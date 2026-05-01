@@ -41,12 +41,37 @@ func show_detail(slot_id: String, option: Dictionary, source_button: Button) -> 
 	detail_title_label.text = str(option.get("title", "Build"))
 	detail_final_card_button.text = str(detail_final_card_data.get("name", ""))
 	detail_final_card_button.visible = detail_final_card_button.text != ""
-	detail_desc_label.text = _decorate_glossary_terms(str(option.get("detail_description", option.get("description", ""))))
+	detail_desc_label.text = _decorate_glossary_terms(_build_detail_text(option))
 	detail_panel.visible = true
 	detail_panel.set_meta("slot_id", slot_id)
 	hide_final_progress()
 	hide_glossary()
 	call_deferred("_position_detail_panel", source_button)
+
+
+func _build_detail_text(option: Dictionary) -> String:
+	var detail_text := str(option.get("detail_description", option.get("description", "")))
+	var card_type_label := str(option.get("card_type_label", ""))
+	if card_type_label != "":
+		detail_text = "[color=#FFE08A]类型：%s[/color]\n%s" % [card_type_label, detail_text]
+	var role_effect_text := _format_role_effects(option)
+	if role_effect_text != "" and not detail_text.contains("三英雄对应效果 / 数值"):
+		detail_text = "%s\n\n%s" % [detail_text, role_effect_text]
+	return detail_text
+
+
+func _format_role_effects(option: Dictionary) -> String:
+	var role_effects: Array = option.get("role_effects", [])
+	if role_effects.is_empty():
+		return ""
+	var lines: Array[String] = ["[color=#A9C8FF]三英雄对应效果 / 数值[/color]"]
+	for effect in role_effects:
+		if effect is not Dictionary:
+			continue
+		lines.append("[color=#FFE08A]%s｜%s[/color]" % [str(effect.get("role_name", "")), str(effect.get("title", ""))])
+		for line in effect.get("lines", []):
+			lines.append("  • " + str(line))
+	return "\n".join(lines)
 
 func hide_all() -> void:
 	hide_detail()

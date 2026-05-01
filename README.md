@@ -18,12 +18,13 @@ A Godot 4 2D survivor-like prototype focused on **three-character switching comb
 - 主线准备界面
 - 三角色切换战斗
 - 普攻 / 进场技 / 退场技 / 大招
-- 升级与 Build 菜单
+- 升级与 Build 菜单：主题式卡池、英雄特性训练、卡牌悬停详情
 - 普通怪 / 精英 / Boss 基础框架
-- HUD / 暂停菜单 / 继续游戏 / BGM
+- HUD / 暂停菜单 / 主菜单设置 / 继续游戏 / BGM
 - 开发者模式
 - 本地成就系统与右上角成就提示
 - 显示设置：窗口 / 全屏、16:9 固定比例窗口尺寸
+- 通用 UI 组件：居中弹窗、卡牌列表、悬停详情、底部技能栏详情
 
 ## Core Roles
 
@@ -82,7 +83,10 @@ A Godot 4 2D survivor-like prototype focused on **three-character switching comb
   战斗主控、刷怪、Boss、UI、继续游戏
 
 - `scripts/player.gd`
-  玩家战斗核心、三角色轮转、Build、特效、战斗状态
+  玩家战斗核心、三角色轮转、Build、英雄特性、特效、战斗状态
+
+- `scripts/build/build_database.gd` / `scripts/build/build_system.gd`
+  主题式 Build 卡池、卡牌详情、三英雄对应效果和主题解锁
 
 - `scripts/enemy.gd`
   普通怪 / 精英 / Boss 行为
@@ -92,6 +96,9 @@ A Godot 4 2D survivor-like prototype focused on **three-character switching comb
 
 - `scripts/story_data.gd`
   主线关卡表、角色池、风格样式
+
+- `scripts/ui/core/`、`scripts/ui/components/`、`scripts/ui/theme/`
+  通用 UI 弹窗、卡牌列表、悬停详情和幸存者风格主题
 
 ## Documentation
 

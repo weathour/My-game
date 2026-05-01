@@ -5,6 +5,8 @@ signal close_requested
 const GAME_SETTINGS := preload("res://scripts/game_settings.gd")
 const BUILD_DATABASE := preload("res://scripts/build/build_database.gd")
 const PLAYER_EQUIPMENT_FLOW := preload("res://scripts/player/player_equipment_flow.gd")
+const SURVIVORS_MODAL := preload("res://scripts/ui/core/survivors_modal.gd")
+const SURVIVORS_THEME := preload("res://scripts/ui/theme/survivors_ui_theme.gd")
 
 const ROLE_TEXTURE_PATHS := {
 	"swordsman": "人设草图/剑士草图.jpg",
@@ -29,40 +31,35 @@ func _ready() -> void:
 	layer = 4
 	process_mode = Node.PROCESS_MODE_WHEN_PAUSED
 
-	var root := Control.new()
-	root.set_anchors_preset(Control.PRESET_FULL_RECT)
-	add_child(root)
-
-	var dimmer := ColorRect.new()
-	dimmer.set_anchors_preset(Control.PRESET_FULL_RECT)
-	dimmer.color = Color(0.0, 0.0, 0.0, 0.76)
-	root.add_child(dimmer)
-
-	var center := CenterContainer.new()
-	center.set_anchors_preset(Control.PRESET_FULL_RECT)
-	root.add_child(center)
-
-	var panel := PanelContainer.new()
-	panel.custom_minimum_size = Vector2(1120.0, 650.0)
-	panel.add_theme_stylebox_override("panel", _make_panel_style())
-	center.add_child(panel)
+	var modal := SURVIVORS_MODAL.new()
+	modal.configure(Vector2(1100.0, 640.0), 0.86, 0.88, Vector2(360.0, 280.0))
+	modal.set_title("角色面板")
+	modal.set_hint("查看角色数值、Build 与道具。右键道具可赠与其他角色。")
+	add_child(modal)
 
 	var layout := HBoxContainer.new()
-	layout.add_theme_constant_override("separation", 22)
-	panel.add_child(layout)
+	layout.set_anchors_preset(Control.PRESET_FULL_RECT)
+	layout.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	layout.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	layout.add_theme_constant_override("separation", 16)
+	modal.set_body(layout)
 
 	var left_column := VBoxContainer.new()
-	left_column.custom_minimum_size = Vector2(360.0, 610.0)
-	left_column.add_theme_constant_override("separation", 14)
+	left_column.custom_minimum_size = Vector2(280.0, 0.0)
+	left_column.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	left_column.add_theme_constant_override("separation", 10)
 	layout.add_child(left_column)
 
 	role_title_label = Label.new()
 	role_title_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	role_title_label.add_theme_font_size_override("font_size", 28)
+	role_title_label.add_theme_font_size_override("font_size", 24)
+	role_title_label.add_theme_color_override("font_color", SURVIVORS_THEME.COLOR_TEXT_GOLD)
 	left_column.add_child(role_title_label)
 
 	role_texture_rect = TextureRect.new()
-	role_texture_rect.custom_minimum_size = Vector2(340.0, 460.0)
+	role_texture_rect.custom_minimum_size = Vector2(260.0, 360.0)
+	role_texture_rect.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	role_texture_rect.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	role_texture_rect.expand_mode = TextureRect.EXPAND_FIT_WIDTH_PROPORTIONAL
 	role_texture_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 	left_column.add_child(role_texture_rect)
@@ -74,46 +71,55 @@ func _ready() -> void:
 
 	var close_button := Button.new()
 	close_button.text = "关闭 (%s)" % GAME_SETTINGS.get_key_display_name(GAME_SETTINGS.load_keycode(GAME_SETTINGS.ACTION_CHARACTER_PANEL))
-	close_button.custom_minimum_size = Vector2(180.0, 42.0)
+	close_button.custom_minimum_size = Vector2(0.0, 42.0)
+	close_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	SURVIVORS_THEME.apply_button_style(close_button, "primary")
 	close_button.pressed.connect(func() -> void: close_requested.emit())
 	left_column.add_child(close_button)
 
 	var right_column := VBoxContainer.new()
-	right_column.custom_minimum_size = Vector2(700.0, 610.0)
+	right_column.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	right_column.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	right_column.add_theme_constant_override("separation", 8)
 	layout.add_child(right_column)
 
-	var title := Label.new()
-	title.text = "角色面板"
-	title.add_theme_font_size_override("font_size", 30)
-	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	right_column.add_child(title)
-
 	stats_label = RichTextLabel.new()
-	stats_label.custom_minimum_size = Vector2(700.0, 230.0)
+	stats_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	stats_label.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	stats_label.custom_minimum_size = Vector2(0.0, 190.0)
 	stats_label.bbcode_enabled = true
 	stats_label.fit_content = false
 	stats_label.scroll_active = true
+	SURVIVORS_THEME.apply_rich_label_font(stats_label, 16)
 	right_column.add_child(stats_label)
 
 	var equipment_title := Label.new()
 	equipment_title.text = "道具背包（右键道具可赠与）"
-	equipment_title.add_theme_font_size_override("font_size", 22)
+	equipment_title.add_theme_font_size_override("font_size", 20)
+	equipment_title.add_theme_color_override("font_color", SURVIVORS_THEME.COLOR_TEXT)
 	right_column.add_child(equipment_title)
 
 	var equipment_scroll := ScrollContainer.new()
-	equipment_scroll.custom_minimum_size = Vector2(700.0, 150.0)
+	equipment_scroll.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	equipment_scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	equipment_scroll.custom_minimum_size = Vector2(0.0, 120.0)
+	equipment_scroll.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_SHOW_ALWAYS
+	equipment_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
 	right_column.add_child(equipment_scroll)
 
 	equipment_list = VBoxContainer.new()
+	equipment_list.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	equipment_list.add_theme_constant_override("separation", 6)
 	equipment_scroll.add_child(equipment_list)
 
 	card_label = RichTextLabel.new()
-	card_label.custom_minimum_size = Vector2(700.0, 160.0)
+	card_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	card_label.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	card_label.custom_minimum_size = Vector2(0.0, 120.0)
 	card_label.bbcode_enabled = true
 	card_label.fit_content = false
 	card_label.scroll_active = true
+	SURVIVORS_THEME.apply_rich_label_font(card_label, 16)
 	right_column.add_child(card_label)
 
 	gift_popup = PopupMenu.new()
@@ -165,7 +171,8 @@ func _refresh_role_buttons() -> void:
 	for index in range(roles.size()):
 		var role: Dictionary = roles[index]
 		var button := Button.new()
-		button.custom_minimum_size = Vector2(104.0, 38.0)
+		button.custom_minimum_size = Vector2(86.0, 36.0)
+		SURVIVORS_THEME.apply_button_style(button, "primary" if index == active_index else "normal", index == viewed_role_index)
 		button.text = "%s%s" % [str(role.get("name", "角色")), "*" if index == active_index else ""]
 		button.disabled = index == viewed_role_index
 		button.pressed.connect(_view_role.bind(index))
@@ -195,13 +202,15 @@ func _refresh_equipment_list(role_id: String) -> void:
 				count
 			]
 			button.alignment = HORIZONTAL_ALIGNMENT_LEFT
-			button.custom_minimum_size = Vector2(660.0, 34.0)
+			button.custom_minimum_size = Vector2(0.0, 34.0)
+			button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+			SURVIVORS_THEME.apply_card_button_style(button)
 			button.gui_input.connect(_on_equipment_gui_input.bind(str(equipment_id), role_id))
 			equipment_list.add_child(button)
 	if not has_any:
 		var empty_label := Label.new()
 		empty_label.text = "暂无道具"
-		empty_label.custom_minimum_size = Vector2(660.0, 34.0)
+		empty_label.custom_minimum_size = Vector2(0.0, 34.0)
 		equipment_list.add_child(empty_label)
 
 func _on_equipment_gui_input(event: InputEvent, equipment_id: String, from_role_id: String) -> void:
@@ -245,8 +254,7 @@ func _build_stats_text(role_data: Dictionary) -> String:
 	var role_id: String = str(role_data.get("id", ""))
 	var bonus: Dictionary = cached_player._get_role_equipment_bonus_summary(role_id) if cached_player.has_method("_get_role_equipment_bonus_summary") else {}
 	var active_bonus: Dictionary = cached_player._get_role_equipment_bonus_summary(str(cached_player._get_active_role().get("id", ""))) if cached_player.has_method("_get_role_equipment_bonus_summary") else {}
-	var base_global_damage: float = float(cached_player.get("global_damage_multiplier")) - float(active_bonus.get("damage_multiplier_bonus", 0.0))
-	var damage: float = (float(role_data.get("damage", 0.0)) + float(cached_player.get("role_upgrade_levels").get(role_id, {}).get("damage_bonus", 0.0))) * max(0.01, base_global_damage + float(bonus.get("damage_multiplier_bonus", 0.0)))
+	var damage: float = float(cached_player._get_role_damage(role_id)) if cached_player.has_method("_get_role_damage") else float(role_data.get("damage", 0.0))
 	var base_speed: float = float(cached_player.get("speed")) - float(active_bonus.get("speed_bonus", 0.0))
 	var move_speed: float = (base_speed + float(bonus.get("speed_bonus", 0.0))) * float(role_data.get("speed_scale", 1.0))
 	if cached_player.has_method("_get_role_attribute_move_speed_multiplier"):
@@ -259,6 +267,18 @@ func _build_stats_text(role_data: Dictionary) -> String:
 		current_health_text = "- / %.0f" % max_health
 	var base_energy: float = float(cached_player.get("energy_gain_multiplier")) - float(active_bonus.get("energy_gain_bonus", 0.0))
 	var energy_gain: float = base_energy + float(bonus.get("energy_gain_bonus", 0.0))
+	var pickup_radius: float = float(cached_player.get("pickup_radius"))
+	if cached_player.has_method("_get_attribute_pickup_range_bonus"):
+		pickup_radius += float(cached_player._get_attribute_pickup_range_bonus())
+	var attribute_dodge: float = float(cached_player._get_attribute_dodge_chance()) if cached_player.has_method("_get_attribute_dodge_chance") else 0.0
+	var dodge_chance: float = 1.0 - (1.0 - float(bonus.get("dodge_chance", 0.0))) * (1.0 - attribute_dodge)
+	var health_regen: float = float(bonus.get("regen_per_second", 0.0))
+	if cached_player.has_method("_get_attribute_health_regen_per_second"):
+		health_regen += float(cached_player._get_attribute_health_regen_per_second())
+	var mana_regen: float = float(cached_player._get_attribute_mana_regen_per_second()) if cached_player.has_method("_get_attribute_mana_regen_per_second") else 0.0
+	var swordsman_trait_level: float = float(cached_player._get_attribute_level("swordsman_trait")) if cached_player.has_method("_get_attribute_level") else 0.0
+	var gunner_trait_level: float = float(cached_player._get_attribute_level("gunner_trait")) if cached_player.has_method("_get_attribute_level") else 0.0
+	var mage_trait_level: float = float(cached_player._get_attribute_level("mage_trait")) if cached_player.has_method("_get_attribute_level") else 0.0
 	var lines: Array[String] = []
 	lines.append("[font_size=22][b]核心数值[/b][/font_size]")
 	lines.append("生命 %s    大招能量 %.0f / %.0f" % [
@@ -270,22 +290,32 @@ func _build_stats_text(role_data: Dictionary) -> String:
 		damage,
 		float(cached_player._get_effective_attack_interval(role_id)) if cached_player.has_method("_get_effective_attack_interval") else 0.0,
 		move_speed,
-		float(cached_player.get("pickup_radius"))
+		pickup_radius
 	])
-	lines.append("能量获取 x%.2f    技能范围 x%.2f    CD x%.2f    闪避 %.0f%%    回血 %.1f/s" % [
+	lines.append("能量获取 x%.2f    回能 %.2f/s    技能范围 x%.2f    CD x%.2f    闪避 %.1f%%    回血 %.1f/s" % [
 		energy_gain,
+		mana_regen,
 		float(bonus.get("skill_range_multiplier", 1.0)),
 		float(bonus.get("cooldown_multiplier", 1.0)),
-		float(bonus.get("dodge_chance", 0.0)) * 100.0,
-		float(bonus.get("regen_per_second", 0.0))
+		dodge_chance * 100.0,
+		health_regen
 	])
 	lines.append("")
-	lines.append("[font_size=22][b]角色成长[/b][/font_size]")
-	lines.append("体能 Lv.%d    身法 Lv.%d" % [
-		int(cached_player._get_role_attribute_level(role_id, "vitality")) if cached_player.has_method("_get_role_attribute_level") else 0,
-		int(cached_player._get_role_attribute_level(role_id, "agility")) if cached_player.has_method("_get_role_attribute_level") else 0
+	lines.append("[font_size=22][b]属性训练[/b][/font_size]")
+	lines.append("剑士特性 Lv.%s    枪手特性 Lv.%s    术师特性 Lv.%s" % [
+		_format_panel_attribute_level(swordsman_trait_level),
+		_format_panel_attribute_level(gunner_trait_level),
+		_format_panel_attribute_level(mage_trait_level)
 	])
+	lines.append("每点英雄特性 +1 对应英雄普攻伤害；剑士特性偏生存，枪手特性偏机动，术师特性偏回能/拾取。")
 	return "\n".join(lines)
+
+func _format_panel_attribute_level(level: float) -> String:
+	if cached_player != null and cached_player.has_method("_format_attribute_level"):
+		return str(cached_player._format_attribute_level(level))
+	if is_equal_approx(level, roundf(level)):
+		return str(int(roundf(level)))
+	return "%.1f" % level
 
 func _build_card_text() -> String:
 	var lines: Array[String] = []
@@ -322,15 +352,3 @@ func _get_roles() -> Array:
 	if roles_variant is Array:
 		return roles_variant
 	return []
-
-func _make_panel_style() -> StyleBoxFlat:
-	var style := StyleBoxFlat.new()
-	style.bg_color = Color(0.07, 0.075, 0.065, 0.96)
-	style.border_color = Color(0.78, 0.68, 0.42, 0.95)
-	style.set_border_width_all(3)
-	style.set_corner_radius_all(14)
-	style.content_margin_left = 22
-	style.content_margin_right = 22
-	style.content_margin_top = 20
-	style.content_margin_bottom = 20
-	return style

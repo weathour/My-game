@@ -1,13 +1,15 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://dqyu0h1runw0e"]
 
-[ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_rj0uu"]
-[ext_resource type="Script" path="res://scripts/bgm_player.gd" id="2_mkn5x"]
-[ext_resource type="AudioStream" path="res://assets/menu_bgm.mp3" id="3_bh2kh"]
+[ext_resource type="Script" uid="uid://kficgcnndmim" path="res://scripts/main_menu.gd" id="1_rj0uu"]
+[ext_resource type="Script" uid="uid://csqllf4hdm2jh" path="res://scripts/bgm_player.gd" id="2_mkn5x"]
+[ext_resource type="AudioStream" uid="uid://2l6dp2v625g" path="res://assets/menu_bgm.mp3" id="3_bh2kh"]
 
-[node name="MainMenu" type="Control"]
+[node name="MainMenu" type="Control" unique_id=892841128]
+layout_mode = 3
+anchors_preset = 0
 script = ExtResource("1_rj0uu")
 
-[node name="MenuBGM" type="AudioStreamPlayer" parent="."]
+[node name="MenuBGM" type="AudioStreamPlayer" parent="." unique_id=1874434624]
 process_mode = 3
 stream = ExtResource("3_bh2kh")
 script = ExtResource("2_mkn5x")

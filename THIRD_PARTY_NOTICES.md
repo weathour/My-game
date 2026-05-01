@@ -25,7 +25,7 @@ Release requirement: replace or document license before public/commercial distri
 
 Current paths include:
 
-- `assets/demo.jpg`
+- `assets/demo2.png`
 - `assets/sketch/`
 - `effects/`
 - `enemies/`

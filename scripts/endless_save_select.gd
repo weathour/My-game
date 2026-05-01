@@ -5,6 +5,7 @@ const GAME_SCENE_PATH := "res://scenes/main.tscn"
 const SAVE_MANAGER := preload("res://scripts/save_manager.gd")
 const ENDLESS_DIFFICULTY_OVERLAY := preload("res://scripts/ui/save/endless_difficulty_overlay.gd")
 const ENDLESS_SLOT_CARD_FACTORY := preload("res://scripts/ui/save/endless_slot_card_factory.gd")
+const SURVIVORS_THEME := preload("res://scripts/ui/theme/survivors_ui_theme.gd")
 
 const TEXT_TITLE := "\u65e0\u5c3d\u6a21\u5f0f"
 const TEXT_SUBTITLE := "\u9009\u62e9\u4e00\u4e2a\u5b58\u6863\u4f4d\u8fdb\u5165\u65e0\u5c3d\u6218\u6597"
@@ -32,54 +33,58 @@ func _build_ui() -> void:
 	background.color = Color(0.05, 0.07, 0.12, 1.0)
 	add_child(background)
 
-	var title := Label.new()
-	title.anchor_left = 0.0
-	title.anchor_right = 1.0
-	title.offset_top = 18.0
-	title.offset_bottom = 62.0
-	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	title.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	title.text = TEXT_TITLE
-	title.add_theme_font_size_override("font_size", 34)
-	add_child(title)
-
-	var subtitle := Label.new()
-	subtitle.anchor_left = 0.0
-	subtitle.anchor_right = 1.0
-	subtitle.offset_top = 62.0
-	subtitle.offset_bottom = 94.0
-	subtitle.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	subtitle.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	subtitle.text = TEXT_SUBTITLE
-	subtitle.add_theme_font_size_override("font_size", 18)
-	add_child(subtitle)
-
-	var back_button := Button.new()
-	back_button.text = TEXT_BACK
-	back_button.anchor_left = 0.0
-	back_button.anchor_top = 0.0
-	back_button.offset_left = 28.0
-	back_button.offset_top = 24.0
-	back_button.offset_right = 188.0
-	back_button.offset_bottom = 68.0
-	back_button.pressed.connect(_on_back_pressed)
-	add_child(back_button)
-
 	var root_margin := MarginContainer.new()
 	root_margin.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	root_margin.add_theme_constant_override("margin_left", 36)
-	root_margin.add_theme_constant_override("margin_top", 110)
+	root_margin.add_theme_constant_override("margin_top", 28)
 	root_margin.add_theme_constant_override("margin_right", 36)
-	root_margin.add_theme_constant_override("margin_bottom", 32)
+	root_margin.add_theme_constant_override("margin_bottom", 28)
 	add_child(root_margin)
+
+	var page := VBoxContainer.new()
+	page.add_theme_constant_override("separation", 14)
+	root_margin.add_child(page)
+
+	var header := HBoxContainer.new()
+	header.add_theme_constant_override("separation", 14)
+	page.add_child(header)
+
+	var title_column := VBoxContainer.new()
+	title_column.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	header.add_child(title_column)
+
+	var title := Label.new()
+	title.text = TEXT_TITLE
+	title.add_theme_font_size_override("font_size", 34)
+	title.add_theme_color_override("font_color", SURVIVORS_THEME.COLOR_TEXT)
+	title_column.add_child(title)
+
+	var subtitle := Label.new()
+	subtitle.text = TEXT_SUBTITLE
+	subtitle.add_theme_font_size_override("font_size", 18)
+	subtitle.add_theme_color_override("font_color", SURVIVORS_THEME.COLOR_TEXT_MUTED)
+	title_column.add_child(subtitle)
+
+	var back_button := Button.new()
+	back_button.text = TEXT_BACK
+	back_button.custom_minimum_size = Vector2(160.0, 44.0)
+	SURVIVORS_THEME.apply_button_style(back_button)
+	back_button.pressed.connect(_on_back_pressed)
+	header.add_child(back_button)
+
+	var scroll := ScrollContainer.new()
+	scroll.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	scroll.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_SHOW_ALWAYS
+	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	page.add_child(scroll)
 
 	var grid := GridContainer.new()
 	grid.columns = 3
 	grid.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	grid.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	grid.add_theme_constant_override("h_separation", 26)
-	grid.add_theme_constant_override("v_separation", 26)
-	root_margin.add_child(grid)
+	grid.add_theme_constant_override("h_separation", 18)
+	grid.add_theme_constant_override("v_separation", 18)
+	scroll.add_child(grid)
 
 	for slot_payload in SAVE_MANAGER.list_endless_slots():
 		grid.add_child(ENDLESS_SLOT_CARD_FACTORY.build_slot_card(

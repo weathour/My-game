@@ -2,6 +2,7 @@ extends PanelContainer
 
 const DEVELOPER_MODE := preload("res://scripts/developer_mode.gd")
 const PERFORMANCE_MONITOR := preload("res://scripts/game/performance_monitor.gd")
+const SURVIVORS_THEME := preload("res://scripts/ui/theme/survivors_ui_theme.gd")
 
 signal level_up_requested
 signal boss_spawn_requested(archetype_id: String)
@@ -26,16 +27,7 @@ func _ready() -> void:
 	offset_right = -18.0
 	offset_bottom = 720.0
 
-	var style := StyleBoxFlat.new()
-	style.bg_color = Color(0.16, 0.08, 0.08, 0.84)
-	style.border_color = Color(1.0, 0.54, 0.42, 0.92)
-	style.set_border_width_all(2)
-	style.set_corner_radius_all(10)
-	style.content_margin_left = 12
-	style.content_margin_right = 12
-	style.content_margin_top = 12
-	style.content_margin_bottom = 12
-	add_theme_stylebox_override("panel", style)
+	add_theme_stylebox_override("panel", SURVIVORS_THEME.panel_style(Color(0.16, 0.08, 0.08, 0.84), Color(1.0, 0.54, 0.42, 0.92), 2, 10, 12.0))
 
 	var content := VBoxContainer.new()
 	content.add_theme_constant_override("separation", 8)
@@ -51,18 +43,21 @@ func _ready() -> void:
 	level_button.custom_minimum_size = Vector2(220, 40)
 	level_button.add_theme_font_size_override("font_size", 16)
 	level_button.text = "角色等级 +1"
+	SURVIVORS_THEME.apply_button_style(level_button, "primary")
 	level_button.pressed.connect(_on_level_button_pressed)
 	content.add_child(level_button)
 
 	invincibility_button = Button.new()
 	invincibility_button.custom_minimum_size = Vector2(220, 40)
 	invincibility_button.add_theme_font_size_override("font_size", 16)
+	SURVIVORS_THEME.apply_button_style(invincibility_button)
 	invincibility_button.pressed.connect(_on_invincibility_button_pressed)
 	content.add_child(invincibility_button)
 
 	no_cooldown_button = Button.new()
 	no_cooldown_button.custom_minimum_size = Vector2(220, 40)
 	no_cooldown_button.add_theme_font_size_override("font_size", 16)
+	SURVIVORS_THEME.apply_button_style(no_cooldown_button)
 	no_cooldown_button.pressed.connect(_on_no_cooldown_button_pressed)
 	content.add_child(no_cooldown_button)
 
@@ -144,6 +139,7 @@ func _add_small_boss_button(parent: Control, label: String, archetype_id: String
 	button.text = label
 	button.tooltip_text = archetype_id
 	button.add_theme_font_size_override("font_size", 15)
+	SURVIVORS_THEME.apply_button_style(button)
 	button.pressed.connect(_on_small_boss_button_pressed.bind(archetype_id))
 	parent.add_child(button)
 
@@ -161,6 +157,7 @@ func _add_menu_section(parent: Control, title: String) -> VBoxContainer:
 	toggle_button.alignment = HORIZONTAL_ALIGNMENT_LEFT
 	toggle_button.add_theme_font_size_override("font_size", 15)
 	toggle_button.text = "%s  >" % title
+	SURVIVORS_THEME.apply_button_style(toggle_button)
 	section.add_child(toggle_button)
 
 	var list := VBoxContainer.new()
@@ -202,6 +199,7 @@ func _populate_option_list(list: VBoxContainer, options: Array, empty_text: Stri
 		button.text = "%s%s\n%s" % [title, level_text, card_id]
 		button.tooltip_text = str(option.get("description", ""))
 		button.disabled = not bool(option.get("enabled", true))
+		SURVIVORS_THEME.apply_card_button_style(button, false, false, button.disabled)
 		button.pressed.connect(callback.bind(card_id))
 		list.add_child(button)
 

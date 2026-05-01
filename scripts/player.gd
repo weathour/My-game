@@ -29,6 +29,7 @@ const PLAYER_DAMAGE_HELPERS := preload("res://scripts/player/player_damage_helpe
 const PLAYER_DAMAGE_RESOLVER := preload("res://scripts/player/player_damage_resolver.gd")
 const PLAYER_COMBAT_RESULT_FLOW := preload("res://scripts/player/player_combat_result_flow.gd")
 const PLAYER_COMBAT_MODIFIERS := preload("res://scripts/player/player_combat_modifiers.gd")
+const PLAYER_THEME_SKILL_FLOW := preload("res://scripts/player/player_theme_skill_flow.gd")
 const PLAYER_EQUIPMENT_FLOW := preload("res://scripts/player/player_equipment_flow.gd")
 const PLAYER_HEALTH_VISUALS := preload("res://scripts/player/player_health_visuals.gd")
 const PLAYER_TIMER_FLOW := preload("res://scripts/player/player_timer_flow.gd")
@@ -246,6 +247,8 @@ var attribute_training_levels: Dictionary = {}
 var slot_resonances_unlocked: Dictionary = {}
 var role_special_states: Dictionary = {}
 var special_reward_levels: Dictionary = {}
+var theme_skill_trigger_depth: int = 0
+var theme_blood_reflux_cooldown: float = 0.0
 var swordsman_blade_storm_ability = SWORDSMAN_BLADE_STORM_ABILITY.new()
 var camera_node: Camera2D
 var camera_base_offset: Vector2 = Vector2.ZERO
@@ -601,67 +604,106 @@ func _build_attribute_training_data() -> Dictionary:
 func _get_role_attribute_key(role_id: String, attribute_key: String) -> String:
 	return PLAYER_ATTRIBUTE_FLOW.get_role_attribute_key(role_id, attribute_key)
 
-func _get_role_attribute_level(role_id: String, attribute_key: String) -> int:
+func _get_role_attribute_level(role_id: String, attribute_key: String) -> float:
 	return PLAYER_ATTRIBUTE_FLOW.get_role_attribute_level(self, role_id, attribute_key)
 
-func _increase_role_attribute_level(role_id: String, attribute_key: String) -> int:
+func _increase_role_attribute_level(role_id: String, attribute_key: String) -> float:
 	return PLAYER_ATTRIBUTE_FLOW.increase_role_attribute_level(self, role_id, attribute_key)
 
-func _get_swordsman_heart_interval_multiplier(level: int) -> float:
+func _normalize_attribute_training_data(data: Variant) -> Dictionary:
+	return PLAYER_ATTRIBUTE_FLOW.normalize_attribute_training_data(data)
+
+func _sync_swordsman_trait_health_bonus() -> void:
+	PLAYER_ATTRIBUTE_FLOW.sync_swordsman_trait_health_bonus(self)
+
+func _get_attribute_level(attribute_key: String) -> float:
+	return PLAYER_ATTRIBUTE_FLOW.get_attribute_level(self, attribute_key)
+
+func _add_attribute_levels(deltas: Dictionary) -> Dictionary:
+	return PLAYER_ATTRIBUTE_FLOW.add_attribute_levels(self, deltas)
+
+func _format_attribute_level(level: float) -> String:
+	return PLAYER_ATTRIBUTE_FLOW.format_attribute_level(level)
+
+func _get_attribute_health_regen_per_second() -> float:
+	return PLAYER_ATTRIBUTE_FLOW.get_attribute_health_regen_per_second(self)
+
+func _get_attribute_mana_regen_per_second() -> float:
+	return PLAYER_ATTRIBUTE_FLOW.get_attribute_mana_regen_per_second(self)
+
+func _get_attribute_dodge_chance() -> float:
+	return PLAYER_ATTRIBUTE_FLOW.get_attribute_dodge_chance(self)
+
+func _get_attribute_pickup_range_bonus() -> float:
+	return PLAYER_ATTRIBUTE_FLOW.get_attribute_pickup_range_bonus(self)
+
+func _get_primary_attribute_damage_bonus(role_id: String) -> float:
+	return PLAYER_ATTRIBUTE_FLOW.get_primary_attribute_damage_bonus(self, role_id)
+
+func _get_balanced_attribute_description(added_amount: float) -> String:
+	return PLAYER_ATTRIBUTE_FLOW.get_balanced_attribute_description(self, added_amount)
+
+func _add_common_prosperity() -> Dictionary:
+	return PLAYER_ATTRIBUTE_FLOW.add_common_prosperity(self)
+
+func _get_common_prosperity_switch_cooldown_multiplier() -> float:
+	return PLAYER_ATTRIBUTE_FLOW.get_common_prosperity_switch_cooldown_multiplier(self)
+
+func _get_swordsman_heart_interval_multiplier(level: float) -> float:
 	return PLAYER_ATTRIBUTE_FLOW.get_swordsman_heart_interval_multiplier(level)
 
-func _get_swordsman_heart_range_multiplier(level: int) -> float:
+func _get_swordsman_heart_range_multiplier(level: float) -> float:
 	return PLAYER_ATTRIBUTE_FLOW.get_swordsman_heart_range_multiplier(level)
 
-func _get_swordsman_normal_attack_scale(level: int) -> float:
+func _get_swordsman_normal_attack_scale(level: float) -> float:
 	return PLAYER_ATTRIBUTE_FLOW.get_swordsman_normal_attack_scale(level)
 
-func _get_swordsman_normal_attack_width_scale(level: int) -> float:
+func _get_swordsman_normal_attack_width_scale(level: float) -> float:
 	return PLAYER_ATTRIBUTE_FLOW.get_swordsman_normal_attack_width_scale(level)
 
-func _get_swordsman_bloodthirst_ratio(level: int) -> float:
+func _get_swordsman_bloodthirst_ratio(level: float) -> float:
 	return PLAYER_ATTRIBUTE_FLOW.get_swordsman_bloodthirst_ratio(level)
 
-func _get_swordsman_bloodthirst_heal_cap(level: int) -> float:
+func _get_swordsman_bloodthirst_heal_cap(level: float) -> float:
 	return PLAYER_ATTRIBUTE_FLOW.get_swordsman_bloodthirst_heal_cap(level)
 
-func _get_swordsman_dodge_chance(level: int) -> float:
+func _get_swordsman_dodge_chance(level: float) -> float:
 	return PLAYER_ATTRIBUTE_FLOW.get_swordsman_dodge_chance(level)
 
-func _get_gunner_barrage_speed_multiplier(level: int) -> float:
+func _get_gunner_barrage_speed_multiplier(level: float) -> float:
 	return PLAYER_ATTRIBUTE_FLOW.get_gunner_barrage_speed_multiplier(level)
 
-func _get_gunner_barrage_interval_reduction(level: int) -> float:
+func _get_gunner_barrage_interval_reduction(level: float) -> float:
 	return PLAYER_ATTRIBUTE_FLOW.get_gunner_barrage_interval_reduction(level)
 
-func _get_gunner_barrage_bounce_count(level: int) -> int:
+func _get_gunner_barrage_bounce_count(level: float) -> int:
 	return PLAYER_ATTRIBUTE_FLOW.get_gunner_barrage_bounce_count(level)
 
-func _get_gunner_barrage_shotgun_wave_count(level: int) -> int:
+func _get_gunner_barrage_shotgun_wave_count(level: float) -> int:
 	return PLAYER_ATTRIBUTE_FLOW.get_gunner_barrage_shotgun_wave_count(level)
 
-func _get_gunner_barrage_shotgun_pellet_count(level: int) -> int:
+func _get_gunner_barrage_shotgun_pellet_count(level: float) -> int:
 	return PLAYER_ATTRIBUTE_FLOW.get_gunner_barrage_shotgun_pellet_count(level)
 
-func _get_gunner_barrage_split_count(level: int) -> int:
+func _get_gunner_barrage_split_count(level: float) -> int:
 	return PLAYER_ATTRIBUTE_FLOW.get_gunner_barrage_split_count(level)
 
-func _get_gunner_footwork_range_multiplier(level: int) -> float:
+func _get_gunner_footwork_range_multiplier(level: float) -> float:
 	return PLAYER_ATTRIBUTE_FLOW.get_gunner_footwork_range_multiplier(level)
 
-func _get_gunner_footwork_move_multiplier(level: int) -> float:
+func _get_gunner_footwork_move_multiplier(level: float) -> float:
 	return PLAYER_ATTRIBUTE_FLOW.get_gunner_footwork_move_multiplier(level)
 
-func _get_gunner_footwork_flat_speed_bonus(level: int) -> float:
+func _get_gunner_footwork_flat_speed_bonus(level: float) -> float:
 	return PLAYER_ATTRIBUTE_FLOW.get_gunner_footwork_flat_speed_bonus(level)
 
-func _get_mage_arcane_focus_range_multiplier(level: int) -> float:
+func _get_mage_arcane_focus_range_multiplier(level: float) -> float:
 	return PLAYER_ATTRIBUTE_FLOW.get_mage_arcane_focus_range_multiplier(level)
 
-func _get_mage_surplus_energy_multiplier(level: int, role_id: String = "") -> float:
+func _get_mage_surplus_energy_multiplier(level: float, role_id: String = "") -> float:
 	return PLAYER_ATTRIBUTE_FLOW.get_mage_surplus_energy_multiplier(level, role_id)
 
-func _get_mage_surplus_passive_energy_per_second(level: int) -> float:
+func _get_mage_surplus_passive_energy_per_second(level: float) -> float:
 	return PLAYER_ATTRIBUTE_FLOW.get_mage_surplus_passive_energy_per_second(level)
 
 func _get_role_attribute_range_multiplier(role_id: String) -> float:
@@ -706,16 +748,16 @@ func _get_role_attribute_titles(role_id: String) -> Dictionary:
 func _get_role_attribute_titles_for_levels(role_id: String, levels: Dictionary) -> Dictionary:
 	return PLAYER_ATTRIBUTE_FLOW.get_role_attribute_titles_for_levels(role_id, levels)
 
-func _get_role_attribute_description(role_id: String, attribute_key: String, next_level: int) -> String:
+func _get_role_attribute_description(role_id: String, attribute_key: String, next_level: float) -> String:
 	return PLAYER_ATTRIBUTE_FLOW.get_role_attribute_description(role_id, attribute_key, next_level)
 
 func _get_attribute_evolved_title_color() -> Color:
 	return PLAYER_ATTRIBUTE_FLOW.get_evolved_title_color()
 
-func _is_attribute_evolved(level: int) -> bool:
+func _is_attribute_evolved(level: float) -> bool:
 	return PLAYER_ATTRIBUTE_FLOW.is_attribute_evolved(level)
 
-func _get_max_attribute_level() -> int:
+func _get_max_attribute_level() -> float:
 	return PLAYER_ATTRIBUTE_FLOW.get_max_attribute_level()
 
 func _build_role_timing_state_data(default_value: Variant) -> Dictionary:
@@ -761,7 +803,8 @@ func _add_special_reward_level(reward_id: String, amount: int = 1) -> int:
 	return PLAYER_BUILD_STATE.add_special_reward_level(special_reward_levels, reward_id, amount)
 
 func _has_swordsman_blade_storm_reward() -> bool:
-	return PLAYER_BUILD_STATE.has_swordsman_blade_storm_reward(special_reward_levels)
+	return PLAYER_BUILD_STATE.has_swordsman_blade_storm_reward(special_reward_levels) \
+		or BUILD_SYSTEM.is_theme_unlocked(card_pick_levels, special_reward_levels, "branch_omni_edge")
 
 func _can_offer_swordsman_blade_storm_reward() -> bool:
 	return PLAYER_BUILD_STATE.can_offer_swordsman_blade_storm_reward(
@@ -771,7 +814,8 @@ func _can_offer_swordsman_blade_storm_reward() -> bool:
 	)
 
 func _has_gunner_infinite_reload_reward() -> bool:
-	return PLAYER_BUILD_STATE.has_gunner_infinite_reload_reward(special_reward_levels)
+	return PLAYER_BUILD_STATE.has_gunner_infinite_reload_reward(special_reward_levels) \
+		or BUILD_SYSTEM.is_theme_unlocked(card_pick_levels, special_reward_levels, "branch_blood_shield")
 
 func _can_offer_gunner_infinite_reload_reward() -> bool:
 	return PLAYER_BUILD_STATE.can_offer_gunner_infinite_reload_reward(
@@ -781,7 +825,8 @@ func _can_offer_gunner_infinite_reload_reward() -> bool:
 	)
 
 func _has_mage_tidal_surge_reward() -> bool:
-	return PLAYER_BUILD_STATE.has_mage_tidal_surge_reward(special_reward_levels)
+	return PLAYER_BUILD_STATE.has_mage_tidal_surge_reward(special_reward_levels) \
+		or BUILD_SYSTEM.is_theme_unlocked(card_pick_levels, special_reward_levels, "branch_tri_finale")
 
 func _can_offer_mage_tidal_surge_reward() -> bool:
 	return PLAYER_BUILD_STATE.can_offer_mage_tidal_surge_reward(
@@ -889,40 +934,9 @@ func _unhandled_input(event: InputEvent) -> void:
 	PLAYER_SURVIVAL_FLOW.unhandled_input(self, event)
 
 func _physics_process(delta: float) -> void:
-	if is_dead:
-		velocity = Vector2.ZERO
-		move_and_slide()
-		return
-
-	_update_timers(delta)
-	_regenerate_energy(delta)
-	_update_facing_direction()
-	_update_role_idle_visual(delta)
-	_update_player_health_bar(_get_active_role())
-	_update_background_effects(delta)
-
-	var direction := Vector2.ZERO
-	if GAME_SETTINGS.is_action_pressed(GAME_SETTINGS.ACTION_MOVE_LEFT):
-		direction.x -= 1.0
-	if GAME_SETTINGS.is_action_pressed(GAME_SETTINGS.ACTION_MOVE_RIGHT):
-		direction.x += 1.0
-	if GAME_SETTINGS.is_action_pressed(GAME_SETTINGS.ACTION_MOVE_UP):
-		direction.y -= 1.0
-	if GAME_SETTINGS.is_action_pressed(GAME_SETTINGS.ACTION_MOVE_DOWN):
-		direction.y += 1.0
-
-	direction = direction.normalized()
-	velocity = direction * _get_current_move_speed()
-	move_and_slide()
-	PLAYER_MAP_BOUNDS_FLOW.clamp_to_active_map_bounds(self)
-	gem_collection_elapsed += delta
-	if gem_collection_elapsed >= GEM_COLLECTION_INTERVAL:
-		gem_collection_elapsed = 0.0
-		_collect_nearby_gems()
-	contact_check_elapsed += delta
-	if contact_check_elapsed >= CONTACT_CHECK_INTERVAL:
-		contact_check_elapsed = 0.0
-		_check_enemy_contact_damage()
+	PLAYER_SURVIVAL_FLOW.physics_process(self, delta)
+	if not is_dead:
+		PLAYER_MAP_BOUNDS_FLOW.clamp_to_active_map_bounds(self)
 
 func _update_timers(delta: float) -> void:
 	role_visual_time += delta
@@ -942,6 +956,7 @@ func _update_timers(delta: float) -> void:
 		enemy_move_slow_remaining = max(0.0, enemy_move_slow_remaining - delta)
 		if enemy_move_slow_remaining <= 0.0:
 			enemy_move_slow_multiplier = 1.0
+	PLAYER_THEME_SKILL_FLOW.update_cooldowns(self, delta)
 	if swordsman_dangzhen_fan_ability != null:
 		swordsman_dangzhen_fan_ability.update(delta)
 	if gunner_dangzhen_beam_ability != null:
@@ -1670,107 +1685,22 @@ func _get_random_enemy_cluster_centers(count: int) -> Array:
 	return PLAYER_TARGETING.get_owner_random_enemy_cluster_centers(self, count)
 
 func _collect_nearby_gems() -> void:
-	var attract_center := get_hurtbox_center()
-	var attract_radius: float = max(GEM_ATTRACT_RADIUS, get_hurtbox_radius() * 3.6)
-	var attract_radius_squared: float = attract_radius * attract_radius
-	var absorb_radius_squared: float = GEM_ABSORB_RADIUS * GEM_ABSORB_RADIUS
-	var pickup_radius_squared: float = pickup_radius * pickup_radius
-	for gem in get_tree().get_nodes_in_group("exp_gems"):
-		if not is_instance_valid(gem):
-			continue
-		var gem_distance_squared: float = attract_center.distance_squared_to(gem.global_position)
-		if gem_distance_squared <= attract_radius_squared and gem.has_method("set_attraction_target"):
-			gem.set_attraction_target(self)
-		if gem_distance_squared <= absorb_radius_squared:
-			if gem.has_method("collect"):
-				var gained_experience: int = gem.collect()
-				gain_experience(gained_experience)
-
-	for heart_pickup in get_tree().get_nodes_in_group("heart_pickups"):
-		if not is_instance_valid(heart_pickup):
-			continue
-		if attract_center.distance_squared_to(heart_pickup.global_position) <= pickup_radius_squared:
-			if heart_pickup.has_method("collect"):
-				var healed_amount: float = heart_pickup.collect()
-				_heal(healed_amount)
+	PLAYER_SURVIVAL_FLOW.collect_nearby_gems(self)
 
 func _check_enemy_contact_damage() -> void:
-	if hurt_cooldown_remaining > 0.0 or switch_invulnerability_remaining > 0.0:
-		return
-
-	var hurtbox_center := get_hurtbox_center()
-	var hurtbox_radius := get_hurtbox_radius()
-	for enemy in get_tree().get_nodes_in_group("enemies"):
-		if not is_instance_valid(enemy):
-			continue
-		var contact_radius: float = 36.0
-		var touch_damage: float = 10.0
-		var enemy_contact_radius = enemy.get("contact_radius")
-		var enemy_touch_damage = enemy.get("touch_damage")
-		if enemy_contact_radius != null:
-			contact_radius = float(enemy_contact_radius)
-		if enemy_touch_damage != null:
-			touch_damage = float(enemy_touch_damage)
-		var combined_radius := contact_radius + hurtbox_radius
-		if hurtbox_center.distance_squared_to(enemy.global_position) <= combined_radius * combined_radius:
-			take_damage(touch_damage)
-			break
+	PLAYER_SURVIVAL_FLOW.check_enemy_contact_damage(self)
 
 func gain_experience(amount: int) -> void:
-	experience += amount
-
-	if experience_to_next_level <= 0:
-		experience_to_next_level = 30
-
-	var level_up_guard := 0
-	while experience >= experience_to_next_level and level_up_guard < 100:
-		experience -= experience_to_next_level
-		level += 1
-		experience_to_next_level = int(round(experience_to_next_level * 1.42)) + 10
-		pending_level_ups += 1
-		level_up_guard += 1
-	if level_up_guard >= 100:
-		experience = min(experience, max(0, experience_to_next_level - 1))
-
-	experience_changed.emit(experience, experience_to_next_level, level)
-	_try_request_level_up()
+	PLAYER_SURVIVAL_FLOW.gain_experience(self, amount)
 
 func grant_developer_level_up() -> void:
-	level += 1
-	experience_to_next_level = int(round(experience_to_next_level * 1.42)) + 10
-	pending_level_ups += 1
-	experience_changed.emit(experience, experience_to_next_level, level)
-	_try_request_level_up()
+	PLAYER_SURVIVAL_FLOW.grant_developer_level_up(self)
 
 func take_damage(amount: float) -> void:
-	if DEVELOPER_MODE.should_ignore_damage():
-		return
-	if is_dead or switch_invulnerability_remaining > 0.0:
-		return
-
-	var swordsman_counter_level := 0
-	if _get_active_role()["id"] == "swordsman":
-		swordsman_counter_level = int(_get_role_special_state("swordsman").get("counter_level", 0))
-		var nearby_enemy_count := _count_enemies_in_radius(get_hurtbox_center(), 62.0)
-		if nearby_enemy_count > 0:
-			amount *= max(0.84, 0.96 - min(nearby_enemy_count, 3) * 0.04)
-		if swordsman_counter_level > 0:
-			amount *= max(0.76, 0.92 - swordsman_counter_level * 0.04)
-
-	current_health = max(0.0, current_health - amount * _get_effective_damage_taken_multiplier())
-	hurt_cooldown_remaining = hurt_cooldown
-	health_changed.emit(current_health, max_health)
-	_play_player_hurt_feedback()
-
-	if current_health > 0.0 and _get_active_role()["id"] == "swordsman":
-		_trigger_swordsman_counter()
-
-	if current_health <= 0.0:
-		_die()
+	PLAYER_SURVIVAL_FLOW.take_damage(self, amount)
 
 func apply_enemy_slow(multiplier: float, duration: float) -> void:
-	enemy_move_slow_multiplier = min(enemy_move_slow_multiplier, clamp(multiplier, 0.15, 1.0))
-	enemy_move_slow_remaining = max(enemy_move_slow_remaining, duration)
+	PLAYER_SURVIVAL_FLOW.apply_enemy_slow(self, multiplier, duration)
 
 func _add_energy(amount: float) -> void:
 	PLAYER_RESOURCE_FLOW.add_energy(self, amount)
@@ -1835,6 +1765,7 @@ func _get_ultimate_level_damage_multiplier() -> float:
 func _register_attack_result(role_id: String, hit_count: int, killed: bool) -> void:
 	_trigger_relay_success(role_id, hit_count)
 	_apply_entry_lifesteal(role_id, hit_count, killed)
+	_apply_theme_hit_returns(role_id, hit_count, killed)
 	if hit_count > 0 and _get_card_level("battle_chain") > 0:
 		_trigger_chain_reaction(role_id)
 	if hit_count >= 2 and _get_card_level("battle_tide") > 0:
@@ -1852,6 +1783,11 @@ func _register_attack_result(role_id: String, hit_count: int, killed: bool) -> v
 			frenzy_overkill_counter += 1
 			if frenzy_overkill_counter >= 6:
 				frenzy_overkill_counter = 0
+
+
+func _apply_theme_hit_returns(role_id: String, hit_count: int, killed: bool) -> void:
+	PLAYER_COMBAT_RESULT_FLOW.apply_theme_hit_returns(self, role_id, hit_count, killed)
+	PLAYER_THEME_SKILL_FLOW.apply_attack_theme_skills(self, role_id, hit_count, killed)
 
 func _apply_entry_lifesteal(role_id: String, hit_count: int, killed: bool) -> void:
 	if entry_blessing_remaining <= 0.0:
@@ -1976,6 +1912,10 @@ func _spawn_attack_aftershock(center: Vector2, role_id: String) -> void:
 		)
 	tween.tween_callback(controller.queue_free)
 
+
+func _trigger_theme_blood_reflux_counter(incoming_amount: float) -> void:
+	PLAYER_THEME_SKILL_FLOW.trigger_blood_reflux_counter(self, incoming_amount)
+
 func _play_player_hurt_feedback() -> void:
 	_queue_camera_shake(6.0, 0.16)
 	_pulse_player_visual(1.18, 0.16)
@@ -2098,6 +2038,7 @@ func apply_save_data(data: Dictionary) -> void:
 	switch_cooldown_remaining = max(0.0, float(data.get("switch_cooldown_remaining", 0.0)))
 	enemy_move_slow_multiplier = float(data.get("enemy_move_slow_multiplier", 1.0))
 	enemy_move_slow_remaining = max(0.0, float(data.get("enemy_move_slow_remaining", 0.0)))
+	theme_blood_reflux_cooldown = max(0.0, float(data.get("theme_blood_reflux_cooldown", 0.0)))
 	if swordsman_dangzhen_fan_ability == null:
 		swordsman_dangzhen_fan_ability = DANGZHEN_SWORD_FAN_ABILITY.new()
 	swordsman_dangzhen_fan_ability.cooldown_remaining = max(0.0, float(data.get("swordsman_dangzhen_slash_cooldown_remaining", 0.0)))
@@ -2187,7 +2128,8 @@ func apply_save_data(data: Dictionary) -> void:
 	if saved_special_reward_levels is Dictionary:
 		special_reward_levels = BUILD_SYSTEM.normalize_dangzhen_reward_levels(saved_special_reward_levels)
 	elite_relics_unlocked = data.get("elite_relics_unlocked", elite_relics_unlocked).duplicate(true)
-	attribute_training_levels = data.get("attribute_training_levels", attribute_training_levels).duplicate(true)
+	attribute_training_levels = _normalize_attribute_training_data(data.get("attribute_training_levels", attribute_training_levels))
+	_sync_swordsman_trait_health_bonus()
 	slot_resonances_unlocked = data.get("slot_resonances_unlocked", slot_resonances_unlocked).duplicate(true)
 	role_special_states = data.get("role_special_states", role_special_states).duplicate(true)
 	roles = _normalize_loaded_roles(data.get("roles", roles))
@@ -2230,10 +2172,12 @@ func _get_body_upgrade_pool() -> Array:
 	return BUILD_SYSTEM.get_upgrade_pool("body", card_pick_levels, special_reward_levels, active_role_id)
 
 func _get_combat_upgrade_pool() -> Array:
-	return BUILD_SYSTEM.get_upgrade_pool("combat", card_pick_levels)
+	var active_role_id: String = str(_get_active_role().get("id", ""))
+	return BUILD_SYSTEM.get_upgrade_pool("combat", card_pick_levels, special_reward_levels, active_role_id)
 
 func _get_skill_upgrade_pool() -> Array:
-	return BUILD_SYSTEM.get_upgrade_pool("skill", card_pick_levels)
+	var active_role_id: String = str(_get_active_role().get("id", ""))
+	return BUILD_SYSTEM.get_upgrade_pool("skill", card_pick_levels, special_reward_levels, active_role_id)
 
 func _get_fallback_upgrade_pool() -> Array:
 	return [

@@ -12,7 +12,7 @@ static func ready(owner) -> void:
 	owner.build_slot_levels = owner._build_slot_progress_data()
 	owner.equipment_levels = {}
 	owner.role_equipment_levels = {}
-	owner.attribute_training_levels = owner._build_attribute_training_data()
+	owner.attribute_training_levels = owner._normalize_attribute_training_data(owner._build_attribute_training_data())
 	owner.slot_resonances_unlocked = {}
 	owner.role_special_states = owner._build_role_special_state_data()
 	owner.role_standby_elapsed = owner._build_role_timing_state_data(0.0)

@@ -1,24 +1,105 @@
 extends RefCounted
 
+const BUILD_SYSTEM := preload("res://scripts/build/build_system.gd")
+
 static func apply_battle_card(owner, option_id: String) -> bool:
-	match option_id:
+	var card_id := BUILD_SYSTEM.get_shared_card_id(option_id)
+	match card_id:
 		"battle_dangzhen_qichao":
-			owner._record_card_pick("body", option_id)
+			owner._record_card_pick("body", card_id)
 			return true
 		"battle_dangzhen_dielang":
-			owner._record_card_pick("body", option_id)
+			owner._record_card_pick("body", card_id)
 			return true
 		"battle_dangzhen_huichao":
-			owner._record_card_pick("body", option_id)
+			owner._record_card_pick("body", card_id)
 			return true
-		"battle_blade_storm_fury", "battle_blade_storm_eye", "battle_blade_storm_multi":
-			owner._record_card_pick("body", option_id)
+		"battle_omni_pierce":
+			owner._record_card_pick("body", card_id)
+			owner._apply_team_role_bonus(1.4, 0.0, 6.0, 0.05)
+			owner._increase_team_specials([
+				{"role_id": "swordsman", "key": "thrust_level"},
+				{"role_id": "gunner", "key": "focus_level"},
+				{"role_id": "mage", "key": "storm_level"}
+			])
 			return true
-		"battle_infinite_reload_overload", "battle_infinite_reload_chain", "battle_infinite_reload_bore":
-			owner._record_card_pick("body", option_id)
+		"battle_omni_fan":
+			owner._record_card_pick("body", card_id)
+			owner._apply_team_role_bonus(1.0, 0.0, 7.0, 0.06)
+			owner._increase_team_specials([
+				{"role_id": "swordsman", "key": "crescent_level"},
+				{"role_id": "gunner", "key": "scatter_level"},
+				{"role_id": "mage", "key": "echo_level"}
+			])
 			return true
-		"battle_tidal_surge_pressure", "battle_tidal_surge_echo", "battle_tidal_surge_widen":
-			owner._record_card_pick("body", option_id)
+		"battle_omni_ring":
+			owner._record_card_pick("body", card_id)
+			owner._apply_team_role_bonus(0.8, 0.0, 9.0, 0.08)
+			owner._increase_team_specials([
+				{"role_id": "swordsman", "key": "stance_level"},
+				{"role_id": "gunner", "key": "scatter_level"},
+				{"role_id": "mage", "key": "flow_level"}
+			])
+			return true
+		"battle_blood_drink":
+			owner._record_card_pick("body", card_id)
+			owner._increase_team_specials([
+				{"role_id": "swordsman", "key": "blood_level"},
+				{"role_id": "gunner", "key": "reload_level"},
+				{"role_id": "mage", "key": "flow_level"}
+			])
+			owner._heal(8.0)
+			owner._add_active_role_mana(6.0, false)
+			owner._emit_active_mana_changed()
+			return true
+		"battle_blood_shield":
+			owner._record_card_pick("body", card_id)
+			owner.max_health += 8.0
+			owner.current_health = min(owner.max_health, owner.current_health + 8.0)
+			owner.damage_taken_multiplier = max(0.55, owner.damage_taken_multiplier - 0.025)
+			owner._increase_team_specials([
+				{"role_id": "swordsman", "key": "stance_level"},
+				{"role_id": "gunner", "key": "lock_level"},
+				{"role_id": "mage", "key": "frost_level"}
+			])
+			owner.health_changed.emit(owner.current_health, owner.max_health)
+			return true
+		"battle_blood_reflux":
+			owner._record_card_pick("body", card_id)
+			owner._apply_team_role_bonus(0.8, 0.0, 5.0, 0.05)
+			owner.damage_taken_multiplier = max(0.55, owner.damage_taken_multiplier - 0.02)
+			owner._increase_team_specials([
+				{"role_id": "swordsman", "key": "counter_level"},
+				{"role_id": "gunner", "key": "lock_level"},
+				{"role_id": "mage", "key": "frost_level"}
+			])
+			return true
+		"battle_finale_charge":
+			owner._record_card_pick("body", card_id)
+			owner.energy_gain_multiplier += 0.08
+			owner.max_mana += 4.0
+			owner._add_active_role_mana(10.0)
+			return true
+		"battle_finale_break":
+			owner._record_card_pick("body", card_id)
+			owner.ultimate_cost_multiplier = max(0.58, owner.ultimate_cost_multiplier - 0.04)
+			owner._increase_team_specials([
+				{"role_id": "swordsman", "key": "pursuit_level"},
+				{"role_id": "gunner", "key": "barrage_level"},
+				{"role_id": "mage", "key": "storm_level"}
+			])
+			owner._add_active_role_mana(8.0)
+			return true
+		"battle_finale_unity":
+			owner._record_card_pick("body", card_id)
+			owner.global_damage_multiplier += 0.03
+			owner.background_interval_multiplier = max(0.45, owner.background_interval_multiplier - 0.04)
+			owner._increase_team_specials([
+				{"role_id": "swordsman", "key": "pursuit_level"},
+				{"role_id": "gunner", "key": "support_level"},
+				{"role_id": "mage", "key": "flow_level"}
+			])
+			owner._add_active_role_mana(8.0)
 			return true
 		"battle_cover":
 			owner._record_card_pick("body", option_id)

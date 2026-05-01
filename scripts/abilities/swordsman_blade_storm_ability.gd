@@ -88,7 +88,8 @@ func get_cooldown_slot(owner = null) -> Dictionary:
 		"name": "\u5251\u5203\u98ce\u66b4",
 		"remaining": clamp(cooldown_remaining, 0.0, duration),
 		"duration": duration,
-		"color": Color(0.34, 0.92, 1.0, 1.0)
+		"color": Color(0.34, 0.92, 1.0, 1.0),
+		"description": "剑刃风暴：剑士荡阵进化。开启环绕剑刃持续切割周围敌人，冷却期间无法再次触发。"
 	}
 
 func get_save_data() -> Dictionary:

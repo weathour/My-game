@@ -78,7 +78,10 @@ static func get_role_damage(owner, role_id: String) -> float:
 		var upgrade_data: Dictionary = owner.role_upgrade_levels[role_id]
 		var base_global_multiplier: float = owner.global_damage_multiplier - owner.equipment_damage_multiplier_bonus
 		var role_equipment_bonus: float = owner._get_role_equipment_damage_multiplier_bonus(role_id)
-		var damage_amount: float = (float(role_data["damage"]) + float(upgrade_data["damage_bonus"])) * max(0.01, base_global_multiplier + role_equipment_bonus)
+		var primary_attribute_bonus: float = 0.0
+		if owner.has_method("_get_primary_attribute_damage_bonus"):
+			primary_attribute_bonus = float(owner._get_primary_attribute_damage_bonus(role_id))
+		var damage_amount: float = (float(role_data["damage"]) + float(upgrade_data["damage_bonus"]) + primary_attribute_bonus) * max(0.01, base_global_multiplier + role_equipment_bonus)
 		damage_amount *= owner._get_story_style_damage_multiplier(role_id)
 		if owner.switch_power_remaining > 0.0 and owner.switch_power_role_id == role_id:
 			damage_amount *= owner.switch_power_damage_multiplier

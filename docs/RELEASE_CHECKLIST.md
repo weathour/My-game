@@ -25,6 +25,9 @@ Use this before any public build, demo handoff, or store upload.
 - [ ] Start endless mode.
 - [ ] Test pause/resume/main-menu return.
 - [ ] Test window/fullscreen switching and 16:9 window resize behavior.
+- [ ] Test main-menu Settings opens centered after changing window size.
+- [ ] Test level-up card list scroll bar is visible and draggable.
+- [ ] Test hover details for upgrade cards, bottom skill slots, normal attack, and ultimate energy.
 
 ## Save/settings sanity
 
@@ -34,6 +37,9 @@ Use this before any public build, demo handoff, or store upload.
 - [ ] Keybind changes persist.
 - [ ] Music settings persist.
 - [ ] Display settings persist.
+- [ ] Keybind editing in main-menu Settings still works after closing/reopening the panel.
+- [ ] Hero-trait training and common-prosperity count persist across continue-game save/load.
+- [ ] Theme/card levels and unlocked themes persist across continue-game save/load.
 - [ ] Achievement unlock state persists.
 
 ## Content/legal

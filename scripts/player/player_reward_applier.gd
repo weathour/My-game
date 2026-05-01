@@ -1,5 +1,7 @@
 extends RefCounted
 
+const BUILD_SYSTEM := preload("res://scripts/build/build_system.gd")
+
 const DANGZHEN_QICHAO_CARD := "battle_dangzhen_qichao"
 const DANGZHEN_DIELANG_CARD := "battle_dangzhen_dielang"
 const DANGZHEN_HUICHAO_CARD := "battle_dangzhen_huichao"
@@ -11,6 +13,9 @@ const SMALL_BOSS_BLADE_STORM := "small_boss_dangzhen_blade_storm"
 const SMALL_BOSS_INFINITE_RELOAD := "small_boss_dangzhen_infinite_reload"
 const SMALL_BOSS_TIDAL_SURGE := "small_boss_dangzhen_tidal_surge"
 const SMALL_BOSS_TRAINING_LEVEL_UP := "small_boss_training_level_up"
+const BRANCH_OMNI_EDGE := "branch_omni_edge"
+const BRANCH_BLOOD_SHIELD := "branch_blood_shield"
+const BRANCH_TRI_FINALE := "branch_tri_finale"
 
 const BLADE_STORM_LABEL := "\u5251\u5203\u98CE\u66B4"
 const INFINITE_RELOAD_LABEL := "\u65E0\u9650\u88C5\u586B"
@@ -37,6 +42,12 @@ static func apply_small_boss_reward(owner, option_id: String) -> bool:
 			_grant_gunner_infinite_reload(owner)
 		SMALL_BOSS_TIDAL_SURGE:
 			_grant_mage_tidal_surge(owner)
+		BRANCH_OMNI_EDGE:
+			_grant_theme_unlock(owner, BRANCH_OMNI_EDGE, BLADE_STORM_LABEL, Color(0.4, 0.96, 1.0, 1.0))
+		BRANCH_BLOOD_SHIELD:
+			_grant_theme_unlock(owner, BRANCH_BLOOD_SHIELD, INFINITE_RELOAD_LABEL, Color(1.0, 0.6, 0.34, 1.0))
+		BRANCH_TRI_FINALE:
+			_grant_theme_unlock(owner, BRANCH_TRI_FINALE, TIDAL_SURGE_LABEL, Color(0.62, 0.9, 1.0, 1.0))
 		SMALL_BOSS_TRAINING_LEVEL_UP:
 			_grant_training_level(owner)
 		_:
@@ -45,8 +56,25 @@ static func apply_small_boss_reward(owner, option_id: String) -> bool:
 
 
 static func _grant_dangzhen_core_level(owner, card_id: String) -> void:
+	var before_theme_ids := BUILD_SYSTEM.get_unlocked_theme_ids(owner.card_pick_levels, owner.special_reward_levels)
 	owner.card_pick_levels[card_id] = min(3, owner._get_card_level(card_id) + 1)
 	owner._announce_completed_final_set("battle_dangzhen")
+	_announce_new_theme_unlocks(owner, before_theme_ids)
+
+
+static func _announce_new_theme_unlocks(owner, before_theme_ids: Array) -> void:
+	var new_theme_ids := BUILD_SYSTEM.get_newly_unlocked_theme_ids(before_theme_ids, owner.card_pick_levels, owner.special_reward_levels)
+	if new_theme_ids.is_empty():
+		return
+	var accent := Color(1.0, 0.92, 0.58, 1.0)
+	if owner.has_method("_get_role_theme_color"):
+		accent = owner._get_role_theme_color(str(owner._get_active_role().get("id", "swordsman")))
+	for theme_id in new_theme_ids:
+		var id := str(theme_id)
+		owner.special_reward_levels[id] = max(1, int(owner.special_reward_levels.get(id, 0)))
+		var theme_data: Dictionary = BUILD_SYSTEM.BUILD_DATABASE.get_theme_data(id)
+		if owner.has_method("_show_switch_banner"):
+			owner._show_switch_banner("THEME", str(theme_data.get("title", id)), accent)
 
 
 static func _grant_swordsman_blade_storm(owner) -> void:
@@ -54,7 +82,8 @@ static func _grant_swordsman_blade_storm(owner) -> void:
 	owner._spawn_combat_tag(owner.global_position + Vector2(0.0, -62.0), BLADE_STORM_LABEL, Color(0.4, 0.96, 1.0, 1.0))
 	owner._spawn_ring_effect(owner.global_position, 92.0, Color(0.4, 0.96, 1.0, 0.82), 10.0, 0.24)
 	owner._spawn_burst_effect(owner.global_position, 104.0, Color(0.2, 0.76, 1.0, 0.18), 0.22)
-	if owner.swordsman_blade_storm_ability != null and owner.swordsman_blade_storm_ability.can_trigger(owner, str(owner._get_active_role().get("id", ""))):
+	var ability = owner.get("swordsman_blade_storm_ability")
+	if ability != null and ability.can_trigger(owner, str(owner._get_active_role().get("id", ""))):
 		owner._start_swordsman_blade_storm()
 
 
@@ -63,7 +92,8 @@ static func _grant_gunner_infinite_reload(owner) -> void:
 	owner._spawn_combat_tag(owner.global_position + Vector2(0.0, -62.0), INFINITE_RELOAD_LABEL, Color(1.0, 0.6, 0.34, 1.0))
 	owner._spawn_ring_effect(owner.global_position, 96.0, Color(1.0, 0.56, 0.28, 0.78), 10.0, 0.24)
 	owner._spawn_burst_effect(owner.global_position, 108.0, Color(1.0, 0.48, 0.2, 0.18), 0.22)
-	if owner.gunner_infinite_reload_ability != null and owner.gunner_infinite_reload_ability.can_trigger(owner, str(owner._get_active_role().get("id", ""))):
+	var ability = owner.get("gunner_infinite_reload_ability")
+	if ability != null and ability.can_trigger(owner, str(owner._get_active_role().get("id", ""))):
 		owner._start_gunner_infinite_reload()
 
 
@@ -72,8 +102,18 @@ static func _grant_mage_tidal_surge(owner) -> void:
 	owner._spawn_combat_tag(owner.global_position + Vector2(0.0, -62.0), TIDAL_SURGE_LABEL, Color(0.62, 0.9, 1.0, 1.0))
 	owner._spawn_ring_effect(owner.global_position, 104.0, Color(0.56, 0.86, 1.0, 0.78), 10.0, 0.24)
 	owner._spawn_burst_effect(owner.global_position, 116.0, Color(0.46, 0.78, 1.0, 0.18), 0.24)
-	if owner.mage_tidal_surge_ability != null and owner.mage_tidal_surge_ability.can_trigger(owner, str(owner._get_active_role().get("id", ""))):
+	var ability = owner.get("mage_tidal_surge_ability")
+	if ability != null and ability.can_trigger(owner, str(owner._get_active_role().get("id", ""))):
 		owner._start_mage_tidal_surge()
+
+
+static func _grant_theme_unlock(owner, theme_id: String, fallback_label: String, color: Color) -> void:
+	owner._add_special_reward_level(theme_id, 1)
+	var theme_data: Dictionary = BUILD_SYSTEM.BUILD_DATABASE.get_theme_data(theme_id)
+	var label := str(theme_data.get("title", fallback_label))
+	owner._spawn_combat_tag(owner.global_position + Vector2(0.0, -62.0), label, color)
+	owner._spawn_ring_effect(owner.global_position, 96.0, Color(color.r, color.g, color.b, 0.78), 10.0, 0.24)
+	owner._spawn_burst_effect(owner.global_position, 108.0, Color(color.r, color.g, color.b, 0.18), 0.22)
 
 
 static func _grant_training_level(owner) -> void:

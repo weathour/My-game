@@ -3,6 +3,9 @@ extends Control
 signal difficulty_selected(difficulty_id: String)
 signal closed
 
+const SURVIVORS_MODAL := preload("res://scripts/ui/core/survivors_modal.gd")
+const SURVIVORS_SLOT_CARD := preload("res://scripts/ui/components/survivors_slot_card_factory.gd")
+
 const TEXT_CHOOSE_DIFFICULTY := "\u9009\u62e9\u96be\u5ea6"
 const TEXT_CLOSE := "\u5173\u95ed"
 const TEXT_DIFFICULTY_EASY := "\u7b80\u5355"
@@ -11,6 +14,9 @@ const TEXT_DIFFICULTY_HARD := "\u56f0\u96be"
 const TEXT_DIFFICULTY_HELL := "\u5730\u72f1"
 const TEXT_NOT_OPEN := "\u672a\u5f00\u653e"
 
+var modal: Control
+var card_grid: GridContainer
+
 func _ready() -> void:
 	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	_build_overlay()
@@ -18,94 +24,47 @@ func _ready() -> void:
 
 func open() -> void:
 	visible = true
+	if modal != null and modal.has_method("apply_layout"):
+		modal.apply_layout()
 
 func close_overlay() -> void:
 	visible = false
 	closed.emit()
 
 func _build_overlay() -> void:
-	var shade := ColorRect.new()
-	shade.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	shade.color = Color(0.0, 0.0, 0.0, 0.58)
-	add_child(shade)
+	modal = SURVIVORS_MODAL.new()
+	modal.configure(Vector2(860.0, 400.0), 0.68, 0.56, Vector2(320.0, 240.0))
+	modal.set_title(TEXT_CHOOSE_DIFFICULTY)
+	modal.set_hint("选择本次无尽模式的初始难度。")
+	add_child(modal)
 
-	var center := CenterContainer.new()
-	center.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	add_child(center)
+	card_grid = GridContainer.new()
+	card_grid.columns = 2
+	card_grid.set_anchors_preset(Control.PRESET_FULL_RECT)
+	card_grid.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	card_grid.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	card_grid.add_theme_constant_override("h_separation", 12)
+	card_grid.add_theme_constant_override("v_separation", 12)
+	modal.set_body(card_grid)
 
-	var panel := PanelContainer.new()
-	panel.custom_minimum_size = Vector2(980, 420)
-	center.add_child(panel)
+	card_grid.add_child(_build_difficulty_card(TEXT_DIFFICULTY_EASY, "easy", false))
+	card_grid.add_child(_build_difficulty_card(TEXT_DIFFICULTY_NORMAL, "normal", true))
+	card_grid.add_child(_build_difficulty_card(TEXT_DIFFICULTY_HARD, "hard", false))
+	card_grid.add_child(_build_difficulty_card(TEXT_DIFFICULTY_HELL, "hell", false))
 
-	var margin := MarginContainer.new()
-	margin.add_theme_constant_override("margin_left", 24)
-	margin.add_theme_constant_override("margin_top", 24)
-	margin.add_theme_constant_override("margin_right", 24)
-	margin.add_theme_constant_override("margin_bottom", 24)
-	panel.add_child(margin)
-
-	var content := VBoxContainer.new()
-	content.add_theme_constant_override("separation", 18)
-	margin.add_child(content)
-
-	var header := HBoxContainer.new()
-	content.add_child(header)
-
-	var title := Label.new()
-	title.text = TEXT_CHOOSE_DIFFICULTY
-	title.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	title.add_theme_font_size_override("font_size", 30)
-	header.add_child(title)
-
-	var close_button := Button.new()
-	close_button.text = TEXT_CLOSE
-	close_button.custom_minimum_size = Vector2(100, 40)
-	close_button.pressed.connect(close_overlay)
-	header.add_child(close_button)
-
-	var cards := HBoxContainer.new()
-	cards.alignment = BoxContainer.ALIGNMENT_CENTER
-	cards.add_theme_constant_override("separation", 18)
-	content.add_child(cards)
-
-	cards.add_child(_build_difficulty_card(TEXT_DIFFICULTY_EASY, "easy", false))
-	cards.add_child(_build_difficulty_card(TEXT_DIFFICULTY_NORMAL, "normal", true))
-	cards.add_child(_build_difficulty_card(TEXT_DIFFICULTY_HARD, "hard", false))
-	cards.add_child(_build_difficulty_card(TEXT_DIFFICULTY_HELL, "hell", false))
+	modal.clear_footer()
+	modal.add_footer_button(TEXT_CLOSE, Callable(self, "close_overlay"), "normal")
 
 func _build_difficulty_card(title_text: String, difficulty_id: String, available: bool) -> Control:
-	var panel := PanelContainer.new()
-	panel.custom_minimum_size = Vector2(200, 260)
+	return SURVIVORS_SLOT_CARD.build_card(
+		title_text,
+		"标准幸存者割草体验。" if available else TEXT_NOT_OPEN,
+		"\u9009\u62e9" if available else TEXT_NOT_OPEN,
+		Callable(self, "_emit_difficulty").bind(difficulty_id),
+		132.0,
+		available,
+		not available
+	)
 
-	var margin := MarginContainer.new()
-	margin.add_theme_constant_override("margin_left", 18)
-	margin.add_theme_constant_override("margin_top", 18)
-	margin.add_theme_constant_override("margin_right", 18)
-	margin.add_theme_constant_override("margin_bottom", 18)
-	panel.add_child(margin)
-
-	var content := VBoxContainer.new()
-	content.alignment = BoxContainer.ALIGNMENT_CENTER
-	content.add_theme_constant_override("separation", 16)
-	margin.add_child(content)
-
-	var title := Label.new()
-	title.text = title_text
-	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	title.add_theme_font_size_override("font_size", 28)
-	content.add_child(title)
-
-	var state := Label.new()
-	state.text = "" if available else TEXT_NOT_OPEN
-	state.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	state.add_theme_font_size_override("font_size", 18)
-	content.add_child(state)
-
-	var choose_button := Button.new()
-	choose_button.text = "\u9009\u62e9" if available else TEXT_NOT_OPEN
-	choose_button.custom_minimum_size = Vector2(0, 44)
-	choose_button.disabled = not available
-	choose_button.pressed.connect(func(): difficulty_selected.emit(difficulty_id))
-	content.add_child(choose_button)
-
-	return panel
+func _emit_difficulty(difficulty_id: String) -> void:
+	difficulty_selected.emit(difficulty_id)

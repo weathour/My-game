@@ -9,9 +9,9 @@ const DANGZHEN_CORE_IDS := [
 ]
 
 const DANGZHEN_EVOLUTION_IDS := [
-	"small_boss_dangzhen_blade_storm",
-	"small_boss_dangzhen_infinite_reload",
-	"small_boss_dangzhen_tidal_surge"
+	"branch_omni_edge",
+	"branch_blood_shield",
+	"branch_tri_finale"
 ]
 
 const DANGZHEN_REINFORCEMENT_IDS := [
@@ -26,158 +26,198 @@ const DANGZHEN_REINFORCEMENT_CARD_IDS := {
 	"small_boss_dangzhen_huichao": "battle_dangzhen_huichao"
 }
 
-const DANGZHEN_SHARED_EVOLUTION_CARD_IDS := {
-	"battle_blade_storm_fury": "battle_blade_storm_fury",
-	"battle_infinite_reload_overload": "battle_blade_storm_fury",
-	"battle_tidal_surge_pressure": "battle_blade_storm_fury",
-	"battle_blade_storm_eye": "battle_blade_storm_eye",
-	"battle_infinite_reload_chain": "battle_blade_storm_eye",
-	"battle_tidal_surge_echo": "battle_blade_storm_eye",
-	"battle_blade_storm_multi": "battle_blade_storm_multi",
-	"battle_infinite_reload_bore": "battle_blade_storm_multi",
-	"battle_tidal_surge_widen": "battle_blade_storm_multi"
-}
-
-const DANGZHEN_SHARED_EVOLUTION_CARD_GROUPS := {
-	"battle_blade_storm_fury": [
-		"battle_blade_storm_fury",
-		"battle_infinite_reload_overload",
-		"battle_tidal_surge_pressure"
-	],
-	"battle_blade_storm_eye": [
-		"battle_blade_storm_eye",
-		"battle_infinite_reload_chain",
-		"battle_tidal_surge_echo"
-	],
-	"battle_blade_storm_multi": [
-		"battle_blade_storm_multi",
-		"battle_infinite_reload_bore",
-		"battle_tidal_surge_widen"
-	]
-}
-
-const DANGZHEN_SHARED_EVOLUTION_REWARD_IDS := [
+const LEGACY_DANGZHEN_EVOLUTION_IDS := [
 	"small_boss_dangzhen_blade_storm",
 	"small_boss_dangzhen_infinite_reload",
 	"small_boss_dangzhen_tidal_surge"
 ]
 
+const INITIAL_THEME_ID := "theme_threefold_tide"
+
+
 static func get_shared_card_id(card_id: String) -> String:
-	return str(DANGZHEN_SHARED_EVOLUTION_CARD_IDS.get(card_id, card_id))
+	return BUILD_DATABASE.canonical_card_id(card_id)
+
 
 static func get_shared_reward_ids(reward_id: String) -> Array:
-	if DANGZHEN_SHARED_EVOLUTION_REWARD_IDS.has(reward_id):
-		return DANGZHEN_SHARED_EVOLUTION_REWARD_IDS.duplicate()
-	return [reward_id]
+	return [BUILD_DATABASE.canonical_reward_id(reward_id)]
+
 
 static func get_card_level(card_levels: Dictionary, card_id: String) -> int:
-	var shared_card_id := get_shared_card_id(card_id)
-	if not DANGZHEN_SHARED_EVOLUTION_CARD_GROUPS.has(shared_card_id):
-		return int(card_levels.get(card_id, 0))
-	var level := 0
-	for alias_id in DANGZHEN_SHARED_EVOLUTION_CARD_GROUPS.get(shared_card_id, []):
-		level = max(level, int(card_levels.get(str(alias_id), 0)))
-	return level
+	var canonical_card_id := get_shared_card_id(card_id)
+	return int(card_levels.get(canonical_card_id, card_levels.get(card_id, 0)))
+
 
 static func get_reward_level(reward_levels: Dictionary, reward_id: String) -> int:
-	if DANGZHEN_SHARED_EVOLUTION_REWARD_IDS.has(reward_id):
-		var level := 0
-		for shared_reward_id in DANGZHEN_SHARED_EVOLUTION_REWARD_IDS:
-			level = max(level, int(reward_levels.get(shared_reward_id, 0)))
-		return level
-	return int(reward_levels.get(reward_id, 0))
+	var canonical_reward_id := BUILD_DATABASE.canonical_reward_id(reward_id)
+	return int(reward_levels.get(canonical_reward_id, reward_levels.get(reward_id, 0)))
+
 
 static func get_slot_label(slot_id: String) -> String:
 	return BUILD_DATABASE.get_slot_label(slot_id)
 
+
 static func normalize_dangzhen_card_levels(card_levels: Dictionary) -> Dictionary:
-	var normalized := card_levels.duplicate(true)
-	for card_id in DANGZHEN_CORE_IDS:
-		if not normalized.has(card_id):
+	var normalized: Dictionary = {}
+	for raw_card_id in card_levels.keys():
+		var canonical_card_id := get_shared_card_id(str(raw_card_id))
+		var config := BUILD_DATABASE.get_core_card(canonical_card_id)
+		if config.is_empty():
+			normalized[str(raw_card_id)] = int(card_levels.get(raw_card_id, 0))
 			continue
-		var config := BUILD_DATABASE.get_core_card(card_id)
 		var max_level := int(config.get("max_level", 3))
-		normalized[card_id] = clamp(int(normalized.get(card_id, 0)), 0, max_level)
-	for shared_card_id in DANGZHEN_SHARED_EVOLUTION_CARD_GROUPS.keys():
-		var config := BUILD_DATABASE.get_core_card(str(shared_card_id))
-		var max_level := int(config.get("max_level", 3))
-		var level := 0
-		for alias_id in DANGZHEN_SHARED_EVOLUTION_CARD_GROUPS.get(shared_card_id, []):
-			level = max(level, int(normalized.get(str(alias_id), 0)))
-			normalized.erase(str(alias_id))
-		if level > 0:
-			normalized[str(shared_card_id)] = clamp(level, 0, max_level)
+		var raw_level := int(card_levels.get(raw_card_id, 0))
+		normalized[canonical_card_id] = clamp(max(raw_level, int(normalized.get(canonical_card_id, 0))), 0, max_level)
 	return normalized
+
 
 static func normalize_dangzhen_reward_levels(reward_levels: Dictionary) -> Dictionary:
-	var normalized := reward_levels.duplicate(true)
-	var shared_evolution_level := 0
-	for reward_id in DANGZHEN_EVOLUTION_IDS:
-		if normalized.has(reward_id):
-			shared_evolution_level = max(shared_evolution_level, int(normalized.get(reward_id, 0)))
-	if shared_evolution_level > 0:
-		for reward_id in DANGZHEN_EVOLUTION_IDS:
-			normalized[reward_id] = 1
+	var normalized: Dictionary = {}
+	for raw_reward_id in reward_levels.keys():
+		var canonical_reward_id := BUILD_DATABASE.canonical_reward_id(str(raw_reward_id))
+		normalized[canonical_reward_id] = max(int(normalized.get(canonical_reward_id, 0)), int(reward_levels.get(raw_reward_id, 0)))
 	return normalized
 
-static func get_core_card_config(card_id: String) -> Dictionary:
-	return BUILD_DATABASE.get_core_card(card_id)
+
+static func get_core_card_config(card_id: String, active_role_id: String = "") -> Dictionary:
+	return BUILD_DATABASE.get_role_card_config(card_id, active_role_id)
+
+
+static func get_card_type(card_id: String) -> String:
+	return BUILD_DATABASE.get_card_type(card_id)
+
+
+static func has_independent_skill_cooldown(card_id: String) -> bool:
+	return BUILD_DATABASE.has_independent_skill_cooldown(card_id)
+
+
+static func get_role_effect_payload(card_id: String) -> Array:
+	return BUILD_DATABASE.get_role_effect_payload(card_id)
+
 
 static func get_final_set_data(set_key: String) -> Dictionary:
 	return BUILD_DATABASE.get_final_set_data(set_key)
 
+
 static func is_card_offerable(card_levels: Dictionary, card_id: String) -> bool:
-	var config := BUILD_DATABASE.get_core_card(card_id)
+	var canonical_card_id := get_shared_card_id(card_id)
+	var config := BUILD_DATABASE.get_core_card(canonical_card_id)
 	if config.is_empty():
 		return false
 	for required_id in config.get("requires", []):
 		if get_card_level(card_levels, str(required_id)) <= 0:
 			return false
-	return get_card_level(card_levels, card_id) < int(config.get("max_level", 3))
+	return get_card_level(card_levels, canonical_card_id) < int(config.get("max_level", 3))
+
 
 static func is_final_set_complete(card_levels: Dictionary, set_key: String) -> bool:
-	for card_id in DANGZHEN_CORE_IDS:
-		var config := BUILD_DATABASE.get_core_card(card_id)
-		if str(config.get("set_key", "")) != set_key:
+	var final_set := get_final_set_data(set_key)
+	if final_set.is_empty():
+		return false
+	for requirement in final_set.get("requirements", []):
+		if not (requirement is Dictionary):
 			continue
-		if get_card_level(card_levels, card_id) < int(config.get("max_level", 3)):
+		var card_id := str(requirement.get("card_id", ""))
+		var max_level := int(requirement.get("max_level", 0))
+		if card_id == "" or get_card_level(card_levels, card_id) < max_level:
 			return false
-	return set_key == "battle_dangzhen"
+	return true
+
+
+static func get_unlocked_theme_ids(card_levels: Dictionary, reward_levels: Dictionary = {}) -> Array:
+	var theme_ids: Array = [INITIAL_THEME_ID]
+	for theme_id in BUILD_DATABASE.get_branch_theme_ids():
+		var branch_id := str(theme_id)
+		if is_theme_unlocked(card_levels, reward_levels, branch_id):
+			theme_ids.append(branch_id)
+	return theme_ids
+
+
+static func get_newly_unlocked_theme_ids(before_theme_ids: Array, card_levels: Dictionary, reward_levels: Dictionary = {}) -> Array:
+	var before := {}
+	for theme_id in before_theme_ids:
+		before[str(theme_id)] = true
+	var result: Array = []
+	for theme_id in get_unlocked_theme_ids(card_levels, reward_levels):
+		var id := str(theme_id)
+		if not before.has(id):
+			result.append(id)
+	return result
+
+
+static func is_theme_unlocked(card_levels: Dictionary, reward_levels: Dictionary, theme_id: String) -> bool:
+	if theme_id == INITIAL_THEME_ID:
+		return true
+	if get_reward_level(reward_levels, theme_id) > 0:
+		return true
+	return _is_theme_recipe_met(card_levels, theme_id)
+
+
+static func _is_theme_recipe_met(card_levels: Dictionary, theme_id: String) -> bool:
+	var recipes := BUILD_DATABASE.get_theme_unlock_recipes()
+	var recipe: Dictionary = recipes.get(theme_id, {})
+	if recipe.is_empty():
+		return false
+	for card_id in recipe.get("requirements", {}).keys():
+		if get_card_level(card_levels, str(card_id)) < int(recipe.get("requirements", {}).get(card_id, 0)):
+			return false
+	return true
+
 
 static func get_upgrade_pool(slot_id: String, card_levels: Dictionary, reward_levels: Dictionary = {}, active_role_id: String = "") -> Array:
 	var options: Array = []
-	for card_id in BUILD_DATABASE.get_core_card_ids_for_slot(slot_id):
-		if is_card_offerable(card_levels, card_id):
-			options.append(make_core_card_option(slot_id, card_id, card_levels))
-	var active_evolution_reward_id := BUILD_DATABASE.get_evolution_reward_id_for_role(active_role_id)
-	if active_evolution_reward_id != "" and _get_shared_evolution_reward_level(reward_levels) > 0:
-		for card_id in BUILD_DATABASE.get_evolution_card_ids_for_reward(active_evolution_reward_id):
-			if is_card_offerable(card_levels, str(card_id)):
-				options.append(make_core_card_option(slot_id, str(card_id), card_levels))
+	var used_ids := {}
+	for theme_id in get_unlocked_theme_ids(card_levels, reward_levels):
+		for raw_card_id in BUILD_DATABASE.get_card_ids_for_theme_slot(str(theme_id), slot_id):
+			var card_id := get_shared_card_id(str(raw_card_id))
+			if used_ids.has(card_id):
+				continue
+			if is_card_offerable(card_levels, card_id):
+				options.append(make_core_card_option(slot_id, card_id, card_levels, active_role_id))
+				used_ids[card_id] = true
 	return options
 
-static func make_core_card_option(slot_id: String, card_id: String, card_levels: Dictionary) -> Dictionary:
-	var config := BUILD_DATABASE.get_core_card(card_id)
-	var next_level := get_card_level(card_levels, card_id) + 1
-	var title := str(config.get("title", card_id))
+
+static func make_core_card_option(slot_id: String, card_id: String, card_levels: Dictionary, active_role_id: String = "") -> Dictionary:
+	var canonical_card_id := get_shared_card_id(card_id)
+	var config := BUILD_DATABASE.get_role_card_config(canonical_card_id, active_role_id)
+	var next_level := get_card_level(card_levels, canonical_card_id) + 1
+	var title := str(config.get("title", canonical_card_id))
 	var description := _make_core_card_detail_description(config)
+	var role_effect_description := _make_role_effect_description(config)
+	if role_effect_description != "":
+		description = "%s\n\n%s" % [description, role_effect_description]
 	var preview := str(config.get("preview", description))
 	var final_set := get_final_set_data(str(config.get("set_key", "")))
+	var theme_id := str(config.get("theme_id", INITIAL_THEME_ID))
+	var theme_data := BUILD_DATABASE.get_theme_data(theme_id)
+	var display_title := "%s Lv.%d" % [title, next_level]
+	if not theme_data.is_empty() and theme_id != INITIAL_THEME_ID:
+		display_title = "%s｜%s" % [str(theme_data.get("title", "")), display_title]
 	return {
-		"id": card_id,
+		"id": canonical_card_id,
 		"slot": slot_id,
 		"slot_label": BUILD_DATABASE.get_slot_label(slot_id),
-		"title": "%s Lv.%d" % [title, next_level],
+		"title": display_title,
+		"card_title": title,
+		"card_type": str(config.get("card_type", "passive_attack")),
+		"card_type_label": str(config.get("card_type_label", "")),
+		"is_new_passive_skill": bool(config.get("is_new_passive_skill", false)),
+		"has_independent_cooldown": bool(config.get("has_independent_cooldown", false)),
+		"role_effects": config.get("role_effects", []),
 		"preview_description": preview,
 		"description": description,
 		"detail_description": description,
 		"glossary_terms": [],
 		"exact_description": description,
+		"theme_id": theme_id,
+		"theme_title": str(theme_data.get("title", "")),
 		"final_card_name": str(final_set.get("main_name", "")),
 		"final_card_title": str(final_set.get("full_title", "")),
 		"final_card_requirements": _make_final_set_requirement_payload(final_set, card_levels),
 		"max_level": int(config.get("max_level", 3))
 	}
+
 
 static func _make_core_card_detail_description(config: Dictionary) -> String:
 	var detail_lines: Array = config.get("detail_lines", [])
@@ -187,6 +227,21 @@ static func _make_core_card_detail_description(config: Dictionary) -> String:
 	for detail_line in detail_lines:
 		lines.append("- " + str(detail_line))
 	return "\n".join(lines)
+
+
+static func _make_role_effect_description(config: Dictionary) -> String:
+	var role_effects: Array = config.get("role_effects", [])
+	if role_effects.is_empty():
+		return ""
+	var lines: Array[String] = ["【三英雄对应效果 / 数值】"]
+	for effect in role_effects:
+		if effect is not Dictionary:
+			continue
+		lines.append("%s｜%s" % [str(effect.get("role_name", "")), str(effect.get("title", ""))])
+		for line in effect.get("lines", []):
+			lines.append("  - " + str(line))
+	return "\n".join(lines)
+
 
 static func _make_final_set_requirement_payload(final_set: Dictionary, card_levels: Dictionary) -> Array:
 	var requirement_payload: Array = []
@@ -202,25 +257,20 @@ static func _make_final_set_requirement_payload(final_set: Dictionary, card_leve
 		})
 	return requirement_payload
 
+
 static func get_small_boss_reward_options(card_levels: Dictionary, reward_levels: Dictionary, active_role_id: String = "") -> Array:
 	var options: Array = []
-	if not is_final_set_complete(card_levels, "battle_dangzhen"):
-		for reward_id in DANGZHEN_REINFORCEMENT_IDS:
-			if _is_reinforcement_reward_offerable(card_levels, str(reward_id)):
-				options.append(_make_small_boss_reward_option(str(reward_id)))
-	else:
-		var active_evolution_reward_id := BUILD_DATABASE.get_evolution_reward_id_for_role(active_role_id)
-		if active_evolution_reward_id != "" and _get_shared_evolution_reward_level(reward_levels) <= 0:
-			options.append(_make_small_boss_reward_option(active_evolution_reward_id))
+	for reward_id in DANGZHEN_REINFORCEMENT_IDS:
+		if _is_reinforcement_reward_offerable(card_levels, str(reward_id)):
+			options.append(_make_small_boss_reward_option(str(reward_id)))
+	for branch_id in BUILD_DATABASE.get_branch_theme_ids():
+		var theme_id := str(branch_id)
+		if _is_theme_recipe_met(card_levels, theme_id) and get_reward_level(reward_levels, theme_id) <= 0:
+			options.append(_make_small_boss_reward_option(theme_id))
 	if options.is_empty():
 		options.append(make_small_boss_training_reward_option())
 	return options.slice(0, 3)
 
-static func _get_shared_evolution_reward_level(reward_levels: Dictionary) -> int:
-	var level := 0
-	for reward_id in DANGZHEN_SHARED_EVOLUTION_REWARD_IDS:
-		level = max(level, get_reward_level(reward_levels, str(reward_id)))
-	return level
 
 static func get_blank_small_boss_reward_options(count: int = 3) -> Array:
 	var options: Array = []
@@ -228,11 +278,13 @@ static func get_blank_small_boss_reward_options(count: int = 3) -> Array:
 		options.append(_make_small_boss_blank_reward_option(index + 1))
 	return options
 
+
 static func _is_reinforcement_reward_offerable(card_levels: Dictionary, reward_id: String) -> bool:
 	var card_id := str(DANGZHEN_REINFORCEMENT_CARD_IDS.get(reward_id, ""))
 	if card_id == "":
 		return false
 	return is_card_offerable(card_levels, card_id)
+
 
 static func _make_small_boss_reward_option(reward_id: String) -> Dictionary:
 	var reward := BUILD_DATABASE.get_small_boss_reward(reward_id)
@@ -247,6 +299,7 @@ static func _make_small_boss_reward_option(reward_id: String) -> Dictionary:
 		"exact_description": description
 	}
 
+
 static func _make_small_boss_blank_reward_option(index: int) -> Dictionary:
 	return {
 		"id": "small_boss_blank_%d" % index,
@@ -257,6 +310,7 @@ static func _make_small_boss_blank_reward_option(index: int) -> Dictionary:
 		"preview_description": "Continue without an extra reward.",
 		"exact_description": "This option gives no extra combat bonus."
 	}
+
 
 static func make_small_boss_training_reward_option() -> Dictionary:
 	return {

@@ -59,6 +59,19 @@ static func setup_player_health_bar(owner) -> void:
 	border.closed = true
 	bar_root.add_child(border)
 
+	var level_label := Label.new()
+	level_label.name = "LevelLabel"
+	level_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	level_label.custom_minimum_size = Vector2(48.0, 18.0)
+	level_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
+	level_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	level_label.add_theme_font_size_override("font_size", 11)
+	level_label.add_theme_color_override("font_color", Color(1.0, 0.90, 0.35, 1.0))
+	level_label.add_theme_color_override("font_shadow_color", Color(0.0, 0.0, 0.0, 0.95))
+	level_label.add_theme_constant_override("shadow_offset_x", 1)
+	level_label.add_theme_constant_override("shadow_offset_y", 1)
+	bar_root.add_child(level_label)
+
 	update_player_health_bar(owner, owner._get_active_role(), 5.0, 44.0)
 
 static func update_player_health_bar(owner, role_data: Dictionary, bar_height: float, bar_y_offset: float) -> void:
@@ -101,6 +114,19 @@ static func update_player_health_bar(owner, role_data: Dictionary, bar_height: f
 			Vector2(half_width, half_height),
 			Vector2(-half_width, half_height)
 		])
+
+	var level_label := bar_root.get_node_or_null("LevelLabel") as Label
+	if level_label != null:
+		level_label.text = "Lv.%d" % _get_owner_level(owner)
+		level_label.position = Vector2(half_width + 7.0, -9.5)
+		level_label.size = Vector2(48.0, 18.0)
+
+
+static func _get_owner_level(owner) -> int:
+	var level_value: Variant = owner.get("level")
+	if level_value == null:
+		return 1
+	return max(1, int(level_value))
 
 
 static func get_hurtbox_center(owner) -> Vector2:

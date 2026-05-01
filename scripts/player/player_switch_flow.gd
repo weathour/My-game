@@ -202,7 +202,7 @@ static func try_switch_role(owner, new_role_index: int) -> void:
 	var previous_position: Vector2 = owner.global_position
 	var exit_hits: int = apply_exit_skill(owner, previous_role_index)
 	owner.active_role_index = new_role_index
-	owner.switch_cooldown_remaining = 0.0 if DEVELOPER_MODE.should_ignore_cooldowns() else max(2.5, (ROLE_SWITCH_COOLDOWN - owner.role_switch_cooldown_bonus) * owner._get_equipment_cooldown_multiplier())
+	owner.switch_cooldown_remaining = 0.0 if DEVELOPER_MODE.should_ignore_cooldowns() else _get_switch_cooldown_duration(owner)
 	owner.switch_invulnerability_remaining = SWITCH_INVULNERABILITY
 	var entry_hits: int = apply_enter_skill(owner, owner.active_role_index)
 	apply_pending_entry_blessing(owner, str(owner.roles[owner.active_role_index]["id"]))
@@ -221,6 +221,17 @@ static func try_switch_role(owner, new_role_index: int) -> void:
 		owner._add_energy(12.0)
 	if previous_position != owner.global_position:
 		owner._spawn_dash_line_effect(previous_position, owner.global_position, Color(0.94, 0.92, 0.66, 0.7), 8.0, 0.12)
+
+
+static func get_switch_cooldown_duration(owner) -> float:
+	return _get_switch_cooldown_duration(owner)
+
+
+static func _get_switch_cooldown_duration(owner) -> float:
+	var common_prosperity_multiplier := 1.0
+	if owner.has_method("_get_common_prosperity_switch_cooldown_multiplier"):
+		common_prosperity_multiplier = float(owner._get_common_prosperity_switch_cooldown_multiplier())
+	return max(2.5, (ROLE_SWITCH_COOLDOWN - owner.role_switch_cooldown_bonus) * owner._get_equipment_cooldown_multiplier() * common_prosperity_multiplier)
 
 
 static func apply_enter_skill(owner, role_index: int) -> int:

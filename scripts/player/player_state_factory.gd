@@ -9,9 +9,10 @@ static func build_slot_progress_data() -> Dictionary:
 
 static func build_attribute_training_data() -> Dictionary:
 	return {
-		"vitality": 0,
-		"agility": 0,
-		"power": 0
+		"swordsman_trait": 0.0,
+		"gunner_trait": 0.0,
+		"mage_trait": 0.0,
+		"common_prosperity": 0
 	}
 
 static func make_slot_resonance_key(slot_id: String, threshold: int) -> String:

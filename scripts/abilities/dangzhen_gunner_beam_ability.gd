@@ -90,7 +90,8 @@ func get_cooldown_slot(owner = null) -> Dictionary:
 		"name": "\u8361\u9635",
 		"remaining": clamp(cooldown_remaining, 0.0, duration),
 		"duration": duration,
-		"color": Color(1.0, 0.44, 0.26, 1.0)
+		"color": Color(1.0, 0.44, 0.26, 1.0),
+		"description": "荡阵·枪手：沿瞄准方向释放贯穿光束；叠浪会延迟追踪补发，回潮提升覆盖宽度/范围。"
 	}
 
 func _get_cooldown(owner) -> float:

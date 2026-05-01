@@ -73,7 +73,8 @@ func get_cooldown_slot(owner = null) -> Dictionary:
 		"name": "\u8361\u9635",
 		"remaining": clamp(cooldown_remaining, 0.0, duration),
 		"duration": duration,
-		"color": Color(0.36, 0.88, 1.0, 1.0)
+		"color": Color(0.36, 0.88, 1.0, 1.0),
+		"description": "荡阵·剑士：向前方挥出扇形剑气；叠浪会追加补发，回潮会扩展为反向/十字方向。"
 	}
 
 func _get_cooldown(owner) -> float:

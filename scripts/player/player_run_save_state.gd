@@ -33,6 +33,7 @@ static func get_save_data(player) -> Dictionary:
 		"switch_cooldown_remaining": player.switch_cooldown_remaining,
 		"enemy_move_slow_multiplier": player.enemy_move_slow_multiplier,
 		"enemy_move_slow_remaining": player.enemy_move_slow_remaining,
+		"theme_blood_reflux_cooldown": player.theme_blood_reflux_cooldown,
 		"swordsman_dangzhen_slash_cooldown_remaining": player.swordsman_dangzhen_fan_ability.cooldown_remaining if player.swordsman_dangzhen_fan_ability != null else 0.0,
 		"gunner_dangzhen_beam_cooldown_remaining": player.gunner_dangzhen_beam_ability.cooldown_remaining if player.gunner_dangzhen_beam_ability != null else 0.0,
 		"gunner_infinite_reload_cooldown_remaining": player.gunner_infinite_reload_ability.cooldown_remaining if player.gunner_infinite_reload_ability != null else 0.0,
@@ -195,9 +196,11 @@ static func apply_save_data(player, data: Dictionary) -> void:
 	if saved_special_reward_levels is Dictionary:
 		player.special_reward_levels = BUILD_SYSTEM.normalize_dangzhen_reward_levels(saved_special_reward_levels)
 	player.elite_relics_unlocked = data.get("elite_relics_unlocked", player.elite_relics_unlocked).duplicate(true)
-	player.attribute_training_levels = data.get("attribute_training_levels", player.attribute_training_levels).duplicate(true)
+	player.attribute_training_levels = player._normalize_attribute_training_data(data.get("attribute_training_levels", player.attribute_training_levels))
+	player._sync_swordsman_trait_health_bonus()
 	player.slot_resonances_unlocked = data.get("slot_resonances_unlocked", player.slot_resonances_unlocked).duplicate(true)
 	player.role_special_states = data.get("role_special_states", player.role_special_states).duplicate(true)
+	player.theme_blood_reflux_cooldown = max(0.0, float(data.get("theme_blood_reflux_cooldown", 0.0)))
 	player.roles = player._normalize_loaded_roles(data.get("roles", player.roles))
 	player.story_equipped_styles = data.get("story_equipped_styles", player.story_equipped_styles).duplicate(true)
 	if player.swordsman_blade_storm_ability != null:

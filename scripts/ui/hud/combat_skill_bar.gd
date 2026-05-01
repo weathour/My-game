@@ -1,6 +1,7 @@
 extends Control
 
 const GAME_SETTINGS := preload("res://scripts/game_settings.gd")
+const SURVIVORS_HOVER_DETAIL := preload("res://scripts/ui/components/survivors_hover_detail.gd")
 const SKILL_CD_SLOT_COUNT := 6
 const SKILL_CD_SLOT_SIZE := 52.0
 const ULTIMATE_WIDGET_SIZE := 108.0
@@ -131,6 +132,7 @@ class UltimateEnergyDisplay:
 	extends Control
 
 	var fill_ratio: float = 0.0
+	var skill_name: String = ""
 
 	func set_state(new_ratio: float) -> void:
 		fill_ratio = clamp(new_ratio, 0.0, 1.0)
@@ -146,6 +148,14 @@ class UltimateEnergyDisplay:
 		if fill_ratio >= 0.999:
 			draw_circle(center, inner_radius, Color(0.32, 0.76, 1.0, 0.16))
 		draw_arc(center, radius, 0.0, TAU, 64, Color(0.0, 0.0, 0.0, 1.0), 3.0)
+
+		if skill_name != "":
+			var font := get_theme_default_font()
+			var font_size := 14
+			var text_size := font.get_string_size(skill_name, HORIZONTAL_ALIGNMENT_CENTER, -1.0, font_size)
+			var text_position := center - text_size * 0.5 + Vector2(0.0, 3.0)
+			draw_string(font, text_position + Vector2(1.0, 1.0), skill_name, HORIZONTAL_ALIGNMENT_CENTER, -1.0, font_size, Color(0.0, 0.0, 0.0, 0.95))
+			draw_string(font, text_position, skill_name, HORIZONTAL_ALIGNMENT_CENTER, -1.0, font_size, Color(1.0, 0.96, 0.72, 1.0))
 
 	func _draw_fill(center: Vector2, radius: float, ratio: float) -> void:
 		if ratio <= 0.0:
@@ -192,8 +202,12 @@ var switch_cd_portrait: SwitchPortraitDisplay
 var skill_cd_slots: Array = []
 var ultimate_energy_widget: UltimateEnergyDisplay
 var ultimate_key_label: Label
+var ultimate_current_energy: float = 0.0
+var ultimate_required_energy: float = 100.0
+var ultimate_display: Dictionary = {}
 var experience_bar: ProgressBar
 var experience_label: Label
+var hover_detail: Control
 
 func _ready() -> void:
 	anchor_left = 0.5
@@ -206,6 +220,8 @@ func _ready() -> void:
 	offset_right = total_width * 0.5
 	offset_bottom = -10.0
 	_build_widgets()
+	hover_detail = SURVIVORS_HOVER_DETAIL.new()
+	add_child(hover_detail)
 
 func update_experience(current_experience: int, required_experience: int) -> void:
 	if experience_bar != null:
@@ -228,10 +244,14 @@ func update_switch_cooldown(role_id: String, cooldown_remaining: float, cooldown
 	if switch_cd_time_label != null:
 		switch_cd_time_label.text = "%.1f" % cooldown_remaining if cooldown_remaining > 0.05 else ""
 
-func update_ultimate_energy(current_energy: float, required_energy: float) -> void:
+func update_ultimate_energy(current_energy: float, required_energy: float, display_data: Dictionary = {}) -> void:
 	_refresh_action_key_labels()
+	ultimate_current_energy = max(current_energy, 0.0)
+	ultimate_required_energy = max(required_energy, 1.0)
+	ultimate_display = display_data.duplicate(true)
 	if ultimate_energy_widget != null:
-		ultimate_energy_widget.set_state(current_energy / max(required_energy, 1.0))
+		ultimate_energy_widget.skill_name = str(ultimate_display.get("name", "大招"))
+		ultimate_energy_widget.set_state(ultimate_current_energy / ultimate_required_energy)
 
 func update_skill_cooldown_slots(slot_data_list: Array) -> void:
 	for index in range(skill_cd_slots.size()):
@@ -240,7 +260,10 @@ func update_skill_cooldown_slots(slot_data_list: Array) -> void:
 		var label: Label = slot_nodes["label"] as Label
 		if index >= slot_data_list.size():
 			slot_view.set_state(false, Color(0.12, 0.13, 0.16, 1.0), 0.0)
+			slot_view.tooltip_text = ""
 			label.text = ""
+			slot_nodes["title"] = ""
+			slot_nodes["description"] = ""
 			continue
 
 		var slot_data: Dictionary = slot_data_list[index]
@@ -252,7 +275,12 @@ func update_skill_cooldown_slots(slot_data_list: Array) -> void:
 		var remaining: float = clamp(float(slot_data.get("remaining", 0.0)), 0.0, duration)
 		var ratio: float = remaining / duration
 		slot_view.set_state(true, slot_color, ratio)
-		label.text = "%.1f" % remaining if remaining > 0.05 else str(slot_data.get("name", "OK"))
+		var slot_name := str(slot_data.get("name", "OK"))
+		label.text = slot_name
+		slot_view.tooltip_text = ""
+		slot_nodes["title"] = slot_name
+		slot_nodes["description"] = _build_slot_tooltip(slot_data, duration, remaining)
+		slot_nodes["slot_label"] = str(slot_data.get("slot_label", "技能冷却"))
 
 func _build_widgets() -> void:
 	var switch_cd_widget := HBoxContainer.new()
@@ -333,6 +361,9 @@ func _build_widgets() -> void:
 		var slot_icon := SkillCooldownIcon.new()
 		slot_icon.custom_minimum_size = Vector2(SKILL_CD_SLOT_SIZE, SKILL_CD_SLOT_SIZE)
 		slot_icon.set_state(false, Color(0.12, 0.13, 0.16, 1.0), 0.0)
+		slot_icon.tooltip_text = ""
+		slot_icon.mouse_entered.connect(_on_skill_slot_hovered.bind(slot_icon, index))
+		slot_icon.mouse_exited.connect(_on_skill_slot_unhovered)
 		skill_cd_panel.add_child(slot_icon)
 
 		var label := Label.new()
@@ -350,7 +381,10 @@ func _build_widgets() -> void:
 
 		skill_cd_slots.append({
 			"view": slot_icon,
-			"label": label
+			"label": label,
+			"title": "",
+			"description": "",
+			"slot_label": ""
 		})
 
 	ultimate_energy_widget = UltimateEnergyDisplay.new()
@@ -358,6 +392,9 @@ func _build_widgets() -> void:
 	ultimate_energy_widget.size = Vector2(ULTIMATE_WIDGET_SIZE, ULTIMATE_WIDGET_SIZE)
 	ultimate_energy_widget.custom_minimum_size = Vector2(ULTIMATE_WIDGET_SIZE, ULTIMATE_WIDGET_SIZE)
 	ultimate_energy_widget.set_state(0.0)
+	ultimate_energy_widget.tooltip_text = ""
+	ultimate_energy_widget.mouse_entered.connect(_on_ultimate_energy_hovered)
+	ultimate_energy_widget.mouse_exited.connect(_on_skill_slot_unhovered)
 	add_child(ultimate_energy_widget)
 
 	ultimate_key_label = Label.new()
@@ -402,6 +439,64 @@ func _build_widgets() -> void:
 	add_child(experience_label)
 
 	_refresh_action_key_labels()
+
+func _build_slot_tooltip(slot_data: Dictionary, duration: float, remaining: float) -> String:
+	var description := str(slot_data.get("description", ""))
+	var status := "剩余 %.1f / %.1f 秒" % [remaining, duration] if remaining > 0.05 else "冷却就绪"
+	if description == "":
+		description = status
+	else:
+		description = "%s\n%s" % [description, status]
+	return description
+
+func _on_skill_slot_hovered(slot_icon: Control, index: int) -> void:
+	if index < 0 or index >= skill_cd_slots.size():
+		return
+	var slot_nodes: Dictionary = skill_cd_slots[index]
+	var title := str(slot_nodes.get("title", ""))
+	if title == "":
+		title = "技能"
+	var description := str(slot_nodes.get("description", ""))
+	if description == "":
+		return
+	var item := {
+		"title": title,
+		"slot_label": str(slot_nodes.get("slot_label", "技能冷却")),
+		"description": description
+	}
+	if hover_detail != null and hover_detail.has_method("show_item"):
+		hover_detail.show_item(item, get_viewport().get_mouse_position(), Rect2(slot_icon.global_position, slot_icon.size))
+
+func _on_ultimate_energy_hovered() -> void:
+	if ultimate_energy_widget == null:
+		return
+	var ultimate_key := ""
+	if ultimate_key_label != null:
+		ultimate_key = ultimate_key_label.text
+	if ultimate_key == "":
+		ultimate_key = GAME_SETTINGS.get_key_display_name(GAME_SETTINGS.load_keycode(GAME_SETTINGS.ACTION_ULTIMATE))
+	var status := "已充满，可以按 %s 释放大招。" % ultimate_key if ultimate_current_energy >= ultimate_required_energy else "还需 %.0f 点能量。" % max(0.0, ultimate_required_energy - ultimate_current_energy)
+	var ultimate_name := str(ultimate_display.get("name", "大招"))
+	var ultimate_description := str(ultimate_display.get("description", "当前英雄的大招。"))
+	var item := {
+		"title": ultimate_name,
+		"slot_label": "大招 / 能量",
+		"description": "%s\n\n能量 %.0f / %.0f。\n%s\n攻击命中与战斗节奏会积累大招能量，充满后释放当前角色的大招。" % [
+			ultimate_description,
+			ultimate_current_energy,
+			ultimate_required_energy,
+			status
+		]
+	}
+	if hover_detail != null and hover_detail.has_method("show_item"):
+		hover_detail.show_item(item, get_viewport().get_mouse_position(), Rect2(ultimate_energy_widget.global_position, ultimate_energy_widget.size))
+
+func _on_skill_slot_unhovered() -> void:
+	if hover_detail != null:
+		if hover_detail.has_method("request_hide"):
+			hover_detail.request_hide()
+		elif hover_detail.has_method("hide_detail"):
+			hover_detail.hide_detail()
 
 func _refresh_switch_key_labels() -> void:
 	_refresh_action_key_labels()

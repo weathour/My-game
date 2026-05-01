@@ -1,7 +1,9 @@
-extends CenterContainer
+extends Control
 
 const BGM_PLAYER_SCRIPT := preload("res://scripts/bgm_player.gd")
 const GAME_SETTINGS := preload("res://scripts/game_settings.gd")
+const SURVIVORS_MODAL := preload("res://scripts/ui/core/survivors_modal.gd")
+const SURVIVORS_THEME := preload("res://scripts/ui/theme/survivors_ui_theme.gd")
 
 const TEXT_SETTINGS := "\u8bbe\u7f6e"
 const TEXT_VOLUME_SETTINGS := "\u97f3\u91cf\u8bbe\u7f6e"
@@ -44,9 +46,11 @@ var window_size_option: OptionButton
 var keybind_buttons: Dictionary = {}
 var keybind_status_label: Label
 var waiting_for_key_action: String = ""
+var modal: Control
 
 func _ready() -> void:
-	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	_fit_to_viewport()
+	mouse_filter = Control.MOUSE_FILTER_STOP
 	_build_panel()
 	visible = false
 	_show_volume_settings()
@@ -54,12 +58,17 @@ func _ready() -> void:
 	_refresh_display_controls()
 	_refresh_keybind_controls()
 
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_RESIZED:
+		_fit_to_viewport()
+
 func open() -> void:
 	waiting_for_key_action = ""
 	_refresh_audio_controls()
 	_refresh_display_controls()
 	_refresh_keybind_controls()
 	_show_volume_settings()
+	_fit_to_viewport()
 	visible = true
 
 func close_panel() -> void:
@@ -93,63 +102,76 @@ func handle_unhandled_input(event: InputEvent) -> bool:
 	return true
 
 func _build_panel() -> void:
-	var settings_panel := PanelContainer.new()
-	settings_panel.custom_minimum_size = Vector2(780, 520)
-	add_child(settings_panel)
+	modal = SURVIVORS_MODAL.new()
+	modal.configure(Vector2(780.0, 520.0), 0.62, 0.72, Vector2(320.0, 260.0))
+	add_child(modal)
+	modal.set_title(TEXT_SETTINGS)
+	modal.set_hint("")
 
 	var content := VBoxContainer.new()
-	content.add_theme_constant_override("separation", 18)
-	settings_panel.add_child(content)
+	content.set_anchors_preset(Control.PRESET_FULL_RECT)
+	content.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	content.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	content.add_theme_constant_override("separation", 12)
+	modal.set_body(content)
 
 	var header := HBoxContainer.new()
-	header.add_theme_constant_override("separation", 12)
+	header.add_theme_constant_override("separation", 10)
 	content.add_child(header)
 
 	settings_title_label = Label.new()
 	settings_title_label.text = TEXT_SETTINGS
 	settings_title_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	settings_title_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	settings_title_label.add_theme_font_size_override("font_size", 30)
+	settings_title_label.add_theme_font_size_override("font_size", 28)
+	settings_title_label.add_theme_color_override("font_color", SURVIVORS_THEME.COLOR_TEXT)
 	header.add_child(settings_title_label)
 
 	var close_button := Button.new()
 	close_button.text = TEXT_CLOSE
-	close_button.custom_minimum_size = Vector2(108, 40)
+	close_button.custom_minimum_size = Vector2(100, 38)
+	SURVIVORS_THEME.apply_button_style(close_button)
 	close_button.pressed.connect(close_panel)
 	header.add_child(close_button)
 
 	var body := HBoxContainer.new()
-	body.add_theme_constant_override("separation", 22)
+	body.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	body.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	body.add_theme_constant_override("separation", 14)
 	content.add_child(body)
 
 	var category_column := VBoxContainer.new()
-	category_column.custom_minimum_size = Vector2(190, 360)
-	category_column.add_theme_constant_override("separation", 14)
+	category_column.custom_minimum_size = Vector2(170, 0)
+	category_column.add_theme_constant_override("separation", 10)
 	body.add_child(category_column)
 
 	var volume_category_button := Button.new()
 	volume_category_button.text = TEXT_VOLUME_SETTINGS
-	volume_category_button.custom_minimum_size = Vector2(170, 52)
-	volume_category_button.add_theme_font_size_override("font_size", 20)
+	volume_category_button.custom_minimum_size = Vector2(0, 48)
+	volume_category_button.add_theme_font_size_override("font_size", 18)
+	SURVIVORS_THEME.apply_button_style(volume_category_button)
 	volume_category_button.pressed.connect(_show_volume_settings)
 	category_column.add_child(volume_category_button)
 
 	var display_category_button := Button.new()
 	display_category_button.text = TEXT_DISPLAY_SETTINGS
-	display_category_button.custom_minimum_size = Vector2(170, 52)
-	display_category_button.add_theme_font_size_override("font_size", 20)
+	display_category_button.custom_minimum_size = Vector2(0, 48)
+	display_category_button.add_theme_font_size_override("font_size", 18)
+	SURVIVORS_THEME.apply_button_style(display_category_button)
 	display_category_button.pressed.connect(_show_display_settings)
 	category_column.add_child(display_category_button)
 
 	var keybind_category_button := Button.new()
 	keybind_category_button.text = TEXT_KEY_SETTINGS
-	keybind_category_button.custom_minimum_size = Vector2(170, 52)
-	keybind_category_button.add_theme_font_size_override("font_size", 20)
+	keybind_category_button.custom_minimum_size = Vector2(0, 48)
+	keybind_category_button.add_theme_font_size_override("font_size", 18)
+	SURVIVORS_THEME.apply_button_style(keybind_category_button)
 	keybind_category_button.pressed.connect(_show_keybind_settings)
 	category_column.add_child(keybind_category_button)
 
 	var page_root := Control.new()
-	page_root.custom_minimum_size = Vector2(520, 360)
+	page_root.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	page_root.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	body.add_child(page_root)
 
 	volume_page = _build_volume_page()
@@ -163,6 +185,19 @@ func _build_panel() -> void:
 	keybind_page = _build_keybind_page()
 	keybind_page.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	page_root.add_child(keybind_page)
+
+	_fit_to_viewport()
+
+func _fit_to_viewport() -> void:
+	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	offset_left = 0.0
+	offset_top = 0.0
+	offset_right = 0.0
+	offset_bottom = 0.0
+	if modal != null:
+		modal.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+		if modal.has_method("apply_layout"):
+			modal.apply_layout()
 
 func _build_volume_page() -> VBoxContainer:
 	var page := VBoxContainer.new()
@@ -182,7 +217,8 @@ func _build_volume_page() -> VBoxContainer:
 	volume_slider.min_value = 0.0
 	volume_slider.max_value = 1.0
 	volume_slider.step = 0.01
-	volume_slider.custom_minimum_size = Vector2(420, 36)
+	volume_slider.custom_minimum_size = Vector2(0, 36)
+	volume_slider.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	volume_slider.value_changed.connect(_on_volume_changed)
 	page.add_child(volume_slider)
 
@@ -272,6 +308,7 @@ func _build_keybind_page() -> VBoxContainer:
 		var button := Button.new()
 		button.custom_minimum_size = Vector2(150, 34)
 		button.add_theme_font_size_override("font_size", 17)
+		SURVIVORS_THEME.apply_button_style(button)
 		button.pressed.connect(_on_keybind_button_pressed.bind(action_id))
 		row.add_child(button)
 		keybind_buttons[action_id] = button
@@ -279,6 +316,7 @@ func _build_keybind_page() -> VBoxContainer:
 	var reset_button := Button.new()
 	reset_button.text = TEXT_RESET_DEFAULTS
 	reset_button.custom_minimum_size = Vector2(180, 38)
+	SURVIVORS_THEME.apply_button_style(reset_button)
 	reset_button.pressed.connect(_on_reset_keybinds_pressed)
 	page.add_child(reset_button)
 

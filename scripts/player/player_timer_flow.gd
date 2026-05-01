@@ -2,6 +2,7 @@ extends RefCounted
 
 const DEVELOPER_MODE := preload("res://scripts/developer_mode.gd")
 const ROLE_RESOURCE_STATE := preload("res://scripts/player/roles/role_resource_state.gd")
+const PLAYER_THEME_SKILL_FLOW := preload("res://scripts/player/player_theme_skill_flow.gd")
 
 
 static func update_timers(owner, delta: float) -> void:
@@ -22,6 +23,7 @@ static func update_timers(owner, delta: float) -> void:
 		owner.enemy_move_slow_remaining = max(0.0, owner.enemy_move_slow_remaining - delta)
 		if owner.enemy_move_slow_remaining <= 0.0:
 			owner.enemy_move_slow_multiplier = 1.0
+	PLAYER_THEME_SKILL_FLOW.update_cooldowns(owner, delta)
 	if owner.swordsman_dangzhen_fan_ability != null:
 		owner.swordsman_dangzhen_fan_ability.update(delta)
 	if owner.gunner_dangzhen_beam_ability != null:

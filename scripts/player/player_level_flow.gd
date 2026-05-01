@@ -2,30 +2,29 @@ extends RefCounted
 
 const BUILD_SYSTEM := preload("res://scripts/build/build_system.gd")
 const DEVELOPER_MODE := preload("res://scripts/developer_mode.gd")
+const PLAYER_ATTRIBUTE_FLOW := preload("res://scripts/player/player_attribute_flow.gd")
 const PLAYER_EQUIPMENT_FLOW := preload("res://scripts/player/player_equipment_flow.gd")
 const PLAYER_LEVEL_OPTIONS := preload("res://scripts/player/player_level_options.gd")
 const PLAYER_UPGRADE_OPTIONS := preload("res://scripts/player/player_upgrade_options.gd")
 
 
 static func get_attribute_upgrade_options(owner) -> Array:
-	var role_id: String = str(owner._get_active_role().get("id", ""))
-	var max_attribute_level: int = owner._get_max_attribute_level()
-	var vitality_next_level: int = min(max_attribute_level, owner._get_role_attribute_level(role_id, "vitality") + 1)
-	var agility_next_level: int = min(max_attribute_level, owner._get_role_attribute_level(role_id, "agility") + 1)
-	var title_map: Dictionary = owner._get_role_attribute_titles_for_levels(role_id, {
-		"vitality": vitality_next_level,
-		"agility": agility_next_level
-	})
+	owner._sync_swordsman_trait_health_bonus()
+	var max_attribute_level: float = owner._get_max_attribute_level()
+	var swordsman_next_level: float = min(max_attribute_level, owner._get_attribute_level("swordsman_trait") + 1.0)
+	var gunner_next_level: float = min(max_attribute_level, owner._get_attribute_level("gunner_trait") + 1.0)
+	var mage_next_level: float = min(max_attribute_level, owner._get_attribute_level("mage_trait") + 1.0)
 	return PLAYER_LEVEL_OPTIONS.build_attribute_upgrade_options(
-		title_map,
-		vitality_next_level,
-		agility_next_level,
-		int(owner.attribute_training_levels.get("power", 0)) + 1,
-		owner._get_role_attribute_description(role_id, "vitality", vitality_next_level),
-		owner._get_role_attribute_description(role_id, "agility", agility_next_level),
-		owner.LEVEL_STAT_DAMAGE_STEP,
-		owner._is_attribute_evolved(vitality_next_level),
-		owner._is_attribute_evolved(agility_next_level),
+		swordsman_next_level,
+		gunner_next_level,
+		mage_next_level,
+		owner._get_role_attribute_description("swordsman", "swordsman_trait", swordsman_next_level),
+		owner._get_role_attribute_description("gunner", "gunner_trait", gunner_next_level),
+		owner._get_role_attribute_description("mage", "mage_trait", mage_next_level),
+		owner._get_balanced_attribute_description(PLAYER_ATTRIBUTE_FLOW.COMMON_PROSPERITY_TRAIT_GAIN),
+		owner._is_attribute_evolved(swordsman_next_level),
+		owner._is_attribute_evolved(gunner_next_level),
+		owner._is_attribute_evolved(mage_next_level),
 		false,
 		owner._get_attribute_evolved_title_color()
 	)
@@ -39,17 +38,21 @@ static func get_small_boss_reward_options(owner) -> Array:
 
 
 static func apply_attribute_upgrade(owner, option_id: String) -> void:
-	var role_id: String = str(owner._get_active_role().get("id", ""))
 	match option_id:
-		"level_stat_vitality":
-			owner._increase_role_attribute_level(role_id, "vitality")
-		"level_stat_agility":
-			owner._increase_role_attribute_level(role_id, "agility")
+		"level_trait_swordsman":
+			owner._add_attribute_levels({"swordsman_trait": 1.0})
+		"level_trait_gunner":
+			owner._add_attribute_levels({"gunner_trait": 1.0})
+		"level_trait_mage":
+			owner._add_attribute_levels({"mage_trait": 1.0})
+		"level_trait_team":
+			owner._add_common_prosperity()
 		_:
 			return
 
 	owner._update_fire_timer()
 	owner.stats_changed.emit(owner.get_stat_summary())
+	owner.health_changed.emit(owner.current_health, owner.max_health)
 
 
 static func get_final_core_options() -> Array:

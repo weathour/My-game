@@ -3,6 +3,7 @@ extends Control
 const MAIN_MENU_SCENE_PATH := "res://scenes/main_menu.tscn"
 const SAVE_MANAGER := preload("res://scripts/save_manager.gd")
 const STORY_DATA := preload("res://scripts/story_data.gd")
+const SURVIVORS_THEME := preload("res://scripts/ui/theme/survivors_ui_theme.gd")
 
 var profile: Dictionary = {}
 
@@ -26,7 +27,7 @@ func _rebuild_ui() -> void:
 
 	var background := ColorRect.new()
 	background.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	background.color = Color(0.07, 0.09, 0.12, 1.0)
+	background.color = Color(0.05, 0.07, 0.12, 1.0)
 	add_child(background)
 
 	var root_margin := MarginContainer.new()
@@ -52,16 +53,19 @@ func _rebuild_ui() -> void:
 	var title := Label.new()
 	title.text = "主线准备"
 	title.add_theme_font_size_override("font_size", 32)
+	title.add_theme_color_override("font_color", SURVIVORS_THEME.COLOR_TEXT)
 	title_column.add_child(title)
 
 	var slot_label := Label.new()
 	slot_label.text = "存档 %d  |  Boss核心 %d" % [int(profile.get("slot_id", 1)), int(profile.get("boss_core_fragments", 0))]
 	slot_label.add_theme_font_size_override("font_size", 18)
+	slot_label.add_theme_color_override("font_color", SURVIVORS_THEME.COLOR_TEXT_MUTED)
 	title_column.add_child(slot_label)
 
 	var back_button := Button.new()
 	back_button.text = "返回主菜单"
 	back_button.custom_minimum_size = Vector2(160, 46)
+	SURVIVORS_THEME.apply_button_style(back_button)
 	back_button.pressed.connect(_on_back_pressed)
 	header.add_child(back_button)
 
@@ -78,12 +82,14 @@ func _rebuild_ui() -> void:
 	start_button.disabled = current_stage.is_empty()
 	start_button.custom_minimum_size = Vector2(260, 58)
 	start_button.add_theme_font_size_override("font_size", 24)
+	SURVIVORS_THEME.apply_button_style(start_button, "primary")
 	start_button.pressed.connect(_on_start_pressed)
 	root.add_child(start_button)
 
 func _build_roster_panel() -> Control:
 	var panel := PanelContainer.new()
-	panel.custom_minimum_size = Vector2(640, 0)
+	panel.custom_minimum_size = Vector2(600, 0)
+	panel.add_theme_stylebox_override("panel", SURVIVORS_THEME.panel_style(SURVIVORS_THEME.COLOR_BG, SURVIVORS_THEME.COLOR_BORDER, 1, 14))
 
 	var margin := MarginContainer.new()
 	margin.add_theme_constant_override("margin_left", 18)
@@ -115,6 +121,7 @@ func _build_roster_panel() -> Control:
 			continue
 		var locked_card := PanelContainer.new()
 		locked_card.custom_minimum_size = Vector2(0, 62)
+		locked_card.add_theme_stylebox_override("panel", SURVIVORS_THEME.card_style(false, false, true))
 		var locked_label := Label.new()
 		locked_label.text = "%s  |  预留锁定位" % str(role_payload.get("name", "未命名"))
 		locked_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
@@ -133,6 +140,7 @@ func _build_team_slot(slot_index: int, role_id: String, team_size: int) -> Contr
 
 	var panel := PanelContainer.new()
 	panel.custom_minimum_size = Vector2(0, 122)
+	panel.add_theme_stylebox_override("panel", SURVIVORS_THEME.card_style())
 
 	var margin := MarginContainer.new()
 	margin.add_theme_constant_override("margin_left", 14)
@@ -171,12 +179,14 @@ func _build_team_slot(slot_index: int, role_id: String, team_size: int) -> Contr
 	var up_button := Button.new()
 	up_button.text = "上移"
 	up_button.disabled = slot_index == 0
+	SURVIVORS_THEME.apply_button_style(up_button)
 	up_button.pressed.connect(_on_move_team_role.bind(slot_index, slot_index - 1))
 	order_row.add_child(up_button)
 
 	var down_button := Button.new()
 	down_button.text = "下移"
 	down_button.disabled = slot_index >= team_size - 1
+	SURVIVORS_THEME.apply_button_style(down_button)
 	down_button.pressed.connect(_on_move_team_role.bind(slot_index, slot_index + 1))
 	order_row.add_child(down_button)
 
@@ -187,6 +197,7 @@ func _build_team_slot(slot_index: int, role_id: String, team_size: int) -> Contr
 	var default_button := Button.new()
 	default_button.text = "装备默认"
 	default_button.disabled = role_style_id == "default"
+	SURVIVORS_THEME.apply_button_style(default_button)
 	default_button.pressed.connect(_on_equip_style.bind(role_id, "default"))
 	style_row.add_child(default_button)
 
@@ -199,6 +210,7 @@ func _build_team_slot(slot_index: int, role_id: String, team_size: int) -> Contr
 		unlock_button.text = "解锁%s" % str(unlock_style_payload.get("name", "风格"))
 		unlock_button.disabled = int(profile.get("boss_core_fragments", 0)) <= 0
 		unlock_button.pressed.connect(_on_unlock_style.bind(role_id, unlock_style_id))
+	SURVIVORS_THEME.apply_button_style(unlock_button, "primary")
 	style_row.add_child(unlock_button)
 
 	var unlock_desc := Label.new()
@@ -211,6 +223,7 @@ func _build_team_slot(slot_index: int, role_id: String, team_size: int) -> Contr
 func _build_stage_panel(stage_data: Dictionary) -> Control:
 	var panel := PanelContainer.new()
 	panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	panel.add_theme_stylebox_override("panel", SURVIVORS_THEME.panel_style(SURVIVORS_THEME.COLOR_BG, SURVIVORS_THEME.COLOR_BORDER, 1, 14))
 
 	var margin := MarginContainer.new()
 	margin.add_theme_constant_override("margin_left", 18)

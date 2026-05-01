@@ -57,6 +57,7 @@ static func get_boss_damage_energy(damage_amount: float) -> float:
 static func register_attack_result(owner, role_id: String, hit_count: int, killed: bool) -> void:
 	owner._trigger_relay_success(role_id, hit_count)
 	apply_entry_lifesteal(owner, role_id, hit_count, killed)
+	apply_theme_hit_returns(owner, role_id, hit_count, killed)
 	if hit_count > 0 and owner._get_card_level("battle_chain") > 0:
 		trigger_chain_reaction(owner, role_id)
 	if hit_count >= 2 and owner._get_card_level("battle_tide") > 0:
@@ -74,6 +75,28 @@ static func register_attack_result(owner, role_id: String, hit_count: int, kille
 			owner.frenzy_overkill_counter += 1
 			if owner.frenzy_overkill_counter >= 6:
 				owner.frenzy_overkill_counter = 0
+
+
+static func apply_theme_hit_returns(owner, role_id: String, hit_count: int, killed: bool) -> void:
+	if hit_count <= 0:
+		return
+	var capped_hits: int = min(hit_count, 6)
+	var blood_drink_level: int = max(0, int(owner._get_card_level("battle_blood_drink")))
+	if blood_drink_level > 0:
+		var heal_amount: float = owner._get_role_damage(role_id) * 0.018 * float(blood_drink_level) * float(capped_hits)
+		if killed:
+			heal_amount += 0.8 * float(blood_drink_level)
+		owner._heal(heal_amount)
+		if role_id == "gunner":
+			owner._add_energy(0.25 * float(blood_drink_level))
+
+	var finale_charge_level: int = max(0, int(owner._get_card_level("battle_finale_charge")))
+	if finale_charge_level > 0:
+		owner._add_energy(0.16 * float(finale_charge_level) * float(capped_hits))
+
+	var finale_unity_level: int = max(0, int(owner._get_card_level("battle_finale_unity")))
+	if finale_unity_level > 0 and killed:
+		owner._add_energy(0.65 * float(finale_unity_level))
 
 
 static func apply_entry_lifesteal(owner, role_id: String, hit_count: int, killed: bool) -> void:

@@ -35,7 +35,7 @@ static func physics_process(owner, delta: float) -> void:
 	owner._update_timers(delta)
 	owner._regenerate_energy(delta)
 	owner._apply_equipment_passives(delta)
-	apply_mage_surplus_passive_energy(owner, delta)
+	apply_attribute_passives(owner, delta)
 	owner._update_facing_direction()
 	owner._update_role_idle_visual(delta)
 	owner._update_player_health_bar(owner._get_active_role())
@@ -70,14 +70,19 @@ static func regenerate_energy(owner, delta: float) -> void:
 	owner._add_energy(owner.ENERGY_PASSIVE_REGEN * owner.energy_gain_multiplier * delta)
 
 
+static func apply_attribute_passives(owner, delta: float) -> void:
+	if delta <= 0.0:
+		return
+	var health_regen: float = owner._get_attribute_health_regen_per_second() if owner.has_method("_get_attribute_health_regen_per_second") else 0.0
+	if health_regen > 0.0:
+		owner._heal(health_regen * delta)
+	var mana_regen: float = owner._get_attribute_mana_regen_per_second() if owner.has_method("_get_attribute_mana_regen_per_second") else 0.0
+	if mana_regen > 0.0:
+		owner._add_active_role_mana(mana_regen * delta, true)
+
+
 static func apply_mage_surplus_passive_energy(owner, delta: float) -> void:
-	if delta <= 0.0 or str(owner._get_active_role().get("id", "")) != "mage":
-		return
-	var surplus_level: int = owner._get_role_attribute_level("mage", "agility")
-	var passive_energy: float = owner._get_mage_surplus_passive_energy_per_second(surplus_level)
-	if passive_energy <= 0.0:
-		return
-	owner._add_role_mana("mage", passive_energy * delta, true)
+	apply_attribute_passives(owner, delta)
 
 
 static func update_facing_direction(owner) -> void:
@@ -129,7 +134,10 @@ static func collect_nearby_gems(owner) -> void:
 	var attract_radius: float = max(owner.GEM_ATTRACT_RADIUS, owner.get_hurtbox_radius() * 3.6)
 	var attract_radius_squared: float = attract_radius * attract_radius
 	var absorb_radius_squared: float = owner.GEM_ABSORB_RADIUS * owner.GEM_ABSORB_RADIUS
-	var pickup_radius_squared: float = owner.pickup_radius * owner.pickup_radius
+	var effective_pickup_radius: float = owner.pickup_radius
+	if owner.has_method("_get_attribute_pickup_range_bonus"):
+		effective_pickup_radius += float(owner._get_attribute_pickup_range_bonus())
+	var pickup_radius_squared: float = effective_pickup_radius * effective_pickup_radius
 	for gem in owner.get_tree().get_nodes_in_group("exp_gems"):
 		if not is_instance_valid(gem):
 			continue
@@ -212,13 +220,14 @@ static func take_damage(owner, amount: float) -> void:
 		owner._spawn_combat_tag(owner.global_position + Vector2(0.0, -34.0), "\u95ea\u907f", Color(0.38, 1.0, 0.48, 1.0))
 		return
 
+	var attribute_dodge_chance: float = owner._get_attribute_dodge_chance() if owner.has_method("_get_attribute_dodge_chance") else 0.0
+	if attribute_dodge_chance > 0.0 and randf() < attribute_dodge_chance:
+		owner.hurt_cooldown_remaining = owner.hurt_cooldown * 0.55
+		owner._spawn_combat_tag(owner.global_position + Vector2(0.0, -34.0), "闪避", Color(0.38, 1.0, 0.48, 1.0))
+		return
+
 	var swordsman_counter_level := 0
 	if owner._get_active_role()["id"] == "swordsman":
-		var dodge_chance: float = owner._get_swordsman_dodge_chance(owner._get_role_attribute_level("swordsman", "agility"))
-		if dodge_chance > 0.0 and randf() < dodge_chance:
-			owner.hurt_cooldown_remaining = owner.hurt_cooldown * 0.55
-			owner._spawn_combat_tag(owner.global_position + Vector2(0.0, -34.0), "闪避", Color(0.38, 1.0, 0.48, 1.0))
-			return
 		swordsman_counter_level = int(owner._get_role_special_state("swordsman").get("counter_level", 0))
 		var nearby_enemy_count: int = owner._count_enemies_in_radius(owner.get_hurtbox_center(), 62.0)
 		if nearby_enemy_count > 0:
@@ -226,10 +235,13 @@ static func take_damage(owner, amount: float) -> void:
 		if swordsman_counter_level > 0:
 			amount *= max(0.76, 0.92 - swordsman_counter_level * 0.04)
 
-	owner.current_health = max(0.0, owner.current_health - amount * owner._get_effective_damage_taken_multiplier())
+	var adjusted_damage: float = amount * owner._get_effective_damage_taken_multiplier()
+	owner.current_health = max(0.0, owner.current_health - adjusted_damage)
 	owner.hurt_cooldown_remaining = owner.hurt_cooldown
 	owner.health_changed.emit(owner.current_health, owner.max_health)
 	owner._play_player_hurt_feedback()
+	if owner.current_health > 0.0 and owner.has_method("_trigger_theme_blood_reflux_counter"):
+		owner._trigger_theme_blood_reflux_counter(adjusted_damage)
 
 	if owner.current_health > 0.0 and owner._get_active_role()["id"] == "swordsman":
 		owner._trigger_swordsman_counter()

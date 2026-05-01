@@ -10,15 +10,10 @@ static func get_enemy_meta_float(enemy: Node, key: String) -> float:
 		return 0.0
 	return float(enemy.get_meta(key))
 
-static func apply_role_damage_lifesteal(owner, source_role_id: String, damage_amount: float) -> void:
-	if source_role_id != "swordsman":
-		return
-	var level: int = owner._get_role_attribute_level("swordsman", "agility")
-	if level <= 0 or damage_amount <= 0.0:
-		return
-	var heal_amount: float = min(damage_amount * owner._get_swordsman_bloodthirst_ratio(level), owner._get_swordsman_bloodthirst_heal_cap(level))
-	if heal_amount > 0.0:
-		owner._heal(heal_amount)
+static func apply_role_damage_lifesteal(_owner, _source_role_id: String, _damage_amount: float) -> void:
+	# Attribute training no longer grants swordsman lifesteal. Strength now provides
+	# max health, passive regeneration, and swordsman primary damage.
+	return
 
 static func get_gunner_distance_damage_multiplier(distance: float) -> float:
 	var safe_distance: float = max(0.0, distance)

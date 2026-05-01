@@ -51,6 +51,13 @@ if [[ -n "$GODOT_BIN" ]]; then
     echo "MAP_UI_SMOKE_FAILED"
     exit 1
   fi
+
+  echo "== Godot UI/build handoff smoke =="
+  "$GODOT_BIN" --headless --path . --script scripts/tests/ui_build_handoff_smoke.gd 2>&1 | tee /tmp/my-game-ui-build-handoff-smoke.log
+  if ! grep -q "UI_BUILD_HANDOFF_SMOKE_OK" /tmp/my-game-ui-build-handoff-smoke.log; then
+    echo "UI_BUILD_HANDOFF_SMOKE_FAILED"
+    exit 1
+  fi
 else
   echo "== Godot checks skipped: set GODOT_BIN or install godot =="
 fi

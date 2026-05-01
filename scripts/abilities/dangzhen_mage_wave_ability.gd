@@ -63,7 +63,8 @@ func get_cooldown_slot(owner = null) -> Dictionary:
 		"name": "\u8361\u9635",
 		"remaining": clamp(cooldown_remaining, 0.0, duration),
 		"duration": duration,
-		"color": Color(1.0, 0.54, 0.9, 1.0)
+		"color": Color(1.0, 0.54, 0.9, 1.0),
+		"description": "荡阵·术师：短暂蓄力后发射波浪；叠浪增加连续波次，回潮扩展为多方向。"
 	}
 
 func _spawn_wave_set(owner, origin: Vector2, base_direction: Vector2, damage_amount: float, role_id: String, huichao_level: int) -> void:

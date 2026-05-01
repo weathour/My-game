@@ -101,7 +101,8 @@ func get_cooldown_slot(owner = null) -> Dictionary:
 		"name": "\u65E0\u9650\u88C5\u586B",
 		"remaining": clamp(cooldown_remaining, 0.0, duration),
 		"duration": duration,
-		"color": Color(1.0, 0.56, 0.28, 1.0)
+		"color": Color(1.0, 0.56, 0.28, 1.0),
+		"description": "无限装填：枪手荡阵进化。短时间高速释放贯穿火力，冷却结束后可再次触发。"
 	}
 
 func get_save_data() -> Dictionary:

@@ -115,8 +115,6 @@ static func show_small_boss_reward(main: Node) -> void:
 		main.level_up_ui.show_small_boss_reward_menu("\u5c0f Boss \u5956\u52b1", options)
 	elif main.level_up_ui.has_method("show_menu"):
 		main.level_up_ui.show_menu("\u5c0f Boss \u5956\u52b1", options)
-		return
-		main.level_up_ui.show_menu("小 Boss 奖励", options)
 
 static func show_endless_boss_reward(main: Node) -> void:
 	if main.level_up_ui == null or not main.level_up_ui.has_method("show_menu"):

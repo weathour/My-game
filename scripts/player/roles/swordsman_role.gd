@@ -5,7 +5,7 @@ func perform_attack(owner) -> void:
 	var upgrade_data: Dictionary = owner.role_upgrade_levels[role_data["id"]]
 	var special_data: Dictionary = owner._get_role_special_state("swordsman")
 	var attack_direction: Vector2 = owner._get_attack_aim_direction(owner.facing_direction)
-	var heart_level: int = owner._get_role_attribute_level("swordsman", "vitality")
+	var heart_level: float = 0.0
 	var normal_attack_scale: float = owner._get_swordsman_normal_attack_scale(heart_level)
 	var normal_attack_width_scale: float = owner._get_swordsman_normal_attack_width_scale(heart_level)
 	var crescent_level: int = int(special_data.get("crescent_level", 0))

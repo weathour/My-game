@@ -9,7 +9,7 @@ func perform_attack(owner) -> void:
 	var echo_level: int = int(special_data.get("echo_level", 0))
 	var frost_level: int = int(special_data.get("frost_level", 0))
 	var gravity_level: int = int(special_data.get("gravity_level", 0))
-	var arcane_focus_level: int = owner._get_role_attribute_level("mage", "vitality")
+	var arcane_focus_level: float = 0.0
 	var overload_level: int = owner._get_card_level("battle_overload")
 	var bombard_center: Vector2 = owner._get_mage_mouse_bombard_center(float(role_data["range"]) + float(upgrade_data.get("range_bonus", 0.0)))
 	var target_enemy: Node2D = owner._get_enemy_near_position(bombard_center, 56.0 + float(upgrade_data.get("range_bonus", 0.0)) * 0.25)

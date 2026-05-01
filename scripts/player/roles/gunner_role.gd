@@ -11,7 +11,7 @@ func perform_attack(owner) -> void:
 	var scatter_level: int = int(special_data.get("scatter_level", 0))
 	var focus_level: int = int(special_data.get("focus_level", 0))
 	var lock_level: int = int(special_data.get("lock_level", 0))
-	var barrage_attribute_level: int = owner._get_role_attribute_level("gunner", "vitality")
+	var barrage_attribute_level: float = 0.0
 	var overload_level: int = owner._get_card_level("battle_overload")
 	var shot_direction: Vector2 = owner.facing_direction if owner.facing_direction.length_squared() > 0.001 else Vector2.RIGHT
 	var effective_range: float = (float(role_data["range"]) + float(upgrade_data.get("range_bonus", 0.0))) * owner._get_story_style_range_multiplier(role_data["id"])
@@ -89,7 +89,7 @@ func perform_attack(owner) -> void:
 
 	owner._spawn_attack_aftershock(owner.global_position + shot_direction * min(220.0 + focus_level * 20.0, effective_range), role_data["id"])
 
-func _spawn_barrage_shotgun(owner, shot_direction: Vector2, main_damage: float, bullet_color: Color, role_data: Dictionary, upgrade_data: Dictionary, focus_level: int, barrage_attribute_level: int) -> void:
+func _spawn_barrage_shotgun(owner, shot_direction: Vector2, main_damage: float, bullet_color: Color, role_data: Dictionary, upgrade_data: Dictionary, focus_level: int, barrage_attribute_level: float) -> void:
 	var wave_count: int = owner._get_gunner_barrage_shotgun_wave_count(barrage_attribute_level)
 	var pellet_count: int = owner._get_gunner_barrage_shotgun_pellet_count(barrage_attribute_level)
 	var base_arc := deg_to_rad(9.0)

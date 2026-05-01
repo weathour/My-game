@@ -5,7 +5,7 @@ static func apply_role_projectile_modifiers(owner, projectile: Node, role_id: St
 		return
 	if role_id != "gunner":
 		return
-	var barrage_level: int = owner._get_role_attribute_level("gunner", "vitality")
+	var barrage_level: float = 0.0
 	if barrage_level <= 0:
 		return
 	projectile.set("speed_multiplier", owner._get_gunner_barrage_speed_multiplier(barrage_level))

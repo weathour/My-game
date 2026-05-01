@@ -62,8 +62,7 @@ const SERVER_VERSION = "1.0.0"
 
 
 func _ready() -> void:
-	_tcp_server = TCPServer.new()
-	_register_tools()
+	_ensure_initialized()
 
 
 func _process(_delta: float) -> void:
@@ -113,12 +112,14 @@ func initialize(port: int, host: String, debug: bool) -> void:
 	_port = port
 	_host = host
 	_debug_mode = debug
+	_ensure_initialized()
 
 
 func start() -> bool:
 	if _running:
 		return true
 
+	_ensure_initialized()
 	var error = _tcp_server.listen(_port, _host)
 	if error != OK:
 		push_error("[MCP] Failed to start server on port %d: %s" % [_port, error_string(error)])
@@ -148,6 +149,13 @@ func stop() -> void:
 
 func is_running() -> bool:
 	return _running
+
+
+func _ensure_initialized() -> void:
+	if _tcp_server == null:
+		_tcp_server = TCPServer.new()
+	if _tool_definitions.is_empty():
+		_register_tools()
 
 
 func set_port(port: int) -> void:
@@ -428,10 +436,23 @@ func _handle_mcp_request(body: String) -> Dictionary:
 	var method = request.get("method", "")
 	var params = request.get("params", {})
 	var id = request.get("id")
+	var is_notification = not request.has("id")
 
 	print("[MCP] Method: %s, ID: %s" % [method, id])
 
 	request_received.emit(method, params)
+
+	# JSON-RPC notifications do not have an id and MUST NOT receive a
+	# JSON-RPC response. Streamable HTTP requires accepted notifications to
+	# return HTTP 202 with no response body; returning {"id": null, ...} causes
+	# strict clients such as Codex to close the transport during initialization.
+	if is_notification:
+		match method:
+			"initialized", "notifications/initialized", "ping":
+				return _create_accepted_response()
+			_:
+				print("[MCP] Accepted notification without response: %s" % method)
+				return _create_accepted_response()
 
 	var response: Dictionary
 
@@ -549,7 +570,7 @@ func _create_json_rpc_response(result, id) -> Dictionary:
 	return {
 		"jsonrpc": "2.0",
 		"result": result,
-		"id": id
+		"id": _normalize_json_rpc_id(id)
 	}
 
 
@@ -560,8 +581,18 @@ func _create_json_rpc_error(code: int, message: String, id) -> Dictionary:
 			"code": code,
 			"message": message
 		},
-		"id": id
+		"id": _normalize_json_rpc_id(id)
 	}
+
+
+func _normalize_json_rpc_id(id):
+	# Godot's JSON parser represents numeric JSON values as floats, so an
+	# incoming JSON-RPC id of 0 can be echoed as 0.0. Strict MCP clients reject
+	# that as an invalid JsonRpcMessage id. Preserve string/null ids and convert
+	# integral numeric ids back to integers before serializing the response.
+	if typeof(id) == TYPE_FLOAT and is_equal_approx(id, round(id)):
+		return int(id)
+	return id
 
 
 func _create_health_response() -> Dictionary:
@@ -583,23 +614,35 @@ func _create_tools_list_response() -> Dictionary:
 func _create_cors_response() -> Dictionary:
 	return {
 		"status": 204,
-		"cors": true
+		"cors": true,
+		"_no_body": true
+	}
+
+
+func _create_accepted_response() -> Dictionary:
+	return {
+		"status": 202,
+		"_no_body": true
 	}
 
 
 func _send_http_response(client: StreamPeerTCP, data: Dictionary) -> void:
 	# Sanitize data before JSON serialization
-	var sanitized = _sanitize_for_json(data)
-	var body = JSON.stringify(sanitized)
-	var body_bytes = body.to_utf8_buffer()
 	var status_code = data.get("status", 200)
+	var no_body = data.get("_no_body", false)
+	var body_bytes: PackedByteArray = PackedByteArray()
+	if not no_body:
+		var sanitized = _sanitize_for_json(data)
+		var body = JSON.stringify(sanitized)
+		body_bytes = body.to_utf8_buffer()
 	var status_text = "OK" if status_code == 200 else "Error"
 
-	var status_texts = {200: "OK", 204: "No Content", 404: "Not Found", 500: "Internal Server Error"}
+	var status_texts = {200: "OK", 202: "Accepted", 204: "No Content", 404: "Not Found", 500: "Internal Server Error"}
 	status_text = status_texts.get(status_code, "OK")
 
 	var headers = "HTTP/1.1 %d %s\r\n" % [status_code, status_text]
-	headers += "Content-Type: application/json; charset=utf-8\r\n"
+	if not no_body:
+		headers += "Content-Type: application/json; charset=utf-8\r\n"
 	headers += "Content-Length: %d\r\n" % body_bytes.size()
 	headers += "Access-Control-Allow-Origin: *\r\n"
 	headers += "Access-Control-Allow-Methods: GET, POST, OPTIONS\r\n"
@@ -611,7 +654,9 @@ func _send_http_response(client: StreamPeerTCP, data: Dictionary) -> void:
 	# Send headers and body
 	var header_bytes = headers.to_utf8_buffer()
 	var err1 = client.put_data(header_bytes)
-	var err2 = client.put_data(body_bytes)
+	var err2 = OK
+	if body_bytes.size() > 0:
+		err2 = client.put_data(body_bytes)
 
 	print("[MCP] Response sent: status=%d, size=%d bytes, errors=(h:%s, b:%s)" % [status_code, body_bytes.size(), err1, err2])
 

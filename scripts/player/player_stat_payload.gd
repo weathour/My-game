@@ -1,6 +1,8 @@
 extends RefCounted
 
 const PLAYER_ROLE_PRESENTER := preload("res://scripts/player/player_role_presenter.gd")
+const PLAYER_SWITCH_FLOW := preload("res://scripts/player/player_switch_flow.gd")
+const PLAYER_ULTIMATE_FLOW := preload("res://scripts/player/player_ultimate_flow.gd")
 
 static func build_from_player(owner) -> Dictionary:
 	var role_data: Dictionary = owner._get_active_role()
@@ -30,7 +32,8 @@ static func build_from_player(owner) -> Dictionary:
 		"max_mana": owner.max_mana,
 		"ultimate_energy_cost": owner._get_ultimate_energy_cost(),
 		"ultimate_ready": owner._can_use_ultimate(),
-		"pickup_radius": owner.pickup_radius,
+		"ultimate_display": PLAYER_ULTIMATE_FLOW.get_ultimate_display(owner, role_id),
+		"pickup_radius": owner.pickup_radius + (float(owner._get_attribute_pickup_range_bonus()) if owner.has_method("_get_attribute_pickup_range_bonus") else 0.0),
 		"role_name": role_data["name"],
 		"role_id": role_id,
 		"body_slot_label": owner._get_upgrade_slot_label("body"),
@@ -40,7 +43,7 @@ static func build_from_player(owner) -> Dictionary:
 		"active_role_index": owner.active_role_index,
 		"auto_attack_enabled": owner.auto_attack_enabled,
 		"switch_cooldown": max(0.0, owner.switch_cooldown_remaining),
-		"switch_cooldown_base": max(2.5, (7.0 - owner.role_switch_cooldown_bonus) * owner._get_equipment_cooldown_multiplier()),
+		"switch_cooldown_base": PLAYER_SWITCH_FLOW.get_switch_cooldown_duration(owner),
 		"energy_gain_multiplier": owner.energy_gain_multiplier,
 		"background_interval_multiplier": owner.background_interval_multiplier,
 		"ultimate_cost_multiplier": owner.ultimate_cost_multiplier,
@@ -48,9 +51,10 @@ static func build_from_player(owner) -> Dictionary:
 		"body_build_level": int(owner.build_slot_levels.get("body", 0)),
 		"combat_build_level": int(owner.build_slot_levels.get("combat", 0)),
 		"skill_build_level": int(owner.build_slot_levels.get("skill", 0)),
-		"attribute_vitality_level": owner._get_role_attribute_level(role_id, "vitality"),
-		"attribute_agility_level": owner._get_role_attribute_level(role_id, "agility"),
-		"attribute_power_level": int(owner.attribute_training_levels.get("power", 0)),
+		"attribute_swordsman_trait_level": owner._get_attribute_level("swordsman_trait") if owner.has_method("_get_attribute_level") else 0.0,
+		"attribute_gunner_trait_level": owner._get_attribute_level("gunner_trait") if owner.has_method("_get_attribute_level") else 0.0,
+		"attribute_mage_trait_level": owner._get_attribute_level("mage_trait") if owner.has_method("_get_attribute_level") else 0.0,
+
 		"slot_resonance_summary": PLAYER_ROLE_PRESENTER.get_slot_resonance_summary(slot_resonance_labels, slot_resonance_tiers),
 		"role_detail_summary": PLAYER_ROLE_PRESENTER.get_role_detail_summary(role_id, role_special_data),
 		"role_route_summary": PLAYER_ROLE_PRESENTER.get_role_route_summary(role_id, role_special_data),
@@ -76,6 +80,7 @@ static func build_stat_summary(context: Dictionary) -> Dictionary:
 		"max_mana": context.get("max_mana", 0.0),
 		"ultimate_energy_cost": context.get("ultimate_energy_cost", 0.0),
 		"ultimate_ready": context.get("ultimate_ready", false),
+		"ultimate_display": context.get("ultimate_display", {}),
 		"pickup_radius": context.get("pickup_radius", 0.0),
 		"role_name": context.get("role_name", ""),
 		"role_id": context.get("role_id", ""),
@@ -94,9 +99,10 @@ static func build_stat_summary(context: Dictionary) -> Dictionary:
 		"body_build_level": context.get("body_build_level", 0),
 		"combat_build_level": context.get("combat_build_level", 0),
 		"skill_build_level": context.get("skill_build_level", 0),
-		"attribute_vitality_level": context.get("attribute_vitality_level", 0),
-		"attribute_agility_level": context.get("attribute_agility_level", 0),
-		"attribute_power_level": context.get("attribute_power_level", 0),
+		"attribute_swordsman_trait_level": context.get("attribute_swordsman_trait_level", 0.0),
+		"attribute_gunner_trait_level": context.get("attribute_gunner_trait_level", 0.0),
+		"attribute_mage_trait_level": context.get("attribute_mage_trait_level", 0.0),
+
 		"slot_resonance_summary": context.get("slot_resonance_summary", ""),
 		"role_detail_summary": context.get("role_detail_summary", ""),
 		"role_route_summary": context.get("role_route_summary", ""),

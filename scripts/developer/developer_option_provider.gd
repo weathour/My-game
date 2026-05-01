@@ -7,10 +7,14 @@ const ENEMY_ARCHETYPE_DATABASE := preload("res://scripts/enemy/enemy_archetype_d
 static func get_boss_options() -> Array:
 	return ENEMY_ARCHETYPE_DATABASE.get_boss_options()
 
-static func get_dangzhen_build_options(card_levels: Dictionary) -> Array:
+static func get_dangzhen_build_options(card_levels: Dictionary, active_role_id: String = "") -> Array:
 	var options: Array = []
-	for card_id in BUILD_SYSTEM.DANGZHEN_CORE_IDS:
-		var config := BUILD_DATABASE.get_core_card(card_id)
+	var card_ids: Array = []
+	card_ids.append_array(BUILD_SYSTEM.DANGZHEN_CORE_IDS)
+	for theme_id in BUILD_DATABASE.get_branch_theme_ids():
+		card_ids.append_array(BUILD_DATABASE.get_theme_card_ids(str(theme_id)))
+	for card_id in card_ids:
+		var config := BUILD_DATABASE.get_role_card_config(card_id, active_role_id) if active_role_id != "" else BUILD_DATABASE.get_core_card(card_id)
 		options.append(_make_card_option(
 			card_id,
 			str(config.get("title", card_id)),

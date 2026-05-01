@@ -3,11 +3,12 @@ extends Control
 const GAME_SCENE_PATH := "res://scenes/main.tscn"
 const SAVE_SELECT_SCENE_PATH := "res://scenes/save_select.tscn"
 const ENDLESS_SAVE_SELECT_SCENE_PATH := "res://scenes/endless_save_select.tscn"
-const BACKGROUND_TEXTURE := preload("res://assets/demo.jpg")
+const BACKGROUND_TEXTURE := preload("res://assets/demo2.png")
 const SAVE_MANAGER := preload("res://scripts/save_manager.gd")
 const STORY_DATA := preload("res://scripts/story_data.gd")
 const DEVELOPER_MODE := preload("res://scripts/developer_mode.gd")
 const MAIN_MENU_SETTINGS_PANEL := preload("res://scripts/ui/main_menu/main_menu_settings_panel.gd")
+const SURVIVORS_THEME := preload("res://scripts/ui/theme/survivors_ui_theme.gd")
 
 const TEXT_CONTINUE := "\u7ee7\u7eed\u6e38\u620f"
 const TEXT_STORY := "\u4e3b\u7ebf\u6a21\u5f0f"
@@ -20,7 +21,7 @@ const TEXT_QUIT := "\u9000\u51fa"
 
 var background: TextureRect
 var continue_button: Button
-var settings_panel: CenterContainer
+var settings_panel: Control
 
 func _ready() -> void:
 	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
@@ -33,20 +34,21 @@ func _ready() -> void:
 	background.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(background)
 
-	var button_margin := MarginContainer.new()
+	var button_margin := PanelContainer.new()
 	button_margin.anchor_left = 0.0
 	button_margin.anchor_top = 1.0
 	button_margin.anchor_right = 0.0
 	button_margin.anchor_bottom = 1.0
 	button_margin.offset_left = 24.0
-	button_margin.offset_top = -376.0
-	button_margin.offset_right = 264.0
+	button_margin.offset_top = -430.0
+	button_margin.offset_right = 316.0
 	button_margin.offset_bottom = -24.0
+	button_margin.add_theme_stylebox_override("panel", SURVIVORS_THEME.panel_style(SURVIVORS_THEME.COLOR_BG, SURVIVORS_THEME.COLOR_BORDER_GOLD, 2, 14, 14.0))
 	add_child(button_margin)
 
 	var button_column := VBoxContainer.new()
 	button_column.alignment = BoxContainer.ALIGNMENT_END
-	button_column.add_theme_constant_override("separation", 12)
+	button_column.add_theme_constant_override("separation", 10)
 	button_margin.add_child(button_column)
 
 	continue_button = _make_main_button(TEXT_CONTINUE)
@@ -81,6 +83,7 @@ func _ready() -> void:
 	button_column.add_child(quit_button)
 
 	settings_panel = MAIN_MENU_SETTINGS_PANEL.new()
+	settings_panel.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	add_child(settings_panel)
 	_fit_to_viewport()
 	_apply_saved_music_volume()
@@ -97,8 +100,9 @@ func _unhandled_input(event: InputEvent) -> void:
 func _make_main_button(text_value: String) -> Button:
 	var button := Button.new()
 	button.text = text_value
-	button.custom_minimum_size = Vector2(220, 56)
-	button.add_theme_font_size_override("font_size", 24)
+	button.custom_minimum_size = Vector2(240, 52)
+	button.add_theme_font_size_override("font_size", 22)
+	SURVIVORS_THEME.apply_button_style(button)
 	return button
 
 func _fit_to_viewport() -> void:

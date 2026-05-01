@@ -76,7 +76,8 @@ func get_cooldown_slot(owner = null) -> Dictionary:
 		"name": "\u6CE2\u6D9B\u6D8C\u52A8",
 		"remaining": clamp(cooldown_remaining, 0.0, duration),
 		"duration": duration,
-		"color": Color(0.62, 0.84, 1.0, 1.0)
+		"color": Color(0.62, 0.84, 1.0, 1.0),
+		"description": "波涛涌动：术师荡阵进化。向多方向释放冲击波组，覆盖大范围敌人。"
 	}
 
 func _fire_direction_group(owner, origin: Vector2, damage_amount: float, directions: Array) -> void:

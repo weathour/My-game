@@ -33,6 +33,9 @@ static func is_last_stand_active(owner) -> bool:
 
 static func get_effective_damage_taken_multiplier(owner) -> float:
 	var multiplier: float = owner.damage_taken_multiplier
+	var blood_shield_level: int = max(0, int(owner._get_card_level("battle_blood_shield")))
+	if blood_shield_level > 0:
+		multiplier *= max(0.78, 1.0 - 0.035 * float(blood_shield_level))
 	if is_last_stand_active(owner):
 		multiplier *= 0.82
 	multiplier *= owner._get_equipment_low_health_damage_taken_multiplier()

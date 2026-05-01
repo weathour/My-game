@@ -5,6 +5,7 @@ const DEVELOPER_PANEL := preload("res://scripts/developer/developer_panel.gd")
 const COMBAT_SKILL_BAR := preload("res://scripts/ui/hud/combat_skill_bar.gd")
 const GAME_SETTINGS := preload("res://scripts/game_settings.gd")
 const PERFORMANCE_MONITOR := preload("res://scripts/game/performance_monitor.gd")
+const SURVIVORS_THEME := preload("res://scripts/ui/theme/survivors_ui_theme.gd")
 
 signal developer_level_up_requested
 signal developer_boss_spawn_requested(archetype_id: String)
@@ -117,16 +118,7 @@ func _build_team_panel(root: Control) -> void:
 	team_panel.offset_right = -18.0
 	team_panel.offset_bottom = 210.0
 
-	var style := StyleBoxFlat.new()
-	style.bg_color = Color(0.08, 0.1, 0.14, 0.82)
-	style.border_color = Color(1.0, 0.88, 0.45, 0.9)
-	style.set_border_width_all(2)
-	style.set_corner_radius_all(10)
-	style.content_margin_left = 14
-	style.content_margin_right = 14
-	style.content_margin_top = 12
-	style.content_margin_bottom = 12
-	team_panel.add_theme_stylebox_override("panel", style)
+	team_panel.add_theme_stylebox_override("panel", SURVIVORS_THEME.panel_style(Color(0.08, 0.1, 0.14, 0.82), SURVIVORS_THEME.COLOR_BORDER_GOLD, 2, 10, 12.0))
 	root.add_child(team_panel)
 
 	var content := VBoxContainer.new()
@@ -182,16 +174,7 @@ func _build_attack_mode_hint(root: Control) -> void:
 	attack_mode_hint_panel.offset_right = -16.0
 	attack_mode_hint_panel.offset_bottom = 36.0
 
-	var style := StyleBoxFlat.new()
-	style.bg_color = Color(0.03, 0.05, 0.07, 0.72)
-	style.border_color = Color(0.75, 0.88, 1.0, 0.58)
-	style.set_border_width_all(1)
-	style.set_corner_radius_all(10)
-	style.content_margin_left = 12
-	style.content_margin_right = 12
-	style.content_margin_top = 8
-	style.content_margin_bottom = 8
-	attack_mode_hint_panel.add_theme_stylebox_override("panel", style)
+	attack_mode_hint_panel.add_theme_stylebox_override("panel", SURVIVORS_THEME.panel_style(Color(0.03, 0.05, 0.07, 0.72), Color(0.75, 0.88, 1.0, 0.58), 1, 10, 8.0))
 	root.add_child(attack_mode_hint_panel)
 
 	attack_mode_hint_label = Label.new()
@@ -214,16 +197,7 @@ func _build_minimap(root: Control) -> void:
 	minimap_panel.offset_right = -18.0
 	minimap_panel.offset_bottom = -18.0
 
-	var style := StyleBoxFlat.new()
-	style.bg_color = Color(0.02, 0.04, 0.07, 0.72)
-	style.border_color = Color(0.42, 0.78, 1.0, 0.76)
-	style.set_border_width_all(1)
-	style.set_corner_radius_all(10)
-	style.content_margin_left = 8
-	style.content_margin_right = 8
-	style.content_margin_top = 8
-	style.content_margin_bottom = 8
-	minimap_panel.add_theme_stylebox_override("panel", style)
+	minimap_panel.add_theme_stylebox_override("panel", SURVIVORS_THEME.panel_style(Color(0.02, 0.04, 0.07, 0.72), Color(0.42, 0.78, 1.0, 0.76), 1, 10, 8.0))
 	root.add_child(minimap_panel)
 
 	minimap_view = Control.new()
@@ -354,16 +328,7 @@ func _ensure_performance_overlay() -> void:
 	performance_overlay_panel.offset_right = -16.0
 	performance_overlay_panel.offset_bottom = 158.0
 
-	var style := StyleBoxFlat.new()
-	style.bg_color = Color(0.02, 0.04, 0.06, 0.68)
-	style.border_color = Color(0.45, 0.78, 1.0, 0.72)
-	style.set_border_width_all(1)
-	style.set_corner_radius_all(8)
-	style.content_margin_left = 10
-	style.content_margin_right = 10
-	style.content_margin_top = 8
-	style.content_margin_bottom = 8
-	performance_overlay_panel.add_theme_stylebox_override("panel", style)
+	performance_overlay_panel.add_theme_stylebox_override("panel", SURVIVORS_THEME.panel_style(Color(0.02, 0.04, 0.06, 0.68), Color(0.45, 0.78, 1.0, 0.72), 1, 8, 8.0))
 
 	performance_overlay_label = Label.new()
 	performance_overlay_label.text = "Performance: collecting..."
@@ -467,7 +432,7 @@ func update_stats(summary: Dictionary) -> void:
 	if mana_bar != null and mana_bar.value != current_energy:
 		mana_bar.value = current_energy
 	if combat_skill_bar != null and combat_skill_bar.has_method("update_ultimate_energy"):
-		combat_skill_bar.update_ultimate_energy(current_energy, required_energy)
+		combat_skill_bar.update_ultimate_energy(current_energy, required_energy, summary.get("ultimate_display", {}))
 	var cooldown_slots: Array = summary.get("skill_cooldown_slots", [])
 	if combat_skill_bar != null and combat_skill_bar.has_method("update_skill_cooldown_slots"):
 		combat_skill_bar.update_skill_cooldown_slots(cooldown_slots)

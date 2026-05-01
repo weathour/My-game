@@ -9,14 +9,15 @@ This roadmap tracks project direction, not a promise of release dates.
 - Keep the local achievement system independent from Steam APIs.
 - Maintain display settings: window/fullscreen and 16:9 window sizing.
 - Keep docs synchronized with implemented systems.
+- Protect the current UI modal/card/hover components with smoke tests.
 
 ## Next: content and systems depth
 
 - Rebuild elite reward identity.
-- Deepen build/card choices so roles feel less interchangeable.
+- Deepen build/card choices beyond the current 三相荡阵 / 万向锋路 / 血盾回路 / 三相终式 set so roles feel less interchangeable.
 - Improve Boss pressure, readability, and phase identity.
 - Add clearer achievement categories once progression goals settle.
-- Add basic automated checks for settings, achievements, and save serialization.
+- Add more automated checks for settings, achievements, save serialization, hero-trait persistence, and theme unlock persistence.
 
 ## Later: release preparation
 
