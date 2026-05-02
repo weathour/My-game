@@ -52,3 +52,4 @@ static func reset(enemy, randomize_timers: bool) -> void:
 	enemy.boss_orbit_bomb_shot_timer = 0.0
 	enemy.boss_peacock_charge_remaining = 0.0
 	enemy.rebirth_timer = 0.0
+	enemy.glutton_absorb_elapsed = 0.0

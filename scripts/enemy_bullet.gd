@@ -1,6 +1,8 @@
 extends Node2D
 
 const ENEMY_BULLET_SCENE_PATH := "res://scenes/enemy_bullet.tscn"
+const ENEMY_BULLET_SCENE := preload("res://scenes/enemy_bullet.tscn")
+const PERFORMANCE_GUARD := preload("res://scripts/game/performance_guard.gd")
 const MAX_TURN_CATCH_UP_TICKS := 8
 
 @export var speed: float = 260.0
@@ -167,11 +169,14 @@ func _spawn_split_bullets() -> void:
 	var current_scene := get_tree().current_scene
 	if current_scene == null:
 		return
-	var bullet_scene := load(ENEMY_BULLET_SCENE_PATH) as PackedScene
+	var bullet_scene := ENEMY_BULLET_SCENE
 	if bullet_scene == null:
 		return
 
 	var count: int = max(1, split_count)
+	count = PERFORMANCE_GUARD.trim_requested_count(current_scene, "enemy_projectiles", count, _get_enemy_projectile_limit(current_scene))
+	if count <= 0:
+		return
 	for index in range(count):
 		var bullet = bullet_scene.instantiate()
 		if bullet == null:
@@ -393,3 +398,8 @@ func apply_save_data(data: Dictionary, target_node: Node2D) -> void:
 	target = target_node
 	add_to_group("enemy_projectiles")
 	_apply_visuals()
+
+func _get_enemy_projectile_limit(current_scene: Node) -> int:
+	if current_scene != null and current_scene.has_method("_get_difficulty_limit"):
+		return int(current_scene._get_difficulty_limit("enemy_projectile_limit", PERFORMANCE_GUARD.DEFAULT_ENEMY_PROJECTILE_LIMIT))
+	return PERFORMANCE_GUARD.DEFAULT_ENEMY_PROJECTILE_LIMIT

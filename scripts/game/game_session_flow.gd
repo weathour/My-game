@@ -10,6 +10,8 @@ static func handle_escape_toggle(main: Node) -> void:
 		return
 	if main.level_up_ui != null and main.level_up_ui.visible:
 		return
+	if main.hud != null and main.hud.has_method("hide_build_graph"):
+		main.hud.hide_build_graph()
 	if main.game_over_ui != null and main.game_over_ui.visible:
 		return
 

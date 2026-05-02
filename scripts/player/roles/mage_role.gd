@@ -99,10 +99,12 @@ func perform_background(owner) -> void:
 
 func perform_enter(owner, role_id: String, assault_level: int, _assault_multiplier: float) -> int:
 	owner._show_switch_banner("\u8FDB\u573A", "\u971C\u73AF\u548F\u5531", Color(0.54, 0.9, 1.0, 1.0))
-	var bombard_centers: Array = owner._get_random_enemy_cluster_centers(2)
+	var bombard_count := int(owner._get_mage_entry_bombard_count())
+	var radius_multiplier := float(owner._get_mage_entry_radius_multiplier())
+	var bombard_centers: Array = owner._get_random_enemy_cluster_centers(bombard_count)
 	var total_hits: int = 0
 	for bombard_center in bombard_centers:
-		total_hits += owner._count_enemies_in_radius(bombard_center, owner.MAGE_ENTRY_HIT_RADIUS)
+		total_hits += owner._count_enemies_in_radius(bombard_center, owner.MAGE_ENTRY_HIT_RADIUS * radius_multiplier)
 	owner._start_mage_entry_bombardment(role_id, bombard_centers)
 	owner._activate_switch_power(role_id, "\u5171\u9E23\u8FC7\u8F7D", 2.4, 1.18, 0.07)
 	owner._apply_switch_payoff(total_hits, 7.0 + assault_level, 1.2 + assault_level * 0.18)
@@ -111,8 +113,12 @@ func perform_enter(owner, role_id: String, assault_level: int, _assault_multipli
 func perform_exit(owner, role_id: String, rearguard_level: int) -> int:
 	owner._queue_next_entry_blessing(role_id)
 	owner._show_switch_banner("\u9000\u573A", "\u7B26\u5370\u4F20\u5BFC", Color(0.56, 0.92, 1.0, 0.96))
-	owner._spawn_ring_effect(owner.global_position, 96.0, Color(0.52, 0.88, 1.0, 0.58), 6.0, 0.18)
-	owner._spawn_frost_sigils_effect(owner.global_position, 58.0, Color(0.82, 0.98, 1.0, 0.72), 0.2)
+	var field_radius: float = 58.0 + float(owner._get_mage_exit_slow_field_radius_bonus())
+	var damage_ratio: float = float(owner._get_mage_exit_slow_field_damage_ratio())
+	owner._spawn_ring_effect(owner.global_position, max(96.0, field_radius + 38.0), Color(0.52, 0.88, 1.0, 0.58), 6.0, 0.18)
+	owner._spawn_frost_sigils_effect(owner.global_position, field_radius, Color(0.82, 0.98, 1.0, 0.72), 0.2)
+	if damage_ratio > 0.0:
+		owner._damage_enemies_in_radius(owner.global_position, field_radius, owner._get_role_damage(role_id) * damage_ratio, 0.02, 0.72, 1.4, role_id)
 	if rearguard_level >= 3:
 		owner._activate_guard_cover()
 	return owner._trigger_rearguard_attack(role_id, owner.global_position, rearguard_level)

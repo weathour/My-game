@@ -2,6 +2,8 @@ extends RefCounted
 
 const DEVELOPER_MODE := preload("res://scripts/developer_mode.gd")
 const GAME_SETTINGS := preload("res://scripts/game_settings.gd")
+const PLAYER_LEVEL_CURVE := preload("res://scripts/player/player_level_curve.gd")
+const PLAYER_FIRST_BATCH_MILESTONE_FLOW := preload("res://scripts/player/player_first_batch_milestone_flow.gd")
 
 
 static func unhandled_input(owner, event: InputEvent) -> void:
@@ -185,14 +187,15 @@ static func gain_experience(owner, amount: int) -> void:
 	owner.experience += amount
 
 	if owner.experience_to_next_level <= 0:
-		owner.experience_to_next_level = 30
+		owner.experience_to_next_level = PLAYER_LEVEL_CURVE.get_required_experience_for_level(owner.level)
 
 	var level_up_guard := 0
 	while owner.experience >= owner.experience_to_next_level and level_up_guard < 100:
 		owner.experience -= owner.experience_to_next_level
 		owner.level += 1
-		owner.experience_to_next_level = int(round(owner.experience_to_next_level * 1.42)) + 10
+		owner.experience_to_next_level = PLAYER_LEVEL_CURVE.get_next_required_experience_after_level_up(owner.level)
 		owner.pending_level_ups += 1
+		PLAYER_FIRST_BATCH_MILESTONE_FLOW.check_level_milestones(owner)
 		level_up_guard += 1
 	if level_up_guard >= 100:
 		owner.experience = min(owner.experience, max(0, owner.experience_to_next_level - 1))
@@ -203,8 +206,9 @@ static func gain_experience(owner, amount: int) -> void:
 
 static func grant_developer_level_up(owner) -> void:
 	owner.level += 1
-	owner.experience_to_next_level = int(round(owner.experience_to_next_level * 1.42)) + 10
+	owner.experience_to_next_level = PLAYER_LEVEL_CURVE.get_next_required_experience_after_level_up(owner.level)
 	owner.pending_level_ups += 1
+	PLAYER_FIRST_BATCH_MILESTONE_FLOW.check_level_milestones(owner)
 	owner.experience_changed.emit(owner.experience, owner.experience_to_next_level, owner.level)
 	owner._try_request_level_up()
 

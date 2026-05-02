@@ -1,6 +1,7 @@
 extends CanvasLayer
 
 signal upgrade_selected(option_id: String, attribute_option_id: String)
+signal upgrade_refresh_requested
 
 const SURVIVORS_MODAL := preload("res://scripts/ui/core/survivors_modal.gd")
 const SURVIVORS_CARD_LIST := preload("res://scripts/ui/components/survivors_card_list.gd")
@@ -9,6 +10,7 @@ const SURVIVORS_HOVER_DETAIL := preload("res://scripts/ui/components/survivors_h
 
 const BUILD_SLOT_ORDER := ["body", "combat", "skill"]
 const SMALL_BOSS_SLOT_ORDER := ["equipment", "card"]
+const BUILD_UNIFIED_SECTION_TITLE := "Build 技能三选一"
 const DEFAULT_SLOT_LABELS := {
 	"body": "战斗",
 	"combat": "连携",
@@ -25,6 +27,7 @@ var hover_detail: Control
 var current_mode: String = "direct"
 var current_options: Array = []
 var current_attribute_options: Array = []
+var current_offer_context: Dictionary = {}
 var build_groups: Dictionary = {}
 var pending_build_option_id: String = ""
 var pending_build_title: String = ""
@@ -70,10 +73,11 @@ func _on_viewport_size_changed() -> void:
 	if visible:
 		_apply_responsive_state()
 
-func show_options(options: Array, attribute_options: Array = []) -> void:
+func show_options(options: Array, attribute_options: Array = [], offer_context: Dictionary = {}) -> void:
 	current_mode = "build"
 	current_options = options
 	current_attribute_options = attribute_options
+	current_offer_context = offer_context.duplicate(true)
 	build_groups = _group_options(options, BUILD_SLOT_ORDER)
 	_reset_pending_selection()
 	visible = true
@@ -82,6 +86,7 @@ func show_options(options: Array, attribute_options: Array = []) -> void:
 	modal.set_hint("卡面显示简短摘要；鼠标移到卡片上查看完整说明。右侧滚动条始终可拖动。")
 	selection_label.visible = true
 	_prepare_modal_layout()
+	_configure_level_up_footer()
 	_rebuild_level_up_list()
 	_update_selection_hint()
 
@@ -89,6 +94,7 @@ func show_menu(title: String, options: Array) -> void:
 	current_mode = "direct"
 	current_options = options
 	current_attribute_options = []
+	current_offer_context = {}
 	build_groups = {}
 	_reset_pending_selection()
 	visible = true
@@ -97,20 +103,23 @@ func show_menu(title: String, options: Array) -> void:
 	modal.set_hint("卡面显示简短摘要；鼠标移到卡片上查看完整说明。")
 	selection_label.visible = false
 	_prepare_modal_layout()
+	_clear_modal_footer()
 	_rebuild_direct_list()
 
 func show_small_boss_reward_menu(title: String, options: Array) -> void:
 	current_mode = "small_boss_pair"
 	current_options = options
 	current_attribute_options = []
+	current_offer_context = {}
 	build_groups = _group_small_boss_reward_options(options)
 	_reset_pending_selection()
 	visible = true
 	modal.configure(Vector2(660.0, 420.0), 0.52, 0.58, Vector2(320.0, 230.0))
 	modal.set_title(title)
-	modal.set_hint("道具和卡牌各选 1 个；鼠标移到卡片上查看完整说明。")
+	modal.set_hint("道具选 1 个，Boss Build 从三名英雄定向增强中选 1 个；鼠标移到卡片上查看完整说明。")
 	selection_label.visible = true
 	_prepare_modal_layout()
+	_clear_modal_footer()
 	_rebuild_small_boss_list()
 	_update_small_boss_reward_hint()
 
@@ -121,6 +130,7 @@ func hide_ui() -> void:
 		hover_detail.hide_detail()
 	if card_list != null and card_list.has_method("clear"):
 		card_list.clear()
+	_clear_modal_footer()
 
 func _apply_responsive_state() -> void:
 	_prepare_modal_layout()
@@ -137,14 +147,41 @@ func _prepare_modal_layout() -> void:
 	if card_list != null and card_list.has_method("set_compact"):
 		card_list.set_compact(compact)
 
+func _configure_level_up_footer() -> void:
+	_clear_modal_footer()
+	if modal == null or not modal.has_method("add_footer_button"):
+		return
+	var refresh_limit := int(current_offer_context.get("refresh_limit", 0))
+	if refresh_limit <= 0:
+		return
+	var refresh_remaining := int(current_offer_context.get("refresh_remaining", 0))
+	var label := str(current_offer_context.get("refresh_button_label", ""))
+	if label == "":
+		label = "刷新发牌 %d/%d" % [refresh_remaining, refresh_limit] if refresh_remaining > 0 else "刷新已用完"
+	var button: Button = modal.add_footer_button(label, Callable(self, "_on_refresh_pressed"), "normal")
+	button.disabled = refresh_remaining <= 0
+
+func _clear_modal_footer() -> void:
+	if modal != null and modal.has_method("clear_footer"):
+		modal.clear_footer()
+
+func _on_refresh_pressed() -> void:
+	if current_mode != "build":
+		return
+	if int(current_offer_context.get("refresh_remaining", 0)) <= 0:
+		return
+	upgrade_refresh_requested.emit()
+
 func _rebuild_level_up_list() -> void:
 	card_list.clear()
+	_add_unified_build_options()
 	if not current_attribute_options.is_empty():
 		card_list.add_section("英雄特性训练")
 		card_list.columns = 2
 		card_list.add_card_grid(current_attribute_options, 2)
-	_add_build_sections(BUILD_SLOT_ORDER)
 	_refresh_selected_cards()
+	if card_list.has_method("reset_scroll_to_top"):
+		card_list.reset_scroll_to_top()
 
 func _rebuild_small_boss_list() -> void:
 	card_list.clear()
@@ -172,6 +209,16 @@ func _add_build_sections(slot_order: Array) -> void:
 				continue
 			var option: Dictionary = raw_option
 			card_list.add_card(option, false, bool(option.get("evolved", false)))
+
+func _add_unified_build_options() -> void:
+	if current_options.is_empty():
+		return
+	card_list.add_section(BUILD_UNIFIED_SECTION_TITLE)
+	for raw_option in current_options:
+		if raw_option is not Dictionary:
+			continue
+		var option: Dictionary = raw_option
+		card_list.add_card(option, false, bool(option.get("evolved", false)))
 
 func _on_card_item_hovered(item: Dictionary, anchor_rect: Rect2) -> void:
 	if hover_detail != null and hover_detail.has_method("show_item"):
@@ -248,7 +295,7 @@ func _update_small_boss_reward_hint() -> void:
 	if current_mode != "small_boss_pair":
 		return
 	var equipment_text := pending_equipment_title if pending_equipment_title != "" else "未选道具"
-	var card_text := pending_card_title if pending_card_title != "" else "未选卡牌"
+	var card_text := pending_card_title if pending_card_title != "" else "未选 Boss Build"
 	selection_label.text = "当前：%s | %s" % [equipment_text, card_text]
 
 func _refresh_selected_cards() -> void:
@@ -294,7 +341,7 @@ func _group_small_boss_reward_options(options: Array) -> Dictionary:
 			groups["equipment"].append(option)
 		else:
 			option["slot"] = "card"
-			option["slot_label"] = "卡牌"
+			option["slot_label"] = "Boss Build"
 			groups["card"].append(option)
 	return groups
 

@@ -92,7 +92,7 @@ func _format_role_effects(item: Dictionary) -> String:
 	var role_effects: Array = item.get("role_effects", [])
 	if role_effects.is_empty():
 		return ""
-	var lines: Array[String] = ["三英雄对应效果 / 数值"]
+	var lines: Array[String] = [_get_role_effect_section_title(role_effects)]
 	for effect in role_effects:
 		if effect is not Dictionary:
 			continue
@@ -102,7 +102,11 @@ func _format_role_effects(item: Dictionary) -> String:
 	return "\n".join(lines)
 
 func _contains_role_effect_section(text_value: String) -> bool:
-	return text_value.contains("三英雄对应效果 / 数值")
+	return text_value.contains("三英雄对应效果 / 数值") or text_value.contains("队伍英雄对应效果 / 数值")
+
+
+func _get_role_effect_section_title(role_effects: Array) -> String:
+	return "三英雄对应效果 / 数值" if role_effects.size() == 3 else "队伍英雄对应效果 / 数值"
 
 func _get_category_text(item: Dictionary) -> String:
 	var parts: Array[String] = []

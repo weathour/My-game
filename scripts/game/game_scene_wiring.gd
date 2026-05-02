@@ -50,6 +50,7 @@ static func _setup_level_up_ui(main: Node) -> void:
 	main.level_up_ui = main.level_up_ui_scene.instantiate()
 	main.add_child(main.level_up_ui)
 	_connect_if_present(main.level_up_ui, "upgrade_selected", Callable(main, "_on_upgrade_selected"))
+	_connect_if_present(main.level_up_ui, "upgrade_refresh_requested", Callable(main, "_on_upgrade_refresh_requested"))
 
 static func _setup_pause_menu(main: Node) -> void:
 	if main.pause_menu_scene == null:

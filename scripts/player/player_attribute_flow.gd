@@ -148,17 +148,111 @@ static func get_primary_attribute_damage_bonus(owner, role_id: String) -> float:
 	return ROLE_ATTRIBUTE_RULES.get_primary_attribute_damage_bonus(role_id, normalize_attribute_training_data(owner.attribute_training_levels))
 
 
+static func get_role_trait_level(owner, role_id: String) -> float:
+	return get_attribute_level(owner, ROLE_ATTRIBUTE_RULES.get_primary_attribute_for_role(role_id))
+
+
+static func get_role_entry_damage_multiplier(owner, role_id: String) -> float:
+	var level := get_role_trait_level(owner, role_id)
+	match role_id:
+		"swordsman":
+			return ROLE_ATTRIBUTE_RULES.get_swordsman_trait_entry_damage_multiplier(level)
+		"gunner":
+			return ROLE_ATTRIBUTE_RULES.get_gunner_trait_entry_bullet_damage_multiplier(level)
+		"mage":
+			return ROLE_ATTRIBUTE_RULES.get_mage_trait_entry_damage_multiplier(level)
+	return 1.0
+
+
+static func get_swordsman_entry_distance_multiplier(owner) -> float:
+	return ROLE_ATTRIBUTE_RULES.get_swordsman_trait_entry_distance_multiplier(get_attribute_level(owner, ROLE_ATTRIBUTE_RULES.ATTR_SWORDSMAN))
+
+
+static func get_swordsman_entry_invulnerability_bonus(owner) -> float:
+	return ROLE_ATTRIBUTE_RULES.get_swordsman_trait_entry_invulnerability_bonus(get_attribute_level(owner, ROLE_ATTRIBUTE_RULES.ATTR_SWORDSMAN))
+
+
+static func get_swordsman_exit_lifesteal_bonus(owner) -> float:
+	return ROLE_ATTRIBUTE_RULES.get_swordsman_trait_exit_lifesteal_bonus(get_attribute_level(owner, ROLE_ATTRIBUTE_RULES.ATTR_SWORDSMAN))
+
+
+static func get_swordsman_exit_lifesteal_duration_bonus(owner) -> float:
+	return ROLE_ATTRIBUTE_RULES.get_swordsman_trait_exit_lifesteal_duration_bonus(get_attribute_level(owner, ROLE_ATTRIBUTE_RULES.ATTR_SWORDSMAN))
+
+
+static func get_gunner_entry_bullet_speed_bonus(owner) -> float:
+	return ROLE_ATTRIBUTE_RULES.get_gunner_trait_entry_bullet_speed_bonus(get_attribute_level(owner, ROLE_ATTRIBUTE_RULES.ATTR_GUNNER))
+
+
+static func get_gunner_entry_wave_count(owner) -> int:
+	return ROLE_ATTRIBUTE_RULES.get_gunner_trait_entry_wave_count(get_attribute_level(owner, ROLE_ATTRIBUTE_RULES.ATTR_GUNNER))
+
+
+static func get_gunner_exit_haste_interval_bonus(owner) -> float:
+	return ROLE_ATTRIBUTE_RULES.get_gunner_trait_exit_haste_interval_bonus(get_attribute_level(owner, ROLE_ATTRIBUTE_RULES.ATTR_GUNNER))
+
+
+static func get_gunner_exit_move_speed_multiplier_bonus(owner) -> float:
+	return ROLE_ATTRIBUTE_RULES.get_gunner_trait_exit_move_speed_multiplier_bonus(get_attribute_level(owner, ROLE_ATTRIBUTE_RULES.ATTR_GUNNER))
+
+
+static func get_gunner_exit_haste_duration_bonus(owner) -> float:
+	return ROLE_ATTRIBUTE_RULES.get_gunner_trait_exit_haste_duration_bonus(get_attribute_level(owner, ROLE_ATTRIBUTE_RULES.ATTR_GUNNER))
+
+
+static func get_mage_entry_radius_multiplier(owner) -> float:
+	return ROLE_ATTRIBUTE_RULES.get_mage_trait_entry_radius_multiplier(get_attribute_level(owner, ROLE_ATTRIBUTE_RULES.ATTR_MAGE))
+
+
+static func get_mage_entry_bombard_count(owner) -> int:
+	return ROLE_ATTRIBUTE_RULES.get_mage_trait_entry_bombard_count(get_attribute_level(owner, ROLE_ATTRIBUTE_RULES.ATTR_MAGE))
+
+
+static func get_mage_exit_energy_bonus(owner) -> float:
+	return ROLE_ATTRIBUTE_RULES.get_mage_trait_exit_energy_bonus(get_attribute_level(owner, ROLE_ATTRIBUTE_RULES.ATTR_MAGE))
+
+
+static func get_mage_exit_slow_field_radius_bonus(owner) -> float:
+	return ROLE_ATTRIBUTE_RULES.get_mage_trait_exit_slow_field_radius_bonus(get_attribute_level(owner, ROLE_ATTRIBUTE_RULES.ATTR_MAGE))
+
+
+static func get_mage_exit_slow_field_damage_ratio(owner) -> float:
+	return ROLE_ATTRIBUTE_RULES.get_mage_trait_exit_slow_field_damage_ratio(get_attribute_level(owner, ROLE_ATTRIBUTE_RULES.ATTR_MAGE))
+
+
+static func get_trait_definitions_for_owner(owner) -> Array:
+	if owner != null and owner.get("roles") is Array:
+		var definitions := ROLE_ATTRIBUTE_RULES.get_trait_definitions(owner.roles)
+		if not definitions.is_empty():
+			return definitions
+	return ROLE_ATTRIBUTE_RULES.get_trait_definitions()
+
+
+static func get_trait_keys_for_owner(owner) -> Array:
+	var keys: Array = []
+	for definition in get_trait_definitions_for_owner(owner):
+		if definition is not Dictionary:
+			continue
+		var trait_key := str((definition as Dictionary).get("trait_key", ""))
+		if trait_key != "" and not keys.has(trait_key):
+			keys.append(trait_key)
+	return keys
+
+
 static func get_balanced_attribute_description(owner, added_amount: float) -> String:
-	return ROLE_ATTRIBUTE_RULES.get_balanced_attribute_description(normalize_attribute_training_data(owner.attribute_training_levels), added_amount)
+	return ROLE_ATTRIBUTE_RULES.get_balanced_attribute_description_for_roles(
+		normalize_attribute_training_data(owner.attribute_training_levels),
+		added_amount,
+		get_trait_definitions_for_owner(owner)
+	)
 
 
 static func add_common_prosperity(owner) -> Dictionary:
 	owner.attribute_training_levels = normalize_attribute_training_data(owner.attribute_training_levels)
-	add_attribute_levels(owner, {
-		ROLE_ATTRIBUTE_RULES.ATTR_SWORDSMAN: COMMON_PROSPERITY_TRAIT_GAIN,
-		ROLE_ATTRIBUTE_RULES.ATTR_GUNNER: COMMON_PROSPERITY_TRAIT_GAIN,
-		ROLE_ATTRIBUTE_RULES.ATTR_MAGE: COMMON_PROSPERITY_TRAIT_GAIN
-	})
+	var deltas := {}
+	for trait_key in get_trait_keys_for_owner(owner):
+		deltas[str(trait_key)] = COMMON_PROSPERITY_TRAIT_GAIN
+	add_attribute_levels(owner, deltas)
 	owner.attribute_training_levels[COMMON_PROSPERITY_KEY] = get_common_prosperity_count(owner) + 1
 	return owner.attribute_training_levels.duplicate(true)
 

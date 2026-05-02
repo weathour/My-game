@@ -40,6 +40,7 @@ static func apply_profile(enemy, kind: String, profile: Dictionary) -> void:
 	enemy.boss_turning_interval = float(profile.get("boss_turning_interval", enemy.boss_turning_interval))
 	enemy.boss_turning_bullets = int(profile.get("boss_turning_bullets", enemy.boss_turning_bullets))
 	enemy.boss_display_name = str(profile.get("boss_name", enemy.boss_display_name))
+	enemy.boss_attack_pressure_scale = float(profile.get("boss_attack_pressure_scale", enemy.boss_attack_pressure_scale))
 
 	enemy.glutton_absorb_radius = float(profile.get("glutton_absorb_radius", enemy.glutton_absorb_radius))
 	enemy.glutton_speed_gain_per_gem = float(profile.get("glutton_speed_gain_per_gem", enemy.glutton_speed_gain_per_gem))

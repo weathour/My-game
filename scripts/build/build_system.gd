@@ -32,6 +32,18 @@ const LEGACY_DANGZHEN_EVOLUTION_IDS := [
 	"small_boss_dangzhen_tidal_surge"
 ]
 
+const BOSS_BUILD_ROLE_REWARD_IDS := [
+	"boss_build_swordsman_blade_shadow",
+	"boss_build_gunner_spotter_drone",
+	"boss_build_mage_guardian_puppet"
+]
+
+const BOSS_BUILD_ROLE_REWARD_CARD_IDS := {
+	"boss_build_swordsman_blade_shadow": "swd_blade_shadow",
+	"boss_build_gunner_spotter_drone": "gun_spotter_drone",
+	"boss_build_mage_guardian_puppet": "mag_guardian_puppet"
+}
+
 const INITIAL_THEME_ID := "theme_threefold_tide"
 
 
@@ -79,8 +91,8 @@ static func normalize_dangzhen_reward_levels(reward_levels: Dictionary) -> Dicti
 	return normalized
 
 
-static func get_core_card_config(card_id: String, active_role_id: String = "") -> Dictionary:
-	return BUILD_DATABASE.get_role_card_config(card_id, active_role_id)
+static func get_core_card_config(card_id: String, active_role_id: String = "", role_order: Array = []) -> Dictionary:
+	return BUILD_DATABASE.get_role_card_config(card_id, active_role_id, role_order)
 
 
 static func get_card_type(card_id: String) -> String:
@@ -91,8 +103,8 @@ static func has_independent_skill_cooldown(card_id: String) -> bool:
 	return BUILD_DATABASE.has_independent_skill_cooldown(card_id)
 
 
-static func get_role_effect_payload(card_id: String) -> Array:
-	return BUILD_DATABASE.get_role_effect_payload(card_id)
+static func get_role_effect_payload(card_id: String, role_order: Array = []) -> Array:
+	return BUILD_DATABASE.get_role_effect_payload(card_id, role_order)
 
 
 static func get_final_set_data(set_key: String) -> Dictionary:
@@ -164,7 +176,7 @@ static func _is_theme_recipe_met(card_levels: Dictionary, theme_id: String) -> b
 	return true
 
 
-static func get_upgrade_pool(slot_id: String, card_levels: Dictionary, reward_levels: Dictionary = {}, active_role_id: String = "") -> Array:
+static func get_upgrade_pool(slot_id: String, card_levels: Dictionary, reward_levels: Dictionary = {}, active_role_id: String = "", role_order: Array = []) -> Array:
 	var options: Array = []
 	var used_ids := {}
 	for theme_id in get_unlocked_theme_ids(card_levels, reward_levels):
@@ -173,14 +185,14 @@ static func get_upgrade_pool(slot_id: String, card_levels: Dictionary, reward_le
 			if used_ids.has(card_id):
 				continue
 			if is_card_offerable(card_levels, card_id):
-				options.append(make_core_card_option(slot_id, card_id, card_levels, active_role_id))
+				options.append(make_core_card_option(slot_id, card_id, card_levels, active_role_id, role_order))
 				used_ids[card_id] = true
 	return options
 
 
-static func make_core_card_option(slot_id: String, card_id: String, card_levels: Dictionary, active_role_id: String = "") -> Dictionary:
+static func make_core_card_option(slot_id: String, card_id: String, card_levels: Dictionary, active_role_id: String = "", role_order: Array = []) -> Dictionary:
 	var canonical_card_id := get_shared_card_id(card_id)
-	var config := BUILD_DATABASE.get_role_card_config(canonical_card_id, active_role_id)
+	var config := BUILD_DATABASE.get_role_card_config(canonical_card_id, active_role_id, role_order)
 	var next_level := get_card_level(card_levels, canonical_card_id) + 1
 	var title := str(config.get("title", canonical_card_id))
 	var description := _make_core_card_detail_description(config)
@@ -233,7 +245,8 @@ static func _make_role_effect_description(config: Dictionary) -> String:
 	var role_effects: Array = config.get("role_effects", [])
 	if role_effects.is_empty():
 		return ""
-	var lines: Array[String] = ["【三英雄对应效果 / 数值】"]
+	var section_title := "三英雄对应效果 / 数值" if role_effects.size() == 3 else "队伍英雄对应效果 / 数值"
+	var lines: Array[String] = ["【%s】" % section_title]
 	for effect in role_effects:
 		if effect is not Dictionary:
 			continue
@@ -259,17 +272,15 @@ static func _make_final_set_requirement_payload(final_set: Dictionary, card_leve
 
 
 static func get_small_boss_reward_options(card_levels: Dictionary, reward_levels: Dictionary, active_role_id: String = "") -> Array:
+	return get_boss_build_reward_options(card_levels, reward_levels, active_role_id)
+
+
+static func get_boss_build_reward_options(card_levels: Dictionary, reward_levels: Dictionary = {}, active_role_id: String = "") -> Array:
 	var options: Array = []
-	for reward_id in DANGZHEN_REINFORCEMENT_IDS:
-		if _is_reinforcement_reward_offerable(card_levels, str(reward_id)):
-			options.append(_make_small_boss_reward_option(str(reward_id)))
-	for branch_id in BUILD_DATABASE.get_branch_theme_ids():
-		var theme_id := str(branch_id)
-		if _is_theme_recipe_met(card_levels, theme_id) and get_reward_level(reward_levels, theme_id) <= 0:
-			options.append(_make_small_boss_reward_option(theme_id))
-	if options.is_empty():
-		options.append(make_small_boss_training_reward_option())
-	return options.slice(0, 3)
+	var ordered_reward_ids := _get_role_ordered_boss_build_reward_ids(active_role_id)
+	for reward_id in ordered_reward_ids:
+		options.append(_make_small_boss_reward_option(str(reward_id), card_levels))
+	return options
 
 
 static func get_blank_small_boss_reward_options(count: int = 3) -> Array:
@@ -279,6 +290,22 @@ static func get_blank_small_boss_reward_options(count: int = 3) -> Array:
 	return options
 
 
+static func _get_role_ordered_boss_build_reward_ids(active_role_id: String = "") -> Array:
+	var ids: Array = BOSS_BUILD_ROLE_REWARD_IDS.duplicate()
+	var preferred_id := ""
+	match active_role_id:
+		"swordsman":
+			preferred_id = "boss_build_swordsman_blade_shadow"
+		"gunner":
+			preferred_id = "boss_build_gunner_spotter_drone"
+		"mage":
+			preferred_id = "boss_build_mage_guardian_puppet"
+	if preferred_id == "":
+		return ids
+	ids.erase(preferred_id)
+	ids.push_front(preferred_id)
+	return ids
+
 static func _is_reinforcement_reward_offerable(card_levels: Dictionary, reward_id: String) -> bool:
 	var card_id := str(DANGZHEN_REINFORCEMENT_CARD_IDS.get(reward_id, ""))
 	if card_id == "":
@@ -286,13 +313,39 @@ static func _is_reinforcement_reward_offerable(card_levels: Dictionary, reward_i
 	return is_card_offerable(card_levels, card_id)
 
 
-static func _make_small_boss_reward_option(reward_id: String) -> Dictionary:
+static func _make_small_boss_reward_option(reward_id: String, card_levels: Dictionary = {}) -> Dictionary:
 	var reward := BUILD_DATABASE.get_small_boss_reward(reward_id)
 	var description := str(reward.get("description", ""))
+	var card_id := str(BOSS_BUILD_ROLE_REWARD_CARD_IDS.get(reward_id, ""))
+	if card_id != "":
+		var current_level := get_card_level(card_levels, card_id)
+		var card_data := BUILD_DATABASE.get_role_card_config(card_id, "")
+		var max_level := int(card_data.get("max_level", 3))
+		var next_level: int = min(max_level, current_level + 1)
+		var card_title := str(card_data.get("title", card_id))
+		var level_text := "当前 Lv.%d / %d，选择后 Lv.%d。" % [min(current_level, max_level), max_level, next_level]
+		if current_level >= max_level:
+			level_text = "该专属已满级，选择后改为同英雄专精补强。"
+		description = "%s\n%s" % [description, level_text]
+		return {
+			"id": reward_id,
+			"slot": "card",
+			"slot_label": "Boss Build",
+			"title": str(reward.get("title", reward_id)),
+			"card_title": card_title,
+			"card_type": "boss_role_build",
+			"card_type_label": "Boss定向",
+			"target_card_id": card_id,
+			"target_level": next_level,
+			"max_level": max_level,
+			"description": description,
+			"preview_description": description,
+			"exact_description": description
+		}
 	return {
 		"id": reward_id,
-		"slot": "special",
-		"slot_label": BUILD_DATABASE.get_slot_label("special"),
+		"slot": "card",
+		"slot_label": "Boss Build",
 		"title": str(reward.get("title", reward_id)),
 		"description": description,
 		"preview_description": description,

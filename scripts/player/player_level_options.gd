@@ -1,5 +1,30 @@
 extends RefCounted
 
+static func build_trait_upgrade_options(trait_options: Array, team_description: String, team_evolved: bool = false, evolved_color: Color = Color(0.38, 1.0, 0.48, 1.0)) -> Array:
+	var options: Array = []
+	for trait_option in trait_options:
+		if trait_option is not Dictionary:
+			continue
+		var definition: Dictionary = trait_option
+		var trait_key := str(definition.get("trait_key", ""))
+		if trait_key == "":
+			continue
+		options.append({
+			"id": str(definition.get("trait_option_id", "level_trait_%s" % trait_key)),
+			"title": "%s Lv.%s" % [str(definition.get("trait_name", trait_key)), _format_level(float(definition.get("next_level", 0.0)))],
+			"description": str(definition.get("description", "")),
+			"evolved": bool(definition.get("evolved", false)),
+			"title_color": evolved_color
+		})
+	options.append({
+		"id": "level_trait_team",
+		"title": "共同致富",
+		"description": team_description,
+		"evolved": team_evolved,
+		"title_color": evolved_color
+	})
+	return options
+
 static func build_attribute_upgrade_options(
 	swordsman_next_level: float,
 	gunner_next_level: float,

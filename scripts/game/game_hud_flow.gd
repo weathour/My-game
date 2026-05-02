@@ -31,7 +31,7 @@ static func refresh_hud(main: Node) -> void:
 	if main.hud.has_method("set_developer_boss_options"):
 		main.hud.set_developer_boss_options(main._get_developer_boss_options())
 	if main.hud.has_method("set_developer_dangzhen_build_options"):
-		main.hud.set_developer_dangzhen_build_options(DEVELOPER_OPTION_PROVIDER.get_dangzhen_build_options(main.player.card_pick_levels))
+		main.hud.set_developer_dangzhen_build_options(DEVELOPER_OPTION_PROVIDER.get_first_batch_build_options(main.player.card_pick_levels, main.player.level))
 	if main.hud.has_method("set_developer_special_card_options"):
 		main.hud.set_developer_special_card_options(DEVELOPER_OPTION_PROVIDER.get_special_card_options(main.player.special_reward_levels))
 	update_boss_hud(main)

@@ -73,7 +73,7 @@ func _ready() -> void:
 	scroll.add_child(menu_content)
 
 	boss_list = _add_menu_section(menu_content, "Boss+1")
-	dangzhen_build_list = _add_menu_section(menu_content, "荡阵 Build")
+	dangzhen_build_list = _add_menu_section(menu_content, "新 Build 卡")
 	special_card_list = _add_menu_section(menu_content, "强化卡牌")
 
 	var small_boss_title := Label.new()
@@ -113,7 +113,7 @@ func set_boss_options(options: Array) -> void:
 	_populate_option_list(boss_list, options, "暂无 Boss 选项", Callable(self, "_on_boss_button_pressed"))
 
 func set_dangzhen_build_options(options: Array) -> void:
-	_populate_option_list(dangzhen_build_list, options, "暂无荡阵 Build", Callable(self, "_on_card_button_pressed"))
+	_populate_option_list(dangzhen_build_list, options, "暂无新 Build 卡", Callable(self, "_on_card_button_pressed"))
 
 func set_special_card_options(options: Array) -> void:
 	_populate_option_list(special_card_list, options, "暂无强化卡牌", Callable(self, "_on_card_button_pressed"))

@@ -24,6 +24,8 @@ static func can_show_character_panel(main: Node) -> bool:
 		return false
 	if main.pause_menu != null and main.pause_menu.visible:
 		return false
+	if main.hud != null and main.hud.get("build_graph_panel") != null and bool(main.hud.get("build_graph_panel").get("visible")):
+		return false
 	return true
 
 static func show_character_panel(main: Node) -> void:

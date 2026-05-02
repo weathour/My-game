@@ -2,6 +2,7 @@ extends RefCounted
 
 const PLAYER_SKILL_COOLDOWN_SLOTS := preload("res://scripts/player/player_skill_cooldown_slots.gd")
 const PLAYER_THEME_SKILL_FLOW := preload("res://scripts/player/player_theme_skill_flow.gd")
+const PLAYER_FIRST_BATCH_MILESTONE_FLOW := preload("res://scripts/player/player_first_batch_milestone_flow.gd")
 
 
 static func get_active_skill_cooldown_slots(owner, attack_interval: float) -> Array:
@@ -13,11 +14,33 @@ static func get_active_skill_cooldown_slots(owner, attack_interval: float) -> Ar
 
 	var extra_slots: Array = []
 
+	extra_slots.append_array(PLAYER_FIRST_BATCH_MILESTONE_FLOW.get_milestone_skill_slots(owner, role_id))
 	extra_slots.append_array(PLAYER_THEME_SKILL_FLOW.get_passive_skill_slots(owner, role_id))
+	_append_first_batch_dedicated_skill_slot(owner, role_id, extra_slots)
 	_append_evolved_active_skill_slot(owner, role_id, extra_slots)
 
 	return PLAYER_SKILL_COOLDOWN_SLOTS.build_slots(role_id, attack_remaining, attack_interval, extra_slots, owner)
 
+
+static func _append_first_batch_dedicated_skill_slot(owner, role_id: String, extra_slots: Array) -> void:
+	var ability = null
+	match role_id:
+		"swordsman":
+			if owner.has_method("_get_card_level") and int(owner._get_card_level("swd_blade_shadow")) > 0:
+				ability = _get_owner_property(owner, "swordsman_blade_shadow_ability")
+		"gunner":
+			if owner.has_method("_get_card_level") and int(owner._get_card_level("gun_spotter_drone")) > 0:
+				ability = _get_owner_property(owner, "gunner_spotter_drone_ability")
+		"mage":
+			if owner.has_method("_get_card_level") and int(owner._get_card_level("mag_guardian_puppet")) > 0:
+				ability = _get_owner_property(owner, "mage_guardian_puppet_ability")
+	if ability == null or not ability.has_method("get_cooldown_slot"):
+		return
+	var slot: Dictionary = ability.get_cooldown_slot(owner)
+	if slot.is_empty():
+		return
+	slot["slot_label"] = str(slot.get("slot_label", "英雄专属"))
+	extra_slots.append(slot)
 
 static func _append_evolved_active_skill_slot(owner, role_id: String, extra_slots: Array) -> void:
 	var ability = null

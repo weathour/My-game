@@ -1,14 +1,11 @@
 extends RefCounted
 
 const SURVIVORS_SLOT_CARD := preload("res://scripts/ui/components/survivors_slot_card_factory.gd")
+const DIFFICULTY_PROFILE := preload("res://scripts/game/difficulty_profile.gd")
 
 const TEXT_CREATE := "\u521b\u5efa\u5b58\u6863"
 const TEXT_SURVIVED := "\u5df2\u575a\u6301%s"
 const TEXT_DELETE_TITLE := "\u5220\u9664\u5B58\u6863"
-const TEXT_DIFFICULTY_EASY := "\u7b80\u5355"
-const TEXT_DIFFICULTY_NORMAL := "\u666e\u901a"
-const TEXT_DIFFICULTY_HARD := "\u56f0\u96be"
-const TEXT_DIFFICULTY_HELL := "\u5730\u72f1"
 
 static func build_slot_card(slot_payload: Dictionary, slot_pressed_callback: Callable, delete_pressed_callback: Callable) -> Control:
 	var slot_id: int = int(slot_payload.get("slot_id", 0))
@@ -50,15 +47,7 @@ static func format_survival_time(total_seconds: float) -> String:
 	return "%d\u5206%d\u79d2" % [minutes, seconds]
 
 static func get_difficulty_label(difficulty_id: String) -> String:
-	match difficulty_id:
-		"easy":
-			return TEXT_DIFFICULTY_EASY
-		"hard":
-			return TEXT_DIFFICULTY_HARD
-		"hell":
-			return TEXT_DIFFICULTY_HELL
-		_:
-			return TEXT_DIFFICULTY_NORMAL
+	return DIFFICULTY_PROFILE.get_label(difficulty_id)
 
 static func _build_delete_button(slot_id: int, delete_pressed_callback: Callable) -> Button:
 	var delete_button := Button.new()

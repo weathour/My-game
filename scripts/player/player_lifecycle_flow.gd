@@ -1,5 +1,7 @@
 extends RefCounted
 
+const PLAYER_LEVEL_CURVE := preload("res://scripts/player/player_level_curve.gd")
+const PLAYER_FIRST_BATCH_MILESTONE_FLOW := preload("res://scripts/player/player_first_batch_milestone_flow.gd")
 
 static func ready(owner) -> void:
 	owner.motion_mode = CharacterBody2D.MOTION_MODE_FLOATING
@@ -10,6 +12,7 @@ static func ready(owner) -> void:
 	owner.role_upgrade_levels = owner._build_role_upgrade_data()
 	owner.background_cooldowns = owner._build_background_cooldowns()
 	owner.build_slot_levels = owner._build_slot_progress_data()
+	owner.first_batch_milestone_state = PLAYER_FIRST_BATCH_MILESTONE_FLOW.build_milestone_state_data()
 	owner.equipment_levels = {}
 	owner.role_equipment_levels = {}
 	owner.attribute_training_levels = owner._normalize_attribute_training_data(owner._build_attribute_training_data())
@@ -19,6 +22,7 @@ static func ready(owner) -> void:
 	owner.role_cycle_marks = owner._build_role_timing_state_data(false)
 	owner.role_mana_values = owner._build_role_timing_state_data(0.0)
 	owner.role_ultimate_energy_lock_remaining = owner._build_role_timing_state_data(0.0)
+	owner.experience_to_next_level = PLAYER_LEVEL_CURVE.normalize_required_experience(owner.level, owner.experience_to_next_level)
 
 	owner.speed = owner.base_speed
 	owner.pickup_radius = owner.base_pickup_radius

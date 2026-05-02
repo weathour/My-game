@@ -3,6 +3,7 @@ extends CanvasLayer
 const DEVELOPER_MODE := preload("res://scripts/developer_mode.gd")
 const DEVELOPER_PANEL := preload("res://scripts/developer/developer_panel.gd")
 const COMBAT_SKILL_BAR := preload("res://scripts/ui/hud/combat_skill_bar.gd")
+const BUILD_SKILL_GRAPH_PANEL := preload("res://scripts/ui/build_graph/build_skill_graph_panel.gd")
 const GAME_SETTINGS := preload("res://scripts/game_settings.gd")
 const PERFORMANCE_MONITOR := preload("res://scripts/game/performance_monitor.gd")
 const SURVIVORS_THEME := preload("res://scripts/ui/theme/survivors_ui_theme.gd")
@@ -33,6 +34,8 @@ var switch_power_label: Label
 var relay_label: Label
 var combat_skill_bar: Control
 var developer_panel: PanelContainer
+var build_graph_button: Button
+var build_graph_panel: Control
 var performance_overlay_panel: PanelContainer
 var performance_overlay_label: Label
 var attack_mode_hint_panel: PanelContainer
@@ -102,6 +105,7 @@ func _ready() -> void:
 	boss_panel.add_child(boss_health_label)
 
 	_build_skill_cooldown_panel(root)
+	_build_build_graph_button(root)
 	_build_attack_mode_hint(root)
 	_build_minimap(root)
 	if DEVELOPER_MODE.is_enabled():
@@ -162,6 +166,39 @@ func _build_team_panel(root: Control) -> void:
 func _build_skill_cooldown_panel(root: Control) -> void:
 	combat_skill_bar = COMBAT_SKILL_BAR.new()
 	root.add_child(combat_skill_bar)
+
+func _build_build_graph_button(root: Control) -> void:
+	build_graph_button = Button.new()
+	build_graph_button.anchor_left = 0.0
+	build_graph_button.anchor_top = 0.0
+	build_graph_button.anchor_right = 0.0
+	build_graph_button.anchor_bottom = 0.0
+	build_graph_button.offset_left = 16.0
+	build_graph_button.offset_top = 16.0
+	build_graph_button.offset_right = 140.0
+	build_graph_button.offset_bottom = 54.0
+	build_graph_button.text = "Build 图谱"
+	build_graph_button.add_theme_font_size_override("font_size", 15)
+	SURVIVORS_THEME.apply_button_style(build_graph_button, "primary")
+	build_graph_button.pressed.connect(_on_build_graph_button_pressed)
+	root.add_child(build_graph_button)
+
+	build_graph_panel = BUILD_SKILL_GRAPH_PANEL.new()
+	build_graph_panel.z_index = 80
+	root.add_child(build_graph_panel)
+
+func _on_build_graph_button_pressed() -> void:
+	toggle_build_graph()
+
+func toggle_build_graph() -> void:
+	if build_graph_panel == null:
+		return
+	if build_graph_panel.has_method("toggle_panel"):
+		build_graph_panel.toggle_panel(true)
+
+func hide_build_graph() -> void:
+	if build_graph_panel != null and build_graph_panel.has_method("hide_panel") and bool(build_graph_panel.get("visible")):
+		build_graph_panel.hide_panel()
 
 func _build_attack_mode_hint(root: Control) -> void:
 	attack_mode_hint_panel = PanelContainer.new()

@@ -1,4 +1,4 @@
-﻿extends CharacterBody2D
+extends CharacterBody2D
 
 const DEVELOPER_MODE := preload("res://scripts/developer_mode.gd")
 const GAME_SETTINGS := preload("res://scripts/game_settings.gd")
@@ -44,6 +44,7 @@ const PLAYER_MAP_BOUNDS_FLOW := preload("res://scripts/player/player_map_bounds_
 const PLAYER_FIELD_EFFECT_FLOW := preload("res://scripts/player/player_field_effect_flow.gd")
 const PLAYER_BUILD_PROGRESS_FLOW := preload("res://scripts/player/player_build_progress_flow.gd")
 const PLAYER_ATTRIBUTE_FLOW := preload("res://scripts/player/player_attribute_flow.gd")
+const PLAYER_FIRST_BATCH_MILESTONE_FLOW := preload("res://scripts/player/player_first_batch_milestone_flow.gd")
 const PLAYER_VISUAL_LAYOUT := preload("res://scripts/player/player_visual_layout.gd")
 const PLAYER_TEXTURE_LOADER := preload("res://scripts/player/player_texture_loader.gd")
 const PLAYER_VISUAL_STATE := preload("res://scripts/player/player_visual_state.gd")
@@ -56,10 +57,13 @@ const GUNNER_ROLE := preload("res://scripts/player/roles/gunner_role.gd")
 const MAGE_ROLE := preload("res://scripts/player/roles/mage_role.gd")
 const DANGZHEN_SWORD_FAN_ABILITY := preload("res://scripts/abilities/dangzhen_sword_fan_ability.gd")
 const SWORDSMAN_BLADE_STORM_ABILITY := preload("res://scripts/abilities/swordsman_blade_storm_ability.gd")
+const SWORDSMAN_BLADE_SHADOW_ABILITY := preload("res://scripts/abilities/swordsman_blade_shadow_ability.gd")
 const MAGE_DANGZHEN_WAVE_ABILITY := preload("res://scripts/abilities/dangzhen_mage_wave_ability.gd")
 const MAGE_TIDAL_SURGE_ABILITY := preload("res://scripts/abilities/mage_tidal_surge_ability.gd")
+const MAGE_GUARDIAN_PUPPET_ABILITY := preload("res://scripts/abilities/mage_guardian_puppet_ability.gd")
 const DANGZHEN_GUNNER_BEAM_ABILITY := preload("res://scripts/abilities/dangzhen_gunner_beam_ability.gd")
 const GUNNER_INFINITE_RELOAD_ABILITY := preload("res://scripts/abilities/gunner_infinite_reload_ability.gd")
+const GUNNER_SPOTTER_DRONE_ABILITY := preload("res://scripts/abilities/gunner_spotter_drone_ability.gd")
 const WHITE_KEY_SHADER := preload("res://shaders/white_key.gdshader")
 const SWORD_SLASH_EFFECT_SCENE := preload("res://effects/sword/slash3/slasheffect3.tscn")
 const SWORD_OMNISLASH_EFFECT_SCENE := preload("res://effects/sword/omnislash/omnislash.tscn")
@@ -230,6 +234,8 @@ var role_upgrade_levels: Dictionary = {}
 var background_cooldowns: Dictionary = {}
 var build_slot_levels: Dictionary = {}
 var card_pick_levels: Dictionary = {}
+var current_build_offer: Dictionary = {}
+var first_batch_milestone_state: Dictionary = {}
 var elite_relics_unlocked: Dictionary = {}
 var equipment_levels: Dictionary = {}
 var role_equipment_levels: Dictionary = {}
@@ -250,6 +256,7 @@ var special_reward_levels: Dictionary = {}
 var theme_skill_trigger_depth: int = 0
 var theme_blood_reflux_cooldown: float = 0.0
 var swordsman_blade_storm_ability = SWORDSMAN_BLADE_STORM_ABILITY.new()
+var swordsman_blade_shadow_ability = SWORDSMAN_BLADE_SHADOW_ABILITY.new()
 var camera_node: Camera2D
 var camera_base_offset: Vector2 = Vector2.ZERO
 var camera_shake_strength: float = 0.0
@@ -313,10 +320,12 @@ var gunner_role = GUNNER_ROLE.new()
 var gunner_attack_chain: int = 0
 var gunner_dangzhen_beam_ability = DANGZHEN_GUNNER_BEAM_ABILITY.new()
 var gunner_infinite_reload_ability = GUNNER_INFINITE_RELOAD_ABILITY.new()
+var gunner_spotter_drone_ability = GUNNER_SPOTTER_DRONE_ABILITY.new()
 var mage_role = MAGE_ROLE.new()
 var mage_attack_chain: int = 0
 var mage_dangzhen_wave_ability = MAGE_DANGZHEN_WAVE_ABILITY.new()
 var mage_tidal_surge_ability = MAGE_TIDAL_SURGE_ABILITY.new()
+var mage_guardian_puppet_ability = MAGE_GUARDIAN_PUPPET_ABILITY.new()
 var gunner_lock_target: Node2D
 var gunner_lock_stacks: int = 0
 var gem_collection_elapsed: float = 0.0
@@ -640,6 +649,54 @@ func _get_attribute_pickup_range_bonus() -> float:
 func _get_primary_attribute_damage_bonus(role_id: String) -> float:
 	return PLAYER_ATTRIBUTE_FLOW.get_primary_attribute_damage_bonus(self, role_id)
 
+func _get_role_trait_level(role_id: String) -> float:
+	return PLAYER_ATTRIBUTE_FLOW.get_role_trait_level(self, role_id)
+
+func _get_role_entry_damage_multiplier(role_id: String) -> float:
+	return PLAYER_ATTRIBUTE_FLOW.get_role_entry_damage_multiplier(self, role_id)
+
+func _get_swordsman_entry_distance_multiplier() -> float:
+	return PLAYER_ATTRIBUTE_FLOW.get_swordsman_entry_distance_multiplier(self)
+
+func _get_swordsman_entry_invulnerability_bonus() -> float:
+	return PLAYER_ATTRIBUTE_FLOW.get_swordsman_entry_invulnerability_bonus(self)
+
+func _get_swordsman_exit_lifesteal_bonus() -> float:
+	return PLAYER_ATTRIBUTE_FLOW.get_swordsman_exit_lifesteal_bonus(self)
+
+func _get_swordsman_exit_lifesteal_duration_bonus() -> float:
+	return PLAYER_ATTRIBUTE_FLOW.get_swordsman_exit_lifesteal_duration_bonus(self)
+
+func _get_gunner_entry_bullet_speed_bonus() -> float:
+	return PLAYER_ATTRIBUTE_FLOW.get_gunner_entry_bullet_speed_bonus(self)
+
+func _get_gunner_entry_wave_count() -> int:
+	return PLAYER_ATTRIBUTE_FLOW.get_gunner_entry_wave_count(self)
+
+func _get_gunner_exit_haste_interval_bonus() -> float:
+	return PLAYER_ATTRIBUTE_FLOW.get_gunner_exit_haste_interval_bonus(self)
+
+func _get_gunner_exit_move_speed_multiplier_bonus() -> float:
+	return PLAYER_ATTRIBUTE_FLOW.get_gunner_exit_move_speed_multiplier_bonus(self)
+
+func _get_gunner_exit_haste_duration_bonus() -> float:
+	return PLAYER_ATTRIBUTE_FLOW.get_gunner_exit_haste_duration_bonus(self)
+
+func _get_mage_entry_radius_multiplier() -> float:
+	return PLAYER_ATTRIBUTE_FLOW.get_mage_entry_radius_multiplier(self)
+
+func _get_mage_entry_bombard_count() -> int:
+	return PLAYER_ATTRIBUTE_FLOW.get_mage_entry_bombard_count(self)
+
+func _get_mage_exit_energy_bonus() -> float:
+	return PLAYER_ATTRIBUTE_FLOW.get_mage_exit_energy_bonus(self)
+
+func _get_mage_exit_slow_field_radius_bonus() -> float:
+	return PLAYER_ATTRIBUTE_FLOW.get_mage_exit_slow_field_radius_bonus(self)
+
+func _get_mage_exit_slow_field_damage_ratio() -> float:
+	return PLAYER_ATTRIBUTE_FLOW.get_mage_exit_slow_field_damage_ratio(self)
+
 func _get_balanced_attribute_description(added_amount: float) -> String:
 	return PLAYER_ATTRIBUTE_FLOW.get_balanced_attribute_description(self, added_amount)
 
@@ -804,6 +861,7 @@ func _add_special_reward_level(reward_id: String, amount: int = 1) -> int:
 
 func _has_swordsman_blade_storm_reward() -> bool:
 	return PLAYER_BUILD_STATE.has_swordsman_blade_storm_reward(special_reward_levels) \
+		or _get_card_level("swd_tide_unbound") > 0 \
 		or BUILD_SYSTEM.is_theme_unlocked(card_pick_levels, special_reward_levels, "branch_omni_edge")
 
 func _can_offer_swordsman_blade_storm_reward() -> bool:
@@ -815,6 +873,7 @@ func _can_offer_swordsman_blade_storm_reward() -> bool:
 
 func _has_gunner_infinite_reload_reward() -> bool:
 	return PLAYER_BUILD_STATE.has_gunner_infinite_reload_reward(special_reward_levels) \
+		or _get_card_level("gun_infinite_fireline") > 0 \
 		or BUILD_SYSTEM.is_theme_unlocked(card_pick_levels, special_reward_levels, "branch_blood_shield")
 
 func _can_offer_gunner_infinite_reload_reward() -> bool:
@@ -826,6 +885,7 @@ func _can_offer_gunner_infinite_reload_reward() -> bool:
 
 func _has_mage_tidal_surge_reward() -> bool:
 	return PLAYER_BUILD_STATE.has_mage_tidal_surge_reward(special_reward_levels) \
+		or _get_card_level("mag_sky_dome") > 0 \
 		or BUILD_SYSTEM.is_theme_unlocked(card_pick_levels, special_reward_levels, "branch_tri_finale")
 
 func _can_offer_mage_tidal_surge_reward() -> bool:
@@ -956,6 +1016,7 @@ func _update_timers(delta: float) -> void:
 		enemy_move_slow_remaining = max(0.0, enemy_move_slow_remaining - delta)
 		if enemy_move_slow_remaining <= 0.0:
 			enemy_move_slow_multiplier = 1.0
+	PLAYER_FIRST_BATCH_MILESTONE_FLOW.update_cooldowns(self, delta)
 	PLAYER_THEME_SKILL_FLOW.update_cooldowns(self, delta)
 	if swordsman_dangzhen_fan_ability != null:
 		swordsman_dangzhen_fan_ability.update(delta)
@@ -963,15 +1024,24 @@ func _update_timers(delta: float) -> void:
 		gunner_dangzhen_beam_ability.update(delta)
 	if gunner_infinite_reload_ability != null:
 		gunner_infinite_reload_ability.update(self, delta)
+	if gunner_spotter_drone_ability != null:
+		gunner_spotter_drone_ability.update(delta)
 	if mage_tidal_surge_ability != null:
 		mage_tidal_surge_ability.update(delta)
 	if mage_dangzhen_wave_ability != null:
 		mage_dangzhen_wave_ability.update(delta)
+	if mage_guardian_puppet_ability != null:
+		mage_guardian_puppet_ability.update(delta)
 	if swordsman_blade_storm_ability != null:
 		swordsman_blade_storm_ability.update(self, delta)
+	if swordsman_blade_shadow_ability != null:
+		swordsman_blade_shadow_ability.update(delta)
 	_try_trigger_independent_sword_qichao()
 	_try_trigger_independent_gunner_qichao()
 	_try_trigger_independent_mage_qichao()
+	_try_trigger_swordsman_blade_shadow()
+	_try_trigger_gunner_spotter_drone()
+	_try_trigger_mage_guardian_puppet()
 	_try_trigger_swordsman_blade_storm()
 	_try_trigger_gunner_infinite_reload()
 	_try_trigger_mage_tidal_surge()
@@ -1051,12 +1121,18 @@ func _apply_developer_no_cooldown() -> void:
 		gunner_dangzhen_beam_ability.cooldown_remaining = 0.0
 	if gunner_infinite_reload_ability != null:
 		gunner_infinite_reload_ability.cooldown_remaining = 0.0
+	if gunner_spotter_drone_ability != null:
+		gunner_spotter_drone_ability.cooldown_remaining = 0.0
 	if mage_dangzhen_wave_ability != null:
 		mage_dangzhen_wave_ability.cooldown_remaining = 0.0
 	if mage_tidal_surge_ability != null:
 		mage_tidal_surge_ability.cooldown_remaining = 0.0
+	if mage_guardian_puppet_ability != null:
+		mage_guardian_puppet_ability.cooldown_remaining = 0.0
 	if swordsman_blade_storm_ability != null:
 		swordsman_blade_storm_ability.cooldown_remaining = 0.0
+	if swordsman_blade_shadow_ability != null:
+		swordsman_blade_shadow_ability.cooldown_remaining = 0.0
 
 func _regenerate_energy(delta: float) -> void:
 	PLAYER_SURVIVAL_FLOW.regenerate_energy(self, delta)
@@ -1132,6 +1208,8 @@ func _try_trigger_independent_gunner_qichao() -> void:
 	var active_role_id := str(_get_active_role().get("id", ""))
 	if active_role_id != "gunner":
 		return
+	if _get_card_level("battle_dangzhen_qichao") <= 0:
+		return
 	if is_gunner_infinite_reload_active():
 		return
 	if gunner_dangzhen_beam_ability == null or not gunner_dangzhen_beam_ability.can_trigger(self, active_role_id):
@@ -1140,6 +1218,42 @@ func _try_trigger_independent_gunner_qichao() -> void:
 	var dangzhen_hits := _trigger_dangzhen_gunner_qichao_preview(shot_direction, _get_role_damage(active_role_id), active_role_id)
 	if dangzhen_hits > 0:
 		_register_attack_result(active_role_id, dangzhen_hits, false)
+
+func _try_trigger_swordsman_blade_shadow() -> void:
+	if is_dead or level_up_active:
+		return
+	var active_role_id: String = str(_get_active_role().get("id", ""))
+	if swordsman_blade_shadow_ability == null or not swordsman_blade_shadow_ability.can_trigger(self, active_role_id):
+		return
+	_start_swordsman_blade_shadow()
+
+func _start_swordsman_blade_shadow() -> void:
+	if swordsman_blade_shadow_ability != null:
+		swordsman_blade_shadow_ability.try_trigger(self)
+
+func _try_trigger_gunner_spotter_drone() -> void:
+	if is_dead or level_up_active:
+		return
+	var active_role_id: String = str(_get_active_role().get("id", ""))
+	if gunner_spotter_drone_ability == null or not gunner_spotter_drone_ability.can_trigger(self, active_role_id):
+		return
+	_start_gunner_spotter_drone()
+
+func _start_gunner_spotter_drone() -> void:
+	if gunner_spotter_drone_ability != null:
+		gunner_spotter_drone_ability.try_trigger(self)
+
+func _try_trigger_mage_guardian_puppet() -> void:
+	if is_dead or level_up_active:
+		return
+	var active_role_id: String = str(_get_active_role().get("id", ""))
+	if mage_guardian_puppet_ability == null or not mage_guardian_puppet_ability.can_trigger(self, active_role_id):
+		return
+	_start_mage_guardian_puppet()
+
+func _start_mage_guardian_puppet() -> void:
+	if mage_guardian_puppet_ability != null:
+		mage_guardian_puppet_ability.try_trigger(self)
 
 func _try_trigger_swordsman_blade_storm() -> void:
 	var active_role_id := str(_get_active_role().get("id", ""))
@@ -1787,6 +1901,7 @@ func _register_attack_result(role_id: String, hit_count: int, killed: bool) -> v
 
 func _apply_theme_hit_returns(role_id: String, hit_count: int, killed: bool) -> void:
 	PLAYER_COMBAT_RESULT_FLOW.apply_theme_hit_returns(self, role_id, hit_count, killed)
+	PLAYER_FIRST_BATCH_MILESTONE_FLOW.apply_attack_milestones(self, role_id, hit_count, killed)
 	PLAYER_THEME_SKILL_FLOW.apply_attack_theme_skills(self, role_id, hit_count, killed)
 
 func _apply_entry_lifesteal(role_id: String, hit_count: int, killed: bool) -> void:
@@ -1965,6 +2080,14 @@ func apply_upgrade(option_id: String) -> void:
 func get_attribute_upgrade_options() -> Array:
 	return PLAYER_LEVEL_FLOW.get_attribute_upgrade_options(self)
 
+func refresh_upgrade_options() -> Array:
+	return PLAYER_LEVEL_FLOW.refresh_upgrade_options(self)
+
+func get_current_build_offer_context() -> Dictionary:
+	if current_build_offer is Dictionary:
+		return (current_build_offer.get("context", {}) as Dictionary).duplicate(true)
+	return {}
+
 func get_all_upgrade_options() -> Array:
 	return PLAYER_UPGRADE_OPTIONS.build_all_upgrade_options_for_developer_mode(
 		_get_body_upgrade_pool(),
@@ -1984,6 +2107,9 @@ func _deprecated_get_developer_card_options_v2() -> Array:
 
 func get_small_boss_reward_options() -> Array:
 	return PLAYER_LEVEL_FLOW.get_small_boss_reward_options(self)
+
+func get_boss_build_reward_options() -> Array:
+	return PLAYER_LEVEL_FLOW.get_boss_build_reward_options(self)
 
 func apply_attribute_upgrade(option_id: String) -> void:
 	PLAYER_LEVEL_FLOW.apply_attribute_upgrade(self, option_id)
@@ -2169,15 +2295,15 @@ func _build_upgrade_options() -> Array:
 
 func _get_body_upgrade_pool() -> Array:
 	var active_role_id: String = str(_get_active_role().get("id", ""))
-	return BUILD_SYSTEM.get_upgrade_pool("body", card_pick_levels, special_reward_levels, active_role_id)
+	return BUILD_SYSTEM.get_upgrade_pool("body", card_pick_levels, special_reward_levels, active_role_id, roles)
 
 func _get_combat_upgrade_pool() -> Array:
 	var active_role_id: String = str(_get_active_role().get("id", ""))
-	return BUILD_SYSTEM.get_upgrade_pool("combat", card_pick_levels, special_reward_levels, active_role_id)
+	return BUILD_SYSTEM.get_upgrade_pool("combat", card_pick_levels, special_reward_levels, active_role_id, roles)
 
 func _get_skill_upgrade_pool() -> Array:
 	var active_role_id: String = str(_get_active_role().get("id", ""))
-	return BUILD_SYSTEM.get_upgrade_pool("skill", card_pick_levels, special_reward_levels, active_role_id)
+	return BUILD_SYSTEM.get_upgrade_pool("skill", card_pick_levels, special_reward_levels, active_role_id, roles)
 
 func _get_fallback_upgrade_pool() -> Array:
 	return [

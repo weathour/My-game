@@ -28,14 +28,3 @@ color = Color(1, 1, 1, 0.72)
 default_color = Color(1, 0.45, 0.35, 1)
 width = 3.0
 closed = true
-
-[node name="HurtCore" type="Node2D" parent="."]
-z_index = 60
-
-[node name="Fill" type="Polygon2D" parent="HurtCore"]
-color = Color(1, 1, 1, 0.72)
-
-[node name="Outline" type="Line2D" parent="HurtCore"]
-default_color = Color(1, 0.45, 0.35, 1)
-width = 3.0
-closed = true

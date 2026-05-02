@@ -3,6 +3,7 @@ extends RefCounted
 const DEVELOPER_MODE := preload("res://scripts/developer_mode.gd")
 const ROLE_RESOURCE_STATE := preload("res://scripts/player/roles/role_resource_state.gd")
 const PLAYER_THEME_SKILL_FLOW := preload("res://scripts/player/player_theme_skill_flow.gd")
+const PLAYER_FIRST_BATCH_MILESTONE_FLOW := preload("res://scripts/player/player_first_batch_milestone_flow.gd")
 
 
 static func update_timers(owner, delta: float) -> void:
@@ -23,6 +24,7 @@ static func update_timers(owner, delta: float) -> void:
 		owner.enemy_move_slow_remaining = max(0.0, owner.enemy_move_slow_remaining - delta)
 		if owner.enemy_move_slow_remaining <= 0.0:
 			owner.enemy_move_slow_multiplier = 1.0
+	PLAYER_FIRST_BATCH_MILESTONE_FLOW.update_cooldowns(owner, delta)
 	PLAYER_THEME_SKILL_FLOW.update_cooldowns(owner, delta)
 	if owner.swordsman_dangzhen_fan_ability != null:
 		owner.swordsman_dangzhen_fan_ability.update(delta)
@@ -30,15 +32,24 @@ static func update_timers(owner, delta: float) -> void:
 		owner.gunner_dangzhen_beam_ability.update(delta)
 	if owner.gunner_infinite_reload_ability != null:
 		owner.gunner_infinite_reload_ability.update(owner, delta)
+	if owner.gunner_spotter_drone_ability != null:
+		owner.gunner_spotter_drone_ability.update(delta)
 	if owner.mage_tidal_surge_ability != null:
 		owner.mage_tidal_surge_ability.update(delta)
 	if owner.mage_dangzhen_wave_ability != null:
 		owner.mage_dangzhen_wave_ability.update(delta)
+	if owner.mage_guardian_puppet_ability != null:
+		owner.mage_guardian_puppet_ability.update(delta)
 	if owner.swordsman_blade_storm_ability != null:
 		owner.swordsman_blade_storm_ability.update(owner, delta)
+	if owner.swordsman_blade_shadow_ability != null:
+		owner.swordsman_blade_shadow_ability.update(delta)
 	owner._try_trigger_independent_sword_qichao()
 	owner._try_trigger_independent_gunner_qichao()
 	owner._try_trigger_independent_mage_qichao()
+	owner._try_trigger_swordsman_blade_shadow()
+	owner._try_trigger_gunner_spotter_drone()
+	owner._try_trigger_mage_guardian_puppet()
 	owner._try_trigger_swordsman_blade_storm()
 	owner._try_trigger_gunner_infinite_reload()
 	owner._try_trigger_mage_tidal_surge()
@@ -119,9 +130,15 @@ static func apply_developer_no_cooldown(owner) -> void:
 		owner.gunner_dangzhen_beam_ability.cooldown_remaining = 0.0
 	if owner.gunner_infinite_reload_ability != null:
 		owner.gunner_infinite_reload_ability.cooldown_remaining = 0.0
+	if owner.gunner_spotter_drone_ability != null:
+		owner.gunner_spotter_drone_ability.cooldown_remaining = 0.0
 	if owner.mage_dangzhen_wave_ability != null:
 		owner.mage_dangzhen_wave_ability.cooldown_remaining = 0.0
 	if owner.mage_tidal_surge_ability != null:
 		owner.mage_tidal_surge_ability.cooldown_remaining = 0.0
+	if owner.mage_guardian_puppet_ability != null:
+		owner.mage_guardian_puppet_ability.cooldown_remaining = 0.0
 	if owner.swordsman_blade_storm_ability != null:
 		owner.swordsman_blade_storm_ability.cooldown_remaining = 0.0
+	if owner.swordsman_blade_shadow_ability != null:
+		owner.swordsman_blade_shadow_ability.cooldown_remaining = 0.0

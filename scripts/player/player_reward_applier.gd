@@ -1,6 +1,8 @@
 extends RefCounted
 
 const BUILD_SYSTEM := preload("res://scripts/build/build_system.gd")
+const PLAYER_LEVEL_CURVE := preload("res://scripts/player/player_level_curve.gd")
+const FIRST_BATCH_DB := preload("res://scripts/build/build_first_batch_database.gd")
 
 const DANGZHEN_QICHAO_CARD := "battle_dangzhen_qichao"
 const DANGZHEN_DIELANG_CARD := "battle_dangzhen_dielang"
@@ -13,6 +15,9 @@ const SMALL_BOSS_BLADE_STORM := "small_boss_dangzhen_blade_storm"
 const SMALL_BOSS_INFINITE_RELOAD := "small_boss_dangzhen_infinite_reload"
 const SMALL_BOSS_TIDAL_SURGE := "small_boss_dangzhen_tidal_surge"
 const SMALL_BOSS_TRAINING_LEVEL_UP := "small_boss_training_level_up"
+const BOSS_BUILD_SWORDSMAN := "boss_build_swordsman_blade_shadow"
+const BOSS_BUILD_GUNNER := "boss_build_gunner_spotter_drone"
+const BOSS_BUILD_MAGE := "boss_build_mage_guardian_puppet"
 const BRANCH_OMNI_EDGE := "branch_omni_edge"
 const BRANCH_BLOOD_SHIELD := "branch_blood_shield"
 const BRANCH_TRI_FINALE := "branch_tri_finale"
@@ -50,6 +55,12 @@ static func apply_small_boss_reward(owner, option_id: String) -> bool:
 			_grant_theme_unlock(owner, BRANCH_TRI_FINALE, TIDAL_SURGE_LABEL, Color(0.62, 0.9, 1.0, 1.0))
 		SMALL_BOSS_TRAINING_LEVEL_UP:
 			_grant_training_level(owner)
+		BOSS_BUILD_SWORDSMAN:
+			_grant_boss_role_build(owner, "swd_blade_shadow", "swordsman", "剑影进阶", Color(0.42, 0.92, 1.0, 1.0))
+		BOSS_BUILD_GUNNER:
+			_grant_boss_role_build(owner, "gun_spotter_drone", "gunner", "无人机进阶", Color(1.0, 0.64, 0.28, 1.0))
+		BOSS_BUILD_MAGE:
+			_grant_boss_role_build(owner, "mag_guardian_puppet", "mage", "傀儡进阶", Color(0.68, 0.9, 1.0, 1.0))
 		_:
 			return false
 	return true
@@ -116,9 +127,71 @@ static func _grant_theme_unlock(owner, theme_id: String, fallback_label: String,
 	owner._spawn_burst_effect(owner.global_position, 108.0, Color(color.r, color.g, color.b, 0.18), 0.22)
 
 
+static func _grant_boss_role_build(owner, card_id: String, role_id: String, label: String, color: Color) -> void:
+	var card := FIRST_BATCH_DB.get_card_data(card_id)
+	var max_level := int(card.get("max_level", 3))
+	var previous := int(owner.card_pick_levels.get(card_id, 0))
+	if previous < max_level:
+		owner.card_pick_levels[card_id] = min(max_level, previous + 1)
+		_apply_boss_role_specials(owner, card_id, role_id, false)
+	else:
+		_apply_boss_role_specials(owner, card_id, role_id, true)
+	owner._spawn_combat_tag(owner.global_position + Vector2(0.0, -62.0), label, color)
+	owner._spawn_ring_effect(owner.global_position, 92.0, Color(color.r, color.g, color.b, 0.52), 9.0, 0.22)
+	owner._spawn_burst_effect(owner.global_position, 102.0, Color(color.r, color.g, color.b, 0.18), 0.22)
+	if role_id == str(owner._get_active_role().get("id", "")):
+		_trigger_boss_role_build_preview(owner, card_id)
+
+
+static func _apply_boss_role_specials(owner, card_id: String, role_id: String, overflow: bool) -> void:
+	var role_data: Dictionary = owner.role_upgrade_levels.get(role_id, {}).duplicate(true)
+	role_data["damage_bonus"] = float(role_data.get("damage_bonus", 0.0)) + (2.0 if overflow else 1.2)
+	role_data["interval_bonus"] = float(role_data.get("interval_bonus", 0.0)) + (0.026 if overflow else 0.014)
+	role_data["range_bonus"] = float(role_data.get("range_bonus", 0.0)) + (6.0 if overflow else 3.0)
+	role_data["skill_bonus"] = float(role_data.get("skill_bonus", 0.0)) + (0.12 if overflow else 0.07)
+	owner.role_upgrade_levels[role_id] = role_data
+	match card_id:
+		"swd_blade_shadow":
+			owner._increase_role_special("swordsman", "counter_level", 2 if overflow else 1)
+			owner._increase_role_special("swordsman", "stance_level", 1)
+		"gun_spotter_drone":
+			owner._increase_role_special("gunner", "support_level", 2 if overflow else 1)
+			owner._increase_role_special("gunner", "lock_level", 1)
+		"mag_guardian_puppet":
+			owner._increase_role_special("mage", "support_level", 2 if overflow else 1)
+			owner._increase_role_special("mage", "frost_level", 1)
+			if overflow:
+				owner.damage_taken_multiplier = max(0.55, owner.damage_taken_multiplier - 0.012)
+	owner.background_interval_multiplier = max(0.42, owner.background_interval_multiplier - (0.018 if overflow else 0.01))
+	owner._add_active_role_mana(5.0 if overflow else 3.0, false)
+	if owner.has_signal("health_changed"):
+		owner.health_changed.emit(owner.current_health, owner.max_health)
+	if owner.has_signal("stats_changed"):
+		owner.stats_changed.emit(owner.get_stat_summary() if owner.has_method("get_stat_summary") else {})
+
+
+static func _trigger_boss_role_build_preview(owner, card_id: String) -> void:
+	match card_id:
+		"swd_blade_shadow":
+			var ability = owner.get("swordsman_blade_shadow_ability")
+			if ability != null:
+				ability.cooldown_remaining = 0.0
+				owner._start_swordsman_blade_shadow()
+		"gun_spotter_drone":
+			var ability = owner.get("gunner_spotter_drone_ability")
+			if ability != null:
+				ability.cooldown_remaining = 0.0
+				owner._start_gunner_spotter_drone()
+		"mag_guardian_puppet":
+			var ability = owner.get("mage_guardian_puppet_ability")
+			if ability != null:
+				ability.cooldown_remaining = 0.0
+				owner._start_mage_guardian_puppet()
+
+
 static func _grant_training_level(owner) -> void:
 	owner.level += 1
-	owner.experience_to_next_level = int(round(owner.experience_to_next_level * 1.42)) + 10
+	owner.experience_to_next_level = PLAYER_LEVEL_CURVE.get_next_required_experience_after_level_up(owner.level)
 	owner.pending_level_ups += 1
 	owner.experience_changed.emit(owner.experience, owner.experience_to_next_level, owner.level)
 	owner._spawn_combat_tag(owner.global_position + Vector2(0.0, -62.0), "\u6f5c\u5fc3\u4fee\u70bc Lv.+1", Color(0.66, 1.0, 0.58, 1.0))

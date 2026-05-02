@@ -1,5 +1,7 @@
 extends RefCounted
 
+const ROLE_DATABASE := preload("res://scripts/player/roles/role_database.gd")
+
 const SLOT_LABELS := {
 	"body": "\u6218\u6597",
 	"combat": "\u8FDE\u643A",
@@ -549,6 +551,18 @@ const SMALL_BOSS_REWARDS := {
 	"small_boss_dangzhen_tidal_surge": {
 		"title": "主题解锁·三相终式",
 		"description": "旧存档兼容入口。解锁三相终式主题，后续卡池加入蓄相、破相、归一；术师可进入波涛涌动进化。"
+	},
+	"boss_build_swordsman_blade_shadow": {
+		"title": "Boss构筑·剑影进阶",
+		"description": "三选一英雄定向增强：剑士专属《剑影留形》等级 +1。若已满级，则转为剑士伤害、冷却和反击专精补强。"
+	},
+	"boss_build_gunner_spotter_drone": {
+		"title": "Boss构筑·无人机进阶",
+		"description": "三选一英雄定向增强：枪手专属《侦察无人机》等级 +1。若已满级，则转为枪手标记、火力和支援专精补强。"
+	},
+	"boss_build_mage_guardian_puppet": {
+		"title": "Boss构筑·傀儡进阶",
+		"description": "三选一英雄定向增强：术师专属《守护傀儡》等级 +1。若已满级，则转为术师领域、护卫和生存专精补强。"
 	}
 }
 
@@ -577,7 +591,7 @@ static func get_role_card_variant(card_id: String, role_id: String) -> Dictionar
 	return variants.get(role_id, {}).duplicate(true)
 
 
-static func get_role_card_config(card_id: String, role_id: String) -> Dictionary:
+static func get_role_card_config(card_id: String, role_id: String, role_order: Array = []) -> Dictionary:
 	var config := get_core_card(card_id)
 	var canonical_id := canonical_card_id(card_id)
 	var card_type := str(CARD_TYPE_BY_ID.get(canonical_id, "passive_attack"))
@@ -585,7 +599,7 @@ static func get_role_card_config(card_id: String, role_id: String) -> Dictionary
 	config["card_type_label"] = str(CARD_TYPE_LABELS.get(card_type, card_type))
 	config["is_new_passive_skill"] = SKILL_CARD_IDS.has(canonical_id)
 	config["has_independent_cooldown"] = COOLDOWN_PASSIVE_SKILL_CARD_IDS.has(canonical_id)
-	config["role_effects"] = get_role_effect_payload(canonical_id)
+	config["role_effects"] = get_role_effect_payload(canonical_id, role_order)
 	var variant := get_role_card_variant(canonical_id, role_id)
 	if not variant.is_empty():
 		for key in variant.keys():
@@ -610,17 +624,17 @@ static func has_independent_skill_cooldown(card_id: String) -> bool:
 	return COOLDOWN_PASSIVE_SKILL_CARD_IDS.has(canonical_card_id(card_id))
 
 
-static func get_role_effect_payload(card_id: String) -> Array:
+static func get_role_effect_payload(card_id: String, role_order: Array = []) -> Array:
 	var canonical_id := canonical_card_id(card_id)
 	var result: Array = []
-	var role_labels := {
-		"swordsman": "剑士",
-		"gunner": "枪手",
-		"mage": "术师"
-	}
-	var role_order := ["swordsman", "gunner", "mage"]
+	var role_definitions := ROLE_DATABASE.get_role_trait_definitions(role_order)
 	var numbers: Dictionary = CARD_ROLE_NUMBERS.get(canonical_id, {})
-	for role_id in role_order:
+	for definition in role_definitions:
+		if definition is not Dictionary:
+			continue
+		var role_id := str((definition as Dictionary).get("role_id", ""))
+		if role_id == "":
+			continue
 		var variant := get_role_card_variant(canonical_id, role_id)
 		var lines: Array = []
 		for line in numbers.get(role_id, []):
@@ -629,7 +643,7 @@ static func get_role_effect_payload(card_id: String) -> Array:
 			lines.append(str(variant.get("preview", get_core_card(canonical_id).get("preview", ""))))
 		result.append({
 			"role_id": role_id,
-			"role_name": str(role_labels.get(role_id, role_id)),
+			"role_name": str((definition as Dictionary).get("role_name", role_id)),
 			"title": str(variant.get("title", get_core_card(canonical_id).get("title", canonical_id))),
 			"lines": lines
 		})

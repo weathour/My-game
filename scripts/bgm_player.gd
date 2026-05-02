@@ -12,8 +12,20 @@ var resume_request_id: int = 0
 var paused_by_script: bool = false
 
 func _ready() -> void:
+	if _is_headless_runtime():
+		if playing:
+			stop()
+		stream = null
+		return
 	finished.connect(_on_finished)
 	apply_saved_volume()
+
+func _exit_tree() -> void:
+	resume_request_id += 1
+	stream_paused = false
+	if playing:
+		stop()
+	stream = null
 
 func apply_saved_volume() -> void:
 	var volume_linear: float = load_music_volume()
@@ -45,6 +57,8 @@ func restore_playback_position(position_seconds: float) -> void:
 	paused_by_script = true
 
 func start_music(position_seconds: float = 0.0) -> void:
+	if _is_headless_runtime():
+		return
 	if stream == null:
 		return
 
@@ -54,6 +68,8 @@ func start_music(position_seconds: float = 0.0) -> void:
 	_play_from_position(stored_playback_position)
 
 func pause_music() -> void:
+	if _is_headless_runtime():
+		return
 	if stream == null:
 		return
 
@@ -66,6 +82,8 @@ func pause_music() -> void:
 		stop()
 
 func resume_music(delay_seconds: float = 0.0) -> void:
+	if _is_headless_runtime():
+		return
 	if stream == null:
 		return
 
@@ -85,6 +103,8 @@ func resume_music(delay_seconds: float = 0.0) -> void:
 	paused_by_script = false
 
 func _play_from_position(position_seconds: float) -> void:
+	if _is_headless_runtime():
+		return
 	stream_paused = false
 	var safe_position: float = max(position_seconds, 0.0)
 	if safe_position <= 0.001:
@@ -92,6 +112,9 @@ func _play_from_position(position_seconds: float) -> void:
 	else:
 		play()
 		seek(safe_position)
+
+func _is_headless_runtime() -> bool:
+	return str(DisplayServer.get_name()).to_lower() == "headless"
 
 static func load_music_volume() -> float:
 	var config := ConfigFile.new()

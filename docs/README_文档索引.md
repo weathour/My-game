@@ -39,16 +39,22 @@
 11. [11_技术债_风险点_重构建议.md](11_技术债_风险点_重构建议.md)
     记录当前项目最可能出问题的区域，以及后续轻量重构方向。
 
-12. [achievements/STEAM_ADAPTER.md](achievements/STEAM_ADAPTER.md)
+12. [12_Build数学模型与发牌方案.md](12_Build数学模型与发牌方案.md)
+    记录下一代 Build 的向量模型、英雄关系图、动量转向、三槽位发牌和实施阶段。
+
+13. [13_Build首批卡牌与等级节奏.md](13_Build首批卡牌与等级节奏.md)
+    记录首批新 Build 卡牌、队伍等级 6/12/18/25 阶段质变、能力包数据和协同连结。
+
+14. [achievements/STEAM_ADAPTER.md](achievements/STEAM_ADAPTER.md)
     记录本地成就系统、Steam 成就适配边界与新增成就流程。
 
-13. [GRAPHIFY.md](GRAPHIFY.md)
+15. [GRAPHIFY.md](GRAPHIFY.md)
     记录项目知识图谱位置、更新方式和 Godot/GDScript 支持说明。
 
-14. [KNOWN_ISSUES.md](KNOWN_ISSUES.md)
+16. [KNOWN_ISSUES.md](KNOWN_ISSUES.md)
     记录当前已知问题、风险和待确认事项。
 
-15. [RELEASE_CHECKLIST.md](RELEASE_CHECKLIST.md)
+17. [RELEASE_CHECKLIST.md](RELEASE_CHECKLIST.md)
     记录发布/打包前检查项。
 
 ## 使用建议
@@ -56,10 +62,12 @@
 - 查“项目怎么跑起来”：看 `02`
 - 查“战斗现在怎么工作”：看 `03`
 - 查“Build 现在怎么写、怎么显示”：看 `04`
+- 查“下一代 Build 数学模型、三槽位发牌、中期转向和敌人压力”：看 `12`
+- 查“首批新卡、队伍等级阶段质变、三张英雄专属和 Boss 三选一奖励”：看 `13`
 - 查“关卡/Boss/难度怎么设计”：看 `05`
 - 查“菜单、继续游戏、BGM、显示设置、存档”：看 `06`
 - 查“资源尺寸、特效替换、判定贴合”：看 `07`
-- 查“下一步做什么”：看 `08` 和根目录 [ROADMAP.md](../ROADMAP.md)
+- 查“当前进度、下一步做什么、哪些模块已可玩”：看 `08` 和根目录 [ROADMAP.md](../ROADMAP.md)
 - 查“代码现在是谁在管什么、数据怎么流”：看 `09`
 - 查“主线和故事档现在到底存了什么”：看 `10`
 - 查“哪里最容易炸、后面怎么拆”：看 `11`

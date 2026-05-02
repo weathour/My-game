@@ -1,6 +1,7 @@
 extends RefCounted
 
 const ENEMY_VISUAL_DATA := preload("res://scripts/enemies/enemy_visual_data.gd")
+const PERFORMANCE_GUARD := preload("res://scripts/game/performance_guard.gd")
 const NON_BOSS_PROJECTILE_SPEED_MULTIPLIER := 0.6
 
 static func fire_shooter_pattern(enemy) -> void:
@@ -48,6 +49,8 @@ static func spawn_projectile(enemy, origin: Vector2, shot_direction: Vector2, sh
 	var current_scene: Node = enemy.get_tree().current_scene
 	if current_scene == null:
 		return
+	if not PERFORMANCE_GUARD.can_spawn_in_group(current_scene, "enemy_projectiles", _get_enemy_projectile_limit(enemy)):
+		return
 	var projectile = enemy.projectile_scene.instantiate()
 	if projectile == null:
 		return
@@ -69,3 +72,9 @@ static func spawn_projectile(enemy, origin: Vector2, shot_direction: Vector2, sh
 
 static func get_projectile_color(enemy) -> Color:
 	return ENEMY_VISUAL_DATA.get_projectile_color(enemy.archetype_id)
+
+static func _get_enemy_projectile_limit(enemy) -> int:
+	var current_scene: Node = enemy.get_tree().current_scene if enemy != null and enemy.get_tree() != null else null
+	if current_scene != null and current_scene.has_method("_get_difficulty_limit"):
+		return int(current_scene._get_difficulty_limit("enemy_projectile_limit", PERFORMANCE_GUARD.DEFAULT_ENEMY_PROJECTILE_LIMIT))
+	return PERFORMANCE_GUARD.DEFAULT_ENEMY_PROJECTILE_LIMIT

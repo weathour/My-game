@@ -132,6 +132,8 @@ var boss_orbit_bomb_shot_timer: float = 0.0
 var boss_peacock_interval: float = 9.0
 var boss_peacock_timer: float = 0.0
 var boss_peacock_charge_remaining: float = 0.0
+var boss_attack_pressure_scale: float = 1.0
+var glutton_absorb_elapsed: float = 0.0
 var boss_helper_root: Node2D
 var boss_laser_lines: Array[Line2D] = []
 var boss_laser_core_lines: Array[Line2D] = []

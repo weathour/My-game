@@ -97,7 +97,9 @@ static func get_save_data(enemy) -> Dictionary:
 		"boss_orbit_bomb_angle": enemy.boss_orbit_bomb_angle,
 		"boss_orbit_bomb_shot_timer": enemy.boss_orbit_bomb_shot_timer,
 		"boss_peacock_timer": enemy.boss_peacock_timer,
-		"boss_peacock_charge_remaining": enemy.boss_peacock_charge_remaining
+		"boss_peacock_charge_remaining": enemy.boss_peacock_charge_remaining,
+		"boss_attack_pressure_scale": enemy.boss_attack_pressure_scale,
+		"glutton_absorb_elapsed": enemy.glutton_absorb_elapsed
 	}
 
 static func apply_save_data(enemy, data: Dictionary, target_node: Node2D) -> void:
@@ -208,6 +210,8 @@ static func apply_save_data(enemy, data: Dictionary, target_node: Node2D) -> voi
 	enemy.boss_orbit_bomb_shot_timer = float(data.get("boss_orbit_bomb_shot_timer", 0.0))
 	enemy.boss_peacock_timer = float(data.get("boss_peacock_timer", enemy.boss_peacock_interval))
 	enemy.boss_peacock_charge_remaining = float(data.get("boss_peacock_charge_remaining", 0.0))
+	enemy.boss_attack_pressure_scale = float(data.get("boss_attack_pressure_scale", enemy.boss_attack_pressure_scale))
+	enemy.glutton_absorb_elapsed = float(data.get("glutton_absorb_elapsed", 0.0))
 
 	enemy.target = target_node
 	enemy.profile_initialized = true

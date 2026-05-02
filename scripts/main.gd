@@ -1,4 +1,4 @@
-﻿extends Node2D
+extends Node2D
 
 const SAVE_MANAGER := preload("res://scripts/save_manager.gd")
 const DEVELOPER_MODE := preload("res://scripts/developer_mode.gd")
@@ -18,6 +18,7 @@ const GAME_HUD_FLOW := preload("res://scripts/game/game_hud_flow.gd")
 const GAME_CHARACTER_PANEL_FLOW := preload("res://scripts/game/game_character_panel_flow.gd")
 const GAME_MAP_FLOW := preload("res://scripts/game/game_map_flow.gd")
 const PICKUP_COMPACTOR := preload("res://scripts/game/pickup_compactor.gd")
+const PERFORMANCE_GUARD := preload("res://scripts/game/performance_guard.gd")
 
 @export var enemy_scene: PackedScene = preload("res://scenes/enemy.tscn")
 @export var enemy_bullet_scene: PackedScene = preload("res://scenes/enemy_bullet.tscn")
@@ -52,6 +53,8 @@ var reward_context: String = ""
 var story_stage: Dictionary = {}
 var story_mode_active: bool = false
 var endless_mode_active: bool = false
+var difficulty_id: String = "normal"
+var difficulty_profile: Dictionary = {}
 var suppress_exit_save: bool = false
 var defeated_boss_count: int = 0
 var exit_snapshot_saved: bool = false
@@ -98,6 +101,20 @@ func _notification(what: int) -> void:
 func _exit_tree() -> void:
 	if not game_over and not suppress_exit_save and not exit_snapshot_saved:
 		_save_run_state()
+	_cleanup_runtime_nodes()
+
+func _cleanup_runtime_nodes() -> void:
+	var game_bgm = _get_game_bgm()
+	if game_bgm != null and game_bgm.has_method("stop"):
+		game_bgm.stop()
+	if game_bgm != null:
+		game_bgm.set("stream", null)
+	var tree := get_tree()
+	if tree != null:
+		for effect in tree.get_nodes_in_group("temporary_effects"):
+			if effect != null and is_instance_valid(effect):
+				if effect is Node and not effect.is_queued_for_deletion():
+					effect.free()
 
 func _unhandled_input(event: InputEvent) -> void:
 	if game_over:
@@ -217,7 +234,7 @@ func _get_spawn_position(angle: float, distance: float) -> Vector2:
 	return ENEMY_SPAWN_FLOW.get_spawn_position(self, angle, distance)
 
 func _get_enemy_profile(kind: String, archetype: String) -> Dictionary:
-	return ENEMY_SPAWN_FLOW.get_enemy_profile(kind, archetype)
+	return ENEMY_SPAWN_FLOW.get_enemy_profile(self, kind, archetype)
 
 func _save_run_state() -> void:
 	GAME_ACHIEVEMENT_BRIDGE.record_survival_time(self)
@@ -226,14 +243,14 @@ func _save_run_state() -> void:
 func _load_saved_run() -> bool:
 	return RUN_SAVE_FLOW.load_saved_run(self)
 
-func _get_spawn_enemy_health_multiplier() -> float:
-	return _get_story_enemy_health_multiplier() * ENEMY_DIRECTOR.get_endless_cycle_health_multiplier(_get_endless_cycle_power_level())
+func _get_spawn_enemy_health_multiplier(kind: String = "normal") -> float:
+	return _get_story_enemy_health_multiplier() * _get_difficulty_enemy_health_multiplier(kind) * ENEMY_DIRECTOR.get_endless_cycle_health_multiplier(_get_endless_cycle_power_level())
 
 func _get_spawn_enemy_speed_multiplier() -> float:
-	return _get_story_enemy_speed_multiplier() * ENEMY_DIRECTOR.get_endless_cycle_speed_multiplier(_get_endless_cycle_power_level())
+	return _get_story_enemy_speed_multiplier() * _get_difficulty_enemy_speed_multiplier() * ENEMY_DIRECTOR.get_endless_cycle_speed_multiplier(_get_endless_cycle_power_level())
 
 func _get_spawn_enemy_damage_multiplier() -> float:
-	return ENEMY_DIRECTOR.get_endless_cycle_damage_multiplier(_get_endless_cycle_power_level())
+	return _get_difficulty_enemy_damage_multiplier() * ENEMY_DIRECTOR.get_endless_cycle_damage_multiplier(_get_endless_cycle_power_level())
 
 func _get_endless_cycle_power_level() -> int:
 	if not endless_mode_active:
@@ -280,6 +297,9 @@ func _on_player_level_up_requested(options: Array) -> void:
 func _on_upgrade_selected(option_id: String, attribute_option_id: String = "") -> void:
 	REWARD_FLOW.handle_upgrade_selected(self, option_id, attribute_option_id)
 
+func _on_upgrade_refresh_requested() -> void:
+	REWARD_FLOW.handle_upgrade_refresh_requested(self)
+
 func _on_player_died() -> void:
 	GAME_ACHIEVEMENT_BRIDGE.record_survival_time(self)
 	GAME_SESSION_FLOW.handle_player_died(self)
@@ -307,6 +327,47 @@ func _get_effective_stage_curve_time() -> float:
 
 func _get_story_spawn_interval_multiplier() -> float:
 	return GAME_STORY_CONTEXT_FLOW.get_story_spawn_interval_multiplier(self)
+
+func _get_difficulty_spawn_interval_multiplier() -> float:
+	return GAME_STORY_CONTEXT_FLOW.get_difficulty_spawn_interval_multiplier(self)
+
+func _get_difficulty_minimum_spawn_interval_multiplier() -> float:
+	return GAME_STORY_CONTEXT_FLOW.get_difficulty_minimum_spawn_interval_multiplier(self)
+
+func _get_difficulty_enemy_health_multiplier(kind: String = "normal") -> float:
+	return GAME_STORY_CONTEXT_FLOW.get_difficulty_enemy_health_multiplier(self, kind)
+
+func _get_difficulty_enemy_speed_multiplier() -> float:
+	return GAME_STORY_CONTEXT_FLOW.get_difficulty_enemy_speed_multiplier(self)
+
+func _get_difficulty_enemy_damage_multiplier() -> float:
+	return GAME_STORY_CONTEXT_FLOW.get_difficulty_enemy_damage_multiplier(self)
+
+func _get_difficulty_limit(key: String, fallback: int) -> int:
+	return GAME_STORY_CONTEXT_FLOW.get_difficulty_limit(self, key, fallback)
+
+func _apply_difficulty_to_wave_profile(wave_profile: Dictionary) -> Dictionary:
+	return GAME_STORY_CONTEXT_FLOW.apply_difficulty_to_wave_profile(self, wave_profile)
+
+func _apply_difficulty_to_enemy_profile(kind: String, enemy_profile: Dictionary) -> Dictionary:
+	return GAME_STORY_CONTEXT_FLOW.apply_difficulty_to_enemy_profile(self, kind, enemy_profile)
+
+func _can_spawn_runtime_group(group_name: String, fallback_limit: int) -> bool:
+	return PERFORMANCE_GUARD.can_spawn_in_group(self, group_name, _get_difficulty_limit(_limit_key_for_group(group_name), fallback_limit))
+
+func _trim_spawn_count_for_group(group_name: String, requested_count: int, fallback_limit: int) -> int:
+	return PERFORMANCE_GUARD.trim_requested_count(self, group_name, requested_count, _get_difficulty_limit(_limit_key_for_group(group_name), fallback_limit))
+
+func _limit_key_for_group(group_name: String) -> String:
+	match group_name:
+		"enemies":
+			return "active_enemy_limit"
+		"enemy_projectiles":
+			return "enemy_projectile_limit"
+		"temporary_effects":
+			return "temporary_effect_limit"
+		_:
+			return ""
 
 func _get_story_enemy_health_multiplier() -> float:
 	return GAME_STORY_CONTEXT_FLOW.get_story_enemy_health_multiplier(self)

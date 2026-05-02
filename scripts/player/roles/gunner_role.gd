@@ -155,8 +155,10 @@ func perform_enter(owner, role_id: String, assault_level: int, _assault_multipli
 		controller.name = "GunnerEntryWaveController"
 		current_scene.add_child(controller)
 		var tween := controller.create_tween()
-		tween.tween_interval(0.08)
-		tween.tween_callback(Callable(owner, "_fire_gunner_entry_wave").bind(role_id, 1))
+		var wave_count := int(owner._get_gunner_entry_wave_count()) if owner.has_method("_get_gunner_entry_wave_count") else 2
+		for wave_index in range(1, wave_count):
+			tween.tween_interval(0.08)
+			tween.tween_callback(Callable(owner, "_fire_gunner_entry_wave").bind(role_id, wave_index))
 		tween.tween_callback(controller.queue_free)
 	owner._activate_switch_power(role_id, "\u5F39\u9053\u8D85\u8F7D", 2.0, 1.22, 0.11)
 	owner._apply_switch_payoff(8 + assault_level * 2, 5.0 + assault_level, 1.0 + assault_level * 0.15)

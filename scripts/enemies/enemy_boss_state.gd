@@ -40,6 +40,9 @@ static func update_boss_trait(enemy, delta: float) -> void:
 	if enemy.boss_phase >= 3:
 		enemy.boss_phase_three_elapsed += delta
 
+	var pressure_scale: float = max(0.6, float(enemy.get("boss_attack_pressure_scale")))
+	var interval_pressure_multiplier: float = 1.0 / sqrt(pressure_scale)
+	var count_pressure_multiplier: float = sqrt(pressure_scale)
 	var radial_interval: float = 0.74
 	var radial_count: int = 16
 	var sine_interval: float = 2.9
@@ -68,6 +71,10 @@ static func update_boss_trait(enemy, delta: float) -> void:
 		sine_interval *= phase_three_interval_multiplier
 	radial_interval *= BOSS_ATTACK_INTERVAL_SCALE
 	sine_interval *= BOSS_ATTACK_INTERVAL_SCALE
+	radial_interval *= interval_pressure_multiplier
+	sine_interval *= interval_pressure_multiplier
+	radial_count = max(8, int(round(float(radial_count) * count_pressure_multiplier)))
+	sine_count = max(8, int(round(float(sine_count) * count_pressure_multiplier)))
 
 	enemy.boss_radial_timer -= delta
 	if enemy.boss_radial_timer <= 0.0:
@@ -82,7 +89,7 @@ static func update_boss_trait(enemy, delta: float) -> void:
 	if enemy.boss_phase >= 2:
 		enemy.boss_split_timer -= delta
 		if enemy.boss_split_timer <= 0.0:
-			var split_interval: float = 5.4 if enemy.boss_phase == 2 else 4.2
+			var split_interval: float = (5.4 if enemy.boss_phase == 2 else 4.2) * interval_pressure_multiplier
 			if enemy.boss_phase == 2:
 				split_interval *= 2.2222223
 			elif enemy.boss_phase >= 3:
@@ -92,7 +99,7 @@ static func update_boss_trait(enemy, delta: float) -> void:
 
 		enemy.boss_laser_timer -= delta
 		if enemy.boss_laser_timer <= 0.0 and enemy.boss_laser_remaining <= 0.0:
-			var laser_interval: float = (8.0 if enemy.boss_phase == 2 else 6.4) + 3.0
+			var laser_interval: float = ((8.0 if enemy.boss_phase == 2 else 6.4) + 3.0) * interval_pressure_multiplier
 			if enemy.boss_phase == 2:
 				laser_interval *= 2.2222223
 			elif enemy.boss_phase >= 3:
@@ -105,12 +112,12 @@ static func update_boss_trait(enemy, delta: float) -> void:
 	if enemy.boss_phase >= 3:
 		enemy.boss_orbit_bomb_timer -= delta
 		if enemy.boss_orbit_bomb_timer <= 0.0 and enemy.boss_orbit_bomb_remaining <= 0.0:
-			enemy.boss_orbit_bomb_timer += 9.8 * BOSS_ATTACK_INTERVAL_SCALE * phase_three_interval_multiplier
+			enemy.boss_orbit_bomb_timer += 9.8 * BOSS_ATTACK_INTERVAL_SCALE * phase_three_interval_multiplier * interval_pressure_multiplier
 			ENEMY_BOSS_ATTACKS.start_orbit_bomb(enemy)
 
 		enemy.boss_peacock_timer -= delta
 		if enemy.boss_peacock_timer <= 0.0 and enemy.boss_peacock_charge_remaining <= 0.0:
-			enemy.boss_peacock_timer += 8.2 * BOSS_ATTACK_INTERVAL_SCALE * phase_three_interval_multiplier
+			enemy.boss_peacock_timer += 8.2 * BOSS_ATTACK_INTERVAL_SCALE * phase_three_interval_multiplier * interval_pressure_multiplier
 			ENEMY_BOSS_ATTACKS.start_peacock_attack(enemy)
 
 	ENEMY_BOSS_ATTACKS.update_orbit_bomb(enemy, delta)

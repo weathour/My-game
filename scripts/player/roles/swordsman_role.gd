@@ -131,13 +131,16 @@ func perform_enter(owner, role_id: String, assault_level: int, assault_multiplie
 	var cluster_center: Vector2 = owner._get_enemy_cluster_center()
 	var target_enemy: Node2D = owner._get_enemy_nearest_to_position(cluster_center) if cluster_center != Vector2.ZERO else owner._get_closest_enemy()
 	var travel_direction: Vector2 = owner.facing_direction if owner.facing_direction.length_squared() > 0.001 else Vector2.RIGHT
-	var dash_distance: float = (160.0 + thrust_level * 14.0 + pursuit_level * 10.0) * assault_multiplier
+	var trait_distance_multiplier := float(owner._get_swordsman_entry_distance_multiplier()) if owner.has_method("_get_swordsman_entry_distance_multiplier") else 1.0
+	var trait_damage_multiplier := float(owner._get_role_entry_damage_multiplier(role_id)) if owner.has_method("_get_role_entry_damage_multiplier") else 1.0
+	var trait_invulnerability_bonus := float(owner._get_swordsman_entry_invulnerability_bonus()) if owner.has_method("_get_swordsman_entry_invulnerability_bonus") else 0.0
+	var dash_distance: float = (160.0 + thrust_level * 14.0 + pursuit_level * 10.0) * assault_multiplier * trait_distance_multiplier
 	if target_enemy != null and is_instance_valid(target_enemy):
 		travel_direction = previous_position.direction_to(target_enemy.global_position)
-		dash_distance = (600.0 + thrust_level * 48.0 + pursuit_level * 28.0) * assault_multiplier
+		dash_distance = (600.0 + thrust_level * 48.0 + pursuit_level * 28.0) * assault_multiplier * trait_distance_multiplier
 	elif cluster_center != Vector2.ZERO:
 		travel_direction = previous_position.direction_to(cluster_center)
-		dash_distance = (600.0 + thrust_level * 48.0 + pursuit_level * 28.0) * assault_multiplier
+		dash_distance = (600.0 + thrust_level * 48.0 + pursuit_level * 28.0) * assault_multiplier * trait_distance_multiplier
 	owner.global_position += travel_direction * dash_distance
 	owner.facing_direction = travel_direction
 	owner._show_switch_banner("\u8FDB\u573A", "\u7A81\u8FDB\u7834\u9635", Color(1.0, 0.84, 0.46, 1.0))
@@ -148,9 +151,9 @@ func perform_enter(owner, role_id: String, assault_level: int, assault_multiplie
 	owner._spawn_sword_omnislash_scene_effect(scar_center, travel_direction, scar_length, scar_width * 1.08)
 	owner._spawn_ring_effect(owner.global_position, 78.0 + crescent_level * 8.0, Color(1.0, 0.86, 0.5, 0.78), 9.0, 0.18)
 	owner._spawn_burst_effect(owner.global_position, 72.0 + crescent_level * 8.0, Color(1.0, 0.78, 0.38, 0.18), 0.16)
-	owner.switch_invulnerability_remaining = max(owner.switch_invulnerability_remaining, 0.5)
-	var line_hits: int = owner._damage_enemies_in_line(previous_position, scar_end, scar_width, owner._get_role_damage(role_id) * (1.52 + pursuit_level * 0.12) * assault_multiplier, 0.1, 1.0, 0.0, role_id)
-	var burst_hits: int = owner._damage_enemies_in_radius(owner.global_position, (78.0 + crescent_level * 8.0) * (1.0 + assault_level * 0.06), owner._get_role_damage(role_id) * (0.72 + crescent_level * 0.08) * assault_multiplier, 0.08, 1.0, 0.0)
+	owner.switch_invulnerability_remaining = max(owner.switch_invulnerability_remaining, 0.5 + trait_invulnerability_bonus)
+	var line_hits: int = owner._damage_enemies_in_line(previous_position, scar_end, scar_width, owner._get_role_damage(role_id) * (1.52 + pursuit_level * 0.12) * assault_multiplier * trait_damage_multiplier, 0.1, 1.0, 0.0, role_id)
+	var burst_hits: int = owner._damage_enemies_in_radius(owner.global_position, (78.0 + crescent_level * 8.0) * (1.0 + assault_level * 0.06), owner._get_role_damage(role_id) * (0.72 + crescent_level * 0.08) * assault_multiplier * trait_damage_multiplier, 0.08, 1.0, 0.0)
 	var entry_hits: int = line_hits + burst_hits
 	owner._activate_switch_power(role_id, "\u7834\u9635\u8FFD\u51FB", 2.2, 1.28, 0.08)
 	owner._apply_switch_payoff(entry_hits, 6.0 + assault_level, 1.4 + assault_level * 0.2)

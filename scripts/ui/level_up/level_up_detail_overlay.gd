@@ -55,7 +55,7 @@ func _build_detail_text(option: Dictionary) -> String:
 	if card_type_label != "":
 		detail_text = "[color=#FFE08A]类型：%s[/color]\n%s" % [card_type_label, detail_text]
 	var role_effect_text := _format_role_effects(option)
-	if role_effect_text != "" and not detail_text.contains("三英雄对应效果 / 数值"):
+	if role_effect_text != "" and not _contains_role_effect_section(detail_text):
 		detail_text = "%s\n\n%s" % [detail_text, role_effect_text]
 	return detail_text
 
@@ -64,7 +64,8 @@ func _format_role_effects(option: Dictionary) -> String:
 	var role_effects: Array = option.get("role_effects", [])
 	if role_effects.is_empty():
 		return ""
-	var lines: Array[String] = ["[color=#A9C8FF]三英雄对应效果 / 数值[/color]"]
+	var section_title := "三英雄对应效果 / 数值" if role_effects.size() == 3 else "队伍英雄对应效果 / 数值"
+	var lines: Array[String] = ["[color=#A9C8FF]%s[/color]" % section_title]
 	for effect in role_effects:
 		if effect is not Dictionary:
 			continue
@@ -72,6 +73,10 @@ func _format_role_effects(option: Dictionary) -> String:
 		for line in effect.get("lines", []):
 			lines.append("  • " + str(line))
 	return "\n".join(lines)
+
+
+func _contains_role_effect_section(text_value: String) -> bool:
+	return text_value.contains("三英雄对应效果 / 数值") or text_value.contains("队伍英雄对应效果 / 数值")
 
 func hide_all() -> void:
 	hide_detail()

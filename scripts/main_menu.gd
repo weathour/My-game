@@ -93,6 +93,13 @@ func _notification(what: int) -> void:
 	if what == NOTIFICATION_RESIZED and background != null:
 		background.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 
+func _exit_tree() -> void:
+	var menu_bgm = get_node_or_null("MenuBGM")
+	if menu_bgm != null and menu_bgm.has_method("stop"):
+		menu_bgm.stop()
+	if menu_bgm != null:
+		menu_bgm.set("stream", null)
+
 func _unhandled_input(event: InputEvent) -> void:
 	if settings_panel != null and settings_panel.has_method("handle_unhandled_input"):
 		settings_panel.handle_unhandled_input(event)

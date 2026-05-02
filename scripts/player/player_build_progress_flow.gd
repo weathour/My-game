@@ -26,7 +26,7 @@ static func record_card_pick(owner, slot_id: String, option_id: String) -> void:
 	var before_theme_ids := BUILD_SYSTEM.get_unlocked_theme_ids(owner.card_pick_levels, owner.special_reward_levels)
 	var stored_card_id := BUILD_SYSTEM.get_shared_card_id(option_id)
 	var active_role_id := str(owner._get_active_role().get("id", ""))
-	var config: Dictionary = BUILD_SYSTEM.get_core_card_config(stored_card_id, active_role_id)
+	var config: Dictionary = BUILD_SYSTEM.get_core_card_config(stored_card_id, active_role_id, owner.roles)
 	var max_level := int(config.get("max_level", 999))
 	owner.card_pick_levels[stored_card_id] = min(max_level, owner._get_card_level(stored_card_id) + 1)
 	record_build_pick(owner, slot_id)

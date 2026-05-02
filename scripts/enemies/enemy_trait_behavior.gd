@@ -3,6 +3,7 @@ extends RefCounted
 const ENEMY_PROJECTILES := preload("res://scripts/enemies/enemy_projectiles.gd")
 const ENEMY_TURRET_BOMBARD := preload("res://scripts/enemies/enemy_turret_bombard.gd")
 const NON_BOSS_RANGED_ATTACK_FREQUENCY_MULTIPLIER := 0.4
+const GLUTTON_ABSORB_INTERVAL := 0.18
 
 static func update_behavior_state(enemy, delta: float) -> void:
 	_tick_trait(enemy, enemy.behavior_id, delta)
@@ -18,7 +19,7 @@ static func _tick_trait(enemy, trait_id: String, delta: float) -> void:
 		"dash":
 			_update_dash_trait(enemy, delta)
 		"glutton":
-			_update_glutton_trait(enemy)
+			_update_glutton_trait(enemy, delta)
 		"rebirth":
 			_update_rebirth_trait(enemy, delta)
 		"turret":
@@ -69,9 +70,13 @@ static func _update_dash_trait(enemy, delta: float) -> void:
 	enemy.dash_windup_remaining = max(enemy.dash_windup_duration, 0.18)
 	enemy._spawn_status_burst(Color(1.0, 0.88, 0.32, 0.24), 28.0 + enemy.scale.x * 6.0)
 
-static func _update_glutton_trait(enemy) -> void:
+static func _update_glutton_trait(enemy, delta: float) -> void:
 	if enemy.glutton_absorb_radius <= 0.0:
 		return
+	enemy.glutton_absorb_elapsed += delta
+	if enemy.glutton_absorb_elapsed < GLUTTON_ABSORB_INTERVAL:
+		return
+	enemy.glutton_absorb_elapsed = 0.0
 	for gem in enemy.get_tree().get_nodes_in_group("exp_gems"):
 		if not is_instance_valid(gem):
 			continue

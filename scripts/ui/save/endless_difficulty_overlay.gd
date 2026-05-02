@@ -5,13 +5,10 @@ signal closed
 
 const SURVIVORS_MODAL := preload("res://scripts/ui/core/survivors_modal.gd")
 const SURVIVORS_SLOT_CARD := preload("res://scripts/ui/components/survivors_slot_card_factory.gd")
+const DIFFICULTY_PROFILE := preload("res://scripts/game/difficulty_profile.gd")
 
 const TEXT_CHOOSE_DIFFICULTY := "\u9009\u62e9\u96be\u5ea6"
 const TEXT_CLOSE := "\u5173\u95ed"
-const TEXT_DIFFICULTY_EASY := "\u7b80\u5355"
-const TEXT_DIFFICULTY_NORMAL := "\u666e\u901a"
-const TEXT_DIFFICULTY_HARD := "\u56f0\u96be"
-const TEXT_DIFFICULTY_HELL := "\u5730\u72f1"
 const TEXT_NOT_OPEN := "\u672a\u5f00\u653e"
 
 var modal: Control
@@ -47,18 +44,22 @@ func _build_overlay() -> void:
 	card_grid.add_theme_constant_override("v_separation", 12)
 	modal.set_body(card_grid)
 
-	card_grid.add_child(_build_difficulty_card(TEXT_DIFFICULTY_EASY, "easy", false))
-	card_grid.add_child(_build_difficulty_card(TEXT_DIFFICULTY_NORMAL, "normal", true))
-	card_grid.add_child(_build_difficulty_card(TEXT_DIFFICULTY_HARD, "hard", false))
-	card_grid.add_child(_build_difficulty_card(TEXT_DIFFICULTY_HELL, "hell", false))
+	for profile in DIFFICULTY_PROFILE.get_ordered_profiles():
+		var difficulty_id := str((profile as Dictionary).get("id", DIFFICULTY_PROFILE.DEFAULT_DIFFICULTY_ID))
+		card_grid.add_child(_build_difficulty_card(
+			str((profile as Dictionary).get("label", difficulty_id)),
+			difficulty_id,
+			bool((profile as Dictionary).get("available", true)),
+			str((profile as Dictionary).get("description", "标准幸存者割草体验。"))
+		))
 
 	modal.clear_footer()
 	modal.add_footer_button(TEXT_CLOSE, Callable(self, "close_overlay"), "normal")
 
-func _build_difficulty_card(title_text: String, difficulty_id: String, available: bool) -> Control:
+func _build_difficulty_card(title_text: String, difficulty_id: String, available: bool, description: String) -> Control:
 	return SURVIVORS_SLOT_CARD.build_card(
 		title_text,
-		"标准幸存者割草体验。" if available else TEXT_NOT_OPEN,
+		description if available else TEXT_NOT_OPEN,
 		"\u9009\u62e9" if available else TEXT_NOT_OPEN,
 		Callable(self, "_emit_difficulty").bind(difficulty_id),
 		132.0,

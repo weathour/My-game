@@ -1,8 +1,11 @@
 extends RefCounted
 
 const BUILD_SYSTEM := preload("res://scripts/build/build_system.gd")
+const PLAYER_FIRST_BATCH_CARD_APPLIER := preload("res://scripts/player/player_first_batch_card_applier.gd")
 
 static func apply_battle_card(owner, option_id: String) -> bool:
+	if PLAYER_FIRST_BATCH_CARD_APPLIER.apply_card(owner, option_id):
+		return true
 	var card_id := BUILD_SYSTEM.get_shared_card_id(option_id)
 	match card_id:
 		"battle_dangzhen_qichao":

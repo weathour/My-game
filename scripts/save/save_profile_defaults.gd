@@ -1,6 +1,7 @@
 extends RefCounted
 
 const STORY_DATA := preload("res://scripts/story_data.gd")
+const DIFFICULTY_PROFILE := preload("res://scripts/game/difficulty_profile.gd")
 
 const MODE_STORY := "story"
 const MODE_ENDLESS := "endless"
@@ -30,10 +31,11 @@ static func ensure_story_profile_defaults(profile: Dictionary, slot_id: int) -> 
 	return normalized
 
 static func build_default_endless_profile(slot_id: int, difficulty: String) -> Dictionary:
+	var normalized_difficulty := DIFFICULTY_PROFILE.normalize_id(difficulty)
 	return {
 		"slot_id": slot_id,
 		"mode": MODE_ENDLESS,
-		"difficulty": difficulty,
+		"difficulty": normalized_difficulty,
 		"created_unix": Time.get_unix_time_from_system(),
 		"last_updated_unix": Time.get_unix_time_from_system()
 	}
@@ -44,7 +46,7 @@ static func ensure_endless_profile_defaults(profile: Dictionary, slot_id: int) -
 		normalized[key] = profile[key]
 	normalized["slot_id"] = slot_id
 	normalized["mode"] = MODE_ENDLESS
-	normalized["difficulty"] = str(normalized.get("difficulty", "normal"))
+	normalized["difficulty"] = DIFFICULTY_PROFILE.normalize_id(str(normalized.get("difficulty", DIFFICULTY_PROFILE.DEFAULT_DIFFICULTY_ID)))
 	normalized["last_updated_unix"] = Time.get_unix_time_from_system()
 	return normalized
 

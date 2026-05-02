@@ -16,7 +16,21 @@ static func show_level_up(main: Node, options: Array) -> void:
 	var attribute_options: Array = []
 	if main.player != null and main.player.has_method("get_attribute_upgrade_options"):
 		attribute_options = main.player.get_attribute_upgrade_options()
-	main.level_up_ui.show_options(options, attribute_options)
+	var offer_context := _get_current_build_offer_context(main)
+	main.level_up_ui.show_options(options, attribute_options, offer_context)
+
+static func handle_upgrade_refresh_requested(main: Node) -> void:
+	if main.game_over or main.reward_context != "level_up":
+		return
+	if main.player == null or main.level_up_ui == null:
+		return
+	if not main.player.has_method("refresh_upgrade_options") or not main.level_up_ui.has_method("show_options"):
+		return
+	var options: Array = main.player.refresh_upgrade_options()
+	var attribute_options: Array = []
+	if main.player.has_method("get_attribute_upgrade_options"):
+		attribute_options = main.player.get_attribute_upgrade_options()
+	main.level_up_ui.show_options(options, attribute_options, _get_current_build_offer_context(main))
 
 static func show_final_core(main: Node) -> void:
 	if main.game_over or main.player == null or main.level_up_ui == null:
@@ -124,11 +138,11 @@ static func show_endless_boss_reward(main: Node) -> void:
 	main.reward_context = "endless_boss_reward"
 	main.get_tree().paused = true
 	var options: Array = []
-	if main.player != null and main.player.has_method("get_final_core_options"):
-		options = main.player.get_final_core_options()
+	if main.player != null and main.player.has_method("get_boss_build_reward_options"):
+		options = main.player.get_boss_build_reward_options()
 	if options.is_empty():
-		options = [_make_final_blank_upgrade_option()]
-	main.level_up_ui.show_menu("Boss 奖励", options)
+		options = BUILD_SYSTEM.get_boss_build_reward_options({}, {}, "")
+	main.level_up_ui.show_menu("Boss Build 奖励（三选一）", options)
 
 static func get_blank_small_boss_reward_options() -> Array:
 	return BUILD_SYSTEM.get_blank_small_boss_reward_options()
@@ -136,6 +150,11 @@ static func get_blank_small_boss_reward_options() -> Array:
 static func _apply_player_upgrade(main: Node, option_id: String) -> void:
 	if main.player != null and main.player.has_method("apply_upgrade"):
 		main.player.apply_upgrade(option_id)
+
+static func _get_current_build_offer_context(main: Node) -> Dictionary:
+	if main.player != null and main.player.has_method("get_current_build_offer_context"):
+		return main.player.get_current_build_offer_context()
+	return {}
 
 static func _make_final_blank_upgrade_option() -> Dictionary:
 	return {

@@ -36,13 +36,26 @@ func _ready() -> void:
 	scroll_area.add_child(content)
 
 func clear() -> void:
+	button_entries = []
+	selected_ids = []
+	columns = 1
 	if content == null:
+		reset_scroll_to_top()
 		return
 	for child in content.get_children():
 		content.remove_child(child)
 		child.queue_free()
-	button_entries = []
-	selected_ids = []
+	reset_scroll_to_top()
+
+func reset_scroll_to_top() -> void:
+	if scroll_area == null:
+		return
+	scroll_area.scroll_vertical = 0
+	call_deferred("_reset_scroll_to_top_deferred")
+
+func _reset_scroll_to_top_deferred() -> void:
+	if scroll_area != null:
+		scroll_area.scroll_vertical = 0
 
 func set_selected_ids(ids: Array) -> void:
 	var next_selected_ids: Array[String] = []
