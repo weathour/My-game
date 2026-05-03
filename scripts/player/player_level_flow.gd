@@ -3,6 +3,7 @@ extends RefCounted
 const BUILD_SYSTEM := preload("res://scripts/build/build_system.gd")
 const FIRST_BATCH_RUNTIME := preload("res://scripts/build/build_first_batch_runtime.gd")
 const DEVELOPER_MODE := preload("res://scripts/developer_mode.gd")
+const PLAYER_BLESSING_SYSTEM := preload("res://scripts/player/player_blessing_system.gd")
 const PLAYER_ATTRIBUTE_FLOW := preload("res://scripts/player/player_attribute_flow.gd")
 const PLAYER_EQUIPMENT_FLOW := preload("res://scripts/player/player_equipment_flow.gd")
 const PLAYER_LEVEL_OPTIONS := preload("res://scripts/player/player_level_options.gd")
@@ -96,7 +97,7 @@ static func try_request_level_up(owner) -> void:
 
 
 static func build_upgrade_options(owner) -> Array:
-	var offer := FIRST_BATCH_RUNTIME.build_offer_for_owner(owner)
+	var offer := PLAYER_BLESSING_SYSTEM.build_offer_for_owner(owner)
 	owner.current_build_offer = offer
 	return offer.get("options", [])
 
@@ -105,7 +106,7 @@ static func refresh_upgrade_options(owner) -> Array:
 	var current_offer: Dictionary = owner.current_build_offer if owner.current_build_offer is Dictionary else {}
 	if current_offer.is_empty():
 		return build_upgrade_options(owner)
-	var offer := FIRST_BATCH_RUNTIME.refresh_offer_for_owner(owner, current_offer)
+	var offer := PLAYER_BLESSING_SYSTEM.refresh_offer_for_owner(owner, current_offer)
 	owner.current_build_offer = offer
 	return offer.get("options", [])
 

@@ -1,5 +1,11 @@
 extends RefCounted
 
+const CLUSTER_CELL_SIZE := 120.0
+const CLUSTER_RADIUS := 120.0
+const CLUSTER_RADIUS_SQUARED := CLUSTER_RADIUS * CLUSTER_RADIUS
+const CLOSE_CLUSTER_RADIUS := 90.0
+const CLOSE_CLUSTER_RADIUS_SQUARED := CLOSE_CLUSTER_RADIUS * CLOSE_CLUSTER_RADIUS
+
 static func get_enemy_nodes(owner) -> Array:
 	return owner.get_tree().get_nodes_in_group("enemies")
 
@@ -38,9 +44,9 @@ static func get_closest_enemy(enemies: Array, origin: Vector2) -> Node2D:
 	for enemy in enemies:
 		if not is_instance_valid(enemy):
 			continue
-		var distance: float = origin.distance_to(enemy.global_position)
-		if distance < closest_distance:
-			closest_distance = distance
+		var distance_squared: float = origin.distance_squared_to(enemy.global_position)
+		if distance_squared < closest_distance:
+			closest_distance = distance_squared
 			closest_enemy = enemy
 	return closest_enemy
 
@@ -50,24 +56,24 @@ static func get_farthest_enemy(enemies: Array, origin: Vector2) -> Node2D:
 	for enemy in enemies:
 		if not is_instance_valid(enemy):
 			continue
-		var distance: float = origin.distance_to(enemy.global_position)
-		if distance > farthest_distance:
-			farthest_distance = distance
+		var distance_squared: float = origin.distance_squared_to(enemy.global_position)
+		if distance_squared > farthest_distance:
+			farthest_distance = distance_squared
 			farthest_enemy = enemy
 	return farthest_enemy
 
 static func get_enemy_targets(enemies: Array, origin: Vector2, count: int, prefer_farthest: bool = false) -> Array:
-	var valid_enemies: Array = []
+	var target_count: int = max(0, count)
+	if target_count <= 0:
+		return []
+	var selected: Array = []
+	var selected_scores: Array[float] = []
 	for enemy in enemies:
-		if is_instance_valid(enemy):
-			valid_enemies.append(enemy)
-
-	if prefer_farthest:
-		valid_enemies.sort_custom(func(a, b): return origin.distance_to(a.global_position) > origin.distance_to(b.global_position))
-	else:
-		valid_enemies.sort_custom(func(a, b): return origin.distance_to(a.global_position) < origin.distance_to(b.global_position))
-
-	return valid_enemies.slice(0, min(count, valid_enemies.size()))
+		if not is_instance_valid(enemy):
+			continue
+		var score: float = origin.distance_squared_to(enemy.global_position)
+		_insert_scored_enemy(selected, selected_scores, enemy, score, target_count, prefer_farthest)
+	return selected
 
 static func get_low_health_enemy(enemies: Array) -> Node2D:
 	var selected_enemy: Node2D
@@ -87,14 +93,16 @@ static func get_enemy_in_aim_cone(enemies: Array, origin: Vector2, facing_direct
 	var selected_enemy: Node2D
 	var best_score: float = -INF
 	var max_dot: float = cos(deg_to_rad(max_angle_degrees))
+	var max_distance_squared: float = max_distance * max_distance
 	for enemy in enemies:
 		if not is_instance_valid(enemy):
 			continue
 		var to_enemy: Vector2 = enemy.global_position - origin
-		var distance: float = to_enemy.length()
-		if distance <= 0.001 or distance > max_distance:
+		var distance_squared: float = to_enemy.length_squared()
+		if distance_squared <= 0.001 or distance_squared > max_distance_squared:
 			continue
-		var direction_dot: float = facing_direction.dot(to_enemy.normalized())
+		var distance: float = sqrt(distance_squared)
+		var direction_dot: float = facing_direction.dot(to_enemy / distance)
 		if direction_dot < max_dot:
 			continue
 		var score: float = direction_dot * 1000.0 - distance
@@ -109,16 +117,12 @@ static func get_enemy_cluster_center(enemies: Array) -> Vector2:
 
 	var best_center := Vector2.ZERO
 	var best_score: int = 0
+	var grid: Dictionary = _build_enemy_position_grid(enemies)
 	for enemy in enemies:
 		if not is_instance_valid(enemy):
 			continue
 		var center: Vector2 = enemy.global_position
-		var score: int = 0
-		for other_enemy in enemies:
-			if not is_instance_valid(other_enemy):
-				continue
-			if center.distance_to(other_enemy.global_position) <= 90.0:
-				score += 1
+		var score: int = _count_nearby_enemies(center, grid, CLOSE_CLUSTER_RADIUS_SQUARED)
 		if score > best_score:
 			best_score = score
 			best_center = center
@@ -129,16 +133,12 @@ static func get_random_enemy_cluster_centers(enemies: Array, fallback_position: 
 		return [fallback_position]
 
 	var scored_centers: Array = []
+	var grid: Dictionary = _build_enemy_position_grid(enemies)
 	for enemy in enemies:
 		if not is_instance_valid(enemy):
 			continue
 		var center: Vector2 = enemy.global_position
-		var score: int = 0
-		for other_enemy in enemies:
-			if not is_instance_valid(other_enemy):
-				continue
-			if center.distance_to(other_enemy.global_position) <= 120.0:
-				score += 1
+		var score: int = _count_nearby_enemies(center, grid, CLUSTER_RADIUS_SQUARED)
 		scored_centers.append({
 			"center": center,
 			"score": score
@@ -153,7 +153,7 @@ static func get_random_enemy_cluster_centers(enemies: Array, fallback_position: 
 		candidate_pool.remove_at(chosen_index)
 		var too_close := false
 		for picked_center in picked_centers:
-			if chosen_center.distance_to(picked_center) < 48.0:
+			if chosen_center.distance_squared_to(picked_center) < 2304.0:
 				too_close = true
 				break
 		if too_close:
@@ -172,21 +172,68 @@ static func get_enemy_nearest_to_position(enemies: Array, position: Vector2) -> 
 	for enemy in enemies:
 		if not is_instance_valid(enemy):
 			continue
-		var distance: float = position.distance_to(enemy.global_position)
-		if distance < best_distance:
-			best_distance = distance
+		var distance_squared: float = position.distance_squared_to(enemy.global_position)
+		if distance_squared < best_distance:
+			best_distance = distance_squared
 			selected_enemy = enemy
 	return selected_enemy
 
 static func get_enemy_near_position(enemies: Array, position: Vector2, max_distance: float) -> Node2D:
 	var selected_enemy: Node2D
-	var best_distance: float = max_distance
+	var best_distance: float = max_distance * max_distance
 	for enemy in enemies:
 		if not is_instance_valid(enemy):
 			continue
-		var distance := position.distance_to(enemy.global_position)
-		if distance > best_distance:
+		var distance_squared := position.distance_squared_to(enemy.global_position)
+		if distance_squared > best_distance:
 			continue
-		best_distance = distance
+		best_distance = distance_squared
 		selected_enemy = enemy
 	return selected_enemy
+
+static func _insert_scored_enemy(selected: Array, selected_scores: Array[float], enemy: Node2D, score: float, target_count: int, prefer_farthest: bool) -> void:
+	var insert_index := selected_scores.size()
+	for index in range(selected_scores.size()):
+		if prefer_farthest:
+			if score > selected_scores[index]:
+				insert_index = index
+				break
+		elif score < selected_scores[index]:
+			insert_index = index
+			break
+	if insert_index >= target_count:
+		return
+	selected.insert(insert_index, enemy)
+	selected_scores.insert(insert_index, score)
+	if selected.size() > target_count:
+		selected.pop_back()
+		selected_scores.pop_back()
+
+static func _build_enemy_position_grid(enemies: Array) -> Dictionary:
+	var grid: Dictionary = {}
+	for enemy in enemies:
+		if not is_instance_valid(enemy):
+			continue
+		var cell: Vector2i = _grid_cell(enemy.global_position)
+		if not grid.has(cell):
+			grid[cell] = []
+		(grid[cell] as Array).append(enemy)
+	return grid
+
+static func _count_nearby_enemies(center: Vector2, grid: Dictionary, radius_squared: float) -> int:
+	var center_cell: Vector2i = _grid_cell(center)
+	var score := 0
+	for x in range(center_cell.x - 1, center_cell.x + 2):
+		for y in range(center_cell.y - 1, center_cell.y + 2):
+			var cell := Vector2i(x, y)
+			if not grid.has(cell):
+				continue
+			for other_enemy in grid[cell] as Array:
+				if not is_instance_valid(other_enemy):
+					continue
+				if center.distance_squared_to((other_enemy as Node2D).global_position) <= radius_squared:
+					score += 1
+	return score
+
+static func _grid_cell(position: Vector2) -> Vector2i:
+	return Vector2i(floori(position.x / CLUSTER_CELL_SIZE), floori(position.y / CLUSTER_CELL_SIZE))

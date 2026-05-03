@@ -1,8 +1,35 @@
 extends RefCounted
 
 const MAGE_ATTACK_EFFECT_SCALE := 0.8
+const BASIC_COMBO_INTERVAL := 0.16
 
 func perform_attack(owner) -> void:
+	var contexts: Array[Dictionary] = _build_attack_contexts(owner)
+	if contexts.is_empty():
+		return
+	_perform_combo_segment(owner, contexts, 1.0)
+	_schedule_reprise_segments(owner, contexts)
+	owner._spawn_attack_aftershock(contexts[0].get("center", owner.global_position), str((contexts[0].get("role_data", {}) as Dictionary).get("id", "mage")))
+
+func _perform_combo_segment(owner, contexts: Array[Dictionary], combo_scale: float) -> void:
+	for index in range(contexts.size()):
+		_cast_attack_context(owner, contexts[index], combo_scale, index == 0)
+
+func _schedule_reprise_segments(owner, contexts: Array[Dictionary]) -> void:
+	var combo_scales := _get_skill_effect_scales(owner, "combo_skill_extra")
+	for index in range(combo_scales.size()):
+		var tree: SceneTree = owner.get_tree()
+		if tree == null:
+			return
+		var timer := tree.create_timer(BASIC_COMBO_INTERVAL * float(index + 1))
+		timer.timeout.connect(Callable(self, "_perform_combo_segment_if_valid").bind(owner, contexts, float(combo_scales[index])))
+
+func _perform_combo_segment_if_valid(owner, contexts: Array[Dictionary], combo_scale: float) -> void:
+	if owner == null or not is_instance_valid(owner) or bool(owner.get("is_dead")):
+		return
+	_perform_combo_segment(owner, contexts, combo_scale)
+
+func _build_attack_contexts(owner) -> Array[Dictionary]:
 	var role_data: Dictionary = owner._get_active_role()
 	var upgrade_data: Dictionary = owner.role_upgrade_levels[role_data["id"]]
 	var special_data: Dictionary = owner._get_role_special_state("mage")
@@ -12,10 +39,32 @@ func perform_attack(owner) -> void:
 	var arcane_focus_level: float = 0.0
 	var overload_level: int = owner._get_card_level("battle_overload")
 	var bombard_center: Vector2 = owner._get_mage_mouse_bombard_center(float(role_data["range"]) + float(upgrade_data.get("range_bonus", 0.0)))
+	var centers: Array[Vector2] = [bombard_center]
+	for target in owner._get_enemy_targets(_get_skill_effect_scales(owner, "quantity_skill_count").size(), false):
+		if target != null and is_instance_valid(target):
+			var target_center: Vector2 = target.global_position
+			if target_center.distance_to(bombard_center) >= 32.0:
+				centers.append(target_center)
+	while centers.size() < 1 + _get_skill_effect_scales(owner, "quantity_skill_count").size():
+		var angle: float = TAU * float(centers.size()) / float(max(2, 1 + _get_skill_effect_scales(owner, "quantity_skill_count").size()))
+		centers.append(bombard_center + Vector2.RIGHT.rotated(angle) * 72.0)
+	var contexts: Array[Dictionary] = []
+	var quantity_scales: Array[float] = [1.0]
+	quantity_scales.append_array(_get_skill_effect_scales(owner, "quantity_skill_count"))
+	for index in range(centers.size()):
+		var center: Vector2 = centers[index]
+		var effect_scale: float = float(quantity_scales[min(index, quantity_scales.size() - 1)])
+		contexts.append(_build_attack_context(owner, role_data, upgrade_data, special_data, center, effect_scale, overload_level, arcane_focus_level))
+	return contexts
+
+func _build_attack_context(owner, role_data: Dictionary, upgrade_data: Dictionary, special_data: Dictionary, bombard_center: Vector2, effect_scale: float, overload_level: int, arcane_focus_level: float) -> Dictionary:
+	var echo_level: int = int(special_data.get("echo_level", 0))
+	var frost_level: int = int(special_data.get("frost_level", 0))
+	var gravity_level: int = int(special_data.get("gravity_level", 0))
 	var target_enemy: Node2D = owner._get_enemy_near_position(bombard_center, 56.0 + float(upgrade_data.get("range_bonus", 0.0)) * 0.25)
 	var radius: float = (44.0 + float(upgrade_data["range_bonus"]) * 0.55 + echo_level * 5.0 + frost_level * 5.0) * owner._get_story_style_range_multiplier(role_data["id"])
 	radius *= owner._get_mage_arcane_focus_range_multiplier(arcane_focus_level)
-	var damage_amount: float = owner._get_role_damage(role_data["id"]) * (0.96 + echo_level * 0.04)
+	var damage_amount: float = owner._get_role_damage(role_data["id"]) * (0.96 + echo_level * 0.04) * max(0.0, effect_scale)
 	if target_enemy != null:
 		damage_amount *= owner._get_priority_target_bonus(target_enemy)
 	if overload_level > 0 and owner.mage_attack_chain == 2:
@@ -25,11 +74,41 @@ func perform_attack(owner) -> void:
 	var vulnerability_bonus: float = 0.03 * frost_level
 	var slow_multiplier: float = max(0.38, max(0.56, 0.76 - frost_level * 0.07) - owner._get_story_style_slow_bonus(role_data["id"]))
 	var slow_duration: float = 1.0 + frost_level * 0.3 + overload_level * 0.15 if overload_level > 0 and owner.mage_attack_chain == 2 else 1.0 + frost_level * 0.3
+	return {
+		"role_data": role_data,
+		"center": bombard_center,
+		"radius": radius,
+		"damage_amount": damage_amount,
+		"vulnerability_bonus": vulnerability_bonus,
+		"slow_multiplier": slow_multiplier,
+		"slow_duration": slow_duration,
+		"gravity_level": gravity_level,
+		"echo_level": echo_level,
+		"frost_level": frost_level,
+		"arcane_focus_level": arcane_focus_level
+	}
+
+func _cast_attack_context(owner, context: Dictionary, scale: float, advance_attack_chain: bool) -> void:
+	var role_data: Dictionary = context.get("role_data", {})
+	var arcane_focus_level: float = float(context.get("arcane_focus_level", 0.0))
+	var bombard_center: Vector2 = context.get("center", owner.global_position)
+	var radius: float = float(context.get("radius", 44.0))
+	var damage_amount: float = float(context.get("damage_amount", 0.0)) * max(0.0, scale)
+	var vulnerability_bonus: float = float(context.get("vulnerability_bonus", 0.0))
+	var slow_multiplier: float = float(context.get("slow_multiplier", 1.0))
+	var slow_duration: float = float(context.get("slow_duration", 0.0))
+	var gravity_level: int = int(context.get("gravity_level", 0))
+	var echo_level: int = int(context.get("echo_level", 0))
+	var frost_level: int = int(context.get("frost_level", 0))
 	if arcane_focus_level > 6:
 		_start_evolved_arcane_bombardment(owner, bombard_center, radius, damage_amount, vulnerability_bonus, slow_multiplier, slow_duration, gravity_level, echo_level, frost_level, role_data["id"], arcane_focus_level > 12)
 	else:
-		owner._start_basic_mage_bombardment(bombard_center, radius, damage_amount, vulnerability_bonus, slow_multiplier, slow_duration, gravity_level, echo_level, frost_level, role_data["id"], true)
-	owner._spawn_attack_aftershock(bombard_center, role_data["id"])
+		owner._start_basic_mage_bombardment(bombard_center, radius, damage_amount, vulnerability_bonus, slow_multiplier, slow_duration, gravity_level, echo_level, frost_level, role_data["id"], true, advance_attack_chain)
+
+func _get_skill_effect_scales(owner, stat: String) -> Array[float]:
+	if owner != null and owner.has_method("_get_skill_blessing_effect_scales"):
+		return owner._get_skill_blessing_effect_scales(stat)
+	return []
 
 func _start_evolved_arcane_bombardment(owner, center: Vector2, radius: float, damage_amount: float, vulnerability_bonus: float, slow_multiplier: float, slow_duration: float, gravity_level: int, echo_level: int, frost_level: int, role_id: String, third_tier: bool = false) -> void:
 	owner._start_basic_mage_bombardment(center, radius, damage_amount, vulnerability_bonus, slow_multiplier, slow_duration, gravity_level, echo_level, frost_level, role_id, true, false)

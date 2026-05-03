@@ -7,9 +7,15 @@ const BULLET_VISIBLE_BOUNDS := Rect2(563.0, 641.0, 120.0, 118.0)
 const BULLET_EFFECT_SCENE_SIZE := Vector2(1024.0, 1024.0)
 const BULLET_EFFECT_VISIBLE_BOUNDS := Rect2(505.0, 476.0, 36.0, 36.0)
 const BULLET_VISUAL_SCALE := 0.67
+const MAX_IMPACT_EFFECTS_PER_PHYSICS_FRAME := 18
+const MAX_SPLIT_BURSTS_PER_PHYSICS_FRAME := 6
 static var shared_bullet_texture: Texture2D
 static var cached_enemy_nodes: Array = []
 static var cached_enemy_nodes_frame: int = -1
+static var impact_effect_budget_frame: int = -1
+static var impact_effect_budget_used: int = 0
+static var split_burst_budget_frame: int = -1
+static var split_burst_budget_used: int = 0
 
 @export var speed: float = 420.0
 @export var speed_multiplier: float = 1.0
@@ -60,6 +66,7 @@ var cached_visual_scale_multiplier: float = -9999.0
 var cached_visual_color: Color = Color(-1.0, -1.0, -1.0, -1.0)
 var cached_animated_scene_size: Vector2 = Vector2(-1.0, -1.0)
 var cached_animated_visible_bounds: Rect2 = Rect2(-1.0, -1.0, -1.0, -1.0)
+var split_triggered: bool = false
 
 func _get_desktop_sketch_path(relative_path: String) -> String:
 	return (OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP).replace("\\", "/") + "/草图/" + relative_path)
@@ -249,9 +256,9 @@ func _get_enemy_hit_radius(enemy: Node2D) -> float:
 func _segment_hits_enemy(enemy: Node2D, start_position: Vector2, end_position: Vector2) -> bool:
 	var total_hit_radius: float = hit_radius * max(0.01, hit_radius_multiplier) + _get_enemy_hit_radius(enemy)
 	if start_position.distance_squared_to(end_position) <= 0.001:
-		return start_position.distance_to(enemy.global_position) <= total_hit_radius
+		return start_position.distance_squared_to(enemy.global_position) <= total_hit_radius * total_hit_radius
 	var closest_point := Geometry2D.get_closest_point_to_segment(enemy.global_position, start_position, end_position)
-	return closest_point.distance_to(enemy.global_position) <= total_hit_radius
+	return closest_point.distance_squared_to(enemy.global_position) <= total_hit_radius * total_hit_radius
 
 func _find_bounce_target(last_enemy: Node2D) -> Node2D:
 	var chosen_enemy: Node2D
@@ -314,7 +321,8 @@ func _apply_hit(enemy: Node2D) -> void:
 		source_player._register_attack_result(source_role_id, 1, killed)
 
 	_spawn_impact_effect(enemy.global_position, killed)
-	if split_count > 0:
+	if split_count > 0 and not split_triggered:
+		split_triggered = true
 		_trigger_split_bursts(enemy.global_position)
 
 	if bounce_count > 0:
@@ -340,12 +348,34 @@ func _trigger_split_bursts(center: Vector2) -> void:
 		_apply_split_burst(center, burst_index)
 
 func _apply_split_burst(center: Vector2, burst_index: int) -> void:
+	if not _consume_split_burst_budget():
+		return
 	var radius: float = split_radius + float(burst_index) * 20.0
 	_spawn_split_visual(center, radius, burst_index)
 	if source_player != null and source_player.has_method("_damage_enemies_in_radius"):
 		var hit_count: int = int(source_player._damage_enemies_in_radius(center, radius, damage, vulnerability_bonus, slow_multiplier, slow_duration, source_role_id))
 		if hit_count > 0 and source_player.has_method("_register_attack_result"):
 			source_player._register_attack_result(source_role_id, hit_count, false)
+
+func _consume_split_burst_budget() -> bool:
+	var current_frame: int = Engine.get_physics_frames()
+	if split_burst_budget_frame != current_frame:
+		split_burst_budget_frame = current_frame
+		split_burst_budget_used = 0
+	if split_burst_budget_used >= MAX_SPLIT_BURSTS_PER_PHYSICS_FRAME:
+		return false
+	split_burst_budget_used += 1
+	return true
+
+func _consume_impact_effect_budget() -> bool:
+	var current_frame: int = Engine.get_physics_frames()
+	if impact_effect_budget_frame != current_frame:
+		impact_effect_budget_frame = current_frame
+		impact_effect_budget_used = 0
+	if impact_effect_budget_used >= MAX_IMPACT_EFFECTS_PER_PHYSICS_FRAME:
+		return false
+	impact_effect_budget_used += 1
+	return true
 
 func _spawn_split_visual(center: Vector2, radius: float, burst_index: int) -> void:
 	var current_scene := get_tree().current_scene
@@ -389,6 +419,8 @@ func _spawn_split_visual(center: Vector2, radius: float, burst_index: int) -> vo
 	tween.tween_callback(ring.queue_free)
 
 func _spawn_impact_effect(position: Vector2, killed: bool) -> void:
+	if not _consume_impact_effect_budget():
+		return
 	var current_scene := get_tree().current_scene
 	if current_scene == null:
 		return

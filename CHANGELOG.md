@@ -37,6 +37,8 @@
 
 ### Changed
 
+- Normal enemy spawning now uses map-bounded telegraphed wave batches instead of one-at-a-time off-map spawns.
+- Added runtime caps and lighter metrics for player projectiles, pickup counts, and projectile impact effects to reduce late-build frame drops.
 - 清理 Godot headless 检查中的退出泄漏报错：BGM 在 headless/退出树时主动停止并释放 stream，玩家场景移除重复 HurtCore 节点。
 
 - 修复升级时 Build 技能三选一可能在刷新/重建列表后消失或被旧滚动位置遮住的问题；Build 三选现在固定优先显示，卡表每次重建都会回到顶部，并加入 UI smoke 回归。

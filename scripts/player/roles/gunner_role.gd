@@ -1,10 +1,20 @@
 extends RefCounted
 
-const ULTIMATE_BULLET_HIT_SCAN_INTERVAL := 0.025
+const ULTIMATE_BULLET_HIT_SCAN_INTERVAL := 0.035
+const BASIC_COMBO_INTERVAL := 0.12
 
 func perform_attack(owner) -> void:
 	if owner.is_gunner_infinite_reload_active():
 		return
+	var base_direction: Vector2 = owner.facing_direction if owner.facing_direction.length_squared() > 0.001 else Vector2.RIGHT
+	_perform_combo_segment(owner, base_direction, 1.0)
+	_schedule_reprise_segments(owner, base_direction)
+
+func _perform_combo_segment(owner, base_direction: Vector2, combo_scale: float) -> void:
+	_perform_attack_variant(owner, base_direction, combo_scale, true, true)
+	_apply_trick_variants(owner, base_direction, combo_scale)
+
+func _perform_attack_variant(owner, shot_direction: Vector2, effect_scale: float = 1.0, advance_chain: bool = true, spawn_aftershock: bool = true) -> void:
 	var role_data: Dictionary = owner._get_active_role()
 	var upgrade_data: Dictionary = owner.role_upgrade_levels[role_data["id"]]
 	var special_data: Dictionary = owner._get_role_special_state("gunner")
@@ -13,14 +23,15 @@ func perform_attack(owner) -> void:
 	var lock_level: int = int(special_data.get("lock_level", 0))
 	var barrage_attribute_level: float = 0.0
 	var overload_level: int = owner._get_card_level("battle_overload")
-	var shot_direction: Vector2 = owner.facing_direction if owner.facing_direction.length_squared() > 0.001 else Vector2.RIGHT
+	shot_direction = shot_direction if shot_direction.length_squared() > 0.001 else Vector2.RIGHT
+	shot_direction = shot_direction.normalized()
 	var effective_range: float = (float(role_data["range"]) + float(upgrade_data.get("range_bonus", 0.0))) * owner._get_story_style_range_multiplier(role_data["id"])
 	var target_enemy: Node2D = owner._get_enemy_in_aim_cone(18.0, effective_range + 80.0)
 	var target_distance: float = owner.global_position.distance_to(target_enemy.global_position) if target_enemy != null else effective_range
-	var main_damage: float = owner._get_role_damage(role_data["id"])
+	var main_damage: float = owner._get_role_damage(role_data["id"]) * max(0.0, effect_scale)
 	if target_enemy != null:
 		main_damage *= owner._get_priority_target_bonus(target_enemy)
-	var overload_ready: bool = overload_level > 0 and owner.gunner_attack_chain == 3
+	var overload_ready: bool = advance_chain and overload_level > 0 and owner.gunner_attack_chain == 3
 	if overload_ready:
 		main_damage *= 1.16 + overload_level * 0.08
 
@@ -41,8 +52,8 @@ func perform_attack(owner) -> void:
 		for shot_index in range(side_shots):
 			var angle_offset: float = angle_step * float(shot_index + 1)
 			for direction_sign in [-1.0, 1.0]:
-				var spread_direction: Vector2 = owner.facing_direction.rotated(angle_offset * direction_sign)
-				var spread_bullet = owner._spawn_directional_bullet(spread_direction, owner._get_role_damage(role_data["id"]) * (0.42 + scatter_level * 0.06), Color(1.0, 0.55, 0.36, 0.92), role_data["id"], owner.global_position + owner.facing_direction * 14.0)
+				var spread_direction: Vector2 = shot_direction.rotated(angle_offset * direction_sign)
+				var spread_bullet = owner._spawn_directional_bullet(spread_direction, owner._get_role_damage(role_data["id"]) * (0.42 + scatter_level * 0.06) * max(0.0, effect_scale), Color(1.0, 0.55, 0.36, 0.92), role_data["id"], owner.global_position + shot_direction * 14.0)
 				if spread_bullet != null:
 					spread_bullet.speed = 510.0 + 18.0 * scatter_level
 					spread_bullet.lifetime = 1.0
@@ -50,7 +61,7 @@ func perform_attack(owner) -> void:
 
 	if scatter_level >= 2 and target_distance >= 220.0:
 		for angle_offset in [-0.2, 0.2]:
-			var lock_bullet = owner._spawn_directional_bullet(owner.facing_direction.rotated(angle_offset), owner._get_role_damage(role_data["id"]) * (0.32 + scatter_level * 0.04), Color(1.0, 0.66, 0.4, 0.94), role_data["id"], owner.global_position + owner.facing_direction * 18.0)
+			var lock_bullet = owner._spawn_directional_bullet(shot_direction.rotated(angle_offset), owner._get_role_damage(role_data["id"]) * (0.32 + scatter_level * 0.04) * max(0.0, effect_scale), Color(1.0, 0.66, 0.4, 0.94), role_data["id"], owner.global_position + shot_direction * 18.0)
 			if lock_bullet != null:
 				lock_bullet.speed = 600.0
 				lock_bullet.lifetime = 1.2
@@ -58,7 +69,7 @@ func perform_attack(owner) -> void:
 
 	if focus_level >= 2 and target_distance >= 170.0:
 		var rail_width: float = 16.0 + focus_level * 2.0
-		var rail_bullet = owner._spawn_directional_bullet(owner.facing_direction, owner._get_role_damage(role_data["id"]) * (0.34 + focus_level * 0.08), Color(1.0, 0.82, 0.44, 0.96), role_data["id"], owner.global_position + owner.facing_direction * 16.0)
+		var rail_bullet = owner._spawn_directional_bullet(shot_direction, owner._get_role_damage(role_data["id"]) * (0.34 + focus_level * 0.08) * max(0.0, effect_scale), Color(1.0, 0.82, 0.44, 0.96), role_data["id"], owner.global_position + shot_direction * 16.0)
 		if rail_bullet != null:
 			rail_bullet.speed = 980.0 + focus_level * 80.0
 			rail_bullet.lifetime = 0.72 + focus_level * 0.04
@@ -67,10 +78,11 @@ func perform_attack(owner) -> void:
 			rail_bullet.vulnerability_bonus = max(rail_bullet.vulnerability_bonus, 0.05 * focus_level)
 			rail_bullet.vulnerability_duration = max(rail_bullet.vulnerability_duration, 1.0)
 
-	owner.gunner_attack_chain = (owner.gunner_attack_chain + 1) % 4
-	if owner.gunner_attack_chain == 0 and focus_level > 0:
+	if advance_chain:
+		owner.gunner_attack_chain = (owner.gunner_attack_chain + 1) % 4
+	if advance_chain and owner.gunner_attack_chain == 0 and focus_level > 0:
 		var tracer_width: float = 18.0 + focus_level * 2.0
-		var tracer_bullet = owner._spawn_directional_bullet(owner.facing_direction, owner._get_role_damage(role_data["id"]) * (0.52 + focus_level * 0.08), Color(1.0, 0.9, 0.5, 0.98), role_data["id"], owner.global_position + owner.facing_direction * 14.0)
+		var tracer_bullet = owner._spawn_directional_bullet(shot_direction, owner._get_role_damage(role_data["id"]) * (0.52 + focus_level * 0.08), Color(1.0, 0.9, 0.5, 0.98), role_data["id"], owner.global_position + shot_direction * 14.0)
 		if tracer_bullet != null:
 			tracer_bullet.speed = 860.0 + focus_level * 65.0
 			tracer_bullet.lifetime = 0.68 + focus_level * 0.05
@@ -87,7 +99,35 @@ func perform_attack(owner) -> void:
 			overdrive_bullet.hit_radius = 14.0
 			overdrive_bullet.pierce_count = 1 + min(1, overload_level)
 
-	owner._spawn_attack_aftershock(owner.global_position + shot_direction * min(220.0 + focus_level * 20.0, effective_range), role_data["id"])
+	if spawn_aftershock:
+		owner._spawn_attack_aftershock(owner.global_position + shot_direction * min(220.0 + focus_level * 20.0, effective_range), role_data["id"])
+
+func _schedule_reprise_segments(owner, base_direction: Vector2) -> void:
+	var combo_scales := _get_skill_effect_scales(owner, "combo_skill_extra")
+	for index in range(combo_scales.size()):
+		var tree: SceneTree = owner.get_tree()
+		if tree == null:
+			return
+		var timer := tree.create_timer(BASIC_COMBO_INTERVAL * float(index + 1))
+		timer.timeout.connect(Callable(self, "_perform_combo_segment_if_valid").bind(owner, base_direction, float(combo_scales[index])))
+
+func _perform_combo_segment_if_valid(owner, base_direction: Vector2, combo_scale: float) -> void:
+	if owner == null or not is_instance_valid(owner) or bool(owner.get("is_dead")):
+		return
+	if owner.has_method("is_gunner_infinite_reload_active") and owner.is_gunner_infinite_reload_active():
+		return
+	_perform_combo_segment(owner, base_direction, combo_scale)
+
+func _apply_trick_variants(owner, base_direction: Vector2, combo_scale: float) -> void:
+	var index := 1
+	for scale in _get_skill_effect_scales(owner, "quantity_skill_count"):
+		_perform_attack_variant(owner, base_direction.rotated(deg_to_rad(30.0 * float(index))), combo_scale * float(scale), false, false)
+		index += 1
+
+func _get_skill_effect_scales(owner, stat: String) -> Array[float]:
+	if owner != null and owner.has_method("_get_skill_blessing_effect_scales"):
+		return owner._get_skill_blessing_effect_scales(stat)
+	return []
 
 func _spawn_barrage_shotgun(owner, shot_direction: Vector2, main_damage: float, bullet_color: Color, role_data: Dictionary, upgrade_data: Dictionary, focus_level: int, barrage_attribute_level: float) -> void:
 	var wave_count: int = owner._get_gunner_barrage_shotgun_wave_count(barrage_attribute_level)
@@ -229,26 +269,28 @@ func _fire_ultimate_wave(owner, wave_count: int, barrage_level: int, focus_level
 		var angle: float = target_direction.angle() + centered_ratio * fan_arc_radians * 0.5 + angle_offset
 		var shot_direction: Vector2 = Vector2.RIGHT.rotated(angle)
 		var muzzle_offset: Vector2 = shot_direction * (12.0 + 4.0 * sin(spin + float(bullet_index) * 0.8))
-		var spray_bullet = owner._spawn_directional_bullet(shot_direction, owner._get_role_damage("gunner") * damage_scale, Color(1.0, 0.72, 0.38, 0.94), "gunner", wave_origin + muzzle_offset)
-		if spray_bullet != null:
-			spray_bullet.speed = 620.0 + focus_level * 54.0 + barrage_level * 18.0
-			spray_bullet.lifetime = 1.08 + barrage_level * 0.06
-			spray_bullet.hit_radius = 10.0 + scatter_level * 0.8
-			spray_bullet.visual_scale_multiplier = 0.68
-			spray_bullet.enemy_hit_radius_scale = 0.2
-			spray_bullet.enemy_hit_radius_min = 4.0
-			spray_bullet.enemy_hit_radius_max = 12.0
-			spray_bullet.pierce_count = normal_pierce_count
-			spray_bullet.min_hit_travel_distance = 22.0
-			spray_bullet.hit_scan_interval = ULTIMATE_BULLET_HIT_SCAN_INTERVAL
-			if spray_bullet.has_method("configure_wave_motion") and abs(centered_ratio) >= 0.34:
-				var wave_phase: float = ratio * PI + spin * 0.45
-				var wave_amplitude: float = max(0.0, abs(centered_ratio) * (10.0 + scatter_level * 4.0))
-				var wave_frequency: float = 6.4 + focus_level * 0.9 + barrage_level * 0.25
-				spray_bullet.configure_wave_motion(wave_amplitude, wave_frequency, wave_phase)
-			if focus_level > 0:
-				spray_bullet.vulnerability_bonus = 0.04 * focus_level
-				spray_bullet.vulnerability_duration = 1.0 + focus_level * 0.2
+		var wave_amplitude: float = 0.0
+		var wave_frequency: float = 0.0
+		var wave_phase: float = 0.0
+		if abs(centered_ratio) >= 0.34:
+			wave_phase = ratio * PI + spin * 0.45
+			wave_amplitude = max(0.0, abs(centered_ratio) * (10.0 + scatter_level * 4.0))
+			wave_frequency = 6.4 + focus_level * 0.9 + barrage_level * 0.25
+		owner._spawn_batched_directional_bullet(shot_direction, owner._get_role_damage("gunner") * damage_scale, Color(1.0, 0.72, 0.38, 0.94), "gunner", wave_origin + muzzle_offset, {
+			"speed": 620.0 + focus_level * 54.0 + barrage_level * 18.0,
+			"lifetime": 1.08 + barrage_level * 0.06,
+			"hit_radius": 10.0 + scatter_level * 0.8,
+			"visual_radius": 3.8,
+			"enemy_hit_radius_scale": 0.2,
+			"enemy_hit_radius_min": 4.0,
+			"enemy_hit_radius_max": 12.0,
+			"vulnerability_bonus": 0.04 * focus_level if focus_level > 0 else 0.0,
+			"vulnerability_duration": 1.0 + focus_level * 0.2 if focus_level > 0 else 0.0,
+			"pierce_count": normal_pierce_count,
+			"wave_amplitude": wave_amplitude,
+			"wave_frequency": wave_frequency,
+			"wave_phase": wave_phase
+		})
 
 	if lock_level > 0 and wave_index % max(2, 4 - lock_level) == 0:
 		for enemy in owner._get_enemy_targets(min(1 + lock_level, 3), false):

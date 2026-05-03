@@ -5,6 +5,7 @@ signal close_requested
 const GAME_SETTINGS := preload("res://scripts/game_settings.gd")
 const BUILD_DATABASE := preload("res://scripts/build/build_database.gd")
 const PLAYER_EQUIPMENT_FLOW := preload("res://scripts/player/player_equipment_flow.gd")
+const PLAYER_BLESSING_SYSTEM := preload("res://scripts/player/player_blessing_system.gd")
 const SURVIVORS_MODAL := preload("res://scripts/ui/core/survivors_modal.gd")
 const SURVIVORS_THEME := preload("res://scripts/ui/theme/survivors_ui_theme.gd")
 
@@ -19,13 +20,18 @@ var role_title_label: Label
 var role_button_row: HBoxContainer
 var stats_label: RichTextLabel
 var equipment_list: VBoxContainer
+var blessing_list: VBoxContainer
 var card_label: RichTextLabel
 var gift_popup: PopupMenu
+var blessing_popup: PopupMenu
 var cached_player: Node
 var viewed_role_index: int = 0
 var pending_gift_equipment_id: String = ""
 var pending_gift_from_role_id: String = ""
 var gift_target_role_ids: Array[String] = []
+var pending_compose_blessing_id: String = ""
+var pending_compose_role_id: String = ""
+var pending_compose_is_skill_bound: bool = false
 
 func _ready() -> void:
 	layer = 4
@@ -34,7 +40,7 @@ func _ready() -> void:
 	var modal := SURVIVORS_MODAL.new()
 	modal.configure(Vector2(1100.0, 640.0), 0.86, 0.88, Vector2(360.0, 280.0))
 	modal.set_title("角色面板")
-	modal.set_hint("查看角色数值、Build 与道具。右键道具可赠与其他角色。")
+	modal.set_hint("查看角色数值、祝福、Build 与道具。右键道具可赠与；右键 I Lv.3 祝福可合成 II Lv.1。")
 	add_child(modal)
 
 	var layout := HBoxContainer.new()
@@ -56,6 +62,14 @@ func _ready() -> void:
 	role_title_label.add_theme_color_override("font_color", SURVIVORS_THEME.COLOR_TEXT_GOLD)
 	left_column.add_child(role_title_label)
 
+	var close_button := Button.new()
+	close_button.text = "关闭 (%s)" % GAME_SETTINGS.get_key_display_name(GAME_SETTINGS.load_keycode(GAME_SETTINGS.ACTION_CHARACTER_PANEL))
+	close_button.custom_minimum_size = Vector2(0.0, 42.0)
+	close_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	SURVIVORS_THEME.apply_button_style(close_button, "primary")
+	close_button.pressed.connect(func() -> void: close_requested.emit())
+	left_column.add_child(close_button)
+
 	role_texture_rect = TextureRect.new()
 	role_texture_rect.custom_minimum_size = Vector2(260.0, 360.0)
 	role_texture_rect.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -68,14 +82,6 @@ func _ready() -> void:
 	role_button_row.alignment = BoxContainer.ALIGNMENT_CENTER
 	role_button_row.add_theme_constant_override("separation", 8)
 	left_column.add_child(role_button_row)
-
-	var close_button := Button.new()
-	close_button.text = "关闭 (%s)" % GAME_SETTINGS.get_key_display_name(GAME_SETTINGS.load_keycode(GAME_SETTINGS.ACTION_CHARACTER_PANEL))
-	close_button.custom_minimum_size = Vector2(0.0, 42.0)
-	close_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	SURVIVORS_THEME.apply_button_style(close_button, "primary")
-	close_button.pressed.connect(func() -> void: close_requested.emit())
-	left_column.add_child(close_button)
 
 	var right_column := VBoxContainer.new()
 	right_column.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -112,6 +118,25 @@ func _ready() -> void:
 	equipment_list.add_theme_constant_override("separation", 6)
 	equipment_scroll.add_child(equipment_list)
 
+	var blessing_title := Label.new()
+	blessing_title.text = "已获祝福（三人共享；右键 I Lv.3 可合成）"
+	blessing_title.add_theme_font_size_override("font_size", 20)
+	blessing_title.add_theme_color_override("font_color", SURVIVORS_THEME.COLOR_TEXT)
+	right_column.add_child(blessing_title)
+
+	var blessing_scroll := ScrollContainer.new()
+	blessing_scroll.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	blessing_scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	blessing_scroll.custom_minimum_size = Vector2(0.0, 116.0)
+	blessing_scroll.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_SHOW_ALWAYS
+	blessing_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	right_column.add_child(blessing_scroll)
+
+	blessing_list = VBoxContainer.new()
+	blessing_list.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	blessing_list.add_theme_constant_override("separation", 6)
+	blessing_scroll.add_child(blessing_list)
+
 	card_label = RichTextLabel.new()
 	card_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	card_label.size_flags_vertical = Control.SIZE_EXPAND_FILL
@@ -127,6 +152,11 @@ func _ready() -> void:
 	gift_popup.index_pressed.connect(_on_gift_popup_index_pressed)
 	add_child(gift_popup)
 
+	blessing_popup = PopupMenu.new()
+	blessing_popup.process_mode = Node.PROCESS_MODE_WHEN_PAUSED
+	blessing_popup.index_pressed.connect(_on_blessing_popup_index_pressed)
+	add_child(blessing_popup)
+
 	hide_panel()
 
 func show_for_player(player: Node) -> void:
@@ -140,6 +170,8 @@ func hide_panel() -> void:
 	visible = false
 	if gift_popup != null:
 		gift_popup.hide()
+	if blessing_popup != null:
+		blessing_popup.hide()
 
 func refresh() -> void:
 	if cached_player == null or not is_instance_valid(cached_player):
@@ -160,6 +192,7 @@ func refresh() -> void:
 	_refresh_role_buttons()
 	stats_label.text = _build_stats_text(role_data)
 	_refresh_equipment_list(role_id)
+	_refresh_blessing_list(role_id)
 	card_label.text = _build_card_text()
 
 func _refresh_role_buttons() -> void:
@@ -248,6 +281,106 @@ func _on_gift_popup_index_pressed(index: int) -> void:
 	var target_role_id: String = gift_target_role_ids[index]
 	if cached_player.has_method("transfer_role_equipment_item"):
 		cached_player.transfer_role_equipment_item(pending_gift_equipment_id, pending_gift_from_role_id, target_role_id)
+	refresh()
+
+func _refresh_blessing_list(role_id: String) -> void:
+	for child in blessing_list.get_children():
+		blessing_list.remove_child(child)
+		child.queue_free()
+	var role_levels: Dictionary = cached_player.get_role_blessing_levels(role_id) if cached_player.has_method("get_role_blessing_levels") else {}
+	var skill_levels: Dictionary = cached_player.get_skill_blessing_levels() if cached_player.has_method("get_skill_blessing_levels") else {}
+	var has_any := false
+	for blessing_id in PLAYER_BLESSING_SYSTEM.DEFINITIONS.keys():
+		var definition: Dictionary = PLAYER_BLESSING_SYSTEM.DEFINITIONS.get(str(blessing_id), {})
+		if str(definition.get("binding", PLAYER_BLESSING_SYSTEM.ROLE_BOUND)) != PLAYER_BLESSING_SYSTEM.ROLE_BOUND:
+			continue
+		if _add_blessing_row(str(blessing_id), definition, role_levels, role_id, false):
+			has_any = true
+	var skill_header_added := false
+	for blessing_id in PLAYER_BLESSING_SYSTEM.DEFINITIONS.keys():
+		var definition: Dictionary = PLAYER_BLESSING_SYSTEM.DEFINITIONS.get(str(blessing_id), {})
+		if str(definition.get("binding", PLAYER_BLESSING_SYSTEM.ROLE_BOUND)) != PLAYER_BLESSING_SYSTEM.SKILL_BOUND:
+			continue
+		if not _has_blessing_levels(skill_levels, str(blessing_id)):
+			continue
+		if not skill_header_added:
+			var header := Label.new()
+			header.text = "技能绑定祝福（暂未绑定具体技能）"
+			header.add_theme_color_override("font_color", SURVIVORS_THEME.COLOR_TEXT_MUTED)
+			blessing_list.add_child(header)
+			skill_header_added = true
+		if _add_blessing_row(str(blessing_id), definition, skill_levels, "", true):
+			has_any = true
+	if not has_any:
+		var empty_label := Label.new()
+		empty_label.text = "暂无祝福"
+		empty_label.custom_minimum_size = Vector2(0.0, 34.0)
+		blessing_list.add_child(empty_label)
+
+func _add_blessing_row(blessing_id: String, definition: Dictionary, levels: Dictionary, role_id: String, skill_bound: bool) -> bool:
+	if not _has_blessing_levels(levels, blessing_id):
+		return false
+	var blessing_levels: Dictionary = levels.get(blessing_id, {})
+	var tier_one_level: int = int(blessing_levels.get(1, 0))
+	var tier_two_level: int = int(blessing_levels.get(2, 0))
+	var can_compose := false
+	if cached_player != null:
+		if skill_bound and cached_player.has_method("can_compose_skill_blessing"):
+			can_compose = bool(cached_player.can_compose_skill_blessing(blessing_id))
+		elif not skill_bound and cached_player.has_method("can_compose_role_blessing"):
+			can_compose = bool(cached_player.can_compose_role_blessing(role_id, blessing_id))
+	var button := Button.new()
+	button.text = "%s    I Lv.%d / 3    II Lv.%d / 3%s" % [
+		str(definition.get("title", blessing_id)),
+		tier_one_level,
+		tier_two_level,
+		"    可合成" if can_compose else ""
+	]
+	button.tooltip_text = "%s\nI Lv.3 可手动合成 II Lv.1；升级发牌里的 II 级从 Lv.7 后按概率独立出现。" % str(definition.get("description", ""))
+	button.alignment = HORIZONTAL_ALIGNMENT_LEFT
+	button.custom_minimum_size = Vector2(0.0, 34.0)
+	button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	SURVIVORS_THEME.apply_card_button_style(button)
+	button.disabled = not can_compose
+	button.gui_input.connect(_on_blessing_gui_input.bind(blessing_id, role_id, skill_bound))
+	blessing_list.add_child(button)
+	return true
+
+func _has_blessing_levels(levels: Dictionary, blessing_id: String) -> bool:
+	var blessing_levels: Dictionary = levels.get(blessing_id, {})
+	return int(blessing_levels.get(1, 0)) > 0 or int(blessing_levels.get(2, 0)) > 0
+
+func _on_blessing_gui_input(event: InputEvent, blessing_id: String, role_id: String, skill_bound: bool) -> void:
+	if event is InputEventMouseButton:
+		var mouse_event := event as InputEventMouseButton
+		if mouse_event.pressed and mouse_event.button_index == MOUSE_BUTTON_RIGHT:
+			_show_blessing_compose_popup(blessing_id, role_id, skill_bound)
+
+func _show_blessing_compose_popup(blessing_id: String, role_id: String, skill_bound: bool) -> void:
+	pending_compose_blessing_id = blessing_id
+	pending_compose_role_id = role_id
+	pending_compose_is_skill_bound = skill_bound
+	blessing_popup.clear()
+	var can_compose := false
+	if cached_player != null:
+		if skill_bound and cached_player.has_method("can_compose_skill_blessing"):
+			can_compose = bool(cached_player.can_compose_skill_blessing(blessing_id))
+		elif not skill_bound and cached_player.has_method("can_compose_role_blessing"):
+			can_compose = bool(cached_player.can_compose_role_blessing(role_id, blessing_id))
+	blessing_popup.add_item("合成 II Lv.1")
+	blessing_popup.set_item_disabled(0, not can_compose)
+	blessing_popup.position = Vector2i(get_viewport().get_mouse_position())
+	blessing_popup.popup()
+
+func _on_blessing_popup_index_pressed(index: int) -> void:
+	if cached_player == null or not is_instance_valid(cached_player) or index != 0:
+		return
+	if pending_compose_is_skill_bound:
+		if cached_player.has_method("compose_skill_blessing"):
+			cached_player.compose_skill_blessing(pending_compose_blessing_id)
+	else:
+		if cached_player.has_method("compose_role_blessing"):
+			cached_player.compose_role_blessing(pending_compose_role_id, pending_compose_blessing_id)
 	refresh()
 
 func _build_stats_text(role_data: Dictionary) -> String:

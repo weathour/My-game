@@ -4,6 +4,7 @@ const PLAYER_REWARD_APPLIER := preload("res://scripts/player/player_reward_appli
 const PLAYER_EQUIPMENT_FLOW := preload("res://scripts/player/player_equipment_flow.gd")
 const PLAYER_ELITE_UPGRADE_APPLIER := preload("res://scripts/player/player_elite_upgrade_applier.gd")
 const PLAYER_FINAL_UPGRADE_APPLIER := preload("res://scripts/player/player_final_upgrade_applier.gd")
+const PLAYER_BLESSING_SYSTEM := preload("res://scripts/player/player_blessing_system.gd")
 
 const MOVE_SPEED_STEP := 12.0
 const DAMAGE_STEP := 2.5
@@ -18,6 +19,14 @@ const SWITCH_COOLDOWN_STEP := 0.4
 static func apply_upgrade(owner, option_id: String) -> void:
 	if PLAYER_REWARD_APPLIER.is_noop_upgrade(option_id):
 		owner.level_up_active = false
+		return
+	if PLAYER_BLESSING_SYSTEM.apply_option(owner, option_id):
+		owner.level_up_active = false
+		owner._update_fire_timer()
+		owner.health_changed.emit(owner.current_health, owner.max_health)
+		owner.stats_changed.emit(owner.get_stat_summary())
+		owner._emit_active_mana_changed()
+		owner._try_request_level_up()
 		return
 	if PLAYER_EQUIPMENT_FLOW.apply_equipment_reward(owner, option_id):
 		owner.level_up_active = false

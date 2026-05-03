@@ -2,12 +2,20 @@ extends RefCounted
 
 const HIT_FLASH_DURATION := 0.18
 const HIT_FLASH_DIM_ALPHA := 0.26
+const DAMAGE_NUMBER_BUDGET_PER_FRAME := 28
+const DEATH_BURST_BUDGET_PER_FRAME := 20
+
+static var damage_number_budget_frame: int = -1
+static var damage_number_budget_used: int = 0
+static var death_burst_budget_frame: int = -1
+static var death_burst_budget_used: int = 0
 
 static func play_hit_feedback(enemy, damage_amount: float, killed: bool) -> void:
 	enemy.hit_flash_remaining = HIT_FLASH_DURATION
 
-	show_damage_number(enemy, damage_amount, killed)
-	if killed:
+	if killed or _consume_damage_number_budget():
+		show_damage_number(enemy, damage_amount, killed)
+	if killed and _consume_death_burst_budget():
 		spawn_death_burst(enemy)
 
 static func get_hit_flash_alpha(hit_flash_remaining: float) -> float:
@@ -31,6 +39,7 @@ static func show_damage_number(enemy, damage_amount: float, killed: bool) -> voi
 		return
 
 	var label := Label.new()
+	label.add_to_group("temporary_effects")
 	label.text = str(int(round(damage_amount)))
 	var label_color: Color = Color(1.0, 1.0, 1.0, 0.95)
 	var label_font_size: int = 15
@@ -49,12 +58,33 @@ static func show_damage_number(enemy, damage_amount: float, killed: bool) -> voi
 	tween.parallel().tween_property(label, "modulate:a", 0.0, 0.38)
 	tween.tween_callback(label.queue_free)
 
+static func _consume_damage_number_budget() -> bool:
+	var current_frame := Engine.get_physics_frames()
+	if damage_number_budget_frame != current_frame:
+		damage_number_budget_frame = current_frame
+		damage_number_budget_used = 0
+	if damage_number_budget_used >= DAMAGE_NUMBER_BUDGET_PER_FRAME:
+		return false
+	damage_number_budget_used += 1
+	return true
+
+static func _consume_death_burst_budget() -> bool:
+	var current_frame := Engine.get_physics_frames()
+	if death_burst_budget_frame != current_frame:
+		death_burst_budget_frame = current_frame
+		death_burst_budget_used = 0
+	if death_burst_budget_used >= DEATH_BURST_BUDGET_PER_FRAME:
+		return false
+	death_burst_budget_used += 1
+	return true
+
 static func spawn_death_burst(enemy) -> void:
 	var current_scene = enemy.get_tree().current_scene
 	if current_scene == null:
 		return
 
 	var burst := Polygon2D.new()
+	burst.add_to_group("temporary_effects")
 	burst.global_position = enemy.global_position
 	burst.z_index = 14
 	burst.color = Color(1.0, 0.88, 0.65, 0.75)

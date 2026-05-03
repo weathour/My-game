@@ -6,6 +6,10 @@ const DEFAULT_SMALL_BOSS_SPAWN_TIMES := [180.0, 360.0, 540.0]
 const DEFAULT_BOSS_SPAWN_TIME := 720.0
 const DEFAULT_STARTING_SPAWN_INTERVAL := 1.02
 const DEFAULT_MINIMUM_SPAWN_INTERVAL := 0.28
+const WAVE_BATCH_INTERVAL_MULTIPLIER := 2.6
+const WAVE_BATCH_MIN_INTERVAL := 1.05
+const WAVE_BATCH_MAX_INTERVAL := 2.2
+const WAVE_BATCH_MAX_PACKS := 5
 const ENDLESS_CYCLE_HEALTH_GROWTH := 0.35
 const ENDLESS_CYCLE_DAMAGE_GROWTH := 0.18
 const ENDLESS_CYCLE_SPEED_GROWTH := 0.04
@@ -179,6 +183,27 @@ static func get_spawn_interval(starting_interval: float, minimum_interval: float
 	var stage_ratio: float = clamp(survival_time / max(curve_time, 0.01), 0.0, 1.0)
 	var base_interval: float = lerpf(starting_interval, minimum_interval, stage_ratio)
 	return max(minimum_interval, base_interval * float(wave_profile.get("interval_scale", 1.0)) * story_interval_multiplier)
+
+static func get_wave_batch_interval(pack_interval: float) -> float:
+	return clamp(pack_interval * WAVE_BATCH_INTERVAL_MULTIPLIER, WAVE_BATCH_MIN_INTERVAL, WAVE_BATCH_MAX_INTERVAL)
+
+static func pick_spawn_wave_plan(wave_profile: Dictionary, rng: RandomNumberGenerator, pack_interval: float, batch_interval: float, max_count: int) -> Array:
+	var plan: Array = []
+	if max_count <= 0:
+		return plan
+	var pack_count: int = clamp(int(round(batch_interval / max(0.05, pack_interval))), 2, WAVE_BATCH_MAX_PACKS)
+	var remaining_count: int = max_count
+	for _index in range(pack_count):
+		if remaining_count <= 0:
+			break
+		var pack: Dictionary = pick_spawn_pack(wave_profile, rng)
+		var count: int = min(remaining_count, max(1, int(pack.get("count", 1))))
+		plan.append({
+			"archetype": str(pack.get("archetype", "chaser")),
+			"count": count
+		})
+		remaining_count -= count
+	return plan
 
 static func collect_stage_events(
 	survival_time: float,

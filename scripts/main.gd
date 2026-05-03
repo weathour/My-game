@@ -364,6 +364,8 @@ func _limit_key_for_group(group_name: String) -> String:
 			return "active_enemy_limit"
 		"enemy_projectiles":
 			return "enemy_projectile_limit"
+		"player_projectiles":
+			return "player_projectile_limit"
 		"temporary_effects":
 			return "temporary_effect_limit"
 		_:

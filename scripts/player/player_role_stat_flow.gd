@@ -57,6 +57,8 @@ static func get_effective_background_interval_multiplier(owner) -> float:
 static func get_current_move_speed(owner) -> float:
 	var role_id: String = str(owner._get_active_role()["id"])
 	var move_speed: float = owner.speed * float(owner._get_active_role()["speed_scale"])
+	if owner.has_method("_get_role_blessing_stat_bonus"):
+		move_speed += float(owner._get_role_blessing_stat_bonus(role_id, "move_speed"))
 	move_speed *= owner._get_role_attribute_move_speed_multiplier(role_id)
 	move_speed += owner._get_role_attribute_flat_move_speed_bonus(role_id)
 	if owner.entry_blessing_remaining > 0.0 and owner.entry_blessing_role_id == role_id:
@@ -78,6 +80,8 @@ static func get_role_damage(owner, role_id: String) -> float:
 		var upgrade_data: Dictionary = owner.role_upgrade_levels[role_id]
 		var base_global_multiplier: float = owner.global_damage_multiplier - owner.equipment_damage_multiplier_bonus
 		var role_equipment_bonus: float = owner._get_role_equipment_damage_multiplier_bonus(role_id)
+		if owner.has_method("_get_role_blessing_stat_bonus"):
+			role_equipment_bonus += float(owner._get_role_blessing_stat_bonus(role_id, "damage"))
 		var primary_attribute_bonus: float = 0.0
 		if owner.has_method("_get_primary_attribute_damage_bonus"):
 			primary_attribute_bonus = float(owner._get_primary_attribute_damage_bonus(role_id))

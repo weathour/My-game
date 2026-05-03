@@ -1,10 +1,23 @@
 extends RefCounted
 
+const BASIC_COMBO_INTERVAL := 0.14
+
 func perform_attack(owner) -> void:
+	var base_direction: Vector2 = owner._get_attack_aim_direction(owner.facing_direction)
+	_perform_combo_segment(owner, base_direction, 1.0)
+	_schedule_reprise_segments(owner, base_direction)
+
+func _perform_combo_segment(owner, base_direction: Vector2, combo_scale: float) -> void:
+	_perform_attack_variant(owner, base_direction, combo_scale, true, true)
+	_apply_trick_variants(owner, base_direction, combo_scale)
+
+func _perform_attack_variant(owner, attack_direction: Vector2, effect_scale: float = 1.0, advance_chain: bool = true, spawn_aftershock: bool = true) -> int:
 	var role_data: Dictionary = owner._get_active_role()
 	var upgrade_data: Dictionary = owner.role_upgrade_levels[role_data["id"]]
 	var special_data: Dictionary = owner._get_role_special_state("swordsman")
-	var attack_direction: Vector2 = owner._get_attack_aim_direction(owner.facing_direction)
+	if attack_direction.length_squared() <= 0.001:
+		attack_direction = owner.facing_direction if owner.facing_direction.length_squared() > 0.001 else Vector2.RIGHT
+	attack_direction = attack_direction.normalized()
 	var heart_level: float = 0.0
 	var normal_attack_scale: float = owner._get_swordsman_normal_attack_scale(heart_level)
 	var normal_attack_width_scale: float = owner._get_swordsman_normal_attack_width_scale(heart_level)
@@ -14,7 +27,7 @@ func perform_attack(owner) -> void:
 	var stance_level: int = int(special_data.get("stance_level", 0))
 	var overload_level: int = owner._get_card_level("battle_overload")
 	var attack_range: float = (float(role_data["range"]) + float(upgrade_data.get("range_bonus", 0.0)) + crescent_level * 6.0 + thrust_level * 4.0) * owner._get_story_style_range_multiplier(role_data["id"])
-	var attack_damage: float = owner._get_role_damage(role_data["id"]) * 1.5
+	var attack_damage: float = owner._get_role_damage(role_data["id"]) * 1.5 * max(0.0, effect_scale)
 	var slash_axis: Vector2 = owner._get_downward_perpendicular(attack_direction)
 	var slash_mirror: bool = attack_direction.x > 0.0
 	var slash_length: float = (56.0 + float(upgrade_data.get("range_bonus", 0.0)) * 0.19 + crescent_level * 4.0 + thrust_level * 2.0) * owner._get_story_style_range_multiplier(role_data["id"])
@@ -70,8 +83,11 @@ func perform_attack(owner) -> void:
 		owner._heal(1.2 + blood_level * 0.8)
 		owner._spawn_burst_effect(owner.global_position, 34.0 + blood_level * 4.0, Color(1.0, 0.3, 0.28, 0.18), 0.12)
 
-	owner.swordsman_attack_chain = (owner.swordsman_attack_chain + 1) % 3
-	if owner.swordsman_attack_chain == 0 and (crescent_level > 0 or thrust_level > 0 or stance_level > 0):
+	var chain_for_bonus: int = owner.swordsman_attack_chain
+	if advance_chain:
+		owner.swordsman_attack_chain = (owner.swordsman_attack_chain + 1) % 3
+		chain_for_bonus = owner.swordsman_attack_chain
+	if advance_chain and chain_for_bonus == 0 and (crescent_level > 0 or thrust_level > 0 or stance_level > 0):
 		var core_center: Vector2 = owner.global_position + attack_direction * 26.0
 		owner._spawn_cross_slash_effect(core_center, attack_direction, 88.0, 17.0, Color(1.0, 0.94, 0.62, 0.82), 0.14)
 		var chain_hits: int = owner._damage_enemies_in_radius(core_center, 44.0 + crescent_level * 5.0, attack_damage * (0.48 + thrust_level * 0.05), 0.04 + thrust_level * 0.02, 1.0, 0.0)
@@ -90,10 +106,38 @@ func perform_attack(owner) -> void:
 				if guard_hits > 0:
 					owner._spawn_burst_effect(owner.global_position + owner.facing_direction * 12.0, 30.0 + stance_level * 7.0, Color(1.0, 0.84, 0.42, 0.18), 0.12)
 
-	owner._spawn_attack_aftershock(owner.global_position + owner.facing_direction * max(26.0, attack_range * 0.55), role_data["id"])
+	if spawn_aftershock:
+		owner._spawn_attack_aftershock(owner.global_position + attack_direction * max(26.0, attack_range * 0.55), role_data["id"])
 
 	if enemies_hit > 0:
 		owner._register_attack_result(role_data["id"], enemies_hit, any_kill)
+	return enemies_hit
+
+func _schedule_reprise_segments(owner, base_direction: Vector2) -> void:
+	var combo_scales := _get_skill_effect_scales(owner, "combo_skill_extra")
+	for index in range(combo_scales.size()):
+		var tree: SceneTree = owner.get_tree()
+		if tree == null:
+			return
+		var timer := tree.create_timer(BASIC_COMBO_INTERVAL * float(index + 1))
+		timer.timeout.connect(Callable(self, "_perform_combo_segment_if_valid").bind(owner, base_direction, float(combo_scales[index])))
+
+func _perform_combo_segment_if_valid(owner, base_direction: Vector2, combo_scale: float) -> void:
+	if owner == null or not is_instance_valid(owner) or bool(owner.get("is_dead")):
+		return
+	_perform_combo_segment(owner, base_direction, combo_scale)
+
+func _apply_trick_variants(owner, base_direction: Vector2, combo_scale: float) -> void:
+	var index := 1
+	for scale in _get_skill_effect_scales(owner, "quantity_skill_count"):
+		var direction := base_direction.rotated(deg_to_rad(30.0 * float(index)))
+		_perform_attack_variant(owner, direction, combo_scale * float(scale), false, false)
+		index += 1
+
+func _get_skill_effect_scales(owner, stat: String) -> Array[float]:
+	if owner != null and owner.has_method("_get_skill_blessing_effect_scales"):
+		return owner._get_skill_blessing_effect_scales(stat)
+	return []
 
 func perform_background(owner) -> void:
 	var target_enemy: Node2D = owner._get_low_health_enemy()

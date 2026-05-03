@@ -184,10 +184,10 @@ func _check_level_up_hover_contract() -> void:
 			section_titles.append(str((child as Label).text))
 	if section_titles.has("战斗") or section_titles.has("连携") or section_titles.has("大招"):
 		failures.append("normal level-up Build choices should be a unified three-pick section, got %s" % str(section_titles))
-	if not section_titles.has("Build 技能三选一"):
-		failures.append("normal level-up Build choices should expose unified section title, got %s" % str(section_titles))
-	elif section_titles[0] != "Build 技能三选一":
-		failures.append("Build three-pick section should render first to avoid being hidden below traits, got %s" % str(section_titles))
+	if not section_titles.has("祝福三选一"):
+		failures.append("normal level-up blessing choices should expose unified section title, got %s" % str(section_titles))
+	elif section_titles[0] != "祝福三选一":
+		failures.append("blessing three-pick section should render first to avoid being hidden below traits, got %s" % str(section_titles))
 	var expected_build_ids: Array[String] = ["battle_omni_pierce", "ui_link_resonance", "ui_pivot_support"]
 	var rendered_build_ids := {}
 	for entry in ui.card_list.button_entries:

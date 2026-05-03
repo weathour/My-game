@@ -2,6 +2,7 @@ extends RefCounted
 
 const PLAYER_LEVEL_CURVE := preload("res://scripts/player/player_level_curve.gd")
 const PLAYER_FIRST_BATCH_MILESTONE_FLOW := preload("res://scripts/player/player_first_batch_milestone_flow.gd")
+const PLAYER_BLESSING_SYSTEM := preload("res://scripts/player/player_blessing_system.gd")
 
 static func ready(owner) -> void:
 	owner.motion_mode = CharacterBody2D.MOTION_MODE_FLOATING
@@ -12,6 +13,9 @@ static func ready(owner) -> void:
 	owner.role_upgrade_levels = owner._build_role_upgrade_data()
 	owner.background_cooldowns = owner._build_background_cooldowns()
 	owner.build_slot_levels = owner._build_slot_progress_data()
+	owner.role_blessing_levels = PLAYER_BLESSING_SYSTEM.build_empty_role_state(owner.roles)
+	PLAYER_BLESSING_SYSTEM.sync_shared_role_blessings(owner)
+	owner.skill_blessing_levels = PLAYER_BLESSING_SYSTEM.build_empty_skill_state()
 	owner.first_batch_milestone_state = PLAYER_FIRST_BATCH_MILESTONE_FLOW.build_milestone_state_data()
 	owner.equipment_levels = {}
 	owner.role_equipment_levels = {}

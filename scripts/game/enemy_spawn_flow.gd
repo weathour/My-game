@@ -3,6 +3,12 @@ extends RefCounted
 const ENEMY_DIRECTOR := preload("res://scripts/enemy/enemy_director.gd")
 const ENEMY_ARCHETYPE_DATABASE := preload("res://scripts/enemy/enemy_archetype_database.gd")
 const PERFORMANCE_GUARD := preload("res://scripts/game/performance_guard.gd")
+const SPAWN_WARNING_VIEW := preload("res://scripts/game/enemy_spawn_warning_view.gd")
+
+const MAP_SPAWN_MARGIN := 36.0
+const MAP_SPAWN_EDGE_EPSILON := 0.5
+const SPAWN_POSITION_RETRY_COUNT := 18
+const SPAWN_WARNING_RADIUS := 26.0
 
 static func setup_spawn_timer(main: Node) -> void:
 	main.spawn_timer = Timer.new()
@@ -34,7 +40,7 @@ static func update_spawn_curve(main: Node) -> void:
 		wave_profile,
 		main._get_story_spawn_interval_multiplier() * main._get_difficulty_spawn_interval_multiplier()
 	)
-	main.spawn_timer.wait_time = target_interval
+	main.spawn_timer.wait_time = ENEMY_DIRECTOR.get_wave_batch_interval(target_interval)
 	if main.spawn_timer.is_stopped() and not main.game_over:
 		main.spawn_timer.start()
 
@@ -81,21 +87,25 @@ static func spawn_enemy(main: Node) -> void:
 	var speed_multiplier: float = main._get_spawn_enemy_speed_multiplier()
 	var damage_multiplier: float = main._get_spawn_enemy_damage_multiplier()
 	var wave_profile := get_wave_profile(main)
-	var spawn_pack: Dictionary = ENEMY_DIRECTOR.pick_spawn_pack(wave_profile, main.rng)
-	var requested_count := int(spawn_pack.get("count", 1))
-	var count := requested_count
-	if main.has_method("_trim_spawn_count_for_group"):
-		count = int(main._trim_spawn_count_for_group("enemies", requested_count, PERFORMANCE_GUARD.DEFAULT_ACTIVE_ENEMY_LIMIT))
-	if count <= 0:
+	var pack_interval: float = _get_current_pack_interval(main, wave_profile)
+	var batch_interval: float = ENEMY_DIRECTOR.get_wave_batch_interval(pack_interval)
+	var capacity: int = PERFORMANCE_GUARD.get_remaining_capacity(main, "enemies", PERFORMANCE_GUARD.DEFAULT_ACTIVE_ENEMY_LIMIT)
+	var spawn_plan: Array = ENEMY_DIRECTOR.pick_spawn_wave_plan(wave_profile, main.rng, pack_interval, batch_interval, capacity)
+	if spawn_plan.is_empty():
 		return
-	spawn_wave_pack(
-		main,
-		"normal",
-		str(spawn_pack.get("archetype", "chaser")),
-		count,
-		health_multiplier,
-		speed_multiplier,
-		damage_multiplier
+	spawn_telegraphed_wave_plan(main, spawn_plan, health_multiplier, speed_multiplier, damage_multiplier)
+
+static func _get_current_pack_interval(main: Node, wave_profile: Dictionary) -> float:
+	var minimum_spawn_interval := ENEMY_DIRECTOR.get_default_minimum_spawn_interval()
+	if main.has_method("_get_difficulty_minimum_spawn_interval_multiplier"):
+		minimum_spawn_interval *= max(0.2, float(main._get_difficulty_minimum_spawn_interval_multiplier()))
+	return ENEMY_DIRECTOR.get_spawn_interval(
+		ENEMY_DIRECTOR.get_default_starting_spawn_interval(),
+		minimum_spawn_interval,
+		main.survival_time,
+		main._get_effective_stage_curve_time(),
+		wave_profile,
+		main._get_story_spawn_interval_multiplier() * main._get_difficulty_spawn_interval_multiplier()
 	)
 
 static func spawn_special_enemy(main: Node, kind: String) -> Node2D:
@@ -119,7 +129,35 @@ static func spawn_wave_pack(main: Node, kind: String, archetype: String, count: 
 			damage_multiplier
 		)
 
+static func spawn_telegraphed_wave_plan(main: Node, spawn_plan: Array, health_multiplier: float, speed_multiplier: float, damage_multiplier: float = 1.0) -> void:
+	for pack in spawn_plan:
+		if pack is not Dictionary:
+			continue
+		var archetype: String = str((pack as Dictionary).get("archetype", "chaser"))
+		var count: int = int((pack as Dictionary).get("count", 1))
+		var spawn_layout: Array = ENEMY_DIRECTOR.pick_wave_spawn_layout(count, main.rng)
+		for spawn_entry in spawn_layout:
+			var angle: float = float(spawn_entry.get("angle", 0.0))
+			var distance: float = ENEMY_DIRECTOR.get_spawn_distance("normal", main.spawn_distance, float(spawn_entry.get("distance_offset", 0.0)))
+			var spawn_position: Vector2 = get_spawn_position(main, angle, distance)
+			_show_enemy_spawn_warning(
+				main,
+				archetype,
+				health_multiplier,
+				speed_multiplier,
+				damage_multiplier,
+				spawn_position
+			)
+
 static func spawn_configured_enemy(main: Node, kind: String, archetype: String, health_multiplier: float, speed_multiplier: float, spawn_angle: float = INF, distance_offset: float = 0.0, damage_multiplier: float = 1.0) -> Node2D:
+	var angle: float = spawn_angle if is_finite(spawn_angle) else main.rng.randf_range(0.0, TAU)
+	var distance: float = ENEMY_DIRECTOR.get_spawn_distance(kind, main.spawn_distance, distance_offset)
+	return _spawn_configured_enemy_at_position(main, kind, archetype, health_multiplier, speed_multiplier, get_spawn_position(main, angle, distance), damage_multiplier)
+
+static func spawn_configured_enemy_at(main: Node, kind: String, archetype: String, health_multiplier: float, speed_multiplier: float, spawn_position: Vector2, damage_multiplier: float = 1.0) -> Node2D:
+	return _spawn_configured_enemy_at_position(main, kind, archetype, health_multiplier, speed_multiplier, spawn_position, damage_multiplier)
+
+static func _spawn_configured_enemy_at_position(main: Node, kind: String, archetype: String, health_multiplier: float, speed_multiplier: float, spawn_position: Vector2, damage_multiplier: float = 1.0) -> Node2D:
 	if kind == "normal" and main.has_method("_can_spawn_runtime_group") and not bool(main._can_spawn_runtime_group("enemies", PERFORMANCE_GUARD.DEFAULT_ACTIVE_ENEMY_LIMIT)):
 		return null
 	var enemy = main.enemy_scene.instantiate()
@@ -139,9 +177,7 @@ static func spawn_configured_enemy(main: Node, kind: String, archetype: String, 
 	if enemy.has_signal("defeated"):
 		enemy.defeated.connect(main._on_enemy_defeated.bind(enemy))
 
-	var angle: float = spawn_angle if is_finite(spawn_angle) else main.rng.randf_range(0.0, TAU)
-	var distance: float = ENEMY_DIRECTOR.get_spawn_distance(kind, main.spawn_distance, distance_offset)
-	enemy.global_position = get_spawn_position(main, angle, distance)
+	enemy.global_position = _clamp_position_to_spawn_bounds(main, spawn_position)
 	main.add_child(enemy)
 	return enemy
 
@@ -175,7 +211,17 @@ static func get_expected_growth_score(main: Node) -> float:
 	return ENEMY_DIRECTOR.get_expected_growth_score(main.survival_time, ENEMY_DIRECTOR.get_default_boss_spawn_time())
 
 static func get_spawn_position(main: Node, angle: float, distance: float) -> Vector2:
-	return main.player.global_position + Vector2.RIGHT.rotated(angle) * max(180.0, distance)
+	var target_distance: float = max(180.0, distance)
+	var base_angle: float = angle
+	for index in range(SPAWN_POSITION_RETRY_COUNT):
+		var offset_angle: float = 0.0
+		if index > 0:
+			var side := -1.0 if index % 2 == 0 else 1.0
+			offset_angle = side * float(index + 1) * 0.18
+		var candidate: Vector2 = main.player.global_position + Vector2.RIGHT.rotated(base_angle + offset_angle) * target_distance
+		if _is_position_inside_spawn_bounds(main, candidate):
+			return candidate
+	return _clamp_position_to_spawn_bounds(main, main.player.global_position + Vector2.RIGHT.rotated(base_angle) * target_distance)
 
 static func get_enemy_profile(main: Node, kind: String, archetype: String) -> Dictionary:
 	var profile := ENEMY_ARCHETYPE_DATABASE.get_profile(kind, archetype)
@@ -187,3 +233,36 @@ static func has_active_special_enemy(main: Node, kind: String) -> bool:
 	if main.boss_enemy == null or not is_instance_valid(main.boss_enemy):
 		return false
 	return str(main.boss_enemy.get("enemy_kind")) == kind
+
+static func _show_enemy_spawn_warning(main: Node, archetype: String, health_multiplier: float, speed_multiplier: float, damage_multiplier: float, spawn_position: Vector2) -> void:
+	var warning := SPAWN_WARNING_VIEW.new()
+	warning.global_position = spawn_position
+	main.add_child(warning)
+	warning.finished.connect(func() -> void:
+		_spawn_after_warning(main, archetype, health_multiplier, speed_multiplier, damage_multiplier, spawn_position)
+	, CONNECT_ONE_SHOT)
+	warning.configure(SPAWN_WARNING_RADIUS)
+
+static func _spawn_after_warning(main: Node, archetype: String, health_multiplier: float, speed_multiplier: float, damage_multiplier: float, spawn_position: Vector2) -> void:
+	if main == null or not is_instance_valid(main) or bool(main.get("game_over")):
+		return
+	if main.get("player") == null:
+		return
+	spawn_configured_enemy_at(main, "normal", archetype, health_multiplier, speed_multiplier, spawn_position, damage_multiplier)
+
+static func _get_spawn_bounds(main: Node) -> Rect2:
+	if main != null and main.get("map_bounds") != null:
+		var bounds = main.get("map_bounds")
+		if bounds is Rect2:
+			return (bounds as Rect2).grow(-MAP_SPAWN_MARGIN)
+	return Rect2(Vector2(-1600.0, -900.0), Vector2(3200.0, 1800.0)).grow(-MAP_SPAWN_MARGIN)
+
+static func _is_position_inside_spawn_bounds(main: Node, position: Vector2) -> bool:
+	return _get_spawn_bounds(main).has_point(position)
+
+static func _clamp_position_to_spawn_bounds(main: Node, position: Vector2) -> Vector2:
+	var bounds := _get_spawn_bounds(main)
+	return Vector2(
+		clamp(position.x, bounds.position.x, bounds.position.x + bounds.size.x - MAP_SPAWN_EDGE_EPSILON),
+		clamp(position.y, bounds.position.y, bounds.position.y + bounds.size.y - MAP_SPAWN_EDGE_EPSILON)
+	)

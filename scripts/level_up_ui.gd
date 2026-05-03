@@ -10,7 +10,7 @@ const SURVIVORS_HOVER_DETAIL := preload("res://scripts/ui/components/survivors_h
 
 const BUILD_SLOT_ORDER := ["body", "combat", "skill"]
 const SMALL_BOSS_SLOT_ORDER := ["equipment", "card"]
-const BUILD_UNIFIED_SECTION_TITLE := "Build 技能三选一"
+const BUILD_UNIFIED_SECTION_TITLE := "祝福三选一"
 const DEFAULT_SLOT_LABELS := {
 	"body": "战斗",
 	"combat": "连携",
@@ -259,7 +259,7 @@ func _select_attribute_option(option: Dictionary) -> void:
 
 func _select_build_option(option: Dictionary) -> void:
 	pending_build_option_id = str(option.get("id", ""))
-	pending_build_title = str(option.get("title", "Build"))
+	pending_build_title = str(option.get("title", "祝福"))
 	_update_selection_hint()
 	_refresh_selected_cards()
 	_try_emit_combined_selection()
@@ -288,7 +288,7 @@ func _update_selection_hint() -> void:
 	if current_mode != "build":
 		return
 	var attribute_text := pending_attribute_title if pending_attribute_title != "" else "未选英雄特性"
-	var build_text := pending_build_title if pending_build_title != "" else "未选 Build"
+	var build_text := pending_build_title if pending_build_title != "" else "未选祝福"
 	selection_label.text = "当前：%s | %s" % [attribute_text, build_text]
 
 func _update_small_boss_reward_hint() -> void:

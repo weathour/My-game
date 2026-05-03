@@ -15,6 +15,7 @@ const PLAYER_BUILD_STATE := preload("res://scripts/player/player_build_state.gd"
 const PLAYER_UPGRADE_OPTIONS := preload("res://scripts/player/player_upgrade_options.gd")
 const PLAYER_LEVEL_OPTIONS := preload("res://scripts/player/player_level_options.gd")
 const PLAYER_LEVEL_FLOW := preload("res://scripts/player/player_level_flow.gd")
+const PLAYER_BLESSING_SYSTEM := preload("res://scripts/player/player_blessing_system.gd")
 const PLAYER_CARD_APPLIER := preload("res://scripts/player/player_card_applier.gd")
 const PLAYER_UPGRADE_APPLIER := preload("res://scripts/player/player_upgrade_applier.gd")
 const PLAYER_SLOT_RESONANCE_FLOW := preload("res://scripts/player/player_slot_resonance_flow.gd")
@@ -234,6 +235,8 @@ var role_upgrade_levels: Dictionary = {}
 var background_cooldowns: Dictionary = {}
 var build_slot_levels: Dictionary = {}
 var card_pick_levels: Dictionary = {}
+var role_blessing_levels: Dictionary = {}
+var skill_blessing_levels: Dictionary = {}
 var current_build_offer: Dictionary = {}
 var first_batch_milestone_state: Dictionary = {}
 var elite_relics_unlocked: Dictionary = {}
@@ -785,10 +788,10 @@ func _get_role_equipment_damage_multiplier_bonus(role_id: String) -> float:
 	return PLAYER_EQUIPMENT_FLOW.get_role_damage_multiplier_bonus(self, role_id)
 
 func _get_role_equipment_energy_gain_bonus(role_id: String) -> float:
-	return PLAYER_EQUIPMENT_FLOW.get_role_energy_gain_bonus(self, role_id)
+	return PLAYER_EQUIPMENT_FLOW.get_role_energy_gain_bonus(self, role_id) + _get_role_blessing_stat_bonus(role_id, "energy_gain")
 
 func _get_role_equipment_skill_range_multiplier(role_id: String) -> float:
-	return float(PLAYER_EQUIPMENT_FLOW.get_role_bonus_summary(self, role_id).get("skill_range_multiplier", 1.0))
+	return float(PLAYER_EQUIPMENT_FLOW.get_role_bonus_summary(self, role_id).get("skill_range_multiplier", 1.0)) + _get_role_blessing_stat_bonus(role_id, "skill_range")
 
 func _get_role_equipment_levels(role_id: String) -> Dictionary:
 	return PLAYER_EQUIPMENT_FLOW.get_role_equipment_levels(self, role_id)
@@ -852,6 +855,35 @@ func _emit_active_mana_changed() -> void:
 
 func _get_card_level(card_id: String) -> int:
 	return PLAYER_BUILD_STATE.get_card_level(card_pick_levels, card_id)
+
+func _get_role_blessing_stat_bonus(role_id: String, stat: String) -> float:
+	return PLAYER_BLESSING_SYSTEM.get_role_stat_bonus(self, role_id, stat)
+
+func _get_skill_blessing_stat_bonus(stat: String) -> float:
+	return PLAYER_BLESSING_SYSTEM.get_skill_stat_bonus(self, stat)
+
+func _get_skill_blessing_effect_scales(stat: String) -> Array[float]:
+	return PLAYER_BLESSING_SYSTEM.get_skill_effect_scales(self, stat)
+
+func get_role_blessing_levels(role_id: String) -> Dictionary:
+	PLAYER_BLESSING_SYSTEM.sync_shared_role_blessings(self)
+	return (role_blessing_levels.get(role_id, {}) as Dictionary).duplicate(true)
+
+func get_skill_blessing_levels() -> Dictionary:
+	skill_blessing_levels = PLAYER_BLESSING_SYSTEM.normalize_skill_state(skill_blessing_levels)
+	return skill_blessing_levels.duplicate(true)
+
+func can_compose_role_blessing(role_id: String, blessing_id: String) -> bool:
+	return PLAYER_BLESSING_SYSTEM.can_compose_role_blessing(self, role_id, blessing_id)
+
+func can_compose_skill_blessing(blessing_id: String) -> bool:
+	return PLAYER_BLESSING_SYSTEM.can_compose_skill_blessing(self, blessing_id)
+
+func compose_role_blessing(role_id: String, blessing_id: String) -> bool:
+	return PLAYER_BLESSING_SYSTEM.compose_role_blessing(self, role_id, blessing_id)
+
+func compose_skill_blessing(blessing_id: String) -> bool:
+	return PLAYER_BLESSING_SYSTEM.compose_skill_blessing(self, blessing_id)
 
 func _get_build_final_set_data(set_key: String) -> Dictionary:
 	return BUILD_SYSTEM.get_final_set_data(set_key)
@@ -1416,6 +1448,9 @@ func _spawn_directional_bullet(direction: Vector2, damage_amount: float, color: 
 func _spawn_directional_bullet_from_scene(projectile_scene: PackedScene, direction: Vector2, damage_amount: float, color: Color, role_id: String = "", origin: Variant = null):
 	return PLAYER_PROJECTILE_SPAWNER.spawn_directional_bullet_from_scene(self, projectile_scene, direction, damage_amount, color, role_id, origin)
 
+func _spawn_batched_directional_bullet(direction: Vector2, damage_amount: float, color: Color, role_id: String = "", origin: Variant = null, config: Dictionary = {}) -> bool:
+	return PLAYER_PROJECTILE_SPAWNER.spawn_batched_directional_bullet(self, direction, damage_amount, color, role_id, origin, config)
+
 func _get_enemy_meta_int(enemy: Node, key: String) -> int:
 	return PLAYER_DAMAGE_HELPERS.get_enemy_meta_int(enemy, key)
 
@@ -1486,23 +1521,7 @@ func _deal_damage_to_enemy(enemy: Node, damage_amount: float, source_role_id: St
 	return killed
 
 func _damage_enemies_in_radius(center: Vector2, radius: float, damage_amount: float, vulnerability_bonus: float, slow_multiplier: float, slow_duration: float, source_role_id: String = "") -> int:
-	var hit_count: int = 0
-	var resolved_role_id := source_role_id
-	if resolved_role_id == "":
-		resolved_role_id = str(_get_active_role().get("id", ""))
-	for enemy in get_tree().get_nodes_in_group("enemies"):
-		if not is_instance_valid(enemy):
-			continue
-		if center.distance_to(enemy.global_position) > radius + _get_enemy_hit_radius(enemy):
-			continue
-
-		var killed: bool = false
-		killed = _deal_damage_to_enemy(enemy, damage_amount, resolved_role_id, vulnerability_bonus, 2.5, slow_multiplier, slow_duration)
-		hit_count += 1
-		if killed:
-			_register_attack_result(resolved_role_id, 1, true)
-
-	return hit_count
+	return PLAYER_DAMAGE_RESOLVER.damage_enemies_in_radius(self, center, radius, damage_amount, vulnerability_bonus, slow_multiplier, slow_duration, source_role_id)
 
 func _pull_enemies_toward(center: Vector2, radius: float, pull_strength: float) -> void:
 	for enemy in get_tree().get_nodes_in_group("enemies"):
@@ -1518,120 +1537,19 @@ func _pull_enemies_toward(center: Vector2, radius: float, pull_strength: float) 
 		enemy.global_position = enemy.global_position.move_toward(center, max(4.0, pull_step * (0.55 + pull_ratio * 0.7)))
 
 func _damage_enemies_in_line(start_position: Vector2, end_position: Vector2, width: float, damage_amount: float, vulnerability_bonus: float, slow_multiplier: float, slow_duration: float, source_role_id: String = "") -> int:
-	var hit_count: int = 0
-	for enemy in get_tree().get_nodes_in_group("enemies"):
-		if not is_instance_valid(enemy):
-			continue
-		var closest_point: Vector2 = Geometry2D.get_closest_point_to_segment(enemy.global_position, start_position, end_position)
-		if closest_point.distance_to(enemy.global_position) > width + _get_enemy_hit_radius(enemy):
-			continue
-
-		var killed: bool = false
-		killed = _deal_damage_to_enemy(enemy, damage_amount, source_role_id if source_role_id != "" else str(_get_active_role().get("id", "")), vulnerability_bonus, 2.0, slow_multiplier, slow_duration, start_position)
-		hit_count += 1
-		if killed:
-			_register_attack_result(source_role_id if source_role_id != "" else _get_active_role()["id"], 1, true)
-
-	return hit_count
+	return PLAYER_DAMAGE_RESOLVER.damage_enemies_in_line(self, start_position, end_position, width, damage_amount, vulnerability_bonus, slow_multiplier, slow_duration, source_role_id)
 
 func _damage_enemies_in_oriented_rect(center: Vector2, axis_direction: Vector2, rect_length: float, rect_width: float, damage_amount: float, vulnerability_bonus: float, slow_multiplier: float, slow_duration: float, source_role_id: String = "") -> int:
-	var hit_count: int = 0
-	var long_axis: Vector2 = axis_direction.normalized()
-	if long_axis.length_squared() <= 0.001:
-		long_axis = Vector2.DOWN
-	var short_axis: Vector2 = Vector2(-long_axis.y, long_axis.x)
-	var half_length: float = rect_length * 0.5
-	var half_width: float = rect_width * 0.5
-	for enemy in get_tree().get_nodes_in_group("enemies"):
-		if not is_instance_valid(enemy):
-			continue
-		var enemy_position: Vector2 = enemy.global_position
-		var to_enemy: Vector2 = enemy_position - center
-		var enemy_radius: float = _get_enemy_hit_radius(enemy)
-		var local_long: float = abs(to_enemy.dot(long_axis))
-		var local_short: float = abs(to_enemy.dot(short_axis))
-		if local_long > half_length + enemy_radius:
-			continue
-		if local_short > half_width + enemy_radius:
-			continue
-
-		var killed: bool = _deal_damage_to_enemy(enemy, damage_amount, source_role_id if source_role_id != "" else str(_get_active_role().get("id", "")), vulnerability_bonus, 2.0, slow_multiplier, slow_duration)
-		hit_count += 1
-		if killed:
-			_register_attack_result(source_role_id if source_role_id != "" else _get_active_role()["id"], 1, true)
-
-	return hit_count
+	return PLAYER_DAMAGE_RESOLVER.damage_enemies_in_oriented_rect(self, center, axis_direction, rect_length, rect_width, damage_amount, vulnerability_bonus, slow_multiplier, slow_duration, source_role_id)
 
 func _damage_enemies_in_oriented_rect_unique(center: Vector2, axis_direction: Vector2, rect_length: float, rect_width: float, damage_amount: float, vulnerability_bonus: float, slow_multiplier: float, slow_duration: float, hit_registry: Dictionary, source_role_id: String = "") -> int:
-	var hit_count: int = 0
-	var long_axis: Vector2 = axis_direction.normalized()
-	if long_axis.length_squared() <= 0.001:
-		long_axis = Vector2.DOWN
-	var short_axis: Vector2 = Vector2(-long_axis.y, long_axis.x)
-	var half_length: float = rect_length * 0.5
-	var half_width: float = rect_width * 0.5
-	for enemy in get_tree().get_nodes_in_group("enemies"):
-		if not is_instance_valid(enemy):
-			continue
-		var enemy_id: int = enemy.get_instance_id()
-		if hit_registry.has(enemy_id):
-			continue
-		var enemy_position: Vector2 = enemy.global_position
-		var to_enemy: Vector2 = enemy_position - center
-		var enemy_radius: float = _get_enemy_hit_radius(enemy)
-		var local_long: float = abs(to_enemy.dot(long_axis))
-		var local_short: float = abs(to_enemy.dot(short_axis))
-		if local_long > half_length + enemy_radius:
-			continue
-		if local_short > half_width + enemy_radius:
-			continue
-
-		hit_registry[enemy_id] = true
-		var killed: bool = _deal_damage_to_enemy(enemy, damage_amount, source_role_id if source_role_id != "" else str(_get_active_role().get("id", "")), vulnerability_bonus, 2.0, slow_multiplier, slow_duration)
-		hit_count += 1
-		if killed:
-			_register_attack_result(source_role_id if source_role_id != "" else _get_active_role()["id"], 1, true)
-
-	return hit_count
+	return PLAYER_DAMAGE_RESOLVER.damage_enemies_in_oriented_rect_unique(self, center, axis_direction, rect_length, rect_width, damage_amount, vulnerability_bonus, slow_multiplier, slow_duration, hit_registry, source_role_id)
 
 func _damage_enemies_in_ellipse(center: Vector2, horizontal_radius: float, vertical_radius: float, damage_amount: float, vulnerability_bonus: float, slow_multiplier: float, slow_duration: float, source_role_id: String = "") -> int:
-	var hit_count: int = 0
-	var safe_horizontal_radius: float = max(1.0, horizontal_radius)
-	var safe_vertical_radius: float = max(1.0, vertical_radius)
-	for enemy in get_tree().get_nodes_in_group("enemies"):
-		if not is_instance_valid(enemy):
-			continue
-		var enemy_position: Vector2 = enemy.global_position
-		var enemy_radius: float = _get_enemy_hit_radius(enemy)
-		var normalized_x: float = (enemy_position.x - center.x) / (safe_horizontal_radius + enemy_radius)
-		var normalized_y: float = (enemy_position.y - center.y) / (safe_vertical_radius + enemy_radius)
-		if normalized_x * normalized_x + normalized_y * normalized_y > 1.0:
-			continue
-
-		var killed: bool = _deal_damage_to_enemy(enemy, damage_amount, source_role_id if source_role_id != "" else str(_get_active_role().get("id", "")), vulnerability_bonus, 2.0, slow_multiplier, slow_duration)
-		hit_count += 1
-		if killed:
-			_register_attack_result(source_role_id if source_role_id != "" else _get_active_role()["id"], 1, true)
-
-	return hit_count
+	return PLAYER_DAMAGE_RESOLVER.damage_enemies_in_ellipse(self, center, horizontal_radius, vertical_radius, damage_amount, vulnerability_bonus, slow_multiplier, slow_duration, source_role_id)
 
 func _schedule_swordsman_slash_followthrough(center: Vector2, axis_direction: Vector2, rect_length: float, rect_width: float, damage_amount: float, vulnerability_bonus: float, slow_multiplier: float, slow_duration: float, animation_duration: float, source_role_id: String, hit_registry: Dictionary) -> void:
-	var current_scene := get_tree().current_scene
-	if current_scene == null or SWORD_SLASH_DAMAGE_FOLLOW_PULSES <= 0:
-		return
-
-	var controller := Node2D.new()
-	controller.name = "SwordsmanSlashFollowthroughController"
-	current_scene.add_child(controller)
-
-	var tween := controller.create_tween()
-	var pulse_interval: float = max(0.03, animation_duration / float(SWORD_SLASH_DAMAGE_FOLLOW_PULSES + 1))
-	for pulse_index in range(SWORD_SLASH_DAMAGE_FOLLOW_PULSES):
-		tween.tween_interval(pulse_interval)
-		tween.tween_callback(func() -> void:
-			_damage_enemies_in_oriented_rect_unique(center, axis_direction, rect_length, rect_width, damage_amount, vulnerability_bonus, slow_multiplier, slow_duration, hit_registry, source_role_id)
-		)
-	tween.tween_callback(controller.queue_free)
+	PLAYER_DAMAGE_RESOLVER.schedule_swordsman_slash_followthrough(self, center, axis_direction, rect_length, rect_width, damage_amount, vulnerability_bonus, slow_multiplier, slow_duration, animation_duration, source_role_id, hit_registry)
 
 func _apply_gunner_lock(target_enemy: Node2D, lock_level: int) -> void:
 	if target_enemy == null or not is_instance_valid(target_enemy):
@@ -1664,6 +1582,7 @@ func _apply_gunner_lock(target_enemy: Node2D, lock_level: int) -> void:
 
 func _update_active_role_state() -> void:
 	PLAYER_EQUIPMENT_FLOW.recalculate_active_equipment_stats(self, false)
+	PLAYER_BLESSING_SYSTEM.apply_active_role_runtime_bonuses(self)
 	PLAYER_VISUAL_STATE.update_active_role_state(self)
 
 func _setup_hurt_core_visual() -> void:

@@ -13,6 +13,7 @@ const MAGE_GUARDIAN_PUPPET_ABILITY := preload("res://scripts/abilities/mage_guar
 const DANGZHEN_GUNNER_BEAM_ABILITY := preload("res://scripts/abilities/dangzhen_gunner_beam_ability.gd")
 const GUNNER_INFINITE_RELOAD_ABILITY := preload("res://scripts/abilities/gunner_infinite_reload_ability.gd")
 const GUNNER_SPOTTER_DRONE_ABILITY := preload("res://scripts/abilities/gunner_spotter_drone_ability.gd")
+const PLAYER_BLESSING_SYSTEM := preload("res://scripts/player/player_blessing_system.gd")
 
 static func get_save_data(player) -> Dictionary:
 	var pending_upgrade_count: int = player.pending_level_ups
@@ -130,6 +131,8 @@ static func get_save_data(player) -> Dictionary:
 		"special_reward_levels": player.special_reward_levels.duplicate(true),
 		"elite_relics_unlocked": player.elite_relics_unlocked.duplicate(true),
 		"attribute_training_levels": player.attribute_training_levels.duplicate(true),
+		"role_blessing_levels": player.role_blessing_levels.duplicate(true),
+		"skill_blessing_levels": player.skill_blessing_levels.duplicate(true),
 		"slot_resonances_unlocked": player.slot_resonances_unlocked.duplicate(true),
 		"role_special_states": player.role_special_states.duplicate(true),
 		"roles": player._serialize_roles_for_save(),
@@ -216,6 +219,9 @@ static func apply_save_data(player, data: Dictionary) -> void:
 	PLAYER_FIRST_BATCH_MILESTONE_FLOW.check_level_milestones(player)
 	player.theme_blood_reflux_cooldown = max(0.0, float(data.get("theme_blood_reflux_cooldown", 0.0)))
 	player.roles = player._normalize_loaded_roles(data.get("roles", player.roles))
+	player.role_blessing_levels = PLAYER_BLESSING_SYSTEM.normalize_role_state(data.get("role_blessing_levels", player.role_blessing_levels), player.roles)
+	PLAYER_BLESSING_SYSTEM.sync_shared_role_blessings(player)
+	player.skill_blessing_levels = PLAYER_BLESSING_SYSTEM.normalize_skill_state(data.get("skill_blessing_levels", player.skill_blessing_levels))
 	player.story_equipped_styles = data.get("story_equipped_styles", player.story_equipped_styles).duplicate(true)
 	if player.swordsman_blade_storm_ability != null:
 		player.swordsman_blade_storm_ability.restore_effect_if_active(player)
