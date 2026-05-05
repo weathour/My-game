@@ -10,6 +10,12 @@ static func build_from_player(owner) -> Dictionary:
 	var interval: float = owner._get_effective_attack_interval(role_id)
 	var skill_cooldown_slots: Array = owner._get_active_skill_cooldown_slots(interval)
 	var role_special_data: Dictionary = owner._get_role_special_state(role_id)
+	var ultimate_display: Dictionary = PLAYER_ULTIMATE_FLOW.get_ultimate_display(owner, role_id)
+	if owner.has_method("get_skill_next_requirement_text"):
+		var ultimate_skill_id := str(ultimate_display.get("skill_id", ""))
+		var ultimate_requirement := str(owner.get_skill_next_requirement_text(ultimate_skill_id))
+		if ultimate_requirement != "":
+			ultimate_display["description"] = "%s\n\n进化需求：\n%s" % [str(ultimate_display.get("description", "")), ultimate_requirement]
 	return build_stat_summary({
 		"level": owner.level,
 		"move_speed": owner._get_current_move_speed(),
@@ -19,7 +25,7 @@ static func build_from_player(owner) -> Dictionary:
 		"max_mana": owner.max_mana,
 		"ultimate_energy_cost": owner._get_ultimate_energy_cost(),
 		"ultimate_ready": owner._can_use_ultimate(),
-		"ultimate_display": PLAYER_ULTIMATE_FLOW.get_ultimate_display(owner, role_id),
+		"ultimate_display": ultimate_display,
 		"pickup_radius": owner.pickup_radius + (float(owner._get_attribute_pickup_range_bonus()) if owner.has_method("_get_attribute_pickup_range_bonus") else 0.0),
 		"role_name": role_data["name"],
 		"role_id": role_id,

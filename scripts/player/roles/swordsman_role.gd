@@ -10,6 +10,8 @@ const ULTIMATE_TIER_TWO_DAMAGE_MULTIPLIER := 1.22
 const ULTIMATE_TIER_THREE_EXTRA_SLASHES := 3
 const ULTIMATE_TIER_THREE_VISUAL_HIT_SCALE := 1.38
 const ULTIMATE_TIER_THREE_DAMAGE_MULTIPLIER := 1.42
+const ENTRY_INVULNERABILITY_DURATION := 1.5
+const POST_ULTIMATE_INVULNERABILITY_DURATION := 1.5
 
 func perform_attack(owner) -> void:
 	var base_direction: Vector2 = owner._get_attack_aim_direction(owner.facing_direction)
@@ -152,7 +154,7 @@ func perform_enter(owner, role_id: String, _assault_level: int, _assault_multipl
 	var scar_center: Vector2 = previous_position.lerp(scar_end, 0.5)
 	var scar_length: float = previous_position.distance_to(scar_end)
 	owner._spawn_sword_omnislash_scene_effect(scar_center, travel_direction, scar_length, scar_width * 1.08)
-	owner.switch_invulnerability_remaining = max(owner.switch_invulnerability_remaining, 0.5)
+	owner.switch_invulnerability_remaining = max(owner.switch_invulnerability_remaining, ENTRY_INVULNERABILITY_DURATION)
 	return owner._damage_enemies_in_line(previous_position, scar_end, scar_width, owner._get_role_damage(role_id) * 1.52, 0.1, 1.0, 0.0, role_id)
 
 func perform_exit(_owner, _role_id: String, _rearguard_level: int) -> int:
@@ -179,7 +181,7 @@ func perform_ultimate(owner, cast_payload: Dictionary) -> void:
 		special_data["ultimate_lifesteal_multiplier_remaining"] = total_duration
 		owner.role_special_states["swordsman"] = special_data
 	owner._queue_camera_shake(20.0, 0.62)
-	owner.switch_invulnerability_remaining = max(owner.switch_invulnerability_remaining, total_duration)
+	owner.switch_invulnerability_remaining = max(owner.switch_invulnerability_remaining, total_duration + POST_ULTIMATE_INVULNERABILITY_DURATION)
 	owner._delay_level_up_requests(total_duration)
 	owner._set_active_role_visual_hidden(true)
 	var current_scene: Node = owner.get_tree().current_scene

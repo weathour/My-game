@@ -17,6 +17,7 @@ static func build_slots(role_id: String, attack_remaining: float, attack_interva
 	var slots: Array = [
 		{
 			"name": "普攻",
+			"skill_id": _get_basic_attack_skill_id(role_id),
 			"remaining": attack_remaining,
 			"duration": max(attack_interval, 0.01),
 			"color": get_role_color(role_id),
@@ -25,6 +26,17 @@ static func build_slots(role_id: String, attack_remaining: float, attack_interva
 	]
 	slots.append_array(extra_slots)
 	return slots
+
+
+static func _get_basic_attack_skill_id(role_id: String) -> String:
+	match role_id:
+		"swordsman":
+			return "swordsman_basic_attack"
+		"gunner":
+			return "gunner_basic_attack"
+		"mage":
+			return "mage_basic_attack"
+	return ""
 
 
 static func _get_basic_attack_description(role_id: String, attack_interval: float) -> String:

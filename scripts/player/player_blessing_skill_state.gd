@@ -698,6 +698,29 @@ static func get_skill_graph_text(owner, role_id_filter: String = "") -> String:
 		return "暂无技能图谱信息。"
 	return "\n".join(lines)
 
+static func get_skill_next_requirement_text(owner, skill_id: String) -> String:
+	if not _is_known_skill_id(skill_id):
+		return ""
+	if owner != null:
+		refresh_unlocks(owner, "", 0, "", get_skill_role_id(skill_id))
+	var current_tier: int = get_skill_tier(owner, skill_id)
+	var recipe: Dictionary = {}
+	var title := get_skill_title(skill_id)
+	if current_tier <= 0:
+		recipe = UNLOCK_RECIPES.get(skill_id, {})
+		var unlock_requirements := _build_recipe_progress(owner, skill_id, recipe)
+		if unlock_requirements.is_empty():
+			return "%s：暂未激活。" % title
+		return "%s 激活需要：\n%s" % [title, "\n".join(unlock_requirements)]
+	recipe = _get_next_evolve_recipe(owner, skill_id)
+	if recipe.is_empty():
+		return "%s 已满级。" % title
+	var target_tier: int = int(recipe.get("tier", current_tier + 1))
+	var requirements := _build_recipe_progress(owner, skill_id, recipe)
+	if requirements.is_empty():
+		return "%s 升级到 %s 需要：暂无材料要求。" % [title, _get_tier_suffix(target_tier)]
+	return "%s 升级到 %s 需要：\n%s" % [title, _get_tier_suffix(target_tier), "\n".join(requirements)]
+
 static func force_unlock_skill(owner, skill_id: String, tier: int) -> bool:
 	if owner == null or not _is_known_skill_id(skill_id):
 		return false

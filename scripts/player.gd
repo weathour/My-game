@@ -859,6 +859,8 @@ func _refresh_blessing_skill_unlocks(selected_blessing_id: String = "", selected
 		if str((event as Dictionary).get("type", "")) == "binding_choice":
 			pending_blessing_binding_choices.append(event)
 			continue
+		_show_blessing_skill_event_tag(event)
+		continue
 		var title := str((event as Dictionary).get("title", "技能觉醒"))
 		_spawn_combat_tag(global_position + Vector2(0.0, -78.0), "%s 解锁" % title, Color(0.58, 0.95, 0.86, 1.0))
 	stats_changed.emit(get_stat_summary())
@@ -909,10 +911,18 @@ func apply_blessing_binding_choice(choice: Dictionary, option_id: String) -> boo
 	if index < 0 or index >= candidates.size():
 		return false
 	for event in PLAYER_BLESSING_SKILL_STATE.apply_recipe_candidate(self, candidates[index]):
+		_show_blessing_skill_event_tag(event)
+		continue
 		var title := str((event as Dictionary).get("title", "技能"))
 		_spawn_combat_tag(global_position + Vector2(0.0, -78.0), "%s 解锁" % title, Color(0.58, 0.95, 0.86, 1.0))
 	stats_changed.emit(get_stat_summary())
 	return true
+
+func _show_blessing_skill_event_tag(event: Dictionary) -> void:
+	var title := str(event.get("title", "技能"))
+	var tier := int(event.get("tier", 1))
+	var suffix := "已激活" if tier <= 1 else "已升级"
+	_spawn_combat_tag(global_position + Vector2(0.0, -78.0), "%s%s" % [title, suffix], Color(0.58, 0.95, 0.86, 1.0))
 
 func _is_blessing_skill_unlocked(skill_id: String) -> bool:
 	return PLAYER_BLESSING_SKILL_STATE.is_skill_unlocked(self, skill_id)
@@ -934,6 +944,9 @@ func _get_blessing_skill_combo_scales(skill_id: String) -> Array[float]:
 
 func _get_blessing_skill_duration_multiplier(skill_id: String) -> float:
 	return PLAYER_BLESSING_SKILL_STATE.get_duration_multiplier(self, skill_id)
+
+func get_skill_next_requirement_text(skill_id: String) -> String:
+	return PLAYER_BLESSING_SKILL_STATE.get_skill_next_requirement_text(self, skill_id)
 
 func get_skill_graph_text(role_id_filter: String = "") -> String:
 	return PLAYER_BLESSING_SKILL_STATE.get_skill_graph_text(self, role_id_filter)

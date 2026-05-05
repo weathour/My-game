@@ -53,10 +53,22 @@ static func get_ultimate_display(owner, role_id: String) -> Dictionary:
 	fallback = {"name": "大招", "description": "当前英雄的大招。"}
 	var display: Dictionary = ULTIMATE_DISPLAY_OVERRIDE.get(role_id, fallback)
 	var result := display.duplicate(true)
+	result["skill_id"] = _get_ultimate_skill_id(role_id)
 	var enhancement_text := _make_ultimate_enhancement_description(owner, role_id)
 	if enhancement_text != "":
 		result["description"] = "%s\n\n已获得的大招强化：\n%s" % [str(result.get("description", "")), enhancement_text]
 	return result
+
+
+static func _get_ultimate_skill_id(role_id: String) -> String:
+	match role_id:
+		"swordsman":
+			return "swordsman_ultimate"
+		"gunner":
+			return "gunner_ultimate"
+		"mage":
+			return "mage_ultimate"
+	return ""
 
 
 static func _make_ultimate_enhancement_description(_owner, _role_id: String) -> String:

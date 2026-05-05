@@ -13,7 +13,9 @@ static func get_active_skill_cooldown_slots(owner, attack_interval: float) -> Ar
 	var extra_slots: Array = []
 	_append_blessing_active_skill_slot(owner, role_id, extra_slots)
 
-	return PLAYER_SKILL_COOLDOWN_SLOTS.build_slots(role_id, attack_remaining, attack_interval, extra_slots, owner)
+	var slots: Array = PLAYER_SKILL_COOLDOWN_SLOTS.build_slots(role_id, attack_remaining, attack_interval, extra_slots, owner)
+	_append_requirement_text(owner, slots)
+	return slots
 
 
 static func _append_blessing_active_skill_slot(owner, role_id: String, extra_slots: Array) -> void:
@@ -38,8 +40,27 @@ static func _append_ability_slot_if_unlocked(owner, extra_slots: Array, skill_id
 	var slot: Dictionary = ability.get_cooldown_slot(owner)
 	if slot.is_empty():
 		return
+	slot["skill_id"] = skill_id
 	slot["slot_label"] = str(slot.get("slot_label", "祝福技能"))
 	extra_slots.append(slot)
+
+
+static func _append_requirement_text(owner, slots: Array) -> void:
+	if owner == null or not owner.has_method("get_skill_next_requirement_text"):
+		return
+	for slot in slots:
+		if slot is not Dictionary:
+			continue
+		var slot_dict: Dictionary = slot
+		var skill_id := str(slot_dict.get("skill_id", ""))
+		if skill_id == "":
+			continue
+		var requirement_text := str(owner.get_skill_next_requirement_text(skill_id))
+		if requirement_text == "":
+			continue
+		slot_dict["next_requirement"] = requirement_text
+		var description := str(slot_dict.get("description", ""))
+		slot_dict["description"] = "%s\n\n进化需求：\n%s" % [description, requirement_text] if description != "" else "进化需求：\n%s" % requirement_text
 
 
 static func _get_owner_property(owner, property_name: String):
