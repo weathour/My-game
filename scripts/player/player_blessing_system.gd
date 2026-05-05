@@ -360,7 +360,7 @@ static func _make_option(owner, blessing_id: String, tier: int) -> Dictionary:
 	var next_count: int = current + 1
 	var tier_label := _tier_label(tier)
 	var blessing_name := "%s%s" % [str(definition.get("title", blessing_id)), tier_label]
-	var title := "%s x%d" % [blessing_name, next_count]
+	var title := "%s %d/%d" % [blessing_name, current, MAX_BLESSING_COUNT_PER_TIER]
 	var binding_text := "绑定：技能（持续/连段/数量类技能）" if binding == SKILL_BOUND else "绑定：三名角色共享"
 	var value_text := _format_value(definition, tier)
 	var description := "%s\n%s\n本次选择后：%s Lv.%d\n每级效果：%s\n%s" % [
@@ -369,15 +369,19 @@ static func _make_option(owner, blessing_id: String, tier: int) -> Dictionary:
 		blessing_name,
 		next_count,
 		value_text,
-		"提示：I 级累计 Lv.3 后可在角色面板手动合成 II Lv.1；祝福可无限重复选择。" if tier == 1 else "提示：II 级从 Lv.12 后会独立刷出，并随角色等级提高更常见；祝福可无限重复选择。"
+		"提示：I 级累计 x3 后可在角色面板手动合成 II x1；每阶最多持有 x%d。" % MAX_BLESSING_COUNT_PER_TIER if tier == 1 else "提示：II 级从 Lv.12 后会独立刷出，并随角色等级提高更常见；每阶最多持有 x%d。" % MAX_BLESSING_COUNT_PER_TIER
 	]
-	description = "%s\n%s\n本次选择后：%s x%d\n每次选择效果：%s\n%s" % [
+	description = "%s\n%s\n当前持有：%s %d/%d\n本次选择后：%s %d/%d\n每次选择效果：%s\n%s" % [
 		str(definition.get("description", "")),
 		binding_text,
 		blessing_name,
+		current,
+		MAX_BLESSING_COUNT_PER_TIER,
+		blessing_name,
 		next_count,
+		MAX_BLESSING_COUNT_PER_TIER,
 		value_text,
-		"提示：I x3 后可在角色面板手动合成 II x1；祝福可无限重复选择。" if tier == 1 else "提示：II 从角色 Lv.12 后会独立刷出，并随角色等级提高更常见；祝福可无限重复选择。"
+		"提示：I x3 后可在角色面板手动合成 II x1；合成会消耗 3 个 I 并释放 I 的名额；每阶最多持有 x%d。" % MAX_BLESSING_COUNT_PER_TIER if tier == 1 else "提示：II 从角色 Lv.12 后会独立刷出，并随角色等级提高更常见；每阶最多持有 x%d。" % MAX_BLESSING_COUNT_PER_TIER
 	]
 	var unlock_detail := PLAYER_BLESSING_SKILL_STATE.get_blessing_unlock_detail(blessing_id, tier)
 	unlock_detail = unlock_detail.replace(blessing_id, str(definition.get("title", blessing_id)))
