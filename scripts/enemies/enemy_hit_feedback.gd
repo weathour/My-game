@@ -37,6 +37,8 @@ static func show_damage_number(enemy, damage_amount: float, killed: bool) -> voi
 	var current_scene = enemy.get_tree().current_scene
 	if current_scene == null:
 		return
+	if not killed and not _can_spawn_temporary_effect(current_scene):
+		return
 
 	var label := Label.new()
 	label.add_to_group("temporary_effects")
@@ -82,6 +84,8 @@ static func spawn_death_burst(enemy) -> void:
 	var current_scene = enemy.get_tree().current_scene
 	if current_scene == null:
 		return
+	if not _can_spawn_temporary_effect(current_scene):
+		return
 
 	var burst := Polygon2D.new()
 	burst.add_to_group("temporary_effects")
@@ -101,3 +105,8 @@ static func spawn_death_burst(enemy) -> void:
 	tween.parallel().tween_property(burst, "scale", Vector2(1.2, 1.2), 0.16)
 	tween.parallel().tween_property(burst, "modulate:a", 0.0, 0.16)
 	tween.tween_callback(burst.queue_free)
+
+static func _can_spawn_temporary_effect(root: Node) -> bool:
+	if root != null and root.has_method("_can_spawn_runtime_group"):
+		return bool(root._can_spawn_runtime_group("temporary_effects", 160))
+	return true

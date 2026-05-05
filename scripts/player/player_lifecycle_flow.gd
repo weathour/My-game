@@ -1,7 +1,6 @@
 extends RefCounted
 
 const PLAYER_LEVEL_CURVE := preload("res://scripts/player/player_level_curve.gd")
-const PLAYER_FIRST_BATCH_MILESTONE_FLOW := preload("res://scripts/player/player_first_batch_milestone_flow.gd")
 const PLAYER_BLESSING_SYSTEM := preload("res://scripts/player/player_blessing_system.gd")
 
 static func ready(owner) -> void:
@@ -12,18 +11,14 @@ static func ready(owner) -> void:
 	owner.roles = owner._build_role_data()
 	owner.role_upgrade_levels = owner._build_role_upgrade_data()
 	owner.background_cooldowns = owner._build_background_cooldowns()
-	owner.build_slot_levels = owner._build_slot_progress_data()
 	owner.role_blessing_levels = PLAYER_BLESSING_SYSTEM.build_empty_role_state(owner.roles)
 	PLAYER_BLESSING_SYSTEM.sync_shared_role_blessings(owner)
 	owner.skill_blessing_levels = PLAYER_BLESSING_SYSTEM.build_empty_skill_state()
-	owner.first_batch_milestone_state = PLAYER_FIRST_BATCH_MILESTONE_FLOW.build_milestone_state_data()
 	owner.equipment_levels = {}
 	owner.role_equipment_levels = {}
 	owner.attribute_training_levels = owner._normalize_attribute_training_data(owner._build_attribute_training_data())
-	owner.slot_resonances_unlocked = {}
 	owner.role_special_states = owner._build_role_special_state_data()
 	owner.role_standby_elapsed = owner._build_role_timing_state_data(0.0)
-	owner.role_cycle_marks = owner._build_role_timing_state_data(false)
 	owner.role_mana_values = owner._build_role_timing_state_data(0.0)
 	owner.role_ultimate_energy_lock_remaining = owner._build_role_timing_state_data(0.0)
 	owner.experience_to_next_level = PLAYER_LEVEL_CURVE.normalize_required_experience(owner.level, owner.experience_to_next_level)
@@ -57,7 +52,6 @@ static func ready(owner) -> void:
 	owner._setup_player_health_bar()
 
 	owner._initialize_existing_role_shares()
-	owner.role_cycle_marks[str(owner._get_active_role().get("id", ""))] = true
 
 	owner._update_active_role_state()
 	owner.experience_changed.emit(owner.experience, owner.experience_to_next_level, owner.level)

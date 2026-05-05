@@ -45,8 +45,6 @@ static func get_effective_background_attack_interval(owner, role_id: String) -> 
 
 static func get_effective_background_interval_multiplier(owner) -> float:
 	var multiplier: float = owner.background_interval_multiplier
-	if owner.team_combo_remaining > 0.0:
-		multiplier *= owner.team_combo_background_multiplier
 	if owner.borrow_fire_remaining > 0.0:
 		multiplier *= owner.borrow_fire_background_multiplier
 	if owner.post_ultimate_flow_remaining > 0.0:
@@ -63,10 +61,10 @@ static func get_current_move_speed(owner) -> float:
 	move_speed += owner._get_role_attribute_flat_move_speed_bonus(role_id)
 	if owner.entry_blessing_remaining > 0.0 and owner.entry_blessing_role_id == role_id:
 		move_speed *= owner.entry_haste_move_speed_multiplier
+	if role_id == "gunner" and owner.has_method("_get_gunner_infinite_reload_move_speed_multiplier"):
+		move_speed *= float(owner._get_gunner_infinite_reload_move_speed_multiplier())
 	if owner._is_last_stand_active():
 		move_speed *= 1.18
-	if owner.team_combo_remaining > 0.0:
-		move_speed *= owner.team_combo_move_multiplier
 	if owner.frenzy_remaining > 0.0 and owner.frenzy_stacks > 0:
 		move_speed *= 1.0 + 0.02 * owner.frenzy_stacks
 	move_speed *= owner.enemy_move_slow_multiplier
@@ -95,8 +93,6 @@ static func get_role_damage(owner, role_id: String) -> float:
 			damage_amount *= 0.92
 		if owner.standby_entry_remaining > 0.0 and owner.standby_entry_role_id == role_id:
 			damage_amount *= owner.standby_entry_damage_multiplier
-		if owner.team_combo_remaining > 0.0:
-			damage_amount *= owner.team_combo_damage_multiplier
 		if owner.borrow_fire_remaining > 0.0 and owner.borrow_fire_role_id == role_id:
 			damage_amount *= owner.borrow_fire_damage_multiplier
 		if owner.frenzy_remaining > 0.0 and owner.frenzy_stacks > 0:

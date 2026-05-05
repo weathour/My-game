@@ -4,6 +4,14 @@ static func _mark_temporary_effect(node: Node) -> void:
 	if node != null:
 		node.add_to_group("temporary_effects")
 
+static func _can_spawn_temporary_effect(owner: Node) -> bool:
+	if owner == null or owner.get_tree() == null:
+		return false
+	var root := owner.get_tree().current_scene
+	if root != null and root.has_method("_can_spawn_runtime_group"):
+		return bool(root._can_spawn_runtime_group("temporary_effects", 160))
+	return true
+
 static func spawn_gunner_intersect_effect(
 		owner,
 		center: Vector2,
@@ -23,6 +31,8 @@ static func spawn_gunner_intersect_effect(
 	if playback_direction.length_squared() <= 0.001:
 		playback_direction = Vector2.RIGHT
 	if gather_scene == null and beam_scene == null:
+		return null
+	if not _can_spawn_temporary_effect(owner):
 		return null
 
 	var effect := Node2D.new()

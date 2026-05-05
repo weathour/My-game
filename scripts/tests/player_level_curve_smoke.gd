@@ -34,14 +34,14 @@ func _check_milestone_totals() -> void:
 	var total_to_12 := LevelCurve.get_total_required_experience_to_reach_level(12)
 	var total_to_18 := LevelCurve.get_total_required_experience_to_reach_level(18)
 	var total_to_25 := LevelCurve.get_total_required_experience_to_reach_level(25)
-	if total_to_6 < 420 or total_to_6 > 520:
+	if total_to_6 < 470 or total_to_6 > 540:
 		failures.append("level 6 total should keep first quality shift reachable, got %d" % total_to_6)
-	if total_to_12 < 2400 or total_to_12 > 2900:
+	if total_to_12 < 3000 or total_to_12 > 3400:
 		failures.append("level 12 total should slow midgame without exploding, got %d" % total_to_12)
-	if total_to_18 < 6900 or total_to_18 > 8200:
-		failures.append("level 18 total should be meaningful but reachable, got %d" % total_to_18)
-	if total_to_25 < 17500 or total_to_25 > 20500:
-		failures.append("level 25 total should replace old runaway exponential, got %d" % total_to_25)
+	if total_to_18 < 13500 or total_to_18 > 14200:
+		failures.append("level 18 total should target roughly 12-minute level 18 pacing, got %d" % total_to_18)
+	if total_to_25 < 62000 or total_to_25 > 67000:
+		failures.append("level 25 total should strongly slow late endless progression, got %d" % total_to_25)
 
 func _check_save_normalization() -> void:
 	var old_required := 10366

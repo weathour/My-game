@@ -101,7 +101,7 @@ static func apply_pending_entry_blessing(owner, target_role_id: String) -> void:
 	if owner.pending_entry_blessing_source_role_id == "":
 		return
 
-	var legacy_level: int = owner._get_card_level("combat_legacy")
+	var legacy_level: int = 0
 
 	match owner.pending_entry_blessing_source_role_id:
 		"swordsman":

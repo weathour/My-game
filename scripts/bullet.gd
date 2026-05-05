@@ -9,9 +9,12 @@ const BULLET_EFFECT_VISIBLE_BOUNDS := Rect2(505.0, 476.0, 36.0, 36.0)
 const BULLET_VISUAL_SCALE := 0.67
 const MAX_IMPACT_EFFECTS_PER_PHYSICS_FRAME := 18
 const MAX_SPLIT_BURSTS_PER_PHYSICS_FRAME := 6
+const ENEMY_GRID_CELL_SIZE := 96.0
 static var shared_bullet_texture: Texture2D
 static var cached_enemy_nodes: Array = []
 static var cached_enemy_nodes_frame: int = -1
+static var cached_enemy_grid: Dictionary = {}
+static var cached_enemy_grid_frame: int = -1
 static var impact_effect_budget_frame: int = -1
 static var impact_effect_budget_used: int = 0
 static var split_burst_budget_frame: int = -1
@@ -263,7 +266,7 @@ func _segment_hits_enemy(enemy: Node2D, start_position: Vector2, end_position: V
 func _find_bounce_target(last_enemy: Node2D) -> Node2D:
 	var chosen_enemy: Node2D
 	var best_distance: float = INF
-	for enemy in _get_cached_enemy_nodes():
+	for enemy in _get_candidate_enemies_near(global_position, 260.0):
 		if not is_instance_valid(enemy):
 			continue
 		if enemy == last_enemy:
@@ -284,7 +287,9 @@ func _try_hit_enemy(start_position: Vector2, end_position: Vector2) -> void:
 			_apply_hit(target)
 			return
 
-	for enemy in _get_cached_enemy_nodes():
+	var query_center: Vector2 = (start_position + end_position) * 0.5
+	var query_radius: float = start_position.distance_to(end_position) * 0.5 + hit_radius * max(0.01, hit_radius_multiplier) + enemy_hit_radius_max + 8.0
+	for enemy in _get_candidate_enemies_near(query_center, query_radius):
 		if not is_instance_valid(enemy):
 			continue
 		if not _can_hit_enemy(enemy):
@@ -302,6 +307,39 @@ func _get_cached_enemy_nodes() -> Array:
 		cached_enemy_nodes = get_tree().get_nodes_in_group("enemies")
 		cached_enemy_nodes_frame = current_frame
 	return cached_enemy_nodes
+
+func _get_candidate_enemies_near(center: Vector2, radius: float) -> Array:
+	var grid: Dictionary = _get_cached_enemy_grid()
+	if grid.is_empty():
+		return []
+	var cell_radius: int = int(ceil(max(1.0, radius) / ENEMY_GRID_CELL_SIZE))
+	var center_cell: Vector2i = _grid_cell(center)
+	var result: Array = []
+	for x in range(center_cell.x - cell_radius, center_cell.x + cell_radius + 1):
+		for y in range(center_cell.y - cell_radius, center_cell.y + cell_radius + 1):
+			var cell := Vector2i(x, y)
+			if not grid.has(cell):
+				continue
+			result.append_array(grid[cell] as Array)
+	return result
+
+func _get_cached_enemy_grid() -> Dictionary:
+	var current_frame := Engine.get_physics_frames()
+	if cached_enemy_grid_frame == current_frame:
+		return cached_enemy_grid
+	cached_enemy_grid = {}
+	for enemy in _get_cached_enemy_nodes():
+		if enemy == null or not is_instance_valid(enemy) or enemy is not Node2D:
+			continue
+		var cell: Vector2i = _grid_cell((enemy as Node2D).global_position)
+		if not cached_enemy_grid.has(cell):
+			cached_enemy_grid[cell] = []
+		(cached_enemy_grid[cell] as Array).append(enemy)
+	cached_enemy_grid_frame = current_frame
+	return cached_enemy_grid
+
+func _grid_cell(position: Vector2) -> Vector2i:
+	return Vector2i(floori(position.x / ENEMY_GRID_CELL_SIZE), floori(position.y / ENEMY_GRID_CELL_SIZE))
 
 func _apply_hit(enemy: Node2D) -> void:
 	hit_enemy_ids[enemy.get_instance_id()] = true

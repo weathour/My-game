@@ -2,8 +2,6 @@ extends RefCounted
 
 const DEVELOPER_MODE := preload("res://scripts/developer_mode.gd")
 const ROLE_RESOURCE_STATE := preload("res://scripts/player/roles/role_resource_state.gd")
-const PLAYER_THEME_SKILL_FLOW := preload("res://scripts/player/player_theme_skill_flow.gd")
-const PLAYER_FIRST_BATCH_MILESTONE_FLOW := preload("res://scripts/player/player_first_batch_milestone_flow.gd")
 
 
 static func update_timers(owner, delta: float) -> void:
@@ -24,35 +22,24 @@ static func update_timers(owner, delta: float) -> void:
 		owner.enemy_move_slow_remaining = max(0.0, owner.enemy_move_slow_remaining - delta)
 		if owner.enemy_move_slow_remaining <= 0.0:
 			owner.enemy_move_slow_multiplier = 1.0
-	PLAYER_FIRST_BATCH_MILESTONE_FLOW.update_cooldowns(owner, delta)
-	PLAYER_THEME_SKILL_FLOW.update_cooldowns(owner, delta)
-	if owner.swordsman_dangzhen_fan_ability != null:
-		owner.swordsman_dangzhen_fan_ability.update(delta)
-	if owner.gunner_dangzhen_beam_ability != null:
-		owner.gunner_dangzhen_beam_ability.update(delta)
 	if owner.gunner_infinite_reload_ability != null:
 		owner.gunner_infinite_reload_ability.update(owner, delta)
-	if owner.gunner_spotter_drone_ability != null:
-		owner.gunner_spotter_drone_ability.update(delta)
+	if owner.gunner_shrapnel_field_ability != null:
+		owner.gunner_shrapnel_field_ability.update(owner, delta)
 	if owner.mage_tidal_surge_ability != null:
 		owner.mage_tidal_surge_ability.update(delta)
-	if owner.mage_dangzhen_wave_ability != null:
-		owner.mage_dangzhen_wave_ability.update(delta)
-	if owner.mage_guardian_puppet_ability != null:
-		owner.mage_guardian_puppet_ability.update(delta)
+	if owner.mage_meta_field_ability != null:
+		owner.mage_meta_field_ability.update(owner, delta)
 	if owner.swordsman_blade_storm_ability != null:
 		owner.swordsman_blade_storm_ability.update(owner, delta)
-	if owner.swordsman_blade_shadow_ability != null:
-		owner.swordsman_blade_shadow_ability.update(delta)
-	owner._try_trigger_independent_sword_qichao()
-	owner._try_trigger_independent_gunner_qichao()
-	owner._try_trigger_independent_mage_qichao()
-	owner._try_trigger_swordsman_blade_shadow()
-	owner._try_trigger_gunner_spotter_drone()
-	owner._try_trigger_mage_guardian_puppet()
+	if owner.swordsman_crescent_wave_ability != null:
+		owner.swordsman_crescent_wave_ability.update(delta)
 	owner._try_trigger_swordsman_blade_storm()
+	owner._try_trigger_swordsman_crescent_wave()
 	owner._try_trigger_gunner_infinite_reload()
+	owner._try_trigger_gunner_shrapnel_field()
 	owner._try_trigger_mage_tidal_surge()
+	owner._try_trigger_mage_meta_field()
 	if owner.perpetual_motion_cooldown_remaining > 0.0:
 		owner.perpetual_motion_cooldown_remaining = max(0.0, owner.perpetual_motion_cooldown_remaining - delta)
 	apply_developer_no_cooldown(owner)
@@ -76,12 +63,6 @@ static func update_timers(owner, delta: float) -> void:
 		owner.guard_cover_remaining = max(0.0, owner.guard_cover_remaining - delta)
 		if owner.guard_cover_remaining <= 0.0:
 			owner.guard_cover_damage_multiplier = 1.0
-	if owner.team_combo_remaining > 0.0:
-		owner.team_combo_remaining = max(0.0, owner.team_combo_remaining - delta)
-		if owner.team_combo_remaining <= 0.0:
-			owner.team_combo_damage_multiplier = 1.0
-			owner.team_combo_move_multiplier = 1.0
-			owner.team_combo_background_multiplier = 1.0
 	if owner.borrow_fire_remaining > 0.0:
 		owner.borrow_fire_remaining = max(0.0, owner.borrow_fire_remaining - delta)
 		if owner.borrow_fire_remaining <= 0.0:
@@ -103,13 +84,6 @@ static func update_timers(owner, delta: float) -> void:
 		if owner.frenzy_remaining <= 0.0:
 			owner.frenzy_stacks = 0
 			owner.frenzy_overkill_counter = 0
-	if owner.relay_window_remaining > 0.0:
-		owner.relay_window_remaining = max(0.0, owner.relay_window_remaining - delta)
-		if owner.relay_window_remaining <= 0.0:
-			owner.relay_ready_role_id = ""
-			owner.relay_from_role_id = ""
-			owner.relay_label = ""
-			owner.relay_bonus_pending = false
 	for role_data in owner.roles:
 		var role_id := str(role_data.get("id", ""))
 		if role_id == str(owner._get_active_role().get("id", "")):
@@ -124,21 +98,15 @@ static func apply_developer_no_cooldown(owner) -> void:
 		return
 	owner.switch_cooldown_remaining = 0.0
 	owner.perpetual_motion_cooldown_remaining = 0.0
-	if owner.swordsman_dangzhen_fan_ability != null:
-		owner.swordsman_dangzhen_fan_ability.cooldown_remaining = 0.0
-	if owner.gunner_dangzhen_beam_ability != null:
-		owner.gunner_dangzhen_beam_ability.cooldown_remaining = 0.0
 	if owner.gunner_infinite_reload_ability != null:
 		owner.gunner_infinite_reload_ability.cooldown_remaining = 0.0
-	if owner.gunner_spotter_drone_ability != null:
-		owner.gunner_spotter_drone_ability.cooldown_remaining = 0.0
-	if owner.mage_dangzhen_wave_ability != null:
-		owner.mage_dangzhen_wave_ability.cooldown_remaining = 0.0
+	if owner.gunner_shrapnel_field_ability != null:
+		owner.gunner_shrapnel_field_ability.cooldown_remaining = 0.0
 	if owner.mage_tidal_surge_ability != null:
 		owner.mage_tidal_surge_ability.cooldown_remaining = 0.0
-	if owner.mage_guardian_puppet_ability != null:
-		owner.mage_guardian_puppet_ability.cooldown_remaining = 0.0
+	if owner.mage_meta_field_ability != null:
+		owner.mage_meta_field_ability.cooldown_remaining = 0.0
 	if owner.swordsman_blade_storm_ability != null:
 		owner.swordsman_blade_storm_ability.cooldown_remaining = 0.0
-	if owner.swordsman_blade_shadow_ability != null:
-		owner.swordsman_blade_shadow_ability.cooldown_remaining = 0.0
+	if owner.swordsman_crescent_wave_ability != null:
+		owner.swordsman_crescent_wave_ability.cooldown_remaining = 0.0

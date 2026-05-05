@@ -111,8 +111,11 @@ static func spawn_status_burst(enemy, color: Color, radius: float) -> void:
 	var current_scene: Node = enemy.get_tree().current_scene
 	if current_scene == null:
 		return
+	if not _can_spawn_temporary_effect(current_scene):
+		return
 
 	var ring := Line2D.new()
+	ring.add_to_group("temporary_effects")
 	ring.global_position = enemy.global_position
 	ring.width = 5.0
 	ring.default_color = color
@@ -130,8 +133,13 @@ static func spawn_dash_trail(enemy, direction_vector: Vector2, length: float) ->
 	var current_scene: Node = enemy.get_tree().current_scene
 	if current_scene == null:
 		return
+	if not _can_spawn_temporary_effect(current_scene):
+		if enemy.enemy_kind == "elite" and enemy.archetype_id == "elite_ram_trail":
+			spawn_dash_trail_hazard(enemy, direction_vector, length)
+		return
 
 	var trail := Line2D.new()
+	trail.add_to_group("temporary_effects")
 	trail.width = 8.0
 	trail.default_color = Color(1.0, 0.46, 0.46, 0.28 if enemy.enemy_kind != "boss" else 0.38)
 	trail.points = PackedVector2Array([
@@ -147,6 +155,11 @@ static func spawn_dash_trail(enemy, direction_vector: Vector2, length: float) ->
 	tween.tween_callback(trail.queue_free)
 	if enemy.enemy_kind == "elite" and enemy.archetype_id == "elite_ram_trail":
 		spawn_dash_trail_hazard(enemy, direction_vector, length)
+
+static func _can_spawn_temporary_effect(root: Node) -> bool:
+	if root != null and root.has_method("_can_spawn_runtime_group"):
+		return bool(root._can_spawn_runtime_group("temporary_effects", 160))
+	return true
 
 static func spawn_dash_trail_hazard(enemy, direction_vector: Vector2, length: float) -> void:
 	var current_scene: Node = enemy.get_tree().current_scene

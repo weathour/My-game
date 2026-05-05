@@ -1,18 +1,15 @@
-extends RefCounted
+﻿extends RefCounted
 
-const BUILD_SYSTEM := preload("res://scripts/build/build_system.gd")
-const FIRST_BATCH_RUNTIME := preload("res://scripts/build/build_first_batch_runtime.gd")
 const DEVELOPER_MODE := preload("res://scripts/developer_mode.gd")
 const PLAYER_BLESSING_SYSTEM := preload("res://scripts/player/player_blessing_system.gd")
 const PLAYER_ATTRIBUTE_FLOW := preload("res://scripts/player/player_attribute_flow.gd")
 const PLAYER_EQUIPMENT_FLOW := preload("res://scripts/player/player_equipment_flow.gd")
 const PLAYER_LEVEL_OPTIONS := preload("res://scripts/player/player_level_options.gd")
-const PLAYER_UPGRADE_OPTIONS := preload("res://scripts/player/player_upgrade_options.gd")
+const PLAYER_REWARD_APPLIER := preload("res://scripts/player/player_reward_applier.gd")
 
 
 static func get_attribute_upgrade_options(owner) -> Array:
 	owner._sync_swordsman_trait_health_bonus()
-	var max_attribute_level: float = owner._get_max_attribute_level()
 	var trait_options: Array = []
 	for definition in PLAYER_ATTRIBUTE_FLOW.get_trait_definitions_for_owner(owner):
 		if definition is not Dictionary:
@@ -21,7 +18,7 @@ static func get_attribute_upgrade_options(owner) -> Array:
 		if trait_key == "":
 			continue
 		var role_id := str((definition as Dictionary).get("role_id", ""))
-		var next_level: float = min(max_attribute_level, owner._get_attribute_level(trait_key) + 1.0)
+		var next_level: float = owner._get_attribute_level(trait_key) + 1.0
 		trait_options.append({
 			"role_id": role_id,
 			"trait_key": trait_key,
@@ -40,9 +37,8 @@ static func get_attribute_upgrade_options(owner) -> Array:
 
 
 static func get_small_boss_reward_options(owner) -> Array:
-	var active_role_id: String = str(owner._get_active_role().get("id", ""))
 	var options: Array = PLAYER_EQUIPMENT_FLOW.get_active_reward_options(owner)
-	options.append_array(BUILD_SYSTEM.get_small_boss_reward_options(owner.card_pick_levels, owner.special_reward_levels, active_role_id))
+	options.append_array(get_boss_skill_reward_options(owner))
 	return options
 
 
@@ -72,9 +68,32 @@ static func get_final_core_options() -> Array:
 	return PLAYER_LEVEL_OPTIONS.get_final_core_options()
 
 
-static func get_boss_build_reward_options(owner) -> Array:
-	var active_role_id: String = str(owner._get_active_role().get("id", ""))
-	return BUILD_SYSTEM.get_boss_build_reward_options(owner.card_pick_levels, owner.special_reward_levels, active_role_id)
+static func get_boss_skill_reward_options(owner) -> Array:
+	return [_make_choose_blessing_option()]
+
+
+static func _make_training_level_up_option() -> Dictionary:
+	return {
+		"id": PLAYER_REWARD_APPLIER.SMALL_BOSS_TRAINING_LEVEL_UP,
+		"slot": "card",
+		"slot_label": "技能奖励",
+		"title": "潜心修炼",
+		"description": "角色等级 +1，并立刻触发一次对应的升级祝福选择。",
+		"preview_description": "角色等级 +1，并进入升级选择。",
+		"exact_description": "作为技能奖励池暂未开放时的兜底奖励，选择后角色等级提升 1 级，并弹出本次升级的祝福选择。"
+	}
+
+
+static func _make_choose_blessing_option() -> Dictionary:
+	return {
+		"id": PLAYER_REWARD_APPLIER.SMALL_BOSS_CHOOSE_BLESSING,
+		"slot": "card",
+		"slot_label": "技能奖励",
+		"title": "自选祝福",
+		"description": "不提升角色等级，改为从所有当前可用祝福里自选 2 个。",
+		"preview_description": "从所有当前可用祝福里自选 2 个。",
+		"exact_description": "作为技能奖励池暂未开放时的兜底奖励，选择后不会获得等级 +1，而是连续进行 2 次全祝福自选。"
+	}
 
 
 static func resume_pending_level_ups(owner) -> void:
@@ -93,28 +112,38 @@ static func try_request_level_up(owner) -> void:
 
 	owner.pending_level_ups -= 1
 	owner.level_up_active = true
-	owner.level_up_requested.emit(build_upgrade_options(owner))
+	owner.level_up_requested.emit(build_blessing_upgrade_options(owner))
 
 
-static func build_upgrade_options(owner) -> Array:
+static func build_blessing_upgrade_options(owner) -> Array:
 	var offer := PLAYER_BLESSING_SYSTEM.build_offer_for_owner(owner)
-	owner.current_build_offer = offer
+	owner.current_blessing_offer = offer
+	return offer.get("options", [])
+
+
+static func build_all_blessing_options(owner) -> Array:
+	var offer := PLAYER_BLESSING_SYSTEM.build_all_offer_for_owner(owner)
+	owner.current_blessing_offer = offer
 	return offer.get("options", [])
 
 
 static func refresh_upgrade_options(owner) -> Array:
-	var current_offer: Dictionary = owner.current_build_offer if owner.current_build_offer is Dictionary else {}
+	var current_offer: Dictionary = owner.current_blessing_offer if owner.current_blessing_offer is Dictionary else {}
 	if current_offer.is_empty():
-		return build_upgrade_options(owner)
+		return build_blessing_upgrade_options(owner)
 	var offer := PLAYER_BLESSING_SYSTEM.refresh_offer_for_owner(owner, current_offer)
-	owner.current_build_offer = offer
+	owner.current_blessing_offer = offer
 	return offer.get("options", [])
 
 
-static func get_dangzhen_upgrade_pool(owner) -> Array:
-	var active_role_id: String = str(owner._get_active_role().get("id", ""))
-	return BUILD_SYSTEM.get_upgrade_pool("body", owner.card_pick_levels, owner.special_reward_levels, active_role_id, owner.roles)
-
-
 static func make_endless_blank_upgrade_option(owner) -> Dictionary:
-	return PLAYER_UPGRADE_OPTIONS.make_endless_blank_upgrade_option(owner._get_upgrade_slot_label("body"))
+	var slot_label: String = owner._get_upgrade_slot_label("body")
+	return {
+		"id": "endless_blank_upgrade",
+		"slot": "body",
+		"slot_label": slot_label,
+		"title": "继续战斗",
+		"description": "当前没有可选升级，点击继续。",
+		"preview_description": "不获得额外升级，直接继续。",
+		"exact_description": "这是继续选项，不提供额外战斗加成。"
+	}

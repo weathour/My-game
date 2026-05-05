@@ -1,19 +1,15 @@
 extends RefCounted
 
-const BUILD_SYSTEM := preload("res://scripts/build/build_system.gd")
 const PLAYER_LEVEL_CURVE := preload("res://scripts/player/player_level_curve.gd")
 const ROLE_RESOURCE_STATE := preload("res://scripts/player/roles/role_resource_state.gd")
-const PLAYER_FIRST_BATCH_MILESTONE_FLOW := preload("res://scripts/player/player_first_batch_milestone_flow.gd")
-const DANGZHEN_SWORD_FAN_ABILITY := preload("res://scripts/abilities/dangzhen_sword_fan_ability.gd")
 const SWORDSMAN_BLADE_STORM_ABILITY := preload("res://scripts/abilities/swordsman_blade_storm_ability.gd")
-const SWORDSMAN_BLADE_SHADOW_ABILITY := preload("res://scripts/abilities/swordsman_blade_shadow_ability.gd")
-const MAGE_DANGZHEN_WAVE_ABILITY := preload("res://scripts/abilities/dangzhen_mage_wave_ability.gd")
 const MAGE_TIDAL_SURGE_ABILITY := preload("res://scripts/abilities/mage_tidal_surge_ability.gd")
-const MAGE_GUARDIAN_PUPPET_ABILITY := preload("res://scripts/abilities/mage_guardian_puppet_ability.gd")
-const DANGZHEN_GUNNER_BEAM_ABILITY := preload("res://scripts/abilities/dangzhen_gunner_beam_ability.gd")
 const GUNNER_INFINITE_RELOAD_ABILITY := preload("res://scripts/abilities/gunner_infinite_reload_ability.gd")
-const GUNNER_SPOTTER_DRONE_ABILITY := preload("res://scripts/abilities/gunner_spotter_drone_ability.gd")
+const MAGE_META_FIELD_ABILITY := preload("res://scripts/abilities/mage_meta_field_ability.gd")
+const SWORDSMAN_CRESCENT_WAVE_ABILITY := preload("res://scripts/abilities/swordsman_crescent_wave_ability.gd")
+const GUNNER_SHRAPNEL_FIELD_ABILITY := preload("res://scripts/abilities/gunner_shrapnel_field_ability.gd")
 const PLAYER_BLESSING_SYSTEM := preload("res://scripts/player/player_blessing_system.gd")
+const PLAYER_BLESSING_SKILL_STATE := preload("res://scripts/player/player_blessing_skill_state.gd")
 
 static func get_save_data(player) -> Dictionary:
 	var pending_upgrade_count: int = player.pending_level_ups
@@ -39,9 +35,6 @@ static func get_save_data(player) -> Dictionary:
 		"switch_cooldown_remaining": player.switch_cooldown_remaining,
 		"enemy_move_slow_multiplier": player.enemy_move_slow_multiplier,
 		"enemy_move_slow_remaining": player.enemy_move_slow_remaining,
-		"theme_blood_reflux_cooldown": player.theme_blood_reflux_cooldown,
-		"swordsman_dangzhen_slash_cooldown_remaining": player.swordsman_dangzhen_fan_ability.cooldown_remaining if player.swordsman_dangzhen_fan_ability != null else 0.0,
-		"gunner_dangzhen_beam_cooldown_remaining": player.gunner_dangzhen_beam_ability.cooldown_remaining if player.gunner_dangzhen_beam_ability != null else 0.0,
 		"gunner_infinite_reload_cooldown_remaining": player.gunner_infinite_reload_ability.cooldown_remaining if player.gunner_infinite_reload_ability != null else 0.0,
 		"gunner_infinite_reload_remaining": player.gunner_infinite_reload_ability.active_remaining if player.gunner_infinite_reload_ability != null else 0.0,
 		"gunner_infinite_reload_tick_remaining": player.gunner_infinite_reload_ability.tick_remaining if player.gunner_infinite_reload_ability != null else 0.0,
@@ -49,14 +42,15 @@ static func get_save_data(player) -> Dictionary:
 			player.gunner_infinite_reload_ability.locked_aim_direction.x if player.gunner_infinite_reload_ability != null else 1.0,
 			player.gunner_infinite_reload_ability.locked_aim_direction.y if player.gunner_infinite_reload_ability != null else 0.0
 		],
-		"gunner_spotter_drone_cooldown_remaining": player.gunner_spotter_drone_ability.cooldown_remaining if player.gunner_spotter_drone_ability != null else 0.0,
-		"mage_dangzhen_wave_cooldown_remaining": player.mage_dangzhen_wave_ability.cooldown_remaining if player.mage_dangzhen_wave_ability != null else 0.0,
+		"gunner_shrapnel_field_cooldown_remaining": player.gunner_shrapnel_field_ability.cooldown_remaining if player.gunner_shrapnel_field_ability != null else 0.0,
 		"mage_tidal_surge_cooldown_remaining": player.mage_tidal_surge_ability.cooldown_remaining if player.mage_tidal_surge_ability != null else 0.0,
-		"mage_guardian_puppet_cooldown_remaining": player.mage_guardian_puppet_ability.cooldown_remaining if player.mage_guardian_puppet_ability != null else 0.0,
+		"mage_meta_field_cooldown_remaining": player.mage_meta_field_ability.cooldown_remaining if player.mage_meta_field_ability != null else 0.0,
+		"mage_meta_field_remaining": player.mage_meta_field_ability.active_remaining if player.mage_meta_field_ability != null else 0.0,
+		"mage_meta_field_tick_remaining": player.mage_meta_field_ability.tick_remaining if player.mage_meta_field_ability != null else 0.0,
 		"swordsman_blade_storm_cooldown_remaining": player.swordsman_blade_storm_ability.cooldown_remaining if player.swordsman_blade_storm_ability != null else 0.0,
 		"swordsman_blade_storm_remaining": player.swordsman_blade_storm_ability.active_remaining if player.swordsman_blade_storm_ability != null else 0.0,
 		"swordsman_blade_storm_tick_remaining": player.swordsman_blade_storm_ability.tick_remaining if player.swordsman_blade_storm_ability != null else 0.0,
-		"swordsman_blade_shadow_cooldown_remaining": player.swordsman_blade_shadow_ability.cooldown_remaining if player.swordsman_blade_shadow_ability != null else 0.0,
+		"swordsman_crescent_wave_cooldown_remaining": player.swordsman_crescent_wave_ability.cooldown_remaining if player.swordsman_crescent_wave_ability != null else 0.0,
 		"speed": player.speed,
 		"pickup_radius": player.pickup_radius,
 		"energy_gain_multiplier": player.energy_gain_multiplier,
@@ -87,11 +81,6 @@ static func get_save_data(player) -> Dictionary:
 		"entry_lifesteal_ratio": player.entry_lifesteal_ratio,
 		"entry_haste_interval_bonus": player.entry_haste_interval_bonus,
 		"entry_haste_move_speed_multiplier": player.entry_haste_move_speed_multiplier,
-		"relay_window_remaining": player.relay_window_remaining,
-		"relay_ready_role_id": player.relay_ready_role_id,
-		"relay_from_role_id": player.relay_from_role_id,
-		"relay_label": player.relay_label,
-		"relay_bonus_pending": player.relay_bonus_pending,
 		"standby_entry_role_id": player.standby_entry_role_id,
 		"standby_entry_label": player.standby_entry_label,
 		"standby_entry_remaining": player.standby_entry_remaining,
@@ -99,10 +88,6 @@ static func get_save_data(player) -> Dictionary:
 		"standby_entry_interval_bonus": player.standby_entry_interval_bonus,
 		"guard_cover_remaining": player.guard_cover_remaining,
 		"guard_cover_damage_multiplier": player.guard_cover_damage_multiplier,
-		"team_combo_remaining": player.team_combo_remaining,
-		"team_combo_damage_multiplier": player.team_combo_damage_multiplier,
-		"team_combo_move_multiplier": player.team_combo_move_multiplier,
-		"team_combo_background_multiplier": player.team_combo_background_multiplier,
 		"borrow_fire_role_id": player.borrow_fire_role_id,
 		"borrow_fire_remaining": player.borrow_fire_remaining,
 		"borrow_fire_damage_multiplier": player.borrow_fire_damage_multiplier,
@@ -117,23 +102,18 @@ static func get_save_data(player) -> Dictionary:
 		"frenzy_stacks": player.frenzy_stacks,
 		"frenzy_overkill_counter": player.frenzy_overkill_counter,
 		"role_standby_elapsed": player.role_standby_elapsed.duplicate(true),
-		"role_cycle_marks": player.role_cycle_marks.duplicate(true),
 		"role_share_initialized": player.role_share_initialized,
 		"active_role_index": player.active_role_index,
 		"auto_attack_enabled": player.auto_attack_enabled,
 		"role_upgrade_levels": player.role_upgrade_levels.duplicate(true),
 		"background_cooldowns": player.background_cooldowns.duplicate(true),
-		"build_slot_levels": player.build_slot_levels.duplicate(true),
-		"card_pick_levels": player.card_pick_levels.duplicate(true),
-		"first_batch_milestone_state": PLAYER_FIRST_BATCH_MILESTONE_FLOW.get_save_snapshot(player),
 		"equipment_levels": player.equipment_levels.duplicate(true),
 		"role_equipment_levels": player.role_equipment_levels.duplicate(true),
-		"special_reward_levels": player.special_reward_levels.duplicate(true),
 		"elite_relics_unlocked": player.elite_relics_unlocked.duplicate(true),
 		"attribute_training_levels": player.attribute_training_levels.duplicate(true),
 		"role_blessing_levels": player.role_blessing_levels.duplicate(true),
 		"skill_blessing_levels": player.skill_blessing_levels.duplicate(true),
-		"slot_resonances_unlocked": player.slot_resonances_unlocked.duplicate(true),
+		"blessing_skill_state": player.blessing_skill_state.duplicate(true),
 		"role_special_states": player.role_special_states.duplicate(true),
 		"roles": player._serialize_roles_for_save(),
 		"story_equipped_styles": player.story_equipped_styles.duplicate(true)
@@ -182,13 +162,11 @@ static func apply_save_data(player, data: Dictionary) -> void:
 	_apply_switch_buff_save_data(player, data)
 
 	player.role_standby_elapsed = data.get("role_standby_elapsed", player.role_standby_elapsed).duplicate(true)
-	player.role_cycle_marks = data.get("role_cycle_marks", player.role_cycle_marks).duplicate(true)
 	player.role_share_initialized = bool(data.get("role_share_initialized", false))
 	player.active_role_index = saved_active_role_index
 	player.auto_attack_enabled = bool(data.get("auto_attack_enabled", player.auto_attack_enabled))
 	player.role_upgrade_levels = data.get("role_upgrade_levels", player.role_upgrade_levels).duplicate(true)
 	player.background_cooldowns = data.get("background_cooldowns", player.background_cooldowns).duplicate(true)
-	player.build_slot_levels = data.get("build_slot_levels", player.build_slot_levels).duplicate(true)
 	player.equipment_levels = data.get("equipment_levels", player.equipment_levels).duplicate(true)
 	var saved_role_equipment_levels: Variant = data.get("role_equipment_levels", {})
 	if saved_role_equipment_levels is Dictionary and not saved_role_equipment_levels.is_empty():
@@ -204,27 +182,22 @@ static func apply_save_data(player, data: Dictionary) -> void:
 		player.equipment_speed_bonus = float(active_equipment_summary.get("speed_bonus", 0.0))
 		player.equipment_max_health_bonus = float(active_equipment_summary.get("max_health_bonus", 0.0))
 		player.equipment_energy_gain_bonus = float(active_equipment_summary.get("energy_gain_bonus", 0.0))
-	var saved_card_pick_levels: Variant = data.get("card_pick_levels", player.card_pick_levels)
-	if saved_card_pick_levels is Dictionary:
-		player.card_pick_levels = BUILD_SYSTEM.normalize_dangzhen_card_levels(saved_card_pick_levels)
-	var saved_special_reward_levels: Variant = data.get("special_reward_levels", player.special_reward_levels)
-	if saved_special_reward_levels is Dictionary:
-		player.special_reward_levels = BUILD_SYSTEM.normalize_dangzhen_reward_levels(saved_special_reward_levels)
 	player.elite_relics_unlocked = data.get("elite_relics_unlocked", player.elite_relics_unlocked).duplicate(true)
 	player.attribute_training_levels = player._normalize_attribute_training_data(data.get("attribute_training_levels", player.attribute_training_levels))
 	player._sync_swordsman_trait_health_bonus()
-	player.slot_resonances_unlocked = data.get("slot_resonances_unlocked", player.slot_resonances_unlocked).duplicate(true)
 	player.role_special_states = data.get("role_special_states", player.role_special_states).duplicate(true)
-	PLAYER_FIRST_BATCH_MILESTONE_FLOW.apply_save_snapshot(player, data.get("first_batch_milestone_state", player.first_batch_milestone_state))
-	PLAYER_FIRST_BATCH_MILESTONE_FLOW.check_level_milestones(player)
-	player.theme_blood_reflux_cooldown = max(0.0, float(data.get("theme_blood_reflux_cooldown", 0.0)))
 	player.roles = player._normalize_loaded_roles(data.get("roles", player.roles))
 	player.role_blessing_levels = PLAYER_BLESSING_SYSTEM.normalize_role_state(data.get("role_blessing_levels", player.role_blessing_levels), player.roles)
 	PLAYER_BLESSING_SYSTEM.sync_shared_role_blessings(player)
 	player.skill_blessing_levels = PLAYER_BLESSING_SYSTEM.normalize_skill_state(data.get("skill_blessing_levels", player.skill_blessing_levels))
+	player.blessing_skill_state = PLAYER_BLESSING_SKILL_STATE.normalize_state(data.get("blessing_skill_state", player.blessing_skill_state))
 	player.story_equipped_styles = data.get("story_equipped_styles", player.story_equipped_styles).duplicate(true)
 	if player.swordsman_blade_storm_ability != null:
 		player.swordsman_blade_storm_ability.restore_effect_if_active(player)
+	if player.mage_meta_field_ability != null:
+		player.mage_meta_field_ability.restore_effect_if_active(player)
+	if player.has_method("_refresh_blessing_skill_unlocks"):
+		player._refresh_blessing_skill_unlocks()
 	player._initialize_existing_role_shares()
 	player.level_up_active = false
 	player.is_dead = false
@@ -238,12 +211,6 @@ static func apply_save_data(player, data: Dictionary) -> void:
 	player._emit_active_mana_changed()
 
 static func _apply_ability_save_data(player, data: Dictionary) -> void:
-	if player.swordsman_dangzhen_fan_ability == null:
-		player.swordsman_dangzhen_fan_ability = DANGZHEN_SWORD_FAN_ABILITY.new()
-	player.swordsman_dangzhen_fan_ability.cooldown_remaining = max(0.0, float(data.get("swordsman_dangzhen_slash_cooldown_remaining", 0.0)))
-	if player.gunner_dangzhen_beam_ability == null:
-		player.gunner_dangzhen_beam_ability = DANGZHEN_GUNNER_BEAM_ABILITY.new()
-	player.gunner_dangzhen_beam_ability.cooldown_remaining = max(0.0, float(data.get("gunner_dangzhen_beam_cooldown_remaining", 0.0)))
 	if player.gunner_infinite_reload_ability == null:
 		player.gunner_infinite_reload_ability = GUNNER_INFINITE_RELOAD_ABILITY.new()
 	player.gunner_infinite_reload_ability.apply_save_data({
@@ -252,18 +219,16 @@ static func _apply_ability_save_data(player, data: Dictionary) -> void:
 		"tick_remaining": float(data.get("gunner_infinite_reload_tick_remaining", 0.0)),
 		"locked_aim_direction": data.get("gunner_infinite_reload_locked_aim_direction", [1.0, 0.0])
 	})
-	if player.gunner_spotter_drone_ability == null:
-		player.gunner_spotter_drone_ability = GUNNER_SPOTTER_DRONE_ABILITY.new()
-	player.gunner_spotter_drone_ability.cooldown_remaining = max(0.0, float(data.get("gunner_spotter_drone_cooldown_remaining", 0.0)))
-	if player.mage_dangzhen_wave_ability == null:
-		player.mage_dangzhen_wave_ability = MAGE_DANGZHEN_WAVE_ABILITY.new()
-	player.mage_dangzhen_wave_ability.cooldown_remaining = max(0.0, float(data.get("mage_dangzhen_wave_cooldown_remaining", 0.0)))
 	if player.mage_tidal_surge_ability == null:
 		player.mage_tidal_surge_ability = MAGE_TIDAL_SURGE_ABILITY.new()
 	player.mage_tidal_surge_ability.cooldown_remaining = max(0.0, float(data.get("mage_tidal_surge_cooldown_remaining", 0.0)))
-	if player.mage_guardian_puppet_ability == null:
-		player.mage_guardian_puppet_ability = MAGE_GUARDIAN_PUPPET_ABILITY.new()
-	player.mage_guardian_puppet_ability.cooldown_remaining = max(0.0, float(data.get("mage_guardian_puppet_cooldown_remaining", 0.0)))
+	if player.mage_meta_field_ability == null:
+		player.mage_meta_field_ability = MAGE_META_FIELD_ABILITY.new()
+	player.mage_meta_field_ability.apply_save_data({
+		"cooldown_remaining": float(data.get("mage_meta_field_cooldown_remaining", 0.0)),
+		"active_remaining": float(data.get("mage_meta_field_remaining", 0.0)),
+		"tick_remaining": float(data.get("mage_meta_field_tick_remaining", 0.0))
+	})
 	if player.swordsman_blade_storm_ability == null:
 		player.swordsman_blade_storm_ability = SWORDSMAN_BLADE_STORM_ABILITY.new()
 	player.swordsman_blade_storm_ability.apply_save_data({
@@ -271,9 +236,16 @@ static func _apply_ability_save_data(player, data: Dictionary) -> void:
 		"active_remaining": float(data.get("swordsman_blade_storm_remaining", 0.0)),
 		"tick_remaining": float(data.get("swordsman_blade_storm_tick_remaining", 0.0))
 	})
-	if player.swordsman_blade_shadow_ability == null:
-		player.swordsman_blade_shadow_ability = SWORDSMAN_BLADE_SHADOW_ABILITY.new()
-	player.swordsman_blade_shadow_ability.cooldown_remaining = max(0.0, float(data.get("swordsman_blade_shadow_cooldown_remaining", 0.0)))
+	if player.swordsman_crescent_wave_ability == null:
+		player.swordsman_crescent_wave_ability = SWORDSMAN_CRESCENT_WAVE_ABILITY.new()
+	player.swordsman_crescent_wave_ability.apply_save_data({
+		"cooldown_remaining": float(data.get("swordsman_crescent_wave_cooldown_remaining", 0.0))
+	})
+	if player.gunner_shrapnel_field_ability == null:
+		player.gunner_shrapnel_field_ability = GUNNER_SHRAPNEL_FIELD_ABILITY.new()
+	player.gunner_shrapnel_field_ability.apply_save_data({
+		"cooldown_remaining": float(data.get("gunner_shrapnel_field_cooldown_remaining", 0.0))
+	})
 
 static func _apply_stat_save_data(player, data: Dictionary) -> void:
 	player.speed = float(data.get("speed", player.speed))
@@ -308,11 +280,6 @@ static func _apply_switch_buff_save_data(player, data: Dictionary) -> void:
 	player.entry_lifesteal_ratio = float(data.get("entry_lifesteal_ratio", 0.0))
 	player.entry_haste_interval_bonus = float(data.get("entry_haste_interval_bonus", 0.0))
 	player.entry_haste_move_speed_multiplier = float(data.get("entry_haste_move_speed_multiplier", 1.0))
-	player.relay_window_remaining = float(data.get("relay_window_remaining", 0.0))
-	player.relay_ready_role_id = str(data.get("relay_ready_role_id", ""))
-	player.relay_from_role_id = str(data.get("relay_from_role_id", ""))
-	player.relay_label = str(data.get("relay_label", ""))
-	player.relay_bonus_pending = bool(data.get("relay_bonus_pending", false))
 	player.standby_entry_role_id = str(data.get("standby_entry_role_id", ""))
 	player.standby_entry_label = "待机蓄势"
 	player.standby_entry_remaining = float(data.get("standby_entry_remaining", 0.0))
@@ -320,10 +287,6 @@ static func _apply_switch_buff_save_data(player, data: Dictionary) -> void:
 	player.standby_entry_interval_bonus = float(data.get("standby_entry_interval_bonus", 0.0))
 	player.guard_cover_remaining = float(data.get("guard_cover_remaining", 0.0))
 	player.guard_cover_damage_multiplier = float(data.get("guard_cover_damage_multiplier", 1.0))
-	player.team_combo_remaining = float(data.get("team_combo_remaining", 0.0))
-	player.team_combo_damage_multiplier = float(data.get("team_combo_damage_multiplier", 1.0))
-	player.team_combo_move_multiplier = float(data.get("team_combo_move_multiplier", 1.0))
-	player.team_combo_background_multiplier = float(data.get("team_combo_background_multiplier", 1.0))
 	player.borrow_fire_role_id = str(data.get("borrow_fire_role_id", ""))
 	player.borrow_fire_remaining = float(data.get("borrow_fire_remaining", 0.0))
 	player.borrow_fire_damage_multiplier = float(data.get("borrow_fire_damage_multiplier", 1.0))

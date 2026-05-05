@@ -64,6 +64,7 @@ func show_item(item: Dictionary, global_position_value: Vector2, anchor_rect: Re
 	title_label.text = title
 	category_label.text = _get_category_text(item)
 	category_label.visible = category_label.text != ""
+	description_label.bbcode_enabled = item.has("detail_bbcode")
 	description_label.text = detail
 	description_label.scroll_to_line(0)
 	_apply_size(SURVIVORS_THEME.viewport_size(self).x < 900.0 or SURVIVORS_THEME.viewport_size(self).y < 560.0)
@@ -81,6 +82,8 @@ func request_hide() -> void:
 	hide_detail()
 
 func _get_detail_text(item: Dictionary) -> String:
+	if item.has("detail_bbcode"):
+		return str(item.get("detail_bbcode", ""))
 	for key in ["detail_description", "exact_description", "description", "preview_description"]:
 		var value := str(item.get(key, ""))
 		if value != "":

@@ -103,10 +103,3 @@ static func get_role_core_summary(role_id: String) -> String:
 			return "\u56FA\u6709 \u5E7F\u57DF\u56DE\u54CD"
 		_:
 			return ""
-
-static func get_slot_resonance_summary(labels: Dictionary, unlocked_tiers: Dictionary) -> String:
-	var parts: Array[String] = []
-	for slot_id in ["body", "combat", "skill"]:
-		var tier_text := str(unlocked_tiers.get(slot_id, "-"))
-		parts.append("%s:%s" % [str(labels[slot_id]), tier_text])
-	return "\u5171\u9E23\u8FDB\u5EA6 %s" % " | ".join(parts)

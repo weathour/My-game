@@ -1,7 +1,6 @@
 extends RefCounted
 
 const DEVELOPER_MODE := preload("res://scripts/developer_mode.gd")
-const BUILD_SYSTEM := preload("res://scripts/build/build_system.gd")
 
 const ULTIMATE_ENERGY_LOCK_AFTER_CAST := 3.2
 const ULTIMATE_ENERGY_REQUIRED := 100.0
@@ -9,15 +8,31 @@ const ULTIMATE_ENERGY_REQUIRED := 100.0
 const ULTIMATE_DISPLAY := {
 	"swordsman": {
 		"name": "破锋连斩",
-		"description": "剑士大招：短时间强化剑士体术，连续向前方斩击；已获得的追斩、回旋、穿锋等大招 Build 会改变斩击次数、范围和追击方式。"
+		"description": "剑士大招：短时间强化剑士体术，连续向前方斩击。"
 	},
 	"gunner": {
 		"name": "火力压制",
-		"description": "枪手大招：进入爆发射击节奏，向目标方向连续倾泻弹幕；已获得的弹幕、聚焦、散射、锁定等大招 Build 会改变波次、命中与覆盖方式。"
+		"description": "枪手大招：进入爆发射击节奏，向目标方向连续倾泻弹幕。"
 	},
 	"mage": {
 		"name": "奥术潮汐",
-		"description": "术师大招：在敌群区域引爆多段法术轰击；已获得的风暴、回响、冰纹、塌缩等大招 Build 会改变轰击次数、控制与范围。"
+		"description": "术师大招：在敌群区域引爆多段法术轰击。"
+	}
+}
+
+
+const ULTIMATE_DISPLAY_OVERRIDE := {
+	"swordsman": {
+		"name": "无敌斩",
+		"description": "剑士大招：短时间连续高速斩击敌人。"
+	},
+	"gunner": {
+		"name": "火箭弹幕",
+		"description": "枪手大招：向目标方向释放持续弹幕，并用锥形区域造成伤害。"
+	},
+	"mage": {
+		"name": "奥数轰炸",
+		"description": "术师大招：在敌群区域连续引发多段奥数轰炸。"
 	}
 }
 
@@ -35,7 +50,8 @@ static func get_ultimate_display(owner, role_id: String) -> Dictionary:
 		"name": "大招",
 		"description": "当前英雄的大招。"
 	}
-	var display: Dictionary = ULTIMATE_DISPLAY.get(role_id, fallback)
+	fallback = {"name": "大招", "description": "当前英雄的大招。"}
+	var display: Dictionary = ULTIMATE_DISPLAY_OVERRIDE.get(role_id, fallback)
 	var result := display.duplicate(true)
 	var enhancement_text := _make_ultimate_enhancement_description(owner, role_id)
 	if enhancement_text != "":
@@ -44,32 +60,7 @@ static func get_ultimate_display(owner, role_id: String) -> Dictionary:
 
 
 static func _make_ultimate_enhancement_description(owner, role_id: String) -> String:
-	if owner == null or not is_instance_valid(owner) or not owner.has_method("_get_card_level"):
-		return ""
-	var lines: Array[String] = []
-	for card_id in ["battle_finale_charge", "battle_finale_break", "battle_finale_unity"]:
-		var level: int = max(0, int(owner._get_card_level(card_id)))
-		if level <= 0:
-			continue
-		var config: Dictionary = BUILD_SYSTEM.get_core_card_config(card_id, role_id)
-		lines.append("【%s Lv.%d】%s" % [
-			str(config.get("card_title", config.get("title", card_id))),
-			level,
-			str(config.get("card_type_label", "大招加强"))
-		])
-		for line in _get_role_effect_lines(card_id, role_id):
-			lines.append("  - " + line)
-	return "\n".join(lines)
-
-
-static func _get_role_effect_lines(card_id: String, role_id: String) -> Array[String]:
-	var result: Array[String] = []
-	for effect in BUILD_SYSTEM.get_role_effect_payload(card_id):
-		if effect is Dictionary and str(effect.get("role_id", "")) == role_id:
-			for line in effect.get("lines", []):
-				result.append(str(line))
-			break
-	return result
+	return ""
 
 
 static func can_use_ultimate(owner) -> bool:
@@ -143,14 +134,14 @@ static func try_use_ultimate(owner) -> void:
 
 
 static func apply_post_ultimate_bonuses(owner, role_id: String, total_duration: float) -> void:
-	var afterglow_level: int = owner._get_card_level("skill_afterglow")
+	var afterglow_level: int = 0
 	if afterglow_level > 0:
 		owner._activate_switch_power(role_id, "\u4F59\u8F89", 2.2 + afterglow_level * 0.35, 1.12 + afterglow_level * 0.05, 0.03 * afterglow_level)
 	owner._spawn_ultimate_afterglow_effect(role_id, 1.8 + afterglow_level * 0.4)
-	var extend_level: int = owner._get_card_level("skill_extend")
+	var extend_level: int = 0
 	if extend_level >= 3:
 		owner._add_energy(10.0)
-	var borrow_fire_level: int = owner._get_card_level("skill_borrow_fire")
+	var borrow_fire_level: int = 0
 	if borrow_fire_level > 0:
 		owner.borrow_fire_role_id = role_id
 		owner.borrow_fire_remaining = total_duration
@@ -160,7 +151,7 @@ static func apply_post_ultimate_bonuses(owner, role_id: String, total_duration: 
 		if borrow_fire_level >= 3:
 			owner._add_energy(8.0)
 		owner._update_fire_timer()
-	var reflux_level: int = owner._get_card_level("skill_reflux")
+	var reflux_level: int = 0
 	if reflux_level > 0:
 		var current_scene: Node = owner.get_tree().current_scene
 		if current_scene != null:
@@ -181,7 +172,7 @@ static func apply_post_ultimate_bonuses(owner, role_id: String, total_duration: 
 			)
 			flow_tween.tween_callback(flow_controller.queue_free)
 
-	var reprise_level: int = owner._get_card_level("skill_reprise")
+	var reprise_level: int = 0
 	if owner._has_elite_relic("elite_mirror_finisher"):
 		reprise_level += 1
 	if reprise_level <= 0:

@@ -14,8 +14,8 @@ const ROLE_DATA := [
 		"background_interval": 2.6,
 		"trait_key": "swordsman_trait",
 		"trait_option_id": "level_trait_swordsman",
-		"trait_name": "\u5251\u58EB\u7279\u6027",
-		"trait_effect_type": "health_regen",
+		"trait_name": "\u5251\u58EB\u7279\u6027\u8BAD\u7EC3",
+		"trait_effect_type": "swordsman_training",
 		"trait_damage_role_id": "swordsman"
 	},
 	{
@@ -29,8 +29,8 @@ const ROLE_DATA := [
 		"background_interval": 2.0,
 		"trait_key": "gunner_trait",
 		"trait_option_id": "level_trait_gunner",
-		"trait_name": "\u67AA\u624B\u7279\u6027",
-		"trait_effect_type": "speed_dodge",
+		"trait_name": "\u67AA\u624B\u7279\u6027\u8BAD\u7EC3",
+		"trait_effect_type": "gunner_training",
 		"trait_damage_role_id": "gunner"
 	},
 	{
@@ -44,8 +44,8 @@ const ROLE_DATA := [
 		"background_interval": 3.0,
 		"trait_key": "mage_trait",
 		"trait_option_id": "level_trait_mage",
-		"trait_name": "\u672F\u5E08\u7279\u6027",
-		"trait_effect_type": "mana_pickup",
+		"trait_name": "\u672F\u5E08\u7279\u6027\u8BAD\u7EC3",
+		"trait_effect_type": "mage_training",
 		"trait_damage_role_id": "mage"
 	}
 ]

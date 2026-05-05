@@ -6,6 +6,14 @@ static func _mark_temporary_effect(node: Node) -> void:
 	if node != null:
 		node.add_to_group("temporary_effects")
 
+static func _can_spawn_temporary_effect(owner) -> bool:
+	if owner == null or owner.get_tree() == null:
+		return false
+	var root: Node = owner.get_tree().current_scene
+	if root != null and root.has_method("_can_spawn_runtime_group"):
+		return bool(root._can_spawn_runtime_group("temporary_effects", 160))
+	return true
+
 static func spawn_sketch_sprite_effect(
 		owner,
 		center: Vector2,
@@ -23,6 +31,8 @@ static func spawn_sketch_sprite_effect(
 		saturation_threshold: float = 0.08,
 		edge_softness: float = 0.03
 	) -> Node2D:
+	if not _can_spawn_temporary_effect(owner):
+		return null
 	var current_scene: Node = owner.get_tree().current_scene
 	if current_scene == null:
 		return null
@@ -201,6 +211,8 @@ static func spawn_scaled_animated_scene(
 		scale_multiplier: float = 1.0,
 		multiply_base_scale: bool = true
 	) -> Node2D:
+	if not _can_spawn_temporary_effect(owner):
+		return null
 	var current_scene: Node = owner.get_tree().current_scene
 	if current_scene == null or scene == null:
 		return null

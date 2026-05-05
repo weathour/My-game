@@ -2,6 +2,7 @@ extends RefCounted
 
 const COOLDOWN := 13.0
 const BASE_DURATION := 1.0
+const TIER_TWO_DURATION := 2.0
 const TICK_INTERVAL := 0.1
 const MAX_CATCH_UP_TICKS := 6
 const MAX_VISUALS := 7
@@ -14,6 +15,10 @@ const DIELANG_RANGE_BONUS := 0.42
 const DIELANG_DURATION_BONUS := 0.67
 const HUICHAO_WIDTH_BONUS := 0.36
 const VISUAL_WIDTH_SPREAD_SCALE := 0.92
+const INFINITE_RELOAD_SKILL_ID := "infinite_reload"
+const TIER_TWO_RANGE_MULTIPLIER := 2.0
+const TIER_TWO_MOVE_SPEED_MULTIPLIER := 1.5
+const TIER_TWO_TICK_INTERVAL_MULTIPLIER := 0.58
 
 var cooldown_remaining: float = 0.0
 var active_remaining: float = 0.0
@@ -37,11 +42,11 @@ func update(owner, delta: float) -> void:
 	tick_remaining -= delta
 	var catch_up_ticks := 0
 	while tick_remaining <= 0.0 and active_remaining > 0.0 and catch_up_ticks < MAX_CATCH_UP_TICKS:
-		tick_remaining += TICK_INTERVAL
+		tick_remaining += _get_tick_interval(owner)
 		_trigger_tick(owner)
 		catch_up_ticks += 1
 	if catch_up_ticks >= MAX_CATCH_UP_TICKS and tick_remaining <= 0.0:
-		tick_remaining = TICK_INTERVAL
+		tick_remaining = _get_tick_interval(owner)
 	if active_remaining <= 0.0:
 		stop()
 
@@ -52,7 +57,7 @@ func can_trigger(owner, role_id: String) -> bool:
 		return false
 	if role_id != "gunner":
 		return false
-	if not bool(owner._has_gunner_infinite_reload_reward()):
+	if not _has_required_unlock(owner):
 		return false
 	return active_remaining <= 0.0 and cooldown_remaining <= 0.0
 
@@ -115,7 +120,7 @@ func get_save_data() -> Dictionary:
 
 func apply_save_data(data: Dictionary) -> void:
 	cooldown_remaining = clamp(float(data.get("cooldown_remaining", 0.0)), 0.0, COOLDOWN)
-	active_remaining = clamp(float(data.get("active_remaining", 0.0)), 0.0, BASE_DURATION + 3.0 * DIELANG_DURATION_BONUS)
+	active_remaining = clamp(float(data.get("active_remaining", 0.0)), 0.0, TIER_TWO_DURATION + 3.0 * DIELANG_DURATION_BONUS)
 	tick_remaining = clamp(float(data.get("tick_remaining", 0.0)), 0.0, TICK_INTERVAL)
 	var direction_data: Array = data.get("locked_aim_direction", [locked_aim_direction.x, locked_aim_direction.y])
 	if direction_data.size() >= 2:
@@ -133,8 +138,7 @@ func _trigger_tick(owner) -> void:
 	var beam_length: float = BEAM_LENGTH * range_multiplier
 	var hit_width: float = BEAM_THICKNESS * BASE_WIDTH_MULTIPLIER * _get_width_multiplier(owner)
 	var base_origin: Vector2 = owner.global_position + aim_direction * 20.0
-	var overload_level: int = max(0, int(owner._get_card_level("battle_infinite_reload_overload")))
-	var damage_amount: float = float(owner._get_role_damage("gunner")) * (0.52 + float(overload_level) * 0.12)
+	var damage_amount: float = float(owner._get_role_damage("gunner")) * 0.52 * (1.16 if _get_tier(owner) >= 2 else 1.0)
 	_spawn_visuals(owner, base_origin, aim_direction, beam_length, hit_width)
 	var hit_center: Vector2 = base_origin + aim_direction * (beam_length * 0.5)
 	var hit_count: int = int(owner._damage_enemies_in_oriented_rect(hit_center, aim_direction, beam_length, hit_width, damage_amount, 0.0, 1.0, 0.0, "gunner"))
@@ -173,24 +177,41 @@ func _cleanup_effects() -> void:
 	effects = valid_effects
 
 func _get_duration(owner) -> float:
-	return BASE_DURATION + float(max(0, int(owner._get_card_level("battle_infinite_reload_chain")))) * DIELANG_DURATION_BONUS
+	var duration := TIER_TWO_DURATION if _get_tier(owner) >= 2 else BASE_DURATION
+	if owner != null and owner.has_method("_get_blessing_skill_duration_multiplier"):
+		duration *= float(owner._get_blessing_skill_duration_multiplier(INFINITE_RELOAD_SKILL_ID))
+	return duration
 
 func _get_range_multiplier(owner) -> float:
-	var dangzhen_range_level: int = max(0, int(owner._get_card_level("battle_dangzhen_huichao")))
-	var chain_level: int = max(0, int(owner._get_card_level("battle_infinite_reload_chain")))
-	return float(owner._get_dangzhen_gunner_range_multiplier(dangzhen_range_level)) * (1.0 + float(chain_level) * DIELANG_RANGE_BONUS)
+	var tier_multiplier := TIER_TWO_RANGE_MULTIPLIER if _get_tier(owner) >= 2 else 1.0
+	return float(owner._get_infinite_reload_range_multiplier()) * tier_multiplier
 
 func _get_width_multiplier(owner) -> float:
-	return 1.0 + float(max(0, int(owner._get_card_level("battle_infinite_reload_bore")))) * HUICHAO_WIDTH_BONUS
+	return 1.0
 
 func _get_max_visuals(owner) -> int:
-	return MAX_VISUALS + max(0, int(owner._get_card_level("battle_infinite_reload_bore"))) * EXTRA_VISUALS_PER_WIDTH_LEVEL
+	return MAX_VISUALS
 
 func _get_visuals_per_tick(owner) -> int:
-	var width_level: int = max(0, int(owner._get_card_level("battle_infinite_reload_bore")))
-	return 1 + min(width_level, 2)
+	return 2 if _get_tier(owner) >= 2 else 1
+
+func _has_required_unlock(owner) -> bool:
+	if owner == null or not owner.has_method("_is_blessing_skill_unlocked"):
+		return false
+	return bool(owner._is_blessing_skill_unlocked(INFINITE_RELOAD_SKILL_ID))
 
 func _get_cooldown(owner) -> float:
 	if owner != null and is_instance_valid(owner) and owner.has_method("_get_equipment_cooldown_multiplier"):
 		return COOLDOWN * owner._get_equipment_cooldown_multiplier()
 	return COOLDOWN
+
+func _get_tier(owner) -> int:
+	if owner != null and owner.has_method("_get_blessing_skill_tier"):
+		return int(owner._get_blessing_skill_tier(INFINITE_RELOAD_SKILL_ID))
+	return 1
+
+func _get_tick_interval(owner) -> float:
+	return TICK_INTERVAL * (TIER_TWO_TICK_INTERVAL_MULTIPLIER if _get_tier(owner) >= 2 else 1.0)
+
+func get_move_speed_multiplier(owner) -> float:
+	return TIER_TWO_MOVE_SPEED_MULTIPLIER if is_active() and _get_tier(owner) >= 2 else 1.0

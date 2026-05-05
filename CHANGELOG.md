@@ -2,87 +2,22 @@
 
 ## Unreleased
 
-### Documentation
-
-- 完成文档状态归档：同步当前新 Build Alpha 可玩实现阶段、模块完成度、三张英雄专属、Boss 三选一奖励、技能图谱、四档难度和下一阶段实机验证路线。
-
-### Added
-
-- 三张 12 级英雄专属接入独立 ability：剑影留形、侦察无人机、守护傀儡分别拥有独立冷却、冷却栏显示、存档冷却和专属战斗效果。
-- Boss Build 奖励改为三选一英雄定向增强：剑士/枪手/术师各一张，优先提升对应专属卡，满级后转为该英雄专精溢出补强。
-- 新增可打开的 Build 技能图谱 UI：从上到下展示首批 Build 的 1/6/12/18/25 演进层级，方块代表技能节点，连线代表同包演进、投入门槛、英雄接力、状态逻辑和桥接路线，悬停显示技能介绍。
-- 新增 `player_level_curve`，把升级经验从旧的指数递增改为分段幂曲线；6/12/18/25 级质变更可控，并加入 smoke 验证。
-- 新增 `player_first_batch_milestone_flow`，队伍 6/12/18/25 级会触发实战里程碑；6 级现在会显示“Build质变”冷却槽并让剑士/枪手/术师分别触发破阵牵引、火线标记、符印领域。
-- 首批 Build 接入局内升级：普通升级现在使用 `build_first_batch_runtime` 把三槽位模型映射为“主轴延续 / 联动共鸣 / 转向补强”，并在升级 UI 中提供每次升级一次“刷新发牌”。
-- 新增 `player_first_batch_card_applier`，将首批卡记录到 `card_pick_levels` 并按定位权重/英雄归属转换为基础战斗收益、英雄 special 增长和三英雄独立冷却表现。
-- 新增 first-batch runtime smoke，验证首批发牌格式、从已选卡重建 state、刷新后 UI 兼容。
-- 四档无尽难度首批落地：新增 `difficulty_profile`，开放 easy / normal / hard / hell，并把难度接入刷怪间隔、敌人属性、危险怪权重、特殊怪攻击频率、Boss 压力和敌人压力模型。
-- 记录完整场景时间线评估器和基于 Build/敌人压力模型的四档难度方案，用目标风险带约束简单、普通、困难、地狱的刷怪密度、敌人属性、特殊怪与 Boss 压力。
-- 首批 Build 纯模型补强英雄多定位、发牌刷新、敌人压力与平衡分析：新增升级轴、定位权重、三名英雄独立冷却被动技能标记、每次升级一次刷新接口、敌人压力模型、阶段强度分析器，并用 smoke 测试约束多定位覆盖、不同质化、刷新边界、敌人压力覆盖和明显唯一最优解。
-- 推进完整首批版 Build 纯模型实现：新增 35 张首批候选卡、3 个成型节点、三槽位发牌生成器和 first-batch smoke 测试。
-- 新增首批新 Build 卡牌与等级节奏文档，细化队伍等级 6/12/18/25 阶段门槛下的剑士/枪手/术师投入质变、专属卡数据、双人/三人协同、能力包连结、首批卡量和卡内等级原则。
-- 新增下一代 Build 数学模型与发牌方案文档，明确卡牌向量、英雄关系图、动量转向、三槽位发牌、Boss 突破和实施阶段；并细化门派/机制标签、英雄亲和张量、能力包图、多样化保障、召唤流与奶推流扩展方式。
-- 主题式 Build 卡池：默认三相荡阵，并按配比解锁万向锋路、血盾回路、三相终式。
-- 队伍驱动英雄特性训练与“共同致富”：特性选项按当前出战队伍生成；每个特性除属性成长外，还会强化对应英雄入场/离场效果；共同致富每次让当前队伍英雄特性各 +0.35，并让切换英雄冷却乘算 ×90%。
-- Build 技能卡详情支持按当前队伍展示对应效果/数值，角色同卡不同名。
-- 底部技能栏悬停详情：普攻折叠普攻/被动强化，大招能量球显示当前英雄大招与大招强化，独立冷却被动单独显示。
-- 通用幸存者风格 UI 组件：`SurvivorsModal`、`SurvivorsCardList`、`SurvivorsHoverDetail`、`SurvivorsTheme`。
-- UI/Build 交接 smoke：`scripts/tests/ui_build_handoff_smoke.gd`。
-- 本地成就系统、成就定义表和右上角成就提示。
-- Steam 成就适配文档与 adapter 草稿。
-- 显示设置：窗口 / 全屏、预设窗口尺寸和 16:9 窗口比例校正。
-- 项目治理文档：路线图、已知问题、发布检查、贡献说明、第三方素材说明。
-- graphify Godot/GDScript 本地支持说明。
-- 本地一键检查脚本、轻量项目校验和最小 GitHub Actions 工作流。
-
 ### Changed
 
-- Normal enemy spawning now uses map-bounded telegraphed wave batches instead of one-at-a-time off-map spawns.
-- Added runtime caps and lighter metrics for player projectiles, pickup counts, and projectile impact effects to reduce late-build frame drops.
-- 清理 Godot headless 检查中的退出泄漏报错：BGM 在 headless/退出树时主动停止并释放 stream，玩家场景移除重复 HurtCore 节点。
-
-- 修复升级时 Build 技能三选一可能在刷新/重建列表后消失或被旧滚动位置遮住的问题；Build 三选现在固定优先显示，卡表每次重建都会回到顶部，并加入 UI smoke 回归。
-- 开发者模式同步到首批 Build：开发者升级不再绕回旧全卡池，开发者面板“新 Build 卡”也改用首批卡、等级门槛和可用状态。
-- Build 技能图谱节点改为轻量自绘，不再为每个技能创建 Button/StyleBox；同时自绘单字 glyph，修复小图标无文字并降低悬停/筛选时卡顿。
-- Build 技能图谱视觉版式改为小型单字节点，同等级技能固定在同一横排，节点完整名称与数据转入悬停详情，减少方块占位和纵向散乱感。
-- Build 技能图谱改为更接近成熟天赋树的读图方式：默认只显示主干/桥接关系，新增路线视图切换、搜索定位、点击锁定局部关系和清除锁定，避免全部关系线同时堆叠导致看不清。
-- 优化 Build 技能图谱连线可读性：限制跨层边密度，按关系类型错开端口/中转线，悬停节点时只高亮相关前置/后续，并提供关系类型筛选。
-- 升级 Build 三选不再按“主轴/联动/转向”拆分区，统一显示为“Build 技能三选一”，对应推荐类型改在卡面摘要和详情中说明。
-- 地狱难度二次上调：提高密度、敌人生命/伤害、危险怪权重、特殊怪弹幕与 Boss 攻击压力，并用压力模型约束至少高于普通 55%。
-- 普通升级 Build 候选不再走旧主题树三栏池；旧主题数据保留为兼容、开发者模式和旧奖励链路参考。
-- 增加运行时性能保护：普通刷怪按难度敌人上限裁剪，敌方弹幕和分裂弹按弹幕上限裁剪，吞晶小 Boss 的拾取扫描改为间隔采样，降低高密度场景卡顿风险。
-- 升级界面改为“英雄特性训练 + Build 卡”双选择，卡片本体显示短摘要，悬停显示完整详情。
-- 主菜单设置面板改为全屏 overlay + 居中 `SurvivorsModal`，修复点击设置后显示在角落的问题。
-- 主菜单背景资源切换为 `assets/demo2.png`。
-- 技能栏标题显示技能/普攻/大招名称，不再用冷却时间覆盖标题。
-- 文档索引改为仓库相对路径。
-- README 同步当前成就、显示设置和治理文档入口。
-
-
-## v0.1.0 - Current Prototype Baseline
-
-首个可公开整理的原型基线版本。
+- Cleaned legacy progression runtime and documentation entry points.
+- Level-up progression now uses the blessing system as the active progression model.
+- Developer upgrade flow now points at blessing offers instead of old card pools.
+- Player upgrade application was reduced to the current reward types: blessings, equipment, small boss training, final core rewards, and blank continuation options.
+- Documentation was rewritten around current blessing, equipment, skill unlock, enemy spawning, HUD, and architecture boundaries.
 
 ### Added
 
-- 主菜单与设置入口
-- 存档位选择
-- 主线准备界面基础框架
-- 三角色切换战斗
-- 剑士 / 枪手 / 术师基础定位
-- 升级与 Build 菜单
-- 普通怪 / 精英 / Boss 基础框架
-- HUD、暂停菜单、继续游戏、BGM
-- 开发者模式
-- 项目说明文档 `docs/`
-
-### Improved
-
-- 主菜单仓库展示说明
-- GitHub 可读文档结构
-- 项目整体设计与工程信息归档
+- Blessing-driven skill unlock state.
+- Role-shared role blessings and separate skill-bound blessings.
+- Character panel blessing display and composition support.
+- Map-bounded wave spawning with warnings.
+- Runtime performance guard for dense combat scenarios.
 
 ### Notes
 
-- 当前版本仍以“可玩、可测、可继续迭代”为目标
-- 重点仍在角色差异、构筑深度、Boss 演出和关卡节奏
+- BGM files under `assets/` are non-commercial placeholder materials for development testing only and will be replaced before commercial release or public distribution.

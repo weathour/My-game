@@ -12,6 +12,12 @@ const FLASH_DURATION := 0.11
 var _radius: float = CROSS_RADIUS
 
 func configure(radius: float = CROSS_RADIUS) -> void:
+	var current_scene := get_tree().current_scene
+	if current_scene != null and current_scene.has_method("_can_spawn_runtime_group"):
+		if not bool(current_scene._can_spawn_runtime_group("temporary_effects", 160)):
+			finished.emit()
+			queue_free()
+			return
 	_radius = max(8.0, radius)
 	add_to_group("temporary_effects")
 	z_index = 18

@@ -129,19 +129,39 @@ static func format_attribute_level(level: float) -> String:
 
 
 static func get_attribute_health_regen_per_second(owner) -> float:
-	return ROLE_ATTRIBUTE_RULES.get_swordsman_trait_regen_per_second(get_attribute_level(owner, ROLE_ATTRIBUTE_RULES.ATTR_SWORDSMAN))
+	return 0.0
 
 
 static func get_attribute_mana_regen_per_second(owner) -> float:
-	return ROLE_ATTRIBUTE_RULES.get_mage_trait_mana_regen_per_second(get_attribute_level(owner, ROLE_ATTRIBUTE_RULES.ATTR_MAGE))
+	return 0.0
 
 
 static func get_attribute_dodge_chance(owner) -> float:
-	return ROLE_ATTRIBUTE_RULES.get_gunner_trait_dodge_chance(get_attribute_level(owner, ROLE_ATTRIBUTE_RULES.ATTR_GUNNER))
+	return ROLE_ATTRIBUTE_RULES.get_swordsman_trait_dodge_chance(get_attribute_level(owner, ROLE_ATTRIBUTE_RULES.ATTR_SWORDSMAN))
 
 
 static func get_attribute_pickup_range_bonus(owner) -> float:
-	return ROLE_ATTRIBUTE_RULES.get_mage_trait_pickup_range_bonus(get_attribute_level(owner, ROLE_ATTRIBUTE_RULES.ATTR_MAGE))
+	return 0.0
+
+
+static func get_swordsman_low_health_flat_heal(owner) -> float:
+	return ROLE_ATTRIBUTE_RULES.get_swordsman_trait_low_health_flat_heal(get_attribute_level(owner, ROLE_ATTRIBUTE_RULES.ATTR_SWORDSMAN))
+
+
+static func get_swordsman_low_health_threshold(_owner) -> float:
+	return ROLE_ATTRIBUTE_RULES.SWORDSMAN_LOW_HEALTH_THRESHOLD
+
+
+static func get_gunner_distance_damage_bonus(owner) -> float:
+	return ROLE_ATTRIBUTE_RULES.get_gunner_trait_distance_damage_bonus(get_attribute_level(owner, ROLE_ATTRIBUTE_RULES.ATTR_GUNNER))
+
+
+static func get_mage_skill_range_multiplier(owner) -> float:
+	return ROLE_ATTRIBUTE_RULES.get_mage_trait_skill_range_multiplier(get_attribute_level(owner, ROLE_ATTRIBUTE_RULES.ATTR_MAGE))
+
+
+static func get_mage_kill_energy_multiplier(owner) -> float:
+	return ROLE_ATTRIBUTE_RULES.get_mage_trait_kill_energy_multiplier(get_attribute_level(owner, ROLE_ATTRIBUTE_RULES.ATTR_MAGE))
 
 
 static func get_primary_attribute_damage_bonus(owner, role_id: String) -> float:
@@ -343,6 +363,8 @@ static func get_mage_surplus_passive_energy_per_second(level: float) -> float:
 
 
 static func get_role_attribute_range_multiplier(_owner, _role_id: String) -> float:
+	if _role_id == "mage":
+		return get_mage_skill_range_multiplier(_owner)
 	return 1.0
 
 
@@ -363,6 +385,8 @@ static func get_role_attack_interval_flat_reduction(_owner, _role_id: String) ->
 
 
 static func get_ultimate_energy_gain_multiplier_for_role(_owner, _role_id: String) -> float:
+	if _role_id == "mage":
+		return get_mage_kill_energy_multiplier(_owner)
 	return 1.0
 
 

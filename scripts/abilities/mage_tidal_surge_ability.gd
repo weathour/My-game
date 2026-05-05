@@ -3,10 +3,10 @@ extends RefCounted
 const MAGE_GATHERING_EFFECT_SCENE := preload("res://effects/wizard/wave/gathering/gatering.tscn")
 const MAGE_WAVE_EFFECT_SCENE := preload("res://effects/wizard/wave/wave.tscn")
 
-const COOLDOWN := 12.0
+const TIER_ONE_COOLDOWN := 16.0
+const TIER_TWO_COOLDOWN := 14.0
 const WAVE_REPEAT_INTERVAL := 0.3
 const BASE_SCALE_MULTIPLIER := 1.5
-const LIFETIME_MULTIPLIER := 1.5
 const HUICHAO_WIDTH_BONUS := 0.12
 const WAVE_SPEED := 120.0
 const WAVE_LIFETIME := 3.84
@@ -14,6 +14,7 @@ const WAVE_HIT_RADIUS := 28.0
 const WAVE_VISUAL_SCALE := 5.2
 const WAVE_WIDTH_MULTIPLIER := 0.7
 const TIDAL_SURGE_RANGE_MULTIPLIER := 0.7
+const SURGE_SKILL_ID := "surging_wave"
 
 var cooldown_remaining: float = 0.0
 
@@ -28,7 +29,7 @@ func can_trigger(owner, role_id: String) -> bool:
 		return false
 	if role_id != "mage":
 		return false
-	if not bool(owner._has_mage_tidal_surge_reward()):
+	if not _has_required_unlock(owner):
 		return false
 	return cooldown_remaining <= 0.0
 
@@ -43,9 +44,8 @@ func try_trigger(owner, base_direction: Vector2) -> bool:
 	owner.facing_direction = direction
 
 	var gather_origin: Vector2 = owner.global_position + direction * 18.0
-	var pressure_level: int = max(0, int(owner._get_card_level("battle_tidal_surge_pressure")))
-	var damage_amount: float = float(owner._get_role_damage("mage")) * (0.62 + float(pressure_level) * 0.14)
-	owner._spawn_combat_tag(owner.global_position + Vector2(0.0, -64.0), "\u6CE2\u6D9B\u6D8C\u52A8", Color(0.62, 0.9, 1.0, 1.0))
+	var damage_amount: float = float(owner._get_role_damage("mage")) * _get_damage_multiplier(owner)
+	owner._spawn_combat_tag(owner.global_position + Vector2(0.0, -64.0), "\u6CE2\u6D9B\u6C79\u6D8C", Color(0.62, 0.9, 1.0, 1.0))
 	owner._spawn_ring_effect(owner.global_position, 112.0, Color(0.56, 0.86, 1.0, 0.34), 8.0, 0.22)
 
 	var gather_duration: float = float(owner._get_scene_animation_duration(MAGE_GATHERING_EFFECT_SCENE, 0.16))
@@ -60,11 +60,9 @@ func try_trigger(owner, base_direction: Vector2) -> bool:
 	current_scene.add_child(controller)
 	var tween := controller.create_tween()
 	tween.tween_interval(gather_duration)
-	var repeat_count: int = 1 + max(0, int(owner._get_card_level("battle_tidal_surge_echo")))
+	var repeat_count: int = 1 + _get_combo_extra_count(owner)
 	for repeat_index in range(repeat_count):
-		tween.tween_callback(Callable(self, "_fire_direction_group").bind(owner, gather_origin, damage_amount, _get_cardinal_directions()))
-		tween.tween_interval(WAVE_REPEAT_INTERVAL)
-		tween.tween_callback(Callable(self, "_fire_direction_group").bind(owner, gather_origin, damage_amount, _get_diagonal_directions()))
+		tween.tween_callback(Callable(self, "_fire_direction_group").bind(owner, gather_origin, damage_amount, _get_wave_directions(owner)))
 		if repeat_index < repeat_count - 1:
 			tween.tween_interval(WAVE_REPEAT_INTERVAL)
 	tween.tween_callback(controller.queue_free)
@@ -73,7 +71,7 @@ func try_trigger(owner, base_direction: Vector2) -> bool:
 func get_cooldown_slot(owner = null) -> Dictionary:
 	var duration := _get_cooldown(owner)
 	return {
-		"name": "\u6CE2\u6D9B\u6D8C\u52A8",
+		"name": "\u6CE2\u6D9B\u6C79\u6D8C",
 		"remaining": clamp(cooldown_remaining, 0.0, duration),
 		"duration": duration,
 		"color": Color(0.62, 0.84, 1.0, 1.0),
@@ -97,9 +95,9 @@ func _spawn_wave(owner, origin: Vector2, fire_direction: Vector2, damage_amount:
 	)
 	if wave == null:
 		return null
-	var range_multiplier := float(owner._get_story_style_range_multiplier("mage")) * _get_visual_range_multiplier(owner)
+	var range_multiplier: float = float(owner._get_story_style_range_multiplier("mage")) * float(owner._get_role_attribute_range_multiplier("mage")) * _get_visual_range_multiplier(owner)
 	wave.speed = WAVE_SPEED
-	wave.lifetime = WAVE_LIFETIME * LIFETIME_MULTIPLIER
+	wave.lifetime = WAVE_LIFETIME * _get_lifetime_multiplier(owner)
 	wave.hit_radius = WAVE_HIT_RADIUS * range_multiplier * WAVE_WIDTH_MULTIPLIER
 	wave.pierce_count = 999
 	wave.visual_scale_multiplier = WAVE_VISUAL_SCALE * range_multiplier * WAVE_WIDTH_MULTIPLIER
@@ -109,7 +107,8 @@ func _spawn_wave(owner, origin: Vector2, fire_direction: Vector2, damage_amount:
 	return wave
 
 func _get_scale_multiplier(owner) -> float:
-	return BASE_SCALE_MULTIPLIER * (1.0 + float(max(0, int(owner._get_card_level("battle_tidal_surge_widen")))) * HUICHAO_WIDTH_BONUS)
+	var quantity_bonus := float(_get_quantity_extra_count(owner)) * HUICHAO_WIDTH_BONUS
+	return BASE_SCALE_MULTIPLIER * (1.0 + quantity_bonus)
 
 func _get_visual_range_multiplier(owner) -> float:
 	return _get_scale_multiplier(owner) * TIDAL_SURGE_RANGE_MULTIPLIER
@@ -130,7 +129,48 @@ func _get_all_directions() -> Array[Vector2]:
 	directions.append_array(_get_diagonal_directions())
 	return directions
 
+func _get_wave_directions(owner) -> Array[Vector2]:
+	var quantity_count := _get_quantity_extra_count(owner)
+	if quantity_count <= 0:
+		var direction: Vector2 = owner.facing_direction if owner.facing_direction.length_squared() > 0.001 else Vector2.RIGHT
+		return [direction.normalized()]
+	var directions: Array[Vector2] = []
+	var total_count: int = min(8, 1 + quantity_count)
+	for index in range(total_count):
+		directions.append(Vector2.RIGHT.rotated(TAU * float(index) / float(total_count)))
+	return directions
+
 func _get_cooldown(owner) -> float:
+	var base_cooldown := TIER_TWO_COOLDOWN if _get_tier(owner) >= 2 else TIER_ONE_COOLDOWN
 	if owner != null and is_instance_valid(owner) and owner.has_method("_get_equipment_cooldown_multiplier"):
-		return COOLDOWN * owner._get_equipment_cooldown_multiplier()
-	return COOLDOWN
+		return base_cooldown * owner._get_equipment_cooldown_multiplier()
+	return base_cooldown
+
+func _has_required_unlock(owner) -> bool:
+	if owner == null or not owner.has_method("_is_blessing_skill_unlocked"):
+		return false
+	return bool(owner._is_blessing_skill_unlocked(SURGE_SKILL_ID))
+
+func _get_tier(owner) -> int:
+	if owner != null and owner.has_method("_get_blessing_skill_tier"):
+		return int(owner._get_blessing_skill_tier(SURGE_SKILL_ID))
+	return 1
+
+func _get_combo_extra_count(owner) -> int:
+	if owner == null or not owner.has_method("_get_blessing_skill_combo_scales"):
+		return 0
+	return (owner._get_blessing_skill_combo_scales(SURGE_SKILL_ID) as Array).size()
+
+func _get_quantity_extra_count(owner) -> int:
+	if owner == null or not owner.has_method("_get_blessing_skill_quantity_count"):
+		return 0
+	return int(owner._get_blessing_skill_quantity_count(SURGE_SKILL_ID))
+
+func _get_lifetime_multiplier(owner) -> float:
+	var multiplier := 4.0 / 3.0 if _get_tier(owner) >= 2 else 1.0
+	if owner != null and owner.has_method("_get_blessing_skill_duration_multiplier"):
+		multiplier *= float(owner._get_blessing_skill_duration_multiplier(SURGE_SKILL_ID))
+	return multiplier
+
+func _get_damage_multiplier(owner) -> float:
+	return 1.5 if _get_tier(owner) >= 2 else 1.0

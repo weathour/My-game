@@ -10,7 +10,7 @@ Use this before any public build, demo handoff, or store upload.
 ./scripts/check_project.sh
 ```
 
-## Build sanity
+## Package sanity
 
 - [ ] Open the project in Godot `4.6.2`.
 - [ ] Main scene is `res://scenes/main_menu.tscn`.
@@ -26,8 +26,8 @@ Use this before any public build, demo handoff, or store upload.
 - [ ] Test pause/resume/main-menu return.
 - [ ] Test window/fullscreen switching and 16:9 window resize behavior.
 - [ ] Test main-menu Settings opens centered after changing window size.
-- [ ] Test level-up card list scroll bar is visible and draggable.
-- [ ] Test hover details for upgrade cards, bottom skill slots, normal attack, and ultimate energy.
+- [ ] Test level-up blessing list scroll bar is visible and draggable.
+- [ ] Test hover details for blessings, rewards, bottom skill slots, normal attack, and ultimate energy.
 
 ## Save/settings sanity
 
@@ -39,7 +39,7 @@ Use this before any public build, demo handoff, or store upload.
 - [ ] Display settings persist.
 - [ ] Keybind editing in main-menu Settings still works after closing/reopening the panel.
 - [ ] Hero-trait training and common-prosperity count persist across continue-game save/load.
-- [ ] Theme/card levels and unlocked themes persist across continue-game save/load.
+- [ ] Blessing levels, skill blessing levels, and equipment persist across continue-game save/load.
 - [ ] Achievement unlock state persists.
 
 ## Content/legal
@@ -51,7 +51,7 @@ Use this before any public build, demo handoff, or store upload.
 
 ## Steam-specific future checks
 
-- [ ] GodotSteam installed only for Steam build lane.
+- [ ] GodotSteam installed only for Steam package lane.
 - [ ] Steamworks Achievement API Names match local `data/achievements.json` IDs.
 - [ ] Steamworks changes are published.
 - [ ] `Steam.setAchievement()` and `Steam.storeStats()` verified in a Steam test app.

@@ -1,8 +1,6 @@
 extends RefCounted
 
 const PLAYER_SKILL_COOLDOWN_SLOTS := preload("res://scripts/player/player_skill_cooldown_slots.gd")
-const PLAYER_THEME_SKILL_FLOW := preload("res://scripts/player/player_theme_skill_flow.gd")
-const PLAYER_FIRST_BATCH_MILESTONE_FLOW := preload("res://scripts/player/player_first_batch_milestone_flow.gd")
 
 
 static func get_active_skill_cooldown_slots(owner, attack_interval: float) -> Array:
@@ -13,53 +11,34 @@ static func get_active_skill_cooldown_slots(owner, attack_interval: float) -> Ar
 		attack_remaining = clamp(owner.fire_timer.time_left, 0.0, attack_interval)
 
 	var extra_slots: Array = []
-
-	extra_slots.append_array(PLAYER_FIRST_BATCH_MILESTONE_FLOW.get_milestone_skill_slots(owner, role_id))
-	extra_slots.append_array(PLAYER_THEME_SKILL_FLOW.get_passive_skill_slots(owner, role_id))
-	_append_first_batch_dedicated_skill_slot(owner, role_id, extra_slots)
-	_append_evolved_active_skill_slot(owner, role_id, extra_slots)
+	_append_blessing_active_skill_slot(owner, role_id, extra_slots)
 
 	return PLAYER_SKILL_COOLDOWN_SLOTS.build_slots(role_id, attack_remaining, attack_interval, extra_slots, owner)
 
 
-static func _append_first_batch_dedicated_skill_slot(owner, role_id: String, extra_slots: Array) -> void:
-	var ability = null
+static func _append_blessing_active_skill_slot(owner, role_id: String, extra_slots: Array) -> void:
 	match role_id:
 		"swordsman":
-			if owner.has_method("_get_card_level") and int(owner._get_card_level("swd_blade_shadow")) > 0:
-				ability = _get_owner_property(owner, "swordsman_blade_shadow_ability")
+			_append_ability_slot_if_unlocked(owner, extra_slots, "blade_storm", "swordsman_blade_storm_ability")
+			_append_ability_slot_if_unlocked(owner, extra_slots, "crescent_wave", "swordsman_crescent_wave_ability")
 		"gunner":
-			if owner.has_method("_get_card_level") and int(owner._get_card_level("gun_spotter_drone")) > 0:
-				ability = _get_owner_property(owner, "gunner_spotter_drone_ability")
+			_append_ability_slot_if_unlocked(owner, extra_slots, "infinite_reload", "gunner_infinite_reload_ability")
+			_append_ability_slot_if_unlocked(owner, extra_slots, "shrapnel_field", "gunner_shrapnel_field_ability")
 		"mage":
-			if owner.has_method("_get_card_level") and int(owner._get_card_level("mag_guardian_puppet")) > 0:
-				ability = _get_owner_property(owner, "mage_guardian_puppet_ability")
-	if ability == null or not ability.has_method("get_cooldown_slot"):
-		return
-	var slot: Dictionary = ability.get_cooldown_slot(owner)
-	if slot.is_empty():
-		return
-	slot["slot_label"] = str(slot.get("slot_label", "英雄专属"))
-	extra_slots.append(slot)
+			_append_ability_slot_if_unlocked(owner, extra_slots, "surging_wave", "mage_tidal_surge_ability")
+			_append_ability_slot_if_unlocked(owner, extra_slots, "meta_field", "mage_meta_field_ability")
 
-static func _append_evolved_active_skill_slot(owner, role_id: String, extra_slots: Array) -> void:
-	var ability = null
-	match role_id:
-		"swordsman":
-			if owner.has_method("_has_swordsman_blade_storm_reward") and bool(owner._has_swordsman_blade_storm_reward()):
-				ability = _get_owner_property(owner, "swordsman_blade_storm_ability")
-		"gunner":
-			if owner.has_method("_has_gunner_infinite_reload_reward") and bool(owner._has_gunner_infinite_reload_reward()):
-				ability = _get_owner_property(owner, "gunner_infinite_reload_ability")
-		"mage":
-			if owner.has_method("_has_mage_tidal_surge_reward") and bool(owner._has_mage_tidal_surge_reward()):
-				ability = _get_owner_property(owner, "mage_tidal_surge_ability")
+
+static func _append_ability_slot_if_unlocked(owner, extra_slots: Array, skill_id: String, property_name: String) -> void:
+	if not owner.has_method("_is_blessing_skill_unlocked") or not bool(owner._is_blessing_skill_unlocked(skill_id)):
+		return
+	var ability: Variant = _get_owner_property(owner, property_name)
 	if ability == null or not ability.has_method("get_cooldown_slot"):
 		return
 	var slot: Dictionary = ability.get_cooldown_slot(owner)
 	if slot.is_empty():
 		return
-	slot["slot_label"] = str(slot.get("slot_label", "荡阵进化"))
+	slot["slot_label"] = str(slot.get("slot_label", "祝福技能"))
 	extra_slots.append(slot)
 
 

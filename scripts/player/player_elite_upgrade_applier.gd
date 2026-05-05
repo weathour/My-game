@@ -20,9 +20,6 @@ static func apply_elite_upgrade(owner, option_id: String) -> void:
 			owner.energy_gain_multiplier += 0.18
 			owner._emit_active_mana_changed()
 		"elite_fixed_axis_core":
-			if owner._get_card_level("combat_fixed_axis") <= 0:
-				owner.card_pick_levels["combat_fixed_axis"] = 1
-				owner._record_build_pick("combat")
 			owner.global_damage_multiplier += 0.16
 			owner.background_interval_multiplier = max(0.42, owner.background_interval_multiplier - 0.14)
 		"elite_chain_overload":

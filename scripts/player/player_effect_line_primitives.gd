@@ -4,7 +4,17 @@ static func _mark_temporary_effect(node: Node) -> void:
 	if node != null:
 		node.add_to_group("temporary_effects")
 
+static func _can_spawn_temporary_effect(owner: Node) -> bool:
+	if owner == null or owner.get_tree() == null:
+		return false
+	var root := owner.get_tree().current_scene
+	if root != null and root.has_method("_can_spawn_runtime_group"):
+		return bool(root._can_spawn_runtime_group("temporary_effects", 160))
+	return true
+
 static func spawn_dash_line_effect(owner: Node, start_position: Vector2, end_position: Vector2, color: Color, width: float, duration: float) -> void:
+	if not _can_spawn_temporary_effect(owner):
+		return
 	var current_scene := owner.get_tree().current_scene
 	if current_scene == null:
 		return
@@ -24,6 +34,8 @@ static func spawn_dash_line_effect(owner: Node, start_position: Vector2, end_pos
 
 
 static func spawn_ring_effect(owner: Node, center: Vector2, radius: float, color: Color, width: float, duration: float, points: PackedVector2Array) -> void:
+	if not _can_spawn_temporary_effect(owner):
+		return
 	var current_scene := owner.get_tree().current_scene
 	if current_scene == null:
 		return
@@ -45,6 +57,8 @@ static func spawn_ring_effect(owner: Node, center: Vector2, radius: float, color
 
 
 static func spawn_slash_effect(owner: Node, center: Vector2, direction: Vector2, length: float, width: float, color: Color, duration: float) -> void:
+	if not _can_spawn_temporary_effect(owner):
+		return
 	var current_scene := owner.get_tree().current_scene
 	if current_scene == null:
 		return
@@ -75,6 +89,8 @@ static func spawn_slash_effect(owner: Node, center: Vector2, direction: Vector2,
 
 
 static func spawn_line_corridor_effect(owner: Node, start_position: Vector2, end_position: Vector2, hit_width: float, color: Color, duration: float) -> void:
+	if not _can_spawn_temporary_effect(owner):
+		return
 	var current_scene := owner.get_tree().current_scene
 	if current_scene == null:
 		return
@@ -108,6 +124,8 @@ static func spawn_line_corridor_effect(owner: Node, start_position: Vector2, end
 
 
 static func spawn_crescent_wave_effect(owner: Node, center: Vector2, direction: Vector2, radius: float, color: Color, duration: float, arc_band_points: PackedVector2Array, edge_points: PackedVector2Array) -> void:
+	if not _can_spawn_temporary_effect(owner):
+		return
 	var current_scene := owner.get_tree().current_scene
 	if current_scene == null:
 		return
@@ -153,6 +171,8 @@ static func spawn_owner_crescent_wave_effect(owner, center: Vector2, direction: 
 
 
 static func spawn_thrust_effect(owner: Node, start_position: Vector2, end_position: Vector2, color: Color, width: float, duration: float, show_arrow: bool = true) -> void:
+	if not _can_spawn_temporary_effect(owner):
+		return
 	var current_scene := owner.get_tree().current_scene
 	if current_scene == null:
 		return

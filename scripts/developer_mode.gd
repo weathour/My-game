@@ -44,7 +44,7 @@ static func set_no_cooldown_enabled(value: bool) -> void:
 static func is_no_cooldown_enabled() -> bool:
 	return enabled and no_cooldown_enabled
 
-static func should_offer_all_build_cards() -> bool:
+static func should_offer_all_blessings() -> bool:
 	return enabled
 
 static func should_disable_save() -> bool:

@@ -3,8 +3,9 @@ extends RefCounted
 const DEVELOPER_MODE := preload("res://scripts/developer_mode.gd")
 const GAME_SETTINGS := preload("res://scripts/game_settings.gd")
 const PLAYER_LEVEL_CURVE := preload("res://scripts/player/player_level_curve.gd")
-const PLAYER_FIRST_BATCH_MILESTONE_FLOW := preload("res://scripts/player/player_first_batch_milestone_flow.gd")
 
+const EXPERIENCE_GAIN_MULTIPLIER := 0.45
+const EXPERIENCE_FRACTION_CARRY_KEY := "__experience_fraction_carry"
 
 static func unhandled_input(owner, event: InputEvent) -> void:
 	if owner.is_dead or owner.get_tree().paused:
@@ -15,12 +16,8 @@ static func unhandled_input(owner, event: InputEvent) -> void:
 		return
 
 	if GAME_SETTINGS.event_matches_action(event, GAME_SETTINGS.ACTION_SWITCH_PREV):
-		if owner._get_card_level("combat_fixed_axis") > 0:
-			return
 		owner._try_switch_role((owner.active_role_index - 1 + owner.roles.size()) % owner.roles.size())
 	elif GAME_SETTINGS.event_matches_action(event, GAME_SETTINGS.ACTION_SWITCH_NEXT):
-		if owner._get_card_level("combat_fixed_axis") > 0:
-			return
 		owner._try_switch_role((owner.active_role_index + 1) % owner.roles.size())
 	elif GAME_SETTINGS.event_matches_action(event, GAME_SETTINGS.ACTION_ULTIMATE):
 		owner._try_use_ultimate()
@@ -184,7 +181,10 @@ static func check_enemy_contact_damage(owner) -> void:
 
 
 static func gain_experience(owner, amount: int) -> void:
-	owner.experience += amount
+	var adjusted_amount := _get_adjusted_experience_gain(owner, amount)
+	if adjusted_amount <= 0:
+		return
+	owner.experience += adjusted_amount
 
 	if owner.experience_to_next_level <= 0:
 		owner.experience_to_next_level = PLAYER_LEVEL_CURVE.get_required_experience_for_level(owner.level)
@@ -195,7 +195,6 @@ static func gain_experience(owner, amount: int) -> void:
 		owner.level += 1
 		owner.experience_to_next_level = PLAYER_LEVEL_CURVE.get_next_required_experience_after_level_up(owner.level)
 		owner.pending_level_ups += 1
-		PLAYER_FIRST_BATCH_MILESTONE_FLOW.check_level_milestones(owner)
 		level_up_guard += 1
 	if level_up_guard >= 100:
 		owner.experience = min(owner.experience, max(0, owner.experience_to_next_level - 1))
@@ -204,11 +203,25 @@ static func gain_experience(owner, amount: int) -> void:
 	owner._try_request_level_up()
 
 
+static func _get_adjusted_experience_gain(owner, amount: int) -> int:
+	if amount <= 0:
+		return 0
+	var raw_gain := float(amount) * EXPERIENCE_GAIN_MULTIPLIER
+	var carry := 0.0
+	if owner != null and owner.has_meta(EXPERIENCE_FRACTION_CARRY_KEY):
+		carry = float(owner.get_meta(EXPERIENCE_FRACTION_CARRY_KEY))
+	raw_gain += carry
+	var whole_gain := int(floor(raw_gain))
+	var next_carry := raw_gain - float(whole_gain)
+	if owner != null:
+		owner.set_meta(EXPERIENCE_FRACTION_CARRY_KEY, next_carry)
+	return whole_gain
+
+
 static func grant_developer_level_up(owner) -> void:
 	owner.level += 1
 	owner.experience_to_next_level = PLAYER_LEVEL_CURVE.get_next_required_experience_after_level_up(owner.level)
 	owner.pending_level_ups += 1
-	PLAYER_FIRST_BATCH_MILESTONE_FLOW.check_level_milestones(owner)
 	owner.experience_changed.emit(owner.experience, owner.experience_to_next_level, owner.level)
 	owner._try_request_level_up()
 
@@ -244,9 +257,6 @@ static func take_damage(owner, amount: float) -> void:
 	owner.hurt_cooldown_remaining = owner.hurt_cooldown
 	owner.health_changed.emit(owner.current_health, owner.max_health)
 	owner._play_player_hurt_feedback()
-	if owner.current_health > 0.0 and owner.has_method("_trigger_theme_blood_reflux_counter"):
-		owner._trigger_theme_blood_reflux_counter(adjusted_damage)
-
 	if owner.current_health > 0.0 and owner._get_active_role()["id"] == "swordsman":
 		owner._trigger_swordsman_counter()
 

@@ -6,14 +6,15 @@ const DEFAULT_SMALL_BOSS_SPAWN_TIMES := [180.0, 360.0, 540.0]
 const DEFAULT_BOSS_SPAWN_TIME := 720.0
 const DEFAULT_STARTING_SPAWN_INTERVAL := 1.02
 const DEFAULT_MINIMUM_SPAWN_INTERVAL := 0.28
-const WAVE_BATCH_INTERVAL_MULTIPLIER := 2.6
-const WAVE_BATCH_MIN_INTERVAL := 1.05
-const WAVE_BATCH_MAX_INTERVAL := 2.2
-const WAVE_BATCH_MAX_PACKS := 5
+const WAVE_BATCH_INTERVAL_MULTIPLIER := 3.2
+const WAVE_BATCH_MIN_INTERVAL := 1.22
+const WAVE_BATCH_MAX_INTERVAL := 2.85
+const WAVE_BATCH_MAX_PACKS := 6
 const ENDLESS_CYCLE_HEALTH_GROWTH := 0.35
 const ENDLESS_CYCLE_DAMAGE_GROWTH := 0.18
 const ENDLESS_CYCLE_SPEED_GROWTH := 0.04
 const ENDLESS_CYCLE_MAX_SPEED_MULTIPLIER := 1.28
+const ENDLESS_CYCLE_SPAWN_COUNT_MULTIPLIERS := [0.88, 0.96, 1.0]
 
 static func get_default_stage_duration() -> float:
 	return DEFAULT_STAGE_DURATION
@@ -75,6 +76,10 @@ static func get_endless_cycle_damage_multiplier(cycle_power_level: int) -> float
 
 static func get_endless_cycle_speed_multiplier(cycle_power_level: int) -> float:
 	return min(ENDLESS_CYCLE_MAX_SPEED_MULTIPLIER, 1.0 + float(max(0, cycle_power_level)) * ENDLESS_CYCLE_SPEED_GROWTH)
+
+static func get_endless_cycle_spawn_count_multiplier(cycle_power_level: int) -> float:
+	var index: int = clamp(max(0, cycle_power_level), 0, ENDLESS_CYCLE_SPAWN_COUNT_MULTIPLIERS.size() - 1)
+	return float(ENDLESS_CYCLE_SPAWN_COUNT_MULTIPLIERS[index])
 
 static func get_wave_profile(survival_time: float, elite_spawn_times: Array, player_growth_score: float, expected_growth_score: float) -> Dictionary:
 	var profile: Dictionary
@@ -187,7 +192,7 @@ static func get_spawn_interval(starting_interval: float, minimum_interval: float
 static func get_wave_batch_interval(pack_interval: float) -> float:
 	return clamp(pack_interval * WAVE_BATCH_INTERVAL_MULTIPLIER, WAVE_BATCH_MIN_INTERVAL, WAVE_BATCH_MAX_INTERVAL)
 
-static func pick_spawn_wave_plan(wave_profile: Dictionary, rng: RandomNumberGenerator, pack_interval: float, batch_interval: float, max_count: int) -> Array:
+static func pick_spawn_wave_plan(wave_profile: Dictionary, rng: RandomNumberGenerator, pack_interval: float, batch_interval: float, max_count: int, count_multiplier: float = 1.0) -> Array:
 	var plan: Array = []
 	if max_count <= 0:
 		return plan
@@ -197,7 +202,8 @@ static func pick_spawn_wave_plan(wave_profile: Dictionary, rng: RandomNumberGene
 		if remaining_count <= 0:
 			break
 		var pack: Dictionary = pick_spawn_pack(wave_profile, rng)
-		var count: int = min(remaining_count, max(1, int(pack.get("count", 1))))
+		var raw_count: int = max(1, int(pack.get("count", 1)))
+		var count: int = min(remaining_count, max(1, int(round(float(raw_count) * max(0.05, count_multiplier)))))
 		plan.append({
 			"archetype": str(pack.get("archetype", "chaser")),
 			"count": count
@@ -342,15 +348,11 @@ static func pick_special_archetype(kind: String, survival_time: float, spawned_s
 static func get_player_growth_score(
 	player_level: int,
 	stat_summary: Dictionary,
-	slot_resonances_unlocked: Dictionary,
+	_removed_legacy_progress: Dictionary,
 	elite_relics_unlocked: Dictionary
 ) -> float:
 	var score := 0.0
 	score += float(max(0, player_level - 1)) * 0.95
-	score += float(int(stat_summary.get("body_build_level", 0))) * 0.7
-	score += float(int(stat_summary.get("combat_build_level", 0))) * 0.75
-	score += float(int(stat_summary.get("skill_build_level", 0))) * 0.8
-	score += float(count_unlocked_entries(slot_resonances_unlocked)) * 1.4
 	score += float(count_unlocked_entries(elite_relics_unlocked)) * 1.7
 	score += float(stat_summary.get("bullet_damage", 0.0)) / 18.0
 	return score

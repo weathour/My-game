@@ -1,6 +1,12 @@
 extends RefCounted
 
 const BASIC_COMBO_INTERVAL := 0.14
+const ULTIMATE_SKILL_ID := "swordsman_ultimate"
+const ULTIMATE_COMBO_INTERVAL := 0.18
+const ULTIMATE_EXTRA_SLASHES := 3
+const ULTIMATE_TIER_TWO_EXTRA_SLASHES := 3
+const ULTIMATE_TIER_TWO_VISUAL_HIT_SCALE := 1.18
+const ULTIMATE_TIER_TWO_DAMAGE_MULTIPLIER := 1.22
 
 func perform_attack(owner) -> void:
 	var base_direction: Vector2 = owner._get_attack_aim_direction(owner.facing_direction)
@@ -25,22 +31,17 @@ func _perform_attack_variant(owner, attack_direction: Vector2, effect_scale: flo
 	var thrust_level: int = int(special_data.get("thrust_level", 0))
 	var blood_level: int = int(special_data.get("blood_level", 0))
 	var stance_level: int = int(special_data.get("stance_level", 0))
-	var overload_level: int = owner._get_card_level("battle_overload")
-	var attack_range: float = (float(role_data["range"]) + float(upgrade_data.get("range_bonus", 0.0)) + crescent_level * 6.0 + thrust_level * 4.0) * owner._get_story_style_range_multiplier(role_data["id"])
+	var basic_range_multiplier: float = _get_basic_attack_range_multiplier(owner)
+	var attack_range: float = (float(role_data["range"]) + float(upgrade_data.get("range_bonus", 0.0)) + crescent_level * 6.0 + thrust_level * 4.0) * owner._get_story_style_range_multiplier(role_data["id"]) * basic_range_multiplier
 	var attack_damage: float = owner._get_role_damage(role_data["id"]) * 1.5 * max(0.0, effect_scale)
 	var slash_axis: Vector2 = owner._get_downward_perpendicular(attack_direction)
 	var slash_mirror: bool = attack_direction.x > 0.0
-	var slash_length: float = (56.0 + float(upgrade_data.get("range_bonus", 0.0)) * 0.19 + crescent_level * 4.0 + thrust_level * 2.0) * owner._get_story_style_range_multiplier(role_data["id"])
+	var slash_length: float = (56.0 + float(upgrade_data.get("range_bonus", 0.0)) * 0.19 + crescent_level * 4.0 + thrust_level * 2.0) * owner._get_story_style_range_multiplier(role_data["id"]) * basic_range_multiplier
 	var slash_width: float = (8.0 + crescent_level * 1.05 + thrust_level * 0.7) * normal_attack_width_scale
 	var slash_forward_distance: float = 42.0 + thrust_level * 3.0
 	var style_color := Color(0.48, 0.86, 1.0, 0.95) if owner._get_story_style_id(role_data["id"]) == "moon_edge" else Color(1.0, 0.74, 0.34, 0.95)
 	var enemies_hit: int = 0
 	var any_kill: bool = false
-	var overload_ready: bool = overload_level > 0 and owner.swordsman_attack_chain == 2
-	if overload_ready:
-		attack_damage *= 1.18 + 0.08 * overload_level
-		slash_length += 5.0 + overload_level * 3.0
-		slash_width += 1.0 + overload_level * 0.6
 
 	slash_length *= normal_attack_scale
 	var slash_visual_width: float = _get_slash_visual_width(slash_width)
@@ -135,9 +136,16 @@ func _apply_trick_variants(owner, base_direction: Vector2, combo_scale: float) -
 		index += 1
 
 func _get_skill_effect_scales(owner, stat: String) -> Array[float]:
+	if owner != null and owner.has_method("_get_skill_blessing_effect_scales_for_skill"):
+		return owner._get_skill_blessing_effect_scales_for_skill("swordsman_basic_attack", stat)
 	if owner != null and owner.has_method("_get_skill_blessing_effect_scales"):
 		return owner._get_skill_blessing_effect_scales(stat)
 	return []
+
+func _get_basic_attack_range_multiplier(owner) -> float:
+	if owner != null and owner.has_method("_get_basic_attack_range_multiplier"):
+		return float(owner._get_basic_attack_range_multiplier("swordsman_basic_attack"))
+	return 1.0
 
 func perform_background(owner) -> void:
 	var target_enemy: Node2D = owner._get_low_health_enemy()
@@ -217,17 +225,18 @@ func perform_ultimate(owner, cast_payload: Dictionary) -> void:
 	var pursuit_level: int = int(special_data.get("pursuit_level", 0))
 	var crescent_level: int = int(special_data.get("crescent_level", 0))
 	var thrust_level: int = int(special_data.get("thrust_level", 0))
-	var extend_level: int = owner._get_card_level("skill_extend")
 	var slash_count: int = 7 + min(2, max(pursuit_level, max(crescent_level, thrust_level)))
-	slash_count = int(ceil(float(slash_count) * (1.0 + extend_level * 0.12) * float(cast_payload.get("duration_multiplier", 1.0))))
-	slash_count += 2
+	slash_count = int(ceil(float(slash_count) * float(cast_payload.get("duration_multiplier", 1.0))))
+	slash_count += 2 + ULTIMATE_EXTRA_SLASHES
+	var ultimate_tier: int = _get_ultimate_skill_tier(owner)
+	if ultimate_tier >= 2:
+		slash_count += ULTIMATE_TIER_TWO_EXTRA_SLASHES
+	var combo_scales: Array[float] = _get_ultimate_combo_scales(owner)
 	var total_duration: float = 0.22 + float(slash_count - 1) * owner.SWORD_ULTIMATE_SLASH_INTERVAL + 0.18
-	total_duration *= 1.0 + extend_level * 0.04
+	if not combo_scales.is_empty():
+		total_duration += ULTIMATE_COMBO_INTERVAL * float(combo_scales.size())
 	owner._queue_camera_shake(20.0, 0.62)
 	owner.switch_invulnerability_remaining = max(owner.switch_invulnerability_remaining, total_duration)
-	if extend_level >= 2:
-		owner.ultimate_guard_remaining = max(owner.ultimate_guard_remaining, total_duration)
-		owner.ultimate_guard_damage_multiplier = min(owner.ultimate_guard_damage_multiplier, 0.9)
 	owner._delay_level_up_requests(total_duration)
 	owner._set_active_role_visual_hidden(true)
 	var current_scene: Node = owner.get_tree().current_scene
@@ -241,14 +250,29 @@ func perform_ultimate(owner, cast_payload: Dictionary) -> void:
 			owner._set_active_role_visual_hidden(false)
 		)
 		restore_tween.tween_callback(restore_controller.queue_free)
-	owner._spawn_combat_tag(owner.global_position + Vector2(0.0, -34.0), "\u7EDD\u65A9", Color(1.0, 0.92, 0.6, 1.0))
+	owner._spawn_combat_tag(owner.global_position + Vector2(0.0, -34.0), "无敌斩", Color(1.0, 0.92, 0.6, 1.0))
 	owner._spawn_ring_effect(owner.global_position, 68.0, Color(1.0, 0.88, 0.52, 0.84), 8.0, 0.18)
-	owner._schedule_repeating_sequence(owner.SWORD_ULTIMATE_SLASH_INTERVAL, slash_count, func(slash_index: int) -> void:
-		_execute_ultimate_slash(owner, slash_count, pursuit_level, crescent_level, thrust_level, float(cast_payload.get("damage_multiplier", 1.0)), slash_index)
-	)
+	_schedule_ultimate_sequence(owner, slash_count, pursuit_level, crescent_level, thrust_level, float(cast_payload.get("damage_multiplier", 1.0)), ultimate_tier, 1.0, 0.0)
+	for combo_index in range(combo_scales.size()):
+		_schedule_ultimate_sequence(owner, slash_count, pursuit_level, crescent_level, thrust_level, float(cast_payload.get("damage_multiplier", 1.0)), ultimate_tier, float(combo_scales[combo_index]), ULTIMATE_COMBO_INTERVAL * float(combo_index + 1))
 	owner._apply_post_ultimate_bonuses("swordsman", total_duration)
 
-func _execute_ultimate_slash(owner, slash_count: int, pursuit_level: int, crescent_level: int, thrust_level: int, cast_damage_multiplier: float, slash_index: int) -> void:
+func _schedule_ultimate_sequence(owner, slash_count: int, pursuit_level: int, crescent_level: int, thrust_level: int, cast_damage_multiplier: float, ultimate_tier: int, effect_scale: float, start_delay: float) -> void:
+	var sequence_callback := func(slash_index: int) -> void:
+		_execute_ultimate_slash(owner, slash_count, pursuit_level, crescent_level, thrust_level, cast_damage_multiplier, slash_index, ultimate_tier, effect_scale)
+	if start_delay <= 0.0:
+		owner._schedule_repeating_sequence(owner.SWORD_ULTIMATE_SLASH_INTERVAL, slash_count, sequence_callback)
+		return
+	var tree: SceneTree = owner.get_tree()
+	if tree == null:
+		return
+	var timer: SceneTreeTimer = tree.create_timer(start_delay)
+	timer.timeout.connect(func() -> void:
+		if is_instance_valid(owner):
+			owner._schedule_repeating_sequence(owner.SWORD_ULTIMATE_SLASH_INTERVAL, slash_count, sequence_callback)
+	)
+
+func _execute_ultimate_slash(owner, slash_count: int, pursuit_level: int, crescent_level: int, thrust_level: int, cast_damage_multiplier: float, slash_index: int, ultimate_tier: int = 1, effect_scale: float = 1.0) -> void:
 	if owner.is_dead:
 		return
 
@@ -280,41 +304,51 @@ func _execute_ultimate_slash(owner, slash_count: int, pursuit_level: int, cresce
 	owner.facing_direction = travel_direction
 	owner.switch_invulnerability_remaining = max(owner.switch_invulnerability_remaining, 0.24)
 	owner._queue_camera_shake(8.6 + float(slash_index) * 0.7, 0.15)
-	var scar_width: float = 40.0 + thrust_level * 5.0
-	var scar_length_end: Vector2 = end_position + travel_direction * (84.0 + thrust_level * 18.0)
+	var tier_visual_hit_scale: float = ULTIMATE_TIER_TWO_VISUAL_HIT_SCALE if ultimate_tier >= 2 else 1.0
+	var visual_hit_scale: float = max(0.05, effect_scale) * tier_visual_hit_scale
+	var damage_multiplier: float = cast_damage_multiplier * max(0.0, effect_scale) * (ULTIMATE_TIER_TWO_DAMAGE_MULTIPLIER if ultimate_tier >= 2 else 1.0)
+	var scar_width: float = (40.0 + thrust_level * 5.0) * visual_hit_scale
+	var scar_length_end: Vector2 = end_position + travel_direction * ((84.0 + thrust_level * 18.0) * visual_hit_scale)
 	var scar_center: Vector2 = start_position.lerp(scar_length_end, 0.5)
 	var scar_length: float = start_position.distance_to(scar_length_end)
 	owner._spawn_sword_omnislash_scene_effect(scar_center, travel_direction, scar_length, scar_width * 1.12)
 
-	var damage_scale: float = (1.15 + float(pursuit_level) * 0.12 + float(crescent_level + thrust_level) * 0.06 + float(slash_index) * 0.08) * cast_damage_multiplier
+	var damage_scale: float = (1.15 + float(pursuit_level) * 0.12 + float(crescent_level + thrust_level) * 0.06 + float(slash_index) * 0.08) * damage_multiplier
 	var line_hits: int = owner._damage_enemies_in_line(start_position, scar_length_end, scar_width, owner._get_role_damage("swordsman") * damage_scale, 0.08 + pursuit_level * 0.02, 1.0, 0.0, "swordsman")
-	var blast_hits: int = owner._damage_enemies_in_radius(end_position, 48.0 + crescent_level * 12.0, owner._get_role_damage("swordsman") * (0.52 + float(crescent_level) * 0.08) * cast_damage_multiplier, 0.03 + pursuit_level * 0.02, 1.0, 0.0)
+	var blast_hits: int = owner._damage_enemies_in_radius(end_position, (48.0 + crescent_level * 12.0) * visual_hit_scale, owner._get_role_damage("swordsman") * (0.52 + float(crescent_level) * 0.08) * damage_multiplier, 0.03 + pursuit_level * 0.02, 1.0, 0.0)
 	if line_hits > 0:
 		owner._register_attack_result("swordsman", line_hits, false)
 	if blast_hits > 0:
 		owner._register_attack_result("swordsman", blast_hits, false)
 	if target_enemy != null and is_instance_valid(target_enemy):
-		var direct_cut_kill: bool = owner._deal_damage_to_enemy(target_enemy, owner._get_role_damage("swordsman") * (0.68 + pursuit_level * 0.08) * cast_damage_multiplier, "swordsman", 0.06 + pursuit_level * 0.02, 2.0, 1.0, 0.0)
+		var direct_cut_kill: bool = owner._deal_damage_to_enemy(target_enemy, owner._get_role_damage("swordsman") * (0.68 + pursuit_level * 0.08) * damage_multiplier, "swordsman", 0.06 + pursuit_level * 0.02, 2.0, 1.0, 0.0)
 		owner._register_attack_result("swordsman", 1, direct_cut_kill)
 
-	owner._spawn_ring_effect(end_position, 34.0 + crescent_level * 8.0, Color(1.0, 0.84, 0.44, 0.76), 5.0, 0.12)
+	owner._spawn_ring_effect(end_position, (34.0 + crescent_level * 8.0) * visual_hit_scale, Color(1.0, 0.84, 0.44, 0.76), 5.0, 0.12)
 
 	if target_enemy != null and is_instance_valid(target_enemy) and target_enemy.has_method("apply_bleed"):
 		target_enemy.apply_bleed(owner._get_role_damage("swordsman") * (0.68 + pursuit_level * 0.1), 2.8 + float(crescent_level) * 0.35)
 
 	if slash_index == slash_count - 1:
-		var finale_level: int = owner._get_card_level("skill_finale")
-		var finale_damage_multiplier: float = [1.12, 1.2, 1.3][max(0, finale_level - 1)] if finale_level > 0 else 1.0
-		var finale_radius_multiplier: float = 1.2 if finale_level > 0 else 1.0
 		owner._queue_camera_shake(15.0, 0.22)
-		owner._spawn_burst_effect(end_position, (94.0 + crescent_level * 10.0) * finale_radius_multiplier, Color(1.0, 0.78, 0.35, 0.28), 0.2)
-		owner._spawn_ring_effect(end_position, (108.0 + thrust_level * 10.0) * finale_radius_multiplier, Color(1.0, 0.92, 0.58, 0.9), 10.0, 0.18)
-		var finisher_hits: int = owner._damage_enemies_in_line(start_position, end_position + travel_direction * (168.0 * finale_radius_multiplier), scar_width + 18.0, owner._get_role_damage("swordsman") * (1.55 + pursuit_level * 0.14) * cast_damage_multiplier * finale_damage_multiplier, 0.1, 1.0, 0.0, "swordsman")
+		owner._spawn_burst_effect(end_position, (94.0 + crescent_level * 10.0) * visual_hit_scale, Color(1.0, 0.78, 0.35, 0.28), 0.2)
+		owner._spawn_ring_effect(end_position, (108.0 + thrust_level * 10.0) * visual_hit_scale, Color(1.0, 0.92, 0.58, 0.9), 10.0, 0.18)
+		var finisher_hits: int = owner._damage_enemies_in_line(start_position, end_position + travel_direction * (168.0 * visual_hit_scale), scar_width + 18.0 * visual_hit_scale, owner._get_role_damage("swordsman") * (1.55 + pursuit_level * 0.14) * damage_multiplier, 0.1, 1.0, 0.0, "swordsman")
 		if finisher_hits > 0:
 			owner._register_attack_result("swordsman", finisher_hits, false)
 		if target_enemy != null and is_instance_valid(target_enemy):
-			var finisher_kill: bool = owner._deal_damage_to_enemy(target_enemy, owner._get_role_damage("swordsman") * (0.92 + pursuit_level * 0.1) * cast_damage_multiplier * finale_damage_multiplier, "swordsman", 0.12, 2.4, 1.0, 0.0)
+			var finisher_kill: bool = owner._deal_damage_to_enemy(target_enemy, owner._get_role_damage("swordsman") * (0.92 + pursuit_level * 0.1) * damage_multiplier, "swordsman", 0.12, 2.4, 1.0, 0.0)
 			owner._register_attack_result("swordsman", 1, finisher_kill)
+
+func _get_ultimate_skill_tier(owner) -> int:
+	if owner != null and owner.has_method("_get_blessing_skill_tier"):
+		return max(1, int(owner._get_blessing_skill_tier(ULTIMATE_SKILL_ID)))
+	return 1
+
+func _get_ultimate_combo_scales(owner) -> Array[float]:
+	if owner != null and owner.has_method("_get_blessing_skill_combo_scales"):
+		return owner._get_blessing_skill_combo_scales(ULTIMATE_SKILL_ID) as Array[float]
+	return []
 
 func _get_slash_visual_width(slash_width: float) -> float:
 	return max(18.0, slash_width * 2.0)

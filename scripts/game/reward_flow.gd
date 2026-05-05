@@ -1,9 +1,10 @@
-extends RefCounted
+﻿extends RefCounted
 
 const STORY_PREP_SCENE_PATH := "res://scenes/story_prep.tscn"
 const SAVE_MANAGER := preload("res://scripts/save_manager.gd")
-const BUILD_SYSTEM := preload("res://scripts/build/build_system.gd")
 const GAME_HUD_FLOW := preload("res://scripts/game/game_hud_flow.gd")
+const DIRECT_BLESSING_CHOICES_META := "direct_blessing_choices_remaining"
+const DIRECT_BLESSING_CHOICE_COUNT := 2
 
 static func show_level_up(main: Node, options: Array) -> void:
 	if main.game_over:
@@ -16,11 +17,11 @@ static func show_level_up(main: Node, options: Array) -> void:
 	var attribute_options: Array = []
 	if main.player != null and main.player.has_method("get_attribute_upgrade_options"):
 		attribute_options = main.player.get_attribute_upgrade_options()
-	var offer_context := _get_current_build_offer_context(main)
+	var offer_context := _get_current_blessing_offer_context(main)
 	main.level_up_ui.show_options(options, attribute_options, offer_context)
 
 static func handle_upgrade_refresh_requested(main: Node) -> void:
-	if main.game_over or main.reward_context != "level_up":
+	if main.game_over or not ["level_up", "small_boss_blessing_choice"].has(main.reward_context):
 		return
 	if main.player == null or main.level_up_ui == null:
 		return
@@ -28,9 +29,9 @@ static func handle_upgrade_refresh_requested(main: Node) -> void:
 		return
 	var options: Array = main.player.refresh_upgrade_options()
 	var attribute_options: Array = []
-	if main.player.has_method("get_attribute_upgrade_options"):
+	if main.reward_context == "level_up" and main.player.has_method("get_attribute_upgrade_options"):
 		attribute_options = main.player.get_attribute_upgrade_options()
-	main.level_up_ui.show_options(options, attribute_options, _get_current_build_offer_context(main))
+	main.level_up_ui.show_options(options, attribute_options, _get_current_blessing_offer_context(main))
 
 static func show_final_core(main: Node) -> void:
 	if main.game_over or main.player == null or main.level_up_ui == null:
@@ -86,12 +87,28 @@ static func handle_upgrade_selected(main: Node, option_id: String, attribute_opt
 
 	main.get_tree().paused = false
 
+	if main.reward_context == "small_boss_blessing_choice":
+		_apply_player_upgrade(main, option_id)
+		var remaining_choices := max(0, int(main.get_meta(DIRECT_BLESSING_CHOICES_META, 1)) - 1)
+		main.set_meta(DIRECT_BLESSING_CHOICES_META, remaining_choices)
+		if remaining_choices > 0:
+			show_direct_blessing_choice(main, remaining_choices)
+			return
+		main.remove_meta(DIRECT_BLESSING_CHOICES_META)
+		main.reward_context = ""
+		main._refresh_hud()
+		main._save_run_state()
+		return
+
 	if main.reward_context == "level_up" and attribute_option_id != "" and main.player != null and main.player.has_method("apply_attribute_upgrade"):
 		main.player.apply_attribute_upgrade(attribute_option_id)
 	if main.reward_context == "small_boss_reward":
 		_apply_player_upgrade(main, option_id)
 		if attribute_option_id != "":
 			_apply_player_upgrade(main, attribute_option_id)
+		if attribute_option_id == "small_boss_choose_blessing":
+			show_direct_blessing_choice(main, DIRECT_BLESSING_CHOICE_COUNT)
+			return
 		if main.player != null and bool(main.player.get("level_up_active")):
 			main._refresh_hud()
 			main._save_run_state()
@@ -102,6 +119,9 @@ static func handle_upgrade_selected(main: Node, option_id: String, attribute_opt
 		return
 	if main.reward_context == "endless_boss_reward":
 		_apply_player_upgrade(main, option_id)
+		if option_id == "small_boss_choose_blessing":
+			show_direct_blessing_choice(main, DIRECT_BLESSING_CHOICE_COUNT)
+			return
 		main.reward_context = ""
 		main._refresh_hud()
 		main._save_run_state()
@@ -130,6 +150,21 @@ static func show_small_boss_reward(main: Node) -> void:
 	elif main.level_up_ui.has_method("show_menu"):
 		main.level_up_ui.show_menu("\u5c0f Boss \u5956\u52b1", options)
 
+static func show_direct_blessing_choice(main: Node, choices_remaining: int = DIRECT_BLESSING_CHOICE_COUNT) -> void:
+	if main.game_over or main.player == null or main.level_up_ui == null:
+		return
+	if not main.level_up_ui.has_method("show_options"):
+		return
+	main.reward_context = "small_boss_blessing_choice"
+	main.set_meta(DIRECT_BLESSING_CHOICES_META, max(1, choices_remaining))
+	main.get_tree().paused = true
+	var options: Array = []
+	if main.player.has_method("build_direct_blessing_options"):
+		options = main.player.build_direct_blessing_options()
+	var offer_context := _get_current_blessing_offer_context(main)
+	offer_context["summary"] = "Boss 奖励：从全部祝福中自选。剩余 %d 次。" % max(1, choices_remaining)
+	main.level_up_ui.show_options(options, [], offer_context)
+
 static func show_endless_boss_reward(main: Node) -> void:
 	if main.level_up_ui == null or not main.level_up_ui.has_method("show_menu"):
 		main._refresh_hud()
@@ -138,22 +173,30 @@ static func show_endless_boss_reward(main: Node) -> void:
 	main.reward_context = "endless_boss_reward"
 	main.get_tree().paused = true
 	var options: Array = []
-	if main.player != null and main.player.has_method("get_boss_build_reward_options"):
-		options = main.player.get_boss_build_reward_options()
+	if main.player != null and main.player.has_method("get_boss_skill_reward_options"):
+		options = main.player.get_boss_skill_reward_options()
 	if options.is_empty():
-		options = BUILD_SYSTEM.get_boss_build_reward_options({}, {}, "")
-	main.level_up_ui.show_menu("Boss Build 奖励（三选一）", options)
+		options = get_blank_small_boss_reward_options()
+	main.level_up_ui.show_menu("技能奖励（三选一）", options)
 
 static func get_blank_small_boss_reward_options() -> Array:
-	return BUILD_SYSTEM.get_blank_small_boss_reward_options()
+	return [
+		{
+			"id": "small_boss_blank_continue",
+			"title": "继续战斗",
+			"description": "当前没有可选奖励。",
+			"preview_description": "不获得额外奖励，直接继续。",
+			"exact_description": "不获得额外奖励，直接继续。"
+		}
+	]
 
 static func _apply_player_upgrade(main: Node, option_id: String) -> void:
 	if main.player != null and main.player.has_method("apply_upgrade"):
 		main.player.apply_upgrade(option_id)
 
-static func _get_current_build_offer_context(main: Node) -> Dictionary:
-	if main.player != null and main.player.has_method("get_current_build_offer_context"):
-		return main.player.get_current_build_offer_context()
+static func _get_current_blessing_offer_context(main: Node) -> Dictionary:
+	if main.player != null and main.player.has_method("get_current_blessing_offer_context"):
+		return main.player.get_current_blessing_offer_context()
 	return {}
 
 static func _make_final_blank_upgrade_option() -> Dictionary:

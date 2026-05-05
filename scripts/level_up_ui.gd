@@ -1,4 +1,4 @@
-extends CanvasLayer
+﻿extends CanvasLayer
 
 signal upgrade_selected(option_id: String, attribute_option_id: String)
 signal upgrade_refresh_requested
@@ -7,16 +7,17 @@ const SURVIVORS_MODAL := preload("res://scripts/ui/core/survivors_modal.gd")
 const SURVIVORS_CARD_LIST := preload("res://scripts/ui/components/survivors_card_list.gd")
 const SURVIVORS_THEME := preload("res://scripts/ui/theme/survivors_ui_theme.gd")
 const SURVIVORS_HOVER_DETAIL := preload("res://scripts/ui/components/survivors_hover_detail.gd")
+const GAME_SETTINGS := preload("res://scripts/game_settings.gd")
 
-const BUILD_SLOT_ORDER := ["body", "combat", "skill"]
+const BLESSING_SLOT_ORDER := ["body", "combat", "skill"]
 const SMALL_BOSS_SLOT_ORDER := ["equipment", "card"]
-const BUILD_UNIFIED_SECTION_TITLE := "祝福三选一"
+const BLESSING_UNIFIED_SECTION_TITLE := "祝福三选一"
 const DEFAULT_SLOT_LABELS := {
 	"body": "战斗",
 	"combat": "连携",
-	"skill": "大招",
+	"skill": "技能",
 	"equipment": "道具",
-	"card": "卡牌"
+	"card": "技能奖励"
 }
 
 var modal: Control
@@ -28,9 +29,9 @@ var current_mode: String = "direct"
 var current_options: Array = []
 var current_attribute_options: Array = []
 var current_offer_context: Dictionary = {}
-var build_groups: Dictionary = {}
-var pending_build_option_id: String = ""
-var pending_build_title: String = ""
+var option_groups: Dictionary = {}
+var pending_blessing_option_id: String = ""
+var pending_blessing_title: String = ""
 var pending_attribute_option_id: String = ""
 var pending_attribute_title: String = ""
 var pending_equipment_option_id: String = ""
@@ -73,12 +74,21 @@ func _on_viewport_size_changed() -> void:
 	if visible:
 		_apply_responsive_state()
 
+func _input(event: InputEvent) -> void:
+	if not visible:
+		return
+	if GAME_SETTINGS.event_matches_action(event, GAME_SETTINGS.ACTION_CHARACTER_PANEL):
+		var main := get_tree().current_scene
+		if main != null and main.has_method("_toggle_character_panel"):
+			main._toggle_character_panel()
+			get_viewport().set_input_as_handled()
+
 func show_options(options: Array, attribute_options: Array = [], offer_context: Dictionary = {}) -> void:
-	current_mode = "build"
+	current_mode = "blessing"
 	current_options = options
 	current_attribute_options = attribute_options
 	current_offer_context = offer_context.duplicate(true)
-	build_groups = _group_options(options, BUILD_SLOT_ORDER)
+	option_groups = _group_options(options, BLESSING_SLOT_ORDER)
 	_reset_pending_selection()
 	visible = true
 	modal.configure(Vector2(680.0, 430.0), 0.54, 0.60, Vector2(320.0, 240.0))
@@ -95,7 +105,7 @@ func show_menu(title: String, options: Array) -> void:
 	current_options = options
 	current_attribute_options = []
 	current_offer_context = {}
-	build_groups = {}
+	option_groups = {}
 	_reset_pending_selection()
 	visible = true
 	modal.configure(Vector2(640.0, 390.0), 0.50, 0.55, Vector2(300.0, 220.0))
@@ -111,12 +121,12 @@ func show_small_boss_reward_menu(title: String, options: Array) -> void:
 	current_options = options
 	current_attribute_options = []
 	current_offer_context = {}
-	build_groups = _group_small_boss_reward_options(options)
+	option_groups = _group_small_boss_reward_options(options)
 	_reset_pending_selection()
 	visible = true
 	modal.configure(Vector2(660.0, 420.0), 0.52, 0.58, Vector2(320.0, 230.0))
 	modal.set_title(title)
-	modal.set_hint("道具选 1 个，Boss Build 从三名英雄定向增强中选 1 个；鼠标移到卡片上查看完整说明。")
+	modal.set_hint(_get_small_boss_reward_menu_hint())
 	selection_label.visible = true
 	_prepare_modal_layout()
 	_clear_modal_footer()
@@ -157,7 +167,7 @@ func _configure_level_up_footer() -> void:
 	var refresh_remaining := int(current_offer_context.get("refresh_remaining", 0))
 	var label := str(current_offer_context.get("refresh_button_label", ""))
 	if label == "":
-		label = "刷新发牌 %d/%d" % [refresh_remaining, refresh_limit] if refresh_remaining > 0 else "刷新已用完"
+		label = "刷新祝福 %d/%d" % [refresh_remaining, refresh_limit] if refresh_remaining > 0 else "刷新已用完"
 	var button: Button = modal.add_footer_button(label, Callable(self, "_on_refresh_pressed"), "normal")
 	button.disabled = refresh_remaining <= 0
 
@@ -166,7 +176,7 @@ func _clear_modal_footer() -> void:
 		modal.clear_footer()
 
 func _on_refresh_pressed() -> void:
-	if current_mode != "build":
+	if current_mode != "blessing":
 		return
 	if int(current_offer_context.get("refresh_remaining", 0)) <= 0:
 		return
@@ -174,7 +184,7 @@ func _on_refresh_pressed() -> void:
 
 func _rebuild_level_up_list() -> void:
 	card_list.clear()
-	_add_unified_build_options()
+	_add_unified_blessing_options()
 	if not current_attribute_options.is_empty():
 		card_list.add_section("英雄特性训练")
 		card_list.columns = 2
@@ -185,7 +195,7 @@ func _rebuild_level_up_list() -> void:
 
 func _rebuild_small_boss_list() -> void:
 	card_list.clear()
-	_add_build_sections(SMALL_BOSS_SLOT_ORDER)
+	_add_option_sections(SMALL_BOSS_SLOT_ORDER)
 	_refresh_selected_cards()
 
 func _rebuild_direct_list() -> void:
@@ -196,10 +206,10 @@ func _rebuild_direct_list() -> void:
 		card_list.add_card(raw_option)
 	_refresh_selected_cards()
 
-func _add_build_sections(slot_order: Array) -> void:
+func _add_option_sections(slot_order: Array) -> void:
 	for slot_id_value in slot_order:
 		var slot_id := str(slot_id_value)
-		var grouped_options: Array = build_groups.get(slot_id, [])
+		var grouped_options: Array = option_groups.get(slot_id, [])
 		if grouped_options.is_empty():
 			continue
 		var label := str(grouped_options[0].get("slot_label", DEFAULT_SLOT_LABELS.get(slot_id, slot_id)))
@@ -210,10 +220,10 @@ func _add_build_sections(slot_order: Array) -> void:
 			var option: Dictionary = raw_option
 			card_list.add_card(option, false, bool(option.get("evolved", false)))
 
-func _add_unified_build_options() -> void:
+func _add_unified_blessing_options() -> void:
 	if current_options.is_empty():
 		return
-	card_list.add_section(BUILD_UNIFIED_SECTION_TITLE)
+	card_list.add_section(BLESSING_UNIFIED_SECTION_TITLE)
 	for raw_option in current_options:
 		if raw_option is not Dictionary:
 			continue
@@ -242,7 +252,7 @@ func _on_card_list_item_selected(option_id: String, option: Dictionary) -> void:
 	if slot_id == "" or _is_attribute_option(option_id):
 		_select_attribute_option(option)
 	else:
-		_select_build_option(option)
+		_select_blessing_option(option)
 
 func _is_attribute_option(option_id: String) -> bool:
 	for raw_option in current_attribute_options:
@@ -257,9 +267,9 @@ func _select_attribute_option(option: Dictionary) -> void:
 	_refresh_selected_cards()
 	_try_emit_combined_selection()
 
-func _select_build_option(option: Dictionary) -> void:
-	pending_build_option_id = str(option.get("id", ""))
-	pending_build_title = str(option.get("title", "祝福"))
+func _select_blessing_option(option: Dictionary) -> void:
+	pending_blessing_option_id = str(option.get("id", ""))
+	pending_blessing_title = str(option.get("title", "绁濈"))
 	_update_selection_hint()
 	_refresh_selected_cards()
 	_try_emit_combined_selection()
@@ -271,32 +281,38 @@ func _select_small_boss_reward_option(option: Dictionary) -> void:
 		pending_equipment_title = str(option.get("title", "道具"))
 	elif slot_id == "card":
 		pending_card_option_id = str(option.get("id", ""))
-		pending_card_title = str(option.get("title", "卡牌"))
+		pending_card_title = str(option.get("title", "技能奖励"))
 	_update_small_boss_reward_hint()
 	_refresh_selected_cards()
-	if pending_equipment_option_id != "" and pending_card_option_id != "":
+	if _is_small_boss_reward_selection_complete():
 		upgrade_selected.emit(pending_equipment_option_id, pending_card_option_id)
 
 func _try_emit_combined_selection() -> void:
-	if pending_build_option_id == "":
+	if pending_blessing_option_id == "":
 		return
 	if not current_attribute_options.is_empty() and pending_attribute_option_id == "":
 		return
-	upgrade_selected.emit(pending_build_option_id, pending_attribute_option_id)
+	upgrade_selected.emit(pending_blessing_option_id, pending_attribute_option_id)
 
 func _update_selection_hint() -> void:
-	if current_mode != "build":
+	if current_mode != "blessing":
 		return
 	var attribute_text := pending_attribute_title if pending_attribute_title != "" else "未选英雄特性"
-	var build_text := pending_build_title if pending_build_title != "" else "未选祝福"
-	selection_label.text = "当前：%s | %s" % [attribute_text, build_text]
+	var blessing_text := pending_blessing_title if pending_blessing_title != "" else "未选祝福"
+	selection_label.text = "当前：%s | %s" % [attribute_text, blessing_text]
 
 func _update_small_boss_reward_hint() -> void:
 	if current_mode != "small_boss_pair":
 		return
-	var equipment_text := pending_equipment_title if pending_equipment_title != "" else "未选道具"
-	var card_text := pending_card_title if pending_card_title != "" else "未选 Boss Build"
-	selection_label.text = "当前：%s | %s" % [equipment_text, card_text]
+	var parts: Array[String] = []
+	if _small_boss_reward_slot_required("equipment"):
+		parts.append(pending_equipment_title if pending_equipment_title != "" else "未选道具")
+	if _small_boss_reward_slot_required("card"):
+		parts.append(pending_card_title if pending_card_title != "" else "未选技能奖励")
+	if parts.is_empty():
+		selection_label.text = "当前：无可选奖励"
+	else:
+		selection_label.text = "当前：%s" % " | ".join(parts)
 
 func _refresh_selected_cards() -> void:
 	if card_list == null:
@@ -304,8 +320,8 @@ func _refresh_selected_cards() -> void:
 	var ids: Array[String] = []
 	if pending_attribute_option_id != "":
 		ids.append(pending_attribute_option_id)
-	if pending_build_option_id != "":
-		ids.append(pending_build_option_id)
+	if pending_blessing_option_id != "":
+		ids.append(pending_blessing_option_id)
 	if pending_equipment_option_id != "":
 		ids.append(pending_equipment_option_id)
 	if pending_card_option_id != "":
@@ -337,17 +353,37 @@ func _group_small_boss_reward_options(options: Array) -> Dictionary:
 		var option: Dictionary = raw_option.duplicate(true)
 		if str(option.get("slot", "")) == "equipment":
 			option["slot"] = "equipment"
-			option["slot_label"] = "道具"
+			option["slot_label"] = "閬撳叿"
 			groups["equipment"].append(option)
 		else:
 			option["slot"] = "card"
-			option["slot_label"] = "Boss Build"
+			option["slot_label"] = "技能奖励"
 			groups["card"].append(option)
 	return groups
 
+func _get_small_boss_reward_menu_hint() -> String:
+	var labels: Array[String] = []
+	if _small_boss_reward_slot_required("equipment"):
+		labels.append("道具选 1 个")
+	if _small_boss_reward_slot_required("card"):
+		labels.append("技能奖励选 1 个")
+	if labels.is_empty():
+		return "当前没有可选奖励；鼠标移到卡片上查看完整说明。"
+	return "%s；鼠标移到卡片上查看完整说明。" % "，".join(labels)
+
+func _small_boss_reward_slot_required(slot_id: String) -> bool:
+	return not (option_groups.get(slot_id, []) as Array).is_empty()
+
+func _is_small_boss_reward_selection_complete() -> bool:
+	if _small_boss_reward_slot_required("equipment") and pending_equipment_option_id == "":
+		return false
+	if _small_boss_reward_slot_required("card") and pending_card_option_id == "":
+		return false
+	return _small_boss_reward_slot_required("equipment") or _small_boss_reward_slot_required("card")
+
 func _reset_pending_selection() -> void:
-	pending_build_option_id = ""
-	pending_build_title = ""
+	pending_blessing_option_id = ""
+	pending_blessing_title = ""
 	pending_attribute_option_id = ""
 	pending_attribute_title = ""
 	pending_equipment_option_id = ""

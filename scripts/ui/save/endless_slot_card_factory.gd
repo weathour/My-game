@@ -42,7 +42,7 @@ static func build_slot_card(slot_payload: Dictionary, slot_pressed_callback: Cal
 
 static func format_survival_time(total_seconds: float) -> String:
 	var seconds_int: int = max(0, int(floor(total_seconds)))
-	var minutes: int = int(seconds_int / 60)
+	var minutes: int = seconds_int / 60
 	var seconds: int = seconds_int % 60
 	return "%d\u5206%d\u79d2" % [minutes, seconds]
 

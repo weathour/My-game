@@ -55,13 +55,7 @@ static func get_boss_damage_energy(damage_amount: float) -> float:
 
 
 static func register_attack_result(owner, role_id: String, hit_count: int, killed: bool) -> void:
-	owner._trigger_relay_success(role_id, hit_count)
 	apply_entry_lifesteal(owner, role_id, hit_count, killed)
-	apply_theme_hit_returns(owner, role_id, hit_count, killed)
-	if hit_count > 0 and owner._get_card_level("battle_chain") > 0:
-		trigger_chain_reaction(owner, role_id)
-	if hit_count >= 2 and owner._get_card_level("battle_tide") > 0:
-		trigger_clean_tide(owner, role_id)
 	if killed and owner._has_elite_relic("elite_execution_pact") and not owner.execution_pact_burst_active:
 		owner.execution_pact_burst_active = true
 		owner._spawn_burst_effect(owner.global_position + owner.facing_direction * 20.0, 42.0, Color(1.0, 0.62, 0.4, 0.16), 0.16)
@@ -78,25 +72,7 @@ static func register_attack_result(owner, role_id: String, hit_count: int, kille
 
 
 static func apply_theme_hit_returns(owner, role_id: String, hit_count: int, killed: bool) -> void:
-	if hit_count <= 0:
-		return
-	var capped_hits: int = min(hit_count, 6)
-	var blood_drink_level: int = max(0, int(owner._get_card_level("battle_blood_drink")))
-	if blood_drink_level > 0:
-		var heal_amount: float = owner._get_role_damage(role_id) * 0.018 * float(blood_drink_level) * float(capped_hits)
-		if killed:
-			heal_amount += 0.8 * float(blood_drink_level)
-		owner._heal(heal_amount)
-		if role_id == "gunner":
-			owner._add_energy(0.25 * float(blood_drink_level))
-
-	var finale_charge_level: int = max(0, int(owner._get_card_level("battle_finale_charge")))
-	if finale_charge_level > 0:
-		owner._add_energy(0.16 * float(finale_charge_level) * float(capped_hits))
-
-	var finale_unity_level: int = max(0, int(owner._get_card_level("battle_finale_unity")))
-	if finale_unity_level > 0 and killed:
-		owner._add_energy(0.65 * float(finale_unity_level))
+	return
 
 
 static func apply_entry_lifesteal(owner, role_id: String, hit_count: int, killed: bool) -> void:
@@ -117,110 +93,15 @@ static func apply_entry_lifesteal(owner, role_id: String, hit_count: int, killed
 
 
 static func trigger_chain_reaction(owner, role_id: String) -> void:
-	var chain_level: int = owner._get_card_level("battle_chain")
-	if chain_level <= 0 or owner.chain_reaction_active:
-		return
-	owner.chain_reaction_active = true
-	var search_center: Vector2 = owner.global_position + owner.facing_direction * 28.0
-	var search_radius: float = 220.0
-	var bounce_count: int = 1 if chain_level == 1 else 2
-	var chain_damage_ratio: float = [0.45, 0.55, 0.65][chain_level - 1]
-	var previous_target: Node2D = null
-	var from_position: Vector2 = search_center
-	for bounce_index in range(bounce_count):
-		var chosen_target: Node2D = null
-		var best_distance: float = search_radius
-		for enemy in owner.get_tree().get_nodes_in_group("enemies"):
-			if not is_instance_valid(enemy):
-				continue
-			if enemy == previous_target:
-				continue
-			var distance: float = from_position.distance_to(enemy.global_position)
-			if distance > best_distance:
-				continue
-			best_distance = distance
-			chosen_target = enemy
-		if chosen_target == null:
-			break
-		owner._spawn_dash_line_effect(from_position, chosen_target.global_position, Color(0.92, 0.56, 1.0, 0.9), 6.0, 0.1)
-		owner._spawn_target_lock_effect(chosen_target.global_position, 18.0 + chain_level * 4.0, Color(0.92, 0.56, 1.0, 0.76), 0.12)
-		owner._spawn_burst_effect(chosen_target.global_position, 22.0 + chain_level * 4.0, Color(0.72, 0.38, 1.0, 0.2), 0.12)
-		var chain_kill: bool = owner._deal_damage_to_enemy(chosen_target, owner._get_role_damage(role_id) * chain_damage_ratio, role_id, 0.02 * chain_level, 1.8, 1.0, 0.0)
-		owner._register_attack_result(role_id, 1, chain_kill)
-		previous_target = chosen_target
-		from_position = chosen_target.global_position
-	if chain_level >= 3:
-		owner._add_energy(2.0)
-	owner.chain_reaction_active = false
+	return
 
 
 static func trigger_clean_tide(owner, role_id: String) -> void:
-	var tide_level: int = owner._get_card_level("battle_tide")
-	if tide_level <= 0 or owner.clean_tide_active:
-		return
-	owner.clean_tide_active = true
-	var tide_radius: float = [32.0, 40.0, 48.0][tide_level - 1]
-	var tide_damage_ratio: float = [0.45, 0.55, 0.65][tide_level - 1]
-	var tide_center: Vector2 = owner.global_position + owner.facing_direction * (28.0 + tide_radius * 0.4)
-	owner._spawn_ring_effect(tide_center, tide_radius * 1.2, Color(0.3, 0.92, 1.0, 0.76), 6.0, 0.16)
-	owner._spawn_burst_effect(tide_center, tide_radius * 1.08, Color(0.18, 0.84, 1.0, 0.2), 0.14)
-	var slow_multiplier: float = 1.0
-	var slow_duration: float = 0.0
-	if tide_level >= 2:
-		slow_multiplier = 0.8
-		slow_duration = 0.8
-	var tide_hits: int = owner._damage_enemies_in_radius(tide_center, tide_radius, owner._get_role_damage(role_id) * tide_damage_ratio, 0.0, slow_multiplier, slow_duration)
-	if tide_hits > 0:
-		owner._register_attack_result(role_id, tide_hits, false)
-	if tide_level >= 3:
-		owner._add_energy(6.0)
-	owner.clean_tide_active = false
+	return
 
 
 static func spawn_attack_aftershock(owner, center: Vector2, role_id: String) -> void:
-	var aftershock_level: int = owner._get_card_level("battle_aftershock")
-	if aftershock_level <= 0:
-		return
-	var level_index: int = clamp(aftershock_level - 1, 0, 2)
-	var radius: float = [48.0, 64.0, 80.0][level_index]
-	var damage_ratio: float = [0.35, 0.45, 0.55][level_index]
-	var pulse_count: int = 2 if aftershock_level == 1 else 3
-	var current_scene: Node = owner.get_tree().current_scene
-	if current_scene == null:
-		return
-	var controller := Node2D.new()
-	controller.name = "AttackAftershockController"
-	current_scene.add_child(controller)
-	var tween := controller.create_tween()
-	for pulse_index in range(pulse_count):
-		if pulse_index > 0:
-			tween.tween_interval(0.12)
-		tween.tween_callback(func() -> void:
-			var current_radius: float = radius + pulse_index * 14.0
-			var current_damage: float = owner._get_role_damage(role_id) * damage_ratio
-			var accent: Color = owner._get_role_theme_color(role_id)
-			owner._spawn_ring_effect(center, current_radius, Color(min(1.0, accent.r + 0.14), min(1.0, accent.g + 0.14), min(1.0, accent.b + 0.18), 0.88), 8.0, 0.2)
-			owner._spawn_burst_effect(center, current_radius * 0.94, Color(accent.r, accent.g, accent.b, 0.26), 0.18)
-			match role_id:
-				"swordsman":
-					var angle_shift: float = pulse_index * 0.18
-					owner._spawn_crescent_wave_effect(center, Vector2.RIGHT.rotated(angle_shift), current_radius * 0.96, Color(0.24, 0.94, 1.0, 0.7), 0.2, 220.0, 18.0 + pulse_index * 4.0)
-					owner._spawn_crescent_wave_effect(center, Vector2.RIGHT.rotated(PI + angle_shift), current_radius * 0.82, Color(1.0, 0.2, 0.16, 0.48), 0.18, 200.0, 14.0 + pulse_index * 3.0)
-				"gunner":
-					owner._spawn_radial_rays_effect(center, current_radius * 1.06, 8 + aftershock_level * 2 + pulse_index * 2, Color(1.0, 0.66, 0.34, 0.7), 4.0 + pulse_index, 0.2, pulse_index * 0.14)
-				"mage":
-					owner._spawn_frost_sigils_effect(center, current_radius * 0.76, Color(0.9, 0.98, 1.0, 0.84), 0.2)
-					owner._spawn_vortex_effect(center, current_radius * 0.42, Color(0.72, 0.8, 1.0, 0.34), 0.2)
-			var slow_multiplier: float = 1.0
-			var slow_duration: float = 0.0
-			if aftershock_level >= 2:
-				slow_multiplier = 0.75
-				slow_duration = 1.0
-			var shock_hits: int = owner._damage_enemies_in_radius(center, current_radius, current_damage, 0.0, slow_multiplier, slow_duration)
-			if shock_hits > 0:
-				owner._register_attack_result(role_id, shock_hits, false)
-		)
-	tween.tween_callback(controller.queue_free)
+	return
 
 
 static func play_player_hurt_feedback(owner) -> void:

@@ -7,11 +7,21 @@ static func _mark_temporary_effect(node: Node) -> void:
 	if node != null:
 		node.add_to_group("temporary_effects")
 
+static func _can_spawn_temporary_effect(owner: Node) -> bool:
+	if owner == null or owner.get_tree() == null:
+		return false
+	var root := owner.get_tree().current_scene
+	if root != null and root.has_method("_can_spawn_runtime_group"):
+		return bool(root._can_spawn_runtime_group("temporary_effects", 160))
+	return true
+
 static func spawn_dash_line_effect(owner: Node, start_position: Vector2, end_position: Vector2, color: Color, width: float, duration: float) -> void:
 	PLAYER_EFFECT_LINE_PRIMITIVES.spawn_dash_line_effect(owner, start_position, end_position, color, width, duration)
 
 static func spawn_combat_tag(owner: Node, position: Vector2, text: String, color: Color, show_gameplay_text_hints: bool) -> void:
 	if not show_gameplay_text_hints:
+		return
+	if not _can_spawn_temporary_effect(owner):
 		return
 	var current_scene := owner.get_tree().current_scene
 	if current_scene == null:
@@ -52,6 +62,8 @@ static func spawn_thrust_effect(owner: Node, start_position: Vector2, end_positi
 
 static func spawn_guard_effect(owner: Node, center: Vector2, radius: float, color: Color, duration: float, ring_points: PackedVector2Array) -> void:
 	spawn_ring_effect(owner, center, radius, Color(color.r, color.g, color.b, min(0.9, color.a + 0.2)), 6.0, duration, ring_points)
+	if not _can_spawn_temporary_effect(owner):
+		return
 	var current_scene := owner.get_tree().current_scene
 	if current_scene == null:
 		return
@@ -78,6 +90,8 @@ static func spawn_guard_effect(owner: Node, center: Vector2, radius: float, colo
 	tween.tween_callback(shield.queue_free)
 
 static func spawn_burst_effect(owner: Node, center: Vector2, color: Color, duration: float, points: PackedVector2Array) -> void:
+	if not _can_spawn_temporary_effect(owner):
+		return
 	var current_scene := owner.get_tree().current_scene
 	if current_scene == null:
 		return
@@ -97,6 +111,8 @@ static func spawn_burst_effect(owner: Node, center: Vector2, color: Color, durat
 	tween.tween_callback(polygon.queue_free)
 
 static func spawn_frost_sigils_effect(owner: Node, center: Vector2, radius: float, color: Color, duration: float) -> void:
+	if not _can_spawn_temporary_effect(owner):
+		return
 	var current_scene := owner.get_tree().current_scene
 	if current_scene == null:
 		return
@@ -148,6 +164,8 @@ static func spawn_target_lock_effect(owner: Node, center: Vector2, radius: float
 	PLAYER_EFFECT_SHAPE_PRIMITIVES.spawn_target_lock_effect(owner, center, radius, color, duration, ring_points)
 
 static func spawn_radial_rays_effect(owner: Node, center: Vector2, radius: float, ray_count: int, color: Color, width: float, duration: float, angle_offset: float = 0.0) -> void:
+	if not _can_spawn_temporary_effect(owner):
+		return
 	var current_scene := owner.get_tree().current_scene
 	if current_scene == null:
 		return

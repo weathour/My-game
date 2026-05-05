@@ -4,7 +4,17 @@ static func _mark_temporary_effect(node: Node) -> void:
 	if node != null:
 		node.add_to_group("temporary_effects")
 
+static func _can_spawn_temporary_effect(owner: Node) -> bool:
+	if owner == null or owner.get_tree() == null:
+		return false
+	var root := owner.get_tree().current_scene
+	if root != null and root.has_method("_can_spawn_runtime_group"):
+		return bool(root._can_spawn_runtime_group("temporary_effects", 160))
+	return true
+
 static func spawn_vortex_effect(owner: Node, center: Vector2, radius: float, color: Color, duration: float, outer_points: PackedVector2Array, inner_points: PackedVector2Array) -> void:
+	if not _can_spawn_temporary_effect(owner):
+		return
 	var current_scene := owner.get_tree().current_scene
 	if current_scene == null:
 		return
@@ -52,6 +62,8 @@ static func spawn_vortex_effect(owner: Node, center: Vector2, radius: float, col
 
 
 static func spawn_target_lock_effect(owner: Node, center: Vector2, radius: float, color: Color, duration: float, ring_points: PackedVector2Array) -> void:
+	if not _can_spawn_temporary_effect(owner):
+		return
 	var current_scene := owner.get_tree().current_scene
 	if current_scene == null:
 		return

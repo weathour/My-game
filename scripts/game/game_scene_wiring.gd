@@ -36,8 +36,8 @@ static func _setup_hud(main: Node) -> void:
 	main.add_child(main.hud)
 	_connect_if_present(main.hud, "developer_level_up_requested", Callable(main, "_on_developer_level_up_requested"))
 	_connect_if_present(main.hud, "developer_boss_spawn_requested", Callable(main, "_on_developer_boss_spawn_requested"))
-	_connect_if_present(main.hud, "developer_card_grant_requested", Callable(main, "_on_developer_card_grant_requested"))
 	_connect_if_present(main.hud, "developer_small_boss_spawn_requested", Callable(main, "_on_developer_small_boss_spawn_requested"))
+	_connect_if_present(main.hud, "developer_skill_unlock_requested", Callable(main, "_on_developer_skill_unlock_requested"))
 
 static func _setup_character_panel(main: Node) -> void:
 	main.character_panel = CHARACTER_PANEL.new()

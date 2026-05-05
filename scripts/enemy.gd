@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+@warning_ignore("unused_signal")
 signal defeated(enemy_kind: String)
 
 const ENEMY_BOSS_STATE := preload("res://scripts/enemies/enemy_boss_state.gd")

@@ -288,12 +288,12 @@ static func _scale_active_cooldowns(owner, scale: float) -> void:
 	owner.switch_cooldown_remaining = max(0.0, owner.switch_cooldown_remaining * scale)
 	owner.perpetual_motion_cooldown_remaining = max(0.0, owner.perpetual_motion_cooldown_remaining * scale)
 	for ability in [
-		owner.swordsman_dangzhen_fan_ability,
 		owner.swordsman_blade_storm_ability,
-		owner.gunner_dangzhen_beam_ability,
+		owner.swordsman_crescent_wave_ability,
 		owner.gunner_infinite_reload_ability,
-		owner.mage_dangzhen_wave_ability,
-		owner.mage_tidal_surge_ability
+		owner.gunner_shrapnel_field_ability,
+		owner.mage_tidal_surge_ability,
+		owner.mage_meta_field_ability
 	]:
 		if ability != null and ability.get("cooldown_remaining") != null:
 			ability.cooldown_remaining = max(0.0, float(ability.cooldown_remaining) * scale)

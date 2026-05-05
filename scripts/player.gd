@@ -2,7 +2,6 @@ extends CharacterBody2D
 
 const DEVELOPER_MODE := preload("res://scripts/developer_mode.gd")
 const GAME_SETTINGS := preload("res://scripts/game_settings.gd")
-const BUILD_SYSTEM := preload("res://scripts/build/build_system.gd")
 const PLAYER_SAVE_CODEC := preload("res://scripts/player/player_save_codec.gd")
 const PLAYER_STATE_FACTORY := preload("res://scripts/player/player_state_factory.gd")
 const PLAYER_LIFECYCLE_FLOW := preload("res://scripts/player/player_lifecycle_flow.gd")
@@ -11,16 +10,12 @@ const PLAYER_ROLE_PRESENTER := preload("res://scripts/player/player_role_present
 const PLAYER_TARGETING := preload("res://scripts/player/player_targeting.gd")
 const PLAYER_MATH := preload("res://scripts/player/player_math.gd")
 const PLAYER_ROLE_STAT_FLOW := preload("res://scripts/player/player_role_stat_flow.gd")
-const PLAYER_BUILD_STATE := preload("res://scripts/player/player_build_state.gd")
-const PLAYER_UPGRADE_OPTIONS := preload("res://scripts/player/player_upgrade_options.gd")
 const PLAYER_LEVEL_OPTIONS := preload("res://scripts/player/player_level_options.gd")
 const PLAYER_LEVEL_FLOW := preload("res://scripts/player/player_level_flow.gd")
 const PLAYER_BLESSING_SYSTEM := preload("res://scripts/player/player_blessing_system.gd")
-const PLAYER_CARD_APPLIER := preload("res://scripts/player/player_card_applier.gd")
+const PLAYER_BLESSING_SKILL_STATE := preload("res://scripts/player/player_blessing_skill_state.gd")
 const PLAYER_UPGRADE_APPLIER := preload("res://scripts/player/player_upgrade_applier.gd")
-const PLAYER_SLOT_RESONANCE_FLOW := preload("res://scripts/player/player_slot_resonance_flow.gd")
 const PLAYER_REWARD_APPLIER := preload("res://scripts/player/player_reward_applier.gd")
-const PLAYER_SKILL_COOLDOWN_SLOTS := preload("res://scripts/player/player_skill_cooldown_slots.gd")
 const PLAYER_SKILL_COOLDOWN_FLOW := preload("res://scripts/player/player_skill_cooldown_flow.gd")
 const PLAYER_STAT_PAYLOAD := preload("res://scripts/player/player_stat_payload.gd")
 const PLAYER_RUN_SAVE_STATE := preload("res://scripts/player/player_run_save_state.gd")
@@ -28,9 +23,7 @@ const PLAYER_AUTHORED_EFFECTS := preload("res://scripts/player/player_authored_e
 const PLAYER_PROJECTILE_SPAWNER := preload("res://scripts/player/player_projectile_spawner.gd")
 const PLAYER_DAMAGE_HELPERS := preload("res://scripts/player/player_damage_helpers.gd")
 const PLAYER_DAMAGE_RESOLVER := preload("res://scripts/player/player_damage_resolver.gd")
-const PLAYER_COMBAT_RESULT_FLOW := preload("res://scripts/player/player_combat_result_flow.gd")
 const PLAYER_COMBAT_MODIFIERS := preload("res://scripts/player/player_combat_modifiers.gd")
-const PLAYER_THEME_SKILL_FLOW := preload("res://scripts/player/player_theme_skill_flow.gd")
 const PLAYER_EQUIPMENT_FLOW := preload("res://scripts/player/player_equipment_flow.gd")
 const PLAYER_HEALTH_VISUALS := preload("res://scripts/player/player_health_visuals.gd")
 const PLAYER_TIMER_FLOW := preload("res://scripts/player/player_timer_flow.gd")
@@ -43,9 +36,7 @@ const PLAYER_ATTACK_LOOP_FLOW := preload("res://scripts/player/player_attack_loo
 const PLAYER_CAMERA_FEEDBACK := preload("res://scripts/player/player_camera_feedback.gd")
 const PLAYER_MAP_BOUNDS_FLOW := preload("res://scripts/player/player_map_bounds_flow.gd")
 const PLAYER_FIELD_EFFECT_FLOW := preload("res://scripts/player/player_field_effect_flow.gd")
-const PLAYER_BUILD_PROGRESS_FLOW := preload("res://scripts/player/player_build_progress_flow.gd")
 const PLAYER_ATTRIBUTE_FLOW := preload("res://scripts/player/player_attribute_flow.gd")
-const PLAYER_FIRST_BATCH_MILESTONE_FLOW := preload("res://scripts/player/player_first_batch_milestone_flow.gd")
 const PLAYER_VISUAL_LAYOUT := preload("res://scripts/player/player_visual_layout.gd")
 const PLAYER_TEXTURE_LOADER := preload("res://scripts/player/player_texture_loader.gd")
 const PLAYER_VISUAL_STATE := preload("res://scripts/player/player_visual_state.gd")
@@ -56,15 +47,12 @@ const ROLE_RESOURCE_STATE := preload("res://scripts/player/roles/role_resource_s
 const SWORDSMAN_ROLE := preload("res://scripts/player/roles/swordsman_role.gd")
 const GUNNER_ROLE := preload("res://scripts/player/roles/gunner_role.gd")
 const MAGE_ROLE := preload("res://scripts/player/roles/mage_role.gd")
-const DANGZHEN_SWORD_FAN_ABILITY := preload("res://scripts/abilities/dangzhen_sword_fan_ability.gd")
 const SWORDSMAN_BLADE_STORM_ABILITY := preload("res://scripts/abilities/swordsman_blade_storm_ability.gd")
-const SWORDSMAN_BLADE_SHADOW_ABILITY := preload("res://scripts/abilities/swordsman_blade_shadow_ability.gd")
-const MAGE_DANGZHEN_WAVE_ABILITY := preload("res://scripts/abilities/dangzhen_mage_wave_ability.gd")
 const MAGE_TIDAL_SURGE_ABILITY := preload("res://scripts/abilities/mage_tidal_surge_ability.gd")
-const MAGE_GUARDIAN_PUPPET_ABILITY := preload("res://scripts/abilities/mage_guardian_puppet_ability.gd")
-const DANGZHEN_GUNNER_BEAM_ABILITY := preload("res://scripts/abilities/dangzhen_gunner_beam_ability.gd")
 const GUNNER_INFINITE_RELOAD_ABILITY := preload("res://scripts/abilities/gunner_infinite_reload_ability.gd")
-const GUNNER_SPOTTER_DRONE_ABILITY := preload("res://scripts/abilities/gunner_spotter_drone_ability.gd")
+const MAGE_META_FIELD_ABILITY := preload("res://scripts/abilities/mage_meta_field_ability.gd")
+const SWORDSMAN_CRESCENT_WAVE_ABILITY := preload("res://scripts/abilities/swordsman_crescent_wave_ability.gd")
+const GUNNER_SHRAPNEL_FIELD_ABILITY := preload("res://scripts/abilities/gunner_shrapnel_field_ability.gd")
 const WHITE_KEY_SHADER := preload("res://shaders/white_key.gdshader")
 const SWORD_SLASH_EFFECT_SCENE := preload("res://effects/sword/slash3/slasheffect3.tscn")
 const SWORD_OMNISLASH_EFFECT_SCENE := preload("res://effects/sword/omnislash/omnislash.tscn")
@@ -77,8 +65,6 @@ const MAGE_WARNING_EFFECT_SCENE := preload("res://effects/wizard/warning/warning
 const MAGE_GATHERING_EFFECT_SCENE := preload("res://effects/wizard/wave/gathering/gatering.tscn")
 const MAGE_WAVE_EFFECT_SCENE := preload("res://effects/wizard/wave/wave.tscn")
 
-const DANGZHEN_PREVIEW_ACTIVE := false
-const DANGZHEN_ONLY_BUILD_ACTIVE := true
 const SWORD_FAN_SCENE_SIZE := Vector2(1024.0, 1024.0)
 const SWORD_FAN_SCENE_VISIBLE_BOUNDS := Rect2(485.0, 405.0, 117.0, 50.0)
 const GUNNER_INTERSECT_SCENE_SIZE := Vector2(1024.0, 1024.0)
@@ -135,8 +121,6 @@ const ROLE_SHARE_DAMAGE_RATIO := 0.42
 const ROLE_SHARE_INTERVAL_RATIO := 0.34
 const ROLE_SHARE_RANGE_RATIO := 0.45
 const ROLE_SHARE_SKILL_RATIO := 0.4
-const SLOT_RESONANCE_FIRST_THRESHOLD := 3
-const SLOT_RESONANCE_SECOND_THRESHOLD := 6
 const SLOT_EVOLUTION_THRESHOLD := 2
 const GEM_COLLECTION_INTERVAL := 0.08
 const GEM_ATTRACT_RADIUS := 128.8
@@ -233,12 +217,10 @@ var auto_attack_enabled: bool = false
 var roles: Array = []
 var role_upgrade_levels: Dictionary = {}
 var background_cooldowns: Dictionary = {}
-var build_slot_levels: Dictionary = {}
-var card_pick_levels: Dictionary = {}
 var role_blessing_levels: Dictionary = {}
 var skill_blessing_levels: Dictionary = {}
-var current_build_offer: Dictionary = {}
-var first_batch_milestone_state: Dictionary = {}
+var blessing_skill_state: Dictionary = {}
+var current_blessing_offer: Dictionary = {}
 var elite_relics_unlocked: Dictionary = {}
 var equipment_levels: Dictionary = {}
 var role_equipment_levels: Dictionary = {}
@@ -253,13 +235,9 @@ var equipment_low_health_damage_taken_multiplier: float = 1.0
 var equipment_skill_range_multiplier: float = 1.0
 var equipment_cooldown_multiplier: float = 1.0
 var attribute_training_levels: Dictionary = {}
-var slot_resonances_unlocked: Dictionary = {}
 var role_special_states: Dictionary = {}
-var special_reward_levels: Dictionary = {}
-var theme_skill_trigger_depth: int = 0
-var theme_blood_reflux_cooldown: float = 0.0
 var swordsman_blade_storm_ability = SWORDSMAN_BLADE_STORM_ABILITY.new()
-var swordsman_blade_shadow_ability = SWORDSMAN_BLADE_SHADOW_ABILITY.new()
+var swordsman_crescent_wave_ability = SWORDSMAN_CRESCENT_WAVE_ABILITY.new()
 var camera_node: Camera2D
 var camera_base_offset: Vector2 = Vector2.ZERO
 var camera_shake_strength: float = 0.0
@@ -278,11 +256,6 @@ var entry_blessing_remaining: float = 0.0
 var entry_lifesteal_ratio: float = 0.0
 var entry_haste_interval_bonus: float = 0.0
 var entry_haste_move_speed_multiplier: float = 1.0
-var relay_window_remaining: float = 0.0
-var relay_ready_role_id: String = ""
-var relay_from_role_id: String = ""
-var relay_label: String = ""
-var relay_bonus_pending: bool = false
 var standby_entry_role_id: String = ""
 var standby_entry_label: String = ""
 var standby_entry_remaining: float = 0.0
@@ -290,10 +263,6 @@ var standby_entry_damage_multiplier: float = 1.0
 var standby_entry_interval_bonus: float = 0.0
 var guard_cover_remaining: float = 0.0
 var guard_cover_damage_multiplier: float = 1.0
-var team_combo_remaining: float = 0.0
-var team_combo_damage_multiplier: float = 1.0
-var team_combo_move_multiplier: float = 1.0
-var team_combo_background_multiplier: float = 1.0
 var borrow_fire_role_id: String = ""
 var borrow_fire_remaining: float = 0.0
 var borrow_fire_damage_multiplier: float = 1.0
@@ -308,7 +277,6 @@ var frenzy_remaining: float = 0.0
 var frenzy_stacks: int = 0
 var frenzy_overkill_counter: int = 0
 var role_standby_elapsed: Dictionary = {}
-var role_cycle_marks: Dictionary = {}
 var role_mana_values: Dictionary = {}
 var role_ultimate_energy_lock_remaining: Dictionary = {}
 var role_share_initialized: bool = false
@@ -318,24 +286,19 @@ var active_role_visual_hidden_role_id: String = ""
 var runtime_texture_cache: Dictionary = {}
 var swordsman_role = SWORDSMAN_ROLE.new()
 var swordsman_attack_chain: int = 0
-var swordsman_dangzhen_fan_ability = DANGZHEN_SWORD_FAN_ABILITY.new()
 var gunner_role = GUNNER_ROLE.new()
 var gunner_attack_chain: int = 0
-var gunner_dangzhen_beam_ability = DANGZHEN_GUNNER_BEAM_ABILITY.new()
 var gunner_infinite_reload_ability = GUNNER_INFINITE_RELOAD_ABILITY.new()
-var gunner_spotter_drone_ability = GUNNER_SPOTTER_DRONE_ABILITY.new()
+var gunner_shrapnel_field_ability = GUNNER_SHRAPNEL_FIELD_ABILITY.new()
 var mage_role = MAGE_ROLE.new()
 var mage_attack_chain: int = 0
-var mage_dangzhen_wave_ability = MAGE_DANGZHEN_WAVE_ABILITY.new()
 var mage_tidal_surge_ability = MAGE_TIDAL_SURGE_ABILITY.new()
-var mage_guardian_puppet_ability = MAGE_GUARDIAN_PUPPET_ABILITY.new()
+var mage_meta_field_ability = MAGE_META_FIELD_ABILITY.new()
 var gunner_lock_target: Node2D
 var gunner_lock_stacks: int = 0
 var gem_collection_elapsed: float = 0.0
 var contact_check_elapsed: float = 0.0
 var execution_pact_burst_active: bool = false
-var chain_reaction_active: bool = false
-var clean_tide_active: bool = false
 var final_set_unlock_announced: Dictionary = {}
 var story_equipped_styles: Dictionary = {
 	"swordsman": "default",
@@ -464,17 +427,11 @@ func _spawn_sword_fan_scene_effect(center: Vector2, direction: Vector2, scale_mu
 		false
 	)
 
-func _get_dangzhen_sword_visual_size(split_level: int, huichao_level: int) -> Vector2:
-	return PLAYER_MATH.get_dangzhen_sword_visual_size(split_level, huichao_level)
-
-func _get_dangzhen_gunner_beam_hit_half_width(visual_thickness: float) -> float:
-	return PLAYER_MATH.get_dangzhen_gunner_beam_hit_half_width(visual_thickness, GUNNER_INTERSECT_VISUAL_SCALE)
-
 func _spawn_gunner_intersect_scene_effect(center: Vector2, direction: Vector2, visual_length: float = 112.0, visual_thickness: float = 18.0, gather_visual_length: float = -1.0) -> Node2D:
 	return PLAYER_AUTHORED_EFFECTS.spawn_owner_gunner_intersect_effect(self, center, direction, visual_length, visual_thickness, gather_visual_length)
 
-func _get_dangzhen_gunner_range_multiplier(huichao_level: int) -> float:
-	return PLAYER_MATH.get_dangzhen_gunner_range_multiplier(huichao_level)
+func _get_infinite_reload_range_multiplier() -> float:
+	return PLAYER_MATH.get_infinite_reload_range_multiplier()
 
 func _get_gunner_intersect_combo_duration() -> float:
 	return PLAYER_AUTHORED_EFFECTS.get_owner_gunner_intersect_combo_duration(self)
@@ -506,9 +463,6 @@ func _spawn_mage_boom_scene_effect(center: Vector2, radius: float) -> Node2D:
 		14,
 		0.3
 	)
-
-func _get_dangzhen_qichao_damage(role_id: String, qichao_level: int) -> float:
-	return PLAYER_MATH.get_dangzhen_qichao_damage(role_id, qichao_level)
 
 func _spawn_mage_warning_scene_effect(center: Vector2, radius: float) -> Node2D:
 	return PLAYER_AUTHORED_EFFECTS.spawn_scaled_animated_scene(
@@ -548,21 +502,6 @@ func _build_role_upgrade_data() -> Dictionary:
 func _build_background_cooldowns() -> Dictionary:
 	return PLAYER_ROLE_STAT_FLOW.build_background_cooldowns(self)
 
-func _build_slot_progress_data() -> Dictionary:
-	return PLAYER_STATE_FACTORY.build_slot_progress_data()
-
-func _make_slot_resonance_key(slot_id: String, threshold: int) -> String:
-	return PLAYER_SLOT_RESONANCE_FLOW.make_slot_resonance_key(slot_id, threshold)
-
-func _is_slot_resonance_unlocked(slot_id: String, threshold: int) -> bool:
-	return PLAYER_SLOT_RESONANCE_FLOW.is_slot_resonance_unlocked(self, slot_id, threshold)
-
-func _unlock_slot_resonance(slot_id: String, threshold: int) -> void:
-	PLAYER_SLOT_RESONANCE_FLOW.unlock_slot_resonance(self, slot_id, threshold)
-
-func _check_slot_resonance_unlocks() -> void:
-	PLAYER_SLOT_RESONANCE_FLOW.check_slot_resonance_unlocks(self)
-
 func configure_story_loadout(team_order: Array, equipped_styles: Dictionary) -> void:
 	var ordered_roles: Array = []
 	for role_variant in team_order:
@@ -579,9 +518,6 @@ func configure_story_loadout(team_order: Array, equipped_styles: Dictionary) -> 
 		story_equipped_styles[role_id] = str(equipped_styles.get(role_id, "default"))
 	active_role_index = clamp(active_role_index, 0, max(0, roles.size() - 1))
 	_update_active_role_state()
-
-func _uses_blank_upgrade_fallback() -> bool:
-	return DANGZHEN_ONLY_BUILD_ACTIVE
 
 func _get_story_style_id(role_id: String) -> String:
 	return PLAYER_STORY_STYLES.get_story_style_id(story_equipped_styles, role_id)
@@ -605,7 +541,16 @@ func _get_story_style_slow_bonus(role_id: String) -> float:
 	return PLAYER_STORY_STYLES.get_slow_bonus(_get_story_style_id(role_id))
 
 func _get_upgrade_slot_label(slot_id: String) -> String:
-	return BUILD_SYSTEM.get_slot_label(slot_id)
+	match slot_id:
+		"body":
+			return "祝福"
+		"combat":
+			return "战斗"
+		"skill":
+			return "技能"
+		"special":
+			return "奖励"
+	return slot_id
 
 func _build_role_special_state_data() -> Dictionary:
 	return ROLE_DATABASE.get_role_special_state_data()
@@ -648,6 +593,21 @@ func _get_attribute_dodge_chance() -> float:
 
 func _get_attribute_pickup_range_bonus() -> float:
 	return PLAYER_ATTRIBUTE_FLOW.get_attribute_pickup_range_bonus(self)
+
+func _get_swordsman_low_health_flat_heal() -> float:
+	return PLAYER_ATTRIBUTE_FLOW.get_swordsman_low_health_flat_heal(self)
+
+func _get_swordsman_low_health_threshold() -> float:
+	return PLAYER_ATTRIBUTE_FLOW.get_swordsman_low_health_threshold(self)
+
+func _get_gunner_distance_damage_bonus() -> float:
+	return PLAYER_ATTRIBUTE_FLOW.get_gunner_distance_damage_bonus(self)
+
+func _get_mage_skill_range_multiplier() -> float:
+	return PLAYER_ATTRIBUTE_FLOW.get_mage_skill_range_multiplier(self)
+
+func _get_mage_kill_energy_multiplier() -> float:
+	return PLAYER_ATTRIBUTE_FLOW.get_mage_kill_energy_multiplier(self)
 
 func _get_primary_attribute_damage_bonus(role_id: String) -> float:
 	return PLAYER_ATTRIBUTE_FLOW.get_primary_attribute_damage_bonus(self, role_id)
@@ -854,7 +814,7 @@ func _emit_active_mana_changed() -> void:
 	PLAYER_RESOURCE_FLOW.emit_active_mana_changed(self)
 
 func _get_card_level(card_id: String) -> int:
-	return PLAYER_BUILD_STATE.get_card_level(card_pick_levels, card_id)
+	return 0
 
 func _get_role_blessing_stat_bonus(role_id: String, stat: String) -> float:
 	return PLAYER_BLESSING_SYSTEM.get_role_stat_bonus(self, role_id, stat)
@@ -864,6 +824,9 @@ func _get_skill_blessing_stat_bonus(stat: String) -> float:
 
 func _get_skill_blessing_effect_scales(stat: String) -> Array[float]:
 	return PLAYER_BLESSING_SYSTEM.get_skill_effect_scales(self, stat)
+
+func _get_skill_blessing_effect_scales_for_skill(skill_id: String, stat: String) -> Array[float]:
+	return PLAYER_BLESSING_SKILL_STATE.get_skill_effect_scales(self, skill_id, stat)
 
 func get_role_blessing_levels(role_id: String) -> Dictionary:
 	PLAYER_BLESSING_SYSTEM.sync_shared_role_blessings(self)
@@ -885,47 +848,32 @@ func compose_role_blessing(role_id: String, blessing_id: String) -> bool:
 func compose_skill_blessing(blessing_id: String) -> bool:
 	return PLAYER_BLESSING_SYSTEM.compose_skill_blessing(self, blessing_id)
 
-func _get_build_final_set_data(set_key: String) -> Dictionary:
-	return BUILD_SYSTEM.get_final_set_data(set_key)
+func _refresh_blessing_skill_unlocks() -> void:
+	for event in PLAYER_BLESSING_SKILL_STATE.refresh_unlocks(self):
+		var title := str((event as Dictionary).get("title", "技能觉醒"))
+		_spawn_combat_tag(global_position + Vector2(0.0, -78.0), "%s 解锁" % title, Color(0.58, 0.95, 0.86, 1.0))
+	stats_changed.emit(get_stat_summary())
 
-func _add_special_reward_level(reward_id: String, amount: int = 1) -> int:
-	return PLAYER_BUILD_STATE.add_special_reward_level(special_reward_levels, reward_id, amount)
+func _is_blessing_skill_unlocked(skill_id: String) -> bool:
+	return PLAYER_BLESSING_SKILL_STATE.is_skill_unlocked(self, skill_id)
 
-func _has_swordsman_blade_storm_reward() -> bool:
-	return PLAYER_BUILD_STATE.has_swordsman_blade_storm_reward(special_reward_levels) \
-		or _get_card_level("swd_tide_unbound") > 0 \
-		or BUILD_SYSTEM.is_theme_unlocked(card_pick_levels, special_reward_levels, "branch_omni_edge")
+func _get_blessing_skill_tier(skill_id: String) -> int:
+	return PLAYER_BLESSING_SKILL_STATE.get_skill_tier(self, skill_id)
 
-func _can_offer_swordsman_blade_storm_reward() -> bool:
-	return PLAYER_BUILD_STATE.can_offer_swordsman_blade_storm_reward(
-		card_pick_levels,
-		special_reward_levels,
-		_get_build_final_set_data("battle_dangzhen")
-	)
+func _get_blessing_skill_quantity_count(skill_id: String) -> int:
+	return PLAYER_BLESSING_SKILL_STATE.get_quantity_extra_count(self, skill_id)
 
-func _has_gunner_infinite_reload_reward() -> bool:
-	return PLAYER_BUILD_STATE.has_gunner_infinite_reload_reward(special_reward_levels) \
-		or _get_card_level("gun_infinite_fireline") > 0 \
-		or BUILD_SYSTEM.is_theme_unlocked(card_pick_levels, special_reward_levels, "branch_blood_shield")
+func _get_blessing_skill_combo_scales(skill_id: String) -> Array[float]:
+	return PLAYER_BLESSING_SKILL_STATE.get_combo_extra_scales(self, skill_id)
 
-func _can_offer_gunner_infinite_reload_reward() -> bool:
-	return PLAYER_BUILD_STATE.can_offer_gunner_infinite_reload_reward(
-		card_pick_levels,
-		special_reward_levels,
-		_get_build_final_set_data("battle_dangzhen")
-	)
+func _get_blessing_skill_duration_multiplier(skill_id: String) -> float:
+	return PLAYER_BLESSING_SKILL_STATE.get_duration_multiplier(self, skill_id)
 
-func _has_mage_tidal_surge_reward() -> bool:
-	return PLAYER_BUILD_STATE.has_mage_tidal_surge_reward(special_reward_levels) \
-		or _get_card_level("mag_sky_dome") > 0 \
-		or BUILD_SYSTEM.is_theme_unlocked(card_pick_levels, special_reward_levels, "branch_tri_finale")
+func _get_basic_attack_range_multiplier(skill_id: String) -> float:
+	return PLAYER_BLESSING_SKILL_STATE.get_basic_attack_range_multiplier(self, skill_id)
 
-func _can_offer_mage_tidal_surge_reward() -> bool:
-	return PLAYER_BUILD_STATE.can_offer_mage_tidal_surge_reward(
-		card_pick_levels,
-		special_reward_levels,
-		_get_build_final_set_data("battle_dangzhen")
-	)
+func _get_basic_attack_projectile_speed_multiplier(skill_id: String) -> float:
+	return PLAYER_BLESSING_SKILL_STATE.get_basic_attack_projectile_speed_multiplier(self, skill_id)
 
 func _make_small_boss_reward_option(option_id: String, title: String, description: String) -> Dictionary:
 	return {
@@ -945,16 +893,19 @@ func _deprecated_get_small_boss_reward_options_v1() -> Array:
 	return []
 
 func _has_elite_relic(relic_id: String) -> bool:
-	return PLAYER_BUILD_STATE.has_unlocked_flag(elite_relics_unlocked, relic_id)
+	return bool(elite_relics_unlocked.get(relic_id, false))
 
 func _unlock_elite_relic(relic_id: String) -> void:
 	elite_relics_unlocked[relic_id] = true
 
 func _get_role_theme_color(role_id: String) -> Color:
-	return PLAYER_BUILD_PROGRESS_FLOW.get_role_theme_color(self, role_id)
+	for role_data in roles:
+		if str(role_data.get("id", "")) == role_id:
+			return role_data.get("color", Color.WHITE)
+	return Color.WHITE
 
 func _announce_completed_final_set(set_key: String) -> void:
-	PLAYER_BUILD_PROGRESS_FLOW.announce_completed_final_set(self, set_key)
+	return
 
 func _apply_team_role_bonus(damage_bonus: float, interval_bonus: float, range_bonus: float, skill_bonus: float) -> void:
 	PLAYER_ROLE_STAT_FLOW.apply_team_role_bonus(self, damage_bonus, interval_bonus, range_bonus, skill_bonus)
@@ -979,12 +930,6 @@ func _get_effective_background_interval_multiplier() -> float:
 
 func _clear_standby_entry_buff() -> void:
 	PLAYER_SWITCH_FLOW.clear_standby_entry_buff(self)
-
-func _activate_team_combo(duration: float, damage_multiplier: float, move_multiplier: float, background_multiplier: float) -> void:
-	PLAYER_SWITCH_FLOW.activate_team_combo(self, duration, damage_multiplier, move_multiplier, background_multiplier)
-
-func _mark_role_cycle(role_id: String) -> void:
-	PLAYER_SWITCH_FLOW.mark_role_cycle(self, role_id)
 
 func _apply_rotation_entry_bonus(role_id: String) -> void:
 	PLAYER_SWITCH_FLOW.apply_rotation_entry_bonus(self, role_id)
@@ -1011,7 +956,7 @@ func _get_equipment_low_health_damage_taken_multiplier() -> float:
 	return PLAYER_EQUIPMENT_FLOW.get_low_health_damage_taken_multiplier(self)
 
 func _get_equipment_skill_range_multiplier() -> float:
-	return PLAYER_EQUIPMENT_FLOW.get_skill_range_multiplier(self)
+	return PLAYER_EQUIPMENT_FLOW.get_skill_range_multiplier(self) * _get_role_attribute_range_multiplier(str(_get_active_role().get("id", "")))
 
 func _get_equipment_cooldown_multiplier() -> float:
 	return PLAYER_EQUIPMENT_FLOW.get_cooldown_multiplier(self)
@@ -1048,35 +993,24 @@ func _update_timers(delta: float) -> void:
 		enemy_move_slow_remaining = max(0.0, enemy_move_slow_remaining - delta)
 		if enemy_move_slow_remaining <= 0.0:
 			enemy_move_slow_multiplier = 1.0
-	PLAYER_FIRST_BATCH_MILESTONE_FLOW.update_cooldowns(self, delta)
-	PLAYER_THEME_SKILL_FLOW.update_cooldowns(self, delta)
-	if swordsman_dangzhen_fan_ability != null:
-		swordsman_dangzhen_fan_ability.update(delta)
-	if gunner_dangzhen_beam_ability != null:
-		gunner_dangzhen_beam_ability.update(delta)
 	if gunner_infinite_reload_ability != null:
 		gunner_infinite_reload_ability.update(self, delta)
-	if gunner_spotter_drone_ability != null:
-		gunner_spotter_drone_ability.update(delta)
+	if gunner_shrapnel_field_ability != null:
+		gunner_shrapnel_field_ability.update(self, delta)
 	if mage_tidal_surge_ability != null:
 		mage_tidal_surge_ability.update(delta)
-	if mage_dangzhen_wave_ability != null:
-		mage_dangzhen_wave_ability.update(delta)
-	if mage_guardian_puppet_ability != null:
-		mage_guardian_puppet_ability.update(delta)
+	if mage_meta_field_ability != null:
+		mage_meta_field_ability.update(self, delta)
 	if swordsman_blade_storm_ability != null:
 		swordsman_blade_storm_ability.update(self, delta)
-	if swordsman_blade_shadow_ability != null:
-		swordsman_blade_shadow_ability.update(delta)
-	_try_trigger_independent_sword_qichao()
-	_try_trigger_independent_gunner_qichao()
-	_try_trigger_independent_mage_qichao()
-	_try_trigger_swordsman_blade_shadow()
-	_try_trigger_gunner_spotter_drone()
-	_try_trigger_mage_guardian_puppet()
+	if swordsman_crescent_wave_ability != null:
+		swordsman_crescent_wave_ability.update(delta)
 	_try_trigger_swordsman_blade_storm()
+	_try_trigger_swordsman_crescent_wave()
 	_try_trigger_gunner_infinite_reload()
+	_try_trigger_gunner_shrapnel_field()
 	_try_trigger_mage_tidal_surge()
+	_try_trigger_mage_meta_field()
 	if perpetual_motion_cooldown_remaining > 0.0:
 		perpetual_motion_cooldown_remaining = max(0.0, perpetual_motion_cooldown_remaining - delta)
 	_apply_developer_no_cooldown()
@@ -1100,12 +1034,6 @@ func _update_timers(delta: float) -> void:
 		guard_cover_remaining = max(0.0, guard_cover_remaining - delta)
 		if guard_cover_remaining <= 0.0:
 			guard_cover_damage_multiplier = 1.0
-	if team_combo_remaining > 0.0:
-		team_combo_remaining = max(0.0, team_combo_remaining - delta)
-		if team_combo_remaining <= 0.0:
-			team_combo_damage_multiplier = 1.0
-			team_combo_move_multiplier = 1.0
-			team_combo_background_multiplier = 1.0
 	if borrow_fire_remaining > 0.0:
 		borrow_fire_remaining = max(0.0, borrow_fire_remaining - delta)
 		if borrow_fire_remaining <= 0.0:
@@ -1127,13 +1055,6 @@ func _update_timers(delta: float) -> void:
 		if frenzy_remaining <= 0.0:
 			frenzy_stacks = 0
 			frenzy_overkill_counter = 0
-	if relay_window_remaining > 0.0:
-		relay_window_remaining = max(0.0, relay_window_remaining - delta)
-		if relay_window_remaining <= 0.0:
-			relay_ready_role_id = ""
-			relay_from_role_id = ""
-			relay_label = ""
-			relay_bonus_pending = false
 	for role_data in roles:
 		var role_id := str(role_data.get("id", ""))
 		if role_id == str(_get_active_role().get("id", "")):
@@ -1147,24 +1068,18 @@ func _apply_developer_no_cooldown() -> void:
 		return
 	switch_cooldown_remaining = 0.0
 	perpetual_motion_cooldown_remaining = 0.0
-	if swordsman_dangzhen_fan_ability != null:
-		swordsman_dangzhen_fan_ability.cooldown_remaining = 0.0
-	if gunner_dangzhen_beam_ability != null:
-		gunner_dangzhen_beam_ability.cooldown_remaining = 0.0
 	if gunner_infinite_reload_ability != null:
 		gunner_infinite_reload_ability.cooldown_remaining = 0.0
-	if gunner_spotter_drone_ability != null:
-		gunner_spotter_drone_ability.cooldown_remaining = 0.0
-	if mage_dangzhen_wave_ability != null:
-		mage_dangzhen_wave_ability.cooldown_remaining = 0.0
+	if gunner_shrapnel_field_ability != null:
+		gunner_shrapnel_field_ability.cooldown_remaining = 0.0
 	if mage_tidal_surge_ability != null:
 		mage_tidal_surge_ability.cooldown_remaining = 0.0
-	if mage_guardian_puppet_ability != null:
-		mage_guardian_puppet_ability.cooldown_remaining = 0.0
+	if mage_meta_field_ability != null:
+		mage_meta_field_ability.cooldown_remaining = 0.0
 	if swordsman_blade_storm_ability != null:
 		swordsman_blade_storm_ability.cooldown_remaining = 0.0
-	if swordsman_blade_shadow_ability != null:
-		swordsman_blade_shadow_ability.cooldown_remaining = 0.0
+	if swordsman_crescent_wave_ability != null:
+		swordsman_crescent_wave_ability.cooldown_remaining = 0.0
 
 func _regenerate_energy(delta: float) -> void:
 	PLAYER_SURVIVAL_FLOW.regenerate_energy(self, delta)
@@ -1190,108 +1105,22 @@ func _trigger_background_effect(role_index: int) -> void:
 func _perform_active_attack() -> void:
 	PLAYER_ATTACK_LOOP_FLOW.perform_active_attack(self)
 
-func _trigger_dangzhen_sword_qichao_preview(attack_direction: Vector2, attack_damage: float, role_id: String) -> int:
-	if swordsman_dangzhen_fan_ability == null:
-		return 0
-	return swordsman_dangzhen_fan_ability.try_trigger(self, attack_direction, role_id)
-
-func _execute_dangzhen_gunner_beam(origin: Vector2, fire_direction: Vector2, damage_amount: float, role_id: String) -> int:
-	if gunner_dangzhen_beam_ability == null:
-		return 0
-	return gunner_dangzhen_beam_ability.execute_beam(self, origin, fire_direction, damage_amount, role_id)
-
-func _trigger_dangzhen_gunner_qichao_preview(shot_direction: Vector2, attack_damage: float, role_id: String) -> int:
-	if gunner_dangzhen_beam_ability == null:
-		return 0
-	return gunner_dangzhen_beam_ability.try_trigger(self, shot_direction, role_id)
-
 func _get_live_mouse_aim_direction(fallback_direction: Vector2 = Vector2.RIGHT) -> Vector2:
 	return _get_attack_aim_direction(fallback_direction)
-
-func _try_trigger_independent_mage_qichao() -> void:
-	if is_dead or level_up_active:
-		return
-	var active_role_id := str(_get_active_role().get("id", ""))
-	if active_role_id != "mage":
-		return
-	if mage_dangzhen_wave_ability == null or not mage_dangzhen_wave_ability.can_trigger(self, active_role_id):
-		return
-	var wave_direction: Vector2 = _get_live_mouse_aim_direction(facing_direction)
-	mage_dangzhen_wave_ability.try_trigger(self, wave_direction, active_role_id)
-
-func _try_trigger_independent_sword_qichao() -> void:
-	if is_dead or level_up_active:
-		return
-	var active_role_id := str(_get_active_role().get("id", ""))
-	if active_role_id != "swordsman":
-		return
-	if _get_card_level("battle_dangzhen_qichao") <= 0:
-		return
-	if swordsman_dangzhen_fan_ability == null or not swordsman_dangzhen_fan_ability.can_trigger(self, active_role_id):
-		return
-	var attack_direction: Vector2 = _get_live_mouse_aim_direction(facing_direction)
-	var dangzhen_hits := _trigger_dangzhen_sword_qichao_preview(attack_direction, _get_role_damage(active_role_id), active_role_id)
-	if dangzhen_hits > 0:
-		_register_attack_result(active_role_id, dangzhen_hits, false)
-
-func _try_trigger_independent_gunner_qichao() -> void:
-	if is_dead or level_up_active:
-		return
-	var active_role_id := str(_get_active_role().get("id", ""))
-	if active_role_id != "gunner":
-		return
-	if _get_card_level("battle_dangzhen_qichao") <= 0:
-		return
-	if is_gunner_infinite_reload_active():
-		return
-	if gunner_dangzhen_beam_ability == null or not gunner_dangzhen_beam_ability.can_trigger(self, active_role_id):
-		return
-	var shot_direction: Vector2 = _get_live_mouse_aim_direction(facing_direction)
-	var dangzhen_hits := _trigger_dangzhen_gunner_qichao_preview(shot_direction, _get_role_damage(active_role_id), active_role_id)
-	if dangzhen_hits > 0:
-		_register_attack_result(active_role_id, dangzhen_hits, false)
-
-func _try_trigger_swordsman_blade_shadow() -> void:
-	if is_dead or level_up_active:
-		return
-	var active_role_id: String = str(_get_active_role().get("id", ""))
-	if swordsman_blade_shadow_ability == null or not swordsman_blade_shadow_ability.can_trigger(self, active_role_id):
-		return
-	_start_swordsman_blade_shadow()
-
-func _start_swordsman_blade_shadow() -> void:
-	if swordsman_blade_shadow_ability != null:
-		swordsman_blade_shadow_ability.try_trigger(self)
-
-func _try_trigger_gunner_spotter_drone() -> void:
-	if is_dead or level_up_active:
-		return
-	var active_role_id: String = str(_get_active_role().get("id", ""))
-	if gunner_spotter_drone_ability == null or not gunner_spotter_drone_ability.can_trigger(self, active_role_id):
-		return
-	_start_gunner_spotter_drone()
-
-func _start_gunner_spotter_drone() -> void:
-	if gunner_spotter_drone_ability != null:
-		gunner_spotter_drone_ability.try_trigger(self)
-
-func _try_trigger_mage_guardian_puppet() -> void:
-	if is_dead or level_up_active:
-		return
-	var active_role_id: String = str(_get_active_role().get("id", ""))
-	if mage_guardian_puppet_ability == null or not mage_guardian_puppet_ability.can_trigger(self, active_role_id):
-		return
-	_start_mage_guardian_puppet()
-
-func _start_mage_guardian_puppet() -> void:
-	if mage_guardian_puppet_ability != null:
-		mage_guardian_puppet_ability.try_trigger(self)
 
 func _try_trigger_swordsman_blade_storm() -> void:
 	var active_role_id := str(_get_active_role().get("id", ""))
 	if swordsman_blade_storm_ability == null or not swordsman_blade_storm_ability.can_trigger(self, active_role_id):
 		return
 	_start_swordsman_blade_storm()
+
+func _try_trigger_swordsman_crescent_wave() -> void:
+	if is_dead or level_up_active:
+		return
+	var active_role_id := str(_get_active_role().get("id", ""))
+	if swordsman_crescent_wave_ability == null or not swordsman_crescent_wave_ability.can_trigger(self, active_role_id):
+		return
+	_start_swordsman_crescent_wave()
 
 func _try_trigger_gunner_infinite_reload() -> void:
 	if is_dead or level_up_active:
@@ -1303,11 +1132,21 @@ func _try_trigger_gunner_infinite_reload() -> void:
 		return
 	_start_gunner_infinite_reload()
 
+func _try_trigger_gunner_shrapnel_field() -> void:
+	if is_dead or level_up_active:
+		return
+	var active_role_id := str(_get_active_role().get("id", ""))
+	if gunner_shrapnel_field_ability == null or not gunner_shrapnel_field_ability.can_trigger(self, active_role_id):
+		return
+	_start_gunner_shrapnel_field()
+
 func _start_swordsman_blade_storm() -> void:
 	if swordsman_blade_storm_ability != null:
 		swordsman_blade_storm_ability.try_trigger(self)
-	return
-	_spawn_combat_tag(global_position + Vector2(0.0, -66.0), "閸撴垵鍨夋搴㈡瘹", Color(0.42, 0.9, 1.0, 1.0))
+
+func _start_swordsman_crescent_wave() -> void:
+	if swordsman_crescent_wave_ability != null:
+		swordsman_crescent_wave_ability.try_trigger(self)
 
 func _trigger_swordsman_blade_storm_tick() -> void:
 	if swordsman_blade_storm_ability != null:
@@ -1337,6 +1176,10 @@ func _start_gunner_infinite_reload() -> void:
 	if gunner_infinite_reload_ability != null:
 		gunner_infinite_reload_ability.try_trigger(self)
 
+func _start_gunner_shrapnel_field() -> void:
+	if gunner_shrapnel_field_ability != null:
+		gunner_shrapnel_field_ability.try_trigger(self)
+
 func _trigger_gunner_infinite_reload_tick() -> void:
 	if gunner_infinite_reload_ability != null:
 		gunner_infinite_reload_ability._trigger_tick(self)
@@ -1347,6 +1190,11 @@ func _stop_gunner_infinite_reload() -> void:
 
 func is_gunner_infinite_reload_active() -> bool:
 	return gunner_infinite_reload_ability != null and gunner_infinite_reload_ability.is_active()
+
+func _get_gunner_infinite_reload_move_speed_multiplier() -> float:
+	if gunner_infinite_reload_ability != null and gunner_infinite_reload_ability.has_method("get_move_speed_multiplier"):
+		return float(gunner_infinite_reload_ability.get_move_speed_multiplier(self))
+	return 1.0
 
 func _try_trigger_mage_tidal_surge() -> void:
 	if is_dead or level_up_active:
@@ -1361,6 +1209,18 @@ func _start_mage_tidal_surge() -> void:
 		return
 	var base_direction: Vector2 = _get_live_mouse_aim_direction(facing_direction)
 	mage_tidal_surge_ability.try_trigger(self, base_direction)
+
+func _try_trigger_mage_meta_field() -> void:
+	if is_dead or level_up_active:
+		return
+	var active_role_id := str(_get_active_role().get("id", ""))
+	if mage_meta_field_ability == null or not mage_meta_field_ability.can_trigger(self, active_role_id):
+		return
+	_start_mage_meta_field()
+
+func _start_mage_meta_field() -> void:
+	if mage_meta_field_ability != null:
+		mage_meta_field_ability.try_trigger(self)
 
 func _perform_swordsman_attack() -> void:
 	if swordsman_role != null:
@@ -1461,7 +1321,7 @@ func _apply_role_damage_lifesteal(source_role_id: String, damage_amount: float) 
 	PLAYER_DAMAGE_HELPERS.apply_role_damage_lifesteal(self, source_role_id, damage_amount)
 
 func _get_gunner_distance_damage_multiplier(distance: float) -> float:
-	return PLAYER_DAMAGE_HELPERS.get_gunner_distance_damage_multiplier(distance)
+	return PLAYER_DAMAGE_HELPERS.get_gunner_distance_damage_multiplier(distance, _get_gunner_distance_damage_bonus())
 
 func _get_enemy_hit_radius(enemy: Node) -> float:
 	return PLAYER_DAMAGE_HELPERS.get_enemy_hit_radius(enemy)
@@ -1469,29 +1329,12 @@ func _get_enemy_hit_radius(enemy: Node) -> float:
 func _deal_damage_to_enemy(enemy: Node, damage_amount: float, source_role_id: String, vulnerability_bonus: float = 0.0, vulnerability_duration: float = 2.0, slow_multiplier: float = 1.0, slow_duration: float = 0.0, source_position: Variant = null) -> bool:
 	if enemy == null or not is_instance_valid(enemy):
 		return false
-	var break_level := _get_card_level("battle_break")
 	var final_damage := damage_amount
 	if source_role_id == "gunner":
 		var attack_origin: Vector2 = global_position
 		if source_position is Vector2:
 			attack_origin = source_position
 		final_damage *= _get_gunner_distance_damage_multiplier(attack_origin.distance_to(enemy.global_position))
-	var break_stacks := 0
-	var break_max_stacks := 0
-	var break_expire_time := 0.0
-	var break_ready := false
-	if break_level > 0:
-		break_stacks = _get_enemy_meta_int(enemy, "player_break_stacks")
-		break_max_stacks = 4 if break_level == 1 else 5
-		break_expire_time = _get_enemy_meta_float(enemy, "player_break_expire")
-		break_ready = bool(enemy.get_meta("player_break_ready")) if enemy.has_meta("player_break_ready") else false
-		if role_visual_time > break_expire_time:
-			break_stacks = 0
-			break_ready = false
-		var break_multiplier: float = [0.06, 0.07, 0.08][break_level - 1]
-		final_damage *= 1.0 + min(break_stacks, break_max_stacks) * break_multiplier
-		if break_level >= 2 and break_stacks >= break_max_stacks:
-			final_damage *= 1.1
 	var killed := false
 	if damage_amount > 0.0 and enemy.has_method("take_damage"):
 		killed = bool(enemy.take_damage(final_damage))
@@ -1504,20 +1347,6 @@ func _deal_damage_to_enemy(enemy: Node, damage_amount: float, source_role_id: St
 		enemy.apply_vulnerability(vulnerability_bonus, vulnerability_duration)
 	if slow_duration > 0.0 and enemy.has_method("apply_slow"):
 		enemy.apply_slow(slow_multiplier, slow_duration)
-	if break_level > 0:
-		break_stacks = min(break_max_stacks, break_stacks + 1)
-		enemy.set_meta("player_break_stacks", break_stacks)
-		enemy.set_meta("player_break_expire", role_visual_time + 1.8)
-		if break_stacks >= break_max_stacks and break_level >= 3:
-			if break_ready and enemy.has_method("take_damage"):
-				var bonus_kill := bool(enemy.take_damage(damage_amount * 0.6))
-				if bonus_kill and source_role_id != "":
-					_register_attack_result(source_role_id, 1, true)
-				enemy.set_meta("player_break_ready", false)
-			else:
-				enemy.set_meta("player_break_ready", true)
-		elif break_stacks < break_max_stacks:
-			enemy.set_meta("player_break_ready", false)
 	return killed
 
 func _damage_enemies_in_radius(center: Vector2, radius: float, damage_amount: float, vulnerability_bonus: float, slow_multiplier: float, slow_duration: float, source_role_id: String = "") -> int:
@@ -1547,6 +1376,9 @@ func _damage_enemies_in_oriented_rect_unique(center: Vector2, axis_direction: Ve
 
 func _damage_enemies_in_ellipse(center: Vector2, horizontal_radius: float, vertical_radius: float, damage_amount: float, vulnerability_bonus: float, slow_multiplier: float, slow_duration: float, source_role_id: String = "") -> int:
 	return PLAYER_DAMAGE_RESOLVER.damage_enemies_in_ellipse(self, center, horizontal_radius, vertical_radius, damage_amount, vulnerability_bonus, slow_multiplier, slow_duration, source_role_id)
+
+func _damage_enemies_in_cone(origin: Vector2, direction: Vector2, cone_range: float, cone_angle_radians: float, damage_amount: float, vulnerability_bonus: float, slow_multiplier: float, slow_duration: float, source_role_id: String = "") -> int:
+	return PLAYER_DAMAGE_RESOLVER.damage_enemies_in_cone(self, origin, direction, cone_range, cone_angle_radians, damage_amount, vulnerability_bonus, slow_multiplier, slow_duration, source_role_id)
 
 func _schedule_swordsman_slash_followthrough(center: Vector2, axis_direction: Vector2, rect_length: float, rect_width: float, damage_amount: float, vulnerability_bonus: float, slow_multiplier: float, slow_duration: float, animation_duration: float, source_role_id: String, hit_registry: Dictionary) -> void:
 	PLAYER_DAMAGE_RESOLVER.schedule_swordsman_slash_followthrough(self, center, axis_direction, rect_length, rect_width, damage_amount, vulnerability_bonus, slow_multiplier, slow_duration, animation_duration, source_role_id, hit_registry)
@@ -1665,12 +1497,6 @@ func _apply_pending_entry_blessing(target_role_id: String) -> void:
 
 func _clear_entry_blessing() -> void:
 	PLAYER_SWITCH_FLOW.clear_entry_blessing(self)
-
-func _prepare_relay_window(from_role_index: int, to_role_index: int, exit_hits: int, entry_hits: int) -> void:
-	PLAYER_SWITCH_FLOW.prepare_relay_window(self, from_role_index, to_role_index, exit_hits, entry_hits)
-
-func _trigger_relay_success(role_id: String, hit_count: int) -> void:
-	PLAYER_SWITCH_FLOW.trigger_relay_success(self, role_id, hit_count)
 
 func _apply_switch_payoff(hit_count: int, energy_gain: float, cooldown_refund: float) -> void:
 	PLAYER_SWITCH_FLOW.apply_switch_payoff(self, hit_count, energy_gain, cooldown_refund)
@@ -1796,13 +1622,9 @@ func _get_ultimate_level_damage_multiplier() -> float:
 	return PLAYER_ULTIMATE_FLOW.get_ultimate_level_damage_multiplier(self)
 
 func _register_attack_result(role_id: String, hit_count: int, killed: bool) -> void:
-	_trigger_relay_success(role_id, hit_count)
+	_apply_swordsman_low_health_flat_heal(role_id, hit_count)
+	_apply_role_flat_heal_on_hit(role_id, hit_count)
 	_apply_entry_lifesteal(role_id, hit_count, killed)
-	_apply_theme_hit_returns(role_id, hit_count, killed)
-	if hit_count > 0 and _get_card_level("battle_chain") > 0:
-		_trigger_chain_reaction(role_id)
-	if hit_count >= 2 and _get_card_level("battle_tide") > 0:
-		_trigger_clean_tide(role_id)
 	if killed and _has_elite_relic("elite_execution_pact") and not execution_pact_burst_active:
 		execution_pact_burst_active = true
 		_spawn_burst_effect(global_position + facing_direction * 20.0, 42.0, Color(1.0, 0.62, 0.4, 0.16), 0.16)
@@ -1819,9 +1641,25 @@ func _register_attack_result(role_id: String, hit_count: int, killed: bool) -> v
 
 
 func _apply_theme_hit_returns(role_id: String, hit_count: int, killed: bool) -> void:
-	PLAYER_COMBAT_RESULT_FLOW.apply_theme_hit_returns(self, role_id, hit_count, killed)
-	PLAYER_FIRST_BATCH_MILESTONE_FLOW.apply_attack_milestones(self, role_id, hit_count, killed)
-	PLAYER_THEME_SKILL_FLOW.apply_attack_theme_skills(self, role_id, hit_count, killed)
+	return
+
+func _apply_swordsman_low_health_flat_heal(role_id: String, hit_count: int) -> void:
+	if role_id != "swordsman" or hit_count <= 0 or max_health <= 0.0:
+		return
+	if current_health / max_health > _get_swordsman_low_health_threshold():
+		return
+	var heal_amount: float = _get_swordsman_low_health_flat_heal()
+	if heal_amount <= 0.0:
+		return
+	_heal(heal_amount)
+
+func _apply_role_flat_heal_on_hit(role_id: String, hit_count: int) -> void:
+	if role_id == "" or hit_count <= 0:
+		return
+	var heal_amount: float = _get_role_blessing_stat_bonus(role_id, "flat_heal_on_hit")
+	if heal_amount <= 0.0:
+		return
+	_heal(heal_amount)
 
 func _apply_entry_lifesteal(role_id: String, hit_count: int, killed: bool) -> void:
 	if entry_blessing_remaining <= 0.0:
@@ -1842,113 +1680,8 @@ func _apply_entry_lifesteal(role_id: String, hit_count: int, killed: bool) -> vo
 func _heal(amount: float) -> void:
 	PLAYER_RESOURCE_FLOW.heal(self, amount)
 
-func _trigger_chain_reaction(role_id: String) -> void:
-	var chain_level := _get_card_level("battle_chain")
-	if chain_level <= 0 or chain_reaction_active:
-		return
-	chain_reaction_active = true
-	var search_center := global_position + facing_direction * 28.0
-	var search_radius := 220.0
-	var bounce_count := 1 if chain_level == 1 else 2
-	var chain_damage_ratio: float = [0.45, 0.55, 0.65][chain_level - 1]
-	var previous_target: Node2D = null
-	var from_position := search_center
-	for bounce_index in range(bounce_count):
-		var chosen_target: Node2D = null
-		var best_distance := search_radius
-		for enemy in get_tree().get_nodes_in_group("enemies"):
-			if not is_instance_valid(enemy):
-				continue
-			if enemy == previous_target:
-				continue
-			var distance := from_position.distance_to(enemy.global_position)
-			if distance > best_distance:
-				continue
-			best_distance = distance
-			chosen_target = enemy
-		if chosen_target == null:
-			break
-		_spawn_dash_line_effect(from_position, chosen_target.global_position, Color(0.92, 0.56, 1.0, 0.9), 6.0, 0.1)
-		_spawn_target_lock_effect(chosen_target.global_position, 18.0 + chain_level * 4.0, Color(0.92, 0.56, 1.0, 0.76), 0.12)
-		_spawn_burst_effect(chosen_target.global_position, 22.0 + chain_level * 4.0, Color(0.72, 0.38, 1.0, 0.2), 0.12)
-		var chain_kill := _deal_damage_to_enemy(chosen_target, _get_role_damage(role_id) * chain_damage_ratio, role_id, 0.02 * chain_level, 1.8, 1.0, 0.0)
-		_register_attack_result(role_id, 1, chain_kill)
-		previous_target = chosen_target
-		from_position = chosen_target.global_position
-	if chain_level >= 3:
-		_add_energy(2.0)
-	chain_reaction_active = false
-
-func _trigger_clean_tide(role_id: String) -> void:
-	var tide_level := _get_card_level("battle_tide")
-	if tide_level <= 0 or clean_tide_active:
-		return
-	clean_tide_active = true
-	var tide_radius: float = [32.0, 40.0, 48.0][tide_level - 1]
-	var tide_damage_ratio: float = [0.45, 0.55, 0.65][tide_level - 1]
-	var tide_center: Vector2 = global_position + facing_direction * (28.0 + tide_radius * 0.4)
-	_spawn_ring_effect(tide_center, tide_radius * 1.2, Color(0.3, 0.92, 1.0, 0.76), 6.0, 0.16)
-	_spawn_burst_effect(tide_center, tide_radius * 1.08, Color(0.18, 0.84, 1.0, 0.2), 0.14)
-	var slow_multiplier := 1.0
-	var slow_duration := 0.0
-	if tide_level >= 2:
-		slow_multiplier = 0.8
-		slow_duration = 0.8
-	var tide_hits := _damage_enemies_in_radius(tide_center, tide_radius, _get_role_damage(role_id) * tide_damage_ratio, 0.0, slow_multiplier, slow_duration)
-	if tide_hits > 0:
-		_register_attack_result(role_id, tide_hits, false)
-	if tide_level >= 3:
-		_add_energy(6.0)
-	clean_tide_active = false
-
 func _spawn_attack_aftershock(center: Vector2, role_id: String) -> void:
-	var aftershock_level := _get_card_level("battle_aftershock")
-	if aftershock_level <= 0:
-		return
-	var level_index: int = clamp(aftershock_level - 1, 0, 2)
-	var radius: float = [48.0, 64.0, 80.0][level_index]
-	var damage_ratio: float = [0.35, 0.45, 0.55][level_index]
-	var pulse_count := 2 if aftershock_level == 1 else 3
-	var current_scene := get_tree().current_scene
-	if current_scene == null:
-		return
-	var controller := Node2D.new()
-	controller.name = "AttackAftershockController"
-	current_scene.add_child(controller)
-	var tween := controller.create_tween()
-	for pulse_index in range(pulse_count):
-		if pulse_index > 0:
-			tween.tween_interval(0.12)
-		tween.tween_callback(func() -> void:
-			var current_radius: float = radius + pulse_index * 14.0
-			var current_damage: float = _get_role_damage(role_id) * damage_ratio
-			var accent := _get_role_theme_color(role_id)
-			_spawn_ring_effect(center, current_radius, Color(min(1.0, accent.r + 0.14), min(1.0, accent.g + 0.14), min(1.0, accent.b + 0.18), 0.88), 8.0, 0.2)
-			_spawn_burst_effect(center, current_radius * 0.94, Color(accent.r, accent.g, accent.b, 0.26), 0.18)
-			match role_id:
-				"swordsman":
-					var angle_shift := pulse_index * 0.18
-					_spawn_crescent_wave_effect(center, Vector2.RIGHT.rotated(angle_shift), current_radius * 0.96, Color(0.24, 0.94, 1.0, 0.7), 0.2, 220.0, 18.0 + pulse_index * 4.0)
-					_spawn_crescent_wave_effect(center, Vector2.RIGHT.rotated(PI + angle_shift), current_radius * 0.82, Color(1.0, 0.2, 0.16, 0.48), 0.18, 200.0, 14.0 + pulse_index * 3.0)
-				"gunner":
-					_spawn_radial_rays_effect(center, current_radius * 1.06, 8 + aftershock_level * 2 + pulse_index * 2, Color(1.0, 0.66, 0.34, 0.7), 4.0 + pulse_index, 0.2, pulse_index * 0.14)
-				"mage":
-					_spawn_frost_sigils_effect(center, current_radius * 0.76, Color(0.9, 0.98, 1.0, 0.84), 0.2)
-					_spawn_vortex_effect(center, current_radius * 0.42, Color(0.72, 0.8, 1.0, 0.34), 0.2)
-			var slow_multiplier := 1.0
-			var slow_duration := 0.0
-			if aftershock_level >= 2:
-				slow_multiplier = 0.75
-				slow_duration = 1.0
-			var shock_hits := _damage_enemies_in_radius(center, current_radius, current_damage, 0.0, slow_multiplier, slow_duration)
-			if shock_hits > 0:
-				_register_attack_result(role_id, shock_hits, false)
-		)
-	tween.tween_callback(controller.queue_free)
-
-
-func _trigger_theme_blood_reflux_counter(incoming_amount: float) -> void:
-	PLAYER_THEME_SKILL_FLOW.trigger_blood_reflux_counter(self, incoming_amount)
+	return
 
 func _play_player_hurt_feedback() -> void:
 	_queue_camera_shake(6.0, 0.16)
@@ -1981,18 +1714,6 @@ func _count_enemies_in_radius(center: Vector2, radius: float) -> int:
 			count += 1
 	return count
 
-func _record_card_pick(slot_id: String, option_id: String) -> void:
-	PLAYER_BUILD_PROGRESS_FLOW.record_card_pick(self, slot_id, option_id)
-
-func _apply_battle_card(option_id: String) -> bool:
-	return PLAYER_CARD_APPLIER.apply_battle_card(self, option_id)
-
-func _apply_combat_card(option_id: String) -> bool:
-	return PLAYER_CARD_APPLIER.apply_combat_card(self, option_id)
-
-func _apply_skill_card(option_id: String) -> bool:
-	return PLAYER_CARD_APPLIER.apply_skill_card(self, option_id)
-
 func apply_upgrade(option_id: String) -> void:
 	PLAYER_UPGRADE_APPLIER.apply_upgrade(self, option_id)
 
@@ -2002,33 +1723,19 @@ func get_attribute_upgrade_options() -> Array:
 func refresh_upgrade_options() -> Array:
 	return PLAYER_LEVEL_FLOW.refresh_upgrade_options(self)
 
-func get_current_build_offer_context() -> Dictionary:
-	if current_build_offer is Dictionary:
-		return (current_build_offer.get("context", {}) as Dictionary).duplicate(true)
+func build_direct_blessing_options() -> Array:
+	return PLAYER_LEVEL_FLOW.build_all_blessing_options(self)
+
+func get_current_blessing_offer_context() -> Dictionary:
+	if current_blessing_offer is Dictionary:
+		return (current_blessing_offer.get("context", {}) as Dictionary).duplicate(true)
 	return {}
-
-func get_all_upgrade_options() -> Array:
-	return PLAYER_UPGRADE_OPTIONS.build_all_upgrade_options_for_developer_mode(
-		_get_body_upgrade_pool(),
-		_get_combat_upgrade_pool(),
-		_get_skill_upgrade_pool(),
-		_uses_blank_upgrade_fallback(),
-		_get_fallback_upgrade_pool(),
-		_make_endless_blank_upgrade_option()
-	)
-
-func _deprecated_get_developer_card_options_v1() -> Array:
-	return []
-
-func _deprecated_get_developer_card_options_v2() -> Array:
-	return []
-
 
 func get_small_boss_reward_options() -> Array:
 	return PLAYER_LEVEL_FLOW.get_small_boss_reward_options(self)
 
-func get_boss_build_reward_options() -> Array:
-	return PLAYER_LEVEL_FLOW.get_boss_build_reward_options(self)
+func get_boss_skill_reward_options() -> Array:
+	return PLAYER_LEVEL_FLOW.get_boss_skill_reward_options(self)
 
 func apply_attribute_upgrade(option_id: String) -> void:
 	PLAYER_LEVEL_FLOW.apply_attribute_upgrade(self, option_id)
@@ -2048,150 +1755,6 @@ func get_save_data() -> Dictionary:
 
 func apply_save_data(data: Dictionary) -> void:
 	PLAYER_RUN_SAVE_STATE.apply_save_data(self, data)
-	return
-	var position_data = data.get("position", [0.0, 0.0])
-	if position_data.size() >= 2:
-		global_position = Vector2(float(position_data[0]), float(position_data[1]))
-
-	var saved_active_role_index := int(data.get("active_role_index", active_role_index))
-	level = int(data.get("level", level))
-	experience = int(data.get("experience", experience))
-	experience_to_next_level = max(1, int(data.get("experience_to_next_level", experience_to_next_level)))
-	pending_level_ups = max(0, int(data.get("pending_level_ups", pending_level_ups)))
-	max_health = float(data.get("max_health", max_health))
-	max_mana = float(data.get("max_mana", max_mana))
-	current_health = float(data.get("current_health", current_health))
-	role_mana_values = _build_role_resource_state_data(0.0)
-	role_ultimate_energy_lock_remaining = _build_role_resource_state_data(0.0)
-	var saved_role_mana_values: Dictionary = data.get("role_mana_values", {})
-	if saved_role_mana_values is Dictionary and not saved_role_mana_values.is_empty():
-		ROLE_RESOURCE_STATE.apply_saved_mana(role_mana_values, saved_role_mana_values, max_mana)
-	else:
-		var fallback_role_id: String = str(roles[clamp(saved_active_role_index, 0, max(0, roles.size() - 1))].get("id", ""))
-		if fallback_role_id != "":
-			ROLE_RESOURCE_STATE.set_mana(role_mana_values, fallback_role_id, float(data.get("current_mana", current_mana)), max_mana)
-	var saved_role_locks: Dictionary = data.get("role_ultimate_energy_lock_remaining", {})
-	if saved_role_locks is Dictionary and not saved_role_locks.is_empty():
-		ROLE_RESOURCE_STATE.apply_saved_locks(role_ultimate_energy_lock_remaining, saved_role_locks)
-	else:
-		var fallback_lock_role_id: String = str(roles[clamp(saved_active_role_index, 0, max(0, roles.size() - 1))].get("id", ""))
-		if fallback_lock_role_id != "":
-			ROLE_RESOURCE_STATE.set_lock_remaining(role_ultimate_energy_lock_remaining, fallback_lock_role_id, float(data.get("ultimate_energy_lock_remaining", 0.0)))
-	hurt_cooldown_remaining = max(0.0, float(data.get("hurt_cooldown_remaining", 0.0)))
-	switch_invulnerability_remaining = max(0.0, float(data.get("switch_invulnerability_remaining", 0.0)))
-	level_up_delay_remaining = max(0.0, float(data.get("level_up_delay_remaining", 0.0)))
-	switch_cooldown_remaining = max(0.0, float(data.get("switch_cooldown_remaining", 0.0)))
-	enemy_move_slow_multiplier = float(data.get("enemy_move_slow_multiplier", 1.0))
-	enemy_move_slow_remaining = max(0.0, float(data.get("enemy_move_slow_remaining", 0.0)))
-	theme_blood_reflux_cooldown = max(0.0, float(data.get("theme_blood_reflux_cooldown", 0.0)))
-	if swordsman_dangzhen_fan_ability == null:
-		swordsman_dangzhen_fan_ability = DANGZHEN_SWORD_FAN_ABILITY.new()
-	swordsman_dangzhen_fan_ability.cooldown_remaining = max(0.0, float(data.get("swordsman_dangzhen_slash_cooldown_remaining", 0.0)))
-	if gunner_dangzhen_beam_ability == null:
-		gunner_dangzhen_beam_ability = DANGZHEN_GUNNER_BEAM_ABILITY.new()
-	gunner_dangzhen_beam_ability.cooldown_remaining = max(0.0, float(data.get("gunner_dangzhen_beam_cooldown_remaining", 0.0)))
-	if gunner_infinite_reload_ability == null:
-		gunner_infinite_reload_ability = GUNNER_INFINITE_RELOAD_ABILITY.new()
-	gunner_infinite_reload_ability.apply_save_data({
-		"cooldown_remaining": float(data.get("gunner_infinite_reload_cooldown_remaining", 0.0)),
-		"active_remaining": float(data.get("gunner_infinite_reload_remaining", 0.0)),
-		"tick_remaining": float(data.get("gunner_infinite_reload_tick_remaining", 0.0))
-	})
-	if mage_dangzhen_wave_ability == null:
-		mage_dangzhen_wave_ability = MAGE_DANGZHEN_WAVE_ABILITY.new()
-	mage_dangzhen_wave_ability.cooldown_remaining = max(0.0, float(data.get("mage_dangzhen_wave_cooldown_remaining", 0.0)))
-	if mage_tidal_surge_ability == null:
-		mage_tidal_surge_ability = MAGE_TIDAL_SURGE_ABILITY.new()
-	mage_tidal_surge_ability.cooldown_remaining = max(0.0, float(data.get("mage_tidal_surge_cooldown_remaining", 0.0)))
-	if swordsman_blade_storm_ability == null:
-		swordsman_blade_storm_ability = SWORDSMAN_BLADE_STORM_ABILITY.new()
-	swordsman_blade_storm_ability.apply_save_data({
-		"cooldown_remaining": float(data.get("swordsman_blade_storm_cooldown_remaining", 0.0)),
-		"active_remaining": float(data.get("swordsman_blade_storm_remaining", 0.0)),
-		"tick_remaining": float(data.get("swordsman_blade_storm_tick_remaining", 0.0))
-	})
-	speed = float(data.get("speed", speed))
-	pickup_radius = float(data.get("pickup_radius", pickup_radius))
-	energy_gain_multiplier = float(data.get("energy_gain_multiplier", energy_gain_multiplier))
-	global_damage_multiplier = float(data.get("global_damage_multiplier", global_damage_multiplier))
-	background_interval_multiplier = float(data.get("background_interval_multiplier", background_interval_multiplier))
-	ultimate_cost_multiplier = float(data.get("ultimate_cost_multiplier", ultimate_cost_multiplier))
-	damage_taken_multiplier = float(data.get("damage_taken_multiplier", damage_taken_multiplier))
-	role_switch_cooldown_bonus = float(data.get("role_switch_cooldown_bonus", role_switch_cooldown_bonus))
-	switch_power_remaining = float(data.get("switch_power_remaining", 0.0))
-	switch_power_role_id = str(data.get("switch_power_role_id", ""))
-	switch_power_damage_multiplier = float(data.get("switch_power_damage_multiplier", 1.0))
-	switch_power_interval_bonus = float(data.get("switch_power_interval_bonus", 0.0))
-	switch_power_label = str(data.get("switch_power_label", ""))
-	pending_entry_blessing_source_role_id = str(data.get("pending_entry_blessing_source_role_id", ""))
-	entry_blessing_role_id = str(data.get("entry_blessing_role_id", ""))
-	entry_blessing_label = str(data.get("entry_blessing_label", ""))
-	entry_blessing_remaining = float(data.get("entry_blessing_remaining", 0.0))
-	entry_lifesteal_ratio = float(data.get("entry_lifesteal_ratio", 0.0))
-	entry_haste_interval_bonus = float(data.get("entry_haste_interval_bonus", 0.0))
-	entry_haste_move_speed_multiplier = float(data.get("entry_haste_move_speed_multiplier", 1.0))
-	relay_window_remaining = float(data.get("relay_window_remaining", 0.0))
-	relay_ready_role_id = str(data.get("relay_ready_role_id", ""))
-	relay_from_role_id = str(data.get("relay_from_role_id", ""))
-	relay_label = str(data.get("relay_label", ""))
-	relay_bonus_pending = bool(data.get("relay_bonus_pending", false))
-	standby_entry_role_id = str(data.get("standby_entry_role_id", ""))
-	standby_entry_label = "寰呮満钃勫娍"
-	standby_entry_remaining = float(data.get("standby_entry_remaining", 0.0))
-	standby_entry_damage_multiplier = float(data.get("standby_entry_damage_multiplier", 1.0))
-	standby_entry_interval_bonus = float(data.get("standby_entry_interval_bonus", 0.0))
-	guard_cover_remaining = float(data.get("guard_cover_remaining", 0.0))
-	guard_cover_damage_multiplier = float(data.get("guard_cover_damage_multiplier", 1.0))
-	team_combo_remaining = float(data.get("team_combo_remaining", 0.0))
-	team_combo_damage_multiplier = float(data.get("team_combo_damage_multiplier", 1.0))
-	team_combo_move_multiplier = float(data.get("team_combo_move_multiplier", 1.0))
-	team_combo_background_multiplier = float(data.get("team_combo_background_multiplier", 1.0))
-	borrow_fire_role_id = str(data.get("borrow_fire_role_id", ""))
-	borrow_fire_remaining = float(data.get("borrow_fire_remaining", 0.0))
-	borrow_fire_damage_multiplier = float(data.get("borrow_fire_damage_multiplier", 1.0))
-	borrow_fire_interval_bonus = float(data.get("borrow_fire_interval_bonus", 0.0))
-	borrow_fire_background_multiplier = float(data.get("borrow_fire_background_multiplier", 1.0))
-	post_ultimate_flow_remaining = float(data.get("post_ultimate_flow_remaining", 0.0))
-	post_ultimate_flow_background_multiplier = float(data.get("post_ultimate_flow_background_multiplier", 1.0))
-	ultimate_guard_remaining = float(data.get("ultimate_guard_remaining", 0.0))
-	ultimate_guard_damage_multiplier = float(data.get("ultimate_guard_damage_multiplier", 1.0))
-	perpetual_motion_cooldown_remaining = float(data.get("perpetual_motion_cooldown_remaining", 0.0))
-	frenzy_remaining = float(data.get("frenzy_remaining", 0.0))
-	frenzy_stacks = int(data.get("frenzy_stacks", 0))
-	frenzy_overkill_counter = int(data.get("frenzy_overkill_counter", 0))
-	role_standby_elapsed = data.get("role_standby_elapsed", role_standby_elapsed).duplicate(true)
-	role_cycle_marks = data.get("role_cycle_marks", role_cycle_marks).duplicate(true)
-	role_share_initialized = bool(data.get("role_share_initialized", false))
-	active_role_index = saved_active_role_index
-	role_upgrade_levels = data.get("role_upgrade_levels", role_upgrade_levels).duplicate(true)
-	background_cooldowns = data.get("background_cooldowns", background_cooldowns).duplicate(true)
-	build_slot_levels = data.get("build_slot_levels", build_slot_levels).duplicate(true)
-	var saved_card_pick_levels: Variant = data.get("card_pick_levels", card_pick_levels)
-	if saved_card_pick_levels is Dictionary:
-		card_pick_levels = BUILD_SYSTEM.normalize_dangzhen_card_levels(saved_card_pick_levels)
-	var saved_special_reward_levels: Variant = data.get("special_reward_levels", special_reward_levels)
-	if saved_special_reward_levels is Dictionary:
-		special_reward_levels = BUILD_SYSTEM.normalize_dangzhen_reward_levels(saved_special_reward_levels)
-	elite_relics_unlocked = data.get("elite_relics_unlocked", elite_relics_unlocked).duplicate(true)
-	attribute_training_levels = _normalize_attribute_training_data(data.get("attribute_training_levels", attribute_training_levels))
-	_sync_swordsman_trait_health_bonus()
-	slot_resonances_unlocked = data.get("slot_resonances_unlocked", slot_resonances_unlocked).duplicate(true)
-	role_special_states = data.get("role_special_states", role_special_states).duplicate(true)
-	roles = _normalize_loaded_roles(data.get("roles", roles))
-	story_equipped_styles = data.get("story_equipped_styles", story_equipped_styles).duplicate(true)
-	if swordsman_blade_storm_ability != null:
-		swordsman_blade_storm_ability.restore_effect_if_active(self)
-	_initialize_existing_role_shares()
-	level_up_active = false
-	is_dead = false
-
-	_update_active_role_state()
-	fire_timer.start()
-
-	experience_changed.emit(experience, experience_to_next_level, level)
-	stats_changed.emit(get_stat_summary())
-	health_changed.emit(current_health, max_health)
-	_emit_active_mana_changed()
 
 func resume_pending_level_ups() -> void:
 	_try_request_level_up()
@@ -2210,32 +1773,7 @@ func _try_request_level_up() -> void:
 	level_up_requested.emit(_build_upgrade_options())
 
 func _build_upgrade_options() -> Array:
-	return PLAYER_LEVEL_FLOW.build_upgrade_options(self)
-
-func _get_body_upgrade_pool() -> Array:
-	var active_role_id: String = str(_get_active_role().get("id", ""))
-	return BUILD_SYSTEM.get_upgrade_pool("body", card_pick_levels, special_reward_levels, active_role_id, roles)
-
-func _get_combat_upgrade_pool() -> Array:
-	var active_role_id: String = str(_get_active_role().get("id", ""))
-	return BUILD_SYSTEM.get_upgrade_pool("combat", card_pick_levels, special_reward_levels, active_role_id, roles)
-
-func _get_skill_upgrade_pool() -> Array:
-	var active_role_id: String = str(_get_active_role().get("id", ""))
-	return BUILD_SYSTEM.get_upgrade_pool("skill", card_pick_levels, special_reward_levels, active_role_id, roles)
-
-func _get_fallback_upgrade_pool() -> Array:
-	return [
-		PLAYER_UPGRADE_OPTIONS.make_upgrade_option("body", _get_upgrade_slot_label("body"), "fallback_body_reforge", "体魄重铸", "所有角色伤害与生存能力小幅提升。"),
-		PLAYER_UPGRADE_OPTIONS.make_upgrade_option("combat", _get_upgrade_slot_label("combat"), "fallback_combat_reforge", "轮换重铸", "切人冷却与后台攻击节奏小幅优化。"),
-		PLAYER_UPGRADE_OPTIONS.make_upgrade_option("skill", _get_upgrade_slot_label("skill"), "fallback_skill_reforge", "技能重铸", "大招能量获取与技能强度小幅提升。")
-	]
-
-func _make_endless_blank_upgrade_option() -> Dictionary:
-	return PLAYER_UPGRADE_OPTIONS.make_endless_blank_upgrade_option(_get_upgrade_slot_label("body"))
-
-func _record_build_pick(slot_id: String) -> void:
-	PLAYER_BUILD_PROGRESS_FLOW.record_build_pick(self, slot_id)
+	return PLAYER_LEVEL_FLOW.build_blessing_upgrade_options(self)
 
 func _get_support_offset(role_id: String, aggressive: bool) -> Vector2:
 	return PLAYER_VISUAL_LAYOUT.get_support_offset(role_id, facing_direction, aggressive)

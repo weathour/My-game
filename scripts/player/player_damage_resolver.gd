@@ -107,6 +107,43 @@ static func damage_enemies_in_ellipse(owner, center: Vector2, horizontal_radius:
 			hit_count += 1
 	return hit_count
 
+static func damage_enemies_in_cone(owner, origin: Vector2, direction: Vector2, cone_range: float, cone_angle_radians: float, damage_amount: float, vulnerability_bonus: float, slow_multiplier: float, slow_duration: float, source_role_id: String = "") -> int:
+	var forward := direction.normalized()
+	if forward.length_squared() <= 0.001:
+		forward = Vector2.RIGHT
+	var safe_range: float = max(1.0, cone_range)
+	var half_angle: float = max(0.0, cone_angle_radians * 0.5)
+	var cos_half_angle: float = cos(half_angle)
+	var center: Vector2 = origin + forward * (safe_range * 0.5)
+	var broad_size: float = safe_range * 2.0
+	var hit_count := 0
+	var resolved_role_id: String = _resolve_role_id(owner, source_role_id)
+	for enemy in _get_candidate_enemies_for_rect(owner, center, broad_size, broad_size):
+		if not _is_live_enemy(enemy):
+			continue
+		var enemy_offset: Vector2 = enemy.global_position - origin
+		var distance: float = enemy_offset.length()
+		var hit_radius: float = _get_enemy_hit_radius(owner, enemy)
+		if distance > safe_range + hit_radius:
+			continue
+		if distance <= hit_radius:
+			deal_damage_to_enemy(owner, enemy, damage_amount, resolved_role_id, vulnerability_bonus, 2.0, slow_multiplier, slow_duration, origin)
+			hit_count += 1
+			continue
+		var enemy_direction: Vector2 = enemy_offset / distance
+		if enemy_direction.dot(forward) >= cos_half_angle or _is_enemy_inside_cone_edge(enemy_offset, forward, safe_range, half_angle, hit_radius):
+			deal_damage_to_enemy(owner, enemy, damage_amount, resolved_role_id, vulnerability_bonus, 2.0, slow_multiplier, slow_duration, origin)
+			hit_count += 1
+	return hit_count
+
+static func _is_enemy_inside_cone_edge(offset: Vector2, forward: Vector2, cone_range: float, half_angle: float, hit_radius: float) -> bool:
+	var side: Vector2 = forward.orthogonal()
+	var forward_distance: float = offset.dot(forward)
+	if forward_distance < -hit_radius or forward_distance > cone_range + hit_radius:
+		return false
+	var allowed_side_distance: float = max(0.0, forward_distance) * tan(half_angle) + hit_radius
+	return abs(offset.dot(side)) <= allowed_side_distance
+
 static func schedule_swordsman_slash_followthrough(owner, center: Vector2, axis_direction: Vector2, rect_length: float, rect_width: float, damage_amount: float, vulnerability_bonus: float, slow_multiplier: float, slow_duration: float, animation_duration: float, source_role_id: String, hit_registry: Dictionary) -> void:
 	for index in range(max(0, int(owner.SWORD_SLASH_DAMAGE_FOLLOW_PULSES))):
 		var tree: SceneTree = owner.get_tree()

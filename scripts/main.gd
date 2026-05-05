@@ -60,6 +60,7 @@ var defeated_boss_count: int = 0
 var exit_snapshot_saved: bool = false
 var performance_sample_elapsed: float = 0.0
 var pickup_compact_elapsed: float = 0.0
+var distant_enemy_maintenance_elapsed: float = 0.0
 var map_boundary_node: Node2D
 
 func _ready() -> void:
@@ -151,6 +152,7 @@ func _process(delta: float) -> void:
 	GAME_HUD_FLOW.update_frame_hud(self)
 	_update_minimap()
 	_update_pickup_compaction(delta)
+	_update_distant_enemy_maintenance(delta)
 	_update_performance_metrics(delta)
 
 func _setup_spawn_timer() -> void:
@@ -184,6 +186,13 @@ func _update_pickup_compaction(delta: float) -> void:
 		return
 	pickup_compact_elapsed = 0.0
 	PICKUP_COMPACTOR.compact_pickups(self)
+
+func _update_distant_enemy_maintenance(delta: float) -> void:
+	distant_enemy_maintenance_elapsed += delta
+	if distant_enemy_maintenance_elapsed < 0.75:
+		return
+	distant_enemy_maintenance_elapsed = 0.0
+	ENEMY_SPAWN_FLOW.reposition_distant_normal_enemies(self)
 
 func _toggle_character_panel() -> void:
 	GAME_CHARACTER_PANEL_FLOW.toggle_character_panel(self)
@@ -353,10 +362,14 @@ func _apply_difficulty_to_enemy_profile(kind: String, enemy_profile: Dictionary)
 	return GAME_STORY_CONTEXT_FLOW.apply_difficulty_to_enemy_profile(self, kind, enemy_profile)
 
 func _can_spawn_runtime_group(group_name: String, fallback_limit: int) -> bool:
-	return PERFORMANCE_GUARD.can_spawn_in_group(self, group_name, _get_difficulty_limit(_limit_key_for_group(group_name), fallback_limit))
+	return PERFORMANCE_GUARD.can_spawn_in_group(self, group_name, _get_runtime_group_limit(group_name, fallback_limit))
 
 func _trim_spawn_count_for_group(group_name: String, requested_count: int, fallback_limit: int) -> int:
-	return PERFORMANCE_GUARD.trim_requested_count(self, group_name, requested_count, _get_difficulty_limit(_limit_key_for_group(group_name), fallback_limit))
+	return PERFORMANCE_GUARD.trim_requested_count(self, group_name, requested_count, _get_runtime_group_limit(group_name, fallback_limit))
+
+func _get_runtime_group_limit(group_name: String, fallback_limit: int) -> int:
+	var base_limit := _get_difficulty_limit(_limit_key_for_group(group_name), fallback_limit)
+	return PERFORMANCE_GUARD.get_dynamic_limit(self, group_name, base_limit)
 
 func _limit_key_for_group(group_name: String) -> String:
 	match group_name:
@@ -404,14 +417,17 @@ func _on_developer_level_up_requested() -> void:
 func _on_developer_boss_spawn_requested(archetype_id: String) -> void:
 	DEVELOPER_ACTIONS.spawn_boss(self, archetype_id)
 
-func _on_developer_card_grant_requested(card_id: String) -> void:
-	DEVELOPER_ACTIONS.grant_card(self, card_id)
-
 func _on_developer_small_boss_spawn_requested(archetype_id: String) -> void:
 	DEVELOPER_ACTIONS.spawn_small_boss(self, archetype_id)
 
+func _on_developer_skill_unlock_requested(skill_id: String, tier: int) -> void:
+	DEVELOPER_ACTIONS.unlock_skill(self, skill_id, tier)
+
 func _get_developer_boss_options() -> Array:
 	return DEVELOPER_OPTION_PROVIDER.get_boss_options()
+
+func _get_developer_skill_options() -> Array:
+	return DEVELOPER_OPTION_PROVIDER.get_skill_options(player)
 
 func _spawn_developer_boss(archetype_id: String = "boss_spellcore") -> void:
 	DEVELOPER_ACTIONS.spawn_boss(self, archetype_id)

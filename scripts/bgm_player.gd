@@ -28,13 +28,13 @@ func _exit_tree() -> void:
 	stream = null
 
 func apply_saved_volume() -> void:
-	var volume_linear: float = load_music_volume()
+	var saved_volume_linear: float = load_music_volume()
 	var muted: bool = load_music_muted()
 
 	if muted:
 		volume_db = MUTED_VOLUME_DB
 	else:
-		volume_db = linear_to_db(max(volume_linear, 0.001))
+		volume_db = linear_to_db(max(saved_volume_linear, 0.001))
 
 func _on_finished() -> void:
 	stored_playback_position = 0.0
@@ -124,10 +124,10 @@ static func load_music_volume() -> float:
 
 	return float(config.get_value(SETTINGS_SECTION, MUSIC_VOLUME_KEY, DEFAULT_VOLUME_LINEAR))
 
-static func save_music_volume(volume_linear: float) -> void:
+static func save_music_volume(saved_volume_linear: float) -> void:
 	var config := ConfigFile.new()
 	config.load(SETTINGS_PATH)
-	config.set_value(SETTINGS_SECTION, MUSIC_VOLUME_KEY, clamp(volume_linear, 0.0, 1.0))
+	config.set_value(SETTINGS_SECTION, MUSIC_VOLUME_KEY, clamp(saved_volume_linear, 0.0, 1.0))
 	config.save(SETTINGS_PATH)
 
 static func load_music_muted() -> bool:

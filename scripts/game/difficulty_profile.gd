@@ -34,7 +34,7 @@ const PROFILES := {
 		"id": "normal",
 		"label": "普通",
 		"available": true,
-		"description": "标准幸存者割草体验，作为 Build 和敌人压力的基准盘。",
+		"description": "标准幸存者割草体验，作为祝福和敌人压力的基准盘。",
 		"risk_band": [0.50, 0.63],
 		"spawn_interval_scale": 1.00,
 		"minimum_spawn_interval_scale": 1.00,
@@ -185,10 +185,7 @@ static func apply_to_enemy_profile(kind: String, enemy_profile: Dictionary, prof
 	if behavior == "turret" or secondary_behavior == "turret" or is_special:
 		_adjust_interval(adjusted, "turret_bombard_interval", attack_interval_scale, 0.9)
 		_adjust_projectile_count(adjusted, "turret_bombard_projectiles", projectile_count_scale, 6, 14)
-	if kind == "boss":
-		adjusted["boss_attack_pressure_scale"] = get_scale(profile, "boss_attack_pressure_scale", 1.0)
-	else:
-		adjusted["boss_attack_pressure_scale"] = 1.0
+	adjusted["boss_attack_pressure_scale"] = get_scale(profile, "boss_attack_pressure_scale", 1.0) if kind == "boss" else 1.0
 	return adjusted
 
 static func _adjust_interval(target: Dictionary, key: String, scale: float, minimum: float) -> void:

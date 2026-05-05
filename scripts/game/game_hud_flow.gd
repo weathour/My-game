@@ -30,10 +30,8 @@ static func refresh_hud(main: Node) -> void:
 		main.hud.update_time(main.survival_time)
 	if main.hud.has_method("set_developer_boss_options"):
 		main.hud.set_developer_boss_options(main._get_developer_boss_options())
-	if main.hud.has_method("set_developer_dangzhen_build_options"):
-		main.hud.set_developer_dangzhen_build_options(DEVELOPER_OPTION_PROVIDER.get_first_batch_build_options(main.player.card_pick_levels, main.player.level))
-	if main.hud.has_method("set_developer_special_card_options"):
-		main.hud.set_developer_special_card_options(DEVELOPER_OPTION_PROVIDER.get_special_card_options(main.player.special_reward_levels))
+	if main.hud.has_method("set_developer_skill_options"):
+		main.hud.set_developer_skill_options(main._get_developer_skill_options())
 	update_boss_hud(main)
 
 static func update_boss_hud(main: Node) -> void:

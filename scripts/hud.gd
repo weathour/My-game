@@ -1,17 +1,16 @@
-extends CanvasLayer
+﻿extends CanvasLayer
 
 const DEVELOPER_MODE := preload("res://scripts/developer_mode.gd")
 const DEVELOPER_PANEL := preload("res://scripts/developer/developer_panel.gd")
 const COMBAT_SKILL_BAR := preload("res://scripts/ui/hud/combat_skill_bar.gd")
-const BUILD_SKILL_GRAPH_PANEL := preload("res://scripts/ui/build_graph/build_skill_graph_panel.gd")
 const GAME_SETTINGS := preload("res://scripts/game_settings.gd")
 const PERFORMANCE_MONITOR := preload("res://scripts/game/performance_monitor.gd")
 const SURVIVORS_THEME := preload("res://scripts/ui/theme/survivors_ui_theme.gd")
 
 signal developer_level_up_requested
 signal developer_boss_spawn_requested(archetype_id: String)
-signal developer_card_grant_requested(card_id: String)
 signal developer_small_boss_spawn_requested(archetype_id: String)
+signal developer_skill_unlock_requested(skill_id: String, tier: int)
 
 var level_label: Label
 var role_label: Label
@@ -31,11 +30,8 @@ var team_panel: PanelContainer
 var team_role_labels: Array[Label] = []
 var switch_cd_label: Label
 var switch_power_label: Label
-var relay_label: Label
 var combat_skill_bar: Control
 var developer_panel: PanelContainer
-var build_graph_button: Button
-var build_graph_panel: Control
 var performance_overlay_panel: PanelContainer
 var performance_overlay_label: Label
 var attack_mode_hint_panel: PanelContainer
@@ -105,7 +101,6 @@ func _ready() -> void:
 	boss_panel.add_child(boss_health_label)
 
 	_build_skill_cooldown_panel(root)
-	_build_build_graph_button(root)
 	_build_attack_mode_hint(root)
 	_build_minimap(root)
 	if DEVELOPER_MODE.is_enabled():
@@ -156,49 +151,10 @@ func _build_team_panel(root: Control) -> void:
 	switch_power_label.modulate = Color(0.86, 0.9, 0.98, 0.92)
 	content.add_child(switch_power_label)
 
-	relay_label = Label.new()
-	relay_label.text = "接力窗口 无"
-	relay_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	relay_label.add_theme_font_size_override("font_size", 15)
-	relay_label.modulate = Color(0.8, 0.92, 1.0, 0.92)
-	content.add_child(relay_label)
 
 func _build_skill_cooldown_panel(root: Control) -> void:
 	combat_skill_bar = COMBAT_SKILL_BAR.new()
 	root.add_child(combat_skill_bar)
-
-func _build_build_graph_button(root: Control) -> void:
-	build_graph_button = Button.new()
-	build_graph_button.anchor_left = 0.0
-	build_graph_button.anchor_top = 0.0
-	build_graph_button.anchor_right = 0.0
-	build_graph_button.anchor_bottom = 0.0
-	build_graph_button.offset_left = 16.0
-	build_graph_button.offset_top = 16.0
-	build_graph_button.offset_right = 140.0
-	build_graph_button.offset_bottom = 54.0
-	build_graph_button.text = "Build 图谱"
-	build_graph_button.add_theme_font_size_override("font_size", 15)
-	SURVIVORS_THEME.apply_button_style(build_graph_button, "primary")
-	build_graph_button.pressed.connect(_on_build_graph_button_pressed)
-	root.add_child(build_graph_button)
-
-	build_graph_panel = BUILD_SKILL_GRAPH_PANEL.new()
-	build_graph_panel.z_index = 80
-	root.add_child(build_graph_panel)
-
-func _on_build_graph_button_pressed() -> void:
-	toggle_build_graph()
-
-func toggle_build_graph() -> void:
-	if build_graph_panel == null:
-		return
-	if build_graph_panel.has_method("toggle_panel"):
-		build_graph_panel.toggle_panel(true)
-
-func hide_build_graph() -> void:
-	if build_graph_panel != null and build_graph_panel.has_method("hide_panel") and bool(build_graph_panel.get("visible")):
-		build_graph_panel.hide_panel()
 
 func _build_attack_mode_hint(root: Control) -> void:
 	attack_mode_hint_panel = PanelContainer.new()
@@ -325,8 +281,8 @@ func _build_developer_panel(root: Control) -> void:
 	root.add_child(developer_panel)
 	developer_panel.level_up_requested.connect(func(): developer_level_up_requested.emit())
 	developer_panel.boss_spawn_requested.connect(func(archetype_id: String): developer_boss_spawn_requested.emit(archetype_id))
-	developer_panel.card_grant_requested.connect(func(card_id: String): developer_card_grant_requested.emit(card_id))
 	developer_panel.small_boss_spawn_requested.connect(func(archetype_id: String): developer_small_boss_spawn_requested.emit(archetype_id))
+	developer_panel.skill_unlock_requested.connect(func(skill_id: String, tier: int): developer_skill_unlock_requested.emit(skill_id, tier))
 
 func set_developer_invincibility_enabled(enabled: bool) -> void:
 	if developer_panel != null and developer_panel.has_method("set_invincibility_enabled"):
@@ -336,13 +292,9 @@ func set_developer_boss_options(options: Array) -> void:
 	if developer_panel != null and developer_panel.has_method("set_boss_options"):
 		developer_panel.set_boss_options(options)
 
-func set_developer_dangzhen_build_options(options: Array) -> void:
-	if developer_panel != null and developer_panel.has_method("set_dangzhen_build_options"):
-		developer_panel.set_dangzhen_build_options(options)
-
-func set_developer_special_card_options(options: Array) -> void:
-	if developer_panel != null and developer_panel.has_method("set_special_card_options"):
-		developer_panel.set_special_card_options(options)
+func set_developer_skill_options(options: Array) -> void:
+	if developer_panel != null and developer_panel.has_method("set_skill_options"):
+		developer_panel.set_skill_options(options)
 
 func update_performance_metrics(metrics: Dictionary) -> void:
 	if developer_panel != null and developer_panel.has_method("update_performance_metrics"):
@@ -377,7 +329,7 @@ func _ensure_performance_overlay() -> void:
 
 func update_display(level: int, current_experience: int, required_experience: int) -> void:
 	if level_label != null:
-		level_label.text = "等级 %d" % level
+		level_label.text = "绛夌骇 %d" % level
 	if experience_bar != null:
 		experience_bar.max_value = max(required_experience, 1)
 		experience_bar.value = current_experience
@@ -442,17 +394,6 @@ func update_stats(summary: Dictionary) -> void:
 			switch_power_label.text = "切换增益 无"
 			switch_power_label.modulate = Color(0.86, 0.9, 0.98, 0.92)
 
-	var relay_window := float(summary.get("relay_window_remaining", 0.0))
-	var relay_name := str(summary.get("relay_label", ""))
-	var relay_pending := bool(summary.get("relay_bonus_pending", false))
-	if relay_label != null:
-		if relay_pending and relay_window > 0.0 and relay_name != "":
-			relay_label.text = "接力窗口 %s %.1f 秒" % [relay_name, relay_window]
-			relay_label.modulate = Color(1.0, 0.92, 0.56, 0.98)
-		else:
-			relay_label.text = "接力窗口 无"
-			relay_label.modulate = Color(0.8, 0.92, 1.0, 0.92)
-
 	var current_energy: float = float(summary.get("current_mana", 0.0))
 	var required_energy: float = float(summary.get("ultimate_energy_cost", 100.0))
 	var ultimate_ready: bool = bool(summary.get("ultimate_ready", false))
@@ -476,7 +417,7 @@ func update_stats(summary: Dictionary) -> void:
 
 func update_time(seconds_elapsed: float) -> void:
 	var total_seconds: int = int(floor(seconds_elapsed))
-	var minutes: int = int(total_seconds / 60)
+	var minutes: int = total_seconds / 60
 	var seconds: int = total_seconds % 60
 	time_label.text = "时间 %02d:%02d" % [minutes, seconds]
 

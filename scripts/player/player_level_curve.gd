@@ -1,11 +1,11 @@
 extends RefCounted
 
 const BASE_REQUIRED_EXPERIENCE := 30.0
-const LINEAR_STEP := 12.0
-const POWER_STEP := 11.0
-const POWER_EXPONENT := 1.52
-const MIDGAME_STEP := 18.0
-const LATEGAME_STEP := 42.0
+const LINEAR_STEP := 10.0
+const POWER_STEP := 14.0
+const POWER_EXPONENT := 1.54
+const MIDGAME_STEP := 340.0
+const LATEGAME_STEP := 850.0
 const MIDGAME_LEVEL := 12
 const LATEGAME_LEVEL := 18
 

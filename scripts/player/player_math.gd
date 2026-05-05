@@ -1,35 +1,7 @@
 extends RefCounted
 
-static func get_dangzhen_sword_visual_size(split_level: int, huichao_level: int) -> Vector2:
-	var scale_multiplier: float = 0.72 + split_level * 0.07 + huichao_level * 0.05
-	return Vector2(138.0, 74.0) * scale_multiplier
-
-static func get_dangzhen_gunner_beam_hit_half_width(visual_thickness: float, visual_scale: float) -> float:
-	var beam_visible_height: float = visual_thickness * visual_scale
-	return beam_visible_height * 0.5
-
-static func get_dangzhen_gunner_range_multiplier(huichao_level: int) -> float:
-	match huichao_level:
-		1:
-			return 1.5
-		2:
-			return 2.0
-		3:
-			return 3.0
-		_:
-			return 1.0
-
-static func get_dangzhen_qichao_damage(role_id: String, qichao_level: int) -> float:
-	var level_index: int = clamp(qichao_level - 1, 0, 2)
-	match role_id:
-		"swordsman":
-			return [22.0, 30.0, 38.0][level_index]
-		"gunner":
-			return [18.0, 25.0, 32.0][level_index]
-		"mage":
-			return [24.0, 32.0, 40.0][level_index]
-		_:
-			return [20.0, 28.0, 36.0][level_index]
+static func get_infinite_reload_range_multiplier() -> float:
+	return 1.0
 
 static func get_downward_perpendicular(direction: Vector2) -> Vector2:
 	var normalized_direction: Vector2 = direction.normalized()

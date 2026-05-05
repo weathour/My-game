@@ -11,19 +11,12 @@ static func get_enemy_meta_float(enemy: Node, key: String) -> float:
 	return float(enemy.get_meta(key))
 
 static func apply_role_damage_lifesteal(owner, source_role_id: String, damage_amount: float) -> void:
-	if owner == null or source_role_id == "" or damage_amount <= 0.0:
-		return
-	if not owner.has_method("_get_role_blessing_stat_bonus") or not owner.has_method("_heal"):
-		return
-	var lifesteal_ratio: float = max(0.0, float(owner._get_role_blessing_stat_bonus(source_role_id, "lifesteal")))
-	if lifesteal_ratio <= 0.0:
-		return
-	owner._heal(min(10.0, damage_amount * lifesteal_ratio))
+	return
 
-static func get_gunner_distance_damage_multiplier(distance: float) -> float:
+static func get_gunner_distance_damage_multiplier(distance: float, trait_bonus: float = 0.0) -> float:
 	var safe_distance: float = max(0.0, distance)
-	var multiplier: float = 0.30 + 0.70 * sqrt(safe_distance / 160.0)
-	return clamp(multiplier, 0.60, 1.65)
+	var multiplier: float = 0.30 + (0.70 + max(0.0, trait_bonus)) * sqrt(safe_distance / 160.0)
+	return clamp(multiplier, 0.60, 1.65 + max(0.0, trait_bonus) * 1.5)
 
 static func get_enemy_hit_radius(enemy: Node) -> float:
 	if enemy == null or not is_instance_valid(enemy):

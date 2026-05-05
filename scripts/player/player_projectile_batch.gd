@@ -5,19 +5,31 @@ const DEFAULT_HIT_RADIUS := 10.0
 const DEFAULT_ENEMY_HIT_RADIUS := 8.0
 const MAX_HIT_CHECKS_PER_FRAME := 380
 const HIT_GRID_CELL_SIZE := 96.0
-const BULLET_TEXTURE_SIZE := 32
-const TAIL_TEXTURE_SIZE := 8
+const BULLET_FRAME_TEXTURE_PATHS := [
+	"res://effects/gun/bullet/1.png",
+	"res://effects/gun/bullet/2.png",
+	"res://effects/gun/bullet/3.png",
+	"res://effects/gun/bullet/4.png",
+	"res://effects/gun/bullet/3.png",
+	"res://effects/gun/bullet/2.png"
+]
+const BULLET_FRAME_VISIBLE_REGION := Rect2(505.0, 476.0, 36.0, 36.0)
+const BULLET_ANIMATION_SPEED := 28.0
+const BULLET_FRAME_BASE_SIZE := 84.0
 
 var positions: Array[Vector2] = []
 var source_origins: Array[Vector2] = []
 var directions: Array[Vector2] = []
 var damages: PackedFloat32Array = PackedFloat32Array()
 var colors: Array[Color] = []
+var outline_colors: Array[Color] = []
 var role_ids: PackedStringArray = PackedStringArray()
 var speeds: PackedFloat32Array = PackedFloat32Array()
 var lifetimes: PackedFloat32Array = PackedFloat32Array()
 var hit_radii: PackedFloat32Array = PackedFloat32Array()
 var visual_radii: PackedFloat32Array = PackedFloat32Array()
+var visual_min_diameters: PackedFloat32Array = PackedFloat32Array()
+var visual_outline_widths: PackedFloat32Array = PackedFloat32Array()
 var enemy_hit_radius_scales: PackedFloat32Array = PackedFloat32Array()
 var enemy_hit_radius_mins: PackedFloat32Array = PackedFloat32Array()
 var enemy_hit_radius_maxs: PackedFloat32Array = PackedFloat32Array()
@@ -34,17 +46,22 @@ var wave_travel_distances: PackedFloat32Array = PackedFloat32Array()
 var wave_origins: Array[Vector2] = []
 var wave_forwards: Array[Vector2] = []
 var wave_sides: Array[Vector2] = []
+var hit_enemy_ids: Array[Dictionary] = []
 var projectiles: Array = []
 var scan_cursor: int = 0
+var animation_elapsed: float = 0.0
+var current_animation_frame: int = -1
+var bullet_frame_textures: Array[Texture2D] = []
 var source_player: Node
+var bullet_outline_multimesh_instance: MultiMeshInstance2D
+var bullet_outline_multimesh: MultiMesh
 var bullet_multimesh_instance: MultiMeshInstance2D
-var tail_multimesh_instance: MultiMeshInstance2D
 var bullet_multimesh: MultiMesh
-var tail_multimesh: MultiMesh
 
 func _ready() -> void:
 	add_to_group("temporary_effects")
 	z_index = 12
+	_load_bullet_frame_textures()
 	_setup_multimesh_renderers()
 
 func configure(owner: Node) -> void:
@@ -63,11 +80,14 @@ func add_projectile(data: Dictionary) -> bool:
 	directions.append(shot_direction)
 	damages.append(float(data.get("damage", 0.0)))
 	colors.append(data.get("color", Color(1.0, 0.72, 0.38, 0.94)) as Color)
+	outline_colors.append(data.get("visual_outline_color", Color(1.0, 1.0, 1.0, 0.0)) as Color)
 	role_ids.append(str(data.get("role_id", "gunner")))
 	speeds.append(float(data.get("speed", 620.0)))
 	lifetimes.append(float(data.get("lifetime", 1.0)))
 	hit_radii.append(float(data.get("hit_radius", DEFAULT_HIT_RADIUS)))
 	visual_radii.append(float(data.get("visual_radius", 4.2)))
+	visual_min_diameters.append(float(data.get("visual_min_diameter", 8.0)))
+	visual_outline_widths.append(float(data.get("visual_outline_width", 0.0)))
 	enemy_hit_radius_scales.append(float(data.get("enemy_hit_radius_scale", 0.2)))
 	enemy_hit_radius_mins.append(float(data.get("enemy_hit_radius_min", 4.0)))
 	enemy_hit_radius_maxs.append(float(data.get("enemy_hit_radius_max", 12.0)))
@@ -84,6 +104,7 @@ func add_projectile(data: Dictionary) -> bool:
 	wave_origins.append(data.get("wave_origin", position) as Vector2)
 	wave_forwards.append(data.get("wave_forward", shot_direction) as Vector2)
 	wave_sides.append(data.get("wave_side", shot_direction.orthogonal().normalized()) as Vector2)
+	hit_enemy_ids.append({})
 	_sync_projectile_size()
 	_update_multimesh_instances()
 	return true
@@ -94,6 +115,7 @@ func _physics_process(delta: float) -> void:
 			projectiles.clear()
 			_update_multimesh_instances()
 		return
+	_update_animation_frame(delta)
 	_update_projectiles(delta)
 	_check_projectile_hits()
 	_sync_projectile_size()
@@ -165,6 +187,8 @@ func _find_hit_enemy(projectile_index: int, grid: Dictionary) -> Node2D:
 			for enemy in grid[cell] as Array:
 				if enemy == null or not is_instance_valid(enemy) or enemy is not Node2D:
 					continue
+				if _has_projectile_hit_enemy(projectile_index, enemy as Node2D):
+					continue
 				var enemy_radius: float = _get_enemy_hit_radius(enemy as Node2D, enemy_hit_radius_scales[projectile_index], enemy_hit_radius_mins[projectile_index], enemy_hit_radius_maxs[projectile_index])
 				var total_radius: float = hit_radii[projectile_index] + enemy_radius
 				if position.distance_squared_to((enemy as Node2D).global_position) <= total_radius * total_radius:
@@ -172,6 +196,7 @@ func _find_hit_enemy(projectile_index: int, grid: Dictionary) -> Node2D:
 	return null
 
 func _apply_projectile_hit(projectile_index: int, enemy: Node2D) -> void:
+	_mark_projectile_hit_enemy(projectile_index, enemy)
 	var role_id: String = role_ids[projectile_index]
 	var killed := false
 	if source_player.has_method("_deal_damage_to_enemy"):
@@ -180,6 +205,16 @@ func _apply_projectile_hit(projectile_index: int, enemy: Node2D) -> void:
 		killed = bool(enemy.take_damage(damages[projectile_index]))
 	if source_player.has_method("_register_attack_result"):
 		source_player._register_attack_result(role_id, 1, killed)
+
+func _has_projectile_hit_enemy(projectile_index: int, enemy: Node2D) -> bool:
+	if projectile_index < 0 or projectile_index >= hit_enemy_ids.size():
+		return false
+	return hit_enemy_ids[projectile_index].has(enemy.get_instance_id())
+
+func _mark_projectile_hit_enemy(projectile_index: int, enemy: Node2D) -> void:
+	if projectile_index < 0 or projectile_index >= hit_enemy_ids.size():
+		return
+	hit_enemy_ids[projectile_index][enemy.get_instance_id()] = true
 
 func _build_enemy_grid(enemies: Array) -> Dictionary:
 	var grid: Dictionary = {}
@@ -212,11 +247,14 @@ func _remove_projectile(index: int) -> void:
 		directions[index] = directions[last_index]
 		damages[index] = damages[last_index]
 		colors[index] = colors[last_index]
+		outline_colors[index] = outline_colors[last_index]
 		role_ids[index] = role_ids[last_index]
 		speeds[index] = speeds[last_index]
 		lifetimes[index] = lifetimes[last_index]
 		hit_radii[index] = hit_radii[last_index]
 		visual_radii[index] = visual_radii[last_index]
+		visual_min_diameters[index] = visual_min_diameters[last_index]
+		visual_outline_widths[index] = visual_outline_widths[last_index]
 		enemy_hit_radius_scales[index] = enemy_hit_radius_scales[last_index]
 		enemy_hit_radius_mins[index] = enemy_hit_radius_mins[last_index]
 		enemy_hit_radius_maxs[index] = enemy_hit_radius_maxs[last_index]
@@ -233,16 +271,20 @@ func _remove_projectile(index: int) -> void:
 		wave_origins[index] = wave_origins[last_index]
 		wave_forwards[index] = wave_forwards[last_index]
 		wave_sides[index] = wave_sides[last_index]
+		hit_enemy_ids[index] = hit_enemy_ids[last_index]
 	positions.pop_back()
 	source_origins.pop_back()
 	directions.pop_back()
 	damages.resize(last_index)
 	colors.pop_back()
+	outline_colors.pop_back()
 	role_ids.resize(last_index)
 	speeds.resize(last_index)
 	lifetimes.resize(last_index)
 	hit_radii.resize(last_index)
 	visual_radii.resize(last_index)
+	visual_min_diameters.resize(last_index)
+	visual_outline_widths.resize(last_index)
 	enemy_hit_radius_scales.resize(last_index)
 	enemy_hit_radius_mins.resize(last_index)
 	enemy_hit_radius_maxs.resize(last_index)
@@ -259,6 +301,7 @@ func _remove_projectile(index: int) -> void:
 	wave_origins.pop_back()
 	wave_forwards.pop_back()
 	wave_sides.pop_back()
+	hit_enemy_ids.pop_back()
 	if scan_cursor > positions.size():
 		scan_cursor = positions.size()
 
@@ -268,11 +311,14 @@ func _clear_projectiles() -> void:
 	directions.clear()
 	damages.clear()
 	colors.clear()
+	outline_colors.clear()
 	role_ids.clear()
 	speeds.clear()
 	lifetimes.clear()
 	hit_radii.clear()
 	visual_radii.clear()
+	visual_min_diameters.clear()
+	visual_outline_widths.clear()
 	enemy_hit_radius_scales.clear()
 	enemy_hit_radius_mins.clear()
 	enemy_hit_radius_maxs.clear()
@@ -289,6 +335,7 @@ func _clear_projectiles() -> void:
 	wave_origins.clear()
 	wave_forwards.clear()
 	wave_sides.clear()
+	hit_enemy_ids.clear()
 	projectiles.clear()
 	scan_cursor = 0
 	_update_multimesh_instances()
@@ -298,10 +345,50 @@ func _sync_projectile_size() -> void:
 		projectiles.resize(positions.size())
 
 func _setup_multimesh_renderers() -> void:
+	bullet_outline_multimesh = _create_multimesh()
 	bullet_multimesh = _create_multimesh()
-	tail_multimesh = _create_multimesh()
-	bullet_multimesh_instance = _create_multimesh_instance("BatchedBulletHeads", bullet_multimesh, _create_circle_texture(BULLET_TEXTURE_SIZE))
-	tail_multimesh_instance = _create_multimesh_instance("BatchedBulletTails", tail_multimesh, _create_rect_texture(TAIL_TEXTURE_SIZE))
+	var fallback_texture: Texture2D = bullet_frame_textures[0] if not bullet_frame_textures.is_empty() else null
+	bullet_outline_multimesh_instance = _create_multimesh_instance("BatchedBulletOutlines", bullet_outline_multimesh, fallback_texture)
+	if bullet_outline_multimesh_instance != null:
+		bullet_outline_multimesh_instance.z_index = z_index - 1
+	bullet_multimesh_instance = _create_multimesh_instance("BatchedBulletVisuals", bullet_multimesh, fallback_texture)
+
+func _load_bullet_frame_textures() -> void:
+	bullet_frame_textures.clear()
+	for path in BULLET_FRAME_TEXTURE_PATHS:
+		var texture := load(path) as Texture2D
+		if texture != null:
+			bullet_frame_textures.append(_create_bullet_frame_texture(texture))
+
+func _create_bullet_frame_texture(texture: Texture2D) -> Texture2D:
+	var source_image := texture.get_image()
+	var crop_rect := Rect2i(
+		Vector2i(int(BULLET_FRAME_VISIBLE_REGION.position.x), int(BULLET_FRAME_VISIBLE_REGION.position.y)),
+		Vector2i(int(BULLET_FRAME_VISIBLE_REGION.size.x), int(BULLET_FRAME_VISIBLE_REGION.size.y))
+	)
+	var cropped := Image.create(crop_rect.size.x, crop_rect.size.y, false, Image.FORMAT_RGBA8)
+	cropped.blit_rect(source_image, crop_rect, Vector2i.ZERO)
+	for x in range(cropped.get_width()):
+		for y in range(cropped.get_height()):
+			var pixel := cropped.get_pixel(x, y)
+			var max_channel: float = max(pixel.r, max(pixel.g, pixel.b))
+			var min_channel: float = min(pixel.r, min(pixel.g, pixel.b))
+			if max_channel >= 0.94 and max_channel - min_channel <= 0.08:
+				pixel.a = 0.0
+				cropped.set_pixel(x, y, pixel)
+	return ImageTexture.create_from_image(cropped)
+
+func _update_animation_frame(delta: float) -> void:
+	if bullet_frame_textures.is_empty() or bullet_multimesh_instance == null:
+		return
+	animation_elapsed += delta
+	var frame_index := int(floor(animation_elapsed * BULLET_ANIMATION_SPEED)) % bullet_frame_textures.size()
+	if frame_index == current_animation_frame:
+		return
+	current_animation_frame = frame_index
+	if bullet_outline_multimesh_instance != null:
+		bullet_outline_multimesh_instance.texture = bullet_frame_textures[frame_index]
+	bullet_multimesh_instance.texture = bullet_frame_textures[frame_index]
 
 func _create_multimesh() -> MultiMesh:
 	var mesh := QuadMesh.new()
@@ -324,23 +411,28 @@ func _create_multimesh_instance(node_name: String, multimesh: MultiMesh, texture
 	return instance
 
 func _update_multimesh_instances() -> void:
-	if bullet_multimesh == null or tail_multimesh == null:
+	if bullet_multimesh == null:
 		return
 	var count: int = min(positions.size(), MAX_BATCHED_PROJECTILES)
 	bullet_multimesh.visible_instance_count = count
-	tail_multimesh.visible_instance_count = count
+	if bullet_outline_multimesh != null:
+		bullet_outline_multimesh.visible_instance_count = count
 	for index in range(count):
 		var position: Vector2 = positions[index]
 		var direction: Vector2 = directions[index]
 		var radius: float = visual_radii[index]
 		var color: Color = colors[index]
-		var tail_length: float = radius * 2.8
-		var tail_width: float = max(2.0, radius * 0.7)
-		var tail_center: Vector2 = position - direction * tail_length * 0.5
-		bullet_multimesh.set_instance_transform_2d(index, _make_transform(position, direction, Vector2(radius * 2.0, radius * 2.0)))
+		var diameter: float = max(visual_min_diameters[index], radius * 2.0)
+		var frame_size := Vector2(diameter, diameter) * (BULLET_FRAME_BASE_SIZE / 32.0)
+		bullet_multimesh.set_instance_transform_2d(index, _make_transform(position, direction, frame_size))
 		bullet_multimesh.set_instance_color(index, color)
-		tail_multimesh.set_instance_transform_2d(index, _make_transform(tail_center, direction, Vector2(tail_length, tail_width)))
-		tail_multimesh.set_instance_color(index, Color(color.r, color.g, color.b, color.a * 0.55))
+		if bullet_outline_multimesh != null:
+			var outline_width: float = visual_outline_widths[index]
+			var outline_color: Color = outline_colors[index] if outline_width > 0.0 else Color(1.0, 1.0, 1.0, 0.0)
+			var outline_diameter: float = diameter + outline_width * 2.0
+			var outline_size := Vector2(outline_diameter, outline_diameter) * (BULLET_FRAME_BASE_SIZE / 32.0)
+			bullet_outline_multimesh.set_instance_transform_2d(index, _make_transform(position, direction, outline_size))
+			bullet_outline_multimesh.set_instance_color(index, outline_color)
 
 func _make_transform(position: Vector2, direction: Vector2, size: Vector2) -> Transform2D:
 	var forward := direction.normalized()
@@ -348,24 +440,6 @@ func _make_transform(position: Vector2, direction: Vector2, size: Vector2) -> Tr
 		forward = Vector2.RIGHT
 	var side := forward.orthogonal()
 	return Transform2D(forward * size.x, side * size.y, position)
-
-func _create_circle_texture(size: int) -> Texture2D:
-	var image := Image.create(size, size, false, Image.FORMAT_RGBA8)
-	var center := Vector2(float(size - 1) * 0.5, float(size - 1) * 0.5)
-	var radius := float(size) * 0.46
-	for x in range(size):
-		for y in range(size):
-			var distance: float = center.distance_to(Vector2(float(x), float(y)))
-			var alpha: float = clamp((radius - distance) / 2.0, 0.0, 1.0)
-			image.set_pixel(x, y, Color(1.0, 1.0, 1.0, alpha))
-	return ImageTexture.create_from_image(image)
-
-func _create_rect_texture(size: int) -> Texture2D:
-	var image := Image.create(size, size, false, Image.FORMAT_RGBA8)
-	for x in range(size):
-		for y in range(size):
-			image.set_pixel(x, y, Color.WHITE)
-	return ImageTexture.create_from_image(image)
 
 func _grid_cell(position: Vector2) -> Vector2i:
 	return Vector2i(floori(position.x / HIT_GRID_CELL_SIZE), floori(position.y / HIT_GRID_CELL_SIZE))

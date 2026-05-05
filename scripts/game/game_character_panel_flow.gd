@@ -18,13 +18,10 @@ static func toggle_character_panel(main: Node) -> void:
 static func can_show_character_panel(main: Node) -> bool:
 	if main.character_panel == null or main.player == null:
 		return false
-	if main.get_tree().paused:
-		return false
-	if main.level_up_ui != null and main.level_up_ui.visible:
+	var reward_menu_visible: bool = main.level_up_ui != null and main.level_up_ui.visible
+	if main.get_tree().paused and not reward_menu_visible:
 		return false
 	if main.pause_menu != null and main.pause_menu.visible:
-		return false
-	if main.hud != null and main.hud.get("build_graph_panel") != null and bool(main.hud.get("build_graph_panel").get("visible")):
 		return false
 	return true
 
@@ -38,4 +35,13 @@ static func hide_character_panel(main: Node) -> void:
 	if main.character_panel == null:
 		return
 	main.character_panel.hide_panel()
-	main.get_tree().paused = false
+	main.get_tree().paused = _should_keep_paused_after_character_panel_hide(main)
+
+static func _should_keep_paused_after_character_panel_hide(main: Node) -> bool:
+	if main.game_over:
+		return true
+	if main.level_up_ui != null and main.level_up_ui.visible:
+		return true
+	if main.pause_menu != null and main.pause_menu.visible:
+		return true
+	return false

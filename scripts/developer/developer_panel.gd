@@ -6,15 +6,14 @@ const SURVIVORS_THEME := preload("res://scripts/ui/theme/survivors_ui_theme.gd")
 
 signal level_up_requested
 signal boss_spawn_requested(archetype_id: String)
-signal card_grant_requested(card_id: String)
 signal small_boss_spawn_requested(archetype_id: String)
+signal skill_unlock_requested(skill_id: String, tier: int)
 
 var level_button: Button
 var invincibility_button: Button
 var no_cooldown_button: Button
 var boss_list: VBoxContainer
-var dangzhen_build_list: VBoxContainer
-var special_card_list: VBoxContainer
+var skill_list: VBoxContainer
 var performance_label: Label
 
 func _ready() -> void:
@@ -72,9 +71,8 @@ func _ready() -> void:
 	menu_content.add_theme_constant_override("separation", 8)
 	scroll.add_child(menu_content)
 
-	boss_list = _add_menu_section(menu_content, "Boss+1")
-	dangzhen_build_list = _add_menu_section(menu_content, "新 Build 卡")
-	special_card_list = _add_menu_section(menu_content, "强化卡牌")
+	boss_list = _add_menu_section(menu_content, "Boss +1")
+	skill_list = _add_menu_section(menu_content, "添加技能")
 
 	var small_boss_title := Label.new()
 	small_boss_title.text = "小 Boss 生成"
@@ -112,11 +110,8 @@ func set_invincibility_enabled(enabled: bool) -> void:
 func set_boss_options(options: Array) -> void:
 	_populate_option_list(boss_list, options, "暂无 Boss 选项", Callable(self, "_on_boss_button_pressed"))
 
-func set_dangzhen_build_options(options: Array) -> void:
-	_populate_option_list(dangzhen_build_list, options, "暂无新 Build 卡", Callable(self, "_on_card_button_pressed"))
-
-func set_special_card_options(options: Array) -> void:
-	_populate_option_list(special_card_list, options, "暂无强化卡牌", Callable(self, "_on_card_button_pressed"))
+func set_skill_options(options: Array) -> void:
+	_populate_option_list(skill_list, options, "暂无技能选项", Callable(self, "_on_skill_button_pressed"))
 
 func update_performance_metrics(metrics: Dictionary) -> void:
 	if performance_label != null:
@@ -187,20 +182,13 @@ func _populate_option_list(list: VBoxContainer, options: Array, empty_text: Stri
 		button.custom_minimum_size = Vector2(220.0, 58.0)
 		button.alignment = HORIZONTAL_ALIGNMENT_LEFT
 		button.add_theme_font_size_override("font_size", 14)
-		var title: String = str(option.get("title", option.get("id", "未命名卡牌")))
-		var card_id: String = str(option.get("id", ""))
-		var current_level: int = int(option.get("current_level", 0))
-		var max_level: int = int(option.get("max_level", 1))
-		var level_text := ""
-		if max_level > 1:
-			level_text = "  Lv.%d/%d" % [current_level, max_level]
-		elif current_level > 0:
-			level_text = "  已获得"
-		button.text = "%s%s\n%s" % [title, level_text, card_id]
+		var title: String = str(option.get("title", option.get("id", "未命名选项")))
+		var option_id: String = str(option.get("id", ""))
+		button.text = "%s\n%s" % [title, option_id]
 		button.tooltip_text = str(option.get("description", ""))
 		button.disabled = not bool(option.get("enabled", true))
 		SURVIVORS_THEME.apply_card_button_style(button, false, false, button.disabled)
-		button.pressed.connect(callback.bind(card_id))
+		button.pressed.connect(callback.bind(option_id))
 		list.add_child(button)
 
 	if list.get_child_count() == 0:
@@ -213,6 +201,11 @@ func _on_boss_button_pressed(archetype_id: String) -> void:
 	if archetype_id != "":
 		boss_spawn_requested.emit(archetype_id)
 
-func _on_card_button_pressed(card_id: String) -> void:
-	if card_id != "":
-		card_grant_requested.emit(card_id)
+func _on_skill_button_pressed(option_id: String) -> void:
+	var parts: PackedStringArray = option_id.split(":")
+	if parts.size() < 2:
+		return
+	var skill_id: String = str(parts[0])
+	var tier: int = max(1, int(parts[1]))
+	if skill_id != "":
+		skill_unlock_requested.emit(skill_id, tier)
