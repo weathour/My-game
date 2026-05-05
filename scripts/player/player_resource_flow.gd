@@ -95,6 +95,8 @@ static func heal(owner, amount: float) -> void:
 	if amount <= 0.0 or owner.is_dead:
 		return
 	owner.current_health = min(owner.max_health, owner.current_health + amount)
+	if owner.has_method("_save_active_role_health"):
+		owner._save_active_role_health()
 	owner.health_changed.emit(owner.current_health, owner.max_health)
 
 

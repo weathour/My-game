@@ -268,6 +268,8 @@ static func take_damage(owner, amount: float) -> void:
 
 	var adjusted_damage: float = amount * owner._get_effective_damage_taken_multiplier()
 	owner.current_health = max(0.0, owner.current_health - adjusted_damage)
+	if owner.has_method("_save_active_role_health"):
+		owner._save_active_role_health()
 	owner.hurt_cooldown_remaining = owner.hurt_cooldown
 	owner.health_changed.emit(owner.current_health, owner.max_health)
 	owner._play_player_hurt_feedback()

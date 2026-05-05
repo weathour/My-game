@@ -557,9 +557,16 @@ static func _apply_role_stat_delta(owner, role_id: String, stat: String, value: 
 	var role_data: Dictionary = owner.role_upgrade_levels.get(role_id, {}).duplicate(true)
 	match stat:
 		"max_health":
-			owner.max_health += value
-			owner.current_health = min(owner.max_health, owner.current_health + value)
-			owner.health_changed.emit(owner.current_health, owner.max_health)
+			var restored_role_health := false
+			if owner.has_method("_add_all_role_current_health"):
+				owner._add_all_role_current_health(value)
+				restored_role_health = true
+			if owner.has_method("_sync_active_role_max_health"):
+				owner._sync_active_role_max_health(false, not restored_role_health)
+			else:
+				owner.max_health += value
+				owner.current_health = min(owner.max_health, owner.current_health + value)
+				owner.health_changed.emit(owner.current_health, owner.max_health)
 		"cooldown_reduction":
 			if str(owner._get_active_role().get("id", "")) == role_id:
 				owner.equipment_cooldown_multiplier = max(0.45, owner.equipment_cooldown_multiplier * max(0.2, 1.0 - value))

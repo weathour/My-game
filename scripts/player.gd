@@ -283,6 +283,7 @@ var frenzy_remaining: float = 0.0
 var frenzy_stacks: int = 0
 var frenzy_overkill_counter: int = 0
 var role_standby_elapsed: Dictionary = {}
+var role_health_values: Dictionary = {}
 var role_mana_values: Dictionary = {}
 var role_ultimate_energy_lock_remaining: Dictionary = {}
 var role_share_initialized: bool = false
@@ -791,6 +792,9 @@ func _build_role_timing_state_data(default_value: Variant) -> Dictionary:
 
 func _build_role_resource_state_data(default_value: Variant) -> Dictionary:
 	return ROLE_RESOURCE_STATE.build_for_roles(roles, default_value)
+
+func _build_role_health_state() -> Dictionary:
+	return PLAYER_ROLE_STAT_FLOW.build_role_health_state(self)
 
 func _get_active_role_id() -> String:
 	return PLAYER_RESOURCE_FLOW.get_active_role_id(self)
@@ -1601,6 +1605,22 @@ func _get_active_role_base_health() -> float:
 
 func _get_active_role_max_health() -> float:
 	return PLAYER_ROLE_STAT_FLOW.get_active_role_max_health(self)
+
+func _get_role_max_health(role_id: String) -> float:
+	return PLAYER_ROLE_STAT_FLOW.get_role_max_health(self, role_id)
+
+func _get_role_current_health(role_id: String) -> float:
+	if role_id == str(_get_active_role().get("id", "")):
+		return current_health
+	if role_health_values is not Dictionary or role_health_values.is_empty():
+		role_health_values = PLAYER_ROLE_STAT_FLOW.build_role_health_state(self)
+	return clamp(float(role_health_values.get(role_id, _get_role_max_health(role_id))), 0.0, _get_role_max_health(role_id))
+
+func _save_active_role_health() -> void:
+	PLAYER_ROLE_STAT_FLOW.save_active_role_health(self)
+
+func _add_all_role_current_health(amount: float) -> void:
+	PLAYER_ROLE_STAT_FLOW.add_all_role_current_health(self, amount)
 
 func _sync_active_role_max_health(preserve_ratio: bool = true, restore_gain: bool = false) -> void:
 	PLAYER_ROLE_STAT_FLOW.sync_active_role_max_health(self, preserve_ratio, restore_gain)

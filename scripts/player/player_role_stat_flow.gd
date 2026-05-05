@@ -76,31 +76,105 @@ static func get_active_role_base_health(owner) -> float:
 	return max(1.0, float(role_data.get("base_health", owner.max_health if owner != null else 1.0)))
 
 
+static func build_role_health_state(owner) -> Dictionary:
+	var result: Dictionary = {}
+	if owner == null:
+		return result
+	for role_data in owner.roles:
+		if role_data is not Dictionary:
+			continue
+		var role_id: String = str((role_data as Dictionary).get("id", ""))
+		if role_id == "":
+			continue
+		result[role_id] = get_role_max_health(owner, role_id)
+	return result
+
+
+static func normalize_role_health_state(owner, value: Variant) -> Dictionary:
+	var result := build_role_health_state(owner)
+	if value is not Dictionary:
+		return result
+	for role_id_value in result.keys():
+		var role_id := str(role_id_value)
+		var max_value: float = get_role_max_health(owner, role_id)
+		result[role_id] = clamp(float((value as Dictionary).get(role_id, result.get(role_id, max_value))), 0.0, max_value)
+	return result
+
+
+static func save_active_role_health(owner) -> void:
+	if owner == null:
+		return
+	var role_id: String = str(owner._get_active_role().get("id", "")) if owner.has_method("_get_active_role") else ""
+	if role_id == "":
+		return
+	if owner.role_health_values is not Dictionary or owner.role_health_values.is_empty():
+		owner.role_health_values = build_role_health_state(owner)
+	owner.role_health_values[role_id] = clamp(float(owner.current_health), 0.0, max(1.0, float(owner.max_health)))
+
+
+static func add_all_role_current_health(owner, amount: float) -> void:
+	if owner == null or amount <= 0.0:
+		return
+	save_active_role_health(owner)
+	if owner.role_health_values is not Dictionary or owner.role_health_values.is_empty():
+		owner.role_health_values = build_role_health_state(owner)
+	for role_data in owner.roles:
+		if role_data is not Dictionary:
+			continue
+		var role_id: String = str((role_data as Dictionary).get("id", ""))
+		if role_id == "":
+			continue
+		var role_max_health: float = get_role_max_health(owner, role_id)
+		var role_current_health: float = float(owner.role_health_values.get(role_id, role_max_health))
+		owner.role_health_values[role_id] = clamp(role_current_health + amount, 0.0, role_max_health)
+
+
+static func get_role_base_health(owner, role_id: String) -> float:
+	if owner == null:
+		return 1.0
+	for role_data in owner.roles:
+		if role_data is Dictionary and str((role_data as Dictionary).get("id", "")) == role_id:
+			return max(1.0, float((role_data as Dictionary).get("base_health", owner.max_health)))
+	return max(1.0, float(owner.max_health))
+
+
+static func get_role_max_health(owner, role_id: String) -> float:
+	if owner == null:
+		return 1.0
+	var base_health: float = get_role_base_health(owner, role_id)
+	var blessing_bonus: float = 0.0
+	if owner.has_method("_get_role_blessing_stat_bonus") and role_id != "":
+		blessing_bonus = float(owner._get_role_blessing_stat_bonus(role_id, "max_health"))
+	var equipment_bonus: float = 0.0
+	if owner.has_method("_get_role_equipment_bonus_summary") and role_id != "":
+		equipment_bonus = float(owner._get_role_equipment_bonus_summary(role_id).get("max_health_bonus", 0.0))
+	else:
+		equipment_bonus = float(owner.get("equipment_max_health_bonus"))
+	return max(1.0, base_health + blessing_bonus + equipment_bonus)
+
+
 static func get_active_role_max_health(owner) -> float:
 	if owner == null:
 		return 1.0
 	var role_id: String = str(owner._get_active_role().get("id", "")) if owner.has_method("_get_active_role") else ""
-	var base_health: float = get_active_role_base_health(owner)
-	var blessing_bonus: float = 0.0
-	if owner.has_method("_get_role_blessing_stat_bonus") and role_id != "":
-		blessing_bonus = float(owner._get_role_blessing_stat_bonus(role_id, "max_health"))
-	return max(1.0, base_health + blessing_bonus + float(owner.get("equipment_max_health_bonus")))
+	return get_role_max_health(owner, role_id)
 
 
-static func sync_active_role_max_health(owner, preserve_ratio: bool = true, restore_gain: bool = false) -> void:
+static func sync_active_role_max_health(owner, _preserve_ratio: bool = true, restore_gain: bool = false) -> void:
 	if owner == null:
 		return
-	var old_max: float = max(1.0, float(owner.max_health))
-	var old_current: float = clamp(float(owner.current_health), 0.0, old_max)
-	var old_ratio: float = old_current / old_max
+	if owner.role_health_values is not Dictionary or owner.role_health_values.is_empty():
+		owner.role_health_values = build_role_health_state(owner)
+	var role_id: String = str(owner._get_active_role().get("id", "")) if owner.has_method("_get_active_role") else ""
 	var new_max: float = get_active_role_max_health(owner)
+	var old_role_max: float = max(1.0, float(owner.max_health))
+	var stored_current: float = clamp(float(owner.role_health_values.get(role_id, new_max)), 0.0, new_max)
 	owner.max_health = new_max
-	if restore_gain and new_max > old_max:
-		owner.current_health = min(new_max, old_current + (new_max - old_max))
-	elif preserve_ratio:
-		owner.current_health = clamp(new_max * old_ratio, 0.0, new_max)
+	if restore_gain and new_max > old_role_max:
+		owner.current_health = min(new_max, stored_current + (new_max - old_role_max))
 	else:
-		owner.current_health = min(old_current, new_max)
+		owner.current_health = stored_current
+	owner.role_health_values[role_id] = owner.current_health
 	owner.health_changed.emit(owner.current_health, owner.max_health)
 
 

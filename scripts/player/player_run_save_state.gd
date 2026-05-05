@@ -10,11 +10,14 @@ const SWORDSMAN_CRESCENT_WAVE_ABILITY := preload("res://scripts/abilities/swords
 const GUNNER_SHRAPNEL_FIELD_ABILITY := preload("res://scripts/abilities/gunner_shrapnel_field_ability.gd")
 const PLAYER_BLESSING_SYSTEM := preload("res://scripts/player/player_blessing_system.gd")
 const PLAYER_BLESSING_SKILL_STATE := preload("res://scripts/player/player_blessing_skill_state.gd")
+const PLAYER_ROLE_STAT_FLOW := preload("res://scripts/player/player_role_stat_flow.gd")
 
 static func get_save_data(player) -> Dictionary:
 	var pending_upgrade_count: int = player.pending_level_ups
 	if player.level_up_active:
 		pending_upgrade_count += 1
+	if player.has_method("_save_active_role_health"):
+		player._save_active_role_health()
 
 	return {
 		"position": [player.global_position.x, player.global_position.y],
@@ -25,6 +28,7 @@ static func get_save_data(player) -> Dictionary:
 		"max_health": player.max_health,
 		"max_mana": player.max_mana,
 		"current_health": player.current_health,
+		"role_health_values": player.role_health_values.duplicate(true),
 		"current_mana": player._get_role_mana(player._get_active_role_id()),
 		"role_mana_values": player.role_mana_values.duplicate(true),
 		"ultimate_energy_lock_remaining": player._get_role_ultimate_lock_remaining(player._get_active_role_id()),
@@ -135,6 +139,14 @@ static func apply_save_data(player, data: Dictionary) -> void:
 	player.max_health = float(data.get("max_health", player.max_health))
 	player.max_mana = float(data.get("max_mana", player.max_mana))
 	player.current_health = float(data.get("current_health", player.current_health))
+	player.role_health_values = player._build_role_health_state()
+	var saved_role_health_values: Variant = data.get("role_health_values", {})
+	if saved_role_health_values is Dictionary and not (saved_role_health_values as Dictionary).is_empty():
+		player.role_health_values = PLAYER_ROLE_STAT_FLOW.normalize_role_health_state(player, saved_role_health_values)
+	else:
+		var fallback_health_role_id: String = str(player.roles[clamp(saved_active_role_index, 0, max(0, player.roles.size() - 1))].get("id", ""))
+		if fallback_health_role_id != "":
+			player.role_health_values[fallback_health_role_id] = clamp(player.current_health, 0.0, max(1.0, player.max_health))
 	player.role_mana_values = player._build_role_resource_state_data(0.0)
 	player.role_ultimate_energy_lock_remaining = player._build_role_resource_state_data(0.0)
 	var saved_role_mana_values: Dictionary = data.get("role_mana_values", {})
@@ -201,6 +213,7 @@ static func apply_save_data(player, data: Dictionary) -> void:
 	player._initialize_existing_role_shares()
 	player.level_up_active = false
 	player.is_dead = false
+	player.role_health_values = PLAYER_ROLE_STAT_FLOW.normalize_role_health_state(player, player.role_health_values)
 
 	player._update_active_role_state()
 	player.fire_timer.start()

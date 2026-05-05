@@ -19,6 +19,7 @@ static func ready(owner) -> void:
 	owner.attribute_training_levels = owner._normalize_attribute_training_data(owner._build_attribute_training_data())
 	owner.role_special_states = owner._build_role_special_state_data()
 	owner.role_standby_elapsed = owner._build_role_timing_state_data(0.0)
+	owner.role_health_values = owner._build_role_health_state()
 	owner.role_mana_values = owner._build_role_timing_state_data(0.0)
 	owner.role_ultimate_energy_lock_remaining = owner._build_role_timing_state_data(0.0)
 	owner.experience_to_next_level = PLAYER_LEVEL_CURVE.normalize_required_experience(owner.level, owner.experience_to_next_level)
@@ -37,7 +38,6 @@ static func ready(owner) -> void:
 	owner.equipment_cooldown_multiplier = 1.0
 	if owner.has_method("_sync_active_role_max_health"):
 		owner._sync_active_role_max_health(false, false)
-	owner.current_health = owner.max_health
 	owner._sync_active_role_ultimate_state()
 
 	owner.fire_timer = Timer.new()

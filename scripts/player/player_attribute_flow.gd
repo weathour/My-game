@@ -65,9 +65,12 @@ static func sync_swordsman_trait_health_bonus(owner) -> void:
 	var applied_level: float = float(owner.attribute_training_levels.get(SWORDSMAN_HEALTH_MARKER_KEY, 0.0))
 	var health_delta: float = ROLE_ATTRIBUTE_RULES.get_swordsman_trait_max_health_bonus(swordsman_level) - ROLE_ATTRIBUTE_RULES.get_swordsman_trait_max_health_bonus(applied_level)
 	if absf(health_delta) > 0.001:
-		owner.max_health = max(1.0, float(owner.max_health) + health_delta)
-		owner.current_health = clamp(float(owner.current_health) + max(0.0, health_delta), 0.0, float(owner.max_health))
-		owner.health_changed.emit(owner.current_health, owner.max_health)
+		if owner.has_method("_sync_active_role_max_health"):
+			owner._sync_active_role_max_health(false, health_delta > 0.0)
+		else:
+			owner.max_health = max(1.0, float(owner.max_health) + health_delta)
+			owner.current_health = clamp(float(owner.current_health) + max(0.0, health_delta), 0.0, float(owner.max_health))
+			owner.health_changed.emit(owner.current_health, owner.max_health)
 	owner.attribute_training_levels[SWORDSMAN_HEALTH_MARKER_KEY] = swordsman_level
 
 

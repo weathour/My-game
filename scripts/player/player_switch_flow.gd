@@ -171,6 +171,8 @@ static func try_switch_role(owner, new_role_index: int) -> void:
 
 	var previous_role_index: int = owner.active_role_index
 	var previous_position: Vector2 = owner.global_position
+	if owner.has_method("_save_active_role_health"):
+		owner._save_active_role_health()
 	apply_exit_skill(owner, previous_role_index)
 	owner.active_role_index = new_role_index
 	owner.switch_cooldown_remaining = 0.0 if DEVELOPER_MODE.should_ignore_cooldowns() else _get_switch_cooldown_duration(owner)

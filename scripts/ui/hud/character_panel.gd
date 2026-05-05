@@ -526,10 +526,9 @@ func _build_stats_text(role_data: Dictionary) -> String:
 		move_speed *= float(cached_player._get_role_attribute_move_speed_multiplier(role_id))
 	if cached_player.has_method("_get_role_attribute_flat_move_speed_bonus"):
 		move_speed += float(cached_player._get_role_attribute_flat_move_speed_bonus(role_id))
-	var max_health: float = float(cached_player.get("max_health")) - float(active_bonus.get("max_health_bonus", 0.0)) + float(bonus.get("max_health_bonus", 0.0))
-	var current_health_text := "%.0f / %.0f" % [float(cached_player.get("current_health")), max_health]
-	if viewed_role_index != int(cached_player.get("active_role_index")):
-		current_health_text = "- / %.0f" % max_health
+	var max_health: float = float(cached_player._get_role_max_health(role_id)) if cached_player.has_method("_get_role_max_health") else float(cached_player.get("max_health")) - float(active_bonus.get("max_health_bonus", 0.0)) + float(bonus.get("max_health_bonus", 0.0))
+	var current_health: float = float(cached_player._get_role_current_health(role_id)) if cached_player.has_method("_get_role_current_health") else float(cached_player.get("current_health"))
+	var current_health_text := "%.0f / %.0f" % [current_health, max_health]
 	var base_energy: float = float(cached_player.get("energy_gain_multiplier")) - float(active_bonus.get("energy_gain_bonus", 0.0))
 	var energy_gain: float = base_energy + float(bonus.get("energy_gain_bonus", 0.0))
 	var pickup_radius: float = float(cached_player.get("pickup_radius"))
