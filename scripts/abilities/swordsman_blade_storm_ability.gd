@@ -2,11 +2,13 @@ extends RefCounted
 
 const SWORD_TORNADO_EFFECT_SCENE := preload("res://effects/sword/tornado/tornado.tscn")
 
-const COOLDOWN := 12.0
+const COOLDOWN := 18.0
 const BASE_DURATION := 1.0
 const TIER_TWO_DURATION := 1.5
+const TIER_THREE_DURATION := 2.0
 const BASE_TICK_INTERVAL := 0.5
 const TIER_TWO_TICK_INTERVAL := 0.4
+const TIER_THREE_TICK_INTERVAL := 0.2
 const MAX_CATCH_UP_TICKS := 5
 const ROTATION_SPEED := -TAU * 3.45
 const BASE_RADIUS := 350.0 * 0.6
@@ -159,19 +161,34 @@ func _update_effect(owner, delta: float) -> void:
 		effect.modulate.a = 0.52 + 0.44 * remain_ratio
 
 func _get_damage(owner) -> float:
-	var tier_multiplier := 1.18 if _get_tier(owner) >= 2 else 1.0
+	var tier: int = _get_tier(owner)
+	var tier_multiplier := 1.0
+	if tier >= 3:
+		tier_multiplier = 1.05 / 0.72
+	elif tier >= 2:
+		tier_multiplier = 1.18
 	return float(owner._get_role_damage("swordsman")) * 0.72 * tier_multiplier
 
 func _get_duration(owner) -> float:
-	var duration := TIER_TWO_DURATION if _get_tier(owner) >= 2 else BASE_DURATION
+	var tier: int = _get_tier(owner)
+	var duration := BASE_DURATION
+	if tier >= 3:
+		duration = TIER_THREE_DURATION
+	elif tier >= 2:
+		duration = TIER_TWO_DURATION
 	if owner != null and owner.has_method("_get_blessing_skill_duration_multiplier"):
 		duration *= float(owner._get_blessing_skill_duration_multiplier(BLADE_STORM_SKILL_ID))
 	return duration
 
 func _get_tick_interval(owner) -> float:
-	return TIER_TWO_TICK_INTERVAL if _get_tier(owner) >= 2 else BASE_TICK_INTERVAL
+	var tier: int = _get_tier(owner)
+	if tier >= 3:
+		return TIER_THREE_TICK_INTERVAL
+	if tier >= 2:
+		return TIER_TWO_TICK_INTERVAL
+	return BASE_TICK_INTERVAL
 
-func _get_size_multiplier(owner) -> float:
+func _get_size_multiplier(_owner) -> float:
 	return 1.0
 
 func _get_radius(owner) -> float:

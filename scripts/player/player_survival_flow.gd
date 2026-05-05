@@ -6,6 +6,10 @@ const PLAYER_LEVEL_CURVE := preload("res://scripts/player/player_level_curve.gd"
 
 const EXPERIENCE_GAIN_MULTIPLIER := 0.45
 const EXPERIENCE_FRACTION_CARRY_KEY := "__experience_fraction_carry"
+const PICKUP_SCAN_CURSOR_KEY := "__pickup_scan_cursor"
+const HEART_SCAN_CURSOR_KEY := "__heart_scan_cursor"
+const PICKUP_SCAN_BATCH_SIZE := 80
+const HEART_SCAN_BATCH_SIZE := 28
 
 static func unhandled_input(owner, event: InputEvent) -> void:
 	if owner.is_dead or owner.get_tree().paused:
@@ -137,7 +141,12 @@ static func collect_nearby_gems(owner) -> void:
 	if owner.has_method("_get_attribute_pickup_range_bonus"):
 		effective_pickup_radius += float(owner._get_attribute_pickup_range_bonus())
 	var pickup_radius_squared: float = effective_pickup_radius * effective_pickup_radius
-	for gem in owner.get_tree().get_nodes_in_group("exp_gems"):
+	var gems: Array = owner.get_tree().get_nodes_in_group("exp_gems")
+	var gem_count: int = gems.size()
+	var gem_cursor := int(owner.get_meta(PICKUP_SCAN_CURSOR_KEY, 0)) if owner.has_meta(PICKUP_SCAN_CURSOR_KEY) else 0
+	var gem_scan_count: int = min(gem_count, PICKUP_SCAN_BATCH_SIZE)
+	for offset in range(gem_scan_count):
+		var gem: Node = gems[(gem_cursor + offset) % max(1, gem_count)]
 		if not is_instance_valid(gem):
 			continue
 		var gem_distance_squared: float = attract_center.distance_squared_to(gem.global_position)
@@ -147,14 +156,23 @@ static func collect_nearby_gems(owner) -> void:
 			if gem.has_method("collect"):
 				var gained_experience: int = gem.collect()
 				owner.gain_experience(gained_experience)
+	if gem_count > 0:
+		owner.set_meta(PICKUP_SCAN_CURSOR_KEY, (gem_cursor + gem_scan_count) % gem_count)
 
-	for heart_pickup in owner.get_tree().get_nodes_in_group("heart_pickups"):
+	var hearts: Array = owner.get_tree().get_nodes_in_group("heart_pickups")
+	var heart_count: int = hearts.size()
+	var heart_cursor := int(owner.get_meta(HEART_SCAN_CURSOR_KEY, 0)) if owner.has_meta(HEART_SCAN_CURSOR_KEY) else 0
+	var heart_scan_count: int = min(heart_count, HEART_SCAN_BATCH_SIZE)
+	for offset in range(heart_scan_count):
+		var heart_pickup: Node = hearts[(heart_cursor + offset) % max(1, heart_count)]
 		if not is_instance_valid(heart_pickup):
 			continue
 		if attract_center.distance_squared_to(heart_pickup.global_position) <= pickup_radius_squared:
 			if heart_pickup.has_method("collect"):
 				var healed_amount: float = heart_pickup.collect()
 				owner._heal(healed_amount)
+	if heart_count > 0:
+		owner.set_meta(HEART_SCAN_CURSOR_KEY, (heart_cursor + heart_scan_count) % heart_count)
 
 
 static func check_enemy_contact_damage(owner) -> void:
@@ -243,22 +261,16 @@ static func take_damage(owner, amount: float) -> void:
 		owner._spawn_combat_tag(owner.global_position + Vector2(0.0, -34.0), "闪避", Color(0.38, 1.0, 0.48, 1.0))
 		return
 
-	var swordsman_counter_level := 0
 	if owner._get_active_role()["id"] == "swordsman":
-		swordsman_counter_level = int(owner._get_role_special_state("swordsman").get("counter_level", 0))
 		var nearby_enemy_count: int = owner._count_enemies_in_radius(owner.get_hurtbox_center(), 62.0)
 		if nearby_enemy_count > 0:
 			amount *= max(0.84, 0.96 - min(nearby_enemy_count, 3) * 0.04)
-		if swordsman_counter_level > 0:
-			amount *= max(0.76, 0.92 - swordsman_counter_level * 0.04)
 
 	var adjusted_damage: float = amount * owner._get_effective_damage_taken_multiplier()
 	owner.current_health = max(0.0, owner.current_health - adjusted_damage)
 	owner.hurt_cooldown_remaining = owner.hurt_cooldown
 	owner.health_changed.emit(owner.current_health, owner.max_health)
 	owner._play_player_hurt_feedback()
-	if owner.current_health > 0.0 and owner._get_active_role()["id"] == "swordsman":
-		owner._trigger_swordsman_counter()
 
 	if owner.current_health <= 0.0:
 		owner._die()

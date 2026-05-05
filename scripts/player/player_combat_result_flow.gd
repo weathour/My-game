@@ -2,8 +2,13 @@ extends RefCounted
 
 const DEVELOPER_MODE := preload("res://scripts/developer_mode.gd")
 
+const ULTIMATE_ENERGY_GAIN_GLOBAL_MULTIPLIER := 0.55
 const SMALL_ENEMY_KILL_ENERGY_MULTIPLIER := 0.75
 const BACKGROUND_ULTIMATE_ENERGY_GAIN_RATIO := 0.3
+const LIFESTEAL_PROC_HEAL_AMOUNT := 1.0
+const LIFESTEAL_PROC_COOLDOWN := 0.15
+const LIFESTEAL_MAX_ROLL_HITS := 6
+const LIFESTEAL_MAX_PROC_CHANCE := 0.80
 
 
 static func add_kill_energy(owner, amount: float) -> void:
@@ -18,7 +23,7 @@ static func add_kill_energy(owner, amount: float) -> void:
 			continue
 		var gain_scale: float = 1.0 if role_id == active_role_id else BACKGROUND_ULTIMATE_ENERGY_GAIN_RATIO
 		var base_energy_gain_multiplier: float = owner.energy_gain_multiplier - owner.equipment_energy_gain_bonus + owner._get_role_equipment_energy_gain_bonus(role_id)
-		var adjusted_amount: float = amount * gain_scale * max(0.01, base_energy_gain_multiplier) * owner._get_ultimate_energy_gain_multiplier_for_role(role_id)
+		var adjusted_amount: float = amount * ULTIMATE_ENERGY_GAIN_GLOBAL_MULTIPLIER * gain_scale * max(0.01, base_energy_gain_multiplier) * owner._get_ultimate_energy_gain_multiplier_for_role(role_id)
 		if adjusted_amount <= 0.0:
 			continue
 		var updated_mana: float = owner._add_role_mana(role_id, adjusted_amount, false)
@@ -55,6 +60,8 @@ static func get_boss_damage_energy(damage_amount: float) -> float:
 
 
 static func register_attack_result(owner, role_id: String, hit_count: int, killed: bool) -> void:
+	apply_swordsman_low_health_flat_heal(owner, role_id, hit_count)
+	apply_role_flat_heal_on_hit(owner, role_id, hit_count)
 	apply_entry_lifesteal(owner, role_id, hit_count, killed)
 	if killed and owner._has_elite_relic("elite_execution_pact") and not owner.execution_pact_burst_active:
 		owner.execution_pact_burst_active = true
@@ -73,6 +80,37 @@ static func register_attack_result(owner, role_id: String, hit_count: int, kille
 
 static func apply_theme_hit_returns(owner, role_id: String, hit_count: int, killed: bool) -> void:
 	return
+
+
+static func apply_swordsman_low_health_flat_heal(owner, role_id: String, hit_count: int) -> void:
+	if role_id != "swordsman" or hit_count <= 0 or owner.max_health <= 0.0:
+		return
+	if owner.current_health / owner.max_health > owner._get_swordsman_low_health_threshold():
+		return
+	var heal_amount: float = owner._get_swordsman_low_health_flat_heal()
+	if heal_amount <= 0.0:
+		return
+	owner._heal(heal_amount)
+
+
+static func apply_role_flat_heal_on_hit(owner, role_id: String, hit_count: int) -> void:
+	if role_id == "" or hit_count <= 0:
+		return
+	if owner.lifesteal_proc_cooldown_remaining > 0.0:
+		return
+	var proc_chance: float = owner._get_role_blessing_stat_bonus(role_id, "flat_heal_on_hit")
+	if proc_chance <= 0.0:
+		return
+	if role_id == "swordsman":
+		var special_data: Dictionary = owner._get_role_special_state("swordsman")
+		if float(special_data.get("ultimate_lifesteal_multiplier_remaining", 0.0)) > 0.0:
+			proc_chance *= 2.0
+	var capped_hits: int = min(hit_count, LIFESTEAL_MAX_ROLL_HITS)
+	var combined_chance: float = 1.0 - pow(max(0.0, 1.0 - proc_chance), float(capped_hits))
+	if randf() > clamp(combined_chance, 0.0, LIFESTEAL_MAX_PROC_CHANCE):
+		return
+	owner.lifesteal_proc_cooldown_remaining = LIFESTEAL_PROC_COOLDOWN
+	owner._heal(LIFESTEAL_PROC_HEAL_AMOUNT)
 
 
 static func apply_entry_lifesteal(owner, role_id: String, hit_count: int, killed: bool) -> void:
@@ -124,7 +162,7 @@ static func trigger_swordsman_counter(owner) -> void:
 	var hits: int = owner._damage_enemies_in_radius(owner.global_position, radius, damage_amount, 0.08 * counter_level, 1.0, 0.0)
 	if hits > 0:
 		owner._register_attack_result("swordsman", hits, false)
-		owner._heal(1.2 + counter_level * 0.5)
+		owner._heal(0.6 + counter_level * 0.25)
 		owner.switch_invulnerability_remaining = max(owner.switch_invulnerability_remaining, 0.05 + counter_level * 0.02)
 
 

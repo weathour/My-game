@@ -3,8 +3,9 @@ extends RefCounted
 const MAGE_GATHERING_EFFECT_SCENE := preload("res://effects/wizard/wave/gathering/gatering.tscn")
 const MAGE_WAVE_EFFECT_SCENE := preload("res://effects/wizard/wave/wave.tscn")
 
-const TIER_ONE_COOLDOWN := 16.0
-const TIER_TWO_COOLDOWN := 14.0
+const TIER_ONE_COOLDOWN := 18.0
+const TIER_TWO_COOLDOWN := 16.0
+const TIER_THREE_COOLDOWN := 16.0
 const WAVE_REPEAT_INTERVAL := 0.3
 const BASE_SCALE_MULTIPLIER := 1.5
 const HUICHAO_WIDTH_BONUS := 0.12
@@ -141,7 +142,12 @@ func _get_wave_directions(owner) -> Array[Vector2]:
 	return directions
 
 func _get_cooldown(owner) -> float:
-	var base_cooldown := TIER_TWO_COOLDOWN if _get_tier(owner) >= 2 else TIER_ONE_COOLDOWN
+	var tier: int = _get_tier(owner)
+	var base_cooldown := TIER_ONE_COOLDOWN
+	if tier >= 3:
+		base_cooldown = TIER_THREE_COOLDOWN
+	elif tier >= 2:
+		base_cooldown = TIER_TWO_COOLDOWN
 	if owner != null and is_instance_valid(owner) and owner.has_method("_get_equipment_cooldown_multiplier"):
 		return base_cooldown * owner._get_equipment_cooldown_multiplier()
 	return base_cooldown
@@ -167,10 +173,20 @@ func _get_quantity_extra_count(owner) -> int:
 	return int(owner._get_blessing_skill_quantity_count(SURGE_SKILL_ID))
 
 func _get_lifetime_multiplier(owner) -> float:
-	var multiplier := 4.0 / 3.0 if _get_tier(owner) >= 2 else 1.0
+	var tier: int = _get_tier(owner)
+	var multiplier := 1.0
+	if tier >= 3:
+		multiplier = 1.6
+	elif tier >= 2:
+		multiplier = 4.0 / 3.0
 	if owner != null and owner.has_method("_get_blessing_skill_duration_multiplier"):
 		multiplier *= float(owner._get_blessing_skill_duration_multiplier(SURGE_SKILL_ID))
 	return multiplier
 
 func _get_damage_multiplier(owner) -> float:
-	return 1.5 if _get_tier(owner) >= 2 else 1.0
+	var tier: int = _get_tier(owner)
+	if tier >= 3:
+		return 2.0
+	if tier >= 2:
+		return 1.5
+	return 1.0

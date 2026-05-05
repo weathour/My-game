@@ -14,38 +14,26 @@ static func apply_final_upgrade(owner, option_id: String, role_id: String, role_
 			apply_final_skill_core(owner, role_id, special_data)
 
 
-static func apply_final_combat_core(owner, role_id: String, role_data: Dictionary, special_data: Dictionary) -> void:
+static func apply_final_combat_core(owner, role_id: String, role_data: Dictionary, _special_data: Dictionary) -> void:
 	owner.global_damage_multiplier += 0.12
 	role_data["damage_bonus"] = float(role_data["damage_bonus"]) + 8.0
 	if role_id == "swordsman":
 		role_data["skill_bonus"] = float(role_data["skill_bonus"]) + 0.24
 		owner.damage_taken_multiplier = max(0.52, owner.damage_taken_multiplier - 0.05)
 		owner._heal(18.0)
-		special_data["crescent_level"] = int(special_data.get("crescent_level", 0)) + 1
-		special_data["thrust_level"] = int(special_data.get("thrust_level", 0)) + 1
 	elif role_id == "gunner":
 		role_data["range_bonus"] = float(role_data["range_bonus"]) + 16.0
 		role_data["interval_bonus"] = float(role_data["interval_bonus"]) + 0.05
 		role_data["skill_bonus"] = float(role_data["skill_bonus"]) + 0.18
-		special_data["scatter_level"] = int(special_data.get("scatter_level", 0)) + 1
-		special_data["focus_level"] = int(special_data.get("focus_level", 0)) + 1
 	elif role_id == "mage":
 		role_data["range_bonus"] = float(role_data["range_bonus"]) + 18.0
 		role_data["skill_bonus"] = float(role_data["skill_bonus"]) + 0.22
 		role_data["damage_bonus"] = float(role_data["damage_bonus"]) + 2.0
-		special_data["echo_level"] = int(special_data.get("echo_level", 0)) + 1
-		special_data["frost_level"] = int(special_data.get("frost_level", 0)) + 1
 
 
-static func apply_final_skill_core(owner, role_id: String, special_data: Dictionary) -> void:
+static func apply_final_skill_core(owner, _role_id: String, _special_data: Dictionary) -> void:
 	owner.energy_gain_multiplier += 0.16
 	owner.background_interval_multiplier = max(0.6, owner.background_interval_multiplier - 0.08)
 	owner.ultimate_cost_multiplier = max(0.6, owner.ultimate_cost_multiplier - 0.08)
 	owner.role_switch_cooldown_bonus += 0.7
 	owner._add_active_role_mana(30.0)
-	if role_id == "gunner":
-		special_data["support_level"] = int(special_data.get("support_level", 0)) + 1
-		special_data["barrage_level"] = int(special_data.get("barrage_level", 0)) + 1
-	elif role_id == "mage":
-		special_data["support_level"] = int(special_data.get("support_level", 0)) + 1
-		special_data["storm_level"] = int(special_data.get("storm_level", 0)) + 1

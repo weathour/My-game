@@ -67,7 +67,7 @@ func _build_content() -> void:
 
 func _update_message(title_text: String, survival_time: float, level: int) -> void:
 	var total_seconds := int(floor(survival_time))
-	var minutes := total_seconds / 60
+	var minutes := int(total_seconds / 60.0)
 	var seconds := total_seconds % 60
 	title_label.text = title_text
 	message_label.text = "You survived %02d:%02d\nReached Level %d" % [minutes, seconds, level]

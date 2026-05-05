@@ -30,21 +30,21 @@ const DEFINITIONS := {
 		"title": "破阵",
 		"binding": ROLE_BOUND,
 		"stat": "skill_range",
-		"tier_values": {1: 0.05, 2: 0.095},
+		"tier_values": {1: 0.02, 2: 0.035},
 		"description": "增加当前角色技能范围。"
 	},
 	"benediction": {
 		"title": "恩典",
 		"binding": ROLE_BOUND,
 		"stat": "energy_gain",
-		"tier_values": {1: 0.08, 2: 0.15},
+		"tier_values": {1: 0.06, 2: 0.11},
 		"description": "增加当前角色大招能量回复。"
 	},
 	"greed": {
 		"title": "贪婪",
 		"binding": ROLE_BOUND,
 		"stat": "flat_heal_on_hit",
-		"tier_values": {1: 0.32, 2: 0.65},
+		"tier_values": {1: 0.03, 2: 0.06},
 		"description": "增加当前角色吸血。"
 	},
 	"support": {
@@ -65,14 +65,14 @@ const DEFINITIONS := {
 		"title": "潮雨",
 		"binding": SKILL_BOUND,
 		"stat": "duration_skill_duration",
-		"tier_values": {1: 0.20, 2: 0.40},
+		"tier_values": {1: 0.12, 2: 0.20},
 		"description": "增加持续性技能持续时间。当前等待持续性技能绑定后生效。"
 	},
 	"blazing_sun": {
 		"title": "焰阳",
 		"binding": ROLE_BOUND,
 		"stat": "damage",
-		"tier_values": {1: 0.055, 2: 0.10},
+		"tier_values": {1: 0.02, 2: 0.04},
 		"description": "增加当前角色造成伤害。"
 	},
 	"reprise": {
@@ -86,7 +86,7 @@ const DEFINITIONS := {
 		"title": "幻影",
 		"binding": ROLE_BOUND,
 		"stat": "dodge",
-		"tier_values": {1: 0.035, 2: 0.065},
+		"tier_values": {1: 0.045, 2: 0.08},
 		"description": "增加当前角色闪避。"
 	},
 	"unyielding": {
@@ -167,6 +167,22 @@ static func build_all_offer_for_owner(owner) -> Dictionary:
 	}
 
 
+static func build_tier_offer_for_owner(owner, tier: int) -> Dictionary:
+	var safe_tier: int = clamp(tier, 1, 2)
+	var options := _build_tier_options(owner, safe_tier)
+	if options.is_empty():
+		options.append(_make_blank_option())
+	return {
+		"options": options,
+		"context": {
+			"offer_mode": "blessing",
+			"refresh_limit": 0,
+			"refresh_remaining": 0,
+			"summary": "从全部 %s 级祝福中自选。" % _tier_label(safe_tier)
+		}
+	}
+
+
 static func refresh_offer_for_owner(owner, _current_offer: Dictionary) -> Dictionary:
 	return build_offer_for_owner(owner)
 
@@ -182,18 +198,59 @@ static func apply_option(owner, option_id: String) -> bool:
 	return apply_blessing(owner, blessing_id, tier)
 
 
-static func apply_blessing(owner, blessing_id: String, tier: int) -> bool:
+static func apply_option_with_result(owner, option_id: String) -> Dictionary:
+	if not option_id.begins_with(OPTION_PREFIX):
+		return {}
+	var payload := option_id.trim_prefix(OPTION_PREFIX).split(":")
+	if payload.size() < 2:
+		return {}
+	var blessing_id := str(payload[0])
+	var tier := int(payload[1])
+	if not apply_blessing(owner, blessing_id, tier, false):
+		return {}
+	var definition: Dictionary = DEFINITIONS.get(blessing_id, {})
+	return {
+		"blessing_id": blessing_id,
+		"tier": clamp(tier, 1, 2),
+		"binding": str(definition.get("binding", ROLE_BOUND)),
+		"title": "%s%s" % [str(definition.get("title", blessing_id)), _tier_label(tier)]
+	}
+
+
+static func apply_blessing(owner, blessing_id: String, tier: int, refresh_unlocks: bool = true) -> bool:
 	if not DEFINITIONS.has(blessing_id):
 		return false
 	tier = clamp(tier, 1, 2)
 	var definition: Dictionary = DEFINITIONS.get(blessing_id, {})
 	var binding := str(definition.get("binding", ROLE_BOUND))
 	if binding == ROLE_BOUND:
-		return _apply_role_blessing(owner, blessing_id, tier, definition)
-	return _apply_skill_blessing(owner, blessing_id, tier, definition)
+		return _apply_role_blessing(owner, blessing_id, tier, definition, refresh_unlocks)
+	return _apply_skill_blessing(owner, blessing_id, tier, definition, refresh_unlocks)
 
 
-static func get_role_stat_bonus(owner, role_id: String, stat: String) -> float:
+static func grant_random_blessings(owner, tier: int, count: int, rng: RandomNumberGenerator = null) -> Array[String]:
+	var safe_tier: int = clamp(tier, 1, 2)
+	var pool: Array[String] = _get_offerable_blessing_ids_for_tier(owner, safe_tier)
+	var granted: Array[String] = []
+	if pool.is_empty() or count <= 0:
+		return granted
+	var roll_rng := rng
+	if roll_rng == null:
+		roll_rng = RandomNumberGenerator.new()
+		roll_rng.randomize()
+	for _index in range(count):
+		if pool.is_empty():
+			break
+		var picked_index: int = roll_rng.randi_range(0, pool.size() - 1)
+		var blessing_id: String = str(pool[picked_index])
+		if apply_blessing(owner, blessing_id, safe_tier):
+			granted.append(blessing_id)
+		if _get_blessing_count(owner, blessing_id, safe_tier) >= MAX_BLESSING_COUNT_PER_TIER:
+			pool.remove_at(picked_index)
+	return granted
+
+
+static func get_role_stat_bonus(owner, _role_id: String, stat: String) -> float:
 	var levels: Dictionary = _get_shared_role_levels(owner)
 	return _sum_stat_bonus(levels, stat)
 
@@ -232,7 +289,7 @@ static func get_blessing_level_summary(owner, role_id: String = "") -> Dictionar
 	return summary
 
 
-static func can_compose_role_blessing(owner, role_id: String, blessing_id: String) -> bool:
+static func can_compose_role_blessing(owner, _role_id: String, blessing_id: String) -> bool:
 	var definition: Dictionary = DEFINITIONS.get(blessing_id, {})
 	if str(definition.get("binding", ROLE_BOUND)) != ROLE_BOUND:
 		return false
@@ -332,6 +389,24 @@ static func _build_all_options(owner) -> Array:
 	return options
 
 
+static func _build_tier_options(owner, tier: int) -> Array:
+	var options: Array = []
+	for blessing_id in _get_offerable_blessing_ids_for_tier(owner, tier):
+		options.append(_make_option(owner, str(blessing_id), tier))
+	options.sort_custom(func(a: Dictionary, b: Dictionary) -> bool:
+		return str(a.get("title", "")) < str(b.get("title", ""))
+	)
+	return options
+
+
+static func _get_offerable_blessing_ids_for_tier(owner, tier: int) -> Array[String]:
+	var result: Array[String] = []
+	for blessing_id in DEFINITIONS.keys():
+		if _is_offerable_forced_tier(owner, str(blessing_id), tier):
+			result.append(str(blessing_id))
+	return result
+
+
 static func _get_offer_weight(player_level: int, tier: int) -> int:
 	if tier <= 1:
 		return 100
@@ -351,16 +426,21 @@ static func _is_offerable(_owner, blessing_id: String, tier: int, player_level: 
 	return player_level >= TIER_II_UNLOCK_LEVEL
 
 
+static func _is_offerable_forced_tier(_owner, blessing_id: String, tier: int) -> bool:
+	if not DEFINITIONS.has(blessing_id):
+		return false
+	return _get_blessing_count(_owner, blessing_id, tier) < MAX_BLESSING_COUNT_PER_TIER
+
+
 static func _make_option(owner, blessing_id: String, tier: int) -> Dictionary:
 	var definition: Dictionary = DEFINITIONS.get(blessing_id, {})
 	var binding := str(definition.get("binding", ROLE_BOUND))
-	var role_id := str(owner._get_active_role().get("id", "")) if owner != null and owner.has_method("_get_active_role") else ""
 	var levels := _get_skill_levels(owner) if binding == SKILL_BOUND else _get_shared_role_levels(owner)
-	var current := int((levels.get(blessing_id, {}) as Dictionary).get(tier, 0))
-	var next_count: int = current + 1
+	var display_current: int = PLAYER_BLESSING_SKILL_STATE.get_available_blessing_count(owner, binding, blessing_id, tier)
+	var next_count: int = display_current + 1
 	var tier_label := _tier_label(tier)
 	var blessing_name := "%s%s" % [str(definition.get("title", blessing_id)), tier_label]
-	var title := "%s %d/%d" % [blessing_name, current, MAX_BLESSING_COUNT_PER_TIER]
+	var title := "%s %d/%d" % [blessing_name, display_current, MAX_BLESSING_COUNT_PER_TIER]
 	var binding_text := "绑定：技能（持续/连段/数量类技能）" if binding == SKILL_BOUND else "绑定：三名角色共享"
 	var value_text := _format_value(definition, tier)
 	var description := "%s\n%s\n本次选择后：%s Lv.%d\n每级效果：%s\n%s" % [
@@ -375,7 +455,7 @@ static func _make_option(owner, blessing_id: String, tier: int) -> Dictionary:
 		str(definition.get("description", "")),
 		binding_text,
 		blessing_name,
-		current,
+		display_current,
 		MAX_BLESSING_COUNT_PER_TIER,
 		blessing_name,
 		next_count,
@@ -427,7 +507,7 @@ static func _escape_bbcode(value: String) -> String:
 	return value.replace("[", "[lb]").replace("]", "[rb]")
 
 
-static func _apply_role_blessing(owner, blessing_id: String, tier: int, definition: Dictionary) -> bool:
+static func _apply_role_blessing(owner, blessing_id: String, tier: int, definition: Dictionary, refresh_unlocks: bool = true) -> bool:
 	var role_id := str(owner._get_active_role().get("id", ""))
 	if role_id == "":
 		return false
@@ -442,12 +522,12 @@ static func _apply_role_blessing(owner, blessing_id: String, tier: int, definiti
 	_set_shared_role_levels(owner, role_levels)
 	_apply_role_stat_delta(owner, role_id, str(definition.get("stat", "")), float((definition.get("tier_values", {}) as Dictionary).get(tier, 0.0)))
 	owner._spawn_combat_tag(owner.global_position + Vector2(0.0, -62.0), "%s%s" % [str(definition.get("title", blessing_id)), _tier_label(tier)], Color(0.92, 0.86, 0.54, 1.0))
-	if owner.has_method("_refresh_blessing_skill_unlocks"):
+	if refresh_unlocks and owner.has_method("_refresh_blessing_skill_unlocks"):
 		owner._refresh_blessing_skill_unlocks()
 	return true
 
 
-static func _apply_skill_blessing(owner, blessing_id: String, tier: int, definition: Dictionary) -> bool:
+static func _apply_skill_blessing(owner, blessing_id: String, tier: int, definition: Dictionary, refresh_unlocks: bool = true) -> bool:
 	owner.skill_blessing_levels = normalize_skill_state(owner.skill_blessing_levels)
 	var skill_levels: Dictionary = _get_skill_levels(owner)
 	var blessing_levels: Dictionary = (skill_levels.get(blessing_id, {}) as Dictionary).duplicate(true)
@@ -459,7 +539,7 @@ static func _apply_skill_blessing(owner, blessing_id: String, tier: int, definit
 	skill_levels[blessing_id] = blessing_levels
 	owner.skill_blessing_levels = skill_levels
 	owner._spawn_combat_tag(owner.global_position + Vector2(0.0, -62.0), "%s%s" % [str(definition.get("title", blessing_id)), _tier_label(tier)], Color(0.64, 0.90, 1.0, 1.0))
-	if owner.has_method("_refresh_blessing_skill_unlocks"):
+	if refresh_unlocks and owner.has_method("_refresh_blessing_skill_unlocks"):
 		owner._refresh_blessing_skill_unlocks()
 	return true
 
@@ -635,6 +715,8 @@ static func _get_blessing_count(owner, blessing_id: String, tier: int) -> int:
 static func _format_value(definition: Dictionary, tier: int) -> String:
 	var stat := str(definition.get("stat", ""))
 	var value := float((definition.get("tier_values", {}) as Dictionary).get(tier, 0.0))
+	if stat == "flat_heal_on_hit":
+		return "+%.0f%% 吸血触发率" % (value * 100.0)
 	match stat:
 		"flat_heal_on_hit":
 			return "+%.2f 固定命中回复" % value

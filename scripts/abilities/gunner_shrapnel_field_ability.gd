@@ -18,16 +18,21 @@ const SHRAPNEL_TEXTURES := [
 ]
 
 const SKILL_ID := "shrapnel_field"
-const COOLDOWN := 14.0
+const COOLDOWN := 10.0
 const DURATION := 6.0
 const BASE_RADIUS := 145.0
 const RADIUS_MULTIPLIER := 1.30
 const TIER_ONE_TICK_INTERVAL := 0.65
 const TIER_TWO_TICK_INTERVAL := 0.45
+const TIER_THREE_TICK_INTERVAL := 0.25
 const TIER_ONE_SLOW := 0.70
 const TIER_TWO_SLOW := 0.55
+const TIER_THREE_SLOW := 0.45
 const TIER_ONE_DAMAGE_RATIO := 0.44
-const TIER_TWO_DAMAGE_RATIO := 0.58
+const TIER_TWO_DAMAGE_RATIO := 0.60
+const TIER_THREE_DAMAGE_RATIO := 0.60
+const TIER_TWO_RADIUS := 200.0
+const TIER_THREE_RADIUS := 220.0
 const MAX_ACTIVE_VISUALS := 7
 const VISUAL_SPAWN_INTERVAL := 0.1
 const FIELD_CIRCLE_VISUAL_SCALE := 1.35
@@ -280,17 +285,38 @@ func _get_radius(owner) -> float:
 	var range_multiplier: float = 1.0
 	if owner != null and owner.has_method("_get_equipment_skill_range_multiplier"):
 		range_multiplier *= float(owner._get_equipment_skill_range_multiplier())
-	return BASE_RADIUS * RADIUS_MULTIPLIER * range_multiplier
+	var tier: int = _get_tier(owner)
+	var base_radius: float = BASE_RADIUS * RADIUS_MULTIPLIER
+	if tier >= 3:
+		base_radius = TIER_THREE_RADIUS
+	elif tier >= 2:
+		base_radius = TIER_TWO_RADIUS
+	return base_radius * range_multiplier
 
 
 func _get_tick_interval(owner) -> float:
-	return TIER_TWO_TICK_INTERVAL if _get_tier(owner) >= 2 else TIER_ONE_TICK_INTERVAL
+	var tier: int = _get_tier(owner)
+	if tier >= 3:
+		return TIER_THREE_TICK_INTERVAL
+	if tier >= 2:
+		return TIER_TWO_TICK_INTERVAL
+	return TIER_ONE_TICK_INTERVAL
 
 
 func _get_slow_multiplier(owner) -> float:
-	return TIER_TWO_SLOW if _get_tier(owner) >= 2 else TIER_ONE_SLOW
+	var tier: int = _get_tier(owner)
+	if tier >= 3:
+		return TIER_THREE_SLOW
+	if tier >= 2:
+		return TIER_TWO_SLOW
+	return TIER_ONE_SLOW
 
 
 func _get_damage(owner) -> float:
-	var ratio: float = TIER_TWO_DAMAGE_RATIO if _get_tier(owner) >= 2 else TIER_ONE_DAMAGE_RATIO
+	var tier: int = _get_tier(owner)
+	var ratio: float = TIER_ONE_DAMAGE_RATIO
+	if tier >= 3:
+		ratio = TIER_THREE_DAMAGE_RATIO
+	elif tier >= 2:
+		ratio = TIER_TWO_DAMAGE_RATIO
 	return float(owner._get_role_damage("gunner")) * ratio

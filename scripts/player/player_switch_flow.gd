@@ -176,6 +176,7 @@ static func try_switch_role(owner, new_role_index: int) -> void:
 	owner.switch_cooldown_remaining = 0.0 if DEVELOPER_MODE.should_ignore_cooldowns() else _get_switch_cooldown_duration(owner)
 	owner.switch_invulnerability_remaining = SWITCH_INVULNERABILITY
 	apply_enter_skill(owner, owner.active_role_index)
+	PLAYER_SWITCH_ENTRY_FLOW.apply_shared_entry_skills(owner, str(owner.roles[owner.active_role_index]["id"]))
 	apply_pending_entry_blessing(owner, str(owner.roles[owner.active_role_index]["id"]))
 	apply_rotation_entry_bonus(owner, str(owner.roles[owner.active_role_index]["id"]))
 	apply_swap_guard(owner, owner.velocity if owner.velocity.length_squared() > 0.001 else owner.facing_direction)
@@ -242,24 +243,24 @@ static func apply_exit_skill(owner, role_index: int) -> int:
 	return 0
 
 
-static func fire_gunner_entry_wave(owner, role_id: String, wave_index: int) -> void:
-	PLAYER_SWITCH_ENTRY_FLOW.fire_gunner_entry_wave(owner, role_id, wave_index)
+static func fire_gunner_entry_wave(owner, role_id: String, wave_index: int, damage_scale: float = 1.0) -> void:
+	PLAYER_SWITCH_ENTRY_FLOW.fire_gunner_entry_wave(owner, role_id, wave_index, damage_scale)
 
 
-static func spawn_gunner_entry_wave_batch(owner, role_id: String, wave_index: int, start_index: int) -> void:
-	PLAYER_SWITCH_ENTRY_FLOW.spawn_gunner_entry_wave_batch(owner, role_id, wave_index, start_index)
+static func spawn_gunner_entry_wave_batch(owner, role_id: String, wave_index: int, start_index: int, damage_scale: float = 1.0) -> void:
+	PLAYER_SWITCH_ENTRY_FLOW.spawn_gunner_entry_wave_batch(owner, role_id, wave_index, start_index, damage_scale)
 
 
-static func start_mage_entry_bombardment(owner, role_id: String, bombard_centers: Array) -> void:
-	PLAYER_SWITCH_ENTRY_FLOW.start_mage_entry_bombardment(owner, role_id, bombard_centers)
+static func start_mage_entry_bombardment(owner, role_id: String, bombard_centers: Array, damage_scale: float = 1.0) -> void:
+	PLAYER_SWITCH_ENTRY_FLOW.start_mage_entry_bombardment(owner, role_id, bombard_centers, damage_scale)
 
 
 static func show_mage_entry_bombardment_warning(owner, center: Vector2) -> void:
 	PLAYER_SWITCH_ENTRY_FLOW.show_mage_entry_bombardment_warning(owner, center)
 
 
-static func trigger_mage_entry_bombardment_impact(owner, role_id: String, center: Vector2) -> void:
-	PLAYER_SWITCH_ENTRY_FLOW.trigger_mage_entry_bombardment_impact(owner, role_id, center)
+static func trigger_mage_entry_bombardment_impact(owner, role_id: String, center: Vector2, damage_scale: float = 1.0) -> void:
+	PLAYER_SWITCH_ENTRY_FLOW.trigger_mage_entry_bombardment_impact(owner, role_id, center, damage_scale)
 
 
 static func queue_next_entry_blessing(owner, source_role_id: String) -> void:

@@ -584,6 +584,12 @@ func _format_panel_attribute_level(level: float) -> String:
 	return "%.1f" % level
 
 func _build_card_text() -> String:
+	if cached_player != null and cached_player.has_method("get_skill_graph_text"):
+		var roles: Array = _get_roles()
+		var role_id := ""
+		if viewed_role_index >= 0 and viewed_role_index < roles.size():
+			role_id = str((roles[viewed_role_index] as Dictionary).get("id", ""))
+		return str(cached_player.get_skill_graph_text(role_id))
 	var lines: Array[String] = []
 	var skill_state: Dictionary = cached_player.get("blessing_skill_state")
 	var unlocked_skills: Dictionary = skill_state.get("unlocked_skills", {})

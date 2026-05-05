@@ -128,11 +128,11 @@ static func format_attribute_level(level: float) -> String:
 	return "%.1f" % level
 
 
-static func get_attribute_health_regen_per_second(owner) -> float:
+static func get_attribute_health_regen_per_second(_owner) -> float:
 	return 0.0
 
 
-static func get_attribute_mana_regen_per_second(owner) -> float:
+static func get_attribute_mana_regen_per_second(_owner) -> float:
 	return 0.0
 
 
@@ -140,7 +140,7 @@ static func get_attribute_dodge_chance(owner) -> float:
 	return ROLE_ATTRIBUTE_RULES.get_swordsman_trait_dodge_chance(get_attribute_level(owner, ROLE_ATTRIBUTE_RULES.ATTR_SWORDSMAN))
 
 
-static func get_attribute_pickup_range_bonus(owner) -> float:
+static func get_attribute_pickup_range_bonus(_owner) -> float:
 	return 0.0
 
 

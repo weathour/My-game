@@ -417,7 +417,7 @@ func update_stats(summary: Dictionary) -> void:
 
 func update_time(seconds_elapsed: float) -> void:
 	var total_seconds: int = int(floor(seconds_elapsed))
-	var minutes: int = total_seconds / 60
+	var minutes: int = int(total_seconds / 60.0)
 	var seconds: int = total_seconds % 60
 	time_label.text = "时间 %02d:%02d" % [minutes, seconds]
 

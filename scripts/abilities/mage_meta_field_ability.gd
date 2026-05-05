@@ -6,14 +6,19 @@ const SKILL_ID := "meta_field"
 const COOLDOWN := 24.0
 const TIER_ONE_DURATION := 10.0
 const TIER_TWO_DURATION := 15.0
+const TIER_THREE_DURATION := 17.0
 const TIER_ONE_SLOW := 0.55
 const TIER_TWO_SLOW := 0.40
+const TIER_THREE_SLOW := 0.20
 const TIER_ONE_DAMAGE_REDUCTION := 0.12
 const TIER_TWO_DAMAGE_REDUCTION := 0.20
+const TIER_THREE_DAMAGE_REDUCTION := 0.30
 const TIER_ONE_DAMAGE_RATIO := 0.18
 const TIER_TWO_DAMAGE_RATIO := 0.28
+const TIER_THREE_DAMAGE_RATIO := 0.38
 const TIER_ONE_RADIUS := 160.0
 const TIER_TWO_RADIUS := 190.0
+const TIER_THREE_RADIUS := 218.6
 const FIELD_SIZE_MULTIPLIER := 0.70
 const TICK_INTERVAL := 1.0
 const MAX_CATCH_UP_TICKS := 4
@@ -173,7 +178,12 @@ func _get_tier(owner) -> int:
 
 
 func _get_duration(owner) -> float:
-	var duration: float = TIER_TWO_DURATION if _get_tier(owner) >= 2 else TIER_ONE_DURATION
+	var tier: int = _get_tier(owner)
+	var duration: float = TIER_ONE_DURATION
+	if tier >= 3:
+		duration = TIER_THREE_DURATION
+	elif tier >= 2:
+		duration = TIER_TWO_DURATION
 	if owner != null and owner.has_method("_get_blessing_skill_duration_multiplier"):
 		duration *= float(owner._get_blessing_skill_duration_multiplier(SKILL_ID))
 	return duration
@@ -186,7 +196,12 @@ func _get_cooldown(owner) -> float:
 
 
 func _get_radius(owner) -> float:
-	var base_radius: float = TIER_TWO_RADIUS if _get_tier(owner) >= 2 else TIER_ONE_RADIUS
+	var tier: int = _get_tier(owner)
+	var base_radius: float = TIER_ONE_RADIUS
+	if tier >= 3:
+		base_radius = TIER_THREE_RADIUS
+	elif tier >= 2:
+		base_radius = TIER_TWO_RADIUS
 	var range_multiplier: float = 1.0
 	if owner != null and owner.has_method("_get_equipment_skill_range_multiplier"):
 		range_multiplier *= float(owner._get_equipment_skill_range_multiplier())
@@ -198,13 +213,28 @@ func _get_visual_scale(owner) -> float:
 
 
 func _get_slow_multiplier(owner) -> float:
-	return TIER_TWO_SLOW if _get_tier(owner) >= 2 else TIER_ONE_SLOW
+	var tier: int = _get_tier(owner)
+	if tier >= 3:
+		return TIER_THREE_SLOW
+	if tier >= 2:
+		return TIER_TWO_SLOW
+	return TIER_ONE_SLOW
 
 
 func _get_damage_reduction(owner) -> float:
-	return TIER_TWO_DAMAGE_REDUCTION if _get_tier(owner) >= 2 else TIER_ONE_DAMAGE_REDUCTION
+	var tier: int = _get_tier(owner)
+	if tier >= 3:
+		return TIER_THREE_DAMAGE_REDUCTION
+	if tier >= 2:
+		return TIER_TWO_DAMAGE_REDUCTION
+	return TIER_ONE_DAMAGE_REDUCTION
 
 
 func _get_damage(owner) -> float:
-	var ratio: float = TIER_TWO_DAMAGE_RATIO if _get_tier(owner) >= 2 else TIER_ONE_DAMAGE_RATIO
+	var tier: int = _get_tier(owner)
+	var ratio: float = TIER_ONE_DAMAGE_RATIO
+	if tier >= 3:
+		ratio = TIER_THREE_DAMAGE_RATIO
+	elif tier >= 2:
+		ratio = TIER_TWO_DAMAGE_RATIO
 	return float(owner._get_role_damage("mage")) * ratio

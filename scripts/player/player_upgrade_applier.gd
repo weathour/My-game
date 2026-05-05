@@ -10,7 +10,14 @@ static func apply_upgrade(owner, option_id: String) -> void:
 	if PLAYER_REWARD_APPLIER.is_noop_upgrade(option_id):
 		_finish_upgrade(owner)
 		return
-	if PLAYER_BLESSING_SYSTEM.apply_option(owner, option_id):
+	var blessing_result: Dictionary = PLAYER_BLESSING_SYSTEM.apply_option_with_result(owner, option_id)
+	if not blessing_result.is_empty():
+		if owner.has_method("_refresh_blessing_skill_unlocks"):
+			owner._refresh_blessing_skill_unlocks(
+				str(blessing_result.get("blessing_id", "")),
+				int(blessing_result.get("tier", 0)),
+				str(blessing_result.get("binding", ""))
+			)
 		_finish_upgrade(owner, true, true)
 		return
 	if PLAYER_EQUIPMENT_FLOW.apply_equipment_reward(owner, option_id):
@@ -48,4 +55,6 @@ static func _finish_upgrade(owner, refresh_stats: bool = false, refresh_health: 
 		owner._emit_active_mana_changed()
 	if refresh_health:
 		owner.health_changed.emit(owner.current_health, owner.max_health)
+	if owner.get("pending_blessing_binding_choices") is Array and not (owner.get("pending_blessing_binding_choices") as Array).is_empty():
+		return
 	owner._try_request_level_up()

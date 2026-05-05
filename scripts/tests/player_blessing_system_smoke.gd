@@ -14,13 +14,21 @@ func _run() -> void:
 	_check_tier_two_independent_offer_after_level_twelve()
 	_check_tier_two_weight_increases_with_level()
 	_check_blessings_stack_to_level_cap()
+	_check_random_and_tier_specific_blessing_rewards()
 	_check_manual_compose_from_tier_one_level_three()
 	_check_role_bound_state()
 	_check_skill_bound_state_is_record_only()
 	_check_blessing_skill_unlock_and_binding()
 	_check_new_blessing_skill_unlocks()
 	_check_tier_two_counts_as_three_for_skill_recipes()
+	_check_tier_two_equivalent_recipe_lock()
+	_check_basic_attack_evolution_does_not_lock_recipe()
+	_check_locked_blessing_offer_display_count()
+	_check_multi_skill_blessing_binding_choice()
+	_check_skipped_binding_locks_one_material()
+	_check_skill_unlock_uses_skill_role_not_active_role()
 	_check_ultimate_skills_are_always_available_and_evolve()
+	_check_shared_entry_skills_unlock_and_do_not_lock_materials()
 	if failures.is_empty():
 		print("PLAYER_BLESSING_SYSTEM_SMOKE_OK")
 		quit(0)
@@ -80,6 +88,32 @@ func _check_blessings_stack_to_level_cap() -> void:
 		failures.append("blessings should stack up to x6 and then cap, got x%d" % level)
 
 
+func _check_random_and_tier_specific_blessing_rewards() -> void:
+	var owner := _OwnerStub.new()
+	var rng := RandomNumberGenerator.new()
+	rng.seed = 1221
+	var granted: Array[String] = PlayerBlessingSystem.grant_random_blessings(owner, 1, 3, rng)
+	if granted.size() != 3:
+		failures.append("small boss fallback should grant three tier I blessings, got %s" % str(granted))
+	var total_tier_one := 0
+	for role_id in ["swordsman", "gunner", "mage"]:
+		var role_levels: Dictionary = owner.role_blessing_levels.get(role_id, {})
+		for blessing_levels in role_levels.values():
+			total_tier_one += int((blessing_levels as Dictionary).get(1, 0))
+		break
+	for blessing_levels in owner.skill_blessing_levels.values():
+		total_tier_one += int((blessing_levels as Dictionary).get(1, 0))
+	if total_tier_one != 3:
+		failures.append("random tier I blessing grant should add exactly three tier I counts, got %d" % total_tier_one)
+
+	var tier_owner := _OwnerStub.new()
+	tier_owner.level = 1
+	var tier_offer: Dictionary = PlayerBlessingSystem.build_tier_offer_for_owner(tier_owner, 2)
+	for option in tier_offer.get("options", []):
+		if option is Dictionary and str((option as Dictionary).get("id", "")) != "blessing_blank_continue" and int((option as Dictionary).get("blessing_tier", 0)) != 2:
+			failures.append("boss fallback tier-specific offer should only include tier II blessings, got %s" % str(option))
+
+
 func _count_tier_two_options(owner, rolls: int) -> int:
 	var count := 0
 	for _index in range(rolls):
@@ -136,7 +170,7 @@ func _check_role_bound_state() -> void:
 		if level != 1:
 			failures.append("role-bound blessing should be shared by all roles, got %s" % str(owner.role_blessing_levels))
 		var damage_bonus := PlayerBlessingSystem.get_role_stat_bonus(owner, role_id, "damage")
-		if not is_equal_approx(damage_bonus, 0.055):
+		if not is_equal_approx(damage_bonus, 0.02):
 			failures.append("shared role-bound damage bonus mismatch for %s: %.3f" % [role_id, damage_bonus])
 
 
@@ -157,10 +191,6 @@ func _check_blessing_skill_unlock_and_binding() -> void:
 	var owner := _OwnerStub.new()
 	for option_id in [
 		"blessing:formation_break:1",
-		"blessing:formation_break:1",
-		"blessing:formation_break:1",
-		"blessing:blazing_sun:1",
-		"blessing:blazing_sun:1",
 		"blessing:blazing_sun:1"
 	]:
 		PlayerBlessingSystem.apply_option(owner, option_id)
@@ -168,11 +198,17 @@ func _check_blessing_skill_unlock_and_binding() -> void:
 	if not PlayerBlessingSkillState.is_skill_unlocked(owner, PlayerBlessingSkillState.SKILL_BLADE_STORM):
 		failures.append("blade storm should unlock from formation_break Lv.3 + blazing_sun Lv.3")
 
+	owner.role_blessing_levels["swordsman"]["formation_break"] = {1: 4}
+	owner.role_blessing_levels["swordsman"]["blazing_sun"] = {1: 4}
+	PlayerBlessingSystem.sync_shared_role_blessings(owner)
+	PlayerBlessingSkillState.refresh_unlocks(owner)
+	if PlayerBlessingSkillState.get_skill_tier(owner, PlayerBlessingSkillState.SKILL_BLADE_STORM) != 2:
+		failures.append("blade storm should evolve from formation_break I x3 + blazing_sun I x3")
 	owner.skill_blessing_levels["tide_rain"] = {2: 3}
 	owner.skill_blessing_levels["trick"] = {2: 3}
 	PlayerBlessingSkillState.refresh_unlocks(owner)
-	if PlayerBlessingSkillState.get_skill_tier(owner, PlayerBlessingSkillState.SKILL_BLADE_STORM) != 2:
-		failures.append("blade storm should evolve from tide_rain II Lv.3 + trick II Lv.3")
+	if PlayerBlessingSkillState.get_skill_tier(owner, PlayerBlessingSkillState.SKILL_BLADE_STORM) != 3:
+		failures.append("blade storm should evolve to tier III from tide_rain II x3 + trick II x3")
 	var bound_skill := PlayerBlessingSkillState.get_bound_skill_for_blessing(owner, "trick")
 	if bound_skill != "":
 		failures.append("skill-type blessings should no longer be exclusively bound, got %s" % bound_skill)
@@ -180,37 +216,43 @@ func _check_blessing_skill_unlock_and_binding() -> void:
 	if basic_scales.is_empty():
 		failures.append("basic attack should read trick because it has the quantity tag")
 	var blade_scales := PlayerBlessingSkillState.get_skill_effect_scales(owner, PlayerBlessingSkillState.SKILL_BLADE_STORM, "quantity_skill_count")
-	if blade_scales.is_empty():
-		failures.append("blade storm should also read trick because it has the quantity tag")
+	if not blade_scales.is_empty():
+		failures.append("blade storm should not use trick II that was locked into its tier III evolution recipe, got %s" % str(blade_scales))
 
 
 func _check_new_blessing_skill_unlocks() -> void:
 	var mage_owner := _OwnerStub.new()
 	mage_owner.active_role_index = 2
-	mage_owner.role_blessing_levels["mage"]["divine_grace"] = {1: 3}
-	mage_owner.skill_blessing_levels["tide_rain"] = {1: 3}
+	mage_owner.role_blessing_levels["mage"]["divine_grace"] = {1: 1}
+	mage_owner.skill_blessing_levels["tide_rain"] = {1: 1}
 	PlayerBlessingSystem.sync_shared_role_blessings(mage_owner)
 	PlayerBlessingSkillState.refresh_unlocks(mage_owner)
 	if not PlayerBlessingSkillState.is_skill_unlocked(mage_owner, PlayerBlessingSkillState.SKILL_META_FIELD):
-		failures.append("meta field should unlock from tide_rain I Lv.3 + divine_grace I Lv.3")
+		failures.append("meta field should unlock from tide_rain I x1 + divine_grace I x1")
+	mage_owner.role_blessing_levels["mage"]["divine_grace"] = {1: 4}
+	mage_owner.skill_blessing_levels["tide_rain"] = {1: 4}
+	PlayerBlessingSystem.sync_shared_role_blessings(mage_owner)
+	PlayerBlessingSkillState.refresh_unlocks(mage_owner)
+	if PlayerBlessingSkillState.get_skill_tier(mage_owner, PlayerBlessingSkillState.SKILL_META_FIELD) != 2:
+		failures.append("meta field should evolve to tier II from divine_grace I x3 + tide_rain I x3")
 	mage_owner.role_blessing_levels["mage"]["formation_break"] = {2: 3}
 	mage_owner.skill_blessing_levels["tide_rain"] = {1: 3, 2: 3}
 	PlayerBlessingSystem.sync_shared_role_blessings(mage_owner)
 	PlayerBlessingSkillState.refresh_unlocks(mage_owner)
-	if PlayerBlessingSkillState.get_skill_tier(mage_owner, PlayerBlessingSkillState.SKILL_META_FIELD) != 2:
-		failures.append("meta field should evolve from tide_rain II Lv.3 + formation_break II Lv.3")
+	if PlayerBlessingSkillState.get_skill_tier(mage_owner, PlayerBlessingSkillState.SKILL_META_FIELD) != 3:
+		failures.append("meta field should evolve to tier III from tide_rain II x3 + formation_break II x3")
 
 	var swordsman_owner := _OwnerStub.new()
-	swordsman_owner.skill_blessing_levels["trick"] = {1: 3}
-	swordsman_owner.skill_blessing_levels["reprise"] = {1: 3}
+	swordsman_owner.skill_blessing_levels["trick"] = {1: 1}
+	swordsman_owner.skill_blessing_levels["reprise"] = {1: 1}
 	PlayerBlessingSkillState.refresh_unlocks(swordsman_owner)
 	if not PlayerBlessingSkillState.is_skill_unlocked(swordsman_owner, PlayerBlessingSkillState.SKILL_CRESCENT_WAVE):
 		failures.append("crescent wave should unlock from trick I Lv.3 + reprise I Lv.3")
 
 	var gunner_owner := _OwnerStub.new()
 	gunner_owner.active_role_index = 1
-	gunner_owner.role_blessing_levels["gunner"]["blazing_sun"] = {1: 3}
-	gunner_owner.skill_blessing_levels["tide_rain"] = {1: 3}
+	gunner_owner.role_blessing_levels["gunner"]["blazing_sun"] = {1: 1}
+	gunner_owner.skill_blessing_levels["tide_rain"] = {1: 1}
 	PlayerBlessingSystem.sync_shared_role_blessings(gunner_owner)
 	PlayerBlessingSkillState.refresh_unlocks(gunner_owner)
 	if not PlayerBlessingSkillState.is_skill_unlocked(gunner_owner, PlayerBlessingSkillState.SKILL_SHRAPNEL_FIELD):
@@ -219,6 +261,7 @@ func _check_new_blessing_skill_unlocks() -> void:
 
 func _check_tier_two_counts_as_three_for_skill_recipes() -> void:
 	var owner := _OwnerStub.new()
+	owner.active_role_index = 1
 	owner.skill_blessing_levels["reprise"] = {2: 1}
 	owner.skill_blessing_levels["tide_rain"] = {2: 1}
 	PlayerBlessingSkillState.refresh_unlocks(owner)
@@ -232,6 +275,96 @@ func _check_tier_two_counts_as_three_for_skill_recipes() -> void:
 	PlayerBlessingSkillState.refresh_unlocks(blade_owner)
 	if not PlayerBlessingSkillState.is_skill_unlocked(blade_owner, PlayerBlessingSkillState.SKILL_BLADE_STORM):
 		failures.append("one tier II role blessing should count as three tier I blessings for unlock recipes")
+
+func _check_tier_two_equivalent_recipe_lock() -> void:
+	var owner := _OwnerStub.new()
+	owner.active_role_index = 2
+	owner.role_blessing_levels["mage"]["divine_grace"] = {1: 3}
+	owner.role_blessing_levels["mage"]["formation_break"] = {2: 1}
+	owner.skill_blessing_levels["tide_rain"] = {2: 1}
+	PlayerBlessingSystem.sync_shared_role_blessings(owner)
+	PlayerBlessingSkillState.refresh_unlocks(owner)
+	if not PlayerBlessingSkillState.is_skill_unlocked(owner, PlayerBlessingSkillState.SKILL_META_FIELD):
+		failures.append("tier II tide_rain should satisfy meta field's tier I unlock requirement")
+	if PlayerBlessingSkillState.is_skill_unlocked(owner, PlayerBlessingSkillState.SKILL_SURGING_WAVE):
+		failures.append("same tier II tide_rain should be locked after meta field unlock and not unlock surging wave too")
+
+func _check_basic_attack_evolution_does_not_lock_recipe() -> void:
+	var owner := _OwnerStub.new()
+	owner.active_role_index = 1
+	owner.role_blessing_levels["gunner"]["prayer"] = {2: 3}
+	owner.role_blessing_levels["gunner"]["formation_break"] = {1: 3}
+	owner.skill_blessing_levels["reprise"] = {1: 3}
+	owner.skill_blessing_levels["trick"] = {1: 3, 2: 3}
+	owner.skill_blessing_levels["tide_rain"] = {1: 3}
+	PlayerBlessingSystem.sync_shared_role_blessings(owner)
+	PlayerBlessingSkillState.refresh_unlocks(owner)
+	if PlayerBlessingSkillState.get_skill_tier(owner, PlayerBlessingSkillState.SKILL_GUNNER_BASIC_ATTACK) != 3:
+		failures.append("gunner basic attack should evolve from prayer II x3 + trick II x3")
+	if PlayerBlessingSkillState.get_skill_tier(owner, PlayerBlessingSkillState.SKILL_GUNNER_ULTIMATE) != 2:
+		failures.append("basic attack evolution should not lock trick away from gunner ultimate evolution")
+
+func _check_locked_blessing_offer_display_count() -> void:
+	var owner := _OwnerStub.new()
+	PlayerBlessingSystem.apply_option(owner, "blessing:formation_break:1")
+	PlayerBlessingSystem.apply_option(owner, "blessing:blazing_sun:1")
+	PlayerBlessingSkillState.refresh_unlocks(owner)
+	var option: Dictionary = PlayerBlessingSystem._make_option(owner, "formation_break", 1)
+	if not str(option.get("title", "")).contains("0/6"):
+		failures.append("locked recipe blessing should display available count 0/6, got %s" % str(option.get("title", "")))
+
+func _check_multi_skill_blessing_binding_choice() -> void:
+	var owner := _OwnerStub.new()
+	owner.active_role_index = 2
+	owner.role_blessing_levels["mage"]["divine_grace"] = {1: 1}
+	owner.role_blessing_levels["mage"]["formation_break"] = {1: 1}
+	owner.skill_blessing_levels["tide_rain"] = {1: 1}
+	PlayerBlessingSystem.sync_shared_role_blessings(owner)
+	var events: Array[Dictionary] = PlayerBlessingSkillState.refresh_unlocks(owner, "tide_rain", 1, PlayerBlessingSkillState.SKILL_BOUND)
+	if events.size() != 1 or str(events[0].get("type", "")) != "binding_choice":
+		failures.append("shared tide_rain should produce a binding choice when multiple skills can use it, got %s" % str(events))
+		return
+	var candidates: Array = events[0].get("candidates", [])
+	if candidates.size() != 2:
+		failures.append("binding choice should contain both candidate skills, got %s" % str(candidates))
+		return
+	PlayerBlessingSkillState.apply_recipe_candidate(owner, candidates[0])
+	var first_skill_id := str((candidates[0] as Dictionary).get("skill_id", ""))
+	if not PlayerBlessingSkillState.is_skill_unlocked(owner, first_skill_id):
+		failures.append("selected binding candidate should unlock/evolve its skill")
+	var second_skill_id := str((candidates[1] as Dictionary).get("skill_id", ""))
+	if PlayerBlessingSkillState.is_skill_unlocked(owner, second_skill_id):
+		failures.append("unselected candidate should not consume the same blessing material")
+	var option: Dictionary = PlayerBlessingSystem._make_option(owner, "tide_rain", 1)
+	if not str(option.get("title", "")).contains("0/6"):
+		failures.append("selected binding should lock tide_rain and display 0/6, got %s" % str(option.get("title", "")))
+
+func _check_skipped_binding_locks_one_material() -> void:
+	var owner := _OwnerStub.new()
+	owner.active_role_index = 2
+	owner.role_blessing_levels["mage"]["divine_grace"] = {1: 1}
+	owner.role_blessing_levels["mage"]["formation_break"] = {1: 1}
+	owner.skill_blessing_levels["tide_rain"] = {1: 1}
+	PlayerBlessingSystem.sync_shared_role_blessings(owner)
+	PlayerBlessingSkillState.lock_one_blessing_material(owner, PlayerBlessingSkillState.SKILL_BOUND, "tide_rain", 1)
+	var events: Array[Dictionary] = PlayerBlessingSkillState.refresh_unlocks(owner, "tide_rain", 1, PlayerBlessingSkillState.SKILL_BOUND)
+	for event in events:
+		if str((event as Dictionary).get("type", "")) == "binding_choice":
+			failures.append("skipped binding should lock the material and avoid repeated binding prompts")
+	var option: Dictionary = PlayerBlessingSystem._make_option(owner, "tide_rain", 1)
+	if not str(option.get("title", "")).contains("0/6"):
+		failures.append("skipped binding should display available count 0/6, got %s" % str(option.get("title", "")))
+
+
+func _check_skill_unlock_uses_skill_role_not_active_role() -> void:
+	var owner := _OwnerStub.new()
+	owner.active_role_index = 2
+	owner.role_blessing_levels["gunner"]["blazing_sun"] = {1: 1}
+	owner.skill_blessing_levels["tide_rain"] = {1: 1}
+	PlayerBlessingSystem.sync_shared_role_blessings(owner)
+	PlayerBlessingSkillState.refresh_unlocks(owner, "", 0, "", "gunner")
+	if not PlayerBlessingSkillState.is_skill_unlocked(owner, PlayerBlessingSkillState.SKILL_SHRAPNEL_FIELD):
+		failures.append("shrapnel field should unlock from gunner materials when the gunner panel refreshes")
 
 
 func _check_ultimate_skills_are_always_available_and_evolve() -> void:
@@ -253,8 +386,15 @@ func _check_ultimate_skills_are_always_available_and_evolve() -> void:
 	var combo_scales := PlayerBlessingSkillState.get_skill_effect_scales(swordsman_owner, PlayerBlessingSkillState.SKILL_SWORDSMAN_ULTIMATE, "combo_skill_extra")
 	if combo_scales.size() != 3 or not is_equal_approx(float(combo_scales[0]), 0.5):
 		failures.append("tier I reprise should grant 50 percent combo visual/hit scales for ultimate, got %s" % str(combo_scales))
+	swordsman_owner.role_blessing_levels["swordsman"]["blazing_sun"] = {1: 3, 2: 3}
+	swordsman_owner.role_blessing_levels["swordsman"]["greed"] = {1: 3}
+	PlayerBlessingSystem.sync_shared_role_blessings(swordsman_owner)
+	PlayerBlessingSkillState.refresh_unlocks(swordsman_owner)
+	if PlayerBlessingSkillState.get_skill_tier(swordsman_owner, PlayerBlessingSkillState.SKILL_SWORDSMAN_ULTIMATE) != 3:
+		failures.append("swordsman ultimate should evolve to tier III from blazing_sun II x3 + greed I x3")
 
 	var gunner_owner := _OwnerStub.new()
+	gunner_owner.active_role_index = 1
 	gunner_owner.skill_blessing_levels["tide_rain"] = {1: 3}
 	gunner_owner.role_blessing_levels["gunner"]["formation_break"] = {1: 3}
 	PlayerBlessingSystem.sync_shared_role_blessings(gunner_owner)
@@ -263,16 +403,76 @@ func _check_ultimate_skills_are_always_available_and_evolve() -> void:
 		failures.append("gunner ultimate should evolve from tide_rain I x3 + formation_break I x3")
 	if not PlayerBlessingSkillState.get_duration_multiplier(gunner_owner, PlayerBlessingSkillState.SKILL_GUNNER_ULTIMATE) > 1.0:
 		failures.append("gunner ultimate should read tide_rain because it has the duration tag")
+	gunner_owner.role_blessing_levels["gunner"]["blazing_sun"] = {2: 3}
+	gunner_owner.role_blessing_levels["gunner"]["formation_break"] = {1: 3, 2: 3}
+	PlayerBlessingSystem.sync_shared_role_blessings(gunner_owner)
+	PlayerBlessingSkillState.refresh_unlocks(gunner_owner)
+	if PlayerBlessingSkillState.get_skill_tier(gunner_owner, PlayerBlessingSkillState.SKILL_GUNNER_ULTIMATE) != 3:
+		failures.append("gunner ultimate should evolve to tier III from blazing_sun II x3 + formation_break II x3")
 
 	var mage_owner := _OwnerStub.new()
+	mage_owner.active_role_index = 2
 	mage_owner.skill_blessing_levels["reprise"] = {1: 3}
 	mage_owner.role_blessing_levels["mage"]["formation_break"] = {1: 3}
-	mage_owner.role_blessing_levels["mage"]["benediction"] = {2: 3}
-	mage_owner.role_blessing_levels["mage"]["blazing_sun"] = {2: 3}
 	PlayerBlessingSystem.sync_shared_role_blessings(mage_owner)
 	PlayerBlessingSkillState.refresh_unlocks(mage_owner)
 	if PlayerBlessingSkillState.get_skill_tier(mage_owner, PlayerBlessingSkillState.SKILL_MAGE_ULTIMATE) != 2:
-		failures.append("mage ultimate should evolve from reprise I x3 + formation_break I x3 + benediction II x3 + blazing_sun II x3")
+		failures.append("mage ultimate should evolve from reprise I x3 + formation_break I x3")
+	mage_owner.skill_blessing_levels["reprise"] = {1: 3, 2: 3}
+	mage_owner.role_blessing_levels["mage"]["benediction"] = {2: 3}
+	PlayerBlessingSystem.sync_shared_role_blessings(mage_owner)
+	PlayerBlessingSkillState.refresh_unlocks(mage_owner)
+	if PlayerBlessingSkillState.get_skill_tier(mage_owner, PlayerBlessingSkillState.SKILL_MAGE_ULTIMATE) != 3:
+		failures.append("mage ultimate should evolve to tier III from reprise II x3 + benediction II x3")
+
+
+func _check_shared_entry_skills_unlock_and_do_not_lock_materials() -> void:
+	var owner := _OwnerStub.new()
+	owner.role_blessing_levels["swordsman"]["support"] = {1: 1}
+	owner.role_blessing_levels["swordsman"]["divine_grace"] = {1: 1}
+	owner.skill_blessing_levels["reprise"] = {1: 1}
+	PlayerBlessingSystem.sync_shared_role_blessings(owner)
+	PlayerBlessingSkillState.refresh_unlocks(owner)
+	if not PlayerBlessingSkillState.is_skill_unlocked(owner, PlayerBlessingSkillState.SKILL_ENTRY_RESCUE):
+		failures.append("entry rescue should unlock from support I x1 + divine_grace I x1")
+	if not PlayerBlessingSkillState.is_skill_unlocked(owner, PlayerBlessingSkillState.SKILL_HERO_ENTRY):
+		failures.append("hero entry should unlock from support I x1 + reprise I x1")
+	if not is_equal_approx(PlayerBlessingSkillState.get_entry_rescue_regen_per_second(owner), 0.525):
+		failures.append("entry rescue tier I should grant 0.525 regen per second")
+	if PlayerBlessingSkillState.get_hero_entry_effect(owner).get("extra_count", 0) != 1:
+		failures.append("hero entry tier I should grant one extra entry segment")
+	var option: Dictionary = PlayerBlessingSystem._make_option(owner, "support", 1)
+	if not str(option.get("title", "")).contains("1/6"):
+		failures.append("shared entry skills should not lock support materials, got %s" % str(option.get("title", "")))
+
+	owner.role_blessing_levels["swordsman"]["support"] = {1: 3}
+	owner.role_blessing_levels["swordsman"]["divine_grace"] = {1: 3}
+	owner.skill_blessing_levels["reprise"] = {1: 3}
+	PlayerBlessingSystem.sync_shared_role_blessings(owner)
+	PlayerBlessingSkillState.refresh_unlocks(owner)
+	if PlayerBlessingSkillState.get_skill_tier(owner, PlayerBlessingSkillState.SKILL_ENTRY_RESCUE) != 2:
+		failures.append("entry rescue should evolve to tier II from support I x3 + divine_grace I x3")
+	if PlayerBlessingSkillState.get_skill_tier(owner, PlayerBlessingSkillState.SKILL_HERO_ENTRY) != 2:
+		failures.append("hero entry should evolve to tier II from support I x3 + reprise I x3")
+	if not is_equal_approx(PlayerBlessingSkillState.get_entry_rescue_regen_per_second(owner), 0.975):
+		failures.append("entry rescue tier II should grant 0.975 regen per second")
+	if not is_equal_approx(float(PlayerBlessingSkillState.get_hero_entry_effect(owner).get("effect_scale", 0.0)), 0.5):
+		failures.append("hero entry tier II should use 50 percent extra entry effect")
+
+	owner.role_blessing_levels["swordsman"]["divine_grace"] = {1: 3, 2: 3}
+	owner.role_blessing_levels["swordsman"]["support"] = {1: 3, 2: 3}
+	owner.skill_blessing_levels["tide_rain"] = {2: 3}
+	owner.skill_blessing_levels["reprise"] = {1: 3, 2: 3}
+	PlayerBlessingSystem.sync_shared_role_blessings(owner)
+	PlayerBlessingSkillState.refresh_unlocks(owner)
+	if PlayerBlessingSkillState.get_skill_tier(owner, PlayerBlessingSkillState.SKILL_ENTRY_RESCUE) != 3:
+		failures.append("entry rescue should evolve to tier III from tide_rain II x3 + divine_grace II x3")
+	if PlayerBlessingSkillState.get_skill_tier(owner, PlayerBlessingSkillState.SKILL_HERO_ENTRY) != 3:
+		failures.append("hero entry should evolve to tier III from support II x3 + reprise II x3")
+	if not is_equal_approx(PlayerBlessingSkillState.get_entry_rescue_regen_per_second(owner), 1.5):
+		failures.append("entry rescue tier III should grant 1.5 regen per second")
+	if int(PlayerBlessingSkillState.get_hero_entry_effect(owner).get("extra_count", 0)) != 2:
+		failures.append("hero entry tier III should grant two extra entry segments")
 
 
 class _OwnerStub:

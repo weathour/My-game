@@ -26,7 +26,7 @@ const ROLE_PRIMARY_ATTRIBUTES := {
 const SWORDSMAN_MAX_HEALTH_PER_POINT := 0.0
 const PRIMARY_DAMAGE_PER_POINT := 0.0
 const SWORDSMAN_LOW_HEALTH_THRESHOLD := 0.30
-const SWORDSMAN_LOW_HEALTH_FLAT_HEAL_PER_POINT := 0.28
+const SWORDSMAN_LOW_HEALTH_FLAT_HEAL_PER_POINT := 0.14
 const SWORDSMAN_DODGE_PER_POINT := 0.006
 const SWORDSMAN_MAX_DODGE := 0.16
 const GUNNER_MOVE_SPEED_PER_POINT := 3.0
@@ -84,11 +84,11 @@ static func get_trait_keys_for_roles(role_order: Array = []) -> Array:
 	return result
 
 
-static func get_swordsman_trait_max_health_bonus(level: float) -> float:
+static func get_swordsman_trait_max_health_bonus(_level: float) -> float:
 	return 0.0
 
 
-static func get_swordsman_trait_regen_per_second(level: float) -> float:
+static func get_swordsman_trait_regen_per_second(_level: float) -> float:
 	return 0.0
 
 
@@ -104,7 +104,7 @@ static func get_gunner_trait_flat_move_speed_bonus(level: float) -> float:
 	return get_effective_level(level) * GUNNER_MOVE_SPEED_PER_POINT
 
 
-static func get_gunner_trait_dodge_chance(level: float) -> float:
+static func get_gunner_trait_dodge_chance(_level: float) -> float:
 	return 0.0
 
 
@@ -112,11 +112,11 @@ static func get_gunner_trait_distance_damage_bonus(level: float) -> float:
 	return get_effective_level(level) * GUNNER_DISTANCE_DAMAGE_PER_POINT
 
 
-static func get_mage_trait_mana_regen_per_second(level: float) -> float:
+static func get_mage_trait_mana_regen_per_second(_level: float) -> float:
 	return 0.0
 
 
-static func get_mage_trait_pickup_range_bonus(level: float) -> float:
+static func get_mage_trait_pickup_range_bonus(_level: float) -> float:
 	return 0.0
 
 
@@ -128,71 +128,71 @@ static func get_mage_trait_kill_energy_multiplier(level: float) -> float:
 	return 1.0 + get_effective_level(level) * MAGE_KILL_ENERGY_PER_POINT
 
 
-static func get_swordsman_trait_entry_damage_multiplier(level: float) -> float:
+static func get_swordsman_trait_entry_damage_multiplier(_level: float) -> float:
 	return 1.0
 
 
-static func get_swordsman_trait_entry_distance_multiplier(level: float) -> float:
+static func get_swordsman_trait_entry_distance_multiplier(_level: float) -> float:
 	return 1.0
 
 
-static func get_swordsman_trait_entry_invulnerability_bonus(level: float) -> float:
+static func get_swordsman_trait_entry_invulnerability_bonus(_level: float) -> float:
 	return 0.0
 
 
-static func get_swordsman_trait_exit_lifesteal_bonus(level: float) -> float:
+static func get_swordsman_trait_exit_lifesteal_bonus(_level: float) -> float:
 	return 0.0
 
 
-static func get_swordsman_trait_exit_lifesteal_duration_bonus(level: float) -> float:
+static func get_swordsman_trait_exit_lifesteal_duration_bonus(_level: float) -> float:
 	return 0.0
 
 
-static func get_gunner_trait_entry_bullet_damage_multiplier(level: float) -> float:
+static func get_gunner_trait_entry_bullet_damage_multiplier(_level: float) -> float:
 	return 1.0
 
 
-static func get_gunner_trait_entry_bullet_speed_bonus(level: float) -> float:
+static func get_gunner_trait_entry_bullet_speed_bonus(_level: float) -> float:
 	return 0.0
 
 
-static func get_gunner_trait_entry_wave_count(level: float) -> int:
+static func get_gunner_trait_entry_wave_count(_level: float) -> int:
 	return 2
 
 
-static func get_gunner_trait_exit_haste_interval_bonus(level: float) -> float:
+static func get_gunner_trait_exit_haste_interval_bonus(_level: float) -> float:
 	return 0.0
 
 
-static func get_gunner_trait_exit_move_speed_multiplier_bonus(level: float) -> float:
+static func get_gunner_trait_exit_move_speed_multiplier_bonus(_level: float) -> float:
 	return 0.0
 
 
-static func get_gunner_trait_exit_haste_duration_bonus(level: float) -> float:
+static func get_gunner_trait_exit_haste_duration_bonus(_level: float) -> float:
 	return 0.0
 
 
-static func get_mage_trait_entry_radius_multiplier(level: float) -> float:
+static func get_mage_trait_entry_radius_multiplier(_level: float) -> float:
 	return 1.0
 
 
-static func get_mage_trait_entry_damage_multiplier(level: float) -> float:
+static func get_mage_trait_entry_damage_multiplier(_level: float) -> float:
 	return 1.0
 
 
-static func get_mage_trait_entry_bombard_count(level: float) -> int:
+static func get_mage_trait_entry_bombard_count(_level: float) -> int:
 	return 2
 
 
-static func get_mage_trait_exit_energy_bonus(level: float) -> float:
+static func get_mage_trait_exit_energy_bonus(_level: float) -> float:
 	return 0.0
 
 
-static func get_mage_trait_exit_slow_field_radius_bonus(level: float) -> float:
+static func get_mage_trait_exit_slow_field_radius_bonus(_level: float) -> float:
 	return 0.0
 
 
-static func get_mage_trait_exit_slow_field_damage_ratio(level: float) -> float:
+static func get_mage_trait_exit_slow_field_damage_ratio(_level: float) -> float:
 	return 0.0
 
 
@@ -221,7 +221,7 @@ static func get_intelligence_pickup_range_bonus(level: float) -> float:
 	return get_mage_trait_pickup_range_bonus(level)
 
 
-static func get_primary_attribute_damage_bonus(role_id: String, attribute_levels: Dictionary) -> float:
+static func get_primary_attribute_damage_bonus(_role_id: String, _attribute_levels: Dictionary) -> float:
 	return 0.0
 
 

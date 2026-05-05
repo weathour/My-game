@@ -89,10 +89,10 @@ static func _make_choose_blessing_option() -> Dictionary:
 		"id": PLAYER_REWARD_APPLIER.SMALL_BOSS_CHOOSE_BLESSING,
 		"slot": "card",
 		"slot_label": "技能奖励",
-		"title": "自选祝福",
-		"description": "不提升角色等级，改为从所有当前可用祝福里自选 2 个。",
-		"preview_description": "从所有当前可用祝福里自选 2 个。",
-		"exact_description": "作为技能奖励池暂未开放时的兜底奖励，选择后不会获得等级 +1，而是连续进行 2 次全祝福自选。"
+		"title": "兜底祝福",
+		"description": "小 Boss：随机获得 3 个当前轮次级别祝福。Boss：从所有 II 级祝福里自选 2 个。",
+		"preview_description": "根据 Boss 类型获得祝福兜底奖励。",
+		"exact_description": "小 Boss 选择后会随机获得 3 个当前轮次级别祝福；正式 Boss 选择后会连续进行 2 次 II 级祝福自选。"
 	}
 
 
@@ -123,6 +123,12 @@ static func build_blessing_upgrade_options(owner) -> Array:
 
 static func build_all_blessing_options(owner) -> Array:
 	var offer := PLAYER_BLESSING_SYSTEM.build_all_offer_for_owner(owner)
+	owner.current_blessing_offer = offer
+	return offer.get("options", [])
+
+
+static func build_tier_blessing_options(owner, tier: int) -> Array:
+	var offer := PLAYER_BLESSING_SYSTEM.build_tier_offer_for_owner(owner, tier)
 	owner.current_blessing_offer = offer
 	return offer.get("options", [])
 

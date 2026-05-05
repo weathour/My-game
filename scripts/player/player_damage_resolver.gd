@@ -38,12 +38,37 @@ static func damage_enemies_in_radius(owner, center: Vector2, radius: float, dama
 			hit_count += 1
 	return hit_count
 
+static func damage_enemies_in_radius_count_kills(owner, center: Vector2, radius: float, damage_amount: float, vulnerability_bonus: float, slow_multiplier: float, slow_duration: float, source_role_id: String = "") -> Dictionary:
+	var hit_count := 0
+	var kill_count := 0
+	var resolved_role_id: String = _resolve_role_id(owner, source_role_id)
+	for enemy in _get_candidate_enemies_for_circle(owner, center, radius):
+		if not _is_live_enemy(enemy):
+			continue
+		var hit_radius: float = _get_enemy_hit_radius(owner, enemy)
+		var total_radius: float = radius + hit_radius
+		if center.distance_squared_to(enemy.global_position) <= total_radius * total_radius:
+			if deal_damage_to_enemy(owner, enemy, damage_amount, resolved_role_id, vulnerability_bonus, 2.0, slow_multiplier, slow_duration, center):
+				kill_count += 1
+			hit_count += 1
+	return {"hits": hit_count, "kills": kill_count}
+
 static func pull_enemies_toward(owner, center: Vector2, radius: float, pull_strength: float) -> void:
-	for enemy in _get_live_enemies(owner):
+	for enemy in _get_candidate_enemies_for_circle(owner, center, radius):
 		var offset: Vector2 = center - enemy.global_position
 		var distance := offset.length()
 		if distance > 0.001 and distance <= radius:
 			enemy.global_position += offset.normalized() * min(pull_strength, distance)
+
+static func count_enemies_in_radius(owner, center: Vector2, radius: float) -> int:
+	var count := 0
+	var radius_squared := radius * radius
+	for enemy in _get_candidate_enemies_for_circle(owner, center, radius):
+		if not _is_live_enemy(enemy):
+			continue
+		if center.distance_squared_to(enemy.global_position) <= radius_squared:
+			count += 1
+	return count
 
 static func damage_enemies_in_line(owner, start_position: Vector2, end_position: Vector2, width: float, damage_amount: float, vulnerability_bonus: float, slow_multiplier: float, slow_duration: float, source_role_id: String = "") -> int:
 	var axis := end_position - start_position

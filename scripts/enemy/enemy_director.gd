@@ -10,11 +10,12 @@ const WAVE_BATCH_INTERVAL_MULTIPLIER := 3.2
 const WAVE_BATCH_MIN_INTERVAL := 1.22
 const WAVE_BATCH_MAX_INTERVAL := 2.85
 const WAVE_BATCH_MAX_PACKS := 6
-const ENDLESS_CYCLE_HEALTH_GROWTH := 0.35
-const ENDLESS_CYCLE_DAMAGE_GROWTH := 0.18
-const ENDLESS_CYCLE_SPEED_GROWTH := 0.04
-const ENDLESS_CYCLE_MAX_SPEED_MULTIPLIER := 1.28
-const ENDLESS_CYCLE_SPAWN_COUNT_MULTIPLIERS := [0.88, 0.96, 1.0]
+const ENDLESS_FIRST_CYCLE_SPAWN_COUNT_MULTIPLIER := 0.88
+const ENDLESS_CYCLE_HEALTH_BASE_MULTIPLIER := 1.5
+const ENDLESS_CYCLE_DAMAGE_BASE_MULTIPLIER := 2.0
+const ENDLESS_CYCLE_SPAWN_COUNT_BASE_MULTIPLIER := 2.0
+const ENDLESS_CYCLE_RANGED_FREQUENCY_BASE_MULTIPLIER := 1.5
+const ENDLESS_CYCLE_GROWTH_STEP := 0.5
 
 static func get_default_stage_duration() -> float:
 	return DEFAULT_STAGE_DURATION
@@ -69,17 +70,43 @@ static func get_story_enemy_speed_multiplier(story_stage: Dictionary, story_mode
 	return float(story_stage.get("enemy_speed_multiplier", 1.0))
 
 static func get_endless_cycle_health_multiplier(cycle_power_level: int) -> float:
-	return 1.0 + float(max(0, cycle_power_level)) * ENDLESS_CYCLE_HEALTH_GROWTH
+	if cycle_power_level <= 0:
+		return 1.0
+	return ENDLESS_CYCLE_HEALTH_BASE_MULTIPLIER + float(cycle_power_level - 1) * ENDLESS_CYCLE_GROWTH_STEP
 
 static func get_endless_cycle_damage_multiplier(cycle_power_level: int) -> float:
-	return 1.0 + float(max(0, cycle_power_level)) * ENDLESS_CYCLE_DAMAGE_GROWTH
+	if cycle_power_level <= 0:
+		return 1.0
+	return ENDLESS_CYCLE_DAMAGE_BASE_MULTIPLIER + float(cycle_power_level - 1) * ENDLESS_CYCLE_GROWTH_STEP
 
-static func get_endless_cycle_speed_multiplier(cycle_power_level: int) -> float:
-	return min(ENDLESS_CYCLE_MAX_SPEED_MULTIPLIER, 1.0 + float(max(0, cycle_power_level)) * ENDLESS_CYCLE_SPEED_GROWTH)
+static func get_endless_cycle_speed_multiplier(_cycle_power_level: int) -> float:
+	return 1.0
 
 static func get_endless_cycle_spawn_count_multiplier(cycle_power_level: int) -> float:
-	var index: int = clamp(max(0, cycle_power_level), 0, ENDLESS_CYCLE_SPAWN_COUNT_MULTIPLIERS.size() - 1)
-	return float(ENDLESS_CYCLE_SPAWN_COUNT_MULTIPLIERS[index])
+	if cycle_power_level <= 0:
+		return ENDLESS_FIRST_CYCLE_SPAWN_COUNT_MULTIPLIER
+	return ENDLESS_CYCLE_SPAWN_COUNT_BASE_MULTIPLIER + float(cycle_power_level - 1) * ENDLESS_CYCLE_GROWTH_STEP
+
+static func get_endless_cycle_ranged_frequency_multiplier(cycle_power_level: int) -> float:
+	if cycle_power_level <= 0:
+		return 1.0
+	return ENDLESS_CYCLE_RANGED_FREQUENCY_BASE_MULTIPLIER + float(cycle_power_level - 1) * ENDLESS_CYCLE_GROWTH_STEP
+
+static func apply_endless_cycle_to_enemy_profile(kind: String, enemy_profile: Dictionary, cycle_power_level: int) -> Dictionary:
+	var adjusted: Dictionary = enemy_profile.duplicate(true)
+	if kind == "boss":
+		return adjusted
+	var ranged_frequency_multiplier := get_endless_cycle_ranged_frequency_multiplier(cycle_power_level)
+	if ranged_frequency_multiplier <= 1.0:
+		return adjusted
+	_divide_interval(adjusted, "shot_interval", ranged_frequency_multiplier, 0.18)
+	_divide_interval(adjusted, "turret_bombard_interval", ranged_frequency_multiplier, 0.5)
+	return adjusted
+
+static func _divide_interval(target: Dictionary, key: String, divisor: float, minimum: float) -> void:
+	if not target.has(key):
+		return
+	target[key] = max(minimum, float(target.get(key, minimum)) / max(0.001, divisor))
 
 static func get_wave_profile(survival_time: float, elite_spawn_times: Array, player_growth_score: float, expected_growth_score: float) -> Dictionary:
 	var profile: Dictionary
@@ -283,7 +310,7 @@ static func _collect_cyclic_special_events(
 static func _is_cyclic_event_due(survival_time: float, event_times: Array, spawned_count: int, cycle_duration: float) -> bool:
 	if event_times.is_empty():
 		return false
-	var cycle_index: int = int(spawned_count / event_times.size())
+	var cycle_index: int = int(spawned_count / float(event_times.size()))
 	var event_index: int = spawned_count % event_times.size()
 	var event_time: float = float(event_times[event_index])
 	var absolute_event_time: float = float(cycle_index) * cycle_duration + event_time

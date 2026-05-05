@@ -9,8 +9,11 @@ const SLASH_WIDTH := 52.0
 const WAVE_LENGTH := 430.0
 const WAVE_WIDTH := 58.0
 const TIER_TWO_WIDTH_MULTIPLIER := 1.2
-const TIER_TWO_DAMAGE_MULTIPLIER := 1.28
+const TIER_TWO_DAMAGE_MULTIPLIER := 1.45
 const TIER_TWO_SPEED_MULTIPLIER := 1.3
+const TIER_THREE_WIDTH_MULTIPLIER := 1.4
+const TIER_THREE_DAMAGE_MULTIPLIER := 1.65
+const TIER_THREE_SPEED_MULTIPLIER := 1.6
 const BASE_WAVE_SPEED := 520.0
 const COMBO_INTERVAL := 0.16
 const VISUAL_AND_HIT_SCALE := 0.6
@@ -18,6 +21,8 @@ const FAN_SCENE_SIZE := Vector2(1024.0, 1024.0)
 const FAN_SCENE_VISIBLE_BOUNDS := Rect2(485.0, 405.0, 117.0, 50.0)
 const FAN_WAVE_BASE_VISIBLE_SIZE := Vector2(138.0, 74.0)
 const SLASH_EFFECT_MAX_LIFETIME := 0.32
+const SLASH_DAMAGE_RATIO := 1.18
+const WAVE_DAMAGE_RATIO := 1.42
 
 var cooldown_remaining: float = 0.0
 
@@ -106,14 +111,14 @@ func _cast_once(owner, direction: Vector2, damage_scale: float) -> void:
 		direction,
 		slash_length,
 		slash_width,
-		_get_damage(owner) * damage_scale,
+		_get_damage(owner) * SLASH_DAMAGE_RATIO * damage_scale,
 		0.02,
 		1.0,
 		0.0,
 		"swordsman"
 	))
 	var wave_origin: Vector2 = owner.global_position + direction * max(24.0, slash_length * 0.72)
-	_spawn_crescent_projectile(owner, wave_origin, direction, wave_length, wave_width, visual_hit_multiplier, _get_damage(owner) * damage_scale * 0.92)
+	_spawn_crescent_projectile(owner, wave_origin, direction, wave_length, wave_width, visual_hit_multiplier, _get_damage(owner) * WAVE_DAMAGE_RATIO * damage_scale)
 	if slash_hits > 0:
 		owner._register_attack_result("swordsman", slash_hits, false)
 
@@ -236,7 +241,13 @@ func _get_cooldown(owner) -> float:
 
 
 func _get_width_multiplier(owner) -> float:
-	return (TIER_TWO_WIDTH_MULTIPLIER if _get_tier(owner) >= 2 else 1.0) * float(owner._get_equipment_skill_range_multiplier())
+	var tier: int = _get_tier(owner)
+	var tier_multiplier := 1.0
+	if tier >= 3:
+		tier_multiplier = TIER_THREE_WIDTH_MULTIPLIER
+	elif tier >= 2:
+		tier_multiplier = TIER_TWO_WIDTH_MULTIPLIER
+	return tier_multiplier * float(owner._get_equipment_skill_range_multiplier())
 
 
 func _get_range_multiplier(owner) -> float:
@@ -244,8 +255,18 @@ func _get_range_multiplier(owner) -> float:
 
 
 func _get_wave_speed(owner) -> float:
-	return BASE_WAVE_SPEED * (TIER_TWO_SPEED_MULTIPLIER if _get_tier(owner) >= 2 else 1.0)
+	var tier: int = _get_tier(owner)
+	if tier >= 3:
+		return BASE_WAVE_SPEED * TIER_THREE_SPEED_MULTIPLIER
+	if tier >= 2:
+		return BASE_WAVE_SPEED * TIER_TWO_SPEED_MULTIPLIER
+	return BASE_WAVE_SPEED
 
 
 func _get_damage(owner) -> float:
-	return float(owner._get_role_damage("swordsman")) * (TIER_TWO_DAMAGE_MULTIPLIER if _get_tier(owner) >= 2 else 1.0)
+	var tier: int = _get_tier(owner)
+	if tier >= 3:
+		return float(owner._get_role_damage("swordsman")) * TIER_THREE_DAMAGE_MULTIPLIER
+	if tier >= 2:
+		return float(owner._get_role_damage("swordsman")) * TIER_TWO_DAMAGE_MULTIPLIER
+	return float(owner._get_role_damage("swordsman"))

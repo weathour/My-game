@@ -18,6 +18,12 @@ static func update_timers(owner, delta: float) -> void:
 			owner._try_request_level_up()
 	if owner.switch_cooldown_remaining > 0.0:
 		owner.switch_cooldown_remaining = max(0.0, owner.switch_cooldown_remaining - delta)
+	if owner.lifesteal_proc_cooldown_remaining > 0.0:
+		owner.lifesteal_proc_cooldown_remaining = max(0.0, owner.lifesteal_proc_cooldown_remaining - delta)
+	var swordsman_special: Dictionary = owner._get_role_special_state("swordsman")
+	if float(swordsman_special.get("ultimate_lifesteal_multiplier_remaining", 0.0)) > 0.0:
+		swordsman_special["ultimate_lifesteal_multiplier_remaining"] = max(0.0, float(swordsman_special.get("ultimate_lifesteal_multiplier_remaining", 0.0)) - delta)
+		owner.role_special_states["swordsman"] = swordsman_special
 	if owner.enemy_move_slow_remaining > 0.0:
 		owner.enemy_move_slow_remaining = max(0.0, owner.enemy_move_slow_remaining - delta)
 		if owner.enemy_move_slow_remaining <= 0.0:
@@ -55,6 +61,12 @@ static func update_timers(owner, delta: float) -> void:
 		owner.entry_blessing_remaining = max(0.0, owner.entry_blessing_remaining - delta)
 		if owner.entry_blessing_remaining <= 0.0:
 			owner._clear_entry_blessing()
+	if owner.entry_rescue_remaining > 0.0:
+		owner.entry_rescue_remaining = max(0.0, owner.entry_rescue_remaining - delta)
+		if owner.entry_rescue_regen_per_second > 0.0:
+			owner._heal(owner.entry_rescue_regen_per_second * delta)
+		if owner.entry_rescue_remaining <= 0.0:
+			owner.entry_rescue_regen_per_second = 0.0
 	if owner.standby_entry_remaining > 0.0:
 		owner.standby_entry_remaining = max(0.0, owner.standby_entry_remaining - delta)
 		if owner.standby_entry_remaining <= 0.0:

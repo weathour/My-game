@@ -71,6 +71,39 @@ static func get_current_move_speed(owner) -> float:
 	return move_speed
 
 
+static func get_active_role_base_health(owner) -> float:
+	var role_data: Dictionary = owner._get_active_role() if owner != null and owner.has_method("_get_active_role") else {}
+	return max(1.0, float(role_data.get("base_health", owner.max_health if owner != null else 1.0)))
+
+
+static func get_active_role_max_health(owner) -> float:
+	if owner == null:
+		return 1.0
+	var role_id: String = str(owner._get_active_role().get("id", "")) if owner.has_method("_get_active_role") else ""
+	var base_health: float = get_active_role_base_health(owner)
+	var blessing_bonus: float = 0.0
+	if owner.has_method("_get_role_blessing_stat_bonus") and role_id != "":
+		blessing_bonus = float(owner._get_role_blessing_stat_bonus(role_id, "max_health"))
+	return max(1.0, base_health + blessing_bonus + float(owner.get("equipment_max_health_bonus")))
+
+
+static func sync_active_role_max_health(owner, preserve_ratio: bool = true, restore_gain: bool = false) -> void:
+	if owner == null:
+		return
+	var old_max: float = max(1.0, float(owner.max_health))
+	var old_current: float = clamp(float(owner.current_health), 0.0, old_max)
+	var old_ratio: float = old_current / old_max
+	var new_max: float = get_active_role_max_health(owner)
+	owner.max_health = new_max
+	if restore_gain and new_max > old_max:
+		owner.current_health = min(new_max, old_current + (new_max - old_max))
+	elif preserve_ratio:
+		owner.current_health = clamp(new_max * old_ratio, 0.0, new_max)
+	else:
+		owner.current_health = min(old_current, new_max)
+	owner.health_changed.emit(owner.current_health, owner.max_health)
+
+
 static func get_role_damage(owner, role_id: String) -> float:
 	for role_data in owner.roles:
 		if role_data["id"] != role_id:

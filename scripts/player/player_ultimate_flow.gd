@@ -59,7 +59,7 @@ static func get_ultimate_display(owner, role_id: String) -> Dictionary:
 	return result
 
 
-static func _make_ultimate_enhancement_description(owner, role_id: String) -> String:
+static func _make_ultimate_enhancement_description(_owner, _role_id: String) -> String:
 	return ""
 
 

@@ -3,6 +3,7 @@ extends RefCounted
 const ENEMY_VISUAL_DATA := preload("res://scripts/enemies/enemy_visual_data.gd")
 const PERFORMANCE_GUARD := preload("res://scripts/game/performance_guard.gd")
 const NON_BOSS_PROJECTILE_SPEED_MULTIPLIER := 0.6
+const ENEMY_PROJECTILE_POOL_GROUP := "enemy_projectile_pool"
 
 static func fire_shooter_pattern(enemy) -> void:
 	if enemy.target == null or not is_instance_valid(enemy.target):
@@ -51,24 +52,45 @@ static func spawn_projectile(enemy, origin: Vector2, shot_direction: Vector2, sh
 		return
 	if not PERFORMANCE_GUARD.can_spawn_in_group(current_scene, "enemy_projectiles", _get_enemy_projectile_limit(enemy)):
 		return
-	var projectile = enemy.projectile_scene.instantiate()
+	var projectile = _take_projectile_from_pool(current_scene)
+	if projectile == null:
+		projectile = enemy.projectile_scene.instantiate()
 	if projectile == null:
 		return
-	projectile.global_position = origin
-	projectile.direction = shot_direction.normalized()
 	var speed_multiplier := NON_BOSS_PROJECTILE_SPEED_MULTIPLIER if str(enemy.enemy_kind) != "boss" else 1.0
-	projectile.speed = shot_speed * speed_multiplier
-	projectile.damage = shot_damage
-	projectile.lifetime = shot_lifetime
-	projectile.visual_color = color
-	projectile.motion_mode = mode
-	projectile.target = enemy.target
+	if projectile.get_parent() == null:
+		current_scene.add_child(projectile)
+	elif projectile.get_parent() != current_scene:
+		projectile.get_parent().remove_child(projectile)
+		current_scene.add_child(projectile)
+	var config := {
+		"position": origin,
+		"direction": shot_direction.normalized(),
+		"speed": shot_speed * speed_multiplier,
+		"damage": shot_damage,
+		"lifetime": shot_lifetime,
+		"visual_color": color,
+		"motion_mode": mode,
+		"target": enemy.target
+	}
 	for key in extra_config.keys():
 		if key in ["split_speed", "return_speed"]:
-			projectile.set(key, float(extra_config[key]) * speed_multiplier)
+			config[key] = float(extra_config[key]) * speed_multiplier
 		else:
-			projectile.set(key, extra_config[key])
-	current_scene.add_child(projectile)
+			config[key] = extra_config[key]
+	if projectile.has_method("reset_projectile"):
+		projectile.reset_projectile(config)
+	else:
+		for key in config.keys():
+			projectile.set(key, config[key])
+
+static func _take_projectile_from_pool(current_scene: Node):
+	if current_scene == null or current_scene.get_tree() == null:
+		return null
+	for projectile in current_scene.get_tree().get_nodes_in_group(ENEMY_PROJECTILE_POOL_GROUP):
+		if projectile != null and is_instance_valid(projectile):
+			return projectile
+	return null
 
 static func get_projectile_color(enemy) -> Color:
 	return ENEMY_VISUAL_DATA.get_projectile_color(enemy.archetype_id)

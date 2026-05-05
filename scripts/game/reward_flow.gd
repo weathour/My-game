@@ -4,7 +4,11 @@ const STORY_PREP_SCENE_PATH := "res://scenes/story_prep.tscn"
 const SAVE_MANAGER := preload("res://scripts/save_manager.gd")
 const GAME_HUD_FLOW := preload("res://scripts/game/game_hud_flow.gd")
 const DIRECT_BLESSING_CHOICES_META := "direct_blessing_choices_remaining"
+const DIRECT_BLESSING_TIER_META := "direct_blessing_tier"
+const BLESSING_BINDING_CHOICE_META := "blessing_binding_choice"
+const BLESSING_BINDING_RETURN_CONTEXT_META := "blessing_binding_return_context"
 const DIRECT_BLESSING_CHOICE_COUNT := 2
+const DIRECT_BLESSING_TIER_TWO := 2
 
 static func show_level_up(main: Node, options: Array) -> void:
 	if main.game_over:
@@ -87,17 +91,32 @@ static func handle_upgrade_selected(main: Node, option_id: String, attribute_opt
 
 	main.get_tree().paused = false
 
-	if main.reward_context == "small_boss_blessing_choice":
-		_apply_player_upgrade(main, option_id)
-		var remaining_choices: int = max(0, int(main.get_meta(DIRECT_BLESSING_CHOICES_META, 1)) - 1)
-		main.set_meta(DIRECT_BLESSING_CHOICES_META, remaining_choices)
-		if remaining_choices > 0:
-			show_direct_blessing_choice(main, remaining_choices)
+	if main.reward_context == "blessing_binding_choice":
+		var choice: Dictionary = main.get_meta(BLESSING_BINDING_CHOICE_META, {})
+		var return_context := str(main.get_meta(BLESSING_BINDING_RETURN_CONTEXT_META, ""))
+		if main.player != null and main.player.has_method("apply_blessing_binding_choice"):
+			main.player.apply_blessing_binding_choice(choice, option_id)
+		if main.has_meta(BLESSING_BINDING_CHOICE_META):
+			main.remove_meta(BLESSING_BINDING_CHOICE_META)
+		if main.has_meta(BLESSING_BINDING_RETURN_CONTEXT_META):
+			main.remove_meta(BLESSING_BINDING_RETURN_CONTEXT_META)
+		if _show_pending_blessing_binding_choice(main, return_context):
 			return
-		main.remove_meta(DIRECT_BLESSING_CHOICES_META)
+		if return_context == "small_boss_blessing_choice":
+			_finish_direct_blessing_choice(main)
+			return
 		main.reward_context = ""
 		main._refresh_hud()
 		main._save_run_state()
+		if main.player != null and main.player.has_method("resume_pending_level_ups"):
+			main.player.resume_pending_level_ups()
+		return
+
+	if main.reward_context == "small_boss_blessing_choice":
+		_apply_player_upgrade(main, option_id)
+		if _show_pending_blessing_binding_choice(main):
+			return
+		_finish_direct_blessing_choice(main)
 		return
 
 	if main.reward_context == "level_up" and attribute_option_id != "" and main.player != null and main.player.has_method("apply_attribute_upgrade"):
@@ -106,8 +125,7 @@ static func handle_upgrade_selected(main: Node, option_id: String, attribute_opt
 		_apply_player_upgrade(main, option_id)
 		if attribute_option_id != "":
 			_apply_player_upgrade(main, attribute_option_id)
-		if attribute_option_id == "small_boss_choose_blessing":
-			show_direct_blessing_choice(main, DIRECT_BLESSING_CHOICE_COUNT)
+		if _show_pending_blessing_binding_choice(main):
 			return
 		if main.player != null and bool(main.player.get("level_up_active")):
 			main._refresh_hud()
@@ -118,9 +136,11 @@ static func handle_upgrade_selected(main: Node, option_id: String, attribute_opt
 		main._save_run_state()
 		return
 	if main.reward_context == "endless_boss_reward":
-		_apply_player_upgrade(main, option_id)
 		if option_id == "small_boss_choose_blessing":
-			show_direct_blessing_choice(main, DIRECT_BLESSING_CHOICE_COUNT)
+			show_direct_blessing_choice(main, DIRECT_BLESSING_CHOICE_COUNT, DIRECT_BLESSING_TIER_TWO)
+			return
+		_apply_player_upgrade(main, option_id)
+		if _show_pending_blessing_binding_choice(main):
 			return
 		main.reward_context = ""
 		main._refresh_hud()
@@ -128,6 +148,8 @@ static func handle_upgrade_selected(main: Node, option_id: String, attribute_opt
 		return
 
 	_apply_player_upgrade(main, option_id)
+	if _show_pending_blessing_binding_choice(main):
+		return
 
 	if main.reward_context == "final_core":
 		finish_stage_clear(main)
@@ -136,6 +158,8 @@ static func handle_upgrade_selected(main: Node, option_id: String, attribute_opt
 	main.reward_context = ""
 	main._refresh_hud()
 	main._save_run_state()
+	if main.player != null and main.player.has_method("resume_pending_level_ups"):
+		main.player.resume_pending_level_ups()
 
 static func show_small_boss_reward(main: Node) -> void:
 	if main.level_up_ui == null:
@@ -150,19 +174,23 @@ static func show_small_boss_reward(main: Node) -> void:
 	elif main.level_up_ui.has_method("show_menu"):
 		main.level_up_ui.show_menu("\u5c0f Boss \u5956\u52b1", options)
 
-static func show_direct_blessing_choice(main: Node, choices_remaining: int = DIRECT_BLESSING_CHOICE_COUNT) -> void:
+static func show_direct_blessing_choice(main: Node, choices_remaining: int = DIRECT_BLESSING_CHOICE_COUNT, tier: int = 0) -> void:
 	if main.game_over or main.player == null or main.level_up_ui == null:
 		return
 	if not main.level_up_ui.has_method("show_options"):
 		return
 	main.reward_context = "small_boss_blessing_choice"
 	main.set_meta(DIRECT_BLESSING_CHOICES_META, max(1, choices_remaining))
+	main.set_meta(DIRECT_BLESSING_TIER_META, tier)
 	main.get_tree().paused = true
 	var options: Array = []
-	if main.player.has_method("build_direct_blessing_options"):
+	if tier > 0 and main.player.has_method("build_tier_blessing_options"):
+		options = main.player.build_tier_blessing_options(tier)
+	elif main.player.has_method("build_direct_blessing_options"):
 		options = main.player.build_direct_blessing_options()
 	var offer_context := _get_current_blessing_offer_context(main)
-	offer_context["summary"] = "Boss 奖励：从全部祝福中自选。剩余 %d 次。" % max(1, choices_remaining)
+	var tier_text := "全部祝福" if tier <= 0 else "%s级祝福" % ("II" if tier >= 2 else "I")
+	offer_context["summary"] = "Boss 奖励：从%s中自选。剩余 %d 次。" % [tier_text, max(1, choices_remaining)]
 	main.level_up_ui.show_options(options, [], offer_context)
 
 static func show_endless_boss_reward(main: Node) -> void:
@@ -198,6 +226,42 @@ static func _get_current_blessing_offer_context(main: Node) -> Dictionary:
 	if main.player != null and main.player.has_method("get_current_blessing_offer_context"):
 		return main.player.get_current_blessing_offer_context()
 	return {}
+
+static func _show_pending_blessing_binding_choice(main: Node, return_context_override: String = "") -> bool:
+	if main.game_over or main.player == null or main.level_up_ui == null:
+		return false
+	if not main.player.has_method("consume_pending_blessing_binding_choice"):
+		return false
+	if not main.player.has_method("build_blessing_binding_options"):
+		return false
+	if not main.level_up_ui.has_method("show_menu"):
+		return false
+	var choice: Dictionary = main.player.consume_pending_blessing_binding_choice()
+	if choice.is_empty():
+		return false
+	var options: Array = main.player.build_blessing_binding_options(choice)
+	if options.is_empty():
+		return false
+	main.set_meta(BLESSING_BINDING_CHOICE_META, choice)
+	var return_context := return_context_override if return_context_override != "" else str(main.reward_context)
+	main.set_meta(BLESSING_BINDING_RETURN_CONTEXT_META, return_context)
+	main.reward_context = "blessing_binding_choice"
+	main.get_tree().paused = true
+	main.level_up_ui.show_menu("祝福绑定技能", options)
+	return true
+
+static func _finish_direct_blessing_choice(main: Node) -> void:
+	var remaining_choices: int = max(0, int(main.get_meta(DIRECT_BLESSING_CHOICES_META, 1)) - 1)
+	main.set_meta(DIRECT_BLESSING_CHOICES_META, remaining_choices)
+	if remaining_choices > 0:
+		show_direct_blessing_choice(main, remaining_choices, int(main.get_meta(DIRECT_BLESSING_TIER_META, 0)))
+		return
+	main.remove_meta(DIRECT_BLESSING_CHOICES_META)
+	if main.has_meta(DIRECT_BLESSING_TIER_META):
+		main.remove_meta(DIRECT_BLESSING_TIER_META)
+	main.reward_context = ""
+	main._refresh_hud()
+	main._save_run_state()
 
 static func _make_final_blank_upgrade_option() -> Dictionary:
 	return {

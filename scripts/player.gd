@@ -23,6 +23,7 @@ const PLAYER_AUTHORED_EFFECTS := preload("res://scripts/player/player_authored_e
 const PLAYER_PROJECTILE_SPAWNER := preload("res://scripts/player/player_projectile_spawner.gd")
 const PLAYER_DAMAGE_HELPERS := preload("res://scripts/player/player_damage_helpers.gd")
 const PLAYER_DAMAGE_RESOLVER := preload("res://scripts/player/player_damage_resolver.gd")
+const PLAYER_COMBAT_RESULT_FLOW := preload("res://scripts/player/player_combat_result_flow.gd")
 const PLAYER_COMBAT_MODIFIERS := preload("res://scripts/player/player_combat_modifiers.gd")
 const PLAYER_EQUIPMENT_FLOW := preload("res://scripts/player/player_equipment_flow.gd")
 const PLAYER_HEALTH_VISUALS := preload("res://scripts/player/player_health_visuals.gd")
@@ -88,6 +89,7 @@ const SWITCH_INVULNERABILITY := 0.2
 const ENERGY_PASSIVE_REGEN := 0.0
 const ENERGY_PER_HIT := 0.3
 const ENERGY_PER_KILL := 1.1
+const ULTIMATE_ENERGY_GAIN_GLOBAL_MULTIPLIER := 0.55
 const SMALL_ENEMY_KILL_ENERGY_MULTIPLIER := 0.75
 const BACKGROUND_ULTIMATE_ENERGY_GAIN_RATIO := 0.3
 const ULTIMATE_COST := 90.0
@@ -220,6 +222,7 @@ var background_cooldowns: Dictionary = {}
 var role_blessing_levels: Dictionary = {}
 var skill_blessing_levels: Dictionary = {}
 var blessing_skill_state: Dictionary = {}
+var pending_blessing_binding_choices: Array = []
 var current_blessing_offer: Dictionary = {}
 var elite_relics_unlocked: Dictionary = {}
 var equipment_levels: Dictionary = {}
@@ -254,6 +257,9 @@ var entry_blessing_role_id: String = ""
 var entry_blessing_label: String = ""
 var entry_blessing_remaining: float = 0.0
 var entry_lifesteal_ratio: float = 0.0
+var entry_rescue_remaining: float = 0.0
+var entry_rescue_regen_per_second: float = 0.0
+var lifesteal_proc_cooldown_remaining: float = 0.0
 var entry_haste_interval_bonus: float = 0.0
 var entry_haste_move_speed_multiplier: float = 1.0
 var standby_entry_role_id: String = ""
@@ -848,17 +854,77 @@ func compose_role_blessing(role_id: String, blessing_id: String) -> bool:
 func compose_skill_blessing(blessing_id: String) -> bool:
 	return PLAYER_BLESSING_SYSTEM.compose_skill_blessing(self, blessing_id)
 
-func _refresh_blessing_skill_unlocks() -> void:
-	for event in PLAYER_BLESSING_SKILL_STATE.refresh_unlocks(self):
+func _refresh_blessing_skill_unlocks(selected_blessing_id: String = "", selected_tier: int = 0, selected_binding: String = "") -> void:
+	for event in PLAYER_BLESSING_SKILL_STATE.refresh_unlocks(self, selected_blessing_id, selected_tier, selected_binding):
+		if str((event as Dictionary).get("type", "")) == "binding_choice":
+			pending_blessing_binding_choices.append(event)
+			continue
 		var title := str((event as Dictionary).get("title", "技能觉醒"))
 		_spawn_combat_tag(global_position + Vector2(0.0, -78.0), "%s 解锁" % title, Color(0.58, 0.95, 0.86, 1.0))
 	stats_changed.emit(get_stat_summary())
+
+func consume_pending_blessing_binding_choice() -> Dictionary:
+	if pending_blessing_binding_choices.is_empty():
+		return {}
+	return pending_blessing_binding_choices.pop_front()
+
+func build_blessing_binding_options(choice: Dictionary) -> Array:
+	var options: Array = []
+	var candidates: Array = choice.get("candidates", [])
+	for index in range(candidates.size()):
+		var candidate: Dictionary = candidates[index]
+		var skill_id := str(candidate.get("skill_id", ""))
+		var title := PLAYER_BLESSING_SKILL_STATE.get_skill_title(skill_id)
+		var action_text := "解锁" if str(candidate.get("action", "")) == "unlock" else "进化"
+		var target_tier := int(candidate.get("tier", 1))
+		options.append({
+			"id": "blessing_bind:%d" % index,
+			"title": "%s：%s%s" % [action_text, title, "II" if target_tier >= 2 else ""],
+			"description": "把本次祝福材料绑定到 %s，用于%s该技能。被绑定的祝福会从可用数量中扣除。" % [title, action_text],
+			"preview_description": "绑定到 %s。" % title,
+			"exact_description": "该选择会锁定本次配方材料；其他需要同祝福的技能不会获得这份材料。"
+		})
+	options.append({
+		"id": "blessing_bind_skip",
+		"title": "暂不绑定",
+		"description": "保留本次祝福的数值加成，但不把这份材料绑定给任何技能。该份材料会从技能配方可用数量中扣除。",
+		"preview_description": "不绑定给技能。",
+		"exact_description": "跳过本次技能解锁/进化，并锁定这份材料，避免同一份祝福反复弹出绑定选择。"
+	})
+	return options
+
+func apply_blessing_binding_choice(choice: Dictionary, option_id: String) -> bool:
+	if option_id == "blessing_bind_skip":
+		PLAYER_BLESSING_SKILL_STATE.lock_one_blessing_material(
+			self,
+			str(choice.get("binding", "")),
+			str(choice.get("blessing_id", "")),
+			int(choice.get("tier", 0))
+		)
+		return true
+	if not option_id.begins_with("blessing_bind:"):
+		return false
+	var index := int(option_id.trim_prefix("blessing_bind:"))
+	var candidates: Array = choice.get("candidates", [])
+	if index < 0 or index >= candidates.size():
+		return false
+	for event in PLAYER_BLESSING_SKILL_STATE.apply_recipe_candidate(self, candidates[index]):
+		var title := str((event as Dictionary).get("title", "技能"))
+		_spawn_combat_tag(global_position + Vector2(0.0, -78.0), "%s 解锁" % title, Color(0.58, 0.95, 0.86, 1.0))
+	stats_changed.emit(get_stat_summary())
+	return true
 
 func _is_blessing_skill_unlocked(skill_id: String) -> bool:
 	return PLAYER_BLESSING_SKILL_STATE.is_skill_unlocked(self, skill_id)
 
 func _get_blessing_skill_tier(skill_id: String) -> int:
 	return PLAYER_BLESSING_SKILL_STATE.get_skill_tier(self, skill_id)
+
+func _get_entry_rescue_regen_per_second() -> float:
+	return PLAYER_BLESSING_SKILL_STATE.get_entry_rescue_regen_per_second(self)
+
+func _get_hero_entry_effect() -> Dictionary:
+	return PLAYER_BLESSING_SKILL_STATE.get_hero_entry_effect(self)
 
 func _get_blessing_skill_quantity_count(skill_id: String) -> int:
 	return PLAYER_BLESSING_SKILL_STATE.get_quantity_extra_count(self, skill_id)
@@ -868,6 +934,9 @@ func _get_blessing_skill_combo_scales(skill_id: String) -> Array[float]:
 
 func _get_blessing_skill_duration_multiplier(skill_id: String) -> float:
 	return PLAYER_BLESSING_SKILL_STATE.get_duration_multiplier(self, skill_id)
+
+func get_skill_graph_text(role_id_filter: String = "") -> String:
+	return PLAYER_BLESSING_SKILL_STATE.get_skill_graph_text(self, role_id_filter)
 
 func _get_basic_attack_range_multiplier(skill_id: String) -> float:
 	return PLAYER_BLESSING_SKILL_STATE.get_basic_attack_range_multiplier(self, skill_id)
@@ -989,6 +1058,8 @@ func _update_timers(delta: float) -> void:
 			_try_request_level_up()
 	if switch_cooldown_remaining > 0.0:
 		switch_cooldown_remaining = max(0.0, switch_cooldown_remaining - delta)
+	if lifesteal_proc_cooldown_remaining > 0.0:
+		lifesteal_proc_cooldown_remaining = max(0.0, lifesteal_proc_cooldown_remaining - delta)
 	if enemy_move_slow_remaining > 0.0:
 		enemy_move_slow_remaining = max(0.0, enemy_move_slow_remaining - delta)
 		if enemy_move_slow_remaining <= 0.0:
@@ -1261,20 +1332,20 @@ func _trigger_ultimate_afterglow_pulse(role_id: String, pulse_index: int) -> voi
 func _schedule_repeating_sequence(interval: float, repeat_count: int, callback: Callable) -> void:
 	PLAYER_ULTIMATE_FLOW.schedule_repeating_sequence(self, interval, repeat_count, callback)
 
-func _fire_gunner_entry_wave(role_id: String, wave_index: int) -> void:
-	PLAYER_SWITCH_FLOW.fire_gunner_entry_wave(self, role_id, wave_index)
+func _fire_gunner_entry_wave(role_id: String, wave_index: int, damage_scale: float = 1.0) -> void:
+	PLAYER_SWITCH_FLOW.fire_gunner_entry_wave(self, role_id, wave_index, damage_scale)
 
-func _spawn_gunner_entry_wave_batch(role_id: String, wave_index: int, start_index: int) -> void:
-	PLAYER_SWITCH_FLOW.spawn_gunner_entry_wave_batch(self, role_id, wave_index, start_index)
+func _spawn_gunner_entry_wave_batch(role_id: String, wave_index: int, start_index: int, damage_scale: float = 1.0) -> void:
+	PLAYER_SWITCH_FLOW.spawn_gunner_entry_wave_batch(self, role_id, wave_index, start_index, damage_scale)
 
-func _start_mage_entry_bombardment(role_id: String, bombard_centers: Array) -> void:
-	PLAYER_SWITCH_FLOW.start_mage_entry_bombardment(self, role_id, bombard_centers)
+func _start_mage_entry_bombardment(role_id: String, bombard_centers: Array, damage_scale: float = 1.0) -> void:
+	PLAYER_SWITCH_FLOW.start_mage_entry_bombardment(self, role_id, bombard_centers, damage_scale)
 
 func _show_mage_entry_bombardment_warning(center: Vector2) -> void:
 	PLAYER_SWITCH_FLOW.show_mage_entry_bombardment_warning(self, center)
 
-func _trigger_mage_entry_bombardment_impact(role_id: String, center: Vector2) -> void:
-	PLAYER_SWITCH_FLOW.trigger_mage_entry_bombardment_impact(self, role_id, center)
+func _trigger_mage_entry_bombardment_impact(role_id: String, center: Vector2, damage_scale: float = 1.0) -> void:
+	PLAYER_SWITCH_FLOW.trigger_mage_entry_bombardment_impact(self, role_id, center, damage_scale)
 
 func _start_basic_mage_bombardment(center: Vector2, radius: float, damage_amount: float, vulnerability_bonus: float, slow_multiplier: float, slow_duration: float, gravity_level: int, echo_level: int, frost_level: int, role_id: String, use_boom_effect: bool = false, advance_attack_chain: bool = true) -> void:
 	PLAYER_MAGE_BOMBARDMENT_FLOW.start_basic_mage_bombardment(self, center, radius, damage_amount, vulnerability_bonus, slow_multiplier, slow_duration, gravity_level, echo_level, frost_level, role_id, use_boom_effect, advance_attack_chain)
@@ -1352,18 +1423,11 @@ func _deal_damage_to_enemy(enemy: Node, damage_amount: float, source_role_id: St
 func _damage_enemies_in_radius(center: Vector2, radius: float, damage_amount: float, vulnerability_bonus: float, slow_multiplier: float, slow_duration: float, source_role_id: String = "") -> int:
 	return PLAYER_DAMAGE_RESOLVER.damage_enemies_in_radius(self, center, radius, damage_amount, vulnerability_bonus, slow_multiplier, slow_duration, source_role_id)
 
+func _damage_enemies_in_radius_count_kills(center: Vector2, radius: float, damage_amount: float, vulnerability_bonus: float, slow_multiplier: float, slow_duration: float, source_role_id: String = "") -> Dictionary:
+	return PLAYER_DAMAGE_RESOLVER.damage_enemies_in_radius_count_kills(self, center, radius, damage_amount, vulnerability_bonus, slow_multiplier, slow_duration, source_role_id)
+
 func _pull_enemies_toward(center: Vector2, radius: float, pull_strength: float) -> void:
-	for enemy in get_tree().get_nodes_in_group("enemies"):
-		if not is_instance_valid(enemy):
-			continue
-		var distance: float = center.distance_to(enemy.global_position)
-		if distance <= 1.0 or distance > radius:
-			continue
-		var pull_step: float = min(pull_strength, distance - 4.0)
-		if pull_step <= 0.0:
-			continue
-		var pull_ratio: float = 1.0 - distance / radius
-		enemy.global_position = enemy.global_position.move_toward(center, max(4.0, pull_step * (0.55 + pull_ratio * 0.7)))
+	PLAYER_DAMAGE_RESOLVER.pull_enemies_toward(self, center, radius, pull_strength)
 
 func _damage_enemies_in_line(start_position: Vector2, end_position: Vector2, width: float, damage_amount: float, vulnerability_bonus: float, slow_multiplier: float, slow_duration: float, source_role_id: String = "") -> int:
 	return PLAYER_DAMAGE_RESOLVER.damage_enemies_in_line(self, start_position, end_position, width, damage_amount, vulnerability_bonus, slow_multiplier, slow_duration, source_role_id)
@@ -1519,6 +1583,15 @@ func _get_current_move_speed() -> float:
 func _get_role_damage(role_id: String) -> float:
 	return PLAYER_ROLE_STAT_FLOW.get_role_damage(self, role_id)
 
+func _get_active_role_base_health() -> float:
+	return PLAYER_ROLE_STAT_FLOW.get_active_role_base_health(self)
+
+func _get_active_role_max_health() -> float:
+	return PLAYER_ROLE_STAT_FLOW.get_active_role_max_health(self)
+
+func _sync_active_role_max_health(preserve_ratio: bool = true, restore_gain: bool = false) -> void:
+	PLAYER_ROLE_STAT_FLOW.sync_active_role_max_health(self, preserve_ratio, restore_gain)
+
 func _get_role_special_state(role_id: String) -> Dictionary:
 	return PLAYER_RESOURCE_FLOW.get_role_special_state(self, role_id)
 
@@ -1576,7 +1649,7 @@ func _add_kill_energy(amount: float) -> void:
 			continue
 		var gain_scale: float = 1.0 if role_id == active_role_id else BACKGROUND_ULTIMATE_ENERGY_GAIN_RATIO
 		var base_energy_gain_multiplier: float = energy_gain_multiplier - equipment_energy_gain_bonus + _get_role_equipment_energy_gain_bonus(role_id)
-		var adjusted_amount: float = amount * gain_scale * max(0.01, base_energy_gain_multiplier) * _get_ultimate_energy_gain_multiplier_for_role(role_id)
+		var adjusted_amount: float = amount * ULTIMATE_ENERGY_GAIN_GLOBAL_MULTIPLIER * gain_scale * max(0.01, base_energy_gain_multiplier) * _get_ultimate_energy_gain_multiplier_for_role(role_id)
 		if adjusted_amount <= 0.0:
 			continue
 		var updated_mana := _add_role_mana(role_id, adjusted_amount, false)
@@ -1622,22 +1695,7 @@ func _get_ultimate_level_damage_multiplier() -> float:
 	return PLAYER_ULTIMATE_FLOW.get_ultimate_level_damage_multiplier(self)
 
 func _register_attack_result(role_id: String, hit_count: int, killed: bool) -> void:
-	_apply_swordsman_low_health_flat_heal(role_id, hit_count)
-	_apply_role_flat_heal_on_hit(role_id, hit_count)
-	_apply_entry_lifesteal(role_id, hit_count, killed)
-	if killed and _has_elite_relic("elite_execution_pact") and not execution_pact_burst_active:
-		execution_pact_burst_active = true
-		_spawn_burst_effect(global_position + facing_direction * 20.0, 42.0, Color(1.0, 0.62, 0.4, 0.16), 0.16)
-		_damage_enemies_in_radius(global_position + facing_direction * 20.0, 42.0, _get_role_damage(role_id) * 0.34, 0.0, 1.0, 0.0)
-		execution_pact_burst_active = false
-	if killed and _has_elite_relic("elite_battle_frenzy"):
-		var previous_stacks := frenzy_stacks
-		frenzy_stacks = min(8, frenzy_stacks + 1)
-		frenzy_remaining = 5.0
-		if previous_stacks >= 8 and frenzy_stacks >= 8:
-			frenzy_overkill_counter += 1
-			if frenzy_overkill_counter >= 6:
-				frenzy_overkill_counter = 0
+	PLAYER_COMBAT_RESULT_FLOW.register_attack_result(self, role_id, hit_count, killed)
 
 
 func _apply_theme_hit_returns(role_id: String, hit_count: int, killed: bool) -> void:
@@ -1656,10 +1714,17 @@ func _apply_swordsman_low_health_flat_heal(role_id: String, hit_count: int) -> v
 func _apply_role_flat_heal_on_hit(role_id: String, hit_count: int) -> void:
 	if role_id == "" or hit_count <= 0:
 		return
-	var heal_amount: float = _get_role_blessing_stat_bonus(role_id, "flat_heal_on_hit")
-	if heal_amount <= 0.0:
+	var proc_chance: float = _get_role_blessing_stat_bonus(role_id, "flat_heal_on_hit")
+	if proc_chance <= 0.0:
 		return
-	_heal(heal_amount)
+	if lifesteal_proc_cooldown_remaining > 0.0:
+		return
+	var capped_hits: int = min(hit_count, PLAYER_COMBAT_RESULT_FLOW.LIFESTEAL_MAX_ROLL_HITS)
+	var combined_chance: float = 1.0 - pow(max(0.0, 1.0 - proc_chance), float(capped_hits))
+	if randf() > clamp(combined_chance, 0.0, PLAYER_COMBAT_RESULT_FLOW.LIFESTEAL_MAX_PROC_CHANCE):
+		return
+	lifesteal_proc_cooldown_remaining = PLAYER_COMBAT_RESULT_FLOW.LIFESTEAL_PROC_COOLDOWN
+	_heal(PLAYER_COMBAT_RESULT_FLOW.LIFESTEAL_PROC_HEAL_AMOUNT)
 
 func _apply_entry_lifesteal(role_id: String, hit_count: int, killed: bool) -> void:
 	if entry_blessing_remaining <= 0.0:
@@ -1702,17 +1767,11 @@ func _trigger_swordsman_counter() -> void:
 	var hits: int = _damage_enemies_in_radius(global_position, radius, damage_amount, 0.08 * counter_level, 1.0, 0.0)
 	if hits > 0:
 		_register_attack_result("swordsman", hits, false)
-		_heal(1.2 + counter_level * 0.5)
+		_heal(0.6 + counter_level * 0.25)
 		switch_invulnerability_remaining = max(switch_invulnerability_remaining, 0.05 + counter_level * 0.02)
 
 func _count_enemies_in_radius(center: Vector2, radius: float) -> int:
-	var count := 0
-	for enemy in get_tree().get_nodes_in_group("enemies"):
-		if not is_instance_valid(enemy):
-			continue
-		if center.distance_to(enemy.global_position) <= radius:
-			count += 1
-	return count
+	return PLAYER_DAMAGE_RESOLVER.count_enemies_in_radius(self, center, radius)
 
 func apply_upgrade(option_id: String) -> void:
 	PLAYER_UPGRADE_APPLIER.apply_upgrade(self, option_id)
@@ -1725,6 +1784,9 @@ func refresh_upgrade_options() -> Array:
 
 func build_direct_blessing_options() -> Array:
 	return PLAYER_LEVEL_FLOW.build_all_blessing_options(self)
+
+func build_tier_blessing_options(tier: int) -> Array:
+	return PLAYER_LEVEL_FLOW.build_tier_blessing_options(self, tier)
 
 func get_current_blessing_offer_context() -> Dictionary:
 	if current_blessing_offer is Dictionary:

@@ -23,7 +23,7 @@ static func get_remaining_capacity(root: Node, group_name: String, limit: int) -
 		return 999999
 	return max(0, limit - get_group_count(root, group_name))
 
-static func get_dynamic_limit(root: Node, group_name: String, fallback_limit: int) -> int:
+static func get_dynamic_limit(_root: Node, group_name: String, fallback_limit: int) -> int:
 	var limit := fallback_limit
 	if group_name == "enemies":
 		var fps := Engine.get_frames_per_second()

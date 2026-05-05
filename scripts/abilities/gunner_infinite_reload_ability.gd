@@ -3,6 +3,7 @@ extends RefCounted
 const COOLDOWN := 13.0
 const BASE_DURATION := 1.0
 const TIER_TWO_DURATION := 2.0
+const TIER_THREE_DURATION := 3.0
 const TICK_INTERVAL := 0.1
 const MAX_CATCH_UP_TICKS := 6
 const MAX_VISUALS := 7
@@ -19,6 +20,11 @@ const INFINITE_RELOAD_SKILL_ID := "infinite_reload"
 const TIER_TWO_RANGE_MULTIPLIER := 2.0
 const TIER_TWO_MOVE_SPEED_MULTIPLIER := 1.5
 const TIER_TWO_TICK_INTERVAL_MULTIPLIER := 0.58
+const TIER_THREE_RANGE_MULTIPLIER := 2.5
+const TIER_THREE_MOVE_SPEED_MULTIPLIER := 2.0
+const TIER_THREE_TICK_INTERVAL_MULTIPLIER := 0.38
+const TIER_TWO_DAMAGE_MULTIPLIER := 1.16
+const TIER_THREE_DAMAGE_MULTIPLIER := 1.36
 
 var cooldown_remaining: float = 0.0
 var active_remaining: float = 0.0
@@ -138,7 +144,7 @@ func _trigger_tick(owner) -> void:
 	var beam_length: float = BEAM_LENGTH * range_multiplier
 	var hit_width: float = BEAM_THICKNESS * BASE_WIDTH_MULTIPLIER * _get_width_multiplier(owner)
 	var base_origin: Vector2 = owner.global_position + aim_direction * 20.0
-	var damage_amount: float = float(owner._get_role_damage("gunner")) * 0.52 * (1.16 if _get_tier(owner) >= 2 else 1.0)
+	var damage_amount: float = float(owner._get_role_damage("gunner")) * 0.52 * _get_damage_multiplier(owner)
 	_spawn_visuals(owner, base_origin, aim_direction, beam_length, hit_width)
 	var hit_center: Vector2 = base_origin + aim_direction * (beam_length * 0.5)
 	var hit_count: int = int(owner._damage_enemies_in_oriented_rect(hit_center, aim_direction, beam_length, hit_width, damage_amount, 0.0, 1.0, 0.0, "gunner"))
@@ -177,19 +183,29 @@ func _cleanup_effects() -> void:
 	effects = valid_effects
 
 func _get_duration(owner) -> float:
-	var duration := TIER_TWO_DURATION if _get_tier(owner) >= 2 else BASE_DURATION
+	var tier: int = _get_tier(owner)
+	var duration := BASE_DURATION
+	if tier >= 3:
+		duration = TIER_THREE_DURATION
+	elif tier >= 2:
+		duration = TIER_TWO_DURATION
 	if owner != null and owner.has_method("_get_blessing_skill_duration_multiplier"):
 		duration *= float(owner._get_blessing_skill_duration_multiplier(INFINITE_RELOAD_SKILL_ID))
 	return duration
 
 func _get_range_multiplier(owner) -> float:
-	var tier_multiplier := TIER_TWO_RANGE_MULTIPLIER if _get_tier(owner) >= 2 else 1.0
+	var tier: int = _get_tier(owner)
+	var tier_multiplier := 1.0
+	if tier >= 3:
+		tier_multiplier = TIER_THREE_RANGE_MULTIPLIER
+	elif tier >= 2:
+		tier_multiplier = TIER_TWO_RANGE_MULTIPLIER
 	return float(owner._get_infinite_reload_range_multiplier()) * tier_multiplier
 
-func _get_width_multiplier(owner) -> float:
+func _get_width_multiplier(_owner) -> float:
 	return 1.0
 
-func _get_max_visuals(owner) -> int:
+func _get_max_visuals(_owner) -> int:
 	return MAX_VISUALS
 
 func _get_visuals_per_tick(owner) -> int:
@@ -211,7 +227,27 @@ func _get_tier(owner) -> int:
 	return 1
 
 func _get_tick_interval(owner) -> float:
-	return TICK_INTERVAL * (TIER_TWO_TICK_INTERVAL_MULTIPLIER if _get_tier(owner) >= 2 else 1.0)
+	var tier: int = _get_tier(owner)
+	if tier >= 3:
+		return TICK_INTERVAL * TIER_THREE_TICK_INTERVAL_MULTIPLIER
+	if tier >= 2:
+		return TICK_INTERVAL * TIER_TWO_TICK_INTERVAL_MULTIPLIER
+	return TICK_INTERVAL
 
 func get_move_speed_multiplier(owner) -> float:
-	return TIER_TWO_MOVE_SPEED_MULTIPLIER if is_active() and _get_tier(owner) >= 2 else 1.0
+	if not is_active():
+		return 1.0
+	var tier: int = _get_tier(owner)
+	if tier >= 3:
+		return TIER_THREE_MOVE_SPEED_MULTIPLIER
+	if tier >= 2:
+		return TIER_TWO_MOVE_SPEED_MULTIPLIER
+	return 1.0
+
+func _get_damage_multiplier(owner) -> float:
+	var tier: int = _get_tier(owner)
+	if tier >= 3:
+		return TIER_THREE_DAMAGE_MULTIPLIER
+	if tier >= 2:
+		return TIER_TWO_DAMAGE_MULTIPLIER
+	return 1.0

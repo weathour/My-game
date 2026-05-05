@@ -133,6 +133,8 @@ static func update_visuals(owner: Node, role_data: Dictionary, active_role_visua
 
 static func update_active_role_state(owner) -> void:
 	var role_data: Dictionary = owner._get_active_role()
+	if owner.has_method("_sync_active_role_max_health"):
+		owner._sync_active_role_max_health(true, false)
 	owner._sync_active_role_ultimate_state()
 	update_visuals(owner, role_data, owner.active_role_visual_hidden, owner.active_role_visual_hidden_role_id)
 	owner._update_hurt_core_visual(role_data)

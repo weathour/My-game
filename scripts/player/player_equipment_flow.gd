@@ -244,11 +244,14 @@ static func recalculate_active_equipment_stats(owner, restore_new_health_bonus: 
 	owner.speed = max(0.0, owner.speed - old_speed_bonus + owner.equipment_speed_bonus)
 	owner.energy_gain_multiplier = max(0.01, owner.energy_gain_multiplier - old_energy_bonus + owner.equipment_energy_gain_bonus)
 	var health_delta: float = owner.equipment_max_health_bonus - old_health_bonus
-	owner.max_health = max(1.0, owner.max_health + health_delta)
-	if restore_new_health_bonus and health_delta > 0.0:
-		owner.current_health = min(owner.max_health, owner.current_health + health_delta)
+	if owner.has_method("_sync_active_role_max_health"):
+		owner._sync_active_role_max_health(false, restore_new_health_bonus and health_delta > 0.0)
 	else:
-		owner.current_health = min(owner.current_health, owner.max_health)
+		owner.max_health = max(1.0, owner.max_health + health_delta)
+		if restore_new_health_bonus and health_delta > 0.0:
+			owner.current_health = min(owner.max_health, owner.current_health + health_delta)
+		else:
+			owner.current_health = min(owner.current_health, owner.max_health)
 	if not is_equal_approx(old_cooldown_multiplier, owner.equipment_cooldown_multiplier):
 		var remaining_scale: float = owner.equipment_cooldown_multiplier / max(old_cooldown_multiplier, 0.001)
 		_scale_active_cooldowns(owner, remaining_scale)

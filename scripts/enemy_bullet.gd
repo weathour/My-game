@@ -4,6 +4,8 @@ const ENEMY_BULLET_SCENE_PATH := "res://scenes/enemy_bullet.tscn"
 const ENEMY_BULLET_SCENE := preload("res://scenes/enemy_bullet.tscn")
 const PERFORMANCE_GUARD := preload("res://scripts/game/performance_guard.gd")
 const MAX_TURN_CATCH_UP_TICKS := 8
+const POOL_GROUP := "enemy_projectile_pool"
+const POOL_SOFT_LIMIT := 96
 
 @export var speed: float = 260.0
 @export var damage: float = 8.0
@@ -46,8 +48,66 @@ var turn_delay_remaining: float = 0.0
 var turn_tick_remaining: float = 0.0
 var return_started: bool = false
 var split_performed: bool = false
+var pooled: bool = false
 
 func _ready() -> void:
+	if pooled:
+		return
+	_initialize_runtime_state()
+
+func reset_projectile(config: Dictionary) -> void:
+	pooled = false
+	show()
+	set_process(true)
+	set_physics_process(true)
+	global_position = config.get("position", global_position)
+	direction = (config.get("direction", Vector2.RIGHT) as Vector2).normalized()
+	speed = float(config.get("speed", speed))
+	damage = float(config.get("damage", damage))
+	lifetime = float(config.get("lifetime", lifetime))
+	hit_radius = float(config.get("hit_radius", hit_radius))
+	visual_color = config.get("visual_color", visual_color)
+	motion_mode = str(config.get("motion_mode", motion_mode))
+	target = config.get("target", target)
+	sine_amplitude = float(config.get("sine_amplitude", sine_amplitude))
+	sine_frequency = float(config.get("sine_frequency", sine_frequency))
+	sine_phase = float(config.get("sine_phase", sine_phase))
+	turn_start_delay = float(config.get("turn_start_delay", turn_start_delay))
+	turn_interval = float(config.get("turn_interval", turn_interval))
+	turn_angle_step = float(config.get("turn_angle_step", turn_angle_step))
+	turn_direction_sign = float(config.get("turn_direction_sign", turn_direction_sign))
+	quarter_sine_distance = float(config.get("quarter_sine_distance", quarter_sine_distance))
+	quarter_sine_side = float(config.get("quarter_sine_side", quarter_sine_side))
+	return_after = float(config.get("return_after", return_after))
+	return_speed = float(config.get("return_speed", return_speed))
+	return_target_x = float(config.get("return_target_x", return_target_x))
+	return_target_y = float(config.get("return_target_y", return_target_y))
+	split_on_return = bool(config.get("split_on_return", split_on_return))
+	split_count = int(config.get("split_count", split_count))
+	split_speed = float(config.get("split_speed", split_speed))
+	split_damage_scale = float(config.get("split_damage_scale", split_damage_scale))
+	split_lifetime = float(config.get("split_lifetime", split_lifetime))
+	split_motion_mode = str(config.get("split_motion_mode", split_motion_mode))
+	split_after_time = float(config.get("split_after_time", split_after_time))
+	split_pattern = str(config.get("split_pattern", split_pattern))
+	split_spread = float(config.get("split_spread", split_spread))
+	size_scale = float(config.get("size_scale", size_scale))
+	_initialize_runtime_state()
+
+func recycle() -> void:
+	var tree := get_tree()
+	if tree != null and tree.get_node_count_in_group(POOL_GROUP) >= POOL_SOFT_LIMIT:
+		queue_free()
+		return
+	pooled = true
+	hide()
+	set_process(false)
+	set_physics_process(false)
+	remove_from_group("enemy_projectiles")
+	add_to_group(POOL_GROUP)
+	target = null
+
+func _initialize_runtime_state() -> void:
 	direction = direction.normalized()
 	if direction == Vector2.ZERO:
 		direction = Vector2.RIGHT
@@ -56,6 +116,11 @@ func _ready() -> void:
 	perpendicular_direction = base_direction.orthogonal().normalized()
 	turn_delay_remaining = turn_start_delay
 	turn_tick_remaining = turn_interval
+	travel_time = 0.0
+	forward_distance = 0.0
+	return_started = false
+	split_performed = false
+	remove_from_group(POOL_GROUP)
 	add_to_group("enemy_projectiles")
 	_apply_visuals()
 
@@ -64,7 +129,7 @@ func _physics_process(delta: float) -> void:
 	if lifetime <= 0.0:
 		if motion_mode == "returning_sine" and split_on_return and not split_performed:
 			_spawn_split_bullets()
-		queue_free()
+		recycle()
 		return
 
 	travel_time += delta
@@ -84,7 +149,7 @@ func _physics_process(delta: float) -> void:
 
 	if split_after_time > 0.0 and not split_performed and travel_time >= split_after_time:
 		_spawn_split_bullets()
-		queue_free()
+		recycle()
 		return
 
 	_try_hit_player()
@@ -137,7 +202,7 @@ func _update_returning_sine_motion(delta: float) -> bool:
 		global_position = return_target
 		if split_on_return and not split_performed:
 			_spawn_split_bullets()
-		queue_free()
+		recycle()
 		return true
 
 	direction = to_target.normalized()
@@ -159,7 +224,7 @@ func _try_hit_player() -> void:
 		return
 	if target.has_method("take_damage"):
 		target.take_damage(damage)
-	queue_free()
+	recycle()
 
 func _spawn_split_bullets() -> void:
 	split_performed = true
@@ -190,21 +255,24 @@ func _spawn_split_bullets() -> void:
 		else:
 			var shot_angle := TAU * float(index) / float(count)
 			shot_direction = Vector2.RIGHT.rotated(shot_angle)
-		bullet.global_position = global_position
-		bullet.direction = shot_direction
-		bullet.speed = split_speed
-		bullet.damage = damage * split_damage_scale
-		bullet.lifetime = split_lifetime
-		bullet.hit_radius = max(10.0, hit_radius * 0.8)
-		bullet.visual_color = visual_color.lightened(0.18)
-		bullet.motion_mode = split_motion_mode
-		bullet.sine_amplitude = max(18.0, sine_amplitude * 0.55)
-		bullet.sine_frequency = max(1.0, sine_frequency + 0.2)
-		bullet.quarter_sine_distance = max(120.0, quarter_sine_distance * 0.72)
-		bullet.quarter_sine_side = -1.0 if index % 2 == 0 else 1.0
-		bullet.size_scale = max(0.7, size_scale * 0.75)
-		bullet.target = target
 		current_scene.add_child(bullet)
+		if bullet.has_method("reset_projectile"):
+			bullet.reset_projectile({
+				"position": global_position,
+				"direction": shot_direction,
+				"speed": split_speed,
+				"damage": damage * split_damage_scale,
+				"lifetime": split_lifetime,
+				"hit_radius": max(10.0, hit_radius * 0.8),
+				"visual_color": visual_color.lightened(0.18),
+				"motion_mode": split_motion_mode,
+				"sine_amplitude": max(18.0, sine_amplitude * 0.55),
+				"sine_frequency": max(1.0, sine_frequency + 0.2),
+				"quarter_sine_distance": max(120.0, quarter_sine_distance * 0.72),
+				"quarter_sine_side": -1.0 if index % 2 == 0 else 1.0,
+				"size_scale": max(0.7, size_scale * 0.75),
+				"target": target
+			})
 
 func _apply_visuals() -> void:
 	var polygon := get_node_or_null("Polygon2D") as Polygon2D

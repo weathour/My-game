@@ -4,6 +4,7 @@ const ENEMY_DIRECTOR := preload("res://scripts/enemy/enemy_director.gd")
 const ENEMY_ARCHETYPE_DATABASE := preload("res://scripts/enemy/enemy_archetype_database.gd")
 const PERFORMANCE_GUARD := preload("res://scripts/game/performance_guard.gd")
 const SPAWN_WARNING_VIEW := preload("res://scripts/game/enemy_spawn_warning_view.gd")
+const SPAWN_WARNING_BATCH := preload("res://scripts/game/spawn_warning_batch.gd")
 
 const MAP_SPAWN_MARGIN := 36.0
 const MAP_SPAWN_EDGE_EPSILON := 0.5
@@ -242,7 +243,9 @@ static func get_spawn_position(main: Node, angle: float, distance: float) -> Vec
 static func get_enemy_profile(main: Node, kind: String, archetype: String) -> Dictionary:
 	var profile := ENEMY_ARCHETYPE_DATABASE.get_profile(kind, archetype)
 	if main != null and main.has_method("_apply_difficulty_to_enemy_profile"):
-		return main._apply_difficulty_to_enemy_profile(kind, profile)
+		profile = main._apply_difficulty_to_enemy_profile(kind, profile)
+	if main != null and bool(main.get("endless_mode_active")):
+		profile = ENEMY_DIRECTOR.apply_endless_cycle_to_enemy_profile(kind, profile, int(main.get("defeated_boss_count")))
 	return profile
 
 static func has_active_special_enemy(main: Node, kind: String) -> bool:
@@ -251,6 +254,16 @@ static func has_active_special_enemy(main: Node, kind: String) -> bool:
 	return str(main.boss_enemy.get("enemy_kind")) == kind
 
 static func _show_enemy_spawn_warning(main: Node, archetype: String, health_multiplier: float, speed_multiplier: float, damage_multiplier: float, spawn_position: Vector2) -> void:
+	var batch: Node = _get_spawn_warning_batch(main)
+	if batch != null:
+		batch.add_warning(spawn_position, SPAWN_WARNING_RADIUS, {
+			"archetype": archetype,
+			"health_multiplier": health_multiplier,
+			"speed_multiplier": speed_multiplier,
+			"damage_multiplier": damage_multiplier,
+			"spawn_position": spawn_position
+		})
+		return
 	var warning := SPAWN_WARNING_VIEW.new()
 	warning.global_position = spawn_position
 	main.add_child(warning)
@@ -258,6 +271,27 @@ static func _show_enemy_spawn_warning(main: Node, archetype: String, health_mult
 		_spawn_after_warning(main, archetype, health_multiplier, speed_multiplier, damage_multiplier, spawn_position)
 	, CONNECT_ONE_SHOT)
 	warning.configure(SPAWN_WARNING_RADIUS)
+
+static func _get_spawn_warning_batch(main: Node) -> Node:
+	if main == null or not is_instance_valid(main):
+		return null
+	var batch: Node = main.get_node_or_null("SpawnWarningBatch")
+	if batch == null:
+		batch = SPAWN_WARNING_BATCH.new()
+		batch.name = "SpawnWarningBatch"
+		main.add_child(batch)
+		batch.warning_finished.connect(func(entry: Dictionary) -> void:
+			var payload: Dictionary = entry.get("payload", {})
+			_spawn_after_warning(
+				main,
+				str(payload.get("archetype", "chaser")),
+				float(payload.get("health_multiplier", 1.0)),
+				float(payload.get("speed_multiplier", 1.0)),
+				float(payload.get("damage_multiplier", 1.0)),
+				payload.get("spawn_position", Vector2.ZERO)
+			)
+		)
+	return batch
 
 static func _spawn_after_warning(main: Node, archetype: String, health_multiplier: float, speed_multiplier: float, damage_multiplier: float, spawn_position: Vector2) -> void:
 	if main == null or not is_instance_valid(main) or bool(main.get("game_over")):
