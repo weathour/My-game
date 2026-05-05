@@ -89,7 +89,7 @@ static func handle_upgrade_selected(main: Node, option_id: String, attribute_opt
 
 	if main.reward_context == "small_boss_blessing_choice":
 		_apply_player_upgrade(main, option_id)
-		var remaining_choices := max(0, int(main.get_meta(DIRECT_BLESSING_CHOICES_META, 1)) - 1)
+		var remaining_choices: int = max(0, int(main.get_meta(DIRECT_BLESSING_CHOICES_META, 1)) - 1)
 		main.set_meta(DIRECT_BLESSING_CHOICES_META, remaining_choices)
 		if remaining_choices > 0:
 			show_direct_blessing_choice(main, remaining_choices)
