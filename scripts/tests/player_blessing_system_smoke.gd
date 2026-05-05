@@ -13,6 +13,7 @@ func _run() -> void:
 	_check_low_level_tier_one_only()
 	_check_tier_two_independent_offer_after_level_twelve()
 	_check_tier_two_weight_increases_with_level()
+	_check_blessing_offer_refresh_is_once_per_offer()
 	_check_blessings_stack_to_level_cap()
 	_check_random_and_tier_specific_blessing_rewards()
 	_check_manual_compose_from_tier_one_level_three()
@@ -75,6 +76,23 @@ func _check_tier_two_weight_increases_with_level() -> void:
 	var high_count := _count_tier_two_options(high_owner, 80)
 	if high_count <= low_count:
 		failures.append("tier II should become more common at higher levels, low=%d high=%d" % [low_count, high_count])
+
+
+func _check_blessing_offer_refresh_is_once_per_offer() -> void:
+	var owner := _OwnerStub.new()
+	owner.level = 8
+	var offer: Dictionary = PlayerBlessingSystem.build_offer_for_owner(owner)
+	var context: Dictionary = offer.get("context", {})
+	if int(context.get("refresh_limit", 0)) != 1 or int(context.get("refresh_remaining", 0)) != 1:
+		failures.append("blessing offer should start with one refresh, got %s" % str(context))
+	var refreshed_offer: Dictionary = PlayerBlessingSystem.refresh_offer_for_owner(owner, offer)
+	var refreshed_context: Dictionary = refreshed_offer.get("context", {})
+	if int(refreshed_context.get("refresh_limit", 0)) != 1 or int(refreshed_context.get("refresh_remaining", 0)) != 0:
+		failures.append("blessing offer refresh should be consumed after one use, got %s" % str(refreshed_context))
+	var next_offer: Dictionary = PlayerBlessingSystem.build_offer_for_owner(owner)
+	var next_context: Dictionary = next_offer.get("context", {})
+	if int(next_context.get("refresh_limit", 0)) != 1 or int(next_context.get("refresh_remaining", 0)) != 1:
+		failures.append("new blessing offer should restore one refresh, got %s" % str(next_context))
 
 
 func _check_blessings_stack_to_level_cap() -> void:

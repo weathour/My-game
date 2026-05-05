@@ -180,6 +180,8 @@ func _on_refresh_pressed() -> void:
 		return
 	if int(current_offer_context.get("refresh_remaining", 0)) <= 0:
 		return
+	current_offer_context["refresh_remaining"] = 0
+	_configure_level_up_footer()
 	upgrade_refresh_requested.emit()
 
 func _rebuild_level_up_list() -> void:

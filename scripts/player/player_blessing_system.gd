@@ -7,6 +7,7 @@ const TIER_II_UNLOCK_LEVEL := 12
 const TIER_II_FULL_LEVEL := 20
 const MANUAL_COMPOSE_TIER_ONE_LEVEL := 3
 const MAX_BLESSING_COUNT_PER_TIER := 6
+const OFFER_REFRESH_LIMIT := 1
 const OPTION_PREFIX := "blessing:"
 const ROLE_BOUND := "role"
 const SKILL_BOUND := "skill"
@@ -144,8 +145,8 @@ static func build_offer_for_owner(owner) -> Dictionary:
 		"options": options,
 		"context": {
 			"offer_mode": "blessing",
-			"refresh_limit": 999,
-			"refresh_remaining": 999,
+			"refresh_limit": OFFER_REFRESH_LIMIT,
+			"refresh_remaining": OFFER_REFRESH_LIMIT,
 			"refresh_button_label": "重新随机",
 			"summary": "祝福三选一；英雄特性训练仍可同时选择。"
 		}
@@ -183,8 +184,16 @@ static func build_tier_offer_for_owner(owner, tier: int) -> Dictionary:
 	}
 
 
-static func refresh_offer_for_owner(owner, _current_offer: Dictionary) -> Dictionary:
-	return build_offer_for_owner(owner)
+static func refresh_offer_for_owner(owner, current_offer: Dictionary) -> Dictionary:
+	var offer := build_offer_for_owner(owner)
+	var current_context: Dictionary = current_offer.get("context", {}) if current_offer.get("context", {}) is Dictionary else {}
+	var next_context: Dictionary = offer.get("context", {}) if offer.get("context", {}) is Dictionary else {}
+	var refresh_limit: int = max(0, int(current_context.get("refresh_limit", next_context.get("refresh_limit", OFFER_REFRESH_LIMIT))))
+	var refresh_remaining: int = max(0, int(current_context.get("refresh_remaining", refresh_limit)) - 1)
+	next_context["refresh_limit"] = refresh_limit
+	next_context["refresh_remaining"] = refresh_remaining
+	offer["context"] = next_context
+	return offer
 
 
 static func apply_option(owner, option_id: String) -> bool:
