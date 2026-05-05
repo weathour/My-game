@@ -666,7 +666,7 @@ static func get_skill_graph_text(owner, role_id_filter: String = "") -> String:
 	var lines: Array[String] = []
 	for entry in get_skill_graph_entries(owner, role_id_filter):
 		var role_id := str(entry.get("role_id", ""))
-		if role_id_filter != "" and role_id != role_id_filter:
+		if role_id_filter != "" and role_id != "" and role_id != role_id_filter:
 			continue
 		var current_tier: int = int(entry.get("current_tier", 0))
 		var action := str(entry.get("action", "complete"))

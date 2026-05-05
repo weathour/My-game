@@ -30,6 +30,7 @@ func _run() -> void:
 	_check_skill_unlock_uses_skill_role_not_active_role()
 	_check_ultimate_skills_are_always_available_and_evolve()
 	_check_shared_entry_skills_unlock_and_do_not_lock_materials()
+	_check_shared_entry_skills_visible_in_role_graph()
 	if failures.is_empty():
 		print("PLAYER_BLESSING_SYSTEM_SMOKE_OK")
 		quit(0)
@@ -491,6 +492,15 @@ func _check_shared_entry_skills_unlock_and_do_not_lock_materials() -> void:
 		failures.append("entry rescue tier III should grant 1.5 regen per second")
 	if int(PlayerBlessingSkillState.get_hero_entry_effect(owner).get("extra_count", 0)) != 2:
 		failures.append("hero entry tier III should grant two extra entry segments")
+
+
+func _check_shared_entry_skills_visible_in_role_graph() -> void:
+	var owner := _OwnerStub.new()
+	var text := PlayerBlessingSkillState.get_skill_graph_text(owner, "swordsman")
+	if not text.contains(PlayerBlessingSkillState.get_skill_title(PlayerBlessingSkillState.SKILL_ENTRY_RESCUE)):
+		failures.append("shared entry rescue should be visible in role-filtered skill graph")
+	if not text.contains(PlayerBlessingSkillState.get_skill_title(PlayerBlessingSkillState.SKILL_HERO_ENTRY)):
+		failures.append("shared hero entry should be visible in role-filtered skill graph")
 
 
 class _OwnerStub:
