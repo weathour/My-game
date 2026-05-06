@@ -1378,10 +1378,10 @@ func _resolve_basic_mage_bombardment_damage(center: Vector2, radius: float, dama
 func _get_enemy_nearest_to_position(position: Vector2) -> Node2D:
 	if position == Vector2.ZERO:
 		return _get_closest_enemy()
-	return PLAYER_TARGETING.get_enemy_nearest_to_position(get_tree().get_nodes_in_group("enemies"), position)
+	return PLAYER_TARGETING.get_enemy_nearest_to_position(_get_live_enemies(), position)
 
 func _get_enemy_near_position(position: Vector2, max_distance: float) -> Node2D:
-	return PLAYER_TARGETING.get_enemy_near_position(get_tree().get_nodes_in_group("enemies"), position, max_distance)
+	return PLAYER_TARGETING.get_enemy_near_position(_get_live_enemies(), position, max_distance)
 
 func _get_mage_mouse_bombard_center(base_range: float) -> Vector2:
 	return PLAYER_MAGE_BOMBARDMENT_FLOW.get_mage_mouse_bombard_center(self, base_range)
@@ -1638,6 +1638,12 @@ func _get_role_special_state(role_id: String) -> Dictionary:
 
 func _get_closest_enemy() -> Node2D:
 	return PLAYER_TARGETING.get_owner_closest_enemy(self)
+
+func _get_live_enemies() -> Array:
+	return PLAYER_DAMAGE_RESOLVER._get_live_enemies(self)
+
+func _get_candidate_enemies_for_circle(center: Vector2, radius: float) -> Array:
+	return PLAYER_DAMAGE_RESOLVER._get_candidate_enemies_for_circle(self, center, radius)
 
 func _get_farthest_enemy() -> Node2D:
 	return PLAYER_TARGETING.get_owner_farthest_enemy(self)

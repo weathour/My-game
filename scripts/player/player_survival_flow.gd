@@ -181,7 +181,8 @@ static func check_enemy_contact_damage(owner) -> void:
 
 	var hurtbox_center: Vector2 = owner.get_hurtbox_center()
 	var hurtbox_radius: float = owner.get_hurtbox_radius()
-	for enemy in owner.get_tree().get_nodes_in_group("enemies"):
+	var candidates: Array = owner._get_candidate_enemies_for_circle(hurtbox_center, hurtbox_radius + 36.0)
+	for enemy in candidates:
 		if not is_instance_valid(enemy):
 			continue
 		var contact_radius: float = 36.0

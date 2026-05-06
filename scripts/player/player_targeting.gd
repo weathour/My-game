@@ -1,5 +1,7 @@
 extends RefCounted
 
+const PLAYER_DAMAGE_RESOLVER := preload("res://scripts/player/player_damage_resolver.gd")
+
 const CLUSTER_CELL_SIZE := 120.0
 const CLUSTER_RADIUS := 120.0
 const CLUSTER_RADIUS_SQUARED := CLUSTER_RADIUS * CLUSTER_RADIUS
@@ -7,6 +9,8 @@ const CLOSE_CLUSTER_RADIUS := 90.0
 const CLOSE_CLUSTER_RADIUS_SQUARED := CLOSE_CLUSTER_RADIUS * CLOSE_CLUSTER_RADIUS
 
 static func get_enemy_nodes(owner) -> Array:
+	if owner != null and owner.has_method("_get_live_enemies"):
+		return owner._get_live_enemies()
 	return owner.get_tree().get_nodes_in_group("enemies")
 
 
