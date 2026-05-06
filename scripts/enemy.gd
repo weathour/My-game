@@ -1,4 +1,4 @@
-extends CharacterBody2D
+extends Node2D
 
 @warning_ignore("unused_signal")
 signal defeated(enemy_kind: String)
@@ -158,11 +158,10 @@ var boss_phase_charge_rings: Array[Line2D] = []
 var boss_visual_instance: Node2D
 var profile_initialized: bool = false
 var hit_flash_remaining: float = 0.0
+# Explicit velocity (was inherited from CharacterBody2D)
+var velocity: Vector2 = Vector2.ZERO
 
 func _ready() -> void:
-	motion_mode = CharacterBody2D.MOTION_MODE_FLOATING
-	collision_layer = 0
-	collision_mask = 0
 	current_health = max_health if current_health <= 0.0 else min(current_health, max_health)
 	base_scale = scale
 	if enemy_kind == "":

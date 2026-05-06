@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://decmtco0m7k2j" path="res://scripts/enemy.gd" id="1_7p1mj"]
 
-[node name="Enemy" type="CharacterBody2D" unique_id=1363413956]
+[node name="Enemy" type="Node2D" unique_id=1363413956]
 script = ExtResource("1_7p1mj")
 
 [node name="Polygon2D" type="Polygon2D" parent="." unique_id=950798090]
