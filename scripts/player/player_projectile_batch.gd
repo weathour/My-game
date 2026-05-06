@@ -1,5 +1,6 @@
 extends Node2D
 
+const PLAYER_DAMAGE_RESOLVER := preload("res://scripts/player/player_damage_resolver.gd")
 const PERFORMANCE_COUNTERS := preload("res://scripts/game/performance_counters.gd")
 
 const MAX_BATCHED_PROJECTILES := 1800
@@ -157,10 +158,12 @@ func _check_projectile_hits() -> void:
 	if source_player == null or not is_instance_valid(source_player):
 		_clear_projectiles()
 		return
-	var enemies: Array = _get_live_enemies()
+	var enemies: Array = PLAYER_DAMAGE_RESOLVER._get_live_enemies(source_player)
 	if enemies.is_empty() or positions.is_empty():
 		return
-	var enemy_grid: Dictionary = _build_enemy_grid(enemies)
+	var enemy_grid: Dictionary = PLAYER_DAMAGE_RESOLVER._get_enemy_grid(source_player)
+	if enemy_grid.is_empty():
+		return
 	var checks_done := 0
 	var checked_projectiles := 0
 	while checked_projectiles < positions.size() and checks_done < MAX_HIT_CHECKS_PER_FRAME:
