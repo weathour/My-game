@@ -156,7 +156,6 @@ func _ready() -> void:
 	add_to_group("enemies")
 	if not profile_initialized:
 		_reset_runtime_state(true)
-	_ensure_status_visuals()
 	_apply_visuals()
 	if enemy_kind == "boss":
 		_ensure_boss_visual()
@@ -171,12 +170,11 @@ func _physics_process(delta: float) -> void:
 
 	if target == null or not is_instance_valid(target):
 		velocity = Vector2.ZERO
-		move_and_slide()
 		return
 
 	_update_behavior_state(delta)
 	velocity = _compute_velocity(delta)
-	move_and_slide()
+	_apply_direct_motion(delta)
 
 func apply_enemy_profile(kind: String, profile: Dictionary) -> void:
 	ENEMY_PROFILE_APPLIER.apply_profile(self, kind, profile)
@@ -215,6 +213,11 @@ func _clear_boss_peacock_markers() -> void:
 func _compute_velocity(delta: float) -> Vector2:
 	return ENEMY_MOVEMENT.compute_velocity(self, delta)
 
+func _apply_direct_motion(delta: float) -> void:
+	if velocity.length_squared() <= 0.001:
+		return
+	global_position += velocity * delta
+
 func _update_behavior_state(delta: float) -> void:
 	ENEMY_TRAIT_BEHAVIOR.update_behavior_state(self, delta)
 
@@ -242,6 +245,9 @@ func _update_bleed(delta: float) -> void:
 func take_damage(amount: float) -> bool:
 	return ENEMY_DAMAGE.take_damage(self, amount)
 
+func take_batched_damage(amount: float) -> bool:
+	return ENEMY_DAMAGE.apply_damage(self, amount, false)
+
 func apply_slow(multiplier: float, duration: float) -> void:
 	ENEMY_STATUS_EFFECTS.apply_slow(self, multiplier, duration)
 
@@ -256,6 +262,9 @@ func _ensure_status_visuals() -> void:
 
 func _update_status_visuals() -> void:
 	ENEMY_STATUS_VISUALS.update_status_visuals(self)
+
+func _has_status_visual_pressure() -> bool:
+	return slow_timer > 0.0 or vulnerability_timer > 0.0 or enemy_kind != "normal" or secondary_behavior_id != "" or has_trait("dash") or boss_visual_instance != null
 
 func _spawn_status_burst(color: Color, radius: float) -> void:
 	ENEMY_STATUS_VISUALS.spawn_status_burst(self, color, radius)

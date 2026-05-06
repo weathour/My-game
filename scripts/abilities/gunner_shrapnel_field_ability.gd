@@ -173,7 +173,11 @@ func _create_field(owner, center: Vector2) -> void:
 func _damage_field(owner, field_data: Dictionary) -> void:
 	var center: Vector2 = field_data.get("center", owner.global_position)
 	var radius: float = float(field_data.get("radius", _get_radius(owner)))
-	var hits: int = int(owner._damage_enemies_in_radius(center, radius, _get_damage(owner), 0.0, _get_slow_multiplier(owner), 1.1, "gunner"))
+	var hits: int = 0
+	if owner.has_method("_damage_enemies_in_radius_batched"):
+		hits = int(owner._damage_enemies_in_radius_batched(center, radius, _get_damage(owner), 0.0, _get_slow_multiplier(owner), 1.1, "gunner"))
+	else:
+		hits = int(owner._damage_enemies_in_radius(center, radius, _get_damage(owner), 0.0, _get_slow_multiplier(owner), 1.1, "gunner"))
 	if hits > 0:
 		owner._register_attack_result("gunner", hits, false)
 

@@ -39,7 +39,7 @@ const ROLE_DATA := [
 		"id": "mage",
 		"name": "\u672F\u5E08",
 		"color": Color(0.44, 0.86, 1.0, 1.0),
-		"speed_scale": 0.85,
+		"speed_scale": 0.902083,
 		"base_health": 60.0,
 		"attack_interval": 2.25,
 		"damage": 25.0,

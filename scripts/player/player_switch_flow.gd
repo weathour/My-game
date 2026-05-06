@@ -3,6 +3,7 @@
 const DEVELOPER_MODE := preload("res://scripts/developer_mode.gd")
 const PLAYER_SWITCH_BANNER_FLOW := preload("res://scripts/player/player_switch_banner_flow.gd")
 const PLAYER_SWITCH_ENTRY_FLOW := preload("res://scripts/player/player_switch_entry_flow.gd")
+const PLAYER_SWITCH_JOB_QUEUE := preload("res://scripts/player/player_switch_job_queue.gd")
 
 const ROLE_SWITCH_COOLDOWN := 7.0
 const SWITCH_INVULNERABILITY := 0.2
@@ -177,12 +178,22 @@ static func try_switch_role(owner, new_role_index: int) -> void:
 	owner.active_role_index = new_role_index
 	owner.switch_cooldown_remaining = 0.0 if DEVELOPER_MODE.should_ignore_cooldowns() else _get_switch_cooldown_duration(owner)
 	owner.switch_invulnerability_remaining = SWITCH_INVULNERABILITY
-	apply_enter_skill(owner, owner.active_role_index)
-	PLAYER_SWITCH_ENTRY_FLOW.apply_shared_entry_skills(owner, str(owner.roles[owner.active_role_index]["id"]))
-	apply_pending_entry_blessing(owner, str(owner.roles[owner.active_role_index]["id"]))
-	apply_rotation_entry_bonus(owner, str(owner.roles[owner.active_role_index]["id"]))
-	apply_swap_guard(owner, owner.velocity if owner.velocity.length_squared() > 0.001 else owner.facing_direction)
+	var active_role_index: int = owner.active_role_index
+	var active_role_id: String = str(owner.roles[active_role_index]["id"])
+	var switch_direction: Vector2 = owner.velocity if owner.velocity.length_squared() > 0.001 else owner.facing_direction
 	owner._update_active_role_state()
+	PLAYER_SWITCH_JOB_QUEUE.run_jobs(owner, [
+		func() -> void:
+			apply_enter_skill(owner, active_role_index),
+		func() -> void:
+			PLAYER_SWITCH_ENTRY_FLOW.apply_shared_entry_skills(owner, active_role_id),
+		func() -> void:
+			apply_pending_entry_blessing(owner, active_role_id),
+		func() -> void:
+			apply_rotation_entry_bonus(owner, active_role_id),
+		func() -> void:
+			apply_swap_guard(owner, switch_direction)
+	])
 	var symbol_level: int = 0
 	if symbol_level > 0:
 		owner._add_energy((4.0 + symbol_level * 1.8) * owner.energy_gain_multiplier)

@@ -48,6 +48,10 @@ static func ensure_status_visuals(enemy) -> void:
 	enemy.status_root.add_child(enemy.dash_warning_rect)
 
 static func update_status_visuals(enemy) -> void:
+	if enemy.status_root == null:
+		if not enemy.has_method("_has_status_visual_pressure") or not bool(enemy._has_status_visual_pressure()):
+			return
+		ensure_status_visuals(enemy)
 	var hit_flash_alpha: float = enemy._get_hit_flash_alpha()
 	var polygon := enemy.get_node_or_null("Polygon2D") as Polygon2D
 	if polygon != null:

@@ -4,6 +4,7 @@ const DEFAULT_ACTIVE_ENEMY_LIMIT := 220
 const DEFAULT_PLAYER_PROJECTILE_LIMIT := 260
 const DEFAULT_ENEMY_PROJECTILE_LIMIT := 240
 const DEFAULT_TEMPORARY_EFFECT_LIMIT := 160
+const LOW_FPS_TEMPORARY_EFFECT_LIMIT := 80
 const LOW_FPS_ENEMY_LIMIT := 180
 const LOW_FPS_THRESHOLD := 45
 const RECOVERY_FPS_THRESHOLD := 58
@@ -31,6 +32,10 @@ static func get_dynamic_limit(_root: Node, group_name: String, fallback_limit: i
 			limit = min(limit, LOW_FPS_ENEMY_LIMIT)
 		elif fps >= RECOVERY_FPS_THRESHOLD:
 			limit = min(limit, DEFAULT_ACTIVE_ENEMY_LIMIT)
+	elif group_name == "temporary_effects":
+		var fps := Engine.get_frames_per_second()
+		if fps > 0 and fps < LOW_FPS_THRESHOLD:
+			limit = min(limit, LOW_FPS_TEMPORARY_EFFECT_LIMIT)
 	return limit
 
 static func trim_requested_count(root: Node, group_name: String, requested_count: int, limit: int) -> int:

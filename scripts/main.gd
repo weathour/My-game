@@ -135,6 +135,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _process(delta: float) -> void:
 	if game_over or get_tree().paused:
+		_update_performance_metrics(delta)
 		return
 
 	survival_time += delta

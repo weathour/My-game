@@ -1,5 +1,7 @@
 extends Node2D
 
+const PERFORMANCE_COUNTERS := preload("res://scripts/game/performance_counters.gd")
+
 const MAX_BATCHED_PROJECTILES := 1800
 const DEFAULT_HIT_RADIUS := 10.0
 const DEFAULT_ENEMY_HIT_RADIUS := 8.0
@@ -16,6 +18,8 @@ const BULLET_FRAME_TEXTURE_PATHS := [
 const BULLET_FRAME_VISIBLE_REGION := Rect2(505.0, 476.0, 36.0, 36.0)
 const BULLET_ANIMATION_SPEED := 28.0
 const BULLET_FRAME_BASE_SIZE := 84.0
+const MULTIMESH_REFRESH_FRAME_STRIDE_WHEN_HEAVY := 2
+const HEAVY_PROJECTILE_COUNT := 900
 
 var positions: Array[Vector2] = []
 var source_origins: Array[Vector2] = []
@@ -57,8 +61,10 @@ var bullet_outline_multimesh_instance: MultiMeshInstance2D
 var bullet_outline_multimesh: MultiMesh
 var bullet_multimesh_instance: MultiMeshInstance2D
 var bullet_multimesh: MultiMesh
+var last_multimesh_refresh_frame: int = -1
 
 func _ready() -> void:
+	process_mode = Node.PROCESS_MODE_PAUSABLE
 	add_to_group("temporary_effects")
 	z_index = 12
 	_load_bullet_frame_textures()
@@ -120,6 +126,7 @@ func _physics_process(delta: float) -> void:
 	_check_projectile_hits()
 	_sync_projectile_size()
 	_update_multimesh_instances()
+	PERFORMANCE_COUNTERS.add("batched_projectiles", positions.size())
 
 func _update_projectiles(delta: float) -> void:
 	for index in range(positions.size() - 1, -1, -1):
@@ -413,6 +420,11 @@ func _create_multimesh_instance(node_name: String, multimesh: MultiMesh, texture
 func _update_multimesh_instances() -> void:
 	if bullet_multimesh == null:
 		return
+	var current_frame := Engine.get_process_frames()
+	if positions.size() >= HEAVY_PROJECTILE_COUNT and last_multimesh_refresh_frame >= 0:
+		if current_frame - last_multimesh_refresh_frame < MULTIMESH_REFRESH_FRAME_STRIDE_WHEN_HEAVY:
+			return
+	last_multimesh_refresh_frame = current_frame
 	var count: int = min(positions.size(), MAX_BATCHED_PROJECTILES)
 	bullet_multimesh.visible_instance_count = count
 	if bullet_outline_multimesh != null:

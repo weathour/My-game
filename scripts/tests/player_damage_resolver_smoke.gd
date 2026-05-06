@@ -30,6 +30,12 @@ func _run() -> void:
 	var rect_hits_b: int = DamageResolver.damage_enemies_in_oriented_rect_unique(owner, Vector2.ZERO, Vector2.RIGHT, 100.0, 40.0, 10.0, 0.0, 1.0, 0.0, registry, "mage")
 	if rect_hits_a != 2 or rect_hits_b != 0:
 		failures.append("unique rect damage should respect hit registry")
+	var batched_hits: int = DamageResolver.damage_enemies_in_radius_batched(owner, Vector2.ZERO, 96.0, 10.0, 0.0, 1.0, 0.0, "swordsman")
+	var queue: Node = root.get_node_or_null("PlayerDamageJobQueue")
+	if batched_hits != 3:
+		failures.append("batched radius damage should report all matched hits")
+	if queue == null or not ("jobs" in queue) or queue.jobs.size() <= 0:
+		failures.append("batched radius damage should enqueue merged jobs")
 	if owner.damage_calls <= 0:
 		failures.append("resolver should call owner damage entrypoint")
 	if owner.register_calls != 0:

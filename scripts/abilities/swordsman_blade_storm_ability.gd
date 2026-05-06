@@ -1,6 +1,7 @@
 extends RefCounted
 
 const SWORD_TORNADO_EFFECT_SCENE := preload("res://effects/sword/tornado/tornado.tscn")
+const PLAYER_DAMAGE_BATCHER := preload("res://scripts/player/player_damage_batcher.gd")
 
 const COOLDOWN := 18.0
 const BASE_DURATION := 1.0
@@ -114,15 +115,18 @@ func restore_effect_if_active(owner) -> void:
 func _trigger_tick(owner) -> void:
 	var radius: float = _get_radius(owner)
 	var damage_amount: float = _get_damage(owner)
-	var total_hits := 0
+	var batcher := PLAYER_DAMAGE_BATCHER.new(owner)
 	var should_spawn_ring_visual := ring_visual_tick_index % RING_VISUAL_EVERY_TICKS == 0
 	ring_visual_tick_index += 1
 	for center in _get_storm_centers(owner):
-		total_hits += int(owner._damage_enemies_in_radius(center, radius, damage_amount, 0.08, 1.0, 0.0, "swordsman"))
+		if owner.has_method("_collect_enemies_in_radius_for_damage_batch"):
+			for enemy in owner._collect_enemies_in_radius_for_damage_batch(center, radius):
+				batcher.add_enemy(enemy, damage_amount, "swordsman", 0.08, 2.0, 1.0, 0.0, center)
+		else:
+			owner._damage_enemies_in_radius(center, radius, damage_amount, 0.08, 1.0, 0.0, "swordsman")
 		if should_spawn_ring_visual:
 			owner._spawn_ring_effect(center, radius * 0.88, Color(0.38, 0.86, 1.0, 0.14), 5.0, 0.14)
-	if total_hits > 0:
-		owner._register_attack_result("swordsman", total_hits, false)
+	batcher.flush()
 
 func _ensure_effect(owner) -> void:
 	if owner == null or not is_instance_valid(owner) or SWORD_TORNADO_EFFECT_SCENE == null:

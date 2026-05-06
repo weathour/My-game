@@ -880,6 +880,8 @@ func build_blessing_binding_options(choice: Dictionary) -> Array:
 	for index in range(candidates.size()):
 		var candidate: Dictionary = candidates[index]
 		var skill_id := str(candidate.get("skill_id", ""))
+		if not PLAYER_BLESSING_SKILL_STATE.is_blessing_bindable_skill(skill_id):
+			continue
 		var title := PLAYER_BLESSING_SKILL_STATE.get_skill_title(skill_id)
 		var action_text := "解锁" if str(candidate.get("action", "")) == "unlock" else "进化"
 		var target_tier := int(candidate.get("tier", 1))
@@ -1439,6 +1441,12 @@ func _deal_damage_to_enemy(enemy: Node, damage_amount: float, source_role_id: St
 
 func _damage_enemies_in_radius(center: Vector2, radius: float, damage_amount: float, vulnerability_bonus: float, slow_multiplier: float, slow_duration: float, source_role_id: String = "") -> int:
 	return PLAYER_DAMAGE_RESOLVER.damage_enemies_in_radius(self, center, radius, damage_amount, vulnerability_bonus, slow_multiplier, slow_duration, source_role_id)
+
+func _collect_enemies_in_radius_for_damage_batch(center: Vector2, radius: float) -> Array:
+	return PLAYER_DAMAGE_RESOLVER.collect_enemies_in_radius(self, center, radius)
+
+func _damage_enemies_in_radius_batched(center: Vector2, radius: float, damage_amount: float, vulnerability_bonus: float, slow_multiplier: float, slow_duration: float, source_role_id: String = "") -> int:
+	return PLAYER_DAMAGE_RESOLVER.damage_enemies_in_radius_batched(self, center, radius, damage_amount, vulnerability_bonus, slow_multiplier, slow_duration, source_role_id)
 
 func _damage_enemies_in_radius_count_kills(center: Vector2, radius: float, damage_amount: float, vulnerability_bonus: float, slow_multiplier: float, slow_duration: float, source_role_id: String = "") -> Dictionary:
 	return PLAYER_DAMAGE_RESOLVER.damage_enemies_in_radius_count_kills(self, center, radius, damage_amount, vulnerability_bonus, slow_multiplier, slow_duration, source_role_id)

@@ -19,6 +19,9 @@ static func apply_visuals(enemy, color_override = null) -> void:
 		polygon.polygon = ENEMY_VISUAL_DATA.get_shape_points(enemy.behavior_id)
 		polygon.rotation = 0.0
 
+	if enemy.enemy_kind != "normal" or enemy.secondary_behavior_id != "" or enemy.has_trait("dash"):
+		enemy._ensure_status_visuals()
+
 	if enemy.trait_ring != null:
 		enemy.trait_ring.visible = (enemy.enemy_kind != "normal" or enemy.secondary_behavior_id != "") and enemy.enemy_kind != "boss"
 		enemy.trait_ring.points = ENEMY_GEOMETRY.build_circle_points(18.0 + enemy.scale.x * 4.0)

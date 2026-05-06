@@ -1,5 +1,12 @@
 extends RefCounted
 
+const PERFORMANCE_COUNTERS := preload("res://scripts/game/performance_counters.gd")
+const PLAYER_DAMAGE_JOB_QUEUE := preload("res://scripts/player/player_damage_job_queue.gd")
+const PLAYER_DAMAGE_BATCHER := preload("res://scripts/player/player_damage_batcher.gd")
+
+const DAMAGE_JOB_QUEUE_NAME := "PlayerDamageJobQueue"
+const QUEUED_HIT_THRESHOLD := 16
+
 static var cached_live_enemies: Array = []
 static var cached_live_enemies_frame: int = -1
 static var cached_enemy_grid: Dictionary = {}
@@ -25,32 +32,95 @@ static func deal_damage_to_enemy(owner, enemy: Node, damage_amount: float, sourc
 		owner._on_enemy_killed_by_role(source_role_id)
 	return killed
 
+static func queue_damage_to_enemy(owner, enemy: Node, damage_amount: float, source_role_id: String, vulnerability_bonus: float = 0.0, vulnerability_duration: float = 2.0, slow_multiplier: float = 1.0, slow_duration: float = 0.0, source_position: Variant = null) -> void:
+	var queue := _get_or_create_damage_job_queue(owner)
+	if queue == null:
+		deal_damage_to_enemy(owner, enemy, damage_amount, source_role_id, vulnerability_bonus, vulnerability_duration, slow_multiplier, slow_duration, source_position)
+		return
+	queue.enqueue({
+		"enemy_ref": weakref(enemy),
+		"enemy_id": enemy.get_instance_id(),
+		"damage_amount": damage_amount,
+		"hit_count": 1,
+		"source_role_id": source_role_id,
+		"vulnerability_bonus": vulnerability_bonus,
+		"vulnerability_duration": vulnerability_duration,
+		"slow_multiplier": slow_multiplier,
+		"slow_duration": slow_duration,
+		"source_position": source_position
+	})
+
+static func apply_or_queue_damage_job(owner, job: Dictionary) -> void:
+	var enemy_ref: WeakRef = job.get("enemy_ref", null) as WeakRef
+	if enemy_ref == null:
+		return
+	var enemy: Node = enemy_ref.get_ref() as Node
+	if enemy == null or not is_instance_valid(enemy):
+		return
+	var queue := _get_or_create_damage_job_queue(owner)
+	if queue == null:
+		deal_damage_to_enemy(
+			owner,
+			enemy,
+			float(job.get("damage_amount", 0.0)),
+			str(job.get("source_role_id", "")),
+			float(job.get("vulnerability_bonus", 0.0)),
+			float(job.get("vulnerability_duration", 2.0)),
+			float(job.get("slow_multiplier", 1.0)),
+			float(job.get("slow_duration", 0.0)),
+			job.get("source_position", null)
+		)
+		return
+	queue.enqueue(job)
+
 static func damage_enemies_in_radius(owner, center: Vector2, radius: float, damage_amount: float, vulnerability_bonus: float, slow_multiplier: float, slow_duration: float, source_role_id: String = "") -> int:
 	var hit_count := 0
 	var resolved_role_id: String = _resolve_role_id(owner, source_role_id)
-	for enemy in _get_candidate_enemies_for_circle(owner, center, radius):
+	var candidates: Array = _get_candidate_enemies_for_circle(owner, center, radius)
+	_record_damage_query(candidates.size())
+	var matched_enemies: Array = []
+	for enemy in candidates:
 		if not _is_live_enemy(enemy):
 			continue
 		var hit_radius: float = _get_enemy_hit_radius(owner, enemy)
 		var total_radius: float = radius + hit_radius
 		if center.distance_squared_to(enemy.global_position) <= total_radius * total_radius:
-			deal_damage_to_enemy(owner, enemy, damage_amount, resolved_role_id, vulnerability_bonus, 2.0, slow_multiplier, slow_duration, center)
-			hit_count += 1
+			matched_enemies.append(enemy)
+	hit_count = matched_enemies.size()
+	_apply_or_queue_hits(owner, matched_enemies, damage_amount, resolved_role_id, vulnerability_bonus, 2.0, slow_multiplier, slow_duration, center)
+	PERFORMANCE_COUNTERS.add("damage_hits", hit_count)
 	return hit_count
+
+static func damage_enemies_in_radius_batched(owner, center: Vector2, radius: float, damage_amount: float, vulnerability_bonus: float, slow_multiplier: float, slow_duration: float, source_role_id: String = "") -> int:
+	var resolved_role_id: String = _resolve_role_id(owner, source_role_id)
+	var batcher := PLAYER_DAMAGE_BATCHER.new(owner)
+	for enemy in collect_enemies_in_radius(owner, center, radius):
+		batcher.add_enemy(enemy, damage_amount, resolved_role_id, vulnerability_bonus, 2.0, slow_multiplier, slow_duration, center)
+	return batcher.flush()
 
 static func damage_enemies_in_radius_count_kills(owner, center: Vector2, radius: float, damage_amount: float, vulnerability_bonus: float, slow_multiplier: float, slow_duration: float, source_role_id: String = "") -> Dictionary:
 	var hit_count := 0
 	var kill_count := 0
 	var resolved_role_id: String = _resolve_role_id(owner, source_role_id)
-	for enemy in _get_candidate_enemies_for_circle(owner, center, radius):
+	var candidates: Array = _get_candidate_enemies_for_circle(owner, center, radius)
+	_record_damage_query(candidates.size())
+	var matched_enemies: Array = []
+	for enemy in candidates:
 		if not _is_live_enemy(enemy):
 			continue
 		var hit_radius: float = _get_enemy_hit_radius(owner, enemy)
 		var total_radius: float = radius + hit_radius
 		if center.distance_squared_to(enemy.global_position) <= total_radius * total_radius:
+			matched_enemies.append(enemy)
+	hit_count = matched_enemies.size()
+	if _should_queue_hits(hit_count):
+		for enemy in matched_enemies:
+			queue_damage_to_enemy(owner, enemy, damage_amount, resolved_role_id, vulnerability_bonus, 2.0, slow_multiplier, slow_duration, center)
+	else:
+		for enemy in matched_enemies:
 			if deal_damage_to_enemy(owner, enemy, damage_amount, resolved_role_id, vulnerability_bonus, 2.0, slow_multiplier, slow_duration, center):
 				kill_count += 1
-			hit_count += 1
+	PERFORMANCE_COUNTERS.add("damage_hits", hit_count)
 	return {"hits": hit_count, "kills": kill_count}
 
 static func pull_enemies_toward(owner, center: Vector2, radius: float, pull_strength: float) -> void:
@@ -70,6 +140,20 @@ static func count_enemies_in_radius(owner, center: Vector2, radius: float) -> in
 			count += 1
 	return count
 
+static func collect_enemies_in_radius(owner, center: Vector2, radius: float) -> Array:
+	var matched_enemies: Array = []
+	var candidates: Array = _get_candidate_enemies_for_circle(owner, center, radius)
+	_record_damage_query(candidates.size())
+	for enemy in candidates:
+		if not _is_live_enemy(enemy):
+			continue
+		var hit_radius: float = _get_enemy_hit_radius(owner, enemy)
+		var total_radius: float = radius + hit_radius
+		if center.distance_squared_to(enemy.global_position) <= total_radius * total_radius:
+			matched_enemies.append(enemy)
+	PERFORMANCE_COUNTERS.add("damage_hits", matched_enemies.size())
+	return matched_enemies
+
 static func damage_enemies_in_line(owner, start_position: Vector2, end_position: Vector2, width: float, damage_amount: float, vulnerability_bonus: float, slow_multiplier: float, slow_duration: float, source_role_id: String = "") -> int:
 	var axis := end_position - start_position
 	var length := axis.length()
@@ -78,7 +162,10 @@ static func damage_enemies_in_line(owner, start_position: Vector2, end_position:
 	var direction := axis / length
 	var hit_count := 0
 	var resolved_role_id: String = _resolve_role_id(owner, source_role_id)
-	for enemy in _get_candidate_enemies_for_rect(owner, start_position + axis * 0.5, abs(axis.x) + width * 2.0, abs(axis.y) + width * 2.0):
+	var candidates: Array = _get_candidate_enemies_for_rect(owner, start_position + axis * 0.5, abs(axis.x) + width * 2.0, abs(axis.y) + width * 2.0)
+	_record_damage_query(candidates.size())
+	var matched_enemies: Array = []
+	for enemy in candidates:
 		if not _is_live_enemy(enemy):
 			continue
 		var relative: Vector2 = enemy.global_position - start_position
@@ -86,8 +173,10 @@ static func damage_enemies_in_line(owner, start_position: Vector2, end_position:
 		var closest: Vector2 = start_position + direction * along
 		var total_width: float = width + _get_enemy_hit_radius(owner, enemy)
 		if enemy.global_position.distance_squared_to(closest) <= total_width * total_width:
-			deal_damage_to_enemy(owner, enemy, damage_amount, resolved_role_id, vulnerability_bonus, 2.0, slow_multiplier, slow_duration, start_position)
-			hit_count += 1
+			matched_enemies.append(enemy)
+	hit_count = matched_enemies.size()
+	_apply_or_queue_hits(owner, matched_enemies, damage_amount, resolved_role_id, vulnerability_bonus, 2.0, slow_multiplier, slow_duration, start_position)
+	PERFORMANCE_COUNTERS.add("damage_hits", hit_count)
 	return hit_count
 
 static func damage_enemies_in_oriented_rect(owner, center: Vector2, axis_direction: Vector2, rect_length: float, rect_width: float, damage_amount: float, vulnerability_bonus: float, slow_multiplier: float, slow_duration: float, source_role_id: String = "") -> int:
@@ -103,7 +192,10 @@ static func damage_enemies_in_oriented_rect_unique(owner, center: Vector2, axis_
 	var hit_count := 0
 	var resolved_role_id: String = _resolve_role_id(owner, source_role_id)
 	var broad_size := rect_length + rect_width + 80.0
-	for enemy in _get_candidate_enemies_for_rect(owner, center, broad_size, broad_size):
+	var candidates: Array = _get_candidate_enemies_for_rect(owner, center, broad_size, broad_size)
+	_record_damage_query(candidates.size())
+	var matched_enemies: Array = []
+	for enemy in candidates:
 		if not _is_live_enemy(enemy):
 			continue
 		var id: int = enemy.get_instance_id()
@@ -113,8 +205,10 @@ static func damage_enemies_in_oriented_rect_unique(owner, center: Vector2, axis_
 		var hit_radius: float = _get_enemy_hit_radius(owner, enemy)
 		if abs(relative.dot(direction)) <= half_length + hit_radius and abs(relative.dot(perpendicular)) <= half_width + hit_radius:
 			hit_registry[id] = true
-			deal_damage_to_enemy(owner, enemy, damage_amount, resolved_role_id, vulnerability_bonus, 2.0, slow_multiplier, slow_duration, center)
-			hit_count += 1
+			matched_enemies.append(enemy)
+	hit_count = matched_enemies.size()
+	_apply_or_queue_hits(owner, matched_enemies, damage_amount, resolved_role_id, vulnerability_bonus, 2.0, slow_multiplier, slow_duration, center)
+	PERFORMANCE_COUNTERS.add("damage_hits", hit_count)
 	return hit_count
 
 static func damage_enemies_in_ellipse(owner, center: Vector2, horizontal_radius: float, vertical_radius: float, damage_amount: float, vulnerability_bonus: float, slow_multiplier: float, slow_duration: float, source_role_id: String = "") -> int:
@@ -122,14 +216,19 @@ static func damage_enemies_in_ellipse(owner, center: Vector2, horizontal_radius:
 	var safe_horizontal: float = max(1.0, horizontal_radius)
 	var safe_vertical: float = max(1.0, vertical_radius)
 	var resolved_role_id: String = _resolve_role_id(owner, source_role_id)
-	for enemy in _get_candidate_enemies_for_rect(owner, center, safe_horizontal * 2.0, safe_vertical * 2.0):
+	var candidates: Array = _get_candidate_enemies_for_rect(owner, center, safe_horizontal * 2.0, safe_vertical * 2.0)
+	_record_damage_query(candidates.size())
+	var matched_enemies: Array = []
+	for enemy in candidates:
 		if not _is_live_enemy(enemy):
 			continue
 		var relative: Vector2 = enemy.global_position - center
 		var value := pow(relative.x / safe_horizontal, 2.0) + pow(relative.y / safe_vertical, 2.0)
 		if value <= 1.0:
-			deal_damage_to_enemy(owner, enemy, damage_amount, resolved_role_id, vulnerability_bonus, 2.0, slow_multiplier, slow_duration, center)
-			hit_count += 1
+			matched_enemies.append(enemy)
+	hit_count = matched_enemies.size()
+	_apply_or_queue_hits(owner, matched_enemies, damage_amount, resolved_role_id, vulnerability_bonus, 2.0, slow_multiplier, slow_duration, center)
+	PERFORMANCE_COUNTERS.add("damage_hits", hit_count)
 	return hit_count
 
 static func damage_enemies_in_cone(owner, origin: Vector2, direction: Vector2, cone_range: float, cone_angle_radians: float, damage_amount: float, vulnerability_bonus: float, slow_multiplier: float, slow_duration: float, source_role_id: String = "") -> int:
@@ -143,7 +242,10 @@ static func damage_enemies_in_cone(owner, origin: Vector2, direction: Vector2, c
 	var broad_size: float = safe_range * 2.0
 	var hit_count := 0
 	var resolved_role_id: String = _resolve_role_id(owner, source_role_id)
-	for enemy in _get_candidate_enemies_for_rect(owner, center, broad_size, broad_size):
+	var candidates: Array = _get_candidate_enemies_for_rect(owner, center, broad_size, broad_size)
+	_record_damage_query(candidates.size())
+	var matched_enemies: Array = []
+	for enemy in candidates:
 		if not _is_live_enemy(enemy):
 			continue
 		var enemy_offset: Vector2 = enemy.global_position - origin
@@ -152,14 +254,46 @@ static func damage_enemies_in_cone(owner, origin: Vector2, direction: Vector2, c
 		if distance > safe_range + hit_radius:
 			continue
 		if distance <= hit_radius:
-			deal_damage_to_enemy(owner, enemy, damage_amount, resolved_role_id, vulnerability_bonus, 2.0, slow_multiplier, slow_duration, origin)
-			hit_count += 1
+			matched_enemies.append(enemy)
 			continue
 		var enemy_direction: Vector2 = enemy_offset / distance
 		if enemy_direction.dot(forward) >= cos_half_angle or _is_enemy_inside_cone_edge(enemy_offset, forward, safe_range, half_angle, hit_radius):
-			deal_damage_to_enemy(owner, enemy, damage_amount, resolved_role_id, vulnerability_bonus, 2.0, slow_multiplier, slow_duration, origin)
-			hit_count += 1
+			matched_enemies.append(enemy)
+	hit_count = matched_enemies.size()
+	_apply_or_queue_hits(owner, matched_enemies, damage_amount, resolved_role_id, vulnerability_bonus, 2.0, slow_multiplier, slow_duration, origin)
+	PERFORMANCE_COUNTERS.add("damage_hits", hit_count)
 	return hit_count
+
+static func _record_damage_query(candidate_count: int) -> void:
+	PERFORMANCE_COUNTERS.add("damage_queries", 1)
+	PERFORMANCE_COUNTERS.add("damage_candidates", candidate_count)
+
+static func _apply_or_queue_hits(owner, enemies: Array, damage_amount: float, source_role_id: String, vulnerability_bonus: float, vulnerability_duration: float, slow_multiplier: float, slow_duration: float, source_position: Variant) -> void:
+	if _should_queue_hits(enemies.size()):
+		for enemy in enemies:
+			queue_damage_to_enemy(owner, enemy, damage_amount, source_role_id, vulnerability_bonus, vulnerability_duration, slow_multiplier, slow_duration, source_position)
+		return
+	for enemy in enemies:
+		deal_damage_to_enemy(owner, enemy, damage_amount, source_role_id, vulnerability_bonus, vulnerability_duration, slow_multiplier, slow_duration, source_position)
+
+static func _should_queue_hits(hit_count: int) -> bool:
+	return hit_count >= QUEUED_HIT_THRESHOLD
+
+static func _get_or_create_damage_job_queue(owner) -> Node:
+	if owner == null or owner.get_tree() == null:
+		return null
+	var current_scene: Node = owner.get_tree().current_scene
+	if current_scene == null:
+		return null
+	var queue: Node = current_scene.get_node_or_null(DAMAGE_JOB_QUEUE_NAME)
+	if queue != null:
+		return queue
+	queue = PLAYER_DAMAGE_JOB_QUEUE.new()
+	queue.name = DAMAGE_JOB_QUEUE_NAME
+	current_scene.add_child(queue)
+	if queue.has_method("configure"):
+		queue.configure(owner)
+	return queue
 
 static func _is_enemy_inside_cone_edge(offset: Vector2, forward: Vector2, cone_range: float, half_angle: float, hit_radius: float) -> bool:
 	var side: Vector2 = forward.orthogonal()

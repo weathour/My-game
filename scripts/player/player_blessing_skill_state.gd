@@ -147,6 +147,9 @@ const SHARED_ENTRY_SKILL_IDS := {
 	SKILL_HERO_ENTRY: true
 }
 
+static func is_blessing_bindable_skill(skill_id: String) -> bool:
+	return not INHERENT_SKILL_IDS.has(skill_id) and not SHARED_ENTRY_SKILL_IDS.has(skill_id)
+
 const UNLOCK_RECIPES := {
 	SKILL_META_FIELD: {
 		"role_exact": {"divine_grace": {1: 1}},
@@ -499,7 +502,7 @@ static func get_recipe_candidates_for_blessing(owner, blessing_id: String, tier:
 		return candidates
 	for skill_id_value in _get_recipe_skill_ids():
 		var skill_id := str(skill_id_value)
-		if INHERENT_SKILL_IDS.has(skill_id):
+		if not is_blessing_bindable_skill(skill_id):
 			continue
 		if not is_skill_unlocked(owner, skill_id):
 			var unlock_recipe: Dictionary = UNLOCK_RECIPES.get(skill_id, {})
@@ -552,8 +555,10 @@ static func lock_one_blessing_material(owner, binding: String, blessing_id: Stri
 	owner.blessing_skill_state = state
 
 static func _auto_refresh_inherent_skills(owner, events: Array[Dictionary], role_context: String = "") -> void:
-	for skill_id_value in INHERENT_SKILL_IDS.keys():
+	for skill_id_value in _get_recipe_skill_ids():
 		var skill_id := str(skill_id_value)
+		if is_blessing_bindable_skill(skill_id):
+			continue
 		if not is_skill_unlocked(owner, skill_id) and _can_apply_recipe(owner, skill_id, UNLOCK_RECIPES.get(skill_id, {}), role_context):
 			events.append_array(apply_recipe_candidate(owner, _make_recipe_candidate(skill_id, 1, "unlock", UNLOCK_RECIPES.get(skill_id, {}))))
 		if is_skill_unlocked(owner, skill_id):

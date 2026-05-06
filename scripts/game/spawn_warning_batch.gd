@@ -8,14 +8,26 @@ const CROSS_WIDTH := 5.0
 const FLASH_COUNT := 4
 const FLASH_DURATION := 0.11
 const FADE_DURATION := 0.06
+const MAX_WARNINGS_LOW_FPS := 36
+const MAX_FINISHED_WARNINGS_PER_FRAME := 18
 
 var warnings: Array[Dictionary] = []
+var pending_finished_entries: Array[Dictionary] = []
 
 func _ready() -> void:
 	add_to_group("temporary_effects")
 	z_index = 18
 
 func add_warning(warning_position: Vector2, radius: float, payload: Dictionary) -> void:
+	var fps := Engine.get_frames_per_second()
+	if fps > 0 and fps < 45 and warnings.size() >= MAX_WARNINGS_LOW_FPS:
+		pending_finished_entries.append({
+			"position": warning_position,
+			"radius": max(8.0, radius),
+			"age": 0.0,
+			"payload": payload
+		})
+		return
 	warnings.append({
 		"position": warning_position,
 		"radius": max(8.0, radius),
@@ -26,6 +38,7 @@ func add_warning(warning_position: Vector2, radius: float, payload: Dictionary) 
 
 func _process(delta: float) -> void:
 	if warnings.is_empty():
+		_flush_finished_entries()
 		queue_redraw()
 		return
 	var total_duration := FLASH_COUNT * FLASH_DURATION * 2.0 + FADE_DURATION
@@ -38,9 +51,16 @@ func _process(delta: float) -> void:
 			warnings.remove_at(index)
 		else:
 			warnings[index] = warning
-	for warning in finished_entries:
-		warning_finished.emit(warning)
+	pending_finished_entries.append_array(finished_entries)
+	_flush_finished_entries()
 	queue_redraw()
+
+func _flush_finished_entries() -> void:
+	var emitted := 0
+	while emitted < MAX_FINISHED_WARNINGS_PER_FRAME and not pending_finished_entries.is_empty():
+		var warning: Dictionary = pending_finished_entries.pop_front()
+		warning_finished.emit(warning)
+		emitted += 1
 
 func _draw() -> void:
 	for warning in warnings:

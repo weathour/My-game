@@ -27,11 +27,13 @@ static func tick_bleed(enemy, delta: float) -> void:
 static func apply_slow(enemy, multiplier: float, duration: float) -> void:
 	enemy.slow_multiplier = min(enemy.slow_multiplier, clamp(multiplier, 0.2, 1.0))
 	enemy.slow_timer = max(enemy.slow_timer, duration)
+	enemy._ensure_status_visuals()
 	enemy._spawn_status_burst(Color(0.56, 0.92, 1.0, 0.28), 22.0)
 
 static func apply_vulnerability(enemy, bonus: float, duration: float) -> void:
 	enemy.vulnerability_bonus = max(enemy.vulnerability_bonus, bonus)
 	enemy.vulnerability_timer = max(enemy.vulnerability_timer, duration)
+	enemy._ensure_status_visuals()
 	enemy._spawn_status_burst(Color(1.0, 0.46, 0.36, 0.24), 18.0)
 
 static func apply_bleed(enemy, damage_per_second: float, duration: float) -> void:

@@ -1,10 +1,12 @@
 extends RefCounted
 
+const PERFORMANCE_COUNTERS := preload("res://scripts/game/performance_counters.gd")
 const PLAYER_GUNNER_INTERSECT_EFFECTS := preload("res://scripts/player/player_gunner_intersect_effects.gd")
 
 static func _mark_temporary_effect(node: Node) -> void:
 	if node != null:
 		node.add_to_group("temporary_effects")
+		PERFORMANCE_COUNTERS.add("temporary_effect_spawns", 1)
 
 static func _can_spawn_temporary_effect(owner) -> bool:
 	if owner == null or owner.get_tree() == null:

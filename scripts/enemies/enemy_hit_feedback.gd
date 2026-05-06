@@ -2,8 +2,8 @@ extends RefCounted
 
 const HIT_FLASH_DURATION := 0.18
 const HIT_FLASH_DIM_ALPHA := 0.26
-const DAMAGE_NUMBER_BUDGET_PER_FRAME := 28
-const DEATH_BURST_BUDGET_PER_FRAME := 20
+const DAMAGE_NUMBER_BUDGET_PER_FRAME := 12
+const DEATH_BURST_BUDGET_PER_FRAME := 8
 
 static var damage_number_budget_frame: int = -1
 static var damage_number_budget_used: int = 0

@@ -123,15 +123,19 @@ func get_damage_taken_multiplier(owner) -> float:
 
 
 func _trigger_tick(owner) -> void:
-	var hits: int = int(owner._damage_enemies_in_radius(
-		owner.global_position,
-		_get_radius(owner),
-		_get_damage(owner),
-		0.0,
-		_get_slow_multiplier(owner),
-		1.35,
-		"mage"
-	))
+	var hits: int = 0
+	if owner.has_method("_damage_enemies_in_radius_batched"):
+		hits = int(owner._damage_enemies_in_radius_batched(owner.global_position, _get_radius(owner), _get_damage(owner), 0.0, _get_slow_multiplier(owner), 1.35, "mage"))
+	else:
+		hits = int(owner._damage_enemies_in_radius(
+			owner.global_position,
+			_get_radius(owner),
+			_get_damage(owner),
+			0.0,
+			_get_slow_multiplier(owner),
+			1.35,
+			"mage"
+		))
 	if hits > 0:
 		owner._register_attack_result("mage", hits, false)
 

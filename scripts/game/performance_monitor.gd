@@ -1,5 +1,7 @@
 extends RefCounted
 
+const PERFORMANCE_COUNTERS := preload("res://scripts/game/performance_counters.gd")
+
 const SAMPLE_INTERVAL := 1.0
 const TOTAL_NODE_SAMPLE_STRIDE := 3
 const GROUP_SAMPLE_STRIDE := 2
@@ -26,21 +28,23 @@ static func collect_metrics(root: Node) -> Dictionary:
 		cached_total_nodes = _count_nodes(tree.current_scene)
 	cached_metrics = {
 		"fps": Engine.get_frames_per_second(),
-		"enemies": tree.get_node_count_in_group("enemies"),
-		"player_projectiles": tree.get_node_count_in_group("player_projectiles"),
+		"enemies": _count_group_nodes(tree, "enemies"),
+		"player_projectiles": _count_group_nodes(tree, "player_projectiles"),
 		"batched_projectiles": _count_batched_projectiles(tree.current_scene),
-		"enemy_projectiles": tree.get_node_count_in_group("enemy_projectiles"),
-		"exp_gems": tree.get_node_count_in_group("exp_gems"),
-		"heart_pickups": tree.get_node_count_in_group("heart_pickups"),
-		"temporary_effects": tree.get_node_count_in_group("temporary_effects"),
-		"total_nodes": cached_total_nodes
+		"enemy_projectiles": _count_group_nodes(tree, "enemy_projectiles"),
+		"exp_gems": _count_group_nodes(tree, "exp_gems"),
+		"heart_pickups": _count_group_nodes(tree, "heart_pickups"),
+		"temporary_effects": _count_group_nodes(tree, "temporary_effects"),
+		"total_nodes": cached_total_nodes,
+		"frame_counters": PERFORMANCE_COUNTERS.get_snapshot()
 	}
 	return cached_metrics
 
 static func format_metrics(metrics: Dictionary) -> String:
 	if metrics.is_empty():
 		return "Performance: no data"
-	return "FPS %d | Enemy %d | P.Bullet %d + Batch %d | E.Bullet %d\nGem %d | Heart %d | TempFX %d | Nodes %d" % [
+	var counters_text := _format_counter_snapshot(metrics.get("frame_counters", {}))
+	return "FPS %d | Enemy %d | P.Bullet %d + Batch %d | E.Bullet %d\nGem %d | Heart %d | TempFX %d | Nodes %d%s" % [
 		int(metrics.get("fps", 0)),
 		int(metrics.get("enemies", 0)),
 		int(metrics.get("player_projectiles", 0)),
@@ -49,7 +53,28 @@ static func format_metrics(metrics: Dictionary) -> String:
 		int(metrics.get("exp_gems", 0)),
 		int(metrics.get("heart_pickups", 0)),
 		int(metrics.get("temporary_effects", 0)),
-		int(metrics.get("total_nodes", 0))
+		int(metrics.get("total_nodes", 0)),
+		counters_text
+	]
+
+static func _format_counter_snapshot(snapshot: Variant) -> String:
+	if snapshot is not Dictionary:
+		return ""
+	var peak: Dictionary = (snapshot as Dictionary).get("peak", {})
+	if peak.is_empty():
+		return ""
+	var current_frame: Dictionary = (snapshot as Dictionary).get("current_frame", {})
+	return "\nSpike peak: switch %d | dmgQueries %d | candidates %d | hits %d | queued %d | merged %d | applied %d | qSize %d | fx %d | batch %d" % [
+		int(peak.get("switch_jobs", 0)),
+		int(peak.get("damage_queries", 0)),
+		int(peak.get("damage_candidates", 0)),
+		int(peak.get("damage_hits", 0)),
+		int(peak.get("queued_damage_jobs", 0)),
+		int(peak.get("merged_damage_jobs", 0)),
+		int(peak.get("applied_damage_jobs", 0)),
+		int(current_frame.get("damage_queue_size", peak.get("damage_queue_size", 0))),
+		int(peak.get("temporary_effect_spawns", 0)),
+		int(peak.get("batched_projectiles", 0))
 	]
 
 static func _count_nodes(node: Node) -> int:
@@ -59,6 +84,11 @@ static func _count_nodes(node: Node) -> int:
 	for child in node.get_children():
 		count += _count_nodes(child)
 	return count
+
+static func _count_group_nodes(tree: SceneTree, group_name: String) -> int:
+	if tree == null:
+		return 0
+	return tree.get_nodes_in_group(group_name).size()
 
 static func _count_batched_projectiles(root: Node) -> int:
 	if root == null:
