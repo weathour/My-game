@@ -4,8 +4,8 @@ const BOSS_MOVE_SPEED_SCALE := 0.7
 
 static func compute_velocity(enemy, delta: float) -> Vector2:
 	var to_target: Vector2 = enemy._cached_to_target
-	var distance_to_target := enemy._cached_distance_to_target
-	var direction_to_target := enemy._cached_direction_to_target
+	var distance_to_target: float = enemy._cached_distance_to_target
+	var direction_to_target: Vector2 = enemy._cached_direction_to_target
 	var move_direction := direction_to_target
 	var move_speed: float = enemy.speed * enemy.slow_multiplier
 
