@@ -1,12 +1,17 @@
 extends RefCounted
 
-const DEFAULT_ACTIVE_ENEMY_LIMIT := 220
-const DEFAULT_PLAYER_PROJECTILE_LIMIT := 260
-const DEFAULT_ENEMY_PROJECTILE_LIMIT := 240
-const DEFAULT_TEMPORARY_EFFECT_LIMIT := 160
-const LOW_FPS_TEMPORARY_EFFECT_LIMIT := 80
-const LOW_FPS_ENEMY_LIMIT := 180
-const LOW_FPS_THRESHOLD := 45
+const DEFAULT_ACTIVE_ENEMY_LIMIT := 180
+const DEFAULT_PLAYER_PROJECTILE_LIMIT := 220
+const DEFAULT_ENEMY_PROJECTILE_LIMIT := 200
+const DEFAULT_TEMPORARY_EFFECT_LIMIT := 120
+const LOW_FPS_TEMPORARY_EFFECT_LIMIT := 50
+const LOW_FPS_ENEMY_LIMIT := 120
+const LOW_FPS_PROJECTILE_LIMIT := 140
+const LOW_FPS_ENEMY_PROJECTILE_LIMIT := 120
+const LOW_FPS_THRESHOLD := 52
+const CRITICAL_FPS_ENEMY_LIMIT := 80
+const CRITICAL_FPS_PROJECTILE_LIMIT := 90
+const CRITICAL_FPS_THRESHOLD := 35
 const RECOVERY_FPS_THRESHOLD := 58
 
 static func get_group_count(root: Node, group_name: String) -> int:
@@ -26,15 +31,26 @@ static func get_remaining_capacity(root: Node, group_name: String, limit: int) -
 
 static func get_dynamic_limit(_root: Node, group_name: String, fallback_limit: int) -> int:
 	var limit := fallback_limit
+	var fps := Engine.get_frames_per_second()
+	if fps <= 0:
+		return limit
 	if group_name == "enemies":
-		var fps := Engine.get_frames_per_second()
-		if fps > 0 and fps < LOW_FPS_THRESHOLD:
+		if fps < CRITICAL_FPS_THRESHOLD:
+			limit = min(limit, CRITICAL_FPS_ENEMY_LIMIT)
+		elif fps < LOW_FPS_THRESHOLD:
 			limit = min(limit, LOW_FPS_ENEMY_LIMIT)
 		elif fps >= RECOVERY_FPS_THRESHOLD:
 			limit = min(limit, DEFAULT_ACTIVE_ENEMY_LIMIT)
+	elif group_name == "player_projectiles":
+		if fps < CRITICAL_FPS_THRESHOLD:
+			limit = min(limit, CRITICAL_FPS_PROJECTILE_LIMIT)
+		elif fps < LOW_FPS_THRESHOLD:
+			limit = min(limit, LOW_FPS_PROJECTILE_LIMIT)
+	elif group_name == "enemy_projectiles":
+		if fps < LOW_FPS_THRESHOLD:
+			limit = min(limit, LOW_FPS_ENEMY_PROJECTILE_LIMIT)
 	elif group_name == "temporary_effects":
-		var fps := Engine.get_frames_per_second()
-		if fps > 0 and fps < LOW_FPS_THRESHOLD:
+		if fps < LOW_FPS_THRESHOLD:
 			limit = min(limit, LOW_FPS_TEMPORARY_EFFECT_LIMIT)
 	return limit
 

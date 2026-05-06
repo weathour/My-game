@@ -1,6 +1,7 @@
 extends RefCounted
 
 const PERFORMANCE_COUNTERS := preload("res://scripts/game/performance_counters.gd")
+const PERFORMANCE_GUARD := preload("res://scripts/game/performance_guard.gd")
 const PLAYER_EFFECT_SHAPE_PRIMITIVES := preload("res://scripts/player/player_effect_shape_primitives.gd")
 const PLAYER_EFFECT_LINE_PRIMITIVES := preload("res://scripts/player/player_effect_line_primitives.gd")
 
@@ -14,7 +15,8 @@ static func _can_spawn_temporary_effect(owner: Node) -> bool:
 		return false
 	var root := owner.get_tree().current_scene
 	if root != null and root.has_method("_can_spawn_runtime_group"):
-		return bool(root._can_spawn_runtime_group("temporary_effects", 160))
+		var limit: int = PERFORMANCE_GUARD.get_dynamic_limit(root, "temporary_effects", PERFORMANCE_GUARD.DEFAULT_TEMPORARY_EFFECT_LIMIT)
+		return bool(root._can_spawn_runtime_group("temporary_effects", limit))
 	return true
 
 static func spawn_dash_line_effect(owner: Node, start_position: Vector2, end_position: Vector2, color: Color, width: float, duration: float) -> void:

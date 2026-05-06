@@ -1,6 +1,7 @@
 extends RefCounted
 
 const PERFORMANCE_COUNTERS := preload("res://scripts/game/performance_counters.gd")
+const PERFORMANCE_GUARD := preload("res://scripts/game/performance_guard.gd")
 
 static func _mark_temporary_effect(node: Node) -> void:
 	if node != null:
@@ -12,7 +13,8 @@ static func _can_spawn_temporary_effect(owner: Node) -> bool:
 		return false
 	var root := owner.get_tree().current_scene
 	if root != null and root.has_method("_can_spawn_runtime_group"):
-		return bool(root._can_spawn_runtime_group("temporary_effects", 160))
+		var limit: int = PERFORMANCE_GUARD.get_dynamic_limit(root, "temporary_effects", PERFORMANCE_GUARD.DEFAULT_TEMPORARY_EFFECT_LIMIT)
+		return bool(root._can_spawn_runtime_group("temporary_effects", limit))
 	return true
 
 static func spawn_vortex_effect(owner: Node, center: Vector2, radius: float, color: Color, duration: float, outer_points: PackedVector2Array, inner_points: PackedVector2Array) -> void:
