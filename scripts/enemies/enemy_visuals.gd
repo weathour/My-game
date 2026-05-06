@@ -19,7 +19,7 @@ static func apply_visuals(enemy, color_override = null) -> void:
 		polygon.polygon = ENEMY_VISUAL_DATA.get_shape_points(enemy.behavior_id)
 		polygon.rotation = 0.0
 
-	if enemy.enemy_kind != "normal" or enemy.secondary_behavior_id != "" or enemy.has_trait("dash"):
+	if enemy.enemy_kind != "normal" or enemy.secondary_behavior_id != "" or enemy._is_dasher:
 		enemy._ensure_status_visuals()
 
 	if enemy.trait_ring != null:

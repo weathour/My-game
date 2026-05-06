@@ -60,11 +60,11 @@ static func update_status_visuals(enemy) -> void:
 			target_modulate = target_modulate.lerp(Color(0.68, 0.9, 1.0, 1.0), 0.45)
 		if enemy.vulnerability_timer > 0.0:
 			target_modulate = target_modulate.lerp(Color(1.0, 0.76, 0.76, 1.0), 0.4)
-		if enemy.has_trait("accelerator") and enemy.acceleration_remaining > 0.0:
+		if enemy._is_accelerator and enemy.acceleration_remaining > 0.0:
 			target_modulate = target_modulate.lerp(Color(1.0, 0.88, 0.64, 1.0), 0.32)
-		if enemy.has_trait("dash") and enemy.dash_windup_remaining > 0.0:
+		if enemy._is_dasher and enemy.dash_windup_remaining > 0.0:
 			target_modulate = target_modulate.lerp(Color(1.0, 0.92, 0.56, 1.0), 0.46)
-		if enemy.has_trait("dash") and enemy.dash_remaining > 0.0:
+		if enemy._is_dasher and enemy.dash_remaining > 0.0:
 			target_modulate = target_modulate.lerp(Color(1.0, 0.72, 0.72, 1.0), 0.32)
 		polygon.modulate = polygon.modulate.lerp(target_modulate, 0.18)
 		polygon.modulate.a = hit_flash_alpha
@@ -89,7 +89,7 @@ static func update_status_visuals(enemy) -> void:
 		enemy.trait_ring.scale = Vector2.ONE * (1.0 + 0.05 * sin(enemy.status_visual_time * 4.0))
 
 	if enemy.dash_warning_ring != null:
-		enemy.dash_warning_ring.visible = enemy.has_trait("dash") and enemy.dash_windup_remaining > 0.0
+		enemy.dash_warning_ring.visible = enemy._is_dasher and enemy.dash_windup_remaining > 0.0
 		if enemy.dash_warning_ring.visible:
 			var windup_ratio: float = clamp(enemy.dash_windup_remaining / max(enemy.dash_windup_duration, 0.001), 0.0, 1.0)
 			enemy.dash_warning_ring.rotation = -enemy.status_visual_time * 2.4
@@ -97,7 +97,7 @@ static func update_status_visuals(enemy) -> void:
 			enemy.dash_warning_ring.width = lerpf(5.0, 2.0, windup_ratio)
 			enemy.dash_warning_ring.default_color = Color(1.0, 0.9, 0.28, lerpf(0.9, 0.3, windup_ratio))
 	if enemy.dash_warning_rect != null:
-		enemy.dash_warning_rect.visible = enemy.has_trait("dash") and enemy.dash_windup_remaining > 0.0
+		enemy.dash_warning_rect.visible = enemy._is_dasher and enemy.dash_windup_remaining > 0.0
 		if enemy.dash_warning_rect.visible:
 			var dash_length: float = max(56.0, enemy.speed * max(enemy.dash_duration, 0.2) * max(enemy.dash_speed_multiplier, 1.0))
 			var dash_width: float = max(24.0, enemy.contact_radius * 0.9)

@@ -107,6 +107,20 @@ var boss_turning_interval: float = 4.0
 var boss_turning_timer: float = 0.0
 var boss_turning_bullets: int = 8
 var boss_turning_sign: float = 1.0
+
+# Performance: cached trait booleans (updated via _sync_trait_flags)
+var _is_shooter: bool = false
+var _is_dasher: bool = false
+var _is_accelerator: bool = false
+var _is_turret: bool = false
+var _is_glutton: bool = false
+var _is_swarm: bool = false
+var _is_boss: bool = false
+var _is_rebirth: bool = false
+# P1: cached per-frame target vectors
+var _cached_to_target: Vector2 = Vector2.ZERO
+var _cached_distance_to_target: float = 0.0
+var _cached_direction_to_target: Vector2 = Vector2.RIGHT
 var boss_orbit_sign: float = 1.0
 var boss_pattern_rotation: float = 0.0
 var boss_display_name: String = "祸月星核"
@@ -172,12 +186,17 @@ func _physics_process(delta: float) -> void:
 		velocity = Vector2.ZERO
 		return
 
+	# P1: cache target vectors once per frame, used by _update_behavior_state and _compute_velocity
+	_cached_to_target = target.global_position - global_position
+	_cached_distance_to_target = _cached_to_target.length()
+	_cached_direction_to_target = _cached_to_target.normalized() if _cached_distance_to_target > 0.001 else Vector2.RIGHT
 	_update_behavior_state(delta)
 	velocity = _compute_velocity(delta)
 	_apply_direct_motion(delta)
 
 func apply_enemy_profile(kind: String, profile: Dictionary) -> void:
 	ENEMY_PROFILE_APPLIER.apply_profile(self, kind, profile)
+	_sync_trait_flags()
 	_reset_runtime_state(true)
 	_apply_visuals(display_color)
 	if enemy_kind == "boss":
@@ -225,7 +244,26 @@ func _update_boss_trait(delta: float) -> void:
 	ENEMY_BOSS_STATE.update_boss_trait(self, delta)
 
 func has_trait(trait_id: String) -> bool:
-	return behavior_id == trait_id or secondary_behavior_id == trait_id
+	match trait_id:
+		"shooter": return _is_shooter
+		"dash": return _is_dasher
+		"accelerator": return _is_accelerator
+		"turret": return _is_turret
+		"glutton": return _is_glutton
+		"swarm": return _is_swarm
+		"boss": return _is_boss
+		"rebirth": return _is_rebirth
+		_: return behavior_id == trait_id or secondary_behavior_id == trait_id
+
+func _sync_trait_flags() -> void:
+	_is_shooter = (behavior_id == "shooter" or secondary_behavior_id == "shooter")
+	_is_dasher = (behavior_id == "dash" or secondary_behavior_id == "dash")
+	_is_accelerator = (behavior_id == "accelerator" or secondary_behavior_id == "accelerator")
+	_is_turret = (behavior_id == "turret" or secondary_behavior_id == "turret")
+	_is_glutton = (behavior_id == "glutton" or secondary_behavior_id == "glutton")
+	_is_swarm = (behavior_id == "swarm" or secondary_behavior_id == "swarm")
+	_is_boss = (behavior_id == "boss" or secondary_behavior_id == "boss")
+	_is_rebirth = (behavior_id == "rebirth" or secondary_behavior_id == "rebirth")
 
 func _spawn_projectile(origin: Vector2, shot_direction: Vector2, shot_speed: float, shot_damage: float, shot_lifetime: float, color: Color, mode: String, extra_config: Dictionary = {}) -> void:
 	ENEMY_PROJECTILES.spawn_projectile(self, origin, shot_direction, shot_speed, shot_damage, shot_lifetime, color, mode, extra_config)
@@ -264,7 +302,7 @@ func _update_status_visuals() -> void:
 	ENEMY_STATUS_VISUALS.update_status_visuals(self)
 
 func _has_status_visual_pressure() -> bool:
-	return slow_timer > 0.0 or vulnerability_timer > 0.0 or enemy_kind != "normal" or secondary_behavior_id != "" or has_trait("dash") or boss_visual_instance != null
+	return slow_timer > 0.0 or vulnerability_timer > 0.0 or enemy_kind != "normal" or secondary_behavior_id != "" or _is_dasher or boss_visual_instance != null
 
 func _spawn_status_burst(color: Color, radius: float) -> void:
 	ENEMY_STATUS_VISUALS.spawn_status_burst(self, color, radius)
