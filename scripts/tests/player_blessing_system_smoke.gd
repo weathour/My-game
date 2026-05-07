@@ -25,6 +25,7 @@ func _run() -> void:
 	_check_tier_two_equivalent_recipe_lock()
 	_check_basic_attack_evolution_does_not_lock_recipe()
 	_check_locked_blessing_offer_display_count()
+	_check_locked_blessing_cap_uses_available_count()
 	_check_multi_skill_blessing_binding_choice()
 	_check_skipped_binding_locks_one_material()
 	_check_skill_unlock_uses_skill_role_not_active_role()
@@ -235,8 +236,8 @@ func _check_blessing_skill_unlock_and_binding() -> void:
 	if basic_scales.is_empty():
 		failures.append("basic attack should read trick because it has the quantity tag")
 	var blade_scales := PlayerBlessingSkillState.get_skill_effect_scales(owner, PlayerBlessingSkillState.SKILL_BLADE_STORM, "quantity_skill_count")
-	if not blade_scales.is_empty():
-		failures.append("blade storm should not use trick II that was locked into its tier III evolution recipe, got %s" % str(blade_scales))
+	if blade_scales.size() != 3:
+		failures.append("blade storm should use trick II locked into its own tier III evolution recipe, got %s" % str(blade_scales))
 
 
 func _check_new_blessing_skill_unlocks() -> void:
@@ -331,6 +332,28 @@ func _check_locked_blessing_offer_display_count() -> void:
 	var option: Dictionary = PlayerBlessingSystem._make_option(owner, "formation_break", 1)
 	if not str(option.get("title", "")).contains("0/6"):
 		failures.append("locked recipe blessing should display available count 0/6, got %s" % str(option.get("title", "")))
+
+func _check_locked_blessing_cap_uses_available_count() -> void:
+	var owner := _OwnerStub.new()
+	owner.level = 12
+	for _index in range(6):
+		PlayerBlessingSystem.apply_option(owner, "blessing:formation_break:1")
+	PlayerBlessingSystem.apply_option(owner, "blessing:blazing_sun:1")
+	PlayerBlessingSkillState.refresh_unlocks(owner)
+	var option: Dictionary = PlayerBlessingSystem._make_option(owner, "formation_break", 1)
+	if not str(option.get("title", "")).contains("5/6"):
+		failures.append("locked recipe material should free one blessing cap slot, got %s" % str(option.get("title", "")))
+	var offer: Dictionary = PlayerBlessingSystem.build_tier_offer_for_owner(owner, 1)
+	var found := false
+	for offered_option in offer.get("options", []):
+		if offered_option is Dictionary and str((offered_option as Dictionary).get("blessing_id", "")) == "formation_break":
+			found = true
+	if not found:
+		failures.append("locked recipe material should remain offerable until available count reaches x6")
+	PlayerBlessingSystem.apply_option(owner, "blessing:formation_break:1")
+	option = PlayerBlessingSystem._make_option(owner, "formation_break", 1)
+	if not str(option.get("title", "")).contains("6/6"):
+		failures.append("available blessing cap should refill to 6/6 after one more pick, got %s" % str(option.get("title", "")))
 
 func _check_multi_skill_blessing_binding_choice() -> void:
 	var owner := _OwnerStub.new()

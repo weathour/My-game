@@ -230,7 +230,7 @@ static func get_profile(_kind: String, archetype: String) -> Dictionary:
 				"archetype": "chaser",
 				"behavior": "chaser",
 				"max_health": 28.0,
-				"speed": 88.0,
+				"speed": 88.0 * 0.7,
 				"touch_damage": 10.0,
 				"contact_radius": 36.0,
 				"reward_tier": 1,

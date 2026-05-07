@@ -875,6 +875,38 @@ static func _get_effective_skill_blessing_levels(owner, skill_id: String, blessi
 		var credit_amount: int = int(bonus_credit_levels.get(tier, 0))
 		if credit_amount > 0:
 			result[tier] = int(result.get(tier, 0)) + credit_amount
+	var recipe_credit_levels: Dictionary = _get_skill_evolution_recipe_credit(owner, skill_id, blessing_id, blessing_levels)
+	for tier in [1, 2]:
+		var recipe_credit_amount: int = int(recipe_credit_levels.get(tier, 0))
+		if recipe_credit_amount > 0:
+			result[tier] = int(result.get(tier, 0)) + recipe_credit_amount
+	return result
+
+
+static func _get_skill_evolution_recipe_credit(owner, skill_id: String, blessing_id: String, blessing_levels: Dictionary) -> Dictionary:
+	var result: Dictionary = {}
+	if owner == null or skill_id == "" or not _skill_can_read_blessing(skill_id, blessing_id):
+		return result
+	var current_tier: int = get_skill_tier(owner, skill_id)
+	for recipe in [EVOLVE_RECIPES.get(skill_id, {}), THIRD_TIER_RECIPES.get(skill_id, {})]:
+		if recipe is not Dictionary or (recipe as Dictionary).is_empty():
+			continue
+		var target_tier := int((recipe as Dictionary).get("tier", 0))
+		if target_tier <= 1 or current_tier < target_tier:
+			continue
+		var skill_exact: Variant = (recipe as Dictionary).get("skill_exact", {})
+		if skill_exact is not Dictionary or not (skill_exact as Dictionary).has(blessing_id):
+			continue
+		var required_levels: Variant = (skill_exact as Dictionary).get(blessing_id, {})
+		if required_levels is not Dictionary:
+			continue
+		for tier_value in (required_levels as Dictionary).keys():
+			var tier := int(tier_value)
+			var required_count: int = max(0, int((required_levels as Dictionary).get(tier_value, 0)))
+			var owned_count: int = max(0, int(blessing_levels.get(tier, 0)))
+			var credit_count: int = min(required_count, owned_count)
+			if credit_count > 0:
+				result[tier] = int(result.get(tier, 0)) + credit_count
 	return result
 
 static func _get_skill_blessing_baseline(owner, skill_id: String, blessing_id: String) -> Dictionary:

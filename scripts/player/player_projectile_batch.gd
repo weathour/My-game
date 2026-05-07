@@ -1,6 +1,7 @@
 extends Node2D
 
 const PLAYER_DAMAGE_RESOLVER := preload("res://scripts/player/player_damage_resolver.gd")
+const PLAYER_DAMAGE_BATCHER := preload("res://scripts/player/player_damage_batcher.gd")
 const PERFORMANCE_COUNTERS := preload("res://scripts/game/performance_counters.gd")
 
 const MAX_BATCHED_PROJECTILES := 1800
@@ -63,6 +64,8 @@ var bullet_outline_multimesh: MultiMesh
 var bullet_multimesh_instance: MultiMeshInstance2D
 var bullet_multimesh: MultiMesh
 var last_multimesh_refresh_frame: int = -1
+var damage_batcher: RefCounted
+var reusable_damage_batcher: RefCounted
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_PAUSABLE
@@ -164,11 +167,12 @@ func _check_projectile_hits() -> void:
 	var enemy_grid: Dictionary = PLAYER_DAMAGE_RESOLVER._get_enemy_grid(source_player)
 	if enemy_grid.is_empty():
 		return
+	damage_batcher = _get_damage_batcher()
 	var checks_done := 0
 	var checked_projectiles := 0
 	while checked_projectiles < positions.size() and checks_done < MAX_HIT_CHECKS_PER_FRAME:
 		if positions.is_empty():
-			return
+			break
 		if scan_cursor >= positions.size():
 			scan_cursor = 0
 		var hit_enemy: Node2D = _find_hit_enemy(scan_cursor, enemy_grid)
@@ -183,6 +187,16 @@ func _check_projectile_hits() -> void:
 			continue
 		scan_cursor += 1
 		checked_projectiles += 1
+	if damage_batcher != null:
+		damage_batcher.flush()
+		damage_batcher = null
+
+func _get_damage_batcher() -> RefCounted:
+	if reusable_damage_batcher == null:
+		reusable_damage_batcher = PLAYER_DAMAGE_BATCHER.new(source_player)
+	elif reusable_damage_batcher.has_method("reset"):
+		reusable_damage_batcher.reset(source_player)
+	return reusable_damage_batcher
 
 func _find_hit_enemy(projectile_index: int, grid: Dictionary) -> Node2D:
 	var position: Vector2 = positions[projectile_index]
@@ -208,13 +222,22 @@ func _find_hit_enemy(projectile_index: int, grid: Dictionary) -> Node2D:
 func _apply_projectile_hit(projectile_index: int, enemy: Node2D) -> void:
 	_mark_projectile_hit_enemy(projectile_index, enemy)
 	var role_id: String = role_ids[projectile_index]
-	var killed := false
+	if damage_batcher != null:
+		damage_batcher.add_enemy(
+			enemy,
+			damages[projectile_index],
+			role_id,
+			vulnerability_bonuses[projectile_index],
+			vulnerability_durations[projectile_index],
+			slow_multipliers[projectile_index],
+			slow_durations[projectile_index],
+			source_origins[projectile_index]
+		)
+		return
 	if source_player.has_method("_deal_damage_to_enemy"):
-		killed = bool(source_player._deal_damage_to_enemy(enemy, damages[projectile_index], role_id, vulnerability_bonuses[projectile_index], vulnerability_durations[projectile_index], slow_multipliers[projectile_index], slow_durations[projectile_index], source_origins[projectile_index]))
+		source_player._deal_damage_to_enemy(enemy, damages[projectile_index], role_id, vulnerability_bonuses[projectile_index], vulnerability_durations[projectile_index], slow_multipliers[projectile_index], slow_durations[projectile_index], source_origins[projectile_index])
 	elif enemy.has_method("take_damage"):
-		killed = bool(enemy.take_damage(damages[projectile_index]))
-	if source_player.has_method("_register_attack_result"):
-		source_player._register_attack_result(role_id, 1, killed)
+		enemy.take_damage(damages[projectile_index])
 
 func _has_projectile_hit_enemy(projectile_index: int, enemy: Node2D) -> bool:
 	if projectile_index < 0 or projectile_index >= hit_enemy_ids.size():
@@ -241,6 +264,9 @@ func _get_live_enemies() -> Array:
 	var tree: SceneTree = get_tree()
 	if tree == null:
 		return []
+	var scene: Node = tree.current_scene
+	if scene != null and scene.has_method("get_runtime_enemies"):
+		return scene.get_runtime_enemies()
 	return tree.get_nodes_in_group("enemies")
 
 func _get_enemy_hit_radius(enemy: Node2D, scale: float, minimum: float, maximum: float) -> float:

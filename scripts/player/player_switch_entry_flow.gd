@@ -27,35 +27,25 @@ static func spawn_gunner_entry_wave_batch(owner, role_id: String, wave_index: in
 			bullet.hit_radius = 12.0
 	if end_index >= bullet_count:
 		return
-	var current_scene: Node = owner.get_tree().current_scene
-	if current_scene == null:
+	if owner.get_tree() == null:
 		return
-	var controller := Node2D.new()
-	controller.name = "GunnerEntryWaveBatchController"
-	current_scene.add_child(controller)
-	var tween := controller.create_tween()
+	var tween: Tween = owner.create_tween()
 	tween.tween_interval(GUNNER_ENTRY_WAVE_BATCH_INTERVAL)
 	tween.tween_callback(Callable(owner, "_spawn_gunner_entry_wave_batch").bind(role_id, wave_index, end_index, damage_scale))
-	tween.tween_callback(controller.queue_free)
 
 
 static func start_mage_entry_bombardment(owner, role_id: String, bombard_centers: Array, damage_scale: float = 1.0) -> void:
 	if bombard_centers.is_empty():
 		return
 
-	var current_scene: Node = owner.get_tree().current_scene
-	if current_scene == null:
+	if owner.get_tree() == null:
 		return
-
-	var controller := Node2D.new()
-	controller.name = "MageEntryBombardmentController"
-	current_scene.add_child(controller)
 
 	var first_center: Vector2 = bombard_centers[0]
 	var warning_duration: float = owner._get_scene_animation_duration(owner.MAGE_WARNING_EFFECT_SCENE, 0.2)
 	show_mage_entry_bombardment_warning(owner, first_center)
 
-	var tween := controller.create_tween()
+	var tween: Tween = owner.create_tween()
 	tween.tween_interval(warning_duration)
 	tween.tween_callback(Callable(owner, "_trigger_mage_entry_bombardment_impact").bind(role_id, first_center, damage_scale))
 
@@ -66,8 +56,6 @@ static func start_mage_entry_bombardment(owner, role_id: String, bombard_centers
 			tween.tween_callback(Callable(owner, "_show_mage_entry_bombardment_warning").bind(next_center))
 			tween.tween_interval(warning_duration)
 			tween.tween_callback(Callable(owner, "_trigger_mage_entry_bombardment_impact").bind(role_id, next_center, damage_scale))
-
-	tween.tween_callback(controller.queue_free)
 
 
 static func show_mage_entry_bombardment_warning(owner, center: Vector2) -> void:
@@ -149,21 +137,18 @@ static func _apply_hero_entry(owner, role_id: String) -> void:
 
 
 static func _spawn_swordsman_hero_entry_extras(owner, role_id: String, extra_count: int, effect_scale: float) -> void:
-	var current_scene: Node = owner.get_tree().current_scene
-	if current_scene == null:
+	if owner.get_tree() == null:
 		return
 	var direction: Vector2 = owner.facing_direction if owner.facing_direction.length_squared() > 0.001 else Vector2.RIGHT
 	var origin: Vector2 = owner.global_position
+	var tween: Tween = owner.create_tween()
 	for index in range(extra_count):
-		var controller := Node2D.new()
-		controller.name = "HeroEntrySwordsmanExtra"
-		current_scene.add_child(controller)
-		var tween := controller.create_tween()
-		tween.tween_interval(0.08 * float(index + 1))
+		var extra_index: int = index
+		tween.tween_interval(0.08)
 		tween.tween_callback(func() -> void:
 			if owner == null or not is_instance_valid(owner):
 				return
-			var slash_direction: Vector2 = direction.rotated(deg_to_rad(14.0 * (float(index) - float(extra_count - 1) * 0.5)))
+			var slash_direction: Vector2 = direction.rotated(deg_to_rad(14.0 * (float(extra_index) - float(extra_count - 1) * 0.5)))
 			var start_position: Vector2 = origin - slash_direction * 42.0
 			var end_position: Vector2 = origin + slash_direction * 128.0
 			var width: float = 32.0 * effect_scale
@@ -173,21 +158,15 @@ static func _spawn_swordsman_hero_entry_extras(owner, role_id: String, extra_cou
 			if hits > 0:
 				owner._register_attack_result(role_id, hits, false)
 		)
-		tween.tween_callback(controller.queue_free)
 
 
 static func _spawn_gunner_hero_entry_extras(owner, role_id: String, extra_count: int, effect_scale: float) -> void:
-	var current_scene: Node = owner.get_tree().current_scene
-	if current_scene == null:
+	if owner.get_tree() == null:
 		return
+	var tween: Tween = owner.create_tween()
 	for index in range(extra_count):
-		var controller := Node2D.new()
-		controller.name = "HeroEntryGunnerExtra"
-		current_scene.add_child(controller)
-		var tween := controller.create_tween()
-		tween.tween_interval(0.08 * float(index + 1))
+		tween.tween_interval(0.08)
 		tween.tween_callback(Callable(owner, "_fire_gunner_entry_wave").bind(role_id, index + 2, effect_scale))
-		tween.tween_callback(controller.queue_free)
 
 
 static func _spawn_mage_hero_entry_extras(owner, role_id: String, _extra_count: int, effect_scale: float) -> void:

@@ -13,6 +13,9 @@ const ULTIMATE_TIER_THREE_CONE_DEGREES := 90.0
 const ULTIMATE_TIER_ONE_TICK_INTERVAL := 0.34
 const ULTIMATE_TIER_TWO_TICK_INTERVAL := 0.24
 const ULTIMATE_TIER_THREE_TICK_INTERVAL := 0.14
+const ULTIMATE_TIER_ONE_DAMAGE_WAVES_PER_SECOND := 4.7
+const ULTIMATE_TIER_TWO_DAMAGE_WAVES_PER_SECOND := 5.3
+const ULTIMATE_TIER_THREE_DAMAGE_WAVES_PER_SECOND := 6.0
 const ULTIMATE_VISUAL_INTERVAL := 0.07
 const ULTIMATE_VISUAL_BULLETS_PER_PULSE := 7
 const ULTIMATE_DAMAGE_BASE_RATIO := 2.1
@@ -75,12 +78,12 @@ func _perform_attack_variant(owner, shot_direction: Vector2, effect_scale: float
 
 func _schedule_reprise_segments(owner, base_direction: Vector2) -> void:
 	var combo_scales := _get_skill_effect_scales(owner, "combo_skill_extra")
-	for index in range(combo_scales.size()):
-		var tree: SceneTree = owner.get_tree()
-		if tree == null:
-			return
-		var timer := tree.create_timer(BASIC_COMBO_INTERVAL * float(index + 1))
-		timer.timeout.connect(Callable(self, "_perform_combo_segment_if_valid").bind(owner, base_direction, float(combo_scales[index])))
+	if combo_scales.is_empty():
+		return
+	owner._schedule_repeating_sequence(BASIC_COMBO_INTERVAL, combo_scales.size(), func(index: int) -> void:
+		if index >= 0 and index < combo_scales.size():
+			_perform_combo_segment_if_valid(owner, base_direction, float(combo_scales[index]))
+	, BASIC_COMBO_INTERVAL)
 
 func _perform_combo_segment_if_valid(owner, base_direction: Vector2, combo_scale: float) -> void:
 	if owner == null or not is_instance_valid(owner) or bool(owner.get("is_dead")):
@@ -199,17 +202,12 @@ func perform_background(owner) -> void:
 func perform_enter(owner, role_id: String, _assault_level: int, _assault_multiplier: float) -> int:
 	owner._show_switch_banner("\u8FDB\u573A", "\u5FEB\u62D4\u538B\u5236", Color(1.0, 0.58, 0.36, 1.0))
 	owner._fire_gunner_entry_wave(role_id, 0)
-	var current_scene: Node = owner.get_tree().current_scene
-	if current_scene != null:
-		var controller := Node2D.new()
-		controller.name = "GunnerEntryWaveController"
-		current_scene.add_child(controller)
-		var tween := controller.create_tween()
+	if owner.get_tree() != null:
+		var tween: Tween = owner.create_tween()
 		var wave_count := 2
 		for wave_index in range(1, wave_count):
 			tween.tween_interval(0.08)
 			tween.tween_callback(Callable(owner, "_fire_gunner_entry_wave").bind(role_id, wave_index))
-		tween.tween_callback(controller.queue_free)
 	return 8
 
 func perform_exit(owner, role_id: String, rearguard_level: int) -> int:
@@ -227,20 +225,23 @@ func perform_ultimate(owner, cast_payload: Dictionary) -> void:
 	var scatter_level: int = 0
 	var ultimate_tier: int = _get_ultimate_skill_tier(owner)
 	var cone_degrees: float = _get_ultimate_cone_degrees(ultimate_tier)
-	var tick_interval: float = _get_ultimate_tick_interval(ultimate_tier)
 	var total_duration: float = ULTIMATE_DURATION
 	if owner.has_method("_get_blessing_skill_duration_multiplier"):
 		total_duration *= float(owner._get_blessing_skill_duration_multiplier(ULTIMATE_SKILL_ID))
 	total_duration *= float(cast_payload.get("duration_multiplier", 1.0))
 	_lock_basic_attack_during_ultimate(owner, total_duration)
-	var tick_count: int = max(1, int(ceil(total_duration / tick_interval)))
+	var old_tick_interval: float = _get_ultimate_tick_interval(ultimate_tier)
+	var old_tick_count: int = max(1, int(ceil(total_duration / old_tick_interval)))
+	var tick_count: int = _get_ultimate_damage_wave_count(total_duration, ultimate_tier)
+	var tick_interval: float = total_duration / float(max(1, tick_count))
+	var damage_wave_multiplier: float = float(old_tick_count) / float(max(1, tick_count))
 	var visual_count: int = max(1, int(ceil(total_duration / ULTIMATE_VISUAL_INTERVAL)))
 	owner._queue_camera_shake(17.5, 0.54)
 	owner.switch_invulnerability_remaining = max(owner.switch_invulnerability_remaining, 0.5)
 	owner._delay_level_up_requests(total_duration)
 	owner._spawn_combat_tag(owner.global_position + Vector2(0.0, -34.0), "火箭弹幕", Color(1.0, 0.86, 0.5, 1.0))
 	owner._schedule_repeating_sequence(tick_interval, tick_count, func(tick_index: int) -> void:
-		_apply_ultimate_cone_damage(owner, barrage_level, focus_level, cone_degrees, float(cast_payload.get("damage_multiplier", 1.0)), ultimate_tier, tick_index)
+		_apply_ultimate_cone_damage(owner, barrage_level, focus_level, cone_degrees, float(cast_payload.get("damage_multiplier", 1.0)) * damage_wave_multiplier, ultimate_tier, tick_index)
 	)
 	owner._schedule_repeating_sequence(ULTIMATE_VISUAL_INTERVAL, visual_count, func(visual_index: int) -> void:
 		_spawn_ultimate_cone_visuals(owner, barrage_level, focus_level, scatter_level, cone_degrees, visual_index)
@@ -276,18 +277,20 @@ func _apply_ultimate_cone_damage(owner, barrage_level: int, focus_level: int, co
 		damage_multiplier *= ULTIMATE_TIER_TWO_DAMAGE_MULTIPLIER * ULTIMATE_TIER_THREE_DAMAGE_MULTIPLIER
 	elif ultimate_tier >= 2:
 		damage_multiplier *= ULTIMATE_TIER_TWO_DAMAGE_MULTIPLIER
-	var hits: int = owner._damage_enemies_in_cone(
-		origin,
-		direction,
-		range_value,
-		deg_to_rad(cone_degrees),
-		owner._get_role_damage("gunner") * damage_multiplier,
-		0.035 * float(focus_level),
-		1.0,
-		0.0,
-		"gunner"
-	)
-	if hits > 0:
+	var hits: int = _apply_damage_shapes(owner, [{
+		"type": "cone",
+		"origin": origin,
+		"direction": direction,
+		"range": range_value,
+		"angle": deg_to_rad(cone_degrees),
+		"damage_amount": owner._get_role_damage("gunner") * damage_multiplier,
+		"vulnerability_bonus": 0.035 * float(focus_level),
+		"slow_multiplier": 1.0,
+		"slow_duration": 0.0,
+		"source_role_id": "gunner",
+		"source_position": origin
+	}])
+	if hits > 0 and not _uses_batched_damage(owner):
 		owner._register_attack_result("gunner", hits, false)
 	if tick_index % 3 == 0:
 		owner._queue_camera_shake(3.8 + float(barrage_level) * 0.18, 0.08)
@@ -324,6 +327,27 @@ func _spawn_ultimate_cone_visuals(owner, barrage_level: int, focus_level: int, s
 			"pierce_count": 0
 		})
 
+func _apply_damage_shapes(owner, shapes: Array[Dictionary]) -> int:
+	if owner != null and owner.has_method("_damage_enemies_in_shapes_batched"):
+		return int(owner._damage_enemies_in_shapes_batched(shapes))
+	var hits := 0
+	for shape in shapes:
+		hits += int(owner._damage_enemies_in_cone(
+			shape.get("origin", Vector2.ZERO),
+			shape.get("direction", Vector2.RIGHT),
+			float(shape.get("range", 1.0)),
+			float(shape.get("angle", 0.0)),
+			float(shape.get("damage_amount", 0.0)),
+			float(shape.get("vulnerability_bonus", 0.0)),
+			float(shape.get("slow_multiplier", 1.0)),
+			float(shape.get("slow_duration", 0.0)),
+			str(shape.get("source_role_id", ""))
+		))
+	return hits
+
+func _uses_batched_damage(owner) -> bool:
+	return owner != null and owner.has_method("_damage_enemies_in_shapes_batched")
+
 func _get_ultimate_cone_range(owner) -> float:
 	var role_data: Dictionary = owner.roles[1] if owner.roles.size() > 1 else {"range": 300.0, "id": "gunner"}
 	var upgrade_data: Dictionary = owner.role_upgrade_levels.get("gunner", {})
@@ -351,6 +375,14 @@ func _get_ultimate_tick_interval(ultimate_tier: int) -> float:
 	if ultimate_tier >= 2:
 		return ULTIMATE_TIER_TWO_TICK_INTERVAL
 	return ULTIMATE_TIER_ONE_TICK_INTERVAL
+
+func _get_ultimate_damage_wave_count(total_duration: float, ultimate_tier: int) -> int:
+	var waves_per_second: float = ULTIMATE_TIER_ONE_DAMAGE_WAVES_PER_SECOND
+	if ultimate_tier >= 3:
+		waves_per_second = ULTIMATE_TIER_THREE_DAMAGE_WAVES_PER_SECOND
+	elif ultimate_tier >= 2:
+		waves_per_second = ULTIMATE_TIER_TWO_DAMAGE_WAVES_PER_SECOND
+	return max(1, int(round(total_duration * waves_per_second)))
 
 func _fire_ultimate_wave(owner, wave_count: int, barrage_level: int, focus_level: int, scatter_level: int, lock_level: int, cast_damage_multiplier: float, wave_index: int) -> void:
 	if owner.is_dead:

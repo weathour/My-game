@@ -291,6 +291,7 @@ var role_visual_time: float = 0.0
 var active_role_visual_hidden: bool = false
 var active_role_visual_hidden_role_id: String = ""
 var runtime_texture_cache: Dictionary = {}
+var white_key_material_cache: Dictionary = {}
 var swordsman_role = SWORDSMAN_ROLE.new()
 var swordsman_attack_chain: int = 0
 var gunner_role = GUNNER_ROLE.new()
@@ -326,12 +327,17 @@ func _get_cached_runtime_texture(relative_path: String) -> Texture2D:
 	return PLAYER_TEXTURE_LOADER.get_cached_runtime_texture(relative_path, runtime_texture_cache)
 
 func _create_white_key_material(value_threshold: float = 0.94, saturation_threshold: float = 0.08, edge_softness: float = 0.03) -> ShaderMaterial:
-	return PLAYER_TEXTURE_LOADER.create_white_key_material(
+	var cache_key := "%.3f|%.3f|%.3f" % [value_threshold, saturation_threshold, edge_softness]
+	if white_key_material_cache.has(cache_key):
+		return white_key_material_cache[cache_key] as ShaderMaterial
+	var material := PLAYER_TEXTURE_LOADER.create_white_key_material(
 		WHITE_KEY_SHADER,
 		value_threshold,
 		saturation_threshold,
 		edge_softness
 	)
+	white_key_material_cache[cache_key] = material
+	return material
 
 func _get_role_sprite_offset(role_id: String) -> Vector2:
 	return PLAYER_VISUAL_LAYOUT.get_role_sprite_offset(role_id, ROLE_SKETCH_FULL_SIZES, ROLE_SKETCH_VISIBLE_BOUNDS)
@@ -388,7 +394,10 @@ func _spawn_sword_slash_scene_effect(center: Vector2, direction: Vector2, radius
 		Vector2(max(18.0, thickness * 2.0), max(72.0, radius * 2.0)),
 		13,
 		max(0.24, duration),
-		mirror_horizontal
+		mirror_horizontal,
+		1.0,
+		true,
+		true
 	)
 
 func _spawn_sword_omnislash_scene_effect(center: Vector2, direction: Vector2, length: float, thickness: float) -> Node2D:
@@ -1348,8 +1357,8 @@ func _spawn_ultimate_afterglow_effect(role_id: String, duration: float) -> void:
 func _trigger_ultimate_afterglow_pulse(role_id: String, pulse_index: int) -> void:
 	PLAYER_ULTIMATE_FLOW.trigger_ultimate_afterglow_pulse(self, role_id, pulse_index)
 
-func _schedule_repeating_sequence(interval: float, repeat_count: int, callback: Callable) -> void:
-	PLAYER_ULTIMATE_FLOW.schedule_repeating_sequence(self, interval, repeat_count, callback)
+func _schedule_repeating_sequence(interval: float, repeat_count: int, callback: Callable, initial_delay: float = 0.0) -> void:
+	PLAYER_ULTIMATE_FLOW.schedule_repeating_sequence(self, interval, repeat_count, callback, initial_delay)
 
 func _fire_gunner_entry_wave(role_id: String, wave_index: int, damage_scale: float = 1.0) -> void:
 	PLAYER_SWITCH_FLOW.fire_gunner_entry_wave(self, role_id, wave_index, damage_scale)
@@ -1447,6 +1456,12 @@ func _collect_enemies_in_radius_for_damage_batch(center: Vector2, radius: float)
 
 func _damage_enemies_in_radius_batched(center: Vector2, radius: float, damage_amount: float, vulnerability_bonus: float, slow_multiplier: float, slow_duration: float, source_role_id: String = "") -> int:
 	return PLAYER_DAMAGE_RESOLVER.damage_enemies_in_radius_batched(self, center, radius, damage_amount, vulnerability_bonus, slow_multiplier, slow_duration, source_role_id)
+
+func _damage_enemies_in_multiple_radii_batched(centers: Array[Vector2], radius: float, damage_amount: float, vulnerability_bonus: float, slow_multiplier: float, slow_duration: float, source_role_id: String = "") -> int:
+	return PLAYER_DAMAGE_RESOLVER.damage_enemies_in_multiple_radii_batched(self, centers, radius, damage_amount, vulnerability_bonus, slow_multiplier, slow_duration, source_role_id)
+
+func _damage_enemies_in_shapes_batched(shapes: Array[Dictionary]) -> int:
+	return PLAYER_DAMAGE_RESOLVER.damage_enemies_in_shapes_batched(self, shapes)
 
 func _damage_enemies_in_radius_count_kills(center: Vector2, radius: float, damage_amount: float, vulnerability_bonus: float, slow_multiplier: float, slow_duration: float, source_role_id: String = "") -> Dictionary:
 	return PLAYER_DAMAGE_RESOLVER.damage_enemies_in_radius_count_kills(self, center, radius, damage_amount, vulnerability_bonus, slow_multiplier, slow_duration, source_role_id)

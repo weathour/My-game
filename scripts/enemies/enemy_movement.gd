@@ -1,5 +1,6 @@
 extends RefCounted
 
+const GLOBAL_UNIT_MOVE_SPEED_SCALE := 0.7
 const BOSS_MOVE_SPEED_SCALE := 0.7
 
 static func compute_velocity(enemy, delta: float) -> Vector2:
@@ -37,7 +38,7 @@ static func compute_velocity(enemy, delta: float) -> Vector2:
 	if enemy._is_swarm:
 		move_speed *= 1.1
 
-	return move_direction.normalized() * move_speed
+	return move_direction.normalized() * move_speed * GLOBAL_UNIT_MOVE_SPEED_SCALE
 
 static func compute_boss_velocity(enemy, direction_to_target: Vector2, distance_to_target: float, delta: float) -> Vector2:
 	if enemy.boss_phase >= 3 and enemy.boss_phase_three_intro_remaining > 0.0:
@@ -54,4 +55,4 @@ static func compute_boss_velocity(enemy, direction_to_target: Vector2, distance_
 	enemy.boss_pattern_rotation = wrapf(enemy.boss_pattern_rotation + delta * 0.45, 0.0, TAU)
 	var drift := Vector2.RIGHT.rotated(enemy.boss_pattern_rotation) * 0.16
 	var move_direction := (tangential * 0.92 + radial * 0.58 + drift).normalized()
-	return move_direction * enemy.speed * enemy.slow_multiplier * BOSS_MOVE_SPEED_SCALE
+	return move_direction * enemy.speed * enemy.slow_multiplier * BOSS_MOVE_SPEED_SCALE * GLOBAL_UNIT_MOVE_SPEED_SCALE

@@ -4,6 +4,10 @@ const ENEMY_PROJECTILES := preload("res://scripts/enemies/enemy_projectiles.gd")
 const ENEMY_TURRET_BOMBARD := preload("res://scripts/enemies/enemy_turret_bombard.gd")
 const NON_BOSS_RANGED_ATTACK_FREQUENCY_MULTIPLIER := 0.4
 const GLUTTON_ABSORB_INTERVAL := 0.18
+const GLUTTON_GEM_GRID_CELL_SIZE := 128.0
+
+static var cached_exp_gem_grid_frame: int = -1
+static var cached_exp_gem_grid: Dictionary = {}
 
 static func update_behavior_state(enemy, delta: float) -> void:
 	_tick_trait(enemy, enemy.behavior_id, delta)
@@ -77,10 +81,11 @@ static func _update_glutton_trait(enemy, delta: float) -> void:
 	if enemy.glutton_absorb_elapsed < GLUTTON_ABSORB_INTERVAL:
 		return
 	enemy.glutton_absorb_elapsed = 0.0
-	for gem in enemy.get_tree().get_nodes_in_group("exp_gems"):
+	var absorb_radius_squared: float = enemy.glutton_absorb_radius * enemy.glutton_absorb_radius
+	for gem in _get_exp_gem_candidates(enemy, enemy.global_position, enemy.glutton_absorb_radius):
 		if not is_instance_valid(gem):
 			continue
-		if enemy.global_position.distance_to(gem.global_position) > enemy.glutton_absorb_radius:
+		if enemy.global_position.distance_squared_to(gem.global_position) > absorb_radius_squared:
 			continue
 		if gem.has_method("collect"):
 			gem.collect()
@@ -109,3 +114,53 @@ static func _get_non_boss_ranged_interval(enemy, base_interval: float) -> float:
 	if str(enemy.enemy_kind) == "boss":
 		return base_interval
 	return base_interval / max(NON_BOSS_RANGED_ATTACK_FREQUENCY_MULTIPLIER, 0.001)
+
+static func _get_exp_gem_candidates(enemy, center: Vector2, radius: float) -> Array:
+	var grid := _get_exp_gem_grid(enemy)
+	if grid.is_empty():
+		return []
+	var min_cell: Vector2i = _exp_gem_grid_cell(center - Vector2.ONE * radius)
+	var max_cell: Vector2i = _exp_gem_grid_cell(center + Vector2.ONE * radius)
+	var candidates: Array = []
+	for x in range(min_cell.x, max_cell.x + 1):
+		for y in range(min_cell.y, max_cell.y + 1):
+			var cell := Vector2i(x, y)
+			if not grid.has(cell):
+				continue
+			for gem in grid[cell] as Array:
+				if is_instance_valid(gem):
+					candidates.append(gem)
+	return candidates
+
+static func _get_exp_gem_grid(enemy) -> Dictionary:
+	var tree: SceneTree = enemy.get_tree()
+	if tree == null:
+		return {}
+	var current_frame := Engine.get_physics_frames()
+	if cached_exp_gem_grid_frame == current_frame:
+		return cached_exp_gem_grid
+	cached_exp_gem_grid = {}
+	for gem in _get_runtime_pickups(enemy, tree, "exp_gems"):
+		if not is_instance_valid(gem) or gem is not Node2D:
+			continue
+		var cell: Vector2i = _exp_gem_grid_cell((gem as Node2D).global_position)
+		if not cached_exp_gem_grid.has(cell):
+			cached_exp_gem_grid[cell] = []
+		(cached_exp_gem_grid[cell] as Array).append(gem)
+	cached_exp_gem_grid_frame = current_frame
+	return cached_exp_gem_grid
+
+static func _get_runtime_pickups(enemy, tree: SceneTree, group_name: String) -> Array:
+	if tree == null:
+		return []
+	var scene: Node = tree.current_scene
+	if scene != null and scene.has_method("get_runtime_pickups"):
+		return scene.get_runtime_pickups(group_name)
+	if enemy != null and enemy.has_method("get_tree"):
+		var enemy_tree: SceneTree = enemy.get_tree()
+		if enemy_tree != null:
+			return enemy_tree.get_nodes_in_group(group_name)
+	return tree.get_nodes_in_group(group_name)
+
+static func _exp_gem_grid_cell(position: Vector2) -> Vector2i:
+	return Vector2i(floori(position.x / GLUTTON_GEM_GRID_CELL_SIZE), floori(position.y / GLUTTON_GEM_GRID_CELL_SIZE))

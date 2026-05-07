@@ -11,6 +11,7 @@ signal developer_level_up_requested
 signal developer_boss_spawn_requested(archetype_id: String)
 signal developer_small_boss_spawn_requested(archetype_id: String)
 signal developer_skill_unlock_requested(skill_id: String, tier: int)
+signal developer_blessing_grant_requested(blessing_id: String, tier: int)
 
 var level_label: Label
 var role_label: Label
@@ -283,6 +284,7 @@ func _build_developer_panel(root: Control) -> void:
 	developer_panel.boss_spawn_requested.connect(func(archetype_id: String): developer_boss_spawn_requested.emit(archetype_id))
 	developer_panel.small_boss_spawn_requested.connect(func(archetype_id: String): developer_small_boss_spawn_requested.emit(archetype_id))
 	developer_panel.skill_unlock_requested.connect(func(skill_id: String, tier: int): developer_skill_unlock_requested.emit(skill_id, tier))
+	developer_panel.blessing_grant_requested.connect(func(blessing_id: String, tier: int): developer_blessing_grant_requested.emit(blessing_id, tier))
 
 func set_developer_invincibility_enabled(enabled: bool) -> void:
 	if developer_panel != null and developer_panel.has_method("set_invincibility_enabled"):
@@ -295,6 +297,10 @@ func set_developer_boss_options(options: Array) -> void:
 func set_developer_skill_options(options: Array) -> void:
 	if developer_panel != null and developer_panel.has_method("set_skill_options"):
 		developer_panel.set_skill_options(options)
+
+func set_developer_blessing_options(options: Array) -> void:
+	if developer_panel != null and developer_panel.has_method("set_blessing_options"):
+		developer_panel.set_blessing_options(options)
 
 func update_performance_metrics(metrics: Dictionary) -> void:
 	if developer_panel != null and developer_panel.has_method("update_performance_metrics"):

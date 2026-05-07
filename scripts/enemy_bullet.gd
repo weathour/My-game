@@ -55,6 +55,9 @@ func _ready() -> void:
 		return
 	_initialize_runtime_state()
 
+func _exit_tree() -> void:
+	_unregister_runtime_projectile()
+
 func reset_projectile(config: Dictionary) -> void:
 	pooled = false
 	show()
@@ -95,8 +98,7 @@ func reset_projectile(config: Dictionary) -> void:
 	_initialize_runtime_state()
 
 func recycle() -> void:
-	var tree := get_tree()
-	if tree != null and tree.get_node_count_in_group(POOL_GROUP) >= POOL_SOFT_LIMIT:
+	if _get_runtime_pool_count() >= POOL_SOFT_LIMIT:
 		queue_free()
 		return
 	pooled = true
@@ -105,6 +107,7 @@ func recycle() -> void:
 	set_physics_process(false)
 	remove_from_group("enemy_projectiles")
 	add_to_group(POOL_GROUP)
+	_register_runtime_projectile(true)
 	target = null
 
 func _initialize_runtime_state() -> void:
@@ -122,6 +125,7 @@ func _initialize_runtime_state() -> void:
 	split_performed = false
 	remove_from_group(POOL_GROUP)
 	add_to_group("enemy_projectiles")
+	_register_runtime_projectile(false)
 	_apply_visuals()
 
 func _physics_process(delta: float) -> void:
@@ -465,9 +469,27 @@ func apply_save_data(data: Dictionary, target_node: Node2D) -> void:
 
 	target = target_node
 	add_to_group("enemy_projectiles")
+	_register_runtime_projectile(false)
 	_apply_visuals()
 
 func _get_enemy_projectile_limit(current_scene: Node) -> int:
 	if current_scene != null and current_scene.has_method("_get_difficulty_limit"):
 		return int(current_scene._get_difficulty_limit("enemy_projectile_limit", PERFORMANCE_GUARD.DEFAULT_ENEMY_PROJECTILE_LIMIT))
 	return PERFORMANCE_GUARD.DEFAULT_ENEMY_PROJECTILE_LIMIT
+
+func _register_runtime_projectile(is_pooled: bool) -> void:
+	var scene: Node = get_tree().current_scene if get_tree() != null else null
+	if scene != null and scene.has_method("register_runtime_enemy_projectile"):
+		scene.register_runtime_enemy_projectile(self, is_pooled)
+
+func _unregister_runtime_projectile() -> void:
+	var scene: Node = get_tree().current_scene if get_tree() != null else null
+	if scene != null and scene.has_method("unregister_runtime_enemy_projectile"):
+		scene.unregister_runtime_enemy_projectile(self)
+
+func _get_runtime_pool_count() -> int:
+	var scene: Node = get_tree().current_scene if get_tree() != null else null
+	if scene != null and scene.has_method("get_runtime_enemy_projectile_pool"):
+		return (scene.get_runtime_enemy_projectile_pool() as Array).size()
+	var tree := get_tree()
+	return tree.get_node_count_in_group(POOL_GROUP) if tree != null else 0

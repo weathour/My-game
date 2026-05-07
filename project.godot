@@ -27,6 +27,14 @@ window/size/viewport_width=1280
 window/size/viewport_height=720
 window/stretch/mode="canvas_items"
 
+[rendering]
+
+2d/snap/snap_2d_transforms_to_pixel=true
+2d/snap/snap_2d_vertices_to_pixel=true
+2d/snap/use_gpu_pixel_snap=true
+textures/canvas_textures/default_texture_filter=0
+rendering_device/driver.windows="d3d12"
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/godot_mcp/plugin.cfg")
@@ -34,7 +42,3 @@ enabled=PackedStringArray("res://addons/godot_mcp/plugin.cfg")
 [physics]
 
 3d/physics_engine="Jolt Physics"
-
-[rendering]
-
-rendering_device/driver.windows="d3d12"

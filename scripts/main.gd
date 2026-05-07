@@ -61,7 +61,17 @@ var exit_snapshot_saved: bool = false
 var performance_sample_elapsed: float = 0.0
 var pickup_compact_elapsed: float = 0.0
 var distant_enemy_maintenance_elapsed: float = 0.0
+var distant_enemy_maintenance_cursor: int = 0
 var map_boundary_node: Node2D
+var runtime_spawn_budget_frame: int = -1
+var runtime_spawn_counts: Dictionary = {}
+var runtime_pickup_nodes: Dictionary = {
+	"exp_gems": [],
+	"heart_pickups": []
+}
+var runtime_enemy_nodes: Array = []
+var runtime_enemy_projectile_nodes: Array = []
+var runtime_enemy_projectile_pool_nodes: Array = []
 
 func _ready() -> void:
 	rng.randomize()
@@ -363,14 +373,118 @@ func _apply_difficulty_to_enemy_profile(kind: String, enemy_profile: Dictionary)
 	return GAME_STORY_CONTEXT_FLOW.apply_difficulty_to_enemy_profile(self, kind, enemy_profile)
 
 func _can_spawn_runtime_group(group_name: String, fallback_limit: int) -> bool:
-	return PERFORMANCE_GUARD.can_spawn_in_group(self, group_name, _get_runtime_group_limit(group_name, fallback_limit))
+	_reset_runtime_spawn_budget_if_needed()
+	if not _has_runtime_spawn_frame_budget(group_name):
+		return false
+	var reserved_count: int = int(runtime_spawn_counts.get(group_name, 0))
+	var can_spawn := PERFORMANCE_GUARD.can_spawn_in_group_with_reserved(self, group_name, _get_runtime_group_limit(group_name, fallback_limit), reserved_count)
+	if can_spawn:
+		runtime_spawn_counts[group_name] = reserved_count + 1
+	return can_spawn
 
 func _trim_spawn_count_for_group(group_name: String, requested_count: int, fallback_limit: int) -> int:
-	return PERFORMANCE_GUARD.trim_requested_count(self, group_name, requested_count, _get_runtime_group_limit(group_name, fallback_limit))
+	_reset_runtime_spawn_budget_if_needed()
+	var reserved_count: int = int(runtime_spawn_counts.get(group_name, 0))
+	var allowed_count := PERFORMANCE_GUARD.trim_requested_count_with_reserved(self, group_name, requested_count, _get_runtime_group_limit(group_name, fallback_limit), reserved_count)
+	if allowed_count > 0:
+		runtime_spawn_counts[group_name] = reserved_count + allowed_count
+	return allowed_count
 
 func _get_runtime_group_limit(group_name: String, fallback_limit: int) -> int:
 	var base_limit := _get_difficulty_limit(_limit_key_for_group(group_name), fallback_limit)
 	return PERFORMANCE_GUARD.get_dynamic_limit(self, group_name, base_limit)
+
+func _reset_runtime_spawn_budget_if_needed() -> void:
+	var current_frame := Engine.get_process_frames()
+	if runtime_spawn_budget_frame == current_frame:
+		return
+	runtime_spawn_budget_frame = current_frame
+	runtime_spawn_counts.clear()
+
+func _has_runtime_spawn_frame_budget(group_name: String) -> bool:
+	var limit := _get_runtime_spawn_frame_limit(group_name)
+	if limit <= 0:
+		return true
+	return int(runtime_spawn_counts.get(group_name, 0)) < limit
+
+func register_runtime_pickup(group_name: String, node: Node) -> void:
+	if node == null:
+		return
+	if not runtime_pickup_nodes.has(group_name):
+		runtime_pickup_nodes[group_name] = []
+	var nodes: Array = runtime_pickup_nodes[group_name]
+	if not nodes.has(node):
+		nodes.append(node)
+
+func unregister_runtime_pickup(group_name: String, node: Node) -> void:
+	if node == null or not runtime_pickup_nodes.has(group_name):
+		return
+	var nodes: Array = runtime_pickup_nodes[group_name]
+	nodes.erase(node)
+
+func get_runtime_pickups(group_name: String) -> Array:
+	if not runtime_pickup_nodes.has(group_name):
+		return []
+	return runtime_pickup_nodes[group_name]
+
+func register_runtime_enemy(enemy: Node) -> void:
+	if enemy == null:
+		return
+	if not runtime_enemy_nodes.has(enemy):
+		runtime_enemy_nodes.append(enemy)
+
+func unregister_runtime_enemy(enemy: Node) -> void:
+	if enemy == null:
+		return
+	runtime_enemy_nodes.erase(enemy)
+
+func get_runtime_enemies() -> Array:
+	return runtime_enemy_nodes
+
+func register_runtime_enemy_projectile(projectile: Node, pooled: bool) -> void:
+	if projectile == null:
+		return
+	runtime_enemy_projectile_nodes.erase(projectile)
+	runtime_enemy_projectile_pool_nodes.erase(projectile)
+	if pooled:
+		runtime_enemy_projectile_pool_nodes.append(projectile)
+	else:
+		runtime_enemy_projectile_nodes.append(projectile)
+
+func unregister_runtime_enemy_projectile(projectile: Node) -> void:
+	if projectile == null:
+		return
+	runtime_enemy_projectile_nodes.erase(projectile)
+	runtime_enemy_projectile_pool_nodes.erase(projectile)
+
+func get_runtime_enemy_projectiles() -> Array:
+	return runtime_enemy_projectile_nodes
+
+func get_runtime_enemy_projectile_pool() -> Array:
+	return runtime_enemy_projectile_pool_nodes
+
+func take_runtime_enemy_projectile_from_pool() -> Node:
+	while not runtime_enemy_projectile_pool_nodes.is_empty():
+		var projectile: Node = runtime_enemy_projectile_pool_nodes.pop_back()
+		if projectile != null and is_instance_valid(projectile):
+			return projectile
+	return null
+
+func _get_runtime_spawn_frame_limit(group_name: String) -> int:
+	match group_name:
+		"temporary_effects":
+			var fps := Engine.get_frames_per_second()
+			if fps > 0 and fps < PERFORMANCE_GUARD.CRITICAL_FPS_THRESHOLD:
+				return 8
+			if fps > 0 and fps < PERFORMANCE_GUARD.LOW_FPS_THRESHOLD:
+				return 14
+			return 24
+		"player_projectiles":
+			return 36
+		"enemy_projectiles":
+			return 28
+		_:
+			return 0
 
 func _limit_key_for_group(group_name: String) -> String:
 	match group_name:
@@ -424,11 +538,17 @@ func _on_developer_small_boss_spawn_requested(archetype_id: String) -> void:
 func _on_developer_skill_unlock_requested(skill_id: String, tier: int) -> void:
 	DEVELOPER_ACTIONS.unlock_skill(self, skill_id, tier)
 
+func _on_developer_blessing_grant_requested(blessing_id: String, tier: int) -> void:
+	DEVELOPER_ACTIONS.grant_blessing(self, blessing_id, tier)
+
 func _get_developer_boss_options() -> Array:
 	return DEVELOPER_OPTION_PROVIDER.get_boss_options()
 
 func _get_developer_skill_options() -> Array:
 	return DEVELOPER_OPTION_PROVIDER.get_skill_options(player)
+
+func _get_developer_blessing_options() -> Array:
+	return DEVELOPER_OPTION_PROVIDER.get_blessing_options(player)
 
 func _spawn_developer_boss(archetype_id: String = "boss_spellcore") -> void:
 	DEVELOPER_ACTIONS.spawn_boss(self, archetype_id)

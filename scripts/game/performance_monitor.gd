@@ -28,12 +28,12 @@ static func collect_metrics(root: Node) -> Dictionary:
 		cached_total_nodes = _count_nodes(tree.current_scene)
 	cached_metrics = {
 		"fps": Engine.get_frames_per_second(),
-		"enemies": _count_group_nodes(tree, "enemies"),
+		"enemies": _count_runtime_or_group_nodes(root, tree, "enemies"),
 		"player_projectiles": _count_group_nodes(tree, "player_projectiles"),
 		"batched_projectiles": _count_batched_projectiles(tree.current_scene),
-		"enemy_projectiles": _count_group_nodes(tree, "enemy_projectiles"),
-		"exp_gems": _count_group_nodes(tree, "exp_gems"),
-		"heart_pickups": _count_group_nodes(tree, "heart_pickups"),
+		"enemy_projectiles": _count_runtime_or_group_nodes(root, tree, "enemy_projectiles"),
+		"exp_gems": _count_runtime_or_group_nodes(root, tree, "exp_gems"),
+		"heart_pickups": _count_runtime_or_group_nodes(root, tree, "heart_pickups"),
 		"temporary_effects": _count_group_nodes(tree, "temporary_effects"),
 		"total_nodes": cached_total_nodes,
 		"frame_counters": PERFORMANCE_COUNTERS.get_snapshot()
@@ -64,7 +64,7 @@ static func _format_counter_snapshot(snapshot: Variant) -> String:
 	if peak.is_empty():
 		return ""
 	var current_frame: Dictionary = (snapshot as Dictionary).get("current_frame", {})
-	return "\nSpike peak: switch %d | dmgQueries %d | candidates %d | hits %d | queued %d | merged %d | applied %d | qSize %d | fx %d | batch %d" % [
+	return "\nSpike peak: switch %d | dmgQueries %d | candidates %d | hits %d | queued %d | merged %d | applied %d | qSize %d | fx %d | batch %d\nSuppressed: flash %d | status %d | burst %d | tempFX %d" % [
 		int(peak.get("switch_jobs", 0)),
 		int(peak.get("damage_queries", 0)),
 		int(peak.get("damage_candidates", 0)),
@@ -74,7 +74,11 @@ static func _format_counter_snapshot(snapshot: Variant) -> String:
 		int(peak.get("applied_damage_jobs", 0)),
 		int(current_frame.get("damage_queue_size", peak.get("damage_queue_size", 0))),
 		int(peak.get("temporary_effect_spawns", 0)),
-		int(peak.get("batched_projectiles", 0))
+		int(peak.get("batched_projectiles", 0)),
+		int(peak.get("suppressed_hit_flash", 0)),
+		int(peak.get("suppressed_status_visuals", 0)),
+		int(peak.get("suppressed_status_bursts", 0)),
+		int(peak.get("suppressed_temp_fx", 0))
 	]
 
 static func _count_nodes(node: Node) -> int:
@@ -88,7 +92,17 @@ static func _count_nodes(node: Node) -> int:
 static func _count_group_nodes(tree: SceneTree, group_name: String) -> int:
 	if tree == null:
 		return 0
-	return tree.get_nodes_in_group(group_name).size()
+	return tree.get_node_count_in_group(group_name)
+
+static func _count_runtime_or_group_nodes(root: Node, tree: SceneTree, group_name: String) -> int:
+	if root != null:
+		if group_name == "enemies" and root.has_method("get_runtime_enemies"):
+			return (root.get_runtime_enemies() as Array).size()
+		if group_name == "enemy_projectiles" and root.has_method("get_runtime_enemy_projectiles"):
+			return (root.get_runtime_enemy_projectiles() as Array).size()
+		if (group_name == "exp_gems" or group_name == "heart_pickups") and root.has_method("get_runtime_pickups"):
+			return (root.get_runtime_pickups(group_name) as Array).size()
+	return _count_group_nodes(tree, group_name)
 
 static func _count_batched_projectiles(root: Node) -> int:
 	if root == null:

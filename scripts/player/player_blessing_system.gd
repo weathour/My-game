@@ -254,7 +254,7 @@ static func grant_random_blessings(owner, tier: int, count: int, rng: RandomNumb
 		var blessing_id: String = str(pool[picked_index])
 		if apply_blessing(owner, blessing_id, safe_tier):
 			granted.append(blessing_id)
-		if _get_blessing_count(owner, blessing_id, safe_tier) >= MAX_BLESSING_COUNT_PER_TIER:
+		if _get_available_blessing_count(owner, blessing_id, safe_tier) >= MAX_BLESSING_COUNT_PER_TIER:
 			pool.remove_at(picked_index)
 	return granted
 
@@ -302,14 +302,14 @@ static func can_compose_role_blessing(owner, _role_id: String, blessing_id: Stri
 	var definition: Dictionary = DEFINITIONS.get(blessing_id, {})
 	if str(definition.get("binding", ROLE_BOUND)) != ROLE_BOUND:
 		return false
-	return _can_compose_from_levels(_get_shared_role_levels(owner), blessing_id)
+	return _can_compose_from_available(owner, blessing_id)
 
 
 static func can_compose_skill_blessing(owner, blessing_id: String) -> bool:
 	var definition: Dictionary = DEFINITIONS.get(blessing_id, {})
 	if str(definition.get("binding", ROLE_BOUND)) != SKILL_BOUND:
 		return false
-	return _can_compose_from_levels(_get_skill_levels(owner), blessing_id)
+	return _can_compose_from_available(owner, blessing_id)
 
 
 static func compose_role_blessing(owner, role_id: String, blessing_id: String) -> bool:
@@ -428,7 +428,7 @@ static func _get_offer_weight(player_level: int, tier: int) -> int:
 static func _is_offerable(_owner, blessing_id: String, tier: int, player_level: int) -> bool:
 	if not DEFINITIONS.has(blessing_id):
 		return false
-	if _get_blessing_count(_owner, blessing_id, tier) >= MAX_BLESSING_COUNT_PER_TIER:
+	if _get_available_blessing_count(_owner, blessing_id, tier) >= MAX_BLESSING_COUNT_PER_TIER:
 		return false
 	if tier <= 1:
 		return true
@@ -438,7 +438,7 @@ static func _is_offerable(_owner, blessing_id: String, tier: int, player_level: 
 static func _is_offerable_forced_tier(_owner, blessing_id: String, tier: int) -> bool:
 	if not DEFINITIONS.has(blessing_id):
 		return false
-	return _get_blessing_count(_owner, blessing_id, tier) < MAX_BLESSING_COUNT_PER_TIER
+	return _get_available_blessing_count(_owner, blessing_id, tier) < MAX_BLESSING_COUNT_PER_TIER
 
 
 static func _make_option(owner, blessing_id: String, tier: int) -> Dictionary:
@@ -523,7 +523,7 @@ static func _apply_role_blessing(owner, blessing_id: String, tier: int, definiti
 	var role_levels: Dictionary = _get_shared_role_levels(owner)
 	var blessing_levels: Dictionary = (role_levels.get(blessing_id, {}) as Dictionary).duplicate(true)
 	var previous_level := int(blessing_levels.get(tier, 0))
-	if previous_level >= MAX_BLESSING_COUNT_PER_TIER:
+	if _get_available_blessing_count(owner, blessing_id, tier) >= MAX_BLESSING_COUNT_PER_TIER:
 		owner._spawn_combat_tag(owner.global_position + Vector2(0.0, -62.0), "祝福已达上限", Color(0.92, 0.86, 0.54, 1.0))
 		return true
 	blessing_levels[tier] = previous_level + 1
@@ -541,7 +541,7 @@ static func _apply_skill_blessing(owner, blessing_id: String, tier: int, definit
 	var skill_levels: Dictionary = _get_skill_levels(owner)
 	var blessing_levels: Dictionary = (skill_levels.get(blessing_id, {}) as Dictionary).duplicate(true)
 	var previous_level := int(blessing_levels.get(tier, 0))
-	if previous_level >= MAX_BLESSING_COUNT_PER_TIER:
+	if _get_available_blessing_count(owner, blessing_id, tier) >= MAX_BLESSING_COUNT_PER_TIER:
 		owner._spawn_combat_tag(owner.global_position + Vector2(0.0, -62.0), "祝福已达上限", Color(0.64, 0.90, 1.0, 1.0))
 		return true
 	blessing_levels[tier] = previous_level + 1
@@ -712,11 +712,10 @@ static func _normalize_binding_levels(value: Variant) -> Dictionary:
 	return result
 
 
-static func _can_compose_from_levels(levels: Dictionary, blessing_id: String) -> bool:
+static func _can_compose_from_available(owner, blessing_id: String) -> bool:
 	if not DEFINITIONS.has(blessing_id):
 		return false
-	var blessing_levels: Dictionary = levels.get(blessing_id, {})
-	return int(blessing_levels.get(1, 0)) >= MANUAL_COMPOSE_TIER_ONE_LEVEL and int(blessing_levels.get(2, 0)) < MAX_BLESSING_COUNT_PER_TIER
+	return _get_available_blessing_count(owner, blessing_id, 1) >= MANUAL_COMPOSE_TIER_ONE_LEVEL and _get_available_blessing_count(owner, blessing_id, 2) < MAX_BLESSING_COUNT_PER_TIER
 
 
 static func _get_blessing_count(owner, blessing_id: String, tier: int) -> int:
@@ -726,6 +725,14 @@ static func _get_blessing_count(owner, blessing_id: String, tier: int) -> int:
 	var binding := str(definition.get("binding", ROLE_BOUND))
 	var levels := _get_skill_levels(owner) if binding == SKILL_BOUND else _get_shared_role_levels(owner)
 	return int((levels.get(blessing_id, {}) as Dictionary).get(tier, 0))
+
+
+static func _get_available_blessing_count(owner, blessing_id: String, tier: int) -> int:
+	if owner == null or not DEFINITIONS.has(blessing_id):
+		return 0
+	var definition: Dictionary = DEFINITIONS.get(blessing_id, {})
+	var binding := str(definition.get("binding", ROLE_BOUND))
+	return PLAYER_BLESSING_SKILL_STATE.get_available_blessing_count(owner, binding, blessing_id, tier)
 
 
 static func _format_value(definition: Dictionary, tier: int) -> String:

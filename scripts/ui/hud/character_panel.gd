@@ -7,6 +7,7 @@ const PLAYER_EQUIPMENT_FLOW := preload("res://scripts/player/player_equipment_fl
 const PLAYER_BLESSING_SYSTEM := preload("res://scripts/player/player_blessing_system.gd")
 const SURVIVORS_THEME := preload("res://scripts/ui/theme/survivors_ui_theme.gd")
 
+const GLOBAL_UNIT_MOVE_SPEED_SCALE := 0.7
 const PANEL_MAX_SIZE := Vector2(1100.0, 610.0)
 const PANEL_MIN_SIZE := Vector2(360.0, 280.0)
 const PANEL_WIDTH_RATIO := 0.86
@@ -526,6 +527,7 @@ func _build_stats_text(role_data: Dictionary) -> String:
 		move_speed *= float(cached_player._get_role_attribute_move_speed_multiplier(role_id))
 	if cached_player.has_method("_get_role_attribute_flat_move_speed_bonus"):
 		move_speed += float(cached_player._get_role_attribute_flat_move_speed_bonus(role_id))
+	move_speed *= GLOBAL_UNIT_MOVE_SPEED_SCALE
 	var max_health: float = float(cached_player._get_role_max_health(role_id)) if cached_player.has_method("_get_role_max_health") else float(cached_player.get("max_health")) - float(active_bonus.get("max_health_bonus", 0.0)) + float(bonus.get("max_health_bonus", 0.0))
 	var current_health: float = float(cached_player._get_role_current_health(role_id)) if cached_player.has_method("_get_role_current_health") else float(cached_player.get("current_health"))
 	var current_health_text := "%.0f / %.0f" % [current_health, max_health]

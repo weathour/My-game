@@ -10,8 +10,12 @@ var age_seconds: float = 0.0
 
 func _ready() -> void:
 	add_to_group("heart_pickups")
+	_register_runtime_pickup()
 	polygon_node = get_node_or_null("Polygon2D") as Polygon2D
 	_apply_appearance()
+
+func _exit_tree() -> void:
+	_unregister_runtime_pickup()
 
 func _physics_process(delta: float) -> void:
 	age_seconds += delta
@@ -31,6 +35,16 @@ func _apply_appearance() -> void:
 		polygon_node = get_node_or_null("Polygon2D") as Polygon2D
 	if polygon_node != null:
 		polygon_node.color = Color(1.0, 0.36, 0.48, 1.0)
+
+func _register_runtime_pickup() -> void:
+	var scene: Node = get_tree().current_scene if get_tree() != null else null
+	if scene != null and scene.has_method("register_runtime_pickup"):
+		scene.register_runtime_pickup("heart_pickups", self)
+
+func _unregister_runtime_pickup() -> void:
+	var scene: Node = get_tree().current_scene if get_tree() != null else null
+	if scene != null and scene.has_method("unregister_runtime_pickup"):
+		scene.unregister_runtime_pickup("heart_pickups", self)
 
 func get_save_data() -> Dictionary:
 	return {

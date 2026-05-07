@@ -1,0 +1,102 @@
+[gd_scene format=3 uid="uid://h8ks5ajs0rsb"]
+
+[ext_resource type="Texture2D" uid="uid://cpjjfrtebj2mh" path="res://assets/enemies/pumpkin/rika_05cb7450 (1).png" id="1_o7372"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4l3wj"]
+atlas = ExtResource("1_o7372")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_20wq7"]
+atlas = ExtResource("1_o7372")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cubml"]
+atlas = ExtResource("1_o7372")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rhmih"]
+atlas = ExtResource("1_o7372")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1ajiy"]
+atlas = ExtResource("1_o7372")
+region = Rect2(0, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ck1xp"]
+atlas = ExtResource("1_o7372")
+region = Rect2(128, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bvaic"]
+atlas = ExtResource("1_o7372")
+region = Rect2(256, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_upnhq"]
+atlas = ExtResource("1_o7372")
+region = Rect2(384, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ebgk1"]
+atlas = ExtResource("1_o7372")
+region = Rect2(0, 256, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n88gn"]
+atlas = ExtResource("1_o7372")
+region = Rect2(128, 256, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lii73"]
+atlas = ExtResource("1_o7372")
+region = Rect2(256, 256, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8rcjm"]
+atlas = ExtResource("1_o7372")
+region = Rect2(384, 256, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hpl4o"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4l3wj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_20wq7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cubml")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rhmih")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1ajiy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ck1xp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bvaic")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_upnhq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ebgk1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n88gn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lii73")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8rcjm")
+}],
+"loop": true,
+"name": &"pumpkin-run",
+"speed": 9.0
+}]
+
+[node name="Pumpkin" type="Node2D" unique_id=1176901061]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2096078435]
+sprite_frames = SubResource("SpriteFrames_hpl4o")
+animation = &"pumpkin-run"
+frame_progress = 0.6069809

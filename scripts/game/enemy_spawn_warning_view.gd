@@ -1,5 +1,7 @@
 extends Node2D
 
+const PERFORMANCE_GUARD := preload("res://scripts/game/performance_guard.gd")
+
 signal finished
 
 const CROSS_COLOR := Color(1.0, 0.08, 0.06, 0.92)
@@ -14,7 +16,8 @@ var _radius: float = CROSS_RADIUS
 func configure(radius: float = CROSS_RADIUS) -> void:
 	var current_scene := get_tree().current_scene
 	if current_scene != null and current_scene.has_method("_can_spawn_runtime_group"):
-		if not bool(current_scene._can_spawn_runtime_group("temporary_effects", 160)):
+		var limit: int = PERFORMANCE_GUARD.get_dynamic_limit(current_scene, "temporary_effects", PERFORMANCE_GUARD.DEFAULT_TEMPORARY_EFFECT_LIMIT)
+		if not bool(current_scene._can_spawn_runtime_group("temporary_effects", limit)):
 			finished.emit()
 			queue_free()
 			return

@@ -32,6 +32,8 @@ static func refresh_hud(main: Node) -> void:
 		main.hud.set_developer_boss_options(main._get_developer_boss_options())
 	if main.hud.has_method("set_developer_skill_options"):
 		main.hud.set_developer_skill_options(main._get_developer_skill_options())
+	if main.hud.has_method("set_developer_blessing_options"):
+		main.hud.set_developer_blessing_options(main._get_developer_blessing_options())
 	update_boss_hud(main)
 
 static func update_boss_hud(main: Node) -> void:
@@ -86,5 +88,12 @@ static func on_player_health_changed(main: Node, current_health: float, max_heal
 static func on_player_mana_changed(main: Node, current_mana: float, max_mana: float) -> void:
 	if main.hud != null and main.hud.has_method("update_mana"):
 		main.hud.update_mana(current_mana, max_mana)
-	if main.hud != null and main.hud.has_method("update_stats") and main.player != null and main.player.has_method("get_stat_summary"):
+	if main.hud != null and main.hud.has_method("update_stats") and main.player != null and main.player.has_method("get_stat_summary") and _should_refresh_mana_stats(main):
 		main.hud.update_stats(main.player.get_stat_summary())
+
+static func _should_refresh_mana_stats(main: Node) -> bool:
+	var current_frame := Engine.get_process_frames()
+	if int(main.get_meta("last_mana_stats_frame", -1)) == current_frame:
+		return false
+	main.set_meta("last_mana_stats_frame", current_frame)
+	return true

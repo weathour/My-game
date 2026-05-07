@@ -1,0 +1,73 @@
+[gd_scene format=3 uid="uid://ipg8i7iy6hj7"]
+
+[ext_resource type="Texture2D" uid="uid://w54kh52qcax7" path="res://assets/players/wizard/Idle.png" id="1_vnac6"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ugqb1"]
+atlas = ExtResource("1_vnac6")
+region = Rect2(0, 0, 250, 250)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iccmw"]
+atlas = ExtResource("1_vnac6")
+region = Rect2(250, 0, 250, 250)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rvj5a"]
+atlas = ExtResource("1_vnac6")
+region = Rect2(500, 0, 250, 250)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y5b7o"]
+atlas = ExtResource("1_vnac6")
+region = Rect2(750, 0, 250, 250)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_28lkl"]
+atlas = ExtResource("1_vnac6")
+region = Rect2(1000, 0, 250, 250)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vnyvq"]
+atlas = ExtResource("1_vnac6")
+region = Rect2(1250, 0, 250, 250)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ul5ge"]
+atlas = ExtResource("1_vnac6")
+region = Rect2(1500, 0, 250, 250)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2tych"]
+atlas = ExtResource("1_vnac6")
+region = Rect2(1750, 0, 250, 250)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pvvgw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ugqb1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iccmw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rvj5a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y5b7o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_28lkl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vnyvq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ul5ge")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2tych")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="Wizard" type="Node2D" unique_id=1494539577]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1278752685]
+sprite_frames = SubResource("SpriteFrames_pvvgw")
+frame_progress = 0.39581692

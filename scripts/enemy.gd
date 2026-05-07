@@ -158,6 +158,7 @@ var boss_phase_charge_rings: Array[Line2D] = []
 var boss_visual_instance: Node2D
 var profile_initialized: bool = false
 var hit_flash_remaining: float = 0.0
+var separation_push: Vector2 = Vector2.ZERO
 # Explicit velocity (was inherited from CharacterBody2D)
 var velocity: Vector2 = Vector2.ZERO
 
@@ -167,6 +168,7 @@ func _ready() -> void:
 	if enemy_kind == "":
 		enemy_kind = "normal"
 	add_to_group("enemies")
+	_register_runtime_enemy()
 	if not profile_initialized:
 		_reset_runtime_state(true)
 	_apply_visuals()
@@ -174,24 +176,36 @@ func _ready() -> void:
 		_ensure_boss_visual()
 		_ensure_boss_helpers()
 
+func _exit_tree() -> void:
+	_unregister_runtime_enemy()
+
 func _physics_process(delta: float) -> void:
-	status_visual_time += delta
-	hit_flash_remaining = max(0.0, hit_flash_remaining - delta)
-	_update_status_timers(delta)
-	_update_bleed(delta)
-	_update_status_visuals()
+	if status_root != null or boss_visual_instance != null or hit_flash_remaining > 0.0 or _has_status_visual_pressure():
+		status_visual_time += delta
+	if hit_flash_remaining > 0.0:
+		hit_flash_remaining = max(0.0, hit_flash_remaining - delta)
+	if slow_timer > 0.0 or vulnerability_timer > 0.0 or bleed_timer > 0.0:
+		_update_status_timers(delta)
+	if bleed_timer > 0.0 and bleed_damage_per_second > 0.0:
+		_update_bleed(delta)
+	if status_root != null or hit_flash_remaining > 0.0 or _has_status_visual_pressure():
+		_update_status_visuals()
 
 	if target == null or not is_instance_valid(target):
 		velocity = Vector2.ZERO
+		_update_motion_visual()
 		return
 
 	# P1: cache target vectors once per frame, used by _update_behavior_state and _compute_velocity
 	_cached_to_target = target.global_position - global_position
 	_cached_distance_to_target = _cached_to_target.length()
 	_cached_direction_to_target = _cached_to_target.normalized() if _cached_distance_to_target > 0.001 else Vector2.RIGHT
-	_update_behavior_state(delta)
+	if _has_timed_behavior_traits():
+		_update_behavior_state(delta)
 	velocity = _compute_velocity(delta)
+	velocity += _compute_separation_velocity() * 0.85
 	_apply_direct_motion(delta)
+	_update_motion_visual()
 
 func apply_enemy_profile(kind: String, profile: Dictionary) -> void:
 	ENEMY_PROFILE_APPLIER.apply_profile(self, kind, profile)
@@ -236,6 +250,35 @@ func _apply_direct_motion(delta: float) -> void:
 		return
 	global_position += velocity * delta
 
+func _compute_separation_velocity() -> Vector2:
+	if get_tree() == null:
+		return Vector2.ZERO
+	var neighbors: Array = []
+	var scene: Node = get_tree().current_scene
+	if scene != null and scene.has_method("get_runtime_enemies"):
+		neighbors = scene.get_runtime_enemies()
+	else:
+		neighbors = get_tree().get_nodes_in_group("enemies")
+	var push: Vector2 = Vector2.ZERO
+	var radius: float = max(8.0, contact_radius * 0.72)
+	var radius_sq: float = radius * radius
+	var max_push: float = max(18.0, contact_radius * 0.35)
+	var processed: int = 0
+	for other in neighbors:
+		if other == null or other == self or not is_instance_valid(other) or not (other is Node2D):
+			continue
+		var offset: Vector2 = global_position - (other as Node2D).global_position
+		var distance_sq: float = offset.length_squared()
+		if distance_sq <= 0.001 or distance_sq > radius_sq:
+			continue
+		var distance: float = sqrt(distance_sq)
+		var strength: float = (radius - distance) / radius
+		push += offset.normalized() * strength * max_push
+		processed += 1
+		if processed >= 8:
+			break
+	return push
+
 func _update_behavior_state(delta: float) -> void:
 	ENEMY_TRAIT_BEHAVIOR.update_behavior_state(self, delta)
 
@@ -270,6 +313,9 @@ func _spawn_projectile(origin: Vector2, shot_direction: Vector2, shot_speed: flo
 func _apply_visuals(color_override = null) -> void:
 	ENEMY_VISUALS.apply_visuals(self, color_override)
 
+func _update_motion_visual() -> void:
+	ENEMY_VISUALS.update_motion_visual(self)
+
 func _ensure_boss_visual() -> void:
 	ENEMY_BOSS_VISUALS.ensure_boss_visual(self)
 
@@ -303,6 +349,9 @@ func _update_status_visuals() -> void:
 func _has_status_visual_pressure() -> bool:
 	return slow_timer > 0.0 or vulnerability_timer > 0.0 or enemy_kind != "normal" or secondary_behavior_id != "" or _is_dasher or boss_visual_instance != null
 
+func _has_timed_behavior_traits() -> bool:
+	return _is_shooter or _is_accelerator or _is_dasher or _is_glutton or _is_turret or _is_boss or _is_rebirth
+
 func _spawn_status_burst(color: Color, radius: float) -> void:
 	ENEMY_STATUS_VISUALS.spawn_status_burst(self, color, radius)
 
@@ -329,3 +378,13 @@ func _get_hit_flash_alpha() -> float:
 
 func _apply_hit_flash_alpha_to_node(node: Node, alpha: float) -> void:
 	ENEMY_HIT_FEEDBACK.apply_hit_flash_alpha_to_node(node, alpha)
+
+func _register_runtime_enemy() -> void:
+	var scene: Node = get_tree().current_scene if get_tree() != null else null
+	if scene != null and scene.has_method("register_runtime_enemy"):
+		scene.register_runtime_enemy(self)
+
+func _unregister_runtime_enemy() -> void:
+	var scene: Node = get_tree().current_scene if get_tree() != null else null
+	if scene != null and scene.has_method("unregister_runtime_enemy"):
+		scene.unregister_runtime_enemy(self)

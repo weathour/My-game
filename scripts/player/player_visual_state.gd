@@ -1,6 +1,9 @@
 extends RefCounted
 
 const PLAYER_VISUAL_LAYOUT := preload("res://scripts/player/player_visual_layout.gd")
+const WIZARD_VISUAL_SCENE := preload("res://assets/players/wizard/wizard.tscn")
+const WIZARD_VISUAL_SCALE := Vector2(1.7, 1.7)
+const WIZARD_VISUAL_BASE_POSITION := Vector2(0.0, -20.0)
 
 
 static func get_hidden_role_id(role_id: String, hidden: bool) -> String:
@@ -14,9 +17,12 @@ static func apply_active_role_visual_hidden(owner: Node, role_id: String, active
 	var sprite := owner.get_node_or_null("RoleVisualRoot/RoleSprite") as Sprite2D
 	if sprite != null:
 		sprite.visible = not should_hide
+	var scene_visual := owner.get_node_or_null("RoleVisualRoot/RoleSceneVisual") as Node2D
+	if scene_visual != null:
+		scene_visual.visible = not should_hide
 	var polygon := owner.get_node_or_null("Polygon2D") as Polygon2D
 	if polygon != null:
-		polygon.visible = sprite == null and not should_hide
+		polygon.visible = sprite == null and scene_visual == null and not should_hide
 
 
 static func set_active_role_visual_hidden(owner, hidden: bool) -> void:
@@ -60,6 +66,13 @@ static func pulse_player_visual(owner: Node, peak_scale: float, duration: float)
 		if base_scale_value is Vector2:
 			base_scale = base_scale_value
 	else:
+		var scene_visual := owner.get_node_or_null("RoleVisualRoot/RoleSceneVisual") as Node2D
+		if scene_visual != null:
+			target_node = scene_visual
+			var scene_base_scale_value: Variant = scene_visual.get_meta("base_scale", scene_visual.scale)
+			if scene_base_scale_value is Vector2:
+				base_scale = scene_base_scale_value
+	if target_node == null:
 		var polygon := owner.get_node_or_null("Polygon2D") as Polygon2D
 		if polygon == null:
 			return
@@ -72,6 +85,10 @@ static func pulse_player_visual(owner: Node, peak_scale: float, duration: float)
 static func update_role_idle_visual(owner: Node, role_id: String, facing_direction: Vector2, role_visual_time: float) -> void:
 	var visual_root := owner.get_node_or_null("RoleVisualRoot") as Node2D
 	if visual_root == null:
+		return
+	var scene_visual := visual_root.get_node_or_null("RoleSceneVisual") as Node2D
+	if scene_visual != null:
+		_update_role_scene_visual(scene_visual, role_id, facing_direction, role_visual_time)
 		return
 	var sprite := visual_root.get_node_or_null("RoleSprite") as Sprite2D
 	if sprite == null:
@@ -99,6 +116,19 @@ static func update_role_idle_visual(owner: Node, role_id: String, facing_directi
 	if role_id in ["swordsman", "gunner", "mage"]:
 		sprite.flip_h = facing_direction.x < 0.0
 
+static func _update_role_scene_visual(scene_visual: Node2D, role_id: String, facing_direction: Vector2, role_visual_time: float) -> void:
+	var base_position := WIZARD_VISUAL_BASE_POSITION
+	var base_position_value: Variant = scene_visual.get_meta("base_position", base_position)
+	if base_position_value is Vector2:
+		base_position = base_position_value
+	var bob_strength := 2.0 if role_id == "mage" else 1.4
+	scene_visual.position = base_position + Vector2(0.0, sin(role_visual_time * 4.4) * bob_strength)
+	scene_visual.rotation = 0.012 * sin(role_visual_time * 2.8) if role_id == "mage" else 0.0
+	var animated_sprite := scene_visual.get_node_or_null("AnimatedSprite2D") as AnimatedSprite2D
+	if animated_sprite != null:
+		animated_sprite.flip_h = facing_direction.x < 0.0
+		if animated_sprite.sprite_frames != null and not animated_sprite.is_playing():
+			animated_sprite.play()
 
 static func update_visuals(owner: Node, role_data: Dictionary, active_role_visual_hidden: bool, hidden_role_id: String) -> void:
 	var polygon := owner.get_node_or_null("Polygon2D") as Polygon2D
@@ -113,22 +143,48 @@ static func update_visuals(owner: Node, role_data: Dictionary, active_role_visua
 	var visual_root := Node2D.new()
 	visual_root.name = "RoleVisualRoot"
 	owner.add_child(visual_root)
+	var role_id := str(role_data["id"])
+	if role_id == "mage":
+		var scene_visual := _create_mage_scene_visual()
+		if scene_visual != null:
+			visual_root.add_child(scene_visual)
+			var should_hide_scene := is_role_visual_hidden(role_id, active_role_visual_hidden, hidden_role_id)
+			scene_visual.visible = not should_hide_scene
+			if polygon != null and not should_hide_scene:
+				polygon.visible = false
+			return
 	var sprite := Sprite2D.new()
 	sprite.name = "RoleSprite"
-	if not configure_role_sprite(owner, sprite, str(role_data["id"])):
+	if not configure_role_sprite(owner, sprite, role_id):
 		if polygon != null:
 			polygon.visible = true
 			polygon.color = role_data["color"]
-			if is_role_visual_hidden(str(role_data["id"]), active_role_visual_hidden, hidden_role_id):
+			if is_role_visual_hidden(role_id, active_role_visual_hidden, hidden_role_id):
 				polygon.visible = false
 		sprite.queue_free()
 		return
 	visual_root.add_child(sprite)
-	var should_hide := is_role_visual_hidden(str(role_data["id"]), active_role_visual_hidden, hidden_role_id)
+	var should_hide := is_role_visual_hidden(role_id, active_role_visual_hidden, hidden_role_id)
 	if sprite != null:
 		sprite.visible = not should_hide
 	if polygon != null and not should_hide:
 		polygon.visible = false
+
+static func _create_mage_scene_visual() -> Node2D:
+	var scene_visual := WIZARD_VISUAL_SCENE.instantiate() as Node2D
+	if scene_visual == null:
+		return null
+	scene_visual.name = "RoleSceneVisual"
+	scene_visual.position = WIZARD_VISUAL_BASE_POSITION
+	scene_visual.scale = WIZARD_VISUAL_SCALE
+	scene_visual.set_meta("base_position", WIZARD_VISUAL_BASE_POSITION)
+	scene_visual.set_meta("base_scale", WIZARD_VISUAL_SCALE)
+	var animated_sprite := scene_visual.get_node_or_null("AnimatedSprite2D") as AnimatedSprite2D
+	if animated_sprite != null:
+		animated_sprite.centered = true
+		if animated_sprite.sprite_frames != null:
+			animated_sprite.play()
+	return scene_visual
 
 
 static func update_active_role_state(owner) -> void:

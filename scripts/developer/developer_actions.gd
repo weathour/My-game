@@ -2,6 +2,7 @@ extends RefCounted
 
 const DEVELOPER_MODE := preload("res://scripts/developer_mode.gd")
 const ENEMY_ARCHETYPE_DATABASE := preload("res://scripts/enemy/enemy_archetype_database.gd")
+const PLAYER_BLESSING_SYSTEM := preload("res://scripts/player/player_blessing_system.gd")
 const PLAYER_BLESSING_SKILL_STATE := preload("res://scripts/player/player_blessing_skill_state.gd")
 
 static func activate(main: Node) -> void:
@@ -65,6 +66,15 @@ static func unlock_skill(main: Node, skill_id: String, tier: int) -> void:
 	if not PLAYER_BLESSING_SKILL_STATE.force_unlock_skill(main.player, skill_id, tier):
 		return
 	_clear_skill_cooldown(main.player, skill_id)
+	if main.player.has_signal("stats_changed") and main.player.has_method("get_stat_summary"):
+		main.player.stats_changed.emit(main.player.get_stat_summary())
+	main._refresh_hud()
+
+static func grant_blessing(main: Node, blessing_id: String, tier: int) -> void:
+	if main == null or main.player == null:
+		return
+	if not PLAYER_BLESSING_SYSTEM.apply_blessing(main.player, blessing_id, tier):
+		return
 	if main.player.has_signal("stats_changed") and main.player.has_method("get_stat_summary"):
 		main.player.stats_changed.emit(main.player.get_stat_summary())
 	main._refresh_hud()

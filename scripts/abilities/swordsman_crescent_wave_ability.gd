@@ -20,11 +20,14 @@ const VISUAL_AND_HIT_SCALE := 0.6
 const FAN_SCENE_SIZE := Vector2(1024.0, 1024.0)
 const FAN_SCENE_VISIBLE_BOUNDS := Rect2(485.0, 405.0, 117.0, 50.0)
 const FAN_WAVE_BASE_VISIBLE_SIZE := Vector2(138.0, 74.0)
-const SLASH_EFFECT_MAX_LIFETIME := 0.32
 const SLASH_DAMAGE_RATIO := 1.18
 const WAVE_DAMAGE_RATIO := 1.42
+const WAVE_DAMAGE_SAMPLE_INTERVAL := 0.08
+const CRESCENT_PROJECTILE_POOL_LIMIT := 16
 
 var cooldown_remaining: float = 0.0
+var crescent_projectile_pool: Array[Node2D] = []
+var crescent_projectile_spawn_serial: int = 0
 
 
 func update(delta: float) -> void:
@@ -56,8 +59,7 @@ func try_trigger(owner) -> bool:
 	var directions: Array[Vector2] = _get_cast_directions(owner, owner.facing_direction)
 	var combo_scales: Array[float] = _get_combo_scales(owner)
 	_cast_direction_group(owner, directions, 1.0)
-	for index in range(combo_scales.size()):
-		_schedule_combo(owner, directions, float(combo_scales[index]), COMBO_INTERVAL * float(index + 1))
+	_schedule_combos(owner, [owner.facing_direction], combo_scales)
 	return true
 
 
@@ -80,15 +82,13 @@ func apply_save_data(data: Dictionary) -> void:
 	cooldown_remaining = clamp(float(data.get("cooldown_remaining", 0.0)), 0.0, COOLDOWN)
 
 
-func _schedule_combo(owner, directions: Array[Vector2], scale: float, delay: float) -> void:
-	var tree: SceneTree = owner.get_tree()
-	if tree == null:
+func _schedule_combos(owner, directions: Array[Vector2], combo_scales: Array[float]) -> void:
+	if combo_scales.is_empty():
 		return
-	var timer: SceneTreeTimer = tree.create_timer(delay)
-	timer.timeout.connect(func() -> void:
-		if is_instance_valid(owner):
-			_cast_direction_group(owner, directions, scale)
-	)
+	owner._schedule_repeating_sequence(COMBO_INTERVAL, combo_scales.size(), func(index: int) -> void:
+		if is_instance_valid(owner) and index >= 0 and index < combo_scales.size():
+			_cast_direction_group(owner, directions, float(combo_scales[index]))
+	, COMBO_INTERVAL)
 
 
 func _cast_direction_group(owner, directions: Array[Vector2], damage_scale: float) -> void:
@@ -104,22 +104,23 @@ func _cast_once(owner, direction: Vector2, damage_scale: float) -> void:
 	var wave_width: float = WAVE_WIDTH * visual_hit_multiplier
 	var wave_length: float = WAVE_LENGTH * _get_range_multiplier(owner)
 	var slash_center: Vector2 = owner.global_position + direction * (slash_length * 0.42)
-	var slash_effect := owner._spawn_sword_fan_scene_effect(slash_center, direction, visual_hit_multiplier) as Node2D
-	_schedule_effect_cleanup(owner, slash_effect, SLASH_EFFECT_MAX_LIFETIME)
-	var slash_hits: int = int(owner._damage_enemies_in_oriented_rect(
-		slash_center,
-		direction,
-		slash_length,
-		slash_width,
-		_get_damage(owner) * SLASH_DAMAGE_RATIO * damage_scale,
-		0.02,
-		1.0,
-		0.0,
-		"swordsman"
-	))
+	owner._spawn_sword_fan_scene_effect(slash_center, direction, visual_hit_multiplier)
+	var slash_hits: int = _apply_damage_shapes(owner, [{
+		"type": "oriented_rect",
+		"center": slash_center,
+		"axis": direction,
+		"length": slash_length,
+		"width": slash_width,
+		"damage_amount": _get_damage(owner) * SLASH_DAMAGE_RATIO * damage_scale,
+		"vulnerability_bonus": 0.02,
+		"slow_multiplier": 1.0,
+		"slow_duration": 0.0,
+		"source_role_id": "swordsman",
+		"source_position": slash_center
+	}])
 	var wave_origin: Vector2 = owner.global_position + direction * max(24.0, slash_length * 0.72)
 	_spawn_crescent_projectile(owner, wave_origin, direction, wave_length, wave_width, visual_hit_multiplier, _get_damage(owner) * WAVE_DAMAGE_RATIO * damage_scale)
-	if slash_hits > 0:
+	if slash_hits > 0 and not _uses_batched_damage(owner):
 		owner._register_attack_result("swordsman", slash_hits, false)
 
 
@@ -127,41 +128,60 @@ func _spawn_crescent_projectile(owner, origin: Vector2, direction: Vector2, leng
 	var current_scene: Node = owner.get_tree().current_scene
 	if current_scene == null:
 		return
-	var projectile: Node2D = CRESCENT_SCENE.instantiate() as Node2D if CRESCENT_SCENE != null else Node2D.new()
+	var projectile: Node2D = _acquire_projectile(current_scene)
 	if projectile == null:
 		projectile = Node2D.new()
+	crescent_projectile_spawn_serial += 1
+	var spawn_token: int = crescent_projectile_spawn_serial
 	projectile.name = "SwordsmanCrescentWave"
 	projectile.global_position = origin
 	projectile.rotation = direction.angle() + PI
 	projectile.z_index = 14
-	projectile.add_to_group("temporary_effects")
+	projectile.modulate = Color.WHITE
+	projectile.scale = Vector2.ONE
+	projectile.set_meta("crescent_projectile_released", false)
+	projectile.set_meta("crescent_projectile_token", spawn_token)
 	_configure_crescent_visual(projectile, visual_scale)
-	current_scene.add_child(projectile)
-
 	var duration: float = length / max(1.0, _get_wave_speed(owner))
 	var hit_registry: Dictionary = {}
-	var tween: Tween = projectile.create_tween()
+	var damage_elapsed: float = 0.0
+	var last_damage_progress: float = 0.0
+	var tween: Tween = owner.create_tween()
 	var update_wave := func(progress: float) -> void:
-		if not is_instance_valid(projectile) or not is_instance_valid(owner):
+		if not is_instance_valid(owner):
 			return
 		var current_position: Vector2 = origin + direction * (length * progress)
-		projectile.global_position = current_position
-		var hit_count: int = int(owner._damage_enemies_in_oriented_rect_unique(
-			current_position,
-			direction,
-			52.0 * VISUAL_AND_HIT_SCALE,
-			width,
-			damage_amount,
-			0.03,
-			1.0,
-			0.0,
-			hit_registry,
-			"swordsman"
-		))
-		if hit_count > 0:
+		if is_instance_valid(projectile):
+			projectile.global_position = current_position
+		damage_elapsed += max(0.0, progress - last_damage_progress) * duration
+		if damage_elapsed < WAVE_DAMAGE_SAMPLE_INTERVAL and progress < 1.0:
+			return
+		last_damage_progress = progress
+		damage_elapsed = 0.0
+		var sample_length: float = max(52.0 * VISUAL_AND_HIT_SCALE, length * WAVE_DAMAGE_SAMPLE_INTERVAL / max(duration, 0.001) + 52.0 * VISUAL_AND_HIT_SCALE)
+		var hit_count: int = _apply_damage_shapes(owner, [{
+			"type": "oriented_rect",
+			"center": current_position,
+			"axis": direction,
+			"length": sample_length,
+			"width": width,
+			"damage_amount": damage_amount,
+			"vulnerability_bonus": 0.03,
+			"slow_multiplier": 1.0,
+			"slow_duration": 0.0,
+			"source_role_id": "swordsman",
+			"source_position": current_position,
+			"hit_registry": hit_registry
+		}])
+		if hit_count > 0 and not _uses_batched_damage(owner):
 			owner._register_attack_result("swordsman", hit_count, false)
 	tween.tween_method(update_wave, 0.0, 1.0, duration)
 	tween.tween_callback(_free_projectile.bind(projectile))
+	if projectile != null:
+		var cleanup_token: int = int(projectile.get_meta("crescent_projectile_token", -1))
+		var cleanup_tween: Tween = owner.create_tween()
+		cleanup_tween.tween_interval(duration + 0.12)
+		cleanup_tween.tween_callback(_free_projectile_if_token.bind(projectile, cleanup_token))
 
 
 func _configure_crescent_visual(projectile: Node2D, visual_scale: float) -> void:
@@ -190,22 +210,70 @@ func _configure_crescent_visual(projectile: Node2D, visual_scale: float) -> void
 			sprite.play(animation_name)
 
 
-func _schedule_effect_cleanup(owner, effect: Node2D, delay: float) -> void:
-	if effect == null or not is_instance_valid(effect):
-		return
-	var tree: SceneTree = owner.get_tree()
-	if tree == null:
-		return
-	var timer: SceneTreeTimer = tree.create_timer(delay)
-	timer.timeout.connect(func() -> void:
-		if is_instance_valid(effect):
-			effect.queue_free()
-	)
-
-
 func _free_projectile(projectile: Node2D) -> void:
-	if is_instance_valid(projectile):
+	if projectile == null or not is_instance_valid(projectile):
+		return
+	if bool(projectile.get_meta("crescent_projectile_released", false)):
+		return
+	projectile.set_meta("crescent_projectile_released", true)
+	projectile.hide()
+	projectile.remove_from_group("temporary_effects")
+	var sprite: AnimatedSprite2D = projectile.get_node_or_null("AnimatedSprite2D") as AnimatedSprite2D
+	if sprite != null:
+		sprite.stop()
+	var parent := projectile.get_parent()
+	if parent != null:
+		parent.remove_child(projectile)
+	if crescent_projectile_pool.size() < CRESCENT_PROJECTILE_POOL_LIMIT:
+		crescent_projectile_pool.append(projectile)
+	else:
 		projectile.queue_free()
+
+
+func _free_projectile_if_token(projectile: Node2D, spawn_token: int) -> void:
+	if projectile == null or not is_instance_valid(projectile):
+		return
+	if int(projectile.get_meta("crescent_projectile_token", -1)) != spawn_token:
+		return
+	_free_projectile(projectile)
+
+
+func _acquire_projectile(current_scene: Node) -> Node2D:
+	while not crescent_projectile_pool.is_empty():
+		var projectile: Node2D = crescent_projectile_pool.pop_back()
+		if projectile != null and is_instance_valid(projectile):
+			current_scene.add_child(projectile)
+			projectile.show()
+			projectile.add_to_group("temporary_effects")
+			return projectile
+	var projectile: Node2D = CRESCENT_SCENE.instantiate() as Node2D if CRESCENT_SCENE != null else Node2D.new()
+	if projectile != null:
+		current_scene.add_child(projectile)
+		projectile.add_to_group("temporary_effects")
+	return projectile
+
+
+func _apply_damage_shapes(owner, shapes: Array[Dictionary]) -> int:
+	if owner != null and owner.has_method("_damage_enemies_in_shapes_batched"):
+		return int(owner._damage_enemies_in_shapes_batched(shapes))
+	var hits := 0
+	for shape in shapes:
+		hits += int(owner._damage_enemies_in_oriented_rect_unique(
+			shape.get("center", Vector2.ZERO),
+			shape.get("axis", Vector2.RIGHT),
+			float(shape.get("length", 1.0)),
+			float(shape.get("width", 1.0)),
+			float(shape.get("damage_amount", 0.0)),
+			float(shape.get("vulnerability_bonus", 0.0)),
+			float(shape.get("slow_multiplier", 1.0)),
+			float(shape.get("slow_duration", 0.0)),
+			shape.get("hit_registry", {}),
+			str(shape.get("source_role_id", ""))
+		))
+	return hits
+
+func _uses_batched_damage(owner) -> bool:
+	return owner != null and owner.has_method("_damage_enemies_in_shapes_batched")
 
 
 func _get_cast_directions(owner, base_direction: Vector2) -> Array[Vector2]:
