@@ -29,7 +29,7 @@ static func collect_metrics(root: Node) -> Dictionary:
 	cached_metrics = {
 		"fps": Engine.get_frames_per_second(),
 		"enemies": _count_runtime_or_group_nodes(root, tree, "enemies"),
-		"player_projectiles": _count_group_nodes(tree, "player_projectiles"),
+		"player_projectiles": _count_runtime_or_group_nodes(root, tree, "player_projectiles"),
 		"batched_projectiles": _count_batched_projectiles(tree.current_scene),
 		"enemy_projectiles": _count_runtime_or_group_nodes(root, tree, "enemy_projectiles"),
 		"exp_gems": _count_runtime_or_group_nodes(root, tree, "exp_gems"),
@@ -100,6 +100,8 @@ static func _count_runtime_or_group_nodes(root: Node, tree: SceneTree, group_nam
 			return (root.get_runtime_enemies() as Array).size()
 		if group_name == "enemy_projectiles" and root.has_method("get_runtime_enemy_projectiles"):
 			return (root.get_runtime_enemy_projectiles() as Array).size()
+		if group_name == "player_projectiles" and root.has_method("get_runtime_player_projectiles"):
+			return (root.get_runtime_player_projectiles() as Array).size()
 		if (group_name == "exp_gems" or group_name == "heart_pickups") and root.has_method("get_runtime_pickups"):
 			return (root.get_runtime_pickups(group_name) as Array).size()
 	return _count_group_nodes(tree, group_name)

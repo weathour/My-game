@@ -28,6 +28,7 @@ static func connect_player_signals(main: Node) -> void:
 	_connect_if_present(main.player, "health_changed", Callable(main, "_on_player_health_changed"))
 	_connect_if_present(main.player, "mana_changed", Callable(main, "_on_player_mana_changed"))
 	_connect_if_present(main.player, "died", Callable(main, "_on_player_died"))
+	_connect_if_present(main.player, "blessing_skill_event_announced", Callable(main, "_on_player_blessing_skill_event_announced"))
 
 static func _setup_hud(main: Node) -> void:
 	if main.hud_scene == null:

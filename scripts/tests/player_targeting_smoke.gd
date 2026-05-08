@@ -2,6 +2,13 @@ extends SceneTree
 
 const PlayerTargeting := preload("res://scripts/player/player_targeting.gd")
 
+class OwnerStub:
+	extends Node2D
+	var enemies: Array = []
+
+	func _get_live_enemies() -> Array:
+		return enemies
+
 var failures: Array[String] = []
 
 func _init() -> void:
@@ -27,8 +34,10 @@ func _run() -> void:
 	var cluster_center: Vector2 = PlayerTargeting.get_enemy_cluster_center(enemies)
 	if cluster_center.distance_squared_to(Vector2(420.0, 0.0)) < 900.0:
 		failures.append("cluster center should favor dense local enemies")
+	_check_freed_cached_target_is_ignored()
 	for enemy in enemies:
-		(enemy as Node2D).queue_free()
+		if is_instance_valid(enemy):
+			(enemy as Node2D).free()
 	if failures.is_empty():
 		print("PLAYER_TARGETING_SMOKE_OK")
 		quit(0)
@@ -42,3 +51,17 @@ func _make_enemy(position: Vector2, contact_radius: float) -> Node2D:
 	enemy.global_position = position
 	enemy.set("contact_radius", contact_radius)
 	return enemy
+
+func _check_freed_cached_target_is_ignored() -> void:
+	var owner := OwnerStub.new()
+	owner.global_position = Vector2.ZERO
+	var cached_enemy := _make_enemy(Vector2(12.0, 0.0), 10.0)
+	owner.enemies = [cached_enemy]
+	if PlayerTargeting.get_owner_closest_enemy(owner) != cached_enemy:
+		failures.append("owner closest cache should record initial target")
+	cached_enemy.free()
+	owner.enemies = []
+	var target_after_free: Node2D = PlayerTargeting.get_owner_closest_enemy(owner)
+	if target_after_free != null:
+		failures.append("owner closest cache should drop freed cached targets")
+	owner.free()

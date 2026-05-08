@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env bash
+#!/usr/bin/env bash
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
@@ -45,10 +45,73 @@ if [[ -n "$GODOT_BIN" ]]; then
     exit 1
   fi
 
+  echo "== Godot player blessing system smoke =="
+  "$GODOT_BIN" --headless --path . --script scripts/tests/player_blessing_system_smoke.gd 2>&1 | tee /tmp/my-game-player-blessing-system-smoke.log
+  if ! grep -q "PLAYER_BLESSING_SYSTEM_SMOKE_OK" /tmp/my-game-player-blessing-system-smoke.log; then
+    echo "PLAYER_BLESSING_SYSTEM_SMOKE_FAILED"
+    exit 1
+  fi
+
   echo "== Godot map UI smoke =="
   "$GODOT_BIN" --headless --path . --script scripts/tests/map_ui_smoke.gd 2>&1 | tee /tmp/my-game-map-ui-smoke.log
   if ! grep -q "MAP_UI_SMOKE_OK" /tmp/my-game-map-ui-smoke.log; then
     echo "MAP_UI_SMOKE_FAILED"
+    exit 1
+  fi
+
+  echo "== Godot level-up scroll reopen smoke =="
+  "$GODOT_BIN" --headless --path . --script scripts/tests/level_up_scroll_reopen_smoke.gd 2>&1 | tee /tmp/my-game-level-up-scroll-reopen-smoke.log
+  if ! grep -q "LEVEL_UP_SCROLL_REOPEN_SMOKE_OK" /tmp/my-game-level-up-scroll-reopen-smoke.log; then
+    echo "LEVEL_UP_SCROLL_REOPEN_SMOKE_FAILED"
+    exit 1
+  fi
+
+  echo "== Godot player targeting smoke =="
+  "$GODOT_BIN" --headless --path . --script scripts/tests/player_targeting_smoke.gd 2>&1 | tee /tmp/my-game-player-targeting-smoke.log
+  if ! grep -q "PLAYER_TARGETING_SMOKE_OK" /tmp/my-game-player-targeting-smoke.log; then
+    echo "PLAYER_TARGETING_SMOKE_FAILED"
+    exit 1
+  fi
+
+  echo "== Godot player damage resolver smoke =="
+  "$GODOT_BIN" --headless --path . --script scripts/tests/player_damage_resolver_smoke.gd 2>&1 | tee /tmp/my-game-player-damage-resolver-smoke.log
+  if ! grep -q "PLAYER_DAMAGE_RESOLVER_SMOKE_OK" /tmp/my-game-player-damage-resolver-smoke.log; then
+    echo "PLAYER_DAMAGE_RESOLVER_SMOKE_FAILED"
+    exit 1
+  fi
+
+  echo "== Godot player timer flow smoke =="
+  "$GODOT_BIN" --headless --path . --script scripts/tests/player_timer_flow_smoke.gd 2>&1 | tee /tmp/my-game-player-timer-flow-smoke.log
+  if ! grep -q "PLAYER_TIMER_FLOW_SMOKE_OK" /tmp/my-game-player-timer-flow-smoke.log; then
+    echo "PLAYER_TIMER_FLOW_SMOKE_FAILED"
+    exit 1
+  fi
+
+  echo "== Godot player effect bridge smoke =="
+  "$GODOT_BIN" --headless --path . --script scripts/tests/player_effect_bridge_smoke.gd 2>&1 | tee /tmp/my-game-player-effect-bridge-smoke.log
+  if ! grep -q "PLAYER_EFFECT_BRIDGE_SMOKE_OK" /tmp/my-game-player-effect-bridge-smoke.log; then
+    echo "PLAYER_EFFECT_BRIDGE_SMOKE_FAILED"
+    exit 1
+  fi
+
+  echo "== Godot player save roundtrip smoke =="
+  "$GODOT_BIN" --headless --path . --script scripts/tests/player_save_roundtrip_smoke.gd 2>&1 | tee /tmp/my-game-player-save-roundtrip-smoke.log
+  if ! grep -q "PLAYER_SAVE_ROUNDTRIP_SMOKE_OK" /tmp/my-game-player-save-roundtrip-smoke.log; then
+    echo "PLAYER_SAVE_ROUNDTRIP_SMOKE_FAILED"
+    exit 1
+  fi
+
+  echo "== Godot runtime registry smoke =="
+  "$GODOT_BIN" --headless --path . --script scripts/tests/runtime_registry_smoke.gd 2>&1 | tee /tmp/my-game-runtime-registry-smoke.log
+  if ! grep -q "RUNTIME_REGISTRY_SMOKE_OK" /tmp/my-game-runtime-registry-smoke.log; then
+    echo "RUNTIME_REGISTRY_SMOKE_FAILED"
+    exit 1
+  fi
+
+  echo "== Godot player projectile pool smoke =="
+  "$GODOT_BIN" --headless --path . --script scripts/tests/player_projectile_pool_smoke.gd 2>&1 | tee /tmp/my-game-player-projectile-pool-smoke.log
+  if ! grep -q "PLAYER_PROJECTILE_POOL_SMOKE_OK" /tmp/my-game-player-projectile-pool-smoke.log; then
+    echo "PLAYER_PROJECTILE_POOL_SMOKE_FAILED"
     exit 1
   fi
 

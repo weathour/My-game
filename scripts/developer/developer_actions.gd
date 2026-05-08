@@ -9,10 +9,10 @@ static func activate(main: Node) -> void:
 	DEVELOPER_MODE.set_ignore_damage_enabled(true)
 	if main.spawn_timer != null:
 		main.spawn_timer.stop()
-	for enemy in main.get_tree().get_nodes_in_group("enemies"):
+	for enemy in _get_runtime_or_group_nodes(main, "enemies"):
 		if is_instance_valid(enemy):
 			enemy.queue_free()
-	for projectile in main.get_tree().get_nodes_in_group("enemy_projectiles"):
+	for projectile in _get_runtime_or_group_nodes(main, "enemy_projectiles"):
 		if is_instance_valid(projectile):
 			projectile.queue_free()
 	main.spawned_elite_count = 0
@@ -113,3 +113,12 @@ static func _get_owner_property(owner, property_name: String):
 		if property_info is Dictionary and str(property_info.get("name", "")) == property_name:
 			return owner.get(property_name)
 	return null
+
+static func _get_runtime_or_group_nodes(main: Node, group_name: String) -> Array:
+	if main == null or main.get_tree() == null:
+		return []
+	if group_name == "enemies" and main.has_method("get_runtime_enemies"):
+		return main.get_runtime_enemies()
+	if group_name == "enemy_projectiles" and main.has_method("get_runtime_enemy_projectiles"):
+		return main.get_runtime_enemy_projectiles()
+	return main.get_tree().get_nodes_in_group(group_name)

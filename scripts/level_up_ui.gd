@@ -1,4 +1,4 @@
-﻿extends CanvasLayer
+extends CanvasLayer
 
 signal upgrade_selected(option_id: String, attribute_option_id: String)
 signal upgrade_refresh_requested
@@ -138,8 +138,13 @@ func hide_ui() -> void:
 	_reset_pending_selection()
 	if hover_detail != null and hover_detail.has_method("hide_detail"):
 		hover_detail.hide_detail()
-	if card_list != null and card_list.has_method("clear"):
-		card_list.clear()
+	# Do not clear the card list while hiding. Reward chains can hide the current
+	# panel and open the next panel in the same frame (for example consecutive
+	# level-ups or multi-step skill rewards). Clearing a hidden ScrollContainer
+	# immediately before repopulating it can leave Godot's internal scrollbar
+	# range at 0, making the next panel impossible to scroll. Each show/rebuild
+	# path clears and repopulates the list while visible, which keeps the
+	# scrollbar range valid.
 	_clear_modal_footer()
 
 func _apply_responsive_state() -> void:

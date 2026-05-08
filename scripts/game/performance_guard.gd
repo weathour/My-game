@@ -36,6 +36,8 @@ static func _get_runtime_or_group_count(root: Node, group_name: String) -> int:
 		return (root.get_runtime_enemies() as Array).size()
 	if root.has_method("get_runtime_enemy_projectiles") and group_name == "enemy_projectiles":
 		return (root.get_runtime_enemy_projectiles() as Array).size()
+	if root.has_method("get_runtime_player_projectiles") and group_name == "player_projectiles":
+		return (root.get_runtime_player_projectiles() as Array).size()
 	if root.has_method("get_runtime_pickups") and (group_name == "exp_gems" or group_name == "heart_pickups"):
 		return (root.get_runtime_pickups(group_name) as Array).size()
 	return root.get_tree().get_node_count_in_group(group_name)

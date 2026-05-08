@@ -26,23 +26,34 @@ static func save_run_state(main: Node) -> void:
 		"heart_pickups": []
 	}
 
-	for enemy in main.get_tree().get_nodes_in_group("enemies"):
+	for enemy in _get_runtime_or_group_nodes(main, "enemies"):
 		if is_instance_valid(enemy) and enemy.has_method("get_save_data"):
 			save_data["enemies"].append(enemy.get_save_data())
 
-	for projectile in main.get_tree().get_nodes_in_group("enemy_projectiles"):
+	for projectile in _get_runtime_or_group_nodes(main, "enemy_projectiles"):
 		if is_instance_valid(projectile) and projectile.has_method("get_save_data"):
 			save_data["enemy_projectiles"].append(projectile.get_save_data())
 
-	for gem in main.get_tree().get_nodes_in_group("exp_gems"):
+	for gem in _get_runtime_or_group_nodes(main, "exp_gems"):
 		if is_instance_valid(gem) and gem.has_method("get_save_data"):
 			save_data["gems"].append(gem.get_save_data())
 
-	for heart_pickup in main.get_tree().get_nodes_in_group("heart_pickups"):
+	for heart_pickup in _get_runtime_or_group_nodes(main, "heart_pickups"):
 		if is_instance_valid(heart_pickup) and heart_pickup.has_method("get_save_data"):
 			save_data["heart_pickups"].append(heart_pickup.get_save_data())
 
 	SAVE_MANAGER.save_run(save_data)
+
+static func _get_runtime_or_group_nodes(main: Node, group_name: String) -> Array:
+	if main == null or main.get_tree() == null:
+		return []
+	if group_name == "enemies" and main.has_method("get_runtime_enemies"):
+		return main.get_runtime_enemies()
+	if group_name == "enemy_projectiles" and main.has_method("get_runtime_enemy_projectiles"):
+		return main.get_runtime_enemy_projectiles()
+	if (group_name == "exp_gems" or group_name == "heart_pickups") and main.has_method("get_runtime_pickups"):
+		return main.get_runtime_pickups(group_name)
+	return main.get_tree().get_nodes_in_group(group_name)
 
 static func load_saved_run(main: Node) -> bool:
 	if main._is_developer_mode():

@@ -59,14 +59,7 @@ static func get_blessing_options(player) -> Array:
 static func _get_blessing_count(player, blessing_id: String, tier: int, binding: String) -> int:
 	if player == null:
 		return 0
-	if binding == PLAYER_BLESSING_SYSTEM.SKILL_BOUND:
-		var skill_levels: Dictionary = PLAYER_BLESSING_SYSTEM.normalize_skill_state(player.get("skill_blessing_levels"))
-		var skill_blessing_levels: Dictionary = skill_levels.get(blessing_id, {})
-		return int(skill_blessing_levels.get(tier, 0))
-	var role_levels: Dictionary = PLAYER_BLESSING_SYSTEM.normalize_role_state(player.get("role_blessing_levels"), player.get("roles"))
-	var shared_levels: Dictionary = role_levels.get("__shared__", {})
-	var blessing_levels: Dictionary = shared_levels.get(blessing_id, {})
-	return int(blessing_levels.get(tier, 0))
+	return PLAYER_BLESSING_SKILL_STATE.get_available_blessing_count(player, binding, blessing_id, tier)
 
 static func _get_tier_suffix(tier: int) -> String:
 	match tier:

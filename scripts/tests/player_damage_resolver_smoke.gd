@@ -36,10 +36,12 @@ func _run() -> void:
 		failures.append("batched radius damage should report all matched hits")
 	if queue == null or not ("jobs" in queue) or queue.jobs.size() <= 0:
 		failures.append("batched radius damage should enqueue merged jobs")
+	if owner.register_calls != 0:
+		failures.append("resolver should not register aggregate attack results before queued jobs are applied")
+	await physics_frame
+	await process_frame
 	if owner.damage_calls <= 0:
 		failures.append("resolver should call owner damage entrypoint")
-	if owner.register_calls != 0:
-		failures.append("resolver should not register aggregate attack results for callers")
 	var freeing_owner := FreeingDamageOwner.new()
 	root.add_child(freeing_owner)
 	var freed_enemy := _make_enemy(root, Vector2(10.0, 10.0))
@@ -51,6 +53,8 @@ func _run() -> void:
 		failures.append("resolver should skip queued-for-deletion enemies without aborting later hits")
 	if is_instance_valid(stable_enemy):
 		stable_enemy.queue_free()
+	_check_disjoint_batched_queries()
+	_check_runtime_cache_key_switch()
 	for enemy in enemies:
 		if is_instance_valid(enemy):
 			(enemy as Node).queue_free()
@@ -71,6 +75,48 @@ func _make_enemy(root: Node, position: Vector2) -> Node2D:
 	enemy.add_to_group("enemies")
 	root.add_child(enemy)
 	return enemy
+
+func _make_runtime_enemy(root: RuntimeEnemyRoot, position: Vector2) -> Node2D:
+	var enemy := TestEnemy.new()
+	enemy.global_position = position
+	enemy.contact_radius = 8.0
+	root.add_child(enemy)
+	root.enemies.append(enemy)
+	return enemy
+
+func _check_disjoint_batched_queries() -> void:
+	var runtime_root := RuntimeEnemyRoot.new()
+	get_root().add_child(runtime_root)
+	current_scene = runtime_root
+	var owner := DamageOwner.new()
+	runtime_root.add_child(owner)
+	_make_runtime_enemy(runtime_root, Vector2.ZERO)
+	_make_runtime_enemy(runtime_root, Vector2(1000.0, 0.0))
+	_make_runtime_enemy(runtime_root, Vector2(500.0, 0.0))
+	var hits: int = DamageResolver.damage_enemies_in_multiple_radii_batched(owner, [Vector2.ZERO, Vector2(1000.0, 0.0)], 24.0, 10.0, 0.0, 1.0, 0.0, "swordsman")
+	if hits != 2:
+		failures.append("disjoint batched radii should hit only enemies inside each circle")
+	runtime_root.queue_free()
+
+func _check_runtime_cache_key_switch() -> void:
+	var root_a := RuntimeEnemyRoot.new()
+	var root_b := RuntimeEnemyRoot.new()
+	get_root().add_child(root_a)
+	get_root().add_child(root_b)
+	var owner_a := DamageOwner.new()
+	var owner_b := DamageOwner.new()
+	root_a.add_child(owner_a)
+	root_b.add_child(owner_b)
+	_make_runtime_enemy(root_a, Vector2(500.0, 0.0))
+	_make_runtime_enemy(root_b, Vector2.ZERO)
+	current_scene = root_a
+	var first_hits: int = DamageResolver.damage_enemies_in_radius(owner_a, Vector2.ZERO, 24.0, 10.0, 0.0, 1.0, 0.0, "swordsman")
+	current_scene = root_b
+	var second_hits: int = DamageResolver.damage_enemies_in_radius(owner_b, Vector2.ZERO, 24.0, 10.0, 0.0, 1.0, 0.0, "swordsman")
+	if first_hits != 0 or second_hits != 1:
+		failures.append("resolver frame caches should be isolated per current scene")
+	root_a.queue_free()
+	root_b.queue_free()
 
 class DamageOwner:
 	extends Node2D
@@ -106,3 +152,11 @@ class FreeingDamageOwner:
 		if enemy == enemy_to_free and is_instance_valid(enemy):
 			enemy.queue_free()
 		return false
+
+class RuntimeEnemyRoot:
+	extends Node
+
+	var enemies: Array = []
+
+	func get_runtime_enemies() -> Array:
+		return enemies

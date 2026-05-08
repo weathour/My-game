@@ -252,6 +252,28 @@ static func spawn_owner_vortex_effect(owner, center: Vector2, radius: float, col
 		owner._build_circle_polygon(max(8.0, radius * 0.55))
 	)
 
+static func spawn_cross_slash_effect(owner: Node, center: Vector2, direction: Vector2, length: float, width: float, color: Color, duration: float) -> void:
+	spawn_slash_effect(owner, center, direction.rotated(0.78), length, width, color, duration)
+	spawn_slash_effect(owner, center, direction.rotated(-0.78), length, width, color, duration)
+
+static func spawn_owner_guard_effect(owner, center: Vector2, radius: float, color: Color, duration: float) -> void:
+	spawn_guard_effect(owner, center, radius, color, duration, owner._build_circle_polygon(radius))
+
+static func spawn_owner_ring_effect(owner, center: Vector2, radius: float, color: Color, width: float, duration: float) -> void:
+	spawn_ring_effect(owner, center, radius, color, width, duration, owner._build_circle_polygon(radius))
+
+static func spawn_owner_mage_bombardment_warning_effect(owner, center: Vector2, radius: float) -> void:
+	spawn_mage_bombardment_warning_effect(owner, center, radius, owner._build_circle_polygon(radius * 0.82))
+
+static func spawn_owner_mage_bombardment_fall_effect(owner, center: Vector2, radius: float) -> void:
+	spawn_mage_bombardment_fall_effect(owner, center, radius, owner._build_circle_polygon(radius * 0.28))
+
+static func spawn_owner_burst_effect(owner, center: Vector2, radius: float, color: Color, duration: float) -> void:
+	spawn_burst_effect(owner, center, color, duration, owner._build_circle_polygon(radius))
+
+static func spawn_owner_target_lock_effect(owner, center: Vector2, radius: float, color: Color, duration: float) -> void:
+	spawn_target_lock_effect(owner, center, radius, color, duration, owner._build_circle_polygon(radius))
+
 static func spawn_target_lock_effect(owner: Node, center: Vector2, radius: float, color: Color, duration: float, ring_points: PackedVector2Array) -> void:
 	PLAYER_EFFECT_SHAPE_PRIMITIVES.spawn_target_lock_effect(owner, center, radius, color, duration, ring_points)
 

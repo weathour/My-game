@@ -9,11 +9,14 @@ const DAMAGE_JOB_QUEUE_NAME := "PlayerDamageJobQueue"
 const QUEUED_HIT_THRESHOLD := 16
 const LOW_FPS_QUEUED_HIT_THRESHOLD := 8
 const CRITICAL_FPS_QUEUED_HIT_THRESHOLD := 4
+const DAMAGE_QUERY_BOUNDS_GROW := 48.0
 
 static var cached_live_enemies: Array = []
 static var cached_live_enemies_frame: int = -1
+static var cached_live_enemies_source_key: int = -1
 static var cached_enemy_grid: Dictionary = {}
 static var cached_enemy_grid_frame: int = -1
+static var cached_enemy_grid_source_key: int = -1
 static var cached_enemy_grid_cell_size: float = 96.0
 static var reusable_damage_batcher: RefCounted
 
@@ -104,13 +107,7 @@ static func damage_enemies_in_multiple_radii_batched(owner, centers: Array[Vecto
 		return damage_enemies_in_radius_batched(owner, centers[0], radius, damage_amount, vulnerability_bonus, slow_multiplier, slow_duration, source_role_id)
 	var resolved_role_id: String = _resolve_role_id(owner, source_role_id)
 	var batcher := _get_reusable_damage_batcher(owner)
-	var bounds := Rect2(centers[0], Vector2.ZERO)
-	for center in centers:
-		bounds = bounds.expand(center)
-	var search_center: Vector2 = bounds.get_center()
-	var search_width: float = bounds.size.x + radius * 2.0
-	var search_height: float = bounds.size.y + radius * 2.0
-	var candidates: Array = _get_candidate_enemies_for_rect(owner, search_center, search_width, search_height)
+	var candidates: Array = _get_candidate_enemies_for_multiple_circles(owner, centers, radius)
 	_record_damage_query(candidates.size())
 	for enemy in candidates:
 		if not _is_live_enemy(enemy) or enemy is not Node2D:
@@ -128,10 +125,7 @@ static func damage_enemies_in_multiple_radii_batched(owner, centers: Array[Vecto
 static func damage_enemies_in_shapes_batched(owner, shapes: Array[Dictionary]) -> int:
 	if shapes.is_empty():
 		return 0
-	var search_bounds: Rect2 = _get_shape_bounds(shapes[0])
-	for index in range(1, shapes.size()):
-		search_bounds = search_bounds.merge(_get_shape_bounds(shapes[index]))
-	var candidates: Array = _get_candidate_enemies_for_rect(owner, search_bounds.get_center(), search_bounds.size.x, search_bounds.size.y)
+	var candidates: Array = _get_candidate_enemies_for_shapes(owner, shapes)
 	_record_damage_query(candidates.size())
 	var batcher := _get_reusable_damage_batcher(owner)
 	for enemy in candidates:
@@ -482,7 +476,8 @@ static func _get_live_enemies(owner) -> Array:
 	if tree == null:
 		return []
 	var current_frame := Engine.get_physics_frames()
-	if cached_live_enemies_frame == current_frame:
+	var source_key := _get_enemy_source_cache_key(owner, tree)
+	if cached_live_enemies_frame == current_frame and cached_live_enemies_source_key == source_key:
 		return cached_live_enemies
 	cached_live_enemies = []
 	var enemy_nodes: Array = _get_runtime_enemies(owner, tree)
@@ -490,6 +485,7 @@ static func _get_live_enemies(owner) -> Array:
 		if _is_live_enemy(enemy):
 			cached_live_enemies.append(enemy)
 	cached_live_enemies_frame = current_frame
+	cached_live_enemies_source_key = source_key
 	return cached_live_enemies
 
 static func _get_runtime_enemies(owner, tree: SceneTree) -> Array:
@@ -507,27 +503,56 @@ static func _get_runtime_enemies(owner, tree: SceneTree) -> Array:
 static func _get_candidate_enemies_for_circle(owner, center: Vector2, radius: float) -> Array:
 	return _get_candidate_enemies_for_rect(owner, center, radius * 2.0, radius * 2.0)
 
+static func _get_candidate_enemies_for_multiple_circles(owner, centers: Array[Vector2], radius: float) -> Array:
+	var safe_radius: float = max(1.0, radius)
+	var bounds_list: Array[Rect2] = []
+	for center in centers:
+		bounds_list.append(Rect2(center - Vector2.ONE * safe_radius, Vector2.ONE * safe_radius * 2.0))
+	return _get_candidate_enemies_for_bounds_list(owner, bounds_list)
+
+static func _get_candidate_enemies_for_shapes(owner, shapes: Array[Dictionary]) -> Array:
+	var bounds_list: Array[Rect2] = []
+	for shape in shapes:
+		bounds_list.append(_get_shape_bounds(shape))
+	return _get_candidate_enemies_for_bounds_list(owner, bounds_list)
+
 static func _get_candidate_enemies_for_rect(owner, center: Vector2, width: float, height: float) -> Array:
+	var half_width: float = max(1.0, width * 0.5)
+	var half_height: float = max(1.0, height * 0.5)
+	return _get_candidate_enemies_for_bounds_list(owner, [
+		Rect2(center - Vector2(half_width, half_height), Vector2(half_width * 2.0, half_height * 2.0))
+	])
+
+static func _get_candidate_enemies_for_bounds_list(owner, bounds_list: Array[Rect2]) -> Array:
 	var grid: Dictionary = _get_enemy_grid(owner)
-	if grid.is_empty():
+	if grid.is_empty() or bounds_list.is_empty():
 		return []
-	var half_width: float = max(1.0, width * 0.5 + 48.0)
-	var half_height: float = max(1.0, height * 0.5 + 48.0)
-	var min_cell: Vector2i = _grid_cell(center - Vector2(half_width, half_height))
-	var max_cell: Vector2i = _grid_cell(center + Vector2(half_width, half_height))
 	var candidates: Array = []
-	for x in range(min_cell.x, max_cell.x + 1):
-		for y in range(min_cell.y, max_cell.y + 1):
-			var cell := Vector2i(x, y)
-			if grid.has(cell):
+	var seen_enemy_ids: Dictionary = {}
+	for bounds in bounds_list:
+		var expanded_bounds: Rect2 = bounds.grow(DAMAGE_QUERY_BOUNDS_GROW)
+		var min_cell: Vector2i = _grid_cell(expanded_bounds.position)
+		var max_cell: Vector2i = _grid_cell(expanded_bounds.position + expanded_bounds.size)
+		for x in range(min_cell.x, max_cell.x + 1):
+			for y in range(min_cell.y, max_cell.y + 1):
+				var cell := Vector2i(x, y)
+				if not grid.has(cell):
+					continue
 				for enemy in grid[cell] as Array:
-					if _is_live_enemy(enemy):
-						candidates.append(enemy)
+					if not _is_live_enemy(enemy):
+						continue
+					var enemy_id: int = enemy.get_instance_id()
+					if seen_enemy_ids.has(enemy_id):
+						continue
+					seen_enemy_ids[enemy_id] = true
+					candidates.append(enemy)
 	return candidates
 
 static func _get_enemy_grid(owner) -> Dictionary:
 	var current_frame := Engine.get_physics_frames()
-	if cached_enemy_grid_frame == current_frame:
+	var tree: SceneTree = owner.get_tree() if owner != null and owner.has_method("get_tree") else null
+	var source_key := _get_enemy_source_cache_key(owner, tree)
+	if cached_enemy_grid_frame == current_frame and cached_enemy_grid_source_key == source_key:
 		return cached_enemy_grid
 	cached_enemy_grid = {}
 	for enemy in _get_live_enemies(owner):
@@ -538,7 +563,17 @@ static func _get_enemy_grid(owner) -> Dictionary:
 			cached_enemy_grid[cell] = []
 		(cached_enemy_grid[cell] as Array).append(enemy)
 	cached_enemy_grid_frame = current_frame
+	cached_enemy_grid_source_key = source_key
 	return cached_enemy_grid
+
+static func _get_enemy_source_cache_key(owner, tree: SceneTree) -> int:
+	if tree != null:
+		var scene: Node = tree.current_scene
+		if scene != null:
+			return scene.get_instance_id()
+	if owner != null and owner is Object:
+		return (owner as Object).get_instance_id()
+	return 0
 
 static func _grid_cell(position: Vector2) -> Vector2i:
 	return Vector2i(floori(position.x / cached_enemy_grid_cell_size), floori(position.y / cached_enemy_grid_cell_size))
