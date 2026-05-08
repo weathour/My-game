@@ -251,11 +251,13 @@ static func spawn_thrust_effect(owner: Node, start_position: Vector2, end_positi
 static func _acquire_composite(current_scene: Node, kind: String, child_names: Array[String]) -> Node2D:
 	var pool: Array = composite_pools.get(kind, [])
 	while not pool.is_empty():
-		var root := pool.pop_back() as Node2D
-		if root != null and is_instance_valid(root):
-			composite_pools[kind] = pool
-			_prepare_composite(root, current_scene)
-			return root
+		var pooled_root: Variant = pool.pop_back()
+		if not is_instance_valid(pooled_root) or not (pooled_root is Node2D):
+			continue
+		var root := pooled_root as Node2D
+		composite_pools[kind] = pool
+		_prepare_composite(root, current_scene)
+		return root
 	composite_pools[kind] = pool
 	var root := Node2D.new()
 	current_scene.add_child(root)

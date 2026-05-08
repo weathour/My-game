@@ -154,11 +154,13 @@ static func _get_scene_pool_key(scene: PackedScene) -> String:
 static func _acquire_effect_part(scene: PackedScene, scene_key: String) -> Node2D:
 	var pool: Array = effect_part_pools.get(scene_key, [])
 	while not pool.is_empty():
-		var root := pool.pop_back() as Node2D
-		if root != null and is_instance_valid(root):
-			effect_part_pools[scene_key] = pool
-			_mark_temporary_effect(root)
-			return root
+		var pooled_root: Variant = pool.pop_back()
+		if not is_instance_valid(pooled_root) or not (pooled_root is Node2D):
+			continue
+		var root := pooled_root as Node2D
+		effect_part_pools[scene_key] = pool
+		_mark_temporary_effect(root)
+		return root
 	effect_part_pools[scene_key] = pool
 	var root := scene.instantiate() as Node2D
 	if root != null:

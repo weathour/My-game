@@ -1,6 +1,7 @@
-[gd_scene format=3 uid="uid://h8ks5ajs0rsb"]
+[gd_scene load_steps=16 format=3 uid="uid://h8ks5ajs0rsb"]
 
 [ext_resource type="Texture2D" uid="uid://cpjjfrtebj2mh" path="res://assets/enemies/pumpkin/rika_05cb7450 (1).png" id="1_o7372"]
+[ext_resource type="Script" path="res://assets/enemies/pumpkin/pumpkin_visual.gd" id="2_6npps"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4l3wj"]
 atlas = ExtResource("1_o7372")
@@ -95,6 +96,7 @@ animations = [{
 }]
 
 [node name="Pumpkin" type="Node2D" unique_id=1176901061]
+script = ExtResource("2_6npps")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2096078435]
 sprite_frames = SubResource("SpriteFrames_hpl4o")

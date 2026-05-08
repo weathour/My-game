@@ -46,6 +46,9 @@ static func _play_custom_hit_visual(enemy) -> void:
 	var flying_eye_visual: Node = enemy.get_node_or_null("FlyingEyeVisual")
 	if flying_eye_visual != null and flying_eye_visual.has_method("play_hit"):
 		flying_eye_visual.play_hit()
+	var pumpkin_visual: Node = enemy.get_node_or_null("PumpkinVisual")
+	if pumpkin_visual != null and pumpkin_visual.has_method("play_hit"):
+		pumpkin_visual.play_hit()
 
 static func get_hit_flash_alpha(hit_flash_remaining: float) -> float:
 	if hit_flash_remaining <= 0.0:

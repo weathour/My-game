@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://brtq2t1nh7bww"]
+
+[ext_resource type="Script" path="res://assets/players/sword/sword_visual.gd" id="1_kvbc7"]
+
+[node name="Sword" type="Node2D" unique_id=1557511476]
+script = ExtResource("1_kvbc7")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2094114519]

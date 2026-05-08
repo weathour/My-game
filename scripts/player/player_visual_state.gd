@@ -1,6 +1,12 @@
 extends RefCounted
 
 const PLAYER_VISUAL_LAYOUT := preload("res://scripts/player/player_visual_layout.gd")
+const SWORDSMAN_VISUAL_SCENE := preload("res://assets/players/sword/sword.tscn")
+const SWORDSMAN_VISUAL_SCALE := Vector2(1.0, 1.0)
+const SWORDSMAN_VISUAL_BASE_POSITION := Vector2(0.0, 0.0)
+const GUNNER_VISUAL_SCENE := preload("res://assets/players/gun/gun.tscn")
+const GUNNER_VISUAL_SCALE := Vector2(1.0, 1.0)
+const GUNNER_VISUAL_BASE_POSITION := Vector2(0.0, 0.0)
 const WIZARD_VISUAL_SCENE := preload("res://assets/players/wizard/wizard.tscn")
 const WIZARD_VISUAL_SCALE := Vector2(1.7, 1.7)
 const WIZARD_VISUAL_BASE_POSITION := Vector2(0.0, -20.0)
@@ -88,7 +94,7 @@ static func update_role_idle_visual(owner: Node, role_id: String, facing_directi
 		return
 	var scene_visual := visual_root.get_node_or_null("RoleSceneVisual") as Node2D
 	if scene_visual != null:
-		_update_role_scene_visual(scene_visual, role_id, facing_direction, role_visual_time)
+		_update_role_scene_visual(owner, scene_visual, role_id, facing_direction, role_visual_time)
 		return
 	var sprite := visual_root.get_node_or_null("RoleSprite") as Sprite2D
 	if sprite == null:
@@ -116,7 +122,7 @@ static func update_role_idle_visual(owner: Node, role_id: String, facing_directi
 	if role_id in ["swordsman", "gunner", "mage"]:
 		sprite.flip_h = facing_direction.x < 0.0
 
-static func _update_role_scene_visual(scene_visual: Node2D, role_id: String, facing_direction: Vector2, role_visual_time: float) -> void:
+static func _update_role_scene_visual(owner: Node, scene_visual: Node2D, role_id: String, facing_direction: Vector2, role_visual_time: float) -> void:
 	var base_position := WIZARD_VISUAL_BASE_POSITION
 	var base_position_value: Variant = scene_visual.get_meta("base_position", base_position)
 	if base_position_value is Vector2:
@@ -129,6 +135,9 @@ static func _update_role_scene_visual(scene_visual: Node2D, role_id: String, fac
 		animated_sprite.flip_h = facing_direction.x < 0.0
 		if animated_sprite.sprite_frames != null and not animated_sprite.is_playing():
 			animated_sprite.play()
+	if scene_visual.has_method("set_moving"):
+		var move_direction: Vector2 = owner.velocity
+		scene_visual.set_moving(move_direction.length_squared() > 1.0, move_direction if move_direction.length_squared() > 1.0 else facing_direction)
 
 static func update_visuals(owner: Node, role_data: Dictionary, active_role_visual_hidden: bool, hidden_role_id: String) -> void:
 	var polygon := owner.get_node_or_null("Polygon2D") as Polygon2D
@@ -144,6 +153,24 @@ static func update_visuals(owner: Node, role_data: Dictionary, active_role_visua
 	visual_root.name = "RoleVisualRoot"
 	owner.add_child(visual_root)
 	var role_id := str(role_data["id"])
+	if role_id == "swordsman":
+		var scene_visual := _create_swordsman_scene_visual()
+		if scene_visual != null:
+			visual_root.add_child(scene_visual)
+			var should_hide_scene := is_role_visual_hidden(role_id, active_role_visual_hidden, hidden_role_id)
+			scene_visual.visible = not should_hide_scene
+			if polygon != null and not should_hide_scene:
+				polygon.visible = false
+			return
+	if role_id == "gunner":
+		var scene_visual := _create_gunner_scene_visual()
+		if scene_visual != null:
+			visual_root.add_child(scene_visual)
+			var should_hide_scene := is_role_visual_hidden(role_id, active_role_visual_hidden, hidden_role_id)
+			scene_visual.visible = not should_hide_scene
+			if polygon != null and not should_hide_scene:
+				polygon.visible = false
+			return
 	if role_id == "mage":
 		var scene_visual := _create_mage_scene_visual()
 		if scene_visual != null:
@@ -169,6 +196,32 @@ static func update_visuals(owner: Node, role_data: Dictionary, active_role_visua
 		sprite.visible = not should_hide
 	if polygon != null and not should_hide:
 		polygon.visible = false
+
+static func _create_swordsman_scene_visual() -> Node2D:
+	var scene_visual := SWORDSMAN_VISUAL_SCENE.instantiate() as Node2D
+	if scene_visual == null:
+		return null
+	scene_visual.name = "RoleSceneVisual"
+	scene_visual.position = SWORDSMAN_VISUAL_BASE_POSITION
+	scene_visual.scale = SWORDSMAN_VISUAL_SCALE
+	scene_visual.set_meta("base_position", SWORDSMAN_VISUAL_BASE_POSITION)
+	scene_visual.set_meta("base_scale", SWORDSMAN_VISUAL_SCALE)
+	if scene_visual.has_method("set_moving"):
+		scene_visual.set_moving(false)
+	return scene_visual
+
+static func _create_gunner_scene_visual() -> Node2D:
+	var scene_visual := GUNNER_VISUAL_SCENE.instantiate() as Node2D
+	if scene_visual == null:
+		return null
+	scene_visual.name = "RoleSceneVisual"
+	scene_visual.position = GUNNER_VISUAL_BASE_POSITION
+	scene_visual.scale = GUNNER_VISUAL_SCALE
+	scene_visual.set_meta("base_position", GUNNER_VISUAL_BASE_POSITION)
+	scene_visual.set_meta("base_scale", GUNNER_VISUAL_SCALE)
+	if scene_visual.has_method("set_moving"):
+		scene_visual.set_moving(false)
+	return scene_visual
 
 static func _create_mage_scene_visual() -> Node2D:
 	var scene_visual := WIZARD_VISUAL_SCENE.instantiate() as Node2D

@@ -260,18 +260,25 @@ func _compute_separation_velocity() -> Vector2:
 	else:
 		neighbors = get_tree().get_nodes_in_group("enemies")
 	var push: Vector2 = Vector2.ZERO
-	var radius: float = max(8.0, contact_radius * 0.72)
-	var radius_sq: float = radius * radius
-	var max_push: float = max(18.0, contact_radius * 0.35)
 	var processed: int = 0
 	for other in neighbors:
 		if other == null or other == self or not is_instance_valid(other) or not (other is Node2D):
 			continue
 		var offset: Vector2 = global_position - (other as Node2D).global_position
+		var other_radius: float = contact_radius
+		var other_contact_radius: Variant = other.get("contact_radius")
+		if other_contact_radius != null:
+			other_radius = float(other_contact_radius)
+		var radius: float = max(16.0, (contact_radius + other_radius) * 0.58)
+		var radius_sq: float = radius * radius
 		var distance_sq: float = offset.length_squared()
-		if distance_sq <= 0.001 or distance_sq > radius_sq:
+		if distance_sq > radius_sq:
 			continue
+		if distance_sq <= 0.001:
+			offset = Vector2.RIGHT.rotated(float(get_instance_id() % 360) * PI / 180.0)
+			distance_sq = 1.0
 		var distance: float = sqrt(distance_sq)
+		var max_push: float = max(24.0, radius * 0.55)
 		var strength: float = (radius - distance) / radius
 		push += offset.normalized() * strength * max_push
 		processed += 1

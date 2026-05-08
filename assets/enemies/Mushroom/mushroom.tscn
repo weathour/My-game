@@ -41,7 +41,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ofx8e")
 }],
-"loop": false,
+"loop": true,
 "name": &"mushroom-hit",
 "speed": 7.0
 }]
@@ -52,5 +52,5 @@ script = ExtResource("1_0xtii")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1346586569]
 sprite_frames = SubResource("SpriteFrames_tbybc")
 animation = &"mushroom-hit"
-frame = 4
-frame_progress = 1.0
+frame = 2
+frame_progress = 0.13962777

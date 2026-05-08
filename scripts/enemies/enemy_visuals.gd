@@ -5,6 +5,7 @@ const ENEMY_GEOMETRY := preload("res://scripts/enemies/enemy_geometry.gd")
 const MUSHROOM_VISUAL_SCENE := preload("res://assets/enemies/Mushroom/mushroom.tscn")
 const SLIME_VISUAL_SCENE := preload("res://assets/enemies/slime/Slime.tscn")
 const FLYING_EYE_VISUAL_SCENE := preload("res://assets/enemies/flyingeye/flyingeye.tscn")
+const PUMPKIN_VISUAL_SCENE := preload("res://assets/enemies/pumpkin/pumpkin.tscn")
 
 static func apply_visuals(enemy, color_override = null) -> void:
 	var polygon := enemy.get_node_or_null("Polygon2D") as Polygon2D
@@ -22,16 +23,21 @@ static func apply_visuals(enemy, color_override = null) -> void:
 	elif _should_use_flying_eye_visual(enemy):
 		polygon.visible = false
 		_ensure_flying_eye_visual(enemy)
+	elif _should_use_pumpkin_visual(enemy):
+		polygon.visible = false
+		_ensure_pumpkin_visual(enemy)
 	elif enemy.enemy_kind == "boss":
 		polygon.visible = false
 		_clear_mushroom_visual(enemy)
 		_clear_slime_visual(enemy)
 		_clear_flying_eye_visual(enemy)
+		_clear_pumpkin_visual(enemy)
 		enemy._ensure_boss_visual()
 	else:
 		_clear_mushroom_visual(enemy)
 		_clear_slime_visual(enemy)
 		_clear_flying_eye_visual(enemy)
+		_clear_pumpkin_visual(enemy)
 		polygon.visible = true
 		polygon.color = enemy.display_color
 		polygon.polygon = ENEMY_VISUAL_DATA.get_shape_points(enemy.behavior_id)
@@ -66,6 +72,8 @@ static func update_motion_visual(enemy) -> void:
 	if visual == null or not visual.has_method("set_moving"):
 		visual = enemy.get_node_or_null("FlyingEyeVisual")
 	if visual == null or not visual.has_method("set_moving"):
+		visual = enemy.get_node_or_null("PumpkinVisual")
+	if visual == null or not visual.has_method("set_moving"):
 		return
 	visual.set_moving(enemy.velocity.length_squared() > 1.0, enemy.velocity)
 
@@ -77,6 +85,9 @@ static func _should_use_slime_visual(enemy) -> bool:
 
 static func _should_use_flying_eye_visual(enemy) -> bool:
 	return enemy.enemy_kind == "normal" and enemy.archetype_id == "swarm" and enemy.behavior_id == "swarm"
+
+static func _should_use_pumpkin_visual(enemy) -> bool:
+	return enemy.enemy_kind == "normal" and enemy.archetype_id == "brute" and enemy.behavior_id == "chaser"
 
 static func _ensure_mushroom_visual(enemy) -> void:
 	if enemy.get_node_or_null("MushroomVisual") != null:
@@ -114,6 +125,18 @@ static func _ensure_flying_eye_visual(enemy) -> void:
 	if visual.has_method("set_moving"):
 		visual.set_moving(false)
 
+static func _ensure_pumpkin_visual(enemy) -> void:
+	if enemy.get_node_or_null("PumpkinVisual") != null:
+		return
+	var visual := PUMPKIN_VISUAL_SCENE.instantiate() as Node2D
+	if visual == null:
+		return
+	visual.name = "PumpkinVisual"
+	enemy.add_child(visual)
+	visual.position = Vector2.ZERO
+	if visual.has_method("set_moving"):
+		visual.set_moving(false)
+
 static func _clear_mushroom_visual(enemy) -> void:
 	var visual: Node = enemy.get_node_or_null("MushroomVisual")
 	if visual == null:
@@ -128,6 +151,12 @@ static func _clear_slime_visual(enemy) -> void:
 
 static func _clear_flying_eye_visual(enemy) -> void:
 	var visual: Node = enemy.get_node_or_null("FlyingEyeVisual")
+	if visual == null:
+		return
+	visual.queue_free()
+
+static func _clear_pumpkin_visual(enemy) -> void:
+	var visual: Node = enemy.get_node_or_null("PumpkinVisual")
 	if visual == null:
 		return
 	visual.queue_free()

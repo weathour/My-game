@@ -35,7 +35,8 @@ const TIER_TWO_RADIUS := 200.0
 const TIER_THREE_RADIUS := 220.0
 const MAX_ACTIVE_VISUALS := 7
 const VISUAL_SPAWN_INTERVAL := 0.1
-const FIELD_CIRCLE_VISUAL_SCALE := 1.35
+const FIELD_CIRCLE_VISUAL_SCALE := 1.0
+const FIELD_CIRCLE_VISIBLE_DIAMETER := 363.0
 const FIELD_CIRCLE_VISIBLE_CENTER_OFFSET := Vector2(-18.0, 101.5)
 const SHRAPNEL_MAX_VISIBLE_RADIUS := 127.0
 const SHRAPNEL_VISUAL_MAX_SCALE := 0.62
@@ -160,8 +161,7 @@ func _create_field(owner, center: Vector2) -> void:
 	circle.centered = true
 	circle.offset = FIELD_CIRCLE_VISIBLE_CENTER_OFFSET
 	circle.modulate = Color(1.0, 1.0, 1.0, 0.602)
-	var texture_size: Vector2 = FIELD_TEXTURE.get_size() if FIELD_TEXTURE != null else Vector2(256.0, 256.0)
-	circle.scale = Vector2.ONE * (radius * 2.0 / max(1.0, max(texture_size.x, texture_size.y)) * FIELD_CIRCLE_VISUAL_SCALE)
+	circle.scale = Vector2.ONE * (radius * 2.0 / FIELD_CIRCLE_VISIBLE_DIAMETER * FIELD_CIRCLE_VISUAL_SCALE)
 	root.add_child(circle)
 
 	var field_data: Dictionary = {
