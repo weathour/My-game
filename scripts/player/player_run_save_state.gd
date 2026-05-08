@@ -128,7 +128,12 @@ static func apply_save_data(player, data: Dictionary) -> void:
 	if position_data.size() >= 2:
 		player.global_position = Vector2(float(position_data[0]), float(position_data[1]))
 
-	var saved_active_role_index := int(data.get("active_role_index", player.active_role_index))
+	player.roles = player._normalize_loaded_roles(data.get("roles", player.roles))
+	var saved_active_role_index: int = clampi(
+		int(data.get("active_role_index", player.active_role_index)),
+		0,
+		max(0, player.roles.size() - 1)
+	)
 	player.level = int(data.get("level", player.level))
 	player.experience = int(data.get("experience", player.experience))
 	player.experience_to_next_level = PLAYER_LEVEL_CURVE.normalize_required_experience(
@@ -138,15 +143,10 @@ static func apply_save_data(player, data: Dictionary) -> void:
 	player.pending_level_ups = max(0, int(data.get("pending_level_ups", player.pending_level_ups)))
 	player.max_health = float(data.get("max_health", player.max_health))
 	player.max_mana = float(data.get("max_mana", player.max_mana))
-	player.current_health = float(data.get("current_health", player.current_health))
+	var saved_current_health := float(data.get("current_health", player.current_health))
+	player.current_health = saved_current_health
 	player.role_health_values = player._build_role_health_state()
 	var saved_role_health_values: Variant = data.get("role_health_values", {})
-	if saved_role_health_values is Dictionary and not (saved_role_health_values as Dictionary).is_empty():
-		player.role_health_values = PLAYER_ROLE_STAT_FLOW.normalize_role_health_state(player, saved_role_health_values)
-	else:
-		var fallback_health_role_id: String = str(player.roles[clamp(saved_active_role_index, 0, max(0, player.roles.size() - 1))].get("id", ""))
-		if fallback_health_role_id != "":
-			player.role_health_values[fallback_health_role_id] = clamp(player.current_health, 0.0, max(1.0, player.max_health))
 	player.role_mana_values = player._build_role_resource_state_data(0.0)
 	player.role_ultimate_energy_lock_remaining = player._build_role_resource_state_data(0.0)
 	var saved_role_mana_values: Dictionary = data.get("role_mana_values", {})
@@ -198,12 +198,12 @@ static func apply_save_data(player, data: Dictionary) -> void:
 	player.attribute_training_levels = player._normalize_attribute_training_data(data.get("attribute_training_levels", player.attribute_training_levels))
 	player._sync_swordsman_trait_health_bonus()
 	player.role_special_states = data.get("role_special_states", player.role_special_states).duplicate(true)
-	player.roles = player._normalize_loaded_roles(data.get("roles", player.roles))
 	player.role_blessing_levels = PLAYER_BLESSING_SYSTEM.normalize_role_state(data.get("role_blessing_levels", player.role_blessing_levels), player.roles)
 	PLAYER_BLESSING_SYSTEM.sync_shared_role_blessings(player)
 	player.skill_blessing_levels = PLAYER_BLESSING_SYSTEM.normalize_skill_state(data.get("skill_blessing_levels", player.skill_blessing_levels))
 	player.blessing_skill_state = PLAYER_BLESSING_SKILL_STATE.normalize_state(data.get("blessing_skill_state", player.blessing_skill_state))
 	player.story_equipped_styles = data.get("story_equipped_styles", player.story_equipped_styles).duplicate(true)
+	_apply_saved_role_health_data(player, saved_role_health_values, saved_current_health, saved_active_role_index)
 	if player.swordsman_blade_storm_ability != null:
 		player.swordsman_blade_storm_ability.restore_effect_if_active(player)
 	if player.mage_meta_field_ability != null:
@@ -222,6 +222,20 @@ static func apply_save_data(player, data: Dictionary) -> void:
 	player.stats_changed.emit(player.get_stat_summary())
 	player.health_changed.emit(player.current_health, player.max_health)
 	player._emit_active_mana_changed()
+
+
+static func _apply_saved_role_health_data(player, saved_role_health_values: Variant, saved_current_health: float, saved_active_role_index: int) -> void:
+	player.role_health_values = player._build_role_health_state()
+	if saved_role_health_values is Dictionary and not (saved_role_health_values as Dictionary).is_empty():
+		player.role_health_values = PLAYER_ROLE_STAT_FLOW.normalize_role_health_state(player, saved_role_health_values)
+	else:
+		var fallback_health_role_id: String = str(player.roles[clamp(saved_active_role_index, 0, max(0, player.roles.size() - 1))].get("id", ""))
+		if fallback_health_role_id != "":
+			var role_max_health: float = PLAYER_ROLE_STAT_FLOW.get_role_max_health(player, fallback_health_role_id)
+			player.role_health_values[fallback_health_role_id] = clamp(saved_current_health, 0.0, role_max_health)
+	var active_role_id: String = str(player.roles[clamp(saved_active_role_index, 0, max(0, player.roles.size() - 1))].get("id", ""))
+	if active_role_id != "":
+		player.current_health = float(player.role_health_values.get(active_role_id, saved_current_health))
 
 static func _apply_ability_save_data(player, data: Dictionary) -> void:
 	if player.gunner_infinite_reload_ability == null:
@@ -294,7 +308,7 @@ static func _apply_switch_buff_save_data(player, data: Dictionary) -> void:
 	player.entry_haste_interval_bonus = float(data.get("entry_haste_interval_bonus", 0.0))
 	player.entry_haste_move_speed_multiplier = float(data.get("entry_haste_move_speed_multiplier", 1.0))
 	player.standby_entry_role_id = str(data.get("standby_entry_role_id", ""))
-	player.standby_entry_label = "待机蓄势"
+	player.standby_entry_label = str(data.get("standby_entry_label", "待机蓄势"))
 	player.standby_entry_remaining = float(data.get("standby_entry_remaining", 0.0))
 	player.standby_entry_damage_multiplier = float(data.get("standby_entry_damage_multiplier", 1.0))
 	player.standby_entry_interval_bonus = float(data.get("standby_entry_interval_bonus", 0.0))

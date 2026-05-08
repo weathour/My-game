@@ -1,4 +1,4 @@
-﻿extends RefCounted
+extends RefCounted
 
 static func get_desktop_sketch_path(relative_path: String) -> String:
 	return OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP).replace("\\", "/") + "/草图/" + relative_path

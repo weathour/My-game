@@ -1,4 +1,4 @@
-﻿extends CanvasLayer
+extends CanvasLayer
 
 const DEVELOPER_MODE := preload("res://scripts/developer_mode.gd")
 const DEVELOPER_PANEL := preload("res://scripts/developer/developer_panel.gd")

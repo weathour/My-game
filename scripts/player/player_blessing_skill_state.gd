@@ -486,12 +486,13 @@ static func refresh_unlocks(owner, selected_blessing_id: String = "", selected_t
 			continue
 		if not is_skill_unlocked(owner, str(skill_id)) and _can_apply_recipe(owner, str(skill_id), UNLOCK_RECIPES.get(skill_id, {}), resolved_role_context):
 			var unlock_recipe: Dictionary = UNLOCK_RECIPES.get(skill_id, {})
+			var material_lines: Array[String] = _build_recipe_progress(owner, str(skill_id), unlock_recipe)
 			_unlock_skill(owner, str(skill_id), 1)
 			if not SHARED_ENTRY_SKILL_IDS.has(str(skill_id)):
 				_lock_recipe_requirements(owner, str(skill_id), unlock_recipe)
 				_snapshot_skill_blessing_baseline(owner, str(skill_id), [1, 2])
 				_bind_recipe_skill_blessings(owner, str(skill_id), unlock_recipe)
-			events.append({"skill_id": str(skill_id), "tier": 1, "title": get_skill_title(str(skill_id))})
+			events.append(_make_skill_event(str(skill_id), 1, "unlock", material_lines, unlock_recipe))
 		if is_skill_unlocked(owner, str(skill_id)):
 			_try_evolve_skill(owner, str(skill_id), events, resolved_role_context)
 	return events
@@ -530,6 +531,8 @@ static func apply_recipe_candidate(owner, candidate: Dictionary) -> Array[Dictio
 	if recipe.is_empty() or not _can_apply_recipe(owner, skill_id, recipe):
 		return events
 	var target_tier: int = max(1, int(candidate.get("tier", 1)))
+	var action := str(candidate.get("action", "unlock"))
+	var material_lines: Array[String] = _build_recipe_progress(owner, skill_id, recipe)
 	_unlock_skill(owner, skill_id, target_tier)
 	if not INHERENT_SKILL_IDS.has(skill_id) and not SHARED_ENTRY_SKILL_IDS.has(skill_id):
 		_lock_recipe_requirements(owner, skill_id, recipe)
@@ -539,7 +542,7 @@ static func apply_recipe_candidate(owner, candidate: Dictionary) -> Array[Dictio
 			_snapshot_skill_blessing_baseline(owner, skill_id, [2])
 	if not INHERENT_SKILL_IDS.has(skill_id) and not SHARED_ENTRY_SKILL_IDS.has(skill_id):
 		_bind_recipe_skill_blessings(owner, skill_id, recipe)
-	events.append({"skill_id": skill_id, "tier": target_tier, "title": "%s%s" % [get_skill_title(skill_id), _get_tier_suffix(target_tier)]})
+	events.append(_make_skill_event(skill_id, target_tier, action, material_lines, recipe))
 	return events
 
 static func lock_one_blessing_material(owner, binding: String, blessing_id: String, tier: int) -> void:
@@ -588,6 +591,7 @@ static func _try_evolve_skill(owner, skill_id: String, events: Array[Dictionary]
 		return
 	if not _can_apply_recipe(owner, skill_id, recipe, role_context):
 		return
+	var material_lines: Array[String] = _build_recipe_progress(owner, skill_id, recipe)
 	_unlock_skill(owner, skill_id, target_tier)
 	if not INHERENT_SKILL_IDS.has(skill_id) and not SHARED_ENTRY_SKILL_IDS.has(skill_id):
 		_lock_recipe_requirements(owner, skill_id, recipe)
@@ -595,7 +599,19 @@ static func _try_evolve_skill(owner, skill_id: String, events: Array[Dictionary]
 			_snapshot_skill_blessing_baseline(owner, skill_id, [2])
 	if not INHERENT_SKILL_IDS.has(skill_id) and not SHARED_ENTRY_SKILL_IDS.has(skill_id):
 		_bind_recipe_skill_blessings(owner, skill_id, recipe)
-	events.append({"skill_id": skill_id, "tier": target_tier, "title": "%s%s" % [get_skill_title(skill_id), _get_tier_suffix(target_tier)]})
+	events.append(_make_skill_event(skill_id, target_tier, "evolve", material_lines, recipe))
+
+
+static func _make_skill_event(skill_id: String, tier: int, action: String, material_lines: Array, recipe: Dictionary) -> Dictionary:
+	var consumes_material := not INHERENT_SKILL_IDS.has(skill_id) and not SHARED_ENTRY_SKILL_IDS.has(skill_id) and not recipe.is_empty() and not bool(recipe.get("always", false))
+	return {
+		"skill_id": skill_id,
+		"tier": tier,
+		"action": action,
+		"title": "%s%s" % [get_skill_title(skill_id), _get_tier_suffix(tier)],
+		"material_lines": material_lines.duplicate(true),
+		"consumes_blessing_material": consumes_material
+	}
 
 static func is_skill_unlocked(owner, skill_id: String) -> bool:
 	if ALWAYS_UNLOCKED_SKILL_IDS.has(skill_id):

@@ -93,6 +93,8 @@ var cached_visual_color: Color = Color(-1.0, -1.0, -1.0, -1.0)
 var cached_animated_scene_size: Vector2 = Vector2(-1.0, -1.0)
 var cached_animated_visible_bounds: Rect2 = Rect2(-1.0, -1.0, -1.0, -1.0)
 var split_triggered: bool = false
+var runtime_pool_key: String = ""
+var projectile_scene_defaults: Dictionary = {}
 
 func _get_desktop_sketch_path(relative_path: String) -> String:
 	return (OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP).replace("\\", "/") + "/草图/" + relative_path)
@@ -207,19 +209,130 @@ func _update_visual_cache() -> void:
 	cached_animated_scene_size = animated_scene_size
 	cached_animated_visible_bounds = animated_visible_bounds
 
-func _ready() -> void:
+func _enter_tree() -> void:
 	add_to_group("player_projectiles")
+	var tree := get_tree()
+	if tree != null:
+		var scene: Node = tree.current_scene
+		if scene != null and scene.has_method("register_runtime_player_projectile"):
+			scene.register_runtime_player_projectile(self)
+
+func _ready() -> void:
 	_refresh_bullet_visual(true)
 	rotation = direction.angle()
 	last_hit_scan_position = global_position
 	if wave_amplitude > 0.0:
 		_initialize_wave_motion()
 
+func _exit_tree() -> void:
+	var tree := get_tree()
+	if tree != null:
+		var scene: Node = tree.current_scene
+		if scene != null and scene.has_method("unregister_runtime_player_projectile"):
+			scene.unregister_runtime_player_projectile(self)
+
+func _ensure_projectile_scene_defaults() -> void:
+	if not projectile_scene_defaults.is_empty():
+		return
+	projectile_scene_defaults = {
+		"speed": speed,
+		"speed_multiplier": speed_multiplier,
+		"damage": damage,
+		"lifetime": lifetime,
+		"hit_radius": hit_radius,
+		"hit_radius_multiplier": hit_radius_multiplier,
+		"pierce_count": pierce_count,
+		"bounce_count": bounce_count,
+		"slow_multiplier": slow_multiplier,
+		"slow_duration": slow_duration,
+		"vulnerability_bonus": vulnerability_bonus,
+		"vulnerability_duration": vulnerability_duration,
+		"visual_color": visual_color,
+		"visual_scale_multiplier": visual_scale_multiplier,
+		"enemy_hit_radius_scale": enemy_hit_radius_scale,
+		"enemy_hit_radius_min": enemy_hit_radius_min,
+		"enemy_hit_radius_max": enemy_hit_radius_max,
+		"animated_scene_size": animated_scene_size,
+		"animated_visible_bounds": animated_visible_bounds,
+		"min_hit_travel_distance": min_hit_travel_distance,
+		"hit_scan_interval": hit_scan_interval,
+		"split_count": split_count,
+		"split_radius": split_radius,
+		"split_visual_bullet_count": split_visual_bullet_count,
+		"wave_amplitude": wave_amplitude,
+		"wave_frequency": wave_frequency,
+		"wave_phase": wave_phase
+	}
+
+func _projectile_scene_default(key: String, fallback: Variant) -> Variant:
+	_ensure_projectile_scene_defaults()
+	return projectile_scene_defaults.get(key, fallback)
+
+func reset_projectile(config: Dictionary = {}) -> void:
+	_ensure_projectile_scene_defaults()
+	set_meta("player_projectile_released", false)
+	runtime_pool_key = str(config.get("pool_key", scene_file_path))
+	speed = float(config.get("speed", _projectile_scene_default("speed", 420.0)))
+	speed_multiplier = float(config.get("speed_multiplier", _projectile_scene_default("speed_multiplier", 1.0)))
+	damage = float(config.get("damage", _projectile_scene_default("damage", 10.0)))
+	lifetime = float(config.get("lifetime", _projectile_scene_default("lifetime", 3.0)))
+	hit_radius = float(config.get("hit_radius", _projectile_scene_default("hit_radius", 14.0)))
+	hit_radius_multiplier = float(config.get("hit_radius_multiplier", _projectile_scene_default("hit_radius_multiplier", 1.0)))
+	pierce_count = int(config.get("pierce_count", _projectile_scene_default("pierce_count", 0)))
+	bounce_count = int(config.get("bounce_count", _projectile_scene_default("bounce_count", 0)))
+	slow_multiplier = float(config.get("slow_multiplier", _projectile_scene_default("slow_multiplier", 1.0)))
+	slow_duration = float(config.get("slow_duration", _projectile_scene_default("slow_duration", 0.0)))
+	vulnerability_bonus = float(config.get("vulnerability_bonus", _projectile_scene_default("vulnerability_bonus", 0.0)))
+	vulnerability_duration = float(config.get("vulnerability_duration", _projectile_scene_default("vulnerability_duration", 0.0)))
+	visual_color = config.get("visual_color", _projectile_scene_default("visual_color", Color(1.0, 0.93, 0.39, 1.0)))
+	visual_scale_multiplier = float(config.get("visual_scale_multiplier", _projectile_scene_default("visual_scale_multiplier", 1.0)))
+	enemy_hit_radius_scale = float(config.get("enemy_hit_radius_scale", _projectile_scene_default("enemy_hit_radius_scale", 0.42)))
+	enemy_hit_radius_min = float(config.get("enemy_hit_radius_min", _projectile_scene_default("enemy_hit_radius_min", 10.0)))
+	enemy_hit_radius_max = float(config.get("enemy_hit_radius_max", _projectile_scene_default("enemy_hit_radius_max", 28.0)))
+	animated_scene_size = config.get("animated_scene_size", _projectile_scene_default("animated_scene_size", BULLET_EFFECT_SCENE_SIZE))
+	animated_visible_bounds = config.get("animated_visible_bounds", _projectile_scene_default("animated_visible_bounds", BULLET_EFFECT_VISIBLE_BOUNDS))
+	min_hit_travel_distance = float(config.get("min_hit_travel_distance", _projectile_scene_default("min_hit_travel_distance", 0.0)))
+	hit_scan_interval = float(config.get("hit_scan_interval", _projectile_scene_default("hit_scan_interval", 0.0)))
+	split_count = int(config.get("split_count", _projectile_scene_default("split_count", 0)))
+	split_radius = float(config.get("split_radius", _projectile_scene_default("split_radius", 58.0)))
+	split_visual_bullet_count = int(config.get("split_visual_bullet_count", _projectile_scene_default("split_visual_bullet_count", 12)))
+
+	var configured_direction: Vector2 = config.get("direction", Vector2.RIGHT)
+	direction = configured_direction.normalized()
+	if direction.length_squared() <= 0.001:
+		direction = Vector2.RIGHT
+	target = config.get("target", null) as Node2D
+	source_player = config.get("source_player", null) as Node
+	source_role_id = str(config.get("source_role_id", ""))
+	global_position = config.get("position", global_position)
+	source_origin_position = config.get("source_origin_position", global_position)
+	traveled_distance = 0.0
+	hit_enemy_ids.clear()
+	wave_amplitude = float(config.get("wave_amplitude", _projectile_scene_default("wave_amplitude", 0.0)))
+	wave_frequency = float(config.get("wave_frequency", _projectile_scene_default("wave_frequency", 0.0)))
+	wave_phase = float(config.get("wave_phase", _projectile_scene_default("wave_phase", 0.0)))
+	wave_elapsed = 0.0
+	wave_travel_distance = 0.0
+	wave_origin = global_position
+	wave_forward_direction = direction
+	wave_side_direction = direction.orthogonal().normalized()
+	hit_scan_elapsed = 0.0
+	last_hit_scan_position = global_position
+	split_triggered = false
+	visible = true
+	modulate = Color.WHITE
+	set_physics_process(true)
+	visual_cache_ready = false
+	rotation = direction.angle()
+	if wave_amplitude > 0.0:
+		_initialize_wave_motion()
+	_refresh_bullet_visual(true)
+
 func _physics_process(delta: float) -> void:
 	_refresh_bullet_visual()
 	lifetime -= delta
 	if lifetime <= 0.0:
-		queue_free()
+		_release_or_free()
 		return
 
 	var start_position := global_position
@@ -410,7 +523,27 @@ func _apply_hit(enemy: Node2D) -> void:
 		target = null
 		return
 
-	queue_free()
+	_release_or_free()
+
+func _release_or_free() -> void:
+	if bool(get_meta("player_projectile_released", false)):
+		return
+	set_meta("player_projectile_released", true)
+	var tree := get_tree()
+	var scene: Node = tree.current_scene if tree != null else null
+	hide()
+	set_physics_process(false)
+	remove_from_group("player_projectiles")
+	var animated_sprite := get_node_or_null("AnimatedSprite2D") as AnimatedSprite2D
+	if animated_sprite != null:
+		animated_sprite.stop()
+	var parent := get_parent()
+	if parent != null:
+		parent.remove_child(self)
+	if scene != null and scene.has_method("release_runtime_player_projectile"):
+		scene.release_runtime_player_projectile(self, runtime_pool_key)
+	else:
+		queue_free()
 
 func _trigger_split_bursts(center: Vector2) -> void:
 	var burst_count: int = clamp(split_count, 0, 2)

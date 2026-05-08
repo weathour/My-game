@@ -14,13 +14,21 @@ static var owner_target_cache_frame: int = -1
 static func get_enemy_nodes(owner) -> Array:
 	if owner != null and owner.has_method("_get_live_enemies"):
 		return owner._get_live_enemies()
-	return owner.get_tree().get_nodes_in_group("enemies")
+	if owner != null and owner.has_method("get_tree"):
+		var tree: SceneTree = owner.get_tree()
+		if tree != null:
+			var scene: Node = tree.current_scene
+			if scene != null and scene.has_method("get_runtime_enemies"):
+				return scene.get_runtime_enemies()
+			return tree.get_nodes_in_group("enemies")
+	return []
 
 
 static func get_owner_closest_enemy(owner) -> Node2D:
 	var key: String = _owner_cache_key(owner, "closest")
-	if _has_owner_cache(key):
-		return owner_target_cache[key]["value"] as Node2D
+	var cached: Dictionary = _get_cached_node2d_result(key)
+	if bool(cached.get("hit", false)):
+		return cached.get("value", null) as Node2D
 	var value: Node2D = get_closest_enemy(get_enemy_nodes(owner), owner.global_position)
 	_set_owner_cache(key, value)
 	return value
@@ -28,8 +36,9 @@ static func get_owner_closest_enemy(owner) -> Node2D:
 
 static func get_owner_farthest_enemy(owner) -> Node2D:
 	var key: String = _owner_cache_key(owner, "farthest")
-	if _has_owner_cache(key):
-		return owner_target_cache[key]["value"] as Node2D
+	var cached: Dictionary = _get_cached_node2d_result(key)
+	if bool(cached.get("hit", false)):
+		return cached.get("value", null) as Node2D
 	var value: Node2D = get_farthest_enemy(get_enemy_nodes(owner), owner.global_position)
 	_set_owner_cache(key, value)
 	return value
@@ -46,8 +55,9 @@ static func get_owner_enemy_targets(owner, count: int, prefer_farthest: bool = f
 
 static func get_owner_low_health_enemy(owner) -> Node2D:
 	var key: String = _owner_cache_key(owner, "low_health")
-	if _has_owner_cache(key):
-		return owner_target_cache[key]["value"] as Node2D
+	var cached: Dictionary = _get_cached_node2d_result(key)
+	if bool(cached.get("hit", false)):
+		return cached.get("value", null) as Node2D
 	var value: Node2D = get_low_health_enemy(get_enemy_nodes(owner))
 	_set_owner_cache(key, value)
 	return value
@@ -55,8 +65,9 @@ static func get_owner_low_health_enemy(owner) -> Node2D:
 
 static func get_owner_enemy_in_aim_cone(owner, max_angle_degrees: float, max_distance: float = INF) -> Node2D:
 	var key: String = _owner_cache_key(owner, "aim_cone_%.2f_%.2f_%.3f_%.3f" % [max_angle_degrees, max_distance, owner.facing_direction.x, owner.facing_direction.y])
-	if _has_owner_cache(key):
-		return owner_target_cache[key]["value"] as Node2D
+	var cached: Dictionary = _get_cached_node2d_result(key)
+	if bool(cached.get("hit", false)):
+		return cached.get("value", null) as Node2D
 	var value: Node2D = get_enemy_in_aim_cone(get_enemy_nodes(owner), owner.global_position, owner.facing_direction, max_angle_degrees, max_distance)
 	_set_owner_cache(key, value)
 	return value
@@ -289,6 +300,29 @@ static func _has_owner_cache(key: String) -> bool:
 	if not owner_target_cache.has(key):
 		return false
 	return true
+
+static func _get_cached_node2d_result(key: String) -> Dictionary:
+	if not _has_owner_cache(key):
+		return {
+			"hit": false,
+			"value": null
+		}
+	var cached_value: Variant = (owner_target_cache[key] as Dictionary).get("value", null)
+	if cached_value == null:
+		return {
+			"hit": true,
+			"value": null
+		}
+	if not is_instance_valid(cached_value):
+		owner_target_cache.erase(key)
+		return {
+			"hit": false,
+			"value": null
+		}
+	return {
+		"hit": true,
+		"value": cached_value as Node2D
+	}
 
 static func _set_owner_cache(key: String, value: Variant) -> void:
 	_ensure_owner_cache_frame()

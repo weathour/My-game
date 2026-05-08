@@ -1,4 +1,4 @@
-﻿extends RefCounted
+extends RefCounted
 
 const DEVELOPER_MODE := preload("res://scripts/developer_mode.gd")
 const PLAYER_SWITCH_BANNER_FLOW := preload("res://scripts/player/player_switch_banner_flow.gd")

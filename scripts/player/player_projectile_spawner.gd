@@ -24,23 +24,29 @@ static func spawn_bullet(owner, bullet_scene: PackedScene, target_enemy: Node2D,
 		return null
 	if bullet_scene == null:
 		return null
-	var bullet = bullet_scene.instantiate()
-	if bullet == null:
-		return null
 	var current_scene: Node = owner.get_tree().current_scene
 	if current_scene == null:
 		return null
+	var bullet = _acquire_projectile(current_scene, bullet_scene)
+	if bullet == null:
+		return null
 
-	current_scene.add_child(bullet)
-	bullet.global_position = origin if origin is Vector2 else owner.global_position
-	bullet.source_origin_position = bullet.global_position
-	bullet.direction = bullet.global_position.direction_to(target_enemy.global_position)
-	bullet.target = target_enemy
-	bullet.damage = damage_amount
-	bullet.visual_color = color
-	bullet.source_player = owner
-	bullet.source_role_id = role_id if role_id != "" else owner._get_active_role()["id"]
+	var start_position: Vector2 = _resolve_origin(owner, origin)
+	var role := _resolve_role_id(owner, role_id)
+	var shot_direction := start_position.direction_to(target_enemy.global_position)
+	_configure_projectile(bullet, {
+		"pool_key": _get_projectile_pool_key(bullet_scene),
+		"position": start_position,
+		"source_origin_position": start_position,
+		"direction": shot_direction,
+		"target": target_enemy,
+		"damage": damage_amount,
+		"visual_color": color,
+		"source_player": owner,
+		"source_role_id": role
+	})
 	apply_role_projectile_modifiers(owner, bullet, str(bullet.source_role_id))
+	current_scene.add_child(bullet)
 	return bullet
 
 static func spawn_directional_bullet(owner, bullet_scene: PackedScene, direction: Vector2, damage_amount: float, color: Color, role_id: String = "", origin: Variant = null):
@@ -51,23 +57,31 @@ static func spawn_directional_bullet_from_scene(owner, projectile_scene: PackedS
 		return null
 	if projectile_scene == null:
 		return null
-	var bullet = projectile_scene.instantiate()
-	if bullet == null:
-		return null
 	var current_scene: Node = owner.get_tree().current_scene
 	if current_scene == null:
 		return null
+	var bullet = _acquire_projectile(current_scene, projectile_scene)
+	if bullet == null:
+		return null
 
-	current_scene.add_child(bullet)
-	bullet.global_position = origin if origin is Vector2 else owner.global_position
-	bullet.source_origin_position = bullet.global_position
-	bullet.direction = direction.normalized()
-	bullet.target = null
-	bullet.damage = damage_amount
-	bullet.visual_color = color
-	bullet.source_player = owner
-	bullet.source_role_id = role_id if role_id != "" else owner._get_active_role()["id"]
+	var start_position: Vector2 = _resolve_origin(owner, origin)
+	var role := _resolve_role_id(owner, role_id)
+	var shot_direction := direction.normalized()
+	if shot_direction.length_squared() <= 0.001:
+		shot_direction = Vector2.RIGHT
+	_configure_projectile(bullet, {
+		"pool_key": _get_projectile_pool_key(projectile_scene),
+		"position": start_position,
+		"source_origin_position": start_position,
+		"direction": shot_direction,
+		"target": null,
+		"damage": damage_amount,
+		"visual_color": color,
+		"source_player": owner,
+		"source_role_id": role
+	})
 	apply_role_projectile_modifiers(owner, bullet, str(bullet.source_role_id))
+	current_scene.add_child(bullet)
 	return bullet
 
 static func spawn_batched_directional_bullet(owner, direction: Vector2, damage_amount: float, color: Color, role_id: String = "", origin: Variant = null, config: Dictionary = {}) -> bool:
@@ -133,6 +147,31 @@ static func _resolve_origin(owner, origin: Variant) -> Vector2:
 	if owner is Node2D:
 		return (owner as Node2D).global_position
 	return Vector2.ZERO
+
+static func _get_projectile_pool_key(projectile_scene: PackedScene) -> String:
+	if projectile_scene == null:
+		return "default"
+	if projectile_scene.resource_path != "":
+		return projectile_scene.resource_path
+	return "projectile_scene:%s" % str(projectile_scene.get_instance_id())
+
+static func _acquire_projectile(current_scene: Node, projectile_scene: PackedScene):
+	if current_scene != null and current_scene.has_method("take_runtime_player_projectile_from_pool"):
+		var pooled = current_scene.take_runtime_player_projectile_from_pool(_get_projectile_pool_key(projectile_scene))
+		if pooled != null and is_instance_valid(pooled):
+			return pooled
+	return projectile_scene.instantiate()
+
+static func _configure_projectile(projectile, config: Dictionary) -> void:
+	if projectile == null:
+		return
+	if projectile.has_method("reset_projectile"):
+		projectile.reset_projectile(config)
+		return
+	for key in config.keys():
+		if key == "pool_key":
+			continue
+		projectile.set(key, config[key])
 
 static func _get_or_create_batch(owner) -> Node:
 	if owner == null or owner.get_tree() == null:

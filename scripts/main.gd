@@ -17,6 +17,7 @@ const GAME_STORY_CONTEXT_FLOW := preload("res://scripts/game/game_story_context_
 const GAME_HUD_FLOW := preload("res://scripts/game/game_hud_flow.gd")
 const GAME_CHARACTER_PANEL_FLOW := preload("res://scripts/game/game_character_panel_flow.gd")
 const GAME_MAP_FLOW := preload("res://scripts/game/game_map_flow.gd")
+const BLESSING_UNLOCK_NOTICE_FLOW := preload("res://scripts/game/blessing_unlock_notice_flow.gd")
 const PICKUP_COMPACTOR := preload("res://scripts/game/pickup_compactor.gd")
 const PERFORMANCE_GUARD := preload("res://scripts/game/performance_guard.gd")
 
@@ -66,12 +67,27 @@ var map_boundary_node: Node2D
 var runtime_spawn_budget_frame: int = -1
 var runtime_spawn_counts: Dictionary = {}
 var runtime_pickup_nodes: Dictionary = {
-	"exp_gems": [],
-	"heart_pickups": []
+	"exp_gems": {},
+	"heart_pickups": {}
 }
-var runtime_enemy_nodes: Array = []
-var runtime_enemy_projectile_nodes: Array = []
-var runtime_enemy_projectile_pool_nodes: Array = []
+var runtime_pickup_cache: Dictionary = {}
+var runtime_pickup_cache_dirty: Dictionary = {}
+var runtime_enemy_nodes: Dictionary = {}
+var runtime_enemy_cache: Array = []
+var runtime_enemy_cache_dirty: bool = true
+var runtime_enemy_projectile_nodes: Dictionary = {}
+var runtime_enemy_projectile_cache: Array = []
+var runtime_enemy_projectile_cache_dirty: bool = true
+var runtime_enemy_projectile_pool_nodes: Dictionary = {}
+var runtime_enemy_projectile_pool_cache: Array = []
+var runtime_enemy_projectile_pool_cache_dirty: bool = true
+var runtime_player_projectile_nodes: Dictionary = {}
+var runtime_player_projectile_cache: Array = []
+var runtime_player_projectile_cache_dirty: bool = true
+var runtime_player_projectile_pool_nodes: Dictionary = {}
+var runtime_player_projectile_pool_cache: Dictionary = {}
+var runtime_player_projectile_pool_cache_dirty: Dictionary = {}
+var runtime_player_projectile_pool_limit: int = 96
 
 func _ready() -> void:
 	rng.randomize()
@@ -314,6 +330,9 @@ func _on_player_mana_changed(current_mana: float, max_mana: float) -> void:
 func _on_player_level_up_requested(options: Array) -> void:
 	REWARD_FLOW.show_level_up(self, options)
 
+func _on_player_blessing_skill_event_announced(event: Dictionary) -> void:
+	BLESSING_UNLOCK_NOTICE_FLOW.show_notice(self, event)
+
 func _on_upgrade_selected(option_id: String, attribute_option_id: String = "") -> void:
 	REWARD_FLOW.handle_upgrade_selected(self, option_id, attribute_option_id)
 
@@ -407,68 +426,193 @@ func _has_runtime_spawn_frame_budget(group_name: String) -> bool:
 		return true
 	return int(runtime_spawn_counts.get(group_name, 0)) < limit
 
+func _is_runtime_node_valid(node: Variant) -> bool:
+	if node == null:
+		return false
+	if not is_instance_valid(node):
+		return false
+	var typed_node := node as Node
+	if typed_node == null:
+		return false
+	return not typed_node.is_queued_for_deletion()
+
+func _rebuild_runtime_registry_cache(registry: Dictionary) -> Array:
+	var cache: Array = []
+	var stale_ids: Array = []
+	for instance_id in registry.keys():
+		var node = registry[instance_id]
+		if _is_runtime_node_valid(node):
+			cache.append(node)
+		else:
+			stale_ids.append(instance_id)
+	for instance_id in stale_ids:
+		registry.erase(instance_id)
+	return cache
+
+func _ensure_runtime_pickup_registry(group_name: String) -> Dictionary:
+	if not runtime_pickup_nodes.has(group_name):
+		runtime_pickup_nodes[group_name] = {}
+		runtime_pickup_cache[group_name] = []
+		runtime_pickup_cache_dirty[group_name] = false
+	return runtime_pickup_nodes[group_name]
+
+func _mark_runtime_pickup_cache_dirty(group_name: String) -> void:
+	runtime_pickup_cache_dirty[group_name] = true
+
 func register_runtime_pickup(group_name: String, node: Node) -> void:
 	if node == null:
 		return
-	if not runtime_pickup_nodes.has(group_name):
-		runtime_pickup_nodes[group_name] = []
-	var nodes: Array = runtime_pickup_nodes[group_name]
-	if not nodes.has(node):
-		nodes.append(node)
+	var nodes: Dictionary = _ensure_runtime_pickup_registry(group_name)
+	var instance_id := node.get_instance_id()
+	if not nodes.has(instance_id):
+		nodes[instance_id] = node
+		_mark_runtime_pickup_cache_dirty(group_name)
 
 func unregister_runtime_pickup(group_name: String, node: Node) -> void:
 	if node == null or not runtime_pickup_nodes.has(group_name):
 		return
-	var nodes: Array = runtime_pickup_nodes[group_name]
-	nodes.erase(node)
+	var nodes: Dictionary = runtime_pickup_nodes[group_name]
+	var instance_id := node.get_instance_id()
+	if nodes.erase(instance_id):
+		_mark_runtime_pickup_cache_dirty(group_name)
 
 func get_runtime_pickups(group_name: String) -> Array:
-	if not runtime_pickup_nodes.has(group_name):
-		return []
-	return runtime_pickup_nodes[group_name]
+	var nodes: Dictionary = _ensure_runtime_pickup_registry(group_name)
+	if bool(runtime_pickup_cache_dirty.get(group_name, true)) or not runtime_pickup_cache.has(group_name):
+		runtime_pickup_cache[group_name] = _rebuild_runtime_registry_cache(nodes)
+		runtime_pickup_cache_dirty[group_name] = false
+	return runtime_pickup_cache[group_name]
 
 func register_runtime_enemy(enemy: Node) -> void:
 	if enemy == null:
 		return
-	if not runtime_enemy_nodes.has(enemy):
-		runtime_enemy_nodes.append(enemy)
+	var instance_id := enemy.get_instance_id()
+	if not runtime_enemy_nodes.has(instance_id):
+		runtime_enemy_nodes[instance_id] = enemy
+		runtime_enemy_cache_dirty = true
 
 func unregister_runtime_enemy(enemy: Node) -> void:
 	if enemy == null:
 		return
-	runtime_enemy_nodes.erase(enemy)
+	var instance_id := enemy.get_instance_id()
+	if runtime_enemy_nodes.erase(instance_id):
+		runtime_enemy_cache_dirty = true
 
 func get_runtime_enemies() -> Array:
-	return runtime_enemy_nodes
+	if runtime_enemy_cache_dirty:
+		runtime_enemy_cache = _rebuild_runtime_registry_cache(runtime_enemy_nodes)
+		runtime_enemy_cache_dirty = false
+	return runtime_enemy_cache
 
 func register_runtime_enemy_projectile(projectile: Node, pooled: bool) -> void:
 	if projectile == null:
 		return
-	runtime_enemy_projectile_nodes.erase(projectile)
-	runtime_enemy_projectile_pool_nodes.erase(projectile)
+	var instance_id := projectile.get_instance_id()
+	var active_changed := runtime_enemy_projectile_nodes.erase(instance_id)
+	var pool_changed := runtime_enemy_projectile_pool_nodes.erase(instance_id)
 	if pooled:
-		runtime_enemy_projectile_pool_nodes.append(projectile)
+		if not runtime_enemy_projectile_pool_nodes.has(instance_id):
+			runtime_enemy_projectile_pool_nodes[instance_id] = projectile
+			pool_changed = true
 	else:
-		runtime_enemy_projectile_nodes.append(projectile)
+		if not runtime_enemy_projectile_nodes.has(instance_id):
+			runtime_enemy_projectile_nodes[instance_id] = projectile
+			active_changed = true
+	if active_changed:
+		runtime_enemy_projectile_cache_dirty = true
+	if pool_changed:
+		runtime_enemy_projectile_pool_cache_dirty = true
 
 func unregister_runtime_enemy_projectile(projectile: Node) -> void:
 	if projectile == null:
 		return
-	runtime_enemy_projectile_nodes.erase(projectile)
-	runtime_enemy_projectile_pool_nodes.erase(projectile)
+	var instance_id := projectile.get_instance_id()
+	if runtime_enemy_projectile_nodes.erase(instance_id):
+		runtime_enemy_projectile_cache_dirty = true
+	if runtime_enemy_projectile_pool_nodes.erase(instance_id):
+		runtime_enemy_projectile_pool_cache_dirty = true
 
 func get_runtime_enemy_projectiles() -> Array:
-	return runtime_enemy_projectile_nodes
+	if runtime_enemy_projectile_cache_dirty:
+		runtime_enemy_projectile_cache = _rebuild_runtime_registry_cache(runtime_enemy_projectile_nodes)
+		runtime_enemy_projectile_cache_dirty = false
+	return runtime_enemy_projectile_cache
 
 func get_runtime_enemy_projectile_pool() -> Array:
-	return runtime_enemy_projectile_pool_nodes
+	if runtime_enemy_projectile_pool_cache_dirty:
+		runtime_enemy_projectile_pool_cache = _rebuild_runtime_registry_cache(runtime_enemy_projectile_pool_nodes)
+		runtime_enemy_projectile_pool_cache_dirty = false
+	return runtime_enemy_projectile_pool_cache
 
 func take_runtime_enemy_projectile_from_pool() -> Node:
-	while not runtime_enemy_projectile_pool_nodes.is_empty():
-		var projectile: Node = runtime_enemy_projectile_pool_nodes.pop_back()
-		if projectile != null and is_instance_valid(projectile):
+	for instance_id in runtime_enemy_projectile_pool_nodes.keys():
+		var projectile = runtime_enemy_projectile_pool_nodes[instance_id]
+		runtime_enemy_projectile_pool_nodes.erase(instance_id)
+		runtime_enemy_projectile_pool_cache_dirty = true
+		if _is_runtime_node_valid(projectile):
 			return projectile
 	return null
+
+func register_runtime_player_projectile(projectile: Node) -> void:
+	if projectile == null:
+		return
+	var instance_id := projectile.get_instance_id()
+	if not runtime_player_projectile_nodes.has(instance_id):
+		runtime_player_projectile_nodes[instance_id] = projectile
+		runtime_player_projectile_cache_dirty = true
+
+func unregister_runtime_player_projectile(projectile: Node) -> void:
+	if projectile == null:
+		return
+	var instance_id := projectile.get_instance_id()
+	if runtime_player_projectile_nodes.erase(instance_id):
+		runtime_player_projectile_cache_dirty = true
+
+func get_runtime_player_projectiles() -> Array:
+	if runtime_player_projectile_cache_dirty:
+		runtime_player_projectile_cache = _rebuild_runtime_registry_cache(runtime_player_projectile_nodes)
+		runtime_player_projectile_cache_dirty = false
+	return runtime_player_projectile_cache
+
+func release_runtime_player_projectile(projectile: Node, pool_key: String = "") -> void:
+	if projectile == null or not is_instance_valid(projectile):
+		return
+	var resolved_key := pool_key if pool_key != "" else projectile.scene_file_path
+	if resolved_key == "":
+		resolved_key = projectile.get_script().resource_path if projectile.get_script() != null else "default"
+	if not runtime_player_projectile_pool_nodes.has(resolved_key):
+		runtime_player_projectile_pool_nodes[resolved_key] = {}
+		runtime_player_projectile_pool_cache[resolved_key] = []
+		runtime_player_projectile_pool_cache_dirty[resolved_key] = false
+	var pool: Dictionary = runtime_player_projectile_pool_nodes[resolved_key]
+	if pool.size() >= runtime_player_projectile_pool_limit:
+		projectile.queue_free()
+		return
+	var instance_id := projectile.get_instance_id()
+	pool[instance_id] = projectile
+	runtime_player_projectile_pool_cache_dirty[resolved_key] = true
+
+func take_runtime_player_projectile_from_pool(pool_key: String = "") -> Node:
+	var resolved_key := pool_key if pool_key != "" else "default"
+	if not runtime_player_projectile_pool_nodes.has(resolved_key):
+		return null
+	var pool: Dictionary = runtime_player_projectile_pool_nodes[resolved_key]
+	for instance_id in pool.keys():
+		var projectile = pool[instance_id]
+		pool.erase(instance_id)
+		runtime_player_projectile_pool_cache_dirty[resolved_key] = true
+		if _is_runtime_node_valid(projectile):
+			return projectile
+	return null
+
+func get_runtime_player_projectile_pool(pool_key: String = "") -> Array:
+	var resolved_key := pool_key if pool_key != "" else "default"
+	if not runtime_player_projectile_pool_nodes.has(resolved_key):
+		return []
+	if bool(runtime_player_projectile_pool_cache_dirty.get(resolved_key, true)) or not runtime_player_projectile_pool_cache.has(resolved_key):
+		runtime_player_projectile_pool_cache[resolved_key] = _rebuild_runtime_registry_cache(runtime_player_projectile_pool_nodes[resolved_key])
+		runtime_player_projectile_pool_cache_dirty[resolved_key] = false
+	return runtime_player_projectile_pool_cache[resolved_key]
 
 func _get_runtime_spawn_frame_limit(group_name: String) -> int:
 	match group_name:

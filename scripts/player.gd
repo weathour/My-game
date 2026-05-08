@@ -13,7 +13,7 @@ const PLAYER_ROLE_STAT_FLOW := preload("res://scripts/player/player_role_stat_fl
 const PLAYER_LEVEL_OPTIONS := preload("res://scripts/player/player_level_options.gd")
 const PLAYER_LEVEL_FLOW := preload("res://scripts/player/player_level_flow.gd")
 const PLAYER_BLESSING_SYSTEM := preload("res://scripts/player/player_blessing_system.gd")
-const PLAYER_BLESSING_SKILL_STATE := preload("res://scripts/player/player_blessing_skill_state.gd")
+const PLAYER_BLESSING_SKILL_BRIDGE := preload("res://scripts/player/player_blessing_skill_bridge.gd")
 const PLAYER_UPGRADE_APPLIER := preload("res://scripts/player/player_upgrade_applier.gd")
 const PLAYER_REWARD_APPLIER := preload("res://scripts/player/player_reward_applier.gd")
 const PLAYER_SKILL_COOLDOWN_FLOW := preload("res://scripts/player/player_skill_cooldown_flow.gd")
@@ -83,6 +83,7 @@ signal health_changed(current_health: float, max_health: float)
 signal mana_changed(current_mana: float, max_mana: float)
 signal died
 signal active_role_changed(role_id: String, role_name: String)
+signal blessing_skill_event_announced(event: Dictionary)
 
 const ROLE_SWITCH_COOLDOWN := 7.0
 const SWITCH_INVULNERABILITY := 0.2
@@ -380,42 +381,10 @@ func _spawn_sketch_sprite_effect(
 	)
 
 func _spawn_sword_slash_scene_effect(center: Vector2, direction: Vector2, radius: float, color: Color, duration: float, thickness: float, mirror_horizontal: bool = false) -> Node2D:
-	var playback_direction: Vector2 = direction.normalized()
-	if playback_direction.length_squared() <= 0.001:
-		playback_direction = Vector2.DOWN
-	return PLAYER_AUTHORED_EFFECTS.spawn_scaled_animated_scene(
-		self,
-		SWORD_SLASH_EFFECT_SCENE,
-		SWORD_SLASH_SCENE_SIZE,
-		SWORD_SLASH_SCENE_VISIBLE_BOUNDS,
-		SWORD_SLASH_SCENE_VISIBLE_BOUNDS,
-		center,
-		playback_direction.angle() - Vector2.DOWN.angle(),
-		Vector2(max(18.0, thickness * 2.0), max(72.0, radius * 2.0)),
-		13,
-		max(0.24, duration),
-		mirror_horizontal,
-		1.0,
-		true,
-		true
-	)
+	return PLAYER_AUTHORED_EFFECTS.spawn_sword_slash_scene_effect(self, center, direction, radius, duration, thickness, mirror_horizontal)
 
 func _spawn_sword_omnislash_scene_effect(center: Vector2, direction: Vector2, length: float, thickness: float) -> Node2D:
-	var playback_direction: Vector2 = direction.normalized()
-	if playback_direction.length_squared() <= 0.001:
-		playback_direction = Vector2.RIGHT
-	return PLAYER_AUTHORED_EFFECTS.spawn_scaled_animated_scene(
-		self,
-		SWORD_OMNISLASH_EFFECT_SCENE,
-		SWORD_OMNISLASH_SCENE_SIZE,
-		SWORD_OMNISLASH_SCENE_VISIBLE_BOUNDS,
-		SWORD_OMNISLASH_SCENE_VISIBLE_BOUNDS,
-		center,
-		playback_direction.angle() - Vector2.RIGHT.angle(),
-		Vector2(max(120.0, length), max(28.0, thickness * 1.18)),
-		15,
-		0.2
-	)
+	return PLAYER_AUTHORED_EFFECTS.spawn_sword_omnislash_scene_effect(self, center, direction, length, thickness)
 
 func _set_active_role_visual_hidden(hidden: bool) -> void:
 	PLAYER_VISUAL_STATE.set_active_role_visual_hidden(self, hidden)
@@ -424,24 +393,7 @@ func _spawn_authored_scene_effect(scene: PackedScene, scene_size: Vector2, visib
 	return PLAYER_AUTHORED_EFFECTS.spawn_authored_scene_effect(self, scene, scene_size, visible_bounds, center, rotation_radians, scale_multiplier, z_index)
 
 func _spawn_sword_fan_scene_effect(center: Vector2, direction: Vector2, scale_multiplier: float = 1.0) -> Node2D:
-	var playback_direction := direction.normalized()
-	if playback_direction.length_squared() <= 0.001:
-		playback_direction = Vector2.RIGHT
-	return PLAYER_AUTHORED_EFFECTS.spawn_scaled_animated_scene(
-		self,
-		SWORD_FAN_EFFECT_SCENE,
-		SWORD_FAN_SCENE_SIZE,
-		SWORD_FAN_SCENE_VISIBLE_BOUNDS,
-		SWORD_FAN_SCENE_VISIBLE_BOUNDS,
-		center,
-		playback_direction.angle() + PI,
-		Vector2(138.0, 74.0) * scale_multiplier,
-		12,
-		0.24,
-		false,
-		1.0,
-		false
-	)
+	return PLAYER_AUTHORED_EFFECTS.spawn_sword_fan_scene_effect(self, center, direction, scale_multiplier)
 
 func _spawn_gunner_intersect_scene_effect(center: Vector2, direction: Vector2, visual_length: float = 112.0, visual_thickness: float = 18.0, gather_visual_length: float = -1.0) -> Node2D:
 	return PLAYER_AUTHORED_EFFECTS.spawn_owner_gunner_intersect_effect(self, center, direction, visual_length, visual_thickness, gather_visual_length)
@@ -453,46 +405,13 @@ func _get_gunner_intersect_combo_duration() -> float:
 	return PLAYER_AUTHORED_EFFECTS.get_owner_gunner_intersect_combo_duration(self)
 
 func _spawn_mage_gathering_scene_effect(center: Vector2, direction: Vector2, scale_multiplier: float = 1.0) -> Node2D:
-	var playback_direction := direction.normalized()
-	if playback_direction.length_squared() <= 0.001:
-		playback_direction = Vector2.RIGHT
-	return _spawn_authored_scene_effect(
-		MAGE_GATHERING_EFFECT_SCENE,
-		MAGE_GATHERING_SCENE_SIZE,
-		MAGE_GATHERING_SCENE_VISIBLE_BOUNDS,
-		center,
-		playback_direction.angle() - Vector2.RIGHT.angle(),
-		1.55 * scale_multiplier,
-		12
-	)
+	return PLAYER_AUTHORED_EFFECTS.spawn_mage_gathering_scene_effect(self, center, direction, scale_multiplier)
 
 func _spawn_mage_boom_scene_effect(center: Vector2, radius: float) -> Node2D:
-	return PLAYER_AUTHORED_EFFECTS.spawn_scaled_animated_scene(
-		self,
-		MAGE_BOOM_EFFECT_SCENE,
-		MAGE_BOOM_SCENE_SIZE,
-		MAGE_BOOM_SCENE_VISIBLE_BOUNDS,
-		MAGE_BOOM_IMPACT_FOCUS_BOUNDS,
-		center,
-		0.0,
-		Vector2(max(80.0, radius * 4.0), max(184.0, radius * 4.9)),
-		14,
-		0.3
-	)
+	return PLAYER_AUTHORED_EFFECTS.spawn_mage_boom_scene_effect(self, center, radius)
 
 func _spawn_mage_warning_scene_effect(center: Vector2, radius: float) -> Node2D:
-	return PLAYER_AUTHORED_EFFECTS.spawn_scaled_animated_scene(
-		self,
-		MAGE_WARNING_EFFECT_SCENE,
-		MAGE_WARNING_SCENE_SIZE,
-		MAGE_WARNING_SCENE_VISIBLE_BOUNDS,
-		MAGE_WARNING_SCENE_VISIBLE_BOUNDS,
-		center,
-		0.0,
-		Vector2(max(80.0, radius * 4.0), max(42.0, radius * 1.2)),
-		13,
-		0.2
-	)
+	return PLAYER_AUTHORED_EFFECTS.spawn_mage_warning_scene_effect(self, center, radius)
 
 func _get_downward_perpendicular(direction: Vector2) -> Vector2:
 	return PLAYER_MATH.get_downward_perpendicular(direction)
@@ -836,141 +755,82 @@ func _get_card_level(card_id: String) -> int:
 	return 0
 
 func _get_role_blessing_stat_bonus(role_id: String, stat: String) -> float:
-	return PLAYER_BLESSING_SYSTEM.get_role_stat_bonus(self, role_id, stat)
+	return PLAYER_BLESSING_SKILL_BRIDGE.get_role_stat_bonus(self, role_id, stat)
 
 func _get_skill_blessing_stat_bonus(stat: String) -> float:
-	return PLAYER_BLESSING_SYSTEM.get_skill_stat_bonus(self, stat)
+	return PLAYER_BLESSING_SKILL_BRIDGE.get_skill_stat_bonus(self, stat)
 
 func _get_skill_blessing_effect_scales(stat: String) -> Array[float]:
-	return PLAYER_BLESSING_SYSTEM.get_skill_effect_scales(self, stat)
+	return PLAYER_BLESSING_SKILL_BRIDGE.get_skill_effect_scales(self, stat)
 
 func _get_skill_blessing_effect_scales_for_skill(skill_id: String, stat: String) -> Array[float]:
-	return PLAYER_BLESSING_SKILL_STATE.get_skill_effect_scales(self, skill_id, stat)
+	return PLAYER_BLESSING_SKILL_BRIDGE.get_skill_effect_scales_for_skill(self, skill_id, stat)
 
 func get_role_blessing_levels(role_id: String) -> Dictionary:
-	PLAYER_BLESSING_SYSTEM.sync_shared_role_blessings(self)
-	return (role_blessing_levels.get(role_id, {}) as Dictionary).duplicate(true)
+	return PLAYER_BLESSING_SKILL_BRIDGE.get_role_blessing_levels(self, role_id)
 
 func get_skill_blessing_levels() -> Dictionary:
-	skill_blessing_levels = PLAYER_BLESSING_SYSTEM.normalize_skill_state(skill_blessing_levels)
-	return skill_blessing_levels.duplicate(true)
+	return PLAYER_BLESSING_SKILL_BRIDGE.get_skill_blessing_levels(self)
 
 func can_compose_role_blessing(role_id: String, blessing_id: String) -> bool:
-	return PLAYER_BLESSING_SYSTEM.can_compose_role_blessing(self, role_id, blessing_id)
+	return PLAYER_BLESSING_SKILL_BRIDGE.can_compose_role_blessing(self, role_id, blessing_id)
 
 func can_compose_skill_blessing(blessing_id: String) -> bool:
-	return PLAYER_BLESSING_SYSTEM.can_compose_skill_blessing(self, blessing_id)
+	return PLAYER_BLESSING_SKILL_BRIDGE.can_compose_skill_blessing(self, blessing_id)
 
 func compose_role_blessing(role_id: String, blessing_id: String) -> bool:
-	return PLAYER_BLESSING_SYSTEM.compose_role_blessing(self, role_id, blessing_id)
+	return PLAYER_BLESSING_SKILL_BRIDGE.compose_role_blessing(self, role_id, blessing_id)
 
 func compose_skill_blessing(blessing_id: String) -> bool:
-	return PLAYER_BLESSING_SYSTEM.compose_skill_blessing(self, blessing_id)
+	return PLAYER_BLESSING_SKILL_BRIDGE.compose_skill_blessing(self, blessing_id)
 
 func _refresh_blessing_skill_unlocks(selected_blessing_id: String = "", selected_tier: int = 0, selected_binding: String = "") -> void:
-	for event in PLAYER_BLESSING_SKILL_STATE.refresh_unlocks(self, selected_blessing_id, selected_tier, selected_binding):
-		if str((event as Dictionary).get("type", "")) == "binding_choice":
-			pending_blessing_binding_choices.append(event)
-			continue
-		_show_blessing_skill_event_tag(event)
-		continue
-		var title := str((event as Dictionary).get("title", "技能觉醒"))
-		_spawn_combat_tag(global_position + Vector2(0.0, -78.0), "%s 解锁" % title, Color(0.58, 0.95, 0.86, 1.0))
-	stats_changed.emit(get_stat_summary())
+	PLAYER_BLESSING_SKILL_BRIDGE.refresh_unlocks(self, selected_blessing_id, selected_tier, selected_binding)
 
 func consume_pending_blessing_binding_choice() -> Dictionary:
-	if pending_blessing_binding_choices.is_empty():
-		return {}
-	return pending_blessing_binding_choices.pop_front()
+	return PLAYER_BLESSING_SKILL_BRIDGE.consume_pending_binding_choice(self)
 
 func build_blessing_binding_options(choice: Dictionary) -> Array:
-	var options: Array = []
-	var candidates: Array = choice.get("candidates", [])
-	for index in range(candidates.size()):
-		var candidate: Dictionary = candidates[index]
-		var skill_id := str(candidate.get("skill_id", ""))
-		if not PLAYER_BLESSING_SKILL_STATE.is_blessing_bindable_skill(skill_id):
-			continue
-		var title := PLAYER_BLESSING_SKILL_STATE.get_skill_title(skill_id)
-		var action_text := "解锁" if str(candidate.get("action", "")) == "unlock" else "进化"
-		var target_tier := int(candidate.get("tier", 1))
-		options.append({
-			"id": "blessing_bind:%d" % index,
-			"title": "%s：%s%s" % [action_text, title, "II" if target_tier >= 2 else ""],
-			"description": "把本次祝福材料绑定到 %s，用于%s该技能。被绑定的祝福会从可用数量中扣除。" % [title, action_text],
-			"preview_description": "绑定到 %s。" % title,
-			"exact_description": "该选择会锁定本次配方材料；其他需要同祝福的技能不会获得这份材料。"
-		})
-	options.append({
-		"id": "blessing_bind_skip",
-		"title": "暂不绑定",
-		"description": "保留本次祝福的数值加成，但不把这份材料绑定给任何技能。该份材料会从技能配方可用数量中扣除。",
-		"preview_description": "不绑定给技能。",
-		"exact_description": "跳过本次技能解锁/进化，并锁定这份材料，避免同一份祝福反复弹出绑定选择。"
-	})
-	return options
+	return PLAYER_BLESSING_SKILL_BRIDGE.build_binding_options(self, choice)
 
 func apply_blessing_binding_choice(choice: Dictionary, option_id: String) -> bool:
-	if option_id == "blessing_bind_skip":
-		PLAYER_BLESSING_SKILL_STATE.lock_one_blessing_material(
-			self,
-			str(choice.get("binding", "")),
-			str(choice.get("blessing_id", "")),
-			int(choice.get("tier", 0))
-		)
-		return true
-	if not option_id.begins_with("blessing_bind:"):
-		return false
-	var index := int(option_id.trim_prefix("blessing_bind:"))
-	var candidates: Array = choice.get("candidates", [])
-	if index < 0 or index >= candidates.size():
-		return false
-	for event in PLAYER_BLESSING_SKILL_STATE.apply_recipe_candidate(self, candidates[index]):
-		_show_blessing_skill_event_tag(event)
-		continue
-		var title := str((event as Dictionary).get("title", "技能"))
-		_spawn_combat_tag(global_position + Vector2(0.0, -78.0), "%s 解锁" % title, Color(0.58, 0.95, 0.86, 1.0))
-	stats_changed.emit(get_stat_summary())
-	return true
+	return PLAYER_BLESSING_SKILL_BRIDGE.apply_binding_choice(self, choice, option_id)
 
 func _show_blessing_skill_event_tag(event: Dictionary) -> void:
-	var title := str(event.get("title", "技能"))
-	var tier := int(event.get("tier", 1))
-	var suffix := "已激活" if tier <= 1 else "已升级"
-	_spawn_combat_tag(global_position + Vector2(0.0, -78.0), "%s%s" % [title, suffix], Color(0.58, 0.95, 0.86, 1.0))
+	PLAYER_BLESSING_SKILL_BRIDGE.show_skill_event_tag(self, event)
 
 func _is_blessing_skill_unlocked(skill_id: String) -> bool:
-	return PLAYER_BLESSING_SKILL_STATE.is_skill_unlocked(self, skill_id)
+	return PLAYER_BLESSING_SKILL_BRIDGE.is_skill_unlocked(self, skill_id)
 
 func _get_blessing_skill_tier(skill_id: String) -> int:
-	return PLAYER_BLESSING_SKILL_STATE.get_skill_tier(self, skill_id)
+	return PLAYER_BLESSING_SKILL_BRIDGE.get_skill_tier(self, skill_id)
 
 func _get_entry_rescue_regen_per_second() -> float:
-	return PLAYER_BLESSING_SKILL_STATE.get_entry_rescue_regen_per_second(self)
+	return PLAYER_BLESSING_SKILL_BRIDGE.get_entry_rescue_regen_per_second(self)
 
 func _get_hero_entry_effect() -> Dictionary:
-	return PLAYER_BLESSING_SKILL_STATE.get_hero_entry_effect(self)
+	return PLAYER_BLESSING_SKILL_BRIDGE.get_hero_entry_effect(self)
 
 func _get_blessing_skill_quantity_count(skill_id: String) -> int:
-	return PLAYER_BLESSING_SKILL_STATE.get_quantity_extra_count(self, skill_id)
+	return PLAYER_BLESSING_SKILL_BRIDGE.get_quantity_count(self, skill_id)
 
 func _get_blessing_skill_combo_scales(skill_id: String) -> Array[float]:
-	return PLAYER_BLESSING_SKILL_STATE.get_combo_extra_scales(self, skill_id)
+	return PLAYER_BLESSING_SKILL_BRIDGE.get_combo_scales(self, skill_id)
 
 func _get_blessing_skill_duration_multiplier(skill_id: String) -> float:
-	return PLAYER_BLESSING_SKILL_STATE.get_duration_multiplier(self, skill_id)
+	return PLAYER_BLESSING_SKILL_BRIDGE.get_duration_multiplier(self, skill_id)
 
 func get_skill_next_requirement_text(skill_id: String) -> String:
-	return PLAYER_BLESSING_SKILL_STATE.get_skill_next_requirement_text(self, skill_id)
+	return PLAYER_BLESSING_SKILL_BRIDGE.get_skill_next_requirement_text(self, skill_id)
 
 func get_skill_graph_text(role_id_filter: String = "") -> String:
-	return PLAYER_BLESSING_SKILL_STATE.get_skill_graph_text(self, role_id_filter)
+	return PLAYER_BLESSING_SKILL_BRIDGE.get_skill_graph_text(self, role_id_filter)
 
 func _get_basic_attack_range_multiplier(skill_id: String) -> float:
-	return PLAYER_BLESSING_SKILL_STATE.get_basic_attack_range_multiplier(self, skill_id)
+	return PLAYER_BLESSING_SKILL_BRIDGE.get_basic_attack_range_multiplier(self, skill_id)
 
 func _get_basic_attack_projectile_speed_multiplier(skill_id: String) -> float:
-	return PLAYER_BLESSING_SKILL_STATE.get_basic_attack_projectile_speed_multiplier(self, skill_id)
+	return PLAYER_BLESSING_SKILL_BRIDGE.get_basic_attack_projectile_speed_multiplier(self, skill_id)
 
 func _make_small_boss_reward_option(option_id: String, title: String, description: String) -> Dictionary:
 	return {
@@ -1073,112 +933,10 @@ func _physics_process(delta: float) -> void:
 		PLAYER_MAP_BOUNDS_FLOW.clamp_to_active_map_bounds(self)
 
 func _update_timers(delta: float) -> void:
-	role_visual_time += delta
-	ROLE_RESOURCE_STATE.tick_locks(role_ultimate_energy_lock_remaining, roles, delta)
-	_sync_active_role_ultimate_state()
-	if hurt_cooldown_remaining > 0.0:
-		hurt_cooldown_remaining = max(0.0, hurt_cooldown_remaining - delta)
-	if switch_invulnerability_remaining > 0.0:
-		switch_invulnerability_remaining = max(0.0, switch_invulnerability_remaining - delta)
-	if level_up_delay_remaining > 0.0:
-		level_up_delay_remaining = max(0.0, level_up_delay_remaining - delta)
-		if level_up_delay_remaining <= 0.0:
-			_try_request_level_up()
-	if switch_cooldown_remaining > 0.0:
-		switch_cooldown_remaining = max(0.0, switch_cooldown_remaining - delta)
-	if lifesteal_proc_cooldown_remaining > 0.0:
-		lifesteal_proc_cooldown_remaining = max(0.0, lifesteal_proc_cooldown_remaining - delta)
-	if enemy_move_slow_remaining > 0.0:
-		enemy_move_slow_remaining = max(0.0, enemy_move_slow_remaining - delta)
-		if enemy_move_slow_remaining <= 0.0:
-			enemy_move_slow_multiplier = 1.0
-	if gunner_infinite_reload_ability != null:
-		gunner_infinite_reload_ability.update(self, delta)
-	if gunner_shrapnel_field_ability != null:
-		gunner_shrapnel_field_ability.update(self, delta)
-	if mage_tidal_surge_ability != null:
-		mage_tidal_surge_ability.update(delta)
-	if mage_meta_field_ability != null:
-		mage_meta_field_ability.update(self, delta)
-	if swordsman_blade_storm_ability != null:
-		swordsman_blade_storm_ability.update(self, delta)
-	if swordsman_crescent_wave_ability != null:
-		swordsman_crescent_wave_ability.update(delta)
-	_try_trigger_swordsman_blade_storm()
-	_try_trigger_swordsman_crescent_wave()
-	_try_trigger_gunner_infinite_reload()
-	_try_trigger_gunner_shrapnel_field()
-	_try_trigger_mage_tidal_surge()
-	_try_trigger_mage_meta_field()
-	if perpetual_motion_cooldown_remaining > 0.0:
-		perpetual_motion_cooldown_remaining = max(0.0, perpetual_motion_cooldown_remaining - delta)
-	_apply_developer_no_cooldown()
-	if switch_power_remaining > 0.0:
-		switch_power_remaining = max(0.0, switch_power_remaining - delta)
-		if switch_power_remaining <= 0.0:
-			switch_power_role_id = ""
-			switch_power_damage_multiplier = 1.0
-			switch_power_interval_bonus = 0.0
-			switch_power_label = ""
-			_update_fire_timer()
-	if entry_blessing_remaining > 0.0:
-		entry_blessing_remaining = max(0.0, entry_blessing_remaining - delta)
-		if entry_blessing_remaining <= 0.0:
-			_clear_entry_blessing()
-	if standby_entry_remaining > 0.0:
-		standby_entry_remaining = max(0.0, standby_entry_remaining - delta)
-		if standby_entry_remaining <= 0.0:
-			_clear_standby_entry_buff()
-	if guard_cover_remaining > 0.0:
-		guard_cover_remaining = max(0.0, guard_cover_remaining - delta)
-		if guard_cover_remaining <= 0.0:
-			guard_cover_damage_multiplier = 1.0
-	if borrow_fire_remaining > 0.0:
-		borrow_fire_remaining = max(0.0, borrow_fire_remaining - delta)
-		if borrow_fire_remaining <= 0.0:
-			borrow_fire_role_id = ""
-			borrow_fire_damage_multiplier = 1.0
-			borrow_fire_interval_bonus = 0.0
-			borrow_fire_background_multiplier = 1.0
-			_update_fire_timer()
-	if post_ultimate_flow_remaining > 0.0:
-		post_ultimate_flow_remaining = max(0.0, post_ultimate_flow_remaining - delta)
-		if post_ultimate_flow_remaining <= 0.0:
-			post_ultimate_flow_background_multiplier = 1.0
-	if ultimate_guard_remaining > 0.0:
-		ultimate_guard_remaining = max(0.0, ultimate_guard_remaining - delta)
-		if ultimate_guard_remaining <= 0.0:
-			ultimate_guard_damage_multiplier = 1.0
-	if frenzy_remaining > 0.0:
-		frenzy_remaining = max(0.0, frenzy_remaining - delta)
-		if frenzy_remaining <= 0.0:
-			frenzy_stacks = 0
-			frenzy_overkill_counter = 0
-	for role_data in roles:
-		var role_id := str(role_data.get("id", ""))
-		if role_id == str(_get_active_role().get("id", "")):
-			role_standby_elapsed[role_id] = 0.0
-		else:
-			role_standby_elapsed[role_id] = float(role_standby_elapsed.get(role_id, 0.0)) + delta
-	_update_camera_shake(delta)
+	PLAYER_TIMER_FLOW.update_timers(self, delta)
 
 func _apply_developer_no_cooldown() -> void:
-	if not DEVELOPER_MODE.should_ignore_cooldowns():
-		return
-	switch_cooldown_remaining = 0.0
-	perpetual_motion_cooldown_remaining = 0.0
-	if gunner_infinite_reload_ability != null:
-		gunner_infinite_reload_ability.cooldown_remaining = 0.0
-	if gunner_shrapnel_field_ability != null:
-		gunner_shrapnel_field_ability.cooldown_remaining = 0.0
-	if mage_tidal_surge_ability != null:
-		mage_tidal_surge_ability.cooldown_remaining = 0.0
-	if mage_meta_field_ability != null:
-		mage_meta_field_ability.cooldown_remaining = 0.0
-	if swordsman_blade_storm_ability != null:
-		swordsman_blade_storm_ability.cooldown_remaining = 0.0
-	if swordsman_crescent_wave_ability != null:
-		swordsman_crescent_wave_ability.cooldown_remaining = 0.0
+	PLAYER_TIMER_FLOW.apply_developer_no_cooldown(self)
 
 func _regenerate_energy(delta: float) -> void:
 	PLAYER_SURVIVAL_FLOW.regenerate_energy(self, delta)
@@ -1915,26 +1673,25 @@ func _spawn_crescent_wave_effect(center: Vector2, direction: Vector2, radius: fl
 	PLAYER_EFFECT_PRIMITIVES.spawn_owner_crescent_wave_effect(self, center, direction, radius, color, duration, arc_degrees, thickness)
 
 func _spawn_cross_slash_effect(center: Vector2, direction: Vector2, length: float, width: float, color: Color, duration: float) -> void:
-	_spawn_slash_effect(center, direction.rotated(0.78), length, width, color, duration)
-	_spawn_slash_effect(center, direction.rotated(-0.78), length, width, color, duration)
+	PLAYER_EFFECT_PRIMITIVES.spawn_cross_slash_effect(self, center, direction, length, width, color, duration)
 
 func _spawn_thrust_effect(start_position: Vector2, end_position: Vector2, color: Color, width: float, duration: float, show_arrow: bool = true) -> void:
 	PLAYER_EFFECT_PRIMITIVES.spawn_thrust_effect(self, start_position, end_position, color, width, duration, show_arrow)
 
 func _spawn_guard_effect(center: Vector2, radius: float, color: Color, duration: float) -> void:
-	PLAYER_EFFECT_PRIMITIVES.spawn_guard_effect(self, center, radius, color, duration, _build_circle_polygon(radius))
+	PLAYER_EFFECT_PRIMITIVES.spawn_owner_guard_effect(self, center, radius, color, duration)
 
 func _spawn_combat_tag(position: Vector2, text: String, color: Color) -> void:
 	PLAYER_EFFECT_PRIMITIVES.spawn_combat_tag(self, position, text, color, SHOW_GAMEPLAY_TEXT_HINTS)
 
 func _spawn_ring_effect(center: Vector2, radius: float, color: Color, width: float, duration: float) -> void:
-	PLAYER_EFFECT_PRIMITIVES.spawn_ring_effect(self, center, radius, color, width, duration, _build_circle_polygon(radius))
+	PLAYER_EFFECT_PRIMITIVES.spawn_owner_ring_effect(self, center, radius, color, width, duration)
 
 func _spawn_mage_bombardment_warning_effect(center: Vector2, radius: float) -> void:
-	PLAYER_EFFECT_PRIMITIVES.spawn_mage_bombardment_warning_effect(self, center, radius, _build_circle_polygon(radius * 0.82))
+	PLAYER_EFFECT_PRIMITIVES.spawn_owner_mage_bombardment_warning_effect(self, center, radius)
 
 func _spawn_mage_bombardment_fall_effect(center: Vector2, radius: float) -> void:
-	PLAYER_EFFECT_PRIMITIVES.spawn_mage_bombardment_fall_effect(self, center, radius, _build_circle_polygon(radius * 0.28))
+	PLAYER_EFFECT_PRIMITIVES.spawn_owner_mage_bombardment_fall_effect(self, center, radius)
 
 func _spawn_pulsing_field(center: Vector2, radius: float, color: Color, pulse_count: int, interval: float, damage_amount: float, vulnerability_bonus: float, slow_multiplier: float, slow_duration: float) -> void:
 	var current_scene := get_tree().current_scene
@@ -1960,7 +1717,7 @@ func _trigger_field_pulse(center: Vector2, radius: float, color: Color, damage_a
 	_damage_enemies_in_radius(center, radius, damage_amount, vulnerability_bonus, slow_multiplier, slow_duration)
 
 func _spawn_burst_effect(center: Vector2, radius: float, color: Color, duration: float) -> void:
-	PLAYER_EFFECT_PRIMITIVES.spawn_burst_effect(self, center, color, duration, _build_circle_polygon(radius))
+	PLAYER_EFFECT_PRIMITIVES.spawn_owner_burst_effect(self, center, radius, color, duration)
 
 func _spawn_frost_sigils_effect(center: Vector2, radius: float, color: Color, duration: float) -> void:
 	PLAYER_EFFECT_PRIMITIVES.spawn_frost_sigils_effect(self, center, radius, color, duration)
@@ -1969,7 +1726,7 @@ func _spawn_vortex_effect(center: Vector2, radius: float, color: Color, duration
 	PLAYER_EFFECT_PRIMITIVES.spawn_owner_vortex_effect(self, center, radius, color, duration)
 
 func _spawn_target_lock_effect(center: Vector2, radius: float, color: Color, duration: float) -> void:
-	PLAYER_EFFECT_PRIMITIVES.spawn_target_lock_effect(self, center, radius, color, duration, _build_circle_polygon(radius))
+	PLAYER_EFFECT_PRIMITIVES.spawn_owner_target_lock_effect(self, center, radius, color, duration)
 
 func _build_circle_polygon(radius: float) -> PackedVector2Array:
 	return PLAYER_MATH.build_circle_polygon(radius)
