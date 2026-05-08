@@ -3,15 +3,22 @@ extends RefCounted
 const PERFORMANCE_COUNTERS := preload("res://scripts/game/performance_counters.gd")
 const PLAYER_DAMAGE_JOB_QUEUE := preload("res://scripts/player/player_damage_job_queue.gd")
 const PLAYER_DAMAGE_BATCHER := preload("res://scripts/player/player_damage_batcher.gd")
+const PERFORMANCE_GUARD := preload("res://scripts/game/performance_guard.gd")
 
 const DAMAGE_JOB_QUEUE_NAME := "PlayerDamageJobQueue"
 const QUEUED_HIT_THRESHOLD := 16
+const LOW_FPS_QUEUED_HIT_THRESHOLD := 8
+const CRITICAL_FPS_QUEUED_HIT_THRESHOLD := 4
+const DAMAGE_QUERY_BOUNDS_GROW := 48.0
 
 static var cached_live_enemies: Array = []
 static var cached_live_enemies_frame: int = -1
+static var cached_live_enemies_source_key: int = -1
 static var cached_enemy_grid: Dictionary = {}
 static var cached_enemy_grid_frame: int = -1
+static var cached_enemy_grid_source_key: int = -1
 static var cached_enemy_grid_cell_size: float = 96.0
+static var reusable_damage_batcher: RefCounted
 
 static func deal_damage_to_enemy(owner, enemy: Node, damage_amount: float, source_role_id: String, vulnerability_bonus: float = 0.0, vulnerability_duration: float = 2.0, slow_multiplier: float = 1.0, slow_duration: float = 0.0, source_position: Variant = null) -> bool:
 	if owner != null and owner.has_method("_deal_damage_to_enemy"):
@@ -32,7 +39,7 @@ static func deal_damage_to_enemy(owner, enemy: Node, damage_amount: float, sourc
 		owner._on_enemy_killed_by_role(source_role_id)
 	return killed
 
-static func queue_damage_to_enemy(owner, enemy: Node, damage_amount: float, source_role_id: String, vulnerability_bonus: float = 0.0, vulnerability_duration: float = 2.0, slow_multiplier: float = 1.0, slow_duration: float = 0.0, source_position: Variant = null) -> void:
+static func queue_damage_to_enemy(owner, enemy: Node, damage_amount: float, source_role_id: String, vulnerability_bonus: float = 0.0, vulnerability_duration: float = 2.0, slow_multiplier: float = 1.0, slow_duration: float = 0.0, source_position: Variant = null, prefer_silent_feedback: bool = false) -> void:
 	var queue := _get_or_create_damage_job_queue(owner)
 	if queue == null:
 		deal_damage_to_enemy(owner, enemy, damage_amount, source_role_id, vulnerability_bonus, vulnerability_duration, slow_multiplier, slow_duration, source_position)
@@ -47,7 +54,8 @@ static func queue_damage_to_enemy(owner, enemy: Node, damage_amount: float, sour
 		"vulnerability_duration": vulnerability_duration,
 		"slow_multiplier": slow_multiplier,
 		"slow_duration": slow_duration,
-		"source_position": source_position
+		"source_position": source_position,
+		"prefer_silent_feedback": prefer_silent_feedback
 	})
 
 static func apply_or_queue_damage_job(owner, job: Dictionary) -> void:
@@ -74,28 +82,78 @@ static func apply_or_queue_damage_job(owner, job: Dictionary) -> void:
 	queue.enqueue(job)
 
 static func damage_enemies_in_radius(owner, center: Vector2, radius: float, damage_amount: float, vulnerability_bonus: float, slow_multiplier: float, slow_duration: float, source_role_id: String = "") -> int:
-	var hit_count := 0
 	var resolved_role_id: String = _resolve_role_id(owner, source_role_id)
 	var candidates: Array = _get_candidate_enemies_for_circle(owner, center, radius)
 	_record_damage_query(candidates.size())
-	var matched_enemies: Array = []
+	var batcher := _get_reusable_damage_batcher(owner)
 	for enemy in candidates:
-		if not _is_live_enemy(enemy):
+		if not _is_live_enemy(enemy) or enemy is not Node2D:
 			continue
 		var hit_radius: float = _get_enemy_hit_radius(owner, enemy)
 		var total_radius: float = radius + hit_radius
 		if center.distance_squared_to(enemy.global_position) <= total_radius * total_radius:
-			matched_enemies.append(enemy)
-	hit_count = matched_enemies.size()
-	_apply_or_queue_hits(owner, matched_enemies, damage_amount, resolved_role_id, vulnerability_bonus, 2.0, slow_multiplier, slow_duration, center)
+			batcher.add_enemy(enemy, damage_amount, resolved_role_id, vulnerability_bonus, 2.0, slow_multiplier, slow_duration, center)
+	var hit_count: int = batcher.hit_count
 	PERFORMANCE_COUNTERS.add("damage_hits", hit_count)
-	return hit_count
+	return batcher.flush()
 
 static func damage_enemies_in_radius_batched(owner, center: Vector2, radius: float, damage_amount: float, vulnerability_bonus: float, slow_multiplier: float, slow_duration: float, source_role_id: String = "") -> int:
+	return damage_enemies_in_radius(owner, center, radius, damage_amount, vulnerability_bonus, slow_multiplier, slow_duration, source_role_id)
+
+static func damage_enemies_in_multiple_radii_batched(owner, centers: Array[Vector2], radius: float, damage_amount: float, vulnerability_bonus: float, slow_multiplier: float, slow_duration: float, source_role_id: String = "") -> int:
+	if centers.is_empty():
+		return 0
+	if centers.size() == 1:
+		return damage_enemies_in_radius_batched(owner, centers[0], radius, damage_amount, vulnerability_bonus, slow_multiplier, slow_duration, source_role_id)
 	var resolved_role_id: String = _resolve_role_id(owner, source_role_id)
-	var batcher := PLAYER_DAMAGE_BATCHER.new(owner)
-	for enemy in collect_enemies_in_radius(owner, center, radius):
-		batcher.add_enemy(enemy, damage_amount, resolved_role_id, vulnerability_bonus, 2.0, slow_multiplier, slow_duration, center)
+	var batcher := _get_reusable_damage_batcher(owner)
+	var candidates: Array = _get_candidate_enemies_for_multiple_circles(owner, centers, radius)
+	_record_damage_query(candidates.size())
+	for enemy in candidates:
+		if not _is_live_enemy(enemy) or enemy is not Node2D:
+			continue
+		var hit_radius: float = _get_enemy_hit_radius(owner, enemy)
+		var total_radius: float = radius + hit_radius
+		var total_radius_squared: float = total_radius * total_radius
+		var enemy_position: Vector2 = (enemy as Node2D).global_position
+		for center in centers:
+			if center.distance_squared_to(enemy_position) <= total_radius_squared:
+				batcher.add_enemy(enemy, damage_amount, resolved_role_id, vulnerability_bonus, 2.0, slow_multiplier, slow_duration, center)
+	PERFORMANCE_COUNTERS.add("damage_hits", batcher.hit_count)
+	return batcher.flush()
+
+static func damage_enemies_in_shapes_batched(owner, shapes: Array[Dictionary]) -> int:
+	if shapes.is_empty():
+		return 0
+	var candidates: Array = _get_candidate_enemies_for_shapes(owner, shapes)
+	_record_damage_query(candidates.size())
+	var batcher := _get_reusable_damage_batcher(owner)
+	for enemy in candidates:
+		if not _is_live_enemy(enemy) or enemy is not Node2D:
+			continue
+		var enemy_position: Vector2 = (enemy as Node2D).global_position
+		var hit_radius: float = _get_enemy_hit_radius(owner, enemy)
+		var enemy_id: int = enemy.get_instance_id()
+		for shape in shapes:
+			var hit_registry: Dictionary = shape.get("hit_registry", {})
+			if not hit_registry.is_empty() and hit_registry.has(enemy_id):
+				continue
+			if not _shape_hits_enemy(shape, enemy_position, hit_radius):
+				continue
+			if shape.has("hit_registry"):
+				hit_registry[enemy_id] = true
+			batcher.add_enemy(
+				enemy,
+				float(shape.get("damage_amount", 0.0)),
+				_resolve_role_id(owner, str(shape.get("source_role_id", ""))),
+				float(shape.get("vulnerability_bonus", 0.0)),
+				float(shape.get("vulnerability_duration", 2.0)),
+				float(shape.get("slow_multiplier", 1.0)),
+				float(shape.get("slow_duration", 0.0)),
+				shape.get("source_position", null),
+				float(shape.get("kill_energy_bonus", 0.0))
+			)
+	PERFORMANCE_COUNTERS.add("damage_hits", batcher.hit_count)
 	return batcher.flush()
 
 static func damage_enemies_in_radius_count_kills(owner, center: Vector2, radius: float, damage_amount: float, vulnerability_bonus: float, slow_multiplier: float, slow_duration: float, source_role_id: String = "") -> Dictionary:
@@ -160,11 +218,10 @@ static func damage_enemies_in_line(owner, start_position: Vector2, end_position:
 	if length <= 0.001:
 		return damage_enemies_in_radius(owner, start_position, width, damage_amount, vulnerability_bonus, slow_multiplier, slow_duration, source_role_id)
 	var direction := axis / length
-	var hit_count := 0
 	var resolved_role_id: String = _resolve_role_id(owner, source_role_id)
 	var candidates: Array = _get_candidate_enemies_for_rect(owner, start_position + axis * 0.5, abs(axis.x) + width * 2.0, abs(axis.y) + width * 2.0)
 	_record_damage_query(candidates.size())
-	var matched_enemies: Array = []
+	var batcher := _get_reusable_damage_batcher(owner)
 	for enemy in candidates:
 		if not _is_live_enemy(enemy):
 			continue
@@ -173,11 +230,10 @@ static func damage_enemies_in_line(owner, start_position: Vector2, end_position:
 		var closest: Vector2 = start_position + direction * along
 		var total_width: float = width + _get_enemy_hit_radius(owner, enemy)
 		if enemy.global_position.distance_squared_to(closest) <= total_width * total_width:
-			matched_enemies.append(enemy)
-	hit_count = matched_enemies.size()
-	_apply_or_queue_hits(owner, matched_enemies, damage_amount, resolved_role_id, vulnerability_bonus, 2.0, slow_multiplier, slow_duration, start_position)
+			batcher.add_enemy(enemy, damage_amount, resolved_role_id, vulnerability_bonus, 2.0, slow_multiplier, slow_duration, start_position)
+	var hit_count: int = batcher.hit_count
 	PERFORMANCE_COUNTERS.add("damage_hits", hit_count)
-	return hit_count
+	return batcher.flush()
 
 static func damage_enemies_in_oriented_rect(owner, center: Vector2, axis_direction: Vector2, rect_length: float, rect_width: float, damage_amount: float, vulnerability_bonus: float, slow_multiplier: float, slow_duration: float, source_role_id: String = "") -> int:
 	return damage_enemies_in_oriented_rect_unique(owner, center, axis_direction, rect_length, rect_width, damage_amount, vulnerability_bonus, slow_multiplier, slow_duration, {}, source_role_id)
@@ -189,12 +245,11 @@ static func damage_enemies_in_oriented_rect_unique(owner, center: Vector2, axis_
 	var perpendicular := direction.orthogonal()
 	var half_length := rect_length * 0.5
 	var half_width := rect_width * 0.5
-	var hit_count := 0
 	var resolved_role_id: String = _resolve_role_id(owner, source_role_id)
 	var broad_size := rect_length + rect_width + 80.0
 	var candidates: Array = _get_candidate_enemies_for_rect(owner, center, broad_size, broad_size)
 	_record_damage_query(candidates.size())
-	var matched_enemies: Array = []
+	var batcher := _get_reusable_damage_batcher(owner)
 	for enemy in candidates:
 		if not _is_live_enemy(enemy):
 			continue
@@ -205,31 +260,28 @@ static func damage_enemies_in_oriented_rect_unique(owner, center: Vector2, axis_
 		var hit_radius: float = _get_enemy_hit_radius(owner, enemy)
 		if abs(relative.dot(direction)) <= half_length + hit_radius and abs(relative.dot(perpendicular)) <= half_width + hit_radius:
 			hit_registry[id] = true
-			matched_enemies.append(enemy)
-	hit_count = matched_enemies.size()
-	_apply_or_queue_hits(owner, matched_enemies, damage_amount, resolved_role_id, vulnerability_bonus, 2.0, slow_multiplier, slow_duration, center)
+			batcher.add_enemy(enemy, damage_amount, resolved_role_id, vulnerability_bonus, 2.0, slow_multiplier, slow_duration, center)
+	var hit_count: int = batcher.hit_count
 	PERFORMANCE_COUNTERS.add("damage_hits", hit_count)
-	return hit_count
+	return batcher.flush()
 
 static func damage_enemies_in_ellipse(owner, center: Vector2, horizontal_radius: float, vertical_radius: float, damage_amount: float, vulnerability_bonus: float, slow_multiplier: float, slow_duration: float, source_role_id: String = "") -> int:
-	var hit_count := 0
 	var safe_horizontal: float = max(1.0, horizontal_radius)
 	var safe_vertical: float = max(1.0, vertical_radius)
 	var resolved_role_id: String = _resolve_role_id(owner, source_role_id)
 	var candidates: Array = _get_candidate_enemies_for_rect(owner, center, safe_horizontal * 2.0, safe_vertical * 2.0)
 	_record_damage_query(candidates.size())
-	var matched_enemies: Array = []
+	var batcher := _get_reusable_damage_batcher(owner)
 	for enemy in candidates:
 		if not _is_live_enemy(enemy):
 			continue
 		var relative: Vector2 = enemy.global_position - center
 		var value := pow(relative.x / safe_horizontal, 2.0) + pow(relative.y / safe_vertical, 2.0)
 		if value <= 1.0:
-			matched_enemies.append(enemy)
-	hit_count = matched_enemies.size()
-	_apply_or_queue_hits(owner, matched_enemies, damage_amount, resolved_role_id, vulnerability_bonus, 2.0, slow_multiplier, slow_duration, center)
+			batcher.add_enemy(enemy, damage_amount, resolved_role_id, vulnerability_bonus, 2.0, slow_multiplier, slow_duration, center)
+	var hit_count: int = batcher.hit_count
 	PERFORMANCE_COUNTERS.add("damage_hits", hit_count)
-	return hit_count
+	return batcher.flush()
 
 static func damage_enemies_in_cone(owner, origin: Vector2, direction: Vector2, cone_range: float, cone_angle_radians: float, damage_amount: float, vulnerability_bonus: float, slow_multiplier: float, slow_duration: float, source_role_id: String = "") -> int:
 	var forward := direction.normalized()
@@ -240,11 +292,10 @@ static func damage_enemies_in_cone(owner, origin: Vector2, direction: Vector2, c
 	var cos_half_angle: float = cos(half_angle)
 	var center: Vector2 = origin + forward * (safe_range * 0.5)
 	var broad_size: float = safe_range * 2.0
-	var hit_count := 0
 	var resolved_role_id: String = _resolve_role_id(owner, source_role_id)
 	var candidates: Array = _get_candidate_enemies_for_rect(owner, center, broad_size, broad_size)
 	_record_damage_query(candidates.size())
-	var matched_enemies: Array = []
+	var batcher := _get_reusable_damage_batcher(owner)
 	for enemy in candidates:
 		if not _is_live_enemy(enemy):
 			continue
@@ -254,15 +305,14 @@ static func damage_enemies_in_cone(owner, origin: Vector2, direction: Vector2, c
 		if distance > safe_range + hit_radius:
 			continue
 		if distance <= hit_radius:
-			matched_enemies.append(enemy)
+			batcher.add_enemy(enemy, damage_amount, resolved_role_id, vulnerability_bonus, 2.0, slow_multiplier, slow_duration, origin)
 			continue
 		var enemy_direction: Vector2 = enemy_offset / distance
 		if enemy_direction.dot(forward) >= cos_half_angle or _is_enemy_inside_cone_edge(enemy_offset, forward, safe_range, half_angle, hit_radius):
-			matched_enemies.append(enemy)
-	hit_count = matched_enemies.size()
-	_apply_or_queue_hits(owner, matched_enemies, damage_amount, resolved_role_id, vulnerability_bonus, 2.0, slow_multiplier, slow_duration, origin)
+			batcher.add_enemy(enemy, damage_amount, resolved_role_id, vulnerability_bonus, 2.0, slow_multiplier, slow_duration, origin)
+	var hit_count: int = batcher.hit_count
 	PERFORMANCE_COUNTERS.add("damage_hits", hit_count)
-	return hit_count
+	return batcher.flush()
 
 static func _record_damage_query(candidate_count: int) -> void:
 	PERFORMANCE_COUNTERS.add("damage_queries", 1)
@@ -270,14 +320,31 @@ static func _record_damage_query(candidate_count: int) -> void:
 
 static func _apply_or_queue_hits(owner, enemies: Array, damage_amount: float, source_role_id: String, vulnerability_bonus: float, vulnerability_duration: float, slow_multiplier: float, slow_duration: float, source_position: Variant) -> void:
 	if _should_queue_hits(enemies.size()):
+		var batcher := _get_reusable_damage_batcher(owner)
 		for enemy in enemies:
-			queue_damage_to_enemy(owner, enemy, damage_amount, source_role_id, vulnerability_bonus, vulnerability_duration, slow_multiplier, slow_duration, source_position)
+			batcher.add_enemy(enemy, damage_amount, source_role_id, vulnerability_bonus, vulnerability_duration, slow_multiplier, slow_duration, source_position)
+		batcher.flush()
 		return
 	for enemy in enemies:
 		deal_damage_to_enemy(owner, enemy, damage_amount, source_role_id, vulnerability_bonus, vulnerability_duration, slow_multiplier, slow_duration, source_position)
 
 static func _should_queue_hits(hit_count: int) -> bool:
-	return hit_count >= QUEUED_HIT_THRESHOLD
+	return hit_count >= _get_queued_hit_threshold()
+
+static func _get_queued_hit_threshold() -> int:
+	var fps := Engine.get_frames_per_second()
+	if fps > 0 and fps < PERFORMANCE_GUARD.CRITICAL_FPS_THRESHOLD:
+		return CRITICAL_FPS_QUEUED_HIT_THRESHOLD
+	if fps > 0 and fps < PERFORMANCE_GUARD.LOW_FPS_THRESHOLD:
+		return LOW_FPS_QUEUED_HIT_THRESHOLD
+	return QUEUED_HIT_THRESHOLD
+
+static func _get_reusable_damage_batcher(owner) -> RefCounted:
+	if reusable_damage_batcher == null:
+		reusable_damage_batcher = PLAYER_DAMAGE_BATCHER.new(owner)
+	elif reusable_damage_batcher.has_method("reset"):
+		reusable_damage_batcher.reset(owner)
+	return reusable_damage_batcher
 
 static func _get_or_create_damage_job_queue(owner) -> Node:
 	if owner == null or owner.get_tree() == null:
@@ -302,6 +369,86 @@ static func _is_enemy_inside_cone_edge(offset: Vector2, forward: Vector2, cone_r
 		return false
 	var allowed_side_distance: float = max(0.0, forward_distance) * tan(half_angle) + hit_radius
 	return abs(offset.dot(side)) <= allowed_side_distance
+
+static func _get_shape_bounds(shape: Dictionary) -> Rect2:
+	var shape_type: String = str(shape.get("type", "circle"))
+	if shape_type == "line":
+		var start_position: Vector2 = shape.get("start", Vector2.ZERO)
+		var end_position: Vector2 = shape.get("end", start_position)
+		var width: float = max(1.0, float(shape.get("width", 1.0)))
+		var rect := Rect2(start_position, Vector2.ZERO).expand(end_position)
+		return rect.grow(width + 48.0)
+	if shape_type == "oriented_rect":
+		var center: Vector2 = shape.get("center", Vector2.ZERO)
+		var broad_size: float = float(shape.get("length", 1.0)) + float(shape.get("width", 1.0)) + 80.0
+		return Rect2(center - Vector2.ONE * broad_size * 0.5, Vector2.ONE * broad_size)
+	if shape_type == "cone":
+		var origin: Vector2 = shape.get("origin", Vector2.ZERO)
+		var direction: Vector2 = shape.get("direction", Vector2.RIGHT)
+		if direction.length_squared() <= 0.001:
+			direction = Vector2.RIGHT
+		var cone_range: float = max(1.0, float(shape.get("range", 1.0)))
+		var center: Vector2 = origin + direction.normalized() * cone_range * 0.5
+		var broad_size: float = cone_range * 2.0
+		return Rect2(center - Vector2.ONE * broad_size * 0.5, Vector2.ONE * broad_size)
+	if shape_type == "ellipse":
+		var ellipse_center: Vector2 = shape.get("center", Vector2.ZERO)
+		var horizontal_radius: float = max(1.0, float(shape.get("horizontal_radius", 1.0)))
+		var vertical_radius: float = max(1.0, float(shape.get("vertical_radius", 1.0)))
+		return Rect2(ellipse_center - Vector2(horizontal_radius, vertical_radius), Vector2(horizontal_radius * 2.0, vertical_radius * 2.0)).grow(48.0)
+	var circle_center: Vector2 = shape.get("center", Vector2.ZERO)
+	var radius: float = max(1.0, float(shape.get("radius", 1.0)))
+	return Rect2(circle_center - Vector2.ONE * radius, Vector2.ONE * radius * 2.0)
+
+static func _shape_hits_enemy(shape: Dictionary, enemy_position: Vector2, hit_radius: float) -> bool:
+	var shape_type: String = str(shape.get("type", "circle"))
+	if shape_type == "line":
+		var start_position: Vector2 = shape.get("start", Vector2.ZERO)
+		var end_position: Vector2 = shape.get("end", start_position)
+		var axis: Vector2 = end_position - start_position
+		var length: float = axis.length()
+		if length <= 0.001:
+			var fallback_radius: float = float(shape.get("width", 1.0)) + hit_radius
+			return start_position.distance_squared_to(enemy_position) <= fallback_radius * fallback_radius
+		var direction: Vector2 = axis / length
+		var relative: Vector2 = enemy_position - start_position
+		var along: float = clamp(relative.dot(direction), 0.0, length)
+		var closest: Vector2 = start_position + direction * along
+		var total_width: float = float(shape.get("width", 1.0)) + hit_radius
+		return enemy_position.distance_squared_to(closest) <= total_width * total_width
+	if shape_type == "oriented_rect":
+		var rect_direction: Vector2 = shape.get("axis", Vector2.RIGHT)
+		rect_direction = rect_direction.normalized()
+		if rect_direction.length_squared() <= 0.001:
+			rect_direction = Vector2.RIGHT
+		var perpendicular: Vector2 = rect_direction.orthogonal()
+		var relative_rect: Vector2 = enemy_position - Vector2(shape.get("center", Vector2.ZERO))
+		return abs(relative_rect.dot(rect_direction)) <= float(shape.get("length", 1.0)) * 0.5 + hit_radius and abs(relative_rect.dot(perpendicular)) <= float(shape.get("width", 1.0)) * 0.5 + hit_radius
+	if shape_type == "cone":
+		var origin: Vector2 = shape.get("origin", Vector2.ZERO)
+		var forward: Vector2 = shape.get("direction", Vector2.RIGHT)
+		forward = forward.normalized()
+		if forward.length_squared() <= 0.001:
+			forward = Vector2.RIGHT
+		var safe_range: float = max(1.0, float(shape.get("range", 1.0)))
+		var half_angle: float = max(0.0, float(shape.get("angle", 0.0)) * 0.5)
+		var enemy_offset: Vector2 = enemy_position - origin
+		var distance: float = enemy_offset.length()
+		if distance > safe_range + hit_radius:
+			return false
+		if distance <= hit_radius:
+			return true
+		var enemy_direction: Vector2 = enemy_offset / distance
+		return enemy_direction.dot(forward) >= cos(half_angle) or _is_enemy_inside_cone_edge(enemy_offset, forward, safe_range, half_angle, hit_radius)
+	if shape_type == "ellipse":
+		var ellipse_center: Vector2 = shape.get("center", Vector2.ZERO)
+		var horizontal_radius: float = max(1.0, float(shape.get("horizontal_radius", 1.0)) + hit_radius)
+		var vertical_radius: float = max(1.0, float(shape.get("vertical_radius", 1.0)) + hit_radius)
+		var ellipse_relative: Vector2 = enemy_position - ellipse_center
+		return pow(ellipse_relative.x / horizontal_radius, 2.0) + pow(ellipse_relative.y / vertical_radius, 2.0) <= 1.0
+	var circle_center: Vector2 = shape.get("center", Vector2.ZERO)
+	var total_radius: float = float(shape.get("radius", 1.0)) + hit_radius
+	return circle_center.distance_squared_to(enemy_position) <= total_radius * total_radius
 
 static func schedule_swordsman_slash_followthrough(owner, center: Vector2, axis_direction: Vector2, rect_length: float, rect_width: float, damage_amount: float, vulnerability_bonus: float, slow_multiplier: float, slow_duration: float, animation_duration: float, source_role_id: String, hit_registry: Dictionary) -> void:
 	for index in range(max(0, int(owner.SWORD_SLASH_DAMAGE_FOLLOW_PULSES))):
@@ -329,39 +476,83 @@ static func _get_live_enemies(owner) -> Array:
 	if tree == null:
 		return []
 	var current_frame := Engine.get_physics_frames()
-	if cached_live_enemies_frame == current_frame:
+	var source_key := _get_enemy_source_cache_key(owner, tree)
+	if cached_live_enemies_frame == current_frame and cached_live_enemies_source_key == source_key:
 		return cached_live_enemies
 	cached_live_enemies = []
-	for enemy in tree.get_nodes_in_group("enemies"):
+	var enemy_nodes: Array = _get_runtime_enemies(owner, tree)
+	for enemy in enemy_nodes:
 		if _is_live_enemy(enemy):
 			cached_live_enemies.append(enemy)
 	cached_live_enemies_frame = current_frame
+	cached_live_enemies_source_key = source_key
 	return cached_live_enemies
+
+static func _get_runtime_enemies(owner, tree: SceneTree) -> Array:
+	if tree == null:
+		return []
+	var scene: Node = tree.current_scene
+	if scene != null and scene.has_method("get_runtime_enemies"):
+		return scene.get_runtime_enemies()
+	if owner != null and owner.has_method("get_tree"):
+		var owner_tree: SceneTree = owner.get_tree()
+		if owner_tree != null:
+			return owner_tree.get_nodes_in_group("enemies")
+	return tree.get_nodes_in_group("enemies")
 
 static func _get_candidate_enemies_for_circle(owner, center: Vector2, radius: float) -> Array:
 	return _get_candidate_enemies_for_rect(owner, center, radius * 2.0, radius * 2.0)
 
+static func _get_candidate_enemies_for_multiple_circles(owner, centers: Array[Vector2], radius: float) -> Array:
+	var safe_radius: float = max(1.0, radius)
+	var bounds_list: Array[Rect2] = []
+	for center in centers:
+		bounds_list.append(Rect2(center - Vector2.ONE * safe_radius, Vector2.ONE * safe_radius * 2.0))
+	return _get_candidate_enemies_for_bounds_list(owner, bounds_list)
+
+static func _get_candidate_enemies_for_shapes(owner, shapes: Array[Dictionary]) -> Array:
+	var bounds_list: Array[Rect2] = []
+	for shape in shapes:
+		bounds_list.append(_get_shape_bounds(shape))
+	return _get_candidate_enemies_for_bounds_list(owner, bounds_list)
+
 static func _get_candidate_enemies_for_rect(owner, center: Vector2, width: float, height: float) -> Array:
+	var half_width: float = max(1.0, width * 0.5)
+	var half_height: float = max(1.0, height * 0.5)
+	return _get_candidate_enemies_for_bounds_list(owner, [
+		Rect2(center - Vector2(half_width, half_height), Vector2(half_width * 2.0, half_height * 2.0))
+	])
+
+static func _get_candidate_enemies_for_bounds_list(owner, bounds_list: Array[Rect2]) -> Array:
 	var grid: Dictionary = _get_enemy_grid(owner)
-	if grid.is_empty():
+	if grid.is_empty() or bounds_list.is_empty():
 		return []
-	var half_width: float = max(1.0, width * 0.5 + 48.0)
-	var half_height: float = max(1.0, height * 0.5 + 48.0)
-	var min_cell: Vector2i = _grid_cell(center - Vector2(half_width, half_height))
-	var max_cell: Vector2i = _grid_cell(center + Vector2(half_width, half_height))
 	var candidates: Array = []
-	for x in range(min_cell.x, max_cell.x + 1):
-		for y in range(min_cell.y, max_cell.y + 1):
-			var cell := Vector2i(x, y)
-			if grid.has(cell):
+	var seen_enemy_ids: Dictionary = {}
+	for bounds in bounds_list:
+		var expanded_bounds: Rect2 = bounds.grow(DAMAGE_QUERY_BOUNDS_GROW)
+		var min_cell: Vector2i = _grid_cell(expanded_bounds.position)
+		var max_cell: Vector2i = _grid_cell(expanded_bounds.position + expanded_bounds.size)
+		for x in range(min_cell.x, max_cell.x + 1):
+			for y in range(min_cell.y, max_cell.y + 1):
+				var cell := Vector2i(x, y)
+				if not grid.has(cell):
+					continue
 				for enemy in grid[cell] as Array:
-					if _is_live_enemy(enemy):
-						candidates.append(enemy)
+					if not _is_live_enemy(enemy):
+						continue
+					var enemy_id: int = enemy.get_instance_id()
+					if seen_enemy_ids.has(enemy_id):
+						continue
+					seen_enemy_ids[enemy_id] = true
+					candidates.append(enemy)
 	return candidates
 
 static func _get_enemy_grid(owner) -> Dictionary:
 	var current_frame := Engine.get_physics_frames()
-	if cached_enemy_grid_frame == current_frame:
+	var tree: SceneTree = owner.get_tree() if owner != null and owner.has_method("get_tree") else null
+	var source_key := _get_enemy_source_cache_key(owner, tree)
+	if cached_enemy_grid_frame == current_frame and cached_enemy_grid_source_key == source_key:
 		return cached_enemy_grid
 	cached_enemy_grid = {}
 	for enemy in _get_live_enemies(owner):
@@ -372,7 +563,17 @@ static func _get_enemy_grid(owner) -> Dictionary:
 			cached_enemy_grid[cell] = []
 		(cached_enemy_grid[cell] as Array).append(enemy)
 	cached_enemy_grid_frame = current_frame
+	cached_enemy_grid_source_key = source_key
 	return cached_enemy_grid
+
+static func _get_enemy_source_cache_key(owner, tree: SceneTree) -> int:
+	if tree != null:
+		var scene: Node = tree.current_scene
+		if scene != null:
+			return scene.get_instance_id()
+	if owner != null and owner is Object:
+		return (owner as Object).get_instance_id()
+	return 0
 
 static func _grid_cell(position: Vector2) -> Vector2i:
 	return Vector2i(floori(position.x / cached_enemy_grid_cell_size), floori(position.y / cached_enemy_grid_cell_size))

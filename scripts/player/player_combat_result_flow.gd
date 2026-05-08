@@ -1,6 +1,7 @@
 extends RefCounted
 
 const DEVELOPER_MODE := preload("res://scripts/developer_mode.gd")
+const PLAYER_DAMAGE_RESOLVER := preload("res://scripts/player/player_damage_resolver.gd")
 
 const ULTIMATE_ENERGY_GAIN_GLOBAL_MULTIPLIER := 0.55
 const SMALL_ENEMY_KILL_ENERGY_MULTIPLIER := 0.75
@@ -167,10 +168,4 @@ static func trigger_swordsman_counter(owner) -> void:
 
 
 static func count_enemies_in_radius(owner, center: Vector2, radius: float) -> int:
-	var count: int = 0
-	for enemy in owner.get_tree().get_nodes_in_group("enemies"):
-		if not is_instance_valid(enemy):
-			continue
-		if center.distance_to(enemy.global_position) <= radius:
-			count += 1
-	return count
+	return PLAYER_DAMAGE_RESOLVER.count_enemies_in_radius(owner, center, radius)

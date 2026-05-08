@@ -1,4 +1,4 @@
-﻿extends RefCounted
+extends RefCounted
 
 const STORY_PREP_SCENE_PATH := "res://scenes/story_prep.tscn"
 const SAVE_MANAGER := preload("res://scripts/save_manager.gd")

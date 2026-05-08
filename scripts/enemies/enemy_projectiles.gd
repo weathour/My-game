@@ -87,6 +87,8 @@ static func spawn_projectile(enemy, origin: Vector2, shot_direction: Vector2, sh
 static func _take_projectile_from_pool(current_scene: Node):
 	if current_scene == null or current_scene.get_tree() == null:
 		return null
+	if current_scene.has_method("take_runtime_enemy_projectile_from_pool"):
+		return current_scene.take_runtime_enemy_projectile_from_pool()
 	for projectile in current_scene.get_tree().get_nodes_in_group(ENEMY_PROJECTILE_POOL_GROUP):
 		if projectile != null and is_instance_valid(projectile):
 			return projectile

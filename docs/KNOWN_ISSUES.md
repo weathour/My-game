@@ -28,3 +28,11 @@
 
 - Local graphify support for Godot/GDScript depends on local tooling availability.
 - Godot MCP is development tooling only. Current handoff should not rely on MCP being available; CLI Godot checks are the safer baseline.
+
+## Known Design Quirks
+
+### Blessing Skill Unlock Lock Sharing
+- `player_blessing_skill_state.gd` uses a global `role_recipe_locks` dictionary to track consumed blessings per skill unlock.
+- These locks are NOT per-role — a blessing consumed to unlock a swordsman skill (e.g., `formation_break` for Blade Storm) is also subtracted when checking mage skill requirements (e.g., Surging Wave).
+- Result: two roles that both meet the same blessing requirements may not both unlock their skills, because the first unlock's lock is subtracted from all roles.
+- This may be intentional (shared resource pool) or a bug — confirmed with upstream before changing.

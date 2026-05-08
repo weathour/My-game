@@ -1,0 +1,56 @@
+[gd_scene format=3 uid="uid://dhhq7y67jbgdm"]
+
+[ext_resource type="Script" uid="uid://b5t7msnfg5leb" path="res://assets/enemies/Mushroom/mushroom_visual.gd" id="1_0xtii"]
+[ext_resource type="Texture2D" uid="uid://dw8xkfoddcr2s" path="res://assets/enemies/Mushroom/Mushroom-Hit.png" id="2_0c8bd"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t0jua"]
+atlas = ExtResource("2_0c8bd")
+region = Rect2(0, 0, 80, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yf7f3"]
+atlas = ExtResource("2_0c8bd")
+region = Rect2(80, 0, 80, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qfdb1"]
+atlas = ExtResource("2_0c8bd")
+region = Rect2(160, 0, 80, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jjefa"]
+atlas = ExtResource("2_0c8bd")
+region = Rect2(240, 0, 80, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ofx8e"]
+atlas = ExtResource("2_0c8bd")
+region = Rect2(320, 0, 80, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tbybc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t0jua")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yf7f3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qfdb1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jjefa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ofx8e")
+}],
+"loop": false,
+"name": &"mushroom-hit",
+"speed": 7.0
+}]
+
+[node name="Mushroom" type="Node2D" unique_id=1692661069]
+script = ExtResource("1_0xtii")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1346586569]
+sprite_frames = SubResource("SpriteFrames_tbybc")
+animation = &"mushroom-hit"
+frame = 4
+frame_progress = 1.0

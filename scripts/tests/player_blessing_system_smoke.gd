@@ -2,6 +2,7 @@ extends SceneTree
 
 const PlayerBlessingSystem := preload("res://scripts/player/player_blessing_system.gd")
 const PlayerBlessingSkillState := preload("res://scripts/player/player_blessing_skill_state.gd")
+const DeveloperOptionProvider := preload("res://scripts/developer/developer_option_provider.gd")
 
 var failures: Array[String] = []
 
@@ -25,12 +26,15 @@ func _run() -> void:
 	_check_tier_two_equivalent_recipe_lock()
 	_check_basic_attack_evolution_does_not_lock_recipe()
 	_check_locked_blessing_offer_display_count()
+	_check_locked_blessing_cap_uses_available_count()
 	_check_multi_skill_blessing_binding_choice()
 	_check_skipped_binding_locks_one_material()
+	_check_unlock_events_include_consumed_material_notice_payload()
 	_check_skill_unlock_uses_skill_role_not_active_role()
 	_check_ultimate_skills_are_always_available_and_evolve()
 	_check_shared_entry_skills_unlock_and_do_not_lock_materials()
 	_check_shared_entry_skills_visible_in_role_graph()
+	_check_developer_blessing_options_count_role_shared_blessings()
 	if failures.is_empty():
 		print("PLAYER_BLESSING_SYSTEM_SMOKE_OK")
 		quit(0)
@@ -235,8 +239,8 @@ func _check_blessing_skill_unlock_and_binding() -> void:
 	if basic_scales.is_empty():
 		failures.append("basic attack should read trick because it has the quantity tag")
 	var blade_scales := PlayerBlessingSkillState.get_skill_effect_scales(owner, PlayerBlessingSkillState.SKILL_BLADE_STORM, "quantity_skill_count")
-	if not blade_scales.is_empty():
-		failures.append("blade storm should not use trick II that was locked into its tier III evolution recipe, got %s" % str(blade_scales))
+	if blade_scales.size() != 3:
+		failures.append("blade storm should use trick II locked into its own tier III evolution recipe, got %s" % str(blade_scales))
 
 
 func _check_new_blessing_skill_unlocks() -> void:
@@ -332,6 +336,28 @@ func _check_locked_blessing_offer_display_count() -> void:
 	if not str(option.get("title", "")).contains("0/6"):
 		failures.append("locked recipe blessing should display available count 0/6, got %s" % str(option.get("title", "")))
 
+func _check_locked_blessing_cap_uses_available_count() -> void:
+	var owner := _OwnerStub.new()
+	owner.level = 12
+	for _index in range(6):
+		PlayerBlessingSystem.apply_option(owner, "blessing:formation_break:1")
+	PlayerBlessingSystem.apply_option(owner, "blessing:blazing_sun:1")
+	PlayerBlessingSkillState.refresh_unlocks(owner)
+	var option: Dictionary = PlayerBlessingSystem._make_option(owner, "formation_break", 1)
+	if not str(option.get("title", "")).contains("5/6"):
+		failures.append("locked recipe material should free one blessing cap slot, got %s" % str(option.get("title", "")))
+	var offer: Dictionary = PlayerBlessingSystem.build_tier_offer_for_owner(owner, 1)
+	var found := false
+	for offered_option in offer.get("options", []):
+		if offered_option is Dictionary and str((offered_option as Dictionary).get("blessing_id", "")) == "formation_break":
+			found = true
+	if not found:
+		failures.append("locked recipe material should remain offerable until available count reaches x6")
+	PlayerBlessingSystem.apply_option(owner, "blessing:formation_break:1")
+	option = PlayerBlessingSystem._make_option(owner, "formation_break", 1)
+	if not str(option.get("title", "")).contains("6/6"):
+		failures.append("available blessing cap should refill to 6/6 after one more pick, got %s" % str(option.get("title", "")))
+
 func _check_multi_skill_blessing_binding_choice() -> void:
 	var owner := _OwnerStub.new()
 	owner.active_role_index = 2
@@ -373,6 +399,35 @@ func _check_skipped_binding_locks_one_material() -> void:
 	var option: Dictionary = PlayerBlessingSystem._make_option(owner, "tide_rain", 1)
 	if not str(option.get("title", "")).contains("0/6"):
 		failures.append("skipped binding should display available count 0/6, got %s" % str(option.get("title", "")))
+
+
+func _check_unlock_events_include_consumed_material_notice_payload() -> void:
+	var owner := _OwnerStub.new()
+	owner.active_role_index = 2
+	owner.role_blessing_levels["mage"]["divine_grace"] = {1: 1}
+	owner.skill_blessing_levels["tide_rain"] = {1: 1}
+	PlayerBlessingSystem.sync_shared_role_blessings(owner)
+	var events: Array[Dictionary] = PlayerBlessingSkillState.refresh_unlocks(owner)
+	var found_meta_field_unlock := false
+	for event in events:
+		if str(event.get("skill_id", "")) != PlayerBlessingSkillState.SKILL_META_FIELD:
+			continue
+		found_meta_field_unlock = true
+		if str(event.get("action", "")) != "unlock":
+			failures.append("unlock notice event should mark action=unlock, got %s" % str(event))
+		if not bool(event.get("consumes_blessing_material", false)):
+			failures.append("bindable skill unlock event should mark consumed blessing materials")
+		var material_lines: Array = []
+		var material_variant: Variant = event.get("material_lines", [])
+		if material_variant is Array:
+			material_lines = material_variant
+		if material_lines.is_empty():
+			failures.append("unlock notice event should include consumed material lines")
+		var material_text := "\n".join(material_lines)
+		if not material_text.contains("神赐") or not material_text.contains("潮雨"):
+			failures.append("unlock notice material lines should name consumed blessings, got %s" % material_text)
+	if not found_meta_field_unlock:
+		failures.append("meta field unlock should produce an event for UI notice payload")
 
 
 func _check_skill_unlock_uses_skill_role_not_active_role() -> void:
@@ -501,6 +556,27 @@ func _check_shared_entry_skills_visible_in_role_graph() -> void:
 		failures.append("shared entry rescue should be visible in role-filtered skill graph")
 	if not text.contains(PlayerBlessingSkillState.get_skill_title(PlayerBlessingSkillState.SKILL_HERO_ENTRY)):
 		failures.append("shared hero entry should be visible in role-filtered skill graph")
+
+
+func _check_developer_blessing_options_count_role_shared_blessings() -> void:
+	var owner := _OwnerStub.new()
+	PlayerBlessingSystem.apply_blessing(owner, "divine_grace", 1, false)
+	var role_option: Dictionary = _find_developer_blessing_option(owner, "divine_grace:1")
+	if int(role_option.get("tier", 0)) != 1:
+		failures.append("developer blessing option should include role-bound blessing")
+	if not str(role_option.get("title", "")).contains("1/6"):
+		failures.append("developer role-bound blessing option should display shared count 1/6, got %s" % str(role_option.get("title", "")))
+	PlayerBlessingSystem.apply_blessing(owner, "tide_rain", 1, false)
+	var skill_option: Dictionary = _find_developer_blessing_option(owner, "tide_rain:1")
+	if not str(skill_option.get("title", "")).contains("1/6"):
+		failures.append("developer skill-bound blessing option should display count 1/6, got %s" % str(skill_option.get("title", "")))
+
+
+func _find_developer_blessing_option(owner, option_id: String) -> Dictionary:
+	for option in DeveloperOptionProvider.get_blessing_options(owner):
+		if option is Dictionary and str((option as Dictionary).get("id", "")) == option_id:
+			return option
+	return {}
 
 
 class _OwnerStub:

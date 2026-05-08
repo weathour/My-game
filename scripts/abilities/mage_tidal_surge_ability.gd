@@ -53,20 +53,15 @@ func try_trigger(owner, base_direction: Vector2) -> bool:
 	for gather_direction in _get_all_directions():
 		owner._spawn_mage_gathering_scene_effect(gather_origin, gather_direction, 1.55 * _get_visual_range_multiplier(owner) * owner._get_equipment_skill_range_multiplier())
 
-	var current_scene: Node = owner.get_tree().current_scene
-	if current_scene == null:
+	if owner.get_tree() == null:
 		return true
-	var controller := Node2D.new()
-	controller.name = "MageTidalSurgeController"
-	current_scene.add_child(controller)
-	var tween := controller.create_tween()
+	var tween: Tween = owner.create_tween()
 	tween.tween_interval(gather_duration)
-	var repeat_count: int = 1 + _get_combo_extra_count(owner)
-	for repeat_index in range(repeat_count):
-		tween.tween_callback(Callable(self, "_fire_direction_group").bind(owner, gather_origin, damage_amount, _get_wave_directions(owner)))
-		if repeat_index < repeat_count - 1:
+	var wave_scales: Array[float] = _get_wave_scales(owner)
+	for repeat_index in range(wave_scales.size()):
+		tween.tween_callback(Callable(self, "_fire_direction_group").bind(owner, gather_origin, damage_amount * float(wave_scales[repeat_index]), _get_wave_directions(owner, float(wave_scales[repeat_index])), float(wave_scales[repeat_index])))
+		if repeat_index < wave_scales.size() - 1:
 			tween.tween_interval(WAVE_REPEAT_INTERVAL)
-	tween.tween_callback(controller.queue_free)
 	return true
 
 func get_cooldown_slot(owner = null) -> Dictionary:
@@ -79,13 +74,13 @@ func get_cooldown_slot(owner = null) -> Dictionary:
 		"description": "波涛涌动：术师荡阵进化。向多方向释放冲击波组，覆盖大范围敌人。"
 	}
 
-func _fire_direction_group(owner, origin: Vector2, damage_amount: float, directions: Array) -> void:
+func _fire_direction_group(owner, origin: Vector2, damage_amount: float, directions: Array, effect_scale: float) -> void:
 	if owner == null or not is_instance_valid(owner):
 		return
 	for direction in directions:
-		_spawn_wave(owner, origin, direction, damage_amount)
+		_spawn_wave(owner, origin, direction, damage_amount, effect_scale)
 
-func _spawn_wave(owner, origin: Vector2, fire_direction: Vector2, damage_amount: float) -> Node2D:
+func _spawn_wave(owner, origin: Vector2, fire_direction: Vector2, damage_amount: float, effect_scale: float = 1.0) -> Node2D:
 	var wave = owner._spawn_directional_bullet_from_scene(
 		MAGE_WAVE_EFFECT_SCENE,
 		fire_direction,
@@ -96,7 +91,8 @@ func _spawn_wave(owner, origin: Vector2, fire_direction: Vector2, damage_amount:
 	)
 	if wave == null:
 		return null
-	var range_multiplier: float = float(owner._get_story_style_range_multiplier("mage")) * float(owner._get_role_attribute_range_multiplier("mage")) * _get_visual_range_multiplier(owner)
+	var safe_scale: float = max(0.05, effect_scale)
+	var range_multiplier: float = float(owner._get_story_style_range_multiplier("mage")) * float(owner._get_role_attribute_range_multiplier("mage")) * _get_visual_range_multiplier(owner) * safe_scale
 	wave.speed = WAVE_SPEED
 	wave.lifetime = WAVE_LIFETIME * _get_lifetime_multiplier(owner)
 	wave.hit_radius = WAVE_HIT_RADIUS * range_multiplier * WAVE_WIDTH_MULTIPLIER
@@ -130,9 +126,9 @@ func _get_all_directions() -> Array[Vector2]:
 	directions.append_array(_get_diagonal_directions())
 	return directions
 
-func _get_wave_directions(owner) -> Array[Vector2]:
+func _get_wave_directions(owner, effect_scale: float = 1.0) -> Array[Vector2]:
 	var quantity_count := _get_quantity_extra_count(owner)
-	if quantity_count <= 0:
+	if quantity_count <= 0 or effect_scale < 0.99:
 		var direction: Vector2 = owner.facing_direction if owner.facing_direction.length_squared() > 0.001 else Vector2.RIGHT
 		return [direction.normalized()]
 	var directions: Array[Vector2] = []
@@ -162,10 +158,13 @@ func _get_tier(owner) -> int:
 		return int(owner._get_blessing_skill_tier(SURGE_SKILL_ID))
 	return 1
 
-func _get_combo_extra_count(owner) -> int:
+func _get_wave_scales(owner) -> Array[float]:
+	var result: Array[float] = [1.0]
 	if owner == null or not owner.has_method("_get_blessing_skill_combo_scales"):
-		return 0
-	return (owner._get_blessing_skill_combo_scales(SURGE_SKILL_ID) as Array).size()
+		return result
+	for scale in owner._get_blessing_skill_combo_scales(SURGE_SKILL_ID) as Array:
+		result.append(max(0.05, float(scale)))
+	return result
 
 func _get_quantity_extra_count(owner) -> int:
 	if owner == null or not owner.has_method("_get_blessing_skill_quantity_count"):

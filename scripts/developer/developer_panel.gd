@@ -8,12 +8,14 @@ signal level_up_requested
 signal boss_spawn_requested(archetype_id: String)
 signal small_boss_spawn_requested(archetype_id: String)
 signal skill_unlock_requested(skill_id: String, tier: int)
+signal blessing_grant_requested(blessing_id: String, tier: int)
 
 var level_button: Button
 var invincibility_button: Button
 var no_cooldown_button: Button
 var boss_list: VBoxContainer
 var skill_list: VBoxContainer
+var blessing_list: VBoxContainer
 var performance_label: Label
 
 func _ready() -> void:
@@ -72,6 +74,7 @@ func _ready() -> void:
 	scroll.add_child(menu_content)
 
 	boss_list = _add_menu_section(menu_content, "Boss +1")
+	blessing_list = _add_menu_section(menu_content, "添加祝福")
 	skill_list = _add_menu_section(menu_content, "添加技能")
 
 	var small_boss_title := Label.new()
@@ -112,6 +115,9 @@ func set_boss_options(options: Array) -> void:
 
 func set_skill_options(options: Array) -> void:
 	_populate_option_list(skill_list, options, "暂无技能选项", Callable(self, "_on_skill_button_pressed"))
+
+func set_blessing_options(options: Array) -> void:
+	_populate_option_list(blessing_list, options, "暂无祝福选项", Callable(self, "_on_blessing_button_pressed"))
 
 func update_performance_metrics(metrics: Dictionary) -> void:
 	if performance_label != null:
@@ -209,3 +215,12 @@ func _on_skill_button_pressed(option_id: String) -> void:
 	var tier: int = max(1, int(parts[1]))
 	if skill_id != "":
 		skill_unlock_requested.emit(skill_id, tier)
+
+func _on_blessing_button_pressed(option_id: String) -> void:
+	var parts: PackedStringArray = option_id.split(":")
+	if parts.size() < 2:
+		return
+	var blessing_id: String = str(parts[0])
+	var tier: int = max(1, int(parts[1]))
+	if blessing_id != "":
+		blessing_grant_requested.emit(blessing_id, tier)

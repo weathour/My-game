@@ -165,12 +165,8 @@ static func apply_post_ultimate_bonuses(owner, role_id: String, total_duration: 
 		owner._update_fire_timer()
 	var reflux_level: int = 0
 	if reflux_level > 0:
-		var current_scene: Node = owner.get_tree().current_scene
-		if current_scene != null:
-			var flow_controller := Node2D.new()
-			flow_controller.name = "UltimateRefluxController"
-			current_scene.add_child(flow_controller)
-			var flow_tween := flow_controller.create_tween()
+		if owner.get_tree() != null:
+			var flow_tween: Tween = owner.create_tween()
 			flow_tween.tween_interval(total_duration)
 			flow_tween.tween_callback(func() -> void:
 				owner._add_energy([18.0, 24.0, 30.0][reflux_level - 1])
@@ -182,7 +178,6 @@ static func apply_post_ultimate_bonuses(owner, role_id: String, total_duration: 
 				owner._spawn_ring_effect(owner.global_position, 68.0, Color(0.72, 0.52, 1.0, 0.72), 6.0, 0.18)
 				owner._spawn_burst_effect(owner.global_position, 54.0, Color(0.6, 0.42, 1.0, 0.18), 0.16)
 			)
-			flow_tween.tween_callback(flow_controller.queue_free)
 
 	var reprise_level: int = 0
 	if owner._has_elite_relic("elite_mirror_finisher"):
@@ -190,16 +185,11 @@ static func apply_post_ultimate_bonuses(owner, role_id: String, total_duration: 
 	if reprise_level <= 0:
 		return
 
-	var current_scene: Node = owner.get_tree().current_scene
-	if current_scene == null:
+	if owner.get_tree() == null:
 		return
-	var controller := Node2D.new()
-	controller.name = "UltimateRepriseController"
-	current_scene.add_child(controller)
-	var tween := controller.create_tween()
+	var tween: Tween = owner.create_tween()
 	tween.tween_interval(total_duration + 0.12)
 	tween.tween_callback(Callable(owner, "_trigger_ultimate_reprise").bind(role_id, reprise_level))
-	tween.tween_callback(controller.queue_free)
 
 
 static func trigger_ultimate_reprise(owner, role_id: String, reprise_level: int) -> void:
@@ -230,21 +220,15 @@ static func trigger_ultimate_reprise(owner, role_id: String, reprise_level: int)
 
 
 static func spawn_ultimate_afterglow_effect(owner, role_id: String, duration: float) -> void:
-	var current_scene: Node = owner.get_tree().current_scene
-	if current_scene == null:
+	if owner.get_tree() == null:
 		return
 
-	var controller := Node2D.new()
-	controller.name = "UltimateAfterglowController"
-	current_scene.add_child(controller)
-
 	var pulse_count := 4
-	var tween := controller.create_tween()
+	var tween: Tween = owner.create_tween()
 	for pulse_index in range(pulse_count):
 		if pulse_index > 0:
 			tween.tween_interval(max(0.08, duration / float(pulse_count)))
 		tween.tween_callback(Callable(owner, "_trigger_ultimate_afterglow_pulse").bind(role_id, pulse_index))
-	tween.tween_callback(controller.queue_free)
 
 
 static func trigger_ultimate_afterglow_pulse(owner, role_id: String, pulse_index: int) -> void:
@@ -263,16 +247,13 @@ static func trigger_ultimate_afterglow_pulse(owner, role_id: String, pulse_index
 			owner._spawn_frost_sigils_effect(center, radius * 0.56, Color(0.86, 0.98, 1.0, 0.68), 0.22)
 
 
-static func schedule_repeating_sequence(owner, interval: float, repeat_count: int, callback: Callable) -> void:
-	var current_scene: Node = owner.get_tree().current_scene
-	if current_scene == null or repeat_count <= 0:
+static func schedule_repeating_sequence(owner, interval: float, repeat_count: int, callback: Callable, initial_delay: float = 0.0) -> void:
+	if owner == null or repeat_count <= 0:
 		return
 
-	var controller := Node2D.new()
-	controller.name = "UltimateSequenceController"
-	current_scene.add_child(controller)
-
-	var tween := controller.create_tween()
+	var tween: Tween = owner.create_tween()
+	if initial_delay > 0.0:
+		tween.tween_interval(initial_delay)
 	for index in range(repeat_count):
 		if index > 0:
 			tween.tween_interval(interval)
@@ -280,4 +261,3 @@ static func schedule_repeating_sequence(owner, interval: float, repeat_count: in
 		tween.tween_callback(func() -> void:
 			callback.call(sequence_index)
 		)
-	tween.tween_callback(controller.queue_free)

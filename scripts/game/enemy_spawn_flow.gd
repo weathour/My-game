@@ -12,6 +12,7 @@ const SPAWN_POSITION_RETRY_COUNT := 18
 const SPAWN_WARNING_RADIUS := 26.0
 const DISTANT_ENEMY_REPOSITION_DISTANCE := 980.0
 const DISTANT_ENEMY_REPOSITION_BATCH := 12
+const DISTANT_ENEMY_REPOSITION_SCAN_BATCH := 48
 
 static func setup_spawn_timer(main: Node) -> void:
 	main.spawn_timer = Timer.new()
@@ -306,9 +307,17 @@ static func reposition_distant_normal_enemies(main: Node) -> void:
 	var player_position: Vector2 = main.player.global_position
 	var max_distance_squared := DISTANT_ENEMY_REPOSITION_DISTANCE * DISTANT_ENEMY_REPOSITION_DISTANCE
 	var moved_count := 0
-	for enemy in main.get_tree().get_nodes_in_group("enemies"):
+	var enemies: Array = main.get_runtime_enemies() if main.has_method("get_runtime_enemies") else main.get_tree().get_nodes_in_group("enemies")
+	var enemy_count := enemies.size()
+	if enemy_count <= 0:
+		main.distant_enemy_maintenance_cursor = 0
+		return
+	var cursor: int = clamp(int(main.distant_enemy_maintenance_cursor), 0, max(0, enemy_count - 1))
+	var scan_count: int = min(enemy_count, DISTANT_ENEMY_REPOSITION_SCAN_BATCH)
+	for offset in range(scan_count):
 		if moved_count >= DISTANT_ENEMY_REPOSITION_BATCH:
 			break
+		var enemy = enemies[(cursor + offset) % enemy_count]
 		if enemy == null or not is_instance_valid(enemy) or enemy is not Node2D:
 			continue
 		if str(enemy.get("enemy_kind")) != "normal":
@@ -321,6 +330,7 @@ static func reposition_distant_normal_enemies(main: Node) -> void:
 		var target_position := get_spawn_position(main, direction.angle(), main.spawn_distance + main.rng.randf_range(-24.0, 42.0))
 		(enemy as Node2D).global_position = target_position
 		moved_count += 1
+	main.distant_enemy_maintenance_cursor = (cursor + scan_count) % enemy_count
 
 static func _get_runtime_enemy_limit(main: Node) -> int:
 	if main != null and main.has_method("_get_runtime_group_limit"):

@@ -49,6 +49,8 @@ static func ready(owner) -> void:
 	owner.camera_node = owner.get_node_or_null("Camera2D") as Camera2D
 	if owner.camera_node != null:
 		owner.camera_base_offset = owner.camera_node.offset
+		owner.camera_node.position_smoothing_enabled = false
+		owner.camera_node.process_callback = Camera2D.CAMERA2D_PROCESS_PHYSICS
 
 	owner._setup_hurt_core_visual()
 	owner._setup_player_health_bar()

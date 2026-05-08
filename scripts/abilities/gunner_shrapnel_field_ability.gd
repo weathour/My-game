@@ -41,9 +41,12 @@ const SHRAPNEL_MAX_VISIBLE_RADIUS := 127.0
 const SHRAPNEL_VISUAL_MAX_SCALE := 0.62
 const SHRAPNEL_ATLAS_REGION := Rect2(320.0, 320.0, 320.0, 240.0)
 const MAX_CATCH_UP_TICKS := 5
+const SHRAPNEL_VISUAL_POOL_LIMIT := 32
 
 var cooldown_remaining: float = 0.0
 var active_fields: Array[Dictionary] = []
+var cached_shrapnel_frames: SpriteFrames
+var shrapnel_visual_pool: Array[Node2D] = []
 
 
 func update(owner, delta: float) -> void:
@@ -77,10 +80,8 @@ func try_trigger(owner) -> bool:
 		return false
 	cooldown_remaining = _get_cooldown(owner)
 	active_fields.clear()
-	var centers: Array = owner._get_random_enemy_cluster_centers(1)
 	var extra_field_count: int = _get_trick_extra_field_count(owner)
-	if extra_field_count > 0:
-		centers.append_array(owner._get_random_enemy_cluster_centers(extra_field_count))
+	var centers: Array = owner._get_random_enemy_cluster_centers(1 + extra_field_count)
 	for center_value in centers:
 		var center: Vector2 = center_value if center_value is Vector2 else owner.global_position
 		_create_field(owner, center)
@@ -116,6 +117,7 @@ func apply_save_data(data: Dictionary) -> void:
 
 func _update_fields(owner, delta: float) -> void:
 	var next_fields: Array[Dictionary] = []
+	var damage_shapes: Array[Dictionary] = []
 	for field_data in active_fields:
 		var remaining: float = max(0.0, float(field_data.get("remaining", 0.0)) - delta)
 		field_data["remaining"] = remaining
@@ -126,7 +128,7 @@ func _update_fields(owner, delta: float) -> void:
 		var catch_up_ticks: int = 0
 		while float(field_data.get("tick_remaining", 0.0)) <= 0.0 and catch_up_ticks < MAX_CATCH_UP_TICKS:
 			field_data["tick_remaining"] = float(field_data.get("tick_remaining", 0.0)) + _get_tick_interval(owner)
-			_damage_field(owner, field_data)
+			_add_damage_field_shape(owner, field_data, damage_shapes)
 			catch_up_ticks += 1
 		field_data["visual_remaining"] = float(field_data.get("visual_remaining", 0.0)) - delta
 		while float(field_data.get("visual_remaining", 0.0)) <= 0.0:
@@ -134,13 +136,18 @@ func _update_fields(owner, delta: float) -> void:
 			_spawn_shrapnel_visual_if_room(field_data)
 		next_fields.append(field_data)
 	active_fields = next_fields
+	var hits: int = _apply_damage_shapes(owner, damage_shapes)
+	if hits > 0 and not _uses_batched_damage(owner):
+		owner._register_attack_result("gunner", hits, false)
 
 
 func _create_field(owner, center: Vector2) -> void:
 	var current_scene: Node = owner.get_tree().current_scene
 	if current_scene == null:
 		return
-	var root: Node2D = Node2D.new()
+	var radius: float = _get_radius(owner)
+	var root: Node2D = null
+	root = Node2D.new()
 	root.name = "GunnerShrapnelField"
 	root.global_position = center
 	root.z_index = 10
@@ -154,14 +161,13 @@ func _create_field(owner, center: Vector2) -> void:
 	circle.offset = FIELD_CIRCLE_VISIBLE_CENTER_OFFSET
 	circle.modulate = Color(1.0, 1.0, 1.0, 0.602)
 	var texture_size: Vector2 = FIELD_TEXTURE.get_size() if FIELD_TEXTURE != null else Vector2(256.0, 256.0)
-	var radius: float = _get_radius(owner)
 	circle.scale = Vector2.ONE * (radius * 2.0 / max(1.0, max(texture_size.x, texture_size.y)) * FIELD_CIRCLE_VISUAL_SCALE)
 	root.add_child(circle)
 
 	var field_data: Dictionary = {
 		"root": root,
 		"center": center,
-		"remaining": DURATION,
+		"remaining": _get_duration(owner),
 		"tick_remaining": 0.0,
 		"visual_remaining": 0.0,
 		"visuals": [],
@@ -170,16 +176,20 @@ func _create_field(owner, center: Vector2) -> void:
 	active_fields.append(field_data)
 
 
-func _damage_field(owner, field_data: Dictionary) -> void:
+func _add_damage_field_shape(owner, field_data: Dictionary, damage_shapes: Array[Dictionary]) -> void:
 	var center: Vector2 = field_data.get("center", owner.global_position)
 	var radius: float = float(field_data.get("radius", _get_radius(owner)))
-	var hits: int = 0
-	if owner.has_method("_damage_enemies_in_radius_batched"):
-		hits = int(owner._damage_enemies_in_radius_batched(center, radius, _get_damage(owner), 0.0, _get_slow_multiplier(owner), 1.1, "gunner"))
-	else:
-		hits = int(owner._damage_enemies_in_radius(center, radius, _get_damage(owner), 0.0, _get_slow_multiplier(owner), 1.1, "gunner"))
-	if hits > 0:
-		owner._register_attack_result("gunner", hits, false)
+	damage_shapes.append({
+		"type": "circle",
+		"center": center,
+		"radius": radius,
+		"damage_amount": _get_damage(owner),
+		"vulnerability_bonus": 0.0,
+		"slow_multiplier": _get_slow_multiplier(owner),
+		"slow_duration": 1.1,
+		"source_role_id": "gunner",
+		"source_position": center
+	})
 
 
 func _spawn_shrapnel_visual_if_room(field_data: Dictionary) -> void:
@@ -189,7 +199,7 @@ func _spawn_shrapnel_visual_if_room(field_data: Dictionary) -> void:
 	var visuals: Array = field_data.get("visuals", [])
 	var live_visuals: Array = []
 	for visual in visuals:
-		if visual != null and is_instance_valid(visual):
+		if visual != null and is_instance_valid(visual) and bool(visual.get_meta("shrapnel_active", false)) and visual.get_parent() == root:
 			live_visuals.append(visual)
 	if live_visuals.size() >= MAX_ACTIVE_VISUALS:
 		field_data["visuals"] = live_visuals
@@ -201,23 +211,22 @@ func _spawn_shrapnel_visual_if_room(field_data: Dictionary) -> void:
 
 
 func _create_shrapnel_visual(root: Node2D, radius: float) -> Node2D:
-	var visual: Node2D = null
-	if SHRAPNEL_SCENE != null:
-		visual = SHRAPNEL_SCENE.instantiate() as Node2D
-	else:
-		visual = Node2D.new()
+	var visual: Node2D = _acquire_shrapnel_visual(root)
 	if visual == null:
 		visual = Node2D.new()
 	visual.name = "ShrapnelVisual"
 	visual.z_index = 11
-	root.add_child(visual)
+	visual.visible = true
+	visual.modulate = Color.WHITE
+	visual.set_meta("shrapnel_active", true)
+	visual.set_meta("shrapnel_released", false)
 	var sprite: AnimatedSprite2D = visual.get_node_or_null("AnimatedSprite2D") as AnimatedSprite2D
 	if sprite == null:
 		sprite = AnimatedSprite2D.new()
 		sprite.name = "AnimatedSprite2D"
 		visual.add_child(sprite)
 	if sprite.sprite_frames == null:
-		sprite.sprite_frames = _build_centered_shrapnel_frames()
+		sprite.sprite_frames = _get_centered_shrapnel_frames()
 	sprite.animation = StringName("shrapnel")
 	sprite.centered = true
 	sprite.position = Vector2.ZERO
@@ -228,10 +237,66 @@ func _create_shrapnel_visual(root: Node2D, radius: float) -> Node2D:
 	_place_visual_randomly(visual, radius)
 	sprite.frame = 0
 	sprite.frame_progress = 0.0
+	_disconnect_shrapnel_finish_callbacks(sprite)
 	sprite.play("shrapnel")
-	if not sprite.animation_finished.is_connected(visual.queue_free):
-		sprite.animation_finished.connect(visual.queue_free, CONNECT_ONE_SHOT)
+	sprite.animation_finished.connect(_release_shrapnel_visual.bind(visual), CONNECT_ONE_SHOT)
 	return visual
+
+
+func _acquire_shrapnel_visual(root: Node2D) -> Node2D:
+	while not shrapnel_visual_pool.is_empty():
+		var visual: Node2D = shrapnel_visual_pool.pop_back()
+		if visual != null and is_instance_valid(visual):
+			var parent := visual.get_parent()
+			if parent != root:
+				if parent != null:
+					parent.remove_child(visual)
+				root.add_child(visual)
+			return visual
+	var visual: Node2D = null
+	if SHRAPNEL_SCENE != null:
+		visual = SHRAPNEL_SCENE.instantiate() as Node2D
+	if visual == null:
+		visual = Node2D.new()
+	root.add_child(visual)
+	return visual
+
+
+func _release_shrapnel_visual(visual: Node2D) -> void:
+	if visual == null or not is_instance_valid(visual):
+		return
+	if bool(visual.get_meta("shrapnel_released", false)):
+		return
+	if not bool(visual.get_meta("shrapnel_active", false)) and visual.get_parent() == null:
+		return
+	visual.set_meta("shrapnel_released", true)
+	visual.set_meta("shrapnel_active", false)
+	visual.hide()
+	var sprite: AnimatedSprite2D = visual.get_node_or_null("AnimatedSprite2D") as AnimatedSprite2D
+	if sprite != null:
+		sprite.stop()
+		_disconnect_shrapnel_finish_callbacks(sprite)
+	var parent := visual.get_parent()
+	if parent != null:
+		parent.remove_child(visual)
+	if shrapnel_visual_pool.size() < SHRAPNEL_VISUAL_POOL_LIMIT:
+		shrapnel_visual_pool.append(visual)
+	else:
+		visual.queue_free()
+
+
+func _disconnect_shrapnel_finish_callbacks(sprite: AnimatedSprite2D) -> void:
+	for connection in sprite.animation_finished.get_connections():
+		var callback: Callable = connection.get("callable", Callable())
+		if callback.get_object() == self and String(callback.get_method()) == "_release_shrapnel_visual":
+			sprite.animation_finished.disconnect(callback)
+
+
+func _get_centered_shrapnel_frames() -> SpriteFrames:
+	if cached_shrapnel_frames != null:
+		return cached_shrapnel_frames
+	cached_shrapnel_frames = _build_centered_shrapnel_frames()
+	return cached_shrapnel_frames
 
 
 func _build_centered_shrapnel_frames() -> SpriteFrames:
@@ -258,6 +323,11 @@ func _place_visual_randomly(visual: Node2D, radius: float) -> void:
 
 
 func _free_field(field_data: Dictionary) -> void:
+	var visuals: Array = field_data.get("visuals", [])
+	for visual in visuals:
+		if visual != null and is_instance_valid(visual):
+			_release_shrapnel_visual(visual)
+	field_data["visuals"] = []
 	var root: Node = field_data.get("root", null)
 	if root != null and is_instance_valid(root):
 		root.queue_free()
@@ -324,3 +394,31 @@ func _get_damage(owner) -> float:
 	elif tier >= 2:
 		ratio = TIER_TWO_DAMAGE_RATIO
 	return float(owner._get_role_damage("gunner")) * ratio
+
+
+func _get_duration(owner) -> float:
+	var duration: float = DURATION
+	if owner != null and owner.has_method("_get_blessing_skill_duration_multiplier"):
+		duration *= float(owner._get_blessing_skill_duration_multiplier(SKILL_ID))
+	return duration
+
+func _apply_damage_shapes(owner, shapes: Array[Dictionary]) -> int:
+	if shapes.is_empty():
+		return 0
+	if owner != null and owner.has_method("_damage_enemies_in_shapes_batched"):
+		return int(owner._damage_enemies_in_shapes_batched(shapes))
+	var hits := 0
+	for shape in shapes:
+		hits += int(owner._damage_enemies_in_radius(
+			shape.get("center", Vector2.ZERO),
+			float(shape.get("radius", 1.0)),
+			float(shape.get("damage_amount", 0.0)),
+			float(shape.get("vulnerability_bonus", 0.0)),
+			float(shape.get("slow_multiplier", 1.0)),
+			float(shape.get("slow_duration", 0.0)),
+			str(shape.get("source_role_id", ""))
+		))
+	return hits
+
+func _uses_batched_damage(owner) -> bool:
+	return owner != null and owner.has_method("_damage_enemies_in_shapes_batched")

@@ -28,6 +28,7 @@ static func connect_player_signals(main: Node) -> void:
 	_connect_if_present(main.player, "health_changed", Callable(main, "_on_player_health_changed"))
 	_connect_if_present(main.player, "mana_changed", Callable(main, "_on_player_mana_changed"))
 	_connect_if_present(main.player, "died", Callable(main, "_on_player_died"))
+	_connect_if_present(main.player, "blessing_skill_event_announced", Callable(main, "_on_player_blessing_skill_event_announced"))
 
 static func _setup_hud(main: Node) -> void:
 	if main.hud_scene == null:
@@ -38,6 +39,7 @@ static func _setup_hud(main: Node) -> void:
 	_connect_if_present(main.hud, "developer_boss_spawn_requested", Callable(main, "_on_developer_boss_spawn_requested"))
 	_connect_if_present(main.hud, "developer_small_boss_spawn_requested", Callable(main, "_on_developer_small_boss_spawn_requested"))
 	_connect_if_present(main.hud, "developer_skill_unlock_requested", Callable(main, "_on_developer_skill_unlock_requested"))
+	_connect_if_present(main.hud, "developer_blessing_grant_requested", Callable(main, "_on_developer_blessing_grant_requested"))
 
 static func _setup_character_panel(main: Node) -> void:
 	main.character_panel = CHARACTER_PANEL.new()

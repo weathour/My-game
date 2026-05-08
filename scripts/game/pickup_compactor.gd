@@ -43,7 +43,7 @@ static func merge_heal_into_existing(root: Node, position: Vector2, heal_amount:
 	return true
 
 static func _compact_group(root: Node, group_name: String, hard_limit: int, target_count: int, merge_method: String) -> int:
-	var nodes: Array = root.get_tree().get_nodes_in_group(group_name)
+	var nodes: Array = _get_pickup_nodes(root, group_name)
 	var count := nodes.size()
 	if count <= hard_limit:
 		return 0
@@ -97,6 +97,8 @@ static func _merge_heart_pickup(target: Node, source: Node) -> void:
 static func _get_group_count(root: Node, group_name: String) -> int:
 	if root == null or root.get_tree() == null:
 		return 0
+	if root.has_method("get_runtime_pickups"):
+		return (root.get_runtime_pickups(group_name) as Array).size()
 	return root.get_tree().get_node_count_in_group(group_name)
 
 static func _find_nearest_pickup(root: Node, group_name: String, position: Vector2) -> Node:
@@ -105,7 +107,7 @@ static func _find_nearest_pickup(root: Node, group_name: String, position: Vecto
 	var best_node: Node = null
 	var best_distance_squared := INF
 	var scanned_count := 0
-	for node in root.get_tree().get_nodes_in_group(group_name):
+	for node in _get_pickup_nodes(root, group_name):
 		if not is_instance_valid(node):
 			continue
 		if node is not Node2D:
@@ -118,3 +120,10 @@ static func _find_nearest_pickup(root: Node, group_name: String, position: Vecto
 		if scanned_count >= MAX_PICKUP_MERGE_SCAN_COUNT:
 			break
 	return best_node
+
+static func _get_pickup_nodes(root: Node, group_name: String) -> Array:
+	if root != null and root.has_method("get_runtime_pickups"):
+		return root.get_runtime_pickups(group_name)
+	if root == null or root.get_tree() == null:
+		return []
+	return root.get_tree().get_nodes_in_group(group_name)

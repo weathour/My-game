@@ -1,7 +1,6 @@
 extends RefCounted
 
 const SWORD_TORNADO_EFFECT_SCENE := preload("res://effects/sword/tornado/tornado.tscn")
-const PLAYER_DAMAGE_BATCHER := preload("res://scripts/player/player_damage_batcher.gd")
 
 const COOLDOWN := 18.0
 const BASE_DURATION := 1.0
@@ -20,12 +19,14 @@ const BLADE_STORM_SKILL_ID := "blade_storm"
 const BLADE_STORM_WIDTH_LEVEL := "trick"
 const EXTRA_STORM_OFFSET := 150.0
 const RING_VISUAL_EVERY_TICKS := 2
+const TORNADO_EFFECT_POOL_LIMIT := 6
 
 var cooldown_remaining: float = 0.0
 var active_remaining: float = 0.0
 var tick_remaining: float = 0.0
 var ring_visual_tick_index: int = 0
 var effects: Array[Node2D] = []
+var tornado_effect_pool: Array[Node2D] = []
 
 func update(owner, delta: float) -> void:
 	if cooldown_remaining > 0.0:
@@ -83,7 +84,7 @@ func stop() -> void:
 	tick_remaining = 0.0
 	for effect in effects:
 		if effect != null and is_instance_valid(effect):
-			effect.queue_free()
+			_release_tornado_effect(effect)
 	effects.clear()
 
 func get_cooldown_slot(owner = null) -> Dictionary:
@@ -115,30 +116,28 @@ func restore_effect_if_active(owner) -> void:
 func _trigger_tick(owner) -> void:
 	var radius: float = _get_radius(owner)
 	var damage_amount: float = _get_damage(owner)
-	var batcher := PLAYER_DAMAGE_BATCHER.new(owner)
 	var should_spawn_ring_visual := ring_visual_tick_index % RING_VISUAL_EVERY_TICKS == 0
 	ring_visual_tick_index += 1
-	for center in _get_storm_centers(owner):
-		if owner.has_method("_collect_enemies_in_radius_for_damage_batch"):
-			for enemy in owner._collect_enemies_in_radius_for_damage_batch(center, radius):
-				batcher.add_enemy(enemy, damage_amount, "swordsman", 0.08, 2.0, 1.0, 0.0, center)
-		else:
+	var centers: Array[Vector2] = _get_storm_centers(owner)
+	if owner.has_method("_damage_enemies_in_multiple_radii_batched"):
+		owner._damage_enemies_in_multiple_radii_batched(centers, radius, damage_amount, 0.08, 1.0, 0.0, "swordsman")
+	else:
+		for center in centers:
 			owner._damage_enemies_in_radius(center, radius, damage_amount, 0.08, 1.0, 0.0, "swordsman")
-		if should_spawn_ring_visual:
+	if should_spawn_ring_visual:
+		for center in centers:
 			owner._spawn_ring_effect(center, radius * 0.88, Color(0.38, 0.86, 1.0, 0.14), 5.0, 0.14)
-	batcher.flush()
 
 func _ensure_effect(owner) -> void:
 	if owner == null or not is_instance_valid(owner) or SWORD_TORNADO_EFFECT_SCENE == null:
 		return
 	var desired_count: int = 1 + _get_extra_storm_count(owner)
 	while effects.size() < desired_count:
-		var instance := SWORD_TORNADO_EFFECT_SCENE.instantiate() as Node2D
+		var instance := _acquire_tornado_effect(owner)
 		if instance == null:
 			return
 		instance.name = "SwordsmanBladeStormEffect"
 		instance.z_index = 18
-		owner.add_child(instance)
 		effects.append(instance)
 		var sprite := instance.get_node_or_null("AnimatedSprite2D") as AnimatedSprite2D
 		if sprite != null:
@@ -151,6 +150,43 @@ func _ensure_effect(owner) -> void:
 	for effect in effects:
 		if effect != null and is_instance_valid(effect):
 			effect.visible = true
+
+func _acquire_tornado_effect(owner) -> Node2D:
+	while not tornado_effect_pool.is_empty():
+		var effect: Node2D = tornado_effect_pool.pop_back()
+		if effect != null and is_instance_valid(effect):
+			var parent := effect.get_parent()
+			if parent != owner:
+				if parent != null:
+					parent.remove_child(effect)
+				owner.add_child(effect)
+			effect.show()
+			effect.position = Vector2.ZERO
+			effect.rotation = 0.0
+			effect.scale = Vector2.ONE
+			effect.modulate = Color.WHITE
+			effect.set_meta("blade_storm_released", false)
+			return effect
+	var instance := SWORD_TORNADO_EFFECT_SCENE.instantiate() as Node2D
+	if instance != null:
+		owner.add_child(instance)
+		instance.set_meta("blade_storm_released", false)
+	return instance
+
+func _release_tornado_effect(effect: Node2D) -> void:
+	if effect == null or not is_instance_valid(effect):
+		return
+	if bool(effect.get_meta("blade_storm_released", false)):
+		return
+	effect.set_meta("blade_storm_released", true)
+	effect.hide()
+	var sprite := effect.get_node_or_null("AnimatedSprite2D") as AnimatedSprite2D
+	if sprite != null:
+		sprite.stop()
+	if tornado_effect_pool.size() < TORNADO_EFFECT_POOL_LIMIT:
+		tornado_effect_pool.append(effect)
+	else:
+		effect.queue_free()
 
 func _update_effect(owner, delta: float) -> void:
 	_ensure_effect(owner)
@@ -199,7 +235,7 @@ func _get_radius(owner) -> float:
 	return BASE_RADIUS * _get_size_multiplier(owner) * owner._get_equipment_skill_range_multiplier()
 
 func _get_extra_storm_count(owner) -> int:
-	return _get_trick_bonus(owner) if owner != null else 0
+	return min(4, _get_trick_bonus(owner)) if owner != null else 0
 
 func _get_trick_bonus(owner) -> int:
 	if owner != null and owner.has_method("_get_blessing_skill_quantity_count"):

@@ -11,7 +11,13 @@ func _init(source_owner: Node) -> void:
 	owner = source_owner
 
 
-func add_enemy(enemy: Node, damage_amount: float, source_role_id: String, vulnerability_bonus: float = 0.0, vulnerability_duration: float = 2.0, slow_multiplier: float = 1.0, slow_duration: float = 0.0, source_position: Variant = null) -> void:
+func reset(source_owner: Node) -> void:
+	owner = source_owner
+	jobs_by_enemy_id.clear()
+	hit_count = 0
+
+
+func add_enemy(enemy: Node, damage_amount: float, source_role_id: String, vulnerability_bonus: float = 0.0, vulnerability_duration: float = 2.0, slow_multiplier: float = 1.0, slow_duration: float = 0.0, source_position: Variant = null, kill_energy_bonus: float = 0.0) -> void:
 	if enemy == null or not is_instance_valid(enemy):
 		return
 	var enemy_id := enemy.get_instance_id()
@@ -28,6 +34,7 @@ func add_enemy(enemy: Node, damage_amount: float, source_role_id: String, vulner
 			"slow_multiplier": slow_multiplier,
 			"slow_duration": slow_duration,
 			"source_position": source_position,
+			"kill_energy_bonus": kill_energy_bonus,
 			"prefer_silent_feedback": true
 		}
 		return
@@ -38,6 +45,7 @@ func add_enemy(enemy: Node, damage_amount: float, source_role_id: String, vulner
 	existing["vulnerability_duration"] = max(float(existing.get("vulnerability_duration", 0.0)), vulnerability_duration)
 	existing["slow_multiplier"] = min(float(existing.get("slow_multiplier", 1.0)), slow_multiplier)
 	existing["slow_duration"] = max(float(existing.get("slow_duration", 0.0)), slow_duration)
+	existing["kill_energy_bonus"] = max(float(existing.get("kill_energy_bonus", 0.0)), kill_energy_bonus)
 	jobs_by_enemy_id[enemy_id] = existing
 
 

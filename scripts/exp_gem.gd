@@ -46,11 +46,15 @@ var age_seconds: float = 0.0
 
 func _ready() -> void:
 	add_to_group("exp_gems")
+	_register_runtime_pickup()
 	polygon_node = get_node_or_null("Polygon2D") as Polygon2D
 	if value <= 0:
 		var default_value := _apply_value_multiplier(int(TIER_VALUES.get(tier, 4)), DEFAULT_EXPERIENCE_MULTIPLIER)
 		value = _apply_tier_experience_multiplier(default_value, tier)
 	_apply_appearance()
+
+func _exit_tree() -> void:
+	_unregister_runtime_pickup()
 
 func _physics_process(delta: float) -> void:
 	age_seconds += delta
@@ -116,6 +120,16 @@ func _apply_value_multiplier(base_value: int, multiplier: float) -> int:
 func _apply_tier_experience_multiplier(base_value: int, target_tier: int) -> int:
 	var tier_multiplier := float(TIER_EXPERIENCE_MULTIPLIERS.get(target_tier, 1.0))
 	return max(1, int(round(float(base_value) * max(0.0, tier_multiplier))))
+
+func _register_runtime_pickup() -> void:
+	var scene: Node = get_tree().current_scene if get_tree() != null else null
+	if scene != null and scene.has_method("register_runtime_pickup"):
+		scene.register_runtime_pickup("exp_gems", self)
+
+func _unregister_runtime_pickup() -> void:
+	var scene: Node = get_tree().current_scene if get_tree() != null else null
+	if scene != null and scene.has_method("unregister_runtime_pickup"):
+		scene.unregister_runtime_pickup("exp_gems", self)
 
 func get_save_data() -> Dictionary:
 	return {

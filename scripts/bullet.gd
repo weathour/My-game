@@ -1,5 +1,8 @@
 extends Node2D
 
+const PLAYER_DAMAGE_RESOLVER := preload("res://scripts/player/player_damage_resolver.gd")
+const PERFORMANCE_GUARD := preload("res://scripts/game/performance_guard.gd")
+const PERFORMANCE_COUNTERS := preload("res://scripts/game/performance_counters.gd")
 const WHITE_KEY_SHADER := preload("res://shaders/white_key.gdshader")
 const BULLET_TEXTURE_RELATIVE_PATH := "技能特效/子弹.jpg"
 const BULLET_TEXTURE_SIZE := Vector2(1200.0, 1600.0)
@@ -9,7 +12,13 @@ const BULLET_EFFECT_VISIBLE_BOUNDS := Rect2(505.0, 476.0, 36.0, 36.0)
 const BULLET_VISUAL_SCALE := 0.67
 const MAX_IMPACT_EFFECTS_PER_PHYSICS_FRAME := 18
 const MAX_SPLIT_BURSTS_PER_PHYSICS_FRAME := 6
+const LOW_FPS_IMPACT_EFFECTS_PER_PHYSICS_FRAME := 9
+const CRITICAL_FPS_IMPACT_EFFECTS_PER_PHYSICS_FRAME := 4
+const LOW_FPS_SPLIT_BURSTS_PER_PHYSICS_FRAME := 3
+const CRITICAL_FPS_SPLIT_BURSTS_PER_PHYSICS_FRAME := 1
 const ENEMY_GRID_CELL_SIZE := 96.0
+const IMPACT_EFFECT_POOL_LIMIT := 96
+const SPLIT_RING_POOL_LIMIT := 32
 static var shared_bullet_texture: Texture2D
 static var cached_enemy_nodes: Array = []
 static var cached_enemy_nodes_frame: int = -1
@@ -19,6 +28,20 @@ static var impact_effect_budget_frame: int = -1
 static var impact_effect_budget_used: int = 0
 static var split_burst_budget_frame: int = -1
 static var split_burst_budget_used: int = 0
+static var impact_effect_pool: Array[Polygon2D] = []
+static var split_ring_pool: Array[Node2D] = []
+static var impact_effect_polygon := PackedVector2Array([
+	Vector2(0.0, -10.0),
+	Vector2(10.0, 0.0),
+	Vector2(0.0, 10.0),
+	Vector2(-10.0, 0.0)
+])
+static var split_shard_polygon := PackedVector2Array([
+	Vector2(7.0, 0.0),
+	Vector2(-4.0, -3.0),
+	Vector2(-2.0, 0.0),
+	Vector2(-4.0, 3.0)
+])
 
 @export var speed: float = 420.0
 @export var speed_multiplier: float = 1.0
@@ -70,6 +93,8 @@ var cached_visual_color: Color = Color(-1.0, -1.0, -1.0, -1.0)
 var cached_animated_scene_size: Vector2 = Vector2(-1.0, -1.0)
 var cached_animated_visible_bounds: Rect2 = Rect2(-1.0, -1.0, -1.0, -1.0)
 var split_triggered: bool = false
+var runtime_pool_key: String = ""
+var projectile_scene_defaults: Dictionary = {}
 
 func _get_desktop_sketch_path(relative_path: String) -> String:
 	return (OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP).replace("\\", "/") + "/草图/" + relative_path)
@@ -184,19 +209,130 @@ func _update_visual_cache() -> void:
 	cached_animated_scene_size = animated_scene_size
 	cached_animated_visible_bounds = animated_visible_bounds
 
-func _ready() -> void:
+func _enter_tree() -> void:
 	add_to_group("player_projectiles")
+	var tree := get_tree()
+	if tree != null:
+		var scene: Node = tree.current_scene
+		if scene != null and scene.has_method("register_runtime_player_projectile"):
+			scene.register_runtime_player_projectile(self)
+
+func _ready() -> void:
 	_refresh_bullet_visual(true)
 	rotation = direction.angle()
 	last_hit_scan_position = global_position
 	if wave_amplitude > 0.0:
 		_initialize_wave_motion()
 
+func _exit_tree() -> void:
+	var tree := get_tree()
+	if tree != null:
+		var scene: Node = tree.current_scene
+		if scene != null and scene.has_method("unregister_runtime_player_projectile"):
+			scene.unregister_runtime_player_projectile(self)
+
+func _ensure_projectile_scene_defaults() -> void:
+	if not projectile_scene_defaults.is_empty():
+		return
+	projectile_scene_defaults = {
+		"speed": speed,
+		"speed_multiplier": speed_multiplier,
+		"damage": damage,
+		"lifetime": lifetime,
+		"hit_radius": hit_radius,
+		"hit_radius_multiplier": hit_radius_multiplier,
+		"pierce_count": pierce_count,
+		"bounce_count": bounce_count,
+		"slow_multiplier": slow_multiplier,
+		"slow_duration": slow_duration,
+		"vulnerability_bonus": vulnerability_bonus,
+		"vulnerability_duration": vulnerability_duration,
+		"visual_color": visual_color,
+		"visual_scale_multiplier": visual_scale_multiplier,
+		"enemy_hit_radius_scale": enemy_hit_radius_scale,
+		"enemy_hit_radius_min": enemy_hit_radius_min,
+		"enemy_hit_radius_max": enemy_hit_radius_max,
+		"animated_scene_size": animated_scene_size,
+		"animated_visible_bounds": animated_visible_bounds,
+		"min_hit_travel_distance": min_hit_travel_distance,
+		"hit_scan_interval": hit_scan_interval,
+		"split_count": split_count,
+		"split_radius": split_radius,
+		"split_visual_bullet_count": split_visual_bullet_count,
+		"wave_amplitude": wave_amplitude,
+		"wave_frequency": wave_frequency,
+		"wave_phase": wave_phase
+	}
+
+func _projectile_scene_default(key: String, fallback: Variant) -> Variant:
+	_ensure_projectile_scene_defaults()
+	return projectile_scene_defaults.get(key, fallback)
+
+func reset_projectile(config: Dictionary = {}) -> void:
+	_ensure_projectile_scene_defaults()
+	set_meta("player_projectile_released", false)
+	runtime_pool_key = str(config.get("pool_key", scene_file_path))
+	speed = float(config.get("speed", _projectile_scene_default("speed", 420.0)))
+	speed_multiplier = float(config.get("speed_multiplier", _projectile_scene_default("speed_multiplier", 1.0)))
+	damage = float(config.get("damage", _projectile_scene_default("damage", 10.0)))
+	lifetime = float(config.get("lifetime", _projectile_scene_default("lifetime", 3.0)))
+	hit_radius = float(config.get("hit_radius", _projectile_scene_default("hit_radius", 14.0)))
+	hit_radius_multiplier = float(config.get("hit_radius_multiplier", _projectile_scene_default("hit_radius_multiplier", 1.0)))
+	pierce_count = int(config.get("pierce_count", _projectile_scene_default("pierce_count", 0)))
+	bounce_count = int(config.get("bounce_count", _projectile_scene_default("bounce_count", 0)))
+	slow_multiplier = float(config.get("slow_multiplier", _projectile_scene_default("slow_multiplier", 1.0)))
+	slow_duration = float(config.get("slow_duration", _projectile_scene_default("slow_duration", 0.0)))
+	vulnerability_bonus = float(config.get("vulnerability_bonus", _projectile_scene_default("vulnerability_bonus", 0.0)))
+	vulnerability_duration = float(config.get("vulnerability_duration", _projectile_scene_default("vulnerability_duration", 0.0)))
+	visual_color = config.get("visual_color", _projectile_scene_default("visual_color", Color(1.0, 0.93, 0.39, 1.0)))
+	visual_scale_multiplier = float(config.get("visual_scale_multiplier", _projectile_scene_default("visual_scale_multiplier", 1.0)))
+	enemy_hit_radius_scale = float(config.get("enemy_hit_radius_scale", _projectile_scene_default("enemy_hit_radius_scale", 0.42)))
+	enemy_hit_radius_min = float(config.get("enemy_hit_radius_min", _projectile_scene_default("enemy_hit_radius_min", 10.0)))
+	enemy_hit_radius_max = float(config.get("enemy_hit_radius_max", _projectile_scene_default("enemy_hit_radius_max", 28.0)))
+	animated_scene_size = config.get("animated_scene_size", _projectile_scene_default("animated_scene_size", BULLET_EFFECT_SCENE_SIZE))
+	animated_visible_bounds = config.get("animated_visible_bounds", _projectile_scene_default("animated_visible_bounds", BULLET_EFFECT_VISIBLE_BOUNDS))
+	min_hit_travel_distance = float(config.get("min_hit_travel_distance", _projectile_scene_default("min_hit_travel_distance", 0.0)))
+	hit_scan_interval = float(config.get("hit_scan_interval", _projectile_scene_default("hit_scan_interval", 0.0)))
+	split_count = int(config.get("split_count", _projectile_scene_default("split_count", 0)))
+	split_radius = float(config.get("split_radius", _projectile_scene_default("split_radius", 58.0)))
+	split_visual_bullet_count = int(config.get("split_visual_bullet_count", _projectile_scene_default("split_visual_bullet_count", 12)))
+
+	var configured_direction: Vector2 = config.get("direction", Vector2.RIGHT)
+	direction = configured_direction.normalized()
+	if direction.length_squared() <= 0.001:
+		direction = Vector2.RIGHT
+	target = config.get("target", null) as Node2D
+	source_player = config.get("source_player", null) as Node
+	source_role_id = str(config.get("source_role_id", ""))
+	global_position = config.get("position", global_position)
+	source_origin_position = config.get("source_origin_position", global_position)
+	traveled_distance = 0.0
+	hit_enemy_ids.clear()
+	wave_amplitude = float(config.get("wave_amplitude", _projectile_scene_default("wave_amplitude", 0.0)))
+	wave_frequency = float(config.get("wave_frequency", _projectile_scene_default("wave_frequency", 0.0)))
+	wave_phase = float(config.get("wave_phase", _projectile_scene_default("wave_phase", 0.0)))
+	wave_elapsed = 0.0
+	wave_travel_distance = 0.0
+	wave_origin = global_position
+	wave_forward_direction = direction
+	wave_side_direction = direction.orthogonal().normalized()
+	hit_scan_elapsed = 0.0
+	last_hit_scan_position = global_position
+	split_triggered = false
+	visible = true
+	modulate = Color.WHITE
+	set_physics_process(true)
+	visual_cache_ready = false
+	rotation = direction.angle()
+	if wave_amplitude > 0.0:
+		_initialize_wave_motion()
+	_refresh_bullet_visual(true)
+
 func _physics_process(delta: float) -> void:
 	_refresh_bullet_visual()
 	lifetime -= delta
 	if lifetime <= 0.0:
-		queue_free()
+		_release_or_free()
 		return
 
 	var start_position := global_position
@@ -304,9 +440,18 @@ func _can_hit_enemy(enemy: Node2D) -> bool:
 func _get_cached_enemy_nodes() -> Array:
 	var current_frame := Engine.get_physics_frames()
 	if cached_enemy_nodes_frame != current_frame:
-		cached_enemy_nodes = get_tree().get_nodes_in_group("enemies")
+		cached_enemy_nodes = _get_runtime_enemies()
 		cached_enemy_nodes_frame = current_frame
 	return cached_enemy_nodes
+
+func _get_runtime_enemies() -> Array:
+	var tree := get_tree()
+	if tree == null:
+		return []
+	var scene: Node = tree.current_scene
+	if scene != null and scene.has_method("get_runtime_enemies"):
+		return scene.get_runtime_enemies()
+	return tree.get_nodes_in_group("enemies")
 
 func _get_candidate_enemies_near(center: Vector2, radius: float) -> Array:
 	var grid: Dictionary = _get_cached_enemy_grid()
@@ -345,8 +490,10 @@ func _apply_hit(enemy: Node2D) -> void:
 	hit_enemy_ids[enemy.get_instance_id()] = true
 
 	var killed: bool = false
+	var queued_damage := false
 	if source_player != null and source_player.has_method("_deal_damage_to_enemy"):
-		killed = bool(source_player._deal_damage_to_enemy(enemy, damage, source_role_id, vulnerability_bonus, vulnerability_duration, slow_multiplier, slow_duration, source_origin_position))
+		PLAYER_DAMAGE_RESOLVER.queue_damage_to_enemy(source_player, enemy, damage, source_role_id, vulnerability_bonus, vulnerability_duration, slow_multiplier, slow_duration, source_origin_position, true)
+		queued_damage = true
 	else:
 		if enemy.has_method("take_damage"):
 			killed = bool(enemy.take_damage(damage))
@@ -355,7 +502,7 @@ func _apply_hit(enemy: Node2D) -> void:
 		if vulnerability_duration > 0.0 and enemy.has_method("apply_vulnerability"):
 			enemy.apply_vulnerability(vulnerability_bonus, vulnerability_duration)
 
-	if source_player != null and source_player.has_method("_register_attack_result"):
+	if not queued_damage and source_player != null and source_player.has_method("_register_attack_result"):
 		source_player._register_attack_result(source_role_id, 1, killed)
 
 	_spawn_impact_effect(enemy.global_position, killed)
@@ -376,7 +523,27 @@ func _apply_hit(enemy: Node2D) -> void:
 		target = null
 		return
 
-	queue_free()
+	_release_or_free()
+
+func _release_or_free() -> void:
+	if bool(get_meta("player_projectile_released", false)):
+		return
+	set_meta("player_projectile_released", true)
+	var tree := get_tree()
+	var scene: Node = tree.current_scene if tree != null else null
+	hide()
+	set_physics_process(false)
+	remove_from_group("player_projectiles")
+	var animated_sprite := get_node_or_null("AnimatedSprite2D") as AnimatedSprite2D
+	if animated_sprite != null:
+		animated_sprite.stop()
+	var parent := get_parent()
+	if parent != null:
+		parent.remove_child(self)
+	if scene != null and scene.has_method("release_runtime_player_projectile"):
+		scene.release_runtime_player_projectile(self, runtime_pool_key)
+	else:
+		queue_free()
 
 func _trigger_split_bursts(center: Vector2) -> void:
 	var burst_count: int = clamp(split_count, 0, 2)
@@ -400,7 +567,7 @@ func _consume_split_burst_budget() -> bool:
 	if split_burst_budget_frame != current_frame:
 		split_burst_budget_frame = current_frame
 		split_burst_budget_used = 0
-	if split_burst_budget_used >= MAX_SPLIT_BURSTS_PER_PHYSICS_FRAME:
+	if split_burst_budget_used >= _get_split_burst_budget_per_frame():
 		return false
 	split_burst_budget_used += 1
 	return true
@@ -410,37 +577,140 @@ func _consume_impact_effect_budget() -> bool:
 	if impact_effect_budget_frame != current_frame:
 		impact_effect_budget_frame = current_frame
 		impact_effect_budget_used = 0
-	if impact_effect_budget_used >= MAX_IMPACT_EFFECTS_PER_PHYSICS_FRAME:
+	if impact_effect_budget_used >= _get_impact_effect_budget_per_frame():
 		return false
 	impact_effect_budget_used += 1
 	return true
+
+func _get_split_burst_budget_per_frame() -> int:
+	var fps := Engine.get_frames_per_second()
+	if fps > 0 and fps < PERFORMANCE_GUARD.CRITICAL_FPS_THRESHOLD:
+		return CRITICAL_FPS_SPLIT_BURSTS_PER_PHYSICS_FRAME
+	if fps > 0 and fps < PERFORMANCE_GUARD.LOW_FPS_THRESHOLD:
+		return LOW_FPS_SPLIT_BURSTS_PER_PHYSICS_FRAME
+	return MAX_SPLIT_BURSTS_PER_PHYSICS_FRAME
+
+func _get_impact_effect_budget_per_frame() -> int:
+	var fps := Engine.get_frames_per_second()
+	if fps > 0 and fps < PERFORMANCE_GUARD.CRITICAL_FPS_THRESHOLD:
+		return CRITICAL_FPS_IMPACT_EFFECTS_PER_PHYSICS_FRAME
+	if fps > 0 and fps < PERFORMANCE_GUARD.LOW_FPS_THRESHOLD:
+		return LOW_FPS_IMPACT_EFFECTS_PER_PHYSICS_FRAME
+	return MAX_IMPACT_EFFECTS_PER_PHYSICS_FRAME
+
+func _can_spawn_temporary_effect(current_scene: Node) -> bool:
+	if current_scene != null and current_scene.has_method("_can_spawn_runtime_group"):
+		var limit: int = PERFORMANCE_GUARD.get_dynamic_limit(current_scene, "temporary_effects", PERFORMANCE_GUARD.DEFAULT_TEMPORARY_EFFECT_LIMIT)
+		return bool(current_scene._can_spawn_runtime_group("temporary_effects", limit))
+	return current_scene != null
+
+func _acquire_impact_effect() -> Polygon2D:
+	while not impact_effect_pool.is_empty():
+		var impact: Polygon2D = impact_effect_pool.pop_back()
+		if impact != null and is_instance_valid(impact):
+			return impact
+	return Polygon2D.new()
+
+func _release_impact_effect(impact: Polygon2D) -> void:
+	if impact == null or not is_instance_valid(impact):
+		return
+	if bool(impact.get_meta("bullet_impact_released", false)):
+		return
+	impact.set_meta("bullet_impact_released", true)
+	impact.visible = false
+	impact.modulate = Color.WHITE
+	impact.remove_from_group("temporary_effects")
+	if impact.get_parent() != null:
+		impact.get_parent().remove_child(impact)
+	if impact_effect_pool.size() < IMPACT_EFFECT_POOL_LIMIT:
+		impact_effect_pool.append(impact)
+	else:
+		impact.queue_free()
+
+func _acquire_split_ring() -> Node2D:
+	while not split_ring_pool.is_empty():
+		var ring: Node2D = split_ring_pool.pop_back()
+		if ring != null and is_instance_valid(ring):
+			return ring
+	var ring := Node2D.new()
+	ring.set_meta("bullet_split_ring_initialized", true)
+	var outline := Line2D.new()
+	outline.name = "Outline"
+	outline.width = 3.0
+	outline.closed = true
+	ring.add_child(outline)
+	return ring
+
+func _ensure_split_ring_children(ring: Node2D, shard_count: int) -> void:
+	var existing_shards: Array[Polygon2D] = []
+	for child in ring.get_children():
+		if child is Polygon2D:
+			existing_shards.append(child as Polygon2D)
+	while existing_shards.size() < shard_count:
+		var shard := Polygon2D.new()
+		shard.polygon = split_shard_polygon
+		ring.add_child(shard)
+		existing_shards.append(shard)
+	for index in range(existing_shards.size()):
+		existing_shards[index].visible = index < shard_count
+	var outline := ring.get_node_or_null("Outline") as Line2D
+	if outline == null:
+		outline = Line2D.new()
+		outline.name = "Outline"
+		outline.width = 3.0
+		outline.closed = true
+		ring.add_child(outline)
+	outline.visible = true
+
+func _release_split_ring(ring: Node2D) -> void:
+	if ring == null or not is_instance_valid(ring):
+		return
+	if bool(ring.get_meta("bullet_split_ring_released", false)):
+		return
+	ring.set_meta("bullet_split_ring_released", true)
+	ring.visible = false
+	ring.modulate = Color.WHITE
+	ring.remove_from_group("temporary_effects")
+	if ring.get_parent() != null:
+		ring.get_parent().remove_child(ring)
+	if split_ring_pool.size() < SPLIT_RING_POOL_LIMIT:
+		split_ring_pool.append(ring)
+	else:
+		ring.queue_free()
 
 func _spawn_split_visual(center: Vector2, radius: float, burst_index: int) -> void:
 	var current_scene := get_tree().current_scene
 	if current_scene == null:
 		return
-	var ring := Node2D.new()
+	if not _can_spawn_temporary_effect(current_scene):
+		return
+	var ring := _acquire_split_ring()
+	ring.set_meta("bullet_split_ring_released", false)
 	ring.add_to_group("temporary_effects")
+	PERFORMANCE_COUNTERS.add("temporary_effect_spawns", 1)
 	ring.global_position = center
 	ring.z_index = 14
+	ring.visible = true
+	ring.modulate = Color.WHITE
 	current_scene.add_child(ring)
 
 	var bullet_count: int = max(6, split_visual_bullet_count + burst_index * 4)
+	_ensure_split_ring_children(ring, bullet_count)
+	var shard_index := 0
 	for index in range(bullet_count):
 		var angle: float = TAU * float(index) / float(bullet_count)
-		var shard := Polygon2D.new()
+		var shard := ring.get_child(shard_index) as Polygon2D
+		while shard == null:
+			shard_index += 1
+			shard = ring.get_child(shard_index) as Polygon2D
 		shard.color = Color(visual_color.r, visual_color.g, visual_color.b, 0.78)
 		shard.position = Vector2.RIGHT.rotated(angle) * radius
 		shard.rotation = angle
-		shard.polygon = PackedVector2Array([
-			Vector2(7.0, 0.0),
-			Vector2(-4.0, -3.0),
-			Vector2(-2.0, 0.0),
-			Vector2(-4.0, 3.0)
-		])
-		ring.add_child(shard)
+		shard.polygon = split_shard_polygon
+		shard.visible = true
+		shard_index += 1
 
-	var outline := Line2D.new()
+	var outline := ring.get_node_or_null("Outline") as Line2D
 	outline.width = 3.0
 	outline.default_color = Color(visual_color.r, visual_color.g, visual_color.b, 0.34)
 	outline.closed = true
@@ -448,13 +718,12 @@ func _spawn_split_visual(center: Vector2, radius: float, burst_index: int) -> vo
 	for index in range(24):
 		points.append(Vector2.RIGHT.rotated(TAU * float(index) / 24.0) * radius)
 	outline.points = points
-	ring.add_child(outline)
 
 	ring.scale = Vector2(0.28, 0.28)
 	var tween := ring.create_tween()
 	tween.parallel().tween_property(ring, "scale", Vector2.ONE, 0.12)
 	tween.parallel().tween_property(ring, "modulate:a", 0.0, 0.22)
-	tween.tween_callback(ring.queue_free)
+	tween.tween_callback(_release_split_ring.bind(ring))
 
 func _spawn_impact_effect(position: Vector2, killed: bool) -> void:
 	if not _consume_impact_effect_budget():
@@ -462,22 +731,23 @@ func _spawn_impact_effect(position: Vector2, killed: bool) -> void:
 	var current_scene := get_tree().current_scene
 	if current_scene == null:
 		return
+	if not _can_spawn_temporary_effect(current_scene):
+		return
 
-	var impact := Polygon2D.new()
+	var impact := _acquire_impact_effect()
+	impact.set_meta("bullet_impact_released", false)
 	impact.add_to_group("temporary_effects")
+	PERFORMANCE_COUNTERS.add("temporary_effect_spawns", 1)
 	impact.global_position = position
 	impact.z_index = 15
+	impact.visible = true
+	impact.modulate = Color.WHITE
 	impact.color = visual_color if not killed else Color(1.0, 0.92, 0.6, 1.0)
-	impact.polygon = PackedVector2Array([
-		Vector2(0.0, -10.0),
-		Vector2(10.0, 0.0),
-		Vector2(0.0, 10.0),
-		Vector2(-10.0, 0.0)
-	])
+	impact.polygon = impact_effect_polygon
 	current_scene.add_child(impact)
 
 	impact.scale = Vector2(0.35, 0.35)
 	var tween := impact.create_tween()
 	tween.parallel().tween_property(impact, "scale", Vector2(1.1, 1.1) if killed else Vector2(0.75, 0.75), 0.12)
 	tween.parallel().tween_property(impact, "modulate:a", 0.0, 0.14 if killed else 0.1)
-	tween.tween_callback(impact.queue_free)
+	tween.tween_callback(_release_impact_effect.bind(impact))

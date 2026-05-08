@@ -1,5 +1,7 @@
 extends RefCounted
 
+const GLOBAL_UNIT_MOVE_SPEED_SCALE := 0.7
+
 
 static func build_background_cooldowns(owner) -> Dictionary:
 	return {
@@ -68,7 +70,7 @@ static func get_current_move_speed(owner) -> float:
 	if owner.frenzy_remaining > 0.0 and owner.frenzy_stacks > 0:
 		move_speed *= 1.0 + 0.02 * owner.frenzy_stacks
 	move_speed *= owner.enemy_move_slow_multiplier
-	return move_speed
+	return move_speed * GLOBAL_UNIT_MOVE_SPEED_SCALE
 
 
 static func get_active_role_base_health(owner) -> float:

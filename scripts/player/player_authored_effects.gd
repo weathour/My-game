@@ -2,6 +2,13 @@ extends RefCounted
 
 const PERFORMANCE_COUNTERS := preload("res://scripts/game/performance_counters.gd")
 const PLAYER_GUNNER_INTERSECT_EFFECTS := preload("res://scripts/player/player_gunner_intersect_effects.gd")
+const AUTHORED_SCENE_POOL_LIMIT_PER_SCENE := 32
+const SKETCH_SPRITE_EFFECT_POOL_LIMIT := 32
+
+static var authored_scene_pools: Dictionary = {}
+static var scene_animation_duration_cache: Dictionary = {}
+static var sketch_sprite_effect_pool: Array[Node2D] = []
+static var authored_scene_spawn_serial: int = 0
 
 static func _mark_temporary_effect(node: Node) -> void:
 	if node != null:
@@ -9,12 +16,7 @@ static func _mark_temporary_effect(node: Node) -> void:
 		PERFORMANCE_COUNTERS.add("temporary_effect_spawns", 1)
 
 static func _can_spawn_temporary_effect(owner) -> bool:
-	if owner == null or owner.get_tree() == null:
-		return false
-	var root: Node = owner.get_tree().current_scene
-	if root != null and root.has_method("_can_spawn_runtime_group"):
-		return bool(root._can_spawn_runtime_group("temporary_effects", 160))
-	return true
+	return owner != null and owner.get_tree() != null
 
 static func spawn_sketch_sprite_effect(
 		owner,
@@ -43,13 +45,19 @@ static func spawn_sketch_sprite_effect(
 	if texture == null:
 		return null
 
-	var effect := Node2D.new()
-	_mark_temporary_effect(effect)
+	var effect := _acquire_sketch_sprite_effect(current_scene)
+	effect.set_meta("sketch_sprite_released", false)
 	effect.global_position = center
 	effect.rotation = rotation_angle
 	effect.z_index = z_index
+	effect.scale = Vector2.ONE
+	effect.modulate = Color.WHITE
 
-	var sprite := Sprite2D.new()
+	var sprite := effect.get_node_or_null("Sprite2D") as Sprite2D
+	if sprite == null:
+		sprite = Sprite2D.new()
+		sprite.name = "Sprite2D"
+		effect.add_child(sprite)
 	sprite.texture = texture
 	sprite.centered = true
 	sprite.material = owner._create_white_key_material(value_threshold, saturation_threshold, edge_softness)
@@ -68,14 +76,36 @@ static func spawn_sketch_sprite_effect(
 			target_visible_size.x / max(1.0, visible_bounds.size.x),
 			target_visible_size.y / max(1.0, visible_bounds.size.y)
 		)
-	effect.add_child(sprite)
-	current_scene.add_child(effect)
 
 	var tween := effect.create_tween()
 	tween.parallel().tween_property(effect, "modulate:a", 0.0, duration)
 	tween.parallel().tween_property(effect, "scale", Vector2(1.06, 1.06), duration * 0.35)
-	tween.tween_callback(effect.queue_free)
+	tween.tween_callback(_release_sketch_sprite_effect.bind(effect))
 	return effect
+
+static func _acquire_sketch_sprite_effect(current_scene: Node) -> Node2D:
+	while not sketch_sprite_effect_pool.is_empty():
+		var effect: Node2D = sketch_sprite_effect_pool.pop_back()
+		if effect != null and is_instance_valid(effect):
+			_prepare_authored_scene(effect, current_scene)
+			return effect
+	var effect := Node2D.new()
+	current_scene.add_child(effect)
+	_mark_temporary_effect(effect)
+	return effect
+
+static func _release_sketch_sprite_effect(effect: Node2D) -> void:
+	if effect == null or not is_instance_valid(effect):
+		return
+	if bool(effect.get_meta("sketch_sprite_released", false)):
+		return
+	effect.set_meta("sketch_sprite_released", true)
+	effect.hide()
+	effect.remove_from_group("temporary_effects")
+	if sketch_sprite_effect_pool.size() < SKETCH_SPRITE_EFFECT_POOL_LIMIT:
+		sketch_sprite_effect_pool.append(effect)
+	else:
+		effect.queue_free()
 
 static func spawn_authored_scene_effect(owner, scene: PackedScene, scene_size: Vector2, visible_bounds: Rect2, center: Vector2, rotation_radians: float, scale_multiplier: float, z_index: int = 12) -> Node2D:
 	return spawn_scaled_animated_scene(
@@ -211,26 +241,37 @@ static func spawn_scaled_animated_scene(
 		fallback_duration: float,
 		mirror_horizontal: bool = false,
 		scale_multiplier: float = 1.0,
-		multiply_base_scale: bool = true
+		multiply_base_scale: bool = true,
+		bypass_spawn_limit: bool = false
 	) -> Node2D:
-	if not _can_spawn_temporary_effect(owner):
-		return null
 	var current_scene: Node = owner.get_tree().current_scene
 	if current_scene == null or scene == null:
 		return null
 
-	var effect := scene.instantiate() as Node2D
+	var scene_key := _get_scene_pool_key(scene)
+	if not bypass_spawn_limit and not _can_spawn_temporary_effect(owner) and not _has_reusable_authored_scene(scene_key):
+		return null
+	var effect := _acquire_authored_scene(current_scene, scene, scene_key)
 	if effect == null:
 		return null
 
-	_mark_temporary_effect(effect)
+	authored_scene_spawn_serial += 1
+	var spawn_token: int = authored_scene_spawn_serial
+	effect.set_meta("authored_scene_released", false)
+	effect.set_meta("authored_scene_token", spawn_token)
 	effect.global_position = center
 	effect.rotation = rotation_radians
 	effect.z_index = z_index
+	effect.scale = Vector2.ONE
+	effect.modulate = Color.WHITE
 
 	var sprite := effect.get_node_or_null("AnimatedSprite2D") as AnimatedSprite2D
 	if sprite != null:
 		var base_scale: Vector2 = sprite.scale
+		if effect.has_meta("authored_base_sprite_scale"):
+			base_scale = effect.get_meta("authored_base_sprite_scale") as Vector2
+		else:
+			effect.set_meta("authored_base_sprite_scale", base_scale)
 		sprite.material = null
 		sprite.modulate = Color.WHITE
 		sprite.centered = true
@@ -245,16 +286,21 @@ static func spawn_scaled_animated_scene(
 				target_visible_size.y / max(1.0, visible_bounds.size.y)
 			)
 			sprite.scale = Vector2(base_scale.x * target_scale.x, base_scale.y * target_scale.y) if multiply_base_scale else target_scale
-		play_effect_sprite(sprite, effect)
+		play_effect_sprite(sprite, effect, scene_key, spawn_token)
 	else:
 		var tween := effect.create_tween()
 		tween.tween_interval(fallback_duration)
-		tween.tween_callback(effect.queue_free)
+		tween.tween_callback(_release_authored_scene_if_token.bind(effect, scene_key, spawn_token))
 
-	current_scene.add_child(effect)
+	var cleanup_duration: float = get_scene_animation_duration(scene, fallback_duration) + 0.08
+	var cleanup_tween := effect.create_tween()
+	cleanup_tween.tween_interval(cleanup_duration)
+	cleanup_tween.tween_callback(_release_authored_scene_if_token.bind(effect, scene_key, spawn_token))
+
 	return effect
 
-static func play_effect_sprite(sprite: AnimatedSprite2D, owner_to_free: Node) -> void:
+static func play_effect_sprite(sprite: AnimatedSprite2D, owner_to_free: Node, scene_key: String = "", spawn_token: int = -1) -> void:
+	_disconnect_animation_finished_callbacks(sprite)
 	if sprite.sprite_frames != null:
 		var animation_names: PackedStringArray = sprite.sprite_frames.get_animation_names()
 		var animation_name: StringName = sprite.animation
@@ -272,12 +318,91 @@ static func play_effect_sprite(sprite: AnimatedSprite2D, owner_to_free: Node) ->
 			sprite.play()
 	else:
 		sprite.play()
-	if not sprite.animation_finished.is_connected(owner_to_free.queue_free):
-		sprite.animation_finished.connect(owner_to_free.queue_free, CONNECT_ONE_SHOT)
+	sprite.animation_finished.connect(_release_authored_scene_if_token.bind(owner_to_free, scene_key, spawn_token), CONNECT_ONE_SHOT)
+
+static func _disconnect_animation_finished_callbacks(sprite: AnimatedSprite2D) -> void:
+	for connection in sprite.animation_finished.get_connections():
+		var callback: Callable = connection.get("callable", Callable())
+		if callback.is_valid():
+			sprite.animation_finished.disconnect(callback)
+
+static func _get_scene_pool_key(scene: PackedScene) -> String:
+	if scene == null:
+		return ""
+	var path := scene.resource_path
+	if path != "":
+		return path
+	return str(scene.get_instance_id())
+
+static func _acquire_authored_scene(current_scene: Node, scene: PackedScene, scene_key: String) -> Node2D:
+	var pool: Array = authored_scene_pools.get(scene_key, [])
+	while not pool.is_empty():
+		var pooled_effect: Variant = pool.pop_back()
+		if pooled_effect is Node2D and is_instance_valid(pooled_effect):
+			authored_scene_pools[scene_key] = pool
+			var effect: Node2D = pooled_effect as Node2D
+			_prepare_authored_scene(effect, current_scene)
+			return effect
+	authored_scene_pools[scene_key] = pool
+	var effect := scene.instantiate() as Node2D
+	if effect == null:
+		return null
+	current_scene.add_child(effect)
+	_mark_temporary_effect(effect)
+	return effect
+
+static func _has_reusable_authored_scene(scene_key: String) -> bool:
+	var pool: Array = authored_scene_pools.get(scene_key, [])
+	for effect in pool:
+		if effect is Node2D and is_instance_valid(effect):
+			return true
+	return false
+
+static func _release_authored_scene(effect: Node, scene_key: String) -> void:
+	if effect == null or not is_instance_valid(effect):
+		return
+	if bool(effect.get_meta("authored_scene_released", false)):
+		return
+	effect.set_meta("authored_scene_released", true)
+	var sprite := effect.get_node_or_null("AnimatedSprite2D") as AnimatedSprite2D
+	if sprite != null:
+		_disconnect_animation_finished_callbacks(sprite)
+		sprite.stop()
+	effect.hide()
+	effect.remove_from_group("temporary_effects")
+	var parent := effect.get_parent()
+	if parent != null:
+		parent.remove_child(effect)
+	var pool: Array = authored_scene_pools.get(scene_key, [])
+	if pool.size() < AUTHORED_SCENE_POOL_LIMIT_PER_SCENE:
+		pool.append(effect)
+		authored_scene_pools[scene_key] = pool
+	else:
+		effect.queue_free()
+
+static func _release_authored_scene_if_token(effect: Node, scene_key: String, spawn_token: int) -> void:
+	if effect == null or not is_instance_valid(effect):
+		return
+	if int(effect.get_meta("authored_scene_token", -1)) != spawn_token:
+		return
+	_release_authored_scene(effect, scene_key)
+
+static func _prepare_authored_scene(effect: Node2D, current_scene: Node) -> void:
+	var parent := effect.get_parent()
+	if parent != current_scene:
+		if parent != null:
+			parent.remove_child(effect)
+		current_scene.add_child(effect)
+	effect.show()
+	effect.add_to_group("temporary_effects")
+	PERFORMANCE_COUNTERS.add("temporary_effect_spawns", 1)
 
 static func get_scene_animation_duration(scene: PackedScene, default_duration: float = 0.18) -> float:
 	if scene == null:
 		return default_duration
+	var cache_key := "%s|%.3f" % [_get_scene_pool_key(scene), default_duration]
+	if scene_animation_duration_cache.has(cache_key):
+		return float(scene_animation_duration_cache[cache_key])
 	var effect := scene.instantiate() as Node2D
 	if effect == null:
 		return default_duration
@@ -300,6 +425,7 @@ static func get_scene_animation_duration(scene: PackedScene, default_duration: f
 				animation_speed = 1.0
 			duration = max(0.05, total_relative_duration / animation_speed)
 	effect.queue_free()
+	scene_animation_duration_cache[cache_key] = duration
 	return duration
 
 static func spawn_gunner_intersect_effect(
@@ -322,6 +448,9 @@ static func spawn_gunner_intersect_effect(
 
 static func spawn_owner_gunner_intersect_effect(owner, center: Vector2, direction: Vector2, visual_length: float = 112.0, visual_thickness: float = 18.0, gather_visual_length: float = -1.0) -> Node2D:
 	return PLAYER_GUNNER_INTERSECT_EFFECTS.spawn_owner_gunner_intersect_effect(owner, center, direction, visual_length, visual_thickness, gather_visual_length)
+
+static func release_gunner_intersect_effect(effect: Node2D) -> void:
+	PLAYER_GUNNER_INTERSECT_EFFECTS.release_gunner_intersect_effect(effect)
 
 static func create_gunner_intersect_effect_part(scene: PackedScene, scene_size: Vector2, visible_bounds: Rect2, target_visible_size: Vector2, effect_speed_scale: float) -> Node2D:
 	return PLAYER_GUNNER_INTERSECT_EFFECTS.create_gunner_intersect_effect_part(scene, scene_size, visible_bounds, target_visible_size, effect_speed_scale)

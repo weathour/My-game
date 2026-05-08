@@ -5,6 +5,7 @@ const FILL_COLOR := Color(0.08, 0.16, 0.22, 0.08)
 const CORNER_COLOR := Color(1.0, 0.88, 0.42, 0.92)
 const EDGE_WIDTH := 5.0
 const CORNER_LENGTH := 92.0
+const BATTLE_MAP_TEXTURE := preload("res://assets/maps/battle_map.png")
 
 var _bounds := Rect2(Vector2(-1600.0, -900.0), Vector2(3200.0, 1800.0))
 
@@ -13,6 +14,7 @@ func configure(bounds: Rect2) -> void:
 	queue_redraw()
 
 func _draw() -> void:
+	draw_texture_rect(BATTLE_MAP_TEXTURE, _bounds, false)
 	draw_rect(_bounds, FILL_COLOR, true)
 	draw_rect(_bounds, BORDER_COLOR, false, EDGE_WIDTH)
 	_draw_corners()

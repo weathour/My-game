@@ -2,16 +2,17 @@ extends RefCounted
 
 const DEVELOPER_MODE := preload("res://scripts/developer_mode.gd")
 const ENEMY_ARCHETYPE_DATABASE := preload("res://scripts/enemy/enemy_archetype_database.gd")
+const PLAYER_BLESSING_SYSTEM := preload("res://scripts/player/player_blessing_system.gd")
 const PLAYER_BLESSING_SKILL_STATE := preload("res://scripts/player/player_blessing_skill_state.gd")
 
 static func activate(main: Node) -> void:
 	DEVELOPER_MODE.set_ignore_damage_enabled(true)
 	if main.spawn_timer != null:
 		main.spawn_timer.stop()
-	for enemy in main.get_tree().get_nodes_in_group("enemies"):
+	for enemy in _get_runtime_or_group_nodes(main, "enemies"):
 		if is_instance_valid(enemy):
 			enemy.queue_free()
-	for projectile in main.get_tree().get_nodes_in_group("enemy_projectiles"):
+	for projectile in _get_runtime_or_group_nodes(main, "enemy_projectiles"):
 		if is_instance_valid(projectile):
 			projectile.queue_free()
 	main.spawned_elite_count = 0
@@ -69,6 +70,15 @@ static func unlock_skill(main: Node, skill_id: String, tier: int) -> void:
 		main.player.stats_changed.emit(main.player.get_stat_summary())
 	main._refresh_hud()
 
+static func grant_blessing(main: Node, blessing_id: String, tier: int) -> void:
+	if main == null or main.player == null:
+		return
+	if not PLAYER_BLESSING_SYSTEM.apply_blessing(main.player, blessing_id, tier):
+		return
+	if main.player.has_signal("stats_changed") and main.player.has_method("get_stat_summary"):
+		main.player.stats_changed.emit(main.player.get_stat_summary())
+	main._refresh_hud()
+
 static func _clear_skill_cooldown(player, skill_id: String) -> void:
 	var property_name := _get_skill_ability_property(skill_id)
 	if property_name == "":
@@ -103,3 +113,12 @@ static func _get_owner_property(owner, property_name: String):
 		if property_info is Dictionary and str(property_info.get("name", "")) == property_name:
 			return owner.get(property_name)
 	return null
+
+static func _get_runtime_or_group_nodes(main: Node, group_name: String) -> Array:
+	if main == null or main.get_tree() == null:
+		return []
+	if group_name == "enemies" and main.has_method("get_runtime_enemies"):
+		return main.get_runtime_enemies()
+	if group_name == "enemy_projectiles" and main.has_method("get_runtime_enemy_projectiles"):
+		return main.get_runtime_enemy_projectiles()
+	return main.get_tree().get_nodes_in_group(group_name)

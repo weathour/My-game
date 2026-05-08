@@ -1,12 +1,33 @@
 extends RefCounted
 
+const PERFORMANCE_GUARD := preload("res://scripts/game/performance_guard.gd")
+const PERFORMANCE_COUNTERS := preload("res://scripts/game/performance_counters.gd")
+
 const ELITE_DASH_TRAIL_DAMAGE := 12.0
 const ELITE_DASH_TRAIL_DURATION := 3.4
 const ELITE_DASH_TRAIL_TICK := 0.45
 const ENEMY_GEOMETRY := preload("res://scripts/enemies/enemy_geometry.gd")
+const STATUS_VISUAL_BUDGET_PER_FRAME := 18
+const LOW_FPS_STATUS_VISUAL_BUDGET_PER_FRAME := 8
+const CRITICAL_FPS_STATUS_VISUAL_BUDGET_PER_FRAME := 3
+const STATUS_BURST_BUDGET_PER_FRAME := 12
+const LOW_FPS_STATUS_BURST_BUDGET_PER_FRAME := 5
+const CRITICAL_FPS_STATUS_BURST_BUDGET_PER_FRAME := 2
+const STATUS_BURST_POOL_LIMIT := 32
+const DASH_TRAIL_POOL_LIMIT := 24
+
+static var status_visual_budget_frame: int = -1
+static var status_visual_budget_used: int = 0
+static var status_burst_budget_frame: int = -1
+static var status_burst_budget_used: int = 0
+static var status_burst_enemy_ids_this_frame: Dictionary = {}
+static var status_burst_pool: Array[Line2D] = []
+static var dash_trail_pool: Array[Line2D] = []
 
 static func ensure_status_visuals(enemy) -> void:
 	if enemy.status_root != null:
+		return
+	if not _consume_status_visual_budget(enemy):
 		return
 
 	enemy.status_root = Node2D.new()
@@ -52,6 +73,11 @@ static func update_status_visuals(enemy) -> void:
 		if not enemy.has_method("_has_status_visual_pressure") or not bool(enemy._has_status_visual_pressure()):
 			return
 		ensure_status_visuals(enemy)
+		if enemy.status_root == null:
+			return
+	elif enemy.has_method("_has_status_visual_pressure") and not bool(enemy._has_status_visual_pressure()):
+		_clear_status_visuals(enemy)
+		return
 	var hit_flash_alpha: float = enemy._get_hit_flash_alpha()
 	var polygon := enemy.get_node_or_null("Polygon2D") as Polygon2D
 	if polygon != null:
@@ -60,11 +86,11 @@ static func update_status_visuals(enemy) -> void:
 			target_modulate = target_modulate.lerp(Color(0.68, 0.9, 1.0, 1.0), 0.45)
 		if enemy.vulnerability_timer > 0.0:
 			target_modulate = target_modulate.lerp(Color(1.0, 0.76, 0.76, 1.0), 0.4)
-		if enemy.has_trait("accelerator") and enemy.acceleration_remaining > 0.0:
+		if enemy._is_accelerator and enemy.acceleration_remaining > 0.0:
 			target_modulate = target_modulate.lerp(Color(1.0, 0.88, 0.64, 1.0), 0.32)
-		if enemy.has_trait("dash") and enemy.dash_windup_remaining > 0.0:
+		if enemy._is_dasher and enemy.dash_windup_remaining > 0.0:
 			target_modulate = target_modulate.lerp(Color(1.0, 0.92, 0.56, 1.0), 0.46)
-		if enemy.has_trait("dash") and enemy.dash_remaining > 0.0:
+		if enemy._is_dasher and enemy.dash_remaining > 0.0:
 			target_modulate = target_modulate.lerp(Color(1.0, 0.72, 0.72, 1.0), 0.32)
 		polygon.modulate = polygon.modulate.lerp(target_modulate, 0.18)
 		polygon.modulate.a = hit_flash_alpha
@@ -89,7 +115,7 @@ static func update_status_visuals(enemy) -> void:
 		enemy.trait_ring.scale = Vector2.ONE * (1.0 + 0.05 * sin(enemy.status_visual_time * 4.0))
 
 	if enemy.dash_warning_ring != null:
-		enemy.dash_warning_ring.visible = enemy.has_trait("dash") and enemy.dash_windup_remaining > 0.0
+		enemy.dash_warning_ring.visible = enemy._is_dasher and enemy.dash_windup_remaining > 0.0
 		if enemy.dash_warning_ring.visible:
 			var windup_ratio: float = clamp(enemy.dash_windup_remaining / max(enemy.dash_windup_duration, 0.001), 0.0, 1.0)
 			enemy.dash_warning_ring.rotation = -enemy.status_visual_time * 2.4
@@ -97,7 +123,7 @@ static func update_status_visuals(enemy) -> void:
 			enemy.dash_warning_ring.width = lerpf(5.0, 2.0, windup_ratio)
 			enemy.dash_warning_ring.default_color = Color(1.0, 0.9, 0.28, lerpf(0.9, 0.3, windup_ratio))
 	if enemy.dash_warning_rect != null:
-		enemy.dash_warning_rect.visible = enemy.has_trait("dash") and enemy.dash_windup_remaining > 0.0
+		enemy.dash_warning_rect.visible = enemy._is_dasher and enemy.dash_windup_remaining > 0.0
 		if enemy.dash_warning_rect.visible:
 			var dash_length: float = max(56.0, enemy.speed * max(enemy.dash_duration, 0.2) * max(enemy.dash_speed_multiplier, 1.0))
 			var dash_width: float = max(24.0, enemy.contact_radius * 0.9)
@@ -115,23 +141,25 @@ static func spawn_status_burst(enemy, color: Color, radius: float) -> void:
 	var current_scene: Node = enemy.get_tree().current_scene
 	if current_scene == null:
 		return
+	if not _consume_status_burst_budget(enemy):
+		return
 	if not _can_spawn_temporary_effect(current_scene):
 		return
 
-	var ring := Line2D.new()
-	ring.add_to_group("temporary_effects")
+	var ring := _acquire_status_burst(current_scene)
 	ring.global_position = enemy.global_position
 	ring.width = 5.0
 	ring.default_color = color
 	ring.closed = true
 	ring.points = ENEMY_GEOMETRY.build_circle_points(radius)
 	ring.z_index = 16
-	current_scene.add_child(ring)
+	ring.scale = Vector2.ONE
+	ring.modulate = Color.WHITE
 
 	var tween := ring.create_tween()
 	tween.parallel().tween_property(ring, "scale", Vector2(1.35, 1.35), 0.18)
 	tween.parallel().tween_property(ring, "modulate:a", 0.0, 0.18)
-	tween.tween_callback(ring.queue_free)
+	tween.tween_callback(_release_status_burst.bind(ring))
 
 static func spawn_dash_trail(enemy, direction_vector: Vector2, length: float) -> void:
 	var current_scene: Node = enemy.get_tree().current_scene
@@ -142,8 +170,7 @@ static func spawn_dash_trail(enemy, direction_vector: Vector2, length: float) ->
 			spawn_dash_trail_hazard(enemy, direction_vector, length)
 		return
 
-	var trail := Line2D.new()
-	trail.add_to_group("temporary_effects")
+	var trail := _acquire_dash_trail(current_scene)
 	trail.width = 8.0
 	trail.default_color = Color(1.0, 0.46, 0.46, 0.28 if enemy.enemy_kind != "boss" else 0.38)
 	trail.points = PackedVector2Array([
@@ -151,19 +178,142 @@ static func spawn_dash_trail(enemy, direction_vector: Vector2, length: float) ->
 		enemy.global_position + direction_vector * length
 	])
 	trail.z_index = 13
-	current_scene.add_child(trail)
+	trail.scale = Vector2.ONE
+	trail.modulate = Color.WHITE
 
 	var tween := trail.create_tween()
 	tween.parallel().tween_property(trail, "modulate:a", 0.0, 0.16)
 	tween.parallel().tween_property(trail, "width", 2.0, 0.16)
-	tween.tween_callback(trail.queue_free)
+	tween.tween_callback(_release_dash_trail.bind(trail))
 	if enemy.enemy_kind == "elite" and enemy.archetype_id == "elite_ram_trail":
 		spawn_dash_trail_hazard(enemy, direction_vector, length)
 
+static func _acquire_status_burst(current_scene: Node) -> Line2D:
+	while not status_burst_pool.is_empty():
+		var pooled_burst = status_burst_pool.pop_back()
+		if not is_instance_valid(pooled_burst):
+			continue
+		var ring := pooled_burst as Line2D
+		if ring != null and not ring.is_queued_for_deletion():
+			_prepare_pooled_line(ring, current_scene)
+			return ring
+	var ring := Line2D.new()
+	current_scene.add_child(ring)
+	ring.add_to_group("temporary_effects")
+	return ring
+
+static func _release_status_burst(ring: Line2D) -> void:
+	if ring == null or not is_instance_valid(ring):
+		return
+	ring.hide()
+	ring.remove_from_group("temporary_effects")
+	if status_burst_pool.size() < STATUS_BURST_POOL_LIMIT:
+		status_burst_pool.append(ring)
+	else:
+		ring.queue_free()
+
+static func _acquire_dash_trail(current_scene: Node) -> Line2D:
+	while not dash_trail_pool.is_empty():
+		var pooled_trail = dash_trail_pool.pop_back()
+		if not is_instance_valid(pooled_trail):
+			continue
+		var trail := pooled_trail as Line2D
+		if trail != null and not trail.is_queued_for_deletion():
+			_prepare_pooled_line(trail, current_scene)
+			return trail
+	var trail := Line2D.new()
+	current_scene.add_child(trail)
+	trail.add_to_group("temporary_effects")
+	return trail
+
+static func _release_dash_trail(trail: Line2D) -> void:
+	if trail == null or not is_instance_valid(trail):
+		return
+	trail.hide()
+	trail.remove_from_group("temporary_effects")
+	if dash_trail_pool.size() < DASH_TRAIL_POOL_LIMIT:
+		dash_trail_pool.append(trail)
+	else:
+		trail.queue_free()
+
+static func _prepare_pooled_line(line: Line2D, current_scene: Node) -> void:
+	var parent := line.get_parent()
+	if parent != current_scene:
+		if parent != null:
+			parent.remove_child(line)
+		current_scene.add_child(line)
+	line.show()
+	line.add_to_group("temporary_effects")
+
 static func _can_spawn_temporary_effect(root: Node) -> bool:
 	if root != null and root.has_method("_can_spawn_runtime_group"):
-		return bool(root._can_spawn_runtime_group("temporary_effects", 160))
+		var limit: int = PERFORMANCE_GUARD.get_dynamic_limit(root, "temporary_effects", PERFORMANCE_GUARD.DEFAULT_TEMPORARY_EFFECT_LIMIT)
+		return bool(root._can_spawn_runtime_group("temporary_effects", limit))
 	return true
+
+static func _consume_status_visual_budget(enemy) -> bool:
+	if enemy == null:
+		return false
+	if str(enemy.get("enemy_kind")) != "normal" or str(enemy.get("secondary_behavior_id")) != "":
+		return true
+	var current_frame := Engine.get_physics_frames()
+	if status_visual_budget_frame != current_frame:
+		status_visual_budget_frame = current_frame
+		status_visual_budget_used = 0
+	var budget := _get_status_visual_budget_per_frame()
+	if status_visual_budget_used >= budget:
+		PERFORMANCE_COUNTERS.add("suppressed_status_visuals", 1)
+		return false
+	status_visual_budget_used += 1
+	return true
+
+static func _get_status_visual_budget_per_frame() -> int:
+	var fps := Engine.get_frames_per_second()
+	if fps > 0 and fps < PERFORMANCE_GUARD.CRITICAL_FPS_THRESHOLD:
+		return CRITICAL_FPS_STATUS_VISUAL_BUDGET_PER_FRAME
+	if fps > 0 and fps < PERFORMANCE_GUARD.LOW_FPS_THRESHOLD:
+		return LOW_FPS_STATUS_VISUAL_BUDGET_PER_FRAME
+	return STATUS_VISUAL_BUDGET_PER_FRAME
+
+static func _consume_status_burst_budget(enemy) -> bool:
+	if enemy == null:
+		return false
+	var current_frame := Engine.get_physics_frames()
+	if status_burst_budget_frame != current_frame:
+		status_burst_budget_frame = current_frame
+		status_burst_budget_used = 0
+		status_burst_enemy_ids_this_frame.clear()
+	var enemy_id: int = enemy.get_instance_id()
+	if status_burst_enemy_ids_this_frame.has(enemy_id):
+		PERFORMANCE_COUNTERS.add("suppressed_status_bursts", 1)
+		return false
+	status_burst_enemy_ids_this_frame[enemy_id] = true
+	if str(enemy.get("enemy_kind")) != "normal" or str(enemy.get("secondary_behavior_id")) != "":
+		return true
+	var budget := _get_status_burst_budget_per_frame()
+	if status_burst_budget_used >= budget:
+		PERFORMANCE_COUNTERS.add("suppressed_status_bursts", 1)
+		return false
+	status_burst_budget_used += 1
+	return true
+
+static func _get_status_burst_budget_per_frame() -> int:
+	var fps := Engine.get_frames_per_second()
+	if fps > 0 and fps < PERFORMANCE_GUARD.CRITICAL_FPS_THRESHOLD:
+		return CRITICAL_FPS_STATUS_BURST_BUDGET_PER_FRAME
+	if fps > 0 and fps < PERFORMANCE_GUARD.LOW_FPS_THRESHOLD:
+		return LOW_FPS_STATUS_BURST_BUDGET_PER_FRAME
+	return STATUS_BURST_BUDGET_PER_FRAME
+
+static func _clear_status_visuals(enemy) -> void:
+	if enemy.status_root != null and is_instance_valid(enemy.status_root):
+		enemy.status_root.queue_free()
+	enemy.status_root = null
+	enemy.slow_ring = null
+	enemy.vulnerability_ring = null
+	enemy.trait_ring = null
+	enemy.dash_warning_ring = null
+	enemy.dash_warning_rect = null
 
 static func spawn_dash_trail_hazard(enemy, direction_vector: Vector2, length: float) -> void:
 	var current_scene: Node = enemy.get_tree().current_scene

@@ -141,7 +141,7 @@ static func collect_nearby_gems(owner) -> void:
 	if owner.has_method("_get_attribute_pickup_range_bonus"):
 		effective_pickup_radius += float(owner._get_attribute_pickup_range_bonus())
 	var pickup_radius_squared: float = effective_pickup_radius * effective_pickup_radius
-	var gems: Array = owner.get_tree().get_nodes_in_group("exp_gems")
+	var gems: Array = _get_runtime_pickups(owner, "exp_gems")
 	var gem_count: int = gems.size()
 	var gem_cursor := int(owner.get_meta(PICKUP_SCAN_CURSOR_KEY, 0)) if owner.has_meta(PICKUP_SCAN_CURSOR_KEY) else 0
 	var gem_scan_count: int = min(gem_count, PICKUP_SCAN_BATCH_SIZE)
@@ -159,7 +159,7 @@ static func collect_nearby_gems(owner) -> void:
 	if gem_count > 0:
 		owner.set_meta(PICKUP_SCAN_CURSOR_KEY, (gem_cursor + gem_scan_count) % gem_count)
 
-	var hearts: Array = owner.get_tree().get_nodes_in_group("heart_pickups")
+	var hearts: Array = _get_runtime_pickups(owner, "heart_pickups")
 	var heart_count: int = hearts.size()
 	var heart_cursor := int(owner.get_meta(HEART_SCAN_CURSOR_KEY, 0)) if owner.has_meta(HEART_SCAN_CURSOR_KEY) else 0
 	var heart_scan_count: int = min(heart_count, HEART_SCAN_BATCH_SIZE)
@@ -174,6 +174,13 @@ static func collect_nearby_gems(owner) -> void:
 	if heart_count > 0:
 		owner.set_meta(HEART_SCAN_CURSOR_KEY, (heart_cursor + heart_scan_count) % heart_count)
 
+static func _get_runtime_pickups(owner, group_name: String) -> Array:
+	if owner != null and owner.get_tree() != null:
+		var scene: Node = owner.get_tree().current_scene
+		if scene != null and scene.has_method("get_runtime_pickups"):
+			return scene.get_runtime_pickups(group_name)
+	return owner.get_tree().get_nodes_in_group(group_name)
+
 
 static func check_enemy_contact_damage(owner) -> void:
 	if owner.hurt_cooldown_remaining > 0.0 or owner.switch_invulnerability_remaining > 0.0:
@@ -181,7 +188,8 @@ static func check_enemy_contact_damage(owner) -> void:
 
 	var hurtbox_center: Vector2 = owner.get_hurtbox_center()
 	var hurtbox_radius: float = owner.get_hurtbox_radius()
-	for enemy in owner.get_tree().get_nodes_in_group("enemies"):
+	var candidates: Array = owner._get_candidate_enemies_for_circle(hurtbox_center, hurtbox_radius + 36.0)
+	for enemy in candidates:
 		if not is_instance_valid(enemy):
 			continue
 		var contact_radius: float = 36.0
