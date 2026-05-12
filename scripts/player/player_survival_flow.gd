@@ -49,6 +49,8 @@ static func physics_process(owner, delta: float) -> void:
 		direction.x -= 1.0
 	if GAME_SETTINGS.is_action_pressed(GAME_SETTINGS.ACTION_MOVE_RIGHT):
 		direction.x += 1.0
+	if abs(direction.x) > 0.01:
+		owner.visual_facing_direction_x = sign(direction.x)
 	if GAME_SETTINGS.is_action_pressed(GAME_SETTINGS.ACTION_MOVE_UP):
 		direction.y -= 1.0
 	if GAME_SETTINGS.is_action_pressed(GAME_SETTINGS.ACTION_MOVE_DOWN):

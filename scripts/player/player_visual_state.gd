@@ -94,7 +94,7 @@ static func update_role_idle_visual(owner: Node, role_id: String, facing_directi
 		return
 	var scene_visual := visual_root.get_node_or_null("RoleSceneVisual") as Node2D
 	if scene_visual != null:
-		_update_role_scene_visual(owner, scene_visual, role_id, facing_direction, role_visual_time)
+		_update_role_scene_visual(owner, scene_visual, role_id, _get_visual_facing_direction(owner, facing_direction), role_visual_time)
 		return
 	var sprite := visual_root.get_node_or_null("RoleSprite") as Sprite2D
 	if sprite == null:
@@ -120,7 +120,7 @@ static func update_role_idle_visual(owner: Node, role_id: String, facing_directi
 	sprite.position = base_position + Vector2(0.0, sin(role_visual_time * 4.4) * bob_strength)
 	sprite.rotation = tilt
 	if role_id in ["swordsman", "gunner", "mage"]:
-		sprite.flip_h = facing_direction.x < 0.0
+		sprite.flip_h = _get_visual_facing_direction(owner, facing_direction).x < 0.0
 
 static func _update_role_scene_visual(owner: Node, scene_visual: Node2D, role_id: String, facing_direction: Vector2, role_visual_time: float) -> void:
 	var base_position := WIZARD_VISUAL_BASE_POSITION
@@ -137,7 +137,17 @@ static func _update_role_scene_visual(owner: Node, scene_visual: Node2D, role_id
 			animated_sprite.play()
 	if scene_visual.has_method("set_moving"):
 		var move_direction: Vector2 = owner.velocity
-		scene_visual.set_moving(move_direction.length_squared() > 1.0, move_direction if move_direction.length_squared() > 1.0 else facing_direction)
+		scene_visual.set_moving(move_direction.length_squared() > 1.0, facing_direction)
+
+static func _get_visual_facing_direction(owner: Node, fallback_direction: Vector2) -> Vector2:
+	var visual_x: float = 1.0
+	if owner != null:
+		visual_x = float(owner.get("visual_facing_direction_x"))
+	if abs(visual_x) > 0.01:
+		return Vector2(sign(visual_x), 0.0)
+	if abs(fallback_direction.x) > 0.01:
+		return Vector2(sign(fallback_direction.x), 0.0)
+	return Vector2.RIGHT
 
 static func update_visuals(owner: Node, role_data: Dictionary, active_role_visual_hidden: bool, hidden_role_id: String) -> void:
 	var polygon := owner.get_node_or_null("Polygon2D") as Polygon2D

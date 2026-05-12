@@ -64,10 +64,14 @@ static func spawn_ring_effect(owner: Node, center: Vector2, radius: float, color
 
 static func _acquire_line(current_scene: Node) -> Line2D:
 	while not line_pool.is_empty():
-		var line: Line2D = line_pool.pop_back()
-		if line != null and is_instance_valid(line):
-			_prepare_pooled_line(line, current_scene)
-			return line
+		var pooled_line: Variant = line_pool.pop_back()
+		if not is_instance_valid(pooled_line) or not (pooled_line is Line2D):
+			continue
+		var line := pooled_line as Line2D
+		if line.is_queued_for_deletion():
+			continue
+		_prepare_pooled_line(line, current_scene)
+		return line
 	var line := Line2D.new()
 	current_scene.add_child(line)
 	_mark_temporary_effect(line)
@@ -78,7 +82,7 @@ static func _release_line(line: Line2D) -> void:
 		return
 	line.hide()
 	line.remove_from_group("temporary_effects")
-	if line_pool.size() < LINE_POOL_LIMIT:
+	if line_pool.size() < LINE_POOL_LIMIT and not line_pool.has(line):
 		line_pool.append(line)
 	else:
 		line.queue_free()
@@ -255,6 +259,8 @@ static func _acquire_composite(current_scene: Node, kind: String, child_names: A
 		if not is_instance_valid(pooled_root) or not (pooled_root is Node2D):
 			continue
 		var root := pooled_root as Node2D
+		if root.is_queued_for_deletion():
+			continue
 		composite_pools[kind] = pool
 		_prepare_composite(root, current_scene)
 		return root
@@ -279,7 +285,7 @@ static func _release_composite(root: Node2D, kind: String) -> void:
 	root.hide()
 	root.remove_from_group("temporary_effects")
 	var pool: Array = composite_pools.get(kind, [])
-	if pool.size() < COMPOSITE_POOL_LIMIT_PER_KIND:
+	if pool.size() < COMPOSITE_POOL_LIMIT_PER_KIND and not pool.has(root):
 		pool.append(root)
 		composite_pools[kind] = pool
 	else:

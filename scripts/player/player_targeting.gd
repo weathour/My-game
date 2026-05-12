@@ -3,10 +3,6 @@ extends RefCounted
 const PLAYER_DAMAGE_RESOLVER := preload("res://scripts/player/player_damage_resolver.gd")
 
 const CLUSTER_CELL_SIZE := 120.0
-const CLUSTER_RADIUS := 120.0
-const CLUSTER_RADIUS_SQUARED := CLUSTER_RADIUS * CLUSTER_RADIUS
-const CLOSE_CLUSTER_RADIUS := 90.0
-const CLOSE_CLUSTER_RADIUS_SQUARED := CLOSE_CLUSTER_RADIUS * CLOSE_CLUSTER_RADIUS
 
 static var owner_target_cache: Dictionary = {}
 static var owner_target_cache_frame: int = -1
@@ -168,34 +164,15 @@ static func get_enemy_cluster_center(enemies: Array) -> Vector2:
 	if enemies.is_empty():
 		return Vector2.ZERO
 
-	var best_center := Vector2.ZERO
-	var best_score: int = 0
 	var grid: Dictionary = _build_enemy_position_grid(enemies)
-	for enemy in enemies:
-		if not is_instance_valid(enemy):
-			continue
-		var center: Vector2 = enemy.global_position
-		var score: int = _count_nearby_enemies(center, grid, CLOSE_CLUSTER_RADIUS_SQUARED)
-		if score > best_score:
-			best_score = score
-			best_center = center
-	return best_center
+	return _get_best_cluster_center_from_grid(grid)
 
 static func get_random_enemy_cluster_centers(enemies: Array, fallback_position: Vector2, count: int) -> Array:
 	if enemies.is_empty():
 		return [fallback_position]
 
-	var scored_centers: Array = []
 	var grid: Dictionary = _build_enemy_position_grid(enemies)
-	for enemy in enemies:
-		if not is_instance_valid(enemy):
-			continue
-		var center: Vector2 = enemy.global_position
-		var score: int = _count_nearby_enemies(center, grid, CLUSTER_RADIUS_SQUARED)
-		scored_centers.append({
-			"center": center,
-			"score": score
-		})
+	var scored_centers: Array = _get_scored_cluster_centers_from_grid(grid)
 
 	scored_centers.sort_custom(func(a, b): return int(a["score"]) > int(b["score"]))
 	var candidate_pool: Array = scored_centers.slice(0, min(6, scored_centers.size()))
@@ -214,7 +191,7 @@ static func get_random_enemy_cluster_centers(enemies: Array, fallback_position: 
 		picked_centers.append(chosen_center)
 
 	if picked_centers.is_empty():
-		picked_centers.append(get_enemy_cluster_center(enemies))
+		picked_centers.append(_get_best_cluster_center_from_grid(grid))
 	while picked_centers.size() < count:
 		picked_centers.append(picked_centers[picked_centers.size() - 1])
 	return picked_centers
@@ -273,20 +250,43 @@ static func _build_enemy_position_grid(enemies: Array) -> Dictionary:
 		(grid[cell] as Array).append(enemy)
 	return grid
 
-static func _count_nearby_enemies(center: Vector2, grid: Dictionary, radius_squared: float) -> int:
-	var center_cell: Vector2i = _grid_cell(center)
+static func _get_best_cluster_center_from_grid(grid: Dictionary) -> Vector2:
+	if grid.is_empty():
+		return Vector2.ZERO
+	var best_center := Vector2.ZERO
+	var best_score: int = -1
+	for cell in grid.keys():
+		var scored: Dictionary = _score_cluster_cell(grid, cell as Vector2i)
+		var score: int = int(scored.get("score", 0))
+		if score > best_score:
+			best_score = score
+			best_center = scored.get("center", Vector2.ZERO) as Vector2
+	return best_center
+
+static func _get_scored_cluster_centers_from_grid(grid: Dictionary) -> Array:
+	var scored_centers: Array = []
+	for cell in grid.keys():
+		scored_centers.append(_score_cluster_cell(grid, cell as Vector2i))
+	return scored_centers
+
+static func _score_cluster_cell(grid: Dictionary, center_cell: Vector2i) -> Dictionary:
 	var score := 0
+	var position_sum := Vector2.ZERO
 	for x in range(center_cell.x - 1, center_cell.x + 2):
 		for y in range(center_cell.y - 1, center_cell.y + 2):
 			var cell := Vector2i(x, y)
 			if not grid.has(cell):
 				continue
-			for other_enemy in grid[cell] as Array:
-				if not is_instance_valid(other_enemy):
+			for enemy in grid[cell] as Array:
+				if not is_instance_valid(enemy):
 					continue
-				if center.distance_squared_to((other_enemy as Node2D).global_position) <= radius_squared:
-					score += 1
-	return score
+				score += 1
+				position_sum += (enemy as Node2D).global_position
+	var center: Vector2 = position_sum / float(max(1, score))
+	return {
+		"center": center,
+		"score": score
+	}
 
 static func _grid_cell(position: Vector2) -> Vector2i:
 	return Vector2i(floori(position.x / CLUSTER_CELL_SIZE), floori(position.y / CLUSTER_CELL_SIZE))

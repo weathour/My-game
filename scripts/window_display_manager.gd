@@ -54,8 +54,8 @@ func _center_window(size: Vector2i) -> void:
 	var screen_position := DisplayServer.screen_get_position(screen)
 	var usable_rect := DisplayServer.screen_get_usable_rect(screen)
 	var target_position := screen_position + Vector2i(
-		maxi(0, int((usable_rect.size.x - size.x) / 2)),
-		maxi(0, int((usable_rect.size.y - size.y) / 2))
+		maxi(0, int(float(usable_rect.size.x - size.x) / 2.0)),
+		maxi(0, int(float(usable_rect.size.y - size.y) / 2.0))
 	)
 	DisplayServer.window_set_position(target_position)
 

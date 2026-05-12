@@ -106,10 +106,14 @@ static func spawn_target_lock_effect(owner: Node, center: Vector2, radius: float
 
 static func _acquire_vortex_root(current_scene: Node) -> Node2D:
 	while not vortex_pool.is_empty():
-		var root: Node2D = vortex_pool.pop_back()
-		if root != null and is_instance_valid(root):
-			_prepare_root(root, current_scene)
-			return root
+		var pooled_root: Variant = vortex_pool.pop_back()
+		if not is_instance_valid(pooled_root) or not (pooled_root is Node2D):
+			continue
+		var root := pooled_root as Node2D
+		if root.is_queued_for_deletion():
+			continue
+		_prepare_root(root, current_scene)
+		return root
 	var root := Node2D.new()
 	current_scene.add_child(root)
 	_mark_temporary_effect(root)
@@ -130,10 +134,14 @@ static func _release_vortex_root(root: Node2D) -> void:
 
 static func _acquire_target_lock_root(current_scene: Node) -> Node2D:
 	while not target_lock_pool.is_empty():
-		var root: Node2D = target_lock_pool.pop_back()
-		if root != null and is_instance_valid(root):
-			_prepare_root(root, current_scene)
-			return root
+		var pooled_root: Variant = target_lock_pool.pop_back()
+		if not is_instance_valid(pooled_root) or not (pooled_root is Node2D):
+			continue
+		var root := pooled_root as Node2D
+		if root.is_queued_for_deletion():
+			continue
+		_prepare_root(root, current_scene)
+		return root
 	var root := Node2D.new()
 	current_scene.add_child(root)
 	_mark_temporary_effect(root)
@@ -167,7 +175,7 @@ static func _release_root_to_pool(root: Node2D, pool: Array[Node2D], pool_limit:
 		return
 	root.hide()
 	root.remove_from_group("temporary_effects")
-	if pool.size() < pool_limit:
+	if pool.size() < pool_limit and not pool.has(root):
 		pool.append(root)
 	else:
 		root.queue_free()

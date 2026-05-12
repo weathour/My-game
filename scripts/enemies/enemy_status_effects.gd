@@ -1,6 +1,7 @@
 extends RefCounted
 
 const STATUS_VISUAL_REFRESH_EPSILON := 0.08
+const NORMAL_STATUS_VISUAL_REFRESH_EPSILON := 0.35
 
 static func tick_timers(enemy, delta: float) -> void:
 	if enemy.slow_timer > 0.0:
@@ -32,7 +33,7 @@ static func tick_bleed(enemy, delta: float) -> void:
 static func apply_slow(enemy, multiplier: float, duration: float) -> void:
 	var next_multiplier: float = min(enemy.slow_multiplier, clamp(multiplier, 0.2, 1.0))
 	var next_timer: float = max(enemy.slow_timer, duration)
-	var should_refresh_visual: bool = next_multiplier < enemy.slow_multiplier or next_timer > enemy.slow_timer + STATUS_VISUAL_REFRESH_EPSILON
+	var should_refresh_visual: bool = next_multiplier < enemy.slow_multiplier or next_timer > enemy.slow_timer + _get_status_visual_refresh_epsilon(enemy)
 	enemy.slow_multiplier = next_multiplier
 	enemy.slow_timer = next_timer
 	if should_refresh_visual:
@@ -42,7 +43,7 @@ static func apply_slow(enemy, multiplier: float, duration: float) -> void:
 static func apply_vulnerability(enemy, bonus: float, duration: float) -> void:
 	var next_bonus: float = max(enemy.vulnerability_bonus, bonus)
 	var next_timer: float = max(enemy.vulnerability_timer, duration)
-	var should_refresh_visual: bool = next_bonus > enemy.vulnerability_bonus or next_timer > enemy.vulnerability_timer + STATUS_VISUAL_REFRESH_EPSILON
+	var should_refresh_visual: bool = next_bonus > enemy.vulnerability_bonus or next_timer > enemy.vulnerability_timer + _get_status_visual_refresh_epsilon(enemy)
 	enemy.vulnerability_bonus = next_bonus
 	enemy.vulnerability_timer = next_timer
 	if should_refresh_visual:
@@ -52,3 +53,10 @@ static func apply_vulnerability(enemy, bonus: float, duration: float) -> void:
 static func apply_bleed(enemy, damage_per_second: float, duration: float) -> void:
 	enemy.bleed_damage_per_second = max(enemy.bleed_damage_per_second, damage_per_second)
 	enemy.bleed_timer = max(enemy.bleed_timer, duration)
+
+static func _get_status_visual_refresh_epsilon(enemy) -> float:
+	if enemy == null:
+		return STATUS_VISUAL_REFRESH_EPSILON
+	if str(enemy.get("enemy_kind")) == "normal" and str(enemy.get("secondary_behavior_id")) == "":
+		return NORMAL_STATUS_VISUAL_REFRESH_EPSILON
+	return STATUS_VISUAL_REFRESH_EPSILON

@@ -66,16 +66,16 @@ static func apply_visuals(enemy, color_override = null) -> void:
 		enemy.dash_warning_ring.points = ENEMY_GEOMETRY.build_circle_points(24.0 + enemy.scale.x * 10.0)
 
 static func update_motion_visual(enemy) -> void:
-	var visual: Node = enemy.get_node_or_null("MushroomVisual")
-	if visual == null or not visual.has_method("set_moving"):
-		visual = enemy.get_node_or_null("SlimeVisual")
-	if visual == null or not visual.has_method("set_moving"):
-		visual = enemy.get_node_or_null("FlyingEyeVisual")
-	if visual == null or not visual.has_method("set_moving"):
-		visual = enemy.get_node_or_null("PumpkinVisual")
+	var visual: Node = enemy.cached_motion_visual
 	if visual == null or not visual.has_method("set_moving"):
 		return
-	visual.set_moving(enemy.velocity.length_squared() > 1.0, enemy.velocity)
+	var is_moving: bool = enemy.velocity.length_squared() > 1.0
+	var facing_sign: int = _get_velocity_facing_sign(enemy.velocity.x, enemy.cached_motion_visual_facing_sign)
+	if is_moving == enemy.cached_motion_visual_moving and facing_sign == enemy.cached_motion_visual_facing_sign:
+		return
+	enemy.cached_motion_visual_moving = is_moving
+	enemy.cached_motion_visual_facing_sign = facing_sign
+	visual.set_moving(is_moving, enemy.velocity)
 
 static func _should_use_mushroom_visual(enemy) -> bool:
 	return enemy.enemy_kind == "normal" and enemy.archetype_id == "chaser" and enemy.behavior_id == "chaser"
@@ -98,6 +98,7 @@ static func _ensure_mushroom_visual(enemy) -> void:
 	visual.name = "MushroomVisual"
 	enemy.add_child(visual)
 	visual.position = Vector2.ZERO
+	_set_motion_visual_cache(enemy, visual)
 	if visual.has_method("set_moving"):
 		visual.set_moving(false)
 
@@ -110,6 +111,7 @@ static func _ensure_slime_visual(enemy) -> void:
 	visual.name = "SlimeVisual"
 	enemy.add_child(visual)
 	visual.position = Vector2.ZERO
+	_set_motion_visual_cache(enemy, visual)
 	if visual.has_method("set_moving"):
 		visual.set_moving(false)
 
@@ -122,6 +124,7 @@ static func _ensure_flying_eye_visual(enemy) -> void:
 	visual.name = "FlyingEyeVisual"
 	enemy.add_child(visual)
 	visual.position = Vector2.ZERO
+	_set_motion_visual_cache(enemy, visual)
 	if visual.has_method("set_moving"):
 		visual.set_moving(false)
 
@@ -134,29 +137,50 @@ static func _ensure_pumpkin_visual(enemy) -> void:
 	visual.name = "PumpkinVisual"
 	enemy.add_child(visual)
 	visual.position = Vector2.ZERO
+	_set_motion_visual_cache(enemy, visual)
 	if visual.has_method("set_moving"):
 		visual.set_moving(false)
+
+static func _set_motion_visual_cache(enemy, visual: Node) -> void:
+	enemy.cached_motion_visual = visual
+	enemy.cached_motion_visual_moving = false
+	enemy.cached_motion_visual_facing_sign = 0
+
+static func _clear_motion_visual_cache(enemy, visual: Node) -> void:
+	if enemy.cached_motion_visual == visual:
+		enemy.cached_motion_visual = null
+		enemy.cached_motion_visual_moving = false
+	enemy.cached_motion_visual_facing_sign = 0
+
+static func _get_velocity_facing_sign(velocity_x: float, fallback: int) -> int:
+	if abs(velocity_x) <= 0.01:
+		return fallback
+	return 1 if velocity_x > 0.0 else -1
 
 static func _clear_mushroom_visual(enemy) -> void:
 	var visual: Node = enemy.get_node_or_null("MushroomVisual")
 	if visual == null:
 		return
+	_clear_motion_visual_cache(enemy, visual)
 	visual.queue_free()
 
 static func _clear_slime_visual(enemy) -> void:
 	var visual: Node = enemy.get_node_or_null("SlimeVisual")
 	if visual == null:
 		return
+	_clear_motion_visual_cache(enemy, visual)
 	visual.queue_free()
 
 static func _clear_flying_eye_visual(enemy) -> void:
 	var visual: Node = enemy.get_node_or_null("FlyingEyeVisual")
 	if visual == null:
 		return
+	_clear_motion_visual_cache(enemy, visual)
 	visual.queue_free()
 
 static func _clear_pumpkin_visual(enemy) -> void:
 	var visual: Node = enemy.get_node_or_null("PumpkinVisual")
 	if visual == null:
 		return
+	_clear_motion_visual_cache(enemy, visual)
 	visual.queue_free()

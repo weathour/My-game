@@ -1,14 +1,12 @@
 extends Node2D
 
-const IDLE_TEXTURE := preload("res://assets/players/sword/sword-idle1.png")
-const RUN_TEXTURE := preload("res://assets/players/sword/sword-run2.png")
-const FRAME_SIZE := Vector2i(256, 256)
-const FRAME_COLUMNS := 4
-const FRAME_COUNT := 12
+const IDLE_ANIMATION := &"sword-idle"
+const RUN_ANIMATION := &"sword-run"
 const VISUAL_SCALE := Vector2(0.62, 0.62)
+const RUN_VISUAL_SCALE_MULTIPLIER := 2.0
 
 var sprite: AnimatedSprite2D
-var current_animation: String = ""
+var current_animation: StringName = StringName()
 
 
 func _ready() -> void:
@@ -19,10 +17,11 @@ func _ready() -> void:
 func set_moving(is_moving: bool, move_direction: Vector2 = Vector2.ZERO) -> void:
 	_ensure_sprite()
 	_update_facing(move_direction)
-	var next_animation := "run" if is_moving else "idle"
+	var next_animation: StringName = RUN_ANIMATION if is_moving else IDLE_ANIMATION
 	if current_animation == next_animation and sprite.is_playing():
 		return
 	current_animation = next_animation
+	_apply_animation_scale(next_animation)
 	sprite.play(next_animation)
 
 
@@ -40,28 +39,14 @@ func _ensure_sprite() -> void:
 		sprite = AnimatedSprite2D.new()
 		sprite.name = "AnimatedSprite2D"
 		add_child(sprite)
-	sprite.sprite_frames = _build_frames()
 	sprite.centered = true
 	sprite.position = Vector2(-11.0, 10.0)
 	sprite.scale = VISUAL_SCALE
 	sprite.z_index = 1
 
 
-func _build_frames() -> SpriteFrames:
-	var frames := SpriteFrames.new()
-	_add_sheet_animation(frames, "idle", IDLE_TEXTURE, 8.0, true)
-	_add_sheet_animation(frames, "run", RUN_TEXTURE, 12.0, true)
-	return frames
-
-
-func _add_sheet_animation(frames: SpriteFrames, animation_name: String, texture: Texture2D, speed: float, loop: bool) -> void:
-	frames.add_animation(animation_name)
-	frames.set_animation_loop(animation_name, loop)
-	frames.set_animation_speed(animation_name, speed)
-	for index in range(FRAME_COUNT):
-		var atlas := AtlasTexture.new()
-		atlas.atlas = texture
-		var column := index % FRAME_COLUMNS
-		var row := int(index / FRAME_COLUMNS)
-		atlas.region = Rect2i(column * FRAME_SIZE.x, row * FRAME_SIZE.y, FRAME_SIZE.x, FRAME_SIZE.y)
-		frames.add_frame(animation_name, atlas)
+func _apply_animation_scale(animation_name: StringName) -> void:
+	if sprite == null:
+		return
+	var scale_multiplier: float = RUN_VISUAL_SCALE_MULTIPLIER if animation_name == RUN_ANIMATION else 1.0
+	sprite.scale = VISUAL_SCALE * scale_multiplier

@@ -224,7 +224,7 @@ func _free_projectile(projectile: Node2D) -> void:
 	var parent := projectile.get_parent()
 	if parent != null:
 		parent.remove_child(projectile)
-	if crescent_projectile_pool.size() < CRESCENT_PROJECTILE_POOL_LIMIT:
+	if crescent_projectile_pool.size() < CRESCENT_PROJECTILE_POOL_LIMIT and not crescent_projectile_pool.has(projectile):
 		crescent_projectile_pool.append(projectile)
 	else:
 		projectile.queue_free()
@@ -240,12 +240,16 @@ func _free_projectile_if_token(projectile: Node2D, spawn_token: int) -> void:
 
 func _acquire_projectile(current_scene: Node) -> Node2D:
 	while not crescent_projectile_pool.is_empty():
-		var projectile: Node2D = crescent_projectile_pool.pop_back()
-		if projectile != null and is_instance_valid(projectile):
-			current_scene.add_child(projectile)
-			projectile.show()
-			projectile.add_to_group("temporary_effects")
-			return projectile
+		var pooled_projectile: Variant = crescent_projectile_pool.pop_back()
+		if not is_instance_valid(pooled_projectile) or not (pooled_projectile is Node2D):
+			continue
+		var projectile := pooled_projectile as Node2D
+		if projectile.is_queued_for_deletion():
+			continue
+		current_scene.add_child(projectile)
+		projectile.show()
+		projectile.add_to_group("temporary_effects")
+		return projectile
 	var projectile: Node2D = CRESCENT_SCENE.instantiate() as Node2D if CRESCENT_SCENE != null else Node2D.new()
 	if projectile != null:
 		current_scene.add_child(projectile)

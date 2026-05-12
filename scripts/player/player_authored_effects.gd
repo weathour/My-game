@@ -85,10 +85,14 @@ static func spawn_sketch_sprite_effect(
 
 static func _acquire_sketch_sprite_effect(current_scene: Node) -> Node2D:
 	while not sketch_sprite_effect_pool.is_empty():
-		var effect: Node2D = sketch_sprite_effect_pool.pop_back()
-		if effect != null and is_instance_valid(effect):
-			_prepare_authored_scene(effect, current_scene)
-			return effect
+		var pooled_effect: Variant = sketch_sprite_effect_pool.pop_back()
+		if not is_instance_valid(pooled_effect) or not (pooled_effect is Node2D):
+			continue
+		var effect := pooled_effect as Node2D
+		if effect.is_queued_for_deletion():
+			continue
+		_prepare_authored_scene(effect, current_scene)
+		return effect
 	var effect := Node2D.new()
 	current_scene.add_child(effect)
 	_mark_temporary_effect(effect)
@@ -102,7 +106,7 @@ static func _release_sketch_sprite_effect(effect: Node2D) -> void:
 	effect.set_meta("sketch_sprite_released", true)
 	effect.hide()
 	effect.remove_from_group("temporary_effects")
-	if sketch_sprite_effect_pool.size() < SKETCH_SPRITE_EFFECT_POOL_LIMIT:
+	if sketch_sprite_effect_pool.size() < SKETCH_SPRITE_EFFECT_POOL_LIMIT and not sketch_sprite_effect_pool.has(effect):
 		sketch_sprite_effect_pool.append(effect)
 	else:
 		effect.queue_free()
@@ -338,11 +342,14 @@ static func _acquire_authored_scene(current_scene: Node, scene: PackedScene, sce
 	var pool: Array = authored_scene_pools.get(scene_key, [])
 	while not pool.is_empty():
 		var pooled_effect: Variant = pool.pop_back()
-		if pooled_effect is Node2D and is_instance_valid(pooled_effect):
-			authored_scene_pools[scene_key] = pool
-			var effect: Node2D = pooled_effect as Node2D
-			_prepare_authored_scene(effect, current_scene)
-			return effect
+		if not is_instance_valid(pooled_effect) or not (pooled_effect is Node2D):
+			continue
+		var effect := pooled_effect as Node2D
+		if effect.is_queued_for_deletion():
+			continue
+		authored_scene_pools[scene_key] = pool
+		_prepare_authored_scene(effect, current_scene)
+		return effect
 	authored_scene_pools[scene_key] = pool
 	var effect := scene.instantiate() as Node2D
 	if effect == null:
@@ -354,7 +361,7 @@ static func _acquire_authored_scene(current_scene: Node, scene: PackedScene, sce
 static func _has_reusable_authored_scene(scene_key: String) -> bool:
 	var pool: Array = authored_scene_pools.get(scene_key, [])
 	for effect in pool:
-		if effect is Node2D and is_instance_valid(effect):
+		if is_instance_valid(effect) and effect is Node2D and not (effect as Node2D).is_queued_for_deletion():
 			return true
 	return false
 
@@ -374,7 +381,7 @@ static func _release_authored_scene(effect: Node, scene_key: String) -> void:
 	if parent != null:
 		parent.remove_child(effect)
 	var pool: Array = authored_scene_pools.get(scene_key, [])
-	if pool.size() < AUTHORED_SCENE_POOL_LIMIT_PER_SCENE:
+	if pool.size() < AUTHORED_SCENE_POOL_LIMIT_PER_SCENE and not pool.has(effect):
 		pool.append(effect)
 		authored_scene_pools[scene_key] = pool
 	else:

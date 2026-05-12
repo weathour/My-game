@@ -158,6 +158,8 @@ static func _acquire_effect_part(scene: PackedScene, scene_key: String) -> Node2
 		if not is_instance_valid(pooled_root) or not (pooled_root is Node2D):
 			continue
 		var root := pooled_root as Node2D
+		if root.is_queued_for_deletion():
+			continue
 		effect_part_pools[scene_key] = pool
 		_mark_temporary_effect(root)
 		return root
@@ -184,7 +186,7 @@ static func _release_effect_part(root: Node2D) -> void:
 	if parent != null:
 		parent.remove_child(root)
 	var pool: Array = effect_part_pools.get(scene_key, [])
-	if pool.size() < EFFECT_PART_POOL_LIMIT_PER_SCENE:
+	if pool.size() < EFFECT_PART_POOL_LIMIT_PER_SCENE and not pool.has(root):
 		pool.append(root)
 		effect_part_pools[scene_key] = pool
 	else:

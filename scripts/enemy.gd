@@ -15,6 +15,7 @@ const ENEMY_RUNTIME_STATE := preload("res://scripts/enemies/enemy_runtime_state.
 const ENEMY_SAVE_DATA := preload("res://scripts/enemies/enemy_save_data.gd")
 const ENEMY_STATUS_EFFECTS := preload("res://scripts/enemies/enemy_status_effects.gd")
 const ENEMY_STATUS_VISUALS := preload("res://scripts/enemies/enemy_status_visuals.gd")
+const ENEMY_SPATIAL_GRID := preload("res://scripts/enemies/enemy_spatial_grid.gd")
 const ENEMY_TRAIT_BEHAVIOR := preload("res://scripts/enemies/enemy_trait_behavior.gd")
 const ENEMY_VISUALS := preload("res://scripts/enemies/enemy_visuals.gd")
 
@@ -159,6 +160,14 @@ var boss_visual_instance: Node2D
 var profile_initialized: bool = false
 var hit_flash_remaining: float = 0.0
 var separation_push: Vector2 = Vector2.ZERO
+var cached_separation_velocity: Vector2 = Vector2.ZERO
+var separation_refresh_frame: int = -1
+var status_visual_refresh_frame: int = -1
+var throttled_motion_delta: float = 0.0
+var motion_refresh_frame: int = -1
+var cached_motion_visual: Node
+var cached_motion_visual_moving: bool = false
+var cached_motion_visual_facing_sign: int = 0
 # Explicit velocity (was inherited from CharacterBody2D)
 var velocity: Vector2 = Vector2.ZERO
 
@@ -188,7 +197,7 @@ func _physics_process(delta: float) -> void:
 		_update_status_timers(delta)
 	if bleed_timer > 0.0 and bleed_damage_per_second > 0.0:
 		_update_bleed(delta)
-	if status_root != null or hit_flash_remaining > 0.0 or _has_status_visual_pressure():
+	if (status_root != null or hit_flash_remaining > 0.0 or _has_status_visual_pressure()) and _should_update_status_visual_frame():
 		_update_status_visuals()
 
 	if target == null or not is_instance_valid(target):
@@ -200,11 +209,15 @@ func _physics_process(delta: float) -> void:
 	_cached_to_target = target.global_position - global_position
 	_cached_distance_to_target = _cached_to_target.length()
 	_cached_direction_to_target = _cached_to_target.normalized() if _cached_distance_to_target > 0.001 else Vector2.RIGHT
+	if _should_skip_motion_frame(delta):
+		return
 	if _has_timed_behavior_traits():
-		_update_behavior_state(delta)
-	velocity = _compute_velocity(delta)
-	velocity += _compute_separation_velocity() * 0.85
-	_apply_direct_motion(delta)
+		_update_behavior_state(delta + throttled_motion_delta)
+	var motion_delta := delta + throttled_motion_delta
+	throttled_motion_delta = 0.0
+	velocity = _compute_velocity(motion_delta)
+	velocity += _get_separation_velocity() * 0.85
+	_apply_direct_motion(motion_delta)
 	_update_motion_visual()
 
 func apply_enemy_profile(kind: String, profile: Dictionary) -> void:
@@ -253,12 +266,7 @@ func _apply_direct_motion(delta: float) -> void:
 func _compute_separation_velocity() -> Vector2:
 	if get_tree() == null:
 		return Vector2.ZERO
-	var neighbors: Array = []
-	var scene: Node = get_tree().current_scene
-	if scene != null and scene.has_method("get_runtime_enemies"):
-		neighbors = scene.get_runtime_enemies()
-	else:
-		neighbors = get_tree().get_nodes_in_group("enemies")
+	var neighbors: Array = ENEMY_SPATIAL_GRID.get_neighbors(self, max(128.0, contact_radius * 3.0))
 	var push: Vector2 = Vector2.ZERO
 	var processed: int = 0
 	for other in neighbors:
@@ -285,6 +293,69 @@ func _compute_separation_velocity() -> Vector2:
 		if processed >= 8:
 			break
 	return push
+
+func _get_separation_velocity() -> Vector2:
+	var current_frame := Engine.get_physics_frames()
+	if _should_refresh_separation(current_frame):
+		cached_separation_velocity = _compute_separation_velocity()
+		separation_refresh_frame = current_frame + _get_separation_refresh_interval()
+	return cached_separation_velocity
+
+func _should_refresh_separation(current_frame: int) -> bool:
+	if enemy_kind != "normal" or secondary_behavior_id != "" or _has_timed_behavior_traits():
+		return true
+	if separation_refresh_frame < 0:
+		separation_refresh_frame = current_frame + int(get_instance_id() % _get_separation_refresh_interval())
+		return true
+	return current_frame >= separation_refresh_frame
+
+func _get_separation_refresh_interval() -> int:
+	return 2
+
+func _should_skip_motion_frame(delta: float) -> bool:
+	var interval := _get_motion_refresh_interval()
+	if interval <= 1:
+		throttled_motion_delta = 0.0
+		return false
+	var current_frame := Engine.get_physics_frames()
+	if motion_refresh_frame < 0:
+		motion_refresh_frame = current_frame + int(get_instance_id() % interval)
+	if current_frame < motion_refresh_frame:
+		throttled_motion_delta += delta
+		return true
+	motion_refresh_frame = current_frame + interval
+	return false
+
+func _get_motion_refresh_interval() -> int:
+	if enemy_kind != "normal" or secondary_behavior_id != "" or _has_timed_behavior_traits():
+		return 1
+	if slow_timer > 0.0 or vulnerability_timer > 0.0 or bleed_timer > 0.0 or hit_flash_remaining > 0.0:
+		return 1
+	if _cached_distance_to_target > 1200.0:
+		return 3
+	if _cached_distance_to_target > 820.0:
+		return 2
+	return 1
+
+func _should_update_status_visual_frame() -> bool:
+	var interval := _get_status_visual_refresh_interval()
+	if interval <= 1:
+		status_visual_refresh_frame = -1
+		return true
+	var current_frame := Engine.get_physics_frames()
+	if status_visual_refresh_frame < 0:
+		status_visual_refresh_frame = current_frame + int(get_instance_id() % interval)
+	if current_frame < status_visual_refresh_frame:
+		return false
+	status_visual_refresh_frame = current_frame + interval
+	return true
+
+func _get_status_visual_refresh_interval() -> int:
+	if enemy_kind != "normal" or secondary_behavior_id != "" or boss_visual_instance != null or _is_dasher:
+		return 1
+	if hit_flash_remaining > 0.0:
+		return 2
+	return 3
 
 func _update_behavior_state(delta: float) -> void:
 	ENEMY_TRAIT_BEHAVIOR.update_behavior_state(self, delta)

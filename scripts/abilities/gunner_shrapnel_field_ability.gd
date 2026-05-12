@@ -245,14 +245,18 @@ func _create_shrapnel_visual(root: Node2D, radius: float) -> Node2D:
 
 func _acquire_shrapnel_visual(root: Node2D) -> Node2D:
 	while not shrapnel_visual_pool.is_empty():
-		var visual: Node2D = shrapnel_visual_pool.pop_back()
-		if visual != null and is_instance_valid(visual):
-			var parent := visual.get_parent()
-			if parent != root:
-				if parent != null:
-					parent.remove_child(visual)
-				root.add_child(visual)
-			return visual
+		var pooled_visual: Variant = shrapnel_visual_pool.pop_back()
+		if not is_instance_valid(pooled_visual) or not (pooled_visual is Node2D):
+			continue
+		var visual := pooled_visual as Node2D
+		if visual.is_queued_for_deletion():
+			continue
+		var parent := visual.get_parent()
+		if parent != root:
+			if parent != null:
+				parent.remove_child(visual)
+			root.add_child(visual)
+		return visual
 	var visual: Node2D = null
 	if SHRAPNEL_SCENE != null:
 		visual = SHRAPNEL_SCENE.instantiate() as Node2D
@@ -279,7 +283,7 @@ func _release_shrapnel_visual(visual: Node2D) -> void:
 	var parent := visual.get_parent()
 	if parent != null:
 		parent.remove_child(visual)
-	if shrapnel_visual_pool.size() < SHRAPNEL_VISUAL_POOL_LIMIT:
+	if shrapnel_visual_pool.size() < SHRAPNEL_VISUAL_POOL_LIMIT and not shrapnel_visual_pool.has(visual):
 		shrapnel_visual_pool.append(visual)
 	else:
 		visual.queue_free()

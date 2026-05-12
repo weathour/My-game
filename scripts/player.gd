@@ -216,6 +216,7 @@ var role_switch_cooldown_bonus: float = 0.0
 
 var active_role_index: int = 0
 var facing_direction: Vector2 = Vector2.RIGHT
+var visual_facing_direction_x: float = 1.0
 var auto_attack_enabled: bool = false
 var roles: Array = []
 var role_upgrade_levels: Dictionary = {}

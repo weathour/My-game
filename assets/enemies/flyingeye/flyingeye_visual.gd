@@ -14,14 +14,17 @@ var last_moving_state: bool = false
 func _ready() -> void:
 	_ensure_sprite()
 	set_moving(false)
+	set_process(false)
 
 func _process(delta: float) -> void:
 	if hit_lock_remaining <= 0.0:
+		set_process(false)
 		return
 	hit_lock_remaining = max(0.0, hit_lock_remaining - delta)
 	if hit_lock_remaining <= 0.0:
 		current_animation = ""
 		set_moving(last_moving_state)
+		set_process(false)
 
 func set_moving(is_moving: bool, move_direction: Vector2 = Vector2.ZERO) -> void:
 	_ensure_sprite()
@@ -40,6 +43,7 @@ func play_hit() -> void:
 	hit_lock_remaining = 0.2
 	current_animation = "hit"
 	sprite.play("hit")
+	set_process(true)
 
 func _update_facing(move_direction: Vector2) -> void:
 	if abs(move_direction.x) <= 0.01:

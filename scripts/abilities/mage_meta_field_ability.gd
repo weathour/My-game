@@ -184,20 +184,24 @@ func _ensure_effect(owner) -> void:
 
 func _acquire_effect(owner) -> Node2D:
 	while not effect_pool.is_empty():
-		var pooled: Node2D = effect_pool.pop_back()
-		if pooled != null and is_instance_valid(pooled):
-			var parent := pooled.get_parent()
-			if parent != owner:
-				if parent != null:
-					parent.remove_child(pooled)
-				owner.add_child(pooled)
-			pooled.show()
-			pooled.position = Vector2.ZERO
-			pooled.rotation = 0.0
-			pooled.scale = Vector2.ONE
-			pooled.modulate = Color.WHITE
-			pooled.set_meta("meta_field_released", false)
-			return pooled
+		var pooled_effect: Variant = effect_pool.pop_back()
+		if not is_instance_valid(pooled_effect) or not (pooled_effect is Node2D):
+			continue
+		var pooled := pooled_effect as Node2D
+		if pooled.is_queued_for_deletion():
+			continue
+		var parent := pooled.get_parent()
+		if parent != owner:
+			if parent != null:
+				parent.remove_child(pooled)
+			owner.add_child(pooled)
+		pooled.show()
+		pooled.position = Vector2.ZERO
+		pooled.rotation = 0.0
+		pooled.scale = Vector2.ONE
+		pooled.modulate = Color.WHITE
+		pooled.set_meta("meta_field_released", false)
+		return pooled
 	var instance := FIELD_EFFECT_SCENE.instantiate() as Node2D
 	if instance != null:
 		owner.add_child(instance)
@@ -214,7 +218,7 @@ func _release_effect(effect_to_release: Node2D) -> void:
 	var sprite := effect_to_release.get_node_or_null("field") as AnimatedSprite2D
 	if sprite != null:
 		sprite.stop()
-	if effect_pool.size() < 2:
+	if effect_pool.size() < 2 and not effect_pool.has(effect_to_release):
 		effect_pool.append(effect_to_release)
 	else:
 		effect_to_release.queue_free()

@@ -4,6 +4,7 @@ const PERFORMANCE_COUNTERS := preload("res://scripts/game/performance_counters.g
 const PLAYER_DAMAGE_JOB_QUEUE := preload("res://scripts/player/player_damage_job_queue.gd")
 const PLAYER_DAMAGE_BATCHER := preload("res://scripts/player/player_damage_batcher.gd")
 const PERFORMANCE_GUARD := preload("res://scripts/game/performance_guard.gd")
+const ENEMY_SPATIAL_GRID := preload("res://scripts/enemies/enemy_spatial_grid.gd")
 
 const DAMAGE_JOB_QUEUE_NAME := "PlayerDamageJobQueue"
 const QUEUED_HIT_THRESHOLD := 16
@@ -107,34 +108,37 @@ static func damage_enemies_in_multiple_radii_batched(owner, centers: Array[Vecto
 		return damage_enemies_in_radius_batched(owner, centers[0], radius, damage_amount, vulnerability_bonus, slow_multiplier, slow_duration, source_role_id)
 	var resolved_role_id: String = _resolve_role_id(owner, source_role_id)
 	var batcher := _get_reusable_damage_batcher(owner)
-	var candidates: Array = _get_candidate_enemies_for_multiple_circles(owner, centers, radius)
-	_record_damage_query(candidates.size())
-	for enemy in candidates:
-		if not _is_live_enemy(enemy) or enemy is not Node2D:
-			continue
-		var hit_radius: float = _get_enemy_hit_radius(owner, enemy)
-		var total_radius: float = radius + hit_radius
-		var total_radius_squared: float = total_radius * total_radius
-		var enemy_position: Vector2 = (enemy as Node2D).global_position
-		for center in centers:
+	var total_candidates := 0
+	for center in centers:
+		var candidates: Array = _get_candidate_enemies_for_circle(owner, center, radius)
+		total_candidates += candidates.size()
+		for enemy in candidates:
+			if not _is_live_enemy(enemy) or enemy is not Node2D:
+				continue
+			var hit_radius: float = _get_enemy_hit_radius(owner, enemy)
+			var total_radius: float = radius + hit_radius
+			var total_radius_squared: float = total_radius * total_radius
+			var enemy_position: Vector2 = (enemy as Node2D).global_position
 			if center.distance_squared_to(enemy_position) <= total_radius_squared:
 				batcher.add_enemy(enemy, damage_amount, resolved_role_id, vulnerability_bonus, 2.0, slow_multiplier, slow_duration, center)
+	_record_damage_query(total_candidates)
 	PERFORMANCE_COUNTERS.add("damage_hits", batcher.hit_count)
 	return batcher.flush()
 
 static func damage_enemies_in_shapes_batched(owner, shapes: Array[Dictionary]) -> int:
 	if shapes.is_empty():
 		return 0
-	var candidates: Array = _get_candidate_enemies_for_shapes(owner, shapes)
-	_record_damage_query(candidates.size())
 	var batcher := _get_reusable_damage_batcher(owner)
-	for enemy in candidates:
-		if not _is_live_enemy(enemy) or enemy is not Node2D:
-			continue
-		var enemy_position: Vector2 = (enemy as Node2D).global_position
-		var hit_radius: float = _get_enemy_hit_radius(owner, enemy)
-		var enemy_id: int = enemy.get_instance_id()
-		for shape in shapes:
+	var total_candidates := 0
+	for shape in shapes:
+		var candidates: Array = _get_candidate_enemies_for_bounds(owner, _get_shape_bounds(shape))
+		total_candidates += candidates.size()
+		for enemy in candidates:
+			if not _is_live_enemy(enemy) or enemy is not Node2D:
+				continue
+			var enemy_position: Vector2 = (enemy as Node2D).global_position
+			var hit_radius: float = _get_enemy_hit_radius(owner, enemy)
+			var enemy_id: int = enemy.get_instance_id()
 			var hit_registry: Dictionary = shape.get("hit_registry", {})
 			if not hit_registry.is_empty() and hit_registry.has(enemy_id):
 				continue
@@ -153,6 +157,7 @@ static func damage_enemies_in_shapes_batched(owner, shapes: Array[Dictionary]) -
 				shape.get("source_position", null),
 				float(shape.get("kill_energy_bonus", 0.0))
 			)
+	_record_damage_query(total_candidates)
 	PERFORMANCE_COUNTERS.add("damage_hits", batcher.hit_count)
 	return batcher.flush()
 
@@ -548,9 +553,36 @@ static func _get_candidate_enemies_for_bounds_list(owner, bounds_list: Array[Rec
 					candidates.append(enemy)
 	return candidates
 
+static func _get_candidate_enemies_for_bounds(owner, bounds: Rect2) -> Array:
+	var grid: Dictionary = _get_enemy_grid(owner)
+	if grid.is_empty():
+		return []
+	var candidates: Array = []
+	var seen_enemy_ids: Dictionary = {}
+	var expanded_bounds: Rect2 = bounds.grow(DAMAGE_QUERY_BOUNDS_GROW)
+	var min_cell: Vector2i = _grid_cell(expanded_bounds.position)
+	var max_cell: Vector2i = _grid_cell(expanded_bounds.position + expanded_bounds.size)
+	for x in range(min_cell.x, max_cell.x + 1):
+		for y in range(min_cell.y, max_cell.y + 1):
+			var cell := Vector2i(x, y)
+			if not grid.has(cell):
+				continue
+			for enemy in grid[cell] as Array:
+				if not _is_live_enemy(enemy):
+					continue
+				var enemy_id: int = enemy.get_instance_id()
+				if seen_enemy_ids.has(enemy_id):
+					continue
+				seen_enemy_ids[enemy_id] = true
+				candidates.append(enemy)
+	return candidates
+
 static func _get_enemy_grid(owner) -> Dictionary:
 	var current_frame := Engine.get_physics_frames()
 	var tree: SceneTree = owner.get_tree() if owner != null and owner.has_method("get_tree") else null
+	var scene: Node = tree.current_scene if tree != null else null
+	if scene != null:
+		return ENEMY_SPATIAL_GRID.get_grid(scene)
 	var source_key := _get_enemy_source_cache_key(owner, tree)
 	if cached_enemy_grid_frame == current_frame and cached_enemy_grid_source_key == source_key:
 		return cached_enemy_grid
