@@ -267,13 +267,12 @@ static func _update_active_death_bursts(delta: float) -> void:
 static func _acquire_damage_label(current_scene: Node) -> Label:
 	while not damage_label_pool.is_empty():
 		var pooled_label: Variant = damage_label_pool.pop_back()
-		if not is_instance_valid(pooled_label) or not (pooled_label is Label):
-			continue
-		var label := pooled_label as Label
-		if label.is_queued_for_deletion():
-			continue
-		_prepare_pooled_node(label, current_scene)
-		return label
+		if is_instance_valid(pooled_label) and pooled_label is Label:
+			var label := pooled_label as Label
+			if label.is_queued_for_deletion():
+				continue
+			_prepare_pooled_node(label, current_scene)
+			return label
 	var label := Label.new()
 	current_scene.add_child(label)
 	label.add_to_group("temporary_effects")
@@ -292,13 +291,12 @@ static func _release_damage_label(label: Label) -> void:
 static func _acquire_death_burst(current_scene: Node) -> Polygon2D:
 	while not death_burst_pool.is_empty():
 		var pooled_burst: Variant = death_burst_pool.pop_back()
-		if not is_instance_valid(pooled_burst) or not (pooled_burst is Polygon2D):
-			continue
-		var burst := pooled_burst as Polygon2D
-		if burst.is_queued_for_deletion():
-			continue
-		_prepare_pooled_node(burst, current_scene)
-		return burst
+		if is_instance_valid(pooled_burst) and pooled_burst is Polygon2D:
+			var burst := pooled_burst as Polygon2D
+			if burst.is_queued_for_deletion():
+				continue
+			_prepare_pooled_node(burst, current_scene)
+			return burst
 	var burst := Polygon2D.new()
 	current_scene.add_child(burst)
 	burst.add_to_group("temporary_effects")
