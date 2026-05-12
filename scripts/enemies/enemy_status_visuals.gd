@@ -191,7 +191,7 @@ static func spawn_dash_trail(enemy, direction_vector: Vector2, length: float) ->
 static func _acquire_status_burst(current_scene: Node) -> Line2D:
 	while not status_burst_pool.is_empty():
 		var pooled_burst = status_burst_pool.pop_back()
-		if not is_instance_valid(pooled_burst):
+		if not is_instance_valid(pooled_burst) or not (pooled_burst is Line2D):
 			continue
 		var ring := pooled_burst as Line2D
 		if ring != null and not ring.is_queued_for_deletion():
@@ -207,7 +207,7 @@ static func _release_status_burst(ring: Line2D) -> void:
 		return
 	ring.hide()
 	ring.remove_from_group("temporary_effects")
-	if status_burst_pool.size() < STATUS_BURST_POOL_LIMIT:
+	if status_burst_pool.size() < STATUS_BURST_POOL_LIMIT and not status_burst_pool.has(ring):
 		status_burst_pool.append(ring)
 	else:
 		ring.queue_free()
@@ -215,7 +215,7 @@ static func _release_status_burst(ring: Line2D) -> void:
 static func _acquire_dash_trail(current_scene: Node) -> Line2D:
 	while not dash_trail_pool.is_empty():
 		var pooled_trail = dash_trail_pool.pop_back()
-		if not is_instance_valid(pooled_trail):
+		if not is_instance_valid(pooled_trail) or not (pooled_trail is Line2D):
 			continue
 		var trail := pooled_trail as Line2D
 		if trail != null and not trail.is_queued_for_deletion():
@@ -231,7 +231,7 @@ static func _release_dash_trail(trail: Line2D) -> void:
 		return
 	trail.hide()
 	trail.remove_from_group("temporary_effects")
-	if dash_trail_pool.size() < DASH_TRAIL_POOL_LIMIT:
+	if dash_trail_pool.size() < DASH_TRAIL_POOL_LIMIT and not dash_trail_pool.has(trail):
 		dash_trail_pool.append(trail)
 	else:
 		trail.queue_free()

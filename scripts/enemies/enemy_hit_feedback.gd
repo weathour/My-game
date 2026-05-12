@@ -176,6 +176,8 @@ static func _acquire_damage_label(current_scene: Node) -> Label:
 		var pooled_label: Variant = damage_label_pool.pop_back()
 		if is_instance_valid(pooled_label) and pooled_label is Label:
 			var label := pooled_label as Label
+			if label.is_queued_for_deletion():
+				continue
 			_prepare_pooled_node(label, current_scene)
 			return label
 	var label := Label.new()
@@ -188,7 +190,7 @@ static func _release_damage_label(label: Label) -> void:
 		return
 	label.hide()
 	label.remove_from_group("temporary_effects")
-	if damage_label_pool.size() < DAMAGE_LABEL_POOL_LIMIT:
+	if damage_label_pool.size() < DAMAGE_LABEL_POOL_LIMIT and not damage_label_pool.has(label):
 		damage_label_pool.append(label)
 	else:
 		label.queue_free()
@@ -198,6 +200,8 @@ static func _acquire_death_burst(current_scene: Node) -> Polygon2D:
 		var pooled_burst: Variant = death_burst_pool.pop_back()
 		if is_instance_valid(pooled_burst) and pooled_burst is Polygon2D:
 			var burst := pooled_burst as Polygon2D
+			if burst.is_queued_for_deletion():
+				continue
 			_prepare_pooled_node(burst, current_scene)
 			return burst
 	var burst := Polygon2D.new()
@@ -210,7 +214,7 @@ static func _release_death_burst(burst: Polygon2D) -> void:
 		return
 	burst.hide()
 	burst.remove_from_group("temporary_effects")
-	if death_burst_pool.size() < DEATH_BURST_POOL_LIMIT:
+	if death_burst_pool.size() < DEATH_BURST_POOL_LIMIT and not death_burst_pool.has(burst):
 		death_burst_pool.append(burst)
 	else:
 		burst.queue_free()

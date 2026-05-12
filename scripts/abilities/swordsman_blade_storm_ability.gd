@@ -153,20 +153,24 @@ func _ensure_effect(owner) -> void:
 
 func _acquire_tornado_effect(owner) -> Node2D:
 	while not tornado_effect_pool.is_empty():
-		var effect: Node2D = tornado_effect_pool.pop_back()
-		if effect != null and is_instance_valid(effect):
-			var parent := effect.get_parent()
-			if parent != owner:
-				if parent != null:
-					parent.remove_child(effect)
-				owner.add_child(effect)
-			effect.show()
-			effect.position = Vector2.ZERO
-			effect.rotation = 0.0
-			effect.scale = Vector2.ONE
-			effect.modulate = Color.WHITE
-			effect.set_meta("blade_storm_released", false)
-			return effect
+		var pooled_effect: Variant = tornado_effect_pool.pop_back()
+		if not is_instance_valid(pooled_effect) or not (pooled_effect is Node2D):
+			continue
+		var effect := pooled_effect as Node2D
+		if effect.is_queued_for_deletion():
+			continue
+		var parent := effect.get_parent()
+		if parent != owner:
+			if parent != null:
+				parent.remove_child(effect)
+			owner.add_child(effect)
+		effect.show()
+		effect.position = Vector2.ZERO
+		effect.rotation = 0.0
+		effect.scale = Vector2.ONE
+		effect.modulate = Color.WHITE
+		effect.set_meta("blade_storm_released", false)
+		return effect
 	var instance := SWORD_TORNADO_EFFECT_SCENE.instantiate() as Node2D
 	if instance != null:
 		owner.add_child(instance)
@@ -183,7 +187,7 @@ func _release_tornado_effect(effect: Node2D) -> void:
 	var sprite := effect.get_node_or_null("AnimatedSprite2D") as AnimatedSprite2D
 	if sprite != null:
 		sprite.stop()
-	if tornado_effect_pool.size() < TORNADO_EFFECT_POOL_LIMIT:
+	if tornado_effect_pool.size() < TORNADO_EFFECT_POOL_LIMIT and not tornado_effect_pool.has(effect):
 		tornado_effect_pool.append(effect)
 	else:
 		effect.queue_free()

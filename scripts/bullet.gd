@@ -606,9 +606,13 @@ func _can_spawn_temporary_effect(current_scene: Node) -> bool:
 
 func _acquire_impact_effect() -> Polygon2D:
 	while not impact_effect_pool.is_empty():
-		var impact: Polygon2D = impact_effect_pool.pop_back()
-		if impact != null and is_instance_valid(impact):
-			return impact
+		var pooled_impact: Variant = impact_effect_pool.pop_back()
+		if not is_instance_valid(pooled_impact) or not (pooled_impact is Polygon2D):
+			continue
+		var impact := pooled_impact as Polygon2D
+		if impact.is_queued_for_deletion():
+			continue
+		return impact
 	return Polygon2D.new()
 
 func _release_impact_effect(impact: Polygon2D) -> void:
@@ -629,9 +633,13 @@ func _release_impact_effect(impact: Polygon2D) -> void:
 
 func _acquire_split_ring() -> Node2D:
 	while not split_ring_pool.is_empty():
-		var ring: Node2D = split_ring_pool.pop_back()
-		if ring != null and is_instance_valid(ring):
-			return ring
+		var pooled_ring: Variant = split_ring_pool.pop_back()
+		if not is_instance_valid(pooled_ring) or not (pooled_ring is Node2D):
+			continue
+		var ring := pooled_ring as Node2D
+		if ring.is_queued_for_deletion():
+			continue
+		return ring
 	var ring := Node2D.new()
 	ring.set_meta("bullet_split_ring_initialized", true)
 	var outline := Line2D.new()
