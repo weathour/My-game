@@ -29,6 +29,13 @@ static var active_damage_labels: Array[Dictionary] = []
 static var active_death_bursts: Array[Dictionary] = []
 static var feedback_animation_frame: int = -1
 
+static func clear_runtime_state() -> void:
+	damage_label_pool.clear()
+	death_burst_pool.clear()
+	active_damage_labels.clear()
+	active_death_bursts.clear()
+	feedback_animation_frame = -1
+
 static func update_feedback_animations(delta: float) -> void:
 	_update_static_feedback_animations(delta)
 
@@ -214,8 +221,12 @@ static func _update_static_feedback_animations(delta: float) -> void:
 static func _update_active_damage_labels(delta: float) -> void:
 	for index in range(active_damage_labels.size() - 1, -1, -1):
 		var data: Dictionary = active_damage_labels[index]
-		var label := data.get("node", null) as Label
-		if label == null or not is_instance_valid(label):
+		var label_ref: Variant = data.get("node", null)
+		if not is_instance_valid(label_ref) or not (label_ref is Label):
+			active_damage_labels.remove_at(index)
+			continue
+		var label := label_ref as Label
+		if label.is_queued_for_deletion():
 			active_damage_labels.remove_at(index)
 			continue
 		var elapsed: float = float(data.get("elapsed", 0.0)) + delta
@@ -233,8 +244,12 @@ static func _update_active_damage_labels(delta: float) -> void:
 static func _update_active_death_bursts(delta: float) -> void:
 	for index in range(active_death_bursts.size() - 1, -1, -1):
 		var data: Dictionary = active_death_bursts[index]
-		var burst := data.get("node", null) as Polygon2D
-		if burst == null or not is_instance_valid(burst):
+		var burst_ref: Variant = data.get("node", null)
+		if not is_instance_valid(burst_ref) or not (burst_ref is Polygon2D):
+			active_death_bursts.remove_at(index)
+			continue
+		var burst := burst_ref as Polygon2D
+		if burst.is_queued_for_deletion():
 			active_death_bursts.remove_at(index)
 			continue
 		var elapsed: float = float(data.get("elapsed", 0.0)) + delta
@@ -252,12 +267,13 @@ static func _update_active_death_bursts(delta: float) -> void:
 static func _acquire_damage_label(current_scene: Node) -> Label:
 	while not damage_label_pool.is_empty():
 		var pooled_label: Variant = damage_label_pool.pop_back()
-		if is_instance_valid(pooled_label) and pooled_label is Label:
-			var label := pooled_label as Label
-			if label.is_queued_for_deletion():
-				continue
-			_prepare_pooled_node(label, current_scene)
-			return label
+		if not is_instance_valid(pooled_label) or not (pooled_label is Label):
+			continue
+		var label := pooled_label as Label
+		if label.is_queued_for_deletion():
+			continue
+		_prepare_pooled_node(label, current_scene)
+		return label
 	var label := Label.new()
 	current_scene.add_child(label)
 	label.add_to_group("temporary_effects")
@@ -276,12 +292,13 @@ static func _release_damage_label(label: Label) -> void:
 static func _acquire_death_burst(current_scene: Node) -> Polygon2D:
 	while not death_burst_pool.is_empty():
 		var pooled_burst: Variant = death_burst_pool.pop_back()
-		if is_instance_valid(pooled_burst) and pooled_burst is Polygon2D:
-			var burst := pooled_burst as Polygon2D
-			if burst.is_queued_for_deletion():
-				continue
-			_prepare_pooled_node(burst, current_scene)
-			return burst
+		if not is_instance_valid(pooled_burst) or not (pooled_burst is Polygon2D):
+			continue
+		var burst := pooled_burst as Polygon2D
+		if burst.is_queued_for_deletion():
+			continue
+		_prepare_pooled_node(burst, current_scene)
+		return burst
 	var burst := Polygon2D.new()
 	current_scene.add_child(burst)
 	burst.add_to_group("temporary_effects")
