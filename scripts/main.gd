@@ -21,6 +21,8 @@ const BLESSING_UNLOCK_NOTICE_FLOW := preload("res://scripts/game/blessing_unlock
 const PICKUP_COMPACTOR := preload("res://scripts/game/pickup_compactor.gd")
 const PERFORMANCE_GUARD := preload("res://scripts/game/performance_guard.gd")
 
+const PICKUP_GRID_CELL_SIZE := 128.0
+
 @export var enemy_scene: PackedScene = preload("res://scenes/enemy.tscn")
 @export var enemy_bullet_scene: PackedScene = preload("res://scenes/enemy_bullet.tscn")
 @export var exp_gem_scene: PackedScene = preload("res://scenes/exp_gem.tscn")
@@ -60,6 +62,8 @@ var suppress_exit_save: bool = false
 var defeated_boss_count: int = 0
 var exit_snapshot_saved: bool = false
 var performance_sample_elapsed: float = 0.0
+var minimap_update_elapsed: float = 0.0
+var minimap_update_interval: float = 0.18
 var pickup_compact_elapsed: float = 0.0
 var distant_enemy_maintenance_elapsed: float = 0.0
 var distant_enemy_maintenance_cursor: int = 0
@@ -72,9 +76,18 @@ var runtime_pickup_nodes: Dictionary = {
 }
 var runtime_pickup_cache: Dictionary = {}
 var runtime_pickup_cache_dirty: Dictionary = {}
+var runtime_pickup_pool_nodes: Dictionary = {}
+var runtime_pickup_pool_limit: int = 160
+var runtime_pickup_grid_cache: Dictionary = {}
+var runtime_pickup_grid_cache_dirty: Dictionary = {}
+var runtime_pickup_grid_cache_frame: Dictionary = {}
 var runtime_enemy_nodes: Dictionary = {}
 var runtime_enemy_cache: Array = []
 var runtime_enemy_cache_dirty: bool = true
+var runtime_enemy_pool_nodes: Dictionary = {}
+var runtime_enemy_pool_limit: int = 160
+var pending_enemy_spawn_requests: Array[Dictionary] = []
+var pending_enemy_spawn_cursor: int = 0
 var runtime_enemy_projectile_nodes: Dictionary = {}
 var runtime_enemy_projectile_cache: Array = []
 var runtime_enemy_projectile_cache_dirty: bool = true
@@ -177,7 +190,8 @@ func _process(delta: float) -> void:
 		_save_run_state()
 
 	GAME_HUD_FLOW.update_frame_hud(self)
-	_update_minimap()
+	_update_minimap(delta)
+	_process_pending_enemy_spawns()
 	_update_pickup_compaction(delta)
 	_update_distant_enemy_maintenance(delta)
 	_update_performance_metrics(delta)
@@ -191,7 +205,11 @@ func _setup_ui() -> void:
 func _setup_map_features() -> void:
 	GAME_MAP_FLOW.setup_map_features(self)
 
-func _update_minimap() -> void:
+func _update_minimap(delta: float = 0.0) -> void:
+	minimap_update_elapsed += delta
+	if minimap_update_elapsed < minimap_update_interval:
+		return
+	minimap_update_elapsed = 0.0
 	GAME_MAP_FLOW.update_minimap(self)
 
 func _connect_player_signals() -> void:
@@ -454,10 +472,14 @@ func _ensure_runtime_pickup_registry(group_name: String) -> Dictionary:
 		runtime_pickup_nodes[group_name] = {}
 		runtime_pickup_cache[group_name] = []
 		runtime_pickup_cache_dirty[group_name] = false
+		runtime_pickup_grid_cache[group_name] = {}
+		runtime_pickup_grid_cache_dirty[group_name] = true
+		runtime_pickup_grid_cache_frame[group_name] = -1
 	return runtime_pickup_nodes[group_name]
 
 func _mark_runtime_pickup_cache_dirty(group_name: String) -> void:
 	runtime_pickup_cache_dirty[group_name] = true
+	runtime_pickup_grid_cache_dirty[group_name] = true
 
 func register_runtime_pickup(group_name: String, node: Node) -> void:
 	if node == null:
@@ -483,10 +505,81 @@ func get_runtime_pickups(group_name: String) -> Array:
 		runtime_pickup_cache_dirty[group_name] = false
 	return runtime_pickup_cache[group_name]
 
+func get_runtime_pickups_in_radius(group_name: String, center: Vector2, radius: float) -> Array:
+	var grid: Dictionary = _get_runtime_pickup_grid(group_name)
+	if grid.is_empty():
+		return []
+	return _collect_runtime_pickups_from_grid(grid, center, radius)
+
+func _collect_runtime_pickups_from_grid(grid: Dictionary, center: Vector2, radius: float) -> Array:
+	var safe_radius: float = max(1.0, radius)
+	var min_cell: Vector2i = _pickup_grid_cell(center - Vector2.ONE * safe_radius)
+	var max_cell: Vector2i = _pickup_grid_cell(center + Vector2.ONE * safe_radius)
+	var candidates: Array = []
+	for x in range(min_cell.x, max_cell.x + 1):
+		for y in range(min_cell.y, max_cell.y + 1):
+			var cell: Vector2i = Vector2i(x, y)
+			if grid.has(cell):
+				candidates.append_array(grid[cell] as Array)
+	return candidates
+
+func _get_runtime_pickup_grid(group_name: String) -> Dictionary:
+	_ensure_runtime_pickup_registry(group_name)
+	var current_frame: int = Engine.get_physics_frames()
+	if not bool(runtime_pickup_grid_cache_dirty.get(group_name, true)) \
+			and int(runtime_pickup_grid_cache_frame.get(group_name, -1)) == current_frame \
+			and runtime_pickup_grid_cache.has(group_name):
+		return runtime_pickup_grid_cache[group_name]
+	var grid: Dictionary = {}
+	for pickup in get_runtime_pickups(group_name):
+		if not _is_runtime_node_valid(pickup) or pickup is not Node2D:
+			continue
+		var cell: Vector2i = _pickup_grid_cell((pickup as Node2D).global_position)
+		if not grid.has(cell):
+			grid[cell] = []
+		(grid[cell] as Array).append(pickup)
+	runtime_pickup_grid_cache[group_name] = grid
+	runtime_pickup_grid_cache_dirty[group_name] = false
+	runtime_pickup_grid_cache_frame[group_name] = current_frame
+	return grid
+
+func _pickup_grid_cell(position: Vector2) -> Vector2i:
+	return Vector2i(floori(position.x / PICKUP_GRID_CELL_SIZE), floori(position.y / PICKUP_GRID_CELL_SIZE))
+
+func release_runtime_pickup(group_name: String, node: Node) -> void:
+	if node == null or not is_instance_valid(node):
+		return
+	unregister_runtime_pickup(group_name, node)
+	if not runtime_pickup_pool_nodes.has(group_name):
+		runtime_pickup_pool_nodes[group_name] = {}
+	var pool: Dictionary = runtime_pickup_pool_nodes[group_name]
+	if pool.size() >= runtime_pickup_pool_limit:
+		node.queue_free()
+		return
+	var parent := node.get_parent()
+	if parent != null:
+		parent.remove_child(node)
+	node.hide()
+	node.set_process(false)
+	node.set_physics_process(false)
+	pool[node.get_instance_id()] = node
+
+func take_runtime_pickup_from_pool(group_name: String) -> Node:
+	if not runtime_pickup_pool_nodes.has(group_name):
+		return null
+	var pool: Dictionary = runtime_pickup_pool_nodes[group_name]
+	for instance_id in pool.keys():
+		var node = pool[instance_id]
+		pool.erase(instance_id)
+		if _is_runtime_node_valid(node):
+			return node
+	return null
+
 func register_runtime_enemy(enemy: Node) -> void:
 	if enemy == null:
 		return
 	var instance_id := enemy.get_instance_id()
+	runtime_enemy_pool_nodes.erase(instance_id)
 	if not runtime_enemy_nodes.has(instance_id):
 		runtime_enemy_nodes[instance_id] = enemy
 		runtime_enemy_cache_dirty = true
@@ -503,6 +596,74 @@ func get_runtime_enemies() -> Array:
 		runtime_enemy_cache = _rebuild_runtime_registry_cache(runtime_enemy_nodes)
 		runtime_enemy_cache_dirty = false
 	return runtime_enemy_cache
+
+func queue_runtime_enemy_spawn(request: Dictionary) -> void:
+	if request.is_empty():
+		return
+	pending_enemy_spawn_requests.append(request)
+
+func _process_pending_enemy_spawns() -> void:
+	if pending_enemy_spawn_cursor >= pending_enemy_spawn_requests.size():
+		_clear_pending_enemy_spawn_requests_if_needed()
+		return
+	var processed := 0
+	var process_limit := _get_enemy_spawn_process_limit()
+	while processed < process_limit and pending_enemy_spawn_cursor < pending_enemy_spawn_requests.size():
+		var request: Dictionary = pending_enemy_spawn_requests[pending_enemy_spawn_cursor]
+		pending_enemy_spawn_cursor += 1
+		if not request.is_empty():
+			_spawn_queued_enemy_request(request)
+		processed += 1
+	_clear_pending_enemy_spawn_requests_if_needed()
+
+func _spawn_queued_enemy_request(request: Dictionary) -> void:
+	if game_over or player == null or enemy_scene == null:
+		return
+	var kind: String = str(request.get("kind", "normal"))
+	var archetype: String = str(request.get("archetype", "chaser"))
+	var health_multiplier: float = float(request.get("health_multiplier", 1.0))
+	var speed_multiplier: float = float(request.get("speed_multiplier", 1.0))
+	var damage_multiplier: float = float(request.get("damage_multiplier", 1.0))
+	var spawn_position: Vector2 = request.get("spawn_position", Vector2.ZERO)
+	ENEMY_SPAWN_FLOW.spawn_configured_enemy_at(self, kind, archetype, health_multiplier, speed_multiplier, spawn_position, damage_multiplier)
+
+func _clear_pending_enemy_spawn_requests_if_needed() -> void:
+	if pending_enemy_spawn_cursor < pending_enemy_spawn_requests.size():
+		return
+	pending_enemy_spawn_requests.clear()
+	pending_enemy_spawn_cursor = 0
+
+func _get_enemy_spawn_process_limit() -> int:
+	var fps := Engine.get_frames_per_second()
+	if fps > 0 and fps < PERFORMANCE_GUARD.CRITICAL_FPS_THRESHOLD:
+		return 4
+	if fps > 0 and fps < PERFORMANCE_GUARD.LOW_FPS_THRESHOLD:
+		return 7
+	return 12
+
+func take_runtime_enemy_from_pool() -> Node:
+	for instance_id in runtime_enemy_pool_nodes.keys():
+		var enemy = runtime_enemy_pool_nodes[instance_id]
+		runtime_enemy_pool_nodes.erase(instance_id)
+		if _is_runtime_node_valid(enemy):
+			return enemy
+	return null
+
+func release_runtime_enemy(enemy: Node) -> void:
+	if enemy == null or not is_instance_valid(enemy):
+		return
+	unregister_runtime_enemy(enemy)
+	var instance_id := enemy.get_instance_id()
+	if runtime_enemy_pool_nodes.size() >= runtime_enemy_pool_limit:
+		enemy.queue_free()
+		return
+	var parent := enemy.get_parent()
+	if parent != null:
+		parent.remove_child(enemy)
+	enemy.hide()
+	enemy.set_process(false)
+	enemy.set_physics_process(false)
+	runtime_enemy_pool_nodes[instance_id] = enemy
 
 func register_runtime_enemy_projectile(projectile: Node, pooled: bool) -> void:
 	if projectile == null:

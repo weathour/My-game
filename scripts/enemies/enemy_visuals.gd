@@ -90,7 +90,11 @@ static func _should_use_pumpkin_visual(enemy) -> bool:
 	return enemy.enemy_kind == "normal" and enemy.archetype_id == "brute" and enemy.behavior_id == "chaser"
 
 static func _ensure_mushroom_visual(enemy) -> void:
-	if enemy.get_node_or_null("MushroomVisual") != null:
+	var existing_visual: Node = enemy.get_node_or_null("MushroomVisual")
+	if existing_visual != null:
+		_set_motion_visual_cache(enemy, existing_visual)
+		if existing_visual.has_method("set_moving"):
+			existing_visual.set_moving(false)
 		return
 	var visual := MUSHROOM_VISUAL_SCENE.instantiate() as Node2D
 	if visual == null:
@@ -103,7 +107,11 @@ static func _ensure_mushroom_visual(enemy) -> void:
 		visual.set_moving(false)
 
 static func _ensure_slime_visual(enemy) -> void:
-	if enemy.get_node_or_null("SlimeVisual") != null:
+	var existing_visual: Node = enemy.get_node_or_null("SlimeVisual")
+	if existing_visual != null:
+		_set_motion_visual_cache(enemy, existing_visual)
+		if existing_visual.has_method("set_moving"):
+			existing_visual.set_moving(false)
 		return
 	var visual := SLIME_VISUAL_SCENE.instantiate() as Node2D
 	if visual == null:
@@ -116,7 +124,11 @@ static func _ensure_slime_visual(enemy) -> void:
 		visual.set_moving(false)
 
 static func _ensure_flying_eye_visual(enemy) -> void:
-	if enemy.get_node_or_null("FlyingEyeVisual") != null:
+	var existing_visual: Node = enemy.get_node_or_null("FlyingEyeVisual")
+	if existing_visual != null:
+		_set_motion_visual_cache(enemy, existing_visual)
+		if existing_visual.has_method("set_moving"):
+			existing_visual.set_moving(false)
 		return
 	var visual := FLYING_EYE_VISUAL_SCENE.instantiate() as Node2D
 	if visual == null:
@@ -129,7 +141,11 @@ static func _ensure_flying_eye_visual(enemy) -> void:
 		visual.set_moving(false)
 
 static func _ensure_pumpkin_visual(enemy) -> void:
-	if enemy.get_node_or_null("PumpkinVisual") != null:
+	var existing_visual: Node = enemy.get_node_or_null("PumpkinVisual")
+	if existing_visual != null:
+		_set_motion_visual_cache(enemy, existing_visual)
+		if existing_visual.has_method("set_moving"):
+			existing_visual.set_moving(false)
 		return
 	var visual := PUMPKIN_VISUAL_SCENE.instantiate() as Node2D
 	if visual == null:

@@ -133,6 +133,10 @@ static func _get_exp_gem_candidates(enemy, center: Vector2, radius: float) -> Ar
 	return candidates
 
 static func _get_exp_gem_grid(enemy) -> Dictionary:
+	if enemy == null or not is_instance_valid(enemy):
+		return {}
+	if enemy is Node and not (enemy as Node).is_inside_tree():
+		return {}
 	var tree: SceneTree = enemy.get_tree()
 	if tree == null:
 		return {}
@@ -157,6 +161,8 @@ static func _get_runtime_pickups(enemy, tree: SceneTree, group_name: String) -> 
 	if scene != null and scene.has_method("get_runtime_pickups"):
 		return scene.get_runtime_pickups(group_name)
 	if enemy != null and enemy.has_method("get_tree"):
+		if enemy is Node and not (enemy as Node).is_inside_tree():
+			return []
 		var enemy_tree: SceneTree = enemy.get_tree()
 		if enemy_tree != null:
 			return enemy_tree.get_nodes_in_group(group_name)

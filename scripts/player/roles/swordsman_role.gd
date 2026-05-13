@@ -18,17 +18,14 @@ func perform_attack(owner) -> void:
 	_schedule_reprise_segments(owner, base_direction)
 
 func _perform_combo_segment(owner, base_direction: Vector2, combo_scale: float, allow_followthrough: bool = true) -> void:
-	var damage_shapes: Array[Dictionary] = []
 	var total_hits: int = 0
-	total_hits += _perform_attack_variant(owner, base_direction, combo_scale, true, true, allow_followthrough, damage_shapes)
-	_apply_trick_variants(owner, base_direction, combo_scale, damage_shapes)
-	var shape_hits: int = _apply_basic_attack_damage_shapes(owner, damage_shapes)
-	total_hits += shape_hits
+	total_hits += _perform_attack_variant(owner, base_direction, combo_scale, true, true, allow_followthrough)
+	total_hits += _apply_trick_variants(owner, base_direction, combo_scale)
 	if total_hits > 0 and not _uses_batched_basic_attack_damage(owner):
 		var role_data: Dictionary = owner._get_active_role()
 		owner._register_attack_result(role_data["id"], total_hits, false)
 
-func _perform_attack_variant(owner, attack_direction: Vector2, effect_scale: float = 1.0, advance_chain: bool = true, spawn_aftershock: bool = true, allow_followthrough: bool = false, damage_shapes: Array[Dictionary] = []) -> int:
+func _perform_attack_variant(owner, attack_direction: Vector2, effect_scale: float = 1.0, advance_chain: bool = true, spawn_aftershock: bool = true, allow_followthrough: bool = false) -> int:
 	var role_data: Dictionary = owner._get_active_role()
 	var upgrade_data: Dictionary = owner.role_upgrade_levels[role_data["id"]]
 	if attack_direction.length_squared() <= 0.001:
@@ -46,8 +43,6 @@ func _perform_attack_variant(owner, attack_direction: Vector2, effect_scale: flo
 	var slash_width: float = 8.0 * normal_attack_width_scale
 	var slash_forward_distance: float = 42.0
 	var style_color := Color(0.48, 0.86, 1.0, 0.95) if owner._get_story_style_id(role_data["id"]) == "moon_edge" else Color(1.0, 0.74, 0.34, 0.95)
-	var enemies_hit: int = 0
-
 	slash_length *= normal_attack_scale
 	var slash_visual_width: float = _get_slash_visual_width(slash_width)
 	var slash_mirror_forward_offset: float = _get_slash_mirror_forward_offset(owner, slash_visual_width)
@@ -66,20 +61,7 @@ func _perform_attack_variant(owner, attack_direction: Vector2, effect_scale: flo
 	var slash_hit_registry: Dictionary = {}
 	var slash_rect_width: float = max(slash_visual_width, slash_center.distance_to(owner.global_position) * 2.0 + 12.0)
 	var slash_animation_duration: float = owner._get_sword_slash_scene_animation_duration()
-	damage_shapes.append({
-		"type": "oriented_rect",
-		"center": slash_center,
-		"axis": slash_axis,
-		"length": slash_length,
-		"width": slash_rect_width,
-		"damage_amount": attack_damage,
-		"vulnerability_bonus": 0.0,
-		"slow_multiplier": 1.0,
-		"slow_duration": 0.0,
-		"source_role_id": role_data["id"],
-		"source_position": slash_center,
-		"hit_registry": slash_hit_registry
-	})
+	var enemies_hit: int = owner._damage_enemies_in_oriented_rect_unique(slash_center, slash_axis, slash_length, slash_rect_width, attack_damage, 0.0, 1.0, 0.0, slash_hit_registry, role_data["id"])
 	if allow_followthrough:
 		owner._schedule_swordsman_slash_followthrough(slash_center, slash_axis, slash_length, slash_rect_width, attack_damage, 0.0, 1.0, 0.0, slash_animation_duration, role_data["id"], slash_hit_registry)
 
@@ -105,12 +87,14 @@ func _perform_combo_segment_if_valid(owner, base_direction: Vector2, combo_scale
 		return
 	_perform_combo_segment(owner, base_direction, combo_scale, false)
 
-func _apply_trick_variants(owner, base_direction: Vector2, combo_scale: float, damage_shapes: Array[Dictionary]) -> void:
+func _apply_trick_variants(owner, base_direction: Vector2, combo_scale: float) -> int:
+	var total_hits := 0
 	var index := 1
 	for scale in _get_skill_effect_scales(owner, "quantity_skill_count"):
 		var direction := base_direction.rotated(deg_to_rad(30.0 * float(index)))
-		_perform_attack_variant(owner, direction, combo_scale * float(scale), false, false, false, damage_shapes)
+		total_hits += _perform_attack_variant(owner, direction, combo_scale * float(scale), false, false, false)
 		index += 1
+	return total_hits
 
 func _get_skill_effect_scales(owner, stat: String) -> Array[float]:
 	if owner != null and owner.has_method("_get_skill_blessing_effect_scales_for_skill"):
@@ -124,29 +108,8 @@ func _get_basic_attack_range_multiplier(owner) -> float:
 		return float(owner._get_basic_attack_range_multiplier("swordsman_basic_attack"))
 	return 1.0
 
-func _apply_basic_attack_damage_shapes(owner, shapes: Array[Dictionary]) -> int:
-	if shapes.is_empty():
-		return 0
-	if owner != null and owner.has_method("_damage_enemies_in_shapes_batched"):
-		return int(owner._damage_enemies_in_shapes_batched(shapes))
-	var hits := 0
-	for shape in shapes:
-		hits += int(owner._damage_enemies_in_oriented_rect_unique(
-			shape.get("center", Vector2.ZERO),
-			shape.get("axis", Vector2.RIGHT),
-			float(shape.get("length", 1.0)),
-			float(shape.get("width", 1.0)),
-			float(shape.get("damage_amount", 0.0)),
-			float(shape.get("vulnerability_bonus", 0.0)),
-			float(shape.get("slow_multiplier", 1.0)),
-			float(shape.get("slow_duration", 0.0)),
-			shape.get("hit_registry", {}),
-			str(shape.get("source_role_id", ""))
-		))
-	return hits
-
 func _uses_batched_basic_attack_damage(owner) -> bool:
-	return owner != null and owner.has_method("_damage_enemies_in_shapes_batched")
+	return owner != null and owner.has_method("_damage_enemies_in_oriented_rect_unique")
 
 func perform_background(owner) -> void:
 	var target_enemy: Node2D = owner._get_low_health_enemy()
@@ -226,12 +189,10 @@ func perform_ultimate(owner, cast_payload: Dictionary) -> void:
 	owner.switch_invulnerability_remaining = max(owner.switch_invulnerability_remaining, total_duration + POST_ULTIMATE_INVULNERABILITY_DURATION)
 	owner._delay_level_up_requests(total_duration)
 	owner._set_active_role_visual_hidden(true)
-	if owner.get_tree() != null:
-		var restore_tween: Tween = owner.create_tween()
-		restore_tween.tween_interval(total_duration)
-		restore_tween.tween_callback(func() -> void:
+	if owner.has_method("_schedule_repeating_sequence"):
+		owner._schedule_repeating_sequence(0.0, 1, func(_index: int) -> void:
 			owner._set_active_role_visual_hidden(false)
-		)
+		, total_duration)
 	owner._spawn_combat_tag(owner.global_position + Vector2(0.0, -34.0), "无敌斩", Color(1.0, 0.92, 0.6, 1.0))
 	owner._spawn_ring_effect(owner.global_position, 68.0, Color(1.0, 0.88, 0.52, 0.84), 8.0, 0.18)
 	_schedule_ultimate_sequence(owner, slash_scales, pursuit_level, crescent_level, thrust_level, float(cast_payload.get("damage_multiplier", 1.0)), ultimate_tier, 0.0, combo_start_index, combo_end_index)
@@ -245,14 +206,7 @@ func _schedule_ultimate_sequence(owner, slash_scales: Array[float], pursuit_leve
 	if start_delay <= 0.0:
 		owner._schedule_repeating_sequence(owner.SWORD_ULTIMATE_SLASH_INTERVAL, slash_count, sequence_callback)
 		return
-	var tree: SceneTree = owner.get_tree()
-	if tree == null:
-		return
-	var timer: SceneTreeTimer = tree.create_timer(start_delay)
-	timer.timeout.connect(func() -> void:
-		if is_instance_valid(owner):
-			owner._schedule_repeating_sequence(owner.SWORD_ULTIMATE_SLASH_INTERVAL, slash_count, sequence_callback)
-	)
+	owner._schedule_repeating_sequence(owner.SWORD_ULTIMATE_SLASH_INTERVAL, slash_count, sequence_callback, start_delay)
 
 func _execute_ultimate_slash(owner, slash_scales: Array[float], pursuit_level: int, crescent_level: int, thrust_level: int, cast_damage_multiplier: float, slash_index: int, ultimate_tier: int = 1, is_combo_segment: bool = false) -> void:
 	if owner.is_dead:
@@ -311,46 +265,12 @@ func _execute_ultimate_slash(owner, slash_scales: Array[float], pursuit_level: i
 	var damage_scale: float = (1.15 + float(pursuit_level) * 0.12 + float(crescent_level + thrust_level) * 0.06 + float(slash_index) * 0.08) * damage_multiplier
 	var line_damage: float = owner._get_role_damage("swordsman") * damage_scale
 	if is_combo_segment:
-		var combo_hits: int = _apply_ultimate_damage_shapes(owner, [{
-			"type": "line",
-			"start": start_position,
-			"end": scar_length_end,
-			"width": scar_width,
-			"damage_amount": line_damage,
-			"vulnerability_bonus": 0.08 + pursuit_level * 0.02,
-			"slow_multiplier": 1.0,
-			"slow_duration": 0.0,
-			"source_role_id": "swordsman",
-			"source_position": start_position
-		}])
+		var combo_hits: int = owner._damage_enemies_in_line(start_position, scar_length_end, scar_width, line_damage, 0.08 + pursuit_level * 0.02, 1.0, 0.0, "swordsman")
 		if combo_hits > 0 and not _uses_batched_ultimate_damage(owner):
 			owner._register_attack_result("swordsman", combo_hits, false)
 		return
-	var shape_hits: int = _apply_ultimate_damage_shapes(owner, [
-		{
-			"type": "line",
-			"start": start_position,
-			"end": scar_length_end,
-			"width": scar_width,
-			"damage_amount": line_damage,
-			"vulnerability_bonus": 0.08 + pursuit_level * 0.02,
-			"slow_multiplier": 1.0,
-			"slow_duration": 0.0,
-			"source_role_id": "swordsman",
-			"source_position": start_position
-		},
-		{
-			"type": "circle",
-			"center": end_position,
-			"radius": (48.0 + crescent_level * 12.0) * visual_hit_scale,
-			"damage_amount": owner._get_role_damage("swordsman") * (0.52 + float(crescent_level) * 0.08) * damage_multiplier,
-			"vulnerability_bonus": 0.03 + pursuit_level * 0.02,
-			"slow_multiplier": 1.0,
-			"slow_duration": 0.0,
-			"source_role_id": "swordsman",
-			"source_position": end_position
-		}
-	])
+	var shape_hits: int = owner._damage_enemies_in_line(start_position, scar_length_end, scar_width, line_damage, 0.08 + pursuit_level * 0.02, 1.0, 0.0, "swordsman")
+	shape_hits += owner._damage_enemies_in_radius(end_position, (48.0 + crescent_level * 12.0) * visual_hit_scale, owner._get_role_damage("swordsman") * (0.52 + float(crescent_level) * 0.08) * damage_multiplier, 0.03 + pursuit_level * 0.02, 1.0, 0.0, "swordsman")
 	if shape_hits > 0 and not _uses_batched_ultimate_damage(owner):
 		owner._register_attack_result("swordsman", shape_hits, false)
 	if target_enemy != null and is_instance_valid(target_enemy):
@@ -366,18 +286,7 @@ func _execute_ultimate_slash(owner, slash_scales: Array[float], pursuit_level: i
 		owner._queue_camera_shake(15.0, 0.22)
 		owner._spawn_burst_effect(end_position, (94.0 + crescent_level * 10.0) * visual_hit_scale, Color(1.0, 0.78, 0.35, 0.28), 0.2)
 		owner._spawn_ring_effect(end_position, (108.0 + thrust_level * 10.0) * visual_hit_scale, Color(1.0, 0.92, 0.58, 0.9), 10.0, 0.18)
-		var finisher_hits: int = _apply_ultimate_damage_shapes(owner, [{
-			"type": "line",
-			"start": start_position,
-			"end": end_position + travel_direction * (168.0 * visual_hit_scale),
-			"width": scar_width + 18.0 * visual_hit_scale,
-			"damage_amount": owner._get_role_damage("swordsman") * (1.55 + pursuit_level * 0.14) * damage_multiplier,
-			"vulnerability_bonus": 0.1,
-			"slow_multiplier": 1.0,
-			"slow_duration": 0.0,
-			"source_role_id": "swordsman",
-			"source_position": start_position
-		}])
+		var finisher_hits: int = owner._damage_enemies_in_line(start_position, end_position + travel_direction * (168.0 * visual_hit_scale), scar_width + 18.0 * visual_hit_scale, owner._get_role_damage("swordsman") * (1.55 + pursuit_level * 0.14) * damage_multiplier, 0.1, 1.0, 0.0, "swordsman")
 		if finisher_hits > 0 and not _uses_batched_ultimate_damage(owner):
 			owner._register_attack_result("swordsman", finisher_hits, false)
 		if target_enemy != null and is_instance_valid(target_enemy):

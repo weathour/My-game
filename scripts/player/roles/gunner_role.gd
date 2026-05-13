@@ -135,19 +135,28 @@ func _spawn_primary_batched_bullet(owner, shot_direction: Vector2, damage_amount
 		hit_radius += 1.5 * focus_level
 	var lifetime: float = float(overrides.get("lifetime", BASIC_BULLET_LIFETIME))
 	var pierce_count: int = int(round(float(upgrade_data["range_bonus"]) / 40.0)) + focus_level + owner._get_story_style_extra_pierce(role_data["id"])
-	return owner._spawn_batched_directional_bullet(shot_direction, damage_amount, bullet_color, role_data["id"], origin, {
-		"speed": (BASIC_BULLET_BASE_SPEED + BASIC_BULLET_FOCUS_SPEED_BONUS * focus_level) * owner._get_story_style_bullet_speed_multiplier(role_data["id"]) * _get_basic_attack_projectile_speed_multiplier(owner),
-		"lifetime": lifetime,
-		"hit_radius": hit_radius,
-		"visual_radius": _get_scaled_visual_radius(BASIC_BULLET_VISUAL_RADIUS),
-		"visual_min_diameter": GUNNER_BATCHED_BULLET_VISUAL_MIN_DIAMETER,
-		"enemy_hit_radius_scale": 0.42,
-		"enemy_hit_radius_min": 10.0,
-		"enemy_hit_radius_max": 28.0,
-		"pierce_count": pierce_count,
-		"vulnerability_bonus": 0.04 * focus_level if focus_level > 0 else 0.0,
-		"vulnerability_duration": 1.0 + 0.2 * focus_level if focus_level > 0 else 0.0
-	})
+	return owner._spawn_batched_directional_bullet_values(
+		shot_direction,
+		damage_amount,
+		bullet_color,
+		role_data["id"],
+		origin,
+		(BASIC_BULLET_BASE_SPEED + BASIC_BULLET_FOCUS_SPEED_BONUS * focus_level) * owner._get_story_style_bullet_speed_multiplier(role_data["id"]) * _get_basic_attack_projectile_speed_multiplier(owner),
+		lifetime,
+		hit_radius,
+		_get_scaled_visual_radius(BASIC_BULLET_VISUAL_RADIUS),
+		GUNNER_BATCHED_BULLET_VISUAL_MIN_DIAMETER,
+		Color(1.0, 1.0, 1.0, 0.0),
+		0.0,
+		0.42,
+		10.0,
+		28.0,
+		0.04 * focus_level if focus_level > 0 else 0.0,
+		1.0 + 0.2 * focus_level if focus_level > 0 else 0.0,
+		1.0,
+		0.0,
+		pierce_count
+	)
 
 func _configure_primary_bullet(owner, bullet, role_data: Dictionary, upgrade_data: Dictionary, focus_level: int) -> void:
 	bullet.speed = (BASIC_BULLET_BASE_SPEED + BASIC_BULLET_FOCUS_SPEED_BONUS * focus_level) * owner._get_story_style_bullet_speed_multiplier(role_data["id"]) * _get_basic_attack_projectile_speed_multiplier(owner)
@@ -202,12 +211,11 @@ func perform_background(owner) -> void:
 func perform_enter(owner, role_id: String, _assault_level: int, _assault_multiplier: float) -> int:
 	owner._show_switch_banner("\u8FDB\u573A", "\u5FEB\u62D4\u538B\u5236", Color(1.0, 0.58, 0.36, 1.0))
 	owner._fire_gunner_entry_wave(role_id, 0)
-	if owner.get_tree() != null:
-		var tween: Tween = owner.create_tween()
-		var wave_count := 2
-		for wave_index in range(1, wave_count):
-			tween.tween_interval(0.08)
-			tween.tween_callback(Callable(owner, "_fire_gunner_entry_wave").bind(role_id, wave_index))
+	var wave_count := 2
+	if owner.has_method("_schedule_repeating_sequence") and wave_count > 1:
+		owner._schedule_repeating_sequence(0.08, wave_count - 1, func(index: int) -> void:
+			owner._fire_gunner_entry_wave(role_id, index + 1)
+		, 0.08)
 	return 8
 
 func perform_exit(owner, role_id: String, rearguard_level: int) -> int:
@@ -252,15 +260,14 @@ func _lock_basic_attack_during_ultimate(owner, total_duration: float) -> void:
 	ultimate_attack_lock_id += 1
 	var lock_id: int = ultimate_attack_lock_id
 	ultimate_attack_locked = true
-	var tree: SceneTree = owner.get_tree() if owner != null else null
-	if tree == null:
+	if owner == null or not owner.has_method("_schedule_repeating_sequence"):
 		ultimate_attack_locked = false
 		return
-	var timer: SceneTreeTimer = tree.create_timer(max(0.0, total_duration))
-	timer.timeout.connect(func() -> void:
+	var lock_duration: float = max(0.0, total_duration)
+	owner._schedule_repeating_sequence(lock_duration, 1, func(_index: int) -> void:
 		if ultimate_attack_lock_id == lock_id:
 			ultimate_attack_locked = false
-	)
+	, lock_duration)
 
 func _apply_ultimate_cone_damage(owner, barrage_level: int, focus_level: int, cone_degrees: float, cast_damage_multiplier: float, ultimate_tier: int, tick_index: int) -> void:
 	if owner.is_dead:
@@ -277,19 +284,17 @@ func _apply_ultimate_cone_damage(owner, barrage_level: int, focus_level: int, co
 		damage_multiplier *= ULTIMATE_TIER_TWO_DAMAGE_MULTIPLIER * ULTIMATE_TIER_THREE_DAMAGE_MULTIPLIER
 	elif ultimate_tier >= 2:
 		damage_multiplier *= ULTIMATE_TIER_TWO_DAMAGE_MULTIPLIER
-	var hits: int = _apply_damage_shapes(owner, [{
-		"type": "cone",
-		"origin": origin,
-		"direction": direction,
-		"range": range_value,
-		"angle": deg_to_rad(cone_degrees),
-		"damage_amount": owner._get_role_damage("gunner") * damage_multiplier,
-		"vulnerability_bonus": 0.035 * float(focus_level),
-		"slow_multiplier": 1.0,
-		"slow_duration": 0.0,
-		"source_role_id": "gunner",
-		"source_position": origin
-	}])
+	var hits: int = owner._damage_enemies_in_cone_batched(
+		origin,
+		direction,
+		range_value,
+		deg_to_rad(cone_degrees),
+		owner._get_role_damage("gunner") * damage_multiplier,
+		0.035 * float(focus_level),
+		1.0,
+		0.0,
+		"gunner"
+	)
 	if hits > 0 and not _uses_batched_damage(owner):
 		owner._register_attack_result("gunner", hits, false)
 	if tick_index % 3 == 0:
@@ -313,19 +318,23 @@ func _spawn_ultimate_cone_visuals(owner, barrage_level: int, focus_level: int, s
 		var jitter: float = sin(phase + float(bullet_index) * 1.7) * 0.08
 		var shot_direction: Vector2 = direction.rotated(deg_to_rad(cone_degrees) * 0.5 * centered_ratio + jitter)
 		var origin_offset: Vector2 = direction * 18.0 + direction.orthogonal() * (centered_ratio * 10.0)
-		owner._spawn_batched_directional_bullet(shot_direction, 0.0, ULTIMATE_VISUAL_BULLET_COLOR, "gunner", owner.global_position + origin_offset, {
-			"speed": bullet_speed,
-			"lifetime": bullet_lifetime,
-			"hit_radius": 0.0,
-			"visual_radius": _get_scaled_visual_radius(3.8),
-			"visual_min_diameter": GUNNER_BATCHED_BULLET_VISUAL_MIN_DIAMETER,
-			"visual_outline_color": ULTIMATE_VISUAL_BULLET_OUTLINE_COLOR,
-			"visual_outline_width": ULTIMATE_VISUAL_BULLET_OUTLINE_WIDTH,
-			"enemy_hit_radius_scale": 0.0,
-			"enemy_hit_radius_min": 0.0,
-			"enemy_hit_radius_max": 0.0,
-			"pierce_count": 0
-		})
+		owner._spawn_batched_directional_bullet_values(
+			shot_direction,
+			0.0,
+			ULTIMATE_VISUAL_BULLET_COLOR,
+			"gunner",
+			owner.global_position + origin_offset,
+			bullet_speed,
+			bullet_lifetime,
+			0.0,
+			_get_scaled_visual_radius(3.8),
+			GUNNER_BATCHED_BULLET_VISUAL_MIN_DIAMETER,
+			ULTIMATE_VISUAL_BULLET_OUTLINE_COLOR,
+			ULTIMATE_VISUAL_BULLET_OUTLINE_WIDTH,
+			0.0,
+			0.0,
+			0.0
+		)
 
 func _apply_damage_shapes(owner, shapes: Array[Dictionary]) -> int:
 	if owner != null and owner.has_method("_damage_enemies_in_shapes_batched"):
@@ -419,22 +428,31 @@ func _fire_ultimate_wave(owner, wave_count: int, barrage_level: int, focus_level
 			wave_phase = ratio * PI + spin * 0.45
 			wave_amplitude = max(0.0, abs(centered_ratio) * (10.0 + scatter_level * 4.0))
 			wave_frequency = 6.4 + focus_level * 0.9 + barrage_level * 0.25
-		owner._spawn_batched_directional_bullet(shot_direction, owner._get_role_damage("gunner") * damage_scale, Color(1.0, 0.72, 0.38, 0.94), "gunner", wave_origin + muzzle_offset, {
-			"speed": 620.0 + focus_level * 54.0 + barrage_level * 18.0,
-			"lifetime": 1.08 + barrage_level * 0.06,
-			"hit_radius": 10.0 + scatter_level * 0.8,
-			"visual_radius": _get_scaled_visual_radius(3.8),
-			"visual_min_diameter": GUNNER_BATCHED_BULLET_VISUAL_MIN_DIAMETER,
-			"enemy_hit_radius_scale": 0.2,
-			"enemy_hit_radius_min": 4.0,
-			"enemy_hit_radius_max": 12.0,
-			"vulnerability_bonus": 0.04 * focus_level if focus_level > 0 else 0.0,
-			"vulnerability_duration": 1.0 + focus_level * 0.2 if focus_level > 0 else 0.0,
-			"pierce_count": normal_pierce_count,
-			"wave_amplitude": wave_amplitude,
-			"wave_frequency": wave_frequency,
-			"wave_phase": wave_phase
-		})
+		owner._spawn_batched_directional_bullet_values(
+			shot_direction,
+			owner._get_role_damage("gunner") * damage_scale,
+			Color(1.0, 0.72, 0.38, 0.94),
+			"gunner",
+			wave_origin + muzzle_offset,
+			620.0 + focus_level * 54.0 + barrage_level * 18.0,
+			1.08 + barrage_level * 0.06,
+			10.0 + scatter_level * 0.8,
+			_get_scaled_visual_radius(3.8),
+			GUNNER_BATCHED_BULLET_VISUAL_MIN_DIAMETER,
+			Color(1.0, 1.0, 1.0, 0.0),
+			0.0,
+			0.2,
+			4.0,
+			12.0,
+			0.04 * focus_level if focus_level > 0 else 0.0,
+			1.0 + focus_level * 0.2 if focus_level > 0 else 0.0,
+			1.0,
+			0.0,
+			normal_pierce_count,
+			wave_amplitude,
+			wave_frequency,
+			wave_phase
+		)
 
 	if lock_level > 0 and wave_index % max(2, 4 - lock_level) == 0:
 		for enemy in owner._get_enemy_targets(min(1 + lock_level, 3), false):

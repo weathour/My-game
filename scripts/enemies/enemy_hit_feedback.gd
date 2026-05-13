@@ -25,8 +25,15 @@ static var hit_flash_budget_frame: int = -1
 static var hit_flash_budget_used: int = 0
 static var damage_label_pool: Array = []
 static var death_burst_pool: Array = []
+static var active_damage_labels: Array[Dictionary] = []
+static var active_death_bursts: Array[Dictionary] = []
+static var feedback_animation_frame: int = -1
+
+static func update_feedback_animations(delta: float) -> void:
+	_update_static_feedback_animations(delta)
 
 static func play_hit_feedback(enemy, damage_amount: float, killed: bool) -> void:
+	_update_static_feedback_animations(1.0 / float(Engine.physics_ticks_per_second))
 	if killed or _consume_hit_flash_budget():
 		enemy.hit_flash_remaining = HIT_FLASH_DURATION
 		_play_custom_hit_visual(enemy)
@@ -41,18 +48,19 @@ static func _play_custom_hit_visual(enemy) -> void:
 	if cached_visual != null and is_instance_valid(cached_visual) and cached_visual.has_method("play_hit"):
 		cached_visual.play_hit()
 		return
-	var mushroom_visual: Node = enemy.get_node_or_null("MushroomVisual")
-	if mushroom_visual != null and mushroom_visual.has_method("play_hit"):
-		mushroom_visual.play_hit()
-	var slime_visual: Node = enemy.get_node_or_null("SlimeVisual")
-	if slime_visual != null and slime_visual.has_method("play_hit"):
-		slime_visual.play_hit()
-	var flying_eye_visual: Node = enemy.get_node_or_null("FlyingEyeVisual")
-	if flying_eye_visual != null and flying_eye_visual.has_method("play_hit"):
-		flying_eye_visual.play_hit()
-	var pumpkin_visual: Node = enemy.get_node_or_null("PumpkinVisual")
-	if pumpkin_visual != null and pumpkin_visual.has_method("play_hit"):
-		pumpkin_visual.play_hit()
+	var fallback_visual: Node = _find_hit_visual(enemy)
+	if fallback_visual == null:
+		return
+	enemy.set("cached_motion_visual", fallback_visual)
+	if fallback_visual.has_method("play_hit"):
+		fallback_visual.play_hit()
+
+static func _find_hit_visual(enemy) -> Node:
+	for visual_name in ["MushroomVisual", "SlimeVisual", "FlyingEyeVisual", "PumpkinVisual"]:
+		var visual: Node = enemy.get_node_or_null(visual_name)
+		if visual != null and visual.has_method("play_hit"):
+			return visual
+	return null
 
 static func get_hit_flash_alpha(hit_flash_remaining: float) -> float:
 	if hit_flash_remaining <= 0.0:
@@ -70,7 +78,7 @@ static func apply_hit_flash_alpha_to_node(node: Node, alpha: float) -> void:
 		apply_hit_flash_alpha_to_node(child, alpha)
 
 static func show_damage_number(enemy, damage_amount: float, killed: bool) -> void:
-	var current_scene = enemy.get_tree().current_scene
+	var current_scene: Node = _get_enemy_current_scene(enemy)
 	if current_scene == null:
 		return
 	if not killed and not _can_spawn_temporary_effect(current_scene):
@@ -89,11 +97,15 @@ static func show_damage_number(enemy, damage_amount: float, killed: bool) -> voi
 	label.z_index = 20
 	label.global_position = enemy.global_position + Vector2(-10.0, -28.0)
 
-	var target_position: Vector2 = label.global_position + Vector2(randf_range(-10.0, 10.0), -28.0)
-	var tween := label.create_tween()
-	tween.parallel().tween_property(label, "global_position", target_position, 0.38)
-	tween.parallel().tween_property(label, "modulate:a", 0.0, 0.38)
-	tween.tween_callback(_release_damage_label.bind(label))
+	var start_position: Vector2 = label.global_position
+	active_damage_labels.append({
+		"node": label,
+		"elapsed": 0.0,
+		"duration": 0.38,
+		"start_position": start_position,
+		"target_position": start_position + Vector2(randf_range(-10.0, 10.0), -28.0),
+		"start_alpha": label.modulate.a
+	})
 
 static func _consume_damage_number_budget() -> bool:
 	var current_frame := Engine.get_physics_frames()
@@ -151,7 +163,7 @@ static func _get_hit_flash_budget_per_frame() -> int:
 	return HIT_FLASH_BUDGET_PER_FRAME
 
 static func spawn_death_burst(enemy) -> void:
-	var current_scene = enemy.get_tree().current_scene
+	var current_scene: Node = _get_enemy_current_scene(enemy)
 	if current_scene == null:
 		return
 	if not _can_spawn_temporary_effect(current_scene):
@@ -170,10 +182,61 @@ static func spawn_death_burst(enemy) -> void:
 	])
 
 	burst.scale = Vector2(0.25, 0.25)
-	var tween := burst.create_tween()
-	tween.parallel().tween_property(burst, "scale", Vector2(1.2, 1.2), 0.16)
-	tween.parallel().tween_property(burst, "modulate:a", 0.0, 0.16)
-	tween.tween_callback(_release_death_burst.bind(burst))
+	active_death_bursts.append({
+		"node": burst,
+		"elapsed": 0.0,
+		"duration": 0.16,
+		"start_scale": Vector2(0.25, 0.25),
+		"target_scale": Vector2(1.2, 1.2)
+	})
+
+static func _update_static_feedback_animations(delta: float) -> void:
+	if delta <= 0.0:
+		return
+	var current_frame := Engine.get_process_frames()
+	if feedback_animation_frame == current_frame:
+		return
+	feedback_animation_frame = current_frame
+	_update_active_damage_labels(delta)
+	_update_active_death_bursts(delta)
+
+static func _update_active_damage_labels(delta: float) -> void:
+	for index in range(active_damage_labels.size() - 1, -1, -1):
+		var data: Dictionary = active_damage_labels[index]
+		var label := data.get("node", null) as Label
+		if label == null or not is_instance_valid(label):
+			active_damage_labels.remove_at(index)
+			continue
+		var elapsed: float = float(data.get("elapsed", 0.0)) + delta
+		var duration: float = max(0.001, float(data.get("duration", 0.38)))
+		var progress: float = clamp(elapsed / duration, 0.0, 1.0)
+		label.global_position = (data.get("start_position", label.global_position) as Vector2).lerp(data.get("target_position", label.global_position) as Vector2, progress)
+		label.modulate.a = float(data.get("start_alpha", 1.0)) * (1.0 - progress)
+		if elapsed >= duration:
+			active_damage_labels.remove_at(index)
+			_release_damage_label(label)
+			continue
+		data["elapsed"] = elapsed
+		active_damage_labels[index] = data
+
+static func _update_active_death_bursts(delta: float) -> void:
+	for index in range(active_death_bursts.size() - 1, -1, -1):
+		var data: Dictionary = active_death_bursts[index]
+		var burst := data.get("node", null) as Polygon2D
+		if burst == null or not is_instance_valid(burst):
+			active_death_bursts.remove_at(index)
+			continue
+		var elapsed: float = float(data.get("elapsed", 0.0)) + delta
+		var duration: float = max(0.001, float(data.get("duration", 0.16)))
+		var progress: float = clamp(elapsed / duration, 0.0, 1.0)
+		burst.scale = (data.get("start_scale", Vector2.ONE) as Vector2).lerp(data.get("target_scale", Vector2.ONE) as Vector2, progress)
+		burst.modulate.a = 1.0 - progress
+		if elapsed >= duration:
+			active_death_bursts.remove_at(index)
+			_release_death_burst(burst)
+			continue
+		data["elapsed"] = elapsed
+		active_death_bursts[index] = data
 
 static func _acquire_damage_label(current_scene: Node) -> Label:
 	while not damage_label_pool.is_empty():
@@ -231,6 +294,16 @@ static func _prepare_pooled_node(node: Node, current_scene: Node) -> void:
 		current_scene.add_child(node)
 	node.show()
 	node.add_to_group("temporary_effects")
+
+static func _get_enemy_current_scene(enemy) -> Node:
+	if enemy == null or not is_instance_valid(enemy):
+		return null
+	if enemy is Node and not (enemy as Node).is_inside_tree():
+		return null
+	var tree: SceneTree = enemy.get_tree()
+	if tree == null:
+		return null
+	return tree.current_scene
 
 static func _can_spawn_temporary_effect(root: Node) -> bool:
 	if root != null and root.has_method("_can_spawn_runtime_group"):

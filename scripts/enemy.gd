@@ -17,6 +17,7 @@ const ENEMY_STATUS_EFFECTS := preload("res://scripts/enemies/enemy_status_effect
 const ENEMY_STATUS_VISUALS := preload("res://scripts/enemies/enemy_status_visuals.gd")
 const ENEMY_SPATIAL_GRID := preload("res://scripts/enemies/enemy_spatial_grid.gd")
 const ENEMY_TRAIT_BEHAVIOR := preload("res://scripts/enemies/enemy_trait_behavior.gd")
+const ENEMY_TURRET_BOMBARD := preload("res://scripts/enemies/enemy_turret_bombard.gd")
 const ENEMY_VISUALS := preload("res://scripts/enemies/enemy_visuals.gd")
 
 @export var speed: float = 80.0
@@ -168,6 +169,7 @@ var motion_refresh_frame: int = -1
 var cached_motion_visual: Node
 var cached_motion_visual_moving: bool = false
 var cached_motion_visual_facing_sign: int = 0
+var pooled_inactive: bool = false
 # Explicit velocity (was inherited from CharacterBody2D)
 var velocity: Vector2 = Vector2.ZERO
 
@@ -189,6 +191,12 @@ func _exit_tree() -> void:
 	_unregister_runtime_enemy()
 
 func _physics_process(delta: float) -> void:
+	ENEMY_HIT_FEEDBACK.update_feedback_animations(delta)
+	ENEMY_STATUS_VISUALS.update_temporary_animations(delta)
+	var current_scene: Node = get_tree().current_scene if is_inside_tree() and get_tree() != null else null
+	ENEMY_TURRET_BOMBARD.update_bombards(current_scene, delta)
+	if pooled_inactive:
+		return
 	if status_root != null or boss_visual_instance != null or hit_flash_remaining > 0.0 or _has_status_visual_pressure():
 		status_visual_time += delta
 	if hit_flash_remaining > 0.0:
@@ -221,6 +229,7 @@ func _physics_process(delta: float) -> void:
 	_update_motion_visual()
 
 func apply_enemy_profile(kind: String, profile: Dictionary) -> void:
+	pooled_inactive = false
 	ENEMY_PROFILE_APPLIER.apply_profile(self, kind, profile)
 	_sync_trait_flags()
 	_reset_runtime_state(true)
@@ -264,14 +273,13 @@ func _apply_direct_motion(delta: float) -> void:
 	global_position += velocity * delta
 
 func _compute_separation_velocity() -> Vector2:
-	if get_tree() == null:
+	if not is_inside_tree():
 		return Vector2.ZERO
-	var neighbors: Array = ENEMY_SPATIAL_GRID.get_neighbors(self, max(128.0, contact_radius * 3.0))
 	var push: Vector2 = Vector2.ZERO
 	var processed: int = 0
-	for other in neighbors:
+	ENEMY_SPATIAL_GRID.for_each_neighbor(self, max(128.0, contact_radius * 3.0), func(other: Variant) -> bool:
 		if other == null or other == self or not is_instance_valid(other) or not (other is Node2D):
-			continue
+			return true
 		var offset: Vector2 = global_position - (other as Node2D).global_position
 		var other_radius: float = contact_radius
 		var other_contact_radius: Variant = other.get("contact_radius")
@@ -281,7 +289,7 @@ func _compute_separation_velocity() -> Vector2:
 		var radius_sq: float = radius * radius
 		var distance_sq: float = offset.length_squared()
 		if distance_sq > radius_sq:
-			continue
+			return true
 		if distance_sq <= 0.001:
 			offset = Vector2.RIGHT.rotated(float(get_instance_id() % 360) * PI / 180.0)
 			distance_sq = 1.0
@@ -290,8 +298,8 @@ func _compute_separation_velocity() -> Vector2:
 		var strength: float = (radius - distance) / radius
 		push += offset.normalized() * strength * max_push
 		processed += 1
-		if processed >= 8:
-			break
+		return processed < 8
+	)
 	return push
 
 func _get_separation_velocity() -> Vector2:
@@ -310,6 +318,8 @@ func _should_refresh_separation(current_frame: int) -> bool:
 	return current_frame >= separation_refresh_frame
 
 func _get_separation_refresh_interval() -> int:
+	if enemy_kind == "normal" and secondary_behavior_id == "" and not _has_timed_behavior_traits() and _is_scene_under_enemy_pressure():
+		return 4
 	return 2
 
 func _should_skip_motion_frame(delta: float) -> bool:
@@ -329,13 +339,36 @@ func _should_skip_motion_frame(delta: float) -> bool:
 func _get_motion_refresh_interval() -> int:
 	if enemy_kind != "normal" or secondary_behavior_id != "" or _has_timed_behavior_traits():
 		return 1
-	if slow_timer > 0.0 or vulnerability_timer > 0.0 or bleed_timer > 0.0 or hit_flash_remaining > 0.0:
+	# Status effects are common in late-game area skills. Do not let slow/vulnerability/bleed
+	# disable movement throttling for every normal enemy that was touched by a large skill.
+	if hit_flash_remaining > 0.0 and not _is_scene_under_enemy_pressure():
 		return 1
+	if _is_scene_under_enemy_pressure():
+		if _cached_distance_to_target > 760.0:
+			return 4
+		if _cached_distance_to_target > 420.0:
+			return 2
 	if _cached_distance_to_target > 1200.0:
 		return 3
 	if _cached_distance_to_target > 820.0:
 		return 2
 	return 1
+
+func _is_scene_under_enemy_pressure() -> bool:
+	if not is_inside_tree():
+		return false
+	var current_frame := Engine.get_physics_frames()
+	var scene: Node = get_tree().current_scene if get_tree() != null else null
+	if scene == null or not scene.has_method("get_runtime_enemies"):
+		return false
+	const CACHE_FRAME_KEY := "__enemy_pressure_frame"
+	const CACHE_VALUE_KEY := "__enemy_pressure_value"
+	if int(scene.get_meta(CACHE_FRAME_KEY, -1)) == current_frame:
+		return bool(scene.get_meta(CACHE_VALUE_KEY, false))
+	var pressure_active: bool = (scene.get_runtime_enemies() as Array).size() >= 110
+	scene.set_meta(CACHE_FRAME_KEY, current_frame)
+	scene.set_meta(CACHE_VALUE_KEY, pressure_active)
+	return pressure_active
 
 func _should_update_status_visual_frame() -> bool:
 	var interval := _get_status_visual_refresh_interval()
@@ -409,6 +442,52 @@ func take_damage(amount: float) -> bool:
 func take_batched_damage(amount: float) -> bool:
 	return ENEMY_DAMAGE.apply_damage(self, amount, false)
 
+func activate_pooled_enemy() -> void:
+	pooled_inactive = false
+	_register_runtime_enemy()
+
+func release_after_defeat() -> bool:
+	if enemy_kind != "normal":
+		return false
+	if not is_inside_tree():
+		return false
+	var scene: Node = get_tree().current_scene
+	if scene == null or not scene.has_method("release_runtime_enemy"):
+		return false
+	_prepare_for_pool()
+	scene.release_runtime_enemy(self)
+	return true
+
+func _prepare_for_pool() -> void:
+	pooled_inactive = true
+	velocity = Vector2.ZERO
+	separation_push = Vector2.ZERO
+	cached_separation_velocity = Vector2.ZERO
+	throttled_motion_delta = 0.0
+	slow_multiplier = 1.0
+	slow_timer = 0.0
+	vulnerability_bonus = 0.0
+	vulnerability_timer = 0.0
+	bleed_damage_per_second = 0.0
+	bleed_timer = 0.0
+	hit_flash_remaining = 0.0
+	status_visual_time = 0.0
+	status_visual_refresh_frame = -1
+	separation_refresh_frame = -1
+	motion_refresh_frame = -1
+	if status_root != null and is_instance_valid(status_root):
+		status_root.queue_free()
+	status_root = null
+	slow_ring = null
+	vulnerability_ring = null
+	trait_ring = null
+	dash_warning_ring = null
+	dash_warning_rect = null
+	if boss_visual_instance != null and is_instance_valid(boss_visual_instance):
+		boss_visual_instance.queue_free()
+	boss_visual_instance = null
+	cached_motion_visual = null
+
 func apply_slow(multiplier: float, duration: float) -> void:
 	ENEMY_STATUS_EFFECTS.apply_slow(self, multiplier, duration)
 
@@ -425,7 +504,11 @@ func _update_status_visuals() -> void:
 	ENEMY_STATUS_VISUALS.update_status_visuals(self)
 
 func _has_status_visual_pressure() -> bool:
-	return slow_timer > 0.0 or vulnerability_timer > 0.0 or enemy_kind != "normal" or secondary_behavior_id != "" or _is_dasher or boss_visual_instance != null
+	if enemy_kind != "normal" or secondary_behavior_id != "" or _is_dasher or boss_visual_instance != null:
+		return true
+	if status_root == null and _is_scene_under_enemy_pressure():
+		return false
+	return slow_timer > 0.0 or vulnerability_timer > 0.0
 
 func _has_timed_behavior_traits() -> bool:
 	return _is_shooter or _is_accelerator or _is_dasher or _is_glutton or _is_turret or _is_boss or _is_rebirth
@@ -458,11 +541,15 @@ func _apply_hit_flash_alpha_to_node(node: Node, alpha: float) -> void:
 	ENEMY_HIT_FEEDBACK.apply_hit_flash_alpha_to_node(node, alpha)
 
 func _register_runtime_enemy() -> void:
-	var scene: Node = get_tree().current_scene if get_tree() != null else null
+	if not is_inside_tree():
+		return
+	var scene: Node = get_tree().current_scene
 	if scene != null and scene.has_method("register_runtime_enemy"):
 		scene.register_runtime_enemy(self)
 
 func _unregister_runtime_enemy() -> void:
-	var scene: Node = get_tree().current_scene if get_tree() != null else null
+	if not is_inside_tree():
+		return
+	var scene: Node = get_tree().current_scene
 	if scene != null and scene.has_method("unregister_runtime_enemy"):
 		scene.unregister_runtime_enemy(self)

@@ -12,18 +12,30 @@ static func start_basic_mage_bombardment(owner, center: Vector2, radius: float, 
 	if owner.get_tree() == null:
 		return
 
-	var tween: Tween = owner.create_tween()
 	if use_boom_effect:
 		var warning_duration: float = owner._get_scene_animation_duration(owner.MAGE_WARNING_EFFECT_SCENE, 0.2)
 		var boom_duration: float = owner._get_scene_animation_duration(owner.MAGE_BOOM_EFFECT_SCENE, 0.3)
-		tween.tween_callback(Callable(owner, "_spawn_mage_warning_scene_effect").bind(center, radius))
-		tween.tween_interval(warning_duration)
-		tween.tween_callback(Callable(owner, "_spawn_mage_boom_scene_effect").bind(center, radius))
-		tween.tween_interval(boom_duration)
-		tween.tween_callback(Callable(owner, "_resolve_basic_mage_bombardment_damage").bind(center, radius, damage_amount, vulnerability_bonus, slow_multiplier, slow_duration, gravity_level, echo_level, frost_level, role_id, use_boom_effect, advance_attack_chain))
+		owner._spawn_mage_warning_scene_effect(center, radius)
+		if owner.has_method("_schedule_repeating_sequence"):
+			owner._schedule_repeating_sequence(0.0, 1, func(_index: int) -> void:
+				if is_instance_valid(owner):
+					owner._spawn_mage_boom_scene_effect(center, radius)
+			, warning_duration)
+			owner._schedule_repeating_sequence(0.0, 1, func(_index: int) -> void:
+				if is_instance_valid(owner):
+					owner._resolve_basic_mage_bombardment_damage(center, radius, damage_amount, vulnerability_bonus, slow_multiplier, slow_duration, gravity_level, echo_level, frost_level, role_id, use_boom_effect, advance_attack_chain)
+			, warning_duration + boom_duration)
+		else:
+			owner._spawn_mage_boom_scene_effect(center, radius)
+			owner._resolve_basic_mage_bombardment_damage(center, radius, damage_amount, vulnerability_bonus, slow_multiplier, slow_duration, gravity_level, echo_level, frost_level, role_id, use_boom_effect, advance_attack_chain)
 	else:
-		tween.tween_interval(0.22)
-		tween.tween_callback(Callable(owner, "_trigger_basic_mage_bombardment_impact").bind(center, radius, damage_amount, vulnerability_bonus, slow_multiplier, slow_duration, gravity_level, echo_level, frost_level, role_id, use_boom_effect, advance_attack_chain))
+		if owner.has_method("_schedule_repeating_sequence"):
+			owner._schedule_repeating_sequence(0.0, 1, func(_index: int) -> void:
+				if is_instance_valid(owner):
+					owner._trigger_basic_mage_bombardment_impact(center, radius, damage_amount, vulnerability_bonus, slow_multiplier, slow_duration, gravity_level, echo_level, frost_level, role_id, use_boom_effect, advance_attack_chain)
+			, 0.22)
+		else:
+			trigger_basic_mage_bombardment_impact(owner, center, radius, damage_amount, vulnerability_bonus, slow_multiplier, slow_duration, gravity_level, echo_level, frost_level, role_id, use_boom_effect, advance_attack_chain)
 
 
 static func trigger_basic_mage_bombardment_impact(owner, center: Vector2, radius: float, damage_amount: float, vulnerability_bonus: float, slow_multiplier: float, slow_duration: float, gravity_level: int, echo_level: int, frost_level: int, role_id: String, use_boom_effect: bool = false, advance_attack_chain: bool = true) -> void:
@@ -58,52 +70,20 @@ static func resolve_basic_mage_bombardment_damage(owner, center: Vector2, radius
 	owner._spawn_burst_effect(center, radius, Color(0.52, 0.9, 1.0, 0.22), 0.2)
 	if frost_level > 0:
 		owner._spawn_frost_sigils_effect(center, max(20.0, radius * 0.58), Color(0.86, 0.98, 1.0, 0.76), 0.18)
-	var damage_shapes: Array[Dictionary] = []
+	var hits: int = 0
 	if use_boom_effect:
 		var ellipse_horizontal_radius: float = radius * 2.04
 		var ellipse_vertical_radius: float = max(32.0, radius * 0.84)
-		damage_shapes.append({
-			"type": "ellipse",
-			"center": center,
-			"horizontal_radius": ellipse_horizontal_radius,
-			"vertical_radius": ellipse_vertical_radius,
-			"damage_amount": damage_amount,
-			"vulnerability_bonus": vulnerability_bonus,
-			"slow_multiplier": slow_multiplier,
-			"slow_duration": slow_duration,
-			"source_role_id": role_id,
-			"source_position": center
-		})
+		hits += owner._damage_enemies_in_ellipse(center, ellipse_horizontal_radius, ellipse_vertical_radius, damage_amount, vulnerability_bonus, slow_multiplier, slow_duration, role_id)
 	else:
-		damage_shapes.append({
-			"type": "circle",
-			"center": center,
-			"radius": radius,
-			"damage_amount": damage_amount,
-			"vulnerability_bonus": vulnerability_bonus,
-			"slow_multiplier": slow_multiplier,
-			"slow_duration": slow_duration,
-			"source_role_id": role_id,
-			"source_position": center
-		})
+		hits += owner._damage_enemies_in_radius(center, radius, damage_amount, vulnerability_bonus, slow_multiplier, slow_duration, role_id)
 
 	if echo_level > 0:
 		var echo_target: Node2D = get_enemy_nearest_to_position(owner, center + owner.facing_direction * (36.0 + echo_level * 10.0))
 		if echo_target != null and is_instance_valid(echo_target) and center.distance_to(echo_target.global_position) <= 132.0 + echo_level * 16.0:
 			var echo_center: Vector2 = echo_target.global_position
 			owner._spawn_burst_effect(echo_center, 24.0 + echo_level * 6.0, Color(0.64, 0.94, 1.0, 0.16), 0.14)
-			damage_shapes.append({
-				"type": "circle",
-				"center": echo_center,
-				"radius": 24.0 + echo_level * 6.0,
-				"damage_amount": damage_amount * (0.24 + echo_level * 0.05),
-				"vulnerability_bonus": 0.0,
-				"slow_multiplier": max(0.62, slow_multiplier + 0.08),
-				"slow_duration": 0.8 + echo_level * 0.15,
-				"source_role_id": role_id,
-				"source_position": echo_center
-			})
-	var hits: int = _apply_damage_shapes(owner, damage_shapes)
+			hits += owner._damage_enemies_in_radius(echo_center, 24.0 + echo_level * 6.0, damage_amount * (0.24 + echo_level * 0.05), 0.0, max(0.62, slow_multiplier + 0.08), 0.8 + echo_level * 0.15, role_id)
 	if hits > 0 and not _uses_batched_damage(owner):
 		owner._register_attack_result(role_id, hits, false)
 
@@ -128,39 +108,8 @@ static func get_enemy_near_position(owner, position: Vector2, max_distance: floa
 	return PLAYER_TARGETING.get_enemy_near_position(owner._get_live_enemies(), position, max_distance)
 
 
-static func _apply_damage_shapes(owner, shapes: Array[Dictionary]) -> int:
-	if shapes.is_empty():
-		return 0
-	if owner != null and owner.has_method("_damage_enemies_in_shapes_batched"):
-		return int(owner._damage_enemies_in_shapes_batched(shapes))
-	var hits := 0
-	for shape in shapes:
-		if str(shape.get("type", "")) == "ellipse":
-			hits += int(owner._damage_enemies_in_ellipse(
-				shape.get("center", Vector2.ZERO),
-				float(shape.get("horizontal_radius", 1.0)),
-				float(shape.get("vertical_radius", 1.0)),
-				float(shape.get("damage_amount", 0.0)),
-				float(shape.get("vulnerability_bonus", 0.0)),
-				float(shape.get("slow_multiplier", 1.0)),
-				float(shape.get("slow_duration", 0.0)),
-				str(shape.get("source_role_id", ""))
-			))
-		else:
-			hits += int(owner._damage_enemies_in_radius(
-				shape.get("center", Vector2.ZERO),
-				float(shape.get("radius", 1.0)),
-				float(shape.get("damage_amount", 0.0)),
-				float(shape.get("vulnerability_bonus", 0.0)),
-				float(shape.get("slow_multiplier", 1.0)),
-				float(shape.get("slow_duration", 0.0)),
-				str(shape.get("source_role_id", ""))
-			))
-	return hits
-
-
 static func _uses_batched_damage(owner) -> bool:
-	return owner != null and owner.has_method("_damage_enemies_in_shapes_batched")
+	return owner != null and owner.has_method("_damage_enemies_in_radius")
 
 
 static func get_mage_mouse_bombard_center(owner, base_range: float) -> Vector2:

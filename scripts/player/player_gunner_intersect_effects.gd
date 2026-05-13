@@ -5,6 +5,12 @@ const EFFECT_PART_POOL_LIMIT_PER_SCENE := 48
 
 static var effect_part_pools: Dictionary = {}
 static var scene_animation_duration_cache: Dictionary = {}
+static var active_cleanup_jobs: Array[Dictionary] = []
+
+static func update_effect_animations(delta: float) -> void:
+	if delta <= 0.0:
+		return
+	_update_cleanup_jobs(delta)
 
 static func _mark_temporary_effect(node: Node) -> void:
 	if node != null:
@@ -275,9 +281,30 @@ static func _play_gunner_intersect_beam(
 			release_gunner_intersect_effect(effect)
 		, CONNECT_ONE_SHOT)
 	else:
-		var tween := effect.create_tween()
-		tween.tween_interval(get_scene_animation_duration(beam_scene, 0.18))
-		tween.tween_callback(func() -> void:
+		_track_cleanup(effect, beam_root, get_scene_animation_duration(beam_scene, 0.18))
+
+static func _track_cleanup(effect: Node2D, beam_root: Node2D, duration: float) -> void:
+	active_cleanup_jobs.append({
+		"effect_ref": weakref(effect),
+		"beam_ref": weakref(beam_root),
+		"elapsed": 0.0,
+		"duration": max(0.001, duration)
+	})
+
+static func _update_cleanup_jobs(delta: float) -> void:
+	for index in range(active_cleanup_jobs.size() - 1, -1, -1):
+		var data: Dictionary = active_cleanup_jobs[index]
+		var elapsed: float = float(data.get("elapsed", 0.0)) + delta
+		if elapsed < float(data.get("duration", 0.1)):
+			data["elapsed"] = elapsed
+			active_cleanup_jobs[index] = data
+			continue
+		active_cleanup_jobs.remove_at(index)
+		var beam_ref: WeakRef = data.get("beam_ref", null) as WeakRef
+		var beam_root := beam_ref.get_ref() as Node2D if beam_ref != null else null
+		if beam_root != null and is_instance_valid(beam_root):
 			_release_effect_part(beam_root)
+		var effect_ref: WeakRef = data.get("effect_ref", null) as WeakRef
+		var effect := effect_ref.get_ref() as Node2D if effect_ref != null else null
+		if effect != null and is_instance_valid(effect):
 			release_gunner_intersect_effect(effect)
-		)

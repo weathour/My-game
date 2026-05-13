@@ -47,10 +47,10 @@ static func fire_shooter_pattern(enemy) -> void:
 static func spawn_projectile(enemy, origin: Vector2, shot_direction: Vector2, shot_speed: float, shot_damage: float, shot_lifetime: float, color: Color, mode: String, extra_config: Dictionary = {}) -> void:
 	if enemy.projectile_scene == null:
 		return
-	var current_scene: Node = enemy.get_tree().current_scene
+	var current_scene: Node = _get_enemy_current_scene(enemy)
 	if current_scene == null:
 		return
-	if not PERFORMANCE_GUARD.can_spawn_in_group(current_scene, "enemy_projectiles", _get_enemy_projectile_limit(enemy)):
+	if not _can_spawn_enemy_projectile(current_scene, enemy):
 		return
 	var projectile = _take_projectile_from_pool(current_scene)
 	if projectile == null:
@@ -98,7 +98,23 @@ static func get_projectile_color(enemy) -> Color:
 	return ENEMY_VISUAL_DATA.get_projectile_color(enemy.archetype_id)
 
 static func _get_enemy_projectile_limit(enemy) -> int:
-	var current_scene: Node = enemy.get_tree().current_scene if enemy != null and enemy.get_tree() != null else null
+	var current_scene: Node = _get_enemy_current_scene(enemy)
 	if current_scene != null and current_scene.has_method("_get_difficulty_limit"):
 		return int(current_scene._get_difficulty_limit("enemy_projectile_limit", PERFORMANCE_GUARD.DEFAULT_ENEMY_PROJECTILE_LIMIT))
 	return PERFORMANCE_GUARD.DEFAULT_ENEMY_PROJECTILE_LIMIT
+
+static func _can_spawn_enemy_projectile(current_scene: Node, enemy) -> bool:
+	var limit: int = _get_enemy_projectile_limit(enemy)
+	if current_scene != null and current_scene.has_method("_can_spawn_runtime_group"):
+		return bool(current_scene._can_spawn_runtime_group("enemy_projectiles", limit))
+	return PERFORMANCE_GUARD.can_spawn_in_group(current_scene, "enemy_projectiles", limit)
+
+static func _get_enemy_current_scene(enemy) -> Node:
+	if enemy == null or not is_instance_valid(enemy):
+		return null
+	if enemy is Node and not (enemy as Node).is_inside_tree():
+		return null
+	var tree: SceneTree = enemy.get_tree()
+	if tree == null:
+		return null
+	return tree.current_scene

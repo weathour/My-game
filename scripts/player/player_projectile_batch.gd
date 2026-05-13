@@ -36,6 +36,7 @@ var hit_radii: PackedFloat32Array = PackedFloat32Array()
 var visual_radii: PackedFloat32Array = PackedFloat32Array()
 var visual_min_diameters: PackedFloat32Array = PackedFloat32Array()
 var visual_outline_widths: PackedFloat32Array = PackedFloat32Array()
+var damage_enabled_flags: Array[bool] = []
 var enemy_hit_radius_scales: PackedFloat32Array = PackedFloat32Array()
 var enemy_hit_radius_mins: PackedFloat32Array = PackedFloat32Array()
 var enemy_hit_radius_maxs: PackedFloat32Array = PackedFloat32Array()
@@ -52,9 +53,9 @@ var wave_travel_distances: PackedFloat32Array = PackedFloat32Array()
 var wave_origins: Array[Vector2] = []
 var wave_forwards: Array[Vector2] = []
 var wave_sides: Array[Vector2] = []
-var hit_enemy_ids: Array[Dictionary] = []
-var projectiles: Array = []
+var hit_enemy_ids: Array = []
 var scan_cursor: int = 0
+var damage_enabled_count: int = 0
 var animation_elapsed: float = 0.0
 var current_animation_frame: int = -1
 var bullet_frame_textures: Array[Texture2D] = []
@@ -74,8 +75,8 @@ func _ready() -> void:
 	_load_bullet_frame_textures()
 	_setup_multimesh_renderers()
 
-func configure(owner: Node) -> void:
-	source_player = owner
+func configure(batch_owner: Node) -> void:
+	source_player = batch_owner
 
 func add_projectile(data: Dictionary) -> bool:
 	if positions.size() >= MAX_BATCHED_PROJECTILES:
@@ -84,9 +85,9 @@ func add_projectile(data: Dictionary) -> bool:
 	if shot_direction.length_squared() <= 0.001:
 		shot_direction = Vector2.RIGHT
 	shot_direction = shot_direction.normalized()
-	var position: Vector2 = data.get("position", Vector2.ZERO) as Vector2
-	positions.append(position)
-	source_origins.append(data.get("source_origin", position) as Vector2)
+	var spawn_position: Vector2 = data.get("position", Vector2.ZERO) as Vector2
+	positions.append(spawn_position)
+	source_origins.append(data.get("source_origin", spawn_position) as Vector2)
 	directions.append(shot_direction)
 	damages.append(float(data.get("damage", 0.0)))
 	colors.append(data.get("color", Color(1.0, 0.72, 0.38, 0.94)) as Color)
@@ -98,6 +99,7 @@ func add_projectile(data: Dictionary) -> bool:
 	visual_radii.append(float(data.get("visual_radius", 4.2)))
 	visual_min_diameters.append(float(data.get("visual_min_diameter", 8.0)))
 	visual_outline_widths.append(float(data.get("visual_outline_width", 0.0)))
+	_append_damage_enabled_flag(damages[damages.size() - 1] > 0.0 and hit_radii[hit_radii.size() - 1] > 0.0)
 	enemy_hit_radius_scales.append(float(data.get("enemy_hit_radius_scale", 0.2)))
 	enemy_hit_radius_mins.append(float(data.get("enemy_hit_radius_min", 4.0)))
 	enemy_hit_radius_maxs.append(float(data.get("enemy_hit_radius_max", 12.0)))
@@ -105,30 +107,98 @@ func add_projectile(data: Dictionary) -> bool:
 	vulnerability_durations.append(float(data.get("vulnerability_duration", 0.0)))
 	slow_multipliers.append(float(data.get("slow_multiplier", 1.0)))
 	slow_durations.append(float(data.get("slow_duration", 0.0)))
-	pierce_counts.append(int(data.get("pierce_count", 0)))
+	var pierce_count: int = int(data.get("pierce_count", 0))
+	pierce_counts.append(pierce_count)
 	wave_amplitudes.append(float(data.get("wave_amplitude", 0.0)))
 	wave_frequencies.append(float(data.get("wave_frequency", 0.0)))
 	wave_phases.append(float(data.get("wave_phase", 0.0)))
 	wave_elapsed_times.append(0.0)
 	wave_travel_distances.append(0.0)
-	wave_origins.append(data.get("wave_origin", position) as Vector2)
+	wave_origins.append(data.get("wave_origin", spawn_position) as Vector2)
 	wave_forwards.append(data.get("wave_forward", shot_direction) as Vector2)
 	wave_sides.append(data.get("wave_side", shot_direction.orthogonal().normalized()) as Vector2)
-	hit_enemy_ids.append({})
-	_sync_projectile_size()
-	_update_multimesh_instances()
+	if pierce_count > 0:
+		hit_enemy_ids.append({})
+	else:
+		hit_enemy_ids.append(null)
+	return true
+
+func add_projectile_values(
+	spawn_position: Vector2,
+	source_origin: Vector2,
+	direction: Vector2,
+	damage: float,
+	color: Color,
+	role_id: String,
+	speed: float = 620.0,
+	lifetime: float = 1.0,
+	hit_radius: float = DEFAULT_HIT_RADIUS,
+	visual_radius: float = 4.2,
+	visual_min_diameter: float = 8.0,
+	visual_outline_color: Color = Color(1.0, 1.0, 1.0, 0.0),
+	visual_outline_width: float = 0.0,
+	enemy_hit_radius_scale: float = 0.2,
+	enemy_hit_radius_min: float = 4.0,
+	enemy_hit_radius_max: float = 12.0,
+	vulnerability_bonus: float = 0.0,
+	vulnerability_duration: float = 0.0,
+	slow_multiplier: float = 1.0,
+	slow_duration: float = 0.0,
+	pierce_count: int = 0,
+	wave_amplitude: float = 0.0,
+	wave_frequency: float = 0.0,
+	wave_phase: float = 0.0
+) -> bool:
+	if positions.size() >= MAX_BATCHED_PROJECTILES:
+		return false
+	var shot_direction: Vector2 = direction
+	if shot_direction.length_squared() <= 0.001:
+		shot_direction = Vector2.RIGHT
+	shot_direction = shot_direction.normalized()
+	positions.append(spawn_position)
+	source_origins.append(source_origin)
+	directions.append(shot_direction)
+	damages.append(damage)
+	colors.append(color)
+	outline_colors.append(visual_outline_color)
+	role_ids.append(role_id)
+	speeds.append(speed)
+	lifetimes.append(lifetime)
+	hit_radii.append(hit_radius)
+	visual_radii.append(visual_radius)
+	visual_min_diameters.append(visual_min_diameter)
+	visual_outline_widths.append(visual_outline_width)
+	_append_damage_enabled_flag(damage > 0.0 and hit_radius > 0.0)
+	enemy_hit_radius_scales.append(enemy_hit_radius_scale)
+	enemy_hit_radius_mins.append(enemy_hit_radius_min)
+	enemy_hit_radius_maxs.append(enemy_hit_radius_max)
+	vulnerability_bonuses.append(vulnerability_bonus)
+	vulnerability_durations.append(vulnerability_duration)
+	slow_multipliers.append(slow_multiplier)
+	slow_durations.append(slow_duration)
+	pierce_counts.append(pierce_count)
+	wave_amplitudes.append(wave_amplitude)
+	wave_frequencies.append(wave_frequency)
+	wave_phases.append(wave_phase)
+	wave_elapsed_times.append(0.0)
+	wave_travel_distances.append(0.0)
+	wave_origins.append(spawn_position)
+	wave_forwards.append(shot_direction)
+	wave_sides.append(shot_direction.orthogonal().normalized())
+	if pierce_count > 0:
+		hit_enemy_ids.append({})
+	else:
+		hit_enemy_ids.append(null)
 	return true
 
 func _physics_process(delta: float) -> void:
 	if positions.is_empty():
-		if not projectiles.is_empty():
-			projectiles.clear()
+		if bullet_multimesh != null and bullet_multimesh.visible_instance_count != 0:
 			_update_multimesh_instances()
 		return
 	_update_animation_frame(delta)
 	_update_projectiles(delta)
 	_check_projectile_hits()
-	_sync_projectile_size()
 	_update_multimesh_instances()
 	PERFORMANCE_COUNTERS.add("batched_projectiles", positions.size())
 
@@ -161,8 +231,7 @@ func _check_projectile_hits() -> void:
 	if source_player == null or not is_instance_valid(source_player):
 		_clear_projectiles()
 		return
-	var enemies: Array = PLAYER_DAMAGE_RESOLVER._get_live_enemies(source_player)
-	if enemies.is_empty() or positions.is_empty():
+	if positions.is_empty() or damage_enabled_count <= 0:
 		return
 	var enemy_grid: Dictionary = PLAYER_DAMAGE_RESOLVER._get_enemy_grid(source_player)
 	if enemy_grid.is_empty():
@@ -173,8 +242,8 @@ func _check_projectile_hits() -> void:
 	while checked_projectiles < positions.size() and checks_done < MAX_HIT_CHECKS_PER_FRAME:
 		if positions.is_empty():
 			break
-		if scan_cursor >= positions.size():
-			scan_cursor = 0
+		if not _advance_scan_cursor_to_damage_enabled():
+			break
 		var hit_enemy: Node2D = _find_hit_enemy(scan_cursor, enemy_grid)
 		checks_done += 1
 		if hit_enemy != null:
@@ -191,6 +260,19 @@ func _check_projectile_hits() -> void:
 		damage_batcher.flush()
 		damage_batcher = null
 
+func _advance_scan_cursor_to_damage_enabled() -> bool:
+	if damage_enabled_count <= 0 or positions.is_empty():
+		return false
+	var attempts: int = 0
+	while attempts < positions.size():
+		if scan_cursor >= positions.size():
+			scan_cursor = 0
+		if damage_enabled_flags[scan_cursor]:
+			return true
+		scan_cursor += 1
+		attempts += 1
+	return false
+
 func _get_damage_batcher() -> RefCounted:
 	if reusable_damage_batcher == null:
 		reusable_damage_batcher = PLAYER_DAMAGE_BATCHER.new(source_player)
@@ -199,10 +281,10 @@ func _get_damage_batcher() -> RefCounted:
 	return reusable_damage_batcher
 
 func _find_hit_enemy(projectile_index: int, grid: Dictionary) -> Node2D:
-	var position: Vector2 = positions[projectile_index]
+	var projectile_position: Vector2 = positions[projectile_index]
 	var total_cell_radius: float = hit_radii[projectile_index] + DEFAULT_ENEMY_HIT_RADIUS
 	var cell_radius: int = int(ceil(total_cell_radius / HIT_GRID_CELL_SIZE))
-	var center_cell: Vector2i = _grid_cell(position)
+	var center_cell: Vector2i = _grid_cell(projectile_position)
 	for x in range(center_cell.x - cell_radius, center_cell.x + cell_radius + 1):
 		for y in range(center_cell.y - cell_radius, center_cell.y + cell_radius + 1):
 			var cell := Vector2i(x, y)
@@ -215,12 +297,13 @@ func _find_hit_enemy(projectile_index: int, grid: Dictionary) -> Node2D:
 					continue
 				var enemy_radius: float = _get_enemy_hit_radius(enemy as Node2D, enemy_hit_radius_scales[projectile_index], enemy_hit_radius_mins[projectile_index], enemy_hit_radius_maxs[projectile_index])
 				var total_radius: float = hit_radii[projectile_index] + enemy_radius
-				if position.distance_squared_to((enemy as Node2D).global_position) <= total_radius * total_radius:
+				if projectile_position.distance_squared_to((enemy as Node2D).global_position) <= total_radius * total_radius:
 					return enemy as Node2D
 	return null
 
 func _apply_projectile_hit(projectile_index: int, enemy: Node2D) -> void:
-	_mark_projectile_hit_enemy(projectile_index, enemy)
+	if pierce_counts[projectile_index] > 0:
+		_mark_projectile_hit_enemy(projectile_index, enemy)
 	var role_id: String = role_ids[projectile_index]
 	if damage_batcher != null:
 		damage_batcher.add_enemy(
@@ -242,12 +325,19 @@ func _apply_projectile_hit(projectile_index: int, enemy: Node2D) -> void:
 func _has_projectile_hit_enemy(projectile_index: int, enemy: Node2D) -> bool:
 	if projectile_index < 0 or projectile_index >= hit_enemy_ids.size():
 		return false
-	return hit_enemy_ids[projectile_index].has(enemy.get_instance_id())
+	var hits: Variant = hit_enemy_ids[projectile_index]
+	if hits is not Dictionary:
+		return false
+	return (hits as Dictionary).has(enemy.get_instance_id())
 
 func _mark_projectile_hit_enemy(projectile_index: int, enemy: Node2D) -> void:
 	if projectile_index < 0 or projectile_index >= hit_enemy_ids.size():
 		return
-	hit_enemy_ids[projectile_index][enemy.get_instance_id()] = true
+	var hits: Variant = hit_enemy_ids[projectile_index]
+	if hits is not Dictionary:
+		hits = {}
+		hit_enemy_ids[projectile_index] = hits
+	(hits as Dictionary)[enemy.get_instance_id()] = true
 
 func _build_enemy_grid(enemies: Array) -> Dictionary:
 	var grid: Dictionary = {}
@@ -269,15 +359,16 @@ func _get_live_enemies() -> Array:
 		return scene.get_runtime_enemies()
 	return tree.get_nodes_in_group("enemies")
 
-func _get_enemy_hit_radius(enemy: Node2D, scale: float, minimum: float, maximum: float) -> float:
+func _get_enemy_hit_radius(enemy: Node2D, radius_scale: float, minimum: float, maximum: float) -> float:
 	var contact_radius: Variant = enemy.get("contact_radius")
 	if contact_radius == null:
 		return clamp(DEFAULT_ENEMY_HIT_RADIUS, minimum, maximum)
-	return clamp(float(contact_radius) * scale, minimum, maximum)
+	return clamp(float(contact_radius) * radius_scale, minimum, maximum)
 
 func _remove_projectile(index: int) -> void:
 	var last_index := positions.size() - 1
 	if index != last_index:
+		var removed_damage_enabled: bool = damage_enabled_flags[index]
 		positions[index] = positions[last_index]
 		source_origins[index] = source_origins[last_index]
 		directions[index] = directions[last_index]
@@ -291,6 +382,9 @@ func _remove_projectile(index: int) -> void:
 		visual_radii[index] = visual_radii[last_index]
 		visual_min_diameters[index] = visual_min_diameters[last_index]
 		visual_outline_widths[index] = visual_outline_widths[last_index]
+		damage_enabled_flags[index] = damage_enabled_flags[last_index]
+		if removed_damage_enabled:
+			damage_enabled_count -= 1
 		enemy_hit_radius_scales[index] = enemy_hit_radius_scales[last_index]
 		enemy_hit_radius_mins[index] = enemy_hit_radius_mins[last_index]
 		enemy_hit_radius_maxs[index] = enemy_hit_radius_maxs[last_index]
@@ -308,6 +402,8 @@ func _remove_projectile(index: int) -> void:
 		wave_forwards[index] = wave_forwards[last_index]
 		wave_sides[index] = wave_sides[last_index]
 		hit_enemy_ids[index] = hit_enemy_ids[last_index]
+	elif damage_enabled_flags[index]:
+		damage_enabled_count -= 1
 	positions.pop_back()
 	source_origins.pop_back()
 	directions.pop_back()
@@ -321,6 +417,7 @@ func _remove_projectile(index: int) -> void:
 	visual_radii.resize(last_index)
 	visual_min_diameters.resize(last_index)
 	visual_outline_widths.resize(last_index)
+	damage_enabled_flags.pop_back()
 	enemy_hit_radius_scales.resize(last_index)
 	enemy_hit_radius_mins.resize(last_index)
 	enemy_hit_radius_maxs.resize(last_index)
@@ -355,6 +452,7 @@ func _clear_projectiles() -> void:
 	visual_radii.clear()
 	visual_min_diameters.clear()
 	visual_outline_widths.clear()
+	damage_enabled_flags.clear()
 	enemy_hit_radius_scales.clear()
 	enemy_hit_radius_mins.clear()
 	enemy_hit_radius_maxs.clear()
@@ -372,13 +470,14 @@ func _clear_projectiles() -> void:
 	wave_forwards.clear()
 	wave_sides.clear()
 	hit_enemy_ids.clear()
-	projectiles.clear()
 	scan_cursor = 0
+	damage_enabled_count = 0
 	_update_multimesh_instances()
 
-func _sync_projectile_size() -> void:
-	if projectiles.size() != positions.size():
-		projectiles.resize(positions.size())
+func _append_damage_enabled_flag(enabled: bool) -> void:
+	damage_enabled_flags.append(enabled)
+	if enabled:
+		damage_enabled_count += 1
 
 func _setup_multimesh_renderers() -> void:
 	bullet_outline_multimesh = _create_multimesh()
@@ -459,28 +558,28 @@ func _update_multimesh_instances() -> void:
 	if bullet_outline_multimesh != null:
 		bullet_outline_multimesh.visible_instance_count = count
 	for index in range(count):
-		var position: Vector2 = positions[index]
+		var projectile_position: Vector2 = positions[index]
 		var direction: Vector2 = directions[index]
 		var radius: float = visual_radii[index]
 		var color: Color = colors[index]
 		var diameter: float = max(visual_min_diameters[index], radius * 2.0)
 		var frame_size := Vector2(diameter, diameter) * (BULLET_FRAME_BASE_SIZE / 32.0)
-		bullet_multimesh.set_instance_transform_2d(index, _make_transform(position, direction, frame_size))
+		bullet_multimesh.set_instance_transform_2d(index, _make_transform(projectile_position, direction, frame_size))
 		bullet_multimesh.set_instance_color(index, color)
 		if bullet_outline_multimesh != null:
 			var outline_width: float = visual_outline_widths[index]
 			var outline_color: Color = outline_colors[index] if outline_width > 0.0 else Color(1.0, 1.0, 1.0, 0.0)
 			var outline_diameter: float = diameter + outline_width * 2.0
 			var outline_size := Vector2(outline_diameter, outline_diameter) * (BULLET_FRAME_BASE_SIZE / 32.0)
-			bullet_outline_multimesh.set_instance_transform_2d(index, _make_transform(position, direction, outline_size))
+			bullet_outline_multimesh.set_instance_transform_2d(index, _make_transform(projectile_position, direction, outline_size))
 			bullet_outline_multimesh.set_instance_color(index, outline_color)
 
-func _make_transform(position: Vector2, direction: Vector2, size: Vector2) -> Transform2D:
+func _make_transform(transform_position: Vector2, direction: Vector2, size: Vector2) -> Transform2D:
 	var forward := direction.normalized()
 	if forward.length_squared() <= 0.001:
 		forward = Vector2.RIGHT
 	var side := forward.orthogonal()
-	return Transform2D(forward * size.x, side * size.y, position)
+	return Transform2D(forward * size.x, side * size.y, transform_position)
 
-func _grid_cell(position: Vector2) -> Vector2i:
-	return Vector2i(floori(position.x / HIT_GRID_CELL_SIZE), floori(position.y / HIT_GRID_CELL_SIZE))
+func _grid_cell(world_position: Vector2) -> Vector2i:
+	return Vector2i(floori(world_position.x / HIT_GRID_CELL_SIZE), floori(world_position.y / HIT_GRID_CELL_SIZE))

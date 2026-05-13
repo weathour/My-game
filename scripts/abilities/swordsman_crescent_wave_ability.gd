@@ -28,11 +28,13 @@ const CRESCENT_PROJECTILE_POOL_LIMIT := 16
 var cooldown_remaining: float = 0.0
 var crescent_projectile_pool: Array[Node2D] = []
 var crescent_projectile_spawn_serial: int = 0
+var active_crescent_projectiles: Array[Dictionary] = []
 
 
 func update(delta: float) -> void:
 	if cooldown_remaining > 0.0:
 		cooldown_remaining = max(0.0, cooldown_remaining - delta)
+	_update_crescent_projectiles(delta)
 
 
 func can_trigger(owner, role_id: String) -> bool:
@@ -105,19 +107,7 @@ func _cast_once(owner, direction: Vector2, damage_scale: float) -> void:
 	var wave_length: float = WAVE_LENGTH * _get_range_multiplier(owner)
 	var slash_center: Vector2 = owner.global_position + direction * (slash_length * 0.42)
 	owner._spawn_sword_fan_scene_effect(slash_center, direction, visual_hit_multiplier)
-	var slash_hits: int = _apply_damage_shapes(owner, [{
-		"type": "oriented_rect",
-		"center": slash_center,
-		"axis": direction,
-		"length": slash_length,
-		"width": slash_width,
-		"damage_amount": _get_damage(owner) * SLASH_DAMAGE_RATIO * damage_scale,
-		"vulnerability_bonus": 0.02,
-		"slow_multiplier": 1.0,
-		"slow_duration": 0.0,
-		"source_role_id": "swordsman",
-		"source_position": slash_center
-	}])
+	var slash_hits: int = owner._damage_enemies_in_oriented_rect(slash_center, direction, slash_length, slash_width, _get_damage(owner) * SLASH_DAMAGE_RATIO * damage_scale, 0.02, 1.0, 0.0, "swordsman")
 	var wave_origin: Vector2 = owner.global_position + direction * max(24.0, slash_length * 0.72)
 	_spawn_crescent_projectile(owner, wave_origin, direction, wave_length, wave_width, visual_hit_multiplier, _get_damage(owner) * WAVE_DAMAGE_RATIO * damage_scale)
 	if slash_hits > 0 and not _uses_batched_damage(owner):
@@ -143,45 +133,67 @@ func _spawn_crescent_projectile(owner, origin: Vector2, direction: Vector2, leng
 	projectile.set_meta("crescent_projectile_token", spawn_token)
 	_configure_crescent_visual(projectile, visual_scale)
 	var duration: float = length / max(1.0, _get_wave_speed(owner))
-	var hit_registry: Dictionary = {}
-	var damage_elapsed: float = 0.0
-	var last_damage_progress: float = 0.0
-	var tween: Tween = owner.create_tween()
-	var update_wave := func(progress: float) -> void:
-		if not is_instance_valid(owner):
-			return
+	active_crescent_projectiles.append({
+		"owner_ref": weakref(owner),
+		"projectile": projectile,
+		"token": spawn_token,
+		"origin": origin,
+		"direction": direction,
+		"length": length,
+		"width": width,
+		"damage_amount": damage_amount,
+		"duration": duration,
+		"elapsed": 0.0,
+		"damage_elapsed": 0.0,
+		"last_damage_progress": 0.0,
+		"hit_registry": {}
+	})
+
+
+func _update_crescent_projectiles(delta: float) -> void:
+	if active_crescent_projectiles.is_empty():
+		return
+	for index in range(active_crescent_projectiles.size() - 1, -1, -1):
+		var data: Dictionary = active_crescent_projectiles[index]
+		var owner_ref: WeakRef = data.get("owner_ref", null) as WeakRef
+		var owner = owner_ref.get_ref() if owner_ref != null else null
+		var projectile := data.get("projectile", null) as Node2D
+		if owner == null or not is_instance_valid(owner) or projectile == null or not is_instance_valid(projectile):
+			if projectile != null and is_instance_valid(projectile):
+				_free_projectile(projectile)
+			active_crescent_projectiles.remove_at(index)
+			continue
+		if int(projectile.get_meta("crescent_projectile_token", -1)) != int(data.get("token", -1)):
+			active_crescent_projectiles.remove_at(index)
+			continue
+		var duration: float = max(0.001, float(data.get("duration", 0.1)))
+		var elapsed: float = float(data.get("elapsed", 0.0)) + delta
+		var progress: float = clamp(elapsed / duration, 0.0, 1.0)
+		var origin: Vector2 = data.get("origin", Vector2.ZERO)
+		var direction: Vector2 = data.get("direction", Vector2.RIGHT)
+		var length: float = float(data.get("length", 1.0))
 		var current_position: Vector2 = origin + direction * (length * progress)
-		if is_instance_valid(projectile):
-			projectile.global_position = current_position
+		projectile.global_position = current_position
+		var damage_elapsed: float = float(data.get("damage_elapsed", 0.0))
+		var last_damage_progress: float = float(data.get("last_damage_progress", 0.0))
 		damage_elapsed += max(0.0, progress - last_damage_progress) * duration
-		if damage_elapsed < WAVE_DAMAGE_SAMPLE_INTERVAL and progress < 1.0:
-			return
-		last_damage_progress = progress
-		damage_elapsed = 0.0
-		var sample_length: float = max(52.0 * VISUAL_AND_HIT_SCALE, length * WAVE_DAMAGE_SAMPLE_INTERVAL / max(duration, 0.001) + 52.0 * VISUAL_AND_HIT_SCALE)
-		var hit_count: int = _apply_damage_shapes(owner, [{
-			"type": "oriented_rect",
-			"center": current_position,
-			"axis": direction,
-			"length": sample_length,
-			"width": width,
-			"damage_amount": damage_amount,
-			"vulnerability_bonus": 0.03,
-			"slow_multiplier": 1.0,
-			"slow_duration": 0.0,
-			"source_role_id": "swordsman",
-			"source_position": current_position,
-			"hit_registry": hit_registry
-		}])
-		if hit_count > 0 and not _uses_batched_damage(owner):
-			owner._register_attack_result("swordsman", hit_count, false)
-	tween.tween_method(update_wave, 0.0, 1.0, duration)
-	tween.tween_callback(_free_projectile.bind(projectile))
-	if projectile != null:
-		var cleanup_token: int = int(projectile.get_meta("crescent_projectile_token", -1))
-		var cleanup_tween: Tween = owner.create_tween()
-		cleanup_tween.tween_interval(duration + 0.12)
-		cleanup_tween.tween_callback(_free_projectile_if_token.bind(projectile, cleanup_token))
+		if damage_elapsed >= WAVE_DAMAGE_SAMPLE_INTERVAL or progress >= 1.0:
+			data["last_damage_progress"] = progress
+			data["damage_elapsed"] = 0.0
+			var sample_length: float = max(52.0 * VISUAL_AND_HIT_SCALE, length * WAVE_DAMAGE_SAMPLE_INTERVAL / duration + 52.0 * VISUAL_AND_HIT_SCALE)
+			var hit_registry: Dictionary = data.get("hit_registry", {})
+			var hit_count: int = owner._damage_enemies_in_oriented_rect_unique(current_position, direction, sample_length, float(data.get("width", 1.0)), float(data.get("damage_amount", 0.0)), 0.03, 1.0, 0.0, hit_registry, "swordsman")
+			data["hit_registry"] = hit_registry
+			if hit_count > 0 and not _uses_batched_damage(owner):
+				owner._register_attack_result("swordsman", hit_count, false)
+		else:
+			data["damage_elapsed"] = damage_elapsed
+		if elapsed >= duration:
+			_free_projectile(projectile)
+			active_crescent_projectiles.remove_at(index)
+			continue
+		data["elapsed"] = elapsed
+		active_crescent_projectiles[index] = data
 
 
 func _configure_crescent_visual(projectile: Node2D, visual_scale: float) -> void:

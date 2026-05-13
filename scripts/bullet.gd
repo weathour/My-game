@@ -30,6 +30,9 @@ static var split_burst_budget_frame: int = -1
 static var split_burst_budget_used: int = 0
 static var impact_effect_pool: Array[Polygon2D] = []
 static var split_ring_pool: Array[Node2D] = []
+static var active_impact_effects: Array[Dictionary] = []
+static var active_split_ring_effects: Array[Dictionary] = []
+static var effect_animation_frame: int = -1
 static var impact_effect_polygon := PackedVector2Array([
 	Vector2(0.0, -10.0),
 	Vector2(10.0, 0.0),
@@ -329,6 +332,7 @@ func reset_projectile(config: Dictionary = {}) -> void:
 	_refresh_bullet_visual(true)
 
 func _physics_process(delta: float) -> void:
+	_update_static_effect_animations(delta)
 	_refresh_bullet_visual()
 	lifetime -= delta
 	if lifetime <= 0.0:
@@ -472,14 +476,17 @@ func _get_cached_enemy_grid() -> Dictionary:
 	var current_frame := Engine.get_physics_frames()
 	if cached_enemy_grid_frame == current_frame:
 		return cached_enemy_grid
-	cached_enemy_grid = {}
-	for enemy in _get_cached_enemy_nodes():
-		if enemy == null or not is_instance_valid(enemy) or enemy is not Node2D:
-			continue
-		var cell: Vector2i = _grid_cell((enemy as Node2D).global_position)
-		if not cached_enemy_grid.has(cell):
-			cached_enemy_grid[cell] = []
-		(cached_enemy_grid[cell] as Array).append(enemy)
+	if source_player != null and is_instance_valid(source_player):
+		cached_enemy_grid = PLAYER_DAMAGE_RESOLVER._get_enemy_grid(source_player)
+	else:
+		cached_enemy_grid = {}
+		for enemy in _get_cached_enemy_nodes():
+			if enemy == null or not is_instance_valid(enemy) or enemy is not Node2D:
+				continue
+			var cell: Vector2i = _grid_cell((enemy as Node2D).global_position)
+			if not cached_enemy_grid.has(cell):
+				cached_enemy_grid[cell] = []
+			(cached_enemy_grid[cell] as Array).append(enemy)
 	cached_enemy_grid_frame = current_frame
 	return cached_enemy_grid
 
@@ -615,7 +622,7 @@ func _acquire_impact_effect() -> Polygon2D:
 		return impact
 	return Polygon2D.new()
 
-func _release_impact_effect(impact: Polygon2D) -> void:
+static func _release_impact_effect(impact: Polygon2D) -> void:
 	if impact == null or not is_instance_valid(impact):
 		return
 	if bool(impact.get_meta("bullet_impact_released", false)):
@@ -670,7 +677,7 @@ func _ensure_split_ring_children(ring: Node2D, shard_count: int) -> void:
 		ring.add_child(outline)
 	outline.visible = true
 
-func _release_split_ring(ring: Node2D) -> void:
+static func _release_split_ring(ring: Node2D) -> void:
 	if ring == null or not is_instance_valid(ring):
 		return
 	if bool(ring.get_meta("bullet_split_ring_released", false)):
@@ -728,10 +735,12 @@ func _spawn_split_visual(center: Vector2, radius: float, burst_index: int) -> vo
 	outline.points = points
 
 	ring.scale = Vector2(0.28, 0.28)
-	var tween := ring.create_tween()
-	tween.parallel().tween_property(ring, "scale", Vector2.ONE, 0.12)
-	tween.parallel().tween_property(ring, "modulate:a", 0.0, 0.22)
-	tween.tween_callback(_release_split_ring.bind(ring))
+	active_split_ring_effects.append({
+		"node": ring,
+		"elapsed": 0.0,
+		"duration": 0.22,
+		"scale_duration": 0.12
+	})
 
 func _spawn_impact_effect(position: Vector2, killed: bool) -> void:
 	if not _consume_impact_effect_budget():
@@ -755,7 +764,57 @@ func _spawn_impact_effect(position: Vector2, killed: bool) -> void:
 	current_scene.add_child(impact)
 
 	impact.scale = Vector2(0.35, 0.35)
-	var tween := impact.create_tween()
-	tween.parallel().tween_property(impact, "scale", Vector2(1.1, 1.1) if killed else Vector2(0.75, 0.75), 0.12)
-	tween.parallel().tween_property(impact, "modulate:a", 0.0, 0.14 if killed else 0.1)
-	tween.tween_callback(_release_impact_effect.bind(impact))
+	active_impact_effects.append({
+		"node": impact,
+		"elapsed": 0.0,
+		"duration": 0.14 if killed else 0.1,
+		"scale_duration": 0.12,
+		"target_scale": Vector2(1.1, 1.1) if killed else Vector2(0.75, 0.75)
+	})
+
+static func _update_static_effect_animations(delta: float) -> void:
+	var current_frame := Engine.get_physics_frames()
+	if effect_animation_frame == current_frame:
+		return
+	effect_animation_frame = current_frame
+	_update_active_impact_effects(delta)
+	_update_active_split_ring_effects(delta)
+
+static func _update_active_impact_effects(delta: float) -> void:
+	for index in range(active_impact_effects.size() - 1, -1, -1):
+		var data: Dictionary = active_impact_effects[index]
+		var impact := data.get("node", null) as Polygon2D
+		if impact == null or not is_instance_valid(impact):
+			active_impact_effects.remove_at(index)
+			continue
+		var elapsed: float = float(data.get("elapsed", 0.0)) + delta
+		var duration: float = max(0.001, float(data.get("duration", 0.1)))
+		var scale_duration: float = max(0.001, float(data.get("scale_duration", duration)))
+		var target_scale: Vector2 = data.get("target_scale", Vector2.ONE)
+		impact.scale = Vector2(0.35, 0.35).lerp(target_scale, clamp(elapsed / scale_duration, 0.0, 1.0))
+		impact.modulate.a = 1.0 - clamp(elapsed / duration, 0.0, 1.0)
+		if elapsed >= duration:
+			active_impact_effects.remove_at(index)
+			_release_impact_effect(impact)
+			continue
+		data["elapsed"] = elapsed
+		active_impact_effects[index] = data
+
+static func _update_active_split_ring_effects(delta: float) -> void:
+	for index in range(active_split_ring_effects.size() - 1, -1, -1):
+		var data: Dictionary = active_split_ring_effects[index]
+		var ring := data.get("node", null) as Node2D
+		if ring == null or not is_instance_valid(ring):
+			active_split_ring_effects.remove_at(index)
+			continue
+		var elapsed: float = float(data.get("elapsed", 0.0)) + delta
+		var duration: float = max(0.001, float(data.get("duration", 0.22)))
+		var scale_duration: float = max(0.001, float(data.get("scale_duration", 0.12)))
+		ring.scale = Vector2(0.28, 0.28).lerp(Vector2.ONE, clamp(elapsed / scale_duration, 0.0, 1.0))
+		ring.modulate.a = 1.0 - clamp(elapsed / duration, 0.0, 1.0)
+		if elapsed >= duration:
+			active_split_ring_effects.remove_at(index)
+			_release_split_ring(ring)
+			continue
+		data["elapsed"] = elapsed
+		active_split_ring_effects[index] = data

@@ -14,13 +14,11 @@ static func trigger_rearguard_attack(owner, role_id: String, origin: Vector2, le
 	owner._spawn_ring_effect(origin, 62.0 + level * 12.0, Color(accent.r, accent.g, accent.b, 0.68), 8.0, 0.24)
 	if owner.get_tree() == null:
 		return 0
-	var tween: Tween = owner.create_tween()
 	for attack_index in range(repeat_count):
-		var delay: float = 0.18 * attack_index
 		var queued_attack_index: int = attack_index
-		if delay > 0.0:
-			tween.tween_interval(delay)
-		tween.tween_callback(func() -> void:
+		owner._schedule_repeating_sequence(0.0, 1, func(_sequence_index: int) -> void:
+			if owner == null or not is_instance_valid(owner):
+				return
 			match role_id:
 				"swordsman":
 					var direction: Vector2 = owner.facing_direction if owner.facing_direction.length_squared() > 0.001 else Vector2.RIGHT
@@ -38,7 +36,7 @@ static func trigger_rearguard_attack(owner, role_id: String, origin: Vector2, le
 					owner._spawn_vortex_effect(origin, 30.0 + level * 8.0, Color(0.7, 0.78, 1.0, 0.42), 0.22)
 					owner._spawn_burst_effect(origin, 68.0 + level * 12.0, Color(0.52, 0.9, 1.0, 0.28), 0.22)
 					owner._damage_enemies_in_radius(origin, 68.0 + level * 12.0, owner._get_role_damage(role_id) * damage_scale, 0.02, 0.74, 1.0)
-		)
+		, 0.18 * float(attack_index))
 		hit_count += 1
 	return hit_count
 
@@ -58,10 +56,8 @@ static func _spawn_gunner_rearguard_bullet_batch(owner, role_id: String, origin:
 			bullet.scale = Vector2(1.18, 1.18)
 	if end_index >= bullet_count:
 		return
-	if owner.get_tree() == null:
+	if not owner.has_method("_schedule_repeating_sequence"):
 		return
-	var tween: Tween = owner.create_tween()
-	tween.tween_interval(GUNNER_REARGUARD_BULLET_BATCH_INTERVAL)
-	tween.tween_callback(func() -> void:
+	owner._schedule_repeating_sequence(GUNNER_REARGUARD_BULLET_BATCH_INTERVAL, 1, func(_index: int) -> void:
 		_spawn_gunner_rearguard_bullet_batch(owner, role_id, origin, level, damage_scale, attack_index, end_index)
-	)
+	, GUNNER_REARGUARD_BULLET_BATCH_INTERVAL)

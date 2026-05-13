@@ -2,20 +2,17 @@ extends RefCounted
 
 
 static func spawn_pulsing_field(owner, center: Vector2, radius: float, color: Color, pulse_count: int, interval: float, damage_amount: float, vulnerability_bonus: float, slow_multiplier: float, slow_duration: float) -> void:
-	var current_scene: Node = owner.get_tree().current_scene
-	if current_scene == null:
+	if owner == null or not is_instance_valid(owner):
 		return
-
-	var controller := Node2D.new()
-	controller.global_position = center
-	current_scene.add_child(controller)
-
-	var tween := controller.create_tween()
-	for pulse_index in range(max(1, pulse_count)):
-		if pulse_index > 0:
-			tween.tween_interval(interval)
-		tween.tween_callback(Callable(owner, "_trigger_field_pulse").bind(center, radius, color, damage_amount, vulnerability_bonus, slow_multiplier, slow_duration))
-	tween.tween_callback(controller.queue_free)
+	var safe_pulse_count: int = max(1, pulse_count)
+	if owner.has_method("_schedule_repeating_sequence"):
+		owner._schedule_repeating_sequence(max(0.0, interval), safe_pulse_count, func(_index: int) -> void:
+			if is_instance_valid(owner):
+				owner._trigger_field_pulse(center, radius, color, damage_amount, vulnerability_bonus, slow_multiplier, slow_duration)
+		)
+		return
+	for pulse_index in range(safe_pulse_count):
+		trigger_field_pulse(owner, center, radius, color, damage_amount, vulnerability_bonus, slow_multiplier, slow_duration)
 
 
 static func trigger_field_pulse(owner, center: Vector2, radius: float, color: Color, damage_amount: float, vulnerability_bonus: float, slow_multiplier: float, slow_duration: float) -> void:

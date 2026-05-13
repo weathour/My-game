@@ -151,32 +151,18 @@ func _trigger_tick(owner) -> void:
 	var hit_width: float = BEAM_THICKNESS * BASE_WIDTH_MULTIPLIER * _get_width_multiplier(owner)
 	var base_origin: Vector2 = owner.global_position + aim_direction * 20.0
 	var damage_amount: float = float(owner._get_role_damage("gunner")) * 0.52 * _get_damage_multiplier(owner)
-	var damage_shapes: Array[Dictionary] = []
-	_fire_piercing_beam(owner, base_origin, aim_direction, beam_length, hit_width, damage_amount, 1.0, damage_shapes)
+	var hit_count: int = _fire_piercing_beam(owner, base_origin, aim_direction, beam_length, hit_width, damage_amount, 1.0)
 	for combo_scale in _get_combo_scales(owner):
 		var offset_origin: Vector2 = _get_random_origin_in_hit_width(owner, base_origin, aim_direction, hit_width)
-		_fire_piercing_beam(owner, offset_origin, aim_direction, beam_length, hit_width, damage_amount, float(combo_scale), damage_shapes)
-	var hit_count: int = _apply_damage_shapes(owner, damage_shapes)
+		hit_count += _fire_piercing_beam(owner, offset_origin, aim_direction, beam_length, hit_width, damage_amount, float(combo_scale))
 	if hit_count > 0 and not _uses_batched_damage(owner):
 		owner._register_attack_result("gunner", hit_count, false)
 
-func _fire_piercing_beam(owner, base_origin: Vector2, aim_direction: Vector2, beam_length: float, hit_width: float, damage_amount: float, effect_scale: float, damage_shapes: Array[Dictionary]) -> void:
+func _fire_piercing_beam(owner, base_origin: Vector2, aim_direction: Vector2, beam_length: float, hit_width: float, damage_amount: float, effect_scale: float) -> int:
 	var safe_scale: float = max(0.05, effect_scale)
 	_spawn_visuals(owner, base_origin, aim_direction, beam_length, hit_width * safe_scale)
 	var hit_center: Vector2 = base_origin + aim_direction * (beam_length * 0.5)
-	damage_shapes.append({
-		"type": "oriented_rect",
-		"center": hit_center,
-		"axis": aim_direction,
-		"length": beam_length,
-		"width": hit_width * safe_scale,
-		"damage_amount": damage_amount * safe_scale,
-		"vulnerability_bonus": 0.0,
-		"slow_multiplier": 1.0,
-		"slow_duration": 0.0,
-		"source_role_id": "gunner",
-		"source_position": base_origin
-	})
+	return owner._damage_enemies_in_oriented_rect(hit_center, aim_direction, beam_length, hit_width * safe_scale, damage_amount * safe_scale, 0.0, 1.0, 0.0, "gunner")
 
 func _get_random_origin_in_hit_width(owner, base_origin: Vector2, aim_direction: Vector2, hit_width: float) -> Vector2:
 	var perpendicular: Vector2 = owner._get_downward_perpendicular(aim_direction).normalized()
@@ -290,25 +276,5 @@ func _get_combo_scales(owner) -> Array[float]:
 		return []
 	return owner._get_blessing_skill_combo_scales(INFINITE_RELOAD_SKILL_ID) as Array[float]
 
-func _apply_damage_shapes(owner, shapes: Array[Dictionary]) -> int:
-	if shapes.is_empty():
-		return 0
-	if owner != null and owner.has_method("_damage_enemies_in_shapes_batched"):
-		return int(owner._damage_enemies_in_shapes_batched(shapes))
-	var hits := 0
-	for shape in shapes:
-		hits += int(owner._damage_enemies_in_oriented_rect(
-			shape.get("center", Vector2.ZERO),
-			shape.get("axis", Vector2.RIGHT),
-			float(shape.get("length", 1.0)),
-			float(shape.get("width", 1.0)),
-			float(shape.get("damage_amount", 0.0)),
-			float(shape.get("vulnerability_bonus", 0.0)),
-			float(shape.get("slow_multiplier", 1.0)),
-			float(shape.get("slow_duration", 0.0)),
-			str(shape.get("source_role_id", ""))
-		))
-	return hits
-
 func _uses_batched_damage(owner) -> bool:
-	return owner != null and owner.has_method("_damage_enemies_in_shapes_batched")
+	return owner != null and owner.has_method("_damage_enemies_in_oriented_rect")

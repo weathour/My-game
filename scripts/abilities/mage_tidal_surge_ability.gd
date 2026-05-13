@@ -55,13 +55,17 @@ func try_trigger(owner, base_direction: Vector2) -> bool:
 
 	if owner.get_tree() == null:
 		return true
-	var tween: Tween = owner.create_tween()
-	tween.tween_interval(gather_duration)
 	var wave_scales: Array[float] = _get_wave_scales(owner)
 	for repeat_index in range(wave_scales.size()):
-		tween.tween_callback(Callable(self, "_fire_direction_group").bind(owner, gather_origin, damage_amount * float(wave_scales[repeat_index]), _get_wave_directions(owner, float(wave_scales[repeat_index])), float(wave_scales[repeat_index])))
-		if repeat_index < wave_scales.size() - 1:
-			tween.tween_interval(WAVE_REPEAT_INTERVAL)
+		var wave_scale: float = float(wave_scales[repeat_index])
+		var fire_delay: float = gather_duration + float(repeat_index) * WAVE_REPEAT_INTERVAL
+		if owner.has_method("_schedule_repeating_sequence"):
+			owner._schedule_repeating_sequence(0.0, 1, func(_index: int) -> void:
+				if is_instance_valid(owner):
+					_fire_direction_group(owner, gather_origin, damage_amount * wave_scale, _get_wave_directions(owner, wave_scale), wave_scale)
+			, fire_delay)
+		else:
+			_fire_direction_group(owner, gather_origin, damage_amount * wave_scale, _get_wave_directions(owner, wave_scale), wave_scale)
 	return true
 
 func get_cooldown_slot(owner = null) -> Dictionary:

@@ -27,6 +27,8 @@ var tick_remaining: float = 0.0
 var ring_visual_tick_index: int = 0
 var effects: Array[Node2D] = []
 var tornado_effect_pool: Array[Node2D] = []
+var storm_local_positions: Array[Vector2] = []
+var storm_global_centers: Array[Vector2] = []
 
 func update(owner, delta: float) -> void:
 	if cooldown_remaining > 0.0:
@@ -252,31 +254,32 @@ func _has_required_unlock(owner) -> bool:
 	return bool(owner._is_blessing_skill_unlocked(BLADE_STORM_SKILL_ID))
 
 func _get_storm_local_positions(owner) -> Array[Vector2]:
-	var positions: Array[Vector2] = [Vector2.ZERO]
+	storm_local_positions.clear()
+	storm_local_positions.append(Vector2.ZERO)
 	var extra_count := _get_extra_storm_count(owner)
 	if extra_count <= 0:
-		return positions
+		return storm_local_positions
 	var direction: Vector2 = owner.facing_direction if owner.facing_direction.length_squared() > 0.001 else Vector2.RIGHT
 	direction = direction.normalized()
 	var side: Vector2 = owner._get_downward_perpendicular(direction).normalized()
 	if side.length_squared() <= 0.001:
 		side = Vector2.DOWN
 	var distance: float = EXTRA_STORM_OFFSET * _get_size_multiplier(owner) * owner._get_equipment_skill_range_multiplier()
-	var ordered_offsets: Array[Vector2] = [
-		direction * distance,
-		-direction * distance,
-		-side * distance,
-		side * distance
-	]
-	for index in range(min(extra_count, ordered_offsets.size())):
-		positions.append(ordered_offsets[index])
-	return positions
+	if extra_count >= 1:
+		storm_local_positions.append(direction * distance)
+	if extra_count >= 2:
+		storm_local_positions.append(-direction * distance)
+	if extra_count >= 3:
+		storm_local_positions.append(-side * distance)
+	if extra_count >= 4:
+		storm_local_positions.append(side * distance)
+	return storm_local_positions
 
 func _get_storm_centers(owner) -> Array[Vector2]:
-	var centers: Array[Vector2] = []
+	storm_global_centers.clear()
 	for local_position in _get_storm_local_positions(owner):
-		centers.append(owner.global_position + local_position)
-	return centers
+		storm_global_centers.append(owner.global_position + local_position)
+	return storm_global_centers
 
 func _get_cooldown(owner) -> float:
 	if owner != null and is_instance_valid(owner) and owner.has_method("_get_equipment_cooldown_multiplier"):

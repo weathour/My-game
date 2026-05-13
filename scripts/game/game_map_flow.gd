@@ -14,6 +14,7 @@ const TILE_MAP_LAYER_NAMES := {
 	"stone": true
 }
 const MAP_BOUNDS_PADDING := 0.0
+const MINIMAP_CURSOR_META_PREFIX := "__minimap_cursor_"
 
 # Handoff note:
 # Map-scale presentation lives here. Keep gameplay rules separate:
@@ -128,7 +129,15 @@ static func _build_minimap_payload(main: Node) -> Dictionary:
 
 static func _collect_group_points(main: Node, group_name: String, limit: int = 48) -> Array:
 	var points: Array = []
-	for node in _get_runtime_group_nodes(main, group_name):
+	var nodes: Array = _get_runtime_group_nodes(main, group_name)
+	var node_count: int = nodes.size()
+	if node_count <= 0:
+		return points
+	var cursor: int = _get_minimap_cursor(main, group_name, node_count)
+	var scanned: int = 0
+	while scanned < node_count and points.size() < limit:
+		var node = nodes[(cursor + scanned) % node_count]
+		scanned += 1
 		if not is_instance_valid(node) or not (node is Node2D):
 			continue
 		var entry := {
@@ -139,9 +148,19 @@ static func _collect_group_points(main: Node, group_name: String, limit: int = 4
 		elif node.get("enemy_kind") != null:
 			entry["kind"] = str(node.get("enemy_kind"))
 		points.append(entry)
-		if points.size() >= limit:
-			break
+	_set_minimap_cursor(main, group_name, (cursor + max(scanned, limit)) % node_count)
 	return points
+
+static func _get_minimap_cursor(main: Node, group_name: String, node_count: int) -> int:
+	if main == null or node_count <= 0:
+		return 0
+	var key: String = MINIMAP_CURSOR_META_PREFIX + group_name
+	return int(main.get_meta(key, 0)) % node_count if main.has_meta(key) else 0
+
+static func _set_minimap_cursor(main: Node, group_name: String, cursor: int) -> void:
+	if main == null:
+		return
+	main.set_meta(MINIMAP_CURSOR_META_PREFIX + group_name, cursor)
 
 static func _get_runtime_group_nodes(main: Node, group_name: String) -> Array:
 	if main == null:

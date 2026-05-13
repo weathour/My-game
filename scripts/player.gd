@@ -292,6 +292,7 @@ var role_share_initialized: bool = false
 var role_visual_time: float = 0.0
 var active_role_visual_hidden: bool = false
 var active_role_visual_hidden_role_id: String = ""
+var hurt_core_visual_visible: bool = true
 var runtime_texture_cache: Dictionary = {}
 var white_key_material_cache: Dictionary = {}
 var swordsman_role = SWORDSMAN_ROLE.new()
@@ -929,6 +930,9 @@ func _unhandled_input(event: InputEvent) -> void:
 	PLAYER_SURVIVAL_FLOW.unhandled_input(self, event)
 
 func _physics_process(delta: float) -> void:
+	PLAYER_EFFECT_PRIMITIVES.update_effect_animations(delta)
+	PLAYER_AUTHORED_EFFECTS.update_effect_animations(delta)
+	PLAYER_VISUAL_STATE.update_visual_pulses(delta)
 	PLAYER_SURVIVAL_FLOW.physics_process(self, delta)
 	if not is_dead:
 		PLAYER_MAP_BOUNDS_FLOW.clamp_to_active_map_bounds(self)
@@ -1169,6 +1173,33 @@ func _spawn_directional_bullet_from_scene(projectile_scene: PackedScene, directi
 func _spawn_batched_directional_bullet(direction: Vector2, damage_amount: float, color: Color, role_id: String = "", origin: Variant = null, config: Dictionary = {}) -> bool:
 	return PLAYER_PROJECTILE_SPAWNER.spawn_batched_directional_bullet(self, direction, damage_amount, color, role_id, origin, config)
 
+func _spawn_batched_directional_bullet_values(
+	direction: Vector2,
+	damage_amount: float,
+	color: Color,
+	role_id: String = "",
+	origin: Variant = null,
+	speed: float = 620.0,
+	lifetime: float = 1.0,
+	hit_radius: float = 10.0,
+	visual_radius: float = 4.2,
+	visual_min_diameter: float = 8.0,
+	visual_outline_color: Color = Color(1.0, 1.0, 1.0, 0.0),
+	visual_outline_width: float = 0.0,
+	enemy_hit_radius_scale: float = 0.2,
+	enemy_hit_radius_min: float = 4.0,
+	enemy_hit_radius_max: float = 12.0,
+	vulnerability_bonus: float = 0.0,
+	vulnerability_duration: float = 0.0,
+	slow_multiplier: float = 1.0,
+	slow_duration: float = 0.0,
+	pierce_count: int = 0,
+	wave_amplitude: float = 0.0,
+	wave_frequency: float = 0.0,
+	wave_phase: float = 0.0
+) -> bool:
+	return PLAYER_PROJECTILE_SPAWNER.spawn_batched_directional_bullet_values(self, direction, damage_amount, color, role_id, origin, speed, lifetime, hit_radius, visual_radius, visual_min_diameter, visual_outline_color, visual_outline_width, enemy_hit_radius_scale, enemy_hit_radius_min, enemy_hit_radius_max, vulnerability_bonus, vulnerability_duration, slow_multiplier, slow_duration, pierce_count, wave_amplitude, wave_frequency, wave_phase)
+
 func _get_enemy_meta_int(enemy: Node, key: String) -> int:
 	return PLAYER_DAMAGE_HELPERS.get_enemy_meta_int(enemy, key)
 
@@ -1216,11 +1247,17 @@ func _collect_enemies_in_radius_for_damage_batch(center: Vector2, radius: float)
 func _damage_enemies_in_radius_batched(center: Vector2, radius: float, damage_amount: float, vulnerability_bonus: float, slow_multiplier: float, slow_duration: float, source_role_id: String = "") -> int:
 	return PLAYER_DAMAGE_RESOLVER.damage_enemies_in_radius_batched(self, center, radius, damage_amount, vulnerability_bonus, slow_multiplier, slow_duration, source_role_id)
 
+func _damage_enemies_in_radius_with_kill_energy(center: Vector2, radius: float, damage_amount: float, vulnerability_bonus: float, slow_multiplier: float, slow_duration: float, source_role_id: String = "", kill_energy_bonus: float = 0.0) -> int:
+	return PLAYER_DAMAGE_RESOLVER.damage_enemies_in_radius_with_kill_energy(self, center, radius, damage_amount, vulnerability_bonus, slow_multiplier, slow_duration, source_role_id, kill_energy_bonus)
+
 func _damage_enemies_in_multiple_radii_batched(centers: Array[Vector2], radius: float, damage_amount: float, vulnerability_bonus: float, slow_multiplier: float, slow_duration: float, source_role_id: String = "") -> int:
 	return PLAYER_DAMAGE_RESOLVER.damage_enemies_in_multiple_radii_batched(self, centers, radius, damage_amount, vulnerability_bonus, slow_multiplier, slow_duration, source_role_id)
 
 func _damage_enemies_in_shapes_batched(shapes: Array[Dictionary]) -> int:
 	return PLAYER_DAMAGE_RESOLVER.damage_enemies_in_shapes_batched(self, shapes)
+
+func _damage_enemies_in_cone_batched(origin: Vector2, direction: Vector2, cone_range: float, cone_angle_radians: float, damage_amount: float, vulnerability_bonus: float, slow_multiplier: float, slow_duration: float, source_role_id: String = "") -> int:
+	return PLAYER_DAMAGE_RESOLVER.damage_enemies_in_cone(self, origin, direction, cone_range, cone_angle_radians, damage_amount, vulnerability_bonus, slow_multiplier, slow_duration, source_role_id)
 
 func _damage_enemies_in_radius_count_kills(center: Vector2, radius: float, damage_amount: float, vulnerability_bonus: float, slow_multiplier: float, slow_duration: float, source_role_id: String = "") -> Dictionary:
 	return PLAYER_DAMAGE_RESOLVER.damage_enemies_in_radius_count_kills(self, center, radius, damage_amount, vulnerability_bonus, slow_multiplier, slow_duration, source_role_id)
@@ -1282,9 +1319,20 @@ func _update_active_role_state() -> void:
 
 func _setup_hurt_core_visual() -> void:
 	PLAYER_HEALTH_VISUALS.setup_hurt_core_visual(self, PLAYER_HURT_CORE_RADIUS, PLAYER_HURT_CORE_OUTLINE_WIDTH)
+	_apply_hurt_core_visibility()
 
 func _update_hurt_core_visual(role_data: Dictionary = {}) -> void:
 	PLAYER_HEALTH_VISUALS.update_hurt_core_visual(self, role_data, PLAYER_HURT_CORE_OFFSET)
+	_apply_hurt_core_visibility()
+
+func _toggle_hurt_core_visual() -> void:
+	hurt_core_visual_visible = not hurt_core_visual_visible
+	_apply_hurt_core_visibility()
+
+func _apply_hurt_core_visibility() -> void:
+	var hurt_core := get_node_or_null("HurtCore") as Node2D
+	if hurt_core != null:
+		hurt_core.visible = hurt_core_visual_visible
 
 func _setup_player_health_bar() -> void:
 	PLAYER_HEALTH_VISUALS.setup_player_health_bar(self)
@@ -1418,6 +1466,9 @@ func _get_live_enemies() -> Array:
 
 func _get_candidate_enemies_for_circle(center: Vector2, radius: float) -> Array:
 	return PLAYER_DAMAGE_RESOLVER._get_candidate_enemies_for_circle(self, center, radius)
+
+func _get_touching_enemy_damage(center: Vector2, radius: float, query_padding: float = 36.0) -> float:
+	return PLAYER_DAMAGE_RESOLVER.get_touching_enemy_damage(self, center, radius, query_padding)
 
 func _get_farthest_enemy() -> Node2D:
 	return PLAYER_TARGETING.get_owner_farthest_enemy(self)
@@ -1695,20 +1746,9 @@ func _spawn_mage_bombardment_fall_effect(center: Vector2, radius: float) -> void
 	PLAYER_EFFECT_PRIMITIVES.spawn_owner_mage_bombardment_fall_effect(self, center, radius)
 
 func _spawn_pulsing_field(center: Vector2, radius: float, color: Color, pulse_count: int, interval: float, damage_amount: float, vulnerability_bonus: float, slow_multiplier: float, slow_duration: float) -> void:
-	var current_scene := get_tree().current_scene
-	if current_scene == null:
-		return
-
-	var controller := Node2D.new()
-	controller.global_position = center
-	current_scene.add_child(controller)
-
-	var tween := controller.create_tween()
-	for pulse_index in range(max(1, pulse_count)):
-		if pulse_index > 0:
-			tween.tween_interval(interval)
-		tween.tween_callback(Callable(self, "_trigger_field_pulse").bind(center, radius, color, damage_amount, vulnerability_bonus, slow_multiplier, slow_duration))
-	tween.tween_callback(controller.queue_free)
+	_schedule_repeating_sequence(max(0.0, interval), max(1, pulse_count), func(_pulse_index: int) -> void:
+		_trigger_field_pulse(center, radius, color, damage_amount, vulnerability_bonus, slow_multiplier, slow_duration)
+	)
 
 func _trigger_field_pulse(center: Vector2, radius: float, color: Color, damage_amount: float, vulnerability_bonus: float, slow_multiplier: float, slow_duration: float) -> void:
 	_spawn_ring_effect(center, radius, Color(color.r, color.g, color.b, min(0.9, color.a + 0.35)), 6.0, 0.18)

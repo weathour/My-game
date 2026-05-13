@@ -31,7 +31,8 @@ const KEYBIND_LABELS := {
 	"switch_prev": "\u5207\u6362\u4e0a\u4e00\u4e2a\u4eba",
 	"switch_next": "\u5207\u6362\u4e0b\u4e00\u4e2a\u4eba",
 	"toggle_attack_mode": "\u5207\u6362\u653b\u51fb\u65b9\u5f0f",
-	"character_panel": "\u89d2\u8272\u9762\u677f"
+	"character_panel": "\u89d2\u8272\u9762\u677f",
+	"toggle_hurt_core": "\u663e\u793a/\u9690\u85cf\u5224\u5b9a\u5706"
 }
 
 var settings_title_label: Label

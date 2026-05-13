@@ -10,19 +10,20 @@ const ULTIMATE_TIER_THREE_EXTRA_BOMBARDS := 3
 const ULTIMATE_TIER_THREE_KILL_ENERGY := 0.45
 
 func perform_attack(owner) -> void:
-	var contexts: Array[Dictionary] = _build_attack_contexts(owner)
-	if contexts.is_empty():
+	var contexts: Array = _build_attack_contexts(owner)
+	if (contexts[0] as Array).is_empty():
 		return
 	var combo_scales: Array[float] = [1.0]
 	combo_scales.append_array(_get_skill_effect_scales(owner, "combo_skill_extra"))
 	_start_basic_attack_combo_sequence(owner, contexts, combo_scales)
-	owner._spawn_attack_aftershock(contexts[0].get("center", owner.global_position), str((contexts[0].get("role_data", {}) as Dictionary).get("id", "mage")))
+	owner._spawn_attack_aftershock((contexts[0] as Array)[0], str((contexts[3] as Array)[0]))
 
-func _perform_combo_segment(owner, contexts: Array[Dictionary], combo_scale: float) -> void:
-	for index in range(contexts.size()):
-		_cast_attack_context(owner, contexts[index], combo_scale, index == 0)
+func _perform_combo_segment(owner, contexts: Array, combo_scale: float) -> void:
+	var centers: Array = contexts[0]
+	for index in range(centers.size()):
+		_cast_attack_context(owner, contexts, index, combo_scale, index == 0)
 
-func _start_basic_attack_combo_sequence(owner, contexts: Array[Dictionary], combo_scales: Array[float]) -> void:
+func _start_basic_attack_combo_sequence(owner, contexts: Array, combo_scales: Array[float]) -> void:
 	if combo_scales.is_empty():
 		return
 	if owner.get_tree() == null:
@@ -30,57 +31,63 @@ func _start_basic_attack_combo_sequence(owner, contexts: Array[Dictionary], comb
 			_perform_combo_segment(owner, contexts, float(combo_scales[combo_index]))
 		return
 
-	var tween: Tween = owner.create_tween()
 	var warning_duration: float = owner._get_scene_animation_duration(owner.MAGE_WARNING_EFFECT_SCENE, 0.2)
 	var boom_duration: float = owner._get_scene_animation_duration(owner.MAGE_BOOM_EFFECT_SCENE, 0.3)
-	tween.tween_callback(func() -> void:
-		if is_instance_valid(owner):
-			_spawn_basic_attack_warning_group(owner, contexts)
-	)
-	tween.tween_interval(warning_duration)
+	_spawn_basic_attack_warning_group(owner, contexts)
+	if not owner.has_method("_schedule_repeating_sequence"):
+		for combo_index in range(combo_scales.size()):
+			var combo_scale: float = float(combo_scales[combo_index])
+			_spawn_basic_attack_boom_group(owner, contexts, combo_scale)
+			_resolve_basic_attack_group(owner, contexts, combo_scale)
+		return
 	for combo_index in range(combo_scales.size()):
 		var combo_scale: float = float(combo_scales[combo_index])
-		tween.tween_callback(func() -> void:
+		var boom_delay: float = warning_duration + float(combo_index) * boom_duration
+		var resolve_delay: float = boom_delay + boom_duration
+		owner._schedule_repeating_sequence(0.0, 1, func(_index: int) -> void:
 			if is_instance_valid(owner):
 				_spawn_basic_attack_boom_group(owner, contexts, combo_scale)
-		)
-		tween.tween_interval(boom_duration)
-		tween.tween_callback(func() -> void:
+		, boom_delay)
+		owner._schedule_repeating_sequence(0.0, 1, func(_index: int) -> void:
 			if is_instance_valid(owner):
 				_resolve_basic_attack_group(owner, contexts, combo_scale)
-		)
+		, resolve_delay)
 
-func _perform_combo_segment_if_valid(owner, contexts: Array[Dictionary], combo_scale: float) -> void:
+func _perform_combo_segment_if_valid(owner, contexts: Array, combo_scale: float) -> void:
 	if owner == null or not is_instance_valid(owner) or bool(owner.get("is_dead")):
 		return
 	_perform_combo_segment(owner, contexts, combo_scale)
 
-func _spawn_basic_attack_warning_group(owner, contexts: Array[Dictionary]) -> void:
-	for context in contexts:
-		var center: Vector2 = context.get("center", owner.global_position)
-		var radius: float = float(context.get("radius", 44.0))
-		owner._spawn_mage_warning_scene_effect(center, radius)
+func _spawn_basic_attack_warning_group(owner, contexts: Array) -> void:
+	var centers: Array = contexts[0]
+	var radii: Array = contexts[1]
+	for index in range(centers.size()):
+		owner._spawn_mage_warning_scene_effect(centers[index], float(radii[index]))
 
-func _spawn_basic_attack_boom_group(owner, contexts: Array[Dictionary], combo_scale: float) -> void:
-	for context in contexts:
-		var center: Vector2 = context.get("center", owner.global_position)
-		var radius: float = float(context.get("radius", 44.0)) * max(0.05, combo_scale)
-		owner._spawn_mage_boom_scene_effect(center, radius)
+func _spawn_basic_attack_boom_group(owner, contexts: Array, combo_scale: float) -> void:
+	var centers: Array = contexts[0]
+	var radii: Array = contexts[1]
+	for index in range(centers.size()):
+		owner._spawn_mage_boom_scene_effect(centers[index], float(radii[index]) * max(0.05, combo_scale))
 
-func _resolve_basic_attack_group(owner, contexts: Array[Dictionary], combo_scale: float) -> void:
+func _resolve_basic_attack_group(owner, contexts: Array, combo_scale: float) -> void:
 	if owner == null or not is_instance_valid(owner) or bool(owner.get("is_dead")):
 		return
-	for index in range(contexts.size()):
-		_resolve_basic_attack_context(owner, contexts[index], combo_scale, index == 0)
+	var centers: Array = contexts[0]
+	for index in range(centers.size()):
+		_resolve_basic_attack_context(owner, contexts, index, combo_scale, index == 0)
 
-func _resolve_basic_attack_context(owner, context: Dictionary, combo_scale: float, advance_attack_chain: bool) -> void:
-	var role_data: Dictionary = context.get("role_data", {})
-	var center: Vector2 = context.get("center", owner.global_position)
-	var radius: float = float(context.get("radius", 44.0)) * max(0.05, combo_scale)
-	var damage_amount: float = float(context.get("damage_amount", 0.0)) * max(0.0, combo_scale)
-	owner._resolve_basic_mage_bombardment_damage(center, radius, damage_amount, 0.0, 1.0, 0.0, 0, 0, 0, role_data["id"], true, advance_attack_chain)
+func _resolve_basic_attack_context(owner, contexts: Array, index: int, combo_scale: float, advance_attack_chain: bool) -> void:
+	var centers: Array = contexts[0]
+	var radii: Array = contexts[1]
+	var damages: Array = contexts[2]
+	var role_ids: Array = contexts[3]
+	var center: Vector2 = centers[index]
+	var radius: float = float(radii[index]) * max(0.05, combo_scale)
+	var damage_amount: float = float(damages[index]) * max(0.0, combo_scale)
+	owner._resolve_basic_mage_bombardment_damage(center, radius, damage_amount, 0.0, 1.0, 0.0, 0, 0, 0, str(role_ids[index]), true, advance_attack_chain)
 
-func _build_attack_contexts(owner) -> Array[Dictionary]:
+func _build_attack_contexts(owner) -> Array:
 	var role_data: Dictionary = owner._get_active_role()
 	var upgrade_data: Dictionary = owner.role_upgrade_levels[role_data["id"]]
 	var special_data: Dictionary = owner._get_role_special_state("mage")
@@ -95,16 +102,23 @@ func _build_attack_contexts(owner) -> Array[Dictionary]:
 	while centers.size() < 1 + _get_skill_effect_scales(owner, "quantity_skill_count").size():
 		var angle: float = TAU * float(centers.size()) / float(max(2, 1 + _get_skill_effect_scales(owner, "quantity_skill_count").size()))
 		centers.append(bombard_center + Vector2.RIGHT.rotated(angle) * 72.0)
-	var contexts: Array[Dictionary] = []
+	var context_centers: Array[Vector2] = []
+	var context_radii: Array[float] = []
+	var context_damages: Array[float] = []
+	var context_role_ids: Array[String] = []
 	var quantity_scales: Array[float] = [1.0]
 	quantity_scales.append_array(_get_skill_effect_scales(owner, "quantity_skill_count"))
 	for index in range(centers.size()):
 		var center: Vector2 = centers[index]
 		var effect_scale: float = float(quantity_scales[min(index, quantity_scales.size() - 1)])
-		contexts.append(_build_attack_context(owner, role_data, upgrade_data, special_data, center, effect_scale, arcane_focus_level))
-	return contexts
+		var context: Array = _build_attack_context(owner, role_data, upgrade_data, special_data, center, effect_scale, arcane_focus_level)
+		context_centers.append(context[0])
+		context_radii.append(float(context[1]))
+		context_damages.append(float(context[2]))
+		context_role_ids.append(str(context[3]))
+	return [context_centers, context_radii, context_damages, context_role_ids]
 
-func _build_attack_context(owner, role_data: Dictionary, upgrade_data: Dictionary, _special_data: Dictionary, bombard_center: Vector2, effect_scale: float, arcane_focus_level: float) -> Dictionary:
+func _build_attack_context(owner, role_data: Dictionary, upgrade_data: Dictionary, _special_data: Dictionary, bombard_center: Vector2, effect_scale: float, arcane_focus_level: float) -> Array:
 	var target_enemy: Node2D = owner._get_enemy_near_position(bombard_center, 56.0 + float(upgrade_data.get("range_bonus", 0.0)) * 0.25)
 	var radius: float = (44.0 + float(upgrade_data["range_bonus"]) * 0.55) * owner._get_story_style_range_multiplier(role_data["id"])
 	radius *= owner._get_role_attribute_range_multiplier("mage")
@@ -114,24 +128,17 @@ func _build_attack_context(owner, role_data: Dictionary, upgrade_data: Dictionar
 	if target_enemy != null:
 		damage_amount *= owner._get_priority_target_bonus(target_enemy)
 	radius *= MAGE_ATTACK_EFFECT_SCALE
-	return {
-		"role_data": role_data,
-		"center": bombard_center,
-		"radius": radius,
-		"damage_amount": damage_amount,
-		"arcane_focus_level": arcane_focus_level
-	}
+	return [bombard_center, radius, damage_amount, str(role_data["id"]), arcane_focus_level]
 
-func _cast_attack_context(owner, context: Dictionary, scale: float, advance_attack_chain: bool) -> void:
-	var role_data: Dictionary = context.get("role_data", {})
-	var arcane_focus_level: float = float(context.get("arcane_focus_level", 0.0))
-	var bombard_center: Vector2 = context.get("center", owner.global_position)
-	var radius: float = float(context.get("radius", 44.0)) * max(0.05, scale)
-	var damage_amount: float = float(context.get("damage_amount", 0.0)) * max(0.0, scale)
-	if arcane_focus_level > 6:
-		_start_evolved_arcane_bombardment(owner, bombard_center, radius, damage_amount, 0.0, 1.0, 0.0, 0, 0, 0, role_data["id"], arcane_focus_level > 12)
-	else:
-		owner._start_basic_mage_bombardment(bombard_center, radius, damage_amount, 0.0, 1.0, 0.0, 0, 0, 0, role_data["id"], true, advance_attack_chain)
+func _cast_attack_context(owner, contexts: Array, index: int, scale: float, advance_attack_chain: bool) -> void:
+	var centers: Array = contexts[0]
+	var radii: Array = contexts[1]
+	var damages: Array = contexts[2]
+	var role_ids: Array = contexts[3]
+	var bombard_center: Vector2 = centers[index]
+	var radius: float = float(radii[index]) * max(0.05, scale)
+	var damage_amount: float = float(damages[index]) * max(0.0, scale)
+	owner._start_basic_mage_bombardment(bombard_center, radius, damage_amount, 0.0, 1.0, 0.0, 0, 0, 0, str(role_ids[index]), true, advance_attack_chain)
 
 func _get_skill_effect_scales(owner, stat: String) -> Array[float]:
 	if owner != null and owner.has_method("_get_skill_blessing_effect_scales_for_skill"):
@@ -148,20 +155,24 @@ func _get_basic_attack_range_multiplier(owner) -> float:
 func _start_evolved_arcane_bombardment(owner, center: Vector2, radius: float, damage_amount: float, vulnerability_bonus: float, slow_multiplier: float, slow_duration: float, gravity_level: int, echo_level: int, frost_level: int, role_id: String, third_tier: bool = false) -> void:
 	owner._start_basic_mage_bombardment(center, radius, damage_amount, vulnerability_bonus, slow_multiplier, slow_duration, gravity_level, echo_level, frost_level, role_id, true, false)
 	var followup_count: int = 2 if third_tier else 1
-	if owner.get_tree() == null:
+	if owner.get_tree() == null or not owner.has_method("_schedule_repeating_sequence"):
 		for followup_index in range(followup_count):
 			owner._resolve_basic_mage_bombardment_damage(center, radius, damage_amount, vulnerability_bonus, slow_multiplier, slow_duration, gravity_level, echo_level, frost_level, role_id, true, followup_index == followup_count - 1)
 		return
-	var tween: Tween = owner.create_tween()
 	var first_damage_delay: float = owner._get_scene_animation_duration(owner.MAGE_WARNING_EFFECT_SCENE, 0.2) + owner._get_scene_animation_duration(owner.MAGE_BOOM_EFFECT_SCENE, 0.3)
 	var boom_duration: float = owner._get_scene_animation_duration(owner.MAGE_BOOM_EFFECT_SCENE, 0.3)
-	tween.tween_interval(first_damage_delay + 0.06)
 	for followup_index in range(followup_count):
-		tween.tween_callback(Callable(owner, "_spawn_mage_boom_scene_effect").bind(center, radius))
-		tween.tween_interval(boom_duration)
-		tween.tween_callback(Callable(owner, "_resolve_basic_mage_bombardment_damage").bind(center, radius, damage_amount, vulnerability_bonus, slow_multiplier, slow_duration, gravity_level, echo_level, frost_level, role_id, true, followup_index == followup_count - 1))
-		if followup_index < followup_count - 1:
-			tween.tween_interval(0.06)
+		var boom_delay: float = first_damage_delay + 0.06 + float(followup_index) * (boom_duration + 0.06)
+		var resolve_delay: float = boom_delay + boom_duration
+		owner._schedule_repeating_sequence(0.0, 1, func(_index: int) -> void:
+			if is_instance_valid(owner):
+				owner._spawn_mage_boom_scene_effect(center, radius)
+		, boom_delay)
+		var advance_chain := followup_index == followup_count - 1
+		owner._schedule_repeating_sequence(0.0, 1, func(_index: int) -> void:
+			if is_instance_valid(owner):
+				owner._resolve_basic_mage_bombardment_damage(center, radius, damage_amount, vulnerability_bonus, slow_multiplier, slow_duration, gravity_level, echo_level, frost_level, role_id, true, advance_chain)
+		, resolve_delay)
 
 func perform_background(owner) -> void:
 	var special_data: Dictionary = owner._get_role_special_state("mage")
@@ -256,14 +267,7 @@ func _schedule_ultimate_bombardment_sequence(owner, bombard_scales: Array[float]
 	if start_delay <= 0.0:
 		owner._schedule_repeating_sequence(owner.MAGE_ULTIMATE_BOMBARD_INTERVAL, bombard_count, sequence_callback)
 		return
-	var tree: SceneTree = owner.get_tree()
-	if tree == null:
-		return
-	var timer: SceneTreeTimer = tree.create_timer(start_delay)
-	timer.timeout.connect(func() -> void:
-		if is_instance_valid(owner):
-			owner._schedule_repeating_sequence(owner.MAGE_ULTIMATE_BOMBARD_INTERVAL, bombard_count, sequence_callback)
-	)
+	owner._schedule_repeating_sequence(owner.MAGE_ULTIMATE_BOMBARD_INTERVAL, bombard_count, sequence_callback, start_delay)
 
 func _trigger_ultimate_bombardment(owner, bombard_scales: Array[float], storm_level: int, frost_level: int, echo_level: int, gravity_level: int, cast_damage_multiplier: float, pulse_index: int, ultimate_tier: int = 1) -> void:
 	if owner.is_dead:
@@ -291,18 +295,16 @@ func _trigger_ultimate_bombardment(owner, bombard_scales: Array[float], storm_le
 	owner._spawn_ring_effect(main_center, pulse_radius, Color(0.72, 0.96, 1.0, 0.76), 6.0, 0.18)
 	owner._spawn_burst_effect(main_center, pulse_radius, Color(0.5, 0.92, 1.0, 0.24), 0.2)
 	owner._spawn_frost_sigils_effect(main_center, 34.0 + frost_level * 8.0, Color(0.86, 0.98, 1.0, 0.82), 0.18)
-	var damage_shapes: Array[Dictionary] = [{
-		"type": "circle",
-		"center": main_center,
-		"radius": pulse_radius,
-		"damage_amount": pulse_damage,
-		"vulnerability_bonus": 0.08 + frost_level * 0.025,
-		"slow_multiplier": max(0.24, 0.46 - frost_level * 0.03),
-		"slow_duration": 2.2 + storm_level * 0.22,
-		"source_role_id": "mage",
-		"source_position": main_center,
-		"kill_energy_bonus": ULTIMATE_TIER_THREE_KILL_ENERGY if ultimate_tier >= 3 else 0.0
-	}]
+	var shape_hits: int = owner._damage_enemies_in_radius_with_kill_energy(
+		main_center,
+		pulse_radius,
+		pulse_damage,
+		0.08 + frost_level * 0.025,
+		max(0.24, 0.46 - frost_level * 0.03),
+		2.2 + storm_level * 0.22,
+		"mage",
+		ULTIMATE_TIER_THREE_KILL_ENERGY if ultimate_tier >= 3 else 0.0
+	)
 
 	if frost_level >= 2 and pulse_index % 3 == 0:
 		owner._spawn_pulsing_field(main_center, 44.0 + frost_level * 10.0, Color(0.56, 0.92, 1.0, 0.16), 2, 0.1, owner._get_role_damage("mage") * (0.18 + frost_level * 0.04), 0.05, max(0.24, 0.4 - frost_level * 0.03), 1.8 + frost_level * 0.2)
@@ -313,18 +315,7 @@ func _trigger_ultimate_bombardment(owner, bombard_scales: Array[float], storm_le
 			var echo_center: Vector2 = secondary_enemy.global_position
 			if echo_center.distance_to(main_center) > 28.0:
 				owner._spawn_burst_effect(echo_center, (46.0 + echo_level * 8.0) * scale, Color(0.68, 0.96, 1.0, 0.18), 0.18)
-				damage_shapes.append({
-					"type": "circle",
-					"center": echo_center,
-					"radius": (46.0 + echo_level * 8.0) * scale,
-					"damage_amount": owner._get_role_damage("mage") * (0.3 + echo_level * 0.05) * max(0.0, effect_scale) * tier_damage_multiplier,
-					"vulnerability_bonus": 0.04,
-					"slow_multiplier": max(0.3, 0.52 - frost_level * 0.03),
-					"slow_duration": 1.8,
-					"source_role_id": "mage",
-					"source_position": echo_center
-				})
-	var shape_hits: int = _apply_damage_shapes(owner, damage_shapes)
+				shape_hits += owner._damage_enemies_in_radius(echo_center, (46.0 + echo_level * 8.0) * scale, owner._get_role_damage("mage") * (0.3 + echo_level * 0.05) * max(0.0, effect_scale) * tier_damage_multiplier, 0.04, max(0.3, 0.52 - frost_level * 0.03), 1.8, "mage")
 	if shape_hits > 0 and not _uses_batched_damage(owner):
 		owner._register_attack_result("mage", shape_hits, false)
 

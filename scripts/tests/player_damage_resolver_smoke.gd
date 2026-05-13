@@ -34,7 +34,7 @@ func _run() -> void:
 	var queue: Node = root.get_node_or_null("PlayerDamageJobQueue")
 	if batched_hits != 3:
 		failures.append("batched radius damage should report all matched hits")
-	if queue == null or not ("jobs" in queue) or queue.jobs.size() <= 0:
+	if queue == null or not ("enemy_refs" in queue) or queue.enemy_refs.size() <= 0:
 		failures.append("batched radius damage should enqueue merged jobs")
 	if owner.register_calls != 0:
 		failures.append("resolver should not register aggregate attack results before queued jobs are applied")

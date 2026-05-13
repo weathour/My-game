@@ -9,6 +9,20 @@ static var authored_scene_pools: Dictionary = {}
 static var scene_animation_duration_cache: Dictionary = {}
 static var sketch_sprite_effect_pool: Array[Node2D] = []
 static var authored_scene_spawn_serial: int = 0
+static var active_sketch_sprite_effects: Array[Dictionary] = []
+static var active_authored_cleanup_effects: Array[Dictionary] = []
+static var authored_effect_animation_frame: int = -1
+
+static func update_effect_animations(delta: float) -> void:
+	if delta <= 0.0:
+		return
+	PLAYER_GUNNER_INTERSECT_EFFECTS.update_effect_animations(delta)
+	var current_frame: int = Engine.get_process_frames()
+	if authored_effect_animation_frame == current_frame:
+		return
+	authored_effect_animation_frame = current_frame
+	_update_sketch_sprite_effects(delta)
+	_update_authored_cleanup_effects(delta)
 
 static func _mark_temporary_effect(node: Node) -> void:
 	if node != null:
@@ -77,10 +91,7 @@ static func spawn_sketch_sprite_effect(
 			target_visible_size.y / max(1.0, visible_bounds.size.y)
 		)
 
-	var tween := effect.create_tween()
-	tween.parallel().tween_property(effect, "modulate:a", 0.0, duration)
-	tween.parallel().tween_property(effect, "scale", Vector2(1.06, 1.06), duration * 0.35)
-	tween.tween_callback(_release_sketch_sprite_effect.bind(effect))
+	_track_sketch_sprite_effect(effect, duration, effect.scale, Vector2(1.06, 1.06), duration * 0.35)
 	return effect
 
 static func _acquire_sketch_sprite_effect(current_scene: Node) -> Node2D:
@@ -292,14 +303,10 @@ static func spawn_scaled_animated_scene(
 			sprite.scale = Vector2(base_scale.x * target_scale.x, base_scale.y * target_scale.y) if multiply_base_scale else target_scale
 		play_effect_sprite(sprite, effect, scene_key, spawn_token)
 	else:
-		var tween := effect.create_tween()
-		tween.tween_interval(fallback_duration)
-		tween.tween_callback(_release_authored_scene_if_token.bind(effect, scene_key, spawn_token))
+		_track_authored_cleanup(effect, scene_key, spawn_token, fallback_duration)
 
 	var cleanup_duration: float = get_scene_animation_duration(scene, fallback_duration) + 0.08
-	var cleanup_tween := effect.create_tween()
-	cleanup_tween.tween_interval(cleanup_duration)
-	cleanup_tween.tween_callback(_release_authored_scene_if_token.bind(effect, scene_key, spawn_token))
+	_track_authored_cleanup(effect, scene_key, spawn_token, cleanup_duration)
 
 	return effect
 
@@ -393,6 +400,70 @@ static func _release_authored_scene_if_token(effect: Node, scene_key: String, sp
 	if int(effect.get_meta("authored_scene_token", -1)) != spawn_token:
 		return
 	_release_authored_scene(effect, scene_key)
+
+static func _track_sketch_sprite_effect(effect: Node2D, duration: float, start_scale: Vector2, target_scale: Vector2, scale_duration: float) -> void:
+	active_sketch_sprite_effects.append({
+		"node": effect,
+		"elapsed": 0.0,
+		"duration": max(0.001, duration),
+		"scale_duration": max(0.001, scale_duration),
+		"start_scale": start_scale,
+		"target_scale": target_scale,
+		"start_alpha": effect.modulate.a
+	})
+
+static func _track_authored_cleanup(effect: Node, scene_key: String, spawn_token: int, duration: float) -> void:
+	active_authored_cleanup_effects.append({
+		"node": effect,
+		"scene_key": scene_key,
+		"token": spawn_token,
+		"elapsed": 0.0,
+		"duration": max(0.001, duration)
+	})
+
+static func _update_sketch_sprite_effects(delta: float) -> void:
+	for index in range(active_sketch_sprite_effects.size() - 1, -1, -1):
+		var data: Dictionary = active_sketch_sprite_effects[index]
+		var effect_node: Variant = data.get("node", null)
+		if effect_node == null or not is_instance_valid(effect_node) or not (effect_node is Node2D):
+			active_sketch_sprite_effects.remove_at(index)
+			continue
+		var effect := effect_node as Node2D
+		if bool(effect.get_meta("sketch_sprite_released", false)):
+			active_sketch_sprite_effects.remove_at(index)
+			continue
+		var elapsed: float = float(data.get("elapsed", 0.0)) + delta
+		var duration: float = max(0.001, float(data.get("duration", 0.1)))
+		var scale_duration: float = max(0.001, float(data.get("scale_duration", duration)))
+		var alpha_progress: float = clamp(elapsed / duration, 0.0, 1.0)
+		var scale_progress: float = clamp(elapsed / scale_duration, 0.0, 1.0)
+		effect.scale = (data.get("start_scale", Vector2.ONE) as Vector2).lerp(data.get("target_scale", Vector2.ONE) as Vector2, scale_progress)
+		effect.modulate.a = float(data.get("start_alpha", 1.0)) * (1.0 - alpha_progress)
+		if elapsed >= duration:
+			active_sketch_sprite_effects.remove_at(index)
+			_release_sketch_sprite_effect(effect)
+			continue
+		data["elapsed"] = elapsed
+		active_sketch_sprite_effects[index] = data
+
+static func _update_authored_cleanup_effects(delta: float) -> void:
+	for index in range(active_authored_cleanup_effects.size() - 1, -1, -1):
+		var data: Dictionary = active_authored_cleanup_effects[index]
+		var effect_node: Variant = data.get("node", null)
+		if effect_node == null or not is_instance_valid(effect_node) or not (effect_node is Node):
+			active_authored_cleanup_effects.remove_at(index)
+			continue
+		var effect := effect_node as Node
+		if bool(effect.get_meta("authored_scene_released", false)):
+			active_authored_cleanup_effects.remove_at(index)
+			continue
+		var elapsed: float = float(data.get("elapsed", 0.0)) + delta
+		if elapsed >= float(data.get("duration", 0.1)):
+			active_authored_cleanup_effects.remove_at(index)
+			_release_authored_scene_if_token(effect, str(data.get("scene_key", "")), int(data.get("token", -1)))
+			continue
+		data["elapsed"] = elapsed
+		active_authored_cleanup_effects[index] = data
 
 static func _prepare_authored_scene(effect: Node2D, current_scene: Node) -> void:
 	var parent := effect.get_parent()

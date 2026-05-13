@@ -4,9 +4,9 @@ static func apply_profile(enemy, kind: String, profile: Dictionary) -> void:
 	enemy.enemy_kind = kind
 	enemy.archetype_id = str(profile.get("archetype", enemy.archetype_id))
 	enemy.behavior_id = str(profile.get("behavior", enemy.behavior_id))
-	enemy.secondary_behavior_id = str(profile.get("secondary_behavior", enemy.secondary_behavior_id))
+	enemy.secondary_behavior_id = str(profile.get("secondary_behavior", ""))
 	enemy.max_health = float(profile.get("max_health", enemy.max_health))
-	enemy.current_health = min(enemy.current_health if enemy.current_health > 0.0 else enemy.max_health, enemy.max_health)
+	enemy.current_health = enemy.max_health
 	enemy.speed = float(profile.get("speed", enemy.speed))
 	enemy.touch_damage = float(profile.get("touch_damage", enemy.touch_damage))
 	enemy.contact_radius = float(profile.get("contact_radius", enemy.contact_radius))

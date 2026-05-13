@@ -23,6 +23,21 @@ static var status_burst_budget_used: int = 0
 static var status_burst_enemy_ids_this_frame: Dictionary = {}
 static var status_burst_pool: Array[Line2D] = []
 static var dash_trail_pool: Array[Line2D] = []
+static var active_status_bursts: Array[Dictionary] = []
+static var active_dash_trails: Array[Dictionary] = []
+static var active_dash_trail_hazards: Array[Dictionary] = []
+static var temporary_animation_frame: int = -1
+
+static func update_temporary_animations(delta: float) -> void:
+	if delta <= 0.0:
+		return
+	var current_frame := Engine.get_process_frames()
+	if temporary_animation_frame == current_frame:
+		return
+	temporary_animation_frame = current_frame
+	_update_active_status_bursts(delta)
+	_update_active_dash_trails(delta)
+	_update_active_dash_trail_hazards(delta)
 
 static func ensure_status_visuals(enemy) -> void:
 	if enemy.status_root != null:
@@ -138,7 +153,7 @@ static func update_status_visuals(enemy) -> void:
 			enemy.dash_warning_rect.color = Color(1.0, 0.14, 0.08, 0.16 + 0.18 * (1.0 - clamp(enemy.dash_windup_remaining / max(enemy.dash_windup_duration, 0.001), 0.0, 1.0)))
 
 static func spawn_status_burst(enemy, color: Color, radius: float) -> void:
-	var current_scene: Node = enemy.get_tree().current_scene
+	var current_scene: Node = _get_enemy_current_scene(enemy)
 	if current_scene == null:
 		return
 	if not _consume_status_burst_budget(enemy):
@@ -156,13 +171,16 @@ static func spawn_status_burst(enemy, color: Color, radius: float) -> void:
 	ring.scale = Vector2.ONE
 	ring.modulate = Color.WHITE
 
-	var tween := ring.create_tween()
-	tween.parallel().tween_property(ring, "scale", Vector2(1.35, 1.35), 0.18)
-	tween.parallel().tween_property(ring, "modulate:a", 0.0, 0.18)
-	tween.tween_callback(_release_status_burst.bind(ring))
+	active_status_bursts.append({
+		"node": ring,
+		"elapsed": 0.0,
+		"duration": 0.18,
+		"start_scale": Vector2.ONE,
+		"target_scale": Vector2(1.35, 1.35)
+	})
 
 static func spawn_dash_trail(enemy, direction_vector: Vector2, length: float) -> void:
-	var current_scene: Node = enemy.get_tree().current_scene
+	var current_scene: Node = _get_enemy_current_scene(enemy)
 	if current_scene == null:
 		return
 	if not _can_spawn_temporary_effect(current_scene):
@@ -181,12 +199,53 @@ static func spawn_dash_trail(enemy, direction_vector: Vector2, length: float) ->
 	trail.scale = Vector2.ONE
 	trail.modulate = Color.WHITE
 
-	var tween := trail.create_tween()
-	tween.parallel().tween_property(trail, "modulate:a", 0.0, 0.16)
-	tween.parallel().tween_property(trail, "width", 2.0, 0.16)
-	tween.tween_callback(_release_dash_trail.bind(trail))
+	active_dash_trails.append({
+		"node": trail,
+		"elapsed": 0.0,
+		"duration": 0.16,
+		"start_width": trail.width,
+		"target_width": 2.0
+	})
 	if enemy.enemy_kind == "elite" and enemy.archetype_id == "elite_ram_trail":
 		spawn_dash_trail_hazard(enemy, direction_vector, length)
+
+static func _update_active_status_bursts(delta: float) -> void:
+	for index in range(active_status_bursts.size() - 1, -1, -1):
+		var data: Dictionary = active_status_bursts[index]
+		var ring := data.get("node", null) as Line2D
+		if ring == null or not is_instance_valid(ring):
+			active_status_bursts.remove_at(index)
+			continue
+		var elapsed: float = float(data.get("elapsed", 0.0)) + delta
+		var duration: float = max(0.001, float(data.get("duration", 0.18)))
+		var progress: float = clamp(elapsed / duration, 0.0, 1.0)
+		ring.scale = (data.get("start_scale", Vector2.ONE) as Vector2).lerp(data.get("target_scale", Vector2.ONE) as Vector2, progress)
+		ring.modulate.a = 1.0 - progress
+		if elapsed >= duration:
+			active_status_bursts.remove_at(index)
+			_release_status_burst(ring)
+			continue
+		data["elapsed"] = elapsed
+		active_status_bursts[index] = data
+
+static func _update_active_dash_trails(delta: float) -> void:
+	for index in range(active_dash_trails.size() - 1, -1, -1):
+		var data: Dictionary = active_dash_trails[index]
+		var trail := data.get("node", null) as Line2D
+		if trail == null or not is_instance_valid(trail):
+			active_dash_trails.remove_at(index)
+			continue
+		var elapsed: float = float(data.get("elapsed", 0.0)) + delta
+		var duration: float = max(0.001, float(data.get("duration", 0.16)))
+		var progress: float = clamp(elapsed / duration, 0.0, 1.0)
+		trail.modulate.a = 1.0 - progress
+		trail.width = lerpf(float(data.get("start_width", trail.width)), float(data.get("target_width", 2.0)), progress)
+		if elapsed >= duration:
+			active_dash_trails.remove_at(index)
+			_release_dash_trail(trail)
+			continue
+		data["elapsed"] = elapsed
+		active_dash_trails[index] = data
 
 static func _acquire_status_burst(current_scene: Node) -> Line2D:
 	while not status_burst_pool.is_empty():
@@ -316,7 +375,7 @@ static func _clear_status_visuals(enemy) -> void:
 	enemy.dash_warning_rect = null
 
 static func spawn_dash_trail_hazard(enemy, direction_vector: Vector2, length: float) -> void:
-	var current_scene: Node = enemy.get_tree().current_scene
+	var current_scene: Node = _get_enemy_current_scene(enemy)
 	if current_scene == null:
 		return
 	var root := Node2D.new()
@@ -374,20 +433,44 @@ static func spawn_dash_trail_hazard(enemy, direction_vector: Vector2, length: fl
 		bodies.erase(body)
 	)
 
-	var tick_timer := Timer.new()
-	tick_timer.wait_time = ELITE_DASH_TRAIL_TICK
-	tick_timer.one_shot = false
-	tick_timer.autostart = true
-	root.add_child(tick_timer)
-	tick_timer.timeout.connect(func() -> void:
-		for body in bodies:
-			if is_instance_valid(body) and body.has_method("take_damage"):
-				body.take_damage(ELITE_DASH_TRAIL_DAMAGE)
-	)
+	active_dash_trail_hazards.append({
+		"root": root,
+		"bodies": bodies,
+		"elapsed": 0.0,
+		"duration": ELITE_DASH_TRAIL_DURATION,
+		"tick_elapsed": 0.0
+	})
 
-	var timer := Timer.new()
-	timer.wait_time = ELITE_DASH_TRAIL_DURATION
-	timer.one_shot = true
-	timer.autostart = true
-	root.add_child(timer)
-	timer.timeout.connect(root.queue_free)
+static func _update_active_dash_trail_hazards(delta: float) -> void:
+	for index in range(active_dash_trail_hazards.size() - 1, -1, -1):
+		var data: Dictionary = active_dash_trail_hazards[index]
+		var root_node: Variant = data.get("root", null)
+		if root_node == null or not is_instance_valid(root_node) or not (root_node is Node):
+			active_dash_trail_hazards.remove_at(index)
+			continue
+		var elapsed: float = float(data.get("elapsed", 0.0)) + delta
+		var duration: float = max(0.001, float(data.get("duration", ELITE_DASH_TRAIL_DURATION)))
+		var tick_elapsed: float = float(data.get("tick_elapsed", 0.0)) + delta
+		if tick_elapsed >= ELITE_DASH_TRAIL_TICK:
+			tick_elapsed = fmod(tick_elapsed, ELITE_DASH_TRAIL_TICK)
+			var bodies: Array = data.get("bodies", [])
+			for body in bodies:
+				if is_instance_valid(body) and body.has_method("take_damage"):
+					body.take_damage(ELITE_DASH_TRAIL_DAMAGE)
+		if elapsed >= duration:
+			active_dash_trail_hazards.remove_at(index)
+			(root_node as Node).queue_free()
+			continue
+		data["elapsed"] = elapsed
+		data["tick_elapsed"] = tick_elapsed
+		active_dash_trail_hazards[index] = data
+
+static func _get_enemy_current_scene(enemy) -> Node:
+	if enemy == null or not is_instance_valid(enemy):
+		return null
+	if enemy is Node and not (enemy as Node).is_inside_tree():
+		return null
+	var tree: SceneTree = enemy.get_tree()
+	if tree == null:
+		return null
+	return tree.current_scene

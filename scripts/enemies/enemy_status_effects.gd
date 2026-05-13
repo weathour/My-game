@@ -37,7 +37,8 @@ static func apply_slow(enemy, multiplier: float, duration: float) -> void:
 	enemy.slow_multiplier = next_multiplier
 	enemy.slow_timer = next_timer
 	if should_refresh_visual:
-		enemy._ensure_status_visuals()
+		if not _should_suppress_normal_status_visuals(enemy):
+			enemy._ensure_status_visuals()
 		enemy._spawn_status_burst(Color(0.56, 0.92, 1.0, 0.28), 22.0)
 
 static func apply_vulnerability(enemy, bonus: float, duration: float) -> void:
@@ -47,7 +48,8 @@ static func apply_vulnerability(enemy, bonus: float, duration: float) -> void:
 	enemy.vulnerability_bonus = next_bonus
 	enemy.vulnerability_timer = next_timer
 	if should_refresh_visual:
-		enemy._ensure_status_visuals()
+		if not _should_suppress_normal_status_visuals(enemy):
+			enemy._ensure_status_visuals()
 		enemy._spawn_status_burst(Color(1.0, 0.46, 0.36, 0.24), 18.0)
 
 static func apply_bleed(enemy, damage_per_second: float, duration: float) -> void:
@@ -60,3 +62,12 @@ static func _get_status_visual_refresh_epsilon(enemy) -> float:
 	if str(enemy.get("enemy_kind")) == "normal" and str(enemy.get("secondary_behavior_id")) == "":
 		return NORMAL_STATUS_VISUAL_REFRESH_EPSILON
 	return STATUS_VISUAL_REFRESH_EPSILON
+
+static func _should_suppress_normal_status_visuals(enemy) -> bool:
+	if enemy == null:
+		return false
+	if str(enemy.get("enemy_kind")) != "normal" or str(enemy.get("secondary_behavior_id")) != "":
+		return false
+	if enemy.get("status_root") != null:
+		return false
+	return enemy.has_method("_is_scene_under_enemy_pressure") and bool(enemy._is_scene_under_enemy_pressure())

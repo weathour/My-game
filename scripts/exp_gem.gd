@@ -43,8 +43,11 @@ var attraction_target_node: Node = null
 var attraction_active: bool = false
 var attraction_speed: float = 0.0
 var age_seconds: float = 0.0
+var pooled: bool = false
 
 func _ready() -> void:
+	if pooled:
+		return
 	add_to_group("exp_gems")
 	_register_runtime_pickup()
 	polygon_node = get_node_or_null("Polygon2D") as Polygon2D
@@ -59,7 +62,7 @@ func _exit_tree() -> void:
 func _physics_process(delta: float) -> void:
 	age_seconds += delta
 	if not attraction_active and age_seconds >= DESPAWN_SECONDS:
-		queue_free()
+		recycle()
 		return
 	if not attraction_active:
 		return
@@ -77,10 +80,21 @@ func _physics_process(delta: float) -> void:
 	global_position += to_target.normalized() * step
 
 func configure(new_tier: int, custom_value: int = -1, value_multiplier: float = DEFAULT_EXPERIENCE_MULTIPLIER) -> void:
+	pooled = false
+	show()
+	set_process(true)
+	set_physics_process(true)
+	add_to_group("exp_gems")
+	_register_runtime_pickup()
 	tier = clamp(new_tier, 1, 4)
 	var base_value: int = custom_value if custom_value > 0 else int(TIER_VALUES.get(tier, 4))
 	var scaled_value := _apply_value_multiplier(base_value, value_multiplier)
 	value = _apply_tier_experience_multiplier(scaled_value, tier)
+	attraction_target = Vector2.ZERO
+	attraction_target_node = null
+	attraction_active = false
+	attraction_speed = 0.0
+	age_seconds = 0.0
 	_apply_appearance()
 
 func set_attraction_target(target) -> void:
@@ -98,8 +112,23 @@ func set_attraction_target(target) -> void:
 		attraction_speed = ATTRACT_START_SPEED
 
 func collect() -> int:
+	var collected_value := value
+	recycle()
+	return collected_value
+
+func recycle() -> void:
+	pooled = true
+	_unregister_runtime_pickup()
+	remove_from_group("exp_gems")
+	var scene: Node = get_tree().current_scene if get_tree() != null else null
+	if scene != null and scene.has_method("release_runtime_pickup"):
+		scene.release_runtime_pickup("exp_gems", self)
+		return
 	queue_free()
-	return value
+
+func reset_pickup(new_position: Vector2, new_tier: int, custom_value: int = -1, value_multiplier: float = DEFAULT_EXPERIENCE_MULTIPLIER) -> void:
+	global_position = new_position
+	configure(new_tier, custom_value, value_multiplier)
 
 func merge_pickup_value(extra_value: int, extra_tier: int = 1) -> void:
 	value += max(0, extra_value)

@@ -7,8 +7,11 @@ const DESPAWN_SECONDS := 45.0
 
 var polygon_node: Polygon2D
 var age_seconds: float = 0.0
+var pooled: bool = false
 
 func _ready() -> void:
+	if pooled:
+		return
 	add_to_group("heart_pickups")
 	_register_runtime_pickup()
 	polygon_node = get_node_or_null("Polygon2D") as Polygon2D
@@ -20,11 +23,34 @@ func _exit_tree() -> void:
 func _physics_process(delta: float) -> void:
 	age_seconds += delta
 	if age_seconds >= DESPAWN_SECONDS:
-		queue_free()
+		recycle()
 
 func collect() -> float:
+	var collected_heal := heal_amount
+	recycle()
+	return collected_heal
+
+func reset_pickup(new_position: Vector2, new_heal_amount: float = HEAL_AMOUNT) -> void:
+	pooled = false
+	show()
+	set_process(true)
+	set_physics_process(true)
+	add_to_group("heart_pickups")
+	global_position = new_position
+	heal_amount = new_heal_amount
+	age_seconds = 0.0
+	_register_runtime_pickup()
+	_apply_appearance()
+
+func recycle() -> void:
+	pooled = true
+	_unregister_runtime_pickup()
+	remove_from_group("heart_pickups")
+	var scene: Node = get_tree().current_scene if get_tree() != null else null
+	if scene != null and scene.has_method("release_runtime_pickup"):
+		scene.release_runtime_pickup("heart_pickups", self)
+		return
 	queue_free()
-	return heal_amount
 
 func merge_heal_amount(extra_heal_amount: float) -> void:
 	heal_amount += max(0.0, extra_heal_amount)

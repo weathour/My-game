@@ -9,11 +9,53 @@ const GUNNER_VISUAL_SCALE := Vector2(1.0, 1.0)
 const GUNNER_VISUAL_BASE_POSITION := Vector2(0.0, 0.0)
 const WIZARD_VISUAL_SCENE := preload("res://assets/players/wizard/wizard.tscn")
 const WIZARD_VISUAL_SCALE := Vector2(1.7, 1.7)
-const WIZARD_VISUAL_BASE_POSITION := Vector2(0.0, -20.0)
+const WIZARD_VISUAL_BASE_POSITION := Vector2(0.0, -8.0)
+const ROLE_BODY_CENTER_OFFSETS := {
+	"swordsman": Vector2.ZERO,
+	"gunner": Vector2.ZERO,
+	"mage": Vector2.ZERO
+}
+
+static var active_visual_pulses: Array[Dictionary] = []
+static var visual_pulse_frame: int = -1
+
+static func update_visual_pulses(delta: float) -> void:
+	if delta <= 0.0:
+		return
+	var current_frame: int = Engine.get_process_frames()
+	if visual_pulse_frame == current_frame:
+		return
+	visual_pulse_frame = current_frame
+	for index in range(active_visual_pulses.size() - 1, -1, -1):
+		var data: Dictionary = active_visual_pulses[index]
+		var node_ref: WeakRef = data.get("node_ref", null) as WeakRef
+		var target_node := node_ref.get_ref() as Node2D if node_ref != null else null
+		if target_node == null or not is_instance_valid(target_node):
+			active_visual_pulses.remove_at(index)
+			continue
+		var elapsed: float = float(data.get("elapsed", 0.0)) + delta
+		var duration: float = max(0.001, float(data.get("duration", 0.1)))
+		var base_scale: Vector2 = data.get("base_scale", Vector2.ONE)
+		var peak_scale: float = float(data.get("peak_scale", 1.0))
+		var up_duration: float = max(0.001, duration * 0.35)
+		if elapsed <= up_duration:
+			target_node.scale = base_scale.lerp(base_scale * peak_scale, clamp(elapsed / up_duration, 0.0, 1.0))
+		else:
+			var down_duration: float = max(0.001, duration - up_duration)
+			target_node.scale = (base_scale * peak_scale).lerp(base_scale, clamp((elapsed - up_duration) / down_duration, 0.0, 1.0))
+		if elapsed >= duration:
+			target_node.scale = base_scale
+			active_visual_pulses.remove_at(index)
+			continue
+		data["elapsed"] = elapsed
+		active_visual_pulses[index] = data
 
 
 static func get_hidden_role_id(role_id: String, hidden: bool) -> String:
 	return role_id if hidden else ""
+
+static func get_role_body_center_offset(role_id: String) -> Vector2:
+	return ROLE_BODY_CENTER_OFFSETS.get(role_id, Vector2.ZERO)
 
 static func is_role_visual_hidden(role_id: String, active_role_visual_hidden: bool, hidden_role_id: String) -> bool:
 	return active_role_visual_hidden and role_id == hidden_role_id
@@ -84,13 +126,30 @@ static func pulse_player_visual(owner: Node, peak_scale: float, duration: float)
 			return
 		target_node = polygon
 	target_node.scale = base_scale
-	var tween := owner.create_tween()
-	tween.tween_property(target_node, "scale", base_scale * peak_scale, duration * 0.35)
-	tween.tween_property(target_node, "scale", base_scale, duration * 0.65)
+	_track_visual_pulse(target_node, base_scale, peak_scale, duration)
+
+static func _track_visual_pulse(target_node: Node2D, base_scale: Vector2, peak_scale: float, duration: float) -> void:
+	for index in range(active_visual_pulses.size() - 1, -1, -1):
+		var data: Dictionary = active_visual_pulses[index]
+		var node_ref: WeakRef = data.get("node_ref", null) as WeakRef
+		var current_node := node_ref.get_ref() as Node2D if node_ref != null else null
+		if current_node == target_node:
+			active_visual_pulses.remove_at(index)
+			break
+	active_visual_pulses.append({
+		"node_ref": weakref(target_node),
+		"base_scale": base_scale,
+		"peak_scale": peak_scale,
+		"duration": max(0.001, duration),
+		"elapsed": 0.0
+	})
 
 static func update_role_idle_visual(owner: Node, role_id: String, facing_direction: Vector2, role_visual_time: float) -> void:
 	var visual_root := owner.get_node_or_null("RoleVisualRoot") as Node2D
 	if visual_root == null:
+		return
+	if is_role_visual_hidden(role_id, owner.active_role_visual_hidden, owner.active_role_visual_hidden_role_id):
+		apply_active_role_visual_hidden(owner, role_id, owner.active_role_visual_hidden, owner.active_role_visual_hidden_role_id)
 		return
 	var scene_visual := visual_root.get_node_or_null("RoleSceneVisual") as Node2D
 	if scene_visual != null:
@@ -131,13 +190,13 @@ static func _update_role_scene_visual(owner: Node, scene_visual: Node2D, role_id
 	scene_visual.position = base_position + Vector2(0.0, sin(role_visual_time * 4.4) * bob_strength)
 	scene_visual.rotation = 0.012 * sin(role_visual_time * 2.8) if role_id == "mage" else 0.0
 	var animated_sprite := scene_visual.get_node_or_null("AnimatedSprite2D") as AnimatedSprite2D
-	if animated_sprite != null:
-		animated_sprite.flip_h = facing_direction.x < 0.0
-		if animated_sprite.sprite_frames != null and not animated_sprite.is_playing():
-			animated_sprite.play()
 	if scene_visual.has_method("set_moving"):
 		var move_direction: Vector2 = owner.velocity
 		scene_visual.set_moving(move_direction.length_squared() > 1.0, facing_direction)
+	elif animated_sprite != null:
+		animated_sprite.flip_h = facing_direction.x < 0.0
+		if animated_sprite.sprite_frames != null and not animated_sprite.is_playing():
+			animated_sprite.play()
 
 static func _get_visual_facing_direction(owner: Node, fallback_direction: Vector2) -> Vector2:
 	var visual_x: float = 1.0

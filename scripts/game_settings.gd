@@ -24,6 +24,7 @@ const ACTION_SWITCH_PREV := "switch_prev"
 const ACTION_SWITCH_NEXT := "switch_next"
 const ACTION_TOGGLE_ATTACK_MODE := "toggle_attack_mode"
 const ACTION_CHARACTER_PANEL := "character_panel"
+const ACTION_TOGGLE_HURT_CORE := "toggle_hurt_core"
 
 const ACTION_ORDER := [
 	ACTION_MOVE_UP,
@@ -34,7 +35,8 @@ const ACTION_ORDER := [
 	ACTION_SWITCH_PREV,
 	ACTION_SWITCH_NEXT,
 	ACTION_TOGGLE_ATTACK_MODE,
-	ACTION_CHARACTER_PANEL
+	ACTION_CHARACTER_PANEL,
+	ACTION_TOGGLE_HURT_CORE
 ]
 
 const DEFAULT_KEYS := {
@@ -46,7 +48,8 @@ const DEFAULT_KEYS := {
 	"switch_prev": KEY_Q,
 	"switch_next": KEY_E,
 	"toggle_attack_mode": KEY_TAB,
-	"character_panel": KEY_C
+	"character_panel": KEY_C,
+	"toggle_hurt_core": KEY_1
 }
 
 const WINDOW_SIZE_OPTIONS := {

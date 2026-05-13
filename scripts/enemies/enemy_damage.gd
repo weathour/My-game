@@ -25,6 +25,8 @@ static func apply_damage(enemy, amount: float, show_feedback: bool = true) -> bo
 		enemy.defeated.emit(enemy.enemy_kind)
 		enemy._drop_experience_gem()
 		enemy._maybe_drop_heart()
+		if enemy.has_method("release_after_defeat") and bool(enemy.release_after_defeat()):
+			return true
 		enemy.queue_free()
 		return true
 

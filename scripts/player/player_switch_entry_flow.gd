@@ -27,35 +27,58 @@ static func spawn_gunner_entry_wave_batch(owner, role_id: String, wave_index: in
 			bullet.hit_radius = 12.0
 	if end_index >= bullet_count:
 		return
-	if owner.get_tree() == null:
+	if not owner.has_method("_schedule_repeating_sequence"):
 		return
-	var tween: Tween = owner.create_tween()
-	tween.tween_interval(GUNNER_ENTRY_WAVE_BATCH_INTERVAL)
-	tween.tween_callback(Callable(owner, "_spawn_gunner_entry_wave_batch").bind(role_id, wave_index, end_index, damage_scale))
+	owner._schedule_repeating_sequence(GUNNER_ENTRY_WAVE_BATCH_INTERVAL, 1, func(_index: int) -> void:
+		spawn_gunner_entry_wave_batch(owner, role_id, wave_index, end_index, damage_scale)
+	, GUNNER_ENTRY_WAVE_BATCH_INTERVAL)
 
 
 static func start_mage_entry_bombardment(owner, role_id: String, bombard_centers: Array, damage_scale: float = 1.0) -> void:
 	if bombard_centers.is_empty():
 		return
 
-	if owner.get_tree() == null:
+	if not owner.has_method("_schedule_repeating_sequence"):
 		return
 
 	var first_center: Vector2 = bombard_centers[0]
 	var warning_duration: float = owner._get_scene_animation_duration(owner.MAGE_WARNING_EFFECT_SCENE, 0.2)
 	show_mage_entry_bombardment_warning(owner, first_center)
+	var sequence_steps: Array[Dictionary] = []
+	sequence_steps.append({
+		"delay": warning_duration,
+		"action": "impact",
+		"center": first_center
+	})
+	for center_index in range(1, bombard_centers.size()):
+		var next_center: Vector2 = bombard_centers[center_index]
+		sequence_steps.append({
+			"delay": 0.22,
+			"action": "warning",
+			"center": next_center
+		})
+		sequence_steps.append({
+			"delay": warning_duration,
+			"action": "impact",
+			"center": next_center
+		})
+	_schedule_mage_entry_step(owner, role_id, sequence_steps, 0, damage_scale)
 
-	var tween: Tween = owner.create_tween()
-	tween.tween_interval(warning_duration)
-	tween.tween_callback(Callable(owner, "_trigger_mage_entry_bombardment_impact").bind(role_id, first_center, damage_scale))
 
-	if bombard_centers.size() > 1:
-		for center_index in range(1, bombard_centers.size()):
-			var next_center: Vector2 = bombard_centers[center_index]
-			tween.tween_interval(0.22)
-			tween.tween_callback(Callable(owner, "_show_mage_entry_bombardment_warning").bind(next_center))
-			tween.tween_interval(warning_duration)
-			tween.tween_callback(Callable(owner, "_trigger_mage_entry_bombardment_impact").bind(role_id, next_center, damage_scale))
+static func _schedule_mage_entry_step(owner, role_id: String, sequence_steps: Array[Dictionary], step_index: int, damage_scale: float) -> void:
+	if step_index < 0 or step_index >= sequence_steps.size():
+		return
+	var step: Dictionary = sequence_steps[step_index]
+	owner._schedule_repeating_sequence(float(step.get("delay", 0.0)), 1, func(_index: int) -> void:
+		if not is_instance_valid(owner):
+			return
+		var center: Vector2 = step.get("center", Vector2.ZERO)
+		if str(step.get("action", "")) == "warning":
+			show_mage_entry_bombardment_warning(owner, center)
+		else:
+			trigger_mage_entry_bombardment_impact(owner, role_id, center, damage_scale)
+		_schedule_mage_entry_step(owner, role_id, sequence_steps, step_index + 1, damage_scale)
+	, float(step.get("delay", 0.0)))
 
 
 static func show_mage_entry_bombardment_warning(owner, center: Vector2) -> void:
@@ -141,11 +164,9 @@ static func _spawn_swordsman_hero_entry_extras(owner, role_id: String, extra_cou
 		return
 	var direction: Vector2 = owner.facing_direction if owner.facing_direction.length_squared() > 0.001 else Vector2.RIGHT
 	var origin: Vector2 = owner.global_position
-	var tween: Tween = owner.create_tween()
 	for index in range(extra_count):
 		var extra_index: int = index
-		tween.tween_interval(0.08)
-		tween.tween_callback(func() -> void:
+		owner._schedule_repeating_sequence(0.0, 1, func(_sequence_index: int) -> void:
 			if owner == null or not is_instance_valid(owner):
 				return
 			var slash_direction: Vector2 = direction.rotated(deg_to_rad(14.0 * (float(extra_index) - float(extra_count - 1) * 0.5)))
@@ -157,16 +178,18 @@ static func _spawn_swordsman_hero_entry_extras(owner, role_id: String, extra_cou
 			var hits: int = owner._damage_enemies_in_line(start_position, end_position, width, owner._get_role_damage(role_id) * 1.52 * effect_scale, 0.1, 1.0, 0.0, role_id)
 			if hits > 0:
 				owner._register_attack_result(role_id, hits, false)
-		)
+		, 0.08 * float(index + 1))
 
 
 static func _spawn_gunner_hero_entry_extras(owner, role_id: String, extra_count: int, effect_scale: float) -> void:
 	if owner.get_tree() == null:
 		return
-	var tween: Tween = owner.create_tween()
 	for index in range(extra_count):
-		tween.tween_interval(0.08)
-		tween.tween_callback(Callable(owner, "_fire_gunner_entry_wave").bind(role_id, index + 2, effect_scale))
+		var extra_index: int = index
+		owner._schedule_repeating_sequence(0.0, 1, func(_sequence_index: int) -> void:
+			if is_instance_valid(owner):
+				owner._fire_gunner_entry_wave(role_id, extra_index + 2, effect_scale)
+		, 0.08 * float(extra_index + 1))
 
 
 static func _spawn_mage_hero_entry_extras(owner, role_id: String, _extra_count: int, effect_scale: float) -> void:

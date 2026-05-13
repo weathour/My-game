@@ -114,6 +114,4 @@ static func _count_batched_projectiles(root: Node) -> int:
 		return 0
 	if "positions" in batch:
 		return int(batch.positions.size())
-	if "projectiles" in batch:
-		return int(batch.projectiles.size())
 	return 0

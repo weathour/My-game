@@ -5,6 +5,7 @@ const CELL_SIZE := 96.0
 static var cached_frame: int = -1
 static var cached_scene_id: int = -1
 static var cached_grid: Dictionary = {}
+static var active_cells: Array[Vector2i] = []
 
 
 static func get_grid(scene: Node) -> Dictionary:
@@ -14,7 +15,7 @@ static func get_grid(scene: Node) -> Dictionary:
 
 
 static func get_neighbors(enemy: Node2D, query_radius: float) -> Array:
-	if enemy == null or not is_instance_valid(enemy) or enemy.get_tree() == null:
+	if enemy == null or not is_instance_valid(enemy) or not enemy.is_inside_tree():
 		return []
 	var scene := enemy.get_tree().current_scene
 	if scene == null:
@@ -34,6 +35,27 @@ static func get_neighbors(enemy: Node2D, query_radius: float) -> Array:
 	return candidates
 
 
+static func for_each_neighbor(enemy: Node2D, query_radius: float, callback: Callable) -> void:
+	if enemy == null or not is_instance_valid(enemy) or not enemy.is_inside_tree():
+		return
+	var scene: Node = enemy.get_tree().current_scene
+	if scene == null:
+		return
+	var grid: Dictionary = _get_grid(scene)
+	if grid.is_empty():
+		return
+	var center_cell: Vector2i = _grid_cell(enemy.global_position)
+	var cell_radius: int = int(ceil(max(1.0, query_radius) / CELL_SIZE))
+	for x in range(center_cell.x - cell_radius, center_cell.x + cell_radius + 1):
+		for y in range(center_cell.y - cell_radius, center_cell.y + cell_radius + 1):
+			var cell: Vector2i = Vector2i(x, y)
+			if not grid.has(cell):
+				continue
+			for other in grid[cell] as Array:
+				if not bool(callback.call(other)):
+					return
+
+
 static func _get_grid(scene: Node) -> Dictionary:
 	var current_frame := Engine.get_physics_frames()
 	var scene_id := scene.get_instance_id()
@@ -41,7 +63,7 @@ static func _get_grid(scene: Node) -> Dictionary:
 		return cached_grid
 	cached_frame = current_frame
 	cached_scene_id = scene_id
-	cached_grid = {}
+	_clear_grid_cells()
 	var enemies: Array = scene.get_runtime_enemies() if scene.has_method("get_runtime_enemies") else scene.get_tree().get_nodes_in_group("enemies")
 	for enemy in enemies:
 		if not _is_live_node2d(enemy):
@@ -49,8 +71,17 @@ static func _get_grid(scene: Node) -> Dictionary:
 		var cell := _grid_cell((enemy as Node2D).global_position)
 		if not cached_grid.has(cell):
 			cached_grid[cell] = []
-		(cached_grid[cell] as Array).append(enemy)
+		var cell_enemies: Array = cached_grid[cell]
+		if cell_enemies.is_empty():
+			active_cells.append(cell)
+		cell_enemies.append(enemy)
 	return cached_grid
+
+
+static func _clear_grid_cells() -> void:
+	for cell in active_cells:
+		(cached_grid[cell] as Array).clear()
+	active_cells.clear()
 
 
 static func _grid_cell(position: Vector2) -> Vector2i:

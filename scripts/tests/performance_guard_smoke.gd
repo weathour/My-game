@@ -55,7 +55,7 @@ func _check_batched_projectiles_bypass_node_limit() -> void:
 	var batch := root.get_node_or_null("PlayerProjectileBatch")
 	if batch == null:
 		failures.append("batched projectile node should be created")
-	elif int(batch.get("projectiles").size()) != 1:
+	elif int(batch.get("positions").size()) != 1:
 		failures.append("batched projectile node should contain one projectile")
 	if _count_projectile_group_children(root) != PerformanceGuard.DEFAULT_PLAYER_PROJECTILE_LIMIT:
 		failures.append("batched projectile should not add player_projectiles nodes")

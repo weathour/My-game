@@ -117,27 +117,25 @@ func apply_save_data(data: Dictionary) -> void:
 
 
 func _update_fields(owner, delta: float) -> void:
-	var next_fields: Array[Dictionary] = []
-	var damage_shapes: Array[Dictionary] = []
-	for field_data in active_fields:
+	var hits: int = 0
+	for index in range(active_fields.size() - 1, -1, -1):
+		var field_data: Dictionary = active_fields[index]
 		var remaining: float = max(0.0, float(field_data.get("remaining", 0.0)) - delta)
 		field_data["remaining"] = remaining
 		if remaining <= 0.0:
 			_free_field(field_data)
+			active_fields.remove_at(index)
 			continue
 		field_data["tick_remaining"] = float(field_data.get("tick_remaining", 0.0)) - delta
 		var catch_up_ticks: int = 0
 		while float(field_data.get("tick_remaining", 0.0)) <= 0.0 and catch_up_ticks < MAX_CATCH_UP_TICKS:
 			field_data["tick_remaining"] = float(field_data.get("tick_remaining", 0.0)) + _get_tick_interval(owner)
-			_add_damage_field_shape(owner, field_data, damage_shapes)
+			hits += _damage_field(owner, field_data)
 			catch_up_ticks += 1
 		field_data["visual_remaining"] = float(field_data.get("visual_remaining", 0.0)) - delta
 		while float(field_data.get("visual_remaining", 0.0)) <= 0.0:
 			field_data["visual_remaining"] = float(field_data.get("visual_remaining", 0.0)) + VISUAL_SPAWN_INTERVAL
 			_spawn_shrapnel_visual_if_room(field_data)
-		next_fields.append(field_data)
-	active_fields = next_fields
-	var hits: int = _apply_damage_shapes(owner, damage_shapes)
 	if hits > 0 and not _uses_batched_damage(owner):
 		owner._register_attack_result("gunner", hits, false)
 
@@ -176,20 +174,10 @@ func _create_field(owner, center: Vector2) -> void:
 	active_fields.append(field_data)
 
 
-func _add_damage_field_shape(owner, field_data: Dictionary, damage_shapes: Array[Dictionary]) -> void:
+func _damage_field(owner, field_data: Dictionary) -> int:
 	var center: Vector2 = field_data.get("center", owner.global_position)
 	var radius: float = float(field_data.get("radius", _get_radius(owner)))
-	damage_shapes.append({
-		"type": "circle",
-		"center": center,
-		"radius": radius,
-		"damage_amount": _get_damage(owner),
-		"vulnerability_bonus": 0.0,
-		"slow_multiplier": _get_slow_multiplier(owner),
-		"slow_duration": 1.1,
-		"source_role_id": "gunner",
-		"source_position": center
-	})
+	return owner._damage_enemies_in_radius(center, radius, _get_damage(owner), 0.0, _get_slow_multiplier(owner), 1.1, "gunner")
 
 
 func _spawn_shrapnel_visual_if_room(field_data: Dictionary) -> void:
@@ -197,17 +185,20 @@ func _spawn_shrapnel_visual_if_room(field_data: Dictionary) -> void:
 	if root == null or not is_instance_valid(root):
 		return
 	var visuals: Array = field_data.get("visuals", [])
-	var live_visuals: Array = []
-	for visual in visuals:
-		if visual != null and is_instance_valid(visual) and bool(visual.get_meta("shrapnel_active", false)) and visual.get_parent() == root:
-			live_visuals.append(visual)
-	if live_visuals.size() >= MAX_ACTIVE_VISUALS:
-		field_data["visuals"] = live_visuals
+	var live_count: int = 0
+	for index in range(visuals.size()):
+		var visual: Variant = visuals[index]
+		if visual != null and is_instance_valid(visual) and bool(visual.get_meta("shrapnel_active", false)) and (visual as Node).get_parent() == root:
+			visuals[live_count] = visual
+			live_count += 1
+	visuals.resize(live_count)
+	if live_count >= MAX_ACTIVE_VISUALS:
+		field_data["visuals"] = visuals
 		return
 	var visual: Node2D = _create_shrapnel_visual(root, float(field_data.get("radius", BASE_RADIUS)))
 	if visual != null:
-		live_visuals.append(visual)
-	field_data["visuals"] = live_visuals
+		visuals.append(visual)
+	field_data["visuals"] = visuals
 
 
 func _create_shrapnel_visual(root: Node2D, radius: float) -> Node2D:
@@ -406,23 +397,5 @@ func _get_duration(owner) -> float:
 		duration *= float(owner._get_blessing_skill_duration_multiplier(SKILL_ID))
 	return duration
 
-func _apply_damage_shapes(owner, shapes: Array[Dictionary]) -> int:
-	if shapes.is_empty():
-		return 0
-	if owner != null and owner.has_method("_damage_enemies_in_shapes_batched"):
-		return int(owner._damage_enemies_in_shapes_batched(shapes))
-	var hits := 0
-	for shape in shapes:
-		hits += int(owner._damage_enemies_in_radius(
-			shape.get("center", Vector2.ZERO),
-			float(shape.get("radius", 1.0)),
-			float(shape.get("damage_amount", 0.0)),
-			float(shape.get("vulnerability_bonus", 0.0)),
-			float(shape.get("slow_multiplier", 1.0)),
-			float(shape.get("slow_duration", 0.0)),
-			str(shape.get("source_role_id", ""))
-		))
-	return hits
-
 func _uses_batched_damage(owner) -> bool:
-	return owner != null and owner.has_method("_damage_enemies_in_shapes_batched")
+	return owner != null and owner.has_method("_damage_enemies_in_radius")

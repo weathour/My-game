@@ -12,6 +12,7 @@ func _init() -> void:
 func _run() -> void:
 	var main := MainSceneScript.new()
 	_check_enemy_registry(main)
+	_check_enemy_pool(main)
 	_check_pickup_registry(main)
 	_check_enemy_projectile_registry(main)
 	_check_player_projectile_registry(main)
@@ -43,14 +44,39 @@ func _check_enemy_registry(main: Node) -> void:
 	enemy_b.free()
 
 
+func _check_enemy_pool(main: Node) -> void:
+	var enemy := Node2D.new()
+	main.add_child(enemy)
+	main.register_runtime_enemy(enemy)
+	_assert_size(main.get_runtime_enemies(), 1, "enemy pool setup should register active enemy")
+
+	main.release_runtime_enemy(enemy)
+	_assert_size(main.get_runtime_enemies(), 0, "enemy release should remove active registry entry")
+	if enemy.get_parent() != null:
+		failures.append("enemy release should detach pooled enemy from scene")
+
+	var taken: Node = main.take_runtime_enemy_from_pool()
+	if taken != enemy:
+		failures.append("enemy pool should return released enemy")
+	main.register_runtime_enemy(enemy)
+	_assert_size(main.get_runtime_enemies(), 1, "enemy register after pool take should restore active registry")
+
+	main.unregister_runtime_enemy(enemy)
+	enemy.free()
+
+
 func _check_pickup_registry(main: Node) -> void:
 	var gem := Node2D.new()
 	var heart := Node2D.new()
 	main.register_runtime_pickup("exp_gems", gem)
 	main.register_runtime_pickup("exp_gems", gem)
 	main.register_runtime_pickup("heart_pickups", heart)
+	gem.global_position = Vector2(24.0, 0.0)
+	heart.global_position = Vector2(500.0, 0.0)
 	_assert_size(main.get_runtime_pickups("exp_gems"), 1, "pickup registry should deduplicate same group")
 	_assert_size(main.get_runtime_pickups("heart_pickups"), 1, "pickup registry should isolate groups")
+	_assert_size(main.get_runtime_pickups_in_radius("exp_gems", Vector2.ZERO, 64.0), 1, "pickup grid should return nearby gems")
+	_assert_size(main.get_runtime_pickups_in_radius("heart_pickups", Vector2.ZERO, 64.0), 0, "pickup grid should exclude distant hearts")
 
 	main.unregister_runtime_pickup("exp_gems", gem)
 	_assert_size(main.get_runtime_pickups("exp_gems"), 0, "pickup unregister should update group cache")

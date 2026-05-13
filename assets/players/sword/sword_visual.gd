@@ -4,6 +4,8 @@ const IDLE_ANIMATION := &"sword-idle"
 const RUN_ANIMATION := &"sword-run"
 const VISUAL_SCALE := Vector2(0.62, 0.62)
 const RUN_VISUAL_SCALE_MULTIPLIER := 2.0
+const IDLE_BODY_CENTER_OFFSET := Vector2(2.08, -3.04)
+const RUN_BODY_CENTER_OFFSET := Vector2(-0.33, -0.25)
 
 var sprite: AnimatedSprite2D
 var current_animation: StringName = StringName()
@@ -40,8 +42,8 @@ func _ensure_sprite() -> void:
 		sprite.name = "AnimatedSprite2D"
 		add_child(sprite)
 	sprite.centered = true
-	sprite.position = Vector2(-11.0, 10.0)
 	sprite.scale = VISUAL_SCALE
+	_apply_animation_offset(IDLE_ANIMATION)
 	sprite.z_index = 1
 
 
@@ -50,3 +52,11 @@ func _apply_animation_scale(animation_name: StringName) -> void:
 		return
 	var scale_multiplier: float = RUN_VISUAL_SCALE_MULTIPLIER if animation_name == RUN_ANIMATION else 1.0
 	sprite.scale = VISUAL_SCALE * scale_multiplier
+	_apply_animation_offset(animation_name)
+
+
+func _apply_animation_offset(animation_name: StringName) -> void:
+	if sprite == null:
+		return
+	var raw_offset: Vector2 = RUN_BODY_CENTER_OFFSET if animation_name == RUN_ANIMATION else IDLE_BODY_CENTER_OFFSET
+	sprite.position = raw_offset * sprite.scale

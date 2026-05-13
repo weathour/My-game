@@ -1,5 +1,8 @@
 extends RefCounted
 
+const PLAYER_SEQUENCE_SCHEDULER := preload("res://scripts/player/player_sequence_scheduler.gd")
+const SEQUENCE_SCHEDULER_NAME := "PlayerSequenceScheduler"
+
 const DEVELOPER_MODE := preload("res://scripts/developer_mode.gd")
 
 const ULTIMATE_ENERGY_LOCK_AFTER_CAST := 3.2
@@ -165,10 +168,8 @@ static func apply_post_ultimate_bonuses(owner, role_id: String, total_duration: 
 		owner._update_fire_timer()
 	var reflux_level: int = 0
 	if reflux_level > 0:
-		if owner.get_tree() != null:
-			var flow_tween: Tween = owner.create_tween()
-			flow_tween.tween_interval(total_duration)
-			flow_tween.tween_callback(func() -> void:
+		if owner.has_method("_schedule_repeating_sequence"):
+			owner._schedule_repeating_sequence(total_duration, 1, func(_index: int) -> void:
 				owner._add_energy([18.0, 24.0, 30.0][reflux_level - 1])
 				owner.switch_cooldown_remaining = max(0.0, owner.switch_cooldown_remaining - [0.6, 0.9, 1.2][reflux_level - 1])
 				if reflux_level >= 3:
@@ -177,7 +178,7 @@ static func apply_post_ultimate_bonuses(owner, role_id: String, total_duration: 
 				owner._spawn_combat_tag(owner.global_position + Vector2(0.0, -46.0), "回流", Color(0.84, 0.96, 1.0, 1.0))
 				owner._spawn_ring_effect(owner.global_position, 68.0, Color(0.72, 0.52, 1.0, 0.72), 6.0, 0.18)
 				owner._spawn_burst_effect(owner.global_position, 54.0, Color(0.6, 0.42, 1.0, 0.18), 0.16)
-			)
+			, total_duration)
 
 	var reprise_level: int = 0
 	if owner._has_elite_relic("elite_mirror_finisher"):
@@ -185,11 +186,11 @@ static func apply_post_ultimate_bonuses(owner, role_id: String, total_duration: 
 	if reprise_level <= 0:
 		return
 
-	if owner.get_tree() == null:
+	if not owner.has_method("_schedule_repeating_sequence"):
 		return
-	var tween: Tween = owner.create_tween()
-	tween.tween_interval(total_duration + 0.12)
-	tween.tween_callback(Callable(owner, "_trigger_ultimate_reprise").bind(role_id, reprise_level))
+	owner._schedule_repeating_sequence(total_duration + 0.12, 1, func(_index: int) -> void:
+		owner._trigger_ultimate_reprise(role_id, reprise_level)
+	, total_duration + 0.12)
 
 
 static func trigger_ultimate_reprise(owner, role_id: String, reprise_level: int) -> void:
@@ -224,11 +225,11 @@ static func spawn_ultimate_afterglow_effect(owner, role_id: String, duration: fl
 		return
 
 	var pulse_count := 4
-	var tween: Tween = owner.create_tween()
-	for pulse_index in range(pulse_count):
-		if pulse_index > 0:
-			tween.tween_interval(max(0.08, duration / float(pulse_count)))
-		tween.tween_callback(Callable(owner, "_trigger_ultimate_afterglow_pulse").bind(role_id, pulse_index))
+	var pulse_interval: float = max(0.08, duration / float(pulse_count))
+	schedule_repeating_sequence(owner, pulse_interval, pulse_count, func(pulse_index: int) -> void:
+		if is_instance_valid(owner):
+			owner._trigger_ultimate_afterglow_pulse(role_id, pulse_index)
+	)
 
 
 static func trigger_ultimate_afterglow_pulse(owner, role_id: String, pulse_index: int) -> void:
@@ -250,14 +251,21 @@ static func trigger_ultimate_afterglow_pulse(owner, role_id: String, pulse_index
 static func schedule_repeating_sequence(owner, interval: float, repeat_count: int, callback: Callable, initial_delay: float = 0.0) -> void:
 	if owner == null or repeat_count <= 0:
 		return
-
-	var tween: Tween = owner.create_tween()
-	if initial_delay > 0.0:
-		tween.tween_interval(initial_delay)
+	var scheduler: Node = _get_or_create_sequence_scheduler(owner)
+	if scheduler != null and scheduler.has_method("schedule"):
+		scheduler.schedule(interval, repeat_count, callback, initial_delay)
+		return
 	for index in range(repeat_count):
-		if index > 0:
-			tween.tween_interval(interval)
-		var sequence_index := index
-		tween.tween_callback(func() -> void:
-			callback.call(sequence_index)
-		)
+		callback.call(index)
+
+
+static func _get_or_create_sequence_scheduler(owner) -> Node:
+	if owner == null or not owner.has_method("get_node_or_null"):
+		return null
+	var scheduler: Node = owner.get_node_or_null(SEQUENCE_SCHEDULER_NAME)
+	if scheduler != null:
+		return scheduler
+	scheduler = PLAYER_SEQUENCE_SCHEDULER.new()
+	scheduler.name = SEQUENCE_SCHEDULER_NAME
+	owner.add_child(scheduler)
+	return scheduler

@@ -243,11 +243,18 @@ func _spawn_split_bullets() -> void:
 		return
 
 	var count: int = max(1, split_count)
-	count = PERFORMANCE_GUARD.trim_requested_count(current_scene, "enemy_projectiles", count, _get_enemy_projectile_limit(current_scene))
+	if current_scene.has_method("_trim_spawn_count_for_group"):
+		count = int(current_scene._trim_spawn_count_for_group("enemy_projectiles", count, _get_enemy_projectile_limit(current_scene)))
+	else:
+		count = PERFORMANCE_GUARD.trim_requested_count(current_scene, "enemy_projectiles", count, _get_enemy_projectile_limit(current_scene))
 	if count <= 0:
 		return
 	for index in range(count):
-		var bullet = bullet_scene.instantiate()
+		var bullet = null
+		if current_scene.has_method("take_runtime_enemy_projectile_from_pool"):
+			bullet = current_scene.take_runtime_enemy_projectile_from_pool()
+		if bullet == null:
+			bullet = bullet_scene.instantiate()
 		if bullet == null:
 			continue
 		var shot_direction := Vector2.RIGHT
@@ -259,7 +266,11 @@ func _spawn_split_bullets() -> void:
 		else:
 			var shot_angle := TAU * float(index) / float(count)
 			shot_direction = Vector2.RIGHT.rotated(shot_angle)
-		current_scene.add_child(bullet)
+		if bullet.get_parent() == null:
+			current_scene.add_child(bullet)
+		elif bullet.get_parent() != current_scene:
+			bullet.get_parent().remove_child(bullet)
+			current_scene.add_child(bullet)
 		if bullet.has_method("reset_projectile"):
 			bullet.reset_projectile({
 				"position": global_position,

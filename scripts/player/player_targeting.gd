@@ -1,11 +1,15 @@
 extends RefCounted
 
 const PLAYER_DAMAGE_RESOLVER := preload("res://scripts/player/player_damage_resolver.gd")
+const ENEMY_SPATIAL_GRID := preload("res://scripts/enemies/enemy_spatial_grid.gd")
 
 const CLUSTER_CELL_SIZE := 120.0
+const DEFAULT_TARGET_QUERY_RADIUS := 780.0
 
 static var owner_target_cache: Dictionary = {}
 static var owner_target_cache_frame: int = -1
+static var reusable_candidate_pool: Array = []
+static var reusable_picked_centers: Array = []
 
 static func get_enemy_nodes(owner) -> Array:
 	if owner != null and owner.has_method("_get_live_enemies"):
@@ -22,19 +26,19 @@ static func get_enemy_nodes(owner) -> Array:
 
 static func get_owner_closest_enemy(owner) -> Node2D:
 	var key: String = _owner_cache_key(owner, "closest")
-	var cached: Dictionary = _get_cached_node2d_result(key)
-	if bool(cached.get("hit", false)):
-		return cached.get("value", null) as Node2D
-	var value: Node2D = get_closest_enemy(get_enemy_nodes(owner), owner.global_position)
+	if _has_owner_cache(key):
+		return _get_cached_node2d_value(key)
+	var value: Node2D = get_closest_enemy(_get_owner_nearby_enemy_nodes(owner, DEFAULT_TARGET_QUERY_RADIUS), owner.global_position)
+	if value == null:
+		value = get_closest_enemy(get_enemy_nodes(owner), owner.global_position)
 	_set_owner_cache(key, value)
 	return value
 
 
 static func get_owner_farthest_enemy(owner) -> Node2D:
 	var key: String = _owner_cache_key(owner, "farthest")
-	var cached: Dictionary = _get_cached_node2d_result(key)
-	if bool(cached.get("hit", false)):
-		return cached.get("value", null) as Node2D
+	if _has_owner_cache(key):
+		return _get_cached_node2d_value(key)
 	var value: Node2D = get_farthest_enemy(get_enemy_nodes(owner), owner.global_position)
 	_set_owner_cache(key, value)
 	return value
@@ -43,17 +47,20 @@ static func get_owner_farthest_enemy(owner) -> Node2D:
 static func get_owner_enemy_targets(owner, count: int, prefer_farthest: bool = false) -> Array:
 	var key: String = _owner_cache_key(owner, "targets_%d_%s" % [count, str(prefer_farthest)])
 	if _has_owner_cache(key):
-		return owner_target_cache[key]["value"] as Array
-	var value: Array = get_enemy_targets(get_enemy_nodes(owner), owner.global_position, count, prefer_farthest)
+		return owner_target_cache[key] as Array
+	var query_radius: float = INF if prefer_farthest else DEFAULT_TARGET_QUERY_RADIUS
+	var candidates: Array = get_enemy_nodes(owner) if prefer_farthest else _get_owner_nearby_enemy_nodes(owner, query_radius)
+	var value: Array = get_enemy_targets(candidates, owner.global_position, count, prefer_farthest)
+	if value.size() < max(0, count) and not prefer_farthest:
+		value = get_enemy_targets(get_enemy_nodes(owner), owner.global_position, count, prefer_farthest)
 	_set_owner_cache(key, value)
 	return value
 
 
 static func get_owner_low_health_enemy(owner) -> Node2D:
 	var key: String = _owner_cache_key(owner, "low_health")
-	var cached: Dictionary = _get_cached_node2d_result(key)
-	if bool(cached.get("hit", false)):
-		return cached.get("value", null) as Node2D
+	if _has_owner_cache(key):
+		return _get_cached_node2d_value(key)
 	var value: Node2D = get_low_health_enemy(get_enemy_nodes(owner))
 	_set_owner_cache(key, value)
 	return value
@@ -61,10 +68,12 @@ static func get_owner_low_health_enemy(owner) -> Node2D:
 
 static func get_owner_enemy_in_aim_cone(owner, max_angle_degrees: float, max_distance: float = INF) -> Node2D:
 	var key: String = _owner_cache_key(owner, "aim_cone_%.2f_%.2f_%.3f_%.3f" % [max_angle_degrees, max_distance, owner.facing_direction.x, owner.facing_direction.y])
-	var cached: Dictionary = _get_cached_node2d_result(key)
-	if bool(cached.get("hit", false)):
-		return cached.get("value", null) as Node2D
-	var value: Node2D = get_enemy_in_aim_cone(get_enemy_nodes(owner), owner.global_position, owner.facing_direction, max_angle_degrees, max_distance)
+	if _has_owner_cache(key):
+		return _get_cached_node2d_value(key)
+	var query_radius: float = min(max_distance, DEFAULT_TARGET_QUERY_RADIUS) if is_finite(max_distance) else DEFAULT_TARGET_QUERY_RADIUS
+	var value: Node2D = get_enemy_in_aim_cone(_get_owner_nearby_enemy_nodes(owner, query_radius), owner.global_position, owner.facing_direction, max_angle_degrees, max_distance)
+	if value == null:
+		value = get_enemy_in_aim_cone(get_enemy_nodes(owner), owner.global_position, owner.facing_direction, max_angle_degrees, max_distance)
 	_set_owner_cache(key, value)
 	return value
 
@@ -72,8 +81,8 @@ static func get_owner_enemy_in_aim_cone(owner, max_angle_degrees: float, max_dis
 static func get_owner_enemy_cluster_center(owner) -> Vector2:
 	var key: String = _owner_cache_key(owner, "cluster_center")
 	if _has_owner_cache(key):
-		return owner_target_cache[key]["value"] as Vector2
-	var value: Vector2 = get_enemy_cluster_center(get_enemy_nodes(owner))
+		return owner_target_cache[key] as Vector2
+	var value: Vector2 = get_enemy_cluster_center_from_owner(owner)
 	_set_owner_cache(key, value)
 	return value
 
@@ -81,8 +90,8 @@ static func get_owner_enemy_cluster_center(owner) -> Vector2:
 static func get_owner_random_enemy_cluster_centers(owner, count: int) -> Array:
 	var key: String = _owner_cache_key(owner, "random_cluster_centers_%d" % count)
 	if _has_owner_cache(key):
-		return (owner_target_cache[key]["value"] as Array).duplicate()
-	var value: Array = get_random_enemy_cluster_centers(get_enemy_nodes(owner), owner.global_position, count)
+		return (owner_target_cache[key] as Array).duplicate()
+	var value: Array = get_random_enemy_cluster_centers_from_owner(owner, owner.global_position, count)
 	_set_owner_cache(key, value)
 	return value.duplicate()
 
@@ -167,34 +176,51 @@ static func get_enemy_cluster_center(enemies: Array) -> Vector2:
 	var grid: Dictionary = _build_enemy_position_grid(enemies)
 	return _get_best_cluster_center_from_grid(grid)
 
+static func get_enemy_cluster_center_from_owner(owner) -> Vector2:
+	var grid: Dictionary = _get_owner_cluster_grid(owner)
+	if grid.is_empty():
+		return Vector2.ZERO
+	return _get_best_cluster_center_from_grid(grid)
+
 static func get_random_enemy_cluster_centers(enemies: Array, fallback_position: Vector2, count: int) -> Array:
 	if enemies.is_empty():
 		return [fallback_position]
 
 	var grid: Dictionary = _build_enemy_position_grid(enemies)
+	return _pick_random_cluster_centers_from_grid(grid, fallback_position, count)
+
+static func get_random_enemy_cluster_centers_from_owner(owner, fallback_position: Vector2, count: int) -> Array:
+	var grid: Dictionary = _get_owner_cluster_grid(owner)
+	if grid.is_empty():
+		return [fallback_position]
+	return _pick_random_cluster_centers_from_grid(grid, fallback_position, count)
+
+static func _pick_random_cluster_centers_from_grid(grid: Dictionary, fallback_position: Vector2, count: int) -> Array:
 	var scored_centers: Array = _get_scored_cluster_centers_from_grid(grid)
 
 	scored_centers.sort_custom(func(a, b): return int(a["score"]) > int(b["score"]))
-	var candidate_pool: Array = scored_centers.slice(0, min(6, scored_centers.size()))
-	var picked_centers: Array = []
-	while picked_centers.size() < count and not candidate_pool.is_empty():
-		var chosen_index: int = randi() % candidate_pool.size()
-		var chosen_center: Vector2 = candidate_pool[chosen_index]["center"]
-		candidate_pool.remove_at(chosen_index)
+	reusable_candidate_pool.clear()
+	reusable_picked_centers.clear()
+	for index in range(min(6, scored_centers.size())):
+		reusable_candidate_pool.append(scored_centers[index])
+	while reusable_picked_centers.size() < count and not reusable_candidate_pool.is_empty():
+		var chosen_index: int = randi() % reusable_candidate_pool.size()
+		var chosen_center: Vector2 = reusable_candidate_pool[chosen_index]["center"]
+		reusable_candidate_pool.remove_at(chosen_index)
 		var too_close := false
-		for picked_center in picked_centers:
+		for picked_center in reusable_picked_centers:
 			if chosen_center.distance_squared_to(picked_center) < 2304.0:
 				too_close = true
 				break
 		if too_close:
 			continue
-		picked_centers.append(chosen_center)
+		reusable_picked_centers.append(chosen_center)
 
-	if picked_centers.is_empty():
-		picked_centers.append(_get_best_cluster_center_from_grid(grid))
-	while picked_centers.size() < count:
-		picked_centers.append(picked_centers[picked_centers.size() - 1])
-	return picked_centers
+	if reusable_picked_centers.is_empty():
+		reusable_picked_centers.append(_get_best_cluster_center_from_grid(grid))
+	while reusable_picked_centers.size() < count:
+		reusable_picked_centers.append(reusable_picked_centers[reusable_picked_centers.size() - 1])
+	return reusable_picked_centers.duplicate()
 
 static func get_enemy_nearest_to_position(enemies: Array, position: Vector2) -> Node2D:
 	var selected_enemy: Node2D
@@ -220,6 +246,21 @@ static func get_enemy_near_position(enemies: Array, position: Vector2, max_dista
 		best_distance = distance_squared
 		selected_enemy = enemy
 	return selected_enemy
+
+static func _get_owner_nearby_enemy_nodes(owner, radius: float) -> Array:
+	if owner == null or not is_instance_valid(owner):
+		return []
+	if owner is Node and not (owner as Node).is_inside_tree():
+		return get_enemy_nodes(owner)
+	if not owner.has_method("get_tree") or owner.get_tree() == null:
+		return get_enemy_nodes(owner)
+	var origin: Vector2 = owner.global_position
+	var safe_radius: float = max(1.0, radius)
+	var bounds := Rect2(origin - Vector2.ONE * safe_radius, Vector2.ONE * safe_radius * 2.0)
+	var candidates: Array = PLAYER_DAMAGE_RESOLVER._get_candidate_enemies_for_bounds(owner, bounds)
+	if candidates.is_empty():
+		return []
+	return candidates
 
 static func _insert_scored_enemy(selected: Array, selected_scores: Array[float], enemy: Node2D, score: float, target_count: int, prefer_farthest: bool) -> void:
 	var insert_index := selected_scores.size()
@@ -250,17 +291,37 @@ static func _build_enemy_position_grid(enemies: Array) -> Dictionary:
 		(grid[cell] as Array).append(enemy)
 	return grid
 
+static func _get_owner_cluster_grid(owner) -> Dictionary:
+	if owner == null or not is_instance_valid(owner):
+		return {}
+	if owner.has_method("get_tree") and owner.get_tree() != null:
+		var scene: Node = owner.get_tree().current_scene
+		if scene != null:
+			return ENEMY_SPATIAL_GRID.get_grid(scene)
+	return _build_enemy_position_grid(get_enemy_nodes(owner))
+
 static func _get_best_cluster_center_from_grid(grid: Dictionary) -> Vector2:
 	if grid.is_empty():
 		return Vector2.ZERO
 	var best_center := Vector2.ZERO
 	var best_score: int = -1
-	for cell in grid.keys():
-		var scored: Dictionary = _score_cluster_cell(grid, cell as Vector2i)
-		var score: int = int(scored.get("score", 0))
+	for raw_cell in grid.keys():
+		var center_cell: Vector2i = raw_cell as Vector2i
+		var score := 0
+		var position_sum := Vector2.ZERO
+		for x in range(center_cell.x - 1, center_cell.x + 2):
+			for y in range(center_cell.y - 1, center_cell.y + 2):
+				var cell := Vector2i(x, y)
+				if not grid.has(cell):
+					continue
+				for enemy in grid[cell] as Array:
+					if not is_instance_valid(enemy):
+						continue
+					score += 1
+					position_sum += (enemy as Node2D).global_position
 		if score > best_score:
 			best_score = score
-			best_center = scored.get("center", Vector2.ZERO) as Vector2
+			best_center = position_sum / float(max(1, score))
 	return best_center
 
 static func _get_scored_cluster_centers_from_grid(grid: Dictionary) -> Array:
@@ -301,34 +362,18 @@ static func _has_owner_cache(key: String) -> bool:
 		return false
 	return true
 
-static func _get_cached_node2d_result(key: String) -> Dictionary:
-	if not _has_owner_cache(key):
-		return {
-			"hit": false,
-			"value": null
-		}
-	var cached_value: Variant = (owner_target_cache[key] as Dictionary).get("value", null)
+static func _get_cached_node2d_value(key: String) -> Node2D:
+	var cached_value: Variant = owner_target_cache.get(key, null)
 	if cached_value == null:
-		return {
-			"hit": true,
-			"value": null
-		}
+		return null
 	if not is_instance_valid(cached_value):
 		owner_target_cache.erase(key)
-		return {
-			"hit": false,
-			"value": null
-		}
-	return {
-		"hit": true,
-		"value": cached_value as Node2D
-	}
+		return null
+	return cached_value as Node2D
 
 static func _set_owner_cache(key: String, value: Variant) -> void:
 	_ensure_owner_cache_frame()
-	owner_target_cache[key] = {
-		"value": value
-	}
+	owner_target_cache[key] = value
 
 static func _ensure_owner_cache_frame() -> void:
 	var current_frame: int = Engine.get_physics_frames()

@@ -6,6 +6,19 @@ const COMPOSITE_POOL_LIMIT_PER_KIND := 32
 
 static var line_pool: Array[Line2D] = []
 static var composite_pools: Dictionary = {}
+static var active_lines: Array[Dictionary] = []
+static var active_composites: Array[Dictionary] = []
+static var effect_animation_frame: int = -1
+
+static func update_effect_animations(delta: float) -> void:
+	if delta <= 0.0:
+		return
+	var current_frame := Engine.get_process_frames()
+	if effect_animation_frame == current_frame:
+		return
+	effect_animation_frame = current_frame
+	_update_active_lines(delta)
+	_update_active_composites(delta)
 
 static func _mark_temporary_effect(node: Node) -> void:
 	if node != null:
@@ -33,10 +46,7 @@ static func spawn_dash_line_effect(owner: Node, start_position: Vector2, end_pos
 	line.scale = Vector2.ONE
 	line.modulate = Color.WHITE
 
-	var tween := line.create_tween()
-	tween.parallel().tween_property(line, "modulate:a", 0.0, duration)
-	tween.parallel().tween_property(line, "width", 2.0, duration)
-	tween.tween_callback(_release_line.bind(line))
+	_track_line_animation(line, duration, line.width, 2.0)
 
 
 static func spawn_ring_effect(owner: Node, center: Vector2, radius: float, color: Color, width: float, duration: float, points: PackedVector2Array) -> void:
@@ -57,10 +67,7 @@ static func spawn_ring_effect(owner: Node, center: Vector2, radius: float, color
 	ring.scale = Vector2.ONE
 	ring.modulate = Color.WHITE
 
-	var tween := ring.create_tween()
-	tween.parallel().tween_property(ring, "width", 2.0, duration)
-	tween.parallel().tween_property(ring, "modulate:a", 0.0, duration)
-	tween.tween_callback(_release_line.bind(ring))
+	_track_line_animation(ring, duration, ring.width, 2.0)
 
 static func _acquire_line(current_scene: Node) -> Line2D:
 	while not line_pool.is_empty():
@@ -123,10 +130,7 @@ static func spawn_slash_effect(owner: Node, center: Vector2, direction: Vector2,
 	])
 
 	effect.scale = Vector2(0.32, 0.74)
-	var tween := effect.create_tween()
-	tween.parallel().tween_property(effect, "scale", Vector2(1.0, 1.0), duration * 0.45)
-	tween.parallel().tween_property(effect, "modulate:a", 0.0, duration)
-	tween.tween_callback(_release_composite.bind(effect, "slash"))
+	_track_composite_animation(effect, "slash", duration, effect.scale, Vector2.ONE, duration * 0.45)
 
 
 static func spawn_line_corridor_effect(owner: Node, start_position: Vector2, end_position: Vector2, hit_width: float, color: Color, duration: float) -> void:
@@ -157,10 +161,7 @@ static func spawn_line_corridor_effect(owner: Node, start_position: Vector2, end
 		Vector2(0.0, hit_width)
 	])
 
-	var tween := effect.create_tween()
-	tween.parallel().tween_property(effect, "modulate:a", 0.0, duration)
-	tween.parallel().tween_property(effect, "scale:y", 0.65, duration)
-	tween.tween_callback(_release_composite.bind(effect, "corridor"))
+	_track_composite_animation(effect, "corridor", duration, Vector2.ONE, Vector2(1.0, 0.65), duration)
 
 
 static func spawn_crescent_wave_effect(owner: Node, center: Vector2, direction: Vector2, radius: float, color: Color, duration: float, arc_band_points: PackedVector2Array, edge_points: PackedVector2Array) -> void:
@@ -187,10 +188,7 @@ static func spawn_crescent_wave_effect(owner: Node, center: Vector2, direction: 
 	edge.points = edge_points
 
 	effect.scale = Vector2(0.42, 0.42)
-	var tween := effect.create_tween()
-	tween.parallel().tween_property(effect, "scale", Vector2.ONE, duration * 0.45)
-	tween.parallel().tween_property(effect, "modulate:a", 0.0, duration)
-	tween.tween_callback(_release_composite.bind(effect, "crescent"))
+	_track_composite_animation(effect, "crescent", duration, effect.scale, Vector2.ONE, duration * 0.45)
 
 
 static func spawn_owner_crescent_wave_effect(owner, center: Vector2, direction: Vector2, radius: float, color: Color, duration: float, arc_degrees: float = 270.0, thickness: float = 26.0) -> void:
@@ -247,10 +245,71 @@ static func spawn_thrust_effect(owner: Node, start_position: Vector2, end_positi
 	])
 
 	effect.scale = Vector2(0.3, 0.8)
-	var tween := effect.create_tween()
-	tween.parallel().tween_property(effect, "scale", Vector2.ONE, duration * 0.45)
-	tween.parallel().tween_property(effect, "modulate:a", 0.0, duration)
-	tween.tween_callback(_release_composite.bind(effect, "thrust"))
+	_track_composite_animation(effect, "thrust", duration, effect.scale, Vector2.ONE, duration * 0.45)
+
+static func _track_line_animation(line: Line2D, duration: float, start_width: float, target_width: float) -> void:
+	active_lines.append({
+		"node": line,
+		"elapsed": 0.0,
+		"duration": max(0.001, duration),
+		"start_width": start_width,
+		"target_width": target_width,
+		"start_alpha": line.modulate.a
+	})
+
+static func _track_composite_animation(root: Node2D, kind: String, duration: float, start_scale: Vector2, target_scale: Vector2, scale_duration: float) -> void:
+	active_composites.append({
+		"node": root,
+		"kind": kind,
+		"elapsed": 0.0,
+		"duration": max(0.001, duration),
+		"start_scale": start_scale,
+		"target_scale": target_scale,
+		"scale_duration": max(0.001, scale_duration),
+		"start_alpha": root.modulate.a
+	})
+
+static func _update_active_lines(delta: float) -> void:
+	for index in range(active_lines.size() - 1, -1, -1):
+		var data: Dictionary = active_lines[index]
+		var line_node: Variant = data.get("node", null)
+		if line_node == null or not is_instance_valid(line_node) or not (line_node is Line2D):
+			active_lines.remove_at(index)
+			continue
+		var line := line_node as Line2D
+		var elapsed: float = float(data.get("elapsed", 0.0)) + delta
+		var duration: float = max(0.001, float(data.get("duration", 0.1)))
+		var progress: float = clamp(elapsed / duration, 0.0, 1.0)
+		line.width = lerpf(float(data.get("start_width", line.width)), float(data.get("target_width", 2.0)), progress)
+		line.modulate.a = float(data.get("start_alpha", 1.0)) * (1.0 - progress)
+		if elapsed >= duration:
+			active_lines.remove_at(index)
+			_release_line(line)
+			continue
+		data["elapsed"] = elapsed
+		active_lines[index] = data
+
+static func _update_active_composites(delta: float) -> void:
+	for index in range(active_composites.size() - 1, -1, -1):
+		var data: Dictionary = active_composites[index]
+		var root_node: Variant = data.get("node", null)
+		if root_node == null or not is_instance_valid(root_node) or not (root_node is Node2D):
+			active_composites.remove_at(index)
+			continue
+		var root := root_node as Node2D
+		var elapsed: float = float(data.get("elapsed", 0.0)) + delta
+		var duration: float = max(0.001, float(data.get("duration", 0.1)))
+		var scale_duration: float = max(0.001, float(data.get("scale_duration", duration)))
+		var alpha_progress: float = clamp(elapsed / duration, 0.0, 1.0)
+		var scale_progress: float = clamp(elapsed / scale_duration, 0.0, 1.0)
+		root.scale = (data.get("start_scale", Vector2.ONE) as Vector2).lerp(data.get("target_scale", Vector2.ONE) as Vector2, scale_progress)
+		root.modulate.a = float(data.get("start_alpha", 1.0)) * (1.0 - alpha_progress)
+		if elapsed >= duration:
+			active_composites.remove_at(index)
+			_release_composite(root, str(data.get("kind", "")))
+			continue
+		data["elapsed"] = elapsed
+		active_composites[index] = data
 
 static func _acquire_composite(current_scene: Node, kind: String, child_names: Array[String]) -> Node2D:
 	var pool: Array = composite_pools.get(kind, [])

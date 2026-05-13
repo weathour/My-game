@@ -14,6 +14,8 @@ static var burst_polygon_pool: Array = []
 static var frost_sigil_pool: Array = []
 static var radial_rays_pool: Array = []
 static var guard_shield_pool: Array = []
+static var active_simple_effects: Array[Dictionary] = []
+static var simple_effect_animation_frame: int = -1
 
 static func _mark_temporary_effect(node: Node) -> void:
 	if node != null:
@@ -22,6 +24,11 @@ static func _mark_temporary_effect(node: Node) -> void:
 
 static func _can_spawn_temporary_effect(owner: Node) -> bool:
 	return owner != null and owner.get_tree() != null
+
+static func update_effect_animations(delta: float) -> void:
+	PLAYER_EFFECT_LINE_PRIMITIVES.update_effect_animations(delta)
+	PLAYER_EFFECT_SHAPE_PRIMITIVES.update_effect_animations(delta)
+	_update_simple_effect_animations(delta)
 
 static func spawn_dash_line_effect(owner: Node, start_position: Vector2, end_position: Vector2, color: Color, width: float, duration: float) -> void:
 	PLAYER_EFFECT_LINE_PRIMITIVES.spawn_dash_line_effect(owner, start_position, end_position, color, width, duration)
@@ -43,10 +50,7 @@ static func spawn_combat_tag(owner: Node, position: Vector2, text: String, color
 	label.add_theme_font_size_override("font_size", 20)
 	label.global_position = position
 
-	var tween := label.create_tween()
-	tween.parallel().tween_property(label, "global_position", position + Vector2(0.0, -24.0), 0.34)
-	tween.parallel().tween_property(label, "modulate:a", 0.0, 0.34)
-	tween.tween_callback(_release_combat_tag.bind(label))
+	_track_text_effect(label, position, position + Vector2(0.0, -24.0), 0.34, &"combat_tag")
 
 static func spawn_ring_effect(owner: Node, center: Vector2, radius: float, color: Color, width: float, duration: float, points: PackedVector2Array) -> void:
 	PLAYER_EFFECT_LINE_PRIMITIVES.spawn_ring_effect(owner, center, radius, color, width, duration, points)
@@ -91,10 +95,7 @@ static func spawn_guard_effect(owner: Node, center: Vector2, radius: float, colo
 	])
 
 	shield.scale = Vector2(0.36, 0.36)
-	var tween := shield.create_tween()
-	tween.parallel().tween_property(shield, "scale", Vector2.ONE, duration)
-	tween.parallel().tween_property(shield, "modulate:a", 0.0, duration)
-	tween.tween_callback(_release_guard_shield.bind(shield))
+	_track_simple_effect(shield, duration, shield.scale, Vector2.ONE, 0.0, &"guard_shield")
 
 static func spawn_burst_effect(owner: Node, center: Vector2, color: Color, duration: float, points: PackedVector2Array) -> void:
 	if not _can_spawn_temporary_effect(owner):
@@ -112,10 +113,7 @@ static func spawn_burst_effect(owner: Node, center: Vector2, color: Color, durat
 	polygon.polygon = points
 
 	polygon.scale = Vector2(0.2, 0.2)
-	var tween := polygon.create_tween()
-	tween.parallel().tween_property(polygon, "scale", Vector2.ONE, duration)
-	tween.parallel().tween_property(polygon, "modulate:a", 0.0, duration)
-	tween.tween_callback(_release_burst_polygon.bind(polygon))
+	_track_simple_effect(polygon, duration, polygon.scale, Vector2.ONE, 0.0, &"burst_polygon")
 
 static func _acquire_combat_tag(current_scene: Node) -> Label:
 	while not combat_tag_pool.is_empty():
@@ -203,11 +201,7 @@ static func spawn_frost_sigils_effect(owner: Node, center: Vector2, radius: floa
 		])
 
 	effect.scale = Vector2(0.45, 0.45)
-	var tween := effect.create_tween()
-	tween.parallel().tween_property(effect, "rotation", 0.32, duration)
-	tween.parallel().tween_property(effect, "scale", Vector2.ONE, duration * 0.5)
-	tween.parallel().tween_property(effect, "modulate:a", 0.0, duration)
-	tween.tween_callback(_release_frost_sigil.bind(effect))
+	_track_simple_effect(effect, duration, effect.scale, Vector2.ONE, 0.32, &"frost_sigil", duration * 0.5)
 
 static func _acquire_frost_sigil(current_scene: Node) -> Node2D:
 	while not frost_sigil_pool.is_empty():
@@ -306,10 +300,84 @@ static func spawn_radial_rays_effect(owner: Node, center: Vector2, radius: float
 			extra_ray.visible = false
 
 	root.scale = Vector2(0.35, 0.35)
-	var tween := root.create_tween()
-	tween.parallel().tween_property(root, "scale", Vector2.ONE, duration * 0.45)
-	tween.parallel().tween_property(root, "modulate:a", 0.0, duration)
-	tween.tween_callback(_release_radial_rays.bind(root))
+	_track_simple_effect(root, duration, root.scale, Vector2.ONE, 0.0, &"radial_rays", duration * 0.45)
+
+static func _track_simple_effect(node: CanvasItem, duration: float, start_scale: Vector2, target_scale: Vector2, target_rotation: float, release_kind: StringName, scale_duration: float = -1.0) -> void:
+	active_simple_effects.append({
+		"node": node,
+		"elapsed": 0.0,
+		"duration": max(0.001, duration),
+		"scale_duration": max(0.001, duration if scale_duration < 0.0 else scale_duration),
+		"start_scale": start_scale,
+		"target_scale": target_scale,
+		"start_rotation": node.rotation,
+		"target_rotation": target_rotation,
+		"start_alpha": node.modulate.a,
+		"release_kind": release_kind
+	})
+
+static func _track_text_effect(label: Label, start_position: Vector2, target_position: Vector2, duration: float, release_kind: StringName) -> void:
+	active_simple_effects.append({
+		"node": label,
+		"elapsed": 0.0,
+		"duration": max(0.001, duration),
+		"scale_duration": max(0.001, duration),
+		"start_scale": label.scale,
+		"target_scale": label.scale,
+		"start_rotation": label.rotation,
+		"target_rotation": label.rotation,
+		"start_alpha": label.modulate.a,
+		"start_position": start_position,
+		"target_position": target_position,
+		"release_kind": release_kind
+	})
+
+static func _update_simple_effect_animations(delta: float) -> void:
+	if delta <= 0.0:
+		return
+	var current_frame := Engine.get_process_frames()
+	if simple_effect_animation_frame == current_frame:
+		return
+	simple_effect_animation_frame = current_frame
+	for index in range(active_simple_effects.size() - 1, -1, -1):
+		var data: Dictionary = active_simple_effects[index]
+		var effect_node: Variant = data.get("node", null)
+		if effect_node == null or not is_instance_valid(effect_node) or not (effect_node is CanvasItem):
+			active_simple_effects.remove_at(index)
+			continue
+		var node := effect_node as CanvasItem
+		var elapsed: float = float(data.get("elapsed", 0.0)) + delta
+		var duration: float = max(0.001, float(data.get("duration", 0.1)))
+		var scale_duration: float = max(0.001, float(data.get("scale_duration", duration)))
+		var alpha_progress: float = clamp(elapsed / duration, 0.0, 1.0)
+		var scale_progress: float = clamp(elapsed / scale_duration, 0.0, 1.0)
+		node.scale = (data.get("start_scale", Vector2.ONE) as Vector2).lerp(data.get("target_scale", Vector2.ONE) as Vector2, scale_progress)
+		node.rotation = lerpf(float(data.get("start_rotation", 0.0)), float(data.get("target_rotation", 0.0)), alpha_progress)
+		if data.has("start_position") and data.has("target_position"):
+			node.set("global_position", (data.get("start_position", Vector2.ZERO) as Vector2).lerp(data.get("target_position", Vector2.ZERO) as Vector2, alpha_progress))
+		node.modulate.a = float(data.get("start_alpha", 1.0)) * (1.0 - alpha_progress)
+		if elapsed >= duration:
+			active_simple_effects.remove_at(index)
+			_release_simple_effect(data.get("release_kind", &""), node)
+			continue
+		data["elapsed"] = elapsed
+		active_simple_effects[index] = data
+
+static func _release_simple_effect(release_kind: StringName, node: CanvasItem) -> void:
+	match release_kind:
+		&"combat_tag":
+			_release_combat_tag(node as Label)
+		&"guard_shield":
+			_release_guard_shield(node as Polygon2D)
+		&"burst_polygon":
+			_release_burst_polygon(node as Polygon2D)
+		&"frost_sigil":
+			_release_frost_sigil(node as Node2D)
+		&"radial_rays":
+			_release_radial_rays(node as Node2D)
+		_:
+			if node != null and is_instance_valid(node):
+				node.queue_free()
 
 static func _acquire_guard_shield(current_scene: Node) -> Polygon2D:
 	while not guard_shield_pool.is_empty():

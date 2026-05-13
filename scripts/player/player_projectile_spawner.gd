@@ -124,6 +124,68 @@ static func spawn_batched_directional_bullet(owner, direction: Vector2, damage_a
 		"wave_side": shot_direction.orthogonal().normalized()
 	}))
 
+static func spawn_batched_directional_bullet_values(
+	owner,
+	direction: Vector2,
+	damage_amount: float,
+	color: Color,
+	role_id: String = "",
+	origin: Variant = null,
+	speed: float = 620.0,
+	lifetime: float = 1.0,
+	hit_radius: float = 10.0,
+	visual_radius: float = 4.2,
+	visual_min_diameter: float = 8.0,
+	visual_outline_color: Color = Color(1.0, 1.0, 1.0, 0.0),
+	visual_outline_width: float = 0.0,
+	enemy_hit_radius_scale: float = 0.2,
+	enemy_hit_radius_min: float = 4.0,
+	enemy_hit_radius_max: float = 12.0,
+	vulnerability_bonus: float = 0.0,
+	vulnerability_duration: float = 0.0,
+	slow_multiplier: float = 1.0,
+	slow_duration: float = 0.0,
+	pierce_count: int = 0,
+	wave_amplitude: float = 0.0,
+	wave_frequency: float = 0.0,
+	wave_phase: float = 0.0
+) -> bool:
+	var batch: Node = _get_or_create_batch(owner)
+	if batch == null:
+		return false
+	var shot_direction: Vector2 = direction.normalized()
+	if shot_direction.length_squared() <= 0.001:
+		shot_direction = Vector2.RIGHT
+	var start_position: Vector2 = _resolve_origin(owner, origin)
+	if batch.has_method("add_projectile_values"):
+		return bool(batch.add_projectile_values(
+			start_position,
+			start_position,
+			shot_direction,
+			damage_amount,
+			color,
+			_resolve_role_id(owner, role_id),
+			speed,
+			lifetime,
+			hit_radius,
+			visual_radius,
+			visual_min_diameter,
+			visual_outline_color,
+			visual_outline_width,
+			enemy_hit_radius_scale,
+			enemy_hit_radius_min,
+			enemy_hit_radius_max,
+			vulnerability_bonus,
+			vulnerability_duration,
+			slow_multiplier,
+			slow_duration,
+			pierce_count,
+			wave_amplitude,
+			wave_frequency,
+			wave_phase
+		))
+	return false
+
 static func _can_spawn_player_projectile(owner) -> bool:
 	if owner == null or owner.get_tree() == null:
 		return false

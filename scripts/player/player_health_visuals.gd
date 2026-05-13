@@ -1,5 +1,7 @@
 extends RefCounted
 
+const PLAYER_VISUAL_STATE := preload("res://scripts/player/player_visual_state.gd")
+
 static func setup_hurt_core_visual(owner, hurt_core_radius: float, outline_width: float) -> void:
 	var hurt_core := owner.get_node_or_null("HurtCore") as Node2D
 	if hurt_core == null:
@@ -21,7 +23,9 @@ static func update_hurt_core_visual(owner, role_data: Dictionary, hurt_core_offs
 		return
 	if role_data.is_empty():
 		role_data = owner._get_active_role()
-	hurt_core.position = hurt_core_offset
+	var role_id: String = str(role_data.get("id", ""))
+	var body_center_offset: Vector2 = PLAYER_VISUAL_STATE.get_role_body_center_offset(role_id)
+	hurt_core.position = body_center_offset + hurt_core_offset
 	hurt_core.z_index = 60
 	var role_color: Color = role_data.get("color", Color(1.0, 0.5, 0.4, 1.0))
 	var fill := hurt_core.get_node_or_null("Fill") as Polygon2D
@@ -81,11 +85,13 @@ static func update_player_health_bar(owner, role_data: Dictionary, bar_height: f
 	if role_data.is_empty():
 		role_data = owner._get_active_role()
 
-	var bar_width: float = owner._get_role_health_bar_width(str(role_data.get("id", "")))
+	var role_id: String = str(role_data.get("id", ""))
+	var body_center_offset: Vector2 = PLAYER_VISUAL_STATE.get_role_body_center_offset(role_id)
+	var bar_width: float = owner._get_role_health_bar_width(role_id)
 	var half_width: float = bar_width * 0.5
 	var half_height: float = bar_height * 0.5
 	var health_ratio: float = clamp(owner.current_health / max(owner.max_health, 1.0), 0.0, 1.0)
-	bar_root.position = Vector2(0.0, bar_y_offset)
+	bar_root.position = body_center_offset + Vector2(0.0, bar_y_offset)
 
 	var background := bar_root.get_node_or_null("Background") as Polygon2D
 	if background != null:

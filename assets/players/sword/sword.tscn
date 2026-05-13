@@ -2,7 +2,6 @@
 
 [ext_resource type="Texture2D" uid="uid://biw5dnyxm2b8h" path="res://assets/players/sword/剑-idle.png" id="1_ouj5t"]
 [ext_resource type="Texture2D" uid="uid://bbc3fgt0iof54" path="res://assets/players/sword/剑-run.png" id="2_wfrid"]
-
 [ext_resource type="Script" uid="uid://b833omy22j8w1" path="res://assets/players/sword/sword_visual.gd" id="3_q05ti"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_u1o65"]
@@ -142,7 +141,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"sword-idle",
-"speed": 7.0
+"speed": 6.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -191,6 +190,6 @@ script = ExtResource("3_q05ti")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2094114519]
 sprite_frames = SubResource("SpriteFrames_wid25")
-animation = &"sword-idle"
-frame_progress = 0.591712
-speed_scale = 2.0
+animation = &"sword-run"
+frame_progress = 0.07772739
+speed_scale = 1.5

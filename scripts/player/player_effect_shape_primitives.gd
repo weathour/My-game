@@ -6,6 +6,37 @@ const TARGET_LOCK_POOL_LIMIT := 24
 
 static var vortex_pool: Array[Node2D] = []
 static var target_lock_pool: Array[Node2D] = []
+static var active_roots: Array[Dictionary] = []
+static var shape_animation_frame: int = -1
+
+static func update_effect_animations(delta: float) -> void:
+	if delta <= 0.0:
+		return
+	var current_frame := Engine.get_process_frames()
+	if shape_animation_frame == current_frame:
+		return
+	shape_animation_frame = current_frame
+	for index in range(active_roots.size() - 1, -1, -1):
+		var data: Dictionary = active_roots[index]
+		var root_node: Variant = data.get("node", null)
+		if root_node == null or not is_instance_valid(root_node) or not (root_node is Node2D):
+			active_roots.remove_at(index)
+			continue
+		var root := root_node as Node2D
+		var elapsed: float = float(data.get("elapsed", 0.0)) + delta
+		var duration: float = max(0.001, float(data.get("duration", 0.1)))
+		var scale_duration: float = max(0.001, float(data.get("scale_duration", duration)))
+		var alpha_progress: float = clamp(elapsed / duration, 0.0, 1.0)
+		var scale_progress: float = clamp(elapsed / scale_duration, 0.0, 1.0)
+		root.rotation = lerpf(float(data.get("start_rotation", 0.0)), float(data.get("target_rotation", 0.0)), alpha_progress)
+		root.scale = (data.get("start_scale", Vector2.ONE) as Vector2).lerp(data.get("target_scale", Vector2.ONE) as Vector2, scale_progress)
+		root.modulate.a = float(data.get("start_alpha", 1.0)) * (1.0 - alpha_progress)
+		if elapsed >= duration:
+			active_roots.remove_at(index)
+			_release_root_by_kind(data.get("release_kind", &""), root)
+			continue
+		data["elapsed"] = elapsed
+		active_roots[index] = data
 
 static func _mark_temporary_effect(node: Node) -> void:
 	if node != null:
@@ -54,11 +85,7 @@ static func spawn_vortex_effect(owner: Node, center: Vector2, radius: float, col
 		])
 
 	root.scale = Vector2(0.4, 0.4)
-	var tween := root.create_tween()
-	tween.parallel().tween_property(root, "rotation", -0.42, duration)
-	tween.parallel().tween_property(root, "scale", Vector2.ONE, duration * 0.45)
-	tween.parallel().tween_property(root, "modulate:a", 0.0, duration)
-	tween.tween_callback(_release_vortex_root.bind(root))
+	_track_root_animation(root, duration, root.scale, Vector2.ONE, -0.42, &"vortex", duration * 0.45)
 
 
 static func spawn_target_lock_effect(owner: Node, center: Vector2, radius: float, color: Color, duration: float, ring_points: PackedVector2Array) -> void:
@@ -99,10 +126,31 @@ static func spawn_target_lock_effect(owner: Node, center: Vector2, radius: float
 		])
 
 	root.scale = Vector2(1.2, 1.2)
-	var tween := root.create_tween()
-	tween.parallel().tween_property(root, "scale", Vector2.ONE, duration * 0.5)
-	tween.parallel().tween_property(root, "modulate:a", 0.0, duration)
-	tween.tween_callback(_release_target_lock_root.bind(root))
+	_track_root_animation(root, duration, root.scale, Vector2.ONE, 0.0, &"target_lock", duration * 0.5)
+
+static func _track_root_animation(root: Node2D, duration: float, start_scale: Vector2, target_scale: Vector2, target_rotation: float, release_kind: StringName, scale_duration: float) -> void:
+	active_roots.append({
+		"node": root,
+		"elapsed": 0.0,
+		"duration": max(0.001, duration),
+		"scale_duration": max(0.001, scale_duration),
+		"start_scale": start_scale,
+		"target_scale": target_scale,
+		"start_rotation": root.rotation,
+		"target_rotation": target_rotation,
+		"start_alpha": root.modulate.a,
+		"release_kind": release_kind
+	})
+
+static func _release_root_by_kind(release_kind: StringName, root: Node2D) -> void:
+	match release_kind:
+		&"vortex":
+			_release_vortex_root(root)
+		&"target_lock":
+			_release_target_lock_root(root)
+		_:
+			if root != null and is_instance_valid(root):
+				root.queue_free()
 
 static func _acquire_vortex_root(current_scene: Node) -> Node2D:
 	while not vortex_pool.is_empty():

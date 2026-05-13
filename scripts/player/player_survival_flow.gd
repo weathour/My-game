@@ -27,6 +27,8 @@ static func unhandled_input(owner, event: InputEvent) -> void:
 		owner._try_use_ultimate()
 	elif GAME_SETTINGS.event_matches_action(event, GAME_SETTINGS.ACTION_TOGGLE_ATTACK_MODE):
 		owner._toggle_attack_aim_mode()
+	elif GAME_SETTINGS.event_matches_action(event, GAME_SETTINGS.ACTION_TOGGLE_HURT_CORE):
+		owner._toggle_hurt_core_visual()
 
 
 static func physics_process(owner, delta: float) -> void:
@@ -138,12 +140,13 @@ static func collect_nearby_gems(owner) -> void:
 	var attract_center: Vector2 = owner.get_hurtbox_center()
 	var attract_radius: float = max(owner.GEM_ATTRACT_RADIUS, owner.get_hurtbox_radius() * 3.6)
 	var attract_radius_squared: float = attract_radius * attract_radius
-	var absorb_radius_squared: float = owner.GEM_ABSORB_RADIUS * owner.GEM_ABSORB_RADIUS
+	var absorb_radius: float = owner.GEM_ABSORB_RADIUS
+	var absorb_radius_squared: float = absorb_radius * absorb_radius
 	var effective_pickup_radius: float = owner.pickup_radius
 	if owner.has_method("_get_attribute_pickup_range_bonus"):
 		effective_pickup_radius += float(owner._get_attribute_pickup_range_bonus())
 	var pickup_radius_squared: float = effective_pickup_radius * effective_pickup_radius
-	var gems: Array = _get_runtime_pickups(owner, "exp_gems")
+	var gems: Array = _get_runtime_pickups_near(owner, "exp_gems", attract_center, max(attract_radius, absorb_radius))
 	var gem_count: int = gems.size()
 	var gem_cursor := int(owner.get_meta(PICKUP_SCAN_CURSOR_KEY, 0)) if owner.has_meta(PICKUP_SCAN_CURSOR_KEY) else 0
 	var gem_scan_count: int = min(gem_count, PICKUP_SCAN_BATCH_SIZE)
@@ -161,7 +164,7 @@ static func collect_nearby_gems(owner) -> void:
 	if gem_count > 0:
 		owner.set_meta(PICKUP_SCAN_CURSOR_KEY, (gem_cursor + gem_scan_count) % gem_count)
 
-	var hearts: Array = _get_runtime_pickups(owner, "heart_pickups")
+	var hearts: Array = _get_runtime_pickups_near(owner, "heart_pickups", attract_center, effective_pickup_radius)
 	var heart_count: int = hearts.size()
 	var heart_cursor := int(owner.get_meta(HEART_SCAN_CURSOR_KEY, 0)) if owner.has_meta(HEART_SCAN_CURSOR_KEY) else 0
 	var heart_scan_count: int = min(heart_count, HEART_SCAN_BATCH_SIZE)
@@ -183,6 +186,13 @@ static func _get_runtime_pickups(owner, group_name: String) -> Array:
 			return scene.get_runtime_pickups(group_name)
 	return owner.get_tree().get_nodes_in_group(group_name)
 
+static func _get_runtime_pickups_near(owner, group_name: String, center: Vector2, radius: float) -> Array:
+	if owner != null and owner.get_tree() != null:
+		var scene: Node = owner.get_tree().current_scene
+		if scene != null and scene.has_method("get_runtime_pickups_in_radius"):
+			return scene.get_runtime_pickups_in_radius(group_name, center, radius)
+	return _get_runtime_pickups(owner, group_name)
+
 
 static func check_enemy_contact_damage(owner) -> void:
 	if owner.hurt_cooldown_remaining > 0.0 or owner.switch_invulnerability_remaining > 0.0:
@@ -190,22 +200,9 @@ static func check_enemy_contact_damage(owner) -> void:
 
 	var hurtbox_center: Vector2 = owner.get_hurtbox_center()
 	var hurtbox_radius: float = owner.get_hurtbox_radius()
-	var candidates: Array = owner._get_candidate_enemies_for_circle(hurtbox_center, hurtbox_radius + 36.0)
-	for enemy in candidates:
-		if not is_instance_valid(enemy):
-			continue
-		var contact_radius: float = 36.0
-		var touch_damage: float = 10.0
-		var enemy_contact_radius = enemy.get("contact_radius")
-		var enemy_touch_damage = enemy.get("touch_damage")
-		if enemy_contact_radius != null:
-			contact_radius = float(enemy_contact_radius)
-		if enemy_touch_damage != null:
-			touch_damage = float(enemy_touch_damage)
-		var combined_radius: float = contact_radius + hurtbox_radius
-		if hurtbox_center.distance_squared_to(enemy.global_position) <= combined_radius * combined_radius:
-			owner.take_damage(touch_damage)
-			break
+	var touch_damage: float = owner._get_touching_enemy_damage(hurtbox_center, hurtbox_radius, 36.0)
+	if touch_damage > 0.0:
+		owner.take_damage(touch_damage)
 
 
 static func gain_experience(owner, amount: int) -> void:
