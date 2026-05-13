@@ -46,6 +46,21 @@ static var split_shard_polygon := PackedVector2Array([
 	Vector2(-4.0, 3.0)
 ])
 
+static func clear_runtime_state() -> void:
+	cached_enemy_nodes.clear()
+	cached_enemy_nodes_frame = -1
+	cached_enemy_grid.clear()
+	cached_enemy_grid_frame = -1
+	impact_effect_budget_frame = -1
+	impact_effect_budget_used = 0
+	split_burst_budget_frame = -1
+	split_burst_budget_used = 0
+	impact_effect_pool.clear()
+	split_ring_pool.clear()
+	active_impact_effects.clear()
+	active_split_ring_effects.clear()
+	effect_animation_frame = -1
+
 @export var speed: float = 420.0
 @export var speed_multiplier: float = 1.0
 @export var damage: float = 10.0
@@ -70,6 +85,7 @@ static var split_shard_polygon := PackedVector2Array([
 @export var split_count: int = 0
 @export var split_radius: float = 58.0
 @export var split_visual_bullet_count: int = 12
+@export var split_burst_enabled: bool = false
 
 var direction: Vector2 = Vector2.RIGHT
 var target: Node2D
@@ -262,6 +278,7 @@ func _ensure_projectile_scene_defaults() -> void:
 		"split_count": split_count,
 		"split_radius": split_radius,
 		"split_visual_bullet_count": split_visual_bullet_count,
+		"split_burst_enabled": split_burst_enabled,
 		"wave_amplitude": wave_amplitude,
 		"wave_frequency": wave_frequency,
 		"wave_phase": wave_phase
@@ -299,6 +316,7 @@ func reset_projectile(config: Dictionary = {}) -> void:
 	split_count = int(config.get("split_count", _projectile_scene_default("split_count", 0)))
 	split_radius = float(config.get("split_radius", _projectile_scene_default("split_radius", 58.0)))
 	split_visual_bullet_count = int(config.get("split_visual_bullet_count", _projectile_scene_default("split_visual_bullet_count", 12)))
+	split_burst_enabled = bool(config.get("split_burst_enabled", _projectile_scene_default("split_burst_enabled", false)))
 
 	var configured_direction: Vector2 = config.get("direction", Vector2.RIGHT)
 	direction = configured_direction.normalized()
@@ -513,7 +531,7 @@ func _apply_hit(enemy: Node2D) -> void:
 		source_player._register_attack_result(source_role_id, 1, killed)
 
 	_spawn_impact_effect(enemy.global_position, killed)
-	if split_count > 0 and not split_triggered:
+	if split_burst_enabled and split_count > 0 and not split_triggered:
 		split_triggered = true
 		_trigger_split_bursts(enemy.global_position)
 
@@ -783,8 +801,12 @@ static func _update_static_effect_animations(delta: float) -> void:
 static func _update_active_impact_effects(delta: float) -> void:
 	for index in range(active_impact_effects.size() - 1, -1, -1):
 		var data: Dictionary = active_impact_effects[index]
-		var impact := data.get("node", null) as Polygon2D
-		if impact == null or not is_instance_valid(impact):
+		var impact_ref: Variant = data.get("node", null)
+		if not is_instance_valid(impact_ref) or not (impact_ref is Polygon2D):
+			active_impact_effects.remove_at(index)
+			continue
+		var impact := impact_ref as Polygon2D
+		if impact.is_queued_for_deletion():
 			active_impact_effects.remove_at(index)
 			continue
 		var elapsed: float = float(data.get("elapsed", 0.0)) + delta
@@ -803,8 +825,12 @@ static func _update_active_impact_effects(delta: float) -> void:
 static func _update_active_split_ring_effects(delta: float) -> void:
 	for index in range(active_split_ring_effects.size() - 1, -1, -1):
 		var data: Dictionary = active_split_ring_effects[index]
-		var ring := data.get("node", null) as Node2D
-		if ring == null or not is_instance_valid(ring):
+		var ring_ref: Variant = data.get("node", null)
+		if not is_instance_valid(ring_ref) or not (ring_ref is Node2D):
+			active_split_ring_effects.remove_at(index)
+			continue
+		var ring := ring_ref as Node2D
+		if ring.is_queued_for_deletion():
 			active_split_ring_effects.remove_at(index)
 			continue
 		var elapsed: float = float(data.get("elapsed", 0.0)) + delta

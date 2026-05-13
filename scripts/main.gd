@@ -21,6 +21,7 @@ const BLESSING_UNLOCK_NOTICE_FLOW := preload("res://scripts/game/blessing_unlock
 const PICKUP_COMPACTOR := preload("res://scripts/game/pickup_compactor.gd")
 const PERFORMANCE_GUARD := preload("res://scripts/game/performance_guard.gd")
 const ENEMY_HIT_FEEDBACK := preload("res://scripts/enemies/enemy_hit_feedback.gd")
+const PLAYER_BULLET := preload("res://scripts/bullet.gd")
 
 const PICKUP_GRID_CELL_SIZE := 128.0
 
@@ -146,6 +147,7 @@ func _exit_tree() -> void:
 
 func _cleanup_runtime_nodes() -> void:
 	ENEMY_HIT_FEEDBACK.clear_runtime_state()
+	PLAYER_BULLET.clear_runtime_state()
 	var game_bgm = _get_game_bgm()
 	if game_bgm != null and game_bgm.has_method("stop"):
 		game_bgm.stop()
