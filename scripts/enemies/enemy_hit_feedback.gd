@@ -45,7 +45,7 @@ static func play_hit_feedback(enemy, damage_amount: float, killed: bool) -> void
 
 static func _play_custom_hit_visual(enemy) -> void:
 	var cached_visual: Node = enemy.get("cached_motion_visual") as Node
-	if cached_visual != null and is_instance_valid(cached_visual) and cached_visual.has_method("play_hit"):
+	if _is_valid_hit_visual(enemy, cached_visual) and cached_visual.has_method("play_hit"):
 		cached_visual.play_hit()
 		return
 	var fallback_visual: Node = _find_hit_visual(enemy)
@@ -58,9 +58,20 @@ static func _play_custom_hit_visual(enemy) -> void:
 static func _find_hit_visual(enemy) -> Node:
 	for visual_name in ["MushroomVisual", "SlimeVisual", "FlyingEyeVisual", "PumpkinVisual"]:
 		var visual: Node = enemy.get_node_or_null(visual_name)
-		if visual != null and visual.has_method("play_hit"):
+		if _is_valid_hit_visual(enemy, visual) and visual.has_method("play_hit"):
 			return visual
 	return null
+
+static func _is_valid_hit_visual(enemy, visual: Node) -> bool:
+	if enemy == null or not is_instance_valid(enemy) or not (enemy is Node):
+		return false
+	if not (enemy as Node).is_inside_tree():
+		return false
+	if visual == null or not is_instance_valid(visual):
+		return false
+	if visual.is_queued_for_deletion() or not visual.is_inside_tree():
+		return false
+	return (enemy as Node).is_ancestor_of(visual)
 
 static func get_hit_flash_alpha(hit_flash_remaining: float) -> float:
 	if hit_flash_remaining <= 0.0:

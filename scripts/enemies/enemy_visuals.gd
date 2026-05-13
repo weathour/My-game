@@ -67,7 +67,8 @@ static func apply_visuals(enemy, color_override = null) -> void:
 
 static func update_motion_visual(enemy) -> void:
 	var visual: Node = enemy.cached_motion_visual
-	if visual == null or not visual.has_method("set_moving"):
+	if not _is_valid_motion_visual(enemy, visual):
+		_clear_motion_visual_cache(enemy, visual)
 		return
 	var is_moving: bool = enemy.velocity.length_squared() > 1.0
 	var facing_sign: int = _get_velocity_facing_sign(enemy.velocity.x, enemy.cached_motion_visual_facing_sign)
@@ -163,10 +164,23 @@ static func _set_motion_visual_cache(enemy, visual: Node) -> void:
 	enemy.cached_motion_visual_facing_sign = 0
 
 static func _clear_motion_visual_cache(enemy, visual: Node) -> void:
-	if enemy.cached_motion_visual == visual:
+	if visual == null or enemy.cached_motion_visual == visual:
 		enemy.cached_motion_visual = null
 		enemy.cached_motion_visual_moving = false
 	enemy.cached_motion_visual_facing_sign = 0
+
+static func _is_valid_motion_visual(enemy, visual: Node) -> bool:
+	if visual == null or not is_instance_valid(visual):
+		return false
+	if visual.is_queued_for_deletion():
+		return false
+	if not visual.is_inside_tree():
+		return false
+	if enemy == null or not is_instance_valid(enemy) or not enemy.is_inside_tree():
+		return false
+	if not enemy.is_ancestor_of(visual):
+		return false
+	return visual.has_method("set_moving")
 
 static func _get_velocity_facing_sign(velocity_x: float, fallback: int) -> int:
 	if abs(velocity_x) <= 0.01:

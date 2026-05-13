@@ -487,6 +487,8 @@ func _prepare_for_pool() -> void:
 		boss_visual_instance.queue_free()
 	boss_visual_instance = null
 	cached_motion_visual = null
+	cached_motion_visual_moving = false
+	cached_motion_visual_facing_sign = 0
 
 func apply_slow(multiplier: float, duration: float) -> void:
 	ENEMY_STATUS_EFFECTS.apply_slow(self, multiplier, duration)
