@@ -21,6 +21,11 @@ const BLESSING_UNLOCK_NOTICE_FLOW := preload("res://scripts/game/blessing_unlock
 const PICKUP_COMPACTOR := preload("res://scripts/game/pickup_compactor.gd")
 const PERFORMANCE_GUARD := preload("res://scripts/game/performance_guard.gd")
 const ENEMY_HIT_FEEDBACK := preload("res://scripts/enemies/enemy_hit_feedback.gd")
+const ENEMY_STATUS_VISUALS := preload("res://scripts/enemies/enemy_status_visuals.gd")
+const ENEMY_TURRET_BOMBARD := preload("res://scripts/enemies/enemy_turret_bombard.gd")
+const ENEMY_BATCH_SIMULATION := preload("res://scripts/enemies/enemy_batch_simulation.gd")
+const ENEMY_PROJECTILE_BATCH_SIMULATION := preload("res://scripts/enemies/enemy_projectile_batch_simulation.gd")
+const PICKUP_BATCH_SIMULATION := preload("res://scripts/game/pickup_batch_simulation.gd")
 const PLAYER_BULLET := preload("res://scripts/bullet.gd")
 
 const PICKUP_GRID_CELL_SIZE := 128.0
@@ -111,6 +116,8 @@ func _ready() -> void:
 	if player == null:
 		push_error("Main.gd could not find a player node.")
 		return
+	if player is Node:
+		(player as Node).process_physics_priority = -100
 
 	_load_story_stage_context()
 	_apply_story_loadout()
@@ -199,6 +206,16 @@ func _process(delta: float) -> void:
 	_update_pickup_compaction(delta)
 	_update_distant_enemy_maintenance(delta)
 	_update_performance_metrics(delta)
+
+func _physics_process(delta: float) -> void:
+	if game_over or get_tree().paused:
+		return
+	ENEMY_HIT_FEEDBACK.update_feedback_animations(delta)
+	ENEMY_STATUS_VISUALS.update_temporary_animations(delta)
+	ENEMY_TURRET_BOMBARD.update_bombards(self, delta)
+	ENEMY_BATCH_SIMULATION.update_simple_normal_enemies(self, delta)
+	ENEMY_PROJECTILE_BATCH_SIMULATION.update_enemy_projectiles(self, delta)
+	PICKUP_BATCH_SIMULATION.update_pickups(self, delta)
 
 func _setup_spawn_timer() -> void:
 	ENEMY_SPAWN_FLOW.setup_spawn_timer(self)

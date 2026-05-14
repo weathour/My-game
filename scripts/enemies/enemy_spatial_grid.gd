@@ -56,6 +56,51 @@ static func for_each_neighbor(enemy: Node2D, query_radius: float, callback: Call
 					return
 
 
+static func compute_separation_velocity(enemy: Node2D, query_radius: float, contact_radius: float, max_processed: int = 8) -> Vector2:
+	if enemy == null or not is_instance_valid(enemy) or not enemy.is_inside_tree():
+		return Vector2.ZERO
+	var scene: Node = enemy.get_tree().current_scene
+	if scene == null:
+		return Vector2.ZERO
+	var grid: Dictionary = _get_grid(scene)
+	if grid.is_empty():
+		return Vector2.ZERO
+	var enemy_position: Vector2 = enemy.global_position
+	var center_cell: Vector2i = _grid_cell(enemy_position)
+	var cell_radius: int = int(ceil(max(1.0, query_radius) / CELL_SIZE))
+	var push: Vector2 = Vector2.ZERO
+	var processed: int = 0
+	for x in range(center_cell.x - cell_radius, center_cell.x + cell_radius + 1):
+		for y in range(center_cell.y - cell_radius, center_cell.y + cell_radius + 1):
+			var cell: Vector2i = Vector2i(x, y)
+			if not grid.has(cell):
+				continue
+			for other in grid[cell] as Array:
+				if other == null or other == enemy or not is_instance_valid(other) or not (other is Node2D):
+					continue
+				var offset: Vector2 = enemy_position - (other as Node2D).global_position
+				var other_radius: float = contact_radius
+				var other_contact_radius: Variant = other.get("contact_radius")
+				if other_contact_radius != null:
+					other_radius = float(other_contact_radius)
+				var radius: float = max(16.0, (contact_radius + other_radius) * 0.58)
+				var radius_sq: float = radius * radius
+				var distance_sq: float = offset.length_squared()
+				if distance_sq > radius_sq:
+					continue
+				if distance_sq <= 0.001:
+					offset = Vector2.RIGHT.rotated(float(enemy.get_instance_id() % 360) * PI / 180.0)
+					distance_sq = 1.0
+				var distance: float = sqrt(distance_sq)
+				var max_push: float = max(24.0, radius * 0.55)
+				var strength: float = (radius - distance) / radius
+				push += (offset / distance) * strength * max_push
+				processed += 1
+				if processed >= max_processed:
+					return push
+	return push
+
+
 static func _get_grid(scene: Node) -> Dictionary:
 	var current_frame := Engine.get_physics_frames()
 	var scene_id := scene.get_instance_id()

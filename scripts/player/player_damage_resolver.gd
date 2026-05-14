@@ -123,14 +123,15 @@ static func damage_enemies_in_multiple_radii_batched(owner, centers: Array[Vecto
 	var batcher := _get_reusable_damage_batcher(owner)
 	var candidates: Array = _get_candidate_enemies_for_multiple_circles(owner, centers, radius)
 	var total_candidates := candidates.size()
+	var center_count: int = centers.size()
 	for enemy in candidates:
 		if not _is_live_enemy(enemy) or enemy is not Node2D:
 			continue
 		var enemy_position: Vector2 = (enemy as Node2D).global_position
 		var hit_radius: float = _get_enemy_hit_radius(owner, enemy)
-		for center_index in range(centers.size()):
-			var total_radius: float = radius + hit_radius
-			var total_radius_squared: float = total_radius * total_radius
+		var total_radius: float = radius + hit_radius
+		var total_radius_squared: float = total_radius * total_radius
+		for center_index in range(center_count):
 			if centers[center_index].distance_squared_to(enemy_position) <= total_radius_squared:
 				batcher.add_enemy(enemy, damage_amount, resolved_role_id, vulnerability_bonus, 2.0, slow_multiplier, slow_duration, centers[center_index])
 	_record_damage_query(total_candidates)
@@ -310,7 +311,9 @@ static func damage_enemies_in_ellipse(owner, center: Vector2, horizontal_radius:
 		if not _is_live_enemy(enemy):
 			continue
 		var relative: Vector2 = enemy.global_position - center
-		var value := pow(relative.x / safe_horizontal, 2.0) + pow(relative.y / safe_vertical, 2.0)
+		var scaled_x: float = relative.x / safe_horizontal
+		var scaled_y: float = relative.y / safe_vertical
+		var value: float = scaled_x * scaled_x + scaled_y * scaled_y
 		if value <= 1.0:
 			batcher.add_enemy(enemy, damage_amount, resolved_role_id, vulnerability_bonus, 2.0, slow_multiplier, slow_duration, center)
 	var hit_count: int = batcher.hit_count
@@ -479,7 +482,9 @@ static func _shape_hits_enemy(shape: Dictionary, enemy_position: Vector2, hit_ra
 		var horizontal_radius: float = max(1.0, float(shape.get("horizontal_radius", 1.0)) + hit_radius)
 		var vertical_radius: float = max(1.0, float(shape.get("vertical_radius", 1.0)) + hit_radius)
 		var ellipse_relative: Vector2 = enemy_position - ellipse_center
-		return pow(ellipse_relative.x / horizontal_radius, 2.0) + pow(ellipse_relative.y / vertical_radius, 2.0) <= 1.0
+		var ellipse_x: float = ellipse_relative.x / horizontal_radius
+		var ellipse_y: float = ellipse_relative.y / vertical_radius
+		return ellipse_x * ellipse_x + ellipse_y * ellipse_y <= 1.0
 	var circle_center: Vector2 = shape.get("center", Vector2.ZERO)
 	var total_radius: float = float(shape.get("radius", 1.0)) + hit_radius
 	return circle_center.distance_squared_to(enemy_position) <= total_radius * total_radius

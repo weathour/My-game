@@ -8,6 +8,7 @@ const DESPAWN_SECONDS := 45.0
 var polygon_node: Polygon2D
 var age_seconds: float = 0.0
 var pooled: bool = false
+var batch_simulation_enabled: bool = false
 
 func _ready() -> void:
 	if pooled:
@@ -21,6 +22,19 @@ func _exit_tree() -> void:
 	_unregister_runtime_pickup()
 
 func _physics_process(delta: float) -> void:
+	if batch_simulation_enabled and can_use_batch_simulation():
+		return
+	_run_physics_tick(delta)
+
+func batch_physics_process(delta: float) -> void:
+	_run_physics_tick(delta)
+
+func can_use_batch_simulation() -> bool:
+	return not pooled
+
+func _run_physics_tick(delta: float) -> void:
+	if pooled:
+		return
 	age_seconds += delta
 	if age_seconds >= DESPAWN_SECONDS:
 		recycle()
@@ -32,6 +46,7 @@ func collect() -> float:
 
 func reset_pickup(new_position: Vector2, new_heal_amount: float = HEAL_AMOUNT) -> void:
 	pooled = false
+	batch_simulation_enabled = false
 	show()
 	set_process(true)
 	set_physics_process(true)
@@ -44,6 +59,7 @@ func reset_pickup(new_position: Vector2, new_heal_amount: float = HEAL_AMOUNT) -
 
 func recycle() -> void:
 	pooled = true
+	batch_simulation_enabled = false
 	_unregister_runtime_pickup()
 	remove_from_group("heart_pickups")
 	var scene: Node = get_tree().current_scene if get_tree() != null else null
@@ -80,6 +96,8 @@ func get_save_data() -> Dictionary:
 	}
 
 func apply_save_data(data: Dictionary) -> void:
+	pooled = false
+	batch_simulation_enabled = false
 	var position_data = data.get("position", [0.0, 0.0])
 	if position_data.size() >= 2:
 		global_position = Vector2(float(position_data[0]), float(position_data[1]))

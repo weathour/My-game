@@ -17,7 +17,6 @@ const ENEMY_STATUS_EFFECTS := preload("res://scripts/enemies/enemy_status_effect
 const ENEMY_STATUS_VISUALS := preload("res://scripts/enemies/enemy_status_visuals.gd")
 const ENEMY_SPATIAL_GRID := preload("res://scripts/enemies/enemy_spatial_grid.gd")
 const ENEMY_TRAIT_BEHAVIOR := preload("res://scripts/enemies/enemy_trait_behavior.gd")
-const ENEMY_TURRET_BOMBARD := preload("res://scripts/enemies/enemy_turret_bombard.gd")
 const ENEMY_VISUALS := preload("res://scripts/enemies/enemy_visuals.gd")
 
 @export var speed: float = 80.0
@@ -170,6 +169,7 @@ var cached_motion_visual: Node
 var cached_motion_visual_moving: bool = false
 var cached_motion_visual_facing_sign: int = 0
 var pooled_inactive: bool = false
+var batch_simulation_enabled: bool = false
 # Explicit velocity (was inherited from CharacterBody2D)
 var velocity: Vector2 = Vector2.ZERO
 
@@ -191,10 +191,27 @@ func _exit_tree() -> void:
 	_unregister_runtime_enemy()
 
 func _physics_process(delta: float) -> void:
-	ENEMY_HIT_FEEDBACK.update_feedback_animations(delta)
-	ENEMY_STATUS_VISUALS.update_temporary_animations(delta)
-	var current_scene: Node = get_tree().current_scene if is_inside_tree() and get_tree() != null else null
-	ENEMY_TURRET_BOMBARD.update_bombards(current_scene, delta)
+	if batch_simulation_enabled and can_use_batch_simulation():
+		return
+	_run_physics_tick(delta)
+
+func batch_physics_process(delta: float) -> void:
+	_run_physics_tick(delta)
+
+func can_use_batch_simulation() -> bool:
+	if pooled_inactive:
+		return false
+	if enemy_kind != "normal":
+		return false
+	if behavior_id != "chaser" or secondary_behavior_id != "":
+		return false
+	if boss_visual_instance != null:
+		return false
+	if _has_timed_behavior_traits():
+		return false
+	return true
+
+func _run_physics_tick(delta: float) -> void:
 	if pooled_inactive:
 		return
 	if status_root != null or boss_visual_instance != null or hit_flash_remaining > 0.0 or _has_status_visual_pressure():
@@ -208,6 +225,8 @@ func _physics_process(delta: float) -> void:
 	if (status_root != null or hit_flash_remaining > 0.0 or _has_status_visual_pressure()) and _should_update_status_visual_frame():
 		_update_status_visuals()
 
+	var rebirth_timer_ticked: bool = _tick_rebirth_timer_if_needed(delta)
+
 	if target == null or not is_instance_valid(target):
 		velocity = Vector2.ZERO
 		_update_motion_visual()
@@ -215,12 +234,12 @@ func _physics_process(delta: float) -> void:
 
 	# P1: cache target vectors once per frame, used by _update_behavior_state and _compute_velocity
 	_cached_to_target = target.global_position - global_position
-	_cached_distance_to_target = _cached_to_target.length()
-	_cached_direction_to_target = _cached_to_target.normalized() if _cached_distance_to_target > 0.001 else Vector2.RIGHT
+	_cached_distance_to_target = sqrt(_cached_to_target.length_squared())
+	_cached_direction_to_target = _cached_to_target / _cached_distance_to_target if _cached_distance_to_target > 0.001 else Vector2.RIGHT
 	if _should_skip_motion_frame(delta):
 		return
 	if _has_timed_behavior_traits():
-		_update_behavior_state(delta + throttled_motion_delta)
+		_update_behavior_state(delta + throttled_motion_delta, rebirth_timer_ticked)
 	var motion_delta := delta + throttled_motion_delta
 	throttled_motion_delta = 0.0
 	velocity = _compute_velocity(motion_delta)
@@ -228,8 +247,15 @@ func _physics_process(delta: float) -> void:
 	_apply_direct_motion(motion_delta)
 	_update_motion_visual()
 
+func _tick_rebirth_timer_if_needed(delta: float) -> bool:
+	if not _is_rebirth or rebirth_timer <= 0.0:
+		return false
+	ENEMY_TRAIT_BEHAVIOR.update_rebirth_timer(self, delta)
+	return true
+
 func apply_enemy_profile(kind: String, profile: Dictionary) -> void:
 	pooled_inactive = false
+	batch_simulation_enabled = false
 	ENEMY_PROFILE_APPLIER.apply_profile(self, kind, profile)
 	_sync_trait_flags()
 	_reset_runtime_state(true)
@@ -275,32 +301,7 @@ func _apply_direct_motion(delta: float) -> void:
 func _compute_separation_velocity() -> Vector2:
 	if not is_inside_tree():
 		return Vector2.ZERO
-	var push: Vector2 = Vector2.ZERO
-	var processed: int = 0
-	ENEMY_SPATIAL_GRID.for_each_neighbor(self, max(128.0, contact_radius * 3.0), func(other: Variant) -> bool:
-		if other == null or other == self or not is_instance_valid(other) or not (other is Node2D):
-			return true
-		var offset: Vector2 = global_position - (other as Node2D).global_position
-		var other_radius: float = contact_radius
-		var other_contact_radius: Variant = other.get("contact_radius")
-		if other_contact_radius != null:
-			other_radius = float(other_contact_radius)
-		var radius: float = max(16.0, (contact_radius + other_radius) * 0.58)
-		var radius_sq: float = radius * radius
-		var distance_sq: float = offset.length_squared()
-		if distance_sq > radius_sq:
-			return true
-		if distance_sq <= 0.001:
-			offset = Vector2.RIGHT.rotated(float(get_instance_id() % 360) * PI / 180.0)
-			distance_sq = 1.0
-		var distance: float = sqrt(distance_sq)
-		var max_push: float = max(24.0, radius * 0.55)
-		var strength: float = (radius - distance) / radius
-		push += offset.normalized() * strength * max_push
-		processed += 1
-		return processed < 8
-	)
-	return push
+	return ENEMY_SPATIAL_GRID.compute_separation_velocity(self, max(128.0, contact_radius * 3.0), contact_radius, 8)
 
 func _get_separation_velocity() -> Vector2:
 	var current_frame := Engine.get_physics_frames()
@@ -390,8 +391,8 @@ func _get_status_visual_refresh_interval() -> int:
 		return 2
 	return 3
 
-func _update_behavior_state(delta: float) -> void:
-	ENEMY_TRAIT_BEHAVIOR.update_behavior_state(self, delta)
+func _update_behavior_state(delta: float, skip_rebirth: bool = false) -> void:
+	ENEMY_TRAIT_BEHAVIOR.update_behavior_state(self, delta, skip_rebirth)
 
 func _update_boss_trait(delta: float) -> void:
 	ENEMY_BOSS_STATE.update_boss_trait(self, delta)
@@ -444,6 +445,7 @@ func take_batched_damage(amount: float) -> bool:
 
 func activate_pooled_enemy() -> void:
 	pooled_inactive = false
+	batch_simulation_enabled = false
 	_register_runtime_enemy()
 
 func release_after_defeat() -> bool:
@@ -460,6 +462,7 @@ func release_after_defeat() -> bool:
 
 func _prepare_for_pool() -> void:
 	pooled_inactive = true
+	batch_simulation_enabled = false
 	velocity = Vector2.ZERO
 	separation_push = Vector2.ZERO
 	cached_separation_velocity = Vector2.ZERO

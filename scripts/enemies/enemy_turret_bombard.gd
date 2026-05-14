@@ -4,6 +4,11 @@ const ENEMY_GEOMETRY := preload("res://scripts/enemies/enemy_geometry.gd")
 
 const ACTIVE_BOMBARD_META_KEY := "__enemy_turret_bombards"
 const BOMBARD_FRAME_META_KEY := "__enemy_turret_bombard_frame"
+const WARNING_LINE_POOL_LIMIT := 48
+const WARNING_FILL_POOL_LIMIT := 48
+
+static var warning_line_pool: Array[Line2D] = []
+static var warning_fill_pool: Array[Polygon2D] = []
 
 static func start_bombard(enemy) -> void:
 	if enemy.target == null or not is_instance_valid(enemy.target):
@@ -15,22 +20,25 @@ static func start_bombard(enemy) -> void:
 	if enemy.target.has_method("get_hurtbox_center"):
 		aim_center = enemy.target.get_hurtbox_center()
 	var impact_center: Vector2 = aim_center + Vector2(randf_range(-42.0, 42.0), randf_range(-42.0, 42.0))
+	var warning_points: PackedVector2Array = ENEMY_GEOMETRY.build_circle_points(enemy.turret_bombard_radius)
 
-	var warning := Line2D.new()
+	var warning := _acquire_warning_line(current_scene)
 	warning.global_position = impact_center
 	warning.width = 4.0
 	warning.default_color = Color(1.0, 0.28, 0.18, 0.86)
 	warning.closed = true
-	warning.points = ENEMY_GEOMETRY.build_circle_points(enemy.turret_bombard_radius)
+	warning.points = warning_points
 	warning.z_index = 15
-	current_scene.add_child(warning)
+	warning.scale = Vector2.ONE
+	warning.modulate = Color.WHITE
 
-	var warning_fill := Polygon2D.new()
+	var warning_fill := _acquire_warning_fill(current_scene)
 	warning_fill.global_position = impact_center
 	warning_fill.color = Color(1.0, 0.22, 0.14, 0.14)
-	warning_fill.polygon = warning.points
+	warning_fill.polygon = warning_points
 	warning_fill.z_index = 14
-	current_scene.add_child(warning_fill)
+	warning_fill.scale = Vector2.ONE
+	warning_fill.modulate = Color.WHITE
 
 	_track_bombard(current_scene, enemy, warning, warning_fill, impact_center, 0.7)
 
@@ -78,11 +86,11 @@ static func _track_bombard(scene: Node, enemy, warning: Line2D, warning_fill: Po
 
 static func _finish_bombard(data: Dictionary) -> void:
 	var warning_node: Variant = data.get("warning", null)
-	if warning_node != null and is_instance_valid(warning_node) and warning_node is Node:
-		(warning_node as Node).queue_free()
+	if warning_node != null and is_instance_valid(warning_node) and warning_node is Line2D:
+		_release_warning_line(warning_node as Line2D)
 	var fill_node: Variant = data.get("fill", null)
-	if fill_node != null and is_instance_valid(fill_node) and fill_node is Node:
-		(fill_node as Node).queue_free()
+	if fill_node != null and is_instance_valid(fill_node) and fill_node is Polygon2D:
+		_release_warning_fill(fill_node as Polygon2D)
 	var enemy_ref: WeakRef = data.get("enemy_ref", null) as WeakRef
 	var enemy = enemy_ref.get_ref() if enemy_ref != null else null
 	if enemy == null or not is_instance_valid(enemy):
@@ -111,6 +119,62 @@ static func _finish_bombard(data: Dictionary) -> void:
 			"straight",
 			{"size_scale": 1.1}
 		)
+
+static func _acquire_warning_line(current_scene: Node) -> Line2D:
+	while not warning_line_pool.is_empty():
+		var pooled_line = warning_line_pool.pop_back()
+		if not is_instance_valid(pooled_line) or not (pooled_line is Line2D):
+			continue
+		var line := pooled_line as Line2D
+		if line != null and not line.is_queued_for_deletion():
+			_prepare_pooled_node(line, current_scene)
+			return line
+	var line := Line2D.new()
+	current_scene.add_child(line)
+	return line
+
+static func _release_warning_line(line: Line2D) -> void:
+	if line == null or not is_instance_valid(line):
+		return
+	line.hide()
+	line.scale = Vector2.ONE
+	line.modulate = Color.WHITE
+	if warning_line_pool.size() < WARNING_LINE_POOL_LIMIT and not warning_line_pool.has(line):
+		warning_line_pool.append(line)
+	else:
+		line.queue_free()
+
+static func _acquire_warning_fill(current_scene: Node) -> Polygon2D:
+	while not warning_fill_pool.is_empty():
+		var pooled_fill = warning_fill_pool.pop_back()
+		if not is_instance_valid(pooled_fill) or not (pooled_fill is Polygon2D):
+			continue
+		var fill := pooled_fill as Polygon2D
+		if fill != null and not fill.is_queued_for_deletion():
+			_prepare_pooled_node(fill, current_scene)
+			return fill
+	var fill := Polygon2D.new()
+	current_scene.add_child(fill)
+	return fill
+
+static func _release_warning_fill(fill: Polygon2D) -> void:
+	if fill == null or not is_instance_valid(fill):
+		return
+	fill.hide()
+	fill.scale = Vector2.ONE
+	fill.modulate = Color.WHITE
+	if warning_fill_pool.size() < WARNING_FILL_POOL_LIMIT and not warning_fill_pool.has(fill):
+		warning_fill_pool.append(fill)
+	else:
+		fill.queue_free()
+
+static func _prepare_pooled_node(node: Node2D, current_scene: Node) -> void:
+	var parent := node.get_parent()
+	if parent != current_scene:
+		if parent != null:
+			parent.remove_child(node)
+		current_scene.add_child(node)
+	node.show()
 
 static func _get_enemy_current_scene(enemy) -> Node:
 	if enemy == null or not is_instance_valid(enemy):

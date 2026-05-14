@@ -17,6 +17,10 @@ static func apply_damage(enemy, amount: float, show_feedback: bool = true) -> bo
 		enemy.rebirth_lives_remaining -= 1
 		enemy.current_health = enemy.max_health
 		enemy.rebirth_timer = enemy.rebirth_delay
+		enemy.velocity = Vector2.ZERO
+		enemy.throttled_motion_delta = 0.0
+		enemy.motion_refresh_frame = -1
+		enemy.separation_refresh_frame = -1
 		if enemy.target != null and is_instance_valid(enemy.target) and enemy.target.has_method("apply_enemy_slow"):
 			enemy.target.apply_enemy_slow(enemy.rebirth_slow_multiplier, enemy.rebirth_slow_duration)
 		enemy._spawn_status_burst(Color(0.8, 0.64, 1.0, 0.32), 40.0 + enemy.scale.x * 10.0)

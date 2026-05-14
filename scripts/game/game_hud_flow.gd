@@ -2,6 +2,10 @@ extends RefCounted
 
 const DEVELOPER_OPTION_PROVIDER := preload("res://scripts/developer/developer_option_provider.gd")
 const PERFORMANCE_MONITOR := preload("res://scripts/game/performance_monitor.gd")
+const FRAME_TIME_REFRESH_INTERVAL := 0.10
+const FRAME_STATS_REFRESH_INTERVAL := 0.20
+const LAST_FRAME_TIME_REFRESH_META := "last_frame_time_refresh_time"
+const LAST_FRAME_STATS_REFRESH_META := "last_frame_stats_refresh_time"
 
 # Handoff note:
 # HUD projection lives here. main.gd should expose scene state and thin callback
@@ -9,9 +13,9 @@ const PERFORMANCE_MONITOR := preload("res://scripts/game/performance_monitor.gd"
 # into HUD methods.
 
 static func update_frame_hud(main: Node) -> void:
-	if main.hud != null and main.hud.has_method("update_time"):
+	if main.hud != null and main.hud.has_method("update_time") and _should_refresh_elapsed(main, LAST_FRAME_TIME_REFRESH_META, main.survival_time, FRAME_TIME_REFRESH_INTERVAL):
 		main.hud.update_time(main.survival_time)
-	if main.hud != null and main.hud.has_method("update_stats") and main.player != null and main.player.has_method("get_stat_summary"):
+	if main.hud != null and main.hud.has_method("update_stats") and main.player != null and main.player.has_method("get_stat_summary") and _should_refresh_elapsed(main, LAST_FRAME_STATS_REFRESH_META, main.survival_time, FRAME_STATS_REFRESH_INTERVAL):
 		main.hud.update_stats(main.player.get_stat_summary())
 	update_boss_hud(main)
 
@@ -92,8 +96,15 @@ static func on_player_mana_changed(main: Node, current_mana: float, max_mana: fl
 		main.hud.update_stats(main.player.get_stat_summary())
 
 static func _should_refresh_mana_stats(main: Node) -> bool:
-	var current_frame := Engine.get_process_frames()
-	if int(main.get_meta("last_mana_stats_frame", -1)) == current_frame:
+	return _should_refresh_elapsed(main, LAST_FRAME_STATS_REFRESH_META, main.survival_time, FRAME_STATS_REFRESH_INTERVAL)
+
+static func _should_refresh_elapsed(owner: Node, meta_key: String, current_time: float, interval: float) -> bool:
+	if owner == null:
 		return false
-	main.set_meta("last_mana_stats_frame", current_frame)
+	if interval <= 0.0:
+		return true
+	var last_refresh_time := float(owner.get_meta(meta_key, -999999.0))
+	if current_time - last_refresh_time < interval:
+		return false
+	owner.set_meta(meta_key, current_time)
 	return true

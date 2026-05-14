@@ -1,5 +1,6 @@
 extends RefCounted
 
+const PERFORMANCE_GUARD := preload("res://scripts/game/performance_guard.gd")
 const PERFORMANCE_COUNTERS := preload("res://scripts/game/performance_counters.gd")
 const VORTEX_POOL_LIMIT := 24
 const TARGET_LOCK_POOL_LIMIT := 24
@@ -44,12 +45,18 @@ static func _mark_temporary_effect(node: Node) -> void:
 		PERFORMANCE_COUNTERS.add("temporary_effect_spawns", 1)
 
 static func _can_spawn_temporary_effect(owner: Node) -> bool:
-	return owner != null and owner.get_tree() != null
+	if owner == null or owner.get_tree() == null:
+		return false
+	var current_scene: Node = owner.get_tree().current_scene
+	if current_scene != null and current_scene.has_method("_can_spawn_runtime_group"):
+		var limit: int = PERFORMANCE_GUARD.get_dynamic_limit(current_scene, "temporary_effects", PERFORMANCE_GUARD.DEFAULT_TEMPORARY_EFFECT_LIMIT)
+		return bool(current_scene._can_spawn_runtime_group("temporary_effects", limit))
+	return true
 
 static func spawn_vortex_effect(owner: Node, center: Vector2, radius: float, color: Color, duration: float, outer_points: PackedVector2Array, inner_points: PackedVector2Array) -> void:
 	if not _can_spawn_temporary_effect(owner):
 		return
-	var current_scene := owner.get_tree().current_scene
+	var current_scene: Node = owner.get_tree().current_scene
 	if current_scene == null:
 		return
 
@@ -91,7 +98,7 @@ static func spawn_vortex_effect(owner: Node, center: Vector2, radius: float, col
 static func spawn_target_lock_effect(owner: Node, center: Vector2, radius: float, color: Color, duration: float, ring_points: PackedVector2Array) -> void:
 	if not _can_spawn_temporary_effect(owner):
 		return
-	var current_scene := owner.get_tree().current_scene
+	var current_scene: Node = owner.get_tree().current_scene
 	if current_scene == null:
 		return
 

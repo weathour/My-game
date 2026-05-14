@@ -9,12 +9,12 @@ const GLUTTON_GEM_GRID_CELL_SIZE := 128.0
 static var cached_exp_gem_grid_frame: int = -1
 static var cached_exp_gem_grid: Dictionary = {}
 
-static func update_behavior_state(enemy, delta: float) -> void:
-	_tick_trait(enemy, enemy.behavior_id, delta)
+static func update_behavior_state(enemy, delta: float, skip_rebirth: bool = false) -> void:
+	_tick_trait(enemy, enemy.behavior_id, delta, skip_rebirth)
 	if enemy.secondary_behavior_id != "" and enemy.secondary_behavior_id != enemy.behavior_id:
-		_tick_trait(enemy, enemy.secondary_behavior_id, delta)
+		_tick_trait(enemy, enemy.secondary_behavior_id, delta, skip_rebirth)
 
-static func _tick_trait(enemy, trait_id: String, delta: float) -> void:
+static func _tick_trait(enemy, trait_id: String, delta: float, skip_rebirth: bool = false) -> void:
 	match trait_id:
 		"shooter":
 			_update_shooter_trait(enemy, delta)
@@ -25,11 +25,15 @@ static func _tick_trait(enemy, trait_id: String, delta: float) -> void:
 		"glutton":
 			_update_glutton_trait(enemy, delta)
 		"rebirth":
-			_update_rebirth_trait(enemy, delta)
+			if not skip_rebirth:
+				_update_rebirth_trait(enemy, delta)
 		"turret":
 			_update_turret_trait(enemy, delta)
 		"boss":
 			enemy._update_boss_trait(delta)
+
+static func update_rebirth_timer(enemy, delta: float) -> void:
+	_update_rebirth_trait(enemy, delta)
 
 static func _update_shooter_trait(enemy, delta: float) -> void:
 	if enemy.shot_interval <= 0.0:
@@ -69,7 +73,7 @@ static func _update_dash_trait(enemy, delta: float) -> void:
 	if enemy.dash_timer > 0.0:
 		return
 	enemy.dash_timer += max(0.3, enemy.dash_interval)
-	var direction_to_target: Vector2 = enemy.global_position.direction_to(enemy.target.global_position)
+	var direction_to_target: Vector2 = enemy._cached_direction_to_target
 	enemy.dash_direction = direction_to_target if direction_to_target != Vector2.ZERO else Vector2.RIGHT
 	enemy.dash_windup_remaining = max(enemy.dash_windup_duration, 0.18)
 	enemy._spawn_status_burst(Color(1.0, 0.88, 0.32, 0.24), 28.0 + enemy.scale.x * 6.0)

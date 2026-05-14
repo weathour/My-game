@@ -1,5 +1,6 @@
 extends RefCounted
 
+const PERFORMANCE_GUARD := preload("res://scripts/game/performance_guard.gd")
 const PERFORMANCE_COUNTERS := preload("res://scripts/game/performance_counters.gd")
 const PLAYER_EFFECT_SHAPE_PRIMITIVES := preload("res://scripts/player/player_effect_shape_primitives.gd")
 const PLAYER_EFFECT_LINE_PRIMITIVES := preload("res://scripts/player/player_effect_line_primitives.gd")
@@ -23,7 +24,13 @@ static func _mark_temporary_effect(node: Node) -> void:
 		PERFORMANCE_COUNTERS.add("temporary_effect_spawns", 1)
 
 static func _can_spawn_temporary_effect(owner: Node) -> bool:
-	return owner != null and owner.get_tree() != null
+	if owner == null or owner.get_tree() == null:
+		return false
+	var current_scene: Node = owner.get_tree().current_scene
+	if current_scene != null and current_scene.has_method("_can_spawn_runtime_group"):
+		var limit: int = PERFORMANCE_GUARD.get_dynamic_limit(current_scene, "temporary_effects", PERFORMANCE_GUARD.DEFAULT_TEMPORARY_EFFECT_LIMIT)
+		return bool(current_scene._can_spawn_runtime_group("temporary_effects", limit))
+	return true
 
 static func update_effect_animations(delta: float) -> void:
 	PLAYER_EFFECT_LINE_PRIMITIVES.update_effect_animations(delta)
@@ -38,7 +45,7 @@ static func spawn_combat_tag(owner: Node, position: Vector2, text: String, color
 		return
 	if not _can_spawn_temporary_effect(owner):
 		return
-	var current_scene := owner.get_tree().current_scene
+	var current_scene: Node = owner.get_tree().current_scene
 	if current_scene == null:
 		return
 
@@ -75,7 +82,7 @@ static func spawn_guard_effect(owner: Node, center: Vector2, radius: float, colo
 	spawn_ring_effect(owner, center, radius, Color(color.r, color.g, color.b, min(0.9, color.a + 0.2)), 6.0, duration, ring_points)
 	if not _can_spawn_temporary_effect(owner):
 		return
-	var current_scene := owner.get_tree().current_scene
+	var current_scene: Node = owner.get_tree().current_scene
 	if current_scene == null:
 		return
 
@@ -100,7 +107,7 @@ static func spawn_guard_effect(owner: Node, center: Vector2, radius: float, colo
 static func spawn_burst_effect(owner: Node, center: Vector2, color: Color, duration: float, points: PackedVector2Array) -> void:
 	if not _can_spawn_temporary_effect(owner):
 		return
-	var current_scene := owner.get_tree().current_scene
+	var current_scene: Node = owner.get_tree().current_scene
 	if current_scene == null:
 		return
 
@@ -176,7 +183,7 @@ static func _prepare_pooled_node(node: Node, current_scene: Node) -> void:
 static func spawn_frost_sigils_effect(owner: Node, center: Vector2, radius: float, color: Color, duration: float) -> void:
 	if not _can_spawn_temporary_effect(owner):
 		return
-	var current_scene := owner.get_tree().current_scene
+	var current_scene: Node = owner.get_tree().current_scene
 	if current_scene == null:
 		return
 
@@ -274,7 +281,7 @@ static func spawn_target_lock_effect(owner: Node, center: Vector2, radius: float
 static func spawn_radial_rays_effect(owner: Node, center: Vector2, radius: float, ray_count: int, color: Color, width: float, duration: float, angle_offset: float = 0.0) -> void:
 	if not _can_spawn_temporary_effect(owner):
 		return
-	var current_scene := owner.get_tree().current_scene
+	var current_scene: Node = owner.get_tree().current_scene
 	if current_scene == null:
 		return
 
