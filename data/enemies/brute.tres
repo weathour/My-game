@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="EnemyProfile" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/enemy/enemy_profile.gd" id="1_profile"]
+[ext_resource type="PackedScene" path="res://assets/enemies/pumpkin/pumpkin.tscn" id="2_visual"]
+
+[resource]
+script = ExtResource("1_profile")
+archetype = "brute"
+behavior = "chaser"
+max_health = 56.0
+speed = 72.0
+touch_damage = 14.0
+contact_radius = 40.0
+body_collision_radius = 44.0
+reward_tier = 2
+experience_reward = 10
+scale = 1.22
+display_color = Color(0.96, 0.8, 0.28, 1)
+visual_scene = ExtResource("2_visual")

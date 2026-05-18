@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="EnemyProfile" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/enemy/enemy_profile.gd" id="1_profile"]
+
+[resource]
+script = ExtResource("1_profile")
+archetype = "boss_spellcore"
+behavior = "boss"
+boss_name = "祸月星核"
+max_health = 4800.0
+speed = 78.0
+touch_damage = 28.0
+contact_radius = 64.0
+body_collision_radius = 70.0
+reward_tier = 4
+experience_reward = 40
+scale = 2.35
+display_color = Color(0.95, 0.2, 0.24, 1)
+extra = {
+"preferred_distance": 230.0,
+"projectile_damage": 13.5,
+"boss_radial_interval": 0.78,
+"boss_radial_bullets": 16,
+"boss_sine_interval": 2.9,
+"boss_sine_stream_duration": 1.7,
+"boss_sine_stream_rate": 0.12,
+"boss_turning_interval": 4.2,
+"boss_turning_bullets": 9
+}

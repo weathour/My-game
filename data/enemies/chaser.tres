@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="EnemyProfile" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/enemy/enemy_profile.gd" id="1_profile"]
+[ext_resource type="PackedScene" path="res://assets/enemies/Mushroom/mushroom.tscn" id="2_visual"]
+
+[resource]
+script = ExtResource("1_profile")
+archetype = "chaser"
+behavior = "chaser"
+max_health = 28.0
+speed = 61.6
+touch_damage = 10.0
+contact_radius = 42.0
+body_collision_radius = 30.0
+reward_tier = 1
+experience_reward = 4
+scale = 1.0
+display_color = Color(0.34, 0.8, 1, 1)
+visual_scene = ExtResource("2_visual")

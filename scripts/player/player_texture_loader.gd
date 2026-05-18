@@ -35,3 +35,23 @@ static func create_white_key_material(
 	material.set_shader_parameter("saturation_threshold", saturation_threshold)
 	material.set_shader_parameter("edge_softness", edge_softness)
 	return material
+
+
+static func get_cached_white_key_material(
+		shader: Shader,
+		white_key_material_cache: Dictionary,
+		value_threshold: float = 0.94,
+		saturation_threshold: float = 0.08,
+		edge_softness: float = 0.03
+) -> ShaderMaterial:
+	var cache_key := "%.3f|%.3f|%.3f" % [value_threshold, saturation_threshold, edge_softness]
+	if white_key_material_cache.has(cache_key):
+		return white_key_material_cache[cache_key] as ShaderMaterial
+	var material := create_white_key_material(
+		shader,
+		value_threshold,
+		saturation_threshold,
+		edge_softness
+	)
+	white_key_material_cache[cache_key] = material
+	return material

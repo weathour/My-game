@@ -3,6 +3,7 @@ extends RefCounted
 const PERFORMANCE_COUNTERS := preload("res://scripts/game/performance_counters.gd")
 const PLAYER_DAMAGE_JOB_QUEUE := preload("res://scripts/player/player_damage_job_queue.gd")
 const PLAYER_DAMAGE_BATCHER := preload("res://scripts/player/player_damage_batcher.gd")
+const PLAYER_DAMAGE_SHAPE_FLOW := preload("res://scripts/player/player_damage_shape_flow.gd")
 const PERFORMANCE_GUARD := preload("res://scripts/game/performance_guard.gd")
 const ENEMY_SPATIAL_GRID := preload("res://scripts/enemies/enemy_spatial_grid.gd")
 
@@ -25,22 +26,28 @@ static var reusable_seen_enemy_ids: Dictionary = {}
 static var reusable_bounds_list: Array[Rect2] = []
 
 static func deal_damage_to_enemy(owner, enemy: Node, damage_amount: float, source_role_id: String, vulnerability_bonus: float = 0.0, vulnerability_duration: float = 2.0, slow_multiplier: float = 1.0, slow_duration: float = 0.0, source_position: Variant = null) -> bool:
-	if owner != null and owner.has_method("_deal_damage_to_enemy"):
-		return bool(owner._deal_damage_to_enemy(enemy, damage_amount, source_role_id, vulnerability_bonus, vulnerability_duration, slow_multiplier, slow_duration, source_position))
-	if enemy == null or not is_instance_valid(enemy) or not enemy.has_method("take_damage"):
+	if enemy == null or not is_instance_valid(enemy):
 		return false
+	var final_damage := damage_amount
+	if owner != null and source_role_id == "gunner" and enemy is Node2D:
+		var attack_origin: Vector2 = owner.global_position if owner is Node2D else (enemy as Node2D).global_position
+		if source_position is Vector2:
+			attack_origin = source_position
+		if owner.has_method("_get_gunner_distance_damage_multiplier"):
+			final_damage *= float(owner._get_gunner_distance_damage_multiplier(attack_origin.distance_to((enemy as Node2D).global_position)))
+	var killed := false
+	if damage_amount > 0.0 and enemy.has_method("take_damage"):
+		killed = bool(enemy.take_damage(final_damage))
+		if owner != null and owner.has_method("_apply_role_damage_lifesteal"):
+			owner._apply_role_damage_lifesteal(source_role_id, final_damage)
+		if owner != null and enemy.get("enemy_kind") != null and str(enemy.get("enemy_kind")) == "boss" and owner.has_method("_add_kill_energy") and owner.has_method("_get_boss_damage_energy"):
+			owner._add_kill_energy(owner._get_boss_damage_energy(final_damage))
+		if killed and owner != null and owner.has_method("_add_kill_energy") and owner.has_method("_get_kill_energy_from_enemy"):
+			owner._add_kill_energy(owner._get_kill_energy_from_enemy(enemy))
 	if vulnerability_bonus > 0.0 and enemy.has_method("apply_vulnerability"):
 		enemy.apply_vulnerability(vulnerability_bonus, vulnerability_duration)
-	if slow_multiplier < 1.0 and slow_duration > 0.0 and enemy.has_method("apply_slow"):
+	if slow_duration > 0.0 and enemy.has_method("apply_slow"):
 		enemy.apply_slow(slow_multiplier, slow_duration)
-	var adjusted_damage: float = damage_amount
-	if source_position is Vector2 and source_role_id == "gunner" and owner.has_method("_get_gunner_distance_damage_multiplier"):
-		adjusted_damage *= float(owner._get_gunner_distance_damage_multiplier((enemy.global_position - source_position).length()))
-	var killed: bool = bool(enemy.take_damage(adjusted_damage))
-	if owner.has_method("_apply_role_damage_lifesteal"):
-		owner._apply_role_damage_lifesteal(source_role_id, adjusted_damage)
-	if killed and owner.has_method("_on_enemy_killed_by_role"):
-		owner._on_enemy_killed_by_role(source_role_id)
 	return killed
 
 static func queue_damage_to_enemy(owner, enemy: Node, damage_amount: float, source_role_id: String, vulnerability_bonus: float = 0.0, vulnerability_duration: float = 2.0, slow_multiplier: float = 1.0, slow_duration: float = 0.0, source_position: Variant = null, prefer_silent_feedback: bool = false) -> void:
@@ -397,92 +404,13 @@ static func _get_or_create_damage_job_queue(owner) -> Node:
 	return queue
 
 static func _is_enemy_inside_cone_edge(offset: Vector2, forward: Vector2, cone_range: float, half_angle: float, hit_radius: float) -> bool:
-	var side: Vector2 = forward.orthogonal()
-	var forward_distance: float = offset.dot(forward)
-	if forward_distance < -hit_radius or forward_distance > cone_range + hit_radius:
-		return false
-	var allowed_side_distance: float = max(0.0, forward_distance) * tan(half_angle) + hit_radius
-	return abs(offset.dot(side)) <= allowed_side_distance
+	return PLAYER_DAMAGE_SHAPE_FLOW.is_enemy_inside_cone_edge(offset, forward, cone_range, half_angle, hit_radius)
 
 static func _get_shape_bounds(shape: Dictionary) -> Rect2:
-	var shape_type: String = str(shape.get("type", "circle"))
-	if shape_type == "line":
-		var start_position: Vector2 = shape.get("start", Vector2.ZERO)
-		var end_position: Vector2 = shape.get("end", start_position)
-		var width: float = max(1.0, float(shape.get("width", 1.0)))
-		var rect := Rect2(start_position, Vector2.ZERO).expand(end_position)
-		return rect.grow(width + 48.0)
-	if shape_type == "oriented_rect":
-		var center: Vector2 = shape.get("center", Vector2.ZERO)
-		var broad_size: float = float(shape.get("length", 1.0)) + float(shape.get("width", 1.0)) + 80.0
-		return Rect2(center - Vector2.ONE * broad_size * 0.5, Vector2.ONE * broad_size)
-	if shape_type == "cone":
-		var origin: Vector2 = shape.get("origin", Vector2.ZERO)
-		var direction: Vector2 = shape.get("direction", Vector2.RIGHT)
-		if direction.length_squared() <= 0.001:
-			direction = Vector2.RIGHT
-		var cone_range: float = max(1.0, float(shape.get("range", 1.0)))
-		var center: Vector2 = origin + direction.normalized() * cone_range * 0.5
-		var broad_size: float = cone_range * 2.0
-		return Rect2(center - Vector2.ONE * broad_size * 0.5, Vector2.ONE * broad_size)
-	if shape_type == "ellipse":
-		var ellipse_center: Vector2 = shape.get("center", Vector2.ZERO)
-		var horizontal_radius: float = max(1.0, float(shape.get("horizontal_radius", 1.0)))
-		var vertical_radius: float = max(1.0, float(shape.get("vertical_radius", 1.0)))
-		return Rect2(ellipse_center - Vector2(horizontal_radius, vertical_radius), Vector2(horizontal_radius * 2.0, vertical_radius * 2.0)).grow(48.0)
-	var circle_center: Vector2 = shape.get("center", Vector2.ZERO)
-	var radius: float = max(1.0, float(shape.get("radius", 1.0)))
-	return Rect2(circle_center - Vector2.ONE * radius, Vector2.ONE * radius * 2.0)
+	return PLAYER_DAMAGE_SHAPE_FLOW.get_shape_bounds(shape)
 
 static func _shape_hits_enemy(shape: Dictionary, enemy_position: Vector2, hit_radius: float) -> bool:
-	var shape_type: String = str(shape.get("type", "circle"))
-	if shape_type == "line":
-		var start_position: Vector2 = shape.get("start", Vector2.ZERO)
-		var end_position: Vector2 = shape.get("end", start_position)
-		var axis: Vector2 = end_position - start_position
-		var length: float = axis.length()
-		if length <= 0.001:
-			var fallback_radius: float = float(shape.get("width", 1.0)) + hit_radius
-			return start_position.distance_squared_to(enemy_position) <= fallback_radius * fallback_radius
-		var direction: Vector2 = axis / length
-		var relative: Vector2 = enemy_position - start_position
-		var along: float = clamp(relative.dot(direction), 0.0, length)
-		var closest: Vector2 = start_position + direction * along
-		var total_width: float = float(shape.get("width", 1.0)) + hit_radius
-		return enemy_position.distance_squared_to(closest) <= total_width * total_width
-	if shape_type == "oriented_rect":
-		var rect_direction: Vector2 = shape.get("axis", Vector2.RIGHT)
-		rect_direction = rect_direction.normalized()
-		if rect_direction.length_squared() <= 0.001:
-			rect_direction = Vector2.RIGHT
-		var perpendicular: Vector2 = rect_direction.orthogonal()
-		var relative_rect: Vector2 = enemy_position - Vector2(shape.get("center", Vector2.ZERO))
-		return abs(relative_rect.dot(rect_direction)) <= float(shape.get("length", 1.0)) * 0.5 + hit_radius and abs(relative_rect.dot(perpendicular)) <= float(shape.get("width", 1.0)) * 0.5 + hit_radius
-	if shape_type == "cone":
-		var origin: Vector2 = shape.get("origin", Vector2.ZERO)
-		var forward: Vector2 = shape.get("direction", Vector2.RIGHT)
-		forward = forward.normalized()
-		if forward.length_squared() <= 0.001:
-			forward = Vector2.RIGHT
-		var safe_range: float = max(1.0, float(shape.get("range", 1.0)))
-		var half_angle: float = max(0.0, float(shape.get("angle", 0.0)) * 0.5)
-		var enemy_offset: Vector2 = enemy_position - origin
-		var distance: float = enemy_offset.length()
-		if distance > safe_range + hit_radius:
-			return false
-		if distance <= hit_radius:
-			return true
-		var enemy_direction: Vector2 = enemy_offset / distance
-		return enemy_direction.dot(forward) >= cos(half_angle) or _is_enemy_inside_cone_edge(enemy_offset, forward, safe_range, half_angle, hit_radius)
-	if shape_type == "ellipse":
-		var ellipse_center: Vector2 = shape.get("center", Vector2.ZERO)
-		var horizontal_radius: float = max(1.0, float(shape.get("horizontal_radius", 1.0)) + hit_radius)
-		var vertical_radius: float = max(1.0, float(shape.get("vertical_radius", 1.0)) + hit_radius)
-		var ellipse_relative: Vector2 = enemy_position - ellipse_center
-		return pow(ellipse_relative.x / horizontal_radius, 2.0) + pow(ellipse_relative.y / vertical_radius, 2.0) <= 1.0
-	var circle_center: Vector2 = shape.get("center", Vector2.ZERO)
-	var total_radius: float = float(shape.get("radius", 1.0)) + hit_radius
-	return circle_center.distance_squared_to(enemy_position) <= total_radius * total_radius
+	return PLAYER_DAMAGE_SHAPE_FLOW.shape_hits_enemy(shape, enemy_position, hit_radius)
 
 static func schedule_swordsman_slash_followthrough(owner, center: Vector2, axis_direction: Vector2, rect_length: float, rect_width: float, damage_amount: float, vulnerability_bonus: float, slow_multiplier: float, slow_duration: float, animation_duration: float, source_role_id: String, hit_registry: Dictionary) -> void:
 	var pulse_count: int = max(0, int(owner.SWORD_SLASH_DAMAGE_FOLLOW_PULSES))

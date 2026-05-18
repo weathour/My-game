@@ -1,0 +1,83 @@
+[gd_scene format=3 uid="uid://t6fmr4aefbok"]
+
+[ext_resource type="Texture2D" uid="uid://bapqkx7m5jlte" path="res://assets/enemies/treeboss/tree-walk.png" id="1_5ljqa"]
+[ext_resource type="Script" path="res://assets/enemies/treeboss/treeboss_visual.gd" id="2_treev"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pss2o"]
+atlas = ExtResource("1_5ljqa")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v2ejk"]
+atlas = ExtResource("1_5ljqa")
+region = Rect2(256, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wgomk"]
+atlas = ExtResource("1_5ljqa")
+region = Rect2(512, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0kiui"]
+atlas = ExtResource("1_5ljqa")
+region = Rect2(768, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_20fla"]
+atlas = ExtResource("1_5ljqa")
+region = Rect2(0, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4w8fw"]
+atlas = ExtResource("1_5ljqa")
+region = Rect2(256, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2y6ww"]
+atlas = ExtResource("1_5ljqa")
+region = Rect2(512, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ia7yq"]
+atlas = ExtResource("1_5ljqa")
+region = Rect2(768, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_njb8y"]
+atlas = ExtResource("1_5ljqa")
+region = Rect2(0, 512, 256, 256)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1uhfr"]
+animations = [{
+"frames": [{
+"duration": 0.2,
+"texture": SubResource("AtlasTexture_pss2o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v2ejk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wgomk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0kiui")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_20fla")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4w8fw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2y6ww")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ia7yq")
+}, {
+"duration": 0.8,
+"texture": SubResource("AtlasTexture_njb8y")
+}],
+"loop": true,
+"name": &"treewalk",
+"speed": 6.0
+}]
+
+[node name="Treeboss" type="Node2D" unique_id=928784164]
+script = ExtResource("2_treev")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=438959411]
+sprite_frames = SubResource("SpriteFrames_1uhfr")
+animation = &"treewalk"
+frame_progress = 0.5824798

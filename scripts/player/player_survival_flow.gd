@@ -4,7 +4,7 @@ const DEVELOPER_MODE := preload("res://scripts/developer_mode.gd")
 const GAME_SETTINGS := preload("res://scripts/game_settings.gd")
 const PLAYER_LEVEL_CURVE := preload("res://scripts/player/player_level_curve.gd")
 
-const EXPERIENCE_GAIN_MULTIPLIER := 0.45
+const EXPERIENCE_GAIN_MULTIPLIER := 2.025
 const EXPERIENCE_FRACTION_CARRY_KEY := "__experience_fraction_carry"
 const PICKUP_SCAN_CURSOR_KEY := "__pickup_scan_cursor"
 const HEART_SCAN_CURSOR_KEY := "__heart_scan_cursor"
@@ -29,6 +29,13 @@ static func unhandled_input(owner, event: InputEvent) -> void:
 		owner._toggle_attack_aim_mode()
 	elif GAME_SETTINGS.event_matches_action(event, GAME_SETTINGS.ACTION_TOGGLE_HURT_CORE):
 		owner._toggle_hurt_core_visual()
+
+
+static func toggle_attack_aim_mode(owner) -> void:
+	owner.auto_attack_enabled = not owner.auto_attack_enabled
+	var mode_text := "\u81ea\u52a8\u653b\u51fb" if owner.auto_attack_enabled else "\u9f20\u6807\u8ddf\u968f"
+	owner._spawn_combat_tag(owner.global_position + Vector2(0.0, -48.0), mode_text, Color(0.72, 0.96, 1.0, 1.0))
+	owner.stats_changed.emit(owner.get_stat_summary())
 
 
 static func physics_process(owner, delta: float) -> void:

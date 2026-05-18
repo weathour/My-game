@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="EnemyProfile" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/enemy/enemy_profile.gd" id="1_profile"]
+[ext_resource type="PackedScene" path="res://assets/enemies/slime/Slime.tscn" id="2_visual"]
+
+[resource]
+script = ExtResource("1_profile")
+archetype = "runner"
+behavior = "chaser"
+max_health = 16.0
+speed = 126.0
+touch_damage = 8.0
+contact_radius = 38.0
+body_collision_radius = 40.8
+reward_tier = 1
+experience_reward = 5
+scale = 0.82
+display_color = Color(0.72, 0.96, 1, 1)
+visual_scene = ExtResource("2_visual")

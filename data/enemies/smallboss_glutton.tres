@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="EnemyProfile" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/enemy/enemy_profile.gd" id="1_profile"]
+[ext_resource type="PackedScene" path="res://assets/enemies/treeboss/treeboss.tscn" id="2_visual"]
+
+[resource]
+script = ExtResource("1_profile")
+archetype = "smallboss_glutton"
+behavior = "glutton"
+boss_name = "吞晶巨核"
+max_health = 1320.0
+speed = 40.0
+touch_damage = 24.0
+contact_radius = 62.0
+body_collision_radius = 68.0
+reward_tier = 4
+experience_reward = 60
+scale = 2.05
+display_color = Color(0.62, 0.92, 1, 1)
+visual_scene = ExtResource("2_visual")
+extra = {
+"glutton_absorb_radius": 190.0,
+"glutton_speed_gain_per_gem": 3.8,
+"glutton_scale_gain_per_gem": 0.018,
+"glutton_max_bonus_speed": 120.0
+}

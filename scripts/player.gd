@@ -34,6 +34,7 @@ const PLAYER_SURVIVAL_FLOW := preload("res://scripts/player/player_survival_flow
 const PLAYER_RESOURCE_FLOW := preload("res://scripts/player/player_resource_flow.gd")
 const PLAYER_MAGE_BOMBARDMENT_FLOW := preload("res://scripts/player/player_mage_bombardment_flow.gd")
 const PLAYER_ATTACK_LOOP_FLOW := preload("res://scripts/player/player_attack_loop_flow.gd")
+const PLAYER_ABILITY_FLOW := preload("res://scripts/player/player_ability_flow.gd")
 const PLAYER_CAMERA_FEEDBACK := preload("res://scripts/player/player_camera_feedback.gd")
 const PLAYER_MAP_BOUNDS_FLOW := preload("res://scripts/player/player_map_bounds_flow.gd")
 const PLAYER_FIELD_EFFECT_FLOW := preload("res://scripts/player/player_field_effect_flow.gd")
@@ -90,7 +91,7 @@ const SWITCH_INVULNERABILITY := 0.2
 const ENERGY_PASSIVE_REGEN := 0.0
 const ENERGY_PER_HIT := 0.3
 const ENERGY_PER_KILL := 1.1
-const ULTIMATE_ENERGY_GAIN_GLOBAL_MULTIPLIER := 0.55
+const ULTIMATE_ENERGY_GAIN_GLOBAL_MULTIPLIER := 0.66
 const SMALL_ENEMY_KILL_ENERGY_MULTIPLIER := 0.75
 const BACKGROUND_ULTIMATE_ENERGY_GAIN_RATIO := 0.3
 const ULTIMATE_COST := 90.0
@@ -330,17 +331,13 @@ func _get_cached_runtime_texture(relative_path: String) -> Texture2D:
 	return PLAYER_TEXTURE_LOADER.get_cached_runtime_texture(relative_path, runtime_texture_cache)
 
 func _create_white_key_material(value_threshold: float = 0.94, saturation_threshold: float = 0.08, edge_softness: float = 0.03) -> ShaderMaterial:
-	var cache_key := "%.3f|%.3f|%.3f" % [value_threshold, saturation_threshold, edge_softness]
-	if white_key_material_cache.has(cache_key):
-		return white_key_material_cache[cache_key] as ShaderMaterial
-	var material := PLAYER_TEXTURE_LOADER.create_white_key_material(
+	return PLAYER_TEXTURE_LOADER.get_cached_white_key_material(
 		WHITE_KEY_SHADER,
+		white_key_material_cache,
 		value_threshold,
 		saturation_threshold,
 		edge_softness
 	)
-	white_key_material_cache[cache_key] = material
-	return material
 
 func _get_role_sprite_offset(role_id: String) -> Vector2:
 	return PLAYER_VISUAL_LAYOUT.get_role_sprite_offset(role_id, ROLE_SKETCH_FULL_SIZES, ROLE_SKETCH_VISIBLE_BOUNDS)
@@ -440,21 +437,7 @@ func _build_background_cooldowns() -> Dictionary:
 	return PLAYER_ROLE_STAT_FLOW.build_background_cooldowns(self)
 
 func configure_story_loadout(team_order: Array, equipped_styles: Dictionary) -> void:
-	var ordered_roles: Array = []
-	for role_variant in team_order:
-		var role_id := str(role_variant)
-		for role_data in roles:
-			if str(role_data.get("id", "")) == role_id:
-				ordered_roles.append(role_data)
-				break
-	for role_data in roles:
-		if not ordered_roles.has(role_data):
-			ordered_roles.append(role_data)
-	roles = ordered_roles
-	for role_id in ["swordsman", "gunner", "mage"]:
-		story_equipped_styles[role_id] = str(equipped_styles.get(role_id, "default"))
-	active_role_index = clamp(active_role_index, 0, max(0, roles.size() - 1))
-	_update_active_role_state()
+	PLAYER_STORY_STYLES.configure_story_loadout(self, team_order, equipped_styles)
 
 func _get_story_style_id(role_id: String) -> String:
 	return PLAYER_STORY_STYLES.get_story_style_id(story_equipped_styles, role_id)
@@ -834,23 +817,6 @@ func _get_basic_attack_range_multiplier(skill_id: String) -> float:
 func _get_basic_attack_projectile_speed_multiplier(skill_id: String) -> float:
 	return PLAYER_BLESSING_SKILL_BRIDGE.get_basic_attack_projectile_speed_multiplier(self, skill_id)
 
-func _make_small_boss_reward_option(option_id: String, title: String, description: String) -> Dictionary:
-	return {
-		"id": option_id,
-		"slot": "special",
-		"slot_label": "\u5956\u52B1",
-		"title": title,
-		"description": description,
-		"preview_description": description,
-		"exact_description": description
-	}
-
-func _make_small_boss_blank_reward_option(index: int) -> Dictionary:
-	return _make_small_boss_reward_option("small_boss_blank_%d" % index, "\u7A7A\u767D\u5361\u724C", "\u5360\u4F4D\u5956\u52B1\uFF0C\u540E\u7EED\u66FF\u6362\u3002")
-
-func _deprecated_get_small_boss_reward_options_v1() -> Array:
-	return []
-
 func _has_elite_relic(relic_id: String) -> bool:
 	return bool(elite_relics_unlocked.get(relic_id, false))
 
@@ -858,10 +824,7 @@ func _unlock_elite_relic(relic_id: String) -> void:
 	elite_relics_unlocked[relic_id] = true
 
 func _get_role_theme_color(role_id: String) -> Color:
-	for role_data in roles:
-		if str(role_data.get("id", "")) == role_id:
-			return role_data.get("color", Color.WHITE)
-	return Color.WHITE
+	return PLAYER_ROLE_STAT_FLOW.get_role_theme_color(self, role_id)
 
 func _announce_completed_final_set(set_key: String) -> void:
 	return
@@ -950,10 +913,7 @@ func _update_facing_direction() -> void:
 	PLAYER_SURVIVAL_FLOW.update_facing_direction(self)
 
 func _toggle_attack_aim_mode() -> void:
-	auto_attack_enabled = not auto_attack_enabled
-	var mode_text := "\u81ea\u52a8\u653b\u51fb" if auto_attack_enabled else "\u9f20\u6807\u8ddf\u968f"
-	_spawn_combat_tag(global_position + Vector2(0.0, -48.0), mode_text, Color(0.72, 0.96, 1.0, 1.0))
-	stats_changed.emit(get_stat_summary())
+	PLAYER_SURVIVAL_FLOW.toggle_attack_aim_mode(self)
 
 func _get_attack_aim_direction(fallback_direction: Vector2 = Vector2.RIGHT) -> Vector2:
 	return PLAYER_SURVIVAL_FLOW.get_attack_aim_direction(self, fallback_direction)
@@ -971,118 +931,70 @@ func _get_live_mouse_aim_direction(fallback_direction: Vector2 = Vector2.RIGHT) 
 	return _get_attack_aim_direction(fallback_direction)
 
 func _try_trigger_swordsman_blade_storm() -> void:
-	var active_role_id := str(_get_active_role().get("id", ""))
-	if swordsman_blade_storm_ability == null or not swordsman_blade_storm_ability.can_trigger(self, active_role_id):
-		return
-	_start_swordsman_blade_storm()
+	PLAYER_ABILITY_FLOW.try_trigger_swordsman_blade_storm(self)
 
 func _try_trigger_swordsman_crescent_wave() -> void:
-	if is_dead or level_up_active:
-		return
-	var active_role_id := str(_get_active_role().get("id", ""))
-	if swordsman_crescent_wave_ability == null or not swordsman_crescent_wave_ability.can_trigger(self, active_role_id):
-		return
-	_start_swordsman_crescent_wave()
+	PLAYER_ABILITY_FLOW.try_trigger_swordsman_crescent_wave(self)
 
 func _try_trigger_gunner_infinite_reload() -> void:
-	if is_dead or level_up_active:
-		return
-	if gunner_infinite_reload_ability == null:
-		return
-	var active_role_id := str(_get_active_role().get("id", ""))
-	if not gunner_infinite_reload_ability.can_trigger(self, active_role_id):
-		return
-	_start_gunner_infinite_reload()
+	PLAYER_ABILITY_FLOW.try_trigger_gunner_infinite_reload(self)
 
 func _try_trigger_gunner_shrapnel_field() -> void:
-	if is_dead or level_up_active:
-		return
-	var active_role_id := str(_get_active_role().get("id", ""))
-	if gunner_shrapnel_field_ability == null or not gunner_shrapnel_field_ability.can_trigger(self, active_role_id):
-		return
-	_start_gunner_shrapnel_field()
+	PLAYER_ABILITY_FLOW.try_trigger_gunner_shrapnel_field(self)
 
 func _start_swordsman_blade_storm() -> void:
-	if swordsman_blade_storm_ability != null:
-		swordsman_blade_storm_ability.try_trigger(self)
+	PLAYER_ABILITY_FLOW.start_swordsman_blade_storm(self)
 
 func _start_swordsman_crescent_wave() -> void:
-	if swordsman_crescent_wave_ability != null:
-		swordsman_crescent_wave_ability.try_trigger(self)
+	PLAYER_ABILITY_FLOW.start_swordsman_crescent_wave(self)
 
 func _trigger_swordsman_blade_storm_tick() -> void:
-	if swordsman_blade_storm_ability != null:
-		swordsman_blade_storm_ability._trigger_tick(self)
+	PLAYER_ABILITY_FLOW.trigger_swordsman_blade_storm_tick(self)
 
 func _ensure_swordsman_blade_storm_effect() -> void:
-	if swordsman_blade_storm_ability != null:
-		swordsman_blade_storm_ability.restore_effect_if_active(self)
+	PLAYER_ABILITY_FLOW.ensure_swordsman_blade_storm_effect(self)
 
 func _update_swordsman_blade_storm_effect(delta: float) -> void:
-	if swordsman_blade_storm_ability != null:
-		swordsman_blade_storm_ability._update_effect(self, delta)
+	PLAYER_ABILITY_FLOW.update_swordsman_blade_storm_effect(self, delta)
 
 func _stop_swordsman_blade_storm() -> void:
-	if swordsman_blade_storm_ability != null:
-		swordsman_blade_storm_ability.stop()
+	PLAYER_ABILITY_FLOW.stop_swordsman_blade_storm(self)
 
 func _cleanup_gunner_infinite_reload_effects() -> void:
-	if gunner_infinite_reload_ability != null:
-		gunner_infinite_reload_ability._cleanup_effects()
+	PLAYER_ABILITY_FLOW.cleanup_gunner_infinite_reload_effects(self)
 
 func _register_gunner_infinite_reload_effect(effect: Node2D) -> void:
-	if gunner_infinite_reload_ability != null:
-		gunner_infinite_reload_ability.register_effect(effect)
+	PLAYER_ABILITY_FLOW.register_gunner_infinite_reload_effect(self, effect)
 
 func _start_gunner_infinite_reload() -> void:
-	if gunner_infinite_reload_ability != null:
-		gunner_infinite_reload_ability.try_trigger(self)
+	PLAYER_ABILITY_FLOW.start_gunner_infinite_reload(self)
 
 func _start_gunner_shrapnel_field() -> void:
-	if gunner_shrapnel_field_ability != null:
-		gunner_shrapnel_field_ability.try_trigger(self)
+	PLAYER_ABILITY_FLOW.start_gunner_shrapnel_field(self)
 
 func _trigger_gunner_infinite_reload_tick() -> void:
-	if gunner_infinite_reload_ability != null:
-		gunner_infinite_reload_ability._trigger_tick(self)
+	PLAYER_ABILITY_FLOW.trigger_gunner_infinite_reload_tick(self)
 
 func _stop_gunner_infinite_reload() -> void:
-	if gunner_infinite_reload_ability != null:
-		gunner_infinite_reload_ability.stop()
+	PLAYER_ABILITY_FLOW.stop_gunner_infinite_reload(self)
 
 func is_gunner_infinite_reload_active() -> bool:
-	return gunner_infinite_reload_ability != null and gunner_infinite_reload_ability.is_active()
+	return PLAYER_ABILITY_FLOW.is_gunner_infinite_reload_active(self)
 
 func _get_gunner_infinite_reload_move_speed_multiplier() -> float:
-	if gunner_infinite_reload_ability != null and gunner_infinite_reload_ability.has_method("get_move_speed_multiplier"):
-		return float(gunner_infinite_reload_ability.get_move_speed_multiplier(self))
-	return 1.0
+	return PLAYER_ABILITY_FLOW.get_gunner_infinite_reload_move_speed_multiplier(self)
 
 func _try_trigger_mage_tidal_surge() -> void:
-	if is_dead or level_up_active:
-		return
-	var active_role_id := str(_get_active_role().get("id", ""))
-	if mage_tidal_surge_ability == null or not mage_tidal_surge_ability.can_trigger(self, active_role_id):
-		return
-	_start_mage_tidal_surge()
+	PLAYER_ABILITY_FLOW.try_trigger_mage_tidal_surge(self)
 
 func _start_mage_tidal_surge() -> void:
-	if mage_tidal_surge_ability == null:
-		return
-	var base_direction: Vector2 = _get_live_mouse_aim_direction(facing_direction)
-	mage_tidal_surge_ability.try_trigger(self, base_direction)
+	PLAYER_ABILITY_FLOW.start_mage_tidal_surge(self)
 
 func _try_trigger_mage_meta_field() -> void:
-	if is_dead or level_up_active:
-		return
-	var active_role_id := str(_get_active_role().get("id", ""))
-	if mage_meta_field_ability == null or not mage_meta_field_ability.can_trigger(self, active_role_id):
-		return
-	_start_mage_meta_field()
+	PLAYER_ABILITY_FLOW.try_trigger_mage_meta_field(self)
 
 func _start_mage_meta_field() -> void:
-	if mage_meta_field_ability != null:
-		mage_meta_field_ability.try_trigger(self)
+	PLAYER_ABILITY_FLOW.start_mage_meta_field(self)
 
 func _perform_swordsman_attack() -> void:
 	if swordsman_role != null:
@@ -1216,27 +1128,7 @@ func _get_enemy_hit_radius(enemy: Node) -> float:
 	return PLAYER_DAMAGE_HELPERS.get_enemy_hit_radius(enemy)
 
 func _deal_damage_to_enemy(enemy: Node, damage_amount: float, source_role_id: String, vulnerability_bonus: float = 0.0, vulnerability_duration: float = 2.0, slow_multiplier: float = 1.0, slow_duration: float = 0.0, source_position: Variant = null) -> bool:
-	if enemy == null or not is_instance_valid(enemy):
-		return false
-	var final_damage := damage_amount
-	if source_role_id == "gunner":
-		var attack_origin: Vector2 = global_position
-		if source_position is Vector2:
-			attack_origin = source_position
-		final_damage *= _get_gunner_distance_damage_multiplier(attack_origin.distance_to(enemy.global_position))
-	var killed := false
-	if damage_amount > 0.0 and enemy.has_method("take_damage"):
-		killed = bool(enemy.take_damage(final_damage))
-		_apply_role_damage_lifesteal(source_role_id, final_damage)
-		if str(enemy.get("enemy_kind")) == "boss":
-			_add_kill_energy(_get_boss_damage_energy(final_damage))
-		if killed:
-			_add_kill_energy(_get_kill_energy_from_enemy(enemy))
-	if vulnerability_bonus > 0.0 and enemy.has_method("apply_vulnerability"):
-		enemy.apply_vulnerability(vulnerability_bonus, vulnerability_duration)
-	if slow_duration > 0.0 and enemy.has_method("apply_slow"):
-		enemy.apply_slow(slow_multiplier, slow_duration)
-	return killed
+	return PLAYER_DAMAGE_RESOLVER.deal_damage_to_enemy(self, enemy, damage_amount, source_role_id, vulnerability_bonus, vulnerability_duration, slow_multiplier, slow_duration, source_position)
 
 func _damage_enemies_in_radius(center: Vector2, radius: float, damage_amount: float, vulnerability_bonus: float, slow_multiplier: float, slow_duration: float, source_role_id: String = "") -> int:
 	return PLAYER_DAMAGE_RESOLVER.damage_enemies_in_radius(self, center, radius, damage_amount, vulnerability_bonus, slow_multiplier, slow_duration, source_role_id)
@@ -1284,33 +1176,7 @@ func _schedule_swordsman_slash_followthrough(center: Vector2, axis_direction: Ve
 	PLAYER_DAMAGE_RESOLVER.schedule_swordsman_slash_followthrough(self, center, axis_direction, rect_length, rect_width, damage_amount, vulnerability_bonus, slow_multiplier, slow_duration, animation_duration, source_role_id, hit_registry)
 
 func _apply_gunner_lock(target_enemy: Node2D, lock_level: int) -> void:
-	if target_enemy == null or not is_instance_valid(target_enemy):
-		gunner_lock_target = null
-		gunner_lock_stacks = 0
-		return
-
-	if gunner_lock_target == null or not is_instance_valid(gunner_lock_target) or gunner_lock_target != target_enemy:
-		gunner_lock_target = target_enemy
-		gunner_lock_stacks = 0
-
-	gunner_lock_stacks += 1
-	if target_enemy.has_method("apply_vulnerability"):
-		target_enemy.apply_vulnerability(0.04 * lock_level, 1.4 + 0.2 * lock_level)
-
-	var required_stacks: int = max(1, 3 - lock_level)
-	if gunner_lock_stacks < required_stacks:
-		return
-
-	gunner_lock_stacks = 0
-	gunner_lock_target = null
-	var bonus_damage := _get_role_damage("gunner") * (0.36 + lock_level * 0.14)
-	var locked_kill := false
-	locked_kill = _deal_damage_to_enemy(target_enemy, bonus_damage, "gunner")
-	if lock_level >= 2:
-		var splash_hits := _damage_enemies_in_radius(target_enemy.global_position, 26.0 + lock_level * 5.0, _get_role_damage("gunner") * (0.12 + lock_level * 0.03), 0.02, 1.0, 0.0)
-		if splash_hits > 0:
-			_register_attack_result("gunner", splash_hits, false)
-	_register_attack_result("gunner", 1, locked_kill)
+	gunner_role.apply_lock(self, target_enemy, lock_level)
 
 func _update_active_role_state() -> void:
 	PLAYER_EQUIPMENT_FLOW.recalculate_active_equipment_stats(self, false)
@@ -1326,13 +1192,10 @@ func _update_hurt_core_visual(role_data: Dictionary = {}) -> void:
 	_apply_hurt_core_visibility()
 
 func _toggle_hurt_core_visual() -> void:
-	hurt_core_visual_visible = not hurt_core_visual_visible
-	_apply_hurt_core_visibility()
+	PLAYER_HEALTH_VISUALS.toggle_hurt_core_visual(self)
 
 func _apply_hurt_core_visibility() -> void:
-	var hurt_core := get_node_or_null("HurtCore") as Node2D
-	if hurt_core != null:
-		hurt_core.visible = hurt_core_visual_visible
+	PLAYER_HEALTH_VISUALS.apply_hurt_core_visibility(self)
 
 func _setup_player_health_bar() -> void:
 	PLAYER_HEALTH_VISUALS.setup_player_health_bar(self)
@@ -1350,34 +1213,7 @@ func get_hurtbox_radius() -> float:
 	return PLAYER_HURT_CORE_RADIUS
 
 func _update_visuals(role_data: Dictionary) -> void:
-	var polygon := get_node_or_null("Polygon2D") as Polygon2D
-	if polygon != null:
-		polygon.visible = false
-
-	for child in get_children():
-		if child is Node and str(child.name).begins_with("RoleVisualRoot"):
-			remove_child(child)
-			child.free()
-
-	var visual_root := Node2D.new()
-	visual_root.name = "RoleVisualRoot"
-	add_child(visual_root)
-	var sprite := Sprite2D.new()
-	sprite.name = "RoleSprite"
-	if not _configure_role_sprite(sprite, str(role_data["id"])):
-		if polygon != null:
-			polygon.visible = true
-			polygon.color = role_data["color"]
-			if PLAYER_VISUAL_STATE.is_role_visual_hidden(str(role_data["id"]), active_role_visual_hidden, active_role_visual_hidden_role_id):
-				polygon.visible = false
-		sprite.queue_free()
-		return
-	visual_root.add_child(sprite)
-	var should_hide := PLAYER_VISUAL_STATE.is_role_visual_hidden(str(role_data["id"]), active_role_visual_hidden, active_role_visual_hidden_role_id)
-	if sprite != null:
-		sprite.visible = not should_hide
-	if polygon != null and not should_hide:
-		polygon.visible = false
+	PLAYER_VISUAL_STATE.update_visuals(self, role_data, active_role_visual_hidden, active_role_visual_hidden_role_id)
 
 func _update_fire_timer() -> void:
 	PLAYER_VISUAL_STATE.update_fire_timer(self)
@@ -1440,11 +1276,7 @@ func _get_role_max_health(role_id: String) -> float:
 	return PLAYER_ROLE_STAT_FLOW.get_role_max_health(self, role_id)
 
 func _get_role_current_health(role_id: String) -> float:
-	if role_id == str(_get_active_role().get("id", "")):
-		return current_health
-	if role_health_values is not Dictionary or role_health_values.is_empty():
-		role_health_values = PLAYER_ROLE_STAT_FLOW.build_role_health_state(self)
-	return clamp(float(role_health_values.get(role_id, _get_role_max_health(role_id))), 0.0, _get_role_max_health(role_id))
+	return PLAYER_ROLE_STAT_FLOW.get_role_current_health(self, role_id)
 
 func _save_active_role_health() -> void:
 	PLAYER_ROLE_STAT_FLOW.save_active_role_health(self)
@@ -1510,49 +1342,13 @@ func _add_energy(amount: float) -> void:
 	PLAYER_RESOURCE_FLOW.add_energy(self, amount)
 
 func _add_kill_energy(amount: float) -> void:
-	if amount <= 0.0:
-		return
-	var active_role_id := _get_active_role_id()
-	for role_data in roles:
-		var role_id := str(role_data.get("id", ""))
-		if role_id == "":
-			continue
-		if _get_role_ultimate_lock_remaining(role_id) > 0.0 and not DEVELOPER_MODE.should_unlock_ultimate_freely():
-			continue
-		var gain_scale: float = 1.0 if role_id == active_role_id else BACKGROUND_ULTIMATE_ENERGY_GAIN_RATIO
-		var base_energy_gain_multiplier: float = energy_gain_multiplier - equipment_energy_gain_bonus + _get_role_equipment_energy_gain_bonus(role_id)
-		var adjusted_amount: float = amount * ULTIMATE_ENERGY_GAIN_GLOBAL_MULTIPLIER * gain_scale * max(0.01, base_energy_gain_multiplier) * _get_ultimate_energy_gain_multiplier_for_role(role_id)
-		if adjusted_amount <= 0.0:
-			continue
-		var updated_mana := _add_role_mana(role_id, adjusted_amount, false)
-		if role_id == active_role_id and _has_elite_relic("elite_reactor") and is_equal_approx(updated_mana, max_mana):
-			_activate_switch_power(active_role_id, "\u6EE1\u80FD\u53CD\u5E94", 2.8, 1.14, 0.04)
-	_emit_active_mana_changed()
+	PLAYER_COMBAT_RESULT_FLOW.add_kill_energy(self, amount)
 
 func _get_kill_energy_from_enemy(enemy: Node) -> float:
-	if enemy == null or not is_instance_valid(enemy):
-		return 0.0
-	var enemy_kind: String = str(enemy.get("enemy_kind"))
-	if enemy_kind == "boss":
-		return 0.0
-	if enemy_kind == "elite":
-		return 10.0 * SMALL_ENEMY_KILL_ENERGY_MULTIPLIER
-	var reward_tier: int = int(enemy.get("reward_tier"))
-	match reward_tier:
-		2:
-			return 1.1 * SMALL_ENEMY_KILL_ENERGY_MULTIPLIER
-		3:
-			return 1.5 * SMALL_ENEMY_KILL_ENERGY_MULTIPLIER
-		4:
-			return 2.0 * SMALL_ENEMY_KILL_ENERGY_MULTIPLIER
-		_:
-			return 0.8 * SMALL_ENEMY_KILL_ENERGY_MULTIPLIER
+	return PLAYER_COMBAT_RESULT_FLOW.get_kill_energy_from_enemy(enemy)
 
 func _get_boss_damage_energy(damage_amount: float) -> float:
-	if damage_amount <= 0.0:
-		return 0.0
-	var energy_amount: float = sqrt(damage_amount) * 0.18
-	return clamp(energy_amount, 0.25, 2.0)
+	return PLAYER_COMBAT_RESULT_FLOW.get_boss_damage_energy(damage_amount)
 
 func _get_ultimate_energy_cost() -> float:
 	return PLAYER_ULTIMATE_FLOW.get_ultimate_energy_cost(self)
@@ -1574,45 +1370,13 @@ func _apply_theme_hit_returns(role_id: String, hit_count: int, killed: bool) -> 
 	return
 
 func _apply_swordsman_low_health_flat_heal(role_id: String, hit_count: int) -> void:
-	if role_id != "swordsman" or hit_count <= 0 or max_health <= 0.0:
-		return
-	if current_health / max_health > _get_swordsman_low_health_threshold():
-		return
-	var heal_amount: float = _get_swordsman_low_health_flat_heal()
-	if heal_amount <= 0.0:
-		return
-	_heal(heal_amount)
+	PLAYER_COMBAT_RESULT_FLOW.apply_swordsman_low_health_flat_heal(self, role_id, hit_count)
 
 func _apply_role_flat_heal_on_hit(role_id: String, hit_count: int) -> void:
-	if role_id == "" or hit_count <= 0:
-		return
-	var proc_chance: float = _get_role_blessing_stat_bonus(role_id, "flat_heal_on_hit")
-	if proc_chance <= 0.0:
-		return
-	if lifesteal_proc_cooldown_remaining > 0.0:
-		return
-	var capped_hits: int = min(hit_count, PLAYER_COMBAT_RESULT_FLOW.LIFESTEAL_MAX_ROLL_HITS)
-	var combined_chance: float = 1.0 - pow(max(0.0, 1.0 - proc_chance), float(capped_hits))
-	if randf() > clamp(combined_chance, 0.0, PLAYER_COMBAT_RESULT_FLOW.LIFESTEAL_MAX_PROC_CHANCE):
-		return
-	lifesteal_proc_cooldown_remaining = PLAYER_COMBAT_RESULT_FLOW.LIFESTEAL_PROC_COOLDOWN
-	_heal(PLAYER_COMBAT_RESULT_FLOW.LIFESTEAL_PROC_HEAL_AMOUNT)
+	PLAYER_COMBAT_RESULT_FLOW.apply_role_flat_heal_on_hit(self, role_id, hit_count)
 
 func _apply_entry_lifesteal(role_id: String, hit_count: int, killed: bool) -> void:
-	if entry_blessing_remaining <= 0.0:
-		return
-	if entry_blessing_role_id != role_id:
-		return
-	if entry_lifesteal_ratio <= 0.0 or hit_count <= 0:
-		return
-
-	var capped_hits: int = min(hit_count, 6)
-	var estimated_damage: float = _get_role_damage(role_id) * float(capped_hits) * 0.55
-	if killed:
-		estimated_damage += _get_role_damage(role_id) * 0.35
-	var heal_amount: float = estimated_damage * entry_lifesteal_ratio
-	if heal_amount > 0.0:
-		_heal(heal_amount)
+	PLAYER_COMBAT_RESULT_FLOW.apply_entry_lifesteal(self, role_id, hit_count, killed)
 
 func _heal(amount: float) -> void:
 	PLAYER_RESOURCE_FLOW.heal(self, amount)
@@ -1621,26 +1385,10 @@ func _spawn_attack_aftershock(center: Vector2, role_id: String) -> void:
 	return
 
 func _play_player_hurt_feedback() -> void:
-	_queue_camera_shake(6.0, 0.16)
-	_pulse_player_visual(1.18, 0.16)
-	_spawn_burst_effect(get_hurtbox_center(), 54.0, Color(1.0, 0.3, 0.3, 0.18), 0.16)
+	PLAYER_COMBAT_RESULT_FLOW.play_player_hurt_feedback(self)
 
 func _trigger_swordsman_counter() -> void:
-	var special_data: Dictionary = _get_role_special_state("swordsman")
-	var counter_level: int = int(special_data.get("counter_level", 0))
-	if counter_level <= 0:
-		return
-
-	var radius: float = 62.0 + counter_level * 14.0
-	var damage_amount: float = _get_role_damage("swordsman") * (0.38 + counter_level * 0.14)
-	_spawn_combat_tag(global_position + Vector2(0.0, -24.0), "\u53CD\u51FB", Color(1.0, 0.84, 0.48, 1.0))
-	_spawn_guard_effect(global_position, radius, Color(1.0, 0.84, 0.46, 0.22), 0.18)
-	_spawn_burst_effect(global_position, radius, Color(1.0, 0.76, 0.38, 0.22), 0.16)
-	var hits: int = _damage_enemies_in_radius(global_position, radius, damage_amount, 0.08 * counter_level, 1.0, 0.0)
-	if hits > 0:
-		_register_attack_result("swordsman", hits, false)
-		_heal(0.6 + counter_level * 0.25)
-		switch_invulnerability_remaining = max(switch_invulnerability_remaining, 0.05 + counter_level * 0.02)
+	PLAYER_COMBAT_RESULT_FLOW.trigger_swordsman_counter(self)
 
 func _count_enemies_in_radius(center: Vector2, radius: float) -> int:
 	return PLAYER_DAMAGE_RESOLVER.count_enemies_in_radius(self, center, radius)
@@ -1691,20 +1439,13 @@ func apply_save_data(data: Dictionary) -> void:
 	PLAYER_RUN_SAVE_STATE.apply_save_data(self, data)
 
 func resume_pending_level_ups() -> void:
-	_try_request_level_up()
+	PLAYER_LEVEL_FLOW.resume_pending_level_ups(self)
 
 func _delay_level_up_requests(duration: float) -> void:
-	if duration <= 0.0:
-		return
-	level_up_delay_remaining = max(level_up_delay_remaining, duration)
+	PLAYER_LEVEL_FLOW.delay_level_up_requests(self, duration)
 
 func _try_request_level_up() -> void:
-	if is_dead or level_up_active or pending_level_ups <= 0 or level_up_delay_remaining > 0.0:
-		return
-
-	pending_level_ups -= 1
-	level_up_active = true
-	level_up_requested.emit(_build_upgrade_options())
+	PLAYER_LEVEL_FLOW.try_request_level_up(self)
 
 func _build_upgrade_options() -> Array:
 	return PLAYER_LEVEL_FLOW.build_blessing_upgrade_options(self)
@@ -1746,16 +1487,10 @@ func _spawn_mage_bombardment_fall_effect(center: Vector2, radius: float) -> void
 	PLAYER_EFFECT_PRIMITIVES.spawn_owner_mage_bombardment_fall_effect(self, center, radius)
 
 func _spawn_pulsing_field(center: Vector2, radius: float, color: Color, pulse_count: int, interval: float, damage_amount: float, vulnerability_bonus: float, slow_multiplier: float, slow_duration: float) -> void:
-	_schedule_repeating_sequence(max(0.0, interval), max(1, pulse_count), func(_pulse_index: int) -> void:
-		_trigger_field_pulse(center, radius, color, damage_amount, vulnerability_bonus, slow_multiplier, slow_duration)
-	)
+	PLAYER_FIELD_EFFECT_FLOW.spawn_pulsing_field(self, center, radius, color, pulse_count, interval, damage_amount, vulnerability_bonus, slow_multiplier, slow_duration)
 
 func _trigger_field_pulse(center: Vector2, radius: float, color: Color, damage_amount: float, vulnerability_bonus: float, slow_multiplier: float, slow_duration: float) -> void:
-	_spawn_ring_effect(center, radius, Color(color.r, color.g, color.b, min(0.9, color.a + 0.35)), 6.0, 0.18)
-	_spawn_burst_effect(center, radius, color, 0.18)
-	if slow_duration > 0.0:
-		_spawn_frost_sigils_effect(center, max(18.0, radius * 0.58), Color(0.84, 0.98, 1.0, 0.72), 0.18)
-	_damage_enemies_in_radius(center, radius, damage_amount, vulnerability_bonus, slow_multiplier, slow_duration)
+	PLAYER_FIELD_EFFECT_FLOW.trigger_field_pulse(self, center, radius, color, damage_amount, vulnerability_bonus, slow_multiplier, slow_duration)
 
 func _spawn_burst_effect(center: Vector2, radius: float, color: Color, duration: float) -> void:
 	PLAYER_EFFECT_PRIMITIVES.spawn_owner_burst_effect(self, center, radius, color, duration)

@@ -1,5 +1,7 @@
 extends RefCounted
 
+const PLAYER_BLESSING_SKILL_STORE := preload("res://scripts/player/player_blessing_skill_store.gd")
+
 const ROLE_BOUND := "role"
 const SKILL_BOUND := "skill"
 const TIER_ONE_EQUIVALENT_COUNT := 1
@@ -338,15 +340,7 @@ const THIRD_TIER_RECIPES := {
 }
 
 static func build_empty_state() -> Dictionary:
-	return {
-		"unlocked": {},
-		"tiers": {},
-		"skill_blessing_bindings": {},
-		"skill_blessing_baselines": {},
-		"skill_blessing_bonus_credits": {},
-		"role_recipe_locks": {},
-		"skill_recipe_locks": {}
-	}
+	return PLAYER_BLESSING_SKILL_STORE.build_empty_state()
 
 
 static func _is_known_skill_id(skill_id: String) -> bool:
@@ -363,99 +357,14 @@ static func _get_recipe_skill_ids() -> Array:
 	return ids
 
 static func normalize_state(value: Variant) -> Dictionary:
-	var state := build_empty_state()
-	if value is not Dictionary:
-		return state
-	var source := value as Dictionary
-	if source.get("unlocked", {}) is Dictionary:
-		for skill_id_value in (source.get("unlocked", {}) as Dictionary).keys():
-			var skill_id := str(skill_id_value)
-			if _is_known_skill_id(skill_id) and bool((source.get("unlocked", {}) as Dictionary).get(skill_id_value, false)):
-				state["unlocked"][skill_id] = true
-	if source.get("tiers", {}) is Dictionary:
-		for skill_id_value in (source.get("tiers", {}) as Dictionary).keys():
-			var skill_id := str(skill_id_value)
-			if _is_known_skill_id(skill_id):
-				state["tiers"][skill_id] = clamp(int((source.get("tiers", {}) as Dictionary).get(skill_id_value, 0)), 0, 3)
-	if source.get("skill_blessing_bindings", {}) is Dictionary:
-		for blessing_id_value in (source.get("skill_blessing_bindings", {}) as Dictionary).keys():
-			var blessing_id := str(blessing_id_value)
-			var skill_id := str((source.get("skill_blessing_bindings", {}) as Dictionary).get(blessing_id_value, ""))
-			if _is_known_skill_id(skill_id):
-				state["skill_blessing_bindings"][blessing_id] = skill_id
-	if source.get("skill_blessing_baselines", {}) is Dictionary:
-		for skill_id_value in (source.get("skill_blessing_baselines", {}) as Dictionary).keys():
-			var skill_id := str(skill_id_value)
-			if not _is_known_skill_id(skill_id):
-				continue
-			var source_baselines: Variant = (source.get("skill_blessing_baselines", {}) as Dictionary).get(skill_id_value, {})
-			if source_baselines is not Dictionary:
-				continue
-			var normalized_baselines: Dictionary = {}
-			for blessing_id_value in (source_baselines as Dictionary).keys():
-				var blessing_id := str(blessing_id_value)
-				var source_levels: Variant = (source_baselines as Dictionary).get(blessing_id_value, {})
-				if source_levels is not Dictionary:
-					continue
-				var normalized_levels: Dictionary = {}
-				for tier_value in (source_levels as Dictionary).keys():
-					var tier := int(tier_value)
-					if tier < 1 or tier > 2:
-						continue
-					var amount: int = max(0, int((source_levels as Dictionary).get(tier_value, 0)))
-					if amount > 0:
-						normalized_levels[tier] = amount
-				if not normalized_levels.is_empty():
-					normalized_baselines[blessing_id] = normalized_levels
-			if not normalized_baselines.is_empty():
-				state["skill_blessing_baselines"][skill_id] = normalized_baselines
-	if source.get("skill_blessing_bonus_credits", {}) is Dictionary:
-		for skill_id_value in (source.get("skill_blessing_bonus_credits", {}) as Dictionary).keys():
-			var skill_id := str(skill_id_value)
-			if not _is_known_skill_id(skill_id):
-				continue
-			var source_credits: Variant = (source.get("skill_blessing_bonus_credits", {}) as Dictionary).get(skill_id_value, {})
-			if source_credits is not Dictionary:
-				continue
-			var normalized_credits: Dictionary = {}
-			for blessing_id_value in (source_credits as Dictionary).keys():
-				var blessing_id := str(blessing_id_value)
-				var source_levels: Variant = (source_credits as Dictionary).get(blessing_id_value, {})
-				if source_levels is not Dictionary:
-					continue
-				var normalized_levels: Dictionary = {}
-				for tier_value in (source_levels as Dictionary).keys():
-					var tier := int(tier_value)
-					if tier < 1 or tier > 2:
-						continue
-					var amount: int = max(0, int((source_levels as Dictionary).get(tier_value, 0)))
-					if amount > 0:
-						normalized_levels[tier] = amount
-				if not normalized_levels.is_empty():
-					normalized_credits[blessing_id] = normalized_levels
-			if not normalized_credits.is_empty():
-				state["skill_blessing_bonus_credits"][skill_id] = normalized_credits
-	for lock_key in ["role_recipe_locks", "skill_recipe_locks"]:
-		if source.get(lock_key, {}) is not Dictionary:
-			continue
-		var normalized_locks: Dictionary = {}
-		for blessing_id_value in (source.get(lock_key, {}) as Dictionary).keys():
-			var blessing_id := str(blessing_id_value)
-			var source_levels: Variant = (source.get(lock_key, {}) as Dictionary).get(blessing_id_value, {})
-			if source_levels is not Dictionary:
-				continue
-			var normalized_levels: Dictionary = {}
-			for tier_value in (source_levels as Dictionary).keys():
-				var tier := int(tier_value)
-				if tier < 1 or tier > 2:
-					continue
-				var amount: int = max(0, int((source_levels as Dictionary).get(tier_value, 0)))
-				if amount > 0:
-					normalized_levels[tier] = amount
-			if not normalized_levels.is_empty():
-				normalized_locks[blessing_id] = normalized_levels
-		state[lock_key] = normalized_locks
-	return state
+	return PLAYER_BLESSING_SKILL_STORE.normalize_state(value, _get_known_skill_id_map())
+
+
+static func _get_known_skill_id_map() -> Dictionary:
+	var result: Dictionary = {}
+	for skill_id_value in _get_recipe_skill_ids():
+		result[str(skill_id_value)] = true
+	return result
 
 static func refresh_unlocks(owner, selected_blessing_id: String = "", selected_tier: int = 0, selected_binding: String = "", role_context: String = "") -> Array[Dictionary]:
 	if owner == null:

@@ -61,6 +61,9 @@ static func _get_grid(scene: Node) -> Dictionary:
 	var scene_id := scene.get_instance_id()
 	if cached_frame == current_frame and cached_scene_id == scene_id:
 		return cached_grid
+	if cached_scene_id != scene_id:
+		cached_grid.clear()
+		active_cells.clear()
 	cached_frame = current_frame
 	cached_scene_id = scene_id
 	_clear_grid_cells()
@@ -80,7 +83,10 @@ static func _get_grid(scene: Node) -> Dictionary:
 
 static func _clear_grid_cells() -> void:
 	for cell in active_cells:
-		(cached_grid[cell] as Array).clear()
+		if not cached_grid.has(cell):
+			continue
+		var cell_enemies: Array = cached_grid[cell] as Array
+		cell_enemies.clear()
 	active_cells.clear()
 
 

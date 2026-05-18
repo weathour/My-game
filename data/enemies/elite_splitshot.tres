@@ -1,0 +1,33 @@
+[gd_resource type="Resource" script_class="EnemyProfile" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/enemy/enemy_profile.gd" id="1_profile"]
+[ext_resource type="PackedScene" path="res://assets/enemies/skull/SkullElite.tscn" id="2_visual"]
+
+[resource]
+script = ExtResource("1_profile")
+archetype = "elite_splitshot"
+behavior = "shooter"
+boss_name = "碎幕炮台"
+max_health = 380.0
+speed = 74.0
+touch_damage = 22.0
+contact_radius = 56.0
+body_collision_radius = 102.0
+reward_tier = 4
+experience_reward = 45
+scale = 1.76
+display_color = Color(1, 0.7, 0.34, 1)
+visual_scene = ExtResource("2_visual")
+extra = {
+"preferred_distance": 230.0,
+"projectile_color": Color(0.890196, 0.184314, 0.211765, 1),
+"shot_interval": 2.2,
+"projectile_speed": 250.0,
+"projectile_damage": 10.0,
+"projectile_lifetime": 4.8,
+"projectile_spread": 0.18,
+"projectile_count": 5,
+"projectile_split_count": 4,
+"projectile_split_after": 0.48,
+"projectile_split_spread": 1.2
+}

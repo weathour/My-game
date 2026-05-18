@@ -34,6 +34,7 @@ static func get_save_data(enemy) -> Dictionary:
 		"projectile_lifetime": enemy.projectile_lifetime,
 		"projectile_spread": enemy.projectile_spread,
 		"projectile_count": enemy.projectile_count,
+		"projectile_color": [enemy.projectile_color.r, enemy.projectile_color.g, enemy.projectile_color.b, enemy.projectile_color.a],
 		"projectile_split_count": enemy.projectile_split_count,
 		"projectile_split_after": enemy.projectile_split_after,
 		"projectile_split_spread": enemy.projectile_split_spread,
@@ -139,6 +140,9 @@ static func apply_save_data(enemy, data: Dictionary, target_node: Node2D) -> voi
 	enemy.projectile_lifetime = float(data.get("projectile_lifetime", enemy.projectile_lifetime))
 	enemy.projectile_spread = float(data.get("projectile_spread", enemy.projectile_spread))
 	enemy.projectile_count = int(data.get("projectile_count", enemy.projectile_count))
+	var projectile_color_data = data.get("projectile_color", [enemy.projectile_color.r, enemy.projectile_color.g, enemy.projectile_color.b, enemy.projectile_color.a])
+	if projectile_color_data.size() >= 4:
+		enemy.projectile_color = Color(float(projectile_color_data[0]), float(projectile_color_data[1]), float(projectile_color_data[2]), float(projectile_color_data[3]))
 	enemy.projectile_split_count = int(data.get("projectile_split_count", enemy.projectile_split_count))
 	enemy.projectile_split_after = float(data.get("projectile_split_after", enemy.projectile_split_after))
 	enemy.projectile_split_spread = float(data.get("projectile_split_spread", enemy.projectile_split_spread))

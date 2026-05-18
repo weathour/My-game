@@ -2,6 +2,7 @@ extends RefCounted
 
 const SAVE_MANAGER := preload("res://scripts/save_manager.gd")
 const DEVELOPER_MODE := preload("res://scripts/developer_mode.gd")
+const RUN_SAVE_RUNTIME_FLOW := preload("res://scripts/game/run_save_runtime_flow.gd")
 
 static func save_run_state(main: Node) -> void:
 	if main.game_over or main.player == null or DEVELOPER_MODE.should_disable_save():
@@ -26,34 +27,15 @@ static func save_run_state(main: Node) -> void:
 		"heart_pickups": []
 	}
 
-	for enemy in _get_runtime_or_group_nodes(main, "enemies"):
-		if is_instance_valid(enemy) and enemy.has_method("get_save_data"):
-			save_data["enemies"].append(enemy.get_save_data())
-
-	for projectile in _get_runtime_or_group_nodes(main, "enemy_projectiles"):
-		if is_instance_valid(projectile) and projectile.has_method("get_save_data"):
-			save_data["enemy_projectiles"].append(projectile.get_save_data())
-
-	for gem in _get_runtime_or_group_nodes(main, "exp_gems"):
-		if is_instance_valid(gem) and gem.has_method("get_save_data"):
-			save_data["gems"].append(gem.get_save_data())
-
-	for heart_pickup in _get_runtime_or_group_nodes(main, "heart_pickups"):
-		if is_instance_valid(heart_pickup) and heart_pickup.has_method("get_save_data"):
-			save_data["heart_pickups"].append(heart_pickup.get_save_data())
+	RUN_SAVE_RUNTIME_FLOW.append_group_save_data(main, save_data, "enemies", "enemies")
+	RUN_SAVE_RUNTIME_FLOW.append_group_save_data(main, save_data, "enemy_projectiles", "enemy_projectiles")
+	RUN_SAVE_RUNTIME_FLOW.append_group_save_data(main, save_data, "gems", "exp_gems")
+	RUN_SAVE_RUNTIME_FLOW.append_group_save_data(main, save_data, "heart_pickups", "heart_pickups")
 
 	SAVE_MANAGER.save_run(save_data)
 
 static func _get_runtime_or_group_nodes(main: Node, group_name: String) -> Array:
-	if main == null or main.get_tree() == null:
-		return []
-	if group_name == "enemies" and main.has_method("get_runtime_enemies"):
-		return main.get_runtime_enemies()
-	if group_name == "enemy_projectiles" and main.has_method("get_runtime_enemy_projectiles"):
-		return main.get_runtime_enemy_projectiles()
-	if (group_name == "exp_gems" or group_name == "heart_pickups") and main.has_method("get_runtime_pickups"):
-		return main.get_runtime_pickups(group_name)
-	return main.get_tree().get_nodes_in_group(group_name)
+	return RUN_SAVE_RUNTIME_FLOW.get_runtime_or_group_nodes(main, group_name)
 
 static func load_saved_run(main: Node) -> bool:
 	if main._is_developer_mode():
@@ -85,43 +67,13 @@ static func load_saved_run(main: Node) -> bool:
 	return true
 
 static func _restore_enemies(main: Node, enemies_data: Array) -> void:
-	for enemy_data in enemies_data:
-		var enemy = main.enemy_scene.instantiate()
-		if enemy == null:
-			continue
-		main.add_child(enemy)
-		enemy.projectile_scene = main.enemy_bullet_scene
-		enemy.heart_pickup_scene = main.heart_pickup_scene
-		enemy.apply_save_data(enemy_data, main.player)
-		if enemy.has_signal("defeated"):
-			enemy.defeated.connect(main._on_enemy_defeated.bind(enemy))
-		var loaded_enemy_kind := str(enemy_data.get("enemy_kind", "normal"))
-		if loaded_enemy_kind == "boss":
-			main.boss_enemy = enemy
-			main.boss_spawned = true
-		elif loaded_enemy_kind == "small_boss" and main.boss_enemy == null:
-			main.boss_enemy = enemy
+	RUN_SAVE_RUNTIME_FLOW.restore_enemies(main, enemies_data)
 
 static func _restore_enemy_projectiles(main: Node, projectiles_data: Array) -> void:
-	for projectile_data in projectiles_data:
-		var projectile = main.enemy_bullet_scene.instantiate()
-		if projectile == null:
-			continue
-		main.add_child(projectile)
-		projectile.apply_save_data(projectile_data, main.player)
+	RUN_SAVE_RUNTIME_FLOW.restore_enemy_projectiles(main, projectiles_data)
 
 static func _restore_gems(main: Node, gems_data: Array) -> void:
-	for gem_data in gems_data:
-		var gem = main.exp_gem_scene.instantiate()
-		if gem == null:
-			continue
-		main.add_child(gem)
-		gem.apply_save_data(gem_data)
+	RUN_SAVE_RUNTIME_FLOW.restore_gems(main, gems_data)
 
 static func _restore_heart_pickups(main: Node, hearts_data: Array) -> void:
-	for heart_data in hearts_data:
-		var heart_pickup = main.heart_pickup_scene.instantiate()
-		if heart_pickup == null:
-			continue
-		main.add_child(heart_pickup)
-		heart_pickup.apply_save_data(heart_data)
+	RUN_SAVE_RUNTIME_FLOW.restore_heart_pickups(main, hearts_data)

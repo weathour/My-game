@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="EnemyProfile" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/enemy/enemy_profile.gd" id="1_profile"]
+
+[resource]
+script = ExtResource("1_profile")
+archetype = "smallboss_rebirth"
+behavior = "rebirth"
+boss_name = "三命诡影"
+max_health = 980.0
+speed = 88.0
+touch_damage = 20.0
+contact_radius = 50.0
+body_collision_radius = 54.0
+reward_tier = 4
+experience_reward = 60
+scale = 1.72
+display_color = Color(0.78, 0.64, 1, 1)
+extra = {
+"rebirth_lives": 2,
+"rebirth_delay": 2.0,
+"rebirth_slow_multiplier": 0.5,
+"rebirth_slow_duration": 6.0
+}

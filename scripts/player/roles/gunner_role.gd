@@ -475,3 +475,33 @@ func _fire_ultimate_wave(owner, wave_count: int, barrage_level: int, focus_level
 
 func _get_scaled_visual_radius(base_radius: float) -> float:
 	return base_radius * GUNNER_BULLET_VISUAL_SCALE
+
+
+func apply_lock(owner, target_enemy: Node2D, lock_level: int) -> void:
+	if target_enemy == null or not is_instance_valid(target_enemy):
+		owner.gunner_lock_target = null
+		owner.gunner_lock_stacks = 0
+		return
+
+	if owner.gunner_lock_target == null or not is_instance_valid(owner.gunner_lock_target) or owner.gunner_lock_target != target_enemy:
+		owner.gunner_lock_target = target_enemy
+		owner.gunner_lock_stacks = 0
+
+	owner.gunner_lock_stacks += 1
+	if target_enemy.has_method("apply_vulnerability"):
+		target_enemy.apply_vulnerability(0.04 * lock_level, 1.4 + 0.2 * lock_level)
+
+	var required_stacks: int = max(1, 3 - lock_level)
+	if owner.gunner_lock_stacks < required_stacks:
+		return
+
+	owner.gunner_lock_stacks = 0
+	owner.gunner_lock_target = null
+	var bonus_damage: float = owner._get_role_damage("gunner") * (0.36 + lock_level * 0.14)
+	var locked_kill := false
+	locked_kill = owner._deal_damage_to_enemy(target_enemy, bonus_damage, "gunner")
+	if lock_level >= 2:
+		var splash_hits: int = owner._damage_enemies_in_radius(target_enemy.global_position, 26.0 + lock_level * 5.0, owner._get_role_damage("gunner") * (0.12 + lock_level * 0.03), 0.02, 1.0, 0.0)
+		if splash_hits > 0:
+			owner._register_attack_result("gunner", splash_hits, false)
+	owner._register_attack_result("gunner", 1, locked_kill)

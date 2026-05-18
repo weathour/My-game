@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="EnemyProfile" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/enemy/enemy_profile.gd" id="1_profile"]
+
+[resource]
+script = ExtResource("1_profile")
+archetype = "dasher"
+behavior = "dash"
+max_health = 54.0
+speed = 80.0
+touch_damage = 16.0
+contact_radius = 42.0
+body_collision_radius = 42.0
+reward_tier = 2
+experience_reward = 12
+scale = 1.18
+display_color = Color(1, 0.36, 0.42, 1)
+extra = {
+"dash_interval": 3.1,
+"dash_duration": 0.42,
+"dash_speed_multiplier": 3.2,
+"dash_windup_duration": 0.6
+}

@@ -8,7 +8,7 @@ static func spawn_pulsing_field(owner, center: Vector2, radius: float, color: Co
 	if owner.has_method("_schedule_repeating_sequence"):
 		owner._schedule_repeating_sequence(max(0.0, interval), safe_pulse_count, func(_index: int) -> void:
 			if is_instance_valid(owner):
-				owner._trigger_field_pulse(center, radius, color, damage_amount, vulnerability_bonus, slow_multiplier, slow_duration)
+				trigger_field_pulse(owner, center, radius, color, damage_amount, vulnerability_bonus, slow_multiplier, slow_duration)
 		)
 		return
 	for pulse_index in range(safe_pulse_count):

@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="EnemyProfile" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/enemy/enemy_profile.gd" id="1_profile"]
+[ext_resource type="PackedScene" path="res://assets/enemies/skull/skull-soilder.tscn" id="2_visual"]
+
+[resource]
+script = ExtResource("1_profile")
+archetype = "shooter"
+behavior = "shooter"
+boss_name = "远程怪"
+max_health = 24.0
+speed = 68.0
+touch_damage = 8.0
+contact_radius = 34.0
+body_collision_radius = 40.6
+reward_tier = 1
+experience_reward = 6
+scale = 0.672
+display_color = Color(1, 0.54, 0.32, 1)
+visual_scene = ExtResource("2_visual")
+extra = {
+"preferred_distance": 240.0,
+"projectile_color": Color(0.45098, 0.960784, 0.964706, 1),
+"shot_interval": 2.6,
+"projectile_speed": 220.0,
+"projectile_damage": 7.0,
+"projectile_lifetime": 4.2,
+"projectile_spread": 0.0,
+"projectile_count": 1
+}

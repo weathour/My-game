@@ -5,16 +5,22 @@ const FILL_COLOR := Color(0.08, 0.16, 0.22, 0.08)
 const CORNER_COLOR := Color(1.0, 0.88, 0.42, 0.92)
 const EDGE_WIDTH := 5.0
 const CORNER_LENGTH := 92.0
-const BATTLE_MAP_TEXTURE := preload("res://assets/maps/battle_map.png")
+# Rollback: change to "res://assets/maps/battle_map.png" to restore the original map
+const BATTLE_MAP_TEXTURE_PATH := "res://assets/maps/temp_reference_map.png"
 
 var _bounds := Rect2(Vector2(-1600.0, -900.0), Vector2(3200.0, 1800.0))
+var _map_texture: Texture2D
+
+func _ready() -> void:
+	_map_texture = load(BATTLE_MAP_TEXTURE_PATH) as Texture2D
 
 func configure(bounds: Rect2) -> void:
 	_bounds = bounds
 	queue_redraw()
 
 func _draw() -> void:
-	draw_texture_rect(BATTLE_MAP_TEXTURE, _bounds, false)
+	if _map_texture != null:
+		draw_texture_rect(_map_texture, _bounds, false)
 	draw_rect(_bounds, FILL_COLOR, true)
 	draw_rect(_bounds, BORDER_COLOR, false, EDGE_WIDTH)
 	_draw_corners()

@@ -279,7 +279,7 @@ func _spawn_split_bullets() -> void:
 				"damage": damage * split_damage_scale,
 				"lifetime": split_lifetime,
 				"hit_radius": max(10.0, hit_radius * 0.8),
-				"visual_color": visual_color.lightened(0.18),
+				"visual_color": visual_color,
 				"motion_mode": split_motion_mode,
 				"sine_amplitude": max(18.0, sine_amplitude * 0.55),
 				"sine_frequency": max(1.0, sine_frequency + 0.2),
@@ -301,6 +301,13 @@ func _apply_visuals() -> void:
 		glow.z_index = -1
 		add_child(glow)
 
+	var outline := get_node_or_null("Outline") as Polygon2D
+	if outline == null:
+		outline = Polygon2D.new()
+		outline.name = "Outline"
+		outline.z_index = -2
+		add_child(outline)
+
 	var ring := get_node_or_null("Ring") as Line2D
 	if ring == null:
 		ring = Line2D.new()
@@ -313,6 +320,10 @@ func _apply_visuals() -> void:
 	polygon.color = visual_color
 	polygon.polygon = base_shape
 	polygon.scale = _get_visual_scale()
+
+	outline.color = Color(0.0, 0.0, 0.0, 0.88)
+	outline.polygon = base_shape
+	outline.scale = polygon.scale * 1.24
 
 	glow.color = Color(visual_color.r, visual_color.g, visual_color.b, 0.28)
 	glow.polygon = base_shape

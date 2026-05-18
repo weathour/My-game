@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="EnemyProfile" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/enemy/enemy_profile.gd" id="1_profile"]
+
+[resource]
+script = ExtResource("1_profile")
+archetype = "elite_ram_trail"
+behavior = "dash"
+boss_name = "裂地重锤"
+max_health = 420.0
+speed = 82.0
+touch_damage = 28.0
+contact_radius = 52.0
+body_collision_radius = 56.0
+reward_tier = 4
+experience_reward = 45
+scale = 1.84
+display_color = Color(1, 0.42, 0.36, 1)
+extra = {
+"dash_interval": 2.4,
+"dash_duration": 0.58,
+"dash_speed_multiplier": 3.45,
+"dash_windup_duration": 0.72
+}

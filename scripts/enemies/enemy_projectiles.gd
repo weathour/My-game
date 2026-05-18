@@ -95,6 +95,10 @@ static func _take_projectile_from_pool(current_scene: Node):
 	return null
 
 static func get_projectile_color(enemy) -> Color:
+	if enemy != null and enemy.get("projectile_color") is Color:
+		var profile_color: Color = enemy.get("projectile_color") as Color
+		if profile_color.a >= 0.0:
+			return profile_color
 	return ENEMY_VISUAL_DATA.get_projectile_color(enemy.archetype_id)
 
 static func _get_enemy_projectile_limit(enemy) -> int:

@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="EnemyProfile" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/enemy/enemy_profile.gd" id="1_profile"]
+[ext_resource type="PackedScene" path="res://assets/enemies/skull/skullshotgunner.tscn" id="2_visual"]
+
+[resource]
+script = ExtResource("1_profile")
+archetype = "shotgunner"
+behavior = "shooter"
+max_health = 76.0
+speed = 70.0
+touch_damage = 16.0
+contact_radius = 48.0
+body_collision_radius = 51.8
+reward_tier = 3
+experience_reward = 16
+scale = 0.896
+display_color = Color(1, 0.62, 0.32, 1)
+visual_scene = ExtResource("2_visual")
+extra = {
+"preferred_distance": 210.0,
+"projectile_color": Color(0.278431, 0.772549, 0.509804, 1),
+"shot_interval": 2.55,
+"projectile_speed": 240.0,
+"projectile_damage": 8.0,
+"projectile_lifetime": 4.6,
+"projectile_spread": 0.22,
+"projectile_count": 5
+}

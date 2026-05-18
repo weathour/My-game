@@ -37,6 +37,17 @@ static func update_hurt_core_visual(owner, role_data: Dictionary, hurt_core_offs
 		outline.default_color = Color(role_color.r, role_color.g, role_color.b, 1.0)
 		outline.visible = true
 
+
+static func toggle_hurt_core_visual(owner) -> void:
+	owner.hurt_core_visual_visible = not owner.hurt_core_visual_visible
+	apply_hurt_core_visibility(owner)
+
+
+static func apply_hurt_core_visibility(owner) -> void:
+	var hurt_core := owner.get_node_or_null("HurtCore") as Node2D
+	if hurt_core != null:
+		hurt_core.visible = owner.hurt_core_visual_visible
+
 static func setup_player_health_bar(owner) -> void:
 	if owner.get_node_or_null("PlayerHealthBar") != null:
 		return

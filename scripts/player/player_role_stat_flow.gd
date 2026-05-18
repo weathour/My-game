@@ -11,6 +11,13 @@ static func build_background_cooldowns(owner) -> Dictionary:
 	}
 
 
+static func get_role_theme_color(owner, role_id: String) -> Color:
+	for role_data in owner.roles:
+		if str(role_data.get("id", "")) == role_id:
+			return role_data.get("color", Color.WHITE)
+	return Color.WHITE
+
+
 static func get_active_interval_bonus(owner, role_id: String) -> float:
 	var interval_bonus: float = float(owner.role_upgrade_levels.get(role_id, {}).get("interval_bonus", 0.0)) + owner._get_story_style_interval_bonus(role_id)
 	if owner.switch_power_remaining > 0.0 and owner.switch_power_role_id == role_id:
@@ -101,6 +108,16 @@ static func normalize_role_health_state(owner, value: Variant) -> Dictionary:
 		var max_value: float = get_role_max_health(owner, role_id)
 		result[role_id] = clamp(float((value as Dictionary).get(role_id, result.get(role_id, max_value))), 0.0, max_value)
 	return result
+
+
+static func get_role_current_health(owner, role_id: String) -> float:
+	if owner == null:
+		return 0.0
+	if role_id == str(owner._get_active_role().get("id", "")):
+		return owner.current_health
+	if owner.role_health_values is not Dictionary or owner.role_health_values.is_empty():
+		owner.role_health_values = build_role_health_state(owner)
+	return clamp(float(owner.role_health_values.get(role_id, get_role_max_health(owner, role_id))), 0.0, get_role_max_health(owner, role_id))
 
 
 static func save_active_role_health(owner) -> void:

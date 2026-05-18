@@ -48,7 +48,7 @@ func play_hit() -> void:
 func _update_facing(move_direction: Vector2) -> void:
 	if abs(move_direction.x) <= 0.01:
 		return
-	sprite.flip_h = move_direction.x > 0.0
+	sprite.flip_h = move_direction.x < 0.0
 
 
 func _ensure_sprite() -> void:

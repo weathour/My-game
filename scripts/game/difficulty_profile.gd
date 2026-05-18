@@ -25,7 +25,7 @@ const PROFILES := {
 		"special_projectile_count_scale": 0.88,
 		"boss_attack_pressure_scale": 0.90,
 		"recovery_margin_scale": 1.15,
-		"active_enemy_limit": 260,
+		"active_enemy_limit": 40,
 		"enemy_projectile_limit": 180,
 		"temporary_effect_limit": 260,
 		"autosave_interval": 3.0
@@ -51,7 +51,7 @@ const PROFILES := {
 		"special_projectile_count_scale": 1.00,
 		"boss_attack_pressure_scale": 1.00,
 		"recovery_margin_scale": 1.00,
-		"active_enemy_limit": 320,
+		"active_enemy_limit": 40,
 		"enemy_projectile_limit": 240,
 		"temporary_effect_limit": 340,
 		"autosave_interval": 3.0
@@ -77,7 +77,7 @@ const PROFILES := {
 		"special_projectile_count_scale": 1.08,
 		"boss_attack_pressure_scale": 1.10,
 		"recovery_margin_scale": 0.95,
-		"active_enemy_limit": 380,
+		"active_enemy_limit": 40,
 		"enemy_projectile_limit": 280,
 		"temporary_effect_limit": 400,
 		"autosave_interval": 4.0
@@ -103,7 +103,7 @@ const PROFILES := {
 		"special_projectile_count_scale": 1.42,
 		"boss_attack_pressure_scale": 1.65,
 		"recovery_margin_scale": 0.78,
-		"active_enemy_limit": 520,
+		"active_enemy_limit": 40,
 		"enemy_projectile_limit": 430,
 		"temporary_effect_limit": 560,
 		"autosave_interval": 4.5

@@ -212,10 +212,11 @@ static func spawn_dash_trail(enemy, direction_vector: Vector2, length: float) ->
 static func _update_active_status_bursts(delta: float) -> void:
 	for index in range(active_status_bursts.size() - 1, -1, -1):
 		var data: Dictionary = active_status_bursts[index]
-		var ring := data.get("node", null) as Line2D
-		if ring == null or not is_instance_valid(ring):
+		var ring_value: Variant = data.get("node", null)
+		if ring_value == null or not is_instance_valid(ring_value) or not (ring_value is Line2D):
 			active_status_bursts.remove_at(index)
 			continue
+		var ring: Line2D = ring_value as Line2D
 		var elapsed: float = float(data.get("elapsed", 0.0)) + delta
 		var duration: float = max(0.001, float(data.get("duration", 0.18)))
 		var progress: float = clamp(elapsed / duration, 0.0, 1.0)
@@ -231,10 +232,11 @@ static func _update_active_status_bursts(delta: float) -> void:
 static func _update_active_dash_trails(delta: float) -> void:
 	for index in range(active_dash_trails.size() - 1, -1, -1):
 		var data: Dictionary = active_dash_trails[index]
-		var trail := data.get("node", null) as Line2D
-		if trail == null or not is_instance_valid(trail):
+		var trail_value: Variant = data.get("node", null)
+		if trail_value == null or not is_instance_valid(trail_value) or not (trail_value is Line2D):
 			active_dash_trails.remove_at(index)
 			continue
+		var trail: Line2D = trail_value as Line2D
 		var elapsed: float = float(data.get("elapsed", 0.0)) + delta
 		var duration: float = max(0.001, float(data.get("duration", 0.16)))
 		var progress: float = clamp(elapsed / duration, 0.0, 1.0)
