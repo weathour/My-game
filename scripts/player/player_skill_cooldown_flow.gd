@@ -3,7 +3,7 @@ extends RefCounted
 const PLAYER_SKILL_COOLDOWN_SLOTS := preload("res://scripts/player/player_skill_cooldown_slots.gd")
 
 
-static func get_active_skill_cooldown_slots(owner, attack_interval: float) -> Array:
+static func get_active_skill_cooldown_slots(owner, attack_interval: float, include_descriptions: bool = true) -> Array:
 	var role_data: Dictionary = owner._get_active_role()
 	var role_id: String = str(role_data.get("id", ""))
 	var attack_remaining: float = 0.0
@@ -14,7 +14,10 @@ static func get_active_skill_cooldown_slots(owner, attack_interval: float) -> Ar
 	_append_blessing_active_skill_slot(owner, role_id, extra_slots)
 
 	var slots: Array = PLAYER_SKILL_COOLDOWN_SLOTS.build_slots(role_id, attack_remaining, attack_interval, extra_slots, owner)
-	_append_requirement_text(owner, slots)
+	if include_descriptions:
+		_append_requirement_text(owner, slots)
+	else:
+		_strip_frame_only_slot_text(slots)
 	return slots
 
 
@@ -62,11 +65,16 @@ static func _append_requirement_text(owner, slots: Array) -> void:
 		var description := str(slot_dict.get("description", ""))
 		slot_dict["description"] = "%s\n\n进化需求：\n%s" % [description, requirement_text] if description != "" else "进化需求：\n%s" % requirement_text
 
+static func _strip_frame_only_slot_text(slots: Array) -> void:
+	for slot in slots:
+		if slot is not Dictionary:
+			continue
+		var slot_dict: Dictionary = slot
+		slot_dict["description"] = ""
+		slot_dict.erase("next_requirement")
+
 
 static func _get_owner_property(owner, property_name: String):
 	if owner == null or not is_instance_valid(owner):
 		return null
-	for property_info in owner.get_property_list():
-		if property_info is Dictionary and str(property_info.get("name", "")) == property_name:
-			return owner.get(property_name)
-	return null
+	return owner.get(property_name)

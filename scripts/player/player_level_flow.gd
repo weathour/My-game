@@ -60,7 +60,7 @@ static func apply_attribute_upgrade(owner, option_id: String) -> void:
 		return
 
 	owner._update_fire_timer()
-	owner.stats_changed.emit(owner.get_stat_summary())
+	_emit_lightweight_stats_changed(owner)
 	owner.health_changed.emit(owner.current_health, owner.max_health)
 
 
@@ -112,7 +112,10 @@ static func try_request_level_up(owner) -> void:
 
 	owner.pending_level_ups -= 1
 	owner.level_up_active = true
-	owner.level_up_requested.emit(build_blessing_upgrade_options(owner))
+	if owner.has_method("_emit_deferred_level_up_requested"):
+		owner.call_deferred("_emit_deferred_level_up_requested")
+	else:
+		owner.level_up_requested.emit(build_blessing_upgrade_options(owner))
 
 
 static func build_blessing_upgrade_options(owner) -> Array:
@@ -153,3 +156,10 @@ static func make_endless_blank_upgrade_option(owner) -> Dictionary:
 		"preview_description": "不获得额外升级，直接继续。",
 		"exact_description": "这是继续选项，不提供额外战斗加成。"
 	}
+
+
+static func _emit_lightweight_stats_changed(owner) -> void:
+	if owner.has_method("emit_frame_stats_changed"):
+		owner.emit_frame_stats_changed()
+	else:
+		owner.stats_changed.emit(owner.get_stat_summary())

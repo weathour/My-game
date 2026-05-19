@@ -1,6 +1,7 @@
 extends CanvasLayer
 
 const BGM_PLAYER_SCRIPT := preload("res://scripts/bgm_player.gd")
+const GAME_SETTINGS := preload("res://scripts/game_settings.gd")
 const SURVIVORS_MODAL := preload("res://scripts/ui/core/survivors_modal.gd")
 const SURVIVORS_THEME := preload("res://scripts/ui/theme/survivors_ui_theme.gd")
 
@@ -12,13 +13,14 @@ var modal: Control
 var volume_slider: HSlider
 var volume_value_label: Label
 var mute_checkbox: CheckBox
+var performance_trace_checkbox: CheckBox
 
 func _ready() -> void:
 	layer = 3
 	process_mode = Node.PROCESS_MODE_WHEN_PAUSED
 
 	modal = SURVIVORS_MODAL.new()
-	modal.configure(Vector2(420.0, 430.0), 0.36, 0.60, Vector2(280.0, 260.0))
+	modal.configure(Vector2(420.0, 510.0), 0.36, 0.70, Vector2(280.0, 300.0))
 	modal.set_title("暂停")
 	modal.set_hint("")
 	add_child(modal)
@@ -72,6 +74,11 @@ func _build_content() -> void:
 	mute_checkbox.toggled.connect(_on_mute_toggled)
 	content.add_child(mute_checkbox)
 
+	performance_trace_checkbox = CheckBox.new()
+	performance_trace_checkbox.text = "记录性能日志"
+	performance_trace_checkbox.toggled.connect(_on_performance_trace_toggled)
+	content.add_child(performance_trace_checkbox)
+
 func _make_action_button(text_value: String, callback: Callable, kind: String = "normal") -> Button:
 	var button := Button.new()
 	button.text = text_value
@@ -88,7 +95,9 @@ func _refresh_audio_controls() -> void:
 	if volume_value_label != null:
 		volume_value_label.text = "%d%%" % int(round(BGM_PLAYER_SCRIPT.load_music_volume() * 100.0))
 	if mute_checkbox != null:
-		mute_checkbox.button_pressed = BGM_PLAYER_SCRIPT.load_music_muted()
+		mute_checkbox.set_pressed_no_signal(BGM_PLAYER_SCRIPT.load_music_muted())
+	if performance_trace_checkbox != null:
+		performance_trace_checkbox.set_pressed_no_signal(GAME_SETTINGS.load_performance_trace_enabled())
 
 func _apply_saved_music_volume() -> void:
 	var parent_scene := get_parent()
@@ -116,3 +125,6 @@ func _on_volume_changed(value: float) -> void:
 func _on_mute_toggled(toggled_on: bool) -> void:
 	BGM_PLAYER_SCRIPT.save_music_muted(toggled_on)
 	_apply_saved_music_volume()
+
+func _on_performance_trace_toggled(toggled_on: bool) -> void:
+	GAME_SETTINGS.save_performance_trace_enabled(toggled_on)

@@ -133,7 +133,11 @@ static func ensure_boss_visual(enemy) -> void:
 			enemy.boss_visual_instance = null
 		return
 	if enemy.boss_visual_instance != null:
-		return
+		if is_instance_valid(enemy.boss_visual_instance) and not enemy.boss_visual_instance.is_queued_for_deletion():
+			if enemy.boss_visual_instance.get_parent() == enemy:
+				enemy.boss_visual_instance.visible = true
+				return
+		enemy.boss_visual_instance = null
 	if BOSS_VISUAL_SCENE == null:
 		return
 	var visual := BOSS_VISUAL_SCENE.instantiate()

@@ -18,6 +18,8 @@ static func show_level_up(main: Node, options: Array) -> void:
 
 	main.reward_context = "level_up"
 	main.get_tree().paused = true
+	if options.is_empty() and main.player != null and main.player.has_method("_build_upgrade_options"):
+		options = main.player._build_upgrade_options()
 	var attribute_options: Array = []
 	if main.player != null and main.player.has_method("get_attribute_upgrade_options"):
 		attribute_options = main.player.get_attribute_upgrade_options()
@@ -106,10 +108,7 @@ static func handle_upgrade_selected(main: Node, option_id: String, attribute_opt
 			_finish_direct_blessing_choice(main)
 			return
 		main.reward_context = ""
-		main._refresh_hud()
-		main._save_run_state()
-		if main.player != null and main.player.has_method("resume_pending_level_ups"):
-			main.player.resume_pending_level_ups()
+		_schedule_post_reward_maintenance(main, true)
 		return
 
 	if main.reward_context == "small_boss_blessing_choice":
@@ -128,12 +127,10 @@ static func handle_upgrade_selected(main: Node, option_id: String, attribute_opt
 		if _show_pending_blessing_binding_choice(main):
 			return
 		if main.player != null and bool(main.player.get("level_up_active")):
-			main._refresh_hud()
-			main._save_run_state()
+			_schedule_post_reward_maintenance(main)
 			return
 		main.reward_context = ""
-		main._refresh_hud()
-		main._save_run_state()
+		_schedule_post_reward_maintenance(main)
 		return
 	if main.reward_context == "endless_boss_reward":
 		if option_id == "small_boss_choose_blessing":
@@ -143,8 +140,7 @@ static func handle_upgrade_selected(main: Node, option_id: String, attribute_opt
 		if _show_pending_blessing_binding_choice(main):
 			return
 		main.reward_context = ""
-		main._refresh_hud()
-		main._save_run_state()
+		_schedule_post_reward_maintenance(main)
 		return
 
 	_apply_player_upgrade(main, option_id)
@@ -156,10 +152,7 @@ static func handle_upgrade_selected(main: Node, option_id: String, attribute_opt
 		return
 
 	main.reward_context = ""
-	main._refresh_hud()
-	main._save_run_state()
-	if main.player != null and main.player.has_method("resume_pending_level_ups"):
-		main.player.resume_pending_level_ups()
+	_schedule_post_reward_maintenance(main, true)
 
 static func show_small_boss_reward(main: Node) -> void:
 	if main.level_up_ui == null:
@@ -195,8 +188,7 @@ static func show_direct_blessing_choice(main: Node, choices_remaining: int = DIR
 
 static func show_endless_boss_reward(main: Node) -> void:
 	if main.level_up_ui == null or not main.level_up_ui.has_method("show_menu"):
-		main._refresh_hud()
-		main._save_run_state()
+		_schedule_post_reward_maintenance(main)
 		return
 	main.reward_context = "endless_boss_reward"
 	main.get_tree().paused = true
@@ -260,8 +252,16 @@ static func _finish_direct_blessing_choice(main: Node) -> void:
 	if main.has_meta(DIRECT_BLESSING_TIER_META):
 		main.remove_meta(DIRECT_BLESSING_TIER_META)
 	main.reward_context = ""
+	_schedule_post_reward_maintenance(main)
+
+static func _schedule_post_reward_maintenance(main: Node, resume_level_ups: bool = false) -> void:
+	if main.has_method("_schedule_reward_maintenance"):
+		main._schedule_reward_maintenance(resume_level_ups)
+		return
 	main._refresh_hud()
 	main._save_run_state()
+	if resume_level_ups and main.player != null and main.player.has_method("resume_pending_level_ups"):
+		main.player.resume_pending_level_ups()
 
 static func _make_final_blank_upgrade_option() -> Dictionary:
 	return {

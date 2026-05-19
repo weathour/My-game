@@ -1,6 +1,8 @@
 extends RefCounted
 
 const PERFORMANCE_RECORDER := preload("res://scripts/game/performance_recorder.gd")
+const PERFORMANCE_FEATURE_FLAGS := preload("res://scripts/game/performance_feature_flags.gd")
+const PERFORMANCE_TRACE_LOGGER := preload("res://scripts/game/performance_trace_logger.gd")
 
 
 static func ready(main: Node) -> void:
@@ -42,6 +44,7 @@ static func handle_notification(main: Node, what: int) -> void:
 
 
 static func exit_tree(main: Node) -> void:
+	PERFORMANCE_TRACE_LOGGER.stop("scene_exit")
 	if not main.game_over and not main.suppress_exit_save and not main.exit_snapshot_saved:
 		main._save_run_state()
 	main._cleanup_runtime_nodes()
@@ -82,6 +85,7 @@ static func unhandled_input(main: Node, event: InputEvent) -> void:
 
 static func process(main: Node, delta: float) -> void:
 	PERFORMANCE_RECORDER.record_frame(delta)
+	PERFORMANCE_TRACE_LOGGER.tick(main, delta)
 	if main.game_over or main.get_tree().paused:
 		main._update_performance_metrics(delta)
 		return
@@ -101,7 +105,10 @@ static func process(main: Node, delta: float) -> void:
 
 	if main.autosave_elapsed >= main.autosave_interval:
 		main.autosave_elapsed = 0.0
-		main._save_run_state()
+		if not PERFORMANCE_FEATURE_FLAGS.is_enabled(main, PERFORMANCE_FEATURE_FLAGS.FLAG_DISABLE_AUTOSAVE):
+			PERFORMANCE_RECORDER.begin_scope("autosave_trigger_ms")
+			main._save_run_state()
+			PERFORMANCE_RECORDER.end_scope("autosave_trigger_ms")
 
 	PERFORMANCE_RECORDER.begin_scope("hud_frame_ms")
 	main.GAME_HUD_FLOW.update_frame_hud(main)

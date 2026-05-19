@@ -6,6 +6,7 @@ const FLAG_PICKUP_BATCH := "pickup_batch"
 const FLAG_ADAPTIVE_DEGRADE := "adaptive_degrade"
 const FLAG_WORKER_THREADPOOL_PROTOTYPE := "worker_threadpool_prototype"
 const FLAG_PROJECT_THREAD_SETTINGS_AB := "project_thread_settings_ab"
+const FLAG_DISABLE_AUTOSAVE := "disable_autosave"
 
 const ALL_FLAGS := [
 	FLAG_ENEMY_BATCH,
@@ -13,7 +14,8 @@ const ALL_FLAGS := [
 	FLAG_PICKUP_BATCH,
 	FLAG_ADAPTIVE_DEGRADE,
 	FLAG_WORKER_THREADPOOL_PROTOTYPE,
-	FLAG_PROJECT_THREAD_SETTINGS_AB
+	FLAG_PROJECT_THREAD_SETTINGS_AB,
+	FLAG_DISABLE_AUTOSAVE
 ]
 
 const META_KEY := "performance_feature_flags"

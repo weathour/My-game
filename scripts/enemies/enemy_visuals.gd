@@ -19,7 +19,7 @@ static func apply_visuals(enemy, color_override = null) -> void:
 		_ensure_profile_visual(enemy)
 	elif enemy.enemy_kind == "boss":
 		polygon.visible = false
-		_clear_all_visuals_except(enemy, "")
+		_clear_all_visuals_except(enemy, "BossVisual")
 		enemy._ensure_boss_visual()
 	else:
 		_clear_all_visuals_except(enemy, "")

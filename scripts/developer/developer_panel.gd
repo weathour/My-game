@@ -7,6 +7,7 @@ const SURVIVORS_THEME := preload("res://scripts/ui/theme/survivors_ui_theme.gd")
 signal level_up_requested
 signal boss_spawn_requested(archetype_id: String)
 signal small_boss_spawn_requested(archetype_id: String)
+signal normal_enemy_batch_spawn_requested(archetype_id: String, count: int)
 signal skill_unlock_requested(skill_id: String, tier: int)
 signal blessing_grant_requested(blessing_id: String, tier: int)
 
@@ -14,9 +15,11 @@ var level_button: Button
 var invincibility_button: Button
 var no_cooldown_button: Button
 var boss_list: VBoxContainer
+var normal_enemy_list: VBoxContainer
 var skill_list: VBoxContainer
 var blessing_list: VBoxContainer
 var performance_label: Label
+var normal_enemy_batch_spinbox: SpinBox
 
 func _ready() -> void:
 	anchor_left = 1.0
@@ -74,6 +77,7 @@ func _ready() -> void:
 	scroll.add_child(menu_content)
 
 	boss_list = _add_menu_section(menu_content, "Boss +1")
+	_build_normal_enemy_batch_controls(menu_content)
 	blessing_list = _add_menu_section(menu_content, "添加祝福")
 	skill_list = _add_menu_section(menu_content, "添加技能")
 
@@ -113,6 +117,9 @@ func set_invincibility_enabled(enabled: bool) -> void:
 func set_boss_options(options: Array) -> void:
 	_populate_option_list(boss_list, options, "暂无 Boss 选项", Callable(self, "_on_boss_button_pressed"))
 
+func set_normal_enemy_options(options: Array) -> void:
+	_populate_option_list(normal_enemy_list, options, "暂无小怪选项", Callable(self, "_on_normal_enemy_button_pressed"))
+
 func set_skill_options(options: Array) -> void:
 	_populate_option_list(skill_list, options, "暂无技能选项", Callable(self, "_on_skill_button_pressed"))
 
@@ -134,6 +141,29 @@ func _on_no_cooldown_button_pressed() -> void:
 	DEVELOPER_MODE.set_no_cooldown_enabled(not DEVELOPER_MODE.is_no_cooldown_enabled())
 	refresh_mode_buttons()
 
+func _build_normal_enemy_batch_controls(parent: Control) -> void:
+	var batch_row := HBoxContainer.new()
+	batch_row.add_theme_constant_override("separation", 6)
+	parent.add_child(batch_row)
+
+	var batch_label := Label.new()
+	batch_label.text = "小怪批量"
+	batch_label.custom_minimum_size = Vector2(86.0, 32.0)
+	batch_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	batch_label.add_theme_font_size_override("font_size", 15)
+	batch_row.add_child(batch_label)
+
+	normal_enemy_batch_spinbox = SpinBox.new()
+	normal_enemy_batch_spinbox.min_value = 1.0
+	normal_enemy_batch_spinbox.max_value = 999.0
+	normal_enemy_batch_spinbox.step = 1.0
+	normal_enemy_batch_spinbox.value = 10.0
+	normal_enemy_batch_spinbox.custom_minimum_size = Vector2(128.0, 32.0)
+	normal_enemy_batch_spinbox.tooltip_text = "点击下面的小怪按钮时一次生成的数量；开发者模式不受普通敌人运行时上限限制。"
+	batch_row.add_child(normal_enemy_batch_spinbox)
+
+	normal_enemy_list = _add_menu_section(parent, "小怪批量生成")
+
 func _add_small_boss_button(parent: Control, label: String, archetype_id: String) -> void:
 	var button := Button.new()
 	button.custom_minimum_size = Vector2(68, 36)
@@ -146,6 +176,14 @@ func _add_small_boss_button(parent: Control, label: String, archetype_id: String
 
 func _on_small_boss_button_pressed(archetype_id: String) -> void:
 	small_boss_spawn_requested.emit(archetype_id)
+
+func _on_normal_enemy_button_pressed(archetype_id: String) -> void:
+	if archetype_id == "":
+		return
+	var count := 1
+	if normal_enemy_batch_spinbox != null:
+		count = int(round(normal_enemy_batch_spinbox.value))
+	normal_enemy_batch_spawn_requested.emit(archetype_id, count)
 
 func _add_menu_section(parent: Control, title: String) -> VBoxContainer:
 	var section := VBoxContainer.new()

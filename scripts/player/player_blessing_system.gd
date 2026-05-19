@@ -350,7 +350,7 @@ static func compose_skill_blessing(owner, blessing_id: String) -> bool:
 	if owner.has_method("_update_fire_timer"):
 		owner._update_fire_timer()
 	if owner.get("stats_changed") != null:
-		owner.stats_changed.emit(owner.get_stat_summary())
+		_emit_lightweight_stats_changed(owner)
 	if owner.has_method("_refresh_blessing_skill_unlocks"):
 		owner._refresh_blessing_skill_unlocks()
 	return true
@@ -592,7 +592,7 @@ static func _apply_role_stat_delta(owner, role_id: String, stat: String, value: 
 	if not role_data.is_empty():
 		owner.role_upgrade_levels[role_id] = role_data
 	owner._update_fire_timer()
-	owner.stats_changed.emit(owner.get_stat_summary())
+	_emit_lightweight_stats_changed(owner)
 
 
 static func apply_active_role_runtime_bonuses(owner) -> void:
@@ -775,3 +775,10 @@ static func _format_value(definition: Dictionary, tier: int) -> String:
 
 static func _tier_label(tier: int) -> String:
 	return "II" if tier >= 2 else "I"
+
+
+static func _emit_lightweight_stats_changed(owner) -> void:
+	if owner.has_method("emit_frame_stats_changed"):
+		owner.emit_frame_stats_changed()
+	else:
+		owner.stats_changed.emit(owner.get_stat_summary())

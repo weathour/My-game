@@ -5,14 +5,11 @@ const DEFAULT_PLAYER_PROJECTILE_LIMIT := 220
 const DEFAULT_ENEMY_PROJECTILE_LIMIT := 200
 const DEFAULT_TEMPORARY_EFFECT_LIMIT := 120
 const LOW_FPS_TEMPORARY_EFFECT_LIMIT := 50
-const LOW_FPS_ENEMY_LIMIT := 40
 const LOW_FPS_PROJECTILE_LIMIT := 140
 const LOW_FPS_ENEMY_PROJECTILE_LIMIT := 120
 const LOW_FPS_THRESHOLD := 52
-const CRITICAL_FPS_ENEMY_LIMIT := 40
 const CRITICAL_FPS_PROJECTILE_LIMIT := 90
 const CRITICAL_FPS_THRESHOLD := 35
-const RECOVERY_FPS_THRESHOLD := 58
 
 static var cached_group_counts_frame: int = -1
 static var cached_group_counts: Dictionary = {}
@@ -68,12 +65,7 @@ static func get_dynamic_limit(_root: Node, group_name: String, fallback_limit: i
 	if fps <= 0:
 		return limit
 	if group_name == "enemies":
-		if fps < CRITICAL_FPS_THRESHOLD:
-			limit = min(limit, CRITICAL_FPS_ENEMY_LIMIT)
-		elif fps < LOW_FPS_THRESHOLD:
-			limit = min(limit, LOW_FPS_ENEMY_LIMIT)
-		elif fps >= RECOVERY_FPS_THRESHOLD:
-			limit = min(limit, DEFAULT_ACTIVE_ENEMY_LIMIT)
+		return limit
 	elif group_name == "player_projectiles":
 		if fps < CRITICAL_FPS_THRESHOLD:
 			limit = min(limit, CRITICAL_FPS_PROJECTILE_LIMIT)

@@ -4,6 +4,7 @@ const PLAYER_REWARD_APPLIER := preload("res://scripts/player/player_reward_appli
 const PLAYER_EQUIPMENT_FLOW := preload("res://scripts/player/player_equipment_flow.gd")
 const PLAYER_FINAL_UPGRADE_APPLIER := preload("res://scripts/player/player_final_upgrade_applier.gd")
 const PLAYER_BLESSING_SYSTEM := preload("res://scripts/player/player_blessing_system.gd")
+const POST_UPGRADE_NEXT_POPUP_DELAY := 0.08
 
 
 static func apply_upgrade(owner, option_id: String) -> void:
@@ -51,10 +52,19 @@ static func _finish_upgrade(owner, refresh_stats: bool = false, refresh_health: 
 	owner.level_up_active = false
 	if refresh_stats:
 		owner._update_fire_timer()
-		owner.stats_changed.emit(owner.get_stat_summary())
+		_emit_lightweight_stats_changed(owner)
 		owner._emit_active_mana_changed()
 	if refresh_health:
 		owner.health_changed.emit(owner.current_health, owner.max_health)
 	if owner.get("pending_blessing_binding_choices") is Array and not (owner.get("pending_blessing_binding_choices") as Array).is_empty():
 		return
+	if int(owner.get("pending_level_ups")) > 0 and owner.has_method("_delay_level_up_requests"):
+		owner._delay_level_up_requests(POST_UPGRADE_NEXT_POPUP_DELAY)
 	owner._try_request_level_up()
+
+
+static func _emit_lightweight_stats_changed(owner) -> void:
+	if owner.has_method("emit_frame_stats_changed"):
+		owner.emit_frame_stats_changed()
+	else:
+		owner.stats_changed.emit(owner.get_stat_summary())

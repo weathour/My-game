@@ -108,6 +108,20 @@ if [[ -n "$GODOT_BIN" ]]; then
     exit 1
   fi
 
+  echo "== Godot enemy rebirth smoke =="
+  "$GODOT_BIN" --headless --path . --script scripts/tests/enemy_rebirth_smoke.gd 2>&1 | tee /tmp/my-game-enemy-rebirth-smoke.log
+  if ! grep -q "ENEMY_REBIRTH_SMOKE_OK" /tmp/my-game-enemy-rebirth-smoke.log; then
+    echo "ENEMY_REBIRTH_SMOKE_FAILED"
+    exit 1
+  fi
+
+  echo "== Godot enemy boss visual smoke =="
+  "$GODOT_BIN" --headless --path . --script scripts/tests/enemy_boss_visual_smoke.gd 2>&1 | tee /tmp/my-game-enemy-boss-visual-smoke.log
+  if ! grep -q "ENEMY_BOSS_VISUAL_SMOKE_OK" /tmp/my-game-enemy-boss-visual-smoke.log; then
+    echo "ENEMY_BOSS_VISUAL_SMOKE_FAILED"
+    exit 1
+  fi
+
   echo "== Godot runtime enemy spawn smoothing smoke =="
   "$GODOT_BIN" --headless --path . --script scripts/tests/runtime_enemy_spawn_smoothing_smoke.gd 2>&1 | tee /tmp/my-game-runtime-enemy-spawn-smoothing-smoke.log
   if ! grep -q "RUNTIME_ENEMY_SPAWN_SMOOTHING_SMOKE_OK" /tmp/my-game-runtime-enemy-spawn-smoothing-smoke.log; then

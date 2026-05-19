@@ -3,6 +3,7 @@ extends RefCounted
 const PLAYER_ROLE_PRESENTER := preload("res://scripts/player/player_role_presenter.gd")
 const PLAYER_SWITCH_FLOW := preload("res://scripts/player/player_switch_flow.gd")
 const PLAYER_ULTIMATE_FLOW := preload("res://scripts/player/player_ultimate_flow.gd")
+const PERFORMANCE_RECORDER := preload("res://scripts/game/performance_recorder.gd")
 
 static func build_from_player(owner) -> Dictionary:
 	var role_data: Dictionary = owner._get_active_role()
@@ -10,12 +11,7 @@ static func build_from_player(owner) -> Dictionary:
 	var interval: float = owner._get_effective_attack_interval(role_id)
 	var skill_cooldown_slots: Array = owner._get_active_skill_cooldown_slots(interval)
 	var role_special_data: Dictionary = owner._get_role_special_state(role_id)
-	var ultimate_display: Dictionary = PLAYER_ULTIMATE_FLOW.get_ultimate_display(owner, role_id)
-	if owner.has_method("get_skill_next_requirement_text"):
-		var ultimate_skill_id := str(ultimate_display.get("skill_id", ""))
-		var ultimate_requirement := str(owner.get_skill_next_requirement_text(ultimate_skill_id))
-		if ultimate_requirement != "":
-			ultimate_display["description"] = "%s\n\n进化需求：\n%s" % [str(ultimate_display.get("description", "")), ultimate_requirement]
+	var ultimate_display: Dictionary = _build_ultimate_display(owner, role_id)
 	return build_stat_summary({
 		"level": owner.level,
 		"move_speed": owner._get_current_move_speed(),
@@ -54,6 +50,54 @@ static func build_from_player(owner) -> Dictionary:
 		"entry_blessing_role_id": owner.entry_blessing_role_id,
 		"skill_cooldown_slots": skill_cooldown_slots
 	})
+
+static func build_frame_hud_from_player(owner) -> Dictionary:
+	PERFORMANCE_RECORDER.begin_scope("hud_payload_active_role_ms")
+	var role_data: Dictionary = owner._get_active_role()
+	var role_id: String = str(role_data.get("id", "swordsman"))
+	PERFORMANCE_RECORDER.end_scope("hud_payload_active_role_ms")
+	PERFORMANCE_RECORDER.begin_scope("hud_payload_attack_interval_ms")
+	var interval: float = owner._get_effective_attack_interval(role_id)
+	PERFORMANCE_RECORDER.end_scope("hud_payload_attack_interval_ms")
+	PERFORMANCE_RECORDER.begin_scope("hud_payload_cooldown_slots_ms")
+	var cooldown_slots: Array = owner._get_active_skill_cooldown_slots(interval, false)
+	PERFORMANCE_RECORDER.end_scope("hud_payload_cooldown_slots_ms")
+	PERFORMANCE_RECORDER.begin_scope("hud_payload_misc_ms")
+	var summary: Dictionary = {
+		"current_mana": owner._get_role_mana(role_id),
+		"max_mana": owner.max_mana,
+		"ultimate_energy_cost": owner._get_ultimate_energy_cost(),
+		"ultimate_ready": owner._can_use_ultimate(),
+		"ultimate_display": _build_frame_ultimate_display(role_id),
+		"role_name": str(role_data.get("name", "剑士")),
+		"role_id": role_id,
+		"team_roles": owner.roles.map(func(role): return role["name"]),
+		"active_role_index": owner.active_role_index,
+		"auto_attack_enabled": owner.auto_attack_enabled,
+		"switch_cooldown": max(0.0, owner.switch_cooldown_remaining),
+		"switch_cooldown_base": PLAYER_SWITCH_FLOW.get_switch_cooldown_duration(owner),
+		"switch_power_label": owner.switch_power_label,
+		"switch_power_remaining": owner.switch_power_remaining,
+		"entry_blessing_label": owner.entry_blessing_label,
+		"entry_blessing_remaining": owner.entry_blessing_remaining,
+		"skill_cooldown_slots": cooldown_slots
+	}
+	PERFORMANCE_RECORDER.end_scope("hud_payload_misc_ms")
+	return summary
+
+static func _build_ultimate_display(owner, role_id: String) -> Dictionary:
+	var ultimate_display: Dictionary = PLAYER_ULTIMATE_FLOW.get_ultimate_display(owner, role_id)
+	if owner.has_method("get_skill_next_requirement_text"):
+		var ultimate_skill_id: String = str(ultimate_display.get("skill_id", ""))
+		var ultimate_requirement: String = str(owner.get_skill_next_requirement_text(ultimate_skill_id))
+		if ultimate_requirement != "":
+			ultimate_display["description"] = "%s\n\n进化需求：\n%s" % [str(ultimate_display.get("description", "")), ultimate_requirement]
+	return ultimate_display
+
+static func _build_frame_ultimate_display(role_id: String) -> Dictionary:
+	var ultimate_display: Dictionary = PLAYER_ULTIMATE_FLOW.get_ultimate_display(null, role_id)
+	ultimate_display["description"] = str(ultimate_display.get("description", "当前英雄的大招。"))
+	return ultimate_display
 
 static func build_stat_summary(context: Dictionary) -> Dictionary:
 	return {

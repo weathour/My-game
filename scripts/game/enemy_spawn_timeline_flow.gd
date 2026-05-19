@@ -3,6 +3,8 @@ extends RefCounted
 const ENEMY_DIRECTOR := preload("res://scripts/enemy/enemy_director.gd")
 const PERFORMANCE_GUARD := preload("res://scripts/game/performance_guard.gd")
 
+const SPAWN_CURVE_REFRESH_INTERVAL := 0.25
+const LAST_SPAWN_CURVE_REFRESH_META := "last_spawn_curve_refresh_time"
 
 static func setup_spawn_timer(main: Node) -> void:
 	main.spawn_timer = Timer.new()
@@ -22,6 +24,8 @@ static func update_spawn_curve(main: Node) -> void:
 	if main.boss_spawned and is_instance_valid(main.boss_enemy):
 		main.spawn_timer.stop()
 		return
+	if not main.spawn_timer.is_stopped() and not _should_refresh_spawn_curve(main):
+		return
 
 	var wave_profile: Dictionary = main.ENEMY_SPAWN_FLOW.get_wave_profile(main)
 	var minimum_spawn_interval: float = ENEMY_DIRECTOR.get_default_minimum_spawn_interval()
@@ -38,6 +42,16 @@ static func update_spawn_curve(main: Node) -> void:
 	main.spawn_timer.wait_time = ENEMY_DIRECTOR.get_wave_batch_interval(target_interval)
 	if main.spawn_timer.is_stopped() and not main.game_over:
 		main.spawn_timer.start()
+
+
+static func _should_refresh_spawn_curve(main: Node) -> bool:
+	if main == null:
+		return false
+	var last_refresh_time := float(main.get_meta(LAST_SPAWN_CURVE_REFRESH_META, -999999.0))
+	if float(main.survival_time) - last_refresh_time < SPAWN_CURVE_REFRESH_INTERVAL:
+		return false
+	main.set_meta(LAST_SPAWN_CURVE_REFRESH_META, float(main.survival_time))
+	return true
 
 
 static func handle_stage_events(main: Node) -> void:

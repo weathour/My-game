@@ -26,11 +26,13 @@
     主线骨架、故事档结构和角色池。
 11. [11_技术债_风险点_重构建议.md](11_技术债_风险点_重构建议.md)
     当前工程风险和重构护栏。
-12. [GRAPHIFY.md](GRAPHIFY.md)
+12. [12_性能优化与验证记录.md](12_性能优化与验证记录.md)
+    密集战斗优化边界、掉帧原因、日志和验证方式。
+13. [GRAPHIFY.md](GRAPHIFY.md)
     项目知识图更新方式。
-13. [KNOWN_ISSUES.md](KNOWN_ISSUES.md)
+14. [KNOWN_ISSUES.md](KNOWN_ISSUES.md)
     已知问题和高风险区域。
-14. [RELEASE_CHECKLIST.md](RELEASE_CHECKLIST.md)
+15. [RELEASE_CHECKLIST.md](RELEASE_CHECKLIST.md)
     发布前检查项。
 
 ## 使用建议
@@ -41,4 +43,5 @@
 - 查关卡、Boss、难度：看 `05`。
 - 查 UI、角色面板、存档、音频：看 `06`。
 - 查当前进度和下一步：看 `08`。
+- 查性能优化、掉帧原因和验证方式：看 `12`。
 - 查代码职责和数据流：看 `09`。

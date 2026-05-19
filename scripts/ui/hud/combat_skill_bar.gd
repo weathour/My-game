@@ -10,6 +10,8 @@ const SWITCH_WIDGET_WIDTH := 176.0
 const SWITCH_WIDGET_HEIGHT := 72.0
 const SWITCH_WIDGET_GAP := 18.0
 const SKILL_PANEL_WIDTH := 382.0
+const COOLDOWN_REDRAW_EPSILON: float = 0.01
+const ENERGY_REDRAW_EPSILON: float = 0.01
 const SKETCH_TEXTURES := {
 	"swordsman": preload("res://assets/sketch/人设草图/剑士草图.jpg"),
 	"gunner": preload("res://assets/sketch/人设草图/枪手草图.jpg"),
@@ -25,7 +27,10 @@ class SkillCooldownIcon:
 		var cooldown_ratio: float = 0.0
 
 		func set_ratio(new_ratio: float) -> void:
-			cooldown_ratio = clamp(new_ratio, 0.0, 1.0)
+			var resolved_ratio: float = clamp(new_ratio, 0.0, 1.0)
+			if abs(resolved_ratio - cooldown_ratio) <= COOLDOWN_REDRAW_EPSILON:
+				return
+			cooldown_ratio = resolved_ratio
 			queue_redraw()
 
 		func _draw() -> void:
@@ -40,7 +45,7 @@ class SkillCooldownIcon:
 			var center := inner_rect.get_center()
 			var radius: float = max(inner_rect.size.x, inner_rect.size.y) * 0.82
 			var angle_total: float = TAU * cooldown_ratio
-			var steps: int = max(8, int(ceil(56.0 * cooldown_ratio)))
+			var steps: int = max(8, int(ceil(32.0 * cooldown_ratio)))
 			var points := PackedVector2Array()
 			points.append(center)
 			for step in range(steps + 1):
@@ -67,12 +72,18 @@ class SkillCooldownIcon:
 		cooldown_overlay.set_ratio(cooldown_ratio if unlocked else 0.0)
 
 	func set_state(new_unlocked: bool, new_color: Color, new_cooldown_ratio: float) -> void:
+		var resolved_ratio: float = clamp(new_cooldown_ratio, 0.0, 1.0)
+		var visual_changed: bool = unlocked != new_unlocked or icon_color != new_color
+		var ratio_changed: bool = abs(resolved_ratio - cooldown_ratio) > COOLDOWN_REDRAW_EPSILON
+		if not visual_changed and not ratio_changed:
+			return
 		unlocked = new_unlocked
 		icon_color = new_color
-		cooldown_ratio = clamp(new_cooldown_ratio, 0.0, 1.0)
+		cooldown_ratio = resolved_ratio
 		if cooldown_overlay != null:
 			cooldown_overlay.set_ratio(cooldown_ratio if unlocked else 0.0)
-		queue_redraw()
+		if visual_changed:
+			queue_redraw()
 
 	func _draw() -> void:
 		var outer_rect := Rect2(Vector2.ZERO, size)
@@ -93,8 +104,11 @@ class SwitchPortraitDisplay:
 	var cooldown_ratio: float = 0.0
 
 	func set_state(new_texture: Texture2D, new_ratio: float) -> void:
+		var resolved_ratio: float = clamp(new_ratio, 0.0, 1.0)
+		if role_texture == new_texture and abs(resolved_ratio - cooldown_ratio) <= COOLDOWN_REDRAW_EPSILON:
+			return
 		role_texture = new_texture
-		cooldown_ratio = clamp(new_ratio, 0.0, 1.0)
+		cooldown_ratio = resolved_ratio
 		queue_redraw()
 
 	func _draw() -> void:
@@ -111,7 +125,7 @@ class SwitchPortraitDisplay:
 
 		if cooldown_ratio > 0.01:
 			_draw_cooldown_sector(center, inner_radius, cooldown_ratio)
-		draw_arc(center, radius, 0.0, TAU, 48, Color(0.0, 0.0, 0.0, 1.0), 3.0)
+		draw_arc(center, radius, 0.0, TAU, 32, Color(0.0, 0.0, 0.0, 1.0), 3.0)
 
 	func _draw_cooldown_sector(center: Vector2, radius: float, ratio: float) -> void:
 		var shade := Color(0.0, 0.0, 0.0, 0.66)
@@ -119,7 +133,7 @@ class SwitchPortraitDisplay:
 			draw_circle(center, radius, shade)
 			return
 		var angle_total: float = TAU * ratio
-		var steps: int = max(6, int(ceil(52.0 * ratio)))
+		var steps: int = max(6, int(ceil(32.0 * ratio)))
 		var points := PackedVector2Array()
 		points.append(center)
 		for step in range(steps + 1):
@@ -135,7 +149,16 @@ class UltimateEnergyDisplay:
 	var skill_name: String = ""
 
 	func set_state(new_ratio: float) -> void:
-		fill_ratio = clamp(new_ratio, 0.0, 1.0)
+		var resolved_ratio: float = clamp(new_ratio, 0.0, 1.0)
+		if abs(resolved_ratio - fill_ratio) <= ENERGY_REDRAW_EPSILON:
+			return
+		fill_ratio = resolved_ratio
+		queue_redraw()
+
+	func set_skill_name(new_skill_name: String) -> void:
+		if skill_name == new_skill_name:
+			return
+		skill_name = new_skill_name
 		queue_redraw()
 
 	func _draw() -> void:
@@ -147,7 +170,7 @@ class UltimateEnergyDisplay:
 		_draw_fill(center, inner_radius, fill_ratio)
 		if fill_ratio >= 0.999:
 			draw_circle(center, inner_radius, Color(0.32, 0.76, 1.0, 0.16))
-		draw_arc(center, radius, 0.0, TAU, 64, Color(0.0, 0.0, 0.0, 1.0), 3.0)
+		draw_arc(center, radius, 0.0, TAU, 32, Color(0.0, 0.0, 0.0, 1.0), 3.0)
 
 		if skill_name != "":
 			var font := get_theme_default_font()
@@ -160,40 +183,34 @@ class UltimateEnergyDisplay:
 	func _draw_fill(center: Vector2, radius: float, ratio: float) -> void:
 		if ratio <= 0.0:
 			return
+		if ratio >= 0.999:
+			draw_circle(center, radius, Color(0.24, 0.68, 1.0, 0.72))
+			return
 
 		var top_y: float = center.y + radius - radius * 2.0 * ratio
 		var min_y: float = center.y - radius
 		var max_y: float = center.y + radius
-		var start_y: int = int(floor(max(top_y, min_y)))
-		var end_y: int = int(ceil(max_y))
-		var fill_height: float = max(max_y - top_y, 1.0)
+		var line_y: float = clamp(top_y, min_y, max_y)
+		var y_ratio: float = clamp((line_y - center.y) / radius, -1.0, 1.0)
+		var right_angle: float = asin(y_ratio)
+		var left_angle: float = PI - right_angle
+		var points := PackedVector2Array()
+		var steps: int = 28
+		for step in range(steps + 1):
+			var progress: float = float(step) / float(steps)
+			var angle: float = left_angle + (right_angle - left_angle) * progress
+			points.append(center + Vector2(cos(angle), sin(angle)) * radius)
+		draw_colored_polygon(points, Color(0.22, 0.64, 1.0, 0.62))
 
-		for y in range(start_y, end_y + 1):
-			var sample_y: float = float(y) + 0.5
-			var dy: float = sample_y - center.y
-			if abs(dy) > radius:
-				continue
-			var half_width: float = sqrt(max(radius * radius - dy * dy, 0.0))
-			var depth_ratio: float = clamp((sample_y - top_y) / fill_height, 0.0, 1.0)
-			var fill_color := Color(0.22, 0.58 + depth_ratio * 0.1, 1.0, 0.42 + depth_ratio * 0.32)
+		var line_offset: float = line_y - center.y
+		if abs(line_offset) <= radius:
+			var half_width_at_line: float = sqrt(max(radius * radius - line_offset * line_offset, 0.0))
 			draw_line(
-				Vector2(center.x - half_width, sample_y),
-				Vector2(center.x + half_width, sample_y),
-				fill_color,
-				1.6
+				Vector2(center.x - half_width_at_line, line_y),
+				Vector2(center.x + half_width_at_line, line_y),
+				Color(0.72, 0.9, 1.0, 0.75),
+				2.0
 			)
-
-		if ratio < 0.999:
-			var line_y: float = clamp(top_y, min_y, max_y)
-			var line_offset: float = line_y - center.y
-			if abs(line_offset) <= radius:
-				var half_width_at_line: float = sqrt(max(radius * radius - line_offset * line_offset, 0.0))
-				draw_line(
-					Vector2(center.x - half_width_at_line, line_y),
-					Vector2(center.x + half_width_at_line, line_y),
-					Color(0.72, 0.9, 1.0, 0.75),
-					2.0
-				)
 
 var switch_cd_left_key_label: Label
 var switch_cd_right_key_label: Label
@@ -208,6 +225,7 @@ var ultimate_display: Dictionary = {}
 var experience_bar: ProgressBar
 var experience_label: Label
 var hover_detail: Control
+var action_key_labels_ready: bool = false
 
 func _ready() -> void:
 	anchor_left = 0.5
@@ -225,10 +243,15 @@ func _ready() -> void:
 
 func update_experience(current_experience: int, required_experience: int) -> void:
 	if experience_bar != null:
-		experience_bar.max_value = max(required_experience, 1)
-		experience_bar.value = current_experience
+		var resolved_required: int = max(required_experience, 1)
+		if int(experience_bar.max_value) != resolved_required:
+			experience_bar.max_value = resolved_required
+		if int(experience_bar.value) != current_experience:
+			experience_bar.value = current_experience
 	if experience_label != null:
-		experience_label.text = "%d / %d XP" % [current_experience, required_experience]
+		var next_text: String = "%d / %d XP" % [current_experience, required_experience]
+		if experience_label.text != next_text:
+			experience_label.text = next_text
 
 func update_switch_cooldown(role_id: String, cooldown_remaining: float, cooldown_duration: float) -> void:
 	_refresh_switch_key_labels()
@@ -242,7 +265,9 @@ func update_switch_cooldown(role_id: String, cooldown_remaining: float, cooldown
 	var ratio: float = clamp(cooldown_remaining / duration, 0.0, 1.0)
 	switch_cd_portrait.set_state(portrait_texture, ratio)
 	if switch_cd_time_label != null:
-		switch_cd_time_label.text = "%.1f" % cooldown_remaining if cooldown_remaining > 0.05 else ""
+		var next_text: String = "%.1f" % cooldown_remaining if cooldown_remaining > 0.05 else ""
+		if switch_cd_time_label.text != next_text:
+			switch_cd_time_label.text = next_text
 
 func update_ultimate_energy(current_energy: float, required_energy: float, display_data: Dictionary = {}) -> void:
 	_refresh_action_key_labels()
@@ -250,7 +275,7 @@ func update_ultimate_energy(current_energy: float, required_energy: float, displ
 	ultimate_required_energy = max(required_energy, 1.0)
 	ultimate_display = display_data.duplicate(true)
 	if ultimate_energy_widget != null:
-		ultimate_energy_widget.skill_name = str(ultimate_display.get("name", "大招"))
+		ultimate_energy_widget.set_skill_name(str(ultimate_display.get("name", "大招")))
 		ultimate_energy_widget.set_state(ultimate_current_energy / ultimate_required_energy)
 
 func update_skill_cooldown_slots(slot_data_list: Array) -> void:
@@ -260,10 +285,16 @@ func update_skill_cooldown_slots(slot_data_list: Array) -> void:
 		var label: Label = slot_nodes["label"] as Label
 		if index >= slot_data_list.size():
 			slot_view.set_state(false, Color(0.12, 0.13, 0.16, 1.0), 0.0)
-			slot_view.tooltip_text = ""
-			label.text = ""
-			slot_nodes["title"] = ""
-			slot_nodes["description"] = ""
+			if slot_view.tooltip_text != "":
+				slot_view.tooltip_text = ""
+			if label.text != "":
+				label.text = ""
+			if str(slot_nodes.get("title", "")) != "":
+				slot_nodes["title"] = ""
+			if str(slot_nodes.get("description", "")) != "":
+				slot_nodes["description"] = ""
+			if str(slot_nodes.get("slot_label", "")) != "":
+				slot_nodes["slot_label"] = ""
 			continue
 
 		var slot_data: Dictionary = slot_data_list[index]
@@ -275,12 +306,19 @@ func update_skill_cooldown_slots(slot_data_list: Array) -> void:
 		var remaining: float = clamp(float(slot_data.get("remaining", 0.0)), 0.0, duration)
 		var ratio: float = remaining / duration
 		slot_view.set_state(true, slot_color, ratio)
-		var slot_name := str(slot_data.get("name", "OK"))
-		label.text = slot_name
-		slot_view.tooltip_text = ""
-		slot_nodes["title"] = slot_name
-		slot_nodes["description"] = _build_slot_tooltip(slot_data, duration, remaining)
-		slot_nodes["slot_label"] = str(slot_data.get("slot_label", "技能冷却"))
+		var slot_name: String = str(slot_data.get("name", "OK"))
+		if label.text != slot_name:
+			label.text = slot_name
+		if slot_view.tooltip_text != "":
+			slot_view.tooltip_text = ""
+		if str(slot_nodes.get("title", "")) != slot_name:
+			slot_nodes["title"] = slot_name
+		var next_description: String = _build_slot_tooltip(slot_data, duration, remaining)
+		if str(slot_nodes.get("description", "")) != next_description:
+			slot_nodes["description"] = next_description
+		var next_slot_label: String = str(slot_data.get("slot_label", "技能冷却"))
+		if str(slot_nodes.get("slot_label", "")) != next_slot_label:
+			slot_nodes["slot_label"] = next_slot_label
 
 func _build_widgets() -> void:
 	var switch_cd_widget := HBoxContainer.new()
@@ -501,10 +539,13 @@ func _on_skill_slot_unhovered() -> void:
 func _refresh_switch_key_labels() -> void:
 	_refresh_action_key_labels()
 
-func _refresh_action_key_labels() -> void:
+func _refresh_action_key_labels(force: bool = false) -> void:
+	if action_key_labels_ready and not force:
+		return
 	if switch_cd_left_key_label != null:
 		switch_cd_left_key_label.text = GAME_SETTINGS.get_key_display_name(GAME_SETTINGS.load_keycode(GAME_SETTINGS.ACTION_SWITCH_PREV))
 	if switch_cd_right_key_label != null:
 		switch_cd_right_key_label.text = GAME_SETTINGS.get_key_display_name(GAME_SETTINGS.load_keycode(GAME_SETTINGS.ACTION_SWITCH_NEXT))
 	if ultimate_key_label != null:
 		ultimate_key_label.text = GAME_SETTINGS.get_key_display_name(GAME_SETTINGS.load_keycode(GAME_SETTINGS.ACTION_ULTIMATE))
+	action_key_labels_ready = true

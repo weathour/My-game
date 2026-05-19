@@ -29,6 +29,15 @@ Use this before any public build, demo handoff, or store upload.
 - [ ] Test level-up blessing list scroll bar is visible and draggable.
 - [ ] Test hover details for blessings, rewards, bottom skill slots, normal attack, and ultimate energy.
 
+
+## Performance sanity
+
+- [ ] Endless mode keeps intended enemy density; low FPS must not silently reduce normal enemy count.
+- [ ] Developer normal-enemy batch spawner can reproduce dense-combat scenes.
+- [ ] Level-up, blessing binding, and skill-reward confirmation do not create obvious click-frame stalls.
+- [ ] If a stall is reported, enable performance trace briefly and inspect `user://performance_trace_latest.jsonl` for slow-frame, SavePeak, pending spawn, and batch counters.
+- [ ] Combat save still overwrites `run_save.json` and `run_save_backup.json` only; save file count must not grow with play time.
+
 ## Save/settings sanity
 
 - [ ] New story profile can be created.

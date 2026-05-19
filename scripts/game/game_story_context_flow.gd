@@ -16,7 +16,6 @@ static func load_story_stage_context(main: Node) -> void:
 	main.endless_mode_active = not main.story_mode_active and SAVE_MANAGER.is_endless_mode_active()
 	main.difficulty_profile = _load_difficulty_profile(main)
 	main.difficulty_id = str(main.difficulty_profile.get("id", DIFFICULTY_PROFILE.DEFAULT_DIFFICULTY_ID))
-	main.autosave_interval = float(main.difficulty_profile.get("autosave_interval", main.autosave_interval))
 
 static func apply_story_loadout(main: Node) -> void:
 	if not main.story_mode_active or main.player == null or not main.player.has_method("configure_story_loadout"):

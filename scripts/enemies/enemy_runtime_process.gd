@@ -40,6 +40,8 @@ static func physics_process(enemy, delta: float) -> void:
 		enemy._update_status_visuals()
 
 	if enemy.target == null or not is_instance_valid(enemy.target):
+		if enemy.rebirth_timer > 0.0:
+			enemy.ENEMY_TRAIT_BEHAVIOR.update_rebirth_timer(enemy, delta)
 		enemy.velocity = Vector2.ZERO
 		enemy._update_motion_visual()
 		return

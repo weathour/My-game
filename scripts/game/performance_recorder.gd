@@ -63,7 +63,10 @@ static func end_scope(scope_name: String) -> void:
 
 
 static func get_rolling_snapshot() -> Dictionary:
-	return _build_snapshot(frame_samples_ms)
+	var snapshot := _build_snapshot(frame_samples_ms)
+	snapshot["scope_totals_ms"] = _convert_scope_map_to_ms(scope_totals_us)
+	snapshot["scope_peaks_ms"] = _convert_scope_map_to_ms(scope_peaks_us)
+	return snapshot
 
 
 static func get_session_snapshot() -> Dictionary:

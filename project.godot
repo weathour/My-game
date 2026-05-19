@@ -13,6 +13,9 @@ config_version=5
 config/name="survivor_like"
 run/main_scene="res://scenes/main_menu.tscn"
 run/max_fps=120
+run/performance_flags/enemy_batch=true
+run/performance_flags/enemy_projectile_batch=true
+run/performance_flags/pickup_batch=true
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 

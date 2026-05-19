@@ -51,8 +51,8 @@ static func _resolve_endless_slot(slot_id: int = -1) -> int:
 static func _read_json(path: String) -> Variant:
 	return SAVE_FILE_STORE.read_json(path)
 
-static func _write_json(path: String, data: Dictionary) -> void:
-	SAVE_FILE_STORE.write_json(path, data)
+static func _write_json(path: String, data: Dictionary) -> int:
+	return SAVE_FILE_STORE.write_json(path, data)
 
 static func _load_meta() -> Dictionary:
 	return SAVE_FILE_STORE.load_meta()
@@ -244,19 +244,20 @@ static func has_save(slot_id: int = -1, mode: String = "") -> bool:
 	var backup_path := _run_backup_path(resolved) if resolved_mode == MODE_STORY else _endless_run_backup_path(resolved)
 	return FileAccess.file_exists(run_path) or FileAccess.file_exists(backup_path)
 
-static func save_run(data: Dictionary, slot_id: int = -1, mode: String = "") -> void:
+static func save_run(data: Dictionary, slot_id: int = -1, mode: String = "") -> int:
 	var resolved_mode := mode if mode != "" else get_active_mode()
 	var resolved := _resolve_slot(slot_id) if resolved_mode == MODE_STORY else _resolve_endless_slot(slot_id)
 	if resolved < 1:
-		return
+		return 0
 	if resolved_mode == MODE_STORY:
 		set_active_slot(resolved)
-		_write_json(_run_path(resolved), data)
+		var story_payload_chars := _write_json(_run_path(resolved), data)
 		_write_json(_run_backup_path(resolved), data)
-		return
+		return story_payload_chars
 	set_active_endless_slot(resolved)
-	_write_json(_endless_run_path(resolved), data)
+	var endless_payload_chars := _write_json(_endless_run_path(resolved), data)
 	_write_json(_endless_run_backup_path(resolved), data)
+	return endless_payload_chars
 
 static func load_run(slot_id: int = -1, mode: String = "") -> Dictionary:
 	var resolved_mode := mode if mode != "" else get_active_mode()

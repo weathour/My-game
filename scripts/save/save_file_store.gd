@@ -46,13 +46,15 @@ static func read_json(path: String) -> Variant:
 		return null
 	return json.data
 
-static func write_json(path: String, data: Dictionary) -> void:
+static func write_json(path: String, data: Dictionary) -> int:
 	ensure_save_root()
 	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(path.get_base_dir()))
 	var file := FileAccess.open(path, FileAccess.WRITE)
 	if file == null:
-		return
-	file.store_string(JSON.stringify(data))
+		return 0
+	var serialized := JSON.stringify(data)
+	file.store_string(serialized)
+	return serialized.length()
 
 static func load_meta() -> Dictionary:
 	var parsed: Variant = read_json(META_PATH)

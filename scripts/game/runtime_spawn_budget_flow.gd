@@ -2,6 +2,8 @@ extends RefCounted
 
 
 static func can_spawn_runtime_group(main: Node, group_name: String, fallback_limit: int) -> bool:
+	if should_bypass_runtime_group_limit(main, group_name):
+		return true
 	reset_runtime_spawn_budget_if_needed(main)
 	if not has_runtime_spawn_frame_budget(main, group_name):
 		return false
@@ -13,6 +15,8 @@ static func can_spawn_runtime_group(main: Node, group_name: String, fallback_lim
 
 
 static func trim_spawn_count_for_group(main: Node, group_name: String, requested_count: int, fallback_limit: int) -> int:
+	if should_bypass_runtime_group_limit(main, group_name):
+		return max(0, requested_count)
 	reset_runtime_spawn_budget_if_needed(main)
 	var reserved_count: int = int(main.runtime_spawn_counts.get(group_name, 0))
 	var allowed_count: int = int(main.PERFORMANCE_GUARD.trim_requested_count_with_reserved(main, group_name, requested_count, get_runtime_group_limit(main, group_name, fallback_limit), reserved_count))
@@ -22,8 +26,14 @@ static func trim_spawn_count_for_group(main: Node, group_name: String, requested
 
 
 static func get_runtime_group_limit(main: Node, group_name: String, fallback_limit: int) -> int:
+	if should_bypass_runtime_group_limit(main, group_name):
+		return 0
 	var base_limit: int = int(main._get_difficulty_limit(limit_key_for_group(group_name), fallback_limit))
 	return main.PERFORMANCE_GUARD.get_dynamic_limit(main, group_name, base_limit)
+
+
+static func should_bypass_runtime_group_limit(main: Node, group_name: String) -> bool:
+	return group_name == "enemies" and main != null and main.has_method("_is_developer_mode") and bool(main._is_developer_mode())
 
 
 static func reset_runtime_spawn_budget_if_needed(main: Node) -> void:

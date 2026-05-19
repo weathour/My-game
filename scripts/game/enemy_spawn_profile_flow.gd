@@ -21,9 +21,9 @@ static func get_player_growth_score(main: Node) -> float:
 	if main.player == null:
 		return 0.0
 
-	var summary: Dictionary = {}
-	if main.player.has_method("get_stat_summary"):
-		summary = main.player.get_stat_summary()
+	var summary: Dictionary = {
+		"bullet_damage": _get_active_role_damage(main.player)
+	}
 
 	return ENEMY_DIRECTOR.get_player_growth_score(
 		int(main.player.level),
@@ -31,6 +31,18 @@ static func get_player_growth_score(main: Node) -> float:
 		{},
 		main.player.elite_relics_unlocked
 	)
+
+
+static func _get_active_role_damage(player: Node) -> float:
+	if player == null:
+		return 0.0
+	if not player.has_method("_get_active_role") or not player.has_method("_get_role_damage"):
+		return 0.0
+	var role_data: Dictionary = player._get_active_role()
+	var role_id := str(role_data.get("id", ""))
+	if role_id == "":
+		return 0.0
+	return float(player._get_role_damage(role_id))
 
 
 static func get_expected_growth_score(main: Node) -> float:

@@ -10,6 +10,8 @@ const TEXT_VOLUME_SETTINGS := "\u97f3\u91cf\u8bbe\u7f6e"
 const TEXT_DISPLAY_SETTINGS := "\u663e\u793a\u8bbe\u7f6e"
 const TEXT_KEY_SETTINGS := "\u6309\u952e\u8bbe\u7f6e"
 const TEXT_MUSIC_VOLUME := "\u80cc\u666f\u97f3\u4e50\u97f3\u91cf"
+const TEXT_PERFORMANCE_TRACE := "\u8bb0\u5f55\u6027\u80fd\u65e5\u5fd7"
+const TEXT_PERFORMANCE_TRACE_HINT := "\u5f00\u542f\u540e\u5199\u5165 user://performance_trace_latest.jsonl\uff1b\u7528\u4e8e\u77ed\u65f6\u95f4\u5b9a\u4f4d\u5361\u987f\uff0c\u6d4b\u5b8c\u5efa\u8bae\u5173\u95ed\u3002"
 const TEXT_CLOSE := "\u5173\u95ed"
 const TEXT_RESET_DEFAULTS := "\u6062\u590d\u9ed8\u8ba4\u952e\u4f4d"
 const TEXT_WINDOW_MODE := "\u7a97\u53e3\u6a21\u5f0f"
@@ -42,6 +44,7 @@ var keybind_page: VBoxContainer
 var volume_slider: HSlider
 var volume_value_label: Label
 var mute_checkbox: CheckBox
+var performance_trace_checkbox: CheckBox
 var window_mode_option: OptionButton
 var window_size_option: OptionButton
 var keybind_buttons: Dictionary = {}
@@ -56,6 +59,7 @@ func _ready() -> void:
 	visible = false
 	_show_volume_settings()
 	_refresh_audio_controls()
+	_refresh_gameplay_controls()
 	_refresh_display_controls()
 	_refresh_keybind_controls()
 
@@ -66,6 +70,7 @@ func _notification(what: int) -> void:
 func open() -> void:
 	waiting_for_key_action = ""
 	_refresh_audio_controls()
+	_refresh_gameplay_controls()
 	_refresh_display_controls()
 	_refresh_keybind_controls()
 	_show_volume_settings()
@@ -233,6 +238,18 @@ func _build_volume_page() -> VBoxContainer:
 	mute_checkbox.toggled.connect(_on_mute_toggled)
 	page.add_child(mute_checkbox)
 
+	performance_trace_checkbox = CheckBox.new()
+	performance_trace_checkbox.text = TEXT_PERFORMANCE_TRACE
+	performance_trace_checkbox.toggled.connect(_on_performance_trace_toggled)
+	page.add_child(performance_trace_checkbox)
+
+	var performance_trace_hint := Label.new()
+	performance_trace_hint.text = TEXT_PERFORMANCE_TRACE_HINT
+	performance_trace_hint.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	performance_trace_hint.add_theme_font_size_override("font_size", 14)
+	performance_trace_hint.modulate = Color(0.82, 0.88, 0.95, 0.96)
+	page.add_child(performance_trace_hint)
+
 	return page
 
 func _build_display_page() -> VBoxContainer:
@@ -374,6 +391,10 @@ func _refresh_audio_controls() -> void:
 	if mute_checkbox != null:
 		mute_checkbox.set_pressed_no_signal(BGM_PLAYER_SCRIPT.load_music_muted())
 
+func _refresh_gameplay_controls() -> void:
+	if performance_trace_checkbox != null:
+		performance_trace_checkbox.set_pressed_no_signal(GAME_SETTINGS.load_performance_trace_enabled())
+
 func _refresh_keybind_controls() -> void:
 	for action_id in GAME_SETTINGS.ACTION_ORDER:
 		var button := keybind_buttons.get(action_id) as Button
@@ -428,6 +449,9 @@ func _on_volume_changed(value: float) -> void:
 func _on_mute_toggled(toggled_on: bool) -> void:
 	BGM_PLAYER_SCRIPT.save_music_muted(toggled_on)
 	_apply_saved_music_volume()
+
+func _on_performance_trace_toggled(toggled_on: bool) -> void:
+	GAME_SETTINGS.save_performance_trace_enabled(toggled_on)
 
 func _on_window_mode_selected(index: int) -> void:
 	if window_mode_option == null:

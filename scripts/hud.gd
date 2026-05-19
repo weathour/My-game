@@ -10,6 +10,7 @@ const SURVIVORS_THEME := preload("res://scripts/ui/theme/survivors_ui_theme.gd")
 signal developer_level_up_requested
 signal developer_boss_spawn_requested(archetype_id: String)
 signal developer_small_boss_spawn_requested(archetype_id: String)
+signal developer_normal_enemy_batch_spawn_requested(archetype_id: String, count: int)
 signal developer_skill_unlock_requested(skill_id: String, tier: int)
 signal developer_blessing_grant_requested(blessing_id: String, tier: int)
 
@@ -37,6 +38,7 @@ var performance_overlay_panel: PanelContainer
 var performance_overlay_label: Label
 var attack_mode_hint_panel: PanelContainer
 var attack_mode_hint_label: Label
+var attack_mode_hint_key_name: String = ""
 var minimap_panel: PanelContainer
 var minimap_view: Control
 var minimap_bounds := Rect2(Vector2(-1600.0, -900.0), Vector2(3200.0, 1800.0))
@@ -273,9 +275,10 @@ func _map_to_minimap(world_position: Vector2, rect: Rect2) -> Vector2:
 func _update_attack_mode_hint(auto_attack: bool) -> void:
 	if attack_mode_hint_label == null:
 		return
-	var key_name := GAME_SETTINGS.get_key_display_name(GAME_SETTINGS.load_keycode(GAME_SETTINGS.ACTION_TOGGLE_ATTACK_MODE))
+	if attack_mode_hint_key_name == "":
+		attack_mode_hint_key_name = GAME_SETTINGS.get_key_display_name(GAME_SETTINGS.load_keycode(GAME_SETTINGS.ACTION_TOGGLE_ATTACK_MODE))
 	var mode_text := "自动攻击" if auto_attack else "鼠标跟随"
-	attack_mode_hint_label.text = "%s切换攻击方式：目前攻击为%s" % [key_name, mode_text]
+	attack_mode_hint_label.text = "%s切换攻击方式：目前攻击为%s" % [attack_mode_hint_key_name, mode_text]
 
 func _build_developer_panel(root: Control) -> void:
 	developer_panel = DEVELOPER_PANEL.new()
@@ -283,6 +286,7 @@ func _build_developer_panel(root: Control) -> void:
 	developer_panel.level_up_requested.connect(func(): developer_level_up_requested.emit())
 	developer_panel.boss_spawn_requested.connect(func(archetype_id: String): developer_boss_spawn_requested.emit(archetype_id))
 	developer_panel.small_boss_spawn_requested.connect(func(archetype_id: String): developer_small_boss_spawn_requested.emit(archetype_id))
+	developer_panel.normal_enemy_batch_spawn_requested.connect(func(archetype_id: String, count: int): developer_normal_enemy_batch_spawn_requested.emit(archetype_id, count))
 	developer_panel.skill_unlock_requested.connect(func(skill_id: String, tier: int): developer_skill_unlock_requested.emit(skill_id, tier))
 	developer_panel.blessing_grant_requested.connect(func(blessing_id: String, tier: int): developer_blessing_grant_requested.emit(blessing_id, tier))
 
@@ -293,6 +297,10 @@ func set_developer_invincibility_enabled(enabled: bool) -> void:
 func set_developer_boss_options(options: Array) -> void:
 	if developer_panel != null and developer_panel.has_method("set_boss_options"):
 		developer_panel.set_boss_options(options)
+
+func set_developer_normal_enemy_options(options: Array) -> void:
+	if developer_panel != null and developer_panel.has_method("set_normal_enemy_options"):
+		developer_panel.set_normal_enemy_options(options)
 
 func set_developer_skill_options(options: Array) -> void:
 	if developer_panel != null and developer_panel.has_method("set_skill_options"):
@@ -334,52 +342,56 @@ func _ensure_performance_overlay() -> void:
 	add_child(performance_overlay_panel)
 
 func update_display(level: int, current_experience: int, required_experience: int) -> void:
-	if level_label != null:
-		level_label.text = "绛夌骇 %d" % level
+	_set_label_text(level_label, "绛夌骇 %d" % level)
 	if experience_bar != null:
-		experience_bar.max_value = max(required_experience, 1)
-		experience_bar.value = current_experience
-	if experience_label != null:
-		experience_label.text = "%d / %d XP" % [current_experience, required_experience]
+		var next_max: int = max(required_experience, 1)
+		if int(experience_bar.max_value) != next_max:
+			experience_bar.max_value = next_max
+		if int(experience_bar.value) != current_experience:
+			experience_bar.value = current_experience
+	_set_label_text(experience_label, "%d / %d XP" % [current_experience, required_experience])
 	if combat_skill_bar != null and combat_skill_bar.has_method("update_experience"):
 		combat_skill_bar.update_experience(current_experience, required_experience)
 
 func update_health(current_health: float, max_health: float) -> void:
 	if health_bar != null:
-		health_bar.max_value = max(max_health, 1.0)
-		health_bar.value = current_health
-	if health_label != null:
-		health_label.text = "HP %.0f / %.0f" % [current_health, max_health]
+		var next_max: float = max(max_health, 1.0)
+		if health_bar.max_value != next_max:
+			health_bar.max_value = next_max
+		if health_bar.value != current_health:
+			health_bar.value = current_health
+	_set_label_text(health_label, "HP %.0f / %.0f" % [current_health, max_health])
 
 func update_mana(current_mana: float, max_mana: float) -> void:
 	if mana_bar != null:
-		mana_bar.max_value = max(max_mana, 1.0)
-		mana_bar.value = current_mana
-	if mana_label != null:
-		mana_label.text = "大招能量 %.0f / %.0f" % [current_mana, max_mana]
+		var next_max: float = max(max_mana, 1.0)
+		if mana_bar.max_value != next_max:
+			mana_bar.max_value = next_max
+		if mana_bar.value != current_mana:
+			mana_bar.value = current_mana
+	_set_label_text(mana_label, "大招能量 %.0f / %.0f" % [current_mana, max_mana])
 
 func update_stats(summary: Dictionary) -> void:
 	_update_attack_mode_hint(bool(summary.get("auto_attack_enabled", false)))
-	if role_label != null:
-		role_label.text = "角色 %s" % summary.get("role_name", "剑士")
+	_set_label_text(role_label, "角色 %s" % str(summary.get("role_name", "剑士")))
 	var active_role_index := int(summary.get("active_role_index", 0))
 	var team_roles: Array = summary.get("team_roles", ["剑士", "枪手", "术师"])
 	for index in range(team_role_labels.size()):
 		var label := team_role_labels[index]
 		var role_name := str(team_roles[index]) if index < team_roles.size() else "-"
 		if index == active_role_index:
-			label.text = "> %s <" % role_name
-			label.modulate = Color(1.0, 0.92, 0.45, 1.0)
+			_set_label_text(label, "> %s <" % role_name)
+			_set_label_modulate(label, Color(1.0, 0.92, 0.45, 1.0))
 		else:
-			label.text = role_name
-			label.modulate = Color(0.86, 0.86, 0.86, 1.0)
+			_set_label_text(label, role_name)
+			_set_label_modulate(label, Color(0.86, 0.86, 0.86, 1.0))
 
 	var switch_cooldown := float(summary.get("switch_cooldown", 0.0))
 	if switch_cd_label != null:
 		if switch_cooldown > 0.0:
-			switch_cd_label.text = "切人 CD %.1f 秒" % switch_cooldown
+			_set_label_text(switch_cd_label, "切人 CD %.1f 秒" % switch_cooldown)
 		else:
-			switch_cd_label.text = "切人 CD 就绪"
+			_set_label_text(switch_cd_label, "切人 CD 就绪")
 	if combat_skill_bar != null and combat_skill_bar.has_method("update_switch_cooldown"):
 		combat_skill_bar.update_switch_cooldown(str(summary.get("role_id", "swordsman")), switch_cooldown, float(summary.get("switch_cooldown_base", 8.0)))
 
@@ -394,22 +406,22 @@ func update_stats(summary: Dictionary) -> void:
 		switch_buff_parts.append("%s %.1f 秒" % [entry_blessing_name, entry_blessing_remaining])
 	if switch_power_label != null:
 		if not switch_buff_parts.is_empty():
-			switch_power_label.text = "切换增益 %s" % " / ".join(switch_buff_parts)
-			switch_power_label.modulate = Color(1.0, 0.9, 0.5, 0.98)
+			_set_label_text(switch_power_label, "切换增益 %s" % " / ".join(switch_buff_parts))
+			_set_label_modulate(switch_power_label, Color(1.0, 0.9, 0.5, 0.98))
 		else:
-			switch_power_label.text = "切换增益 无"
-			switch_power_label.modulate = Color(0.86, 0.9, 0.98, 0.92)
+			_set_label_text(switch_power_label, "切换增益 无")
+			_set_label_modulate(switch_power_label, Color(0.86, 0.9, 0.98, 0.92))
 
 	var current_energy: float = float(summary.get("current_mana", 0.0))
 	var required_energy: float = float(summary.get("ultimate_energy_cost", 100.0))
 	var ultimate_ready: bool = bool(summary.get("ultimate_ready", false))
 	if ultimate_label != null:
 		if ultimate_ready:
-			ultimate_label.text = "大招能量 %.0f / %.0f | 大招就绪" % [current_energy, required_energy]
-			ultimate_label.modulate = Color(1.0, 0.9, 0.5, 1.0)
+			_set_label_text(ultimate_label, "大招能量 %.0f / %.0f | 大招就绪" % [current_energy, required_energy])
+			_set_label_modulate(ultimate_label, Color(1.0, 0.9, 0.5, 1.0))
 		else:
-			ultimate_label.text = "大招能量 %.0f / %.0f | 大招未就绪" % [current_energy, required_energy]
-			ultimate_label.modulate = Color(0.88, 0.92, 0.98, 0.96)
+			_set_label_text(ultimate_label, "大招能量 %.0f / %.0f | 大招未就绪" % [current_energy, required_energy])
+			_set_label_modulate(ultimate_label, Color(0.88, 0.92, 0.98, 0.96))
 	var max_energy: float = max(float(summary.get("max_mana", 1.0)), 1.0)
 	if mana_bar != null and mana_bar.max_value != max_energy:
 		mana_bar.max_value = max_energy
@@ -425,7 +437,17 @@ func update_time(seconds_elapsed: float) -> void:
 	var total_seconds: int = int(floor(seconds_elapsed))
 	var minutes: int = int(total_seconds / 60.0)
 	var seconds: int = total_seconds % 60
-	time_label.text = "时间 %02d:%02d" % [minutes, seconds]
+	_set_label_text(time_label, "时间 %02d:%02d" % [minutes, seconds])
+
+func _set_label_text(label: Label, next_text: String) -> void:
+	if label == null or label.text == next_text:
+		return
+	label.text = next_text
+
+func _set_label_modulate(label: Label, next_color: Color) -> void:
+	if label == null or label.modulate == next_color:
+		return
+	label.modulate = next_color
 
 func show_boss_ui(boss_name: String, current_health: float, max_health: float) -> void:
 	if boss_panel != null:

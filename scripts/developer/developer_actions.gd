@@ -60,6 +60,15 @@ static func spawn_small_boss(main: Node, archetype_id: String) -> void:
 	var damage_multiplier: float = main._get_spawn_enemy_damage_multiplier()
 	main._spawn_configured_enemy("small_boss", archetype_id, health_multiplier, speed_multiplier, INF, 0.0, damage_multiplier)
 
+static func spawn_normal_enemy_batch(main: Node, archetype_id: String, count: int) -> void:
+	if main == null or main.player == null or not ENEMY_ARCHETYPE_DATABASE.is_normal_archetype(archetype_id):
+		return
+	var spawn_count: int = max(1, count)
+	var health_multiplier: float = main._get_spawn_enemy_health_multiplier("normal")
+	var speed_multiplier: float = main._get_spawn_enemy_speed_multiplier()
+	var damage_multiplier: float = main._get_spawn_enemy_damage_multiplier()
+	main.ENEMY_SPAWN_FLOW.spawn_wave_pack(main, "normal", archetype_id, spawn_count, health_multiplier, speed_multiplier, damage_multiplier)
+
 static func unlock_skill(main: Node, skill_id: String, tier: int) -> void:
 	if main == null or main.player == null:
 		return

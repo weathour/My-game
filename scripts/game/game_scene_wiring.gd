@@ -38,6 +38,7 @@ static func _setup_hud(main: Node) -> void:
 	_connect_if_present(main.hud, "developer_level_up_requested", Callable(main, "_on_developer_level_up_requested"))
 	_connect_if_present(main.hud, "developer_boss_spawn_requested", Callable(main, "_on_developer_boss_spawn_requested"))
 	_connect_if_present(main.hud, "developer_small_boss_spawn_requested", Callable(main, "_on_developer_small_boss_spawn_requested"))
+	_connect_if_present(main.hud, "developer_normal_enemy_batch_spawn_requested", Callable(main, "_on_developer_normal_enemy_batch_spawn_requested"))
 	_connect_if_present(main.hud, "developer_skill_unlock_requested", Callable(main, "_on_developer_skill_unlock_requested"))
 	_connect_if_present(main.hud, "developer_blessing_grant_requested", Callable(main, "_on_developer_blessing_grant_requested"))
 

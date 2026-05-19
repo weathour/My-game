@@ -3,6 +3,8 @@ extends RefCounted
 const SETTINGS_PATH := "user://settings.cfg"
 const KEY_SECTION := "keybinds"
 const DISPLAY_SECTION := "display"
+const GAMEPLAY_SECTION := "gameplay"
+const PERFORMANCE_TRACE_ENABLED_KEY := "performance_trace_enabled"
 
 const WINDOW_MODE_WINDOWED := "windowed"
 const WINDOW_MODE_FULLSCREEN := "fullscreen"
@@ -11,9 +13,12 @@ const WINDOW_SIZE_1600X900 := "1600x900"
 const WINDOW_SIZE_1920X1080 := "1920x1080"
 const DEFAULT_WINDOW_MODE := WINDOW_MODE_WINDOWED
 const DEFAULT_WINDOW_SIZE := WINDOW_SIZE_1280X720
+const DEFAULT_PERFORMANCE_TRACE_ENABLED := false
 const ASPECT_WIDTH := 16
 const ASPECT_HEIGHT := 9
 const MIN_WINDOW_WIDTH := 960
+
+static var cached_config: ConfigFile
 
 const ACTION_MOVE_UP := "move_up"
 const ACTION_MOVE_DOWN := "move_down"
@@ -59,16 +64,12 @@ const WINDOW_SIZE_OPTIONS := {
 }
 
 static func load_keycode(action_id: String) -> int:
-	var config := ConfigFile.new()
-	var load_result: Error = config.load(SETTINGS_PATH)
+	var config := _get_config()
 	var default_keycode: int = int(DEFAULT_KEYS.get(action_id, KEY_NONE))
-	if load_result != OK:
-		return default_keycode
 	return int(config.get_value(KEY_SECTION, action_id, default_keycode))
 
 static func save_keycode(action_id: String, keycode: int) -> void:
-	var config := ConfigFile.new()
-	config.load(SETTINGS_PATH)
+	var config := _get_config()
 	config.set_value(KEY_SECTION, action_id, keycode)
 	config.save(SETTINGS_PATH)
 
@@ -79,8 +80,7 @@ static func load_key_map() -> Dictionary:
 	return key_map
 
 static func save_key_map(key_map: Dictionary) -> void:
-	var config := ConfigFile.new()
-	config.load(SETTINGS_PATH)
+	var config := _get_config()
 	for action_id in ACTION_ORDER:
 		config.set_value(KEY_SECTION, action_id, int(key_map.get(action_id, DEFAULT_KEYS.get(action_id, KEY_NONE))))
 	config.save(SETTINGS_PATH)
@@ -107,10 +107,7 @@ static func get_key_display_name(keycode: int) -> String:
 	return display_name
 
 static func load_window_mode() -> String:
-	var config := ConfigFile.new()
-	var load_result: Error = config.load(SETTINGS_PATH)
-	if load_result != OK:
-		return DEFAULT_WINDOW_MODE
+	var config := _get_config()
 	var mode := str(config.get_value(DISPLAY_SECTION, "window_mode", DEFAULT_WINDOW_MODE))
 	if mode not in [WINDOW_MODE_WINDOWED, WINDOW_MODE_FULLSCREEN]:
 		return DEFAULT_WINDOW_MODE
@@ -119,16 +116,12 @@ static func load_window_mode() -> String:
 static func save_window_mode(mode: String) -> void:
 	if mode not in [WINDOW_MODE_WINDOWED, WINDOW_MODE_FULLSCREEN]:
 		mode = DEFAULT_WINDOW_MODE
-	var config := ConfigFile.new()
-	config.load(SETTINGS_PATH)
+	var config := _get_config()
 	config.set_value(DISPLAY_SECTION, "window_mode", mode)
 	config.save(SETTINGS_PATH)
 
 static func load_window_size_key() -> String:
-	var config := ConfigFile.new()
-	var load_result: Error = config.load(SETTINGS_PATH)
-	if load_result != OK:
-		return DEFAULT_WINDOW_SIZE
+	var config := _get_config()
 	var size_key := str(config.get_value(DISPLAY_SECTION, "window_size", DEFAULT_WINDOW_SIZE))
 	if not WINDOW_SIZE_OPTIONS.has(size_key):
 		return DEFAULT_WINDOW_SIZE
@@ -137,9 +130,17 @@ static func load_window_size_key() -> String:
 static func save_window_size_key(size_key: String) -> void:
 	if not WINDOW_SIZE_OPTIONS.has(size_key):
 		size_key = DEFAULT_WINDOW_SIZE
-	var config := ConfigFile.new()
-	config.load(SETTINGS_PATH)
+	var config := _get_config()
 	config.set_value(DISPLAY_SECTION, "window_size", size_key)
+	config.save(SETTINGS_PATH)
+
+static func load_performance_trace_enabled() -> bool:
+	var config := _get_config()
+	return bool(config.get_value(GAMEPLAY_SECTION, PERFORMANCE_TRACE_ENABLED_KEY, DEFAULT_PERFORMANCE_TRACE_ENABLED))
+
+static func save_performance_trace_enabled(enabled: bool) -> void:
+	var config := _get_config()
+	config.set_value(GAMEPLAY_SECTION, PERFORMANCE_TRACE_ENABLED_KEY, enabled)
 	config.save(SETTINGS_PATH)
 
 static func get_window_size(size_key: String = "") -> Vector2i:
@@ -153,3 +154,9 @@ static func normalize_16_9_size(size: Vector2i) -> Vector2i:
 	var width := maxi(MIN_WINDOW_WIDTH, size.x)
 	var height := int(round(float(width) * float(ASPECT_HEIGHT) / float(ASPECT_WIDTH)))
 	return Vector2i(width, height)
+
+static func _get_config() -> ConfigFile:
+	if cached_config == null:
+		cached_config = ConfigFile.new()
+		cached_config.load(SETTINGS_PATH)
+	return cached_config

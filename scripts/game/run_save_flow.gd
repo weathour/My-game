@@ -3,10 +3,14 @@ extends RefCounted
 const SAVE_MANAGER := preload("res://scripts/save_manager.gd")
 const DEVELOPER_MODE := preload("res://scripts/developer_mode.gd")
 const RUN_SAVE_RUNTIME_FLOW := preload("res://scripts/game/run_save_runtime_flow.gd")
+const PERFORMANCE_COUNTERS := preload("res://scripts/game/performance_counters.gd")
+const PERFORMANCE_RECORDER := preload("res://scripts/game/performance_recorder.gd")
 
 static func save_run_state(main: Node) -> void:
 	if main.game_over or main.player == null or DEVELOPER_MODE.should_disable_save():
 		return
+	var save_start_usec: int = Time.get_ticks_usec()
+	PERFORMANCE_RECORDER.begin_scope("save_run_ms")
 
 	var game_bgm = main._get_game_bgm()
 	var music_position: float = 0.0
@@ -32,7 +36,18 @@ static func save_run_state(main: Node) -> void:
 	RUN_SAVE_RUNTIME_FLOW.append_group_save_data(main, save_data, "gems", "exp_gems")
 	RUN_SAVE_RUNTIME_FLOW.append_group_save_data(main, save_data, "heart_pickups", "heart_pickups")
 
-	SAVE_MANAGER.save_run(save_data)
+	var payload_chars: int = int(SAVE_MANAGER.save_run(save_data))
+	PERFORMANCE_RECORDER.end_scope("save_run_ms")
+	_record_save_probe_counters(save_data, payload_chars, Time.get_ticks_usec() - save_start_usec)
+
+static func _record_save_probe_counters(save_data: Dictionary, payload_chars: int, elapsed_usec: int) -> void:
+	PERFORMANCE_COUNTERS.add("save_run_calls", 1)
+	PERFORMANCE_COUNTERS.add("save_run_ms_x10", int(round(float(max(0, elapsed_usec)) / 100.0)))
+	PERFORMANCE_COUNTERS.add("save_payload_kb", int(ceil(float(max(0, payload_chars)) / 1024.0)))
+	PERFORMANCE_COUNTERS.add("save_enemies", (save_data.get("enemies", []) as Array).size())
+	PERFORMANCE_COUNTERS.add("save_enemy_projectiles", (save_data.get("enemy_projectiles", []) as Array).size())
+	PERFORMANCE_COUNTERS.add("save_gems", (save_data.get("gems", []) as Array).size())
+	PERFORMANCE_COUNTERS.add("save_hearts", (save_data.get("heart_pickups", []) as Array).size())
 
 static func _get_runtime_or_group_nodes(main: Node, group_name: String) -> Array:
 	return RUN_SAVE_RUNTIME_FLOW.get_runtime_or_group_nodes(main, group_name)

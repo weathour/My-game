@@ -27,8 +27,7 @@ const PROFILES := {
 		"recovery_margin_scale": 1.15,
 		"active_enemy_limit": 40,
 		"enemy_projectile_limit": 180,
-		"temporary_effect_limit": 260,
-		"autosave_interval": 3.0
+		"temporary_effect_limit": 260
 	},
 	"normal": {
 		"id": "normal",
@@ -53,8 +52,7 @@ const PROFILES := {
 		"recovery_margin_scale": 1.00,
 		"active_enemy_limit": 40,
 		"enemy_projectile_limit": 240,
-		"temporary_effect_limit": 340,
-		"autosave_interval": 3.0
+		"temporary_effect_limit": 340
 	},
 	"hard": {
 		"id": "hard",
@@ -79,8 +77,7 @@ const PROFILES := {
 		"recovery_margin_scale": 0.95,
 		"active_enemy_limit": 40,
 		"enemy_projectile_limit": 280,
-		"temporary_effect_limit": 400,
-		"autosave_interval": 4.0
+		"temporary_effect_limit": 400
 	},
 	"hell": {
 		"id": "hell",
@@ -105,8 +102,7 @@ const PROFILES := {
 		"recovery_margin_scale": 0.78,
 		"active_enemy_limit": 40,
 		"enemy_projectile_limit": 430,
-		"temporary_effect_limit": 560,
-		"autosave_interval": 4.5
+		"temporary_effect_limit": 560
 	}
 }
 

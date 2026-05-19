@@ -1426,8 +1426,19 @@ func apply_attribute_upgrade(option_id: String) -> void:
 func get_stat_summary() -> Dictionary:
 	return PLAYER_STAT_PAYLOAD.build_from_player(self)
 
-func _get_active_skill_cooldown_slots(attack_interval: float) -> Array:
-	return PLAYER_SKILL_COOLDOWN_FLOW.get_active_skill_cooldown_slots(self, attack_interval)
+func get_frame_hud_summary() -> Dictionary:
+	return PLAYER_STAT_PAYLOAD.build_frame_hud_from_player(self)
+
+func emit_frame_stats_changed() -> void:
+	stats_changed.emit(get_frame_hud_summary())
+
+func _emit_deferred_level_up_requested() -> void:
+	if is_dead or not level_up_active:
+		return
+	level_up_requested.emit([])
+
+func _get_active_skill_cooldown_slots(attack_interval: float, include_descriptions: bool = true) -> Array:
+	return PLAYER_SKILL_COOLDOWN_FLOW.get_active_skill_cooldown_slots(self, attack_interval, include_descriptions)
 
 func get_final_core_options() -> Array:
 	return PLAYER_LEVEL_OPTIONS.get_final_core_options()
