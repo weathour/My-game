@@ -13,11 +13,13 @@ REQUIRED_AUTOLOADS = {
 }
 REQUIRED_SETTINGS = {
     "run/main_scene": '"res://scenes/main_menu.tscn"',
+    "run/max_fps": "0",
     "window/size/viewport_width": "1280",
     "window/size/viewport_height": "720",
     "window/size/resizable": "true",
     "window/stretch/mode": '"canvas_items"',
     "window/stretch/aspect": '"keep"',
+    "window/vsync/vsync_mode": "0",
 }
 REQUIRED_FILES = [
     "scripts/game/game_map_flow.gd",

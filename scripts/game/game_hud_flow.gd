@@ -2,8 +2,9 @@ extends RefCounted
 
 const DEVELOPER_OPTION_PROVIDER := preload("res://scripts/developer/developer_option_provider.gd")
 const PERFORMANCE_MONITOR := preload("res://scripts/game/performance_monitor.gd")
-const FRAME_TIME_REFRESH_INTERVAL := 0.10
-const FRAME_STATS_REFRESH_INTERVAL := 0.20
+const HUD_PRESENTATION_REFRESH_INTERVAL := 1.0 / 30.0
+const FRAME_TIME_REFRESH_INTERVAL := HUD_PRESENTATION_REFRESH_INTERVAL
+const FRAME_STATS_REFRESH_INTERVAL := HUD_PRESENTATION_REFRESH_INTERVAL
 const LAST_FRAME_TIME_REFRESH_META := "last_frame_time_refresh_time"
 const LAST_FRAME_STATS_REFRESH_META := "last_frame_stats_refresh_time"
 
