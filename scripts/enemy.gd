@@ -182,6 +182,7 @@ var cached_motion_visual_facing_sign: int = 0
 var pooled_inactive: bool = false
 # Explicit velocity (was inherited from CharacterBody2D)
 var velocity: Vector2 = Vector2.ZERO
+var batch_simulation_enabled: bool = false
 
 func _ready() -> void:
 	ENEMY_RUNTIME_PROCESS.ready(self)
@@ -190,7 +191,25 @@ func _exit_tree() -> void:
 	ENEMY_RUNTIME_PROCESS.exit_tree(self)
 
 func _physics_process(delta: float) -> void:
+	if batch_simulation_enabled and can_use_batch_simulation():
+		return
 	ENEMY_RUNTIME_PROCESS.physics_process(self, delta)
+
+func batch_physics_process(delta: float) -> void:
+	ENEMY_RUNTIME_PROCESS.physics_process(self, delta)
+
+func can_use_batch_simulation() -> bool:
+	if pooled_inactive:
+		return false
+	if enemy_kind != "normal":
+		return false
+	if behavior_id != "chaser" or secondary_behavior_id != "":
+		return false
+	if boss_visual_instance != null:
+		return false
+	if _has_timed_behavior_traits():
+		return false
+	return true
 
 func apply_enemy_profile(kind: String, profile: Dictionary) -> void:
 	pooled_inactive = false
@@ -288,12 +307,14 @@ func take_batched_damage(amount: float) -> bool:
 	return ENEMY_DAMAGE.apply_damage(self, amount, false)
 
 func activate_pooled_enemy() -> void:
+	batch_simulation_enabled = false
 	ENEMY_POOL_LIFECYCLE.activate_pooled_enemy(self)
 
 func release_after_defeat() -> bool:
 	return ENEMY_POOL_LIFECYCLE.release_after_defeat(self)
 
 func _prepare_for_pool() -> void:
+	batch_simulation_enabled = false
 	ENEMY_POOL_LIFECYCLE.prepare_for_pool(self)
 
 func apply_slow(multiplier: float, duration: float) -> void:

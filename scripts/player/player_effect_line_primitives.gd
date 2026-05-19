@@ -1,5 +1,6 @@
 extends RefCounted
 
+const PERFORMANCE_GUARD := preload("res://scripts/game/performance_guard.gd")
 const PERFORMANCE_COUNTERS := preload("res://scripts/game/performance_counters.gd")
 const LINE_POOL_LIMIT := 96
 const COMPOSITE_POOL_LIMIT_PER_KIND := 32
@@ -26,12 +27,18 @@ static func _mark_temporary_effect(node: Node) -> void:
 		PERFORMANCE_COUNTERS.add("temporary_effect_spawns", 1)
 
 static func _can_spawn_temporary_effect(owner: Node) -> bool:
-	return owner != null and owner.get_tree() != null
+	if owner == null or owner.get_tree() == null:
+		return false
+	var current_scene: Node = owner.get_tree().current_scene
+	if current_scene != null and current_scene.has_method("_can_spawn_runtime_group"):
+		var limit: int = PERFORMANCE_GUARD.get_dynamic_limit(current_scene, "temporary_effects", PERFORMANCE_GUARD.DEFAULT_TEMPORARY_EFFECT_LIMIT)
+		return bool(current_scene._can_spawn_runtime_group("temporary_effects", limit))
+	return true
 
 static func spawn_dash_line_effect(owner: Node, start_position: Vector2, end_position: Vector2, color: Color, width: float, duration: float) -> void:
 	if not _can_spawn_temporary_effect(owner):
 		return
-	var current_scene := owner.get_tree().current_scene
+	var current_scene: Node = owner.get_tree().current_scene
 	if current_scene == null:
 		return
 
@@ -52,7 +59,7 @@ static func spawn_dash_line_effect(owner: Node, start_position: Vector2, end_pos
 static func spawn_ring_effect(owner: Node, center: Vector2, radius: float, color: Color, width: float, duration: float, points: PackedVector2Array) -> void:
 	if not _can_spawn_temporary_effect(owner):
 		return
-	var current_scene := owner.get_tree().current_scene
+	var current_scene: Node = owner.get_tree().current_scene
 	if current_scene == null:
 		return
 
@@ -108,7 +115,7 @@ static func _prepare_pooled_line(line: Line2D, current_scene: Node) -> void:
 static func spawn_slash_effect(owner: Node, center: Vector2, direction: Vector2, length: float, width: float, color: Color, duration: float) -> void:
 	if not _can_spawn_temporary_effect(owner):
 		return
-	var current_scene := owner.get_tree().current_scene
+	var current_scene: Node = owner.get_tree().current_scene
 	if current_scene == null:
 		return
 
@@ -136,7 +143,7 @@ static func spawn_slash_effect(owner: Node, center: Vector2, direction: Vector2,
 static func spawn_line_corridor_effect(owner: Node, start_position: Vector2, end_position: Vector2, hit_width: float, color: Color, duration: float) -> void:
 	if not _can_spawn_temporary_effect(owner):
 		return
-	var current_scene := owner.get_tree().current_scene
+	var current_scene: Node = owner.get_tree().current_scene
 	if current_scene == null:
 		return
 
@@ -167,7 +174,7 @@ static func spawn_line_corridor_effect(owner: Node, start_position: Vector2, end
 static func spawn_crescent_wave_effect(owner: Node, center: Vector2, direction: Vector2, radius: float, color: Color, duration: float, arc_band_points: PackedVector2Array, edge_points: PackedVector2Array) -> void:
 	if not _can_spawn_temporary_effect(owner):
 		return
-	var current_scene := owner.get_tree().current_scene
+	var current_scene: Node = owner.get_tree().current_scene
 	if current_scene == null:
 		return
 
@@ -209,7 +216,7 @@ static func spawn_owner_crescent_wave_effect(owner, center: Vector2, direction: 
 static func spawn_thrust_effect(owner: Node, start_position: Vector2, end_position: Vector2, color: Color, width: float, duration: float, show_arrow: bool = true) -> void:
 	if not _can_spawn_temporary_effect(owner):
 		return
-	var current_scene := owner.get_tree().current_scene
+	var current_scene: Node = owner.get_tree().current_scene
 	if current_scene == null:
 		return
 

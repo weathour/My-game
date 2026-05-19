@@ -6,6 +6,8 @@ const FLY_FRAME_SIZE := Vector2i(150, 150)
 const HIT_FRAME_SIZE := Vector2i(150, 150)
 const VISUAL_SCALE := Vector2(1.8, 1.8)
 
+static var shared_sprite_frames: SpriteFrames
+
 var sprite: AnimatedSprite2D
 var current_animation: String = ""
 var hit_lock_remaining: float = 0.0
@@ -58,19 +60,24 @@ func _ensure_sprite() -> void:
 		sprite = AnimatedSprite2D.new()
 		sprite.name = "AnimatedSprite2D"
 		add_child(sprite)
-	sprite.sprite_frames = _build_frames()
+	sprite.sprite_frames = _get_shared_frames()
 	sprite.centered = true
 	sprite.position = Vector2(0.0, -18.0)
 	sprite.scale = VISUAL_SCALE
 	sprite.z_index = 1
 
-func _build_frames() -> SpriteFrames:
+static func _get_shared_frames() -> SpriteFrames:
+	if shared_sprite_frames == null:
+		shared_sprite_frames = _build_frames()
+	return shared_sprite_frames
+
+static func _build_frames() -> SpriteFrames:
 	var frames := SpriteFrames.new()
 	_add_strip_animation(frames, "fly", FLY_TEXTURE, 8, 10.0, true, FLY_FRAME_SIZE)
 	_add_strip_animation(frames, "hit", HIT_TEXTURE, 4, 14.0, false, HIT_FRAME_SIZE)
 	return frames
 
-func _add_strip_animation(frames: SpriteFrames, animation_name: String, texture: Texture2D, frame_count: int, speed: float, loop: bool, frame_size: Vector2i) -> void:
+static func _add_strip_animation(frames: SpriteFrames, animation_name: String, texture: Texture2D, frame_count: int, speed: float, loop: bool, frame_size: Vector2i) -> void:
 	frames.add_animation(animation_name)
 	frames.set_animation_loop(animation_name, loop)
 	frames.set_animation_speed(animation_name, speed)

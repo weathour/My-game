@@ -3,6 +3,7 @@ extends Node2D
 const ENEMY_BULLET_SCENE_PATH := "res://scenes/enemy_bullet.tscn"
 const ENEMY_BULLET_SCENE := preload("res://scenes/enemy_bullet.tscn")
 const PERFORMANCE_GUARD := preload("res://scripts/game/performance_guard.gd")
+const ENEMY_GEOMETRY := preload("res://scripts/enemies/enemy_geometry.gd")
 const MAX_TURN_CATCH_UP_TICKS := 8
 const POOL_GROUP := "enemy_projectile_pool"
 const POOL_SOFT_LIMIT := 96
@@ -49,6 +50,9 @@ var turn_tick_remaining: float = 0.0
 var return_started: bool = false
 var split_performed: bool = false
 var pooled: bool = false
+var batch_simulation_enabled: bool = false
+
+static var visual_shape_cache: Dictionary = {}
 
 func _ready() -> void:
 	if pooled:
@@ -60,6 +64,7 @@ func _exit_tree() -> void:
 
 func reset_projectile(config: Dictionary) -> void:
 	pooled = false
+	batch_simulation_enabled = false
 	show()
 	set_process(true)
 	set_physics_process(true)
@@ -102,6 +107,7 @@ func recycle() -> void:
 		queue_free()
 		return
 	pooled = true
+	batch_simulation_enabled = false
 	hide()
 	set_process(false)
 	set_physics_process(false)
@@ -129,6 +135,19 @@ func _initialize_runtime_state() -> void:
 	_apply_visuals()
 
 func _physics_process(delta: float) -> void:
+	if batch_simulation_enabled and can_use_batch_simulation():
+		return
+	_run_physics_tick(delta)
+
+func batch_physics_process(delta: float) -> void:
+	_run_physics_tick(delta)
+
+func can_use_batch_simulation() -> bool:
+	return not pooled
+
+func _run_physics_tick(delta: float) -> void:
+	if pooled:
+		return
 	lifetime -= delta
 	if lifetime <= 0.0:
 		if motion_mode == "returning_sine" and split_on_return and not split_performed:
@@ -165,9 +184,10 @@ func _update_straight_motion(delta: float) -> void:
 func _update_sine_motion(delta: float) -> void:
 	forward_distance += speed * delta
 	var forward_offset := base_direction * forward_distance
-	var lateral_offset := perpendicular_direction * sin(travel_time * TAU * sine_frequency + sine_phase) * sine_amplitude
+	var wave_phase_value: float = travel_time * TAU * sine_frequency + sine_phase
+	var lateral_offset := perpendicular_direction * sin(wave_phase_value) * sine_amplitude
 	global_position = base_position + forward_offset + lateral_offset
-	rotation = (base_direction + perpendicular_direction * cos(travel_time * TAU * sine_frequency + sine_phase) * 0.28).angle()
+	rotation = (base_direction + perpendicular_direction * cos(wave_phase_value) * 0.28).angle()
 
 func _update_turning_motion(delta: float) -> void:
 	if turn_delay_remaining > 0.0:
@@ -199,9 +219,9 @@ func _update_returning_sine_motion(delta: float) -> bool:
 		return false
 
 	return_started = true
-	var return_target := Vector2(return_target_x, return_target_y)
-	var to_target := return_target - global_position
-	var distance_to_target := to_target.length()
+	var return_target: Vector2 = Vector2(return_target_x, return_target_y)
+	var to_target: Vector2 = return_target - global_position
+	var distance_to_target: float = sqrt(to_target.length_squared())
 	if distance_to_target <= max(hit_radius, return_speed * delta):
 		global_position = return_target
 		if split_on_return and not split_performed:
@@ -209,7 +229,7 @@ func _update_returning_sine_motion(delta: float) -> bool:
 		recycle()
 		return true
 
-	direction = to_target.normalized()
+	direction = to_target / distance_to_target
 	var wobble := direction.orthogonal() * sin(travel_time * TAU * sine_frequency + sine_phase) * sine_amplitude * 0.18
 	global_position += (direction * return_speed + wobble) * delta
 	rotation = direction.angle()
@@ -224,7 +244,8 @@ func _try_hit_player() -> void:
 		target_center = target.get_hurtbox_center()
 	if target.has_method("get_hurtbox_radius"):
 		target_radius = float(target.get_hurtbox_radius())
-	if global_position.distance_to(target_center) > hit_radius + target_radius:
+	var total_radius: float = hit_radius + target_radius
+	if global_position.distance_squared_to(target_center) > total_radius * total_radius:
 		return
 	if target.has_method("take_damage"):
 		target.take_damage(damage)
@@ -331,12 +352,21 @@ func _apply_visuals() -> void:
 
 	ring.width = 2.5 * max(size_scale, 0.8)
 	ring.default_color = Color(0.05, 0.02, 0.04, 0.7)
-	ring.points = _build_ring_points(12.0 * polygon.scale.x)
+	ring.points = ENEMY_GEOMETRY.build_circle_points(12.0 * polygon.scale.x, 14)
 
 func _get_shape_for_mode() -> PackedVector2Array:
+	var shape_key: String = "straight"
 	match motion_mode:
 		"sine", "quarter_sine", "returning_sine":
-			return PackedVector2Array([
+			shape_key = "curve"
+		"turning":
+			shape_key = "turning"
+	if visual_shape_cache.has(shape_key):
+		return visual_shape_cache[shape_key] as PackedVector2Array
+	var shape: PackedVector2Array = PackedVector2Array()
+	match shape_key:
+		"curve":
+			shape = PackedVector2Array([
 				Vector2(0.0, -9.0),
 				Vector2(10.0, -3.0),
 				Vector2(12.0, 0.0),
@@ -345,7 +375,7 @@ func _get_shape_for_mode() -> PackedVector2Array:
 				Vector2(-8.0, 0.0)
 			])
 		"turning":
-			return PackedVector2Array([
+			shape = PackedVector2Array([
 				Vector2(0.0, -10.0),
 				Vector2(8.0, -4.0),
 				Vector2(10.0, 4.0),
@@ -354,12 +384,14 @@ func _get_shape_for_mode() -> PackedVector2Array:
 				Vector2(-8.0, -4.0)
 			])
 		_:
-			return PackedVector2Array([
+			shape = PackedVector2Array([
 				Vector2(0.0, -8.0),
 				Vector2(8.0, 0.0),
 				Vector2(0.0, 8.0),
 				Vector2(-8.0, 0.0)
 			])
+	visual_shape_cache[shape_key] = shape
+	return shape
 
 func _get_visual_scale() -> Vector2:
 	match motion_mode:
@@ -373,14 +405,6 @@ func _get_visual_scale() -> Vector2:
 			return Vector2(1.3, 1.3) * size_scale
 		_:
 			return Vector2.ONE * size_scale
-
-func _build_ring_points(radius: float) -> PackedVector2Array:
-	var points := PackedVector2Array()
-	var segments := 14
-	for index in range(segments):
-		var angle := TAU * float(index) / float(segments)
-		points.append(Vector2.RIGHT.rotated(angle) * radius)
-	return points
 
 func get_save_data() -> Dictionary:
 	return {
@@ -426,6 +450,8 @@ func get_save_data() -> Dictionary:
 	}
 
 func apply_save_data(data: Dictionary, target_node: Node2D) -> void:
+	pooled = false
+	batch_simulation_enabled = false
 	var position_data = data.get("position", [0.0, 0.0])
 	if position_data.size() >= 2:
 		global_position = Vector2(float(position_data[0]), float(position_data[1]))

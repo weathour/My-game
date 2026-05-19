@@ -1,5 +1,6 @@
 extends RefCounted
 
+const PERFORMANCE_GUARD := preload("res://scripts/game/performance_guard.gd")
 const PERFORMANCE_COUNTERS := preload("res://scripts/game/performance_counters.gd")
 const PLAYER_GUNNER_INTERSECT_EFFECTS := preload("res://scripts/player/player_gunner_intersect_effects.gd")
 const AUTHORED_SCENE_POOL_LIMIT_PER_SCENE := 32
@@ -30,7 +31,13 @@ static func _mark_temporary_effect(node: Node) -> void:
 		PERFORMANCE_COUNTERS.add("temporary_effect_spawns", 1)
 
 static func _can_spawn_temporary_effect(owner) -> bool:
-	return owner != null and owner.get_tree() != null
+	if owner == null or owner.get_tree() == null:
+		return false
+	var current_scene: Node = owner.get_tree().current_scene
+	if current_scene != null and current_scene.has_method("_can_spawn_runtime_group"):
+		var limit: int = PERFORMANCE_GUARD.get_dynamic_limit(current_scene, "temporary_effects", PERFORMANCE_GUARD.DEFAULT_TEMPORARY_EFFECT_LIMIT)
+		return bool(current_scene._can_spawn_runtime_group("temporary_effects", limit))
+	return true
 
 static func spawn_sketch_sprite_effect(
 		owner,

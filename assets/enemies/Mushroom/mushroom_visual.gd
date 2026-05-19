@@ -6,6 +6,8 @@ const HIT_TEXTURE := preload("res://assets/enemies/Mushroom/Mushroom-Hit.png")
 const FRAME_SIZE := Vector2i(80, 64)
 const VISUAL_SCALE := Vector2(1.26, 1.26)
 
+static var shared_sprite_frames: SpriteFrames
+
 var sprite: AnimatedSprite2D
 var current_animation: String = ""
 var hit_lock_remaining: float = 0.0
@@ -58,20 +60,25 @@ func _ensure_sprite() -> void:
 		sprite = AnimatedSprite2D.new()
 		sprite.name = "AnimatedSprite2D"
 		add_child(sprite)
-	sprite.sprite_frames = _build_frames()
+	sprite.sprite_frames = _get_shared_frames()
 	sprite.centered = true
 	sprite.position = Vector2(0.0, -8.0)
 	sprite.scale = VISUAL_SCALE
 	sprite.z_index = 1
 
-func _build_frames() -> SpriteFrames:
+static func _get_shared_frames() -> SpriteFrames:
+	if shared_sprite_frames == null:
+		shared_sprite_frames = _build_frames()
+	return shared_sprite_frames
+
+static func _build_frames() -> SpriteFrames:
 	var frames := SpriteFrames.new()
 	_add_strip_animation(frames, "idle", IDLE_TEXTURE, 7, 8.0)
 	_add_strip_animation(frames, "run", RUN_TEXTURE, 8, 10.0)
 	_add_strip_animation(frames, "hit", HIT_TEXTURE, 5, 18.0, false)
 	return frames
 
-func _add_strip_animation(frames: SpriteFrames, animation_name: String, texture: Texture2D, frame_count: int, speed: float, loop: bool = true) -> void:
+static func _add_strip_animation(frames: SpriteFrames, animation_name: String, texture: Texture2D, frame_count: int, speed: float, loop: bool = true) -> void:
 	frames.add_animation(animation_name)
 	frames.set_animation_loop(animation_name, loop)
 	frames.set_animation_speed(animation_name, speed)

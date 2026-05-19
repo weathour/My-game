@@ -8,7 +8,7 @@ const ENEMY_PROJECTILE_POOL_GROUP := "enemy_projectile_pool"
 static func fire_shooter_pattern(enemy) -> void:
 	if enemy.target == null or not is_instance_valid(enemy.target):
 		return
-	var aim_direction: Vector2 = enemy.global_position.direction_to(enemy.target.global_position)
+	var aim_direction: Vector2 = enemy._cached_direction_to_target
 	if aim_direction == Vector2.ZERO:
 		aim_direction = Vector2.RIGHT
 	var start_position: Vector2 = enemy.global_position + aim_direction * (22.0 + enemy.scale.x * 4.0)

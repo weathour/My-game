@@ -14,11 +14,16 @@ const CRITICAL_FPS_DEATH_BURST_BUDGET_PER_FRAME := 2
 const HIT_FLASH_BUDGET_PER_FRAME := 28
 const LOW_FPS_HIT_FLASH_BUDGET_PER_FRAME := 12
 const CRITICAL_FPS_HIT_FLASH_BUDGET_PER_FRAME := 5
+const KILL_DAMAGE_NUMBER_BUDGET_PER_FRAME := 6
+const LOW_FPS_KILL_DAMAGE_NUMBER_BUDGET_PER_FRAME := 3
+const CRITICAL_FPS_KILL_DAMAGE_NUMBER_BUDGET_PER_FRAME := 1
 const DAMAGE_LABEL_POOL_LIMIT := 64
 const DEATH_BURST_POOL_LIMIT := 32
 
 static var damage_number_budget_frame: int = -1
 static var damage_number_budget_used: int = 0
+static var kill_damage_number_budget_frame: int = -1
+static var kill_damage_number_budget_used: int = 0
 static var death_burst_budget_frame: int = -1
 static var death_burst_budget_used: int = 0
 static var hit_flash_budget_frame: int = -1
@@ -45,7 +50,8 @@ static func play_hit_feedback(enemy, damage_amount: float, killed: bool) -> void
 		enemy.hit_flash_remaining = HIT_FLASH_DURATION
 		_play_custom_hit_visual(enemy)
 
-	if killed or _consume_damage_number_budget():
+	var can_show_damage_number := _consume_kill_damage_number_budget() if killed else _consume_damage_number_budget()
+	if can_show_damage_number:
 		show_damage_number(enemy, damage_amount, killed)
 	if killed and _consume_death_burst_budget():
 		spawn_death_burst(enemy)
@@ -99,7 +105,7 @@ static func show_damage_number(enemy, damage_amount: float, killed: bool) -> voi
 	var current_scene: Node = _get_enemy_current_scene(enemy)
 	if current_scene == null:
 		return
-	if not killed and not _can_spawn_temporary_effect(current_scene):
+	if not _can_spawn_temporary_effect(current_scene):
 		return
 
 	var label := _acquire_damage_label(current_scene)
@@ -152,6 +158,24 @@ static func _get_damage_number_budget_per_frame() -> int:
 	if fps > 0 and fps < PERFORMANCE_GUARD.LOW_FPS_THRESHOLD:
 		return LOW_FPS_DAMAGE_NUMBER_BUDGET_PER_FRAME
 	return DAMAGE_NUMBER_BUDGET_PER_FRAME
+
+static func _consume_kill_damage_number_budget() -> bool:
+	var current_frame := Engine.get_physics_frames()
+	if kill_damage_number_budget_frame != current_frame:
+		kill_damage_number_budget_frame = current_frame
+		kill_damage_number_budget_used = 0
+	if kill_damage_number_budget_used >= _get_kill_damage_number_budget_per_frame():
+		return false
+	kill_damage_number_budget_used += 1
+	return true
+
+static func _get_kill_damage_number_budget_per_frame() -> int:
+	var fps := Engine.get_frames_per_second()
+	if fps > 0 and fps < PERFORMANCE_GUARD.CRITICAL_FPS_THRESHOLD:
+		return CRITICAL_FPS_KILL_DAMAGE_NUMBER_BUDGET_PER_FRAME
+	if fps > 0 and fps < PERFORMANCE_GUARD.LOW_FPS_THRESHOLD:
+		return LOW_FPS_KILL_DAMAGE_NUMBER_BUDGET_PER_FRAME
+	return KILL_DAMAGE_NUMBER_BUDGET_PER_FRAME
 
 static func _get_death_burst_budget_per_frame() -> int:
 	var fps := Engine.get_frames_per_second()
@@ -267,13 +291,12 @@ static func _update_active_death_bursts(delta: float) -> void:
 static func _acquire_damage_label(current_scene: Node) -> Label:
 	while not damage_label_pool.is_empty():
 		var pooled_label: Variant = damage_label_pool.pop_back()
-		if not is_instance_valid(pooled_label) or not (pooled_label is Label):
-			continue
-		var label := pooled_label as Label
-		if label.is_queued_for_deletion():
-			continue
-		_prepare_pooled_node(label, current_scene)
-		return label
+		if is_instance_valid(pooled_label) and pooled_label is Label:
+			var label := pooled_label as Label
+			if label.is_queued_for_deletion():
+				continue
+			_prepare_pooled_node(label, current_scene)
+			return label
 	var label := Label.new()
 	current_scene.add_child(label)
 	label.add_to_group("temporary_effects")
@@ -292,13 +315,12 @@ static func _release_damage_label(label: Label) -> void:
 static func _acquire_death_burst(current_scene: Node) -> Polygon2D:
 	while not death_burst_pool.is_empty():
 		var pooled_burst: Variant = death_burst_pool.pop_back()
-		if not is_instance_valid(pooled_burst) or not (pooled_burst is Polygon2D):
-			continue
-		var burst := pooled_burst as Polygon2D
-		if burst.is_queued_for_deletion():
-			continue
-		_prepare_pooled_node(burst, current_scene)
-		return burst
+		if is_instance_valid(pooled_burst) and pooled_burst is Polygon2D:
+			var burst := pooled_burst as Polygon2D
+			if burst.is_queued_for_deletion():
+				continue
+			_prepare_pooled_node(burst, current_scene)
+			return burst
 	var burst := Polygon2D.new()
 	current_scene.add_child(burst)
 	burst.add_to_group("temporary_effects")

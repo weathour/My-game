@@ -21,7 +21,7 @@ const BULLET_FRAME_VISIBLE_REGION := Rect2(505.0, 476.0, 36.0, 36.0)
 const BULLET_ANIMATION_SPEED := 28.0
 const BULLET_FRAME_BASE_SIZE := 84.0
 const MULTIMESH_REFRESH_FRAME_STRIDE_WHEN_HEAVY := 2
-const HEAVY_PROJECTILE_COUNT := 900
+const HEAVY_PROJECTILE_COUNT := 360
 
 var positions: Array[Vector2] = []
 var source_origins: Array[Vector2] = []
@@ -575,7 +575,7 @@ func _update_multimesh_instances() -> void:
 			bullet_outline_multimesh.set_instance_color(index, outline_color)
 
 func _make_transform(transform_position: Vector2, direction: Vector2, size: Vector2) -> Transform2D:
-	var forward := direction.normalized()
+	var forward := direction
 	if forward.length_squared() <= 0.001:
 		forward = Vector2.RIGHT
 	var side := forward.orthogonal()
