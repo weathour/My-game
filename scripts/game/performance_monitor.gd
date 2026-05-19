@@ -1,6 +1,8 @@
 extends RefCounted
 
 const PERFORMANCE_COUNTERS := preload("res://scripts/game/performance_counters.gd")
+const PERFORMANCE_RECORDER := preload("res://scripts/game/performance_recorder.gd")
+const PERFORMANCE_FEATURE_FLAGS := preload("res://scripts/game/performance_feature_flags.gd")
 
 const SAMPLE_INTERVAL := 1.0
 const TOTAL_NODE_SAMPLE_STRIDE := 3
@@ -36,7 +38,9 @@ static func collect_metrics(root: Node) -> Dictionary:
 		"heart_pickups": _count_runtime_or_group_nodes(root, tree, "heart_pickups"),
 		"temporary_effects": _count_group_nodes(tree, "temporary_effects"),
 		"total_nodes": cached_total_nodes,
-		"frame_counters": PERFORMANCE_COUNTERS.get_snapshot()
+		"frame_counters": PERFORMANCE_COUNTERS.get_snapshot(),
+		"frame_time": PERFORMANCE_RECORDER.get_rolling_snapshot(),
+		"performance_flags": PERFORMANCE_FEATURE_FLAGS.get_snapshot(root)
 	}
 	return cached_metrics
 
@@ -44,8 +48,12 @@ static func format_metrics(metrics: Dictionary) -> String:
 	if metrics.is_empty():
 		return "Performance: no data"
 	var counters_text := _format_counter_snapshot(metrics.get("frame_counters", {}))
-	return "FPS %d | Enemy %d | P.Bullet %d + Batch %d | E.Bullet %d\nGem %d | Heart %d | TempFX %d | Nodes %d%s" % [
+	var frame_time: Dictionary = metrics.get("frame_time", {})
+	return "FPS %d | p95 %.1fms p99 %.1fms max %.1fms | Enemy %d | P.Bullet %d + Batch %d | E.Bullet %d\nGem %d | Heart %d | TempFX %d | Nodes %d%s" % [
 		int(metrics.get("fps", 0)),
+		float(frame_time.get("p95_ms", 0.0)),
+		float(frame_time.get("p99_ms", 0.0)),
+		float(frame_time.get("max_ms", 0.0)),
 		int(metrics.get("enemies", 0)),
 		int(metrics.get("player_projectiles", 0)),
 		int(metrics.get("batched_projectiles", 0)),

@@ -51,8 +51,8 @@ If the work is runtime behavior, add it to the matching `scripts/enemies/enemy_*
 
 Run these after enemy refactor changes:
 
-```powershell
-& 'C:\Users\Aron\Desktop\Godot_v4.6.2-stable_win64.exe\Godot_v4.6.2-stable_win64_console.exe' --headless --path 'C:\Users\Aron\Documents\survivor-like' --check-only --script res://scripts/enemy.gd
-& 'C:\Users\Aron\Desktop\Godot_v4.6.2-stable_win64.exe\Godot_v4.6.2-stable_win64_console.exe' --headless --path 'C:\Users\Aron\Documents\survivor-like' --script res://scripts/tests/enemy_profile_resource_smoke.gd
-& 'C:\Users\Aron\Desktop\Godot_v4.6.2-stable_win64.exe\Godot_v4.6.2-stable_win64_console.exe' --headless --path 'C:\Users\Aron\Documents\survivor-like' --script res://scripts/tests/enemy_profile_snapshot_smoke.gd
+```bash
+/home/weathour/.local/bin/godot-4.6.2 --headless --path . --check-only --script scripts/enemy.gd
+/home/weathour/.local/bin/godot-4.6.2 --headless --path . --script scripts/tests/enemy_profile_resource_smoke.gd
+/home/weathour/.local/bin/godot-4.6.2 --headless --path . --script scripts/tests/enemy_profile_snapshot_smoke.gd
 ```

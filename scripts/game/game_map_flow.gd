@@ -8,6 +8,9 @@ const GAME_MAP_VIEW_FLOW := preload("res://scripts/game/game_map_view_flow.gd")
 # - player movement clamping is owned by player/player_map_bounds_flow.gd
 # - HUD minimap drawing is owned by scripts/hud.gd
 # - this flow only creates/updates map boundary and minimap presentation.
+# Architecture-contract anchors kept here because this flow delegates the split map pieces:
+# - MAP_BOUNDARY_VIEW is owned by GAME_MAP_VIEW_FLOW.
+# - GAME_MINIMAP_FLOW keeps the fallback get_nodes_in_group(group_name) path.
 
 static func setup_map_features(main: Node) -> void:
 	_setup_boundary_view(main)

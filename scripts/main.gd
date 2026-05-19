@@ -11,6 +11,7 @@ const REWARD_FLOW := preload("res://scripts/game/reward_flow.gd")
 const RUN_SAVE_FLOW := preload("res://scripts/game/run_save_flow.gd")
 const GAME_SESSION_FLOW := preload("res://scripts/game/game_session_flow.gd")
 const GAME_MAIN_FLOW := preload("res://scripts/game/game_main_flow.gd")
+const GAME_PHYSICS_FLOW := preload("res://scripts/game/game_physics_flow.gd")
 const GAME_ACHIEVEMENT_BRIDGE := preload("res://scripts/game/game_achievement_bridge.gd")
 const ENEMY_DEFEAT_FLOW := preload("res://scripts/game/enemy_defeat_flow.gd")
 const GAME_SCENE_WIRING := preload("res://scripts/game/game_scene_wiring.gd")
@@ -127,6 +128,9 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _process(delta: float) -> void:
 	GAME_MAIN_FLOW.process(self, delta)
+
+func _physics_process(delta: float) -> void:
+	GAME_PHYSICS_FLOW.physics_process(self, delta)
 
 func _setup_spawn_timer() -> void:
 	ENEMY_SPAWN_FLOW.setup_spawn_timer(self)

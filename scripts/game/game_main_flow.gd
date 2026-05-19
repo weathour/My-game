@@ -1,5 +1,7 @@
 extends RefCounted
 
+const PERFORMANCE_RECORDER := preload("res://scripts/game/performance_recorder.gd")
+
 
 static func ready(main: Node) -> void:
 	main.rng.randomize()
@@ -79,28 +81,47 @@ static func unhandled_input(main: Node, event: InputEvent) -> void:
 
 
 static func process(main: Node, delta: float) -> void:
+	PERFORMANCE_RECORDER.record_frame(delta)
 	if main.game_over or main.get_tree().paused:
 		main._update_performance_metrics(delta)
 		return
 
+	PERFORMANCE_RECORDER.begin_scope("script_logic_ms")
 	main.survival_time += delta
 	main.autosave_elapsed += delta
 	if main._is_developer_mode():
+		PERFORMANCE_RECORDER.begin_scope("developer_mode_ms")
 		main._update_developer_mode(delta)
+		PERFORMANCE_RECORDER.end_scope("developer_mode_ms")
 	else:
+		PERFORMANCE_RECORDER.begin_scope("spawn_events_ms")
 		main._update_spawn_curve()
 		main._handle_stage_events()
+		PERFORMANCE_RECORDER.end_scope("spawn_events_ms")
 
 	if main.autosave_elapsed >= main.autosave_interval:
 		main.autosave_elapsed = 0.0
 		main._save_run_state()
 
+	PERFORMANCE_RECORDER.begin_scope("hud_frame_ms")
 	main.GAME_HUD_FLOW.update_frame_hud(main)
+	PERFORMANCE_RECORDER.end_scope("hud_frame_ms")
+	PERFORMANCE_RECORDER.begin_scope("minimap_ms")
 	main._update_minimap(delta)
+	PERFORMANCE_RECORDER.end_scope("minimap_ms")
+	PERFORMANCE_RECORDER.begin_scope("pending_spawns_ms")
 	main._process_pending_enemy_spawns()
+	PERFORMANCE_RECORDER.end_scope("pending_spawns_ms")
+	PERFORMANCE_RECORDER.begin_scope("pickup_compaction_ms")
 	main._update_pickup_compaction(delta)
+	PERFORMANCE_RECORDER.end_scope("pickup_compaction_ms")
+	PERFORMANCE_RECORDER.begin_scope("distant_enemy_maintenance_ms")
 	main._update_distant_enemy_maintenance(delta)
+	PERFORMANCE_RECORDER.end_scope("distant_enemy_maintenance_ms")
+	PERFORMANCE_RECORDER.begin_scope("performance_metrics_ms")
 	main._update_performance_metrics(delta)
+	PERFORMANCE_RECORDER.end_scope("performance_metrics_ms")
+	PERFORMANCE_RECORDER.end_scope("script_logic_ms")
 
 
 static func find_player(main: Node) -> Node2D:

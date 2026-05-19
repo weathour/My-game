@@ -29,8 +29,8 @@ Goal: split blessing and blessing-skill state logic into focused modules without
 
 Run these after blessing-state refactor changes:
 
-```powershell
-& 'C:\Users\Aron\Desktop\Godot_v4.6.2-stable_win64.exe\Godot_v4.6.2-stable_win64_console.exe' --headless --path 'C:\Users\Aron\Documents\survivor-like' --check-only --script res://scripts/player/player_blessing_skill_state.gd
-& 'C:\Users\Aron\Desktop\Godot_v4.6.2-stable_win64.exe\Godot_v4.6.2-stable_win64_console.exe' --headless --path 'C:\Users\Aron\Documents\survivor-like' --script res://scripts/tests/player_blessing_system_smoke.gd
-& 'C:\Users\Aron\Desktop\Godot_v4.6.2-stable_win64.exe\Godot_v4.6.2-stable_win64_console.exe' --headless --path 'C:\Users\Aron\Documents\survivor-like' --script res://scripts/tests/player_save_roundtrip_smoke.gd
+```bash
+/home/weathour/.local/bin/godot-4.6.2 --headless --path . --check-only --script scripts/player/player_blessing_skill_state.gd
+/home/weathour/.local/bin/godot-4.6.2 --headless --path . --script scripts/tests/player_blessing_system_smoke.gd
+/home/weathour/.local/bin/godot-4.6.2 --headless --path . --script scripts/tests/player_save_roundtrip_smoke.gd
 ```
