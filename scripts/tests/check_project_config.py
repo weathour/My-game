@@ -13,7 +13,7 @@ REQUIRED_AUTOLOADS = {
 }
 REQUIRED_SETTINGS = {
     "run/main_scene": '"res://scenes/main_menu.tscn"',
-    "run/max_fps": "0",
+    "run/max_fps": "120",
     "window/size/viewport_width": "1280",
     "window/size/viewport_height": "720",
     "window/size/resizable": "true",
