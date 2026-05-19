@@ -9,7 +9,11 @@ const FLASH_COUNT := 4
 const FLASH_DURATION := 0.11
 const FADE_DURATION := 0.06
 const MAX_WARNINGS_LOW_FPS := 36
-const MAX_FINISHED_WARNINGS_PER_FRAME := 18
+const MAX_FINISHED_WARNINGS_PER_FRAME := 12
+const LOW_FPS_FINISHED_WARNINGS_PER_FRAME := 8
+const CRITICAL_FPS_FINISHED_WARNINGS_PER_FRAME := 4
+const LOW_FPS_THRESHOLD := 52
+const CRITICAL_FPS_THRESHOLD := 35
 
 var warnings: Array[Dictionary] = []
 var pending_finished_entries: Array[Dictionary] = []
@@ -57,10 +61,19 @@ func _process(delta: float) -> void:
 
 func _flush_finished_entries() -> void:
 	var emitted := 0
-	while emitted < MAX_FINISHED_WARNINGS_PER_FRAME and not pending_finished_entries.is_empty():
+	var emit_limit := _get_finished_warning_emit_limit()
+	while emitted < emit_limit and not pending_finished_entries.is_empty():
 		var warning: Dictionary = pending_finished_entries.pop_front()
 		warning_finished.emit(warning)
 		emitted += 1
+
+func _get_finished_warning_emit_limit() -> int:
+	var fps := Engine.get_frames_per_second()
+	if fps > 0 and fps < CRITICAL_FPS_THRESHOLD:
+		return CRITICAL_FPS_FINISHED_WARNINGS_PER_FRAME
+	if fps > 0 and fps < LOW_FPS_THRESHOLD:
+		return LOW_FPS_FINISHED_WARNINGS_PER_FRAME
+	return MAX_FINISHED_WARNINGS_PER_FRAME
 
 func _draw() -> void:
 	for warning in warnings:

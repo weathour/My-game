@@ -38,6 +38,7 @@ static func collect_metrics(root: Node) -> Dictionary:
 		"heart_pickups": _count_runtime_or_group_nodes(root, tree, "heart_pickups"),
 		"temporary_effects": _count_group_nodes(tree, "temporary_effects"),
 		"total_nodes": cached_total_nodes,
+		"pending_enemy_spawns": _count_pending_enemy_spawns(root),
 		"frame_counters": PERFORMANCE_COUNTERS.get_snapshot(),
 		"frame_time": PERFORMANCE_RECORDER.get_rolling_snapshot(),
 		"performance_flags": PERFORMANCE_FEATURE_FLAGS.get_snapshot(root)
@@ -49,12 +50,13 @@ static func format_metrics(metrics: Dictionary) -> String:
 		return "Performance: no data"
 	var counters_text := _format_counter_snapshot(metrics.get("frame_counters", {}))
 	var frame_time: Dictionary = metrics.get("frame_time", {})
-	return "FPS %d | p95 %.1fms p99 %.1fms max %.1fms | Enemy %d | P.Bullet %d + Batch %d | E.Bullet %d\nGem %d | Heart %d | TempFX %d | Nodes %d%s" % [
+	return "FPS %d | p95 %.1fms p99 %.1fms max %.1fms | Enemy %d | SpawnQ %d | P.Bullet %d + Batch %d | E.Bullet %d\nGem %d | Heart %d | TempFX %d | Nodes %d%s" % [
 		int(metrics.get("fps", 0)),
 		float(frame_time.get("p95_ms", 0.0)),
 		float(frame_time.get("p99_ms", 0.0)),
 		float(frame_time.get("max_ms", 0.0)),
 		int(metrics.get("enemies", 0)),
+		int(metrics.get("pending_enemy_spawns", 0)),
 		int(metrics.get("player_projectiles", 0)),
 		int(metrics.get("batched_projectiles", 0)),
 		int(metrics.get("enemy_projectiles", 0)),
@@ -122,4 +124,15 @@ static func _count_batched_projectiles(root: Node) -> int:
 		return 0
 	if "positions" in batch:
 		return int(batch.positions.size())
+	return 0
+
+static func _count_pending_enemy_spawns(root: Node) -> int:
+	if root == null:
+		return 0
+	if root.has_method("get_pending_enemy_spawn_count"):
+		return int(root.get_pending_enemy_spawn_count())
+	if "pending_enemy_spawn_requests" in root and "pending_enemy_spawn_cursor" in root:
+		var requests: Variant = root.get("pending_enemy_spawn_requests")
+		if requests is Array:
+			return max(0, (requests as Array).size() - int(root.get("pending_enemy_spawn_cursor")))
 	return 0

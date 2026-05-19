@@ -423,6 +423,9 @@ func _clear_pending_enemy_spawn_requests_if_needed() -> void:
 func _get_enemy_spawn_process_limit() -> int:
 	return RUNTIME_ENEMY_REGISTRY_FLOW.get_enemy_spawn_process_limit(self)
 
+func get_pending_enemy_spawn_count() -> int:
+	return RUNTIME_ENEMY_REGISTRY_FLOW.get_pending_enemy_spawn_count(self)
+
 func take_runtime_enemy_from_pool() -> Node:
 	return RUNTIME_ENEMY_REGISTRY_FLOW.take_runtime_enemy_from_pool(self)
 

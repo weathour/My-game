@@ -108,6 +108,13 @@ if [[ -n "$GODOT_BIN" ]]; then
     exit 1
   fi
 
+  echo "== Godot runtime enemy spawn smoothing smoke =="
+  "$GODOT_BIN" --headless --path . --script scripts/tests/runtime_enemy_spawn_smoothing_smoke.gd 2>&1 | tee /tmp/my-game-runtime-enemy-spawn-smoothing-smoke.log
+  if ! grep -q "RUNTIME_ENEMY_SPAWN_SMOOTHING_SMOKE_OK" /tmp/my-game-runtime-enemy-spawn-smoothing-smoke.log; then
+    echo "RUNTIME_ENEMY_SPAWN_SMOOTHING_SMOKE_FAILED"
+    exit 1
+  fi
+
   echo "== Godot player projectile pool smoke =="
   "$GODOT_BIN" --headless --path . --script scripts/tests/player_projectile_pool_smoke.gd 2>&1 | tee /tmp/my-game-player-projectile-pool-smoke.log
   if ! grep -q "PLAYER_PROJECTILE_POOL_SMOKE_OK" /tmp/my-game-player-projectile-pool-smoke.log; then
