@@ -1,0 +1,53 @@
+﻿<html style="margin:0;padding:0;">
+<div style="width:100%;box-sizing:border-box;font-family:-apple-system,'Segoe UI','Microsoft YaHei',sans-serif;background:#f7f9fc;color:#1f2937;padding:18px 16px;border-radius:12px;line-height:1.5;">
+  <div style="font-size:16px;font-weight:700;margin-bottom:4px;">技能系统架构总览（数据驱动 + 分层注册）</div>
+  <div style="font-size:13px;color:#6b7280;margin-bottom:14px;">示意：文件路径均为 scripts/ 下，箭头表示数据/调用流向</div>
+
+  <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:8px;">
+    <div style="flex:1 1 48%;min-width:280px;background:#ffffff;border:1px solid #dbe3ee;border-left:5px solid #2563eb;border-radius:8px;padding:10px 12px;box-sizing:border-box;">
+      <div style="font-weight:700;font-size:14px;color:#1d4ed8;">① 定义层：每个技能 = 2 个文件</div>
+      <div style="font-size:13px;margin-top:4px;"><b>abilities/xxx_ability.gd</b>（外壳）：冷却、触发条件、冷却条文案、存档<br><b>player/player_xxx_flow.gd</b>（内核）：伤害倍率、范围、效果结算</div>
+      <div style="font-size:12px;color:#6b7280;margin-top:4px;">统一接口：update / can_trigger / try_trigger / get_cooldown_slot / get_save_data / restore_effect_if_active</div>
+    </div>
+    <div style="flex:1 1 48%;min-width:280px;background:#ffffff;border:1px solid #dbe3ee;border-left:5px solid #0891b2;border-radius:8px;padding:10px 12px;box-sizing:border-box;">
+      <div style="font-weight:700;font-size:14px;color:#0e7490;">② 注册层：技能要“报名”的 2 张表</div>
+      <div style="font-size:13px;margin-top:4px;"><b>player_blessing_skill_state.gd</b>：SKILL_ID 常量、ACTIVE_SLOT_SKILL_IDS（有没有冷却槽）、ALWAYS_UNLOCKED（大招默认解锁）、中文名</div>
+      <div style="font-size:13px;"><b>player_skill_cooldown_flow.gd</b>：ROLE_ACTIVE_SKILL_PROPERTIES（角色 → 技能ID → player 上的实例名）</div>
+    </div>
+  </div>
+
+  <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:8px;">
+    <div style="flex:1 1 48%;min-width:280px;background:#ffffff;border:1px solid #dbe3ee;border-left:5px solid #7c3aed;border-radius:8px;padding:10px 12px;box-sizing:border-box;">
+      <div style="font-weight:700;font-size:14px;color:#6d28d9;">③ 实例层 + 运行调度层（每帧）</div>
+      <div style="font-size:13px;margin-top:4px;"><b>player.gd</b>：每个技能一个实例 var xxx_ability = XXX_ABILITY.new()，外加 _try_trigger_xxx() 包装</div>
+      <div style="font-size:13px;"><b>player_timer_flow.gd</b>：每帧 ① ability.update（冷却/效果）② 依次自动触发所有 _try_trigger_xxx —— 技能是<b>全自动释放</b></div>
+      <div style="font-size:13px;"><b>player_ability_flow.gd</b>：try_trigger_xxx → 检查死亡/升级/锁定 → can_trigger（角色/已解锁/冷却）→ try_trigger</div>
+      <div style="font-size:12px;color:#6b7280;">UI：combat_skill_bar.gd 读 get_cooldown_slot 显示冷却条</div>
+    </div>
+    <div style="flex:1 1 48%;min-width:280px;background:#ffffff;border:1px solid #dbe3ee;border-left:5px solid #d97706;border-radius:8px;padding:10px 12px;box-sizing:border-box;">
+      <div style="font-weight:700;font-size:14px;color:#b45309;">④ 成长发牌层：技能怎么“获得”</div>
+      <div style="font-size:13px;margin-top:4px;"><b>player_build_system.gd</b>：BUILD_DEFINITIONS（解锁卡 unlock_xxx / 强化卡 requires_skill），升级四选二发牌</div>
+      <div style="font-size:13px;">选<b>解锁卡</b> → force_unlock_skill 写入解锁状态（blessing_skill_state 的 unlocked / tiers / unlock_order）</div>
+      <div style="font-size:13px;">选<b>强化卡</b> → build_levels 计数+1 → 技能内用 get_xxx_bonus 读取加成</div>
+    </div>
+  </div>
+
+  <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:8px;">
+    <div style="flex:1 1 48%;min-width:280px;background:#ffffff;border:1px solid #dbe3ee;border-left:5px solid #16a34a;border-radius:8px;padding:10px 12px;box-sizing:border-box;">
+      <div style="font-weight:700;font-size:14px;color:#15803d;">⑤ 等级天赋层：3/6/9 级发牌</div>
+      <div style="font-size:13px;margin-top:4px;"><b>player_skill_talent_system.gd</b>：LEVEL_TALENT_DEFINITIONS（三个角色的天赋池）→ 3/6/9 级三选一（排除已选/同互斥组/未解锁技能）→ 选择写入 role_special_states 的 level_talents</div>
+      <div style="font-size:13px;"><b>player_xxx_talent_flow.gd</b>：has_level_talent 判断 → 提供数值加成 → 被伤害结算层（player_damage_resolver / job_queue）消费</div>
+    </div>
+    <div style="flex:1 1 48%;min-width:280px;background:#ffffff;border:1px solid #dbe3ee;border-left:5px solid #dc2626;border-radius:8px;padding:10px 12px;box-sizing:border-box;">
+      <div style="font-weight:700;font-size:14px;color:#b91c1c;">⑥ 开发者模式 + 存档</div>
+      <div style="font-size:13px;margin-top:4px;"><b>developer_panel / developer_actions.gd</b>：跳过正常发牌直达 —— 强制解锁技能（force_unlock_skill + 清冷却 + 刷新 HUD + 存盘）、直接发天赋、发祝福、发升级</div>
+      <div style="font-size:13px;"><b>player_run_save_state.gd</b>：保存 blessing_skill_state（解锁）、role_special_states（天赋/强化计数）、ability 自身状态</div>
+      <div style="font-size:12px;color:#6b7280;">开发者模式 = 正常流程的“快捷键”，走的是同一套底层写入</div>
+    </div>
+  </div>
+
+  <div style="background:#eef4ff;border:1px solid #c7d8f7;border-radius:8px;padding:10px 12px;font-size:13px;">
+    <b>核心规律</b>：解锁/天赋/祝福都只是“往状态表里写数据”，<b>效果永远由技能的 flow 在结算时现读</b>。所以加新技能 = 复制一个现成技能模板，改 10 个注册点；加新天赋 = 定义 + 一个消费函数。
+  </div>
+</div>
+</html>
