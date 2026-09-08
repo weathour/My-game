@@ -5,6 +5,8 @@ const MAGIC_GRENADE_VISUAL_SCRIPT := preload("res://scripts/player/gunner_magic_
 
 const SKILL_ID := "magic_grenade"
 const COOLDOWN := 16.0
+const COOLDOWN_REDUCTION := 2.0
+const TALENT_MAGIC_GRENADE_2 := "gunner_level_talent_magic_grenade_2"
 const PROJECTILE_SPEED := 620.0
 const MAX_FLIGHT_TIME := 0.6
 const MIN_FLIGHT_TIME := 0.18
@@ -69,7 +71,7 @@ func try_trigger(owner) -> bool:
 	var scene: Node = owner.get_tree().current_scene if owner.get_tree() != null else null
 	if scene == null:
 		return false
-	cooldown_remaining = COOLDOWN
+	cooldown_remaining = get_cooldown(owner)
 	var origin: Vector2 = owner.global_position
 	var targets := PLAYER_GUNNER_MAGIC_GRENADE_FLOW.collect_targets(owner, origin, direction)
 	var spawn_origin: Vector2 = origin + direction * 26.0
@@ -96,13 +98,17 @@ func try_trigger(owner) -> bool:
 	return true
 
 
+func get_cooldown(owner) -> float:
+	return COOLDOWN - (COOLDOWN_REDUCTION if _has_talent(owner, TALENT_MAGIC_GRENADE_2) else 0.0)
+
+
 func get_cooldown_slot(owner = null) -> Dictionary:
 	return {
 		"name": "魔法榴弹",
 		"remaining": clamp(cooldown_remaining, 0.0, COOLDOWN),
-		"duration": COOLDOWN,
+		"duration": get_cooldown(owner),
 		"color": Color(0.78, 0.45, 1.0, 1.0),
-		"description": "发射 3 枚魔法榴弹飞向前方敌人密集区域，每枚爆炸造成 300% 范围伤害；魔法榴弹更容易暴击，额外获得 20% 暴击率。"
+		"description": "发射 3 枚魔法榴弹飞向前方敌人密集区域，每枚爆炸造成 300% 范围伤害；魔法榴弹更容易暴击，额外获得 20% 暴击率。魔法榴弹 I：爆炸范围+75、每枚伤害+100%、暴击率额外+20%。魔法榴弹 II：数量+1、冷却-2秒。"
 	}
 
 
@@ -164,11 +170,12 @@ func restore_effect_if_active(owner) -> void:
 
 func _explode(owner, center: Vector2) -> void:
 	PLAYER_GUNNER_MAGIC_GRENADE_FLOW.apply_explosion(owner, center)
+	var blast_radius: float = PLAYER_GUNNER_MAGIC_GRENADE_FLOW.get_blast_radius(owner)
 	if owner.has_method("_spawn_burst_effect"):
-		owner._spawn_burst_effect(center, PLAYER_GUNNER_MAGIC_GRENADE_FLOW.BLAST_RADIUS * 0.6, Color(0.85, 0.55, 1.0, 0.85), 0.2)
+		owner._spawn_burst_effect(center, blast_radius * 0.6, Color(0.85, 0.55, 1.0, 0.85), 0.2)
 	if owner.has_method("_spawn_ring_effect"):
-		owner._spawn_ring_effect(center, PLAYER_GUNNER_MAGIC_GRENADE_FLOW.BLAST_RADIUS, Color(0.8, 0.5, 1.0, 0.9), 3.0, 0.24)
-		owner._spawn_ring_effect(center, PLAYER_GUNNER_MAGIC_GRENADE_FLOW.BLAST_RADIUS * 0.55, Color(1.0, 0.9, 1.0, 0.8), 2.0, 0.16)
+		owner._spawn_ring_effect(center, blast_radius, Color(0.8, 0.5, 1.0, 0.9), 3.0, 0.24)
+		owner._spawn_ring_effect(center, blast_radius * 0.55, Color(1.0, 0.9, 1.0, 0.8), 2.0, 0.16)
 	if owner.has_method("_queue_camera_shake"):
 		owner._queue_camera_shake(11.0, 0.2)
 
@@ -204,3 +211,7 @@ func _decode_vector2(value: Variant, fallback: Vector2) -> Vector2:
 
 func _is_unlocked(owner) -> bool:
 	return owner != null and owner.has_method("_is_blessing_skill_unlocked") and bool(owner._is_blessing_skill_unlocked(SKILL_ID))
+
+
+func _has_talent(owner, talent_id: String) -> bool:
+	return owner != null and owner.has_method("_has_level_talent") and bool(owner._has_level_talent(talent_id))

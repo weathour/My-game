@@ -63,7 +63,11 @@ const LEVEL_TALENT_DEFINITIONS := {
 		{"id": "gunner_level_talent_gunfire_ceremony_1", "title": "枪手天赋·枪火典礼 I", "summary": "枪火典礼伤害增加 50%；枪火典礼每击杀 1 个单位，使枪手伤害增加 1%，持续 5 秒。"},
 		{"id": "gunner_level_talent_gunfire_ceremony_2", "title": "枪手天赋·枪火典礼 II", "summary": "枪火典礼子弹命中的单位减少 50 点减伤值，持续 10 秒。"},
 		{"id": "gunner_level_talent_explosive_round_1", "title": "枪手天赋·爆破弹 I", "summary": "爆破弹命中伤害提升 50%（330%）并变为半径 100 的范围伤害；扇形区域伤害提升 50%（210%）、半径增加 100（475）；被爆破弹击杀的敌人原地爆炸，对半径 75 内的敌人造成 150% 伤害。", "level_talent_group_id": "gunner_explosive_round_variant"},
-		{"id": "gunner_level_talent_explosive_round_2", "title": "枪手天赋·爆破弹 II", "summary": "爆破弹数量 +1：释放后 0.8 秒再发射第二发。", "level_talent_group_id": "gunner_explosive_round_variant"}
+		{"id": "gunner_level_talent_explosive_round_2", "title": "枪手天赋·爆破弹 II", "summary": "爆破弹数量 +1：释放后 0.8 秒再发射第二发。", "level_talent_group_id": "gunner_explosive_round_variant"},
+		{"id": "gunner_level_talent_magic_grenade_1", "title": "枪手天赋·魔法榴弹 I", "summary": "魔法榴弹爆炸范围增加 75（75 增至 150）；每枚榴弹伤害增加 100%（300% 增至 400%）；榴弹暴击率额外增加 20%（合计 +40%）。", "level_talent_group_id": "gunner_magic_grenade_variant"},
+		{"id": "gunner_level_talent_magic_grenade_2", "title": "枪手天赋·魔法榴弹 II", "summary": "魔法榴弹数量 +1（3 枚增至 4 枚）；冷却时间减少 2 秒（16 秒减至 14 秒）。", "level_talent_group_id": "gunner_magic_grenade_variant"},
+		{"id": "gunner_level_talent_magic_eye_1", "title": "枪手天赋·魔眼聚合 I", "summary": "魔眼聚合每次造成伤害增加 50%（80% 增至 130%）；持续时间增加 1.2 秒（5 发增至 7 发）。", "level_talent_group_id": "gunner_magic_eye_variant"},
+		{"id": "gunner_level_talent_magic_eye_2", "title": "枪手天赋·魔眼聚合 II", "summary": "魔眼聚合每次击中敌人造成的减伤值增加 30（每次 -30 增至 -60）。", "level_talent_group_id": "gunner_magic_eye_variant"}
 	],
 	"mage": [
 		{"id": "mage_level_talent_arcane", "title": "法师天赋·奥术", "summary": "预留法师天赋效果接口。当前只记录选择，不附加旧天赋效果。", "placeholder": true},
@@ -177,6 +181,8 @@ const LEVEL_TALENT_REQUIRED_SKILL_RULES := [
 	{"prefix": "gunner_level_talent_shrapnel", "skill_id": "shrapnel_field"},
 	{"prefix": "gunner_level_talent_infinite_reload", "skill_id": "infinite_reload"},
 	{"prefix": "gunner_level_talent_explosive_round", "skill_id": "explosive_round"},
+	{"prefix": "gunner_level_talent_magic_grenade", "skill_id": "magic_grenade"},
+	{"prefix": "gunner_level_talent_magic_eye", "skill_id": "magic_eye"},
 	{"prefix": "gunner_level_talent_rocket_barrage", "skill_id": "gunner_ultimate"},
 	{"prefix": "mage_level_talent_meta_field", "skill_id": "meta_field"},
 	{"prefix": "mage_level_talent_arcane_bombardment", "skill_id": "mage_ultimate"},

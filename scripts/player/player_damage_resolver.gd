@@ -55,7 +55,7 @@ static func deal_damage_to_enemy(owner, enemy: Node, damage_amount: float, sourc
 	if applies_gunner_target_talents:
 		if not gunner_event_prepared:
 			final_damage *= snapshot_gunner_damage_event_multiplier(owner, source_role_id, damage_amount > 0.0, damage_event_id)
-	var source_critical_chance_bonus: float = PLAYER_GUNNER_MAGIC_GRENADE_FLOW.get_critical_chance_bonus(source_role_id)
+	var source_critical_chance_bonus: float = PLAYER_GUNNER_MAGIC_GRENADE_FLOW.get_critical_chance_bonus(owner, source_role_id)
 	var was_critical := false
 	if owner != null and resolved_source_role_id != "" and owner.has_method("_roll_critical_hit") and owner.has_method("_get_critical_damage_multiplier"):
 		was_critical = bool(owner._roll_critical_hit(resolved_source_role_id, source_critical_chance_bonus))

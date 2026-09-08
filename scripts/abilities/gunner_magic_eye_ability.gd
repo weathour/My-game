@@ -12,6 +12,14 @@ const BEAM_LENGTH := 450.0
 const BEAM_WIDTH := 64.0
 const ARMOR_SHRED_PER_HIT := 30.0
 
+const TALENT_MAGIC_EYE_1 := "gunner_level_talent_magic_eye_1"
+const TALENT_MAGIC_EYE_2 := "gunner_level_talent_magic_eye_2"
+# 魔眼聚合 I（绝对加法）：每次伤害 +50%（80%→130%）；持续时间 +1.2s → 总 2.8s，发数按 2.8÷0.4 = 7 发。
+const SHOT_DAMAGE_RATIO_BONUS := 0.50
+const EXTRA_SHOTS := 2
+# 魔眼聚合 II：每次命中减伤值 +30（-30→-60）。
+const ARMOR_SHRED_BONUS := 30.0
+
 var cooldown_remaining: float = 0.0
 var shots_remaining: int = 0
 var shot_timer: float = 0.0
@@ -51,9 +59,22 @@ func try_trigger(owner) -> bool:
 	if scene == null:
 		return false
 	_spawn_beam_visual(owner)
-	shots_remaining = SHOT_COUNT
-	shot_timer = 0.0
+	shots_remaining = get_shot_count(owner)
+	# 无天赋：第一发立即出，5 发在 1.6s 内打完；魔眼聚合 I：第一发 0.4s 时打出，7 发正好铺满 2.8s。
+	shot_timer = SHOT_INTERVAL if _has_talent(owner, TALENT_MAGIC_EYE_1) else 0.0
 	return true
+
+
+func get_shot_damage_ratio(owner) -> float:
+	return SHOT_DAMAGE_RATIO + (SHOT_DAMAGE_RATIO_BONUS if _has_talent(owner, TALENT_MAGIC_EYE_1) else 0.0)
+
+
+func get_armor_shred(owner) -> float:
+	return ARMOR_SHRED_PER_HIT + (ARMOR_SHRED_BONUS if _has_talent(owner, TALENT_MAGIC_EYE_2) else 0.0)
+
+
+func get_shot_count(owner) -> int:
+	return SHOT_COUNT + (EXTRA_SHOTS if _has_talent(owner, TALENT_MAGIC_EYE_1) else 0)
 
 
 func get_cooldown_slot(owner = null) -> Dictionary:
@@ -62,7 +83,7 @@ func get_cooldown_slot(owner = null) -> Dictionary:
 		"remaining": clamp(cooldown_remaining, 0.0, COOLDOWN),
 		"duration": COOLDOWN,
 		"color": Color(0.32, 0.66, 1.0, 1.0),
-		"description": "向前方释放持续的蓝色加农炮，对前方敌人造成 5 次 80% 伤害，每次命中使敌人减伤值降低 30 点。"
+		"description": "向前方释放持续的蓝色加农炮，对前方敌人造成 5 次 80% 伤害，每次命中使敌人减伤值降低 30 点。魔眼聚合 I：每次伤害+50%、持续时间+1.2s。魔眼聚合 II：每次命中减伤值+30。"
 	}
 
 
@@ -96,8 +117,8 @@ func restore_effect_if_active(owner) -> void:
 
 func _fire_shot(owner) -> void:
 	var center: Vector2 = owner.global_position + locked_direction * (BEAM_LENGTH * 0.5)
-	var damage: float = float(owner._get_role_damage("gunner")) * SHOT_DAMAGE_RATIO
-	var damage_taken: int = PLAYER_GUNNER_MAGIC_EYE_FLOW.fire_shot(owner, locked_direction, BEAM_LENGTH, BEAM_WIDTH, damage, ARMOR_SHRED_PER_HIT)
+	var damage: float = float(owner._get_role_damage("gunner")) * get_shot_damage_ratio(owner)
+	var damage_taken: int = PLAYER_GUNNER_MAGIC_EYE_FLOW.fire_shot(owner, locked_direction, BEAM_LENGTH, BEAM_WIDTH, damage, get_armor_shred(owner))
 	if owner.has_method("_register_attack_result"):
 		owner._register_attack_result("gunner", damage_taken, false)
 	if beam_visual != null and is_instance_valid(beam_visual) and beam_visual.has_method("fire_pulse"):
@@ -135,3 +156,7 @@ func _clear_beam_visual() -> void:
 
 func _is_unlocked(owner) -> bool:
 	return owner != null and owner.has_method("_is_blessing_skill_unlocked") and bool(owner._is_blessing_skill_unlocked(SKILL_ID))
+
+
+func _has_talent(owner, talent_id: String) -> bool:
+	return owner != null and owner.has_method("_has_level_talent") and bool(owner._has_level_talent(talent_id))

@@ -363,7 +363,8 @@ static func gain_experience(owner, amount: int) -> void:
 static func _get_adjusted_experience_gain(owner, amount: int) -> int:
 	if amount <= 0:
 		return 0
-	var raw_gain := float(amount) * EXPERIENCE_GAIN_MULTIPLIER
+	var difficulty_multiplier: float = _get_difficulty_experience_multiplier(owner)
+	var raw_gain := float(amount) * EXPERIENCE_GAIN_MULTIPLIER * difficulty_multiplier
 	var carry := 0.0
 	if owner != null and owner.has_meta(EXPERIENCE_FRACTION_CARRY_KEY):
 		carry = float(owner.get_meta(EXPERIENCE_FRACTION_CARRY_KEY))
@@ -373,6 +374,18 @@ static func _get_adjusted_experience_gain(owner, amount: int) -> int:
 	if owner != null:
 		owner.set_meta(EXPERIENCE_FRACTION_CARRY_KEY, next_carry)
 	return whole_gain
+
+
+static func _get_difficulty_experience_multiplier(owner) -> float:
+	if owner == null or not owner.has_method("get_tree"):
+		return 1.0
+	var tree: SceneTree = owner.get_tree()
+	if tree == null:
+		return 1.0
+	var main_scene: Node = tree.current_scene
+	if main_scene == null or not main_scene.has_method("_get_difficulty_experience_multiplier"):
+		return 1.0
+	return max(0.0, float(main_scene._get_difficulty_experience_multiplier()))
 
 
 static func grant_developer_level_up(owner) -> void:

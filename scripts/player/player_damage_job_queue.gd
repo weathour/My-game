@@ -245,7 +245,7 @@ func _deal_batched_damage_to_enemy(enemy: Node, damage_amount: float, source_rol
 	var final_damage := damage_amount
 	var resolved_source_role_id: String = _resolve_damage_source_role_id(source_role_id)
 	var source_ultimate_energy_bonus: float = PLAYER_MAGE_ULTIMATE_TALENT_FLOW.get_ultimate_energy_bonus_multiplier(source_player, source_role_id, resolved_source_role_id)
-	var source_critical_chance_bonus: float = PLAYER_GUNNER_MAGIC_GRENADE_FLOW.get_critical_chance_bonus(source_role_id)
+	var source_critical_chance_bonus: float = PLAYER_GUNNER_MAGIC_GRENADE_FLOW.get_critical_chance_bonus(source_player, source_role_id)
 	var was_critical := false
 	if resolved_source_role_id != "" and source_player.has_method("_roll_critical_hit") and source_player.has_method("_get_critical_damage_multiplier"):
 		was_critical = bool(source_player._roll_critical_hit(resolved_source_role_id, source_critical_chance_bonus))

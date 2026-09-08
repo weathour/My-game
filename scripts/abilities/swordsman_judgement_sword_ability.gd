@@ -20,7 +20,7 @@ const SHOCKWAVE_INTERVAL_TALENT_REDUCTION := 1.0
 const SHOCKWAVE_DAMAGE_TALENT_BONUS := 0.50
 const ARMOR_SHRED_TALENT_BONUS := 10.0
 const ACTIVE_DAMAGE_REDUCTION_TALENT_BONUS := 80.0
-const SHOCKWAVE_HEAL_MISSING_HEALTH_RATIO := 0.015
+const SHOCKWAVE_HEAL_MISSING_HEALTH_RATIO := 0.30
 const SWORD_AREA_TEXTURE_PATH := "res://effects/sword/area/sword area.png"
 const SWORD_AREA_TEXTURE_SIZE := Vector2(1254.0, 1254.0)
 const SWORD_AREA_VISIBLE_BOUNDS := Rect2(300.0, 50.0, 660.0, 1140.0)
@@ -85,7 +85,7 @@ func get_cooldown_slot(owner = null) -> Dictionary:
 	if owner != null and _has_talent(owner, TALENT_JUDGEMENT_SWORD_1):
 		description += " 审判之誓 I：落地伤害增加 100%，冲击波间隔减少 1 秒，每道冲击波伤害增加 50%，并额外降低 10 点减伤值。"
 	if owner != null and _has_talent(owner, TALENT_JUDGEMENT_SWORD_2):
-		description += " 审判之誓 II：冲击波间隔减少 1 秒，每道冲击波为当前站场角色回复 1.5% 已损失生命，巨剑存在期间剑士获得 80 点减伤值。"
+		description += " 审判之誓 II：冲击波间隔减少 1 秒，每道冲击波为当前站场角色回复 30% 已损失生命，巨剑存在期间剑士获得 80 点减伤值。"
 	return {
 		"name": "审判之誓",
 		"remaining": clamp(cooldown_remaining, 0.0, COOLDOWN),

@@ -33,7 +33,7 @@ const ROLE_DATA := [
 		"base_damage_reduction_value": -40.0,
 		"attack_interval": 0.39,
 		"damage": 15.0,
-		"range": 350.0,
+		"range": 425.0,
 		"background_interval": 2.0,
 		"trait_key": "gunner_trait",
 		"trait_option_id": "level_trait_gunner",

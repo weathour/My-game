@@ -1,6 +1,7 @@
 extends RefCounted
 
 const PLAYER_SWORDSMAN_KNIGHT_THRUST_FLOW := preload("res://scripts/player/player_swordsman_knight_thrust_flow.gd")
+const PLAYER_RESOURCE_FLOW := preload("res://scripts/player/player_resource_flow.gd")
 
 const SKILL_ID := "knight_thrust"
 const COOLDOWN := 7.0
@@ -42,22 +43,25 @@ func try_trigger(owner) -> bool:
 	direction = direction.normalized()
 	owner.facing_direction = direction
 	combo_direction = direction
-	_perform_strike(owner, direction)
+	var hits: int = _perform_strike(owner, direction)
+	if _has_talent(owner, TALENT_KNIGHT_THRUST_2) and hits > 0:
+		var missing_health: float = max(0.0, owner.max_health - owner.current_health)
+		PLAYER_RESOURCE_FLOW.heal(owner, missing_health * 0.10)
 	if _has_talent(owner, TALENT_KNIGHT_THRUST_1):
 		combo_remaining = COMBO_INTERVAL
 	return true
 
-func _perform_strike(owner, direction: Vector2) -> void:
+func _perform_strike(owner, direction: Vector2) -> int:
 	var has_talent_1 := _has_talent(owner, TALENT_KNIGHT_THRUST_1)
 	var has_talent_2 := _has_talent(owner, TALENT_KNIGHT_THRUST_2)
-	PLAYER_SWORDSMAN_KNIGHT_THRUST_FLOW.apply(
+	var hits: int = PLAYER_SWORDSMAN_KNIGHT_THRUST_FLOW.apply(
 		owner,
 		direction,
 		THRUST_LENGTH_BONUS if has_talent_1 else 0.0,
-		0.5 if has_talent_2 else 0.0,
+		0.8 if has_talent_2 else 0.0,
 		1,
 		has_talent_2,
-		5.0 if has_talent_1 else 0.0
+		10.0 if has_talent_1 else 0.0
 	)
 	var base_length: float = THRUST_LENGTH + (THRUST_LENGTH_BONUS if has_talent_1 else 0.0)
 	var angles: Array[float] = [0.0]
@@ -74,6 +78,7 @@ func _perform_strike(owner, direction: Vector2) -> void:
 			owner._spawn_ring_effect(owner.global_position + thrust_direction * length, 24.0 * scale, Color(1.0, 0.9, 0.6, 0.6), 4.0, 0.14)
 	if owner.has_method("_queue_camera_shake"):
 		owner._queue_camera_shake(9.5, 0.16)
+	return hits
 
 func _has_talent(owner, talent_id: String) -> bool:
 	return owner != null and owner.has_method("_has_level_talent") and bool(owner._has_level_talent(talent_id))
@@ -84,7 +89,7 @@ func get_cooldown_slot(owner = null) -> Dictionary:
 		"remaining": clamp(cooldown_remaining, 0.0, COOLDOWN),
 		"duration": COOLDOWN,
 		"color": Color(1.0, 0.72, 0.24, 1.0),
-		"description": "剑士向前刺击，不发生位移；造成 160% 伤害，每命中一名敌人获得 5 点临时血量，持续 5 秒。骑士突 I：变为两次连击，间隔 0.3 秒，距离与特效长度增加 50，每名敌人临时血量额外增加 5 点。骑士突 II：每次生成主刺及左右各 15° 的副刺，副刺范围与特效为 80%，每道突刺伤害增加 50%。"
+		"description": "剑士向前刺击，不发生位移；造成 160% 伤害，每命中一名敌人获得 10 点临时血量，持续 5 秒。骑士突 I：变为两次连击，间隔 0.3 秒，距离与特效长度增加 50，每名敌人临时血量额外增加 10 点。骑士突 II：每次生成主刺及左右各 15° 的副刺，副刺范围与特效为 80%，每道突刺伤害增加 80%；每次释放至少命中 1 名敌人时恢复自身已损血量 10%（两连击仅触发一次）。"
 	}
 func get_save_data() -> Dictionary:
 	return {"cooldown_remaining": cooldown_remaining}

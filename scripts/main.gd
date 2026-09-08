@@ -386,6 +386,14 @@ func _get_difficulty_projectile_speed_bonus() -> float:
 func _get_difficulty_enemy_damage_multiplier() -> float:
 	return GAME_STORY_CONTEXT_FLOW.get_difficulty_enemy_damage_multiplier(self)
 
+func _get_difficulty_experience_multiplier() -> float:
+	# 无尽层级 N1-N5：N1 正常，每升一层 +10% 经验效率；故事难度（无 tier 字段）保持正常。
+	var tier: int = int(difficulty_profile.get("tier", 0))
+	if tier <= 0:
+		return 1.0
+	var capped_tier: int = mini(tier, 5)
+	return 1.0 + float(capped_tier - 1) * 0.10
+
 func _get_difficulty_limit(key: String, fallback: int) -> int:
 	return GAME_STORY_CONTEXT_FLOW.get_difficulty_limit(self, key, fallback)
 

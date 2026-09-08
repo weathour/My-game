@@ -3,7 +3,7 @@ extends RefCounted
 const PLAYER_RESOURCE_FLOW := preload("res://scripts/player/player_resource_flow.gd")
 
 const DAMAGE_RATIO := 1.60
-const HIT_TEMPORARY_HEALTH := 5.0
+const HIT_TEMPORARY_HEALTH := 10.0
 const TEMPORARY_HEALTH_DURATION := 5.0
 const THRUST_LENGTH := 250.0
 const THRUST_WIDTH := 58.0
