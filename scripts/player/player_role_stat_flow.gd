@@ -4,6 +4,7 @@ const PLAYER_BUILD_SYSTEM := preload("res://scripts/player/player_build_system.g
 const PLAYER_SWORDSMAN_TRAIT_RUNTIME_FLOW := preload("res://scripts/player/player_swordsman_trait_runtime_flow.gd")
 const PLAYER_GUNNER_FLASH_TALENT_FLOW := preload("res://scripts/player/player_gunner_flash_talent_flow.gd")
 const PLAYER_GUNNER_ENTRY_TALENT_FLOW := preload("res://scripts/player/player_gunner_entry_talent_flow.gd")
+const PLAYER_SWORDSMAN_KING_BLADE_FLOW := preload("res://scripts/player/player_swordsman_king_blade_flow.gd")
 
 const GLOBAL_UNIT_MOVE_SPEED_SCALE := 0.7
 
@@ -276,7 +277,8 @@ static func get_role_max_health(owner, role_id: String) -> float:
 		equipment_bonus = float(owner._get_role_equipment_bonus_summary(role_id).get("max_health_bonus", 0.0))
 	else:
 		equipment_bonus = float(owner.get("equipment_max_health_bonus"))
-	return max(1.0, base_health * max(0.01, 1.0 + blessing_percent_bonus) + blessing_bonus + equipment_bonus)
+	var king_blade_health_bonus: float = PLAYER_SWORDSMAN_KING_BLADE_FLOW.get_permanent_health_bonus(owner) if role_id == "swordsman" else 0.0
+	return max(1.0, base_health * max(0.01, 1.0 + blessing_percent_bonus) + blessing_bonus + equipment_bonus + king_blade_health_bonus)
 
 
 static func get_active_role_max_health(owner) -> float:

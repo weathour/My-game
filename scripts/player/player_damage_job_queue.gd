@@ -10,6 +10,7 @@ const PLAYER_MAGE_ULTIMATE_TALENT_FLOW := preload("res://scripts/player/player_m
 const PLAYER_SWORDSMAN_KING_BLADE_FLOW := preload("res://scripts/player/player_swordsman_king_blade_flow.gd")
 const PLAYER_GUNNER_MAGIC_GRENADE_FLOW := preload("res://scripts/player/player_gunner_magic_grenade_flow.gd")
 const PLAYER_MAGE_DARK_CONTRACT_FLOW := preload("res://scripts/player/player_mage_dark_contract_flow.gd")
+const PLAYER_GUNNER_EXPLOSIVE_ROUND_FLOW := preload("res://scripts/player/player_gunner_explosive_round_flow.gd")
 
 const MAX_DAMAGE_APPLICATIONS_PER_RENDER_FRAME := 24
 const LARGE_QUEUE_DAMAGE_APPLICATIONS_PER_RENDER_FRAME := 56
@@ -292,6 +293,7 @@ func _deal_batched_damage_to_enemy(enemy: Node, damage_amount: float, source_rol
 		PLAYER_MAGE_ENTRY_TALENT_FLOW.on_entry_lightning_killed(source_player, source_role_id, resolved_source_role_id)
 		PLAYER_MAGE_ULTIMATE_TALENT_FLOW.on_ultimate_bombardment_killed(source_player, source_role_id, resolved_source_role_id)
 		PLAYER_SWORDSMAN_KING_BLADE_FLOW.on_king_blade_killed(source_player, source_role_id, resolved_source_role_id)
+		PLAYER_GUNNER_EXPLOSIVE_ROUND_FLOW.on_explosive_round_killed(source_player, source_role_id, resolved_source_role_id, enemy)
 	if killed and source_player.has_method("_get_kill_energy_from_enemy"):
 		var kill_energy: float = source_player._get_kill_energy_from_enemy(enemy)
 		var bypass_lock_role_id: String = resolved_source_role_id if resolved_source_role_id == "mage" and kill_energy_bonus > 0.0 else ""
@@ -333,6 +335,10 @@ func _resolve_damage_source_role_id(source_role_id: String) -> String:
 		return "gunner"
 	if PLAYER_MAGE_DARK_CONTRACT_FLOW.is_dark_contract_source(source_role_id):
 		return "mage"
+	if PLAYER_GUNNER_EXPLOSIVE_ROUND_FLOW.is_explosive_round_source(source_role_id):
+		return "gunner"
+	if PLAYER_GUNNER_EXPLOSIVE_ROUND_FLOW.is_explosive_round_killblast_source(source_role_id):
+		return "gunner"
 	for role_id in ["swordsman", "gunner", "mage"]:
 		if source_role_id.begins_with("%s_basic:" % role_id):
 			return role_id

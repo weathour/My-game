@@ -16,6 +16,7 @@ const PLAYER_MAGE_ULTIMATE_TALENT_FLOW := preload("res://scripts/player/player_m
 const PLAYER_SWORDSMAN_KING_BLADE_FLOW := preload("res://scripts/player/player_swordsman_king_blade_flow.gd")
 const PLAYER_GUNNER_MAGIC_GRENADE_FLOW := preload("res://scripts/player/player_gunner_magic_grenade_flow.gd")
 const PLAYER_MAGE_DARK_CONTRACT_FLOW := preload("res://scripts/player/player_mage_dark_contract_flow.gd")
+const PLAYER_GUNNER_EXPLOSIVE_ROUND_FLOW := preload("res://scripts/player/player_gunner_explosive_round_flow.gd")
 
 const DAMAGE_JOB_QUEUE_NAME := "PlayerDamageJobQueue"
 const QUEUED_HIT_THRESHOLD := 16
@@ -92,6 +93,7 @@ static func deal_damage_to_enemy(owner, enemy: Node, damage_amount: float, sourc
 			PLAYER_MAGE_ENTRY_TALENT_FLOW.on_entry_lightning_killed(owner, source_role_id, resolved_source_role_id)
 			PLAYER_MAGE_ULTIMATE_TALENT_FLOW.on_ultimate_bombardment_killed(owner, source_role_id, resolved_source_role_id)
 			PLAYER_SWORDSMAN_KING_BLADE_FLOW.on_king_blade_killed(owner, source_role_id, resolved_source_role_id)
+			PLAYER_GUNNER_EXPLOSIVE_ROUND_FLOW.on_explosive_round_killed(owner, source_role_id, resolved_source_role_id, enemy)
 		if killed and owner != null and owner.has_method("_add_kill_energy") and owner.has_method("_get_kill_energy_from_enemy"):
 			var kill_energy: float = owner._get_kill_energy_from_enemy(enemy)
 			var bypass_lock_role_id: String = resolved_source_role_id if resolved_source_role_id == "mage" and source_kill_energy_bonus > 0.0 else ""
@@ -473,6 +475,34 @@ static func damage_enemies_in_oriented_rect_unique(owner, center: Vector2, axis_
 	var hit_count: int = batcher.hit_count
 	PERFORMANCE_COUNTERS.add("damage_hits", hit_count)
 	return batcher.flush()
+
+static func damage_enemies_in_oriented_rect_tracking(owner, center: Vector2, axis_direction: Vector2, rect_length: float, rect_width: float, damage_amount: float, vulnerability_bonus: float, slow_multiplier: float, slow_duration: float, hit_registry: Dictionary, source_role_id: String = "", knockback_distance: float = 0.0) -> int:
+	var direction := axis_direction.normalized()
+	if direction.length_squared() <= 0.001:
+		direction = Vector2.RIGHT
+	var perpendicular := direction.orthogonal()
+	var half_length := rect_length * 0.5
+	var half_width := rect_width * 0.5
+	var resolved_role_id: String = _resolve_role_id(owner, source_role_id)
+	var broad_size := rect_length + rect_width + 80.0
+	var candidates: Array = _get_candidate_enemies_for_rect(owner, center, broad_size, broad_size)
+	_record_damage_query(candidates.size())
+	var batcher := _get_reusable_damage_batcher(owner)
+	var new_hit_count := 0
+	for enemy in candidates:
+		if not _is_live_enemy(enemy):
+			continue
+		if enemy is Node2D and _enemy_hit_shape_hits_oriented_rect(owner, enemy as Node2D, center, direction, perpendicular, half_length, half_width):
+			var id: int = enemy.get_instance_id()
+			if not hit_registry.has(id):
+				hit_registry[id] = true
+				new_hit_count += 1
+			batcher.add_enemy(enemy, damage_amount, resolved_role_id, vulnerability_bonus, 2.0, slow_multiplier, slow_duration, center)
+			if knockback_distance > 0.0:
+				(enemy as Node2D).global_position += direction * knockback_distance
+	PERFORMANCE_COUNTERS.add("damage_hits", batcher.hit_count)
+	batcher.flush()
+	return new_hit_count
 
 static func damage_enemies_in_ellipse(owner, center: Vector2, horizontal_radius: float, vertical_radius: float, damage_amount: float, vulnerability_bonus: float, slow_multiplier: float, slow_duration: float, source_role_id: String = "") -> int:
 	var safe_horizontal: float = max(1.0, horizontal_radius)
@@ -1001,6 +1031,10 @@ static func _resolve_damage_source_role_id(source_role_id: String) -> String:
 		return "gunner"
 	if PLAYER_MAGE_DARK_CONTRACT_FLOW.is_dark_contract_source(source_role_id):
 		return "mage"
+	if PLAYER_GUNNER_EXPLOSIVE_ROUND_FLOW.is_explosive_round_source(source_role_id):
+		return "gunner"
+	if PLAYER_GUNNER_EXPLOSIVE_ROUND_FLOW.is_explosive_round_killblast_source(source_role_id):
+		return "gunner"
 	for role_id in ["swordsman", "gunner", "mage"]:
 		if source_role_id.begins_with("%s_basic:" % role_id):
 			return role_id

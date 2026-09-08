@@ -55,6 +55,10 @@ static func get_role_damage_reduction_value(owner, role_id: String = "") -> floa
 	value += _get_equipment_damage_reduction_value(owner, resolved_role_id)
 	value += _get_blessing_damage_reduction_value(owner, resolved_role_id)
 	value += _get_passive_damage_reduction_value(owner)
+	if resolved_role_id == "swordsman":
+		var judgement_ability: Variant = owner.get("swordsman_judgement_sword_ability")
+		if judgement_ability != null and judgement_ability.has_method("get_active_damage_reduction_value"):
+			value += float(judgement_ability.get_active_damage_reduction_value(owner))
 	if resolved_role_id == _get_active_role_id(owner):
 		value += _get_active_temporary_damage_reduction_value(owner)
 	return value

@@ -31,6 +31,12 @@ const LEVEL_TALENT_DEFINITIONS := {
 		{"id": "swordsman_level_talent_basic_attack_2", "title": "剑士天赋·普通攻击 II", "summary": "普通攻击范围扩大 25%，并变为两道斩击；第二道与第一道夹角 30°，同一目标可同时承受两道斩击伤害。"},
 		{"id": "swordsman_level_talent_crescent_wave_1", "title": "剑士天赋·月牙剑气 I", "summary": "月牙剑气的斩击效果造成 2 段连击，第二段造成 60% 伤害，并在第一段 0.1 秒后打出。"},
 		{"id": "swordsman_level_talent_crescent_wave_2", "title": "剑士天赋·月牙剑气 II", "summary": "月牙剑气的斩击后释放 2 段剑气，第二段造成 60% 伤害，并在第一段剑气 0.2 秒后出现。"},
+		{"id": "swordsman_level_talent_knight_thrust_1", "title": "剑士天赋·骑士突 I", "summary": "骑士突变为两次连击，间隔 0.3 秒；突刺判定与特效长度增加 50。每名敌人首次命中时获得的临时血量额外增加 5 点。", "level_talent_group_id": "swordsman_knight_thrust_variant"},
+		{"id": "swordsman_level_talent_knight_thrust_2", "title": "剑士天赋·骑士突 II", "summary": "骑士突每次生成主刺及左右各 15° 的副刺，副刺范围与特效为主刺的 80%；每道突刺伤害增加 50%。", "level_talent_group_id": "swordsman_knight_thrust_variant"},
+		{"id": "swordsman_level_talent_king_blade_1", "title": "剑士天赋·王者之剑 I", "summary": "王者之剑变为连续 3 道斩击，每道间隔 0.8 秒，每道造成 400% 伤害；每次击杀仍永久增加剑士 0.01 点攻击力。冷却时间增加 8 秒。", "level_talent_group_id": "swordsman_king_blade_variant"},
+		{"id": "swordsman_level_talent_king_blade_2", "title": "剑士天赋·王者之剑 II", "summary": "保留王者之剑每次击杀永久增加剑士 0.01 点攻击力的效果，并额外使每次击杀永久增加剑士最大生命值 0.05 点。", "level_talent_group_id": "swordsman_king_blade_variant"},
+		{"id": "swordsman_level_talent_judgement_sword_1", "title": "剑士天赋·审判之誓 I", "summary": "巨剑落地命中的伤害增加 100%（200% 增至 300%）；冲击波施放间隔减少 1 秒，每道冲击波伤害增加 50%，并令被冲击的敌人额外降低 10 点减伤值。", "level_talent_group_id": "swordsman_judgement_sword_variant"},
+		{"id": "swordsman_level_talent_judgement_sword_2", "title": "剑士天赋·审判之誓 II", "summary": "冲击波施放间隔减少 1 秒；每道冲击波为当前站场角色恢复已损失生命的 1.5%；巨剑存在期间剑士获得 80 点减伤值。", "level_talent_group_id": "swordsman_judgement_sword_variant"},
 		{"id": "swordsman_level_talent_blade_storm_1", "title": "剑士天赋·剑刃风暴 I", "summary": "剑刃风暴范围扩大 20%；期间剑士移动速度增加 20 点，并获得 100 点减伤值。"},
 		{"id": "swordsman_level_talent_blade_storm_2", "title": "剑士天赋·剑刃风暴 II", "summary": "剑刃风暴期间可以进行普通攻击。"},
 		{"id": "swordsman_level_talent_charge_1", "title": "剑士天赋·冲锋 I", "summary": "剑士释放冲锋后获得 150 点减伤值，持续 3 秒。"},
@@ -55,7 +61,9 @@ const LEVEL_TALENT_DEFINITIONS := {
 		{"id": "gunner_level_talent_rocket_barrage_1", "title": "枪手天赋·火箭弹幕 I", "summary": "火箭弹幕以 20° 角固定方向释放，波次增加 2 波，每波伤害增加 10%。"},
 		{"id": "gunner_level_talent_rocket_barrage_2", "title": "枪手天赋·火箭弹幕 II", "summary": "火箭弹幕以 60° 角释放，波次增加 2 波，每波伤害减少 10%。"},
 		{"id": "gunner_level_talent_gunfire_ceremony_1", "title": "枪手天赋·枪火典礼 I", "summary": "枪火典礼伤害增加 50%；枪火典礼每击杀 1 个单位，使枪手伤害增加 1%，持续 5 秒。"},
-		{"id": "gunner_level_talent_gunfire_ceremony_2", "title": "枪手天赋·枪火典礼 II", "summary": "枪火典礼子弹命中的单位减少 50 点减伤值，持续 10 秒。"}
+		{"id": "gunner_level_talent_gunfire_ceremony_2", "title": "枪手天赋·枪火典礼 II", "summary": "枪火典礼子弹命中的单位减少 50 点减伤值，持续 10 秒。"},
+		{"id": "gunner_level_talent_explosive_round_1", "title": "枪手天赋·爆破弹 I", "summary": "爆破弹命中伤害提升 50%（330%）并变为半径 100 的范围伤害；扇形区域伤害提升 50%（210%）、半径增加 100（475）；被爆破弹击杀的敌人原地爆炸，对半径 75 内的敌人造成 150% 伤害。", "level_talent_group_id": "gunner_explosive_round_variant"},
+		{"id": "gunner_level_talent_explosive_round_2", "title": "枪手天赋·爆破弹 II", "summary": "爆破弹数量 +1：释放后 0.8 秒再发射第二发。", "level_talent_group_id": "gunner_explosive_round_variant"}
 	],
 	"mage": [
 		{"id": "mage_level_talent_arcane", "title": "法师天赋·奥术", "summary": "预留法师天赋效果接口。当前只记录选择，不附加旧天赋效果。", "placeholder": true},
@@ -162,9 +170,13 @@ const SKILL_PROGRESS_BY_SKILL_ID := {
 const LEVEL_TALENT_REQUIRED_SKILL_RULES := [
 	{"prefix": "swordsman_level_talent_blade_storm", "skill_id": "blade_storm"},
 	{"prefix": "swordsman_level_talent_crescent_wave", "skill_id": "crescent_wave"},
+	{"prefix": "swordsman_level_talent_knight_thrust", "skill_id": "knight_thrust"},
+	{"prefix": "swordsman_level_talent_king_blade", "skill_id": "king_blade"},
+	{"prefix": "swordsman_level_talent_judgement_sword", "skill_id": "judgement_sword"},
 	{"prefix": "swordsman_level_talent_ultimate", "skill_id": "swordsman_ultimate"},
 	{"prefix": "gunner_level_talent_shrapnel", "skill_id": "shrapnel_field"},
 	{"prefix": "gunner_level_talent_infinite_reload", "skill_id": "infinite_reload"},
+	{"prefix": "gunner_level_talent_explosive_round", "skill_id": "explosive_round"},
 	{"prefix": "gunner_level_talent_rocket_barrage", "skill_id": "gunner_ultimate"},
 	{"prefix": "mage_level_talent_meta_field", "skill_id": "meta_field"},
 	{"prefix": "mage_level_talent_arcane_bombardment", "skill_id": "mage_ultimate"},

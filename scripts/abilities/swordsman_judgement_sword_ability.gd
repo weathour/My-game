@@ -12,6 +12,15 @@ const SHOCKWAVE_INTERVAL := 2.0
 const SHOCKWAVE_DAMAGE_RATIO := 1.00
 const ARMOR_SHRED_PER_SHOCKWAVE := 20.0
 const FULL_MAP_RADIUS := 4000.0
+# 审判之誓 I/II 天赋加成（均按线性比例相加，不乘算）
+const TALENT_JUDGEMENT_SWORD_1 := "swordsman_level_talent_judgement_sword_1"
+const TALENT_JUDGEMENT_SWORD_2 := "swordsman_level_talent_judgement_sword_2"
+const FALL_DAMAGE_TALENT_BONUS := 1.00
+const SHOCKWAVE_INTERVAL_TALENT_REDUCTION := 1.0
+const SHOCKWAVE_DAMAGE_TALENT_BONUS := 0.50
+const ARMOR_SHRED_TALENT_BONUS := 10.0
+const ACTIVE_DAMAGE_REDUCTION_TALENT_BONUS := 80.0
+const SHOCKWAVE_HEAL_MISSING_HEALTH_RATIO := 0.015
 const SWORD_AREA_TEXTURE_PATH := "res://effects/sword/area/sword area.png"
 const SWORD_AREA_TEXTURE_SIZE := Vector2(1254.0, 1254.0)
 const SWORD_AREA_VISIBLE_BOUNDS := Rect2(300.0, 50.0, 660.0, 1140.0)
@@ -36,7 +45,7 @@ func update(owner, delta: float) -> void:
 		return
 	shockwave_timer -= delta
 	while shockwave_timer <= 0.0:
-		shockwave_timer += SHOCKWAVE_INTERVAL
+		shockwave_timer += _get_shockwave_interval(owner)
 		_release_shockwave(owner)
 
 
@@ -57,8 +66,9 @@ func try_trigger(owner) -> bool:
 		return false
 	# 落点 = 鼠标所指位置，鼠标可指定的最远距离为 MAX_RANGE
 	var center: Vector2 = PLAYER_SWORDSMAN_JUDGEMENT_SWORD_FLOW.resolve_target_position(owner, direction, MAX_RANGE)
-	# 巨剑从天而降命中
-	var damage: float = float(owner._get_role_damage("swordsman")) * FALL_DAMAGE_RATIO
+	# 巨剑从天而降命中（审判之誓 I：落地伤害线性增加 100%）
+	var fall_ratio: float = FALL_DAMAGE_RATIO + (FALL_DAMAGE_TALENT_BONUS if _has_talent(owner, TALENT_JUDGEMENT_SWORD_1) else 0.0)
+	var damage: float = float(owner._get_role_damage("swordsman")) * fall_ratio
 	PLAYER_SWORDSMAN_JUDGEMENT_SWORD_FLOW.apply_impact(owner, center, damage, FALL_RADIUS)
 	if owner.has_method("_queue_camera_shake"):
 		owner._queue_camera_shake(14.0, 0.26)
@@ -66,17 +76,22 @@ func try_trigger(owner) -> bool:
 	sword_position = center
 	_spawn_sword_visual(owner, center)
 	active_remaining = SWORD_DURATION
-	shockwave_timer = SHOCKWAVE_INTERVAL
+	shockwave_timer = _get_shockwave_interval(owner)
 	return true
 
 
 func get_cooldown_slot(owner = null) -> Dictionary:
+	var description := "指定地点降下巨剑，对击中的敌人造成 200% 伤害；巨剑留地 8 秒，每 2 秒释放全图冲击波造成 100% 伤害，并使受到冲击的敌人减伤值降低 20 点（可叠加）。"
+	if owner != null and _has_talent(owner, TALENT_JUDGEMENT_SWORD_1):
+		description += " 审判之誓 I：落地伤害增加 100%，冲击波间隔减少 1 秒，每道冲击波伤害增加 50%，并额外降低 10 点减伤值。"
+	if owner != null and _has_talent(owner, TALENT_JUDGEMENT_SWORD_2):
+		description += " 审判之誓 II：冲击波间隔减少 1 秒，每道冲击波为当前站场角色回复 1.5% 已损失生命，巨剑存在期间剑士获得 80 点减伤值。"
 	return {
 		"name": "审判之誓",
 		"remaining": clamp(cooldown_remaining, 0.0, COOLDOWN),
 		"duration": COOLDOWN,
 		"color": Color(1.0, 0.85, 0.4, 1.0),
-		"description": "指定地点降下巨剑，对击中的敌人造成 200% 伤害；巨剑留地 8 秒，每 2 秒释放全图冲击波造成 100% 伤害，并使受到冲击的敌人减伤值降低 20 点（可叠加）。"
+		"description": description
 	}
 
 
@@ -105,14 +120,34 @@ func restore_effect_if_active(owner) -> void:
 
 
 func _release_shockwave(owner) -> void:
-	var damage: float = float(owner._get_role_damage("swordsman")) * SHOCKWAVE_DAMAGE_RATIO
-	PLAYER_SWORDSMAN_JUDGEMENT_SWORD_FLOW.release_shockwave(owner, sword_position, damage, ARMOR_SHRED_PER_SHOCKWAVE)
+	var has_talent_1 := _has_talent(owner, TALENT_JUDGEMENT_SWORD_1)
+	var shockwave_ratio: float = SHOCKWAVE_DAMAGE_RATIO + (SHOCKWAVE_DAMAGE_TALENT_BONUS if has_talent_1 else 0.0)
+	var armor_shred: float = ARMOR_SHRED_PER_SHOCKWAVE + (ARMOR_SHRED_TALENT_BONUS if has_talent_1 else 0.0)
+	var heal_ratio: float = SHOCKWAVE_HEAL_MISSING_HEALTH_RATIO if _has_talent(owner, TALENT_JUDGEMENT_SWORD_2) else 0.0
+	var damage: float = float(owner._get_role_damage("swordsman")) * shockwave_ratio
+	PLAYER_SWORDSMAN_JUDGEMENT_SWORD_FLOW.release_shockwave(owner, sword_position, damage, armor_shred, heal_ratio)
 	if owner.has_method("_spawn_ring_effect"):
 		owner._spawn_ring_effect(sword_position, FULL_MAP_RADIUS, Color(1.0, 0.9, 0.6, 0.55), 4.0, 0.6)
 	if owner.has_method("_spawn_burst_effect"):
 		owner._spawn_burst_effect(sword_position, 120.0, Color(1.0, 0.88, 0.5, 0.7), 0.3)
 	if owner.has_method("_queue_camera_shake"):
 		owner._queue_camera_shake(7.0, 0.16)
+
+
+func get_active_damage_reduction_value(owner) -> float:
+	if active_remaining > 0.0 and _has_talent(owner, TALENT_JUDGEMENT_SWORD_2):
+		return ACTIVE_DAMAGE_REDUCTION_TALENT_BONUS
+	return 0.0
+
+
+func _get_shockwave_interval(owner) -> float:
+	if owner != null and (_has_talent(owner, TALENT_JUDGEMENT_SWORD_1) or _has_talent(owner, TALENT_JUDGEMENT_SWORD_2)):
+		return SHOCKWAVE_INTERVAL - SHOCKWAVE_INTERVAL_TALENT_REDUCTION
+	return SHOCKWAVE_INTERVAL
+
+
+func _has_talent(owner, talent_id: String) -> bool:
+	return owner != null and owner.has_method("_has_level_talent") and bool(owner._has_level_talent(talent_id))
 
 
 func _spawn_sword_visual(owner, center: Vector2) -> void:
