@@ -83,7 +83,7 @@ func _init() -> void:
 	assert(is_equal_approx(shrapnel._get_uncompressed_duration(owner), 4.0))
 	assert(is_equal_approx(shrapnel._get_duration(owner), 1.0))
 	assert(is_equal_approx(shrapnel._get_field_tick_interval(owner), 0.15))
-	assert(is_equal_approx(shrapnel._get_damage(owner), 4.2))
+	assert(is_equal_approx(shrapnel._get_damage(owner), 4.5))
 	shrapnel._damage_field(owner, {
 		"center": Vector2.ZERO,
 		"radius": 50.0,
@@ -92,7 +92,7 @@ func _init() -> void:
 		"slow_multiplier": 0.7,
 		"talent_ids": ["gunner_level_talent_shrapnel_2"]
 	})
-	assert(is_equal_approx(float(owner.last_radius_damage.get("damage", 0.0)), 4.2))
+	assert(is_equal_approx(float(owner.last_radius_damage.get("damage", 0.0)), 4.5))
 	assert(is_equal_approx(float(owner.last_radius_damage.get("slow_duration", 0.0)), 3.0))
 	owner.level_talents.clear()
 
@@ -119,8 +119,8 @@ func _init() -> void:
 	owner.level_talents = {"gunner_level_talent_infinite_reload_2": true}
 	owner.last_shapes.clear()
 	var infinite_two := InfiniteReload.new()
-	assert(is_equal_approx(infinite_two._get_duration(owner), 4.0))
-	assert(is_equal_approx(infinite_two._get_cooldown(owner), 21.0))
+	assert(is_equal_approx(infinite_two._get_duration(owner), 4.0 + 1.0))
+	assert(is_equal_approx(infinite_two._get_cooldown(owner), 32.0 + 1.0))
 	infinite_two._start_cast(owner, false)
 	infinite_two._trigger_tick(owner)
 	infinite_two._update_pending_beam_hits(owner, 0.2)
@@ -184,8 +184,7 @@ func _init() -> void:
 	var locked_mid_index := int(owner.projectiles.size() / 2)
 	var locked_visual_direction := owner.projectiles[locked_mid_index].get("direction", Vector2.ZERO) as Vector2
 	assert(abs(Vector2.RIGHT.angle_to(locked_visual_direction)) <= deg_to_rad(10.1))
-	var base_wave_damage := 10.0 * 2.1 * (12.0 / 19.0) * 0.8
-	assert(is_equal_approx(float(owner.last_cone_damage.get("damage_amount", 0.0)), base_wave_damage * 1.10))
+	assert(is_equal_approx(float(owner.last_cone_damage.get("damage_amount", 0.0)), 10.0 * (2.1 + 0.10) * (12.0 / 19.0) * 0.8))
 
 	owner.level_talents = {"gunner_level_talent_rocket_barrage_2": true}
 	owner.projectiles.clear()
@@ -198,13 +197,13 @@ func _init() -> void:
 	assert(owner.scheduled_counts.has(21))
 	assert((owner.last_cone_damage.get("direction", Vector2.ZERO) as Vector2).is_equal_approx(Vector2.DOWN))
 	assert(is_equal_approx(rad_to_deg(float(owner.last_cone_damage.get("angle", 0.0))), 60.0))
-	assert(is_equal_approx(float(owner.last_cone_damage.get("damage_amount", 0.0)), base_wave_damage * 0.90))
+	assert(is_equal_approx(float(owner.last_cone_damage.get("damage_amount", 0.0)), 10.0 * (2.1 - 0.10) * (12.0 / 19.0) * 0.8))
 
 	owner.level_talents = {"gunner_level_talent_gunfire_ceremony_1": true}
 	owner.projectiles.clear()
 	SwitchEntryFlow.fire_gunner_entry_wave(owner, "gunner", 0)
 	assert(owner.projectiles.size() == 8)
-	assert(is_equal_approx(float(owner.projectiles[0].get("damage", 0.0)), 30.0))
+	assert(is_equal_approx(float(owner.projectiles[0].get("damage", 0.0)), 25.0))
 	GunnerEntryTalentFlow.on_enemy_killed(owner, "gunner", "gunner_entry:1")
 	assert(is_equal_approx(GunnerEntryTalentFlow.get_gunner_damage_multiplier(owner, "gunner"), 1.01))
 	GunnerEntryTalentFlow.tick(owner, 5.0)

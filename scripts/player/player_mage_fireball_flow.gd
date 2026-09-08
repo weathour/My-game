@@ -14,7 +14,7 @@ static func apply_impact(owner, center: Vector2, radius: float, damage: float) -
 	return int(owner._damage_enemies_in_radius(center, radius, damage, 0.0, 1.0, 0.0, "mage"))
 
 
-static func apply_burn_tick(owner, center: Vector2, radius: float, max_health_ratio: float) -> int:
+static func apply_burn_tick(owner, center: Vector2, radius: float, current_health_ratio: float) -> int:
 	if owner == null or not is_instance_valid(owner):
 		return 0
 	var candidates: Array = PLAYER_DAMAGE_RESOLVER._get_candidate_enemies_for_bounds(
@@ -31,8 +31,8 @@ static func apply_burn_tick(owner, center: Vector2, radius: float, max_health_ra
 		var enemy_node := enemy as Node2D
 		if center.distance_squared_to(enemy_node.global_position) > radius_squared:
 			continue
-		var max_health_value: Variant = enemy.get("max_health")
-		var burn_damage: float = max(0.0, float(max_health_value) if max_health_value != null else 0.0) * max_health_ratio
+		var current_health_value: Variant = enemy.get("current_health")
+		var burn_damage: float = max(0.0, float(current_health_value) if current_health_value != null else 0.0) * current_health_ratio
 		if burn_damage <= 0.0:
 			continue
 		owner._deal_damage_to_enemy(enemy_node, burn_damage, "mage", 0.0, 2.0, 1.0, 0.0, center)

@@ -403,10 +403,6 @@ func perform_ultimate(owner, cast_payload: Dictionary) -> void:
 		cast_damage_multiplier *= 1.55
 	elif bool(talent_snapshot["gunner_ultimate_fan"]):
 		cast_damage_multiplier *= 0.70
-	if rocket_barrage_1:
-		cast_damage_multiplier *= 1.10
-	elif rocket_barrage_2:
-		cast_damage_multiplier *= 0.90
 	var visual_interval: float = _get_ultimate_visual_interval()
 	var visual_count: int = max(1, int(ceil(total_duration / visual_interval)))
 	owner._queue_camera_shake(17.5, 0.54)
@@ -458,7 +454,12 @@ func _apply_ultimate_cone_damage(owner, barrage_level: int, focus_level: int, co
 		if bool(calibration_state.get("calibrated", false)):
 			cast_damage_multiplier *= 1.18
 	var range_value: float = _get_ultimate_cone_range(owner, talent_snapshot)
-	var damage_multiplier: float = (ULTIMATE_DAMAGE_BASE_RATIO + float(barrage_level) * ULTIMATE_DAMAGE_BARRAGE_RATIO + float(focus_level) * ULTIMATE_DAMAGE_FOCUS_RATIO) * cast_damage_multiplier * ULTIMATE_DAMAGE_OUTPUT_MULTIPLIER
+	var rocket_ratio_bonus := 0.0
+	if bool(talent_snapshot.get(ULTIMATE_ROCKET_BARRAGE_1, false)):
+		rocket_ratio_bonus = 0.10
+	elif bool(talent_snapshot.get(ULTIMATE_ROCKET_BARRAGE_2, false)):
+		rocket_ratio_bonus = -0.10
+	var damage_multiplier: float = (ULTIMATE_DAMAGE_BASE_RATIO + float(barrage_level) * ULTIMATE_DAMAGE_BARRAGE_RATIO + float(focus_level) * ULTIMATE_DAMAGE_FOCUS_RATIO + rocket_ratio_bonus) * cast_damage_multiplier * ULTIMATE_DAMAGE_OUTPUT_MULTIPLIER
 	if ultimate_tier >= 3:
 		damage_multiplier *= ULTIMATE_TIER_TWO_DAMAGE_MULTIPLIER * ULTIMATE_TIER_THREE_DAMAGE_MULTIPLIER
 	elif ultimate_tier >= 2:

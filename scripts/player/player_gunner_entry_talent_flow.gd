@@ -7,7 +7,7 @@ const TALENT_GUNFIRE_CEREMONY_1 := "gunner_level_talent_gunfire_ceremony_1"
 const TALENT_GUNFIRE_CEREMONY_2 := "gunner_level_talent_gunfire_ceremony_2"
 const ENTRY_SOURCE_ID := "gunner_entry"
 
-const ENTRY_DAMAGE_MULTIPLIER := 1.50
+const ENTRY_DAMAGE_RATIO_BONUS := 0.50
 const KILL_DAMAGE_BONUS_PER_STACK := 0.01
 const KILL_DAMAGE_BONUS_DURATION := 5.0
 const ENTRY_ARMOR_SHRED_VALUE := 50.0
@@ -32,8 +32,8 @@ static func tick(owner, delta: float) -> void:
 	runtime[STATE_GUNFIRE_DAMAGE_STACKS] = remaining_stacks
 
 
-static func get_entry_damage_multiplier(owner) -> float:
-	return ENTRY_DAMAGE_MULTIPLIER if has_level_talent(owner, TALENT_GUNFIRE_CEREMONY_1) else 1.0
+static func get_entry_damage_ratio_bonus(owner) -> float:
+	return ENTRY_DAMAGE_RATIO_BONUS if has_level_talent(owner, TALENT_GUNFIRE_CEREMONY_1) else 0.0
 
 
 static func get_gunner_damage_multiplier(owner, role_id: String) -> float:

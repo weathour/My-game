@@ -185,8 +185,8 @@ static func spawn_gunner_entry_wave_batch(owner, role_id: String, wave_index: in
 static func _get_gunner_entry_bullet_damage(owner, role_id: String, damage_scale: float = 1.0) -> float:
 	if owner == null or not is_instance_valid(owner):
 		return 0.0
-	var entry_multiplier := PLAYER_GUNNER_ENTRY_TALENT_FLOW.get_entry_damage_multiplier(owner)
-	return owner._get_role_damage(role_id) * GUNNER_ENTRY_BULLET_DAMAGE_MULTIPLIER * max(0.0, damage_scale) * entry_multiplier
+	var entry_ratio: float = GUNNER_ENTRY_BULLET_DAMAGE_MULTIPLIER + PLAYER_GUNNER_ENTRY_TALENT_FLOW.get_entry_damage_ratio_bonus(owner)
+	return owner._get_role_damage(role_id) * entry_ratio * max(0.0, damage_scale)
 
 
 static func _create_gunner_damage_event_id(owner, prefix: String) -> String:

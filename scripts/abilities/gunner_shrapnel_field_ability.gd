@@ -42,7 +42,7 @@ const LEVEL_TALENT_SHRAPNEL_1 := "gunner_level_talent_shrapnel_1"
 const LEVEL_TALENT_SHRAPNEL_2 := "gunner_level_talent_shrapnel_2"
 const LEVEL_TALENT_SHRAPNEL_1_FIELD_COUNT := 4
 const LEVEL_TALENT_SHRAPNEL_1_AREA_MULTIPLIER := 1.20
-const LEVEL_TALENT_SHRAPNEL_2_DAMAGE_MULTIPLIER := 1.05
+const LEVEL_TALENT_SHRAPNEL_2_DAMAGE_RATIO_BONUS := 0.05
 const LEVEL_TALENT_SHRAPNEL_2_DURATION := 1.0
 const LEVEL_TALENT_SHRAPNEL_2_SLOW_DURATION := 3.0
 const MIN_FIELD_CENTER_DISTANCE := 150.0
@@ -795,9 +795,9 @@ func _get_damage(owner) -> float:
 		ratio = TIER_THREE_DAMAGE_RATIO
 	elif tier >= 2:
 		ratio = TIER_TWO_DAMAGE_RATIO
-	var damage: float = float(owner._get_role_damage("gunner")) * (ratio + PLAYER_BUILD_SYSTEM.get_shrapnel_damage_ratio_bonus(owner))
 	if _has_level_talent(owner, LEVEL_TALENT_SHRAPNEL_2):
-		damage *= LEVEL_TALENT_SHRAPNEL_2_DAMAGE_MULTIPLIER
+		ratio += LEVEL_TALENT_SHRAPNEL_2_DAMAGE_RATIO_BONUS
+	var damage: float = float(owner._get_role_damage("gunner")) * (ratio + PLAYER_BUILD_SYSTEM.get_shrapnel_damage_ratio_bonus(owner))
 	return damage
 
 

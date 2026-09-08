@@ -8,17 +8,24 @@ const COOLDOWN := 28.0
 const MAX_RANGE := 450.0
 const BLAST_RADIUS := 200.0
 const BLAST_DAMAGE_RATIO := 6.00
-const GROUND_DURATION := 5.0
+const CHARGE_DURATION := 0.5
+const GROUND_DURATION := 6.0
 const GROUND_TICK_INTERVAL := 1.0
-const GROUND_BURN_MAX_HEALTH_RATIO := 0.02
+const GROUND_BURN_CURRENT_HEALTH_RATIO := 0.01
 
 var cooldown_remaining: float = 0.0
 var active_fire_fields: Array[Dictionary] = []
 var pending_saved_fields: Array[Dictionary] = []
+var pending_impact_remaining: float = 0.0
+var pending_impact_center: Vector2 = Vector2.ZERO
 
 
 func update(owner, delta: float) -> void:
 	cooldown_remaining = max(0.0, cooldown_remaining - delta)
+	if pending_impact_remaining > 0.0:
+		pending_impact_remaining = max(0.0, pending_impact_remaining - delta)
+		if pending_impact_remaining <= 0.0:
+			_resolve_pending_impact(owner)
 	for index in range(active_fire_fields.size() - 1, -1, -1):
 		var data: Dictionary = active_fire_fields[index]
 		var ground: Node2D = data.get("node", null) as Node2D
@@ -29,7 +36,7 @@ func update(owner, delta: float) -> void:
 		active_fire_fields[index] = data
 		while tick_elapsed >= GROUND_TICK_INTERVAL:
 			tick_elapsed -= GROUND_TICK_INTERVAL
-			PLAYER_MAGE_FIREBALL_FLOW.apply_burn_tick(owner, data.get("center", Vector2.ZERO), BLAST_RADIUS, GROUND_BURN_MAX_HEALTH_RATIO)
+			PLAYER_MAGE_FIREBALL_FLOW.apply_burn_tick(owner, data.get("center", Vector2.ZERO), BLAST_RADIUS, GROUND_BURN_CURRENT_HEALTH_RATIO)
 		data["tick_elapsed"] = tick_elapsed
 		active_fire_fields[index] = data
 		if remaining <= 0.0:
@@ -54,9 +61,21 @@ func try_trigger(owner) -> bool:
 	if scene == null:
 		return false
 	cooldown_remaining = COOLDOWN
-	# 落点 = 鼠标所指位置，鼠标可指定的最远距离为 MAX_RANGE
-	var center: Vector2 = PLAYER_MAGE_FIREBALL_FLOW.resolve_target_position(owner, direction, MAX_RANGE)
-	# 火球爆炸
+	pending_impact_center = PLAYER_MAGE_FIREBALL_FLOW.resolve_target_position(owner, direction, MAX_RANGE)
+	pending_impact_remaining = CHARGE_DURATION
+	if owner.has_method("_spawn_ring_effect"):
+		owner._spawn_ring_effect(pending_impact_center, BLAST_RADIUS * 0.55, Color(1.0, 0.34, 0.08, 0.72), 5.0, CHARGE_DURATION)
+		owner._spawn_ring_effect(pending_impact_center, BLAST_RADIUS * 0.30, Color(1.0, 0.86, 0.28, 0.86), 3.0, CHARGE_DURATION)
+	if owner.has_method("_spawn_combat_tag"):
+		owner._spawn_combat_tag(pending_impact_center + Vector2(0.0, -32.0), "火球聚能", Color(1.0, 0.68, 0.24, 1.0))
+	return true
+
+
+func _resolve_pending_impact(owner) -> void:
+	if owner == null or not is_instance_valid(owner) or bool(owner.get("is_dead")):
+		return
+	var center := pending_impact_center
+	pending_impact_center = Vector2.ZERO
 	var damage: float = float(owner._get_role_damage("mage")) * BLAST_DAMAGE_RATIO
 	PLAYER_MAGE_FIREBALL_FLOW.apply_impact(owner, center, BLAST_RADIUS, damage)
 	if owner.has_method("_spawn_ring_effect"):
@@ -66,7 +85,7 @@ func try_trigger(owner) -> bool:
 		owner._spawn_burst_effect(center, BLAST_RADIUS * 0.5, Color(1.0, 0.62, 0.2, 0.9), 0.26)
 	if owner.has_method("_queue_camera_shake"):
 		owner._queue_camera_shake(15.0, 0.3)
-	# 留下燃烧地面
+	# 爆炸后留下按当前生命百分比结算的燃烧地面。
 	var ground := _create_fire_ground(owner, center)
 	active_fire_fields.append({
 		"node": ground,
@@ -74,7 +93,6 @@ func try_trigger(owner) -> bool:
 		"remaining": GROUND_DURATION,
 		"tick_elapsed": 0.0
 	})
-	return true
 
 
 func get_cooldown_slot(owner = null) -> Dictionary:
@@ -83,7 +101,7 @@ func get_cooldown_slot(owner = null) -> Dictionary:
 		"remaining": clamp(cooldown_remaining, 0.0, COOLDOWN),
 		"duration": COOLDOWN,
 		"color": Color(1.0, 0.45, 0.16, 1.0),
-		"description": "在指定地点引爆火球，造成 600% 范围伤害，并留下持续 5 秒的火焰地面，其上的敌人每秒损失 2% 最大生命。"
+		"description": "在指定地点聚能 0.5 秒后爆炸，造成 600% 范围伤害；留下持续 6 秒的火焰区域，区域内敌人每秒损失当前生命的 1%。"
 	}
 
 
