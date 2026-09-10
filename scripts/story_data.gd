@@ -10,7 +10,7 @@ const ROLE_POOL := [
 	{"id": "swordsman", "name": "剑士", "available": true},
 	{"id": "gunner", "name": "枪手", "available": true},
 	{"id": "mage", "name": "法师", "available": true},
-	{"id": "reserved_4", "name": "角色4", "available": false},
+	{"id": "mechanic", "name": "机械师", "available": true},
 	{"id": "reserved_5", "name": "角色5", "available": false}
 ]
 
@@ -60,7 +60,7 @@ static func build_default_story_profile(slot_id: int) -> Dictionary:
 		"chapter_index": 1,
 		"current_stage_index": 0,
 		"boss_core_fragments": 0,
-		"unlocked_role_ids": ["swordsman", "gunner", "mage"],
+		"unlocked_role_ids": ["swordsman", "gunner", "mage", "mechanic"],
 		"team_order": ["swordsman", "gunner", "mage"],
 		"created_unix": Time.get_unix_time_from_system(),
 		"last_updated_unix": Time.get_unix_time_from_system()
