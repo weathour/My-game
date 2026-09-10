@@ -141,6 +141,21 @@ func _run() -> void:
 	assert(is_equal_approx(enemies[3].damage_taken, 0.0))
 	assert(owner.stone_rings == 1)
 	enemies[0].free()
+	enemies.remove_at(0)
+
+	_reset(enemies)
+	owner.ruan_stone_proc_events.clear()
+	owner.equipped_ruan_stone = "thunder"
+	owner.ruan_stone_levels = {"thunder": 1}
+	DamageResolver.deal_damage_to_enemy(owner, enemies[0], 10.0, "mechanic_basic:event_mechanic_spider")
+	assert(is_equal_approx(enemies[0].damage_taken, 10.0))
+	assert(is_equal_approx(enemies[1].damage_taken, 3.0))
+
+	_reset(enemies)
+	owner.ruan_stone_proc_events.clear()
+	DamageResolver.deal_damage_to_enemy(owner, enemies[0], 10.0, "mechanic")
+	assert(is_equal_approx(enemies[0].damage_taken, 10.0))
+	assert(is_equal_approx(enemies[1].damage_taken, 0.0))
 
 	print("RUAN_STONE_COMBAT_SMOKE_OK")
 	quit(0)

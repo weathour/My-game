@@ -24,37 +24,43 @@ const PANEL_EDGE_MARGIN := Vector2(14.0, 10.0)
 const ROLE_TEXTURE_PATHS := {
 	"swordsman": "人设草图/剑士草图.jpg",
 	"gunner": "人设草图/枪手草图.jpg",
-	"mage": "人设草图/术师草图.jpg"
+	"mage": "人设草图/术师草图.jpg",
+	"mechanic": "人设草图/机械师草图.jpg"
 }
 
 const ROLE_PIXEL_TEXTURE_PATHS := {
 	"swordsman": "res://assets/players/sword/剑-run.png",
 	"gunner": "res://assets/players/gun/gun-run.png",
-	"mage": "res://assets/players/wizard/wizard-run.png"
+	"mage": "res://assets/players/wizard/wizard-run.png",
+	"mechanic": "res://assets/players/mechanic/mechanic-run.png"
 }
 
 const ROLE_PIXEL_FRAME_RECTS := {
 	"swordsman": Rect2(529.0, 21.0, 95.0, 89.0),
 	"gunner": Rect2(542.0, 25.0, 69.0, 74.0),
-	"mage": Rect2(314.0, 78.0, 133.0, 93.0)
+	"mage": Rect2(314.0, 78.0, 133.0, 93.0),
+	"mechanic": Rect2(57.0, 73.0, 135.0, 100.0)
 }
 
 const ROLE_PIXEL_MODULATE := {
 	"swordsman": Color(1.0, 0.88, 0.52, 1.0),
 	"gunner": Color(1.0, 0.56, 0.44, 1.0),
-	"mage": Color(0.72, 0.92, 1.0, 1.0)
+	"mage": Color(0.72, 0.92, 1.0, 1.0),
+	"mechanic": Color(1.0, 0.9, 0.65, 1.0)
 }
 
 const ROLE_PIXEL_INACTIVE_MODULATE := {
 	"swordsman": Color(0.72, 0.58, 0.34, 0.84),
 	"gunner": Color(0.70, 0.36, 0.30, 0.84),
-	"mage": Color(0.42, 0.64, 0.76, 0.84)
+	"mage": Color(0.42, 0.64, 0.76, 0.84),
+	"mechanic": Color(0.62, 0.56, 0.42, 0.84)
 }
 
 const ROLE_TAGLINES := {
 	"swordsman": "近战 · 均衡 · 连击",
 	"gunner": "远程 · 爆发 · 弹幕",
-	"mage": "奥术 · 范围 · 控场"
+	"mage": "奥术 · 范围 · 控场",
+	"mechanic": "部署与阵地火力"
 }
 
 var role_texture_rect: TextureRect
@@ -314,7 +320,8 @@ func _build_role_sidebar(content_layout: HBoxContainer) -> void:
 	role_nav_list.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	role_nav_list.add_theme_constant_override("separation", 10)
 	side_box.add_child(role_nav_list)
-	for index in range(ROLE_PIXEL_TEXTURE_PATHS.size()):
+	var initial_role_count: int = max(_get_roles().size(), 3)
+	for index in range(initial_role_count):
 		role_nav_list.add_child(_make_role_card(index))
 
 func _build_role_detail_column(content_layout: HBoxContainer) -> void:

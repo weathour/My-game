@@ -38,14 +38,16 @@ func _verify_inherit_and_expire(player: Node) -> void:
 	player._add_temporary_health(10.0)
 	player._tick_temporary_health_stacks(2.0)
 	player._add_temporary_health(10.0)
-	player._try_switch_role(1)
-	_expect_approx(player.current_temporary_health, 20.0, "temporary health should carry to next role")
+	_expect_approx(player.current_temporary_health, 20.0, "temporary health should accumulate in stacks")
 	player._tick_temporary_health_stacks(27.9)
 	_expect_approx(player.current_temporary_health, 20.0, "temporary health should stay before first stack expires")
 	player._tick_temporary_health_stacks(0.2)
 	_expect_approx(player.current_temporary_health, 10.0, "only the first stack should expire after 30 seconds")
 	player._tick_temporary_health_stacks(2.0)
 	_expect_approx(player.current_temporary_health, 0.0, "second stack should expire on its own timer")
+	player._add_temporary_health(10.0)
+	player._try_switch_role(1)
+	_expect_approx(player.current_temporary_health, 0.0, "swordsman temporary health should clear when switching out")
 
 
 func _verify_damage_consumes_oldest_stack(player: Node) -> void:

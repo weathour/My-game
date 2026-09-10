@@ -238,6 +238,23 @@ class SkulltombStub:
 	var skulltomb_area_remaining: float = 0.0
 	var skulltomb_area_damage_elapsed: float = 0.0
 	var skulltomb_area_instance: Node2D
+	var skulltomb_channel_ring: Node = null
+	var skulltomb_channel_fill: Polygon2D
+	var skulltomb_death_ring: Node = null
+	var skulltomb_tomb_instance: Node = null
+	var skulltomb_pending_spawns: Array = []
+	var skulltomb_summon_interval: float = 20.0
+	var skulltomb_summon_timer: float = 0.0
+	var skulltomb_summon_windup: float = 0.7
+	var skulltomb_min_soldiers: int = 10
+	var skulltomb_buff_duration: float = 5.0
+	var skulltomb_death_player_slow_multiplier: float = 0.5
+	var skulltomb_death_player_slow_duration: float = 5.0
+	var skulltomb_death_soldier_speed_multiplier: float = 1.2
+	var skulltomb_death_shot_frequency_multiplier: float = 1.3
+	var skulltomb_tomb_scene: PackedScene
+	var skulltomb_spawn_elapsed: float = 0.0
+	var skulltomb_spawn_vertex_index: int = 0
 	var _cached_direction_to_target: Vector2 = Vector2.RIGHT
 
 	func _spawn_dash_trail(_direction: Vector2, _distance: float) -> void:

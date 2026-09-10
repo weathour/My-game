@@ -13,6 +13,10 @@ const ROLE_VISUALS := {
 	"mage": {
 		"scene": preload("res://assets/players/wizard/wizard.tscn"),
 		"scale": Vector2(1.7, 1.7)
+	},
+	"mechanic": {
+		"scene": preload("res://assets/players/mechanic/mechanic.tscn"),
+		"scale": Vector2(1.0, 1.0)
 	}
 }
 

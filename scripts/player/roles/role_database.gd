@@ -1,6 +1,8 @@
 extends RefCounted
 
-const ROLE_IDS := ["swordsman", "gunner", "mage"]
+const ROLE_IDS := ["swordsman", "gunner", "mage", "mechanic"]
+
+const DEFAULT_TEAM_IDS := ["swordsman", "gunner", "mage"]
 
 const ROLE_DATA := [
 	{
@@ -59,6 +61,25 @@ const ROLE_DATA := [
 		"trait_name": "\u6CD5\u5E08\u7279\u6027",
 		"trait_effect_type": "mage_training",
 		"trait_damage_role_id": "mage"
+	},
+	{
+		"id": "mechanic",
+		"name": "机械师",
+		"color": Color(0.95, 0.68, 0.25, 1.0),
+		"speed_scale": 1.0,
+		"move_speed": 130.0,
+		"base_health": 120.0,
+		"base_dodge": 0.03,
+		"base_damage_reduction_value": 0.0,
+		"attack_interval": 0.5,
+		"damage": 18.0,
+		"range": 300.0,
+		"background_interval": 2.4,
+		"trait_key": "mechanic_trait",
+		"trait_option_id": "level_trait_mechanic",
+		"trait_name": "机械师特性",
+		"trait_effect_type": "mechanic_training",
+		"trait_damage_role_id": "mechanic"
 	}
 ]
 
@@ -93,6 +114,14 @@ const ROLE_SPECIAL_STATE_TEMPLATES := {
 		"storm_level": 0,
 		"flow_level": 0,
 		"gravity_level": 0
+	},
+	"mechanic": {
+		"drone_level": 0,
+		"mine_level": 0,
+		"emp_level": 0,
+		"turret_level": 0,
+		"missile_level": 0,
+		"overdrive_level": 0
 	}
 }
 
@@ -104,6 +133,22 @@ static func get_role_data() -> Array:
 
 static func get_role_ids() -> Array:
 	return ROLE_IDS.duplicate()
+
+
+static func get_team_role_data(team_ids: Array = []) -> Array:
+	var ordered_ids: Array = []
+	for role_variant in team_ids:
+		var role_id := str(role_variant)
+		if role_id != "" and not ordered_ids.has(role_id):
+			ordered_ids.append(role_id)
+	if ordered_ids.is_empty():
+		ordered_ids = DEFAULT_TEAM_IDS.duplicate()
+	var result: Array = []
+	for role_id in ordered_ids:
+		var role_data := get_role_data_by_id(role_id)
+		if not role_data.is_empty():
+			result.append(role_data)
+	return result
 
 
 static func get_role_data_by_id(role_id: String) -> Dictionary:

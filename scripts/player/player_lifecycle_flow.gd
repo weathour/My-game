@@ -10,7 +10,7 @@ static func ready(owner) -> void:
 	owner.collision_layer = 0
 	owner.collision_mask = PLAYER_OBSTACLE_COLLISION_MASK
 
-	owner.roles = owner._build_role_data()
+	owner.roles = owner._build_team_role_data()
 	owner.role_upgrade_levels = owner._build_role_upgrade_data()
 	owner.background_cooldowns = owner._build_background_cooldowns()
 	owner.role_blessing_levels = PLAYER_BLESSING_SYSTEM.build_empty_role_state(owner.roles)

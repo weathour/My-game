@@ -17,6 +17,11 @@ const MAGE_DARK_CONTRACT_ABILITY := preload("res://scripts/abilities/mage_dark_c
 const SWORDSMAN_JUDGEMENT_SWORD_ABILITY := preload("res://scripts/abilities/swordsman_judgement_sword_ability.gd")
 const GUNNER_MAGIC_EYE_ABILITY := preload("res://scripts/abilities/gunner_magic_eye_ability.gd")
 const MAGE_FIREBALL_ABILITY := preload("res://scripts/abilities/mage_fireball_ability.gd")
+const MECHANIC_DRONE_ABILITY := preload("res://scripts/abilities/mechanic_drone_ability.gd")
+const MECHANIC_MINE_ABILITY := preload("res://scripts/abilities/mechanic_mine_ability.gd")
+const MECHANIC_EMP_BURST_ABILITY := preload("res://scripts/abilities/mechanic_emp_burst_ability.gd")
+const MECHANIC_TULIP_TURRET_ABILITY := preload("res://scripts/abilities/mechanic_tulip_turret_ability.gd")
+const MECHANIC_MISSILE_VOLLEY_ABILITY := preload("res://scripts/abilities/mechanic_missile_volley_ability.gd")
 const PLAYER_BLESSING_SYSTEM := preload("res://scripts/player/player_blessing_system.gd")
 const PLAYER_BLESSING_SKILL_STATE := preload("res://scripts/player/player_blessing_skill_state.gd")
 const PLAYER_ROLE_STAT_FLOW := preload("res://scripts/player/player_role_stat_flow.gd")
@@ -465,6 +470,29 @@ static func _apply_ability_save_data(player, data: Dictionary) -> void:
 	player.gunner_shrapnel_field_ability.apply_save_data(_get_ability_runtime_entry(ability_runtime, "shrapnel_field", {
 		"cooldown_remaining": float(data.get("gunner_shrapnel_field_cooldown_remaining", 0.0))
 	}))
+	_apply_mechanic_ability_save(player, "mechanic_drone_ability", MECHANIC_DRONE_ABILITY, ability_runtime, "drone")
+	_apply_mechanic_ability_save(player, "mechanic_mine_ability", MECHANIC_MINE_ABILITY, ability_runtime, "mine")
+	_apply_mechanic_ability_save(player, "mechanic_emp_burst_ability", MECHANIC_EMP_BURST_ABILITY, ability_runtime, "emp_burst")
+	_apply_mechanic_ability_save(player, "mechanic_tulip_turret_ability", MECHANIC_TULIP_TURRET_ABILITY, ability_runtime, "tulip_turret")
+	_apply_mechanic_ability_save(player, "mechanic_missile_volley_ability", MECHANIC_MISSILE_VOLLEY_ABILITY, ability_runtime, "missile_volley")
+
+static func _apply_mechanic_ability_save(player, property_name: String, ability_class, ability_runtime: Dictionary, skill_id: String) -> void:
+	if player == null or not (property_name in player):
+		return
+	var ability: Variant = player.get(property_name)
+	if ability == null:
+		ability = ability_class.new()
+		player.set(property_name, ability)
+	ability.apply_save_data(_get_ability_runtime_entry(ability_runtime, skill_id, {}))
+	ability.restore_effect_if_active(player)
+
+static func _get_ability_save_entry(player, property_name: String) -> Dictionary:
+	if player == null or not (property_name in player):
+		return {}
+	var ability: Variant = player.get(property_name)
+	if ability == null:
+		return {}
+	return ability.get_save_data()
 
 static func _get_ability_runtime(player) -> Dictionary:
 	return {
@@ -482,7 +510,12 @@ static func _get_ability_runtime(player) -> Dictionary:
 		"flame_path": player.mage_flame_path_ability.get_save_data() if player.mage_flame_path_ability != null else {},
 		"dark_contract": player.mage_dark_contract_ability.get_save_data() if player.mage_dark_contract_ability != null else {},
 		"fireball": player.mage_fireball_ability.get_save_data() if player.mage_fireball_ability != null else {},
-		"surging_wave": player.mage_tidal_surge_ability.get_save_data() if player.mage_tidal_surge_ability != null else {}
+		"surging_wave": player.mage_tidal_surge_ability.get_save_data() if player.mage_tidal_surge_ability != null else {},
+		"drone": _get_ability_save_entry(player, "mechanic_drone_ability"),
+		"mine": _get_ability_save_entry(player, "mechanic_mine_ability"),
+		"emp_burst": _get_ability_save_entry(player, "mechanic_emp_burst_ability"),
+		"tulip_turret": _get_ability_save_entry(player, "mechanic_tulip_turret_ability"),
+		"missile_volley": _get_ability_save_entry(player, "mechanic_missile_volley_ability")
 	}
 
 static func _get_ability_runtime_entry(runtime: Dictionary, skill_id: String, fallback: Dictionary) -> Dictionary:

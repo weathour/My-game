@@ -82,6 +82,9 @@ func _check_path_trail() -> void:
 	_expect(_find_trail_polygon(scene) != null, "surging wave II should create a rectangular trail visual")
 	if owner.schedules.size() > 0:
 		wave.global_position = Vector2(100.0, 0.0)
+		# 拖尾多边形由 trail 节点的 _process 驱动; 等两帧让出一帧处理(信号先于节点 _process 触发)
+		await process_frame
+		await process_frame
 		var callback: Callable = owner.schedules[0].get("callback")
 		callback.call(0)
 	_expect(owner.rect_damage_calls.size() == 1, "surging wave II trail should damage enemies along one oriented rectangle each tick")

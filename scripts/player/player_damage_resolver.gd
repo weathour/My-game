@@ -1035,13 +1035,13 @@ static func _resolve_damage_source_role_id(source_role_id: String) -> String:
 		return "gunner"
 	if PLAYER_GUNNER_EXPLOSIVE_ROUND_FLOW.is_explosive_round_killblast_source(source_role_id):
 		return "gunner"
-	for role_id in ["swordsman", "gunner", "mage"]:
+	for role_id in ["swordsman", "gunner", "mage", "mechanic"]:
 		if source_role_id.begins_with("%s_basic:" % role_id):
 			return role_id
 	return source_role_id
 
 static func _is_basic_attack_damage_source(source_role_id: String) -> bool:
-	return source_role_id.begins_with("swordsman_basic:") or source_role_id.begins_with("gunner_basic:") or source_role_id.begins_with("mage_basic:")
+	return source_role_id.begins_with("swordsman_basic:") or source_role_id.begins_with("gunner_basic:") or source_role_id.begins_with("mage_basic:") or source_role_id.begins_with("mechanic_basic:")
 
 static func snapshot_gunner_damage_event_multiplier(owner, source_role_id: String, has_hits: bool, damage_event_id: String = "") -> float:
 	var resolved_role_id := _resolve_damage_source_role_id(source_role_id)

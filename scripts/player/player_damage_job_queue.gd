@@ -339,13 +339,13 @@ func _resolve_damage_source_role_id(source_role_id: String) -> String:
 		return "gunner"
 	if PLAYER_GUNNER_EXPLOSIVE_ROUND_FLOW.is_explosive_round_killblast_source(source_role_id):
 		return "gunner"
-	for role_id in ["swordsman", "gunner", "mage"]:
+	for role_id in ["swordsman", "gunner", "mage", "mechanic"]:
 		if source_role_id.begins_with("%s_basic:" % role_id):
 			return role_id
 	return source_role_id
 
 func _is_basic_attack_damage_source(source_role_id: String) -> bool:
-	return source_role_id.begins_with("swordsman_basic:") or source_role_id.begins_with("gunner_basic:") or source_role_id.begins_with("mage_basic:")
+	return source_role_id.begins_with("swordsman_basic:") or source_role_id.begins_with("gunner_basic:") or source_role_id.begins_with("mage_basic:") or source_role_id.begins_with("mechanic_basic:")
 
 func _is_enemy_damageable(enemy: Node) -> bool:
 	if enemy == null or not is_instance_valid(enemy):

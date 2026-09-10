@@ -413,6 +413,10 @@ static func take_damage(owner, amount: float) -> void:
 		_show_gunner_flash_immunity_tag(owner)
 		return
 
+	if _try_mechanic_guard_bot_block(owner):
+		owner.hurt_cooldown_remaining = owner.hurt_cooldown * 0.55
+		return
+
 	if owner._get_active_role()["id"] == "swordsman":
 		var nearby_enemy_count: int = owner._count_enemies_in_radius(owner.get_hurtbox_center(), 62.0)
 		if nearby_enemy_count > 0:
@@ -444,6 +448,13 @@ static func take_damage(owner, amount: float) -> void:
 
 	if owner.current_health <= 0.0:
 		_start_death_sequence(owner)
+
+
+static func _try_mechanic_guard_bot_block(owner) -> bool:
+	var ability = owner.get("mechanic_drone_ability") if owner != null else null
+	if ability == null or not ability.has_method("try_block_damage"):
+		return false
+	return bool(ability.try_block_damage(owner))
 
 
 static func _start_death_sequence(owner) -> void:

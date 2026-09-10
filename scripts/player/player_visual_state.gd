@@ -11,6 +11,9 @@ const GUNNER_VISUAL_BASE_POSITION := Vector2(0.0, 0.0)
 const WIZARD_VISUAL_SCENE := preload("res://assets/players/wizard/wizard.tscn")
 const WIZARD_VISUAL_SCALE := Vector2(1.7, 1.7)
 const WIZARD_VISUAL_BASE_POSITION := Vector2(0.0, -8.0)
+const MECHANIC_VISUAL_SCENE := preload("res://assets/players/mechanic/mechanic.tscn")
+const MECHANIC_VISUAL_SCALE := Vector2(1.7, 1.7)
+const MECHANIC_VISUAL_BASE_POSITION := Vector2(0.0, -8.0)
 const ROLE_BODY_CENTER_OFFSETS := {
 	"swordsman": Vector2.ZERO,
 	"gunner": Vector2.ZERO,
@@ -184,7 +187,7 @@ static func update_role_idle_visual(owner: Node, role_id: String, facing_directi
 	sprite.position = base_position + Vector2(0.0, sin(role_visual_time * 4.4) * bob_strength)
 	sprite.position = sprite.position.round()
 	sprite.rotation = tilt
-	if role_id in ["swordsman", "gunner", "mage"]:
+	if role_id in ["swordsman", "gunner", "mage", "mechanic"]:
 		sprite.flip_h = _get_visual_facing_direction(owner, facing_direction).x < 0.0
 	_update_invulnerability_tint(owner)
 
@@ -269,6 +272,15 @@ static func update_visuals(owner: Node, role_data: Dictionary, active_role_visua
 			if polygon != null and not should_hide_scene:
 				polygon.visible = false
 			return
+	if role_id == "mechanic":
+		var scene_visual := _create_mechanic_scene_visual()
+		if scene_visual != null:
+			visual_root.add_child(scene_visual)
+			var should_hide_scene := is_role_visual_hidden(role_id, active_role_visual_hidden, hidden_role_id)
+			scene_visual.visible = not should_hide_scene
+			if polygon != null and not should_hide_scene:
+				polygon.visible = false
+			return
 	var sprite := Sprite2D.new()
 	sprite.name = "RoleSprite"
 	if not configure_role_sprite(owner, sprite, role_id):
@@ -337,6 +349,19 @@ static func _create_mage_scene_visual() -> Node2D:
 		animated_sprite.centered = true
 		if animated_sprite.sprite_frames != null:
 			animated_sprite.play()
+	return scene_visual
+
+static func _create_mechanic_scene_visual() -> Node2D:
+	var scene_visual := MECHANIC_VISUAL_SCENE.instantiate() as Node2D
+	if scene_visual == null:
+		return null
+	scene_visual.name = "RoleSceneVisual"
+	scene_visual.position = MECHANIC_VISUAL_BASE_POSITION
+	scene_visual.scale = MECHANIC_VISUAL_SCALE
+	scene_visual.set_meta("base_position", MECHANIC_VISUAL_BASE_POSITION)
+	scene_visual.set_meta("base_scale", MECHANIC_VISUAL_SCALE)
+	if scene_visual.has_method("set_moving"):
+		scene_visual.set_moving(false)
 	return scene_visual
 
 

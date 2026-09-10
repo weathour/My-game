@@ -228,7 +228,7 @@ class DamageOwner:
 	func _get_gunner_distance_damage_multiplier(_distance: float) -> float:
 		return 1.0
 
-	func _roll_critical_hit(_role_id: String) -> bool:
+	func _roll_critical_hit(_role_id: String, _chance_bonus: float = 0.0) -> bool:
 		return false
 
 	func _get_critical_damage_multiplier(_role_id: String) -> float:

@@ -63,6 +63,8 @@ static func update_timers(owner, delta: float) -> void:
 		owner._tick_gunner_flash_trait(delta)
 	if owner.get("gunner_role") != null and owner.gunner_role.has_method("update_talent_states"):
 		owner.gunner_role.update_talent_states(owner, delta)
+	if owner.get("mechanic_role") != null and owner.mechanic_role.has_method("update_trait_state"):
+		owner.mechanic_role.update_trait_state(owner, delta)
 	PLAYER_SWORDSMAN_BATTLE_WILL_FLOW.tick(owner, delta)
 	PLAYER_SWORDSMAN_ULTIMATE_FLOW.update(owner, delta)
 	var swordsman_special: Dictionary = owner._get_role_special_state("swordsman")
@@ -118,6 +120,21 @@ static func update_timers(owner, delta: float) -> void:
 	if owner.swordsman_crescent_wave_ability != null:
 		PLAYER_MAGE_ARCANE_SURPLUS_TALENT_FLOW.apply_skill_cooldown_tick_bonus(owner, owner.swordsman_crescent_wave_ability, "swordsman", delta)
 		owner.swordsman_crescent_wave_ability.update(delta)
+	if owner.get("mechanic_drone_ability") != null:
+		PLAYER_MAGE_ARCANE_SURPLUS_TALENT_FLOW.apply_skill_cooldown_tick_bonus(owner, owner.get("mechanic_drone_ability"), "mechanic", delta)
+		owner.mechanic_drone_ability.update(owner, delta)
+	if owner.get("mechanic_mine_ability") != null:
+		PLAYER_MAGE_ARCANE_SURPLUS_TALENT_FLOW.apply_skill_cooldown_tick_bonus(owner, owner.get("mechanic_mine_ability"), "mechanic", delta)
+		owner.mechanic_mine_ability.update(owner, delta)
+	if owner.get("mechanic_emp_burst_ability") != null:
+		PLAYER_MAGE_ARCANE_SURPLUS_TALENT_FLOW.apply_skill_cooldown_tick_bonus(owner, owner.get("mechanic_emp_burst_ability"), "mechanic", delta)
+		owner.mechanic_emp_burst_ability.update(owner, delta)
+	if owner.get("mechanic_tulip_turret_ability") != null:
+		PLAYER_MAGE_ARCANE_SURPLUS_TALENT_FLOW.apply_skill_cooldown_tick_bonus(owner, owner.get("mechanic_tulip_turret_ability"), "mechanic", delta)
+		owner.mechanic_tulip_turret_ability.update(owner, delta)
+	if owner.get("mechanic_missile_volley_ability") != null:
+		PLAYER_MAGE_ARCANE_SURPLUS_TALENT_FLOW.apply_skill_cooldown_tick_bonus(owner, owner.get("mechanic_missile_volley_ability"), "mechanic", delta)
+		owner.mechanic_missile_volley_ability.update(owner, delta)
 	owner._try_trigger_swordsman_blade_storm()
 	owner._try_trigger_swordsman_knight_thrust()
 	owner._try_trigger_swordsman_king_blade()
@@ -133,6 +150,16 @@ static func update_timers(owner, delta: float) -> void:
 	owner._try_trigger_mage_meta_field()
 	owner._try_trigger_mage_dark_contract()
 	owner._try_trigger_mage_fireball()
+	if owner.has_method("_try_trigger_mechanic_drone"):
+		owner._try_trigger_mechanic_drone()
+	if owner.has_method("_try_trigger_mechanic_mine"):
+		owner._try_trigger_mechanic_mine()
+	if owner.has_method("_try_trigger_mechanic_emp_burst"):
+		owner._try_trigger_mechanic_emp_burst()
+	if owner.has_method("_try_trigger_mechanic_tulip_turret"):
+		owner._try_trigger_mechanic_tulip_turret()
+	if owner.has_method("_try_trigger_mechanic_missile_volley"):
+		owner._try_trigger_mechanic_missile_volley()
 	if owner.perpetual_motion_cooldown_remaining > 0.0:
 		owner.perpetual_motion_cooldown_remaining = max(0.0, owner.perpetual_motion_cooldown_remaining - delta)
 	apply_developer_no_cooldown(owner)
@@ -238,3 +265,13 @@ static func apply_developer_no_cooldown(owner) -> void:
 		owner.swordsman_judgement_sword_ability.active_remaining = 0.0
 	if owner.swordsman_crescent_wave_ability != null:
 		owner.swordsman_crescent_wave_ability.cooldown_remaining = 0.0
+	if owner.get("mechanic_drone_ability") != null:
+		owner.mechanic_drone_ability.cooldown_remaining = 0.0
+	if owner.get("mechanic_mine_ability") != null:
+		owner.mechanic_mine_ability.cooldown_remaining = 0.0
+	if owner.get("mechanic_emp_burst_ability") != null:
+		owner.mechanic_emp_burst_ability.cooldown_remaining = 0.0
+	if owner.get("mechanic_tulip_turret_ability") != null:
+		owner.mechanic_tulip_turret_ability.cooldown_remaining = 0.0
+	if owner.get("mechanic_missile_volley_ability") != null:
+		owner.mechanic_missile_volley_ability.cooldown_remaining = 0.0

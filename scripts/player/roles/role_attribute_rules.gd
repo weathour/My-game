@@ -9,12 +9,14 @@ const EVOLVED_TITLE_COLOR := Color(0.38, 1.0, 0.48, 1.0)
 const ATTR_SWORDSMAN := "swordsman_trait"
 const ATTR_GUNNER := "gunner_trait"
 const ATTR_MAGE := "mage_trait"
-const ATTRIBUTE_KEYS := [ATTR_SWORDSMAN, ATTR_GUNNER, ATTR_MAGE]
+const ATTR_MECHANIC := "mechanic_trait"
+const ATTRIBUTE_KEYS := [ATTR_SWORDSMAN, ATTR_GUNNER, ATTR_MAGE, ATTR_MECHANIC]
 
 const ROLE_PRIMARY_ATTRIBUTES := {
 	"swordsman": ATTR_SWORDSMAN,
 	"gunner": ATTR_GUNNER,
-	"mage": ATTR_MAGE
+	"mage": ATTR_MAGE,
+	"mechanic": ATTR_MECHANIC
 }
 
 const SWORDSMAN_TRAIT_HEAL_BASE_PROC_CHANCE := 0.05
@@ -26,9 +28,11 @@ const SWORDSMAN_TRAIT_MAX_ROLL_HITS := 2
 const SWORDSMAN_BASE_DODGE_CHANCE := 0.03
 const GUNNER_BASE_DODGE_CHANCE := 0.15
 const MAGE_BASE_DODGE_CHANCE := 0.03
+const MECHANIC_BASE_DODGE_CHANCE := 0.03
 const SWORDSMAN_BASE_DAMAGE_REDUCTION_VALUE := 20.0
 const GUNNER_BASE_DAMAGE_REDUCTION_VALUE := -40.0
 const MAGE_BASE_DAMAGE_REDUCTION_VALUE := 0.0
+const MECHANIC_BASE_DAMAGE_REDUCTION_VALUE := 0.0
 const GUNNER_TRAIT_DODGE_VALUE_PER_LEVEL := 2.0
 const MAGE_TRAIT_KILL_ENERGY_BASE_CHANCE := 0.10
 const MAGE_TRAIT_KILL_ENERGY_CHANCE_PER_LEVEL := 0.02
@@ -99,6 +103,8 @@ static func get_role_base_dodge_chance(role_id: String) -> float:
 			return GUNNER_BASE_DODGE_CHANCE
 		"mage":
 			return MAGE_BASE_DODGE_CHANCE
+		"mechanic":
+			return MECHANIC_BASE_DODGE_CHANCE
 	return 0.0
 
 
@@ -110,6 +116,8 @@ static func get_role_base_damage_reduction_value(role_id: String) -> float:
 			return GUNNER_BASE_DAMAGE_REDUCTION_VALUE
 		"mage":
 			return MAGE_BASE_DAMAGE_REDUCTION_VALUE
+		"mechanic":
+			return MECHANIC_BASE_DAMAGE_REDUCTION_VALUE
 	return 0.0
 
 
@@ -164,6 +172,10 @@ static func get_role_attribute_description(_role_id: String, attribute_key: Stri
 				get_mage_trait_kill_energy_proc_chance(level) * 100.0,
 				MAGE_TRAIT_KILL_ENERGY_CHANCE_PER_LEVEL * 100.0
 			]
+		ATTR_MECHANIC:
+			return "机械师特性提升到 Lv.%s：战场改装——机械师登场期间每 4 秒产出 1 个零件，最多 10 个；每个零件使机械师的召唤物与力场（定点机炮、感应地雷、磁滞力场、重型炮台）与机械全开齐射伤害提升 4%%。" % [
+				_format_level(level)
+			]
 	return ""
 
 
@@ -181,7 +193,11 @@ static func get_balanced_attribute_description_for_roles(current_levels: Diction
 			continue
 		var next_level := get_effective_level(float(current_levels.get(trait_key, 0.0)) + added_amount)
 		parts.append("%s Lv.%s" % [str((definition as Dictionary).get("trait_name", trait_key)), _format_level(next_level)])
-	var target_text := "所选英雄特性" if trait_definitions.size() != 3 else "三名英雄特性"
+	var target_text := "所选英雄特性"
+	if trait_definitions.size() == 3:
+		target_text = "三名英雄特性"
+	elif trait_definitions.size() == 4:
+		target_text = "四名英雄特性"
 	return "共同致富：%s都 +%.2f，且切换英雄冷却 x%.0f%%。本次后：%s。" % [
 		target_text,
 		added_amount,

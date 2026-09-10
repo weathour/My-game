@@ -172,15 +172,15 @@ static func grant_skill_talent(main: Node, talent_id: String) -> void:
 
 
 static func _find_level_talent_role(talent_id: String) -> String:
-	for role_id in ["swordsman", "gunner", "mage"]:
+	for role_id in PLAYER_SKILL_TALENT_SYSTEM.LEVEL_TALENT_DEFINITIONS.keys():
 		for talent_value in PLAYER_SKILL_TALENT_SYSTEM.LEVEL_TALENT_DEFINITIONS.get(role_id, []):
 			if talent_value is Dictionary and str((talent_value as Dictionary).get("id", "")) == talent_id:
-				return role_id
+				return str(role_id)
 	return ""
 
 
 static func _clear_all_level_talents(player) -> void:
-	for role_id in ["swordsman", "gunner", "mage"]:
+	for role_id in PLAYER_SKILL_TALENT_SYSTEM.LEVEL_TALENT_DEFINITIONS.keys():
 		var role_state: Dictionary = player.role_special_states.get(role_id, {})
 		role_state[PLAYER_SKILL_TALENT_SYSTEM.LEVEL_TALENTS_KEY] = []
 		role_state[PLAYER_SKILL_TALENT_SYSTEM.LEVEL_TALENT_GROUP_LOCKS_KEY] = {}
@@ -301,6 +301,16 @@ static func _get_skill_ability_property(skill_id: String) -> String:
 			return "mage_dark_contract_ability"
 		PLAYER_BLESSING_SKILL_STATE.SKILL_FIREBALL:
 			return "mage_fireball_ability"
+		PLAYER_BLESSING_SKILL_STATE.SKILL_DRONE:
+			return "mechanic_drone_ability"
+		PLAYER_BLESSING_SKILL_STATE.SKILL_MINE:
+			return "mechanic_mine_ability"
+		PLAYER_BLESSING_SKILL_STATE.SKILL_EMP_BURST:
+			return "mechanic_emp_burst_ability"
+		PLAYER_BLESSING_SKILL_STATE.SKILL_TULIP_TURRET:
+			return "mechanic_tulip_turret_ability"
+		PLAYER_BLESSING_SKILL_STATE.SKILL_MISSILE_VOLLEY:
+			return "mechanic_missile_volley_ability"
 	return ""
 
 static func _get_owner_property(owner, property_name: String):

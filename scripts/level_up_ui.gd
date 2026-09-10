@@ -1,4 +1,4 @@
-﻿extends CanvasLayer
+extends CanvasLayer
 
 signal upgrade_selected(option_id: String, attribute_option_id: String)
 signal upgrade_refresh_requested
@@ -24,15 +24,16 @@ const BUILD_CARD_OPTION_COUNT := 4
 const TRAIT_HEAD_SCENES := {
 	"level_trait_swordsman": preload("res://assets/UI/facility/swordhead.tscn"),
 	"level_trait_gunner": preload("res://assets/UI/facility/gunhead.tscn"),
-	"level_trait_mage": preload("res://assets/UI/facility/witchhead.tscn")
+	"level_trait_mage": preload("res://assets/UI/facility/witchhead.tscn"),
+	"level_trait_mechanic": preload("res://assets/UI/facility/mechanichead.tscn")
 }
 const LEVEL_TALENT_ROLE_SCENES := {
 	"swordsman": preload("res://assets/UI/facility/swordchange.tscn"),
 	"gunner": preload("res://assets/UI/facility/gunchange.tscn"),
-	"mage": preload("res://assets/UI/facility/witchchange.tscn")
+	"mage": preload("res://assets/UI/facility/witchchange.tscn"),
+	"mechanic": preload("res://assets/UI/facility/mechanicchange.tscn")
 }
 const LEVEL_TALENT_ROLE_BUTTON_SCALE := 2.5
-const LEVEL_TALENT_ROLE_ORDER := ["swordsman", "gunner", "mage"]
 const BUILD_CARD_DISPLAY_SCALE := 1.0
 const BUILD_CARD_VISUAL_OFFSET := Vector2(52.0, 98.0)
 const TRAIT_BUTTON_SCALE := 2.0

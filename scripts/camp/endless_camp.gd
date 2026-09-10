@@ -8,6 +8,7 @@ const GAME_SETTINGS := preload("res://scripts/game_settings.gd")
 const RUAN_STONE_SYSTEM := preload("res://scripts/player/ruan_stone_system.gd")
 const SURVIVORS_THEME := preload("res://scripts/ui/theme/survivors_ui_theme.gd")
 const ENDLESS_TIER_OVERLAY := preload("res://scripts/ui/save/endless_tier_overlay.gd")
+const TEAM_SWAP_PANEL_SCENE := preload("res://scenes/UI/team_swap_panel.tscn")
 
 const INTERACTABLE_TEXT := {
 	"swordsman": {
@@ -21,6 +22,10 @@ const INTERACTABLE_TEXT := {
 	"mage": {
 		"name": "\u672f\u5e08",
 		"prompt": "\u672f\u5e08\u6682\u672a\u5f00\u653e\u5bf9\u8bdd"
+	},
+	"mechanic": {
+		"name": "\u673a\u68b0\u5e08",
+		"prompt": "\u673a\u68b0\u5e08\u6682\u672a\u5f00\u653e\u5bf9\u8bdd"
 	},
 	"blacksmith": {
 		"name": "\u94c1\u5320",
@@ -37,6 +42,10 @@ const INTERACTABLE_TEXT := {
 	"endless_portal": {
 		"name": "\u65e0\u5c3d\u4f20\u9001\u95e8",
 		"prompt": "选择无尽 N 层"
+	},
+	"prep_station": {
+		"name": "整备台",
+		"prompt": "调整队伍"
 	}
 }
 const DIALOGUE_LINES := {
@@ -77,6 +86,7 @@ var ruan_stone_profile: Dictionary = {}
 var ruan_stone_purchase_buttons: Dictionary = {}
 var ruan_stone_equip_buttons: Dictionary = {}
 var tier_overlay: Control
+var team_swap_panel: Control
 
 func _ready() -> void:
 	get_tree().paused = false
@@ -85,13 +95,16 @@ func _ready() -> void:
 	_apply_character_stand_visibility(camp_role_id)
 	_setup_ui()
 	_setup_tier_overlay()
+	_setup_team_swap_panel()
 	_apply_interactable_texts()
 	_connect_interactables()
 	_update_prompt()
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):
-		if tier_overlay != null and tier_overlay.visible:
+		if team_swap_panel != null and team_swap_panel.visible:
+			team_swap_panel.close_panel()
+		elif tier_overlay != null and tier_overlay.visible:
 			tier_overlay.close_overlay()
 		elif dialogue_panel.visible:
 			_close_dialogue()
@@ -141,6 +154,12 @@ func _setup_tier_overlay() -> void:
 	tier_overlay.tier_selected.connect(_on_endless_tier_selected)
 	tier_overlay.closed.connect(_on_tier_overlay_closed)
 	$CanvasLayer.add_child(tier_overlay)
+
+func _setup_team_swap_panel() -> void:
+	team_swap_panel = TEAM_SWAP_PANEL_SCENE.instantiate()
+	team_swap_panel.name = "TeamSwapPanel"
+	team_swap_panel.closed.connect(_on_team_swap_closed)
+	$CanvasLayer.add_child(team_swap_panel)
 
 func _resolve_camp_role_id() -> String:
 	var run_data: Dictionary = SAVE_MANAGER.load_run(-1, SAVE_MANAGER.MODE_ENDLESS)
@@ -206,6 +225,8 @@ func _connect_interactables() -> void:
 			node.connect("interacted", Callable(self, "_on_interactable_interacted"))
 
 func _handle_interact() -> void:
+	if team_swap_panel != null and team_swap_panel.visible:
+		return
 	if dialogue_panel.visible:
 		_advance_dialogue()
 		return
@@ -234,6 +255,8 @@ func _on_interactable_interacted(interactable: Node) -> void:
 	match kind:
 		"portal":
 			_open_tier_overlay()
+		"team_swap":
+			_open_team_swap_panel()
 		"tutorial":
 			_open_tutorial_prompt()
 		"shop":
@@ -254,7 +277,7 @@ func _get_best_interactable() -> Node:
 	return null
 
 func _update_prompt() -> void:
-	if dialogue_panel.visible or shop_panel.visible or ruan_stone_panel.visible or tutorial_prompt_panel.visible or (tier_overlay != null and tier_overlay.visible):
+	if dialogue_panel.visible or shop_panel.visible or ruan_stone_panel.visible or tutorial_prompt_panel.visible or (tier_overlay != null and tier_overlay.visible) or (team_swap_panel != null and team_swap_panel.visible):
 		prompt_label.visible = false
 		prompt_label.text = ""
 		return
@@ -507,5 +530,19 @@ func _on_endless_tier_selected(tier: int, continue_existing: bool) -> void:
 	get_tree().change_scene_to_file(GAME_SCENE_PATH)
 
 func _on_tier_overlay_closed() -> void:
+	_set_camp_player_movement_enabled(true)
+	_update_prompt()
+
+func _open_team_swap_panel() -> void:
+	_close_dialogue()
+	_close_shop()
+	_close_ruan_stone_shop()
+	_close_tutorial_prompt()
+	_show_message("")
+	team_swap_panel.open(SAVE_MANAGER.MODE_ENDLESS)
+	_set_camp_player_movement_enabled(false)
+	_update_prompt()
+
+func _on_team_swap_closed() -> void:
 	_set_camp_player_movement_enabled(true)
 	_update_prompt()

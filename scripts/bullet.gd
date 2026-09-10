@@ -120,6 +120,8 @@ var damage_event_id: String = ""
 var damage_event_registered: bool = false
 var entry_repulse_on_first_hit: bool = false
 var entry_repulse_consumed: bool = false
+var custom_sprite_frames: SpriteFrames
+var cached_custom_sprite_frames: SpriteFrames
 
 func _get_desktop_sketch_path(relative_path: String) -> String:
 	return (OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP).replace("\\", "/") + "/草图/" + relative_path)
@@ -156,10 +158,24 @@ func _refresh_bullet_visual(force: bool = false) -> void:
 		and is_equal_approx(cached_visual_scale_multiplier, visual_scale_multiplier) \
 		and cached_visual_color == visual_color \
 		and cached_animated_scene_size == animated_scene_size \
-		and cached_animated_visible_bounds == animated_visible_bounds:
+		and cached_animated_visible_bounds == animated_visible_bounds \
+		and cached_custom_sprite_frames == custom_sprite_frames:
 			return
 
 	var animated_sprite := get_node_or_null("AnimatedSprite2D") as AnimatedSprite2D
+	if custom_sprite_frames != null:
+		if animated_sprite == null:
+			animated_sprite = AnimatedSprite2D.new()
+			animated_sprite.name = "AnimatedSprite2D"
+			add_child(animated_sprite)
+		if animated_sprite.sprite_frames != custom_sprite_frames:
+			animated_sprite.sprite_frames = custom_sprite_frames
+			animated_sprite.animation = StringName()
+		animated_sprite.visible = true
+	elif animated_sprite != null:
+		animated_sprite.visible = false
+		animated_sprite.stop()
+		animated_sprite = null
 	var polygon := get_node_or_null("Polygon2D") as Polygon2D
 	var sprite := get_node_or_null("BulletSprite") as Sprite2D
 	if animated_sprite != null:
@@ -233,6 +249,7 @@ func _update_visual_cache() -> void:
 	cached_visual_color = visual_color
 	cached_animated_scene_size = animated_scene_size
 	cached_animated_visible_bounds = animated_visible_bounds
+	cached_custom_sprite_frames = custom_sprite_frames
 
 func _enter_tree() -> void:
 	add_to_group("player_projectiles")
@@ -318,6 +335,7 @@ func reset_projectile(config: Dictionary = {}) -> void:
 	enemy_hit_radius_max = float(config.get("enemy_hit_radius_max", _projectile_scene_default("enemy_hit_radius_max", 28.0)))
 	animated_scene_size = config.get("animated_scene_size", _projectile_scene_default("animated_scene_size", BULLET_EFFECT_SCENE_SIZE))
 	animated_visible_bounds = config.get("animated_visible_bounds", _projectile_scene_default("animated_visible_bounds", BULLET_EFFECT_VISIBLE_BOUNDS))
+	custom_sprite_frames = config.get("custom_sprite_frames", null)
 	min_hit_travel_distance = float(config.get("min_hit_travel_distance", _projectile_scene_default("min_hit_travel_distance", 0.0)))
 	hit_scan_interval = float(config.get("hit_scan_interval", _projectile_scene_default("hit_scan_interval", 0.0)))
 	split_count = int(config.get("split_count", _projectile_scene_default("split_count", 0)))

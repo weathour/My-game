@@ -4,8 +4,10 @@ const MAIN_MENU_SCENE_PATH := "res://scenes/main_menu.tscn"
 const SAVE_MANAGER := preload("res://scripts/save_manager.gd")
 const STORY_DATA := preload("res://scripts/story_data.gd")
 const SURVIVORS_THEME := preload("res://scripts/ui/theme/survivors_ui_theme.gd")
+const TEAM_SWAP_PANEL_SCENE := preload("res://scenes/UI/team_swap_panel.tscn")
 
 var profile: Dictionary = {}
+var team_swap_panel: Control
 
 func _ready() -> void:
 	if not STORY_DATA.is_story_mode_enabled():
@@ -16,10 +18,16 @@ func _ready() -> void:
 	if profile.is_empty():
 		get_tree().change_scene_to_file(STORY_DATA.SAVE_SELECT_SCENE_PATH)
 		return
+	team_swap_panel = TEAM_SWAP_PANEL_SCENE.instantiate()
+	team_swap_panel.visible = false
+	team_swap_panel.closed.connect(_on_team_swap_closed)
+	add_child(team_swap_panel)
 	_rebuild_ui()
 
 func _rebuild_ui() -> void:
 	for child in get_children():
+		if child == team_swap_panel:
+			continue
 		child.queue_free()
 
 	profile = SAVE_MANAGER.load_story_profile()
@@ -62,6 +70,13 @@ func _rebuild_ui() -> void:
 	slot_label.add_theme_color_override("font_color", SURVIVORS_THEME.COLOR_TEXT_MUTED)
 	title_column.add_child(slot_label)
 
+	var swap_team_button := Button.new()
+	swap_team_button.text = "调整队伍"
+	swap_team_button.custom_minimum_size = Vector2(160, 46)
+	SURVIVORS_THEME.apply_button_style(swap_team_button)
+	swap_team_button.pressed.connect(_on_swap_team_pressed)
+	header.add_child(swap_team_button)
+
 	var back_button := Button.new()
 	back_button.text = "返回主菜单"
 	back_button.custom_minimum_size = Vector2(160, 46)
@@ -85,6 +100,9 @@ func _rebuild_ui() -> void:
 	SURVIVORS_THEME.apply_button_style(start_button, "primary")
 	start_button.pressed.connect(_on_start_pressed)
 	root.add_child(start_button)
+
+	if team_swap_panel != null and team_swap_panel.get_parent() == self:
+		move_child(team_swap_panel, get_child_count() - 1)
 
 func _build_roster_panel() -> Control:
 	var panel := PanelContainer.new()
@@ -268,6 +286,14 @@ func _on_start_pressed() -> void:
 		get_tree().change_scene_to_file(MAIN_MENU_SCENE_PATH)
 		return
 	get_tree().change_scene_to_file(STORY_DATA.BATTLE_SCENE_PATH)
+
+func _on_swap_team_pressed() -> void:
+	if team_swap_panel == null:
+		return
+	team_swap_panel.open(SAVE_MANAGER.MODE_STORY)
+
+func _on_team_swap_closed() -> void:
+	_rebuild_ui()
 
 func _on_back_pressed() -> void:
 	get_tree().change_scene_to_file(MAIN_MENU_SCENE_PATH)

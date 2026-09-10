@@ -45,7 +45,8 @@ const SWITCH_ROLE_ORDER := ["swordsman", "gunner", "mage"]
 const SWITCH_HEAD_SCENES := {
 	"swordsman": preload("res://assets/UI/facility/swordchange.tscn"),
 	"gunner": preload("res://assets/UI/facility/gunchange.tscn"),
-	"mage": preload("res://assets/UI/facility/witchchange.tscn")
+	"mage": preload("res://assets/UI/facility/witchchange.tscn"),
+	"mechanic": preload("res://assets/UI/facility/mechanicchange.tscn")
 }
 
 class SkillCooldownIcon:
@@ -721,6 +722,7 @@ var switch_cd_active_role_id: String = ""
 var switch_cd_layout_initialized: bool = false
 var switch_cd_layout_tween: Tween
 var switch_cd_widget: Control
+var switch_role_order: Array = []
 var switch_cooldown_remaining_value: float = 0.0
 var switch_cooldown_duration_value: float = 0.5
 var team_stack_widget: Control
@@ -840,7 +842,7 @@ func update_switch_cooldown(role_id: String, cooldown_remaining: float, cooldown
 		_layout_switch_portraits(role_id, switch_cd_layout_initialized and switch_cd_active_role_id != role_id)
 		switch_cd_active_role_id = role_id
 		switch_cd_layout_initialized = true
-		for switch_role_id in SWITCH_ROLE_ORDER:
+		for switch_role_id in _get_switch_role_order():
 			var switch_role_id_string: String = str(switch_role_id)
 			var portrait: SwitchPortraitDisplay = switch_cd_portraits.get(switch_role_id_string, null) as SwitchPortraitDisplay
 			if portrait == null:
@@ -993,16 +995,7 @@ func _build_legacy_widgets() -> void:
 	switch_cd_left_key_label.add_theme_font_size_override("font_size", 16)
 	left_arrow_box.add_child(switch_cd_left_key_label)
 
-	for switch_role_id in SWITCH_ROLE_ORDER:
-		var switch_role_id_string: String = str(switch_role_id)
-		var portrait := SwitchPortraitDisplay.new()
-		portrait.size = Vector2(56.0, 56.0) * SWITCH_HEAD_SIZE_MULTIPLIER
-		portrait.custom_minimum_size = Vector2(56.0, 56.0) * SWITCH_HEAD_SIZE_MULTIPLIER
-		var scene_value: Variant = SWITCH_HEAD_SCENES.get(switch_role_id_string, null)
-		if scene_value is PackedScene:
-			portrait.set_role_scene(switch_role_id_string, scene_value)
-		switch_cd_widget.add_child(portrait)
-		switch_cd_portraits[switch_role_id_string] = portrait
+	_build_switch_portraits()
 
 	switch_cd_time_label = Label.new()
 	switch_cd_time_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -1322,11 +1315,6 @@ func _get_team_stack_width() -> float:
 	return TEAM_STACK_WIDTH
 
 func update_team_role_statuses(statuses: Array, active_role_id: String, active_role_index: int = 0) -> void:
-	if team_role_rows.is_empty():
-		return
-	if statuses.is_empty():
-		_apply_empty_team_statuses()
-		return
 	team_role_status_by_id.clear()
 	var role_ids: Array[String] = []
 	for status_value in statuses:
@@ -1338,6 +1326,10 @@ func update_team_role_statuses(statuses: Array, active_role_id: String, active_r
 			continue
 		role_ids.append(role_id)
 		team_role_status_by_id[role_id] = status
+	if not role_ids.is_empty():
+		set_switch_role_order(role_ids)
+	if team_role_rows.is_empty():
+		return
 	if role_ids.is_empty():
 		_apply_empty_team_statuses()
 		return
@@ -1493,14 +1485,59 @@ func set_switch_widget_visible(visible_value: bool) -> void:
 	if switch_cd_widget != null:
 		switch_cd_widget.visible = visible_value
 
+func _get_switch_role_order() -> Array:
+	return switch_role_order if not switch_role_order.is_empty() else SWITCH_ROLE_ORDER
+
+
+func set_switch_role_order(role_ids: Array) -> void:
+	var normalized: Array = []
+	for role_value in role_ids:
+		var role_id := str(role_value)
+		if role_id != "" and SWITCH_HEAD_SCENES.has(role_id) and not normalized.has(role_id):
+			normalized.append(role_id)
+	if normalized.is_empty() or normalized == switch_role_order:
+		return
+	switch_role_order = normalized
+	if switch_cd_widget != null:
+		_rebuild_switch_portraits()
+
+
+func _build_switch_portraits() -> void:
+	for switch_role_id in _get_switch_role_order():
+		var switch_role_id_string: String = str(switch_role_id)
+		var portrait := SwitchPortraitDisplay.new()
+		portrait.size = Vector2(56.0, 56.0) * SWITCH_HEAD_SIZE_MULTIPLIER
+		portrait.custom_minimum_size = Vector2(56.0, 56.0) * SWITCH_HEAD_SIZE_MULTIPLIER
+		var scene_value: Variant = SWITCH_HEAD_SCENES.get(switch_role_id_string, null)
+		if scene_value is PackedScene:
+			portrait.set_role_scene(switch_role_id_string, scene_value)
+		switch_cd_widget.add_child(portrait)
+		switch_cd_portraits[switch_role_id_string] = portrait
+
+
+func _rebuild_switch_portraits() -> void:
+	for portrait_value in switch_cd_portraits.values():
+		var portrait := portrait_value as SwitchPortraitDisplay
+		if portrait != null and is_instance_valid(portrait):
+			switch_cd_widget.remove_child(portrait)
+			portrait.queue_free()
+	switch_cd_portraits.clear()
+	_build_switch_portraits()
+	if not _get_switch_role_order().has(switch_cd_active_role_id):
+		switch_cd_active_role_id = str(_get_switch_role_order()[0])
+	_layout_switch_portraits(switch_cd_active_role_id, false)
+	switch_cd_layout_initialized = true
+
+
 func _layout_switch_portraits(active_role_id: String, animate: bool) -> void:
-	var active_index: int = SWITCH_ROLE_ORDER.find(active_role_id)
+	var role_order := _get_switch_role_order()
+	var active_index: int = role_order.find(active_role_id)
 	if active_index < 0:
 		active_index = 1
-	var role_count: int = SWITCH_ROLE_ORDER.size()
-	var left_role_id: String = str(SWITCH_ROLE_ORDER[(active_index + role_count - 1) % role_count])
-	var top_role_id: String = str(SWITCH_ROLE_ORDER[active_index])
-	var right_role_id: String = str(SWITCH_ROLE_ORDER[(active_index + 1) % role_count])
+	var role_count: int = role_order.size()
+	var left_role_id: String = str(role_order[(active_index + role_count - 1) % role_count])
+	var top_role_id: String = str(role_order[active_index])
+	var right_role_id: String = str(role_order[(active_index + 1) % role_count])
 	if switch_cd_layout_tween != null and switch_cd_layout_tween.is_valid():
 		switch_cd_layout_tween.kill()
 	switch_cd_layout_tween = create_tween() if animate else null
