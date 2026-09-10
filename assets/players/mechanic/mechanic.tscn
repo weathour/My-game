@@ -1,0 +1,251 @@
+[gd_scene format=3]
+
+[ext_resource type="Texture2D" path="res://assets/players/mechanic/mechanic-idle.png" id="1_idle"]
+[ext_resource type="Texture2D" path="res://assets/players/mechanic/mechanic-run.png" id="2_run"]
+
+[sub_resource type="GDScript" id="GDScript_mechanic"]
+script/source = "extends Node2D
+
+const IDLE_ANIMATION := &\"mechanic-idle\"
+const RUN_ANIMATION := &\"mechanic-run\"
+const VISUAL_SCALE := Vector2(0.65, 0.65)
+const IDLE_OFFSET := Vector2(-0.5, 4.5)
+const RUN_OFFSET := Vector2(1.4, 5.2)
+
+var sprite: AnimatedSprite2D
+var current_animation: StringName = StringName()
+
+
+func _ready() -> void:
+	_ensure_sprite()
+	set_moving(false)
+
+
+func set_moving(is_moving: bool, move_direction: Vector2 = Vector2.ZERO) -> void:
+	_ensure_sprite()
+	var next_animation: StringName = RUN_ANIMATION if is_moving else IDLE_ANIMATION
+	_update_facing(move_direction, next_animation)
+	if current_animation == next_animation and sprite.is_playing():
+		return
+	current_animation = next_animation
+	_apply_animation_layout(next_animation)
+	if sprite.sprite_frames != null and sprite.sprite_frames.has_animation(next_animation):
+		sprite.play(next_animation)
+
+
+func _update_facing(move_direction: Vector2, animation_name: StringName) -> void:
+	if abs(move_direction.x) <= 0.01:
+		return
+	if animation_name == RUN_ANIMATION:
+		sprite.flip_h = move_direction.x < 0.0
+	else:
+		sprite.flip_h = move_direction.x > 0.0
+
+
+func _ensure_sprite() -> void:
+	if sprite != null:
+		return
+	sprite = get_node_or_null(\"AnimatedSprite2D\") as AnimatedSprite2D
+	if sprite == null:
+		sprite = AnimatedSprite2D.new()
+		sprite.name = \"AnimatedSprite2D\"
+		add_child(sprite)
+	sprite.centered = true
+	sprite.z_index = 1
+	_apply_animation_layout(IDLE_ANIMATION)
+
+
+func _apply_animation_layout(animation_name: StringName) -> void:
+	if sprite == null:
+		return
+	sprite.scale = VISUAL_SCALE
+	sprite.position = RUN_OFFSET if animation_name == RUN_ANIMATION else IDLE_OFFSET
+"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_idle01"]
+atlas = ExtResource("1_idle")
+region = Rect2(0, 0, 245, 138)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_idle02"]
+atlas = ExtResource("1_idle")
+region = Rect2(245, 0, 245, 138)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_idle03"]
+atlas = ExtResource("1_idle")
+region = Rect2(490, 0, 245, 138)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_idle04"]
+atlas = ExtResource("1_idle")
+region = Rect2(735, 0, 245, 138)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_idle05"]
+atlas = ExtResource("1_idle")
+region = Rect2(980, 0, 245, 138)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_idle06"]
+atlas = ExtResource("1_idle")
+region = Rect2(1225, 0, 245, 138)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_idle07"]
+atlas = ExtResource("1_idle")
+region = Rect2(1470, 0, 245, 138)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_idle08"]
+atlas = ExtResource("1_idle")
+region = Rect2(1715, 0, 245, 138)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_idle09"]
+atlas = ExtResource("1_idle")
+region = Rect2(1960, 0, 245, 138)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_idle10"]
+atlas = ExtResource("1_idle")
+region = Rect2(2205, 0, 245, 138)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_idle11"]
+atlas = ExtResource("1_idle")
+region = Rect2(2450, 0, 245, 138)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_idle12"]
+atlas = ExtResource("1_idle")
+region = Rect2(2695, 0, 245, 138)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_run01"]
+atlas = ExtResource("2_run")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_run02"]
+atlas = ExtResource("2_run")
+region = Rect2(256, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_run03"]
+atlas = ExtResource("2_run")
+region = Rect2(512, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_run04"]
+atlas = ExtResource("2_run")
+region = Rect2(768, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_run05"]
+atlas = ExtResource("2_run")
+region = Rect2(0, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_run06"]
+atlas = ExtResource("2_run")
+region = Rect2(256, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_run07"]
+atlas = ExtResource("2_run")
+region = Rect2(512, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_run08"]
+atlas = ExtResource("2_run")
+region = Rect2(768, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_run09"]
+atlas = ExtResource("2_run")
+region = Rect2(0, 512, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_run10"]
+atlas = ExtResource("2_run")
+region = Rect2(256, 512, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_run11"]
+atlas = ExtResource("2_run")
+region = Rect2(512, 512, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_run12"]
+atlas = ExtResource("2_run")
+region = Rect2(768, 512, 256, 256)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mechanic"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_idle01")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_idle02")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_idle03")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_idle04")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_idle05")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_idle06")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_idle07")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_idle08")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_idle09")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_idle10")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_idle11")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_idle12")
+}],
+"loop": true,
+"name": &"mechanic-idle",
+"speed": 7.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_run01")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_run02")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_run03")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_run04")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_run05")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_run06")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_run07")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_run08")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_run09")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_run10")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_run11")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_run12")
+}],
+"loop": true,
+"name": &"mechanic-run",
+"speed": 11.0
+}]
+
+[node name="Mechanic" type="Node2D"]
+script = SubResource("GDScript_mechanic")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_mechanic")
+animation = &"mechanic-idle"
