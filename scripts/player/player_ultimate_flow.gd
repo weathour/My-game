@@ -21,6 +21,10 @@ const ULTIMATE_DISPLAY := {
 	"mage": {
 		"name": "奥数轰炸",
 		"description": "法师大招：释放多轮轰炸圈打击敌人。"
+	},
+	"mechanic": {
+		"name": "机械全开·郁金香齐射",
+		"description": "机械师大招：标记敌人密集区域，进行 3 轮郁金香齐射。"
 	}
 }
 
@@ -37,6 +41,10 @@ const ULTIMATE_DISPLAY_OVERRIDE := {
 	"mage": {
 		"name": "奥数轰炸",
 		"description": "法师大招：释放多轮轰炸圈打击敌人，保留原有视觉效果与伤害轮次。"
+	},
+	"mechanic": {
+		"name": "机械全开·郁金香齐射",
+		"description": "机械师大招：标记敌人密集区域并预警，随后进行 3 轮郁金香齐射，每轮造成 300% 范围伤害（受战场改装零件加成）。"
 	}
 }
 
@@ -74,6 +82,8 @@ static func _get_ultimate_skill_id(role_id: String) -> String:
 			return "gunner_ultimate"
 		"mage":
 			return "mage_ultimate"
+		"mechanic":
+			return "mechanic_ultimate"
 	return ""
 
 
@@ -178,6 +188,9 @@ static func try_use_ultimate(owner) -> void:
 		"mage":
 			if owner.mage_role != null:
 				owner.mage_role.perform_ultimate(owner, cast_payload)
+		"mechanic":
+			if owner.mechanic_role != null:
+				owner.mechanic_role.perform_ultimate(owner, cast_payload)
 
 
 static func apply_post_ultimate_bonuses(owner, role_id: String, total_duration: float) -> void:
@@ -250,6 +263,15 @@ static func trigger_ultimate_reprise(owner, role_id: String, reprise_level: int)
 				center = owner.global_position + owner.facing_direction * 80.0
 			owner._spawn_mage_bombardment_warning_effect(center, 54.0 + reprise_level * 10.0)
 			owner._trigger_basic_mage_bombardment_impact(center, 54.0 + reprise_level * 10.0, owner._get_role_damage(role_id) * (0.56 + reprise_level * 0.06), 0.02, 0.7, 1.2, 0, 0, 0, role_id)
+		"mechanic":
+			var mechanic_center: Vector2 = owner._get_enemy_cluster_center()
+			if mechanic_center == Vector2.ZERO:
+				mechanic_center = owner.global_position + owner.facing_direction * 80.0
+			owner._spawn_ring_effect(mechanic_center, 60.0 + reprise_level * 10.0, Color(0.95, 0.68, 0.25, 0.8), 5.0, 0.2)
+			owner._spawn_burst_effect(mechanic_center, 60.0 + reprise_level * 10.0, Color(1.0, 0.76, 0.32, 0.28), 0.2)
+			var mechanic_hits: int = owner._damage_enemies_in_radius(mechanic_center, 60.0 + reprise_level * 10.0, owner._get_role_damage(role_id) * (0.56 + reprise_level * 0.06), 0.02, 1.0, 0.0, role_id)
+			if mechanic_hits > 0:
+				owner._register_attack_result(role_id, mechanic_hits, false)
 
 
 static func spawn_ultimate_afterglow_effect(owner, role_id: String, duration: float) -> void:
@@ -278,6 +300,13 @@ static func trigger_ultimate_afterglow_pulse(owner, role_id: String, pulse_index
 			var radius := 62.0 + pulse_index * 10.0
 			owner._spawn_ring_effect(center, radius, Color(0.68, 0.96, 1.0, 0.56), 5.0, 0.22)
 			owner._spawn_frost_sigils_effect(center, radius * 0.56, Color(0.86, 0.98, 1.0, 0.68), 0.22)
+		"mechanic":
+			var mechanic_center: Vector2 = owner._get_enemy_cluster_center()
+			if mechanic_center == Vector2.ZERO:
+				mechanic_center = owner.global_position + owner.facing_direction * 70.0
+			var mechanic_radius := 58.0 + pulse_index * 10.0
+			owner._spawn_ring_effect(mechanic_center, mechanic_radius, Color(0.95, 0.68, 0.25, 0.56), 5.0, 0.22)
+			owner._spawn_burst_effect(mechanic_center, mechanic_radius * 0.6, Color(1.0, 0.76, 0.32, 0.2), 0.2)
 
 
 static func schedule_repeating_sequence(owner, interval: float, repeat_count: int, callback: Callable, initial_delay: float = 0.0) -> void:

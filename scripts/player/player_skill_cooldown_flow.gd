@@ -24,6 +24,13 @@ const ROLE_ACTIVE_SKILL_PROPERTIES := {
 		"flame_path": "mage_flame_path_ability",
 		"dark_contract": "mage_dark_contract_ability",
 		"fireball": "mage_fireball_ability"
+	},
+	"mechanic": {
+		"tulip_turret": "mechanic_tulip_turret_ability",
+		"mine": "mechanic_mine_ability",
+		"emp_burst": "mechanic_emp_burst_ability",
+		"drone": "mechanic_drone_ability",
+		"missile_volley": "mechanic_missile_volley_ability"
 	}
 }
 

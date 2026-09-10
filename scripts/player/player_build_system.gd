@@ -76,6 +76,31 @@ const BUILD_DEFINITIONS := {
 		{"id": "unlock_flame_path", "title": "获得技能：火焰之径", "summary": "获得技能：火焰之径", "unlock_skill": "flame_path", "skill_progress_id": "mage_flame_path"},
 		{"id": "unlock_dark_contract", "title": "获得技能：黑暗契约", "summary": "获得技能：黑暗契约", "unlock_skill": "dark_contract", "skill_progress_id": "mage_dark_contract"},
 		{"id": "unlock_fireball", "title": "获得技能：火球术", "summary": "获得技能：火球术", "unlock_skill": "fireball", "skill_progress_id": "mage_fireball"}
+	],
+	"mechanic": [
+		{"id": "trait_part_interval", "title": "战场改装零件产出间隔-0.5s", "summary": "战场改装零件产出间隔-0.5s", "card_title": "机械师特性", "skill_progress_id": "mechanic_trait"},
+		{"id": "trait_part_damage", "title": "每个零件提供的召唤物伤害+2％", "summary": "每个零件提供的召唤物伤害+2％", "card_title": "机械师特性", "skill_progress_id": "mechanic_trait"},
+		{"id": "trait_part_max", "title": "战场改装零件上限+2", "summary": "战场改装零件上限+2", "card_title": "机械师特性", "skill_progress_id": "mechanic_trait"},
+		{"id": "entry_damage", "title": "紧急部署炮塔伤害倍率+15％", "summary": "紧急部署炮塔伤害倍率+15％", "card_title": "紧急部署", "skill_progress_id": "mechanic_entry"},
+		{"id": "basic_attack_damage", "title": "机械师普通攻击伤害倍率+15％", "summary": "机械师普通攻击伤害倍率+15％", "card_title": "普通攻击", "skill_progress_id": "mechanic_basic"},
+		{"id": "basic_attack_cooldown", "title": "机械师普通攻击冷却时间减少8％", "summary": "机械师普通攻击冷却时间减少8％", "card_title": "普通攻击", "skill_progress_id": "mechanic_basic"},
+		{"id": "basic_attack_range", "title": "机械师普通攻击距离增加8％", "summary": "机械师普通攻击距离增加8％", "card_title": "普通攻击", "skill_progress_id": "mechanic_basic"},
+		{"id": "drone_damage", "title": "守卫机器人抵挡次数+1", "summary": "守卫机器人抵挡次数+1", "requires_skill": "drone", "skill_progress_id": "mechanic_drone"},
+		{"id": "drone_duration", "title": "守卫机器人同时存在上限+1", "summary": "守卫机器人同时存在上限+1", "requires_skill": "drone", "skill_progress_id": "mechanic_drone"},
+		{"id": "mine_damage", "title": "感应地雷伤害倍率+15％", "summary": "感应地雷伤害倍率+15％", "requires_skill": "mine", "skill_progress_id": "mechanic_mine"},
+		{"id": "mine_count", "title": "感应地雷数量+1", "summary": "感应地雷数量+1", "requires_skill": "mine", "skill_progress_id": "mechanic_mine"},
+		{"id": "emp_damage", "title": "磁滞力场伤害倍率+25％", "summary": "磁滞力场伤害倍率+25％", "requires_skill": "emp_burst", "skill_progress_id": "mechanic_emp_burst"},
+		{"id": "emp_cooldown", "title": "磁滞力场冷却时间-2s", "summary": "磁滞力场冷却时间-2s", "requires_skill": "emp_burst", "skill_progress_id": "mechanic_emp_burst"},
+		{"id": "turret_damage", "title": "定点机炮伤害倍率+20％", "summary": "定点机炮伤害倍率+20％", "requires_skill": "tulip_turret", "skill_progress_id": "mechanic_tulip_turret"},
+		{"id": "turret_duration", "title": "定点机炮持续时间+1s", "summary": "定点机炮持续时间+1s", "requires_skill": "tulip_turret", "skill_progress_id": "mechanic_tulip_turret"},
+		{"id": "missile_damage", "title": "重型炮台伤害倍率+20％", "summary": "重型炮台伤害倍率+20％", "requires_skill": "missile_volley", "skill_progress_id": "mechanic_missile_volley"},
+		{"id": "missile_count", "title": "重型炮台持续时间+2s", "summary": "重型炮台持续时间+2s", "requires_skill": "missile_volley", "skill_progress_id": "mechanic_missile_volley"},
+		{"id": "ultimate_salvo_count", "title": "机械全开·郁金香齐射轮次+1", "summary": "机械全开·郁金香齐射轮次+1", "card_title": "机械全开·郁金香齐射", "skill_progress_id": "mechanic_ultimate"},
+		{"id": "unlock_drone", "title": "获得技能：守卫机器人", "summary": "获得技能：守卫机器人", "unlock_skill": "drone", "skill_progress_id": "mechanic_drone"},
+		{"id": "unlock_mine", "title": "获得技能：感应地雷", "summary": "获得技能：感应地雷", "unlock_skill": "mine", "skill_progress_id": "mechanic_mine"},
+		{"id": "unlock_emp_burst", "title": "获得技能：磁滞力场", "summary": "获得技能：磁滞力场", "unlock_skill": "emp_burst", "skill_progress_id": "mechanic_emp_burst"},
+		{"id": "unlock_tulip_turret", "title": "获得技能：定点机炮", "summary": "获得技能：定点机炮", "unlock_skill": "tulip_turret", "skill_progress_id": "mechanic_tulip_turret"},
+		{"id": "unlock_missile_volley", "title": "获得技能：重型炮台", "summary": "获得技能：重型炮台", "unlock_skill": "missile_volley", "skill_progress_id": "mechanic_missile_volley"}
 	]
 }
 
@@ -194,6 +219,8 @@ static func get_basic_attack_damage_multiplier(owner, role_id: String) -> float:
 			return 1.0 + 0.15 * float(get_count(owner, role_id, "basic_attack_damage"))
 		"mage":
 			return 1.0 + 0.20 * float(get_count(owner, role_id, "basic_attack_damage"))
+		"mechanic":
+			return 1.0 + 0.15 * float(get_count(owner, role_id, "basic_attack_damage"))
 	return 1.0
 
 
@@ -203,6 +230,8 @@ static func get_basic_attack_cooldown_multiplier(owner, role_id: String) -> floa
 			return _percent_reduction_multiplier(get_count(owner, role_id, "basic_attack_cooldown"), 0.15, 0.18)
 		"gunner":
 			return _percent_reduction_multiplier(get_count(owner, role_id, "basic_attack_cooldown"), 0.08, 0.18)
+		"mechanic":
+			return _percent_reduction_multiplier(get_count(owner, role_id, "basic_attack_cooldown"), 0.08, 0.18)
 	return 1.0
 
 
@@ -211,6 +240,8 @@ static func get_basic_attack_range_multiplier(owner, role_id: String) -> float:
 		"swordsman":
 			return 1.0 + 0.15 * float(get_count(owner, role_id, "basic_attack_range"))
 		"mage":
+			return 1.0 + 0.08 * float(get_count(owner, role_id, "basic_attack_range"))
+		"mechanic":
 			return 1.0 + 0.08 * float(get_count(owner, role_id, "basic_attack_range"))
 	return 1.0
 
@@ -224,6 +255,8 @@ static func get_basic_attack_range_flat_bonus(owner, role_id: String) -> float:
 static func get_entry_damage_multiplier(owner, role_id: String) -> float:
 	match role_id:
 		"swordsman", "gunner":
+			return 1.0 + 0.15 * float(get_count(owner, role_id, "entry_damage"))
+		"mechanic":
 			return 1.0 + 0.15 * float(get_count(owner, role_id, "entry_damage"))
 	return 1.0
 
@@ -375,6 +408,62 @@ static func get_surging_wave_duration_bonus(owner) -> float:
 
 static func get_surging_wave_speed_bonus(owner) -> float:
 	return 8.0 * float(get_count(owner, "mage", "surging_wave_speed"))
+
+
+static func get_mechanic_part_interval_reduction(owner) -> float:
+	return 0.5 * float(get_count(owner, "mechanic", "trait_part_interval"))
+
+
+static func get_mechanic_part_damage_bonus(owner) -> float:
+	return 0.02 * float(get_count(owner, "mechanic", "trait_part_damage"))
+
+
+static func get_mechanic_part_max_bonus(owner) -> int:
+	return 2 * get_count(owner, "mechanic", "trait_part_max")
+
+
+static func get_mechanic_ultimate_salvo_bonus(owner) -> int:
+	return get_count(owner, "mechanic", "ultimate_salvo_count")
+
+
+static func get_mechanic_turret_damage_multiplier(owner) -> float:
+	return 1.0 + 0.2 * float(get_count(owner, "mechanic", "turret_damage"))
+
+
+static func get_mechanic_turret_duration_bonus(owner) -> float:
+	return 1.0 * float(get_count(owner, "mechanic", "turret_duration"))
+
+
+static func get_mechanic_mine_damage_multiplier(owner) -> float:
+	return 1.0 + 0.15 * float(get_count(owner, "mechanic", "mine_damage"))
+
+
+static func get_mechanic_mine_count_bonus(owner) -> int:
+	return get_count(owner, "mechanic", "mine_count")
+
+
+static func get_mechanic_field_damage_bonus_count(owner) -> int:
+	return get_count(owner, "mechanic", "emp_damage")
+
+
+static func get_mechanic_field_cooldown_reduction(owner) -> float:
+	return 2.0 * float(get_count(owner, "mechanic", "emp_cooldown"))
+
+
+static func get_mechanic_guard_block_bonus(owner) -> int:
+	return get_count(owner, "mechanic", "drone_damage")
+
+
+static func get_mechanic_guard_cap_bonus(owner) -> int:
+	return get_count(owner, "mechanic", "drone_duration")
+
+
+static func get_mechanic_cannon_damage_bonus_count(owner) -> int:
+	return get_count(owner, "mechanic", "missile_damage")
+
+
+static func get_mechanic_cannon_duration_bonus(owner) -> float:
+	return 2.0 * float(get_count(owner, "mechanic", "missile_count"))
 
 
 static func _pick_role_option(owner, role_id: String, role_slot_index: int) -> Dictionary:

@@ -54,7 +54,7 @@ static func serialize_roles_for_save(roles: Array) -> Array:
 		saved_roles.append(role_data)
 	return saved_roles
 
-static func normalize_loaded_roles(saved_roles: Variant, base_roles: Array) -> Array:
+static func normalize_loaded_roles(saved_roles: Variant, base_roles: Array, pad_roles: Array = []) -> Array:
 	var base_role_map: Dictionary = {}
 	for base_role_variant in base_roles:
 		if base_role_variant is Dictionary:
@@ -91,7 +91,10 @@ static func normalize_loaded_roles(saved_roles: Variant, base_roles: Array) -> A
 			var role_id := str((role_variant as Dictionary).get("id", ""))
 			if role_id != "":
 				ordered_ids.append(role_id)
-	for fallback_role_variant in base_roles:
+	var pad_source: Array = pad_roles if not pad_roles.is_empty() else base_roles
+	for fallback_role_variant in pad_source:
+		if normalized_roles.size() >= pad_source.size():
+			break
 		var fallback_role: Dictionary = fallback_role_variant
 		var fallback_id := str(fallback_role.get("id", ""))
 		if ordered_ids.has(fallback_id):

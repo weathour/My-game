@@ -107,12 +107,13 @@ static func get_skill_options(player) -> Array:
 	options.append({
 		"id": SKILL_TALENT_OPTION_PREFIX + CLEAR_SKILL_TALENTS_OPTION_ID,
 		"title": "重置全部等级天赋",
-		"description": "开发者模式：清空三名角色已选等级天赋；普通构筑等级不受影响。",
+		"description": "开发者模式：清空所有角色已选等级天赋；普通构筑等级不受影响。",
 		"enabled": true
 	})
-	for role_id in ["swordsman", "gunner", "mage"]:
-		var selected_ids: Array = PLAYER_SKILL_TALENT_SYSTEM.get_selected_level_talents(player, role_id) if player != null else []
-		var role_title := str(PLAYER_SKILL_TALENT_SYSTEM.LEVEL_TALENT_ROLE_TITLES.get(role_id, role_id))
+	for role_id in PLAYER_SKILL_TALENT_SYSTEM.LEVEL_TALENT_DEFINITIONS.keys():
+		var role_id_string := str(role_id)
+		var selected_ids: Array = PLAYER_SKILL_TALENT_SYSTEM.get_selected_level_talents(player, role_id_string) if player != null else []
+		var role_title := str(PLAYER_SKILL_TALENT_SYSTEM.LEVEL_TALENT_ROLE_TITLES.get(role_id_string, role_id_string))
 		for talent_value in PLAYER_SKILL_TALENT_SYSTEM.LEVEL_TALENT_DEFINITIONS.get(role_id, []):
 			var talent: Dictionary = talent_value
 			var talent_id := str(talent.get("id", ""))

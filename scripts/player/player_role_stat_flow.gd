@@ -13,7 +13,8 @@ static func build_background_cooldowns(owner) -> Dictionary:
 	return {
 		"swordsman": owner._get_effective_background_attack_interval("swordsman"),
 		"gunner": owner._get_effective_background_attack_interval("gunner"),
-		"mage": owner._get_effective_background_attack_interval("mage")
+		"mage": owner._get_effective_background_attack_interval("mage"),
+		"mechanic": owner._get_effective_background_attack_interval("mechanic")
 	}
 
 
@@ -60,6 +61,8 @@ static func get_effective_attack_interval(owner, role_id: String) -> float:
 		talent_multiplier *= float(owner.swordsman_role.get_talent_basic_attack_interval_multiplier(owner))
 	elif role_id == "gunner" and owner.get("gunner_role") != null:
 		talent_multiplier *= float(owner.gunner_role.get_basic_attack_interval_multiplier(owner))
+	elif role_id == "mechanic" and owner.get("mechanic_role") != null:
+		talent_multiplier *= float(owner.mechanic_role.get_basic_attack_interval_multiplier(owner))
 	return max(0.18, base_interval * owner._get_role_attack_interval_multiplier(role_id) * blessing_multiplier * build_multiplier * talent_multiplier)
 
 
@@ -123,6 +126,9 @@ static func get_role_move_speed(owner, role_id: String) -> float:
 		move_speed *= float(owner.gunner_role.get_talent_move_speed_multiplier(owner))
 	if owner.ultimate_haste_remaining > 0.0:
 		move_speed *= max(0.0, float(owner.ultimate_haste_move_speed_multiplier))
+	var mechanic_field = owner.get("mechanic_emp_burst_ability") if owner != null else null
+	if mechanic_field != null and mechanic_field.has_method("get_field_haste_multiplier"):
+		move_speed *= float(mechanic_field.get_field_haste_multiplier())
 	if owner._is_last_stand_active():
 		move_speed *= 1.18
 	if owner.frenzy_remaining > 0.0 and owner.frenzy_stacks > 0:

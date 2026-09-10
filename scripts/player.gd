@@ -61,6 +61,7 @@ const ROLE_RESOURCE_STATE := preload("res://scripts/player/roles/role_resource_s
 const SWORDSMAN_ROLE := preload("res://scripts/player/roles/swordsman_role.gd")
 const GUNNER_ROLE := preload("res://scripts/player/roles/gunner_role.gd")
 const MAGE_ROLE := preload("res://scripts/player/roles/mage_role.gd")
+const MECHANIC_ROLE := preload("res://scripts/player/roles/mechanic_role.gd")
 const SWORDSMAN_BLADE_STORM_ABILITY := preload("res://scripts/abilities/swordsman_blade_storm_ability.gd")
 const MAGE_TIDAL_SURGE_ABILITY := preload("res://scripts/abilities/mage_tidal_surge_ability.gd")
 const GUNNER_INFINITE_RELOAD_ABILITY := preload("res://scripts/abilities/gunner_infinite_reload_ability.gd")
@@ -76,6 +77,11 @@ const GUNNER_MAGIC_EYE_ABILITY := preload("res://scripts/abilities/gunner_magic_
 const MAGE_FIREBALL_ABILITY := preload("res://scripts/abilities/mage_fireball_ability.gd")
 const MAGE_FLAME_PATH_ABILITY := preload("res://scripts/abilities/mage_flame_path_ability.gd")
 const SWORDSMAN_KING_BLADE_ABILITY := preload("res://scripts/abilities/swordsman_king_blade_ability.gd")
+const MECHANIC_DRONE_ABILITY := preload("res://scripts/abilities/mechanic_drone_ability.gd")
+const MECHANIC_MINE_ABILITY := preload("res://scripts/abilities/mechanic_mine_ability.gd")
+const MECHANIC_EMP_BURST_ABILITY := preload("res://scripts/abilities/mechanic_emp_burst_ability.gd")
+const MECHANIC_TULIP_TURRET_ABILITY := preload("res://scripts/abilities/mechanic_tulip_turret_ability.gd")
+const MECHANIC_MISSILE_VOLLEY_ABILITY := preload("res://scripts/abilities/mechanic_missile_volley_ability.gd")
 const WHITE_KEY_SHADER := preload("res://shaders/white_key.gdshader")
 const SWORD_SLASH_EFFECT_SCENE := preload("res://effects/sword/slash3/slasheffect3.tscn")
 const SWORD_OMNISLASH_EFFECT_SCENE := preload("res://effects/sword/omnislash/omnislash.tscn")
@@ -185,27 +191,32 @@ const ROLE_SKETCH_TARGET_HEIGHT := 72.0
 const ROLE_SKETCH_PATHS := {
 	"swordsman": "人设草图/剑士草图.jpg",
 	"gunner": "人设草图/枪手草图.jpg",
-	"mage": "人设草图/术师草图.jpg"
+	"mage": "人设草图/术师草图.jpg",
+	"mechanic": "人设草图/机械师草图.jpg"
 }
 const ROLE_SKETCH_FULL_SIZES := {
 	"swordsman": Vector2(589.0, 527.0),
 	"gunner": Vector2(589.0, 582.0),
-	"mage": Vector2(589.0, 527.0)
+	"mage": Vector2(589.0, 527.0),
+	"mechanic": Vector2(589.0, 527.0)
 }
 const ROLE_SKETCH_SCALE_MULTIPLIERS := {
 	"swordsman": 1.0,
 	"gunner": 1.12,
-	"mage": 1.06
+	"mage": 1.06,
+	"mechanic": 1.12
 }
 const ROLE_SKETCH_BASE_POSITIONS := {
 	"swordsman": Vector2(14.0, -4.0),
 	"gunner": Vector2(2.0, -3.0),
-	"mage": Vector2(10.0, -5.0)
+	"mage": Vector2(10.0, -5.0),
+	"mechanic": Vector2(6.0, -4.0)
 }
 const ROLE_SKETCH_VISIBLE_BOUNDS := {
 	"swordsman": Rect2(161.0, 49.0, 368.0, 430.0),
 	"gunner": Rect2(94.0, 16.0, 415.0, 539.0),
-	"mage": Rect2(142.0, 31.0, 377.0, 424.0)
+	"mage": Rect2(142.0, 31.0, 377.0, 424.0),
+	"mechanic": Rect2(70.0, 8.0, 450.0, 512.0)
 }
 const SWORD_SLASH_TEXTURE_RELATIVE_PATH := "技能特效/斩击.jpg"
 const SWORD_SLASH_TEXTURE_SIZE := Vector2(1200.0, 1600.0)
@@ -414,6 +425,12 @@ var mage_meta_field_ability = MAGE_META_FIELD_ABILITY.new()
 var mage_flame_path_ability = MAGE_FLAME_PATH_ABILITY.new()
 var mage_dark_contract_ability = MAGE_DARK_CONTRACT_ABILITY.new()
 var mage_fireball_ability = MAGE_FIREBALL_ABILITY.new()
+var mechanic_role = MECHANIC_ROLE.new()
+var mechanic_drone_ability = MECHANIC_DRONE_ABILITY.new()
+var mechanic_mine_ability = MECHANIC_MINE_ABILITY.new()
+var mechanic_emp_burst_ability = MECHANIC_EMP_BURST_ABILITY.new()
+var mechanic_tulip_turret_ability = MECHANIC_TULIP_TURRET_ABILITY.new()
+var mechanic_missile_volley_ability = MECHANIC_MISSILE_VOLLEY_ABILITY.new()
 var gunner_lock_target: Node2D
 var gunner_lock_stacks: int = 0
 var gem_collection_elapsed: float = 0.0
@@ -533,11 +550,14 @@ func _get_scene_animation_duration(scene: PackedScene, default_duration: float =
 func _build_role_data() -> Array:
 	return ROLE_DATABASE.get_role_data()
 
+func _build_team_role_data(team_ids: Array = []) -> Array:
+	return ROLE_DATABASE.get_team_role_data(team_ids)
+
 func _serialize_roles_for_save() -> Array:
 	return PLAYER_SAVE_CODEC.serialize_roles_for_save(roles)
 
 func _normalize_loaded_roles(saved_roles: Variant) -> Array:
-	return PLAYER_SAVE_CODEC.normalize_loaded_roles(saved_roles, _build_role_data())
+	return PLAYER_SAVE_CODEC.normalize_loaded_roles(saved_roles, _build_role_data(), _build_team_role_data())
 
 func _build_role_upgrade_data() -> Dictionary:
 	return ROLE_DATABASE.get_role_upgrade_data()
@@ -546,17 +566,10 @@ func _build_background_cooldowns() -> Dictionary:
 	return PLAYER_ROLE_STAT_FLOW.build_background_cooldowns(self)
 
 func configure_story_loadout(team_order: Array) -> void:
-	var ordered_roles: Array = []
-	for role_variant in team_order:
-		var role_id := str(role_variant)
-		for role_data in roles:
-			if str(role_data.get("id", "")) == role_id:
-				ordered_roles.append(role_data)
-				break
-	for role_data in roles:
-		if not ordered_roles.has(role_data):
-			ordered_roles.append(role_data)
-	roles = ordered_roles
+	var team_roles: Array = _build_team_role_data(team_order)
+	if team_roles.is_empty():
+		return
+	roles = team_roles
 	active_role_index = clamp(active_role_index, 0, max(0, roles.size() - 1))
 	_update_active_role_state()
 
@@ -1701,6 +1714,36 @@ func _try_trigger_mage_meta_field() -> void:
 func _start_mage_meta_field() -> void:
 	PLAYER_ABILITY_FLOW.start_mage_meta_field(self)
 
+func _try_trigger_mechanic_drone() -> void:
+	PLAYER_ABILITY_FLOW.try_trigger_mechanic_drone(self)
+
+func _try_trigger_mechanic_mine() -> void:
+	PLAYER_ABILITY_FLOW.try_trigger_mechanic_mine(self)
+
+func _try_trigger_mechanic_emp_burst() -> void:
+	PLAYER_ABILITY_FLOW.try_trigger_mechanic_emp_burst(self)
+
+func _try_trigger_mechanic_tulip_turret() -> void:
+	PLAYER_ABILITY_FLOW.try_trigger_mechanic_tulip_turret(self)
+
+func _try_trigger_mechanic_missile_volley() -> void:
+	PLAYER_ABILITY_FLOW.try_trigger_mechanic_missile_volley(self)
+
+func _start_mechanic_drone() -> void:
+	PLAYER_ABILITY_FLOW.start_mechanic_drone(self)
+
+func _start_mechanic_mine() -> void:
+	PLAYER_ABILITY_FLOW.start_mechanic_mine(self)
+
+func _start_mechanic_emp_burst() -> void:
+	PLAYER_ABILITY_FLOW.start_mechanic_emp_burst(self)
+
+func _start_mechanic_tulip_turret() -> void:
+	PLAYER_ABILITY_FLOW.start_mechanic_tulip_turret(self)
+
+func _start_mechanic_missile_volley() -> void:
+	PLAYER_ABILITY_FLOW.start_mechanic_missile_volley(self)
+
 func _perform_swordsman_attack() -> void:
 	if swordsman_role != null:
 		swordsman_role.perform_attack(self)
@@ -1712,6 +1755,10 @@ func _perform_gunner_attack() -> void:
 func _perform_mage_attack() -> void:
 	if mage_role != null:
 		mage_role.perform_attack(self)
+
+func _perform_mechanic_attack() -> void:
+	if mechanic_role != null:
+		mechanic_role.perform_attack(self)
 
 func _try_switch_role(new_role_index: int, ignore_restrictions: bool = false, force_entry: bool = false) -> void:
 	PLAYER_SWITCH_FLOW.try_switch_role(self, new_role_index, ignore_restrictions, force_entry)

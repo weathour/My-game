@@ -14,7 +14,8 @@ const LEVEL_TALENT_ROLE_OPTION_COUNT := 3
 const LEVEL_TALENT_ROLE_TITLES := {
 	"swordsman": "剑士",
 	"gunner": "枪手",
-	"mage": "法师"
+	"mage": "法师",
+	"mechanic": "机械师"
 }
 const LEVEL_TALENT_DEFINITIONS := {
 	"swordsman": [
@@ -87,6 +88,25 @@ const LEVEL_TALENT_DEFINITIONS := {
 		{"id": "mage_level_talent_arcane_bombardment_2", "title": "\u5965\u6570\u8F70\u70B8 II", "summary": "\u5965\u6570\u8F70\u70B8\u6BCF\u6CE2\u4F24\u5BB3\u500D\u7387 +5%\uFF1B\u5965\u6570\u8F70\u70B8\u6BCF\u51FB\u6740 1 \u4E2A\u5355\u4F4D\uFF0C\u6C38\u4E45\u63D0\u5347 0.05% \u6BCF\u8F6E\u4F24\u5BB3\u500D\u7387\u3002"},
 		{"id": "mage_level_talent_dense_lightning_1", "title": "\u5BC6\u96C6\u96F7\u7FA4 I", "summary": "\u5BC6\u96C6\u96F7\u7FA4 5 \u4E2A\u65B9\u5411\u989D\u5916\u589E\u52A0 1 \u5708\u96F7\u51FB\uFF1B\u6BCF\u51FB\u6740 1 \u4E2A\u5355\u4F4D\uFF0C\u4E3A\u6CD5\u5E08\u6240\u6709\u6B63\u5728\u51B7\u5374\u7684\u975E\u5927\u62DB\u6280\u80FD\u6216\u666E\u901A\u653B\u51FB\u51CF\u5C11 0.2 \u79D2\u51B7\u5374\u3002"},
 		{"id": "mage_level_talent_dense_lightning_2", "title": "\u5BC6\u96C6\u96F7\u7FA4 II", "summary": "\u5BC6\u96C6\u96F7\u7FA4 5 \u4E2A\u65B9\u5411\u989D\u5916\u589E\u52A0 1 \u5708\u96F7\u51FB\uFF1B\u6BCF\u51FB\u6740 1 \u4E2A\u5355\u4F4D\uFF0C\u4E3A\u5965\u6CD5\u76C8\u4F59\u63D0\u4F9B 0.2 \u79D2\u6301\u7EED\u65F6\u95F4\u3002"}
+	],
+	"mechanic": [
+		{"id": "mechanic_level_talent_overclock", "title": "机械师天赋·超频", "summary": "预留机械师天赋效果接口。当前只记录选择，不附加旧天赋效果。", "placeholder": true},
+		{"id": "mechanic_level_talent_armor_plate", "title": "机械师天赋·装甲板", "summary": "预留机械师天赋效果接口。当前只记录选择，不附加旧天赋效果。", "placeholder": true},
+		{"id": "mechanic_level_talent_blueprint", "title": "机械师天赋·蓝图", "summary": "预留机械师天赋效果接口。当前只记录选择，不附加旧天赋效果。", "placeholder": true},
+		{"id": "mechanic_level_talent_trait_1", "title": "战场改装 I", "summary": "战场改装零件产出间隔缩短至 3 秒。", "level_talent_group_id": "mechanic_trait_variant"},
+		{"id": "mechanic_level_talent_trait_2", "title": "战场改装 II", "summary": "战场改装零件上限 +4，每个零件提供的召唤物伤害提升至 6%。", "level_talent_group_id": "mechanic_trait_variant"},
+		{"id": "mechanic_level_talent_basic_attack_1", "title": "机械蜘蛛 I", "summary": "机械蜘蛛伤害增加 20%。", "level_talent_group_id": "mechanic_basic_variant"},
+		{"id": "mechanic_level_talent_basic_attack_2", "title": "机械蜘蛛 II", "summary": "机械蜘蛛命中的敌人减伤值降低 2 点。", "level_talent_group_id": "mechanic_basic_variant"},
+		{"id": "mechanic_level_talent_entry_1", "title": "紧急部署 I", "summary": "紧急部署的定点机炮持续时间增加 2 秒。", "level_talent_group_id": "mechanic_entry_variant"},
+		{"id": "mechanic_level_talent_entry_2", "title": "紧急部署 II", "summary": "紧急部署额外部署一座定点机炮。", "level_talent_group_id": "mechanic_entry_variant"},
+		{"id": "mechanic_level_talent_overdrive_1", "title": "机械全开 I", "summary": "机械全开·郁金香齐射轮次 +1。", "level_talent_group_id": "mechanic_ultimate_variant"},
+		{"id": "mechanic_level_talent_overdrive_2", "title": "机械全开 II", "summary": "机械全开·郁金香齐射每轮伤害倍率 +50%。", "level_talent_group_id": "mechanic_ultimate_variant"},
+		{"id": "mechanic_level_talent_drone_1", "title": "守卫机器人 I", "summary": "守卫机器人抵挡次数 +2。", "level_talent_group_id": "mechanic_drone_variant"},
+		{"id": "mechanic_level_talent_drone_2", "title": "守卫机器人 II", "summary": "守卫机器人同时存在上限 +2。", "level_talent_group_id": "mechanic_drone_variant"},
+		{"id": "mechanic_level_talent_mine_1", "title": "感应地雷 I", "summary": "感应地雷数量 +2。", "level_talent_group_id": "mechanic_mine_variant"},
+		{"id": "mechanic_level_talent_mine_2", "title": "感应地雷 II", "summary": "感应地雷爆炸范围扩大 50%，并使敌人减速 30%，持续 1 秒。", "level_talent_group_id": "mechanic_mine_variant"},
+		{"id": "mechanic_level_talent_turret_1", "title": "定点机炮 I", "summary": "定点机炮射击间隔缩短至 0.6 秒。", "level_talent_group_id": "mechanic_turret_variant"},
+		{"id": "mechanic_level_talent_turret_2", "title": "定点机炮 II", "summary": "定点机炮持续时间增加 2 秒，伤害倍率提升至 150%。", "level_talent_group_id": "mechanic_turret_variant"}
 	]
 }
 const TRIGGER_LEVEL := 3
@@ -96,7 +116,8 @@ const TALENT_STAGE_COUNT := 3
 const ROLE_PROGRESS_ORDER := {
 	"swordsman": ["swordsman_trait", "swordsman_entry", "swordsman_basic", "swordsman_blade_storm", "swordsman_crescent_wave", "swordsman_knight_thrust", "swordsman_king_blade", "swordsman_judgement_sword", "swordsman_ultimate"],
 	"gunner": ["gunner_trait", "gunner_entry", "gunner_basic", "gunner_shrapnel", "gunner_infinite_reload", "gunner_explosive_round", "gunner_magic_grenade", "gunner_magic_eye", "gunner_ultimate"],
-	"mage": ["mage_trait", "mage_entry", "mage_basic", "mage_meta_field", "mage_surging_wave", "mage_flame_path", "mage_dark_contract", "mage_fireball", "mage_ultimate"]
+	"mage": ["mage_trait", "mage_entry", "mage_basic", "mage_meta_field", "mage_surging_wave", "mage_flame_path", "mage_dark_contract", "mage_fireball", "mage_ultimate"],
+	"mechanic": ["mechanic_trait", "mechanic_entry", "mechanic_basic", "mechanic_drone", "mechanic_mine", "mechanic_emp_burst", "mechanic_tulip_turret", "mechanic_missile_volley", "mechanic_ultimate"]
 }
 
 const PROGRESS_TITLES := {
@@ -126,7 +147,16 @@ const PROGRESS_TITLES := {
 	"mage_flame_path": "火焰之径",
 	"mage_dark_contract": "黑暗契约",
 	"mage_fireball": "火球术",
-	"mage_ultimate": "奥数轰炸"
+	"mage_ultimate": "奥数轰炸",
+	"mechanic_trait": "机械师特性",
+	"mechanic_entry": "紧急部署",
+	"mechanic_basic": "机械蜘蛛",
+	"mechanic_drone": "守卫机器人",
+	"mechanic_mine": "感应地雷",
+	"mechanic_emp_burst": "磁滞力场",
+	"mechanic_tulip_turret": "定点机炮",
+	"mechanic_missile_volley": "重型炮台",
+	"mechanic_ultimate": "机械全开·郁金香齐射"
 }
 
 const UNLOCKABLE_PROGRESS := {
@@ -145,6 +175,11 @@ const UNLOCKABLE_PROGRESS := {
 	"mage_flame_path": "flame_path",
 	"mage_dark_contract": "dark_contract",
 	"mage_fireball": "fireball",
+	"mechanic_drone": "drone",
+	"mechanic_mine": "mine",
+	"mechanic_emp_burst": "emp_burst",
+	"mechanic_tulip_turret": "tulip_turret",
+	"mechanic_missile_volley": "missile_volley",
 }
 
 const SKILL_PROGRESS_BY_SKILL_ID := {
@@ -168,7 +203,14 @@ const SKILL_PROGRESS_BY_SKILL_ID := {
 	"fireball": "mage_fireball",
 	"swordsman_ultimate": "swordsman_ultimate",
 	"gunner_ultimate": "gunner_ultimate",
-	"mage_ultimate": "mage_ultimate"
+	"mage_ultimate": "mage_ultimate",
+	"mechanic_basic_attack": "mechanic_basic",
+	"drone": "mechanic_drone",
+	"mine": "mechanic_mine",
+	"emp_burst": "mechanic_emp_burst",
+	"tulip_turret": "mechanic_tulip_turret",
+	"missile_volley": "mechanic_missile_volley",
+	"mechanic_ultimate": "mechanic_ultimate"
 }
 
 const LEVEL_TALENT_REQUIRED_SKILL_RULES := [
@@ -188,7 +230,11 @@ const LEVEL_TALENT_REQUIRED_SKILL_RULES := [
 	{"prefix": "mage_level_talent_arcane_bombardment", "skill_id": "mage_ultimate"},
 	{"prefix": "mage_level_talent_dense_lightning", "skill_id": "hero_entry"},
 	{"prefix": "mage_level_talent_surging_wave", "skill_id": "surging_wave"},
-	{"prefix": "mage_level_talent_surge", "skill_id": "surging_wave"}
+	{"prefix": "mage_level_talent_surge", "skill_id": "surging_wave"},
+	{"prefix": "mechanic_level_talent_drone", "skill_id": "drone"},
+	{"prefix": "mechanic_level_talent_mine", "skill_id": "mine"},
+	{"prefix": "mechanic_level_talent_turret", "skill_id": "tulip_turret"},
+	{"prefix": "mechanic_level_talent_overdrive", "skill_id": "mechanic_ultimate"}
 ]
 
 const TALENT_DEFINITIONS := {
@@ -1046,7 +1092,8 @@ static func refresh_offer_card(owner, option_index: int, role_id: String = "") -
 	if option_index < 0 or option_index >= options.size():
 		return options
 	var old_option: Dictionary = options[option_index] if options[option_index] is Dictionary else {}
-	var target_role_id := str(old_option.get("role_id", LEVEL_TALENT_ROLE_ORDER[clampi(option_index, 0, LEVEL_TALENT_ROLE_ORDER.size() - 1)]))
+	var fallback_role_order := get_level_talent_role_order(owner)
+	var target_role_id := str(old_option.get("role_id", fallback_role_order[clampi(option_index, 0, fallback_role_order.size() - 1)]))
 	var old_talent_id := str(old_option.get("talent_id", old_option.get("level_talent_id", "")))
 	var replacement := _make_level_talent_option(owner, target_role_id, option_index, [old_talent_id])
 	if not replacement.is_empty():
@@ -1117,20 +1164,35 @@ static func get_selected_level_talents(owner, role_id: String) -> Array:
 static func has_level_talent(owner, talent_id: String) -> bool:
 	if owner == null or talent_id == "":
 		return false
-	for role_id in LEVEL_TALENT_ROLE_ORDER:
+	for role_id in get_level_talent_role_order(owner):
 		if get_selected_level_talents(owner, str(role_id)).has(talent_id):
 			return true
 	return false
 
 
+static func get_level_talent_role_order(owner) -> Array:
+	var team_order: Array = []
+	if owner != null and owner.get("roles") is Array:
+		for role_variant in owner.get("roles"):
+			if role_variant is not Dictionary:
+				continue
+			var role_id := str((role_variant as Dictionary).get("id", ""))
+			if role_id != "" and LEVEL_TALENT_DEFINITIONS.has(role_id) and not team_order.has(role_id):
+				team_order.append(role_id)
+	if team_order.size() == LEVEL_TALENT_ROLE_OPTION_COUNT:
+		return team_order
+	return LEVEL_TALENT_ROLE_ORDER.duplicate()
+
+
 static func _build_level_talent_offer(owner) -> Dictionary:
 	var options: Array = []
-	for role_index in range(LEVEL_TALENT_ROLE_ORDER.size()):
-		var role_id := str(LEVEL_TALENT_ROLE_ORDER[role_index])
+	var role_order := get_level_talent_role_order(owner)
+	for role_index in range(role_order.size()):
+		var role_id := str(role_order[role_index])
 		var option := _make_level_talent_role_option(owner, role_id, role_index)
 		if not option.is_empty():
 			options.append(option)
-	if options.size() != LEVEL_TALENT_ROLE_ORDER.size():
+	if options.size() != role_order.size():
 		return {}
 	return {"options": options, "context": _build_level_talent_context(owner)}
 
@@ -1139,6 +1201,9 @@ static func _build_level_talent_context(owner) -> Dictionary:
 	var pick_index := _get_next_level_talent_pick_index(owner)
 	var owner_level := _get_owner_level(owner)
 	var trigger_level := owner_level if owner_level > 0 and owner_level % TRIGGER_LEVEL == 0 else pick_index * TRIGGER_LEVEL
+	var role_names := PackedStringArray()
+	for role_id in get_level_talent_role_order(owner):
+		role_names.append(str(LEVEL_TALENT_ROLE_TITLES.get(role_id, str(role_id))))
 	return {
 		"offer_mode": CATEGORY_SKILL_TALENT,
 		"skill_talent_offer": true,
@@ -1152,7 +1217,7 @@ static func _build_level_talent_context(owner) -> Dictionary:
 		"level_talent_role_select": true,
 		"talent_stage": pick_index,
 		"trigger_level": trigger_level,
-		"summary": "Lv.%d 天赋强化：先选择剑士、枪手或法师，再从该角色 3 张候选天赋中选择 1 项。" % trigger_level
+		"summary": "Lv.%d 天赋强化：先选择%s，再从该角色 3 张候选天赋中选择 1 项。" % [trigger_level, "、".join(role_names)]
 	}
 
 
@@ -1397,7 +1462,7 @@ static func _get_preserved_level_talent_offer(owner) -> Dictionary:
 	if not _is_level_talent_context(context):
 		return {}
 	var options := _duplicate_option_array((offer as Dictionary).get("options", []))
-	if options.size() != LEVEL_TALENT_ROLE_ORDER.size():
+	if options.size() != get_level_talent_role_order(owner).size():
 		return {}
 	return {"options": options, "context": context.duplicate(true)}
 
@@ -1416,7 +1481,7 @@ static func _set_pending_level_talent_count(owner, count: int) -> void:
 
 static func _get_acquired_level_talent_count(owner) -> int:
 	var result := 0
-	for role_id in LEVEL_TALENT_ROLE_ORDER:
+	for role_id in get_level_talent_role_order(owner):
 		result += get_selected_level_talents(owner, str(role_id)).size()
 	return result
 
@@ -1441,7 +1506,7 @@ static func _is_valid_level_talent_id(role_id: String, talent_id: String) -> boo
 
 static func _get_level_talent_role_id_from_definition(definition: Dictionary) -> String:
 	var talent_id := str(definition.get("id", ""))
-	for role_id in LEVEL_TALENT_ROLE_ORDER:
+	for role_id in LEVEL_TALENT_DEFINITIONS.keys():
 		if _is_valid_level_talent_id(str(role_id), talent_id):
 			return str(role_id)
 	return ""

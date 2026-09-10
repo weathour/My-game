@@ -124,6 +124,46 @@ static func try_trigger_mage_fireball(owner) -> void:
 		owner.mage_fireball_ability.try_trigger(owner)
 
 
+static func try_trigger_mechanic_drone(owner) -> void:
+	if owner.is_dead or owner.level_up_active or _is_action_blocked_by_lock_or_manual_skill(owner):
+		return
+	var active_role_id := str(owner._get_active_role().get("id", ""))
+	if owner.mechanic_drone_ability != null and owner.mechanic_drone_ability.can_trigger(owner, active_role_id):
+		owner.mechanic_drone_ability.try_trigger(owner)
+
+
+static func try_trigger_mechanic_mine(owner) -> void:
+	if owner.is_dead or owner.level_up_active or _is_action_blocked_by_lock_or_manual_skill(owner):
+		return
+	var active_role_id := str(owner._get_active_role().get("id", ""))
+	if owner.mechanic_mine_ability != null and owner.mechanic_mine_ability.can_trigger(owner, active_role_id):
+		owner.mechanic_mine_ability.try_trigger(owner)
+
+
+static func try_trigger_mechanic_emp_burst(owner) -> void:
+	if owner.is_dead or owner.level_up_active or _is_action_blocked_by_lock_or_manual_skill(owner):
+		return
+	var active_role_id := str(owner._get_active_role().get("id", ""))
+	if owner.mechanic_emp_burst_ability != null and owner.mechanic_emp_burst_ability.can_trigger(owner, active_role_id):
+		owner.mechanic_emp_burst_ability.try_trigger(owner)
+
+
+static func try_trigger_mechanic_tulip_turret(owner) -> void:
+	if owner.is_dead or owner.level_up_active or _is_action_blocked_by_lock_or_manual_skill(owner):
+		return
+	var active_role_id := str(owner._get_active_role().get("id", ""))
+	if owner.mechanic_tulip_turret_ability != null and owner.mechanic_tulip_turret_ability.can_trigger(owner, active_role_id):
+		owner.mechanic_tulip_turret_ability.try_trigger(owner)
+
+
+static func try_trigger_mechanic_missile_volley(owner) -> void:
+	if owner.is_dead or owner.level_up_active or _is_action_blocked_by_lock_or_manual_skill(owner):
+		return
+	var active_role_id := str(owner._get_active_role().get("id", ""))
+	if owner.mechanic_missile_volley_ability != null and owner.mechanic_missile_volley_ability.can_trigger(owner, active_role_id):
+		owner.mechanic_missile_volley_ability.try_trigger(owner)
+
+
 static func try_trigger_mage_meta_field(owner) -> void:
 	if owner.is_dead or owner.level_up_active or _is_action_blocked_by_lock_or_manual_skill(owner):
 		return
@@ -326,3 +366,28 @@ static func start_mage_fireball(owner) -> void:
 static func start_mage_meta_field(owner) -> void:
 	if owner.mage_meta_field_ability != null:
 		owner.mage_meta_field_ability.try_trigger(owner)
+
+
+static func start_mechanic_drone(owner) -> void:
+	if owner.mechanic_drone_ability != null:
+		owner.mechanic_drone_ability.try_trigger(owner)
+
+
+static func start_mechanic_mine(owner) -> void:
+	if owner.mechanic_mine_ability != null:
+		owner.mechanic_mine_ability.try_trigger(owner)
+
+
+static func start_mechanic_emp_burst(owner) -> void:
+	if owner.mechanic_emp_burst_ability != null:
+		owner.mechanic_emp_burst_ability.try_trigger(owner)
+
+
+static func start_mechanic_tulip_turret(owner) -> void:
+	if owner.mechanic_tulip_turret_ability != null:
+		owner.mechanic_tulip_turret_ability.try_trigger(owner)
+
+
+static func start_mechanic_missile_volley(owner) -> void:
+	if owner.mechanic_missile_volley_ability != null:
+		owner.mechanic_missile_volley_ability.try_trigger(owner)

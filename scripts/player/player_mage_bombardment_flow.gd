@@ -121,7 +121,7 @@ static func _uses_batched_damage(owner) -> bool:
 
 
 static func _base_role_id(source_role_id: String) -> String:
-	for role_id in ["swordsman", "gunner", "mage"]:
+	for role_id in ["swordsman", "gunner", "mage", "mechanic"]:
 		if source_role_id.begins_with("%s_basic:" % role_id):
 			return role_id
 	return source_role_id

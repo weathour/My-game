@@ -9,6 +9,8 @@ static func get_role_color(role_id: String) -> Color:
 			return Color(0.34, 0.82, 1.0, 1.0)
 		"mage":
 			return Color(0.78, 0.46, 1.0, 1.0)
+		"mechanic":
+			return Color(0.95, 0.68, 0.25, 1.0)
 		_:
 			return Color(1.0, 0.74, 0.34, 1.0)
 
@@ -36,6 +38,8 @@ static func _get_basic_attack_skill_id(role_id: String) -> String:
 			return "gunner_basic_attack"
 		"mage":
 			return "mage_basic_attack"
+		"mechanic":
+			return "mechanic_basic_attack"
 	return ""
 
 
@@ -48,4 +52,6 @@ static func _get_basic_attack_description(role_id: String, attack_interval: floa
 			role_name = "枪手"
 		"mage":
 			role_name = "法师"
+		"mechanic":
+			role_name = "机械师"
 	return "%s普攻冷却。攻击间隔 %.2f 秒；冷却结束后按当前攻击模式出手。" % [role_name, max(attack_interval, 0.01)]

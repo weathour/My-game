@@ -32,6 +32,13 @@ const SKILL_DARK_CONTRACT := "dark_contract"
 const SKILL_JUDGEMENT_SWORD := "judgement_sword"
 const SKILL_MAGIC_EYE := "magic_eye"
 const SKILL_FIREBALL := "fireball"
+const SKILL_DRONE := "drone"
+const SKILL_MINE := "mine"
+const SKILL_EMP_BURST := "emp_burst"
+const SKILL_TULIP_TURRET := "tulip_turret"
+const SKILL_MISSILE_VOLLEY := "missile_volley"
+const SKILL_MECHANIC_BASIC_ATTACK := "mechanic_basic_attack"
+const SKILL_MECHANIC_ULTIMATE := "mechanic_ultimate"
 const ACTIVE_SKILL_IDS := [
 	SKILL_BLADE_STORM,
 	SKILL_CRESCENT_WAVE,
@@ -48,9 +55,15 @@ const ACTIVE_SKILL_IDS := [
 	SKILL_JUDGEMENT_SWORD,
 	SKILL_MAGIC_EYE,
 	SKILL_FIREBALL,
+	SKILL_DRONE,
+	SKILL_MINE,
+	SKILL_EMP_BURST,
+	SKILL_TULIP_TURRET,
+	SKILL_MISSILE_VOLLEY,
 	SKILL_SWORDSMAN_ULTIMATE,
 	SKILL_GUNNER_ULTIMATE,
-	SKILL_MAGE_ULTIMATE
+	SKILL_MAGE_ULTIMATE,
+	SKILL_MECHANIC_ULTIMATE
 ]
 const ACTIVE_SLOT_SKILL_IDS := [
 	SKILL_BLADE_STORM,
@@ -67,17 +80,24 @@ const ACTIVE_SLOT_SKILL_IDS := [
 	SKILL_DARK_CONTRACT,
 	SKILL_JUDGEMENT_SWORD,
 	SKILL_MAGIC_EYE,
-	SKILL_FIREBALL
+	SKILL_FIREBALL,
+	SKILL_DRONE,
+	SKILL_MINE,
+	SKILL_EMP_BURST,
+	SKILL_TULIP_TURRET,
+	SKILL_MISSILE_VOLLEY
 ]
 const BASIC_ATTACK_SKILL_IDS := {
 	SKILL_SWORDSMAN_BASIC_ATTACK: true,
 	SKILL_GUNNER_BASIC_ATTACK: true,
-	SKILL_MAGE_BASIC_ATTACK: true
+	SKILL_MAGE_BASIC_ATTACK: true,
+	SKILL_MECHANIC_BASIC_ATTACK: true
 }
 const ULTIMATE_SKILL_IDS := {
 	SKILL_SWORDSMAN_ULTIMATE: true,
 	SKILL_GUNNER_ULTIMATE: true,
 	SKILL_MAGE_ULTIMATE: true,
+	SKILL_MECHANIC_ULTIMATE: true,
 	SKILL_ENTRY_RESCUE: true,
 	SKILL_HERO_ENTRY: true
 }
@@ -85,9 +105,11 @@ const INHERENT_SKILL_IDS := {
 	SKILL_SWORDSMAN_BASIC_ATTACK: true,
 	SKILL_GUNNER_BASIC_ATTACK: true,
 	SKILL_MAGE_BASIC_ATTACK: true,
+	SKILL_MECHANIC_BASIC_ATTACK: true,
 	SKILL_SWORDSMAN_ULTIMATE: true,
 	SKILL_GUNNER_ULTIMATE: true,
-	SKILL_MAGE_ULTIMATE: true
+	SKILL_MAGE_ULTIMATE: true,
+	SKILL_MECHANIC_ULTIMATE: true
 }
 const SKILL_GRAPH_IDS := [
 	SKILL_SWORDSMAN_BASIC_ATTACK,
@@ -108,7 +130,8 @@ const SKILL_GRAPH_IDS := [
 const ALWAYS_UNLOCKED_SKILL_IDS := {
 	SKILL_SWORDSMAN_ULTIMATE: 1,
 	SKILL_GUNNER_ULTIMATE: 1,
-	SKILL_MAGE_ULTIMATE: 1
+	SKILL_MAGE_ULTIMATE: 1,
+	SKILL_MECHANIC_ULTIMATE: 1
 }
 const SKILL_TAG_COMBO := "combo"
 const SKILL_TAG_DURATION := "duration"
@@ -152,6 +175,13 @@ const SKILL_TAGS := {
 	SKILL_SWORDSMAN_ULTIMATE: {SKILL_TAG_COMBO: true, SKILL_TAG_DURATION: true},
 	SKILL_GUNNER_ULTIMATE: {SKILL_TAG_DURATION: true},
 	SKILL_MAGE_ULTIMATE: {SKILL_TAG_COMBO: true, SKILL_TAG_DURATION: true},
+	SKILL_DRONE: {SKILL_TAG_DURATION: true},
+	SKILL_MINE: {},
+	SKILL_EMP_BURST: {SKILL_TAG_DURATION: true},
+	SKILL_TULIP_TURRET: {SKILL_TAG_DURATION: true},
+	SKILL_MISSILE_VOLLEY: {SKILL_TAG_DURATION: true},
+	SKILL_MECHANIC_BASIC_ATTACK: {SKILL_TAG_COMBO: true, SKILL_TAG_QUANTITY: true},
+	SKILL_MECHANIC_ULTIMATE: {SKILL_TAG_COMBO: true, SKILL_TAG_DURATION: true},
 	SKILL_ENTRY_RESCUE: {},
 	SKILL_HERO_ENTRY: {}
 }
@@ -177,7 +207,14 @@ const SKILL_TITLES := {
 	SKILL_MAGE_BASIC_ATTACK: "法师普攻",
 	SKILL_SWORDSMAN_ULTIMATE: "无敌斩",
 	SKILL_GUNNER_ULTIMATE: "火箭弹幕",
-	SKILL_MAGE_ULTIMATE: "奥数轰炸"
+	SKILL_MAGE_ULTIMATE: "奥数轰炸",
+	SKILL_DRONE: "守卫机器人",
+	SKILL_MINE: "感应地雷",
+	SKILL_EMP_BURST: "磁滞力场",
+	SKILL_TULIP_TURRET: "定点机炮",
+	SKILL_MISSILE_VOLLEY: "重型炮台",
+	SKILL_MECHANIC_BASIC_ATTACK: "机械师普攻",
+	SKILL_MECHANIC_ULTIMATE: "机械全开·郁金香齐射"
 }
 
 const SKILL_ROLE_IDS := {
@@ -202,6 +239,13 @@ const SKILL_ROLE_IDS := {
 	SKILL_SWORDSMAN_ULTIMATE: "swordsman",
 	SKILL_GUNNER_ULTIMATE: "gunner",
 	SKILL_MAGE_ULTIMATE: "mage",
+	SKILL_DRONE: "mechanic",
+	SKILL_MINE: "mechanic",
+	SKILL_EMP_BURST: "mechanic",
+	SKILL_TULIP_TURRET: "mechanic",
+	SKILL_MISSILE_VOLLEY: "mechanic",
+	SKILL_MECHANIC_BASIC_ATTACK: "mechanic",
+	SKILL_MECHANIC_ULTIMATE: "mechanic",
 	SKILL_ENTRY_RESCUE: "",
 	SKILL_HERO_ENTRY: ""
 }
@@ -258,6 +302,33 @@ const UNLOCK_RECIPES := {
 		"always": true
 	},
 	SKILL_MAGE_ULTIMATE: {
+		"always": true
+	},
+	SKILL_DRONE: {
+		"role": {"blazing_sun": 1},
+		"skill": {"tide_rain": 1}
+	},
+	SKILL_MINE: {
+		"role": {"formation_break": 1},
+		"skill": {}
+	},
+	SKILL_EMP_BURST: {
+		"role": {"formation_break": 1},
+		"skill": {"reprise": 1}
+	},
+	SKILL_TULIP_TURRET: {
+		"role": {"divine_grace": 1},
+		"skill": {"tide_rain": 1}
+	},
+	SKILL_MISSILE_VOLLEY: {
+		"role": {"blazing_sun": 1},
+		"skill": {"reprise": 1}
+	},
+	SKILL_MECHANIC_BASIC_ATTACK: {
+		"role_exact": {"blazing_sun": {1: 3}},
+		"skill_exact": {"trick": {1: 3}}
+	},
+	SKILL_MECHANIC_ULTIMATE: {
 		"always": true
 	},
 	SKILL_ENTRY_RESCUE: {
@@ -331,6 +402,41 @@ const EVOLVE_RECIPES := {
 		"skill_exact": {"reprise": {1: 3}},
 		"tier": 2
 	},
+	SKILL_DRONE: {
+		"role_exact": {"blazing_sun": {1: 3}},
+		"skill_exact": {"tide_rain": {1: 3}},
+		"tier": 2
+	},
+	SKILL_MINE: {
+		"role_exact": {"formation_break": {1: 3}},
+		"skill_exact": {},
+		"tier": 2
+	},
+	SKILL_EMP_BURST: {
+		"role_exact": {"formation_break": {1: 3}},
+		"skill_exact": {"reprise": {1: 3}},
+		"tier": 2
+	},
+	SKILL_TULIP_TURRET: {
+		"role_exact": {"divine_grace": {1: 3}},
+		"skill_exact": {"tide_rain": {1: 3}},
+		"tier": 2
+	},
+	SKILL_MISSILE_VOLLEY: {
+		"role_exact": {"blazing_sun": {1: 3}},
+		"skill_exact": {"reprise": {1: 3}},
+		"tier": 2
+	},
+	SKILL_MECHANIC_BASIC_ATTACK: {
+		"role_exact": {"phantom": {2: 3}},
+		"skill_exact": {"trick": {2: 3}},
+		"tier": 3
+	},
+	SKILL_MECHANIC_ULTIMATE: {
+		"role_exact": {"formation_break": {1: 3}},
+		"skill_exact": {"reprise": {1: 3}},
+		"tier": 2
+	},
 	SKILL_ENTRY_RESCUE: {
 		"role_exact": {"support": {1: 3}, "divine_grace": {1: 3}},
 		"skill_exact": {},
@@ -386,6 +492,36 @@ const THIRD_TIER_RECIPES := {
 	},
 	SKILL_MAGE_ULTIMATE: {
 		"role_exact": {"benediction": {2: 3}},
+		"skill_exact": {"reprise": {2: 3}},
+		"tier": 3
+	},
+	SKILL_DRONE: {
+		"role_exact": {},
+		"skill_exact": {"tide_rain": {2: 3}, "trick": {2: 3}},
+		"tier": 3
+	},
+	SKILL_MINE: {
+		"role_exact": {"blazing_sun": {2: 3}},
+		"skill_exact": {},
+		"tier": 3
+	},
+	SKILL_EMP_BURST: {
+		"role_exact": {},
+		"skill_exact": {"reprise": {2: 3}, "trick": {2: 3}},
+		"tier": 3
+	},
+	SKILL_TULIP_TURRET: {
+		"role_exact": {"divine_grace": {2: 3}},
+		"skill_exact": {"tide_rain": {2: 3}},
+		"tier": 3
+	},
+	SKILL_MISSILE_VOLLEY: {
+		"role_exact": {"blazing_sun": {2: 3}},
+		"skill_exact": {"reprise": {2: 3}},
+		"tier": 3
+	},
+	SKILL_MECHANIC_ULTIMATE: {
+		"role_exact": {"blazing_sun": {2: 3}},
 		"skill_exact": {"reprise": {2: 3}},
 		"tier": 3
 	},

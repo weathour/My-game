@@ -126,6 +126,10 @@ static func trigger_rearguard_attack(owner, role_id: String, origin: Vector2, le
 					owner._spawn_vortex_effect(origin, 30.0 + level * 8.0, Color(0.7, 0.78, 1.0, 0.42), 0.22)
 					owner._spawn_burst_effect(origin, 68.0 + level * 12.0, Color(0.52, 0.9, 1.0, 0.28), 0.22)
 					owner._damage_enemies_in_radius(origin, 68.0 + level * 12.0, owner._get_role_damage(role_id) * damage_scale, 0.02, 0.74, 1.0)
+				"mechanic":
+					owner._spawn_ring_effect(origin, 64.0 + level * 10.0, Color(0.95, 0.68, 0.25, 0.78), 7.0, 0.22)
+					owner._spawn_burst_effect(origin, 66.0 + level * 12.0, Color(1.0, 0.76, 0.32, 0.26), 0.22)
+					owner._damage_enemies_in_radius(origin, 66.0 + level * 12.0, owner._get_role_damage(role_id) * damage_scale, 0.02, 1.0, 0.0)
 		, 0.18 * float(attack_index))
 		hit_count += 1
 	return hit_count
@@ -259,6 +263,9 @@ static func apply_enter_skill(owner, role_index: int) -> int:
 		"mage":
 			if owner.mage_role != null:
 				return owner.mage_role.perform_enter(owner, role_id, assault_level, assault_multiplier)
+		"mechanic":
+			if owner.mechanic_role != null:
+				return owner.mechanic_role.perform_enter(owner, role_id, assault_level, assault_multiplier)
 	return 0
 
 
@@ -278,6 +285,9 @@ static func apply_exit_skill(owner, role_index: int) -> int:
 		"mage":
 			if owner.mage_role != null:
 				return owner.mage_role.perform_exit(owner, role_id, rearguard_level)
+		"mechanic":
+			if owner.mechanic_role != null:
+				return owner.mechanic_role.perform_exit(owner, role_id, rearguard_level)
 	return 0
 
 

@@ -17,6 +17,9 @@ static func trigger_background_effect(owner, role_index: int) -> void:
 		"mage":
 			if owner.mage_role != null:
 				owner.mage_role.perform_background(owner)
+		"mechanic":
+			if owner.mechanic_role != null:
+				owner.mechanic_role.perform_background(owner)
 
 
 static func perform_active_attack(owner) -> void:
@@ -35,3 +38,5 @@ static func perform_active_attack(owner) -> void:
 			owner._perform_gunner_attack()
 		"mage":
 			owner._perform_mage_attack()
+		"mechanic":
+			owner._perform_mechanic_attack()
