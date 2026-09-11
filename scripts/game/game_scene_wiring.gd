@@ -2,6 +2,7 @@ extends RefCounted
 
 const CHARACTER_PANEL := preload("res://scripts/ui/hud/character_panel.gd")
 const ENEMY_DEBUG_RANGE_OVERLAY := preload("res://scripts/debug/enemy_debug_range_overlay.gd")
+const DEVELOPER_MODE := preload("res://scripts/developer_mode.gd")
 
 # Handoff note:
 # This file owns scene-local node creation and signal wiring for scripts/main.gd.
@@ -94,7 +95,7 @@ static func _setup_enemy_debug_range_overlay(main: Node) -> void:
 	var overlay := ENEMY_DEBUG_RANGE_OVERLAY.new()
 	overlay.name = "EnemyDebugRangeOverlay"
 	main.add_child(overlay)
-	overlay.configure(main)
+	overlay.configure(main, DEVELOPER_MODE.is_enabled())
 
 static func _connect_if_present(source: Object, signal_name: String, callable: Callable) -> void:
 	if source == null:

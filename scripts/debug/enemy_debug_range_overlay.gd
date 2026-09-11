@@ -28,12 +28,12 @@ var debug_enabled: bool = false
 var combat_enabled: bool = true
 
 
-func configure(root_node: Node) -> void:
+func configure(root_node: Node, combat_ranges_enabled: bool = false) -> void:
 	battle_root = root_node
 	z_as_relative = false
 	z_index = 4090
 	set_debug_enabled(false)
-	set_combat_enabled(true)
+	set_combat_enabled(combat_ranges_enabled)
 
 
 func set_combat_enabled(enabled: bool) -> void:
