@@ -123,6 +123,10 @@ func _check_skill_tree_content(panel: Node) -> void:
 	var text := _collect_text(detail)
 	for title in ["普通攻击", "剑士普通攻击伤害倍率增加15％", "剑士普通攻击冷却减少15％"]:
 		_expect(text.contains(title), "basic attack tree should show %s" % title)
+	_expect(
+		text.contains("技能效果") and text.contains("剑士普攻冷却"),
+		"basic attack tree should show the skill effect description"
+	)
 	_expect(text.contains("构筑 Lv.9"), "completed basic attack tree should show build Lv.9")
 	_expect(
 		not text.contains("当前路径") and not text.contains("阶段 I") and not text.contains("质变后续升级"),
@@ -174,6 +178,10 @@ func _check_locked_skill_copy(panel: Node) -> void:
 	var text := _collect_text(panel.find_child("SkillTreeDetail", true, false))
 	for expected in ["尚未解锁", "普通构筑未生效", "先解锁"]:
 		_expect(text.contains(expected), "locked skill detail should say %s" % expected)
+	_expect(
+		text.contains("开启环绕剑刃持续切割"),
+		"locked skill detail should still show the skill effect description"
+	)
 	_expect(
 		not text.contains("阶段 I") and not text.contains("当前路径") and not text.contains("质变"),
 		"locked skill detail should not describe the removed path system"

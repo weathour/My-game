@@ -9,6 +9,8 @@ const PLAYER_BLESSING_SYSTEM := preload("res://scripts/player/player_blessing_sy
 const PLAYER_BLESSING_SKILL_STATE := preload("res://scripts/player/player_blessing_skill_state.gd")
 const PLAYER_BUILD_SYSTEM := preload("res://scripts/player/player_build_system.gd")
 const PLAYER_SKILL_TALENT_SYSTEM := preload("res://scripts/player/player_skill_talent_system.gd")
+const PLAYER_SKILL_COOLDOWN_FLOW := preload("res://scripts/player/player_skill_cooldown_flow.gd")
+const PLAYER_SKILL_COOLDOWN_SLOTS := preload("res://scripts/player/player_skill_cooldown_slots.gd")
 const SURVIVORS_THEME := preload("res://scripts/ui/theme/survivors_ui_theme.gd")
 const ARCHIVE_ORNAMENT_LAYER := preload("res://scripts/ui/hud/archive_ornament_layer.gd")
 const WHITE_KEY_SHADER := preload("res://shaders/white_key.gdshader")
@@ -933,6 +935,27 @@ func _build_skill_tree_detail_shell() -> void:
 	state_label.add_theme_color_override("font_color", SURVIVORS_THEME.COLOR_TEXT_MUTED)
 	header_box.add_child(state_label)
 
+	var effect_panel := PanelContainer.new()
+	effect_panel.name = "SkillEffectPanel"
+	effect_panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	effect_panel.add_theme_stylebox_override("panel", _archive_card_style())
+	skill_tree_detail.add_child(effect_panel)
+	var effect_box := VBoxContainer.new()
+	effect_box.name = "Content"
+	effect_box.add_theme_constant_override("separation", 5)
+	effect_panel.add_child(effect_box)
+	var effect_title := Label.new()
+	effect_title.text = "技能效果"
+	effect_title.add_theme_font_size_override("font_size", 15)
+	effect_title.add_theme_color_override("font_color", SURVIVORS_THEME.COLOR_TEXT_GOLD)
+	effect_box.add_child(effect_title)
+	var effect_description := Label.new()
+	effect_description.name = "Description"
+	effect_description.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	effect_description.add_theme_font_size_override("font_size", 13)
+	effect_description.add_theme_color_override("font_color", SURVIVORS_THEME.COLOR_TEXT)
+	effect_box.add_child(effect_description)
+
 	var build_panel := PanelContainer.new()
 	build_panel.name = "SkillTreeBuildDetails"
 	build_panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -980,6 +1003,13 @@ func _refresh_skill_tree_detail(role_id: String, progress_id: String) -> void:
 	]
 	state_label.text = "尚未解锁 · 普通构筑未生效" if level <= 0 else "构筑 Lv.%d · 普通构筑强化" % level
 
+	var effect_panel := skill_tree_detail.get_node("SkillEffectPanel") as PanelContainer
+	var effect_description := effect_panel.get_node("Content/Description") as Label
+	var base_effect := _get_skill_base_effect_text(role_id, progress_id)
+	effect_description.text = base_effect
+	effect_panel.visible = base_effect != ""
+	effect_panel.modulate = Color(0.72, 0.75, 0.82, 0.78) if level <= 0 else Color.WHITE
+
 	var build_panel := skill_tree_detail.get_node("SkillTreeBuildDetails") as PanelContainer
 	var requirement_label := build_panel.get_node("Content/Requirement") as Label
 	var build_entries_label := build_panel.get_node("Content/Entries") as Label
@@ -1008,6 +1038,29 @@ func _refresh_skill_tree_detail(role_id: String, progress_id: String) -> void:
 	else:
 		upgrade_note.text = "等级天赋已从旧技能路径迁移；这里仅显示普通构筑。"
 		upgrade_note.modulate = SURVIVORS_THEME.COLOR_TEXT_MUTED
+
+func _get_skill_base_effect_text(role_id: String, progress_id: String) -> String:
+	if cached_player == null or not is_instance_valid(cached_player):
+		return ""
+	if progress_id.ends_with("_basic"):
+		var attack_interval := 1.0
+		if cached_player.has_method("_get_effective_attack_interval"):
+			attack_interval = float(cached_player._get_effective_attack_interval(role_id))
+		var basic_slots := PLAYER_SKILL_COOLDOWN_SLOTS.build_slots(role_id, 0.0, max(attack_interval, 0.01), [], cached_player)
+		if not basic_slots.is_empty() and basic_slots[0] is Dictionary:
+			return str((basic_slots[0] as Dictionary).get("description", ""))
+		return ""
+	var skill_id := str(PLAYER_SKILL_TALENT_SYSTEM.UNLOCKABLE_PROGRESS.get(progress_id, ""))
+	if skill_id == "":
+		return ""
+	var property_name := str((PLAYER_SKILL_COOLDOWN_FLOW.ROLE_ACTIVE_SKILL_PROPERTIES.get(role_id, {}) as Dictionary).get(skill_id, ""))
+	if property_name == "":
+		return ""
+	var ability: Variant = cached_player.get(property_name)
+	if ability == null or not ability.has_method("get_cooldown_slot"):
+		return ""
+	var slot: Dictionary = ability.get_cooldown_slot(cached_player)
+	return str(slot.get("description", ""))
 
 func _get_projected_build_entries(role_id: String, progress_id: String) -> Array[Dictionary]:
 	var result: Array[Dictionary] = []
