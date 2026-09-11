@@ -1,6 +1,7 @@
 extends PanelContainer
 
 const SURVIVORS_THEME := preload("res://scripts/ui/theme/survivors_ui_theme.gd")
+const TOOLTIP_TEXT_DECORATOR := preload("res://scripts/ui/components/tooltip_text_decorator.gd")
 
 const MIN_SIZE := Vector2(260.0, 132.0)
 const MAX_SIZE := Vector2(560.0, 420.0)
@@ -14,8 +15,10 @@ const CURSOR_OFFSET := Vector2(18.0, 18.0)
 
 var title_label: Label
 var category_label: Label
+var stats_label: Label
 var description_label: RichTextLabel
 var compact := false
+var _plain_detail_text := ""
 
 func _ready() -> void:
 	mouse_filter = Control.MOUSE_FILTER_STOP
@@ -41,8 +44,14 @@ func _ready() -> void:
 	category_label.add_theme_color_override("font_color", SURVIVORS_THEME.COLOR_TEXT_MUTED)
 	content.add_child(category_label)
 
+	stats_label = Label.new()
+	stats_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	stats_label.add_theme_color_override("font_color", Color(0.66, 0.78, 1.0, 1.0))
+	stats_label.visible = false
+	content.add_child(stats_label)
+
 	description_label = RichTextLabel.new()
-	description_label.bbcode_enabled = false
+	description_label.bbcode_enabled = true
 	description_label.fit_content = false
 	description_label.scroll_active = true
 	description_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -65,9 +74,11 @@ func show_item(item: Dictionary, global_position_value: Vector2, anchor_rect: Re
 	title_label.add_theme_color_override("font_color", item.get("tier_text_font_color", SURVIVORS_THEME.COLOR_TEXT_GOLD))
 	category_label.text = _get_category_text(item)
 	category_label.visible = category_label.text != ""
-	description_label.bbcode_enabled = false
+	stats_label.text = str(item.get("stats", ""))
+	stats_label.visible = stats_label.text != ""
+	_plain_detail_text = detail
 	description_label.add_theme_color_override("default_color", item.get("tier_description_color", SURVIVORS_THEME.COLOR_TEXT))
-	description_label.text = detail
+	description_label.text = TOOLTIP_TEXT_DECORATOR.highlight_numbers(detail)
 	description_label.scroll_to_line(0)
 	_apply_size(SURVIVORS_THEME.viewport_size(self).x < 900.0 or SURVIVORS_THEME.viewport_size(self).y < 560.0)
 	visible = true
@@ -149,6 +160,7 @@ func _apply_size(is_compact: bool) -> void:
 	description_label.custom_minimum_size = Vector2(0.0, max(64.0, resolved_size.y - HEADER_HEIGHT))
 	title_label.add_theme_font_size_override("font_size", 16 if compact else 18)
 	category_label.add_theme_font_size_override("font_size", 12 if compact else 13)
+	stats_label.add_theme_font_size_override("font_size", 12 if compact else 13)
 	description_label.add_theme_font_size_override("normal_font_size", 13 if compact else 15)
 	description_label.add_theme_font_size_override("bold_font_size", 13 if compact else 15)
 
@@ -157,7 +169,9 @@ func _estimate_content_size(max_width: float, is_compact: bool) -> Vector2:
 	all_lines.append(str(title_label.text))
 	if category_label.visible:
 		all_lines.append(str(category_label.text))
-	for line in str(description_label.text).replace("\r", "").split("\n"):
+	if stats_label.visible:
+		all_lines.append(str(stats_label.text))
+	for line in _plain_detail_text.replace("\r", "").split("\n"):
 		all_lines.append(str(line))
 	var longest_line := 0
 	for line in all_lines:
@@ -165,13 +179,14 @@ func _estimate_content_size(max_width: float, is_compact: bool) -> Vector2:
 	var natural_width: float = min(max_width, max(MIN_SIZE.x, 52.0 + float(longest_line) * WIDTH_PER_CHAR))
 	var usable_text_width: float = max(160.0, natural_width - 36.0)
 	var estimated_lines := 0
-	for line in str(description_label.text).replace("\r", "").split("\n"):
+	for line in _plain_detail_text.replace("\r", "").split("\n"):
 		var length: int = max(1, str(line).length())
 		estimated_lines += max(1, int(ceil(float(length) * WIDTH_PER_CHAR / usable_text_width)))
 	var title_lines: int = max(1, int(ceil(float(max(1, str(title_label.text).length())) * WIDTH_PER_CHAR / usable_text_width)))
 	var category_lines: int = 1 if category_label.visible and category_label.text != "" else 0
+	var stats_lines: int = 1 if stats_label.visible and stats_label.text != "" else 0
 	var line_height: float = LINE_HEIGHT_COMPACT if is_compact else LINE_HEIGHT_NORMAL
-	var natural_height: float = 34.0 + float(title_lines) * 22.0 + float(category_lines) * 18.0 + float(estimated_lines) * line_height
+	var natural_height: float = 34.0 + float(title_lines) * 22.0 + float(category_lines + stats_lines) * 18.0 + float(estimated_lines) * line_height
 	return Vector2(natural_width, natural_height)
 
 func _reposition(global_position_value: Vector2, anchor_rect: Rect2) -> void:

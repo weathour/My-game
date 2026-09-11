@@ -918,6 +918,9 @@ func update_skill_cooldown_slots(slot_data_list: Array) -> void:
 		var next_description: String = _build_slot_tooltip(slot_data, duration, remaining)
 		if str(slot_nodes.get("description", "")) != next_description:
 			slot_nodes["description"] = next_description
+		var next_stats: String = _build_slot_stats(duration, remaining)
+		if str(slot_nodes.get("stats", "")) != next_stats:
+			slot_nodes["stats"] = next_stats
 		var next_slot_label: String = str(slot_data.get("slot_label", "技能冷却"))
 		if str(slot_nodes.get("slot_label", "")) != next_slot_label:
 			slot_nodes["slot_label"] = next_slot_label
@@ -1471,6 +1474,7 @@ func _update_team_role_slots(row_index: int, slot_data_list: Array) -> void:
 		var tooltip_data := slot_data.duplicate(true)
 		tooltip_data["description"] = base_description
 		slot_nodes["description"] = _build_slot_tooltip(tooltip_data, duration, remaining)
+		slot_nodes["stats"] = _build_slot_stats(duration, remaining)
 		slot_nodes["slot_label"] = str(slot_data.get("slot_label", "技能冷却"))
 
 func _get_slot_display_text(slot_name: String, _row_active: bool) -> String:
@@ -1573,6 +1577,13 @@ func _build_slot_tooltip(slot_data: Dictionary, duration: float, remaining: floa
 		description = "%s\n%s" % [description, status]
 	return description
 
+func _build_slot_stats(duration: float, remaining: float) -> String:
+	if duration <= 0.0:
+		return ""
+	if remaining > 0.05:
+		return "冷却 %.1f 秒 · 剩余 %.1f 秒" % [duration, remaining]
+	return "冷却 %.1f 秒 · 就绪" % duration
+
 func _on_team_role_row_hovered(row_index: int) -> void:
 	if row_index < 0 or row_index >= team_role_rows.size():
 		return
@@ -1623,6 +1634,7 @@ func _on_team_role_skill_slot_hovered(row_index: int, slot_index: int, slot_icon
 	var item := {
 		"title": title,
 		"slot_label": "%s / %s" % [role_name, str(slot_nodes.get("slot_label", "技能冷却"))],
+		"stats": str(slot_nodes.get("stats", "")),
 		"description": description
 	}
 	if hover_detail != null and hover_detail.has_method("show_item"):
@@ -1641,6 +1653,7 @@ func _on_skill_slot_hovered(slot_icon: Control, index: int) -> void:
 	var item := {
 		"title": title,
 		"slot_label": str(slot_nodes.get("slot_label", "技能冷却")),
+		"stats": str(slot_nodes.get("stats", "")),
 		"description": description
 	}
 	if hover_detail != null and hover_detail.has_method("show_item"):
