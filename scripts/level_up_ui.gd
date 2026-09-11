@@ -354,7 +354,7 @@ func _ensure_build_overlay() -> void:
 
 	build_refresh_button = Button.new()
 	build_refresh_button.text = ""
-	build_refresh_button.tooltip_text = "鍒锋柊"
+	build_refresh_button.tooltip_text = "刷新"
 	build_refresh_button.focus_mode = Control.FOCUS_NONE
 	build_refresh_button.pressed.connect(_on_refresh_pressed)
 	var refresh_icon := TextureRect.new()

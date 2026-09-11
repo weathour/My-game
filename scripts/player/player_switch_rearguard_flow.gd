@@ -10,7 +10,7 @@ static func trigger_rearguard_attack(owner, role_id: String, origin: Vector2, le
 	var repeat_count: int = 1 if level == 1 else 2
 	var damage_scale: float = 0.4 if level == 1 else (0.45 if level == 2 else 0.55)
 	var accent: Color = owner._get_role_theme_color(role_id)
-	owner._spawn_combat_tag(origin + Vector2(0.0, -40.0), "鍚庡崼鎺╂姢", Color(min(1.0, accent.r + 0.18), min(1.0, accent.g + 0.18), min(1.0, accent.b + 0.18), 1.0))
+	owner._spawn_combat_tag(origin + Vector2(0.0, -40.0), "后卫掩护", Color(min(1.0, accent.r + 0.18), min(1.0, accent.g + 0.18), min(1.0, accent.b + 0.18), 1.0))
 	owner._spawn_ring_effect(origin, 62.0 + level * 12.0, Color(accent.r, accent.g, accent.b, 0.68), 8.0, 0.24)
 	if owner.get_tree() == null:
 		return 0

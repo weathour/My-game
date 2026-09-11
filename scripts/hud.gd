@@ -638,7 +638,7 @@ func _ensure_performance_overlay() -> void:
 	performance_overlay_panel.visible = performance_overlay_visible
 
 func update_display(level: int, current_experience: int, required_experience: int) -> void:
-	_set_label_text(level_label, "绛夌骇 %d" % level)
+	_set_label_text(level_label, "等级 %d" % level)
 	if experience_bar != null:
 		var next_max: int = max(required_experience, 1)
 		if int(experience_bar.max_value) != next_max:

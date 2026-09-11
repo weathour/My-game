@@ -38,7 +38,7 @@ static func activate_switch_power(owner, role_id: String, label: String, duratio
 
 static func clear_standby_entry_buff(owner) -> void:
 	owner.standby_entry_role_id = ""
-	owner.standby_entry_label = "寰呮満钃勫娍"
+	owner.standby_entry_label = "待机蓄势"
 	owner.standby_entry_remaining = 0.0
 	owner.standby_entry_damage_multiplier = 1.0
 	owner.standby_entry_interval_bonus = 0.0
@@ -57,12 +57,12 @@ static func apply_rotation_entry_bonus(owner, role_id: String) -> void:
 	var damage_step: float = [0.10, 0.14, 0.18][rotation_level - 1]
 	var interval_step: float = [0.035, 0.045, 0.055][rotation_level - 1]
 	owner.standby_entry_role_id = role_id
-	owner.standby_entry_label = "寰呮満钃勫娍"
+	owner.standby_entry_label = "待机蓄势"
 	owner.standby_entry_remaining = [2.5, 3.5, 4.5][rotation_level - 1]
 	owner.standby_entry_damage_multiplier = 1.0 + damage_step * stacks
 	owner.standby_entry_interval_bonus = interval_step * stacks
 	owner.role_standby_elapsed[role_id] = 0.0
-	owner._spawn_combat_tag(owner.global_position + Vector2(0.0, -48.0), "寰呮満钃勫娍 x%d" % stacks, Color(1.0, 0.86, 0.56, 1.0))
+	owner._spawn_combat_tag(owner.global_position + Vector2(0.0, -48.0), "待机蓄势 x%d" % stacks, Color(1.0, 0.86, 0.56, 1.0))
 	owner._spawn_ring_effect(owner.global_position, 54.0 + stacks * 10.0, Color(0.64, 0.92, 1.0, 0.62), 5.0, 0.18)
 	if rotation_level >= 2:
 		owner._add_energy(4.0)
@@ -90,7 +90,7 @@ static func apply_swap_guard(owner, direction: Vector2) -> void:
 static func activate_guard_cover(owner) -> void:
 	owner.guard_cover_remaining = 2.0
 	owner.guard_cover_damage_multiplier = 0.92
-	owner._spawn_combat_tag(owner.global_position + Vector2(0.0, -42.0), "鎺╂姢鏋跺娍", Color(0.88, 0.96, 1.0, 1.0))
+	owner._spawn_combat_tag(owner.global_position + Vector2(0.0, -42.0), "掩护架势", Color(0.88, 0.96, 1.0, 1.0))
 
 
 static func trigger_rearguard_attack(owner, role_id: String, origin: Vector2, level: int) -> int:
@@ -100,7 +100,7 @@ static func trigger_rearguard_attack(owner, role_id: String, origin: Vector2, le
 	var repeat_count: int = 1 if level == 1 else 2
 	var damage_scale: float = 0.4 if level == 1 else (0.45 if level == 2 else 0.55)
 	var accent: Color = owner._get_role_theme_color(role_id)
-	owner._spawn_combat_tag(origin + Vector2(0.0, -40.0), "鍚庡崼鎺╂姢", Color(min(1.0, accent.r + 0.18), min(1.0, accent.g + 0.18), min(1.0, accent.b + 0.18), 1.0))
+	owner._spawn_combat_tag(origin + Vector2(0.0, -40.0), "后卫掩护", Color(min(1.0, accent.r + 0.18), min(1.0, accent.g + 0.18), min(1.0, accent.b + 0.18), 1.0))
 	owner._spawn_ring_effect(origin, 62.0 + level * 12.0, Color(accent.r, accent.g, accent.b, 0.68), 8.0, 0.24)
 	if owner.get_tree() == null:
 		return 0
