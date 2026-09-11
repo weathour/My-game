@@ -2,6 +2,8 @@ extends Control
 
 signal focus_pressed
 
+const TOOLTIP_TEXT_DECORATOR := preload("res://scripts/ui/components/tooltip_text_decorator.gd")
+
 var focus_blur: ColorRect
 var detail_panel: PanelContainer
 var detail_title_label: Label
@@ -50,7 +52,10 @@ func show_detail(slot_id: String, option: Dictionary, source_button: Button) -> 
 
 
 func _build_detail_text(option: Dictionary) -> String:
-	var detail_text := str(option.get("detail_description", option.get("description", "")))
+	var detail_text := TOOLTIP_TEXT_DECORATOR.highlight_numbers(str(option.get("detail_description", option.get("description", ""))))
+	var owned_count := int(option.get("owned_count", 0))
+	if owned_count > 0:
+		detail_text = "[color=#8CE88C]已持有 ×%d → ×%d[/color]\n%s" % [owned_count, owned_count + 1, detail_text]
 	var card_type_label := str(option.get("card_type_label", ""))
 	if card_type_label != "":
 		detail_text = "[color=#FFE08A]类型：%s[/color]\n%s" % [card_type_label, detail_text]
@@ -69,9 +74,9 @@ func _format_role_effects(option: Dictionary) -> String:
 	for effect in role_effects:
 		if effect is not Dictionary:
 			continue
-		lines.append("[color=#FFE08A]%s｜%s[/color]" % [str(effect.get("role_name", "")), str(effect.get("title", ""))])
+		lines.append("[color=#FFE08A]%s｜%s[/color]" % [str(effect.get("role_name", "")), TOOLTIP_TEXT_DECORATOR.highlight_numbers(str(effect.get("title", "")))])
 		for line in effect.get("lines", []):
-			lines.append("  • " + str(line))
+			lines.append("  • " + TOOLTIP_TEXT_DECORATOR.highlight_numbers(str(line)))
 	return "\n".join(lines)
 
 
@@ -250,8 +255,8 @@ func _show_glossary(term: String) -> void:
 	var entry: Dictionary = detail_glossary_terms.get(term, {})
 	glossary_title_label.text = str(entry.get("title", term))
 	glossary_desc_label.text = "%s\n\n[color=#A9C8FF]每层效果[/color]\n%s" % [
-		str(entry.get("description", "")),
-		str(entry.get("per_level", ""))
+		TOOLTIP_TEXT_DECORATOR.highlight_numbers(str(entry.get("description", ""))),
+		TOOLTIP_TEXT_DECORATOR.highlight_numbers(str(entry.get("per_level", "")))
 	]
 	glossary_panel.set_meta("slot_id", detail_slot_id)
 	glossary_panel.visible = true

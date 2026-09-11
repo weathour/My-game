@@ -543,6 +543,7 @@ static func _make_role_option(owner, role_id: String, role_slot_index: int, defi
 		"preview_description": description,
 		"detail_description": description,
 		"exact_description": description,
+		"owned_count": get_count(owner, role_id, build_id),
 		"card_title": card_title,
 		"hide_card_title": not shows_card_title,
 		"unlock_skill": unlock_skill,
