@@ -5,6 +5,8 @@ const ENEMY_BATCH_ELIGIBILITY := preload("res://scripts/enemies/enemy_batch_elig
 
 const BATCH_FRAME_META_KEY := "__enemy_batch_simulation_frame"
 
+static var _script_api_cache: Dictionary = {}
+
 
 static func update_simple_normal_enemies(scene: Node, delta: float) -> void:
 	if scene == null or delta <= 0.0:
@@ -22,11 +24,12 @@ static func update_simple_normal_enemies(scene: Node, delta: float) -> void:
 			continue
 		var enemy_node := raw_enemy as Node
 		scanned_count += 1
-		if not enemy_node.has_method("can_use_batch_simulation") or not enemy_node.has_method("batch_physics_process"):
+		var api := _get_script_api(enemy_node)
+		if not bool(api[0]):
 			_add_skip_reason(skipped_by_reason, "missing_batch_api")
 			continue
 		var reason := ENEMY_BATCH_ELIGIBILITY.REASON_ELIGIBLE
-		if enemy_node.has_method("get_batch_ineligibility_reason"):
+		if bool(api[1]):
 			reason = str(enemy_node.call("get_batch_ineligibility_reason"))
 		elif not bool(enemy_node.call("can_use_batch_simulation")):
 			reason = "legacy_rejected"
@@ -36,8 +39,11 @@ static func update_simple_normal_enemies(scene: Node, delta: float) -> void:
 			continue
 
 		if "batch_simulation_enabled" in enemy_node:
-			enemy_node.set("batch_simulation_enabled", true)
-		if enemy_node.is_physics_processing():
+			if not bool(enemy_node.get("batch_simulation_enabled")):
+				enemy_node.set("batch_simulation_enabled", true)
+				if enemy_node.is_physics_processing():
+					enemy_node.set_physics_process(false)
+		elif enemy_node.is_physics_processing():
 			enemy_node.set_physics_process(false)
 		enemy_node.call("batch_physics_process", delta)
 		updated_count += 1
@@ -55,6 +61,21 @@ static func _get_runtime_enemies(scene: Node) -> Array:
 	if scene.has_method("get_runtime_enemies"):
 		return scene.call("get_runtime_enemies")
 	return scene.get_tree().get_nodes_in_group("enemies") if scene.is_inside_tree() else []
+
+
+static func _get_script_api(node: Node) -> Array:
+	var script := node.get_script() as Script
+	if script == null:
+		return [false, false]
+	var cached: Variant = _script_api_cache.get(script)
+	if cached is Array:
+		return cached
+	var api := [
+		node.has_method("can_use_batch_simulation") and node.has_method("batch_physics_process"),
+		node.has_method("get_batch_ineligibility_reason")
+	]
+	_script_api_cache[script] = api
+	return api
 
 
 static func _restore_enemy_physics(enemy_node: Node) -> void:
