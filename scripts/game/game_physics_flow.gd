@@ -5,6 +5,7 @@ const PERFORMANCE_RECORDER := preload("res://scripts/game/performance_recorder.g
 const ENEMY_BATCH_SIMULATION := preload("res://scripts/enemies/enemy_batch_simulation.gd")
 const ENEMY_PROJECTILE_BATCH_SIMULATION := preload("res://scripts/enemies/enemy_projectile_batch_simulation.gd")
 const PICKUP_BATCH_SIMULATION := preload("res://scripts/game/pickup_batch_simulation.gd")
+const ENEMY_TURRET_BOMBARD := preload("res://scripts/enemies/enemy_turret_bombard.gd")
 
 
 static func physics_process(main: Node, delta: float) -> void:
@@ -13,6 +14,7 @@ static func physics_process(main: Node, delta: float) -> void:
 	if main.get_tree() == null or main.get_tree().paused or bool(main.get("game_over")):
 		return
 	PERFORMANCE_RECORDER.begin_scope("physics_phase_ms")
+	ENEMY_TURRET_BOMBARD.update_bombards(main, delta)
 	if PERFORMANCE_FEATURE_FLAGS.is_enabled(main, PERFORMANCE_FEATURE_FLAGS.FLAG_ENEMY_BATCH):
 		PERFORMANCE_RECORDER.begin_scope("enemy_batch_ms")
 		ENEMY_BATCH_SIMULATION.update_simple_normal_enemies(main, delta)

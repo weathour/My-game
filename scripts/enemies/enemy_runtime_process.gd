@@ -24,8 +24,6 @@ static func exit_tree(enemy) -> void:
 static func physics_process(enemy, delta: float) -> void:
 	enemy.ENEMY_HIT_FEEDBACK.update_feedback_animations(delta)
 	enemy.ENEMY_STATUS_VISUALS.update_temporary_animations(delta)
-	var current_scene: Node = enemy.get_tree().current_scene if enemy.is_inside_tree() and enemy.get_tree() != null else null
-	enemy.ENEMY_TURRET_BOMBARD.update_bombards(current_scene, delta)
 	if enemy.pooled_inactive:
 		return
 	if bool(enemy._is_glutton) or enemy.behavior_id == "skulltomb" or enemy.secondary_behavior_id == "skulltomb":
