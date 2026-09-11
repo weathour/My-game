@@ -5,12 +5,15 @@ const PERFORMANCE_COUNTERS := preload("res://scripts/game/performance_counters.g
 const PLAYER_EFFECT_SHAPE_PRIMITIVES := preload("res://scripts/player/player_effect_shape_primitives.gd")
 const PLAYER_EFFECT_LINE_PRIMITIVES := preload("res://scripts/player/player_effect_line_primitives.gd")
 const COMBAT_TAG_POOL_LIMIT := 32
+const COMBAT_TAG_REPEAT_INTERVAL_MSEC := 2000
+const COMBAT_TAG_THROTTLE_ENTRY_LIMIT := 128
 const BURST_POLYGON_POOL_LIMIT := 48
 const FROST_SIGIL_POOL_LIMIT := 32
 const RADIAL_RAYS_POOL_LIMIT := 24
 const GUARD_SHIELD_POOL_LIMIT := 16
 
 static var combat_tag_pool: Array = []
+static var combat_tag_last_spawn_msec: Dictionary = {}
 static var burst_polygon_pool: Array = []
 static var frost_sigil_pool: Array = []
 static var radial_rays_pool: Array = []
@@ -43,6 +46,13 @@ static func spawn_dash_line_effect(owner: Node, start_position: Vector2, end_pos
 static func spawn_combat_tag(owner: Node, position: Vector2, text: String, color: Color, show_gameplay_text_hints: bool) -> void:
 	if not show_gameplay_text_hints:
 		return
+	var now_msec := Time.get_ticks_msec()
+	var last_spawn_msec := int(combat_tag_last_spawn_msec.get(text, -COMBAT_TAG_REPEAT_INTERVAL_MSEC))
+	if now_msec - last_spawn_msec < COMBAT_TAG_REPEAT_INTERVAL_MSEC:
+		return
+	if combat_tag_last_spawn_msec.size() >= COMBAT_TAG_THROTTLE_ENTRY_LIMIT:
+		combat_tag_last_spawn_msec.clear()
+	combat_tag_last_spawn_msec[text] = now_msec
 	if not _can_spawn_temporary_effect(owner):
 		return
 	var current_scene: Node = owner.get_tree().current_scene
