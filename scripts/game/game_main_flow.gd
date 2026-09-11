@@ -89,6 +89,11 @@ static func unhandled_input(main: Node, event: InputEvent) -> void:
 
 static func process(main: Node, delta: float) -> void:
 	var real_delta: float = delta / max(Engine.time_scale, 0.001)
+	PERFORMANCE_RECORDER.set_scopes_enabled(
+		PERFORMANCE_TRACE_LOGGER.active
+		or PERFORMANCE_RECORDER.session_active
+		or (main.hud != null and bool(main.hud.get("performance_overlay_visible")))
+	)
 	PERFORMANCE_RECORDER.record_frame(real_delta)
 	PERFORMANCE_TRACE_LOGGER.tick(main, real_delta)
 	if main.game_over or main.get_tree().paused:

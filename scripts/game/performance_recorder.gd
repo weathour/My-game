@@ -3,22 +3,26 @@ extends RefCounted
 const MAX_FRAME_SAMPLES := 7200
 
 static var frame_samples_ms: Array[float] = []
+static var frame_samples_write_index: int = 0
 static var session_samples_ms: Array[float] = []
 static var current_scopes: Dictionary = {}
 static var scope_totals_us: Dictionary = {}
 static var scope_peaks_us: Dictionary = {}
 static var session_active: bool = false
 static var session_label: String = ""
+static var scopes_enabled: bool = true
 
 
 static func reset() -> void:
 	frame_samples_ms.clear()
+	frame_samples_write_index = 0
 	session_samples_ms.clear()
 	current_scopes.clear()
 	scope_totals_us.clear()
 	scope_peaks_us.clear()
 	session_active = false
 	session_label = ""
+	scopes_enabled = true
 
 
 static func start_session(label: String = "") -> void:
@@ -40,21 +44,31 @@ static func record_frame(delta: float) -> void:
 	if delta <= 0.0:
 		return
 	var frame_ms := delta * 1000.0
-	frame_samples_ms.append(frame_ms)
-	if frame_samples_ms.size() > MAX_FRAME_SAMPLES:
-		frame_samples_ms.pop_front()
+	if frame_samples_ms.size() < MAX_FRAME_SAMPLES:
+		frame_samples_ms.append(frame_ms)
+	else:
+		frame_samples_ms[frame_samples_write_index] = frame_ms
+		frame_samples_write_index = (frame_samples_write_index + 1) % MAX_FRAME_SAMPLES
 	if session_active:
 		session_samples_ms.append(frame_ms)
 
 
+static func set_scopes_enabled(enabled: bool) -> void:
+	if scopes_enabled == enabled:
+		return
+	scopes_enabled = enabled
+	if not enabled:
+		current_scopes.clear()
+
+
 static func begin_scope(scope_name: String) -> void:
-	if scope_name == "":
+	if not scopes_enabled or scope_name == "":
 		return
 	current_scopes[scope_name] = Time.get_ticks_usec()
 
 
 static func end_scope(scope_name: String) -> void:
-	if scope_name == "" or not current_scopes.has(scope_name):
+	if not scopes_enabled or scope_name == "" or not current_scopes.has(scope_name):
 		return
 	var elapsed := Time.get_ticks_usec() - int(current_scopes.get(scope_name, Time.get_ticks_usec()))
 	current_scopes.erase(scope_name)
