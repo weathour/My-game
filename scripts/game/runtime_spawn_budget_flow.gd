@@ -1,5 +1,7 @@
 extends RefCounted
 
+const PERFORMANCE_GUARD := preload("res://scripts/game/performance_guard.gd")
+
 
 static func can_spawn_runtime_group(main: Node, group_name: String, fallback_limit: int) -> bool:
 	if should_bypass_runtime_group_limit(main, group_name):
@@ -54,7 +56,7 @@ static func has_runtime_spawn_frame_budget(main: Node, group_name: String) -> bo
 static func get_runtime_spawn_frame_limit(main: Node, group_name: String) -> int:
 	match group_name:
 		"temporary_effects":
-			var fps := main.PERFORMANCE_GUARD.get_fps()
+			var fps := PERFORMANCE_GUARD.get_fps()
 			if fps > 0 and fps < main.PERFORMANCE_GUARD.CRITICAL_FPS_THRESHOLD:
 				return 8
 			if fps > 0 and fps < main.PERFORMANCE_GUARD.LOW_FPS_THRESHOLD:
