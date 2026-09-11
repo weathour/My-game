@@ -366,7 +366,7 @@ static func _consume_status_visual_budget(enemy) -> bool:
 	return true
 
 static func _get_status_visual_budget_per_frame() -> int:
-	var fps := Engine.get_frames_per_second()
+	var fps := PERFORMANCE_GUARD.get_fps()
 	if fps > 0 and fps < PERFORMANCE_GUARD.CRITICAL_FPS_THRESHOLD:
 		return CRITICAL_FPS_STATUS_VISUAL_BUDGET_PER_FRAME
 	if fps > 0 and fps < PERFORMANCE_GUARD.LOW_FPS_THRESHOLD:
@@ -396,7 +396,7 @@ static func _consume_status_burst_budget(enemy) -> bool:
 	return true
 
 static func _get_status_burst_budget_per_frame() -> int:
-	var fps := Engine.get_frames_per_second()
+	var fps := PERFORMANCE_GUARD.get_fps()
 	if fps > 0 and fps < PERFORMANCE_GUARD.CRITICAL_FPS_THRESHOLD:
 		return CRITICAL_FPS_STATUS_BURST_BUDGET_PER_FRAME
 	if fps > 0 and fps < PERFORMANCE_GUARD.LOW_FPS_THRESHOLD:

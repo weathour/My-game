@@ -3,6 +3,7 @@ extends Node2D
 signal warning_finished(entry: Dictionary)
 
 const CROSS_COLOR := Color(1.0, 0.08, 0.06, 0.92)
+const PERFORMANCE_GUARD := preload("res://scripts/game/performance_guard.gd")
 const FILL_COLOR := Color(1.0, 0.08, 0.04, 0.18)
 const CROSS_WIDTH := 5.0
 const FLASH_COUNT := 4
@@ -23,7 +24,7 @@ func _ready() -> void:
 	z_index = 18
 
 func add_warning(warning_position: Vector2, radius: float, payload: Dictionary) -> void:
-	var fps := Engine.get_frames_per_second()
+	var fps := PERFORMANCE_GUARD.get_fps()
 	if fps > 0 and fps < 45 and warnings.size() >= MAX_WARNINGS_LOW_FPS:
 		pending_finished_entries.append({
 			"position": warning_position,
@@ -68,7 +69,7 @@ func _flush_finished_entries() -> void:
 		emitted += 1
 
 func _get_finished_warning_emit_limit() -> int:
-	var fps := Engine.get_frames_per_second()
+	var fps := PERFORMANCE_GUARD.get_fps()
 	if fps > 0 and fps < CRITICAL_FPS_THRESHOLD:
 		return CRITICAL_FPS_FINISHED_WARNINGS_PER_FRAME
 	if fps > 0 and fps < LOW_FPS_THRESHOLD:

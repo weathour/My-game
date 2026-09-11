@@ -427,7 +427,7 @@ func _get_frame_process_limit(queue_size: int) -> int:
 
 
 func _get_feedback_jobs_per_render_frame() -> int:
-	var fps := Engine.get_frames_per_second()
+	var fps := PERFORMANCE_GUARD.get_fps()
 	if fps > 0 and fps < PERFORMANCE_GUARD.CRITICAL_FPS_THRESHOLD:
 		return CRITICAL_FPS_FEEDBACK_DAMAGE_JOBS_PER_RENDER_FRAME
 	if fps > 0 and fps < PERFORMANCE_GUARD.LOW_FPS_THRESHOLD:
@@ -436,7 +436,7 @@ func _get_feedback_jobs_per_render_frame() -> int:
 
 
 func _get_frame_time_budget_usec() -> int:
-	var fps := Engine.get_frames_per_second()
+	var fps := PERFORMANCE_GUARD.get_fps()
 	if fps > 0 and fps < PERFORMANCE_GUARD.CRITICAL_FPS_THRESHOLD:
 		return CRITICAL_FPS_DAMAGE_QUEUE_TIME_BUDGET_USEC
 	if fps > 0 and fps < PERFORMANCE_GUARD.LOW_FPS_THRESHOLD:

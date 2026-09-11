@@ -704,7 +704,7 @@ func _consume_impact_effect_budget() -> bool:
 	return true
 
 func _get_split_burst_budget_per_frame() -> int:
-	var fps := Engine.get_frames_per_second()
+	var fps := PERFORMANCE_GUARD.get_fps()
 	if fps > 0 and fps < PERFORMANCE_GUARD.CRITICAL_FPS_THRESHOLD:
 		return CRITICAL_FPS_SPLIT_BURSTS_PER_PHYSICS_FRAME
 	if fps > 0 and fps < PERFORMANCE_GUARD.LOW_FPS_THRESHOLD:
@@ -712,7 +712,7 @@ func _get_split_burst_budget_per_frame() -> int:
 	return MAX_SPLIT_BURSTS_PER_PHYSICS_FRAME
 
 func _get_impact_effect_budget_per_frame() -> int:
-	var fps := Engine.get_frames_per_second()
+	var fps := PERFORMANCE_GUARD.get_fps()
 	if fps > 0 and fps < PERFORMANCE_GUARD.CRITICAL_FPS_THRESHOLD:
 		return CRITICAL_FPS_IMPACT_EFFECTS_PER_PHYSICS_FRAME
 	if fps > 0 and fps < PERFORMANCE_GUARD.LOW_FPS_THRESHOLD:

@@ -54,7 +54,7 @@ static func has_runtime_spawn_frame_budget(main: Node, group_name: String) -> bo
 static func get_runtime_spawn_frame_limit(main: Node, group_name: String) -> int:
 	match group_name:
 		"temporary_effects":
-			var fps := Engine.get_frames_per_second()
+			var fps := main.PERFORMANCE_GUARD.get_fps()
 			if fps > 0 and fps < main.PERFORMANCE_GUARD.CRITICAL_FPS_THRESHOLD:
 				return 8
 			if fps > 0 and fps < main.PERFORMANCE_GUARD.LOW_FPS_THRESHOLD:

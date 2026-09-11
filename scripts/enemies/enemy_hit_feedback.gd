@@ -259,7 +259,7 @@ static func _consume_death_burst_budget() -> bool:
 	return true
 
 static func _get_damage_number_budget_per_frame() -> int:
-	var fps := Engine.get_frames_per_second()
+	var fps := PERFORMANCE_GUARD.get_fps()
 	if fps > 0 and fps < PERFORMANCE_GUARD.CRITICAL_FPS_THRESHOLD:
 		return CRITICAL_FPS_DAMAGE_NUMBER_BUDGET_PER_FRAME
 	if fps > 0 and fps < PERFORMANCE_GUARD.LOW_FPS_THRESHOLD:
@@ -277,7 +277,7 @@ static func _consume_kill_damage_number_budget() -> bool:
 	return true
 
 static func _get_kill_damage_number_budget_per_frame() -> int:
-	var fps := Engine.get_frames_per_second()
+	var fps := PERFORMANCE_GUARD.get_fps()
 	if fps > 0 and fps < PERFORMANCE_GUARD.CRITICAL_FPS_THRESHOLD:
 		return CRITICAL_FPS_KILL_DAMAGE_NUMBER_BUDGET_PER_FRAME
 	if fps > 0 and fps < PERFORMANCE_GUARD.LOW_FPS_THRESHOLD:
@@ -285,7 +285,7 @@ static func _get_kill_damage_number_budget_per_frame() -> int:
 	return KILL_DAMAGE_NUMBER_BUDGET_PER_FRAME
 
 static func _get_death_burst_budget_per_frame() -> int:
-	var fps := Engine.get_frames_per_second()
+	var fps := PERFORMANCE_GUARD.get_fps()
 	if fps > 0 and fps < PERFORMANCE_GUARD.CRITICAL_FPS_THRESHOLD:
 		return CRITICAL_FPS_DEATH_BURST_BUDGET_PER_FRAME
 	if fps > 0 and fps < PERFORMANCE_GUARD.LOW_FPS_THRESHOLD:
@@ -304,7 +304,7 @@ static func _consume_hit_flash_budget() -> bool:
 	return true
 
 static func _get_hit_flash_budget_per_frame() -> int:
-	var fps := Engine.get_frames_per_second()
+	var fps := PERFORMANCE_GUARD.get_fps()
 	if fps > 0 and fps < PERFORMANCE_GUARD.CRITICAL_FPS_THRESHOLD:
 		return CRITICAL_FPS_HIT_FLASH_BUDGET_PER_FRAME
 	if fps > 0 and fps < PERFORMANCE_GUARD.LOW_FPS_THRESHOLD:

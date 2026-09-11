@@ -562,7 +562,7 @@ static func _should_queue_hits(hit_count: int) -> bool:
 	return hit_count >= _get_queued_hit_threshold()
 
 static func _get_queued_hit_threshold() -> int:
-	var fps := Engine.get_frames_per_second()
+	var fps := PERFORMANCE_GUARD.get_fps()
 	if fps > 0 and fps < PERFORMANCE_GUARD.CRITICAL_FPS_THRESHOLD:
 		return CRITICAL_FPS_QUEUED_HIT_THRESHOLD
 	if fps > 0 and fps < PERFORMANCE_GUARD.LOW_FPS_THRESHOLD:

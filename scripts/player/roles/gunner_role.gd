@@ -644,7 +644,7 @@ func _get_ultimate_damage_wave_count(total_duration: float, ultimate_tier: int) 
 	return max(1, int(round(total_duration * waves_per_second)))
 
 func _get_ultimate_visual_interval() -> float:
-	var fps: int = Engine.get_frames_per_second()
+	var fps: int = PERFORMANCE_GUARD.get_fps()
 	if fps > 0 and fps < PERFORMANCE_GUARD.CRITICAL_FPS_THRESHOLD:
 		return ULTIMATE_CRITICAL_FPS_VISUAL_INTERVAL
 	if fps > 0 and fps < PERFORMANCE_GUARD.LOW_FPS_THRESHOLD:
@@ -652,7 +652,7 @@ func _get_ultimate_visual_interval() -> float:
 	return ULTIMATE_VISUAL_INTERVAL
 
 func _get_ultimate_visual_bullets_per_pulse() -> int:
-	var fps: int = Engine.get_frames_per_second()
+	var fps: int = PERFORMANCE_GUARD.get_fps()
 	if fps > 0 and fps < PERFORMANCE_GUARD.CRITICAL_FPS_THRESHOLD:
 		return max(3, int(ceil(float(ULTIMATE_VISUAL_BULLETS_PER_PULSE) * 0.5)))
 	if fps > 0 and fps < PERFORMANCE_GUARD.LOW_FPS_THRESHOLD:

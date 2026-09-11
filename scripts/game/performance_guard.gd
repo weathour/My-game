@@ -13,6 +13,15 @@ const CRITICAL_FPS_THRESHOLD := 35
 
 static var cached_group_counts_frame: int = -1
 static var cached_group_counts: Dictionary = {}
+static var cached_fps_frame: int = -1
+static var cached_fps: int = 0
+
+static func get_fps() -> int:
+	var current_frame := Engine.get_process_frames()
+	if cached_fps_frame != current_frame:
+		cached_fps_frame = current_frame
+		cached_fps = Engine.get_frames_per_second()
+	return cached_fps
 
 static func get_group_count(root: Node, group_name: String) -> int:
 	if root == null or root.get_tree() == null:
@@ -61,7 +70,7 @@ static func get_remaining_capacity_with_reserved(root: Node, group_name: String,
 
 static func get_dynamic_limit(_root: Node, group_name: String, fallback_limit: int) -> int:
 	var limit := fallback_limit
-	var fps := Engine.get_frames_per_second()
+	var fps := get_fps()
 	if fps <= 0:
 		return limit
 	if group_name == "enemies":

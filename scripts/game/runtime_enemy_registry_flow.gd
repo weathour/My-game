@@ -1,5 +1,6 @@
 extends RefCounted
 
+const PERFORMANCE_GUARD := preload("res://scripts/game/performance_guard.gd")
 const ENEMY_SPAWN_STATUS_PAYLOAD := preload("res://scripts/game/enemy_spawn_status_payload.gd")
 
 # Enemy scene instantiation/activation is a heavy spike source. Keep burst
@@ -85,7 +86,7 @@ static func clear_pending_enemy_spawn_requests_if_needed(main: Node) -> void:
 
 
 static func get_enemy_spawn_process_limit(main: Node) -> int:
-	var fps := Engine.get_frames_per_second()
+	var fps := PERFORMANCE_GUARD.get_fps()
 	if fps > 0 and fps < main.PERFORMANCE_GUARD.CRITICAL_FPS_THRESHOLD:
 		return CRITICAL_FPS_ENEMY_SPAWN_PROCESS_LIMIT
 	if fps > 0 and fps < main.PERFORMANCE_GUARD.LOW_FPS_THRESHOLD:
@@ -94,7 +95,7 @@ static func get_enemy_spawn_process_limit(main: Node) -> int:
 
 
 static func get_enemy_spawn_process_budget_us(main: Node) -> int:
-	var fps := Engine.get_frames_per_second()
+	var fps := PERFORMANCE_GUARD.get_fps()
 	if fps > 0 and fps < main.PERFORMANCE_GUARD.CRITICAL_FPS_THRESHOLD:
 		return CRITICAL_FPS_ENEMY_SPAWN_BUDGET_US
 	if fps > 0 and fps < main.PERFORMANCE_GUARD.LOW_FPS_THRESHOLD:

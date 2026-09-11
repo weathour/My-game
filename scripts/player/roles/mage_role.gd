@@ -739,7 +739,7 @@ func _get_ultimate_damage_multiplier(owner, cast_payload: Dictionary) -> float:
 	return multiplier
 
 func _should_spawn_ultimate_pulse_visual(pulse_index: int) -> bool:
-	var fps: int = Engine.get_frames_per_second()
+	var fps: int = PERFORMANCE_GUARD.get_fps()
 	if fps > 0 and fps < PERFORMANCE_GUARD.CRITICAL_FPS_THRESHOLD:
 		return pulse_index % 3 == 0
 	if fps > 0 and fps < PERFORMANCE_GUARD.LOW_FPS_THRESHOLD:

@@ -451,7 +451,7 @@ func configure_minimap(bounds: Rect2) -> void:
 		minimap_view.queue_redraw()
 
 func update_minimap(payload: Dictionary) -> void:
-	minimap_payload = payload.duplicate(true)
+	minimap_payload = payload
 	var bounds = minimap_payload.get("bounds", minimap_bounds)
 	if bounds is Rect2:
 		minimap_bounds = bounds
