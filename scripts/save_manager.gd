@@ -259,11 +259,13 @@ static func save_run(data: Dictionary, slot_id: int = -1, mode: String = "") -> 
 	if resolved_mode == MODE_STORY:
 		set_active_slot(resolved)
 		var story_payload_chars := _write_json(_run_path(resolved), data)
-		_write_json(_run_backup_path(resolved), data)
+		if story_payload_chars > 0:
+			SAVE_FILE_STORE.copy_file(_run_path(resolved), _run_backup_path(resolved))
 		return story_payload_chars
 	set_active_endless_slot(resolved)
 	var endless_payload_chars := _write_json(_endless_run_path(resolved), data)
-	_write_json(_endless_run_backup_path(resolved), data)
+	if endless_payload_chars > 0:
+		SAVE_FILE_STORE.copy_file(_endless_run_path(resolved), _endless_run_backup_path(resolved))
 	return endless_payload_chars
 
 static func load_run(slot_id: int = -1, mode: String = "") -> Dictionary:

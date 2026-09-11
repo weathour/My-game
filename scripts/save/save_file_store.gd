@@ -83,6 +83,15 @@ static func write_json(path: String, data: Dictionary) -> int:
 		return 0
 	return serialized.length()
 
+static func copy_file(from_path: String, to_path: String) -> bool:
+	if not FileAccess.file_exists(from_path):
+		return false
+	return DirAccess.copy_absolute(
+		ProjectSettings.globalize_path(from_path),
+		ProjectSettings.globalize_path(to_path)
+	) == OK
+
+
 static func load_meta() -> Dictionary:
 	var parsed: Variant = read_json(META_PATH)
 	if parsed is Dictionary:
