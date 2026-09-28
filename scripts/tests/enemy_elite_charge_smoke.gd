@@ -58,9 +58,15 @@ func _run() -> void:
 		if child.get_script() == GROUND:
 			hazard = child
 	assert(hazard != null)
-	var old_length: float = maxf(32.0, (42.0 + elite.scale.x * 8.0) * 0.6) * 2.0
-	assert(is_equal_approx(hazard.size.x, old_length * 2.0))
-	assert(is_equal_approx(hazard.size.y, 62.4))
+	assert(hazard.size.is_equal_approx(Vector2(200.0, 80.0)))
+	# 可见区域与碰撞区域必须使用相同尺寸。
+	var fill := hazard.get_child(0) as Polygon2D
+	assert(fill.polygon[0].is_equal_approx(Vector2(-100.0, -40.0)))
+	assert(fill.polygon[2].is_equal_approx(Vector2(100.0, 40.0)))
+	var collision_nodes: Array[Node] = hazard.find_children("*", "CollisionShape2D", true, false)
+	assert(collision_nodes.size() == 1)
+	var collider_shape: RectangleShape2D = collision_nodes[0].shape
+	assert(collider_shape.size.is_equal_approx(Vector2(200.0, 80.0)))
 	hazard._on_body_entered(player)
 	assert(is_equal_approx(player.damage_received, 10.0))
 	assert(is_equal_approx(GROUND.get_slow_multiplier(player), 0.7))
@@ -103,16 +109,24 @@ func _run() -> void:
 	actual_player.add_child(collider)
 	scene.add_child(actual_player)
 	var actual_ground = GROUND.new()
-	actual_ground.size = Vector2(200, 100)
 	scene.add_child(actual_ground)
 	for _index in range(3):
 		await physics_frame
-	actual_player.position = Vector2.ZERO
+	# 该点在扩大后的区域内，超出旧区域的长边。
+	actual_player.position = Vector2(90.0, 30.0)
 	for _index in range(3):
 		await physics_frame
 	assert(is_equal_approx(actual_player.damage_received, 10.0))
 	assert(is_equal_approx(GROUND.get_slow_multiplier(actual_player), 0.7))
-	actual_player.position = Vector2(1000, 0)
+	actual_player.position = Vector2(105.0, 0.0)
+	for _index in range(3):
+		await physics_frame
+	assert(is_equal_approx(GROUND.get_slow_multiplier(actual_player), 1.0))
+	actual_player.position = Vector2(0.0, 30.0)
+	for _index in range(3):
+		await physics_frame
+	assert(is_equal_approx(GROUND.get_slow_multiplier(actual_player), 0.7))
+	actual_player.position = Vector2(0.0, 45.0)
 	for _index in range(3):
 		await physics_frame
 	assert(is_equal_approx(GROUND.get_slow_multiplier(actual_player), 1.0))

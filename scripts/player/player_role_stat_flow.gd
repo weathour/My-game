@@ -27,44 +27,96 @@ static func get_role_theme_color(owner, role_id: String) -> Color:
 
 
 static func get_active_interval_bonus(owner, role_id: String) -> float:
-	var interval_bonus: float = float(owner.role_upgrade_levels.get(role_id, {}).get("interval_bonus", 0.0))
-	if owner.switch_power_remaining > 0.0 and owner.switch_power_role_id == role_id:
-		interval_bonus += owner.switch_power_interval_bonus
-	if owner.entry_blessing_remaining > 0.0 and owner.entry_blessing_role_id == role_id:
-		interval_bonus += owner.entry_haste_interval_bonus
-	if owner.standby_entry_remaining > 0.0 and owner.standby_entry_role_id == role_id:
-		interval_bonus += owner.standby_entry_interval_bonus
-	if owner.borrow_fire_remaining > 0.0 and owner.borrow_fire_role_id == role_id:
-		interval_bonus += owner.borrow_fire_interval_bonus
-	if owner.frenzy_remaining > 0.0 and owner.frenzy_stacks > 0:
-		interval_bonus += 0.012 * owner.frenzy_stacks
-	return interval_bonus
+	# These fields are retained for old runs and dormant entry effects that still
+	# store a reduction in seconds. Convert their combined value once into the
+	# additive speed term used by the new formula.
+	var legacy_interval_reduction: float = 0.0
+	var role_upgrade_levels: Variant = owner.get("role_upgrade_levels")
+	if role_upgrade_levels is Dictionary:
+		var role_upgrade_data: Variant = (role_upgrade_levels as Dictionary).get(role_id, {})
+		if role_upgrade_data is Dictionary:
+			legacy_interval_reduction += float((role_upgrade_data as Dictionary).get("interval_bonus", 0.0))
+	if _owner_float(owner, "switch_power_remaining") > 0.0 and str(owner.get("switch_power_role_id")) == role_id:
+		legacy_interval_reduction += _owner_float(owner, "switch_power_interval_bonus")
+	if _owner_float(owner, "entry_blessing_remaining") > 0.0 and str(owner.get("entry_blessing_role_id")) == role_id:
+		legacy_interval_reduction += _owner_float(owner, "entry_haste_interval_bonus")
+	if _owner_float(owner, "standby_entry_remaining") > 0.0 and str(owner.get("standby_entry_role_id")) == role_id:
+		legacy_interval_reduction += _owner_float(owner, "standby_entry_interval_bonus")
+	if _owner_float(owner, "borrow_fire_remaining") > 0.0 and str(owner.get("borrow_fire_role_id")) == role_id:
+		legacy_interval_reduction += _owner_float(owner, "borrow_fire_interval_bonus")
+	if _owner_float(owner, "frenzy_remaining") > 0.0 and int(_owner_float(owner, "frenzy_stacks")) > 0:
+		legacy_interval_reduction += 0.012 * _owner_float(owner, "frenzy_stacks")
+	return _legacy_interval_bonus_to_speed(get_role_base_attack_speed(owner, role_id), legacy_interval_reduction)
 
 
-static func get_effective_attack_interval(owner, role_id: String) -> float:
+static func _owner_float(owner, property_name: String) -> float:
+	var value: Variant = owner.get(property_name)
+	if value == null:
+		return 0.0
+	return float(value)
+
+
+static func _legacy_interval_bonus_to_speed(base_attack_speed: float, interval_reduction: float) -> float:
+	if interval_reduction <= 0.0:
+		return 0.0
+	var base_interval: float = 1.0 / maxf(0.01, base_attack_speed)
+	var updated_interval: float = maxf(0.18, base_interval - interval_reduction)
+	return 1.0 / updated_interval - base_attack_speed
+
+
+static func get_role_base_attack_speed(owner, role_id: String) -> float:
+	for role_data in owner.roles:
+		if role_data is Dictionary and str((role_data as Dictionary).get("id", "")) == role_id:
+			return maxf(0.01, float((role_data as Dictionary).get("base_attack_speed", 1.0)))
+	return 1.0
+
+
+static func get_effective_attack_speed(owner, role_id: String) -> float:
 	var role_data := {}
 	for candidate in owner.roles:
-		if str(candidate.get("id", "")) == role_id:
+		if candidate is Dictionary and str((candidate as Dictionary).get("id", "")) == role_id:
 			role_data = candidate
 			break
 	if role_data.is_empty():
-		return 0.18
-	var flat_reduction: float = 0.0
-	if owner.has_method("_get_role_attack_interval_flat_reduction"):
-		flat_reduction = float(owner._get_role_attack_interval_flat_reduction(role_id))
-	var base_interval: float = max(0.18, float(role_data.get("attack_interval", 0.18)) - get_active_interval_bonus(owner, role_id) - flat_reduction)
-	var blessing_multiplier := 1.0
+		return 0.01
+
+	var base_attack_speed: float = maxf(0.01, float(role_data.get("base_attack_speed", 1.0)))
+	var attack_speed_bonus: float = get_active_interval_bonus(owner, role_id)
+
+	# Percentage bonuses are absolute additions: base speed + 1 × bonus.
 	if owner.has_method("_get_role_blessing_stat_bonus"):
-		blessing_multiplier = max(0.2, 1.0 - float(owner._get_role_blessing_stat_bonus(role_id, "basic_attack_cooldown_reduction")))
-	var build_multiplier: float = PLAYER_BUILD_SYSTEM.get_basic_attack_cooldown_multiplier(owner, role_id)
-	var talent_multiplier := 1.0
+		attack_speed_bonus += float(owner._get_role_blessing_stat_bonus(role_id, "basic_attack_speed_percent"))
+	if owner.has_method("_get_role_equipment_attack_speed_percent_bonus"):
+		attack_speed_bonus += float(owner._get_role_equipment_attack_speed_percent_bonus(role_id))
+	elif owner.has_method("_get_role_equipment_bonus_summary"):
+		attack_speed_bonus += float(owner._get_role_equipment_bonus_summary(role_id).get("attack_speed_percent_bonus", 0.0))
+	attack_speed_bonus += PLAYER_RUAN_STONE_STAT_FLOW.get_attack_speed_percent_bonus(owner)
+	attack_speed_bonus += PLAYER_BUILD_SYSTEM.get_basic_attack_speed_percent_bonus(owner, role_id)
+
+	# Keep old interval-based talent hooks compatible. They are dormant in the
+	# current game, but if an old save activates one, it still contributes to
+	# the same additive final-speed term.
 	if role_id == "swordsman" and owner.get("swordsman_role") != null:
-		talent_multiplier *= float(owner.swordsman_role.get_talent_basic_attack_interval_multiplier(owner))
+		var talent_multiplier: float = maxf(0.01, float(owner.swordsman_role.get_talent_basic_attack_interval_multiplier(owner)))
+		attack_speed_bonus += _legacy_interval_multiplier_to_speed(base_attack_speed, talent_multiplier)
 	elif role_id == "gunner" and owner.get("gunner_role") != null:
-		talent_multiplier *= float(owner.gunner_role.get_basic_attack_interval_multiplier(owner))
+		var talent_multiplier: float = maxf(0.01, float(owner.gunner_role.get_basic_attack_interval_multiplier(owner)))
+		attack_speed_bonus += _legacy_interval_multiplier_to_speed(base_attack_speed, talent_multiplier)
 	elif role_id == "mechanic" and owner.get("mechanic_role") != null:
-		talent_multiplier *= float(owner.mechanic_role.get_basic_attack_interval_multiplier(owner))
-	return max(0.18, base_interval * owner._get_role_attack_interval_multiplier(role_id) * blessing_multiplier * build_multiplier * talent_multiplier)
+		var talent_multiplier: float = maxf(0.01, float(owner.mechanic_role.get_basic_attack_interval_multiplier(owner)))
+		attack_speed_bonus += _legacy_interval_multiplier_to_speed(base_attack_speed, talent_multiplier)
+
+	return maxf(0.01, base_attack_speed + attack_speed_bonus)
+
+
+static func _legacy_interval_multiplier_to_speed(base_attack_speed: float, interval_multiplier: float) -> float:
+	if interval_multiplier >= 0.999999:
+		return 0.0
+	return base_attack_speed * (1.0 / interval_multiplier - 1.0)
+
+
+static func get_effective_attack_interval(owner, role_id: String) -> float:
+	return 1.0 / get_effective_attack_speed(owner, role_id)
 
 
 static func get_effective_background_attack_interval(owner, role_id: String) -> float:
@@ -107,6 +159,7 @@ static func get_role_move_speed(owner, role_id: String) -> float:
 	if owner.has_method("_get_role_blessing_stat_bonus"):
 		move_speed += float(owner._get_role_blessing_stat_bonus(role_id, "move_speed"))
 		move_speed *= max(0.01, 1.0 + float(owner._get_role_blessing_stat_bonus(role_id, "move_speed_percent")))
+	move_speed *= max(0.01, 1.0 + PLAYER_RUAN_STONE_STAT_FLOW.get_move_speed_percent_bonus(owner))
 	move_speed += PLAYER_SWORDSMAN_TRAIT_RUNTIME_FLOW.get_move_speed_bonus(owner, role_id)
 	if role_id == "gunner" and owner.has_method("_get_gunner_hunt_move_speed_bonus"):
 		move_speed += float(owner._get_gunner_hunt_move_speed_bonus(role_id))
@@ -132,7 +185,8 @@ static func get_role_move_speed(owner, role_id: String) -> float:
 		move_speed *= float(mechanic_field.get_field_haste_multiplier())
 	if owner.frenzy_remaining > 0.0 and owner.frenzy_stacks > 0:
 		move_speed *= 1.0 + 0.02 * owner.frenzy_stacks
-	move_speed *= minf(minf(owner.enemy_move_slow_multiplier, preload("res://scripts/enemies/elite_charge_ground.gd").get_slow_multiplier(owner)), preload("res://scripts/enemies/skulltomb_domain_effect.gd").get_slow_multiplier(owner))
+	var slow_multiplier: float = minf(minf(owner.enemy_move_slow_multiplier, preload("res://scripts/enemies/elite_charge_ground.gd").get_slow_multiplier(owner)), preload("res://scripts/enemies/skulltomb_domain_effect.gd").get_slow_multiplier(owner))
+	move_speed *= minf(slow_multiplier, preload("res://scripts/player/player_plague_flow.gd").get_slow_multiplier(owner))
 	return move_speed
 
 

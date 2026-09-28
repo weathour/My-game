@@ -2,13 +2,14 @@ extends RefCounted
 
 const ENEMY_DIRECTOR := preload("res://scripts/enemy/enemy_director.gd")
 const ENEMY_BOSS_STATE := preload("res://scripts/enemies/enemy_boss_state.gd")
+const ENEMY_MUSHROOM_SWARM := preload("res://scripts/enemies/enemy_mushroom_swarm.gd")
 
 static func apply_profile(enemy, kind: String, profile: Dictionary) -> void:
 	enemy.heavy_armor_remaining = 0.0
-	enemy.heavy_armor_cooldown = 20.0
 	preload("res://scripts/enemies/enemy_heavy_armor_form.gd").sync_visual(enemy)
 	enemy.enemy_kind = kind
 	enemy.archetype_id = str(profile.get("archetype", enemy.archetype_id))
+	enemy.heavy_armor_cooldown = preload("res://scripts/enemies/enemy_heavy_armor_form.gd").get_cooldown(enemy)
 	enemy.behavior_id = str(profile.get("behavior", enemy.behavior_id))
 	enemy.secondary_behavior_id = str(profile.get("secondary_behavior", ""))
 	enemy.profile_visual_scene = profile.get("visual_scene", null) as PackedScene
@@ -116,3 +117,4 @@ static func apply_profile(enemy, kind: String, profile: Dictionary) -> void:
 	enemy.body_collision_reference_scale = max(0.001, max(abs(enemy.scale.x), abs(enemy.scale.y)))
 	enemy.display_color = profile.get("color", enemy.display_color) if profile.has("color") else enemy.display_color
 	enemy.profile_initialized = true
+	ENEMY_MUSHROOM_SWARM.invalidate_cache()

@@ -79,7 +79,7 @@ const LEVEL_TALENT_DEFINITIONS := {
 		{"id": "mage_level_talent_arcane_charge_2", "title": "奥数充能 II", "summary": "术师获得奥数充能概率增加 5%；每层奥数充能提供 2% 大招伤害，切人继承的奥数充能也会生效。"},
 		{"id": "mage_level_talent_arcane_surplus_1", "title": "奥法盈余 I", "summary": "奥法盈余状态下，当前处于该状态的角色获得 10% 增伤。"},
 		{"id": "mage_level_talent_arcane_surplus_2", "title": "奥法盈余 II", "summary": "奥法盈余状态下，当前处于该状态的角色技能冷却计数加快 10%，10s 冷却约 9s 走完。"},
-		{"id": "mage_level_talent_basic_attack_1", "title": "普通攻击 I", "summary": "普通攻击造成 2 段雷击；第二段 0.2 秒后造成 50% 伤害。普攻击杀每个单位减少 0.1 秒普攻冷却。"},
+		{"id": "mage_level_talent_basic_attack_1", "title": "普通攻击 I", "summary": "普通攻击造成 2 段雷击；第二段 0.2 秒后造成 50% 伤害。普攻击杀每个单位缩短当前普攻剩余间隔 0.1 秒。"},
 		{"id": "mage_level_talent_basic_attack_2", "title": "普通攻击 II", "summary": "普通攻击变为 2 道雷击；第二道随机生成在怪物密集处。普攻击杀的大招能量和换人能量为 1.5 倍。"},
 		{"id": "mage_level_talent_surging_wave_1", "title": "波涛汹涌 I", "summary": "波涛汹涌范围增大 20%，变成 2 道冲击波，两道之间呈 30° 角。"},
 		{"id": "mage_level_talent_surging_wave_2", "title": "波涛汹涌 II", "summary": "波涛汹涌持续时间延长 2 秒；冲击波路径留下痕迹，造成每秒 30% 波涛汹涌伤害并施加 70% 减速，冲击波消失后痕迹消失。"},
@@ -190,7 +190,7 @@ const TALENT_DEFINITIONS := {
 		{"id": "swordsman_trait_last_guard", "stage": 1, "side": "right", "title": "最后的换防", "description": "剑士在后台时，可消耗满换位能量与骑士荣耀挽救一次前台角色，救回 30% 生命并强制剑士登场；80 秒冷却。定位：后台救援。", "upgrade_note": "治疗强化提高救回比例；骑士荣耀持续时间延长强制登场后的无敌。"},
 		{"id": "swordsman_trait_blood_surge", "stage": 2, "side": "left", "title": "血涌", "description": "每次战意实际治疗后，下一次剑士伤害 +20%；2 秒内未命中则失效，与血战昂扬相加、不相乘。定位：治疗转爆发。", "upgrade_note": "额外触发次数提高获得血涌的频率；治疗量只影响触发前提。"},
 		{"id": "swordsman_trait_guard_stance", "stage": 2, "side": "right", "title": "守势", "description": "每次战意实际治疗后，剑士承受伤害 -15%，持续 2 秒；刷新不叠层。定位：前排续航。", "upgrade_note": "治疗与额外触发次数提高覆盖率；骑士荣耀持续时间不延长守势。"},
-		{"id": "swordsman_trait_head_high", "stage": 3, "side": "left", "title": "昂首", "description": "生命低于 50% 时触发战意实际治疗，获得 25% 移速与 15% 普攻攻速，持续 2 秒；刷新不叠层。定位：低血压迫。", "upgrade_note": "普攻冷却先结算，再乘攻速效果；治疗强化只提高续航。"},
+		{"id": "swordsman_trait_head_high", "stage": 3, "side": "left", "title": "昂首", "description": "生命低于 50% 时触发战意实际治疗，获得 25% 移速与 15% 普攻攻速，持续 2 秒；刷新不叠层。定位：低血压迫。", "upgrade_note": "先结算基础攻击速度，再叠加昂首攻速；治疗强化只提高续航。"},
 		{"id": "swordsman_trait_unyielding", "stage": 3, "side": "right", "title": "不屈", "description": "生命低于 35% 时触发战意实际治疗，获得 40% 减伤 1.2 秒；每 12 秒最多触发一次。定位：濒死稳场。", "upgrade_note": "治疗强化提高脱离斩杀线的能力；骑士荣耀与该减伤独立结算。"}
 	],
 	"swordsman_entry": [
@@ -207,7 +207,7 @@ const TALENT_DEFINITIONS := {
 		{"id": "swordsman_basic_pursuit", "stage": 2, "side": "left", "title": "追锋", "description": "所有普攻剑斩长度 +25%、宽度 +20%。定位：安全距离清线。", "upgrade_note": "普攻范围构筑与该形态相乘；伤害、攻速作用全部派生斩击。"},
 		{"id": "swordsman_basic_opening", "stage": 2, "side": "right", "title": "破绽", "description": "每第 3 段连击的主斩伤害 +20%，并使命中敌人减速至 75%，持续 1 秒。定位：节奏处决。", "upgrade_note": "攻速强化加快第三段循环；伤害强化先结算，再加 20%。"},
 		{"id": "swordsman_basic_sword_wheel", "stage": 3, "side": "left", "title": "剑轮", "description": "每第 3 段连击额外向左右各挥一道 35% 伤害斩击。定位：第三段清场。", "upgrade_note": "范围、伤害、攻速同步作用追加斩；每道 35% 比例固定。"},
-		{"id": "swordsman_basic_cooldown_cut", "stage": 3, "side": "right", "title": "截流", "description": "普攻击杀敌人时，当前普攻冷却缩短 12%；每 0.6 秒最多一次。定位：高密度续攻。", "upgrade_note": "先应用普通冷却强化，再按当前剩余冷却缩减。"}
+		{"id": "swordsman_basic_cooldown_cut", "stage": 3, "side": "right", "title": "截流", "description": "普攻击杀敌人时，当前普攻间隔缩短 12%；每 0.6 秒最多触发一次。定位：高密度续攻。", "upgrade_note": "立即按新最终攻击速度换算并缩短当前剩余攻击间隔。"}
 	],
 	"swordsman_blade_storm": [
 		{"id": "swordsman_blade_storm_retain", "stage": 1, "side": "left", "title": "随身风暴", "description": "切换角色后，风暴跟随当前角色完成剩余持续时间，伤害降为 70%。定位：后台贡献。", "upgrade_note": "伤害、范围、冷却同步作用施放与跟随阶段；70% 比例固定。"},
@@ -246,7 +246,7 @@ const TALENT_DEFINITIONS := {
 		{"id": "gunner_entry_denial", "stage": 1, "side": "right", "title": "封锁礼炮", "description": "登场技改为 2 波十二发环射，每发 50% 伤害并减速 40% 1.5 秒。定位：换人解围。", "upgrade_note": "登场伤害同步作用全部 24 发；伤害比例和减速固定。"},
 		{"id": "gunner_entry_piercing", "stage": 2, "side": "left", "title": "穿阵", "description": "所有登场子弹穿透 +4。定位：穿透长队。", "upgrade_note": "登场伤害先结算；本节点只改变可命中数量。"},
 		{"id": "gunner_entry_repulse", "stage": 2, "side": "right", "title": "制退", "description": "登场子弹首次命中时，将普通敌人沿弹道方向击退 48 距离；Boss 免疫。定位：建立射击距离。", "upgrade_note": "伤害构筑只增强子弹；聚焦与封锁礼炮均获得击退。"},
-		{"id": "gunner_entry_follow_fire", "stage": 3, "side": "left", "title": "续火", "description": "最后一波结束后获得 1.4 秒换弹窗口：普攻间隔 -25%、穿透 +1。定位：入场接管输出。", "upgrade_note": "普攻伤害、冷却、射程继续作用；窗口不延长登场技。"},
+		{"id": "gunner_entry_follow_fire", "stage": 3, "side": "left", "title": "续火", "description": "最后一波结束后获得 1.4 秒换弹窗口：普攻攻速提高（等效原间隔缩短25%）、穿透 +1。定位：入场接管输出。", "upgrade_note": "普攻伤害、攻速、射程继续作用；窗口不延长登场技。"},
 		{"id": "gunner_entry_hot_start", "stage": 3, "side": "right", "title": "热启动", "description": "最后一波礼炮结束后，使已解锁的散弹和无限装填当前剩余冷却各减少 25%，每项最多 4 秒。定位：换人接技能循环。", "upgrade_note": "登场伤害只强化礼炮；主动技能冷却构筑决定可缩减的实际剩余时间。"}
 	],
 	"gunner_basic": [

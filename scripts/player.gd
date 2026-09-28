@@ -270,6 +270,7 @@ var level_up_delay_remaining: float = 0.0
 var switch_cooldown_remaining: float = 0.0
 var enemy_move_slow_multiplier: float = 1.0
 var enemy_move_slow_remaining: float = 0.0
+var plague_remaining: float = 0.0
 var is_dead: bool = false
 var death_sequence_pending: bool = false
 var death_sequence_remaining: float = 0.0
@@ -848,6 +849,9 @@ func _get_role_equipment_levels(role_id: String) -> Dictionary:
 func _get_role_equipment_bonus_summary(role_id: String) -> Dictionary:
 	return PLAYER_EQUIPMENT_FLOW.get_role_bonus_summary(self, role_id)
 
+func _get_role_equipment_attack_speed_percent_bonus(role_id: String) -> float:
+	return PLAYER_EQUIPMENT_FLOW.get_role_attack_speed_percent_bonus(self, role_id)
+
 func transfer_role_equipment_item(equipment_id: String, from_role_id: String, target_role_id: String) -> bool:
 	return PLAYER_EQUIPMENT_FLOW.transfer_equipment(self, equipment_id, from_role_id, target_role_id)
 
@@ -1132,6 +1136,9 @@ func _get_active_interval_bonus(role_id: String) -> float:
 
 func _get_effective_attack_interval(role_id: String) -> float:
 	return PLAYER_ROLE_STAT_FLOW.get_effective_attack_interval(self, role_id)
+
+func _get_effective_attack_speed(role_id: String) -> float:
+	return PLAYER_ROLE_STAT_FLOW.get_effective_attack_speed(self, role_id)
 
 func _get_effective_background_attack_interval(role_id: String) -> float:
 	return PLAYER_ROLE_STAT_FLOW.get_effective_background_attack_interval(self, role_id)
@@ -2218,6 +2225,7 @@ func _heal_role(role_id: String, amount: float) -> void:
 	if has_method("is_healing_blocked") and is_healing_blocked():
 		return
 	amount = PLAYER_SWORDSMAN_TRAIT_RUNTIME_FLOW.apply_healing_multiplier(self, amount)
+	amount *= preload("res://scripts/player/player_plague_flow.gd").get_healing_multiplier(self)
 	if amount <= 0.0:
 		return
 	if role_health_values is not Dictionary or role_health_values.is_empty():

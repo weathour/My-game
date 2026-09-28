@@ -4,8 +4,9 @@ const DURATION := 3.0
 const DAMAGE_RATIO := 0.01
 const SLOW_MULTIPLIER := 0.7
 const SOURCES_META := "elite_charge_ground_sources"
+const DEFAULT_SIZE := Vector2(200.0, 80.0)
 
-var size := Vector2.ZERO
+var size := DEFAULT_SIZE
 var elapsed: float = 0.0
 var bodies: Dictionary = {}
 

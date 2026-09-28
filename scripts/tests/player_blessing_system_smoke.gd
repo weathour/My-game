@@ -450,10 +450,20 @@ func _check_general_blessing_descriptions_match_current_design() -> void:
 func _check_strengthened_survivability_baseline() -> void:
 	var owner := _OwnerStub.new()
 	owner.roles = RoleDatabase.get_role_data()
+	var expected_attack_intervals := {
+		"swordsman": 1.0 / 0.7,
+		"gunner": 1.0 / 0.85,
+		"mage": 1.0 / 0.4,
+		"mechanic": 1.0 / 2.0
+	}
+	for role_id in expected_attack_intervals.keys():
+		var actual_interval := PlayerRoleStatFlow.get_effective_attack_interval(owner, str(role_id))
+		if not is_equal_approx(actual_interval, float(expected_attack_intervals[role_id])):
+			failures.append("%s default attack interval should be %.4f, got %.4f" % [str(role_id), float(expected_attack_intervals[role_id]), actual_interval])
 	var expected_health := {
-		"swordsman": 150.0,
-		"gunner": 120.0,
-		"mage": 120.0
+		"swordsman": 200.0,
+		"gunner": 170.0,
+		"mage": 170.0
 	}
 	for role_id in expected_health.keys():
 		var actual: float = PlayerRoleStatFlow.get_role_max_health(owner, str(role_id))
@@ -475,7 +485,7 @@ func _check_strengthened_role_build_values() -> void:
 				PlayerBuildSystem.apply_option(owner, "role_build:%s:%s" % [role_id, str(definition.get("id", ""))])
 	var checks := [
 		[PlayerBuildSystem.get_basic_attack_damage_multiplier(owner, "swordsman"), 1.15, "swordsman basic damage"],
-		[PlayerBuildSystem.get_basic_attack_cooldown_multiplier(owner, "swordsman"), 0.85, "swordsman basic cooldown"],
+		[PlayerBuildSystem.get_basic_attack_speed_percent_bonus(owner, "swordsman"), 0.15, "swordsman basic attack speed"],
 		[PlayerBuildSystem.get_basic_attack_range_multiplier(owner, "swordsman"), 1.15, "swordsman basic range"],
 		[PlayerBuildSystem.get_entry_damage_multiplier(owner, "swordsman"), 1.15, "swordsman entry damage"],
 		[PlayerBuildSystem.get_swordsman_trait_extra_rolls(owner), 2.0, "swordsman trait rolls"],
@@ -495,7 +505,7 @@ func _check_strengthened_role_build_values() -> void:
 		[PlayerBuildSystem.get_gunner_flash_speed_bonus_per_stack(owner), 0.0075, "gunner flash speed"],
 		[PlayerBuildSystem.get_gunner_flash_dodge_bonus_per_stack(owner), 30.0, "gunner flash dodge"],
 		[PlayerBuildSystem.get_basic_attack_damage_multiplier(owner, "gunner"), 1.15, "gunner basic damage"],
-		[PlayerBuildSystem.get_basic_attack_cooldown_multiplier(owner, "gunner"), 0.92, "gunner basic cooldown"],
+		[PlayerBuildSystem.get_basic_attack_speed_percent_bonus(owner, "gunner"), 0.08, "gunner basic attack speed"],
 		[PlayerBuildSystem.get_basic_attack_range_flat_bonus(owner, "gunner"), 15.0, "gunner basic range"],
 		[PlayerBuildSystem.get_entry_damage_multiplier(owner, "gunner"), 1.15, "gunner entry damage"],
 		[PlayerBuildSystem.get_shrapnel_cooldown_multiplier(owner), 0.85, "shrapnel cooldown"],

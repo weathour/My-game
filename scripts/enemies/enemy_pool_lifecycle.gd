@@ -36,7 +36,8 @@ static func prepare_for_pool(enemy) -> void:
 	enemy.dash_distance_remaining = 0.0
 	enemy.elite_charge_haste_remaining = 0.0
 	enemy.heavy_armor_remaining = 0.0
-	enemy.heavy_armor_cooldown = 20.0
+	enemy.heavy_armor_cooldown = preload("res://scripts/enemies/enemy_heavy_armor_form.gd").get_cooldown(enemy)
+	preload("res://scripts/enemies/enemy_runner_haste.gd").reset(enemy)
 	preload("res://scripts/enemies/enemy_heavy_armor_form.gd").sync_visual(enemy)
 	enemy.vulnerability_bonus = 0.0
 	enemy.fury_armor_shred = 0.0

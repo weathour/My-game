@@ -79,3 +79,7 @@ The current BGM files under `assets/` are non-commercial placeholder materials f
 - [CHANGELOG.md](CHANGELOG.md)
 - [docs/KNOWN_ISSUES.md](docs/KNOWN_ISSUES.md)
 - [docs/RELEASE_CHECKLIST.md](docs/RELEASE_CHECKLIST.md)
+
+## Historical code archive
+
+Superseded implementations are cataloged under [`archive/legacy/`](archive/legacy/). The directory is ignored by Godot and contains references to Git history rather than runtime scripts. It is kept for explicit historical comparison or migration work; current gameplay analysis uses the active working tree only.

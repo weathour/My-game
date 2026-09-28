@@ -346,20 +346,19 @@ const DEFINITIONS := {
 		"category": CATEGORY_MAGIC_STONE_BLESSING,
 		"magic_stone": MAGIC_STONE_KINGDOM,
 		"binding": ROLE_BOUND,
-		"stat": "basic_attack_cooldown_reduction",
-		"nonlinear": true,
+		"stat": "basic_attack_speed_percent",
 		"tier_values": {1: 0.05, 2: 0.08, 3: 0.10, 4: 0.20},
 		"descriptions": {
-			1: "攻击技能冷却减少5%",
-			2: "攻击技能冷却减少8%",
-			3: "攻击技能冷却减少10%",
-			4: "攻击技能冷却减少20%"
+			1: "普通攻击攻速提高5%",
+			2: "普通攻击攻速提高8%",
+			3: "普通攻击攻速提高10%",
+			4: "普通攻击攻速提高20%"
 		},
 		"card_summaries": {
-			1: "普攻冷却-5%",
-			2: "普攻冷却-8%",
-			3: "普攻冷却-10%",
-			4: "普攻冷却-20%"
+			1: "普攻攻速+5%",
+			2: "普攻攻速+8%",
+			3: "普攻攻速+10%",
+			4: "普攻攻速+20%"
 		}
 	},
 	"kingdom_trick": {
@@ -1461,6 +1460,8 @@ static func _format_magic_stone_skill_description(definition: Dictionary, tier: 
 	var stat: String = str(definition.get("stat", ""))
 	var value: float = float((definition.get("tier_values", {}) as Dictionary).get(tier, 0.0))
 	match stat:
+		"basic_attack_speed_percent":
+			return "%s攻速提高%.0f%%" % [skill_title, value * 100.0]
 		"basic_attack_cooldown_reduction", "kebiru_magic_cooldown_reduction":
 			return "%s冷却减少%.0f%%" % [skill_title, value * 100.0]
 		"basic_attack_quantity_skill_count":
@@ -1482,6 +1483,8 @@ static func _format_magic_stone_skill_summary(definition: Dictionary, tier: int,
 	var stat: String = str(definition.get("stat", ""))
 	var value: float = float((definition.get("tier_values", {}) as Dictionary).get(tier, 0.0))
 	match stat:
+		"basic_attack_speed_percent":
+			return "%s攻速+%.0f%%" % [skill_title, value * 100.0]
 		"basic_attack_cooldown_reduction", "kebiru_magic_cooldown_reduction":
 			return "%sCD-%.0f%%" % [skill_title, value * 100.0]
 		"basic_attack_quantity_skill_count":
@@ -1505,6 +1508,8 @@ static func _format_value(definition: Dictionary, tier: int) -> String:
 	if stat == "greed_proc_chance":
 		return "攻击命中时有%.0f%%几率回复最大生命值的1%%，该效果每秒最多触发1次" % (value * 100.0)
 	match stat:
+		"basic_attack_speed_percent":
+			return "普通攻击攻速提高%.0f%%" % (value * 100.0)
 		"max_health":
 			return "所有角色血量加%.0f" % value
 		"energy_gain":

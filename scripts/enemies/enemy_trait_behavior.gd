@@ -90,7 +90,7 @@ static func _update_dash_trait(enemy, delta: float) -> void:
 	enemy.dash_timer += max(0.3, enemy.dash_interval)
 	var direction_to_target: Vector2 = enemy._cached_direction_to_target
 	enemy.dash_direction = direction_to_target if direction_to_target != Vector2.ZERO else Vector2.RIGHT
-	enemy.dash_windup_remaining = max(enemy.dash_windup_duration, 0.18)
+	enemy.dash_windup_remaining = max(preload("res://scripts/enemies/enemy_dasher_charge.gd").get_windup_duration(enemy), 0.18)
 	enemy._spawn_status_burst(Color(1.0, 0.88, 0.32, 0.24), 28.0 + enemy.scale.x * 6.0)
 
 static func _update_glutton_trait(enemy, delta: float) -> void:

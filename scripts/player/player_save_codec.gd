@@ -79,7 +79,7 @@ static func normalize_loaded_roles(saved_roles: Variant, base_roles: Array, pad_
 				var current_role: Dictionary = base_role_map[role_id]
 				# Base balance comes from the current template; run upgrades
 				# live in separate blessing/equipment/attribute dictionaries.
-				for stat in ["base_health", "move_speed", "damage"]:
+				for stat in ["base_health", "move_speed", "damage", "base_attack_speed"]:
 					if current_role.has(stat):
 						merged_role[stat] = current_role[stat]
 				if current_role.has("base_damage_reduction_rate"):

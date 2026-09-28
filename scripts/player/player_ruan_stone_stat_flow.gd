@@ -36,6 +36,15 @@ static func get_speed_bonus(owner) -> float:
 	return float(_stacked_values(owner, "tattered_cloak").get("speed_bonus", 0.0))
 
 
+static func get_move_speed_percent_bonus(owner) -> float:
+	return float(_stacked_values(owner, "failed_assassin_dagger").get("move_speed_percent", 0.0))
+
+
+static func get_attack_speed_percent_bonus(owner) -> float:
+	return float(_stacked_values(owner, "ground_branch").get("attack_speed_percent", 0.0)) \
+		+ float(_stacked_values(owner, "failed_assassin_dagger").get("attack_speed_percent", 0.0))
+
+
 static func get_dodge_miss_multiplier(owner) -> float:
 	var count := get_count(owner, "tattered_cloak")
 	var chance := clampf(float(SYSTEM.get_effect_values("tattered_cloak", 1).get("dodge_chance", 0.0)), 0.0, 1.0)
@@ -43,8 +52,7 @@ static func get_dodge_miss_multiplier(owner) -> float:
 
 
 static func get_damage_reduction_rate(owner) -> float:
-	return float(_stacked_values(owner, "ground_branch").get("damage_reduction_rate", 0.0)) \
-		+ float(_stacked_values(owner, "broken_chestplate").get("damage_reduction_rate", 0.0))
+	return float(_stacked_values(owner, "broken_chestplate").get("damage_reduction_rate", 0.0))
 
 
 static func get_max_health_bonus(owner) -> float:

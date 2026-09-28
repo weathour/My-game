@@ -1,0 +1,157 @@
+﻿# Git history index
+
+Source baseline: `f4f4872d0efd990892275469ac55040a8965c5b5`
+Reachable commits indexed: 147
+Generated: 2026-09-23
+
+This is a navigation index only. The Git object database remains the authoritative copy of every historical file.
+
+## Commits
+
+- `f4f4872` `2026-09-21` 恢复最终 Boss 被动牵引并在弹幕收尾时发射基础炮弹
+- `7187b12` `2026-09-21` 将魔法石重构版本纳入主线并补齐资源标识
+- `0808750` `2026-09-21` 修复 Boss 收尾引力球停转并延长瘫痪至九秒
+- `8a2d1c7` `2026-09-21` 优化最终 Boss 全阶段弹幕绘制与批处理
+- `b36bec9` `2026-09-21` Complete boss performances before recovery and scale skills by phase
+- `62b0888` `2026-09-21` Restore brighter purple and shadow orb visuals for final boss
+- `2dd5481` `2026-09-21` Give magic stone danmaku an original dark crystal visual identity
+- `0a6c332` `2026-09-21` Expand magic stone performances with butterfly and cherry blossom patterns
+- `6ba6196` `2026-09-21` Sequence final boss combat into basic and themed performance stages
+- `2656593` `2026-09-20` Extend final boss projectile, laser and volley durations
+- `589a61d` `2026-09-20` Rework magic stone danmaku, aimed volleys and attack-based damage
+- `4ae7989` `2026-09-20` Rework polluted magic stone boss stats and shield defenses
+- `1ee96da` `2026-09-20` Optimize dense combat queries, rendering and runtime hot paths
+- `32b7782` `2026-09-20` Rework enemy combat and stats, rebalance blessings and items, fix healing crash
+- `36e3788` `2026-09-20` 调整魔眼聚合削甲并清理旧减伤升级与遗物
+- `9484041` `2026-09-19` 重构护甲减伤与闪避结算模型
+- `370c424` `2026-09-16` Fix zero-value healing combat text
+- `fae8b1c` `2026-09-16` 追加斩击/剑气发射间隔按设计调整：剑士普攻 0.15s、月牙剑气 0.35s
+- `e5a5753` `2026-09-16` 修复技能等级追加弹道不可见与审判之誓巨剑提前消失：追加斩击/剑气改为依次发射(0.08s/0.07s)避免同帧重叠，巨剑视觉时长跟随实际留场时间；新增里程碑运行时 smoke 并同步卡面断言
+- `9711c5c` `2026-09-16` 技能等级系统：每条技能线1~10级，角色槽发获得技能卡(60%)与技能升级卡(40%)，5级二选一天赋位、10级自动补齐；接入剑士/枪手/法师全部非大招升级效果，枪手特性拆为瞬杀与猎杀两条线；停用玩家等级3倍数天赋入口
+- `72457d0` `2026-09-16` 技能快捷键与自动释放状态、技能槽拖拽交换；阮石商店携带上限改为档案最高解锁N、重复购买叠加、取消购买退骨
+- `0ffbe30` `2026-09-16` 审判之誓重做：落地200%后2s只放一道冲击波；删除王者之剑默认击杀+0.01攻击力；王者之剑天赋描述同步
+- `bcf6643` `2026-09-15` Refactor Ruan dog shop items
+- `68d7a59` `2026-09-15` 新增法师天赋：火焰之径/黑暗契约/火球术；调整地瑰灵与爱心掉落数值；N1-N5难度经验加成；其他数值与特效调整
+- `f97e48a` `2026-09-11` Merge PR #13: 第四角色机械师 + 营地三人换人面板 + HUD修复 + 发布门禁修复
+- `ab4ffff` `2026-09-10` test: 对齐临时血量与骷髅冢 smoke 至当前设计
+- `6a32c6d` `2026-09-10` test: 涌潮拖尾 smoke 补模拟帧让 trail 的 _process 刷新多边形
+- `d8c75eb` `2026-09-10` test: smoke 替身补齐 _roll_critical_hit 第二参数(chance_bonus)
+- `1df1410` `2026-09-10` test: 对齐 N 层敌弹速度断言与当前运行时(每层+20)
+- `0b14490` `2026-09-10` fix(build): 恢复 project.godot 显示设置(resizable/stretch aspect)以满足发布门禁
+- `36724c3` `2026-09-10` docs: 同步机械师/换人面板/HUD 修复相关文档与变更日志
+- `dd7dfc2` `2026-09-10` fix(hud): legacy 布局头像顺序与升级界面机械师头像
+- `f463b12` `2026-09-10` feat(team): 三人队伍换人面板与营地整备台
+- `4bf41c1` `2026-09-10` feat(mechanic): 第四角色机械师与技能/构筑体系
+- `a7efab8` `2026-09-10` feat(art): 机械师角色立绘/头像与机械系技能特效像素素材
+- `76c46ec` `2026-09-09` feat: 枪手天赋扩充(爆破弹/魔法榴弹/魔眼聚合各I/II) + 骑士突重做 + 审判之誓II回血提升 + 难度经验效率与敌弹速度调整
+- `3bff271` `2026-09-09` docs: sync skill/talent documentation and changelog
+- `9871c62` `2026-09-09` feat(talents): judgement-sword and explosive-round level talents
+- `0b33fd5` `2026-09-09` refactor(active skills): flow-based skill logic with linear damage bonuses
+- `a04c92d` `2026-09-04` chore: sync current game build
+- `47efe5f` `2026-08-14` Merge pull request #12 from Aron-ux/codex/current-build-analysis
+- `1d5aec3` `2026-08-14` feat: refine gunner reload and boss tuning
+- `06da7b3` `2026-08-13` docs: clarify historical validation evidence
+- `defcf65` `2026-08-13` docs: record restored project checks
+- `d352def` `2026-08-13` test: align smoke checks with current runtime
+- `9679979` `2026-08-13` docs: add current build baseline analysis
+- `43f3118` `2026-08-13` docs: align current design and gameplay documentation
+- `478ead1` `2026-08-12` Sync current gameplay talent update
+- `daa464f` `2026-07-31` Merge pull request #9 from Aron-ux/codex/team-combat-skill-bar
+- `0d59f77` `2026-07-31` fix: clear effect pools after scene teardown
+- `cdefd8f` `2026-07-31` fix: release pooled player effects on scene exit
+- `1ee8a97` `2026-07-30` feat: strengthen hero survivability and skill upgrades
+- `c2c45d0` `2026-07-30` feat: complete N-tier endless progression
+- `28f35a9` `2026-07-30` fix: restore Ruan stones and add endless camp returns
+- `35911c7` `2026-07-30` feat: add endless bone and Ruan stone progression
+- `ea9762f` `2026-07-30` feat: implement three-stage skill talent trees
+- `9f04dca` `2026-07-30` docs: specify complete three-stage skill talents
+- `82d430d` `2026-07-30` feat: rebuild character build archive
+- `15e7938` `2026-07-29` feat: evolve post-talent skill upgrades
+- `00baebf` `2026-07-29` feat: add per-skill talent progression
+- `48546e7` `2026-07-29` Merge pull request #8 from Aron-ux/codex/team-combat-skill-bar
+- `ea62641` `2026-07-29` Fix achievement smoke initialization
+- `19b5679` `2026-07-29` Import Godot assets before CI checks
+- `d7c24ac` `2026-07-29` Fix tutorial exit input handling
+- `ea05993` `2026-07-29` Add Ruan Dog camp dialogue
+- `f89cfd0` `2026-07-29` Run Godot validation in CI
+- `02c8e6b` `2026-07-29` Sync progression docs and remove dead entry points
+- `63a4f6c` `2026-07-29` Fix upstream sync validation compatibility
+- `03bba9e` `2026-07-28` Harden project checks and performance validation
+- `e531bd0` `2026-07-28` Update current game build
+- `292da12` `2026-06-21` Merge pull request #7 from Aron-ux/pr-7
+- `64f7405` `2026-06-17` Add selectable combat HUD layout
+- `95f3afe` `2026-06-17` Document combat HUD team status band
+- `007441d` `2026-06-17` Add combat HUD design reference preview
+- `5ff7f29` `2026-06-17` Redesign combat HUD as team status band
+- `14e123f` `2026-06-17` Add team role combat HUD payload
+- `932a593` `2026-06-17` Merge pull request #6 from Aron-ux/pr-6
+- `97d3f7a` `2026-06-17` Restore required display config settings
+- `09b76dd` `2026-06-17` Document character panel build archive UI
+- `924b791` `2026-06-17` Redesign character panel as build archive
+- `924ffb4` `2026-06-17` Add character panel archive ornament controls
+- `3767517` `2026-06-14` Update battle map and boss status behavior
+- `383b203` `2026-06-13` Update role tuning and combat behavior
+- `ca9e36a` `2026-06-12` Update swordsman traits and unify boss targeting
+- `d13d767` `2026-06-04` Update tutorial flow, role traits, camp, and combat systems
+- `c6b2d50` `2026-05-30` Update boss behaviors and enemy occlusion
+- `94f9aa9` `2026-05-27` Add endless camp entry
+- `aaa67f3` `2026-05-27` Fix runtime map background loading
+- `1638688` `2026-05-26` Update current game build
+- `3741522` `2026-05-23` Tune ultimate energy gain and CI display config
+- `845c6e4` `2026-05-22` Update build UI and enemy debug tools
+- `f0538be` `2026-05-20` Update boss and enemy behavior visuals
+- `1272afc` `2026-05-20` Update enemies, spawn pacing, and performance systems
+- `30678cf` `2026-05-20` Merge pull request #5 from performance updates
+- `6a830e2` `2026-05-19` Optimize dense combat performance and reward stalls
+- `89a960b` `2026-05-19` Smooth large enemy spawn bursts
+- `19a3942` `2026-05-19` Cap rendering at 120 FPS
+- `8e4a275` `2026-05-19` Restore combat HUD refresh rate
+- `568e69f` `2026-05-19` Add dense combat performance evidence gate
+- `3342724` `2026-05-19` Batch dense combat runtime simulation
+- `8c93021` `2026-05-19` Update enemy balance and runtime refactors
+- `d911122` `2026-05-14` Gate bullet split burst effects
+- `51b7990` `2026-05-14` Fix enemy hit feedback cleanup
+- `d8e99fd` `2026-05-14` Fix enemy visual cache crash during pooling
+- `4ea986c` `2026-05-14` Update combat visuals and performance stability
+- `dd46c6d` `2026-05-13` Update visuals and stabilize pooled effects
+- `2e56060` `2026-05-12` fix: satisfy project display config checks
+- `09d7fe3` `2026-05-12` fix: ignore freed pooled effect nodes
+- `5850cfc` `2026-05-08` Update character and enemy visuals
+- `7a3975f` `2026-05-08` Merge weathour PR #1
+- `7bbe415` `2026-05-08` Refactor player architecture, fix blessing/developer UX, and stabilize saves
+- `ccf2f79` `2026-05-08` Save current project state
+- `8e5b57e` `2026-05-06` On main: pre-pr2-sync-local-work
+- `53fe306` `2026-05-06` index on main: 65d0688 Optimize combat performance and tune mage speed
+- `d8acf09` `2026-05-06` untracked files on main: 65d0688 Optimize combat performance and tune mage speed
+- `4a0dc30` `2026-05-06` perf: convert enemy from CharacterBody2D to Node2D
+- `9282394` `2026-05-06` perf: aggressive performance guard + dynamic temp effect limits
+- `3c962a0` `2026-05-06` perf: cache enemy group queries in contact damage + targeting
+- `9e1901d` `2026-05-06` fix: explicit type annotations in enemy_movement.gd to resolve Variant inference error
+- `bc5da01` `2026-05-06` perf: replace has_trait() string comparisons with bool flags + cache target vectors
+- `1011509` `2026-05-06` perf: reuse cached enemy grid from damage_resolver in projectile_batch
+- `65d0688` `2026-05-06` Optimize combat performance and tune mage speed
+- `191777b` `2026-05-06` Use per-role health pools
+- `771437c` `2026-05-06` Improve sword invulnerability and skill hints
+- `0b72e1b` `2026-05-06` Show shared entry skills in character panel
+- `b7e86be` `2026-05-06` Limit blessing reroll to once
+- `be57e97` `2026-05-06` Update blessing skills and wave scaling
+- `736d0ad` `2026-05-05` Show blessing counts in build menu
+- `941f4d9` `2026-05-05` Fix reward flow variant type warning
+- `ce88cc6` `2026-05-05` Rework blessing progression and active skills
+- `2532963` `2026-05-04` Add blessing progression and combat updates
+- `c0f301e` `2026-05-02` Make build progression playable for route testing
+- `bb94f1d` `2026-05-01` Evolve build progression and UI handoff
+- `9b3f5d1` `2026-04-30` Stabilize local gameplay systems for upstream review
+- `7fc2b68` `2026-04-30` Fix local gameplay update issues
+- `13d86fd` `2026-04-30` Tune mage range scaling and cooldowns
+- `2dc79e9` `2026-04-30` Tune evolved attacks and upgrade UI
+- `412ca28` `2026-04-30` Increase evolved ability cooldowns
+- `1036b86` `2026-04-30` Tune role attacks and disable exit skills
+- `597ec06` `2026-04-30` Add placeholder BGM assets
+- `edf84a9` `2026-04-30` Restore modular combat refactor and UI systems
+- `3628a81` `2026-04-23` Add graphify documentation outputs
+- `c1cd960` `2026-04-23` Remove temporary BGM assets from repository
+- `2eabbde` `2026-04-23` Update combat effects and build prototype
+- `28a70e8` `2026-04-20` Polish repository README and add changelog
+- `0b59d72` `2026-04-20` Add project README and docs
+- `e2846d9` `2026-04-20` Initial project import

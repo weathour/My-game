@@ -181,6 +181,7 @@ static func get_role_bonus_summary(owner, role_id: String) -> Dictionary:
 	var levels: Dictionary = get_role_equipment_levels(owner, role_id)
 	var summary := {
 		"damage_multiplier_bonus": 0.0,
+		"attack_speed_percent_bonus": 0.0,
 		"speed_bonus": 0.0,
 		"dodge_chance": 0.0,
 		"max_health_bonus": 0.0,
@@ -199,6 +200,7 @@ static func get_role_bonus_summary(owner, role_id: String) -> Dictionary:
 			continue
 		var definition: Dictionary = EQUIPMENT_DEFINITIONS.get(str(equipment_id), {})
 		summary["damage_multiplier_bonus"] = float(summary["damage_multiplier_bonus"]) + float(definition.get("damage_multiplier_bonus", 0.0)) * level
+		summary["attack_speed_percent_bonus"] = float(summary["attack_speed_percent_bonus"]) + float(definition.get("attack_speed_percent_bonus", 0.0)) * level
 		summary["speed_bonus"] = float(summary["speed_bonus"]) + float(definition.get("speed_bonus", 0.0)) * level
 		summary["dodge_chance"] = float(summary["dodge_chance"]) + float(definition.get("dodge_bonus", 0.0)) * level
 		summary["max_health_bonus"] = float(summary["max_health_bonus"]) + float(definition.get("max_health_bonus", 0.0)) * level
@@ -216,6 +218,10 @@ static func get_role_bonus_summary(owner, role_id: String) -> Dictionary:
 
 static func get_role_damage_multiplier_bonus(owner, role_id: String) -> float:
 	return float(get_role_bonus_summary(owner, role_id).get("damage_multiplier_bonus", 0.0))
+
+
+static func get_role_attack_speed_percent_bonus(owner, role_id: String) -> float:
+	return float(get_role_bonus_summary(owner, role_id).get("attack_speed_percent_bonus", 0.0))
 
 
 static func get_role_energy_gain_bonus(owner, role_id: String) -> float:

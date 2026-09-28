@@ -10,7 +10,7 @@ static func compute_velocity(enemy, delta: float) -> Vector2:
 	var distance_to_target: float = enemy._cached_distance_to_target
 	var direction_to_target: Vector2 = enemy._cached_direction_to_target
 	var move_direction := direction_to_target
-	var move_speed: float = enemy.speed * enemy.slow_multiplier
+	var move_speed: float = (enemy.speed + preload("res://scripts/enemies/enemy_runner_haste.gd").get_speed_bonus(enemy)) * enemy.slow_multiplier
 	if preload("res://scripts/enemies/enemy_heavy_armor_form.gd").is_active(enemy):
 		move_speed *= 0.5
 
@@ -36,7 +36,7 @@ static func compute_velocity(enemy, delta: float) -> Vector2:
 	var has_active_dash: bool = (enemy._is_dasher and enemy.dash_remaining > 0.0) or (enemy.behavior_id == "skulltomb" and enemy.dash_remaining > 0.0)
 	if has_active_dash:
 		if preload("res://scripts/enemies/enemy_dasher_charge.gd").is_active(enemy):
-			return enemy.dash_direction.normalized() * preload("res://scripts/enemies/enemy_dasher_charge.gd").SPEED
+			return enemy.dash_direction.normalized() * preload("res://scripts/enemies/enemy_dasher_charge.gd").get_speed(enemy)
 		move_direction = enemy.dash_direction
 		move_speed *= enemy.dash_speed_multiplier
 		if enemy.behavior_id == "skulltomb":

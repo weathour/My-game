@@ -15,13 +15,19 @@ func _run() -> void:
 	var owner := StoneOwner.new()
 	scene.add_child(owner)
 	owner.ruan_stone_purchased = ["ground_branch"]
-	assert(is_equal_approx(StoneStats.get_attack_bonus(owner), 1.0))
-	assert(is_equal_approx(StoneStats.get_damage_reduction_rate(owner), 0.05))
+	assert(is_equal_approx(StoneStats.get_attack_bonus(owner), 2.0))
+	assert(is_zero_approx(StoneStats.get_damage_reduction_rate(owner)))
+	assert(is_equal_approx(StoneStats.get_attack_speed_percent_bonus(owner), 0.05))
 	assert(is_zero_approx(StoneStats.get_damage_bonus(owner)))
 	owner.ruan_stone_purchased = ["ground_branch", "ground_branch", "broken_sword", "broken_sword"]
-	assert(is_equal_approx(StoneStats.get_attack_bonus(owner), 6.0))
-	assert(is_equal_approx(StoneStats.get_damage_reduction_rate(owner), 0.10))
+	assert(is_equal_approx(StoneStats.get_attack_bonus(owner), 8.0))
+	assert(is_zero_approx(StoneStats.get_damage_reduction_rate(owner)))
+	assert(is_equal_approx(StoneStats.get_attack_speed_percent_bonus(owner), 0.10))
 	assert(is_equal_approx(StoneStats.get_damage_bonus(owner), 0.04))
+	owner.ruan_stone_purchased = ["broken_chestplate"]
+	assert(is_equal_approx(StoneStats.get_damage_reduction_rate(owner), 0.03))
+	owner.ruan_stone_purchased = ["broken_chestplate", "broken_chestplate"]
+	assert(is_equal_approx(StoneStats.get_damage_reduction_rate(owner), 0.06))
 	var enemies: Array[StoneEnemy] = []
 	for index in range(4):
 		var enemy := StoneEnemy.new()

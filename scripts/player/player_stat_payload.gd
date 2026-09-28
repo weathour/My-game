@@ -183,17 +183,20 @@ static func _build_team_role_statuses(owner, active_role_id: String, include_des
 
 static func _build_buff_status_slots(owner) -> Array:
 	var slots: Array = []
+	var plague_slot: Dictionary = preload("res://scripts/player/player_plague_flow.gd").get_buff_slot(owner)
+	if not plague_slot.is_empty():
+		slots.append(plague_slot)
 	var blindness = preload("res://scripts/player/player_blindness.gd").get_effect(owner) if owner != null else null
 	if blindness != null and blindness.remaining > 0.0:
 		slots.append({
 			"id": "blindness",
 			"name": "目盲",
-			"description": "只能看见自身半径160范围，持续1.5秒；每10秒最多触发一次。",
+			"description": "只能看见自身半径60范围，持续2.5秒；每10秒最多触发一次。",
 			"text": "盲",
 			"color": Color(0.5, 0.3, 0.7, 1.0),
 			"base_color": Color(0.15, 0.08, 0.22, 1.0),
 			"remaining": blindness.remaining,
-			"duration": 1.5,
+			"duration": 2.5,
 			"cooldown": false
 		})
 	var domain_remaining: float = preload("res://scripts/enemies/skulltomb_domain_effect.gd").get_remaining(owner) if owner != null else 0.0

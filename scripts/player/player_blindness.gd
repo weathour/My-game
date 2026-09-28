@@ -1,8 +1,8 @@
 extends CanvasLayer
 
-const DURATION := 1.5
+const DURATION := 2.5
 const TRIGGER_COOLDOWN := 10.0
-const SIGHT_RADIUS := 160.0
+const SIGHT_RADIUS := 60.0
 const MASK_SHADER := preload("res://shaders/blindness_mask.gdshader")
 const NODE_NAME := "PlayerBlindness"
 

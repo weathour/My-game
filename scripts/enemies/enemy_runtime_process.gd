@@ -31,6 +31,7 @@ static func physics_process(enemy, delta: float) -> void:
 	enemy.ENEMY_STALWART_BODY.tick(enemy, delta)
 	enemy.elite_charge_haste_remaining = maxf(0.0, enemy.elite_charge_haste_remaining - delta)
 	preload("res://scripts/enemies/enemy_heavy_armor_form.gd").tick(enemy, delta)
+	preload("res://scripts/enemies/enemy_runner_haste.gd").tick(enemy, delta)
 	if bool(enemy._is_glutton) or enemy.behavior_id == "skulltomb" or enemy.secondary_behavior_id == "skulltomb":
 		enemy.ENEMY_OCCLUSION_SORT.update_scene_from_occluder(enemy)
 	if enemy.status_root != null or enemy.boss_visual_instance != null or enemy.hit_flash_remaining > 0.0 or enemy._has_status_visual_pressure():

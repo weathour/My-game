@@ -19,7 +19,7 @@ const BUILD_DEFINITIONS := {
 		{"id": "trait_heal_bonus", "title": "战意触发时回复效果增加2％", "summary": "战意触发时回复效果增加2％", "card_title": "剑士特性", "skill_progress_id": "swordsman_trait"},
 		{"id": "knight_glory_duration", "title": "骑士荣耀持续时间增加0.3s", "summary": "骑士荣耀持续时间增加0.3s", "card_title": "剑士特性", "skill_progress_id": "swordsman_trait"},
 		{"id": "entry_damage", "title": "冲锋伤害倍率增加15％", "summary": "冲锋伤害倍率增加15％", "card_title": "冲锋", "skill_progress_id": "swordsman_entry"},
-		{"id": "basic_attack_cooldown", "title": "剑士普通攻击冷却减少15％", "summary": "剑士普通攻击冷却减少15％", "card_title": "普通攻击", "skill_progress_id": "swordsman_basic"},
+		{"id": "basic_attack_cooldown", "title": "剑士普通攻击攻速提高15％", "summary": "剑士普通攻击攻速提高15％", "card_title": "普通攻击", "skill_progress_id": "swordsman_basic"},
 		{"id": "basic_attack_damage", "title": "剑士普通攻击伤害倍率增加15％", "summary": "剑士普通攻击伤害倍率增加15％", "card_title": "普通攻击", "skill_progress_id": "swordsman_basic"},
 		{"id": "basic_attack_range", "title": "剑士普通攻击范围增加15％", "summary": "剑士普通攻击范围增加15％", "card_title": "普通攻击", "skill_progress_id": "swordsman_basic"},
 		{"id": "blade_storm_damage", "title": "剑士剑刃风暴伤害倍率增加2.5％", "summary": "剑士剑刃风暴伤害倍率增加2.5％", "requires_skill": "blade_storm", "skill_progress_id": "swordsman_blade_storm"},
@@ -42,7 +42,7 @@ const BUILD_DEFINITIONS := {
 		{"id": "flash_stack_bonus", "title": "瞬杀每层提供伤害+0.75％，移速+0.75％，闪避值+30", "summary": "瞬杀每层提供伤害+0.75％，移速+0.75％，闪避值+30", "card_title": "枪手特性", "skill_progress_id": "gunner_trait"},
 		{"id": "entry_damage", "title": "枪火典礼伤害倍率+15％", "summary": "枪火典礼伤害倍率+15％", "card_title": "枪火典礼", "skill_progress_id": "gunner_entry"},
 		{"id": "basic_attack_damage", "title": "枪手普通攻击伤害倍率+15％", "summary": "枪手普通攻击伤害倍率+15％", "card_title": "普通攻击", "skill_progress_id": "gunner_basic"},
-		{"id": "basic_attack_cooldown", "title": "枪手普通攻击冷却时间减少8％", "summary": "枪手普通攻击冷却时间减少8％", "card_title": "普通攻击", "skill_progress_id": "gunner_basic"},
+		{"id": "basic_attack_cooldown", "title": "枪手普通攻击攻速提高8％", "summary": "枪手普通攻击攻速提高8％", "card_title": "普通攻击", "skill_progress_id": "gunner_basic"},
 		{"id": "basic_attack_range", "title": "枪手普通攻击距离+15", "summary": "枪手普通攻击距离+15", "card_title": "普通攻击", "skill_progress_id": "gunner_basic"},
 		{"id": "shrapnel_cooldown", "title": "散弹冷却时间-15％", "summary": "散弹冷却时间-15％", "requires_skill": "shrapnel_field", "skill_progress_id": "gunner_shrapnel"},
 		{"id": "shrapnel_damage", "title": "散弹伤害倍率+3％", "summary": "散弹伤害倍率+3％", "requires_skill": "shrapnel_field", "skill_progress_id": "gunner_shrapnel"},
@@ -85,7 +85,7 @@ const BUILD_DEFINITIONS := {
 		{"id": "trait_part_max", "title": "战场改装零件上限+2", "summary": "战场改装零件上限+2", "card_title": "机械师特性", "skill_progress_id": "mechanic_trait"},
 		{"id": "entry_damage", "title": "紧急部署炮塔伤害倍率+15％", "summary": "紧急部署炮塔伤害倍率+15％", "card_title": "紧急部署", "skill_progress_id": "mechanic_entry"},
 		{"id": "basic_attack_damage", "title": "机械师普通攻击伤害倍率+15％", "summary": "机械师普通攻击伤害倍率+15％", "card_title": "普通攻击", "skill_progress_id": "mechanic_basic"},
-		{"id": "basic_attack_cooldown", "title": "机械师普通攻击冷却时间减少8％", "summary": "机械师普通攻击冷却时间减少8％", "card_title": "普通攻击", "skill_progress_id": "mechanic_basic"},
+		{"id": "basic_attack_cooldown", "title": "机械师普通攻击攻速提高8％", "summary": "机械师普通攻击攻速提高8％", "card_title": "普通攻击", "skill_progress_id": "mechanic_basic"},
 		{"id": "basic_attack_range", "title": "机械师普通攻击距离增加8％", "summary": "机械师普通攻击距离增加8％", "card_title": "普通攻击", "skill_progress_id": "mechanic_basic"},
 		{"id": "drone_damage", "title": "守卫机器人抵挡次数+1", "summary": "守卫机器人抵挡次数+1", "requires_skill": "drone", "skill_progress_id": "mechanic_drone"},
 		{"id": "drone_duration", "title": "守卫机器人同时存在上限+1", "summary": "守卫机器人同时存在上限+1", "requires_skill": "drone", "skill_progress_id": "mechanic_drone"},
@@ -257,15 +257,15 @@ static func get_basic_attack_damage_multiplier(owner, role_id: String) -> float:
 	return 1.0
 
 
-static func get_basic_attack_cooldown_multiplier(owner, role_id: String) -> float:
+static func get_basic_attack_speed_percent_bonus(owner, role_id: String) -> float:
 	match role_id:
 		"swordsman":
-			return _percent_reduction_multiplier(get_count(owner, role_id, "basic_attack_cooldown"), 0.15, 0.18)
+			return 0.15 * float(get_count(owner, role_id, "basic_attack_cooldown"))
 		"gunner":
-			return _percent_reduction_multiplier(get_count(owner, role_id, "basic_attack_cooldown"), 0.08, 0.18)
+			return 0.08 * float(get_count(owner, role_id, "basic_attack_cooldown"))
 		"mechanic":
-			return _percent_reduction_multiplier(get_count(owner, role_id, "basic_attack_cooldown"), 0.08, 0.18)
-	return 1.0
+			return 0.08 * float(get_count(owner, role_id, "basic_attack_cooldown"))
+	return 0.0
 
 
 static func get_basic_attack_range_multiplier(owner, role_id: String) -> float:

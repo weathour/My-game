@@ -85,6 +85,7 @@ static func get_save_data(player) -> Dictionary:
 		"swordsman_death_defiance_cooldown_remaining": player.swordsman_death_defiance_cooldown_remaining,
 		"enemy_move_slow_multiplier": player.enemy_move_slow_multiplier,
 		"enemy_move_slow_remaining": player.enemy_move_slow_remaining,
+		"plague_remaining": player.plague_remaining,
 		"ability_runtime": _get_ability_runtime(player),
 		"gunner_infinite_reload_cooldown_remaining": player.gunner_infinite_reload_ability.cooldown_remaining if player.gunner_infinite_reload_ability != null else 0.0,
 		"gunner_infinite_reload_remaining": player.gunner_infinite_reload_ability.active_remaining if player.gunner_infinite_reload_ability != null else 0.0,
@@ -254,6 +255,7 @@ static func apply_save_data(player, data: Dictionary) -> void:
 	player.swordsman_death_defiance_cooldown_remaining = max(0.0, float(data.get("swordsman_death_defiance_cooldown_remaining", 0.0)))
 	player.enemy_move_slow_multiplier = float(data.get("enemy_move_slow_multiplier", 1.0))
 	player.enemy_move_slow_remaining = max(0.0, float(data.get("enemy_move_slow_remaining", 0.0)))
+	player.plague_remaining = clampf(float(data.get("plague_remaining", 0.0)), 0.0, preload("res://scripts/player/player_plague_flow.gd").DURATION)
 	_apply_ability_save_data(player, data)
 	_apply_stat_save_data(player, data)
 	_apply_switch_buff_save_data(player, data)

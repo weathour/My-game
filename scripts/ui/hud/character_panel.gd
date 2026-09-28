@@ -1312,6 +1312,9 @@ func _build_stats_text(role_data: Dictionary) -> String:
 	var reduction: float = float(cached_player._get_role_damage_reduction_rate(role_id)) if cached_player.has_method("_get_role_damage_reduction_rate") else 0.0
 	var critical_chance: float = float(cached_player._get_role_critical_chance(role_id)) if cached_player.has_method("_get_role_critical_chance") else 0.0
 	var critical_damage: float = float(cached_player._get_critical_damage_multiplier(role_id)) if cached_player.has_method("_get_critical_damage_multiplier") else 1.0
+	var base_attack_speed: float = float(role_data.get("base_attack_speed", 1.0))
+	var effective_attack_speed: float = float(cached_player._get_effective_attack_speed(role_id)) if cached_player.has_method("_get_effective_attack_speed") else base_attack_speed
+	var attack_interval: float = 1.0 / maxf(0.01, effective_attack_speed)
 	var flat_attack: float = float(role_data.get("damage", 0.0))
 	if cached_player.has_method("_get_blazing_sun_flat_base_damage"):
 		flat_attack += float(cached_player._get_blazing_sun_flat_base_damage(role_id))
@@ -1329,6 +1332,8 @@ func _build_stats_text(role_data: Dictionary) -> String:
 	var lines: Array[String] = []
 	lines.append("生命值      [color=#ffffff]%s[/color]" % current_health_text)
 	lines.append("攻击力      [color=#ffffff]%.1f[/color]" % damage)
+	lines.append("基础攻击速度[color=#ffffff]%.2f 次/秒[/color]" % base_attack_speed)
+	lines.append("普通攻速    [color=#74f0a7]%.2f 次/秒（间隔 %.2f 秒）[/color]" % [effective_attack_speed, attack_interval])
 	lines.append("护甲        [color=#ffffff]%.1f[/color]" % armor)
 	lines.append("移动速度    [color=#ffffff]%.1f[/color]" % move_speed)
 	lines.append("闪避率      [color=#74f0a7]%.1f%%[/color]" % (dodge_chance * 100.0))

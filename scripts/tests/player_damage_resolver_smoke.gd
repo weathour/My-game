@@ -1,6 +1,7 @@
 extends SceneTree
 
 const DamageResolver := preload("res://scripts/player/player_damage_resolver.gd")
+const FlamePathAbility := preload("res://scripts/abilities/mage_flame_path_ability.gd")
 
 var failures: Array[String] = []
 
@@ -55,6 +56,7 @@ func _run() -> void:
 		stable_enemy.queue_free()
 	_check_disjoint_batched_queries()
 	_check_runtime_cache_key_switch()
+	_check_flame_path_stalwart_immunity(root)
 	for enemy in enemies:
 		if is_instance_valid(enemy):
 			(enemy as Node).queue_free()
@@ -67,6 +69,36 @@ func _run() -> void:
 		for failure in failures:
 			push_error(failure)
 		quit(1)
+
+func _check_flame_path_stalwart_immunity(root: Node) -> void:
+	var runtime_root := RuntimeEnemyRoot.new()
+	root.get_tree().root.add_child(runtime_root)
+	root.get_tree().current_scene = runtime_root
+	var owner := DamageOwner.new()
+	runtime_root.add_child(owner)
+	var enemy := StalwartEnemy.new()
+	enemy.global_position = Vector2(720.0, 0.0)
+	enemy.contact_radius = 8.0
+	runtime_root.add_child(enemy)
+	runtime_root.enemies.append(enemy)
+
+	var ability := FlamePathAbility.new()
+	ability.active_remaining = 8.0
+	ability.path_remaining = 15.0
+	owner.mage_flame_path_ability = ability
+	var immune_hit: Dictionary = DamageResolver.get_touching_enemy_hit(owner, enemy.global_position, 8.0, 0.0)
+	if not immune_hit.is_empty() or enemy.stalwart_calls != 0:
+		failures.append("active flame path should suppress Stalwart Body collision damage")
+
+	ability.active_remaining = 0.0
+	var residual_path_hit: Dictionary = DamageResolver.get_touching_enemy_hit(owner, enemy.global_position, 8.0, 0.0)
+	if float(residual_path_hit.get("damage", 0.0)) != 25.0 or enemy.stalwart_calls != 1:
+		failures.append("flame path ground duration should not extend Stalwart Body immunity")
+
+	owner.queue_free()
+	enemy.queue_free()
+	runtime_root.queue_free()
+	root.get_tree().current_scene = root
 
 func _make_enemy(root: Node, position: Vector2) -> Node2D:
 	var enemy := TestEnemy.new()
@@ -123,6 +155,7 @@ class DamageOwner:
 
 	var damage_calls := 0
 	var register_calls := 0
+	var mage_flame_path_ability: Variant = null
 
 	func _deal_damage_to_enemy(_enemy: Node, _damage_amount: float, _source_role_id: String, _vulnerability_bonus: float = 0.0, _vulnerability_duration: float = 2.0, _slow_multiplier: float = 1.0, _slow_duration: float = 0.0, _source_position: Variant = null, _suppress_status_visual: bool = false, _kill_energy_bonus: float = 0.0) -> bool:
 		damage_calls += 1
@@ -141,6 +174,15 @@ class TestEnemy:
 	extends Node2D
 
 	var contact_radius: float = 8.0
+
+class StalwartEnemy:
+	extends TestEnemy
+
+	var stalwart_calls := 0
+
+	func try_stalwart_body_damage() -> float:
+		stalwart_calls += 1
+		return 25.0
 
 class FreeingDamageOwner:
 	extends DamageOwner

@@ -3,6 +3,7 @@ extends RefCounted
 const ENEMY_BOSS_STATE := preload("res://scripts/enemies/enemy_boss_state.gd")
 const ENEMY_BOSS_VISUALS := preload("res://scripts/enemies/enemy_boss_visuals.gd")
 const ENEMY_PROFILE_RESTORE := preload("res://scripts/enemies/enemy_profile_restore.gd")
+const RUNNER_HASTE := preload("res://scripts/enemies/enemy_runner_haste.gd")
 
 static func get_save_data(enemy) -> Dictionary:
 	return {
@@ -23,6 +24,8 @@ static func get_save_data(enemy) -> Dictionary:
 		"basic_shot_timer": enemy.basic_shot_timer,
 		"heavy_armor_remaining": enemy.heavy_armor_remaining,
 		"heavy_armor_cooldown": enemy.heavy_armor_cooldown,
+		"runner_haste_remaining": enemy.runner_haste_remaining,
+		"runner_haste_cooldown": enemy.runner_haste_cooldown,
 		"speed": enemy.speed,
 		"touch_damage": enemy.touch_damage,
 		"contact_radius": enemy.contact_radius,
@@ -183,8 +186,11 @@ static func apply_save_data(enemy, data: Dictionary, target_node: Node2D) -> voi
 	enemy.damage_reduction_rate = clampf(float(data.get("damage_reduction_rate", 0.0)), 0.0, 1.0)
 	enemy.stalwart_body_cooldown = clampf(float(data.get("stalwart_body_cooldown", 0.0)), 0.0, 1.0)
 	enemy.basic_shot_timer = maxf(0.0, float(data.get("basic_shot_timer", 2.6)))
-	enemy.heavy_armor_remaining = clampf(float(data.get("heavy_armor_remaining", 0.0)), 0.0, 3.0)
-	enemy.heavy_armor_cooldown = clampf(float(data.get("heavy_armor_cooldown", 20.0)), 0.0, 20.0)
+	var heavy_armor_form := preload("res://scripts/enemies/enemy_heavy_armor_form.gd")
+	enemy.heavy_armor_remaining = clampf(float(data.get("heavy_armor_remaining", 0.0)), 0.0, heavy_armor_form.get_duration(enemy))
+	enemy.heavy_armor_cooldown = clampf(float(data.get("heavy_armor_cooldown", heavy_armor_form.get_cooldown(enemy))), 0.0, heavy_armor_form.get_cooldown(enemy))
+	enemy.runner_haste_remaining = clampf(float(data.get("runner_haste_remaining", 0.0)), 0.0, RUNNER_HASTE.DURATION) if enemy.archetype_id == "runner" else 0.0
+	enemy.runner_haste_cooldown = clampf(float(data.get("runner_haste_cooldown", 0.0)), 0.0, RUNNER_HASTE.COOLDOWN) if enemy.archetype_id == "runner" else 0.0
 	enemy.speed = float(data.get("speed", enemy.speed))
 	enemy.touch_damage = float(data.get("touch_damage", enemy.touch_damage))
 	enemy.contact_radius = float(data.get("contact_radius", enemy.contact_radius))

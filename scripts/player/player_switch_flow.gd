@@ -27,12 +27,12 @@ const MAGE_ENTRY_HIT_RADIUS := 104.0 * MAGE_ATTACK_EFFECT_SCALE
 const EXIT_SKILLS_ENABLED := false
 
 
-static func activate_switch_power(owner, role_id: String, label: String, duration: float, damage_multiplier: float, interval_bonus: float) -> void:
+static func activate_switch_power(owner, role_id: String, label: String, duration: float, damage_multiplier: float, attack_speed_percent_bonus: float) -> void:
 	owner.switch_power_role_id = role_id
 	owner.switch_power_label = label
 	owner.switch_power_remaining = duration
 	owner.switch_power_damage_multiplier = damage_multiplier
-	owner.switch_power_interval_bonus = interval_bonus
+	owner.switch_power_interval_bonus = attack_speed_percent_bonus
 	owner._update_fire_timer()
 
 

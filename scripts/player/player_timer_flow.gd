@@ -13,6 +13,7 @@ const MAGE_ARCANE_SURPLUS_EXPIRE_CHARGE_STACKS := 3
 
 static func update_timers(owner, delta: float) -> void:
 	owner.role_visual_time += delta
+	preload("res://scripts/player/player_plague_flow.gd").tick(owner, delta)
 	if owner.has_method("_tick_duration_statuses"):
 		owner._tick_duration_statuses(delta)
 	if owner.has_method("_tick_temporary_health_stacks"):

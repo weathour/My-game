@@ -51,14 +51,15 @@ func _run() -> void:
 
 
 func _check_core_stats(panel: Node, player: Node) -> void:
-	var labels := ["生命值", "攻击力", "护甲", "移动速度", "闪避率", "减伤率", "暴击率", "暴击伤害", "增伤", "生命回复", "冷却缩减"]
+	var labels := ["生命值", "攻击力", "基础攻击速度", "普通攻速", "护甲", "移动速度", "闪避率", "减伤率", "暴击率", "暴击伤害", "增伤", "生命回复", "冷却缩减"]
 	for role in player.roles:
 		var text: String = panel._build_stats_text(role)
 		var lines := text.split("\n")
-		_expect(lines.size() == labels.size(), "core stats should have exactly 11 rows")
+		_expect(lines.size() == labels.size(), "core stats should include base and current attack speed")
 		for index in range(min(lines.size(), labels.size())):
 			_expect(lines[index].begins_with(labels[index]), "core stats should keep requested order")
-		_expect(not text.contains("普攻间隔") and not text.contains("拾取范围"), "extra stats should not remain in core rows")
+		_expect(text.contains("%.2f 次/秒" % float(role.get("base_attack_speed", 0.0))), "role panel should display its base attack speed")
+		_expect(text.contains("间隔") and not text.contains("拾取范围"), "attack interval should be shown with current attack speed")
 
 
 func _seed_character_build(player: Node) -> void:

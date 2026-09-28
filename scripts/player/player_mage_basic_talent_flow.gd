@@ -51,9 +51,17 @@ static func on_basic_attack_killed(owner, source_role_id: String, resolved_role_
 	if owner == null or not _is_mage_basic_source(source_role_id, resolved_role_id):
 		return
 	if has_level_talent(owner, TALENT_BASIC_ATTACK_1):
-		_apply_basic_cooldown_cut(owner)
+		_apply_basic_attack_interval_cut(owner)
 	if has_level_talent(owner, TALENT_BASIC_ATTACK_2) and final_damage > 0.0 and owner.has_method("_add_switch_energy_from_damage"):
 		owner._add_switch_energy_from_damage(final_damage * BASIC_ATTACK_2_KILL_ENERGY_BONUS, "mage")
+
+
+static func _apply_basic_attack_interval_cut(owner) -> void:
+	var timer_value: Variant = owner.get("fire_timer") if owner != null else null
+	if timer_value is Timer:
+		var fire_timer := timer_value as Timer
+		if not fire_timer.is_stopped():
+			fire_timer.start(maxf(0.001, fire_timer.time_left - BASIC_ATTACK_1_COOLDOWN_CUT))
 
 
 static func pick_secondary_lightning_center(owner, fallback_center: Vector2) -> Vector2:
@@ -74,23 +82,6 @@ static func pick_secondary_lightning_center(owner, fallback_center: Vector2) -> 
 	if not candidates.is_empty():
 		return candidates[0]
 	return fallback_center
-
-
-static func _apply_basic_cooldown_cut(owner) -> void:
-	var timer_value: Variant = owner.get("fire_timer") if owner != null else null
-	if timer_value is Timer:
-		var fire_timer := timer_value as Timer
-		if not fire_timer.is_stopped():
-			fire_timer.start(max(0.001, fire_timer.time_left - BASIC_ATTACK_1_COOLDOWN_CUT))
-		return
-	if timer_value is Object:
-		var timer_object := timer_value as Object
-		if timer_object.has_method("is_stopped") and timer_object.has_method("start") and not bool(timer_object.call("is_stopped")):
-			var time_left := 0.0
-			var time_left_value: Variant = timer_object.get("time_left")
-			if time_left_value != null:
-				time_left = float(time_left_value)
-			timer_object.call("start", max(0.001, time_left - BASIC_ATTACK_1_COOLDOWN_CUT))
 
 
 static func _is_mage_basic_source(source_role_id: String, _resolved_role_id: String = "") -> bool:

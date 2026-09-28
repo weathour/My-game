@@ -7,6 +7,13 @@ const FLAME_PATH_SOURCE := "mage_flame_path"
 const SHRED_VALUE := 20.0
 
 
+static func is_active(owner) -> bool:
+	if owner == null or not is_instance_valid(owner):
+		return false
+	var ability: Variant = owner.get("mage_flame_path_ability")
+	return ability != null and ability.has_method("is_active") and bool(ability.is_active())
+
+
 static func apply_damage_tick(owner, points: Array[Vector2], path_width: float, damage_per_second: float, interval: float) -> void:
 	if owner == null or not is_instance_valid(owner) or points.size() < 2:
 		return

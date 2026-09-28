@@ -62,6 +62,9 @@ func get_move_speed_multiplier(owner) -> float:
 		mult += 0.30
 	return mult
 
+func is_active() -> bool:
+	return active_remaining > 0.0
+
 func get_cooldown_slot(owner = null) -> Dictionary:
 	var remaining: float = cooldown_remaining
 	if active_remaining > 0.0 or path_remaining > 0.0:

@@ -111,7 +111,7 @@ static func update_status_visuals(enemy) -> void:
 	if enemy.dash_warning_ring != null:
 		enemy.dash_warning_ring.visible = enemy._is_dasher and enemy.dash_windup_remaining > 0.0
 		if enemy.dash_warning_ring.visible:
-			var windup_ratio: float = clamp(enemy.dash_windup_remaining / max(enemy.dash_windup_duration, 0.001), 0.0, 1.0)
+			var windup_ratio: float = clamp(enemy.dash_windup_remaining / max(preload("res://scripts/enemies/enemy_dasher_charge.gd").get_windup_duration(enemy), 0.001), 0.0, 1.0)
 			enemy.dash_warning_ring.rotation = -enemy.status_visual_time * 2.4
 			enemy.dash_warning_ring.scale = Vector2.ONE * lerpf(0.72, 1.5, windup_ratio)
 			enemy.dash_warning_ring.width = lerpf(5.0, 2.0, windup_ratio)
@@ -131,7 +131,7 @@ static func update_status_visuals(enemy) -> void:
 				Vector2(dash_length * 0.5, dash_width * 0.5),
 				Vector2(-dash_length * 0.5, dash_width * 0.5)
 			])
-			enemy.dash_warning_rect.color = Color(1.0, 0.14, 0.08, 0.16 + 0.18 * (1.0 - clamp(enemy.dash_windup_remaining / max(enemy.dash_windup_duration, 0.001), 0.0, 1.0)))
+			enemy.dash_warning_rect.color = Color(1.0, 0.14, 0.08, 0.16 + 0.18 * (1.0 - clamp(enemy.dash_windup_remaining / max(preload("res://scripts/enemies/enemy_dasher_charge.gd").get_windup_duration(enemy), 0.001), 0.0, 1.0)))
 
 static func _update_invulnerability_tint(enemy) -> void:
 	var targets: Array = []
@@ -415,8 +415,6 @@ static func spawn_dash_trail_hazard(enemy, direction_vector: Vector2, length: fl
 	if current_scene == null:
 		return
 	var hazard := preload("res://scripts/enemies/elite_charge_ground.gd").new()
-	# Double both dimensions of the previous rectangular ground area.
-	hazard.size = Vector2(maxf(32.0, length * 0.6) * 4.0, maxf(10.0, enemy.contact_radius * 0.3) * 4.0)
 	current_scene.add_child(hazard)
 	hazard.global_position = enemy.global_position + direction_vector * length * 0.42
 	hazard.rotation = direction_vector.angle()

@@ -133,6 +133,7 @@ static func heal(owner, amount: float) -> void:
 	if owner.has_method("is_healing_blocked") and owner.is_healing_blocked():
 		return
 	amount = PLAYER_SWORDSMAN_TRAIT_RUNTIME_FLOW.apply_healing_multiplier(owner, amount)
+	amount *= preload("res://scripts/player/player_plague_flow.gd").get_healing_multiplier(owner)
 	if amount <= 0.0:
 		return
 	var previous_health: float = owner.current_health

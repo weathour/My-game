@@ -433,6 +433,7 @@ static func take_damage(owner, amount: float, source_enemy: Node = null, ignore_
 			owner._save_active_role_temporary_health()
 	owner.current_health = max(0.0, owner.current_health - remaining_damage)
 	preload("res://scripts/player/player_blindness.gd").on_enemy_damage(owner, source_enemy, adjusted_damage)
+	preload("res://scripts/player/player_plague_flow.gd").on_enemy_damage(owner, source_enemy, adjusted_damage)
 	if adjusted_damage > 0.0 and owner.get("gunner_role") != null and owner.gunner_role.has_method("handle_damage_taken"):
 		owner.gunner_role.handle_damage_taken(owner)
 	if adjusted_damage > 0.0 and owner.has_method("_break_gunner_flash_trait"):
@@ -464,6 +465,7 @@ static func _start_death_sequence(owner) -> void:
 	owner.death_sequence_pending = true
 	owner.death_sequence_remaining = DEATH_HEALTH_BAR_ANIMATION_DELAY
 	owner.is_dead = true
+	owner.plague_remaining = 0.0
 	owner.level_up_active = false
 	owner.velocity = Vector2.ZERO
 	_clear_swordsman_talent_states(owner)

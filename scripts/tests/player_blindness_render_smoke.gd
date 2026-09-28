@@ -35,8 +35,8 @@ func _run() -> void:
 	await RenderingServer.frame_post_draw
 	var image := viewport.get_texture().get_image()
 	_check(image.get_pixel(320, 240).r > 0.9, "player center visible")
-	_check(image.get_pixel(470, 240).r > 0.9, "inside radius 160 visible")
-	_check(image.get_pixel(490, 240).r < 0.05, "outside radius 160 black, including high z enemies")
+	_check(image.get_pixel(370, 240).r > 0.9, "inside radius 60 visible")
+	_check(image.get_pixel(390, 240).r < 0.05, "outside radius 60 black, including high z enemies")
 	_check(image.get_pixel(10, 10).r > 0.9 and image.get_pixel(10, 10).g < 0.05, "HUD above mask")
 	image.save_png(OS.get_environment("TEMP").path_join("player_blindness_render.png"))
 	viewport.canvas_transform = Transform2D(Vector2(0.5, 0), Vector2(0, 0.5), Vector2(160, 120))
@@ -45,8 +45,8 @@ func _run() -> void:
 	await process_frame
 	await RenderingServer.frame_post_draw
 	image = viewport.get_texture().get_image()
-	_check(image.get_pixel(410, 240).r > 0.9, "zoomed visible radius follows player")
-	_check(image.get_pixel(430, 240).r < 0.05, "zoom preserves world radius")
+	_check(image.get_pixel(365, 240).r > 0.9, "zoomed visible radius follows player")
+	_check(image.get_pixel(380, 240).r < 0.05, "zoom preserves world radius")
 	effect.remaining = 0.0
 	effect._sync_mask()
 	await process_frame
