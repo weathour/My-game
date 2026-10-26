@@ -3,7 +3,6 @@
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_f0xrn"]
 [ext_resource type="PackedScene" uid="uid://dpgrvaclsp6eg" path="res://scenes/player.tscn" id="1_o5qli"]
 [ext_resource type="Script" path="res://scripts/bgm_player.gd" id="2_vk5d8"]
-[ext_resource type="AudioStream" path="res://assets/game_bgm.mp3" id="3_6n11y"]
 
 [node name="main" type="Node2D" unique_id=1978643475]
 script = ExtResource("1_f0xrn")
@@ -12,5 +11,5 @@ script = ExtResource("1_f0xrn")
 
 [node name="GameBGM" type="AudioStreamPlayer" parent="."]
 process_mode = 3
-stream = ExtResource("3_6n11y")
 script = ExtResource("2_vk5d8")
+follow_battle_context = true

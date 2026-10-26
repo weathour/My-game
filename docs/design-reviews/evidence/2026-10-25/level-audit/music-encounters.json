@@ -1,0 +1,708 @@
+{
+  "schema_version": 1,
+  "evidence_date": "2026-10-25",
+  "evidence_scope": "当前工作树源码及小型契约探针；不是人工完整通关或性能验证",
+  "user_audio_constraints": {
+    "dialogue_voiceover": false
+  },
+  "identity_notes": [
+    "只有stage_id与enemy_id来自现有稳定ID；无尽波数是PLAN数组索引，未虚构稳定关卡ID。",
+    "精英两种与独立命名三小Boss、一最终Boss分列；profile_boss_name_field在精英上保留旧名称，不将其提升为独立Boss。",
+    "生成时间为规则准入时点；受帧调度、存活上限与生成失败重试影响，不承诺绝对音轨时间线。",
+    "无尽N1及后续层复用同一20波计划；N层改变属性/部分技能，不是新的地图或Boss身份。",
+    "故事与无尽均用同一main.tscn战斗场景；地图工厂仅矩形边界。"
+  ],
+  "story_stages": [
+    {
+      "stage_id": "chapter1_stage1",
+      "chinese_name": "第一章·前哨清剿",
+      "type": "normal",
+      "target_time_seconds": 180.0,
+      "completion": "生存至目标时间，无需清场或击杀小Boss",
+      "boss_spawn_schedule_seconds": null,
+      "special_enemy_ids": [],
+      "elite_enemy_ids": [],
+      "spawn_interval_multiplier": 1.0,
+      "enemy_health_multiplier": 1.0,
+      "enemy_speed_multiplier": 1.0,
+      "battle_scene": "res://scenes/main.tscn",
+      "authored_stage_map_binding": null,
+      "sources": [
+        "scripts/story_data.gd:17",
+        "scripts/enemy/enemy_director.gd:224",
+        "scripts/game/enemy_defeat_flow.gd:43"
+      ]
+    },
+    {
+      "stage_id": "chapter1_stage2",
+      "chinese_name": "第一章·裂隙推进",
+      "type": "normal",
+      "target_time_seconds": 210.0,
+      "completion": "生存至目标时间，无需清场或击杀小Boss",
+      "boss_spawn_schedule_seconds": null,
+      "special_enemy_ids": [
+        "smallboss_glutton"
+      ],
+      "elite_enemy_ids": [],
+      "spawn_interval_multiplier": 0.9,
+      "enemy_health_multiplier": 1.1,
+      "enemy_speed_multiplier": 1.08,
+      "battle_scene": "res://scenes/main.tscn",
+      "authored_stage_map_binding": null,
+      "sources": [
+        "scripts/story_data.gd:17",
+        "scripts/enemy/enemy_director.gd:224",
+        "scripts/game/enemy_defeat_flow.gd:43"
+      ]
+    },
+    {
+      "stage_id": "chapter1_stage3",
+      "chinese_name": "第一章·星核讨伐",
+      "type": "boss",
+      "target_time_seconds": 300.0,
+      "completion": "真实击败boss_spellcore；300秒不是通关或失败时限",
+      "boss_spawn_schedule_seconds": 135.0,
+      "special_enemy_ids": [
+        "boss_spellcore"
+      ],
+      "elite_enemy_ids": [],
+      "spawn_interval_multiplier": 0.92,
+      "enemy_health_multiplier": 1.14,
+      "enemy_speed_multiplier": 1.1,
+      "battle_scene": "res://scenes/main.tscn",
+      "authored_stage_map_binding": null,
+      "sources": [
+        "scripts/story_data.gd:17",
+        "scripts/enemy/enemy_director.gd:224",
+        "scripts/game/enemy_defeat_flow.gd:43"
+      ]
+    }
+  ],
+  "endless_plan": {
+    "waves": [
+      {
+        "wave_number": 1,
+        "chinese_title": "基础战斗",
+        "stable_level_id": null,
+        "duration_seconds": 60,
+        "completion": "计时结束",
+        "normal_spawn_pool": [
+          "chaser"
+        ],
+        "elite_enemy_ids": [],
+        "boss_enemy_id": null,
+        "flyby_swarm": false,
+        "reward_wave": false
+      },
+      {
+        "wave_number": 2,
+        "chinese_title": "基础战斗",
+        "stable_level_id": null,
+        "duration_seconds": 60,
+        "completion": "计时结束",
+        "normal_spawn_pool": [
+          "chaser",
+          "chaser",
+          "runner"
+        ],
+        "elite_enemy_ids": [],
+        "boss_enemy_id": null,
+        "flyby_swarm": false,
+        "reward_wave": false
+      },
+      {
+        "wave_number": 3,
+        "chinese_title": "基础战斗",
+        "stable_level_id": null,
+        "duration_seconds": 60,
+        "completion": "计时结束",
+        "normal_spawn_pool": [
+          "chaser",
+          "chaser",
+          "brute"
+        ],
+        "elite_enemy_ids": [],
+        "boss_enemy_id": null,
+        "flyby_swarm": false,
+        "reward_wave": false
+      },
+      {
+        "wave_number": 4,
+        "chinese_title": "混合战斗",
+        "stable_level_id": null,
+        "duration_seconds": 65,
+        "completion": "计时结束",
+        "normal_spawn_pool": [
+          "chaser",
+          "runner",
+          "brute",
+          "shooter"
+        ],
+        "elite_enemy_ids": [],
+        "boss_enemy_id": null,
+        "flyby_swarm": false,
+        "reward_wave": false
+      },
+      {
+        "wave_number": 5,
+        "chinese_title": "精英波",
+        "stable_level_id": null,
+        "duration_seconds": 70,
+        "completion": "计时结束",
+        "normal_spawn_pool": [
+          "chaser",
+          "runner",
+          "brute",
+          "dasher"
+        ],
+        "elite_enemy_ids": [
+          "elite_ram_trail"
+        ],
+        "boss_enemy_id": null,
+        "flyby_swarm": false,
+        "reward_wave": false
+      },
+      {
+        "wave_number": 6,
+        "chinese_title": "幽影树人",
+        "stable_level_id": null,
+        "duration_seconds": null,
+        "completion": "击败本波Boss",
+        "normal_spawn_pool": [
+          "shadow_tree"
+        ],
+        "elite_enemy_ids": [],
+        "boss_enemy_id": "smallboss_glutton",
+        "flyby_swarm": false,
+        "reward_wave": false
+      },
+      {
+        "wave_number": 7,
+        "chinese_title": "奖励波",
+        "stable_level_id": null,
+        "duration_seconds": 60,
+        "completion": "计时结束",
+        "normal_spawn_pool": [
+          "chaser",
+          "runner"
+        ],
+        "elite_enemy_ids": [],
+        "boss_enemy_id": null,
+        "flyby_swarm": false,
+        "reward_wave": true
+      },
+      {
+        "wave_number": 8,
+        "chinese_title": "混合战斗",
+        "stable_level_id": null,
+        "duration_seconds": 70,
+        "completion": "计时结束",
+        "normal_spawn_pool": [
+          "chaser",
+          "runner",
+          "brute",
+          "shooter",
+          "dasher"
+        ],
+        "elite_enemy_ids": [],
+        "boss_enemy_id": null,
+        "flyby_swarm": true,
+        "reward_wave": false
+      },
+      {
+        "wave_number": 9,
+        "chinese_title": "混合战斗",
+        "stable_level_id": null,
+        "duration_seconds": 75,
+        "completion": "计时结束",
+        "normal_spawn_pool": [
+          "chaser",
+          "runner",
+          "brute",
+          "shooter",
+          "vine"
+        ],
+        "elite_enemy_ids": [],
+        "boss_enemy_id": null,
+        "flyby_swarm": false,
+        "reward_wave": false
+      },
+      {
+        "wave_number": 10,
+        "chinese_title": "精英波",
+        "stable_level_id": null,
+        "duration_seconds": 75,
+        "completion": "计时结束",
+        "normal_spawn_pool": [
+          "chaser",
+          "runner",
+          "brute",
+          "shooter",
+          "shotgunner"
+        ],
+        "elite_enemy_ids": [
+          "elite_splitshot"
+        ],
+        "boss_enemy_id": null,
+        "flyby_swarm": false,
+        "reward_wave": false
+      },
+      {
+        "wave_number": 11,
+        "chinese_title": "引渡人",
+        "stable_level_id": null,
+        "duration_seconds": null,
+        "completion": "击败本波Boss",
+        "normal_spawn_pool": [
+          "shooter",
+          "shotgunner",
+          "skull_mage"
+        ],
+        "elite_enemy_ids": [],
+        "boss_enemy_id": "smallboss_rebirth",
+        "flyby_swarm": false,
+        "reward_wave": false
+      },
+      {
+        "wave_number": 12,
+        "chinese_title": "奖励波",
+        "stable_level_id": null,
+        "duration_seconds": 60,
+        "completion": "计时结束",
+        "normal_spawn_pool": [
+          "chaser",
+          "runner",
+          "brute"
+        ],
+        "elite_enemy_ids": [],
+        "boss_enemy_id": null,
+        "flyby_swarm": false,
+        "reward_wave": true
+      },
+      {
+        "wave_number": 13,
+        "chinese_title": "混合战斗",
+        "stable_level_id": null,
+        "duration_seconds": 80,
+        "completion": "计时结束",
+        "normal_spawn_pool": [
+          "chaser",
+          "runner",
+          "brute",
+          "dasher",
+          "shadow_tree",
+          "skull_mage"
+        ],
+        "elite_enemy_ids": [],
+        "boss_enemy_id": null,
+        "flyby_swarm": false,
+        "reward_wave": false
+      },
+      {
+        "wave_number": 14,
+        "chinese_title": "混合战斗",
+        "stable_level_id": null,
+        "duration_seconds": 80,
+        "completion": "计时结束",
+        "normal_spawn_pool": [
+          "chaser",
+          "runner",
+          "brute",
+          "shooter",
+          "shotgunner",
+          "angry_porcupine"
+        ],
+        "elite_enemy_ids": [],
+        "boss_enemy_id": null,
+        "flyby_swarm": true,
+        "reward_wave": false
+      },
+      {
+        "wave_number": 15,
+        "chinese_title": "精英波",
+        "stable_level_id": null,
+        "duration_seconds": 85,
+        "completion": "计时结束",
+        "normal_spawn_pool": [
+          "chaser",
+          "runner",
+          "brute",
+          "shooter",
+          "dasher",
+          "shotgunner"
+        ],
+        "elite_enemy_ids": [
+          "elite_ram_trail",
+          "elite_splitshot"
+        ],
+        "boss_enemy_id": null,
+        "flyby_swarm": false,
+        "reward_wave": false
+      },
+      {
+        "wave_number": 16,
+        "chinese_title": "地瑰灵",
+        "stable_level_id": null,
+        "duration_seconds": null,
+        "completion": "击败本波Boss",
+        "normal_spawn_pool": [
+          "chaser",
+          "chaser",
+          "runner"
+        ],
+        "elite_enemy_ids": [],
+        "boss_enemy_id": "smallboss_turret",
+        "flyby_swarm": false,
+        "reward_wave": false
+      },
+      {
+        "wave_number": 17,
+        "chinese_title": "奖励波",
+        "stable_level_id": null,
+        "duration_seconds": 60,
+        "completion": "计时结束",
+        "normal_spawn_pool": [
+          "chaser",
+          "runner",
+          "brute"
+        ],
+        "elite_enemy_ids": [],
+        "boss_enemy_id": null,
+        "flyby_swarm": false,
+        "reward_wave": true
+      },
+      {
+        "wave_number": 18,
+        "chinese_title": "混合战斗",
+        "stable_level_id": null,
+        "duration_seconds": 90,
+        "completion": "计时结束",
+        "normal_spawn_pool": [
+          "chaser",
+          "runner",
+          "brute",
+          "shooter",
+          "dasher",
+          "shadow_tree",
+          "vine",
+          "necro_priest"
+        ],
+        "elite_enemy_ids": [],
+        "boss_enemy_id": null,
+        "flyby_swarm": false,
+        "reward_wave": false
+      },
+      {
+        "wave_number": 19,
+        "chinese_title": "精英波",
+        "stable_level_id": null,
+        "duration_seconds": 90,
+        "completion": "计时结束",
+        "normal_spawn_pool": [
+          "chaser",
+          "runner",
+          "brute",
+          "shooter",
+          "dasher",
+          "shotgunner",
+          "shadow_tree",
+          "vine",
+          "skull_mage",
+          "angry_porcupine",
+          "necro_priest"
+        ],
+        "elite_enemy_ids": [
+          "elite_ram_trail",
+          "elite_splitshot"
+        ],
+        "boss_enemy_id": null,
+        "flyby_swarm": true,
+        "reward_wave": false
+      },
+      {
+        "wave_number": 20,
+        "chinese_title": "被污染的魔法石",
+        "stable_level_id": null,
+        "duration_seconds": null,
+        "completion": "击败本波Boss",
+        "normal_spawn_pool": [],
+        "elite_enemy_ids": [],
+        "boss_enemy_id": "boss_spellcore",
+        "flyby_swarm": false,
+        "reward_wave": false
+      }
+    ],
+    "preparation_seconds": 30,
+    "preparation_skippable": true,
+    "fixed_combat_seconds_excluding_bosses": 1140,
+    "boss_waves": [
+      6,
+      11,
+      16,
+      20
+    ],
+    "elite_waves": [
+      5,
+      10,
+      15,
+      19
+    ],
+    "sources": [
+      "scripts/game/combat_wave_plan.gd:7",
+      "scripts/game/combat_wave_plan.gd:13",
+      "scripts/game/combat_wave_plan.gd:35",
+      "scripts/game/combat_wave_flow.gd:109"
+    ]
+  },
+  "special_encounters": [
+    {
+      "enemy_id": "elite_ram_trail",
+      "enemy_kind": "elite",
+      "chinese_name": "精英冲锋骷髅",
+      "profile_boss_name_field": "裂地重锤",
+      "classification": "强化普通敌人原型，非独立Boss战",
+      "formal_appearances": [
+        {
+          "mode": "endless",
+          "wave": 5,
+          "eligible_after_wave_combat_seconds": 35,
+          "condition": "半程后生成1只"
+        },
+        {
+          "mode": "endless",
+          "wave": 15,
+          "eligible_after_wave_combat_seconds": 8,
+          "condition": "第一只精英；本波精英存活上限2"
+        },
+        {
+          "mode": "endless",
+          "wave": 19,
+          "eligible_after_wave_combat_seconds": 8,
+          "condition": "第一只精英；本波精英存活上限1"
+        }
+      ],
+      "core_mechanisms": [
+        "蓄力直线冲锋、碰撞额外伤害",
+        "冲锋留下红色矩形危险区域，百分比伤害并减速",
+        "冲锋开始时强化场上普通冲锋怪移速",
+        "N3起前摇0.3秒、冲锋速度300；低层0.6秒、250"
+      ],
+      "visual": {
+        "scene": "res://assets/enemies/skullsolider/eliteskull.tscn",
+        "identity": "放大的精英近战骷髅；冲锋预警、拖尾与红色地面危险区"
+      },
+      "sources": [
+        "data/enemies/elite_ram_trail.tres",
+        "scripts/game/combat_wave_plan.gd:35",
+        "scripts/game/combat_wave_flow.gd:77",
+        "scripts/game/combat_wave_flow.gd:109"
+      ]
+    },
+    {
+      "enemy_id": "elite_splitshot",
+      "enemy_kind": "elite",
+      "chinese_name": "精英分裂骷髅",
+      "profile_boss_name_field": "碎幕炮台",
+      "classification": "强化普通敌人原型，非独立Boss战",
+      "formal_appearances": [
+        {
+          "mode": "endless",
+          "wave": 10,
+          "eligible_after_wave_combat_seconds": 8,
+          "condition": "生成1只"
+        },
+        {
+          "mode": "endless",
+          "wave": 15,
+          "eligible_after_wave_combat_seconds": 18,
+          "condition": "第二只精英；距前一次精英成功生成至少10秒，可与第一只共存"
+        },
+        {
+          "mode": "endless",
+          "wave": 19,
+          "eligible_after_wave_combat_seconds": 18,
+          "condition": "距前一次精英成功生成至少10秒，且第一只精英已死；若未死则等待，可能到波末仍不生成"
+        }
+      ],
+      "core_mechanisms": [
+        "五枚扇形主弹",
+        "飞行2秒后各分裂为前后左右四枚子弹",
+        "移动远程压力单位，子弹不再次分裂"
+      ],
+      "visual": {
+        "scene": "res://assets/enemies/skullshot/SkullElite.tscn",
+        "identity": "精英远程骷髅；扇射与十字分裂弹"
+      },
+      "sources": [
+        "data/enemies/elite_splitshot.tres",
+        "scripts/game/combat_wave_plan.gd:35",
+        "scripts/game/combat_wave_flow.gd:77",
+        "scripts/game/combat_wave_flow.gd:109"
+      ]
+    },
+    {
+      "enemy_id": "smallboss_glutton",
+      "enemy_kind": "small_boss",
+      "chinese_name": "幽影树人",
+      "profile_boss_name_field": "幽影树人",
+      "classification": "独立命名Boss战",
+      "formal_appearances": [
+        {
+          "mode": "story",
+          "stage_id": "chapter1_stage2",
+          "eligible_after_stage_combat_seconds": 180,
+          "condition": "计时事件入队，下个调度tick生成；210秒生存通关优先，不要求击杀"
+        },
+        {
+          "mode": "endless",
+          "wave": 6,
+          "eligible_after_wave_combat_seconds": 0,
+          "condition": "本波首个战斗tick尝试生成；击败后才能结束该波"
+        }
+      ],
+      "core_mechanisms": [
+        "吸收附近经验球和红心，成长加速并治疗",
+        "战争践踏、五处缠绕区域、十六处木刺",
+        "可吞噬/伤害附近其他怪物；无尽波6有持续幽影树怪护卫"
+      ],
+      "visual": {
+        "scene": "res://assets/enemies/treeboss/treeboss.tscn",
+        "identity": "独立幽影树人造型，吞噬成长、根须缠绕和木刺"
+      },
+      "sources": [
+        "data/enemies/smallboss_glutton.tres",
+        "scripts/game/combat_wave_plan.gd:35",
+        "scripts/game/combat_wave_flow.gd:77",
+        "scripts/game/combat_wave_flow.gd:109"
+      ]
+    },
+    {
+      "enemy_id": "smallboss_rebirth",
+      "enemy_kind": "small_boss",
+      "chinese_name": "引渡人",
+      "profile_boss_name_field": "引渡人",
+      "classification": "独立命名Boss战",
+      "formal_appearances": [
+        {
+          "mode": "endless",
+          "wave": 11,
+          "eligible_after_wave_combat_seconds": 0,
+          "condition": "本波首个战斗tick尝试生成；复活不算最终击杀"
+        }
+      ],
+      "core_mechanisms": [
+        "巨型冲锋与推挤",
+        "衰老光环持续生命损失",
+        "三角死亡领域、禁疗与减速、补足普通冲锋骷髅",
+        "首次致命伤转墓碑5秒，随后满血复活一次"
+      ],
+      "visual": {
+        "scene": "res://assets/enemies/skulltomb/skulltomb.tscn",
+        "identity": "独立亡灵引渡人造型；三角领域、冲锋军团与墓碑"
+      },
+      "sources": [
+        "data/enemies/smallboss_rebirth.tres",
+        "scripts/game/combat_wave_plan.gd:35",
+        "scripts/game/combat_wave_flow.gd:77",
+        "scripts/game/combat_wave_flow.gd:109"
+      ]
+    },
+    {
+      "enemy_id": "smallboss_turret",
+      "enemy_kind": "small_boss",
+      "chinese_name": "地瑰灵",
+      "profile_boss_name_field": "地瑰灵",
+      "classification": "独立命名Boss战",
+      "formal_appearances": [
+        {
+          "mode": "endless",
+          "wave": 16,
+          "eligible_after_wave_combat_seconds": 0,
+          "condition": "本波首个战斗tick尝试生成"
+        }
+      ],
+      "core_mechanisms": [
+        "固定原地的花形远程Boss",
+        "每轮三发花弹、分裂母球与八向子弹",
+        "召唤玫瑰分身、预警范围轰炸"
+      ],
+      "visual": {
+        "scene": "res://assets/enemies/rose/rose.tscn",
+        "identity": "独立固定花形造型；玫瑰花弹与分身"
+      },
+      "sources": [
+        "data/enemies/smallboss_turret.tres",
+        "scripts/game/combat_wave_plan.gd:35",
+        "scripts/game/combat_wave_flow.gd:77",
+        "scripts/game/combat_wave_flow.gd:109"
+      ]
+    },
+    {
+      "enemy_id": "boss_spellcore",
+      "enemy_kind": "boss",
+      "chinese_name": "被污染的魔法石",
+      "profile_boss_name_field": "被污染的魔法石",
+      "classification": "独立命名Boss战",
+      "formal_appearances": [
+        {
+          "mode": "story",
+          "stage_id": "chapter1_stage3",
+          "eligible_after_stage_combat_seconds": 135,
+          "condition": "计时事件入队，下个调度tick生成；Boss出现后停止普通刷怪，实际击败通关"
+        },
+        {
+          "mode": "endless",
+          "wave": 20,
+          "eligible_after_wave_combat_seconds": 0,
+          "condition": "本波首个战斗tick尝试生成；不自然补普通怪"
+        }
+      ],
+      "core_mechanisms": [
+        "5000初始护盾、三条阶段血",
+        "破盾/转阶段各5秒演出",
+        "基础环形直射、被动牵引、自机弹与主题弹幕",
+        "基础→预告→主题弹幕→残留收尾→9秒瘫痪窗口；后续阶段解锁更多主题"
+      ],
+      "visual": {
+        "scene": "res://assets/enemies/Unas/Unas.tscn",
+        "identity": "当前由Unas素材场景渲染的独立最终Boss；紫色/紫黑色球弹、护盾、激光与引力表现；命名与规则身份为被污染的魔法石"
+      },
+      "sources": [
+        "data/enemies/boss_spellcore.tres",
+        "scripts/game/combat_wave_plan.gd:35",
+        "scripts/game/combat_wave_flow.gd:77",
+        "scripts/game/combat_wave_flow.gd:109"
+      ]
+    }
+  ],
+  "excluded_from_special_music_inventory": [
+    "开发者菜单中任意手动生成组合",
+    "旧按分钟触发的生存精英/Boss时间线（已被无尽20波接管）",
+    "reserved_5角色占位",
+    "tree_seed、shadow_tree_young、rose_minion等衍生物（正式可由父体产生，但非独立精英/Boss身份）"
+  ],
+  "map_verification": {
+    "main_scene_static_children": [
+      "player",
+      "GameBGM"
+    ],
+    "player_scene_contains_static_map": false,
+    "factory_script": "res://scripts/map/map_boundary_view.gd",
+    "factory_child_count": 0,
+    "factory_draws": [
+      "半透明矩形填色",
+      "蓝色边界",
+      "黄色角标"
+    ],
+    "other_static_battle_map_node_found": false,
+    "sources": [
+      "scenes/main.tscn:8",
+      "scenes/player.tscn:8",
+      "scripts/game/game_main_flow.gd:24",
+      "scripts/game/game_map_view_flow.gd:35",
+      "scripts/map/map_boundary_view.gd:15",
+      "scripts/game/game_scene_wiring.gd:16",
+      "project.godot:22"
+    ]
+  }
+}

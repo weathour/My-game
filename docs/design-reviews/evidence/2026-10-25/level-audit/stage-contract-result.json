@@ -1,0 +1,46 @@
+{
+  "engine": "Godot 4.6.2.stable.official.71f334935",
+  "command": "env XDG_DATA_HOME=/tmp/mygame-level-audit-data XDG_CONFIG_HOME=/tmp/mygame-level-audit-config XDG_CACHE_HOME=/tmp/mygame-level-audit-cache /home/weathour/.local/bin/godot-4.6.2 --headless --path . --script /tmp/mygame_level_audit_probe.gd",
+  "exit_code": 0,
+  "scope": "Deterministic contract probe of current static story stage events, HUD remaining time and map factory; not a combat playthrough.",
+  "result": {
+    "map_children": 0,
+    "map_class": "res://scripts/map/map_boundary_view.gd",
+    "stage_contracts": [
+      {
+        "events_at_180": [
+          {
+            "type": "clear_stage"
+          }
+        ],
+        "events_at_300": [
+          {
+            "type": "clear_stage"
+          }
+        ],
+        "hud_remaining_at300": 0.0,
+        "stage": "chapter1_stage1"
+      },
+      {
+        "events_at_180": [
+          {
+            "type": "small_boss"
+          }
+        ],
+        "events_at_300": [
+          {
+            "type": "clear_stage"
+          }
+        ],
+        "hud_remaining_at300": 0.0,
+        "stage": "chapter1_stage2"
+      },
+      {
+        "events_at_180": [],
+        "events_at_300": [],
+        "hud_remaining_at300": 0.0,
+        "stage": "chapter1_stage3"
+      }
+    ]
+  }
+}

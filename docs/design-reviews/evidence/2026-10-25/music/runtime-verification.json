@@ -1,0 +1,81 @@
+{
+  "engine": "Godot 4.6.2",
+  "scope": "original music runtime integration; no gameplay changes",
+  "checks": {
+    "music_context_smoke": {
+      "status": "passed",
+      "log": "music-context-smoke.log",
+      "includes": [
+        "3 story stages",
+        "20 endless wave bases",
+        "all 6 encounter identities in actual spawn scenes",
+        "dual elite priority",
+        "rebirth tomb",
+        "real restored enemy identity before legacy music_position",
+        "phase continuity and complementary gain",
+        "duplicate cue idempotence",
+        "pause and delayed-resume cancellation",
+        "mute and volume across both voices",
+        "native Ogg loop wrap",
+        "native one-shot completion",
+        "scene-exit timer/voice cleanup",
+        "real menu to save-select camp handoff and entry fade"
+      ]
+    },
+    "headless_parse": {
+      "status": "passed",
+      "log": "godot-headless.log"
+    },
+    "x11_playback": {
+      "status": "passed",
+      "log": "music-display-playback.log",
+      "display": "X11",
+      "audio_driver": "Dummy",
+      "test_script": "/tmp/my-game-music-display-check.gd",
+      "note": "Standard production BGM script; no headless override. First cold-render run passed behavior but reported 4 resources at shutdown; verbose recheck completed without resource warnings."
+    },
+    "package": {
+      "status": "passed",
+      "log": "music-package-check.log",
+      "pack": "/tmp/my-game-music-final.pck",
+      "bytes": 206701732,
+      "sha256": "5177955526ce0ff39b65e21b99cffa9382202e3eafcc6d96597ee85c8917da25",
+      "working_directory": "/tmp",
+      "note": "Pack loaded outside repository so excluded files cannot fall back to local res:// files; all 14 new cues load and 4 old cues do not."
+    },
+    "asset_import_export": {
+      "status": "completed with editor shutdown diagnostics",
+      "import_log": "music-import.log",
+      "export_log": "music-export.log",
+      "note": "Both commands exited 0; editor shutdown reported ObjectDB instances and 5 resources still in use, not attributed by this task. Runtime headless and package checks were clean."
+    },
+    "related_smokes": [
+      "system_feedback: passed",
+      "menu_ui: passed",
+      "developer_scene_integration: passed",
+      "story_lifecycle: passed with ObjectDB shutdown warning",
+      "combat_wave_flow: passed",
+      "combat_wave_blessing: passed",
+      "enemy_rebirth: passed after correcting existing TargetStub optional source_id signature"
+    ],
+    "static_checks": [
+      "check_docs_links.py passed",
+      "check_project_config.py passed",
+      "check_architecture_contract.py passed",
+      "git diff --check passed"
+    ]
+  },
+  "not_claimed": [
+    "No speaker/headphone listening judgment from Dummy audio driver",
+    "No full-project check or Graphify update in this worker; main agent owns them",
+    "No license audit of unrelated assets"
+  ],
+  "root_final_checks": {
+    "full_project_check": "failed at developer_catalog_smoke; same 3 assertions as baseline 2026-10-23; see full-project-check.log",
+    "required_headless": "passed; final-headless.log",
+    "audio_delivery": "14 of 14 hash/MIDI/project/loop checks passed",
+    "graphify": "required update executed, new GDScript absent; prior 5094-node graph restored and marked stale",
+    "docs_links": "passed",
+    "git_diff_check": "passed"
+  }
+}

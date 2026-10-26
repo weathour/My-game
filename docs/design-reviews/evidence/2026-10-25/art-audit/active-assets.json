@@ -1,0 +1,285 @@
+{
+  "scope_note": "Selected, directly bound examples only; not a complete scan of dynamic resource loads. PNG counts are not runtime-use counts.",
+  "assets": [
+    {
+      "label": "主菜单 / Main menu",
+      "path": "assets/demo2.png",
+      "source_binding": "scripts/main_menu.gd:6,29-34",
+      "source_dimensions_px": "1672x941",
+      "frame_layout_or_runtime_scale": "单张背景；TextureRect 全屏拉伸",
+      "runtime_use": "用途：主菜单背景；运行缩放随窗口改变，STRETCH_SCALE",
+      "rights_status": "THIRD_PARTY_NOTICES.md:24-33 将其列为原型素材，来源/发行授权待核验。",
+      "file_exists": true
+    },
+    {
+      "label": "故事营地 / Story camp",
+      "path": "assets/story/communications_camp.png",
+      "source_binding": "scripts/ui/story/story_visuals.gd:10-25",
+      "source_dimensions_px": "1672x941",
+      "frame_layout_or_runtime_scale": "单张背景；对话地点使用原图裁切",
+      "runtime_use": "用途：故事准备/阅读底图；KEEP_ASPECT_COVERED",
+      "rights_status": "THIRD_PARTY_NOTICES.md:55-59：项目内生成，提示词见 design/story-20261025/README.md。",
+      "file_exists": true
+    },
+    {
+      "label": "营地地面 / Camp ground atlas",
+      "path": "assets/Tiny Swords/Tiny Swords (Update 010)/Terrain/Ground/Tilemap_Flat.png",
+      "source_binding": "scripts/camp/camp_environment.gd:3,50-66",
+      "source_dimensions_px": "640x256",
+      "frame_layout_or_runtime_scale": "按 64x64 源区域绘制；地砖图集",
+      "runtime_use": "用途：营地地面与道路；绘制尺寸 64x64 世界单位",
+      "rights_status": "THIRD_PARTY_NOTICES.md 未列明该素材包；来源与许可待核验。",
+      "file_exists": true
+    },
+    {
+      "label": "营地树 / Camp tree",
+      "path": "assets/Tiny Swords (Free Pack)/Terrain/Resources/Wood/Trees/Tree1.png",
+      "source_binding": "scripts/camp/camp_environment.gd:4,26-33",
+      "source_dimensions_px": "1536x256",
+      "frame_layout_or_runtime_scale": "hframes=8，使用 frame 0，scale 0.72",
+      "runtime_use": "用途：营地装饰",
+      "rights_status": "THIRD_PARTY_NOTICES.md 未列明该素材包；来源与许可待核验。",
+      "file_exists": true
+    },
+    {
+      "label": "剑士 / Swordsman · idle",
+      "path": "assets/players/sword/剑-idle.png",
+      "source_binding": "scripts/player/player_visual_state.gd:5-7; assets/players/sword/sword.tscn:3, region definitions",
+      "source_dimensions_px": "1024x768",
+      "frame_layout_or_runtime_scale": "4列x3行，每格256x256；角色场景外层scale 1.0",
+      "runtime_use": "用途：剑士待机动画；攻击/跑步另用同场景绑定帧表",
+      "rights_status": "THIRD_PARTY_NOTICES.md:24-33 将 effects/enemies 列为待核验，但未逐项标记玩家角色；来源/许可未知。",
+      "file_exists": true
+    },
+    {
+      "label": "剑士 / Swordsman · run",
+      "path": "assets/players/sword/剑-run.png",
+      "source_binding": "assets/players/sword/sword.tscn:4 and AtlasTexture regions",
+      "source_dimensions_px": "1536x128",
+      "frame_layout_or_runtime_scale": "12列，每格128x128；外层scale 1.0",
+      "runtime_use": "用途：剑士移动动画",
+      "rights_status": "玩家角色素材来源/许可待核验。",
+      "file_exists": true
+    },
+    {
+      "label": "枪手 / Gunner · idle",
+      "path": "assets/players/gun/gun-idle.png",
+      "source_binding": "assets/players/gun/gun.tscn:3,11-15; scripts/player/player_visual_state.gd:8-10",
+      "source_dimensions_px": "1536x128",
+      "frame_layout_or_runtime_scale": "12列，每格128x128；内层sprite scale 0.62x2.2=1.364，外层1.0",
+      "runtime_use": "用途：枪手待机动画；帧中角色在128方格内占比偏小，需按战斗尺寸复核",
+      "rights_status": "玩家角色素材来源/许可待核验。",
+      "file_exists": true
+    },
+    {
+      "label": "枪手 / Gunner · run",
+      "path": "assets/players/gun/gun-run.png",
+      "source_binding": "assets/players/gun/gun.tscn:4,11-15",
+      "source_dimensions_px": "1536x128",
+      "frame_layout_or_runtime_scale": "12列，每格128x128；内层sprite scale约1.364，外层1.0",
+      "runtime_use": "用途：枪手移动动画",
+      "rights_status": "玩家角色素材来源/许可待核验。",
+      "file_exists": true
+    },
+    {
+      "label": "法师 / Mage · idle",
+      "path": "assets/players/wizard/wizard-idle.png",
+      "source_binding": "assets/players/wizard/wizard.tscn:3, frame regions; scripts/player/player_visual_state.gd:11-13",
+      "source_dimensions_px": "2940x138",
+      "frame_layout_or_runtime_scale": "12列，每格245x138；外层scale 1.7，基准偏移(0,-8)",
+      "runtime_use": "用途：法师待机动画",
+      "rights_status": "玩家角色素材来源/许可待核验。",
+      "file_exists": true
+    },
+    {
+      "label": "法师 / Mage · run",
+      "path": "assets/players/wizard/wizard-run.png",
+      "source_binding": "assets/players/wizard/wizard.tscn:4, frame regions",
+      "source_dimensions_px": "1024x768",
+      "frame_layout_or_runtime_scale": "4列x3行，每格256x256；外层scale 1.7",
+      "runtime_use": "用途：法师移动动画",
+      "rights_status": "玩家角色素材来源/许可待核验。",
+      "file_exists": true
+    },
+    {
+      "label": "机械师 / Mechanic · idle",
+      "path": "assets/players/mechanic/mechanic-idle.png",
+      "source_binding": "assets/players/mechanic/mechanic_visual.gd; scripts/player/player_visual_state.gd:14-16",
+      "source_dimensions_px": "384x96",
+      "frame_layout_or_runtime_scale": "4帧横排，每格96x96；外层scale 1.1",
+      "runtime_use": "用途：机械师待机；另有跑步、操作状态",
+      "rights_status": "THIRD_PARTY_NOTICES.md:35-39：项目内生成，但设计明确受 Rance IX 玛利亚参考影响；发行设计权属未独立清理。",
+      "file_exists": true
+    },
+    {
+      "label": "机械师 / Mechanic · run",
+      "path": "assets/players/mechanic/mechanic-run.png",
+      "source_binding": "assets/players/mechanic/mechanic_visual.gd; scripts/player/player_visual_state.gd:14-16",
+      "source_dimensions_px": "768x96",
+      "frame_layout_or_runtime_scale": "8帧横排，每格96x96；外层scale 1.1",
+      "runtime_use": "用途：机械师移动动画",
+      "rights_status": "同机械师美术：参考衍生设计需权属复核。",
+      "file_exists": true
+    },
+    {
+      "label": "普通敌人蘑菇 / Chaser mushroom",
+      "path": "assets/enemies/Mushroom/Mushroom-Idle.png",
+      "source_binding": "data/enemies/chaser.tres:4 -> assets/enemies/Mushroom/mushroom.tscn -> assets/enemies/Mushroom/mushroom_visual.gd:3-9,83-85",
+      "source_dimensions_px": "560x64",
+      "frame_layout_or_runtime_scale": "7帧横排，每格80x64；视觉缩放1.26",
+      "runtime_use": "用途：追击普通敌人",
+      "rights_status": "THIRD_PARTY_NOTICES.md:24-33 将 enemies 列为原型素材，逐项来源/许可待核验。",
+      "file_exists": true
+    },
+    {
+      "label": "普通敌人史莱姆 / Runner slime",
+      "path": "assets/enemies/slime/Monster_Slime_Walk-Sheet.png",
+      "source_binding": "data/enemies/runner.tres:4 -> assets/enemies/slime/Slime.tscn; assets/enemies/slime/slime_visual.gd:5",
+      "source_dimensions_px": "768x96",
+      "frame_layout_or_runtime_scale": "8帧横排，每格96x96；视觉缩放2.0",
+      "runtime_use": "用途：快速接近的普通敌人",
+      "rights_status": "同敌人原型素材：来源/许可待核验。",
+      "file_exists": true
+    },
+    {
+      "label": "普通敌人骷髅 / Shooter skeleton",
+      "path": "assets/enemies/skullshot/skull小兵.png",
+      "source_binding": "data/enemies/shooter.tres:4 -> assets/enemies/skullshot/skull-soilder.tscn:3-4",
+      "source_dimensions_px": "1024x128",
+      "frame_layout_or_runtime_scale": "8帧横排，每格128x128；未核实 profile 最终缩放",
+      "runtime_use": "用途：远程射击普通敌人",
+      "rights_status": "同敌人原型素材：来源/许可待核验。",
+      "file_exists": true
+    },
+    {
+      "label": "小Boss幽影树人 / Shadow tree boss",
+      "path": "assets/enemies/treeboss/tree-walk.png",
+      "source_binding": "data/enemies/smallboss_glutton.tres:4 -> assets/enemies/treeboss/treeboss.tscn; assets/enemies/treeboss/treeboss_visual.gd:6",
+      "source_dimensions_px": "1024x768",
+      "frame_layout_or_runtime_scale": "帧表按场景配置；场景精灵缩放0.48，不能据此推定碰撞/最终呈现边界",
+      "runtime_use": "用途：小Boss幽影树人",
+      "rights_status": "同敌人原型素材：来源/许可待核验。",
+      "file_exists": true
+    },
+    {
+      "label": "终局Boss / Unas boss",
+      "path": "assets/enemies/Unas/UnasFloat.png",
+      "source_binding": "scripts/enemies/enemy_boss_visuals.gd:3 -> assets/enemies/Unas/Unas.tscn:3,9-12; assets/enemies/Unas/unas_boss_visual.gd:5",
+      "source_dimensions_px": "4096x640",
+      "frame_layout_or_runtime_scale": "8帧横排，每格512x640；精灵缩放0.46",
+      "runtime_use": "用途：Boss视觉",
+      "rights_status": "同敌人原型素材：来源/许可待核验。",
+      "file_exists": true
+    },
+    {
+      "label": "法师轰炸预警 / Mage bombard warning",
+      "path": "effects/wizard/warning/1.png",
+      "source_binding": "scripts/player.gd:95-98 -> effects/wizard/warning/warning.tscn",
+      "source_dimensions_px": "256x256",
+      "frame_layout_or_runtime_scale": "warning场景含5张序列帧；单帧256方形；运行缩放依攻击等级变化，未在本记录全查",
+      "runtime_use": "用途：法师范围轰炸落点预警",
+      "rights_status": "THIRD_PARTY_NOTICES.md:24-33 将 effects 列为原型素材，来源/许可待核验。",
+      "file_exists": true
+    },
+    {
+      "label": "剑士斩击 / Swordsman slash",
+      "path": "effects/sword/slash3/1.png",
+      "source_binding": "scripts/player.gd:89 -> effects/sword/slash3/slasheffect3.tscn",
+      "source_dimensions_px": "256x256",
+      "frame_layout_or_runtime_scale": "序列帧；显示尺寸由斩击参数缩放，docs/07:27-32要求跟判定范围一致",
+      "runtime_use": "用途：剑士普攻刀光",
+      "rights_status": "同特效原型素材：来源/许可待核验。",
+      "file_exists": true
+    },
+    {
+      "label": "枪手子弹 / Gunner bullet",
+      "path": "effects/gun/bullet/1.png",
+      "source_binding": "scripts/player.gd:245 -> effects/gun/bullet/bullet.tscn; scripts/player/player_projectile_batch.gd:13-19",
+      "source_dimensions_px": "1024x1024",
+      "frame_layout_or_runtime_scale": "图集帧布局需以 bullet.tscn 为准；运行缩放未知",
+      "runtime_use": "用途：枪手弹道精灵动画",
+      "rights_status": "同特效原型素材：来源/许可待核验。",
+      "file_exists": true
+    },
+    {
+      "label": "机械师终极预警 / Mechanic ultimate warning",
+      "path": "effects/mechanic/ult_warning/1.png",
+      "source_binding": "scripts/player/roles/mechanic_role.gd:8-11",
+      "source_dimensions_px": "256x256",
+      "frame_layout_or_runtime_scale": "3帧，每帧256方形；源自64x64序列放大4倍；半径常量99.8",
+      "runtime_use": "用途：机械师齐射落点预警，按规范对应伤害范围",
+      "rights_status": "THIRD_PARTY_NOTICES.md:35-39：项目内生成并可追溯导入；与机械师参考衍生设计一并复核。",
+      "file_exists": true
+    },
+    {
+      "label": "机械师终极爆炸 / Mechanic ultimate burst",
+      "path": "effects/mechanic/ult_explosion/1.png",
+      "source_binding": "scripts/player/roles/mechanic_role.gd:13-21",
+      "source_dimensions_px": "256x256",
+      "frame_layout_or_runtime_scale": "7帧，每帧256方形；源自64x64序列放大4倍；半径常量123.8",
+      "runtime_use": "用途：机械师齐射爆炸表现",
+      "rights_status": "同机械师资产来源状态。",
+      "file_exists": true
+    },
+    {
+      "label": "营地房屋 / Camp house",
+      "path": "assets/Tiny Swords (Free Pack)/Buildings/Yellow Buildings/House1.png",
+      "source_binding": "scenes/endless_camp.tscn:12; node texture binding below ext resources",
+      "source_dimensions_px": "128x192",
+      "frame_layout_or_runtime_scale": "单张建筑图；场景实例显示缩放请看该场景节点变换，本表未抄录",
+      "runtime_use": "营地建筑",
+      "rights_status": "THIRD_PARTY_NOTICES.md 未列明 Tiny Swords 资产包；来源与许可待核验。",
+      "file_exists": true
+    },
+    {
+      "label": "营地修道院 / Camp monastery",
+      "path": "assets/Tiny Swords (Free Pack)/Buildings/Blue Buildings/Monastery.png",
+      "source_binding": "scenes/endless_camp.tscn:13; node texture binding below ext resources",
+      "source_dimensions_px": "192x320",
+      "frame_layout_or_runtime_scale": "单张建筑图；场景实例显示缩放本表未核实",
+      "runtime_use": "营地建筑",
+      "rights_status": "THIRD_PARTY_NOTICES.md 未列明 Tiny Swords 资产包；来源与许可待核验。",
+      "file_exists": true
+    },
+    {
+      "label": "营地箭术场 / Camp archery",
+      "path": "assets/Tiny Swords (Free Pack)/Buildings/Yellow Buildings/Archery.png",
+      "source_binding": "scenes/endless_camp.tscn:14; node texture binding below ext resources",
+      "source_dimensions_px": "192x256",
+      "frame_layout_or_runtime_scale": "单张建筑图；场景实例显示缩放本表未核实",
+      "runtime_use": "营地建筑",
+      "rights_status": "THIRD_PARTY_NOTICES.md 未列明 Tiny Swords 资产包；来源与许可待核验。",
+      "file_exists": true
+    },
+    {
+      "label": "营地房屋 / Camp house 2",
+      "path": "assets/Tiny Swords (Free Pack)/Buildings/Yellow Buildings/House3.png",
+      "source_binding": "scenes/endless_camp.tscn:15; node texture binding below ext resources",
+      "source_dimensions_px": "128x192",
+      "frame_layout_or_runtime_scale": "单张建筑图；场景实例显示缩放本表未核实",
+      "runtime_use": "营地建筑",
+      "rights_status": "THIRD_PARTY_NOTICES.md 未列明 Tiny Swords 资产包；来源与许可待核验。",
+      "file_exists": true
+    },
+    {
+      "label": "营地芦灌木 / Camp bush",
+      "path": "assets/Tiny Swords (Free Pack)/Terrain/Decorations/Bushes/Bushe1.png",
+      "source_binding": "scripts/camp/camp_environment.gd:5,34-39",
+      "source_dimensions_px": "1024x128",
+      "frame_layout_or_runtime_scale": "hframes=8，scale=0.7",
+      "runtime_use": "营地装饰",
+      "rights_status": "THIRD_PARTY_NOTICES.md 未列明 Tiny Swords 资产包；来源与许可待核验。",
+      "file_exists": true
+    },
+    {
+      "label": "营地石块 / Camp rock",
+      "path": "assets/Tiny Swords (Free Pack)/Terrain/Decorations/Rocks/Rock1.png",
+      "source_binding": "scripts/camp/camp_environment.gd:6,41-45",
+      "source_dimensions_px": "64x64",
+      "frame_layout_or_runtime_scale": "单张图，scale=0.65",
+      "runtime_use": "营地装饰",
+      "rights_status": "THIRD_PARTY_NOTICES.md 未列明 Tiny Swords 资产包；来源与许可待核验。",
+      "file_exists": true
+    }
+  ]
+}

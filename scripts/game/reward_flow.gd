@@ -178,6 +178,7 @@ static func finish_story_stage(main: Node) -> void:
 		main.suppress_exit_save = true
 		main.GAME_SESSION_FLOW.reset_game_speed(main)
 		STATE.clear_pause_reasons(main)
+		preload("res://scripts/audio/music_catalog.gd").arrival_cue = "victory"
 		main.get_tree().change_scene_to_file(STORY_PREP_SCENE_PATH)
 	else:
 		main.reward_context = "story_settlement"

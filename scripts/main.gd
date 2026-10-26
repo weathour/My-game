@@ -285,6 +285,9 @@ func _get_spawn_enemy_speed_multiplier() -> float:
 func _get_spawn_enemy_damage_multiplier() -> float:
 	return _get_difficulty_enemy_damage_multiplier()
 
+func get_session_presentation() -> Dictionary:
+	return preload("res://scripts/game/session_state.gd").presentation(self)
+
 func _get_game_bgm():
 	return GAME_SESSION_FLOW.get_game_bgm(self)
 

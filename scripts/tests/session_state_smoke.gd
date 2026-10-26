@@ -94,7 +94,36 @@ func run():
 	check(STATE.presentation(main).outcome == "victory", "result identity is independent of reward menu strings")
 	STATE.clear_pause_reasons(main)
 	main.free()
+	await check_configured_lifecycle()
 	finish()
+
+func check_configured_lifecycle():
+	MODE.activate()
+	var game = load("res://scenes/main.tscn").instantiate()
+	game.process_mode = Node.PROCESS_MODE_DISABLED
+	root.add_child(game)
+	current_scene = game
+	var source = game.ENEMY_SPAWN_FLOW.spawn_special_enemy_with_archetype(game, "boss", "boss_spellcore")
+	var saved: Dictionary = source.get_save_data()
+	saved.boss_phase = 2
+	source.free()
+	var music = game.get_node("GameBGM")
+	var restored = game.enemy_scene.instantiate()
+	game.add_child(restored)
+	check(not restored.runtime_configuration_complete and restored not in music._encounters, "entering the tree does not announce an unconfigured restored enemy")
+	var announcements: Array = []
+	restored.runtime_configured.connect(func(): announcements.append([restored.archetype_id, restored.boss_phase]))
+	check(restored.apply_save_data(saved, game.player), "real enemy hydrate reports success")
+	check(announcements == [["boss_spellcore", 2]] and restored in music._encounters and music.current_cue == "boss_spellcore_2", "configured event exposes final restored identity and phase exactly once")
+	check(not restored.apply_save_data({"position": [1]}, game.player), "invalid direct enemy hydrate reports failure")
+	check(not restored.runtime_configuration_complete and announcements.size() == 1, "failed hydrate does not announce configuration completion")
+	music.refresh_context()
+	check(music.current_cue == "stage_frontpost", "observer ignores an incomplete cached identity")
+	game.suppress_exit_save = true
+	game.free()
+	current_scene = null
+	MODE.deactivate()
+	await process_frame
 
 func finish():
 	for message in failures:

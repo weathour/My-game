@@ -8,7 +8,7 @@ This file tracks bundled assets/plugins and their release readiness.
 - Purpose: editor/MCP tooling for local development.
 - Release note: verify whether this addon should be included in exported builds. If not needed at runtime, disable/remove it for release builds.
 
-## Placeholder audio
+## Retained, unused placeholder audio
 
 Current files:
 
@@ -17,9 +17,9 @@ Current files:
 - `assets/menu_bgm.mp3`
 - `assets/menu_bgm.ogg`
 
-Status: development placeholder / non-commercial testing material unless explicit license evidence is added later.
+Status: no longer referenced by runtime scenes; explicitly excluded by `export_presets.cfg`. Retained source files still have no added license evidence.
 
-Release requirement: replace or document license before public/commercial distribution.
+Do not redistribute these retained files, including in a public source archive, without replacement or explicit license evidence. The new music does not retroactively license them.
 
 ## Prototype images/sketches
 
@@ -44,3 +44,25 @@ Status: prototype material. Verify source and usage rights before public/commerc
 - Source: [Husky Sprites](https://opengameart.org/content/husky-sprites) by Hellkipz, based on work by Shepardskin.
 - License: CC0 1.0 Universal.
 - Usage: the original PNG is bundled unchanged; `scenes/endless_camp.tscn` selects one sitting-idle frame with `AtlasTexture` for the camp sprite and dialogue portrait.
+
+## Shared UI tones and export boundary (2026-10-23)
+
+- `scripts/ui/ui_audio.gd` generates short sine tones in code; it introduces no sampled third-party audio. These are development feedback cues, not finished combat sound design.
+- `export_presets.cfg` excludes development tools, tests, archives, docs and design artifacts, and explicitly includes runtime story/achievement JSON.
+- `SurvivorsUITheme` still uses system-font fallback. Verify Chinese text on each target OS; no new font redistribution license is implied.
+- A successful local PCK export does not clear retained placeholder files, prototype images/effects or reference-derived character artwork listed above. Other asset-rights review/replacement remains necessary for public distribution.
+
+## Story communications camp (2026-10-25)
+
+- Runtime path: `assets/story/communications_camp.png`.
+- Source: original scene generated with the built-in ImageGen tool for this project. Full prompt and generation provenance are retained in `design/story-20261025/README.md`.
+- The story UI uses crops of this same image; no Narcissu or To the Moon screenshots, dialogue, character art or soundtrack were copied into the runtime.
+
+## Original game score (2026-10-25)
+
+- Runtime: 14 Ogg Vorbis files in `assets/music/`; 12 loops and 2 non-looping result cues. This replaces the previous runtime BGM.
+- Composition: original note-level themes and arrangements written by the primary coding assistant for this project. Bach-style independent voices and Touhou-style melodic battle energy are references to methods; no songs, recordings or MIDI from those works were imported. No dialogue voice or voice clone was produced.
+- Authoring: REAPER 7.83 Linux with its bundled Synthy McSynthface (MDA piano), Major General MIDI (Sonivox EAS), and Zita-Rev1-port reverb. The Sonivox engine/bank is identified as Apache-2.0 in the bundled source; the JSFX ports identify GPLv3+ licensing. The repository contains rendered performances, scores and project settings, not redistributed plugin implementations or sound banks.
+- Provenance, software sources, license context, exact reproduction steps and limitations: [soundtrack production record](design/music-20261025/README.md). Full source scores, MIDI, REAPER projects, 24-bit FLAC masters and per-file hashes are retained there.
+- REAPER was used under its official 60-day evaluation; continued DAW use beyond that period requires the appropriate license. The exported game does not depend on REAPER or its trial period.
+- Technical audio checks do not establish human artistic approval or clear unrelated visual assets.

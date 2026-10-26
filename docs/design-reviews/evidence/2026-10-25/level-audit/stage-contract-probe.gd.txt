@@ -1,0 +1,30 @@
+extends SceneTree
+const STORY = preload("res://scripts/story_data.gd")
+const DIRECTOR = preload("res://scripts/enemy/enemy_director.gd")
+const HUD_FLOW = preload("res://scripts/game/game_hud_flow.gd")
+const MAP_FLOW = preload("res://scripts/game/game_map_view_flow.gd")
+class State extends Node:
+    var wave_flow = null
+    var story_mode_active = true
+    var story_stage: Dictionary
+    var survival_time: float
+func _initialize() -> void:
+    var rows: Array = []
+    for i in range(3):
+        var stage: Dictionary = STORY.get_stage(i)
+        var state = State.new()
+        state.story_stage = stage
+        state.survival_time = 300.0
+        var at180 = DIRECTOR.collect_stage_events(180.0, DIRECTOR.get_default_elite_spawn_times(), 0, DIRECTOR.get_default_small_boss_spawn_times(), 0, i == 2, float(stage.boss_spawn_time), false, stage, true, false)
+        var at300 = DIRECTOR.collect_stage_events(300.0, DIRECTOR.get_default_elite_spawn_times(), 0, DIRECTOR.get_default_small_boss_spawn_times(), 0, i == 2, float(stage.boss_spawn_time), false, stage, true, false)
+        rows.append({"stage": stage.id, "events_at_180": at180, "events_at_300": at300, "hud_remaining_at300": HUD_FLOW._get_wave_remaining_time(state)})
+        state.free()
+    var map = MAP_FLOW.create_battle_map_view()
+    var output = {"stage_contracts": rows, "map_class": str(map.get_script().resource_path), "map_children": map.get_child_count()}
+    assert(rows[0].events_at_180 == [{"type":"clear_stage"}])
+    assert(rows[1].events_at_180 == [{"type":"small_boss"}])
+    assert(rows[2].events_at_300.is_empty())
+    assert(rows[2].hud_remaining_at300 == 0.0)
+    print(JSON.stringify(output))
+    map.free()
+    quit(0)

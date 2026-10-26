@@ -23,7 +23,8 @@ func _ready() -> void:
 
 func _build_ui() -> void:
 	for child in get_children():
-		child.queue_free()
+		if child.name != "MenuBGM":
+			child.queue_free()
 	delete_confirm_dialog = null
 
 	var background := ColorRect.new()

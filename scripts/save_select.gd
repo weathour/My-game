@@ -16,7 +16,8 @@ func _ready() -> void:
 
 func _build_ui() -> void:
 	for child in get_children():
-		child.queue_free()
+		if child.name != "MenuBGM":
+			child.queue_free()
 
 	var background := ColorRect.new()
 	background.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
