@@ -1,0 +1,53 @@
+{
+	"benchmark": "dense_combat_headless_smoke",
+	"cpu_sampling_limitation": "Headless smoke records a CPU/core artifact placeholder; graphical profiling should attach pidstat/top -H output for release evidence.",
+	"duration_seconds": 2.5,
+	"entity_targets": {
+		"enemies": 40,
+		"enemy_projectiles": 96,
+		"exp_gems": 96,
+		"heart_pickups": 24
+	},
+	"feature_flags": {
+		"disable_autosave": false,
+		"enemy_batch": true,
+		"enemy_projectile_batch": true,
+		"pickup_batch": true
+	},
+	"frame_time": {
+		"avg_ms": 7.35886666666666,
+		"count": 150,
+		"max_ms": 9.943,
+		"p50_ms": 6.8,
+		"p95_ms": 9.943,
+		"p99_ms": 9.943
+	},
+	"frames": 150,
+	"gameplay_counters": {
+		"damage_taken": 64.0,
+		"duplicate_tick_failures": 0,
+		"enemy_count": 40,
+		"enemy_projectile_count": 0,
+		"pickup_count": 120,
+		"pickup_value": 984,
+		"pooled_reactivations": 0,
+		"projectile_hits": 8
+	},
+	"label": "candidate",
+	"recorder": {
+		"avg_ms": 7.35886666666666,
+		"count": 150,
+		"label": "candidate",
+		"max_ms": 9.943,
+		"p50_ms": 6.8,
+		"p95_ms": 9.943,
+		"p99_ms": 9.943,
+		"scope_peaks_ms": {
+
+		},
+		"scope_totals_ms": {
+
+		}
+	},
+	"seed": 20260519
+}

@@ -4,7 +4,7 @@ This roadmap tracks direction, not release dates. For implemented behavior and c
 
 ## Now: finish the current progression
 
-- Keep the playable route explicit: ordinary four-card/select-two rewards offer skill unlocks and skill-level upgrades; skill level 5 queues a two-slot choice and level 10 grants the other slot.
+- Keep the playable route explicit: independent role skill points upgrade existing icons or open a three-option unlock; wave blessings are free; skill level 5 queues a two-slot choice and level 10 grants the other slot.
 - Validate the implemented growth of all four roles in full runs. Mechanic now has eight growth lines, numeric previews and independent entry/active turret sources; keep its summon density and high-tier balance under review.
 - Design actual skill-slot effects for swordsman, gunner and mage. Mechanic's 16 effects are implemented, including their selection UI and save regression; balance tuning was explicitly excluded from that task.
 - Keep player-level talent acquisition disabled until redesigned. Preserve saved `level_talents`, their effects and the character sheet's read-only list.
@@ -29,10 +29,10 @@ This roadmap tracks direction, not release dates. For implemented behavior and c
 - Keep dense-combat and autosave optimization evidence-driven through existing benchmarks, evaluators, traces and feature flags. A getter microbenchmark is not an overall frame-rate claim.
 - Clarify elite and Boss reward identity through existing reward modules before adding reward types.
 
-## Later: story and release
+## Story framework delivered; release follow-up
 
-- Keep the story on a fixed route with dialogue and replayable cleared maps; do not add branching room selection.
+- The first chapter now has saved dialogue, tasks, delivery, records and practice replays on the fixed three-stage route. Follow the current [implementation record](docs/implementation/2026-10-23_系统框架实施.md) for acceptance and remaining work.
 - Keep the implemented camp loop coherent: permanent items survive return, separate per-copy buy/refund actions, four-role residents, ordered team preparation and loadout confirmation. The blacksmith reuses the equipment filter of the existing shop. Defer elaborate facilities, crafting trees and new camp currencies.
-- Replace placeholder or non-commercial media, finalize licensing, add export checks and build the missing combat SFX system.
+- Replace placeholder or non-commercial media, finalize licensing, verify standalone exports and create the remaining combat SFX. Development PCK checks and common UI/result tones are implemented.
 - Keep achievements local until platform integration; use the existing `AchievementService` boundary for Steam.
 - Do not restore retired three-in-one blessings, all-team role traits, pre-equipped skill loadouts, the seven-second switch cooldown or the old talent tree as incidental cleanup.

@@ -1,0 +1,30 @@
+Check logs: /home/weathour/programs/desktop-projects/My-game/docs/implementation/evidence/2026-10-25/architecture/project-check
+== Python project checks ==
+DOC_LINK_CHECK_OK
+ACHIEVEMENT_CHECK_OK 6 achievements
+PROJECT_CONFIG_CHECK_OK
+ARCHITECTURE_CONTRACT_SELF_TEST_OK
+{"graph_update_accepted": false, "reason": "exit=0; missing 1 runtime GDScript files", "missing": ["scripts/new.gd"]}
+GRAPHIFY_UPDATE_REJECTED: exit=0; missing 1 runtime GDScript files
+{"graph_update_accepted": true, "reason": "exit=0; missing 0 runtime GDScript files", "missing": []}
+GRAPH_UPDATE_SELF_TEST_OK
+ARCHITECTURE_CONTRACT_CHECK_OK
+{
+  "status": "STORY_CONTENT_CHECK_OK",
+  "scope": "runtime_content_structure_reachability_and_item_budget",
+  "stages": 3,
+  "quests": 3,
+  "speakers": 6,
+  "items": 3,
+  "dialogues": 13,
+  "dialogue_nodes": 29,
+  "unique_reward_receipts": 6,
+  "quest_order": [
+    "q.c1.outpost",
+    "q.c1.rift",
+    "q.c1.core"
+  ]
+}
+== Godot asset import ==
+ERROR: 5 resources still in use at exit (run with --verbose for details).
+GODOT_ASSET_IMPORT_FAILED

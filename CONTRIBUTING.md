@@ -18,6 +18,10 @@ Run the one-command project check before reporting completion or opening a pull 
 
 This runs Markdown links, achievement JSON, project config and architecture checks, Godot import and scene checks, all smoke tests except the separate dense-combat benchmark, and the existing Graphify index update when available. Pixel checks (`*_render_smoke.gd`) use OpenGL and require a display; other smoke tests run headless. On a Linux server, install Xvfb and Mesa and run `xvfb-run --auto-servernum ./scripts/check_project.sh`, as CI does.
 
+Godot is required: a missing binary or an import-time script error fails the check. Each smoke has its own player-data/settings directory, so earlier tests cannot change later inputs. Set `PROJECT_CHECK_LOG_DIR` to retain logs at a chosen path. A smoke must exit successfully, print its success marker and contain no script/engine errors. Do not treat an `OK` line followed by errors as passing.
+
+The graph update is navigation tooling, separate from the runtime gate. `scripts/tools/update_existing_graph.py` runs `graphify update .` only for an existing index, and rejects/rolls back candidates missing runtime GDScript coverage. `GRAPHIFY_UPDATE_REJECTED` means the retained graph is stale; consult current source and `docs/08_当前实现状态与后续重点.md`. Restoring Graphify's missing Godot extractor is separate tooling work.
+
 ## Change rules
 
 1. Keep gameplay behavior stable unless the task explicitly changes it.

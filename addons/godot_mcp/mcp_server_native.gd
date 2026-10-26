@@ -208,8 +208,11 @@ func _enter_tree() -> void:
 func _exit_tree() -> void:
 	_log_info("Godot Native MCP Plugin exiting tree...")
 	
-	if _native_server and _native_server.is_running():
-		_native_server.stop()
+	if _native_server:
+		_native_server.cleanup()
+	_tool_instances.clear()
+	if Engine.get_meta("GodotMCPPlugin", null) == self:
+		Engine.remove_meta("GodotMCPPlugin")
 	
 	if _main_panel:
 		EditorInterface.get_editor_main_screen().remove_child(_main_panel)

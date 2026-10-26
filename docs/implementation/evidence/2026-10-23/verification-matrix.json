@@ -1,0 +1,1373 @@
+{
+  "baseline": "9c1472e429af1168ec8e75f4c9adc980427a9235",
+  "total": 165,
+  "initial_passed": 138,
+  "final_passed": 143,
+  "remaining_failed": 22,
+  "method": "initial scan plus targeted rechecks; not a single all-green run",
+  "baseline_comparison": "all remaining failures reproduced on untouched baseline",
+  "results": [
+    {
+      "name": "ability_talent_snapshot_save_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 1.4,
+      "log": "final-checks/ability_talent_snapshot_save_smoke.log",
+      "pass_kind": "targeted_recheck"
+    },
+    {
+      "name": "achievement_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.27,
+      "log": "all-smokes/achievement_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "armor_rules_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.26,
+      "log": "all-smokes/armor_rules_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "blade_storm_build_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 1.85,
+      "log": "final-checks/blade_storm_build_smoke.log",
+      "pass_kind": "targeted_recheck"
+    },
+    {
+      "name": "bone_pickup_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.65,
+      "log": "final-checks/bone_pickup_smoke.log",
+      "pass_kind": "targeted_recheck"
+    },
+    {
+      "name": "boss_danmaku_completion_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 1.38,
+      "log": "all-smokes/boss_danmaku_completion_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "boss_danmaku_render_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 15.66,
+      "log": "all-smokes/boss_danmaku_render_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "boss_danmaku_rework_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.99,
+      "log": "all-smokes/boss_danmaku_rework_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "boss_danmaku_stress_smoke",
+      "ok": true,
+      "exit": 0,
+      "log": "boss-stress-recheck.log",
+      "pass_kind": "targeted_recheck"
+    },
+    {
+      "name": "boss_magic_stone_patterns_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 8.34,
+      "log": "all-smokes/boss_magic_stone_patterns_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "boss_magic_stone_stats_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 1.01,
+      "log": "all-smokes/boss_magic_stone_stats_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "boss_passive_pull_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.91,
+      "log": "all-smokes/boss_passive_pull_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "boss_projectile_render_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 5.08,
+      "log": "all-smokes/boss_projectile_render_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "boss_projectile_renderer_lifecycle_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 1.11,
+      "log": "all-smokes/boss_projectile_renderer_lifecycle_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "boss_routine_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 3.44,
+      "log": "all-smokes/boss_routine_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "boss_runtime_cleanup_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 2.04,
+      "log": "all-smokes/boss_runtime_cleanup_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "boss_shield_phase_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 1.01,
+      "log": "all-smokes/boss_shield_phase_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "character_panel_ui_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 6.7,
+      "log": "all-smokes/character_panel_ui_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "combat_performance_regression_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.99,
+      "log": "all-smokes/combat_performance_regression_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "combat_runtime_optimization_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.99,
+      "log": "all-smokes/combat_runtime_optimization_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "combat_skill_bar_talent_projection_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.35,
+      "log": "all-smokes/combat_skill_bar_talent_projection_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "combat_wave_blessing_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 2.41,
+      "log": "all-smokes/combat_wave_blessing_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "combat_wave_experience_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 2.34,
+      "log": "all-smokes/combat_wave_experience_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "combat_wave_flow_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 2.9,
+      "log": "final-checks/combat_wave_flow_smoke.log",
+      "pass_kind": "targeted_recheck"
+    },
+    {
+      "name": "damage_dead_target_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.63,
+      "log": "all-smokes/damage_dead_target_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "developer_catalog_smoke",
+      "ok": false,
+      "exit": 1,
+      "seconds": 4.86,
+      "log": "all-smokes/developer_catalog_smoke.log",
+      "pass_kind": "initial_scan",
+      "baseline_reproduced": true,
+      "first_error_also_in_baseline": true
+    },
+    {
+      "name": "developer_panel_option_cache_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 3.62,
+      "log": "all-smokes/developer_panel_option_cache_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "developer_ruan_stone_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 2.04,
+      "log": "all-smokes/developer_ruan_stone_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "developer_scene_integration_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 5.7,
+      "log": "all-smokes/developer_scene_integration_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "developer_skill_talent_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 1.97,
+      "log": "all-smokes/developer_skill_talent_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "dodge_probability_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.46,
+      "log": "all-smokes/dodge_probability_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "endless_camp_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 3.54,
+      "log": "final-checks/endless_camp_smoke.log",
+      "pass_kind": "targeted_recheck"
+    },
+    {
+      "name": "endless_progression_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.27,
+      "log": "all-smokes/endless_progression_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "endless_return_flow_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.81,
+      "log": "final-checks/endless_return_flow_smoke.log",
+      "pass_kind": "targeted_recheck"
+    },
+    {
+      "name": "endless_speed_toggle_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.64,
+      "log": "all-smokes/endless_speed_toggle_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "endless_tier_scaling_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.44,
+      "log": "all-smokes/endless_tier_scaling_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "enemy_batch_simulation_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 1.01,
+      "log": "all-smokes/enemy_batch_simulation_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "enemy_batched_hit_feedback_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 1.0,
+      "log": "all-smokes/enemy_batched_hit_feedback_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "enemy_boss_flash_render_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 3.54,
+      "log": "all-smokes/enemy_boss_flash_render_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "enemy_boss_projectile_visual_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.25,
+      "log": "all-smokes/enemy_boss_projectile_visual_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "enemy_boss_visual_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.9,
+      "log": "all-smokes/enemy_boss_visual_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "enemy_dasher_charge_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 1.01,
+      "log": "all-smokes/enemy_dasher_charge_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "enemy_elite_charge_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 1.1,
+      "log": "all-smokes/enemy_elite_charge_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "enemy_glutton_behavior_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.25,
+      "log": "all-smokes/enemy_glutton_behavior_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "enemy_glutton_occlusion_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.26,
+      "log": "all-smokes/enemy_glutton_occlusion_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "enemy_glutton_rework_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 1.03,
+      "log": "all-smokes/enemy_glutton_rework_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "enemy_heavy_armor_render_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 2.21,
+      "log": "all-smokes/enemy_heavy_armor_render_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "enemy_heavy_armor_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 1.0,
+      "log": "all-smokes/enemy_heavy_armor_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "enemy_model_hurtbox_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.73,
+      "log": "all-smokes/enemy_model_hurtbox_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "enemy_mushroom_swarm_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.26,
+      "log": "all-smokes/enemy_mushroom_swarm_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "enemy_profile_resource_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.26,
+      "log": "all-smokes/enemy_profile_resource_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "enemy_profile_reuse_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 1.09,
+      "log": "all-smokes/enemy_profile_reuse_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "enemy_profile_snapshot_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.36,
+      "log": "all-smokes/enemy_profile_snapshot_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "enemy_projectile_batch_simulation_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.26,
+      "log": "all-smokes/enemy_projectile_batch_simulation_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "enemy_projectile_frame_context_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.99,
+      "log": "all-smokes/enemy_projectile_frame_context_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "enemy_rebirth_smoke",
+      "ok": false,
+      "exit": 0,
+      "seconds": 0.91,
+      "log": "all-smokes/enemy_rebirth_smoke.log",
+      "pass_kind": "initial_scan",
+      "baseline_reproduced": true,
+      "first_error_also_in_baseline": true
+    },
+    {
+      "name": "enemy_rose_attack_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 2.32,
+      "log": "all-smokes/enemy_rose_attack_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "enemy_rose_behavior_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.25,
+      "log": "all-smokes/enemy_rose_behavior_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "enemy_runner_haste_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 1.01,
+      "log": "all-smokes/enemy_runner_haste_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "enemy_save_visual_restore_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 1.01,
+      "log": "final-checks/enemy_save_visual_restore_smoke.log",
+      "pass_kind": "targeted_recheck"
+    },
+    {
+      "name": "enemy_shooter_attack_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 1.02,
+      "log": "all-smokes/enemy_shooter_attack_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "enemy_shotgunner_attacks_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.93,
+      "log": "all-smokes/enemy_shotgunner_attacks_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "enemy_spawn_flow_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.73,
+      "log": "all-smokes/enemy_spawn_flow_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "enemy_split_projectile_budget_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.27,
+      "log": "all-smokes/enemy_split_projectile_budget_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "enemy_splitshot_attack_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 1.0,
+      "log": "all-smokes/enemy_splitshot_attack_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "enemy_stalwart_body_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.26,
+      "log": "all-smokes/enemy_stalwart_body_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "experience_vacuum_pickup_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 1.85,
+      "log": "all-smokes/experience_vacuum_pickup_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "game_mode_ruan_stone_context_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.27,
+      "log": "all-smokes/game_mode_ruan_stone_context_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "gunner_authored_event_projectile_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.73,
+      "log": "all-smokes/gunner_authored_event_projectile_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "gunner_basic_build_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 1.57,
+      "log": "all-smokes/gunner_basic_build_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "gunner_basic_level_talents_smoke",
+      "ok": false,
+      "exit": 1,
+      "seconds": 0.84,
+      "log": "all-smokes/gunner_basic_level_talents_smoke.log",
+      "pass_kind": "initial_scan",
+      "baseline_reproduced": true,
+      "first_error_also_in_baseline": true
+    },
+    {
+      "name": "gunner_entry_wave_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.46,
+      "log": "all-smokes/gunner_entry_wave_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "gunner_flash_level_talents_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.76,
+      "log": "all-smokes/gunner_flash_level_talents_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "gunner_hunt_level_talents_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.72,
+      "log": "all-smokes/gunner_hunt_level_talents_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "gunner_infinite_reload_build_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 1.77,
+      "log": "all-smokes/gunner_infinite_reload_build_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "gunner_infinite_reload_manual_smoke",
+      "ok": false,
+      "exit": 124,
+      "seconds": 50.06,
+      "log": "all-smokes/gunner_infinite_reload_manual_smoke.log",
+      "pass_kind": "initial_scan",
+      "baseline_reproduced": true,
+      "first_error_also_in_baseline": true
+    },
+    {
+      "name": "gunner_skill_level_effect_smoke",
+      "ok": false,
+      "exit": 1,
+      "seconds": 0.64,
+      "log": "all-smokes/gunner_skill_level_effect_smoke.log",
+      "pass_kind": "initial_scan",
+      "baseline_reproduced": true,
+      "first_error_also_in_baseline": true
+    },
+    {
+      "name": "gunner_skill_talents_smoke",
+      "ok": false,
+      "exit": 124,
+      "seconds": 50.06,
+      "log": "all-smokes/gunner_skill_talents_smoke.log",
+      "pass_kind": "initial_scan",
+      "baseline_reproduced": true,
+      "first_error_also_in_baseline": true
+    },
+    {
+      "name": "hud_widget_lifecycle_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.34,
+      "log": "final-checks/hud_widget_lifecycle_smoke.log",
+      "pass_kind": "targeted_recheck"
+    },
+    {
+      "name": "judgement_sword_visual_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.26,
+      "log": "all-smokes/judgement_sword_visual_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "level_up_scroll_reopen_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 2.67,
+      "log": "all-smokes/level_up_scroll_reopen_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "mage_arcane_charge_level_talents_smoke",
+      "ok": false,
+      "exit": 124,
+      "seconds": 50.07,
+      "log": "all-smokes/mage_arcane_charge_level_talents_smoke.log",
+      "pass_kind": "initial_scan",
+      "baseline_reproduced": true,
+      "first_error_also_in_baseline": true
+    },
+    {
+      "name": "mage_arcane_surplus_level_talents_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 1.38,
+      "log": "all-smokes/mage_arcane_surplus_level_talents_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "mage_basic_build_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 1.75,
+      "log": "all-smokes/mage_basic_build_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "mage_basic_level_talents_smoke",
+      "ok": false,
+      "exit": 1,
+      "seconds": 0.63,
+      "log": "all-smokes/mage_basic_level_talents_smoke.log",
+      "pass_kind": "initial_scan",
+      "baseline_reproduced": true,
+      "first_error_also_in_baseline": true
+    },
+    {
+      "name": "mage_entry_level_talents_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.63,
+      "log": "all-smokes/mage_entry_level_talents_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "mage_flame_path_switch_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.34,
+      "log": "all-smokes/mage_flame_path_switch_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "mage_meta_field_level_talents_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.43,
+      "log": "all-smokes/mage_meta_field_level_talents_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "mage_skill_level_effect_smoke",
+      "ok": false,
+      "exit": 1,
+      "seconds": 0.45,
+      "log": "all-smokes/mage_skill_level_effect_smoke.log",
+      "pass_kind": "initial_scan",
+      "baseline_reproduced": true,
+      "first_error_also_in_baseline": true
+    },
+    {
+      "name": "mage_stage_two_three_talents_smoke",
+      "ok": false,
+      "exit": 0,
+      "seconds": 0.81,
+      "log": "all-smokes/mage_stage_two_three_talents_smoke.log",
+      "pass_kind": "initial_scan",
+      "baseline_reproduced": true,
+      "first_error_also_in_baseline": true
+    },
+    {
+      "name": "mage_surging_wave_level_talents_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.72,
+      "log": "all-smokes/mage_surging_wave_level_talents_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "mage_talent_smoke",
+      "ok": false,
+      "exit": 124,
+      "seconds": 50.06,
+      "log": "all-smokes/mage_talent_smoke.log",
+      "pass_kind": "initial_scan",
+      "baseline_reproduced": true,
+      "first_error_also_in_baseline": true
+    },
+    {
+      "name": "mage_ultimate_level_talents_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.63,
+      "log": "all-smokes/mage_ultimate_level_talents_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "map_ui_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.44,
+      "log": "all-smokes/map_ui_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "mechanic_roster_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 1.68,
+      "log": "all-smokes/mechanic_roster_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "mechanic_skill_level_effect_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 1.57,
+      "log": "all-smokes/mechanic_skill_level_effect_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "mechanic_skill_talents_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 1.95,
+      "log": "all-smokes/mechanic_skill_talents_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "mechanic_visual_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 2.03,
+      "log": "all-smokes/mechanic_visual_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "menu_ui_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 1.84,
+      "log": "final-checks/menu_ui_smoke.log",
+      "pass_kind": "targeted_recheck"
+    },
+    {
+      "name": "movement_slow_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 1.76,
+      "log": "all-smokes/movement_slow_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "movement_tutorial_exit_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 2.7,
+      "log": "all-smokes/movement_tutorial_exit_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "necro_priest_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 1.66,
+      "log": "all-smokes/necro_priest_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "new_blessing_abilities_compile_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 1.29,
+      "log": "all-smokes/new_blessing_abilities_compile_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "performance_guard_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.72,
+      "log": "final-checks/performance_guard_smoke.log",
+      "pass_kind": "targeted_recheck"
+    },
+    {
+      "name": "performance_recorder_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.28,
+      "log": "final-checks/performance_recorder_smoke.log",
+      "pass_kind": "targeted_recheck"
+    },
+    {
+      "name": "pickup_batch_simulation_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.26,
+      "log": "all-smokes/pickup_batch_simulation_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "plant_enemy_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 1.86,
+      "log": "all-smokes/plant_enemy_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "playable_role_balance_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 1.85,
+      "log": "all-smokes/playable_role_balance_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "player_blessing_system_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 2.03,
+      "log": "all-smokes/player_blessing_system_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "player_blindness_render_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 3.23,
+      "log": "all-smokes/player_blindness_render_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "player_blindness_smoke",
+      "ok": false,
+      "exit": 1,
+      "seconds": 1.39,
+      "log": "all-smokes/player_blindness_smoke.log",
+      "pass_kind": "initial_scan",
+      "baseline_reproduced": true,
+      "first_error_also_in_baseline": true
+    },
+    {
+      "name": "player_combat_result_flow_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.62,
+      "log": "all-smokes/player_combat_result_flow_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "player_damage_resolver_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.72,
+      "log": "all-smokes/player_damage_resolver_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "player_effect_bridge_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 1.38,
+      "log": "all-smokes/player_effect_bridge_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "player_heal_runtime_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 1.38,
+      "log": "all-smokes/player_heal_runtime_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "player_health_visuals_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.24,
+      "log": "all-smokes/player_health_visuals_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "player_level_curve_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.25,
+      "log": "all-smokes/player_level_curve_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "player_level_flow_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 1.47,
+      "log": "all-smokes/player_level_flow_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "player_plague_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 1.48,
+      "log": "all-smokes/player_plague_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "player_projectile_pool_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.73,
+      "log": "all-smokes/player_projectile_pool_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "player_projectile_query_smoke",
+      "ok": false,
+      "exit": 124,
+      "seconds": 50.06,
+      "log": "all-smokes/player_projectile_query_smoke.log",
+      "pass_kind": "initial_scan",
+      "baseline_reproduced": true,
+      "first_error_also_in_baseline": true
+    },
+    {
+      "name": "player_projectile_render_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 2.62,
+      "log": "all-smokes/player_projectile_render_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "player_save_roundtrip_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 2.68,
+      "log": "final-checks/player_save_roundtrip_smoke.log",
+      "pass_kind": "targeted_recheck"
+    },
+    {
+      "name": "player_sequence_scheduler_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.35,
+      "log": "all-smokes/player_sequence_scheduler_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "player_skill_level_system_smoke",
+      "ok": false,
+      "exit": 1,
+      "seconds": 1.28,
+      "log": "all-smokes/player_skill_level_system_smoke.log",
+      "pass_kind": "initial_scan",
+      "baseline_reproduced": true,
+      "first_error_also_in_baseline": true
+    },
+    {
+      "name": "player_skill_talent_system_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.34,
+      "log": "all-smokes/player_skill_talent_system_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "player_targeting_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.63,
+      "log": "all-smokes/player_targeting_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "player_temporary_health_stacks_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 1.29,
+      "log": "all-smokes/player_temporary_health_stacks_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "player_timer_flow_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.63,
+      "log": "all-smokes/player_timer_flow_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "porcupine_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.9,
+      "log": "all-smokes/porcupine_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "reward_flow_talent_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 1.56,
+      "log": "final-checks/reward_flow_talent_smoke.log",
+      "pass_kind": "targeted_recheck"
+    },
+    {
+      "name": "reward_recovery_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 2.62,
+      "log": "final-checks/reward_recovery_smoke.log",
+      "pass_kind": "targeted_recheck"
+    },
+    {
+      "name": "role_base_defense_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.24,
+      "log": "all-smokes/role_base_defense_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "ruan_cloak_dodge_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.24,
+      "log": "all-smokes/ruan_cloak_dodge_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "ruan_fury_armor_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.91,
+      "log": "all-smokes/ruan_fury_armor_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "ruan_stone_combat_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.62,
+      "log": "all-smokes/ruan_stone_combat_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "ruan_stone_formal_attack_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 1.3,
+      "log": "all-smokes/ruan_stone_formal_attack_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "ruan_stone_profile_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.25,
+      "log": "all-smokes/ruan_stone_profile_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "ruan_stone_ui_smoke",
+      "ok": false,
+      "exit": 1,
+      "seconds": 1.85,
+      "log": "all-smokes/ruan_stone_ui_smoke.log",
+      "pass_kind": "initial_scan",
+      "baseline_reproduced": true,
+      "first_error_also_in_baseline": true
+    },
+    {
+      "name": "runtime_enemy_spawn_smoothing_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.26,
+      "log": "all-smokes/runtime_enemy_spawn_smoothing_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "runtime_registry_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 1.58,
+      "log": "all-smokes/runtime_registry_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "save_recovery_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.26,
+      "log": "final-checks/save_recovery_smoke.log",
+      "pass_kind": "targeted_recheck"
+    },
+    {
+      "name": "shared_talent_runtime_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.72,
+      "log": "all-smokes/shared_talent_runtime_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "skill_info_ui_smoke",
+      "ok": false,
+      "exit": 124,
+      "seconds": 50.07,
+      "log": "all-smokes/skill_info_ui_smoke.log",
+      "pass_kind": "initial_scan",
+      "baseline_reproduced": true,
+      "first_error_also_in_baseline": true
+    },
+    {
+      "name": "skill_level_milestone_runtime_smoke",
+      "ok": false,
+      "exit": 1,
+      "seconds": 0.63,
+      "log": "all-smokes/skill_level_milestone_runtime_smoke.log",
+      "pass_kind": "initial_scan",
+      "baseline_reproduced": true,
+      "first_error_also_in_baseline": true
+    },
+    {
+      "name": "skill_manual_mode_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 1.39,
+      "log": "all-smokes/skill_manual_mode_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "skull_mage_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.91,
+      "log": "all-smokes/skull_mage_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "skulltomb_charge_decision_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.26,
+      "log": "all-smokes/skulltomb_charge_decision_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "skulltomb_rework_smoke",
+      "ok": false,
+      "exit": 124,
+      "seconds": 50.08,
+      "log": "all-smokes/skulltomb_rework_smoke.log",
+      "pass_kind": "initial_scan",
+      "baseline_reproduced": true,
+      "first_error_also_in_baseline": true
+    },
+    {
+      "name": "status_resistance_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 1.66,
+      "log": "all-smokes/status_resistance_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "story_lifecycle_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 3.99,
+      "log": "final-checks/story_lifecycle_smoke.log",
+      "pass_kind": "targeted_recheck"
+    },
+    {
+      "name": "story_progress_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.62,
+      "log": "final-checks/story_progress_smoke.log",
+      "pass_kind": "targeted_recheck"
+    },
+    {
+      "name": "story_ui_smoke",
+      "ok": true,
+      "exit": 0,
+      "log": "story-ui-graphical.log",
+      "pass_kind": "targeted_recheck"
+    },
+    {
+      "name": "swordsman_advanced_talents_smoke",
+      "ok": false,
+      "exit": 0,
+      "seconds": 0.81,
+      "log": "all-smokes/swordsman_advanced_talents_smoke.log",
+      "pass_kind": "initial_scan",
+      "baseline_reproduced": true,
+      "first_error_also_in_baseline": true
+    },
+    {
+      "name": "swordsman_basic_attack_event_smoke",
+      "ok": false,
+      "exit": 124,
+      "seconds": 50.06,
+      "log": "all-smokes/swordsman_basic_attack_event_smoke.log",
+      "pass_kind": "initial_scan",
+      "baseline_reproduced": true,
+      "first_error_also_in_baseline": true
+    },
+    {
+      "name": "swordsman_basic_build_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 1.67,
+      "log": "all-smokes/swordsman_basic_build_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "swordsman_skill_level_effect_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.35,
+      "log": "all-smokes/swordsman_skill_level_effect_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "swordsman_skill_talents_smoke",
+      "ok": false,
+      "exit": 124,
+      "seconds": 50.06,
+      "log": "all-smokes/swordsman_skill_talents_smoke.log",
+      "pass_kind": "initial_scan",
+      "baseline_reproduced": true,
+      "first_error_also_in_baseline": true
+    },
+    {
+      "name": "swordsman_trait_heal_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 1.39,
+      "log": "all-smokes/swordsman_trait_heal_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "swordsman_trait_runtime_flow_smoke",
+      "ok": false,
+      "exit": 1,
+      "seconds": 0.72,
+      "log": "all-smokes/swordsman_trait_runtime_flow_smoke.log",
+      "pass_kind": "initial_scan",
+      "baseline_reproduced": true,
+      "first_error_also_in_baseline": true
+    },
+    {
+      "name": "swordsman_ultimate_talents_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.35,
+      "log": "all-smokes/swordsman_ultimate_talents_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "system_feedback_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 1.78,
+      "log": "final-checks/system_feedback_smoke.log",
+      "pass_kind": "targeted_recheck"
+    },
+    {
+      "name": "tailwind_dodge_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.35,
+      "log": "all-smokes/tailwind_dodge_smoke.log",
+      "pass_kind": "initial_scan"
+    },
+    {
+      "name": "team_swap_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.73,
+      "log": "final-checks/team_swap_smoke.log",
+      "pass_kind": "targeted_recheck"
+    },
+    {
+      "name": "vulnerability_rules_smoke",
+      "ok": true,
+      "exit": 0,
+      "seconds": 1.38,
+      "log": "all-smokes/vulnerability_rules_smoke.log",
+      "pass_kind": "initial_scan"
+    }
+  ]
+}

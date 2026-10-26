@@ -1,0 +1,41 @@
+check_docs_links.py
+DOC_LINK_CHECK_OK
+EXIT=0
+
+check_achievements.py
+ACHIEVEMENT_CHECK_OK 6 achievements
+EXIT=0
+
+check_project_config.py
+PROJECT_CONFIG_CHECK_OK
+EXIT=0
+
+check_architecture_contract.py
+ARCHITECTURE_CONTRACT_CHECK_OK
+EXIT=0
+
+check_story_content.py
+{
+  "status": "STORY_CONTENT_CHECK_OK",
+  "scope": "runtime_content_structure_reachability_and_item_budget",
+  "stages": 3,
+  "quests": 3,
+  "speakers": 6,
+  "items": 3,
+  "dialogues": 13,
+  "dialogue_nodes": 29,
+  "unique_reward_receipts": 6,
+  "quest_order": [
+    "q.c1.outpost",
+    "q.c1.rift",
+    "q.c1.core"
+  ]
+}
+EXIT=0
+
+git diff --check
+EXIT=0
+
+bash -n scripts/check_project.sh
+EXIT=0
+

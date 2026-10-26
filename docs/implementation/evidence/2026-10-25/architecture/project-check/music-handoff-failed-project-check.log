@@ -1,0 +1,477 @@
+Check logs: /home/weathour/programs/desktop-projects/My-game/docs/implementation/evidence/2026-10-25/architecture/project-check
+== Python project checks ==
+DOC_LINK_CHECK_OK
+ACHIEVEMENT_CHECK_OK 6 achievements
+PROJECT_CONFIG_CHECK_OK
+ARCHITECTURE_CONTRACT_SELF_TEST_OK
+{"graph_update_accepted": false, "reason": "exit=0; missing 1 runtime GDScript files", "missing": ["scripts/new.gd"]}
+GRAPHIFY_UPDATE_REJECTED: exit=0; missing 1 runtime GDScript files
+{"graph_update_accepted": true, "reason": "exit=0; missing 0 runtime GDScript files", "missing": []}
+GRAPH_UPDATE_SELF_TEST_OK
+ARCHITECTURE_CONTRACT_CHECK_OK
+{
+  "status": "STORY_CONTENT_CHECK_OK",
+  "scope": "runtime_content_structure_reachability_and_item_budget",
+  "stages": 3,
+  "quests": 3,
+  "speakers": 6,
+  "items": 3,
+  "dialogues": 13,
+  "dialogue_nodes": 29,
+  "unique_reward_receipts": 6,
+  "quest_order": [
+    "q.c1.outpost",
+    "q.c1.rift",
+    "q.c1.core"
+  ]
+}
+== Godot asset import ==
+GODOT_ASSET_IMPORT_OK
+== Godot headless parse ==
+GODOT_PARSE_CHECK_OK
+== Godot main menu scene smoke ==
+MAIN_MENU_SCENE_SMOKE_OK
+== Godot endless save select scene smoke ==
+ENDLESS_SAVE_SELECT_SCENE_SMOKE_OK
+== Godot battle scene smoke ==
+BATTLE_SCENE_SMOKE_OK
+== Godot ability talent snapshot save smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+ABILITY_TALENT_SNAPSHOT_SAVE_SMOKE_OK
+== Godot achievement smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+ACHIEVEMENT_SMOKE_OK
+== Godot armor rules smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+ARMOR_RULES_SMOKE_OK
+== Godot blade storm build smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+BLADE_STORM_BUILD_SMOKE_OK
+== Godot bone pickup smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+BONE_PICKUP_SMOKE_OK
+== Godot boss danmaku completion smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+BOSS_DANMAKU_COMPLETION_SMOKE_OK
+== Godot boss danmaku render smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+OpenGL API 3.3.0 NVIDIA 580.173.02 - Compatibility - Using Device: NVIDIA - NVIDIA GeForce RTX 5080
+
+BOSS_DANMAKU_RENDER_SMOKE_OK
+== Godot boss danmaku rework smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+BOSS_DANMAKU_REWORK_SMOKE_OK
+== Godot boss danmaku stress smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+BOSS_DANMAKU_STRESS pressure=0.90 peak=1274 avg_ms=3.628 p95_ms=9.159 max_ms=73.725
+BOSS_DANMAKU_STRESS pressure=1.65 peak=2213 avg_ms=6.147 p95_ms=16.522 max_ms=58.295
+BOSS_DANMAKU_STRESS_SMOKE_OK
+== Godot boss magic stone patterns smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+BOSS_MAGIC_STONE_PATTERNS_SMOKE_OK
+== Godot boss magic stone stats smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+BOSS_MAGIC_STONE_STATS_SMOKE_OK
+== Godot boss passive pull smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+BOSS_PASSIVE_PULL_SMOKE_OK
+== Godot boss projectile render smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+OpenGL API 3.3.0 NVIDIA 580.173.02 - Compatibility - Using Device: NVIDIA - NVIDIA GeForce RTX 5080
+
+BOSS_RENDER_COMPARE step=0 changed=33520 max_channel_difference=1
+BOSS_RENDER_COMPARE step=1 changed=30204 max_channel_difference=1
+BOSS_RENDER_COMPARE step=2 changed=19889 max_channel_difference=1
+BOSS_RENDER_COMPARE step=3 changed=7485 max_channel_difference=1
+BOSS_PROJECTILE_RENDER_SMOKE_OK
+== Godot boss projectile renderer lifecycle smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+BOSS_PROJECTILE_RENDERER_LIFECYCLE_SMOKE_OK
+== Godot boss routine smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+BOSS_ROUTINE_SMOKE_OK
+== Godot boss runtime cleanup smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+BOSS_RUNTIME_CLEANUP_SMOKE_OK
+== Godot boss shield phase smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+BOSS_SHIELD_PHASE_SMOKE_OK
+== Godot character panel ui smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+CHARACTER_PANEL_UI_SMOKE_OK
+== Godot combat performance regression smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+COMBAT_PERFORMANCE_REGRESSION_SMOKE_OK
+== Godot combat runtime optimization smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+COMBAT_RUNTIME_OPTIMIZATION_SMOKE_OK
+== Godot combat skill bar talent projection smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+COMBAT_SKILL_BAR_TALENT_PROJECTION_SMOKE_OK
+== Godot combat wave blessing smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+COMBAT_WAVE_BLESSING_SMOKE_OK
+== Godot combat wave experience smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+Wave 1 reference level: 3 (+23/38 XP)
+Wave 5 reference level: 10 (+118/130 XP)
+Wave 6 reference level: 11 (+115/145 XP)
+Wave 11 reference level: 16 (+221/224 XP)
+Wave 20 reference level: 28 (+98/230 XP)
+COMBAT_WAVE_EXPERIENCE_SMOKE_OK
+== Godot combat wave flow smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+COMBAT_WAVE_FLOW_SMOKE_OK
+== Godot content growth contract smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+CONTENT_GROWTH_CONTRACT_SMOKE_OK
+== Godot damage dead target smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+DAMAGE_DEAD_TARGET_SMOKE_OK
+== Godot developer catalog smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+DEVELOPER_CATALOG_SMOKE_OK
+== Godot developer panel option cache smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+DEVELOPER_PANEL_OPTION_CACHE_SMOKE_OK
+== Godot developer ruan stone smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+DEVELOPER_RUAN_STONE_SMOKE_OK
+== Godot developer scene integration smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+DEVELOPER_SCENE_INTEGRATION_SMOKE_OK
+== Godot developer skill talent smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+DEVELOPER_SKILL_TALENT_SMOKE_OK
+== Godot dodge probability smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+DODGE_PROBABILITY_SMOKE_OK
+== Godot endless camp smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+ENDLESS_CAMP_SMOKE_OK
+== Godot endless progression smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+ENDLESS_PROGRESSION_SMOKE_OK
+== Godot endless return flow smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+ENDLESS_RETURN_FLOW_SMOKE_OK
+== Godot endless speed toggle smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+ENDLESS_SPEED_TOGGLE_SMOKE_OK
+== Godot endless tier scaling smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+ENDLESS_TIER_SCALING_SMOKE_OK
+== Godot enemy batch simulation smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+ENEMY_BATCH_SIMULATION_SMOKE_OK
+== Godot enemy batched hit feedback smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+ENEMY_BATCHED_HIT_FEEDBACK_SMOKE_OK
+== Godot enemy boss flash render smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+OpenGL API 3.3.0 NVIDIA 580.173.02 - Compatibility - Using Device: NVIDIA - NVIDIA GeForce RTX 5080
+
+ENEMY_BOSS_FLASH_RENDER_SMOKE_OK
+== Godot enemy boss projectile visual smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+ENEMY_BOSS_PROJECTILE_VISUAL_SMOKE_OK
+== Godot enemy boss visual smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+ENEMY_BOSS_VISUAL_SMOKE_OK
+== Godot enemy dasher charge smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+ENEMY_DASHER_CHARGE_SMOKE_OK
+== Godot enemy elite charge smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+ENEMY_ELITE_CHARGE_SMOKE_OK
+== Godot enemy glutton behavior smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+ENEMY_GLUTTON_BEHAVIOR_SMOKE_OK
+== Godot enemy glutton occlusion smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+enemy_glutton_occlusion_smoke: PASS
+== Godot enemy glutton rework smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+ENEMY_GLUTTON_REWORK_SMOKE_OK
+== Godot enemy heavy armor render smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+OpenGL API 3.3.0 NVIDIA 580.173.02 - Compatibility - Using Device: NVIDIA - NVIDIA GeForce RTX 5080
+
+ENEMY_HEAVY_ARMOR_RENDER_SMOKE_OK
+== Godot enemy heavy armor smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+ENEMY_HEAVY_ARMOR_SMOKE_OK
+== Godot enemy model hurtbox smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+ENEMY_MODEL_HURTBOX_SMOKE_OK
+== Godot enemy mushroom swarm smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+ENEMY_MUSHROOM_SWARM_SMOKE_OK
+== Godot enemy profile resource smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+enemy_profile_resource_smoke: OK
+== Godot enemy profile reuse smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+ENEMY_PROFILE_REUSE_SMOKE_OK
+== Godot enemy profile snapshot smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+enemy_profile_snapshot_smoke: OK
+== Godot enemy projectile batch simulation smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+ENEMY_PROJECTILE_BATCH_SIMULATION_SMOKE_OK
+== Godot enemy projectile frame context smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+ENEMY_PROJECTILE_FRAME_CONTEXT_SMOKE_OK
+== Godot enemy rebirth smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+ENEMY_REBIRTH_SMOKE_OK
+== Godot enemy rose attack smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+ENEMY_ROSE_ATTACK_SMOKE_OK
+== Godot enemy rose behavior smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+ENEMY_ROSE_BEHAVIOR_SMOKE_OK
+== Godot enemy runner haste smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+ENEMY_RUNNER_HASTE_SMOKE_OK
+== Godot enemy save visual restore smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+enemy_save_visual_restore_smoke: OK
+== Godot enemy shooter attack smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+ENEMY_SHOOTER_ATTACK_SMOKE_OK
+== Godot enemy shotgunner attacks smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+ENEMY_SHOTGUNNER_ATTACKS_SMOKE_OK
+== Godot enemy spawn flow smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+ENEMY_SPAWN_FLOW_SMOKE_OK
+== Godot enemy split projectile budget smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+ENEMY_SPLIT_PROJECTILE_BUDGET_SMOKE_OK
+== Godot enemy splitshot attack smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+ENEMY_SPLITSHOT_ATTACK_SMOKE_OK
+== Godot enemy stalwart body smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+ENEMY_STALWART_BODY_SMOKE_OK
+== Godot experience vacuum pickup smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+EXPERIENCE_VACUUM_PICKUP_SMOKE_OK
+== Godot game mode ruan stone context smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+GAME_MODE_RUAN_STONE_CONTEXT_SMOKE_OK
+== Godot gunner authored event projectile smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+GUNNER_AUTHORED_EVENT_PROJECTILE_SMOKE_OK
+== Godot gunner basic build smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+GUNNER_BASIC_BUILD_SMOKE_OK
+== Godot gunner basic level talents smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+GUNNER_BASIC_LEVEL_TALENTS_SMOKE_OK
+== Godot gunner entry wave smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+GUNNER_ENTRY_WAVE_SMOKE_OK
+== Godot gunner flash level talents smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+GUNNER_FLASH_LEVEL_TALENTS_SMOKE_OK
+== Godot gunner hunt level talents smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+GUNNER_HUNT_LEVEL_TALENTS_SMOKE_OK
+== Godot gunner infinite reload build smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+GUNNER_INFINITE_RELOAD_BUILD_SMOKE_OK
+== Godot gunner infinite reload manual smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+GUNNER_INFINITE_RELOAD_MANUAL_SMOKE_OK
+== Godot gunner skill level effect smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+GUNNER_SKILL_LEVEL_EFFECT_SMOKE_OK
+== Godot gunner skill talents smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+GUNNER_SKILL_TALENTS_SMOKE_OK
+== Godot hud widget lifecycle smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+HUD_WIDGET_LIFECYCLE_SMOKE_OK
+== Godot judgement sword visual smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+JUDGEMENT_SWORD_VISUAL_SMOKE_OK
+== Godot level up scroll reopen smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+LEVEL_UP_SCROLL_REOPEN_SMOKE_OK
+== Godot mage arcane charge level talents smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+MAGE_ARCANE_CHARGE_LEVEL_TALENTS_SMOKE_OK
+== Godot mage arcane surplus level talents smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+MAGE_ARCANE_SURPLUS_LEVEL_TALENTS_SMOKE_OK
+== Godot mage basic build smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+MAGE_BASIC_BUILD_SMOKE_OK
+== Godot mage basic level talents smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+MAGE_BASIC_LEVEL_TALENTS_SMOKE_OK
+== Godot mage entry level talents smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+MAGE_ENTRY_LEVEL_TALENTS_SMOKE_OK
+== Godot mage flame path switch smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+MAGE_FLAME_PATH_SWITCH_SMOKE_OK
+== Godot mage meta field level talents smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+MAGE_META_FIELD_LEVEL_TALENTS_SMOKE_OK
+== Godot mage skill level effect smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+MAGE_SKILL_LEVEL_EFFECT_SMOKE_OK
+== Godot mage stage two three talents smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+MAGE_STAGE_TWO_THREE_TALENTS_SMOKE_OK
+== Godot mage surging wave level talents smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+MAGE_SURGING_WAVE_LEVEL_TALENTS_SMOKE_OK
+WARNING: ObjectDB instances leaked at exit (run with --verbose for details).
+     at: cleanup (core/object/object.cpp:2641)
+== Godot mage talent smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+MAGE_TALENT_SMOKE_OK
+== Godot mage ultimate level talents smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+MAGE_ULTIMATE_LEVEL_TALENTS_SMOKE_OK
+== Godot map ui smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+MAP_UI_SMOKE_OK
+== Godot mcp cleanup smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+MCP_CLEANUP_SMOKE_OK
+== Godot mechanic roster smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+MECHANIC_ROSTER_SMOKE_OK
+== Godot mechanic skill level effect smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+MECHANIC_SKILL_LEVEL_EFFECT_SMOKE_OK
+== Godot mechanic skill talents smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+MECHANIC_SKILL_TALENTS_SMOKE_OK
+== Godot mechanic visual smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+MECHANIC_VISUAL_SMOKE_OK
+== Godot menu ui smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+MENU_UI_SMOKE_OK
+== Godot movement slow smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+MOVEMENT_SLOW_SMOKE_OK
+== Godot movement tutorial exit smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+MOVEMENT_TUTORIAL_EXIT_SMOKE_OK
+== Godot music context smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+ERROR: camp advances across real scene rebuild and unmutes at the saved volume
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] finish (res://scripts/tests/music_context_smoke.gd:299)
+       [1] run (res://scripts/tests/music_context_smoke.gd:145)
+       [2] check_native_playback (res://scripts/tests/music_context_smoke.gd:264)
+MUSIC_CONTEXT_SMOKE_FAILED
+MUSIC_CONTEXT_SMOKE_FAILED

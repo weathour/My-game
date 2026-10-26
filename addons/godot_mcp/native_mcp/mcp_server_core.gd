@@ -881,6 +881,10 @@ func _log_debug(message: String) -> void:
 
 func cleanup() -> void:
 	stop()
+	# Registered closures can retain this server; break the cycle on plugin exit.
+	_tools.clear()
+	_resources.clear()
+	_prompts.clear()
 
 # ============================================================================
 # 工具调用日志（用于批量验证）

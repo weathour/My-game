@@ -15,11 +15,13 @@ Run:
 /home/weathour/.local/bin/godot-4.6.2 --headless --path . --quit
 ```
 
-Then run:
+If this repository already has `graphify-out/graph.json`, update it:
 
 ```bash
 graphify update .
 ```
+
+Do not create a new index unless the user explicitly requests it.
 
 If graphify reports no Godot code files, check `docs/GRAPHIFY.md`; this project relies on local GDScript support for graphify.
 

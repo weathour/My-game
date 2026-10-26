@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 
+import io
+import re
+import tokenize
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -8,6 +11,29 @@ ROOT = Path(__file__).resolve().parents[2]
 
 def read(path: str) -> str:
     return (ROOT / path).read_text(encoding="utf-8-sig")
+
+
+def function_body(source: str, name: str) -> tuple[str, ...]:
+    """Tokenize thin GDScript wrappers; indentation and comments are not contracts."""
+    declaration = r"^(?:@|(?:static )?(?:func|var|const|signal|class_name|class|enum)\b)"
+    match = re.search(rf"(?ms)^(?:static )?func {re.escape(name)}\b.*?(?={declaration}|\Z)", source)
+    if match is None:
+        return ()
+    body = False
+    tokens: list[str] = []
+    for token in tokenize.generate_tokens(io.StringIO(match[0]).readline):
+        if not body:
+            body = token.type == tokenize.NEWLINE
+        elif token.type not in {
+            tokenize.INDENT, tokenize.DEDENT, tokenize.NEWLINE, tokenize.NL,
+            tokenize.COMMENT, tokenize.ENDMARKER,
+        }:
+            tokens.append(token.string)
+    return tuple(tokens)
+
+
+def delegates(source: str, name: str, calls: str) -> bool:
+    return function_body(source, name) == function_body("func expected():\n" + calls, "expected")
 
 
 def main() -> int:
@@ -40,13 +66,13 @@ def main() -> int:
         failures.append("scripts/main.gd must route achievement events through GAME_ACHIEVEMENT_BRIDGE")
     if "AchievementService." in main_script:
         failures.append("scripts/main.gd must not call AchievementService directly")
-    if "func _on_enemy_defeated(enemy_kind: String, enemy: Node2D) -> void:\n\tENEMY_DEFEAT_FLOW.handle_enemy_defeated(self, enemy_kind, enemy)" not in main_script:
+    if not delegates(main_script, "_on_enemy_defeated", "\tENEMY_DEFEAT_FLOW.handle_enemy_defeated(self, enemy_kind, enemy)\n"):
         failures.append("scripts/main.gd enemy defeat handler must delegate to ENEMY_DEFEAT_FLOW only")
     if "REWARD_FLOW.show_small_boss_reward" in main_script or "REWARD_FLOW.show_endless_boss_reward" in main_script:
         failures.append("scripts/main.gd must not handle enemy reward UI directly; use enemy_defeat_flow.gd")
-    if "func _setup_ui() -> void:\n\tGAME_SCENE_WIRING.setup_ui(self)" not in main_script:
+    if not delegates(main_script, "_setup_ui", "\tGAME_SCENE_WIRING.setup_ui(self)\n"):
         failures.append("scripts/main.gd UI setup must delegate to GAME_SCENE_WIRING")
-    if "func _connect_player_signals() -> void:\n\tGAME_SCENE_WIRING.connect_player_signals(self)" not in main_script:
+    if not delegates(main_script, "_connect_player_signals", "\tGAME_SCENE_WIRING.connect_player_signals(self)\n\t_refresh_hud()\n"):
         failures.append("scripts/main.gd player signal wiring must delegate to GAME_SCENE_WIRING")
     hud_wrappers = {
         "_refresh_hud": "GAME_HUD_FLOW.refresh_hud(self)",

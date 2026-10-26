@@ -65,7 +65,7 @@ This runs the Python contracts, Godot asset import and parse checks, real main-m
 
 ## Asset Notice
 
-The current BGM files under `assets/` are non-commercial placeholder materials for development testing only. They are included so the project can run with the current audio setup, and will be replaced before any commercial release or public distribution build.
+Runtime music uses the 14 original cues under `assets/music/`, covering preparation, stages, elites, Boss phases and results. Editable REAPER projects, MIDI, lossless masters and production notes are in [the soundtrack package](design/music-20261025/README.md). The four old `game_bgm`/`menu_bgm` MP3/Ogg placeholders are retained locally but excluded from the export preset. Other prototype artwork still requires the review described in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
 
 ## Documentation
 
