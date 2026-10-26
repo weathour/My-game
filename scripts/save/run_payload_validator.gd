@@ -1,5 +1,6 @@
 extends RefCounted
 
+const PERFORMANCE_RECORDER := preload("res://scripts/game/performance_recorder.gd")
 
 # Match restoration types; absent legacy fields still use their existing defaults.
 const PLAYER_NUMBERS := [
@@ -115,7 +116,9 @@ static func error(run: Variant) -> String:
 		return "run: expected dictionary"
 	if not run.get("player") is Dictionary:
 		return "player: expected dictionary"
+	PERFORMANCE_RECORDER.begin_scope("save_payload_finite_ms")
 	var problem := _finite(run, "run")
+	PERFORMANCE_RECORDER.end_scope("save_payload_finite_ms")
 	if not problem.is_empty():
 		return problem
 	problem = _containers(run, "", ["player", "combat_wave", "reward_state", "story_attempt", "pending_settlement", "pending_run_end"], OBJECT_ARRAYS)

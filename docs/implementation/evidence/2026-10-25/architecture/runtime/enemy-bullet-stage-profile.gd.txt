@@ -1,0 +1,47 @@
+extends SceneTree
+const MAIN := preload("res://scenes/main.tscn")
+const SAVE := preload("res://scripts/save_manager.gd")
+const BULLET := preload("res://scenes/enemy_bullet.tscn")
+const PROFILE := preload("/tmp/mygame_enemy_bullet_profile.gd")
+const CONTEXT := preload("res://scripts/enemies/enemy_projectile_frame_context.gd")
+const RENDERER := preload("res://scripts/enemies/boss_projectile_renderer.gd")
+
+func _init() -> void:
+	call_deferred("_run")
+
+func _run() -> void:
+	SAVE.set_active_endless_slot(3)
+	SAVE.create_or_load_endless_profile(3)
+	var main = MAIN.instantiate()
+	root.add_child(main)
+	current_scene = main
+	main.process_mode = Node.PROCESS_MODE_DISABLED
+	var renderer := RENDERER.get_or_create(main)
+	var reports: Array = []
+	for mode in ["straight", "danmaku", "danmaku_bloom"]:
+		for profiled in [false, true]:
+			var bullets: Array = []
+			for index in range(2000):
+				var bullet = BULLET.instantiate()
+				if profiled:
+					bullet.set_script(PROFILE)
+				main.add_child(bullet)
+				bullet.reset_projectile({"position":Vector2(500, float(index % 100) - 50),"direction":Vector2.RIGHT,"speed":120.0,"damage":1.0,"lifetime":100.0,"hit_radius":8.0,"target":main.player,"motion_mode":mode,"visual_style":"boss_danmaku_violet_orb"})
+				renderer.add_projectile(bullet)
+				bullets.append(bullet)
+			for key in PROFILE.profile_us:
+				PROFILE.profile_us[key] = 0
+			var started := Time.get_ticks_usec()
+			for frame in range(50):
+				var context := CONTEXT.new()
+				for bullet in bullets:
+					bullet.batch_physics_process(1.0 / 60.0, context)
+			var elapsed_ms := float(Time.get_ticks_usec() - started) / 1000.0
+			reports.append({"mode":mode,"profiled_copy":profiled,"count":2000,"steps":50,"tick_total_ms":elapsed_ms,"per_step_ms":elapsed_ms / 50.0,"stage_us":PROFILE.profile_us.duplicate()})
+			for bullet in bullets:
+				bullet.free()
+			renderer.sync()
+	print("ENEMY_BULLET_STAGE_PROFILE ", JSON.stringify(reports))
+	main.suppress_exit_save = true
+	main.free()
+	quit(0)

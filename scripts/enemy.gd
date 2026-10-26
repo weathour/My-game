@@ -30,6 +30,7 @@ const ENEMY_TRAIT_FLAGS := preload("res://scripts/enemies/enemy_trait_flags.gd")
 const ENEMY_TRAIT_BEHAVIOR := preload("res://scripts/enemies/enemy_trait_behavior.gd")
 const ENEMY_TURRET_BOMBARD := preload("res://scripts/enemies/enemy_turret_bombard.gd")
 const ENEMY_RUNTIME_PROCESS := preload("res://scripts/enemies/enemy_runtime_process.gd")
+const PERFORMANCE_RECORDER := preload("res://scripts/game/performance_recorder.gd")
 const ENEMY_VISUALS := preload("res://scripts/enemies/enemy_visuals.gd")
 const ENEMY_OCCLUSION_SORT := preload("res://scripts/enemies/enemy_occlusion_sort.gd")
 const ENEMY_GLUTTON_BEHAVIOR := preload("res://scripts/enemies/enemy_glutton_behavior.gd")
@@ -365,8 +366,10 @@ func _exit_tree() -> void:
 func _physics_process(delta: float) -> void:
 	if batch_simulation_enabled and can_use_batch_simulation():
 		return
+	PERFORMANCE_RECORDER.begin_scope("enemy_individual_ms")
 	ENEMY_RUNTIME_PROCESS.physics_process(self, delta)
 	_apply_mage_surge_push(delta)
+	PERFORMANCE_RECORDER.end_scope("enemy_individual_ms")
 
 func batch_physics_process(delta: float) -> void:
 	ENEMY_RUNTIME_PROCESS.physics_process(self, delta)

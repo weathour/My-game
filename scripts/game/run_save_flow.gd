@@ -18,6 +18,7 @@ static func save_run_state(main: Node) -> bool:
 		return true
 	var save_start_usec: int = Time.get_ticks_usec()
 	PERFORMANCE_RECORDER.begin_scope("save_run_ms")
+	PERFORMANCE_RECORDER.begin_scope("save_payload_build_ms")
 
 	var game_bgm = main._get_game_bgm()
 	var music_position: float = 0.0
@@ -63,6 +64,7 @@ static func save_run_state(main: Node) -> bool:
 	RUN_SAVE_RUNTIME_FLOW.append_group_save_data(main, save_data, "swordsman_ground_cracks", "swordsman_ground_cracks")
 	RUN_SAVE_RUNTIME_FLOW.append_group_save_data(main, save_data, "skull_mage_domains", "skull_mage_domains")
 	RUN_SAVE_RUNTIME_FLOW.append_group_save_data(main, save_data, "parasite_seeds", "parasite_seeds")
+	PERFORMANCE_RECORDER.end_scope("save_payload_build_ms")
 
 	var context: Dictionary = main.get_meta("save_context", {})
 	var payload_chars: int = int(SAVE_MANAGER.save_run(save_data, int(context.get("slot", -1)), str(context.get("mode", ""))))

@@ -13,6 +13,13 @@ static func add(counter_name: String, amount: int = 1) -> void:
 	counters[counter_name] = int(counters.get(counter_name, 0)) + amount
 
 
+static func record_max(counter_name: String, value: int) -> void:
+	if counter_name == "":
+		return
+	_ensure_frame()
+	counters[counter_name] = maxi(int(counters.get(counter_name, 0)), value)
+
+
 static func get_snapshot() -> Dictionary:
 	_ensure_frame()
 	var result := last_frame_snapshot.duplicate(true)

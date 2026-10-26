@@ -1,0 +1,19 @@
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+Vulkan 1.4.312 - Forward Mobile - Using Device #0: NVIDIA - NVIDIA GeForce RTX 5080
+
+BATTLE_LIFECYCLE_CYCLE {"after_exit":{"nodes":12,"orphans":0,"resources":738,"static_memory_bytes":137050867},"cycle":1,"wall_frame_ms":{"avg_ms":108.767616666667,"count":360,"max_ms":598.352,"p50_ms":85.075,"p95_ms":232.33,"p99_ms":557.806}}
+BATTLE_LIFECYCLE_CYCLE {"after_exit":{"nodes":12,"orphans":0,"resources":738,"static_memory_bytes":139383687},"cycle":2,"wall_frame_ms":{"avg_ms":119.727633333333,"count":30,"max_ms":299.419,"p50_ms":100.957,"p95_ms":274.346,"p99_ms":299.419}}
+BATTLE_LIFECYCLE_CYCLE {"after_exit":{"nodes":12,"orphans":0,"resources":738,"static_memory_bytes":139399903},"cycle":3,"wall_frame_ms":{"avg_ms":108.822733333333,"count":30,"max_ms":279.762,"p50_ms":88.364,"p95_ms":263.808,"p99_ms":279.762}}
+BATTLE_LIFECYCLE_CYCLE {"after_exit":{"nodes":12,"orphans":0,"resources":740,"static_memory_bytes":141625724},"cycle":4,"wall_frame_ms":{"avg_ms":94.1255333333334,"count":30,"max_ms":275.173,"p50_ms":93.405,"p95_ms":254.433,"p99_ms":275.173}}
+BATTLE_LIFECYCLE_CYCLE {"after_exit":{"nodes":12,"orphans":0,"resources":738,"static_memory_bytes":139435567},"cycle":5,"wall_frame_ms":{"avg_ms":100.5359,"count":30,"max_ms":311.196,"p50_ms":72.415,"p95_ms":254.713,"p99_ms":311.196}}
+BATTLE_LIFECYCLE_CYCLE {"after_exit":{"nodes":12,"orphans":0,"resources":738,"static_memory_bytes":139448223},"cycle":6,"wall_frame_ms":{"avg_ms":96.7091333333333,"count":30,"max_ms":246.815,"p50_ms":78.764,"p95_ms":215.071,"p99_ms":246.815}}
+BATTLE_LIFECYCLE_CYCLE {"after_exit":{"nodes":12,"orphans":0,"resources":738,"static_memory_bytes":139463143},"cycle":7,"wall_frame_ms":{"avg_ms":84.0230666666667,"count":30,"max_ms":233.914,"p50_ms":60.033,"p95_ms":222.92,"p99_ms":233.914}}
+BATTLE_LIFECYCLE_CYCLE {"after_exit":{"nodes":12,"orphans":0,"resources":740,"static_memory_bytes":141689476},"cycle":8,"wall_frame_ms":{"avg_ms":97.3640333333333,"count":30,"max_ms":268.087,"p50_ms":87.739,"p95_ms":253.353,"p99_ms":268.087}}
+BATTLE_LIFECYCLE_CYCLE {"after_exit":{"nodes":12,"orphans":0,"resources":738,"static_memory_bytes":139486227},"cycle":9,"wall_frame_ms":{"avg_ms":56.4264333333333,"count":30,"max_ms":282.014,"p50_ms":23.411,"p95_ms":183.412,"p99_ms":282.014}}
+BATTLE_LIFECYCLE_CYCLE {"after_exit":{"nodes":12,"orphans":0,"resources":738,"static_memory_bytes":139515219},"cycle":10,"wall_frame_ms":{"avg_ms":102.1444,"count":30,"max_ms":290.822,"p50_ms":86.659,"p95_ms":245.295,"p99_ms":290.822}}
+ERROR: last three exits must have stable node/orphan/resource counts
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _require (res://scripts/tests/battle_lifecycle_benchmark.gd:30)
+       [1] _run (res://scripts/tests/battle_lifecycle_benchmark.gd:93)
+BATTLE_LIFECYCLE_BENCHMARK_FAILED output=/home/weathour/programs/desktop-projects/My-game/docs/implementation/evidence/2026-10-25/architecture/runtime/real-main-x11.json

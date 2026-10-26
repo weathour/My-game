@@ -64,13 +64,14 @@ func _check_mana_hud() -> void:
 
 
 func _check_save_pair() -> void:
-	var path := "res://.omx/performance/regression_primary.json"
-	var backup := "res://.omx/performance/regression_backup.json"
+	var path := "user://performance/regression_primary.json"
+	var backup := "user://performance/regression_backup.json"
 	var payload := {"health": 52.5, "enemies": [{"armor": -5.0}], "label": "存档回归"}
-	var expected := JSON.stringify(payload)
-	assert(STORE.write_json_pair(path, backup, payload) == expected.length())
-	assert(FileAccess.get_file_as_string(path) == expected)
-	assert(FileAccess.get_file_as_string(backup) == expected)
+	var written := STORE.write_json_pair(path, backup, payload)
+	var serialized := FileAccess.get_file_as_string(path)
+	assert(written > 0 and written == serialized.length())
+	assert(JSON.parse_string(serialized) == payload)
+	assert(FileAccess.get_file_as_string(backup) == serialized)
 	assert(STORE.read_json(backup) == payload)
 	payload.health = 10.0
 	assert(STORE.write_json_pair(path, backup, payload) > 0)

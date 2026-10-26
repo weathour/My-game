@@ -1,5 +1,6 @@
 extends RefCounted
 
+const PERFORMANCE_RECORDER := preload("res://scripts/game/performance_recorder.gd")
 
 const STORY_SAVE_ROOT := "user://story_slots"
 const ENDLESS_SAVE_ROOT := "user://endless_slots"
@@ -70,10 +71,16 @@ static func write_json(path: String, data: Dictionary) -> int:
 
 static func write_json_pair(path: String, backup_path: String, data: Dictionary) -> int:
 	# JSON object order is not state; both files receive this one snapshot.
-	var serialized := JSON.stringify(data)
+	PERFORMANCE_RECORDER.begin_scope("save_json_serialize_ms")
+	var serialized := JSON.stringify(data, "", false)
+	PERFORMANCE_RECORDER.end_scope("save_json_serialize_ms")
+	PERFORMANCE_RECORDER.begin_scope("save_primary_commit_ms")
 	var primary_chars := _write_serialized_json(path, serialized)
+	PERFORMANCE_RECORDER.end_scope("save_primary_commit_ms")
 	if primary_chars > 0:
+		PERFORMANCE_RECORDER.begin_scope("save_backup_commit_ms")
 		_write_serialized_json(backup_path, serialized)
+		PERFORMANCE_RECORDER.end_scope("save_backup_commit_ms")
 	return primary_chars
 
 static func _write_serialized_json(path: String, serialized: String) -> int:

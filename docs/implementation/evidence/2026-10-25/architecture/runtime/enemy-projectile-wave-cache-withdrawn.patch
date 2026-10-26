@@ -1,0 +1,79 @@
+# Reconstructed from the applied experiment edits recorded during this session.
+# This slower candidate was withdrawn; production uses no wave-flow cache.
+--- before/enemy_projectile_frame_context.gd
++++ wave-cache-experiment/enemy_projectile_frame_context.gd
+@@ -8,14 +8,20 @@
+ var center := Vector2.ZERO
+ var radius := 0.0
+ var accepts_damage := false
++var cached_physics_frame := -1
++var cached_scene: Node
++var cached_wave_flow: Node
++var wave_physics_frame := -1
+ 
+ 
+ func prepare(target: Node2D) -> bool:
+ 	if not is_instance_valid(target):
+ 		invalidate()
+ 		return false
+-	if cached and cached_target == target:
++	var frame := Engine.get_physics_frames()
++	if cached and cached_target == target and cached_physics_frame == frame:
+ 		return true
++	cached_physics_frame = frame
+ 	cached_target = target
+ 	position = target.global_position
+ 	center = target.get_hurtbox_center() if target.has_method("get_hurtbox_center") else position
+@@ -28,3 +34,14 @@
+ func invalidate() -> void:
+ 	cached = false
+ 	cached_target = null
++	cached_scene = null
++	cached_wave_flow = null
++	wave_physics_frame = -1
++
++func get_wave_flow(scene: Node) -> Node:
++	var frame := Engine.get_physics_frames()
++	if cached_scene != scene or wave_physics_frame != frame:
++		cached_scene = scene
++		wave_physics_frame = frame
++		cached_wave_flow = scene.get("wave_flow") as Node if is_instance_valid(scene) else null
++	return cached_wave_flow if is_instance_valid(cached_wave_flow) else null
+--- before/enemy_bullet.gd
++++ wave-cache-experiment/enemy_bullet.gd
+@@ -375,11 +375,13 @@
+ 	incident_velocity = (global_position - motion_start) / maxf(delta, 0.00001)
+ 	if not reflected:
+ 		var scene: Node = get_tree().current_scene
+-		var waves = scene.get("wave_flow") if scene != null else null
++		var waves = context.get_wave_flow(scene) if context != null else scene.get("wave_flow") if scene != null else null
+ 		if is_instance_valid(waves) and waves.phase == "preparation" and waves.merchant_health > 0 and is_instance_valid(waves.merchant):
+ 			var point := Geometry2D.get_closest_point_to_segment(waves.merchant.global_position, motion_start, global_position)
+ 			if point.distance_squared_to(waves.merchant.global_position) <= pow(hit_radius + 24.0, 2):
+ 				waves.merchant.take_damage(damage)
++				if context != null:
++					context.invalidate()
+ 				recycle()
+ 				return
+ 	if split_after_time > 0.0 and not split_performed and travel_time >= split_after_time:
+@@ -387,7 +389,7 @@
+ 		recycle()
+ 		return
+ 
+-	_try_hit_player(context)
++	_try_hit_player(context, context != null)
+ 	if is_instance_valid(boss_render_owner):
+ 		boss_render_owner.update_transform(self)
+ 
+@@ -664,9 +666,9 @@
+ 	rotation = direction.angle()
+ 	return false
+ 
+-func _try_hit_player(context: FRAME_CONTEXT = null) -> void:
++func _try_hit_player(context: FRAME_CONTEXT = null, target_prepared: bool = false) -> void:
+ 	if context != null:
+-		if not context.prepare(target):
++		if not target_prepared and not context.prepare(target):
+ 			return
+ 		var radius := hit_radius + context.radius
+ 		if global_position.distance_squared_to(context.center) > radius * radius:

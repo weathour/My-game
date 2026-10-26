@@ -1,0 +1,22 @@
+extends SceneTree
+const WARNING = preload("res://scripts/game/spawn_warning_batch.gd")
+var finished := 0
+func _initialize() -> void:
+    call_deferred("_run")
+func _run() -> void:
+    Engine.max_fps = 30
+    for index in range(40):
+        await process_frame
+    var fps := Engine.get_frames_per_second()
+    assert(fps > 0 and fps < 45)
+    var warnings := WARNING.new()
+    root.add_child(warnings)
+    warnings.set_process(false)
+    warnings.warning_finished.connect(func(_entry): finished += 1)
+    for index in range(40):
+        warnings.add_warning(Vector2(index * 2, 0), 26, {"index":index})
+    warnings._process(0.01)
+    print(JSON.stringify({"fps":fps,"visible_warnings":warnings.warnings.size(),"finished_after_10ms":finished}))
+    assert(finished == 4)
+    warnings.free()
+    quit(0)

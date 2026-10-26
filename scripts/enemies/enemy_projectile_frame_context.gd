@@ -8,14 +8,17 @@ var position := Vector2.ZERO
 var center := Vector2.ZERO
 var radius := 0.0
 var accepts_damage := false
+var cached_physics_frame := -1
 
 
 func prepare(target: Node2D) -> bool:
 	if not is_instance_valid(target):
 		invalidate()
 		return false
-	if cached and cached_target == target:
+	var frame := Engine.get_physics_frames()
+	if cached and cached_target == target and cached_physics_frame == frame:
 		return true
+	cached_physics_frame = frame
 	cached_target = target
 	position = target.global_position
 	center = target.get_hurtbox_center() if target.has_method("get_hurtbox_center") else position

@@ -4,6 +4,7 @@ const PLAYER_DAMAGE_RESOLVER := preload("res://scripts/player/player_damage_reso
 const PLAYER_DAMAGE_BATCHER := preload("res://scripts/player/player_damage_batcher.gd")
 const PLAYER_PROJECTILE_QUERY := preload("res://scripts/player/player_projectile_query.gd")
 const PERFORMANCE_COUNTERS := preload("res://scripts/game/performance_counters.gd")
+const PERFORMANCE_RECORDER := preload("res://scripts/game/performance_recorder.gd")
 
 const MAX_BATCHED_PROJECTILES := 1800
 const DEFAULT_HIT_RADIUS := 10.0
@@ -269,9 +270,15 @@ func _physics_process(delta: float) -> void:
 			_update_multimesh_instances()
 		return
 	_update_animation_frame(delta)
+	PERFORMANCE_RECORDER.begin_scope("player_projectile_motion_ms")
 	_update_projectiles(delta)
+	PERFORMANCE_RECORDER.end_scope("player_projectile_motion_ms")
+	PERFORMANCE_RECORDER.begin_scope("player_projectile_collision_ms")
 	_check_projectile_hits()
+	PERFORMANCE_RECORDER.end_scope("player_projectile_collision_ms")
+	PERFORMANCE_RECORDER.begin_scope("player_projectile_render_ms")
 	_update_multimesh_instances()
+	PERFORMANCE_RECORDER.end_scope("player_projectile_render_ms")
 	PERFORMANCE_COUNTERS.add("batched_projectiles", positions.size())
 
 func _update_projectiles(delta: float) -> void:
@@ -316,6 +323,7 @@ func _check_projectile_hits() -> void:
 				_remove_projectile(index)
 		return
 	damage_batcher = _get_damage_batcher()
+	var checks_done := 0
 	# Collision is gameplay: every live segment is checked in its own physics tick.
 	# Reverse traversal keeps swap-removal and newly split bullets out of the way.
 	for index in range(positions.size() - 1, -1, -1):
@@ -323,6 +331,7 @@ func _check_projectile_hits() -> void:
 			continue
 		while true:
 			var hit_enemy: Node2D = _find_hit_enemy(index, enemy_grid)
+			checks_done += 1
 			if hit_enemy == null:
 				if lifetimes[index] <= 0.0:
 					_remove_projectile(index)
@@ -333,6 +342,7 @@ func _check_projectile_hits() -> void:
 				break
 			if pierce_counts[index] > 0:
 				pierce_counts[index] -= 1
+	PERFORMANCE_COUNTERS.add("player_projectile_collision_checks", checks_done)
 	if damage_batcher != null:
 		damage_batcher.flush()
 		damage_batcher = null

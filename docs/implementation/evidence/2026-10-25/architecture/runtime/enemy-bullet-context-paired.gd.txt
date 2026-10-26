@@ -1,0 +1,54 @@
+extends SceneTree
+const MAIN := preload("res://scenes/main.tscn")
+const SAVE := preload("res://scripts/save_manager.gd")
+const BULLET := preload("res://scenes/enemy_bullet.tscn")
+const BEFORE := preload("/tmp/mygame_enemy_bullet_context_before.gd")
+const OLD_CONTEXT := preload("/tmp/mygame_enemy_projectile_frame_context_before.gd")
+const CONTEXT := preload("res://scripts/enemies/enemy_projectile_frame_context.gd")
+const RENDERER := preload("res://scripts/enemies/boss_projectile_renderer.gd")
+
+func _init() -> void:
+	call_deferred("_run")
+
+func _run() -> void:
+	SAVE.set_active_endless_slot(3)
+	SAVE.create_or_load_endless_profile(3)
+	var main = MAIN.instantiate()
+	root.add_child(main)
+	current_scene = main
+	main.process_mode = Node.PROCESS_MODE_DISABLED
+	var renderer := RENDERER.get_or_create(main)
+	var groups := {}
+	for before in [true, false]:
+		groups[before] = []
+		for index in range(2000):
+			var bullet = BULLET.instantiate()
+			if before:
+				bullet.set_script(BEFORE)
+			main.add_child(bullet)
+			bullet.reset_projectile({"position":Vector2(500, index % 100 - 50),"direction":Vector2.RIGHT,"speed":120.0,"damage":1.0,"lifetime":100.0,"hit_radius":8.0,"target":main.player,"motion_mode":"danmaku","visual_style":"boss_danmaku_violet_orb"})
+			renderer.add_projectile(bullet)
+			groups[before].append(bullet)
+	var rows: Array = []
+	for pair in range(5):
+		for before in ([true, false] if pair % 2 == 0 else [false, true]):
+			var bullets: Array = groups[before]
+			for index in range(bullets.size()):
+				var bullet = bullets[index]
+				bullet.global_position = Vector2(500, index % 100 - 50)
+				bullet.base_position = bullet.global_position
+				bullet.direction = Vector2.RIGHT
+				bullet.base_direction = Vector2.RIGHT
+				bullet.travel_time = 0.0
+				bullet.remote_update_elapsed = 0.0
+				bullet.lifetime = 100.0
+			var started := Time.get_ticks_usec()
+			for frame in range(50):
+				var context = OLD_CONTEXT.new() if before else CONTEXT.new()
+				for bullet in bullets:
+					bullet.batch_physics_process(1.0 / 60.0, context)
+			rows.append({"pair":pair,"before":before,"per_step_ms":float(Time.get_ticks_usec() - started) / 50000.0})
+	print("ENEMY_BULLET_CONTEXT_PAIRED ", JSON.stringify({"mode":"danmaku","count":2000,"fixed_steps_per_sample":50,"alternating_order":true,"rows":rows}))
+	main.suppress_exit_save = true
+	main.free()
+	quit(0)

@@ -1,0 +1,12 @@
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+SCRIPT ERROR: Parse Error: Cannot call non-static function "call()" on the class "res://scripts/game/run_save_runtime_flow.gd" directly. Make an instance instead.
+          at: GDScript::reload (res://scripts/game/run_save_flow.gd:127)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+          at: GDScript::reload (res://scripts/main.gd:0)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+          at: GDScript::reload (/tmp/mygame_architecture_probe.gd:0)
+ERROR: Failed to load script "/tmp/mygame_architecture_probe.gd" with error "Compilation failed".
+   at: load (modules/gdscript/gdscript.cpp:2907)
+{"detached_pools_survive_scene_cleanup":{"enemy_alive":true,"pickup_alive":true},"old_damage_hits_reused_enemy":{"owner_applications":1,"replacement_health":83.0},"subsampled_projectile_loses_unchecked_segment":{"checks_per_tick":380,"fifth_tick_sweep_start_x":41.3333358764648,"projectiles":1800,"target_health":100.0,"target_x":5.0}}
+ARCHITECTURE_PROBE_OK

@@ -1,0 +1,106 @@
+extends SceneTree
+const MAIN = preload("res://scripts/main.gd")
+const QUEUE = preload("res://scripts/player/player_damage_job_queue.gd")
+const BATCH = preload("res://scripts/player/player_projectile_batch.gd")
+const GRID = preload("res://scripts/enemies/enemy_spatial_grid.gd")
+
+class BareMain extends MAIN:
+    func _ready() -> void:
+        pass
+    func _exit_tree() -> void:
+        pass
+
+class Enemy extends Node2D:
+    var current_health := 100.0
+    var pooled_inactive := false
+    var rebirth_timer := 0.0
+    var contact_radius := 20.0
+    var enemy_kind := "normal"
+    var archetype_id := "probe"
+    var behavior_id := ""
+    var secondary_behavior_id := ""
+    var _is_glutton := false
+class Owner extends Node2D:
+    var applications := 0
+    func _deal_damage_to_enemy(enemy, amount, _source, _vulnerability, _duration, _slow, _slow_duration, _position, _suppress, _energy) -> bool:
+        applications += 1
+        enemy.current_health -= amount
+        return false
+class Runtime extends Node2D:
+    var enemies: Array = []
+    func get_runtime_enemies() -> Array:
+        return enemies
+
+func _initialize() -> void:
+    call_deferred("_run")
+func _run() -> void:
+    var results := {}
+    var main := BareMain.new()
+    main.process_mode = Node.PROCESS_MODE_DISABLED
+    root.add_child(main)
+    var pooled_enemy := Enemy.new()
+    main.add_child(pooled_enemy)
+    var owner := Owner.new()
+    var queue := QUEUE.new()
+    queue.configure(owner)
+    queue.enqueue_values(weakref(pooled_enemy), pooled_enemy.get_instance_id(), 17.0, 1, "probe")
+    pooled_enemy.current_health = 0.0
+    pooled_enemy.pooled_inactive = true
+    main.release_runtime_enemy(pooled_enemy)
+    assert(pooled_enemy.get_parent() == null)
+    var reused = main.take_runtime_enemy_from_pool()
+    assert(reused == pooled_enemy)
+    main.add_child(reused)
+    reused.current_health = 100.0
+    reused.pooled_inactive = false
+    reused.archetype_id = "replacement"
+    queue._apply_job_at_index(0)
+    assert(reused.current_health == 83.0)
+    results.old_damage_hits_reused_enemy = {"replacement_health": reused.current_health, "owner_applications":owner.applications}
+    queue.free()
+    owner.free()
+    main.release_runtime_enemy(reused)
+    var pickup := Node2D.new()
+    main.add_child(pickup)
+    main.release_runtime_pickup("exp_gems", pickup)
+    assert(pickup.get_parent() == null)
+    main._cleanup_runtime_nodes()
+    main.free()
+    assert(is_instance_valid(reused))
+    assert(is_instance_valid(pickup))
+    results.detached_pools_survive_scene_cleanup = {"enemy_alive":is_instance_valid(reused),"pickup_alive":is_instance_valid(pickup)}
+    reused.free()
+    pickup.free()
+
+    var scene := Runtime.new()
+    scene.process_mode = Node.PROCESS_MODE_DISABLED
+    root.add_child(scene)
+    current_scene = scene
+    var target := Enemy.new()
+    target.position = Vector2(5, 0)
+    scene.add_child(target)
+    scene.enemies.append(target)
+    var shooter := Owner.new()
+    scene.add_child(shooter)
+    var batch := BATCH.new()
+    batch.configure(shooter)
+    for index in range(1800):
+        var origin := Vector2(0, 1000) if index < 1799 else Vector2.ZERO
+        assert(batch.add_projectile({"position":origin,"direction":Vector2.RIGHT,"speed":620.0,"lifetime":5.0,"damage":1.0,"hit_radius":10.0,"enemy_hit_radius_min":4.0,"enemy_hit_radius_max":4.0,"enemy_hit_radius_scale":0.2,"role_id":"probe"}))
+    batch._update_projectiles(1.0 / 60.0)
+    batch._check_projectile_hits()
+    assert(batch.scan_cursor == 380)
+    assert(batch._projectile_swept_hits_enemy_shape(Vector2.ZERO, batch.positions[1799], 10.0, target, 0.2, 4.0, 4.0))
+    for tick in range(4):
+        batch._update_projectiles(1.0 / 60.0)
+        batch._check_projectile_hits()
+    var forgotten := batch.previous_positions[1799]
+    assert(target.current_health == 100.0)
+    assert(batch._find_hit_enemy(1799, GRID.get_grid(scene)) == null)
+    results.subsampled_projectile_loses_unchecked_segment = {"projectiles":1800,"checks_per_tick":380,"fifth_tick_sweep_start_x":forgotten.x,"target_x":target.position.x,"target_health":target.current_health}
+    batch.free()
+    scene.free()
+    current_scene = null
+    print(JSON.stringify(results))
+    print("ARCHITECTURE_PROBE_OK")
+    quit(0)

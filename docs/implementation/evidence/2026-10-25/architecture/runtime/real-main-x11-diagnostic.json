@@ -1,0 +1,266 @@
+{
+	"cycles": [
+		{
+			"after_exit": {
+				"nodes": 12,
+				"orphans": 0,
+				"resources": 738,
+				"static_memory_bytes": 137005703
+			},
+			"after_exit_2_frames": {
+				"nodes": 12,
+				"orphans": 0,
+				"resources": 738,
+				"static_memory_bytes": 137004979
+			},
+			"completed_damage_jobs": 578,
+			"counter_peaks": {
+				"applied_damage_jobs": 8,
+				"batched_enemy_projectiles": 16323,
+				"batched_enemy_ticks": 216,
+				"completed_damage_jobs": 8,
+				"damage_candidates": 46,
+				"damage_hits": 46,
+				"damage_queries": 1,
+				"damage_queue_completed_wait_us": 1315471,
+				"damage_queue_oldest_wait_us": 1314274,
+				"damage_queue_size": 46,
+				"enemy_batch_eligible": 216,
+				"enemy_batch_scanned": 382,
+				"enemy_batch_skip_unsupported_behavior": 152,
+				"enemy_batch_skip_unsupported_kind": 24,
+				"merged_damage_jobs": 2,
+				"player_projectile_collision_checks": 33,
+				"queued_damage_jobs": 46,
+				"resolved_damage_jobs": 8,
+				"save_enemies": 47,
+				"save_enemy_projectiles": 2015,
+				"save_payload_kb": 3768,
+				"save_run_calls": 1,
+				"save_run_ms_x10": 3974,
+				"suppressed_hit_flash": 3
+			},
+			"cycle": 1,
+			"engine_process_cpu_ms": {
+				"avg_ms": 99.5214638888889,
+				"count": 360,
+				"max_ms": 420.477,
+				"p50_ms": 25.482,
+				"p95_ms": 371.88,
+				"p99_ms": 420.477
+			},
+			"explicit_save_cpu_ms": [
+				357.303,
+				84.503
+			],
+			"path_history_allocated": false,
+			"peak_entities": {
+				"enemies": 48,
+				"enemy_projectiles": 2035,
+				"player_projectiles": 0
+			},
+			"physics_steps": 1715,
+			"player_collision_checks": 985,
+			"queued_damage_jobs": 578,
+			"real_main_recorder": {
+				"avg_ms": 79.7199935185185,
+				"count": 360,
+				"label": "real_main_frames",
+				"max_ms": 150.0,
+				"p50_ms": 67.239,
+				"p95_ms": 141.619333333333,
+				"p99_ms": 148.046666666666,
+				"scope_peaks_ms": {
+					"autosave_trigger_ms": 406.803,
+					"boss_hud_ms": 11.172,
+					"distant_enemy_maintenance_ms": 0.092,
+					"enemy_batch_ms": 11.32,
+					"enemy_individual_ms": 36.215,
+					"enemy_projectile_batch_ms": 24.049,
+					"enemy_projectile_renderer_sync_ms": 14.617,
+					"enemy_projectile_simulation_ms": 24.003,
+					"hud_frame_ms": 15.585,
+					"hud_payload_active_role_ms": 0.009,
+					"hud_payload_attack_interval_ms": 4.188,
+					"hud_payload_cooldown_slots_ms": 4.041,
+					"hud_payload_misc_ms": 6.722,
+					"hud_stats_payload_ms": 10.475,
+					"hud_time_label_ms": 0.118,
+					"hud_update_stats_ms": 1.735,
+					"minimap_ms": 1.868,
+					"pending_spawns_ms": 0.102,
+					"performance_metrics_ms": 4.644,
+					"physics_phase_ms": 27.759,
+					"pickup_batch_ms": 1.004,
+					"pickup_compaction_ms": 0.043,
+					"player_projectile_collision_ms": 5.264,
+					"player_projectile_motion_ms": 0.019,
+					"player_projectile_render_ms": 0.169,
+					"save_backup_commit_ms": 7.891,
+					"save_json_serialize_ms": 100.387,
+					"save_payload_build_ms": 52.906,
+					"save_payload_finite_ms": 183.661,
+					"save_payload_validate_ms": 239.494,
+					"save_primary_commit_ms": 8.443,
+					"save_run_ms": 397.369,
+					"script_logic_ms": 414.471,
+					"spawn_events_ms": 0.188
+				},
+				"scope_totals_ms": {
+					"autosave_trigger_ms": 3297.82,
+					"boss_hud_ms": 49.291,
+					"distant_enemy_maintenance_ms": 2.894,
+					"enemy_batch_ms": 6086.196,
+					"enemy_individual_ms": 4353.056,
+					"enemy_projectile_batch_ms": 13305.706,
+					"enemy_projectile_renderer_sync_ms": 20.658,
+					"enemy_projectile_simulation_ms": 13215.284,
+					"hud_frame_ms": 1124.842,
+					"hud_payload_active_role_ms": 1.219,
+					"hud_payload_attack_interval_ms": 55.251,
+					"hud_payload_cooldown_slots_ms": 180.909,
+					"hud_payload_misc_ms": 701.322,
+					"hud_stats_payload_ms": 944.235,
+					"hud_time_label_ms": 11.027,
+					"hud_update_stats_ms": 107.75,
+					"minimap_ms": 85.876,
+					"pending_spawns_ms": 2.457,
+					"performance_metrics_ms": 28.06,
+					"physics_phase_ms": 19539.053,
+					"pickup_batch_ms": 35.813,
+					"pickup_compaction_ms": 1.496,
+					"player_projectile_collision_ms": 114.032,
+					"player_projectile_motion_ms": 0.634,
+					"player_projectile_render_ms": 5.696,
+					"save_backup_commit_ms": 67.838,
+					"save_json_serialize_ms": 997.172,
+					"save_payload_build_ms": 302.15,
+					"save_payload_finite_ms": 1639.892,
+					"save_payload_validate_ms": 2210.705,
+					"save_primary_commit_ms": 71.311,
+					"save_run_ms": 3657.561,
+					"script_logic_ms": 4571.519,
+					"spawn_events_ms": 20.404
+				}
+			},
+			"running_scene_objects": {
+				"nodes": 3576,
+				"orphans": 0,
+				"resources": 827,
+				"static_memory_bytes": 166198142
+			},
+			"scene_destroy_cpu_ms": 46.054,
+			"spawn_burst_cpu_ms": 70.139,
+			"spawn_queue_drain_wall_ms": 1534.165,
+			"survival_time_end": 35.688236,
+			"survival_time_start": 6.98903833333333,
+			"wall_frame_ms": {
+				"avg_ms": 101.270386111111,
+				"count": 360,
+				"max_ms": 611.661,
+				"p50_ms": 61.725,
+				"p95_ms": 221.058,
+				"p99_ms": 497.101
+			},
+			"wave_end": {
+				"blessing_offer": {
+
+				},
+				"blessing_pending": false,
+				"boss_started": false,
+				"claimed": false,
+				"elapsed": 35.688236,
+				"elite_index": 0,
+				"ending_elapsed": 0.0,
+				"ending_final": false,
+				"flyby_direction": [
+					1.0,
+					0.0
+				],
+				"flyby_left": 0,
+				"flyby_origin": [
+					0.0,
+					0.0
+				],
+				"flyby_remaining": 12.0,
+				"merchant_health": 200.0,
+				"merchant_position": [
+					0.0,
+					0.0
+				],
+				"phase": "combat",
+				"remaining": 30.0,
+				"small_boss_reward_pending": false,
+				"spawn_remaining": 24.311764,
+				"special_remaining": 0.0,
+				"version": 1,
+				"wave": 1
+			},
+			"wave_start": {
+				"blessing_offer": {
+
+				},
+				"blessing_pending": false,
+				"boss_started": false,
+				"claimed": false,
+				"elapsed": 6.98903833333333,
+				"elite_index": 0,
+				"ending_elapsed": 0.0,
+				"ending_final": false,
+				"flyby_direction": [
+					1.0,
+					0.0
+				],
+				"flyby_left": 0,
+				"flyby_origin": [
+					0.0,
+					0.0
+				],
+				"flyby_remaining": 12.0,
+				"merchant_health": 200.0,
+				"merchant_position": [
+					0.0,
+					0.0
+				],
+				"phase": "combat",
+				"remaining": 30.0,
+				"small_boss_reward_pending": false,
+				"spawn_remaining": 53.0109616666667,
+				"special_remaining": 0.0,
+				"version": 1,
+				"wave": 1
+			}
+		}
+	],
+	"display": "X11",
+	"engine": "4.6.2-stable (official)",
+	"environment": {
+		"cpu": "Intel(R) Core(TM) i5-14600K",
+		"display_environment": ":0",
+		"engine_arguments": [
+			"--script",
+			"scripts/tests/battle_lifecycle_benchmark.gd"
+		],
+		"gpu": "NVIDIA GeForce RTX 5080",
+		"gpu_type": 2,
+		"gpu_vendor": "NVIDIA"
+	},
+	"failures": [],
+	"last_three_exits_stable": false,
+	"max_fps": 120,
+	"quick_function_check": false,
+	"rendering_method": "mobile",
+	"scope": "Controlled real main.tscn frames; invulnerable fixture, not a full 20-wave playthrough or balance test",
+	"seed": 271828,
+	"workload": {
+		"aoe_every_30_process_frames": true,
+		"boss_id": "boss_spellcore",
+		"elite_ids": [
+			"elite_ram_trail",
+			"elite_splitshot"
+		],
+		"initial_boss_projectiles": 512,
+		"player_bullets_per_12_process_frames": 32,
+		"queued_normal_enemies": 40
+	}
+}

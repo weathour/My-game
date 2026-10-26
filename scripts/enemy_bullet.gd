@@ -305,6 +305,8 @@ func _run_physics_tick(delta: float, context: FRAME_CONTEXT = null) -> void:
 		return
 	if reflected:
 		_tick_reflected(delta)
+		if context != null:
+			context.invalidate()
 		return
 	if clear_fade_remaining > 0.0:
 		clear_fade_remaining = maxf(0.0, clear_fade_remaining - delta)
@@ -380,6 +382,8 @@ func _run_physics_tick(delta: float, context: FRAME_CONTEXT = null) -> void:
 			var point := Geometry2D.get_closest_point_to_segment(waves.merchant.global_position, motion_start, global_position)
 			if point.distance_squared_to(waves.merchant.global_position) <= pow(hit_radius + 24.0, 2):
 				waves.merchant.take_damage(damage)
+				if context != null:
+					context.invalidate()
 				recycle()
 				return
 	if split_after_time > 0.0 and not split_performed and travel_time >= split_after_time:
@@ -387,7 +391,7 @@ func _run_physics_tick(delta: float, context: FRAME_CONTEXT = null) -> void:
 		recycle()
 		return
 
-	_try_hit_player(context)
+	_try_hit_player(context, context != null)
 	if is_instance_valid(boss_render_owner):
 		boss_render_owner.update_transform(self)
 
@@ -664,9 +668,10 @@ func _update_returning_sine_motion(delta: float) -> bool:
 	rotation = direction.angle()
 	return false
 
-func _try_hit_player(context: FRAME_CONTEXT = null) -> void:
+func _try_hit_player(context: FRAME_CONTEXT = null, target_prepared: bool = false) -> void:
 	if context != null:
-		if not context.prepare(target):
+		# The normal tick already prepared it before motion and has not called gameplay.
+		if not target_prepared and not context.prepare(target):
 			return
 		var radius := hit_radius + context.radius
 		if global_position.distance_squared_to(context.center) > radius * radius:

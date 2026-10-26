@@ -1,0 +1,92 @@
+{
+  "fixture": {
+    "description": "real diagnostic snapshot, repeat one original projectile to 2000 entries; unchanged enemy/player data",
+    "source_projectile_count": 147,
+    "enemies": 44,
+    "expanded_projectiles": 2000,
+    "utf8_bytes": 3858202,
+    "canonical_payload_sha256": "f44d11e9844362d44b7a79731817fed1112c2d6aa6872800f756af9d0df73235",
+    "source_path": "/tmp/mygame-real-main-diagnostic-data/godot/app_userdata/survivor_like/endless_slots/slot_3/run_save.json"
+  },
+  "metrics": {
+    "finite_ms": {
+      "before_median_ms": 187.868,
+      "after_median_ms": 57.22,
+      "reduction_percent": 69.54,
+      "samples_per_version": 5
+    },
+    "validation_ms": {
+      "before_median_ms": 243.176,
+      "after_median_ms": 108.005,
+      "reduction_percent": 55.59,
+      "samples_per_version": 5
+    },
+    "interleaved_write_pair_ms": {
+      "sorted_reference_median_ms": 117.931,
+      "current_unsorted_median_ms": 113.279,
+      "reduction_percent": 3.94,
+      "samples_per_version": 5,
+      "note": "Same process and paths, alternating sorted reference and current API. The benefit is small; separate-process write timing was larger but is not used for attribution."
+    }
+  },
+  "validation_contract": {
+    "all_validation_retained": true,
+    "change": "Only containers and non-finite float leaves build diagnostic paths and recurse; finite scalar leaves are inspected and then skipped. Field/type/shape validation is unchanged.",
+    "diagnostic_paths_identical": [
+      "run: expected finite number",
+      "run: expected finite number",
+      "run.nested[1].bad: expected finite number",
+      "run.nested[0].deep[1]: expected finite number",
+      "run[1].空键.: expected finite number",
+      ""
+    ]
+  },
+  "write_contract": {
+    "change": "Run snapshots use compact JSON with object-key sorting disabled. Both atomic commits reuse one serialized string; permanent-profile writer behavior is unchanged.",
+    "identical_primary_backup": true,
+    "parsed_snapshot_equal": true,
+    "temporary_files_removed": true
+  },
+  "instrumentation": "Existing finite, validation, serialize and commit PERFORMANCE_RECORDER scopes were preserved.",
+  "checks": [
+    {
+      "log": "save-perf-validation-regression.log",
+      "status": "passed"
+    },
+    {
+      "log": "save-perf-integrity-regression.log",
+      "status": "passed"
+    },
+    {
+      "log": "save-perf-recovery-regression.log",
+      "status": "passed"
+    },
+    {
+      "log": "save-perf-player-roundtrip.log",
+      "status": "passed"
+    },
+    {
+      "log": "save-perf-reward-recovery.log",
+      "status": "passed"
+    },
+    {
+      "log": "save-perf-headless.log",
+      "status": "passed"
+    },
+    {
+      "check": "git diff --check",
+      "status": "passed"
+    }
+  ],
+  "source_sha256": {
+    "scripts/save/run_payload_validator.gd": "8ac16faebb9a4288ff98e52d715587e08bc61a8090ccc03517d8dcc6771b79b1",
+    "scripts/save/save_file_store.gd": "0f392e71a1110458d276db131145d0addab934d57fd6fa85544d51aa2540fee4",
+    "scripts/tests/run_payload_validation_smoke.gd": "536a725f37f89c4f4a8a81f9f55520f8ddf64bf82b1a8aa9c4361ca720bb5607",
+    "scripts/tests/run_restore_integrity_smoke.gd": "451f75476c700d361ee324e276ea3d6f36281b3d07bd6ec5fddb958a184db4ae"
+  },
+  "limits": [
+    "This is a bounded microbenchmark of a real payload expanded to 2000 projectiles, not a full gameplay or frame-time improvement claim.",
+    "Five timings per version; filesystem and CPU scheduling noise remain. The performance owner receives the exclusive window for the final gameplay benchmark.",
+    "No full-project gate or Graphify update was run by this worker."
+  ]
+}

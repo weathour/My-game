@@ -63,6 +63,7 @@ static func start(main: Node) -> void:
 	session_id = "%d_%d" % [Time.get_unix_time_from_system(), Engine.get_process_frames()]
 	_write_line({
 		"event": "session_start",
+		"run_context": _run_context(main),
 		"session_id": session_id,
 		"datetime": Time.get_datetime_string_from_system(),
 		"time_msec": Time.get_ticks_msec(),
@@ -105,6 +106,7 @@ static func _write_sample(main: Node, delta: float, reason: String) -> void:
 	var is_paused := tree.paused if tree != null else false
 	_write_line({
 		"event": "sample",
+		"run_context": _run_context(main),
 		"session_id": session_id,
 		"sample": sample_index,
 		"reason": reason,
@@ -152,3 +154,13 @@ static func _write_line(payload: Dictionary) -> void:
 		return
 	trace_file.store_line(JSON.stringify(payload))
 	trace_file.flush()
+
+static func _run_context(main: Node) -> Dictionary:
+	var flow = main.get("wave_flow")
+	return {
+		"save": main.get_meta("save_context", {}),
+		"run_id": str(main.get("endless_run_id")) if main.get("endless_run_id") != null else "",
+		"story_attempt": main.get_meta("story_attempt", {}),
+		"wave": int(flow.wave) if is_instance_valid(flow) else 0,
+		"phase": str(flow.phase) if is_instance_valid(flow) else "story_or_training"
+	}

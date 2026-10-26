@@ -1,0 +1,36 @@
+extends "res://scripts/tests/player_projectile_path_contract_smoke.gd"
+
+func _run() -> void:
+	var scene := Runtime.new()
+	scene.process_mode = Node.PROCESS_MODE_DISABLED
+	root.add_child(scene)
+	current_scene = scene
+	var owner := Node2D.new()
+	scene.add_child(owner)
+	var target := Target.new()
+	target.position = Vector2(5, 0)
+	scene.add_child(target)
+	scene.enemies.append(target)
+	var rows: Array = []
+	for all_hit in [false, true]:
+		for sample in range(3):
+			var batch := _new_batch(owner)
+			var before_bytes := int(Performance.get_monitor(Performance.MEMORY_STATIC))
+			_add_workload(batch)
+			if all_hit:
+				for index in range(batch.positions.size()):
+					batch.positions[index] = Vector2.ZERO
+					batch.previous_positions[index] = Vector2.ZERO
+			var allocation_bytes := int(Performance.get_monitor(Performance.MEMORY_STATIC)) - before_bytes
+			GRID.cached_frame = -1
+			var started := Time.get_ticks_usec()
+			batch._update_projectiles(1.0 / 60.0)
+			batch._check_projectile_hits()
+			var elapsed_ms := float(Time.get_ticks_usec() - started) / 1000.0
+			var queue := scene.get_node("PlayerDamageJobQueue")
+			rows.append({"all_1800_hit":all_hit,"sample":sample,"projectiles":1800,"one_fixed_step_collision_and_motion_ms":elapsed_ms,"array_allocation_static_bytes":allocation_bytes,"pending_damage_jobs":queue.enemy_refs.size(),"damage_hit_count":queue.hit_counts[0]})
+			queue.free()
+			batch.free()
+	print("PLAYER_PROJECTILE_CAPACITY_PROFILE ", JSON.stringify(rows))
+	scene.free()
+	quit(0)

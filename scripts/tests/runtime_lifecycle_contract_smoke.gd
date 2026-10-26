@@ -6,6 +6,7 @@ const LIFECYCLE := preload("res://scripts/enemies/enemy_pool_lifecycle.gd")
 const QUEUE := preload("res://scripts/player/player_damage_job_queue.gd")
 const BATCHER := preload("res://scripts/player/player_damage_batcher.gd")
 const WARNING := preload("res://scripts/game/spawn_warning_batch.gd")
+const COUNTERS := preload("res://scripts/game/performance_counters.gd")
 
 var finished_warnings: Array[int] = []
 
@@ -57,9 +58,13 @@ func _check_activation_and_damage(main: Node) -> void:
 	queue.job_cursor = 64
 	queue._compact_processed_jobs(false)
 	assert(queue.enemy_generations.size() == 6 and queue.enemy_refs.size() == 6)
+	assert(queue.queued_at_usec.size() == 6)
+	queue.queued_at_usec[0] = Time.get_ticks_usec() - 20000
 	queue._physics_process(0.0)
+	var counters: Dictionary = COUNTERS.get_snapshot().current_frame
+	assert(counters.completed_damage_jobs == 6 and counters.damage_queue_oldest_wait_us >= 20000 and counters.damage_queue_completed_wait_us >= 20000)
 	queue._clear_jobs()
-	assert(queue.enemy_generations.is_empty())
+	assert(queue.enemy_generations.is_empty() and queue.queued_at_usec.is_empty())
 	queue.free()
 
 	var health_before_batch: float = enemy.current_health

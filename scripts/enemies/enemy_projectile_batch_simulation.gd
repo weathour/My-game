@@ -4,6 +4,7 @@ const PERFORMANCE_COUNTERS := preload("res://scripts/game/performance_counters.g
 const ENEMY_BULLET := preload("res://scripts/enemy_bullet.gd")
 const BOSS_RENDERER := preload("res://scripts/enemies/boss_projectile_renderer.gd")
 const FRAME_CONTEXT := preload("res://scripts/enemies/enemy_projectile_frame_context.gd")
+const PERFORMANCE_RECORDER := preload("res://scripts/game/performance_recorder.gd")
 
 const BATCH_FRAME_META_KEY := "__enemy_projectile_batch_simulation_frame"
 
@@ -20,6 +21,8 @@ static func update_enemy_projectiles(scene: Node, delta: float, render_boss_proj
 	var context := FRAME_CONTEXT.new()
 	var profile := bool(scene.get_meta(&"_profile_boss_projectiles", false))
 	var started := Time.get_ticks_usec() if profile else 0
+	if profile:
+		PERFORMANCE_RECORDER.begin_scope("enemy_projectile_simulation_ms")
 	var updated_count := 0
 	for raw_projectile in _get_runtime_enemy_projectiles(scene):
 		if not is_instance_valid(raw_projectile):
@@ -55,9 +58,13 @@ static func update_enemy_projectiles(scene: Node, delta: float, render_boss_proj
 		updated_count += 1
 
 	var render_started := Time.get_ticks_usec() if profile else 0
+	if profile:
+		PERFORMANCE_RECORDER.end_scope("enemy_projectile_simulation_ms")
+		PERFORMANCE_RECORDER.begin_scope("enemy_projectile_renderer_sync_ms")
 	if renderer != null:
 		renderer.sync()
 	if profile:
+		PERFORMANCE_RECORDER.end_scope("enemy_projectile_renderer_sync_ms")
 		scene.set_meta(&"_boss_simulation_usec", render_started - started)
 		scene.set_meta(&"_boss_render_upload_usec", Time.get_ticks_usec() - render_started)
 	if updated_count > 0:

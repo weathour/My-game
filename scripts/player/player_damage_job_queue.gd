@@ -34,6 +34,7 @@ var source_player: Node
 var enemy_refs: Array[WeakRef] = []
 var enemy_ids: Array[int] = []
 var enemy_generations: Array[int] = []
+var queued_at_usec: Array[int] = []
 var damage_amounts: PackedFloat32Array = PackedFloat32Array()
 var hit_counts: Array[int] = []
 var source_role_ids: PackedStringArray = PackedStringArray()
@@ -103,6 +104,7 @@ func enqueue_values(enemy_ref: WeakRef, enemy_id: int, damage_amount: float, hit
 	enemy_refs.append(enemy_ref)
 	enemy_ids.append(enemy_id)
 	enemy_generations.append(generation)
+	queued_at_usec.append(Time.get_ticks_usec())
 	damage_amounts.append(damage_amount)
 	hit_counts.append(hit_count)
 	source_role_ids.append(source_role_id)
@@ -136,6 +138,7 @@ func _physics_process(_delta: float) -> void:
 		PERFORMANCE_COUNTERS.add("damage_queue_size", 0)
 		return
 	PERFORMANCE_COUNTERS.add("damage_queue_size", queue_size)
+	PERFORMANCE_COUNTERS.record_max("damage_queue_oldest_wait_us", Time.get_ticks_usec() - queued_at_usec[job_cursor])
 	if source_player == null or not is_instance_valid(source_player):
 		_clear_jobs()
 		job_cursor = 0
@@ -152,12 +155,14 @@ func _physics_process(_delta: float) -> void:
 		var enemy_id: int = enemy_ids[current_index]
 		if enemy_id != 0 and int(pending_by_enemy_id.get(enemy_id, -1)) == current_index:
 			pending_by_enemy_id.erase(enemy_id)
+		PERFORMANCE_COUNTERS.record_max("damage_queue_completed_wait_us", Time.get_ticks_usec() - queued_at_usec[current_index])
 		_apply_job_at_index(current_index)
 		processed += 1
 	_flush_pending_kill_energy()
 	_flush_attack_results()
 	_compact_processed_jobs(false)
 	PERFORMANCE_COUNTERS.add("applied_damage_jobs", processed)
+	PERFORMANCE_COUNTERS.add("completed_damage_jobs", processed)
 
 
 func _apply_job_at_index(index: int) -> void:
@@ -168,7 +173,9 @@ func _apply_job_at_index(index: int) -> void:
 	if not _is_enemy_damageable(enemy):
 		return
 	if int(enemy.get_meta(ENEMY_LIFECYCLE.ACTIVATION_GENERATION_META, -1)) != enemy_generations[index]:
+		PERFORMANCE_COUNTERS.add("discarded_stale_damage_jobs", 1)
 		return
+	PERFORMANCE_COUNTERS.add("resolved_damage_jobs", 1)
 	var damage_amount: float = damage_amounts[index]
 	var source_role_id: String = source_role_ids[index]
 	var resolved_source_role_id: String = _resolve_damage_source_role_id(source_role_id)
@@ -480,6 +487,7 @@ func _compact_processed_jobs(force: bool) -> void:
 			enemy_refs[write_index] = enemy_refs[read_index]
 			enemy_ids[write_index] = enemy_ids[read_index]
 			enemy_generations[write_index] = enemy_generations[read_index]
+			queued_at_usec[write_index] = queued_at_usec[read_index]
 			damage_amounts[write_index] = damage_amounts[read_index]
 			hit_counts[write_index] = hit_counts[read_index]
 			source_role_ids[write_index] = source_role_ids[read_index]
@@ -497,6 +505,7 @@ func _compact_processed_jobs(force: bool) -> void:
 		enemy_refs.resize(remaining_size)
 		enemy_ids.resize(remaining_size)
 		enemy_generations.resize(remaining_size)
+		queued_at_usec.resize(remaining_size)
 		damage_amounts.resize(remaining_size)
 		hit_counts.resize(remaining_size)
 		source_role_ids.resize(remaining_size)
@@ -519,6 +528,7 @@ func _clear_jobs() -> void:
 	enemy_refs.clear()
 	enemy_ids.clear()
 	enemy_generations.clear()
+	queued_at_usec.clear()
 	damage_amounts.clear()
 	hit_counts.clear()
 	source_role_ids.clear()

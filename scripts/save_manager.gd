@@ -5,6 +5,7 @@ const DEVELOPER_MODE := preload("res://scripts/developer_mode.gd")
 const SAVE_FILE_STORE := preload("res://scripts/save/save_file_store.gd")
 const SAVE_PROFILE_DEFAULTS := preload("res://scripts/save/save_profile_defaults.gd")
 const RUN_PAYLOAD := preload("res://scripts/save/run_payload_validator.gd")
+const PERFORMANCE_RECORDER := preload("res://scripts/game/performance_recorder.gd")
 
 const STORY_SLOT_COUNT := 3
 const ENDLESS_SLOT_COUNT := 9
@@ -270,7 +271,9 @@ static func has_save(slot_id: int = -1, mode: String = "") -> bool:
 	return not load_run(slot_id, mode).is_empty()
 
 static func save_run(data: Dictionary, slot_id: int = -1, mode: String = "") -> int:
+	PERFORMANCE_RECORDER.begin_scope("save_payload_validate_ms")
 	var payload_error := RUN_PAYLOAD.error(data)
+	PERFORMANCE_RECORDER.end_scope("save_payload_validate_ms")
 	if payload_error != "":
 		return 0
 	var resolved_mode := mode if mode != "" else get_active_mode()
