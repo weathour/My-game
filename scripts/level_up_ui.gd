@@ -1690,6 +1690,8 @@ func _play_pending_tier_four_card_intro_effects() -> void:
 		_play_tier_four_card_intro_effect(card)
 
 func _play_tier_four_card_intro_effect(card: TextureButton) -> void:
+	if GAME_SETTINGS.comfort_enabled("reduced_motion"):
+		return
 	if card == null or not is_instance_valid(card):
 		return
 	_kill_build_card_tween(card)
@@ -1868,6 +1870,8 @@ func _animate_trait_button_hover(button: Button, hovered: bool) -> void:
 	build_card_hover_tweens[key] = tween
 
 func _play_trait_button_select_animation(button: Button) -> void:
+	if GAME_SETTINGS.comfort_enabled("reduced_motion"):
+		return
 	if button == null or not is_instance_valid(button):
 		return
 	var key := button.get_instance_id()
@@ -1897,6 +1901,8 @@ func _play_trait_button_select_animation(button: Button) -> void:
 	await hold_timer.timeout
 
 func _play_build_card_select_animation(card: TextureButton) -> void:
+	if GAME_SETTINGS.comfort_enabled("reduced_motion"):
+		return
 	if card == null or not is_instance_valid(card):
 		return
 	var key := card.get_instance_id()

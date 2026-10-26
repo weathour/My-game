@@ -38,7 +38,9 @@ func _run() -> void:
 	pause_menu.set_endless_mode_enabled(true)
 	await process_frame
 	assert(pause_menu.end_run_button.visible)
-	_assert_inside_modal(pause_menu.hud_layout_option, pause_menu.modal)
+	pause_menu.settings_panel.open()
+	assert(pause_menu.settings_panel.visible)
+	pause_menu.settings_panel.close_panel()
 	pause_menu._on_end_run_pressed()
 	assert(pause_menu.end_run_confirm_dialog != null)
 	var end_requested := [false]
@@ -54,7 +56,9 @@ func _run() -> void:
 	settings_panel._show_display_settings()
 	await process_frame
 	_assert_inside_modal(settings_panel.hud_layout_option, settings_panel.modal)
-	_assert_inside_modal(_last_label(settings_panel.display_page), settings_panel.modal)
+	settings_panel.page_scroll.ensure_control_visible(settings_panel.comfort_checks["large_story_text"])
+	await process_frame
+	_assert_inside_modal(settings_panel.comfort_checks["large_story_text"], settings_panel.modal)
 
 	var game_over_ui := GAME_OVER_UI.new()
 	root.add_child(game_over_ui)

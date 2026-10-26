@@ -173,6 +173,7 @@ static func finish_story_stage(main: Node) -> void:
 	if bool(main.get_meta("last_run_save_ok", false)):
 		response = STORY_PROGRESS.settle_stage(int(attempt.get("slot_id", -1)), str(attempt.get("attempt_id", "")))
 	if response.ok:
+		preload("res://scripts/ui/ui_audio.gd").play("stage")
 		main.remove_meta("pending_story_settlement")
 		main.suppress_exit_save = true
 		main.GAME_SESSION_FLOW.reset_game_speed(main)
@@ -180,6 +181,7 @@ static func finish_story_stage(main: Node) -> void:
 		main.get_tree().change_scene_to_file(STORY_PREP_SCENE_PATH)
 	else:
 		main.reward_context = "story_settlement"
+		preload("res://scripts/ui/ui_audio.gd").play("error")
 		main.level_up_ui.show_menu("关卡已完成，结果待保存", [{"id": "story_settlement_retry", "title": "重试保存并返营", "description": STORY_PROGRESS.message(response.reason)}])
 
 static func handle_upgrade_selected(main: Node, option_id: String, attribute_option_id: String = "") -> void:
@@ -400,6 +402,7 @@ static func show_endless_boss_reward(main: Node, settlement: Dictionary = {}) ->
 		option_id = ENDLESS_TIER_CLEAR_RETRY_OPTION_ID
 		option_title = "重试结算"
 	if bool(settlement.get("applied", false)):
+		preload("res://scripts/ui/ui_audio.gd").play("stage")
 		description = "通关奖励：%d 骨。" % int(settlement.get("base_reward", 0))
 		if bool(settlement.get("first_clear", false)):
 			description += "\n首通奖励：%d 骨。已解锁 N%d。" % [

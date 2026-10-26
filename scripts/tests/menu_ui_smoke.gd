@@ -38,7 +38,7 @@ func _run() -> void:
 	panel.open()
 	await _settle()
 	_expect(panel.category_buttons[0].has_focus(), "Settings must take keyboard focus")
-	_expect(panel.mute_checkbox.text == "静音", "Mute must have an accessible visible label")
+	_expect(panel.mute_checkbox.text == "背景音乐静音", "Mute must have an accessible visible label")
 	await _capture("settings-audio")
 	panel._show_keybind_settings()
 	await _settle()
@@ -111,7 +111,7 @@ func _run() -> void:
 	var tier = load("res://scripts/ui/save/endless_tier_overlay.gd").new()
 	root.add_child(tier)
 	_expect(tier.modal.title_label.text == "选择无尽 N 层", "Tier selection title must survive pre-ready configuration")
-	_expect(tier.modal.hint_label.text.contains("到场"), "Tier selection must describe Boss arrival, not a 12-minute deadline")
+	_expect(tier.modal.hint_label.text.contains("20 波") and tier.modal.hint_label.text.contains("第 20 波"), "Tier selection must describe the current 20-wave route")
 	tier.queue_free()
 	await process_frame
 

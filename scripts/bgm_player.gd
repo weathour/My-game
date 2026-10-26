@@ -117,29 +117,21 @@ func _is_headless_runtime() -> bool:
 	return str(DisplayServer.get_name()).to_lower() == "headless"
 
 static func load_music_volume() -> float:
-	var config := ConfigFile.new()
-	var load_result := config.load(SETTINGS_PATH)
-	if load_result != OK:
-		return DEFAULT_VOLUME_LINEAR
+	var config := preload("res://scripts/game_settings.gd")._get_config()
 
 	return float(config.get_value(SETTINGS_SECTION, MUSIC_VOLUME_KEY, DEFAULT_VOLUME_LINEAR))
 
 static func save_music_volume(saved_volume_linear: float) -> void:
-	var config := ConfigFile.new()
-	config.load(SETTINGS_PATH)
+	var config := preload("res://scripts/game_settings.gd")._get_config()
 	config.set_value(SETTINGS_SECTION, MUSIC_VOLUME_KEY, clamp(saved_volume_linear, 0.0, 1.0))
 	config.save(SETTINGS_PATH)
 
 static func load_music_muted() -> bool:
-	var config := ConfigFile.new()
-	var load_result := config.load(SETTINGS_PATH)
-	if load_result != OK:
-		return false
+	var config := preload("res://scripts/game_settings.gd")._get_config()
 
 	return bool(config.get_value(SETTINGS_SECTION, MUSIC_MUTED_KEY, false))
 
 static func save_music_muted(muted: bool) -> void:
-	var config := ConfigFile.new()
-	config.load(SETTINGS_PATH)
+	var config := preload("res://scripts/game_settings.gd")._get_config()
 	config.set_value(SETTINGS_SECTION, MUSIC_MUTED_KEY, muted)
 	config.save(SETTINGS_PATH)

@@ -111,6 +111,9 @@ static func action_button_style(kind: String = "normal", selected: bool = false)
 static func apply_button_style(button: Button, kind: String = "normal", selected: bool = false) -> void:
 	if button == null:
 		return
+	if not button.has_meta("ui_audio_bound"):
+		button.set_meta("ui_audio_bound", true)
+		button.pressed.connect(preload("res://scripts/ui/ui_audio.gd").play)
 	button.add_theme_stylebox_override("normal", action_button_style(kind, selected))
 	var hover := action_button_style(kind, true if selected else false)
 	hover.bg_color = hover.bg_color.lightened(0.08)

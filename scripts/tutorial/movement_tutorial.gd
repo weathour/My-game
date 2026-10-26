@@ -289,32 +289,35 @@ func _update_portal_interaction_state() -> void:
 	if in_range == player_in_portal_range:
 		return
 	player_in_portal_range = in_range
-	continue_label.text = "按 F 查看角色介绍" if player_in_portal_range else "前往传送门"
+	continue_label.text = "按 %s 查看角色介绍" % _key(GAME_SETTINGS.ACTION_INTERACT) if player_in_portal_range else "前往传送门"
 
+
+func _key(action: String) -> String:
+	return GAME_SETTINGS.get_key_display_name(GAME_SETTINGS.load_keycode(action))
 
 func _update_step_text() -> void:
 	_update_tutorial_panel_layout()
 	match current_step:
 		TutorialStep.MOVE_TO_MARKER:
-			tutorial_label.text = "使用 WASD 移动到发光标记点"
+			tutorial_label.text = "使用 %s / %s / %s / %s 移动到发光标记点" % [_key("move_up"), _key("move_left"), _key("move_down"), _key("move_right")]
 			continue_label.visible = false
 		TutorialStep.ATTACK_DUMMY:
 			tutorial_label.text = "现在去对幽影树人木桩造成伤害"
 			continue_label.visible = false
 		TutorialStep.SWITCH_ROLE:
-			tutorial_label.text = "按 Q 切换上一名队友" if switch_step == SwitchTutorialStep.PREV_ROLE else "按 E 切换下一名队友"
+			tutorial_label.text = "按 %s 切换上一名队友" % _key("switch_prev") if switch_step == SwitchTutorialStep.PREV_ROLE else "按 %s 切换下一名队友" % _key("switch_next")
 			continue_label.visible = false
 		TutorialStep.SWITCH_ENERGY:
-			tutorial_label.text = "当前角色切换能量满时，切人会消耗其能量，触发新角色的登场技" if switch_energy_step == SwitchEnergyTutorialStep.INTRO else "按 Q/E 切换角色释放登场技"
+			tutorial_label.text = "当前角色切换能量满时，切人会消耗其能量，触发新角色的登场技" if switch_energy_step == SwitchEnergyTutorialStep.INTRO else "按 %s / %s 切换角色释放登场技" % [_key("switch_prev"), _key("switch_next")]
 			continue_label.visible = false
 		TutorialStep.ULTIMATE:
-			tutorial_label.text = "终极技能能量收集完毕，按 R 释放你的终极技能"
+			tutorial_label.text = "终极技能能量收集完毕，按 %s 释放你的终极技能" % _key("ultimate")
 			continue_label.visible = false
 		TutorialStep.ROLE_INTRO:
 			tutorial_label.text = ""
 			continue_label.visible = false
 		TutorialStep.ENTER_PORTAL:
-			tutorial_label.text = "已完成切换教学。前往传送门进入无尽模式"
+			tutorial_label.text = "无尽每层共20波。升级后用技能栏＋分配角色各自的技能点；波间可领取急救并跳过整备。前往传送门出击。"
 			continue_label.visible = true
 			continue_label.text = "前往传送门"
 			tutorial_portal.visible = true
@@ -472,7 +475,7 @@ func _update_attack_mode_hint_tutorial_highlight() -> void:
 		attack_mode_hint_tutorial_tween = null
 	hint_panel.scale = Vector2.ONE
 	hint_panel.modulate = Color(1.0, 1.0, 1.0, 1.0)
-	if current_step != TutorialStep.ATTACK_DUMMY:
+	if current_step != TutorialStep.ATTACK_DUMMY or GAME_SETTINGS.comfort_enabled("reduced_motion") or GAME_SETTINGS.comfort_enabled("reduced_flash"):
 		return
 	attack_mode_hint_tutorial_tween = create_tween()
 	attack_mode_hint_tutorial_tween.set_loops()

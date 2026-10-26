@@ -4,6 +4,11 @@ extends RefCounted
 static func update_camera_shake(owner, delta: float) -> void:
 	if owner.camera_node == null:
 		return
+	if preload("res://scripts/game_settings.gd").comfort_enabled("reduced_motion"):
+		owner.camera_shake_time = 0.0
+		owner.external_camera_shake_time = 0.0
+		owner.camera_node.offset = owner.camera_base_offset
+		return
 	if owner.camera_shake_time <= 0.0 and owner.external_camera_shake_time <= 0.0:
 		owner.camera_node.offset = owner.camera_base_offset
 		return

@@ -67,6 +67,8 @@ static func save_run_state(main: Node) -> bool:
 	var context: Dictionary = main.get_meta("save_context", {})
 	var payload_chars: int = int(SAVE_MANAGER.save_run(save_data, int(context.get("slot", -1)), str(context.get("mode", ""))))
 	main.set_meta("last_run_save_ok", payload_chars > 0)
+	if main.hud != null and main.hud.has_method("set_save_status"):
+		main.hud.set_save_status(payload_chars > 0 and not bool(main.player.get_meta("bone_save_failed", false)))
 	PERFORMANCE_RECORDER.end_scope("save_run_ms")
 	_record_save_probe_counters(save_data, payload_chars, Time.get_ticks_usec() - save_start_usec)
 	return payload_chars > 0

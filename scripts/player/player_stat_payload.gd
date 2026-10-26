@@ -170,6 +170,7 @@ static func _build_team_role_statuses(owner, active_role_id: String, include_des
 		var current_mana: float = clamp(float(owner._get_role_mana(role_id)), 0.0, max_mana)
 		statuses.append({
 			"role_id": role_id,
+			"skill_points": owner.get_role_skill_points(role_id),
 			"role_name": str(role_data.get("name", role_id)),
 			"role_index": index,
 			"is_active": role_id == active_role_id,

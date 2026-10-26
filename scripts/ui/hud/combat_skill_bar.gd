@@ -197,12 +197,12 @@ func _create_slot_upgrade_button(slot_icon: Control) -> Button:
 	button.offset_right = 13.0
 	button.offset_top = -26.0
 	button.offset_bottom = -4.0
-	button.focus_mode = Control.FOCUS_NONE
+	button.focus_mode = Control.FOCUS_ALL
 	button.z_index = 5
 	button.add_theme_font_size_override("font_size", 22)
 	for state in ["font_color", "font_hover_color", "font_pressed_color", "font_focus_color"]:
 		button.add_theme_color_override(state, Color(1.0, 0.88, 0.05, 1.0))
-	for state in ["normal", "hover", "pressed"]:
+	for state in ["normal", "hover", "pressed", "focus"]:
 		var style := StyleBoxFlat.new()
 		style.bg_color = Color(0.24, 0.16, 0.01, 1.0) if state == "hover" else Color(0.09, 0.07, 0.01, 1.0)
 		style.border_color = Color(1.0, 0.83, 0.08, 1.0)
@@ -228,10 +228,12 @@ func _set_slot_upgrade_state(slot_nodes: Dictionary, slot_data: Dictionary, role
 	var skill_id := str(slot_nodes.get("skill_id", ""))
 	slot_nodes["role_active"] = role_active
 	var eligible := bool(slot_nodes.get("can_learn", false)) if skill_id == "" else bool(slot_nodes.get("can_upgrade", false))
-	var can_show := skill_point_count > 0 and role_active and str(slot_nodes.get("role_id", "")) != "" and eligible
+	var role_id := str(slot_nodes.get("role_id", ""))
+	var points := skill_point_count if role_active else int(team_role_status_by_id.get(role_id, {}).get("skill_points", 0))
+	var can_show := points > 0 and role_active and role_id != "" and eligible
 	var slot_view: SkillCooldownIcon = slot_nodes.get("view") as SkillCooldownIcon
 	if slot_view != null:
-		slot_view.set_skill_point_highlighted(skill_point_count > 0 and str(slot_nodes.get("role_id", "")) != "")
+		slot_view.set_skill_point_highlighted(points > 0 and role_id != "")
 	button.visible = can_show
 	button.disabled = not can_show
 	button.tooltip_text = "消耗 1 个技能点，升级%s" % str(slot_nodes.get("title", "技能")) if skill_id != "" else "消耗 1 个技能点，选择一个尚未拥有的技能"

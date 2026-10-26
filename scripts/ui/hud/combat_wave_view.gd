@@ -1,6 +1,7 @@
 extends CanvasLayer
 
 const UI := preload("res://scripts/ui/theme/survivors_ui_theme.gd")
+const PLAN := preload("res://scripts/game/combat_wave_plan.gd")
 var flow
 var root: Control
 var status: Label
@@ -75,7 +76,11 @@ func refresh() -> void:
 		hide_all()
 		return
 	root.show()
-	status.visible = false
+	status.visible = true
+	var phase_label: String = {"combat": "战斗", "clearing": "清理战场", "collecting": "回收经验", "settling": "选择奖励", "preparation": "整备"}.get(flow.phase, "选择奖励")
+	if flow.phase == "combat" and PLAN.duration(flow.wave) == 0:
+		phase_label = "击败 Boss 后结算"
+	status.text = "第 %d / 20 波 · %s\n%s" % [flow.wave, PLAN.title(flow.wave), phase_label]
 	var preparing: bool = flow.phase == "preparation"
 	skip_button.visible = preparing
 	shop_button.visible = preparing

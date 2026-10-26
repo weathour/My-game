@@ -1,5 +1,7 @@
 extends Control
 
+signal hud_layout_changed(layout_key: String)
+
 const BGM_PLAYER_SCRIPT := preload("res://scripts/bgm_player.gd")
 const GAME_SETTINGS := preload("res://scripts/game_settings.gd")
 const SURVIVORS_MODAL := preload("res://scripts/ui/core/survivors_modal.gd")
@@ -65,6 +67,9 @@ var keybind_buttons: Dictionary = {}
 var keybind_status_label: Label
 var waiting_for_key_action: String = ""
 var modal: Control
+var sfx_slider: HSlider
+var sfx_value: Label
+var comfort_checks: Dictionary = {}
 
 func _ready() -> void:
 	_fit_to_viewport()
@@ -106,6 +111,8 @@ func _input(event: InputEvent) -> void:
 	if not key_event.pressed or key_event.echo:
 		return
 	if waiting_for_key_action.is_empty():
+		if modal.cycle_keyboard_focus(event):
+			return
 		if key_event.keycode == KEY_ESCAPE:
 			close_panel()
 			get_viewport().set_input_as_handled()
@@ -222,9 +229,22 @@ func _build_volume_page() -> VBoxContainer:
 	page.add_child(volume_value_label)
 
 	mute_checkbox = CheckBox.new()
-	mute_checkbox.text = "静音"
+	mute_checkbox.text = "背景音乐静音"
 	mute_checkbox.toggled.connect(_on_mute_toggled)
 	page.add_child(mute_checkbox)
+	page.add_child(SURVIVORS_THEME.make_hint_label("界面与结果音效 · 0% 为静音"))
+	sfx_slider = HSlider.new()
+	sfx_slider.max_value = 1.0
+	sfx_slider.step = 0.01
+	sfx_slider.custom_minimum_size.y = 36
+	sfx_slider.value_changed.connect(func(value: float):
+		GAME_SETTINGS.save_sfx_volume(value)
+		sfx_value.text = "%d%%" % roundi(value * 100)
+	)
+	sfx_slider.drag_ended.connect(func(_changed): preload("res://scripts/ui/ui_audio.gd").play("reward"))
+	page.add_child(sfx_slider)
+	sfx_value = SURVIVORS_THEME.make_hint_label("")
+	page.add_child(sfx_value)
 
 	return page
 
@@ -297,6 +317,14 @@ func _build_display_page() -> VBoxContainer:
 	var performance_trace_hint := SURVIVORS_THEME.make_hint_label(TEXT_PERFORMANCE_TRACE_HINT)
 	performance_trace_hint.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
 	page.add_child(performance_trace_hint)
+	var comfort_labels := {"reduced_motion": "减少震动与动画（镜头、奖励卡、对话）", "reduced_flash": "出怪预警改为常亮", "large_story_text": "放大剧情正文与记录文字"}
+	for key: String in comfort_labels:
+		var check := CheckBox.new()
+		check.text = comfort_labels[key]
+		check.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		check.toggled.connect(func(enabled: bool): GAME_SETTINGS.save_comfort(key, enabled))
+		page.add_child(check)
+		comfort_checks[key] = check
 
 	return page
 
@@ -379,6 +407,9 @@ func _refresh_display_controls() -> void:
 		_select_option_by_metadata(hud_layout_option, GAME_SETTINGS.load_hud_layout())
 
 func _refresh_audio_controls() -> void:
+	if sfx_slider != null:
+		sfx_slider.set_value_no_signal(GAME_SETTINGS.load_sfx_volume())
+		sfx_value.text = "%d%%" % roundi(sfx_slider.value * 100)
 	if volume_slider != null:
 		volume_slider.set_value_no_signal(BGM_PLAYER_SCRIPT.load_music_volume())
 	if volume_value_label != null:
@@ -387,6 +418,8 @@ func _refresh_audio_controls() -> void:
 		mute_checkbox.set_pressed_no_signal(BGM_PLAYER_SCRIPT.load_music_muted())
 
 func _refresh_gameplay_controls() -> void:
+	for key in comfort_checks:
+		comfort_checks[key].set_pressed_no_signal(GAME_SETTINGS.comfort_enabled(key))
 	if performance_trace_checkbox != null:
 		performance_trace_checkbox.set_pressed_no_signal(GAME_SETTINGS.load_performance_trace_enabled())
 
@@ -412,9 +445,12 @@ func _save_keybind(action_id: String, new_keycode: int) -> void:
 	GAME_SETTINGS.save_key_map(key_map)
 
 func _apply_saved_music_volume() -> void:
-	var menu_bgm = get_node_or_null("../MenuBGM")
-	if menu_bgm != null and menu_bgm.has_method("apply_saved_volume"):
-		menu_bgm.apply_saved_volume()
+	var scene := get_tree().current_scene
+	if scene != null:
+		for name in ["MenuBGM", "GameBGM"]:
+			var music := scene.get_node_or_null(name)
+			if music != null and music.has_method("apply_saved_volume"):
+				music.apply_saved_volume()
 
 func _select_option_by_metadata(option: OptionButton, metadata: String) -> void:
 	for index in range(option.item_count):
@@ -474,4 +510,5 @@ func _on_hud_layout_selected(index: int) -> void:
 	if hud_layout_option == null:
 		return
 	GAME_SETTINGS.save_hud_layout(str(hud_layout_option.get_item_metadata(index)))
+	hud_layout_changed.emit(GAME_SETTINGS.load_hud_layout())
 	_refresh_display_controls()

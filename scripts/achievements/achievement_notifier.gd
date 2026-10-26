@@ -68,6 +68,7 @@ func _build_card() -> void:
 
 	var badge := PanelContainer.new()
 	badge.custom_minimum_size = Vector2(42, 42)
+	badge.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	var badge_style := StyleBoxFlat.new()
 	badge_style.bg_color = Color(1.0, 0.72, 0.18, 0.96)
 	badge_style.border_color = Color(1.0, 0.95, 0.55, 1.0)
@@ -105,6 +106,9 @@ func _build_card() -> void:
 	_description_label = Label.new()
 	_description_label.text = "成就描述"
 	_description_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_description_label.custom_minimum_size.x = 200
+	_description_label.max_lines_visible = 2
+	_description_label.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
 	_description_label.add_theme_font_size_override("font_size", 12)
 	_description_label.add_theme_color_override("font_color", Color(0.78, 0.84, 0.92, 0.96))
 	text_box.add_child(_description_label)
@@ -132,10 +136,17 @@ func _show_next() -> void:
 	_progress_label.text = "成就达成"
 
 	_card.visible = true
+	_card.size = Vector2(CARD_WIDTH, CARD_HEIGHT)
 	_card.position = _hidden_position
 	_card.modulate = Color(1, 1, 1, 0)
 
 	var tween := create_tween()
+	if preload("res://scripts/game_settings.gd").comfort_enabled("reduced_motion"):
+		_card.position = _base_position
+		_card.modulate = Color.WHITE
+		tween.tween_interval(HOLD_SECONDS)
+		tween.finished.connect(_on_card_finished)
+		return
 	tween.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 	tween.tween_property(_card, "position", _base_position, ENTER_SECONDS)
 	tween.parallel().tween_property(_card, "modulate", Color(1, 1, 1, 1), ENTER_SECONDS)

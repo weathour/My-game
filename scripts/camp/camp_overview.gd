@@ -91,6 +91,10 @@ func refresh(profile: Dictionary, run: Dictionary, team: Array, movement_hint: S
 		recent = "最近通关 N%d，结算 +%d 骨。" % [maxi(1, int(result.get("tier", 1))), maxi(0, int(result.get("bones", 0)))]
 	elif int(profile.get("highest_cleared_tier", 0)) > 0:
 		recent = "最高已通关 N%d。" % int(profile["highest_cleared_tier"])
+	var last_run: Variant = profile.get("last_run_summary", {})
+	if last_run is Dictionary and not last_run.is_empty():
+		var outcome: String = {"victory": "通关", "failed": "失败", "abandoned": "主动结束"}.get(last_run.get("outcome", ""), "结束")
+		recent = "最近一局：N%d 第%d波%s，Lv%d。" % [int(last_run.get("tier", 1)), int(last_run.get("wave", 1)), outcome, int(last_run.get("level", 1))]
 	var run_tier := int(run.get("run_tier", 0))
 	departure_button.text = "继续 N%d" % run_tier if run_tier > 0 else "选择 N 层"
 	result_label.text = ("进行中 N%d：阵容调整用于下一局，携带修改在继续时生效。" % run_tier if run_tier > 0 else recent) + "    " + movement_hint

@@ -383,6 +383,7 @@ func _create_merchant() -> void:
 func skip_preparation() -> void:
 	if phase != "preparation" or blessing_pending or main.game_over or main.get_tree().paused:
 		return
+	preload("res://scripts/ui/ui_audio.gd").play("stage")
 	if is_instance_valid(merchant):
 		merchant.queue_free()
 	merchant = null

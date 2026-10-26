@@ -3,6 +3,7 @@ extends RefCounted
 const DEVELOPER_OPTION_PROVIDER := preload("res://scripts/developer/developer_option_provider.gd")
 const PERFORMANCE_MONITOR := preload("res://scripts/game/performance_monitor.gd")
 const PERFORMANCE_RECORDER := preload("res://scripts/game/performance_recorder.gd")
+const STATE := preload("res://scripts/game/session_state.gd")
 const HUD_PRESENTATION_REFRESH_INTERVAL := 1.0 / 30.0
 const FRAME_TIME_REFRESH_INTERVAL := HUD_PRESENTATION_REFRESH_INTERVAL
 const FRAME_STATS_REFRESH_INTERVAL := HUD_PRESENTATION_REFRESH_INTERVAL
@@ -18,7 +19,7 @@ const DEVELOPER_BUILD_TOOLS := preload("res://scripts/developer/developer_build_
 static func update_frame_hud(main: Node) -> void:
 	if main.hud != null and main.hud.has_method("update_time") and _should_refresh_elapsed(main, LAST_FRAME_TIME_REFRESH_META, main.survival_time, FRAME_TIME_REFRESH_INTERVAL):
 		PERFORMANCE_RECORDER.begin_scope("hud_time_label_ms")
-		main.hud.update_time(_get_wave_remaining_time(main))
+		_update_time(main)
 		PERFORMANCE_RECORDER.end_scope("hud_time_label_ms")
 	if main.hud != null and main.hud.has_method("update_stats") and main.player != null and main.player.has_method("get_stat_summary") and _should_refresh_elapsed(main, LAST_FRAME_STATS_REFRESH_META, main.survival_time, FRAME_STATS_REFRESH_INTERVAL):
 		PERFORMANCE_RECORDER.begin_scope("hud_stats_payload_ms")
@@ -27,6 +28,8 @@ static func update_frame_hud(main: Node) -> void:
 		PERFORMANCE_RECORDER.begin_scope("hud_update_stats_ms")
 		main.hud.update_stats(summary)
 		PERFORMANCE_RECORDER.end_scope("hud_update_stats_ms")
+		if main.hud.has_method("set_save_status"):
+			main.hud.set_save_status(bool(main.get_meta("last_run_save_ok", true)) and not bool(main.player.get_meta("bone_save_failed", false)))
 	PERFORMANCE_RECORDER.begin_scope("boss_hud_ms")
 	update_boss_hud(main)
 	PERFORMANCE_RECORDER.end_scope("boss_hud_ms")
@@ -44,8 +47,8 @@ static func refresh_hud(main: Node) -> void:
 		main.hud.update_mana(main.player.current_mana, main.player.max_mana)
 	if main.hud.has_method("update_time"):
 		if main.hud.has_method("set_endless_tier"):
-			main.hud.set_endless_tier(main.endless_tier if main.endless_mode_active or main._is_developer_mode() else 0)
-		main.hud.update_time(_get_wave_remaining_time(main))
+			main.hud.set_endless_tier(main.endless_tier if STATE.presentation(main).mode in ["endless", "developer"] else 0)
+		_update_time(main)
 	if main.hud.has_method("set_developer_boss_options"):
 		main.hud.set_developer_boss_options(main._get_developer_boss_options())
 	if main.hud.has_method("set_developer_normal_enemy_options"):
@@ -59,18 +62,21 @@ static func refresh_hud(main: Node) -> void:
 			"item": DEVELOPER_BUILD_TOOLS.item_catalog(main.player)
 		})
 
-static func _get_wave_remaining_time(main: Node) -> float:
-	var flow = main.get("wave_flow")
-	if flow == null or not is_instance_valid(flow):
-		return 0.0
-	var phase: String = str(flow.get("phase"))
-	if phase == "combat":
-		var plan = preload("res://scripts/game/combat_wave_plan.gd")
-		return maxf(0.0, plan.duration(int(flow.get("wave"))) - float(flow.get("elapsed")))
-	if phase == "preparation":
-		return maxf(0.0, float(flow.get("remaining")))
-	return 0.0
-	update_boss_hud(main)
+static func _update_time(main: Node) -> void:
+	var view := STATE.presentation(main)
+	var caption := "本关剩余" if view.mode == "story" else "波次剩余" if view.wave > 0 else "已生存"
+	var value: float = view.remaining_seconds if view.mode == "story" or view.wave > 0 else view.elapsed_seconds
+	if view.phase == "preparation":
+		caption = "整备剩余"
+	elif view.phase == "result":
+		caption = "本局用时"
+		value = view.elapsed_seconds
+	elif view.target_kind == "defeat_boss":
+		caption = "讨伐用时"
+		value = view.elapsed_seconds
+	if main.hud.has_method("set_time_caption"):
+		main.hud.set_time_caption(caption)
+	main.hud.update_time(value)
 
 static func _get_boss_ui_data(enemy, default_name: String) -> Dictionary:
 	var current_health := float(enemy.get("current_health"))
@@ -134,7 +140,7 @@ static func update_boss_hud(main: Node) -> void:
 		var final_data: Dictionary = _get_boss_ui_data(final_boss, "Boss")
 		if not bool(final_data.get("hide_health", false)) and main.hud.has_method("show_boss_ui"):
 			var final_name := str(final_data.get("name", "Boss"))
-			if main.endless_mode_active or main._is_developer_mode():
+			if STATE.presentation(main).mode in ["endless", "developer"]:
 				final_name = "N%d · %s" % [main.endless_tier, final_name]
 			main.hud.show_boss_ui(final_name, float(final_data.get("current_health", 0.0)), float(final_data.get("max_health", 1.0)), final_data.get("status", {}) as Dictionary, final_data.get("ui", {}) as Dictionary)
 		else:
@@ -145,7 +151,7 @@ static func update_boss_hud(main: Node) -> void:
 		hide_boss_ui(main)
 
 static func update_performance_metrics(main: Node, delta: float) -> void:
-	if not main._is_developer_mode() and not main.endless_mode_active:
+	if STATE.presentation(main).mode not in ["developer", "endless"]:
 		return
 	if main.hud == null or not main.hud.has_method("update_performance_metrics"):
 		return

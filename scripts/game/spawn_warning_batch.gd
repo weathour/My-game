@@ -91,6 +91,8 @@ func _draw() -> void:
 		draw_line(warning_position + Vector2(-radius, radius), warning_position + Vector2(radius, -radius), cross_color, CROSS_WIDTH)
 
 func _get_alpha(age: float) -> float:
+	if preload("res://scripts/game_settings.gd").comfort_enabled("reduced_flash"):
+		return 0.8
 	var flash_span := FLASH_DURATION * 2.0
 	var active_duration := FLASH_COUNT * flash_span
 	if age >= active_duration:

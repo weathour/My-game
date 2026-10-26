@@ -774,12 +774,34 @@ func _update_ruan_stone_status(summary: Dictionary) -> void:
 	_set_label_text(ruan_stone_status_label, "骨头 %d\n阮石 %d/%d：%s" % [bone_count, carried, carry_limit, stone_text])
 
 
+var save_status_label: Label
+
+func set_save_status(success: bool) -> void:
+	if success and not is_instance_valid(save_status_label):
+		return
+	if not is_instance_valid(save_status_label):
+		save_status_label = Label.new()
+		save_status_label.text = "保存失败，战局仍在内存中。请检查存储空间后重试。"
+		save_status_label.position = Vector2(24, 110)
+		save_status_label.add_theme_font_size_override("font_size", 18)
+		save_status_label.add_theme_color_override("font_color", Color(1, 0.75, 0.45))
+		save_status_label.add_theme_color_override("font_shadow_color", Color.BLACK)
+		save_status_label.add_theme_constant_override("shadow_offset_x", 2)
+		save_status_label.add_theme_constant_override("shadow_offset_y", 2)
+		add_child(save_status_label)
+	save_status_label.visible = not success
+
+var time_caption := "已生存"
+
+func set_time_caption(caption: String) -> void:
+	time_caption = caption
+
 func update_time(seconds_elapsed: float) -> void:
 	var total_seconds: int = maxi(0, int(ceil(seconds_elapsed)))
 	var minutes: int = int(total_seconds / 60.0)
 	var seconds: int = total_seconds % 60
 	var prefix := "N%d · " % current_endless_tier if current_endless_tier > 0 else ""
-	_set_label_text(time_label, "%s波次剩余 %02d:%02d" % [prefix, minutes, seconds])
+	_set_label_text(time_label, "%s%s %02d:%02d" % [prefix, time_caption, minutes, seconds])
 
 func set_endless_tier(tier: int) -> void:
 	current_endless_tier = max(0, tier)

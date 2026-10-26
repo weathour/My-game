@@ -1,6 +1,7 @@
 extends RefCounted
 
 static func show_error(owner: Node, text: String) -> void:
+	preload("res://scripts/ui/ui_audio.gd").play("error")
 	var dialog := AcceptDialog.new()
 	dialog.title = "存档未完成"
 	dialog.dialog_text = text
