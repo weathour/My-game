@@ -131,7 +131,7 @@ static func deal_damage_to_enemy(owner, enemy: Node, damage_amount: float, sourc
 			enemy.apply_slow_silent(slow_multiplier, slow_duration)
 		elif enemy.has_method("apply_slow"):
 			enemy.apply_slow(slow_multiplier, slow_duration)
-	var wet_pending: Variant = enemy.get_meta("mage_surge_wet_pending", null)
+	var wet_pending: Variant = enemy.get_meta("mage_surge_wet_pending") if enemy.has_meta("mage_surge_wet_pending") else null
 	if wet_pending != null and enemy.has_method("apply_mage_wet"):
 		enemy.remove_meta("mage_surge_wet_pending")
 		enemy.apply_mage_wet(wet_pending, 4.0)
@@ -767,11 +767,11 @@ static func _enemy_shape_hits_circle(target_shape: Dictionary, center: Vector2, 
 	return _is_center_inside_enemy_touch_shape(center, max(0.0, radius), target_shape)
 
 static func _enemy_shape_hits_line(target_shape: Dictionary, start_position: Vector2, end_position: Vector2, width: float) -> bool:
+	if start_position.distance_squared_to(end_position) <= 0.001:
+		return _enemy_shape_hits_circle(target_shape, start_position, width)
 	if str(target_shape.get("type", "ellipse")) == "square":
 		return _square_hits_segment(target_shape, start_position, end_position, width)
 	var shape_center: Vector2 = _get_shape_center(target_shape)
-	if start_position.distance_squared_to(end_position) <= 0.001:
-		return _enemy_shape_hits_circle(target_shape, start_position, width)
 	var closest_point: Vector2 = Geometry2D.get_closest_point_to_segment(shape_center, start_position, end_position)
 	return _enemy_shape_hits_circle(target_shape, closest_point, width)
 

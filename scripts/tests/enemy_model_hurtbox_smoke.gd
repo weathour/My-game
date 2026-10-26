@@ -11,6 +11,11 @@ func _init() -> void:
 
 
 func _run() -> void:
+	var square := {"type": "square", "center": Vector2.ZERO, "half_extent": 10.0}
+	if PLAYER_DAMAGE_RESOLVER._enemy_shape_hits_line(square, Vector2(14, 14), Vector2(14, 14), 5.0):
+		failures.append("stationary projectile must not hit outside a square's rounded corner")
+	if not PLAYER_DAMAGE_RESOLVER._enemy_shape_hits_line(square, Vector2(13, 14), Vector2(13, 14), 5.0):
+		failures.append("stationary projectile must hit a tangent square corner")
 	var root := Node2D.new()
 	get_root().add_child(root)
 	var visual_cases := [

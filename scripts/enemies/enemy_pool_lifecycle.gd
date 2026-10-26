@@ -1,7 +1,23 @@
 extends RefCounted
 
+const ACTIVATION_GENERATION_META := &"runtime_enemy_activation_generation"
+
+
+static func ensure_activation_generation(enemy: Node) -> int:
+	if not enemy.has_meta(ACTIVATION_GENERATION_META):
+		advance_activation_generation(enemy)
+	return int(enemy.get_meta(ACTIVATION_GENERATION_META))
+
+
+static func advance_activation_generation(enemy: Node) -> void:
+	enemy.set_meta(ACTIVATION_GENERATION_META, int(enemy.get_meta(ACTIVATION_GENERATION_META, 0)) + 1)
+
 
 static func activate_pooled_enemy(enemy) -> void:
+	if enemy.pooled_inactive:
+		advance_activation_generation(enemy)
+	else:
+		ensure_activation_generation(enemy)
 	enemy.pooled_inactive = false
 	register_runtime_enemy(enemy)
 
@@ -20,6 +36,7 @@ static func release_after_defeat(enemy) -> bool:
 
 
 static func prepare_for_pool(enemy) -> void:
+	enemy.runtime_configuration_complete = false
 	if enemy.has_meta("wave_flyby"):
 		enemy.remove_meta("wave_flyby")
 	if enemy.has_meta("combat_wave_boss"):

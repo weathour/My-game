@@ -137,3 +137,10 @@ static func release_runtime_enemy(main: Node, enemy: Node) -> void:
 	enemy.set_process(false)
 	enemy.set_physics_process(false)
 	main.runtime_enemy_pool_nodes[instance_id] = enemy
+
+
+static func clear_pool(main: Node) -> void:
+	for enemy in main.runtime_enemy_pool_nodes.values():
+		if is_instance_valid(enemy):
+			enemy.free()
+	main.runtime_enemy_pool_nodes.clear()

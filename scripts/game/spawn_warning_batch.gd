@@ -8,7 +8,6 @@ const CROSS_WIDTH := 5.0
 const FLASH_COUNT := 4
 const FLASH_DURATION := 0.11
 const FADE_DURATION := 0.06
-const MAX_WARNINGS_LOW_FPS := 36
 const MAX_FINISHED_WARNINGS_PER_FRAME := 12
 const LOW_FPS_FINISHED_WARNINGS_PER_FRAME := 8
 const CRITICAL_FPS_FINISHED_WARNINGS_PER_FRAME := 4
@@ -23,15 +22,6 @@ func _ready() -> void:
 	z_index = 18
 
 func add_warning(warning_position: Vector2, radius: float, payload: Dictionary) -> void:
-	var fps := Engine.get_frames_per_second()
-	if fps > 0 and fps < 45 and warnings.size() >= MAX_WARNINGS_LOW_FPS:
-		pending_finished_entries.append({
-			"position": warning_position,
-			"radius": max(8.0, radius),
-			"age": 0.0,
-			"payload": payload
-		})
-		return
 	warnings.append({
 		"position": warning_position,
 		"radius": max(8.0, radius),

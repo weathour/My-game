@@ -71,6 +71,8 @@ static func exit_tree(main: Node) -> void:
 
 
 static func cleanup_runtime_nodes(main: Node) -> void:
+	main.RUNTIME_ENEMY_REGISTRY_FLOW.clear_pool(main)
+	main.RUNTIME_PICKUP_REGISTRY_FLOW.clear_pools(main)
 	main.ENEMY_HIT_FEEDBACK.clear_runtime_state()
 	main.PLAYER_BULLET.clear_runtime_state()
 	var game_bgm = main._get_game_bgm()

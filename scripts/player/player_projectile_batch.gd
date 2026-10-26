@@ -8,7 +8,6 @@ const PERFORMANCE_COUNTERS := preload("res://scripts/game/performance_counters.g
 const MAX_BATCHED_PROJECTILES := 1800
 const DEFAULT_HIT_RADIUS := 10.0
 const DEFAULT_ENEMY_HIT_RADIUS := 8.0
-const MAX_HIT_CHECKS_PER_FRAME := 380
 const HIT_GRID_CELL_SIZE := 96.0
 const BULLET_FRAME_TEXTURE_PATHS := [
 	"res://effects/gun/bullet/1.png",
@@ -70,7 +69,6 @@ var gunner_basic_split_speed_scales: PackedFloat32Array = PackedFloat32Array()
 var gunner_basic_split_distance_bonuses: PackedFloat32Array = PackedFloat32Array()
 var gunner_basic_split_visual_scales: PackedFloat32Array = PackedFloat32Array()
 var gunner_builds: Array[Dictionary] = []
-var scan_cursor: int = 0
 var damage_enabled_count: int = 0
 var animation_elapsed: float = 0.0
 var current_animation_frame: int = -1
@@ -278,18 +276,21 @@ func _physics_process(delta: float) -> void:
 
 func _update_projectiles(delta: float) -> void:
 	for index in range(positions.size() - 1, -1, -1):
-		lifetimes[index] -= delta
 		if lifetimes[index] <= 0.0:
+			if not damage_enabled_flags[index]:
+				_remove_projectile(index)
+			continue
+		var motion_delta := minf(delta, lifetimes[index])
+		lifetimes[index] = maxf(0.0, lifetimes[index] - delta)
+		if lifetimes[index] <= 0.0 and not damage_enabled_flags[index]:
 			_remove_projectile(index)
 			continue
 		var speed: float = speeds[index] + difficulty_projectile_speed_bonus
 		previous_positions[index] = positions[index]
 		if wave_amplitudes[index] > 0.0:
-			_update_wave_projectile(index, delta, speed)
+			_update_wave_projectile(index, motion_delta, speed)
 		else:
-			positions[index] += directions[index] * speed * delta
-	if scan_cursor >= positions.size():
-		scan_cursor = 0
+			positions[index] += directions[index] * speed * motion_delta
 
 func _update_wave_projectile(index: int, delta: float, speed: float) -> void:
 	wave_elapsed_times[index] += delta
@@ -310,44 +311,31 @@ func _check_projectile_hits() -> void:
 		return
 	var enemy_grid: Dictionary = PLAYER_DAMAGE_RESOLVER._get_enemy_grid(source_player)
 	if enemy_grid.is_empty():
+		for index in range(positions.size() - 1, -1, -1):
+			if lifetimes[index] <= 0.0:
+				_remove_projectile(index)
 		return
 	damage_batcher = _get_damage_batcher()
-	var checks_done := 0
-	var checked_projectiles := 0
-	while checked_projectiles < positions.size() and checks_done < MAX_HIT_CHECKS_PER_FRAME:
-		if positions.is_empty():
-			break
-		if not _advance_scan_cursor_to_damage_enabled():
-			break
-		var hit_enemy: Node2D = _find_hit_enemy(scan_cursor, enemy_grid)
-		checks_done += 1
-		if hit_enemy != null:
-			_apply_projectile_hit(scan_cursor, hit_enemy)
-			if pierce_counts[scan_cursor] != 0:
-				if pierce_counts[scan_cursor] > 0:
-					pierce_counts[scan_cursor] -= 1
-				scan_cursor += 1
-			else:
-				_remove_projectile(scan_cursor)
+	# Collision is gameplay: every live segment is checked in its own physics tick.
+	# Reverse traversal keeps swap-removal and newly split bullets out of the way.
+	for index in range(positions.size() - 1, -1, -1):
+		if not damage_enabled_flags[index]:
 			continue
-		scan_cursor += 1
-		checked_projectiles += 1
+		while true:
+			var hit_enemy: Node2D = _find_hit_enemy(index, enemy_grid)
+			if hit_enemy == null:
+				if lifetimes[index] <= 0.0:
+					_remove_projectile(index)
+				break
+			_apply_projectile_hit(index, hit_enemy)
+			if pierce_counts[index] == 0:
+				_remove_projectile(index)
+				break
+			if pierce_counts[index] > 0:
+				pierce_counts[index] -= 1
 	if damage_batcher != null:
 		damage_batcher.flush()
 		damage_batcher = null
-
-func _advance_scan_cursor_to_damage_enabled() -> bool:
-	if damage_enabled_count <= 0 or positions.is_empty():
-		return false
-	var attempts: int = 0
-	while attempts < positions.size():
-		if scan_cursor >= positions.size():
-			scan_cursor = 0
-		if damage_enabled_flags[scan_cursor]:
-			return true
-		scan_cursor += 1
-		attempts += 1
-	return false
 
 func _get_damage_batcher() -> RefCounted:
 	if reusable_damage_batcher == null:
@@ -688,8 +676,6 @@ func _remove_projectile(index: int) -> void:
 	gunner_basic_split_speed_scales.resize(last_index)
 	gunner_basic_split_distance_bonuses.resize(last_index)
 	gunner_basic_split_visual_scales.resize(last_index)
-	if scan_cursor > positions.size():
-		scan_cursor = positions.size()
 
 func _clear_projectiles() -> void:
 	for damage_event_id in damage_event_ids:
@@ -739,7 +725,6 @@ func _clear_projectiles() -> void:
 	gunner_basic_split_speed_scales.clear()
 	gunner_basic_split_distance_bonuses.clear()
 	gunner_basic_split_visual_scales.clear()
-	scan_cursor = 0
 	damage_enabled_count = 0
 	_update_multimesh_instances()
 

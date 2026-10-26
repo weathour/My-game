@@ -3,6 +3,7 @@ const SWORDSMAN_BASIC_BUILD := preload("res://scripts/player/player_swordsman_ba
 
 const PERFORMANCE_COUNTERS := preload("res://scripts/game/performance_counters.gd")
 const DAMAGE_METHOD_DISPATCH := preload("res://scripts/combat/damage_method_dispatch.gd")
+const ENEMY_LIFECYCLE := preload("res://scripts/enemies/enemy_pool_lifecycle.gd")
 const PERFORMANCE_GUARD := preload("res://scripts/game/performance_guard.gd")
 const PLAYER_RUAN_STONE_FLOW := preload("res://scripts/player/player_ruan_stone_flow.gd")
 const PLAYER_GUNNER_BASIC_TALENT_FLOW := preload("res://scripts/player/player_gunner_basic_talent_flow.gd")
@@ -32,6 +33,7 @@ const GUNNER_NO_HUNT_SOURCE_ROLE_ID := "gunner_no_hunt"
 var source_player: Node
 var enemy_refs: Array[WeakRef] = []
 var enemy_ids: Array[int] = []
+var enemy_generations: Array[int] = []
 var damage_amounts: PackedFloat32Array = PackedFloat32Array()
 var hit_counts: Array[int] = []
 var source_role_ids: PackedStringArray = PackedStringArray()
@@ -88,14 +90,19 @@ func enqueue(job: Dictionary) -> void:
 func enqueue_values(enemy_ref: WeakRef, enemy_id: int, damage_amount: float, hit_count: int, source_role_id: String, vulnerability_bonus: float = 0.0, vulnerability_duration: float = 2.0, slow_multiplier: float = 1.0, slow_duration: float = 0.0, source_position: Variant = null, kill_energy_bonus: float = 0.0, prefer_silent_feedback: bool = false, suppress_status_visual: bool = false, gunner_event_prepared: bool = false, damage_event_id: String = "", slow_source_id: String = "") -> void:
 	if enemy_ref == null:
 		return
+	var enemy: Node = enemy_ref.get_ref() as Node
+	if not is_instance_valid(enemy):
+		return
+	var generation := ENEMY_LIFECYCLE.ensure_activation_generation(enemy)
 	if enemy_id != 0:
 		var pending_index: int = int(pending_by_enemy_id.get(enemy_id, -1))
-		if pending_index >= job_cursor and pending_index < enemy_refs.size() and str(source_role_ids[pending_index]) == source_role_id and str(slow_source_ids[pending_index]) == slow_source_id and (gunner_event_prepared or str(damage_event_ids[pending_index]) == damage_event_id):
+		if pending_index >= job_cursor and pending_index < enemy_refs.size() and enemy_generations[pending_index] == generation and str(source_role_ids[pending_index]) == source_role_id and str(slow_source_ids[pending_index]) == slow_source_id and (gunner_event_prepared or str(damage_event_ids[pending_index]) == damage_event_id):
 			_merge_job_at_index(pending_index, damage_amount, hit_count, vulnerability_bonus, vulnerability_duration, slow_multiplier, slow_duration, kill_energy_bonus, prefer_silent_feedback, suppress_status_visual, gunner_event_prepared)
 			PERFORMANCE_COUNTERS.add("merged_damage_jobs", 1)
 			return
 	enemy_refs.append(enemy_ref)
 	enemy_ids.append(enemy_id)
+	enemy_generations.append(generation)
 	damage_amounts.append(damage_amount)
 	hit_counts.append(hit_count)
 	source_role_ids.append(source_role_id)
@@ -143,7 +150,7 @@ func _physics_process(_delta: float) -> void:
 		var current_index := job_cursor
 		job_cursor += 1
 		var enemy_id: int = enemy_ids[current_index]
-		if enemy_id != 0:
+		if enemy_id != 0 and int(pending_by_enemy_id.get(enemy_id, -1)) == current_index:
 			pending_by_enemy_id.erase(enemy_id)
 		_apply_job_at_index(current_index)
 		processed += 1
@@ -159,6 +166,8 @@ func _apply_job_at_index(index: int) -> void:
 		return
 	var enemy: Node = enemy_ref.get_ref() as Node
 	if not _is_enemy_damageable(enemy):
+		return
+	if int(enemy.get_meta(ENEMY_LIFECYCLE.ACTIVATION_GENERATION_META, -1)) != enemy_generations[index]:
 		return
 	var damage_amount: float = damage_amounts[index]
 	var source_role_id: String = source_role_ids[index]
@@ -470,6 +479,7 @@ func _compact_processed_jobs(force: bool) -> void:
 			var read_index: int = write_index + job_cursor
 			enemy_refs[write_index] = enemy_refs[read_index]
 			enemy_ids[write_index] = enemy_ids[read_index]
+			enemy_generations[write_index] = enemy_generations[read_index]
 			damage_amounts[write_index] = damage_amounts[read_index]
 			hit_counts[write_index] = hit_counts[read_index]
 			source_role_ids[write_index] = source_role_ids[read_index]
@@ -486,6 +496,7 @@ func _compact_processed_jobs(force: bool) -> void:
 			damage_event_ids[write_index] = damage_event_ids[read_index]
 		enemy_refs.resize(remaining_size)
 		enemy_ids.resize(remaining_size)
+		enemy_generations.resize(remaining_size)
 		damage_amounts.resize(remaining_size)
 		hit_counts.resize(remaining_size)
 		source_role_ids.resize(remaining_size)
@@ -507,6 +518,7 @@ func _compact_processed_jobs(force: bool) -> void:
 func _clear_jobs() -> void:
 	enemy_refs.clear()
 	enemy_ids.clear()
+	enemy_generations.clear()
 	damage_amounts.clear()
 	hit_counts.clear()
 	source_role_ids.clear()

@@ -118,3 +118,11 @@ static func take_runtime_pickup_from_pool(main: Node, group_name: String) -> Nod
 		if main._is_runtime_node_valid(node):
 			return node
 	return null
+
+
+static func clear_pools(main: Node) -> void:
+	for pool: Dictionary in main.runtime_pickup_pool_nodes.values():
+		for pickup in pool.values():
+			if is_instance_valid(pickup):
+				pickup.free()
+	main.runtime_pickup_pool_nodes.clear()

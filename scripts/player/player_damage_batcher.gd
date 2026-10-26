@@ -1,10 +1,12 @@
 extends RefCounted
 
 const PLAYER_DAMAGE_RESOLVER := preload("res://scripts/player/player_damage_resolver.gd")
+const ENEMY_LIFECYCLE := preload("res://scripts/enemies/enemy_pool_lifecycle.gd")
 
 var owner: Node
 var enemy_refs: Array[WeakRef] = []
 var enemy_ids: Array[int] = []
+var enemy_generations: Array[int] = []
 var damage_amounts: PackedFloat32Array = PackedFloat32Array()
 var hit_counts: Array[int] = []
 var source_role_ids: PackedStringArray = PackedStringArray()
@@ -31,6 +33,7 @@ func reset(source_owner: Node) -> void:
 	owner = source_owner
 	enemy_refs.clear()
 	enemy_ids.clear()
+	enemy_generations.clear()
 	damage_amounts.clear()
 	hit_counts.clear()
 	source_role_ids.clear()
@@ -53,13 +56,15 @@ func add_enemy(enemy: Node, damage_amount: float, source_role_id: String, vulner
 	if enemy == null or not is_instance_valid(enemy):
 		return
 	var enemy_id: int = enemy.get_instance_id()
+	var generation := ENEMY_LIFECYCLE.ensure_activation_generation(enemy)
 	var damage_event_key := _damage_event_key(source_role_id, source_position, damage_event_id)
-	var merge_key: String = "%s|%s|%s|%s" % [enemy_id, source_role_id, slow_source_id, damage_event_key]
+	var merge_key: String = "%s|%s|%s|%s|%s" % [enemy_id, generation, source_role_id, slow_source_id, damage_event_key]
 	hit_count += 1
 	if not indexes_by_enemy_id.has(merge_key):
 		indexes_by_enemy_id[merge_key] = enemy_refs.size()
 		enemy_refs.append(weakref(enemy))
 		enemy_ids.append(enemy_id)
+		enemy_generations.append(generation)
 		damage_amounts.append(damage_amount)
 		hit_counts.append(1)
 		source_role_ids.append(source_role_id)
@@ -92,9 +97,13 @@ func flush() -> int:
 	var gunner_event_multipliers: Dictionary = {}
 	var positive_gunner_events: Dictionary = {}
 	for index in range(enemy_refs.size()):
+		if not _is_current_activation(index):
+			continue
 		if not gunner_event_prepareds[index] and damage_amounts[index] > 0.0:
 			positive_gunner_events[damage_event_keys[index]] = true
 	for index in range(enemy_refs.size()):
+		if not _is_current_activation(index):
+			continue
 		var source_role_id: String = source_role_ids[index]
 		var gunner_event_prepared: bool = gunner_event_prepareds[index]
 		if not gunner_event_prepared and PLAYER_DAMAGE_RESOLVER.is_gunner_talent_damage_source(source_role_id):
@@ -124,6 +133,11 @@ func flush() -> int:
 		)
 	reset(owner)
 	return result
+
+
+func _is_current_activation(index: int) -> bool:
+	var enemy: Node = enemy_refs[index].get_ref() as Node
+	return PLAYER_DAMAGE_RESOLVER._is_live_enemy(enemy) and int(enemy.get_meta(ENEMY_LIFECYCLE.ACTIVATION_GENERATION_META, -1)) == enemy_generations[index]
 
 
 func _damage_event_key(source_role_id: String, source_position: Variant, damage_event_id: String) -> String:

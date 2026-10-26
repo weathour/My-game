@@ -4,7 +4,9 @@ var storm_armor_shred_timers: Array = []
 
 @warning_ignore("unused_signal")
 signal defeated(enemy_kind: String)
+signal runtime_configured
 
+var runtime_configuration_complete: bool = false
 
 const ENEMY_BOSS_STATE := preload("res://scripts/enemies/enemy_boss_state.gd")
 const ENEMY_BOSS_VISUALS := preload("res://scripts/enemies/enemy_boss_visuals.gd")
@@ -395,6 +397,8 @@ func get_batch_ineligibility_reason() -> String:
 	return ENEMY_BATCH_ELIGIBILITY.get_ineligibility_reason(self)
 
 func apply_enemy_profile(kind: String, profile: Dictionary) -> void:
+	runtime_configuration_complete = false
+	ENEMY_POOL_LIFECYCLE.advance_activation_generation(self)
 	pooled_inactive = false
 	ENEMY_PROFILE_APPLIER.apply_profile(self, kind, profile)
 	_sync_trait_flags()
@@ -403,6 +407,7 @@ func apply_enemy_profile(kind: String, profile: Dictionary) -> void:
 	if enemy_kind == "boss":
 		_ensure_boss_visual()
 		_ensure_boss_helpers()
+	_notify_runtime_configured()
 
 func _reset_runtime_state(randomize_timers: bool) -> void:
 	ENEMY_RUNTIME_STATE.reset(self, randomize_timers)
@@ -640,11 +645,18 @@ func get_save_data() -> Dictionary:
 	return ENEMY_SAVE_DATA.get_save_data(self)
 
 func apply_save_data(data: Dictionary, target_node: Node2D) -> bool:
+	runtime_configuration_complete = false
 	if preload("res://scripts/save/run_payload_validator.gd").error({"player": {}, "enemies": [data]}) != "":
 		return false
 	if ENEMY_SAVE_DATA.apply_save_data(self, data, target_node) != true:
 		return false
+	_notify_runtime_configured()
 	return true
+
+func _notify_runtime_configured() -> void:
+	runtime_configuration_complete = true
+	if is_inside_tree():
+		runtime_configured.emit()
 
 func _play_hit_feedback(damage_amount: float, killed: bool, is_critical: bool = false) -> void:
 	ENEMY_HIT_FEEDBACK.play_hit_feedback(self, damage_amount, killed, is_critical)
