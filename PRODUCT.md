@@ -40,3 +40,11 @@ Tactical, weighty, readable, and restrained. The visual metaphor is a dark-gold 
 - Never use color as the only state signal; pair it with labels, borders, or symbols.
 - Preserve keyboard focus, `C`/`Esc` close behavior, and standard scrolling.
 - Keep important information visible without requiring hover.
+
+## Story framework
+
+The first chapter follows one fixed three-stage route. Its preparation title is “等一声回答”; the content chapter remains “恢复通讯”. A night camp and radio anchor the story: the recovered log, the sample and the repaired signal gradually change what the player knows. Short spoken lines and separate environmental observations give each return to camp a pause.
+
+Preparation answers what to do next, whom to speak to, what will be consumed and which team will depart. The scene sits beside a scrolling current-clue/NPC rail and above a three-stage route. Undiscovered locations stay unnamed. Clue objects appear after discovery; after delivery they open retained intel. Inspection is read-only. Conversations may be postponed; delivery is an explicit saved action. Records contain only seen dialogue and narration. Replays are practice and never repeat permanent story rewards.
+
+Story reading uses a full-screen camp composition and a bottom reading band, with clear choices, keyboard focus, retained checkpoints, reduced motion and optional 120% story text. The visual treatment and original prose draw on quiet visual-novel reading and gradual environmental discovery; this does not add a walkable story map, voice acting, new music or combat rules. Task and save identities remain stable. Player comprehension and emotional pacing still require normal-speed play. See [the story presentation review](docs/design-reviews/2026-10-25_主线场景与叙事呈现.md).

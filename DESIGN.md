@@ -207,3 +207,15 @@ Show all owned tier counts and aggregate primary plus extra stats only where the
 - **Don't** add fantasy parchment overload, realistic book textures, or ornate metal framing.
 - **Don't** use tiny card grids or raw debug-text lists that force players to decode the build.
 - **Don't** add star maps, cross-panel connector lines, or decorative motion for fixed talent choices.
+
+## Story reading surfaces
+
+Story preparation is titled “等一声回答”, with “第一章 · 恢复通讯” as the chapter label. Use the original night communications-camp image as the main field, with a short caption derived from existing quest/delivery/completion state. Keep the current-clue/NPC rail scrollable on the right and the three-stage route below the scene. Unknown stages stay unnamed; cleared stages offer practice replay. Only discovered objects expose record links; delivered objects become “已整理” and open intel. These links never change story progress.
+
+The story palette is maintained in `scripts/ui/story/story_visuals.gd`: background `#101923`, panel `#151f29`, warm text `#ece9de`, muted text `#b3bdc6`, gold `#d7bd86` and line `#3e4b56`. Scene art carries the atmosphere; leave room around the prose. Avoid repeating bordered cards for every paragraph or adding ambient motion that competes with reading.
+
+Dialogue uses a full-screen image with a bottom reading band. `dialogue.location` supplies the small location label; `dialogue.scene` selects `radio` (full camp), `outpost` or `rift` (different crops of the same camp). These are visual motifs, not new playable locations. Display optional `node.narration` separately in muted text, followed by the speaker, spoken text and explicit choices. The current 29 nodes use 27–40-character lines and narration under 40 characters.
+
+The reading band reuses the modal's focus/scroll behavior, while task/item/intel/history records keep the shared modal shell. `journal.open(profile, tab_name = "任务")` supports direct object-to-record links; history includes only seen narration and dialogue. Retain the existing team editor. Acceptance, delivery and postponement remain explicit; first confirmation reveals the line, and skip stops at a choice. Keep save errors visible at the unchanged node, restore opener focus on close and preserve the checkpoint on Esc. Use the reading font, optional 120% story text and instant reveal under reduced motion. Check 1280×720 and 960×540, including three choices and long labels.
+
+The Narcissu reference informs this project's choice of quiet reading space; To the Moon informs gradual discovery through ordinary objects. These are design interpretations, not copied layouts or official mandates. No third-party text, art or music is reused. Source boundaries and verification are recorded in [the story presentation review](docs/design-reviews/2026-10-25_主线场景与叙事呈现.md).

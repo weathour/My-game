@@ -1,6 +1,6 @@
 extends RefCounted
 
-const STORY_MODE_ENABLED := false
+const STORY_MODE_ENABLED := true
 
 const PREP_SCENE_PATH := "res://scenes/story_prep.tscn"
 const BATTLE_SCENE_PATH := "res://scenes/main.tscn"

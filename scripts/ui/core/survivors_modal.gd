@@ -159,3 +159,17 @@ func _apply_current_style(viewport_size: Vector2) -> void:
 
 func _on_viewport_size_changed() -> void:
 	apply_layout()
+
+func cycle_keyboard_focus(event: InputEvent) -> bool:
+	if not visible or not event is InputEventKey or not event.pressed or event.keycode != KEY_TAB:
+		return false
+	var controls: Array[Control] = []
+	for child in find_children("*", "Control", true, false):
+		if child.is_visible_in_tree() and child.focus_mode == Control.FOCUS_ALL and not (child is BaseButton and child.disabled):
+			controls.append(child)
+	if not controls.is_empty():
+		var index := controls.find(get_viewport().gui_get_focus_owner())
+		var direction := -1 if event.shift_pressed else 1
+		controls[posmod(index + direction, controls.size())].grab_focus()
+	get_viewport().set_input_as_handled()
+	return true

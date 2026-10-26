@@ -25,6 +25,29 @@ const KEYBIND_SCHEMA_VERSION := 2
 
 static var cached_config: ConfigFile
 
+const COMFORT_DEFAULTS := {"reduced_motion": false, "reduced_flash": false, "large_story_text": false}
+
+static func comfort_enabled(key: String) -> bool:
+	return bool(_get_config().get_value("comfort", key, COMFORT_DEFAULTS.get(key, false)))
+
+static func save_comfort(key: String, enabled: bool) -> void:
+	if not COMFORT_DEFAULTS.has(key):
+		return
+	var config := _get_config()
+	config.set_value("comfort", key, enabled)
+	config.save(SETTINGS_PATH)
+
+static func story_font_size(base: int) -> int:
+	return int(round(base * 1.2)) if comfort_enabled("large_story_text") else base
+
+static func load_sfx_volume() -> float:
+	return clampf(float(_get_config().get_value("audio", "sfx_volume", 0.65)), 0.0, 1.0)
+
+static func save_sfx_volume(value: float) -> void:
+	var config := _get_config()
+	config.set_value("audio", "sfx_volume", clampf(value, 0.0, 1.0))
+	config.save(SETTINGS_PATH)
+
 const ACTION_MOVE_UP := "move_up"
 const ACTION_MOVE_DOWN := "move_down"
 const ACTION_MOVE_LEFT := "move_left"
