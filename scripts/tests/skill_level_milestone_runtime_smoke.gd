@@ -33,7 +33,7 @@ func _check_basic_attack_extra_slashes() -> void:
 			_expect_equal(owner.extra_slash_hits, 0, "combo must wait for its timer")
 			owner.global_position = Vector2(300.0, 150.0)
 			owner.delayed_callback.call(0)
-			_expect_equal(owner.last_slash_center, Vector2(360.0, 150.0), "combo follows current position with the existing slash visual offset")
+			_expect_equal(owner.last_slash_center, Vector2(340.0, 150.0), "combo hitbox follows current position and covers the point-blank visual gap")
 			_expect_equal(owner.last_interval, 0.25, "combo delay is 0.25 seconds")
 		_expect_equal(
 			PLAYER_SKILL_LEVEL_EFFECT_FLOW.get_swordsman_basic_attack_extra_slash_count(owner),
@@ -125,7 +125,7 @@ class SwordsmanRuntimeStub:
 	func _spawn_sword_slash_scene_effect(_center: Vector2, _axis: Vector2, _half_length: float, _color: Color, _duration: float, _width: float, _mirrored: bool) -> void:
 		pass
 
-	func _damage_enemies_in_oriented_rect_unique(_center: Vector2, _axis: Vector2, _length: float, _rect_width: float, _damage: float, _vulnerability: float, _slow_multiplier: float, _slow_duration: float, _hit_registry: Dictionary, _source_id: String) -> int:
+	func _damage_enemies_in_oriented_rect_unique(_center: Vector2, _axis: Vector2, _length: float, _rect_width: float, _damage: float, _vulnerability: float, _slow_multiplier: float, _slow_duration: float, _hit_registry: Dictionary, _source_id: String, _slow_source_id: String = "", _knockback_distance: float = 0.0) -> int:
 		extra_slash_hits += 1
 		last_slash_center = _center
 		return 1

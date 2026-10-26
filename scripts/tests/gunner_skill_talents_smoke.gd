@@ -1,5 +1,6 @@
 extends SceneTree
 
+const TALENTS := preload("res://scripts/player/player_skill_talent_system.gd")
 const GunnerRole := preload("res://scripts/player/roles/gunner_role.gd")
 const InfiniteReload := preload("res://scripts/abilities/gunner_infinite_reload_ability.gd")
 const ShrapnelField := preload("res://scripts/abilities/gunner_shrapnel_field_ability.gd")
@@ -12,41 +13,25 @@ func _init() -> void:
 	root.add_child(owner)
 	var role := GunnerRole.new()
 
-	owner.talents = {
-		"gunner_basic_mark": true,
-		"gunner_basic_penetration": true,
-		"gunner_basic_mobile_fire": true
+	role._spawn_primary_batched_bullet(owner, Vector2.RIGHT, 10.0, Color.WHITE, {"id": "gunner"}, {"range_bonus": 0.0}, 0, Vector2.ZERO)
+	var baseline := owner.last_projectile.duplicate(true)
+	owner.role_special_states["gunner"]["skill_talents"] = {
+		"gunner_basic": ["gunner_basic_mark", "gunner_basic_penetration", "gunner_basic_mobile_fire"],
+		"gunner_shrapnel": ["gunner_shrapnel_rend", "gunner_shrapnel_quick_throw", "gunner_shrapnel_snare"],
+		"gunner_infinite_reload": ["gunner_infinite_sear", "gunner_infinite_recycle"],
+		"gunner_entry": ["gunner_entry_hot_start", "gunner_entry_follow_fire"],
+		"gunner_trait": ["gunner_trait_execution"]
 	}
 	owner.velocity = Vector2.RIGHT * 10.0
 	role._spawn_primary_batched_bullet(owner, Vector2.RIGHT, 10.0, Color.WHITE, {"id": "gunner"}, {"range_bonus": 0.0}, 0, Vector2.ZERO)
-	assert(is_equal_approx(float(owner.last_projectile.get("vulnerability_bonus", 0.0)), 0.06))
-	assert(int(owner.last_projectile.get("pierce_count", 0)) == 2)
-	assert(is_equal_approx(float(owner.last_projectile.get("hit_radius", 0.0)), 16.8))
-	assert(is_equal_approx(float(owner.last_projectile.get("speed", 0.0)), 950.0))
-
-	owner.talents = {"gunner_entry_piercing": true}
-	owner.projectiles.clear()
-	SwitchEntryFlow.fire_gunner_entry_wave(owner, "gunner", 0)
-	assert(owner.projectiles.size() == 8)
-	assert(int(owner.projectiles[0].get("pierce_count", 0)) == 12)
-	var entry_enemy := TalentEnemy.new()
-	entry_enemy.global_position = Vector2(100.0, 0.0)
-	root.add_child(entry_enemy)
-	owner.runtime_enemies = [entry_enemy]
-	owner.talents = {"gunner_entry_repulse": true}
-	SwitchEntryFlow.fire_gunner_entry_wave(owner, "gunner", 0)
-	assert(is_equal_approx(entry_enemy.global_position.x, 100.0))
-
-	owner.talents = {"gunner_shrapnel_rend": true, "gunner_shrapnel_quick_throw": true}
+	assert(owner.last_projectile == baseline, "retired basic nodes must not change projectile damage, speed or pierce")
 	var shrapnel := ShrapnelField.new()
-	assert(is_equal_approx(shrapnel._get_cooldown(owner), 10.92))
-	assert(is_equal_approx(shrapnel._get_duration(owner), 3.2))
-	shrapnel._damage_field(owner, {"center": Vector2.ZERO, "radius": 50.0, "effect_scale": 1.0})
-	assert(is_equal_approx(float(owner.last_radius_damage.get("vulnerability_bonus", 0.0)), 0.05))
-	owner.talents = {"gunner_shrapnel_snare": true}
-	shrapnel._apply_snare_tail(owner, entry_enemy)
-	assert(is_equal_approx(entry_enemy.slow_multiplier, 0.75))
-	assert(is_equal_approx(entry_enemy.slow_timer, 0.65))
+	assert(is_equal_approx(shrapnel._get_cooldown(owner), 14.0))
+	assert(is_equal_approx(shrapnel._get_duration(owner), 4.0))
+	var entry_enemy := TalentEnemy.new()
+	root.add_child(entry_enemy)
+	assert(not shrapnel._has_talent(owner, "gunner_shrapnel_snare"))
+	assert(entry_enemy.slow_multiplier == 1.0 and entry_enemy.slow_timer == 0.0, "retired snare input stays inert")
 	var shrapnel_enemies: Array = []
 	for shrapnel_enemy_position in [Vector2(0.0, 0.0), Vector2(420.0, 40.0), Vector2(840.0, -20.0)]:
 		var shrapnel_enemy := TalentEnemy.new()
@@ -96,72 +81,17 @@ func _init() -> void:
 	assert(is_equal_approx(float(owner.last_radius_damage.get("slow_duration", 0.0)), 3.0))
 	owner.level_talents.clear()
 
-	owner.talents = {"gunner_infinite_sear": true}
-	var infinite := InfiniteReload.new()
-	infinite._apply_piercing_beam_damage(owner, Vector2.ZERO, Vector2.RIGHT, 100.0, 20.0, 30.0)
-	assert(is_equal_approx(float(owner.last_shapes[0].get("vulnerability_bonus", 0.0)), 0.06))
-	assert(is_equal_approx(float(owner.last_shapes[0].get("vulnerability_duration", 0.0)), 0.45))
-	owner.talents = {"gunner_infinite_recycle": true}
-	infinite.cooldown_remaining = 10.0
-	infinite.hit_during_cast = true
-	infinite._finish_cast(owner)
-	assert(is_equal_approx(infinite.cooldown_remaining, 8.5))
-	infinite.last_tick_data = {"origin": Vector2(1.0, 2.0), "direction": Vector2.RIGHT, "length": 30.0, "width": 4.0, "damage": 5.0}
-	var infinite_save := infinite.get_save_data()
-	assert(JSON.stringify(infinite_save).contains("\"origin\":[1.0,2.0]"))
-	var restored_infinite := InfiniteReload.new()
-	restored_infinite.apply_save_data(infinite_save)
-	assert((restored_infinite.last_tick_data.get("origin", Vector2.ZERO) as Vector2).is_equal_approx(Vector2(1.0, 2.0)))
-	restored_infinite.apply_save_data({"cooldown_remaining": 21.0})
-	assert(is_equal_approx(restored_infinite.cooldown_remaining, 21.0))
-
-	owner.talents = {}
 	owner.level_talents = {"gunner_level_talent_infinite_reload_2": true}
-	owner.last_shapes.clear()
-	var infinite_two := InfiniteReload.new()
-	assert(is_equal_approx(infinite_two._get_duration(owner), 4.0 + 1.0))
-	assert(is_equal_approx(infinite_two._get_cooldown(owner), 32.0 + 1.0))
-	infinite_two._start_cast(owner, false)
-	infinite_two._trigger_tick(owner)
-	infinite_two._update_pending_beam_hits(owner, 0.2)
-	assert(owner.last_shapes.size() == 2)
-	assert(is_equal_approx(float(owner.last_shapes[0].get("length", 0.0)), 450.0))
-	infinite_two.stop(owner)
+	var infinite := InfiniteReload.new()
+	assert(is_equal_approx(infinite._get_duration(owner), 4.0))
+	assert(is_equal_approx(infinite._get_cooldown(owner), 36.0), "custom reload does not use retired beam talents")
 	owner.level_talents.clear()
-
-	owner.last_shapes.clear()
-	var sync_infinite := InfiniteReload.new()
-	var sync_shapes: Array[Dictionary] = [{
-		"type": "oriented_rect",
-		"center": Vector2(50.0, 0.0),
-		"axis": Vector2.RIGHT,
-		"length": 100.0,
-		"width": 20.0,
-		"damage_amount": 30.0,
-		"vulnerability_bonus": 0.0,
-		"vulnerability_duration": 0.0,
-		"slow_multiplier": 1.0,
-		"slow_duration": 0.0,
-		"source_position": Vector2.ZERO,
-		"source_role_id": "gunner"
-	}]
-	sync_infinite._queue_piercing_beam_shapes(owner, sync_shapes)
-	sync_shapes[0]["axis"] = Vector2.DOWN
-	assert(owner.last_shapes.is_empty())
-	sync_infinite._update_pending_beam_hits(owner, 0.19)
-	assert(owner.last_shapes.is_empty())
-	sync_infinite._update_pending_beam_hits(owner, 0.02)
-	assert(owner.last_shapes.size() == 1)
-	assert((owner.last_shapes[0].get("axis", Vector2.ZERO) as Vector2).is_equal_approx(Vector2.RIGHT))
-	assert(sync_infinite.hit_during_cast)
-
-	owner.talents = {"gunner_entry_hot_start": true, "gunner_entry_follow_fire": true}
 	owner.gunner_shrapnel_field_ability.cooldown_remaining = 8.0
 	owner.gunner_infinite_reload_ability.cooldown_remaining = 20.0
 	role._complete_entry_talents(owner)
-	assert(is_equal_approx(owner.gunner_shrapnel_field_ability.cooldown_remaining, 6.0))
-	assert(is_equal_approx(owner.gunner_infinite_reload_ability.cooldown_remaining, 16.0))
-	assert(is_equal_approx(role.get_basic_attack_interval_multiplier(owner), 0.75))
+	assert(owner.gunner_shrapnel_field_ability.cooldown_remaining == 8.0)
+	assert(owner.gunner_infinite_reload_ability.cooldown_remaining == 20.0)
+	assert(is_equal_approx(role.get_basic_attack_interval_multiplier(owner), 1.0))
 
 	var calibration := {"anchor": Vector2.RIGHT, "stable_elapsed": 0.0, "calibrated": false}
 	role._update_ultimate_calibration(Vector2.RIGHT, 0.5, calibration)
@@ -169,7 +99,6 @@ func _init() -> void:
 	role._update_ultimate_calibration(Vector2.DOWN, 0.1, calibration)
 	assert(not bool(calibration.get("calibrated", true)))
 
-	owner.talents = {}
 	owner.level_talents = {"gunner_level_talent_rocket_barrage_1": true}
 	owner.projectiles.clear()
 	owner.last_cone_damage.clear()
@@ -219,12 +148,11 @@ func _init() -> void:
 	shred_enemy.queue_free()
 	owner.level_talents.clear()
 
-	owner.talents = {"gunner_trait_execution": true}
 	owner.gunner_flash_stacks = 10
 	var enemy := TalentEnemy.new()
 	root.add_child(enemy)
-	assert(is_equal_approx(role.consume_damage_event_multiplier(owner, "gunner"), 1.6))
-	assert(owner.gunner_flash_stacks == 5)
+	assert(is_equal_approx(role.consume_damage_event_multiplier(owner, "gunner"), 1.0), "retired execution does not amplify a hit")
+	assert(owner.gunner_flash_stacks == 10, "retired execution does not consume flash stacks")
 
 	enemy.queue_free()
 	owner.queue_free()
@@ -253,7 +181,6 @@ class TalentEnemy:
 class TalentOwner:
 	extends CharacterBody2D
 
-	var talents: Dictionary = {}
 	var role_special_states := {"gunner": {"build_levels": {}}}
 	var last_projectile: Dictionary = {}
 	var projectiles: Array[Dictionary] = []
@@ -284,7 +211,7 @@ class TalentOwner:
 	const GUNNER_INTERSECT_VISUAL_SCALE := 1.0
 
 	func _has_skill_talent(talent_id: String) -> bool:
-		return bool(talents.get(talent_id, false))
+		return TALENTS.has_talent(self, talent_id)
 
 	func _has_level_talent(talent_id: String) -> bool:
 		return bool(level_talents.get(talent_id, false))

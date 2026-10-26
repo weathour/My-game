@@ -27,6 +27,7 @@ const BOSS_ARCHETYPES: Array[String] = ["boss_spellcore"]
 const SMALL_BOSS_ARCHETYPES: Array[String] = ["smallboss_glutton", "smallboss_rebirth", "smallboss_turret"]
 const ELITE_ARCHETYPES: Array[String] = ["elite_ram_trail", "elite_splitshot"]
 const NORMAL_ARCHETYPES: Array[String] = ["chaser", "runner", "swarm", "shooter", "brute", "dasher", "shotgunner", "skull_mage", "vine", "shadow_tree", "shadow_tree_young", "necro_priest", "angry_porcupine"]
+const INTERNAL_ARCHETYPES: Array[String] = ["tree_seed"]
 const NORMAL_ARCHETYPE_LABELS := {
 	"chaser": "追击菇",
 	"runner": "疾行史莱姆",
@@ -50,11 +51,15 @@ const ELITE_ARCHETYPE_LABELS := {
 
 static func get_profile(_kind: String, archetype: String) -> Dictionary:
 	var profile: Resource = _load_profile(archetype)
-	if profile == null:
-		profile = _load_profile("chaser")
 	if profile != null and profile.has_method("to_dictionary"):
 		return profile.to_dictionary()
 	return {}
+
+
+# 仅旧档恢复允许退回基础敌人；作者内容与正式生成必须使用严格查询。
+static func get_profile_for_restore(kind: String, archetype: String) -> Dictionary:
+	var profile := get_profile(kind, archetype)
+	return get_profile("normal", "chaser") if profile.is_empty() else profile
 
 
 static func get_boss_options() -> Array:

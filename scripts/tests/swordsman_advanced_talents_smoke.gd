@@ -1,5 +1,7 @@
 extends SceneTree
 
+const TALENTS := preload("res://scripts/player/player_skill_talent_system.gd")
+const STORM_BUILD := preload("res://scripts/player/player_blade_storm_build.gd")
 const BladeStorm := preload("res://scripts/abilities/swordsman_blade_storm_ability.gd")
 const CrescentWave := preload("res://scripts/abilities/swordsman_crescent_wave_ability.gd")
 const CombatResultFlow := preload("res://scripts/player/player_combat_result_flow.gd")
@@ -12,59 +14,28 @@ func _init() -> void:
 	root.add_child(owner)
 	_check_trait_states(owner)
 	_check_crescent_branches(owner)
-	_check_blade_storm_recall(owner)
 	_check_blade_storm_blocks_basic_attack(owner)
-	_check_ultimate_pursuit()
 	_check_ultimate_talent_snapshot(owner)
 	print("SWORDSMAN_ADVANCED_TALENTS_SMOKE_OK")
 	quit()
 
 
 func _check_trait_states(owner: TalentOwner) -> void:
-	owner.talents = {
-		"swordsman_trait_blood_surge": true,
-		"swordsman_trait_guard_stance": true,
-		"swordsman_trait_head_high": true,
-		"swordsman_trait_unyielding": true
-	}
 	owner.role_health_values["swordsman"] = 30.0
 	CombatResultFlow._activate_swordsman_heal_talents(owner)
 	var state: Dictionary = owner.role_special_states["swordsman"]
-	assert(is_equal_approx(float(state["blood_surge_remaining"]), 2.0))
-	assert(is_equal_approx(float(state["guard_stance_remaining"]), 2.0))
-	assert(is_equal_approx(float(state["head_high_remaining"]), 2.0))
-	assert(is_equal_approx(float(state["unyielding_remaining"]), 1.2))
-	assert(is_equal_approx(SurvivalFlow._get_swordsman_talent_damage_taken_multiplier(owner), 0.60))
-	assert(is_equal_approx(SurvivalFlow._get_swordsman_talent_move_multiplier(owner), 1.25))
-	assert(is_equal_approx(SwordsmanRole.new().get_talent_basic_attack_interval_multiplier(owner), 1.0 / 1.15))
-	owner.switch_power_remaining = 3.0
-	owner.switch_power_role_id = "swordsman"
-	owner.switch_power_label = "血战昂扬"
-	assert(is_equal_approx(CombatResultFlow.get_swordsman_blood_surge_multiplier(owner) * 1.15, 1.35))
-	CombatResultFlow.consume_swordsman_blood_surge(owner)
+	for timer in ["blood_surge_remaining", "guard_stance_remaining", "head_high_remaining", "unyielding_remaining"]:
+		assert(is_zero_approx(float(state.get(timer, 0.0))), "retired heal nodes must not activate timed buffs")
+	assert(is_equal_approx(SurvivalFlow._get_swordsman_talent_damage_taken_multiplier(owner), 1.0))
+	assert(is_equal_approx(SurvivalFlow._get_swordsman_talent_move_multiplier(owner), 1.0))
+	assert(is_equal_approx(SwordsmanRole.new().get_talent_basic_attack_interval_multiplier(owner), 1.0))
 	assert(is_equal_approx(CombatResultFlow.get_swordsman_blood_surge_multiplier(owner), 1.0))
 
 
 func _check_crescent_branches(owner: TalentOwner) -> void:
-	owner.talents = {"swordsman_crescent_twin_moons": true}
 	var directions: Array[Vector2] = CrescentWave.new()._get_cast_directions(owner, Vector2.RIGHT)
-	assert(directions.size() == 2)
-	assert(is_equal_approx(rad_to_deg(directions[1].angle()), 18.0))
-
-
-func _check_blade_storm_recall(owner: TalentOwner) -> void:
-	owner.talents = {"swordsman_blade_storm_recall": true}
-	var enemy := Node2D.new()
-	root.add_child(enemy)
-	owner.live_enemies = [enemy]
-	var blade = BladeStorm.new()
-	blade.cast_origin = Vector2.ZERO
-	enemy.global_position = Vector2(100.0, 0.0)
-	blade._update_recall(owner, 0.1)
-	enemy.global_position = Vector2(220.0, 0.0)
-	blade._update_recall(owner, 0.1)
-	assert(is_equal_approx(enemy.global_position.x, 130.0))
-	enemy.queue_free()
+	assert(directions == [Vector2.RIGHT], "retired twin moons must not add cast directions")
+	assert(STORM_BUILD.choices(owner).is_empty(), "retired recall does not grant a current storm branch")
 
 
 func _check_blade_storm_blocks_basic_attack(_owner: TalentOwner) -> void:
@@ -76,26 +47,12 @@ func _check_blade_storm_blocks_basic_attack(_owner: TalentOwner) -> void:
 	assert(attack_owner.active_checks == 2)
 	attack_owner.queue_free()
 
-
-func _check_ultimate_pursuit() -> void:
-	var role = SwordsmanRole.new()
-	var enemy := Node2D.new()
-	root.add_child(enemy)
-	role._update_pursuit_tracking(enemy)
-	role._update_pursuit_tracking(enemy)
-	role._update_pursuit_tracking(enemy)
-	assert(role.ultimate_pursuit_armed)
-	enemy.queue_free()
-
 func _check_ultimate_talent_snapshot(owner: TalentOwner) -> void:
 	var role = SwordsmanRole.new()
-	owner.talents = {"swordsman_ultimate_triumph": true}
 	var snapshot: Dictionary = role._snapshot_ultimate_talents(owner)
-	owner.talents.clear()
 	role._activate_ultimate_triumph(owner, bool(snapshot["swordsman_ultimate_triumph"]))
-	assert(is_equal_approx(float(owner.role_special_states["swordsman"]["ultimate_triumph_remaining"]), 2.0))
-	owner.role_special_states["swordsman"].erase("ultimate_triumph_remaining")
-	owner.talents = {"swordsman_ultimate_triumph": true}
+	assert(not bool(snapshot["swordsman_ultimate_triumph"]))
+	assert(not owner.role_special_states["swordsman"].has("ultimate_triumph_remaining"), "retired ultimate node is not captured in new casts")
 	role._activate_ultimate_triumph(owner, false)
 	assert(not owner.role_special_states["swordsman"].has("ultimate_triumph_remaining"))
 
@@ -114,9 +71,13 @@ class BasicAttackOwner:
 class TalentOwner:
 	extends Node2D
 
-	var talents: Dictionary = {}
 	var blessing_skill_state: Dictionary = {"unlocked": {"blade_storm": true}}
-	var role_special_states: Dictionary = {"swordsman": {}}
+	var role_special_states: Dictionary = {"swordsman": {"skill_talents": {
+		"swordsman_trait": ["swordsman_trait_blood_surge", "swordsman_trait_guard_stance", "swordsman_trait_head_high", "swordsman_trait_unyielding"],
+		"swordsman_crescent": ["swordsman_crescent_twin_moons"],
+		"swordsman_blade_storm": ["swordsman_blade_storm_recall"],
+		"swordsman_ultimate": ["swordsman_ultimate_triumph"]
+	}}}
 	var roles: Array = [{"id": "swordsman"}]
 	var active_role_index := 0
 	var role_health_values := {"swordsman": 100.0}
@@ -127,7 +88,7 @@ class TalentOwner:
 	var facing_direction := Vector2.RIGHT
 
 	func _has_skill_talent(talent_id: String) -> bool:
-		return bool(talents.get(talent_id, false))
+		return TALENTS.has_talent(self, talent_id)
 
 	func _get_active_role() -> Dictionary:
 		return roles[active_role_index]

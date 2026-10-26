@@ -30,37 +30,6 @@ const PROGRESS_TITLES := PLAYER_SKILL_LEVEL_SYSTEM.PROGRESS_TITLES
 
 const UNLOCKABLE_PROGRESS := PLAYER_SKILL_LEVEL_SYSTEM.UNLOCKABLE_PROGRESS
 
-const SKILL_PROGRESS_BY_SKILL_ID := {
-	"swordsman_basic_attack": "swordsman_basic",
-	"gunner_basic_attack": "gunner_basic",
-	"mage_basic_attack": "mage_basic",
-	"blade_storm": "swordsman_blade_storm",
-	"crescent_wave": "swordsman_crescent_wave",
-	"knight_thrust": "swordsman_knight_thrust",
-	"king_blade": "swordsman_king_blade",
-	"judgement_sword": "swordsman_judgement_sword",
-	"shrapnel_field": "gunner_shrapnel",
-	"infinite_reload": "gunner_infinite_reload",
-	"explosive_round": "gunner_explosive_round",
-	"magic_grenade": "gunner_magic_grenade",
-	"magic_eye": "gunner_magic_eye",
-	"meta_field": "mage_meta_field",
-	"surging_wave": "mage_surging_wave",
-	"flame_path": "mage_flame_path",
-	"dark_contract": "mage_dark_contract",
-	"fireball": "mage_fireball",
-	"swordsman_ultimate": "swordsman_ultimate",
-	"gunner_ultimate": "gunner_ultimate",
-	"mage_ultimate": "mage_ultimate",
-	"mechanic_basic_attack": "mechanic_basic",
-	"drone": "mechanic_drone",
-	"mine": "mechanic_mine",
-	"emp_burst": "mechanic_emp_burst",
-	"tulip_turret": "mechanic_tulip_turret",
-	"missile_volley": "mechanic_missile_volley",
-	"mechanic_ultimate": "mechanic_ultimate"
-}
-
 const LEVEL_TALENT_REQUIRED_SKILL_RULES := ROLE_TALENT_CATALOG.LEVEL_TALENT_REQUIRED_SKILL_RULES
 
 const TALENT_DEFINITIONS := LEGACY_SKILL_TALENT_CATALOG.TALENT_DEFINITIONS
@@ -73,53 +42,21 @@ static func get_display(owner, role_id: String, progress_id: String) -> Dictiona
 	if PLAYER_SKILL_LEVEL_SYSTEM.is_custom_basic(progress_id):
 		var build = PLAYER_SKILL_LEVEL_SYSTEM.basic_build(progress_id)
 		return {"base_name": "普通攻击", "name": "普通攻击", "hud_name": "普攻", "role_id": role_id, "progress_id": progress_id, "description": build.description(owner), "upgrade_note": build.next_preview(owner), "stages": [], "talent_ids": [], "talent_title": "", "path": ""}
+	# 旧108节点不参与当前展示；已保存的角色level_talents仍走独立读取链。
 	var base_name := str(PROGRESS_TITLES.get(progress_id, progress_id))
-	var talent_ids := get_selected_talents(owner, role_id, progress_id)
-	var titles: Array[String] = []
-	var descriptions: Array[String] = []
-	var upgrade_notes: Array[String] = []
-	var stages: Array = []
-	for stage in range(1, TALENT_STAGE_COUNT + 1):
-		var selected_id := str(talent_ids[stage - 1]) if talent_ids.size() >= stage else ""
-		var selected_definition := get_talent_definition(progress_id, selected_id)
-		var title := str(selected_definition.get("title", ""))
-		if title != "":
-			titles.append(title)
-			descriptions.append(str(selected_definition.get("description", "")))
-			upgrade_notes.append(str(selected_definition.get("upgrade_note", "")))
-		stages.append({
-			"stage": stage,
-			"trigger_level": int(TRIGGER_LEVELS[stage - 1]),
-			"selected": selected_id != "",
-			"talent_id": selected_id,
-			"side": str(selected_definition.get("side", "")),
-			"title": title,
-			"description": str(selected_definition.get("description", "")),
-			"upgrade_note": str(selected_definition.get("upgrade_note", "")),
-			"options": _get_stage_definitions(progress_id, stage)
-		})
-	var latest_title := titles[-1] if not titles.is_empty() else ""
-	return {
-		"base_name": base_name,
-		"name": base_name if titles.is_empty() else "%s·%s" % [base_name, "·".join(titles)],
-		"hud_name": (latest_title if latest_title != "" else base_name).left(2),
-		"path": _get_path(talent_ids),
-		"role_id": role_id,
-		"progress_id": progress_id,
-		"talent_id": str(talent_ids[0]) if not talent_ids.is_empty() else "",
-		"talent_ids": talent_ids,
-		"talent_title": latest_title,
-		"description": "\n".join(descriptions),
-		"upgrade_note": "\n".join(upgrade_notes),
-		"stages": stages
-	}
+	return {"base_name": base_name, "name": base_name, "hud_name": base_name.left(2), "role_id": role_id, "progress_id": progress_id, "description": "", "upgrade_note": "", "stages": [], "talent_ids": [], "talent_title": "", "path": ""}
 
 
 static func get_display_for_skill_id(owner, skill_id: String) -> Dictionary:
-	var progress_id := str(SKILL_PROGRESS_BY_SKILL_ID.get(skill_id, ""))
-	if progress_id == "":
+	var progress_id := str(UNLOCKABLE_PROGRESS.find_key(skill_id))
+	if skill_id.ends_with("_basic_attack"):
+		progress_id = skill_id.trim_suffix("_attack")
+	elif skill_id.ends_with("_ultimate"):
+		progress_id = skill_id
+	var role_id := PLAYER_BLESSING_SKILL_STATE.get_skill_role_id(skill_id)
+	if not ROLE_PROGRESS_ORDER.get(role_id, []).has(progress_id):
 		return {}
-	return get_display(owner, progress_id.get_slice("_", 0), progress_id)
+	return get_display(owner, role_id, progress_id)
 
 
 static func get_talent_definition(progress_id: String, talent_id: String) -> Dictionary:

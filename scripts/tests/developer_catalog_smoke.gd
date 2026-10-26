@@ -68,15 +68,25 @@ func _run() -> void:
 	check(is_equal_approx(player.max_health, base_hp + 60.0), "chestplate refreshes max health")
 	ACTIONS.apply_catalog_action(main, {"kind": "item", "id": "broken_chestplate", "operation": "clear"})
 	check(is_equal_approx(player.max_health, base_hp), "chestplate removal restores max health")
-	check(not ACTIONS.apply_catalog_action(main, {"kind": "item", "id": "poison", "operation": "add"}), "unavailable item rejected")
+	var items: Array = TOOLS.item_catalog(player)
+	var poison_entry: Dictionary = {}
+	for entry in items:
+		if str(entry.get("id", "")) == "poison":
+			poison_entry = entry
+	check(items.size() == 17 and not poison_entry.is_empty(), "current item catalog includes all 17 stones, including poison")
+	check(ACTIONS.apply_catalog_action(main, {"kind": "item", "id": "poison", "operation": "add", "amount": 2}), "formal poison stone can be granted")
+	check(player.get_ruan_stone_level("poison") == 2, "poison grant applies exact quantity")
+	check(not ACTIONS.apply_catalog_action(main, {"kind": "item", "id": "not_a_stone", "operation": "add"}), "unknown item remains rejected")
+	ACTIONS.apply_catalog_action(main, {"kind": "item", "id": "poison", "operation": "clear"})
+	check(player.get_ruan_stone_level("poison") == 0, "poison clear removes granted quantity")
 	var skill := {"kind": "skill", "role_id": "swordsman", "id": "swordsman_basic"}
 	ACTIONS.apply_catalog_action(main, skill.merged({"operation": "set", "amount": 9}))
 	for entry in [[4, "heavy"], [8, "split"], [9, "brave"]]:
 		check(ACTIONS.apply_catalog_action(main, skill.merged({"operation": "branch", "stage": entry[0], "choice": entry[1]})), "branch selection")
-	check(is_equal_approx(player._get_effective_attack_speed("swordsman"), 0.15), "heavy brave speed")
+	check(is_equal_approx(player._get_effective_attack_speed("swordsman"), 0.2), "heavy brave speed matches the current basic-build contract")
 	ACTIONS.apply_catalog_action(main, skill.merged({"operation": "branch", "stage": 4, "choice": "light"}))
 	check(not TOOLS.BASIC.has_choice(player, "heavy") and TOOLS.BASIC.has_choice(player, "split"), "replacement preserves other stages")
-	check(is_equal_approx(player._get_effective_attack_speed("swordsman"), 0.7), "branch replacement removes previous stats")
+	check(is_equal_approx(player._get_effective_attack_speed("swordsman"), 1.0), "light branch replacement removes heavy speed penalty")
 	ACTIONS.apply_catalog_action(main, skill.merged({"operation": "set", "amount": 4}))
 	check(TOOLS.BASIC.choices(player) == {"4": "light"}, "lower level clears higher stages")
 	check(not ACTIONS.apply_catalog_action(main, skill.merged({"operation": "branch", "stage": 9, "choice": "guard"})), "underlevel branch rejected")

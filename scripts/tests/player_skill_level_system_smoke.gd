@@ -65,7 +65,7 @@ func _check_initial_levels() -> void:
 	_expect_equal(PLAYER_SKILL_LEVEL_SYSTEM.get_skill_level(owner, "swordsman", "swordsman_trait"), 1, "natural skill lines should start at level 1")
 	_expect_equal(PLAYER_SKILL_LEVEL_SYSTEM.get_skill_level(owner, "gunner", "gunner_infinite_reload"), 0, "locked active skills should report level 0")
 	PLAYER_BLESSING_SKILL_STATE.force_unlock_skill(owner, "infinite_reload", 1)
-	_expect_equal(PLAYER_SKILL_LEVEL_SYSTEM.get_skill_level(owner, "gunner", "gunner_infinite_reload"), 1, "unlocked active skills should start at level 1")
+	_expect_equal(PLAYER_SKILL_LEVEL_SYSTEM.get_skill_level(owner, "gunner", "gunner_infinite_reload"), 0, "custom reload unlock starts at LV0")
 	_expect_equal(PLAYER_SKILL_LEVEL_SYSTEM.get_skill_level(owner, "swordsman", "swordsman_ultimate"), 1, "ultimate skills still report their level")
 	owner.free()
 
@@ -105,7 +105,7 @@ func _check_talent_offer_and_pick() -> void:
 	var offer: Dictionary = PLAYER_SKILL_LEVEL_SYSTEM.build_talent_offer(owner)
 	var options: Array = offer.get("options", [])
 	var context: Dictionary = offer.get("context", {})
-	_expect_equal(options.size(), 2, "level 5 talent offer should present two placeholder slots")
+	_expect_equal(options.size(), 2, "LV4 custom build offer should present two branches")
 	_expect(bool(context.get("skill_talent_offer", false)), "talent offer should present the skill talent context")
 	_expect(not bool(context.get("level_talent_offer", false)), "skill talent offers should not masquerade as player-level talents")
 	_expect_equal(str(context.get("skill_progress_id", "")), "swordsman_basic", "talent offer should target the leveled skill")
@@ -195,14 +195,15 @@ func _check_save_normalization() -> void:
 	var raw: Dictionary = owner.role_special_states.duplicate(true)
 	var normalized: Dictionary = PLAYER_SKILL_TALENT_SYSTEM.normalize_role_special_states(raw)
 	owner.role_special_states = normalized
-	_expect_equal(PLAYER_SKILL_LEVEL_SYSTEM.get_skill_level(owner, "gunner", "gunner_infinite_reload"), 5, "normalization should keep skill levels")
+	_expect_equal(PLAYER_SKILL_LEVEL_SYSTEM.get_skill_level(owner, "gunner", "gunner_infinite_reload"), 4, "normalization should keep the four purchased custom levels")
 	_expect(PLAYER_SKILL_LEVEL_SYSTEM.is_talent_pick_pending(owner, "gunner", "gunner_infinite_reload"), "normalization should keep pending talent picks")
 	var offer: Dictionary = PLAYER_SKILL_LEVEL_SYSTEM.build_talent_offer(owner)
 	var options: Array = offer.get("options", [])
 	PLAYER_SKILL_LEVEL_SYSTEM.apply_option_with_result(owner, str((options[0] as Dictionary).get("id", "")), offer)
 	var normalized_again: Dictionary = PLAYER_SKILL_TALENT_SYSTEM.normalize_role_special_states(owner.role_special_states.duplicate(true))
 	owner.role_special_states = normalized_again
-	_expect_equal(PLAYER_SKILL_LEVEL_SYSTEM.get_granted_talent_slots(owner, "gunner", "gunner_infinite_reload"), [1], "normalization should keep granted talent slots")
+	_expect_equal(owner.role_special_states["gunner"]["infinite_reload_build"].get("4", ""), "light_step", "normalization should keep the chosen custom branch")
+	_expect_equal(PLAYER_SKILL_LEVEL_SYSTEM.get_granted_talent_slots(owner, "gunner", "gunner_infinite_reload"), [], "custom branches must not grant generic LV5/10 slots")
 	_expect_equal(PLAYER_SKILL_LEVEL_SYSTEM.get_skill_level(owner, "gunner", "gunner_trait"), 1, "untouched skill lines should stay at level 1")
 	owner.free()
 

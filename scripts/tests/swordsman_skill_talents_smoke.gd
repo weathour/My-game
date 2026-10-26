@@ -1,5 +1,7 @@
 extends SceneTree
 
+const TALENTS := preload("res://scripts/player/player_skill_talent_system.gd")
+const STORM_BUILD := preload("res://scripts/player/player_blade_storm_build.gd")
 const BladeStorm := preload("res://scripts/abilities/swordsman_blade_storm_ability.gd")
 const CrescentWave := preload("res://scripts/abilities/swordsman_crescent_wave_ability.gd")
 const SurvivalFlow := preload("res://scripts/player/player_survival_flow.gd")
@@ -14,16 +16,14 @@ func _init() -> void:
 func _run() -> void:
 	var owner := TalentOwner.new()
 	root.add_child(owner)
-	owner.talents = {"swordsman_crescent_full_moon": true}
 	var crescent = CrescentWave.new()
-	if not is_equal_approx(crescent._get_wave_speed(owner), 500.0):
-		failures.append("full moon should replace base wave speed with 500")
+	if not is_equal_approx(crescent._get_wave_speed(owner), 650.0):
+		failures.append("retired full moon must not replace the base wave speed")
 	owner.role_special_states["swordsman"]["build_levels"]["crescent_wave_speed"] = 1
-	if not is_equal_approx(crescent._get_wave_speed(owner), 530.0):
-		failures.append("full moon should inherit the post-talent wave speed build")
+	if not is_equal_approx(crescent._get_wave_speed(owner), 680.0):
+		failures.append("retained speed build applies to the current 650 base speed")
 	owner.role_special_states["swordsman"]["build_levels"].erase("crescent_wave_speed")
 
-	owner.talents = {"swordsman_crescent_return": true}
 	var projectile := Node2D.new()
 	root.add_child(projectile)
 	crescent.active_crescent_projectiles.append({
@@ -44,21 +44,13 @@ func _run() -> void:
 	})
 	projectile.set_meta("crescent_projectile_token", -1)
 	crescent._update_crescent_projectiles(1.0)
-	var returned: Dictionary = crescent.active_crescent_projectiles[0]
-	if not bool(returned.get("returned", false)):
-		failures.append("crescent return should keep the projectile for one reverse trip")
-	if not is_equal_approx(float(returned.get("damage_amount", 0.0)), 24.0):
-		failures.append("crescent return should deal 60 percent damage")
-	if not (returned.get("hit_registry", {}) as Dictionary).is_empty():
-		failures.append("crescent return should use an independent hit registry")
-
-	owner.talents = {"swordsman_blade_storm_stationary": true}
-	owner.global_position = Vector2(300.0, 200.0)
-	var blade = BladeStorm.new()
-	blade.cast_origin = Vector2(40.0, 50.0)
-	var centers: Array[Vector2] = blade._get_storm_centers(owner)
-	if centers.is_empty() or centers[0] != Vector2(40.0, 50.0):
-		failures.append("stationary blade storm should stay at its cast origin")
+	if not crescent.active_crescent_projectiles.is_empty():
+		failures.append("retired return input must not retain an expired projectile")
+	for pooled in crescent.crescent_projectile_pool:
+		pooled.free()
+	crescent.crescent_projectile_pool.clear()
+	if not STORM_BUILD.choices(owner).is_empty() or not is_equal_approx(STORM_BUILD.radius(owner), 150.0):
+		failures.append("retired storm nodes must not select current branches or change the base radius")
 
 	_check_last_guard()
 	owner.queue_free()
@@ -74,29 +66,16 @@ func _run() -> void:
 func _check_last_guard() -> void:
 	var owner := TalentOwner.new()
 	root.add_child(owner)
-	owner.talents = {"swordsman_trait_last_guard": true}
 	owner.role_special_states["swordsman"]["build_levels"] = {
 		"trait_heal_bonus": 2,
 		"knight_glory_duration": 1
 	}
 
-	SurvivalFlow.take_damage(owner, 10.0)
-	if owner.active_role_index != 1 or owner.swordsman_death_defiance_cooldown_remaining > 0.0:
-		failures.append("last guard should not trigger on nonlethal damage")
+	if SurvivalFlow._try_trigger_swordsman_last_guard(owner):
+		failures.append("retired last guard input must not rescue another role")
+	if owner.active_role_index != 1 or owner.role_switch_energy_values["gunner"] != 100.0:
+		failures.append("rejected legacy rescue must not switch role or consume energy")
 
-	owner.current_health = 100.0
-	owner.role_health_values["gunner"] = 100.0
-	SurvivalFlow.take_damage(owner, 100.0)
-	if owner.active_role_index != 0:
-		failures.append("last guard should force switch to swordsman")
-	if not is_equal_approx(float(owner.role_health_values.get("gunner", 0.0)), 34.0):
-		failures.append("last guard should inherit trait healing builds for rescued health")
-	if not is_zero_approx(float(owner.role_switch_energy_values.get("gunner", -1.0))):
-		failures.append("last guard should clear the rescued role switch energy")
-	if not is_equal_approx(owner.swordsman_death_defiance_cooldown_remaining, 80.0):
-		failures.append("last guard should start the shared 80 second cooldown")
-	if not is_equal_approx(owner.switch_invulnerability_remaining, 1.8):
-		failures.append("last guard should inherit knight glory duration for post-switch invulnerability")
 	owner.queue_free()
 
 
@@ -107,9 +86,12 @@ class TalentOwner:
 
 	const SWORDSMAN_DEATH_DEFIANCE_COOLDOWN := 80.0
 
-	var talents: Dictionary = {}
 	var blessing_skill_state: Dictionary = {"unlocked": {"crescent_wave": true, "blade_storm": true}}
-	var role_special_states: Dictionary = {"swordsman": {"build_levels": {}}}
+	var role_special_states: Dictionary = {"swordsman": {"build_levels": {}, "skill_talents": {
+		"swordsman_crescent": ["swordsman_crescent_full_moon", "swordsman_crescent_return"],
+		"swordsman_blade_storm": ["swordsman_blade_storm_stationary", "swordsman_blade_storm_recall"],
+		"swordsman_trait": ["swordsman_trait_last_guard"]
+	}}}
 	var roles: Array = [{"id": "swordsman"}, {"id": "gunner"}, {"id": "mage"}]
 	var active_role_index := 1
 	var role_health_values := {"swordsman": 100.0, "gunner": 100.0, "mage": 100.0}
@@ -125,7 +107,7 @@ class TalentOwner:
 	var swordsman_death_defiance_will_remaining := 0.0
 
 	func _has_skill_talent(talent_id: String) -> bool:
-		return bool(talents.get(talent_id, false))
+		return TALENTS.has_talent(self, talent_id)
 
 	func _get_active_role() -> Dictionary:
 		return roles[active_role_index]

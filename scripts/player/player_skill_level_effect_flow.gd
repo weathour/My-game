@@ -877,8 +877,8 @@ static func _get_mage_upgrade_preview(owner, progress_id: String) -> String:
 			parts.append("伤害倍率 +10%")
 			parts.append("持续时间 +0.2s")
 		MAGE_FIREBALL:
-			parts.append("伤害倍率 +20%")
-			parts.append("灼烧倍率 +0.5%")
+			parts.append("伤害倍率 +%.0f%%" % (FIREBALL_DAMAGE_RATIO_PER_LEVEL * 100.0))
+			parts.append("灼烧倍率 +%.1f%%" % (FIREBALL_BURN_RATIO_PER_LEVEL * 100.0))
 		MAGE_DARK_CONTRACT:
 			parts.append("球体速度 +2.5")
 			parts.append("最大移动距离 +15")
@@ -904,7 +904,7 @@ static func _get_mage_milestone_preview_text(progress_id: String, next_level: in
 				return "追加一道雷击"
 		MAGE_FIREBALL:
 			if _is_milestone_level(next_level, FIREBALL_GROUND_FIRST_LEVEL, FIREBALL_GROUND_STEP, FIREBALL_GROUND_MAX):
-				return "灼烧地面持续时间 +1s"
+				return "灼烧地面持续时间 +%.0fs" % FIREBALL_GROUND_DURATION_PER_MILESTONE
 	return ""
 
 

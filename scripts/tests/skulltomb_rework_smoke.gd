@@ -83,7 +83,7 @@ func _run() -> void:
 	assert(SKILLS.handle_lethal_damage(enemy))
 	assert(not player.is_healing_blocked())
 	assert(is_equal_approx(player.enemy_move_slow_multiplier, 0.25))
-	assert(is_equal_approx(player.enemy_move_slow_remaining, 5.0))
+	assert(is_equal_approx(player.enemy_move_slow_remaining, 4.5)) # Swordsman has 10% status resistance.
 	assert(is_equal_approx(soldier.skull_soldier_speed_multiplier, 1.0))
 	for ranged in [shooter, shotgunner, splitshot]:
 		assert(is_equal_approx(ranged.skullshot_attack_frequency_multiplier, 1.3))

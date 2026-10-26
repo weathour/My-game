@@ -78,12 +78,12 @@ func _check_flat_bonuses() -> void:
 	_expect_approx(PLAYER_SKILL_LEVEL_EFFECT_FLOW.get_gunner_hunt_outside_damage_bonus(owner), 0.03, "猎杀 level 4 should add 3% outside damage")
 	_expect_approx(PLAYER_SKILL_LEVEL_EFFECT_FLOW.get_gunner_entry_damage_ratio_bonus(owner), 0.20, "枪火典礼 level 3 should add 20% bullet damage")
 	_expect_approx(PLAYER_SKILL_LEVEL_EFFECT_FLOW.get_gunner_entry_bullet_speed_bonus(owner), 20.0, "枪火典礼 level 3 should add 20 bullet speed")
-	_expect_approx(PLAYER_SKILL_LEVEL_EFFECT_FLOW.get_gunner_basic_range_bonus(owner), 60.0, "枪手普攻 level 5 should add 60 range")
-	_expect_approx(PLAYER_SKILL_LEVEL_EFFECT_FLOW.get_gunner_basic_bullet_speed_bonus(owner), 40.0, "枪手普攻 level 5 should add 40 bullet speed")
+	_expect_approx(PLAYER_SKILL_LEVEL_EFFECT_FLOW.get_gunner_basic_range_bonus(owner), 0.0, "LV5 without sniper does not add range before the LV6 milestone")
+	_expect_approx(PLAYER_SKILL_LEVEL_EFFECT_FLOW.get_gunner_basic_bullet_speed_bonus(owner), 0.0, "custom basic uses branch speed rather than the old flat level bonus")
 	_expect_approx(PLAYER_SKILL_LEVEL_EFFECT_FLOW.get_gunner_shrapnel_damage_ratio_bonus(owner), 0.06, "散弹 level 4 should add 6% damage")
-	_expect_approx(PLAYER_SKILL_LEVEL_EFFECT_FLOW.get_gunner_infinite_reload_range_bonus(owner), 40.0, "无限装填 level 3 should add 40 range")
-	_expect_approx(PLAYER_SKILL_LEVEL_EFFECT_FLOW.get_gunner_infinite_reload_damage_ratio_bonus(owner), 0.02, "无限装填 level 3 should add 2% tick ratio")
-	_expect_approx(PLAYER_SKILL_LEVEL_EFFECT_FLOW.get_gunner_infinite_reload_move_speed_bonus(owner), 0.01, "无限装填 level 3 should add 1% move speed")
+	_expect_approx(PLAYER_SKILL_LEVEL_EFFECT_FLOW.get_gunner_infinite_reload_range_bonus(owner), 0.0, "reload LV3 has no range branch yet")
+	_expect_approx(PLAYER_SKILL_LEVEL_EFFECT_FLOW.get_gunner_infinite_reload_damage_ratio_bonus(owner), 0.15, "reload LV3 adds three five-point upgrades")
+	_expect_approx(PLAYER_SKILL_LEVEL_EFFECT_FLOW.get_gunner_infinite_reload_move_speed_bonus(owner), 0.0, "reload movement bonus requires light_step")
 	_expect_approx(PLAYER_SKILL_LEVEL_EFFECT_FLOW.get_gunner_explosive_round_damage_ratio_bonus(owner), 0.10, "爆破弹 level 2 should add 10% damage")
 	_expect_approx(PLAYER_SKILL_LEVEL_EFFECT_FLOW.get_gunner_explosive_round_cone_radius_bonus(owner), 7.5, "爆破弹 level 2 should add 7.5 cone radius")
 	_expect_approx(PLAYER_SKILL_LEVEL_EFFECT_FLOW.get_gunner_magic_grenade_damage_ratio_bonus(owner), 0.40, "魔法榴弹 level 5 should add 40% damage")
@@ -105,7 +105,7 @@ func _check_milestone_counts() -> void:
 		)
 	_set_level(owner, "gunner_trait", 10)
 	_expect_equal(PLAYER_GUNNER_FLASH_TALENT_FLOW.get_base_flash_stack_capacity(owner), 15, "满级瞬杀 should raise the base stack capacity to 15")
-	var split_table := {2: 0, 3: 1, 5: 1, 6: 2, 9: 3, 10: 3}
+	var split_table := {0: 0, 3: 0, 5: 0, 6: 0, 8: 0, 9: 0}
 	for level in split_table.keys():
 		_set_level(owner, "gunner_basic", int(level))
 		_expect_equal(
@@ -113,9 +113,12 @@ func _check_milestone_counts() -> void:
 			int(split_table[level]),
 			"枪手普攻 level %d split bullet count" % int(level)
 		)
-	_expect_approx(PLAYER_SKILL_LEVEL_EFFECT_FLOW.get_gunner_basic_split_angle_degrees(0), 20.0, "first split bullet should fly at +20 degrees")
-	_expect_approx(PLAYER_SKILL_LEVEL_EFFECT_FLOW.get_gunner_basic_split_angle_degrees(1), -20.0, "second split bullet should fly at -20 degrees")
-	_expect_approx(PLAYER_SKILL_LEVEL_EFFECT_FLOW.get_gunner_basic_split_angle_degrees(2), 40.0, "third split bullet should fly at +40 degrees")
+	_set_level(owner, "gunner_basic", 6)
+	_expect_approx(PLAYER_SKILL_LEVEL_EFFECT_FLOW.get_gunner_basic_range_bonus(owner), 75.0, "custom basic LV6 adds 75 range")
+	_set_level(owner, "gunner_infinite_reload", 4)
+	owner.role_special_states["gunner"]["infinite_reload_build"] = {"4": "light_step"}
+	_expect_approx(PLAYER_SKILL_LEVEL_EFFECT_FLOW.get_gunner_infinite_reload_range_bonus(owner), 100.0, "light_step grants 100 range")
+	_expect_approx(PLAYER_SKILL_LEVEL_EFFECT_FLOW.get_gunner_infinite_reload_move_speed_bonus(owner), 0.1, "light_step grants ten percent speed")
 	_set_level(owner, "gunner_shrapnel", 9)
 	_expect_equal(PLAYER_SKILL_LEVEL_EFFECT_FLOW.get_gunner_shrapnel_extra_field_count(owner), 3, "散弹 level 9 should add three extra fields")
 	_set_level(owner, "gunner_explosive_round", 6)
@@ -136,7 +139,7 @@ func _check_preview_text() -> void:
 	_expect(execution_preview.contains("瞬杀最大层数 +1"), "瞬杀 level 1 preview should mention the level-2 stack cap")
 	_set_level(owner, "gunner_basic", 2)
 	var basic_preview := PLAYER_SKILL_LEVEL_EFFECT_FLOW.get_upgrade_preview_text(owner, "gunner", "gunner_basic")
-	_expect(basic_preview.contains("获得一枚分裂弹"), "枪手普攻 level 2 preview should mention the level-3 split bullet")
+	_expect(basic_preview.contains("伤害倍率 +20 个百分点"), "gunner LV2 preview describes the LV3 ratio upgrade")
 	_set_level(owner, "gunner_basic", 10)
 	_expect_equal(PLAYER_SKILL_LEVEL_EFFECT_FLOW.get_upgrade_preview_text(owner, "gunner", "gunner_basic"), "", "maxed gunner skills should have no upgrade preview")
 	owner.free()
@@ -171,6 +174,10 @@ func _set_level(owner, progress_id: String, level: int) -> void:
 	else:
 		levels[progress_id] = level
 	role_state["skill_levels"] = levels
+	var custom_builds := {"gunner_basic": "gunner_basic_build", "gunner_infinite_reload": "infinite_reload_build"}
+	if custom_builds.has(progress_id):
+		levels[progress_id] = level
+		role_state[custom_builds[progress_id]] = {}
 	states["gunner"] = role_state
 	owner.role_special_states = states
 

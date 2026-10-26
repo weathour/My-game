@@ -61,12 +61,12 @@ func _check_flat_bonuses() -> void:
 	_expect_approx(PLAYER_SKILL_LEVEL_EFFECT_FLOW.get_mage_arcane_surplus_ultimate_energy_bonus(owner), 0.045, "奥法盈余 level 4 should add 4.5% ultimate energy")
 	_expect_approx(PLAYER_SKILL_LEVEL_EFFECT_FLOW.get_mage_arcane_surplus_switch_energy_bonus(owner), 0.045, "奥法盈余 level 4 should add 4.5% switch energy")
 	_expect_approx(PLAYER_SKILL_LEVEL_EFFECT_FLOW.get_mage_arcane_surplus_damage_multiplier_bonus(owner), 0.045, "奥法盈余 level 4 should add 4.5% damage")
-	_expect_approx(PLAYER_SKILL_LEVEL_EFFECT_FLOW.get_mage_basic_range_multiplier(owner), 1.40, "法师普攻 level 5 should scale radius by 1.40")
-	_expect_approx(PLAYER_SKILL_LEVEL_EFFECT_FLOW.get_mage_basic_damage_ratio_bonus(owner), 0.40, "法师普攻 level 5 should add 40% damage ratio")
+	_expect_approx(PLAYER_SKILL_LEVEL_EFFECT_FLOW.get_mage_basic_range_multiplier(owner), 1.0, "custom basic range requires focus branch")
+	_expect_approx(PLAYER_SKILL_LEVEL_EFFECT_FLOW.get_mage_basic_damage_ratio_bonus(owner), 1.70, "custom LV5 basic has a total 270 percent ratio")
 	_expect_approx(PLAYER_SKILL_LEVEL_EFFECT_FLOW.get_mage_meta_field_armor_bonus(owner), 5.0, "梅塔领域 level 3 should add 5 armor")
 	_expect_approx(PLAYER_SKILL_LEVEL_EFFECT_FLOW.get_mage_meta_field_radius_bonus(owner), 15.0, "梅塔领域 level 3 should add 15 radius")
-	_expect_approx(PLAYER_SKILL_LEVEL_EFFECT_FLOW.get_mage_surging_wave_damage_ratio_bonus(owner), 0.30, "波涛汹涌 level 4 should add 30% damage ratio")
-	_expect_approx(PLAYER_SKILL_LEVEL_EFFECT_FLOW.get_mage_surging_wave_duration_bonus(owner), 0.60, "波涛汹涌 level 4 should add 0.6s duration")
+	_expect_approx(preload("res://scripts/abilities/mage_tidal_surge_ability.gd").new()._get_damage_multiplier(owner), 3.90, "custom wave LV4 retains its 390 percent ratio")
+	_expect_approx(preload("res://scripts/abilities/mage_tidal_surge_ability.gd").new()._get_lifetime(owner), 4.0, "custom wave gains no duration until LV6")
 	_expect_approx(PLAYER_SKILL_LEVEL_EFFECT_FLOW.get_mage_fireball_damage_ratio_bonus(owner), 0.80, "火球术 level 5 should add 80% damage ratio")
 	_expect_approx(PLAYER_SKILL_LEVEL_EFFECT_FLOW.get_mage_fireball_burn_ratio_bonus(owner), 0.02, "火球术 level 5 should add 2% burn ratio")
 	_expect_approx(PLAYER_SKILL_LEVEL_EFFECT_FLOW.get_mage_fireball_ground_duration_bonus(owner), 1.0, "火球术 level 5 should add 1s ground duration")
@@ -81,7 +81,7 @@ func _check_flat_bonuses() -> void:
 
 func _check_milestone_counts() -> void:
 	var owner := _make_owner()
-	var lightning_table := {1: 0, 2: 1, 3: 1, 4: 2, 6: 3, 8: 4, 10: 5}
+	var lightning_table := {0: 0, 2: 0, 3: 0, 4: 0, 6: 0, 8: 0, 9: 0}
 	for level in lightning_table.keys():
 		_set_level(owner, "mage_basic", int(level))
 		_expect_equal(
@@ -104,8 +104,8 @@ func _check_preview_text() -> void:
 	var owner := _make_owner()
 	_set_level(owner, "mage_basic", 1)
 	var basic_preview := PLAYER_SKILL_LEVEL_EFFECT_FLOW.get_upgrade_preview_text(owner, "mage", "mage_basic")
-	_expect(basic_preview.contains("雷击范围 +10%"), "法师普攻 preview should mention the radius gain")
-	_expect(basic_preview.contains("追加一道雷击"), "法师普攻 level 1 preview should mention the level-2 extra lightning")
+	_expect(basic_preview.contains("伤害倍率 +15 个百分点"), "custom basic LV1 previews its LV2 ratio upgrade")
+	_expect(not basic_preview.contains("追加一道雷击"), "legacy extra-lightning milestones stay disabled")
 	_set_level(owner, "mage_fireball", 2)
 	var fireball_preview := PLAYER_SKILL_LEVEL_EFFECT_FLOW.get_upgrade_preview_text(owner, "mage", "mage_fireball")
 	_expect(fireball_preview.contains("灼烧地面持续时间 +1s"), "火球术 level 2 preview should mention the level-3 ground duration")
@@ -133,7 +133,7 @@ func _check_upgrade_card_text() -> void:
 	_expect(str(basic_option.get("card_title", "")).contains("范围轰炸"), "法师普攻 upgrade card should use the skill name as card title")
 	_expect_equal(int(basic_option.get("skill_level", 0)), 3, "法师普攻 upgrade card should expose the current skill level")
 	var summary := str(basic_option.get("summary", ""))
-	_expect(summary.contains("追加一道雷击"), "法师普攻 level 4 upgrade summary should preview the extra lightning, got %s" % summary)
+	_expect(summary.contains("狂雷") and summary.contains("通电"), "custom basic LV3 previews the LV4 branches, got %s" % summary)
 	owner.free()
 
 
@@ -146,6 +146,10 @@ func _set_level(owner, progress_id: String, level: int) -> void:
 	else:
 		levels[progress_id] = level
 	role_state["skill_levels"] = levels
+	var custom_builds := {"mage_basic": "mage_basic_build", "mage_surging_wave": "mage_surging_wave_build"}
+	if custom_builds.has(progress_id):
+		levels[progress_id] = level
+		role_state[custom_builds[progress_id]] = {}
 	states["mage"] = role_state
 	owner.role_special_states = states
 

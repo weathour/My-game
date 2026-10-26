@@ -1,5 +1,6 @@
 extends SceneTree
 
+const TALENTS := preload("res://scripts/player/player_skill_talent_system.gd")
 const SwordsmanRole := preload("res://scripts/player/roles/swordsman_role.gd")
 
 
@@ -10,10 +11,9 @@ func _init() -> void:
 
 	owner.hit_results = [2, 1, 1]
 	role.perform_attack(owner)
-	assert(owner.damage_amounts.size() == 3)
+	assert(owner.damage_amounts.size() == 1, "retired back/cross inputs must not add slashes")
 	assert(is_equal_approx(owner.damage_amounts[0], 120.0))
-	assert(is_equal_approx(owner.damage_amounts[1], 54.0))
-	assert(is_equal_approx(owner.damage_amounts[2], 84.0))
+	assert(owner.source_ids[0].begins_with("swordsman_basic:"))
 	assert(is_zero_approx(float(owner.role_special_states["swordsman"]["blood_surge_remaining"])))
 
 	owner.damage_amounts.clear()
@@ -22,6 +22,8 @@ func _init() -> void:
 	owner.role_special_states["swordsman"]["blood_surge_remaining"] = 2.0
 	role.perform_attack(owner)
 	assert(is_equal_approx(float(owner.role_special_states["swordsman"]["blood_surge_remaining"]), 2.0))
+	assert(owner.source_ids[0] != owner.source_ids[1], "each attack receives a fresh event identity even after a miss")
+	owner.queue_free()
 	print("SWORDSMAN_BASIC_ATTACK_EVENT_SMOKE_OK")
 	quit()
 
@@ -32,13 +34,10 @@ class AttackOwner:
 	const SWORD_SLASH_SCENE_VISIBLE_BOUNDS := Rect2(99.0, 30.0, 27.0, 153.0)
 	const SWORD_SLASH_SCENE_SIZE := Vector2(256.0, 212.0)
 
-	var talents := {
-		"swordsman_basic_back": true,
-		"swordsman_basic_cross": true
-	}
 	var role_special_states: Dictionary = {
 		"swordsman": {
 			"blood_surge_remaining": 2.0,
+			"skill_talents": {"swordsman_basic": ["swordsman_basic_back", "swordsman_basic_cross"]},
 			"build_levels": {}
 		}
 	}
@@ -51,9 +50,10 @@ class AttackOwner:
 	var is_dead := false
 	var hit_results: Array[int] = []
 	var damage_amounts: Array[float] = []
+	var source_ids: Array[String] = []
 
 	func _has_skill_talent(talent_id: String) -> bool:
-		return bool(talents.get(talent_id, false))
+		return TALENTS.has_talent(self, talent_id)
 
 	func _get_attack_aim_direction(fallback: Vector2) -> Vector2:
 		return fallback
@@ -85,8 +85,9 @@ class AttackOwner:
 	func _get_sword_slash_scene_animation_duration() -> float:
 		return 0.1
 
-	func _damage_enemies_in_oriented_rect_unique(_center: Vector2, _axis: Vector2, _length: float, _width: float, damage: float, _vulnerability: float, _slow: float, _slow_duration: float, _registry: Dictionary, _role_id: String) -> int:
+	func _damage_enemies_in_oriented_rect_unique(_center: Vector2, _axis: Vector2, _length: float, _width: float, damage: float, _vulnerability: float, _slow: float, _slow_duration: float, _registry: Dictionary, _role_id: String, _slow_source_id: String = "", _knockback_distance: float = 0.0) -> int:
 		damage_amounts.append(damage)
+		source_ids.append(_role_id)
 		return hit_results.pop_front() if not hit_results.is_empty() else 0
 
 	func _schedule_swordsman_slash_followthrough(_center: Vector2, _axis: Vector2, _length: float, _width: float, _damage: float, _vulnerability: float, _slow: float, _slow_duration: float, _duration: float, _role_id: String, _registry: Dictionary) -> void:

@@ -1,0 +1,30 @@
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+SCRIPT ERROR: Invalid access to property or key 'electric_stacks' on a base object of type 'Node2D (BasicEnemy)'.
+          at: apply_damage (res://scripts/enemies/enemy_damage.gd:32)
+          GDScript backtrace (most recent call first):
+              [0] apply_damage (res://scripts/enemies/enemy_damage.gd:32)
+              [1] take_damage (res://scripts/enemies/enemy_damage.gd:15)
+              [2] take_damage (res://scripts/tests/gunner_basic_level_talents_smoke.gd:161)
+              [3] _call_enemy_take_damage (res://scripts/player/player_damage_resolver.gd:152)
+              [4] deal_damage_to_enemy (res://scripts/player/player_damage_resolver.gd:84)
+              [5] _check_basic_hit_armor_shred (res://scripts/tests/gunner_basic_level_talents_smoke.gd:100)
+              [6] _run (res://scripts/tests/gunner_basic_level_talents_smoke.gd:19)
+SCRIPT ERROR: Invalid access to property or key 'electric_stacks' on a base object of type 'Node2D (BasicEnemy)'.
+          at: apply_damage (res://scripts/enemies/enemy_damage.gd:32)
+          GDScript backtrace (most recent call first):
+              [0] apply_damage (res://scripts/enemies/enemy_damage.gd:32)
+              [1] take_damage (res://scripts/enemies/enemy_damage.gd:15)
+              [2] take_damage (res://scripts/tests/gunner_basic_level_talents_smoke.gd:161)
+              [3] _call_enemy_take_damage (res://scripts/player/player_damage_resolver.gd:152)
+              [4] deal_damage_to_enemy (res://scripts/player/player_damage_resolver.gd:84)
+              [5] _check_basic_hit_armor_shred (res://scripts/tests/gunner_basic_level_talents_smoke.gd:104)
+              [6] _run (res://scripts/tests/gunner_basic_level_talents_smoke.gd:19)
+ERROR: first basic hit should not benefit from its own armor shred: 100.0000 != 90.0000
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://scripts/tests/gunner_basic_level_talents_smoke.gd:25)
+ERROR: second basic hit should benefit from previous armor shred: 100.0000 != 79.9074
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://scripts/tests/gunner_basic_level_talents_smoke.gd:25)

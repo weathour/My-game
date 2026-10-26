@@ -1,0 +1,102 @@
+{
+  "date": "2026-10-25",
+  "engine": "Godot 4.6.2",
+  "checks": [
+    {
+      "name": "skill_manual_mode_smoke",
+      "status": "passed",
+      "log": "skill_manual_mode_smoke.log",
+      "command": "env XDG_DATA_HOME=/tmp/my-game-content-skill_manual_mode_smoke timeout 45 /home/weathour/.local/bin/godot-4.6.2 --headless --path . --script scripts/tests/skill_manual_mode_smoke.gd"
+    },
+    {
+      "name": "content_growth_contract_smoke",
+      "status": "passed",
+      "log": "content_growth_contract_smoke.log",
+      "command": "env XDG_DATA_HOME=/tmp/my-game-content-content_growth_contract_smoke timeout 45 /home/weathour/.local/bin/godot-4.6.2 --headless --path . --script scripts/tests/content_growth_contract_smoke.gd"
+    },
+    {
+      "name": "enemy_profile_resource_smoke",
+      "status": "passed",
+      "log": "enemy_profile_resource_smoke.log",
+      "command": "env XDG_DATA_HOME=/tmp/my-game-content-enemy_profile_resource_smoke timeout 45 /home/weathour/.local/bin/godot-4.6.2 --headless --path . --script scripts/tests/enemy_profile_resource_smoke.gd"
+    },
+    {
+      "name": "mechanic_skill_talents_smoke",
+      "status": "passed",
+      "log": "mechanic_skill_talents_smoke.log",
+      "command": "env XDG_DATA_HOME=/tmp/my-game-content-mechanic_skill_talents_smoke timeout 45 /home/weathour/.local/bin/godot-4.6.2 --headless --path . --script scripts/tests/mechanic_skill_talents_smoke.gd"
+    },
+    {
+      "name": "player_blessing_system_smoke",
+      "status": "passed",
+      "log": "player_blessing_system_smoke.log",
+      "command": "env XDG_DATA_HOME=/tmp/my-game-content-player_blessing_system_smoke timeout 45 /home/weathour/.local/bin/godot-4.6.2 --headless --path . --script scripts/tests/player_blessing_system_smoke.gd"
+    },
+    {
+      "name": "player_skill_level_system_smoke",
+      "status": "passed",
+      "log": "player_skill_level_system_smoke.log",
+      "command": "env XDG_DATA_HOME=/tmp/my-game-content-player_skill_level_system_smoke timeout 45 /home/weathour/.local/bin/godot-4.6.2 --headless --path . --script scripts/tests/player_skill_level_system_smoke.gd"
+    },
+    {
+      "name": "enemy_profile_reuse_smoke",
+      "status": "passed",
+      "log": "enemy_profile_reuse_smoke.log",
+      "command": "env XDG_DATA_HOME=/tmp/my-game-content-enemy_profile_reuse_smoke timeout 45 /home/weathour/.local/bin/godot-4.6.2 --headless --path . --script scripts/tests/enemy_profile_reuse_smoke.gd"
+    },
+    {
+      "name": "enemy_spawn_flow_smoke",
+      "status": "passed",
+      "log": "enemy_spawn_flow_smoke.log",
+      "command": "env XDG_DATA_HOME=/tmp/my-game-content-enemy_spawn_flow_smoke timeout 45 /home/weathour/.local/bin/godot-4.6.2 --headless --path . --script scripts/tests/enemy_spawn_flow_smoke.gd"
+    },
+    {
+      "name": "project_parse",
+      "status": "passed",
+      "log": "parse.log",
+      "command": "/home/weathour/.local/bin/godot-4.6.2 --headless --path . --quit"
+    },
+    {
+      "name": "skill_info_ui",
+      "status": "handed_off_after_hover_layout_failures",
+      "logs": [
+        "skill_info_ui_smoke.log",
+        "skill_info_ui_x11.log"
+      ]
+    }
+  ],
+  "scope": [
+    "20 active skills across four roles: mode dispatch, manual hotkey, return to auto",
+    "five real mechanic deployments through manual and automatic entrypoints",
+    "fireball levels 1/5/10 and saved role talents: current UI values match gameplay getters; upgrades use growth constants",
+    "all active ability cooldowns survive real player save roundtrip",
+    "authored enemy resources, categories, developer directory, endless plan and story director references",
+    "strict authored lookup, explicit legacy-restore fallback",
+    "current awards exclude legacy stat cards; legacy build damage/duration survive real save roundtrip; 108-node projections stay empty"
+  ],
+  "boundaries": [
+    "No balance changes, old growth reactivation or legacy build migration/deletion",
+    "Saved role level_talents effects and independent read-only display remain",
+    "UI acceptance is owned by art_audit; local headless/X11 attempts exposed hover/layout fixture failures, not claimed passed",
+    "Global docs, CHANGELOG, project gate and Graphify update are owned by root"
+  ],
+  "graphify_read_only_audit": {
+    "package": "0.9.50",
+    "detect_code_extensions_missing": [
+      ".gd",
+      ".tscn",
+      ".tres",
+      ".godot"
+    ],
+    "dispatch_missing": [
+      ".gd",
+      ".tscn",
+      ".tres",
+      ".godot"
+    ],
+    "godot_extractor_in_installed_modules": false,
+    "recoverable_repo_support": false,
+    "package_backups_have_godot_extractor": false,
+    "conclusion": "Not a registration-only fix; refuse incomplete candidate graph. No global files changed."
+  }
+}

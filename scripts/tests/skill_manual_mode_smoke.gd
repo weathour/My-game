@@ -14,6 +14,7 @@ func _init() -> void:
 func _run() -> void:
 	# 1) 设置层：默认自动、切换可反转、随设置持久（与存档无关）
 	var previous_manual := GAME_SETTINGS.is_skill_manual("blade_storm")
+	var previous_reload_manual := GAME_SETTINGS.is_skill_manual("infinite_reload")
 	GAME_SETTINGS.set_skill_manual("blade_storm", false)
 	assert(not GAME_SETTINGS.is_skill_manual("blade_storm"), "skills should default to auto release")
 	assert(GAME_SETTINGS.toggle_skill_manual("blade_storm"), "toggle should switch to manual")
@@ -75,7 +76,10 @@ func _run() -> void:
 	assert(player.gunner_infinite_reload_ability.is_active(), "infinite reload should be active after the hotkey cast")
 	GAME_SETTINGS.set_skill_manual("infinite_reload", false)
 
+	_check_mechanic_casts(holder)
+	_check_all_registered_skills(player)
 	GAME_SETTINGS.set_skill_manual("blade_storm", previous_manual)
+	GAME_SETTINGS.set_skill_manual("infinite_reload", previous_reload_manual)
 	print("SKILL_MANUAL_MODE_SMOKE_OK")
 	quit(0)
 
@@ -86,3 +90,85 @@ func _find_slot_index(player, skill_id: String, role_id: String = "swordsman") -
 		if skill_ids[index] == skill_id:
 			return index + 1
 	return 0
+
+
+func _check_mechanic_casts(scene: Node2D) -> void:
+	var player = PLAYER_SCENE.instantiate()
+	scene.add_child(player)
+	player.set_process(false)
+	player.set_physics_process(false)
+	player.fire_timer.stop()
+	player.configure_story_loadout(["mechanic", "gunner", "mage"])
+	for skill_id in PLAYER_SKILL_COOLDOWN_FLOW.ROLE_ACTIVE_SKILL_PROPERTIES.mechanic:
+		var previous := GAME_SETTINGS.is_skill_manual(skill_id)
+		assert(PLAYER_BLESSING_SKILL_STATE.force_unlock_skill(player, skill_id, 1))
+		var property_name: String = PLAYER_SKILL_COOLDOWN_FLOW.ROLE_ACTIVE_SKILL_PROPERTIES.mechanic[skill_id]
+		var ability: Variant = player.get(property_name)
+		var auto_method := "_try_trigger_" + property_name.trim_suffix("_ability")
+		GAME_SETTINGS.set_skill_manual(skill_id, true)
+		player.call(auto_method)
+		assert(is_zero_approx(ability.cooldown_remaining), "%s does not deploy automatically in manual mode" % skill_id)
+		assert(PLAYER_ABILITY_FLOW.try_handle_manual_skill_slot(player, _find_slot_index(player, skill_id, "mechanic")))
+		assert(ability.cooldown_remaining > 0.0, "%s really deploys from the hotkey" % skill_id)
+		ability.cooldown_remaining = 0.0
+		GAME_SETTINGS.set_skill_manual(skill_id, false)
+		player.call(auto_method)
+		assert(ability.cooldown_remaining > 0.0, "%s really deploys automatically after switching back" % skill_id)
+		GAME_SETTINGS.set_skill_manual(skill_id, previous)
+	player.queue_free()
+	print("MECHANIC_REAL_CAST_CONTRACT_OK: five skills")
+
+
+func _check_all_registered_skills(player) -> void:
+	player.set_process(false)
+	player.set_physics_process(false)
+	player.fire_timer.stop()
+	player.roles = preload("res://scripts/player/roles/role_database.gd").get_role_data()
+	# 只替换施放端，保留真实角色、解锁顺序、模式设置、自动入口与快捷键分发。
+	for role_id in PLAYER_SKILL_COOLDOWN_FLOW.ROLE_ACTIVE_SKILL_PROPERTIES:
+		for property_name in PLAYER_SKILL_COOLDOWN_FLOW.ROLE_ACTIVE_SKILL_PROPERTIES[role_id].values():
+			player.set(property_name, CastProbe.new())
+	for unsupported_id in ["", "missing_skill", "mechanic_basic_attack", "mechanic_ultimate"]:
+		var previous := GAME_SETTINGS.is_skill_manual(unsupported_id)
+		assert(not PLAYER_ABILITY_FLOW.toggle_skill_manual(player, unsupported_id), "unsupported skill IDs cannot change manual-mode settings")
+		assert(GAME_SETTINGS.is_skill_manual(unsupported_id) == previous, "rejected toggles preserve existing settings")
+	var checked := 0
+	for role_index in player.roles.size():
+		player.active_role_index = role_index
+		var role_id: String = player.roles[role_index].id
+		for skill_id in PLAYER_SKILL_COOLDOWN_FLOW.ROLE_ACTIVE_SKILL_PROPERTIES[role_id]:
+			var previous := GAME_SETTINGS.is_skill_manual(skill_id)
+			var property_name: String = PLAYER_SKILL_COOLDOWN_FLOW.ROLE_ACTIVE_SKILL_PROPERTIES[role_id][skill_id]
+			var probe: CastProbe = player.get(property_name)
+			assert(PLAYER_BLESSING_SKILL_STATE.force_unlock_skill(player, skill_id, 1))
+			var slot := _find_slot_index(player, skill_id, role_id)
+			assert(slot > 0, "%s has a real slot" % skill_id)
+			var auto_method := "try_trigger_" + property_name.trim_suffix("_ability")
+			GAME_SETTINGS.set_skill_manual(skill_id, true)
+			player.call("_" + auto_method)
+			assert(probe.casts == 0, "%s manual mode blocks auto casting" % skill_id)
+			assert(PLAYER_ABILITY_FLOW.try_handle_manual_skill_slot(player, slot), "%s manual dispatch exists" % skill_id)
+			assert(probe.casts == 1, "%s hotkey casts once" % skill_id)
+			GAME_SETTINGS.set_skill_manual(skill_id, false)
+			assert(PLAYER_ABILITY_FLOW.try_handle_manual_skill_slot(player, slot))
+			assert(probe.casts == 1, "%s auto-mode hotkey does not cast" % skill_id)
+			player.call("_" + auto_method)
+			assert(probe.casts == 2, "%s returns to auto casting" % skill_id)
+			GAME_SETTINGS.set_skill_manual(skill_id, previous)
+			checked += 1
+	assert(checked == PLAYER_BLESSING_SKILL_STATE.ACTIVE_SLOT_SKILL_IDS.size(), "every authored active skill is registered and exercised")
+	print("ACTIVE_SKILL_DISPATCH_CONTRACT_OK: %d skills, four roles" % checked)
+
+
+class CastProbe:
+	extends RefCounted
+	var casts := 0
+	func can_trigger(_owner, _role_id: String) -> bool:
+		return true
+	func try_trigger(_owner, _direction: Vector2 = Vector2.ZERO) -> bool:
+		casts += 1
+		return true
+	func is_manual_toggle_enabled(_owner) -> bool:
+		return false
+	func is_blocking_actions(_owner) -> bool:
+		return false

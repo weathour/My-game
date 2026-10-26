@@ -155,6 +155,8 @@ static func try_trigger_mage_fireball(owner) -> void:
 
 
 static func try_trigger_mechanic_drone(owner) -> void:
+	if GAME_SETTINGS.is_skill_manual("drone"):
+		return
 	if owner.is_dead or owner.level_up_active or _is_action_blocked_by_lock_or_manual_skill(owner):
 		return
 	var active_role_id := str(owner._get_active_role().get("id", ""))
@@ -163,6 +165,8 @@ static func try_trigger_mechanic_drone(owner) -> void:
 
 
 static func try_trigger_mechanic_mine(owner) -> void:
+	if GAME_SETTINGS.is_skill_manual("mine"):
+		return
 	if owner.is_dead or owner.level_up_active or _is_action_blocked_by_lock_or_manual_skill(owner):
 		return
 	var active_role_id := str(owner._get_active_role().get("id", ""))
@@ -171,6 +175,8 @@ static func try_trigger_mechanic_mine(owner) -> void:
 
 
 static func try_trigger_mechanic_emp_burst(owner) -> void:
+	if GAME_SETTINGS.is_skill_manual("emp_burst"):
+		return
 	if owner.is_dead or owner.level_up_active or _is_action_blocked_by_lock_or_manual_skill(owner):
 		return
 	var active_role_id := str(owner._get_active_role().get("id", ""))
@@ -179,6 +185,8 @@ static func try_trigger_mechanic_emp_burst(owner) -> void:
 
 
 static func try_trigger_mechanic_tulip_turret(owner) -> void:
+	if GAME_SETTINGS.is_skill_manual("tulip_turret"):
+		return
 	if owner.is_dead or owner.level_up_active or _is_action_blocked_by_lock_or_manual_skill(owner):
 		return
 	var active_role_id := str(owner._get_active_role().get("id", ""))
@@ -187,6 +195,8 @@ static func try_trigger_mechanic_tulip_turret(owner) -> void:
 
 
 static func try_trigger_mechanic_missile_volley(owner) -> void:
+	if GAME_SETTINGS.is_skill_manual("missile_volley"):
+		return
 	if owner.is_dead or owner.level_up_active or _is_action_blocked_by_lock_or_manual_skill(owner):
 		return
 	var active_role_id := str(owner._get_active_role().get("id", ""))
@@ -315,7 +325,8 @@ static func toggle_manual_skill_slot(owner, slot_index: int) -> bool:
 
 
 static func toggle_skill_manual(owner, skill_id: String) -> bool:
-	if skill_id == "":
+	var role_id := PLAYER_BLESSING_SKILL_STATE.get_skill_role_id(skill_id)
+	if not PLAYER_SKILL_COOLDOWN_FLOW.ROLE_ACTIVE_SKILL_PROPERTIES.get(role_id, {}).has(skill_id):
 		return false
 	if skill_id == "infinite_reload" and owner != null and owner.get("gunner_infinite_reload_ability") != null and owner.gunner_infinite_reload_ability.is_manual_toggle_enabled(owner):
 		_spawn_slot_feedback(owner, "火力调控：按技能快捷键开启或关闭", Color(1.0, 0.86, 0.42))
@@ -345,39 +356,20 @@ static func get_slot_skill_id(owner, slot_index: int) -> String:
 
 
 static func start_skill_by_id(owner, skill_id: String) -> bool:
-	match skill_id:
-		"blade_storm":
-			start_swordsman_blade_storm(owner)
-		"knight_thrust":
-			start_swordsman_knight_thrust(owner)
-		"king_blade":
-			start_swordsman_king_blade(owner)
-		"judgement_sword":
-			start_swordsman_judgement_sword(owner)
-		"crescent_wave":
-			start_swordsman_crescent_wave(owner)
-		"infinite_reload":
-			start_gunner_infinite_reload(owner)
-		"explosive_round":
-			start_gunner_explosive_round(owner)
-		"magic_grenade":
-			start_gunner_magic_grenade(owner)
-		"magic_eye":
-			start_gunner_magic_eye(owner)
-		"shrapnel_field":
-			start_gunner_shrapnel_field(owner)
-		"surging_wave":
-			start_mage_tidal_surge(owner)
-		"flame_path":
-			start_mage_flame_path(owner)
-		"dark_contract":
-			start_mage_dark_contract(owner)
-		"fireball":
-			start_mage_fireball(owner)
-		"meta_field":
-			start_mage_meta_field(owner)
-		_:
-			return false
+	if owner == null:
+		return false
+	var role_id := str(PLAYER_BLESSING_SKILL_STATE.get_skill_role_id(skill_id))
+	var property_name := str(PLAYER_SKILL_COOLDOWN_FLOW.ROLE_ACTIVE_SKILL_PROPERTIES.get(role_id, {}).get(skill_id, ""))
+	if property_name == "":
+		return false
+	var ability: Variant = owner.get(property_name)
+	if ability == null:
+		return false
+	# 潮涌需要施放瞬间的瞄准方向；其他主动技能共用属性表分发。
+	if skill_id == "surging_wave":
+		start_mage_tidal_surge(owner)
+	else:
+		ability.try_trigger(owner)
 	return true
 
 

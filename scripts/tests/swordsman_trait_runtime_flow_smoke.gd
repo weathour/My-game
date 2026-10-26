@@ -152,14 +152,13 @@ func _check_blade_storm_level_talents() -> void:
 	blade.active_remaining = 1.0
 	owner.swordsman_blade_storm_ability = blade
 
-	_expect(is_equal_approx(blade._get_size_multiplier(owner), 1.20), "blade storm I should scale visual size by 120 percent")
-	_expect(is_equal_approx(blade._get_radius(owner), 144.0), "blade storm I should scale hit radius by 120 percent")
+	_expect(is_equal_approx(blade.cast_radius, 150.0), "current storm base radius is 150; saved level talents do not replace the custom build")
 	_expect(is_equal_approx(RuntimeFlow.get_move_speed_bonus(owner, "swordsman"), 20.0), "blade storm I should expose +20 move speed while active")
 	_expect(is_equal_approx(RuntimeFlow.get_damage_reduction_value(owner, "swordsman"), 100.0), "blade storm I should expose 100 damage reduction while active")
 
 	var role := SwordsmanRole.new()
 	role.perform_attack(owner)
-	_expect(owner.damage_rects.size() > 0, "blade storm II should allow basic attack while blade storm is active")
+	_expect(owner.damage_rects.is_empty(), "saved blade storm II must not bypass the attached storm basic-attack lock")
 	owner.queue_free()
 
 
@@ -183,8 +182,8 @@ func _check_basic_attack_level_talents() -> void:
 		var angle_delta: float = abs(rad_to_deg(float(first["axis_angle"]) - float(second["axis_angle"])))
 		angle_delta = min(angle_delta, 360.0 - angle_delta)
 		_expect(is_equal_approx(angle_delta, 30.0), "basic attack II slashes should keep a 30 degree angle")
-		_expect(is_equal_approx(float(first["damage"]), 150.0), "first basic slash should use base damage")
-		_expect(is_equal_approx(float(second["damage"]), 150.0), "second basic slash should be able to deal full damage to the same target")
+		_expect(is_equal_approx(float(first["damage"]), 100.0), "first basic slash should use base damage")
+		_expect(is_equal_approx(float(second["damage"]), 100.0), "second basic slash should be able to deal full damage to the same target")
 	if owner.scheduled_sequences.size() >= 1:
 		var scheduled: Dictionary = owner.scheduled_sequences[0] as Dictionary
 		_expect(is_equal_approx(float(scheduled["initial_delay"]), 0.10), "basic attack I second segment should be delayed by 0.1s")
@@ -194,8 +193,8 @@ func _check_basic_attack_level_talents() -> void:
 	if owner.damage_rects.size() >= 4:
 		var delayed_first: Dictionary = owner.damage_rects[2] as Dictionary
 		var delayed_second: Dictionary = owner.damage_rects[3] as Dictionary
-		_expect(is_equal_approx(float(delayed_first["damage"]), 90.0), "basic attack I delayed first slash should deal 60 percent damage")
-		_expect(is_equal_approx(float(delayed_second["damage"]), 90.0), "basic attack I delayed second slash should deal 60 percent damage")
+		_expect(is_equal_approx(float(delayed_first["damage"]), 60.0), "basic attack I delayed first slash should deal 60 percent damage")
+		_expect(is_equal_approx(float(delayed_second["damage"]), 60.0), "basic attack I delayed second slash should deal 60 percent damage")
 	owner.queue_free()
 
 
@@ -403,7 +402,7 @@ class OwnerStub:
 	func _get_sword_slash_scene_animation_duration() -> float:
 		return 0.16
 
-	func _damage_enemies_in_oriented_rect_unique(_center: Vector2, axis: Vector2, length: float, width: float, damage_amount: float, _vulnerability_bonus: float, _slow_multiplier: float, _slow_duration: float, _hit_registry: Dictionary, _source_role_id: String) -> int:
+	func _damage_enemies_in_oriented_rect_unique(_center: Vector2, axis: Vector2, length: float, width: float, damage_amount: float, _vulnerability_bonus: float, _slow_multiplier: float, _slow_duration: float, _hit_registry: Dictionary, _source_role_id: String, _slow_source_id: String = "", _knockback_distance: float = 0.0) -> int:
 		damage_rects.append({
 			"axis_angle": axis.angle(),
 			"length": length,

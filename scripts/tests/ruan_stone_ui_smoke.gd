@@ -1,7 +1,6 @@
 extends SceneTree
 
 const CHARACTER_PANEL := preload("res://scripts/ui/hud/character_panel.gd")
-const HUD := preload("res://scripts/hud.gd")
 const PLAYER_STAT_PAYLOAD := preload("res://scripts/player/player_stat_payload.gd")
 const SHEET := preload("res://scripts/player/player_character_sheet.gd")
 
@@ -45,19 +44,6 @@ func _run() -> void:
 	_expect(projection.get("ruan_stone_carried_count") == 3 and projection.get("ruan_stone_carry_limit") == 5, "统计投影未包含携带数量与上限。")
 	_expect(projection.get("ruan_stone_summary") == "雷石×3", "统计投影未解析携带摘要。")
 
-	var hud := HUD.new()
-	root.add_child(hud)
-	await process_frame
-	var hud_panel := hud.find_child("RuanStoneHudPanel", true, false)
-	var hud_label := hud.find_child("RuanStoneHudLabel", true, false) as Label
-	_expect(hud_panel != null and hud_label != null, "战斗 HUD 缺少常驻阮石状态控件。")
-	if hud_label != null:
-		var original_id := hud_label.get_instance_id()
-		hud.update_stats(projection)
-		_expect(hud_label.text.contains("骨头 17") and hud_label.text.contains("阮石 3/5") and hud_label.text.contains("雷石×3"), "战斗 HUD 未显示骨头与携带摘要。")
-		hud.update_stats(projection)
-		_expect(hud.find_child("RuanStoneHudLabel", true, false).get_instance_id() == original_id, "刷新 HUD 时重建了阮石控件。")
-
 	var player := preload("res://scenes/player.tscn").instantiate()
 	root.add_child(player)
 	player.set_process(false)
@@ -90,8 +76,6 @@ func _run() -> void:
 	_expect(text.contains("暴击率 +8%") and text.contains("暴击伤害 +8%"), "阮石详情应包含实际进入战斗计算的暴伤加成。")
 	character_panel.free()
 	player.free()
-	root.remove_child(hud)
-	hud.free()
 	root.remove_child(owner)
 	owner.free()
 	await process_frame

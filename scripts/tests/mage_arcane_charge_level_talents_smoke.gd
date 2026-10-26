@@ -25,7 +25,7 @@ func _run() -> void:
 	player.mage_arcane_charge_stacks = 4
 	assert(is_equal_approx(player._get_mage_arcane_charge_skill_cooldown_multiplier("mage"), 0.96))
 	var surge = TIDAL_SURGE_ABILITY.new()
-	assert(is_equal_approx(surge._get_cooldown(player), 20.0 * 0.96))
+	assert(is_equal_approx(surge._get_cooldown(player), 26.0 * 0.96))
 
 	_set_level_talents(player, "mage", ["mage_level_talent_arcane_charge_2"])
 	player.mage_arcane_charge_stacks = 5

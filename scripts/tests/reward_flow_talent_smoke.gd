@@ -136,6 +136,7 @@ class MainStub:
 	extends Node
 
 	var game_over := false
+	var story_mode_active := false
 	var reward_context := ""
 	var player: Variant = RewardPlayerStub.new()
 	var level_up_ui := LevelUpUiStub.new()

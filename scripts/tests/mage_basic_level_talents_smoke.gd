@@ -57,8 +57,8 @@ func _check_secondary_lightning_context() -> void:
 	_expect(centers.size() == 2, "mage basic attack II should create two primary lightning centers")
 	_expect(centers[0] == Vector2.ZERO, "first mage lightning should keep the normal aim center")
 	_expect(centers[1] == Vector2(240.0, 0.0), "second mage lightning should use a random dense enemy cluster center")
-	_expect(is_equal_approx(float(damages[0]), 100.0), "first mage lightning should keep full damage")
-	_expect(is_equal_approx(float(damages[1]), 100.0), "second mage lightning should keep full damage")
+	_expect(is_equal_approx(float(damages[0]), 200.0), "first mage lightning should keep full damage")
+	_expect(is_equal_approx(float(damages[1]), 200.0), "second mage lightning should keep full damage")
 	owner.free()
 
 

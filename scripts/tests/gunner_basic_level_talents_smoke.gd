@@ -4,7 +4,7 @@ const GunnerRole := preload("res://scripts/player/roles/gunner_role.gd")
 const GunnerBasicTalentFlow := preload("res://scripts/player/player_gunner_basic_talent_flow.gd")
 const PlayerProjectileBatch := preload("res://scripts/player/player_projectile_batch.gd")
 const DamageResolver := preload("res://scripts/player/player_damage_resolver.gd")
-const EnemyDamage := preload("res://scripts/enemies/enemy_damage.gd")
+const ENEMY := preload("res://scenes/enemy.tscn")
 
 var failures: Array[String] = []
 
@@ -48,9 +48,13 @@ func _check_gunner_role_projectile_config() -> void:
 func _check_batched_split_projectiles() -> void:
 	var owner := BasicOwner.new()
 	root.add_child(owner)
-	var enemy := BasicEnemy.new()
+	var enemy = ENEMY.instantiate()
 	enemy.global_position = Vector2(100.0, 0.0)
 	root.add_child(enemy)
+	enemy.set_process(false)
+	enemy.set_physics_process(false)
+	enemy.armor = 0.0
+	enemy.damage_reduction_rate = 0.0
 	var batch := PlayerProjectileBatch.new()
 	root.add_child(batch)
 	batch.configure(owner)
@@ -92,10 +96,14 @@ func _check_basic_hit_armor_shred() -> void:
 	var owner := BasicOwner.new()
 	root.add_child(owner)
 	owner.level_talents = {"gunner_level_talent_basic_attack_1": true}
-	var enemy := BasicEnemy.new()
+	var enemy = ENEMY.instantiate()
 	enemy.current_health = 100.0
 	enemy.max_health = 100.0
 	root.add_child(enemy)
+	enemy.set_process(false)
+	enemy.set_physics_process(false)
+	enemy.armor = 0.0
+	enemy.damage_reduction_rate = 0.0
 	_expect_float(enemy.damage_reduction_value, 0.0, "enemies should default to zero damage reduction value")
 	DamageResolver.deal_damage_to_enemy(owner, enemy, 10.0, "gunner_basic:event")
 	_expect_float(enemy.current_health, 90.0, "first basic hit should not benefit from its own armor shred")
@@ -140,25 +148,3 @@ class BasicOwner:
 		last_projectile["role_id"] = role_id
 		last_projectile["origin"] = origin
 		return true
-
-
-class BasicEnemy:
-	extends Node2D
-
-	var enemy_kind: String = "normal"
-	var max_health: float = 100.0
-	var current_health: float = 100.0
-	var damage_reduction_value: float = 0.0
-	var vulnerability_bonus: float = 0.0
-	var rebirth_timer: float = 0.0
-	var skull_damage_immune_timer: float = 0.0
-	var glutton_war_stomp_remaining: float = 0.0
-	var boss_phase_transition_target: int = 0
-	var boss_phase_three_intro_remaining: float = 0.0
-	var contact_radius: float = 20.0
-
-	func take_damage(amount: float, is_critical: bool = false) -> bool:
-		return EnemyDamage.take_damage(self, amount, is_critical)
-
-	func _play_hit_feedback(_amount: float, _killed: bool, _is_critical: bool = false) -> void:
-		pass

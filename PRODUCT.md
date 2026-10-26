@@ -17,7 +17,7 @@ The interface must answer four questions quickly:
 3. What do this role's skills currently do, and what will the next level change?
 4. Which saved role talents are actually owned and what effects do they provide?
 
-The character sheet opens on an eleven-stat overview with a fixed source inspector. Skills, blessings, and equipment share the same team / list / detail structure. Saved `level_talents` appear as a read-only list; their disabled acquisition flow stays disabled. Placeholder effects are explicitly labeled.
+The character sheet opens on an fourteen-stat overview with a fixed source inspector. Skills, blessings, and equipment share the same team / list / detail structure. Saved `level_talents` appear as a read-only list; their disabled acquisition flow stays disabled. Placeholder effects are explicitly labeled.
 
 Mechanic skill talents use the current level-5 choice and level-10 completion route. Its eight skill lines show 16 named effects with owned/pending status, while other roles' unimplemented slots remain labeled as placeholders. Runtime values and talent descriptions must agree across reward cards, combat hover and the character sheet.
 

@@ -8,6 +8,7 @@ const BLESSINGS := preload("res://scripts/player/player_blessing_system.gd")
 const LEVELS := preload("res://scripts/player/player_skill_level_system.gd")
 const SKILLS := preload("res://scripts/player/player_blessing_skill_state.gd")
 const COOLDOWNS := preload("res://scripts/player/player_skill_cooldown_flow.gd")
+const PLAYER_AUTHORED_EFFECTS := preload("res://scripts/player/player_authored_effects.gd")
 var output_dir := ""
 var failures: Array[String] = []
 
@@ -35,10 +36,15 @@ func _run() -> void:
 	root.add_child(world)
 	current_scene = world
 	var player = PLAYER.instantiate()
+	player.auto_attack_enabled = false
 	world.add_child(player)
+	player.auto_attack_enabled = false
+	player.fire_timer.stop()
 	player.configure_story_loadout(["swordsman", "gunner", "mechanic"])
 	player.set_process(false)
 	player.set_physics_process(false)
+	player.auto_attack_enabled = false
+	player.fire_timer.stop()
 	player.visible = false
 	player.skill_points = 1
 	var skill_point_offer: Dictionary = BLESSINGS.build_skill_point_offer(player)
@@ -116,13 +122,23 @@ func _run() -> void:
 		assert(not slot["upgrade_button"].visible, "The plus button should hide without unspent points")
 		assert(not slot["view"].skill_point_highlighted, "Slot highlights should disappear without unspent points")
 	await _settle()
-	bar._on_skill_slot_hovered(bar.skill_cd_slots[1]["view"], 1)
-	await _settle()
+	var hovered_icon: Control = bar.skill_cd_slots[1]["view"]
+	bar.set_anchors_and_offsets_preset(Control.PRESET_TOP_LEFT)
+	await process_frame
+	var pointer_position: Vector2 = bar.get_viewport().get_mouse_position()
+	# Put the icon under the current pointer so the real delayed callback can run in headless mode.
+	bar.position += pointer_position - hovered_icon.get_global_rect().get_center()
+	await process_frame
+	assert(hovered_icon.get_global_rect().has_point(pointer_position), "Hover test must keep the pointer over the skill icon")
+	bar._on_skill_slot_hovered(hovered_icon, 1)
+	await create_timer(1.0, true).timeout
+	assert(not bar.hover_detail.visible, "Skill details must stay hidden before the 1.5-second hover delay")
+	await create_timer(0.6, true).timeout
 	assert(bar.hover_detail.visible)
 	assert(bar.hover_detail.category_label.text.contains("Lv.1"))
-	assert(bar.hover_detail.get_global_rect().end.y <= bar.global_position.y)
 	assert(bar.hover_detail.description_label.get_content_height() <= bar.hover_detail.description_label.size.y + 1)
 	await _capture("combat-tooltip")
+	bar._apply_hud_layout_anchor()
 	var frame_slots := slots.duplicate(true)
 	frame_slots[1]["description"] = ""
 	frame_slots[1]["remaining"] = 3.2
@@ -139,16 +155,23 @@ func _run() -> void:
 	await _capture("skill-points-team")
 	bar.update_skill_points(0)
 	await _settle()
+	bar.set_anchors_and_offsets_preset(Control.PRESET_TOP_LEFT)
+	await process_frame
+	var team_pointer_position: Vector2 = bar.get_viewport().get_mouse_position()
 	for row_index in range(bar.team_role_rows.size()):
 		var row: Dictionary = bar.team_role_rows[row_index]
 		if row["data"].get("role_id", "") == "mechanic":
-			bar._on_team_role_skill_slot_hovered(row_index, 1, row["slots"][1]["view"])
-	await _settle()
+			var team_icon: Control = row["slots"][1]["view"]
+			bar.position += team_pointer_position - team_icon.get_global_rect().get_center()
+			await process_frame
+			assert(team_icon.get_global_rect().has_point(team_pointer_position), "Team tooltip test must keep the pointer over the skill icon")
+			bar._on_team_role_skill_slot_hovered(row_index, 1, team_icon)
+			await create_timer(1.6, true).timeout
 	assert(bar.hover_detail.category_label.text.contains("机械师"))
 	assert(bar.hover_detail.status_label.text.contains("待命"))
-	assert(bar.hover_detail.get_global_rect().end.y <= bar.global_position.y)
 	await _capture("team-tooltip")
 	bar.hover_detail.hide_detail()
+	bar._apply_hud_layout_anchor()
 	bar.visible = false
 
 	var ui = UI.instantiate()
@@ -248,10 +271,12 @@ func _run() -> void:
 			await _capture(progress_id + "-talents-960")
 			root.size = Vector2i(1280, 720)
 		ui.hide_ui()
-	ui.queue_free()
-	world.queue_free()
-	await process_frame
 	paused = false
+	current_scene = null
+	ui.free()
+	world.free()
+	PLAYER_AUTHORED_EFFECTS.clear_runtime_state()
+	await process_frame
 	for failure in failures:
 		push_error(failure)
 	if failures.is_empty():

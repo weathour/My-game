@@ -162,7 +162,15 @@ func get_cooldown_slot(owner = null) -> Dictionary:
 		"remaining": clamp(cooldown_remaining, 0.0, COOLDOWN),
 		"duration": COOLDOWN,
 		"color": Color(1.0, 0.45, 0.16, 1.0),
-		"description": "在指定地点聚能 0.5 秒后爆炸，造成 600% 范围伤害；留下持续 6 秒的火焰区域，区域内敌人每秒损失当前生命的 1%。"
+		"description": "在指定地点聚能后爆炸，留下持续灼烧的火焰区域。",
+		"effect_rows": [
+			{"label": "聚能时间", "value": "%.1f 秒" % CHARGE_DURATION},
+			{"label": "爆炸伤害倍率", "value": "%.0f%%" % (_get_blast_damage_ratio(owner) * 100.0)},
+			{"label": "爆炸半径", "value": "%.0f" % _get_blast_radius(owner)},
+			{"label": "灼烧持续时间", "value": "%.1f 秒" % _get_ground_duration(owner)},
+			{"label": "每秒灼烧", "value": "当前生命 %.1f%%" % (_get_ground_burn_ratio(owner) * 100.0)}
+		],
+		"effect_note": "第二次爆炸：%d 处、每处 %.0f%% 伤害、半径 %.0f。" % [SECONDARY_BLAST_COUNT, SECONDARY_BLAST_DAMAGE_RATIO * 100.0, SECONDARY_BLAST_RADIUS] if _has_talent(owner, "mage_level_talent_fireball_2") else "伤害还受角色攻击力、暴击和目标防御影响。"
 	}
 
 

@@ -1,267 +1,84 @@
 extends SceneTree
 
-const InfiniteReload := preload("res://scripts/abilities/gunner_infinite_reload_ability.gd")
-const PlayerAbilityFlow := preload("res://scripts/player/player_ability_flow.gd")
-const PlayerAttackLoopFlow := preload("res://scripts/player/player_attack_loop_flow.gd")
-const PlayerCooldownFlow := preload("res://scripts/player/player_skill_cooldown_flow.gd")
-const PlayerEquipmentFlow := preload("res://scripts/player/player_equipment_flow.gd")
-const PlayerSurvivalFlow := preload("res://scripts/player/player_survival_flow.gd")
-const PlayerUltimateFlow := preload("res://scripts/player/player_ultimate_flow.gd")
-const PlayerSwitchFlow := preload("res://scripts/player/player_switch_flow.gd")
-const GAME_SETTINGS := preload("res://scripts/game_settings.gd")
-
+const PLAYER := preload("res://scenes/player.tscn")
+const SKILLS := preload("res://scripts/player/player_blessing_skill_state.gd")
+const FLOW := preload("res://scripts/player/player_ability_flow.gd")
+const COOLDOWNS := preload("res://scripts/player/player_skill_cooldown_flow.gd")
+const EQUIPMENT := preload("res://scripts/player/player_equipment_flow.gd")
+const SURVIVAL := preload("res://scripts/player/player_survival_flow.gd")
+const SETTINGS := preload("res://scripts/game_settings.gd")
 var failures: Array[String] = []
-
 
 func _init() -> void:
 	call_deferred("_run")
 
-
-func _run() -> void:
-	var owner := ManualOwner.new()
-	root.add_child(owner)
-	owner.blessing_skill_state = {
-		"unlocked": {
-			"shrapnel_field": true,
-			"infinite_reload": true
-		},
-		"unlock_order": [
-			"shrapnel_field",
-			"infinite_reload"
-		]
-	}
-	owner.level_talents = {
-		"gunner_level_talent_infinite_reload_1": true,
-		"gunner_level_talent_infinite_reload_2": true
-	}
-	# 热键仅在技能处于“手动释放”状态时生效，先临时切到手动并在结束时还原。
-	var previous_manual_mode := GAME_SETTINGS.is_skill_manual("infinite_reload")
-	GAME_SETTINGS.set_skill_manual("infinite_reload", true)
-	# 槽位顺序来自全局设置：测试内固定为解锁顺序，结束后还原玩家原有顺序。
-	var previous_slot_order: Array[String] = GAME_SETTINGS.get_skill_slot_order("gunner")
-	GAME_SETTINGS.set_skill_slot_order("gunner", ["shrapnel_field", "infinite_reload"])
-
-	var active_skill_ids := PlayerCooldownFlow.get_role_active_skill_ids(owner, "gunner")
-	_expect(active_skill_ids == ["shrapnel_field", "infinite_reload"], "skill hotkey slots should follow active skill unlock order")
-	_expect(not owner.gunner_infinite_reload_ability.try_trigger(owner), "manual infinite reload should not auto-cast")
-	_expect(PlayerAbilityFlow.try_handle_manual_skill_slot(owner, 1), "slot 1 should report the auto state instead of toggling shrapnel")
-	_expect(not owner.gunner_infinite_reload_ability.is_active(), "slot 1 should not affect infinite reload")
-
-	owner.mouse_aim_direction = Vector2.RIGHT
-	_expect(PlayerAbilityFlow.try_handle_manual_skill_slot(owner, 2), "slot 2 should toggle infinite reload on")
-	_expect(owner.gunner_infinite_reload_ability.is_active(), "manual infinite reload should become active")
-	var initial_manual_slot := owner.gunner_infinite_reload_ability.get_cooldown_slot(owner)
-	_expect(is_equal_approx(float(initial_manual_slot.get("remaining", 0.0)), 1.5), "manual infinite reload should show a 1.5s cooldown at activation")
-	_expect(is_equal_approx(float(initial_manual_slot.get("duration", 0.0)), 1.5), "manual infinite reload lock cooldown should have 1.5s duration")
-	_expect(PlayerAbilityFlow.is_gunner_infinite_reload_blocking_actions(owner), "manual infinite reload should block other actions")
-	_expect(is_equal_approx(PlayerEquipmentFlow.get_role_permanent_dodge_value(owner, "gunner"), 100.0), "manual infinite reload should add 100 dodge value for gunner")
-	_expect(is_equal_approx(PlayerEquipmentFlow.get_role_permanent_dodge_value(owner, "swordsman"), 0.0), "manual infinite reload dodge value should not apply to other roles")
-	_expect(PlayerSurvivalFlow.is_movement_locked(owner), "manual infinite reload should lock movement")
-	_expect(not PlayerUltimateFlow.can_use_ultimate(owner), "manual infinite reload should block ultimate")
-
-	owner.mouse_aim_direction = Vector2.UP
-	owner.last_shapes.clear()
-	owner.gunner_infinite_reload_ability._trigger_tick(owner)
-	_expect(owner.last_shapes.size() == 2, "infinite reload II should fire dual parallel beams")
-	_expect(is_equal_approx(float(owner.last_shapes[0].get("length", 0.0)), 500.0), "infinite reload I and II should each add 50 range")
-	_expect(owner.facing_direction.is_equal_approx(Vector2.RIGHT), "manual infinite reload should keep first aim direction")
-
-	owner.attack_count = 0
-	PlayerAttackLoopFlow.perform_active_attack(owner)
-	_expect(owner.attack_count == 0, "manual infinite reload should block basic attack")
-
-	_expect(not PlayerAbilityFlow.try_handle_manual_skill_slot(owner, 2), "manual infinite reload should not close before 1.5s")
-	_expect(owner.gunner_infinite_reload_ability.is_active(), "manual infinite reload should remain active before 1.5s")
-	PlayerSwitchFlow.try_switch_role(owner, 0)
-	_expect(owner.active_role_index == 1, "manual infinite reload should block role switch before 1.5s")
-	owner.gunner_infinite_reload_ability.update(owner, 1.4)
-	var almost_ready_manual_slot := owner.gunner_infinite_reload_ability.get_cooldown_slot(owner)
-	_expect(is_equal_approx(float(almost_ready_manual_slot.get("remaining", 0.0)), 0.1), "manual infinite reload lock cooldown should count down to 0.1s")
-	_expect(is_equal_approx(float(almost_ready_manual_slot.get("duration", 0.0)), 1.5), "manual infinite reload lock cooldown should remain a 1.5s display")
-	_expect(not PlayerAbilityFlow.try_handle_manual_skill_slot(owner, 2), "manual infinite reload should still not close at 1.4s")
-	owner.gunner_infinite_reload_ability.update(owner, 0.1)
-	var ready_manual_slot := owner.gunner_infinite_reload_ability.get_cooldown_slot(owner)
-	_expect(is_equal_approx(float(ready_manual_slot.get("remaining", 0.0)), 0.0), "manual infinite reload lock cooldown should finish at 1.5s")
-	_expect(PlayerAbilityFlow.try_handle_manual_skill_slot(owner, 2), "slot 2 should toggle infinite reload off after 1.5s")
-	_expect(not owner.gunner_infinite_reload_ability.is_active(), "manual infinite reload should stop after closing")
-	_expect(is_equal_approx(owner.gunner_infinite_reload_ability.cooldown_remaining, 0.5), "manual close should apply 0.5s cooldown")
-	_expect(not PlayerAbilityFlow.is_gunner_infinite_reload_blocking_actions(owner), "manual infinite reload should stop blocking after closing")
-	_expect(is_equal_approx(PlayerEquipmentFlow.get_role_permanent_dodge_value(owner, "gunner"), 0.0), "manual infinite reload dodge value should disappear after closing")
-	_expect(not PlayerSurvivalFlow.is_movement_locked(owner), "manual infinite reload should release movement lock after closing")
-
-	owner.queue_free()
-	GAME_SETTINGS.set_skill_manual("infinite_reload", previous_manual_mode)
-	GAME_SETTINGS.set_skill_slot_order("gunner", previous_slot_order)
-	await process_frame
-	if failures.is_empty():
-		print("GUNNER_INFINITE_RELOAD_MANUAL_SMOKE_OK")
-		quit(0)
-	else:
-		for failure in failures:
-			push_error(failure)
-		quit(1)
-
-
-func _expect(condition: bool, message: String) -> void:
-	if not condition:
+func check(ok: bool, message: String) -> void:
+	if not ok:
 		failures.append(message)
 
+func _run() -> void:
+	var scene := Node2D.new()
+	root.add_child(scene)
+	current_scene = scene
+	var player = PLAYER.instantiate()
+	scene.add_child(player)
+	player.set_process(false)
+	player.set_physics_process(false)
+	player.auto_attack_enabled = false
+	player.fire_timer.stop()
+	player.active_role_index = 1
+	for skill_id in ["shrapnel_field", "infinite_reload"]:
+		SKILLS.force_unlock_skill(player, skill_id, 1)
+	var old_manual := SETTINGS.is_skill_manual("infinite_reload")
+	var old_shrapnel_manual := SETTINGS.is_skill_manual("shrapnel_field")
+	var old_order := SETTINGS.get_skill_slot_order("gunner")
+	SETTINGS.set_skill_manual("infinite_reload", false)
+	SETTINGS.set_skill_manual("shrapnel_field", false)
+	SETTINGS.set_skill_slot_order("gunner", ["shrapnel_field", "infinite_reload"])
+	player.role_special_states["gunner"]["skill_levels"] = {"gunner_infinite_reload": 9}
+	player.role_special_states["gunner"]["infinite_reload_build"] = {"4": "light_step", "8": "soul_form", "9": "fire_control"}
+	var ability := MeasuredReload.new()
+	player.gunner_infinite_reload_ability = ability
+	check(COOLDOWNS.get_role_active_skill_ids(player, "gunner") == ["shrapnel_field", "infinite_reload"], "hotkeys retain the configured slot order")
+	check(not ability.try_trigger(player), "fire control never auto-casts")
+	check(FLOW.try_handle_manual_skill_slot(player, 1) and not ability.is_active(), "another automatic slot does not activate reload")
+	var base_dodge: float = EQUIPMENT.get_role_dodge_chance(player, "gunner")
+	check(FLOW.try_handle_manual_skill_slot(player, 2) and ability.is_active(), "fire control hotkey opens despite the automatic release setting")
+	var slot := ability.get_cooldown_slot(player)
+	check(is_equal_approx(slot.remaining, 1.0) and is_equal_approx(slot.duration, 1.0) and slot.toggle_mode, "HUD shows the current one-second close lock")
+	check(not FLOW.is_gunner_infinite_reload_blocking_actions(player) and not SURVIVAL.is_movement_locked(player), "reload does not lock movement or other skills")
+	check(is_equal_approx(EQUIPMENT.get_role_dodge_chance(player, "gunner"), minf(1.0, base_dodge + 0.3)), "light step adds thirty dodge percentage points")
+	check(ability.get_dodge_chance_bonus("swordsman") == 0.0, "light step dodge remains role-specific")
+	check(ability.pending_beam_hits.size() == 1, "first beam waits for the gather visual")
+	check(not FLOW.try_handle_manual_skill_slot(player, 2) and ability.is_preventing_switch(player), "cannot close or switch during the first second")
+	ability.update(player, 0.9)
+	check(is_equal_approx(ability.get_cooldown_slot(player).remaining, 0.1), "close lock counts down")
+	check(not FLOW.try_handle_manual_skill_slot(player, 2), "cannot close at 0.9 seconds")
+	ability.update(player, 0.1)
+	check(not ability.is_preventing_switch(player), "switch lock expires at one second")
+	check(not ability.hits.is_empty() and ability.hits[0].size() == 1, "fire control retains one lane without dual impact")
+	if not ability.hits.is_empty():
+		check(is_equal_approx(ability.hits[0][0].length, 600.0), "light step and LV6 each add 100 range")
+	check(FLOW.try_handle_manual_skill_slot(player, 2) and not ability.is_active(), "hotkey closes after one second")
+	check(ability.cooldown_remaining == 0.0, "fire control closes without cooldown")
+	check(is_equal_approx(EQUIPMENT.get_role_dodge_chance(player, "gunner"), base_dodge), "closing removes light step dodge")
+	check(FLOW.try_handle_manual_skill_slot(player, 2) and ability.is_active(), "fire control can reopen immediately")
+	ability.stop()
+	SETTINGS.set_skill_manual("infinite_reload", old_manual)
+	SETTINGS.set_skill_manual("shrapnel_field", old_shrapnel_manual)
+	SETTINGS.set_skill_slot_order("gunner", old_order)
+	scene.queue_free()
+	await process_frame
+	for message in failures:
+		push_error(message)
+	print("GUNNER_INFINITE_RELOAD_MANUAL_SMOKE_OK" if failures.is_empty() else "GUNNER_INFINITE_RELOAD_MANUAL_SMOKE_FAILED")
+	quit(0 if failures.is_empty() else 1)
 
-class ManualOwner:
-	extends CharacterBody2D
-
-	var level_talents: Dictionary = {}
-	var talents: Dictionary = {}
-	var blessing_skill_state: Dictionary = {}
-	var roles: Array = [
-		{"id": "swordsman"},
-		{"id": "gunner"},
-		{"id": "mage"}
-	]
-	var role_equipment_levels: Dictionary = {}
-	var equipment_levels: Dictionary = {}
-	var gunner_infinite_reload_ability = InfiniteReload.new()
-	var is_dead := false
-	var level_up_active := false
-	var active_role_index := 1
-	var active_role_id := "gunner"
-	var switch_cooldown_remaining := 0.0
-	var hidden_invulnerability_status_remaining := 0.0
-	var switch_invulnerability_remaining := 0.0
-	var role_switch_cooldown_bonus := 0.0
-	var swordsman_death_defiance_will_remaining := 0.0
-	var facing_direction := Vector2.RIGHT
-	var mouse_aim_direction := Vector2.RIGHT
-	var gunner_attack_chain := 0
-	var last_shapes: Array[Dictionary] = []
-	var attack_count := 0
-	const GUNNER_INTERSECT_VISUAL_SCALE := 1.0
-
-	func _get_active_role() -> Dictionary:
-		return roles[active_role_index]
-
-	func _get_active_role_id() -> String:
-		return str(_get_active_role().get("id", ""))
-
-	func _has_skill_talent(talent_id: String) -> bool:
-		return bool(talents.get(talent_id, false))
-
-	func _has_level_talent(talent_id: String) -> bool:
-		return bool(level_talents.get(talent_id, false))
-
-	func _is_blessing_skill_unlocked(skill_id: String) -> bool:
-		return bool((blessing_skill_state.get("unlocked", {}) as Dictionary).get(skill_id, false))
-
-	func _get_blessing_skill_tier(_skill_id: String) -> int:
-		return 1
-
-	func _get_blessing_skill_combo_scales(_skill_id: String) -> Array:
-		return []
-
-	func _get_blessing_skill_duration_multiplier(_skill_id: String) -> float:
-		return 1.0
-
-	func _get_blessing_skill_duration_flat_bonus(_skill_id: String) -> float:
-		return 0.0
-
-	func _get_role_damage(_role_id: String) -> float:
-		return 10.0
-
-	func _get_role_attribute_range_multiplier(_role_id: String) -> float:
-		return 1.0
-
-	func _get_equipment_skill_range_multiplier() -> float:
-		return 1.0
-
-	func _get_infinite_reload_range_multiplier() -> float:
-		return 1.0
-
-	func _get_equipment_cooldown_multiplier() -> float:
-		return 1.0
-
-	func _get_role_bonus_summary(_role_id: String) -> Dictionary:
-		return {}
-
-	func _get_role_blessing_stat_bonus(_role_id: String, _stat: String) -> float:
-		return 0.0
-
-	func _get_role_attribute_dodge_value(_role_id: String) -> float:
-		return 0.0
-
-	func _get_gunner_infinite_reload_dodge_value(role_id: String = "") -> float:
-		return PlayerAbilityFlow.get_gunner_infinite_reload_dodge_value(self, role_id)
-
-	func _get_live_mouse_aim_direction(fallback_direction: Vector2) -> Vector2:
-		return mouse_aim_direction if mouse_aim_direction.length_squared() > 0.001 else fallback_direction
-
-	func _get_downward_perpendicular(direction: Vector2) -> Vector2:
-		return Vector2(-direction.y, direction.x)
-
-	func _get_gunner_intersect_gather_duration() -> float:
-		return 0.0
-
-	func _queue_camera_shake(_strength: float, _duration: float) -> void:
+class MeasuredReload:
+	extends "res://scripts/abilities/gunner_infinite_reload_ability.gd"
+	var hits: Array = []
+	func _apply_piercing_beam_shapes(_owner, shapes: Array[Dictionary]) -> int:
+		hits.append(shapes.duplicate(true))
+		return 0
+	func _spawn_visuals(_owner, _origin: Vector2, _direction: Vector2, _length: float, _width: float) -> void:
 		pass
-
-	func _damage_enemies_in_shapes_batched(shapes: Array[Dictionary]) -> int:
-		last_shapes.clear()
-		for shape in shapes:
-			last_shapes.append(shape.duplicate(true))
-		return shapes.size()
-
-	func _perform_gunner_attack() -> void:
-		attack_count += 1
-
-	func is_gunner_infinite_reload_blocking_actions() -> bool:
-		return PlayerAbilityFlow.is_gunner_infinite_reload_blocking_actions(self)
-
-	func is_gunner_infinite_reload_preventing_switch() -> bool:
-		return PlayerAbilityFlow.is_gunner_infinite_reload_preventing_switch(self)
-
-	func _is_player_action_locked() -> bool:
-		return false
-
-	func _get_common_prosperity_switch_cooldown_multiplier() -> float:
-		return 1.0
-
-	func _save_active_role_health() -> void:
-		pass
-
-	func _save_active_role_temporary_health() -> void:
-		pass
-
-	func _clear_gunner_flash_trait_on_switch() -> void:
-		pass
-
-	func _update_active_role_state() -> void:
-		active_role_id = str(_get_active_role().get("id", ""))
-
-	func _initialize_existing_role_shares() -> void:
-		pass
-
-	func _consume_switch_energy_for_entry(_role_id: String = "") -> bool:
-		return false
-
-	func _has_elite_relic(_relic_id: String) -> bool:
-		return false
-
-	func _get_role_mana(_role_id: String) -> float:
-		return 100.0
-
-	func _spawn_combat_tag(_position: Vector2, _text: String, _color: Color) -> void:
-		pass
-
-	func _spawn_ring_effect(_position: Vector2, _radius: float, _color: Color, _segments: float, _duration: float) -> Node2D:
-		var effect := Node2D.new()
-		add_child(effect)
-		return effect
-
-	func _spawn_burst_effect(_position: Vector2, _radius: float, _color: Color, _duration: float) -> Node2D:
-		var effect := Node2D.new()
-		add_child(effect)
-		return effect
-
-	func _spawn_gunner_intersect_scene_effect(_center: Vector2, _direction: Vector2, _visual_length: float = 112.0, _visual_thickness: float = 18.0, _gather_visual_length: float = -1.0) -> Node2D:
-		var effect := Node2D.new()
-		add_child(effect)
-		return effect

@@ -76,7 +76,7 @@ class TargetStub:
 
 	var is_dead: bool = false
 
-	func apply_enemy_slow(_multiplier: float, _duration: float) -> void:
+	func apply_enemy_slow(_multiplier: float, _duration: float, _source_id: String = "") -> void:
 		pass
 
 

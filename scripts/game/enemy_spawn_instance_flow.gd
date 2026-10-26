@@ -21,6 +21,14 @@ static func spawn_configured_enemy_at_position(main: Node, kind: String, archety
 		return null
 	if kind == "normal" and main.has_method("_can_spawn_runtime_group") and not bool(main._can_spawn_runtime_group("enemies", main.ENEMY_SPAWN_FLOW.get_runtime_enemy_limit(main))):
 		return null
+	# 在取池/实例化之前拒绝内容拼写错误，避免生成默认怪或遗留半初始化对象。
+	if not preload("res://scripts/enemy/enemy_archetype_database.gd").PROFILE_PATHS.has(archetype):
+		push_error("Unknown authored enemy archetype: %s" % archetype)
+		return null
+	var profile: Dictionary = main.ENEMY_SPAWN_FLOW.get_enemy_profile(main, kind, archetype)
+	if profile.is_empty():
+		push_error("Enemy profile could not load: %s" % archetype)
+		return null
 	var enemy: Variant = take_enemy_from_pool(main, kind)
 	if enemy == null:
 		enemy = main.enemy_scene.instantiate()
@@ -31,7 +39,7 @@ static func spawn_configured_enemy_at_position(main: Node, kind: String, archety
 	enemy.projectile_scene = main.enemy_bullet_scene
 	enemy.heart_pickup_scene = main.heart_pickup_scene
 	if enemy.has_method("apply_enemy_profile"):
-		enemy.apply_enemy_profile(kind, main.ENEMY_SPAWN_FLOW.get_enemy_profile(main, kind, archetype))
+		enemy.apply_enemy_profile(kind, profile)
 	var waves = main.get("wave_flow")
 	if kind == "small_boss" and is_instance_valid(waves) and waves.PLAN.SMALL_BOSS_EXPERIENCE.has(int(waves.wave)):
 		enemy.experience_reward = int(waves.PLAN.SMALL_BOSS_EXPERIENCE[int(waves.wave)])

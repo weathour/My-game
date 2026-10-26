@@ -161,7 +161,7 @@ All camp overlays use the shared modal, stop world movement and suppress world i
 
 - **Upgrade-card exception:** preserve the original four floating portrait paper cards, illustrated outlines, crystals, entrance animation and separate cyan refresh controls. Their face reads owner/type, name, level transition, primary benefit and secondary changes. Show details below the row; do not replace the cards with dashboard tiles.
 - **Reading type for choices and hover details:** Noto Sans CJK SC, Microsoft YaHei, PingFang SC, then sans-serif through Godot `SystemFont`. Paper uses dark ink; dark hover panels always use the archive's light text. Skill titles and the primary benefit use a bold weight.
-- **Choice state:** gold outline plus an explicit selected check, a visible selected/required count and one refresh count per card. The second selection still submits the original four-pick-two offer automatically.
+- **Choice state:** gold outline plus an explicit selected check, a visible selected/required count and one refresh count per card. The active flow shows the actual required count: one free wave blessing, one skill unlock, or the current talent-slot choice. Historical four-pick-two styling does not enable that retired route.
 - **Corner Style:** 12px for rows/cards; 16px for the main modal.
 - **Background:** archive card over archive background.
 - **Shadow Strategy:** structural only, following Elevation.
@@ -179,7 +179,7 @@ The character sheet has four top tabs: 总览 / 技能 / 祝福 / 装备. Its le
 
 ### Character Overview
 
-Show all eleven primary stats at the 1280×720 logical baseline. Group output, survival, and mobility/cooldowns. Base attack speed belongs in the attack-speed detail; damage bonuses belong in attack sources. Do not duplicate already-applied multipliers. The inspector lists exact combat operands and explains conditional scope and nonlinear dodge/reduction. Keep pixel portraits compact, show shared run level, and distinguish viewed role from active role.
+Show all fourteen primary stats at the 1280×720 logical baseline. Group output, survival, and mobility/cooldowns. Base attack speed belongs in the attack-speed detail; damage bonuses belong in attack sources. Do not duplicate already-applied multipliers. The inspector lists exact combat operands and explains conditional scope and nonlinear dodge/reduction. Keep pixel portraits compact, show shared run level, and distinguish viewed role from active role.
 
 Character-sheet surfaces use `#111620` / `#181F2B`, sparse `#CBB581` gold, `#EDECE5` reading text, `#A5ADB9` secondary text and `#98C8B2` values. Use 16px body text, 25–26px titles and 30px selected values, with thin borders and 3–4px corners. The modal scales with the supported minimum window; it does not hide primary stats in a small scroll box.
 

@@ -21,6 +21,7 @@ func _run() -> void:
 	owner.role_special_states["mage"]["skill_levels"]["mage_surging_wave"] = 9
 	_expect(BUILD.choose(owner, 9, 1), "LV9 branch can be selected")
 	_expect(is_equal_approx(ABILITY.new()._get_damage_multiplier(owner), 5.9), "LV9 tidal damage is 590 percent")
+	owner.free()
 	if failures.is_empty():
 		print("MAGE_SURGING_WAVE_LEVEL_TALENTS_SMOKE_OK")
 	else:

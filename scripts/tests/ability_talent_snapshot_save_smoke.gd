@@ -54,37 +54,27 @@ func _run() -> void:
 	]
 
 	var blade := BladeStorm.new()
-	blade.apply_save_data({
-		"active_remaining": 1.2,
-		"ring_visual_tick_index": 3,
-		"base_tick_count": 4,
-		"cast_elapsed": 0.8,
-		"talent_ids": ["swordsman_blade_storm_stationary"],
-		"talent_snapshot_valid": true
-	})
-	assert(blade._has_talent(owner, "swordsman_blade_storm_stationary"))
-	assert(not blade._has_talent(owner, "swordsman_blade_storm_retain"))
-	assert(int(blade.get_save_data()["base_tick_count"]) == 4)
-	blade.active_remaining = 0.0
-	assert(blade._has_talent(owner, "swordsman_blade_storm_stationary"))
-	blade.stop()
-	assert(blade._has_talent(owner, "swordsman_blade_storm_retain"))
+	blade.apply_save_data({"active_remaining": 1.2, "cast_ratio": 0.8, "cast_choices": {"4": "gale"}, "cast_origin": [10, 20]})
+	var blade_copy := BladeStorm.new()
+	blade_copy.apply_save_data(_json_roundtrip(blade.get_save_data()))
+	assert(blade_copy.cast_choices == blade.cast_choices)
+	assert(blade_copy.cast_origin == Vector2(10, 20))
+	assert(is_equal_approx(blade_copy.active_remaining, 1.2))
+	assert(is_equal_approx(blade_copy.cast_ratio, 0.8))
 
 	var infinite := InfiniteReload.new()
-	infinite.apply_save_data({
-		"active_remaining": 1.0,
-		"sweep_elapsed": 0.7,
-		"hit_during_cast": true,
-		"talent_ids": ["gunner_infinite_axis"],
-		"talent_snapshot_valid": true
-	})
-	assert(infinite._has_talent(owner, "gunner_infinite_axis"))
-	assert(not infinite._has_talent(owner, "gunner_infinite_dual"))
-	assert(bool(infinite.get_save_data()["hit_during_cast"]))
-	infinite.active_remaining = 0.0
-	assert(infinite._has_talent(owner, "gunner_infinite_axis"))
+	infinite.apply_save_data({"build_version": 1, "active_remaining": 1.0, "cast_snapshot": {"choices": ["dual_impact"], "damage_ratio": 0.4}})
+	assert(infinite._choice("dual_impact"))
+	assert(not infinite._choice("light_step"))
+	var infinite_copy := InfiniteReload.new()
+	infinite_copy.apply_save_data(_json_roundtrip(infinite.get_save_data()))
+	assert(infinite_copy.cast_snapshot == infinite.cast_snapshot)
+	assert(is_equal_approx(infinite_copy.active_remaining, 1.0))
 	infinite.stop()
-	assert(infinite._has_talent(owner, "gunner_infinite_dual"))
+	assert(infinite.cast_snapshot.is_empty())
+	infinite.apply_save_data({"cooldown_remaining": 2.0, "active_remaining": 1.0, "talent_ids": ["gunner_infinite_axis"]})
+	assert(is_zero_approx(infinite.active_remaining))
+	assert(is_equal_approx(infinite.cooldown_remaining, 2.0))
 
 	var meta := MetaField.new()
 	meta.apply_save_data({
@@ -154,10 +144,10 @@ func _run() -> void:
 	tidal.apply_save_data({
 		"cooldown_remaining": 6.0,
 		"next_wave_token": 9,
-		"talent_ids": ["mage_surge_heavy"],
+		"talent_ids": ["mage_surge_flood"],
 		"talent_snapshot_valid": true
 	})
-	assert(tidal._has_talent(owner, "mage_surge_heavy"))
+	assert(tidal._has_talent(owner, "mage_surge_flood"))
 	assert(int(tidal.get_save_data()["next_wave_token"]) == 9)
 
 	assert(JudgementSwordFlow != null)
@@ -230,15 +220,15 @@ func _run() -> void:
 	RunSaveState._apply_ability_save_data(runtime_owner, {
 		"ability_runtime": {
 			"infinite_reload": {
+				"build_version": 1,
 				"cooldown_remaining": 9.0,
-				"talent_ids": ["gunner_infinite_axis"],
-				"talent_snapshot_valid": true
+				"cast_snapshot": {"choices": ["dual_impact"]}
 			}
 		},
 		"gunner_infinite_reload_cooldown_remaining": 1.0
 	})
 	assert(is_equal_approx(runtime_owner.gunner_infinite_reload_ability.cooldown_remaining, 9.0))
-	assert(runtime_owner.gunner_infinite_reload_ability.cast_talent_ids.has("gunner_infinite_axis"))
+	assert(runtime_owner.gunner_infinite_reload_ability._choice("dual_impact"))
 
 	print("ABILITY_TALENT_SNAPSHOT_SAVE_SMOKE_OK")
 	quit(0)
