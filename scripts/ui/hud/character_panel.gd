@@ -15,12 +15,12 @@ const SHEET := preload("res://scripts/player/player_character_sheet.gd")
 const SURVIVORS_THEME := preload("res://scripts/ui/theme/survivors_ui_theme.gd")
 const WHITE_KEY_SHADER := preload("res://shaders/white_key.gdshader")
 const TAB_IDS := ["overview", "skills", "blessings", "equipment"]
-const GOLD := Color("cbb581")
-const TEXT := Color("edece5")
-const MUTED := Color("a5adb9")
-const GREEN := Color("98c8b2")
-const LINE := Color("363c49")
-const BG := Color("111620")
+const GOLD := Color("dfbd68")
+const TEXT := Color("f3ead0")
+const MUTED := Color("c5b99b")
+const GREEN := Color("b5d39a")
+const LINE := Color("786138")
+const BG := Color("112018")
 const ROLE_TEXTURE_PATHS := {
 	"swordsman": "人设草图/剑士草图.jpg",
 	"gunner": "人设草图/枪手草图.jpg",
@@ -101,18 +101,19 @@ func _ready() -> void:
 	add_child(backdrop)
 	panel = PanelContainer.new()
 	panel.name = "CharacterSheet"
-	panel.add_theme_stylebox_override("panel", SURVIVORS_THEME.panel_style(BG, Color("706448"), 1, 4, 22))
+	panel.add_theme_stylebox_override("panel", SURVIVORS_THEME.panel_style(BG, GOLD, 2, 0, 22))
 	var theme := Theme.new()
 	theme.default_font = SURVIVORS_THEME.get_reading_font()
 	theme.default_font_size = 16
 	panel.theme = theme
 	add_child(panel)
+	SURVIVORS_THEME.apply_campaign_frame(panel, "panel")
 	var shell := VBoxContainer.new()
 	shell.add_theme_constant_override("separation", 10)
 	panel.add_child(shell)
 	var header := HBoxContainer.new()
 	shell.add_child(header)
-	var title := _label("人物信息", 26, TEXT)
+	var title := SURVIVORS_THEME.make_section_label("人物信息", 26)
 	title.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	header.add_child(title)
 	header.add_child(_label("已暂停", 15, GOLD))
@@ -152,7 +153,7 @@ func _ready() -> void:
 	identity.add_child(identity_portrait)
 	var identity_text := VBoxContainer.new()
 	identity_text.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	identity_name = _label("", 23, TEXT)
+	identity_name = SURVIVORS_THEME.make_section_label("", 23)
 	identity_name.name = "RoleIdentity"
 	identity_state = _label("", 14, MUTED)
 	identity_text.add_child(identity_name)
@@ -169,8 +170,9 @@ func _ready() -> void:
 	inspector.name = "FixedInspector"
 	inspector.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	inspector.size_flags_stretch_ratio = 1.0
-	inspector.add_theme_stylebox_override("panel", SURVIVORS_THEME.panel_style(Color("181f2b"), LINE, 1, 3, 20))
+	inspector.add_theme_stylebox_override("panel", SURVIVORS_THEME.panel_style(Color("172b20"), LINE, 1, 0, 20))
 	columns.add_child(inspector)
+	SURVIVORS_THEME.apply_campaign_frame(inspector, "card")
 	detail_scroll = _scroll("DetailScroll")
 	inspector.add_child(detail_scroll)
 	detail = VBoxContainer.new()
@@ -209,15 +211,15 @@ func _button(value: String) -> Button:
 	button.add_theme_font_size_override("font_size", 16)
 	button.add_theme_color_override("font_color", TEXT)
 	button.add_theme_color_override("font_hover_color", TEXT)
-	button.add_theme_stylebox_override("pressed", SURVIVORS_THEME.panel_style(Color("35342e"), GOLD, 1, 3, 8))
-	button.add_theme_stylebox_override("focus", SURVIVORS_THEME.panel_style(Color.TRANSPARENT, GOLD, 2, 3))
+	button.add_theme_stylebox_override("pressed", SURVIVORS_THEME.panel_style(Color("5a241c"), GOLD, 1, 0, 8))
+	button.add_theme_stylebox_override("focus", SURVIVORS_THEME.panel_style(Color.TRANSPARENT, GOLD, 2, 0))
 	_style_selection(button, false)
 	return button
 
 
 func _style_selection(button: Button, selected: bool) -> void:
-	button.add_theme_stylebox_override("normal", SURVIVORS_THEME.panel_style(Color("2b2c2b") if selected else Color("171d27"), GOLD if selected else Color.TRANSPARENT, 1, 3, 8))
-	button.add_theme_stylebox_override("hover", SURVIVORS_THEME.panel_style(Color("33362f") if selected else Color("242c38"), GOLD if selected else LINE.lightened(0.3), 1, 3, 8))
+	button.add_theme_stylebox_override("normal", SURVIVORS_THEME.panel_style(Color("55251e") if selected else Color("14251b"), GOLD if selected else Color.TRANSPARENT, 1, 0, 8))
+	button.add_theme_stylebox_override("hover", SURVIVORS_THEME.panel_style(Color("6b3226") if selected else Color("213b29"), GOLD if selected else LINE.lightened(0.3), 1, 0, 8))
 
 
 func _line() -> HSeparator:
@@ -317,8 +319,9 @@ func _refresh_role_rail() -> void:
 		content.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 		content.offset_left = 8
 		content.offset_right = -8
-		content.offset_top = 8
-		content.offset_bottom = -8
+		content.offset_top = 6
+		content.offset_bottom = -6
+		content.add_theme_constant_override("separation", 1)
 		content.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		var picture := _portrait(Vector2(44, 54))
 		_apply_role_texture(picture, str(role.id), index == viewed_role_index)
@@ -330,6 +333,7 @@ func _refresh_role_rail() -> void:
 		state.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		content.add_child(state)
 		button.add_child(content)
+		SURVIVORS_THEME.apply_campaign_frame(button, "card")
 		button.pressed.connect(_view_role.bind(index))
 		role_nav_list.add_child(button)
 		role_buttons.append(button)

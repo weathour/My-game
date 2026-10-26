@@ -149,6 +149,7 @@ func _ready() -> void:
 	modal = SURVIVORS_MODAL.new()
 	modal.configure(Vector2(680.0, 430.0), 0.54, 0.60, Vector2(320.0, 240.0))
 	add_child(modal)
+	SURVIVORS_THEME.apply_campaign_frame(modal.panel, "panel")
 
 	selection_label = Label.new()
 	selection_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
@@ -337,6 +338,7 @@ func _ensure_build_overlay() -> void:
 	build_root.process_mode = Node.PROCESS_MODE_WHEN_PAUSED
 	build_root.set_anchors_preset(Control.PRESET_FULL_RECT)
 	add_child(build_root)
+	SURVIVORS_THEME.apply_screen_frame(build_root)
 
 	build_dimmer = ColorRect.new()
 	build_dimmer.color = Color(0.0, 0.0, 0.0, 0.62)

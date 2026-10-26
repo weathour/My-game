@@ -40,6 +40,7 @@ func _ready() -> void:
 	panel.clip_contents = true
 	panel.mouse_filter = Control.MOUSE_FILTER_STOP
 	add_child(panel)
+	SURVIVORS_THEME.apply_campaign_frame(panel)
 
 	margin = MarginContainer.new()
 	margin.set_anchors_preset(Control.PRESET_FULL_RECT)

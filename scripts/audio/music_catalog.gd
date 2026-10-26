@@ -1,6 +1,22 @@
 extends RefCounted
 
 const CUES := ["camp_signal", "stage_frontpost", "stage_rift", "stage_core", "elite_ram", "elite_splitshot", "boss_tree", "boss_rebirth", "boss_rose", "boss_spellcore_1", "boss_spellcore_2", "boss_spellcore_3", "victory", "defeat"]
+const TRACK_INFO := {
+	"camp_signal": {"title": "等一声回答", "scene": "主菜单、选档与营地", "kind": "场景配乐"},
+	"stage_frontpost": {"title": "前哨的两条来路", "scene": "第一章·前哨清剿 / 无尽前段", "kind": "场景配乐"},
+	"stage_rift": {"title": "裂隙另一侧的回声", "scene": "第一章·裂隙推进 / 无尽中段", "kind": "场景配乐"},
+	"stage_core": {"title": "群星失去方向", "scene": "第一章·星核讨伐 / 无尽后段", "kind": "场景配乐"},
+	"elite_ram": {"title": "踏破红线", "scene": "精英遭遇·冲锋骷髅", "kind": "场景配乐"},
+	"elite_splitshot": {"title": "四向展开", "scene": "精英遭遇·分裂骷髅", "kind": "场景配乐"},
+	"boss_tree": {"title": "根须记住了雨", "scene": "幽影树人 / 无尽第6波", "kind": "场景配乐"},
+	"boss_rebirth": {"title": "第二次渡河", "scene": "引渡人 / 无尽第11波", "kind": "场景配乐"},
+	"boss_rose": {"title": "八瓣回旋庭", "scene": "地瑰灵 / 无尽第16波", "kind": "场景配乐"},
+	"boss_spellcore_1": {"title": "把回答带回黎明·第一相", "scene": "星核Boss·第一相 / 无尽第20波", "kind": "场景配乐"},
+	"boss_spellcore_2": {"title": "把回答带回黎明·第二相", "scene": "星核Boss·第二相 / 无尽第20波", "kind": "场景配乐"},
+	"boss_spellcore_3": {"title": "把回答带回黎明·第三相", "scene": "星核Boss·第三相 / 无尽第20波", "kind": "场景配乐"},
+	"victory": {"title": "灯亮了", "scene": "胜利结算", "kind": "结算短曲"},
+	"defeat": {"title": "信号仍在", "scene": "失败结算", "kind": "结算短曲"}
+}
 const ENCOUNTERS := {
 	"elite_ram_trail": "elite_ram", "elite_splitshot": "elite_splitshot",
 	"smallboss_glutton": "boss_tree", "smallboss_rebirth": "boss_rebirth",

@@ -31,10 +31,10 @@ func open(profile: Dictionary, tab_name: String = "任务") -> void:
 	bar.add_theme_font_size_override("font_size", 17)
 	bar.add_theme_color_override("font_selected_color", VISUALS.TEXT)
 	bar.add_theme_color_override("font_unselected_color", VISUALS.MUTED)
-	bar.add_theme_stylebox_override("tab_selected", STYLE.panel_style(VISUALS.PANEL, VISUALS.LINE, 1, 3, 12))
-	bar.add_theme_stylebox_override("tab_unselected", STYLE.panel_style(VISUALS.BG, VISUALS.LINE, 0, 3, 12))
-	bar.add_theme_stylebox_override("tab_hovered", STYLE.panel_style(VISUALS.PANEL.lightened(0.06), VISUALS.LINE, 0, 3, 12))
-	bar.add_theme_stylebox_override("tab_focus", STYLE.panel_style(Color(0, 0, 0, 0), VISUALS.GOLD, 2, 3))
+	bar.add_theme_stylebox_override("tab_selected", STYLE.panel_style(Color("#5a211b"), VISUALS.GOLD, 2, 0, 12))
+	bar.add_theme_stylebox_override("tab_unselected", STYLE.panel_style(VISUALS.PANEL, VISUALS.LINE, 1, 0, 12))
+	bar.add_theme_stylebox_override("tab_hovered", STYLE.panel_style(VISUALS.PANEL.lightened(0.06), VISUALS.GOLD, 1, 0, 12))
+	bar.add_theme_stylebox_override("tab_focus", STYLE.panel_style(Color(0, 0, 0, 0), VISUALS.GOLD, 2, 0))
 	modal.set_body(tabs)
 	var quests := _page(tabs, "任务")
 	for quest: Dictionary in CONTENT.entries("quests"):
@@ -84,8 +84,9 @@ func open(profile: Dictionary, tab_name: String = "任务") -> void:
 	tabs.get_tab_bar().grab_focus.call_deferred()
 
 func _style_modal() -> void:
-	modal.panel.add_theme_stylebox_override("panel", STYLE.panel_style(VISUALS.BG, VISUALS.LINE, 1, 3))
-	modal.title_label.add_theme_color_override("font_color", VISUALS.TEXT)
+	modal.panel.add_theme_stylebox_override("panel", STYLE.panel_style(VISUALS.BG, VISUALS.GOLD, 1, 0))
+	STYLE.apply_campaign_frame(modal.panel, "panel")
+	modal.title_label.add_theme_color_override("font_color", VISUALS.GOLD)
 	modal.hint_label.add_theme_color_override("font_color", VISUALS.MUTED)
 	modal.hint_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 
@@ -102,7 +103,7 @@ func _page(tabs: TabContainer, title: String) -> VBoxContainer:
 	return column
 
 func _record(column: VBoxContainer, title: String, text: String) -> void:
-	var heading := STYLE.make_title_label(title)
+	var heading := STYLE.make_section_label(title, 21)
 	heading.add_theme_color_override("font_color", VISUALS.GOLD)
 	heading.add_theme_font_size_override("font_size", 21)
 	heading.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART

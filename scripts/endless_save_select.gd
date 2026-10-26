@@ -5,6 +5,7 @@ const ENDLESS_CAMP_SCENE_PATH := "res://scenes/endless_camp.tscn"
 const SAVE_MANAGER := preload("res://scripts/save_manager.gd")
 const ENDLESS_SLOT_CARD_FACTORY := preload("res://scripts/ui/save/endless_slot_card_factory.gd")
 const SURVIVORS_THEME := preload("res://scripts/ui/theme/survivors_ui_theme.gd")
+const STORY_VISUALS := preload("res://scripts/ui/story/story_visuals.gd")
 const SAVE_FEEDBACK := preload("res://scripts/ui/save/save_feedback.gd")
 
 const TEXT_TITLE := "\u65e0\u5c3d\u6a21\u5f0f"
@@ -29,8 +30,11 @@ func _build_ui() -> void:
 
 	var background := ColorRect.new()
 	background.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	background.color = Color(0.05, 0.07, 0.12, 1.0)
+	background.color = Color("#101a13")
 	add_child(background)
+	var scenery := STORY_VISUALS.add_backdrop(self)
+	scenery.modulate = Color(0.48, 0.44, 0.30, 1.0)
+	SURVIVORS_THEME.apply_screen_frame(self)
 
 	var root_margin := MarginContainer.new()
 	root_margin.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
@@ -52,10 +56,9 @@ func _build_ui() -> void:
 	title_column.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	header.add_child(title_column)
 
-	var title := Label.new()
-	title.text = TEXT_TITLE
+	var title := SURVIVORS_THEME.make_section_label(TEXT_TITLE, 34)
 	title.add_theme_font_size_override("font_size", 34)
-	title.add_theme_color_override("font_color", SURVIVORS_THEME.COLOR_TEXT)
+	title.add_theme_color_override("font_color", SURVIVORS_THEME.COLOR_TEXT_GOLD)
 	title_column.add_child(title)
 
 	var subtitle := Label.new()
@@ -86,11 +89,13 @@ func _build_ui() -> void:
 	scroll.add_child(grid)
 
 	for slot_payload in SAVE_MANAGER.list_endless_slots():
-		grid.add_child(ENDLESS_SLOT_CARD_FACTORY.build_slot_card(
+		var card := ENDLESS_SLOT_CARD_FACTORY.build_slot_card(
 			slot_payload,
 			Callable(self, "_on_slot_pressed"),
 			Callable(self, "_on_delete_pressed")
-		))
+		)
+		grid.add_child(card)
+		SURVIVORS_THEME.apply_campaign_frame(card.get_child(0) as Control, "card")
 
 func _ensure_delete_confirm_dialog() -> void:
 	if delete_confirm_dialog != null and is_instance_valid(delete_confirm_dialog):

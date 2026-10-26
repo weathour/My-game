@@ -30,6 +30,7 @@ func _ready() -> void:
 	modal = MODAL.new()
 	modal.configure(Vector2(1140, 350), 0.94, 1.0, Vector2(400, 280))
 	add_child(modal)
+	STYLE.apply_screen_frame(self)
 	get_viewport().size_changed.connect(_layout.call_deferred)
 	hide()
 
@@ -118,7 +119,8 @@ func _layout() -> void:
 	modal.configure(Vector2(1140, height), 0.94, 1.0, Vector2(400, 280))
 	var viewport := STYLE.viewport_size(self)
 	modal.panel.position.y = maxf(12, viewport.y - modal.panel.size.y - 20)
-	modal.panel.add_theme_stylebox_override("panel", STYLE.panel_style(Color("#101923f7"), VISUALS.LINE, 1, 3))
+	modal.panel.add_theme_stylebox_override("panel", STYLE.panel_style(Color("#14241bf7"), VISUALS.GOLD, 1, 0))
+	STYLE.apply_campaign_frame(modal.panel, "panel")
 	modal.dimmer.color = Color(0, 0, 0, 0.06)
 	modal.title_label.add_theme_color_override("font_color", VISUALS.GOLD)
 	modal.title_label.add_theme_font_size_override("font_size", 22)
@@ -127,7 +129,7 @@ func _layout() -> void:
 	modal.hint_label.add_theme_color_override("font_color", VISUALS.MUTED)
 	modal.hint_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	modal.footer.alignment = BoxContainer.ALIGNMENT_END
-	location.position = Vector2(modal.panel.position.x + 2, 28)
+	location.position = Vector2(modal.panel.position.x + 18, 32)
 
 func _add_option(text: String, callback: Callable, primary: bool) -> void:
 	var button := Button.new()

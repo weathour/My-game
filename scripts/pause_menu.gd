@@ -25,6 +25,7 @@ func _ready() -> void:
 	modal.set_title("暂停")
 	modal.set_hint("")
 	add_child(modal)
+	SURVIVORS_THEME.apply_campaign_frame(modal.panel, "panel")
 	_build_content()
 	settings_panel = SETTINGS_PANEL.new()
 	add_child(settings_panel)

@@ -12,7 +12,7 @@ var role_name: String = ""
 var role_id: String = ""
 var state_text: String = ""
 var active: bool = false
-var role_color: Color = Color(0.36, 0.76, 1.0, 1.0)
+var role_color: Color = Color(0.72, 0.57, 0.25, 1.0)
 var current_health: float = 0.0
 var max_health: float = 1.0
 var current_mana: float = 0.0
@@ -39,51 +39,43 @@ func set_status(data: Dictionary, next_key_text: String, next_state_text: String
 
 func _draw() -> void:
 	var outer_rect := Rect2(Vector2.ZERO, size)
-	var fill_color := Color(0.12, 0.12, 0.14, 0.78) if active else Color(0.04, 0.07, 0.11, 0.48)
-	var border_color := Color(1.0, 0.76, 0.25, 0.72) if active else Color(0.36, 0.48, 0.62, 0.38)
+	var fill_color := Color("#123c2e") if active else Color("#30171d")
+	var border_color := Color("#d3ad56") if active else Color("#76533c")
+	draw_rect(outer_rect, fill_color)
+	draw_rect(outer_rect.grow(-1.0), border_color, false, 1.0 if active else 0.8)
 	if active:
-		_draw_soft_glow(outer_rect)
-	_draw_rounded_fill(outer_rect, 12.0, fill_color)
-	draw_rect(outer_rect.grow(-0.8), border_color, false, 2.0 if active else 1.0)
-	if active:
-		_draw_rounded_fill(Rect2(Vector2(4.0, 7.0), Vector2(7.0, max(8.0, size.y - 14.0))), 4.0, Color(1.0, 0.78, 0.26, 0.9))
+		draw_rect(Rect2(Vector2(4.0, 5.0), Vector2(3.0, max(8.0, size.y - 10.0))), Color("#e4c46d"))
 		var pointer := PackedVector2Array([
-			Vector2(size.x - 1.0, size.y * 0.33),
-			Vector2(size.x + 12.0, size.y * 0.5),
-			Vector2(size.x - 1.0, size.y * 0.67)
+			Vector2(size.x - 1.0, size.y * 0.36),
+			Vector2(size.x + 7.0, size.y * 0.5),
+			Vector2(size.x - 1.0, size.y * 0.64)
 		])
-		draw_colored_polygon(pointer, Color(1.0, 0.78, 0.26, 0.72))
+		draw_colored_polygon(pointer, Color("#d3ad56"))
 	_draw_key_tag()
 	_draw_role_text()
 	_draw_resource_bars()
 	_draw_connector_rail()
-
-func _draw_soft_glow(rect: Rect2) -> void:
-	for index in range(2):
-		var grow_amount: float = 3.0 + float(index) * 4.0
-		var alpha: float = 0.06 - float(index) * 0.018
-		_draw_rounded_fill(rect.grow(grow_amount), 14.0 + grow_amount, Color(1.0, 0.62, 0.16, alpha))
 
 func _draw_key_tag() -> void:
 	var tag_width: float = 68.0 if active else 52.0
 	var tag_height: float = 25.0 if active else 24.0
 	var tag_pos := Vector2(18.0, (size.y - tag_height) * 0.5)
 	var tag_rect := Rect2(tag_pos, Vector2(tag_width, tag_height))
-	var tag_fill := Color(0.38, 0.28, 0.08, 0.92) if active else Color(0.12, 0.18, 0.25, 0.82)
-	var tag_border := Color(1.0, 0.82, 0.34, 0.95) if active else Color(0.48, 0.64, 0.82, 0.62)
-	_draw_rounded_fill(tag_rect, 8.0, tag_fill)
+	var tag_fill := Color("#513d1b") if active else Color("#451f25")
+	var tag_border := Color("#e0bd68") if active else Color("#8b6246")
+	draw_rect(tag_rect, tag_fill)
 	draw_rect(tag_rect.grow(-0.5), tag_border, false, 1.0)
-	_draw_text_center(tag_rect, key_text, 18 if active else 19, Color(1.0, 0.95, 0.72, 1.0) if active else Color(0.88, 0.95, 1.0, 0.88))
+	_draw_text_center(tag_rect, key_text, 18 if active else 19, Color("#f8e8bc"))
 
 func _draw_role_text() -> void:
 	var name_position := _get_name_position()
 	var font := get_theme_default_font()
 	var role_font_size: int = 19 if active else 15
 	draw_string(font, name_position + Vector2(1.0, 1.0), role_name, HORIZONTAL_ALIGNMENT_LEFT, -1.0, role_font_size, Color(0.0, 0.0, 0.0, 0.82))
-	draw_string(font, name_position, role_name, HORIZONTAL_ALIGNMENT_LEFT, -1.0, role_font_size, Color(1.0, 0.91, 0.58, 1.0) if active else Color(0.78, 0.85, 0.94, 0.84))
+	draw_string(font, name_position, role_name, HORIZONTAL_ALIGNMENT_LEFT, -1.0, role_font_size, Color("#f4dfa0") if active else Color("#d8c7a5"))
 	var state_font_size: int = 10
 	var state_pos := Vector2(name_position.x, size.y - 6.0)
-	draw_string(font, state_pos, state_text, HORIZONTAL_ALIGNMENT_LEFT, -1.0, state_font_size, Color(0.50, 0.82, 1.0, 0.9) if active else Color(0.50, 0.62, 0.76, 0.74))
+	draw_string(font, state_pos, state_text, HORIZONTAL_ALIGNMENT_LEFT, -1.0, state_font_size, Color("#c5d8a8") if active else Color("#c2a493"))
 
 func _draw_resource_bars() -> void:
 	var bar_x: float = 236.0
@@ -94,13 +86,13 @@ func _draw_resource_bars() -> void:
 	var mp_height: float = 8.0 if active else 6.0
 	var hp_ratio: float = clamp(current_health / max_health, 0.0, 1.0)
 	var mp_ratio: float = clamp(current_mana / max_mana, 0.0, 1.0)
-	var hp_color := Color(0.34, 0.82, 0.34, 0.95) if hp_ratio > 0.35 else Color(0.92, 0.20, 0.16, 0.96)
+	var hp_color := Color("#ad463e") if hp_ratio > 0.35 else Color("#d44339")
 	_draw_bar(Vector2(bar_x, hp_y), Vector2(bar_width, hp_height), hp_ratio, hp_color, "HP")
-	_draw_bar(Vector2(bar_x, mp_y), Vector2(bar_width, mp_height), mp_ratio, Color(0.22, 0.62, 1.0, 0.94), "MP")
+	_draw_bar(Vector2(bar_x, mp_y), Vector2(bar_width, mp_height), mp_ratio, Color("#83b78b"), "MP")
 	var font := get_theme_default_font()
 	var value_size: int = 11
-	draw_string(font, Vector2(bar_x + bar_width + 8.0, hp_y + hp_height - 1.0), "%.0f/%.0f" % [current_health, max_health], HORIZONTAL_ALIGNMENT_LEFT, -1.0, value_size, Color(0.90, 0.98, 0.90, 0.88))
-	draw_string(font, Vector2(bar_x + bar_width + 8.0, mp_y + mp_height + 1.0), "%.0f/%.0f" % [current_mana, max_mana], HORIZONTAL_ALIGNMENT_LEFT, -1.0, value_size, Color(0.76, 0.90, 1.0, 0.88))
+	draw_string(font, Vector2(bar_x + bar_width + 8.0, hp_y + hp_height - 1.0), "%.0f/%.0f" % [current_health, max_health], HORIZONTAL_ALIGNMENT_LEFT, -1.0, value_size, Color("#f0e5c7"))
+	draw_string(font, Vector2(bar_x + bar_width + 8.0, mp_y + mp_height + 1.0), "%.0f/%.0f" % [current_mana, max_mana], HORIZONTAL_ALIGNMENT_LEFT, -1.0, value_size, Color("#d5d2ad"))
 
 func _draw_connector_rail() -> void:
 	var rail_start_x: float = 474.0
@@ -108,29 +100,19 @@ func _draw_connector_rail() -> void:
 	if rail_end_x <= rail_start_x:
 		return
 	var rail_y: float = size.y * 0.5
-	var rail_color := Color(1.0, 0.76, 0.25, 0.24) if active else Color(0.42, 0.64, 0.84, 0.16)
+	var rail_color := Color("#c9a759", 0.52) if active else Color("#9a7351", 0.30)
 	draw_line(Vector2(rail_start_x, rail_y), Vector2(rail_end_x, rail_y), rail_color, 2.0 if active else 1.0)
 	draw_line(Vector2(rail_start_x, rail_y + 4.0), Vector2(rail_end_x, rail_y + 4.0), Color(0.0, 0.0, 0.0, 0.24), 1.0)
 
 func _draw_bar(pos: Vector2, bar_size: Vector2, ratio: float, fill_color: Color, label: String) -> void:
 	var rect := Rect2(pos, bar_size)
-	_draw_rounded_fill(rect, 4.0, Color(0.02, 0.03, 0.05, 0.78))
+	draw_rect(rect, Color("#0b1714"))
 	var fill_width: float = max(0.0, bar_size.x * ratio)
 	if fill_width > 2.0:
-		_draw_rounded_fill(Rect2(pos + Vector2(1.0, 1.0), Vector2(fill_width - 2.0, bar_size.y - 2.0)), 3.0, fill_color)
-		draw_line(pos + Vector2(5.0, 2.0), pos + Vector2(max(5.0, fill_width - 5.0), 2.0), Color(1.0, 1.0, 1.0, 0.16), 1.0)
-	draw_rect(rect.grow(-0.5), Color(0.0, 0.0, 0.0, 0.72), false, 1.0)
+		draw_rect(Rect2(pos + Vector2(1.0, 1.0), Vector2(fill_width - 2.0, bar_size.y - 2.0)), fill_color)
+	draw_rect(rect.grow(-0.5), Color("#b28b4b"), false, 1.0)
 	var font := get_theme_default_font()
-	draw_string(font, pos + Vector2(5.0, bar_size.y - 1.0), label, HORIZONTAL_ALIGNMENT_LEFT, -1.0, 10, Color(0.92, 0.98, 1.0, 0.86))
-
-func _draw_rounded_fill(rect: Rect2, radius: float, color: Color) -> void:
-	var resolved_radius: float = min(radius, min(rect.size.x, rect.size.y) * 0.5)
-	draw_rect(Rect2(rect.position + Vector2(resolved_radius, 0.0), Vector2(max(0.0, rect.size.x - resolved_radius * 2.0), rect.size.y)), color, true)
-	draw_rect(Rect2(rect.position + Vector2(0.0, resolved_radius), Vector2(rect.size.x, max(0.0, rect.size.y - resolved_radius * 2.0))), color, true)
-	draw_circle(rect.position + Vector2(resolved_radius, resolved_radius), resolved_radius, color)
-	draw_circle(rect.position + Vector2(rect.size.x - resolved_radius, resolved_radius), resolved_radius, color)
-	draw_circle(rect.position + Vector2(resolved_radius, rect.size.y - resolved_radius), resolved_radius, color)
-	draw_circle(rect.position + Vector2(rect.size.x - resolved_radius, rect.size.y - resolved_radius), resolved_radius, color)
+	draw_string(font, pos + Vector2(5.0, bar_size.y - 1.0), label, HORIZONTAL_ALIGNMENT_LEFT, -1.0, 10, Color("#eadfbe"))
 
 func _draw_text_center(rect: Rect2, text: String, font_size: int, color: Color) -> void:
 	var font := get_theme_default_font()

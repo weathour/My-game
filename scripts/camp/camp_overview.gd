@@ -27,15 +27,16 @@ func _ready() -> void:
 	top.offset_left = 20
 	top.offset_right = -20
 	top.offset_top = 16
-	top.add_theme_stylebox_override("panel", UI.panel_style(UI.COLOR_BG, UI.COLOR_BORDER, 1, 6, 14))
+	top.add_theme_stylebox_override("panel", UI.panel_style(UI.COLOR_BG, UI.COLOR_BORDER, 1, 0, 14))
 	add_child(top)
+	UI.apply_campaign_frame(top, "banner")
 	var row := HBoxContainer.new()
 	row.add_theme_constant_override("separation", 10)
 	top.add_child(row)
 	var title_column := VBoxContainer.new()
 	title_column.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	row.add_child(title_column)
-	title_column.add_child(_label("无尽营地", 23, UI.COLOR_TEXT_GOLD))
+	title_column.add_child(UI.make_section_label("无尽营地", 25))
 	status_label = _label("", 15)
 	title_column.add_child(status_label)
 	for data in [["携带物品", shop_requested], ["队伍整备", team_requested], ["出击", departure_requested], ["主菜单", menu_requested]]:
@@ -54,8 +55,9 @@ func _ready() -> void:
 	bottom.offset_right = -20
 	bottom.offset_top = -104
 	bottom.offset_bottom = -16
-	bottom.add_theme_stylebox_override("panel", UI.panel_style(UI.COLOR_BG, UI.COLOR_BORDER, 1, 6, 12))
+	bottom.add_theme_stylebox_override("panel", UI.panel_style(UI.COLOR_BG, UI.COLOR_BORDER, 1, 0, 12))
 	add_child(bottom)
+	UI.apply_campaign_frame(bottom, "banner")
 	var column := VBoxContainer.new()
 	column.add_theme_constant_override("separation", 5)
 	bottom.add_child(column)

@@ -1,17 +1,18 @@
 extends RefCounted
 
 const COLOR_BACKDROP := Color(0.0, 0.0, 0.0, 0.72)
-const COLOR_BG := Color(0.045, 0.052, 0.078, 0.98)
-const COLOR_BG_SOFT := Color(0.075, 0.088, 0.13, 0.96)
-const COLOR_BG_CARD := Color(0.11, 0.125, 0.18, 0.98)
-const COLOR_BG_CARD_ALT := Color(0.085, 0.1, 0.15, 0.98)
-const COLOR_BORDER := Color(0.36, 0.42, 0.58, 0.90)
-const COLOR_BORDER_GOLD := Color(1.0, 0.76, 0.24, 1.0)
-const COLOR_TEXT := Color(0.95, 0.97, 1.0, 1.0)
-const COLOR_TEXT_MUTED := Color(0.78, 0.83, 0.94, 0.94)
-const COLOR_TEXT_GOLD := Color(1.0, 0.88, 0.44, 1.0)
-const COLOR_TEXT_GOOD := Color(0.42, 1.0, 0.58, 1.0)
-const COLOR_DANGER := Color(0.84, 0.18, 0.18, 0.96)
+const COLOR_BG := Color("111a15fa")
+const COLOR_BG_SOFT := Color("1c2c24f5")
+const COLOR_BG_CARD := Color("24392efa")
+const COLOR_BG_CARD_ALT := Color("301c20fa")
+const COLOR_BORDER := Color("82704be6")
+const COLOR_BORDER_GOLD := Color("caa45b")
+const COLOR_TEXT := Color("f5ecd6")
+const COLOR_TEXT_MUTED := Color("c6bea8")
+const COLOR_TEXT_GOLD := Color("f2d699")
+const COLOR_TEXT_GOOD := Color("a6d29c")
+const COLOR_DANGER := Color("702d32f5")
+const CAMPAIGN_FRAME := preload("res://scripts/ui/theme/campaign_frame.gd")
 
 const MODAL_MIN_SIZE := Vector2(330.0, 240.0)
 const MODAL_DEFAULT_MAX_SIZE := Vector2(760.0, 500.0)
@@ -22,6 +23,40 @@ const BUTTON_HEIGHT_COMPACT := 40.0
 
 static var reading_font: SystemFont
 static var reading_bold_font: SystemFont
+static var heading_font: SystemFont
+
+static func get_heading_font() -> SystemFont:
+	if heading_font == null:
+		heading_font = SystemFont.new()
+		heading_font.font_names = PackedStringArray(["Noto Serif CJK SC", "Source Han Serif SC", "SimSun", "serif"])
+		heading_font.font_weight = 700
+	return heading_font
+
+static func apply_campaign_frame(control: Control, variant: String = "panel") -> void:
+	if control == null:
+		return
+	for child in control.get_children():
+		if child is CAMPAIGN_FRAME and not child.is_queued_for_deletion():
+			child.variant = variant
+			child.queue_redraw()
+			return
+	var frame := CAMPAIGN_FRAME.new()
+	frame.name = "CampaignFrame"
+	frame.variant = variant
+	control.add_child(frame)
+	# A Node2D decoration contributes neither input nor container minimum size.
+	if variant == "screen":
+		frame.z_index = 8
+	else:
+		control.move_child(frame, 0)
+
+static func apply_screen_frame(root: Control) -> void:
+	apply_campaign_frame(root, "screen")
+
+static func make_section_label(text_value: String, font_size: int = 26) -> Label:
+	var label := make_title_label(text_value, font_size)
+	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
+	return label
 
 static func get_reading_font() -> SystemFont:
 	if reading_font == null:
@@ -61,7 +96,7 @@ static func panel_style(
 	style.bg_color = bg_color
 	style.border_color = border_color
 	style.set_border_width_all(border_width)
-	style.set_corner_radius_all(corner_radius)
+	style.set_corner_radius_all(mini(corner_radius, 3))
 	if content_margin > 0.0:
 		style.set_content_margin(SIDE_LEFT, content_margin)
 		style.set_content_margin(SIDE_TOP, content_margin)
@@ -74,11 +109,11 @@ static func card_style(selected: bool = false, accented: bool = false, disabled:
 	var border := COLOR_BORDER
 	var border_width := 1
 	if accented:
-		bg = Color(0.07, 0.16, 0.10, 0.98)
-		border = Color(0.30, 0.95, 0.44, 0.92)
+		bg = Color("264333")
+		border = Color("9ebc7d")
 		border_width = 2
 	if selected:
-		bg = Color(0.30, 0.22, 0.08, 0.98)
+		bg = Color("51402a")
 		border = COLOR_BORDER_GOLD
 		border_width = 2
 	if disabled:
@@ -101,11 +136,11 @@ static func action_button_style(kind: String = "normal", selected: bool = false)
 	var bg := COLOR_BG_SOFT
 	var border := COLOR_BORDER
 	if kind == "primary" or selected:
-		bg = Color(0.22, 0.17, 0.07, 0.98)
+		bg = Color("634526")
 		border = COLOR_BORDER_GOLD
 	elif kind == "danger":
 		bg = COLOR_DANGER
-		border = Color(1.0, 0.78, 0.78, 0.98)
+		border = Color("d49c82")
 	return panel_style(bg, border, 2 if (kind == "primary" or selected) else 1, 10, 8.0)
 
 static func apply_button_style(button: Button, kind: String = "normal", selected: bool = false) -> void:
@@ -128,6 +163,7 @@ static func apply_button_style(button: Button, kind: String = "normal", selected
 	button.add_theme_color_override("font_hover_color", font_color.lightened(0.10))
 	button.add_theme_color_override("font_pressed_color", font_color.darkened(0.08))
 	button.add_theme_color_override("font_disabled_color", COLOR_TEXT_MUTED)
+	apply_campaign_frame(button, "button")
 
 static func apply_card_button_style(button: Button, selected: bool = false, accented: bool = false, disabled: bool = false) -> void:
 	if button == null:
@@ -154,7 +190,10 @@ static func make_title_label(text_value: String, font_size: int = 26) -> Label:
 	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	label.add_theme_font_size_override("font_size", font_size)
-	label.add_theme_color_override("font_color", COLOR_TEXT)
+	label.add_theme_font_override("font", get_heading_font())
+	label.add_theme_color_override("font_color", COLOR_TEXT_GOLD)
+	label.add_theme_color_override("font_shadow_color", Color("080b09"))
+	label.add_theme_constant_override("shadow_offset_y", 2)
 	return label
 
 static func make_hint_label(text_value: String, font_size: int = 14) -> Label:
@@ -179,4 +218,4 @@ static func apply_rich_label_font(label: RichTextLabel, font_size: int) -> void:
 	label.add_theme_font_size_override("normal_font_size", font_size)
 	label.add_theme_font_size_override("bold_font_size", font_size)
 	label.add_theme_color_override("default_color", COLOR_TEXT)
-	label.add_theme_stylebox_override("normal", panel_style(Color(0.02, 0.03, 0.05, 0.34), Color(0.22, 0.28, 0.40, 0.70), 1, 8, 8.0))
+	label.add_theme_stylebox_override("normal", panel_style(Color("101a1557"), Color("82704bb3"), 1, 3, 8.0))

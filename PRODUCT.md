@@ -2,7 +2,7 @@
 
 ## Register
 
-Product UI for a desktop three-role survivors-like game.
+Product UI for a desktop three-role survivors-like game, presented as a richly framed campaign archive.
 
 ## Users
 
@@ -25,13 +25,14 @@ The camp supports one preparation loop: inspect permanent gains and carried item
 
 ## Personality
 
-Tactical, weighty, readable, and restrained. The visual metaphor is a dark-gold build archive: dense enough for experienced players, but organized like a dependable tool rather than a decorative fantasy book.
+Tactical, weighty, readable, and atmospheric. Deep forest green and wine-red panels, warm ivory text, serif gold headings, and original gilded carved frames give the interface the feeling of a campaign archive. The home screen uses the original four-hero campaign illustration, with space for navigation on the left and the full swordsman, gunner, mage, and mechanic lineup on the right. Keep combat and record information easy to scan, and preserve character identity in the composition.
 
 ## Anti-references
 
 - Generic mobile-RPG clutter with badges, bars, currencies, and repeated lock icons.
-- Blue SaaS dashboards that ignore the game's combat identity.
-- Fantasy parchment overload, realistic book textures, and ornate metal framing.
+- Flat blue SaaS dashboards that ignore the game's campaign mood.
+- Reusing official Rance 10 artwork, typography assets, interface captures, story, or gameplay rules; the reference is visual direction only.
+- Ornament that obscures labels, controls, scene art, or combat information.
 - Tiny card grids or raw debug-text lists that force players to decode the build.
 
 ## Accessibility

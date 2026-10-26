@@ -5,6 +5,7 @@ const SAVE_MANAGER := preload("res://scripts/save_manager.gd")
 const STORY_DATA := preload("res://scripts/story_data.gd")
 const SURVIVORS_THEME := preload("res://scripts/ui/theme/survivors_ui_theme.gd")
 const SURVIVORS_SLOT_CARD := preload("res://scripts/ui/components/survivors_slot_card_factory.gd")
+const STORY_VISUALS := preload("res://scripts/ui/story/story_visuals.gd")
 const SAVE_FEEDBACK := preload("res://scripts/ui/save/save_feedback.gd")
 
 func _ready() -> void:
@@ -21,8 +22,11 @@ func _build_ui() -> void:
 
 	var background := ColorRect.new()
 	background.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	background.color = Color(0.05, 0.07, 0.12, 1.0)
+	background.color = Color("#101a13")
 	add_child(background)
+	var scenery := STORY_VISUALS.add_backdrop(self)
+	scenery.modulate = Color(0.48, 0.44, 0.30, 1.0)
+	SURVIVORS_THEME.apply_screen_frame(self)
 
 	var root_margin := MarginContainer.new()
 	root_margin.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
@@ -44,10 +48,9 @@ func _build_ui() -> void:
 	title_column.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	header.add_child(title_column)
 
-	var title := Label.new()
-	title.text = "选择主线存档"
+	var title := SURVIVORS_THEME.make_section_label("选择主线存档", 32)
 	title.add_theme_font_size_override("font_size", 32)
-	title.add_theme_color_override("font_color", SURVIVORS_THEME.COLOR_TEXT)
+	title.add_theme_color_override("font_color", SURVIVORS_THEME.COLOR_TEXT_GOLD)
 	title_column.add_child(title)
 
 	var subtitle := Label.new()
@@ -113,6 +116,7 @@ func _build_slot_card(slot_payload: Dictionary) -> Control:
 	)
 	card.set_anchors_preset(Control.PRESET_FULL_RECT)
 	root.add_child(card)
+	SURVIVORS_THEME.apply_campaign_frame(card, "card")
 
 	if has_profile or health != "missing":
 		var delete_button := Button.new()

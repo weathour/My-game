@@ -59,7 +59,7 @@ func _button(parent: Node, text: String, callback: Callable, primary: bool = fal
 	return button
 
 func _label(parent: Node, text: String, title: bool = false) -> Label:
-	var label := Label.new()
+	var label := STYLE.make_section_label(text, 25) if title else Label.new()
 	label.text = text
 	label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -83,6 +83,7 @@ func _rebuild_ui() -> void:
 	background.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	background.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	page_root.add_child(background)
+	STYLE.apply_screen_frame(page_root)
 	var margin := MarginContainer.new()
 	margin.name = "PageMargin"
 	margin.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
@@ -93,9 +94,13 @@ func _rebuild_ui() -> void:
 	layout.name = "PageLayout"
 	layout.add_theme_constant_override("separation", 18)
 	margin.add_child(layout)
+	var masthead := PanelContainer.new()
+	masthead.add_theme_stylebox_override("panel", STYLE.panel_style(VISUALS.PANEL, VISUALS.LINE, 1, 0, 12))
+	layout.add_child(masthead)
+	STYLE.apply_campaign_frame(masthead, "banner")
 	var header := HBoxContainer.new()
 	header.add_theme_constant_override("separation", 8)
-	layout.add_child(header)
+	masthead.add_child(header)
 	var heading := VBoxContainer.new()
 	heading.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	header.add_child(heading)
@@ -112,7 +117,7 @@ func _rebuild_ui() -> void:
 		return
 	var columns := HBoxContainer.new()
 	columns.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	columns.add_theme_constant_override("separation", 28)
+	columns.add_theme_constant_override("separation", 16)
 	layout.add_child(columns)
 	var field := VBoxContainer.new()
 	field.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -121,13 +126,19 @@ func _rebuild_ui() -> void:
 	columns.add_child(field)
 	_build_field(field)
 	_build_route(field)
+	var briefing := PanelContainer.new()
+	briefing.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	briefing.size_flags_stretch_ratio = 1.0
+	briefing.add_theme_stylebox_override("panel", STYLE.panel_style(VISUALS.PANEL, VISUALS.LINE, 1, 0, 16))
+	columns.add_child(briefing)
+	STYLE.apply_campaign_frame(briefing, "panel")
 	var scroll := ScrollContainer.new()
 	scroll.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	scroll.size_flags_stretch_ratio = 1.0
 	scroll.custom_minimum_size.x = 300
 	scroll.follow_focus = true
 	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
-	columns.add_child(scroll)
+	briefing.add_child(scroll)
 	var side := VBoxContainer.new()
 	side.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	side.add_theme_constant_override("separation", 12)
@@ -182,12 +193,13 @@ func _build_field(parent: VBoxContainer) -> void:
 	scene.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	scene.clip_contents = true
 	parent.add_child(scene)
-	VISUALS.add_backdrop(scene)
+	var scenery := VISUALS.add_backdrop(scene)
+	STYLE.apply_campaign_frame(scenery, "card")
 	var shade := TextureRect.new()
 	shade.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	shade.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	var gradient := Gradient.new()
-	gradient.colors = PackedColorArray([Color(0.04, 0.07, 0.10, 0.12), Color(0.04, 0.07, 0.10, 0.05), Color(0.04, 0.07, 0.10, 0.94)])
+	gradient.colors = PackedColorArray([Color(0.04, 0.08, 0.04, 0.08), Color(0.04, 0.08, 0.04, 0.02), Color(0.04, 0.08, 0.04, 0.94)])
 	gradient.offsets = PackedFloat32Array([0.0, 0.50, 1.0])
 	var texture := GradientTexture2D.new()
 	texture.gradient = gradient
@@ -264,7 +276,7 @@ func _build_route(parent: VBoxContainer) -> void:
 		button.disabled = not cleared or not profile.story.active_attempt.is_empty() or recovery_needed
 		button.tooltip_text = "练习不推进主线，也不会重复发放永久剧情材料。" if cleared else "从右侧当前线索继续主线。"
 		if state not in ["locked", "completed"]:
-			button.add_theme_stylebox_override("disabled", STYLE.panel_style(VISUALS.PANEL, VISUALS.GOLD, 1, 3, 12))
+			button.add_theme_stylebox_override("disabled", STYLE.panel_style(Color("#55231b"), VISUALS.GOLD, 2, 0, 12))
 			button.add_theme_color_override("font_disabled_color", VISUALS.GOLD)
 
 func _build_objective(parent: VBoxContainer) -> void:

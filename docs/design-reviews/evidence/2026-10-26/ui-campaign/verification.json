@@ -1,0 +1,127 @@
+{
+  "date": "2026-10-26",
+  "baseline_commit": "6617940ab710ece571e17961ee93245670a8d8eb",
+  "implementation": "uncommitted working tree",
+  "godot": "4.6.2.stable.official.71f334935",
+  "platform": "Linux X11, OpenGL Compatibility",
+  "smokes": [
+    {
+      "name": "music_room_smoke",
+      "exit_code": 0,
+      "errors": [],
+      "passed": true
+    },
+    {
+      "name": "music_context_smoke",
+      "exit_code": 0,
+      "errors": [],
+      "passed": true
+    },
+    {
+      "name": "character_panel_ui_smoke",
+      "exit_code": 0,
+      "errors": [],
+      "passed": true
+    },
+    {
+      "name": "story_ui_smoke",
+      "exit_code": 0,
+      "errors": [],
+      "passed": true
+    },
+    {
+      "name": "story_reading_smoke",
+      "exit_code": 0,
+      "errors": [],
+      "passed": true
+    },
+    {
+      "name": "endless_camp_smoke",
+      "exit_code": 0,
+      "errors": [],
+      "passed": true
+    },
+    {
+      "name": "hud_widget_lifecycle_smoke",
+      "exit_code": 0,
+      "errors": [],
+      "passed": true
+    },
+    {
+      "name": "skill_info_ui_smoke",
+      "exit_code": 0,
+      "errors": [],
+      "passed": true
+    },
+    {
+      "name": "level_up_scroll_reopen_smoke",
+      "exit_code": 0,
+      "errors": [],
+      "passed": true
+    },
+    {
+      "name": "combat_wave_flow_smoke",
+      "exit_code": 0,
+      "errors": [],
+      "passed": true
+    },
+    {
+      "name": "menu_ui_smoke",
+      "exit_code": 0,
+      "errors": [],
+      "passed": true
+    }
+  ],
+  "headless_load": "passed",
+  "standalone_export_pack": "resource loading, all 14 previews and package contents passed",
+  "graphify": "update rejected: installed extractor omits 143 runtime GDScript files; prior graph retained as STALE",
+  "visual_review": {
+    "main_menu": [
+      "960x540",
+      "1280x720",
+      "1920x1080"
+    ],
+    "music_room": [
+      "960x540",
+      "1280x720",
+      "1920x1080"
+    ],
+    "combat_hud": [
+      "960x540",
+      "1280x720",
+      "1920x1080"
+    ],
+    "boss_hud": [
+      "960x540"
+    ]
+  },
+  "not_checked": [
+    "Human listening and audio quality",
+    "Complete playthrough",
+    "Windows rendering"
+  ],
+  "assets_sha256": {
+    "assets/ui/campaign/gilded_frame.png": "4d9aff4c406af32f8b41588dcaeb30320e14979cf86ea2e5d2410da39610e0ae",
+    "assets/ui/campaign/four_heroes_menu.png": "54e1319b1e18dc30eac8bfb1f813f62a8b66ce4303f46f76141b0338f31716eb"
+  },
+  "static_checks": [
+    {
+      "name": "check_project_config",
+      "exit_code": 0,
+      "passed": true,
+      "output": "PROJECT_CONFIG_CHECK_OK"
+    },
+    {
+      "name": "check_architecture_contract",
+      "exit_code": 0,
+      "passed": true,
+      "output": "ARCHITECTURE_CONTRACT_CHECK_OK"
+    },
+    {
+      "name": "check_docs_links",
+      "exit_code": 0,
+      "passed": true,
+      "output": "DOC_LINK_CHECK_OK"
+    }
+  ]
+}

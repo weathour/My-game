@@ -31,6 +31,28 @@ func _run() -> void:
 	var menu := MENU.instantiate()
 	root.add_child(menu)
 	current_scene = menu
+	await _settle()
+	await _capture("main-menu")
+	var continued: bool = menu.continue_button.visible
+	menu.continue_button.show()
+	for menu_size in [Vector2i(960, 540), Vector2i(1280, 720), Vector2i(1920, 1080)]:
+		root.size = menu_size
+		root.content_scale_size = menu_size
+		await _settle()
+		_expect(menu.navigation.get_global_rect().end.y <= menu.utility_bar.get_global_rect().position.y, "Continue entry must not push navigation into utilities at %s" % menu_size)
+		_expect(Rect2(Vector2.ZERO, Vector2(menu_size)).encloses(menu.utility_bar.get_global_rect()), "Menu utilities must remain inside the viewport at %s" % menu_size)
+		await _capture("main-menu-%dx%d-continue" % [menu_size.x, menu_size.y])
+	root.size = Vector2i(1280, 720)
+	root.content_scale_size = Vector2i(1280, 720)
+	menu.continue_button.visible = continued
+	menu.music_button.grab_focus()
+	menu.music_button.pressed.emit()
+	await _settle()
+	_expect(menu.music_room.visible and not menu.menu_content.visible, "Music entry must open an independent listening screen")
+	_expect(menu.music_room._track_buttons.size() == 14, "Music room must expose every current track")
+	await _capture("music-room")
+	await _key(KEY_ESCAPE)
+	_expect(not menu.music_room.visible and menu.menu_content.visible and menu.music_button.has_focus(), "Music room Escape must return to its menu entry")
 	var panel = menu.settings_panel
 	var opener := Button.new()
 	menu.add_child(opener)

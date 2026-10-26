@@ -4,7 +4,7 @@ Godot 4 2D survivor-like prototype focused on three-character switching combat.
 
 ## Current Status
 
-A desktop prototype with endless combat, camp preparation, save/continue, a character sheet, settings, achievements, and developer tools. Combat uses three selected characters from the swordsman, gunner, mage, and mechanic roster. Story and challenge entry points are currently disabled.
+A desktop prototype with a playable three-stage story, endless combat, camp preparation, save/continue, a character sheet, settings, achievements, and developer tools. Combat uses three selected characters from the swordsman, gunner, mage, and mechanic roster. The home screen features the four-hero illustration and a music room with all 14 original tracks. Challenge mode remains disabled.
 
 The maintained implementation status and priorities live in [docs/08_当前实现状态与后续重点.md](docs/08_当前实现状态与后续重点.md). Read that entry before treating older design reviews as current requirements.
 

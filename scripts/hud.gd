@@ -72,14 +72,15 @@ func _ready() -> void:
 	var root := Control.new()
 	root.set_anchors_preset(Control.PRESET_FULL_RECT)
 	add_child(root)
+	SURVIVORS_THEME.apply_screen_frame(root)
 
 	time_label = Label.new()
 	time_label.anchor_left = 0.0
 	time_label.anchor_right = 1.0
 	time_label.offset_left = 0.0
 	time_label.offset_right = 0.0
-	time_label.offset_top = 12.0
-	time_label.offset_bottom = 52.0
+	time_label.offset_top = 34.0
+	time_label.offset_bottom = 74.0
 	time_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	time_label.add_theme_font_size_override("font_size", 24)
 	time_label.text = "时间 00:00"
@@ -90,8 +91,8 @@ func _ready() -> void:
 	boss_panel.anchor_right = 1.0
 	boss_panel.offset_left = 120.0
 	boss_panel.offset_right = -120.0
-	boss_panel.offset_top = 10.0
-	boss_panel.offset_bottom = 82.0
+	boss_panel.offset_top = 34.0
+	boss_panel.offset_bottom = 106.0
 	boss_panel.visible = false
 	root.add_child(boss_panel)
 
@@ -178,6 +179,7 @@ func _ready() -> void:
 	_build_endless_speed_toggle(root)
 	_build_attack_mode_hint(root)
 	_build_minimap(root)
+	get_viewport().size_changed.connect(_layout_minimap_for_viewport)
 	_build_small_boss_panel(root)
 	if DEVELOPER_MODE.is_enabled():
 		_build_developer_panel(root)
@@ -189,8 +191,8 @@ func _build_small_boss_panel(root: Control) -> void:
 	small_boss_panel.anchor_right = 1.0
 	small_boss_panel.offset_left = 120.0
 	small_boss_panel.offset_right = -120.0
-	small_boss_panel.offset_top = 10.0
-	small_boss_panel.offset_bottom = 82.0
+	small_boss_panel.offset_top = 34.0
+	small_boss_panel.offset_bottom = 106.0
 	small_boss_panel.visible = false
 	root.add_child(small_boss_panel)
 
@@ -232,11 +234,12 @@ func _build_small_boss_panel(root: Control) -> void:
 func _layout_boss_panels() -> void:
 	var has_small_boss := small_boss_panel != null and small_boss_panel.visible
 	if small_boss_panel != null:
-		small_boss_panel.offset_top = 10.0
-		small_boss_panel.offset_bottom = 82.0
+		small_boss_panel.offset_top = 34.0
+		small_boss_panel.offset_bottom = 106.0
 	if boss_panel != null:
-		boss_panel.offset_top = 128.0 if has_small_boss else 10.0
-		boss_panel.offset_bottom = 200.0 if has_small_boss else 82.0
+		boss_panel.offset_top = 152.0 if has_small_boss else 34.0
+		boss_panel.offset_bottom = 224.0 if has_small_boss else 106.0
+	_layout_minimap_for_viewport()
 
 
 func show_small_boss_ui(boss_name: String, current_health: float, max_health: float) -> void:
@@ -295,7 +298,8 @@ func _build_team_panel(root: Control) -> void:
 	team_panel.offset_right = -18.0
 	team_panel.offset_bottom = 210.0
 
-	team_panel.add_theme_stylebox_override("panel", SURVIVORS_THEME.panel_style(Color(0.08, 0.1, 0.14, 0.82), SURVIVORS_THEME.COLOR_BORDER_GOLD, 2, 10, 12.0))
+	team_panel.add_theme_stylebox_override("panel", SURVIVORS_THEME.panel_style(SURVIVORS_THEME.COLOR_BG_SOFT, SURVIVORS_THEME.COLOR_BORDER, 1, 0, 12))
+	SURVIVORS_THEME.apply_campaign_frame(team_panel, "card")
 	root.add_child(team_panel)
 
 	var content := VBoxContainer.new()
@@ -335,6 +339,7 @@ func _build_skill_cooldown_panel(root: Control) -> void:
 	combat_skill_bar.skill_mode_toggle_requested.connect(func(skill_id: String): skill_mode_toggle_requested.emit(skill_id))
 	combat_skill_bar.skill_slot_swap_requested.connect(func(role_id: String, from_slot: int, to_slot: int): skill_slot_swap_requested.emit(role_id, from_slot, to_slot))
 	combat_skill_bar.skill_point_requested.connect(func(skill_id: String, role_id: String): skill_point_requested.emit(skill_id, role_id))
+	SURVIVORS_THEME.apply_campaign_frame(combat_skill_bar, "panel")
 	root.add_child(combat_skill_bar)
 
 
@@ -347,10 +352,7 @@ func _build_ruan_stone_status(root: Control) -> void:
 	ruan_stone_status_panel.offset_top = 18.0
 	ruan_stone_status_panel.offset_right = 258.0
 	ruan_stone_status_panel.offset_bottom = 78.0
-	ruan_stone_status_panel.add_theme_stylebox_override(
-		"panel",
-		SURVIVORS_THEME.panel_style(Color(0.055, 0.04, 0.018, 0.88), SURVIVORS_THEME.COLOR_BORDER_GOLD, 1, 9, 8.0)
-	)
+	ruan_stone_status_panel.add_theme_stylebox_override("panel", SURVIVORS_THEME.panel_style(Color("101a15e0"), SURVIVORS_THEME.COLOR_BORDER_GOLD, 1, 0, 8.0))
 	root.add_child(ruan_stone_status_panel)
 
 	ruan_stone_status_label = Label.new()
@@ -409,17 +411,17 @@ func _build_attack_mode_hint(root: Control) -> void:
 	attack_mode_hint_panel.anchor_top = 0.5
 	attack_mode_hint_panel.anchor_right = 1.0
 	attack_mode_hint_panel.anchor_bottom = 0.5
-	attack_mode_hint_panel.offset_left = -292.0
+	attack_mode_hint_panel.offset_left = -356.0
 	attack_mode_hint_panel.offset_top = -28.0
 	attack_mode_hint_panel.offset_right = -16.0
 	attack_mode_hint_panel.offset_bottom = 36.0
 
-	attack_mode_hint_panel.add_theme_stylebox_override("panel", SURVIVORS_THEME.panel_style(Color(0.03, 0.05, 0.07, 0.72), Color(0.75, 0.88, 1.0, 0.58), 1, 10, 8.0))
+	attack_mode_hint_panel.add_theme_stylebox_override("panel", SURVIVORS_THEME.panel_style(Color("101a15e0"), SURVIVORS_THEME.COLOR_BORDER_GOLD, 1, 0, 8.0))
 	attack_mode_hint_panel.modulate.a = 1.0
 	root.add_child(attack_mode_hint_panel)
 
 	attack_mode_hint_label = Label.new()
-	attack_mode_hint_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	attack_mode_hint_label.autowrap_mode = TextServer.AUTOWRAP_ARBITRARY
 	attack_mode_hint_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	attack_mode_hint_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	attack_mode_hint_label.add_theme_font_size_override("font_size", 15)
@@ -433,18 +435,36 @@ func _build_minimap(root: Control) -> void:
 	minimap_panel.anchor_top = 1.0
 	minimap_panel.anchor_right = 1.0
 	minimap_panel.anchor_bottom = 1.0
-	minimap_panel.offset_left = -236.0
-	minimap_panel.offset_top = -172.0
-	minimap_panel.offset_right = -18.0
-	minimap_panel.offset_bottom = -18.0
-
-	minimap_panel.add_theme_stylebox_override("panel", SURVIVORS_THEME.panel_style(Color(0.02, 0.04, 0.07, 0.72), Color(0.42, 0.78, 1.0, 0.76), 1, 10, 8.0))
+	minimap_panel.add_theme_stylebox_override("panel", SURVIVORS_THEME.panel_style(Color("101a15e0"), SURVIVORS_THEME.COLOR_BORDER_GOLD, 1, 0, 8.0))
 	root.add_child(minimap_panel)
 
 	minimap_view = Control.new()
 	minimap_view.custom_minimum_size = Vector2(200.0, 138.0)
 	minimap_view.draw.connect(_draw_minimap)
 	minimap_panel.add_child(minimap_view)
+	_layout_minimap_for_viewport()
+
+func _layout_minimap_for_viewport() -> void:
+	if minimap_panel == null:
+		return
+	var narrow := get_viewport().get_visible_rect().size.x < 1280.0
+	for boss_view in [boss_panel, small_boss_panel]:
+		if boss_view != null:
+			boss_view.offset_right = -264.0 if narrow else -120.0
+	minimap_panel.anchor_left = 1.0
+	minimap_panel.anchor_right = 1.0
+	minimap_panel.offset_left = -236.0
+	minimap_panel.offset_right = -18.0
+	if narrow:
+		minimap_panel.anchor_top = 0.0
+		minimap_panel.anchor_bottom = 0.0
+		minimap_panel.offset_top = 82.0
+		minimap_panel.offset_bottom = 236.0
+	else:
+		minimap_panel.anchor_top = 1.0
+		minimap_panel.anchor_bottom = 1.0
+		minimap_panel.offset_top = -172.0
+		minimap_panel.offset_bottom = -18.0
 
 func configure_minimap(bounds: Rect2) -> void:
 	minimap_bounds = bounds

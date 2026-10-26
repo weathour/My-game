@@ -11,6 +11,7 @@ signal skill_slot_swap_requested(role_id: String, from_slot: int, to_slot: int)
 signal skill_point_requested(skill_id: String, role_id: String)
 
 const GAME_SETTINGS := preload("res://scripts/game_settings.gd")
+const SURVIVORS_THEME := preload("res://scripts/ui/theme/survivors_ui_theme.gd")
 const SURVIVORS_HOVER_DETAIL := preload("res://scripts/ui/components/survivors_hover_detail.gd")
 const SKILL_CD_SLOT_COUNT := TeamRoleStatusRow.SKILL_CD_SLOT_COUNT
 const SKILL_CD_SLOT_SIZE := 52.0
@@ -39,7 +40,7 @@ const SKILL_CD_SLOT_SEPARATION := 9
 const TEAM_STACK_BASIC_ATTACK_GAP := 16.0
 const SKILL_SLOT_KEY_LABEL_FONT_SIZE := 12
 const SKILL_SLOT_MANUAL_COLOR := Color(1.0, 0.86, 0.42, 1.0)
-const SKILL_SLOT_AUTO_COLOR := Color(0.78, 0.86, 0.96, 0.92)
+const SKILL_SLOT_AUTO_COLOR := Color("#eee2c1")
 const SKILL_SLOT_DRAG_THRESHOLD := 6.0
 const SKILL_SLOT_SWAP_ANIMATION_DURATION := 0.26
 const SKILL_SLOT_DRAG_GHOST_FONT_SIZE := 16
@@ -97,6 +98,7 @@ func _ready() -> void:
 
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_RESIZED and hud_layout == GAME_SETTINGS.HUD_LAYOUT_TEAM_BAND:
+		_apply_hud_layout_anchor()
 		_apply_team_stack_layout()
 	elif what == NOTIFICATION_VISIBILITY_CHANGED and not is_visible_in_tree():
 		_cancel_skill_slot_drag()
@@ -157,17 +159,17 @@ func _apply_hud_layout_anchor() -> void:
 		anchor_left = 0.0
 		anchor_right = 1.0
 		offset_left = 18.0
-		offset_top = -172.0
-		offset_right = -252.0
-		offset_bottom = -18.0
+		offset_top = -190.0
+		offset_right = -18.0
+		offset_bottom = -36.0
 		return
 	anchor_left = 0.5
 	anchor_right = 0.5
 	var total_width := SWITCH_WIDGET_WIDTH + SWITCH_WIDGET_GAP + SKILL_PANEL_WIDTH + ULTIMATE_WIDGET_GAP + ULTIMATE_WIDGET_SIZE
 	offset_left = -total_width * 0.5
-	offset_top = -128.0
+	offset_top = -146.0
 	offset_right = total_width * 0.5
-	offset_bottom = -10.0
+	offset_bottom = -28.0
 
 func update_experience(current_experience: int, required_experience: int) -> void:
 	if experience_bar != null:
@@ -201,13 +203,13 @@ func _create_slot_upgrade_button(slot_icon: Control) -> Button:
 	button.z_index = 5
 	button.add_theme_font_size_override("font_size", 22)
 	for state in ["font_color", "font_hover_color", "font_pressed_color", "font_focus_color"]:
-		button.add_theme_color_override(state, Color(1.0, 0.88, 0.05, 1.0))
+		button.add_theme_color_override(state, Color("#edcf72"))
 	for state in ["normal", "hover", "pressed", "focus"]:
 		var style := StyleBoxFlat.new()
-		style.bg_color = Color(0.24, 0.16, 0.01, 1.0) if state == "hover" else Color(0.09, 0.07, 0.01, 1.0)
-		style.border_color = Color(1.0, 0.83, 0.08, 1.0)
+		style.bg_color = Color("#49371a") if state == "hover" else Color("#241d13")
+		style.border_color = Color("#d2ad55")
 		style.set_border_width_all(2)
-		style.set_corner_radius_all(3)
+		style.set_corner_radius_all(0)
 		button.add_theme_stylebox_override(state, style)
 	button.tooltip_text = "消耗 1 个技能点"
 	button.visible = false
@@ -472,6 +474,7 @@ func update_buff_slots(buff_data_list: Array) -> void:
 		slot_nodes["description"] = "%s\n%s" % [str(buff_data.get("description", "")), time_label % [remaining, duration]]
 
 func _build_widgets() -> void:
+	SURVIVORS_THEME.apply_campaign_frame(self, "panel")
 	if hud_layout == GAME_SETTINGS.HUD_LAYOUT_TEAM_BAND:
 		_build_team_band_widgets()
 		return
@@ -482,6 +485,7 @@ func _build_legacy_widgets() -> void:
 	switch_cd_widget.position = Vector2(0.0, 0.0)
 	switch_cd_widget.custom_minimum_size = Vector2(SWITCH_WIDGET_WIDTH, SWITCH_WIDGET_HEIGHT)
 	switch_cd_widget.size = Vector2(SWITCH_WIDGET_WIDTH, SWITCH_WIDGET_HEIGHT)
+	SURVIVORS_THEME.apply_campaign_frame(switch_cd_widget, "card")
 	add_child(switch_cd_widget)
 
 	var left_arrow_box := Control.new()
@@ -552,6 +556,7 @@ func _build_legacy_widgets() -> void:
 	skill_cd_panel.position = Vector2(SWITCH_WIDGET_WIDTH + SWITCH_WIDGET_GAP, 10.0)
 	skill_cd_panel.alignment = BoxContainer.ALIGNMENT_CENTER
 	skill_cd_panel.add_theme_constant_override("separation", SKILL_CD_SLOT_SEPARATION)
+	SURVIVORS_THEME.apply_campaign_frame(skill_cd_panel, "panel")
 	add_child(skill_cd_panel)
 
 	buff_status_bar = HBoxContainer.new()
@@ -839,6 +844,9 @@ func _apply_team_stack_layout() -> void:
 		return
 	var stack_width: float = _get_team_stack_width()
 	team_stack_widget.position = Vector2.ZERO
+	var viewport_width := get_viewport_rect().size.x
+	var stack_scale := clampf((viewport_width - 36.0) / TEAM_STACK_WIDTH, 0.72, 1.0)
+	team_stack_widget.scale = Vector2.ONE * stack_scale
 	team_stack_widget.size = Vector2(stack_width, TEAM_STACK_HEIGHT)
 	team_stack_widget.custom_minimum_size = Vector2(stack_width, TEAM_STACK_HEIGHT)
 	for row_index in range(team_role_rows.size()):
@@ -867,8 +875,6 @@ func _apply_team_stack_layout() -> void:
 		experience_label.size = Vector2(stack_width - 36.0, 18.0)
 
 func _get_team_stack_width() -> float:
-	if size.x > 1.0:
-		return max(TEAM_STACK_MIN_WIDTH, size.x)
 	return TEAM_STACK_WIDTH
 
 func update_team_role_statuses(statuses: Array, active_role_id: String, active_role_index: int = 0) -> void:
@@ -1142,12 +1148,7 @@ func _create_skill_slot_drag_ghost() -> void:
 	ghost.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	ghost.z_index = 200
 	ghost.modulate = Color(1.0, 1.0, 1.0, 0.94)
-	var style := StyleBoxFlat.new()
-	style.bg_color = Color(0.08, 0.1, 0.14, 0.94)
-	style.border_color = Color(1.0, 0.86, 0.42, 0.95)
-	style.set_border_width_all(2)
-	style.set_corner_radius_all(4)
-	ghost.add_theme_stylebox_override("panel", style)
+	SURVIVORS_THEME.apply_campaign_frame(ghost, "card")
 	var label := Label.new()
 	label.text = str(skill_slot_drag_state.get("ghost_text", ""))
 	label.add_theme_font_size_override("font_size", SKILL_SLOT_DRAG_GHOST_FONT_SIZE)

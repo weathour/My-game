@@ -27,6 +27,7 @@ func _ready() -> void:
 	status.add_theme_font_override("font", UI.get_reading_font())
 	status.add_theme_font_size_override("font_size", 18)
 	status.add_theme_color_override("font_color", UI.COLOR_TEXT_GOLD)
+	UI.apply_campaign_frame(status, "banner")
 	column.add_child(status)
 	shop_button = _button("靠近阮狗 · 领取急救")
 	shop_button.pressed.connect(func() -> void:
@@ -38,7 +39,7 @@ func _ready() -> void:
 	skip_button.pressed.connect(flow.skip_preparation)
 	column.add_child(skip_button)
 	shop = PanelContainer.new()
-	shop.add_theme_stylebox_override("panel", UI.panel_style())
+	UI.apply_campaign_frame(shop, "panel")
 	shop.custom_minimum_size = Vector2(350, 0)
 	shop.set_anchors_and_offsets_preset(Control.PRESET_TOP_RIGHT)
 	shop.position = Vector2(-375, 300)
@@ -46,10 +47,7 @@ func _ready() -> void:
 	var contents := VBoxContainer.new()
 	contents.add_theme_constant_override("separation", 12)
 	shop.add_child(contents)
-	var title := Label.new()
-	title.text = "阮狗 · 整备补给"
-	title.add_theme_font_override("font", UI.get_reading_font())
-	title.add_theme_color_override("font_color", UI.COLOR_TEXT_GOLD)
+	var title := UI.make_section_label("阮狗 · 整备补给", 18)
 	contents.add_child(title)
 	card = _button("急救\n恢复所有人物已经损失血量的50％\n免费领取 · 每次整备限一张")
 	card.custom_minimum_size = Vector2(350, 125)
@@ -66,7 +64,7 @@ func _button(text: String) -> Button:
 	button.custom_minimum_size.y = 40
 	button.add_theme_font_override("font", UI.get_reading_font())
 	button.add_theme_font_size_override("font_size", 16)
-	button.add_theme_stylebox_override("normal", UI.panel_style(UI.COLOR_BG, UI.COLOR_BORDER_GOLD, 1, 5, 12))
+	button.add_theme_stylebox_override("normal", UI.action_button_style())
 	return button
 
 func refresh() -> void:
