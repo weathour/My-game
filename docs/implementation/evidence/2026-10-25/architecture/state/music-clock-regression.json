@@ -1,0 +1,46 @@
+{
+  "failure": "camp advances across real scene rebuild and unmutes at the saved volume",
+  "cause": "The 0.4-second wall-clock timer fired before the entry fade had accumulated its 0.35 seconds of _process delta. Playback, nonzero scene handoff, the saved volume and unmute state were correct.",
+  "baseline_observations": [
+    {
+      "environment": "fresh isolated data",
+      "playing": true,
+      "position": 4.37597894668579,
+      "gain": 0.99091579278587,
+      "fade_elapsed": 0.31994366666667,
+      "fade_duration": 0.35,
+      "time_scale": 1.0,
+      "saved_volume": 0.25,
+      "muted": false
+    },
+    {
+      "environment": "copy of /tmp/my-game-check.FGA3G8",
+      "playing": true,
+      "position": 4.37597894668579,
+      "gain": 0.98936522997511,
+      "fade_elapsed": 0.31747533333333,
+      "fade_duration": 0.35,
+      "time_scale": 1.0,
+      "saved_volume": 0.25,
+      "muted": false
+    }
+  ],
+  "change": "Only music_context_smoke.gd changed: wait each process frame until the observed fade completes, fail after a 2-second deadline, then check unchanged player/request identity, increasing nonzero playback position and the same strict 0.25 actual linear volume.",
+  "runtime_or_audio_asset_changes": false,
+  "checks": [
+    {
+      "environment": "fresh isolated data",
+      "result": "MUSIC_CONTEXT_SMOKE_OK",
+      "log": "music-gate-fresh.log"
+    },
+    {
+      "environment": "gate data copied to a separate /tmp directory",
+      "result": "MUSIC_CONTEXT_SMOKE_OK",
+      "log": "music-gate-clone.log"
+    },
+    {
+      "result": "git diff --check passed"
+    }
+  ],
+  "not_repeated": "No unrelated smoke, import, whole-project gate, Graphify update or pressure benchmark; main agent resumes the combined gate."
+}

@@ -193,7 +193,7 @@ static func get_save_data(player) -> Dictionary:
 		"roles": player._serialize_roles_for_save()
 	}
 
-static func apply_save_data(player, data: Dictionary) -> void:
+static func apply_save_data(player, data: Dictionary) -> bool:
 	var position_data = data.get("position", [0.0, 0.0])
 	if position_data.size() >= 2:
 		player.global_position = Vector2(float(position_data[0]), float(position_data[1]))
@@ -358,6 +358,7 @@ static func apply_save_data(player, data: Dictionary) -> void:
 	player.stats_changed.emit(player.get_stat_summary())
 	player.health_changed.emit(player.current_health, player.max_health)
 	player._emit_active_mana_changed()
+	return true
 
 
 static func _normalize_owned_magic_stones(value: Variant) -> Array:

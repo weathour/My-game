@@ -77,7 +77,7 @@ static func _setup_pause_menu(main: Node) -> void:
 	_connect_if_present(main.pause_menu, "main_menu_requested", Callable(main, "_on_main_menu_requested"))
 	_connect_if_present(main.pause_menu, "end_run_requested", Callable(main, "_on_endless_return_to_camp_requested"))
 	if main.pause_menu.has_method("set_endless_mode_enabled"):
-		main.pause_menu.set_endless_mode_enabled(main.endless_mode_active)
+		main.pause_menu.set_endless_mode_enabled(main.endless_mode_active or main.story_mode_active)
 	if main.hud != null and main.hud.has_method("set_hud_layout"):
 		_connect_if_present(main.pause_menu, "hud_layout_changed", Callable(main.hud, "set_hud_layout"))
 

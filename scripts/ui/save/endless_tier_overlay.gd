@@ -62,7 +62,7 @@ func _build_overlay() -> void:
 	modal = SURVIVORS_MODAL.new()
 	modal.configure(Vector2(760.0, 520.0), 0.64, 0.76, Vector2(460.0, 380.0))
 	modal.set_title("选择无尽 N 层")
-	modal.set_hint("每层 12:00 最终 Boss 到场；击败后结算并返回营地。")
+	modal.set_hint("每层 20 波；第 6 / 11 / 16 波为小 Boss，第 20 波击败最终 Boss 后结算返营。")
 	add_child(modal)
 
 	var body := VBoxContainer.new()

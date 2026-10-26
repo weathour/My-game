@@ -57,7 +57,7 @@ static func _handle_endless_boss_defeated(main: Node) -> void:
 	if main.spawn_timer != null:
 		main.spawn_timer.stop()
 	GAME_HUD_FLOW.hide_boss_ui(main)
-	var settlement := SAVE_MANAGER.complete_current_endless_tier(main.endless_tier, main.endless_run_id)
+	var settlement := SAVE_MANAGER.complete_current_endless_tier(main.endless_tier, main.endless_run_id, preload("res://scripts/game/run_outcome.gd").capture(main, "victory"))
 	if not settlement.is_empty():
 		GAME_ACHIEVEMENT_BRIDGE.record_endless_tier_cleared(main, int(settlement.get("highest_cleared_tier", 0)))
 	REWARD_FLOW.show_endless_boss_reward(main, settlement)

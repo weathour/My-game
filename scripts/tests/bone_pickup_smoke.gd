@@ -140,5 +140,6 @@ class BoneOwner:
 
 	var bones := 0
 
-	func collect_ruan_bones(amount: int) -> void:
+	func collect_ruan_bones(amount: int, _pickup_id: String = "") -> int:
 		bones += amount
+		return bones

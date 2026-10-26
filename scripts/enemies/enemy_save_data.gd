@@ -6,8 +6,11 @@ const ENEMY_PROFILE_RESTORE := preload("res://scripts/enemies/enemy_profile_rest
 const RUNNER_HASTE := preload("res://scripts/enemies/enemy_runner_haste.gd")
 
 static func get_save_data(enemy) -> Dictionary:
+	var flyby: Dictionary = enemy.get_meta("wave_flyby", {}).duplicate(true)
+	if flyby.has("closest") and not is_finite(float(flyby.closest)):
+		flyby.closest = 1.0e30
 	return {
-		"wave_flyby": enemy.get_meta("wave_flyby", {}),
+		"wave_flyby": flyby,
 		"combat_wave_boss": enemy.get_meta("combat_wave_boss", 0),
 		"position": [enemy.global_position.x, enemy.global_position.y],
 		"enemy_kind": enemy.enemy_kind,
@@ -180,7 +183,7 @@ static func get_save_data(enemy) -> Dictionary:
 		"glutton_absorb_elapsed": enemy.glutton_absorb_elapsed
 	}
 
-static func apply_save_data(enemy, data: Dictionary, target_node: Node2D) -> void:
+static func apply_save_data(enemy, data: Dictionary, target_node: Node2D) -> bool:
 	if not (data.get("wave_flyby", {}) as Dictionary).is_empty():
 		enemy.set_meta("wave_flyby", data["wave_flyby"])
 	if int(data.get("combat_wave_boss", 0)) > 0:
@@ -398,3 +401,4 @@ static func apply_save_data(enemy, data: Dictionary, target_node: Node2D) -> voi
 			enemy._ensure_boss_peacock_markers(7)
 		if enemy.archetype_id == "boss_spellcore":
 			ENEMY_BOSS_STATE.ROUTINE.restore(enemy, data.get("boss_routine", {}))
+	return true

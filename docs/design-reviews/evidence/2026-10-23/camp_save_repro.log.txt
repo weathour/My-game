@@ -1,0 +1,22 @@
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+ISOLATED_USER_PATH=/tmp/my-game-review-20261023/camp-save-data/godot/app_userdata/survivor_like/
+SaveManager JSON parse failed: user://endless_slots/slot_7/endless_profile.json line 0: Expected '}'
+SaveManager JSON parse failed: user://endless_slots/slot_7/endless_profile.json line 0: Expected '}'
+CASE1_LISTED={"has_profile":false,"has_run":false,"profile":{},"run_tier":0,"slot_id":7}
+CASE1_ARCHIVES_BEFORE_RECREATE=[{"data":{"player":{"level":12.0},"run_id":"profile-corruption-run","run_tier":3.0,"survival_time":321.0},"file":"legacy_run_1792759325_96331.json"}]
+SaveManager JSON parse failed: user://endless_slots/slot_7/endless_profile.json line 0: Expected '}'
+CASE1_RECREATED={"bones":0,"created_unix":1792759325.74601,"equipped_ruan_stone":"","highest_cleared_tier":0,"last_clear_summary":{},"last_rewarded_run_id":"","last_updated_unix":1792759325.74601,"mode":"endless","ruan_stone_levels":{},"ruan_stone_purchased":[],"selected_tier":1,"slot_id":7}
+CASE1_DISK_PROFILE={"bones":0.0,"created_unix":1792759325.74601,"equipped_ruan_stone":"","highest_cleared_tier":0.0,"last_clear_summary":{},"last_rewarded_run_id":"","last_updated_unix":1792759325.74612,"mode":"endless","ruan_stone_levels":{},"ruan_stone_purchased":[],"selected_tier":1.0,"slot_id":7.0,"team_order":["swordsman","gunner","mage"]}
+CASE1_FILES=["endless_profile.json", "legacy_run_1792759325_96331.json"]
+CASE2_BACKUP_BEFORE={"player":{"level":15.0},"run_id":"valid-backup-run","run_tier":1.0,"survival_time":456.0}
+CASE2_LOADED={}
+CASE2_PRIMARY_EXISTS=true
+CASE2_BACKUP_EXISTS=true
+CASE2_ARCHIVES=[]
+CASE2_FILES=["endless_profile.json", "run_save.json", "run_save_backup.json"]
+CASE2_NONEMPTY_LOADED={}
+CASE2_NONEMPTY_BACKUP_EXISTS=false
+CASE2_NONEMPTY_ARCHIVES=[{"data":{"survival_time":7.0},"file":"legacy_run_1792759325_97866.json"}]
+CASE2_NONEMPTY_FILES=["endless_profile.json", "legacy_run_1792759325_97866.json"]
+CAMP_SAVE_REPRO_OK

@@ -1,0 +1,19 @@
+extends SceneTree
+const STORY := preload("res://scripts/story_data.gd")
+const DEFAULTS := preload("res://scripts/save/save_profile_defaults.gd")
+func _init() -> void:
+    var profile := STORY.build_default_story_profile(1)
+    profile["story"] = {"quest_states": {"q.c1.outpost": "active"}, "quest_items": {"item.outpost_log": 1}, "dialogue_checkpoint": {"conversation_id": "dlg.c1.outpost", "node_id": "accept"}}
+    var normalized := DEFAULTS.ensure_story_profile_defaults(profile, 1)
+    if normalized.has("story"):
+        push_error("Expected current normalizer to drop undeclared story state; re-inspect baseline")
+        quit(1)
+        return
+    if STORY.is_story_mode_enabled():
+        push_error("Baseline mode gate changed; re-inspect baseline")
+        quit(1)
+        return
+    print("CURRENT_STORY_GATE_DISABLED=true")
+    print("CURRENT_NORMALIZER_DROPS_NEW_STORY_STATE=true")
+    print("STORY_SCHEMA_PROBE_OK")
+    quit(0)

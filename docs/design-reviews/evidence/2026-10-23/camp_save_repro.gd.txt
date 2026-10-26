@@ -1,0 +1,80 @@
+extends SceneTree
+const SM = preload("res://scripts/save_manager.gd")
+const FS = preload("res://scripts/save/save_file_store.gd")
+
+func _init() -> void:
+    var user_path = ProjectSettings.globalize_path("user://")
+    print("ISOLATED_USER_PATH=", user_path)
+    assert(user_path.begins_with("/tmp/my-game-review-20261023/camp-save-data/"))
+    test_corrupt_profile()
+    test_semantic_primary()
+    print("CAMP_SAVE_REPRO_OK")
+    quit(0)
+
+func archive_payloads(slot: int) -> Array:
+    var result: Array = []
+    var dir = DirAccess.open(FS.endless_slot_dir(slot))
+    if dir != null:
+        for name in dir.get_files():
+            if name.begins_with("legacy_run_"):
+                result.append({"file": name, "data": FS.read_json(FS.endless_slot_dir(slot) + "/" + name)})
+    return result
+
+func write_raw(path: String, content: String) -> void:
+    var file = FileAccess.open(path, FileAccess.WRITE)
+    assert(file != null)
+    file.store_string(content)
+    file.close()
+
+func test_corrupt_profile() -> void:
+    var slot = 7
+    var profile = SM.create_or_load_endless_profile(slot)
+    profile["bones"] = 123
+    profile["highest_cleared_tier"] = 5
+    profile["selected_tier"] = 3
+    profile["ruan_stone_purchased"] = ["thunder"]
+    assert(SM.save_endless_profile(profile, slot) > 0)
+    var run = {"run_id": "profile-corruption-run", "run_tier": 3, "player": {"level": 12}, "survival_time": 321.0}
+    assert(SM.save_run(run, slot, SM.MODE_ENDLESS) > 0)
+    write_raw(FS.endless_profile_path(slot), "{\"bones\":123,")
+    var slots = SM.list_endless_slots()
+    var listed = slots[slot - 1]
+    print("CASE1_LISTED=", JSON.stringify(listed))
+    assert(not listed["has_profile"])
+    assert(not listed["has_run"])
+    print("CASE1_ARCHIVES_BEFORE_RECREATE=", JSON.stringify(archive_payloads(slot)))
+    var recreated = SM.create_or_load_endless_profile(slot)
+    SM.clear_save(slot, SM.MODE_ENDLESS)
+    print("CASE1_RECREATED=", JSON.stringify(recreated))
+    print("CASE1_DISK_PROFILE=", JSON.stringify(FS.read_json(FS.endless_profile_path(slot))))
+    print("CASE1_FILES=", DirAccess.open(FS.endless_slot_dir(slot)).get_files())
+    assert(recreated["bones"] == 0)
+    assert(recreated["highest_cleared_tier"] == 0)
+    assert(recreated["ruan_stone_purchased"].is_empty())
+    assert(not FileAccess.file_exists(FS.endless_run_backup_path(slot)))
+
+func test_semantic_primary() -> void:
+    var slot = 8
+    var profile = SM.create_or_load_endless_profile(slot)
+    profile["selected_tier"] = 1
+    assert(SM.save_endless_profile(profile, slot) > 0)
+    var run = {"run_id": "valid-backup-run", "run_tier": 1, "player": {"level": 15}, "survival_time": 456.0}
+    assert(SM.save_run(run, slot, SM.MODE_ENDLESS) > 0)
+    write_raw(FS.endless_run_path(slot), "{}")
+    print("CASE2_BACKUP_BEFORE=", JSON.stringify(FS.read_json(FS.endless_run_backup_path(slot))))
+    var loaded = SM.load_run(slot, SM.MODE_ENDLESS)
+    print("CASE2_LOADED=", JSON.stringify(loaded))
+    print("CASE2_PRIMARY_EXISTS=", FileAccess.file_exists(FS.endless_run_path(slot)))
+    print("CASE2_BACKUP_EXISTS=", FileAccess.file_exists(FS.endless_run_backup_path(slot)))
+    print("CASE2_ARCHIVES=", JSON.stringify(archive_payloads(slot)))
+    print("CASE2_FILES=", DirAccess.open(FS.endless_slot_dir(slot)).get_files())
+    assert(loaded.is_empty())
+    # An empty dictionary cannot be archived, so repeat with a nonempty malformed primary.
+    if FileAccess.file_exists(FS.endless_run_backup_path(slot)):
+        write_raw(FS.endless_run_path(slot), "{\"survival_time\":7}")
+        loaded = SM.load_run(slot, SM.MODE_ENDLESS)
+        print("CASE2_NONEMPTY_LOADED=", JSON.stringify(loaded))
+        print("CASE2_NONEMPTY_BACKUP_EXISTS=", FileAccess.file_exists(FS.endless_run_backup_path(slot)))
+        print("CASE2_NONEMPTY_ARCHIVES=", JSON.stringify(archive_payloads(slot)))
+        print("CASE2_NONEMPTY_FILES=", DirAccess.open(FS.endless_slot_dir(slot)).get_files())
+        assert(not FileAccess.file_exists(FS.endless_run_backup_path(slot)))

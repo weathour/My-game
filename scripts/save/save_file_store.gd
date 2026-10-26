@@ -1,5 +1,6 @@
 extends RefCounted
 
+
 const STORY_SAVE_ROOT := "user://story_slots"
 const ENDLESS_SAVE_ROOT := "user://endless_slots"
 const META_PATH := "user://save_meta.json"
@@ -32,19 +33,23 @@ static func endless_run_path(slot_id: int) -> String:
 static func endless_run_backup_path(slot_id: int) -> String:
 	return endless_slot_dir(slot_id) + "/run_save_backup.json"
 
-static func archive_legacy_endless_run(slot_id: int, data: Dictionary) -> bool:
-	if data.is_empty():
-		return false
-	var archive_path: String = "%s/legacy_run_%d_%d.json" % [
-		endless_slot_dir(slot_id),
-		int(Time.get_unix_time_from_system()),
-		Time.get_ticks_usec()
-	]
-	if write_json(archive_path, data) <= 0:
-		return false
-	remove_if_exists(endless_run_path(slot_id))
-	remove_if_exists(endless_run_backup_path(slot_id))
-	return true
+static func profile_backup_path(path: String) -> String:
+	return path.get_basename() + "_backup.json"
+
+static func preserve_file(path: String) -> bool:
+	if not FileAccess.file_exists(path):
+		return true
+	var copy_path := "%s.recovery_%d_%d" % [path, int(Time.get_unix_time_from_system()), Time.get_ticks_usec()]
+	return DirAccess.copy_absolute(ProjectSettings.globalize_path(path), ProjectSettings.globalize_path(copy_path)) == OK
+
+static func write_profile(path: String, data: Dictionary, previous_valid: Dictionary) -> int:
+	var backup := profile_backup_path(path)
+	if not previous_valid.is_empty() and write_json(backup, previous_valid) <= 0:
+		return 0
+	var written := write_json(path, data)
+	if written > 0 and not FileAccess.file_exists(backup):
+		write_json(backup, data)
+	return written
 
 static func read_json(path: String) -> Variant:
 	if not FileAccess.file_exists(path):
@@ -64,10 +69,11 @@ static func write_json(path: String, data: Dictionary) -> int:
 	return _write_serialized_json(path, JSON.stringify(data))
 
 static func write_json_pair(path: String, backup_path: String, data: Dictionary) -> int:
-	# Serialize the identical snapshot once; both files retain atomic replacement.
+	# JSON object order is not state; both files receive this one snapshot.
 	var serialized := JSON.stringify(data)
 	var primary_chars := _write_serialized_json(path, serialized)
-	_write_serialized_json(backup_path, serialized)
+	if primary_chars > 0:
+		_write_serialized_json(backup_path, serialized)
 	return primary_chars
 
 static func _write_serialized_json(path: String, serialized: String) -> int:
@@ -101,6 +107,9 @@ static func load_meta() -> Dictionary:
 static func save_meta(meta: Dictionary) -> void:
 	write_json(META_PATH, meta)
 
-static func remove_if_exists(path: String) -> void:
+static func remove_if_exists(path: String) -> bool:
+	if DirAccess.dir_exists_absolute(ProjectSettings.globalize_path(path)):
+		return false
 	if FileAccess.file_exists(path):
-		DirAccess.remove_absolute(ProjectSettings.globalize_path(path))
+		return DirAccess.remove_absolute(ProjectSettings.globalize_path(path)) == OK
+	return true

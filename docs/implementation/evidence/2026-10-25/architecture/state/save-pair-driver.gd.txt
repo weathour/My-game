@@ -1,0 +1,36 @@
+extends SceneTree
+const STORE := preload("res://scripts/save/save_file_store.gd")
+const VALIDATOR := preload("res://scripts/save/run_payload_validator.gd")
+func _init():
+	call_deferred("run")
+func run():
+	assert(ProjectSettings.globalize_path("user://").begins_with("/tmp/"))
+	var payload: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(OS.get_cmdline_user_args()[0]))
+	var projectile: Dictionary = payload.enemy_projectiles[0]
+	payload.enemy_projectiles = []
+	for _i in range(2000):
+		payload.enemy_projectiles.append(projectile)
+	assert(VALIDATOR.error(payload).is_empty())
+	var times := []
+	var sorted_times := []
+	for _i in range(5):
+		var started := Time.get_ticks_usec()
+		assert(write_sorted_reference("user://perf_pair.json", "user://perf_pair_backup.json", payload) > 0)
+		sorted_times.append(float(Time.get_ticks_usec() - started) / 1000.0)
+		started = Time.get_ticks_usec()
+		assert(STORE.write_json_pair("user://perf_pair.json", "user://perf_pair_backup.json", payload) > 0)
+		times.append(float(Time.get_ticks_usec() - started) / 1000.0)
+	var primary := FileAccess.get_file_as_string("user://perf_pair.json")
+	var backup := FileAccess.get_file_as_string("user://perf_pair_backup.json")
+	assert(primary == backup)
+	assert(JSON.parse_string(primary) == JSON.parse_string(JSON.stringify(payload)))
+	assert(not FileAccess.file_exists("user://perf_pair.json.tmp") and not FileAccess.file_exists("user://perf_pair_backup.json.tmp"))
+	print("SAVE_PAIR_PROFILE ",JSON.stringify({"sorted_reference_pair_ms":sorted_times,"write_pair_ms": times,"identical_primary_backup":true,"parsed_snapshot_equal":true,"temporary_files_removed":true,"bytes":primary.to_utf8_buffer().size()}))
+	quit()
+
+func write_sorted_reference(path: String, backup_path: String, payload: Dictionary) -> int:
+	var serialized := JSON.stringify(payload)
+	var written := STORE._write_serialized_json(path, serialized)
+	if written > 0:
+		STORE._write_serialized_json(backup_path, serialized)
+	return written

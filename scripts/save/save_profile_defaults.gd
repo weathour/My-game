@@ -3,24 +3,15 @@ extends RefCounted
 const STORY_DATA := preload("res://scripts/story_data.gd")
 const RUAN_STONE_SYSTEM := preload("res://scripts/player/ruan_stone_system.gd")
 const ROLE_DATABASE := preload("res://scripts/player/roles/role_database.gd")
+const STORY_STATE := preload("res://scripts/story/story_state.gd")
 
 const MODE_STORY := "story"
 const MODE_ENDLESS := "endless"
 const DEFAULT_ROLE_IDS := ["swordsman", "gunner", "mage", "mechanic"]
-const STORY_PROFILE_COPY_KEYS := [
-	"chapter_index",
-	"current_stage_index",
-	"boss_core_fragments",
-	"unlocked_role_ids",
-	"team_order",
-	"created_unix"
-]
 
 static func ensure_story_profile_defaults(profile: Dictionary, slot_id: int) -> Dictionary:
 	var normalized := STORY_DATA.build_default_story_profile(slot_id)
-	for key in STORY_PROFILE_COPY_KEYS:
-		if profile.has(key):
-			normalized[key] = profile[key]
+	normalized.merge(profile.duplicate(true), true)
 	if not normalized.has("team_order") or not (normalized["team_order"] is Array):
 		normalized["team_order"] = ROLE_DATABASE.DEFAULT_TEAM_IDS.duplicate()
 	if not normalized.has("unlocked_role_ids") or not (normalized["unlocked_role_ids"] is Array):
@@ -29,7 +20,33 @@ static func ensure_story_profile_defaults(profile: Dictionary, slot_id: int) -> 
 	normalized["slot_id"] = slot_id
 	normalized["mode"] = MODE_STORY
 	normalized["last_updated_unix"] = Time.get_unix_time_from_system()
-	return normalized
+	return STORY_STATE.migrate(normalized)
+
+static func profile_error(profile: Variant, slot_id: int, mode: String) -> String:
+	if not profile is Dictionary or profile.is_empty():
+		return "invalid_state"
+	if profile.has("mode") and profile.mode != mode:
+		return "invalid_state"
+	if profile.has("slot_id") and (not STORY_STATE.whole_number(profile.slot_id, 1) or int(profile.slot_id) != slot_id):
+		return "invalid_state"
+	if mode == MODE_STORY:
+		if not STORY_STATE.whole_number(profile.get("boss_core_fragments", 0)):
+			return "invalid_state"
+		return STORY_STATE.error(profile)
+	if not profile.has("bones") or not STORY_STATE.whole_number(profile.bones):
+		return "invalid_state"
+	if profile.has("bone_pickup_receipts"):
+		var receipts: Variant = profile.bone_pickup_receipts
+		if not receipts is Dictionary or not receipts.get("run_id") is String or not receipts.get("ids") is Array:
+			return "invalid_state"
+		for id in receipts.ids:
+			if not id is String or id == "":
+				return "invalid_state"
+	if not STORY_STATE.whole_number(profile.get("highest_cleared_tier", 0)) or not STORY_STATE.whole_number(profile.get("selected_tier", 1), 1):
+		return "invalid_state"
+	if int(profile.get("selected_tier", 1)) > int(profile.get("highest_cleared_tier", 0)) + 1:
+		return "invalid_state"
+	return ""
 
 static func build_default_endless_profile(slot_id: int) -> Dictionary:
 	return RUAN_STONE_SYSTEM.normalize_profile({

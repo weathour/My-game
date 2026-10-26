@@ -220,6 +220,7 @@ func _run() -> void:
 	host.add_child(host.pause_menu)
 	host.pause_menu.hide()
 	host.level_up_ui.show()
+	preload("res://scripts/game/session_state.gd").set_pause_reason(host, "reward", true)
 	var flow := preload("res://scripts/game/game_character_panel_flow.gd")
 	panel.close_requested.connect(func(): flow.hide_character_panel(host))
 	flow.show_character_panel(host)
@@ -229,7 +230,7 @@ func _run() -> void:
 	panel._input(escape)
 	_expect(paused and not panel.visible, "Esc close over a reward offer must keep the game paused")
 	host.level_up_ui.hide()
-	paused = false
+	preload("res://scripts/game/session_state.gd").set_pause_reason(host, "reward", false)
 	flow.show_character_panel(host)
 	_expect(paused and panel.visible, "Opening from combat must pause")
 	flow.hide_character_panel(host)

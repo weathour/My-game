@@ -8,6 +8,7 @@ const PLAYER_AUTHORED_EFFECTS := preload("res://scripts/player/player_authored_e
 
 static func ready(main: Node) -> void:
 	main.GAME_SESSION_FLOW.reset_game_speed(main)
+	main.get_tree().auto_accept_quit = false
 	main.rng.randomize()
 	main.player = find_player(main)
 
@@ -24,13 +25,20 @@ static func ready(main: Node) -> void:
 	main._connect_player_signals()
 	main.COMBAT_WAVE_FLOW.setup(main)
 
-	var should_continue: bool = bool(main.SAVE_MANAGER.consume_continue_request()) and bool(main.SAVE_MANAGER.has_save())
-	if should_continue and main._load_saved_run():
+	var should_continue: bool = bool(main.SAVE_MANAGER.consume_continue_request())
+	var restored: bool = should_continue and main._load_saved_run()
+	if main.has_meta("run_restore_failed"):
+		main.loaded_from_save = false
+		main._show_pause_menu_after_continue()
+		main.GAME_SESSION_FLOW._save_error(main)
+	elif restored:
 		main.loaded_from_save = true
 		main._show_pause_menu_after_continue()
 	else:
 		main.loaded_from_save = false
 		main._start_game_bgm()
+		if main.story_mode_active:
+			main._save_run_state()
 
 	if main._is_developer_mode():
 		main._activate_developer_mode()
@@ -38,15 +46,23 @@ static func ready(main: Node) -> void:
 
 static func handle_notification(main: Node, what: int) -> void:
 	if what == main.NOTIFICATION_WM_CLOSE_REQUEST:
-		if not main.game_over:
-			main._save_run_state()
-			main.exit_snapshot_saved = true
-	elif what == main.NOTIFICATION_APPLICATION_FOCUS_OUT:
-		if not main.game_over:
-			main._save_run_state()
+		if main.has_meta("run_restore_failed"):
+			main.suppress_exit_save = true
+			main.get_tree().quit()
+			return
+		main._save_run_state()
+		if not bool(main.get_meta("last_run_save_ok", true)):
+			main.GAME_SESSION_FLOW._save_error(main)
+			return
+		main.exit_snapshot_saved = true
+		if main.get_tree().current_scene == main:
+			main.get_tree().quit()
+	elif what == main.NOTIFICATION_APPLICATION_FOCUS_OUT and not main.game_over:
+		main._save_run_state()
 
 
 static func exit_tree(main: Node) -> void:
+	main.get_tree().auto_accept_quit = true
 	PERFORMANCE_TRACE_LOGGER.stop("scene_exit")
 	main.GAME_SESSION_FLOW.reset_game_speed(main)
 	if not main.game_over and not main.suppress_exit_save and not main.exit_snapshot_saved:

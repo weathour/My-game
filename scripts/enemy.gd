@@ -5,6 +5,7 @@ var storm_armor_shred_timers: Array = []
 @warning_ignore("unused_signal")
 signal defeated(enemy_kind: String)
 
+
 const ENEMY_BOSS_STATE := preload("res://scripts/enemies/enemy_boss_state.gd")
 const ENEMY_BOSS_VISUALS := preload("res://scripts/enemies/enemy_boss_visuals.gd")
 const ENEMY_DAMAGE := preload("res://scripts/enemies/enemy_damage.gd")
@@ -638,8 +639,12 @@ func get_glutton_passive_player_touch_shape() -> Dictionary:
 func get_save_data() -> Dictionary:
 	return ENEMY_SAVE_DATA.get_save_data(self)
 
-func apply_save_data(data: Dictionary, target_node: Node2D) -> void:
-	ENEMY_SAVE_DATA.apply_save_data(self, data, target_node)
+func apply_save_data(data: Dictionary, target_node: Node2D) -> bool:
+	if preload("res://scripts/save/run_payload_validator.gd").error({"player": {}, "enemies": [data]}) != "":
+		return false
+	if ENEMY_SAVE_DATA.apply_save_data(self, data, target_node) != true:
+		return false
+	return true
 
 func _play_hit_feedback(damage_amount: float, killed: bool, is_critical: bool = false) -> void:
 	ENEMY_HIT_FEEDBACK.play_hit_feedback(self, damage_amount, killed, is_critical)

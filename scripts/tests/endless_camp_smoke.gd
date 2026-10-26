@@ -12,13 +12,6 @@ var failures: Array[String] = []
 var originals: Dictionary = {}
 var capture_dir := ""
 
-class SessionHost:
-	extends Node2D
-	var endless_mode_active := true
-	var game_over := false
-	var endless_speed_enabled := false
-	var suppress_exit_save := false
-	var hud: Node
 
 func _init() -> void:
 	for arg in OS.get_cmdline_user_args():
@@ -188,12 +181,12 @@ func _check_layouts(camp: Node) -> void:
 
 func _check_return(camp: Node) -> void:
 	var before := SAVE.get_current_endless_profile()
-	var host := SessionHost.new()
+	var host := preload("res://scenes/main.tscn").instantiate()
 	root.add_child(host)
 	current_scene = host
 	camp.queue_free()
 	await process_frame
-	SAVE.save_run({"run_id": "camp-return-run", "run_tier": 1}, SLOT, SAVE.MODE_ENDLESS)
+	host._save_run_state()
 	SESSION.return_to_endless_camp(host)
 	await _settle()
 	var after := SAVE.get_current_endless_profile()

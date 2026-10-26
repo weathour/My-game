@@ -1,0 +1,10 @@
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+CASE1_BEFORE_CLOSE reward=small_boss_reward paused=true pending_boss=false
+CASE1_DISK phase=preparation pending_boss=false pending_wave_blessing=true
+CASE1_AFTER_CONTINUE reward=wave_blessing menu=options
+CASE1_AFTER_BLESSING reward= paused=false phase=preparation
+CASE2_AFTER_SAVE_FAILURE reward=endless_tier_clear game_over=true menu=N1 已通关
+CASE2_DISK phase=complete pending_wave_blessing=false
+CASE2_AFTER_CONTINUE reward= paused=false phase=complete game_over=false
+RUN_FLOW_REPRO_OK

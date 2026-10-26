@@ -1,0 +1,61 @@
+extends SceneTree
+
+const VALIDATOR := preload("res://scripts/save/run_payload_validator.gd")
+
+func _init() -> void:
+	call_deferred("_run")
+
+func _run() -> void:
+	var payload: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(OS.get_cmdline_user_args()[0]))
+	var source_projectile_count: int = payload.enemy_projectiles.size()
+	var projectile: Dictionary = payload.enemy_projectiles[0]
+	payload.enemy_projectiles = []
+	for index in range(2000):
+		payload.enemy_projectiles.append(projectile)
+	var result := {"fixture":"real diagnostic snapshot, repeat one original projectile to 2000 entries; unchanged enemy/player data", "source_projectile_count":source_projectile_count,"payload_bytes":JSON.stringify(payload).length(),"enemies":payload.enemies.size(),"enemy_projectiles":payload.enemy_projectiles.size(),"finite_ms":[],"validation_ms":[],"finite_skip_scalar_ms":[],"serialize_sorted_ms":[],"serialize_unsorted_ms":[]}
+	for repeat in range(5):
+		var started := Time.get_ticks_usec()
+		assert(VALIDATOR._finite(payload, "run").is_empty())
+		result.finite_ms.append(float(Time.get_ticks_usec() - started) / 1000.0)
+		started = Time.get_ticks_usec()
+		assert(VALIDATOR.error(payload).is_empty())
+		result.validation_ms.append(float(Time.get_ticks_usec() - started) / 1000.0)
+		started = Time.get_ticks_usec()
+		assert(_finite_skip_scalar(payload, "run").is_empty())
+		result.finite_skip_scalar_ms.append(float(Time.get_ticks_usec() - started) / 1000.0)
+		started = Time.get_ticks_usec()
+		JSON.stringify(payload)
+		result.serialize_sorted_ms.append(float(Time.get_ticks_usec() - started) / 1000.0)
+		started = Time.get_ticks_usec()
+		JSON.stringify(payload, "", false)
+		result.serialize_unsorted_ms.append(float(Time.get_ticks_usec() - started) / 1000.0)
+	for invalid in [{"nested":[{"bad":INF}]},{"nested":[{"bad":NAN}]}]:
+		assert(_finite_skip_scalar(invalid, "run") == VALIDATOR._finite(invalid, "run"))
+	assert(JSON.parse_string(JSON.stringify(payload)) == JSON.parse_string(JSON.stringify(payload, "", false)))
+	var encoded := JSON.stringify(payload).to_utf8_buffer()
+	var digest := HashingContext.new()
+	digest.start(HashingContext.HASH_SHA256)
+	digest.update(encoded)
+	result["payload_utf8_bytes"] = encoded.size()
+	result["payload_sha256"] = digest.finish().hex_encode()
+	result["diagnostic_paths"] = []
+	for invalid in [INF, NAN, {"nested": [0, {"bad": INF}]}, {"nested": [{"deep": [1, NAN]}]}, [[], {"空键": {"": INF}}], {"ordinary": [null, true, false, 0, 1.5, "text"]}]:
+		result.diagnostic_paths.append(VALIDATOR._finite(invalid, "run"))
+	print("SAVE_FINITE_PROFILE ", JSON.stringify(result))
+	quit(0)
+
+# Candidate valid-path scan only. Invalid snapshots still need existing full
+# diagnostic path generation; no validator field/shape rule is skipped.
+func _finite_skip_scalar(value: Variant, path: String) -> String:
+	if value is float and not is_finite(value):
+		return path + ": expected finite number"
+	if value is Dictionary or value is Array:
+		for key in (value.keys() if value is Dictionary else range(value.size())):
+			var child: Variant = value[key]
+			if not (child is Dictionary or child is Array or (child is float and not is_finite(child))):
+				continue
+			var child_path: String = VALIDATOR._field(path, str(key)) if value is Dictionary else "%s[%d]" % [path, key]
+			var problem := _finite_skip_scalar(child, child_path)
+			if not problem.is_empty():
+				return problem
+	return ""

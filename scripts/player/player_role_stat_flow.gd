@@ -569,7 +569,8 @@ static func initialize_existing_role_shares(owner) -> void:
 		var role_level: int = int(upgrade_data.get("level", 0))
 		var special_total: int = 0
 		for value in special_data.values():
-			special_total += int(value)
+			if value is int or value is float:
+				special_total += int(value)
 		if role_level <= 0 and special_total <= 0:
 			continue
 		apply_role_share(owner, role_id, role_level * 0.04, role_level * 6.0 + special_total * 2.0, role_level * 0.1 + special_total * 0.05)

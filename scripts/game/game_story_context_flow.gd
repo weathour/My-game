@@ -14,9 +14,12 @@ const ROLE_DATABASE := preload("res://scripts/player/roles/role_database.gd")
 
 static func load_story_stage_context(main: Node) -> void:
 	var developer_mode := DEVELOPER_MODE.is_enabled()
+	main.set_meta("save_context", {"mode": SAVE_MANAGER.get_active_mode(), "slot": SAVE_MANAGER.get_active_endless_slot_id() if SAVE_MANAGER.is_endless_mode_active() else SAVE_MANAGER.get_active_slot_id()})
 	main.endless_mode_active = not developer_mode and SAVE_MANAGER.is_endless_mode_active()
 	main.story_stage = {} if main.endless_mode_active else SAVE_MANAGER.get_current_story_stage()
 	main.story_mode_active = not developer_mode and not main.endless_mode_active and not main.story_stage.is_empty()
+	if main.story_mode_active:
+		main.set_meta("story_attempt", SAVE_MANAGER.load_story_profile().story.active_attempt.duplicate(true))
 	if developer_mode:
 		main.endless_tier = DEVELOPER_MODE.get_test_endless_tier()
 		main.endless_run_id = ""
@@ -35,7 +38,7 @@ static func apply_story_loadout(main: Node) -> void:
 	if main.player.has_method("configure_story_loadout"):
 		if main.story_mode_active:
 			var profile := SAVE_MANAGER.load_story_profile()
-			main.player.configure_story_loadout(profile.get("team_order", ROLE_DATABASE.DEFAULT_TEAM_IDS))
+			main.player.configure_story_loadout(profile.story.active_attempt.get("team_order", profile.get("team_order", ROLE_DATABASE.DEFAULT_TEAM_IDS)))
 		elif main.endless_mode_active:
 			var endless_profile := SAVE_MANAGER.get_current_endless_profile()
 			main.player.configure_story_loadout(endless_profile.get("team_order", ROLE_DATABASE.DEFAULT_TEAM_IDS))

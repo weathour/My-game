@@ -308,16 +308,21 @@ static func collect_nearby_gems(owner) -> void:
 		if bone_distance_squared <= attract_radius_squared and bone_pickup.has_method("set_attraction_target"):
 			bone_pickup.set_attraction_target(owner)
 		if bone_distance_squared <= absorb_radius_squared and bone_pickup.has_method("collect"):
-			_collect_bones(owner, int(bone_pickup.collect()))
+			if Time.get_ticks_msec() < int(owner.get_meta("bone_save_retry_msec", 0)):
+				continue
+			if _collect_bones(owner, int(bone_pickup.value), str(bone_pickup.pickup_id)):
+				bone_pickup.collect()
+			else:
+				owner.set_meta("bone_save_retry_msec", Time.get_ticks_msec() + 1000)
 
 
-static func _collect_bones(owner, amount: int) -> void:
+static func _collect_bones(owner, amount: int, pickup_id: String = "") -> bool:
 	if amount <= 0:
-		return
+		return false
 	if owner == null or not owner.has_method("collect_ruan_bones"):
 		push_error("Player survival flow requires collect_ruan_bones().")
-		return
-	owner.collect_ruan_bones(amount)
+		return false
+	return int(owner.collect_ruan_bones(amount, pickup_id)) >= 0
 
 static func _get_runtime_pickups(owner, group_name: String) -> Array:
 	if owner != null and owner.get_tree() != null:

@@ -316,7 +316,25 @@ func _open_tier_overlay() -> void:
 		return
 	var run := SAVE_MANAGER.load_run(-1, SAVE_MANAGER.MODE_ENDLESS)
 	if run.is_empty() and SAVE_MANAGER.has_unarchived_legacy_endless_run():
-		message_label.text = "旧战局归档失败，请释放存储空间后重试。"
+		var dialog := ConfirmationDialog.new()
+		dialog.title = "当前战局无法恢复"
+		dialog.dialog_text = "战局主档与备份均不可用。可保留原件退出，或保存诊断副本并放弃本层构筑。永久骨头、携带物与N进度保留。"
+		dialog.ok_button_text = "放弃本层并重新选层"
+		dialog.cancel_button_text = "保留并返回"
+		add_child(dialog)
+		dialog.confirmed.connect(func():
+			if SAVE_MANAGER.clear_save(-1, SAVE_MANAGER.MODE_ENDLESS):
+				tier_overlay.open(profile, {})
+			else:
+				message_label.text = "诊断文件未能保存，原战局已保留。请检查存储空间。"
+			_sync_modal_state()
+			dialog.queue_free()
+		)
+		dialog.canceled.connect(func():
+			dialog.queue_free()
+			_on_panel_closed()
+		)
+		dialog.popup_centered(Vector2i(560, 240))
 		return
 	tier_overlay.open(profile, run)
 	_sync_modal_state()

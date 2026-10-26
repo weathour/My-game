@@ -1,0 +1,202 @@
+{
+  "schema_version": 1,
+  "content_version": 1,
+  "status": "design_fixture_not_loaded_by_runtime",
+  "chapter_id": "chapter1",
+  "title": "恢复通讯（剧情草案）",
+  "initial_quest_id": "q.c1.outpost",
+  "completion_flag": "chapter1.communications_restored",
+  "rules": {
+    "single_active_main_quest": true,
+    "stage_reward_policy": "first_clear_only",
+    "replay_permanent_rewards": false,
+    "dialogue_replay_read_only": true,
+    "turn_in_commit": "costs_progress_receipt_and_checkpoint_together"
+  },
+  "speakers": [
+    {"id": "swordsman", "name": "剑士"},
+    {"id": "gunner", "name": "枪手"},
+    {"id": "mage", "name": "法师"},
+    {"id": "mechanic", "name": "机械师"},
+    {"id": "blacksmith", "name": "铁匠"},
+    {"id": "ruan_dog", "name": "阮狗"}
+  ],
+  "stages": [
+    {"id": "chapter1_stage1", "name": "前哨清剿", "runtime_source": "scripts/story_data.gd"},
+    {"id": "chapter1_stage2", "name": "裂隙推进", "runtime_source": "scripts/story_data.gd"},
+    {"id": "chapter1_stage3", "name": "星核讨伐", "runtime_source": "scripts/story_data.gd"}
+  ],
+  "items": [
+    {
+      "id": "item.outpost_log", "name": "前哨记录", "kind": "quest_item",
+      "description": "前哨留下的观测记录。交给枪手整理下一段路线。",
+      "icon_policy": "reuse_existing_placeholder", "storage": "story.quest_items",
+      "max_stack": 1, "source_stage_id": "chapter1_stage1", "turn_in_quest_id": "q.c1.outpost",
+      "actions": ["inspect", "turn_in"], "droppable": false, "sellable": false, "occupies_endless_capacity": false
+    },
+    {
+      "id": "item.rift_sample", "name": "裂隙样本", "kind": "quest_item",
+      "description": "来自裂隙的稳定样本。机械师需要它定位干扰源。",
+      "icon_policy": "reuse_existing_placeholder", "storage": "story.quest_items",
+      "max_stack": 1, "source_stage_id": "chapter1_stage2", "turn_in_quest_id": "q.c1.rift",
+      "actions": ["inspect", "turn_in"], "droppable": false, "sellable": false, "occupies_endless_capacity": false
+    },
+    {
+      "id": "material.boss_core", "name": "Boss核心", "kind": "story_material",
+      "description": "星核讨伐取得的核心。本章交付1枚，用于修复通讯装置。",
+      "icon_policy": "reuse_existing_placeholder", "storage": "boss_core_fragments",
+      "max_stack": null, "source_stage_id": "chapter1_stage3", "turn_in_quest_id": "q.c1.core",
+      "actions": ["inspect", "turn_in"], "droppable": false, "sellable": false, "occupies_endless_capacity": false
+    }
+  ],
+  "journal_entries": [
+    {"id": "journal.c1.outpost", "title": "前哨报告", "text": "记录把失联地点连成了一条通向裂隙的路线。枪手已整理出下一处调查目标。"},
+    {"id": "journal.c1.rift", "title": "裂隙分析", "text": "样本中的干扰来自同一个源头。机械师据此标出星核位置，法师确认了观测结果。"},
+    {"id": "journal.c1.core", "title": "重新接通", "text": "核心已用于修复通讯装置，前哨重新收到营地信号。第一章路线全部开放，可返回练习。"}
+  ],
+  "quests": [
+    {
+      "id": "q.c1.outpost", "name": "找回前哨记录", "requires_completed_quests": [],
+      "stage_id": "chapter1_stage1", "accept_npc": "gunner", "turn_in_npc": "gunner",
+      "objective_text": "完成前哨清剿，取得前哨记录，再返回与枪手交付。",
+      "ready_text": "已取得前哨记录。返回枪手处交付。",
+      "first_clear_reward": {"receipt_id": "stage:chapter1_stage1:first_clear", "items": [{"item_id": "item.outpost_log", "quantity": 1}]},
+      "turn_in": {"receipt_id": "quest:q.c1.outpost:turn_in", "costs": [{"item_id": "item.outpost_log", "quantity": 1}], "journal_entries": ["journal.c1.outpost"], "flags": []},
+      "dialogues": {"accept": "dlg.c1.outpost.accept", "reminder": "dlg.c1.outpost.reminder", "turn_in": "dlg.c1.outpost.turn_in"}
+    },
+    {
+      "id": "q.c1.rift", "name": "确认裂隙源头", "requires_completed_quests": ["q.c1.outpost"],
+      "stage_id": "chapter1_stage2", "accept_npc": "mechanic", "turn_in_npc": "mechanic",
+      "objective_text": "完成裂隙推进，取得裂隙样本，再返回与机械师交付。",
+      "ready_text": "已取得裂隙样本。返回机械师处交付。",
+      "first_clear_reward": {"receipt_id": "stage:chapter1_stage2:first_clear", "items": [{"item_id": "item.rift_sample", "quantity": 1}]},
+      "turn_in": {"receipt_id": "quest:q.c1.rift:turn_in", "costs": [{"item_id": "item.rift_sample", "quantity": 1}], "journal_entries": ["journal.c1.rift"], "flags": []},
+      "dialogues": {"accept": "dlg.c1.rift.accept", "reminder": "dlg.c1.rift.reminder", "turn_in": "dlg.c1.rift.turn_in"}
+    },
+    {
+      "id": "q.c1.core", "name": "恢复通讯", "requires_completed_quests": ["q.c1.rift"],
+      "stage_id": "chapter1_stage3", "accept_npc": "blacksmith", "turn_in_npc": "blacksmith",
+      "objective_text": "完成星核讨伐，取得1枚Boss核心，再返回铁匠处交付。",
+      "ready_text": "已取得核心。向铁匠交付1枚，修复通讯装置。",
+      "first_clear_reward": {"receipt_id": "stage:chapter1_stage3:first_clear", "items": [{"item_id": "material.boss_core", "quantity": 1}]},
+      "turn_in": {"receipt_id": "quest:q.c1.core:turn_in", "costs": [{"item_id": "material.boss_core", "quantity": 1}], "journal_entries": ["journal.c1.core"], "flags": ["chapter1.communications_restored"]},
+      "dialogues": {"accept": "dlg.c1.core.accept", "reminder": "dlg.c1.core.reminder", "turn_in": "dlg.c1.core.turn_in"}
+    }
+  ],
+  "dialogues": [
+    {
+      "id": "dlg.c1.opening", "entry": "start", "npc_id": "swordsman", "kind": "optional",
+      "conditions": [{"type": "quest_state", "quest_id": "q.c1.outpost", "value": "available"}],
+      "nodes": [
+        {"id": "start", "speaker": "swordsman", "text": "前哨的信号断了。先带回记录，弄清路上发生了什么。", "next": "end"},
+        {"id": "end", "speaker": "swordsman", "text": "枪手在整理路线。准备好后，去找他确认任务。", "end": true}
+      ]
+    },
+    {
+      "id": "dlg.c1.outpost.accept", "entry": "start", "npc_id": "gunner", "kind": "accept", "quest_id": "q.c1.outpost",
+      "conditions": [{"type": "quest_state", "quest_id": "q.c1.outpost", "value": "available"}],
+      "nodes": [
+        {"id": "start", "speaker": "gunner", "text": "到前哨完成清剿，带回观测记录。拿到后回来找我，才能确定下一段路线。", "choices": [
+          {"id": "accept", "text": "接下任务", "next": "accepted", "command": {"type": "accept_quest", "quest_id": "q.c1.outpost"}},
+          {"id": "details", "text": "为什么要取回记录？", "next": "details"},
+          {"id": "later", "text": "稍后再来", "next": "later"}
+        ]},
+        {"id": "details", "speaker": "gunner", "text": "失联前的信号来自不同方位。凭记忆选路容易走错，记录能把它们对上。", "next": "start"},
+        {"id": "accepted", "speaker": "gunner", "text": "任务已记下。整备好三人队伍后，从准备页出发。", "end": true},
+        {"id": "later", "speaker": "gunner", "text": "路线留在这里。准备好再来。", "end": true}
+      ]
+    },
+    {
+      "id": "dlg.c1.outpost.reminder", "entry": "start", "npc_id": "gunner", "kind": "reminder", "quest_id": "q.c1.outpost",
+      "conditions": [{"type": "quest_state", "quest_id": "q.c1.outpost", "value": "active"}],
+      "nodes": [{"id": "start", "speaker": "gunner", "text": "目标是前哨记录。完成前哨清剿后回来交给我；已有战局可以从准备页继续。", "end": true}]
+    },
+    {
+      "id": "dlg.c1.outpost.turn_in", "entry": "start", "npc_id": "gunner", "kind": "turn_in", "quest_id": "q.c1.outpost",
+      "conditions": [{"type": "quest_state", "quest_id": "q.c1.outpost", "value": "ready_to_turn_in"}],
+      "nodes": [
+        {"id": "start", "speaker": "gunner", "text": "把前哨记录交给我，我来整理路线。交付会消耗这份记录，并开放裂隙调查任务。", "choices": [
+          {"id": "confirm", "text": "交付前哨记录 ×1", "next": "done", "command": {"type": "turn_in_quest", "quest_id": "q.c1.outpost"}},
+          {"id": "later", "text": "稍后交付", "next": "later"}
+        ]},
+        {"id": "done", "speaker": "gunner", "text": "路线指向裂隙。报告已经留在记录页，接下来找机械师确认调查任务。", "end": true},
+        {"id": "later", "speaker": "gunner", "text": "记录先由你保管。回来时再交给我。", "end": true}
+      ]
+    },
+    {
+      "id": "dlg.c1.rift.accept", "entry": "start", "npc_id": "mechanic", "kind": "accept", "quest_id": "q.c1.rift",
+      "conditions": [{"type": "quest_state", "quest_id": "q.c1.rift", "value": "available"}],
+      "nodes": [
+        {"id": "start", "speaker": "mechanic", "text": "枪手确认了路线。进入裂隙，完成推进后带回一份样本，我才能判断干扰源的位置。", "choices": [
+          {"id": "accept", "text": "接下任务", "next": "accepted", "command": {"type": "accept_quest", "quest_id": "q.c1.rift"}},
+          {"id": "later", "text": "先整理装备", "next": "later"}
+        ]},
+        {"id": "accepted", "speaker": "mechanic", "text": "目标已经记下。样本取得后，记得回来交给我。", "end": true},
+        {"id": "later", "speaker": "mechanic", "text": "不急，准备好再出发。", "end": true}
+      ]
+    },
+    {
+      "id": "dlg.c1.rift.reminder", "entry": "start", "npc_id": "mechanic", "kind": "reminder", "quest_id": "q.c1.rift",
+      "conditions": [{"type": "quest_state", "quest_id": "q.c1.rift", "value": "active"}],
+      "nodes": [{"id": "start", "speaker": "mechanic", "text": "完成裂隙推进会取得样本。调查失败可以重新出击，之前的前哨报告仍然保留。", "end": true}]
+    },
+    {
+      "id": "dlg.c1.rift.turn_in", "entry": "start", "npc_id": "mechanic", "kind": "turn_in", "quest_id": "q.c1.rift",
+      "conditions": [{"type": "quest_state", "quest_id": "q.c1.rift", "value": "ready_to_turn_in"}],
+      "nodes": [
+        {"id": "start", "speaker": "mechanic", "text": "这份样本足够做定位。交付后样本会用于分析，完成时就能开放星核任务。", "choices": [
+          {"id": "confirm", "text": "交付裂隙样本 ×1", "next": "analysis", "command": {"type": "turn_in_quest", "quest_id": "q.c1.rift"}},
+          {"id": "later", "text": "稍后交付", "next": "later"}
+        ]},
+        {"id": "analysis", "speaker": "mechanic", "text": "位置确认了。干扰集中在星核附近，我把结果留在记录里。", "next": "done"},
+        {"id": "done", "speaker": "mage", "text": "观测结果吻合。下一步去找铁匠，确认取回核心后的用途。", "end": true},
+        {"id": "later", "speaker": "mechanic", "text": "样本还在你那里。需要分析时再来找我。", "end": true}
+      ]
+    },
+    {
+      "id": "dlg.c1.rift.explanation", "entry": "start", "npc_id": "mage", "kind": "optional",
+      "conditions": [{"type": "quest_state", "quest_id": "q.c1.rift", "value": "completed"}],
+      "nodes": [{"id": "start", "speaker": "mage", "text": "样本让我们知道该去哪里。调查记录会一直保留，不必记住每一句话。", "end": true}]
+    },
+    {
+      "id": "dlg.c1.core.accept", "entry": "start", "npc_id": "blacksmith", "kind": "accept", "quest_id": "q.c1.core",
+      "conditions": [{"type": "quest_state", "quest_id": "q.c1.core", "value": "available"}],
+      "nodes": [
+        {"id": "start", "speaker": "blacksmith", "text": "通讯装置还缺一个稳定核心。完成星核讨伐后带回1枚，我就能修复它。", "choices": [
+          {"id": "accept", "text": "接下任务", "next": "accepted", "command": {"type": "accept_quest", "quest_id": "q.c1.core"}},
+          {"id": "later", "text": "稍后再来", "next": "later"}
+        ]},
+        {"id": "accepted", "speaker": "blacksmith", "text": "星核讨伐已可出击。带回核心后，我们再确认交付。", "end": true},
+        {"id": "later", "speaker": "blacksmith", "text": "装置会留在这里，准备好再来。", "end": true}
+      ]
+    },
+    {
+      "id": "dlg.c1.core.reminder", "entry": "start", "npc_id": "blacksmith", "kind": "reminder", "quest_id": "q.c1.core",
+      "conditions": [{"type": "quest_state", "quest_id": "q.c1.core", "value": "active"}],
+      "nodes": [{"id": "start", "speaker": "blacksmith", "text": "目标是完成星核讨伐。取得核心后回来交付，这次修复只需1枚。", "end": true}]
+    },
+    {
+      "id": "dlg.c1.core.turn_in", "entry": "start", "npc_id": "blacksmith", "kind": "turn_in", "quest_id": "q.c1.core",
+      "conditions": [{"type": "quest_state", "quest_id": "q.c1.core", "value": "ready_to_turn_in"}],
+      "nodes": [
+        {"id": "start", "speaker": "blacksmith", "text": "交付1枚Boss核心，装置就能恢复工作。核心会被消耗；这是本章的最后一次交付。", "choices": [
+          {"id": "confirm", "text": "交付Boss核心 ×1，修复通讯", "next": "repaired", "command": {"type": "turn_in_quest", "quest_id": "q.c1.core"}},
+          {"id": "later", "text": "稍后交付", "next": "later"}
+        ]},
+        {"id": "repaired", "speaker": "blacksmith", "text": "信号接通了，前哨收到回应。修复结果已经记下。", "next": "done"},
+        {"id": "done", "speaker": "swordsman", "text": "这一段路走通了。你可以查看本章记录，或重访已经完成的关卡。", "end": true},
+        {"id": "later", "speaker": "blacksmith", "text": "核心仍由你保管，回来后再继续修复。", "end": true}
+      ]
+    },
+    {
+      "id": "dlg.c1.ruan.advice", "entry": "start", "npc_id": "ruan_dog", "kind": "optional",
+      "conditions": [],
+      "nodes": [{"id": "start", "speaker": "ruan_dog", "text": "交给营地的记录和样本都放在剧情物品里，不占无尽携带位。忘了用途就打开物品详情，里面写着该找谁。", "end": true}]
+    },
+    {
+      "id": "dlg.c1.afterword", "entry": "start", "npc_id": "swordsman", "kind": "optional",
+      "conditions": [{"type": "flag", "flag_id": "chapter1.communications_restored", "value": true}],
+      "nodes": [{"id": "start", "speaker": "swordsman", "text": "前哨的回应还在。想试试另一支队伍，就从已通关列表出发；主线记录和已交付结果会保留。", "end": true}]
+    }
+  ]
+}

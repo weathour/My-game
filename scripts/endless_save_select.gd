@@ -5,6 +5,7 @@ const ENDLESS_CAMP_SCENE_PATH := "res://scenes/endless_camp.tscn"
 const SAVE_MANAGER := preload("res://scripts/save_manager.gd")
 const ENDLESS_SLOT_CARD_FACTORY := preload("res://scripts/ui/save/endless_slot_card_factory.gd")
 const SURVIVORS_THEME := preload("res://scripts/ui/theme/survivors_ui_theme.gd")
+const SAVE_FEEDBACK := preload("res://scripts/ui/save/save_feedback.gd")
 
 const TEXT_TITLE := "\u65e0\u5c3d\u6a21\u5f0f"
 const TEXT_SUBTITLE := "选择存档，进入营地配置 N 层挑战"
@@ -101,26 +102,27 @@ func _ensure_delete_confirm_dialog() -> void:
 	delete_confirm_dialog.confirmed.connect(_on_delete_confirmed)
 	add_child(delete_confirm_dialog)
 
-func _on_slot_pressed(slot_id: int, has_profile: bool, _has_run: bool) -> void:
-	if not has_profile:
-		SAVE_MANAGER.create_or_load_endless_profile(slot_id)
-		SAVE_MANAGER.clear_save(slot_id, SAVE_MANAGER.MODE_ENDLESS)
-		get_tree().change_scene_to_file(ENDLESS_CAMP_SCENE_PATH)
+func _on_slot_pressed(slot_id: int, _has_profile: bool, _has_run: bool) -> void:
+	var health: String = SAVE_MANAGER.profile_status(slot_id, SAVE_MANAGER.MODE_ENDLESS).status
+	if SAVE_MANAGER.create_or_load_endless_profile(slot_id).is_empty():
+		SAVE_FEEDBACK.show_error(self, SAVE_FEEDBACK.health_text(health))
 		return
-
-	SAVE_MANAGER.set_active_endless_slot(slot_id)
 	get_tree().change_scene_to_file(ENDLESS_CAMP_SCENE_PATH)
 
 func _on_delete_pressed(slot_id: int) -> void:
 	pending_delete_slot_id = slot_id
 	_ensure_delete_confirm_dialog()
 	if delete_confirm_dialog != null:
+		var profile := SAVE_MANAGER.load_endless_profile(slot_id)
+		delete_confirm_dialog.dialog_text = "删除无尽存档 %d？\n最高通关 N%d，骨头 %d。永久进度和当前战局都会删除。" % [slot_id, int(profile.get("highest_cleared_tier", 0)), int(profile.get("bones", 0))]
 		delete_confirm_dialog.popup_centered(Vector2i(420, 180))
 
 func _on_delete_confirmed() -> void:
 	if pending_delete_slot_id < 1:
 		return
-	SAVE_MANAGER.delete_endless_profile(pending_delete_slot_id)
+	if not SAVE_MANAGER.delete_endless_profile(pending_delete_slot_id):
+		SAVE_FEEDBACK.show_error(self, "部分文件未能删除，请检查文件权限后重试。")
+		return
 	pending_delete_slot_id = -1
 	_build_ui()
 

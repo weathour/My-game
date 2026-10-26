@@ -301,7 +301,6 @@ func _finish_wave_ending() -> void:
 		_create_merchant()
 	_queue_wave_blessing()
 	if small_boss_reward_pending:
-		small_boss_reward_pending = false
 		preload("res://scripts/game/reward_flow.gd").show_small_boss_reward(main)
 	main.call_deferred("_save_run_state")
 

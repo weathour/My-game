@@ -2574,15 +2574,19 @@ func get_ruan_bone_count() -> int:
 	return ruan_bone_count
 
 
-func collect_ruan_bones(amount: int) -> int:
+func collect_ruan_bones(amount: int, pickup_id: String = "") -> int:
 	if amount <= 0:
 		return ruan_bone_count
-	ruan_bone_count += amount
+	var next_count := ruan_bone_count + amount
 	if SAVE_MANAGER.is_endless_mode_active() and not DEVELOPER_MODE.should_disable_save():
-		var profile := SAVE_MANAGER.get_current_endless_profile()
-		if not profile.is_empty():
-			profile["bones"] = ruan_bone_count
-			SAVE_MANAGER.save_endless_profile(profile)
+		var scene := get_tree().current_scene
+		var run_id := str(scene.get("endless_run_id")) if scene != null and scene.get("endless_run_id") != null else ""
+		next_count = SAVE_MANAGER.credit_bone_pickup(amount, pickup_id, run_id)
+		if next_count < 0:
+			set_meta("bone_save_failed", true)
+			return -1
+	ruan_bone_count = next_count
+	set_meta("bone_save_failed", false)
 	return ruan_bone_count
 
 
@@ -2656,8 +2660,10 @@ func _create_basic_attack_source_id(role_id: String) -> String:
 	return "%s_basic:%s:%s" % [role_id, get_instance_id(), basic_attack_event_serial]
 
 
-func apply_save_data(data: Dictionary) -> void:
-	PLAYER_RUN_SAVE_STATE.apply_save_data(self, data)
+func apply_save_data(data: Dictionary) -> bool:
+	if preload("res://scripts/save/run_payload_validator.gd").error({"player": data}) != "":
+		return false
+	return PLAYER_RUN_SAVE_STATE.apply_save_data(self, data) == true
 
 func resume_pending_level_ups() -> void:
 	PLAYER_LEVEL_FLOW.resume_pending_level_ups(self)

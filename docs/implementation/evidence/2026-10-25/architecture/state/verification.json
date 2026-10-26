@@ -1,0 +1,141 @@
+{
+  "engine": "Godot 4.6.2",
+  "scope": "save payload validation, explicit restore result and failure isolation, endless cleanup retry, scene-local pause reasons, read-only session presentation and configured-enemy observation",
+  "results": [
+    {
+      "log": "ability_talent_snapshot_save.log",
+      "status": "passed",
+      "markers": [
+        "ABILITY_TALENT_SNAPSHOT_SAVE_SMOKE_OK"
+      ],
+      "errors": []
+    },
+    {
+      "log": "character_panel_ui.log",
+      "status": "passed",
+      "markers": [
+        "CHARACTER_PANEL_UI_SMOKE_OK"
+      ],
+      "errors": []
+    },
+    {
+      "log": "endless_camp.log",
+      "status": "passed",
+      "markers": [
+        "ENDLESS_CAMP_SMOKE_OK"
+      ],
+      "errors": []
+    },
+    {
+      "log": "endless_progression.log",
+      "status": "passed",
+      "markers": [
+        "ENDLESS_PROGRESSION_SMOKE_OK"
+      ],
+      "errors": []
+    },
+    {
+      "log": "endless_return_flow.log",
+      "status": "passed",
+      "markers": [
+        "ENDLESS_RETURN_FLOW_SMOKE_OK"
+      ],
+      "errors": []
+    },
+    {
+      "log": "godot-headless.log",
+      "status": "passed",
+      "markers": [],
+      "errors": []
+    },
+    {
+      "log": "music-context.log",
+      "status": "passed",
+      "markers": [
+        "MUSIC_CONTEXT_SMOKE_OK"
+      ],
+      "errors": []
+    },
+    {
+      "log": "reward_flow_talent.log",
+      "status": "passed",
+      "markers": [
+        "REWARD_FLOW_TALENT_SMOKE_OK"
+      ],
+      "errors": []
+    },
+    {
+      "log": "reward_recovery.log",
+      "status": "passed",
+      "markers": [
+        "REWARD_RECOVERY_SMOKE_OK"
+      ],
+      "errors": []
+    },
+    {
+      "log": "run-restore-integrity.log",
+      "status": "passed",
+      "markers": [
+        "RUN_RESTORE_INTEGRITY_SMOKE_OK"
+      ],
+      "errors": []
+    },
+    {
+      "log": "run_payload_validation.log",
+      "status": "passed",
+      "markers": [
+        "RUN_PAYLOAD_VALIDATION_SMOKE_OK"
+      ],
+      "errors": []
+    },
+    {
+      "log": "session-state.log",
+      "status": "passed",
+      "markers": [
+        "SESSION_STATE_SMOKE_OK"
+      ],
+      "errors": []
+    },
+    {
+      "log": "story_lifecycle.log",
+      "status": "passed",
+      "markers": [
+        "STORY_LIFECYCLE_SMOKE_OK"
+      ],
+      "errors": []
+    },
+    {
+      "log": "story_progress.log",
+      "status": "passed",
+      "markers": [
+        "STORY_PROGRESS_SMOKE_OK"
+      ],
+      "errors": []
+    }
+  ],
+  "save_contract": {
+    "rejected": "Known restoration container/type mismatches, malformed directly consumed numeric fields, short/non-numeric vectors, non-finite serialized values, malformed pending outcome/summary and invalid supplied top-level/wave flags.",
+    "preserved_legacy": [
+      "Missing optional fields and minimal player snapshots retain defaults.",
+      "Unknown saved enemy archetype uses get_profile_for_restore fallback; authored spawn references stay strict.",
+      "Old infinite-reload build versions ignore obsolete casts through the existing migration.",
+      "Role stats replaced by current templates and short legacy colors retain existing normalization.",
+      "Old saves missing role_share_initialized migrate numeric flat role shares once; newer structured states are not converted to integers.",
+      "Unticked flyby closest=INF is serialized as finite 1e30 without changing movement behavior."
+    ],
+    "restore_failure": "Validation chooses a valid backup before hydration; a failed restore reports false, marks the scene non-resumable/non-saveable, preserves both snapshots byte-for-byte, and permits returning to the menu.",
+    "result_propagation": "Player/enemy top-level hydrators return explicit success; enemy configuration completion is emitted only after successful hydrate. Existing complex ability normalization remains in place.",
+    "cleanup": "Endless committed rewards with failed run cleanup return cleanup_failed and offer retry; retry uses existing last_rewarded_run_id and does not award twice. Tier selection returns false when cleanup fails."
+  },
+  "state_contract": {
+    "pause": "session_state owns independent scene-local pause reasons. Manual resume, reward completion and character close remove only their own reason; scene departure clears reasons.",
+    "presentation": "Fresh read-only scalar snapshot: mode, phase, outcome, stage_id, wave, paused, target_kind, elapsed_seconds and remaining_seconds. Music and HUD read this producer; no enemy-list scan.",
+    "objective_time": "Survival stages retain countdowns. Kill-Boss objectives display elapsed time (including stage 3 after 300 seconds) without changing clear conditions.",
+    "enemy_lifecycle": "runtime_configuration_complete + runtime_configured distinguish tree entry from completed profile/restore. Music waits for this event, preserves phase and cue lifecycle, and ignores incomplete identities."
+  },
+  "limits": [
+    "No global bus, autoload or general state machine was introduced.",
+    "No exhaustive combinations of all twenty ability effects/talents; bounded direct-index/type consumers and an active beam path were covered. New restoration fields must extend the validator and their meaningful roundtrip checks.",
+    "No global gate, Graphify update, release export or pressure benchmark was run by this worker; main agent owns the combined gate and the performance owner gets a later serial measurement window."
+  ]
+}

@@ -1,0 +1,775 @@
+{
+  "schema_version": 1,
+  "content_version": 1,
+  "status": "runtime",
+  "chapter_id": "chapter1",
+  "title": "恢复通讯",
+  "initial_quest_id": "q.c1.outpost",
+  "completion_flag": "chapter1.communications_restored",
+  "rules": {
+    "single_active_main_quest": true,
+    "stage_reward_policy": "first_clear_only",
+    "replay_permanent_rewards": false,
+    "dialogue_replay_read_only": true,
+    "turn_in_commit": "costs_progress_receipt_and_checkpoint_together"
+  },
+  "speakers": [
+    {
+      "id": "swordsman",
+      "name": "剑士"
+    },
+    {
+      "id": "gunner",
+      "name": "枪手"
+    },
+    {
+      "id": "mage",
+      "name": "法师"
+    },
+    {
+      "id": "mechanic",
+      "name": "机械师"
+    },
+    {
+      "id": "blacksmith",
+      "name": "铁匠"
+    },
+    {
+      "id": "ruan_dog",
+      "name": "阮狗"
+    }
+  ],
+  "stages": [
+    {
+      "id": "chapter1_stage1",
+      "name": "前哨清剿",
+      "runtime_source": "scripts/story_data.gd"
+    },
+    {
+      "id": "chapter1_stage2",
+      "name": "裂隙推进",
+      "runtime_source": "scripts/story_data.gd"
+    },
+    {
+      "id": "chapter1_stage3",
+      "name": "星核讨伐",
+      "runtime_source": "scripts/story_data.gd"
+    }
+  ],
+  "items": [
+    {
+      "id": "item.outpost_log",
+      "name": "前哨记录",
+      "kind": "quest_item",
+      "description": "纸角沾着细沙的值班记录。最后几页记下了失联前的干扰方向。前哨清剿首通获得，交给枪手后消耗，调查报告会保留在记录中。",
+      "icon_policy": "reuse_existing_placeholder",
+      "storage": "story.quest_items",
+      "max_stack": 1,
+      "source_stage_id": "chapter1_stage1",
+      "turn_in_quest_id": "q.c1.outpost",
+      "actions": [
+        "inspect",
+        "turn_in"
+      ],
+      "droppable": false,
+      "sellable": false,
+      "occupies_endless_capacity": false
+    },
+    {
+      "id": "item.rift_sample",
+      "name": "裂隙样本",
+      "kind": "quest_item",
+      "description": "封在玻璃管里的裂隙样本，离开原处仍会干扰接收器。裂隙推进首通获得，交给机械师分析后消耗，定位结果会保留在记录中。",
+      "icon_policy": "reuse_existing_placeholder",
+      "storage": "story.quest_items",
+      "max_stack": 1,
+      "source_stage_id": "chapter1_stage2",
+      "turn_in_quest_id": "q.c1.rift",
+      "actions": [
+        "inspect",
+        "turn_in"
+      ],
+      "droppable": false,
+      "sellable": false,
+      "occupies_endless_capacity": false
+    },
+    {
+      "id": "material.boss_core",
+      "name": "Boss核心",
+      "kind": "story_material",
+      "description": "星核讨伐首通获得的核心，余温尚未散去。向铁匠确认交付1枚后消耗，用于修复通讯装置；其余核心余额保留。",
+      "icon_policy": "reuse_existing_placeholder",
+      "storage": "boss_core_fragments",
+      "max_stack": null,
+      "source_stage_id": "chapter1_stage3",
+      "turn_in_quest_id": "q.c1.core",
+      "actions": [
+        "inspect",
+        "turn_in"
+      ],
+      "droppable": false,
+      "sellable": false,
+      "occupies_endless_capacity": false
+    }
+  ],
+  "journal_entries": [
+    {
+      "id": "journal.c1.outpost",
+      "title": "最后一班",
+      "text": "前哨记录的前几页只写着风向、换班和设备读数。末页多了一句：“灯还亮着，等回音。”枪手对照干扰方位，找出通往裂隙的路线。记录已交付，下一步找机械师调查裂隙。"
+    },
+    {
+      "id": "journal.c1.rift",
+      "title": "杂音的间隔",
+      "text": "样本靠近接收器时，杂音出现了固定的间隔。机械师确认干扰来自星核，法师也辨出了其中微弱的呼叫节奏。样本已用于定位，下一步找铁匠确认通讯修复所需的核心。"
+    },
+    {
+      "id": "journal.c1.core",
+      "title": "听见了",
+      "text": "铁匠将1枚Boss核心装进通讯台。杂音退去，前哨终于传来一句：“听见了。”通讯已经恢复；三处地点仍可重访练习，已交付结果和调查记录都会保留。"
+    }
+  ],
+  "quests": [
+    {
+      "id": "q.c1.outpost",
+      "name": "找回前哨记录",
+      "requires_completed_quests": [],
+      "stage_id": "chapter1_stage1",
+      "accept_npc": "gunner",
+      "turn_in_npc": "gunner",
+      "objective_text": "前往前哨清剿，首通取得前哨记录，再返回枪手处确认交付。交付消耗记录，留下报告并开放裂隙调查。",
+      "ready_text": "已取得前哨记录。返回枪手处交付。",
+      "first_clear_reward": {
+        "receipt_id": "stage:chapter1_stage1:first_clear",
+        "items": [
+          {
+            "item_id": "item.outpost_log",
+            "quantity": 1
+          }
+        ]
+      },
+      "turn_in": {
+        "receipt_id": "quest:q.c1.outpost:turn_in",
+        "costs": [
+          {
+            "item_id": "item.outpost_log",
+            "quantity": 1
+          }
+        ],
+        "journal_entries": [
+          "journal.c1.outpost"
+        ],
+        "flags": []
+      },
+      "dialogues": {
+        "accept": "dlg.c1.outpost.accept",
+        "reminder": "dlg.c1.outpost.reminder",
+        "turn_in": "dlg.c1.outpost.turn_in"
+      }
+    },
+    {
+      "id": "q.c1.rift",
+      "name": "确认裂隙源头",
+      "requires_completed_quests": [
+        "q.c1.outpost"
+      ],
+      "stage_id": "chapter1_stage2",
+      "accept_npc": "mechanic",
+      "turn_in_npc": "mechanic",
+      "objective_text": "前往裂隙推进，首通取得裂隙样本，再返回机械师处确认交付。样本用于分析后消耗，定位结果会保留。",
+      "ready_text": "已取得裂隙样本。返回机械师处交付。",
+      "first_clear_reward": {
+        "receipt_id": "stage:chapter1_stage2:first_clear",
+        "items": [
+          {
+            "item_id": "item.rift_sample",
+            "quantity": 1
+          }
+        ]
+      },
+      "turn_in": {
+        "receipt_id": "quest:q.c1.rift:turn_in",
+        "costs": [
+          {
+            "item_id": "item.rift_sample",
+            "quantity": 1
+          }
+        ],
+        "journal_entries": [
+          "journal.c1.rift"
+        ],
+        "flags": []
+      },
+      "dialogues": {
+        "accept": "dlg.c1.rift.accept",
+        "reminder": "dlg.c1.rift.reminder",
+        "turn_in": "dlg.c1.rift.turn_in"
+      }
+    },
+    {
+      "id": "q.c1.core",
+      "name": "恢复通讯",
+      "requires_completed_quests": [
+        "q.c1.rift"
+      ],
+      "stage_id": "chapter1_stage3",
+      "accept_npc": "blacksmith",
+      "turn_in_npc": "blacksmith",
+      "objective_text": "完成星核讨伐，首通取得1枚Boss核心，再返回铁匠处确认交付。修复消耗1枚核心，恢复前哨通讯。",
+      "ready_text": "已取得核心。向铁匠交付1枚，修复通讯装置。",
+      "first_clear_reward": {
+        "receipt_id": "stage:chapter1_stage3:first_clear",
+        "items": [
+          {
+            "item_id": "material.boss_core",
+            "quantity": 1
+          }
+        ]
+      },
+      "turn_in": {
+        "receipt_id": "quest:q.c1.core:turn_in",
+        "costs": [
+          {
+            "item_id": "material.boss_core",
+            "quantity": 1
+          }
+        ],
+        "journal_entries": [
+          "journal.c1.core"
+        ],
+        "flags": [
+          "chapter1.communications_restored"
+        ]
+      },
+      "dialogues": {
+        "accept": "dlg.c1.core.accept",
+        "reminder": "dlg.c1.core.reminder",
+        "turn_in": "dlg.c1.core.turn_in"
+      }
+    }
+  ],
+  "dialogues": [
+    {
+      "id": "dlg.c1.opening",
+      "entry": "start",
+      "npc_id": "swordsman",
+      "kind": "optional",
+      "conditions": [
+        {
+          "type": "quest_state",
+          "quest_id": "q.c1.outpost",
+          "value": "available"
+        }
+      ],
+      "nodes": [
+        {
+          "id": "start",
+          "speaker": "swordsman",
+          "text": "前哨已经两天没有回答了。昨晚我又试了一次，还是只有杂音。",
+          "next": "end",
+          "narration": "通讯台的指示灯亮着。没人碰它。"
+        },
+        {
+          "id": "end",
+          "speaker": "swordsman",
+          "text": "枪手在桌边等你。他认得去前哨的路，也知道我们该带什么回来。",
+          "end": true,
+          "narration": "剑士收好耳机，把空出的椅子推向桌边。"
+        }
+      ],
+      "location": "营地 / 通讯台",
+      "scene": "radio"
+    },
+    {
+      "id": "dlg.c1.outpost.accept",
+      "entry": "start",
+      "npc_id": "gunner",
+      "kind": "accept",
+      "quest_id": "q.c1.outpost",
+      "conditions": [
+        {
+          "type": "quest_state",
+          "quest_id": "q.c1.outpost",
+          "value": "available"
+        }
+      ],
+      "nodes": [
+        {
+          "id": "start",
+          "speaker": "gunner",
+          "text": "去前哨完成清剿，把值班记录带回来。最后一班的人，总会记下点什么。",
+          "choices": [
+            {
+              "id": "accept",
+              "text": "接下任务",
+              "next": "accepted",
+              "command": {
+                "type": "accept_quest",
+                "quest_id": "q.c1.outpost"
+              }
+            },
+            {
+              "id": "details",
+              "text": "为什么要取回记录？",
+              "next": "details"
+            },
+            {
+              "id": "later",
+              "text": "稍后再来",
+              "next": "later"
+            }
+          ],
+          "narration": "枪手把地图压平。纸角已经卷了。"
+        },
+        {
+          "id": "details",
+          "speaker": "gunner",
+          "text": "以前他们连风向都记。哪天没风，也写一句。把那些方位对上，我们才知道干扰从哪儿来。",
+          "next": "start",
+          "narration": "他的手停在地图上的一个小点。"
+        },
+        {
+          "id": "accepted",
+          "speaker": "gunner",
+          "text": "那就拜托了。出发前把三个人的装备看一遍，记录拿到后，带回这里给我。",
+          "end": true,
+          "narration": "枪手递来一只防水袋，袋口折得很整齐。"
+        },
+        {
+          "id": "later",
+          "speaker": "gunner",
+          "text": "好，先忙你的。地图就放在这里，我再核对一遍路线，等你准备妥当。",
+          "end": true,
+          "narration": "他把防水袋留在了桌子另一侧。"
+        }
+      ],
+      "location": "营地 / 旧地图前",
+      "scene": "outpost"
+    },
+    {
+      "id": "dlg.c1.outpost.reminder",
+      "entry": "start",
+      "npc_id": "gunner",
+      "kind": "reminder",
+      "quest_id": "q.c1.outpost",
+      "conditions": [
+        {
+          "type": "quest_state",
+          "quest_id": "q.c1.outpost",
+          "value": "active"
+        }
+      ],
+      "nodes": [
+        {
+          "id": "start",
+          "speaker": "gunner",
+          "text": "还是去前哨，带回那本值班记录。路上不用抢时间，先把人照顾好。",
+          "end": true,
+          "narration": "地图上，通往前哨的线被描深了一遍。"
+        }
+      ],
+      "location": "营地 / 旧地图前",
+      "scene": "outpost"
+    },
+    {
+      "id": "dlg.c1.outpost.turn_in",
+      "entry": "start",
+      "npc_id": "gunner",
+      "kind": "turn_in",
+      "quest_id": "q.c1.outpost",
+      "conditions": [
+        {
+          "type": "quest_state",
+          "quest_id": "q.c1.outpost",
+          "value": "ready_to_turn_in"
+        }
+      ],
+      "nodes": [
+        {
+          "id": "start",
+          "speaker": "gunner",
+          "text": "找到了。把记录交给我吧，我来对照地图。整理完，就能请机械师去查裂隙了。",
+          "choices": [
+            {
+              "id": "confirm",
+              "text": "交付前哨记录 ×1",
+              "next": "done",
+              "command": {
+                "type": "turn_in_quest",
+                "quest_id": "q.c1.outpost"
+              }
+            },
+            {
+              "id": "later",
+              "text": "稍后交付",
+              "next": "later"
+            }
+          ],
+          "narration": "防水袋打开，几粒细沙落在桌上。"
+        },
+        {
+          "id": "done",
+          "speaker": "gunner",
+          "text": "最后几页都指向裂隙。字越来越小，风向却一天没漏。去找机械师吧，路线我替你标好了。",
+          "end": true,
+          "narration": "末页写着：灯还亮着，等回音。"
+        },
+        {
+          "id": "later",
+          "speaker": "gunner",
+          "text": "也好，先由你保管。别把纸摊在风里，等你回来，我们再慢慢看。",
+          "end": true,
+          "narration": "枪手把防水袋的封口重新压紧。"
+        }
+      ],
+      "location": "营地 / 值班记录",
+      "scene": "outpost"
+    },
+    {
+      "id": "dlg.c1.rift.accept",
+      "entry": "start",
+      "npc_id": "mechanic",
+      "kind": "accept",
+      "quest_id": "q.c1.rift",
+      "conditions": [
+        {
+          "type": "quest_state",
+          "quest_id": "q.c1.rift",
+          "value": "available"
+        }
+      ],
+      "nodes": [
+        {
+          "id": "start",
+          "speaker": "mechanic",
+          "text": "路线有了，还差一份裂隙样本。完成推进后带回来，我想知道这阵杂音究竟从哪里来。",
+          "choices": [
+            {
+              "id": "accept",
+              "text": "接下任务",
+              "next": "accepted",
+              "command": {
+                "type": "accept_quest",
+                "quest_id": "q.c1.rift"
+              }
+            },
+            {
+              "id": "later",
+              "text": "先整理装备",
+              "next": "later"
+            }
+          ],
+          "narration": "接收器旁放着一支空玻璃管。"
+        },
+        {
+          "id": "accepted",
+          "speaker": "mechanic",
+          "text": "玻璃管拿好。样本收进去就盖紧，回营地以后交给我，我们一起听听看。",
+          "end": true,
+          "narration": "机械师在管口绕了一圈软布。"
+        },
+        {
+          "id": "later",
+          "speaker": "mechanic",
+          "text": "先把装备整理好吧。这台机器已经响了两天，不差你准备的这点时间。",
+          "end": true,
+          "narration": "机械师调低接收器的声音，屋里安静了一些。"
+        }
+      ],
+      "location": "营地 / 样本工作台",
+      "scene": "rift"
+    },
+    {
+      "id": "dlg.c1.rift.reminder",
+      "entry": "start",
+      "npc_id": "mechanic",
+      "kind": "reminder",
+      "quest_id": "q.c1.rift",
+      "conditions": [
+        {
+          "type": "quest_state",
+          "quest_id": "q.c1.rift",
+          "value": "active"
+        }
+      ],
+      "nodes": [
+        {
+          "id": "start",
+          "speaker": "mechanic",
+          "text": "去裂隙完成推进，取一份样本回来。玻璃管还在吧？回来时把它放到我手里就好。",
+          "end": true,
+          "narration": "空管的位置留着一小圈没有灰的桌面。"
+        }
+      ],
+      "location": "营地 / 样本工作台",
+      "scene": "rift"
+    },
+    {
+      "id": "dlg.c1.rift.turn_in",
+      "entry": "start",
+      "npc_id": "mechanic",
+      "kind": "turn_in",
+      "quest_id": "q.c1.rift",
+      "conditions": [
+        {
+          "type": "quest_state",
+          "quest_id": "q.c1.rift",
+          "value": "ready_to_turn_in"
+        }
+      ],
+      "nodes": [
+        {
+          "id": "start",
+          "speaker": "mechanic",
+          "text": "样本还有反应。交给我做定位吧，管里的材料会用完，结果我会写下来。",
+          "choices": [
+            {
+              "id": "confirm",
+              "text": "交付裂隙样本 ×1",
+              "next": "analysis",
+              "command": {
+                "type": "turn_in_quest",
+                "quest_id": "q.c1.rift"
+              }
+            },
+            {
+              "id": "later",
+              "text": "稍后交付",
+              "next": "later"
+            }
+          ],
+          "narration": "玻璃管靠近接收器，杂音忽然变得清楚。"
+        },
+        {
+          "id": "analysis",
+          "speaker": "mechanic",
+          "text": "在星核那里。你听，杂音每次都在同一个地方停一下；我把这个位置标出来了。",
+          "next": "done",
+          "narration": "机械师松开旋钮，笔尖落在地图上。"
+        },
+        {
+          "id": "done",
+          "speaker": "mage",
+          "text": "我也听到了，像呼叫时留下的间隔。去找铁匠吧，装置还缺能让信号过去的核心。",
+          "end": true,
+          "narration": "法师俯身听了一会儿，才慢慢直起身。"
+        },
+        {
+          "id": "later",
+          "speaker": "mechanic",
+          "text": "好，先收起来。别让管口松开；你准备好交给我的时候，我再开始分析。",
+          "end": true,
+          "narration": "机械师把工作台中间的位置空了出来。"
+        }
+      ],
+      "location": "营地 / 接收器旁",
+      "scene": "rift"
+    },
+    {
+      "id": "dlg.c1.rift.explanation",
+      "entry": "start",
+      "npc_id": "mage",
+      "kind": "optional",
+      "conditions": [
+        {
+          "type": "quest_state",
+          "quest_id": "q.c1.rift",
+          "value": "completed"
+        }
+      ],
+      "nodes": [
+        {
+          "id": "start",
+          "speaker": "mage",
+          "text": "从前听见这阵杂音，我只想把它关掉。现在知道里面还有呼叫，就总想多听一会儿。",
+          "end": true,
+          "narration": "窗外的风停了，接收器仍在轻轻作响。"
+        }
+      ],
+      "location": "营地 / 窗边",
+      "scene": "rift"
+    },
+    {
+      "id": "dlg.c1.core.accept",
+      "entry": "start",
+      "npc_id": "blacksmith",
+      "kind": "accept",
+      "quest_id": "q.c1.core",
+      "conditions": [
+        {
+          "type": "quest_state",
+          "quest_id": "q.c1.core",
+          "value": "available"
+        }
+      ],
+      "nodes": [
+        {
+          "id": "start",
+          "speaker": "blacksmith",
+          "text": "线都接好了，还缺一个稳定核心。去完成星核讨伐，带回1枚，我来把通讯台修好。",
+          "choices": [
+            {
+              "id": "accept",
+              "text": "接下任务",
+              "next": "accepted",
+              "command": {
+                "type": "accept_quest",
+                "quest_id": "q.c1.core"
+              }
+            },
+            {
+              "id": "later",
+              "text": "稍后再来",
+              "next": "later"
+            }
+          ],
+          "narration": "铁匠擦净底座，留出安放核心的位置。"
+        },
+        {
+          "id": "accepted",
+          "speaker": "blacksmith",
+          "text": "去吧，核心带回来再交给我。这里的零件我守着，你们三个平安回来就好。",
+          "end": true,
+          "narration": "他把几颗小螺丝按顺序排在布上。"
+        },
+        {
+          "id": "later",
+          "speaker": "blacksmith",
+          "text": "不着急。最后一个接口还得磨一磨，你先准备，等回来时就能装了。",
+          "end": true,
+          "narration": "锉刀又响起来，声音很轻，也很稳。"
+        }
+      ],
+      "location": "营地 / 拆开的通讯台",
+      "scene": "radio"
+    },
+    {
+      "id": "dlg.c1.core.reminder",
+      "entry": "start",
+      "npc_id": "blacksmith",
+      "kind": "reminder",
+      "quest_id": "q.c1.core",
+      "conditions": [
+        {
+          "type": "quest_state",
+          "quest_id": "q.c1.core",
+          "value": "active"
+        }
+      ],
+      "nodes": [
+        {
+          "id": "start",
+          "speaker": "blacksmith",
+          "text": "星核讨伐以后，带1枚Boss核心回来。这台旧机器只缺这一枚，多的你自己收好。",
+          "end": true,
+          "narration": "底座擦得很亮，旁边的工具已经摆齐。"
+        }
+      ],
+      "location": "营地 / 拆开的通讯台",
+      "scene": "radio"
+    },
+    {
+      "id": "dlg.c1.core.turn_in",
+      "entry": "start",
+      "npc_id": "blacksmith",
+      "kind": "turn_in",
+      "quest_id": "q.c1.core",
+      "conditions": [
+        {
+          "type": "quest_state",
+          "quest_id": "q.c1.core",
+          "value": "ready_to_turn_in"
+        }
+      ],
+      "nodes": [
+        {
+          "id": "start",
+          "speaker": "blacksmith",
+          "text": "就是它。确认交付1枚Boss核心，我就装进去；用在修复上，这枚核心就取不回来了。",
+          "choices": [
+            {
+              "id": "confirm",
+              "text": "交付Boss核心 ×1，修复通讯",
+              "next": "repaired",
+              "command": {
+                "type": "turn_in_quest",
+                "quest_id": "q.c1.core"
+              }
+            },
+            {
+              "id": "later",
+              "text": "稍后交付",
+              "next": "later"
+            }
+          ],
+          "narration": "核心的余温透过布，留在铁匠的掌心。"
+        },
+        {
+          "id": "repaired",
+          "speaker": "blacksmith",
+          "text": "……接通了。别说话，先听。前哨那边好像有人在回答我们。",
+          "next": "done",
+          "narration": "杂音退下去。稍久，里面传来一句：听见了。"
+        },
+        {
+          "id": "done",
+          "speaker": "swordsman",
+          "text": "嗯，我们也听见了。那张地图先收着吧，今天不用再猜他们在哪里了。",
+          "end": true,
+          "narration": "剑士松开一直扶着桌沿的手。"
+        },
+        {
+          "id": "later",
+          "speaker": "blacksmith",
+          "text": "好，核心仍由你收着。底座已经准备好了，等你决定交付，我们就继续修。",
+          "end": true,
+          "narration": "铁匠把布盖回底座，避开露出的接线。"
+        }
+      ],
+      "location": "营地 / 通讯台",
+      "scene": "radio"
+    },
+    {
+      "id": "dlg.c1.ruan.advice",
+      "entry": "start",
+      "npc_id": "ruan_dog",
+      "kind": "optional",
+      "conditions": [],
+      "nodes": [
+        {
+          "id": "start",
+          "speaker": "ruan_dog",
+          "text": "水刚热，坐一会儿吧。你们出去以后，我总觉得这屋里只剩那台收音机在说话。",
+          "end": true,
+          "narration": "阮狗把杯子往桌子里推了推。"
+        }
+      ],
+      "location": "营地 / 热水壶旁",
+      "scene": "radio"
+    },
+    {
+      "id": "dlg.c1.afterword",
+      "entry": "start",
+      "npc_id": "swordsman",
+      "kind": "optional",
+      "conditions": [
+        {
+          "type": "flag",
+          "flag_id": "chapter1.communications_restored",
+          "value": true
+        }
+      ],
+      "nodes": [
+        {
+          "id": "start",
+          "speaker": "swordsman",
+          "text": "现在偶尔还是会有杂音。至少，我们知道另一头有人。想再走那条路，就一起去看看吧。",
+          "end": true,
+          "narration": "通讯台旁多了一张椅子。耳机放在扶手上。"
+        }
+      ],
+      "location": "营地 / 通讯台",
+      "scene": "radio"
+    }
+  ]
+}

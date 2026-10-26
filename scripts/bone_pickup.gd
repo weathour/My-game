@@ -11,11 +11,14 @@ var attraction_target_node: Node = null
 var attraction_active: bool = false
 var attraction_speed: float = 0.0
 var pooled: bool = false
+var pickup_id := ""
 
 
 func _ready() -> void:
 	if pooled:
 		return
+	if pickup_id == "":
+		pickup_id = _new_id()
 	add_to_group("bone_pickups")
 	_register_runtime_pickup()
 
@@ -62,6 +65,7 @@ func collect() -> int:
 
 
 func reset_pickup(new_position: Vector2, new_value: int = 1) -> void:
+	pickup_id = _new_id()
 	pooled = false
 	show()
 	set_process(true)
@@ -89,6 +93,7 @@ func recycle() -> void:
 
 func get_save_data() -> Dictionary:
 	return {
+		"pickup_id": pickup_id,
 		"position": [global_position.x, global_position.y],
 		"value": value
 	}
@@ -96,6 +101,7 @@ func get_save_data() -> Dictionary:
 
 func apply_save_data(data: Dictionary) -> void:
 	pooled = false
+	pickup_id = str(data.get("pickup_id", pickup_id))
 	var position_data: Variant = data.get("position", [0.0, 0.0])
 	if position_data is Array and (position_data as Array).size() >= 2:
 		global_position = Vector2(float(position_data[0]), float(position_data[1]))
@@ -104,6 +110,9 @@ func apply_save_data(data: Dictionary) -> void:
 	attraction_target_node = null
 	attraction_active = false
 	attraction_speed = 0.0
+
+static func _new_id() -> String:
+	return "%d_%d" % [int(Time.get_unix_time_from_system()), Time.get_ticks_usec()]
 
 
 func _register_runtime_pickup() -> void:

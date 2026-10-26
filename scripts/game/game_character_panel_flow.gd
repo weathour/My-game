@@ -1,5 +1,7 @@
 extends RefCounted
 
+const STATE := preload("res://scripts/game/session_state.gd")
+
 # Handoff note:
 # Character panel visibility and pause rules live here. main.gd remains the
 # input entry point, while this flow owns whether the panel may open/close and
@@ -28,20 +30,11 @@ static func can_show_character_panel(main: Node) -> bool:
 static func show_character_panel(main: Node) -> void:
 	if not can_show_character_panel(main):
 		return
-	main.get_tree().paused = true
+	STATE.set_pause_reason(main, "character", true)
 	main.character_panel.show_for_player(main.player)
 
 static func hide_character_panel(main: Node) -> void:
 	if main.character_panel == null:
 		return
 	main.character_panel.hide_panel()
-	main.get_tree().paused = _should_keep_paused_after_character_panel_hide(main)
-
-static func _should_keep_paused_after_character_panel_hide(main: Node) -> bool:
-	if main.game_over:
-		return true
-	if main.level_up_ui != null and main.level_up_ui.visible:
-		return true
-	if main.pause_menu != null and main.pause_menu.visible:
-		return true
-	return false
+	STATE.set_pause_reason(main, "character", false)
