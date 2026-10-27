@@ -1,0 +1,15 @@
+# Runtime asset prompts
+
+2026-10-27 · Built-in image_gen. Approved direction: probe D. Images are backgrounds/portraits only; all UI is live Godot controls.
+
+## Baimen terrain
+
+Use case: precise-object-edit. Produce a clean reusable game terrain illustration from the approved reference. Preserve its restrained painted historical strategy-map appearance, overhead oblique camera, vast pale olive farmland, winding blue-grey rivers, tiny abandoned Han-dynasty settlements and ruined walls. Expand terrain to fill the whole 16:9 canvas. Small walled city near upper right; open farmland, streams, deserted roads throughout center and lower left. DELETE ALL UI, labels, routes, circles, lines, character portrait, bars, text, borders, symbols, buttons. The finished image is ONLY continuous painted terrain. No glowing fantasy ornament, no giant castle, no people, no text, no numbered markers. Large geographic scale, subdued quiet daylight, abandoned Three Kingdoms land with dignity and traces of life. This is a runtime game-map background, not an interface screenshot.
+
+## Emma portrait
+
+Use case: background-extraction. Extract/reconstruct ONLY the adult silver-lavender haired female mage on the left of the reference as a clean waist-to-thigh-up standing character asset on actual transparent background. Preserve her identity, violet eyes, composed slightly wry expression, rich black and deep-violet fitted layered travel coat, subtle antique brass fastenings, staff in left edge, and elegant adult proportions. Historical fantasy painterly illustration as in the approved reference, refined face and fabric, not chibi. Head and staff tip entirely visible, bottom cropped at mid-thigh; character centered with small padding, portrait aspect ratio. Remove all landscape, interface, writing, frames and shadows behind her. No text or UI. Preserve alpha.
+
+## World relief
+
+Use case: stylized-concept. Create a clean runtime background texture for a Chinese Three Kingdoms WORLD strategy map, 16:9 landscape. Orthographic top-down physical terrain, continental scale hundreds of kilometers, NOT a local town map. Crop covers inland East Asia: high rugged brown-green mountains occupy western/left third, Loess plateau and northern dry brown grassland upper half, expansive muted olive North China plain middle-right, lush low emerald mountain ranges across southern/lower half. Several thin winding silvery grey-blue rivers thread naturally through the terrain. Refined restrained hand-painted relief cartography reminiscent of the sober geography of Romance of the Three Kingdoms strategy games. Painted terrain must fill the whole rectangular canvas, with no ocean or coastline, because game code clips the texture to real continent geometry. No cities, houses, soldiers, buildings, castles, UI, labels, text, compass, borders, icons, roads or route lines. No gold ornament, no glow, no satellite photo. Soft cool daylight, dusty olive, pale brown, stone grey and subdued green, natural realistic regional mountains visible as graceful relief. Background has low contrast to make live labels easy to read. Entire image is reusable map surface.

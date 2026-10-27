@@ -8,4 +8,4 @@
 
 运行 `scripts/tests/skill_info_ui_smoke.gd -- --screenshots=<输出目录>` 和 `scripts/tests/character_panel_ui_smoke.gd -- --capture=<输出目录>` 可重建全部截图；使用实际显示器和 `--rendering-method gl_compatibility --audio-driver Dummy`，隔离 `XDG_DATA_HOME` 以保护个人存档。
 
-正式规则见 [战斗文档](../../docs/03_战斗系统与角色机制.md#机械师专属技能天赋)，验收见 [设计评审](../../docs/design-reviews/2026-10-15_机械师专属技能天赋.md)。完整 `scripts/check_project.sh` 已通过 141 项独立 smoke、3 个场景、4 项 Python 检查，零脚本错误与泄漏报告。截图不能代替整局体验或长期压力证据。
+本目录保留2026-10-15的旧技能天赋素材与截图。对应玩法规格已随新设计撤下，原评审可从Git历史查阅；新目标见[当前设计共识](../../docs/00_当前设计共识.md)，旧运行差距见[运行基线](../../docs/implementation/2026-10-26_重构前运行基线.md)。以下验证指当时版本：完整 `scripts/check_project.sh` 已通过 141 项独立 smoke、3 个场景、4 项 Python 检查，零脚本错误与泄漏报告。截图不能代替整局体验或长期压力证据。

@@ -5,9 +5,7 @@ Active graph location:
 - `graphify-out/GRAPH_REPORT.md`
 - `graphify-out/graph.json`
 
-Legacy documentation-only snapshot:
-
-- `docs/graphify/` was an older graph generated from design docs only. Do not treat it as the active code graph.
+The graph is currently stale and does not describe the new design or cleaned documentation tree. Read [the design consensus](00_当前设计共识.md) and [current status](08_当前实现状态与后续重点.md) first. Documentation-only changes do not require a rebuild; do not recreate deleted specifications from graph nodes.
 
 ## Update command
 
@@ -43,10 +41,16 @@ The project root maintains `.graphifyignore` to keep the graph focused on gamepl
 - `graphify-out/`
 - `addons/godot_mcp/`
 - `archive/legacy/`
-- `docs/13_*` and `docs/14_*` (retired design specifications)
+- Legacy `docs/13_*` and `docs/14_*` patterns may remain in the ignore configuration; those retired specifications have been deleted.
 
 Without this ignore file, editor MCP tooling can dominate the graph with utility nodes such as `_success()`, `_error()`, and `_find_node_by_path()`, making architecture review less useful.
 
 2026-10-25 verification: the required update was run again after the story presentation change. It still excludes `.gd`; `story_visuals.gd` and `dialogue_panel.gd` received zero nodes. The partial 5402-node output was rejected and the prior 5094-node graph/report/HTML restored, with a current stale marker. See the [story presentation review](design-reviews/2026-10-25_主线场景与叙事呈现.md) and [update log](design-reviews/evidence/2026-10-25/graphify-update.log).
 
 2026-10-25 music integration verification: `graphify update .` was run after the original-score/runtime changes. The 5478-node candidate still omitted the new `music_catalog.gd` and `music_context_smoke.gd`; it was rejected and the prior 5094-node graph restored with a refreshed stale marker. Evidence: [update log](design-reviews/evidence/2026-10-25/music/graphify-update.log), [coverage and restore](design-reviews/evidence/2026-10-25/music/graphify-coverage.json). Do not treat this graph as verification of the new music runtime.
+
+2026-10-27 UI framework: the protected updater invoked `graphify update .`; exit was 0 but the Godot extractor remained unavailable, with 149 runtime GDScript sources missing. The candidate was rejected and the original graph restored with a refreshed stale marker. [Update log](design-reviews/evidence/2026-10-27/chronicle/graphify-update.log).
+
+2026-10-27 real combat: the protected updater again invoked `graphify update .`; exit was 0, but Godot extraction was unavailable and 166 runtime scripts lacked coverage. The candidate was rejected and the previous graph retained. New battle/campaign code must be read directly. [Update log](design-reviews/evidence/2026-10-27/combat/graphify-update.log).
+
+2026-10-27 battle presentation reuse: protected update completed with exit 0, but GDScript extraction is still unavailable and 167 runtime scripts are uncovered. Incomplete candidate rejected; prior graph retained. [Reuse update log](design-reviews/evidence/2026-10-27/combat-reuse/graphify-update.log).

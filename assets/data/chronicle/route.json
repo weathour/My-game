@@ -1,0 +1,393 @@
+[
+  {
+    "id": "S01",
+    "name": "听闻鬼城公主",
+    "kind": "event",
+    "next": [
+      "B01"
+    ],
+    "segment": 0,
+    "summary": "推进当前故事，查看行军记录与人物入池变化。",
+    "map_summary": ""
+  },
+  {
+    "id": "B01",
+    "name": "城外异乡人",
+    "kind": "battle",
+    "next": [
+      "S02"
+    ],
+    "segment": 0,
+    "summary": "城外荒道，异乡来客卷入战事。贾苇索独自迎敌。"
+  },
+  {
+    "id": "S02",
+    "name": "艾玛随行",
+    "kind": "event",
+    "next": [
+      "B02"
+    ],
+    "segment": 0,
+    "summary": "推进当前故事，查看行军记录与人物入池变化。",
+    "map_summary": ""
+  },
+  {
+    "id": "B02",
+    "name": "入城旧街",
+    "kind": "battle",
+    "next": [
+      "S03"
+    ],
+    "segment": 0,
+    "summary": "击败首领后通行。关末从已解锁人物中抽卡。",
+    "map_summary": ""
+  },
+  {
+    "id": "S03",
+    "name": "鬼市落脚",
+    "kind": "event",
+    "next": [
+      "B04",
+      "B05"
+    ],
+    "segment": 0,
+    "summary": "鬼市中有人诊治伤者，也有人清点军需。",
+    "map_summary": "鬼市诊治伤者，清点军需。"
+  },
+  {
+    "id": "B04",
+    "name": "运粮道",
+    "kind": "battle",
+    "next": [
+      "B03"
+    ],
+    "segment": 1,
+    "summary": "押粮鬼尉把守运粮道，近战与突进鬼卒沿路阻击。",
+    "map_summary": "近战与突进鬼卒；押粮鬼尉守路。"
+  },
+  {
+    "id": "B05",
+    "name": "冥市暗巷",
+    "kind": "battle",
+    "next": [
+      "B03"
+    ],
+    "segment": 1,
+    "summary": "冥灯术士占据暗巷，远程敌人有重装近战护卫。",
+    "map_summary": "远程敌人与重装近卫；冥灯术士坐镇。"
+  },
+  {
+    "id": "B03",
+    "name": "匪寨夺旗",
+    "kind": "battle",
+    "next": [
+      "S04"
+    ],
+    "segment": 1,
+    "summary": "匪寨内多路敌人围攻，盘寨鬼魁压阵。",
+    "map_summary": "混合敌人围攻；盘寨鬼魁守寨。"
+  },
+  {
+    "id": "S04",
+    "name": "第一批追随者",
+    "kind": "event",
+    "next": [
+      "F01"
+    ],
+    "segment": 1,
+    "summary": "寨中旧部尚未散去，众人商议今后的去留。",
+    "map_summary": "寨中旧部商议去留。"
+  },
+  {
+    "id": "F01",
+    "name": "寨后古井",
+    "kind": "spring",
+    "next": [
+      "B06",
+      "S05"
+    ],
+    "segment": 1,
+    "summary": "全员恢复生命、魔法，并复活阵亡辅助。"
+  },
+  {
+    "id": "B06",
+    "name": "荒祠兵冢",
+    "kind": "elite",
+    "next": [
+      "S05"
+    ],
+    "segment": 1,
+    "summary": "荒祠镇将守着兵冢，远程、突进与重装敌人伺机而动。",
+    "map_summary": "精英关：远程、突进与重装敌人。"
+  },
+  {
+    "id": "S05",
+    "name": "寨中一夜",
+    "kind": "event",
+    "next": [
+      "B07"
+    ],
+    "segment": 1,
+    "summary": "一行人在寨中歇脚，待天亮继续行军。",
+    "map_summary": "寨中歇脚一夜。"
+  },
+  {
+    "id": "B07",
+    "name": "官署外街",
+    "kind": "battle",
+    "next": [
+      "B08",
+      "B09"
+    ],
+    "segment": 2,
+    "summary": "击败首领后通行。关末从已解锁人物中抽卡。",
+    "map_summary": ""
+  },
+  {
+    "id": "B08",
+    "name": "夺水门",
+    "kind": "battle",
+    "next": [
+      "B10",
+      "S06"
+    ],
+    "segment": 2,
+    "summary": "击败首领后通行。关末从已解锁人物中抽卡。",
+    "map_summary": ""
+  },
+  {
+    "id": "B09",
+    "name": "夺军械库",
+    "kind": "battle",
+    "next": [
+      "B10",
+      "S06"
+    ],
+    "segment": 2,
+    "summary": "击败首领后通行。关末从已解锁人物中抽卡。",
+    "map_summary": ""
+  },
+  {
+    "id": "B10",
+    "name": "封库禁卫",
+    "kind": "elite",
+    "next": [
+      "S06"
+    ],
+    "segment": 2,
+    "summary": "可以选择承担更强的敌人，争取额外成长。"
+  },
+  {
+    "id": "S06",
+    "name": "官印易主",
+    "kind": "event",
+    "next": [
+      "F02"
+    ],
+    "segment": 2,
+    "summary": "推进当前故事，查看行军记录与人物入池变化。",
+    "map_summary": ""
+  },
+  {
+    "id": "F02",
+    "name": "官署旧泉",
+    "kind": "spring",
+    "next": [
+      "S07"
+    ],
+    "segment": 2,
+    "summary": "全员恢复生命、魔法，并复活阵亡辅助。"
+  },
+  {
+    "id": "S07",
+    "name": "吕玲绮正式登场",
+    "kind": "event",
+    "next": [
+      "S08"
+    ],
+    "segment": 3,
+    "summary": "推进当前故事，查看行军记录与人物入池变化。",
+    "map_summary": ""
+  },
+  {
+    "id": "S08",
+    "name": "吕家风波",
+    "kind": "event",
+    "next": [
+      "S09"
+    ],
+    "segment": 3,
+    "summary": "此前发生的伤害让吕家与贾苇索的对立加深。"
+  },
+  {
+    "id": "S09",
+    "name": "事后对立",
+    "kind": "event",
+    "next": [
+      "B11"
+    ],
+    "segment": 3,
+    "summary": "推进当前故事，查看行军记录与人物入池变化。",
+    "map_summary": ""
+  },
+  {
+    "id": "B11",
+    "name": "旧城巷战",
+    "kind": "battle",
+    "next": [
+      "B12",
+      "S10"
+    ],
+    "segment": 3,
+    "summary": "击败首领后通行。关末从已解锁人物中抽卡。",
+    "map_summary": ""
+  },
+  {
+    "id": "B12",
+    "name": "瘟灯鬼巷",
+    "kind": "elite",
+    "next": [
+      "S10"
+    ],
+    "segment": 3,
+    "summary": "可以选择承担更强的敌人，争取额外成长。"
+  },
+  {
+    "id": "S10",
+    "name": "鬼曹军临城",
+    "kind": "event",
+    "next": [
+      "S11"
+    ],
+    "segment": 3,
+    "summary": "推进当前故事，查看行军记录与人物入池变化。",
+    "map_summary": ""
+  },
+  {
+    "id": "S11",
+    "name": "暂时协力守城",
+    "kind": "event",
+    "next": [
+      "B13",
+      "B14"
+    ],
+    "segment": 4,
+    "summary": "推进当前故事，查看行军记录与人物入池变化。",
+    "map_summary": ""
+  },
+  {
+    "id": "B13",
+    "name": "东门城墙",
+    "kind": "battle",
+    "next": [
+      "B15"
+    ],
+    "segment": 4,
+    "summary": "击败首领后通行。关末从已解锁人物中抽卡。",
+    "map_summary": ""
+  },
+  {
+    "id": "B14",
+    "name": "外河渡口",
+    "kind": "battle",
+    "next": [
+      "B15"
+    ],
+    "segment": 4,
+    "summary": "击败首领后通行。关末从已解锁人物中抽卡。",
+    "map_summary": ""
+  },
+  {
+    "id": "B15",
+    "name": "破围城军阵",
+    "kind": "battle",
+    "next": [
+      "S12"
+    ],
+    "segment": 4,
+    "summary": "击败首领后通行。关末从已解锁人物中抽卡。",
+    "map_summary": ""
+  },
+  {
+    "id": "S12",
+    "name": "城门重开",
+    "kind": "event",
+    "next": [
+      "F03"
+    ],
+    "segment": 4,
+    "summary": "推进当前故事，查看行军记录与人物入池变化。",
+    "map_summary": ""
+  },
+  {
+    "id": "F03",
+    "name": "城门古泉",
+    "kind": "spring",
+    "next": [
+      "B16"
+    ],
+    "segment": 4,
+    "summary": "全员恢复生命、魔法，并复活阵亡辅助。"
+  },
+  {
+    "id": "B16",
+    "name": "鬼曹主将",
+    "kind": "battle",
+    "next": [
+      "S13"
+    ],
+    "segment": 4,
+    "summary": "击败首领后通行。关末从已解锁人物中抽卡。",
+    "map_summary": ""
+  },
+  {
+    "id": "S13",
+    "name": "救城之后，旧仇仍在",
+    "kind": "event",
+    "next": [
+      "F04"
+    ],
+    "segment": 4,
+    "summary": "推进当前故事，查看行军记录与人物入池变化。",
+    "map_summary": ""
+  },
+  {
+    "id": "F04",
+    "name": "楼前整备",
+    "kind": "spring",
+    "next": [
+      "B17"
+    ],
+    "segment": 5,
+    "summary": "全员恢复生命、魔法，并复活阵亡辅助。"
+  },
+  {
+    "id": "B17",
+    "name": "白门楼前精英关",
+    "kind": "elite",
+    "next": [
+      "B18"
+    ],
+    "segment": 5,
+    "summary": "白门楼前最后一道防线。通过相关剧情后，张辽、高顺与陈宫加入卡池。"
+  },
+  {
+    "id": "B18",
+    "name": "吕布终战",
+    "kind": "boss",
+    "next": [
+      "S14"
+    ],
+    "segment": 5,
+    "summary": "与吕布决战。完成本章后返回天下。"
+  },
+  {
+    "id": "S14",
+    "name": "一方之主",
+    "kind": "event",
+    "next": [],
+    "segment": 5,
+    "summary": "推进当前故事，查看行军记录与人物入池变化。",
+    "map_summary": ""
+  }
+]

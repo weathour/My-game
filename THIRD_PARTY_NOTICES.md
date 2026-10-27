@@ -17,7 +17,7 @@ Current files:
 - `assets/menu_bgm.mp3`
 - `assets/menu_bgm.ogg`
 
-Status: no longer referenced by runtime scenes; explicitly excluded by `export_presets.cfg`. Retained source files still have no added license evidence.
+Status: no longer referenced by runtime scenes; explicitly excluded by `export_presets.cfg`. The four audio files and their `.import` files have been removed from the Git index for the current source tree, while the local files remain. Their original public `origin/main` history is unchanged and still contains the audio; no history rewrite has been performed. Retained source files still have no added license evidence.
 
 Do not redistribute these retained files, including in a public source archive, without replacement or explicit license evidence. The new music does not retroactively license them.
 
@@ -30,7 +30,7 @@ Current paths include:
 - `effects/`
 - `enemies/`
 
-Status: prototype material. Verify source and usage rights before public/commercial distribution.
+Status: prototype material in the source tree. Its source and usage rights still need review before production or commercial distribution.
 
 ## Mechanic artwork (2026-10-13)
 
@@ -66,3 +66,20 @@ Status: prototype material. Verify source and usage rights before public/commerc
 - Provenance, software sources, license context, exact reproduction steps and limitations: [soundtrack production record](design/music-20261025/README.md). Full source scores, MIDI, REAPER projects, 24-bit FLAC masters and per-file hashes are retained there.
 - REAPER was used under its official 60-day evaluation; continued DAW use beyond that period requires the appropriate license. The exported game does not depend on REAPER or its trial period.
 - Technical audio checks do not establish human artistic approval or clear unrelated visual assets.
+
+## Chronicle UI geographic data (2026-10-27)
+
+`assets/data/chronicle/provinces.json` is converted from wonton1984/sanguo-map `data/donghan.js` under MIT; the original notice is retained in [sanguo-map-LICENSE.txt](assets/data/chronicle/sanguo-map-LICENSE.txt). Only the self-drawn province data was used, not its third-party portraits, modern basemap or novel text. `land.json` is Natural Earth 110m land, public domain. [Data provenance](assets/data/chronicle/README.md).
+
+New map/portrait illustrations were generated with native image_gen; [manifest and prompts](design/ui-direction-20261027/manifest.json). Downloaded RTK/Rance screenshots under `design/**/reference/` are local research references, excluded from the current source tree and not used as runtime art; their source records and research documents are retained.
+
+## Chronicle character-card atlases (2026-10-27)
+
+- Runtime paths: `assets/ui/chronicle/cards/named-transparent.png`, `common-transparent.png` and `companions-transparent.png`; the original nontransparent atlases are retained alongside them. The three ImageGen-created atlases contain 26 portrait cells, mapped and reused for the 38-entry character directory; common troops also use color variants. Emma continues to use the existing `assets/ui/chronicle/emma.png`.
+- Eight named Three Kingdoms cards use *The Ravages of Time* as a visual reference. These are provisional designs, not individually finalized reproductions, and their reference-derived status is not a clearance of character-design rights.
+- [Generation manifest](design/ui-reflow-20261027/generated-manifest.json), [prompts](design/ui-reflow-20261027/prompts.json) and [reference sources](design/ui-reflow-20261027/reference/sources.json) record provenance. Two references are from the creator's official site; the Gao Shun reference is a secondary reproduction on Sina. The commercial reference images are research material and are not used as runtime textures. Review or replace reference-derived assets as appropriate before public or commercial distribution.
+
+## Jia battle art (2026-10-27)
+
+- Runtime path: `assets/players/jia/`. ImageGen source sheets use the user-approved [Jia standing art](design/jia-weisuo-20261027/jia-standing-v1.png) as the character identity reference; the previously generated mechanic animation sheet is a pixel-style and workflow reference only. See the mechanic notice above for its own reference history.
+- The HUD portrait is generated separately and exported through Aseprite, rather than cropped from a character animation frame. Aseprite exports character and effect strips plus editable `.aseprite` files; source images, prompts, import command and the validation boundary are recorded in [Jia battle-art provenance](design/jia-combat-20261027/README.md).

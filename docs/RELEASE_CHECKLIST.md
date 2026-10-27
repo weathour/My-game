@@ -1,115 +1,63 @@
-# Release Checklist
+# 发布检查
 
-Use this before any public build, demo handoff, or store upload.
+2026-10-27更新。当前原型已接通六个真实战斗节点；本次工作范围包括公开源码同步。成品游戏发行仍须逐项完成以下验收，旧版本的通过记录不代替新玩法检查。
 
-## Automated checks
+## 规则与实现一致
 
-- [x] Run local project checks: 2026-10-25 final architecture gate passed 174/174 regular smokes with no script errors or exit-leak warnings. Rerun after later code changes; see [evidence](implementation/evidence/2026-10-25/architecture/project-check-final/results.json).
+- [ ] 发布范围、README、当前共识与实际代码一致；未实现功能没有写成已交付。
+- [ ] 天下图能查看全部州/大模块、局势和战役信息；选择出征后进入相关区域路线图，小关、精英关和其他节点通向最终Boss，实际战斗结束可恢复正确路线进度。
+- [ ] 随行无限，关间可从全部合格人物中换两辅助，新卡下一关可用；战役禁入、阵亡和资源状态正确。主线行动在出征完成后结算一次，查看地图和失败重试不额外消耗行动。
+- [ ] 固定主角、两辅助的后台帮助和直接操作符合最终规则，生命魔法独立。
+- [ ] 普攻、常规技能和瞄准自动，最多2个关键技能按角色共用键位手动触发；无鼠标可完成关内操作，整体复杂度经过实玩检查。
+- [ ] 技能键只调用当前人物，后台支援自动，魔法仅供手动关键技能；本关三人回魔与冷却，候补冻结。存活人物升级回满资源，阵亡者不复活。
+- [ ] 一般只有前台人物直接承伤；特殊辅助代主角承伤按角色规则结算。短暂公共切换冷却不附赠通用无敌，也不刷新各角色生命、魔法或技能冷却。
+- [ ] 只有主角死亡失败；辅助死亡切回主角，胜利后阵亡延续到指定恢复节点。
+- [ ] 辅助阵亡停止后台支援，已获得人物的持有加成仍保留；不出征也能获得对应持有收益。
+- [ ] 每小关四角场域择一后其余失效，可以全部绕开；精英和奖励按最终规则结算。
+- [ ] Boss定时或击杀数提前出现，死亡立即通关；未击败的场域精英无额外奖励，已完成挑战正常结算。
+- [ ] 普通五选二／精英收益五选三、章末七选三／精英收益七选四正确；章末至少两张重要候选，保底遵守剧情资格。重复卡升1级保留经验，按进关实际人数均分且本关阵亡仍分，战后加入者不追分。
+- [ ] 不出场角色的持有加成、等级变化与后台辅助效果分清且不重复累计。
+- [ ] 全队共享3槽装备、关间换装与换人正确；切换保留临时效果和召唤物，过关清理普通临时效果及召唤物，HP／MP／阵亡／冷却保留。
+- [ ] 普通关间不自动恢复，泉水与整次出征完成返营能全员恢复并复活辅助；已通关不可返回刷取。
+- [ ] 失败回到进关前状态，撤销本关全部暂存收益，保留此前成果。
+
+- [ ] 单人开局和辅助空位合法，首关无需切人也能完成；艾玛战后剧情直接获得并入池，不占正常五选二，读档不会重复赠送；同次选到艾玛按重复卡处理。
+- [ ] 护甲／武器／饰品三槽分别展示受击效果／主角攻击形态／攻击附魔；共享配置和实际作用范围一致，不套用旧基础属性限制。
+
+- [ ] 经验物拾取后即时分配，通关收取剩余及Boss经验；不重复记账、不补算存活敌人，升级恢复与失败回退一致。
+- [ ] Boss无论定时还是提前出现，都停止普通刷怪；已有敌人与额外精英保留，专属援军及其经验总量有限。
+
+## 保存和恢复
+
+- [ ] 多手动档与自动续档独立；战斗退出恢复进关前，前关成果保留；读旧档整体回退人物、装备和战果，不与之后收益合并。
+- [ ] 成功、人物卡抽取、重复升级、装备入库与推进之间任一步退出，都不会重复发奖或丢失待结算内容。
+- [ ] 加载到暂停页后未继续便再次退出，仍能保留奖励；覆盖现有小Boss候选丢失路径。
+- [ ] 坏主档＋好备份、双坏档、不支持版本、写盘失败、恢复失败都有明确结果，不覆盖原始故障文件或半恢复状态。
+- [ ] 旧档策略已确定，并按所选迁移/隔离方案验收；没有未经说明删除玩家数据。
+- [ ] 设置、重绑、音量和成就保存符合最终版本，暂停原因互不错误释放。
+
+## 自动检查与实际游玩
+
+代码改动按根 [AGENTS.md](../AGENTS.md)执行，完整检查：
 
 ```bash
 ./scripts/check_project.sh
 ```
 
-- [ ] GitHub `Project Checks` passes with its pinned Godot `4.6.2` binary.
+- [ ] 更新对应旧玩法合同后，项目检查和必要的新规则回归通过；没有只改断言来掩盖行为缺陷。
+- [ ] 实际游玩一段完整主线，检查操作、打断频率、辅助价值、关间资源与抽卡节奏。
+- [ ] 在1280×720及支持窗口档位检查HUD、整备、人物信息、结算和设置的可读性、焦点和滚动。
+- [ ] 高密度战斗按完整场景测量，检查刷怪预警、有效命中、对象池复用、保存峰值与多次入退资源稳定。
+- [ ] 完整试听与正常速度游戏混音、音量静音及目标设备输出检查完成。
 
-## Package sanity
+## 资源、打包与平台
 
-- [ ] Open the project in Godot `4.6.2`.
-- [ ] Main scene is `res://scenes/main_menu.tscn`.
-- [x] Run headless parse: passed in the 2026-10-25 final gate.
+- [ ] 素材与分发边界按 [THIRD_PARTY_NOTICES.md](../THIRD_PARTY_NOTICES.md)和 [LICENSE.md](../LICENSE.md)核对。
+- [ ] 导出包含需要的运行数据，排除编辑器插件、测试、文档、制作源档和不允许分发的占位素材。
+- [ ] PCK从隔离目录独立验证，随后用匹配模板生成并运行实际独立可执行包。
+- [ ] 测试目标系统、字体回退、音频与存档权限。
+- [ ] 若接入Steam，再按[成就适配说明](achievements/STEAM_ADAPTER.md)验收，不默认本次已接入。
 
-```bash
-/home/weathour/.local/bin/godot-4.6.2 --headless --path . --quit
-```
+## 历史验证的使用方式
 
-- [ ] Manually launch main menu.
-- [ ] Start story mode if enabled.
-- [ ] Start endless mode.
-- [ ] Test pause/resume/main-menu return.
-- [ ] Test window/fullscreen switching and 16:9 window resize behavior.
-- [ ] Test main-menu Settings opens centered after changing window size.
-- [ ] Verify each role receives its own skill point on level-up, existing-skill plus buttons spend that role’s point, empty slots offer three unowned skills, and wave blessing selection is free.
-- [ ] Reach skill Lv.5: verify the two-slot choice, one selected talent, correct owned/pending state and resume after save/load; at Lv.10 verify the other slot is granted.
-- [ ] For mechanic, verify both effects of each skill line change their documented combat behavior; other roles must label unimplemented slots explicitly.
-- [ ] Verify the live talent flow never opens the historical Lv.3/Lv.6/Lv.9 skill-build tree, writes old `skill_talents`, or queues every-three-player-level talent picks.
-- [ ] Test hover details for role builds, blessings, rewards, bottom skill slots, normal attack, and ultimate energy.
-- [ ] Open the character panel: verify all 14 overview stats and sources, skill levels/talents, blessing counts, shared carried items, equipment transfers, and the read-only saved `level_talents` list.
-- [ ] Verify Q/E switching without full energy changes role but does not fire an entry skill; full **departing-role** energy is consumed and fires only the incoming entry skill. Exit-skill copy/tutorial must not claim an effect while `EXIT_SKILLS_ENABLED=false`.
-- [ ] Verify all 20 active skills honor their auto/manual setting and the matching slot key, including the mechanic's five deployments. Gunner Infinite Reload retains its toggle behavior, and directional skills retain their aiming rules.
-- [ ] In camp, verify all four roles including mechanic, avatar/team synchronization, role introductions, team replacement/reordering, and next-run semantics when a run already exists.
-- [ ] At the dog and blacksmith, verify separate buy/refund actions, duplicate purchases, all 17 effect previews, capacity/poor/empty-owned states, and no inventory/bone changes after a failed save.
-- [ ] Verify camp overview and departure loadout, nearest interact highlight, all-modal movement lock, focus restoration, and F not resetting an open tier selector. Check 1280×720 and 960×540 modal action bounds.
-- [ ] Return after a clear, a defeat and an active end-run: keep permanent items/bones, clear only the run save, and show the latest run summary without paying a duplicate reward.
-- [ ] Defeat the endless final Boss in wave 20: verify fixed/first-clear bones, N+1 unlock, run-save removal, and return to camp with no same-run skill reward or “continue deeper” choice.
-
-
-## Performance sanity
-
-- [ ] Endless mode keeps intended enemy density; low FPS must not silently reduce normal enemy count.
-- [ ] Under high density, effective player projectiles still check each physics-step path, spawn warnings retain the full reaction window, and reused enemy nodes do not receive damage queued for an earlier activation.
-- [ ] Run the isolated battle lifecycle benchmark; review whole-frame time, physics-step workload, save peaks and ten enter/exit snapshots. A passing microbenchmark is not a 60 FPS guarantee.
-- [ ] Developer normal-enemy batch spawner can reproduce dense-combat scenes.
-- [ ] Level-up, blessing binding, and skill-reward confirmation do not create obvious click-frame stalls.
-- [ ] If a stall is reported, enable performance trace briefly and inspect `user://performance_trace_latest.jsonl` for slow-frame, SavePeak, pending spawn, and batch counters.
-- [ ] Combat save still overwrites `run_save.json` and `run_save_backup.json` only; save file count must not grow with play time.
-
-## Save/settings sanity
-
-- [ ] New story profile can be created.
-- [ ] Endless profile can be created.
-- [ ] Continue game works after leaving a run.
-- [ ] Keybind changes persist.
-- [ ] Music settings persist.
-- [ ] Display settings persist.
-- [ ] Keybind editing in main-menu Settings still works after closing/reopening the panel.
-- [ ] Role-build levels and role special state persist across continue-game save/load.
-- [ ] `role_special_states[role_id].skill_levels` and `.skill_talent_slots` persist across continue-game save/load, and a skill reaching level 5 still shows its pending two-slot talent pick after reloading.
-- [ ] `pending_level_talent_choices`, active talent context, `level_talents`, and `level_talent_group_locks` still round-trip for legacy saves; the player-level talent entry no longer queues new picks, and legacy `skill_talents` remains empty after normalization.
-- [ ] Blessing levels, retained attribute-training state, skill blessing levels, and equipment persist across continue-game save/load.
-- [ ] Achievement unlock state persists.
-
-## Content/legal
-
-- [x] Runtime placeholder BGM replaced with 14 original cues; four retained old music files excluded from the export preset. Source archive redistribution still requires excluding or clearing those retained files.
-- [ ] Human listening, normal-speed gameplay mix and target-device speaker checks for the new score; technical audio QA does not close these gates.
-- [ ] Review the implemented common UI/result tones and independent SFX volume; author and verify remaining combat/environment SFX if required for the release.
-- [ ] Placeholder images/sketches replaced or license cleared.
-- [ ] README, `docs/README_文档索引.md`, `docs/04`, `docs/06`, `docs/08`, `ROADMAP.md`, `KNOWN_ISSUES.md`, and this checklist describe the same shipped progression and settlement rules.
-- [ ] `THIRD_PARTY_NOTICES.md` reviewed.
-- [ ] `LICENSE.md` reviewed for intended distribution model.
-
-## Steam-specific future checks
-
-- [ ] GodotSteam installed only for Steam package lane.
-- [ ] Steamworks Achievement API Names match local `data/achievements.json` IDs.
-- [ ] Steamworks changes are published.
-- [ ] `Steam.setAchievement()` and `Steam.storeStats()` verified in a Steam test app.
-
-## Story and recovery acceptance added 2026-10-23
-
-- [ ] Read the current [architecture implementation evidence](implementation/2026-10-25_架构健全性整改.md) and its final verification limits; the earlier [framework record](implementation/2026-10-23_系统框架实施.md) is provenance.
-- [ ] Accept, clear and deliver all three quests through real controls; verify current objective, next NPC and chapter completion.
-- [ ] Reopen a postponed dialogue, reveal text, skip to a choice, confirm delivery and inspect read-only history using keyboard and mouse.
-- [ ] Verify 1280×720 / 960×540, large story text, reduced motion and steady spawn warnings; boss/skill effects retain their current separate visual behavior.
-- [ ] Verify corrupted primary + valid backup, two damaged files, unsupported version, interrupted departure, failed settlement write and repeated submission without losing the raw files or paying twice.
-- [ ] Verify nested damaged entity/ability state falls back safely; a failed runtime restore must not start a fresh battle or overwrite either file. A failed endless cleanup must remain retryable without paying a reward twice.
-- [ ] Verify overlapping reward, pause and character-panel reasons cannot resume one another; third-stage story HUD shows elapsed Boss-hunt time past 300 seconds.
-- [ ] Verify small-Boss reward before wave blessing on resume, and restored final settlement retry.
-- [ ] Verify failure/abandon review, same-stage retry and a practice replay with no permanent story reward.
-
-## Development package
-
-The checked-in `Linux development` preset exports runtime story/achievement JSON and excludes editor tools, tests, docs and design artifacts. Generate a content pack with:
-
-```bash
-mkdir -p builds/linux
-/home/weathour/.local/bin/godot-4.6.2 --headless --path . --export-pack 'Linux development' builds/linux/survivor_like.pck
-```
-
-Run `scripts/tests/package_content_check.gd` from an empty temporary project directory with an isolated `XDG_DATA_HOME` and the absolute PCK path after `--`. This checks packaged resources and three-stage story transactions without falling back to source files. Also boot the pack with `--main-pack builds/linux/survivor_like.pck --quit`.
-
-The 2026-10-25 architecture PCK passed both checks, including all 14 original music cues; [package evidence](implementation/evidence/2026-10-25/architecture/project-check-final/package-results.json) records its hash and isolation directory. This does not close the standalone executable, full-run performance or human acceptance items below.
-
-- [ ] Install the matching Godot export templates and produce/run the independent Linux executable. A locally booted PCK alone is not this check.
-- [ ] Test each intended target OS, font fallback, audio output and save-directory permissions.
-- [ ] Clear asset rights in `THIRD_PARTY_NOTICES.md` before sharing any build outside authorized development.
+2026-10-25的174/174smoke与独立PCK是旧实现证据，见[架构实施记录](implementation/2026-10-25_架构健全性整改.md)。它们可以帮助保护复用模块，不能代替以上新规则检查；高密度整帧仍未达60FPS预算。本次公开源码同步不等于完成上述成品发行检查。

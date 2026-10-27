@@ -1,0 +1,81 @@
+{
+  "date": "2026-10-27",
+  "status": "approved-d-implemented-ui-framework",
+  "tool": "built-in image_gen",
+  "reference": "docs/design-reviews/evidence/2026-10-26/ui-campaign/main-menu.png",
+  "outputs": [
+    {
+      "file": "design/ui-direction-20261027/probes/a-map-led.png",
+      "source": "/home/weathour/.codex/generated_images/01a176ff-4a4a-7783-a114-0a440ed6ef3c/exec-ac9339ad-80e8-4ad6-8167-2559ba0c99f7.png",
+      "sha256": "f19c027c7b0dd27a86ee777103553406bb8b8e5cab72c96127efd883f1847e1f",
+      "status": "rejected-by-user-browser-game-aesthetic"
+    },
+    {
+      "file": "design/ui-direction-20261027/probes/b-character-led.png",
+      "source": "/home/weathour/.codex/generated_images/01a176ff-4a4a-7783-a114-0a440ed6ef3c/exec-30e32edb-88f8-41a0-ab88-938cd85593c7.png",
+      "sha256": "0767e3ee3f44fc49c77a1d4c768f5d3c70d260bc483f9e5d25d1e6f3ccaa1ec4",
+      "status": "rejected-by-user-browser-game-aesthetic"
+    },
+    {
+      "file": "design/ui-direction-20261027/probes/c-rtk-rance-layout.png",
+      "source": "/home/weathour/.codex/generated_images/01a176ff-4a4a-7783-a114-0a440ed6ef3c/exec-58483749-bb73-4f02-af22-36b6bf5f5748.png",
+      "sha256": "b92a4aafb582d3321b41cacf306e87c5bffc4b72c179271e2ae9b09f6ebba91e",
+      "status": "superseded-by-d"
+    },
+    {
+      "file": "design/ui-direction-20261027/probes/d-rtk-rance-restrained.png",
+      "source": "/home/weathour/.codex/generated_images/01a176ff-4a4a-7783-a114-0a440ed6ef3c/exec-fb0d4510-6cf5-49cf-8df2-22baa4cf792c.png",
+      "sha256": "de550dc46ab441d2f5037cb6bb0a3078dfab1103f23868f458a4b07091c66c0a",
+      "status": "approved-by-user"
+    }
+  ],
+  "limitations": [
+    "Not functional UI",
+    "Illustrative geography and node links",
+    "Generated text is not approved copy",
+    "Han architectural forms require refinement"
+  ],
+  "user_direction": "美术参考光荣三国志系列，UI布局与操作组织参考兰斯10；A/B页游感过重，弃用。",
+  "references": [
+    {
+      "file": "reference/rtk14-geography.png",
+      "source": "https://www.gamecity.com.tw/manual/sangokushi14/wpk/sc/images/3000/3100_01.png",
+      "page": "https://www.gamecity.com.tw/manual/sangokushi14/wpk/sc/3100.html"
+    },
+    {
+      "file": "reference/rtk14-main.png",
+      "source": "https://www.gamecity.com.tw/manual/sangokushi14/wpk/sc/images/3000/3300_01.png",
+      "page": "https://www.gamecity.com.tw/manual/sangokushi14/wpk/sc/3300.html"
+    },
+    {
+      "file": "reference/rance10-route.jpg",
+      "source": "https://livedoor.blogimg.jp/alicesoft2010/imgs/2/6/2672e9ee.jpg",
+      "page": "https://www.alicesoft.com/information/2017/entry002328.html"
+    },
+    {
+      "file": "reference/rance10-world.jpg",
+      "source": "https://livedoor.blogimg.jp/alicesoft2010/imgs/2/d/2da2efbb-s.jpg",
+      "page": "https://www.alicesoft.com/information/2017/entry002323.html"
+    }
+  ],
+  "reference_use": "External screenshots are reference-only research materials, not runtime art or distributable game assets.",
+  "user_authorization": "方向D已获认可；不再提问，自主推进到操作界面大框架完成。",
+  "runtime_assets": [
+    {
+      "file": "assets/ui/chronicle/baimen-terrain.png",
+      "source": "/home/weathour/.codex/generated_images/01a176ff-4a4a-7783-a114-0a440ed6ef3c/exec-491af6bc-2065-40f9-96d1-a96ce060be34.png",
+      "sha256": "ab83c8bb1a99bd463272055edc56d5b89ee861d939671aaea16535096ecc9771"
+    },
+    {
+      "file": "assets/ui/chronicle/emma.png",
+      "source": "/home/weathour/.codex/generated_images/01a176ff-4a4a-7783-a114-0a440ed6ef3c/exec-008275dd-6d57-4ded-b54e-4c58de2f10ef.png",
+      "sha256": "b2a3cc7bac947afff83d611ca7b403bd9074c19e8f025516d81ec92cc6733a37"
+    },
+    {
+      "file": "assets/ui/chronicle/world-relief.png",
+      "source": "/home/weathour/.codex/generated_images/01a176ff-4a4a-7783-a114-0a440ed6ef3c/exec-e9ee73cf-fccd-4d36-9219-708d3f2e234a.png",
+      "sha256": "433f923f433be9b48ad1c933a97010dbccd5dc867d08e24ce10f41d244ab42f4"
+    }
+  ],
+  "runtime_prompts": "design/ui-direction-20261027/runtime-prompts.md"
+}

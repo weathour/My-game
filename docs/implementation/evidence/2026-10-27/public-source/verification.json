@@ -1,0 +1,948 @@
+{
+  "result": "PASS",
+  "smoke_count": 183,
+  "independent_benchmark_excluded": "dense_combat_benchmark_smoke",
+  "tests": [
+    {
+      "name": "ability_talent_snapshot_save_smoke",
+      "script_sha256": "12c780c55094dc7f0d103326be2567b323510b2efd5b91850aaec5677a529efb",
+      "log_sha256": "bb458c8ec9f6d66adfce655e68f22c85fd101523b4f34640ccf863ab803bb18c"
+    },
+    {
+      "name": "achievement_smoke",
+      "script_sha256": "0417e5c67042b299519e5b2d201f3850970793bba71c97857707a93fd5c0c492",
+      "log_sha256": "89c3b6dbbd366379fea64fb14e2590d0eb7a08902c234dc2bdf82cbdd16285e8"
+    },
+    {
+      "name": "armor_rules_smoke",
+      "script_sha256": "7e00d540ea3cde7eff0726f5f0638c268886af67feb3d15531aaae7934b1baa3",
+      "log_sha256": "95899a6a1949a29ea0e26154384a555052e3fd90a096d5bb9fa3357a80036ec1"
+    },
+    {
+      "name": "blade_storm_build_smoke",
+      "script_sha256": "28fecfac5aa80a8ade8d2d954d61a2371de2165bf0b80472f95e70004277e8bf",
+      "log_sha256": "56b246338753fa5147fb7a1c889d807425804bb3d4b1ccb55c2a56331201effb"
+    },
+    {
+      "name": "bone_pickup_smoke",
+      "script_sha256": "f01c8e7b422c8fe3da0af90333e8b3c9d9b832e3b049582c2b05de4e33a61a2b",
+      "log_sha256": "00cfc4c1ec2f5ba8e1e666cb962916669939821f907337b4f2aad0093a45b619"
+    },
+    {
+      "name": "boss_danmaku_completion_smoke",
+      "script_sha256": "b6b81d2fdd3d8085907474982ecd96fc015edfd33af26d7e11c5c29590a0d237",
+      "log_sha256": "c7239cdbc7ee92ccfb6003da483430f5249cf874c771769252e06198c1c82e20"
+    },
+    {
+      "name": "boss_danmaku_render_smoke",
+      "script_sha256": "58627aacd61e747a0bcb8b9d80cf25d09e7eca233f5ef40cc344cc7221fda7f0",
+      "log_sha256": "20eda3adf8f3907e68d3a48941fc23e599b14222d3c82a2574054670a0019666"
+    },
+    {
+      "name": "boss_danmaku_rework_smoke",
+      "script_sha256": "5d9da8410a3d77b50cf05c9fd14480c61a2569b0e6bc3f188ef8870027e80cfd",
+      "log_sha256": "d3d125b83f851e3323e49e78bf8ef0fa70bb4187c60e9cab612fa287f2a81ed0"
+    },
+    {
+      "name": "boss_danmaku_stress_smoke",
+      "script_sha256": "95ce19195a69235255a03a1509038be77464fedf8786280bff411d9021b889c3",
+      "log_sha256": "58c6809d2a5421c6e0b46ec76be4064b7f5e07e3de15829086f8a206e20a1877"
+    },
+    {
+      "name": "boss_magic_stone_patterns_smoke",
+      "script_sha256": "34d3a297922bf04107e633f1a26ffdfda0d98a460a4cef7e7be19302b71bb663",
+      "log_sha256": "90b6307a08232629849f6d996399faed5778f0aa18abd1b07f6fa61dc3e079db"
+    },
+    {
+      "name": "boss_magic_stone_stats_smoke",
+      "script_sha256": "fb5d15e690bb4c73185c0e156ab94be2a72be9bb3cfe708af842f262f7ce0827",
+      "log_sha256": "01959e4bc7d9c4d6953b3af10864326821ba4f48e71a70e785d796018341faa1"
+    },
+    {
+      "name": "boss_passive_pull_smoke",
+      "script_sha256": "af3d2da60dde03b245366452f8ad4000116bbacc27cb393678a901ad6607f46f",
+      "log_sha256": "0227422658a22d09349754ce7dd791198071735227103af77d12bc1b8d64a063"
+    },
+    {
+      "name": "boss_projectile_render_smoke",
+      "script_sha256": "9d759c163aaca5868c63adfed8ce0a202a1993e25b88143821b17d0974611c7c",
+      "log_sha256": "bca0e791e639eb3eda546b8d00eae90c214ead08e0123e87ea1ba994fe68cb61"
+    },
+    {
+      "name": "boss_projectile_renderer_lifecycle_smoke",
+      "script_sha256": "a51fcde27cdf766b77ac46107b68d4ca2c65fd6ab52607f9d0e36bda635ef122",
+      "log_sha256": "6b0557ec3f4fe5981092d52528f4d2f825887f974e67f4a25e842bb2f338c2e9"
+    },
+    {
+      "name": "boss_routine_smoke",
+      "script_sha256": "b15b0f0904348e2712b28586067e27bc8ac3779a1c1fa9c793ff05419634f9c2",
+      "log_sha256": "203367cbaad733ad387c6db65aab459ee006fbe514dbf3db801b894815d056be"
+    },
+    {
+      "name": "boss_runtime_cleanup_smoke",
+      "script_sha256": "8959ffd1d43fd324e494c5b86f1c24803e80636aa0d6e7c4095c2faa49154853",
+      "log_sha256": "51c6d1c2f52f9d88d3e2e7e66e1c5e2a9f25ccc08c8fc07ad16345f087859d9a"
+    },
+    {
+      "name": "boss_shield_phase_smoke",
+      "script_sha256": "1ccdbd78aa6806216912baebbde43b523b142090f7c14a913775ae9df66d955b",
+      "log_sha256": "d80d4c8d9ce03e02cc418ff71d52f39a8d149acf50433d049d3556392267ca62"
+    },
+    {
+      "name": "character_panel_ui_smoke",
+      "script_sha256": "3091af0b549ef0aba839c4cb09a3ec17b40a3c0020cf66d563e3a1dd6b10c0ce",
+      "log_sha256": "71c8e49e668e80a8037233832bd1d2658e208d2ead17194fbb80694e13863c56"
+    },
+    {
+      "name": "chronicle_battle_scale_smoke",
+      "script_sha256": "372c321c5e159170f17915511b305fcba39034b240c875c72a36fd4088e6593a",
+      "log_sha256": "6390789a2720ff9137126f22fb5042ad55241027d869bee65a252b31ad9db872"
+    },
+    {
+      "name": "chronicle_chapter_two_smoke",
+      "script_sha256": "f59d498786d2d22935f4b9df1f90d05db64f5ab72aae17a2a82f4a47c61262ca",
+      "log_sha256": "b26e9bfec22c5a09a5d8ec4d4751c496acb78a2c4ba1451a2e58209348e8dabc"
+    },
+    {
+      "name": "chronicle_combat_smoke",
+      "script_sha256": "ce24a9e1c957487c170304dd9d22651656d77347d5cab04f34433f75df5e6178",
+      "log_sha256": "19bcd7cdc343563540e714f83a848bfaa5a5820121470883b7b428742a75646f"
+    },
+    {
+      "name": "chronicle_party_summary_smoke",
+      "script_sha256": "a9fb8d8a08f622f866a91ccf66599ca2b8346f1c57f016baec1d443ab6bbba59",
+      "log_sha256": "9dcaf6eddfad29e8032f83f48c82b0f42a63a3f1e63795237cb5dc1e55a666f1"
+    },
+    {
+      "name": "chronicle_playable_ui_smoke",
+      "script_sha256": "4db300c66722d225141e6ef27359060100103b5fd9c87c0413b5807767618baa",
+      "log_sha256": "fa2494ef35f647f36acaa0321272f30c4b20c261b2016286c4081c9113ab2ad5"
+    },
+    {
+      "name": "chronicle_reflow_visual_smoke",
+      "script_sha256": "034df160204ef091d52d226a6b126e34e8a6aec1dec6f6918b219fe6e7038af6",
+      "log_sha256": "42a6d351ea1ff4939ab440f75ceae977601805721bf55bfec70c5e2d9aea1dd1"
+    },
+    {
+      "name": "chronicle_ui_smoke",
+      "script_sha256": "42b99cb4b04668f43d409ad84ad2a37c9716bf07370b6f008adf1d7824dc915e",
+      "log_sha256": "c6d3de8e3e65af9f125dfcaff25a7c6fc5034e5d1cb5e01bdc4a18a8fd812571"
+    },
+    {
+      "name": "combat_performance_regression_smoke",
+      "script_sha256": "13b7609314231c0d9e0002112f44f55958c30d333b88a31ea511bc35de3e196c",
+      "log_sha256": "f754a32891d50fb4cf720d29eb23a6cafe6819245ee11c908ffa4fff202ef2ff"
+    },
+    {
+      "name": "combat_runtime_optimization_smoke",
+      "script_sha256": "6a8b3888de7e65813ebb40680df7aa20f553d40db96dfb8705bf320d1200e39d",
+      "log_sha256": "b5453d69d74f43b2f3b55d73b93359b1a2a4a491a50056ca18331c10e53cb2bc"
+    },
+    {
+      "name": "combat_skill_bar_talent_projection_smoke",
+      "script_sha256": "4d3ae4c9b3ea6aee4d02405da76d3b13bf9bf7e64efc4560a31b0e13db82a22c",
+      "log_sha256": "80eda7745faf72ffeb8e2898c8814f4dd91904500c62345bcd70eaa5c9ece54a"
+    },
+    {
+      "name": "combat_wave_blessing_smoke",
+      "script_sha256": "1aa0b3a209bcf4903617d12c862de66261f15fa9a093af28e272f95da2e5220a",
+      "log_sha256": "905b93196f9df333cdb7ee81f218f98b015c0d3a87e8ee87490c64158d9a1790"
+    },
+    {
+      "name": "combat_wave_experience_smoke",
+      "script_sha256": "2102e555d38e17375ca4cc19044d144f1e91ace1495f27b1ba3e054c16696cc5",
+      "log_sha256": "fc8493cd3371548653576795076a4f9c00c09e0d6cc8d13444e82b1a45b7a5b5"
+    },
+    {
+      "name": "combat_wave_flow_smoke",
+      "script_sha256": "978f1feb114358208b03830fe69564312c60ce000e181ee2f64d07ebe7056fb6",
+      "log_sha256": "0f9f6a9d45c1eefd173d54e8b7ecd8f29a3d3ed0c6ccbf23ba1f8f88aad54640"
+    },
+    {
+      "name": "content_growth_contract_smoke",
+      "script_sha256": "436f864401b0b46d4563a274a22f609ac1e6f90ecc02fc761a5c76fd9911bbce",
+      "log_sha256": "259034b130fbe1df2c32d47c0092dc86670faa241e6861362a99f510f37b72bd"
+    },
+    {
+      "name": "damage_dead_target_smoke",
+      "script_sha256": "98c95cec505f8bf664ee3786deb55dfabeb670036541b7cf24b0585be7e45eea",
+      "log_sha256": "771a5f54e9559a843517cfbc00f22491466743f0e0b18b18540651dc59baa0b4"
+    },
+    {
+      "name": "developer_catalog_smoke",
+      "script_sha256": "6624b9ee70206be128426ffe87e920e1f65fb0434f33512d8949e421e4ee9903",
+      "log_sha256": "66d7fe8d6cf1c6598fddb9e5679e617970d6d2c65e5d9cd16326e14982c7b41f"
+    },
+    {
+      "name": "developer_panel_option_cache_smoke",
+      "script_sha256": "2b6f93186769478ae9d6eacac69b74c7fb0d041aea0629c4c13abe1483db2ce0",
+      "log_sha256": "42330110a72e37fd585f094d7bf33a19520798920ec449bf12933ac259549b10"
+    },
+    {
+      "name": "developer_ruan_stone_smoke",
+      "script_sha256": "e4fb0d047b1781e6761c92ce7c04f15b8524af141b484dd0a572c2ca20d10144",
+      "log_sha256": "855fc7419790ecbcb16447f60c8eb0de5e0aefa30eae69590d6e1dc38314e1a9"
+    },
+    {
+      "name": "developer_scene_integration_smoke",
+      "script_sha256": "0776ec6726a8b14e39118306e4d16bfd7297a2d76fe0991628175ab8343335c1",
+      "log_sha256": "137c4d2971f18de9afa4a1468c3aac4b601a160eed61ef8cdb8e7766117815e9"
+    },
+    {
+      "name": "developer_skill_talent_smoke",
+      "script_sha256": "6bf87a64a3835712fcd5e92789d51723b7fe9cecae5d284ec1d25da8cb25b2e8",
+      "log_sha256": "2859d90d87b5cf4d074b0a4d123386386aebbe02cb4842638c0fd231f43bbdf9"
+    },
+    {
+      "name": "dodge_probability_smoke",
+      "script_sha256": "143fedb4453e4607b0168f7f20d2d674d4d31ad8755c7ddda7a90c41fc6a33c3",
+      "log_sha256": "9c45861d780c96b24d470633a195c59ba466dd3715dcaa04c453374ec7ab8c55"
+    },
+    {
+      "name": "endless_camp_smoke",
+      "script_sha256": "b286e06cc3a8eb68a670ef81c20f5d99f7e41cce045aae1e54a4a4154ffc98a0",
+      "log_sha256": "abd55c18c861c468e9e9140a7a625894ea4951334d6cdb74bc7d949cba7c7976"
+    },
+    {
+      "name": "endless_progression_smoke",
+      "script_sha256": "edacd53f056a7fe30677b420b540e29481f32239495a32bd934eb1b40f23eb7b",
+      "log_sha256": "0ea9bea7feeb337488dd9e7bd651141fee41a0198c5a89f5fa74b8e378ff47d9"
+    },
+    {
+      "name": "endless_return_flow_smoke",
+      "script_sha256": "eab703577da1e15e8cb0d0fd73101f0675764b21cabbf7c7ea0d3adccbfbdd1d",
+      "log_sha256": "879d2eba27add09655e13b84f57ac03d118da72a954bd420f7f8e69a9639bbb7"
+    },
+    {
+      "name": "endless_speed_toggle_smoke",
+      "script_sha256": "c6de5822aac0f913c75ebba920b88741cb6743e9f17c38a3f362fc0c59cc3071",
+      "log_sha256": "4ce2ffc4ce37ab680946755b37c8a5b8f0e4ee7a6e05c4ec64a67939fd19460c"
+    },
+    {
+      "name": "endless_tier_scaling_smoke",
+      "script_sha256": "e0ff88f0d6f77dda482957bf847a19020b55513732f830a839979297727e2911",
+      "log_sha256": "c46bba9c4e26c31b8473b4c6916949d43f60542110604765433543c38ae78880"
+    },
+    {
+      "name": "enemy_batch_simulation_smoke",
+      "script_sha256": "8eb2d8b7af7b2c57840ea3ff0775eb304d595147d71797588554e7acb95a8e74",
+      "log_sha256": "86e7f827d2ea0f448cc104f09d70750d8c70a61014b528a9f470672aedc64f2e"
+    },
+    {
+      "name": "enemy_batched_hit_feedback_smoke",
+      "script_sha256": "d47e1dabd8aa8694daf06c6f78a1bd58021da6cb328f379f1a3121a3c8deea27",
+      "log_sha256": "8dbfc9af75d9fec85145fca1823648af4318428e82dc10addf5bb59792a14a7c"
+    },
+    {
+      "name": "enemy_boss_flash_render_smoke",
+      "script_sha256": "2d98bb53707f46b829227a0f83525eb05fbbc36dc36a0961a07dc51635b72380",
+      "log_sha256": "63450f19f74b2863dbaa12b08369c7e9a937264f84ed45745f9d6a8b7d3bdc4f"
+    },
+    {
+      "name": "enemy_boss_projectile_visual_smoke",
+      "script_sha256": "bf9e058edea7f80326d83359aaf8c52987469b3f5ff31a3ed35e0e34d834a6c1",
+      "log_sha256": "b74daef4467da499049076cca17c84e5d114b031fe06a368ad335e01e5eb267e"
+    },
+    {
+      "name": "enemy_boss_visual_smoke",
+      "script_sha256": "052092ee22f29225341ac65c4a91d0298acebd6614f9bc8ef0046af7ba3e1a29",
+      "log_sha256": "1d86b70b67b4aafb6c08a10c60d9386326117e290d36d93ee4528cceedb7622d"
+    },
+    {
+      "name": "enemy_dasher_charge_smoke",
+      "script_sha256": "f24ea5334869f43c13b2eb37def347078fecd81eee7a2a9b719c2fa975f03d77",
+      "log_sha256": "8be07f24517ef5cbac55f28b66afa811b9ede7b7a58b3cdc2ac8343c3cfcafed"
+    },
+    {
+      "name": "enemy_elite_charge_smoke",
+      "script_sha256": "5c818cb5e0e8f80512778d5b7fb38e3e068c5ac017d5b617052deb15102ba2a3",
+      "log_sha256": "fcc886e73075181bb080d379bbe123c028164ae8851444520745cd5ec7379e8c"
+    },
+    {
+      "name": "enemy_glutton_behavior_smoke",
+      "script_sha256": "f1332112f961399e69d2e66d0c05be2bd61934c4d55188138bf40fd886373a2b",
+      "log_sha256": "ce7f2079c7c8c74a90e444b03b9e16d97769856fcd578d90d2ce2225b0a8892a"
+    },
+    {
+      "name": "enemy_glutton_occlusion_smoke",
+      "script_sha256": "8f6a317be66025dc22337c6b252dc0d467e480fe2e98b56016cce2f105fb1d38",
+      "log_sha256": "5c7551785f7f2df2dbdc368754cf8e18de0224b6477f326e3827130374f1fcf6"
+    },
+    {
+      "name": "enemy_glutton_rework_smoke",
+      "script_sha256": "1080e022b0f1cf61364e78e23e1d6fbed222c0291d55ffeb440bbc6795738f5e",
+      "log_sha256": "7efe2758b0239e8885dd581cf3b5195c3297789e945dbb55bf8c5b4c70078755"
+    },
+    {
+      "name": "enemy_heavy_armor_render_smoke",
+      "script_sha256": "1b490634a3c0670fb18580cfb15e1a2d4128cb13885bb2a1d43e42ff3092761c",
+      "log_sha256": "d3e275cad7ba269b9d8c717db58c5967b4ecbff084e9c5bb24845d1f6f94fb94"
+    },
+    {
+      "name": "enemy_heavy_armor_smoke",
+      "script_sha256": "a9001862af50f4cc7aee0286133250403244dc76e8ff20cffa22f40e4643c0f6",
+      "log_sha256": "f77dc4137d6ea3647a364f094cb6b5c1656b387617fccdac82e966a2e375b144"
+    },
+    {
+      "name": "enemy_model_hurtbox_smoke",
+      "script_sha256": "54ba8a1a2ac6fc3c976dc12adf178db2376eb2d31dbc2452edf1e260eb1857cb",
+      "log_sha256": "f5aa978b7051067d37c59f64a1984484286460a0a3c4b27236d3509b29ea2527"
+    },
+    {
+      "name": "enemy_mushroom_swarm_smoke",
+      "script_sha256": "f71bfd2af83fb81f4046f77bf87f298da9d2296af6c1737a91dc4087c8a8bca8",
+      "log_sha256": "285754faec70d5e2de08c762c1d69c98e0480d7782221d0ca90d672625cc821c"
+    },
+    {
+      "name": "enemy_profile_resource_smoke",
+      "script_sha256": "a4498cf93e1d9cf0661ba1e4eecff9f696d2444fd06793606b5b382a3dceed0c",
+      "log_sha256": "775362211b1f41fbb6f9c36cb5b9d8d8a6e8e9e083e677b48ec87853a3e146dd"
+    },
+    {
+      "name": "enemy_profile_reuse_smoke",
+      "script_sha256": "48bded7d9c9355cf723b7353bcd21cf58fe07f47e8ef8592083786ac004d8cc3",
+      "log_sha256": "f3590be2788c4f3aa3dac212271c91e3b28a883f80d9b4dff313400b88cdf0e2"
+    },
+    {
+      "name": "enemy_profile_snapshot_smoke",
+      "script_sha256": "3437c7e589c380e8938bcd0bac30342417a288604cb8fb2b3e64cb4dd42c0ebe",
+      "log_sha256": "ba2ae3212e88c6c19de4b5416d678794267da0df2e10e24e077c5a0db7a9da30"
+    },
+    {
+      "name": "enemy_projectile_batch_simulation_smoke",
+      "script_sha256": "21adf5be4f9f8aa6242e7568af0d00f927840cce7da3d9f9b022ba798af921ab",
+      "log_sha256": "ba184387fac79c4456ee783f030c3c046c94d7c63a0a19f674c6a2f8a8756106"
+    },
+    {
+      "name": "enemy_projectile_frame_context_smoke",
+      "script_sha256": "7a635457d77c110b4dda96ace7c34f46aa5d5b854ccd991a7cee3642ce175957",
+      "log_sha256": "e0af38f40427a7bfeffbece053d65806eae39c794311e780e934653a59bff879"
+    },
+    {
+      "name": "enemy_rebirth_smoke",
+      "script_sha256": "c2ef32161d685cf9fac9e5736b7b8aa3ec5795083ddc87c472a6bffe71ee6d62",
+      "log_sha256": "bbb1ce980bed64abd28bc2bf132e698afc7d62cb443f8156f89b2f3651355243"
+    },
+    {
+      "name": "enemy_rose_attack_smoke",
+      "script_sha256": "5490eac4bb216f97944eec8dd335d669d5fff3a865f78fea2b043d5ed8b6dcd7",
+      "log_sha256": "30810ffaeeba7399de7315cf8f442b084c5c5e3f2399200b05efcbff03c2c392"
+    },
+    {
+      "name": "enemy_rose_behavior_smoke",
+      "script_sha256": "ad6dbe7fa4278bb52ac79f30d5f4713249559aa3c438823c51cdafe5b7378f61",
+      "log_sha256": "4e6a33f0ccf645af28cd39028b4ec090025f6bafb99ff024c9fd02fc285e00b8"
+    },
+    {
+      "name": "enemy_runner_haste_smoke",
+      "script_sha256": "51fa0d8b784da82d6882a7979274c6b0bbf0e1ac58a54a610533fbbf06d29171",
+      "log_sha256": "ddf76d71f29cdfdce2e8c9b311fdb893cab4c394dfb258996b9e283b1f1ed5be"
+    },
+    {
+      "name": "enemy_save_visual_restore_smoke",
+      "script_sha256": "a4764339083de38cb56f94a968afdd2409be6271094d9f61af628a12d7fb6180",
+      "log_sha256": "1b8c958bdb9655291f0bf6ec2497f5eb0850e5db1666cc61b5c86aa60080c369"
+    },
+    {
+      "name": "enemy_shooter_attack_smoke",
+      "script_sha256": "e59f41837b9ae79e5bd858530567e260a41a1ed9ee0394dba842d99483a25df4",
+      "log_sha256": "11a93dc512c27673598cd72a08dbaeb9ca097c03fa524139e18837d5ef7d9a36"
+    },
+    {
+      "name": "enemy_shotgunner_attacks_smoke",
+      "script_sha256": "6e9a243250593abad171a0cf7111154f2ba4ea39cd2b773fee9b0b262d599f8b",
+      "log_sha256": "f70df29734d0c25c76eaee552fa9f54ad76a611561c0ceae3bf52bab7bf3923f"
+    },
+    {
+      "name": "enemy_spawn_flow_smoke",
+      "script_sha256": "2e60c30d0590ecf59d3d8f525c337ad147924c66a6a38ff95f765fec68e2d98b",
+      "log_sha256": "3f52eee23c85f8be9cffcab7568ef23a89dfc4315dadd5c5d3437013e5d34c60"
+    },
+    {
+      "name": "enemy_split_projectile_budget_smoke",
+      "script_sha256": "db7ee59b014d0e63d6e82a24a26847903e97580a0556edc0cf19b443e33073b0",
+      "log_sha256": "579982247ac9a531ef22d5f900a4ea456dfb7a208e2cda33299a5c41cad2da66"
+    },
+    {
+      "name": "enemy_splitshot_attack_smoke",
+      "script_sha256": "e7aa6c88857a9ea45b68038c1ac2533e87c5ba4867bb4d9ed368ea8e685ae2ad",
+      "log_sha256": "3eeef89776fb21c203373e50b17c5ed360f424b84ccce98a10f65a2466f34d1c"
+    },
+    {
+      "name": "enemy_stalwart_body_smoke",
+      "script_sha256": "15bd44add19cb9c928b37a54670a2a0dc78b3f86f860001fc43887f7419aaf13",
+      "log_sha256": "c297559427451e41c7eeeafae717a111144402012d7e55fb068b6c5ec85c4523"
+    },
+    {
+      "name": "experience_vacuum_pickup_smoke",
+      "script_sha256": "61c6aeb6dacc1927cffaf902c10d07ea56880fcbc3560779a6ee4d691163a77a",
+      "log_sha256": "7e7b4c88ef323e1b667c4e535bf292195231b40be111a3bed1d1ae03dcb2f243"
+    },
+    {
+      "name": "game_mode_ruan_stone_context_smoke",
+      "script_sha256": "88700f11e450b93931af77b67ce31ef2694c65bb95e2298cf19d9778ea6d9730",
+      "log_sha256": "4f13a15ab90f4351c8968991c3b4050fab9e9eee8376d5d0f74e20cf84bb925e"
+    },
+    {
+      "name": "gunner_authored_event_projectile_smoke",
+      "script_sha256": "30773f315de7cb380b34b4381c2ec7e71ea8d2c9924016a11d65dc33f68dd961",
+      "log_sha256": "3ba1083674630d1541d6dde911b5ec8fdd7d28e92f70dea78f33935a2e26011e"
+    },
+    {
+      "name": "gunner_basic_build_smoke",
+      "script_sha256": "c421d63d8721d3a78d446c22e770ef2cba2edbacd00204d181a4e66fff694434",
+      "log_sha256": "57387e3ba1a5aec81d244fe8a6e632e00f31104a1c5f17df34e0774fa77c500f"
+    },
+    {
+      "name": "gunner_basic_level_talents_smoke",
+      "script_sha256": "6ae9e10356e13fe30883d2dcf8eb36558658d7c4d544bec560ef9c2fe37e7001",
+      "log_sha256": "a828e47b305e11ab411c5fcedbcf6b06cae596bd1333df9fff7d5b06ac5a6d63"
+    },
+    {
+      "name": "gunner_entry_wave_smoke",
+      "script_sha256": "115f222fad65d33b71dcda49d3fb620ce7fc850830a4a62dcbd6e54f92c24efe",
+      "log_sha256": "6a6c599c362e29c16083bbfc7b91feef089d4561e5c2c9fb8d5ee60268f5dc68"
+    },
+    {
+      "name": "gunner_flash_level_talents_smoke",
+      "script_sha256": "76566387621af016c37e14befe7985067ddee58b831c26d68723e2bdebace3b0",
+      "log_sha256": "ec3558d2ce6f5de67ec3857f49c1016de78d69f2e76fbc69ebab177c3cc818fb"
+    },
+    {
+      "name": "gunner_hunt_level_talents_smoke",
+      "script_sha256": "39c64956f2da67ded201df73b9354d0ae328e796ad3b2b4d060a048be57e7708",
+      "log_sha256": "d5e8cda36819570c6608eed7237930155231e005bc48f78c798d75b5a73bb12a"
+    },
+    {
+      "name": "gunner_infinite_reload_build_smoke",
+      "script_sha256": "052a87bdbc9ce4d2830f236c9b78c02db4ed0d83be5249135bbcf78eb69ed7fb",
+      "log_sha256": "3b528da0d32c20033f4fc98625306afcaeb32d50db6364f80978a819be9daec1"
+    },
+    {
+      "name": "gunner_infinite_reload_manual_smoke",
+      "script_sha256": "a192de5d569f83b025976334634f2b81e23a62c8d5c2eee057bb323abaae9567",
+      "log_sha256": "fceb158794981411fb174e877e9fa89fb9a6003792506c8798ab817ae90b5e5f"
+    },
+    {
+      "name": "gunner_skill_level_effect_smoke",
+      "script_sha256": "5f01ea94fbb76fca2f928619701f563f37d3328bc3c544f06026c5d79d4c9794",
+      "log_sha256": "b60aec4e5ab6d3cc25af17f724e20e0a64adc8f0e8403c05b8d91c0b229e5be0"
+    },
+    {
+      "name": "gunner_skill_talents_smoke",
+      "script_sha256": "8459f909479702a28708e7db829eddac0af9a6b2e187cd49095020a468f996de",
+      "log_sha256": "828aaef8673093e46e9c99b8d0d0e29eb87701059e50d86a5ebe3e067f8f1a07"
+    },
+    {
+      "name": "hud_widget_lifecycle_smoke",
+      "script_sha256": "21980ed6e9ff2372d59b0f79fcfa3e103c6b0b06e7b1162afed33fe516c8d728",
+      "log_sha256": "801201b7b47f5922bfbfa0c668c1fb2204e0e29d5ebe674550d39ad3d0684e50"
+    },
+    {
+      "name": "jia_combat_art_smoke",
+      "script_sha256": "c9cb762bb21d09a19b2b7ac5dc366b708fae7557b9e7ddce70aacbf02567860e",
+      "log_sha256": "49475f313cab4245c29914f71c845030d77a59500b6739bf007b5e474f6fdeb2"
+    },
+    {
+      "name": "judgement_sword_visual_smoke",
+      "script_sha256": "448682bc5a629a6ae3570ac48bdd637d43d10d950db7638e1f4566d317c1d810",
+      "log_sha256": "24178eb21c8c240cb0dad17260a430f7cb2a5c8397bfe6d13a6511a65bde7257"
+    },
+    {
+      "name": "level_up_scroll_reopen_smoke",
+      "script_sha256": "02f607ea4b2f5369a74a384c9290226fbd0f8816e99659c7bceb35eaa9979299",
+      "log_sha256": "eb23a2a820354d8d511e8213daadd6fae68c243082cfbf91ee59653fff992da9"
+    },
+    {
+      "name": "mage_arcane_charge_level_talents_smoke",
+      "script_sha256": "a8fcb543ede9c64643f14fab8c1e787fab35528a3321b05f05547c8f5494a09b",
+      "log_sha256": "97f0d0ba4ecddc4ee829b5d46b81e66fa234efbe1f4cd4f25c25cbb60611e3db"
+    },
+    {
+      "name": "mage_arcane_surplus_level_talents_smoke",
+      "script_sha256": "95d437f22ae88698acdae7adaf8fe82fed362af3eba0923c300ec7ff42d0d762",
+      "log_sha256": "6d3639100cadd30549137ad2df767d6a2066899722e925cdad1b8d1d58833451"
+    },
+    {
+      "name": "mage_basic_build_smoke",
+      "script_sha256": "c6208d84e69a6925984afcb4c5b9d26dea5f7ef83b98e85cbd6d6f5163340f3a",
+      "log_sha256": "06f3121beea74b8cfb6dee5a7e1aa66bd22be143075001a505b2fe5586ff4c36"
+    },
+    {
+      "name": "mage_basic_level_talents_smoke",
+      "script_sha256": "dc31bd408dec6c398c5129bbae7aaf3f761556987ed5e31401f135673e63a0b0",
+      "log_sha256": "a29650f2c822e1f02540278c755fc06949e4e58a18f79774ac2fdc50977103fb"
+    },
+    {
+      "name": "mage_entry_level_talents_smoke",
+      "script_sha256": "979912a28cd9cd2e5829b275403c0e2f8f3805a7fc4909515634c792373e901a",
+      "log_sha256": "b9da3033a2b101452bae9b7fa7e0081bf8a6931ead0fa0f28d43069211e8b0f6"
+    },
+    {
+      "name": "mage_flame_path_switch_smoke",
+      "script_sha256": "29741054627c89c881d52b9236bdb2521084f3ca11cdd0dbc45920667ef4ca45",
+      "log_sha256": "2ffcd361904d7aff118c6c19c29e721c9595b08d800864e38914481e9392ed56"
+    },
+    {
+      "name": "mage_meta_field_level_talents_smoke",
+      "script_sha256": "24d8becb89244ef6061c9d5a4de52c996e57fda45a893ef6dd5717a96090042d",
+      "log_sha256": "e0533c8a6d631356fbfe1c6ce529a3daa9c2cd9f316e9eabee259c70b73efada"
+    },
+    {
+      "name": "mage_skill_level_effect_smoke",
+      "script_sha256": "c07551fad5508368bde4ca09dde50e6bad3b75790beb5bffc21835a3cb3e86f7",
+      "log_sha256": "698f43ed6d1ba1d535739c9a23bbbf6079e006a551d61946e81c2929ebccb0e0"
+    },
+    {
+      "name": "mage_stage_two_three_talents_smoke",
+      "script_sha256": "a793587a912a94798f8641d2eb07b0f20e49d6ca3ab89a3b6da755850aead700",
+      "log_sha256": "dbe71be39efb1951dd57ec405275cc87208b8ab32ca8ecda67ffc66541e7fe98"
+    },
+    {
+      "name": "mage_surging_wave_level_talents_smoke",
+      "script_sha256": "74e729a1e937b0afb74f1f9688d4dc7f11d94514553842db5b1f96dd6521ae99",
+      "log_sha256": "cafdbc20ebfc45a40d9a8ad3f279ea9be4e41003a90ee1e153fd6a0be2a89b35"
+    },
+    {
+      "name": "mage_talent_smoke",
+      "script_sha256": "a1a5434d9784756de2974524852a48c5d2b957807842a16d30aa19fddb935da5",
+      "log_sha256": "e36ef0b3b359b18c5b336603e34978607099453bb43b9d5c2a9e60d99a4659e4"
+    },
+    {
+      "name": "mage_ultimate_level_talents_smoke",
+      "script_sha256": "626a8828a740d51afa99cdd0293b1db70c5473304481acdc547340ec0ebc71d6",
+      "log_sha256": "eb978b62f96e3c32091c996013334f3a6a73db3c34247be6bdce87790189520e"
+    },
+    {
+      "name": "map_ui_smoke",
+      "script_sha256": "caf3db44de07cdff43531ffe057d37a417055c5bc08ef48302a33cb7801dae7a",
+      "log_sha256": "2b059684ddd89986d5a35f99e770a1d2e3748d6e268a97bae1be41c87228ca24"
+    },
+    {
+      "name": "mcp_cleanup_smoke",
+      "script_sha256": "4b9d494e5615bee383e78fec654eac8547128b24632eb42e53a16daef73a390b",
+      "log_sha256": "d0f6d7fe9413450674f7d35c56ab5b97cfb19e92177c7b0c8745859d1f088074"
+    },
+    {
+      "name": "mechanic_roster_smoke",
+      "script_sha256": "e12102149ccb85eba188aab28284845ab6825a615a17f32195e98b26b54542e6",
+      "log_sha256": "5a65f978cb255dc5bff50fdc59acb1e1d2a9bdf376b76ff7f08bfc550a6a02ef"
+    },
+    {
+      "name": "mechanic_skill_level_effect_smoke",
+      "script_sha256": "ec6e92213d9c75f7ba35d7c2ea4e31b7032c708b131c3c84be916bfa9fa52e87",
+      "log_sha256": "8346e5a66f6968883ca1e73550da96017625ba6c6ca6d2c5e035212ba70d8c2f"
+    },
+    {
+      "name": "mechanic_skill_talents_smoke",
+      "script_sha256": "44ce150a2740c49ca6da3afb4e50757a282bf2482969fbb699dde2ef32202e85",
+      "log_sha256": "fff9162d8c41970fc2041fe69a4da34195f88006b03ee5468357085f160b4f96"
+    },
+    {
+      "name": "mechanic_visual_smoke",
+      "script_sha256": "595b20b79ac69dbff124847c0f6100a6cf9fe0fb797b7236b4fbe6d6af09bf7d",
+      "log_sha256": "841f0c7da6aa103c3415af8516be87d14ea3466e3439e6e92cd564093fa74bdb"
+    },
+    {
+      "name": "menu_ui_smoke",
+      "script_sha256": "7d8e8b7944c4b5c67d368c6702e27484d201611b8e4dbf45de45e687cf5c4b13",
+      "log_sha256": "a8b98026cdd52bba70590424bf0f166959fcdabdd25fad2b32cc11b86ca8df0e"
+    },
+    {
+      "name": "movement_slow_smoke",
+      "script_sha256": "c9830ab2f3c6b9275020b6a8e929efb7a488310b7f032af504e667e60c646b39",
+      "log_sha256": "c214ee66724deda27620e22ef09cce408078e9da514f5418416d6e8443948853"
+    },
+    {
+      "name": "movement_tutorial_exit_smoke",
+      "script_sha256": "1f87a63e0deae61b12a0f4167a527115e9573b7ca5a81855de8b3a04710b3f46",
+      "log_sha256": "bb808d7d0d00e9fef00a65a2b25d1c0ce2bf761d4965c336df40985d3c4d37ce"
+    },
+    {
+      "name": "music_context_smoke",
+      "script_sha256": "6af89b781966e264928720954dd7d6a09e829fe10a2cc5544fa06e0ba2c4de07",
+      "log_sha256": "157e1a8e11aa2b4fd58325b1cf7ad3e50c4601cfaf7978d1d1e1a617cb6149ee"
+    },
+    {
+      "name": "music_room_smoke",
+      "script_sha256": "e3313ff59b2f2c14dc0b55e99aa7d346e718fd42fe9bf3cc1a294f6f40393f0b",
+      "log_sha256": "82643efa4d7f007171f3bcebeff013603ca3fd5594b8571969a2ef6a6206b2fb"
+    },
+    {
+      "name": "necro_priest_smoke",
+      "script_sha256": "f813fddcbc11aff08128b99f722194e728dc2f7fc915fdca71acb6f6d8eb6518",
+      "log_sha256": "365736948983322312a17d701d1a0e1ab415feaa8f816a8dcce5e9fd68488dde"
+    },
+    {
+      "name": "new_blessing_abilities_compile_smoke",
+      "script_sha256": "1d52407d515fad17c1e3f98fa2fbf12e12c15316f518d0200e275f326663077b",
+      "log_sha256": "539ddf8d71ce69e2f59f0b43945c902aaba4397d9a49c4390a540f78bebadc30"
+    },
+    {
+      "name": "performance_guard_smoke",
+      "script_sha256": "70f9eecba3f69735b43fcbd668668b7e5b77de5acf72fefb0c6a4e9b464a4c87",
+      "log_sha256": "0ca617dd38bbc94cb9d754dcdf6f716e71480869ff35aa0f2537dfca528abd1c"
+    },
+    {
+      "name": "performance_recorder_smoke",
+      "script_sha256": "1e7cd44e74db2dff909335c3c1e810fe413d2be4d3e79049ba2e22bef001431e",
+      "log_sha256": "69d4c04ea29e63c32a06dec162e61c1477e27e55775ce54aaf07a35671a7c3b7"
+    },
+    {
+      "name": "pickup_batch_simulation_smoke",
+      "script_sha256": "5548d9309813915402591f422f3f4f63fff8c2be9da2b6071e435019dda39c6a",
+      "log_sha256": "0accd2fb258ce7d34cbbd6d726942d31942a1c224e6fa07d2af3efe71907532c"
+    },
+    {
+      "name": "plant_enemy_smoke",
+      "script_sha256": "8885b8ed4327a4de38058d883b98050f2f5bf07668ca9c9caab3ba176eeab060",
+      "log_sha256": "56d8b8d9fc7d6b5fd3e2584ad038e56a16a06308dff56df4199c4d1839012bb8"
+    },
+    {
+      "name": "playable_role_balance_smoke",
+      "script_sha256": "1dae796a9ebf6a637ccb21b0d3bfb4f1d858b66d441a01acf45316325dfcf4f0",
+      "log_sha256": "3fea332d6fa0238c71fac785b1b4d672c5dc1f27a2cf96e5aebacc8bfae8c71b"
+    },
+    {
+      "name": "player_blessing_system_smoke",
+      "script_sha256": "311985f29cee3dfe3a3886a296880159066f747ce2399528da28e6a572d5bd84",
+      "log_sha256": "07d8d3ff222d2c3ec72779d649d11f7646610fe691cb7a90027eab1a762563c9"
+    },
+    {
+      "name": "player_blindness_render_smoke",
+      "script_sha256": "1f957ba870f68ff49fa19a75e7cc8119e718c833615098b993d32ef26827b795",
+      "log_sha256": "9820ace159f8a51c9417c5cbe5a3aa34a7ba84c1732ddcc7f11a306bb3947bce"
+    },
+    {
+      "name": "player_blindness_smoke",
+      "script_sha256": "8cbbfe30a1a64a2745041ac1c6202b4b61e5e9cb76d4565e484e74615a60c901",
+      "log_sha256": "01a127a23f6a23d836b90d374fee1be3023ceecf605b8abd3a97f1b873ed5cab"
+    },
+    {
+      "name": "player_combat_result_flow_smoke",
+      "script_sha256": "03a18f63e550e13503c89230d563e6234211ff9e9d87a8ab3002284f23c95cb3",
+      "log_sha256": "db1e809a3894ce1b303bec21a92bc8a7f2efab40f60a3992fddc284478b9cab8"
+    },
+    {
+      "name": "player_damage_resolver_smoke",
+      "script_sha256": "a900887c2a3f84c2cc70f4538c10d0396d7b6b5858bd9eb064737e999d8e1223",
+      "log_sha256": "a513baae32a6028922647a77c4c342ae54aaf16825fc867fdcf79f5e4c8d7ea6"
+    },
+    {
+      "name": "player_effect_bridge_smoke",
+      "script_sha256": "64aaff7b26a3f3177a868266059a9c889e30790498932fa9d8caa2db300cd832",
+      "log_sha256": "d76cd6687c25f5dafe91ba9c4980403cffcfc0039eda3aae66dc9f4eab010937"
+    },
+    {
+      "name": "player_heal_runtime_smoke",
+      "script_sha256": "de178f2418e0a3073310c6c1c49b254943fbe2815711197428cf5794a709683a",
+      "log_sha256": "be9d14163c90788b8163bf386f4bf48e6e62c8dda2f87d6a82d6be09e5282cc7"
+    },
+    {
+      "name": "player_health_visuals_smoke",
+      "script_sha256": "2a11a00c2874c0960603c073b4490dd2c515c60f886c5347c4c0d387392addff",
+      "log_sha256": "e816b884be88aa2183a90c963f5ec6fb17e55f75108ada8cdf033cbf8155c328"
+    },
+    {
+      "name": "player_level_curve_smoke",
+      "script_sha256": "2ae1619cf84eeb9397a4ce925963a49469d57b9e0f9ac53fb8ac1b1e816e458d",
+      "log_sha256": "b50dd4e8d590cd4bd07086ee02d64bd101443c752f89cfee4aa7f53e84ba39ae"
+    },
+    {
+      "name": "player_level_flow_smoke",
+      "script_sha256": "e7aad2d33c3b0dd086dc335ec2d6b19371f357a6505b98e6de65f5b6bf0fca47",
+      "log_sha256": "58aeeb0e8bddc8a8b64e55963aa8eafabe112fa2c1aef3bff795d909f15367be"
+    },
+    {
+      "name": "player_plague_smoke",
+      "script_sha256": "265d7f51420f3e893a4cd5d4b1582299e6d7c7cb44413db3954c25b772e392db",
+      "log_sha256": "075dc2bad0c9fa63f970235dc303d6cb3224b8e9dd89ffeb0f3ec207c61d84fb"
+    },
+    {
+      "name": "player_projectile_path_contract_smoke",
+      "script_sha256": "b5ab49c3c6408d1bdcb7555eb1b6cd81437b1281e053cf43e4c49f0b06891f9e",
+      "log_sha256": "334380c31df51ec9e34cd275e6bb9af3e9edb102068b36cb0e79d11f72800816"
+    },
+    {
+      "name": "player_projectile_pool_smoke",
+      "script_sha256": "3230c59e6a1f46ceb6adf8d05b1c7c0209609b4966d479e4ccfb3e1611ae347f",
+      "log_sha256": "e237893b5cfe143c660d564fcec724b2136211ed472f9fd633b4edfd047e1cf4"
+    },
+    {
+      "name": "player_projectile_query_smoke",
+      "script_sha256": "189feb6dfcac2a242fc34fac35efd5870395d2e1ad08199573191a3d50c47735",
+      "log_sha256": "e3043cab914a7d6fc216eb297c3defa1c5e6ba53db8370a3218dab254fe4997a"
+    },
+    {
+      "name": "player_projectile_render_smoke",
+      "script_sha256": "e1fd09d41e4d24642480dbaf526fa4029e123c85700a67073d4d0278ac15573c",
+      "log_sha256": "8bd84150940a8cb3126ca946c1356d2fb384a70992d31b6e0385815131e75c18"
+    },
+    {
+      "name": "player_save_roundtrip_smoke",
+      "script_sha256": "d90c800b9bb3a281e60e3b4bb315604be1883362573a2eb73c51027f49e649ae",
+      "log_sha256": "9cb6e2363a4fa7d855cb44aac38ba1500b24d80ff44238c7e0464b15e9fad800"
+    },
+    {
+      "name": "player_sequence_scheduler_smoke",
+      "script_sha256": "f2eb9f9cb09a6f06521a96b979679fe945d592f248b3933b1ef2717cc6a9cef5",
+      "log_sha256": "2c22fd6bfa06e5ed03d8b5298ca022eb5d228222e3ff4de609bd375bfbe6a72c"
+    },
+    {
+      "name": "player_skill_level_system_smoke",
+      "script_sha256": "9b1ceea60dcf411702a7baf3119a52ff4382589bda14b1b031cd49396dff5b96",
+      "log_sha256": "4fde22d0c2bf7ab8fd4d24b4fb08487a75d31fbbeb953a07386e21c6cc5bc7b5"
+    },
+    {
+      "name": "player_skill_talent_system_smoke",
+      "script_sha256": "44137a08b576b604876f425dfc094a63fe8a14888ec45ced9d1aeeb3147c46fc",
+      "log_sha256": "32a5ea7314420b5ae175ae38582a22b3e3895f4a9405c2fcc259ed9b27cb4344"
+    },
+    {
+      "name": "player_targeting_smoke",
+      "script_sha256": "eb860f82b5cb2d27b97299c7665718f56b3ab2808f9faf0e7c64b63e1e3ea620",
+      "log_sha256": "1bd1c168e3c84508d426f8a74a82ae0fae68e40b44b4fde20595f07e4348618d"
+    },
+    {
+      "name": "player_temporary_health_stacks_smoke",
+      "script_sha256": "1d42b7be118eae8a40191cc5d3fa91cc7e4d219e6cf667fefa2f19cc7d794d33",
+      "log_sha256": "afb51b48c629b8b86534fb8344a07d9e2f4968d5bd8b74ead0180ae1b5956fee"
+    },
+    {
+      "name": "player_timer_flow_smoke",
+      "script_sha256": "76f35cccbb1ea0574838738e6420f01535e0829ede3b36bb3c18c003c9952a65",
+      "log_sha256": "cb1052a417a1547606a688ace9637e311bc820ffaacac36278dcf380116f2354"
+    },
+    {
+      "name": "porcupine_smoke",
+      "script_sha256": "53f1b58d4a24bfdff10298bcc673b4ebfc76d9c540dbff8ec20b21d5024576b9",
+      "log_sha256": "d0cbf5601b9060cbdf0b0bf1d2a6c7ba5ad397fddd035c50c3565725461d0d38"
+    },
+    {
+      "name": "reward_flow_talent_smoke",
+      "script_sha256": "0beb44b57ec242400ece6f18ee65ed63b009cfff34e385c1c0412556eb9d0028",
+      "log_sha256": "668c69b586ad115b6ef30b7380707f39f1686834db6ba8e6a86821d300e014b8"
+    },
+    {
+      "name": "reward_recovery_smoke",
+      "script_sha256": "671f911726b42e2ec3b0e5ff439d314b33ac081913e5621168f9c84c2d9e4a88",
+      "log_sha256": "269c902712b8bce38b5e50fea7c52972922f6b071f3d74c44e8549d5642db856"
+    },
+    {
+      "name": "role_base_defense_smoke",
+      "script_sha256": "68c21392ec9808377a0d2023acef5eefc3d2528f79197d8566f827bf737096d8",
+      "log_sha256": "dc3da234f2ae2d9fbe1db4cacd8cab6439274bc03b2afe8c5cdc4f6dda2b2c9a"
+    },
+    {
+      "name": "ruan_cloak_dodge_smoke",
+      "script_sha256": "bb352c7a8af062adc7b9f3020b6a9115f146b8975127ae639b9a53bf79b09d2b",
+      "log_sha256": "3af850702442cdbdbbd6d2228e6d2323d430861ab35e0e10a52543000012d903"
+    },
+    {
+      "name": "ruan_fury_armor_smoke",
+      "script_sha256": "a0f32fe88ce4f921f34701f3561d17ca1734d53c280ccaba94d32c42f4a610bb",
+      "log_sha256": "61228b8686981929d6df0b5b7bdb2f64508bd29a8ea236ffd55bd74a1c8fc382"
+    },
+    {
+      "name": "ruan_stone_combat_smoke",
+      "script_sha256": "2722b2f1a494214b7114dbcf04ad9495b3f9e9cb8e7571f489c4f1e613bf2065",
+      "log_sha256": "76081e2070de2539fc8ead98b0cc27a9d9400a6dc5f409e8994b86e79c0a0069"
+    },
+    {
+      "name": "ruan_stone_formal_attack_smoke",
+      "script_sha256": "7121308e29881d210738a801bddd9fb9db04ce1b19d9186bdd4f91698ee95a70",
+      "log_sha256": "5029dd73bd255d6917f608fa43f728a02bddf41ed376e811c0f56a7018c44779"
+    },
+    {
+      "name": "ruan_stone_profile_smoke",
+      "script_sha256": "a56b8ab454dba062a212aa96de43617c7af57755da01f4c1944196b8d8d88a80",
+      "log_sha256": "4ffaf31cac045f60590ed15858517fab0c24e36f2fd44156f983fcc15206a51f"
+    },
+    {
+      "name": "ruan_stone_ui_smoke",
+      "script_sha256": "210e54eb89b7ba9c6f0117c99c7840aee63e36efa09524282fe6fce45505f7ae",
+      "log_sha256": "fb2ea3466d35a1dc40aa5b4e013374d3727216bbae038d6e04d60e329fd34683"
+    },
+    {
+      "name": "run_payload_validation_smoke",
+      "script_sha256": "536a725f37f89c4f4a8a81f9f55520f8ddf64bf82b1a8aa9c4361ca720bb5607",
+      "log_sha256": "713fff550c64de64b1b035416d975f304f57779c83f1094ba9ef08774186bf25"
+    },
+    {
+      "name": "run_restore_integrity_smoke",
+      "script_sha256": "451f75476c700d361ee324e276ea3d6f36281b3d07bd6ec5fddb958a184db4ae",
+      "log_sha256": "69d48e6c823daa32c872a75050d4952322bcd3be02cba650c41bd8b74cd9579d"
+    },
+    {
+      "name": "runtime_enemy_spawn_smoothing_smoke",
+      "script_sha256": "c34537679378f0cd6bc85fcf590ffa9c743538d84ab744db5d75ab8e11ab5c20",
+      "log_sha256": "67c37f8b0cf178097ae8021ee4bb02ebcb8a37f61f3d45dafd65f579055ac54e"
+    },
+    {
+      "name": "runtime_lifecycle_contract_smoke",
+      "script_sha256": "7d52d0fcdb1f974d3d0d218bc43790866b80cfe1ff608492b708da78cdd2c95f",
+      "log_sha256": "ed9ec49745c823239cc5c40fb9e3779ccd8001e7629178b251872c9570c66b14"
+    },
+    {
+      "name": "runtime_registry_smoke",
+      "script_sha256": "018de41d57140e23c095e4f7f5012506c6e94633a1b81bc2806ac8dfb034c3f0",
+      "log_sha256": "a53962e61c9e1e44dbdb5c49f2fd626b0de55aaaad8da8334198209aab7634a1"
+    },
+    {
+      "name": "save_recovery_smoke",
+      "script_sha256": "e2516f5799762b61f35d97f76daeb87916b242c93bb32f3e32133979aebb8156",
+      "log_sha256": "21a4848c1dab242cba6575121e41d9374a1c84bcb61d94b2493d9b8e16d99522"
+    },
+    {
+      "name": "session_state_smoke",
+      "script_sha256": "8fcf63a63ea398dc4f841d783a73098c07258d2e9e2c69a0dc600a8d7befaa8f",
+      "log_sha256": "f7916e6ec1bf82ee8149ba4e694fd8aaa0a8e1a275e9c2eed225810e4c7f60d9"
+    },
+    {
+      "name": "shared_talent_runtime_smoke",
+      "script_sha256": "3cf647de259fef904fcbc58c24f432ee5ce1acf5fa75310bde01733e839f468d",
+      "log_sha256": "88b91b226b34c66f755c3e1f500a2224440ab1e2f68fdc3488059019f97124e5"
+    },
+    {
+      "name": "skill_info_ui_smoke",
+      "script_sha256": "93c2368b53802fa46e7799bac9c0dcfa3fccc3aef5298c6978d0a11128ac2a8e",
+      "log_sha256": "15bc79baec55b4075bd1c31723b25e09f4ec03573681219538c5bb539b7d9fb5"
+    },
+    {
+      "name": "skill_level_milestone_runtime_smoke",
+      "script_sha256": "9d9b208d6c5ad55ac41af8109024ad12fe2aa9edddf54e97a02ad3557e1be554",
+      "log_sha256": "813a58b97f296881fb4fa75275ad3d2b7dd6ebfea5db0f85a270a48c847586fc"
+    },
+    {
+      "name": "skill_manual_mode_smoke",
+      "script_sha256": "95e0a579b72895e51d3add861762e0d67e08f24aa75d5a4deef26cfa365a8fb7",
+      "log_sha256": "10a9f5c6a6d77f2c9e96c7006adddf8007032045dcaea41376323f8a5affb27f"
+    },
+    {
+      "name": "skull_mage_smoke",
+      "script_sha256": "ee2d13d2a2a5896abf0cdc325630e6fbcc53ec4d570b4e514df12ea2c75d0610",
+      "log_sha256": "b2618fc5b5ec8118acf3cd82a94dd4b2fa2fee4449916344f943b0ef190f85f0"
+    },
+    {
+      "name": "skulltomb_charge_decision_smoke",
+      "script_sha256": "edd53d5b87c9a6f379364f767c3b5dd9014f46ad03c6b3a1fba25a20bc123abb",
+      "log_sha256": "c0b0c03387319fe414f070961631d30861590870606599d39f773878d28a158d"
+    },
+    {
+      "name": "skulltomb_rework_smoke",
+      "script_sha256": "89efb74c0e9c25f353a16d6faac6ce2d8bde6cce62bfe930513bca9e6889b953",
+      "log_sha256": "7690403a2953c09fbb585895c27d19e83a42ca3aa98741dbb162d230a7947be2"
+    },
+    {
+      "name": "status_resistance_smoke",
+      "script_sha256": "94761dccfd2f74e67f2c513562d4060bd07c1c4fe142b4abc8ca43fd7caa9fdf",
+      "log_sha256": "cb77ce68854a1daadce51dc9cbbd185f48606d4483e8efe4e7ca8558b88ca940"
+    },
+    {
+      "name": "story_lifecycle_smoke",
+      "script_sha256": "bce5422caf0418f299c879e879a779df0099cdcb4e14693376bb39e9d564754d",
+      "log_sha256": "f2ceb515ec60c97a18775dc6509ebbf765a9d1f8fed56935b30b907ae8e1b846"
+    },
+    {
+      "name": "story_progress_smoke",
+      "script_sha256": "46ae793b8dd96099e6898c009d19a0ac31058ab6b9a0273639a1251ceb8e0cd5",
+      "log_sha256": "42b29070ffb736b35e767d3451168d4f3e25b2daf962f0a92abd18f41d30eb0f"
+    },
+    {
+      "name": "story_reading_smoke",
+      "script_sha256": "4aed22e58f711dcdccb5efd28d20f89406161d0b6b2f452ad5ddbe5ef5e444fa",
+      "log_sha256": "daf90d6cbfb1eb2ec8208ff23aef6f5c5a63ea7a99cfb52b8ecdee7fefef4cae"
+    },
+    {
+      "name": "story_ui_smoke",
+      "script_sha256": "5f8fa5153e25936e393757cd8f193f13ec355de4fc30a6aa6ea318f18b2298a7",
+      "log_sha256": "3d9cfa74c2e3e7a187d849f31a94d2c80a8568029ec8bf4d739287f117d49eb4"
+    },
+    {
+      "name": "swordsman_advanced_talents_smoke",
+      "script_sha256": "26eaa1f4e945f1b1b4de821c22d2b77b63d6eb4a672aa5fb36c5ec947efb6457",
+      "log_sha256": "f071c0bcaa2585690da98a3eb74b451f420a5ad5e5bf8beb59f2eb91403270e6"
+    },
+    {
+      "name": "swordsman_basic_attack_event_smoke",
+      "script_sha256": "1b40bc68b3add45d7c5513b4bd8f7870067d8b00adfd3b6de64bc2777dfefdb5",
+      "log_sha256": "1fb0657316f2ff35c589796aefc2ef99346db971ac87ebfb9de33bbf49308aef"
+    },
+    {
+      "name": "swordsman_basic_build_smoke",
+      "script_sha256": "1083057cc81b08de4a23c6ab76b632c2a932dc0f4a7c697e11f208bdbf91ad3b",
+      "log_sha256": "7993a771879e5212a114a8f2f64b70f610ea8413359f8dc874df52640787fd74"
+    },
+    {
+      "name": "swordsman_skill_level_effect_smoke",
+      "script_sha256": "2e33232a10939526144a9b4b6259eb9721920961f774306416d6817b452fdb21",
+      "log_sha256": "2a590d41f876809b7740d75dab32d4992ef4f1d0e46fc6d322920ab186fe3ea1"
+    },
+    {
+      "name": "swordsman_skill_talents_smoke",
+      "script_sha256": "e06d706b81a63b18ad4faa51357de3c852d2bc3dbbaea0cc5a79d2b5f85defed",
+      "log_sha256": "909af3962dec6fb27217390d2eced053503dbefeb6824531c5966a460f95ec38"
+    },
+    {
+      "name": "swordsman_trait_heal_smoke",
+      "script_sha256": "a478e7a5c515eda079c5f829a12e66f3fb8b8f77608b6a4b32aafc6441535b10",
+      "log_sha256": "ff6c45976ff4be5c6efe2d81daa874e49c760f1935d805877a83bb934840ea00"
+    },
+    {
+      "name": "swordsman_trait_runtime_flow_smoke",
+      "script_sha256": "e8774460bbcff65b33f8833bc9ade5e473d4a5dbf686602f67000254b4d89d9f",
+      "log_sha256": "494f513db7903e41317a87868d71b5767836e89ef5e133db76fe697cc2bd7b3a"
+    },
+    {
+      "name": "swordsman_ultimate_talents_smoke",
+      "script_sha256": "12e7a5eddfe7341f5dda5eaf38f1c8d7ad0ef3709e47d71b721606a044739670",
+      "log_sha256": "41870d80b23d008be1a58bb2ff4549f64f30fd7487b8a2eba8eb48fce8652720"
+    },
+    {
+      "name": "system_feedback_smoke",
+      "script_sha256": "fcb50c4855667dd4cb5f485ff0bb482fa32bf6c0fdd124f2f0250d5865e66641",
+      "log_sha256": "0c7445c7f52c33dadfba6202c8cba1bd658a6e0e9c766e565f89095bb4574008"
+    },
+    {
+      "name": "tailwind_dodge_smoke",
+      "script_sha256": "7f2164525849a5968ef36a9b0999e2fa83150ab12450884211cac6c53d2788dc",
+      "log_sha256": "a3c9523ebc1a05ae95b8848831d79da5fabd46b0630b79001cdc677b721ee411"
+    },
+    {
+      "name": "team_swap_smoke",
+      "script_sha256": "b71d5e352c9578df6de5cccb2abaa1dbac6e51292bfc70fa00abdcf9f5000d54",
+      "log_sha256": "266876c1d71320669d62cad2fdc314b5c60a5afdfd6e53f46bdc3bdad22cbc9e"
+    },
+    {
+      "name": "vulnerability_rules_smoke",
+      "script_sha256": "8e2d5ed5b2d7adcb6ad58e80cc88d694f5a1472bd54cbcb047972cbb2fab6731",
+      "log_sha256": "5333c84fdd2a1a68c91d819944d08e126fa500c68c1f7ab7c4bdba3e81a0fdd3"
+    }
+  ],
+  "verification_mode": "Fresh source-only tree. First 53 completed smoke logs revalidated after lowercase result-format fix; remaining 130 resumed. Gameplay inputs unchanged.",
+  "project_checks": [
+    "DOC_LINK_CHECK_OK",
+    "ACHIEVEMENT_CHECK_OK",
+    "PROJECT_CONFIG_CHECK_OK",
+    "ARCHITECTURE_CONTRACT_SELF_TEST_OK",
+    "GRAPH_UPDATE_SELF_TEST_OK",
+    "SMOKE_LOG_SELF_TEST_OK",
+    "ARCHITECTURE_CONTRACT_CHECK_OK",
+    "STORY_CONTENT_CHECK_OK",
+    "GODOT_ASSET_IMPORT_OK",
+    "GODOT_PARSE_CHECK_OK",
+    "MAIN_MENU_SCENE_SMOKE_OK",
+    "ENDLESS_SAVE_SELECT_SCENE_SMOKE_OK",
+    "BATTLE_SCENE_SMOKE_OK"
+  ],
+  "public_target": "https://github.com/weathour/My-game",
+  "base_remote_main": "28b651b",
+  "publish_method": "fast-forward main; retain history",
+  "graph": "prior graph retained; missing Godot extractor, 179 runtime scripts uncovered",
+  "high_confidence_secret_scan": {
+    "scope": "candidate public tree",
+    "files": 5283,
+    "text_files_checked": 3819,
+    "high_confidence_findings": []
+  }
+}

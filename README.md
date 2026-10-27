@@ -1,79 +1,68 @@
 # survivor-like
 
-Godot 4 2D survivor-like prototype focused on three-character switching combat.
+Godot 4.6.2 实时肉鸽战斗原型，正在转向“固定主角＋两名辅助＋人物卡培养＋主线战役”的新设计。
 
-## Current Status
+## 当前阶段
 
-A desktop prototype with a playable three-stage story, endless combat, camp preparation, save/continue, a character sheet, settings, achievements, and developer tools. Combat uses three selected characters from the swordsman, gunner, mage, and mechanic roster. The home screen features the four-hero illustration and a music room with all 14 original tracks. Challenge mode remains disabled.
+新界面已接通六个真实战斗节点和12名人物（含主角）：首战后艾玛直接加入，之后经鬼市、两条互斥分支、夺寨与泉水，可选挑战荒祠精英。单次路线经过四场战斗，选择精英则五场；B07官署段及后续仍在制作。美术按“三国志＋兰斯10布局”推进；主角使用独立制作的战斗动作、头像和攻击特效，其他人物及战场、怪物等沿用现有素材。默认三角头像HUD，可选三行版。旧版战斗保留独立入口。
 
-The maintained implementation status and priorities live in [docs/08_当前实现状态与后续重点.md](docs/08_当前实现状态与后续重点.md). Read that entry before treating older design reviews as current requirements.
+- [当前设计共识](docs/00_当前设计共识.md)：已定规则、未定边界与被替代方案。
+- [当前状态](docs/08_当前实现状态与后续重点.md)：实际完成范围、风险与下一步。
+- [文档索引](docs/README_文档索引.md)：按设计、运行基线和证据分类。
 
-## Controls
+新设计保留一个强近战主角，配置至多两名可后台帮助也可直接操作的辅助；开局单人，首关后艾玛直接加入；人物卡和战斗经验培养人物，技能到等级自动解锁。每小关有可绕开的四角场域，必须击败Boss才通关，关末抽人物卡。人物持有收益、装备与主线进度构成长远选择；状态跨关延续，失败回到进关前状态。
 
-- `WASD`: move
-- `Mouse`: attack direction when mouse-follow mode is active
-- `TAB`: switch attack mode between auto target and mouse-follow
-- `Q` / `E`: switch role
-- `R`: ultimate
-- `1`–`6`: cast the matching active skill when it is in manual mode
-- `Ctrl` + skill hotkey, or right-click a skill slot: switch auto/manual casting
-- Drag between two skill slots of the same role: swap their order
-- `C`: character panel
-- `F`: interact in camp/tutorial scenes
-- `ESC`: pause
+主线采用三国背景和两层地图：天下图查看州域、局势和战役；区域路线图沿小关、精英与事件走向最终Boss。一次大战役对应一次出征，阶段行动有限。随行人数无限，关间可从全部符合战役条件的人物中更换两辅助；返营全员恢复。首战为白门楼鬼城，详细节点仍在设计。
 
-## Project Structure
+## 运行新界面与旧版战斗
 
-- `assets/`: placeholder art/audio assets.
-- `effects/`: combat effect scenes.
-- `scenes/`: Godot scenes for menus, player, enemy, HUD, pickups, and combat.
-- `scripts/`: gameplay, UI, save, enemy, player, and system logic.
-- `scripts/player/`: player-side modules for blessings, roles, attacks, cooldowns, stats, save data, and rewards.
-- `scripts/game/`: combat scene flows such as HUD wiring, rewards, spawning, map bounds, and session state.
-- `scripts/ui/`: shared UI components and HUD panels.
-- `docs/`: current design and architecture notes.
+在仓库根目录用 Godot 4.6.2 打开 `project.godot`，直接运行即可进入新界面（`scenes/chronicle/chronicle_shell.tscn`）。标题选择“启程白门楼”，击败首领并完成事件和选卡推进；目前到S05后，B07及之后尚未制作。新正式存档位于 `user://chronicle_campaign_v1/`，与旧版和界面演练档隔离。详见[夺寨段实施记录](docs/implementation/2026-10-27_夺寨聚众四关接入.md)。
 
-## Current Progression Model
+新界面操作：Tab/方向键导航、Enter确认、Esc返回；真实战斗使用WASD/方向键移动、Q/E切人、J/K关键技能、Esc暂停。标题中的“旧版战斗”进入 `scenes/main_menu.tscn`，与新行军档案互相独立。
 
-- Each level-up offers three role cards from the current team plus one general-blessing card; choose two, with one refresh per card.
-- Role cards unlock an active skill or raise an eligible skill line from level 1 to 10. At skill level 5, choose one of two talent slots; level 10 grants the other. Mechanic's 16 slot effects are implemented; other roles still use explicit placeholders.
-- Swordsman, gunner, mage, and mechanic skill-level effects are read by the combat modules and shown in upgrade previews. Mechanic entry and active turrets keep independent skill levels across saves.
-- The every-three-player-level talent acquisition flow is disabled. Saved `level_talents` remain readable and appear in the character sheet. The older 108-node `skill_talents` route is also disabled.
-- Direct acquisition cards are the formal active-skill unlock route; legacy recipe materials are not offered in normal rewards.
+新战斗普攻、常规技能和攻击方向自动，关键技能手动，关内不需要鼠标。以下是**旧版战斗入口**的默认操作：
 
-Camp now includes all four resident roles, team replacement/reordering and a departure loadout check. Its 17-item shop has separate per-copy buy/refund actions and cumulative previews. Permanent purchases survive return to camp; failed saves preserve the previous inventory.
+| 操作 | 默认输入 |
+| --- | --- |
+| 移动 | WASD |
+| 鼠标跟随模式下瞄准 | 鼠标 |
+| 自动索敌／鼠标跟随 | Tab |
+| 切换角色 | Q / E |
+| 大招 | R |
+| 手动模式的技能槽 | 1–6 |
+| 技能自动／手动切换 | Ctrl＋技能键，或右击技能槽 |
+| 同角色技能槽排序 | 拖拽技能槽 |
+| 人物面板 | C |
+| 营地／教学交互 | F |
+| 暂停 | Esc |
 
-See [current build rules](docs/04_构筑系统与文案交互规范.md) for the complete contract.
+当前菜单还包含设置、存档、成就、开发者工具和14曲音乐鉴赏；挑战模式仍关闭。详细差距见[重构前运行基线](docs/implementation/2026-10-26_重构前运行基线.md)。
 
-## Run
+## 工程与检查
 
-Open the project with Godot 4.6.2 and run:
+运行代码位于 `scripts/`，场景位于 `scenes/`，敌人/特效/运行素材位于 `enemies/`、`effects/`、`assets/`；制作源档在 `design/`。入口见[工程架构](docs/02_工程架构与代码入口.md)。
 
-```text
-res://scenes/main_menu.tscn
-```
-
-## Checks
-
-Run the local project health check with:
+代码改动后按 [AGENTS.md](AGENTS.md)执行检查；完整项目检查：
 
 ```bash
 ./scripts/check_project.sh
 ```
 
-This runs the Python contracts, Godot asset import and parse checks, real main-menu and battle-scene launch checks, and every ordinary `scripts/tests/*_smoke.gd` test. The timed dense-combat benchmark remains a separate performance evidence command.
+纯文档改动可执行：
 
-## Asset Notice
+```bash
+python3 scripts/tests/check_docs_links.py
+git diff --check
+```
 
-Runtime music uses the 14 original cues under `assets/music/`, covering preparation, stages, elites, Boss phases and results. Editable REAPER projects, MIDI, lossless masters and production notes are in [the soundtrack package](design/music-20261025/README.md). The four old `game_bgm`/`menu_bgm` MP3/Ogg placeholders are retained locally but excluded from the export preset. Other prototype artwork still requires the review described in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+完整检查包含旧运行版本的行为合同，其通过不代表新规则已经实现。Graphify当前缺少GDScript提取能力，旧图已标过期，详见[工具说明](docs/GRAPHIFY.md)。
 
-## Documentation
+## 资源与历史
 
-- [docs/README_文档索引.md](docs/README_文档索引.md)
-- [CHANGELOG.md](CHANGELOG.md)
-- [docs/KNOWN_ISSUES.md](docs/KNOWN_ISSUES.md)
-- [docs/RELEASE_CHECKLIST.md](docs/RELEASE_CHECKLIST.md)
+14首原创运行配乐及REAPER工程、MIDI、无损母带见[配乐源档](design/music-20261025/README.md)。角色动作的生成、导出和验证方法见[角色战斗美术制作流程](docs/art/角色战斗美术制作流程.md)。现有四人插画和界面素材不限制新角色库规模。
 
-## Historical code archive
+本仓库作为公开原型维护，许可为 [All Rights Reserved](LICENSE.md)；素材来源及第三方分发边界见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。源码公开与成品游戏发行分别验收，本次范围及历史素材处理见[源码同步记录](docs/implementation/2026-10-27_公开仓库同步.md)。
 
-Superseded implementations are cataloged under [`archive/legacy/`](archive/legacy/). The directory is ignored by Godot and contains references to Git history rather than runtime scripts. It is kept for explicit historical comparison or migration work; current gameplay analysis uses the active working tree only.
+被替代的玩法规格已从当前文档树清理，历史可从Git查阅。`archive/legacy/` 是只读历史代码目录；仅在明确要求历史比较或迁移时使用。
+
+[变更记录](CHANGELOG.md) · [已知问题](docs/KNOWN_ISSUES.md) · [发布检查](docs/RELEASE_CHECKLIST.md)

@@ -14,7 +14,7 @@
 - [960×540 窗口](implemented/four-cards-960.png)
 - [战斗技能悬停](implemented/combat-tooltip.png)
 - [队伍状态带悬停](implemented/team-tooltip.png)
-- [完整评审记录](../../docs/design-reviews/2026-10-13_技能悬停与选卡信息设计.md)
+- 旧选卡评审已随新设计删除，历史可从Git查阅。本目录保留素材来源，不能据此恢复技能选卡；当前方向见[设计共识](../../docs/00_当前设计共识.md)。
 
 实装图由实际 Godot 控件和 Player 生成的数据捕获，使用隔离背景；不是完整关卡试玩。逻辑基准 1280×720，960×540 图按项目 `canvas_items` 规则缩放。
 

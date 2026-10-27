@@ -1,0 +1,102 @@
+{
+  "scope": "Reuse existing maps, actor/enemy visual scenes, portraits, effects and HUD widgets with the new battle session",
+  "rules_checks": 66,
+  "rules_pass": true,
+  "ui_headless_pass": true,
+  "ui_rendered_pass": true,
+  "required_start_pass": true,
+  "expected_fault_injections": {
+    "rules.log": 2
+  },
+  "battle_campaign_content_unchanged_sha256": {
+    "scripts/battle/enemy_system.gd": true,
+    "scripts/battle/battle_input.gd": true,
+    "scripts/battle/battle_session.gd": true,
+    "scripts/battle/ability_system.gd": true,
+    "scripts/battle/combat_resolver.gd": true,
+    "scripts/battle/ability_definition.gd": true,
+    "scripts/battle/targeting.gd": true,
+    "scripts/battle/stage_director.gd": true,
+    "scripts/battle/enemy_runtime.gd": true,
+    "scripts/battle/character_runtime.gd": true,
+    "scripts/campaign/reward_rules.gd": true,
+    "scripts/campaign/campaign_store.gd": true,
+    "scripts/campaign/campaign_service.gd": true,
+    "scripts/content/combat_catalog.gd": true
+  },
+  "screenshots": {
+    "01-title.png": [
+      1280,
+      720
+    ],
+    "02-pause.png": [
+      1280,
+      720
+    ],
+    "03-first-battle-wave.png": [
+      1280,
+      720
+    ],
+    "03-first-battle.png": [
+      1280,
+      720
+    ],
+    "04-first-reward.png": [
+      1280,
+      720
+    ],
+    "05-roster.png": [
+      1280,
+      720
+    ],
+    "06-preparation.png": [
+      1280,
+      720
+    ],
+    "07-emma.png": [
+      1280,
+      720
+    ],
+    "08-compact.png": [
+      960,
+      540
+    ],
+    "09-large.png": [
+      1920,
+      1080
+    ],
+    "10-second-battle-wave.png": [
+      1280,
+      720
+    ],
+    "10-second-battle.png": [
+      1280,
+      720
+    ],
+    "11-extra-reward.png": [
+      1280,
+      720
+    ],
+    "12-next-content.png": [
+      1280,
+      720
+    ]
+  },
+  "graph_update": {
+    "accepted": false,
+    "missing_gd_files": 167,
+    "prior_graph_preserved": true
+  },
+  "source_sha256": {
+    "scripts/ui/chronicle/battle_art.gd": "fac7d718aeef38b719af16ec334f3b559d96f9dababd7d05cc21c19272af2458",
+    "scripts/ui/chronicle/battle_canvas.gd": "bc4a948aaa32f911892ab2f27e6a390dee8bbe679cb3a3a288113eec9240cee9",
+    "scripts/ui/chronicle/battle_hud.gd": "279e6f917b1eebfe17715c258fbcc197d9558f3df9d3dcf92b3e977c7e9ff211",
+    "scripts/ui/chronicle/battle_view.gd": "f303c343ed30b56c76c377e7341d31ff87636b240a0b18a701cbb72f612c6edc",
+    "scripts/tests/chronicle_playable_ui_smoke.gd": "f54544d4745af2c25c83d93f205d85638e29c3e6799ed9218ecbecc99aefa2d4"
+  },
+  "limitations": [
+    "Original swordswoman art temporarily represents protagonist; N characters share visual assets",
+    "Map collision/obstacle data not integrated",
+    "Only B01 and B02 playable; full chapter content pending"
+  ]
+}

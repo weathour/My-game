@@ -1,38 +1,37 @@
 # Roadmap
 
-This roadmap tracks direction, not release dates. For implemented behavior and current handoff, start with [the status entry](docs/08_当前实现状态与后续重点.md).
+更新：2026-10-27。本页记录推进顺序，不承诺日期。设计以[当前共识](docs/00_当前设计共识.md)为准，实际完成范围见[状态入口](docs/08_当前实现状态与后续重点.md)。
 
-## Now: finish the current progression
+## 长期目标与首个内容目标
 
-- Keep the playable route explicit: independent role skill points upgrade existing icons or open a three-option unlock; wave blessings are free; skill level 5 queues a two-slot choice and level 10 grants the other slot.
-- Validate the implemented growth of all four roles in full runs. Mechanic now has eight growth lines, numeric previews and independent entry/active turret sources; keep its summon density and high-tier balance under review.
-- Design actual skill-slot effects for swordsman, gunner and mage. Mechanic's 16 effects are implemented, including their selection UI and save regression; balance tuning was explicitly excluded from that task.
-- Keep player-level talent acquisition disabled until redesigned. Preserve saved `level_talents`, their effects and the character sheet's read-only list.
-- Decide the fate of the retired 108-node catalog and 63 dormant stat-build definitions. Their presence in data or tests does not make them formal progression.
-- Keep direct role-build cards as the formal active-skill unlock route. Restoring recipes requires a complete decision about material supply, binding, locks and evolution.
+用户已确定以《兰斯10》第一部为长期目标体量，分阶段开发；白门楼自成完整大章，主要参考原作节奏，开篇兼顾入门。完整章节目标与最早可玩交付分开规划。具体任务与人物总数尚未确定，不以原作路线格数或跨两篇的收藏卡总数直接设制作定额。
 
-## Now: stabilize architecture and interaction
+[白门楼完整首章与分阶段开发](docs/design-reviews/2026-10-26_首段教程战役与分阶段开发.md)现以用户确定的白门楼鬼城为首战：为吕玲绮而出征，去白门楼途中遭遇魔法师艾玛，杀匪杀官、掠地壮大，抵御鬼曹军救城，最终对战吕布并踏上诸侯起家之路。女性人物方向获认可，卡牌按用户要求增加吕布、张辽、高顺、陈宫及虎豹营将领等；[新卡池目录](docs/design-reviews/2026-10-26_白门楼人物卡池与剧情解锁.md)在原36张基础上新增艾玛，暂计37张。全游戏沿用对应剧情后入池，张辽／高顺／陈宫在吕布前精英关后解锁。原36路线节点（18战斗、单次12—15战）仍为试排；旧14张卡不再限制完整章节。
 
-- Keep `main.gd` and `player.gd` as coordination points; put new behavior in the existing game/player/ability modules.
-- Keep definitions separate from runtime state. Skill-level and build queries must stay read-only; writes and save loading own initialization and normalization.
-- Preserve independent HUD widgets and their visibility-driven animation lifecycle. Keep layout rebuilds from retaining stale interaction objects.
-- Preserve settings scrolling, keyboard focus, rebinding and shared modal initialization with regression checks.
-- Continue consolidating UI where a concrete defect or feature needs it. Keep the character-sheet, shared modal and illustrated reward-card variants explicit in `DESIGN.md`.
-- Replace remaining static tutorial parameters and shortcut hints through current value/keybinding providers.
-- Protect save/load and reward pause ownership with roundtrip and flow checks. Do not change serialized IDs for a presentation refactor.
+## 当前：夺寨段已接入，继续实玩与扩展
 
-## Next: validate balance and performance
+默认入口已接12人物（含主角）、六个真实战斗节点、关末选卡、F01泉水与独立正式存档；两条分支互斥，单次路线经过四场或含可选精英五场，见[实施记录](docs/implementation/2026-10-27_夺寨聚众四关接入.md)。下一步实玩校准，再从未制作的B07官署段扩充关卡与独特机制。
 
-- Identify the Boss referenced by the meeting before adjusting its difficulty or blessing timing.
-- Validate N1/N3/N6/N11 runs: survival, completion, reached level, build completion, bone income and shop usage.
-- Balance the implemented meta loop: each carried Ruan Gou item copy costs 5 bones, duplicate effects stack, and capacity follows the highest unlocked N tier.
-- Keep dense-combat and autosave optimization evidence-driven through existing benchmarks, evaluators, traces and feature flags. A getter microbenchmark is not an overall frame-rate claim.
-- Clarify elite and Boss reward identity through existing reward modules before adding reward types.
+- 已定的战斗、人物卡、跨关与两层地图规则见共识和[主线框架](docs/10_主线战役与路线.md)，不再回到旧三人平等轮转、技能点或20波成长规划。
+- 背景已确定为三国覆亡后的遗迹与鬼怪世界，贾苇索姓名与正气底色、白门楼首战及吕玲绮身份已定。单人开局、首关直接加入艾玛及其当前能力已接入；后续仍需确定女剑士获救节点、具体敌对势力、吕布终战理由及战后起家成果。其余女性来源保持开放。
+- 人物风格直接参考《兰斯》，用户已纠正过度讲究的恋爱设计。优先写鲜明角色和直接、有趣的事件，不以完整恋爱系统或统一关系成长流程为前置任务。
+- 依据节点需要确定首批人物与早期成长、敌人与Boss、卡池/装备及界面流程；只设计首战会用到的范围。
+- 奖励、普通跨关清理、退出恢复和多手动档／自动续档方式已确认，见[规则确认](docs/design-reviews/2026-10-26_实施前规则确认.md)。护甲／武器／饰品分工、贾苇索与艾玛的当前技能、具体装备效果和首版数值已接入；后续按实玩校准并补齐重要卡名单及未定的随机／保存细节。
 
-## Story framework delivered; release follow-up
+## 进入实施后的建议顺序
 
-- The first chapter now has saved dialogue, tasks, delivery, records and practice replays on the fixed three-stage route. Follow the current [implementation record](docs/implementation/2026-10-23_系统框架实施.md) for acceptance and remaining work.
-- Keep the implemented camp loop coherent: permanent items survive return, separate per-copy buy/refund actions, four-role residents, ordered team preparation and loadout confirmation. The blacksmith reuses the equipment filter of the existing shop. Defer elaborate facilities, crafting trees and new camp currencies.
-- Replace placeholder or non-commercial media, finalize licensing, verify standalone exports and create the remaining combat SFX. Development PCK checks and common UI/result tones are implemented.
-- Keep achievements local until platform integration; use the existing `AchievementService` boundary for Steam.
-- Do not restore retired three-in-one blessings, all-team role traits, pre-equipped skill loadouts, the seven-second switch cooldown or the old talent tree as incidental cleanup.
+具体工程边界与参考来源见[真实战斗架构提案](docs/design-reviews/2026-10-27_真实战斗架构与参考实现.md)。真实单人战斗、人物独立状态与后台支援已接通，夺寨段及其互斥分支也已验证；架构仍需经后续内容扩展检验。
+
+1. **实玩当前入城到夺寨段**：校准整备、战斗、Boss、抽卡／升级、换人和泉水；两条互斥分支及可选精英均已接通，仍需体验与平衡验收。
+2. **继续官署段**：从尚未制作的B07扩展路线、敌人和人物事件，承接已获得的进度与状态；这是整章片段，不另做一套前传。
+3. **补齐完整白门楼**：在现有天下入口、区域分岔、可选精英和装备基础上，接入其余人物、救城／终战及完整返营结算，逐步补齐人物事件。
+4. **依据实际游玩调整**：验证操作负担、战斗长度、成长频率与资源选择，检查保存续玩及失败回退。具体数量可随观察修改。
+5. **扩展并行战事**：增加后续可同时选择的战役，验证有限主线行动、未参与战事的后果和跨战役培养，再逐步扩大地区与内容库。
+
+第一场入门战役能验证一次出征，尚不能独立验证天下层面的机会取舍。自动化检查用于规则和故障验证；体验需要实际游玩。旧战斗、敌人和资源模块按新规则评估复用，不把旧实现完整兼容作为首战目标。
+
+## 工程与发布边界
+
+旧存档迁移、角色与关卡数值、性能目标和发布内容随实施任务确认。保护既有保存故障处理、奖励防重、对象池与暂停边界；已有缺陷和性能证据见[已知问题](docs/KNOWN_ISSUES.md)。
+
+不再把补齐旧角色天赋槽、20波/N层平衡、骨头商店扩展或三关剧情验收列为新体系的先决任务。本轮已完成前两关及夺寨段四个正式战斗节点、12人物和基础成长接入，完整章节和特殊人物机制待后续；未提交、推送或发布。

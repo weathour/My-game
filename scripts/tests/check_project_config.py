@@ -12,7 +12,7 @@ REQUIRED_AUTOLOADS = {
     "WindowDisplayManager": "res://scripts/window_display_manager.gd",
 }
 REQUIRED_SETTINGS = {
-    "run/main_scene": '"res://scenes/main_menu.tscn"',
+    "run/main_scene": '"res://scenes/chronicle/chronicle_shell.tscn"',
     "run/max_fps": "120",
     "window/size/viewport_width": "1280",
     "window/size/viewport_height": "720",
@@ -27,6 +27,10 @@ ENGINE_DEFAULT_SETTINGS = {
     "window/stretch/aspect": '"keep"',
 }
 REQUIRED_FILES = [
+    "scenes/chronicle/chronicle_shell.tscn",
+    "scripts/campaign/campaign_service.gd",
+    "scripts/battle/battle_session.gd",
+    "assets/players/jia/jia.tscn",
     "scripts/game/game_map_flow.gd",
     "scripts/map/map_boundary_view.gd",
     "scripts/player/player_map_bounds_flow.gd",

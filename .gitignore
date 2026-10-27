@@ -16,3 +16,32 @@ __MACOSX/
 # Local build and generated UI acceptance images
 /builds/
 /artifacts/story-framework/
+
+# Local agent configuration, caches and reproducible intermediate exports
+/.kimi-code/
+__pycache__/
+*.pyc
+/design/**/Backups/
+/design/**/preview-frames/
+.env
+.env.*
+!.env.example
+
+# Retired, unlicensed audio remains local; current music is under assets/music/.
+/assets/game_bgm.mp3
+/assets/game_bgm.mp3.import
+/assets/game_bgm.ogg
+/assets/game_bgm.ogg.import
+/assets/menu_bgm.mp3
+/assets/menu_bgm.mp3.import
+/assets/menu_bgm.ogg
+/assets/menu_bgm.ogg.import
+
+# Downloaded commercial reference images are local research only.
+# Keep source URL manifests and project-generated art in version control.
+/design/**/reference/*.png
+/design/**/reference/*.jpg
+/design/**/reference/*.jpeg
+/design/**/reference/*.webp
+/design/**/reference/*.gif
+/design/**/reference/*.import

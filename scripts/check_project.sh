@@ -36,6 +36,7 @@ python3 scripts/tests/check_achievements.py
 python3 scripts/tests/check_project_config.py
 python3 scripts/tests/check_architecture_contract_self_test.py
 python3 scripts/tests/check_graph_update_self_test.py
+python3 scripts/tests/check_smoke_log_self_test.py
 python3 scripts/tests/check_architecture_contract.py
 python3 scripts/tests/check_story_content.py
 
@@ -99,12 +100,7 @@ if [[ -n "$GODOT_BIN" ]]; then
       echo "${name^^}_FAILED"
       exit 1
     fi
-    if grep -E "$GODOT_ERROR_PATTERN" "$log"; then
-      echo "${name^^}_FAILED"
-      exit 1
-    fi
-    if ! grep -Eq "(_OK|: (OK|PASS))$" "$log"; then
-      echo "${name^^}_MISSING_SUCCESS_MARKER"
+    if ! python3 scripts/tests/check_smoke_log.py "$script" "$log"; then
       exit 1
     fi
   }

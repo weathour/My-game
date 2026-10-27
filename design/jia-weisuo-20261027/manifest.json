@@ -1,0 +1,239 @@
+{
+  "date": "2026-10-27",
+  "tool": "built-in image_gen",
+  "use_case": "stylized-concept",
+  "status": "approved_identity_transparent_art_ready",
+  "selected": "character-master-v3-transparent.png",
+  "runtime_integrated": false,
+  "assets": [
+    {
+      "version": 1,
+      "file": "character-master-v1.png",
+      "prompt": "character-master-v1-prompt.txt",
+      "width": 1536,
+      "height": 1024,
+      "mode": "RGB",
+      "sha256": "e0527bc47c21b78b909bfd96b5748cd28e349d1001d2e9281abf0bed68fe243c",
+      "references": []
+    },
+    {
+      "version": 2,
+      "file": "character-master-v2.png",
+      "prompt": "character-master-v2-prompt.txt",
+      "width": 1536,
+      "height": 1024,
+      "mode": "RGB",
+      "sha256": "1fbaa1514266c71563b2caadb2c0fe62b39d66d6b5189592c5eb8cda2bf1d095",
+      "references": [
+        "character-master-v1.png"
+      ]
+    },
+    {
+      "version": 3,
+      "role": "model_sheet",
+      "file": "character-master-v3-transparent.png",
+      "prompt": "character-master-v3-transparent-prompt.txt",
+      "width": 1536,
+      "height": 1024,
+      "mode": "RGBA",
+      "sha256": "35e4f4919f9c6f9c07af75f35d9736b79edfd8f398e08459f836e2f45700c91b",
+      "references": [
+        "character-master-v2.png"
+      ],
+      "generated_source": "/home/weathour/.codex/generated_images/01a176ff-4a4a-7783-a114-0a440ed6ef3c/exec-207ff95b-e89b-49d3-b836-6b853e4a442e.png",
+      "transparent_background": true,
+      "alpha_check": {
+        "range": [
+          0,
+          254
+        ],
+        "fully_transparent_pixels": 712632,
+        "fully_transparent_fraction": 0.453079,
+        "alpha_at_least_250_pixels": 716505,
+        "total_pixels": 1572864
+      }
+    },
+    {
+      "version": 1,
+      "role": "standing",
+      "file": "jia-standing-v1.png",
+      "prompt": "jia-standing-v1-prompt.txt",
+      "width": 1024,
+      "height": 1536,
+      "mode": "RGBA",
+      "sha256": "ec7770b817fc907fa50f921a66206f50e10b99b5a79540b98681c6d3655789f3",
+      "references": [
+        "character-master-v3-transparent.png"
+      ],
+      "generated_source": "/home/weathour/.codex/generated_images/01a176ff-4a4a-7783-a114-0a440ed6ef3c/exec-604568aa-4d70-437b-91e2-866c891f97f3.png",
+      "transparent_background": true,
+      "alpha_check": {
+        "range": [
+          0,
+          254
+        ],
+        "fully_transparent_pixels": 1012022,
+        "fully_transparent_fraction": 0.643426,
+        "alpha_at_least_250_pixels": 498725,
+        "total_pixels": 1572864
+      }
+    },
+    {
+      "version": 1,
+      "role": "standing_variant",
+      "costume": "lord",
+      "expression": "smirk",
+      "status": "new_variant_for_review",
+      "file": "jia-lord-smirk-v1.png",
+      "prompt": "jia-lord-smirk-v1-prompt.txt",
+      "width": 1024,
+      "height": 1536,
+      "mode": "RGBA",
+      "sha256": "7b7db70adc10121752b97127583acf60c5880afa63e99dd551c2b39f492cc2c1",
+      "references": [
+        "jia-standing-v1.png"
+      ],
+      "generated_source": "/home/weathour/.codex/generated_images/01a176ff-4a4a-7783-a114-0a440ed6ef3c/exec-408a60c5-202c-4c61-a7cc-d9467ff2b460.png",
+      "transparent_background": true,
+      "alpha_check": {
+        "range": [
+          0,
+          254
+        ],
+        "fully_transparent_pixels": 800895,
+        "fully_transparent_fraction": 0.509195,
+        "alpha_at_least_250_pixels": 727472,
+        "total_pixels": 1572864
+      }
+    },
+    {
+      "version": 1,
+      "role": "standing_variant",
+      "costume": "lord",
+      "expression": "laugh",
+      "status": "new_variant_for_review",
+      "file": "jia-lord-laugh-v1.png",
+      "prompt": "jia-lord-laugh-v1-prompt.txt",
+      "width": 1024,
+      "height": 1536,
+      "mode": "RGBA",
+      "sha256": "fe82bc77c8b9dac6c0cb9c2c705c05c6740cb67a1990726ada61c9f58c64ee2b",
+      "references": [
+        "jia-lord-smirk-v1.png"
+      ],
+      "generated_source": "/home/weathour/.codex/generated_images/01a176ff-4a4a-7783-a114-0a440ed6ef3c/exec-7c1bb4ba-76a9-4751-8740-cdd177a588cc.png",
+      "transparent_background": true,
+      "alpha_check": {
+        "range": [
+          0,
+          254
+        ],
+        "fully_transparent_pixels": 737234,
+        "fully_transparent_fraction": 0.468721,
+        "alpha_at_least_250_pixels": 786753,
+        "total_pixels": 1572864
+      }
+    },
+    {
+      "version": 1,
+      "role": "standing_variant",
+      "costume": "casual",
+      "expression": "laugh",
+      "status": "new_variant_for_review",
+      "file": "jia-casual-laugh-v1.png",
+      "prompt": "jia-casual-laugh-v1-prompt.txt",
+      "width": 1024,
+      "height": 1536,
+      "mode": "RGBA",
+      "sha256": "89c0794f9649fbe73a94d5d764ad4b58075d8b2448a24074ea15c11392471bad",
+      "references": [
+        "jia-standing-v1.png"
+      ],
+      "generated_source": "/home/weathour/.codex/generated_images/01a176ff-4a4a-7783-a114-0a440ed6ef3c/exec-8b8c0b4d-cd88-4b06-b860-89554d8bbdb4.png",
+      "transparent_background": true,
+      "alpha_check": {
+        "range": [
+          0,
+          254
+        ],
+        "fully_transparent_pixels": 932275,
+        "fully_transparent_fraction": 0.592724,
+        "alpha_at_least_250_pixels": 587725,
+        "total_pixels": 1572864
+      }
+    },
+    {
+      "version": 1,
+      "role": "standing_variant",
+      "costume": "casual",
+      "expression": "smirk_approach_loosen_outer_sash",
+      "status": "new_variant_for_review",
+      "file": "jia-casual-approach-v1.png",
+      "prompt": "jia-casual-approach-v1-prompt.txt",
+      "width": 1024,
+      "height": 1536,
+      "mode": "RGBA",
+      "sha256": "21f6c1edf3edaa261626b959b975849a56ad815d1167560e551a1fd88d62f143",
+      "references": [
+        "jia-casual-laugh-v1.png",
+        "jia-standing-v1.png"
+      ],
+      "generated_source": "/home/weathour/.codex/generated_images/01a176ff-4a4a-7783-a114-0a440ed6ef3c/exec-48b94138-352e-4c50-b601-56cf19dbed1b.png",
+      "transparent_background": true,
+      "alpha_check": {
+        "range": [
+          0,
+          254
+        ],
+        "fully_transparent_pixels": 862671,
+        "fully_transparent_fraction": 0.548471,
+        "alpha_at_least_250_pixels": 653079,
+        "total_pixels": 1572864
+      }
+    }
+  ],
+  "standing": "jia-standing-v1.png",
+  "identity_approved_reference": "character-master-v2.png",
+  "background_policy": {
+    "character_art": "transparent_rgba",
+    "standing": "isolated_character_over_scene",
+    "card_background": "separate_ui_layer_by_rarity",
+    "rarity_palette": "not_defined"
+  },
+  "visual_check": {
+    "viewer": "Chromium CSS alpha compositing",
+    "preview": "alpha-preview.html",
+    "evidence": "transparency-check.png",
+    "backgrounds": [
+      "light parchment",
+      "dark green",
+      "checkerboard"
+    ],
+    "result": "No solid background rectangle or obvious matte halo; full standalone figure and sword tip visible. Preview backgrounds are not part of source assets."
+  },
+  "costume_variants": {
+    "outlaw": [
+      "jia-standing-v1.png"
+    ],
+    "lord": [
+      "jia-lord-smirk-v1.png",
+      "jia-lord-laugh-v1.png"
+    ],
+    "casual": [
+      "jia-casual-laugh-v1.png",
+      "jia-casual-approach-v1.png"
+    ]
+  },
+  "costume_research": "references.md",
+  "costume_visual_check": {
+    "viewer": "Chromium CSS alpha compositing",
+    "preview": "forms-alpha-preview.html",
+    "evidence": "forms-transparency-check.png",
+    "backgrounds": [
+      "light parchment",
+      "dark green"
+    ],
+    "result": "Four full-body costume variants visually checked on both backgrounds: no solid background rectangle or obvious matte halo; headpieces, sleeves, shoes and sash ends remain visible. Source PNGs remain transparent; preview background colors are CSS only.",
+    "user_approval": "pending_new_costume_review"
+  }
+}

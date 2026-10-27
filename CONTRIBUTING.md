@@ -10,7 +10,7 @@ This project is currently a private/early prototype. Contributions should priori
 
 ## Local checks
 
-Run the one-command project check before reporting completion or opening a pull request:
+For code or runtime-resource changes, run the one-command project check before reporting completion or opening a pull request:
 
 ```bash
 ./scripts/check_project.sh
@@ -22,13 +22,15 @@ Godot is required: a missing binary or an import-time script error fails the che
 
 The graph update is navigation tooling, separate from the runtime gate. `scripts/tools/update_existing_graph.py` runs `graphify update .` only for an existing index, and rejects/rolls back candidates missing runtime GDScript coverage. `GRAPHIFY_UPDATE_REJECTED` means the retained graph is stale; consult current source and `docs/08_当前实现状态与后续重点.md`. Restoring Graphify's missing Godot extractor is separate tooling work.
 
+For documentation-only changes, run `python3 scripts/tests/check_docs_links.py` and `git diff --check`, and review changed requirements against `docs/00_当前设计共识.md`. No engine run or graph rebuild is required for prose-only edits.
+
 ## Change rules
 
-1. Keep gameplay behavior stable unless the task explicitly changes it.
+1. Follow the approved target in `docs/00_当前设计共识.md` and execution scope in `docs/08_当前实现状态与后续重点.md`. Old behavior is a baseline, not a requirement to preserve a superseded system. Change runtime behavior only within the task scope.
 2. Update docs when changing player-facing systems, save data, settings, achievements, or controls.
 3. Do not add new dependencies without a clear reason.
 4. Keep generated/cache files out of commits unless the repository already tracks them intentionally.
-5. Before reporting completion, run at least:
+5. After code changes, run at least:
 
 ```bash
 godot --headless --path . --quit

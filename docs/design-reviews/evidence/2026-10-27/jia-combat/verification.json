@@ -1,0 +1,39 @@
+{
+  "art_smoke": {
+    "checks": 26,
+    "failures": 0,
+    "final_portrait": true
+  },
+  "scale_smoke": {
+    "checks": 62,
+    "failures": 0,
+    "viewports": [
+      [
+        960,
+        540
+      ],
+      [
+        1280,
+        720
+      ],
+      [
+        1920,
+        1080
+      ]
+    ],
+    "ground": 0,
+    "standing_height": 72,
+    "dao_run_height": 63,
+    "spear_run_height": 67.5
+  },
+  "combat_smoke": {
+    "checks": 66,
+    "failures": 0,
+    "expected_errors": "/proc writes are intentional save-failure injection"
+  },
+  "playable_ui_smoke": "PASS",
+  "startup": "PASS",
+  "preview": "PASS",
+  "asset_alpha": "all 10 runtime PNGs binary alpha",
+  "graph_update": "rejected unsupported Godot extractor; old graph retained and marked stale; missing 179 runtime scripts"
+}

@@ -64,6 +64,15 @@ func _ready() -> void:
 	menu_content.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	menu_content.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(menu_content)
+	var chronicle_button := _make_main_button("返回新战役界面")
+	chronicle_button.name = "ChronicleReturn"
+	menu_content.add_child(chronicle_button)
+	chronicle_button.set_anchors_and_offsets_preset(Control.PRESET_TOP_RIGHT)
+	chronicle_button.offset_left = -265
+	chronicle_button.offset_right = -25
+	chronicle_button.offset_top = 18
+	chronicle_button.offset_bottom = 66
+	chronicle_button.pressed.connect(func(): get_tree().change_scene_to_file("res://scenes/chronicle/chronicle_shell.tscn"))
 
 	menu_title = SURVIVORS_THEME.make_section_label("幸存者", 58)
 	menu_title.add_theme_constant_override("outline_size", 6)

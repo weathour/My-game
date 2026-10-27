@@ -1,51 +1,69 @@
 # Product Context
 
-## Register
+Updated 2026-10-27. The approved rules are documented in [the design consensus](docs/00_当前设计共识.md). The default UI includes the first two real battles, character growth and isolated campaign saves. The Rance 10-inspired reflow covers character cards, party, rewards, equipment, maps and menu; its result awaits the user's visual review.
 
-Product UI for a desktop three-role survivors-like game, presented as a richly framed campaign archive.
+## Experience
 
-## Users
+A desktop real-time roguelike combat game with character collection and growth across a forward-moving campaign. The fixed male protagonist is 贾苇索 (Jia Weisuo), a strong melee fighter. His name combines a reed cord used to bind harmful spirits with a pun on apparent lechery; his righteous choices and serious wrongdoing are both part of the current story. He is native to this world; his specific background and nature remain undecided. A new game starts with Jia Weisuo alone and two empty auxiliary slots. Emma (艾玛), a displaced Western mage using the existing mage character assets, joins directly after the first stage, in addition to the normal five-card/two-pick reward. She then enters the eligible pool for duplicate leveling. The swordswoman is rescued later; the gunner and mechanic appear in later campaigns. These companions are travelers from other worlds. Up to two selected auxiliaries provide background help and can become the controlled character. Expedition companions have no numerical cap: between stages, choose from all owned, living characters eligible for the campaign, including new acquisitions. Later campaigns may exclude specific characters.
 
-Players who pause combat to compare the three selected roles from the swordsman, gunner, mage, and mechanic roster, then inspect the build they have actually assembled during the current run.
+Campaign conquest and flirtation, romance and intimate companionship with a large cast of women are co-primary attractions. The user wants the latter to carry roughly half the experience's weight. The exact content and playtime allocation, relationship progression and handling of multiple relationships remain undecided. Discuss the combined experience first; the sources and reinterpretation of the female cast are deliberately left open.
 
-## Purpose
+The user specifically asks for Rance's direct, desire-driven adult-adventure tone, including exaggerated interactions and bawdy comedy. Earlier proposals for elaborate courtship or a mandatory gradual relationship arc have been withdrawn. Plan memorable character events alongside the adventure; a separate dating-simulation system is not a prerequisite.
 
-The interface must answer four questions quickly:
+The first-campaign plot now includes Jia Weisuo abducting and sexually assaulting the adult Lü Lingqi before he defends the city against the ghost Cao army. The event is stated without depicting the act. The later rescue and this harm both remain part of the story and the conflict with Lü Bu; forgiveness or recruitment is not predetermined. The protagonist's righteous choices coexist with serious wrongdoing.
 
-1. What are this role's live combat stats and equipment?
-2. Which blessings are currently owned and what do they do?
-3. What do this role's skills currently do, and what will the next level change?
-4. Which saved role talents are actually owned and what effects do they provide?
+Keep fighting continuous. Character levels unlock skills automatically. Within each small stage, optional corner fields offer supplies, experience or an extra elite challenge. When the Boss appears, ordinary spawning stops, while existing enemies and optional elites remain. Boss-specific reinforcements are limited and have a finite experience budget. Defeating the Boss immediately clears the stage; an unbeaten optional elite gives no bonus reward. Every clear gives character-card draws. Faster clears grant extra experience.
 
-The character sheet opens on an fourteen-stat overview with a fixed source inspector. Skills, blessings, and equipment share the same team / list / detail structure. Saved `level_talents` appear as a read-only list; their disabled acquisition flow stays disabled. Placeholder effects are explicitly labeled.
+Basic attacks, routine skills and aiming are automatic. Players move, switch characters and manually trigger key skills; there may be multiple key skills. In-stage play must be possible without a mouse, with low overall complexity across movement, switching and skill inputs. Switching has only a short shared cooldown and preserves individual health, mana and skill cooldowns, without generic invulnerability or a skill reset. Character-specific entry effects are allowed, but frequent rotation is not a required universal loop.
 
-Mechanic skill talents use the current level-5 choice and level-10 completion route. Its eight skill lines show 16 named effects with owned/pending status, while other roles' unimplemented slots remain labeled as placeholders. Runtime values and talent descriptions must agree across reward cards, combat hover and the character sheet.
+The same skill keys invoke only the currently controlled character's key skills; background support triggers automatically. Mana is reserved for manually triggered key skills, while basic attacks, routine automatic skills and automatic support cost no mana. Background characters continue their cooldowns and recover mana at their own regeneration rate. Health recovery requires an explicit ability, supplies or a level-up. Living characters refill health and mana when leveling; fallen characters remain fallen. Switching itself restores neither resource. Unselected reserves freeze their state and cooldowns, while explicit events such as duplicate-card leveling and fountains still apply.
 
-The camp supports one preparation loop: inspect permanent gains and carried items, choose and order the next three-role team, then review the loadout before selecting or continuing an N tier. All four roster members, including mechanic, have camp representation and useful role information. Permanent purchases survive return to camp; transactions only appear as complete after the save succeeds.
+Normally only the controlled character takes direct enemy damage. An auxiliary may explicitly protect the protagonist by taking damage on their behalf. Each auxiliary has separately designed foreground abilities, background support and an owned-character passive that also works without joining the expedition. A fallen auxiliary stops providing background support but retains the owned-character bonus.
 
-## Personality
+## Meaningful choices
 
-Tactical, weighty, readable, and atmospheric. Deep forest green and wine-red panels, warm ivory text, serif gold headings, and original gilded carved frames give the interface the feeling of a campaign archive. The home screen uses the original four-hero campaign illustration, with space for navigation on the left and the full swordsman, gunner, mage, and mechanic lineup on the right. Keep combat and record information easy to scan, and preserve character identity in the composition.
+Ordinary clears offer five random eligible cards, from which the player takes two. New characters start at a level set for their story unlock stage; duplicates add one level while preserving experience. Combat experience is split equally among the characters configured at stage entry: one gets all, two get half each, and three get one third each. Fallen members retain their share; reserves and characters joining after the battle receive none. Defeated enemies drop experience pickups that grant growth when collected. Victory collects the remaining experience, including the defeated Boss's reward, without awarding experience for surviving enemies. Owned characters provide bonuses even when absent from combat. Strong noncombat utility generally trades against field combat strength.
 
-## Anti-references
+Equipment uses three shared slots: armor, weapon and accessory. Weapons can change the protagonist's attack form, accessories enchant attacks, and armor provides effects related to receiving hits. Weapon form affects only the protagonist; generic equipment stats affect the stage party. Enchantment defaults to the controlled actor’s direct basic attacks and skills; background support and summons inherit only when stated. Armor effects follow the actual recipient of damage. Specific values remain open. Players choose whom to field, train and keep in reserve, which field to approach, and how to equip the fixed slots. Show effects and conditions clearly without prescribing a best build. Avoid frequent skill-card interruptions and additional progression layers introduced merely to preserve legacy systems.
 
-- Generic mobile-RPG clutter with badges, bars, currencies, and repeated lock icons.
-- Flat blue SaaS dashboards that ignore the game's campaign mood.
-- Reusing official Rance 10 artwork, typography assets, interface captures, story, or gameplay rules; the reference is visual direction only.
-- Ornament that obscures labels, controls, scene art, or combat information.
-- Tiny card grids or raw debug-text lists that force players to decode the build.
+Health, mana and auxiliary deaths carry across small stages. Fountains and a completed expedition's return to camp restore the party and revive auxiliaries; ordinary stage transitions do not. Only protagonist death fails the stage; failure restores the pre-entry state without spending another campaign action. Cleared stages cannot be revisited for farming.
 
-## Accessibility
+The campaign takes place in an alternate world after the Three Kingdoms have fallen. Ruins and supernatural beings fill the land; famous figures primarily reappear as spirits or transformed beings. The cause of the collapse, the protagonist's nature and the presence of surviving humans remain undecided. See [world setting and style](docs/16_世界背景与风格.md).
 
-- Keep body text readable at the supported 1280×720 baseline.
-- Never use color as the only state signal; pair it with labels, borders, or symbols.
-- Preserve keyboard focus, `C`/`Esc` close behavior, and standard scrolling.
-- Keep important information visible without requiring hover.
+The campaign uses two map layers: a world overview for information and campaign choices, and a regional route through combat, elite, recovery and event nodes to a final boss. A major campaign is one expedition, and story phases have limited expedition actions. There is no limited preselected expedition roster. Campaign restrictions determine eligibility; each stage uses the protagonist and up to two auxiliaries. Exact routes and action counts remain undecided.
 
-## Story framework
+## References and presentation
 
-The first chapter follows one fixed three-stage route. Its preparation title is “等一声回答”; the content chapter remains “恢复通讯”. A night camp and radio anchor the story: the recovered log, the sample and the repaired signal gradually change what the player knows. Short spoken lines and separate environmental observations give each return to camp a pause.
+Rance 10 is a reference for character-card growth, roster-wide value and campaign organization, as well as framed campaign presentation. The previous restriction to visual reference only is withdrawn. Its turn-based/AP combat is not the target of this real-time game.
 
-Preparation answers what to do next, whom to speak to, what will be consumed and which team will depart. The scene sits beside a scrolling current-clue/NPC rail and above a three-stage route. Undiscovered locations stay unnamed. Clue objects appear after discovery; after delivery they open retained intel. Inspection is read-only. Conversations may be postponed; delivery is an explicit saved action. Records contain only seen dialogue and narration. Replays are practice and never repeat permanent story rewards.
+The long-term content scale targets Rance 10 Part 1, delivered incrementally. The first campaign is 白门楼鬼城: Jia Weisuo sets out after hearing of Princess 吕玲绮, gains followers and territory through local conflicts, saves the city and Lü Bu's family from the ghost Cao army, and ultimately fights Lü Bu, beginning his rise as a regional lord. This plot outline is approved; exact nodes, the reason for the final confrontation, character recruitment and postwar territory remain open in the [first-campaign scope and development draft](docs/design-reviews/2026-10-26_首段教程战役与分阶段开发.md).
 
-Story reading uses a full-screen camp composition and a bottom reading band, with clear choices, keyboard focus, retained checkpoints, reduced motion and optional 120% story text. The visual treatment and original prose draw on quiet visual-novel reading and gradual environmental discovery; this does not add a walkable story map, voice acting, new music or combat rules. Task and save identities remain stable. Player comprehension and emotional pacing still require normal-speed play. See [the story presentation review](docs/design-reviews/2026-10-25_主线场景与叙事呈现.md).
+Retain this repository's own art, prose, audio and controls. Campaign controls now follow the requested Rance 10-style framing: dark green surfaces, fine aged-gold edges, selective corner ornaments and wine-red primary buttons, with desolate Three Kingdoms landscapes on the maps. Existing battle HUD components remain in use. Existing four-hero artwork is reusable source material, not a fixed roster or party rule. See [the visual system](DESIGN.md).
+
+Black Myth: Wukong is one reference for the world's atmosphere. The user has accepted ancient grandeur, expansive landscapes, folklore's strangeness and humor, and heroic emotion, with a substantial addition of romantic allure and intimacy. Concrete scenes and palettes remain under discussion. Existing interface colors do not fix the appearance of the new world.
+
+Ordinary rewards are five cards with two picks, increased to three picks after the optional card elite. Chapter finales offer seven cards with three picks, or four after that elite, and contain at least two eligible important-character cards. Story unlock gates still apply. Switching preserves temporary effects and summons; stage completion clears ordinary temporary effects and summons while health, mana, fallen status and skill cooldowns carry on.
+
+Multiple manual saves coexist with automatic continuation. Leaving an unfinished battle resumes from its pre-entry state; a completed battle with pending rewards restores the same candidates. Loading an older manual save restores the whole earlier campaign state, without merging later character growth or rewards. See [save semantics](docs/06_UI_菜单_存档_音频.md).
+
+## Interface requirements
+
+- Keep the world overview and regional campaign route map distinct; inspecting information does not spend an expedition action.
+- Show all owned characters, campaign eligibility and up to two auxiliary slots without an expedition capacity limit; empty slots are valid, including both at the start.
+- Distinguish directly controlled skills, auxiliary support and owned-character bonuses.
+- Show independent health/mana, unavailable fallen auxiliaries and recovery results.
+- Show five-card/two-pick ordinary rewards, automatic unlocks and three shared equipment slots. Each character has at most two manual key skills.
+- Keep core information readable at 1280×720; use labels and shapes alongside color.
+- Preserve keyboard focus and scrolling, and avoid requiring hover for essential information.
+
+## Current delivery boundary
+
+The first two stages and eight characters are playable through the new battle core. The remaining chapter is preview content. Legacy combat remains a separate entry; its skill-point and talent systems are not requirements for the new game. [Current status](docs/08_当前实现状态与后续重点.md) owns the execution boundary.
+
+## Approved interface and current delivery
+
+The user chose probe D for its Romance of the Three Kingdoms map and Rance 10 information layout; the earlier A/B probes were rejected for excessive browser-game styling. The later request adds Rance 10-style frames and buttons, replacing the former blanket prohibition on metal borders and ornament. See DESIGN.md and the [current reflow record](docs/implementation/2026-10-27_人物卡与主线界面重排.md).
+
+The Godot default entry provides both maps, roster/equipment, events, rewards, formal campaign saves, settings, music and the first two real battles with XP progression. Existing battle maps, character/enemy animations, portraits, effects and HUD components are reused; new rules remain in an independent battle core. Owned numerical passives add within their category; strong utility such as dispel/revival/interception requires a configured stage auxiliary. The seven base stats are HP, MP, attack, defense, attack speed, move speed and mana regeneration.
+
+The latest HUD preference is the existing simple bottom-bar composition. Keep the three-row presentation as an option; both use the same battle rules and saved display setting. Campaign reflow gives rewards and party comparison more character-card presence, with contextual map information and a separate menu. The current result awaits visual acceptance; the [screen study](docs/design-reviews/2026-10-27_兰斯10界面结构与信息减法研究.md) records the reference and decisions.

@@ -1,5 +1,8 @@
 # Enemy Runtime Refactor
 
+> 2026-10-26整理：本页保留旧版本的工程与测量记录，正文中的“当前”“已定”“后续”指记录时点；不作为新体系要求或当前任务队列。目标以[当前设计共识](00_当前设计共识.md)为准，新设计尚未实施。
+
+
 Goal: keep `scripts/enemy.gd` as the runtime dispatcher and move feature logic into focused helper modules. This stage must not change gameplay values or behavior.
 
 ## Current Dispatcher Boundary

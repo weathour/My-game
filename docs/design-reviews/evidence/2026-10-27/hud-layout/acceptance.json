@@ -1,0 +1,122 @@
+{
+  "date": "2026-10-27",
+  "runtime_changes": "HUD presentation and existing layout setting; battle rules unchanged",
+  "screenshots": [
+    {
+      "file": "screens/01-title.png",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    {
+      "file": "screens/02-pause.png",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    {
+      "file": "screens/03-first-battle-wave.png",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    {
+      "file": "screens/03-first-battle.png",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    {
+      "file": "screens/04-first-reward.png",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    {
+      "file": "screens/05-roster.png",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    {
+      "file": "screens/06-preparation.png",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    {
+      "file": "screens/07-emma.png",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    {
+      "file": "screens/08-compact.png",
+      "size": [
+        960,
+        540
+      ]
+    },
+    {
+      "file": "screens/08-team-compact.png",
+      "size": [
+        960,
+        540
+      ]
+    },
+    {
+      "file": "screens/09-large.png",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    {
+      "file": "screens/10-second-battle-wave.png",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    {
+      "file": "screens/10-second-battle.png",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    {
+      "file": "screens/11-extra-reward.png",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    {
+      "file": "screens/12-next-content.png",
+      "size": [
+        1280,
+        720
+      ]
+    }
+  ],
+  "checks": {
+    "godot_startup": "pass",
+    "real_playable_rendered_ui": "pass",
+    "full_page_fixture": "pass; expected /proc fault injection",
+    "reference_manifest_and_paths": "pass; 29 screenshots and 18 research views",
+    "research_html_script_syntax": "pass",
+    "research_html_browser_visual": "not checked: CUA reported no browsers",
+    "documentation_links": "pass",
+    "git_diff_whitespace": "pass",
+    "graphify": "candidate rejected; Godot extractor unavailable; prior graph retained"
+  }
+}

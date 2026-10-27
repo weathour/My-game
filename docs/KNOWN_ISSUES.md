@@ -1,64 +1,30 @@
-# Known Issues
+# 已知问题与验证边界
 
-## Documentation
+更新：2026-10-26。下面是重构前运行版本的未解决问题和后续实施风险，不是继续建设旧玩法的任务清单。新目标见[当前设计共识](00_当前设计共识.md)，执行范围见[状态入口](08_当前实现状态与后续重点.md)。
 
-- `docs/13` and `docs/14` are historical three-stage/108-node specifications. Current player progression uses acquisition/skill-level cards and level-5/10 talent slots; `LEVEL_TALENT_DEFINITIONS` acquisition is disabled, and data or tests for old `TALENT_DEFINITIONS` do not prove player reachability.
-- `graphify-out/` is the active generated code graph output when available.
-- Generated graph freshness must be checked against the working tree. Current source and the status entry take precedence over graph summaries and dated reviews.
+## 已复现、尚未修复
 
-## Assets
+- **小Boss奖励候选丢失**：在奖励菜单退出，续战加载后停在默认暂停页，再次退出，会丢失原先固定的候选。`run_save_flow.gd` 先把快照放入 `saved_reward`，随后写回；`reward_flow.gd:get_save_data()` 此时读取尚未恢复的实时上下文，覆盖了待恢复奖励。需覆盖加载后未继续便再次退出的路径。本轮只清理文档，没有修复。
+- **高密度整帧超预算**：2026-10-25最终X11测量约48敌人、2000敌弹时，整帧均值83.35ms、P95 213.86ms，超过16.7ms。存档验证提速不等于整局60FPS；详见[测量证据](implementation/evidence/2026-10-25/architecture/runtime/performance-findings.md)。
+- **图谱过期**：已安装Graphify缺少GDScript注册/提取能力，残缺更新已回滚；旧图不能证明当前代码或新设计状态，见[Graphify说明](GRAPHIFY.md)。
 
-- Runtime BGM now uses 14 original cues; the four old placeholder music files remain in the source tree but are excluded from exports. Human musical listening review and normal-speed full-game mix evaluation have not been performed. See [production evidence](../design/music-20261025/README.md).
-- Some visual assets remain development placeholders.
-- Commercial/public release requires asset replacement or explicit license clearance.
+## 新体系尚未实现
 
-## Gameplay/System Risks
+目前代码仍有旧技能点、天赋槽/分支、祝福与装备、20波无尽、N层和三关故事。新人物卡、持有加成、辅助阵亡延续、四角场域及进关快照回退尚未接入。对应旧测试通过不是新规则的完成证据。
 
-- 2026-10-26复核待修：在小Boss奖励菜单退出，续战加载后停在默认暂停页，再次退出，会丢失原先固定的奖励候选。`run_save_flow.gd` 先把快照放到 `saved_reward`，随后立即写回；`reward_flow.gd:get_save_data()` 此时只读取尚未恢复的实时上下文，磁盘奖励状态被覆盖为空。已在临时存档中复现；修复应保留未消费的奖励快照并覆盖暂停后二次退出/加载回归。按用户要求，本轮先提交已有修改，留待后续修复。
-- The 2026-10-25 dense real-scene benchmark still exceeds a 16.7ms budget: final X11 mean 83.35ms, p95 213.86ms with roughly 48 enemies and 2000 hostile bullets. Save validation is faster, but hostile simulation and enemy updates remain substantial CPU work. This is a reproducible release-performance risk, not a 60 FPS acceptance pass; see [measurement boundaries](implementation/evidence/2026-10-25/architecture/runtime/performance-findings.md).
-- `scripts/player.gd` and `scripts/enemy.gd` remain large hub scripts; future work should avoid adding unrelated responsibilities there.
-- Save/load and continue-game behavior should be treated as high-risk when changing player, enemy, blessings, equipment, hero traits, or mode state.
-- Elite reward design is not final.
-- Blessing text, blessing values, character panel display, and actual combat effects must stay synchronized.
-- Camp return now preserves permanent purchases, and Rusted Dagger critical damage is included in combat and stat sources. Items already erased by an older return flow cannot be reconstructed automatically because profiles have no purchase history; this update preserves the remaining data and does not invent refunds.
-- Common-prosperity applies a multiplicative switch-cooldown factor through player attribute data; changing switch cooldown formulas needs regression testing.
-- The retained role-talent offer builder can produce empty choices when its groups are exhausted. Ordinary level-ups no longer increment `pending_level_talent_choices`, so this is a reactivation/developer-injection risk, not a current every-three-level progression blocker. Define exhaustion behavior before restoring that route.
-- `_1` / `_2` talent names are alternatives, not sequential tiers; current I/II titles can mislead players.
-- Direct role-build skill unlock cards are the only formal player-reachable active-skill unlock route. Blessing-recipe unlock/evolution, binding, and material-lock code remains, but required legacy materials are excluded from ordinary, Boss-choice, and random formal blessing generators.
-- Old 108-node definitions are isolated in `scripts/player/data/legacy_skill_talent_catalog.gd`; compatibility helpers and tests remain. `get_selected_talents()` / `has_talent()` are disabled and `skill_talents` is cleared, so restoring only a UI or developer entry would create a half-working second progression route.
+旧的技能树、配方材料锁和角色天赋兼容链仍可能存在于数据或开发者路径。后续实施应检查可达性与存档迁移；不因这些定义尚在就补回旧奖励入口。更完整的差距见[运行基线](implementation/2026-10-26_重构前运行基线.md)。
 
-## UI Risks
+## 保存与恢复
 
-- All four roles now consume `player_skill_level_effect_flow.gd`; mechanic has eight growth lines, independent entry/active turret sources and 16 implemented skill-slot talents. Other roles' skill slots remain placeholders. Mechanic balance tuning is explicitly outside the current task; full-run density/performance remains unverified.
-- Most ability hover descriptions still contain authored base values. Turret/cannon and fireball stat rows read current runtime getters; a complete effective-value presentation for every ability remains separate content work.
-- Main-menu Settings must remain a full-screen `Control` hosting `SurvivorsModal`; using a plain `CenterContainer` can make the panel appear in a corner.
-- Hover detail panels intentionally auto-size up to a max size. Very long future text can still require scrolling inside the detail panel.
-- Only independent-cooldown skills should appear as separate bottom skill slots. Other passive/basic/ultimate changes should be folded into normal attack or ultimate hover descriptions.
-- The character sheet now displays current stats/sources and saved `level_talents`. Some innate/ultimate parameters still come from authored descriptions. Mechanic current values read runtime getters, and its skill slots show real effects and ownership; other roles' slots still show placeholders.
-- `refresh_limit=0` disables the old whole-offer refresh, not the live per-card buttons. Ordinary four-card offers and retained legacy level-talent detail cards track one refresh per card slot in `level_up_ui.gd`.
+已有原子保存、主备回退和运行载荷验证，仍需为新人物与主线状态设计提交边界。运行恢复失败不能写回半恢复状态；角色加成、重复卡升级和装备入库不得因重试重复累计。
 
-## Tooling
+旧骨头拾取凭据只覆盖其当时的防重范围，不是完整收益账本，也不能恢复更早版本已丢失的物品。新“失败无本关收益”不能靠旧永久拾取即时入账直接实现。
 
-- The installed Graphify 0.9.50 lacks both GDScript registration and extraction. The update guard restores the previous graph when a candidate loses runtime coverage and marks it stale; the graph must not be treated as current implementation evidence. See [Graphify workflow](GRAPHIFY.md).
-- Godot MCP is development tooling only. Current handoff should not rely on MCP being available; CLI Godot checks are the safer baseline.
+## 资源与发布
 
-## Known Design Quirks
+- 已有14首原创运行配乐；四个旧音乐文件留在源树但从导出排除。技术QA不等于完整试听、正常速度游戏混音或设备验收，见[制作记录](../design/music-20261025/README.md)。
+- 部分视觉素材仍为开发占位，公开分发前按 [THIRD_PARTY_NOTICES.md](../THIRD_PARTY_NOTICES.md)处理。
+- 旧版本已有开发PCK验证，未完成独立可执行包与各目标平台的全部验收，也没有公开发布。
+- 旧界面部分技能说明仍用作者填写的基础值；新人物内容和属性表达需随具体实现核对，不能把旧占位文案当真实效果。
 
-### Blessing Skill Unlock Lock Sharing
-- `player_blessing_skill_state.gd` uses a global `role_recipe_locks` dictionary to track consumed blessings per skill unlock.
-- These locks are NOT per-role — a blessing consumed to unlock a swordsman skill (e.g., `formation_break` for Blade Storm) is also subtracted when checking mage skill requirements (e.g., Surging Wave).
-- Result when legacy materials are injected or restored: two roles that both meet the same blessing requirements may not both unlock their skills, because the first unlock's lock is subtracted from all roles.
-- This is dormant in a clean formal run because the required materials are not generated. If recipes are restored, decide whether the shared resource pool is intentional before changing it.
-
-## System framework implementation, 2026-10-23
-
-The four reproduced save/reward defects from the pre-implementation review are fixed and covered by `save_recovery_smoke.gd` and `reward_recovery_smoke.gd`. The story chapter now has task/dialogue/item state, migration, replay and failure recovery. See the [implementation record](implementation/2026-10-23_系统框架实施.md) for exact evidence.
-
-Remaining boundaries:
-
-- The 2026-10-23 baseline failures were reviewed and corrected against current gameplay contracts in the 2026-10-25 architecture work. The full gate now passes 174 regular smokes; earlier reports remain historical evidence. See the [current implementation record](implementation/2026-10-25_架构健全性整改.md) for the final source and performance status.
-- Bone pickup receipts are scoped to the current run and removed at successful end/settlement; ordinary new pickups and deterministic legacy snapshot IDs prevent an older run snapshot from granting an already credited pickup again. They are not a complete historical income ledger or a way to reconstruct data lost before this update.
-- Runtime validation now covers nested entities, directly consumed state types, vectors/colors and finite numbers, with explicit restore failure and primary/backup preservation. Optional legacy fields still use their existing normalizers; future ability payload fields must extend validation and round-trip coverage where they are consumed.
-- UI/result sounds are generated development cues. Most combat sound design, target-platform checks and placeholder-media clearance remain open.
-- Automatic story tests trigger existing stage victory events; they do not prove normal-speed combat pacing or a complete human 20-wave playthrough.
-- A development PCK has been checked independently; standalone executable templates are absent locally. No public build or upload was performed.
+新设计未定项集中在[共识](00_当前设计共识.md)，避免在问题列表中把未讨论内容变成默认方案。

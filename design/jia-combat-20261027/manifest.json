@@ -1,0 +1,156 @@
+{
+  "generator": "OpenAI built-in image_gen",
+  "postprocess": "Aseprite batch Lua; registered connected-component slices; nearest-neighbour resize; shared actor palette; binary alpha",
+  "identity_reference": "design/jia-weisuo-20261027/jia-standing-v1.png",
+  "style_reference": "design/mechanic-rework-20261013/source/character-animations.png",
+  "import_script": "scripts/tools/import_jia_art.lua",
+  "actor_frame_size": [
+    192,
+    192
+  ],
+  "actor_anchor": [
+    96,
+    176
+  ],
+  "standing_opaque_height": 80,
+  "world_scale": 0.9,
+  "actor_palette_colors": 59,
+  "actor_frames": 32,
+  "effect_frames": 12,
+  "source_files": [
+    {
+      "path": "design/jia-combat-20261027/source/attacks-v1.png",
+      "sha256": "ef8e300dcc76713b3b63982668db3e827650fd05e07724d0077a849d840d52f0"
+    },
+    {
+      "path": "design/jia-combat-20261027/source/dao-v1.png",
+      "sha256": "dc7720a430f1b03f61b87292b845f170f15a5a487c4a9810070fb27ad546099e"
+    },
+    {
+      "path": "design/jia-combat-20261027/source/portrait-v1.png",
+      "sha256": "b5861d5ecb3ac0e805eba1becae82798d43da82c75964f55ed425a2b28febd27"
+    },
+    {
+      "path": "design/jia-combat-20261027/source/spear-v1.png",
+      "sha256": "774537204b1264b13021a2e03db5830e69e9b0405f5f6536be4e00809ed29a26"
+    },
+    {
+      "path": "design/jia-combat-20261027/source/vfx-v1.png",
+      "sha256": "c0a1206533a06e162d734051d733156f2b4ec804b1264d1b9c04bad24cccc9b4"
+    },
+    {
+      "path": "design/jia-combat-20261027/source/vfx-v2.png",
+      "sha256": "0cdda8082a89fa5d537f42d46b2a1e2589d39471d1b8d80563d8870c5a5a5ae3"
+    }
+  ],
+  "prompts": [
+    "design/jia-combat-20261027/prompts/attacks.txt",
+    "design/jia-combat-20261027/prompts/dao.txt",
+    "design/jia-combat-20261027/prompts/portrait.txt",
+    "design/jia-combat-20261027/prompts/spear.txt",
+    "design/jia-combat-20261027/prompts/vfx-clean.txt",
+    "design/jia-combat-20261027/prompts/vfx.txt"
+  ],
+  "outputs": [
+    {
+      "path": "assets/players/jia/dao-attack.png",
+      "size": [
+        768,
+        192
+      ],
+      "colors": 59,
+      "sha256": "3a9ab69c36d1c3cc2cca3563ae573e9c729965e548cf50e3e6dd5817cd5fb468"
+    },
+    {
+      "path": "assets/players/jia/dao-idle.png",
+      "size": [
+        768,
+        192
+      ],
+      "colors": 59,
+      "sha256": "cdc10d809bb8b41d0b90584113ab206317290d57fd5b98575b9230f9697d8329"
+    },
+    {
+      "path": "assets/players/jia/dao-run.png",
+      "size": [
+        1536,
+        192
+      ],
+      "colors": 58,
+      "sha256": "dcc5e38083fac6b8dcb8c18efb053f661a62e933ba5d0812e1bee56cfa0b9439"
+    },
+    {
+      "path": "assets/players/jia/jia-head.png",
+      "size": [
+        128,
+        128
+      ],
+      "colors": 62,
+      "sha256": "4c3a9d7455417e12cbdfce4896e4265133ceef2a41d82ddb02dcada8b3930570"
+    },
+    {
+      "path": "assets/players/jia/spear-attack.png",
+      "size": [
+        768,
+        192
+      ],
+      "colors": 59,
+      "sha256": "882a1756fbd453374478447346a8ce8162b772865735d27d68683eb8ed8c77c1"
+    },
+    {
+      "path": "assets/players/jia/spear-idle.png",
+      "size": [
+        768,
+        192
+      ],
+      "colors": 59,
+      "sha256": "eb7406f243c861b254dd91a665f5301e3ea5a4d3b33234c7a6477bd031012b24"
+    },
+    {
+      "path": "assets/players/jia/spear-run.png",
+      "size": [
+        1536,
+        192
+      ],
+      "colors": 59,
+      "sha256": "074338e22c9e83495ce65ae4335bacbddfd1d06af9225f5a33daa68b9b514336"
+    },
+    {
+      "path": "assets/players/jia/vfx-slash.png",
+      "size": [
+        512,
+        128
+      ],
+      "colors": 63,
+      "sha256": "7fb06ea509cb254e801b503403aee73c290b03e850f31094f248bb5113cff770"
+    },
+    {
+      "path": "assets/players/jia/vfx-sweep.png",
+      "size": [
+        512,
+        128
+      ],
+      "colors": 61,
+      "sha256": "ef757af84127689fe12046a73e8db4df258b966d2ba8d332a682eaad6b8deb56"
+    },
+    {
+      "path": "assets/players/jia/vfx-thrust.png",
+      "size": [
+        512,
+        128
+      ],
+      "colors": 63,
+      "sha256": "e42e898033d44e66cbcc7dce6adc32e0f5731b40194444bf22e02e416902cfb1"
+    }
+  ],
+  "portrait": "Dedicated ImageGen face; Aseprite 64px native palette; nearest-neighbor 128px export",
+  "verification": {
+    "asset_alpha": "binary 0/255 RGBA, all 10 PNGs",
+    "combat_art_checks": 26,
+    "scale_checks": 62,
+    "combat_checks": 66,
+    "playable_ui": "PASS",
+    "headless_startup": "PASS",
+    "graph": "prior graph retained; installed extractor unavailable for Godot; 179 runtime files uncovered"
+  }
+}
