@@ -76,6 +76,11 @@ func update(battle: RefCounted, dimensions: Vector2, delta: float, reduced_motio
 	safe_screen = next_safe_screen
 	var player: Vector2 = battle.position
 	var primary := Rect2(player + Vector2(-52, -108), Vector2(104, 146))
+	# Follow padding is negotiable; the controlled body, shield foot ring and
+	# escape endpoint are not. A slightly taller HUD must not discard a fitting
+	# complete boss merely because the pleasant follow box is a fraction too tall.
+	var foot_extent := 27.0 if battle.current().shield > 0 else 24.0
+	var essential := Rect2(player + Vector2(-52, -108), Vector2(104, 108 + foot_extent))
 	var boss: RefCounted
 	for enemy in battle.enemies:
 		if enemy.rank == "boss" and not enemy.dead and enemy.targetable and enemy.hp_owner_id == enemy.id:
@@ -102,6 +107,7 @@ func update(battle: RefCounted, dimensions: Vector2, delta: float, reduced_motio
 			safe_route.append(player)
 			safe_route.append(route.point)
 			primary = primary.merge(Rect2(route.point - Vector2.ONE * 24, Vector2.ONE * 48))
+			essential = essential.merge(Rect2(route.point - Vector2.ONE * 24, Vector2.ONE * 48))
 	requested_bounds = primary
 	if terminal_remaining > 0: requested_bounds = requested_bounds.merge(Rect2(terminal_point - Vector2(70, 120), Vector2(140, 160)))
 	mode = "follow" if boss == null else "duel"
@@ -122,9 +128,12 @@ func update(battle: RefCounted, dimensions: Vector2, delta: float, reduced_motio
 		focus_bounds = Rect2(limited_center - capacity * .5, capacity)
 		var required := primary
 		if boss != null:
-			var with_body := primary.merge(Rect2(visual_bounds.get(boss.id, Rect2(boss.position + Vector2(-boss.radius - 20, -boss.body_height), Vector2((boss.radius + 20) * 2, boss.body_height + boss.radius)))))
+			var real_body: Rect2 = visual_bounds.get(boss.id, Rect2(boss.position + Vector2(-boss.radius - 20, -boss.body_height), Vector2((boss.radius + 20) * 2, boss.body_height + boss.radius)))
+			var with_body := primary.merge(real_body)
+			var essential_body := essential.merge(real_body)
 			var with_boss := primary.expand(boss.position + Vector2(0, -30)).expand(boss.position + Vector2(0, 16))
 			if with_body.size.x <= capacity.x and with_body.size.y <= capacity.y: required = with_body
+			elif essential_body.size.x <= capacity.x and essential_body.size.y <= capacity.y: required = essential_body
 			elif with_boss.size.x <= capacity.x and with_boss.size.y <= capacity.y: required = with_boss
 			elif primary.expand(boss.position).size.x <= capacity.x and primary.expand(boss.position).size.y <= capacity.y: required = primary.expand(boss.position)
 		focus_bounds = _contain(focus_bounds, required)
@@ -139,6 +148,9 @@ func update(battle: RefCounted, dimensions: Vector2, delta: float, reduced_motio
 		var real_body: Rect2 = visual_bounds.get(boss.id, Rect2(boss.position + Vector2(-boss.radius, -boss.body_height), Vector2(boss.radius * 2, boss.body_height)))
 		var whole := primary.merge(real_body)
 		var fit := minf(safe_screen.size.x / maxf(1, whole.size.x), safe_screen.size.y / maxf(1, whole.size.y)) / base_scale
+		if fit < minimum_zoom:
+			whole = essential.merge(real_body)
+			fit = minf(safe_screen.size.x / maxf(1, whole.size.x), safe_screen.size.y / maxf(1, whole.size.y)) / base_scale
 		if fit >= minimum_zoom:
 			hard_bounds = whole
 			wanted_zoom = minf(wanted_zoom, fit)

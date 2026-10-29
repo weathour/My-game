@@ -76,6 +76,7 @@ func run() -> void:
 	expect(view.canvas.enemy_views[boss.id].node.get_meta("visual_id") == "B18_human", "human visual identity preserved")
 	boss.visual_id = "B18"
 	view.canvas.refresh(false)
+	check_tight_silhouette_fit(battle, boss)
 	for dimensions in [Vector2i(960,540), Vector2i(1280,720), Vector2i(1920,1080)]:
 		viewport.size = dimensions
 		await frames(5)
@@ -134,7 +135,10 @@ func run() -> void:
 		expect(large.safe_screen.grow(1).has_point(large.base_origin + boss.position * large.scale), "large boss attack anchor stays in functional viewport")
 		expect(large.escape_valid, "900-world-unit attack retains reachable escape")
 		var real_body: Rect2 = view.canvas._body_rect(view.canvas.enemy_views[boss.id].node, boss.position)
-		expect(large.safe_screen.grow(1).encloses(Rect2(large.base_origin + real_body.position * large.scale, real_body.size * large.scale)), "complete 248-high authored pose stays clear of HUD")
+		var projected_body := Rect2(large.base_origin + real_body.position * large.scale, real_body.size * large.scale)
+		if not large.safe_screen.grow(1).encloses(projected_body):
+			print("CAMERA_FIT_FAILURE ", {"dimensions":dimensions, "display":DisplayServer.get_name(), "safe_screen":large.safe_screen, "world_body":real_body, "projected_body":projected_body, "scale":large.scale, "origin":large.base_origin, "focus":large.focus_bounds, "requested":large.requested_bounds, "route":large.safe_route, "obstacles":view.canvas.camera.hud_obstacles})
+		expect(large.safe_screen.grow(1).encloses(projected_body), "complete 248-high authored pose stays clear of HUD")
 		measurements.append({"large_size":str(dimensions), "zoom":large.zoom, "player_pixels":72 * large.scale, "safe_screen":str(large.safe_screen), "real_body":str(real_body), "focus":str(large.focus_bounds), "requested":str(large.requested_bounds), "origin":str(large.base_origin), "center":str(large.center), "route":str(large.safe_route), "obstacles":str(view.canvas.camera.hud_obstacles)})
 		await screenshot("large-warning-%d" % dimensions.x)
 		view.canvas.refresh(true)
@@ -274,6 +278,30 @@ func run() -> void:
 		file.store_string(JSON.stringify(measurements, "  "))
 	print("CHRONICLE_BOSS_CAMERA_SMOKE ", "PASS" if failures == 0 else "FAIL", " checks=", checks, " failures=", failures)
 	quit(0 if failures == 0 else 1)
+
+func check_tight_silhouette_fit(battle: RefCounted, boss: RefCounted) -> void:
+	# Explicit HUD geometry reproduces the font-dependent CI edge without relying
+	# on any installed font: soft follow padding is .3px taller than the viewport,
+	# while the complete boss and actual controlled-body/foot range still fit.
+	var old_position: Vector2 = boss.position
+	var old_shield: float = battle.current().shield
+	boss.position = battle.position + Vector2(0, -300)
+	var authored_body := Rect2(boss.position + Vector2(-170, -310), Vector2(340, 310))
+	for safe_height in [291.3, 286.8]:
+		battle.current().shield = 1 if safe_height < 290 else 0
+		var camera := CAMERA.new()
+		camera.visual_bounds[boss.id] = authored_body
+		camera.update(battle, Vector2(960, 540), 0, false, 72, 540 - 72 - safe_height)
+		var state: Dictionary = camera.snapshot()
+		var projected := Rect2(state.base_origin + authored_body.position * state.scale, authored_body.size * state.scale)
+		if not state.safe_screen.grow(1).encloses(projected):
+			print("CAMERA_TIGHT_FIT_FAILURE ", {"height":safe_height, "safe_screen":state.safe_screen, "world_body":authored_body, "projected_body":projected, "scale":state.scale, "origin":state.base_origin, "focus":state.focus_bounds})
+		expect(state.safe_screen.grow(1).encloses(projected), "tight explicit HUD preserves complete boss silhouette " + str(safe_height))
+		var controlled := Rect2(battle.position + Vector2(-20, -82), Vector2(40, 109))
+		expect(state.safe_screen.grow(1).encloses(Rect2(state.base_origin + controlled.position * state.scale, controlled.size * state.scale)), "tight explicit HUD preserves controlled body and shield foot range")
+		expect(state.scale >= .45 - .000001, "tight explicit HUD retains 32.4px readability floor")
+	boss.position = old_position
+	battle.current().shield = old_shield
 
 func check_visible_body(player: Vector2, state: Dictionary, label: String) -> void:
 	var top: Vector2 = state.base_origin + (player + Vector2(0,-80)) * state.scale

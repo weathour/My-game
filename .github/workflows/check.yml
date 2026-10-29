@@ -35,10 +35,10 @@ jobs:
           chmod +x "$install_dir/godot"
           echo "$install_dir" >> "$GITHUB_PATH"
 
-      - name: Install virtual display for render checks
+      - name: Install virtual display and Chinese fonts for render checks
         run: |
           sudo apt-get update
-          sudo apt-get install -y xvfb libgl1-mesa-dri
+          sudo apt-get install -y xvfb libgl1-mesa-dri fonts-noto-cjk
 
       - name: Run project checks
         env:
