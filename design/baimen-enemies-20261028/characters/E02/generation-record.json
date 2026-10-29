@@ -1,0 +1,44 @@
+{
+  "version": 1,
+  "id": "E02",
+  "generator": "built-in ImageGen",
+  "identity_master": "source/master-v2.png",
+  "references": [
+    {
+      "path": "design/jia-combat-20261027/source/dao-v1.png",
+      "sha256": "dc7720a430f1b03f61b87292b845f170f15a5a487c4a9810070fb27ad546099e",
+      "role": "pixel_drawing_and_animation_style_only"
+    }
+  ],
+  "source_versions": [
+    {
+      "path": "design/baimen-enemies-20261028/characters/E02/source/actions-v1.png",
+      "sha256": "079a3a1966eb5a6e934ccff115e8db3012a2035900bc06b19351a23777c1f1cd",
+      "selected": true,
+      "role": "pose_source",
+      "decision": "selected"
+    },
+    {
+      "path": "design/baimen-enemies-20261028/characters/E02/source/master-v1.png",
+      "sha256": "f11d9b0c78d84ce0d9ee1118c80c75478c4abb0c0adc6f13af8666dd7ee5e625",
+      "selected": false,
+      "role": "identity_master",
+      "decision": "retained_rejected_variant"
+    },
+    {
+      "path": "design/baimen-enemies-20261028/characters/E02/source/master-v2.png",
+      "sha256": "0e312c5f110b6130e269840a537d706279c457fa70c1050aa3ce0894347817bf",
+      "selected": true,
+      "role": "identity_master",
+      "decision": "selected"
+    }
+  ],
+  "prompts": [
+    "prompts/actions-v1.txt",
+    "prompts/master-v1.txt",
+    "prompts/master-v2.txt"
+  ],
+  "review_notes": "Reviewed masterv2 corrects bow-tip clipping of rejected v1. All20 poses inspected: thin skeleton, pale oversized bone bow, narrow red shoulder pennant. Rows idle/walk/shot/aimed shot/hit. Standing physical body from hood y72 tofoot314 is242px; bow and tall flag are excluded from body calibration but retained in actual connected regions. Per-pose ground follows feet; x follows pelvis. Every bow tip and arrow retained, no separate flying projectiles.",
+  "export": "scripts/tools/import_baimen_enemy_art.lua",
+  "pixels_policy": "ImageGen-authored; Pillow/scipy read-only component measurements and QA; Aseprite extraction/registration/palette/export."
+}

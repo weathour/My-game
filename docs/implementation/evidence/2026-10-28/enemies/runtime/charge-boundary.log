@@ -1,0 +1,17 @@
+Charge boundary correction; 2026-10-28
+Original direction retained; ray length clipped to first radius-inset rectangular boundary.
+Regression: four edges and four corners x radii 11/16/46; real admitted warnings, each active frame, exact warned endpoint, 16-unit collision padding; axis-aligned requested length unchanged.
+
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+CHARGE_TELL tell origin=(3000.0, 1000.0) direction=(0.823213, 0.567733) length=187.071920588617
+CHARGE_END (3154.0, 1106.207) allowed_x<=3154.0 world_x<=3200 outside_world=false
+
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+BAIMEN_ENEMY_RUNTIME_SMOKE PASS checks=641 failures=0
+
+SHA256:
+163f83d2ec1d6c40dc238e695a294aa8e458b8d8f8a96636e97b2262d04b5ae3  scripts/battle/enemy_geometry.gd
+69e49c58d7171756b2176338466beb6d9263419289c33b6946409df3c566bd99  scripts/battle/enemy_system.gd
+8a8e620d6b3460884ac423c73d47205579410a851b27d1f368238577c937dea9  scripts/tests/baimen_enemy_runtime_smoke.gd

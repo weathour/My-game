@@ -1,0 +1,123 @@
+{
+  "schema": 1,
+  "id": "B03",
+  "generator": "built-in image_gen.imagegen",
+  "selected_sources": [
+    "source/actions-v2.png",
+    "source/charge-v1.png",
+    "source/master-v1.png"
+  ],
+  "source_images": [
+    {
+      "path": "design/baimen-enemies-20261028/characters/B03/source/actions-v1.png",
+      "sha256": "8c926d1dc63c4a3155fac18136db4893ed2b2251471be0e5b910a18f31f0ff1d",
+      "size": [
+        1379,
+        1141
+      ],
+      "rgba": true,
+      "alpha_range": [
+        0,
+        255
+      ],
+      "selected": false,
+      "prompt": "design/baimen-enemies-20261028/characters/B03/source/actions-v1-prompt.txt",
+      "references": [
+        {
+          "path": "design/baimen-enemies-20261028/characters/B03/source/master-v1.png",
+          "role": "identity master",
+          "sha256": "abbb3ca7054197dd4dfcc87d7f18f3210885bfb149d261de6d7441e5c536faf4"
+        },
+        {
+          "path": "design/jia-combat-20261027/source/dao-v1.png",
+          "role": "pixel style/animation reference only",
+          "sha256": "dc7720a430f1b03f61b87292b845f170f15a5a487c4a9810070fb27ad546099e"
+        },
+        {
+          "path": "design/mechanic-rework-20261013/source/character-animations.png",
+          "role": "pixel style/animation reference only",
+          "sha256": "ad4ea4529a399df65569c5c37d85c0616bb6d09f594749c30818c283c85407c5"
+        }
+      ]
+    },
+    {
+      "path": "design/baimen-enemies-20261028/characters/B03/source/actions-v2.png",
+      "sha256": "ce3769eee3eec04eda37e4a2a15bdf17f44e64466fe1fb2f489c99f7ba3118a4",
+      "size": [
+        1239,
+        1269
+      ],
+      "rgba": true,
+      "alpha_range": [
+        0,
+        255
+      ],
+      "selected": true,
+      "prompt": "design/baimen-enemies-20261028/characters/B03/source/actions-v2-prompt.txt",
+      "references": [
+        {
+          "path": "design/baimen-enemies-20261028/characters/B03/source/master-v1.png",
+          "role": "identity master",
+          "sha256": "abbb3ca7054197dd4dfcc87d7f18f3210885bfb149d261de6d7441e5c536faf4"
+        },
+        {
+          "path": "design/jia-combat-20261027/source/dao-v1.png",
+          "role": "pixel style/animation reference only",
+          "sha256": "dc7720a430f1b03f61b87292b845f170f15a5a487c4a9810070fb27ad546099e"
+        }
+      ]
+    },
+    {
+      "path": "design/baimen-enemies-20261028/characters/B03/source/charge-v1.png",
+      "sha256": "49c6b4ec43137ce53b2f382f04e8c8e503b7630d256392fd9e59b1ed1cde054e",
+      "size": [
+        2172,
+        724
+      ],
+      "rgba": true,
+      "alpha_range": [
+        0,
+        255
+      ],
+      "selected": true,
+      "prompt": "design/baimen-enemies-20261028/characters/B03/source/charge-v1-prompt.txt",
+      "references": [
+        {
+          "path": "design/baimen-enemies-20261028/characters/B03/source/master-v1.png",
+          "role": "identity master",
+          "sha256": "abbb3ca7054197dd4dfcc87d7f18f3210885bfb149d261de6d7441e5c536faf4"
+        },
+        {
+          "path": "design/jia-combat-20261027/source/dao-v1.png",
+          "role": "pixel style/animation reference only",
+          "sha256": "dc7720a430f1b03f61b87292b845f170f15a5a487c4a9810070fb27ad546099e"
+        }
+      ]
+    },
+    {
+      "path": "design/baimen-enemies-20261028/characters/B03/source/master-v1.png",
+      "sha256": "abbb3ca7054197dd4dfcc87d7f18f3210885bfb149d261de6d7441e5c536faf4",
+      "size": [
+        1434,
+        1097
+      ],
+      "rgba": true,
+      "alpha_range": [
+        0,
+        255
+      ],
+      "selected": true,
+      "prompt": "design/baimen-enemies-20261028/characters/B03/source/master-v1-prompt.txt",
+      "references": []
+    }
+  ],
+  "rejected_or_partially_rejected": {
+    "actions-v1.png": "Connected attack bodies and backview/missing weapon; not exported.",
+    "actions-v2.png row4": "Two charge bodies connected by long saber; only other16 complete poses selected. Four separately generated charge poses selected from charge-v1.png."
+  },
+  "extraction": "Reviewed actual alpha>=128 4-connected components, manual per-pose ground anchors; no blind grid clipping. Fixed calibration per source; no per-pose stretching.",
+  "raster_processing": "Aseprite crop/join/nearest-neighbour resize, shared <=64 colors, binary alpha. Pillow/scipy read-only measurements and QA only.",
+  "measurements": "measurements.json",
+  "export_manifest": "export-manifest.json",
+  "remaining_integration_check": "Root/W3 owns real Godot battle/codex previews at 960/1280/1920 and actual animated action review."
+}

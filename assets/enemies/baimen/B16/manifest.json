@@ -1,0 +1,74 @@
+{
+  "action_clips": {
+    "charge": "attack",
+    "command": "special",
+    "summon": "special"
+  },
+  "anchor_px": [
+    256,
+    480
+  ],
+  "body_height_px": 224,
+  "clips": {
+    "attack": {
+      "contact_frame": 1,
+      "file": "attack.png",
+      "fps": 10,
+      "frame_size": [
+        640,
+        512
+      ],
+      "frames": 4,
+      "windup_frame": 0
+    },
+    "hit": {
+      "contact_frame": 1,
+      "file": "hit.png",
+      "fps": 10,
+      "frame_size": [
+        640,
+        512
+      ],
+      "frames": 4,
+      "windup_frame": 0
+    },
+    "idle": {
+      "contact_frame": 1,
+      "file": "idle.png",
+      "fps": 6,
+      "frame_size": [
+        640,
+        512
+      ],
+      "frames": 4,
+      "windup_frame": 0
+    },
+    "move": {
+      "contact_frame": 1,
+      "file": "move.png",
+      "fps": 10,
+      "frame_size": [
+        640,
+        512
+      ],
+      "frames": 4,
+      "windup_frame": 0
+    },
+    "special": {
+      "contact_frame": 1,
+      "file": "special.png",
+      "fps": 10,
+      "frame_size": [
+        640,
+        512
+      ],
+      "frames": 4,
+      "windup_frame": 0
+    }
+  },
+  "faces_left": false,
+  "provenance": "res://design/baimen-enemies-20261028/characters/B16/export-manifest.json",
+  "status": "final",
+  "version": 1,
+  "visual_id": "B16"
+}

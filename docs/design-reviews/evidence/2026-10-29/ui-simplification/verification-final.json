@@ -1,0 +1,124 @@
+{
+  "date": "2026-10-29",
+  "scope": "enemy codex and context navigation",
+  "runtime_checks_passed": true,
+  "startup_log": "startup-final.log",
+  "checks": [
+    {
+      "name": "navigation_final",
+      "script": "scripts/tests/chronicle_context_navigation_smoke.gd",
+      "log": "navigation-final-integration.log",
+      "result": "CHRONICLE_CONTEXT_NAVIGATION_SMOKE PASS checks=125 failures=0",
+      "sha256": "bc5a6b75114fff6ccb5cffa48c1bd45188692dfa0b028e9a0a12577932af884e"
+    },
+    {
+      "name": "navigation_render",
+      "script": "scripts/tests/chronicle_context_navigation_smoke.gd",
+      "log": "navigation/logs/context-navigation-render.log",
+      "result": "CHRONICLE_CONTEXT_NAVIGATION_SMOKE PASS checks=142 failures=0",
+      "sha256": "ca7178d28f80b06ac391f747d1c9c6182abab1d2a72bb080973cc409c0692cbf"
+    },
+    {
+      "name": "route_render",
+      "script": "scripts/tests/chronicle_route_map_smoke.gd",
+      "log": "navigation/logs/route-map-render.log",
+      "result": "CHRONICLE_ROUTE_MAP_SMOKE PASS checks=166 failures=0",
+      "sha256": "64f67e029393b77ad620318eca63f15d9b166676d739617f5eba478f527ec397"
+    },
+    {
+      "name": "story_replay",
+      "script": "scripts/tests/chronicle_story_replay_smoke.gd",
+      "log": "navigation/logs/story-replay-headless.log",
+      "result": "CHRONICLE_STORY_REPLAY_SMOKE PASS checks=160 failures=0",
+      "sha256": "1fad1eb5ecb09f54b69060c5e4732ed381f2238a07ac5bf6e22c3751f0cb5444"
+    },
+    {
+      "name": "playable_ui",
+      "script": "scripts/tests/chronicle_playable_ui_smoke.gd",
+      "log": "navigation/logs/playable-ui-headless.log",
+      "result": "CHRONICLE_PLAYABLE_UI_SMOKE PASS failures=0",
+      "sha256": "fa2494ef35f647f36acaa0321272f30c4b20c261b2016286c4081c9113ab2ad5"
+    },
+    {
+      "name": "codex_render",
+      "script": "scripts/tests/chronicle_enemy_codex_smoke.gd",
+      "log": "codex/render.log",
+      "result": "CHRONICLE_ENEMY_CODEX_SMOKE PASS checks=668 failures=0",
+      "sha256": "763e294528a7f0115ffb989929e00b25000bd0bbf8e7e45fd4b425cb1f992376"
+    },
+    {
+      "name": "codex_headless",
+      "script": "scripts/tests/chronicle_enemy_codex_smoke.gd",
+      "log": "codex/headless.log",
+      "result": "CHRONICLE_ENEMY_CODEX_SMOKE PASS checks=668 failures=0",
+      "sha256": "63c78f833c872519ad0f60dec35eeff3d2e9b01aedef33c56f571be8861c8aff"
+    },
+    {
+      "name": "enemy_presentation_regression",
+      "script": "scripts/tests/chronicle_enemy_presentation_smoke.gd",
+      "log": "codex/presentation-regression.log",
+      "result": "CHRONICLE_ENEMY_PRESENTATION_SMOKE PASS checks=370 failures=0",
+      "sha256": "7fd1bee28bd9c9f6691b6754996e541492dd3d7f78370699764e29cb04e7d6ab"
+    }
+  ],
+  "graph_update": {
+    "accepted": false,
+    "reason": "exit=0; Godot extractor=False; missing 197 runtime GDScript files",
+    "prior_graph_retained": true
+  },
+  "source_sha256": {
+    "assets/ui/chronicle/codex/ink-backdrop.png": "c65b58e27fc156e9a223fbd3d225641c89975a4976adc822276b8a4ce768c78a",
+    "scripts/tests/chronicle_context_navigation_smoke.gd": "c8d8791bf3da1852c78bac5e5f4d7fa29605f73f7462fad22b25a86f6e9b57d2",
+    "scripts/tests/chronicle_enemy_codex_smoke.gd": "aaea5aaf71d01d2106a4685eed5ecc5fb991103b6069b05351e8dd3ac73ff2eb",
+    "scripts/tests/chronicle_enemy_presentation_smoke.gd": "6ab42a59694d2b90f2cea9bb33418a093357255e838344353be99e0d01f8b66b",
+    "scripts/tests/chronicle_playable_ui_smoke.gd": "0030d621cc6320bf79cf2d14db28650d8bfc868880bea5f6d9abd14853f7b995",
+    "scripts/tests/chronicle_route_map_smoke.gd": "17dcb87cd7a8bb38c8a735e48988caa466e6041780f1dc6b45e1bf7b0d2b6f49",
+    "scripts/tests/chronicle_story_replay_smoke.gd": "1fb3b2232acda158c0b511f12c9655d237d3dd1fdf1e2a58293461ca4379643f",
+    "scripts/ui/chronicle/chronicle_pages.gd": "15ec684a13077e68f3e5761f27d79ba99ca7c87a3b44803936cfa4de1dd56bbe",
+    "scripts/ui/chronicle/chronicle_party_pages.gd": "de09d9623b4a24411090ad4720d0962e9bc9ade7c61bbc5f5789e41b8623816d",
+    "scripts/ui/chronicle/chronicle_route_map.gd": "5cb74c6e13dd19820f9bbd16b7ef53f4c91541f6fc0fdb3400c250bc4f3df6c8",
+    "scripts/ui/chronicle/chronicle_route_page.gd": "ffccef68d24eade19436471af3f3a4d526748b3753581bec485392c6924e75f0",
+    "scripts/ui/chronicle/chronicle_shell.gd": "fb9c2342f656f2f5c0c95a48a0eeb84f5c58d4dcba6379d06e2371448a4ceb2e",
+    "scripts/ui/chronicle/chronicle_theme.gd": "cbfe35aa2cf3cedf5ed27f97d01b909af165afcf7f58d920c4db688accb23983",
+    "scripts/ui/chronicle/enemy_codex.gd": "d3aef22cd7a1060cc20fc3dc01ea0628c93b0e8888ae4c41a2bbfc45e11b0f6a"
+  },
+  "screenshots": [
+    "codex/screens/moves-1280-b16.png",
+    "codex/screens/moves-1280-b18.png",
+    "codex/screens/moves-1920-b16.png",
+    "codex/screens/moves-960-b16.png",
+    "codex/screens/portrait-1280-b16.png",
+    "codex/screens/portrait-1280-b18.png",
+    "codex/screens/portrait-1920-b16.png",
+    "codex/screens/portrait-1920-b18.png",
+    "codex/screens/portrait-960-b16.png",
+    "codex/screens/portrait-960-b18.png",
+    "navigation/01-route-1280.png",
+    "navigation/01-route-1920.png",
+    "navigation/01-route-960.png",
+    "navigation/02-world-1280.png",
+    "navigation/02-world-1920.png",
+    "navigation/02-world-960.png",
+    "navigation/03-party-1280.png",
+    "navigation/03-party-1920.png",
+    "navigation/03-party-960.png",
+    "navigation/04-equipment-1280.png",
+    "navigation/04-equipment-1920.png",
+    "navigation/04-equipment-960.png",
+    "navigation/05-preparation-equipment-1280.png",
+    "navigation/06-preparation-1280.png",
+    "navigation/07-pending-reward-route-1280.png",
+    "navigation/08-menu-after-codex-resize-960.png",
+    "navigation/09-route-after-codex-resize-1280.png",
+    "navigation/route-interaction/01-branching-1280.png",
+    "navigation/route-interaction/02-hover-1280.png",
+    "navigation/route-interaction/03-route-1280.png",
+    "navigation/route-interaction/03-route-1920.png",
+    "navigation/route-interaction/03-route-960.png",
+    "navigation/route-interaction/04-final-area-960.png",
+    "navigation/route-interaction/05-skipped-branch-1280.png",
+    "navigation/route-interaction/06-pending-branch-1280.png",
+    "navigation/route-interaction/07-authored-1280.png"
+  ],
+  "note": "Headless and rendered variants overlap; their check counts are not additive."
+}

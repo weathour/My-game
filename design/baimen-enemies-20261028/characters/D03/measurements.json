@@ -1,0 +1,248 @@
+{
+  "version": 1,
+  "id": "D03",
+  "review_status": "accepted_for_export",
+  "review_notes": "Viewed eight genuine object poses: row1 varying lamp brightness/cord sway, row2 struck roof/paper deformation and recovery. Stationary object: move/attack/special deliberately reuse idle light cycle and do not imply walking or an attack. At alpha128 background glow disappears into transparent rather than baked backdrop; all true components retained. Anchor is bronze-base ground contact, single standing466px calibration.",
+  "prompts": [
+    "portrait-prompt.txt",
+    "sheet-prompt.txt"
+  ],
+  "canvas": {
+    "size": [
+      128,
+      128
+    ],
+    "anchor": [
+      64,
+      112
+    ],
+    "body_height_px": 64
+  },
+  "sources": {
+    "sheet": {
+      "path": "source/sheet-v1.png",
+      "size": [
+        1536,
+        1024
+      ],
+      "sha256": "68425b3ea96e72d10475d9ccda645132541d70353519e39b8c5a8c838fbe8734",
+      "standing_body_height": 466
+    }
+  },
+  "portrait": {
+    "path": "source/portrait-v1.png",
+    "size": [
+      1199,
+      1312
+    ],
+    "sha256": "f88c0777a1258a4ffcad18ae0d8b5f05f2d59b2c0ac770d24cd2829aa2ccaf44"
+  },
+  "poses": [
+    {
+      "id": "idle_1",
+      "source": "sheet",
+      "anchor_source": [
+        198.0,
+        496
+      ],
+      "components": [
+        {
+          "bbox": [
+            31,
+            30,
+            365,
+            496
+          ],
+          "area": 82216
+        }
+      ]
+    },
+    {
+      "id": "idle_2",
+      "source": "sheet",
+      "anchor_source": [
+        579.5,
+        496
+      ],
+      "components": [
+        {
+          "bbox": [
+            412,
+            30,
+            747,
+            496
+          ],
+          "area": 81840
+        }
+      ]
+    },
+    {
+      "id": "idle_3",
+      "source": "sheet",
+      "anchor_source": [
+        964.5,
+        495
+      ],
+      "components": [
+        {
+          "bbox": [
+            797,
+            29,
+            1132,
+            495
+          ],
+          "area": 81682
+        }
+      ]
+    },
+    {
+      "id": "idle_4",
+      "source": "sheet",
+      "anchor_source": [
+        1349.5,
+        496
+      ],
+      "components": [
+        {
+          "bbox": [
+            1184,
+            29,
+            1515,
+            496
+          ],
+          "area": 81339
+        }
+      ]
+    },
+    {
+      "id": "hit_1",
+      "source": "sheet",
+      "anchor_source": [
+        199.5,
+        982
+      ],
+      "components": [
+        {
+          "bbox": [
+            25,
+            532,
+            374,
+            982
+          ],
+          "area": 85583
+        }
+      ]
+    },
+    {
+      "id": "hit_2",
+      "source": "sheet",
+      "anchor_source": [
+        583.0,
+        980
+      ],
+      "components": [
+        {
+          "bbox": [
+            411,
+            595,
+            755,
+            980
+          ],
+          "area": 77603
+        }
+      ]
+    },
+    {
+      "id": "hit_3",
+      "source": "sheet",
+      "anchor_source": [
+        965.5,
+        982
+      ],
+      "components": [
+        {
+          "bbox": [
+            791,
+            525,
+            1140,
+            982
+          ],
+          "area": 87304
+        }
+      ]
+    },
+    {
+      "id": "hit_4",
+      "source": "sheet",
+      "anchor_source": [
+        1349.5,
+        978
+      ],
+      "components": [
+        {
+          "bbox": [
+            1182,
+            528,
+            1517,
+            978
+          ],
+          "area": 81825
+        }
+      ]
+    }
+  ],
+  "clips": {
+    "idle": {
+      "poses": [
+        "idle_1",
+        "idle_2",
+        "idle_3",
+        "idle_4"
+      ],
+      "fps": 6,
+      "contact_frame": 2
+    },
+    "move": {
+      "poses": [
+        "idle_1",
+        "idle_2",
+        "idle_3",
+        "idle_4"
+      ],
+      "fps": 6,
+      "contact_frame": 2
+    },
+    "attack": {
+      "poses": [
+        "idle_1",
+        "idle_2",
+        "idle_3",
+        "idle_4"
+      ],
+      "fps": 6,
+      "contact_frame": 2
+    },
+    "special": {
+      "poses": [
+        "idle_1",
+        "idle_2",
+        "idle_3",
+        "idle_4"
+      ],
+      "fps": 6,
+      "contact_frame": 2
+    },
+    "hit": {
+      "poses": [
+        "hit_1",
+        "hit_2",
+        "hit_3",
+        "hit_4"
+      ],
+      "fps": 10,
+      "contact_frame": 2
+    }
+  },
+  "action_clips": {},
+  "faces_left": false
+}

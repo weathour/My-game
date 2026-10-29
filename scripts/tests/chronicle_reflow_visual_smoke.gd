@@ -1,7 +1,7 @@
 extends SceneTree
 ## Layout fixture only; later chapter ownership/rewards are not gameplay progress.
 const SHELL := preload("res://scenes/chronicle/chronicle_shell.tscn")
-const SESSION := preload("res://scripts/ui/chronicle/chronicle_session.gd")
+const SESSION := preload("res://scripts/campaign/campaign_service.gd")
 var viewport: SubViewport
 var shell: Control
 var failures := 0
@@ -54,10 +54,12 @@ func run() -> void:
 	state.data.available = ["B02"]
 	state.data.completed = ["S01", "B01", "S02"]
 	state.data.pool = state.characters.keys()
+	state.data.pool.erase("JIA")
 	for id in state.characters: state.data.owned[id] = state.new_character(id)
 	state.data.party = ["F11", "M02"]
 	state.data.inventory = []
 	for item in state.EQUIPMENT: state.data.inventory.append(item.id)
+	expect(state.valid(state.data), "layout fixture uses valid formal campaign records")
 	shell.selected_node = "B02"
 	shell.selected_character = "M02"
 	shell.roster_filter = "all"
@@ -72,13 +74,14 @@ func run() -> void:
 		shell.open_page("roster")
 		if dimensions.x == 960:
 			await click("character_M02")
-			expect(shell.page == "character", "compact details open")
+			expect(shell.page == "roster" and is_instance_valid(shell.character_sheet), "compact details open over the existing roster")
 			await capture("character-960")
-			fits("character_back"); fits("assign_0")
+			fits("character_back")
+			expect(shell.find_child("assign_0", true, false) == null and shell.find_child("remove_auxiliary", true, false) == null, "inspection has no numbered assignment buttons")
 			await click("character_stats")
 			await capture("attributes-960")
-			fits("modal_confirm")
-			await click("modal_confirm")
+			expect(shell.character_sheet.active_tab == "growth" and not is_instance_valid(shell.modal), "growth is an inspection tab rather than a generic notice")
+			await click("character_back")
 		shell.open_page("route")
 		shell.open_menu()
 		await capture("menu-%d" % dimensions.x)
@@ -106,5 +109,8 @@ func run() -> void:
 			state.data.pending = {}
 	shell.queue_free()
 	await frames()
+	viewport.queue_free()
+	await frames()
+	state = null
 	print("CHRONICLE_REFLOW_VISUAL_SMOKE PASS" if failures == 0 else "CHRONICLE_REFLOW_VISUAL_SMOKE FAIL %d" % failures)
 	quit(0 if failures == 0 else 1)

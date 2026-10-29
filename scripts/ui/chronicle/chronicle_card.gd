@@ -42,11 +42,7 @@ func _draw() -> void:
 	var area := Rect2(5, 5, size.x - 10, size.y - footer - 5)
 	draw_rect(area, style.field if not character_id.is_empty() else T.DARK)
 	if portrait != null and area.size.y > 0:
-		var source := portrait.get_size()
-		var ratio := maxf(area.size.x / source.x, area.size.y / source.y)
-		var crop := area.size / ratio
-		var at := (source - crop) * Vector2(.5, .15)
-		draw_texture_rect_region(portrait, area, Rect2(at, crop), Color("777a72") if fallen else ART.tint(character_id))
+		draw_texture_rect_region(portrait, area, portrait_source_rect(area.size), Color("777a72") if fallen else ART.tint(character_id))
 	draw_rect(Rect2(5, size.y - footer, size.x - 10, footer - 5), style.footer)
 	var edge: Color = T.LIGHT if selected_card or has_focus() else style.edge
 	draw_rect(rect.grow(-1), edge, false, 2 if selected_card or has_focus() else 1)
@@ -72,3 +68,10 @@ func _draw() -> void:
 		var tag_size := T.FONT.get_reading_font().get_string_size(tag, HORIZONTAL_ALIGNMENT_LEFT, -1, 12).x + 18
 		draw_rect(Rect2(5, 8, tag_size, 24), Color("75392d") if selected_card else Color("16271fec"))
 		draw_string(T.FONT.get_reading_font(), Vector2(13, 25), tag, HORIZONTAL_ALIGNMENT_LEFT, tag_size-10, 12, T.LIGHT)
+
+func portrait_source_rect(area_size: Vector2) -> Rect2:
+	if portrait == null or area_size.x <= 0 or area_size.y <= 0: return Rect2()
+	var source: Vector2 = portrait.get_size()
+	var ratio := maxf(area_size.x / source.x, area_size.y / source.y)
+	var crop := area_size / ratio
+	return Rect2((source - crop) * ART.card_anchor(character_id), crop)

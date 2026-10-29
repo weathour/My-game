@@ -1,0 +1,28 @@
+{
+  "tool": "built-in image_gen",
+  "source": "source/special-repair-v1.png",
+  "prompt": "special-repair-v1-prompt.txt",
+  "sha256": "1cc790a1aae7d2afd2263391c4c5d6fda4a27c2f1e5d239d3af2f4770e4c8972",
+  "size": [
+    1536,
+    1024
+  ],
+  "mode": "RGBA",
+  "alpha_extrema": [
+    0,
+    254
+  ],
+  "references": [
+    {
+      "path": "design/baimen-enemies-20261028/characters/M03_WAR/source/master-v1.png",
+      "sha256": "a519028d9441f21a2e9349b81fdb9d1939629bc7fe620de7898c59ddd29af0b8"
+    },
+    {
+      "path": "design/baimen-women-20261028/source/F07-masanniang-combat-v1.png",
+      "sha256": "da2cc4c7ab1ba88177916085e8f3eb8f1564e722d6476d0731703cc7cfc51d94"
+    }
+  ],
+  "visual_review": "Four command poses2x2, reading upperleft/upperright/lowerleft/lowerright. All faceRIGHT, complete spear and visibly strapped tower shield in each; no additional soldiers. Shield line command pose retains battlement armor identity and gray-haired face. Complete weapons/boots fully contained; four distinct alpha128 large components.",
+  "selection": "all4_selected_replace_original_special_row",
+  "generated_path": "/home/weathour/.codex/generated_images/01a1831a-f001-78c2-85f4-f99fc219fd1c/exec-7fdaadf0-8e4b-4672-a610-866092de67ce.png"
+}

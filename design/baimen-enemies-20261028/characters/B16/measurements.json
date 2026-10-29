@@ -1,0 +1,1234 @@
+{
+  "version": 1,
+  "id": "B16",
+  "review_status": "accepted_for_export",
+  "review_notes": "Original idle/move/hit accepted; original charge/command rejected because source extra spear joined two rows. Accepted independent repairs retain one spear+empty command hand and full tiger feet. Components, including detached edge pixels, grouped intact; shared body calibration per source200/380/400 preserves source proportions and natural charge crouch. Full wide weapon canvas640; no source crop or duplicated pose.",
+  "prompts": [
+    "command-repair-v1-prompt.txt",
+    "actions-v1-prompt.txt",
+    "master-v1-prompt.txt",
+    "charge-repair-v1-prompt.txt"
+  ],
+  "canvas": {
+    "size": [
+      640,
+      512
+    ],
+    "anchor": [
+      256,
+      480
+    ],
+    "body_height_px": 224
+  },
+  "faces_left": false,
+  "sources": {
+    "combat": {
+      "path": "source/actions-v1.png",
+      "size": [
+        1402,
+        1122
+      ],
+      "sha256": "a40e822bfcf7adc0e9e3d9e8340f02dfa624c8fe878bca38b53a09ddcb22786b",
+      "standing_body_height": 200
+    },
+    "charge": {
+      "path": "source/charge-repair-v1.png",
+      "size": [
+        1402,
+        1122
+      ],
+      "sha256": "86bf18b426fbc76332714737f8869cad3e84817c98503f54b12f598c767461f2",
+      "standing_body_height": 380
+    },
+    "command": {
+      "path": "source/command-repair-v1.png",
+      "size": [
+        1536,
+        1024
+      ],
+      "sha256": "10996606342aa33060a4d4d0f11a4755daa81827b1a2ebc57da2568b998602e3",
+      "standing_body_height": 400
+    }
+  },
+  "portrait": {
+    "path": "source/master-v1.png",
+    "size": [
+      1536,
+      1024
+    ],
+    "sha256": "7e2324a0c1acd745a6e42940b1c28bb9ba98571d08719bc26e5754d407c6fa47"
+  },
+  "poses": [
+    {
+      "id": "idle_01",
+      "source": "combat",
+      "anchor_source": [
+        177,
+        233
+      ],
+      "components": [
+        {
+          "bbox": [
+            24,
+            15,
+            352,
+            233
+          ],
+          "area": 38073
+        },
+        {
+          "bbox": [
+            160,
+            48,
+            161,
+            49
+          ],
+          "area": 1
+        }
+      ]
+    },
+    {
+      "id": "idle_02",
+      "source": "combat",
+      "anchor_source": [
+        523,
+        233
+      ],
+      "components": [
+        {
+          "bbox": [
+            360,
+            14,
+            694,
+            233
+          ],
+          "area": 38243
+        },
+        {
+          "bbox": [
+            490,
+            28,
+            492,
+            30
+          ],
+          "area": 3
+        },
+        {
+          "bbox": [
+            482,
+            43,
+            483,
+            44
+          ],
+          "area": 1
+        },
+        {
+          "bbox": [
+            473,
+            44,
+            474,
+            45
+          ],
+          "area": 1
+        },
+        {
+          "bbox": [
+            484,
+            44,
+            487,
+            45
+          ],
+          "area": 3
+        },
+        {
+          "bbox": [
+            419,
+            83,
+            420,
+            84
+          ],
+          "area": 1
+        }
+      ]
+    },
+    {
+      "id": "idle_03",
+      "source": "combat",
+      "anchor_source": [
+        871,
+        233
+      ],
+      "components": [
+        {
+          "bbox": [
+            697,
+            15,
+            1042,
+            233
+          ],
+          "area": 40067
+        },
+        {
+          "bbox": [
+            819,
+            43,
+            820,
+            44
+          ],
+          "area": 1
+        },
+        {
+          "bbox": [
+            853,
+            43,
+            854,
+            44
+          ],
+          "area": 1
+        },
+        {
+          "bbox": [
+            758,
+            92,
+            760,
+            93
+          ],
+          "area": 2
+        },
+        {
+          "bbox": [
+            802,
+            205,
+            803,
+            207
+          ],
+          "area": 2
+        }
+      ]
+    },
+    {
+      "id": "idle_04",
+      "source": "combat",
+      "anchor_source": [
+        1220,
+        232
+      ],
+      "components": [
+        {
+          "bbox": [
+            1038,
+            12,
+            1393,
+            232
+          ],
+          "area": 40222
+        },
+        {
+          "bbox": [
+            1169,
+            42,
+            1171,
+            44
+          ],
+          "area": 3
+        },
+        {
+          "bbox": [
+            1189,
+            44,
+            1190,
+            45
+          ],
+          "area": 1
+        },
+        {
+          "bbox": [
+            1105,
+            91,
+            1106,
+            93
+          ],
+          "area": 2
+        },
+        {
+          "bbox": [
+            1114,
+            92,
+            1115,
+            94
+          ],
+          "area": 2
+        },
+        {
+          "bbox": [
+            1116,
+            115,
+            1117,
+            116
+          ],
+          "area": 1
+        },
+        {
+          "bbox": [
+            1037,
+            116,
+            1038,
+            117
+          ],
+          "area": 1
+        }
+      ]
+    },
+    {
+      "id": "move_01",
+      "source": "combat",
+      "anchor_source": [
+        174,
+        453
+      ],
+      "components": [
+        {
+          "bbox": [
+            20,
+            237,
+            356,
+            453
+          ],
+          "area": 38959
+        },
+        {
+          "bbox": [
+            151,
+            266,
+            153,
+            267
+          ],
+          "area": 2
+        },
+        {
+          "bbox": [
+            155,
+            269,
+            156,
+            270
+          ],
+          "area": 1
+        },
+        {
+          "bbox": [
+            34,
+            279,
+            35,
+            280
+          ],
+          "area": 1
+        },
+        {
+          "bbox": [
+            33,
+            280,
+            34,
+            281
+          ],
+          "area": 1
+        },
+        {
+          "bbox": [
+            29,
+            288,
+            30,
+            289
+          ],
+          "area": 1
+        },
+        {
+          "bbox": [
+            28,
+            289,
+            29,
+            291
+          ],
+          "area": 2
+        },
+        {
+          "bbox": [
+            99,
+            296,
+            100,
+            297
+          ],
+          "area": 1
+        }
+      ]
+    },
+    {
+      "id": "move_02",
+      "source": "combat",
+      "anchor_source": [
+        523,
+        453
+      ],
+      "components": [
+        {
+          "bbox": [
+            361,
+            236,
+            695,
+            453
+          ],
+          "area": 38270
+        },
+        {
+          "bbox": [
+            399,
+            317,
+            400,
+            318
+          ],
+          "area": 1
+        }
+      ]
+    },
+    {
+      "id": "move_03",
+      "source": "combat",
+      "anchor_source": [
+        874,
+        453
+      ],
+      "components": [
+        {
+          "bbox": [
+            693,
+            237,
+            1046,
+            453
+          ],
+          "area": 39543
+        },
+        {
+          "bbox": [
+            760,
+            313,
+            761,
+            315
+          ],
+          "area": 2
+        }
+      ]
+    },
+    {
+      "id": "move_04",
+      "source": "combat",
+      "anchor_source": [
+        1236,
+        451
+      ],
+      "components": [
+        {
+          "bbox": [
+            1069,
+            238,
+            1393,
+            451
+          ],
+          "area": 37358
+        },
+        {
+          "bbox": [
+            1199,
+            249,
+            1200,
+            250
+          ],
+          "area": 1
+        },
+        {
+          "bbox": [
+            1187,
+            263,
+            1188,
+            264
+          ],
+          "area": 1
+        },
+        {
+          "bbox": [
+            1138,
+            286,
+            1139,
+            287
+          ],
+          "area": 1
+        },
+        {
+          "bbox": [
+            1132,
+            308,
+            1133,
+            309
+          ],
+          "area": 1
+        },
+        {
+          "bbox": [
+            1126,
+            313,
+            1127,
+            314
+          ],
+          "area": 1
+        },
+        {
+          "bbox": [
+            1112,
+            315,
+            1113,
+            316
+          ],
+          "area": 1
+        }
+      ]
+    },
+    {
+      "id": "attack_01",
+      "source": "charge",
+      "anchor_source": [
+        345,
+        554
+      ],
+      "components": [
+        {
+          "bbox": [
+            67,
+            207,
+            697,
+            554
+          ],
+          "area": 119631
+        },
+        {
+          "bbox": [
+            313,
+            231,
+            314,
+            232
+          ],
+          "area": 1
+        },
+        {
+          "bbox": [
+            297,
+            246,
+            298,
+            247
+          ],
+          "area": 1
+        },
+        {
+          "bbox": [
+            299,
+            248,
+            300,
+            249
+          ],
+          "area": 1
+        },
+        {
+          "bbox": [
+            84,
+            284,
+            85,
+            285
+          ],
+          "area": 1
+        },
+        {
+          "bbox": [
+            135,
+            333,
+            137,
+            336
+          ],
+          "area": 4
+        },
+        {
+          "bbox": [
+            138,
+            339,
+            139,
+            341
+          ],
+          "area": 2
+        },
+        {
+          "bbox": [
+            166,
+            344,
+            168,
+            345
+          ],
+          "area": 2
+        },
+        {
+          "bbox": [
+            227,
+            483,
+            228,
+            484
+          ],
+          "area": 1
+        }
+      ]
+    },
+    {
+      "id": "attack_02",
+      "source": "charge",
+      "anchor_source": [
+        1035,
+        572
+      ],
+      "components": [
+        {
+          "bbox": [
+            773,
+            168,
+            1386,
+            572
+          ],
+          "area": 123166
+        },
+        {
+          "bbox": [
+            992,
+            199,
+            995,
+            201
+          ],
+          "area": 4
+        },
+        {
+          "bbox": [
+            978,
+            213,
+            981,
+            214
+          ],
+          "area": 3
+        },
+        {
+          "bbox": [
+            991,
+            227,
+            992,
+            228
+          ],
+          "area": 1
+        },
+        {
+          "bbox": [
+            884,
+            307,
+            886,
+            309
+          ],
+          "area": 3
+        },
+        {
+          "bbox": [
+            846,
+            325,
+            847,
+            327
+          ],
+          "area": 2
+        }
+      ]
+    },
+    {
+      "id": "attack_03",
+      "source": "charge",
+      "anchor_source": [
+        360,
+        1009
+      ],
+      "components": [
+        {
+          "bbox": [
+            26,
+            666,
+            824,
+            1009
+          ],
+          "area": 139329
+        },
+        {
+          "bbox": [
+            360,
+            675,
+            361,
+            677
+          ],
+          "area": 2
+        },
+        {
+          "bbox": [
+            331,
+            684,
+            332,
+            685
+          ],
+          "area": 1
+        },
+        {
+          "bbox": [
+            158,
+            791,
+            160,
+            793
+          ],
+          "area": 4
+        },
+        {
+          "bbox": [
+            121,
+            799,
+            122,
+            800
+          ],
+          "area": 1
+        },
+        {
+          "bbox": [
+            120,
+            800,
+            121,
+            801
+          ],
+          "area": 1
+        },
+        {
+          "bbox": [
+            122,
+            800,
+            123,
+            801
+          ],
+          "area": 1
+        }
+      ]
+    },
+    {
+      "id": "attack_04",
+      "source": "charge",
+      "anchor_source": [
+        1080,
+        1037
+      ],
+      "components": [
+        {
+          "bbox": [
+            843,
+            670,
+            1389,
+            1037
+          ],
+          "area": 113316
+        },
+        {
+          "bbox": [
+            1094,
+            672,
+            1096,
+            673
+          ],
+          "area": 2
+        },
+        {
+          "bbox": [
+            915,
+            818,
+            916,
+            819
+          ],
+          "area": 1
+        }
+      ]
+    },
+    {
+      "id": "special_01",
+      "source": "command",
+      "anchor_source": [
+        395,
+        464
+      ],
+      "components": [
+        {
+          "bbox": [
+            77,
+            48,
+            750,
+            464
+          ],
+          "area": 145938
+        },
+        {
+          "bbox": [
+            335,
+            114,
+            336,
+            115
+          ],
+          "area": 1
+        },
+        {
+          "bbox": [
+            486,
+            117,
+            487,
+            119
+          ],
+          "area": 2
+        },
+        {
+          "bbox": [
+            298,
+            149,
+            299,
+            150
+          ],
+          "area": 1
+        },
+        {
+          "bbox": [
+            127,
+            198,
+            128,
+            199
+          ],
+          "area": 1
+        },
+        {
+          "bbox": [
+            173,
+            203,
+            174,
+            205
+          ],
+          "area": 2
+        },
+        {
+          "bbox": [
+            261,
+            230,
+            262,
+            231
+          ],
+          "area": 1
+        },
+        {
+          "bbox": [
+            183,
+            262,
+            185,
+            265
+          ],
+          "area": 4
+        }
+      ]
+    },
+    {
+      "id": "special_02",
+      "source": "command",
+      "anchor_source": [
+        1150,
+        464
+      ],
+      "components": [
+        {
+          "bbox": [
+            834,
+            57,
+            1511,
+            464
+          ],
+          "area": 146649
+        },
+        {
+          "bbox": [
+            954,
+            188,
+            957,
+            192
+          ],
+          "area": 7
+        },
+        {
+          "bbox": [
+            935,
+            262,
+            936,
+            264
+          ],
+          "area": 2
+        },
+        {
+          "bbox": [
+            919,
+            277,
+            923,
+            278
+          ],
+          "area": 4
+        }
+      ]
+    },
+    {
+      "id": "special_03",
+      "source": "command",
+      "anchor_source": [
+        400,
+        977
+      ],
+      "components": [
+        {
+          "bbox": [
+            70,
+            558,
+            752,
+            977
+          ],
+          "area": 145556
+        },
+        {
+          "bbox": [
+            360,
+            591,
+            362,
+            592
+          ],
+          "area": 2
+        },
+        {
+          "bbox": [
+            161,
+            707,
+            162,
+            708
+          ],
+          "area": 1
+        },
+        {
+          "bbox": [
+            227,
+            726,
+            228,
+            728
+          ],
+          "area": 2
+        },
+        {
+          "bbox": [
+            180,
+            776,
+            182,
+            777
+          ],
+          "area": 2
+        }
+      ]
+    },
+    {
+      "id": "special_04",
+      "source": "command",
+      "anchor_source": [
+        1156,
+        977
+      ],
+      "components": [
+        {
+          "bbox": [
+            838,
+            572,
+            1511,
+            977
+          ],
+          "area": 143589
+        },
+        {
+          "bbox": [
+            1090,
+            595,
+            1091,
+            597
+          ],
+          "area": 2
+        },
+        {
+          "bbox": [
+            973,
+            729,
+            974,
+            731
+          ],
+          "area": 2
+        },
+        {
+          "bbox": [
+            1288,
+            745,
+            1289,
+            746
+          ],
+          "area": 1
+        },
+        {
+          "bbox": [
+            941,
+            778,
+            942,
+            779
+          ],
+          "area": 1
+        },
+        {
+          "bbox": [
+            914,
+            787,
+            915,
+            788
+          ],
+          "area": 1
+        }
+      ]
+    },
+    {
+      "id": "hit_01",
+      "source": "combat",
+      "anchor_source": [
+        183,
+        1106
+      ],
+      "components": [
+        {
+          "bbox": [
+            31,
+            900,
+            348,
+            1106
+          ],
+          "area": 38143
+        },
+        {
+          "bbox": [
+            175,
+            906,
+            176,
+            907
+          ],
+          "area": 1
+        },
+        {
+          "bbox": [
+            117,
+            959,
+            118,
+            960
+          ],
+          "area": 1
+        },
+        {
+          "bbox": [
+            112,
+            978,
+            113,
+            979
+          ],
+          "area": 1
+        }
+      ]
+    },
+    {
+      "id": "hit_02",
+      "source": "combat",
+      "anchor_source": [
+        532,
+        1106
+      ],
+      "components": [
+        {
+          "bbox": [
+            398,
+            899,
+            677,
+            1106
+          ],
+          "area": 34802
+        },
+        {
+          "bbox": [
+            439,
+            948,
+            440,
+            950
+          ],
+          "area": 2
+        },
+        {
+          "bbox": [
+            437,
+            951,
+            438,
+            952
+          ],
+          "area": 1
+        }
+      ]
+    },
+    {
+      "id": "hit_03",
+      "source": "combat",
+      "anchor_source": [
+        882,
+        1106
+      ],
+      "components": [
+        {
+          "bbox": [
+            712,
+            895,
+            1020,
+            1106
+          ],
+          "area": 36545
+        },
+        {
+          "bbox": [
+            834,
+            922,
+            835,
+            923
+          ],
+          "area": 1
+        },
+        {
+          "bbox": [
+            787,
+            955,
+            788,
+            956
+          ],
+          "area": 1
+        }
+      ]
+    },
+    {
+      "id": "hit_04",
+      "source": "combat",
+      "anchor_source": [
+        1242,
+        1105
+      ],
+      "components": [
+        {
+          "bbox": [
+            1065,
+            893,
+            1393,
+            1105
+          ],
+          "area": 39575
+        },
+        {
+          "bbox": [
+            1192,
+            913,
+            1193,
+            914
+          ],
+          "area": 1
+        },
+        {
+          "bbox": [
+            1147,
+            925,
+            1148,
+            927
+          ],
+          "area": 2
+        },
+        {
+          "bbox": [
+            1152,
+            927,
+            1153,
+            928
+          ],
+          "area": 1
+        }
+      ]
+    }
+  ],
+  "clips": {
+    "idle": {
+      "poses": [
+        "idle_01",
+        "idle_02",
+        "idle_03",
+        "idle_04"
+      ],
+      "fps": 6,
+      "windup_frame": 0,
+      "contact_frame": 1
+    },
+    "move": {
+      "poses": [
+        "move_01",
+        "move_02",
+        "move_03",
+        "move_04"
+      ],
+      "fps": 10,
+      "windup_frame": 0,
+      "contact_frame": 1
+    },
+    "attack": {
+      "poses": [
+        "attack_01",
+        "attack_02",
+        "attack_03",
+        "attack_04"
+      ],
+      "fps": 10,
+      "windup_frame": 0,
+      "contact_frame": 1
+    },
+    "special": {
+      "poses": [
+        "special_01",
+        "special_02",
+        "special_03",
+        "special_04"
+      ],
+      "fps": 10,
+      "windup_frame": 0,
+      "contact_frame": 1
+    },
+    "hit": {
+      "poses": [
+        "hit_01",
+        "hit_02",
+        "hit_03",
+        "hit_04"
+      ],
+      "fps": 10,
+      "windup_frame": 0,
+      "contact_frame": 1
+    }
+  },
+  "action_clips": {
+    "charge": "attack",
+    "summon": "special",
+    "command": "special"
+  }
+}

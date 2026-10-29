@@ -95,6 +95,7 @@ func _physics_process(delta: float) -> void:
 	for event in battle.events:
 		if event.kind == "message": feedback.text = event.text; message_time = 2
 		if event.kind == "level": feedback.text = "%s  Lv.%d" % [definitions[event.id].name, event.level]; message_time = 3
+	canvas.consume_events(battle.events)
 	battle.events.clear()
 	if not battle.paused:
 		message_time -= delta
@@ -115,7 +116,10 @@ func refresh() -> void:
 	boss_bar.visible = battle.director.boss_spawned
 	boss_label.text = battle.director.config.boss_name if battle.director.boss_spawned else "击破足够敌人可提前迎战首领"
 	for enemy in battle.enemies:
-		if enemy.kind == "boss": boss_bar.max_value = enemy.max_hp; boss_bar.value = enemy.hp
+		if enemy.rank == "boss" and enemy.hp_owner_id == enemy.id:
+			boss_bar.max_value = enemy.max_hp
+			boss_bar.value = enemy.hp
+			break
 	hud.refresh()
 
 func toggle_pause() -> void:

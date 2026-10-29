@@ -1,0 +1,59 @@
+{
+  "captured_at_utc": "2026-10-29T05:56:25.548487+00:00",
+  "engine": "/home/weathour/.local/bin/godot-4.6.2",
+  "files": {
+    "scripts/campaign/campaign_service.gd": "a1cd0a209363c0cfbc50565f9635022061b2033eaefe05ebf57ccbd14451fd32",
+    "scripts/ui/chronicle/chronicle_party_pages.gd": "f47a5342041f57be5cee728f2e49d8b11520687901bf5b2e9ac7dddc4a185294",
+    "scripts/ui/chronicle/chronicle_party_drag_card.gd": "b8a81aefef363fd747de79ed483a06ab3fca0334fb5f8b10c2093322a615bdfb",
+    "scripts/ui/chronicle/chronicle_party_drop_zone.gd": "cffd17ac866d01b9b32f64b60071acc1d05185523fc8299e03ec6dccbce5744d",
+    "scripts/tests/chronicle_party_drag_smoke.gd": "61c2e60f7e24e30a35cb06a05f06a63c0eeaa1780534619f9269ebc71b2e0899",
+    "scripts/tests/chronicle_playable_ui_smoke.gd": "5a12fab0c1a9a800c255278a6c83f4b66c4ed6b656a80be5aeb7053b84171e9f"
+  },
+  "verified_at_utc": "2026-10-29T06:14:50.045571+00:00",
+  "runtime_unchanged_since_initial_fingerprint": true,
+  "test_revisions_after_initial_fingerprint": [
+    "scripts/tests/chronicle_party_drag_smoke.gd",
+    "scripts/tests/chronicle_playable_ui_smoke.gd"
+  ],
+  "native_input": {
+    "pointer_attempts": 17,
+    "native_drags_started": 12,
+    "invalid_source_rejections": 5,
+    "method": "InputEventMouseButton press, InputEventMouseMotion with held button, release through production SubViewport"
+  },
+  "tests": {
+    "party_drag_render": {
+      "checks": 151,
+      "failures": 0,
+      "exit_code": 0,
+      "strict_log_check_exit": 0,
+      "log": "party-drag-render.log"
+    },
+    "party_drag_headless": {
+      "checks": 143,
+      "failures": 0,
+      "exit_code": 0,
+      "strict_log_check_exit": 0,
+      "log": "party-drag-headless.log"
+    },
+    "playable_ui_headless": {
+      "status": "PASS",
+      "failures": 0,
+      "exit_code": 0,
+      "strict_log_check_exit": 0,
+      "log": "playable-ui-headless.log",
+      "includes_start_battle_keyboard_carry_cleanup": true
+    },
+    "party_summary_headless": {
+      "checks": 155,
+      "failures": 0,
+      "exit_code": 0,
+      "strict_log_check_exit": 0,
+      "log": "party-summary-headless.log"
+    },
+    "startup": {
+      "exit_code": 0,
+      "log": "startup.log"
+    }
+  }
+}

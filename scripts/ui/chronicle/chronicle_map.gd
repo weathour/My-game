@@ -41,7 +41,7 @@ func _ready() -> void:
 	resized.connect(queue_redraw)
 
 func project(point: Vector2) -> Vector2:
-	return Vector2((point.x - 96) / 30.0 * (size.x - 290 if mode == "world" else size.x), (45 - point.y) / 26.0 * size.y)
+	return Vector2((point.x - 96) / 30.0 * size.x, (45 - point.y) / 26.0 * size.y)
 
 func province_position(id: String) -> Vector2:
 	return project(LOCATIONS[id])

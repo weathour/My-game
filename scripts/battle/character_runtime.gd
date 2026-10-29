@@ -16,6 +16,11 @@ var shield := 0.0
 var haste := 0.0
 var hurt_lock := 0.0
 
+func clear_temporary() -> void:
+	shield = 0.0
+	haste = 0.0
+	hurt_lock = 0.0
+
 func _init(key: String, record: Dictionary, attributes: Dictionary) -> void:
 	id = key
 	level = int(record.level)

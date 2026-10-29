@@ -1,0 +1,916 @@
+{
+  "version": 1,
+  "id": "L01",
+  "review_status": "accepted_for_export",
+  "review_notes": "Inspected20 commander poses, giant banner and bronze tablet match master. Standing body mask-to-boots approximately190source pixels excludes tall banner; banner is allowed above bodily height. Distinct heavy steps, tablet strike RIGHT, command lift and hit recoil. Actual 4-connected alpha regions reviewed and detached parts retained. One source body scale across all actions, manual chassis/hip and ground anchors. No blind grid crop or per-pose normalization.",
+  "prompts": [
+    "portrait-prompt.txt",
+    "sheet-prompt.txt"
+  ],
+  "canvas": {
+    "size": [
+      256,
+      256
+    ],
+    "anchor": [
+      128,
+      224
+    ],
+    "body_height_px": 128
+  },
+  "sources": {
+    "sheet": {
+      "path": "source/sheet-v1.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "sha256": "ec67de7a1de48b703ab46eb5f371cff5ab57cea7da3afba91b7cc98d8de4dcd4",
+      "standing_body_height": 190.0
+    }
+  },
+  "portrait": {
+    "path": "source/portrait-v1.png",
+    "size": [
+      1182,
+      1330
+    ],
+    "sha256": "7314a75646959f81c54a5998fbb8b20a5d04db294710dda8c7955fc0e8ffeaef"
+  },
+  "poses": [
+    {
+      "id": "idle_1",
+      "source": "sheet",
+      "anchor_source": [
+        210,
+        259
+      ],
+      "components": [
+        {
+          "bbox": [
+            51,
+            8,
+            314,
+            259
+          ],
+          "area": 39575
+        },
+        {
+          "bbox": [
+            76,
+            83,
+            77,
+            84
+          ],
+          "area": 1
+        },
+        {
+          "bbox": [
+            74,
+            166,
+            75,
+            167
+          ],
+          "area": 1
+        },
+        {
+          "bbox": [
+            113,
+            202,
+            114,
+            203
+          ],
+          "area": 1
+        },
+        {
+          "bbox": [
+            110,
+            229,
+            112,
+            231
+          ],
+          "area": 3
+        },
+        {
+          "bbox": [
+            108,
+            231,
+            110,
+            232
+          ],
+          "area": 2
+        }
+      ]
+    },
+    {
+      "id": "idle_2",
+      "source": "sheet",
+      "anchor_source": [
+        505,
+        259
+      ],
+      "components": [
+        {
+          "bbox": [
+            353,
+            11,
+            598,
+            259
+          ],
+          "area": 38665
+        },
+        {
+          "bbox": [
+            368,
+            129,
+            369,
+            130
+          ],
+          "area": 1
+        }
+      ]
+    },
+    {
+      "id": "idle_3",
+      "source": "sheet",
+      "anchor_source": [
+        810,
+        259
+      ],
+      "components": [
+        {
+          "bbox": [
+            651,
+            11,
+            906,
+            259
+          ],
+          "area": 38888
+        },
+        {
+          "bbox": [
+            669,
+            139,
+            670,
+            140
+          ],
+          "area": 1
+        },
+        {
+          "bbox": [
+            690,
+            149,
+            691,
+            150
+          ],
+          "area": 1
+        },
+        {
+          "bbox": [
+            690,
+            151,
+            692,
+            153
+          ],
+          "area": 3
+        },
+        {
+          "bbox": [
+            682,
+            169,
+            683,
+            170
+          ],
+          "area": 1
+        },
+        {
+          "bbox": [
+            702,
+            185,
+            703,
+            186
+          ],
+          "area": 1
+        }
+      ]
+    },
+    {
+      "id": "idle_4",
+      "source": "sheet",
+      "anchor_source": [
+        1120,
+        259
+      ],
+      "components": [
+        {
+          "bbox": [
+            967,
+            14,
+            1217,
+            259
+          ],
+          "area": 38237
+        },
+        {
+          "bbox": [
+            983,
+            108,
+            984,
+            109
+          ],
+          "area": 1
+        },
+        {
+          "bbox": [
+            993,
+            157,
+            994,
+            158
+          ],
+          "area": 1
+        },
+        {
+          "bbox": [
+            1009,
+            168,
+            1010,
+            169
+          ],
+          "area": 1
+        }
+      ]
+    },
+    {
+      "id": "move_1",
+      "source": "sheet",
+      "anchor_source": [
+        210,
+        488
+      ],
+      "components": [
+        {
+          "bbox": [
+            58,
+            263,
+            304,
+            488
+          ],
+          "area": 35534
+        },
+        {
+          "bbox": [
+            61,
+            393,
+            62,
+            394
+          ],
+          "area": 1
+        },
+        {
+          "bbox": [
+            94,
+            452,
+            96,
+            454
+          ],
+          "area": 3
+        }
+      ]
+    },
+    {
+      "id": "move_2",
+      "source": "sheet",
+      "anchor_source": [
+        505,
+        489
+      ],
+      "components": [
+        {
+          "bbox": [
+            354,
+            265,
+            605,
+            489
+          ],
+          "area": 34676
+        },
+        {
+          "bbox": [
+            381,
+            392,
+            382,
+            394
+          ],
+          "area": 2
+        },
+        {
+          "bbox": [
+            418,
+            445,
+            419,
+            446
+          ],
+          "area": 1
+        }
+      ]
+    },
+    {
+      "id": "move_3",
+      "source": "sheet",
+      "anchor_source": [
+        810,
+        490
+      ],
+      "components": [
+        {
+          "bbox": [
+            654,
+            260,
+            915,
+            490
+          ],
+          "area": 35631
+        },
+        {
+          "bbox": [
+            690,
+            349,
+            691,
+            351
+          ],
+          "area": 2
+        },
+        {
+          "bbox": [
+            728,
+            425,
+            729,
+            426
+          ],
+          "area": 1
+        },
+        {
+          "bbox": [
+            698,
+            447,
+            699,
+            448
+          ],
+          "area": 1
+        }
+      ]
+    },
+    {
+      "id": "move_4",
+      "source": "sheet",
+      "anchor_source": [
+        1120,
+        491
+      ],
+      "components": [
+        {
+          "bbox": [
+            978,
+            268,
+            1223,
+            491
+          ],
+          "area": 34656
+        },
+        {
+          "bbox": [
+            977,
+            407,
+            978,
+            408
+          ],
+          "area": 1
+        },
+        {
+          "bbox": [
+            991,
+            407,
+            992,
+            408
+          ],
+          "area": 1
+        },
+        {
+          "bbox": [
+            990,
+            408,
+            991,
+            409
+          ],
+          "area": 1
+        }
+      ]
+    },
+    {
+      "id": "attack_1",
+      "source": "sheet",
+      "anchor_source": [
+        210,
+        739
+      ],
+      "components": [
+        {
+          "bbox": [
+            30,
+            500,
+            299,
+            739
+          ],
+          "area": 39964
+        },
+        {
+          "bbox": [
+            79,
+            614,
+            81,
+            616
+          ],
+          "area": 3
+        },
+        {
+          "bbox": [
+            76,
+            618,
+            77,
+            619
+          ],
+          "area": 1
+        }
+      ]
+    },
+    {
+      "id": "attack_2",
+      "source": "sheet",
+      "anchor_source": [
+        505,
+        738
+      ],
+      "components": [
+        {
+          "bbox": [
+            336,
+            495,
+            614,
+            738
+          ],
+          "area": 42262
+        },
+        {
+          "bbox": [
+            343,
+            645,
+            344,
+            647
+          ],
+          "area": 2
+        },
+        {
+          "bbox": [
+            395,
+            679,
+            396,
+            680
+          ],
+          "area": 1
+        }
+      ]
+    },
+    {
+      "id": "attack_3",
+      "source": "sheet",
+      "anchor_source": [
+        810,
+        733
+      ],
+      "components": [
+        {
+          "bbox": [
+            643,
+            501,
+            979,
+            733
+          ],
+          "area": 44300
+        },
+        {
+          "bbox": [
+            651,
+            611,
+            652,
+            612
+          ],
+          "area": 1
+        },
+        {
+          "bbox": [
+            690,
+            615,
+            691,
+            616
+          ],
+          "area": 1
+        },
+        {
+          "bbox": [
+            732,
+            653,
+            733,
+            654
+          ],
+          "area": 1
+        },
+        {
+          "bbox": [
+            688,
+            669,
+            689,
+            670
+          ],
+          "area": 1
+        }
+      ]
+    },
+    {
+      "id": "attack_4",
+      "source": "sheet",
+      "anchor_source": [
+        1120,
+        737
+      ],
+      "components": [
+        {
+          "bbox": [
+            998,
+            503,
+            1229,
+            737
+          ],
+          "area": 35490
+        },
+        {
+          "bbox": [
+            1026,
+            722,
+            1027,
+            723
+          ],
+          "area": 1
+        }
+      ]
+    },
+    {
+      "id": "special_1",
+      "source": "sheet",
+      "anchor_source": [
+        210,
+        986
+      ],
+      "components": [
+        {
+          "bbox": [
+            44,
+            749,
+            294,
+            986
+          ],
+          "area": 37965
+        },
+        {
+          "bbox": [
+            79,
+            887,
+            80,
+            888
+          ],
+          "area": 1
+        },
+        {
+          "bbox": [
+            77,
+            888,
+            78,
+            889
+          ],
+          "area": 1
+        }
+      ]
+    },
+    {
+      "id": "special_2",
+      "source": "sheet",
+      "anchor_source": [
+        505,
+        990
+      ],
+      "components": [
+        {
+          "bbox": [
+            341,
+            741,
+            598,
+            990
+          ],
+          "area": 41153
+        },
+        {
+          "bbox": [
+            552,
+            892,
+            554,
+            894
+          ],
+          "area": 3
+        },
+        {
+          "bbox": [
+            374,
+            905,
+            375,
+            907
+          ],
+          "area": 2
+        }
+      ]
+    },
+    {
+      "id": "special_3",
+      "source": "sheet",
+      "anchor_source": [
+        810,
+        986
+      ],
+      "components": [
+        {
+          "bbox": [
+            645,
+            742,
+            990,
+            986
+          ],
+          "area": 43192
+        },
+        {
+          "bbox": [
+            678,
+            801,
+            680,
+            802
+          ],
+          "area": 2
+        },
+        {
+          "bbox": [
+            664,
+            846,
+            665,
+            847
+          ],
+          "area": 1
+        }
+      ]
+    },
+    {
+      "id": "special_4",
+      "source": "sheet",
+      "anchor_source": [
+        1120,
+        989
+      ],
+      "components": [
+        {
+          "bbox": [
+            1001,
+            745,
+            1227,
+            989
+          ],
+          "area": 36164
+        },
+        {
+          "bbox": [
+            1036,
+            855,
+            1037,
+            856
+          ],
+          "area": 1
+        },
+        {
+          "bbox": [
+            1003,
+            858,
+            1004,
+            859
+          ],
+          "area": 1
+        }
+      ]
+    },
+    {
+      "id": "hit_1",
+      "source": "sheet",
+      "anchor_source": [
+        210,
+        1225
+      ],
+      "components": [
+        {
+          "bbox": [
+            46,
+            1000,
+            284,
+            1225
+          ],
+          "area": 32888
+        },
+        {
+          "bbox": [
+            49,
+            1061,
+            50,
+            1062
+          ],
+          "area": 1
+        },
+        {
+          "bbox": [
+            77,
+            1090,
+            78,
+            1091
+          ],
+          "area": 1
+        }
+      ]
+    },
+    {
+      "id": "hit_2",
+      "source": "sheet",
+      "anchor_source": [
+        505,
+        1223
+      ],
+      "components": [
+        {
+          "bbox": [
+            359,
+            990,
+            611,
+            1223
+          ],
+          "area": 35391
+        },
+        {
+          "bbox": [
+            427,
+            1170,
+            428,
+            1171
+          ],
+          "area": 1
+        }
+      ]
+    },
+    {
+      "id": "hit_3",
+      "source": "sheet",
+      "anchor_source": [
+        810,
+        1223
+      ],
+      "components": [
+        {
+          "bbox": [
+            668,
+            1032,
+            942,
+            1223
+          ],
+          "area": 33382
+        },
+        {
+          "bbox": [
+            709,
+            1133,
+            710,
+            1134
+          ],
+          "area": 1
+        },
+        {
+          "bbox": [
+            708,
+            1134,
+            709,
+            1137
+          ],
+          "area": 3
+        },
+        {
+          "bbox": [
+            692,
+            1175,
+            693,
+            1176
+          ],
+          "area": 1
+        }
+      ]
+    },
+    {
+      "id": "hit_4",
+      "source": "sheet",
+      "anchor_source": [
+        1120,
+        1227
+      ],
+      "components": [
+        {
+          "bbox": [
+            979,
+            990,
+            1227,
+            1227
+          ],
+          "area": 37031
+        },
+        {
+          "bbox": [
+            1024,
+            1128,
+            1025,
+            1129
+          ],
+          "area": 1
+        }
+      ]
+    }
+  ],
+  "clips": {
+    "idle": {
+      "poses": [
+        "idle_1",
+        "idle_2",
+        "idle_3",
+        "idle_4"
+      ],
+      "fps": 6,
+      "contact_frame": 2,
+      "windup_frame": 0
+    },
+    "move": {
+      "poses": [
+        "move_1",
+        "move_2",
+        "move_3",
+        "move_4"
+      ],
+      "fps": 9,
+      "contact_frame": 2,
+      "windup_frame": 0
+    },
+    "attack": {
+      "poses": [
+        "attack_1",
+        "attack_2",
+        "attack_3",
+        "attack_4"
+      ],
+      "fps": 10,
+      "contact_frame": 2,
+      "windup_frame": 0
+    },
+    "special": {
+      "poses": [
+        "special_1",
+        "special_2",
+        "special_3",
+        "special_4"
+      ],
+      "fps": 10,
+      "contact_frame": 2,
+      "windup_frame": 0
+    },
+    "hit": {
+      "poses": [
+        "hit_1",
+        "hit_2",
+        "hit_3",
+        "hit_4"
+      ],
+      "fps": 10,
+      "contact_frame": 2,
+      "windup_frame": 0
+    }
+  },
+  "action_clips": {
+    "command": "special",
+    "swipe": "attack"
+  },
+  "faces_left": false
+}

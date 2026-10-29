@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "id": "E01",
+  "generator": "built-in ImageGen",
+  "identity_master": "source/master-v1.png",
+  "references": [
+    {
+      "path": "design/jia-combat-20261027/source/dao-v1.png",
+      "sha256": "dc7720a430f1b03f61b87292b845f170f15a5a487c4a9810070fb27ad546099e",
+      "role": "pixel_drawing_and_animation_style_only"
+    },
+    {
+      "path": "design/mechanic-rework-20261013/source/character-animations.png",
+      "sha256": "ad4ea4529a399df65569c5c37d85c0616bb6d09f594749c30818c283c85407c5",
+      "role": "inspected_local_pixel_style_reference_not_passed_to_generation"
+    }
+  ],
+  "source_versions": [
+    {
+      "path": "design/baimen-enemies-20261028/characters/E01/source/actions-v1.png",
+      "sha256": "254e3b2ad53ce88329ff81bc0c857e64f014ab9d4b9444506cf7aaa1f0c68410",
+      "selected": true,
+      "role": "pose_source",
+      "decision": "selected"
+    },
+    {
+      "path": "design/baimen-enemies-20261028/characters/E01/source/master-v1.png",
+      "sha256": "ea5aeae6547f6595f88f66fefee466e36465a9ba4cddf5f75955c91dabd3fb65",
+      "selected": true,
+      "role": "identity_master",
+      "decision": "selected"
+    }
+  ],
+  "prompts": [
+    "prompts/master-v1.txt",
+    "prompts/actions-v1.txt"
+  ],
+  "review_notes": "Viewed full master and each of twenty sheet poses. Squat straw/wood effigy, asymmetric arms and armor scraps retained. Rows 1/2/3/4/5 are idle/walk/long-arm strike/lunge/hit. Actual connected components selected, tiny detached straw pixels within reviewed silhouette included. Standing first pose body from y24 to291 calibrates267px. Ground anchors follow feet rather than the long fingers, and horizontal anchors follow wooden hip/feet support. One uniform scale for all twenty poses. No weapons clipped.",
+  "export": "scripts/tools/import_baimen_enemy_art.lua",
+  "pixels_policy": "ImageGen-authored; Pillow/scipy read-only component measurements and QA; Aseprite extraction/registration/palette/export."
+}

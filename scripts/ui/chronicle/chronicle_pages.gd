@@ -4,7 +4,6 @@ const SETTINGS := preload("res://scripts/game_settings.gd")
 const PARTY := preload("res://scripts/ui/chronicle/chronicle_party_pages.gd")
 const REWARD := preload("res://scripts/ui/chronicle/chronicle_reward_page.gd")
 const BGM := preload("res://scripts/bgm_player.gd")
-static var _events: Dictionary = {}
 
 static func build(shell: Control, page: String) -> void:
 	match page:
@@ -13,6 +12,7 @@ static func build(shell: Control, page: String) -> void:
 		"equipment": equipment(shell)
 		"reward": reward(shell)
 		"event": event_page(shell)
+		"replay": shell.build_story_replay()
 		"preparation": preparation(shell)
 		"failure": failure(shell)
 		"saves": saves(shell)
@@ -26,7 +26,7 @@ static func scaffold(shell: Control, title: String, subtitle: String) -> VBoxCon
 	var row := T.row(column)
 	row.add_child(T.label(title, 24 if shell.size.y < 650 else 30, T.INK, true))
 	T.space(row)
-	shell.action(row, "返回", func(): shell.open_page(shell.previous_page), "page_back")
+	shell.quiet_action(row, "返回", func(): shell.open_page(shell.party_return if shell.page == "equipment" else shell.previous_page), "page_back")
 	if not subtitle.is_empty(): column.add_child(T.paragraph(subtitle, T.MUTED, 13 if shell.size.y < 650 else 14))
 	column.add_theme_constant_override("separation", 6 if shell.size.y < 650 else 10)
 	column.add_child(HSeparator.new())
@@ -51,7 +51,8 @@ static func character_page(shell: Control) -> void:
 static func equipment(shell: Control) -> void:
 	var state: RefCounted = shell.session
 	var compact: bool = shell.size.y < 650
-	var column := scaffold(shell, "行装", "全队共享")
+	var column := scaffold(shell, "整备", "全队共享")
+	shell.party_tabs(column)
 	var slots := T.row(column)
 	for entry in [["weapon", "武器"], ["armor", "护甲"], ["accessory", "饰品"]]:
 		var key: String = entry[0]
@@ -102,34 +103,7 @@ static func reward(shell: Control) -> void:
 	REWARD.build(shell)
 
 static func event_page(shell: Control) -> void:
-	var state: RefCounted = shell.session
-	var node: Dictionary = state.nodes[state.data.current]
-	var row := T.row(shell.page_margin())
-	var image_space := Control.new()
-	image_space.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	row.add_child(image_space)
-	if state.data.owned.has("F11") or node.id == "S02": shell.portrait(image_space, 370)
-	var panel := T.panel(row, false, 28)
-	panel.custom_minimum_size.x = 530 if shell.size.x >= 1150 else 470
-	panel.size_flags_vertical = Control.SIZE_SHRINK_CENTER
-	var column := T.column(panel)
-	column.add_child(T.label("第一章 · " + state.SEGMENTS[int(node.segment)], 15, T.MUTED))
-	column.add_child(T.label(node.name, 36, T.INK, true))
-	var text: String = node.summary
-	if _events.is_empty(): _events = JSON.parse_string(FileAccess.get_file_as_string("res://assets/data/chronicle/events.json"))
-	text = _events.get(node.id, text)
-	if node.id == "S01": text = "白门楼的传闻沿着荒道传来。\n贾苇索收拾行囊，动身往徐州去。\n\n“天下这么大，总得有我一块地方。”"
-	if node.id == "S02": text = "艾玛来自遥远的西方，对这片鬼怪出没的土地所知不多。\n前往白门楼的路上，她与贾苇索同行。"
-	if node.kind == "spring": text = "古泉水清，残墙间暂得片刻安宁。\n\n已获得人物生命、魔法回满，阵亡者复活。"
-	column.add_child(T.paragraph(text, T.INK, 19))
-	column.add_child(HSeparator.new())
-	if state.UNLOCKS.has(node.id) and node.id != "S02":
-		var names: Array[String] = []
-		for id in state.UNLOCKS[node.id]: names.append(state.characters[id].name)
-		column.add_child(T.paragraph("此事件后入池：" + "、".join(names), T.GOLD, 15))
-	shell.action(column, "全员休整" if node.kind == "spring" else "继续", func():
-		if state.resolve_event(): shell.resume_view(), "event_continue", true)
-	shell.action(column, "返回路线", func(): shell.open_page("route"), "event_back")
+	shell.build_story()
 
 static func preparation(shell: Control) -> void:
 	PARTY.build(shell, true)
@@ -157,7 +131,7 @@ static func saves(shell: Control) -> void:
 					else: shell.show_notice("保存失败，原有档案保留。")), "save_" + slot)
 		var load_button: Button = shell.action(row, "读取", func():
 			shell.confirm("读取行军档？", "当前行军状态将整体替换为这份记录。", func():
-				if state.load_slot(id): shell.resume_view()), "load_" + slot)
+				if state.load_slot(id): shell.resume_view(true)), "load_" + slot)
 		load_button.disabled = saved.is_empty()
 
 static func failure(shell: Control) -> void:
@@ -176,6 +150,15 @@ static func failure(shell: Control) -> void:
 static func journal(shell: Control) -> void:
 	var column := scaffold(shell, "行军见闻", "记录已经走过的节点与人物加入。")
 	var list := scroll_column(column, "journal_scroll")
+	list.add_child(T.label("剧情回顾", 21, T.GOLD))
+	list.add_child(T.paragraph("重看已完成的剧情，不影响人物、奖励或行军进度。", T.MUTED, 14))
+	var stories: Array[String] = shell.replayable_stories()
+	if stories.is_empty(): list.add_child(T.paragraph("还没有可回顾的剧情。", T.MUTED, 14))
+	for id in stories:
+		var target: String = id
+		shell.action(list, shell.session.nodes[id].name + " · 回顾剧情", func(): shell.open_story_replay(target, "journal"), "journal_replay_" + id)
+	list.add_child(HSeparator.new())
+	list.add_child(T.label("行军记录", 21, T.GOLD))
 	if shell.session.data.log.is_empty(): list.add_child(T.paragraph("尚未启程。白门楼的传闻正从徐州传来。"))
 	else:
 		var index := 1
@@ -280,8 +263,9 @@ static func menu(shell: Control) -> void:
 	var column := T.column(panel)
 	column.add_child(T.label("菜单", 30, T.LIGHT, true))
 	shell.action(column, "返回", func(): shell.open_page(shell.menu_return), "menu_resume", true)
-	for item in [["roster", "编队与行装"], ["saves", "行军档"], ["journal", "见闻"], ["settings", "设定"]]:
+	for item in [["roster", "整备"], ["saves", "行军档"], ["journal", "见闻"], ["settings", "设定"]]:
 		var page: String = item[0]
 		shell.action(column, item[1], func(): shell.open_page(page), "menu_" + page)
+	shell.quiet_action(column, "敌情图鉴", shell.open_enemy_codex, "menu_codex")
 	shell.action(column, "音乐鉴赏", shell.open_music, "menu_music")
 	shell.action(column, "返回标题", func(): shell.open_page("home"), "menu_home")

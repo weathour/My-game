@@ -13,7 +13,13 @@ const DIRECTORY := "user://chronicle_campaign_v1"
 const SCHEMA := 1
 const INITIAL_POOL := CONTENT.INITIAL_POOL
 const SEGMENTS := ["城外来客", "夺寨聚众", "官印易主", "吕家风波", "协力守城", "白门终战"]
-const UNLOCKS := {"S02":["F11"], "S03":["F03", "N18"], "S04":["F07"], "B06":["N14"]}
+const UNLOCKS := {
+	"S02":["F11"], "S03":["F03", "N18", "F04"], "S04":["F07", "M07", "F08"],
+	"B06":["N14", "F05"], "S05":["F09"], "S06":["M08", "F02", "F06", "F10", "N02", "N05", "N08"],
+	"B15":["M06", "N09", "N11", "N15"], "B16":["M05", "N12"],
+	"B17":["M02", "M03", "M04", "N03", "N06", "N10"], "S14":["M01", "F01"]
+}
+const POST_BATTLE_STORIES := ["B06", "B15", "B16", "B17"]
 const EQUIPMENT := CONTENT.EQUIPMENT
 
 var characters: Dictionary = {}
@@ -38,7 +44,7 @@ func reset(persist: bool = true) -> bool:
 	data = {"schema":SCHEMA, "scope":"campaign", "current":"S01", "completed":[],
 		"available":["S01"], "pool":INITIAL_POOL.duplicate(), "owned":{"JIA":new_character("JIA")},
 		"party":["", ""], "equipped":{"weapon":"plain_blade", "armor":"cloth_armor", "accessory":"ember_seal"},
-		"inventory":["plain_blade", "cloth_armor", "ember_seal"], "pending":{}, "deferred_reward":{},
+		"inventory":["plain_blade", "cloth_armor", "ember_seal"], "pending":{}, "deferred_reward":{}, "story_checkpoint":{},
 		"log":[], "finished":false, "started":false, "reward_seed":int(randi() & 0x7fffffff), "reward_index":0, "last_result":""}
 	entry_snapshot.clear()
 	in_battle = false
@@ -46,7 +52,7 @@ func reset(persist: bool = true) -> bool:
 	return commit(previous) if persist else true
 
 func new_character(id: String) -> Dictionary:
-	return CONTENT.record(id, int(characters[id].level))
+	return CONTENT.record(id, CONTENT.entry_level(id))
 
 func commit(previous: Dictionary) -> bool:
 	if not save_slot("auto"):
@@ -76,6 +82,25 @@ func assign(id: String, slot: int) -> bool:
 	data.party[slot] = id
 	return commit(previous)
 
+func can_reposition_party(id: String, target_slot: int, source_slot: int = -1) -> bool:
+	if in_battle or not data.pending.is_empty() or target_slot not in [-1, 0, 1] or source_slot not in [-1, 0, 1]: return false
+	if id == "JIA" or not data.owned.has(id) or bool(data.owned[id].dead): return false
+	if source_slot >= 0 and data.party[source_slot] != id: return false
+	return target_slot >= 0 or id in data.party
+
+func reposition_party(id: String, target_slot: int, source_slot: int = -1) -> bool:
+	if not can_reposition_party(id, target_slot, source_slot): return false
+	var origin: int = data.party.find(id)
+	if origin == target_slot: return true
+	var previous := data.duplicate(true)
+	if target_slot == -1:
+		data.party[origin] = ""
+	else:
+		var displaced: String = data.party[target_slot]
+		if origin >= 0: data.party[origin] = displaced
+		data.party[target_slot] = id
+	return commit(previous)
+
 func equip(id: String) -> bool:
 	if in_battle or not data.pending.is_empty() or id not in data.inventory: return false
 	for item in EQUIPMENT:
@@ -87,12 +112,14 @@ func equip(id: String) -> bool:
 
 func choose_node(id: String) -> bool:
 	if in_battle or not data.pending.is_empty() or id not in data.available: return false
+	if awaiting_battle_story() and id != data.current: return false
 	var previous := data.duplicate(true)
+	if data.current != id: data.story_checkpoint = {}
 	data.current = id
 	return commit(previous)
 
 func start_battle() -> Dictionary:
-	if in_battle or not data.pending.is_empty() or data.current not in data.available: return {}
+	if in_battle or not data.pending.is_empty() or not data.deferred_reward.is_empty() or data.current not in data.available: return {}
 	var stage := CONTENT.stage(data.current)
 	if stage.is_empty():
 		problem.emit("这一段关卡尚在制作，当前行军进度已保留。")
@@ -116,8 +143,13 @@ func abandon_battle() -> void:
 func complete_battle(result: Dictionary) -> bool:
 	if not in_battle or result.get("attempt_id", "") != active_attempt or result.get("outcome") != "victory": return false
 	if data.last_result == active_attempt or not result.get("characters") is Dictionary: return false
+	var updated_roster: Dictionary = data.owned.duplicate(true)
 	for member in roster():
-		if not _valid_record(member, result.characters.get(member)): return false
+		if not _valid_record_shape(member, result.characters.get(member)): return false
+		updated_roster[member] = result.characters[member]
+	var bonuses := CONTENT.owned_bonuses(updated_roster)
+	for member in roster():
+		if not _valid_record(member, result.characters[member], bonuses, data.equipped): return false
 	if result.characters.JIA.dead or result.characters.JIA.hp <= 0: return false
 	var previous := entry_snapshot.duplicate(true)
 	var id: String = data.current
@@ -132,9 +164,15 @@ func complete_battle(result: Dictionary) -> bool:
 	data.last_result = active_attempt
 	data.log.append("%s · 击破%d · %.1f秒%s" % [nodes[id].name, result.get("kills", 0), result.get("elapsed", 0), " · 速胜经验" if result.get("fast_clear", false) else ""])
 	in_battle = false
-	if id in ["B01", "B18"]:
+	if id == "B18":
 		data.deferred_reward = {"id":id, "extra":extra}
 		advance(id)
+	elif id in POST_BATTLE_STORIES:
+		# A won battle waits for its authored scene before unlocking the pool and
+		# generating a concrete reward. The victory cannot be replayed meanwhile.
+		data.deferred_reward = {"id":id, "extra":extra}
+		data.available = [id]
+		data.story_checkpoint = {}
 	else:
 		unlock(id)
 		if not make_reward(id, extra): data = previous; in_battle = true; return false
@@ -145,12 +183,26 @@ func complete_battle(result: Dictionary) -> bool:
 	entry_snapshot.clear()
 	return true
 
+func save_story_checkpoint(event_id: String, line_id: String) -> bool:
+	if in_battle or not data.pending.is_empty() or line_id.is_empty(): return false
+	if event_id != data.current or event_id not in data.available or event_id not in nodes: return false
+	if not event_available(event_id): return false
+	var previous := data.duplicate(true)
+	data.story_checkpoint = {"event":event_id, "line":line_id}
+	return commit(previous)
+
 func resolve_event() -> bool:
 	if in_battle or not data.pending.is_empty(): return false
 	var id: String = data.current
-	if id not in data.available or nodes[id].kind not in ["event", "spring"]: return false
+	if not event_available(id): return false
 	var previous := data.duplicate(true)
 	unlock(id)
+	if awaiting_battle_story():
+		var won: Dictionary = data.deferred_reward.duplicate()
+		data.deferred_reward.clear()
+		data.story_checkpoint = {}
+		if not make_reward(id, won.extra): data = previous; return false
+		return commit(previous)
 	if id == "S02" and not data.owned.has("F11"):
 		data.owned["F11"] = new_character("F11")
 		data.log.append("艾玛随行 · 剧情加入，不占本关选卡名额。")
@@ -159,12 +211,27 @@ func resolve_event() -> bool:
 			data.owned[member].hp = resource_max(member, "hp")
 			data.owned[member].mp = resource_max(member, "mp")
 			data.owned[member].dead = false
+	if data.get("story_checkpoint", {}).get("event", "") == id: data.story_checkpoint = {}
 	advance(id)
 	if not data.deferred_reward.is_empty():
 		var deferred: Dictionary = data.deferred_reward.duplicate()
 		data.deferred_reward.clear()
 		if not make_reward(deferred.id, deferred.extra): data = previous; return false
 	return commit(previous)
+
+func awaiting_battle_story() -> bool:
+	return _awaiting_battle_story(data)
+
+func _awaiting_battle_story(snapshot: Dictionary) -> bool:
+	var id: String = str(snapshot.get("deferred_reward", {}).get("id", ""))
+	return id in POST_BATTLE_STORIES and id == snapshot.get("current") and id in snapshot.get("available", []) and id not in snapshot.get("completed", [])
+
+func event_available(id: String) -> bool:
+	if in_battle or not data.pending.is_empty() or id not in data.available or id not in nodes: return false
+	return nodes[id].kind in ["event", "spring"] or (id == data.current and awaiting_battle_story())
+
+func is_story_node(id: String) -> bool:
+	return nodes.has(id) and (nodes[id].kind in ["event", "spring"] or id in POST_BATTLE_STORIES)
 
 func unlock(id: String) -> void:
 	for card in UNLOCKS.get(id, []):
@@ -181,14 +248,21 @@ func advance(id: String) -> void:
 		data.current = data.available[0]
 
 func make_reward(id: String, extra: bool) -> bool:
-	reward_rng.seed = int(data.reward_seed) + int(data.reward_index) * 104729
-	var draft := REWARDS.draft(id, data.pool, characters, extra, reward_rng)
+	var draft := _draft_reward(data, id, extra)
 	if draft.is_empty():
 		problem.emit("已解锁卡池不足以生成本关奖励，进度保留。")
 		return false
 	data.pending = draft
 	data.reward_index += 1
 	return true
+
+func _draft_reward(snapshot: Dictionary, id: String, extra: bool) -> Dictionary:
+	reward_rng.seed = int(snapshot.reward_seed) + int(snapshot.reward_index) * 104729
+	var pool: Array = snapshot.pool.duplicate()
+	# The first draft precedes Emma's event, including when recovering a legacy save.
+	if id == "B01" and "S02" not in snapshot.completed and not snapshot.owned.has("F11"):
+		pool.erase("F11")
+	return REWARDS.draft(id, pool, characters, extra, reward_rng)
 
 func select_card(id: String) -> bool:
 	if data.pending.is_empty() or id not in data.pending.candidates: return false
@@ -204,10 +278,13 @@ func claim_reward() -> bool:
 	for id in data.pending.selected:
 		if data.owned.has(id):
 			data.owned[id].level += 1
-			if not data.owned[id].dead:
-				data.owned[id].hp = resource_max(id, "hp")
-				data.owned[id].mp = resource_max(id, "mp")
 		else: data.owned[id] = new_character(id)
+	# All selected cards contribute before filling newly joined/upgraded bodies.
+	# Unchanged bodies keep their resources; dead duplicate cards stay dead.
+	for id in data.pending.selected:
+		if not data.owned[id].dead:
+			data.owned[id].hp = resource_max(id, "hp")
+			data.owned[id].mp = resource_max(id, "mp")
 	var id: String = data.pending.node
 	data.pending.clear()
 	if id not in data.completed: advance(id)
@@ -227,6 +304,17 @@ func read_slot(slot: String) -> Dictionary:
 		value.owned[id].level = int(value.owned[id].level)
 		value.owned[id].xp = roundf(float(value.owned[id].xp) * 6.0) / 6.0
 	if not value.pending.is_empty(): value.pending.picks = int(value.pending.picks)
+	if not value.has("story_checkpoint"): value.story_checkpoint = {}
+	# Schema 1 previously deferred B01 until S02. Recover its reward before the
+	# event, retaining concrete candidates/selections if already generated.
+	if value.deferred_reward.get("id", "") == "B01" and value.current == "S02" and not value.owned.has("F11"):
+		if value.pending.is_empty():
+			var draft := _draft_reward(value, "B01", value.deferred_reward.extra)
+			if draft.is_empty(): return {}
+			value.pending = draft
+			value.reward_index += 1
+		value.deferred_reward.clear()
+		value.story_checkpoint.clear()
 	# Additive content: completed gates gain new pool entries without rerolling a draft.
 	for node in value.completed:
 		for id in UNLOCKS.get(node, []):
@@ -253,7 +341,10 @@ func valid(value: Variant) -> bool:
 		if not value.get(key) is Array: return false
 	if value.get("current", "") not in nodes or value.party.size() != 2 or not value.owned.has("JIA"): return false
 	for id in value.owned:
-		if not _valid_record(id, value.owned[id]): return false
+		if not _valid_record_shape(id, value.owned[id]): return false
+	var bonuses := CONTENT.owned_bonuses(value.owned)
+	for id in value.owned:
+		if not _valid_record(id, value.owned[id], bonuses, value.equipped): return false
 	if value.owned.JIA.dead: return false
 	for key in ["reward_seed", "reward_index"]:
 		if typeof(value.get(key)) not in [TYPE_INT, TYPE_FLOAT] or value[key] < 0: return false
@@ -265,6 +356,14 @@ func valid(value: Variant) -> bool:
 		if id not in CONTENT.IDS or id == "JIA": return false
 	for id in value.available + value.completed:
 		if id not in nodes: return false
+	if value.has("story_checkpoint"):
+		if not value.story_checkpoint is Dictionary: return false
+		var checkpoint: Dictionary = value.story_checkpoint
+		if not checkpoint.is_empty():
+			if checkpoint.size() != 2 or not checkpoint.get("event") is String or not checkpoint.get("line") is String: return false
+			if checkpoint.line.is_empty() or checkpoint.event != value.current or checkpoint.event not in value.available: return false
+			if not value.pending.is_empty(): return false
+			if nodes[checkpoint.event].kind not in ["event", "spring"] and not _awaiting_battle_story(value): return false
 	for slot in ["weapon", "armor", "accessory"]:
 		var found := false
 		for item in EQUIPMENT:
@@ -287,12 +386,13 @@ func valid(value: Variant) -> bool:
 			if id not in pending.candidates or unique.has(id): return false
 			unique[id] = true
 	if not value.deferred_reward.is_empty():
-		if value.deferred_reward.get("id") not in ["B01", "B18"] or typeof(value.deferred_reward.get("extra")) != TYPE_BOOL: return false
+		if value.deferred_reward.get("id") not in ["B01", "B18"] + POST_BATTLE_STORIES or typeof(value.deferred_reward.get("extra")) != TYPE_BOOL: return false
+		if value.deferred_reward.id in POST_BATTLE_STORIES and (not _awaiting_battle_story(value) or not value.pending.is_empty()): return false
 	for key in ["started", "finished"]:
 		if typeof(value.get(key)) != TYPE_BOOL: return false
 	return true
 
-func _valid_record(id: String, value: Variant) -> bool:
+func _valid_record_shape(id: String, value: Variant) -> bool:
 	if id not in CONTENT.IDS or not value is Dictionary: return false
 	for key in ["level", "xp", "hp", "mp"]:
 		if typeof(value.get(key)) not in [TYPE_INT, TYPE_FLOAT] or not is_finite(float(value[key])): return false
@@ -300,21 +400,24 @@ func _valid_record(id: String, value: Variant) -> bool:
 	if value.xp >= CONTENT.xp_required(int(value.level)): return false
 	if typeof(value.get("dead")) != TYPE_BOOL or not value.get("cooldowns") is Dictionary: return false
 	if value.dead != (value.hp <= 0): return false
-	var limits := CONTENT.attributes(id, int(value.level))
-	if value.hp > limits.hp or value.mp > limits.mp: return false
 	for key in value.cooldowns:
 		if typeof(key) not in [TYPE_STRING, TYPE_STRING_NAME] or typeof(value.cooldowns[key]) not in [TYPE_INT, TYPE_FLOAT]: return false
 		if not is_finite(float(value.cooldowns[key])) or value.cooldowns[key] < 0: return false
 	return true
 
+func _valid_record(id: String, value: Variant, bonuses: Dictionary = {}, equipment: Dictionary = {}) -> bool:
+	if not _valid_record_shape(id, value): return false
+	var limits := CONTENT.attributes(id, int(value.level), bonuses, equipment)
+	return value.hp <= limits.hp + 0.001 and value.mp <= limits.mp + 0.001
+
 func resource_max(id: String, stat: String) -> float:
 	if id not in CONTENT.IDS: return 100.0
-	var level: int = int(data.owned[id].level) if data.owned.has(id) else int(characters[id].level)
+	var level: int = int(data.owned[id].level) if data.owned.has(id) else CONTENT.entry_level(id)
 	return float(CONTENT.attributes(id, level, CONTENT.owned_bonuses(data.owned), data.equipped)[stat])
 
 func display_stats(id: String) -> Array:
 	if id not in CONTENT.IDS: return ["此人物能力尚未制作。"]
-	var level: int = int(data.owned[id].level) if data.owned.has(id) else int(characters[id].level)
+	var level: int = int(data.owned[id].level) if data.owned.has(id) else CONTENT.entry_level(id)
 	var stats := CONTENT.attributes(id, level, CONTENT.owned_bonuses(data.owned), data.equipped)
 	var result: Array = []
 	var names := {"hp":"生命上限", "mp":"魔法上限", "attack":"攻击", "armor":"防御", "speed":"攻击速度", "move":"移动速度", "regen":"魔法回复"}
@@ -334,8 +437,11 @@ func _refresh_descriptions() -> void:
 			characters[id].front = "设计预览 · 尚未实装\n" + characters[id].front
 			continue
 		var def := CONTENT.definition(id)
+		characters[id].level = CONTENT.entry_level(id)
 		characters[id].skills = []
 		for ability in def.manual: characters[id].skills.append("%s · Lv.%d · %d魔法" % [ability.title, ability.unlock_level, ability.mana_cost])
 		characters[id].back = def.back_text
 		characters[id].owned = def.owned_text
-		if id == "F11": characters[id].front = "自动远程术法；Lv.2解锁不耗魔的自动冰星。霜环减速近身敌人，Lv.3解锁高伤星火。"
+		characters[id].front = CONTENT.ability_description(CONTENT.basic(id, {}), characters[id].level)
+		var trait_text := CONTENT.trait_description(id)
+		if not trait_text.is_empty(): characters[id].front += "\n" + trait_text

@@ -3,6 +3,9 @@ extends Control
 const STYLE := preload("res://scripts/ui/chronicle/chronicle_theme.gd")
 const SESSION := preload("res://scripts/campaign/campaign_service.gd")
 const MAP := preload("res://scripts/ui/chronicle/chronicle_map.gd")
+const CHROME := preload("res://scripts/ui/chronicle/chronicle_campaign_chrome.gd")
+const WORLD_PAGE := preload("res://scripts/ui/chronicle/chronicle_world_page.gd")
+const ROUTE_PAGE := preload("res://scripts/ui/chronicle/chronicle_route_page.gd")
 const PAGES := preload("res://scripts/ui/chronicle/chronicle_pages.gd")
 const BATTLE := preload("res://scripts/ui/chronicle/battle_view.gd")
 const TERRAIN := preload("res://assets/ui/chronicle/baimen-terrain.png")
@@ -10,18 +13,29 @@ const EMMA := preload("res://assets/ui/chronicle/emma.png")
 const SETTINGS := preload("res://scripts/game_settings.gd")
 const BGM := preload("res://scripts/bgm_player.gd")
 const MUSIC := preload("res://scripts/audio/music_catalog.gd")
+const STORIES := preload("res://scripts/content/story_catalog.gd")
+const CODEX := preload("res://scripts/ui/chronicle/enemy_codex.gd")
+const STORY_VIEW := preload("res://scripts/ui/chronicle/chronicle_story_view.gd")
+const CHARACTER_SHEET := preload("res://scripts/ui/chronicle/chronicle_character_sheet.gd")
 
 var session: RefCounted = SESSION.new()
 var battle_script: Script = BATTLE
 var page := "home"
 var previous_page := "world"
 var selected_province := "徐州"
+var world_tasks_open := false
 var selected_node := "S01"
 var selected_character := "JIA"
 var roster_filter := "owned"
 var character_return := "roster"
 var reward_focus := ""
-var route_overview := false
+var party_return := "route"
+var party_preparation := false
+var enemy_codex: Control
+var character_sheet: Control
+var character_sheet_opener: WeakRef
+var character_sheet_opener_name := ""
+var character_sheet_origin := ""
 var menu_return := "route"
 var search_text := ""
 var segment := 0
@@ -32,6 +46,13 @@ var frame: Control
 var modal: Control
 var status: Label
 var battle_view: Control
+var story_view: Control
+var route_map: Control
+var route_scroll := -1.0
+var route_view_size := Vector2.ZERO
+var replay_event := ""
+var replay_line := ""
+var replay_return := "route"
 var bgm: AudioStreamPlayer
 var music_preview: AudioStreamPlayer
 var music_index := 0
@@ -45,7 +66,7 @@ func _ready() -> void:
 	theme = STYLE.make_theme()
 	texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR
 	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	session.problem.connect(show_notice)
+	session.problem.connect(_on_session_problem)
 	bgm = BGM.new()
 	bgm.name = "ChronicleMusic"
 	add_child(bgm)
@@ -59,7 +80,19 @@ func queue_render() -> void:
 
 func open_page(value: String) -> void:
 	if page == "battle": return
+	# Character inspection is an overlay of the current page, including callers
+	# which previously requested the standalone character route.
+	if value == "character":
+		inspect_character(selected_character)
+		return
+	PAGES.PARTY.cancel_interaction(self)
+	if is_instance_valid(character_sheet): close_character_sheet(false)
 	if page == "music" and value != "music": close_music()
+	if page == "replay" and value != "replay": _clear_story_replay()
+	if value in ["roster", "equipment", "preparation"] and page not in ["roster", "equipment", "preparation", "character"]:
+		party_return = "route" if value == "preparation" else page
+		party_preparation = value == "preparation"
+	if value == "preparation": party_preparation = true
 	if value in ["event", "preparation"]: previous_page = "route"
 	if value in ["roster", "equipment", "saves", "settings", "journal"] and page in ["world", "route", "home", "reward", "preparation", "event", "menu"]:
 		previous_page = page
@@ -67,18 +100,29 @@ func open_page(value: String) -> void:
 	render()
 
 func resume() -> void:
-	if not session.read_slot("auto").is_empty(): session.load_slot("auto")
-	resume_view()
+	if not session.read_slot("auto").is_empty() and not session.load_slot("auto"): return
+	resume_view(true)
 
-func resume_view() -> void:
+func resume_view(enter_event: bool = false) -> void:
+	PAGES.PARTY.cancel_interaction(self)
+	if is_instance_valid(character_sheet): close_character_sheet(false)
+	_clear_story_replay()
+	route_scroll = -1.0
 	selected_node = session.data.current
 	segment = int(session.nodes[selected_node].segment)
 	page = "reward" if not session.data.pending.is_empty() else "route" if session.data.started and not session.data.finished else "world"
+	var checkpoint: Dictionary = session.data.get("story_checkpoint", {})
+	var battle_story: bool = session.has_method("awaiting_battle_story") and session.awaiting_battle_story()
+	if page == "route" and (battle_story or (session.nodes[selected_node].kind in ["event", "spring"] and (enter_event or checkpoint.get("event") == selected_node))):
+		page = "event"
 	render()
 
 func render() -> void:
 	_render_queued = false
 	if not is_inside_tree() or page == "battle": return
+	var reading_state: Dictionary = {}
+	if page == rendered_page and page in ["event", "replay"] and is_instance_valid(story_view) and story_view.is_inside_tree():
+		reading_state = story_view.reading_state()
 	var focus_name := ""
 	var focus := get_viewport().gui_get_focus_owner()
 	if is_instance_valid(focus) and is_instance_valid(frame) and frame.is_ancestor_of(focus):
@@ -91,6 +135,9 @@ func render() -> void:
 		scroll_memory[rendered_page] = scrolls
 		remove_child(frame)
 		frame.queue_free()
+	story_view = null
+	if is_instance_valid(route_map): route_view_size = route_map.size
+	route_map = null
 	frame = Control.new()
 	frame.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	add_child(frame)
@@ -106,7 +153,6 @@ func render() -> void:
 	frame.add_child(layout)
 	layout.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	layout.add_theme_constant_override("separation", 0)
-	if page not in ["home", "reward", "event", "character", "menu"]: build_header(layout)
 	body = Control.new()
 	body.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	body.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -116,12 +162,17 @@ func render() -> void:
 		"world": build_world()
 		"route": build_route()
 		_: PAGES.build(self, page)
-	if page in ["world", "route"]: build_footer(layout)
+	if not reading_state.is_empty() and is_instance_valid(story_view):
+		story_view.restore_reading_state(reading_state)
 	for scroll in frame.find_children("*", "ScrollContainer", true, false):
 		if scroll_memory.get(page, {}).has(str(scroll.name)):
 			scroll.set_deferred("scroll_vertical", scroll_memory[page][str(scroll.name)])
 	rendered_page = page
-	if not focus_name.is_empty():
+	if page in ["event", "replay"]:
+		pass # The story reader owns its input and initial focus.
+	elif is_instance_valid(enemy_codex) or is_instance_valid(character_sheet):
+		pass # Read-only overlays retain keyboard ownership through page reflow.
+	elif not focus_name.is_empty():
 		var replacement := frame.find_child(focus_name, true, false)
 		if replacement is Control and replacement.focus_mode != Control.FOCUS_NONE:
 			_focus_control.call_deferred(weakref(replacement))
@@ -130,37 +181,192 @@ func render() -> void:
 			if not button.disabled:
 				_focus_control.call_deferred(weakref(button))
 				break
+	if is_instance_valid(character_sheet): move_child(character_sheet, -1)
 	if is_instance_valid(modal): move_child(modal, -1)
 
-func build_header(parent: Node) -> void:
-	var panel := STYLE.panel(parent, true, 8 if size.y < 650 else 11)
-	var row := STYLE.row(panel)
-	var brand := STYLE.label("白 门 楼", 25, STYLE.LIGHT, true)
-	brand.custom_minimum_size.x = 160
-	row.add_child(brand)
-	for item in [["world", "天下"], ["route", "战役"], ["roster", "编队"], ["equipment", "行装"]]:
-		var target: String = item[0]
-		var button := action(row, item[1], func():
-			if target == "route": resume_view()
-			else: open_page(target), "nav_" + target)
-		button.custom_minimum_size = Vector2(70, 34 if size.y < 650 else 40)
-		if page == target: button.add_theme_stylebox_override("normal", STYLE.box(STYLE.OLIVE, STYLE.LIGHT, 10))
-		if page == target: button.add_theme_color_override("font_color", STYLE.LIGHT)
-	STYLE.space(row)
-	var menu := action(row, "菜单", open_menu, "nav_settings")
-	menu.custom_minimum_size.x = 70
+func build_story() -> void:
+	var id: String = session.data.current
+	if not session.data.pending.is_empty() or id not in session.data.available or (session.has_method("event_available") and not session.event_available(id)):
+		page = "reward" if not session.data.pending.is_empty() else "route"
+		queue_render()
+		return
+	var event := STORIES.for_node(session.nodes[id])
+	if id == "S02" and not session.data.owned.has("F11"):
+		event.completion_hint = "剧情结束后，艾玛加入队伍并进入卡池。"
+	elif session.UNLOCKS.has(id):
+		var names: Array[String] = []
+		for person in session.UNLOCKS[id]: names.append(session.characters[person].name)
+		event.completion_hint = "剧情结束后加入卡池：" + "、".join(names)
+	if session.nodes[id].kind == "spring": event.finish_label = "饮泉休整"
+	var checkpoint: Dictionary = session.data.get("story_checkpoint", {})
+	var line := STORIES.line_id(event, checkpoint)
+	story_view = STORY_VIEW.new()
+	story_view.name = "CampaignStory"
+	story_view.setup(event, line)
+	story_view.advance_requested.connect(_advance_story)
+	story_view.leave_requested.connect(func(): open_page("route"))
+	body.add_child(story_view)
+	bgm.set_cue(str(event.get("music", "camp_signal")))
+	if checkpoint != {"event":id, "line":line} and session.has_method("save_story_checkpoint"):
+		if not session.save_story_checkpoint(id, line): story_view.show_error("未能保存阅读位置，请重试。")
 
-func build_footer(parent: Node) -> void:
-	var panel := STYLE.panel(parent, true, 8)
-	var row := STYLE.row(panel)
-	action(row, "编队与行装", func(): open_page("roster"), "footer_party")
-	var names: Array[String] = []
-	for id in session.roster(): names.append(session.characters[id].name)
-	row.add_child(STYLE.label(" · ".join(names), 14, STYLE.LIGHT))
-	STYLE.space(row)
-	if not session.data.pending.is_empty(): action(row, "完成选卡", func(): open_page("reward"), "footer_reward", true)
-	action(row, "行军档", func(): open_page("saves"), "footer_saves")
-	action(row, "见闻", func(): open_page("journal"), "footer_journal")
+func _advance_story(line: String) -> void:
+	if page != "event" or not is_instance_valid(story_view): return
+	story_view.set_busy(true)
+	if line.is_empty():
+		if session.resolve_event(): resume_view()
+		else: story_view.show_error("未能保存本次结果，请重试。")
+		return
+	var event := STORIES.for_node(session.nodes[session.data.current])
+	if not STORIES.has_line(event, line):
+		story_view.show_error("未找到这段对白，请返回路线后重试。")
+		return
+	if not session.has_method("save_story_checkpoint") or session.save_story_checkpoint(session.data.current, line):
+		story_view.show_line(line)
+	else:
+		story_view.show_error("未能保存阅读位置，请重试。")
+
+func can_replay_story(id: String) -> bool:
+	if page == "battle" or session.in_battle or id not in session.data.completed or not session.nodes.has(id) or not STORIES.has_event(id): return false
+	return session.is_story_node(id) if session.has_method("is_story_node") else session.nodes[id].kind in ["event", "spring"]
+
+func replayable_stories() -> Array[String]:
+	var result: Array[String] = []
+	for id in session.data.completed:
+		if can_replay_story(id) and id not in result: result.append(id)
+	return result
+
+func open_story_replay(id: String, return_page: String = "route") -> bool:
+	if not can_replay_story(id): return false
+	replay_event = id
+	replay_line = STORIES.line_id(STORIES.for_node(session.nodes[id]))
+	replay_return = "journal" if return_page == "journal" else "route"
+	open_page("replay")
+	return true
+
+func build_story_replay() -> void:
+	if not can_replay_story(replay_event):
+		close_story_replay()
+		return
+	var event := STORIES.for_node(session.nodes[replay_event])
+	event.replay = true
+	event.return_label = "返回见闻" if replay_return == "journal" else "返回路线"
+	story_view = STORY_VIEW.new()
+	story_view.name = "CampaignStoryReplay"
+	story_view.setup(event, replay_line)
+	# A separate callback owns replay. It has no campaign commit/resolve call.
+	story_view.advance_requested.connect(_advance_story_replay)
+	story_view.leave_requested.connect(close_story_replay)
+	body.add_child(story_view)
+	bgm.set_cue(str(event.get("music", "camp_signal")))
+
+func _advance_story_replay(line: String) -> void:
+	if page != "replay" or not is_instance_valid(story_view): return
+	if not can_replay_story(replay_event) or line.is_empty():
+		close_story_replay()
+		return
+	var event := STORIES.for_node(session.nodes[replay_event])
+	if not STORIES.has_line(event, line):
+		story_view.show_error("未找到这段对白，请结束回顾后重试。")
+		return
+	replay_line = line
+	story_view.show_line(line)
+
+func close_story_replay() -> void:
+	if page != "replay": return
+	var target := replay_return
+	_clear_story_replay()
+	open_page(target)
+
+func _clear_story_replay() -> void:
+	replay_event = ""
+	replay_line = ""
+	replay_return = "route"
+
+func _on_session_problem(message: String) -> void:
+	if page == "event" and is_instance_valid(story_view) and story_view.is_inside_tree():
+		story_view.show_error(message)
+	else:
+		show_notice(message)
+
+func quiet_action(parent: Node, title: String, callback: Callable, id: String, selected: bool = false) -> Button:
+	var button := STYLE.quiet_button(title, callback, selected)
+	button.name = id
+	parent.add_child(button)
+	return button
+
+func party_tabs(parent: Node) -> void:
+	var row := STYLE.row(parent)
+	row.name = "party_tabs"
+	quiet_action(row, "编队", func(): open_page("preparation" if party_preparation else "roster"), "party_tab_roster", page in ["roster", "preparation"])
+	quiet_action(row, "行装", func(): open_page("equipment"), "party_tab_equipment", page == "equipment")
+
+func inspect_character(id: String, tab: String = "abilities") -> void:
+	if page == "battle" or not session.characters.has(id): return
+	if is_instance_valid(enemy_codex) or is_instance_valid(modal): return
+	PAGES.PARTY.cancel_interaction(self)
+	selected_character = id
+	if is_instance_valid(character_sheet):
+		character_sheet.show_character(id, tab)
+		return
+	var focused := get_viewport().gui_get_focus_owner()
+	character_sheet_opener = weakref(focused) if is_instance_valid(focused) else null
+	character_sheet_opener_name = str(focused.name) if is_instance_valid(focused) and is_instance_valid(frame) and frame.is_ancestor_of(focused) else ""
+	character_sheet_origin = page
+	var return_label := str({"route":"返回行军", "world":"返回天下", "roster":"返回整备", "preparation":"返回出战整备"}.get(page, "关闭"))
+	character_sheet = CHARACTER_SHEET.new()
+	character_sheet.name = "CharacterInspection"
+	character_sheet.z_index = 30
+	character_sheet.theme = STYLE.make_theme()
+	character_sheet.setup(session, id, tab, return_label)
+	character_sheet.closed.connect(func(): close_character_sheet())
+	add_child(character_sheet)
+	character_sheet.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+
+func close_character_sheet(restore_focus: bool = true) -> void:
+	if not is_instance_valid(character_sheet): return
+	var opener := character_sheet_opener
+	var opener_name := character_sheet_opener_name
+	var origin := character_sheet_origin
+	remove_child(character_sheet)
+	character_sheet.queue_free()
+	character_sheet = null
+	character_sheet_opener = null
+	character_sheet_opener_name = ""
+	character_sheet_origin = ""
+	if restore_focus: _restore_character_focus.call_deferred(opener, opener_name, origin)
+
+func _restore_character_focus(reference: WeakRef, opener_name: String, origin: String) -> void:
+	if page != origin or is_instance_valid(character_sheet) or is_instance_valid(enemy_codex) or not is_instance_valid(frame): return
+	var target: Variant = reference.get_ref() if reference != null else null
+	if not is_instance_valid(target) or not target.is_inside_tree() or not frame.is_ancestor_of(target):
+		target = frame.find_child(opener_name, true, false) if not opener_name.is_empty() else null
+	if is_instance_valid(target) and target is Control: _focus_control(weakref(target))
+
+func open_enemy_codex(stage_id: String = "") -> void:
+	if is_instance_valid(enemy_codex): return
+	var focused := get_viewport().gui_get_focus_owner()
+	var opener: WeakRef = weakref(focused) if is_instance_valid(focused) else null
+	var opener_name := str(focused.name) if is_instance_valid(focused) and frame.is_ancestor_of(focused) else ""
+	var opener_page := page
+	enemy_codex = CODEX.new()
+	enemy_codex.stage_id = stage_id
+	enemy_codex.z_index = 30
+	enemy_codex.theme = STYLE.make_theme()
+	enemy_codex.mouse_filter = Control.MOUSE_FILTER_STOP
+	add_child(enemy_codex)
+	enemy_codex.closed.connect(func():
+		if is_instance_valid(enemy_codex):
+			enemy_codex.queue_free()
+			enemy_codex = null
+		_restore_codex_focus.call_deferred(opener, opener_name, opener_page))
+
+func _restore_codex_focus(reference: WeakRef, opener_name: String, opener_page: String) -> void:
+	if page != opener_page or is_instance_valid(enemy_codex) or not is_instance_valid(frame): return
+	var target: Variant = reference.get_ref() if reference != null else null
+	if not is_instance_valid(target) or not target.is_inside_tree() or not frame.is_ancestor_of(target):
+		target = frame.find_child(opener_name, true, false) if not opener_name.is_empty() else null
+	if is_instance_valid(target) and target is Control: _focus_control(weakref(target))
 
 func open_menu() -> void:
 	menu_return = page
@@ -224,43 +430,7 @@ func map_split() -> HBoxContainer:
 	return row
 
 func build_world() -> void:
-	var canvas := MAP.new()
-	canvas.selected = selected_province
-	body.add_child(canvas)
-	canvas.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	canvas.province_selected.connect(func(id: String): selected_province = id; render())
-	for id in MAP.LOCATIONS:
-		var province: String = id
-		var button := action(canvas, province, func(): selected_province = province; render(), "province_" + province, province == selected_province)
-		button.custom_minimum_size = Vector2(60, 32)
-		STYLE.compact_button(button)
-		button.size = button.custom_minimum_size
-		canvas.resized.connect(func(): button.position = canvas.province_position(province) - button.size / 2)
-	var panel := STYLE.panel(body, true, 25)
-	panel.set_anchors_and_offsets_preset(Control.PRESET_CENTER_RIGHT)
-	panel.offset_left = -290
-	panel.offset_right = -18
-	panel.offset_top = -160
-	panel.offset_bottom = 160
-	var column := STYLE.column(panel)
-	column.add_child(STYLE.label("天下局势", 14, STYLE.GOLD))
-	column.add_child(STYLE.label(selected_province, 38, STYLE.LIGHT, true))
-	if selected_province == "徐州":
-		column.add_child(STYLE.paragraph("下邳旧城，鬼火未息。", STYLE.MUTED, 15))
-		column.add_child(HSeparator.new())
-		column.add_child(STYLE.label("白门楼", 27, STYLE.LIGHT, true))
-		column.add_child(STYLE.paragraph("旧将据城，鬼曹军已逼近城外。", STYLE.LIGHT, 16))
-		STYLE.space(column)
-		var text := "查看战果" if session.data.finished else "继续行军" if session.data.started else "进入白门楼"
-		action(column, text, func():
-			if not session.data.pending.is_empty(): open_page("reward")
-			elif session.data.finished: open_page("journal")
-			elif session.begin_campaign(): resume_view(), "world_enter", true)
-	else:
-		column.add_child(STYLE.paragraph("暂无可赴战役", STYLE.MUTED))
-		STYLE.space(column)
-		var locked := action(column, "暂无可赴战役", func(): pass, "world_locked")
-		locked.disabled = true
+	WORLD_PAGE.build(self)
 
 func sidebar(parent: Node, title: String, subtitle: String) -> VBoxContainer:
 	var panel := STYLE.panel(parent, false, 20)
@@ -272,86 +442,10 @@ func sidebar(parent: Node, title: String, subtitle: String) -> VBoxContainer:
 	return column
 
 func build_route() -> void:
-	var row := map_split()
-	var region := VBoxContainer.new()
-	region.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	region.add_theme_constant_override("separation", 0)
-	row.add_child(region)
-	if route_overview:
-		var tabs := STYLE.row(STYLE.panel(region, true, 8))
-		for index in SESSION.SEGMENTS.size():
-			var target := index
-			var button := action(tabs, SESSION.SEGMENTS[index], func(): segment = target; render(), "segment_%d" % index, index == segment)
-			button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-			STYLE.compact_button(button)
-	var canvas := MAP.new()
-	canvas.mode = "route"
-	canvas.session = session
-	canvas.segment = segment
-	if not route_overview:
-		canvas.visible_nodes = session.data.available.duplicate()
-		for available in session.data.available:
-			for next in session.nodes[available].next:
-				if next not in canvas.visible_nodes: canvas.visible_nodes.append(next)
-		if not session.data.completed.is_empty(): canvas.visible_nodes.append(session.data.completed[-1])
-	canvas.selected = selected_node
-	canvas.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	region.add_child(canvas)
-	if session.data.owned.has("F11"):
-		var art := portrait(canvas, 235 if size.x >= 1150 else 165)
-		art.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
-	var index := 0
-	for id in session.nodes:
-		var node: Dictionary = session.nodes[id]
-		if int(node.segment) != segment: continue
-		var target: String = id
-		var position_index := index
-		index += 1
-		if not canvas.visible_nodes.is_empty() and id not in canvas.visible_nodes: continue
-		var prefix: String = {"event":"◇", "spring":"泉", "battle":"战", "elite":"精", "boss":"将"}[node.kind]
-		if id in session.data.completed: prefix = "✓"
-		var button := action(canvas, "%s  %s" % [prefix, node.name], func(): selected_node = target; render(), "node_" + id, id == selected_node)
-		button.add_theme_font_size_override("font_size", 14)
-		button.custom_minimum_size = Vector2(110, 38)
-		button.size = button.get_combined_minimum_size()
-		canvas.resized.connect(func(): button.position = canvas.route_position(position_index) - button.size * .5)
-	var heading := STYLE.label("徐州 · 下邳", 24, STYLE.LIGHT, true)
-	canvas.add_child(heading)
-	heading.position = Vector2(250 if session.data.owned.has("F11") else 22, 16)
-	heading.add_theme_color_override("font_shadow_color", Color("222a24"))
-	heading.add_theme_constant_override("shadow_offset_x", 2)
-	heading.add_theme_constant_override("shadow_offset_y", 2)
-	var column := sidebar(row, "行军路线", SESSION.SEGMENTS[segment])
-	action(column, "收起总览" if route_overview else "区域总览", func():
-		route_overview = not route_overview
-		if not route_overview:
-			segment = int(session.nodes[session.data.current].segment)
-			selected_node = session.data.current
-		render(), "route_overview")
-	var node: Dictionary = session.nodes[selected_node]
-	column.add_child(STYLE.label(node.name, 25, STYLE.INK, true))
-	var summary: String = node.get("map_summary", node.summary)
-	if not summary.is_empty(): column.add_child(STYLE.paragraph(summary))
-	column.add_child(HSeparator.new())
-	column.add_child(STYLE.label("前路", 17, STYLE.GOLD))
-	for id in session.data.available:
-		var target: String = id
-		action(column, session.nodes[id].name, func(): selected_node = target; segment = int(session.nodes[target].segment); render(), "choice_" + id, selected_node == id)
-	STYLE.space(column)
-	if not session.data.pending.is_empty(): action(column, "完成本关选卡", func(): open_page("reward"), "route_reward", true)
-	elif selected_node in session.data.completed:
-		column.add_child(STYLE.paragraph("已通过"))
-	elif selected_node not in session.data.available:
-		column.add_child(STYLE.paragraph("尚未到达"))
-	else:
-		var event: bool = node.kind in ["event", "spring"]
-		var available: bool = event or not session.has_method("battle_available") or session.battle_available(selected_node)
-		var forward := action(column, "暂不可前往" if not available else "前往泉水" if node.kind == "spring" else "查看事件" if event else "出战整备", func():
-			if session.choose_node(selected_node):
-				open_page("event" if event else "preparation"), "route_forward", true)
-		forward.disabled = not available
+	ROUTE_PAGE.build(self)
 
 func start_battle() -> void:
+	PAGES.PARTY.cancel_interaction(self)
 	var request: Dictionary = session.start_battle()
 	if request.is_empty(): return
 	page = "battle"
@@ -430,6 +524,7 @@ func confirm(title: String, message: String, callback: Callable, cancellable: bo
 func _focus_control(reference: WeakRef) -> void:
 	var control: Variant = reference.get_ref()
 	if is_instance_valid(control) and control is Control and control.is_inside_tree() and control.is_visible_in_tree():
+		if is_instance_valid(character_sheet) and not character_sheet.is_ancestor_of(control): return
 		control.grab_focus()
 
 func open_music() -> void:
@@ -473,6 +568,7 @@ func _process(_delta: float) -> void:
 
 func _unhandled_key_input(event: InputEvent) -> void:
 	if not event is InputEventKey or not event.pressed or event.echo: return
+	if is_instance_valid(enemy_codex) or is_instance_valid(character_sheet): return # Overlays own Escape while open.
 	if page == "battle" and not is_instance_valid(modal): return
 	if event.keycode == KEY_ESCAPE:
 		if is_instance_valid(modal):
@@ -480,8 +576,10 @@ func _unhandled_key_input(event: InputEvent) -> void:
 			modal = null
 		elif page != "battle":
 			if page == "home": open_page("world")
-			elif page in ["roster", "equipment", "saves", "settings", "journal"]: open_page(previous_page)
+			elif page in ["roster", "equipment"]: open_page(party_return)
+			elif page in ["saves", "settings", "journal"]: open_page(previous_page)
 			elif page == "reward": show_notice("请完成本关选卡；也可以保存行军档，稍后继续同一组候选。")
+			elif page == "replay": close_story_replay()
 			elif page in ["event", "preparation", "failure"]: open_page("route")
 			elif page == "character": open_page(character_return)
 			elif page == "menu": open_page(menu_return)

@@ -1,0 +1,345 @@
+{
+  "version": 1,
+  "producer_scope": "E01-E12 ordinary and heavy enemies only",
+  "identities": 12,
+  "actor_frames": 240,
+  "generation_mode": "built-in ImageGen per-identity master and per-identity animation sheet",
+  "reviewed_runtime_clips": [
+    "E01/attack",
+    "E02/attack",
+    "E03/special",
+    "E04/attack",
+    "E05/special",
+    "E06/special",
+    "E07/special",
+    "E08/special",
+    "E09/attack",
+    "E10/attack",
+    "E11/special",
+    "E12/attack"
+  ],
+  "records": [
+    {
+      "id": "E01",
+      "status": "final_audited",
+      "source_dir": "design/baimen-enemies-20261028/characters/E01/source",
+      "prompts_dir": "design/baimen-enemies-20261028/characters/E01/prompts",
+      "measurements": "design/baimen-enemies-20261028/characters/E01/measurements.json",
+      "generation_record": "design/baimen-enemies-20261028/characters/E01/generation-record.json",
+      "export_manifest": "design/baimen-enemies-20261028/characters/E01/export-manifest.json",
+      "runtime_dir": "assets/enemies/baimen/E01",
+      "frames": 20,
+      "colors": 62,
+      "canvas": {
+        "size": [
+          192,
+          192
+        ],
+        "anchor": [
+          96,
+          176
+        ],
+        "body_height_px": 80
+      },
+      "action_clips": {
+        "swipe": "attack"
+      }
+    },
+    {
+      "id": "E02",
+      "status": "final_audited",
+      "source_dir": "design/baimen-enemies-20261028/characters/E02/source",
+      "prompts_dir": "design/baimen-enemies-20261028/characters/E02/prompts",
+      "measurements": "design/baimen-enemies-20261028/characters/E02/measurements.json",
+      "generation_record": "design/baimen-enemies-20261028/characters/E02/generation-record.json",
+      "export_manifest": "design/baimen-enemies-20261028/characters/E02/export-manifest.json",
+      "runtime_dir": "assets/enemies/baimen/E02",
+      "frames": 20,
+      "colors": 60,
+      "canvas": {
+        "size": [
+          192,
+          192
+        ],
+        "anchor": [
+          96,
+          176
+        ],
+        "body_height_px": 80
+      },
+      "action_clips": {
+        "shot": "attack"
+      }
+    },
+    {
+      "id": "E03",
+      "status": "final_audited",
+      "source_dir": "design/baimen-enemies-20261028/characters/E03/source",
+      "prompts_dir": "design/baimen-enemies-20261028/characters/E03/prompts",
+      "measurements": "design/baimen-enemies-20261028/characters/E03/measurements.json",
+      "generation_record": "design/baimen-enemies-20261028/characters/E03/generation-record.json",
+      "export_manifest": "design/baimen-enemies-20261028/characters/E03/export-manifest.json",
+      "runtime_dir": "assets/enemies/baimen/E03",
+      "frames": 20,
+      "colors": 60,
+      "canvas": {
+        "size": [
+          256,
+          192
+        ],
+        "anchor": [
+          128,
+          176
+        ],
+        "body_height_px": 80
+      },
+      "action_clips": {
+        "charge": "special"
+      }
+    },
+    {
+      "id": "E04",
+      "status": "final_audited",
+      "source_dir": "design/baimen-enemies-20261028/characters/E04/source",
+      "prompts_dir": "design/baimen-enemies-20261028/characters/E04/prompts",
+      "measurements": "design/baimen-enemies-20261028/characters/E04/measurements.json",
+      "generation_record": "design/baimen-enemies-20261028/characters/E04/generation-record.json",
+      "export_manifest": "design/baimen-enemies-20261028/characters/E04/export-manifest.json",
+      "runtime_dir": "assets/enemies/baimen/E04",
+      "frames": 20,
+      "colors": 63,
+      "canvas": {
+        "size": [
+          192,
+          192
+        ],
+        "anchor": [
+          96,
+          176
+        ],
+        "body_height_px": 80
+      },
+      "action_clips": {
+        "swipe": "attack"
+      }
+    },
+    {
+      "id": "E05",
+      "status": "final_audited",
+      "source_dir": "design/baimen-enemies-20261028/characters/E05/source",
+      "prompts_dir": "design/baimen-enemies-20261028/characters/E05/prompts",
+      "measurements": "design/baimen-enemies-20261028/characters/E05/measurements.json",
+      "generation_record": "design/baimen-enemies-20261028/characters/E05/generation-record.json",
+      "export_manifest": "design/baimen-enemies-20261028/characters/E05/export-manifest.json",
+      "runtime_dir": "assets/enemies/baimen/E05",
+      "frames": 20,
+      "colors": 63,
+      "canvas": {
+        "size": [
+          192,
+          192
+        ],
+        "anchor": [
+          96,
+          176
+        ],
+        "body_height_px": 80
+      },
+      "action_clips": {
+        "fan": "special"
+      }
+    },
+    {
+      "id": "E06",
+      "status": "final_audited",
+      "source_dir": "design/baimen-enemies-20261028/characters/E06/source",
+      "prompts_dir": "design/baimen-enemies-20261028/characters/E06/prompts",
+      "measurements": "design/baimen-enemies-20261028/characters/E06/measurements.json",
+      "generation_record": "design/baimen-enemies-20261028/characters/E06/generation-record.json",
+      "export_manifest": "design/baimen-enemies-20261028/characters/E06/export-manifest.json",
+      "runtime_dir": "assets/enemies/baimen/E06",
+      "frames": 20,
+      "colors": 61,
+      "canvas": {
+        "size": [
+          192,
+          192
+        ],
+        "anchor": [
+          96,
+          176
+        ],
+        "body_height_px": 80
+      },
+      "action_clips": {
+        "pot": "special"
+      }
+    },
+    {
+      "id": "E07",
+      "status": "final_audited",
+      "source_dir": "design/baimen-enemies-20261028/characters/E07/source",
+      "prompts_dir": "design/baimen-enemies-20261028/characters/E07/prompts",
+      "measurements": "design/baimen-enemies-20261028/characters/E07/measurements.json",
+      "generation_record": "design/baimen-enemies-20261028/characters/E07/generation-record.json",
+      "export_manifest": "design/baimen-enemies-20261028/characters/E07/export-manifest.json",
+      "runtime_dir": "assets/enemies/baimen/E07",
+      "frames": 20,
+      "colors": 62,
+      "canvas": {
+        "size": [
+          192,
+          192
+        ],
+        "anchor": [
+          96,
+          176
+        ],
+        "body_height_px": 80
+      },
+      "action_clips": {
+        "command": "special",
+        "swipe": "attack"
+      }
+    },
+    {
+      "id": "E08",
+      "status": "final_audited",
+      "source_dir": "design/baimen-enemies-20261028/characters/E08/source",
+      "prompts_dir": "design/baimen-enemies-20261028/characters/E08/prompts",
+      "measurements": "design/baimen-enemies-20261028/characters/E08/measurements.json",
+      "generation_record": "design/baimen-enemies-20261028/characters/E08/generation-record.json",
+      "export_manifest": "design/baimen-enemies-20261028/characters/E08/export-manifest.json",
+      "runtime_dir": "assets/enemies/baimen/E08",
+      "frames": 20,
+      "colors": 63,
+      "canvas": {
+        "size": [
+          192,
+          192
+        ],
+        "anchor": [
+          96,
+          176
+        ],
+        "body_height_px": 80
+      },
+      "action_clips": {
+        "heal": "special",
+        "swipe": "attack"
+      }
+    },
+    {
+      "id": "E09",
+      "status": "final_audited",
+      "source_dir": "design/baimen-enemies-20261028/characters/E09/source",
+      "prompts_dir": "design/baimen-enemies-20261028/characters/E09/prompts",
+      "measurements": "design/baimen-enemies-20261028/characters/E09/measurements.json",
+      "generation_record": "design/baimen-enemies-20261028/characters/E09/generation-record.json",
+      "export_manifest": "design/baimen-enemies-20261028/characters/E09/export-manifest.json",
+      "runtime_dir": "assets/enemies/baimen/E09",
+      "frames": 20,
+      "colors": 62,
+      "canvas": {
+        "size": [
+          320,
+          256
+        ],
+        "anchor": [
+          160,
+          240
+        ],
+        "body_height_px": 128
+      },
+      "action_clips": {
+        "slam": "attack"
+      }
+    },
+    {
+      "id": "E10",
+      "status": "final_audited",
+      "source_dir": "design/baimen-enemies-20261028/characters/E10/source",
+      "prompts_dir": "design/baimen-enemies-20261028/characters/E10/prompts",
+      "measurements": "design/baimen-enemies-20261028/characters/E10/measurements.json",
+      "generation_record": "design/baimen-enemies-20261028/characters/E10/generation-record.json",
+      "export_manifest": "design/baimen-enemies-20261028/characters/E10/export-manifest.json",
+      "runtime_dir": "assets/enemies/baimen/E10",
+      "frames": 20,
+      "colors": 60,
+      "canvas": {
+        "size": [
+          320,
+          256
+        ],
+        "anchor": [
+          160,
+          240
+        ],
+        "body_height_px": 128
+      },
+      "action_clips": {
+        "hook": "attack"
+      }
+    },
+    {
+      "id": "E11",
+      "status": "final_audited",
+      "source_dir": "design/baimen-enemies-20261028/characters/E11/source",
+      "prompts_dir": "design/baimen-enemies-20261028/characters/E11/prompts",
+      "measurements": "design/baimen-enemies-20261028/characters/E11/measurements.json",
+      "generation_record": "design/baimen-enemies-20261028/characters/E11/generation-record.json",
+      "export_manifest": "design/baimen-enemies-20261028/characters/E11/export-manifest.json",
+      "runtime_dir": "assets/enemies/baimen/E11",
+      "frames": 20,
+      "colors": 60,
+      "canvas": {
+        "size": [
+          384,
+          256
+        ],
+        "anchor": [
+          192,
+          240
+        ],
+        "body_height_px": 128
+      },
+      "action_clips": {
+        "summon": "special",
+        "swipe": "attack"
+      }
+    },
+    {
+      "id": "E12",
+      "status": "final_audited",
+      "source_dir": "design/baimen-enemies-20261028/characters/E12/source",
+      "prompts_dir": "design/baimen-enemies-20261028/characters/E12/prompts",
+      "measurements": "design/baimen-enemies-20261028/characters/E12/measurements.json",
+      "generation_record": "design/baimen-enemies-20261028/characters/E12/generation-record.json",
+      "export_manifest": "design/baimen-enemies-20261028/characters/E12/export-manifest.json",
+      "runtime_dir": "assets/enemies/baimen/E12",
+      "frames": 20,
+      "colors": 61,
+      "canvas": {
+        "size": [
+          256,
+          256
+        ],
+        "anchor": [
+          128,
+          240
+        ],
+        "body_height_px": 128
+      },
+      "action_clips": {
+        "slam": "attack",
+        "pulse": "special"
+      }
+    }
+  ],
+  "shared_render_review_owner": "/root/enemy_rendering",
+  "global_manifest_merge_owner": "/root",
+  "limits": [
+    "Producer inspected source anatomy and native exports; W3 owns final Godot multi-size rendering and root owns integrated approval.",
+    "No business code, catalog numbers, global production-state or global manifest modified."
+  ]
+}

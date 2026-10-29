@@ -1,0 +1,115 @@
+{
+  "research_date": "2026-10-29",
+  "scope": "Visual and interaction references for drag-to-deploy party formation and character inspection. Measurements are manual visual estimates from the listed static screenshots; they are not pixel-perfect UI extractions.",
+  "references": [
+    {
+      "game": "Rance X",
+      "screen": "部隊編成 (team formation / roster)",
+      "release_status": "Official AliceSoft system page image; page explicitly warns the images and information are developmental and may differ from retail.",
+      "source_page": "https://www.alicesoft.com/rance10/system/index.html",
+      "source_evidence": "The page says the upper area contains deployment slots; the lower area contains team tabs and member list; placing a member in a slot assigns them as the team's leader. It also says the displayed HP is the total for the whole party and AT is per team. This documents placement semantics, but does not specify drag as the input gesture.",
+      "local_image": "design/rance10-ui-research-20261027/reference/system-05_01.jpg",
+      "image_size_px": [1000, 562],
+      "modules": [
+        {"name": "deployed leader cards and available slots", "bbox_px_approx": [114, 0, 701, 173], "bbox_fraction_approx": [0.114, 0.0, 0.701, 0.308], "visible_content": "Seven horizontal slots. Four are occupied by leader cards, three are locked/empty in this shown state.", "priority": "primary"},
+        {"name": "team/category tabs", "bbox_px_approx": [0, 174, 799, 220], "bbox_fraction_approx": [0.0, 0.310, 0.799, 0.392], "visible_content": "Horizontal team tabs with counts and small team indicators, directly between deployment slots and member gallery.", "priority": "navigation"},
+        {"name": "candidate member card gallery", "bbox_px_approx": [0, 221, 710, 399], "bbox_fraction_approx": [0.0, 0.393, 0.71, 0.710], "visible_content": "One row of large collectible-style cards; each card shows portrait, class/skill marks, rank/level and a power value. The lower half of the central canvas remains unused in this state.", "priority": "primary"},
+        {"name": "formation totals and team modifiers", "bbox_px_approx": [800, 0, 999, 488], "bbox_fraction_approx": [0.8, 0.0, 0.199, 0.868], "visible_content": "Persistent right column with total HP, total AT and multiple resistance/bonus percentages.", "priority": "secondary persistent summary"},
+        {"name": "sort and utility controls", "bbox_px_approx": [728, 181, 789, 557], "bbox_fraction_approx": [0.728, 0.322, 0.061, 0.669], "visible_content": "Narrow vertical controls including sorting actions, a shrink/view control, 詳細 (details), help and close in the lower area.", "priority": "utility"}
+      ],
+      "interaction_evidence": "The official page supports assigning a character to a slot and describes team/party totals. The screenshot is static: it cannot establish drag-and-drop, card selection behavior, or what the 詳細 control opens.",
+      "confidence": "High for visible layout and the page's described semantics; medium for exact visual bounding boxes; no evidence for drag gesture."
+    },
+    {
+      "game": "Rance X",
+      "screen": "Released-game member card roster",
+      "release_status": "Post-release player screenshot; exact version unverified.",
+      "source_page": "https://game.girldoll.org/rance10-review/",
+      "source_image": "https://game.girldoll.org/wp/wp-content/uploads/180305_18.jpg",
+      "local_image": "design/rance10-ui-research-20261027/reference/release-roster.jpg",
+      "image_size_px": [750, 422],
+      "modules": [
+        {"name": "owned/recent cards strip", "bbox_px_approx": [0, 0, 584, 101], "bbox_fraction_approx": [0.0, 0.0, 0.779, 0.24], "visible_content": "Large card portraits across the top; count at far right reads 333枚.", "priority": "collection context"},
+        {"name": "team filters", "bbox_px_approx": [0, 102, 584, 141], "bbox_fraction_approx": [0.0, 0.242, 0.779, 0.334], "visible_content": "Compact horizontal tabs for teams/countries, each with small counts and colored markers.", "priority": "navigation"},
+        {"name": "member card grid", "bbox_px_approx": [0, 142, 584, 421], "bbox_fraction_approx": [0.0, 0.336, 0.779, 0.998], "visible_content": "Multiple rows of card tiles with portrait, class/rank markers and card labels.", "priority": "primary"},
+        {"name": "team aggregate statistics", "bbox_px_approx": [585, 0, 749, 421], "bbox_fraction_approx": [0.78, 0.0, 0.219, 0.998], "visible_content": "Persistent narrow right panel with total HP/AT and modifier percentages, plus sort and detail/help/close controls.", "priority": "summary and utility"}
+      ],
+      "interaction_evidence": "This released-game player screenshot establishes the card-gallery and totals arrangement. It does not establish party deployment slots, drag/drop, or the result of opening the visible 詳細 control.",
+      "confidence": "High for visible layout; medium for exact pixel bounds; source is a player review image, not a developer asset."
+    },
+    {
+      "game": "Darkest Dungeon",
+      "screen": "Town hero character sheet / roster overview",
+      "release_status": "Released-game screenshot distributed as a Steam store asset; surfaced in SteamDB's screenshot gallery.",
+      "source_page": "https://steamdb.info/app/262060/screenshots/",
+      "source_image": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/262060/ss_a967c2d7344433cdf72a53ef1922586b0d7cce69.jpg",
+      "local_image": "/tmp/my-game-ui-ref-20261029/dd1/steamdb-character-overview.jpg",
+      "image_size_px": [1920, 1080],
+      "modules": [
+        {"name": "selected hero detail sheet", "bbox_px_approx": [159, 142, 1535, 905], "bbox_fraction_approx": [0.083, 0.131, 0.717, 0.706], "visible_content": "Large framed panel overlays the town backdrop. Left side: hero name/rank, quirks, base stats, equipment and full-body character art. Right side: preferred positions/targets, combat skills, camping skills, resistances and diseases. A red X close control is at the sheet's upper-right.", "priority": "primary"},
+        {"name": "hero roster sidebar", "bbox_px_approx": [1563, 86, 1919, 943], "bbox_fraction_approx": [0.814, 0.080, 0.185, 0.794], "visible_content": "Scrollable vertical list of hero portraits and compact status/stat rows remains visible while the selected hero sheet is open; selected hero is highlighted.", "priority": "persistent selection context"},
+        {"name": "town resources and embark action", "bbox_px_approx": [0, 944, 1920, 1057], "bbox_fraction_approx": [0.0, 0.874, 1.0, 0.105], "visible_content": "Bottom strip retains resource counters and the prominent Embark action beneath the detail sheet.", "priority": "global navigation/action"}
+      ],
+      "interaction_evidence": "A player report says right-clicking a hero portrait opens the character sheet: https://steamcommunity.com/app/262060/discussions/0/458606877310869153/. This is community evidence, not an official manual. The image itself only proves that a selected-hero detail sheet and roster list are simultaneously visible; it cannot prove right-click, hover, tab, or close behavior.",
+      "confidence": "High for visible layout and data groups; medium for interaction behavior because the cited trigger is user-reported."
+    },
+    {
+      "game": "Darkest Dungeon",
+      "screen": "Dungeon exploration/combat with selected-hero quick HUD",
+      "release_status": "Steam Community user screenshot; not an official developer capture.",
+      "source_page": "https://steamcommunity.com/app/262060",
+      "source_image": "https://images.steamusercontent.com/ugc/18120097558134241835/81D3D0A1679D08EDB1AC8E935FFF302388B4C04A/?ima=fit&imcolor=%23000000&impolicy=Letterbox&imw=1024&letterbox=false",
+      "local_image": "/tmp/my-game-ui-ref-20261029/dd1/steam-community-hud.jpg",
+      "image_size_px": [1024, 576],
+      "modules": [
+        {"name": "in-world party lineup", "bbox_px_approx": [190, 119, 432, 257], "bbox_fraction_approx": [0.186, 0.207, 0.422, 0.446], "visible_content": "Four heroes remain visible standing in formation in the dungeon scene.", "priority": "primary scene"},
+        {"name": "selected hero compact summary and abilities", "bbox_px_approx": [133, 389, 374, 576], "bbox_fraction_approx": [0.130, 0.675, 0.235, 0.325], "visible_content": "Portrait/name, HP and stress, several core combat stats, ability buttons and equipment slots for the selected hero.", "priority": "contextual detail"},
+        {"name": "inventory panel", "bbox_px_approx": [515, 389, 363, 187], "bbox_fraction_approx": [0.503, 0.675, 0.354, 0.325], "visible_content": "Grid of carried objects occupies a separate lower-center/right panel while the party scene remains visible.", "priority": "secondary"}
+      ],
+      "interaction_evidence": "This still proves coexistence of a party scene and compact selected-hero data only. It does not establish whether the block appears on hover, click, or another input, and it is not a formation screen.",
+      "confidence": "High for visible elements; no interaction evidence."
+    },
+    {
+      "game": "Darkest Dungeon",
+      "screen": "Party controls / formation interaction evidence",
+      "source_page": "https://store.steampowered.com/news/posts/?appids=262060&enddate=1482191787",
+      "source_evidence": "Developer-published Steam notes for Build #16628 say controller users can swap hero positions and change hero selection; a separate fix mentions dragging heroes to the party from the town event window. This confirms that position swapping and one drag-to-party flow existed, but does not document that all pre-mission party slots accept drag-and-drop.",
+      "additional_source": "https://darkestdungeon.wiki.gg/wiki/Expedition",
+      "additional_evidence": "The community-maintained Official Darkest Dungeon Wiki describes the expedition party as four heroes and says formation may be changed outside combat. Use as secondary corroboration, not developer documentation.",
+      "confidence": "High for the wording in official patch notes; limited scope for general party drag behavior."
+    },
+    {
+      "game": "Darkest Dungeon: The Color of Madness",
+      "screen": "Stagecoach/recruitment (not party formation)",
+      "source_page": "https://store.steampowered.com/app/735730/Darkest_Dungeon_The_Color_Of_Madness/",
+      "source_image": "https://cdn.akamai.steamstatic.com/steam/apps/735730/ss_62111ebdc74bcb70a44570afec10c9c4cc01e809.1920x1080.jpg",
+      "local_image": "/tmp/my-game-ui-ref-20261029/dd1/steam-stage-coach.jpg",
+      "image_size_px": [1920, 1080],
+      "exclusion_note": "Viewed and excluded as a formation reference: the four featured cards are recruits at the Stagecoach, not the assembled party slots. It can support recruitment/roster only."
+    }
+  ],
+  "project_fit_patterns": [
+    {
+      "pattern": "Keep formation slots, member cards and aggregate readiness/power in one view.",
+      "basis": "Rance X places deployed leaders across the top, team filters below them, candidate cards beneath, and party HP/AT totals in a persistent right column. The official system text describes slot assignment and aggregate stats.",
+      "adaptation": "For the existing roster, let a card be dragged onto an explicit deployment slot and keep party HP/strength totals visible during edits. The screenshot and official page support the layout and assignment model, while drag input remains a project choice."
+    },
+    {
+      "pattern": "Inspect a selected character without losing the active formation context.",
+      "basis": "Darkest Dungeon's town character sheet shows a broad set of traits/stats/skills while retaining the hero roster sidebar; its dungeon screenshot keeps the party in-world while showing a compact selected-hero summary.",
+      "adaptation": "Use a compact inline detail card for routine inspection, with an expanded overlay/drawer for growth and full attributes; retain the current party slots and selected card behind/alongside it, with an obvious close control. Static images establish simultaneous visibility, not the opening gesture."
+    },
+    {
+      "pattern": "Separate summary, build details and equipment into labeled groups on a deliberate detail surface.",
+      "basis": "Darkest Dungeon's hero sheet groups quirks, base stats, equipment, combat/camping skills, resistances and diseases across two columns; character art anchors the left side.",
+      "adaptation": "Present the project's growth/attributes beside the character art in grouped sections, and avoid sending the player to a disconnected full-screen page for a small inspection. Keep full-screen only for a deliberately expanded view."
+    }
+  ],
+  "limits": [
+    "All bounding boxes and proportions are approximate visual estimates, not source layout measurements.",
+    "Static screenshots establish what is visible in those states, not which input opened them or what happens after input.",
+    "The Rance official system screenshots are marked as developmental and may differ from the retail release.",
+    "No clear, source-verified Darkest Dungeon 1 screenshot of the pre-mission four-slot party assembly screen was located in this bounded pass; the Stagecoach image is explicitly not that screen.",
+    "Darkest Dungeon's right-click character-sheet trigger is supported here by a player discussion and third-party control references, not an official manual."
+  ]
+}

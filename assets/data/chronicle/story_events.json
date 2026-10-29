@@ -1,0 +1,2121 @@
+{
+  "S01": {
+    "id": "S01",
+    "title": "听闻鬼城公主",
+    "location": "荒道",
+    "background": "res://assets/story/chronicle/road.png",
+    "music": "camp_signal",
+    "lines": [
+      {
+        "id": "s01_01",
+        "speaker": "",
+        "text": "白门楼的传闻沿着荒道传来。",
+        "actors": []
+      },
+      {
+        "id": "s01_02",
+        "speaker": "",
+        "text": "据说鬼城里有位绝色公主，名叫吕玲绮。",
+        "actors": []
+      },
+      {
+        "id": "s01_03",
+        "speaker": "JIA",
+        "text": "绝色公主？这白门楼，我非去不可！",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "s01_04",
+        "speaker": "",
+        "text": "贾苇索收拾行囊，动身往徐州去。",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "s01_05",
+        "speaker": "JIA",
+        "text": "天下这么大，总得有我一块地方。",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          }
+        ]
+      }
+    ]
+  },
+  "S02": {
+    "id": "S02",
+    "title": "艾玛随行",
+    "location": "白门楼山道",
+    "background": "res://assets/story/chronicle/road.png",
+    "music": "camp_signal",
+    "lines": [
+      {
+        "id": "s02_01",
+        "speaker": "",
+        "text": "前路上，一个手持法杖的异乡女子正警惕地打量四周。",
+        "actors": [
+          {
+            "id": "F11",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "s02_02",
+        "speaker": "JIA",
+        "text": "荒山野路，怎么落单了这么一位美人？",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          },
+          {
+            "id": "F11",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "s02_03",
+        "speaker": "F11",
+        "text": "你是谁？离我远点！",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          },
+          {
+            "id": "F11",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "s02_04",
+        "speaker": "JIA",
+        "text": "贾苇索。姑娘叫什么？",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          },
+          {
+            "id": "F11",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "s02_05",
+        "speaker": "F11",
+        "text": "艾玛。我从西方来，想找回去的路。",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          },
+          {
+            "id": "F11",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "s02_06",
+        "speaker": "JIA",
+        "text": "回去的路不知道，白门楼倒是认得。跟我走吧。",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          },
+          {
+            "id": "F11",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "s02_07",
+        "speaker": "F11",
+        "text": "我又不认识你。让开！",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          },
+          {
+            "id": "F11",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "s02_08",
+        "speaker": "JIA",
+        "text": "现在认识了。你会魔法，长得又好看，正合我的心意。",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          },
+          {
+            "id": "F11",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "s02_09",
+        "speaker": "F11",
+        "text": "我没答应！",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          },
+          {
+            "id": "F11",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "s02_10",
+        "speaker": "JIA",
+        "text": "队里正缺个法师，就你了。",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          },
+          {
+            "id": "F11",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "s02_11",
+        "speaker": "F11",
+        "text": "少替我做主。再不让开，我就——",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          },
+          {
+            "id": "F11",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "s02_12",
+        "speaker": "",
+        "text": "贾苇索趁她分神，一把夺走她的法杖，转身便走。",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          },
+          {
+            "id": "F11",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "s02_13",
+        "speaker": "F11",
+        "text": "站住！把法杖还给我！",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          },
+          {
+            "id": "F11",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "s02_14",
+        "speaker": "JIA",
+        "text": "想要就跟上。过了这段山路，再跟你好好说。",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          },
+          {
+            "id": "F11",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "s02_15",
+        "speaker": "F11",
+        "text": "谁要和你好好说！还我！",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          },
+          {
+            "id": "F11",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "s02_16",
+        "speaker": "",
+        "text": "艾玛追上前夺回法杖，贾苇索一把拽住她，拖着她上路。",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          },
+          {
+            "id": "F11",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "s02_17",
+        "speaker": "JIA",
+        "text": "队里有法师啦！跟本大爷去白门楼！",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          },
+          {
+            "id": "F11",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "s02_18",
+        "speaker": "F11",
+        "text": "放手！我根本不想跟你走！",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          },
+          {
+            "id": "F11",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      }
+    ]
+  },
+  "S03": {
+    "id": "S03",
+    "title": "鬼市落脚",
+    "location": "鬼市",
+    "background": "res://assets/story/chronicle/market.png",
+    "music": "camp_signal",
+    "lines": [
+      {
+        "id": "s03_01",
+        "speaker": "",
+        "text": "鬼市里药香混着炭烟，几个伤者坐在檐下。",
+        "actors": []
+      },
+      {
+        "id": "s03_02",
+        "speaker": "F03",
+        "text": "别缩，伤口里还有砂，我得挑干净。",
+        "actors": [
+          {
+            "id": "F03",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "s03_t01",
+        "speaker": "JIA",
+        "text": "哟，好漂亮的手。给本大爷看看手相？",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          },
+          {
+            "id": "F03",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "s03_t02",
+        "speaker": "F03",
+        "text": "水壶在那儿，先烧水。手自己看。",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          },
+          {
+            "id": "F03",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "s03_t03",
+        "speaker": "JIA",
+        "text": "我是来看病的，怎么先给你干活？",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          },
+          {
+            "id": "F03",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "s03_t04",
+        "speaker": "F03",
+        "text": "这儿有三个流血的。你哪儿疼？",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          },
+          {
+            "id": "F03",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "s03_t05",
+        "speaker": "JIA",
+        "text": "心口疼，见了你就——",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          },
+          {
+            "id": "F03",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "s03_t06",
+        "speaker": "F03",
+        "text": "能说这么多，不急。下一位。",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          },
+          {
+            "id": "F03",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "s03_t07",
+        "speaker": "F11",
+        "text": "他是嘴疼。水壶在哪儿？",
+        "actors": [
+          {
+            "id": "F11",
+            "slot": "left",
+            "expression": "neutral"
+          },
+          {
+            "id": "F03",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "s03_03",
+        "speaker": "N18",
+        "text": "药材半筐，粮袋两包。我再去问摊主换点绷布。",
+        "actors": [
+          {
+            "id": "N18",
+            "slot": "left",
+            "expression": "neutral"
+          },
+          {
+            "id": "F03",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "s03_t08",
+        "speaker": "F03",
+        "text": "布钱记我账上。粮袋先别动，给伤重的留着。",
+        "actors": [
+          {
+            "id": "N18",
+            "slot": "left",
+            "expression": "neutral"
+          },
+          {
+            "id": "F03",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "s03_t09",
+        "speaker": "JIA",
+        "text": "算盘打得挺响。你叫什么？",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          },
+          {
+            "id": "F03",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "s03_t10",
+        "speaker": "F03",
+        "text": "田秀。账要是不记清，下回谁拿钱买药？",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          },
+          {
+            "id": "F03",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "s03_p01",
+        "speaker": "F04",
+        "text": "田大夫，绷布给你留着。药钱还是记账？",
+        "actors": [
+          {
+            "id": "F03",
+            "slot": "left",
+            "expression": "neutral"
+          },
+          {
+            "id": "F04",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "s03_p02",
+        "speaker": "F03",
+        "text": "记上。钱绮罗，这回药材可别短斤少两。",
+        "actors": [
+          {
+            "id": "F03",
+            "slot": "left",
+            "expression": "neutral"
+          },
+          {
+            "id": "F04",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "s03_p03",
+        "speaker": "F04",
+        "text": "价钱我敢喊，答应给的货可不会少。",
+        "actors": [
+          {
+            "id": "F03",
+            "slot": "left",
+            "expression": "neutral"
+          },
+          {
+            "id": "F04",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "s03_p04",
+        "speaker": "JIA",
+        "text": "这位掌柜，人也能跟药一块卖吗？",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          },
+          {
+            "id": "F04",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "s03_p05",
+        "speaker": "F04",
+        "text": "能啊，先报个价。你账上有多少？",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          },
+          {
+            "id": "F04",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "s03_p06",
+        "speaker": "JIA",
+        "text": "本大爷欠的都是人情！",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          },
+          {
+            "id": "F04",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "s03_p07",
+        "speaker": "F04",
+        "text": "那可贵。绷布先拿走，药钱回头再算。",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          },
+          {
+            "id": "F04",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "s03_04",
+        "speaker": "",
+        "text": "贾苇索一行等街口让出路，便收拾行装继续赶路。",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          }
+        ]
+      }
+    ]
+  },
+  "S04": {
+    "id": "S04",
+    "title": "第一批追随者",
+    "location": "匪寨寨门",
+    "background": "res://assets/story/chronicle/camp.png",
+    "music": "camp_signal",
+    "lines": [
+      {
+        "id": "s04_01",
+        "speaker": "",
+        "text": "匪寨的旗落了，寨门前还堆着折断的长矛。",
+        "actors": []
+      },
+      {
+        "id": "s04_02",
+        "speaker": "",
+        "text": "旧部聚在空地上议论去留。",
+        "actors": []
+      },
+      {
+        "id": "s04_03",
+        "speaker": "F07",
+        "text": "寨里的人听着，想走的领点干粮；想留的，先把名报上。",
+        "actors": [
+          {
+            "id": "F07",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "s04_t01",
+        "speaker": "JIA",
+        "text": "我才刚拿下寨子，你就给我分起粮来了？",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          },
+          {
+            "id": "F07",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "s04_t02",
+        "speaker": "F07",
+        "text": "你拿的是寨门，不是人的卖身契。",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          },
+          {
+            "id": "F07",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "s04_t03",
+        "speaker": "JIA",
+        "text": "嘴硬是好事。我正缺个女将军，你来当副手。",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          },
+          {
+            "id": "F07",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "s04_t04",
+        "speaker": "F07",
+        "text": "你先把寨里有多少人弄明白，再来封官。",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          },
+          {
+            "id": "F07",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "s04_t05",
+        "speaker": "JIA",
+        "text": "好！你替我看寨子，也跟我去白门楼！",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          },
+          {
+            "id": "F07",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "s04_t06",
+        "speaker": "F07",
+        "text": "你要我给你看寨，还是跟你跑？",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          },
+          {
+            "id": "F07",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "s04_t07",
+        "speaker": "JIA",
+        "text": "都要！",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          },
+          {
+            "id": "F07",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "s04_t08",
+        "speaker": "F07",
+        "text": "你先把人和粮数明白，才有得要。",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          },
+          {
+            "id": "F07",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "s04_t09",
+        "speaker": "JIA",
+        "text": "愿跟我的留下，想走的领粮走。",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          },
+          {
+            "id": "F07",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "s04_p01",
+        "speaker": "",
+        "text": "断矛堆旁传来敲打声，陶小满正替寨里的人修刀。",
+        "actors": [
+          {
+            "id": "F08",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "s04_p02",
+        "speaker": "JIA",
+        "text": "姑娘好力气！本大爷这把刀，也请你看看。",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          },
+          {
+            "id": "F08",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "s04_p03",
+        "speaker": "F08",
+        "text": "这缺口？先给我。夸人的话等磨完再说。",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          },
+          {
+            "id": "F08",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "s04_p04",
+        "speaker": "M07",
+        "text": "山道还堵着。我带了几个人来，想问问这寨里谁说话算数。",
+        "actors": [
+          {
+            "id": "M07",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "s04_p05",
+        "speaker": "JIA",
+        "text": "你是哪位？想投本大爷，先报个名。",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          },
+          {
+            "id": "M07",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "s04_p06",
+        "speaker": "M07",
+        "text": "臧霸。我先问清路和粮，没说把自己卖给谁。",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          },
+          {
+            "id": "M07",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "s04_p07",
+        "speaker": "F07",
+        "text": "人和粮我正数着。愿留下来帮忙的，等会儿一块说。",
+        "actors": [
+          {
+            "id": "F07",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "s04_p08",
+        "speaker": "F08",
+        "text": "刀修好了。你们说完，谁来替我扶一下炉子？",
+        "actors": [
+          {
+            "id": "F08",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "s04_04",
+        "speaker": "",
+        "text": "贾苇索看了一眼尚未散去的人群，转身去查看寨后的水井。",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          }
+        ]
+      }
+    ]
+  },
+  "S05": {
+    "id": "S05",
+    "title": "寨中一夜",
+    "location": "寨中",
+    "background": "res://assets/story/chronicle/camp.png",
+    "music": "camp_signal",
+    "lines": [
+      {
+        "id": "s05_01",
+        "speaker": "",
+        "text": "夜里风穿过破寨墙，篝火映着一地旧旗帜。",
+        "actors": []
+      },
+      {
+        "id": "s05_02",
+        "speaker": "",
+        "text": "众人在院中坐下，清点路上带来的粮食和用具。",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          },
+          {
+            "id": "F11",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "s05_03",
+        "speaker": "",
+        "text": "门外偶有鬼声，守夜人便往火里添一根木柴。",
+        "actors": []
+      },
+      {
+        "id": "s05_p01",
+        "speaker": "",
+        "text": "夜色里，一名女子来到寨门，问起从旧楼走散的人。",
+        "actors": [
+          {
+            "id": "F09",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "s05_p02",
+        "speaker": "F09",
+        "text": "柳晚晴。旧楼里有几个人没了消息，我想问问你们路上见过没有。",
+        "actors": [
+          {
+            "id": "F09",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "s05_p03",
+        "speaker": "JIA",
+        "text": "好嗓子！姑娘先唱一曲，本大爷再帮你找人。",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          },
+          {
+            "id": "F09",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "s05_p04",
+        "speaker": "F09",
+        "text": "先找人。你若真帮了忙，我记得欠你一曲。",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          },
+          {
+            "id": "F09",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "s05_p05",
+        "speaker": "JIA",
+        "text": "说好了！本大爷要坐第一排。",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          },
+          {
+            "id": "F09",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "s05_p06",
+        "speaker": "F11",
+        "text": "门外还有鬼。你小声点，别把听曲的先招来。",
+        "actors": [
+          {
+            "id": "F11",
+            "slot": "left",
+            "expression": "neutral"
+          },
+          {
+            "id": "F09",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "s05_p07",
+        "speaker": "F09",
+        "text": "她说得对。嗓子能省，命可不能省。",
+        "actors": [
+          {
+            "id": "F11",
+            "slot": "left",
+            "expression": "neutral"
+          },
+          {
+            "id": "F09",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "s05_04",
+        "speaker": "",
+        "text": "贾苇索望向山道，等天亮后再商量下一程的去路。",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          }
+        ]
+      }
+    ]
+  },
+  "F01": {
+    "id": "F01",
+    "title": "寨后古井",
+    "location": "寨后古井",
+    "background": "res://assets/story/chronicle/camp.png",
+    "music": "camp_signal",
+    "lines": [
+      {
+        "id": "f01_01",
+        "speaker": "",
+        "text": "古井水清，残墙间暂得片刻安宁。",
+        "actors": []
+      },
+      {
+        "id": "f01_02",
+        "speaker": "",
+        "text": "泉水会使已获得人物的生命、魔法回满，并复活阵亡辅助。",
+        "actors": []
+      }
+    ]
+  },
+  "B06": {
+    "id": "B06",
+    "title": "荒祠战后",
+    "location": "荒祠",
+    "background": "res://assets/story/chronicle/camp.png",
+    "music": "camp_signal",
+    "lines": [
+      {
+        "id": "b06_01",
+        "speaker": "",
+        "text": "荒祠中的烟尘散去，供桌旁还有人蹲着收拾符纸。",
+        "actors": []
+      },
+      {
+        "id": "b06_02",
+        "speaker": "F05",
+        "text": "别踩！那张符还没烧完。",
+        "actors": [
+          {
+            "id": "F05",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "b06_03",
+        "speaker": "JIA",
+        "text": "姑娘，本大爷替你打跑了鬼，不谢我一声？",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          },
+          {
+            "id": "F05",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "b06_04",
+        "speaker": "F05",
+        "text": "祝青蘅。叫我一声师父，我倒可以考虑谢你。",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          },
+          {
+            "id": "F05",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "b06_05",
+        "speaker": "JIA",
+        "text": "师父生得这么俊，我天天叫都成！",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          },
+          {
+            "id": "F05",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "b06_06",
+        "speaker": "F11",
+        "text": "外面还有伤者。你们谁有布？",
+        "actors": [
+          {
+            "id": "F11",
+            "slot": "left",
+            "expression": "neutral"
+          },
+          {
+            "id": "F05",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "b06_07",
+        "speaker": "F05",
+        "text": "供桌上的布拿去，桌板也拆下来，能抬人。",
+        "actors": [
+          {
+            "id": "F11",
+            "slot": "left",
+            "expression": "neutral"
+          },
+          {
+            "id": "F05",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "b06_08",
+        "speaker": "JIA",
+        "text": "方才不是还不让碰？",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          },
+          {
+            "id": "F05",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "b06_09",
+        "speaker": "F05",
+        "text": "贫道讲规矩。救人，比供桌要紧！",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          },
+          {
+            "id": "F05",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "b06_10",
+        "speaker": "",
+        "text": "青蘅收好剩下的符纸，招呼众人把伤者扶出荒祠。",
+        "actors": [
+          {
+            "id": "F05",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      }
+    ]
+  },
+  "S06": {
+    "id": "S06",
+    "title": "官印易主",
+    "location": "官署外院",
+    "background": "res://assets/story/chronicle/market.png",
+    "music": "camp_signal",
+    "lines": [
+      {
+        "id": "s06_01",
+        "speaker": "",
+        "text": "官署外院一片狼藉，几个人正把受困者从断梁旁拉出来。",
+        "actors": []
+      },
+      {
+        "id": "s06_02",
+        "speaker": "F02",
+        "text": "绳子卡住了！剑在旁边，先借我用一下。",
+        "actors": [
+          {
+            "id": "F02",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "s06_03",
+        "speaker": "M08",
+        "text": "梁还压着绳结，乱扯只会越勒越紧。",
+        "actors": [
+          {
+            "id": "M08",
+            "slot": "left",
+            "expression": "neutral"
+          },
+          {
+            "id": "F02",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "s06_04",
+        "speaker": "JIA",
+        "text": "这么漂亮的姑娘，本大爷亲自来救！",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          },
+          {
+            "id": "F02",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "s06_05",
+        "speaker": "F11",
+        "text": "先把那根木头抬起来，别挡着人。",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          },
+          {
+            "id": "F11",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "s06_06",
+        "speaker": "",
+        "text": "众人抬开断梁，贾苇索解开绳结。蕾娜揉了揉手腕，捡起自己的剑。",
+        "actors": [
+          {
+            "id": "F02",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "s06_07",
+        "speaker": "F02",
+        "text": "你就是那个自称天下无敌的？出去以后，和我比一场！",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          },
+          {
+            "id": "F02",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "s06_08",
+        "speaker": "JIA",
+        "text": "好！不过本大爷赢了，你可得——",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          },
+          {
+            "id": "F02",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "s06_09",
+        "speaker": "F02",
+        "text": "你先赢再说！",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          },
+          {
+            "id": "F02",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "s06_10",
+        "speaker": "F06",
+        "text": "秦雁。守城的人先报数，箭袋和伤员都要点清。",
+        "actors": [
+          {
+            "id": "F06",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "s06_11",
+        "speaker": "JIA",
+        "text": "好，我封你管弓弩！你瞧，本大爷安排得多周到。",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          },
+          {
+            "id": "F06",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "s06_12",
+        "speaker": "F10",
+        "text": "你刚才说的是“管所有人”。要我记前一句，还是这一句？",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          },
+          {
+            "id": "F10",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "s06_13",
+        "speaker": "JIA",
+        "text": "你又是谁？怎么记得这么快？",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          },
+          {
+            "id": "F10",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "s06_14",
+        "speaker": "F10",
+        "text": "陆知微。账册和人手我能帮着理，但话要说清楚。",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          },
+          {
+            "id": "F10",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "s06_15",
+        "speaker": "M08",
+        "text": "侯成。军械我先清一遍，能用的再搬出来。",
+        "actors": [
+          {
+            "id": "M08",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "s06_16",
+        "speaker": "F06",
+        "text": "少了两个人。我去看看后院，名册先留给我。",
+        "actors": [
+          {
+            "id": "F06",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "s06_17",
+        "speaker": "",
+        "text": "众人各自忙开，官署门前终于腾出一条可以通行的路。",
+        "actors": []
+      }
+    ]
+  },
+  "B15": {
+    "id": "B15",
+    "title": "军阵战后",
+    "location": "城外军阵",
+    "background": "res://assets/story/chronicle/camp.png",
+    "music": "camp_signal",
+    "lines": [
+      {
+        "id": "b15_01",
+        "speaker": "",
+        "text": "阵前旗帜歪倒，曹休收住兵刃，望向后方散开的骑队。",
+        "actors": []
+      },
+      {
+        "id": "b15_02",
+        "speaker": "M06",
+        "text": "停下，别再追了。先把伤者带回来。",
+        "actors": [
+          {
+            "id": "M06",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "b15_03",
+        "speaker": "N11",
+        "text": "后路还有人，轻骑去接。",
+        "actors": [
+          {
+            "id": "N11",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "b15_04",
+        "speaker": "JIA",
+        "text": "打完了？你这身手不错，要不要跟本大爷混？",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          },
+          {
+            "id": "M06",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "b15_05",
+        "speaker": "M06",
+        "text": "先让我把人带走。往后怎么走，现在不替他们做主。",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          },
+          {
+            "id": "M06",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "b15_06",
+        "speaker": "N09",
+        "text": "弩手收箭，别冲散队伍。",
+        "actors": [
+          {
+            "id": "N09",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "b15_07",
+        "speaker": "N15",
+        "text": "路上的咒印还在，我去把能走的地方标出来。",
+        "actors": [
+          {
+            "id": "N15",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "b15_08",
+        "speaker": "JIA",
+        "text": "行，伤者先走。剩下的账，以后再谈。",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          },
+          {
+            "id": "M06",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "b15_09",
+        "speaker": "",
+        "text": "军阵让出一条窄路，双方各自收拢仍能行动的人。",
+        "actors": []
+      }
+    ]
+  },
+  "B16": {
+    "id": "B16",
+    "title": "主将战后",
+    "location": "鬼曹军阵",
+    "background": "res://assets/story/chronicle/camp.png",
+    "music": "camp_signal",
+    "lines": [
+      {
+        "id": "b16_01",
+        "speaker": "",
+        "text": "尘土落下，曹纯抬手示意骑队停步。",
+        "actors": []
+      },
+      {
+        "id": "b16_02",
+        "speaker": "M05",
+        "text": "收拢队形。先确认还有多少人能走。",
+        "actors": [
+          {
+            "id": "M05",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "b16_03",
+        "speaker": "N12",
+        "text": "重骑还有几人在后面，我去接。",
+        "actors": [
+          {
+            "id": "N12",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "b16_04",
+        "speaker": "JIA",
+        "text": "打得痛快！要不把你的人都交给本大爷？",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          },
+          {
+            "id": "M05",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "b16_05",
+        "speaker": "M05",
+        "text": "他们有自己的腿，不用你替他们答应。",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          },
+          {
+            "id": "M05",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "b16_06",
+        "speaker": "JIA",
+        "text": "好，那先让能走的人出来。要跟我的，自己来说。",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          },
+          {
+            "id": "M05",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "b16_07",
+        "speaker": "M05",
+        "text": "眼下先收队。以后是否同行，各人自己决定。",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          },
+          {
+            "id": "M05",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "b16_08",
+        "speaker": "",
+        "text": "骑队让开道路，曹纯仍站在队伍前头清点人手。",
+        "actors": [
+          {
+            "id": "M05",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      }
+    ]
+  },
+  "B17": {
+    "id": "B17",
+    "title": "楼前战后",
+    "location": "白门楼前",
+    "background": "res://assets/story/chronicle/camp.png",
+    "music": "camp_signal",
+    "lines": [
+      {
+        "id": "b17_01",
+        "speaker": "",
+        "text": "白门楼前，散落的阵旗被风吹得翻起一角。",
+        "actors": []
+      },
+      {
+        "id": "b17_02",
+        "speaker": "M02",
+        "text": "停手。守军先退到城门边，伤者跟上。",
+        "actors": [
+          {
+            "id": "M02",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "b17_03",
+        "speaker": "M03",
+        "text": "盾列留一条路，让后面的人过。",
+        "actors": [
+          {
+            "id": "M03",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "b17_04",
+        "speaker": "JIA",
+        "text": "三位本事都不错，干脆一齐给本大爷做事！",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          },
+          {
+            "id": "M02",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "b17_05",
+        "speaker": "M03",
+        "text": "人怎么走，先由他们自己决定。",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          },
+          {
+            "id": "M03",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "b17_06",
+        "speaker": "M04",
+        "text": "城外余势未清。眼下先把路说清楚，比争嘴有用。",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          },
+          {
+            "id": "M04",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "b17_07",
+        "speaker": "M02",
+        "text": "此刻停刀，只为让人走出去。以后的事，不能一句话算完。",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          },
+          {
+            "id": "M02",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "b17_08",
+        "speaker": "JIA",
+        "text": "那就先把路让开。等人都安稳了，再来跟我争！",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          },
+          {
+            "id": "M02",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "b17_09",
+        "speaker": "",
+        "text": "张辽、高顺与陈宫分别安排守军，双方暂且收住兵刃。",
+        "actors": []
+      }
+    ]
+  },
+  "S14": {
+    "id": "S14",
+    "title": "一方之主",
+    "location": "白门楼",
+    "background": "res://assets/story/chronicle/camp.png",
+    "music": "camp_signal",
+    "lines": [
+      {
+        "id": "s14_01",
+        "speaker": "",
+        "text": "战声渐远，城楼上的残旗仍在风中摇动。",
+        "actors": []
+      },
+      {
+        "id": "s14_02",
+        "speaker": "M01",
+        "text": "城还在，守城的人也不能就这么散了。",
+        "actors": [
+          {
+            "id": "M01",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "s14_03",
+        "speaker": "JIA",
+        "text": "白门楼这一仗，本大爷可是出了大力！",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          },
+          {
+            "id": "M01",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "s14_04",
+        "speaker": "F01",
+        "text": "你救了城，我记着。你对我做过的事，我也不会忘。",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          },
+          {
+            "id": "F01",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "s14_05",
+        "speaker": "JIA",
+        "text": "旧账你要算就算。眼下城里的事，总得有人管。",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          },
+          {
+            "id": "F01",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "s14_06",
+        "speaker": "M01",
+        "text": "城外若再有敌人，我会亲自看着。别替别人做决定。",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          },
+          {
+            "id": "M01",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "s14_07",
+        "speaker": "F01",
+        "text": "城里有事，我会出手。可那不是原谅，也不是听你的。",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          },
+          {
+            "id": "F01",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "s14_08",
+        "speaker": "JIA",
+        "text": "好！城先守住，谁要跟我争，之后再说。",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          },
+          {
+            "id": "F01",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "s14_09",
+        "speaker": "",
+        "text": "战事暂歇，各人仍要决定自己的去路；白门楼前的旧怨没有消失。",
+        "actors": []
+      }
+    ]
+  }
+}

@@ -1,0 +1,493 @@
+{
+  "version": 1,
+  "id": "B09",
+  "review_status": "accepted_for_export",
+  "review_notes": "Viewed master and all 20 actions. Complete distinct quadruped monster; four feet, head/interior mask, roof/vents and tail/cloth preserved. Each pose extracted from measured true 4-connected alpha components, never grid-clipped. Minor disconnected outline pieces retained within 10px. Manual ground anchors at centre between weight-bearing feet; one fixed scale for entire source. Attack is left forelimb slam; special right forelimb slam.",
+  "prompts": [
+    "source/actions-v1-prompt.txt",
+    "source/master-v1-prompt.txt"
+  ],
+  "canvas": {
+    "size": [
+      512,
+      512
+    ],
+    "anchor": [
+      256,
+      450
+    ],
+    "body_height_px": 216
+  },
+  "sources": {
+    "actions": {
+      "path": "source/actions-v1.png",
+      "size": [
+        1374,
+        1145
+      ],
+      "sha256": "9abaa6d5d35540c2c785a0fdc6aeee0297f67be22f9e4804adceb1baec6c24e7",
+      "standing_body_height": 225
+    }
+  },
+  "portrait": {
+    "path": "source/master-v1.png",
+    "size": [
+      1374,
+      1145
+    ],
+    "sha256": "4c6caae45b4a7e2dd1f0948f4c371cd5a55bdc07c36e02af166c5d42290634fb"
+  },
+  "poses": [
+    {
+      "id": "p01",
+      "source": "actions",
+      "anchor_source": [
+        204,
+        239
+      ],
+      "components": [
+        {
+          "bbox": [
+            59,
+            13,
+            337,
+            239
+          ],
+          "area": 43834
+        }
+      ]
+    },
+    {
+      "id": "p02",
+      "source": "actions",
+      "anchor_source": [
+        532,
+        235
+      ],
+      "components": [
+        {
+          "bbox": [
+            383,
+            14,
+            663,
+            235
+          ],
+          "area": 42021
+        }
+      ]
+    },
+    {
+      "id": "p03",
+      "source": "actions",
+      "anchor_source": [
+        875,
+        237
+      ],
+      "components": [
+        {
+          "bbox": [
+            717,
+            11,
+            1020,
+            237
+          ],
+          "area": 45496
+        }
+      ]
+    },
+    {
+      "id": "p04",
+      "source": "actions",
+      "anchor_source": [
+        1210,
+        239
+      ],
+      "components": [
+        {
+          "bbox": [
+            1064,
+            11,
+            1343,
+            239
+          ],
+          "area": 44118
+        }
+      ]
+    },
+    {
+      "id": "p05",
+      "source": "actions",
+      "anchor_source": [
+        207,
+        465
+      ],
+      "components": [
+        {
+          "bbox": [
+            63,
+            247,
+            344,
+            465
+          ],
+          "area": 42091
+        }
+      ]
+    },
+    {
+      "id": "p06",
+      "source": "actions",
+      "anchor_source": [
+        541,
+        467
+      ],
+      "components": [
+        {
+          "bbox": [
+            394,
+            248,
+            675,
+            467
+          ],
+          "area": 41194
+        }
+      ]
+    },
+    {
+      "id": "p07",
+      "source": "actions",
+      "anchor_source": [
+        883,
+        467
+      ],
+      "components": [
+        {
+          "bbox": [
+            734,
+            246,
+            1019,
+            467
+          ],
+          "area": 41783
+        }
+      ]
+    },
+    {
+      "id": "p08",
+      "source": "actions",
+      "anchor_source": [
+        1222,
+        467
+      ],
+      "components": [
+        {
+          "bbox": [
+            1074,
+            244,
+            1353,
+            467
+          ],
+          "area": 40209
+        }
+      ]
+    },
+    {
+      "id": "p09",
+      "source": "actions",
+      "anchor_source": [
+        211,
+        683
+      ],
+      "components": [
+        {
+          "bbox": [
+            48,
+            465,
+            355,
+            683
+          ],
+          "area": 41572
+        }
+      ]
+    },
+    {
+      "id": "p10",
+      "source": "actions",
+      "anchor_source": [
+        538,
+        691
+      ],
+      "components": [
+        {
+          "bbox": [
+            371,
+            470,
+            689,
+            691
+          ],
+          "area": 41161
+        }
+      ]
+    },
+    {
+      "id": "p11",
+      "source": "actions",
+      "anchor_source": [
+        890,
+        691
+      ],
+      "components": [
+        {
+          "bbox": [
+            725,
+            481,
+            1046,
+            691
+          ],
+          "area": 41555
+        }
+      ]
+    },
+    {
+      "id": "p12",
+      "source": "actions",
+      "anchor_source": [
+        1220,
+        683
+      ],
+      "components": [
+        {
+          "bbox": [
+            1074,
+            469,
+            1359,
+            683
+          ],
+          "area": 42437
+        }
+      ]
+    },
+    {
+      "id": "p13",
+      "source": "actions",
+      "anchor_source": [
+        214,
+        902
+      ],
+      "components": [
+        {
+          "bbox": [
+            57,
+            692,
+            365,
+            902
+          ],
+          "area": 40485
+        }
+      ]
+    },
+    {
+      "id": "p14",
+      "source": "actions",
+      "anchor_source": [
+        551,
+        902
+      ],
+      "components": [
+        {
+          "bbox": [
+            397,
+            695,
+            695,
+            902
+          ],
+          "area": 42195
+        }
+      ]
+    },
+    {
+      "id": "p15",
+      "source": "actions",
+      "anchor_source": [
+        895,
+        913
+      ],
+      "components": [
+        {
+          "bbox": [
+            732,
+            719,
+            1050,
+            913
+          ],
+          "area": 37932
+        }
+      ]
+    },
+    {
+      "id": "p16",
+      "source": "actions",
+      "anchor_source": [
+        1227,
+        904
+      ],
+      "components": [
+        {
+          "bbox": [
+            1076,
+            695,
+            1360,
+            904
+          ],
+          "area": 39214
+        }
+      ]
+    },
+    {
+      "id": "p17",
+      "source": "actions",
+      "anchor_source": [
+        205,
+        1126
+      ],
+      "components": [
+        {
+          "bbox": [
+            36,
+            902,
+            357,
+            1126
+          ],
+          "area": 42220
+        }
+      ]
+    },
+    {
+      "id": "p18",
+      "source": "actions",
+      "anchor_source": [
+        549,
+        1125
+      ],
+      "components": [
+        {
+          "bbox": [
+            389,
+            927,
+            694,
+            1125
+          ],
+          "area": 38444
+        }
+      ]
+    },
+    {
+      "id": "p19",
+      "source": "actions",
+      "anchor_source": [
+        890,
+        1125
+      ],
+      "components": [
+        {
+          "bbox": [
+            725,
+            920,
+            1049,
+            1125
+          ],
+          "area": 40051
+        },
+        {
+          "bbox": [
+            734,
+            1023,
+            735,
+            1024
+          ],
+          "area": 1
+        }
+      ]
+    },
+    {
+      "id": "p20",
+      "source": "actions",
+      "anchor_source": [
+        1234,
+        1127
+      ],
+      "components": [
+        {
+          "bbox": [
+            1085,
+            916,
+            1364,
+            1127
+          ],
+          "area": 39863
+        }
+      ]
+    }
+  ],
+  "clips": {
+    "idle": {
+      "poses": [
+        "p01",
+        "p02",
+        "p03",
+        "p04"
+      ],
+      "fps": 6,
+      "windup_frame": 0,
+      "contact_frame": 2
+    },
+    "move": {
+      "poses": [
+        "p05",
+        "p06",
+        "p07",
+        "p08"
+      ],
+      "fps": 9,
+      "windup_frame": 0,
+      "contact_frame": 2
+    },
+    "attack": {
+      "poses": [
+        "p09",
+        "p10",
+        "p11",
+        "p12"
+      ],
+      "fps": 8,
+      "windup_frame": 1,
+      "contact_frame": 2
+    },
+    "special": {
+      "poses": [
+        "p13",
+        "p14",
+        "p15",
+        "p16"
+      ],
+      "fps": 8,
+      "windup_frame": 1,
+      "contact_frame": 2
+    },
+    "hit": {
+      "poses": [
+        "p17",
+        "p18",
+        "p19",
+        "p20"
+      ],
+      "fps": 10,
+      "windup_frame": 0,
+      "contact_frame": 2
+    }
+  },
+  "action_clips": {
+    "slam": "attack",
+    "slam@0": "attack",
+    "slam@1": "special"
+  }
+}

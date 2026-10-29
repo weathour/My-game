@@ -2,6 +2,15 @@ extends SceneTree
 
 const SESSION := preload("res://scripts/ui/chronicle/chronicle_session.gd")
 const SHELL := preload("res://scenes/chronicle/chronicle_shell.tscn")
+# The rehearsal keeps its original combat/route contract. Supply the current
+# read-only presentation interface here, without expanding runtime rehearsal code.
+class RehearsalPresentation extends "res://scripts/ui/chronicle/chronicle_session.gd":
+	func awaiting_battle_story() -> bool:
+		return false
+	func resource_max(_id: String, _stat: String) -> float:
+		return 100.0
+	func party_summary() -> Dictionary:
+		return preload("res://scripts/campaign/party_summary.gd").build(data, characters)
 var failures := 0
 var capture_dir := ""
 var shell: Control
@@ -76,10 +85,8 @@ func run() -> void:
 	state.abandon_battle()
 	expect(state.data.owned.size() == 1, "failed attempt grants nothing")
 	state.start_battle()
-	expect(state.complete_battle({}) and state.data.current == "S02", "post battle event before draw")
-	expect(state.data.pending.is_empty(), "draw waits for story")
-	expect(state.resolve_event(), "Emma story joins")
-	expect(state.data.owned.has("F11") and state.data.pending.picks == 2, "Emma does not consume draw")
+	expect(state.complete_battle({}) and state.data.current == "B01", "first victory opens reward before story")
+	expect(state.data.pending.picks == 2 and "F11" not in state.data.pending.candidates and not state.resolve_event(), "first draft excludes Emma and blocks story")
 	var candidates: Array = state.data.pending.candidates.duplicate()
 	state.select_card(candidates[0])
 	expect(state.save_slot("2"), "pending reward save")
@@ -88,6 +95,8 @@ func run() -> void:
 	expect(state.data.pending.candidates == candidates and state.data.pending.selected == [candidates[0]], "candidates AND selection stable")
 	state.select_card(candidates[1])
 	expect(state.claim_reward(), "initial cards claimed")
+	expect(state.data.current == "S02" and state.resolve_event(), "first reward leads to Emma story")
+	expect(state.data.owned.has("F11") and state.data.pending.is_empty(), "Emma joins separately after first draw")
 	expect(state.assign("F11", 0) and state.assign("F11", 1), "move auxiliary between slots")
 	expect(state.data.party == ["", "F11"], "no duplicate slot")
 	state.start_battle()
@@ -116,9 +125,9 @@ func run() -> void:
 	root.size = Vector2i(1280,720)
 	root.content_scale_size = Vector2i(1280,720)
 	shell = SHELL.instantiate()
-	# Keep the complete 36-node UI fixture independent of the two real battle stages.
-	# Real gameplay and keyboard integration are covered by chronicle_playable_ui_smoke.gd.
-	shell.session = SESSION.new()
+	# Exercise the retained rehearsal UI separately from formal gameplay, which
+	# is covered by chronicle_playable_ui_smoke.gd and the native party drag test.
+	shell.session = RehearsalPresentation.new()
 	shell.session.directory = "user://chronicle_ui_layout_test"
 	shell.battle_script = preload("res://scripts/ui/chronicle/chronicle_battle.gd")
 	root.add_child(shell)
@@ -131,7 +140,7 @@ func run() -> void:
 	await click("modal_confirm")
 	await click("route_forward")
 	await capture("02-opening-event-1280")
-	await click("event_continue")
+	await click("story_skip")
 	await click("route_forward")
 	await capture("03-solo-preparation-1280")
 	await click("prep_start")
@@ -150,14 +159,15 @@ func run() -> void:
 	await capture("05-pause-1280")
 	shell.finish_battle({})
 	await frames()
-	await click("route_forward")
-	await click("event_continue")
+	expect(shell.page == "reward" and not shell.session.data.owned.has("F11"), "rehearsal first victory opens reward")
 	await capture("06-first-reward-1280")
 	candidates = shell.session.data.pending.candidates.duplicate()
 	await click("reward_card_" + candidates[0])
 	await click("reward_card_" + candidates[1])
 	await capture("07-reward-selected-1280")
 	await click("reward_claim")
+	expect(shell.page == "event" and shell.session.data.current == "S02", "first claim opens Emma reader directly")
+	await click("story_skip")
 	shell.session.assign("F11",0)
 	for id in shell.session.data.owned:
 		if id not in ["JIA","F11"]:
@@ -227,7 +237,7 @@ func run() -> void:
 		if dimensions.x == 960:
 			shell.open_page("roster")
 			await click("character_F11")
-			expect(shell.page == "character", "compact character has its own page")
+			expect(shell.page == "roster" and is_instance_valid(shell.character_sheet), "compact character inspection preserves roster context")
 			expect(shell.find_child("character_owned_summary", true, false) != null, "three character roles share detail page")
 			await capture("20-character-960")
 			await click("character_back")

@@ -1,0 +1,36 @@
+{
+  "version": 1,
+  "id": "E07",
+  "generator": "built-in ImageGen",
+  "identity_master": "source/master-v1.png",
+  "references": [
+    {
+      "path": "design/jia-combat-20261027/source/dao-v1.png",
+      "sha256": "dc7720a430f1b03f61b87292b845f170f15a5a487c4a9810070fb27ad546099e",
+      "role": "pixel_drawing_and_animation_style_only"
+    }
+  ],
+  "source_versions": [
+    {
+      "path": "design/baimen-enemies-20261028/characters/E07/source/actions-v1.png",
+      "sha256": "8e05925c144c7579e58aed64c705d1e7f841636f9723215a35efed653d9b3728",
+      "selected": true,
+      "role": "pose_source",
+      "decision": "selected"
+    },
+    {
+      "path": "design/baimen-enemies-20261028/characters/E07/source/master-v1.png",
+      "sha256": "ec4c2e3c5efb7027d6e6699b273f7052a0161f0a100f65763d177f368f8b8cf6",
+      "selected": true,
+      "role": "identity_master",
+      "decision": "selected"
+    }
+  ],
+  "prompts": [
+    "prompts/actions-v1.txt",
+    "prompts/master-v1.txt"
+  ],
+  "review_notes": "Viewed tall pennant official master and all20poses. Narrow official body, extra-tall bent pennant and separate hanging bronze tokens retained. Body from helmet y125 tofeet313 is188px; flagstaff/pennant excluded from body calibration, kept complete in source parts. Rows idle/walk/short arm swipe/command/hit. Command contact frame2 turns the staff horizontal to RIGHT. Actual connected region selection preserves each staff and dangling tokens; all fixed scale and foot anchors.",
+  "export": "scripts/tools/import_baimen_enemy_art.lua",
+  "pixels_policy": "ImageGen-authored; Pillow/scipy read-only component measurements and QA; Aseprite extraction/registration/palette/export."
+}

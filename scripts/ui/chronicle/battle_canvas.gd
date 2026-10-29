@@ -1,9 +1,12 @@
 extends Control
 ## Scene/animation adapter. No Player, enemy AI, collision bodies, or save dependencies.
+const ENEMY_EFFECTS := preload("res://scripts/ui/chronicle/enemy_battle_effects.gd")
+const THREATS := preload("res://scripts/ui/chronicle/enemy_threat_view.gd")
 const ART := preload("res://scripts/ui/chronicle/battle_art.gd")
 const SPACE := preload("res://scripts/battle/battle_space.gd")
 const DIRECTOR := preload("res://scripts/battle/stage_director.gd")
 const JIA_EFFECTS := preload("res://scripts/ui/chronicle/jia_effects.gd")
+const AUTHORED_EFFECTS := preload("res://scripts/ui/chronicle/authored_battle_effects.gd")
 var battle: RefCounted
 var stage_id := "B01"
 var actor_anchor: Node2D
@@ -18,7 +21,13 @@ var enemy_views: Dictionary = {}
 var effect_frames: Dictionary = {}
 var foreground: Foreground
 var jia_effects: RefCounted
+var authored_effects: RefCounted
 var last_seen_cast := 0
+var killed_views: Dictionary = {}
+var death_views: Array[Dictionary] = []
+var released_threats: Array[Dictionary] = []
+var opaque_bounds: Dictionary = {}
+var enemy_effects: RefCounted
 
 class Foreground:
 	extends Node2D
@@ -28,7 +37,9 @@ class Foreground:
 
 
 func _ready() -> void:
+	enemy_effects = ENEMY_EFFECTS.new()
 	jia_effects = JIA_EFFECTS.new()
+	authored_effects = AUTHORED_EFFECTS.new()
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
 	texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 	clip_contents = true
@@ -49,7 +60,12 @@ func _ready() -> void:
 
 func refresh(is_moving: bool) -> void:
 	if actors == null: return
+	if not battle.outcome.is_empty():
+		_clear_transients()
+	_update_transients()
 	moving = is_moving
+	authored_effects.sync(battle)
+	enemy_effects.sync(battle)
 	world_scale = minf(size.x / 1280.0, size.y / 720.0)
 	# Stable reference view over a larger world; UI overlays do not change zoom.
 	var wanted: Vector2 = size * Vector2(.5, .48) - battle.position * world_scale
@@ -78,14 +94,14 @@ func refresh(is_moving: bool) -> void:
 	for enemy in battle.enemies:
 		live[enemy.id] = true
 		if not enemy_views.has(enemy.id):
-			var visual: Node2D = ART.enemy(enemy.kind, stage_id).instantiate()
+			var visual: Node2D = ART.create_enemy(enemy, stage_id)
 			# Pixel-sheet hit bursts normally attach to SceneTree.current_scene.
 			# Here feedback stays under this arena and follows its pause/scale.
 			if visual.get("hit_sheet") != null: visual.set("hit_sheet", null)
 			var anchor := Node2D.new()
 			actors.add_child(anchor)
 			anchor.add_child(visual)
-			ART.fit_enemy(visual, enemy.kind, stage_id)
+			ART.fit_enemy_instance(visual, enemy, stage_id)
 			enemy_views[enemy.id] = {"node":visual, "anchor":anchor, "position":enemy.position, "hp":enemy.hp, "winding":false}
 
 		var entry: Dictionary = enemy_views[enemy.id]
@@ -94,33 +110,111 @@ func refresh(is_moving: bool) -> void:
 		entry.anchor.position = enemy.position
 		# Preserve the authored hit animation until its own lock expires.
 		if float(node.get("hit_lock_remaining") if node.get("hit_lock_remaining") != null else 0.0) <= 0:
-			node.set_moving(direction.length_squared() > .001, direction if direction.length_squared() > .001 else enemy.aim)
+			if node.has_method("set_moving"): node.set_moving(direction.length_squared() > .001, direction if direction.length_squared() > .001 else enemy.aim)
 		if enemy.hp < entry.hp and node.has_method("play_hit"): node.play_hit()
-		if enemy.windup > 0 and not entry.winding and node.has_method("play_cast"): node.play_cast()
+		if node.has_method("present"):
+			var presenter: RefCounted = enemy
+			if not enemy.targetable and enemy.parent_id > 0:
+				for source in battle.enemies:
+					if source.id == enemy.parent_id: presenter = source; break
+			node.present(presenter, battle.director.elapsed, battle.paused)
+		elif enemy.windup > 0 and not entry.winding and node.has_method("play_cast"): node.play_cast()
 		node.modulate = Color("acd8e9") if enemy.slow_time > 0 else ART.enemy_tint(enemy.kind, stage_id)
+		# Retain ground-based sorting, but reveal the controlled body behind tall enemies.
+		var player_body := Rect2(battle.position + Vector2(-18, -72), Vector2(36, 72))
+		var obscures_player: bool = enemy.position.y > battle.position.y and _body_rect(node, enemy.position).intersects(player_body)
+		node.modulate.a = .42 if obscures_player else .78 if not enemy.targetable else 1.0
+		entry["obscures_player"] = obscures_player
 		entry.position = enemy.position
 		entry.hp = enemy.hp
 		entry.winding = enemy.windup > 0
 	for key in enemy_views.keys():
 		if not live.has(key):
 			var node: Node2D = enemy_views[key].anchor
-			actors.remove_child(node)
-			node.queue_free()
+			if killed_views.has(key) and battle.outcome.is_empty():
+				death_views.append({"node":node, "start":battle.director.elapsed})
+			else:
+				actors.remove_child(node)
+				node.queue_free()
 			enemy_views.erase(key)
+	killed_views.clear()
 	queue_redraw()
 	foreground.queue_redraw()
+
+func _body_rect(node: Node2D, point: Vector2) -> Rect2:
+	var sprite = node.get("sprite")
+	if not (sprite is AnimatedSprite2D or sprite is Sprite2D): return Rect2(point, Vector2.ZERO)
+	var texture: Texture2D
+	var region := Rect2i()
+	if sprite is AnimatedSprite2D:
+		texture = sprite.sprite_frames.get_frame_texture(sprite.animation, sprite.frame)
+	elif sprite.texture != null:
+		texture = sprite.texture
+		var cell: Vector2i = Vector2i(texture.get_size()) / Vector2i(sprite.hframes, sprite.vframes)
+		region = Rect2i(Vector2i(sprite.frame % sprite.hframes, sprite.frame / sprite.hframes) * cell, cell)
+	if texture == null: return Rect2(point, Vector2.ZERO)
+	var key := str(texture.get_instance_id()) + ":" + str(region)
+	if not opaque_bounds.has(key):
+		var pixels := texture.get_image()
+		if region.has_area(): pixels = pixels.get_region(region)
+		opaque_bounds[key] = pixels.get_used_rect()
+	var dimensions: Vector2 = Vector2(region.size) if region.has_area() else texture.get_size()
+	var bounds := Rect2(opaque_bounds[key])
+	bounds.position += sprite.offset - dimensions * .5
+	if sprite.flip_h: bounds.position.x = -bounds.end.x
+	return Transform2D(0, point) * node.transform * sprite.transform * bounds
+
+func consume_events(events: Array) -> void:
+	enemy_effects.consume(events, battle)
+	for event in events:
+		if event.kind == "kill": killed_views[int(event.id)] = true
+		if event.kind == "enemy_release" and event.has("geometry"):
+			var geometry: Dictionary = event.geometry.duplicate(true)
+			if enemy_views.has(int(event.id)):
+				var actor: Node2D = enemy_views[int(event.id)].node
+				if actor.has_method("play_release"): actor.play_release(geometry, battle.director.elapsed)
+			if str(geometry.get("action_id", "")) == "collaboration":
+				for child in battle.enemies:
+					if child.parent_id == int(event.id) and not child.targetable and enemy_views.has(child.id):
+						var apparition: Node2D = enemy_views[child.id].node
+						if apparition.has_method("play_release"): apparition.play_release(geometry, battle.director.elapsed)
+			geometry["view_until"] = battle.director.elapsed + .18
+			released_threats.append(geometry)
+
+func _update_transients() -> void:
+	for index in range(death_views.size() - 1, -1, -1):
+		var entry: Dictionary = death_views[index]
+		var elapsed: float = battle.director.elapsed - entry.start
+		entry.node.modulate.a = clampf(1 - elapsed / .3, 0, 1)
+		if elapsed >= .3:
+			entry.node.queue_free()
+			death_views.remove_at(index)
+	for index in range(released_threats.size() - 1, -1, -1):
+		if battle.director.elapsed >= released_threats[index].view_until: released_threats.remove_at(index)
+
+func _clear_transients() -> void:
+	for entry in death_views: entry.node.queue_free()
+	death_views.clear()
+	released_threats.clear()
+	killed_views.clear()
 
 func _present_casts() -> void:
 	var selected: Dictionary = {}
 	for effect in battle.effects:
+		if effect.kind == "impact": continue
 		if int(effect.get("cast", 0)) <= last_seen_cast: continue
 		if effect.get("source", "") != actor_kind or not effect.get("direct", false): continue
 		if selected.is_empty() or effect.color == "manual": selected = effect
 	last_seen_cast = battle.cast_serial
-	if not selected.is_empty() and actor_visual.has_method("play_attack"):
-		actor_visual.play_attack(selected.direction, selected.color == "manual")
+	if not selected.is_empty():
+		if actor_visual.has_method("present_cast"):
+			actor_visual.present_cast(selected)
+		elif actor_visual.has_method("play_attack"):
+			actor_visual.play_attack(selected.direction, selected.color == "manual")
 
 func _draw_authored_effect(painter: Node2D, effect: Dictionary) -> void:
+	# New enemy releases use their actual descriptor, rather than a misleading generic full disc.
+	if effect.get("hostile", false) and not str(effect.get("visual_id", "")).is_empty(): return
 	var color := Color("da7753") if effect.get("hostile", false) else Color("92cbe0") if effect.get("color") == "support" else Color.WHITE
 	painter.draw_set_transform(origin, 0, Vector2.ONE * world_scale)
 	if effect.kind == "line":
@@ -165,14 +259,11 @@ func _draw() -> void:
 		draw_colored_polygon(PackedVector2Array([gem.position + Vector2(0,-5), gem.position + Vector2(4,0), gem.position + Vector2(0,5), gem.position + Vector2(-4,0)]), Color("a5d4ce"))
 	for enemy in battle.enemies:
 		var point: Vector2 = enemy.position
-		if enemy.windup > 0:
-			var warning := Color(0.78,0.28,0.16,0.65)
-			if enemy.attack == "charge": draw_line(point, point + enemy.aim * 240, warning, enemy.radius * 1.6, true)
-			elif enemy.attack == "nova":
-				draw_circle(point, enemy.blast_radius, Color(warning, .12))
-				draw_arc(point, enemy.blast_radius, 0, TAU, 48, warning, 3, true)
-			elif enemy.attack in ["shot", "fan"]: draw_line(point, point + enemy.aim * 160, warning, 3, true)
-			else: draw_arc(point, enemy.radius + 32, 0, TAU, 32, warning, 3, true)
+		# Foot marks expose the actual hurt radius independently of tall combat art.
+		if enemy.targetable:
+			draw_arc(point, enemy.radius, 0, TAU, 32, Color("ad8b68", .50), 1, true)
+		if enemy.rank in ["heavy", "field_elite", "boss"]:
+			draw_circle(point, 3, Color("e7ca9b"))
 		if enemy.id == battle.target_id: draw_arc(point, enemy.radius + 4, 0.3, 2.8, 16, Color("e3dcac"), 1.5, true)
 	draw_set_transform(origin, 0, Vector2.ONE * world_scale)
 	draw_arc(battle.position, 20, 0, TAU, 32, Color("e0cf9a"), 2, true)
@@ -181,19 +272,52 @@ func _draw() -> void:
 func draw_foreground(painter: Node2D) -> void:
 	if battle == null: return
 	painter.draw_set_transform(origin, 0, Vector2.ONE * world_scale)
+	enemy_effects.draw(painter, battle)
+	# The controlled ground marker remains above bodies without changing world y sorting.
+	painter.draw_arc(battle.position, 20, 0, TAU, 32, Color("f1ebbd"), 2, true)
+	painter.draw_line(battle.position + Vector2(-5, 0), battle.position + Vector2(5, 0), Color("f1ebbd"), 2, true)
+	painter.draw_line(battle.position + Vector2(0, -5), battle.position + Vector2(0, 5), Color("f1ebbd"), 2, true)
+	# Persistent threats render over every body, so even the final Boss cannot conceal them.
+	for descriptor in battle.hazards:
+		if str(descriptor.get("phase", "active")) != "tell": THREATS.draw(painter, descriptor, true)
+	for descriptor in battle.telegraphs: THREATS.draw(painter, descriptor)
+	for descriptor in released_threats: THREATS.draw(painter, descriptor, true)
 	for enemy in battle.enemies:
-		if enemy.hp >= enemy.max_hp and enemy.kind not in ["boss", "card_elite", "equipment_elite"]: continue
+		_draw_enemy_state(painter, enemy)
+		if not enemy.targetable: continue
+		if enemy.hp >= enemy.max_hp and enemy.rank not in ["boss", "field_elite"] and enemy.kind not in ["boss", "card_elite", "equipment_elite"]: continue
+		var owner: RefCounted = enemy.damage_owner()
 		var pos: Vector2 = enemy.position + Vector2(-22, enemy.radius + 10)
 		painter.draw_rect(Rect2(pos, Vector2(44, 4)), Color("30352d"))
-		painter.draw_rect(Rect2(pos, Vector2(44 * enemy.hp / enemy.max_hp, 4)), Color("bc7563"))
+		painter.draw_rect(Rect2(pos, Vector2(44 * owner.hp / maxf(1, owner.max_hp), 4)), Color("bc7563"))
 	for p in battle.projectiles:
+		if enemy_effects.draw_projectile(painter, p, battle.director.elapsed, origin, world_scale): continue
+		if authored_effects.draw_projectile(painter, p, origin, world_scale): continue
 		var color := Color("ed957d") if p.hostile else Color("a9ddff") if not p.context.direct else Color.WHITE
 		var texture: Texture2D = ART.BOLTS[int(battle.director.elapsed * 14) % ART.BOLTS.size()]
 		painter.draw_set_transform(origin + p.position * world_scale, p.velocity.angle(), Vector2.ONE * world_scale)
 		painter.draw_texture_rect(texture, Rect2(-16, -8, 32, 16), false, color)
 	for effect in battle.effects:
+		if not AUTHORED_EFFECTS.style(effect).is_empty(): continue
 		_draw_authored_effect(painter, effect)
+	authored_effects.draw(painter, battle, origin, world_scale)
 	_draw_minimap(painter)
+
+func _draw_enemy_state(painter: Node2D, enemy: RefCounted) -> void:
+	var point: Vector2 = enemy.position
+	if enemy.behavior_id == "E04":
+		var guarding: bool = enemy.guard_active and enemy.state != "recovery"
+		var angle: float = enemy.aim.angle()
+		painter.draw_arc(point, enemy.radius + 7, angle - PI * .45, angle + PI * .45, 20, Color("b4dae2") if guarding else Color("7a796b", .45), 4 if guarding else 1, true)
+	if enemy.command_remaining > 0:
+		var flag := point + Vector2(0, -enemy.body_height - 8)
+		painter.draw_line(flag, flag + Vector2(0, -11), Color("f5cb71"), 2, true)
+		painter.draw_colored_polygon(PackedVector2Array([flag + Vector2(0,-11), flag + Vector2(9,-8), flag + Vector2(0,-5)]), Color("f5cb71"))
+	if enemy.protection_remaining > 0:
+		for child in battle.enemies:
+			if child.parent_id == enemy.id and child.definition_id == "D01" and not child.dead and child.position.distance_to(point) <= 220:
+				painter.draw_line(point, child.position, Color("9bc9cb", .8), 2, true)
+				painter.draw_arc(point, enemy.radius + 5, 0, TAU, 32, Color("9bc9cb"), 2, true)
 
 func _draw_minimap(painter: Node2D) -> void:
 	painter.draw_set_transform(Vector2.ZERO)

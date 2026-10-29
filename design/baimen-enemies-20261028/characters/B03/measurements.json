@@ -1,0 +1,575 @@
+{
+  "version": 1,
+  "id": "B03",
+  "review_status": "accepted_for_export",
+  "review_notes": "Master and both20pose revisions plus separate4pose charge strip individually viewed. V1 rejected identity/backview and connected sword-neighbour. V2 accepted idle/move/sweep/hit sixteen bodies, rejected row4 connected two actors. Four complete supplemental charge poses generated separately from same master, measured from true CCs with independent upright source calibration; no grid cuts, weapon tails intact. Three masks and single ring saber present in every accepted pose. Manual floor anchors fixed perpose; no individual height stretching.",
+  "prompts": [
+    "source/actions-v1-prompt.txt",
+    "source/actions-v2-prompt.txt",
+    "source/charge-v1-prompt.txt",
+    "source/master-v1-prompt.txt"
+  ],
+  "canvas": {
+    "size": [
+      512,
+      512
+    ],
+    "anchor": [
+      256,
+      450
+    ],
+    "body_height_px": 216
+  },
+  "sources": {
+    "actions": {
+      "path": "source/actions-v2.png",
+      "size": [
+        1239,
+        1269
+      ],
+      "sha256": "ce3769eee3eec04eda37e4a2a15bdf17f44e64466fe1fb2f489c99f7ba3118a4",
+      "standing_body_height": 237
+    },
+    "charge": {
+      "path": "source/charge-v1.png",
+      "size": [
+        2172,
+        724
+      ],
+      "sha256": "49c6b4ec43137ce53b2f382f04e8c8e503b7630d256392fd9e59b1ed1cde054e",
+      "standing_body_height": 358
+    }
+  },
+  "portrait": {
+    "path": "source/master-v1.png",
+    "size": [
+      1434,
+      1097
+    ],
+    "sha256": "abbb3ca7054197dd4dfcc87d7f18f3210885bfb149d261de6d7441e5c536faf4"
+  },
+  "poses": [
+    {
+      "id": "p01",
+      "source": "actions",
+      "anchor_source": [
+        185,
+        254
+      ],
+      "components": [
+        {
+          "bbox": [
+            40,
+            17,
+            297,
+            254
+          ],
+          "area": 40140
+        }
+      ]
+    },
+    {
+      "id": "p02",
+      "source": "actions",
+      "anchor_source": [
+        483,
+        254
+      ],
+      "components": [
+        {
+          "bbox": [
+            335,
+            17,
+            605,
+            254
+          ],
+          "area": 41210
+        },
+        {
+          "bbox": [
+            477,
+            232,
+            478,
+            233
+          ],
+          "area": 1
+        }
+      ]
+    },
+    {
+      "id": "p03",
+      "source": "actions",
+      "anchor_source": [
+        800,
+        254
+      ],
+      "components": [
+        {
+          "bbox": [
+            642,
+            16,
+            922,
+            254
+          ],
+          "area": 42472
+        }
+      ]
+    },
+    {
+      "id": "p04",
+      "source": "actions",
+      "anchor_source": [
+        1100,
+        254
+      ],
+      "components": [
+        {
+          "bbox": [
+            950,
+            19,
+            1211,
+            254
+          ],
+          "area": 39570
+        },
+        {
+          "bbox": [
+            1195,
+            104,
+            1196,
+            105
+          ],
+          "area": 1
+        },
+        {
+          "bbox": [
+            1013,
+            201,
+            1014,
+            202
+          ],
+          "area": 1
+        }
+      ]
+    },
+    {
+      "id": "p05",
+      "source": "actions",
+      "anchor_source": [
+        180,
+        498
+      ],
+      "components": [
+        {
+          "bbox": [
+            32,
+            270,
+            309,
+            498
+          ],
+          "area": 39144
+        },
+        {
+          "bbox": [
+            119,
+            308,
+            120,
+            310
+          ],
+          "area": 2
+        }
+      ]
+    },
+    {
+      "id": "p06",
+      "source": "actions",
+      "anchor_source": [
+        483,
+        497
+      ],
+      "components": [
+        {
+          "bbox": [
+            337,
+            270,
+            615,
+            497
+          ],
+          "area": 39173
+        },
+        {
+          "bbox": [
+            383,
+            372,
+            384,
+            373
+          ],
+          "area": 1
+        }
+      ]
+    },
+    {
+      "id": "p07",
+      "source": "actions",
+      "anchor_source": [
+        806,
+        500
+      ],
+      "components": [
+        {
+          "bbox": [
+            664,
+            270,
+            937,
+            500
+          ],
+          "area": 36562
+        }
+      ]
+    },
+    {
+      "id": "p08",
+      "source": "actions",
+      "anchor_source": [
+        1104,
+        500
+      ],
+      "components": [
+        {
+          "bbox": [
+            961,
+            272,
+            1219,
+            500
+          ],
+          "area": 35857
+        },
+        {
+          "bbox": [
+            983,
+            423,
+            984,
+            424
+          ],
+          "area": 1
+        }
+      ]
+    },
+    {
+      "id": "p09",
+      "source": "actions",
+      "anchor_source": [
+        180,
+        750
+      ],
+      "components": [
+        {
+          "bbox": [
+            24,
+            514,
+            313,
+            750
+          ],
+          "area": 42625
+        }
+      ]
+    },
+    {
+      "id": "p10",
+      "source": "actions",
+      "anchor_source": [
+        482,
+        749
+      ],
+      "components": [
+        {
+          "bbox": [
+            349,
+            530,
+            611,
+            749
+          ],
+          "area": 35711
+        }
+      ]
+    },
+    {
+      "id": "p11",
+      "source": "actions",
+      "anchor_source": [
+        790,
+        750
+      ],
+      "components": [
+        {
+          "bbox": [
+            637,
+            539,
+            1016,
+            750
+          ],
+          "area": 36434
+        }
+      ]
+    },
+    {
+      "id": "p12",
+      "source": "actions",
+      "anchor_source": [
+        1110,
+        750
+      ],
+      "components": [
+        {
+          "bbox": [
+            958,
+            531,
+            1223,
+            750
+          ],
+          "area": 34739
+        }
+      ]
+    },
+    {
+      "id": "p13",
+      "source": "charge",
+      "anchor_source": [
+        245,
+        560
+      ],
+      "components": [
+        {
+          "bbox": [
+            19,
+            202,
+            443,
+            560
+          ],
+          "area": 98464
+        }
+      ]
+    },
+    {
+      "id": "p14",
+      "source": "charge",
+      "anchor_source": [
+        790,
+        560
+      ],
+      "components": [
+        {
+          "bbox": [
+            574,
+            244,
+            981,
+            560
+          ],
+          "area": 81542
+        }
+      ]
+    },
+    {
+      "id": "p15",
+      "source": "charge",
+      "anchor_source": [
+        1340,
+        562
+      ],
+      "components": [
+        {
+          "bbox": [
+            1077,
+            216,
+            1687,
+            562
+          ],
+          "area": 93756
+        },
+        {
+          "bbox": [
+            1191,
+            388,
+            1192,
+            389
+          ],
+          "area": 1
+        },
+        {
+          "bbox": [
+            1453,
+            449,
+            1454,
+            452
+          ],
+          "area": 3
+        }
+      ]
+    },
+    {
+      "id": "p16",
+      "source": "charge",
+      "anchor_source": [
+        1940,
+        560
+      ],
+      "components": [
+        {
+          "bbox": [
+            1741,
+            246,
+            2141,
+            560
+          ],
+          "area": 82335
+        }
+      ]
+    },
+    {
+      "id": "p17",
+      "source": "actions",
+      "anchor_source": [
+        172,
+        1233
+      ],
+      "components": [
+        {
+          "bbox": [
+            40,
+            1000,
+            309,
+            1233
+          ],
+          "area": 39206
+        },
+        {
+          "bbox": [
+            54,
+            1077,
+            55,
+            1078
+          ],
+          "area": 1
+        }
+      ]
+    },
+    {
+      "id": "p18",
+      "source": "actions",
+      "anchor_source": [
+        485,
+        1234
+      ],
+      "components": [
+        {
+          "bbox": [
+            331,
+            1027,
+            622,
+            1234
+          ],
+          "area": 34845
+        }
+      ]
+    },
+    {
+      "id": "p19",
+      "source": "actions",
+      "anchor_source": [
+        779,
+        1234
+      ],
+      "components": [
+        {
+          "bbox": [
+            626,
+            1010,
+            902,
+            1234
+          ],
+          "area": 36639
+        }
+      ]
+    },
+    {
+      "id": "p20",
+      "source": "actions",
+      "anchor_source": [
+        1090,
+        1234
+      ],
+      "components": [
+        {
+          "bbox": [
+            951,
+            1007,
+            1216,
+            1234
+          ],
+          "area": 38442
+        }
+      ]
+    }
+  ],
+  "clips": {
+    "idle": {
+      "poses": [
+        "p01",
+        "p02",
+        "p03",
+        "p04"
+      ],
+      "fps": 6,
+      "windup_frame": 0,
+      "contact_frame": 2
+    },
+    "move": {
+      "poses": [
+        "p05",
+        "p06",
+        "p07",
+        "p08"
+      ],
+      "fps": 9,
+      "windup_frame": 0,
+      "contact_frame": 2
+    },
+    "attack": {
+      "poses": [
+        "p09",
+        "p10",
+        "p11",
+        "p12"
+      ],
+      "fps": 8,
+      "windup_frame": 1,
+      "contact_frame": 2
+    },
+    "special": {
+      "poses": [
+        "p13",
+        "p14",
+        "p15",
+        "p16"
+      ],
+      "fps": 9,
+      "windup_frame": 1,
+      "contact_frame": 2
+    },
+    "hit": {
+      "poses": [
+        "p17",
+        "p18",
+        "p19",
+        "p20"
+      ],
+      "fps": 10,
+      "windup_frame": 0,
+      "contact_frame": 2
+    }
+  },
+  "action_clips": {
+    "swipe": "attack",
+    "charge": "special"
+  }
+}

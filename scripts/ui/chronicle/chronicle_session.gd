@@ -137,7 +137,7 @@ func complete_battle(result: Dictionary) -> bool:
 				break
 	var extra: bool = result.get("card_elite", false)
 	in_battle = false
-	if id in ["B01", "B18"]:
+	if id == "B18":
 		data.deferred_reward = {"id":id, "extra":extra}
 		advance(id)
 	else:

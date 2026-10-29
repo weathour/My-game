@@ -100,6 +100,34 @@ static func compact_button(button: Button) -> void:
 	button.add_theme_font_size_override("font_size", 14)
 	button.custom_minimum_size.y = 32
 
+static func quiet_button(value: String, action: Callable, selected: bool = false) -> Button:
+	## Context navigation and local tabs yield visual priority to the page artwork.
+	var result := Button.new()
+	result.text = value
+	result.custom_minimum_size.y = 38
+	result.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+	result.pressed.connect(action)
+	result.add_theme_color_override("font_color", LIGHT if selected else INK)
+	result.add_theme_color_override("font_hover_color", LIGHT)
+	result.add_theme_color_override("font_focus_color", LIGHT)
+	result.add_theme_color_override("font_pressed_color", GOLD)
+	result.add_theme_color_override("font_disabled_color", MUTED)
+	for key in ["normal", "hover", "pressed", "disabled"]:
+		var active: bool = selected or key == "pressed"
+		var fill := Color("2a352c") if active else Color("243129") if key == "hover" else Color(0, 0, 0, 0)
+		var surface := box(fill, Color.TRANSPARENT, 12)
+		surface.set_border_width_all(0)
+		surface.content_margin_top = 6
+		surface.content_margin_bottom = 6
+		if active:
+			surface.border_color = GOLD
+			surface.border_width_bottom = 2
+		result.add_theme_stylebox_override(key, surface)
+	var focus := box(Color.TRANSPARENT, GOLD, 0)
+	focus.set_border_width_all(1)
+	result.add_theme_stylebox_override("focus", focus)
+	return result
+
 static func panel(parent: Node, dark: bool = false, pad: float = 18, decorated: bool = true) -> PanelContainer:
 	var result := PanelContainer.new()
 	result.add_theme_stylebox_override("panel", box(DARK if dark else PAPER, BORDER, pad))

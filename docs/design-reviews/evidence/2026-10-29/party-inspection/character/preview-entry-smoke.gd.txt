@@ -1,0 +1,48 @@
+extends SceneTree
+const SHELL := preload("res://scenes/chronicle/chronicle_shell.tscn")
+const C := preload("res://scripts/content/combat_catalog.gd")
+var viewport: SubViewport
+var shell: Control
+var checks := 0
+var failures := 0
+const EVIDENCE := "docs/design-reviews/evidence/2026-10-29/party-inspection/character"
+func _init(): call_deferred("run")
+func frames():
+	for i in 8: await process_frame
+func expect(ok: bool, message: String):
+	checks += 1
+	if not ok: failures += 1;push_error(message)
+func click(button: Button):
+	var point := button.get_global_rect().get_center()
+	var motion := InputEventMouseMotion.new();motion.position = point;viewport.push_input(motion)
+	var event := InputEventMouseButton.new();event.position = point;event.button_index = MOUSE_BUTTON_LEFT;event.pressed = true
+	viewport.push_input(event);await process_frame
+	event = event.duplicate();event.pressed = false;viewport.push_input(event);await frames()
+func run():
+	expect(ProjectSettings.globalize_path("user://").begins_with("/tmp/"),"isolated storage")
+	viewport=SubViewport.new();viewport.size=Vector2i(1280,720);viewport.render_target_update_mode=SubViewport.UPDATE_ALWAYS;root.add_child(viewport)
+	shell=SHELL.instantiate();shell.session.directory="user://preview-entry-"+str(Time.get_ticks_usec());viewport.add_child(shell);await frames()
+	shell.session.data.owned.F03=C.record("F03",3);shell.session.data.party=["F03",""];shell.selected_character="F03";shell.open_page("roster");await frames()
+	var before: Dictionary=shell.session.data.duplicate(true)
+	var rng_state: int=shell.session.reward_rng.state
+	for dimensions in [Vector2i(1280,720),Vector2i(1920,1080)]:
+		viewport.size=dimensions;await frames()
+		var panel:=shell.find_child("character_preview_panel",true,false) as Control
+		var heading:=panel.find_child("character_preview_heading",true,false) as Control
+		var name_label:=panel.find_child("character_preview_name",true,false) as Label
+		var details:=panel.find_child("character_preview_expand",true,false) as Button
+		expect(panel.find_children("*","BaseButton",true,false).size()==1 and details.text=="详情","single preview entry "+str(dimensions))
+		expect(panel.find_child("character_preview_stats",true,false)==null,"duplicate growth entry removed")
+		expect(name_label.get_parent()==details.get_parent() and details.position.x>name_label.position.x,"entry right of name")
+		expect(Rect2(Vector2.ZERO,Vector2(dimensions)).encloses(panel.get_global_rect()) and panel.get_global_rect().encloses(heading.get_global_rect()),"preview and header fully visible "+str(dimensions))
+		if DisplayServer.get_name()!="headless":
+			await RenderingServer.frame_post_draw
+			viewport.get_texture().get_image().save_png(EVIDENCE+"/screens/preview-single-entry-"+str(dimensions.x)+".png")
+		await click(details)
+		expect(is_instance_valid(shell.character_sheet) and shell.character_sheet.active_tab=="abilities" and shell.character_sheet.character_id=="F03" and shell.page=="roster","real click opens abilities in context")
+		await click(shell.character_sheet.find_child("character_back",true,false))
+		expect(not is_instance_valid(shell.character_sheet) and shell.page=="roster","explicit close returns to same page")
+	expect(shell.session.data==before and shell.session.reward_rng.state==rng_state,"read-only campaign and RNG")
+	shell.queue_free();await frames();viewport.queue_free();await frames()
+	print("CHARACTER_PREVIEW_ENTRY_SMOKE ","PASS" if failures==0 else "FAIL"," checks=",checks," failures=",failures)
+	quit(0 if failures==0 else 1)

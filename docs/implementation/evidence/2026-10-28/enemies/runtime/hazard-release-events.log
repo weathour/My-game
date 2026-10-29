@@ -1,0 +1,13 @@
+Hazard release presentation interface; no damage, lifetime, cooldown or admission changes.
+At tell expiry an enemy_hazard_release event contains id/action_serial and deep-copied active geometry.
+Descriptor attack_step records the action index before commitment for optional left/right animation clips.
+Tests: both echo and collaboration_array release once at impact, carry independent active geometry, never repeat, and emit no release on source cancellation.
+
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+BAIMEN_ENEMY_RUNTIME_SMOKE PASS checks=653 failures=0
+
+SHA256:
+873536554363394e974d5a2f33313b4a0bdfa37cf30b1b870ee00a1ca81d8912  scripts/battle/enemy_system.gd
+7c3d9b9f923cd8f83eae7f69ac6217f177e923cf3844d6800fb7d017e45ced38  scripts/battle/enemy_geometry.gd
+c7de2eef5b65fda1ff8be878ca7937b019ef5d3bfc57e044eee4b624b4e902eb  scripts/tests/baimen_enemy_runtime_smoke.gd

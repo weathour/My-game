@@ -1,0 +1,393 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Reviewed Baimen enemy raster extraction measurements v1",
+  "type": "object",
+  "required": [
+    "version",
+    "id",
+    "review_status",
+    "review_notes",
+    "prompts",
+    "canvas",
+    "sources",
+    "portrait",
+    "poses",
+    "clips"
+  ],
+  "properties": {
+    "version": {
+      "const": 1
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[A-Z0-9_]+$"
+    },
+    "review_status": {
+      "const": "accepted_for_export"
+    },
+    "review_notes": {
+      "type": "string",
+      "minLength": 1
+    },
+    "prompts": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string"
+      }
+    },
+    "canvas": {
+      "type": "object",
+      "required": [
+        "size",
+        "anchor",
+        "body_height_px"
+      ],
+      "properties": {
+        "size": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": {
+            "type": "number"
+          }
+        },
+        "anchor": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": {
+            "type": "number"
+          }
+        },
+        "body_height_px": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        }
+      }
+    },
+    "sources": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": "object",
+        "required": [
+          "path",
+          "size",
+          "sha256",
+          "standing_body_height"
+        ],
+        "properties": {
+          "path": {
+            "type": "string"
+          },
+          "size": {
+            "type": "array",
+            "minItems": 2,
+            "maxItems": 2,
+            "items": {
+              "type": "number"
+            }
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "standing_body_height": {
+            "type": "number",
+            "exclusiveMinimum": 0
+          }
+        }
+      }
+    },
+    "portrait": {
+      "type": "object",
+      "required": [
+        "path",
+        "size",
+        "sha256"
+      ],
+      "properties": {
+        "path": {
+          "type": "string"
+        },
+        "size": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": {
+            "type": "number"
+          }
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      }
+    },
+    "poses": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "source",
+          "anchor_source",
+          "components"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "source": {
+            "type": "string"
+          },
+          "anchor_source": {
+            "type": "array",
+            "minItems": 2,
+            "maxItems": 2,
+            "items": {
+              "type": "number"
+            }
+          },
+          "components": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "required": [
+                "bbox",
+                "area"
+              ],
+              "properties": {
+                "bbox": {
+                  "type": "array",
+                  "minItems": 4,
+                  "maxItems": 4,
+                  "items": {
+                    "type": "integer",
+                    "minimum": 0
+                  }
+                },
+                "area": {
+                  "type": "integer",
+                  "minimum": 1
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "clips": {
+      "type": "object",
+      "required": [
+        "idle",
+        "move",
+        "attack",
+        "special",
+        "hit"
+      ],
+      "properties": {
+        "idle": {
+          "type": "object",
+          "required": [
+            "poses",
+            "fps"
+          ],
+          "properties": {
+            "poses": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "string"
+              }
+            },
+            "fps": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "windup_frame": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "contact_frame": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "allow_repeated_frames": {
+              "type": "boolean"
+            }
+          }
+        },
+        "move": {
+          "type": "object",
+          "required": [
+            "poses",
+            "fps"
+          ],
+          "properties": {
+            "poses": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "string"
+              }
+            },
+            "fps": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "windup_frame": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "contact_frame": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "allow_repeated_frames": {
+              "type": "boolean"
+            }
+          }
+        },
+        "attack": {
+          "type": "object",
+          "required": [
+            "poses",
+            "fps"
+          ],
+          "properties": {
+            "poses": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "string"
+              }
+            },
+            "fps": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "windup_frame": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "contact_frame": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "allow_repeated_frames": {
+              "type": "boolean"
+            }
+          }
+        },
+        "special": {
+          "type": "object",
+          "required": [
+            "poses",
+            "fps"
+          ],
+          "properties": {
+            "poses": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "string"
+              }
+            },
+            "fps": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "windup_frame": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "contact_frame": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "allow_repeated_frames": {
+              "type": "boolean"
+            }
+          }
+        },
+        "hit": {
+          "type": "object",
+          "required": [
+            "poses",
+            "fps"
+          ],
+          "properties": {
+            "poses": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "string"
+              }
+            },
+            "fps": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "windup_frame": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "contact_frame": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "allow_repeated_frames": {
+              "type": "boolean"
+            }
+          }
+        }
+      },
+      "additionalProperties": {
+        "type": "object",
+        "required": [
+          "poses",
+          "fps"
+        ],
+        "properties": {
+          "poses": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string"
+            }
+          },
+          "fps": {
+            "type": "number",
+            "exclusiveMinimum": 0
+          },
+          "windup_frame": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "contact_frame": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "allow_repeated_frames": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "faces_left": {
+      "type": "boolean",
+      "default": false
+    },
+    "action_clips": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "default": {}
+    }
+  }
+}

@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://assets/players/baimen-women/women_visual.gd" id="1"]
+
+[node name="F02" type="Node2D"]
+texture_filter = 1
+script = ExtResource("1")
+character_id = "F02"
+attack_contact_frame = 2
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -80)

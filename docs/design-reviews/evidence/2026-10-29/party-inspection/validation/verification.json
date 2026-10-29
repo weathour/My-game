@@ -1,0 +1,259 @@
+{
+  "finalized_utc": "2026-10-29T06:25:02.235020+00:00",
+  "scope": "Drag formation, in-context character inspection and one preview entry next to the name",
+  "checks": {
+    "context_navigation": {
+      "status": "passed",
+      "log": "docs/design-reviews/evidence/2026-10-29/party-inspection/validation/chronicle_context_navigation_smoke.log",
+      "log_sha256": "f80f05472680072320c28274ac8cb5aaa3fd60d8beec5fa6a8a70a9e33059b4b",
+      "result": "CHRONICLE_CONTEXT_NAVIGATION_SMOKE PASS checks=239 failures=0",
+      "strict_log_validation": true
+    },
+    "ui_rehearsal": {
+      "status": "passed",
+      "log": "docs/design-reviews/evidence/2026-10-29/party-inspection/validation/chronicle_ui_smoke.log",
+      "log_sha256": "92b249034caf9f2504d59aef858af12a67115b3036c8c502e1a1e3eccadc25c7",
+      "result": "CHRONICLE_UI_SMOKE_OK",
+      "strict_log_validation": true
+    },
+    "reflow": {
+      "status": "passed",
+      "log": "docs/design-reviews/evidence/2026-10-29/party-inspection/validation/chronicle_reflow_visual_smoke.log",
+      "log_sha256": "c8782d8bdeeb73817345eb759b2e61f7c5654a1442bd94cc73a4a7c3d411d993",
+      "result": "CHRONICLE_REFLOW_VISUAL_SMOKE PASS",
+      "strict_log_validation": true
+    },
+    "character_gl": {
+      "status": "passed",
+      "log": "docs/design-reviews/evidence/2026-10-29/party-inspection/character/render.log",
+      "log_sha256": "c685c4a645667dbc511d0d62eaaee34031a53da3dfc080f675da0365c2944f53",
+      "result": "CHRONICLE_CHARACTER_PANELS_SMOKE PASS checks=362 failures=0",
+      "strict_log_validation": true
+    },
+    "character_headless": {
+      "status": "passed",
+      "log": "docs/design-reviews/evidence/2026-10-29/party-inspection/character/headless.log",
+      "log_sha256": "4aec0f04c34f296f5dedeed97771f3c9711e673167d38eb5a6c81c72f87ff7bb",
+      "result": "CHRONICLE_CHARACTER_PANELS_SMOKE PASS checks=362 failures=0",
+      "strict_log_validation": true
+    },
+    "character_profiles": {
+      "status": "passed",
+      "log": "docs/design-reviews/evidence/2026-10-29/party-inspection/character/profiles.log",
+      "log_sha256": "9a59b1881276b1daddcd848738e8687b2a715878e29b0d9ebbb0f54348073f89",
+      "result": "CHRONICLE_CHARACTER_PROFILES_SMOKE PASS checks=121 failures=0",
+      "strict_log_validation": true
+    },
+    "character_portraits": {
+      "status": "passed",
+      "log": "docs/design-reviews/evidence/2026-10-29/party-inspection/character/women-portraits.log",
+      "log_sha256": "6472c4e2426574abe0ef8061bb0884d5d96544d31c095f621f0b00f5f95eaed6",
+      "result": "BAIMEN_WOMEN_PORTRAITS_SMOKE PASS checks=525 failures=0",
+      "strict_log_validation": true
+    },
+    "single_preview_entry": {
+      "status": "passed",
+      "log": "docs/design-reviews/evidence/2026-10-29/party-inspection/character/preview-entry.log",
+      "log_sha256": "1c856df8c4648c03150c866c5b1126ef139a94d6cbb44169994a6dbd1b7414fd",
+      "result": "CHARACTER_PREVIEW_ENTRY_SMOKE PASS checks=14 failures=0",
+      "strict_log_validation": true
+    },
+    "party_gl": {
+      "status": "passed",
+      "log": "docs/design-reviews/evidence/2026-10-29/party-drag/logs/party-drag-render.log",
+      "log_sha256": "57e562061d26376d406f1a5bd1cbbcabdeb30e86c7251a6b8f787943acf05b7a",
+      "result": "CHRONICLE_PARTY_DRAG_SMOKE PASS checks=151 failures=0",
+      "strict_log_validation": true
+    },
+    "party_headless": {
+      "status": "passed",
+      "log": "docs/design-reviews/evidence/2026-10-29/party-drag/logs/party-drag-headless.log",
+      "log_sha256": "f9811441c0d5ae4a8d3126351c96a7e903a6ec243a9ed7c335646f49c1962e01",
+      "result": "CHRONICLE_PARTY_DRAG_SMOKE PASS checks=143 failures=0",
+      "strict_log_validation": true
+    },
+    "party_summary": {
+      "status": "passed",
+      "log": "docs/design-reviews/evidence/2026-10-29/party-drag/logs/party-summary-headless.log",
+      "log_sha256": "9dcaf6eddfad29e8032f83f48c82b0f42a63a3f1e63795237cb5dc1e55a666f1",
+      "result": "CHRONICLE_PARTY_SUMMARY_SMOKE PASS checks=155 failures=0",
+      "strict_log_validation": true
+    },
+    "playable_ui": {
+      "status": "passed",
+      "log": "docs/design-reviews/evidence/2026-10-29/party-drag/logs/playable-ui-headless.log",
+      "log_sha256": "fa2494ef35f647f36acaa0321272f30c4b20c261b2016286c4081c9113ab2ad5",
+      "result": "CHRONICLE_PLAYABLE_UI_SMOKE PASS failures=0",
+      "strict_log_validation": true
+    }
+  },
+  "required_startup": {
+    "exit_code": 0,
+    "clean_log": true,
+    "log": "docs/design-reviews/evidence/2026-10-29/party-inspection/validation/startup.log"
+  },
+  "source_sha256_at_finalization": {
+    "assets/data/chronicle/character_profiles.json": "2369b99beacfb03d4fe7d8458f42223481692c16ed6512c3899fac658bc7e0cb",
+    "assets/data/chronicle/characters.json": "17ecce6580fb29a5d069a3dc7ca0d391f216293306caf06994cd8c8d4c703066",
+    "project.godot": "3b8c560e5477ae93731b5612ddeb7dfeb8069692ae824222b7487231e9a9db1a",
+    "scenes/chronicle/chronicle_shell.tscn": "317c3340f192461bf4a7ea414b41f0526217426152869ef22d980466c4482e25",
+    "scripts/campaign/campaign_service.gd": "a1cd0a209363c0cfbc50565f9635022061b2033eaefe05ebf57ccbd14451fd32",
+    "scripts/tests/baimen_women_portraits_smoke.gd": "0e1a6ba15f1bb1bb422cc439a9bba8735f3a85a34b6242610942a03164d1b241",
+    "scripts/tests/check_smoke_log.py": "99986c8a62512aa18f29a6937039221ff2ed7cf6103267f79389c2624a2cf0e0",
+    "scripts/tests/chronicle_character_panels_smoke.gd": "72ab2f9e1cb8514478b409240359d29f39b80508faf2ba95d345fdae04d08d40",
+    "scripts/tests/chronicle_character_profiles_smoke.gd": "f97d6932b067264db1f868d161e0239255b36da5b0fee05a025c6aaad1506cc8",
+    "scripts/tests/chronicle_context_navigation_smoke.gd": "72dfc4e5df6d3309e7b921ed166af101bab7eb5f825734f0f9ff5e1c5f17fe00",
+    "scripts/tests/chronicle_party_drag_smoke.gd": "61c2e60f7e24e30a35cb06a05f06a63c0eeaa1780534619f9269ebc71b2e0899",
+    "scripts/tests/chronicle_playable_ui_smoke.gd": "5a12fab0c1a9a800c255278a6c83f4b66c4ed6b656a80be5aeb7053b84171e9f",
+    "scripts/tests/chronicle_reflow_visual_smoke.gd": "e4c398b9dda097792619fa7d5a6986fa8329b070655225b5b669cc80b623ef46",
+    "scripts/tests/chronicle_ui_smoke.gd": "368ca7c5433c940f43e908f8491db4736fc27e4f95b981dc0a5c9812b74cce56",
+    "scripts/ui/chronicle/character_detail_projection.gd": "fcc175f5b2807d094d385128289aa4f4bc8890a3912cbb12c744239c637d6b2f",
+    "scripts/ui/chronicle/chronicle_campaign_chrome.gd": "ccead389dada6f0f8746055e94e83dce786ecd8521124510b1a36549011e6ec8",
+    "scripts/ui/chronicle/chronicle_character_sheet.gd": "daa16b3deb1993658bb73438c3f82502d7572fd0fafe12aba6474caab2ae41d3",
+    "scripts/ui/chronicle/chronicle_party_drag_card.gd": "b8a81aefef363fd747de79ed483a06ab3fca0334fb5f8b10c2093322a615bdfb",
+    "scripts/ui/chronicle/chronicle_party_drop_zone.gd": "cffd17ac866d01b9b32f64b60071acc1d05185523fc8299e03ec6dccbce5744d",
+    "scripts/ui/chronicle/chronicle_party_pages.gd": "f47a5342041f57be5cee728f2e49d8b11520687901bf5b2e9ac7dddc4a185294",
+    "scripts/ui/chronicle/chronicle_party_summary.gd": "e8119387d84da5c1c7132f73c134b0e357a64d7c608a7c4dd4fee72187a60b0c",
+    "scripts/ui/chronicle/chronicle_shell.gd": "2e7dc98adc2e1a9d404ba0ae5c1141d9347d1602011c9df0446b7eb8c29fd159"
+  },
+  "screenshots": {
+    "party-inspection/character/screens": {
+      "count": 29,
+      "sha256": {
+        "alive-abilities-1280.png": "3ddbf77d8193db4e034d9611a6fb10ac89204ae75296fccbfe3feee76ba286e3",
+        "alive-abilities-1920.png": "f82d7be8df067516ca610f582f4fc77e3a05fc54b7fe9a50aebe3a7f0e9786f5",
+        "alive-abilities-960.png": "1ff746fa6b324d9e4badb5fd366fc4e8c65eb84a8041d16529c32d83d977dcbc",
+        "alive-growth-1280.png": "d53cdcd0d449ddcf71d2664cf16c1a9742bb2fdc876dd1dbc3253f7e76b3fab5",
+        "alive-growth-1920.png": "0a0fa5b481ccf739d4467d5bdb29b4015aa4e0a1ea7d3ecf3141a565519e63f2",
+        "alive-growth-960.png": "031ee05e0d1bf63473bdbf73feb84511365cfd4390b4fdeb4ef9802641c682cb",
+        "alive-profile-1280.png": "81375e96939e45c41281a9f964bb35aa006836d8cca5cf600647952dff5185ab",
+        "alive-profile-1920.png": "91020cbed2acf897408225e3a4731d48aaa24a89c0a6929ce89be3e455af09ff",
+        "alive-profile-960.png": "5169e04f27be558fd12304419a0b3c2321bd4e3687a8751fc286f1eaab43bdb5",
+        "dead-abilities-1280.png": "62a891a9131f059ad7515613de36d69616571ddc40a8206684e68daf4b6c4995",
+        "dead-abilities-1920.png": "3bf368c558dccd0469d3121c2cb8c72bad02ec7392ca8ecd9285be47b6c24855",
+        "dead-abilities-960.png": "5ca32d4280b9fe012d5cad05e721eb5bb7115678cc907cae383ef59b86216670",
+        "dead-growth-1280.png": "a89559c2173b67fed81acdab64cf18da8039e010eaa5d8f2143da7867ee27b99",
+        "dead-growth-1920.png": "3a2adc802c6cfc8b8cd00060c8b686ab1d7cb16f994560d0cdedb275943f8258",
+        "dead-growth-960.png": "cfb5c35742a478fd66b364d423c5072c145295c3f5bc6656b374c01753dd1c18",
+        "dead-profile-1280.png": "23707772ab2ad056a3d43107c04497f3c28abba1e4c5ab2e0dff94ae76ce89fc",
+        "dead-profile-1920.png": "cd76b3c485ebd697b64dfffc2b2ea9d86c9cc14379ffcc32451b9e3b08b9ff87",
+        "dead-profile-960.png": "d064c0226b6e3ad487c2758d6b5cb6b43f35ea324efd44a0d3d9e33faa4cc8b8",
+        "preview-abilities-1280.png": "44bc9126e34c676a2fae5a86c0c1817ab5e248825fb6a9e86174ad5baa356132",
+        "preview-abilities-1920.png": "78c34f143b41971266434dfe1de0727beec984fbcffa29b434d9bb42ce18b75a",
+        "preview-abilities-960.png": "f05ac1af11d69e8ed93009e20b51e82ab30f400ec830f09583f3f2a53255ef4f",
+        "preview-growth-1280.png": "9913c478302f135f9c6bd3b61be5027748030f09f3b9110d71ca356a9a0ce393",
+        "preview-growth-1920.png": "1ea35051b134f1eb138f41cab66b3c5384e0ad6958d61c5cd6aa0bf4453a6dff",
+        "preview-growth-960.png": "db18c3576d38fb1f77a66c4102c8c0421c87600dc2bfc728a41201b10a986791",
+        "preview-profile-1280.png": "47b4285b38c14768cf1c009f5444065e5a0be3821a6001cf375815202b5a3a97",
+        "preview-profile-1920.png": "59b4335db5f79a6408bc492e34571fff3302077ea66e4fdbf30251281d252800",
+        "preview-profile-960.png": "56402e893f997d1379e363842e2b1fb6f337131b4bdb2799390cebbc0b3f1dfd",
+        "preview-single-entry-1280.png": "0d41384baac706b90dd50b58d770fdfcb7bcf16c801c727203a9579530d7b7d1",
+        "preview-single-entry-1920.png": "c24b3c45cc84405e5352e5dc9b6afa9275a1f823e2e68f9579f61d21fc06fb5a"
+      }
+    },
+    "party-inspection/reflow": {
+      "count": 30,
+      "sha256": {
+        "attributes-960.png": "83be2932dfd8813c38887c35c0fbf07dd32ba4eedad90e16bf5342c199834535",
+        "character-960.png": "e79f2d3ee014aef9e8464d63fc27b25a0c3072c1ad54f50f4b1fe7590df5bd1c",
+        "equipment-1280.png": "711ba679418a2372391f1f9dce20e31e9d3e07ec9cfda8ca0401e2e045516768",
+        "equipment-1920.png": "1be4fc622b91678812940d4987127585df4ca3ce368bcd160e1147304c434fb8",
+        "equipment-960.png": "9dadee6c9a15c8761f3ae5902d55c189c0da0483843509a90619cae7068d106a",
+        "menu-1280.png": "51475c4962dceb6752b8c67d845efa34ea3d8df98aee3d7771cd6365ca9b42fd",
+        "menu-1920.png": "35bb8cf7097eae43266acc84e150fcfc7d1b6f85562cadfd3f2276d90e467f3a",
+        "menu-960.png": "a46000e3f1617f219ba0d17f5d1e987557609fb1f9ec3405b2dc69f485a99f78",
+        "preparation-1280.png": "b2bf01052cb0b1b492cfe59b6b9c66b00633dca224bd53dd4499ea5456251774",
+        "preparation-1920.png": "b63b2614fc81e6ed71baaf7c717f6dcec4318453dad871eae9fa1b06cf588a77",
+        "preparation-960.png": "7fbdc78665abec2456525a60c6803d6c1c915bfdac9395dfadac1f2a36e5cfee",
+        "reward-5-1280.png": "f529a361c50da005f2542d41e4ddb8e3155bef1c60bfa3520aab76bf1308321c",
+        "reward-5-1920.png": "9c65b5e20cac97087cc51cb3035a828255812c48d6ecda200db015eb62413f25",
+        "reward-5-960.png": "9b70ec272bab9b57e41b31bc30f180134e87725aae8b966431b1a094c7cfde2d",
+        "reward-7-1280.png": "09b5d273e998cc7052eb96d924129dec7e5efeb486ea558e43cdcfce6b45a793",
+        "reward-7-1920.png": "3845e243ace98356d7869dde6f468924e82bd7d70542eb7c7b2a53f2b4aa2549",
+        "reward-7-960.png": "660cb5f7a1ff1b431732ca55af91eb10ddc1c3291910963c74a37a1b0db5617f",
+        "reward-details-960.png": "881ce454717c8c841fa525a06f97b29c093b02621f47384f67620ba51ad92296",
+        "roster-1280.png": "eb5053679c2c92c3a55239829faa061158387492a7f0a38fd2d98fdb52dccb8a",
+        "roster-1920.png": "175a9a67558077f0cabc890852ce7f14105ba81b144e7c145a53202214e34bb7",
+        "roster-960.png": "892708f7e0dcf6b0283b5f096f2b9ef5f5fd8e296b9b1f4eec0a73190eb8208e",
+        "route-1280.png": "bb525bb2ee4058afc2f3854cff3525b665eebf5de96e4162fb80fa7eae13f3d3",
+        "route-1920.png": "7b8d63d120687e7856f1748109bdf7781e7d8dde4fbde43f5365cab3e8099b62",
+        "route-960.png": "29aa8f77f921e49f70942a895d7e0a23df26260dffef73f5f085e5b7b711bf26",
+        "settings-1280.png": "7dcfb5da9058cee1b56a39ef765f89892293c01955470bb0bc682388b59b3260",
+        "settings-1920.png": "6a67ecaaea595911beebfa652fa22e74ada7dca3cd6d52028f9d8f4968426cbe",
+        "settings-960.png": "cd3f482e47f013ce87a3fa05a04d8933ab6de83fe39736cecd7683b7bafea1d4",
+        "world-1280.png": "06e060574c8cf362befb1ca87d75edf15e77a2ef09ff1119024e21c9328d03fe",
+        "world-1920.png": "07aff4013cce5c9e4cb3d7f7419532d91197b4067a20d4d4d7d2a6ce48c311f1",
+        "world-960.png": "0c4def6a0b9e85655b84a6157866c6a3ae325dc28fee1493772bc64506a6830b"
+      }
+    },
+    "party-inspection/context": {
+      "count": 29,
+      "sha256": {
+        "01-route-1280.png": "713b23115e0d61c678320faa27a4e5498ec37565d21394dd7bb8684a5308fb10",
+        "01-route-1920.png": "d57abc2fa53e5a815b0a03a32aff5a40afb5830f9db4a598d8e51e6683ef1d7d",
+        "01-route-960.png": "37721681af92b6046060cf4e80546bb142c1243fa286dc5e6b31d2fb0512cc7e",
+        "01b-route-character-1280.png": "466ece0015dade0be207b7ce50b0aa8f1cf8dd880a9b3d9188e02f955052dd80",
+        "01b-route-character-1920.png": "c6de731d0b85ca26f47f139c6253e3027326bc038d4946976616063d481139cd",
+        "01b-route-character-960.png": "98cd2615a52eeef5174e6f05c77fdbc8322ae1dae12586d45499ada37c63f02c",
+        "02-world-1280.png": "aa20ec0f4a32c1545837ea1e1922d86b7f599edfee4d4845d227c5ab03bc7343",
+        "02-world-1920.png": "7473a9494bcca9c1eeec176ba009aa321cf1f188cdd03cf25336614e96d80360",
+        "02-world-960.png": "cafb508a1d17908e62851a32555a1dd7ac47b6b75a9b73e21436e5ee35ef862e",
+        "02b-world-tasks-1280.png": "b125c10b1b7ffaafbc3b2f359e741f6ff0da4fa0449db6178d8a74b570b2fc42",
+        "02b-world-tasks-1920.png": "7dece20f95d38bff043e01d32a8f91d12fa04b64b9caa101d2e3336d2f997e8f",
+        "02b-world-tasks-960.png": "73eedc334e6db5065c949827eab6979cd6df1173ba73b85b12aa450524689eda",
+        "02c-world-other-1280.png": "09aa7a51eed5613e5358694392f4a10802ab30efccf986c20cf7e320da27be6e",
+        "02c-world-other-1920.png": "343d0b4dc79a24f59a39dd9af7c973b6e64dbe39f40e538ade0f51e9c96a60fd",
+        "02c-world-other-960.png": "5b5529d2a997ebf132fda612386c2c791549701e7dc033849d5b10eb1fe719bc",
+        "03-party-1280.png": "ab6f5b0c91a0d7e13756374df3e54898ebc1fce803044260e5828057139492d3",
+        "03-party-1920.png": "6c6e5661700507bc26f9b707efbb5af61828aba6fe2141535f0b272bdd4dde18",
+        "03-party-960.png": "99475d8b43dddc9f4d71235618a5acfefdefb638e62328bbc18e703b59e26745",
+        "04-equipment-1280.png": "6e6d437613eab42f18e70b56a8fbf587899751c64a549b18e5726c00f5e6a1a9",
+        "04-equipment-1920.png": "b22af1685c4d911b0dc120c1b896a2e4ce130ad8a35eea7501cc47e02abf73fd",
+        "04-equipment-960.png": "2294afc32c3e016ea063e0328daf2fb43c2514a52d7f213ad49aa6621420d5cd",
+        "05-preparation-equipment-1280.png": "6e6d437613eab42f18e70b56a8fbf587899751c64a549b18e5726c00f5e6a1a9",
+        "06-preparation-1280.png": "b85b713011714236684881691a09abf12811f591b69f415c72991d2e48a64220",
+        "07-pending-reward-route-1280.png": "d2bdd88fba0388abe2b2a39de4e3a77e75b7e90c3fecb7d949970c3b7b736d87",
+        "08-menu-after-codex-resize-960.png": "f2551a2d83e4e76ddf2f524cb2ad72086cd14aad3d83feeaecd637926e6d0297",
+        "09-route-after-codex-resize-1280.png": "7be3603d90dd2155897f9b58e045153bd889ebceadc084a0c08d254b20d5c287",
+        "10-completed-story-detail-1280.png": "7e4b9e0dfb7f058a87160ca1551960c3613bd87037602e0a1de2719183e8cd7f",
+        "11-world-pending-1280.png": "21d7ef7935d6a81106881ecc07bcb156e7a3f63446bff1fc03fb1d25817f6271",
+        "11-world-pending-960.png": "c53dc6649b41c28100090a8c7e975e8467c87c4cef60d2aff8a27bd44fd18630"
+      }
+    },
+    "party-drag": {
+      "count": 8,
+      "sha256": {
+        "00-native-drag-1280.png": "d46baef708ae4143e1b387a99bb5322ae9e26473b35bf13028ad4ab4b503b35a",
+        "01-two-members-1280.png": "389f5bb2cce666f201b7df9a46d13f726bc7f02ec6acffc16bcfe500170f7e59",
+        "02-roster-1280.png": "e985185fc1d42a6eae63d2f3a4da797fbe394dc3c98d51b6c06f38d63ea70a2f",
+        "02-roster-1920.png": "cf502352c0306512419881ba8094d59e4418969985fc39526613487d4952bfee",
+        "02-roster-960.png": "558619b591387c2441f37527391cc0be4bbff32282cc7a80d0903b55f2bf3198",
+        "03-battle-preparation-1280.png": "ee2ede6184ac20cc084de9de47ae36a2d63af57a28e1e5449acef00dde9a8406",
+        "03-battle-preparation-1920.png": "fba31c2c0e3cadd5738e62e64559369429cf43bd302746d0590a769542b8a41a",
+        "03-battle-preparation-960.png": "5d99fc170706db2cb03eb9c5cfa600980761e950174b16eba26fbb7904517cba"
+      }
+    }
+  },
+  "visual_reviewed_by_root": [
+    "party-drag/01-two-members-1280.png",
+    "party-drag/02-roster-960.png",
+    "party-inspection/reflow/roster-1280.png",
+    "party-inspection/character/screens/alive-growth-960.png",
+    "party-inspection/character/screens/alive-growth-1280.png",
+    "party-inspection/character/screens/preview-profile-1920.png",
+    "party-inspection/character/screens/preview-single-entry-1280.png"
+  ],
+  "check_reuse": "The final preview-only entry consolidation received 14 focused checks, native GL drag and formal reflow reruns. Modal content, contextual navigation, profiles, portraits, headless drag and battle lifecycle results are reused on unaffected behavior. Historical failed attempts under validation/attempts are excluded.",
+  "graphify": {
+    "accepted": false,
+    "missing_runtime_gd": 202,
+    "prior_graph_retained": true,
+    "status": "STALE",
+    "log": "docs/design-reviews/evidence/2026-10-29/party-inspection/validation/graphify-update.log"
+  },
+  "isolation": "All verification writes use dedicated XDG_DATA_HOME paths under /tmp; runtime user saves are not used.",
+  "limits": [
+    "UI fixtures do not establish campaign balance or complete-playthrough difficulty.",
+    "The retained rehearsal UI smoke is separate from formal campaign behavior."
+  ]
+}

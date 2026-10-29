@@ -1,0 +1,32 @@
+{
+  "tool": "built-in image_gen",
+  "source": "source/sheet-v1.png",
+  "prompt": "sheet-v1-prompt.txt",
+  "sha256": "b4c2d1bd39625cdc22a13bdc9aea4fa937d3d780720eca8d6e35354d884ad98b",
+  "size": [
+    1312,
+    1199
+  ],
+  "mode": "RGBA",
+  "alpha_extrema": [
+    0,
+    255
+  ],
+  "references": [
+    {
+      "path": "design/baimen-enemies-20261028/characters/M04_WAR/source/master-v2.png",
+      "sha256": "50e955fbac8749f84087d2f7928075b32fde8427a817a4af2ec0b9bc2745c134"
+    },
+    {
+      "path": "design/baimen-enemies-20261028/characters/M04_WAR/references/current-identity.png",
+      "sha256": "58991b3cc1288eb440e30551f1d56a4f627da18586cecd8856ebc4dcda4da692"
+    },
+    {
+      "path": "design/baimen-women-20261028/source/F07-masanniang-combat-v1.png",
+      "sha256": "da2cc4c7ab1ba88177916085e8f3eb8f1564e722d6476d0731703cc7cfc51d94"
+    }
+  ],
+  "visual_review": "Viewed all20 poses: idle/move/attack/special/hit rows4 each, RIGHT. Exactly two human hands, one command-baton hand and one scroll-holding hand; no legs or feet, drifting/curling paper body. Each pose is a separate alpha128 large component, all scroll ends and baton tips within canvas and separated. No soldiers/circles. Source display has low-alpha colored fringe RGB; read-only scan found zero bright-red pixels with alpha>=128, so this is transparent residue not baked opaque VFX.",
+  "selection": "all20_selected_for_measurement",
+  "generated_path": "/home/weathour/.codex/generated_images/01a1831a-f001-78c2-85f4-f99fc219fd1c/exec-a4eb12f2-8882-453e-b7af-e58886da41b1.png"
+}

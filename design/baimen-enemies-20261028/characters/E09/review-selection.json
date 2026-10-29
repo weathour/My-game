@@ -1,0 +1,27 @@
+{
+  "id": "E09",
+  "master": "source/master-v1.png",
+  "sheet": "source/actions-v1.png",
+  "standing_body_height": 215,
+  "hip_x": [
+    175,
+    530,
+    885,
+    1240
+  ],
+  "canvas": {
+    "size": [
+      320,
+      256
+    ],
+    "anchor": [
+      160,
+      240
+    ],
+    "body_height_px": 128
+  },
+  "review_notes": "Inspected bell guardian full master and20poses. Wide bronze bell body and short thick legs distinct from soldiers, full massive wooden striker retained. Rows idle/heavy walk/first slam/second strike/hit. Both runtime slam actions use attack with its own windup/contact/recovery; special preserves alternate second-strike source. Standing bell-body height215px; no pose-by-pose height stretching. 320x256 frame is wider than default to preserve striker on low right follow-through. Ground anchor follows feet, not lowered striker cap. No impact effects baked.",
+  "action_clips": {
+    "slam": "attack"
+  }
+}

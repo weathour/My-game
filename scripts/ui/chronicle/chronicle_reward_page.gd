@@ -20,7 +20,7 @@ static func build(shell: Control) -> void:
 	shell.action(heading, "菜单", shell.open_menu, "reward_menu")
 	var line: String = state.nodes[pending.node].name
 	if pending.extra: line += "  ·  精英奖励，多选 1 张"
-	if pending.node == "B01": line += "  ·  艾玛已加入队伍，不占选卡名额。"
+	if pending.node == "B01": line += "  ·  艾玛的剧情加入不占选卡名额。"
 	column.add_child(T.label(line, 13 if compact else 15, T.MUTED))
 	var center := CenterContainer.new()
 	center.size_flags_vertical = Control.SIZE_EXPAND_FILL
@@ -87,6 +87,6 @@ static func build(shell: Control) -> void:
 	var bottom := T.row(column)
 	T.space(bottom)
 	var claim: Button = shell.action(bottom, "确认领取", func():
-		if state.claim_reward(): shell.resume_view(), "reward_claim", true)
+		if state.claim_reward(): shell.resume_view(true), "reward_claim", true)
 	claim.custom_minimum_size.x = 190
 	claim.disabled = pending.selected.size() != int(pending.picks)

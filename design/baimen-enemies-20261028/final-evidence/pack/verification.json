@@ -1,0 +1,55 @@
+{
+  "captured_at": "2026-10-28T16:49:22.809680+00:00",
+  "engine": "4.6.2.stable.official.71f334935",
+  "export_exit_code": 0,
+  "pack_smoke_exit_code": 0,
+  "checks_passed": 610,
+  "checks_failed": 0,
+  "pack": {
+    "path": "/tmp/baimen-enemy-review.pck",
+    "bytes": 349126276,
+    "sha256": "929bdac8e5097ae37b81ed8ad2a7545086b247717bb3e731fabe2c7038e7ddc3",
+    "purpose": "temporary local verification, not a published artifact"
+  },
+  "export_command": [
+    "/home/weathour/.local/bin/godot-4.6.2",
+    "--headless",
+    "--path",
+    ".",
+    "--export-pack",
+    "Linux development",
+    "/tmp/baimen-enemy-review.pck"
+  ],
+  "execution_context": {
+    "path": "/tmp/baimen-enemy-pack-check-root",
+    "user_data_home": "/tmp/baimen-enemy-pack-check-user",
+    "source_tree_fallback": false,
+    "external_smoke_script": "scripts/tests/chronicle_enemy_pack_smoke.gd"
+  },
+  "verified": {
+    "catalog_definitions": 43,
+    "runtime_manifest_slots": 42,
+    "all_standing_portraits_and_animation_textures": true,
+    "new_effects": 8,
+    "existing_effect_reuses": 3,
+    "main_scene_starts": true,
+    "design_sources_excluded": true,
+    "editable_actor_excluded": true,
+    "exported_files_reviewed": 5832,
+    "source_design_docs_archive_and_aseprite_export_entries": 0
+  },
+  "file_sha256": {
+    "export_presets.cfg": "dd55034937d956ca00d6b08c631b4687fc0da488dc5c690c9b9397cb9fd993d0",
+    "scripts/tests/chronicle_enemy_pack_smoke.gd": "49a9e6dd3634a1be748ef39acf5c22450612bca20f9c77210acfc3215f7b210e",
+    "scripts/ui/chronicle/enemy_visual_manifest.gd": "8c34734045f391301553bcabc717b7028d0591f70196c03157959e11d17365df",
+    "scripts/ui/chronicle/enemy_battle_effects.gd": "619e0a9358066f21271ab2dd5aa2a70e99ff488cb8c64c34bc360634a221fbce",
+    "scripts/ui/chronicle/enemy_actor.gd": "7eccf0973eebfd6b33a627d11ea043ed53c32e05b94070415ee48240fc944bbd",
+    "scripts/ui/chronicle/enemy_codex.gd": "a96f2bec589ecb3fc3a22ef5d5ad0c454cc8c52cde426a5b391e25c70d35c75f",
+    "scripts/ui/chronicle/battle_canvas.gd": "420895c55e4af48ed067086e0178568e7d9d5ff22a23c2805fde6496fccce4f3"
+  },
+  "logs": [
+    "export.log",
+    "packed-assets.log"
+  ],
+  "export_file_inventory": "export-file-inventory.json"
+}

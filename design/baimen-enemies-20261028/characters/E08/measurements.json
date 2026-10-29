@@ -1,0 +1,484 @@
+{
+  "version": 1,
+  "id": "E08",
+  "review_status": "accepted_for_export",
+  "review_notes": "All20 source poses and shrine master visually reviewed. Featureless wooden mask, offering bowl, broad seated robes and wooden altar feet retained. Rows idle/wooden-foot walk/short hand swipe/bowl raise ritual/hit. Special contact frame2 raises bowl overhead. Dominant altar body calibration235px includes mask and feet, excludes lifted bowl overhead. Fixed scale all poses. Actual connected components selected despite row overlap, no grid crop.",
+  "prompts": [
+    "prompts/actions-v1.txt",
+    "prompts/master-v1.txt"
+  ],
+  "canvas": {
+    "size": [
+      192,
+      192
+    ],
+    "anchor": [
+      96,
+      176
+    ],
+    "body_height_px": 80
+  },
+  "sources": {
+    "actions": {
+      "path": "source/actions-v1.png",
+      "size": [
+        1374,
+        1145
+      ],
+      "sha256": "8b475b594405f51fcd02c3d08a30fb3f9f42077e9c1258f5f4afc55d6ed55fb9",
+      "standing_body_height": 235
+    }
+  },
+  "portrait": {
+    "path": "source/master-v1.png",
+    "size": [
+      1374,
+      1145
+    ],
+    "sha256": "8f6f315fbcd2de81ba5cb873bbb96a2bafe04a3e2537adfaeae0ee8771f8f994"
+  },
+  "poses": [
+    {
+      "id": "p00",
+      "source": "actions",
+      "anchor_source": [
+        190,
+        246
+      ],
+      "components": [
+        {
+          "bbox": [
+            26,
+            11,
+            335,
+            246
+          ],
+          "area": 38045
+        }
+      ]
+    },
+    {
+      "id": "p01",
+      "source": "actions",
+      "anchor_source": [
+        530,
+        249
+      ],
+      "components": [
+        {
+          "bbox": [
+            368,
+            11,
+            664,
+            249
+          ],
+          "area": 37508
+        }
+      ]
+    },
+    {
+      "id": "p02",
+      "source": "actions",
+      "anchor_source": [
+        875,
+        249
+      ],
+      "components": [
+        {
+          "bbox": [
+            707,
+            12,
+            1007,
+            249
+          ],
+          "area": 37399
+        }
+      ]
+    },
+    {
+      "id": "p03",
+      "source": "actions",
+      "anchor_source": [
+        1220,
+        250
+      ],
+      "components": [
+        {
+          "bbox": [
+            1050,
+            12,
+            1363,
+            250
+          ],
+          "area": 39787
+        }
+      ]
+    },
+    {
+      "id": "p04",
+      "source": "actions",
+      "anchor_source": [
+        190,
+        476
+      ],
+      "components": [
+        {
+          "bbox": [
+            25,
+            250,
+            337,
+            476
+          ],
+          "area": 36500
+        }
+      ]
+    },
+    {
+      "id": "p05",
+      "source": "actions",
+      "anchor_source": [
+        530,
+        478
+      ],
+      "components": [
+        {
+          "bbox": [
+            382,
+            246,
+            680,
+            478
+          ],
+          "area": 38209
+        }
+      ]
+    },
+    {
+      "id": "p06",
+      "source": "actions",
+      "anchor_source": [
+        875,
+        476
+      ],
+      "components": [
+        {
+          "bbox": [
+            705,
+            251,
+            1018,
+            476
+          ],
+          "area": 36658
+        }
+      ]
+    },
+    {
+      "id": "p07",
+      "source": "actions",
+      "anchor_source": [
+        1220,
+        479
+      ],
+      "components": [
+        {
+          "bbox": [
+            1056,
+            254,
+            1362,
+            479
+          ],
+          "area": 36723
+        }
+      ]
+    },
+    {
+      "id": "p08",
+      "source": "actions",
+      "anchor_source": [
+        190,
+        703
+      ],
+      "components": [
+        {
+          "bbox": [
+            16,
+            479,
+            354,
+            703
+          ],
+          "area": 39833
+        }
+      ]
+    },
+    {
+      "id": "p09",
+      "source": "actions",
+      "anchor_source": [
+        530,
+        704
+      ],
+      "components": [
+        {
+          "bbox": [
+            354,
+            481,
+            723,
+            704
+          ],
+          "area": 41519
+        }
+      ]
+    },
+    {
+      "id": "p10",
+      "source": "actions",
+      "anchor_source": [
+        875,
+        702
+      ],
+      "components": [
+        {
+          "bbox": [
+            722,
+            480,
+            1036,
+            702
+          ],
+          "area": 37309
+        }
+      ]
+    },
+    {
+      "id": "p11",
+      "source": "actions",
+      "anchor_source": [
+        1220,
+        704
+      ],
+      "components": [
+        {
+          "bbox": [
+            1056,
+            479,
+            1363,
+            704
+          ],
+          "area": 37515
+        }
+      ]
+    },
+    {
+      "id": "p12",
+      "source": "actions",
+      "anchor_source": [
+        190,
+        938
+      ],
+      "components": [
+        {
+          "bbox": [
+            30,
+            712,
+            342,
+            938
+          ],
+          "area": 38386
+        }
+      ]
+    },
+    {
+      "id": "p13",
+      "source": "actions",
+      "anchor_source": [
+        530,
+        937
+      ],
+      "components": [
+        {
+          "bbox": [
+            368,
+            709,
+            684,
+            937
+          ],
+          "area": 41481
+        }
+      ]
+    },
+    {
+      "id": "p14",
+      "source": "actions",
+      "anchor_source": [
+        875,
+        936
+      ],
+      "components": [
+        {
+          "bbox": [
+            709,
+            688,
+            1032,
+            936
+          ],
+          "area": 43780
+        }
+      ]
+    },
+    {
+      "id": "p15",
+      "source": "actions",
+      "anchor_source": [
+        1220,
+        936
+      ],
+      "components": [
+        {
+          "bbox": [
+            1060,
+            712,
+            1357,
+            936
+          ],
+          "area": 36063
+        }
+      ]
+    },
+    {
+      "id": "p16",
+      "source": "actions",
+      "anchor_source": [
+        190,
+        1135
+      ],
+      "components": [
+        {
+          "bbox": [
+            15,
+            940,
+            347,
+            1135
+          ],
+          "area": 38298
+        }
+      ]
+    },
+    {
+      "id": "p17",
+      "source": "actions",
+      "anchor_source": [
+        530,
+        1135
+      ],
+      "components": [
+        {
+          "bbox": [
+            368,
+            935,
+            678,
+            1135
+          ],
+          "area": 34020
+        }
+      ]
+    },
+    {
+      "id": "p18",
+      "source": "actions",
+      "anchor_source": [
+        875,
+        1135
+      ],
+      "components": [
+        {
+          "bbox": [
+            704,
+            941,
+            1034,
+            1135
+          ],
+          "area": 39548
+        }
+      ]
+    },
+    {
+      "id": "p19",
+      "source": "actions",
+      "anchor_source": [
+        1220,
+        1135
+      ],
+      "components": [
+        {
+          "bbox": [
+            1067,
+            932,
+            1360,
+            1135
+          ],
+          "area": 32949
+        }
+      ]
+    }
+  ],
+  "clips": {
+    "idle": {
+      "poses": [
+        "p00",
+        "p01",
+        "p02",
+        "p03"
+      ],
+      "fps": 6,
+      "windup_frame": 0,
+      "contact_frame": 2
+    },
+    "move": {
+      "poses": [
+        "p04",
+        "p05",
+        "p06",
+        "p07"
+      ],
+      "fps": 8,
+      "windup_frame": 0,
+      "contact_frame": 2
+    },
+    "attack": {
+      "poses": [
+        "p08",
+        "p09",
+        "p10",
+        "p11"
+      ],
+      "fps": 10,
+      "windup_frame": 0,
+      "contact_frame": 2
+    },
+    "special": {
+      "poses": [
+        "p12",
+        "p13",
+        "p14",
+        "p15"
+      ],
+      "fps": 10,
+      "windup_frame": 0,
+      "contact_frame": 2
+    },
+    "hit": {
+      "poses": [
+        "p16",
+        "p17",
+        "p18",
+        "p19"
+      ],
+      "fps": 10,
+      "windup_frame": 0,
+      "contact_frame": 2
+    }
+  },
+  "action_clips": {
+    "heal": "special",
+    "swipe": "attack"
+  },
+  "faces_left": false
+}

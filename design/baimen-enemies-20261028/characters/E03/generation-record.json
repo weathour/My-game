@@ -1,0 +1,52 @@
+{
+  "version": 1,
+  "id": "E03",
+  "generator": "built-in ImageGen",
+  "identity_master": "source/master-v1.png",
+  "references": [
+    {
+      "path": "design/jia-combat-20261027/source/dao-v1.png",
+      "sha256": "dc7720a430f1b03f61b87292b845f170f15a5a487c4a9810070fb27ad546099e",
+      "role": "pixel_drawing_and_animation_style_only"
+    }
+  ],
+  "source_versions": [
+    {
+      "path": "design/baimen-enemies-20261028/characters/E03/source/actions-v1.png",
+      "sha256": "428330f21eff8adef56fb159bb205875615b0f09606214cc0673fd90e8e7697c",
+      "selected": false,
+      "role": "pose_source",
+      "decision": "retained_rejected_variant"
+    },
+    {
+      "path": "design/baimen-enemies-20261028/characters/E03/source/actions-v2.png",
+      "sha256": "858b9aaddc9ffaeb7f32f5c6f4d95aa307f7e2b08cdf183ad356252985421b50",
+      "selected": false,
+      "role": "pose_source",
+      "decision": "retained_rejected_variant"
+    },
+    {
+      "path": "design/baimen-enemies-20261028/characters/E03/source/actions-v3.png",
+      "sha256": "848881babf0bb96eb51d4664048ab36febcf259d37739eae6465b6115ea200ca",
+      "selected": true,
+      "role": "pose_source",
+      "decision": "selected"
+    },
+    {
+      "path": "design/baimen-enemies-20261028/characters/E03/source/master-v1.png",
+      "sha256": "66f33656486b09dd53ee230fde7e88e9be49d2517d251c5df094023b6446af62",
+      "selected": true,
+      "role": "identity_master",
+      "decision": "selected"
+    }
+  ],
+  "prompts": [
+    "prompts/master-v1.txt",
+    "prompts/actions-v1.txt",
+    "prompts/actions-v2.txt",
+    "prompts/actions-v3.txt"
+  ],
+  "review_notes": "Full master and all three sheet versions inspected. v1/v2 rejected because they simplified the wooden yoke into a collar. v3 selected: distinct thick wood posts and transverse crossbeam frame the skull in every pose. Four bone legs, long horizontal spine, swept-back armor retained. Twenty actual connected silhouettes; rows idle/walk/yoke-thrust/charge/hit. All source bodies share181px standing height. Extended charge requires256x192 frame to preserve tail, yoke and outstretched feet; world body scaling remains80px. Ground anchors follow supporting feet, x follows trunk between four legs. No per-frame stretch. Ground review correction: airborne charge feet retain their raised offset above the nominal ground; low weapon cap does not move body grounding.",
+  "export": "scripts/tools/import_baimen_enemy_art.lua",
+  "pixels_policy": "ImageGen-authored; Pillow/scipy read-only component measurements and QA; Aseprite extraction/registration/palette/export."
+}

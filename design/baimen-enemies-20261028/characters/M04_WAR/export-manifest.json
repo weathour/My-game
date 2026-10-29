@@ -1,0 +1,325 @@
+{
+  "schema": 1,
+  "id": "M04_WAR",
+  "generator": "ImageGen pixels / Aseprite reviewed-part extraction and registration",
+  "measurements": "design/baimen-enemies-20261028/characters/M04_WAR/measurements.json",
+  "measurements_sha256": "5f4a587df3793f98fe0fe52daf0dbd4cbb3bfa336a2f857050b39d92fbdd409c",
+  "export_script": "scripts/tools/import_baimen_enemy_art.lua",
+  "export_script_sha256": "86a8f2555a17e5bb0b7a86f03f6b1132d6636b3893b91b8fe3971f8dac242dc1",
+  "audit_script_sha256": "8f67b468e4e63de61fd47f4a704e0b9ba6a6cf749078759570ff205e1298c940",
+  "sources": [
+    {
+      "kind": "combat",
+      "path": "design/baimen-enemies-20261028/characters/M04_WAR/source/sheet-v1.png",
+      "sha256": "b4c2d1bd39625cdc22a13bdc9aea4fa937d3d780720eca8d6e35354d884ad98b",
+      "size": [
+        1312,
+        1199
+      ],
+      "standing_body_height": 220,
+      "scale": 0.8727272727272727
+    },
+    {
+      "kind": "portrait",
+      "path": "design/baimen-enemies-20261028/characters/M04_WAR/source/master-v2.png",
+      "sha256": "50e955fbac8749f84087d2f7928075b32fde8427a817a4af2ec0b9bc2745c134",
+      "size": [
+        1024,
+        1536
+      ]
+    }
+  ],
+  "actor_shared_opaque_colors": 59,
+  "actor_frames": 20,
+  "frame_size": [
+    512,
+    512
+  ],
+  "anchor": [
+    256,
+    480
+  ],
+  "outputs": [
+    {
+      "path": "assets/enemies/baimen/M04_WAR/idle.png",
+      "sha256": "5f71c8705064e23ec8b10371909222dc3f2c4fc5bc01d4876baad25cfcebc640",
+      "size": [
+        2048,
+        512
+      ],
+      "frames": 4,
+      "opaque_colors": 59,
+      "frame_alpha_bounds": [
+        [
+          146,
+          289,
+          362,
+          480
+        ],
+        [
+          147,
+          285,
+          369,
+          480
+        ],
+        [
+          147,
+          289,
+          360,
+          480
+        ],
+        [
+          138,
+          287,
+          367,
+          480
+        ]
+      ],
+      "frame_pixel_sha256": [
+        "5feffe529f8cd8b637df39875fb6367f80119fa80e032c162ff3d6b34ac17372",
+        "4a6c4958193f45138224dd845162739e8ce61efd440ff67d8fb964dd37e74e34",
+        "69dcb7360f48a2fc9e075b30c4bcac0a582d57ce3a1af19c544171ad8a485d8e",
+        "40c7178d274efe21a6b9494b87be7807c769c04e200ff49e5a7a9c0a40b888d8"
+      ]
+    },
+    {
+      "path": "assets/enemies/baimen/M04_WAR/idle.aseprite",
+      "sha256": "c0f75a6416a2e1f417505aaf79a243c048b00deeb3449c398dd664758fbc069c",
+      "size": [
+        512,
+        512
+      ],
+      "frames": 4
+    },
+    {
+      "path": "assets/enemies/baimen/M04_WAR/move.png",
+      "sha256": "50b78b4b8cc6ed3b34fc0d2dce1d7817312988652bb12dd637aa22a7a9d9e42f",
+      "size": [
+        2048,
+        512
+      ],
+      "frames": 4,
+      "opaque_colors": 59,
+      "frame_alpha_bounds": [
+        [
+          132,
+          298,
+          381,
+          480
+        ],
+        [
+          134,
+          297,
+          380,
+          480
+        ],
+        [
+          129,
+          296,
+          382,
+          480
+        ],
+        [
+          119,
+          294,
+          369,
+          480
+        ]
+      ],
+      "frame_pixel_sha256": [
+        "45b8479b2eb28218e3dbcdfa6ec81d4e5b4fc72103206f85ae4e40481d2672a7",
+        "4b51843c45098d1fb0231463c0c090e299f2e8c92166d6b147312bcd482ef4ca",
+        "9707f63f8ca272fde248a647819f6a0f186d3a3b45e010cc130d055d47a4823a",
+        "2f2a11172e3b1abce9383a916cf34bc6a2c7e31fb57c1787720ff64f08d3bbfd"
+      ]
+    },
+    {
+      "path": "assets/enemies/baimen/M04_WAR/move.aseprite",
+      "sha256": "669be4553be26f8fcc16c470baf49cf4c4ee73a2016bee615aa95bdc4440848a",
+      "size": [
+        512,
+        512
+      ],
+      "frames": 4
+    },
+    {
+      "path": "assets/enemies/baimen/M04_WAR/attack.png",
+      "sha256": "d6c0dce74110be768dbf44a6e79e89a45b8b941fd95714a4de947486d6e780e3",
+      "size": [
+        2048,
+        512
+      ],
+      "frames": 4,
+      "opaque_colors": 59,
+      "frame_alpha_bounds": [
+        [
+          143,
+          291,
+          386,
+          480
+        ],
+        [
+          131,
+          274,
+          374,
+          480
+        ],
+        [
+          118,
+          294,
+          404,
+          480
+        ],
+        [
+          145,
+          293,
+          378,
+          480
+        ]
+      ],
+      "frame_pixel_sha256": [
+        "18e407e103a8b5c39cd72b84df4b77071224b11269bd0864fa47a129861303bc",
+        "854ec487e211a518033500175fcd6b4d85f1d5e2ed83ddfca2d5c81750316e9a",
+        "bf0127afc3c66073e892f0a48b4dd9dd79a5ab3391598657b397289ebaa7e916",
+        "ce8b320b1cca1d49d6b106ebd8356156be184fbf294311a81a20659020712d26"
+      ]
+    },
+    {
+      "path": "assets/enemies/baimen/M04_WAR/attack.aseprite",
+      "sha256": "f84c0e3c2eec5edbfdb46c2f111c7ec8eecefff6bf8bccf3c7da63e58fe1aff3",
+      "size": [
+        512,
+        512
+      ],
+      "frames": 4
+    },
+    {
+      "path": "assets/enemies/baimen/M04_WAR/special.png",
+      "sha256": "198e9dc0c53693a483e90cb9b7858251f450a14a41d7f9a594bb445a37751d17",
+      "size": [
+        2048,
+        512
+      ],
+      "frames": 4,
+      "opaque_colors": 59,
+      "frame_alpha_bounds": [
+        [
+          136,
+          289,
+          359,
+          480
+        ],
+        [
+          108,
+          286,
+          369,
+          480
+        ],
+        [
+          109,
+          291,
+          415,
+          480
+        ],
+        [
+          155,
+          285,
+          344,
+          480
+        ]
+      ],
+      "frame_pixel_sha256": [
+        "197f0fb8614a36b8794c55a9dd1af2d5e2384c475ac00602f3c0cea1dda96a10",
+        "a524033312cd9c240a57049bade02667a655c4bbe72649b5d3444ec9d3deab1e",
+        "53ec6f91a3538e741a4921089e137742ff072f0819b81c6c258d695d4ddc9965",
+        "33026c8f68e91e1639fc10230a92668e41a9c71580de14cc864cb36131c050f0"
+      ]
+    },
+    {
+      "path": "assets/enemies/baimen/M04_WAR/special.aseprite",
+      "sha256": "4bd05bfe0405fceae4e4598a3b7caa0b760050c7b316d728bef1e8b74ee2e28d",
+      "size": [
+        512,
+        512
+      ],
+      "frames": 4
+    },
+    {
+      "path": "assets/enemies/baimen/M04_WAR/hit.png",
+      "sha256": "f1fbfc456bc631c565d5bbd0aa35698e5d0cc891a50c5107ae2bc8ac910629a7",
+      "size": [
+        2048,
+        512
+      ],
+      "frames": 4,
+      "opaque_colors": 59,
+      "frame_alpha_bounds": [
+        [
+          149,
+          305,
+          345,
+          480
+        ],
+        [
+          152,
+          315,
+          347,
+          480
+        ],
+        [
+          126,
+          310,
+          342,
+          480
+        ],
+        [
+          140,
+          302,
+          359,
+          480
+        ]
+      ],
+      "frame_pixel_sha256": [
+        "e7424eca05a329e1ed0fe2d9aefd99c7e7441dcc9feae3dd31d48813d09f60d1",
+        "6e20d308ab8ea49616941870033e15a9cad1f5d93e21ec2f00dbfe43ab50dcda",
+        "ac93f2df4f84095b009aae27cf9c33bfc8543430cb3a7eb5cc404fbe712b13be",
+        "f329e86a05a59a3db2f5d85aceb0ca89f1a2e13628d5eaf6daac89607c3b6337"
+      ]
+    },
+    {
+      "path": "assets/enemies/baimen/M04_WAR/hit.aseprite",
+      "sha256": "7d9b67f2e552e51fdfa12fe074b2bad1735d5d6ed6c986b44b98a36b525ee423",
+      "size": [
+        512,
+        512
+      ],
+      "frames": 4
+    },
+    {
+      "path": "assets/enemies/baimen/M04_WAR/actor.aseprite",
+      "sha256": "5ae34feed87517ee3b0bc4ff458ab9bdd7bc409d57d45806134abfdf277bf73a",
+      "size": [
+        512,
+        512
+      ],
+      "frames": 20
+    },
+    {
+      "path": "assets/enemies/baimen/M04_WAR/portrait.png",
+      "sha256": "50e955fbac8749f84087d2f7928075b32fde8427a817a4af2ec0b9bc2745c134",
+      "size": [
+        1024,
+        1536
+      ]
+    },
+    {
+      "path": "assets/enemies/baimen/M04_WAR/portrait.aseprite",
+      "sha256": "6170b32f204e49ec4e38393ca5452fb272bb9744642ee29422ccf4808ef8c73d",
+      "size": [
+        1024,
+        1536
+      ],
+      "frames": 1
+    }
+  ]
+}

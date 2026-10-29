@@ -1,6 +1,7 @@
 extends SceneTree
 const SHELL := preload("res://scenes/chronicle/chronicle_shell.tscn")
 const TARGET := preload("res://scripts/battle/targeting.gd")
+const PARTY_DRAG := preload("res://scripts/ui/chronicle/chronicle_party_drag_card.gd")
 const DIRECTOR := preload("res://scripts/battle/stage_director.gd")
 const SETTINGS := preload("res://scripts/game_settings.gd")
 var shell: Control
@@ -38,6 +39,45 @@ func click(id: String) -> void:
 	if button != null and not button.disabled: button.pressed.emit()
 	await frames()
 
+func drag_character(id: String, slot: int) -> void:
+	var source := shell.find_child("character_" + id, true, false) as Control
+	var target := shell.find_child("prep_member_" + str(slot + 1), true, false) as Control
+	expect(source != null and target != null, "drag controls for " + id)
+	if source == null or target == null: return
+	var scroll := shell.find_child("roster_scroll", true, false) as ScrollContainer
+	scroll.ensure_control_visible(source)
+	await frames()
+	var start := source.get_global_rect().get_center()
+	var finish := target.get_global_rect().get_center()
+	var motion := InputEventMouseMotion.new()
+	motion.position = start
+	motion.global_position = start
+	viewport.push_input(motion)
+	var click := InputEventMouseButton.new()
+	click.position = start
+	click.global_position = start
+	click.button_index = MOUSE_BUTTON_LEFT
+	click.button_mask = MOUSE_BUTTON_MASK_LEFT
+	click.pressed = true
+	viewport.push_input(click)
+	await frames(2)
+	for point in [start + Vector2(24, -18), finish]:
+		motion = InputEventMouseMotion.new()
+		motion.position = point
+		motion.global_position = point
+		motion.relative = point - start
+		motion.button_mask = MOUSE_BUTTON_MASK_LEFT
+		viewport.push_input(motion)
+		await frames(2)
+	expect(viewport.gui_is_dragging(), "native party drag starts " + id)
+	click.position = finish
+	click.global_position = finish
+	click.button_mask = 0
+	click.pressed = false
+	viewport.push_input(click)
+	await frames(8)
+	expect(shell.session.data.party[slot] == id, "native party drag configures " + id)
+
 func key(code: int, pressed: bool = true) -> void:
 	var event := InputEventKey.new()
 	event.keycode = code
@@ -53,7 +93,17 @@ func key(code: int, pressed: bool = true) -> void:
 		viewport.push_input(event)
 		await frames(2)
 
+func finish_story() -> void:
+	for step in 100:
+		if shell.page != "event": return
+		await click("event_continue")
+		# The reader debounces real advances to prevent accidental double input.
+		await create_timer(.16).timeout
+	expect(false, "linear story completes within its bounded line count")
+
 func run() -> void:
+	expect(ProjectSettings.globalize_path("user://").begins_with("/tmp/"), "isolated test saves")
+	if failures: quit(1); return
 	var original_layout := SETTINGS.load_hud_layout()
 	SETTINGS.save_hud_layout(SETTINGS.HUD_LAYOUT_LEGACY)
 	# An actual rendered viewport avoids host window-manager/DPI resize races.
@@ -72,7 +122,17 @@ func run() -> void:
 	# Fixed test seed; production new campaigns receive a fresh reward stream.
 	shell.session.data.reward_seed = 781103
 	await click("route_forward")
-	await click("event_continue")
+	var first_line: String = shell.story_view.current_line_id
+	await key(KEY_ENTER)
+	expect(shell.page == "event" and shell.story_view.current_line_id == first_line, "Enter reveals the current line before advancing")
+	await key(KEY_SPACE)
+	var second_line: String = shell.story_view.current_line_id
+	expect(second_line != first_line and shell.session.data.story_checkpoint.line == second_line, "Space advances and saves the next stable line")
+	await key(KEY_ENTER)
+	await create_timer(.16).timeout
+	await key(KEY_ENTER)
+	expect(shell.story_view.current_line_id != second_line, "keyboard continues through several story lines")
+	await finish_story()
 	await click("route_forward")
 	await click("prep_start")
 	expect(shell.page == "battle", "real combat opened")
@@ -95,30 +155,42 @@ func run() -> void:
 	await capture("02-pause")
 	await key(KEY_ESCAPE)
 	await play_stage(3, "03-first-battle")
-	expect(shell.page == "route" and shell.session.data.current == "S02", "real victory returns to Emma event")
+	expect(shell.page == "reward" and shell.session.data.current == "B01", "real victory opens first reward")
 	expect("long_spear" in shell.session.data.inventory, "equipment elite yielded weapon")
-	await click("route_forward")
-	await click("event_continue")
-	expect(shell.page == "reward" and shell.session.data.owned.has("F11"), "story recruitment and rewards connected")
+	expect(not shell.session.data.owned.has("F11") and "F11" not in shell.session.data.pending.candidates, "first reward precedes Emma recruitment and pool unlock")
 	await capture("04-first-reward")
-	await click("reward_card_N16")
-	await click("reward_card_N13")
+	var first_candidates: Array = shell.session.data.pending.candidates
+	var auxiliary: String = "N16" if "N16" in first_candidates else str(first_candidates[0])
+	var other_pick: String = ""
+	for id: String in first_candidates:
+		if id != auxiliary: other_pick = id; break
+	await click("reward_card_" + auxiliary)
+	await click("reward_card_" + other_pick)
 	await click("reward_claim")
-	await click("nav_roster")
-	await click("character_F11")
-	await click("assign_0")
-	await click("character_N16")
-	await click("assign_1")
+	expect(shell.page == "event" and shell.session.data.current == "S02", "first claim directly opens Emma reader")
+	await finish_story()
+	expect(shell.session.data.owned.has("F11") and shell.session.data.pending.is_empty(), "Emma joins after reading and consumes no reward pick")
+	await click("nav_party")
+	await drag_character("F11", 0)
+	await drag_character(auxiliary, 1)
 	await capture("05-roster")
-	await click("nav_equipment")
+	await click("party_tab_equipment")
 	await click("equip_slot_weapon")
 	await click("equip_long_spear")
 	expect(shell.session.data.equipped.weapon == "long_spear", "between-stage equipment change")
-	await click("nav_route")
+	await click("page_back")
 	await click("route_forward")
 	await capture("06-preparation")
+	(shell.find_child("prep_member_1", true, false) as Control).grab_focus()
+	await key(KEY_SPACE)
+	expect(not PARTY_DRAG.carried(shell).is_empty(), "pick up a living auxiliary before starting battle")
 	await click("prep_start")
 	view = shell.battle_view
+	expect(PARTY_DRAG.carried(shell).is_empty(), "starting battle clears preparation carry")
+	await key(KEY_ESCAPE)
+	expect(view.battle.paused, "first battle Escape pauses after an unfinished keyboard pickup")
+	await key(KEY_ESCAPE)
+	expect(not view.battle.paused, "battle resumes normally after carry cleanup")
 	await key(KEY_E)
 	expect(view.battle.current().id == "F11", "keyboard switches to Emma")
 	expect(view.canvas.actor_visual.scene_file_path == "res://assets/players/wizard/wizard.tscn", "Emma reuses the existing mage scene")
@@ -178,8 +250,8 @@ func run() -> void:
 	var candidates: Array = shell.session.data.pending.candidates.duplicate()
 	for i in 3: await click("reward_card_" + candidates[i])
 	await click("reward_claim")
-	await click("route_forward")
-	await click("event_continue")
+	expect(shell.page == "event" and shell.session.data.current == "S03", "second claim directly opens market reader")
+	await finish_story()
 	await capture("12-next-content")
 	var forward := shell.find_child("route_forward", true, false) as Button
 	expect(not forward.disabled and shell.session.battle_available("B04"), "second segment is reachable after the market")

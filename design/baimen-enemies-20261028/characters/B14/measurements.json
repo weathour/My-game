@@ -1,0 +1,546 @@
+{
+  "version": 1,
+  "id": "B14",
+  "review_status": "accepted_for_export",
+  "review_notes": "Full independent boat-coffin master and all20 actions viewed. One fused coffin hull/ivory bowmask,4jointed shortfeet, teal drapes, stern banner and single bamboo pole intact. Sweep clip draws/raises/extends pole, command clip lifts vertical and points diagonal forward. No rider, scenery orwater. True CC extraction preserves long pole beyond nominal cells. Body175px calibration excludes sternbanner (bowhead tofeet); manual ground anchors exclude low dangling polecloth, one fixed source scale for all poses.",
+  "prompts": [
+    "source/actions-v1-prompt.txt",
+    "source/master-v1-prompt.txt"
+  ],
+  "canvas": {
+    "size": [
+      512,
+      512
+    ],
+    "anchor": [
+      256,
+      450
+    ],
+    "body_height_px": 216
+  },
+  "sources": {
+    "actions": {
+      "path": "source/actions-v1.png",
+      "size": [
+        1312,
+        1199
+      ],
+      "sha256": "98894176eb8e55480a369f840996a0497ade0a8a2b391044ebf49b7944ee515c",
+      "standing_body_height": 175
+    }
+  },
+  "portrait": {
+    "path": "source/master-v1.png",
+    "size": [
+      1536,
+      1024
+    ],
+    "sha256": "4818948837aef96ad46d7b538e0b73ea856b3526acb485acc9641f1e007d1582"
+  },
+  "poses": [
+    {
+      "id": "p01",
+      "source": "actions",
+      "anchor_source": [
+        185,
+        235
+      ],
+      "components": [
+        {
+          "bbox": [
+            31,
+            8,
+            348,
+            235
+          ],
+          "area": 25404
+        }
+      ]
+    },
+    {
+      "id": "p02",
+      "source": "actions",
+      "anchor_source": [
+        511,
+        235
+      ],
+      "components": [
+        {
+          "bbox": [
+            359,
+            8,
+            670,
+            235
+          ],
+          "area": 25223
+        },
+        {
+          "bbox": [
+            408,
+            196,
+            409,
+            198
+          ],
+          "area": 2
+        }
+      ]
+    },
+    {
+      "id": "p03",
+      "source": "actions",
+      "anchor_source": [
+        835,
+        235
+      ],
+      "components": [
+        {
+          "bbox": [
+            681,
+            9,
+            992,
+            235
+          ],
+          "area": 24884
+        },
+        {
+          "bbox": [
+            842,
+            215,
+            843,
+            216
+          ],
+          "area": 1
+        }
+      ]
+    },
+    {
+      "id": "p04",
+      "source": "actions",
+      "anchor_source": [
+        1157,
+        235
+      ],
+      "components": [
+        {
+          "bbox": [
+            1005,
+            9,
+            1302,
+            235
+          ],
+          "area": 25089
+        }
+      ]
+    },
+    {
+      "id": "p05",
+      "source": "actions",
+      "anchor_source": [
+        175,
+        465
+      ],
+      "components": [
+        {
+          "bbox": [
+            23,
+            239,
+            304,
+            465
+          ],
+          "area": 24589
+        }
+      ]
+    },
+    {
+      "id": "p06",
+      "source": "actions",
+      "anchor_source": [
+        504,
+        468
+      ],
+      "components": [
+        {
+          "bbox": [
+            342,
+            236,
+            637,
+            474
+          ],
+          "area": 24892
+        }
+      ]
+    },
+    {
+      "id": "p07",
+      "source": "actions",
+      "anchor_source": [
+        824,
+        468
+      ],
+      "components": [
+        {
+          "bbox": [
+            664,
+            240,
+            961,
+            468
+          ],
+          "area": 25243
+        }
+      ]
+    },
+    {
+      "id": "p08",
+      "source": "actions",
+      "anchor_source": [
+        1149,
+        475
+      ],
+      "components": [
+        {
+          "bbox": [
+            991,
+            243,
+            1291,
+            484
+          ],
+          "area": 25628
+        },
+        {
+          "bbox": [
+            990,
+            324,
+            991,
+            325
+          ],
+          "area": 1
+        },
+        {
+          "bbox": [
+            1227,
+            435,
+            1228,
+            436
+          ],
+          "area": 1
+        }
+      ]
+    },
+    {
+      "id": "p09",
+      "source": "actions",
+      "anchor_source": [
+        169,
+        697
+      ],
+      "components": [
+        {
+          "bbox": [
+            27,
+            471,
+            280,
+            697
+          ],
+          "area": 24005
+        },
+        {
+          "bbox": [
+            235,
+            666,
+            236,
+            667
+          ],
+          "area": 1
+        }
+      ]
+    },
+    {
+      "id": "p10",
+      "source": "actions",
+      "anchor_source": [
+        493,
+        699
+      ],
+      "components": [
+        {
+          "bbox": [
+            347,
+            470,
+            597,
+            699
+          ],
+          "area": 25141
+        }
+      ]
+    },
+    {
+      "id": "p11",
+      "source": "actions",
+      "anchor_source": [
+        807,
+        691
+      ],
+      "components": [
+        {
+          "bbox": [
+            653,
+            471,
+            999,
+            691
+          ],
+          "area": 23531
+        }
+      ]
+    },
+    {
+      "id": "p12",
+      "source": "actions",
+      "anchor_source": [
+        1160,
+        697
+      ],
+      "components": [
+        {
+          "bbox": [
+            1006,
+            476,
+            1289,
+            705
+          ],
+          "area": 24612
+        }
+      ]
+    },
+    {
+      "id": "p13",
+      "source": "actions",
+      "anchor_source": [
+        172,
+        962
+      ],
+      "components": [
+        {
+          "bbox": [
+            20,
+            700,
+            279,
+            962
+          ],
+          "area": 27019
+        }
+      ]
+    },
+    {
+      "id": "p14",
+      "source": "actions",
+      "anchor_source": [
+        491,
+        961
+      ],
+      "components": [
+        {
+          "bbox": [
+            336,
+            721,
+            630,
+            961
+          ],
+          "area": 26076
+        }
+      ]
+    },
+    {
+      "id": "p15",
+      "source": "actions",
+      "anchor_source": [
+        815,
+        960
+      ],
+      "components": [
+        {
+          "bbox": [
+            661,
+            717,
+            976,
+            960
+          ],
+          "area": 28563
+        }
+      ]
+    },
+    {
+      "id": "p16",
+      "source": "actions",
+      "anchor_source": [
+        1153,
+        956
+      ],
+      "components": [
+        {
+          "bbox": [
+            1004,
+            717,
+            1291,
+            976
+          ],
+          "area": 25763
+        }
+      ]
+    },
+    {
+      "id": "p17",
+      "source": "actions",
+      "anchor_source": [
+        174,
+        1170
+      ],
+      "components": [
+        {
+          "bbox": [
+            14,
+            959,
+            308,
+            1170
+          ],
+          "area": 25314
+        },
+        {
+          "bbox": [
+            47,
+            1053,
+            48,
+            1054
+          ],
+          "area": 1
+        }
+      ]
+    },
+    {
+      "id": "p18",
+      "source": "actions",
+      "anchor_source": [
+        510,
+        1182
+      ],
+      "components": [
+        {
+          "bbox": [
+            335,
+            983,
+            668,
+            1182
+          ],
+          "area": 25873
+        }
+      ]
+    },
+    {
+      "id": "p19",
+      "source": "actions",
+      "anchor_source": [
+        830,
+        1175
+      ],
+      "components": [
+        {
+          "bbox": [
+            675,
+            959,
+            992,
+            1185
+          ],
+          "area": 25230
+        },
+        {
+          "bbox": [
+            724,
+            1105,
+            725,
+            1106
+          ],
+          "area": 1
+        }
+      ]
+    },
+    {
+      "id": "p20",
+      "source": "actions",
+      "anchor_source": [
+        1138,
+        1176
+      ],
+      "components": [
+        {
+          "bbox": [
+            1003,
+            963,
+            1258,
+            1176
+          ],
+          "area": 23548
+        }
+      ]
+    }
+  ],
+  "clips": {
+    "idle": {
+      "poses": [
+        "p01",
+        "p02",
+        "p03",
+        "p04"
+      ],
+      "fps": 6,
+      "windup_frame": 0,
+      "contact_frame": 2
+    },
+    "move": {
+      "poses": [
+        "p05",
+        "p06",
+        "p07",
+        "p08"
+      ],
+      "fps": 9,
+      "windup_frame": 0,
+      "contact_frame": 2
+    },
+    "attack": {
+      "poses": [
+        "p09",
+        "p10",
+        "p11",
+        "p12"
+      ],
+      "fps": 8,
+      "windup_frame": 1,
+      "contact_frame": 2
+    },
+    "special": {
+      "poses": [
+        "p13",
+        "p14",
+        "p15",
+        "p16"
+      ],
+      "fps": 8,
+      "windup_frame": 1,
+      "contact_frame": 2
+    },
+    "hit": {
+      "poses": [
+        "p17",
+        "p18",
+        "p19",
+        "p20"
+      ],
+      "fps": 10,
+      "windup_frame": 0,
+      "contact_frame": 2
+    }
+  },
+  "action_clips": {
+    "swipe": "attack",
+    "command": "special"
+  }
+}

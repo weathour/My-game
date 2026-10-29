@@ -1,0 +1,2422 @@
+{
+  "schema": 1,
+  "coordinate_system": "source pixel coordinates; region=[x,y,width,height]; hip=horizontal body anchor; ground=foot contact y",
+  "runtime_frame_size": [
+    192,
+    192
+  ],
+  "runtime_anchor": [
+    96,
+    176
+  ],
+  "standing_body_height_pixels": 80,
+  "characters": [
+    {
+      "id": "F03",
+      "slug": "tianxiu",
+      "review_status": "accepted_for_export",
+      "standing_body_height": 301,
+      "review_notes": "20 distinct sequential poses inspected; source-connected components preserve full props across nominal cell edges. Fixed source scale; crouching/casting is not stretched.",
+      "poses": [
+        {
+          "label": "idle-1",
+          "component_bbox": [
+            77,
+            19,
+            224,
+            320
+          ],
+          "component_area": 27782,
+          "hip": 150,
+          "ground": 320
+        },
+        {
+          "label": "idle-2",
+          "component_bbox": [
+            349,
+            16,
+            497,
+            320
+          ],
+          "component_area": 28257,
+          "hip": 425,
+          "ground": 320
+        },
+        {
+          "label": "idle-3",
+          "component_bbox": [
+            612,
+            15,
+            769,
+            320
+          ],
+          "component_area": 28847,
+          "hip": 700,
+          "ground": 320
+        },
+        {
+          "label": "idle-4",
+          "component_bbox": [
+            904,
+            18,
+            1049,
+            320
+          ],
+          "component_area": 27806,
+          "hip": 977,
+          "ground": 320
+        },
+        {
+          "label": "run-1",
+          "component_bbox": [
+            27,
+            335,
+            253,
+            609
+          ],
+          "component_area": 32178,
+          "hip": 150,
+          "ground": 609
+        },
+        {
+          "label": "run-2",
+          "component_bbox": [
+            325,
+            335,
+            536,
+            609
+          ],
+          "component_area": 31658,
+          "hip": 435,
+          "ground": 609
+        },
+        {
+          "label": "run-3",
+          "component_bbox": [
+            575,
+            337,
+            807,
+            609
+          ],
+          "component_area": 32113,
+          "hip": 705,
+          "ground": 609
+        },
+        {
+          "label": "run-4",
+          "component_bbox": [
+            869,
+            335,
+            1093,
+            609
+          ],
+          "component_area": 31007,
+          "hip": 995,
+          "ground": 609
+        },
+        {
+          "label": "run-5",
+          "component_bbox": [
+            39,
+            621,
+            230,
+            888
+          ],
+          "component_area": 29092,
+          "hip": 145,
+          "ground": 889
+        },
+        {
+          "label": "run-6",
+          "component_bbox": [
+            316,
+            617,
+            528,
+            888
+          ],
+          "component_area": 32008,
+          "hip": 430,
+          "ground": 889
+        },
+        {
+          "label": "run-7",
+          "component_bbox": [
+            600,
+            625,
+            801,
+            889
+          ],
+          "component_area": 30378,
+          "hip": 715,
+          "ground": 889
+        },
+        {
+          "label": "run-8",
+          "component_bbox": [
+            883,
+            619,
+            1089,
+            888
+          ],
+          "component_area": 31523,
+          "hip": 990,
+          "ground": 889
+        },
+        {
+          "label": "attack-1",
+          "component_bbox": [
+            64,
+            893,
+            234,
+            1151
+          ],
+          "component_area": 26929,
+          "hip": 145,
+          "ground": 1151
+        },
+        {
+          "label": "attack-2",
+          "component_bbox": [
+            314,
+            891,
+            529,
+            1151
+          ],
+          "component_area": 29130,
+          "hip": 425,
+          "ground": 1151
+        },
+        {
+          "label": "attack-3",
+          "component_bbox": [
+            587,
+            899,
+            848,
+            1151
+          ],
+          "component_area": 30062,
+          "hip": 700,
+          "ground": 1151
+        },
+        {
+          "label": "attack-4",
+          "component_bbox": [
+            892,
+            897,
+            1083,
+            1151
+          ],
+          "component_area": 28206,
+          "hip": 990,
+          "ground": 1151
+        },
+        {
+          "label": "cast-1",
+          "component_bbox": [
+            65,
+            1154,
+            231,
+            1390
+          ],
+          "component_area": 24912,
+          "hip": 145,
+          "ground": 1390
+        },
+        {
+          "label": "cast-2",
+          "component_bbox": [
+            343,
+            1153,
+            515,
+            1390
+          ],
+          "component_area": 24970,
+          "hip": 430,
+          "ground": 1390
+        },
+        {
+          "label": "cast-3",
+          "component_bbox": [
+            612,
+            1149,
+            808,
+            1390
+          ],
+          "component_area": 26977,
+          "hip": 710,
+          "ground": 1390
+        },
+        {
+          "label": "cast-4",
+          "component_bbox": [
+            920,
+            1157,
+            1082,
+            1390
+          ],
+          "component_area": 23442,
+          "hip": 995,
+          "ground": 1390
+        }
+      ],
+      "combat": {
+        "path": "source/F03-tianxiu-combat-v1.png",
+        "sha256": "6eccee9893e96bac5d6712cebcdb1c9251c23d0850136ce07e77c4156b966d33",
+        "size": [
+          1122,
+          1402
+        ]
+      },
+      "portrait": {
+        "path": "source/F03-tianxiu-portrait-v1.png",
+        "sha256": "0a89a1705fdcf7540bcb6eadb97b76fa2d603863acdd1c282326824179bfa0c0",
+        "size": [
+          1254,
+          1254
+        ]
+      },
+      "attack_contact_frame": 2
+    },
+    {
+      "id": "F07",
+      "slug": "masanniang",
+      "review_status": "accepted_for_export",
+      "standing_body_height": 296,
+      "review_notes": "20 distinct sequential poses inspected; source-connected components preserve full props across nominal cell edges. Fixed source scale; crouching/casting is not stretched.",
+      "poses": [
+        {
+          "label": "idle-1",
+          "component_bbox": [
+            57,
+            19,
+            245,
+            315
+          ],
+          "component_area": 30698,
+          "hip": 169,
+          "ground": 315
+        },
+        {
+          "label": "idle-2",
+          "component_bbox": [
+            331,
+            19,
+            529,
+            315
+          ],
+          "component_area": 30566,
+          "hip": 443,
+          "ground": 315
+        },
+        {
+          "label": "idle-3",
+          "component_bbox": [
+            605,
+            19,
+            800,
+            315
+          ],
+          "component_area": 31573,
+          "hip": 716,
+          "ground": 315
+        },
+        {
+          "label": "idle-4",
+          "component_bbox": [
+            902,
+            20,
+            1079,
+            315
+          ],
+          "component_area": 30423,
+          "hip": 1000,
+          "ground": 315
+        },
+        {
+          "label": "run-1",
+          "component_bbox": [
+            34,
+            331,
+            279,
+            606
+          ],
+          "component_area": 34099,
+          "hip": 165,
+          "ground": 606
+        },
+        {
+          "label": "run-2",
+          "component_bbox": [
+            309,
+            331,
+            555,
+            604
+          ],
+          "component_area": 34861,
+          "hip": 445,
+          "ground": 606
+        },
+        {
+          "label": "run-3",
+          "component_bbox": [
+            589,
+            333,
+            833,
+            606
+          ],
+          "component_area": 33238,
+          "hip": 727,
+          "ground": 606
+        },
+        {
+          "label": "run-4",
+          "component_bbox": [
+            876,
+            335,
+            1105,
+            606
+          ],
+          "component_area": 32859,
+          "hip": 1005,
+          "ground": 606
+        },
+        {
+          "label": "run-5",
+          "component_bbox": [
+            32,
+            609,
+            271,
+            872
+          ],
+          "component_area": 31976,
+          "hip": 155,
+          "ground": 878
+        },
+        {
+          "label": "run-6",
+          "component_bbox": [
+            309,
+            612,
+            561,
+            878
+          ],
+          "component_area": 34212,
+          "hip": 435,
+          "ground": 878
+        },
+        {
+          "label": "run-7",
+          "component_bbox": [
+            587,
+            611,
+            853,
+            878
+          ],
+          "component_area": 36637,
+          "hip": 725,
+          "ground": 878
+        },
+        {
+          "label": "run-8",
+          "component_bbox": [
+            882,
+            612,
+            1115,
+            878
+          ],
+          "component_area": 33463,
+          "hip": 1000,
+          "ground": 878
+        },
+        {
+          "label": "attack-1",
+          "component_bbox": [
+            32,
+            885,
+            271,
+            1140
+          ],
+          "component_area": 33410,
+          "hip": 145,
+          "ground": 1140
+        },
+        {
+          "label": "attack-2",
+          "component_bbox": [
+            302,
+            894,
+            630,
+            1140
+          ],
+          "component_area": 30971,
+          "hip": 425,
+          "ground": 1140
+        },
+        {
+          "label": "attack-3",
+          "component_bbox": [
+            593,
+            898,
+            930,
+            1140
+          ],
+          "component_area": 30913,
+          "hip": 710,
+          "ground": 1140
+        },
+        {
+          "label": "attack-4",
+          "component_bbox": [
+            904,
+            892,
+            1111,
+            1140
+          ],
+          "component_area": 28041,
+          "hip": 1005,
+          "ground": 1140
+        },
+        {
+          "label": "cast-1",
+          "component_bbox": [
+            60,
+            1142,
+            264,
+            1392
+          ],
+          "component_area": 27839,
+          "hip": 160,
+          "ground": 1392
+        },
+        {
+          "label": "cast-2",
+          "component_bbox": [
+            304,
+            1141,
+            542,
+            1390
+          ],
+          "component_area": 31764,
+          "hip": 435,
+          "ground": 1392
+        },
+        {
+          "label": "cast-3",
+          "component_bbox": [
+            589,
+            1150,
+            843,
+            1391
+          ],
+          "component_area": 31496,
+          "hip": 715,
+          "ground": 1392
+        },
+        {
+          "label": "cast-4",
+          "component_bbox": [
+            902,
+            1144,
+            1099,
+            1392
+          ],
+          "component_area": 27606,
+          "hip": 1000,
+          "ground": 1392
+        }
+      ],
+      "combat": {
+        "path": "source/F07-masanniang-combat-v1.png",
+        "sha256": "da2cc4c7ab1ba88177916085e8f3eb8f1564e722d6476d0731703cc7cfc51d94",
+        "size": [
+          1122,
+          1402
+        ]
+      },
+      "portrait": {
+        "path": "source/F07-masanniang-portrait-v1.png",
+        "sha256": "aba6d48eb9c90e8543766ca9f3161aa7a48b400df616b8332b38372084268888",
+        "size": [
+          1254,
+          1254
+        ]
+      },
+      "attack_contact_frame": 1
+    },
+    {
+      "id": "F04",
+      "slug": "qianqiluo",
+      "review_status": "accepted_for_export",
+      "standing_body_height": 283,
+      "review_notes": "20 distinct poses and both portrait and combat identity reviewed; coin and purse preserved. Cast uses its lower source posture without stretching.",
+      "poses": [
+        {
+          "label": "idle-1",
+          "component_bbox": [
+            65,
+            17,
+            237,
+            300
+          ],
+          "component_area": 29042,
+          "hip": 150,
+          "ground": 300
+        },
+        {
+          "label": "idle-2",
+          "component_bbox": [
+            328,
+            15,
+            511,
+            304
+          ],
+          "component_area": 30130,
+          "hip": 420,
+          "ground": 304
+        },
+        {
+          "label": "idle-3",
+          "component_bbox": [
+            610,
+            18,
+            785,
+            304
+          ],
+          "component_area": 29860,
+          "hip": 700,
+          "ground": 304
+        },
+        {
+          "label": "idle-4",
+          "component_bbox": [
+            892,
+            18,
+            1079,
+            304
+          ],
+          "component_area": 29935,
+          "hip": 980,
+          "ground": 304
+        },
+        {
+          "label": "run-1",
+          "component_bbox": [
+            42,
+            312,
+            246,
+            580
+          ],
+          "component_area": 31244,
+          "hip": 150,
+          "ground": 580
+        },
+        {
+          "label": "run-2",
+          "component_bbox": [
+            287,
+            312,
+            521,
+            582
+          ],
+          "component_area": 32558,
+          "hip": 410,
+          "ground": 582
+        },
+        {
+          "label": "run-3",
+          "component_bbox": [
+            582,
+            317,
+            804,
+            583
+          ],
+          "component_area": 32599,
+          "hip": 700,
+          "ground": 583
+        },
+        {
+          "label": "run-4",
+          "component_bbox": [
+            864,
+            315,
+            1084,
+            588
+          ],
+          "component_area": 32571,
+          "hip": 980,
+          "ground": 588
+        },
+        {
+          "label": "run-5",
+          "component_bbox": [
+            34,
+            596,
+            246,
+            857
+          ],
+          "component_area": 30722,
+          "hip": 150,
+          "ground": 857
+        },
+        {
+          "label": "run-6",
+          "component_bbox": [
+            298,
+            597,
+            524,
+            859
+          ],
+          "component_area": 31043,
+          "hip": 420,
+          "ground": 859
+        },
+        {
+          "label": "run-7",
+          "component_bbox": [
+            593,
+            598,
+            799,
+            864
+          ],
+          "component_area": 30190,
+          "hip": 700,
+          "ground": 864
+        },
+        {
+          "label": "run-8",
+          "component_bbox": [
+            862,
+            597,
+            1080,
+            864
+          ],
+          "component_area": 30846,
+          "hip": 980,
+          "ground": 864
+        },
+        {
+          "label": "attack-1",
+          "component_bbox": [
+            49,
+            862,
+            215,
+            1135
+          ],
+          "component_area": 28259,
+          "hip": 140,
+          "ground": 1135
+        },
+        {
+          "label": "attack-2",
+          "component_bbox": [
+            311,
+            867,
+            503,
+            1135
+          ],
+          "component_area": 30494,
+          "hip": 420,
+          "ground": 1135
+        },
+        {
+          "label": "attack-3",
+          "component_bbox": [
+            561,
+            875,
+            836,
+            1135
+          ],
+          "component_area": 32355,
+          "hip": 690,
+          "ground": 1135
+        },
+        {
+          "label": "attack-4",
+          "component_bbox": [
+            880,
+            864,
+            1098,
+            1135
+          ],
+          "component_area": 30246,
+          "hip": 980,
+          "ground": 1135
+        },
+        {
+          "label": "cast-1",
+          "component_bbox": [
+            52,
+            1143,
+            224,
+            1395
+          ],
+          "component_area": 26168,
+          "hip": 140,
+          "ground": 1395
+        },
+        {
+          "label": "cast-2",
+          "component_bbox": [
+            328,
+            1145,
+            504,
+            1395
+          ],
+          "component_area": 25691,
+          "hip": 420,
+          "ground": 1395
+        },
+        {
+          "label": "cast-3",
+          "component_bbox": [
+            605,
+            1150,
+            811,
+            1396
+          ],
+          "component_area": 28909,
+          "hip": 700,
+          "ground": 1396
+        },
+        {
+          "label": "cast-4",
+          "component_bbox": [
+            906,
+            1144,
+            1071,
+            1395
+          ],
+          "component_area": 25299,
+          "hip": 990,
+          "ground": 1395
+        }
+      ],
+      "combat": {
+        "path": "source/F04-qianqiluo-combat-v1.png",
+        "sha256": "aa427ca5f5378752ec7800e5b85d8680802ce7d955d9b64c984bd7e37de54cc4",
+        "size": [
+          1121,
+          1403
+        ]
+      },
+      "portrait": {
+        "path": "source/F04-qianqiluo-portrait-v1.png",
+        "sha256": "b2c660f1dfdf2ec3ecc22974958df1271a45b7bb4497f35deb4558a57f097013",
+        "size": [
+          1254,
+          1254
+        ]
+      },
+      "attack_contact_frame": 2
+    },
+    {
+      "id": "F05",
+      "slug": "zhuqingheng",
+      "review_status": "accepted_for_export",
+      "standing_body_height": 280,
+      "attack_contact_frame": 2,
+      "review_notes": "20 distinct sequential poses inspected; entire connected costume and props retained. Fixed standing-body scale, no per-frame stretching. Attack contact is third authored frame (zero-based 2).",
+      "poses": [
+        {
+          "label": "idle-1",
+          "component_bbox": [
+            52,
+            16,
+            257,
+            296
+          ],
+          "component_area": 30973,
+          "hip": 175,
+          "ground": 296
+        },
+        {
+          "label": "idle-2",
+          "component_bbox": [
+            336,
+            17,
+            538,
+            296
+          ],
+          "component_area": 31147,
+          "hip": 455,
+          "ground": 296
+        },
+        {
+          "label": "idle-3",
+          "component_bbox": [
+            597,
+            14,
+            816,
+            296
+          ],
+          "component_area": 33970,
+          "hip": 730,
+          "ground": 296
+        },
+        {
+          "label": "idle-4",
+          "component_bbox": [
+            889,
+            16,
+            1087,
+            296
+          ],
+          "component_area": 32495,
+          "hip": 1010,
+          "ground": 296
+        },
+        {
+          "label": "run-1",
+          "component_bbox": [
+            30,
+            309,
+            260,
+            581
+          ],
+          "component_area": 37808,
+          "hip": 170,
+          "ground": 581
+        },
+        {
+          "label": "run-2",
+          "component_bbox": [
+            303,
+            309,
+            538,
+            579
+          ],
+          "component_area": 35981,
+          "hip": 450,
+          "ground": 579
+        },
+        {
+          "label": "run-3",
+          "component_bbox": [
+            563,
+            310,
+            796,
+            578
+          ],
+          "component_area": 35218,
+          "hip": 715,
+          "ground": 578
+        },
+        {
+          "label": "run-4",
+          "component_bbox": [
+            848,
+            312,
+            1086,
+            581
+          ],
+          "component_area": 37129,
+          "hip": 1000,
+          "ground": 581
+        },
+        {
+          "label": "run-5",
+          "component_bbox": [
+            23,
+            594,
+            253,
+            840
+          ],
+          "component_area": 31764,
+          "hip": 150,
+          "ground": 840
+        },
+        {
+          "label": "run-6",
+          "component_bbox": [
+            302,
+            594,
+            552,
+            844
+          ],
+          "component_area": 33813,
+          "hip": 435,
+          "ground": 844
+        },
+        {
+          "label": "run-7",
+          "component_bbox": [
+            587,
+            594,
+            825,
+            845
+          ],
+          "component_area": 31709,
+          "hip": 725,
+          "ground": 845
+        },
+        {
+          "label": "run-8",
+          "component_bbox": [
+            871,
+            597,
+            1094,
+            849
+          ],
+          "component_area": 32992,
+          "hip": 1000,
+          "ground": 849
+        },
+        {
+          "label": "attack-1",
+          "component_bbox": [
+            44,
+            854,
+            249,
+            1113
+          ],
+          "component_area": 32014,
+          "hip": 150,
+          "ground": 1113
+        },
+        {
+          "label": "attack-2",
+          "component_bbox": [
+            295,
+            854,
+            540,
+            1112
+          ],
+          "component_area": 34587,
+          "hip": 425,
+          "ground": 1112
+        },
+        {
+          "label": "attack-3",
+          "component_bbox": [
+            572,
+            854,
+            847,
+            1112
+          ],
+          "component_area": 33725,
+          "hip": 705,
+          "ground": 1112
+        },
+        {
+          "label": "attack-4",
+          "component_bbox": [
+            860,
+            855,
+            1111,
+            1112
+          ],
+          "component_area": 34304,
+          "hip": 995,
+          "ground": 1112
+        },
+        {
+          "label": "cast-1",
+          "component_bbox": [
+            46,
+            1124,
+            252,
+            1390
+          ],
+          "component_area": 32228,
+          "hip": 155,
+          "ground": 1390
+        },
+        {
+          "label": "cast-2",
+          "component_bbox": [
+            312,
+            1104,
+            522,
+            1390
+          ],
+          "component_area": 33807,
+          "hip": 435,
+          "ground": 1390
+        },
+        {
+          "label": "cast-3",
+          "component_bbox": [
+            596,
+            1133,
+            826,
+            1390
+          ],
+          "component_area": 35110,
+          "hip": 715,
+          "ground": 1390
+        },
+        {
+          "label": "cast-4",
+          "component_bbox": [
+            889,
+            1127,
+            1090,
+            1390
+          ],
+          "component_area": 30369,
+          "hip": 1000,
+          "ground": 1390
+        }
+      ],
+      "combat": {
+        "path": "source/F05-zhuqingheng-combat-v1.png",
+        "sha256": "c1d34f49c7ddd5a0c4bac5ab753f667b2b80749a6d82dc7fd37a3693d229730c",
+        "size": [
+          1122,
+          1402
+        ]
+      },
+      "portrait": {
+        "path": "source/F05-zhuqingheng-portrait-v1.png",
+        "sha256": "6cd394238682d75ed59d5bb087b922358fd1a622e8a425a625ecd877971e4b09",
+        "size": [
+          1254,
+          1254
+        ]
+      }
+    },
+    {
+      "id": "F08",
+      "slug": "taoxiaoman",
+      "review_status": "accepted_for_export",
+      "standing_body_height": 288,
+      "attack_contact_frame": 2,
+      "review_notes": "20 distinct sequential poses inspected; entire connected costume and props retained. Fixed standing-body scale, no per-frame stretching. Attack contact is third authored frame (zero-based 2).",
+      "poses": [
+        {
+          "label": "idle-1",
+          "component_bbox": [
+            87,
+            11,
+            251,
+            299
+          ],
+          "component_area": 29171,
+          "hip": 165,
+          "ground": 299
+        },
+        {
+          "label": "idle-2",
+          "component_bbox": [
+            368,
+            11,
+            536,
+            299
+          ],
+          "component_area": 29449,
+          "hip": 450,
+          "ground": 299
+        },
+        {
+          "label": "idle-3",
+          "component_bbox": [
+            634,
+            12,
+            799,
+            299
+          ],
+          "component_area": 29542,
+          "hip": 720,
+          "ground": 299
+        },
+        {
+          "label": "idle-4",
+          "component_bbox": [
+            906,
+            10,
+            1071,
+            299
+          ],
+          "component_area": 29673,
+          "hip": 995,
+          "ground": 299
+        },
+        {
+          "label": "run-1",
+          "component_bbox": [
+            30,
+            316,
+            248,
+            570
+          ],
+          "component_area": 30073,
+          "hip": 155,
+          "ground": 570
+        },
+        {
+          "label": "run-2",
+          "component_bbox": [
+            315,
+            318,
+            528,
+            571
+          ],
+          "component_area": 30517,
+          "hip": 435,
+          "ground": 571
+        },
+        {
+          "label": "run-3",
+          "component_bbox": [
+            587,
+            318,
+            801,
+            571
+          ],
+          "component_area": 28814,
+          "hip": 715,
+          "ground": 571
+        },
+        {
+          "label": "run-4",
+          "component_bbox": [
+            864,
+            317,
+            1080,
+            570
+          ],
+          "component_area": 30029,
+          "hip": 990,
+          "ground": 570
+        },
+        {
+          "label": "run-5",
+          "component_bbox": [
+            31,
+            581,
+            244,
+            839
+          ],
+          "component_area": 30291,
+          "hip": 150,
+          "ground": 839
+        },
+        {
+          "label": "run-6",
+          "component_bbox": [
+            319,
+            582,
+            529,
+            837
+          ],
+          "component_area": 29760,
+          "hip": 435,
+          "ground": 837
+        },
+        {
+          "label": "run-7",
+          "component_bbox": [
+            591,
+            585,
+            799,
+            841
+          ],
+          "component_area": 28482,
+          "hip": 710,
+          "ground": 841
+        },
+        {
+          "label": "run-8",
+          "component_bbox": [
+            866,
+            583,
+            1078,
+            841
+          ],
+          "component_area": 29257,
+          "hip": 990,
+          "ground": 841
+        },
+        {
+          "label": "attack-1",
+          "component_bbox": [
+            64,
+            851,
+            249,
+            1125
+          ],
+          "component_area": 29079,
+          "hip": 155,
+          "ground": 1125
+        },
+        {
+          "label": "attack-2",
+          "component_bbox": [
+            314,
+            829,
+            522,
+            1123
+          ],
+          "component_area": 32159,
+          "hip": 430,
+          "ground": 1123
+        },
+        {
+          "label": "attack-3",
+          "component_bbox": [
+            577,
+            874,
+            838,
+            1122
+          ],
+          "component_area": 29759,
+          "hip": 700,
+          "ground": 1122
+        },
+        {
+          "label": "attack-4",
+          "component_bbox": [
+            856,
+            894,
+            1106,
+            1122
+          ],
+          "component_area": 26311,
+          "hip": 990,
+          "ground": 1122
+        },
+        {
+          "label": "cast-1",
+          "component_bbox": [
+            89,
+            1127,
+            234,
+            1390
+          ],
+          "component_area": 25297,
+          "hip": 160,
+          "ground": 1390
+        },
+        {
+          "label": "cast-2",
+          "component_bbox": [
+            350,
+            1127,
+            515,
+            1390
+          ],
+          "component_area": 24898,
+          "hip": 435,
+          "ground": 1390
+        },
+        {
+          "label": "cast-3",
+          "component_bbox": [
+            607,
+            1131,
+            807,
+            1390
+          ],
+          "component_area": 28522,
+          "hip": 715,
+          "ground": 1390
+        },
+        {
+          "label": "cast-4",
+          "component_bbox": [
+            913,
+            1125,
+            1080,
+            1390
+          ],
+          "component_area": 27664,
+          "hip": 1000,
+          "ground": 1390
+        }
+      ],
+      "combat": {
+        "path": "source/F08-taoxiaoman-combat-v1.png",
+        "sha256": "bd31af8e0fcda73304a4e3f204d8a67a7390cb477edb15c0ac9e0483cc4a66fb",
+        "size": [
+          1122,
+          1402
+        ]
+      },
+      "portrait": {
+        "path": "source/F08-taoxiaoman-portrait-v1.png",
+        "sha256": "276bdbf256d4adf28c5add9a4f2dcef7dfeacafe191ab8e9fd7f250fddb61560",
+        "size": [
+          1254,
+          1254
+        ]
+      }
+    },
+    {
+      "id": "F09",
+      "slug": "liuwanqing",
+      "review_status": "accepted_for_export",
+      "standing_body_height": 285,
+      "attack_contact_frame": 2,
+      "review_notes": "20 distinct sequential poses inspected; entire connected costume and props retained. Fixed standing-body scale, no per-frame stretching. Attack contact is third authored frame (zero-based 2).",
+      "poses": [
+        {
+          "label": "idle-1",
+          "component_bbox": [
+            71,
+            22,
+            257,
+            307
+          ],
+          "component_area": 31300,
+          "hip": 170,
+          "ground": 307
+        },
+        {
+          "label": "idle-2",
+          "component_bbox": [
+            342,
+            27,
+            542,
+            308
+          ],
+          "component_area": 31590,
+          "hip": 450,
+          "ground": 308
+        },
+        {
+          "label": "idle-3",
+          "component_bbox": [
+            611,
+            25,
+            812,
+            308
+          ],
+          "component_area": 31528,
+          "hip": 725,
+          "ground": 308
+        },
+        {
+          "label": "idle-4",
+          "component_bbox": [
+            893,
+            26,
+            1075,
+            308
+          ],
+          "component_area": 30146,
+          "hip": 1000,
+          "ground": 308
+        },
+        {
+          "label": "run-1",
+          "component_bbox": [
+            41,
+            325,
+            277,
+            583
+          ],
+          "component_area": 33686,
+          "hip": 160,
+          "ground": 583
+        },
+        {
+          "label": "run-2",
+          "component_bbox": [
+            319,
+            322,
+            558,
+            579
+          ],
+          "component_area": 34181,
+          "hip": 445,
+          "ground": 579
+        },
+        {
+          "label": "run-3",
+          "component_bbox": [
+            597,
+            322,
+            803,
+            582
+          ],
+          "component_area": 31849,
+          "hip": 720,
+          "ground": 582
+        },
+        {
+          "label": "run-4",
+          "component_bbox": [
+            870,
+            324,
+            1106,
+            583
+          ],
+          "component_area": 32940,
+          "hip": 1000,
+          "ground": 583
+        },
+        {
+          "label": "run-5",
+          "component_bbox": [
+            32,
+            602,
+            258,
+            868
+          ],
+          "component_area": 33592,
+          "hip": 155,
+          "ground": 868
+        },
+        {
+          "label": "run-6",
+          "component_bbox": [
+            317,
+            601,
+            555,
+            868
+          ],
+          "component_area": 35545,
+          "hip": 440,
+          "ground": 868
+        },
+        {
+          "label": "run-7",
+          "component_bbox": [
+            585,
+            601,
+            849,
+            868
+          ],
+          "component_area": 36811,
+          "hip": 720,
+          "ground": 868
+        },
+        {
+          "label": "run-8",
+          "component_bbox": [
+            876,
+            602,
+            1110,
+            871
+          ],
+          "component_area": 34236,
+          "hip": 1000,
+          "ground": 871
+        },
+        {
+          "label": "attack-1",
+          "component_bbox": [
+            55,
+            883,
+            280,
+            1121
+          ],
+          "component_area": 30050,
+          "hip": 160,
+          "ground": 1121
+        },
+        {
+          "label": "attack-2",
+          "component_bbox": [
+            326,
+            883,
+            573,
+            1122
+          ],
+          "component_area": 33133,
+          "hip": 440,
+          "ground": 1122
+        },
+        {
+          "label": "attack-3",
+          "component_bbox": [
+            598,
+            884,
+            885,
+            1124
+          ],
+          "component_area": 34529,
+          "hip": 715,
+          "ground": 1124
+        },
+        {
+          "label": "attack-4",
+          "component_bbox": [
+            906,
+            877,
+            1093,
+            1124
+          ],
+          "component_area": 26258,
+          "hip": 1000,
+          "ground": 1124
+        },
+        {
+          "label": "cast-1",
+          "component_bbox": [
+            36,
+            1139,
+            276,
+            1382
+          ],
+          "component_area": 31999,
+          "hip": 160,
+          "ground": 1382
+        },
+        {
+          "label": "cast-2",
+          "component_bbox": [
+            320,
+            1129,
+            560,
+            1382
+          ],
+          "component_area": 34297,
+          "hip": 440,
+          "ground": 1382
+        },
+        {
+          "label": "cast-3",
+          "component_bbox": [
+            579,
+            1140,
+            870,
+            1381
+          ],
+          "component_area": 36831,
+          "hip": 720,
+          "ground": 1381
+        },
+        {
+          "label": "cast-4",
+          "component_bbox": [
+            892,
+            1139,
+            1095,
+            1380
+          ],
+          "component_area": 26741,
+          "hip": 1000,
+          "ground": 1380
+        }
+      ],
+      "combat": {
+        "path": "source/F09-liuwanqing-combat-v1.png",
+        "sha256": "f3227ec8bf62f365f001e8c3b690571ca11df04fca94594f75ffd82a9257d973",
+        "size": [
+          1122,
+          1402
+        ]
+      },
+      "portrait": {
+        "path": "source/F09-liuwanqing-portrait-v1.png",
+        "sha256": "d8673b12f9e5be25b670a1df02ea04d5e16f201e70c35595b2307f389cbfc877",
+        "size": [
+          1254,
+          1254
+        ]
+      }
+    },
+    {
+      "id": "F06",
+      "slug": "qinyan",
+      "review_status": "accepted_for_export",
+      "standing_body_height": 283,
+      "attack_contact_frame": 1,
+      "review_notes": "20 independent poses reviewed. Crossbow is leveled on attack index1; index2 is follow-through/forward stance. Complete stock and bow limbs kept.",
+      "poses": [
+        {
+          "label": "idle-1",
+          "component_bbox": [
+            66,
+            15,
+            254,
+            298
+          ],
+          "component_area": 28217,
+          "hip": 150,
+          "ground": 298
+        },
+        {
+          "label": "idle-2",
+          "component_bbox": [
+            344,
+            15,
+            529,
+            298
+          ],
+          "component_area": 28929,
+          "hip": 430,
+          "ground": 298
+        },
+        {
+          "label": "idle-3",
+          "component_bbox": [
+            615,
+            15,
+            800,
+            298
+          ],
+          "component_area": 28068,
+          "hip": 705,
+          "ground": 298
+        },
+        {
+          "label": "idle-4",
+          "component_bbox": [
+            891,
+            15,
+            1081,
+            298
+          ],
+          "component_area": 28825,
+          "hip": 990,
+          "ground": 298
+        },
+        {
+          "label": "run-1",
+          "component_bbox": [
+            27,
+            318,
+            269,
+            579
+          ],
+          "component_area": 30163,
+          "hip": 155,
+          "ground": 579
+        },
+        {
+          "label": "run-2",
+          "component_bbox": [
+            321,
+            318,
+            553,
+            579
+          ],
+          "component_area": 29237,
+          "hip": 445,
+          "ground": 579
+        },
+        {
+          "label": "run-3",
+          "component_bbox": [
+            593,
+            318,
+            823,
+            581
+          ],
+          "component_area": 28582,
+          "hip": 725,
+          "ground": 581
+        },
+        {
+          "label": "run-4",
+          "component_bbox": [
+            873,
+            318,
+            1104,
+            581
+          ],
+          "component_area": 29961,
+          "hip": 1000,
+          "ground": 581
+        },
+        {
+          "label": "run-5",
+          "component_bbox": [
+            24,
+            597,
+            268,
+            850
+          ],
+          "component_area": 30293,
+          "hip": 155,
+          "ground": 850
+        },
+        {
+          "label": "run-6",
+          "component_bbox": [
+            310,
+            597,
+            554,
+            853
+          ],
+          "component_area": 30369,
+          "hip": 445,
+          "ground": 853
+        },
+        {
+          "label": "run-7",
+          "component_bbox": [
+            593,
+            598,
+            830,
+            855
+          ],
+          "component_area": 29129,
+          "hip": 725,
+          "ground": 855
+        },
+        {
+          "label": "run-8",
+          "component_bbox": [
+            874,
+            597,
+            1103,
+            855
+          ],
+          "component_area": 28304,
+          "hip": 1000,
+          "ground": 855
+        },
+        {
+          "label": "attack-1",
+          "component_bbox": [
+            43,
+            863,
+            269,
+            1121
+          ],
+          "component_area": 29368,
+          "hip": 140,
+          "ground": 1121
+        },
+        {
+          "label": "attack-2",
+          "component_bbox": [
+            324,
+            866,
+            547,
+            1119
+          ],
+          "component_area": 28797,
+          "hip": 420,
+          "ground": 1119
+        },
+        {
+          "label": "attack-3",
+          "component_bbox": [
+            612,
+            866,
+            859,
+            1121
+          ],
+          "component_area": 30720,
+          "hip": 700,
+          "ground": 1121
+        },
+        {
+          "label": "attack-4",
+          "component_bbox": [
+            906,
+            863,
+            1098,
+            1121
+          ],
+          "component_area": 26919,
+          "hip": 990,
+          "ground": 1121
+        },
+        {
+          "label": "cast-1",
+          "component_bbox": [
+            48,
+            1131,
+            237,
+            1390
+          ],
+          "component_area": 27491,
+          "hip": 140,
+          "ground": 1390
+        },
+        {
+          "label": "cast-2",
+          "component_bbox": [
+            332,
+            1130,
+            538,
+            1389
+          ],
+          "component_area": 28367,
+          "hip": 430,
+          "ground": 1389
+        },
+        {
+          "label": "cast-3",
+          "component_bbox": [
+            620,
+            1133,
+            812,
+            1390
+          ],
+          "component_area": 28412,
+          "hip": 715,
+          "ground": 1390
+        },
+        {
+          "label": "cast-4",
+          "component_bbox": [
+            908,
+            1131,
+            1091,
+            1390
+          ],
+          "component_area": 27198,
+          "hip": 1000,
+          "ground": 1390
+        }
+      ],
+      "combat": {
+        "path": "source/F06-qinyan-combat-v1.png",
+        "sha256": "136638a7b73e0161b8752f617626cb8398d614af9ace187b7246c83df39ad9ee",
+        "size": [
+          1122,
+          1402
+        ]
+      },
+      "portrait": {
+        "path": "source/F06-qinyan-portrait-v1.png",
+        "sha256": "51d413cb69cf85dc45e0e33a2c45f2b7fc1c4f5c892f4f6a95b31515550ee7be",
+        "size": [
+          1254,
+          1254
+        ]
+      }
+    },
+    {
+      "id": "F10",
+      "slug": "luzhiwei",
+      "review_status": "accepted_for_export",
+      "standing_body_height": 281,
+      "attack_contact_frame": 1,
+      "review_notes": "20 distinct poses reviewed. Attack index1 first points command forward; index2 is fully extended follow-through. Book/brush and long hem retained.",
+      "poses": [
+        {
+          "label": "idle-1",
+          "component_bbox": [
+            86,
+            26,
+            215,
+            307
+          ],
+          "component_area": 23497,
+          "hip": 150,
+          "ground": 307
+        },
+        {
+          "label": "idle-2",
+          "component_bbox": [
+            365,
+            29,
+            499,
+            307
+          ],
+          "component_area": 23748,
+          "hip": 430,
+          "ground": 307
+        },
+        {
+          "label": "idle-3",
+          "component_bbox": [
+            639,
+            26,
+            772,
+            307
+          ],
+          "component_area": 24189,
+          "hip": 710,
+          "ground": 307
+        },
+        {
+          "label": "idle-4",
+          "component_bbox": [
+            931,
+            26,
+            1060,
+            307
+          ],
+          "component_area": 23588,
+          "hip": 1000,
+          "ground": 307
+        },
+        {
+          "label": "run-1",
+          "component_bbox": [
+            35,
+            325,
+            229,
+            570
+          ],
+          "component_area": 26091,
+          "hip": 145,
+          "ground": 570
+        },
+        {
+          "label": "run-2",
+          "component_bbox": [
+            313,
+            329,
+            510,
+            573
+          ],
+          "component_area": 27045,
+          "hip": 425,
+          "ground": 573
+        },
+        {
+          "label": "run-3",
+          "component_bbox": [
+            585,
+            327,
+            785,
+            569
+          ],
+          "component_area": 26963,
+          "hip": 700,
+          "ground": 569
+        },
+        {
+          "label": "run-4",
+          "component_bbox": [
+            874,
+            328,
+            1075,
+            572
+          ],
+          "component_area": 24716,
+          "hip": 990,
+          "ground": 572
+        },
+        {
+          "label": "run-5",
+          "component_bbox": [
+            34,
+            590,
+            242,
+            829
+          ],
+          "component_area": 27314,
+          "hip": 145,
+          "ground": 829
+        },
+        {
+          "label": "run-6",
+          "component_bbox": [
+            318,
+            589,
+            551,
+            823
+          ],
+          "component_area": 27549,
+          "hip": 430,
+          "ground": 823
+        },
+        {
+          "label": "run-7",
+          "component_bbox": [
+            599,
+            592,
+            805,
+            834
+          ],
+          "component_area": 27085,
+          "hip": 715,
+          "ground": 834
+        },
+        {
+          "label": "run-8",
+          "component_bbox": [
+            881,
+            590,
+            1079,
+            833
+          ],
+          "component_area": 27605,
+          "hip": 1000,
+          "ground": 833
+        },
+        {
+          "label": "attack-1",
+          "component_bbox": [
+            60,
+            851,
+            241,
+            1115
+          ],
+          "component_area": 27266,
+          "hip": 140,
+          "ground": 1115
+        },
+        {
+          "label": "attack-2",
+          "component_bbox": [
+            346,
+            860,
+            548,
+            1115
+          ],
+          "component_area": 26508,
+          "hip": 420,
+          "ground": 1115
+        },
+        {
+          "label": "attack-3",
+          "component_bbox": [
+            604,
+            860,
+            841,
+            1115
+          ],
+          "component_area": 29282,
+          "hip": 700,
+          "ground": 1115
+        },
+        {
+          "label": "attack-4",
+          "component_bbox": [
+            918,
+            861,
+            1053,
+            1115
+          ],
+          "component_area": 22284,
+          "hip": 990,
+          "ground": 1115
+        },
+        {
+          "label": "cast-1",
+          "component_bbox": [
+            72,
+            1134,
+            231,
+            1391
+          ],
+          "component_area": 24616,
+          "hip": 145,
+          "ground": 1391
+        },
+        {
+          "label": "cast-2",
+          "component_bbox": [
+            361,
+            1135,
+            522,
+            1391
+          ],
+          "component_area": 24047,
+          "hip": 430,
+          "ground": 1391
+        },
+        {
+          "label": "cast-3",
+          "component_bbox": [
+            612,
+            1133,
+            843,
+            1391
+          ],
+          "component_area": 27940,
+          "hip": 715,
+          "ground": 1391
+        },
+        {
+          "label": "cast-4",
+          "component_bbox": [
+            930,
+            1133,
+            1078,
+            1391
+          ],
+          "component_area": 23727,
+          "hip": 1000,
+          "ground": 1391
+        }
+      ],
+      "combat": {
+        "path": "source/F10-luzhiwei-combat-v1.png",
+        "sha256": "30728be5d5651d7b95e78e344e975b59dc9a1d44a3f17718160e0988f94632d4",
+        "size": [
+          1122,
+          1402
+        ]
+      },
+      "portrait": {
+        "path": "source/F10-luzhiwei-portrait-v1.png",
+        "sha256": "047f4521c9e8a0208483f4465a6a9df8d673917731c8cba7428291e7a3bbe7b2",
+        "size": [
+          1254,
+          1254
+        ]
+      }
+    },
+    {
+      "id": "F02",
+      "slug": "leina",
+      "review_status": "accepted_for_export",
+      "standing_body_height": 281,
+      "attack_contact_frame": 2,
+      "review_notes": "Original attack index2/3 merged through sword/cloak and were rejected. Only those two poses use independently authored attack-fix source, at a single 80/595 scale measured from recovery standing body. Other 18 source poses unchanged.",
+      "poses": [
+        {
+          "label": "idle-1",
+          "component_bbox": [
+            51,
+            22,
+            267,
+            303
+          ],
+          "component_area": 30114,
+          "hip": 160,
+          "ground": 303
+        },
+        {
+          "label": "idle-2",
+          "component_bbox": [
+            325,
+            21,
+            544,
+            303
+          ],
+          "component_area": 30161,
+          "hip": 435,
+          "ground": 303
+        },
+        {
+          "label": "idle-3",
+          "component_bbox": [
+            599,
+            22,
+            819,
+            303
+          ],
+          "component_area": 30283,
+          "hip": 710,
+          "ground": 303
+        },
+        {
+          "label": "idle-4",
+          "component_bbox": [
+            876,
+            22,
+            1107,
+            304
+          ],
+          "component_area": 30837,
+          "hip": 990,
+          "ground": 304
+        },
+        {
+          "label": "run-1",
+          "component_bbox": [
+            23,
+            328,
+            270,
+            570
+          ],
+          "component_area": 30179,
+          "hip": 165,
+          "ground": 570
+        },
+        {
+          "label": "run-2",
+          "component_bbox": [
+            299,
+            323,
+            558,
+            569
+          ],
+          "component_area": 29177,
+          "hip": 440,
+          "ground": 569
+        },
+        {
+          "label": "run-3",
+          "component_bbox": [
+            576,
+            321,
+            837,
+            570
+          ],
+          "component_area": 30016,
+          "hip": 715,
+          "ground": 570
+        },
+        {
+          "label": "run-4",
+          "component_bbox": [
+            857,
+            322,
+            1106,
+            572
+          ],
+          "component_area": 30662,
+          "hip": 995,
+          "ground": 572
+        },
+        {
+          "label": "run-5",
+          "component_bbox": [
+            29,
+            586,
+            288,
+            831
+          ],
+          "component_area": 30934,
+          "hip": 165,
+          "ground": 831
+        },
+        {
+          "label": "run-6",
+          "component_bbox": [
+            294,
+            589,
+            562,
+            833
+          ],
+          "component_area": 31520,
+          "hip": 440,
+          "ground": 833
+        },
+        {
+          "label": "run-7",
+          "component_bbox": [
+            572,
+            588,
+            846,
+            838
+          ],
+          "component_area": 31968,
+          "hip": 720,
+          "ground": 838
+        },
+        {
+          "label": "run-8",
+          "component_bbox": [
+            859,
+            585,
+            1112,
+            839
+          ],
+          "component_area": 32252,
+          "hip": 1000,
+          "ground": 839
+        },
+        {
+          "label": "attack-1",
+          "component_bbox": [
+            24,
+            846,
+            275,
+            1108
+          ],
+          "component_area": 33549,
+          "hip": 145,
+          "ground": 1108
+        },
+        {
+          "label": "attack-2",
+          "component_bbox": [
+            319,
+            872,
+            590,
+            1106
+          ],
+          "component_area": 30915,
+          "hip": 430,
+          "ground": 1106
+        },
+        {
+          "label": "attack-3",
+          "component_bbox": [
+            68,
+            95,
+            1171,
+            663
+          ],
+          "component_area": 209459,
+          "hip": 500,
+          "ground": 663,
+          "source": "attack_fix"
+        },
+        {
+          "label": "attack-4",
+          "component_bbox": [
+            1429,
+            68,
+            2127,
+            663
+          ],
+          "component_area": 167437,
+          "hip": 1765,
+          "ground": 663,
+          "source": "attack_fix"
+        },
+        {
+          "label": "cast-1",
+          "component_bbox": [
+            33,
+            1117,
+            243,
+            1377
+          ],
+          "component_area": 28768,
+          "hip": 145,
+          "ground": 1377
+        },
+        {
+          "label": "cast-2",
+          "component_bbox": [
+            317,
+            1110,
+            522,
+            1377
+          ],
+          "component_area": 28680,
+          "hip": 430,
+          "ground": 1377
+        },
+        {
+          "label": "cast-3",
+          "component_bbox": [
+            603,
+            1113,
+            807,
+            1377
+          ],
+          "component_area": 28587,
+          "hip": 715,
+          "ground": 1377
+        },
+        {
+          "label": "cast-4",
+          "component_bbox": [
+            872,
+            1132,
+            1099,
+            1378
+          ],
+          "component_area": 27887,
+          "hip": 990,
+          "ground": 1378
+        }
+      ],
+      "extra_sources": {
+        "attack_fix": {
+          "path": "source/F02-leina-attack-fix-v1.png",
+          "sha256": "cbec1520fac44275ead47667fe8ccacc824d8d6adfa4d5b8ed55816ec3b98f5d",
+          "size": [
+            2172,
+            724
+          ],
+          "standing_body_height": 595
+        }
+      },
+      "combat": {
+        "path": "source/F02-leina-combat-v1.png",
+        "sha256": "11f9d07489c90a47f4fcfce2d733b61ba7704e8399b114204a9b22e10e1a841f",
+        "size": [
+          1122,
+          1402
+        ]
+      },
+      "portrait": {
+        "path": "source/F02-leina-portrait-v1.png",
+        "sha256": "ce8e88a59db5c9994eeb253a100069d82adde8986ad261eaabf12c59cfbf7719",
+        "size": [
+          1254,
+          1254
+        ]
+      }
+    }
+  ]
+}

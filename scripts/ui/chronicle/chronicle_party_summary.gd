@@ -1,5 +1,6 @@
 extends RefCounted
 const T := preload("res://scripts/ui/chronicle/chronicle_theme.gd")
+const MODEL := preload("res://scripts/campaign/party_summary.gd")
 
 static func build(shell: Control, parent: Node) -> void:
 	var panel := T.panel(parent, false, 10, false)
@@ -34,23 +35,30 @@ static func build(shell: Control, parent: Node) -> void:
 	table.add_theme_constant_override("h_separation", 12)
 	table.add_theme_constant_override("v_separation", 3)
 	attributes.add_child(table)
-	for text in ["全队加成", "合计", "来源"]: table.add_child(T.label(text, 12, T.MUTED))
+	for text in ["全队加成", "实际", "来源"]: table.add_child(T.label(text, 12, T.MUTED))
 	for stat in model.attributes:
 		table.add_child(T.label(stat.title, 13))
 		var value := T.label(stat.text, 13, T.GOLD)
 		value.name = "party_bonus_" + stat.key
 		table.add_child(value)
-		var source := T.paragraph("、".join(stat.sources), T.MUTED, 12)
-		source.custom_minimum_size.x = 100
-		table.add_child(source)
+		var entry: Dictionary = stat
+		var source: Button = shell.action(table, "查看", func(): shell.show_notice(MODEL.source_text(entry)), "party_sources_" + str(stat.key))
+		T.compact_button(source)
+		source.add_theme_font_size_override("font_size", 12)
+		source.custom_minimum_size.y = 24
+		source.tooltip_text = "查看持有上限、装备与加成来源"
 	if model.attributes.is_empty(): attributes.add_child(T.label("尚无额外属性加成", 13, T.MUTED))
-	else: attributes.add_child(T.paragraph("持有加成含候补与阵亡人物；补给加成为按资源上限额外回复的比例。", T.MUTED, 12))
-	effects.add_child(T.label("后台支援", 14, T.GOLD))
+	else: attributes.add_child(T.paragraph("持有加成包含未上阵和阵亡人物，显示封顶后的实际值。查看来源可查上限；补给按资源上限额外回复。", T.MUTED, 12))
+	effects.add_child(T.label("后台支援与人物机制", 14, T.GOLD))
 	if model.supports.is_empty(): effects.add_child(T.label("暂无支援", 13, T.MUTED))
 	for support in model.supports:
 		var words := T.paragraph(support.title + "　" + support.text, T.LIGHT if support.active else T.MUTED, 13)
 		words.name = "party_support_" + support.id
 		effects.add_child(words)
+		if support.active and not str(support.get("mechanic", "")).is_empty():
+			var mechanic := T.paragraph("人物机制：" + str(support.mechanic), T.MUTED, 12)
+			mechanic.name = "party_mechanic_" + support.id
+			effects.add_child(mechanic)
 	if not model.supports.is_empty(): effects.add_child(T.paragraph("配置为辅助且位于后台时生效；前台登场或阵亡时停止。", T.MUTED, 12))
 	effects.add_child(T.label("行装效果", 14, T.GOLD))
 	for item in model.equipment:

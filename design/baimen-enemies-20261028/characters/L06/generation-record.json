@@ -1,0 +1,23 @@
+{
+  "generator": "built-in image_gen.imagegen",
+  "style_reference": {
+    "path": "source/portrait-v1.png",
+    "sha256": "74e7360d3d4402ff7691f00e06462b0339b011d9674a5060d7fe272308c9e477",
+    "role": "identity only; v2 deliberately omits dense style sheet to improve spacing"
+  },
+  "selected_versions": {
+    "portrait": "v1",
+    "sheet": "v2"
+  },
+  "rejected_versions": [
+    {
+      "path": "source/sheet-v1.png",
+      "reason": "top flag tips and rightmost blades run into source edge"
+    }
+  ],
+  "builtin_original_paths": {
+    "portrait_original": "/home/weathour/.codex/generated_images/01a1831a-f001-78c2-85f4-f99fc219fd1c/exec-3fe4353a-4933-4bf4-8f06-620a6f67cd79.png",
+    "sheet_original": "/home/weathour/.codex/generated_images/01a1831a-f001-78c2-85f4-f99fc219fd1c/exec-07da985a-93e2-499a-a3fc-a8e4cee4b161.png",
+    "rejected_sheet_v1_original": "/home/weathour/.codex/generated_images/01a1831a-f001-78c2-85f4-f99fc219fd1c/exec-e07b664a-2e23-4322-86ea-f9a87af43ccc.png"
+  }
+}

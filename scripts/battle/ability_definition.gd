@@ -13,6 +13,9 @@ enum DamageType { PHYSICAL, MAGIC }
 @export var unlock_level := 1
 @export var slow := 0.0
 @export var duration := 0.0
+@export var mechanic: String = ""
+@export var params: Dictionary = {}
+@export var target_scope: String = "active"
 
 static func make(key: String, label: String, type: Kind, power: float, distance: float, interval: float, cost: float = 0.0, level: int = 1) -> Resource:
 	var value := load("res://scripts/battle/ability_definition.gd").new() as Resource

@@ -1,0 +1,248 @@
+{
+  "version": 1,
+  "id": "D05",
+  "review_status": "accepted_for_export",
+  "review_notes": "Viewed eight stationary coffin poses: row1 slow lid breathing with restrained jade seam; row2 taut rope/lid deformation and recovery. No monster, walking feet or offspring baked in. Stationary object baseline move/attack/special explicitly reuse idle breathe cycle, never fake locomotion. Single270px standing coffin-body calibration, skid-ground anchor.",
+  "prompts": [
+    "portrait-prompt.txt",
+    "sheet-prompt.txt"
+  ],
+  "canvas": {
+    "size": [
+      128,
+      128
+    ],
+    "anchor": [
+      64,
+      112
+    ],
+    "body_height_px": 64
+  },
+  "sources": {
+    "sheet": {
+      "path": "source/sheet-v1.png",
+      "size": [
+        1774,
+        887
+      ],
+      "sha256": "74cd8feeb5b3902ceb4274d7f0eda75eea9e514df338da551ebe21c9dec17133",
+      "standing_body_height": 270
+    }
+  },
+  "portrait": {
+    "path": "source/portrait-v1.png",
+    "size": [
+      1536,
+      1024
+    ],
+    "sha256": "f04d6de09c0fd0f07886462f67ba5383c73b8475aa58ee082454919dd152150f"
+  },
+  "poses": [
+    {
+      "id": "idle_1",
+      "source": "sheet",
+      "anchor_source": [
+        237.0,
+        419
+      ],
+      "components": [
+        {
+          "bbox": [
+            30,
+            150,
+            444,
+            419
+          ],
+          "area": 70587
+        }
+      ]
+    },
+    {
+      "id": "idle_2",
+      "source": "sheet",
+      "anchor_source": [
+        680.0,
+        418
+      ],
+      "components": [
+        {
+          "bbox": [
+            474,
+            150,
+            886,
+            418
+          ],
+          "area": 71667
+        }
+      ]
+    },
+    {
+      "id": "idle_3",
+      "source": "sheet",
+      "anchor_source": [
+        1122.5,
+        419
+      ],
+      "components": [
+        {
+          "bbox": [
+            916,
+            148,
+            1329,
+            419
+          ],
+          "area": 70626
+        }
+      ]
+    },
+    {
+      "id": "idle_4",
+      "source": "sheet",
+      "anchor_source": [
+        1562.5,
+        418
+      ],
+      "components": [
+        {
+          "bbox": [
+            1358,
+            154,
+            1767,
+            418
+          ],
+          "area": 69040
+        }
+      ]
+    },
+    {
+      "id": "hit_1",
+      "source": "sheet",
+      "anchor_source": [
+        237.5,
+        820
+      ],
+      "components": [
+        {
+          "bbox": [
+            25,
+            544,
+            450,
+            820
+          ],
+          "area": 71896
+        }
+      ]
+    },
+    {
+      "id": "hit_2",
+      "source": "sheet",
+      "anchor_source": [
+        677.5,
+        819
+      ],
+      "components": [
+        {
+          "bbox": [
+            464,
+            532,
+            891,
+            819
+          ],
+          "area": 77033
+        }
+      ]
+    },
+    {
+      "id": "hit_3",
+      "source": "sheet",
+      "anchor_source": [
+        1124.0,
+        821
+      ],
+      "components": [
+        {
+          "bbox": [
+            918,
+            550,
+            1330,
+            821
+          ],
+          "area": 69684
+        }
+      ]
+    },
+    {
+      "id": "hit_4",
+      "source": "sheet",
+      "anchor_source": [
+        1560.5,
+        817
+      ],
+      "components": [
+        {
+          "bbox": [
+            1354,
+            554,
+            1767,
+            817
+          ],
+          "area": 69529
+        }
+      ]
+    }
+  ],
+  "clips": {
+    "idle": {
+      "poses": [
+        "idle_1",
+        "idle_2",
+        "idle_3",
+        "idle_4"
+      ],
+      "fps": 6,
+      "contact_frame": 2
+    },
+    "move": {
+      "poses": [
+        "idle_1",
+        "idle_2",
+        "idle_3",
+        "idle_4"
+      ],
+      "fps": 6,
+      "contact_frame": 2
+    },
+    "attack": {
+      "poses": [
+        "idle_1",
+        "idle_2",
+        "idle_3",
+        "idle_4"
+      ],
+      "fps": 6,
+      "contact_frame": 2
+    },
+    "special": {
+      "poses": [
+        "idle_1",
+        "idle_2",
+        "idle_3",
+        "idle_4"
+      ],
+      "fps": 6,
+      "contact_frame": 2
+    },
+    "hit": {
+      "poses": [
+        "hit_1",
+        "hit_2",
+        "hit_3",
+        "hit_4"
+      ],
+      "fps": 10,
+      "contact_frame": 2
+    }
+  },
+  "action_clips": {},
+  "faces_left": false
+}

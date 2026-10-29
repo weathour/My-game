@@ -40,7 +40,9 @@ func run() -> void:
 		expect(RARITY.TIERS.has(state.characters[id].rarity), "explicit valid rarity " + id)
 		if id.begins_with("N"): expect(state.characters[id].rarity == "common", "ordinary troops blue " + id)
 	expect(state.characters.M03.kind == state.characters.M01.kind and state.characters.M03.rarity != state.characters.M01.rarity, "rarity independent of important-character flag")
-	for id in C.IDS: state.data.owned[id] = C.record(id, 2)
+	# Keep the original twelve-person numeric fixture stable as the content library grows.
+	for id in ["JIA", "F11", "N01", "N04", "N07", "N13", "N16", "N17", "F03", "N18", "F07", "N14"]:
+		state.data.owned[id] = C.record(id, 2)
 	state.data.owned.N01.level = 5
 	state.data.owned.N13.dead = true
 	state.data.owned.N13.hp = 0
@@ -63,7 +65,10 @@ func run() -> void:
 	battle.current().hp = 5
 	battle.tick(0.001, Vector2.ZERO)
 	var actual_heal: float = battle.current().hp - 5
-	expect(actual_heal > 0 and summary.supports[1].text.contains(String.num(actual_heal, 2) + " 生命"), "displayed heal agrees with actual support cast")
+	var healing_number := RegEx.new()
+	healing_number.compile("恢复([0-9.]+)生命")
+	var displayed_heal := healing_number.search(summary.supports[1].text)
+	expect(actual_heal > 0 and displayed_heal != null and is_equal_approx(float(displayed_heal.get_string(1)), actual_heal), "displayed heal agrees with actual support cast")
 	state.data.owned.N16.dead = true
 	state.data.owned.N16.hp = 0
 	summary = state.party_summary()

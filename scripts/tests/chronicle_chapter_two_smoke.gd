@@ -96,7 +96,9 @@ func new_character_contracts() -> void:
 		for i in 30: b.tick(1.0/60.0,Vector2.ZERO)
 		expect(b.characters[id].cooldowns.has(C.definition(id).support.id) and b.characters[id].mp == mana, id+" support works without spending mana")
 		if id == "F03": expect(b.characters.JIA.hp > hp, "configured physician heals the current actor")
-		elif id == "N18": expect(b.characters.JIA.mp >= 8, "configured clerk restores current actor mana")
+		elif id == "N18":
+			expect(b.mechanics.states.JIA.windows.has("rally"), "configured clerk grants a finite current-actor rally")
+			expect(b.characters.JIA.mp < 8, "clerk rally does not invent a mana-restoration effect")
 		else: expect(enemy.slow_time > 0, id+" configured support slows enemies")
 		request.members = ["JIA"]
 		var reserve := BATTLE.new(request)
@@ -127,8 +129,8 @@ func campaign_path(branch: String) -> void:
 	state.data.reward_seed = 781103
 	expect(state.begin_campaign() and state.resolve_event(), "begin real campaign " + branch)
 	if not await play(state, branch, 3): return
-	expect(state.resolve_event(), "Emma event")
 	claim(state)
+	expect(state.resolve_event(), "Emma event follows first reward")
 	team(state)
 	if not await play(state, branch, 2): return
 	claim(state)
@@ -173,16 +175,20 @@ func campaign_path(branch: String) -> void:
 	if branch == "B04": await capture_page(state,"route","optional-elite")
 	expect(state.save_slot("2"), "save at optional elite fork")
 	expect(state.choose_node("S05") and state.resolve_event(), "elite can be bypassed")
-	expect("N14" not in state.data.pool and "B06" not in state.data.completed and not state.battle_available("B07"), "bypass loses elite unlock and reaches content boundary")
+	expect("N14" not in state.data.pool and "B06" not in state.data.completed and state.battle_available("B07"), "bypass loses elite unlock and reaches the completed next segment")
 	expect(state.load_slot("2") and state.choose_node("B06"), "reload optional elite fork")
 	team(state)
 	if not await play(state, branch, 2): return
-	expect("N14" in state.data.pool, "elite victory unlocks curse scholar before reward generation")
+	expect(state.data.pending.is_empty() and state.data.deferred_reward.get("id") == "B06" and "N14" not in state.data.pool and "F05" not in state.data.pool, "elite victory waits for its story before pool unlock and reward generation")
+	expect(state.save_slot("3") and state.load_slot("3") and state.data.deferred_reward.get("id") == "B06", "unread elite story and its deferred reward survive reload")
+	expect(state.resolve_event() and "N14" in state.data.pool and "F05" in state.data.pool, "elite story unlocks curse characters before reward generation")
+	expect(state.data.pending.candidates.size() == 5 and state.data.pending.picks == 3, "post-story elite reward retains the chosen card-field extra")
 	var pending: Dictionary = state.data.pending.duplicate(true)
 	expect(state.save_slot("3") and state.load_slot("3") and state.data.pending == pending, "new-stage reward survives reload without reroll")
 	claim(state)
 	expect(state.resolve_event() and state.data.current == "B07", "camp event reaches the next chapter segment")
-	expect(state.start_battle().is_empty() and not state.in_battle, "unimplemented segment remains blocked")
+	expect(not state.start_battle().is_empty() and state.in_battle, "full chapter opens the next authored encounter")
+	state.abandon_battle()
 	expect(state.valid(state.data), "full new-segment campaign remains save-valid")
 	if branch == "B04": await capture_page(state,"route","next-segment")
 
@@ -266,7 +272,7 @@ func capture_page(state: RefCounted, page: String, name: String) -> void:
 	for i in 4: await process_frame
 	if page == "route":
 		var button := shell.find_child("route_forward",true,false) as Button
-		expect(button != null and button.disabled == (state.data.current == "B07"), "route action matches real content availability: "+name)
+		expect(button != null and not button.disabled, "route action matches real content availability: "+name)
 	elif page == "event": expect(shell.find_child("event_continue",true,false) != null, "event can continue: "+name)
 	else: expect(shell.find_child("reward_claim",true,false) != null, "new-stage reward has a claim action")
 	if not capture_dir.is_empty() and DisplayServer.get_name() != "headless":

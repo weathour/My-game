@@ -1,0 +1,4001 @@
+{
+	"characters": [
+		{
+			"automatic": [],
+			"back_text": "无后台支援；主角保留独立生命、魔法与冷却。",
+			"base_stats": {
+				"armor": 7,
+				"attack": 27,
+				"hp": 220,
+				"move": 215,
+				"mp": 90,
+				"regen": 2.8,
+				"speed": 1.45
+			},
+			"basic": {
+				"cooldown": 0.689655172413793,
+				"description": "扇形攻击，范围112，造成100%攻击（约27基础伤害）。",
+				"id": "JIA_basic",
+				"kind": "SWEEP",
+				"mana_cost": 0.0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"reach": 112.0,
+				"target_scope": "active",
+				"title": "普攻",
+				"unlock_level": 1,
+				"unlocked": true
+			},
+			"entry_level": 1,
+			"growth": {
+				"armor": 0.5,
+				"attack": 3.0,
+				"hp": 16.0,
+				"mp": 5.0
+			},
+			"id": "JIA",
+			"level": 1,
+			"manual": [
+				{
+					"cooldown": 5.0,
+					"description": "圆形范围攻击，范围150，造成250%攻击（约67.5基础伤害）。",
+					"id": "jia_sweep",
+					"kind": "NOVA",
+					"mana_cost": 22.0,
+					"mechanic": "",
+					"params": {
+
+					},
+					"reach": 150.0,
+					"target_scope": "active",
+					"title": "横扫",
+					"unlock_level": 1,
+					"unlocked": true
+				},
+				{
+					"cooldown": 10.0,
+					"description": "贯穿直线攻击，范围245，造成450%攻击（约121.5基础伤害）；使命中目标承伤增加12%，持续4秒；同类取最强不相加；Lv.3解锁。",
+					"id": "jia_break",
+					"kind": "THRUST",
+					"mana_cost": 36.0,
+					"mechanic": "expose",
+					"params": {
+						"duration": 4,
+						"multiplier": 0.12
+					},
+					"reach": 245.0,
+					"target_scope": "active",
+					"title": "破阵",
+					"unlock_level": 3,
+					"unlocked": false
+				}
+			],
+			"name": "贾苇索",
+			"owned": {
+
+			},
+			"owned_text": "固定主角；阵亡则本关失败。",
+			"stats": {
+				"armor": 7.0,
+				"attack": 27.0,
+				"hp": 220.0,
+				"move": 215.0,
+				"mp": 90.0,
+				"regen": 2.8,
+				"speed": 1.45
+			},
+			"support": {
+
+			},
+			"trait": "",
+			"trait_description": "",
+			"trait_params": {
+
+			}
+		},
+		{
+			"automatic": [],
+			"back_text": "后台每8秒自动发动「掠阵横戟」，不耗魔法；仅配置且存活时生效。",
+			"base_stats": {
+				"armor": 9,
+				"attack": 38,
+				"hp": 255,
+				"move": 210,
+				"mp": 95,
+				"regen": 2.1,
+				"speed": 1
+			},
+			"basic": {
+				"cooldown": 1.0,
+				"description": "扇形攻击，范围155，造成100%攻击（约62基础伤害）。",
+				"id": "M01_basic",
+				"kind": "SWEEP",
+				"mana_cost": 0.0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"reach": 155.0,
+				"target_scope": "active",
+				"title": "普攻",
+				"unlock_level": 1,
+				"unlocked": true
+			},
+			"entry_level": 9,
+			"growth": {
+				"armor": 0.5,
+				"attack": 3.0,
+				"hp": 16.0,
+				"mp": 5.0
+			},
+			"id": "M01",
+			"level": 9,
+			"manual": [
+				{
+					"cooldown": 13.0,
+					"description": "圆形范围攻击，范围240，造成500%攻击（约310基础伤害）；使命中目标承伤增加16%，持续4秒；同类取最强不相加。",
+					"id": "M01_cleave",
+					"kind": "NOVA",
+					"mana_cost": 46.0,
+					"mechanic": "expose",
+					"params": {
+						"duration": 4,
+						"multiplier": 0.16
+					},
+					"reach": 240.0,
+					"target_scope": "active",
+					"title": "方天破军",
+					"unlock_level": 1,
+					"unlocked": true
+				},
+				{
+					"cooldown": 20.0,
+					"description": "施放者本人获得6秒强化：攻击＋30%、攻速＋8%；同类取最强。",
+					"id": "M01_rally",
+					"kind": "WARD",
+					"mana_cost": 48.0,
+					"mechanic": "rally",
+					"params": {
+						"attack_multiplier": 0.3,
+						"duration": 6,
+						"speed_multiplier": 0.08
+					},
+					"reach": 0.0,
+					"target_scope": "self",
+					"title": "鬼神降临",
+					"unlock_level": 9,
+					"unlocked": true
+				}
+			],
+			"name": "吕布",
+			"owned": {
+				"attack": 0.3
+			},
+			"owned_text": "每级攻击＋0.3。持有即生效，候补与阵亡仍保留；全库同属性合计有上限。",
+			"stats": {
+				"armor": 13.0,
+				"attack": 62.0,
+				"hp": 383.0,
+				"move": 210.0,
+				"mp": 135.0,
+				"regen": 2.1,
+				"speed": 1.0
+			},
+			"support": {
+				"cooldown": 8.0,
+				"description": "扇形攻击，范围225，造成200%攻击（约124基础伤害）。",
+				"id": "M01_support",
+				"kind": "SWEEP",
+				"mana_cost": 0.0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"reach": 225.0,
+				"target_scope": "active",
+				"title": "掠阵横戟",
+				"unlock_level": 1,
+				"unlocked": true
+			},
+			"trait": "",
+			"trait_description": "",
+			"trait_params": {
+
+			}
+		},
+		{
+			"automatic": [],
+			"back_text": "后台每5秒自动发动「追锋」，不耗魔法；仅配置且存活时生效。",
+			"base_stats": {
+				"armor": 8,
+				"attack": 30,
+				"hp": 210,
+				"move": 230,
+				"mp": 105,
+				"regen": 2.7,
+				"speed": 1.35
+			},
+			"basic": {
+				"cooldown": 0.740740740740741,
+				"description": "贯穿直线攻击，范围155，造成100%攻击（约51基础伤害）。",
+				"id": "M02_basic",
+				"kind": "THRUST",
+				"mana_cost": 0.0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"reach": 155.0,
+				"target_scope": "active",
+				"title": "普攻",
+				"unlock_level": 1,
+				"unlocked": true
+			},
+			"entry_level": 8,
+			"growth": {
+				"armor": 0.5,
+				"attack": 3.0,
+				"hp": 16.0,
+				"mp": 5.0
+			},
+			"id": "M02",
+			"level": 8,
+			"manual": [
+				{
+					"cooldown": 8.0,
+					"description": "贯穿直线攻击，范围230，造成320%攻击（约163.2基础伤害）；减速60%，持续1.2秒；向攻击方向移动150，不提供无敌。",
+					"id": "M02_dash",
+					"kind": "THRUST",
+					"mana_cost": 30.0,
+					"mechanic": "dash",
+					"params": {
+						"distance": 150
+					},
+					"reach": 230.0,
+					"target_scope": "active",
+					"title": "破阵突击",
+					"unlock_level": 1,
+					"unlocked": true
+				},
+				{
+					"cooldown": 11.0,
+					"description": "贯穿直线攻击，范围240，造成400%攻击（约204基础伤害）；使命中目标承伤增加15%，持续4秒；同类取最强不相加。",
+					"id": "M02_expose",
+					"kind": "THRUST",
+					"mana_cost": 38.0,
+					"mechanic": "expose",
+					"params": {
+						"duration": 4,
+						"multiplier": 0.15
+					},
+					"reach": 240.0,
+					"target_scope": "active",
+					"title": "斩将",
+					"unlock_level": 8,
+					"unlocked": true
+				}
+			],
+			"name": "张辽",
+			"owned": {
+				"move": 0.3
+			},
+			"owned_text": "每级移速＋0.3。持有即生效，候补与阵亡仍保留；全库同属性合计有上限。",
+			"stats": {
+				"armor": 11.5,
+				"attack": 51.0,
+				"hp": 322.0,
+				"move": 230.0,
+				"mp": 140.0,
+				"regen": 2.7,
+				"speed": 1.35
+			},
+			"support": {
+				"cooldown": 5.0,
+				"description": "贯穿直线攻击，范围240，造成150%攻击（约76.5基础伤害）；减速40%，持续1.2秒。",
+				"id": "M02_support",
+				"kind": "THRUST",
+				"mana_cost": 0.0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"reach": 240.0,
+				"target_scope": "active",
+				"title": "追锋",
+				"unlock_level": 1,
+				"unlocked": true
+			},
+			"trait": "",
+			"trait_description": "",
+			"trait_params": {
+
+			}
+		},
+		{
+			"automatic": [],
+			"back_text": "后台每9秒自动发动「陷阵护盾」，不耗魔法；仅配置且存活时生效。",
+			"base_stats": {
+				"armor": 17,
+				"attack": 22,
+				"hp": 275,
+				"move": 185,
+				"mp": 115,
+				"regen": 2.8,
+				"speed": 1
+			},
+			"basic": {
+				"cooldown": 1.0,
+				"description": "贯穿直线攻击，范围145，造成100%攻击（约43基础伤害）。",
+				"id": "M03_basic",
+				"kind": "THRUST",
+				"mana_cost": 0.0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"reach": 145.0,
+				"target_scope": "active",
+				"title": "普攻",
+				"unlock_level": 1,
+				"unlocked": true
+			},
+			"entry_level": 8,
+			"growth": {
+				"armor": 0.5,
+				"attack": 3.0,
+				"hp": 16.0,
+				"mp": 5.0
+			},
+			"id": "M03",
+			"level": 8,
+			"manual": [
+				{
+					"cooldown": 14.0,
+					"description": "给全部存活编队人物提供55护盾；每位受益者的总护盾不超过自身生命上限的35%。",
+					"id": "M03_guard",
+					"kind": "WARD",
+					"mana_cost": 36.0,
+					"mechanic": "",
+					"params": {
+
+					},
+					"reach": 0.0,
+					"target_scope": "party",
+					"title": "陷阵守御",
+					"unlock_level": 1,
+					"unlocked": true
+				},
+				{
+					"cooldown": 18.0,
+					"description": "原地部署半径195区域6秒，每1秒造成22%施放者攻击伤害；离场后仍按施放者计算；每次脉冲为区域内的全部存活编队人物恢复5生命。",
+					"id": "M03_field",
+					"kind": "NOVA",
+					"mana_cost": 42.0,
+					"mechanic": "field",
+					"params": {
+						"duration": 6,
+						"follow": false,
+						"heal": 5,
+						"interval": 1,
+						"mana": 0,
+						"radius": 195
+					},
+					"reach": 195.0,
+					"target_scope": "party",
+					"title": "铁壁阵",
+					"unlock_level": 8,
+					"unlocked": true
+				}
+			],
+			"name": "高顺",
+			"owned": {
+				"armor": 0.16
+			},
+			"owned_text": "每级防御＋0.16。持有即生效，候补与阵亡仍保留；全库同属性合计有上限。",
+			"stats": {
+				"armor": 20.5,
+				"attack": 43.0,
+				"hp": 387.0,
+				"move": 185.0,
+				"mp": 150.0,
+				"regen": 2.8,
+				"speed": 1.0
+			},
+			"support": {
+				"cooldown": 9.0,
+				"description": "给当前人物提供26护盾；每位受益者的总护盾不超过自身生命上限的35%。",
+				"id": "M03_support",
+				"kind": "WARD",
+				"mana_cost": 0.0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"reach": 0.0,
+				"target_scope": "active",
+				"title": "陷阵护盾",
+				"unlock_level": 1,
+				"unlocked": true
+			},
+			"trait": "",
+			"trait_description": "",
+			"trait_params": {
+
+			}
+		},
+		{
+			"automatic": [],
+			"back_text": "后台每6秒自动发动「阵中令」，不耗魔法；仅配置且存活时生效。",
+			"base_stats": {
+				"armor": 5,
+				"attack": 21,
+				"hp": 155,
+				"move": 195,
+				"mp": 160,
+				"regen": 4.1,
+				"speed": 1
+			},
+			"basic": {
+				"cooldown": 1.0,
+				"description": "单体弹道攻击，范围480，造成100%攻击（约42基础伤害）。",
+				"id": "M04_basic",
+				"kind": "PROJECTILE",
+				"mana_cost": 0.0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"reach": 480.0,
+				"target_scope": "active",
+				"title": "普攻",
+				"unlock_level": 1,
+				"unlocked": true
+			},
+			"entry_level": 8,
+			"growth": {
+				"armor": 0.5,
+				"attack": 3.0,
+				"hp": 16.0,
+				"mp": 5.0
+			},
+			"id": "M04",
+			"level": 8,
+			"manual": [
+				{
+					"cooldown": 13.0,
+					"description": "原地部署半径220区域7秒，每1秒造成55%施放者攻击伤害；离场后仍按施放者计算。",
+					"id": "M04_field",
+					"kind": "NOVA",
+					"mana_cost": 34.0,
+					"mechanic": "field",
+					"params": {
+						"duration": 7,
+						"follow": false,
+						"heal": 0,
+						"interval": 1,
+						"mana": 0,
+						"radius": 220
+					},
+					"reach": 220.0,
+					"target_scope": "active",
+					"title": "阵前令",
+					"unlock_level": 1,
+					"unlocked": true
+				},
+				{
+					"cooldown": 15.0,
+					"description": "圆形范围攻击，范围245，造成270%攻击（约113.4基础伤害）；减速65%，持续3秒。",
+					"id": "M04_bind",
+					"kind": "NOVA",
+					"mana_cost": 40.0,
+					"mechanic": "",
+					"params": {
+
+					},
+					"reach": 245.0,
+					"target_scope": "active",
+					"title": "锁魂阵",
+					"unlock_level": 8,
+					"unlocked": true
+				}
+			],
+			"name": "陈宫",
+			"owned": {
+				"regen": 0.12
+			},
+			"owned_text": "每级每秒回魔＋0.12。持有即生效，候补与阵亡仍保留；全库同属性合计有上限。",
+			"stats": {
+				"armor": 8.5,
+				"attack": 42.0,
+				"hp": 267.0,
+				"move": 195.0,
+				"mp": 195.0,
+				"regen": 4.1,
+				"speed": 1.0
+			},
+			"support": {
+				"cooldown": 6.0,
+				"description": "单体弹道攻击，范围520，造成80%攻击（约33.6基础伤害）；使命中目标承伤增加10%，持续3秒；同类取最强不相加。",
+				"id": "M04_support",
+				"kind": "PROJECTILE",
+				"mana_cost": 0.0,
+				"mechanic": "expose",
+				"params": {
+					"duration": 3,
+					"multiplier": 0.1
+				},
+				"reach": 520.0,
+				"target_scope": "active",
+				"title": "阵中令",
+				"unlock_level": 1,
+				"unlocked": true
+			},
+			"trait": "",
+			"trait_description": "",
+			"trait_params": {
+
+			}
+		},
+		{
+			"automatic": [],
+			"back_text": "后台每6秒自动发动「骑军掠阵」，不耗魔法；仅配置且存活时生效。",
+			"base_stats": {
+				"armor": 10,
+				"attack": 29,
+				"hp": 225,
+				"move": 225,
+				"mp": 100,
+				"regen": 2.5,
+				"speed": 1.2
+			},
+			"basic": {
+				"cooldown": 0.833333333333333,
+				"description": "贯穿直线攻击，范围175，造成100%攻击（约50基础伤害）。",
+				"id": "M05_basic",
+				"kind": "THRUST",
+				"mana_cost": 0.0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"reach": 175.0,
+				"target_scope": "active",
+				"title": "普攻",
+				"unlock_level": 1,
+				"unlocked": true
+			},
+			"entry_level": 8,
+			"growth": {
+				"armor": 0.5,
+				"attack": 3.0,
+				"hp": 16.0,
+				"mp": 5.0
+			},
+			"id": "M05",
+			"level": 8,
+			"manual": [
+				{
+					"cooldown": 9.0,
+					"description": "贯穿直线攻击，范围260，造成350%攻击（约175基础伤害）；向攻击方向移动160，不提供无敌。",
+					"id": "M05_dash",
+					"kind": "THRUST",
+					"mana_cost": 32.0,
+					"mechanic": "dash",
+					"params": {
+						"distance": 160
+					},
+					"reach": 260.0,
+					"target_scope": "active",
+					"title": "虎豹突贯",
+					"unlock_level": 1,
+					"unlocked": true
+				},
+				{
+					"cooldown": 16.0,
+					"description": "全部存活编队人物获得5秒强化：攻击＋15%、攻速＋20%；同类取最强。",
+					"id": "M05_rally",
+					"kind": "WARD",
+					"mana_cost": 35.0,
+					"mechanic": "rally",
+					"params": {
+						"attack_multiplier": 0.15,
+						"duration": 5,
+						"speed_multiplier": 0.2
+					},
+					"reach": 0.0,
+					"target_scope": "party",
+					"title": "催阵",
+					"unlock_level": 8,
+					"unlocked": true
+				}
+			],
+			"name": "曹纯",
+			"owned": {
+				"hp": 0.8
+			},
+			"owned_text": "每级生命上限＋0.8。持有即生效，候补与阵亡仍保留；全库同属性合计有上限。",
+			"stats": {
+				"armor": 13.5,
+				"attack": 50.0,
+				"hp": 337.0,
+				"move": 225.0,
+				"mp": 135.0,
+				"regen": 2.5,
+				"speed": 1.2
+			},
+			"support": {
+				"cooldown": 6.0,
+				"description": "贯穿直线攻击，范围255，造成160%攻击（约80基础伤害）。",
+				"id": "M05_support",
+				"kind": "THRUST",
+				"mana_cost": 0.0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"reach": 255.0,
+				"target_scope": "active",
+				"title": "骑军掠阵",
+				"unlock_level": 1,
+				"unlocked": true
+			},
+			"trait": "",
+			"trait_description": "",
+			"trait_params": {
+
+			}
+		},
+		{
+			"automatic": [],
+			"back_text": "后台每7秒自动发动「定射」，不耗魔法；仅配置且存活时生效。",
+			"base_stats": {
+				"armor": 5,
+				"attack": 32,
+				"hp": 175,
+				"move": 220,
+				"mp": 120,
+				"regen": 3,
+				"speed": 1
+			},
+			"basic": {
+				"cooldown": 1.0,
+				"description": "单体弹道攻击，范围570，造成100%攻击（约50基础伤害）。",
+				"id": "M06_basic",
+				"kind": "PROJECTILE",
+				"mana_cost": 0.0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"reach": 570.0,
+				"target_scope": "active",
+				"title": "普攻",
+				"unlock_level": 1,
+				"unlocked": true
+			},
+			"entry_level": 7,
+			"growth": {
+				"armor": 0.5,
+				"attack": 3.0,
+				"hp": 16.0,
+				"mp": 5.0
+			},
+			"id": "M06",
+			"level": 7,
+			"manual": [
+				{
+					"cooldown": 11.0,
+					"description": "单体弹道攻击，范围650，造成430%攻击（约215基础伤害）；使命中目标承伤增加12%，持续4秒；同类取最强不相加。",
+					"id": "M06_expose",
+					"kind": "PROJECTILE",
+					"mana_cost": 35.0,
+					"mechanic": "expose",
+					"params": {
+						"duration": 4,
+						"multiplier": 0.12
+					},
+					"reach": 650.0,
+					"target_scope": "active",
+					"title": "定点狙击",
+					"unlock_level": 1,
+					"unlocked": true
+				},
+				{
+					"cooldown": 12.0,
+					"description": "贯穿直线攻击，范围480，造成250%攻击（约125基础伤害）；沿攻击方向后撤120，不提供无敌。",
+					"id": "M06_dash",
+					"kind": "THRUST",
+					"mana_cost": 30.0,
+					"mechanic": "dash",
+					"params": {
+						"distance": -120
+					},
+					"reach": 480.0,
+					"target_scope": "active",
+					"title": "退阵射",
+					"unlock_level": 7,
+					"unlocked": true
+				}
+			],
+			"name": "曹休",
+			"owned": {
+				"mp": 0.6
+			},
+			"owned_text": "每级魔法上限＋0.6。持有即生效，候补与阵亡仍保留；全库同属性合计有上限。",
+			"stats": {
+				"armor": 8.0,
+				"attack": 50.0,
+				"hp": 271.0,
+				"move": 220.0,
+				"mp": 150.0,
+				"regen": 3.0,
+				"speed": 1.0
+			},
+			"support": {
+				"cooldown": 7.0,
+				"description": "单体弹道攻击，范围630，造成180%攻击（约90基础伤害）。",
+				"id": "M06_support",
+				"kind": "PROJECTILE",
+				"mana_cost": 0.0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"reach": 630.0,
+				"target_scope": "active",
+				"title": "定射",
+				"unlock_level": 1,
+				"unlocked": true
+			},
+			"trait": "",
+			"trait_description": "",
+			"trait_params": {
+
+			}
+		},
+		{
+			"automatic": [],
+			"back_text": "后台每5.5秒自动发动「清围」，不耗魔法；仅配置且存活时生效。",
+			"base_stats": {
+				"armor": 9,
+				"attack": 29,
+				"hp": 245,
+				"move": 205,
+				"mp": 90,
+				"regen": 2.6,
+				"speed": 1.1
+			},
+			"basic": {
+				"cooldown": 0.909090909090909,
+				"description": "扇形攻击，范围145，造成100%攻击（约35基础伤害）。",
+				"id": "M07_basic",
+				"kind": "SWEEP",
+				"mana_cost": 0.0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"reach": 145.0,
+				"target_scope": "active",
+				"title": "普攻",
+				"unlock_level": 1,
+				"unlocked": true
+			},
+			"entry_level": 3,
+			"growth": {
+				"armor": 0.5,
+				"attack": 3.0,
+				"hp": 16.0,
+				"mp": 5.0
+			},
+			"id": "M07",
+			"level": 3,
+			"manual": [
+				{
+					"cooldown": 8.0,
+					"description": "圆形范围攻击，范围220，造成340%攻击（约119基础伤害）。",
+					"id": "M07_sweep",
+					"kind": "NOVA",
+					"mana_cost": 30.0,
+					"mechanic": "",
+					"params": {
+
+					},
+					"reach": 220.0,
+					"target_scope": "active",
+					"title": "扫寨",
+					"unlock_level": 1,
+					"unlocked": true
+				},
+				{
+					"cooldown": 15.0,
+					"description": "施放者本人获得5秒强化：攻击＋20%、攻速＋8%；同类取最强；Lv.5解锁。",
+					"id": "M07_rally",
+					"kind": "WARD",
+					"mana_cost": 34.0,
+					"mechanic": "rally",
+					"params": {
+						"attack_multiplier": 0.2,
+						"duration": 5,
+						"speed_multiplier": 0.08
+					},
+					"reach": 0.0,
+					"target_scope": "self",
+					"title": "聚众",
+					"unlock_level": 5,
+					"unlocked": false
+				}
+			],
+			"name": "臧霸",
+			"owned": {
+				"hp": 0.7
+			},
+			"owned_text": "每级生命上限＋0.7。持有即生效，候补与阵亡仍保留；全库同属性合计有上限。",
+			"stats": {
+				"armor": 10.0,
+				"attack": 35.0,
+				"hp": 277.0,
+				"move": 205.0,
+				"mp": 100.0,
+				"regen": 2.6,
+				"speed": 1.1
+			},
+			"support": {
+				"cooldown": 5.5,
+				"description": "圆形范围攻击，范围190，造成125%攻击（约43.75基础伤害）。",
+				"id": "M07_support",
+				"kind": "NOVA",
+				"mana_cost": 0.0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"reach": 190.0,
+				"target_scope": "active",
+				"title": "清围",
+				"unlock_level": 1,
+				"unlocked": true
+			},
+			"trait": "",
+			"trait_description": "",
+			"trait_params": {
+
+			}
+		},
+		{
+			"automatic": [],
+			"back_text": "后台每6秒自动发动「破甲援刺」，不耗魔法；仅配置且存活时生效。",
+			"base_stats": {
+				"armor": 14,
+				"attack": 25,
+				"hp": 230,
+				"move": 195,
+				"mp": 105,
+				"regen": 2.6,
+				"speed": 1
+			},
+			"basic": {
+				"cooldown": 1.0,
+				"description": "贯穿直线攻击，范围150，造成100%攻击（约37基础伤害）。",
+				"id": "M08_basic",
+				"kind": "THRUST",
+				"mana_cost": 0.0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"reach": 150.0,
+				"target_scope": "active",
+				"title": "普攻",
+				"unlock_level": 1,
+				"unlocked": true
+			},
+			"entry_level": 5,
+			"growth": {
+				"armor": 0.5,
+				"attack": 3.0,
+				"hp": 16.0,
+				"mp": 5.0
+			},
+			"id": "M08",
+			"level": 5,
+			"manual": [
+				{
+					"cooldown": 9.0,
+					"description": "贯穿直线攻击，范围240，造成300%攻击（约111基础伤害）；使命中目标承伤增加18%，持续5秒；同类取最强不相加。",
+					"id": "M08_break",
+					"kind": "THRUST",
+					"mana_cost": 28.0,
+					"mechanic": "expose",
+					"params": {
+						"duration": 5,
+						"multiplier": 0.18
+					},
+					"reach": 240.0,
+					"target_scope": "active",
+					"title": "破坚",
+					"unlock_level": 1,
+					"unlocked": true
+				},
+				{
+					"cooldown": 13.0,
+					"description": "给当前人物提供44护盾；每位受益者的总护盾不超过自身生命上限的35%。",
+					"id": "M08_guard",
+					"kind": "WARD",
+					"mana_cost": 30.0,
+					"mechanic": "",
+					"params": {
+
+					},
+					"reach": 0.0,
+					"target_scope": "active",
+					"title": "固阵",
+					"unlock_level": 5,
+					"unlocked": true
+				}
+			],
+			"name": "侯成",
+			"owned": {
+				"armor": 0.12
+			},
+			"owned_text": "每级防御＋0.12。持有即生效，候补与阵亡仍保留；全库同属性合计有上限。",
+			"stats": {
+				"armor": 16.0,
+				"attack": 37.0,
+				"hp": 294.0,
+				"move": 195.0,
+				"mp": 125.0,
+				"regen": 2.6,
+				"speed": 1.0
+			},
+			"support": {
+				"cooldown": 6.0,
+				"description": "贯穿直线攻击，范围205，造成100%攻击（约37基础伤害）；使命中目标承伤增加10%，持续3秒；同类取最强不相加。",
+				"id": "M08_support",
+				"kind": "THRUST",
+				"mana_cost": 0.0,
+				"mechanic": "expose",
+				"params": {
+					"duration": 3,
+					"multiplier": 0.1
+				},
+				"reach": 205.0,
+				"target_scope": "active",
+				"title": "破甲援刺",
+				"unlock_level": 1,
+				"unlocked": true
+			},
+			"trait": "",
+			"trait_description": "",
+			"trait_params": {
+
+			}
+		},
+		{
+			"automatic": [],
+			"back_text": "后台每4.5秒自动发动「飞锋援击」，不耗魔法；仅配置且存活时生效。",
+			"base_stats": {
+				"armor": 5,
+				"attack": 34,
+				"hp": 190,
+				"move": 240,
+				"mp": 110,
+				"regen": 2.6,
+				"speed": 1.5
+			},
+			"basic": {
+				"cooldown": 0.666666666666667,
+				"description": "贯穿直线攻击，范围145，造成100%攻击（约58基础伤害）。",
+				"id": "F01_basic",
+				"kind": "THRUST",
+				"mana_cost": 0.0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"reach": 145.0,
+				"target_scope": "active",
+				"title": "普攻",
+				"unlock_level": 1,
+				"unlocked": true
+			},
+			"entry_level": 9,
+			"growth": {
+				"armor": 0.5,
+				"attack": 3.0,
+				"hp": 16.0,
+				"mp": 5.0
+			},
+			"id": "F01",
+			"level": 9,
+			"manual": [
+				{
+					"cooldown": 8.0,
+					"description": "贯穿直线攻击，范围245，造成360%攻击（约208.8基础伤害）；向攻击方向移动140，不提供无敌。",
+					"id": "F01_dash",
+					"kind": "THRUST",
+					"mana_cost": 32.0,
+					"mechanic": "dash",
+					"params": {
+						"distance": 140
+					},
+					"reach": 245.0,
+					"target_scope": "active",
+					"title": "绮锋突进",
+					"unlock_level": 1,
+					"unlocked": true
+				},
+				{
+					"cooldown": 12.0,
+					"description": "圆形范围攻击，范围195，造成409%攻击（约237.8基础伤害）；使命中目标承伤增加15%，持续4秒；同类取最强不相加。",
+					"id": "F01_expose",
+					"kind": "NOVA",
+					"mana_cost": 38.0,
+					"mechanic": "expose",
+					"params": {
+						"duration": 4,
+						"multiplier": 0.15
+					},
+					"reach": 195.0,
+					"target_scope": "active",
+					"title": "裂阵",
+					"unlock_level": 9,
+					"unlocked": true
+				}
+			],
+			"name": "吕玲绮",
+			"owned": {
+				"speed": 0.01
+			},
+			"owned_text": "每级每秒普攻次数＋0.01。持有即生效，候补与阵亡仍保留；全库同属性合计有上限。",
+			"stats": {
+				"armor": 9.0,
+				"attack": 58.0,
+				"hp": 318.0,
+				"move": 240.0,
+				"mp": 150.0,
+				"regen": 2.6,
+				"speed": 1.5
+			},
+			"support": {
+				"cooldown": 4.5,
+				"description": "贯穿直线攻击，范围225，造成140%攻击（约81.2基础伤害）。",
+				"id": "F01_support",
+				"kind": "THRUST",
+				"mana_cost": 0.0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"reach": 225.0,
+				"target_scope": "active",
+				"title": "飞锋援击",
+				"unlock_level": 1,
+				"unlocked": true
+			},
+			"trait": "",
+			"trait_description": "",
+			"trait_params": {
+
+			}
+		},
+		{
+			"automatic": [],
+			"back_text": "后台每8秒自动发动「护剑」，不耗魔法；仅配置且存活时生效。",
+			"base_stats": {
+				"armor": 10,
+				"attack": 26,
+				"hp": 200,
+				"move": 220,
+				"mp": 100,
+				"regen": 2.8,
+				"speed": 1.25
+			},
+			"basic": {
+				"cooldown": 0.8,
+				"description": "扇形攻击，范围120，造成100%攻击（约38基础伤害）。",
+				"id": "F02_basic",
+				"kind": "SWEEP",
+				"mana_cost": 0.0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"reach": 120.0,
+				"target_scope": "active",
+				"title": "普攻",
+				"unlock_level": 1,
+				"unlocked": true
+			},
+			"entry_level": 5,
+			"growth": {
+				"armor": 0.5,
+				"attack": 3.0,
+				"hp": 16.0,
+				"mp": 5.0
+			},
+			"id": "F02",
+			"level": 5,
+			"manual": [
+				{
+					"cooldown": 9.0,
+					"description": "施放者本人进入2.5秒守势；至多承接1次敌击，减伤60%并在185范围反击220%攻击；敌击被护盾吸收也可触发，反击不递归。",
+					"id": "F02_guard",
+					"kind": "WARD",
+					"mana_cost": 24.0,
+					"mechanic": "guard",
+					"params": {
+						"charges": 1,
+						"counter_scale": 2.2,
+						"duration": 2.5,
+						"radius": 185,
+						"reduction": 0.6
+					},
+					"reach": 185.0,
+					"target_scope": "self",
+					"title": "守势反击",
+					"unlock_level": 1,
+					"unlocked": true
+				},
+				{
+					"cooldown": 8.0,
+					"description": "贯穿直线攻击，范围210，造成310%攻击（约117.8基础伤害）；使命中目标承伤增加10%，持续3秒；同类取最强不相加。",
+					"id": "F02_riposte",
+					"kind": "THRUST",
+					"mana_cost": 30.0,
+					"mechanic": "expose",
+					"params": {
+						"duration": 3,
+						"multiplier": 0.1
+					},
+					"reach": 210.0,
+					"target_scope": "active",
+					"title": "迎锋斩",
+					"unlock_level": 5,
+					"unlocked": true
+				}
+			],
+			"name": "蕾娜",
+			"owned": {
+				"armor": 0.14
+			},
+			"owned_text": "每级防御＋0.14。持有即生效，候补与阵亡仍保留；全库同属性合计有上限。",
+			"stats": {
+				"armor": 12.0,
+				"attack": 38.0,
+				"hp": 264.0,
+				"move": 220.0,
+				"mp": 120.0,
+				"regen": 2.8,
+				"speed": 1.25
+			},
+			"support": {
+				"cooldown": 8.0,
+				"description": "当前人物进入1.2秒守势；至多承接1次敌击，减伤35%并在155范围反击80%攻击；敌击被护盾吸收也可触发，反击不递归。",
+				"id": "F02_support",
+				"kind": "WARD",
+				"mana_cost": 0.0,
+				"mechanic": "guard",
+				"params": {
+					"charges": 1,
+					"counter_scale": 0.8,
+					"duration": 1.2,
+					"radius": 155,
+					"reduction": 0.35
+				},
+				"reach": 155.0,
+				"target_scope": "active",
+				"title": "护剑",
+				"unlock_level": 1,
+				"unlocked": true
+			},
+			"trait": "",
+			"trait_description": "",
+			"trait_params": {
+
+			}
+		},
+		{
+			"automatic": [],
+			"back_text": "后台每6秒自动发动「敷药」，不耗魔法；仅配置且存活时生效。",
+			"base_stats": {
+				"armor": 3,
+				"attack": 11,
+				"hp": 145,
+				"move": 200,
+				"mp": 145,
+				"regen": 4,
+				"speed": 1
+			},
+			"basic": {
+				"cooldown": 1.0,
+				"description": "单体弹道攻击，范围400，造成100%攻击（约17基础伤害）。",
+				"id": "F03_basic",
+				"kind": "PROJECTILE",
+				"mana_cost": 0.0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"reach": 400.0,
+				"target_scope": "active",
+				"title": "普攻",
+				"unlock_level": 1,
+				"unlocked": true
+			},
+			"entry_level": 3,
+			"growth": {
+				"armor": 0.5,
+				"attack": 3.0,
+				"hp": 16.0,
+				"mp": 5.0
+			},
+			"id": "F03",
+			"level": 3,
+			"manual": [
+				{
+					"cooldown": 10.0,
+					"description": "为全部存活编队人物恢复52.5生命；逐人溢出治疗转为各自护盾，总盾不超过各自生命上限35%；不复活。",
+					"id": "physician_heal",
+					"kind": "HEAL",
+					"mana_cost": 34.0,
+					"mechanic": "party_heal",
+					"params": {
+						"shield_cap_ratio": 0.35
+					},
+					"reach": 0.0,
+					"target_scope": "party",
+					"title": "回春",
+					"unlock_level": 1,
+					"unlocked": true
+				},
+				{
+					"cooldown": 16.0,
+					"description": "给全部存活编队人物提供55护盾；每位受益者的总护盾不超过自身生命上限的35%；Lv.5解锁。",
+					"id": "physician_ward",
+					"kind": "WARD",
+					"mana_cost": 42.0,
+					"mechanic": "",
+					"params": {
+
+					},
+					"reach": 0.0,
+					"target_scope": "party",
+					"title": "护命",
+					"unlock_level": 5,
+					"unlocked": false
+				}
+			],
+			"name": "田秀",
+			"owned": {
+				"armor": 0.12
+			},
+			"owned_text": "每级防御＋0.12。持有即生效，候补与阵亡仍保留；全库同属性合计有上限。",
+			"stats": {
+				"armor": 4.0,
+				"attack": 17.0,
+				"hp": 177.0,
+				"move": 200.0,
+				"mp": 155.0,
+				"regen": 4.0,
+				"speed": 1.0
+			},
+			"support": {
+				"cooldown": 6.0,
+				"description": "为生命比例最低的存活编队人物恢复16.5生命。",
+				"id": "physician_support",
+				"kind": "HEAL",
+				"mana_cost": 0.0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"reach": 0.0,
+				"target_scope": "lowest_hp",
+				"title": "敷药",
+				"unlock_level": 1,
+				"unlocked": true
+			},
+			"trait": "",
+			"trait_description": "",
+			"trait_params": {
+
+			}
+		},
+		{
+			"automatic": [],
+			"back_text": "后台每5秒自动发动「护身碎银」，不耗魔法；仅配置且存活时生效。",
+			"base_stats": {
+				"armor": 4,
+				"attack": 15,
+				"hp": 160,
+				"move": 210,
+				"mp": 135,
+				"regen": 3.4,
+				"speed": 1.05
+			},
+			"basic": {
+				"cooldown": 0.952380952380952,
+				"description": "单体弹道攻击，范围390，造成100%攻击（约21基础伤害）。",
+				"id": "F04_basic",
+				"kind": "PROJECTILE",
+				"mana_cost": 0.0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"reach": 390.0,
+				"target_scope": "active",
+				"title": "普攻",
+				"unlock_level": 1,
+				"unlocked": true
+			},
+			"entry_level": 3,
+			"growth": {
+				"armor": 0.5,
+				"attack": 3.0,
+				"hp": 16.0,
+				"mp": 5.0
+			},
+			"id": "F04",
+			"level": 3,
+			"manual": [
+				{
+					"cooldown": 12.0,
+					"description": "提前结清本人的返还能力尚未付出的余额；不额外复制返还，仍付自身魔法与冷却。",
+					"id": "F04_settle",
+					"kind": "MANA",
+					"mana_cost": 18.0,
+					"mechanic": "refund_settle",
+					"params": {
+
+					},
+					"reach": 0.0,
+					"target_scope": "party",
+					"title": "集中结账",
+					"unlock_level": 1,
+					"unlocked": true
+				},
+				{
+					"cooldown": 15.0,
+					"description": "为魔法比例最低的存活编队人物恢复22魔法；Lv.5解锁。",
+					"id": "F04_supply",
+					"kind": "MANA",
+					"mana_cost": 28.0,
+					"mechanic": "",
+					"params": {
+
+					},
+					"reach": 0.0,
+					"target_scope": "lowest_mp",
+					"title": "应急补给",
+					"unlock_level": 5,
+					"unlocked": false
+				}
+			],
+			"name": "钱绮罗",
+			"owned": {
+				"mp": 0.6
+			},
+			"owned_text": "每级魔法上限＋0.6。持有即生效，候补与阵亡仍保留；全库同属性合计有上限。",
+			"stats": {
+				"armor": 5.0,
+				"attack": 21.0,
+				"hp": 192.0,
+				"move": 210.0,
+				"mp": 145.0,
+				"regen": 3.4,
+				"speed": 1.05
+			},
+			"support": {
+				"cooldown": 5.0,
+				"description": "单体弹道攻击，范围410，造成55%攻击（约11.55基础伤害）。",
+				"id": "F04_support",
+				"kind": "PROJECTILE",
+				"mana_cost": 0.0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"reach": 410.0,
+				"target_scope": "active",
+				"title": "护身碎银",
+				"unlock_level": 1,
+				"unlocked": true
+			},
+			"trait": "refund",
+			"trait_description": "在后台时，其他队友实际扣除魔法的20%会在6秒内分3次返还原施法者；返还不再触发施法。",
+			"trait_params": {
+				"duration": 6,
+				"fraction": 0.2,
+				"ticks": 3
+			}
+		},
+		{
+			"automatic": [],
+			"back_text": "后台每5秒自动发动「缠咒」，不耗魔法；仅配置且存活时生效。",
+			"base_stats": {
+				"armor": 3,
+				"attack": 23,
+				"hp": 150,
+				"move": 205,
+				"mp": 135,
+				"regen": 3.6,
+				"speed": 1
+			},
+			"basic": {
+				"cooldown": 1.0,
+				"description": "单体弹道攻击，范围460，造成100%攻击（约32基础伤害）。",
+				"id": "F05_basic",
+				"kind": "PROJECTILE",
+				"mana_cost": 0.0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"reach": 460.0,
+				"target_scope": "active",
+				"title": "普攻",
+				"unlock_level": 1,
+				"unlocked": true
+			},
+			"entry_level": 4,
+			"growth": {
+				"armor": 0.5,
+				"attack": 3.0,
+				"hp": 16.0,
+				"mp": 5.0
+			},
+			"id": "F05",
+			"level": 4,
+			"manual": [
+				{
+					"cooldown": 7.0,
+					"description": "单体弹道攻击，范围510，造成140%攻击（约44.8基础伤害）；命中附加6秒咒伤，总计144%攻击；同源刷新；已有咒伤时向180范围至多2个邻敌复制35%剩余咒伤，不递归传播。",
+					"id": "F05_curse",
+					"kind": "PROJECTILE",
+					"mana_cost": 26.0,
+					"mechanic": "curse",
+					"params": {
+						"dot_scale": 1.44,
+						"duration": 6,
+						"spread_fraction": 0.35,
+						"spread_radius": 180,
+						"spread_targets": 2
+					},
+					"reach": 510.0,
+					"target_scope": "active",
+					"title": "青蘅符",
+					"unlock_level": 1,
+					"unlocked": true
+				},
+				{
+					"cooldown": 11.0,
+					"description": "圆形范围攻击，范围230，造成120%攻击（约38.4基础伤害）；命中附加6秒咒伤，总计90%攻击；同源刷新；已有咒伤时向230范围至多3个邻敌复制65%剩余咒伤，不递归传播。",
+					"id": "F05_spread",
+					"kind": "NOVA",
+					"mana_cost": 34.0,
+					"mechanic": "curse",
+					"params": {
+						"dot_scale": 0.9,
+						"duration": 6,
+						"spread_fraction": 0.65,
+						"spread_radius": 230,
+						"spread_targets": 3
+					},
+					"reach": 230.0,
+					"target_scope": "active",
+					"title": "散咒",
+					"unlock_level": 4,
+					"unlocked": true
+				}
+			],
+			"name": "祝青蘅",
+			"owned": {
+				"regen": 0.12
+			},
+			"owned_text": "每级每秒回魔＋0.12。持有即生效，候补与阵亡仍保留；全库同属性合计有上限。",
+			"stats": {
+				"armor": 4.5,
+				"attack": 32.0,
+				"hp": 198.0,
+				"move": 205.0,
+				"mp": 150.0,
+				"regen": 3.6,
+				"speed": 1.0
+			},
+			"support": {
+				"cooldown": 5.0,
+				"description": "单体弹道攻击，范围480，造成45%攻击（约14.4基础伤害）；命中附加4秒咒伤，总计48%攻击；同源刷新。",
+				"id": "F05_support",
+				"kind": "PROJECTILE",
+				"mana_cost": 0.0,
+				"mechanic": "curse",
+				"params": {
+					"dot_scale": 0.48,
+					"duration": 4
+				},
+				"reach": 480.0,
+				"target_scope": "active",
+				"title": "缠咒",
+				"unlock_level": 1,
+				"unlocked": true
+			},
+			"trait": "curse",
+			"trait_description": "本人直接普攻／自动攻击至多每2秒挂一次咒伤，6秒共造成96%攻击伤害；相同来源刷新而不无限叠加。",
+			"trait_params": {
+				"dot_scale": 0.96,
+				"duration": 6,
+				"interval": 2
+			}
+		},
+		{
+			"automatic": [],
+			"back_text": "后台由前台直接攻击命中触发，至少间隔2秒「特制箭追射」，不耗魔法；仅配置且存活时生效。",
+			"base_stats": {
+				"armor": 4,
+				"attack": 25,
+				"hp": 165,
+				"move": 210,
+				"mp": 110,
+				"regen": 3,
+				"speed": 1.2
+			},
+			"basic": {
+				"cooldown": 0.833333333333333,
+				"description": "单体弹道攻击，范围510，造成100%攻击（约37基础伤害）。",
+				"id": "F06_basic",
+				"kind": "PROJECTILE",
+				"mana_cost": 0.0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"reach": 510.0,
+				"target_scope": "active",
+				"title": "普攻",
+				"unlock_level": 1,
+				"unlocked": true
+			},
+			"entry_level": 5,
+			"growth": {
+				"armor": 0.5,
+				"attack": 3.0,
+				"hp": 16.0,
+				"mp": 5.0
+			},
+			"id": "F06",
+			"level": 5,
+			"manual": [
+				{
+					"cooldown": 10.0,
+					"description": "贯穿直线攻击，范围560，造成180%攻击（约66.6基础伤害）；消耗至多4箭，每箭使本击伤害＋35%；零箭仍能普通齐射。",
+					"id": "F06_volley",
+					"kind": "THRUST",
+					"mana_cost": 30.0,
+					"mechanic": "ammo_volley",
+					"params": {
+						"bonus_per_arrow": 0.35,
+						"max_spend": 4
+					},
+					"reach": 560.0,
+					"target_scope": "active",
+					"title": "穿云齐射",
+					"unlock_level": 1,
+					"unlocked": true
+				},
+				{
+					"cooldown": 12.0,
+					"description": "贯穿直线攻击，范围570，造成280%攻击（约103.6基础伤害）；减速45%，持续2.5秒；Lv.6解锁。",
+					"id": "F06_pin",
+					"kind": "THRUST",
+					"mana_cost": 34.0,
+					"mechanic": "",
+					"params": {
+
+					},
+					"reach": 570.0,
+					"target_scope": "active",
+					"title": "钉阵矢",
+					"unlock_level": 6,
+					"unlocked": false
+				}
+			],
+			"name": "秦雁",
+			"owned": {
+				"speed": 0.009
+			},
+			"owned_text": "每级每秒普攻次数＋0.01。持有即生效，候补与阵亡仍保留；全库同属性合计有上限。",
+			"stats": {
+				"armor": 6.0,
+				"attack": 37.0,
+				"hp": 229.0,
+				"move": 210.0,
+				"mp": 130.0,
+				"regen": 3.0,
+				"speed": 1.2
+			},
+			"support": {
+				"cooldown": 2.0,
+				"description": "单体弹道攻击，范围560，造成114%攻击（约42.55基础伤害）；有箭消耗1特制箭；无箭仍有40%威力普通支援，不继承当前人物饰品。",
+				"id": "F06_support",
+				"kind": "PROJECTILE",
+				"mana_cost": 0.0,
+				"mechanic": "ammo_followup",
+				"params": {
+					"normal_multiplier": 0.4
+				},
+				"reach": 560.0,
+				"target_scope": "active",
+				"title": "特制箭追射",
+				"unlock_level": 1,
+				"unlocked": true
+			},
+			"trait": "ammo",
+			"trait_description": "特制箭上限6，进关6；每8秒补2，其他编队队友成功付费施法补1。后台强化追击每2秒至多花1；前台普攻不花箭。",
+			"trait_params": {
+				"capacity": 6,
+				"cast_refill": 1,
+				"followup_interval": 2,
+				"initial": 6,
+				"refill_amount": 2,
+				"refill_interval": 8
+			}
+		},
+		{
+			"automatic": [],
+			"back_text": "后台每4秒自动发动「援斩」，不耗魔法；仅配置且存活时生效。",
+			"base_stats": {
+				"armor": 2,
+				"attack": 31,
+				"hp": 175,
+				"move": 225,
+				"mp": 95,
+				"regen": 2.2,
+				"speed": 1.6
+			},
+			"basic": {
+				"cooldown": 0.625,
+				"description": "扇形攻击，范围120，造成100%攻击（约37基础伤害）。",
+				"id": "F07_basic",
+				"kind": "SWEEP",
+				"mana_cost": 0.0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"reach": 120.0,
+				"target_scope": "active",
+				"title": "普攻",
+				"unlock_level": 1,
+				"unlocked": true
+			},
+			"entry_level": 3,
+			"growth": {
+				"armor": 0.5,
+				"attack": 3.0,
+				"hp": 16.0,
+				"mp": 5.0
+			},
+			"id": "F07",
+			"level": 3,
+			"manual": [
+				{
+					"cooldown": 6.0,
+					"description": "圆形范围攻击，范围165，造成300%攻击（约111基础伤害）。",
+					"id": "bandit_sweep",
+					"kind": "NOVA",
+					"mana_cost": 28.0,
+					"mechanic": "",
+					"params": {
+
+					},
+					"reach": 165.0,
+					"target_scope": "active",
+					"title": "寨风斩",
+					"unlock_level": 1,
+					"unlocked": true
+				},
+				{
+					"cooldown": 10.0,
+					"description": "贯穿直线攻击，范围230，造成320%攻击（约118.4基础伤害）；成功施放后消耗自身至多30盾；每点使本击伤害＋2.5%，满额增加100范围；无盾仍有基础攻击。",
+					"id": "bandit_thrust",
+					"kind": "THRUST",
+					"mana_cost": 38.0,
+					"mechanic": "shield_strike",
+					"params": {
+						"reach_bonus": 100,
+						"shield_max": 30,
+						"shield_ratio": 0.025
+					},
+					"reach": 230.0,
+					"target_scope": "active",
+					"title": "断阵刺",
+					"unlock_level": 1,
+					"unlocked": true
+				}
+			],
+			"name": "马三娘",
+			"owned": {
+				"attack": 0.4
+			},
+			"owned_text": "每级攻击＋0.4。持有即生效，候补与阵亡仍保留；全库同属性合计有上限。",
+			"stats": {
+				"armor": 3.0,
+				"attack": 37.0,
+				"hp": 207.0,
+				"move": 225.0,
+				"mp": 105.0,
+				"regen": 2.2,
+				"speed": 1.6
+			},
+			"support": {
+				"cooldown": 4.0,
+				"description": "扇形攻击，范围150，造成110%攻击（约40.7基础伤害）；减速45%，持续1.5秒。",
+				"id": "bandit_support",
+				"kind": "SWEEP",
+				"mana_cost": 0.0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"reach": 150.0,
+				"target_scope": "active",
+				"title": "援斩",
+				"unlock_level": 1,
+				"unlocked": true
+			},
+			"trait": "",
+			"trait_description": "",
+			"trait_params": {
+
+			}
+		},
+		{
+			"automatic": [],
+			"back_text": "后台每9秒自动发动「余火淬刃」，不耗魔法；仅配置且存活时生效。",
+			"base_stats": {
+				"armor": 9,
+				"attack": 24,
+				"hp": 205,
+				"move": 195,
+				"mp": 100,
+				"regen": 2.8,
+				"speed": 1.05
+			},
+			"basic": {
+				"cooldown": 0.952380952380952,
+				"description": "扇形攻击，范围125，造成100%攻击（约30基础伤害）。",
+				"id": "F08_basic",
+				"kind": "SWEEP",
+				"mana_cost": 0.0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"reach": 125.0,
+				"target_scope": "active",
+				"title": "普攻",
+				"unlock_level": 1,
+				"unlocked": true
+			},
+			"entry_level": 3,
+			"growth": {
+				"armor": 0.5,
+				"attack": 3.0,
+				"hp": 16.0,
+				"mp": 5.0
+			},
+			"id": "F08",
+			"level": 3,
+			"manual": [
+				{
+					"cooldown": 12.0,
+					"description": "当前人物直接攻击强化6秒，范围＋50，并产生45范围／15%攻击的次级火花；后台支援不继承，火花不再触发命中。",
+					"id": "F08_temper",
+					"kind": "WARD",
+					"mana_cost": 30.0,
+					"mechanic": "temper",
+					"params": {
+						"duration": 6,
+						"reach_bonus": 50,
+						"spark_scale": 0.15,
+						"splash_radius": 45
+					},
+					"reach": 155.0,
+					"target_scope": "active",
+					"title": "炉火淬刃",
+					"unlock_level": 1,
+					"unlocked": true
+				},
+				{
+					"cooldown": 10.0,
+					"description": "圆形范围攻击，范围180，造成340%攻击（约102基础伤害）；使命中目标承伤增加12%，持续4秒；同类取最强不相加；Lv.5解锁。",
+					"id": "F08_break",
+					"kind": "NOVA",
+					"mana_cost": 32.0,
+					"mechanic": "expose",
+					"params": {
+						"duration": 4,
+						"multiplier": 0.12
+					},
+					"reach": 180.0,
+					"target_scope": "active",
+					"title": "落锤",
+					"unlock_level": 5,
+					"unlocked": false
+				}
+			],
+			"name": "陶小满",
+			"owned": {
+				"attack": 0.25
+			},
+			"owned_text": "每级攻击＋0.25。持有即生效，候补与阵亡仍保留；全库同属性合计有上限。",
+			"stats": {
+				"armor": 10.0,
+				"attack": 30.0,
+				"hp": 237.0,
+				"move": 195.0,
+				"mp": 110.0,
+				"regen": 2.8,
+				"speed": 1.05
+			},
+			"support": {
+				"cooldown": 9.0,
+				"description": "当前人物直接攻击强化3秒，范围＋30，并产生45范围／10%攻击的次级火花；后台支援不继承，火花不再触发命中。",
+				"id": "F08_support",
+				"kind": "WARD",
+				"mana_cost": 0.0,
+				"mechanic": "temper",
+				"params": {
+					"duration": 3,
+					"reach_bonus": 30,
+					"spark_scale": 0.1,
+					"splash_radius": 45
+				},
+				"reach": 0.0,
+				"target_scope": "active",
+				"title": "余火淬刃",
+				"unlock_level": 1,
+				"unlocked": true
+			},
+			"trait": "",
+			"trait_description": "",
+			"trait_params": {
+
+			}
+		},
+		{
+			"automatic": [],
+			"back_text": "后台每8秒自动发动「轻歌」，不耗魔法；仅配置且存活时生效。",
+			"base_stats": {
+				"armor": 4,
+				"attack": 17,
+				"hp": 150,
+				"move": 210,
+				"mp": 135,
+				"regen": 3.8,
+				"speed": 1
+			},
+			"basic": {
+				"cooldown": 1.0,
+				"description": "单体弹道攻击，范围420，造成100%攻击（约23基础伤害）。",
+				"id": "F09_basic",
+				"kind": "PROJECTILE",
+				"mana_cost": 0.0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"reach": 420.0,
+				"target_scope": "active",
+				"title": "普攻",
+				"unlock_level": 1,
+				"unlocked": true
+			},
+			"entry_level": 3,
+			"growth": {
+				"armor": 0.5,
+				"attack": 3.0,
+				"hp": 16.0,
+				"mp": 5.0
+			},
+			"id": "F09",
+			"level": 3,
+			"manual": [
+				{
+					"cooldown": 12.0,
+					"description": "将其他存活队友已生效的法术记录／淬刃延长3秒；同一实例总延长上限4秒，不补次数、不会恢复已结束的效果。",
+					"id": "F09_extend",
+					"kind": "WARD",
+					"mana_cost": 26.0,
+					"mechanic": "extend",
+					"params": {
+						"allowed": [
+							"echo",
+							"temper"
+						],
+						"max_extension": 4,
+						"seconds": 3
+					},
+					"reach": 0.0,
+					"target_scope": "party",
+					"title": "续一阕",
+					"unlock_level": 1,
+					"unlocked": true
+				},
+				{
+					"cooldown": 14.0,
+					"description": "全部存活编队人物获得5秒强化：攻击＋16%、攻速＋12%；同类取最强；Lv.5解锁。",
+					"id": "F09_rally",
+					"kind": "WARD",
+					"mana_cost": 32.0,
+					"mechanic": "rally",
+					"params": {
+						"attack_multiplier": 0.16,
+						"duration": 5,
+						"speed_multiplier": 0.12
+					},
+					"reach": 0.0,
+					"target_scope": "party",
+					"title": "高歌",
+					"unlock_level": 5,
+					"unlocked": false
+				}
+			],
+			"name": "柳晚晴",
+			"owned": {
+				"mp": 0.5
+			},
+			"owned_text": "每级魔法上限＋0.5。持有即生效，候补与阵亡仍保留；全库同属性合计有上限。",
+			"stats": {
+				"armor": 5.0,
+				"attack": 23.0,
+				"hp": 182.0,
+				"move": 210.0,
+				"mp": 145.0,
+				"regen": 3.8,
+				"speed": 1.0
+			},
+			"support": {
+				"cooldown": 8.0,
+				"description": "将其他存活队友已生效的法术记录／淬刃延长1.5秒；同一实例总延长上限4秒，不补次数、不会恢复已结束的效果。",
+				"id": "F09_support",
+				"kind": "WARD",
+				"mana_cost": 0.0,
+				"mechanic": "extend",
+				"params": {
+					"allowed": [
+						"echo",
+						"temper"
+					],
+					"max_extension": 4,
+					"seconds": 1.5
+				},
+				"reach": 0.0,
+				"target_scope": "party",
+				"title": "轻歌",
+				"unlock_level": 1,
+				"unlocked": true
+			},
+			"trait": "",
+			"trait_description": "",
+			"trait_params": {
+
+			}
+		},
+		{
+			"automatic": [],
+			"back_text": "后台每7秒自动发动「护行符」，不耗魔法；仅配置且存活时生效。",
+			"base_stats": {
+				"armor": 5,
+				"attack": 16,
+				"hp": 165,
+				"move": 205,
+				"mp": 130,
+				"regen": 3.4,
+				"speed": 1.05
+			},
+			"basic": {
+				"cooldown": 0.952380952380952,
+				"description": "单体弹道攻击，范围400，造成100%攻击（约28基础伤害）。",
+				"id": "F10_basic",
+				"kind": "PROJECTILE",
+				"mana_cost": 0.0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"reach": 400.0,
+				"target_scope": "active",
+				"title": "普攻",
+				"unlock_level": 1,
+				"unlocked": true
+			},
+			"entry_level": 5,
+			"growth": {
+				"armor": 0.5,
+				"attack": 3.0,
+				"hp": 16.0,
+				"mp": 5.0
+			},
+			"id": "F10",
+			"level": 5,
+			"manual": [
+				{
+					"cooldown": 12.0,
+					"description": "给当前人物提供38护盾；每位受益者的总护盾不超过自身生命上限的35%。",
+					"id": "F10_ward",
+					"kind": "WARD",
+					"mana_cost": 24.0,
+					"mechanic": "",
+					"params": {
+
+					},
+					"reach": 0.0,
+					"target_scope": "active",
+					"title": "整册护身",
+					"unlock_level": 1,
+					"unlocked": true
+				},
+				{
+					"cooldown": 10.0,
+					"description": "单体弹道攻击，范围460，造成240%攻击（约67.2基础伤害）；使命中目标承伤增加14%，持续5秒；同类取最强不相加；Lv.6解锁。",
+					"id": "F10_expose",
+					"kind": "PROJECTILE",
+					"mana_cost": 28.0,
+					"mechanic": "expose",
+					"params": {
+						"duration": 5,
+						"multiplier": 0.14
+					},
+					"reach": 460.0,
+					"target_scope": "active",
+					"title": "点破",
+					"unlock_level": 6,
+					"unlocked": false
+				}
+			],
+			"name": "陆知微",
+			"owned": {
+				"regen": 0.1
+			},
+			"owned_text": "每级每秒回魔＋0.1。持有即生效，候补与阵亡仍保留；全库同属性合计有上限。",
+			"stats": {
+				"armor": 7.0,
+				"attack": 28.0,
+				"hp": 229.0,
+				"move": 205.0,
+				"mp": 150.0,
+				"regen": 3.4,
+				"speed": 1.05
+			},
+			"support": {
+				"cooldown": 7.0,
+				"description": "给当前人物提供9护盾；每位受益者的总护盾不超过自身生命上限的35%。",
+				"id": "F10_support",
+				"kind": "WARD",
+				"mana_cost": 0.0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"reach": 0.0,
+				"target_scope": "active",
+				"title": "护行符",
+				"unlock_level": 1,
+				"unlocked": true
+			},
+			"trait": "relay",
+			"trait_description": "上一位成功付费施法者与本次不同时，本次耗魔减少20%，最低仍付1；同一人连放不奖励，换人不算施法。",
+			"trait_params": {
+				"fraction": 0.2,
+				"min_cost": 1
+			}
+		},
+		{
+			"automatic": [
+				{
+					"cooldown": 8.0,
+					"description": "单体弹道攻击，范围480，造成180%攻击（约45基础伤害）；减速30%，持续1.8秒；Lv.2解锁。",
+					"id": "emma_ice",
+					"kind": "PROJECTILE",
+					"mana_cost": 0.0,
+					"mechanic": "",
+					"params": {
+
+					},
+					"reach": 480.0,
+					"target_scope": "active",
+					"title": "冰星",
+					"unlock_level": 2,
+					"unlocked": false
+				}
+			],
+			"back_text": "后台每3.5秒自动发动「术法支援」，不耗魔法；仅配置且存活时生效。",
+			"base_stats": {
+				"armor": 3,
+				"attack": 25,
+				"hp": 155,
+				"move": 205,
+				"mp": 130,
+				"regen": 4.2,
+				"speed": 1.15
+			},
+			"basic": {
+				"cooldown": 0.869565217391304,
+				"description": "单体弹道攻击，范围470，造成100%攻击（约25基础伤害）。",
+				"id": "F11_basic",
+				"kind": "PROJECTILE",
+				"mana_cost": 0.0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"reach": 470.0,
+				"target_scope": "active",
+				"title": "普攻",
+				"unlock_level": 1,
+				"unlocked": true
+			},
+			"entry_level": 1,
+			"growth": {
+				"armor": 0.5,
+				"attack": 3.0,
+				"hp": 16.0,
+				"mp": 5.0
+			},
+			"id": "F11",
+			"level": 1,
+			"manual": [
+				{
+					"cooldown": 7.0,
+					"description": "圆形范围攻击，范围190，造成180%攻击（约45基础伤害）；减速60%，持续3秒；付费成功后替换为2次记录，保留12秒；离场后队友付费技能触发原伤害45%、减速强度与时长各为原50%的回响。",
+					"id": "emma_frost",
+					"kind": "NOVA",
+					"mana_cost": 28.0,
+					"mechanic": "echo_record",
+					"params": {
+						"charges": 2,
+						"damage_multiplier": 0.45,
+						"duration": 12,
+						"slow_multiplier": 0.5
+					},
+					"reach": 190.0,
+					"target_scope": "active",
+					"title": "霜环",
+					"unlock_level": 1,
+					"unlocked": true
+				},
+				{
+					"cooldown": 11.0,
+					"description": "单体弹道攻击，范围580，造成500%攻击（约125基础伤害）；付费成功后替换为2次记录，保留12秒；离场后队友付费技能触发原伤害45%、减速强度与时长各为原50%的回响；Lv.3解锁。",
+					"id": "emma_star",
+					"kind": "PROJECTILE",
+					"mana_cost": 42.0,
+					"mechanic": "echo_record",
+					"params": {
+						"charges": 2,
+						"damage_multiplier": 0.45,
+						"duration": 12,
+						"slow_multiplier": 0.5
+					},
+					"reach": 580.0,
+					"target_scope": "active",
+					"title": "星火",
+					"unlock_level": 3,
+					"unlocked": false
+				}
+			],
+			"name": "艾玛",
+			"owned": {
+				"regen": 0.15
+			},
+			"owned_text": "每级每秒回魔＋0.15。持有即生效，候补与阵亡仍保留；全库同属性合计有上限。",
+			"stats": {
+				"armor": 3.0,
+				"attack": 25.0,
+				"hp": 155.0,
+				"move": 205.0,
+				"mp": 130.0,
+				"regen": 4.2,
+				"speed": 1.15
+			},
+			"support": {
+				"cooldown": 3.5,
+				"description": "单体弹道攻击，范围500，造成80%攻击（约20基础伤害）。",
+				"id": "emma_support",
+				"kind": "PROJECTILE",
+				"mana_cost": 0.0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"reach": 500.0,
+				"target_scope": "active",
+				"title": "术法支援",
+				"unlock_level": 1,
+				"unlocked": true
+			},
+			"trait": "echo",
+			"trait_description": "付费法术留下记录；离场后，其他存活队友实际付费施法消耗1次，重放伤害、减速强度与时长均削弱的版本。回响不再触发施法。",
+			"trait_params": {
+				"charges": 2,
+				"damage_multiplier": 0.45,
+				"duration": 12,
+				"slow_multiplier": 0.5
+			}
+		},
+		{
+			"automatic": [],
+			"back_text": "后台由前台普攻累计命中触发「援斩」，不耗魔法；仅配置且存活时生效。",
+			"base_stats": {
+				"armor": 12,
+				"attack": 21,
+				"hp": 240,
+				"move": 190,
+				"mp": 80,
+				"regen": 2,
+				"speed": 1.1
+			},
+			"basic": {
+				"cooldown": 0.909090909090909,
+				"description": "扇形攻击，范围104，造成100%攻击（约21基础伤害）。",
+				"id": "N01_basic",
+				"kind": "SWEEP",
+				"mana_cost": 0.0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"reach": 104.0,
+				"target_scope": "active",
+				"title": "普攻",
+				"unlock_level": 1,
+				"unlocked": true
+			},
+			"entry_level": 1,
+			"growth": {
+				"armor": 0.5,
+				"attack": 3.0,
+				"hp": 16.0,
+				"mp": 5.0
+			},
+			"id": "N01",
+			"level": 1,
+			"manual": [
+				{
+					"cooldown": 7.0,
+					"description": "扇形攻击，范围129，造成320%攻击（约67.2基础伤害）。",
+					"id": "N01_strike",
+					"kind": "SWEEP",
+					"mana_cost": 24.0,
+					"mechanic": "",
+					"params": {
+
+					},
+					"reach": 129.0,
+					"target_scope": "active",
+					"title": "蓄势一击",
+					"unlock_level": 1,
+					"unlocked": true
+				}
+			],
+			"name": "乡勇刀手",
+			"owned": {
+				"attack": 0.5
+			},
+			"owned_text": "每级攻击＋0.5。持有即生效，候补与阵亡仍保留；全库同属性合计有上限。",
+			"stats": {
+				"armor": 12.0,
+				"attack": 21.0,
+				"hp": 240.0,
+				"move": 190.0,
+				"mp": 80.0,
+				"regen": 2.0,
+				"speed": 1.1
+			},
+			"support": {
+				"cooldown": 4.0,
+				"description": "扇形攻击，范围135，造成80%攻击（约16.8基础伤害）。",
+				"id": "militia_support",
+				"kind": "SWEEP",
+				"mana_cost": 0.0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"reach": 135.0,
+				"target_scope": "active",
+				"title": "援斩",
+				"unlock_level": 1,
+				"unlocked": true
+			},
+			"trait": "mark",
+			"trait_description": "在后台时，前台真实普攻命中每3次触发一次本人的支援，至少间隔1秒；同一次普攻命中多人只算1次，追击不再累计。",
+			"trait_params": {
+				"hits": 3,
+				"interval": 1
+			}
+		},
+		{
+			"automatic": [],
+			"back_text": "后台每4秒自动发动「薄盾」，不耗魔法；仅配置且存活时生效。",
+			"base_stats": {
+				"armor": 15,
+				"attack": 18,
+				"hp": 250,
+				"move": 180,
+				"mp": 90,
+				"regen": 2.3,
+				"speed": 1
+			},
+			"basic": {
+				"cooldown": 1.0,
+				"description": "扇形攻击，范围100，造成100%攻击（约30基础伤害）。",
+				"id": "N02_basic",
+				"kind": "SWEEP",
+				"mana_cost": 0.0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"reach": 100.0,
+				"target_scope": "active",
+				"title": "普攻",
+				"unlock_level": 1,
+				"unlocked": true
+			},
+			"entry_level": 5,
+			"growth": {
+				"armor": 0.5,
+				"attack": 3.0,
+				"hp": 16.0,
+				"mp": 5.0
+			},
+			"id": "N02",
+			"level": 5,
+			"manual": [
+				{
+					"cooldown": 10.0,
+					"description": "给施放者本人提供38护盾；每位受益者的总护盾不超过自身生命上限的35%。",
+					"id": "N02_ward",
+					"kind": "WARD",
+					"mana_cost": 24.0,
+					"mechanic": "",
+					"params": {
+
+					},
+					"reach": 0.0,
+					"target_scope": "self",
+					"title": "举盾",
+					"unlock_level": 1,
+					"unlocked": true
+				}
+			],
+			"name": "白门盾卒",
+			"owned": {
+				"armor": 0.12
+			},
+			"owned_text": "每级防御＋0.12。持有即生效，候补与阵亡仍保留；全库同属性合计有上限。",
+			"stats": {
+				"armor": 17.0,
+				"attack": 30.0,
+				"hp": 314.0,
+				"move": 180.0,
+				"mp": 110.0,
+				"regen": 2.3,
+				"speed": 1.0
+			},
+			"support": {
+				"cooldown": 4.0,
+				"description": "给当前人物提供12护盾；每位受益者的总护盾不超过自身生命上限的35%。",
+				"id": "N02_support",
+				"kind": "WARD",
+				"mana_cost": 0.0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"reach": 0.0,
+				"target_scope": "active",
+				"title": "薄盾",
+				"unlock_level": 1,
+				"unlocked": true
+			},
+			"trait": "",
+			"trait_description": "",
+			"trait_params": {
+
+			}
+		},
+		{
+			"automatic": [],
+			"back_text": "后台每11秒自动发动「重盾援护」，不耗魔法；仅配置且存活时生效。",
+			"base_stats": {
+				"armor": 19,
+				"attack": 17,
+				"hp": 290,
+				"move": 170,
+				"mp": 95,
+				"regen": 2.1,
+				"speed": 0.85
+			},
+			"basic": {
+				"cooldown": 1.17647058823529,
+				"description": "贯穿直线攻击，范围120，造成100%攻击（约38基础伤害）。",
+				"id": "N03_basic",
+				"kind": "THRUST",
+				"mana_cost": 0.0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"reach": 120.0,
+				"target_scope": "active",
+				"title": "普攻",
+				"unlock_level": 1,
+				"unlocked": true
+			},
+			"entry_level": 8,
+			"growth": {
+				"armor": 0.5,
+				"attack": 3.0,
+				"hp": 16.0,
+				"mp": 5.0
+			},
+			"id": "N03",
+			"level": 8,
+			"manual": [
+				{
+					"cooldown": 17.0,
+					"description": "给施放者本人提供70护盾；每位受益者的总护盾不超过自身生命上限的35%。",
+					"id": "N03_guard",
+					"kind": "WARD",
+					"mana_cost": 34.0,
+					"mechanic": "",
+					"params": {
+
+					},
+					"reach": 0.0,
+					"target_scope": "self",
+					"title": "陷阵重盾",
+					"unlock_level": 1,
+					"unlocked": true
+				}
+			],
+			"name": "陷阵盾卫",
+			"owned": {
+				"hp": 1
+			},
+			"owned_text": "每级生命上限＋1。持有即生效，候补与阵亡仍保留；全库同属性合计有上限。",
+			"stats": {
+				"armor": 22.5,
+				"attack": 38.0,
+				"hp": 402.0,
+				"move": 170.0,
+				"mp": 130.0,
+				"regen": 2.1,
+				"speed": 0.85
+			},
+			"support": {
+				"cooldown": 11.0,
+				"description": "给当前人物提供32护盾；每位受益者的总护盾不超过自身生命上限的35%。",
+				"id": "N03_support",
+				"kind": "WARD",
+				"mana_cost": 0.0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"reach": 0.0,
+				"target_scope": "active",
+				"title": "重盾援护",
+				"unlock_level": 1,
+				"unlocked": true
+			},
+			"trait": "",
+			"trait_description": "",
+			"trait_params": {
+
+			}
+		},
+		{
+			"automatic": [],
+			"back_text": "后台每4.5秒自动发动「援刺」，不耗魔法；仅配置且存活时生效。",
+			"base_stats": {
+				"armor": 6,
+				"attack": 24,
+				"hp": 185,
+				"move": 205,
+				"mp": 85,
+				"regen": 2.1,
+				"speed": 1
+			},
+			"basic": {
+				"cooldown": 1.0,
+				"description": "贯穿直线攻击，范围165，造成100%攻击（约24基础伤害）。",
+				"id": "N04_basic",
+				"kind": "THRUST",
+				"mana_cost": 0.0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"reach": 165.0,
+				"target_scope": "active",
+				"title": "普攻",
+				"unlock_level": 1,
+				"unlocked": true
+			},
+			"entry_level": 1,
+			"growth": {
+				"armor": 0.5,
+				"attack": 3.0,
+				"hp": 16.0,
+				"mp": 5.0
+			},
+			"id": "N04",
+			"level": 1,
+			"manual": [
+				{
+					"cooldown": 7.0,
+					"description": "贯穿直线攻击，范围190，造成320%攻击（约76.8基础伤害）。",
+					"id": "N04_strike",
+					"kind": "THRUST",
+					"mana_cost": 24.0,
+					"mechanic": "",
+					"params": {
+
+					},
+					"reach": 190.0,
+					"target_scope": "active",
+					"title": "蓄势一击",
+					"unlock_level": 1,
+					"unlocked": true
+				}
+			],
+			"name": "乡勇枪手",
+			"owned": {
+				"attack": 0.35
+			},
+			"owned_text": "每级攻击＋0.35。持有即生效，候补与阵亡仍保留；全库同属性合计有上限。",
+			"stats": {
+				"armor": 6.0,
+				"attack": 24.0,
+				"hp": 185.0,
+				"move": 205.0,
+				"mp": 85.0,
+				"regen": 2.1,
+				"speed": 1.0
+			},
+			"support": {
+				"cooldown": 4.5,
+				"description": "贯穿直线攻击，范围210，造成120%攻击（约28.8基础伤害）。",
+				"id": "spear_support",
+				"kind": "THRUST",
+				"mana_cost": 0.0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"reach": 210.0,
+				"target_scope": "active",
+				"title": "援刺",
+				"unlock_level": 1,
+				"unlocked": true
+			},
+			"trait": "",
+			"trait_description": "",
+			"trait_params": {
+
+			}
+		},
+		{
+			"automatic": [],
+			"back_text": "后台每5秒自动发动「援戟」，不耗魔法；仅配置且存活时生效。",
+			"base_stats": {
+				"armor": 10,
+				"attack": 22,
+				"hp": 220,
+				"move": 195,
+				"mp": 90,
+				"regen": 2.2,
+				"speed": 1
+			},
+			"basic": {
+				"cooldown": 1.0,
+				"description": "扇形攻击，范围145，造成100%攻击（约34基础伤害）。",
+				"id": "N05_basic",
+				"kind": "SWEEP",
+				"mana_cost": 0.0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"reach": 145.0,
+				"target_scope": "active",
+				"title": "普攻",
+				"unlock_level": 1,
+				"unlocked": true
+			},
+			"entry_level": 5,
+			"growth": {
+				"armor": 0.5,
+				"attack": 3.0,
+				"hp": 16.0,
+				"mp": 5.0
+			},
+			"id": "N05",
+			"level": 5,
+			"manual": [
+				{
+					"cooldown": 9.0,
+					"description": "圆形范围攻击，范围200，造成220%攻击（约74.8基础伤害）；减速65%，持续2秒。",
+					"id": "N05_sweep",
+					"kind": "NOVA",
+					"mana_cost": 26.0,
+					"mechanic": "",
+					"params": {
+
+					},
+					"reach": 200.0,
+					"target_scope": "active",
+					"title": "戟门拦截",
+					"unlock_level": 1,
+					"unlocked": true
+				}
+			],
+			"name": "城门戟卒",
+			"owned": {
+				"armor": 0.1
+			},
+			"owned_text": "每级防御＋0.1。持有即生效，候补与阵亡仍保留；全库同属性合计有上限。",
+			"stats": {
+				"armor": 12.0,
+				"attack": 34.0,
+				"hp": 284.0,
+				"move": 195.0,
+				"mp": 110.0,
+				"regen": 2.2,
+				"speed": 1.0
+			},
+			"support": {
+				"cooldown": 5.0,
+				"description": "扇形攻击，范围190，造成100%攻击（约34基础伤害）；减速50%，持续1.5秒。",
+				"id": "N05_support",
+				"kind": "SWEEP",
+				"mana_cost": 0.0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"reach": 190.0,
+				"target_scope": "active",
+				"title": "援戟",
+				"unlock_level": 1,
+				"unlocked": true
+			},
+			"trait": "",
+			"trait_description": "",
+			"trait_params": {
+
+			}
+		},
+		{
+			"automatic": [],
+			"back_text": "后台每6秒自动发动「破坚援刺」，不耗魔法；仅配置且存活时生效。",
+			"base_stats": {
+				"armor": 9,
+				"attack": 26,
+				"hp": 225,
+				"move": 190,
+				"mp": 90,
+				"regen": 2,
+				"speed": 0.95
+			},
+			"basic": {
+				"cooldown": 1.05263157894737,
+				"description": "贯穿直线攻击，范围185，造成100%攻击（约47基础伤害）。",
+				"id": "N06_basic",
+				"kind": "THRUST",
+				"mana_cost": 0.0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"reach": 185.0,
+				"target_scope": "active",
+				"title": "普攻",
+				"unlock_level": 1,
+				"unlocked": true
+			},
+			"entry_level": 8,
+			"growth": {
+				"armor": 0.5,
+				"attack": 3.0,
+				"hp": 16.0,
+				"mp": 5.0
+			},
+			"id": "N06",
+			"level": 8,
+			"manual": [
+				{
+					"cooldown": 9.0,
+					"description": "贯穿直线攻击，范围255，造成300%攻击（约141基础伤害）；使命中目标承伤增加16%，持续4秒；同类取最强不相加。",
+					"id": "N06_break",
+					"kind": "THRUST",
+					"mana_cost": 28.0,
+					"mechanic": "expose",
+					"params": {
+						"duration": 4,
+						"multiplier": 0.16
+					},
+					"reach": 255.0,
+					"target_scope": "active",
+					"title": "锐卒攻坚",
+					"unlock_level": 1,
+					"unlocked": true
+				}
+			],
+			"name": "陷阵锐卒",
+			"owned": {
+				"attack": 0.3
+			},
+			"owned_text": "每级攻击＋0.3。持有即生效，候补与阵亡仍保留；全库同属性合计有上限。",
+			"stats": {
+				"armor": 12.5,
+				"attack": 47.0,
+				"hp": 337.0,
+				"move": 190.0,
+				"mp": 125.0,
+				"regen": 2.0,
+				"speed": 0.95
+			},
+			"support": {
+				"cooldown": 6.0,
+				"description": "贯穿直线攻击，范围235，造成90%攻击（约42.3基础伤害）；使命中目标承伤增加10%，持续3秒；同类取最强不相加。",
+				"id": "N06_support",
+				"kind": "THRUST",
+				"mana_cost": 0.0,
+				"mechanic": "expose",
+				"params": {
+					"duration": 3,
+					"multiplier": 0.1
+				},
+				"reach": 235.0,
+				"target_scope": "active",
+				"title": "破坚援刺",
+				"unlock_level": 1,
+				"unlocked": true
+			},
+			"trait": "",
+			"trait_description": "",
+			"trait_params": {
+
+			}
+		},
+		{
+			"automatic": [],
+			"back_text": "后台由前台普攻累计命中触发「援射」，不耗魔法；仅配置且存活时生效。",
+			"base_stats": {
+				"armor": 3,
+				"attack": 19,
+				"hp": 150,
+				"move": 215,
+				"mp": 90,
+				"regen": 2.4,
+				"speed": 1.45
+			},
+			"basic": {
+				"cooldown": 0.689655172413793,
+				"description": "单体弹道攻击，范围480，造成100%攻击（约19基础伤害）。",
+				"id": "N07_basic",
+				"kind": "PROJECTILE",
+				"mana_cost": 0.0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"reach": 480.0,
+				"target_scope": "active",
+				"title": "普攻",
+				"unlock_level": 1,
+				"unlocked": true
+			},
+			"entry_level": 1,
+			"growth": {
+				"armor": 0.5,
+				"attack": 3.0,
+				"hp": 16.0,
+				"mp": 5.0
+			},
+			"id": "N07",
+			"level": 1,
+			"manual": [
+				{
+					"cooldown": 7.0,
+					"description": "单体弹道攻击，范围505，造成320%攻击（约60.8基础伤害）。",
+					"id": "N07_strike",
+					"kind": "PROJECTILE",
+					"mana_cost": 24.0,
+					"mechanic": "",
+					"params": {
+
+					},
+					"reach": 505.0,
+					"target_scope": "active",
+					"title": "蓄势一击",
+					"unlock_level": 1,
+					"unlocked": true
+				}
+			],
+			"name": "猎户弓手",
+			"owned": {
+				"speed": 0.012
+			},
+			"owned_text": "每级每秒普攻次数＋0.01。持有即生效，候补与阵亡仍保留；全库同属性合计有上限。",
+			"stats": {
+				"armor": 3.0,
+				"attack": 19.0,
+				"hp": 150.0,
+				"move": 215.0,
+				"mp": 90.0,
+				"regen": 2.4,
+				"speed": 1.45
+			},
+			"support": {
+				"cooldown": 3.0,
+				"description": "单体弹道攻击，范围520，造成100%攻击（约19基础伤害）。",
+				"id": "bow_support",
+				"kind": "PROJECTILE",
+				"mana_cost": 0.0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"reach": 520.0,
+				"target_scope": "active",
+				"title": "援射",
+				"unlock_level": 1,
+				"unlocked": true
+			},
+			"trait": "mark",
+			"trait_description": "在后台时，前台真实普攻命中每3次触发一次本人的支援，至少间隔1秒；同一次普攻命中多人只算1次，追击不再累计。",
+			"trait_params": {
+				"hits": 3,
+				"interval": 1
+			}
+		},
+		{
+			"automatic": [],
+			"back_text": "后台每7秒自动发动「贯穿援射」，不耗魔法；仅配置且存活时生效。",
+			"base_stats": {
+				"armor": 6,
+				"attack": 25,
+				"hp": 175,
+				"move": 195,
+				"mp": 95,
+				"regen": 2.3,
+				"speed": 0.9
+			},
+			"basic": {
+				"cooldown": 1.11111111111111,
+				"description": "贯穿直线攻击，范围510，造成100%攻击（约37基础伤害）。",
+				"id": "N08_basic",
+				"kind": "THRUST",
+				"mana_cost": 0.0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"reach": 510.0,
+				"target_scope": "active",
+				"title": "普攻",
+				"unlock_level": 1,
+				"unlocked": true
+			},
+			"entry_level": 5,
+			"growth": {
+				"armor": 0.5,
+				"attack": 3.0,
+				"hp": 16.0,
+				"mp": 5.0
+			},
+			"id": "N08",
+			"level": 5,
+			"manual": [
+				{
+					"cooldown": 10.0,
+					"description": "贯穿直线攻击，范围580，造成340%攻击（约125.8基础伤害）。",
+					"id": "N08_bolt",
+					"kind": "THRUST",
+					"mana_cost": 28.0,
+					"mechanic": "",
+					"params": {
+
+					},
+					"reach": 580.0,
+					"target_scope": "active",
+					"title": "贯阵弩",
+					"unlock_level": 1,
+					"unlocked": true
+				}
+			],
+			"name": "白门弩手",
+			"owned": {
+				"attack": 0.3
+			},
+			"owned_text": "每级攻击＋0.3。持有即生效，候补与阵亡仍保留；全库同属性合计有上限。",
+			"stats": {
+				"armor": 8.0,
+				"attack": 37.0,
+				"hp": 239.0,
+				"move": 195.0,
+				"mp": 115.0,
+				"regen": 2.3,
+				"speed": 0.9
+			},
+			"support": {
+				"cooldown": 7.0,
+				"description": "贯穿直线攻击，范围570，造成150%攻击（约55.5基础伤害）。",
+				"id": "N08_support",
+				"kind": "THRUST",
+				"mana_cost": 0.0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"reach": 570.0,
+				"target_scope": "active",
+				"title": "贯穿援射",
+				"unlock_level": 1,
+				"unlocked": true
+			},
+			"trait": "",
+			"trait_description": "",
+			"trait_params": {
+
+			}
+		},
+		{
+			"automatic": [],
+			"back_text": "后台由前台普攻累计命中触发「连弩援射」，不耗魔法；仅配置且存活时生效。",
+			"base_stats": {
+				"armor": 5,
+				"attack": 26,
+				"hp": 170,
+				"move": 200,
+				"mp": 100,
+				"regen": 2.5,
+				"speed": 1.15
+			},
+			"basic": {
+				"cooldown": 0.869565217391304,
+				"description": "单体弹道攻击，范围560，造成100%攻击（约44基础伤害）。",
+				"id": "N09_basic",
+				"kind": "PROJECTILE",
+				"mana_cost": 0.0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"reach": 560.0,
+				"target_scope": "active",
+				"title": "普攻",
+				"unlock_level": 1,
+				"unlocked": true
+			},
+			"entry_level": 7,
+			"growth": {
+				"armor": 0.5,
+				"attack": 3.0,
+				"hp": 16.0,
+				"mp": 5.0
+			},
+			"id": "N09",
+			"level": 7,
+			"manual": [
+				{
+					"cooldown": 11.0,
+					"description": "单体弹道攻击，范围630，造成400%攻击（约176基础伤害）。",
+					"id": "N09_aim",
+					"kind": "PROJECTILE",
+					"mana_cost": 30.0,
+					"mechanic": "",
+					"params": {
+
+					},
+					"reach": 630.0,
+					"target_scope": "active",
+					"title": "定敌弩",
+					"unlock_level": 1,
+					"unlocked": true
+				}
+			],
+			"name": "曹军劲弩手",
+			"owned": {
+				"mp": 0.5
+			},
+			"owned_text": "每级魔法上限＋0.5。持有即生效，候补与阵亡仍保留；全库同属性合计有上限。",
+			"stats": {
+				"armor": 8.0,
+				"attack": 44.0,
+				"hp": 266.0,
+				"move": 200.0,
+				"mp": 130.0,
+				"regen": 2.5,
+				"speed": 1.15
+			},
+			"support": {
+				"cooldown": 5.0,
+				"description": "单体弹道攻击，范围610，造成120%攻击（约52.8基础伤害）。",
+				"id": "N09_support",
+				"kind": "PROJECTILE",
+				"mana_cost": 0.0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"reach": 610.0,
+				"target_scope": "active",
+				"title": "连弩援射",
+				"unlock_level": 1,
+				"unlocked": true
+			},
+			"trait": "mark",
+			"trait_description": "在后台时，前台真实普攻命中每4次触发一次本人的支援，至少间隔2秒；同一次普攻命中多人只算1次，追击不再累计。",
+			"trait_params": {
+				"hits": 4,
+				"interval": 2
+			}
+		},
+		{
+			"automatic": [],
+			"back_text": "后台每5.5秒自动发动「冲阵」，不耗魔法；仅配置且存活时生效。",
+			"base_stats": {
+				"armor": 7,
+				"attack": 22,
+				"hp": 195,
+				"move": 240,
+				"mp": 90,
+				"regen": 2.1,
+				"speed": 1.2
+			},
+			"basic": {
+				"cooldown": 0.833333333333333,
+				"description": "贯穿直线攻击，范围150，造成100%攻击（约43基础伤害）。",
+				"id": "N10_basic",
+				"kind": "THRUST",
+				"mana_cost": 0.0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"reach": 150.0,
+				"target_scope": "active",
+				"title": "普攻",
+				"unlock_level": 1,
+				"unlocked": true
+			},
+			"entry_level": 8,
+			"growth": {
+				"armor": 0.5,
+				"attack": 3.0,
+				"hp": 16.0,
+				"mp": 5.0
+			},
+			"id": "N10",
+			"level": 8,
+			"manual": [
+				{
+					"cooldown": 9.0,
+					"description": "贯穿直线攻击，范围215，造成270%攻击（约116.1基础伤害）；向攻击方向移动150，不提供无敌。",
+					"id": "N10_dash",
+					"kind": "THRUST",
+					"mana_cost": 25.0,
+					"mechanic": "dash",
+					"params": {
+						"distance": 150
+					},
+					"reach": 215.0,
+					"target_scope": "active",
+					"title": "游骑突围",
+					"unlock_level": 1,
+					"unlocked": true
+				}
+			],
+			"name": "并州游骑",
+			"owned": {
+				"move": 0.45
+			},
+			"owned_text": "每级移速＋0.45。持有即生效，候补与阵亡仍保留；全库同属性合计有上限。",
+			"stats": {
+				"armor": 10.5,
+				"attack": 43.0,
+				"hp": 307.0,
+				"move": 240.0,
+				"mp": 125.0,
+				"regen": 2.1,
+				"speed": 1.2
+			},
+			"support": {
+				"cooldown": 5.5,
+				"description": "贯穿直线攻击，范围225，造成120%攻击（约51.6基础伤害）。",
+				"id": "N10_support",
+				"kind": "THRUST",
+				"mana_cost": 0.0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"reach": 225.0,
+				"target_scope": "active",
+				"title": "冲阵",
+				"unlock_level": 1,
+				"unlocked": true
+			},
+			"trait": "",
+			"trait_description": "",
+			"trait_params": {
+
+			}
+		},
+		{
+			"automatic": [],
+			"back_text": "后台每4秒自动发动「掠锋」，不耗魔法；仅配置且存活时生效。",
+			"base_stats": {
+				"armor": 6,
+				"attack": 24,
+				"hp": 190,
+				"move": 250,
+				"mp": 95,
+				"regen": 2.2,
+				"speed": 1.35
+			},
+			"basic": {
+				"cooldown": 0.740740740740741,
+				"description": "贯穿直线攻击，范围155，造成100%攻击（约42基础伤害）。",
+				"id": "N11_basic",
+				"kind": "THRUST",
+				"mana_cost": 0.0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"reach": 155.0,
+				"target_scope": "active",
+				"title": "普攻",
+				"unlock_level": 1,
+				"unlocked": true
+			},
+			"entry_level": 7,
+			"growth": {
+				"armor": 0.5,
+				"attack": 3.0,
+				"hp": 16.0,
+				"mp": 5.0
+			},
+			"id": "N11",
+			"level": 7,
+			"manual": [
+				{
+					"cooldown": 8.0,
+					"description": "贯穿直线攻击，范围250，造成280%攻击（约117.6基础伤害）；向攻击方向移动180，不提供无敌。",
+					"id": "N11_dash",
+					"kind": "THRUST",
+					"mana_cost": 26.0,
+					"mechanic": "dash",
+					"params": {
+						"distance": 180
+					},
+					"reach": 250.0,
+					"target_scope": "active",
+					"title": "轻骑逐敌",
+					"unlock_level": 1,
+					"unlocked": true
+				}
+			],
+			"name": "虎豹轻骑",
+			"owned": {
+				"move": 0.35
+			},
+			"owned_text": "每级移速＋0.35。持有即生效，候补与阵亡仍保留；全库同属性合计有上限。",
+			"stats": {
+				"armor": 9.0,
+				"attack": 42.0,
+				"hp": 286.0,
+				"move": 250.0,
+				"mp": 125.0,
+				"regen": 2.2,
+				"speed": 1.35
+			},
+			"support": {
+				"cooldown": 4.0,
+				"description": "贯穿直线攻击，范围265，造成90%攻击（约37.8基础伤害）；减速30%，持续1秒。",
+				"id": "N11_support",
+				"kind": "THRUST",
+				"mana_cost": 0.0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"reach": 265.0,
+				"target_scope": "active",
+				"title": "掠锋",
+				"unlock_level": 1,
+				"unlocked": true
+			},
+			"trait": "",
+			"trait_description": "",
+			"trait_params": {
+
+			}
+		},
+		{
+			"automatic": [],
+			"back_text": "后台每8秒自动发动「重冲」，不耗魔法；仅配置且存活时生效。",
+			"base_stats": {
+				"armor": 16,
+				"attack": 28,
+				"hp": 270,
+				"move": 185,
+				"mp": 90,
+				"regen": 2,
+				"speed": 0.8
+			},
+			"basic": {
+				"cooldown": 1.25,
+				"description": "贯穿直线攻击，范围195，造成100%攻击（约49基础伤害）。",
+				"id": "N12_basic",
+				"kind": "THRUST",
+				"mana_cost": 0.0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"reach": 195.0,
+				"target_scope": "active",
+				"title": "普攻",
+				"unlock_level": 1,
+				"unlocked": true
+			},
+			"entry_level": 8,
+			"growth": {
+				"armor": 0.5,
+				"attack": 3.0,
+				"hp": 16.0,
+				"mp": 5.0
+			},
+			"id": "N12",
+			"level": 8,
+			"manual": [
+				{
+					"cooldown": 14.0,
+					"description": "贯穿直线攻击，范围285，造成380%攻击（约186.2基础伤害）；减速65%，持续2秒；向攻击方向移动110，不提供无敌。",
+					"id": "N12_charge",
+					"kind": "THRUST",
+					"mana_cost": 32.0,
+					"mechanic": "dash",
+					"params": {
+						"distance": 110
+					},
+					"reach": 285.0,
+					"target_scope": "active",
+					"title": "重骑压阵",
+					"unlock_level": 1,
+					"unlocked": true
+				}
+			],
+			"name": "虎豹重骑",
+			"owned": {
+				"armor": 0.12
+			},
+			"owned_text": "每级防御＋0.12。持有即生效，候补与阵亡仍保留；全库同属性合计有上限。",
+			"stats": {
+				"armor": 19.5,
+				"attack": 49.0,
+				"hp": 382.0,
+				"move": 185.0,
+				"mp": 125.0,
+				"regen": 2.0,
+				"speed": 0.8
+			},
+			"support": {
+				"cooldown": 8.0,
+				"description": "贯穿直线攻击，范围275，造成180%攻击（约88.2基础伤害）；减速55%，持续1.5秒。",
+				"id": "N12_support",
+				"kind": "THRUST",
+				"mana_cost": 0.0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"reach": 275.0,
+				"target_scope": "active",
+				"title": "重冲",
+				"unlock_level": 1,
+				"unlocked": true
+			},
+			"trait": "",
+			"trait_description": "",
+			"trait_params": {
+
+			}
+		},
+		{
+			"automatic": [],
+			"back_text": "后台每5秒自动发动「回元」，不耗魔法；仅配置且存活时生效。",
+			"base_stats": {
+				"armor": 3,
+				"attack": 16,
+				"hp": 145,
+				"move": 200,
+				"mp": 140,
+				"regen": 5,
+				"speed": 1
+			},
+			"basic": {
+				"cooldown": 1.0,
+				"description": "单体弹道攻击，范围400，造成100%攻击（约16基础伤害）。",
+				"id": "N13_basic",
+				"kind": "PROJECTILE",
+				"mana_cost": 0.0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"reach": 400.0,
+				"target_scope": "active",
+				"title": "普攻",
+				"unlock_level": 1,
+				"unlocked": true
+			},
+			"entry_level": 1,
+			"growth": {
+				"armor": 0.5,
+				"attack": 3.0,
+				"hp": 16.0,
+				"mp": 5.0
+			},
+			"id": "N13",
+			"level": 1,
+			"manual": [
+				{
+					"cooldown": 8.0,
+					"description": "单体弹道攻击，范围460，造成280%攻击（约44.8基础伤害）。",
+					"id": "N13_strike",
+					"kind": "PROJECTILE",
+					"mana_cost": 24.0,
+					"mechanic": "",
+					"params": {
+
+					},
+					"reach": 460.0,
+					"target_scope": "active",
+					"title": "蓄势一击",
+					"unlock_level": 1,
+					"unlocked": true
+				},
+				{
+					"cooldown": 14.0,
+					"description": "为魔法比例最低的存活编队人物恢复24魔法；Lv.4解锁。",
+					"id": "N13_mana",
+					"kind": "MANA",
+					"mana_cost": 34.0,
+					"mechanic": "",
+					"params": {
+
+					},
+					"reach": 0.0,
+					"target_scope": "lowest_mp",
+					"title": "回元符",
+					"unlock_level": 4,
+					"unlocked": false
+				}
+			],
+			"name": "游方符师",
+			"owned": {
+				"regen": 0.25
+			},
+			"owned_text": "每级每秒回魔＋0.25。持有即生效，候补与阵亡仍保留；全库同属性合计有上限。",
+			"stats": {
+				"armor": 3.0,
+				"attack": 16.0,
+				"hp": 145.0,
+				"move": 200.0,
+				"mp": 140.0,
+				"regen": 5.0,
+				"speed": 1.0
+			},
+			"support": {
+				"cooldown": 5.0,
+				"description": "为魔法比例最低的存活编队人物恢复6魔法。",
+				"id": "talisman_support",
+				"kind": "MANA",
+				"mana_cost": 0.0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"reach": 0.0,
+				"target_scope": "lowest_mp",
+				"title": "回元",
+				"unlock_level": 1,
+				"unlocked": true
+			},
+			"trait": "",
+			"trait_description": "",
+			"trait_params": {
+
+			}
+		},
+		{
+			"automatic": [],
+			"back_text": "后台每4.5秒自动发动「缚行咒」，不耗魔法；仅配置且存活时生效。",
+			"base_stats": {
+				"armor": 3,
+				"attack": 20,
+				"hp": 145,
+				"move": 200,
+				"mp": 125,
+				"regen": 3.5,
+				"speed": 1
+			},
+			"basic": {
+				"cooldown": 1.0,
+				"description": "单体弹道攻击，范围460，造成100%攻击（约29基础伤害）。",
+				"id": "N14_basic",
+				"kind": "PROJECTILE",
+				"mana_cost": 0.0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"reach": 460.0,
+				"target_scope": "active",
+				"title": "普攻",
+				"unlock_level": 1,
+				"unlocked": true
+			},
+			"entry_level": 4,
+			"growth": {
+				"armor": 0.5,
+				"attack": 3.0,
+				"hp": 16.0,
+				"mp": 5.0
+			},
+			"id": "N14",
+			"level": 4,
+			"manual": [
+				{
+					"cooldown": 9.0,
+					"description": "圆形范围攻击，范围210，造成200%攻击（约58基础伤害）；减速65%，持续3.5秒；命中附加6秒咒伤，总计108%攻击；同源刷新。",
+					"id": "curse_bind",
+					"kind": "NOVA",
+					"mana_cost": 30.0,
+					"mechanic": "curse",
+					"params": {
+						"dot_scale": 1.08,
+						"duration": 6
+					},
+					"reach": 210.0,
+					"target_scope": "active",
+					"title": "缚行咒",
+					"unlock_level": 1,
+					"unlocked": true
+				}
+			],
+			"name": "荒祠咒师",
+			"owned": {
+				"regen": 0.12
+			},
+			"owned_text": "每级每秒回魔＋0.12。持有即生效，候补与阵亡仍保留；全库同属性合计有上限。",
+			"stats": {
+				"armor": 4.5,
+				"attack": 29.0,
+				"hp": 193.0,
+				"move": 200.0,
+				"mp": 140.0,
+				"regen": 3.5,
+				"speed": 1.0
+			},
+			"support": {
+				"cooldown": 4.5,
+				"description": "单体弹道攻击，范围480，造成65%攻击（约18.85基础伤害）；减速40%，持续2秒；命中附加4秒咒伤，总计40%攻击；同源刷新。",
+				"id": "curse_support",
+				"kind": "PROJECTILE",
+				"mana_cost": 0.0,
+				"mechanic": "curse",
+				"params": {
+					"dot_scale": 0.4,
+					"duration": 4
+				},
+				"reach": 480.0,
+				"target_scope": "active",
+				"title": "缚行咒",
+				"unlock_level": 1,
+				"unlocked": true
+			},
+			"trait": "curse",
+			"trait_description": "本人直接普攻／自动攻击至多每2秒挂一次咒伤，5秒共造成50%攻击伤害；相同来源刷新而不无限叠加。",
+			"trait_params": {
+				"dot_scale": 0.5,
+				"duration": 5,
+				"interval": 2
+			}
+		},
+		{
+			"automatic": [],
+			"back_text": "后台每6秒自动发动「弱敌咒」，不耗魔法；仅配置且存活时生效。",
+			"base_stats": {
+				"armor": 4,
+				"attack": 19,
+				"hp": 155,
+				"move": 195,
+				"mp": 130,
+				"regen": 3.8,
+				"speed": 0.95
+			},
+			"basic": {
+				"cooldown": 1.05263157894737,
+				"description": "单体弹道攻击，范围470，造成100%攻击（约37基础伤害）。",
+				"id": "N15_basic",
+				"kind": "PROJECTILE",
+				"mana_cost": 0.0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"reach": 470.0,
+				"target_scope": "active",
+				"title": "普攻",
+				"unlock_level": 1,
+				"unlocked": true
+			},
+			"entry_level": 7,
+			"growth": {
+				"armor": 0.5,
+				"attack": 3.0,
+				"hp": 16.0,
+				"mp": 5.0
+			},
+			"id": "N15",
+			"level": 7,
+			"manual": [
+				{
+					"cooldown": 8.0,
+					"description": "单体弹道攻击，范围510，造成180%攻击（约66.6基础伤害）；命中附加5秒咒伤，总计100%攻击；同源刷新。",
+					"id": "N15_curse",
+					"kind": "PROJECTILE",
+					"mana_cost": 26.0,
+					"mechanic": "curse",
+					"params": {
+						"dot_scale": 1.0,
+						"duration": 5
+					},
+					"reach": 510.0,
+					"target_scope": "active",
+					"title": "祭咒",
+					"unlock_level": 1,
+					"unlocked": true
+				},
+				{
+					"cooldown": 12.0,
+					"description": "单体弹道攻击，范围530，造成200%攻击（约74基础伤害）；提前结算并移除目标剩余咒伤的100%；未中咒也有基础伤害。",
+					"id": "N15_cashout",
+					"kind": "PROJECTILE",
+					"mana_cost": 34.0,
+					"mechanic": "curse_cashout",
+					"params": {
+						"fraction": 1
+					},
+					"reach": 530.0,
+					"target_scope": "active",
+					"title": "催咒",
+					"unlock_level": 7,
+					"unlocked": true
+				}
+			],
+			"name": "曹军祭师",
+			"owned": {
+				"mp": 0.6
+			},
+			"owned_text": "每级魔法上限＋0.6。持有即生效，候补与阵亡仍保留；全库同属性合计有上限。",
+			"stats": {
+				"armor": 7.0,
+				"attack": 37.0,
+				"hp": 251.0,
+				"move": 195.0,
+				"mp": 160.0,
+				"regen": 3.8,
+				"speed": 0.95
+			},
+			"support": {
+				"cooldown": 6.0,
+				"description": "单体弹道攻击，范围520，造成65%攻击（约24.05基础伤害）；使命中目标承伤增加10%，持续3秒；同类取最强不相加。",
+				"id": "N15_support",
+				"kind": "PROJECTILE",
+				"mana_cost": 0.0,
+				"mechanic": "expose",
+				"params": {
+					"duration": 3,
+					"multiplier": 0.1
+				},
+				"reach": 520.0,
+				"target_scope": "active",
+				"title": "弱敌咒",
+				"unlock_level": 1,
+				"unlocked": true
+			},
+			"trait": "",
+			"trait_description": "",
+			"trait_params": {
+
+			}
+		},
+		{
+			"automatic": [],
+			"back_text": "后台每7秒自动发动「敷药」，不耗魔法；仅配置且存活时生效。",
+			"base_stats": {
+				"armor": 4,
+				"attack": 14,
+				"hp": 170,
+				"move": 200,
+				"mp": 120,
+				"regen": 3.2,
+				"speed": 1
+			},
+			"basic": {
+				"cooldown": 1.0,
+				"description": "扇形攻击，范围95，造成100%攻击（约14基础伤害）。",
+				"id": "N16_basic",
+				"kind": "SWEEP",
+				"mana_cost": 0.0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"reach": 95.0,
+				"target_scope": "active",
+				"title": "普攻",
+				"unlock_level": 1,
+				"unlocked": true
+			},
+			"entry_level": 1,
+			"growth": {
+				"armor": 0.5,
+				"attack": 3.0,
+				"hp": 16.0,
+				"mp": 5.0
+			},
+			"id": "N16",
+			"level": 1,
+			"manual": [
+				{
+					"cooldown": 12.0,
+					"description": "为生命比例最低的存活编队人物恢复46.5生命。",
+					"id": "healer_aid",
+					"kind": "HEAL",
+					"mana_cost": 32.0,
+					"mechanic": "",
+					"params": {
+
+					},
+					"reach": 0.0,
+					"target_scope": "lowest_hp",
+					"title": "急救",
+					"unlock_level": 1,
+					"unlocked": true
+				}
+			],
+			"name": "行脚郎中",
+			"owned": {
+				"supply_hp": 0.025
+			},
+			"owned_text": "每级补给回血比例＋2.5%。持有即生效，候补与阵亡仍保留；全库同属性合计有上限。",
+			"stats": {
+				"armor": 4.0,
+				"attack": 14.0,
+				"hp": 170.0,
+				"move": 200.0,
+				"mp": 120.0,
+				"regen": 3.2,
+				"speed": 1.0
+			},
+			"support": {
+				"cooldown": 7.0,
+				"description": "为生命比例最低的存活编队人物恢复8.5生命。",
+				"id": "healer_support",
+				"kind": "HEAL",
+				"mana_cost": 0.0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"reach": 0.0,
+				"target_scope": "lowest_hp",
+				"title": "敷药",
+				"unlock_level": 1,
+				"unlocked": true
+			},
+			"trait": "",
+			"trait_description": "",
+			"trait_params": {
+
+			}
+		},
+		{
+			"automatic": [],
+			"back_text": "后台每5秒自动发动「热汤」，不耗魔法；仅配置且存活时生效。",
+			"base_stats": {
+				"armor": 6,
+				"attack": 17,
+				"hp": 205,
+				"move": 205,
+				"mp": 95,
+				"regen": 2.6,
+				"speed": 1.1
+			},
+			"basic": {
+				"cooldown": 0.909090909090909,
+				"description": "扇形攻击，范围100，造成100%攻击（约17基础伤害）。",
+				"id": "N17_basic",
+				"kind": "SWEEP",
+				"mana_cost": 0.0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"reach": 100.0,
+				"target_scope": "active",
+				"title": "普攻",
+				"unlock_level": 1,
+				"unlocked": true
+			},
+			"entry_level": 1,
+			"growth": {
+				"armor": 0.5,
+				"attack": 3.0,
+				"hp": 16.0,
+				"mp": 5.0
+			},
+			"id": "N17",
+			"level": 1,
+			"manual": [
+				{
+					"cooldown": 12.0,
+					"description": "给施放者本人提供45护盾；每位受益者的总护盾不超过自身生命上限的35%。",
+					"id": "cook_guard",
+					"kind": "WARD",
+					"mana_cost": 30.0,
+					"mechanic": "",
+					"params": {
+
+					},
+					"reach": 0.0,
+					"target_scope": "self",
+					"title": "护身",
+					"unlock_level": 1,
+					"unlocked": true
+				}
+			],
+			"name": "随军伙夫",
+			"owned": {
+				"supply_mp": 0.04
+			},
+			"owned_text": "每级补给回魔比例＋4%。持有即生效，候补与阵亡仍保留；全库同属性合计有上限。",
+			"stats": {
+				"armor": 6.0,
+				"attack": 17.0,
+				"hp": 205.0,
+				"move": 205.0,
+				"mp": 95.0,
+				"regen": 2.6,
+				"speed": 1.1
+			},
+			"support": {
+				"cooldown": 5.0,
+				"description": "为生命比例最低的存活编队人物恢复5.5生命。",
+				"id": "cook_support",
+				"kind": "HEAL",
+				"mana_cost": 0.0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"reach": 0.0,
+				"target_scope": "lowest_hp",
+				"title": "热汤",
+				"unlock_level": 1,
+				"unlocked": true
+			},
+			"trait": "",
+			"trait_description": "",
+			"trait_params": {
+
+			}
+		},
+		{
+			"automatic": [],
+			"back_text": "后台每7秒自动发动「军需援护」，不耗魔法；仅配置且存活时生效。",
+			"base_stats": {
+				"armor": 5,
+				"attack": 12,
+				"hp": 170,
+				"move": 200,
+				"mp": 105,
+				"regen": 3.2,
+				"speed": 1
+			},
+			"basic": {
+				"cooldown": 1.0,
+				"description": "扇形攻击，范围100，造成100%攻击（约18基础伤害）。",
+				"id": "N18_basic",
+				"kind": "SWEEP",
+				"mana_cost": 0.0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"reach": 100.0,
+				"target_scope": "active",
+				"title": "普攻",
+				"unlock_level": 1,
+				"unlocked": true
+			},
+			"entry_level": 3,
+			"growth": {
+				"armor": 0.5,
+				"attack": 3.0,
+				"hp": 16.0,
+				"mp": 5.0
+			},
+			"id": "N18",
+			"level": 3,
+			"manual": [
+				{
+					"cooldown": 13.0,
+					"description": "给当前人物提供45护盾；每位受益者的总护盾不超过自身生命上限的35%。",
+					"id": "clerk_guard",
+					"kind": "WARD",
+					"mana_cost": 30.0,
+					"mechanic": "",
+					"params": {
+
+					},
+					"reach": 0.0,
+					"target_scope": "active",
+					"title": "护身符",
+					"unlock_level": 1,
+					"unlocked": true
+				},
+				{
+					"cooldown": 15.0,
+					"description": "全部存活编队人物获得4秒强化：攻击＋10%、攻速＋10%；同类取最强；Lv.5解锁。",
+					"id": "N18_rally",
+					"kind": "WARD",
+					"mana_cost": 28.0,
+					"mechanic": "rally",
+					"params": {
+						"attack_multiplier": 0.1,
+						"duration": 4,
+						"speed_multiplier": 0.1
+					},
+					"reach": 0.0,
+					"target_scope": "party",
+					"title": "行军令",
+					"unlock_level": 5,
+					"unlocked": false
+				}
+			],
+			"name": "军需小吏",
+			"owned": {
+				"supply_mp": 0.03
+			},
+			"owned_text": "每级补给回魔比例＋3%。持有即生效，候补与阵亡仍保留；全库同属性合计有上限。",
+			"stats": {
+				"armor": 6.0,
+				"attack": 18.0,
+				"hp": 202.0,
+				"move": 200.0,
+				"mp": 115.0,
+				"regen": 3.2,
+				"speed": 1.0
+			},
+			"support": {
+				"cooldown": 7.0,
+				"description": "当前人物获得2秒强化：攻击＋6%、攻速＋4%；同类取最强。",
+				"id": "clerk_support",
+				"kind": "WARD",
+				"mana_cost": 0.0,
+				"mechanic": "rally",
+				"params": {
+					"attack_multiplier": 0.06,
+					"duration": 2,
+					"speed_multiplier": 0.04
+				},
+				"reach": 0.0,
+				"target_scope": "active",
+				"title": "军需援护",
+				"unlock_level": 1,
+				"unlocked": true
+			},
+			"trait": "",
+			"trait_description": "",
+			"trait_params": {
+
+			}
+		}
+	],
+	"equipment": [
+		{
+			"detail": "宽幅横扫；辅助保留自己的攻击形态。",
+			"effect": "主角普攻：近身横斩",
+			"id": "plain_blade",
+			"mark": "刀",
+			"name": "旧铁刀",
+			"slot": "weapon"
+		},
+		{
+			"detail": "攻击距离更长，命中范围更窄。",
+			"effect": "主角普攻：长线突刺",
+			"id": "long_spear",
+			"mark": "枪",
+			"name": "破阵长枪",
+			"slot": "weapon"
+		},
+		{
+			"detail": "只作用于实际承伤人物。",
+			"effect": "受伤后移动速度提高25%，持续1.5秒",
+			"id": "cloth_armor",
+			"mark": "甲",
+			"name": "行旅布甲",
+			"slot": "armor"
+		},
+		{
+			"detail": "护盾由实际承伤者获得，每2秒至多触发一次。",
+			"effect": "全队防御+4；受伤后获得6点护盾",
+			"id": "iron_armor",
+			"mark": "铠",
+			"name": "旧军铁甲",
+			"slot": "armor"
+		},
+		{
+			"detail": "按发出时的前台攻击判定，后台支援不继承。",
+			"effect": "直接攻击附加15%火焰伤害",
+			"id": "ember_seal",
+			"mark": "火",
+			"name": "余烬符",
+			"slot": "accessory"
+		},
+		{
+			"detail": "切人不改变已发出攻击的附魔资格。",
+			"effect": "直接攻击使目标减速35%，持续1.5秒",
+			"id": "frost_jade",
+			"mark": "霜",
+			"name": "寒泉玉",
+			"slot": "accessory"
+		}
+	],
+	"growth": {
+		"armor": 0.5,
+		"attack": 3.0,
+		"hp": 16.0,
+		"mp": 5.0
+	},
+	"owned_caps": {
+		"armor": 20.0,
+		"attack": 40.0,
+		"hp": 180.0,
+		"move": 35.0,
+		"mp": 100.0,
+		"regen": 3.0,
+		"speed": 0.35,
+		"supply_hp": 0.3,
+		"supply_mp": 0.3
+	},
+	"schema": 1
+}

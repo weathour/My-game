@@ -27,6 +27,24 @@ FAULTS = {
         "EXPECTED_FAULT_INJECTION: write to /proc must fail and rollback":
             "ERROR: Could not create directory: '/proc/chronicle-test-read-only'.",
     },
+    "chronicle_story_progress_smoke": {
+        "EXPECTED_FAULT_INJECTION: first reward claim write rejected":
+            "ERROR: Could not create directory: '/proc/chronicle-story-claim-read-only'.",
+        "EXPECTED_FAULT_INJECTION: story line write rejected":
+            "ERROR: Could not create directory: '/proc/chronicle-story-line-read-only'.",
+        "EXPECTED_FAULT_INJECTION: story completion write rejected":
+            "ERROR: Could not create directory: '/proc/chronicle-story-line-read-only'.",
+    },
+    "chronicle_character_campaign_smoke": {
+        "EXPECTED_FAULT_INJECTION: post-battle story save rejected":
+            "ERROR: Could not create directory: '/proc/character-campaign-story-write-rejected'.",
+    },
+    "chronicle_story_ui_smoke": {
+        "EXPECTED_FAULT_INJECTION: story UI line write rejected":
+            "ERROR: Could not create directory: '/proc/chronicle-story-ui-read-only'.",
+        "EXPECTED_FAULT_INJECTION: story UI completion write rejected":
+            "ERROR: Could not create directory: '/proc/chronicle-story-ui-read-only'.",
+    },
 }
 
 

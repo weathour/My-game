@@ -67,9 +67,8 @@ func run() -> void:
 	if first.outcome != "victory": quit(1); return
 	expect(campaign.complete_battle(first.result), "victory committed")
 	expect(not campaign.complete_battle(first.result), "duplicate victory rejected")
-	expect(campaign.data.current == "S02" and campaign.data.pending.is_empty(), "story precedes first reward")
-	expect(campaign.resolve_event(), "Emma story joins")
-	expect(campaign.data.owned.F11.level == 1 and campaign.data.owned.F11.xp == 0, "Emma does not inherit first-stage XP")
+	expect(campaign.data.current == "B01" and not campaign.data.pending.is_empty(), "first reward precedes Emma story")
+	expect(not campaign.resolve_event() and not campaign.data.owned.has("F11") and "F11" not in campaign.data.pending.candidates, "Emma remains gated during first draft")
 	expect(campaign.data.pending.candidates.size() == 5 and campaign.data.pending.picks == 2, "normal five choose two")
 	var picks: Array = campaign.data.pending.candidates.duplicate()
 	var first_pick: String = "N16" if "N16" in picks else str(picks[0])
@@ -83,6 +82,8 @@ func run() -> void:
 	expect(campaign.claim_reward(), "claim first cards")
 	var claimed := campaign.data.duplicate(true)
 	expect(not campaign.claim_reward() and campaign.data == claimed, "claim idempotency")
+	expect(campaign.data.current == "S02" and campaign.resolve_event(), "claimed first reward reaches Emma story")
+	expect(campaign.data.owned.F11.level == 1 and campaign.data.owned.F11.xp == 0, "Emma does not inherit first-stage XP or consume a pick")
 	var auxiliary: String = ""
 	for id in campaign.data.owned:
 		if id not in ["JIA", "F11"]: auxiliary = id; break
@@ -284,7 +285,7 @@ func campaign_lifecycle() -> void:
 	expect(state.resolve_event() and not state.data.owned.F11.dead, "spring revives defeated auxiliary")
 	expect(state.data.owned.N17.hp == state.resource_max("N17", "hp") and state.data.owned.N17.mp == state.resource_max("N17", "mp"), "spring heals unassigned reserves")
 	expect(state.data.owned.N17.cooldowns.reserve_test == 7, "spring does not silently refresh skill cooldowns")
-	expect(state.battle_available("B04") and not state.battle_available("B07"), "second segment opens while future encounters stay gated")
+	expect(state.battle_available("B04") and state.battle_available("B07") and state.battle_available("B18"), "all completed chapter encounters are playable")
 
 func play(b: RefCounted) -> void:
 	var started := Time.get_ticks_usec()

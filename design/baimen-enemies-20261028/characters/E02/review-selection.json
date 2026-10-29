@@ -1,0 +1,16 @@
+{
+  "id": "E02",
+  "master": "source/master-v2.png",
+  "sheet": "source/actions-v1.png",
+  "standing_body_height": 242,
+  "hip_x": [
+    165,
+    450,
+    730,
+    1010
+  ],
+  "review_notes": "Reviewed masterv2 corrects bow-tip clipping of rejected v1. All20 poses inspected: thin skeleton, pale oversized bone bow, narrow red shoulder pennant. Rows idle/walk/shot/aimed shot/hit. Standing physical body from hood y72 tofoot314 is242px; bow and tall flag are excluded from body calibration but retained in actual connected regions. Per-pose ground follows feet; x follows pelvis. Every bow tip and arrow retained, no separate flying projectiles.",
+  "action_clips": {
+    "shot": "attack"
+  }
+}

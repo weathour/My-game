@@ -1,9 +1,34 @@
 extends RefCounted
 ## Presentation-only asset mapping. Changing a costume never changes combat rules.
+const ENEMIES := preload("res://scripts/content/enemy_catalog.gd")
+const ENEMY_MANIFEST := preload("res://scripts/ui/chronicle/enemy_visual_manifest.gd")
+const ENEMY_ACTOR := preload("res://scripts/ui/chronicle/enemy_actor.gd")
 const STAGES := preload("res://scripts/content/stage_catalog.gd")
 const SWORD := preload("res://assets/players/sword/sword.tscn")
 const JIA := preload("res://assets/players/jia/jia.tscn")
 const JIA_HEAD := preload("res://assets/players/jia/jia-head.tscn")
+const WOMEN := {
+	"F02": preload("res://assets/players/baimen-women/F02/F02.tscn"),
+	"F03": preload("res://assets/players/baimen-women/F03/F03.tscn"),
+	"F04": preload("res://assets/players/baimen-women/F04/F04.tscn"),
+	"F05": preload("res://assets/players/baimen-women/F05/F05.tscn"),
+	"F06": preload("res://assets/players/baimen-women/F06/F06.tscn"),
+	"F07": preload("res://assets/players/baimen-women/F07/F07.tscn"),
+	"F08": preload("res://assets/players/baimen-women/F08/F08.tscn"),
+	"F09": preload("res://assets/players/baimen-women/F09/F09.tscn"),
+	"F10": preload("res://assets/players/baimen-women/F10/F10.tscn"),
+}
+const WOMEN_HEADS := {
+	"F02": preload("res://assets/players/baimen-women/F02/F02-head.tscn"),
+	"F03": preload("res://assets/players/baimen-women/F03/F03-head.tscn"),
+	"F04": preload("res://assets/players/baimen-women/F04/F04-head.tscn"),
+	"F05": preload("res://assets/players/baimen-women/F05/F05-head.tscn"),
+	"F06": preload("res://assets/players/baimen-women/F06/F06-head.tscn"),
+	"F07": preload("res://assets/players/baimen-women/F07/F07-head.tscn"),
+	"F08": preload("res://assets/players/baimen-women/F08/F08-head.tscn"),
+	"F09": preload("res://assets/players/baimen-women/F09/F09-head.tscn"),
+	"F10": preload("res://assets/players/baimen-women/F10/F10-head.tscn"),
+}
 const MAGE := preload("res://assets/players/wizard/wizard.tscn")
 const GUN := preload("res://assets/players/gun/gun.tscn")
 const SWORD_HEAD := preload("res://assets/UI/facility/swordchange.tscn")
@@ -36,7 +61,7 @@ const BODY_SKULL_MAGE := Vector2(130.65, 54.625)
 const ACTOR_HEIGHT := 72.0
 
 static func fit_actor(visual: Node2D, id: String, moving: bool) -> void:
-	if id == "JIA":
+	if id == "JIA" or WOMEN.has(id):
 		# Authored standing body is 80px, feet at the scene origin. Preserve
 		# the natural crouch/run height instead of stretching every pose.
 		_fit_body(visual, Vector2(80, 0), ACTOR_HEIGHT)
@@ -66,19 +91,19 @@ static func _fit_body(visual: Node2D, profile: Vector2, height: float) -> void:
 
 static func actor(id: String) -> PackedScene:
 	if id == "JIA": return JIA
-	if id in ["F11", "N13", "N16", "F03", "N14", "N18"]: return MAGE
+	if WOMEN.has(id): return WOMEN[id]
+	if id in ["F11", "N13", "N16", "N14", "N18"]: return MAGE
 	if id == "N07": return GUN
 	return SWORD
 
 static func portrait(id: String) -> PackedScene:
 	if id == "JIA": return JIA_HEAD
-	if id in ["F11", "N13", "N16", "F03", "N14", "N18"]: return MAGE_HEAD
+	if WOMEN_HEADS.has(id): return WOMEN_HEADS[id]
+	if id in ["F11", "N13", "N16", "N14", "N18"]: return MAGE_HEAD
 	if id == "N07": return GUN_HEAD
 	return SWORD_HEAD
 
 static func tint(id: String) -> Color:
-	if id == "F03": return Color("e8d1c6")
-	if id == "F07": return Color("e6b2a2")
 	if id == "N14": return Color("b7b0dc")
 	if id == "N18": return Color("d6ca9f")
 	return COLORS.get(id, Color.WHITE)
@@ -90,6 +115,37 @@ static func enemy(kind: String, stage: String) -> PackedScene:
 		"equipment_elite": return ELITE
 		"charger", "guard": return SOLDIER
 	return SLIME if stage == "B01" else SOLDIER
+
+static func create_enemy(value: RefCounted, stage: String) -> Node2D:
+	var identity := str(value.visual_id)
+	var metadata := ENEMY_MANIFEST.read(identity)
+	var definition: Dictionary = ENEMIES.definition(str(value.definition_id))
+	var scene_path := str(definition.get("actor_path", ""))
+	var visual: Node2D
+	if not scene_path.is_empty() and ResourceLoader.exists(scene_path):
+		visual = (load(scene_path) as PackedScene).instantiate()
+	elif not metadata.is_empty() and not ENEMY_MANIFEST.resolved(identity).get("clips", {}).is_empty():
+		visual = ENEMY_ACTOR.new()
+		visual.setup(identity)
+	else:
+		visual = enemy(value.kind, stage).instantiate()
+		visual.set_meta("temporary_enemy_art", true)
+	visual.set_meta("visual_id", identity)
+	fit_enemy_instance(visual, value, stage)
+	return visual
+
+static func fit_enemy_instance(visual: Node2D, value: RefCounted, stage: String) -> void:
+	if str(value.definition_id).is_empty():
+		fit_enemy(visual, value.kind, stage)
+		return
+	var profile := BODY_SLIME if enemy(value.kind, stage) == SLIME else BODY_SOLDIER
+	if enemy(value.kind, stage) == SKULL_MAGE: profile = BODY_SKULL_MAGE
+	elif enemy(value.kind, stage) == ELITE: profile = BODY_ELITE
+	if visual.has_method("body_profile"): profile = visual.body_profile()
+	_fit_body(visual, profile, value.body_height)
+
+static func enemy_portrait(visual_id: String) -> Texture2D:
+	return ENEMY_MANIFEST.texture(visual_id, "portrait.png")
 
 static func _mage_boss(stage: String) -> bool:
 	return STAGES.STAGES.get(stage, {}).get("boss_visual", "") == "mage"

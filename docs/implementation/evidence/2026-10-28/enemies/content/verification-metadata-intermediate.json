@@ -1,0 +1,92 @@
+{
+  "captured_at": "2026-10-28T23:08:48.711142",
+  "engine": "4.6.2.stable.official.71f334935",
+  "base_sessions": 18,
+  "base_outcomes": {
+    "victory": 18
+  },
+  "additional_sessions": [
+    {
+      "actions": [
+        "E05:fan",
+        "E11:summon",
+        "D01:swipe",
+        "E11:swipe",
+        "E08:heal",
+        "E04:swipe",
+        "E06:pot",
+        "B12:anchor",
+        "B12:pulse"
+      ],
+      "boss_spawned": true,
+      "fixture_level": 7,
+      "jia_hp": 332.0,
+      "kills": 56,
+      "members": [
+        "JIA",
+        "F11",
+        "N16"
+      ],
+      "outcome": "victory",
+      "remaining": {},
+      "seconds": 173.4,
+      "seen": [
+        "E01",
+        "E11",
+        "E05",
+        "D05",
+        "D01",
+        "E04",
+        "E08",
+        "E06",
+        "B12",
+        "D03"
+      ],
+      "stage": "B12",
+      "strategy": "ranged_on_boss",
+      "warning_frames": 6936
+    }
+  ],
+  "all_18_have_at_least_one_real_victory": true,
+  "fixtures": {
+    "level_formula": "1 + floor(route_index * 0.6), route_index from StageCatalog.ROUTE_ORDER",
+    "members": {
+      "B01": [
+        "JIA"
+      ],
+      "B02-B18": [
+        "JIA",
+        "F11",
+        "N16"
+      ]
+    },
+    "equipment": {
+      "weapon": "plain_blade",
+      "armor": "cloth_armor",
+      "accessory": "ember_seal"
+    },
+    "start_resources": "full record() at fixture level; independent sessions",
+    "enemy_stat_override": false,
+    "boss_hp_override": false,
+    "synthetic_victory": false,
+    "campaign_reachable_build_claim": false,
+    "field_selection": "none",
+    "base_strategy": "auto basic, request both manual skills every 30 frames, move using real warning geometry/projectile sampling, low-HP switch",
+    "B12_additional_strategy": "same build, request normal switch to Emma foreground after boss spawn; same movement and skill inputs",
+    "timeout_seconds": 360
+  },
+  "transactions": {
+    "synthetic_victory_fixture": true,
+    "route_topology_paths": 64,
+    "representative_full_campaign_routes": 4,
+    "claims_combat_balance": false
+  },
+  "file_sha256_captured_after_runs": {
+    "scripts/content/enemy_catalog.gd": "fd111cb04a5f2cfc87a13e10526c5f2a1a07cbc0d7272856727554e2c776df2d",
+    "scripts/content/stage_catalog.gd": "49c895779ebafceaab5967b729482a696a102181be80ba6e3598c68d39a922df",
+    "scripts/tests/chronicle_enemy_content_smoke.gd": "800a9cc28dddda81e48d841810860d9b1352dbbc6b2cbe94723bd98a49392270",
+    "scripts/tests/chronicle_enemy_sessions_smoke.gd": "5b42bc77711d15dccc83fd49d3825de810e633c21907492a3ae5a90f52f2d215"
+  },
+  "version_status": "intermediate_before_runtime_semantics_review",
+  "final_acceptance_claim": false
+}

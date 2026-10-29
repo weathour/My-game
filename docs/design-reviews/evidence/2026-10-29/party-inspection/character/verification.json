@@ -1,0 +1,107 @@
+{
+  "scope": "read-only in-place character sheet and compact preparation preview",
+  "canonical_tabs": [
+    "abilities",
+    "growth",
+    "profile"
+  ],
+  "compatibility_alias": {
+    "stats": "growth"
+  },
+  "checks": {
+    "render_panels": {
+      "pass": 362,
+      "fail": 0,
+      "log": "render.log"
+    },
+    "headless_panels": {
+      "pass": 362,
+      "fail": 0,
+      "log": "headless.log"
+    },
+    "profiles": {
+      "pass": 121,
+      "fail": 0,
+      "log": "profiles.log"
+    },
+    "women_portraits": {
+      "pass": 525,
+      "fail": 0,
+      "log": "women-portraits.log"
+    },
+    "required_startup": {
+      "exit_code": 0,
+      "log": "startup.log"
+    },
+    "preview_single_entry": {
+      "pass": 14,
+      "fail": 0,
+      "log": "preview-entry.log",
+      "test_source": "preview-entry-smoke.gd.txt",
+      "sizes": [
+        [
+          1280,
+          720
+        ],
+        [
+          1920,
+          1080
+        ]
+      ],
+      "input": "actual mouse press/release opens abilities and closes in context"
+    }
+  },
+  "render": {
+    "display": ":0",
+    "renderer": "gl_compatibility",
+    "sizes": [
+      [
+        960,
+        540
+      ],
+      [
+        1280,
+        720
+      ],
+      [
+        1920,
+        1080
+      ]
+    ],
+    "fixture_modes": [
+      "unowned preview",
+      "owned alive configured",
+      "owned fallen configured"
+    ],
+    "screenshots": 27
+  },
+  "read_only": [
+    "campaign data",
+    "reward RNG",
+    "save file bytes"
+  ],
+  "keyboard_checks": [
+    "Tab reaches body scroll",
+    "Home reaches start",
+    "PageDown advances",
+    "End reaches final ability",
+    "PageUp returns"
+  ],
+  "visually_reviewed": [
+    "screens/alive-growth-960.png",
+    "screens/alive-growth-1280.png",
+    "screens/alive-abilities-1280.png",
+    "screens/preview-profile-1920.png",
+    "screens/preview-single-entry-1280.png",
+    "screens/preview-single-entry-1920.png"
+  ],
+  "source_sha256": {
+    "scripts/ui/chronicle/chronicle_character_sheet.gd": "daa16b3deb1993658bb73438c3f82502d7572fd0fafe12aba6474caab2ae41d3",
+    "scripts/ui/chronicle/character_detail_projection.gd": "fcc175f5b2807d094d385128289aa4f4bc8890a3912cbb12c744239c637d6b2f",
+    "scripts/tests/chronicle_character_panels_smoke.gd": "72ab2f9e1cb8514478b409240359d29f39b80508faf2ba95d345fdae04d08d40",
+    "scripts/tests/chronicle_character_profiles_smoke.gd": "f97d6932b067264db1f868d161e0239255b36da5b0fee05a025c6aaad1506cc8",
+    "scripts/tests/baimen_women_portraits_smoke.gd": "0e1a6ba15f1bb1bb422cc439a9bba8735f3a85a34b6242610942a03164d1b241"
+  },
+  "identity_rule": "Equal rarity label and title are displayed once in both sheet and compact preview.",
+  "preview_entry": "One details action right of the expanding name label; no bottom action row or separate growth entry."
+}

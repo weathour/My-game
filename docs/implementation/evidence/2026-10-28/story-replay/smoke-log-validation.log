@@ -1,0 +1,14 @@
+python3 scripts/tests/check_smoke_log.py scripts/tests/chronicle_story_replay_smoke.gd docs/implementation/evidence/2026-10-28/story-replay/replay-headless.log
+exit=0
+
+python3 scripts/tests/check_smoke_log.py scripts/tests/chronicle_story_replay_smoke.gd docs/implementation/evidence/2026-10-28/story-replay/replay-rendered.log
+exit=0
+
+python3 scripts/tests/check_smoke_log.py scripts/tests/chronicle_story_ui_smoke.gd docs/implementation/evidence/2026-10-28/story-replay/story-ui-regression.log
+exit=0
+
+python3 scripts/tests/check_smoke_log.py scripts/tests/chronicle_story_progress_smoke.gd docs/implementation/evidence/2026-10-28/story-replay/story-progress-regression.log
+exit=0
+
+python3 scripts/tests/check_smoke_log.py scripts/tests/chronicle_playable_ui_smoke.gd docs/implementation/evidence/2026-10-28/story-replay/playable-ui-regression.log
+exit=0
