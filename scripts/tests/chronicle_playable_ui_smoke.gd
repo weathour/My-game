@@ -297,4 +297,11 @@ func play_stage(field: int, screenshot: String) -> void:
 			captured = true
 	expect(b.outcome == "victory", "actual win " + screenshot)
 	view._physics_process(0)
+	# The real terminal signal follows the bounded .48-second local boss finish.
+	# This driver disables automatic physics, so advance that same presentation
+	# clock for at most .6 seconds without bypassing completed/result handling.
+	for finish_frame in 36:
+		if not is_instance_valid(view) or view.sent: break
+		view._physics_process(1.0 / 60.0)
+		await process_frame
 	await frames()

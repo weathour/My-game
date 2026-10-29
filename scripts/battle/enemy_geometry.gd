@@ -29,7 +29,7 @@ static func descriptor(enemy: RefCounted, action: Dictionary, actor: Vector2) ->
 	# Clip along the locked ray. Clamping x/y independently changes its angle;
 	# reusing that endpoint's distance with the original direction can overshoot.
 	if shape == "line": length = bounded_ray_length(origin, direction, length, enemy.radius)
-	return {"action_id":str(action.get("action", action.get("id", ""))), "owner_id":enemy.id, "action_serial":enemy.action_serial, "attack_step":enemy.attack_index, "phase":"tell", "shape":shape,
+	return {"action_id":str(action.get("action", action.get("id", ""))), "move_id":str(action.get("id", action.get("action", ""))), "owner_id":enemy.id, "action_serial":enemy.action_serial, "attack_step":enemy.attack_index, "phase":"tell", "shape":shape,
 		"origin":origin, "direction":direction, "length":length, "radius":float(action.get("radius", action.get("range", 70))),
 		"half_width":float(action.get("half_width", enemy.radius)), "spread":float(action.get("spread", 1.7)),
 		"inner_radius":float(action.get("inner_radius", 0)), "gap_angle":direction.angle() + float(action.get("gap_angle", 0)),

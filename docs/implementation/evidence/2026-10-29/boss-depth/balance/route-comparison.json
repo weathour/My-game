@@ -1,0 +1,300 @@
+{
+  "comparison_boundary": "Historical route baseline differs in preceding four bosses; descriptive comparison, not isolated causal balance acceptance.",
+  "routes": [
+    {
+      "route": "short",
+      "finished": true,
+      "battle_count": 12,
+      "B18": {
+        "seconds": 61.4,
+        "phase_seconds": {
+          "B18:0:combat": 25.2166666666665,
+          "B18:1:combat": 34.499999999998,
+          "B18:1:observation": 0.649999999999963,
+          "B18:1:transition": 0.983333333333277
+        },
+        "entry": {
+          "JIA": {
+            "cooldowns": {
+              "JIA_basic": 0.672947510094213,
+              "armor_guard": 0.0,
+              "jia_break": 0.0,
+              "jia_sweep": 0.0
+            },
+            "dead": false,
+            "hp": 428.0,
+            "level": 14,
+            "mp": 22.6208333333326,
+            "xp": 155.333333333333
+          },
+          "N16": {
+            "cooldowns": {
+              "healer_support": 2.83333333333335
+            },
+            "dead": false,
+            "hp": 362.0,
+            "level": 13,
+            "mp": 184.2,
+            "xp": 55.6666666666667
+          },
+          "N17": {
+            "cooldowns": {
+              "cook_support": 3.03333333333334
+            },
+            "dead": false,
+            "hp": 413.0,
+            "level": 14,
+            "mp": 164.2,
+            "xp": 179.333333333333
+          }
+        },
+        "exit": {
+          "JIA": {
+            "cooldowns": {
+              "JIA_basic": 0.653167864141084,
+              "armor_guard": 0.0,
+              "jia_break": 0.0,
+              "jia_sweep": 4.65
+            },
+            "dead": false,
+            "hp": 424.83606557377,
+            "level": 14,
+            "mp": 2.06250000000014,
+            "xp": 181.333333333333
+          },
+          "N16": {
+            "cooldowns": {
+              "healer_support": 4.61666666666668
+            },
+            "dead": false,
+            "hp": 362.0,
+            "level": 13,
+            "mp": 185.7,
+            "xp": 81.6666666666667
+          },
+          "N17": {
+            "cooldowns": {
+              "cook_support": 1.86666666666668
+            },
+            "dead": false,
+            "hp": 429.0,
+            "level": 15,
+            "mp": 170.7,
+            "xp": 19.3333333333333
+          }
+        },
+        "kills": 0,
+        "field": -1,
+        "card_elite": false,
+        "equipment_elite": false,
+        "reward": {
+          "candidates": [
+            "M05",
+            "F07",
+            "N02",
+            "N17",
+            "N01",
+            "N16",
+            "M02"
+          ],
+          "node": "B18",
+          "picks": 3,
+          "selected": [
+            "N16",
+            "N17",
+            "N01"
+          ]
+        },
+        "experience_gained": {
+          "JIA": 26.0,
+          "N16": 26.0,
+          "N17": 26.0
+        },
+        "fast_clear": true
+      },
+      "historical_B18": {
+        "source": "docs/implementation/evidence/2026-10-28/enemies/content/charge-boundary-recheck/continuous-real-campaigns.json",
+        "seconds": 188.2,
+        "kills": 70,
+        "field": 1,
+        "card_elite": false,
+        "experience_gained": {
+          "JIA": 193.666667,
+          "N16": 169.666667,
+          "N17": 169.666667
+        },
+        "reward": {
+          "candidates": [
+            "M05",
+            "F07",
+            "N02",
+            "N17",
+            "N01",
+            "N16",
+            "M02"
+          ],
+          "node": "B18",
+          "picks": 3,
+          "selected": [
+            "N16",
+            "N17",
+            "N01"
+          ]
+        }
+      }
+    },
+    {
+      "route": "explore",
+      "finished": true,
+      "battle_count": 15,
+      "B18": {
+        "seconds": 32.7,
+        "phase_seconds": {
+          "B18:0:combat": 11.8000000000002,
+          "B18:1:combat": 19.2166666666658,
+          "B18:1:observation": 0.650000000000032,
+          "B18:1:transition": 1.00000000000005
+        },
+        "entry": {
+          "F11": {
+            "cooldowns": {
+              "F11_basic": 0.0,
+              "armor_guard": 0.0,
+              "emma_frost": 0.0,
+              "emma_ice": 0.0,
+              "emma_star": 0.0,
+              "emma_support": 3.41666666666667
+            },
+            "dead": false,
+            "hp": 397.1,
+            "level": 16,
+            "mp": 207.4,
+            "xp": 179.333333333333
+          },
+          "JIA": {
+            "cooldowns": {
+              "JIA_basic": 0.413681592039801,
+              "armor_guard": 0.0,
+              "jia_break": 0.733333333333259,
+              "jia_sweep": 4.73333333333333
+            },
+            "dead": false,
+            "hp": 462.1,
+            "level": 16,
+            "mp": 167.4,
+            "xp": 5.33333333333333
+          },
+          "N07": {
+            "cooldowns": {
+              "bow_support": 2.81666666666667
+            },
+            "dead": false,
+            "hp": 376.1,
+            "level": 15,
+            "mp": 162.4,
+            "xp": 179.333333333333
+          }
+        },
+        "exit": {
+          "F11": {
+            "cooldowns": {
+              "F11_basic": 0.0,
+              "armor_guard": 0.0,
+              "emma_frost": 0.0,
+              "emma_ice": 0.0,
+              "emma_star": 0.0,
+              "emma_support": 2.38333333333334
+            },
+            "dead": false,
+            "hp": 397.1,
+            "level": 16,
+            "mp": 207.4,
+            "xp": 205.333333333333
+          },
+          "JIA": {
+            "cooldowns": {
+              "JIA_basic": 0.593824228028504,
+              "armor_guard": 1.65,
+              "jia_break": 9.83333333333333,
+              "jia_sweep": 4.83333333333333
+            },
+            "dead": false,
+            "hp": 182.603361664341,
+            "level": 16,
+            "mp": 75.0666666666616,
+            "xp": 31.3333333333333
+          },
+          "N07": {
+            "cooldowns": {
+              "bow_support": 5.65519853168439e-15
+            },
+            "dead": false,
+            "hp": 392.1,
+            "level": 16,
+            "mp": 167.4,
+            "xp": 7.33333333333333
+          }
+        },
+        "kills": 0,
+        "field": -1,
+        "card_elite": false,
+        "equipment_elite": false,
+        "reward": {
+          "candidates": [
+            "F05",
+            "F10",
+            "N10",
+            "M02",
+            "N11",
+            "N16",
+            "M04"
+          ],
+          "node": "B18",
+          "picks": 3,
+          "selected": [
+            "N16",
+            "F05",
+            "F10"
+          ]
+        },
+        "experience_gained": {
+          "JIA": 26.0,
+          "F11": 26.0,
+          "N07": 26.0
+        },
+        "fast_clear": true
+      },
+      "historical_B18": {
+        "source": "docs/implementation/evidence/2026-10-28/enemies/content/charge-boundary-recheck/continuous-real-campaigns.json",
+        "seconds": 145.0,
+        "kills": 67,
+        "field": 2,
+        "card_elite": true,
+        "experience_gained": {
+          "JIA": 170.333333,
+          "F11": 170.333333,
+          "N07": 170.333333
+        },
+        "reward": {
+          "candidates": [
+            "F05",
+            "F10",
+            "N10",
+            "M02",
+            "N11",
+            "N16",
+            "M04"
+          ],
+          "node": "B18",
+          "picks": 4,
+          "selected": [
+            "N16",
+            "F05",
+            "F10",
+            "N10"
+          ]
+        }
+      }
+    }
+  ]
+}

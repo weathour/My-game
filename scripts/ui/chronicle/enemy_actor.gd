@@ -38,7 +38,7 @@ func present(enemy: RefCounted, elapsed: float, is_paused: bool) -> void:
 	var wanted := "move" if moving else "idle"
 	telling = enemy.state == "tell"
 	if telling:
-		wanted = _clip_for_action(str(enemy.current_action.get("action", enemy.current_action.get("id", enemy.attack))), int(enemy.telegraph.get("attack_step", 0)))
+		wanted = _clip_for_action(str(enemy.current_action.get("id", enemy.current_action.get("action", enemy.attack))), int(enemy.telegraph.get("attack_step", 0)))
 	elif elapsed < action_until or enemy.state == "active":
 		wanted = action_clip
 	if clock < hit_until: wanted = "hit"
@@ -74,6 +74,15 @@ func _is_action_clip(key: String) -> bool:
 
 func play_hit() -> void:
 	hit_until = clock + .16
+
+func play_death() -> void:
+	telling = false
+	_select("death" if metadata.get("clips", {}).has("death") else "hit", 0.0)
+	_update_frame(0.0)
+
+func present_death(local_elapsed: float) -> void:
+	# Caller passes battle/presentation elapsed since removal, including victory freeze.
+	_update_frame(maxf(0.0, local_elapsed))
 
 func preview(action: String, elapsed: float) -> void:
 	telling = false

@@ -1,0 +1,3886 @@
+{
+  "status": "real_shield_route_completed",
+  "source": "shield-real-campaign-final.json",
+  "checks": 214,
+  "route": "shield",
+  "route_node_policy": "Existing short 12-battle node policy, independent reward and party strategy. Original short/explore strategies preserved.",
+  "campaign_reward_seed": 781103,
+  "battle_seed_B18": 1718,
+  "battles_completed": 12,
+  "B17_to_B18_runtime_records_exact": true,
+  "frozen_production_hashes_match": {
+    "scripts/content/boss_forms.gd": true,
+    "scripts/content/enemy_catalog.gd": true,
+    "scripts/content/stage_catalog.gd": true,
+    "scripts/battle/battle_session.gd": true,
+    "scripts/battle/enemy_runtime.gd": true,
+    "scripts/battle/enemy_system.gd": true,
+    "scripts/battle/combat_mechanics.gd": true
+  },
+  "selection_evidence": [
+    {
+      "candidates": [
+        "N18",
+        "F04",
+        "F03",
+        "N04",
+        "N07"
+      ],
+      "node": "B03",
+      "picks": 2,
+      "selected": [
+        "F03",
+        "N07"
+      ]
+    },
+    {
+      "candidates": [
+        "F08",
+        "F07",
+        "N18",
+        "M07",
+        "F04"
+      ],
+      "node": "B07",
+      "picks": 2,
+      "selected": [
+        "F07",
+        "F08"
+      ]
+    },
+    {
+      "candidates": [
+        "F08",
+        "F07",
+        "N17",
+        "F04",
+        "N16"
+      ],
+      "node": "B08",
+      "picks": 2,
+      "selected": [
+        "F07",
+        "N16"
+      ]
+    },
+    {
+      "candidates": [
+        "M05",
+        "F07",
+        "N02",
+        "N17",
+        "N01",
+        "N16",
+        "M02"
+      ],
+      "node": "B18",
+      "picks": 3,
+      "selected": [
+        "F07",
+        "N16",
+        "N17"
+      ]
+    }
+  ],
+  "rotation": "12-second normal switch cycle: visit F03 for paid party heal, F07 for own-shield thrust, then JIA; ward requested every third cycle. Ordinary health-based emergency switching remains enabled.",
+  "background_heal_boundary": {
+    "physician_support": "Ordinary HEAL clamps HP and does not turn overflow into shields.",
+    "physician_heal": "Paid front skill party_heal heals each living member and turns individual overflow into personal capped shields.",
+    "physician_ward": "Paid front ward adds personal shields to living party members.",
+    "code": [
+      "scripts/battle/battle_session.gd:240",
+      "scripts/battle/combat_mechanics.gd:128",
+      "scripts/battle/combat_mechanics.gd:359"
+    ]
+  },
+  "rows": [
+    {
+      "stage": "B15",
+      "seconds": 131.983333333331,
+      "phase_seconds": {
+        "B15:0:combat": 20.2833333333322,
+        "B15:1:combat": 15.3333333333358,
+        "B15:1:observation": 0.649999999999963,
+        "B15:1:transition": 0.983333333333277
+      },
+      "entry": {
+        "F03": {
+          "cooldowns": {
+            "F03_basic": 0.0,
+            "physician_heal": 2.63333333333325,
+            "physician_support": 3.85000000000001,
+            "physician_ward": 0.0
+          },
+          "dead": false,
+          "hp": 257.0,
+          "level": 8,
+          "mp": 180.0,
+          "xp": 23.6666666666667
+        },
+        "F07": {
+          "cooldowns": {
+            "F07_basic": 0.0,
+            "armor_guard": 0.0,
+            "bandit_support": 2.63333333333334,
+            "bandit_thrust": 4.13333333333325
+          },
+          "dead": false,
+          "hp": 287.0,
+          "level": 8,
+          "mp": 58.6666666666836,
+          "xp": 78.0
+        },
+        "JIA": {
+          "cooldowns": {
+            "JIA_basic": 0.67842605156038,
+            "armor_guard": 0.0,
+            "jia_break": 0.0,
+            "jia_sweep": 4.13333333333334
+          },
+          "dead": false,
+          "hp": 380.0,
+          "level": 11,
+          "mp": 34.9366666666641,
+          "xp": 100.0
+        }
+      },
+      "exit": {
+        "F03": {
+          "cooldowns": {
+            "F03_basic": 0.0,
+            "physician_heal": 0.0,
+            "physician_support": 4.23333333333334,
+            "physician_ward": 0.0
+          },
+          "dead": false,
+          "hp": 273.0,
+          "level": 9,
+          "mp": 175.906666666659,
+          "xp": 57.6666666666667
+        },
+        "F07": {
+          "cooldowns": {
+            "F07_basic": 0.0,
+            "armor_guard": 0.0,
+            "bandit_support": 2.55000000000001,
+            "bandit_thrust": 0.0333333333332581
+          },
+          "dead": false,
+          "hp": 319.0,
+          "level": 10,
+          "mp": 140.0,
+          "xp": 10.0
+        },
+        "JIA": {
+          "cooldowns": {
+            "JIA_basic": 0.672947510094213,
+            "armor_guard": 0.0,
+            "jia_break": 0.0,
+            "jia_sweep": 0.0333333333333461
+          },
+          "dead": false,
+          "hp": 396.0,
+          "level": 12,
+          "mp": 34.3966666666613,
+          "xp": 98.0
+        }
+      },
+      "phase_marks": [
+        {
+          "active": "JIA",
+          "bank": 0.0,
+          "form_name": "曹休",
+          "hp": 1720.0,
+          "phase": "B15:0:combat",
+          "player_position": "(1949.03, 156.182)",
+          "resources": {
+            "F03": {
+              "cooldowns": {
+                "F03_basic": 0.0,
+                "physician_heal": 0.0,
+                "physician_support": 5.38333333333334,
+                "physician_ward": 0.0
+              },
+              "dead": false,
+              "hp": 257.0,
+              "level": 8,
+              "mp": 165.531666666662,
+              "xp": 104.333333333333
+            },
+            "F07": {
+              "cooldowns": {
+                "F07_basic": 0.0,
+                "armor_guard": 0.0,
+                "bandit_support": 3.8,
+                "bandit_thrust": 1.28333333333326
+              },
+              "dead": false,
+              "hp": 303.0,
+              "level": 9,
+              "mp": 76.291666666684,
+              "xp": 68.6666666666667
+            },
+            "JIA": {
+              "cooldowns": {
+                "JIA_basic": 0.656280843427546,
+                "armor_guard": 0.0,
+                "jia_break": 6.28333333333324,
+                "jia_sweep": 1.28333333333335
+              },
+              "dead": false,
+              "hp": 396.0,
+              "level": 12,
+              "mp": 56.921666666661,
+              "xp": 30.6666666666667
+            }
+          },
+          "seconds": 94.7333333333292,
+          "shields": {
+            "F03": 89.95,
+            "F07": 61.0680614087899,
+            "JIA": 108.115684473028
+          }
+        },
+        {
+          "active": "JIA",
+          "bank": 67.8800000000006,
+          "form_name": "鬼猎兽相",
+          "hp": 2580.0,
+          "phase": "B15:1:transition",
+          "player_position": "(2364.897, 133.6186)",
+          "resources": {
+            "F03": {
+              "cooldowns": {
+                "F03_basic": 0.0,
+                "physician_heal": 3.49999999999992,
+                "physician_support": 3.15000000000001,
+                "physician_ward": 9.49999999999968
+              },
+              "dead": false,
+              "hp": 273.0,
+              "level": 9,
+              "mp": 136.950000000001,
+              "xp": 6.0
+            },
+            "F07": {
+              "cooldowns": {
+                "F07_basic": 0.0,
+                "armor_guard": 0.0,
+                "bandit_support": 3.5,
+                "bandit_thrust": 4.99999999999991
+              },
+              "dead": false,
+              "hp": 303.0,
+              "level": 9,
+              "mp": 51.000000000018,
+              "xp": 84.3333333333333
+            },
+            "JIA": {
+              "cooldowns": {
+                "JIA_basic": 0.172947510094212,
+                "armor_guard": 0.0,
+                "jia_break": 10.0,
+                "jia_sweep": 5.0
+              },
+              "dead": false,
+              "hp": 396.0,
+              "level": 12,
+              "mp": 3.79999999999461,
+              "xp": 46.3333333333333
+            }
+          },
+          "seconds": 115.016666666661,
+          "shields": {
+            "F03": 95.55,
+            "F07": 36.5173896727709,
+            "JIA": 138.6
+          }
+        },
+        {
+          "active": "JIA",
+          "bank": 235.835200000001,
+          "form_name": "鬼猎兽相",
+          "hp": 2580.0,
+          "phase": "B15:1:observation",
+          "player_position": "(2388.21, 150.1714)",
+          "resources": {
+            "F03": {
+              "cooldowns": {
+                "F03_basic": 0.0,
+                "physician_heal": 2.51666666666659,
+                "physician_support": 2.16666666666668,
+                "physician_ward": 8.51666666666629
+              },
+              "dead": false,
+              "hp": 273.0,
+              "level": 9,
+              "mp": 141.178333333333,
+              "xp": 6.0
+            },
+            "F07": {
+              "cooldowns": {
+                "F07_basic": 0.0,
+                "armor_guard": 0.0,
+                "bandit_support": 2.51666666666667,
+                "bandit_thrust": 4.01666666666658
+              },
+              "dead": false,
+              "hp": 303.0,
+              "level": 9,
+              "mp": 53.4583333333512,
+              "xp": 84.3333333333333
+            },
+            "JIA": {
+              "cooldowns": {
+                "JIA_basic": 0.556280843427546,
+                "armor_guard": 0.0,
+                "jia_break": 9.01666666666662,
+                "jia_sweep": 4.01666666666667
+              },
+              "dead": false,
+              "hp": 396.0,
+              "level": 12,
+              "mp": 6.84833333332795,
+              "xp": 46.3333333333333
+            }
+          },
+          "seconds": 115.999999999995,
+          "shields": {
+            "F03": 95.55,
+            "F07": 36.5173896727709,
+            "JIA": 138.6
+          }
+        },
+        {
+          "active": "JIA",
+          "bank": 0.0,
+          "form_name": "鬼猎兽相",
+          "hp": 2260.1872,
+          "phase": "B15:1:combat",
+          "player_position": "(2358.101, 109.9025)",
+          "resources": {
+            "F03": {
+              "cooldowns": {
+                "F03_basic": 0.0,
+                "physician_heal": 1.86666666666659,
+                "physician_support": 1.51666666666668,
+                "physician_ward": 7.86666666666627
+              },
+              "dead": false,
+              "hp": 273.0,
+              "level": 9,
+              "mp": 143.973333333333,
+              "xp": 6.0
+            },
+            "F07": {
+              "cooldowns": {
+                "F07_basic": 0.0,
+                "armor_guard": 0.0,
+                "bandit_support": 1.86666666666667,
+                "bandit_thrust": 3.36666666666658
+              },
+              "dead": false,
+              "hp": 303.0,
+              "level": 9,
+              "mp": 55.0833333333511,
+              "xp": 84.3333333333333
+            },
+            "JIA": {
+              "cooldowns": {
+                "JIA_basic": 0.589614176760879,
+                "armor_guard": 0.0,
+                "jia_break": 8.36666666666659,
+                "jia_sweep": 3.36666666666667
+              },
+              "dead": false,
+              "hp": 396.0,
+              "level": 12,
+              "mp": 8.86333333332794,
+              "xp": 46.3333333333333
+            }
+          },
+          "seconds": 116.649999999995,
+          "shields": {
+            "F03": 95.55,
+            "F07": 36.5173896727709,
+            "JIA": 138.6
+          }
+        }
+      ],
+      "shield_generated_observed_lower_bound": {
+        "F03": 115.30293942551,
+        "F07": 630.131808595258,
+        "JIA": 328.174964077779
+      },
+      "shield_absorbed_observed_lower_bound": {
+        "F03": 19.7529394255098,
+        "F07": 275.600290282439,
+        "JIA": 230.957640521408
+      },
+      "shield_before_terminal_frame": {
+        "F03": 95.55,
+        "F07": 24.531518312819,
+        "JIA": 97.2173235563703
+      },
+      "shield_spent": {
+        "F03": 0.0,
+        "F07": 330.0,
+        "JIA": 0.0
+      },
+      "hp_damage": {},
+      "resource_balance": {
+        "F03": {
+          "net_hp_restored_including_level_growth": 16.0,
+          "net_mp_restored_including_level_growth": 503.906666666659,
+          "paid_mp": 508.0,
+          "received_hp_damage": 0.0
+        },
+        "F07": {
+          "net_hp_restored_including_level_growth": 32.0,
+          "net_mp_restored_including_level_growth": 499.333333333316,
+          "paid_mp": 418.0,
+          "received_hp_damage": 0.0
+        },
+        "JIA": {
+          "net_hp_restored_including_level_growth": 16.0,
+          "net_mp_restored_including_level_growth": 493.459999999997,
+          "paid_mp": 494.0,
+          "received_hp_damage": 0.0
+        }
+      },
+      "paid_mp": {
+        "F03": 508.0,
+        "F07": 418.0,
+        "JIA": 494.0
+      },
+      "shield_cast_counts": {
+        "F03:physician_heal:front": 10,
+        "F03:physician_support:support": 22,
+        "F03:physician_ward:front": 4,
+        "F07:bandit_thrust:front": 11
+      },
+      "shield_cast_events": [
+        {
+          "ability": "physician_ward",
+          "ammo_spent": 0,
+          "direct": true,
+          "id": "F03",
+          "kind": "cast",
+          "manual": true,
+          "paid": 42.0,
+          "shield_after": {
+            "F03": 55.0,
+            "F07": 55.0,
+            "JIA": 55.0
+          },
+          "shield_before": {
+            "F03": 0.0,
+            "F07": 0.0,
+            "JIA": 0.0
+          },
+          "shield_spent": 0.0,
+          "time": 0.516666666666667
+        },
+        {
+          "ability": "bandit_thrust",
+          "ammo_spent": 0,
+          "direct": true,
+          "id": "F07",
+          "kind": "cast",
+          "manual": true,
+          "paid": 38.0,
+          "shield_after": {
+            "F03": 55.0,
+            "F07": 25.0,
+            "JIA": 55.0
+          },
+          "shield_before": {
+            "F03": 55.0,
+            "F07": 55.0,
+            "JIA": 55.0
+          },
+          "shield_spent": 30.0,
+          "time": 4.51666666666666
+        },
+        {
+          "ability": "physician_heal",
+          "ammo_spent": 0,
+          "direct": true,
+          "id": "F03",
+          "kind": "cast",
+          "manual": true,
+          "paid": 34.0,
+          "shield_after": {
+            "F03": 89.95,
+            "F07": 85.0,
+            "JIA": 115.0
+          },
+          "shield_before": {
+            "F03": 55.0,
+            "F07": 25.0,
+            "JIA": 55.0
+          },
+          "shield_spent": 0.0,
+          "time": 12.5166666666669
+        },
+        {
+          "ability": "bandit_thrust",
+          "ammo_spent": 0,
+          "direct": true,
+          "id": "F07",
+          "kind": "cast",
+          "manual": true,
+          "paid": 38.0,
+          "shield_after": {
+            "F03": 89.95,
+            "F07": 55.0,
+            "JIA": 115.0
+          },
+          "shield_before": {
+            "F03": 89.95,
+            "F07": 85.0,
+            "JIA": 115.0
+          },
+          "shield_spent": 30.0,
+          "time": 14.516666666667
+        },
+        {
+          "ability": "physician_heal",
+          "ammo_spent": 0,
+          "direct": true,
+          "id": "F03",
+          "kind": "cast",
+          "manual": true,
+          "paid": 34.0,
+          "shield_after": {
+            "F03": 89.95,
+            "F07": 87.219515908053,
+            "JIA": 133.0
+          },
+          "shield_before": {
+            "F03": 89.95,
+            "F07": 27.219515908053,
+            "JIA": 77.6153234358431
+          },
+          "shield_spent": 0.0,
+          "time": 24.5166666666666
+        },
+        {
+          "ability": "bandit_thrust",
+          "ammo_spent": 0,
+          "direct": true,
+          "id": "F07",
+          "kind": "cast",
+          "manual": true,
+          "paid": 38.0,
+          "shield_after": {
+            "F03": 89.95,
+            "F07": 57.219515908053,
+            "JIA": 133.0
+          },
+          "shield_before": {
+            "F03": 89.95,
+            "F07": 87.219515908053,
+            "JIA": 133.0
+          },
+          "shield_spent": 30.0,
+          "time": 27.0166666666664
+        },
+        {
+          "ability": "physician_heal",
+          "ammo_spent": 0,
+          "direct": true,
+          "id": "F03",
+          "kind": "cast",
+          "manual": true,
+          "paid": 34.0,
+          "shield_after": {
+            "F03": 89.95,
+            "F07": 106.05,
+            "JIA": 133.0
+          },
+          "shield_before": {
+            "F03": 89.95,
+            "F07": 29.7526284908344,
+            "JIA": 133.0
+          },
+          "shield_spent": 0.0,
+          "time": 36.5166666666659
+        },
+        {
+          "ability": "physician_ward",
+          "ammo_spent": 0,
+          "direct": true,
+          "id": "F03",
+          "kind": "cast",
+          "manual": true,
+          "paid": 42.0,
+          "shield_after": {
+            "F03": 89.95,
+            "F07": 106.05,
+            "JIA": 133.0
+          },
+          "shield_before": {
+            "F03": 89.95,
+            "F07": 29.7526284908344,
+            "JIA": 133.0
+          },
+          "shield_spent": 0.0,
+          "time": 36.5166666666659
+        },
+        {
+          "ability": "bandit_thrust",
+          "ammo_spent": 0,
+          "direct": true,
+          "id": "F07",
+          "kind": "cast",
+          "manual": true,
+          "paid": 38.0,
+          "shield_after": {
+            "F03": 89.95,
+            "F07": 76.05,
+            "JIA": 133.0
+          },
+          "shield_before": {
+            "F03": 89.95,
+            "F07": 106.05,
+            "JIA": 133.0
+          },
+          "shield_spent": 30.0,
+          "time": 38.0166666666658
+        },
+        {
+          "ability": "physician_heal",
+          "ammo_spent": 0,
+          "direct": true,
+          "id": "F03",
+          "kind": "cast",
+          "manual": true,
+          "paid": 34.0,
+          "shield_after": {
+            "F03": 89.95,
+            "F07": 106.05,
+            "JIA": 133.0
+          },
+          "shield_before": {
+            "F03": 89.95,
+            "F07": 57.3225767609874,
+            "JIA": 133.0
+          },
+          "shield_spent": 0.0,
+          "time": 48.5166666666652
+        },
+        {
+          "ability": "bandit_thrust",
+          "ammo_spent": 0,
+          "direct": true,
+          "id": "F07",
+          "kind": "cast",
+          "manual": true,
+          "paid": 38.0,
+          "shield_after": {
+            "F03": 89.95,
+            "F07": 76.05,
+            "JIA": 133.0
+          },
+          "shield_before": {
+            "F03": 89.95,
+            "F07": 106.05,
+            "JIA": 133.0
+          },
+          "shield_spent": 30.0,
+          "time": 50.0166666666651
+        },
+        {
+          "ability": "physician_heal",
+          "ammo_spent": 0,
+          "direct": true,
+          "id": "F03",
+          "kind": "cast",
+          "manual": true,
+          "paid": 34.0,
+          "shield_after": {
+            "F03": 89.95,
+            "F07": 106.05,
+            "JIA": 133.0
+          },
+          "shield_before": {
+            "F03": 89.95,
+            "F07": 46.0861228175798,
+            "JIA": 98.9139713679745
+          },
+          "shield_spent": 0.0,
+          "time": 60.5166666666645
+        },
+        {
+          "ability": "bandit_thrust",
+          "ammo_spent": 0,
+          "direct": true,
+          "id": "F07",
+          "kind": "cast",
+          "manual": true,
+          "paid": 38.0,
+          "shield_after": {
+            "F03": 89.95,
+            "F07": 76.05,
+            "JIA": 133.0
+          },
+          "shield_before": {
+            "F03": 89.95,
+            "F07": 106.05,
+            "JIA": 133.0
+          },
+          "shield_spent": 30.0,
+          "time": 62.0166666666644
+        },
+        {
+          "ability": "physician_heal",
+          "ammo_spent": 0,
+          "direct": true,
+          "id": "F03",
+          "kind": "cast",
+          "manual": true,
+          "paid": 34.0,
+          "shield_after": {
+            "F03": 89.95,
+            "F07": 106.05,
+            "JIA": 138.6
+          },
+          "shield_before": {
+            "F03": 89.95,
+            "F07": 42.3406381697772,
+            "JIA": 106.870586691167
+          },
+          "shield_spent": 0.0,
+          "time": 72.5166666666638
+        },
+        {
+          "ability": "physician_ward",
+          "ammo_spent": 0,
+          "direct": true,
+          "id": "F03",
+          "kind": "cast",
+          "manual": true,
+          "paid": 42.0,
+          "shield_after": {
+            "F03": 89.95,
+            "F07": 106.05,
+            "JIA": 138.6
+          },
+          "shield_before": {
+            "F03": 89.95,
+            "F07": 42.3406381697772,
+            "JIA": 106.870586691167
+          },
+          "shield_spent": 0.0,
+          "time": 72.5166666666638
+        },
+        {
+          "ability": "bandit_thrust",
+          "ammo_spent": 0,
+          "direct": true,
+          "id": "F07",
+          "kind": "cast",
+          "manual": true,
+          "paid": 38.0,
+          "shield_after": {
+            "F03": 89.95,
+            "F07": 76.05,
+            "JIA": 138.6
+          },
+          "shield_before": {
+            "F03": 89.95,
+            "F07": 106.05,
+            "JIA": 138.6
+          },
+          "shield_spent": 30.0,
+          "time": 74.0166666666638
+        },
+        {
+          "ability": "physician_heal",
+          "ammo_spent": 0,
+          "direct": true,
+          "id": "F03",
+          "kind": "cast",
+          "manual": true,
+          "paid": 34.0,
+          "shield_after": {
+            "F03": 89.95,
+            "F07": 106.05,
+            "JIA": 138.6
+          },
+          "shield_before": {
+            "F03": 89.95,
+            "F07": 56.0740818783865,
+            "JIA": 138.6
+          },
+          "shield_spent": 0.0,
+          "time": 84.5166666666632
+        },
+        {
+          "ability": "bandit_thrust",
+          "ammo_spent": 0,
+          "direct": true,
+          "id": "F07",
+          "kind": "cast",
+          "manual": true,
+          "paid": 38.0,
+          "shield_after": {
+            "F03": 89.95,
+            "F07": 76.05,
+            "JIA": 138.6
+          },
+          "shield_before": {
+            "F03": 89.95,
+            "F07": 106.05,
+            "JIA": 138.6
+          },
+          "shield_spent": 30.0,
+          "time": 86.0166666666631
+        },
+        {
+          "ability": "physician_heal",
+          "ammo_spent": 0,
+          "direct": true,
+          "id": "F03",
+          "kind": "cast",
+          "manual": true,
+          "paid": 34.0,
+          "shield_after": {
+            "F03": 89.95,
+            "F07": 106.05,
+            "JIA": 138.6
+          },
+          "shield_before": {
+            "F03": 89.95,
+            "F07": 61.0680614087899,
+            "JIA": 90.6960756004725
+          },
+          "shield_spent": 0.0,
+          "time": 96.5166666666625
+        },
+        {
+          "ability": "bandit_thrust",
+          "ammo_spent": 0,
+          "direct": true,
+          "id": "F07",
+          "kind": "cast",
+          "manual": true,
+          "paid": 38.0,
+          "shield_after": {
+            "F03": 70.1970605744902,
+            "F07": 76.05,
+            "JIA": 138.6
+          },
+          "shield_before": {
+            "F03": 70.1970605744902,
+            "F07": 106.05,
+            "JIA": 138.6
+          },
+          "shield_spent": 30.0,
+          "time": 98.0166666666624
+        },
+        {
+          "ability": "physician_heal",
+          "ammo_spent": 0,
+          "direct": true,
+          "id": "F03",
+          "kind": "cast",
+          "manual": true,
+          "paid": 34.0,
+          "shield_after": {
+            "F03": 95.55,
+            "F07": 106.05,
+            "JIA": 138.6
+          },
+          "shield_before": {
+            "F03": 70.1970605744902,
+            "F07": 56.0740818783865,
+            "JIA": 125.566086159487
+          },
+          "shield_spent": 0.0,
+          "time": 108.516666666662
+        },
+        {
+          "ability": "physician_ward",
+          "ammo_spent": 0,
+          "direct": true,
+          "id": "F03",
+          "kind": "cast",
+          "manual": true,
+          "paid": 42.0,
+          "shield_after": {
+            "F03": 95.55,
+            "F07": 106.05,
+            "JIA": 138.6
+          },
+          "shield_before": {
+            "F03": 70.1970605744902,
+            "F07": 56.0740818783865,
+            "JIA": 125.566086159487
+          },
+          "shield_spent": 0.0,
+          "time": 108.516666666662
+        },
+        {
+          "ability": "bandit_thrust",
+          "ammo_spent": 0,
+          "direct": true,
+          "id": "F07",
+          "kind": "cast",
+          "manual": true,
+          "paid": 38.0,
+          "shield_after": {
+            "F03": 95.55,
+            "F07": 76.05,
+            "JIA": 138.6
+          },
+          "shield_before": {
+            "F03": 95.55,
+            "F07": 106.05,
+            "JIA": 138.6
+          },
+          "shield_spent": 30.0,
+          "time": 110.016666666662
+        },
+        {
+          "ability": "physician_heal",
+          "ammo_spent": 0,
+          "direct": true,
+          "id": "F03",
+          "kind": "cast",
+          "manual": true,
+          "paid": 34.0,
+          "shield_after": {
+            "F03": 95.55,
+            "F07": 98.0173896727709,
+            "JIA": 138.6
+          },
+          "shield_before": {
+            "F03": 95.55,
+            "F07": 36.5173896727709,
+            "JIA": 107.562992667278
+          },
+          "shield_spent": 0.0,
+          "time": 120.516666666661
+        },
+        {
+          "ability": "bandit_thrust",
+          "ammo_spent": 0,
+          "direct": true,
+          "id": "F07",
+          "kind": "cast",
+          "manual": true,
+          "paid": 38.0,
+          "shield_after": {
+            "F03": 95.55,
+            "F07": 68.0173896727709,
+            "JIA": 138.6
+          },
+          "shield_before": {
+            "F03": 95.55,
+            "F07": 98.0173896727709,
+            "JIA": 138.6
+          },
+          "shield_spent": 30.0,
+          "time": 122.016666666661
+        }
+      ],
+      "per_phase_shield_skill_costs": {
+        "pre_boss": {
+          "F07_shield_spent": 240.0,
+          "F03_paid_mp": 364.0,
+          "F07_paid_mp": 304.0
+        },
+        "B15:0:combat": {
+          "F07_shield_spent": 60.0,
+          "F03_paid_mp": 110.0,
+          "F07_paid_mp": 76.0
+        },
+        "B15:1:combat": {
+          "F07_shield_spent": 30.0,
+          "F03_paid_mp": 34.0,
+          "F07_paid_mp": 38.0
+        }
+      },
+      "boss_damage_by_source": {
+        "F03": 160.800000000001,
+        "F07": 1916.2864,
+        "JIA": 2222.9136
+      },
+      "boss_damage_by_ability": {
+        "F03_basic": 160.800000000001,
+        "F07_basic": 903.000000000001,
+        "JIA_basic": 1603.5136,
+        "bandit_support": 339.0464,
+        "bandit_thrust": 674.24,
+        "jia_break": 293.4,
+        "jia_sweep": 326.0
+      },
+      "fast_clear": true,
+      "reward_after": {
+        "candidates": [
+          "M06",
+          "N18",
+          "N08",
+          "N09",
+          "N01"
+        ],
+        "node": "B15",
+        "picks": 2,
+        "selected": [
+          "N01",
+          "M06"
+        ]
+      }
+    },
+    {
+      "stage": "B16",
+      "seconds": 177.850000000034,
+      "phase_seconds": {
+        "B16:0:combat": 19.000000000004,
+        "B16:1:combat": 42.2000000000336,
+        "B16:1:observation": 0.650000000000517,
+        "B16:1:transition": 0.983333333334116
+      },
+      "entry": {
+        "F03": {
+          "cooldowns": {
+            "F03_basic": 0.0,
+            "physician_heal": 0.0,
+            "physician_support": 4.23333333333334,
+            "physician_ward": 0.0
+          },
+          "dead": false,
+          "hp": 273.0,
+          "level": 9,
+          "mp": 189.2,
+          "xp": 57.6666666666667
+        },
+        "F07": {
+          "cooldowns": {
+            "F07_basic": 0.0,
+            "armor_guard": 0.0,
+            "bandit_support": 2.55000000000001,
+            "bandit_thrust": 0.0333333333332581
+          },
+          "dead": false,
+          "hp": 319.0,
+          "level": 10,
+          "mp": 144.2,
+          "xp": 10.0
+        },
+        "JIA": {
+          "cooldowns": {
+            "JIA_basic": 0.672947510094213,
+            "armor_guard": 0.0,
+            "jia_break": 0.0,
+            "jia_sweep": 0.0333333333333461
+          },
+          "dead": false,
+          "hp": 396.0,
+          "level": 12,
+          "mp": 149.2,
+          "xp": 98.0
+        }
+      },
+      "exit": {
+        "F03": {
+          "cooldowns": {
+            "F03_basic": 0.0,
+            "physician_heal": 0.666666666666592,
+            "physician_support": 0.866666666666684,
+            "physician_ward": 0.0
+          },
+          "dead": false,
+          "hp": 289.0,
+          "level": 10,
+          "mp": 193.533333333319,
+          "xp": 67.3333333333333
+        },
+        "F07": {
+          "cooldowns": {
+            "F07_basic": 0.0,
+            "armor_guard": 0.0,
+            "bandit_support": 0.666666666666676,
+            "bandit_thrust": 2.16666666666659
+          },
+          "dead": false,
+          "hp": 335.0,
+          "level": 11,
+          "mp": 149.2,
+          "xp": 31.6666666666667
+        },
+        "JIA": {
+          "cooldowns": {
+            "JIA_basic": 0.672947510094213,
+            "armor_guard": 0.0,
+            "jia_break": 7.16666666666657,
+            "jia_sweep": 2.16666666666668
+          },
+          "dead": false,
+          "hp": 412.0,
+          "level": 13,
+          "mp": 10.5833333333286,
+          "xp": 71.6666666666667
+        }
+      },
+      "phase_marks": [
+        {
+          "active": "JIA",
+          "bank": 0.0,
+          "form_name": "曹纯",
+          "hp": 1920.0,
+          "phase": "B16:0:combat",
+          "player_position": "(655.8358, 213.3654)",
+          "resources": {
+            "F03": {
+              "cooldowns": {
+                "F03_basic": 0.0,
+                "physician_heal": 3.49999999999992,
+                "physician_support": 3.53333333333334,
+                "physician_ward": 9.49999999999968
+              },
+              "dead": false,
+              "hp": 289.0,
+              "level": 10,
+              "mp": 146.149999999999,
+              "xp": 16.3333333333333
+            },
+            "F07": {
+              "cooldowns": {
+                "F07_basic": 0.0,
+                "armor_guard": 0.0,
+                "bandit_support": 0.0,
+                "bandit_thrust": 5.49999999999991
+              },
+              "dead": false,
+              "hp": 319.0,
+              "level": 10,
+              "mp": 37.950000000017,
+              "xp": 118.666666666667
+            },
+            "JIA": {
+              "cooldowns": {
+                "JIA_basic": 0.0,
+                "armor_guard": 0.0,
+                "jia_break": 0.0,
+                "jia_sweep": 5.0
+              },
+              "dead": false,
+              "hp": 412.0,
+              "level": 13,
+              "mp": 105.799999999999,
+              "xp": 20.6666666666667
+            }
+          },
+          "seconds": 115.016666666661,
+          "shields": {
+            "F03": 101.15,
+            "F07": 81.65,
+            "JIA": 144.2
+          }
+        },
+        {
+          "active": "F07",
+          "bank": 214.3656,
+          "form_name": "虎豹甲骑巨相",
+          "hp": 2880.0,
+          "phase": "B16:1:transition",
+          "player_position": "(240.5976, 311.2402)",
+          "resources": {
+            "F03": {
+              "cooldowns": {
+                "F03_basic": 0.0,
+                "physician_heal": 8.49999999999993,
+                "physician_support": 2.58333333333335,
+                "physician_ward": 0.0
+              },
+              "dead": false,
+              "hp": 289.0,
+              "level": 10,
+              "mp": 159.849999999989,
+              "xp": 19.6666666666667
+            },
+            "F07": {
+              "cooldowns": {
+                "F07_basic": 0.0,
+                "armor_guard": 0.0,
+                "bandit_support": 0.550000000000009,
+                "bandit_thrust": 10.0
+              },
+              "dead": false,
+              "hp": 319.0,
+              "level": 10,
+              "mp": 9.4500000000155,
+              "xp": 122.0
+            },
+            "JIA": {
+              "cooldowns": {
+                "JIA_basic": 0.0,
+                "armor_guard": 0.0,
+                "jia_break": 6.49999999999991,
+                "jia_sweep": 0.0
+              },
+              "dead": false,
+              "hp": 412.0,
+              "level": 13,
+              "mp": 70.6999999999942,
+              "xp": 24.0
+            }
+          },
+          "seconds": 134.016666666665,
+          "shields": {
+            "F03": 101.15,
+            "F07": 81.65,
+            "JIA": 144.2
+          }
+        },
+        {
+          "active": "F07",
+          "bank": 278.4656,
+          "form_name": "虎豹甲骑巨相",
+          "hp": 2880.0,
+          "phase": "B16:1:observation",
+          "player_position": "(173.1197, 197.0842)",
+          "resources": {
+            "F03": {
+              "cooldowns": {
+                "F03_basic": 0.0,
+                "physician_heal": 7.51666666666657,
+                "physician_support": 1.60000000000002,
+                "physician_ward": 0.0
+              },
+              "dead": false,
+              "hp": 289.0,
+              "level": 10,
+              "mp": 164.078333333322,
+              "xp": 19.6666666666667
+            },
+            "F07": {
+              "cooldowns": {
+                "F07_basic": 0.211246943765281,
+                "armor_guard": 0.0,
+                "bandit_support": 0.0,
+                "bandit_thrust": 9.01666666666662
+              },
+              "dead": false,
+              "hp": 319.0,
+              "level": 10,
+              "mp": 11.9083333333488,
+              "xp": 122.0
+            },
+            "JIA": {
+              "cooldowns": {
+                "JIA_basic": 0.0,
+                "armor_guard": 0.0,
+                "jia_break": 5.51666666666658,
+                "jia_sweep": 0.0
+              },
+              "dead": false,
+              "hp": 412.0,
+              "level": 13,
+              "mp": 73.7483333333273,
+              "xp": 24.0
+            }
+          },
+          "seconds": 135.0,
+          "shields": {
+            "F03": 101.15,
+            "F07": 81.65,
+            "JIA": 144.2
+          }
+        },
+        {
+          "active": "F07",
+          "bank": 0.0,
+          "form_name": "虎豹甲骑巨相",
+          "hp": 2537.4344,
+          "phase": "B16:1:combat",
+          "player_position": "(154.0099, 151.0746)",
+          "resources": {
+            "F03": {
+              "cooldowns": {
+                "F03_basic": 0.0,
+                "physician_heal": 6.86666666666657,
+                "physician_support": 0.950000000000018,
+                "physician_ward": 0.0
+              },
+              "dead": false,
+              "hp": 289.0,
+              "level": 10,
+              "mp": 166.873333333322,
+              "xp": 19.6666666666667
+            },
+            "F07": {
+              "cooldowns": {
+                "F07_basic": 0.177913610431948,
+                "armor_guard": 0.0,
+                "bandit_support": 0.0,
+                "bandit_thrust": 8.36666666666659
+              },
+              "dead": false,
+              "hp": 319.0,
+              "level": 10,
+              "mp": 13.5333333333488,
+              "xp": 122.0
+            },
+            "JIA": {
+              "cooldowns": {
+                "JIA_basic": 0.0,
+                "armor_guard": 0.0,
+                "jia_break": 4.86666666666658,
+                "jia_sweep": 0.0
+              },
+              "dead": false,
+              "hp": 412.0,
+              "level": 13,
+              "mp": 75.7633333333271,
+              "xp": 24.0
+            }
+          },
+          "seconds": 135.65,
+          "shields": {
+            "F03": 101.15,
+            "F07": 81.65,
+            "JIA": 144.2
+          }
+        }
+      ],
+      "shield_generated_observed_lower_bound": {
+        "F03": 131.000464508048,
+        "F07": 620.343766700613,
+        "JIA": 302.803701561185
+      },
+      "shield_absorbed_observed_lower_bound": {
+        "F03": 29.8504645080475,
+        "F07": 118.693766700613,
+        "JIA": 197.932187977744
+      },
+      "shield_before_terminal_frame": {
+        "F03": 101.15,
+        "F07": 81.65,
+        "JIA": 104.871513583441
+      },
+      "shield_spent": {
+        "F03": 0.0,
+        "F07": 420.0,
+        "JIA": 0.0
+      },
+      "hp_damage": {},
+      "resource_balance": {
+        "F03": {
+          "net_hp_restored_including_level_growth": 16.0,
+          "net_mp_restored_including_level_growth": 724.333333333319,
+          "paid_mp": 720.0,
+          "received_hp_damage": 0.0
+        },
+        "F07": {
+          "net_hp_restored_including_level_growth": 16.0,
+          "net_mp_restored_including_level_growth": 537.0,
+          "paid_mp": 532.0,
+          "received_hp_damage": 0.0
+        },
+        "JIA": {
+          "net_hp_restored_including_level_growth": 16.0,
+          "net_mp_restored_including_level_growth": 623.383333333329,
+          "paid_mp": 762.0,
+          "received_hp_damage": 0.0
+        }
+      },
+      "paid_mp": {
+        "F03": 720.0,
+        "F07": 532.0,
+        "JIA": 762.0
+      },
+      "shield_cast_counts": {
+        "F03:physician_heal:front": 15,
+        "F03:physician_support:support": 29,
+        "F03:physician_ward:front": 5,
+        "F07:bandit_thrust:front": 14
+      },
+      "shield_cast_events": [
+        {
+          "ability": "physician_heal",
+          "ammo_spent": 0,
+          "direct": true,
+          "id": "F03",
+          "kind": "cast",
+          "manual": true,
+          "paid": 34.0,
+          "shield_after": {
+            "F03": 95.55,
+            "F07": 111.65,
+            "JIA": 116.5
+          },
+          "shield_before": {
+            "F03": 0.0,
+            "F07": 0.0,
+            "JIA": 0.0
+          },
+          "shield_spent": 0.0,
+          "time": 0.516666666666667
+        },
+        {
+          "ability": "physician_ward",
+          "ammo_spent": 0,
+          "direct": true,
+          "id": "F03",
+          "kind": "cast",
+          "manual": true,
+          "paid": 42.0,
+          "shield_after": {
+            "F03": 95.55,
+            "F07": 111.65,
+            "JIA": 116.5
+          },
+          "shield_before": {
+            "F03": 0.0,
+            "F07": 0.0,
+            "JIA": 0.0
+          },
+          "shield_spent": 0.0,
+          "time": 0.516666666666667
+        },
+        {
+          "ability": "bandit_thrust",
+          "ammo_spent": 0,
+          "direct": true,
+          "id": "F07",
+          "kind": "cast",
+          "manual": true,
+          "paid": 38.0,
+          "shield_after": {
+            "F03": 95.55,
+            "F07": 81.65,
+            "JIA": 116.5
+          },
+          "shield_before": {
+            "F03": 95.55,
+            "F07": 111.65,
+            "JIA": 116.5
+          },
+          "shield_spent": 30.0,
+          "time": 5.51666666666665
+        },
+        {
+          "ability": "physician_heal",
+          "ammo_spent": 0,
+          "direct": true,
+          "id": "F03",
+          "kind": "cast",
+          "manual": true,
+          "paid": 34.0,
+          "shield_after": {
+            "F03": 95.55,
+            "F07": 111.65,
+            "JIA": 138.6
+          },
+          "shield_before": {
+            "F03": 95.55,
+            "F07": 81.65,
+            "JIA": 116.5
+          },
+          "shield_spent": 0.0,
+          "time": 12.5166666666669
+        },
+        {
+          "ability": "bandit_thrust",
+          "ammo_spent": 0,
+          "direct": true,
+          "id": "F07",
+          "kind": "cast",
+          "manual": true,
+          "paid": 38.0,
+          "shield_after": {
+            "F03": 95.55,
+            "F07": 81.65,
+            "JIA": 138.6
+          },
+          "shield_before": {
+            "F03": 95.55,
+            "F07": 111.65,
+            "JIA": 138.6
+          },
+          "shield_spent": 30.0,
+          "time": 15.516666666667
+        },
+        {
+          "ability": "physician_heal",
+          "ammo_spent": 0,
+          "direct": true,
+          "id": "F03",
+          "kind": "cast",
+          "manual": true,
+          "paid": 34.0,
+          "shield_after": {
+            "F03": 95.55,
+            "F07": 111.65,
+            "JIA": 138.6
+          },
+          "shield_before": {
+            "F03": 95.55,
+            "F07": 62.6578670031171,
+            "JIA": 138.6
+          },
+          "shield_spent": 0.0,
+          "time": 24.5166666666666
+        },
+        {
+          "ability": "bandit_thrust",
+          "ammo_spent": 0,
+          "direct": true,
+          "id": "F07",
+          "kind": "cast",
+          "manual": true,
+          "paid": 38.0,
+          "shield_after": {
+            "F03": 95.55,
+            "F07": 81.65,
+            "JIA": 138.6
+          },
+          "shield_before": {
+            "F03": 95.55,
+            "F07": 111.65,
+            "JIA": 138.6
+          },
+          "shield_spent": 30.0,
+          "time": 26.0166666666665
+        },
+        {
+          "ability": "physician_heal",
+          "ammo_spent": 0,
+          "direct": true,
+          "id": "F03",
+          "kind": "cast",
+          "manual": true,
+          "paid": 34.0,
+          "shield_after": {
+            "F03": 95.55,
+            "F07": 111.65,
+            "JIA": 138.6
+          },
+          "shield_before": {
+            "F03": 95.55,
+            "F07": 81.65,
+            "JIA": 108.442870237004
+          },
+          "shield_spent": 0.0,
+          "time": 36.5166666666659
+        },
+        {
+          "ability": "physician_ward",
+          "ammo_spent": 0,
+          "direct": true,
+          "id": "F03",
+          "kind": "cast",
+          "manual": true,
+          "paid": 42.0,
+          "shield_after": {
+            "F03": 95.55,
+            "F07": 111.65,
+            "JIA": 138.6
+          },
+          "shield_before": {
+            "F03": 95.55,
+            "F07": 81.65,
+            "JIA": 108.442870237004
+          },
+          "shield_spent": 0.0,
+          "time": 36.5166666666659
+        },
+        {
+          "ability": "bandit_thrust",
+          "ammo_spent": 0,
+          "direct": true,
+          "id": "F07",
+          "kind": "cast",
+          "manual": true,
+          "paid": 38.0,
+          "shield_after": {
+            "F03": 95.55,
+            "F07": 81.65,
+            "JIA": 138.6
+          },
+          "shield_before": {
+            "F03": 95.55,
+            "F07": 111.65,
+            "JIA": 138.6
+          },
+          "shield_spent": 30.0,
+          "time": 40.5166666666656
+        },
+        {
+          "ability": "physician_heal",
+          "ammo_spent": 0,
+          "direct": true,
+          "id": "F03",
+          "kind": "cast",
+          "manual": true,
+          "paid": 34.0,
+          "shield_after": {
+            "F03": 95.55,
+            "F07": 111.65,
+            "JIA": 138.6
+          },
+          "shield_before": {
+            "F03": 95.55,
+            "F07": 81.65,
+            "JIA": 138.6
+          },
+          "shield_spent": 0.0,
+          "time": 48.5166666666652
+        },
+        {
+          "ability": "bandit_thrust",
+          "ammo_spent": 0,
+          "direct": true,
+          "id": "F07",
+          "kind": "cast",
+          "manual": true,
+          "paid": 38.0,
+          "shield_after": {
+            "F03": 95.55,
+            "F07": 81.65,
+            "JIA": 138.6
+          },
+          "shield_before": {
+            "F03": 95.55,
+            "F07": 111.65,
+            "JIA": 138.6
+          },
+          "shield_spent": 30.0,
+          "time": 50.5166666666651
+        },
+        {
+          "ability": "physician_heal",
+          "ammo_spent": 0,
+          "direct": true,
+          "id": "F03",
+          "kind": "cast",
+          "manual": true,
+          "paid": 34.0,
+          "shield_after": {
+            "F03": 95.55,
+            "F07": 111.65,
+            "JIA": 138.6
+          },
+          "shield_before": {
+            "F03": 95.55,
+            "F07": 81.65,
+            "JIA": 138.6
+          },
+          "shield_spent": 0.0,
+          "time": 60.5166666666645
+        },
+        {
+          "ability": "bandit_thrust",
+          "ammo_spent": 0,
+          "direct": true,
+          "id": "F07",
+          "kind": "cast",
+          "manual": true,
+          "paid": 38.0,
+          "shield_after": {
+            "F03": 95.55,
+            "F07": 66.4562936024937,
+            "JIA": 138.6
+          },
+          "shield_before": {
+            "F03": 95.55,
+            "F07": 96.4562936024937,
+            "JIA": 138.6
+          },
+          "shield_spent": 30.0,
+          "time": 62.0166666666644
+        },
+        {
+          "ability": "physician_heal",
+          "ammo_spent": 0,
+          "direct": true,
+          "id": "F03",
+          "kind": "cast",
+          "manual": true,
+          "paid": 34.0,
+          "shield_after": {
+            "F03": 95.55,
+            "F07": 111.65,
+            "JIA": 138.6
+          },
+          "shield_before": {
+            "F03": 80.5235760422783,
+            "F07": 46.1980184058186,
+            "JIA": 138.6
+          },
+          "shield_spent": 0.0,
+          "time": 72.5166666666638
+        },
+        {
+          "ability": "physician_ward",
+          "ammo_spent": 0,
+          "direct": true,
+          "id": "F03",
+          "kind": "cast",
+          "manual": true,
+          "paid": 42.0,
+          "shield_after": {
+            "F03": 95.55,
+            "F07": 111.65,
+            "JIA": 138.6
+          },
+          "shield_before": {
+            "F03": 80.5235760422783,
+            "F07": 46.1980184058186,
+            "JIA": 138.6
+          },
+          "shield_spent": 0.0,
+          "time": 72.5166666666638
+        },
+        {
+          "ability": "bandit_thrust",
+          "ammo_spent": 0,
+          "direct": true,
+          "id": "F07",
+          "kind": "cast",
+          "manual": true,
+          "paid": 38.0,
+          "shield_after": {
+            "F03": 95.55,
+            "F07": 81.65,
+            "JIA": 138.6
+          },
+          "shield_before": {
+            "F03": 95.55,
+            "F07": 111.65,
+            "JIA": 138.6
+          },
+          "shield_spent": 30.0,
+          "time": 74.0166666666638
+        },
+        {
+          "ability": "physician_heal",
+          "ammo_spent": 0,
+          "direct": true,
+          "id": "F03",
+          "kind": "cast",
+          "manual": true,
+          "paid": 34.0,
+          "shield_after": {
+            "F03": 101.15,
+            "F07": 111.65,
+            "JIA": 144.2
+          },
+          "shield_before": {
+            "F03": 95.55,
+            "F07": 81.65,
+            "JIA": 125.35808538163
+          },
+          "shield_spent": 0.0,
+          "time": 84.5166666666632
+        },
+        {
+          "ability": "bandit_thrust",
+          "ammo_spent": 0,
+          "direct": true,
+          "id": "F07",
+          "kind": "cast",
+          "manual": true,
+          "paid": 38.0,
+          "shield_after": {
+            "F03": 101.15,
+            "F07": 81.65,
+            "JIA": 144.2
+          },
+          "shield_before": {
+            "F03": 101.15,
+            "F07": 111.65,
+            "JIA": 144.2
+          },
+          "shield_spent": 30.0,
+          "time": 86.0166666666631
+        },
+        {
+          "ability": "physician_heal",
+          "ammo_spent": 0,
+          "direct": true,
+          "id": "F03",
+          "kind": "cast",
+          "manual": true,
+          "paid": 34.0,
+          "shield_after": {
+            "F03": 101.15,
+            "F07": 111.65,
+            "JIA": 144.2
+          },
+          "shield_before": {
+            "F03": 101.15,
+            "F07": 81.65,
+            "JIA": 144.2
+          },
+          "shield_spent": 0.0,
+          "time": 96.5166666666625
+        },
+        {
+          "ability": "bandit_thrust",
+          "ammo_spent": 0,
+          "direct": true,
+          "id": "F07",
+          "kind": "cast",
+          "manual": true,
+          "paid": 38.0,
+          "shield_after": {
+            "F03": 101.15,
+            "F07": 81.65,
+            "JIA": 144.2
+          },
+          "shield_before": {
+            "F03": 101.15,
+            "F07": 111.65,
+            "JIA": 144.2
+          },
+          "shield_spent": 30.0,
+          "time": 100.516666666662
+        },
+        {
+          "ability": "physician_heal",
+          "ammo_spent": 0,
+          "direct": true,
+          "id": "F03",
+          "kind": "cast",
+          "manual": true,
+          "paid": 34.0,
+          "shield_after": {
+            "F03": 101.15,
+            "F07": 111.65,
+            "JIA": 144.2
+          },
+          "shield_before": {
+            "F03": 101.15,
+            "F07": 81.65,
+            "JIA": 144.2
+          },
+          "shield_spent": 0.0,
+          "time": 108.516666666662
+        },
+        {
+          "ability": "physician_ward",
+          "ammo_spent": 0,
+          "direct": true,
+          "id": "F03",
+          "kind": "cast",
+          "manual": true,
+          "paid": 42.0,
+          "shield_after": {
+            "F03": 101.15,
+            "F07": 111.65,
+            "JIA": 144.2
+          },
+          "shield_before": {
+            "F03": 101.15,
+            "F07": 81.65,
+            "JIA": 144.2
+          },
+          "shield_spent": 0.0,
+          "time": 108.516666666662
+        },
+        {
+          "ability": "bandit_thrust",
+          "ammo_spent": 0,
+          "direct": true,
+          "id": "F07",
+          "kind": "cast",
+          "manual": true,
+          "paid": 38.0,
+          "shield_after": {
+            "F03": 101.15,
+            "F07": 81.65,
+            "JIA": 144.2
+          },
+          "shield_before": {
+            "F03": 101.15,
+            "F07": 111.65,
+            "JIA": 144.2
+          },
+          "shield_spent": 30.0,
+          "time": 110.516666666662
+        },
+        {
+          "ability": "physician_heal",
+          "ammo_spent": 0,
+          "direct": true,
+          "id": "F03",
+          "kind": "cast",
+          "manual": true,
+          "paid": 34.0,
+          "shield_after": {
+            "F03": 101.15,
+            "F07": 111.65,
+            "JIA": 144.2
+          },
+          "shield_before": {
+            "F03": 101.15,
+            "F07": 81.65,
+            "JIA": 108.446830530401
+          },
+          "shield_spent": 0.0,
+          "time": 120.516666666661
+        },
+        {
+          "ability": "bandit_thrust",
+          "ammo_spent": 0,
+          "direct": true,
+          "id": "F07",
+          "kind": "cast",
+          "manual": true,
+          "paid": 38.0,
+          "shield_after": {
+            "F03": 101.15,
+            "F07": 81.65,
+            "JIA": 144.2
+          },
+          "shield_before": {
+            "F03": 101.15,
+            "F07": 111.65,
+            "JIA": 144.2
+          },
+          "shield_spent": 30.0,
+          "time": 122.016666666661
+        },
+        {
+          "ability": "physician_heal",
+          "ammo_spent": 0,
+          "direct": true,
+          "id": "F03",
+          "kind": "cast",
+          "manual": true,
+          "paid": 34.0,
+          "shield_after": {
+            "F03": 101.15,
+            "F07": 111.65,
+            "JIA": 144.2
+          },
+          "shield_before": {
+            "F03": 101.15,
+            "F07": 81.65,
+            "JIA": 117.71617076326
+          },
+          "shield_spent": 0.0,
+          "time": 132.516666666664
+        },
+        {
+          "ability": "bandit_thrust",
+          "ammo_spent": 0,
+          "direct": true,
+          "id": "F07",
+          "kind": "cast",
+          "manual": true,
+          "paid": 38.0,
+          "shield_after": {
+            "F03": 101.15,
+            "F07": 81.65,
+            "JIA": 144.2
+          },
+          "shield_before": {
+            "F03": 101.15,
+            "F07": 111.65,
+            "JIA": 144.2
+          },
+          "shield_spent": 30.0,
+          "time": 134.016666666665
+        },
+        {
+          "ability": "physician_heal",
+          "ammo_spent": 0,
+          "direct": true,
+          "id": "F03",
+          "kind": "cast",
+          "manual": true,
+          "paid": 34.0,
+          "shield_after": {
+            "F03": 101.15,
+            "F07": 111.65,
+            "JIA": 144.2
+          },
+          "shield_before": {
+            "F03": 101.15,
+            "F07": 32.5535677276092,
+            "JIA": 144.2
+          },
+          "shield_spent": 0.0,
+          "time": 144.516666666674
+        },
+        {
+          "ability": "physician_ward",
+          "ammo_spent": 0,
+          "direct": true,
+          "id": "F03",
+          "kind": "cast",
+          "manual": true,
+          "paid": 42.0,
+          "shield_after": {
+            "F03": 101.15,
+            "F07": 111.65,
+            "JIA": 144.2
+          },
+          "shield_before": {
+            "F03": 101.15,
+            "F07": 32.5535677276092,
+            "JIA": 144.2
+          },
+          "shield_spent": 0.0,
+          "time": 144.516666666674
+        },
+        {
+          "ability": "bandit_thrust",
+          "ammo_spent": 0,
+          "direct": true,
+          "id": "F07",
+          "kind": "cast",
+          "manual": true,
+          "paid": 38.0,
+          "shield_after": {
+            "F03": 101.15,
+            "F07": 81.65,
+            "JIA": 144.2
+          },
+          "shield_before": {
+            "F03": 101.15,
+            "F07": 111.65,
+            "JIA": 144.2
+          },
+          "shield_spent": 30.0,
+          "time": 146.016666666675
+        },
+        {
+          "ability": "physician_heal",
+          "ammo_spent": 0,
+          "direct": true,
+          "id": "F03",
+          "kind": "cast",
+          "manual": true,
+          "paid": 34.0,
+          "shield_after": {
+            "F03": 101.15,
+            "F07": 111.65,
+            "JIA": 144.2
+          },
+          "shield_before": {
+            "F03": 86.3259594496741,
+            "F07": 66.4967801628423,
+            "JIA": 130.95808538163
+          },
+          "shield_spent": 0.0,
+          "time": 156.516666666683
+        },
+        {
+          "ability": "physician_heal",
+          "ammo_spent": 0,
+          "direct": true,
+          "id": "F03",
+          "kind": "cast",
+          "manual": true,
+          "paid": 34.0,
+          "shield_after": {
+            "F03": 101.15,
+            "F07": 111.65,
+            "JIA": 144.2
+          },
+          "shield_before": {
+            "F03": 101.15,
+            "F07": 111.65,
+            "JIA": 104.47425614489
+          },
+          "shield_spent": 0.0,
+          "time": 168.516666666693
+        },
+        {
+          "ability": "bandit_thrust",
+          "ammo_spent": 0,
+          "direct": true,
+          "id": "F07",
+          "kind": "cast",
+          "manual": true,
+          "paid": 38.0,
+          "shield_after": {
+            "F03": 101.15,
+            "F07": 81.65,
+            "JIA": 144.2
+          },
+          "shield_before": {
+            "F03": 101.15,
+            "F07": 111.65,
+            "JIA": 144.2
+          },
+          "shield_spent": 30.0,
+          "time": 170.016666666694
+        }
+      ],
+      "per_phase_shield_skill_costs": {
+        "pre_boss": {
+          "F07_shield_spent": 300.0,
+          "F03_paid_mp": 508.0,
+          "F07_paid_mp": 380.0
+        },
+        "B16:0:combat": {
+          "F07_shield_spent": 30.0,
+          "F03_paid_mp": 68.0,
+          "F07_paid_mp": 38.0
+        },
+        "B16:1:transition": {
+          "F07_shield_spent": 30.0,
+          "F03_paid_mp": 0,
+          "F07_paid_mp": 38.0
+        },
+        "B16:1:combat": {
+          "F07_shield_spent": 60.0,
+          "F03_paid_mp": 144.0,
+          "F07_paid_mp": 76.0
+        }
+      },
+      "boss_damage_by_source": {
+        "F03": 231.083999999999,
+        "F07": 1957.3576,
+        "JIA": 2611.5584
+      },
+      "boss_damage_by_ability": {
+        "F03_basic": 231.083999999999,
+        "F07_basic": 897.4,
+        "JIA_basic": 1195.0084,
+        "bandit_support": 298.9624,
+        "bandit_thrust": 760.9952,
+        "jia_break": 1243.8,
+        "jia_sweep": 172.75
+      },
+      "fast_clear": true,
+      "reward_after": {
+        "candidates": [
+          "F10",
+          "M05",
+          "N09",
+          "F11",
+          "N01"
+        ],
+        "node": "B16",
+        "picks": 2,
+        "selected": [
+          "F11",
+          "N01"
+        ]
+      }
+    },
+    {
+      "stage": "B17",
+      "seconds": 158.016666666685,
+      "phase_seconds": {
+        "B17:0:combat": 21.1000000000057,
+        "B17:1:combat": 20.2666666666828,
+        "B17:1:observation": 0.650000000000517,
+        "B17:1:transition": 0.983333333334116
+      },
+      "entry": {
+        "F03": {
+          "cooldowns": {
+            "F03_basic": 0.0,
+            "physician_heal": 0.666666666666592,
+            "physician_support": 0.866666666666684,
+            "physician_ward": 0.0
+          },
+          "dead": false,
+          "hp": 289.0,
+          "level": 10,
+          "mp": 194.2,
+          "xp": 67.3333333333333
+        },
+        "F07": {
+          "cooldowns": {
+            "F07_basic": 0.0,
+            "armor_guard": 0.0,
+            "bandit_support": 0.666666666666676,
+            "bandit_thrust": 2.16666666666659
+          },
+          "dead": false,
+          "hp": 335.0,
+          "level": 11,
+          "mp": 149.2,
+          "xp": 31.6666666666667
+        },
+        "JIA": {
+          "cooldowns": {
+            "JIA_basic": 0.672947510094213,
+            "armor_guard": 0.0,
+            "jia_break": 7.16666666666657,
+            "jia_sweep": 2.16666666666668
+          },
+          "dead": false,
+          "hp": 412.0,
+          "level": 13,
+          "mp": 154.2,
+          "xp": 71.6666666666667
+        }
+      },
+      "exit": {
+        "F03": {
+          "cooldowns": {
+            "F03_basic": 0.0,
+            "physician_heal": 8.49999999999993,
+            "physician_support": 5.93333333333333,
+            "physician_ward": 2.49999999999962
+          },
+          "dead": false,
+          "hp": 305.0,
+          "level": 11,
+          "mp": 149.274999999992,
+          "xp": 52.6666666666667
+        },
+        "F07": {
+          "cooldowns": {
+            "F07_basic": 0.0,
+            "armor_guard": 0.0,
+            "bandit_support": 0.516666666666676,
+            "bandit_thrust": 10.0
+          },
+          "dead": false,
+          "hp": 351.0,
+          "level": 12,
+          "mp": 154.2,
+          "xp": 29.0
+        },
+        "JIA": {
+          "cooldowns": {
+            "JIA_basic": 0.0,
+            "armor_guard": 0.0,
+            "jia_break": 0.0,
+            "jia_sweep": 0.0
+          },
+          "dead": false,
+          "hp": 428.0,
+          "level": 14,
+          "mp": 159.2,
+          "xp": 21.0
+        }
+      },
+      "phase_marks": [
+        {
+          "active": "JIA",
+          "bank": 0.0,
+          "form_name": "张辽",
+          "hp": 2480.0,
+          "phase": "B17:0:combat",
+          "player_position": "(2538.84, 137.8641)",
+          "resources": {
+            "F03": {
+              "cooldowns": {
+                "F03_basic": 0.0,
+                "physician_heal": 3.49999999999992,
+                "physician_support": 0.800000000000017,
+                "physician_ward": 9.49999999999968
+              },
+              "dead": false,
+              "hp": 305.0,
+              "level": 11,
+              "mp": 152.124999999997,
+              "xp": 14.0
+            },
+            "F07": {
+              "cooldowns": {
+                "F07_basic": 0.0,
+                "armor_guard": 0.0,
+                "bandit_support": 3.5,
+                "bandit_thrust": 4.99999999999991
+              },
+              "dead": false,
+              "hp": 335.0,
+              "level": 11,
+              "mp": 74.8500000000059,
+              "xp": 140.333333333333
+            },
+            "JIA": {
+              "cooldowns": {
+                "JIA_basic": 0.172947510094212,
+                "armor_guard": 0.0,
+                "jia_break": 0.0,
+                "jia_sweep": 5.0
+              },
+              "dead": false,
+              "hp": 412.0,
+              "level": 13,
+              "mp": 33.1999999999829,
+              "xp": 156.333333333333
+            }
+          },
+          "seconds": 115.016666666661,
+          "shields": {
+            "F03": 106.75,
+            "F07": 71.8907710280374,
+            "JIA": 144.2
+          }
+        },
+        {
+          "active": "F07",
+          "bank": 25.5000000000003,
+          "form_name": "夜叉裂阵将相",
+          "hp": 3720.0,
+          "phase": "B17:1:transition",
+          "player_position": "(3080.333, 171.4029)",
+          "resources": {
+            "F03": {
+              "cooldowns": {
+                "F03_basic": 0.0,
+                "physician_heal": 6.39999999999991,
+                "physician_support": 3.76666666666667,
+                "physician_ward": 0.0
+              },
+              "dead": false,
+              "hp": 305.0,
+              "level": 11,
+              "mp": 178.019999999983,
+              "xp": 17.0
+            },
+            "F07": {
+              "cooldowns": {
+                "F07_basic": 0.611246943765281,
+                "armor_guard": 0.0,
+                "bandit_support": 0.683333333333343,
+                "bandit_thrust": 7.8999999999999
+              },
+              "dead": false,
+              "hp": 335.0,
+              "level": 11,
+              "mp": 54.765000000009,
+              "xp": 143.333333333333
+            },
+            "JIA": {
+              "cooldowns": {
+                "JIA_basic": 0.0,
+                "armor_guard": 0.0,
+                "jia_break": 0.0,
+                "jia_sweep": 0.0
+              },
+              "dead": false,
+              "hp": 412.0,
+              "level": 13,
+              "mp": 43.7749999999834,
+              "xp": 159.333333333333
+            }
+          },
+          "seconds": 136.116666666667,
+          "shields": {
+            "F03": 92.5992176336096,
+            "F07": 87.25,
+            "JIA": 144.2
+          }
+        },
+        {
+          "active": "F07",
+          "bank": 93.5000000000003,
+          "form_name": "夜叉裂阵将相",
+          "hp": 3720.0,
+          "phase": "B17:1:observation",
+          "player_position": "(3091.813, 150.9402)",
+          "resources": {
+            "F03": {
+              "cooldowns": {
+                "F03_basic": 0.0,
+                "physician_heal": 5.41666666666658,
+                "physician_support": 2.78333333333334,
+                "physician_ward": 0.0
+              },
+              "dead": false,
+              "hp": 305.0,
+              "level": 11,
+              "mp": 182.395833333316,
+              "xp": 17.0
+            },
+            "F07": {
+              "cooldowns": {
+                "F07_basic": 0.244580277098614,
+                "armor_guard": 0.0,
+                "bandit_support": 0.0,
+                "bandit_thrust": 6.91666666666657
+              },
+              "dead": false,
+              "hp": 335.0,
+              "level": 11,
+              "mp": 57.3708333333425,
+              "xp": 143.333333333333
+            },
+            "JIA": {
+              "cooldowns": {
+                "JIA_basic": 0.0,
+                "armor_guard": 0.0,
+                "jia_break": 0.0,
+                "jia_sweep": 0.0
+              },
+              "dead": false,
+              "hp": 412.0,
+              "level": 13,
+              "mp": 46.9708333333168,
+              "xp": 159.333333333333
+            }
+          },
+          "seconds": 137.100000000001,
+          "shields": {
+            "F03": 92.5992176336096,
+            "F07": 87.25,
+            "JIA": 144.2
+          }
+        },
+        {
+          "active": "F07",
+          "bank": 0.0,
+          "form_name": "夜叉裂阵将相",
+          "hp": 3558.5,
+          "phase": "B17:1:combat",
+          "player_position": "(3080.264, 132.0026)",
+          "resources": {
+            "F03": {
+              "cooldowns": {
+                "F03_basic": 0.0,
+                "physician_heal": 4.76666666666658,
+                "physician_support": 2.13333333333335,
+                "physician_ward": 0.0
+              },
+              "dead": false,
+              "hp": 305.0,
+              "level": 11,
+              "mp": 185.288333333316,
+              "xp": 17.0
+            },
+            "F07": {
+              "cooldowns": {
+                "F07_basic": 0.211246943765281,
+                "armor_guard": 0.0,
+                "bandit_support": 0.0,
+                "bandit_thrust": 6.26666666666657
+              },
+              "dead": false,
+              "hp": 335.0,
+              "level": 11,
+              "mp": 59.0933333333426,
+              "xp": 143.333333333333
+            },
+            "JIA": {
+              "cooldowns": {
+                "JIA_basic": 0.0,
+                "armor_guard": 0.0,
+                "jia_break": 0.0,
+                "jia_sweep": 0.0
+              },
+              "dead": false,
+              "hp": 412.0,
+              "level": 13,
+              "mp": 49.0833333333168,
+              "xp": 159.333333333333
+            }
+          },
+          "seconds": 137.750000000002,
+          "shields": {
+            "F03": 92.5992176336096,
+            "F07": 87.25,
+            "JIA": 144.2
+          }
+        }
+      ],
+      "shield_generated_observed_lower_bound": {
+        "F03": 215.460799514147,
+        "F07": 677.257294987753,
+        "JIA": 355.289858598071
+      },
+      "shield_absorbed_observed_lower_bound": {
+        "F03": 108.710799514147,
+        "F07": 200.007294987753,
+        "JIA": 211.089858598071
+      },
+      "shield_before_terminal_frame": {
+        "F03": 106.75,
+        "F07": 117.25,
+        "JIA": 144.2
+      },
+      "shield_spent": {
+        "F03": 0.0,
+        "F07": 390.0,
+        "JIA": 0.0
+      },
+      "hp_damage": {},
+      "resource_balance": {
+        "F03": {
+          "net_hp_restored_including_level_growth": 16.0,
+          "net_mp_restored_including_level_growth": 641.074999999992,
+          "paid_mp": 686.0,
+          "received_hp_damage": 0.0
+        },
+        "F07": {
+          "net_hp_restored_including_level_growth": 16.0,
+          "net_mp_restored_including_level_growth": 499.0,
+          "paid_mp": 494.0,
+          "received_hp_damage": 0.0
+        },
+        "JIA": {
+          "net_hp_restored_including_level_growth": 16.0,
+          "net_mp_restored_including_level_growth": 615.0,
+          "paid_mp": 610.0,
+          "received_hp_damage": 0.0
+        }
+      },
+      "paid_mp": {
+        "F03": 686.0,
+        "F07": 494.0,
+        "JIA": 610.0
+      },
+      "shield_cast_counts": {
+        "F03:physician_heal:front": 14,
+        "F03:physician_support:support": 27,
+        "F03:physician_ward:front": 5,
+        "F07:bandit_thrust:front": 13
+      },
+      "shield_cast_events": [
+        {
+          "ability": "physician_ward",
+          "ammo_spent": 0,
+          "direct": true,
+          "id": "F03",
+          "kind": "cast",
+          "manual": true,
+          "paid": 42.0,
+          "shield_after": {
+            "F03": 55.0,
+            "F07": 55.0,
+            "JIA": 55.0
+          },
+          "shield_before": {
+            "F03": 0.0,
+            "F07": 0.0,
+            "JIA": 0.0
+          },
+          "shield_spent": 0.0,
+          "time": 0.516666666666667
+        },
+        {
+          "ability": "physician_heal",
+          "ammo_spent": 0,
+          "direct": true,
+          "id": "F03",
+          "kind": "cast",
+          "manual": true,
+          "paid": 34.0,
+          "shield_after": {
+            "F03": 101.15,
+            "F07": 117.25,
+            "JIA": 118.0
+          },
+          "shield_before": {
+            "F03": 55.0,
+            "F07": 55.0,
+            "JIA": 55.0
+          },
+          "shield_spent": 0.0,
+          "time": 1.01666666666667
+        },
+        {
+          "ability": "physician_heal",
+          "ammo_spent": 0,
+          "direct": true,
+          "id": "F03",
+          "kind": "cast",
+          "manual": true,
+          "paid": 34.0,
+          "shield_after": {
+            "F03": 101.15,
+            "F07": 117.25,
+            "JIA": 144.2
+          },
+          "shield_before": {
+            "F03": 101.15,
+            "F07": 117.25,
+            "JIA": 93.0543337645537
+          },
+          "shield_spent": 0.0,
+          "time": 12.5166666666669
+        },
+        {
+          "ability": "bandit_thrust",
+          "ammo_spent": 0,
+          "direct": true,
+          "id": "F07",
+          "kind": "cast",
+          "manual": true,
+          "paid": 38.0,
+          "shield_after": {
+            "F03": 101.15,
+            "F07": 87.25,
+            "JIA": 144.2
+          },
+          "shield_before": {
+            "F03": 101.15,
+            "F07": 117.25,
+            "JIA": 144.2
+          },
+          "shield_spent": 30.0,
+          "time": 14.0166666666669
+        },
+        {
+          "ability": "physician_heal",
+          "ammo_spent": 0,
+          "direct": true,
+          "id": "F03",
+          "kind": "cast",
+          "manual": true,
+          "paid": 34.0,
+          "shield_after": {
+            "F03": 101.15,
+            "F07": 117.25,
+            "JIA": 144.2
+          },
+          "shield_before": {
+            "F03": 101.15,
+            "F07": 68.0003660322108,
+            "JIA": 144.2
+          },
+          "shield_spent": 0.0,
+          "time": 24.5166666666666
+        },
+        {
+          "ability": "bandit_thrust",
+          "ammo_spent": 0,
+          "direct": true,
+          "id": "F07",
+          "kind": "cast",
+          "manual": true,
+          "paid": 38.0,
+          "shield_after": {
+            "F03": 101.15,
+            "F07": 87.25,
+            "JIA": 144.2
+          },
+          "shield_before": {
+            "F03": 101.15,
+            "F07": 117.25,
+            "JIA": 144.2
+          },
+          "shield_spent": 30.0,
+          "time": 26.0166666666665
+        },
+        {
+          "ability": "physician_heal",
+          "ammo_spent": 0,
+          "direct": true,
+          "id": "F03",
+          "kind": "cast",
+          "manual": true,
+          "paid": 34.0,
+          "shield_after": {
+            "F03": 101.15,
+            "F07": 117.25,
+            "JIA": 144.2
+          },
+          "shield_before": {
+            "F03": 101.15,
+            "F07": 52.6006588579795,
+            "JIA": 119.254333764554
+          },
+          "shield_spent": 0.0,
+          "time": 36.5166666666659
+        },
+        {
+          "ability": "physician_ward",
+          "ammo_spent": 0,
+          "direct": true,
+          "id": "F03",
+          "kind": "cast",
+          "manual": true,
+          "paid": 42.0,
+          "shield_after": {
+            "F03": 101.15,
+            "F07": 117.25,
+            "JIA": 144.2
+          },
+          "shield_before": {
+            "F03": 101.15,
+            "F07": 52.6006588579795,
+            "JIA": 119.254333764554
+          },
+          "shield_spent": 0.0,
+          "time": 36.5166666666659
+        },
+        {
+          "ability": "bandit_thrust",
+          "ammo_spent": 0,
+          "direct": true,
+          "id": "F07",
+          "kind": "cast",
+          "manual": true,
+          "paid": 38.0,
+          "shield_after": {
+            "F03": 101.15,
+            "F07": 87.25,
+            "JIA": 144.2
+          },
+          "shield_before": {
+            "F03": 101.15,
+            "F07": 117.25,
+            "JIA": 144.2
+          },
+          "shield_spent": 30.0,
+          "time": 38.0166666666658
+        },
+        {
+          "ability": "physician_heal",
+          "ammo_spent": 0,
+          "direct": true,
+          "id": "F03",
+          "kind": "cast",
+          "manual": true,
+          "paid": 34.0,
+          "shield_after": {
+            "F03": 101.15,
+            "F07": 106.617496339678,
+            "JIA": 144.2
+          },
+          "shield_before": {
+            "F03": 101.15,
+            "F07": 43.6174963396779,
+            "JIA": 144.2
+          },
+          "shield_spent": 0.0,
+          "time": 48.5166666666652
+        },
+        {
+          "ability": "bandit_thrust",
+          "ammo_spent": 0,
+          "direct": true,
+          "id": "F07",
+          "kind": "cast",
+          "manual": true,
+          "paid": 38.0,
+          "shield_after": {
+            "F03": 101.15,
+            "F07": 76.6174963396779,
+            "JIA": 144.2
+          },
+          "shield_before": {
+            "F03": 101.15,
+            "F07": 106.617496339678,
+            "JIA": 144.2
+          },
+          "shield_spent": 30.0,
+          "time": 50.0166666666651
+        },
+        {
+          "ability": "physician_heal",
+          "ammo_spent": 0,
+          "direct": true,
+          "id": "F03",
+          "kind": "cast",
+          "manual": true,
+          "paid": 34.0,
+          "shield_after": {
+            "F03": 101.15,
+            "F07": 117.25,
+            "JIA": 144.2
+          },
+          "shield_before": {
+            "F03": 101.15,
+            "F07": 76.6174963396779,
+            "JIA": 116.986545924968
+          },
+          "shield_spent": 0.0,
+          "time": 60.5166666666645
+        },
+        {
+          "ability": "bandit_thrust",
+          "ammo_spent": 0,
+          "direct": true,
+          "id": "F07",
+          "kind": "cast",
+          "manual": true,
+          "paid": 38.0,
+          "shield_after": {
+            "F03": 101.15,
+            "F07": 71.8502928257686,
+            "JIA": 144.2
+          },
+          "shield_before": {
+            "F03": 101.15,
+            "F07": 101.850292825769,
+            "JIA": 144.2
+          },
+          "shield_spent": 30.0,
+          "time": 64.0166666666643
+        },
+        {
+          "ability": "physician_heal",
+          "ammo_spent": 0,
+          "direct": true,
+          "id": "F03",
+          "kind": "cast",
+          "manual": true,
+          "paid": 34.0,
+          "shield_after": {
+            "F03": 101.15,
+            "F07": 117.25,
+            "JIA": 144.2
+          },
+          "shield_before": {
+            "F03": 101.15,
+            "F07": 71.8502928257686,
+            "JIA": 144.2
+          },
+          "shield_spent": 0.0,
+          "time": 72.5166666666638
+        },
+        {
+          "ability": "physician_ward",
+          "ammo_spent": 0,
+          "direct": true,
+          "id": "F03",
+          "kind": "cast",
+          "manual": true,
+          "paid": 42.0,
+          "shield_after": {
+            "F03": 101.15,
+            "F07": 117.25,
+            "JIA": 144.2
+          },
+          "shield_before": {
+            "F03": 101.15,
+            "F07": 71.8502928257686,
+            "JIA": 144.2
+          },
+          "shield_spent": 0.0,
+          "time": 72.5166666666638
+        },
+        {
+          "ability": "bandit_thrust",
+          "ammo_spent": 0,
+          "direct": true,
+          "id": "F07",
+          "kind": "cast",
+          "manual": true,
+          "paid": 38.0,
+          "shield_after": {
+            "F03": 101.15,
+            "F07": 87.25,
+            "JIA": 144.2
+          },
+          "shield_before": {
+            "F03": 101.15,
+            "F07": 117.25,
+            "JIA": 144.2
+          },
+          "shield_spent": 30.0,
+          "time": 74.0166666666638
+        },
+        {
+          "ability": "physician_heal",
+          "ammo_spent": 0,
+          "direct": true,
+          "id": "F03",
+          "kind": "cast",
+          "manual": true,
+          "paid": 34.0,
+          "shield_after": {
+            "F03": 101.15,
+            "F07": 117.25,
+            "JIA": 144.2
+          },
+          "shield_before": {
+            "F03": 101.15,
+            "F07": 87.25,
+            "JIA": 130.593272962484
+          },
+          "shield_spent": 0.0,
+          "time": 84.5166666666632
+        },
+        {
+          "ability": "bandit_thrust",
+          "ammo_spent": 0,
+          "direct": true,
+          "id": "F07",
+          "kind": "cast",
+          "manual": true,
+          "paid": 38.0,
+          "shield_after": {
+            "F03": 101.15,
+            "F07": 87.25,
+            "JIA": 144.2
+          },
+          "shield_before": {
+            "F03": 101.15,
+            "F07": 117.25,
+            "JIA": 144.2
+          },
+          "shield_spent": 30.0,
+          "time": 86.0166666666631
+        },
+        {
+          "ability": "physician_heal",
+          "ammo_spent": 0,
+          "direct": true,
+          "id": "F03",
+          "kind": "cast",
+          "manual": true,
+          "paid": 34.0,
+          "shield_after": {
+            "F03": 106.75,
+            "F07": 117.25,
+            "JIA": 144.2
+          },
+          "shield_before": {
+            "F03": 101.15,
+            "F07": 71.8502928257686,
+            "JIA": 116.986545924968
+          },
+          "shield_spent": 0.0,
+          "time": 96.5166666666625
+        },
+        {
+          "ability": "bandit_thrust",
+          "ammo_spent": 0,
+          "direct": true,
+          "id": "F07",
+          "kind": "cast",
+          "manual": true,
+          "paid": 38.0,
+          "shield_after": {
+            "F03": 106.75,
+            "F07": 87.25,
+            "JIA": 144.2
+          },
+          "shield_before": {
+            "F03": 106.75,
+            "F07": 117.25,
+            "JIA": 144.2
+          },
+          "shield_spent": 30.0,
+          "time": 98.0166666666624
+        },
+        {
+          "ability": "physician_heal",
+          "ammo_spent": 0,
+          "direct": true,
+          "id": "F03",
+          "kind": "cast",
+          "manual": true,
+          "paid": 34.0,
+          "shield_after": {
+            "F03": 106.75,
+            "F07": 117.25,
+            "JIA": 144.2
+          },
+          "shield_before": {
+            "F03": 106.75,
+            "F07": 43.7321845794392,
+            "JIA": 105.737170882808
+          },
+          "shield_spent": 0.0,
+          "time": 108.516666666662
+        },
+        {
+          "ability": "physician_ward",
+          "ammo_spent": 0,
+          "direct": true,
+          "id": "F03",
+          "kind": "cast",
+          "manual": true,
+          "paid": 42.0,
+          "shield_after": {
+            "F03": 106.75,
+            "F07": 117.25,
+            "JIA": 144.2
+          },
+          "shield_before": {
+            "F03": 106.75,
+            "F07": 43.7321845794392,
+            "JIA": 105.737170882808
+          },
+          "shield_spent": 0.0,
+          "time": 108.516666666662
+        },
+        {
+          "ability": "bandit_thrust",
+          "ammo_spent": 0,
+          "direct": true,
+          "id": "F07",
+          "kind": "cast",
+          "manual": true,
+          "paid": 38.0,
+          "shield_after": {
+            "F03": 106.75,
+            "F07": 87.25,
+            "JIA": 144.2
+          },
+          "shield_before": {
+            "F03": 106.75,
+            "F07": 117.25,
+            "JIA": 144.2
+          },
+          "shield_spent": 30.0,
+          "time": 110.016666666662
+        },
+        {
+          "ability": "physician_heal",
+          "ammo_spent": 0,
+          "direct": true,
+          "id": "F03",
+          "kind": "cast",
+          "manual": true,
+          "paid": 34.0,
+          "shield_after": {
+            "F03": 106.75,
+            "F07": 117.25,
+            "JIA": 144.2
+          },
+          "shield_before": {
+            "F03": 106.75,
+            "F07": 71.8907710280374,
+            "JIA": 144.2
+          },
+          "shield_spent": 0.0,
+          "time": 120.516666666661
+        },
+        {
+          "ability": "bandit_thrust",
+          "ammo_spent": 0,
+          "direct": true,
+          "id": "F07",
+          "kind": "cast",
+          "manual": true,
+          "paid": 38.0,
+          "shield_after": {
+            "F03": 67.4246088168048,
+            "F07": 87.25,
+            "JIA": 144.2
+          },
+          "shield_before": {
+            "F03": 67.4246088168048,
+            "F07": 117.25,
+            "JIA": 144.2
+          },
+          "shield_spent": 30.0,
+          "time": 122.016666666661
+        },
+        {
+          "ability": "physician_heal",
+          "ammo_spent": 0,
+          "direct": true,
+          "id": "F03",
+          "kind": "cast",
+          "manual": true,
+          "paid": 34.0,
+          "shield_after": {
+            "F03": 92.5992176336096,
+            "F07": 117.25,
+            "JIA": 144.2
+          },
+          "shield_before": {
+            "F03": 28.0992176336096,
+            "F07": 87.25,
+            "JIA": 144.2
+          },
+          "shield_spent": 0.0,
+          "time": 132.516666666664
+        },
+        {
+          "ability": "bandit_thrust",
+          "ammo_spent": 0,
+          "direct": true,
+          "id": "F07",
+          "kind": "cast",
+          "manual": true,
+          "paid": 38.0,
+          "shield_after": {
+            "F03": 92.5992176336096,
+            "F07": 87.25,
+            "JIA": 144.2
+          },
+          "shield_before": {
+            "F03": 92.5992176336096,
+            "F07": 117.25,
+            "JIA": 144.2
+          },
+          "shield_spent": 30.0,
+          "time": 134.016666666665
+        },
+        {
+          "ability": "physician_heal",
+          "ammo_spent": 0,
+          "direct": true,
+          "id": "F03",
+          "kind": "cast",
+          "manual": true,
+          "paid": 34.0,
+          "shield_after": {
+            "F03": 106.75,
+            "F07": 117.25,
+            "JIA": 144.2
+          },
+          "shield_before": {
+            "F03": 77.5692090597314,
+            "F07": 74.4506425233645,
+            "JIA": 103.073054336603
+          },
+          "shield_spent": 0.0,
+          "time": 144.516666666674
+        },
+        {
+          "ability": "physician_ward",
+          "ammo_spent": 0,
+          "direct": true,
+          "id": "F03",
+          "kind": "cast",
+          "manual": true,
+          "paid": 42.0,
+          "shield_after": {
+            "F03": 106.75,
+            "F07": 117.25,
+            "JIA": 144.2
+          },
+          "shield_before": {
+            "F03": 77.5692090597314,
+            "F07": 74.4506425233645,
+            "JIA": 103.073054336603
+          },
+          "shield_spent": 0.0,
+          "time": 144.516666666674
+        },
+        {
+          "ability": "bandit_thrust",
+          "ammo_spent": 0,
+          "direct": true,
+          "id": "F07",
+          "kind": "cast",
+          "manual": true,
+          "paid": 38.0,
+          "shield_after": {
+            "F03": 106.75,
+            "F07": 87.25,
+            "JIA": 144.2
+          },
+          "shield_before": {
+            "F03": 106.75,
+            "F07": 117.25,
+            "JIA": 144.2
+          },
+          "shield_spent": 30.0,
+          "time": 146.016666666675
+        },
+        {
+          "ability": "physician_heal",
+          "ammo_spent": 0,
+          "direct": true,
+          "id": "F03",
+          "kind": "cast",
+          "manual": true,
+          "paid": 34.0,
+          "shield_after": {
+            "F03": 106.75,
+            "F07": 117.25,
+            "JIA": 144.2
+          },
+          "shield_before": {
+            "F03": 91.7199914261218,
+            "F07": 87.25,
+            "JIA": 130.624883840991
+          },
+          "shield_spent": 0.0,
+          "time": 156.516666666683
+        },
+        {
+          "ability": "bandit_thrust",
+          "ammo_spent": 0,
+          "direct": true,
+          "id": "F07",
+          "kind": "cast",
+          "manual": true,
+          "paid": 38.0,
+          "shield_after": {
+            "F03": 0.0,
+            "F07": 0.0,
+            "JIA": 0.0
+          },
+          "shield_before": {
+            "F03": 106.75,
+            "F07": 117.25,
+            "JIA": 144.2
+          },
+          "shield_spent": 30.0,
+          "time": 158.016666666685
+        }
+      ],
+      "per_phase_shield_skill_costs": {
+        "pre_boss": {
+          "F07_shield_spent": 270.0,
+          "F03_paid_mp": 508.0,
+          "F07_paid_mp": 342.0
+        },
+        "B17:0:combat": {
+          "F07_shield_spent": 60.0,
+          "F03_paid_mp": 68.0,
+          "F07_paid_mp": 76.0
+        },
+        "B17:1:combat": {
+          "F07_shield_spent": 60.0,
+          "F03_paid_mp": 110.0,
+          "F07_paid_mp": 76.0
+        }
+      },
+      "boss_damage_by_source": {
+        "F03": 245.76,
+        "F07": 2963.28,
+        "JIA": 2990.96
+      },
+      "boss_damage_by_ability": {
+        "F03_basic": 245.76,
+        "F07_basic": 1224.0,
+        "JIA_basic": 2150.96,
+        "bandit_support": 532.576,
+        "bandit_thrust": 1206.704,
+        "jia_break": 315.0,
+        "jia_sweep": 525.0
+      },
+      "fast_clear": true,
+      "reward_after": {
+        "candidates": [
+          "N10",
+          "F09",
+          "N05",
+          "F10",
+          "F06"
+        ],
+        "node": "B17",
+        "picks": 2,
+        "selected": [
+          "F06",
+          "F09"
+        ]
+      }
+    },
+    {
+      "stage": "B18",
+      "seconds": 50.0166666666651,
+      "phase_seconds": {
+        "B18:0:combat": 19.0000000000002,
+        "B18:1:combat": 29.366666666665,
+        "B18:1:observation": 0.649999999999963,
+        "B18:1:transition": 0.983333333333277
+      },
+      "entry": {
+        "F03": {
+          "cooldowns": {
+            "F03_basic": 0.0,
+            "physician_heal": 8.49999999999993,
+            "physician_support": 5.93333333333333,
+            "physician_ward": 2.49999999999962
+          },
+          "dead": false,
+          "hp": 305.0,
+          "level": 11,
+          "mp": 149.274999999992,
+          "xp": 52.6666666666667
+        },
+        "F07": {
+          "cooldowns": {
+            "F07_basic": 0.0,
+            "armor_guard": 0.0,
+            "bandit_support": 0.516666666666676,
+            "bandit_thrust": 10.0
+          },
+          "dead": false,
+          "hp": 351.0,
+          "level": 12,
+          "mp": 154.2,
+          "xp": 29.0
+        },
+        "JIA": {
+          "cooldowns": {
+            "JIA_basic": 0.0,
+            "armor_guard": 0.0,
+            "jia_break": 0.0,
+            "jia_sweep": 0.0
+          },
+          "dead": false,
+          "hp": 428.0,
+          "level": 14,
+          "mp": 159.2,
+          "xp": 21.0
+        }
+      },
+      "exit": {
+        "F03": {
+          "cooldowns": {
+            "F03_basic": 0.0,
+            "physician_heal": 8.49999999999993,
+            "physician_support": 5.53333333333333,
+            "physician_ward": 2.49999999999962
+          },
+          "dead": false,
+          "hp": 305.0,
+          "level": 11,
+          "mp": 150.774999999992,
+          "xp": 78.6666666666667
+        },
+        "F07": {
+          "cooldowns": {
+            "F07_basic": 0.0948839976204638,
+            "armor_guard": 0.0,
+            "bandit_support": 0.533333333333343,
+            "bandit_thrust": 10.0
+          },
+          "dead": false,
+          "hp": 351.0,
+          "level": 12,
+          "mp": 96.4499999999891,
+          "xp": 55.0
+        },
+        "JIA": {
+          "cooldowns": {
+            "JIA_basic": 0.0,
+            "armor_guard": 0.0,
+            "jia_break": 6.49999999999991,
+            "jia_sweep": 0.0
+          },
+          "dead": false,
+          "hp": 428.0,
+          "level": 14,
+          "mp": 68.4499999999886,
+          "xp": 47.0
+        }
+      },
+      "phase_marks": [
+        {
+          "active": "F03",
+          "bank": 0.0,
+          "form_name": "吕布",
+          "hp": 3040.0,
+          "phase": "B18:0:combat",
+          "player_position": "(1600.0, 896.6667)",
+          "resources": {
+            "F03": {
+              "cooldowns": {
+                "F03_basic": 0.925069380203515,
+                "physician_heal": 8.48333333333326,
+                "physician_support": 5.91666666666667,
+                "physician_ward": 2.48333333333296
+              },
+              "dead": false,
+              "hp": 305.0,
+              "level": 11,
+              "mp": 149.349166666659,
+              "xp": 52.6666666666667
+            },
+            "F07": {
+              "cooldowns": {
+                "F07_basic": 0.0,
+                "armor_guard": 0.0,
+                "bandit_support": 0.500000000000009,
+                "bandit_thrust": 9.98333333333333
+              },
+              "dead": false,
+              "hp": 351.0,
+              "level": 12,
+              "mp": 154.244166666667,
+              "xp": 29.0
+            },
+            "JIA": {
+              "cooldowns": {
+                "JIA_basic": 0.0,
+                "armor_guard": 0.0,
+                "jia_break": 0.0,
+                "jia_sweep": 0.0
+              },
+              "dead": false,
+              "hp": 428.0,
+              "level": 14,
+              "mp": 159.254166666667,
+              "xp": 21.0
+            }
+          },
+          "seconds": 0.0166666666666667,
+          "shields": {
+            "F03": 0.0,
+            "F07": 0.0,
+            "JIA": 0.0
+          }
+        },
+        {
+          "active": "JIA",
+          "bank": 6.89800000000093,
+          "form_name": "四臂鬼神相",
+          "hp": 4560.0,
+          "phase": "B18:1:transition",
+          "player_position": "(1848.869, 1121.791)",
+          "resources": {
+            "F03": {
+              "cooldowns": {
+                "F03_basic": 0.0,
+                "physician_heal": 3.49999999999992,
+                "physician_support": 4.96666666666667,
+                "physician_ward": 0.0
+              },
+              "dead": false,
+              "hp": 305.0,
+              "level": 11,
+              "mp": 195.624999999996,
+              "xp": 52.6666666666667
+            },
+            "F07": {
+              "cooldowns": {
+                "F07_basic": 0.0282173309537971,
+                "armor_guard": 0.0,
+                "bandit_support": 3.5,
+                "bandit_thrust": 5.99999999999991
+              },
+              "dead": false,
+              "hp": 351.0,
+              "level": 12,
+              "mp": 128.3,
+              "xp": 29.0
+            },
+            "JIA": {
+              "cooldowns": {
+                "JIA_basic": 0.153167864141084,
+                "armor_guard": 0.0,
+                "jia_break": 10.0,
+                "jia_sweep": 5.0
+              },
+              "dead": false,
+              "hp": 428.0,
+              "level": 14,
+              "mp": 83.7000000000001,
+              "xp": 21.0
+            }
+          },
+          "seconds": 19.0166666666669,
+          "shields": {
+            "F03": 64.5,
+            "F07": 34.5,
+            "JIA": 64.5
+          }
+        },
+        {
+          "active": "JIA",
+          "bank": 195.976400000001,
+          "form_name": "四臂鬼神相",
+          "hp": 4560.0,
+          "phase": "B18:1:observation",
+          "player_position": "(1848.579, 1132.537)",
+          "resources": {
+            "F03": {
+              "cooldowns": {
+                "F03_basic": 0.0,
+                "physician_heal": 2.51666666666659,
+                "physician_support": 3.98333333333334,
+                "physician_ward": 0.0
+              },
+              "dead": false,
+              "hp": 305.0,
+              "level": 11,
+              "mp": 200.000833333329,
+              "xp": 52.6666666666667
+            },
+            "F07": {
+              "cooldowns": {
+                "F07_basic": 0.0,
+                "armor_guard": 0.0,
+                "bandit_support": 2.51666666666667,
+                "bandit_thrust": 5.01666666666658
+              },
+              "dead": false,
+              "hp": 351.0,
+              "level": 12,
+              "mp": 130.905833333333,
+              "xp": 29.0
+            },
+            "JIA": {
+              "cooldowns": {
+                "JIA_basic": 0.503167864141084,
+                "armor_guard": 0.0,
+                "jia_break": 9.01666666666662,
+                "jia_sweep": 4.01666666666667
+              },
+              "dead": false,
+              "hp": 428.0,
+              "level": 14,
+              "mp": 86.895833333333,
+              "xp": 21.0
+            }
+          },
+          "seconds": 20.0000000000001,
+          "shields": {
+            "F03": 64.5,
+            "F07": 34.5,
+            "JIA": 64.5
+          }
+        },
+        {
+          "active": "JIA",
+          "bank": 0.0,
+          "form_name": "四臂鬼神相",
+          "hp": 4269.4844,
+          "phase": "B18:1:combat",
+          "player_position": "(1848.579, 1268.705)",
+          "resources": {
+            "F03": {
+              "cooldowns": {
+                "F03_basic": 0.0,
+                "physician_heal": 1.86666666666659,
+                "physician_support": 3.33333333333334,
+                "physician_ward": 0.0
+              },
+              "dead": false,
+              "hp": 305.0,
+              "level": 11,
+              "mp": 200.7,
+              "xp": 52.6666666666667
+            },
+            "F07": {
+              "cooldowns": {
+                "F07_basic": 0.0,
+                "armor_guard": 0.0,
+                "bandit_support": 1.86666666666667,
+                "bandit_thrust": 4.36666666666658
+              },
+              "dead": false,
+              "hp": 351.0,
+              "level": 12,
+              "mp": 132.628333333333,
+              "xp": 29.0
+            },
+            "JIA": {
+              "cooldowns": {
+                "JIA_basic": 0.519834530807751,
+                "armor_guard": 0.0,
+                "jia_break": 8.36666666666659,
+                "jia_sweep": 3.36666666666667
+              },
+              "dead": false,
+              "hp": 428.0,
+              "level": 14,
+              "mp": 89.0083333333328,
+              "xp": 21.0
+            }
+          },
+          "seconds": 20.6500000000001,
+          "shields": {
+            "F03": 64.5,
+            "F07": 34.5,
+            "JIA": 64.5
+          }
+        }
+      ],
+      "shield_generated_observed_lower_bound": {
+        "F03": 106.75,
+        "F07": 212.85,
+        "JIA": 149.8
+      },
+      "shield_absorbed_observed_lower_bound": {
+        "F03": 0.0,
+        "F07": 0.0,
+        "JIA": 0.0
+      },
+      "shield_before_terminal_frame": {
+        "F03": 106.75,
+        "F07": 122.85,
+        "JIA": 149.8
+      },
+      "shield_spent": {
+        "F03": 0.0,
+        "F07": 120.0,
+        "JIA": 0.0
+      },
+      "hp_damage": {},
+      "resource_balance": {
+        "F03": {
+          "net_hp_restored_including_level_growth": 0.0,
+          "net_mp_restored_including_level_growth": 179.5,
+          "paid_mp": 178.0,
+          "received_hp_damage": 0.0
+        },
+        "F07": {
+          "net_hp_restored_including_level_growth": 0.0,
+          "net_mp_restored_including_level_growth": 94.2499999999891,
+          "paid_mp": 152.0,
+          "received_hp_damage": 0.0
+        },
+        "JIA": {
+          "net_hp_restored_including_level_growth": 0.0,
+          "net_mp_restored_including_level_growth": 141.249999999989,
+          "paid_mp": 232.0,
+          "received_hp_damage": 0.0
+        }
+      },
+      "paid_mp": {
+        "F03": 178.0,
+        "F07": 152.0,
+        "JIA": 232.0
+      },
+      "shield_cast_counts": {
+        "F03:physician_heal:front": 4,
+        "F03:physician_support:support": 8,
+        "F03:physician_ward:front": 1,
+        "F07:bandit_thrust:front": 4
+      },
+      "shield_cast_events": [
+        {
+          "ability": "physician_heal",
+          "ammo_spent": 0,
+          "direct": true,
+          "id": "F03",
+          "kind": "cast",
+          "manual": true,
+          "paid": 34.0,
+          "shield_after": {
+            "F03": 64.5,
+            "F07": 64.5,
+            "JIA": 64.5
+          },
+          "shield_before": {
+            "F03": 0.0,
+            "F07": 0.0,
+            "JIA": 0.0
+          },
+          "shield_spent": 0.0,
+          "time": 12.5166666666669
+        },
+        {
+          "ability": "bandit_thrust",
+          "ammo_spent": 0,
+          "direct": true,
+          "id": "F07",
+          "kind": "cast",
+          "manual": true,
+          "paid": 38.0,
+          "shield_after": {
+            "F03": 64.5,
+            "F07": 34.5,
+            "JIA": 64.5
+          },
+          "shield_before": {
+            "F03": 64.5,
+            "F07": 64.5,
+            "JIA": 64.5
+          },
+          "shield_spent": 30.0,
+          "time": 15.016666666667
+        },
+        {
+          "ability": "physician_heal",
+          "ammo_spent": 0,
+          "direct": true,
+          "id": "F03",
+          "kind": "cast",
+          "manual": true,
+          "paid": 34.0,
+          "shield_after": {
+            "F03": 106.75,
+            "F07": 99.0,
+            "JIA": 129.0
+          },
+          "shield_before": {
+            "F03": 64.5,
+            "F07": 34.5,
+            "JIA": 64.5
+          },
+          "shield_spent": 0.0,
+          "time": 24.5166666666666
+        },
+        {
+          "ability": "bandit_thrust",
+          "ammo_spent": 0,
+          "direct": true,
+          "id": "F07",
+          "kind": "cast",
+          "manual": true,
+          "paid": 38.0,
+          "shield_after": {
+            "F03": 106.75,
+            "F07": 69.0,
+            "JIA": 129.0
+          },
+          "shield_before": {
+            "F03": 106.75,
+            "F07": 99.0,
+            "JIA": 129.0
+          },
+          "shield_spent": 30.0,
+          "time": 28.5166666666663
+        },
+        {
+          "ability": "physician_heal",
+          "ammo_spent": 0,
+          "direct": true,
+          "id": "F03",
+          "kind": "cast",
+          "manual": true,
+          "paid": 34.0,
+          "shield_after": {
+            "F03": 106.75,
+            "F07": 122.85,
+            "JIA": 149.8
+          },
+          "shield_before": {
+            "F03": 106.75,
+            "F07": 69.0,
+            "JIA": 129.0
+          },
+          "shield_spent": 0.0,
+          "time": 36.5166666666659
+        },
+        {
+          "ability": "physician_ward",
+          "ammo_spent": 0,
+          "direct": true,
+          "id": "F03",
+          "kind": "cast",
+          "manual": true,
+          "paid": 42.0,
+          "shield_after": {
+            "F03": 106.75,
+            "F07": 122.85,
+            "JIA": 149.8
+          },
+          "shield_before": {
+            "F03": 106.75,
+            "F07": 69.0,
+            "JIA": 129.0
+          },
+          "shield_spent": 0.0,
+          "time": 36.5166666666659
+        },
+        {
+          "ability": "bandit_thrust",
+          "ammo_spent": 0,
+          "direct": true,
+          "id": "F07",
+          "kind": "cast",
+          "manual": true,
+          "paid": 38.0,
+          "shield_after": {
+            "F03": 106.75,
+            "F07": 92.85,
+            "JIA": 149.8
+          },
+          "shield_before": {
+            "F03": 106.75,
+            "F07": 122.85,
+            "JIA": 149.8
+          },
+          "shield_spent": 30.0,
+          "time": 40.0166666666657
+        },
+        {
+          "ability": "physician_heal",
+          "ammo_spent": 0,
+          "direct": true,
+          "id": "F03",
+          "kind": "cast",
+          "manual": true,
+          "paid": 34.0,
+          "shield_after": {
+            "F03": 106.75,
+            "F07": 122.85,
+            "JIA": 149.8
+          },
+          "shield_before": {
+            "F03": 106.75,
+            "F07": 92.85,
+            "JIA": 149.8
+          },
+          "shield_spent": 0.0,
+          "time": 48.5166666666652
+        },
+        {
+          "ability": "bandit_thrust",
+          "ammo_spent": 0,
+          "direct": true,
+          "id": "F07",
+          "kind": "cast",
+          "manual": true,
+          "paid": 38.0,
+          "shield_after": {
+            "F03": 0.0,
+            "F07": 0.0,
+            "JIA": 0.0
+          },
+          "shield_before": {
+            "F03": 106.75,
+            "F07": 122.85,
+            "JIA": 149.8
+          },
+          "shield_spent": 30.0,
+          "time": 50.0166666666651
+        }
+      ],
+      "per_phase_shield_skill_costs": {
+        "B18:0:combat": {
+          "F07_shield_spent": 30.0,
+          "F03_paid_mp": 34.0,
+          "F07_paid_mp": 38.0
+        },
+        "B18:1:combat": {
+          "F07_shield_spent": 90.0,
+          "F03_paid_mp": 144.0,
+          "F07_paid_mp": 114.0
+        }
+      },
+      "boss_damage_by_source": {
+        "F03": 453.024000000001,
+        "F07": 2977.122,
+        "JIA": 4169.854
+      },
+      "boss_damage_by_ability": {
+        "F03_basic": 453.024000000001,
+        "F07_basic": 936.768000000001,
+        "JIA_basic": 2481.654,
+        "bandit_support": 508.9392,
+        "bandit_thrust": 1531.4148,
+        "jia_break": 1321.2,
+        "jia_sweep": 367.0
+      },
+      "fast_clear": true,
+      "reward_after": {
+        "candidates": [
+          "M05",
+          "F07",
+          "N02",
+          "N17",
+          "N01",
+          "N16",
+          "M02"
+        ],
+        "node": "B18",
+        "picks": 3,
+        "selected": [
+          "F07",
+          "N16",
+          "N17"
+        ]
+      }
+    }
+  ],
+  "acceptance": {
+    "actually_selected_F03_at_B03": true,
+    "actually_selected_F07_at_B07": true,
+    "F03_followed_for_actual_growth": true,
+    "F03_F07_together_since_B08": true,
+    "B18_entry_levels": {
+      "F03": 11,
+      "F07": 12,
+      "JIA": 14
+    },
+    "B18_full_30_shield_payments": 4,
+    "B18_F03_paid_mp": 178,
+    "B18_F07_paid_mp": 152,
+    "B18_thrust_actual_damage": 1531.4148,
+    "B18_fast_clear": true,
+    "no_injected_characters_levels_equipment_or_resources": true
+  },
+  "limits": [
+    "One deterministic campaign reward seed and one input strategy; reproducible simulated route, not human balance acceptance.",
+    "Shield generation/absorption counters are observed lower bounds from actual 60 Hz shield changes, adjusted for recorded skill spending. Same-tick gains and absorption may cancel; no exact gross generation claim is made.",
+    "HP damage zero does not mean zero incoming hits: shields absorb substantial damage in B15–17.",
+    "Shield before terminal frame is the last live sample; temporary shields clear on victory and do not carry to B18. HP, MP, levels, XP and cooldowns preserve real records.",
+    "The final B18 first successful physician heal occurs at 12.5167s because cooldowns genuinely carry; the route does not reset or refill resources at entry.",
+    "Existing frozen short/explore routes lacked F03 due actual card selection. This independent earned route closes that specific grown-shield-build coverage gap."
+  ]
+}

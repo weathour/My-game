@@ -727,7 +727,7 @@ const STAGES := {
 		"spawn_interval": 1.35,
 		"enemy_cap": 42,
 		"boss_hp": 4300.0,
-		"boss_name": "曹休·鬼猎兽相",
+		"boss_name": "曹休",
 		"seed": 1715,
 		"map": "stone",
 		"enemy_hp": 2.15,
@@ -779,7 +779,7 @@ const STAGES := {
 		"spawn_interval": 1.35,
 		"enemy_cap": 42,
 		"boss_hp": 4800.0,
-		"boss_name": "曹纯·虎豹甲骑巨相",
+		"boss_name": "曹纯",
 		"seed": 1716,
 		"map": "stone",
 		"enemy_hp": 2.25,
@@ -831,7 +831,7 @@ const STAGES := {
 		"spawn_interval": 1.35,
 		"enemy_cap": 42,
 		"boss_hp": 6200.0,
-		"boss_name": "张辽·夜叉裂阵将相",
+		"boss_name": "张辽",
 		"seed": 1717,
 		"map": "stone",
 		"enemy_hp": 2.35,
@@ -877,56 +877,33 @@ const STAGES := {
 		]
 	},
 	"B18": {
-		"boss_time": 120.0,
-		"boss_kills": 64,
-		"bonus_time": 220.0,
+		"encounter_mode": "boss_duel",
+		"fields_enabled": false,
+		"boss_time": 0.0,
+		"boss_kills": 0,
+		"bonus_time": 100.0,
 		"spawn_interval": 1.35,
-		"enemy_cap": 42,
+		"enemy_cap": 0,
 		"boss_hp": 7600.0,
-		"boss_name": "吕布·四臂鬼神相",
+		"boss_name": "吕布",
 		"seed": 1718,
 		"map": "stone",
 		"enemy_hp": 2.5,
 		"enemy_damage": 1.8,
 		"boss_definition": "B18",
-		"field_elites": [
-			"L06",
-			"L02"
-		],
+		"field_elites": [],
 		"action_budget": {
 			"major": 2,
 			"melee": 2
 		},
-		"derivative_cap": 6,
-		"boss_derivative_cap": 4,
+		"derivative_cap": 0,
+		"boss_derivative_cap": 0,
 		"role_caps": {
 			"support": 1,
 			"heavy": 2,
 			"ranged": 4
 		},
-		"waves": [
-			{
-				"at": 0.0,
-				"count": 1,
-				"cycle": [
-					"E12",
-					"E04",
-					"E07",
-					"E02"
-				]
-			},
-			{
-				"at": 34.0,
-				"interval": 1.35,
-				"count": 2,
-				"cycle": [
-					"E11",
-					"E05",
-					"E08",
-					"E03"
-				]
-			}
-		]
+		"waves": []
 	}
 }
 
@@ -940,11 +917,18 @@ static func validate() -> Array:
 		var value: Dictionary = STAGES[id]
 		var boss := ENEMIES.definition(value.boss_definition)
 		if boss.is_empty() or boss.rank != "boss": errors.append(id + ": invalid boss")
-		if value.boss_hp <= 0 or value.boss_time <= 0 or value.boss_kills <= 0: errors.append(id + ": invalid gate")
-		if value.field_elites.size() != 2: errors.append(id + ": two reward slot profiles required")
+		var duel := str(value.get("encounter_mode", "")) == "boss_duel"
+		if value.boss_hp <= 0: errors.append(id + ": invalid boss health")
+		if duel:
+			if value.boss_time != 0 or value.boss_kills != 0: errors.append(id + ": duel must begin immediately")
+			if value.get("fields_enabled", true) or not value.field_elites.is_empty() or not value.waves.is_empty(): errors.append(id + ": duel must not offer reinforcements or fields")
+			if value.enemy_cap != 0 or value.derivative_cap != 0 or value.boss_derivative_cap != 0: errors.append(id + ": duel population must contain only its boss")
+		else:
+			if value.boss_time <= 0 or value.boss_kills <= 0: errors.append(id + ": invalid gate")
+			if value.field_elites.size() != 2: errors.append(id + ": two reward slot profiles required")
 		for elite_id in value.field_elites:
 			if ENEMIES.definition(elite_id).get("rank") != "field_elite": errors.append(id + ": invalid field elite")
-		if value.enemy_cap < 28 or value.enemy_cap > 42: errors.append(id + ": ordinary cap outside authored range")
+		if not duel and (value.enemy_cap < 28 or value.enemy_cap > 42): errors.append(id + ": ordinary cap outside authored range")
 		if value.action_budget.major != (1 if id in ["B01", "B02"] else 2): errors.append(id + ": action budget mismatch")
 		for wave in value.waves:
 			if wave.cycle.is_empty(): errors.append(id + ": empty wave")

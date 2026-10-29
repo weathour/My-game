@@ -30,6 +30,21 @@ func capture(name: String) -> void:
 	DirAccess.make_dir_recursive_absolute(capture_dir)
 	viewport.get_texture().get_image().save_png(capture_dir.path_join(name + ".png"))
 
+func check_viewport_readability(actor: Node2D, id: String, resolution: Vector2i) -> void:
+	var canvas: Control = view.canvas
+	var base_scale := minf(resolution.x / 1280.0, resolution.y / 720.0)
+	expect(canvas.size == Vector2(resolution), id + " battlefield uses the actual resolution")
+	# Authored 80px body is 72 world units, independent of framing or current pose.
+	expect(actor.scale.is_equal_approx(Vector2.ONE * .9) and actor.position.is_zero_approx() and actor.sprite.position.is_equal_approx(Vector2(0,-80)), id + " resizing preserves physical body and foot anchor")
+	var projected_body := 80.0 * actor.global_transform.y.length()
+	expect(is_equal_approx(projected_body, 72.0 * canvas.world_scale) and is_equal_approx(canvas.world_scale, canvas.camera.scale), id + " actual body projection follows the active camera")
+	expect(projected_body >= 32.4 - .01 and projected_body <= 72.0 * base_scale + .01, id + " body remains within the camera readability range at this resolution")
+	var texture: Texture2D = actor.sprite.sprite_frames.get_frame_texture(actor.sprite.animation, actor.sprite.frame)
+	var opaque := Rect2(texture.get_image().get_used_rect())
+	opaque.position -= texture.get_size() * .5
+	var screen_bounds: Rect2 = actor.sprite.global_transform * opaque
+	expect(screen_bounds.has_area() and Rect2(Vector2.ZERO,Vector2(resolution)).encloses(screen_bounds), id + " actual visible pose stays inside the resized battlefield")
+
 func run() -> void:
 	expect(ProjectSettings.globalize_path("user://").begins_with("/tmp/"), "isolated test storage")
 	if failures: quit(1); return
@@ -89,17 +104,27 @@ func run() -> void:
 		b.set_paused(true)
 		view.canvas.refresh(false)
 		var progress: float = actor.sprite.frame_progress
+		var paused_scale: float = view.canvas.world_scale
+		var paused_origin: Vector2 = view.canvas.origin
 		await create_timer(.1).timeout
 		expect(actor.sprite.frame == active_frame and is_equal_approx(actor.sprite.frame_progress, progress), id + " pause freezes clip")
+		expect(is_equal_approx(view.canvas.world_scale, paused_scale) and view.canvas.origin == paused_origin, id + " pause freezes camera framing")
 		await capture(id + "-attack")
 		if id in ["F02", "F06", "F09"]:
+			var paused_sim_elapsed: float = b.director.elapsed
+			var paused_camera_clock: float = view.canvas.camera.clock
+			var paused_feedback_clock: float = view.canvas.boss_feedback.clock
+			var paused_position: Vector2 = b.position
 			for resolution in [Vector2i(960,540),Vector2i(1280,720),Vector2i(1920,1080)]:
 				viewport.size = resolution
 				view.size = Vector2(resolution)
 				await frames()
 				view.refresh()
 				view.canvas.refresh(false)
-				expect(is_equal_approx(view.canvas.world_scale, resolution.x / 1280.0), id + " viewport scale follows actual resolution")
+				check_viewport_readability(actor, id, resolution)
+				expect(b.paused and is_equal_approx(b.director.elapsed,paused_sim_elapsed) and b.position == paused_position, id + " resizing while paused preserves simulation time and position")
+				expect(actor.sprite.frame == active_frame and is_equal_approx(actor.sprite.frame_progress, progress), id + " resizing while paused preserves the exact animation pose")
+				expect(is_equal_approx(view.canvas.camera.clock,paused_camera_clock) and is_equal_approx(view.canvas.boss_feedback.clock,paused_feedback_clock), id + " resizing while paused does not advance presentation clocks")
 				await frames()
 				await capture("%s-battle-%dx%d" % [id,resolution.x,resolution.y])
 			viewport.size = Vector2i(1280,720)

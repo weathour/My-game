@@ -4,9 +4,16 @@ const EMMA := preload("res://assets/ui/chronicle/emma.png")
 const JIA := preload("res://assets/ui/chronicle/cards/jia.png")
 const ROOT := "res://assets/ui/chronicle/cards/"
 const STANDING_ROOT := "res://assets/ui/chronicle/characters/"
+const HUMAN_IDS := {"M01":"B18_human", "M02":"B17_human", "M03":"M03_human", "M04":"M04_human", "M05":"B16_human", "M06":"B15_human"}
 # Source-pixel viewports, composed individually around hair, face and identifying props.
 # The independent RGBA masters remain untouched; standing() always returns the full image.
 const FRAMING := {
+	"M01":{"card":Rect2(325,180,610,800), "dialogue":Rect2(170,100,900,1180)},
+	"M02":{"card":Rect2(235,110,650,810), "dialogue":Rect2(150,50,850,1250)},
+	"M03":{"card":Rect2(270,20,660,820), "dialogue":Rect2(180,10,810,1250)},
+	"M04":{"card":Rect2(260,0,650,820), "dialogue":Rect2(170,0,820,1250)},
+	"M05":{"card":Rect2(130,150,660,820), "dialogue":Rect2(80,80,900,1300)},
+	"M06":{"card":Rect2(220,70,650,820), "dialogue":Rect2(120,30,880,1300)},
 	"F02":{"card":Rect2(260,20,560,760), "dialogue":Rect2(200,20,700,1050)},
 	"F03":{"card":Rect2(230,0,600,740), "dialogue":Rect2(220,0,620,1040)},
 	"F04":{"card":Rect2(240,24,600,760), "dialogue":Rect2(200,24,680,1040)},
@@ -23,6 +30,9 @@ static var standing_cache: Dictionary = {}
 static var dialogue_cache: Dictionary = {}
 
 static func standing(id: String) -> Texture2D:
+	if HUMAN_IDS.has(id):
+		if not standing_cache.has(id): standing_cache[id] = load("res://assets/enemies/baimen/" + str(HUMAN_IDS[id]) + "/portrait.png")
+		return standing_cache[id]
 	if FRAMING.has(id):
 		if not standing_cache.has(id): standing_cache[id] = load(STANDING_ROOT + id + "-standing.png")
 		return standing_cache[id]

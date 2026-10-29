@@ -1,0 +1,51 @@
+{
+  "tool": "built-in image_gen.imagegen",
+  "reference_root": "design/baimen-enemies-20261028/characters",
+  "human_aesthetic_acceptance": "pending user review",
+  "sources": [
+    {
+      "path": "design/boss-forms-20261029/characters/B15_human/source/actions-v1.png",
+      "sha256": "c2fdb68f8f9a74c34946663a640c63e879066eac129a6ec0dd58cd3c2b45e5db",
+      "selection": "selected",
+      "generated_origin": "/home/weathour/.codex/generated_images/01a186cc-4bd1-7152-9d88-76057053ee5d/exec-7eb51cec-7bb3-4664-a8ee-6720b46a61ad.png"
+    },
+    {
+      "path": "design/boss-forms-20261029/characters/B15_human/source/master-raw-v1.png",
+      "sha256": "5976e9779f8189a918cc87fc542e3161c3825dd6ca58f3e36df846d4b84752db",
+      "selection": "retained_unselected",
+      "generated_origin": "same bytes as original master-v1"
+    },
+    {
+      "path": "design/boss-forms-20261029/characters/B15_human/source/master-v1.png",
+      "sha256": "5976e9779f8189a918cc87fc542e3161c3825dd6ca58f3e36df846d4b84752db",
+      "selection": "selected",
+      "generated_origin": "/home/weathour/.codex/generated_images/01a186cc-4bd1-7152-9d88-76057053ee5d/exec-ee684d3d-c66b-4cfd-8a5d-385cf1d9e398.png"
+    }
+  ],
+  "references": [
+    {
+      "path": "design/baimen-enemies-20261028/characters/B15/references/current-identity.png",
+      "sha256": "5973420b578977f39f863ea06a8a77e1b0695c8f6ef2ba34876cf75b3d6d7dda",
+      "role": "identity_face"
+    },
+    {
+      "path": "design/baimen-enemies-20261028/characters/B15/source/master-v1.png",
+      "sha256": "989d3d4c1100fd12ab2697a83d37afb6accb752fd81169cb295b571e13f1efe5",
+      "role": "war_form_continuity"
+    }
+  ],
+  "prompts": [
+    {
+      "path": "design/boss-forms-20261029/characters/B15_human/actions-v1-prompt.txt",
+      "sha256": "9ff82a6386eb29cecfceef83691747e5475f3aa431b2cde03e85cf181c54262c"
+    },
+    {
+      "path": "design/boss-forms-20261029/characters/B15_human/master-v1-prompt.txt",
+      "sha256": "44b8373db2e22e6d4a5c38d8b0ee53aeb8b51c54a7174ee51d26765af3ea5045"
+    }
+  ],
+  "selection_notes": {
+    "master-v1": "identity and pose reviewed; user aesthetic approval remains pending",
+    "actions-v1": "16 separate actual alpha-connected bodies; fixed scale; manually reviewed foot/pelvis anchors; no grid crop"
+  }
+}

@@ -1,6 +1,8 @@
 extends RefCounted
 ## Immutable authored encounter definitions. Base stats precede the stage multiplier.
 ## Elite rule identity never determines card/equipment reward ownership.
+## B15–B18 attacks are authored only in boss_forms.gd; definition() projects the first form.
+const BOSS_FORMS := preload("res://scripts/content/boss_forms.gd")
 const DEFINITIONS := {
 	"E01": {
 		"id": "E01",
@@ -1783,69 +1785,15 @@ const DEFINITIONS := {
 		"radius": 43,
 		"xp": 40,
 		"body_height": 204,
-		"attacks": [
-			{
-				"id": "fan",
-				"action": "fan",
-				"shape": "fan",
-				"range": 580,
-				"windup": 1.3,
-				"recovery": 1.5,
-				"damage_scale": 1.0,
-				"count": 5,
-				"spread": 0.9,
-				"speed": 285,
-				"life": 2.3,
-				"major": true
-			},
-			{
-				"id": "hunter_step_1",
-				"action": "charge",
-				"shape": "line",
-				"range": 300,
-				"windup": 1.15,
-				"recovery": 1.5,
-				"damage_scale": 1.0,
-				"length": 210,
-				"half_width": 28,
-				"major": true
-			},
-			{
-				"id": "hunter_step_2",
-				"action": "charge",
-				"shape": "line",
-				"range": 280,
-				"windup": 1.3,
-				"recovery": 1.8,
-				"damage_scale": 1.0,
-				"length": 180,
-				"half_width": 28,
-				"major": true
-			},
-			{
-				"id": "command",
-				"action": "command",
-				"shape": "disc",
-				"range": 360,
-				"windup": 1.2,
-				"recovery": 2.3,
-				"damage_scale": 1.0,
-				"count": 3,
-				"duration": 2.5,
-				"major": true
-			}
-		],
+		"attacks": [],
 		"params": {
-			"role": "boss",
-			"command_limit": 3,
-			"spawn_limit": 4,
-			"anchor_limit": 2
+			"role": "boss"
 		},
 		"elite_rule_id": "",
-		"description": "曹休以弓与鬼猎兽相作战，远射后伺机突进并指挥部众。",
+		"description": "曹休以瞄准射击和扇形箭矢压制远处，随后直线突进。",
 		"counterplay": [
-			"避开瞄准与突进路线，趁其回气反击。",
-			"先清部众，再接近曹休施压。"
+			"横移离开瞄准线，从扇箭间隙接近。",
+			"避开突进路线，趁曹休收势反击。"
 		],
 		"portrait_path": "",
 		"actor_path": "",
@@ -1867,44 +1815,15 @@ const DEFINITIONS := {
 		"radius": 44,
 		"xp": 40,
 		"body_height": 218,
-		"attacks": [
-			{
-				"id": "charge",
-				"action": "charge",
-				"shape": "line",
-				"range": 620,
-				"windup": 1.6,
-				"recovery": 2.5,
-				"damage_scale": 1.0,
-				"length": 480,
-				"half_width": 40,
-				"major": true
-			},
-			{
-				"id": "summon",
-				"action": "summon",
-				"shape": "disc",
-				"range": 300,
-				"windup": 1.4,
-				"recovery": 2.2,
-				"damage_scale": 1.0,
-				"spawn_id": "D01",
-				"spawn_count": 2,
-				"limit": 4,
-				"major": true
-			}
-		],
+		"attacks": [],
 		"params": {
-			"role": "boss",
-			"command_limit": 3,
-			"spawn_limit": 4,
-			"anchor_limit": 2
+			"role": "boss"
 		},
 		"elite_rule_id": "",
-		"description": "曹纯与虎豹甲骑化为一体，蓄势后长距离冲阵。",
+		"description": "曹纯持枪直冲，穿插近身横斩，再次发起冲击。",
 		"counterplay": [
-			"诱偏冲锋，待其回位时反击。",
-			"先清护卫，为避让长冲留出空间。"
+			"看清冲锋方向，横移离开路线。",
+			"避开横斩后，趁收势接近攻击。"
 		],
 		"portrait_path": "",
 		"actor_path": "",
@@ -1926,49 +1845,19 @@ const DEFINITIONS := {
 		"radius": 45,
 		"xp": 40,
 		"body_height": 220,
-		"attacks": [
-			{
-				"id": "charge",
-				"action": "charge",
-				"shape": "line",
-				"range": 430,
-				"windup": 1.4,
-				"recovery": 1.5,
-				"damage_scale": 1.0,
-				"length": 320,
-				"half_width": 34,
-				"major": true
-			},
-			{
-				"id": "collaboration",
-				"action": "collaboration",
-				"shape": "marker",
-				"range": 420,
-				"windup": 1.4,
-				"recovery": 2.5,
-				"damage_scale": 1.0,
-				"radius": 75,
-				"delay": 0.8,
-				"spawn_count": 2,
-				"limit": 4,
-				"major": true
-			}
-		],
+		"attacks": [],
 		"params": {
 			"role": "boss",
-			"command_limit": 3,
-			"spawn_limit": 4,
-			"anchor_limit": 2,
 			"collaborators": [
 				"M03_WAR",
 				"M04_WAR"
 			]
 		},
 		"elite_rule_id": "",
-		"description": "张辽主攻，高顺或陈宫轮流协同，随后共同回气。",
+		"description": "张辽以突进和横斩主攻，高顺与陈宫轮流协同。",
 		"counterplay": [
-			"避过一轮协同，在共同回气时集中攻击张辽。",
-			"清理真正的援军，保持接近首领的空间。"
+			"高顺列阵时离开路线；陈宫布阵时离开落点。",
+			"避过协同后，趁张辽回气反击。"
 		],
 		"portrait_path": "",
 		"actor_path": "",
@@ -1990,58 +1879,15 @@ const DEFINITIONS := {
 		"radius": 46,
 		"xp": 60,
 		"body_height": 248,
-		"attacks": [
-			{
-				"id": "swipe",
-				"action": "swipe",
-				"shape": "sector",
-				"range": 180,
-				"windup": 1.3,
-				"recovery": 1.5,
-				"damage_scale": 1.0,
-				"radius": 180,
-				"spread": 2.2,
-				"major": true
-			},
-			{
-				"id": "charge",
-				"action": "charge",
-				"shape": "line",
-				"range": 520,
-				"windup": 1.5,
-				"recovery": 1.8,
-				"damage_scale": 1.0,
-				"length": 390,
-				"half_width": 38,
-				"major": true
-			},
-			{
-				"id": "slam",
-				"action": "slam",
-				"shape": "disc",
-				"range": 190,
-				"windup": 1.5,
-				"recovery": 2.5,
-				"damage_scale": 1.0,
-				"radius": 190,
-				"major": true
-			}
-		],
+		"attacks": [],
 		"params": {
-			"role": "boss",
-			"command_limit": 3,
-			"spawn_limit": 4,
-			"anchor_limit": 2,
-			"phase_thresholds": [
-				0.7,
-				0.35
-			]
+			"role": "boss"
 		},
 		"elite_rule_id": "",
-		"description": "吕布以方天戟、双翎与鬼神战相施展横扫、突进和连段。",
+		"description": "吕布独自持戟迎战，以横扫、突进和落戟交替进攻。",
 		"counterplay": [
-			"诱开突进，在其落点附近反击。",
-			"躲过长连段后利用回气集中进攻。"
+			"横移避开突进路线，离开落戟标记。",
+			"避过戟刃横扫，趁收势接近反击。"
 		],
 		"portrait_path": "",
 		"actor_path": "",
@@ -2283,7 +2129,16 @@ const DEFINITIONS := {
 }
 
 static func definition(id: String) -> Dictionary:
-	return DEFINITIONS.get(id, {}).duplicate(true)
+	var value: Dictionary = DEFINITIONS.get(id, {}).duplicate(true)
+	var authored := BOSS_FORMS.forms(id)
+	if not authored.is_empty():
+		value.forms = authored
+		value.attacks = authored[0].attacks.duplicate(true)
+		value.params.phase_hp_fraction = 0.4
+		value.params.transition_duration = 1.0
+		value.params.phase_observation_duration = 0.65
+		value.params.solo = id == "B18"
+	return value
 
 static func ordinary_ids() -> Array:
 	return ["E01", "E02", "E03", "E04", "E05", "E06", "E07", "E08", "E09", "E10", "E11", "E12"]

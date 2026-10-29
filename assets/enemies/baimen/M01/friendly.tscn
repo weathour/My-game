@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3]
+[ext_resource type="Script" path="res://assets/enemies/baimen/human_friendly_visual.gd" id="1"]
+[node name="M01Friendly" type="Node2D"]
+texture_filter = 1
+script = ExtResource("1")
+human_id = "B18_human"
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

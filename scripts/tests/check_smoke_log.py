@@ -12,8 +12,14 @@ ERROR = re.compile(
 )
 SUCCESS = re.compile(
     r"(?:[A-Za-z0-9_]+_OK|[A-Za-z0-9_]+: (?:OK|PASS)|"
-    r"[A-Za-z0-9_]+ PASS(?: (?:checks=[0-9]+ )?failures=0)?)$"
+    r"[A-Za-z0-9_]+ PASS)"
+    r"(?: [A-Za-z][A-Za-z0-9_]*=[A-Za-z0-9_./:+-]+)*$"
 )
+SUCCESS_CANDIDATE = re.compile(
+    r"(?:[A-Za-z0-9_]+_OK|[A-Za-z0-9_]+: (?:OK|PASS)|[A-Za-z0-9_]+ PASS)(?=$| )"
+)
+KEY_VALUE = re.compile(r"([A-Za-z][A-Za-z0-9_]*)=([A-Za-z0-9_./:+-]+)\Z")
+FAIL_WORD = re.compile(r"(?i)(?:^|[^A-Za-z0-9])(?:FAIL(?:ED)?|ERROR)(?:$|[^A-Za-z0-9])")
 # Match the test, exact preceding marker and exact error together. Never
 # blanket-ignore ERROR, /proc errors, or arbitrary lines after a fault marker.
 FAULTS = {
@@ -54,11 +60,33 @@ def validate(name: str, text: str) -> list[str]:
     success = False
     for raw in text.splitlines():
         line = raw.strip()
-        if ERROR.search(line):
-            if FAULTS.get(name, {}).get(previous) != line:
-                failures.append(line)
+        expected_faults = FAULTS.get(name, {})
+        authorized_fault = expected_faults.get(previous) == line
+        if ERROR.search(line) and not authorized_fault:
+            failures.append(line)
         if SUCCESS.fullmatch(line):
-            success = True
+            fields = {}
+            duplicate_field = False
+            for token in line.split()[1:]:
+                match = KEY_VALUE.fullmatch(token)
+                # Prefix tokens (the success marker, including NAME:) are not
+                # diagnostic fields. Every trailing token must be key=value.
+                if match is None:
+                    continue
+                key, value = match.groups()
+                if key in fields:
+                    duplicate_field = True
+                fields[key] = value
+            bad_annotation = FAIL_WORD.search(line) is not None
+            if not duplicate_field and not bad_annotation and fields.get("failures", "0") == "0" and fields.get("checks", "0").isdigit():
+                success = True
+            else:
+                failures.append(line)
+        elif SUCCESS_CANDIDATE.match(line):
+            # A line that starts like a success result but carries prose,
+            # malformed diagnostics, duplicate keys, or a nonzero failure
+            # count must not count as a successful smoke result.
+            failures.append(line)
         elif re.fullmatch(r"[A-Za-z0-9_]+(?: |: )(?:FAIL|FAILED)\b.*", line):
             failures.append(line)
         elif re.search(r"\bfailures=[1-9][0-9]*\b", line):

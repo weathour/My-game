@@ -3,6 +3,7 @@ extends RefCounted
 const ROOT := "res://assets/enemies/baimen/fx/"
 const JIA := preload("res://scripts/ui/chronicle/jia_effects.gd")
 const GEOMETRY_VIEW := preload("res://scripts/ui/chronicle/enemy_threat_view.gd")
+const SETTINGS := preload("res://scripts/game_settings.gd")
 const EFFECT_IDS := ["bone_bolt", "lantern_pulse", "pot_miasma", "coffin_smoke", "lightning", "command_seal", "heal_seal", "charge_dust"]
 var clips: Dictionary = {}
 var transients: Array[Dictionary] = []
@@ -38,7 +39,7 @@ func consume(events: Array, battle: RefCounted) -> void:
 		if event.kind == "boss_phase":
 			var boss_id := int(event.id)
 			for enemy in battle.enemies:
-				if enemy.id == boss_id: _add("coffin_smoke", {"origin":enemy.position, "radius":enemy.radius * 1.8}, battle.director.elapsed, .5, boss_id)
+				if enemy.id == boss_id: _add("coffin_smoke", {"origin":enemy.position, "radius":maxf(enemy.radius * 1.8, enemy.body_height * .46)}, battle.director.elapsed, .5, boss_id)
 		if event.kind not in ["enemy_release", "enemy_hazard_release"] or not event.has("geometry"): continue
 		var key := "%s:%d:%d" % [str(event.kind), int(event.id), int(event.action_serial)]
 		if seen.has(key): continue
@@ -103,11 +104,14 @@ func draw(painter: Node2D, battle: RefCounted) -> void:
 func _draw_geometry(painter: Node2D, style: String, g: Dictionary, age: float, alpha: float, loop: bool = false) -> void:
 	var image := texture(style, age, loop)
 	if image == null: return
+	if SETTINGS.comfort_enabled("reduced_flash"): alpha *= .5
 	var point: Vector2 = g.get("origin", Vector2.ZERO)
 	var radius := float(g.get("radius", 40))
 	var direction: Vector2 = g.get("direction", Vector2.RIGHT)
 	var dimension := Vector2.ONE * radius * 2
-	if style in ["slash", "sweep", "thrust", "pot_miasma", "lantern_pulse"] and g.has("shape"):
+	# A charge's range is its length, never the radius of a giant dust rectangle.
+	# Release decoration follows the same capsule as its warning and collision.
+	if (style in ["slash", "sweep", "thrust", "pot_miasma", "lantern_pulse"] or (style == "charge_dust" and g.get("shape", "") == "line")) and g.has("shape"):
 		var polygon := GEOMETRY_VIEW.outline(g)
 		var bounds := Rect2(polygon[0], Vector2.ZERO)
 		for p in polygon: bounds = bounds.expand(p)

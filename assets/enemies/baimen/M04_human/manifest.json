@@ -1,0 +1,111 @@
+{
+  "action_clips": {
+    "collaboration": "special",
+    "command": "special",
+    "pulse": "attack",
+    "shot": "attack"
+  },
+  "anchor_px": [
+    288,
+    480
+  ],
+  "body_height_px": 224,
+  "clips": {
+    "attack": {
+      "contact_frame": 1,
+      "file": "attack.png",
+      "fps": 10,
+      "frame_size": [
+        640,
+        512
+      ],
+      "frames": 4,
+      "windup_frame": 0
+    },
+    "death": {
+      "contact_frame": 0,
+      "file": "death.png",
+      "fps": 7,
+      "frame_size": [
+        640,
+        512
+      ],
+      "frames": 2,
+      "windup_frame": 0
+    },
+    "hit": {
+      "contact_frame": 0,
+      "file": "hit.png",
+      "fps": 10,
+      "frame_size": [
+        640,
+        512
+      ],
+      "frames": 2,
+      "windup_frame": 0
+    },
+    "idle": {
+      "contact_frame": 1,
+      "file": "idle.png",
+      "fps": 6,
+      "frame_size": [
+        640,
+        512
+      ],
+      "frames": 4,
+      "windup_frame": 0
+    },
+    "move": {
+      "contact_frame": 1,
+      "file": "move.png",
+      "fps": 10,
+      "frame_size": [
+        640,
+        512
+      ],
+      "frames": 4,
+      "windup_frame": 0
+    },
+    "special": {
+      "contact_frame": 1,
+      "file": "special.png",
+      "fps": 9,
+      "frame_size": [
+        640,
+        512
+      ],
+      "frames": 3,
+      "windup_frame": 0
+    }
+  },
+  "faces_left": false,
+  "provenance": "res://design/boss-forms-20261029/characters/M04_human/export-manifest.json",
+  "status": "final",
+  "version": 1,
+  "visual_id": "M04_human",
+  "head_rect_px": [
+    430,
+    50,
+    330,
+    360
+  ],
+  "sources": {
+    "combat": {
+      "path": "design/boss-forms-20261029/characters/M04_human/source/actions-v1.png",
+      "size": [
+        1182,
+        1330
+      ],
+      "sha256": "0e04f359e1f1b8a74d88849d91cd059813207952b925bad097a322623930b808",
+      "standing_body_height": 338
+    },
+    "master": {
+      "path": "design/boss-forms-20261029/characters/M04_human/source/master-v1.png",
+      "size": [
+        1024,
+        1536
+      ],
+      "sha256": "1bb1c509ac0b0ebb144829afd68092c858a12b6b63b231d91725f3adf263f7a5"
+    }
+  }
+}

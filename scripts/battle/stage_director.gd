@@ -26,8 +26,6 @@ func tick(delta: float, live_count: int, actor: Vector2, living: Array = []) -> 
 	if not boss_spawned and (elapsed >= config.boss_time or kills >= config.boss_kills):
 		boss_spawned = true
 		var boss := spawn("boss", SPACE.challenge_position(actor))
-		boss.hp = config.boss_hp
-		boss.max_hp = boss.hp
 		spawns.append(boss)
 	if boss_spawned: return spawns
 	spawn_remaining -= delta
@@ -64,12 +62,15 @@ func spawn(kind: String, point: Vector2) -> RefCounted:
 	if enemy.rank != "boss": enemy.hp *= float(config.get("enemy_hp", 1.0))
 	else: enemy.hp = float(config.get("boss_hp", enemy.hp))
 	enemy.max_hp = enemy.hp
+	if enemy.rank == "boss": enemy.configure_form_budget(float(config.get("boss_hp", enemy.hp)))
 	enemy.damage *= float(config.get("enemy_damage", 1.0))
 	if definition.is_empty() and kind == "boss": enemy.attack_cycle = config.get("boss_cycle", ["charge", "fan"]).duplicate()
 	return enemy
 
 func derivative(descriptor: Dictionary, living: Array) -> RefCounted:
 	var enemy := spawn(str(descriptor.definition_id), descriptor.position)
+	if descriptor.has("visual_id"): enemy.visual_id = str(descriptor.visual_id)
+	if descriptor.has("body_height"): enemy.body_height = float(descriptor.body_height)
 	enemy.parent_id = int(descriptor.get("parent_id", 0))
 	enemy.counts_for_threshold = false
 	enemy.xp = 0
@@ -86,6 +87,7 @@ func derivative(descriptor: Dictionary, living: Array) -> RefCounted:
 	return enemy
 
 func choose_field(index: int) -> bool:
+	if not bool(config.get("fields_enabled", true)): return false
 	if field != -1 or index < 0 or index > 3: return false
 	field = index
 	return true

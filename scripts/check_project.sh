@@ -105,10 +105,61 @@ if [[ -n "$GODOT_BIN" ]]; then
     fi
   }
 
+  run_enemy_pack_smoke() {
+    local name="chronicle_enemy_pack_smoke"
+    local pack_dir="$CHECK_DATA_DIR/enemy-pack-smoke"
+    local empty_dir="$pack_dir/empty-cwd"
+    local external_script="$pack_dir/$name.gd"
+    local pack="$pack_dir/game.pck"
+    local export_log="$CHECK_LOG_DIR/$name-export.log"
+    local log="$CHECK_LOG_DIR/$name.log"
+    mkdir -p "$empty_dir" "$pack_dir/user-data"
+    cp scripts/tests/chronicle_enemy_pack_smoke.gd "$external_script"
+
+    echo "== Godot Linux development pack export for $name =="
+    if ! XDG_DATA_HOME="$pack_dir/export-data" XDG_CONFIG_HOME="$pack_dir/export-config" \
+        timeout 300s "$GODOT_BIN" --headless --path "$ROOT" --export-pack "Linux development" "$pack" \
+        >"$export_log" 2>&1; then
+      tail -n 80 "$export_log"
+      echo "${name^^}_EXPORT_FAILED"
+      exit 1
+    fi
+    if grep -E "$GODOT_ERROR_PATTERN" "$export_log"; then
+      echo "${name^^}_EXPORT_DIAGNOSTIC_FAILED"
+      exit 1
+    fi
+    if [[ ! -s "$pack" ]]; then
+      echo "${name^^}_PACK_MISSING"
+      exit 1
+    fi
+    if [[ -e "$empty_dir/project.godot" || -d "$empty_dir/scripts" || -d "$empty_dir/assets" ]]; then
+      echo "${name^^}_EMPTY_CWD_CONTAMINATED"
+      exit 1
+    fi
+
+    echo "== Godot isolated main-pack smoke from empty cwd =="
+    if ! (
+      cd "$empty_dir"
+      XDG_DATA_HOME="$pack_dir/user-data" XDG_CONFIG_HOME="$pack_dir/user-config" \
+        timeout 120s "$GODOT_BIN" --headless --path "$empty_dir" --main-pack "$pack" --script "$external_script"
+    ) 2>&1 | tee "$log"; then
+      echo "${name^^}_FAILED"
+      exit 1
+    fi
+    if ! python3 scripts/tests/check_smoke_log.py "$external_script" "$log"; then
+      exit 1
+    fi
+  }
+
+  # This test is excluded from the PCK and must run externally against the
+  # exported main pack, with no source project available to satisfy res:// loads.
+  run_enemy_pack_smoke
+
   for smoke in scripts/tests/*_smoke.gd; do
     # The dense benchmark is deliberately separate because it compares two
     # timed cases and writes result artifacts.
     [[ "$(basename "$smoke")" == "dense_combat_benchmark_smoke.gd" ]] && continue
+    [[ "$(basename "$smoke")" == "chronicle_enemy_pack_smoke.gd" ]] && continue
     run_smoke "$smoke"
   done
 

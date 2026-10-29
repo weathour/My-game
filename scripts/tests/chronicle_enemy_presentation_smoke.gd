@@ -47,6 +47,7 @@ func run() -> void:
 	for id in CODEX.all_ids():
 		var value := CATALOG.definition(id)
 		if not visuals.has(value.visual_id): visuals.append(value.visual_id)
+		if not value.get("forms", []).is_empty(): visuals.append(str(id) + "_human")
 	var missing := MANIFEST.validate_final(visuals)
 	if final_art:
 		for error in missing: expect(false, error)
@@ -75,10 +76,23 @@ func run() -> void:
 		await frames(1)
 		expect(codex.selected_id == id and is_instance_valid(codex.preview), "catalog body readable " + id)
 		expect(codex.portrait.stretch_mode == TextureRect.STRETCH_KEEP_ASPECT_CENTERED, "standing portrait uncropped " + id)
-		var art_bounds := codex._preview_bounds(str(CATALOG.definition(id).visual_id))
-		if art_bounds.has_area():
-			var frame_rect: Rect2 = codex.preview.transform * art_bounds
-			expect(Rect2(Vector2.ZERO, codex.preview.get_parent().size).grow(.2).encloses(frame_rect), "all authored poses fit codex preview " + id)
+		var definition := CATALOG.definition(id)
+		var form_count: int = definition.get("forms", []).size()
+		expect(codex.selected_form == 0, "new catalog entry begins in its first form " + id)
+		for form_index in maxi(1, form_count):
+			if form_count > 1:
+				var button := codex.find_child("enemy_form_" + str(form_index), true, false) as Button
+				expect(button != null, "authored form has a selector %s/%d" % [id, form_index])
+				if button == null: continue
+				button.pressed.emit()
+				await frames(1)
+			var expected_visual: String = str(id) + ("_human" if form_index == 0 else "") if form_count > 1 else str(definition.visual_id)
+			expect(codex._selected_definition().visual_id == expected_visual and codex.preview.get_meta("visual_id") == expected_visual, "selected form and rendered identity agree " + expected_visual)
+			var art_bounds := codex._preview_bounds(expected_visual)
+			expect(art_bounds.has_area(), "selected form has authored opaque poses " + expected_visual)
+			if art_bounds.has_area():
+				var frame_rect: Rect2 = codex.preview.transform * art_bounds
+				expect(Rect2(Vector2.ZERO, codex.preview.get_parent().size).grow(.2).encloses(frame_rect), "all authored poses fit codex preview " + expected_visual)
 	for dimensions in [Vector2i(960,540), Vector2i(1280,720), Vector2i(1920,1080)]:
 		viewport.size = dimensions
 		codex.set_mode("portrait")

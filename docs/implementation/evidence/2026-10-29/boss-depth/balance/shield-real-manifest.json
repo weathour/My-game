@@ -1,0 +1,13 @@
+{
+  "config_parent": "rhythm-final-manifest.json",
+  "driver_revision": "visible_goal_v2",
+  "campaign_reward_seed": 781103,
+  "production_unchanged_from_frozen_config": true,
+  "source_sha256": {
+    "scripts/tests/chronicle_enemy_campaign_smoke.gd": "cb5f614d4cd177377c4dd61fff8db100e99a497c19a6c530d7223c809a880ec8",
+    "scripts/tests/chronicle_enemy_sessions_smoke.gd": "42f09146c5a37342ff784c3e76c3310046dd0e47700873819f6fe6a3a89bc8ed",
+    "scripts/battle/combat_mechanics.gd": "44bbae72c801337f165a1210e9080e9d688ec2e9d0853aa1dcd9a4a64d77499f",
+    "scripts/battle/battle_session.gd": "f13903075c80fca26a9cc8c5231c74a04fde07cc714b4ba9f24c2d91b357791e"
+  },
+  "post_freeze_changes": "Test-only shield route, CLI route/output selection and shield telemetry; visible_goal_v2 movement algorithm and frozen production configuration unchanged."
+}

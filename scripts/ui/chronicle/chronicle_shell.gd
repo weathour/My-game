@@ -181,6 +181,7 @@ func render() -> void:
 			if not button.disabled:
 				_focus_control.call_deferred(weakref(button))
 				break
+	if is_instance_valid(enemy_codex): move_child(enemy_codex, -1)
 	if is_instance_valid(character_sheet): move_child(character_sheet, -1)
 	if is_instance_valid(modal): move_child(modal, -1)
 

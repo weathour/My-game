@@ -1,0 +1,4606 @@
+{
+  "audio_track": false,
+  "checks": 14,
+  "current_stage_config": true,
+  "dimensions": "(1280, 720)",
+  "driver": "visible_goal_v2",
+  "failures": 0,
+  "fps": 12,
+  "human_acceptance": false,
+  "mode": "automated_inputs_real_BattleView",
+  "playbacks": [
+    {
+      "active_seconds": {
+        "JIA": 106.799999999995
+      },
+      "boss_damage_by_ability": {
+        "JIA_basic": 2330.4404,
+        "bow_support": 325.404000000001,
+        "emma_support": 291.2256,
+        "jia_break": 630.9,
+        "jia_sweep": 722.03
+      },
+      "boss_damage_by_source": {
+        "F11": 291.2256,
+        "JIA": 3683.3704,
+        "N07": 325.404000000001
+      },
+      "boss_remaining": {},
+      "boss_spawn_seconds": 85.4666666666631,
+      "boss_support_damage": 616.629600000001,
+      "casts": {
+        "F11:emma_support:support": 29,
+        "JIA:JIA_basic:front": 121,
+        "JIA:jia_break:front": 10,
+        "JIA:jia_sweep:front": 18,
+        "N07:bow_support:support": 28
+      },
+      "damage_attribution_available": true,
+      "damage_by_ability": {
+        "JIA_basic": 8556.71759999999,
+        "bow_support": 1337.724,
+        "emma_support": 1423.0304,
+        "jia_break": 2478.582,
+        "jia_sweep": 2204.246
+      },
+      "damage_by_source": {
+        "F11": 1423.0304,
+        "JIA": 13239.5456,
+        "N07": 1337.724
+      },
+      "damage_taken_events": [
+        {
+          "amount": 23.8861256544503,
+          "attack": "stele_arc_1",
+          "enemy_id": 10,
+          "id": "JIA",
+          "kind": "damage_taken",
+          "position": "(596.3557, 1496.829)",
+          "time": 14.6833333333336
+        },
+        {
+          "amount": 7.02879581151833,
+          "attack": "shot",
+          "enemy_id": 14,
+          "id": "JIA",
+          "kind": "damage_taken",
+          "position": "(669.0558, 1138.244)",
+          "time": 26.5666666666664
+        },
+        {
+          "amount": 11.3717277486911,
+          "attack": "charge",
+          "enemy_id": 25,
+          "id": "JIA",
+          "kind": "damage_taken",
+          "position": "(677.7581, 767.2665)",
+          "time": 36.7166666666659
+        },
+        {
+          "amount": 7.02879581151833,
+          "attack": "fan",
+          "enemy_id": 28,
+          "id": "JIA",
+          "kind": "damage_taken",
+          "position": "(253.71, 1000.953)",
+          "time": 42.3999999999989
+        },
+        {
+          "amount": 6.90213869086196,
+          "attack": "fan",
+          "enemy_id": 24,
+          "id": "JIA",
+          "kind": "damage_taken",
+          "position": "(584.685, 1193.799)",
+          "time": 46.3666666666653
+        },
+        {
+          "amount": 6.90213869086196,
+          "attack": "shot",
+          "enemy_id": 17,
+          "id": "JIA",
+          "kind": "damage_taken",
+          "position": "(810.0958, 1209.122)",
+          "time": 49.3833333333318
+        },
+        {
+          "amount": 6.90213869086196,
+          "attack": "fan",
+          "enemy_id": 36,
+          "id": "JIA",
+          "kind": "damage_taken",
+          "position": "(709.6401, 1174.677)",
+          "time": 50.7333333333317
+        },
+        {
+          "amount": 17.2028515878159,
+          "attack": "charge",
+          "enemy_id": 37,
+          "id": "JIA",
+          "kind": "damage_taken",
+          "position": "(452.0591, 974.3109)",
+          "time": 52.7833333333316
+        },
+        {
+          "amount": 6.90213869086196,
+          "attack": "fan",
+          "enemy_id": 36,
+          "id": "JIA",
+          "kind": "damage_taken",
+          "position": "(706.6149, 977.4711)",
+          "time": 55.6999999999981
+        },
+        {
+          "amount": 6.90213869086196,
+          "attack": "fan",
+          "enemy_id": 36,
+          "id": "JIA",
+          "kind": "damage_taken",
+          "position": "(793.8558, 1001.957)",
+          "time": 57.7833333333313
+        },
+        {
+          "amount": 28.1369086195723,
+          "attack": "hunter_aim",
+          "enemy_id": 75,
+          "id": "JIA",
+          "kind": "damage_taken",
+          "position": "(486.2286, 151.2346)",
+          "time": 87.8999999999963
+        },
+        {
+          "amount": 21.3095268956578,
+          "attack": "hunter_volley",
+          "enemy_id": 75,
+          "id": "JIA",
+          "kind": "damage_taken",
+          "position": "(452.112, 133.8306)",
+          "time": 91.4166666666628
+        },
+        {
+          "amount": 11.2028515878159,
+          "attack": "charge",
+          "enemy_id": 65,
+          "id": "JIA",
+          "kind": "damage_taken",
+          "position": "(473.8338, 203.0278)",
+          "time": 92.899999999996
+        },
+        {
+          "amount": 12.902138690862,
+          "attack": "fan",
+          "enemy_id": 49,
+          "id": "JIA",
+          "kind": "damage_taken",
+          "position": "(554.5399, 140.5836)",
+          "time": 97.4999999999958
+        },
+        {
+          "amount": 31.5505994815295,
+          "attack": "hunt_mark",
+          "enemy_id": 75,
+          "id": "JIA",
+          "kind": "damage_taken",
+          "position": "(885.7356, 160.2918)",
+          "time": 105.499999999995
+        }
+      ],
+      "elapsed": 106.799999999995,
+      "entry": {
+        "F11": {
+          "cooldowns": {
+            "F11_basic": 0.0,
+            "armor_guard": 0.0,
+            "emma_frost": 0.0,
+            "emma_ice": 0.0,
+            "emma_star": 0.0,
+            "emma_support": 1.63333333333334
+          },
+          "dead": false,
+          "hp": 363.0,
+          "level": 14,
+          "mp": 197.4,
+          "xp": 139.666666666667
+        },
+        "JIA": {
+          "cooldowns": {
+            "JIA_basic": 0.589331672893317,
+            "armor_guard": 0.716666666666669,
+            "jia_break": 0.0,
+            "jia_sweep": 4.05
+          },
+          "dead": false,
+          "hp": 220.060132450331,
+          "level": 13,
+          "mp": 17.9099999999912,
+          "xp": 139.666666666667
+        },
+        "N07": {
+          "cooldowns": {
+            "bow_support": 2.96666666666667
+          },
+          "dead": false,
+          "hp": 342.0,
+          "level": 13,
+          "mp": 152.4,
+          "xp": 115.666666666667
+        }
+      },
+      "entry_request": {
+        "attempt_id": "B15-18501339-1274996436",
+        "characters": {
+          "F04": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 208.0,
+            "level": 4.0,
+            "mp": 152.4,
+            "xp": 0.0
+          },
+          "F05": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 214.0,
+            "level": 5.0,
+            "mp": 157.4,
+            "xp": 0.0
+          },
+          "F07": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 223.0,
+            "level": 4.0,
+            "mp": 112.4,
+            "xp": 0.0
+          },
+          "F08": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 253.0,
+            "level": 4.0,
+            "mp": 117.4,
+            "xp": 0.0
+          },
+          "F10": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 229.0,
+            "level": 5.0,
+            "mp": 152.4,
+            "xp": 0.0
+          },
+          "F11": {
+            "cooldowns": {
+              "F11_basic": 0.0,
+              "armor_guard": 0.0,
+              "emma_frost": 0.0,
+              "emma_ice": 0.0,
+              "emma_star": 0.0,
+              "emma_support": 1.63333333333334
+            },
+            "dead": false,
+            "hp": 363.0,
+            "level": 14.0,
+            "mp": 197.4,
+            "xp": 139.666666666667
+          },
+          "JIA": {
+            "cooldowns": {
+              "JIA_basic": 0.589331672893317,
+              "armor_guard": 0.716666666666669,
+              "jia_break": 0.0,
+              "jia_sweep": 4.05
+            },
+            "dead": false,
+            "hp": 220.060132450331,
+            "level": 13.0,
+            "mp": 17.9099999999912,
+            "xp": 139.666666666667
+          },
+          "M08": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 294.0,
+            "level": 5.0,
+            "mp": 127.4,
+            "xp": 0.0
+          },
+          "N01": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 272.0,
+            "level": 3.0,
+            "mp": 92.4,
+            "xp": 0.0
+          },
+          "N07": {
+            "cooldowns": {
+              "bow_support": 2.96666666666667
+            },
+            "dead": false,
+            "hp": 342.0,
+            "level": 13.0,
+            "mp": 152.4,
+            "xp": 115.666666666667
+          },
+          "N13": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 209.0,
+            "level": 5.0,
+            "mp": 162.4,
+            "xp": 0.0
+          },
+          "N14": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 193.0,
+            "level": 4.0,
+            "mp": 142.4,
+            "xp": 0.0
+          },
+          "N16": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 186.0,
+            "level": 2.0,
+            "mp": 127.4,
+            "xp": 0.0
+          },
+          "N17": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 205.0,
+            "level": 1.0,
+            "mp": 97.4,
+            "xp": 0.0
+          },
+          "N18": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 218.0,
+            "level": 4.0,
+            "mp": 122.4,
+            "xp": 0.0
+          }
+        },
+        "equipment": {
+          "accessory": "frost_jade",
+          "armor": "iron_armor",
+          "weapon": "long_spear"
+        },
+        "members": [
+          "JIA",
+          "F11",
+          "N07"
+        ],
+        "node": {
+          "id": "B15",
+          "kind": "battle",
+          "map_summary": "",
+          "name": "破围城军阵",
+          "next": [
+            "S12"
+          ],
+          "segment": 4.0,
+          "summary": "击败首领后通行。关末从已解锁人物中抽卡。"
+        },
+        "seed": 1715.0,
+        "stage": {
+          "action_budget": {
+            "major": 2,
+            "melee": 2
+          },
+          "bonus_time": 205.0,
+          "boss_definition": "B15",
+          "boss_derivative_cap": 4,
+          "boss_hp": 4300.0,
+          "boss_kills": 56,
+          "boss_name": "曹休",
+          "boss_time": 110.0,
+          "derivative_cap": 6,
+          "enemy_cap": 42,
+          "enemy_damage": 1.659,
+          "enemy_hp": 2.15,
+          "field_elites": [
+            "L04",
+            "L01"
+          ],
+          "map": "stone",
+          "role_caps": {
+            "heavy": 2,
+            "ranged": 4,
+            "support": 1
+          },
+          "seed": 1715,
+          "spawn_interval": 1.35,
+          "waves": [
+            {
+              "at": 0.0,
+              "count": 1,
+              "cycle": [
+                "E12",
+                "E02",
+                "E07",
+                "E01"
+              ]
+            },
+            {
+              "at": 34.0,
+              "count": 2,
+              "cycle": [
+                "E09",
+                "E05",
+                "E03",
+                "E04"
+              ],
+              "interval": 1.35
+            }
+          ]
+        }
+      },
+      "exit": {
+        "F11": {
+          "cooldowns": {
+            "F11_basic": 0.0,
+            "armor_guard": 0.0,
+            "emma_frost": 0.0,
+            "emma_ice": 0.0,
+            "emma_star": 0.0,
+            "emma_support": 1.50000000000001
+          },
+          "dead": false,
+          "hp": 379.0,
+          "level": 15,
+          "mp": 202.4,
+          "xp": 103.0
+        },
+        "JIA": {
+          "cooldowns": {
+            "JIA_basic": 0.618046971569839,
+            "armor_guard": 0.700000000000003,
+            "jia_break": 9.21666666666663,
+            "jia_sweep": 2.71666666666667
+          },
+          "dead": false,
+          "hp": 271.184429682437,
+          "level": 14,
+          "mp": 5.54333333332465,
+          "xp": 115.0
+        },
+        "N07": {
+          "cooldowns": {
+            "bow_support": 2.36666666666667
+          },
+          "dead": false,
+          "hp": 358.0,
+          "level": 14,
+          "mp": 157.4,
+          "xp": 91.0
+        }
+      },
+      "hurt_events": [
+        {
+          "amount": 23.8861256544503,
+          "id": "JIA",
+          "kind": "hurt",
+          "phase": "",
+          "position": "(546.967, 1376.896)",
+          "seconds": 14.6833333333336
+        },
+        {
+          "amount": 7.02879581151833,
+          "id": "JIA",
+          "kind": "hurt",
+          "phase": "",
+          "position": "(668.4853, 1117.313)",
+          "seconds": 26.5666666666664
+        },
+        {
+          "amount": 11.3717277486911,
+          "id": "JIA",
+          "kind": "hurt",
+          "phase": "",
+          "position": "(641.2717, 868.6678)",
+          "seconds": 36.7166666666659
+        },
+        {
+          "amount": 7.02879581151833,
+          "id": "JIA",
+          "kind": "hurt",
+          "phase": "",
+          "position": "(255.8642, 986.9258)",
+          "seconds": 42.3999999999989
+        },
+        {
+          "amount": 6.90213869086196,
+          "id": "JIA",
+          "kind": "hurt",
+          "phase": "",
+          "position": "(594.8787, 1176.967)",
+          "seconds": 46.3666666666653
+        },
+        {
+          "amount": 6.90213869086196,
+          "id": "JIA",
+          "kind": "hurt",
+          "phase": "",
+          "position": "(794.0699, 1220.13)",
+          "seconds": 49.3833333333318
+        },
+        {
+          "amount": 6.90213869086196,
+          "id": "JIA",
+          "kind": "hurt",
+          "phase": "",
+          "position": "(717.2092, 1192.014)",
+          "seconds": 50.7333333333317
+        },
+        {
+          "amount": 17.2028515878159,
+          "id": "JIA",
+          "kind": "hurt",
+          "phase": "",
+          "position": "(711.179, 1084.733)",
+          "seconds": 52.7833333333316
+        },
+        {
+          "amount": 6.90213869086196,
+          "id": "JIA",
+          "kind": "hurt",
+          "phase": "",
+          "position": "(687.7132, 973.5343)",
+          "seconds": 55.6999999999981
+        },
+        {
+          "amount": 6.90213869086196,
+          "id": "JIA",
+          "kind": "hurt",
+          "phase": "",
+          "position": "(784.398, 985.4467)",
+          "seconds": 57.7833333333313
+        },
+        {
+          "amount": 28.1369086195723,
+          "id": "JIA",
+          "kind": "hurt",
+          "phase": "B15:0:combat",
+          "position": "(473.8871, 163.5148)",
+          "seconds": 87.8999999999963
+        },
+        {
+          "amount": 21.3095268956578,
+          "id": "JIA",
+          "kind": "hurt",
+          "phase": "B15:0:combat",
+          "position": "(433.9109, 138.0153)",
+          "seconds": 91.4166666666628
+        },
+        {
+          "amount": 11.2028515878159,
+          "id": "JIA",
+          "kind": "hurt",
+          "phase": "B15:0:combat",
+          "position": "(441.5124, 127.6713)",
+          "seconds": 92.899999999996
+        },
+        {
+          "amount": 12.902138690862,
+          "id": "JIA",
+          "kind": "hurt",
+          "phase": "B15:1:combat",
+          "position": "(547.2686, 124.0154)",
+          "seconds": 97.4999999999958
+        },
+        {
+          "amount": 31.5505994815295,
+          "id": "JIA",
+          "kind": "hurt",
+          "phase": "B15:1:combat",
+          "position": "(925.1141, 201.6093)",
+          "seconds": 105.499999999995
+        }
+      ],
+      "hurt_total": {
+        "JIA": 206.131015343741
+      },
+      "last_live_shields": {
+        "F11": 0.0,
+        "JIA": 6.0,
+        "N07": 0.0
+      },
+      "last_phase": "B15:1:combat",
+      "max_hostiles": 16,
+      "mechanics": {},
+      "mp_observed_recovery": {
+        "F11": 5.0,
+        "JIA": 740.926666666664,
+        "N07": 5.0
+      },
+      "outcome": "victory",
+      "outcome_reason": "authentic_victory",
+      "paid_mp": {
+        "F11": 0.0,
+        "JIA": 756.0,
+        "N07": 0.0
+      },
+      "phase_damage_attribution": {
+        "B15:0": 1779.17,
+        "B15:1": 2520.83,
+        "D05:0": 96.75,
+        "E01:0": 490.2,
+        "E02:0": 412.8,
+        "E03:0": 2369.3,
+        "E04:0": 3289.5,
+        "E05:0": 309.6,
+        "E07:0": 464.4,
+        "E09:0": 1376.0,
+        "E12:0": 1988.75,
+        "L04:0": 903.0
+      },
+      "phase_marks": [
+        {
+          "active": "JIA",
+          "bank": 0.0,
+          "form_name": "曹休",
+          "hp": 1720.0,
+          "phase": "B15:0:combat",
+          "player_position": "(486.2286, 402.2346)",
+          "resources": {
+            "F11": {
+              "cooldowns": {
+                "F11_basic": 0.0,
+                "armor_guard": 0.0,
+                "emma_frost": 0.0,
+                "emma_ice": 0.0,
+                "emma_star": 0.0,
+                "emma_support": 1.73333333333334
+              },
+              "dead": false,
+              "hp": 379.0,
+              "level": 15,
+              "mp": 202.4,
+              "xp": 47.0
+            },
+            "JIA": {
+              "cooldowns": {
+                "JIA_basic": 0.601380304903173,
+                "armor_guard": 0.0,
+                "jia_break": 9.54999999999998,
+                "jia_sweep": 2.05000000000001
+              },
+              "dead": false,
+              "hp": 376.286454957874,
+              "level": 14,
+              "mp": 41.8099999999934,
+              "xp": 59.0
+            },
+            "N07": {
+              "cooldowns": {
+                "bow_support": 0.766666666666673
+              },
+              "dead": false,
+              "hp": 358.0,
+              "level": 14,
+              "mp": 157.4,
+              "xp": 35.0
+            }
+          },
+          "seconds": 85.4666666666631,
+          "shields": {
+            "F11": 0.0,
+            "JIA": 6.0,
+            "N07": 0.0
+          }
+        },
+        {
+          "active": "JIA",
+          "bank": 116.05,
+          "form_name": "鬼猎兽相",
+          "hp": 2580.0,
+          "phase": "B15:1:transition",
+          "player_position": "(456.3995, 156.7823)",
+          "resources": {
+            "F11": {
+              "cooldowns": {
+                "F11_basic": 0.0,
+                "armor_guard": 0.0,
+                "emma_frost": 0.0,
+                "emma_ice": 0.0,
+                "emma_star": 0.0,
+                "emma_support": 3.43333333333333
+              },
+              "dead": false,
+              "hp": 379.0,
+              "level": 15,
+              "mp": 202.4,
+              "xp": 52.0
+            },
+            "JIA": {
+              "cooldowns": {
+                "JIA_basic": 0.618046971569839,
+                "armor_guard": 0.0,
+                "jia_break": 0.699999999999925,
+                "jia_sweep": 4.2
+              },
+              "dead": false,
+              "hp": 315.637167854828,
+              "level": 14,
+              "mp": 49.139999999992,
+              "xp": 64.0
+            },
+            "N07": {
+              "cooldowns": {
+                "bow_support": 1.73333333333334
+              },
+              "dead": false,
+              "hp": 358.0,
+              "level": 14,
+              "mp": 157.4,
+              "xp": 40.0
+            }
+          },
+          "seconds": 94.3166666666626,
+          "shields": {
+            "F11": 0.0,
+            "JIA": 0.0,
+            "N07": 0.0
+          }
+        },
+        {
+          "active": "JIA",
+          "bank": 512.115,
+          "form_name": "鬼猎兽相",
+          "hp": 2580.0,
+          "phase": "B15:1:observation",
+          "player_position": "(440.8771, 142.4203)",
+          "resources": {
+            "F11": {
+              "cooldowns": {
+                "F11_basic": 0.0,
+                "armor_guard": 0.0,
+                "emma_frost": 0.0,
+                "emma_ice": 0.0,
+                "emma_star": 0.0,
+                "emma_support": 2.45
+              },
+              "dead": false,
+              "hp": 379.0,
+              "level": 15,
+              "mp": 202.4,
+              "xp": 53.6666666666667
+            },
+            "JIA": {
+              "cooldowns": {
+                "JIA_basic": 0.268046971569839,
+                "armor_guard": 0.0,
+                "jia_break": 9.71666666666665,
+                "jia_sweep": 3.21666666666667
+              },
+              "dead": false,
+              "hp": 315.637167854828,
+              "level": 14,
+              "mp": 18.8433333333252,
+              "xp": 65.6666666666667
+            },
+            "N07": {
+              "cooldowns": {
+                "bow_support": 0.750000000000006
+              },
+              "dead": false,
+              "hp": 358.0,
+              "level": 14,
+              "mp": 157.4,
+              "xp": 41.6666666666667
+            }
+          },
+          "seconds": 95.2999999999959,
+          "shields": {
+            "F11": 0.0,
+            "JIA": 0.0,
+            "N07": 0.0
+          }
+        },
+        {
+          "active": "JIA",
+          "bank": 0.0,
+          "form_name": "鬼猎兽相",
+          "hp": 1977.5962,
+          "phase": "B15:1:combat",
+          "player_position": "(493.5039, 166.1975)",
+          "resources": {
+            "F11": {
+              "cooldowns": {
+                "F11_basic": 0.0,
+                "armor_guard": 0.0,
+                "emma_frost": 0.0,
+                "emma_ice": 0.0,
+                "emma_star": 0.0,
+                "emma_support": 1.80000000000001
+              },
+              "dead": false,
+              "hp": 379.0,
+              "level": 15,
+              "mp": 202.4,
+              "xp": 53.6666666666667
+            },
+            "JIA": {
+              "cooldowns": {
+                "JIA_basic": 0.251380304903172,
+                "armor_guard": 0.0,
+                "jia_break": 9.06666666666662,
+                "jia_sweep": 2.56666666666668
+              },
+              "dead": false,
+              "hp": 315.637167854828,
+              "level": 14,
+              "mp": 22.6133333333253,
+              "xp": 65.6666666666667
+            },
+            "N07": {
+              "cooldowns": {
+                "bow_support": 0.100000000000006
+              },
+              "dead": false,
+              "hp": 358.0,
+              "level": 14,
+              "mp": 157.4,
+              "xp": 41.6666666666667
+            }
+          },
+          "seconds": 95.9499999999958,
+          "shields": {
+            "F11": 0.0,
+            "JIA": 0.0,
+            "N07": 0.0
+          }
+        }
+      ],
+      "phase_seconds": {
+        "B15:0:combat": 8.8499999999995,
+        "B15:1:combat": 10.8499999999994,
+        "B15:1:observation": 0.649999999999963,
+        "B15:1:transition": 0.983333333333277
+      },
+      "recording": {
+        "captured_frames": 261,
+        "completed_signals": 1,
+        "failed_signals": 0,
+        "human_acceptance": false,
+        "last_camera": {
+          "escape_needed": false,
+          "escape_valid": false,
+          "viewport": "[P: (295.619, 0.0), S: (1300.318, 731.4286)]",
+          "zoom": 0.986132173909033
+        },
+        "mode": "automatic_input_real_renderer",
+        "pause_input_checked": false,
+        "phase_seen": [
+          "0",
+          "1"
+        ],
+        "preboss_simulated_steps": 5127,
+        "probe_incomplete": false,
+        "recorded_steps": 1309,
+        "render_backend": "X11",
+        "video": {
+          "errors": [
+            ""
+          ],
+          "exit": 0,
+          "fps": 12,
+          "frames": 261,
+          "path": "/home/weathour/programs/desktop-projects/My-game/docs/implementation/evidence/2026-10-29/boss-depth/playback/explore-B15.mp4",
+          "silent": true
+        }
+      },
+      "resource_balance": {
+        "F11": {
+          "net_hp_restored_including_level_growth": 16.0,
+          "net_mp_restored_including_level_growth": 5.0,
+          "paid_mp": 0.0,
+          "received_hp_damage": 0.0
+        },
+        "JIA": {
+          "net_hp_restored_including_level_growth": 257.255312575847,
+          "net_mp_restored_including_level_growth": 743.633333333333,
+          "paid_mp": 756.0,
+          "received_hp_damage": 206.131015343741
+        },
+        "N07": {
+          "net_hp_restored_including_level_growth": 16.0,
+          "net_mp_restored_including_level_growth": 5.0,
+          "paid_mp": 0.0,
+          "received_hp_damage": 0.0
+        }
+      },
+      "seen_boss_actions": {
+        "0:charge": true,
+        "0:fan": true,
+        "0:shot": true,
+        "1:charge": true,
+        "1:fan": true,
+        "1:marker": true
+      },
+      "shield_absorbed_lower_bound": {
+        "F11": 0.0,
+        "JIA": 12.0,
+        "N07": 0.0
+      },
+      "shield_cast_events": [],
+      "shield_gain_exact": {},
+      "shield_observed_gain_lower_bound": {
+        "F11": 0.0,
+        "JIA": 18.0,
+        "N07": 0.0
+      },
+      "shield_spent": {
+        "F11": 0.0,
+        "JIA": 0.0,
+        "N07": 0.0
+      },
+      "source_request": {
+        "attempt_id": "B15-18501339-1274996436",
+        "characters": {
+          "F04": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 208.0,
+            "level": 4.0,
+            "mp": 152.4,
+            "xp": 0.0
+          },
+          "F05": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 214.0,
+            "level": 5.0,
+            "mp": 157.4,
+            "xp": 0.0
+          },
+          "F07": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 223.0,
+            "level": 4.0,
+            "mp": 112.4,
+            "xp": 0.0
+          },
+          "F08": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 253.0,
+            "level": 4.0,
+            "mp": 117.4,
+            "xp": 0.0
+          },
+          "F10": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 229.0,
+            "level": 5.0,
+            "mp": 152.4,
+            "xp": 0.0
+          },
+          "F11": {
+            "cooldowns": {
+              "F11_basic": 0.0,
+              "armor_guard": 0.0,
+              "emma_frost": 0.0,
+              "emma_ice": 0.0,
+              "emma_star": 0.0,
+              "emma_support": 1.63333333333334
+            },
+            "dead": false,
+            "hp": 363.0,
+            "level": 14.0,
+            "mp": 197.4,
+            "xp": 139.666666666667
+          },
+          "JIA": {
+            "cooldowns": {
+              "JIA_basic": 0.589331672893317,
+              "armor_guard": 0.716666666666669,
+              "jia_break": 0.0,
+              "jia_sweep": 4.05
+            },
+            "dead": false,
+            "hp": 220.060132450331,
+            "level": 13.0,
+            "mp": 17.9099999999912,
+            "xp": 139.666666666667
+          },
+          "M08": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 294.0,
+            "level": 5.0,
+            "mp": 127.4,
+            "xp": 0.0
+          },
+          "N01": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 272.0,
+            "level": 3.0,
+            "mp": 92.4,
+            "xp": 0.0
+          },
+          "N07": {
+            "cooldowns": {
+              "bow_support": 2.96666666666667
+            },
+            "dead": false,
+            "hp": 342.0,
+            "level": 13.0,
+            "mp": 152.4,
+            "xp": 115.666666666667
+          },
+          "N13": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 209.0,
+            "level": 5.0,
+            "mp": 162.4,
+            "xp": 0.0
+          },
+          "N14": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 193.0,
+            "level": 4.0,
+            "mp": 142.4,
+            "xp": 0.0
+          },
+          "N16": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 186.0,
+            "level": 2.0,
+            "mp": 127.4,
+            "xp": 0.0
+          },
+          "N17": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 205.0,
+            "level": 1.0,
+            "mp": 97.4,
+            "xp": 0.0
+          },
+          "N18": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 218.0,
+            "level": 4.0,
+            "mp": 122.4,
+            "xp": 0.0
+          }
+        },
+        "equipment": {
+          "accessory": "frost_jade",
+          "armor": "iron_armor",
+          "weapon": "long_spear"
+        },
+        "members": [
+          "JIA",
+          "F11",
+          "N07"
+        ],
+        "node": {
+          "id": "B15",
+          "kind": "battle",
+          "map_summary": "",
+          "name": "破围城军阵",
+          "next": [
+            "S12"
+          ],
+          "segment": 4.0,
+          "summary": "击败首领后通行。关末从已解锁人物中抽卡。"
+        },
+        "seed": 1715.0,
+        "stage": {
+          "action_budget": {
+            "major": 2.0,
+            "melee": 2.0
+          },
+          "bonus_time": 205.0,
+          "boss_definition": "B15",
+          "boss_derivative_cap": 4.0,
+          "boss_hp": 4300.0,
+          "boss_kills": 56.0,
+          "boss_name": "曹休",
+          "boss_time": 110.0,
+          "derivative_cap": 6.0,
+          "enemy_cap": 42.0,
+          "enemy_damage": 1.659,
+          "enemy_hp": 2.15,
+          "field_elites": [
+            "L04",
+            "L01"
+          ],
+          "map": "stone",
+          "role_caps": {
+            "heavy": 2.0,
+            "ranged": 4.0,
+            "support": 1.0
+          },
+          "seed": 1715.0,
+          "spawn_interval": 1.35,
+          "waves": [
+            {
+              "at": 0.0,
+              "count": 1.0,
+              "cycle": [
+                "E12",
+                "E02",
+                "E07",
+                "E01"
+              ]
+            },
+            {
+              "at": 34.0,
+              "count": 2.0,
+              "cycle": [
+                "E09",
+                "E05",
+                "E03",
+                "E04"
+              ],
+              "interval": 1.35
+            }
+          ]
+        }
+      },
+      "stage": "B15",
+      "support_damage": 2760.7544
+    },
+    {
+      "active_seconds": {
+        "JIA": 140.516666666671
+      },
+      "boss_damage_by_ability": {
+        "JIA_basic": 2673.267,
+        "bow_support": 414.036000000001,
+        "emma_support": 429.1872,
+        "jia_break": 986.850000000001,
+        "jia_sweep": 296.6598
+      },
+      "boss_damage_by_source": {
+        "F11": 429.1872,
+        "JIA": 3956.7768,
+        "N07": 414.036000000001
+      },
+      "boss_remaining": {},
+      "boss_spawn_seconds": 98.6666666666624,
+      "boss_support_damage": 843.223200000001,
+      "casts": {
+        "F11:emma_support:support": 39,
+        "JIA:JIA_basic:front": 129,
+        "JIA:jia_break:front": 12,
+        "JIA:jia_sweep:front": 26,
+        "N07:bow_support:support": 31
+      },
+      "damage_attribution_available": true,
+      "damage_by_ability": {
+        "JIA_basic": 9637.605,
+        "bow_support": 1436.873,
+        "emma_support": 1801.1322,
+        "jia_break": 2155.525,
+        "jia_sweep": 1374.7948
+      },
+      "damage_by_source": {
+        "F11": 1801.1322,
+        "JIA": 13167.9248,
+        "N07": 1436.873
+      },
+      "damage_taken_events": [
+        {
+          "amount": 26.5353208036293,
+          "attack": "slam",
+          "enemy_id": 5,
+          "id": "JIA",
+          "kind": "damage_taken",
+          "position": "(471.3432, 1165.265)",
+          "time": 8.04999999999998
+        },
+        {
+          "amount": 20.5353208036293,
+          "attack": "slam",
+          "enemy_id": 5,
+          "id": "JIA",
+          "kind": "damage_taken",
+          "position": "(407.9579, 1183.596)",
+          "time": 9.25000000000004
+        },
+        {
+          "amount": 16.5845755022683,
+          "attack": "swipe",
+          "enemy_id": 20,
+          "id": "JIA",
+          "kind": "damage_taken",
+          "position": "(1057.05, 516.4557)",
+          "time": 24.3166666666666
+        },
+        {
+          "amount": 7.26766040181465,
+          "attack": "shot",
+          "enemy_id": 9,
+          "id": "JIA",
+          "kind": "damage_taken",
+          "position": "(922.1392, 781.7236)",
+          "time": 27.0999999999997
+        },
+        {
+          "amount": 7.26766040181465,
+          "attack": "fan",
+          "enemy_id": 47,
+          "id": "JIA",
+          "kind": "damage_taken",
+          "position": "(2028.474, 1384.708)",
+          "time": 49.8333333333318
+        },
+        {
+          "amount": 7.26766040181465,
+          "attack": "fan",
+          "enemy_id": 57,
+          "id": "JIA",
+          "kind": "damage_taken",
+          "position": "(2243.518, 1432.12)",
+          "time": 66.0999999999975
+        },
+        {
+          "amount": 11.6902138690862,
+          "attack": "charge",
+          "enemy_id": 58,
+          "id": "JIA",
+          "kind": "damage_taken",
+          "position": "(2426.581, 1170.967)",
+          "time": 67.7166666666641
+        },
+        {
+          "amount": 24.3240440699935,
+          "attack": "stele_arc_1",
+          "enemy_id": 39,
+          "id": "JIA",
+          "kind": "damage_taken",
+          "position": "(2178.431, 924.2883)",
+          "time": 70.8166666666639
+        },
+        {
+          "amount": 7.13992297817715,
+          "attack": "fan",
+          "enemy_id": 45,
+          "id": "JIA",
+          "kind": "damage_taken",
+          "position": "(2052.154, 894.6487)",
+          "time": 76.7833333333303
+        },
+        {
+          "amount": 7.13992297817715,
+          "attack": "fan",
+          "enemy_id": 51,
+          "id": "JIA",
+          "kind": "damage_taken",
+          "position": "(2066.959, 935.5377)",
+          "time": 77.1333333333302
+        },
+        {
+          "amount": 13.1399229781772,
+          "attack": "fan",
+          "enemy_id": 62,
+          "id": "JIA",
+          "kind": "damage_taken",
+          "position": "(2052.789, 1003.283)",
+          "time": 78.6999999999968
+        },
+        {
+          "amount": 13.1399229781772,
+          "attack": "fan",
+          "enemy_id": 51,
+          "id": "JIA",
+          "kind": "damage_taken",
+          "position": "(2126.627, 1068.491)",
+          "time": 79.3666666666634
+        },
+        {
+          "amount": 7.13992297817715,
+          "attack": "fan",
+          "enemy_id": 60,
+          "id": "JIA",
+          "kind": "damage_taken",
+          "position": "(2024.728, 1365.788)",
+          "time": 84.6999999999965
+        },
+        {
+          "amount": 7.13992297817715,
+          "attack": "fan",
+          "enemy_id": 73,
+          "id": "JIA",
+          "kind": "damage_taken",
+          "position": "(1874.379, 955.9479)",
+          "time": 99.0499999999957
+        },
+        {
+          "amount": 29.4777920410783,
+          "attack": "rider_lance",
+          "enemy_id": 84,
+          "id": "JIA",
+          "kind": "damage_taken",
+          "position": "(1793.161, 625.7336)",
+          "time": 101.133333333329
+        },
+        {
+          "amount": 25.9300128369705,
+          "attack": "rider_cleave",
+          "enemy_id": 84,
+          "id": "JIA",
+          "kind": "damage_taken",
+          "position": "(2028.938, 1177.467)",
+          "time": 105.266666666662
+        },
+        {
+          "amount": 7.13992297817715,
+          "attack": "fan",
+          "enemy_id": 77,
+          "id": "JIA",
+          "kind": "damage_taken",
+          "position": "(1846.454, 1122.998)",
+          "time": 108.249999999995
+        },
+        {
+          "amount": 29.4777920410783,
+          "attack": "rider_lance",
+          "enemy_id": 84,
+          "id": "JIA",
+          "kind": "damage_taken",
+          "position": "(1578.05, 1199.344)",
+          "time": 113.966666666661
+        },
+        {
+          "amount": 7.13992297817715,
+          "attack": "fan",
+          "enemy_id": 71,
+          "id": "JIA",
+          "kind": "damage_taken",
+          "position": "(1636.096, 1184.801)",
+          "time": 117.366666666661
+        },
+        {
+          "amount": 7.13992297817715,
+          "attack": "fan",
+          "enemy_id": 77,
+          "id": "JIA",
+          "kind": "damage_taken",
+          "position": "(1952.315, 964.0129)",
+          "time": 123.199999999994
+        },
+        {
+          "amount": 36.573350449294,
+          "attack": "tiger_long_charge",
+          "enemy_id": 84,
+          "id": "JIA",
+          "kind": "damage_taken",
+          "position": "(1872.367, 959.3726)",
+          "time": 123.649999999994
+        },
+        {
+          "amount": 13.1399229781772,
+          "attack": "fan",
+          "enemy_id": 71,
+          "id": "JIA",
+          "kind": "damage_taken",
+          "position": "(1998.371, 1000.386)",
+          "time": 124.366666666661
+        },
+        {
+          "amount": 24.0898587933248,
+          "attack": "stele_arc_1",
+          "enemy_id": 65,
+          "id": "JIA",
+          "kind": "damage_taken",
+          "position": "(2003.604, 1056.304)",
+          "time": 124.899999999994
+        },
+        {
+          "amount": 39.0255712451861,
+          "attack": "leopard_return",
+          "enemy_id": 84,
+          "id": "JIA",
+          "kind": "damage_taken",
+          "position": "(1371.372, 387.594)",
+          "time": 134.166666666666
+        }
+      ],
+      "elapsed": 140.516666666671,
+      "entry": {
+        "F11": {
+          "cooldowns": {
+            "F11_basic": 0.0,
+            "armor_guard": 0.0,
+            "emma_frost": 0.0,
+            "emma_ice": 0.0,
+            "emma_star": 0.0,
+            "emma_support": 1.50000000000001
+          },
+          "dead": false,
+          "hp": 381.1,
+          "level": 15,
+          "mp": 202.4,
+          "xp": 103.0
+        },
+        "JIA": {
+          "cooldowns": {
+            "JIA_basic": 0.618046971569839,
+            "armor_guard": 0.700000000000003,
+            "jia_break": 9.21666666666663,
+            "jia_sweep": 2.71666666666667
+          },
+          "dead": false,
+          "hp": 430.1,
+          "level": 14,
+          "mp": 157.4,
+          "xp": 115.0
+        },
+        "N07": {
+          "cooldowns": {
+            "bow_support": 2.36666666666667
+          },
+          "dead": false,
+          "hp": 360.1,
+          "level": 14,
+          "mp": 157.4,
+          "xp": 91.0
+        }
+      },
+      "entry_request": {
+        "attempt_id": "B16-19508396-395984185",
+        "characters": {
+          "F04": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 210.1,
+            "level": 4.0,
+            "mp": 152.4,
+            "xp": 0.0
+          },
+          "F05": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 232.1,
+            "level": 6.0,
+            "mp": 162.4,
+            "xp": 0.0
+          },
+          "F07": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 225.1,
+            "level": 4.0,
+            "mp": 112.4,
+            "xp": 0.0
+          },
+          "F08": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 255.1,
+            "level": 4.0,
+            "mp": 117.4,
+            "xp": 0.0
+          },
+          "F10": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 231.1,
+            "level": 5.0,
+            "mp": 152.4,
+            "xp": 0.0
+          },
+          "F11": {
+            "cooldowns": {
+              "F11_basic": 0.0,
+              "armor_guard": 0.0,
+              "emma_frost": 0.0,
+              "emma_ice": 0.0,
+              "emma_star": 0.0,
+              "emma_support": 1.50000000000001
+            },
+            "dead": false,
+            "hp": 381.1,
+            "level": 15.0,
+            "mp": 202.4,
+            "xp": 103.0
+          },
+          "JIA": {
+            "cooldowns": {
+              "JIA_basic": 0.618046971569839,
+              "armor_guard": 0.700000000000003,
+              "jia_break": 9.21666666666663,
+              "jia_sweep": 2.71666666666667
+            },
+            "dead": false,
+            "hp": 430.1,
+            "level": 14.0,
+            "mp": 157.4,
+            "xp": 115.0
+          },
+          "M07": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 279.1,
+            "level": 3.0,
+            "mp": 102.4,
+            "xp": 0.0
+          },
+          "M08": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 296.1,
+            "level": 5.0,
+            "mp": 127.4,
+            "xp": 0.0
+          },
+          "N01": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 274.1,
+            "level": 3.0,
+            "mp": 92.4,
+            "xp": 0.0
+          },
+          "N07": {
+            "cooldowns": {
+              "bow_support": 2.36666666666667
+            },
+            "dead": false,
+            "hp": 360.1,
+            "level": 14.0,
+            "mp": 157.4,
+            "xp": 91.0
+          },
+          "N11": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 288.1,
+            "level": 7.0,
+            "mp": 127.4,
+            "xp": 0.0
+          },
+          "N13": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 211.1,
+            "level": 5.0,
+            "mp": 162.4,
+            "xp": 0.0
+          },
+          "N14": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 195.1,
+            "level": 4.0,
+            "mp": 142.4,
+            "xp": 0.0
+          },
+          "N16": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 188.1,
+            "level": 2.0,
+            "mp": 127.4,
+            "xp": 0.0
+          },
+          "N17": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 207.1,
+            "level": 1.0,
+            "mp": 97.4,
+            "xp": 0.0
+          },
+          "N18": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 220.1,
+            "level": 4.0,
+            "mp": 122.4,
+            "xp": 0.0
+          }
+        },
+        "equipment": {
+          "accessory": "frost_jade",
+          "armor": "iron_armor",
+          "weapon": "long_spear"
+        },
+        "members": [
+          "JIA",
+          "F11",
+          "N07"
+        ],
+        "node": {
+          "id": "B16",
+          "kind": "battle",
+          "map_summary": "",
+          "name": "鬼曹主将",
+          "next": [
+            "S13"
+          ],
+          "segment": 4.0,
+          "summary": "击败首领后通行。关末从已解锁人物中抽卡。"
+        },
+        "seed": 1716.0,
+        "stage": {
+          "action_budget": {
+            "major": 2,
+            "melee": 2
+          },
+          "bonus_time": 215.0,
+          "boss_definition": "B16",
+          "boss_derivative_cap": 4,
+          "boss_hp": 4800.0,
+          "boss_kills": 60,
+          "boss_name": "曹纯",
+          "boss_time": 115.0,
+          "derivative_cap": 6,
+          "enemy_cap": 42,
+          "enemy_damage": 1.706,
+          "enemy_hp": 2.25,
+          "field_elites": [
+            "L06",
+            "L04"
+          ],
+          "map": "stone",
+          "role_caps": {
+            "heavy": 2,
+            "ranged": 4,
+            "support": 1
+          },
+          "seed": 1716,
+          "spawn_interval": 1.35,
+          "waves": [
+            {
+              "at": 0.0,
+              "count": 1,
+              "cycle": [
+                "E11",
+                "E04",
+                "E02",
+                "E01"
+              ]
+            },
+            {
+              "at": 34.0,
+              "count": 2,
+              "cycle": [
+                "E12",
+                "E08",
+                "E03",
+                "E05"
+              ],
+              "interval": 1.35
+            }
+          ]
+        }
+      },
+      "exit": {
+        "F11": {
+          "cooldowns": {
+            "F11_basic": 0.0,
+            "armor_guard": 0.0,
+            "emma_frost": 0.0,
+            "emma_ice": 0.0,
+            "emma_star": 0.0,
+            "emma_support": 1.66666666666667
+          },
+          "dead": false,
+          "hp": 397.1,
+          "level": 16,
+          "mp": 207.4,
+          "xp": 51.6666666666667
+        },
+        "JIA": {
+          "cooldowns": {
+            "JIA_basic": 0.34683026584867,
+            "armor_guard": 0.0,
+            "jia_break": 0.499999999999925,
+            "jia_sweep": 5.0
+          },
+          "dead": false,
+          "hp": 172.126392811297,
+          "level": 15,
+          "mp": 59.3999999999913,
+          "xp": 75.6666666666667
+        },
+        "N07": {
+          "cooldowns": {
+            "bow_support": 0.266666666666672
+          },
+          "dead": false,
+          "hp": 376.1,
+          "level": 15,
+          "mp": 162.4,
+          "xp": 51.6666666666667
+        }
+      },
+      "hurt_events": [
+        {
+          "amount": 26.5353208036293,
+          "id": "JIA",
+          "kind": "hurt",
+          "phase": "",
+          "position": "(407.9579, 1183.596)",
+          "seconds": 8.04999999999998
+        },
+        {
+          "amount": 20.5353208036293,
+          "id": "JIA",
+          "kind": "hurt",
+          "phase": "",
+          "position": "(407.9579, 1183.596)",
+          "seconds": 9.25000000000004
+        },
+        {
+          "amount": 16.5845755022683,
+          "id": "JIA",
+          "kind": "hurt",
+          "phase": "",
+          "position": "(1022.487, 568.4176)",
+          "seconds": 24.3166666666666
+        },
+        {
+          "amount": 7.26766040181465,
+          "id": "JIA",
+          "kind": "hurt",
+          "phase": "",
+          "position": "(938.9978, 774.1531)",
+          "seconds": 27.0999999999997
+        },
+        {
+          "amount": 7.26766040181465,
+          "id": "JIA",
+          "kind": "hurt",
+          "phase": "",
+          "position": "(2038.889, 1368.424)",
+          "seconds": 49.8333333333318
+        },
+        {
+          "amount": 7.26766040181465,
+          "id": "JIA",
+          "kind": "hurt",
+          "phase": "",
+          "position": "(2224.031, 1427.183)",
+          "seconds": 66.0999999999975
+        },
+        {
+          "amount": 11.6902138690862,
+          "id": "JIA",
+          "kind": "hurt",
+          "phase": "",
+          "position": "(2364.169, 1273.689)",
+          "seconds": 67.7166666666641
+        },
+        {
+          "amount": 24.3240440699935,
+          "id": "JIA",
+          "kind": "hurt",
+          "phase": "",
+          "position": "(2238.341, 936.4063)",
+          "seconds": 70.8166666666639
+        },
+        {
+          "amount": 7.13992297817715,
+          "id": "JIA",
+          "kind": "hurt",
+          "phase": "",
+          "position": "(2066.87, 879.7874)",
+          "seconds": 76.7833333333303
+        },
+        {
+          "amount": 7.13992297817715,
+          "id": "JIA",
+          "kind": "hurt",
+          "phase": "",
+          "position": "(2070.911, 916.4124)",
+          "seconds": 77.1333333333302
+        },
+        {
+          "amount": 13.1399229781772,
+          "id": "JIA",
+          "kind": "hurt",
+          "phase": "",
+          "position": "(2060.365, 989.3138)",
+          "seconds": 78.6999999999968
+        },
+        {
+          "amount": 13.1399229781772,
+          "id": "JIA",
+          "kind": "hurt",
+          "phase": "",
+          "position": "(2125.313, 1053.296)",
+          "seconds": 79.3666666666634
+        },
+        {
+          "amount": 7.13992297817715,
+          "id": "JIA",
+          "kind": "hurt",
+          "phase": "",
+          "position": "(2041.933, 1372.189)",
+          "seconds": 84.6999999999965
+        },
+        {
+          "amount": 7.13992297817715,
+          "id": "JIA",
+          "kind": "hurt",
+          "phase": "B16:0:combat",
+          "position": "(1874.033, 938.2157)",
+          "seconds": 99.0499999999957
+        },
+        {
+          "amount": 29.4777920410783,
+          "id": "JIA",
+          "kind": "hurt",
+          "phase": "B16:0:combat",
+          "position": "(1835.522, 738.0912)",
+          "seconds": 101.133333333329
+        },
+        {
+          "amount": 25.9300128369705,
+          "id": "JIA",
+          "kind": "hurt",
+          "phase": "B16:0:combat",
+          "position": "(1800.34, 1098.77)",
+          "seconds": 105.266666666662
+        },
+        {
+          "amount": 7.13992297817715,
+          "id": "JIA",
+          "kind": "hurt",
+          "phase": "B16:0:combat",
+          "position": "(1835.243, 1106.907)",
+          "seconds": 108.249999999995
+        },
+        {
+          "amount": 29.4777920410783,
+          "id": "JIA",
+          "kind": "hurt",
+          "phase": "B16:0:combat",
+          "position": "(1637.912, 1177.313)",
+          "seconds": 113.966666666661
+        },
+        {
+          "amount": 7.13992297817715,
+          "id": "JIA",
+          "kind": "hurt",
+          "phase": "B16:0:combat",
+          "position": "(1616.659, 1186.126)",
+          "seconds": 117.366666666661
+        },
+        {
+          "amount": 7.13992297817715,
+          "id": "JIA",
+          "kind": "hurt",
+          "phase": "B16:1:combat",
+          "position": "(1937.684, 954.4224)",
+          "seconds": 123.199999999994
+        },
+        {
+          "amount": 36.573350449294,
+          "id": "JIA",
+          "kind": "hurt",
+          "phase": "B16:1:combat",
+          "position": "(1935.314, 961.119)",
+          "seconds": 123.649999999994
+        },
+        {
+          "amount": 13.1399229781772,
+          "id": "JIA",
+          "kind": "hurt",
+          "phase": "B16:1:combat",
+          "position": "(2016.099, 995.1144)",
+          "seconds": 124.366666666661
+        },
+        {
+          "amount": 24.0898587933248,
+          "id": "JIA",
+          "kind": "hurt",
+          "phase": "B16:1:combat",
+          "position": "(2016.099, 995.1144)",
+          "seconds": 124.899999999994
+        },
+        {
+          "amount": 39.0255712451861,
+          "id": "JIA",
+          "kind": "hurt",
+          "phase": "B16:1:combat",
+          "position": "(1402.332, 444.5256)",
+          "seconds": 134.166666666666
+        }
+      ],
+      "hurt_total": {
+        "JIA": 395.446063442754
+      },
+      "last_live_shields": {
+        "F11": 0.0,
+        "JIA": 6.0,
+        "N07": 0.0
+      },
+      "last_phase": "B16:1:combat",
+      "max_hostiles": 17,
+      "mechanics": {},
+      "mp_observed_recovery": {
+        "F11": 5.0,
+        "JIA": 902.906666666658,
+        "N07": 5.0
+      },
+      "outcome": "victory",
+      "outcome_reason": "authentic_victory",
+      "paid_mp": {
+        "F11": 0.0,
+        "JIA": 1004.0,
+        "N07": 0.0
+      },
+      "phase_damage_attribution": {
+        "B16:0": 2138.5412,
+        "B16:1": 2661.4588,
+        "D01:0": 315.0,
+        "D05:0": 367.18,
+        "E01:0": 513.0,
+        "E02:0": 432.0,
+        "E03:0": 3132.0,
+        "E04:0": 1215.0,
+        "E05:0": 1728.0,
+        "E11:0": 1687.5,
+        "E12:0": 1248.75,
+        "L06:0": 967.5
+      },
+      "phase_marks": [
+        {
+          "active": "JIA",
+          "bank": 0.0,
+          "form_name": "曹纯",
+          "hp": 1920.0,
+          "phase": "B16:0:combat",
+          "player_position": "(1793.161, 925.7336)",
+          "resources": {
+            "F11": {
+              "cooldowns": {
+                "F11_basic": 0.0,
+                "armor_guard": 0.0,
+                "emma_frost": 0.0,
+                "emma_ice": 0.0,
+                "emma_star": 0.0,
+                "emma_support": 2.58333333333334
+              },
+              "dead": false,
+              "hp": 397.1,
+              "level": 16,
+              "mp": 207.4,
+              "xp": 4.66666666666667
+            },
+            "JIA": {
+              "cooldowns": {
+                "JIA_basic": 0.596830265848671,
+                "armor_guard": 0.0,
+                "jia_break": 8.34999999999992,
+                "jia_sweep": 2.85000000000001
+              },
+              "dead": false,
+              "hp": 398.400385109114,
+              "level": 15,
+              "mp": 100.669999999998,
+              "xp": 28.6666666666667
+            },
+            "N07": {
+              "cooldowns": {
+                "bow_support": 0.0
+              },
+              "dead": false,
+              "hp": 376.1,
+              "level": 15,
+              "mp": 162.4,
+              "xp": 4.66666666666667
+            }
+          },
+          "seconds": 98.6666666666624,
+          "shields": {
+            "F11": 0.0,
+            "JIA": 6.0,
+            "N07": 0.0
+          }
+        },
+        {
+          "active": "JIA",
+          "bank": 218.5412,
+          "form_name": "虎豹甲骑巨相",
+          "hp": 2880.0,
+          "phase": "B16:1:transition",
+          "player_position": "(1656.773, 955.0563)",
+          "resources": {
+            "F11": {
+              "cooldowns": {
+                "F11_basic": 0.0,
+                "armor_guard": 0.0,
+                "emma_frost": 0.0,
+                "emma_ice": 0.0,
+                "emma_star": 0.0,
+                "emma_support": 1.83333333333334
+              },
+              "dead": false,
+              "hp": 397.1,
+              "level": 16,
+              "mp": 207.4,
+              "xp": 13.6666666666667
+            },
+            "JIA": {
+              "cooldowns": {
+                "JIA_basic": 0.0,
+                "armor_guard": 0.0,
+                "jia_break": 10.0,
+                "jia_sweep": 3.00000000000001
+              },
+              "dead": false,
+              "hp": 292.095019255456,
+              "level": 15,
+              "mp": 67.3999999999944,
+              "xp": 37.6666666666667
+            },
+            "N07": {
+              "cooldowns": {
+                "bow_support": 0.0
+              },
+              "dead": false,
+              "hp": 376.1,
+              "level": 15,
+              "mp": 162.4,
+              "xp": 13.6666666666667
+            }
+          },
+          "seconds": 120.516666666661,
+          "shields": {
+            "F11": 0.0,
+            "JIA": 6.0,
+            "N07": 0.0
+          }
+        },
+        {
+          "active": "JIA",
+          "bank": 479.7588,
+          "form_name": "虎豹甲骑巨相",
+          "hp": 2880.0,
+          "phase": "B16:1:observation",
+          "player_position": "(1796.727, 872.0217)",
+          "resources": {
+            "F11": {
+              "cooldowns": {
+                "F11_basic": 0.0,
+                "armor_guard": 0.0,
+                "emma_frost": 0.0,
+                "emma_ice": 0.0,
+                "emma_star": 0.0,
+                "emma_support": 0.850000000000008
+              },
+              "dead": false,
+              "hp": 397.1,
+              "level": 16,
+              "mp": 207.4,
+              "xp": 13.6666666666667
+            },
+            "JIA": {
+              "cooldowns": {
+                "JIA_basic": 0.49683026584867,
+                "armor_guard": 0.0,
+                "jia_break": 9.01666666666662,
+                "jia_sweep": 2.01666666666668
+              },
+              "dead": false,
+              "hp": 292.095019255456,
+              "level": 15,
+              "mp": 73.1033333333276,
+              "xp": 37.6666666666667
+            },
+            "N07": {
+              "cooldowns": {
+                "bow_support": 2.26666666666667
+              },
+              "dead": false,
+              "hp": 376.1,
+              "level": 15,
+              "mp": 162.4,
+              "xp": 13.6666666666667
+            }
+          },
+          "seconds": 121.499999999994,
+          "shields": {
+            "F11": 0.0,
+            "JIA": 6.0,
+            "N07": 0.0
+          }
+        },
+        {
+          "active": "JIA",
+          "bank": 0.0,
+          "form_name": "虎豹甲骑巨相",
+          "hp": 2306.0884,
+          "phase": "B16:1:combat",
+          "player_position": "(1838.879, 873.1974)",
+          "resources": {
+            "F11": {
+              "cooldowns": {
+                "F11_basic": 0.0,
+                "armor_guard": 0.0,
+                "emma_frost": 0.0,
+                "emma_ice": 0.0,
+                "emma_star": 0.0,
+                "emma_support": 0.200000000000007
+              },
+              "dead": false,
+              "hp": 397.1,
+              "level": 16,
+              "mp": 207.4,
+              "xp": 13.6666666666667
+            },
+            "JIA": {
+              "cooldowns": {
+                "JIA_basic": 0.463496932515337,
+                "armor_guard": 0.0,
+                "jia_break": 8.36666666666659,
+                "jia_sweep": 1.36666666666668
+              },
+              "dead": false,
+              "hp": 292.095019255456,
+              "level": 15,
+              "mp": 76.8733333333275,
+              "xp": 37.6666666666667
+            },
+            "N07": {
+              "cooldowns": {
+                "bow_support": 1.61666666666667
+              },
+              "dead": false,
+              "hp": 376.1,
+              "level": 15,
+              "mp": 162.4,
+              "xp": 13.6666666666667
+            }
+          },
+          "seconds": 122.149999999994,
+          "shields": {
+            "F11": 0.0,
+            "JIA": 6.0,
+            "N07": 0.0
+          }
+        }
+      ],
+      "phase_seconds": {
+        "B16:0:combat": 21.8499999999988,
+        "B16:1:combat": 18.3666666666763,
+        "B16:1:observation": 0.649999999999963,
+        "B16:1:transition": 0.983333333333277
+      },
+      "recording": {
+        "captured_frames": 508,
+        "completed_signals": 1,
+        "failed_signals": 0,
+        "human_acceptance": false,
+        "last_camera": {
+          "escape_needed": false,
+          "escape_valid": false,
+          "viewport": "[P: (1095.0, 587.0), S: (1280.0, 720.0)]",
+          "zoom": 1.0
+        },
+        "mode": "automatic_input_real_renderer",
+        "pause_input_checked": false,
+        "phase_seen": [
+          "0",
+          "1"
+        ],
+        "preboss_simulated_steps": 5919,
+        "probe_incomplete": false,
+        "recorded_steps": 2540,
+        "render_backend": "X11",
+        "video": {
+          "errors": [
+            ""
+          ],
+          "exit": 0,
+          "fps": 12,
+          "frames": 508,
+          "path": "/home/weathour/programs/desktop-projects/My-game/docs/implementation/evidence/2026-10-29/boss-depth/playback/explore-B16.mp4",
+          "silent": true
+        }
+      },
+      "resource_balance": {
+        "F11": {
+          "net_hp_restored_including_level_growth": 16.0,
+          "net_mp_restored_including_level_growth": 5.0,
+          "paid_mp": 0.0,
+          "received_hp_damage": 0.0
+        },
+        "JIA": {
+          "net_hp_restored_including_level_growth": 137.47245625405,
+          "net_mp_restored_including_level_growth": 905.999999999991,
+          "paid_mp": 1004.0,
+          "received_hp_damage": 395.446063442754
+        },
+        "N07": {
+          "net_hp_restored_including_level_growth": 16.0,
+          "net_mp_restored_including_level_growth": 5.0,
+          "paid_mp": 0.0,
+          "received_hp_damage": 0.0
+        }
+      },
+      "seen_boss_actions": {
+        "0:charge": true,
+        "0:slam": true,
+        "1:charge": true,
+        "1:pulse": true,
+        "1:slam": true
+      },
+      "shield_absorbed_lower_bound": {
+        "F11": 0.0,
+        "JIA": 24.0,
+        "N07": 0.0
+      },
+      "shield_cast_events": [],
+      "shield_gain_exact": {},
+      "shield_observed_gain_lower_bound": {
+        "F11": 0.0,
+        "JIA": 30.0,
+        "N07": 0.0
+      },
+      "shield_spent": {
+        "F11": 0.0,
+        "JIA": 0.0,
+        "N07": 0.0
+      },
+      "source_request": {
+        "attempt_id": "B16-19508396-395984185",
+        "characters": {
+          "F04": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 210.1,
+            "level": 4.0,
+            "mp": 152.4,
+            "xp": 0.0
+          },
+          "F05": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 232.1,
+            "level": 6.0,
+            "mp": 162.4,
+            "xp": 0.0
+          },
+          "F07": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 225.1,
+            "level": 4.0,
+            "mp": 112.4,
+            "xp": 0.0
+          },
+          "F08": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 255.1,
+            "level": 4.0,
+            "mp": 117.4,
+            "xp": 0.0
+          },
+          "F10": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 231.1,
+            "level": 5.0,
+            "mp": 152.4,
+            "xp": 0.0
+          },
+          "F11": {
+            "cooldowns": {
+              "F11_basic": 0.0,
+              "armor_guard": 0.0,
+              "emma_frost": 0.0,
+              "emma_ice": 0.0,
+              "emma_star": 0.0,
+              "emma_support": 1.50000000000001
+            },
+            "dead": false,
+            "hp": 381.1,
+            "level": 15.0,
+            "mp": 202.4,
+            "xp": 103.0
+          },
+          "JIA": {
+            "cooldowns": {
+              "JIA_basic": 0.618046971569839,
+              "armor_guard": 0.700000000000003,
+              "jia_break": 9.21666666666663,
+              "jia_sweep": 2.71666666666667
+            },
+            "dead": false,
+            "hp": 430.1,
+            "level": 14.0,
+            "mp": 157.4,
+            "xp": 115.0
+          },
+          "M07": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 279.1,
+            "level": 3.0,
+            "mp": 102.4,
+            "xp": 0.0
+          },
+          "M08": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 296.1,
+            "level": 5.0,
+            "mp": 127.4,
+            "xp": 0.0
+          },
+          "N01": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 274.1,
+            "level": 3.0,
+            "mp": 92.4,
+            "xp": 0.0
+          },
+          "N07": {
+            "cooldowns": {
+              "bow_support": 2.36666666666667
+            },
+            "dead": false,
+            "hp": 360.1,
+            "level": 14.0,
+            "mp": 157.4,
+            "xp": 91.0
+          },
+          "N11": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 288.1,
+            "level": 7.0,
+            "mp": 127.4,
+            "xp": 0.0
+          },
+          "N13": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 211.1,
+            "level": 5.0,
+            "mp": 162.4,
+            "xp": 0.0
+          },
+          "N14": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 195.1,
+            "level": 4.0,
+            "mp": 142.4,
+            "xp": 0.0
+          },
+          "N16": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 188.1,
+            "level": 2.0,
+            "mp": 127.4,
+            "xp": 0.0
+          },
+          "N17": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 207.1,
+            "level": 1.0,
+            "mp": 97.4,
+            "xp": 0.0
+          },
+          "N18": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 220.1,
+            "level": 4.0,
+            "mp": 122.4,
+            "xp": 0.0
+          }
+        },
+        "equipment": {
+          "accessory": "frost_jade",
+          "armor": "iron_armor",
+          "weapon": "long_spear"
+        },
+        "members": [
+          "JIA",
+          "F11",
+          "N07"
+        ],
+        "node": {
+          "id": "B16",
+          "kind": "battle",
+          "map_summary": "",
+          "name": "鬼曹主将",
+          "next": [
+            "S13"
+          ],
+          "segment": 4.0,
+          "summary": "击败首领后通行。关末从已解锁人物中抽卡。"
+        },
+        "seed": 1716.0,
+        "stage": {
+          "action_budget": {
+            "major": 2.0,
+            "melee": 2.0
+          },
+          "bonus_time": 215.0,
+          "boss_definition": "B16",
+          "boss_derivative_cap": 4.0,
+          "boss_hp": 4800.0,
+          "boss_kills": 60.0,
+          "boss_name": "曹纯",
+          "boss_time": 115.0,
+          "derivative_cap": 6.0,
+          "enemy_cap": 42.0,
+          "enemy_damage": 1.706,
+          "enemy_hp": 2.25,
+          "field_elites": [
+            "L06",
+            "L04"
+          ],
+          "map": "stone",
+          "role_caps": {
+            "heavy": 2.0,
+            "ranged": 4.0,
+            "support": 1.0
+          },
+          "seed": 1716.0,
+          "spawn_interval": 1.35,
+          "waves": [
+            {
+              "at": 0.0,
+              "count": 1.0,
+              "cycle": [
+                "E11",
+                "E04",
+                "E02",
+                "E01"
+              ]
+            },
+            {
+              "at": 34.0,
+              "count": 2.0,
+              "cycle": [
+                "E12",
+                "E08",
+                "E03",
+                "E05"
+              ],
+              "interval": 1.35
+            }
+          ]
+        }
+      },
+      "stage": "B16",
+      "support_damage": 3238.0052
+    },
+    {
+      "active_seconds": {
+        "JIA": 152.283333333347
+      },
+      "boss_damage_by_ability": {
+        "JIA_basic": 3766.434,
+        "bow_support": 605.22,
+        "emma_support": 571.495999999997,
+        "jia_break": 661.5,
+        "jia_sweep": 595.35
+      },
+      "boss_damage_by_source": {
+        "F11": 571.495999999997,
+        "JIA": 5023.284,
+        "N07": 605.22
+      },
+      "boss_remaining": {},
+      "boss_spawn_seconds": 115.016666666661,
+      "boss_support_damage": 1176.716,
+      "casts": {
+        "F11:emma_support:support": 43,
+        "JIA:JIA_basic:front": 145,
+        "JIA:jia_break:front": 12,
+        "JIA:jia_sweep:front": 26,
+        "N07:bow_support:support": 33
+      },
+      "damage_attribution_available": true,
+      "damage_by_ability": {
+        "JIA_basic": 10815.709,
+        "bow_support": 1782.17,
+        "emma_support": 1945.246,
+        "jia_break": 1620.05,
+        "jia_sweep": 1377.2
+      },
+      "damage_by_source": {
+        "F11": 1945.246,
+        "JIA": 13812.959,
+        "N07": 1782.17
+      },
+      "damage_taken_events": [
+        {
+          "amount": 24.6964651639344,
+          "attack": "swipe",
+          "enemy_id": 5,
+          "id": "JIA",
+          "kind": "damage_taken",
+          "position": "(482.7859, 1234.169)",
+          "time": 10.1333333333334
+        },
+        {
+          "amount": 7.47079918032787,
+          "attack": "fan",
+          "enemy_id": 30,
+          "id": "JIA",
+          "kind": "damage_taken",
+          "position": "(364.2389, 1440.036)",
+          "time": 58.3666666666646
+        },
+        {
+          "amount": 7.47079918032787,
+          "attack": "fan",
+          "enemy_id": 26,
+          "id": "JIA",
+          "kind": "damage_taken",
+          "position": "(431.0354, 1421.109)",
+          "time": 60.8333333333312
+        },
+        {
+          "amount": 7.47079918032787,
+          "attack": "fan",
+          "enemy_id": 42,
+          "id": "JIA",
+          "kind": "damage_taken",
+          "position": "(1114.696, 1286.624)",
+          "time": 70.9166666666639
+        },
+        {
+          "amount": 7.47079918032787,
+          "attack": "fan",
+          "enemy_id": 42,
+          "id": "JIA",
+          "kind": "damage_taken",
+          "position": "(1234.239, 1270.944)",
+          "time": 81.2666666666633
+        },
+        {
+          "amount": 7.47079918032787,
+          "attack": "fan",
+          "enemy_id": 40,
+          "id": "JIA",
+          "kind": "damage_taken",
+          "position": "(1198.551, 1237.949)",
+          "time": 82.6833333333299
+        },
+        {
+          "amount": 13.4707991803279,
+          "attack": "fan",
+          "enemy_id": 42,
+          "id": "JIA",
+          "kind": "damage_taken",
+          "position": "(1236.424, 1268.613)",
+          "time": 83.8166666666632
+        },
+        {
+          "amount": 7.47079918032787,
+          "attack": "fan",
+          "enemy_id": 49,
+          "id": "JIA",
+          "kind": "damage_taken",
+          "position": "(1132.611, 1594.881)",
+          "time": 92.6166666666627
+        },
+        {
+          "amount": 7.47079918032787,
+          "attack": "fan",
+          "enemy_id": 40,
+          "id": "JIA",
+          "kind": "damage_taken",
+          "position": "(940.186, 1660.784)",
+          "time": 97.0499999999958
+        },
+        {
+          "amount": 7.47079918032787,
+          "attack": "fan",
+          "enemy_id": 59,
+          "id": "JIA",
+          "kind": "damage_taken",
+          "position": "(855.5969, 1655.177)",
+          "time": 101.999999999995
+        },
+        {
+          "amount": 7.47079918032787,
+          "attack": "fan",
+          "enemy_id": 64,
+          "id": "JIA",
+          "kind": "damage_taken",
+          "position": "(768.8882, 1685.223)",
+          "time": 105.666666666662
+        },
+        {
+          "amount": 7.47079918032787,
+          "attack": "fan",
+          "enemy_id": 40,
+          "id": "JIA",
+          "kind": "damage_taken",
+          "position": "(844.0443, 1712.481)",
+          "time": 106.299999999995
+        },
+        {
+          "amount": 13.4707991803279,
+          "attack": "fan",
+          "enemy_id": 59,
+          "id": "JIA",
+          "kind": "damage_taken",
+          "position": "(862.2024, 1610.285)",
+          "time": 110.433333333328
+        },
+        {
+          "amount": 7.47079918032787,
+          "attack": "fan",
+          "enemy_id": 26,
+          "id": "JIA",
+          "kind": "damage_taken",
+          "position": "(987.0801, 1679.612)",
+          "time": 111.599999999995
+        },
+        {
+          "amount": 13.4707991803279,
+          "attack": "fan",
+          "enemy_id": 26,
+          "id": "JIA",
+          "kind": "damage_taken",
+          "position": "(1338.263, 1391.714)",
+          "time": 119.466666666661
+        },
+        {
+          "amount": 31.1008260758197,
+          "attack": "human_formation",
+          "enemy_id": 83,
+          "id": "JIA",
+          "kind": "damage_taken",
+          "position": "(1397.216, 1639.279)",
+          "time": 124.733333333328
+        },
+        {
+          "amount": 36.6659499871926,
+          "attack": "war_formation",
+          "enemy_id": 83,
+          "id": "JIA",
+          "kind": "damage_taken",
+          "position": "(1826.933, 1398.455)",
+          "time": 143.650000000006
+        }
+      ],
+      "elapsed": 152.283333333347,
+      "entry": {
+        "F11": {
+          "cooldowns": {
+            "F11_basic": 0.0,
+            "armor_guard": 0.0,
+            "emma_frost": 0.0,
+            "emma_ice": 0.0,
+            "emma_star": 0.0,
+            "emma_support": 1.66666666666667
+          },
+          "dead": false,
+          "hp": 397.1,
+          "level": 16,
+          "mp": 207.4,
+          "xp": 51.6666666666667
+        },
+        "JIA": {
+          "cooldowns": {
+            "JIA_basic": 0.34683026584867,
+            "armor_guard": 0.0,
+            "jia_break": 0.499999999999925,
+            "jia_sweep": 5.0
+          },
+          "dead": false,
+          "hp": 446.1,
+          "level": 15,
+          "mp": 162.4,
+          "xp": 75.6666666666667
+        },
+        "N07": {
+          "cooldowns": {
+            "bow_support": 0.266666666666672
+          },
+          "dead": false,
+          "hp": 376.1,
+          "level": 15,
+          "mp": 162.4,
+          "xp": 51.6666666666667
+        }
+      },
+      "entry_request": {
+        "attempt_id": "B17-20602500-536521707",
+        "characters": {
+          "F04": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 210.1,
+            "level": 4.0,
+            "mp": 152.4,
+            "xp": 0.0
+          },
+          "F05": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 232.1,
+            "level": 6.0,
+            "mp": 162.4,
+            "xp": 0.0
+          },
+          "F06": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 231.1,
+            "level": 5.0,
+            "mp": 132.4,
+            "xp": 0.0
+          },
+          "F07": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 241.1,
+            "level": 5.0,
+            "mp": 117.4,
+            "xp": 0.0
+          },
+          "F08": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 255.1,
+            "level": 4.0,
+            "mp": 117.4,
+            "xp": 0.0
+          },
+          "F10": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 231.1,
+            "level": 5.0,
+            "mp": 152.4,
+            "xp": 0.0
+          },
+          "F11": {
+            "cooldowns": {
+              "F11_basic": 0.0,
+              "armor_guard": 0.0,
+              "emma_frost": 0.0,
+              "emma_ice": 0.0,
+              "emma_star": 0.0,
+              "emma_support": 1.66666666666667
+            },
+            "dead": false,
+            "hp": 397.1,
+            "level": 16.0,
+            "mp": 207.4,
+            "xp": 51.6666666666667
+          },
+          "JIA": {
+            "cooldowns": {
+              "JIA_basic": 0.34683026584867,
+              "armor_guard": 0.0,
+              "jia_break": 0.499999999999925,
+              "jia_sweep": 5.0
+            },
+            "dead": false,
+            "hp": 446.1,
+            "level": 15.0,
+            "mp": 162.4,
+            "xp": 75.6666666666667
+          },
+          "M07": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 279.1,
+            "level": 3.0,
+            "mp": 102.4,
+            "xp": 0.0
+          },
+          "M08": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 312.1,
+            "level": 6.0,
+            "mp": 132.4,
+            "xp": 0.0
+          },
+          "N01": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 274.1,
+            "level": 3.0,
+            "mp": 92.4,
+            "xp": 0.0
+          },
+          "N07": {
+            "cooldowns": {
+              "bow_support": 0.266666666666672
+            },
+            "dead": false,
+            "hp": 376.1,
+            "level": 15.0,
+            "mp": 162.4,
+            "xp": 51.6666666666667
+          },
+          "N11": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 288.1,
+            "level": 7.0,
+            "mp": 127.4,
+            "xp": 0.0
+          },
+          "N13": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 211.1,
+            "level": 5.0,
+            "mp": 162.4,
+            "xp": 0.0
+          },
+          "N14": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 195.1,
+            "level": 4.0,
+            "mp": 142.4,
+            "xp": 0.0
+          },
+          "N16": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 188.1,
+            "level": 2.0,
+            "mp": 127.4,
+            "xp": 0.0
+          },
+          "N17": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 207.1,
+            "level": 1.0,
+            "mp": 97.4,
+            "xp": 0.0
+          },
+          "N18": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 220.1,
+            "level": 4.0,
+            "mp": 122.4,
+            "xp": 0.0
+          }
+        },
+        "equipment": {
+          "accessory": "frost_jade",
+          "armor": "iron_armor",
+          "weapon": "long_spear"
+        },
+        "members": [
+          "JIA",
+          "F11",
+          "N07"
+        ],
+        "node": {
+          "id": "B17",
+          "kind": "elite",
+          "name": "白门楼前精英关",
+          "next": [
+            "B18"
+          ],
+          "segment": 5.0,
+          "summary": "白门楼前最后一道防线。通过相关剧情后，张辽、高顺与陈宫加入卡池。"
+        },
+        "seed": 1717.0,
+        "stage": {
+          "action_budget": {
+            "major": 2,
+            "melee": 2
+          },
+          "bonus_time": 215.0,
+          "boss_definition": "B17",
+          "boss_derivative_cap": 4,
+          "boss_hp": 6200.0,
+          "boss_kills": 60,
+          "boss_name": "张辽",
+          "boss_time": 115.0,
+          "derivative_cap": 6,
+          "enemy_cap": 42,
+          "enemy_damage": 1.753,
+          "enemy_hp": 2.35,
+          "field_elites": [
+            "L03",
+            "L05"
+          ],
+          "map": "stone",
+          "role_caps": {
+            "heavy": 2,
+            "ranged": 4,
+            "support": 1
+          },
+          "seed": 1717,
+          "spawn_interval": 1.35,
+          "waves": [
+            {
+              "at": 0.0,
+              "count": 1,
+              "cycle": [
+                "E09",
+                "E07",
+                "E04",
+                "E02"
+              ]
+            },
+            {
+              "at": 34.0,
+              "count": 2,
+              "cycle": [
+                "E12",
+                "E05",
+                "E11",
+                "E01"
+              ],
+              "interval": 1.35
+            }
+          ]
+        }
+      },
+      "exit": {
+        "F11": {
+          "cooldowns": {
+            "F11_basic": 0.0,
+            "armor_guard": 0.0,
+            "emma_frost": 0.0,
+            "emma_ice": 0.0,
+            "emma_star": 0.0,
+            "emma_support": 3.41666666666667
+          },
+          "dead": false,
+          "hp": 397.1,
+          "level": 16,
+          "mp": 207.4,
+          "xp": 179.333333333333
+        },
+        "JIA": {
+          "cooldowns": {
+            "JIA_basic": 0.413681592039801,
+            "armor_guard": 0.0,
+            "jia_break": 0.733333333333259,
+            "jia_sweep": 4.73333333333333
+          },
+          "dead": false,
+          "hp": 462.1,
+          "level": 16,
+          "mp": 167.4,
+          "xp": 5.33333333333333
+        },
+        "N07": {
+          "cooldowns": {
+            "bow_support": 2.81666666666667
+          },
+          "dead": false,
+          "hp": 376.1,
+          "level": 15,
+          "mp": 162.4,
+          "xp": 179.333333333333
+        }
+      },
+      "hurt_events": [
+        {
+          "amount": 24.6964651639344,
+          "id": "JIA",
+          "kind": "hurt",
+          "phase": "",
+          "position": "(488.6036, 1298.572)",
+          "seconds": 10.1333333333334
+        },
+        {
+          "amount": 7.47079918032787,
+          "id": "JIA",
+          "kind": "hurt",
+          "phase": "",
+          "position": "(343.3065, 1439.266)",
+          "seconds": 58.3666666666646
+        },
+        {
+          "amount": 7.47079918032787,
+          "id": "JIA",
+          "kind": "hurt",
+          "phase": "",
+          "position": "(424.5396, 1440.501)",
+          "seconds": 60.8333333333312
+        },
+        {
+          "amount": 7.47079918032787,
+          "id": "JIA",
+          "kind": "hurt",
+          "phase": "",
+          "position": "(1133.081, 1295.663)",
+          "seconds": 70.9166666666639
+        },
+        {
+          "amount": 7.47079918032787,
+          "id": "JIA",
+          "kind": "hurt",
+          "phase": "",
+          "position": "(1252.706, 1272.87)",
+          "seconds": 81.2666666666633
+        },
+        {
+          "amount": 7.47079918032787,
+          "id": "JIA",
+          "kind": "hurt",
+          "phase": "",
+          "position": "(1219.245, 1237.53)",
+          "seconds": 82.6833333333299
+        },
+        {
+          "amount": 13.4707991803279,
+          "id": "JIA",
+          "kind": "hurt",
+          "phase": "",
+          "position": "(1253.919, 1277.985)",
+          "seconds": 83.8166666666632
+        },
+        {
+          "amount": 7.47079918032787,
+          "id": "JIA",
+          "kind": "hurt",
+          "phase": "",
+          "position": "(1146.019, 1605.035)",
+          "seconds": 92.6166666666627
+        },
+        {
+          "amount": 7.47079918032787,
+          "id": "JIA",
+          "kind": "hurt",
+          "phase": "",
+          "position": "(933.874, 1678.852)",
+          "seconds": 97.0499999999958
+        },
+        {
+          "amount": 7.47079918032787,
+          "id": "JIA",
+          "kind": "hurt",
+          "phase": "",
+          "position": "(852.9723, 1675.342)",
+          "seconds": 101.999999999995
+        },
+        {
+          "amount": 7.47079918032787,
+          "id": "JIA",
+          "kind": "hurt",
+          "phase": "",
+          "position": "(778.7138, 1701.801)",
+          "seconds": 105.666666666662
+        },
+        {
+          "amount": 7.47079918032787,
+          "id": "JIA",
+          "kind": "hurt",
+          "phase": "",
+          "position": "(837.5645, 1729.995)",
+          "seconds": 106.299999999995
+        },
+        {
+          "amount": 13.4707991803279,
+          "id": "JIA",
+          "kind": "hurt",
+          "phase": "",
+          "position": "(861.3023, 1631.238)",
+          "seconds": 110.433333333328
+        },
+        {
+          "amount": 7.47079918032787,
+          "id": "JIA",
+          "kind": "hurt",
+          "phase": "",
+          "position": "(984.2724, 1695.585)",
+          "seconds": 111.599999999995
+        },
+        {
+          "amount": 13.4707991803279,
+          "id": "JIA",
+          "kind": "hurt",
+          "phase": "B17:0:combat",
+          "position": "(1358.179, 1392.142)",
+          "seconds": 119.466666666661
+        },
+        {
+          "amount": 31.1008260758197,
+          "id": "JIA",
+          "kind": "hurt",
+          "phase": "B17:0:combat",
+          "position": "(1437.974, 1588.013)",
+          "seconds": 124.733333333328
+        },
+        {
+          "amount": 36.6659499871926,
+          "id": "JIA",
+          "kind": "hurt",
+          "phase": "B17:1:combat",
+          "position": "(1836.642, 1353.272)",
+          "seconds": 143.650000000006
+        }
+      ],
+      "hurt_total": {
+        "JIA": 215.054429751537
+      },
+      "last_live_shields": {
+        "F11": 0.0,
+        "JIA": 6.0,
+        "N07": 0.0
+      },
+      "last_phase": "B17:1:combat",
+      "max_hostiles": 13,
+      "mechanics": {},
+      "mp_observed_recovery": {
+        "JIA": 1005.52
+      },
+      "outcome": "victory",
+      "outcome_reason": "authentic_victory",
+      "paid_mp": {
+        "F11": 0.0,
+        "JIA": 1004.0,
+        "N07": 0.0
+      },
+      "phase_damage_attribution": {
+        "B17:0": 2549.745,
+        "B17:1": 3650.255,
+        "D01:0": 460.6,
+        "D05:0": 190.275,
+        "E01:0": 2679.0,
+        "E02:0": 451.2,
+        "E04:0": 1269.0,
+        "E05:0": 683.2,
+        "E07:0": 507.6,
+        "E09:0": 1880.0,
+        "E11:0": 1410.0,
+        "E12:0": 869.5,
+        "L03:0": 940.0
+      },
+      "phase_marks": [
+        {
+          "active": "JIA",
+          "bank": 0.0,
+          "form_name": "张辽",
+          "hp": 2480.0,
+          "phase": "B17:0:combat",
+          "player_position": "(1308.182, 1519.342)",
+          "resources": {
+            "F11": {
+              "cooldowns": {
+                "F11_basic": 0.0,
+                "armor_guard": 0.0,
+                "emma_frost": 0.0,
+                "emma_ice": 0.0,
+                "emma_star": 0.0,
+                "emma_support": 2.00000000000001
+              },
+              "dead": false,
+              "hp": 397.1,
+              "level": 16,
+              "mp": 207.4,
+              "xp": 122.666666666667
+            },
+            "JIA": {
+              "cooldowns": {
+                "JIA_basic": 0.230348258706468,
+                "armor_guard": 0.0,
+                "jia_break": 6.49999999999991,
+                "jia_sweep": 5.0
+              },
+              "dead": false,
+              "hp": 312.283145491804,
+              "level": 15,
+              "mp": 0.399999999989909,
+              "xp": 146.666666666667
+            },
+            "N07": {
+              "cooldowns": {
+                "bow_support": 1.43333333333334
+              },
+              "dead": false,
+              "hp": 376.1,
+              "level": 15,
+              "mp": 162.4,
+              "xp": 122.666666666667
+            }
+          },
+          "seconds": 115.016666666661,
+          "shields": {
+            "F11": 0.0,
+            "JIA": 0.0,
+            "N07": 0.0
+          }
+        },
+        {
+          "active": "JIA",
+          "bank": 69.7450000000007,
+          "form_name": "夜叉裂阵将相",
+          "hp": 3720.0,
+          "phase": "B17:1:transition",
+          "player_position": "(1519.93, 1598.492)",
+          "resources": {
+            "F11": {
+              "cooldowns": {
+                "F11_basic": 0.0,
+                "armor_guard": 0.0,
+                "emma_frost": 0.0,
+                "emma_ice": 0.0,
+                "emma_star": 0.0,
+                "emma_support": 1.88333333333334
+              },
+              "dead": false,
+              "hp": 397.1,
+              "level": 16,
+              "mp": 207.4,
+              "xp": 129.666666666667
+            },
+            "JIA": {
+              "cooldowns": {
+                "JIA_basic": 0.597014925373134,
+                "armor_guard": 0.0,
+                "jia_break": 5.81666666666658,
+                "jia_sweep": 4.81666666666667
+              },
+              "dead": false,
+              "hp": 267.711520235656,
+              "level": 15,
+              "mp": 2.66333333332329,
+              "xp": 153.666666666667
+            },
+            "N07": {
+              "cooldowns": {
+                "bow_support": 0.600000000000006
+              },
+              "dead": false,
+              "hp": 376.1,
+              "level": 15,
+              "mp": 162.4,
+              "xp": 129.666666666667
+            }
+          },
+          "seconds": 129.199999999995,
+          "shields": {
+            "F11": 0.0,
+            "JIA": 6.0,
+            "N07": 0.0
+          }
+        },
+        {
+          "active": "JIA",
+          "bank": 154.270000000001,
+          "form_name": "夜叉裂阵将相",
+          "hp": 3720.0,
+          "phase": "B17:1:observation",
+          "player_position": "(1528.588, 1597.679)",
+          "resources": {
+            "F11": {
+              "cooldowns": {
+                "F11_basic": 0.0,
+                "armor_guard": 0.0,
+                "emma_frost": 0.0,
+                "emma_ice": 0.0,
+                "emma_star": 0.0,
+                "emma_support": 0.900000000000009
+              },
+              "dead": false,
+              "hp": 397.1,
+              "level": 16,
+              "mp": 207.4,
+              "xp": 129.666666666667
+            },
+            "JIA": {
+              "cooldowns": {
+                "JIA_basic": 0.213681592039801,
+                "armor_guard": 0.0,
+                "jia_break": 4.83333333333325,
+                "jia_sweep": 3.83333333333334
+              },
+              "dead": false,
+              "hp": 267.711520235656,
+              "level": 15,
+              "mp": 8.36666666665662,
+              "xp": 153.666666666667
+            },
+            "N07": {
+              "cooldowns": {
+                "bow_support": 0.0
+              },
+              "dead": false,
+              "hp": 376.1,
+              "level": 15,
+              "mp": 162.4,
+              "xp": 129.666666666667
+            }
+          },
+          "seconds": 130.183333333329,
+          "shields": {
+            "F11": 0.0,
+            "JIA": 6.0,
+            "N07": 0.0
+          }
+        },
+        {
+          "active": "JIA",
+          "bank": 0.0,
+          "form_name": "夜叉裂阵将相",
+          "hp": 3415.705,
+          "phase": "B17:1:combat",
+          "player_position": "(1550.806, 1591.151)",
+          "resources": {
+            "F11": {
+              "cooldowns": {
+                "F11_basic": 0.0,
+                "armor_guard": 0.0,
+                "emma_frost": 0.0,
+                "emma_ice": 0.0,
+                "emma_star": 0.0,
+                "emma_support": 0.250000000000007
+              },
+              "dead": false,
+              "hp": 397.1,
+              "level": 16,
+              "mp": 207.4,
+              "xp": 129.666666666667
+            },
+            "JIA": {
+              "cooldowns": {
+                "JIA_basic": 0.163681592039801,
+                "armor_guard": 0.0,
+                "jia_break": 4.18333333333325,
+                "jia_sweep": 3.18333333333334
+              },
+              "dead": false,
+              "hp": 267.711520235656,
+              "level": 15,
+              "mp": 12.1366666666566,
+              "xp": 153.666666666667
+            },
+            "N07": {
+              "cooldowns": {
+                "bow_support": 2.56666666666667
+              },
+              "dead": false,
+              "hp": 376.1,
+              "level": 15,
+              "mp": 162.4,
+              "xp": 129.666666666667
+            }
+          },
+          "seconds": 130.83333333333,
+          "shields": {
+            "F11": 0.0,
+            "JIA": 6.0,
+            "N07": 0.0
+          }
+        }
+      ],
+      "phase_seconds": {
+        "B17:0:combat": 14.1833333333335,
+        "B17:1:combat": 21.4500000000171,
+        "B17:1:observation": 0.650000000000517,
+        "B17:1:transition": 0.983333333334116
+      },
+      "recording": {
+        "captured_frames": 453,
+        "completed_signals": 1,
+        "failed_signals": 0,
+        "human_acceptance": false,
+        "last_camera": {
+          "escape_needed": false,
+          "escape_valid": false,
+          "viewport": "[P: (1293.0, 906.0), S: (1280.0, 720.0)]",
+          "zoom": 1.0
+        },
+        "mode": "automatic_input_real_renderer",
+        "pause_input_checked": false,
+        "phase_seen": [
+          "0",
+          "1"
+        ],
+        "preboss_simulated_steps": 6900,
+        "probe_incomplete": false,
+        "recorded_steps": 2265,
+        "render_backend": "X11",
+        "video": {
+          "errors": [
+            ""
+          ],
+          "exit": 0,
+          "fps": 12,
+          "frames": 453,
+          "path": "/home/weathour/programs/desktop-projects/My-game/docs/implementation/evidence/2026-10-29/boss-depth/playback/explore-B17.mp4",
+          "silent": true
+        }
+      },
+      "resource_balance": {
+        "F11": {
+          "net_hp_restored_including_level_growth": 0.0,
+          "net_mp_restored_including_level_growth": 0.0,
+          "paid_mp": 0.0,
+          "received_hp_damage": 0.0
+        },
+        "JIA": {
+          "net_hp_restored_including_level_growth": 231.054429751537,
+          "net_mp_restored_including_level_growth": 1009.0,
+          "paid_mp": 1004.0,
+          "received_hp_damage": 215.054429751537
+        },
+        "N07": {
+          "net_hp_restored_including_level_growth": 0.0,
+          "net_mp_restored_including_level_growth": 0.0,
+          "paid_mp": 0.0,
+          "received_hp_damage": 0.0
+        }
+      },
+      "seen_boss_actions": {
+        "0:charge": true,
+        "0:collaboration": true,
+        "0:slam": true,
+        "1:charge": true,
+        "1:collaboration": true,
+        "1:pulse": true,
+        "1:slam": true
+      },
+      "shield_absorbed_lower_bound": {
+        "F11": 0.0,
+        "JIA": 18.0,
+        "N07": 0.0
+      },
+      "shield_cast_events": [],
+      "shield_gain_exact": {},
+      "shield_observed_gain_lower_bound": {
+        "F11": 0.0,
+        "JIA": 24.0,
+        "N07": 0.0
+      },
+      "shield_spent": {
+        "F11": 0.0,
+        "JIA": 0.0,
+        "N07": 0.0
+      },
+      "source_request": {
+        "attempt_id": "B17-20602500-536521707",
+        "characters": {
+          "F04": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 210.1,
+            "level": 4.0,
+            "mp": 152.4,
+            "xp": 0.0
+          },
+          "F05": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 232.1,
+            "level": 6.0,
+            "mp": 162.4,
+            "xp": 0.0
+          },
+          "F06": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 231.1,
+            "level": 5.0,
+            "mp": 132.4,
+            "xp": 0.0
+          },
+          "F07": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 241.1,
+            "level": 5.0,
+            "mp": 117.4,
+            "xp": 0.0
+          },
+          "F08": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 255.1,
+            "level": 4.0,
+            "mp": 117.4,
+            "xp": 0.0
+          },
+          "F10": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 231.1,
+            "level": 5.0,
+            "mp": 152.4,
+            "xp": 0.0
+          },
+          "F11": {
+            "cooldowns": {
+              "F11_basic": 0.0,
+              "armor_guard": 0.0,
+              "emma_frost": 0.0,
+              "emma_ice": 0.0,
+              "emma_star": 0.0,
+              "emma_support": 1.66666666666667
+            },
+            "dead": false,
+            "hp": 397.1,
+            "level": 16.0,
+            "mp": 207.4,
+            "xp": 51.6666666666667
+          },
+          "JIA": {
+            "cooldowns": {
+              "JIA_basic": 0.34683026584867,
+              "armor_guard": 0.0,
+              "jia_break": 0.499999999999925,
+              "jia_sweep": 5.0
+            },
+            "dead": false,
+            "hp": 446.1,
+            "level": 15.0,
+            "mp": 162.4,
+            "xp": 75.6666666666667
+          },
+          "M07": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 279.1,
+            "level": 3.0,
+            "mp": 102.4,
+            "xp": 0.0
+          },
+          "M08": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 312.1,
+            "level": 6.0,
+            "mp": 132.4,
+            "xp": 0.0
+          },
+          "N01": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 274.1,
+            "level": 3.0,
+            "mp": 92.4,
+            "xp": 0.0
+          },
+          "N07": {
+            "cooldowns": {
+              "bow_support": 0.266666666666672
+            },
+            "dead": false,
+            "hp": 376.1,
+            "level": 15.0,
+            "mp": 162.4,
+            "xp": 51.6666666666667
+          },
+          "N11": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 288.1,
+            "level": 7.0,
+            "mp": 127.4,
+            "xp": 0.0
+          },
+          "N13": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 211.1,
+            "level": 5.0,
+            "mp": 162.4,
+            "xp": 0.0
+          },
+          "N14": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 195.1,
+            "level": 4.0,
+            "mp": 142.4,
+            "xp": 0.0
+          },
+          "N16": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 188.1,
+            "level": 2.0,
+            "mp": 127.4,
+            "xp": 0.0
+          },
+          "N17": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 207.1,
+            "level": 1.0,
+            "mp": 97.4,
+            "xp": 0.0
+          },
+          "N18": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 220.1,
+            "level": 4.0,
+            "mp": 122.4,
+            "xp": 0.0
+          }
+        },
+        "equipment": {
+          "accessory": "frost_jade",
+          "armor": "iron_armor",
+          "weapon": "long_spear"
+        },
+        "members": [
+          "JIA",
+          "F11",
+          "N07"
+        ],
+        "node": {
+          "id": "B17",
+          "kind": "elite",
+          "name": "白门楼前精英关",
+          "next": [
+            "B18"
+          ],
+          "segment": 5.0,
+          "summary": "白门楼前最后一道防线。通过相关剧情后，张辽、高顺与陈宫加入卡池。"
+        },
+        "seed": 1717.0,
+        "stage": {
+          "action_budget": {
+            "major": 2.0,
+            "melee": 2.0
+          },
+          "bonus_time": 215.0,
+          "boss_definition": "B17",
+          "boss_derivative_cap": 4.0,
+          "boss_hp": 6200.0,
+          "boss_kills": 60.0,
+          "boss_name": "张辽",
+          "boss_time": 115.0,
+          "derivative_cap": 6.0,
+          "enemy_cap": 42.0,
+          "enemy_damage": 1.753,
+          "enemy_hp": 2.35,
+          "field_elites": [
+            "L03",
+            "L05"
+          ],
+          "map": "stone",
+          "role_caps": {
+            "heavy": 2.0,
+            "ranged": 4.0,
+            "support": 1.0
+          },
+          "seed": 1717.0,
+          "spawn_interval": 1.35,
+          "waves": [
+            {
+              "at": 0.0,
+              "count": 1.0,
+              "cycle": [
+                "E09",
+                "E07",
+                "E04",
+                "E02"
+              ]
+            },
+            {
+              "at": 34.0,
+              "count": 2.0,
+              "cycle": [
+                "E12",
+                "E05",
+                "E11",
+                "E01"
+              ],
+              "interval": 1.35
+            }
+          ]
+        }
+      },
+      "stage": "B17",
+      "support_damage": 3727.416
+    },
+    {
+      "active_seconds": {
+        "JIA": 34.4333333333327
+      },
+      "boss_damage_by_ability": {
+        "JIA_basic": 4147.697,
+        "bow_support": 565.449999999999,
+        "emma_support": 499.928,
+        "jia_break": 1381.5,
+        "jia_sweep": 1005.425
+      },
+      "boss_damage_by_source": {
+        "F11": 499.928,
+        "JIA": 6534.622,
+        "N07": 565.449999999999
+      },
+      "boss_remaining": {},
+      "boss_spawn_seconds": 0.0166666666666667,
+      "boss_support_damage": 1065.378,
+      "casts": {
+        "F11:emma_support:support": 9,
+        "JIA:JIA_basic:front": 45,
+        "JIA:jia_break:front": 4,
+        "JIA:jia_sweep:front": 6,
+        "N07:bow_support:support": 8
+      },
+      "damage_attribution_available": true,
+      "damage_by_ability": {
+        "JIA_basic": 4147.697,
+        "bow_support": 565.449999999999,
+        "emma_support": 499.928,
+        "jia_break": 1381.5,
+        "jia_sweep": 1005.425
+      },
+      "damage_by_source": {
+        "F11": 499.928,
+        "JIA": 6534.622,
+        "N07": 565.449999999999
+      },
+      "damage_taken_events": [],
+      "elapsed": 34.4333333333327,
+      "entry": {
+        "F11": {
+          "cooldowns": {
+            "F11_basic": 0.0,
+            "armor_guard": 0.0,
+            "emma_frost": 0.0,
+            "emma_ice": 0.0,
+            "emma_star": 0.0,
+            "emma_support": 3.41666666666667
+          },
+          "dead": false,
+          "hp": 397.1,
+          "level": 16,
+          "mp": 207.4,
+          "xp": 179.333333333333
+        },
+        "JIA": {
+          "cooldowns": {
+            "JIA_basic": 0.413681592039801,
+            "armor_guard": 0.0,
+            "jia_break": 0.733333333333259,
+            "jia_sweep": 4.73333333333333
+          },
+          "dead": false,
+          "hp": 462.1,
+          "level": 16,
+          "mp": 167.4,
+          "xp": 5.33333333333333
+        },
+        "N07": {
+          "cooldowns": {
+            "bow_support": 2.81666666666667
+          },
+          "dead": false,
+          "hp": 376.1,
+          "level": 15,
+          "mp": 162.4,
+          "xp": 179.333333333333
+        }
+      },
+      "entry_request": {
+        "attempt_id": "B18-21913939-1785308151",
+        "characters": {
+          "F04": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 210.1,
+            "level": 4.0,
+            "mp": 152.4,
+            "xp": 0.0
+          },
+          "F05": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 232.1,
+            "level": 6.0,
+            "mp": 162.4,
+            "xp": 0.0
+          },
+          "F06": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 247.1,
+            "level": 6.0,
+            "mp": 137.4,
+            "xp": 0.0
+          },
+          "F07": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 241.1,
+            "level": 5.0,
+            "mp": 117.4,
+            "xp": 0.0
+          },
+          "F08": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 271.1,
+            "level": 5.0,
+            "mp": 122.4,
+            "xp": 0.0
+          },
+          "F10": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 231.1,
+            "level": 5.0,
+            "mp": 152.4,
+            "xp": 0.0
+          },
+          "F11": {
+            "cooldowns": {
+              "F11_basic": 0.0,
+              "armor_guard": 0.0,
+              "emma_frost": 0.0,
+              "emma_ice": 0.0,
+              "emma_star": 0.0,
+              "emma_support": 3.41666666666667
+            },
+            "dead": false,
+            "hp": 397.1,
+            "level": 16.0,
+            "mp": 207.4,
+            "xp": 179.333333333333
+          },
+          "JIA": {
+            "cooldowns": {
+              "JIA_basic": 0.413681592039801,
+              "armor_guard": 0.0,
+              "jia_break": 0.733333333333259,
+              "jia_sweep": 4.73333333333333
+            },
+            "dead": false,
+            "hp": 462.1,
+            "level": 16.0,
+            "mp": 167.4,
+            "xp": 5.33333333333333
+          },
+          "M07": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 279.1,
+            "level": 3.0,
+            "mp": 102.4,
+            "xp": 0.0
+          },
+          "M08": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 312.1,
+            "level": 6.0,
+            "mp": 132.4,
+            "xp": 0.0
+          },
+          "N01": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 274.1,
+            "level": 3.0,
+            "mp": 92.4,
+            "xp": 0.0
+          },
+          "N07": {
+            "cooldowns": {
+              "bow_support": 2.81666666666667
+            },
+            "dead": false,
+            "hp": 376.1,
+            "level": 15.0,
+            "mp": 162.4,
+            "xp": 179.333333333333
+          },
+          "N11": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 288.1,
+            "level": 7.0,
+            "mp": 127.4,
+            "xp": 0.0
+          },
+          "N13": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 211.1,
+            "level": 5.0,
+            "mp": 162.4,
+            "xp": 0.0
+          },
+          "N14": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 195.1,
+            "level": 4.0,
+            "mp": 142.4,
+            "xp": 0.0
+          },
+          "N16": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 204.1,
+            "level": 3.0,
+            "mp": 132.4,
+            "xp": 0.0
+          },
+          "N17": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 207.1,
+            "level": 1.0,
+            "mp": 97.4,
+            "xp": 0.0
+          },
+          "N18": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 220.1,
+            "level": 4.0,
+            "mp": 122.4,
+            "xp": 0.0
+          }
+        },
+        "equipment": {
+          "accessory": "frost_jade",
+          "armor": "iron_armor",
+          "weapon": "long_spear"
+        },
+        "members": [
+          "JIA",
+          "F11",
+          "N07"
+        ],
+        "node": {
+          "id": "B18",
+          "kind": "boss",
+          "name": "吕布终战",
+          "next": [
+            "S14"
+          ],
+          "segment": 5.0,
+          "summary": "与吕布决战。完成本章后返回天下。"
+        },
+        "seed": 1718.0,
+        "stage": {
+          "action_budget": {
+            "major": 2,
+            "melee": 2
+          },
+          "bonus_time": 100.0,
+          "boss_definition": "B18",
+          "boss_derivative_cap": 0,
+          "boss_hp": 7600.0,
+          "boss_kills": 0,
+          "boss_name": "吕布",
+          "boss_time": 0.0,
+          "derivative_cap": 0,
+          "encounter_mode": "boss_duel",
+          "enemy_cap": 0,
+          "enemy_damage": 1.8,
+          "enemy_hp": 2.5,
+          "field_elites": [],
+          "fields_enabled": false,
+          "map": "stone",
+          "role_caps": {
+            "heavy": 2,
+            "ranged": 4,
+            "support": 1
+          },
+          "seed": 1718,
+          "spawn_interval": 1.35,
+          "waves": []
+        }
+      },
+      "exit": {
+        "F11": {
+          "cooldowns": {
+            "F11_basic": 0.0,
+            "armor_guard": 0.0,
+            "emma_frost": 0.0,
+            "emma_ice": 0.0,
+            "emma_star": 0.0,
+            "emma_support": 0.633333333333341
+          },
+          "dead": false,
+          "hp": 397.1,
+          "level": 16,
+          "mp": 207.4,
+          "xp": 205.333333333333
+        },
+        "JIA": {
+          "cooldowns": {
+            "JIA_basic": 0.593824228028504,
+            "armor_guard": 0.0,
+            "jia_break": 8.58333333333326,
+            "jia_sweep": 3.08333333333334
+          },
+          "dead": false,
+          "hp": 462.1,
+          "level": 16,
+          "mp": 85.2166666666614,
+          "xp": 31.3333333333333
+        },
+        "N07": {
+          "cooldowns": {
+            "bow_support": 2.4
+          },
+          "dead": false,
+          "hp": 392.1,
+          "level": 16,
+          "mp": 167.4,
+          "xp": 7.33333333333333
+        }
+      },
+      "hurt_events": [],
+      "hurt_total": {},
+      "last_live_shields": {
+        "F11": 0.0,
+        "JIA": 0.0,
+        "N07": 0.0
+      },
+      "last_phase": "B18:1:combat",
+      "max_hostiles": 1,
+      "mechanics": {},
+      "mp_observed_recovery": {
+        "JIA": 192.946666666661,
+        "N07": 5.0
+      },
+      "outcome": "victory",
+      "outcome_reason": "authentic_victory",
+      "paid_mp": {
+        "F11": 0.0,
+        "JIA": 276.0,
+        "N07": 0.0
+      },
+      "phase_damage_attribution": {
+        "B18:0": 3092.917,
+        "B18:1": 4507.083
+      },
+      "phase_marks": [
+        {
+          "active": "JIA",
+          "bank": 0.0,
+          "form_name": "吕布",
+          "hp": 3040.0,
+          "phase": "B18:0:combat",
+          "player_position": "(1600.0, 896.3759)",
+          "resources": {
+            "F11": {
+              "cooldowns": {
+                "F11_basic": 0.0,
+                "armor_guard": 0.0,
+                "emma_frost": 0.0,
+                "emma_ice": 0.0,
+                "emma_star": 0.0,
+                "emma_support": 3.4
+              },
+              "dead": false,
+              "hp": 397.1,
+              "level": 16,
+              "mp": 207.4,
+              "xp": 179.333333333333
+            },
+            "JIA": {
+              "cooldowns": {
+                "JIA_basic": 0.397014925373134,
+                "armor_guard": 0.0,
+                "jia_break": 0.716666666666592,
+                "jia_sweep": 4.71666666666666
+              },
+              "dead": false,
+              "hp": 462.1,
+              "level": 16,
+              "mp": 167.4,
+              "xp": 5.33333333333333
+            },
+            "N07": {
+              "cooldowns": {
+                "bow_support": 2.8
+              },
+              "dead": false,
+              "hp": 376.1,
+              "level": 15,
+              "mp": 162.4,
+              "xp": 179.333333333333
+            }
+          },
+          "seconds": 0.0166666666666667,
+          "shields": {
+            "F11": 0.0,
+            "JIA": 0.0,
+            "N07": 0.0
+          }
+        },
+        {
+          "active": "JIA",
+          "bank": 52.9169999999995,
+          "form_name": "四臂鬼神相",
+          "hp": 4560.0,
+          "phase": "B18:1:transition",
+          "player_position": "(1537.583, 65.0)",
+          "resources": {
+            "F11": {
+              "cooldowns": {
+                "F11_basic": 0.0,
+                "armor_guard": 0.0,
+                "emma_frost": 0.0,
+                "emma_ice": 0.0,
+                "emma_star": 0.0,
+                "emma_support": 1.76666666666667
+              },
+              "dead": false,
+              "hp": 397.1,
+              "level": 16,
+              "mp": 207.4,
+              "xp": 179.333333333333
+            },
+            "JIA": {
+              "cooldowns": {
+                "JIA_basic": 0.593824228028504,
+                "armor_guard": 0.0,
+                "jia_break": 8.81666666666661,
+                "jia_sweep": 3.31666666666667
+              },
+              "dead": false,
+              "hp": 462.1,
+              "level": 16,
+              "mp": 116.263333333332,
+              "xp": 5.33333333333333
+            },
+            "N07": {
+              "cooldowns": {
+                "bow_support": 2.4
+              },
+              "dead": false,
+              "hp": 376.1,
+              "level": 15,
+              "mp": 162.4,
+              "xp": 179.333333333333
+            }
+          },
+          "seconds": 12.2000000000002,
+          "shields": {
+            "F11": 0.0,
+            "JIA": 0.0,
+            "N07": 0.0
+          }
+        },
+        {
+          "active": "JIA",
+          "bank": 151.771,
+          "form_name": "四臂鬼神相",
+          "hp": 4560.0,
+          "phase": "B18:1:observation",
+          "player_position": "(1537.583, 65.0)",
+          "resources": {
+            "F11": {
+              "cooldowns": {
+                "F11_basic": 0.0,
+                "armor_guard": 0.0,
+                "emma_frost": 0.0,
+                "emma_ice": 0.0,
+                "emma_star": 0.0,
+                "emma_support": 0.783333333333342
+              },
+              "dead": false,
+              "hp": 397.1,
+              "level": 16,
+              "mp": 207.4,
+              "xp": 179.333333333333
+            },
+            "JIA": {
+              "cooldowns": {
+                "JIA_basic": 0.21049089469517,
+                "armor_guard": 0.0,
+                "jia_break": 7.83333333333324,
+                "jia_sweep": 2.33333333333334
+              },
+              "dead": false,
+              "hp": 462.1,
+              "level": 16,
+              "mp": 121.966666666665,
+              "xp": 5.33333333333333
+            },
+            "N07": {
+              "cooldowns": {
+                "bow_support": 1.41666666666667
+              },
+              "dead": false,
+              "hp": 376.1,
+              "level": 15,
+              "mp": 162.4,
+              "xp": 179.333333333333
+            }
+          },
+          "seconds": 13.1833333333336,
+          "shields": {
+            "F11": 0.0,
+            "JIA": 0.0,
+            "N07": 0.0
+          }
+        },
+        {
+          "active": "JIA",
+          "bank": 0.0,
+          "form_name": "四臂鬼神相",
+          "hp": 4309.375,
+          "phase": "B18:1:combat",
+          "player_position": "(1635.435, 65.0)",
+          "resources": {
+            "F11": {
+              "cooldowns": {
+                "F11_basic": 0.0,
+                "armor_guard": 0.0,
+                "emma_frost": 0.0,
+                "emma_ice": 0.0,
+                "emma_star": 0.0,
+                "emma_support": 0.133333333333341
+              },
+              "dead": false,
+              "hp": 397.1,
+              "level": 16,
+              "mp": 207.4,
+              "xp": 179.333333333333
+            },
+            "JIA": {
+              "cooldowns": {
+                "JIA_basic": 0.16049089469517,
+                "armor_guard": 0.0,
+                "jia_break": 7.18333333333324,
+                "jia_sweep": 1.68333333333335
+              },
+              "dead": false,
+              "hp": 462.1,
+              "level": 16,
+              "mp": 125.736666666665,
+              "xp": 5.33333333333333
+            },
+            "N07": {
+              "cooldowns": {
+                "bow_support": 0.766666666666673
+              },
+              "dead": false,
+              "hp": 376.1,
+              "level": 15,
+              "mp": 162.4,
+              "xp": 179.333333333333
+            }
+          },
+          "seconds": 13.8333333333336,
+          "shields": {
+            "F11": 0.0,
+            "JIA": 0.0,
+            "N07": 0.0
+          }
+        }
+      ],
+      "phase_seconds": {
+        "B18:0:combat": 12.1833333333335,
+        "B18:1:combat": 20.5999999999991,
+        "B18:1:observation": 0.650000000000032,
+        "B18:1:transition": 0.983333333333382
+      },
+      "recording": {
+        "captured_frames": 424,
+        "completed_signals": 1,
+        "failed_signals": 0,
+        "human_acceptance": false,
+        "last_camera": {
+          "escape_needed": false,
+          "escape_valid": false,
+          "viewport": "[P: (1668.129, 236.3871), S: (1321.29, 743.2258)]",
+          "zoom": 0.972158278578391
+        },
+        "mode": "automatic_input_real_renderer",
+        "pause_input_checked": true,
+        "phase_seen": [
+          "0",
+          "1"
+        ],
+        "preboss_simulated_steps": 0,
+        "probe_incomplete": false,
+        "recorded_steps": 2094,
+        "render_backend": "X11",
+        "video": {
+          "errors": [
+            ""
+          ],
+          "exit": 0,
+          "fps": 12,
+          "frames": 424,
+          "path": "/home/weathour/programs/desktop-projects/My-game/docs/implementation/evidence/2026-10-29/boss-depth/playback/explore-B18.mp4",
+          "silent": true
+        }
+      },
+      "resource_balance": {
+        "F11": {
+          "net_hp_restored_including_level_growth": 0.0,
+          "net_mp_restored_including_level_growth": 0.0,
+          "paid_mp": 0.0,
+          "received_hp_damage": 0.0
+        },
+        "JIA": {
+          "net_hp_restored_including_level_growth": 0.0,
+          "net_mp_restored_including_level_growth": 193.816666666661,
+          "paid_mp": 276.0,
+          "received_hp_damage": 0.0
+        },
+        "N07": {
+          "net_hp_restored_including_level_growth": 16.0,
+          "net_mp_restored_including_level_growth": 5.0,
+          "paid_mp": 0.0,
+          "received_hp_damage": 0.0
+        }
+      },
+      "seen_boss_actions": {
+        "0:charge": true,
+        "0:marker": true,
+        "0:slam": true,
+        "1:charge": true,
+        "1:marker": true,
+        "1:pulse": true,
+        "1:slam": true
+      },
+      "shield_absorbed_lower_bound": {
+        "F11": 0.0,
+        "JIA": 0.0,
+        "N07": 0.0
+      },
+      "shield_cast_events": [],
+      "shield_gain_exact": {},
+      "shield_observed_gain_lower_bound": {
+        "F11": 0.0,
+        "JIA": 0.0,
+        "N07": 0.0
+      },
+      "shield_spent": {
+        "F11": 0.0,
+        "JIA": 0.0,
+        "N07": 0.0
+      },
+      "source_request": {
+        "attempt_id": "B18-21913939-1785308151",
+        "characters": {
+          "F04": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 210.1,
+            "level": 4.0,
+            "mp": 152.4,
+            "xp": 0.0
+          },
+          "F05": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 232.1,
+            "level": 6.0,
+            "mp": 162.4,
+            "xp": 0.0
+          },
+          "F06": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 247.1,
+            "level": 6.0,
+            "mp": 137.4,
+            "xp": 0.0
+          },
+          "F07": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 241.1,
+            "level": 5.0,
+            "mp": 117.4,
+            "xp": 0.0
+          },
+          "F08": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 271.1,
+            "level": 5.0,
+            "mp": 122.4,
+            "xp": 0.0
+          },
+          "F10": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 231.1,
+            "level": 5.0,
+            "mp": 152.4,
+            "xp": 0.0
+          },
+          "F11": {
+            "cooldowns": {
+              "F11_basic": 0.0,
+              "armor_guard": 0.0,
+              "emma_frost": 0.0,
+              "emma_ice": 0.0,
+              "emma_star": 0.0,
+              "emma_support": 3.41666666666667
+            },
+            "dead": false,
+            "hp": 397.1,
+            "level": 16.0,
+            "mp": 207.4,
+            "xp": 179.333333333333
+          },
+          "JIA": {
+            "cooldowns": {
+              "JIA_basic": 0.413681592039801,
+              "armor_guard": 0.0,
+              "jia_break": 0.733333333333259,
+              "jia_sweep": 4.73333333333333
+            },
+            "dead": false,
+            "hp": 462.1,
+            "level": 16.0,
+            "mp": 167.4,
+            "xp": 5.33333333333333
+          },
+          "M07": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 279.1,
+            "level": 3.0,
+            "mp": 102.4,
+            "xp": 0.0
+          },
+          "M08": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 312.1,
+            "level": 6.0,
+            "mp": 132.4,
+            "xp": 0.0
+          },
+          "N01": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 274.1,
+            "level": 3.0,
+            "mp": 92.4,
+            "xp": 0.0
+          },
+          "N07": {
+            "cooldowns": {
+              "bow_support": 2.81666666666667
+            },
+            "dead": false,
+            "hp": 376.1,
+            "level": 15.0,
+            "mp": 162.4,
+            "xp": 179.333333333333
+          },
+          "N11": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 288.1,
+            "level": 7.0,
+            "mp": 127.4,
+            "xp": 0.0
+          },
+          "N13": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 211.1,
+            "level": 5.0,
+            "mp": 162.4,
+            "xp": 0.0
+          },
+          "N14": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 195.1,
+            "level": 4.0,
+            "mp": 142.4,
+            "xp": 0.0
+          },
+          "N16": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 204.1,
+            "level": 3.0,
+            "mp": 132.4,
+            "xp": 0.0
+          },
+          "N17": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 207.1,
+            "level": 1.0,
+            "mp": 97.4,
+            "xp": 0.0
+          },
+          "N18": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 220.1,
+            "level": 4.0,
+            "mp": 122.4,
+            "xp": 0.0
+          }
+        },
+        "equipment": {
+          "accessory": "frost_jade",
+          "armor": "iron_armor",
+          "weapon": "long_spear"
+        },
+        "members": [
+          "JIA",
+          "F11",
+          "N07"
+        ],
+        "node": {
+          "id": "B18",
+          "kind": "boss",
+          "name": "吕布终战",
+          "next": [
+            "S14"
+          ],
+          "segment": 5.0,
+          "summary": "与吕布决战。完成本章后返回天下。"
+        },
+        "seed": 1718.0,
+        "stage": {
+          "action_budget": {
+            "major": 2.0,
+            "melee": 2.0
+          },
+          "bonus_time": 220.0,
+          "boss_definition": "B18",
+          "boss_derivative_cap": 0.0,
+          "boss_hp": 7600.0,
+          "boss_kills": 0.0,
+          "boss_name": "吕布",
+          "boss_time": 0.0,
+          "derivative_cap": 0.0,
+          "encounter_mode": "boss_duel",
+          "enemy_cap": 0.0,
+          "enemy_damage": 1.8,
+          "enemy_hp": 2.5,
+          "field_elites": [],
+          "fields_enabled": false,
+          "map": "stone",
+          "role_caps": {
+            "heavy": 2.0,
+            "ranged": 4.0,
+            "support": 1.0
+          },
+          "seed": 1718.0,
+          "spawn_interval": 1.35,
+          "waves": []
+        }
+      },
+      "stage": "B18",
+      "support_damage": 1065.378
+    }
+  ],
+  "route": "explore",
+  "simulation_dt": 0.0166666666666667,
+  "source": "res://docs/implementation/evidence/2026-10-29/boss-depth/balance/campaign-r3.json",
+  "source_sha256": "04bd617f48bfbc5c91688e8e9624b0234740654358c5705d702c46887ce14a9f",
+  "presentation_layer": "core-recording-before-final-edge-ground-and-per-window-pixel-floor",
+  "final_presentation_evidence": "../agent-control/latest-replay/boundary-replay.json",
+  "numeric_and_input_evidence_retained": true,
+  "charge_visual_inspection": {
+    "video": "explore-B18.mp4",
+    "video_seconds": 5.25,
+    "frame": "explore-B18-charge-release-core.png",
+    "observation": "Charge decoration remains inside the long capsule; the previous oversized rectangular burst is absent in this sampled frame.",
+    "scope": "single extracted core-recording frame, not collision acceptance"
+  }
+}

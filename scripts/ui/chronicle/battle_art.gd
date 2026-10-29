@@ -29,6 +29,26 @@ const WOMEN_HEADS := {
 	"F09": preload("res://assets/players/baimen-women/F09/F09-head.tscn"),
 	"F10": preload("res://assets/players/baimen-women/F10/F10-head.tscn"),
 }
+const FRIENDLY := {
+	"M01": preload("res://assets/enemies/baimen/M01/friendly.tscn"),
+	"M02": preload("res://assets/enemies/baimen/M02/friendly.tscn"),
+	"M03": preload("res://assets/enemies/baimen/M03/friendly.tscn"),
+	"M04": preload("res://assets/enemies/baimen/M04/friendly.tscn"),
+	"M05": preload("res://assets/enemies/baimen/M05/friendly.tscn"),
+	"M06": preload("res://assets/enemies/baimen/M06/friendly.tscn"),
+}
+const FRIENDLY_HEADS := {
+	"M01": preload("res://assets/enemies/baimen/M01/friendly-head.tscn"),
+	"M02": preload("res://assets/enemies/baimen/M02/friendly-head.tscn"),
+	"M03": preload("res://assets/enemies/baimen/M03/friendly-head.tscn"),
+	"M04": preload("res://assets/enemies/baimen/M04/friendly-head.tscn"),
+	"M05": preload("res://assets/enemies/baimen/M05/friendly-head.tscn"),
+	"M06": preload("res://assets/enemies/baimen/M06/friendly-head.tscn"),
+}
+const FRIENDLY_HUMAN_IDS := {
+	"M01": "B18_human", "M02": "B17_human", "M03": "M03_human",
+	"M04": "M04_human", "M05": "B16_human", "M06": "B15_human",
+}
 const MAGE := preload("res://assets/players/wizard/wizard.tscn")
 const GUN := preload("res://assets/players/gun/gun.tscn")
 const SWORD_HEAD := preload("res://assets/UI/facility/swordchange.tscn")
@@ -61,6 +81,11 @@ const BODY_SKULL_MAGE := Vector2(130.65, 54.625)
 const ACTOR_HEIGHT := 72.0
 
 static func fit_actor(visual: Node2D, id: String, moving: bool) -> void:
+	if FRIENDLY.has(id):
+		var metadata := ENEMY_MANIFEST.read(FRIENDLY_HUMAN_IDS[id])
+		var body_height := float(metadata.get("body_height_px", 224.0))
+		_fit_body(visual, Vector2(body_height, 0.0), ACTOR_HEIGHT)
+		return
 	if id == "JIA" or WOMEN.has(id):
 		# Authored standing body is 80px, feet at the scene origin. Preserve
 		# the natural crouch/run height instead of stretching every pose.
@@ -91,6 +116,7 @@ static func _fit_body(visual: Node2D, profile: Vector2, height: float) -> void:
 
 static func actor(id: String) -> PackedScene:
 	if id == "JIA": return JIA
+	if FRIENDLY.has(id): return FRIENDLY[id]
 	if WOMEN.has(id): return WOMEN[id]
 	if id in ["F11", "N13", "N16", "N14", "N18"]: return MAGE
 	if id == "N07": return GUN
@@ -98,6 +124,7 @@ static func actor(id: String) -> PackedScene:
 
 static func portrait(id: String) -> PackedScene:
 	if id == "JIA": return JIA_HEAD
+	if FRIENDLY_HEADS.has(id): return FRIENDLY_HEADS[id]
 	if WOMEN_HEADS.has(id): return WOMEN_HEADS[id]
 	if id in ["F11", "N13", "N16", "N14", "N18"]: return MAGE_HEAD
 	if id == "N07": return GUN_HEAD

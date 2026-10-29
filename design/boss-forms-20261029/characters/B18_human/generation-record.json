@@ -1,0 +1,67 @@
+{
+  "tool": "built-in image_gen.imagegen",
+  "reference_root": "design/baimen-enemies-20261028/characters",
+  "human_aesthetic_acceptance": "pending user review",
+  "sources": [
+    {
+      "path": "design/boss-forms-20261029/characters/B18_human/source/actions-v1.png",
+      "sha256": "0e82344df457ca5ce8977ea6a7f2bb1bcc3495879a22aaf67e70d867e54c0ca3",
+      "selection": "selected",
+      "generated_origin": "/home/weathour/.codex/generated_images/01a186cc-4bd1-7152-9d88-76057053ee5d/exec-35c1d045-bd32-4c2c-8a46-2f832c80b64a.png"
+    },
+    {
+      "path": "design/boss-forms-20261029/characters/B18_human/source/actions-v2.png",
+      "sha256": "5df038c6f54d824d50c4007f1e0bda4c969a851592c79e25e5f790d0130ebb18",
+      "selection": "retained_unselected",
+      "generated_origin": "/home/weathour/.codex/generated_images/01a186cc-4bd1-7152-9d88-76057053ee5d/exec-31973da4-317f-4aae-a18c-8ab2818b2b0e.png"
+    },
+    {
+      "path": "design/boss-forms-20261029/characters/B18_human/source/master-v1.png",
+      "sha256": "c924a4433c62271ef440489a12d15eb38842e2bd32c732ec5bf7456484fda877",
+      "selection": "retained_unselected",
+      "generated_origin": "/home/weathour/.codex/generated_images/01a186cc-4bd1-7152-9d88-76057053ee5d/exec-c6a21c48-28eb-4b3c-8419-44fca29e4d84.png"
+    },
+    {
+      "path": "design/boss-forms-20261029/characters/B18_human/source/master-v2.png",
+      "sha256": "69b379a6285e4feceadead35c8014e005e9847f116310f27075c4d764f12f4ce",
+      "selection": "selected",
+      "generated_origin": "/home/weathour/.codex/generated_images/01a186cc-4bd1-7152-9d88-76057053ee5d/exec-95c6feee-0381-49af-a96e-c6fcff6bc9f6.png"
+    }
+  ],
+  "references": [
+    {
+      "path": "design/baimen-enemies-20261028/characters/B18/references/current-identity.png",
+      "sha256": "f3316db9cfb6c93d91048232d8b0df72bf70dca8196f1bc7475563a7cd330b77",
+      "role": "identity_face"
+    },
+    {
+      "path": "design/baimen-enemies-20261028/characters/B18/source/master-v1.png",
+      "sha256": "5cd3f209ac9eaec75bc6cf3eb48553bb196276562767bf2bb3c3ac65cb4e1379",
+      "role": "war_form_continuity"
+    }
+  ],
+  "prompts": [
+    {
+      "path": "design/boss-forms-20261029/characters/B18_human/actions-v1-prompt.txt",
+      "sha256": "cf3574e54019ae53d9beab8459463c7ca2ddc60e26c0be4b556690b5fe20bfb5"
+    },
+    {
+      "path": "design/boss-forms-20261029/characters/B18_human/actions-v2-prompt.txt",
+      "sha256": "944e641ad05ea343a355820ff7920c4de1d85de956a89987826fe0446c801695"
+    },
+    {
+      "path": "design/boss-forms-20261029/characters/B18_human/master-v1-prompt.txt",
+      "sha256": "2fa139bcc63d38bfca38daf8ea24c6d4964a69fe1f109046318476b1958bd989"
+    },
+    {
+      "path": "design/boss-forms-20261029/characters/B18_human/master-v2-prompt.txt",
+      "sha256": "7d639f40aaecfa5ad1f3e904a8141e475847d84b0d235ab77695c8872b46f428"
+    }
+  ],
+  "selection_notes": {
+    "master-v1": "retained; top crown plume needed completion",
+    "actions-v1": "16 separate actual alpha-connected bodies; fixed scale; manually reviewed foot/pelvis anchors; no grid crop; source move pose4 touches image edge and is excluded from runtime clips",
+    "master-v2": "selected complete transparent mother; ImageGen redraw repairs crown tips and uncrops whole pose",
+    "actions-v2": "retained, rejected: pose overlap/edge contact worse than v1"
+  }
+}

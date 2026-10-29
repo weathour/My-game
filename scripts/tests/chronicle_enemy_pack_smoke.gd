@@ -4,27 +4,41 @@ extends SceneTree
 const CATALOG = preload("res://scripts/content/enemy_catalog.gd")
 const MANIFEST = preload("res://scripts/ui/chronicle/enemy_visual_manifest.gd")
 const EFFECTS = preload("res://scripts/ui/chronicle/enemy_battle_effects.gd")
-var passed := 0
-var failed := 0
+const ART = preload("res://scripts/ui/chronicle/battle_art.gd")
+const PORTRAITS = preload("res://scripts/ui/chronicle/chronicle_portraits.gd")
+const BOSS_IDS := ["B15", "B16", "B17", "B18"]
+const HUMAN_VISUAL_IDS := ["B15_human", "B16_human", "B17_human", "B18_human", "M03_human", "M04_human"]
+const FRIENDLY_IDS := ["M01", "M02", "M03", "M04", "M05", "M06"]
+var checks := 0
+var failures := 0
 
 func _initialize() -> void:
 	call_deferred("_run")
 
 func _check(ok: bool, label: String) -> void:
-	if ok:
-		passed += 1
-	else:
-		failed += 1
+	checks += 1
+	if not ok:
+		failures += 1
 		push_error("PACK CHECK FAILED: " + label)
 
 func _run() -> void:
 	_check(not FileAccess.file_exists("res://design/baimen-enemies-20261028/production-state.json"), "production sources excluded")
+	_check(not FileAccess.file_exists("res://design/boss-forms-20261029/characters/B15_human/export-manifest.json"), "Boss form production sources excluded")
 	_check(not FileAccess.file_exists("res://assets/enemies/baimen/E01/actor.aseprite"), "editable actor excluded")
 	_check(CATALOG.DEFINITIONS.size() == 43, "all enemy definitions packed")
 	var ids: Dictionary = {}
 	for definition in CATALOG.DEFINITIONS.values():
 		ids[str(definition.visual_id)] = true
 	_check(ids.size() == 42, "all runtime visual slots packed")
+	for id in BOSS_IDS:
+		var boss: Dictionary = CATALOG.definition(id)
+		var forms: Array = boss.get("forms", [])
+		_check(forms.size() == 2, id + " has two authored forms")
+		if not forms.is_empty():
+			ids[id + "_human"] = true
+	for id in HUMAN_VISUAL_IDS:
+		ids[id] = true
+	_check(ids.size() == 48, "runtime and six dynamic human visual slots packed")
 	for id in ids:
 		var own: Dictionary = MANIFEST.read(id)
 		_check(not own.is_empty() and own.get("visual_id", "") == id, id + " raw JSON")
@@ -44,6 +58,30 @@ func _run() -> void:
 		_check(effects.texture(id, 0.15) != null, str(id) + " animation readable")
 	for id in ["slash", "thrust", "sweep"]:
 		_check(effects.texture(id, 0.15) != null, id + " existing effect reuse")
+	for id in FRIENDLY_IDS:
+		var portrait: Texture2D = PORTRAITS.standing(id)
+		_check(portrait != null, id + " friendly portrait resource")
+		var scene: PackedScene = ART.actor(id)
+		_check(scene != null, id + " dynamic friendly scene")
+		if scene != null:
+			var instance: Node2D = scene.instantiate()
+			root.add_child(instance)
+			await process_frame
+			var sprite := instance.get("sprite") as AnimatedSprite2D
+			_check(sprite != null and sprite.sprite_frames != null and sprite.sprite_frames.has_animation("idle"), id + " friendly animation frames loaded")
+			if is_instance_valid(instance):
+				instance.queue_free()
+				await process_frame
+		var head_scene: PackedScene = ART.portrait(id)
+		_check(head_scene != null, id + " friendly head scene")
+		if head_scene != null:
+			var head: Node2D = head_scene.instantiate()
+			root.add_child(head)
+			await process_frame
+			var head_sprite := head.get_node_or_null("Sprite2D") as Sprite2D
+			_check(head_sprite != null and head_sprite.texture != null, id + " dynamic friendly head loaded")
+			head.queue_free()
+			await process_frame
 	var shell: PackedScene = load("res://scenes/chronicle/chronicle_shell.tscn")
 	_check(shell != null, "main scene packed")
 	if shell != null:
@@ -55,5 +93,5 @@ func _run() -> void:
 		instance.queue_free()
 		await process_frame
 	effects = null
-	print("ENEMY_PACK_SMOKE PASS %d FAIL %d" % [passed, failed])
-	quit(1 if failed else 0)
+	print("ENEMY_PACK_SMOKE PASS checks=%d failures=%d" % [checks, failures])
+	quit(1 if failures else 0)

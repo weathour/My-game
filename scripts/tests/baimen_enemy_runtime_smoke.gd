@@ -153,8 +153,11 @@ func lifecycle() -> void:
 	var boss := add(b, "B18")
 	boss.hp = boss.max_hp * 0.2
 	S.step(b.enemies, b.position, 0.01, {"hazards":b.hazards, "config":b.director.config})
-	expect(boss.phase == 2, "large hit crosses both boss thresholds without HP gate")
-	var hp: float = boss.hp; R.hit_enemy(boss, context(hp + 1)); expect(boss.dead, "final phase has no immortality")
+	expect(boss.form_index == 0, "HP threshold alone does not transform human")
+	var hp: float = boss.hp; R.hit_enemy(boss, context(hp + 1))
+	expect(not boss.dead and boss.form_index == 1, "empty human HP starts second form without death")
+	boss.advance_form(1.0); boss.advance_form(0.65)
+	R.hit_enemy(boss, context(boss.hp + 1)); expect(boss.dead, "observed second form has no immortality")
 	b.set_paused(true); var time: float = b.director.elapsed; b.tick(1, Vector2.RIGHT); near(b.director.elapsed, time, "pause freezes enemy clock")
 	b.set_paused(false)
 	var living_elite := add(b, "card_elite")
@@ -169,18 +172,18 @@ func phase_and_team_sequences() -> void:
 	var b := fixture("B18")
 	var boss := add(b, "B18", Vector2(-20, 0))
 	var signatures: Array = []
-	for phase in 3:
-		boss.phase = phase
+	for form in 2:
+		boss._apply_form(form)
 		var sequence: Array = []
-		var size := 2 if phase == 0 else 4 if phase == 1 else 5
-		for index in size:
+		for index in boss.actions.size():
 			boss.attack_index = index
 			var action: Dictionary = S._next_action(boss)
-			sequence.append(action.action)
-			if index == size - 1: expect(action.combo_final and float(action.recovery) >= 2.0, "phase ends with real shared recovery")
-			else: expect(not action.combo_final and float(action.recovery) < 1.0, "phase intermediate beat retains short reset")
+			sequence.append(action.id)
+			if form == 1 and index < boss.actions.size() - 1:
+				expect(float(action.recovery) >= 0.65 and float(action.recovery) <= 1.0, "war form intermediate beats sustain pressure")
+			else: expect(float(action.recovery) >= 1.8, "human beats and war finisher have real recovery")
 		signatures.append(str(sequence))
-	expect(signatures[0] != signatures[1] and signatures[1] != signatures[2], "three phase combos have different actual sequences")
+	expect(signatures[0] != signatures[1], "two forms use distinct authored sequences")
 	var nova := {"shape":"disc", "origin":b.position, "radius":190, "remaining":1.5}
 	expect(S._has_exit(nova, [], [], b.position, 215), "1.5-second pointblank slam has a reachable exit")
 	expect(not S._has_exit(nova, [], [], b.position, 10), "movement speed really constrains admission")
@@ -194,20 +197,20 @@ func phase_and_team_sequences() -> void:
 	expect(commander.attack == "command" and commander.telegraph.action_id == "command", "command with follower is a visible buff tell")
 	release = S.step([commander, follower], b.position, commander.windup + 0.001, {"config":b.director.config})
 	expect(release.hits.is_empty() and follower.command_remaining > 0, "command buffs without hidden circular damage")
-	for phase in 3:
+	for form in 2:
 		var phase_battle := fixture("B18")
 		var phase_boss := add(phase_battle, "B18", Vector2(-40, 0))
-		phase_boss.hp = phase_boss.max_hp * (1.0 if phase == 0 else 0.6 if phase == 1 else 0.2)
+		phase_boss._apply_form(form)
 		var releases: Array = []
-		var beats := 2 if phase == 0 else 4 if phase == 1 else 5
+		var beats: int = phase_boss.actions.size()
 		for frame in 5000:
 			var actor: Vector2 = phase_boss.position + Vector2(40, 0)
 			var output: Dictionary = S.step(phase_battle.enemies, actor, 0.02, {"config":phase_battle.director.config})
 			for event in output.events:
-				if event.kind == "enemy_release": releases.append(event.geometry.action_id)
+				if event.kind == "enemy_release": releases.append(event.geometry.move_id)
 			if releases.size() >= beats: break
-		expect(releases.size() == beats, "phase %s actual timed combo releases all %s beats" % [phase, beats])
-		expect(phase_boss.cooldown >= 2.0, "phase timed final beat commits full recovery")
+		expect(releases.size() == beats, "form %s actual timed sequence releases all %s beats" % [form, beats])
+		expect(phase_boss.cooldown >= 3.0, "form final beat commits full recovery")
 		phase_battle._finish("failed")
 	var cap_battle := fixture()
 	var source := add(cap_battle, "L02")
@@ -242,12 +245,12 @@ func phase_and_team_sequences() -> void:
 	twins._finish("failed")
 	var team := fixture("B17")
 	var leader := add(team, "B17", Vector2(-60, 0))
-	var collaboration: Dictionary = leader.actions[1].duplicate(true)
+	var collaboration: Dictionary = leader.actions[2].duplicate(true)
 	leader.actions = [collaboration]
 	var gao: Dictionary = S.step(team.enemies, team.position, 0.01, {"config":team.director.config})
 	expect(leader.telegraph.shape == "line" and gao.spawns[0].definition_id == "M03_WAR", "Gao collaboration has its own warned line and apparition")
 	gao = S.step(team.enemies, team.position, leader.windup + 0.001, {"config":team.director.config})
-	expect(gao.spawns.size() == 2 and gao.spawns[0].definition_id == "D01" and team.hazards.is_empty(), "Gao supplies finite targetable formation soldiers")
+	expect(gao.spawns.is_empty() and team.hazards.is_empty(), "Gao collaboration attacks without spawning extra soldiers")
 	leader.cooldown = 0
 	var chen: Dictionary = S.step(team.enemies, team.position, 0.01, {"hazards":team.hazards, "config":team.director.config})
 	expect(leader.telegraph.shape == "marker" and chen.spawns[0].definition_id == "M04_WAR", "Chen collaboration locks a distinct array marker")
@@ -321,7 +324,7 @@ func charge_boundary_geometry() -> void:
 			var upper: Vector2 = Vector2(3200, 1800) - lower
 			expect(endpoint.is_equal_approx(endpoint.clamp(lower, upper)), "warned endpoint respects body padding on all four edges")
 			expect(absf((endpoint - Vector2(g.origin)).cross(g.direction)) < 0.001, "edge clipping preserves locked aim direction")
-			expect(float(g.length) <= 390.001, "boundary clip never lengthens authored charge")
+			expect(float(g.length) <= float(boss.current_action.length) + 0.001, "boundary clip never lengthens authored charge")
 			var touched_boundary := minf(minf(absf(endpoint.x - lower.x), absf(endpoint.x - upper.x)), minf(absf(endpoint.y - lower.y), absf(endpoint.y - upper.y)))
 			expect(touched_boundary < 0.001, "outward ray reaches its first inset boundary")
 			var normal: Vector2 = Vector2(g.direction).orthogonal()

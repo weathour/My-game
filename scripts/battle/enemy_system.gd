@@ -3,10 +3,19 @@ const SPACE := preload("res://scripts/battle/battle_space.gd")
 const GEOMETRY := preload("res://scripts/battle/enemy_geometry.gd")
 
 static func step(enemies: Array, actor: Vector2, delta: float, world: Dictionary = {}) -> Dictionary:
-	var result := {"hits":[], "projectiles":[], "effects":[], "spawns":[], "events":[]}
+	var result := {"hits":[], "projectiles":[], "effects":[], "spawns":[], "events":[], "hit_sources":[]}
 	var hazards: Array = world.get("hazards", [])
 	var config: Dictionary = world.get("config", {})
 	var used := {"major":0, "melee":0}
+	for enemy in enemies:
+		if enemy.phase_change_pending:
+			result.events.append(phase_event(enemy))
+			enemy.phase_change_pending = false
+			for i in range(hazards.size() - 1, -1, -1):
+				if int(hazards[i].owner_id) == enemy.id: hazards.remove_at(i)
+			for child in enemies:
+				if child.parent_id == enemy.id and not child.targetable:
+					child.dead = true; child.death_reason = "source_cancel"
 	for hazard in hazards:
 		if hazard.phase == "tell": used.major += 1
 	for enemy in enemies:
@@ -30,6 +39,7 @@ static func step(enemies: Array, actor: Vector2, delta: float, world: Dictionary
 			for child in enemies:
 				if child.parent_id == enemy.id and not child.dead and child.definition_id == "D01" and child.position.distance_to(enemy.position) <= 220: linked = true
 			if not linked: enemy.protection_remaining = 0
+		if enemy.advance_form(delta): continue
 		if not enemy.initialized:
 			enemy.initialized = true
 			_initialize(enemy, enemies, result, config)
@@ -45,7 +55,7 @@ static func step(enemies: Array, actor: Vector2, delta: float, world: Dictionary
 			for escort in enemies:
 				if not escort.dead and escort.parent_id == enemy.id and escort.definition_id == "D01" and escort.position.distance_to(enemy.position) <= 220:
 					enemy.protection_remaining = 5; enemy.rule_cooldown = 8; break
-		if enemy.behavior_id == "J":
+		if enemy.behavior_id == "J" and enemy.form_count == 1:
 			var next_phase := 2 if enemy.hp <= enemy.max_hp * 0.35 else 1 if enemy.hp <= enemy.max_hp * 0.70 else 0
 			if next_phase != enemy.phase:
 				enemy.phase = next_phase
@@ -72,8 +82,8 @@ static func step(enemies: Array, actor: Vector2, delta: float, world: Dictionary
 		var action := _next_action(enemy)
 		if str(action.get("action", "")) == "collaboration":
 			if int(enemy.params.get("collaboration_index", 0)) % 2 == 0:
-				action.shape = "line"; action.length = 280.0; action.half_width = 36.0; action.collaborator = "M03_WAR"
-			else: action.shape = "marker"; action.radius = 90.0; action.collaborator = "M04_WAR"
+				action.shape = "line"; action.length = float(action.get("length", 280.0)); action.half_width = float(action.get("half_width", 36.0)); action.collaborator = "M03_WAR"
+			else: action.shape = "marker"; action.radius = float(action.get("radius", 90.0)); action.collaborator = "M04_WAR"
 		var distance: float = enemy.position.distance_to(actor)
 		if enemy.behavior_id == "E08" and distance > float(action.get("range", 70)):
 			action = enemy.actions[0].duplicate(true)
@@ -98,7 +108,10 @@ static func step(enemies: Array, actor: Vector2, delta: float, world: Dictionary
 					var recipients: Array = _heal_targets(enemy, enemies, float(enemy.params.get("heal_radius", 230))) if str(action.get("action", "")) == "heal" else _followers(enemy, enemies)
 					for follower in recipients: geometry.beneficiaries.append(follower.id)
 				if str(action.get("action", "")) == "collaboration":
-					result.spawns.append({"definition_id":str(action.collaborator), "position":enemy.position + Vector2(80, -50), "parent_id":enemy.id, "lifetime":float(action.get("windup", 1.4)) + 1.6})
+					var human_collaborator: bool = enemy.form_count > 1 and enemy.form_index == 0
+					var collaborator_height := (128.0 if str(action.collaborator) == "M03_WAR" else 120.0) if human_collaborator else (200.0 if str(action.collaborator) == "M03_WAR" else 190.0)
+					result.spawns.append({"definition_id":str(action.collaborator), "position":enemy.position + Vector2(80, -50), "parent_id":enemy.id, "lifetime":float(action.get("windup", 1.4)) + float(action.get("recovery", 2.5)),
+						"visual_id":str(action.collaborator).replace("_WAR", "_human") if human_collaborator else str(action.collaborator), "body_height":collaborator_height})
 				enemy.current_action = action
 				enemy.telegraph = geometry
 				enemy.aim = geometry.direction
@@ -116,7 +129,7 @@ static func _budget(action: Dictionary) -> String:
 	return "major" if bool(action.get("major", str(action.get("action", "")) not in ["swipe", "strike", "shot"])) else "melee"
 
 static func _next_action(enemy: RefCounted) -> Dictionary:
-	if enemy.behavior_id == "J" and not enemy.actions.is_empty():
+	if enemy.behavior_id == "J" and enemy.form_count == 1 and not enemy.actions.is_empty():
 		var pattern: Array = [0, 1] if enemy.phase == 0 else [0, 1, 0, 2] if enemy.phase == 1 else [0, 1, 0, 1, 2]
 		var step_index: int = enemy.attack_index % pattern.size()
 		var action: Dictionary = enemy.actions[int(pattern[step_index]) % enemy.actions.size()].duplicate(true)
@@ -126,7 +139,7 @@ static func _next_action(enemy: RefCounted) -> Dictionary:
 		action.recovery = (2.0 + enemy.phase * 0.25) if action.combo_final else (0.9 - enemy.phase * 0.1)
 		return action
 	if not enemy.actions.is_empty():
-		return enemy.actions[(enemy.attack_index + enemy.phase) % enemy.actions.size()].duplicate(true)
+		return enemy.actions[enemy.attack_index % enemy.actions.size()].duplicate(true)
 	var legacy: String = enemy.attack_cycle[enemy.attack_index % enemy.attack_cycle.size()]
 	return {"action":legacy, "shape":"line" if legacy == "charge" else "disc" if legacy == "nova" else "fan" if legacy in ["shot", "fan"] else "sector", "range":enemy.blast_radius + 20 if legacy == "nova" else enemy.attack_range, "radius":enemy.blast_radius if legacy == "nova" else enemy.radius + 28, "windup":1.15 if legacy == "nova" else enemy.attack_delay, "recovery":enemy.recovery, "count":5 if legacy == "fan" else 1, "spread":1.15, "length":240, "damage_scale":1.2 if legacy == "nova" else 1.0}
 
@@ -197,7 +210,7 @@ static func _release(enemy: RefCounted, actor: Vector2, enemies: Array, hazards:
 			for i in count:
 				var angle := (float(i) / maxf(1, count - 1) - 0.5) * spread if count > 1 else 0.0
 				var direction: Vector2 = enemy.aim.rotated(angle)
-				result.projectiles.append({"position":geometry.origin, "velocity":direction * float(action.get("speed", 225)), "life":minf(float(action.get("range", 400)) / float(action.get("speed", 225)), minf(3, float(action.get("life", 2.5)))), "hostile":true, "damage":geometry.damage, "source":enemy.id, "source_id":enemy.id, "visual_id":enemy.visual_id, "hit_radius":5.0})
+				result.projectiles.append({"position":geometry.origin, "velocity":direction * float(action.get("speed", 225)), "life":minf(float(action.get("range", 400)) / float(action.get("speed", 225)), minf(3, float(action.get("life", 2.5)))), "hostile":true, "move_id":str(action.get("id", kind)), "damage":geometry.damage, "source":enemy.id, "source_id":enemy.id, "visual_id":enemy.visual_id, "hit_radius":5.0})
 		"heal": _heal(enemy, enemies, float(enemy.params.get("heal_radius", 230)), geometry.get("beneficiaries", []))
 		"command":
 			var count := 0
@@ -215,7 +228,7 @@ static func _release(enemy: RefCounted, actor: Vector2, enemies: Array, hazards:
 			for child in enemies:
 				if not child.dead and child.parent_id == enemy.id and child.definition_id == "D03": anchors += 1
 			geometry.shape = "ring_gap" # The opening was frozen at warning admission.
-			if GEOMETRY.contains(geometry, actor): result.hits.append(geometry.damage)
+			if GEOMETRY.contains(geometry, actor): _record_hit(result, geometry)
 		"pot":
 			for i in range(hazards.size() - 1, -1, -1):
 				if hazards[i].owner_id == enemy.id and str(hazards[i].get("kind", "")) == "pot": hazards.remove_at(i)
@@ -226,8 +239,8 @@ static func _release(enemy: RefCounted, actor: Vector2, enemies: Array, hazards:
 			enemy.params.collaboration_index = int(enemy.params.get("collaboration_index", 0)) + 1
 			result.events.append({"kind":"collaboration", "id":enemy.id, "visual_id":visual, "origin":geometry.origin, "duration":1.6})
 			if visual == "M03_WAR":
-				if GEOMETRY.contains(geometry, actor): result.hits.append(geometry.damage)
-				_summon(enemy, {"spawn_id":"D01", "spawn_count":2, "limit":4}, enemies, result, config)
+				if GEOMETRY.contains(geometry, actor): _record_hit(result, geometry)
+				if enemy.form_count == 1: _summon(enemy, {"spawn_id":"D01", "spawn_count":2, "limit":4}, enemies, result, config)
 			else:
 				var array_tell: Dictionary = geometry.duplicate(true)
 				array_tell.phase = "tell"; array_tell.kind = "collaboration_array"; array_tell.remaining = 0.9; array_tell.total = 0.9
@@ -239,7 +252,7 @@ static func _release(enemy: RefCounted, actor: Vector2, enemies: Array, hazards:
 				enemy.active_remaining = enemy.active_total; enemy.active_hit = false
 				geometry.remaining = enemy.active_total; geometry.total = enemy.active_total
 				enemy.telegraph = geometry; enemy.state = "active"
-			elif GEOMETRY.contains(geometry, actor): result.hits.append(geometry.damage)
+			elif GEOMETRY.contains(geometry, actor): _record_hit(result, geometry)
 			if kind == "hook":
 				geometry.kind = "slow_strip"; geometry.remaining = minf(2, float(action.get("duration", 1.5))); geometry.total = geometry.remaining; geometry.until = 0.0; geometry.interval = 0.3; geometry.slow = float(action.get("slow", 0.25)); geometry.phase = "active"
 				hazards.append(geometry)
@@ -253,6 +266,8 @@ static func _release(enemy: RefCounted, actor: Vector2, enemies: Array, hazards:
 			if enemy.elite_rule_id == "L06": echo.shape = "marker"; echo.origin = actor; echo.radius = 55.0
 			echo.phase = "tell"; echo.kind = "echo"; echo.remaining = maxf(0.8, float(enemy.params.get("echo_delay", enemy.params.get("marker_delay", 0.9)))); echo.total = echo.remaining; echo.one_shot = true
 			hazards.append(echo)
+	if enemy.rank == "boss" and kind not in ["heal", "command", "summon"]:
+		result.events.append({"kind":"boss_impact", "id":enemy.id, "enemy_id":enemy.id, "position":geometry.origin, "phase":enemy.form_index, "form_index":enemy.form_index, "action_id":str(action.get("id", kind)), "action_serial":enemy.action_serial, "geometry":geometry.duplicate(true)})
 	if kind != "charge": _shared_recovery(enemy, enemies)
 	result.events.append({"kind":"enemy_release", "id":enemy.id, "action_serial":enemy.action_serial, "geometry":geometry.duplicate(true)})
 	result.effects.append({"kind":"enemy_buff" if kind in ["heal", "command", "summon"] else "line" if geometry.shape == "line" else "ring", "origin":geometry.origin, "end":geometry.origin + geometry.direction * float(geometry.length), "radius":geometry.radius, "life":0.3, "hostile":kind not in ["heal", "command", "summon"], "visual_id":enemy.visual_id})
@@ -275,6 +290,7 @@ static func _heal(enemy: RefCounted, enemies: Array, reach: float, locked_ids: A
 		target.hp += amount; target.healing_received += amount
 
 static func _summon(enemy: RefCounted, action: Dictionary, enemies: Array, result: Dictionary, config: Dictionary) -> void:
+	if bool(enemy.params.get("solo", false)): return
 	var room := _derivative_room(enemies, result, config)
 	var limit := int(action.get("limit", 4))
 	var count := mini(int(action.get("spawn_count", 2)), mini(limit - enemy.spawned_total, room))
@@ -293,7 +309,7 @@ static func _update_hazards(hazards: Array, enemies: Array, actor: Vector2, delt
 		hazard.remaining -= delta
 		if hazard.phase == "tell":
 			if hazard.remaining <= 0:
-				if GEOMETRY.contains(hazard, actor): result.hits.append(hazard.damage)
+				if GEOMETRY.contains(hazard, actor): _record_hit(result, hazard)
 				var released_geometry: Dictionary = hazard.duplicate(true)
 				released_geometry.phase = "active"
 				result.events.append({"kind":"enemy_hazard_release", "id":int(hazard.owner_id), "action_serial":int(hazard.get("action_serial", 0)), "geometry":released_geometry})
@@ -303,7 +319,7 @@ static func _update_hazards(hazards: Array, enemies: Array, actor: Vector2, delt
 			if hazard.until <= 0 and hazard.remaining > 0:
 				if GEOMETRY.contains(hazard, actor):
 					if str(hazard.get("kind", "")) == "slow_strip": result.events.append({"kind":"enemy_slow", "duration":0.4, "slow":float(hazard.get("slow", 0.25))})
-					else: result.hits.append(hazard.damage)
+					else: _record_hit(result, hazard)
 				hazard.until += hazard.interval
 			if hazard.remaining <= 0: hazards.remove_at(i)
 
@@ -344,7 +360,15 @@ static func _advance_charge(enemy: RefCounted, actor: Vector2, delta: float, ene
 	g.remaining = enemy.active_remaining
 	var swept := {"shape":"line", "origin":start, "direction":g.direction, "length":start.distance_to(enemy.position), "half_width":g.half_width}
 	if not enemy.active_hit and GEOMETRY.contains(swept, actor):
-		result.hits.append(g.damage); enemy.active_hit = true
+		_record_hit(result, g); enemy.active_hit = true
 	if enemy.active_remaining <= 0:
 		enemy.telegraph = {}; enemy.state = "recovery"
 		_shared_recovery(enemy, enemies)
+
+static func phase_event(enemy: RefCounted) -> Dictionary:
+	return {"kind":"boss_phase", "id":enemy.id, "enemy_id":enemy.id, "position":enemy.position, "phase":enemy.form_index,
+		"form_index":enemy.form_index, "form_count":enemy.form_count, "form_name":enemy.form_name, "transition_remaining":enemy.transition_remaining}
+
+static func _record_hit(result: Dictionary, geometry: Dictionary) -> void:
+	result.hits.append(float(geometry.damage))
+	result.hit_sources.append({"enemy_id":int(geometry.get("owner_id", 0)), "attack":str(geometry.get("move_id", geometry.get("action_id", ""))), "position":geometry.get("origin", Vector2.ZERO)})

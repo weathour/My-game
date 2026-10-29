@@ -10,12 +10,13 @@ const T := preload("res://scripts/ui/chronicle/chronicle_theme.gd")
 const BACKDROP := "res://assets/ui/chronicle/codex/ink-backdrop.png"
 const CATEGORY_ORDER := ["ordinary", "elite", "boss", "other"]
 const CATEGORY_LABELS := {"ordinary":"普通", "elite":"精英", "boss":"首领", "other":"异物"}
-const CLIP_LABELS := {"idle":"待机", "move":"移动", "attack":"攻击", "special":"特殊动作", "hit":"受击", "slam":"重击", "command":"号令"}
+const CLIP_LABELS := {"idle":"待机", "move":"移动", "attack":"攻击", "special":"特殊动作", "hit":"受击", "death":"败退", "slam":"重击", "command":"号令"}
 const GOLD := Color("bdab7b")
 const WORDS := Color("e4dfd1")
 const MUTED := Color("aaa69b")
 var stage_id := ""
 var selected_id := ""
+var selected_form := 0
 var stage_only := false
 var selected_category := "ordinary"
 var selected_clip := "idle"
@@ -253,9 +254,11 @@ func select_category(key: String) -> void:
 
 func show_entry(id: String) -> void:
 	var focused_name := _focused_name()
-	var value := CATALOG.definition(id)
-	if value.is_empty(): return
+	var definition := CATALOG.definition(id)
+	if definition.is_empty(): return
+	if id != selected_id: selected_form = 0
 	selected_id = id
+	var value := _selected_definition()
 	if stage_only and id not in stage_ids(stage_id): stage_only = false
 	selected_category = category_for(value)
 	if roster == null: return
@@ -264,6 +267,11 @@ func show_entry(id: String) -> void:
 	var category := T.label(_rank_label(value), 14, GOLD)
 	category.name = "enemy_entry_category"
 	detail.add_child(category)
+	if definition.get("forms", []).size() > 1:
+		var forms_row := T.row(detail)
+		for index in definition.forms.size():
+			var form_button := _quiet("一 · 人形" if index == 0 else "二 · 战相", func(): selected_form = index; show_entry(selected_id), selected_form == index, "enemy_form_" + str(index))
+			forms_row.add_child(form_button)
 	var title := T.paragraph(str(value.name).replace("·", "\n"), WORDS, 29 if size.x >= 1100 else 25)
 	title.name = "enemy_entry_title"
 	title.add_theme_font_override("font", T.FONT.get_heading_font())
@@ -298,7 +306,7 @@ func set_mode(value: String) -> void:
 	var focused_name := _focused_name()
 	if value not in ["portrait", "moves"]: return
 	mode_key = value
-	if mode_key == "moves" and preview == null: _create_preview(CATALOG.definition(selected_id))
+	if mode_key == "moves" and preview == null: _create_preview(_selected_definition())
 	_update_modes()
 	_sync_focus()
 	_restore_focus.call_deferred(focused_name)
@@ -335,6 +343,20 @@ func _create_preview(value: Dictionary) -> void:
 	animation_stage.add_child(preview)
 	_fit_active_preview()
 
+func _selected_definition() -> Dictionary:
+	var value := CATALOG.definition(selected_id)
+	var forms: Array = value.get("forms", [])
+	if forms.is_empty(): return value
+	selected_form = clampi(selected_form, 0, forms.size() - 1)
+	var form: Dictionary = forms[selected_form]
+	value.erase("forms")
+	value.merge(form, true)
+	value.visual_id = selected_id + ("_human" if selected_form == 0 else "")
+	var character_name := str(STAGES.stage(selected_id).get("boss_name", str(value.name)))
+	value.name = character_name + "·" + ("人形" if selected_form == 0 else str(form.name))
+	value.hp = float(value.hp) * (float(value.params.get("phase_hp_fraction", 0.4)) if selected_form == 0 else 1.0 - float(value.params.get("phase_hp_fraction", 0.4)))
+	return value
+
 func _rank_label(value: Dictionary) -> String:
 	if value.rank == "proxy": return "协同演出" if not bool(value.params.get("targetable", true)) else "共血形体"
 	return str({"ordinary":"普通", "heavy":"重型", "field_elite":"精英", "boss":"首领", "object":"可破坏物"}.get(value.rank, "异物"))
@@ -363,7 +385,7 @@ func _preview_bounds(visual_id: String) -> Rect2:
 
 func _fit_active_preview() -> void:
 	if not is_instance_valid(preview): return
-	_fit_preview(animation_stage, preview, _preview_bounds(str(CATALOG.definition(selected_id).visual_id)))
+	_fit_preview(animation_stage, preview, _preview_bounds(str(_selected_definition().visual_id)))
 
 func _fit_preview(stage: Control, actor: Node2D, bounds: Rect2) -> void:
 	if not is_instance_valid(actor) or not bounds.has_area(): return

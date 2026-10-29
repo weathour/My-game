@@ -44,6 +44,7 @@ func click(name: String) -> void:
 	if button == null or button.disabled: return
 	var point: Vector2 = button.get_global_rect().get_center()
 	var move := InputEventMouseMotion.new();move.position = point;move.global_position = point;viewport.push_input(move)
+	expect(viewport.gui_get_hovered_control() == button, "pointer reaches modal button " + name)
 	for down in [true,false]:
 		var event := InputEventMouseButton.new();event.button_index = MOUSE_BUTTON_LEFT;event.pressed = down;event.position = point;event.global_position = point
 		viewport.push_input(event)
@@ -86,6 +87,7 @@ func run() -> void:
 	await press(KEY_TAB)
 	expect(viewport.gui_get_focus_owner().name != "enemy_codex_B17" and codex.is_ancestor_of(viewport.gui_get_focus_owner()), "Tab continues from clicked index entry")
 	codex.show_entry("B18");await frames()
+	expect(codex.selected_form == 0 and codex._selected_definition().visual_id == "B18_human", "boss inspection begins with the encountered human form")
 	await capture("portrait-1280-b18")
 	var categories := {}
 	for id in CODEX.all_ids():
@@ -97,6 +99,8 @@ func run() -> void:
 		expect(codex.selected_id == id and codex.portrait.texture != null,"standing illustration accessible " + id)
 		for button in codex.roster.get_children(): expect(not button.text.begins_with(str(id) + "  "),"program IDs stay out of index labels")
 	codex.show_entry("B18");await frames()
+	await click("enemy_form_1")
+	expect(codex.selected_form == 1 and codex._selected_definition().visual_id == "B18", "form selector shows the transformed identity")
 	await click("codex_mode_moves")
 	expect(viewport.gui_get_focus_owner().name == "codex_mode_moves", "real moves click restores the replacement mode button focus")
 	await press(KEY_TAB)
@@ -126,6 +130,7 @@ func run() -> void:
 	expect(shell.selected_node == route_selection and is_equal_approx(shell.route_scroll,route_offset),"keyboard does not inspect or pan underlying route")
 	var wheel := InputEventMouseButton.new();wheel.button_index = MOUSE_BUTTON_WHEEL_DOWN;wheel.pressed = true;wheel.position = Vector2(110,410);wheel.global_position = wheel.position
 	viewport.push_input(wheel);await frames()
+	wheel = wheel.duplicate();wheel.pressed = false;viewport.push_input(wheel);await frames()
 	expect(shell.selected_node == route_selection and is_equal_approx(shell.route_scroll,route_offset),"wheel belongs to the modal index")
 	codex.combat_open = false;codex.set_mode("portrait")
 	for dimensions in [Vector2i(960,540),Vector2i(1280,720),Vector2i(1920,1080)]:
@@ -135,10 +140,15 @@ func run() -> void:
 		expect(codex.get_global_rect().encloses(codex.portrait.get_global_rect()),"portrait region fits viewport " + str(dimensions))
 		await capture("portrait-%d-b18" % dimensions.x)
 		codex.show_entry("B16");await frames();await capture("portrait-%d-b16" % dimensions.x)
-		codex.set_mode("moves");await frames()
-		var bounds: Rect2 = codex._preview_bounds("B16")
-		expect(Rect2(Vector2.ZERO,codex.animation_stage.size).encloses(codex.preview.transform * bounds),"full animation union fits " + str(dimensions))
-		await capture("moves-%d-b16" % dimensions.x)
+		for form_index in 2:
+			await click("enemy_form_" + str(form_index))
+			expect(codex.selected_form == form_index, "real form button selects form %d at %s" % [form_index + 1, dimensions])
+			var visual_id: String = codex._selected_definition().visual_id
+			codex.set_mode("moves");await frames()
+			var bounds: Rect2 = codex._preview_bounds(visual_id)
+			expect(bounds.has_area() and Rect2(Vector2.ZERO,codex.animation_stage.size).encloses(codex.preview.transform * bounds),"complete selected-form animation union fits " + visual_id + str(dimensions))
+			expect(codex.preview.get_meta("visual_id") == visual_id, "animation preview uses selected form instead of resetting to first")
+			await capture("moves-%d-b16-form%d" % [dimensions.x, form_index + 1])
 		codex.set_mode("portrait")
 	expect(snapshot() == before,"all browsing, modes, animation controls and resize leave campaign/RNG/files unchanged")
 	var page_before: String = shell.page
@@ -147,5 +157,6 @@ func run() -> void:
 	expect(viewport.gui_get_focus_owner() == shell.find_child("route_enemy_codex",true,false),"opener focus restores through the shell")
 	expect(snapshot() == before,"close does not save or advance")
 	shell.queue_free();viewport.queue_free();await frames()
+	if DisplayServer.get_name() != "headless": await create_timer(.25).timeout
 	print("CHRONICLE_ENEMY_CODEX_SMOKE ","PASS" if failures == 0 else "FAIL"," checks=",checks," failures=",failures)
 	quit(0 if failures == 0 else 1)

@@ -88,6 +88,27 @@ func _layout_hud() -> void:
 	hud.offset_bottom = -8
 	feedback.offset_top = hud.offset_top - 32
 	feedback.offset_bottom = hud.offset_top - 8
+	canvas.safe_bottom = maxf(90, -hud.offset_top + 12)
+	canvas.safe_top = 72
+	_sync_camera_obstacles()
+
+func _sync_camera_obstacles() -> void:
+	if not is_instance_valid(canvas) or not is_instance_valid(hud) or not is_instance_valid(hud.presentation): return
+	canvas.camera.hud_obstacles.clear()
+	var presentation: Control = hud.presentation
+	if presentation.get("band") == null or presentation.get("members") == null: return
+	var band: Control = presentation.band
+	if band.get_child_count() == 0 or not band.get_child(0) is Control: return
+	var plate: Control = band.get_child(0)
+	var plate_rect := Rect2(plate.get_global_rect().position - global_position, plate.get_global_rect().size)
+	canvas.safe_bottom = maxf(90, size.y - plate_rect.position.y)
+	canvas.camera.hud_obstacles.append(plate_rect)
+	for member in presentation.members:
+		if not member.root.visible: continue
+		var portrait: Control = member.portrait
+		var rect: Rect2 = portrait.get_global_rect()
+		var radius: float = minf(rect.size.x, rect.size.y) * .5 * portrait.SWITCH_COOLDOWN_MASK_RADIUS_SCALE + 16
+		canvas.camera.hud_obstacles.append(Rect2(rect.get_center() - global_position - Vector2.ONE * radius, Vector2.ONE * radius * 2))
 
 func _physics_process(delta: float) -> void:
 	var direction := INPUT.movement()
@@ -97,11 +118,13 @@ func _physics_process(delta: float) -> void:
 		if event.kind == "level": feedback.text = "%s  Lv.%d" % [definitions[event.id].name, event.level]; message_time = 3
 	canvas.consume_events(battle.events)
 	battle.events.clear()
+	_sync_camera_obstacles()
+	canvas.advance_presentation(delta)
 	if not battle.paused:
 		message_time -= delta
 	canvas.refresh(direction.length_squared() > 0)
 	refresh()
-	if not battle.outcome.is_empty() and not sent:
+	if not battle.outcome.is_empty() and not sent and not canvas.victory_presentation_pending():
 		sent = true
 		if battle.outcome == "failed": failed.emit()
 		else:
@@ -119,6 +142,9 @@ func refresh() -> void:
 		if enemy.rank == "boss" and enemy.hp_owner_id == enemy.id:
 			boss_bar.max_value = enemy.max_hp
 			boss_bar.value = enemy.hp
+			if enemy.form_count > 1:
+				var state_text := " · 变身中" if enemy.transition_remaining > 0 else ""
+				boss_label.text = "%s · %s  %d/%d%s" % [battle.director.config.boss_name, "人形" if enemy.form_index == 0 else enemy.form_name, enemy.form_index + 1, enemy.form_count, state_text]
 			break
 	hud.refresh()
 
@@ -131,7 +157,10 @@ func toggle_pause() -> void:
 		var resume_button := T.button("继续战斗 · Esc", toggle_pause, true)
 		column.add_child(resume_button)
 		column.add_child(T.paragraph("WASD / 方向键移动 · Q / E 切人 · J / K 关键技能"))
-		column.add_child(T.paragraph("击破%d名敌人或战斗达到%d秒时，首领出现。" % [battle.director.config.boss_kills, battle.director.config.boss_time]))
+		if battle.director.config.get("encounter_mode", "") == "boss_duel":
+			column.add_child(T.paragraph("此战独对吕布。击败人形后迎战鬼神相，两阶段全部击破后通关。"))
+		else:
+			column.add_child(T.paragraph("击破%d名敌人或战斗达到%d秒时，首领出现。" % [battle.director.config.boss_kills, battle.director.config.boss_time]))
 		column.add_child(T.paragraph("%d秒内击败首领可获得额外经验。" % battle.director.config.bonus_time))
 		var choice := OptionButton.new()
 		choice.name = "battle_hud_layout"
@@ -161,7 +190,9 @@ func _modal(title: String, detail: String) -> VBoxContainer:
 	var center := CenterContainer.new()
 	overlay.add_child(center)
 	center.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	var column := T.column(T.panel(center, false, 25))
+	var panel := T.panel(center, false, 25)
+	panel.custom_minimum_size.x = minf(460, maxf(280, size.x - 48))
+	var column := T.column(panel)
 	column.add_child(T.label(title, 30, T.INK, true))
 	column.add_child(T.paragraph(detail))
 	return column

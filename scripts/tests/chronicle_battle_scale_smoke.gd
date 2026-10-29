@@ -5,6 +5,8 @@ const SPACE := preload("res://scripts/battle/battle_space.gd")
 const ART := preload("res://scripts/ui/chronicle/battle_art.gd")
 const C := preload("res://scripts/content/combat_catalog.gd")
 const SETTINGS := preload("res://scripts/game_settings.gd")
+const ENEMY_MANIFEST := preload("res://scripts/ui/chronicle/enemy_visual_manifest.gd")
+const DIRECTOR := preload("res://scripts/battle/stage_director.gd")
 var viewport: SubViewport
 var view: Control
 var failures := 0
@@ -58,6 +60,63 @@ func measure(visual: Node2D, expected: float, name: String) -> void:
 	expect(absf(bounds.size.y - expected) < .2, name + " height follows visible body, not frame")
 	expect(absf(bounds.end.y) < .2, name + " feet align with ground")
 
+func measure_authored_enemy(visual: Node2D, enemy: RefCounted, clips: Array = ["idle"]) -> void:
+	var identity := str(enemy.visual_id)
+	var manifest := ENEMY_MANIFEST.resolved(identity)
+	expect(not manifest.is_empty(), identity + " has authored body calibration")
+	if manifest.is_empty(): return
+	var body_height := float(manifest.get("body_height_px", 0))
+	expect(body_height > 0, identity + " has a nonzero visible-body reference")
+	if body_height <= 0: return
+	var factor := float(enemy.body_height) / body_height
+	expect(str(visual.get_meta("visual_id", "")) == identity and str(visual.get("visual_id")) == identity, identity + " uses its own authored visual")
+	expect(visual.scale.is_equal_approx(Vector2.ONE * factor), identity + " fits calibrated body, not transparent canvas")
+	expect(visual.position.is_zero_approx(), identity + " calibrated ground origin remains fixed")
+	for key in clips:
+		visual.preview(str(key), 0.0)
+		var clip: Dictionary = manifest.clips[key]
+		var dimensions: Array = clip.frame_size
+		var anchor := Vector2(float(manifest.anchor_px[0]), float(manifest.anchor_px[1]))
+		var cell := Vector2(float(dimensions[0]), float(dimensions[1]))
+		var texture := ENEMY_MANIFEST.texture(identity, str(clip.file))
+		expect(body_height < cell.y, identity + " " + str(key) + " keeps transparent padding outside body reference")
+		expect(visual.sprite.position.is_equal_approx(cell * .5 - anchor), identity + " " + str(key) + " places the recorded foot anchor at origin")
+		var source_image := texture.get_image()
+		var source_bounds := Rect2()
+		for index in int(clip.frames):
+			var frame_image := source_image.get_region(Rect2i(index * int(cell.x), 0, int(cell.x), int(cell.y)))
+			var opaque := Rect2(frame_image.get_used_rect())
+			expect(opaque.has_area(), identity + " " + str(key) + " frame " + str(index) + " has visible pixels")
+			source_bounds = opaque if index == 0 else source_bounds.merge(opaque)
+		var expected := Rect2((source_bounds.position - anchor) * factor, source_bounds.size * factor)
+		var actual := body_bounds(visual)
+		expect(actual.position.distance_to(expected.position) < .02 and actual.size.distance_to(expected.size) < .02, identity + " " + str(key) + " preserves independently read alpha silhouette at calibrated scale")
+		# A weapon or plume can extend beyond the body; only idle feet define ground.
+		if str(key) == "idle": expect(absf(actual.end.y) < .2, identity + " idle feet align with ground")
+		metrics.append({"name":identity + " " + str(key),"calibrated_body_height":body_height * visual.scale.y,"height":actual.size.y,"ground":actual.end.y,"source_alpha_bounds":source_bounds,"scale":factor})
+	visual.preview("idle", 0.0)
+
+func check_boss_form_art() -> void:
+	for stage_id in ["B15", "B16", "B17", "B18"]:
+		var director := DIRECTOR.new(C.stage(stage_id), 1702)
+		var enemy: RefCounted = director.spawn("boss", SPACE.CENTER)
+		for phase in 2:
+			expect(enemy.visual_id == stage_id + ("_human" if phase == 0 else ""), stage_id + " selects the current form identity")
+			var visual := ART.create_enemy(enemy, stage_id)
+			viewport.add_child(visual)
+			measure_authored_enemy(visual, enemy, ENEMY_MANIFEST.resolved(enemy.visual_id).clips.keys())
+			visual.queue_free()
+			if phase == 0: enemy.receive_damage(enemy.hp)
+	# These are non-targetable collaborators; their presentation uses the human
+	# descriptor without changing the war definition that owns their damage.
+	var collaboration_director := DIRECTOR.new(C.stage("B17"), 1702)
+	for descriptor in [{"definition_id":"M03_WAR","visual_id":"M03_human","body_height":128.0,"position":SPACE.CENTER}, {"definition_id":"M04_WAR","visual_id":"M04_human","body_height":120.0,"position":SPACE.CENTER}]:
+		var enemy: RefCounted = collaboration_director.derivative(descriptor, [])
+		var visual := ART.create_enemy(enemy, "B17")
+		viewport.add_child(visual)
+		measure_authored_enemy(visual, enemy, ENEMY_MANIFEST.resolved(enemy.visual_id).clips.keys())
+		visual.queue_free()
+
 func run() -> void:
 	expect(ProjectSettings.globalize_path("user://").begins_with("/tmp/"), "isolated storage")
 	if failures: quit(1); return
@@ -91,13 +150,26 @@ func run() -> void:
 		measure(view.canvas.actor_visual, 67.5 if moving else 72, "JIA spear " + ("run" if moving else "idle"))
 	b.equipment.weapon = "plain_blade"
 	var types := ["melee","ranged","card_elite","equipment_elite","boss"]
-	var heights := [64,68,92,96,112]
+	var fallback_heights := [64,68]
 	for i in types.size():
 		var enemy: RefCounted = b.director.spawn(types[i], SPACE.CENTER + Vector2(-360 + i * 180, 165))
 		enemy.hp *= .8
 		b.enemies.append(enemy)
 	view.canvas.refresh(false)
-	for i in types.size(): measure(view.canvas.enemy_views[b.enemies[i].id].node, heights[i], types[i])
+	for i in types.size():
+		var enemy: RefCounted = b.enemies[i]
+		var visual: Node2D = view.canvas.enemy_views[enemy.id].node
+		if enemy.definition_id.is_empty(): measure(visual, fallback_heights[i], types[i])
+		else: measure_authored_enemy(visual, enemy)
+	var boss: RefCounted = b.enemies.back()
+	var boss_bounds := body_bounds(view.canvas.enemy_views[boss.id].node)
+	var boss_screen := Rect2(view.canvas.origin + (boss.position + boss_bounds.position) * view.canvas.world_scale, boss_bounds.size * view.canvas.world_scale)
+	expect(view.canvas.camera.mode == "duel" and Rect2(Vector2.ZERO, view.canvas.size).encloses(boss_screen), "Boss framing preserves the complete authored silhouette")
+	check_boss_form_art()
+	# Ordinary follow still has the original local-map contract. The explicit Boss
+	# fixture above now invokes duel zoom, so remove it before testing follow.
+	b.enemies.pop_back()
+	view.canvas.camera.reset()
 	var slime: Node2D = ART.SLIME.instantiate()
 	viewport.add_child(slime)
 	ART.fit_enemy(slime, "melee", "B01")

@@ -1,0 +1,114 @@
+{
+  "action_clips": {
+    "charge": "special",
+    "halberd_charge": "special",
+    "halberd_fall": "special",
+    "halberd_finish": "attack",
+    "halberd_sweep": "attack",
+    "marker": "special",
+    "slam": "attack"
+  },
+  "anchor_px": [
+    288,
+    480
+  ],
+  "body_height_px": 224,
+  "clips": {
+    "attack": {
+      "contact_frame": 1,
+      "file": "attack.png",
+      "fps": 10,
+      "frame_size": [
+        640,
+        512
+      ],
+      "frames": 4,
+      "windup_frame": 0
+    },
+    "death": {
+      "contact_frame": 0,
+      "file": "death.png",
+      "fps": 7,
+      "frame_size": [
+        640,
+        512
+      ],
+      "frames": 2,
+      "windup_frame": 0
+    },
+    "hit": {
+      "contact_frame": 0,
+      "file": "hit.png",
+      "fps": 10,
+      "frame_size": [
+        640,
+        512
+      ],
+      "frames": 2,
+      "windup_frame": 0
+    },
+    "idle": {
+      "contact_frame": 1,
+      "file": "idle.png",
+      "fps": 6,
+      "frame_size": [
+        640,
+        512
+      ],
+      "frames": 4,
+      "windup_frame": 0
+    },
+    "move": {
+      "contact_frame": 1,
+      "file": "move.png",
+      "fps": 10,
+      "frame_size": [
+        640,
+        512
+      ],
+      "frames": 3,
+      "windup_frame": 0
+    },
+    "special": {
+      "contact_frame": 1,
+      "file": "special.png",
+      "fps": 9,
+      "frame_size": [
+        640,
+        512
+      ],
+      "frames": 3,
+      "windup_frame": 0
+    }
+  },
+  "faces_left": false,
+  "provenance": "res://design/boss-forms-20261029/characters/B18_human/export-manifest.json",
+  "status": "final",
+  "version": 1,
+  "visual_id": "B18_human",
+  "head_rect_px": [
+    480,
+    220,
+    300,
+    350
+  ],
+  "sources": {
+    "combat": {
+      "path": "design/boss-forms-20261029/characters/B18_human/source/actions-v1.png",
+      "size": [
+        1416,
+        1111
+      ],
+      "sha256": "0e82344df457ca5ce8977ea6a7f2bb1bcc3495879a22aaf67e70d867e54c0ca3",
+      "standing_body_height": 230
+    },
+    "master": {
+      "path": "design/boss-forms-20261029/characters/B18_human/source/master-v2.png",
+      "size": [
+        1134,
+        1387
+      ],
+      "sha256": "69b379a6285e4feceadead35c8014e005e9847f116310f27075c4d764f12f4ce"
+    }
+  }
+}

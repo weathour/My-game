@@ -165,7 +165,7 @@ func refresh() -> void:
 	health.value = actor.hp
 	mana.max_value = actor.stats.mp
 	mana.value = actor.mp
-	health_text.text = "%d / %d" % [ceili(actor.hp), actor.stats.hp]
+	health_text.text = "%d / %d" % [ceili(actor.hp), ceili(actor.stats.hp)]
 	mana_text.text = "%d / %d" % [floori(actor.mp), actor.stats.mp]
 	experience.max_value = C.xp_required(actor.level)
 	experience.value = actor.xp

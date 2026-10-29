@@ -17,7 +17,7 @@ static func hit_enemy(enemy: RefCounted, context: Dictionary) -> bool:
 		if toward.dot(enemy.aim) >= cos(float(enemy.params.get("shield_arc", 1.8)) * 0.5): amount *= 1 - float(enemy.params.get("shield_reduction", 0.4))
 	amount += settled * vulnerability
 	if enemy.protection_remaining > 0: amount *= 1 - float(enemy.params.get("link_reduction", 0.25))
-	enemy.hp = maxf(0, enemy.hp - amount)
+	enemy.receive_damage(amount)
 	enemy.flash = 0.12
 	var slow: float = context.slow
 	var duration: float = context.duration
@@ -25,7 +25,6 @@ static func hit_enemy(enemy: RefCounted, context: Dictionary) -> bool:
 	if duration > 0:
 		enemy.slow = maxf(enemy.slow, slow)
 		enemy.slow_time = maxf(enemy.slow_time, duration)
-	enemy.dead = enemy.hp <= 0
 	return enemy.dead
 
 static func hit_character(character: RefCounted, raw: float, equipment: Dictionary) -> float:

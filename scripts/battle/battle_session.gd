@@ -51,6 +51,8 @@ func _init(request: Dictionary) -> void:
 	var bonuses := C.owned_bonuses(roster)
 	for id in members: characters[id] = CHARACTER.new(id, roster[id], C.attributes(id, int(roster[id].level), bonuses, equipment))
 	mechanics = MECHANICS.new(self)
+	if str(director.config.get("encounter_mode", "")) == "boss_duel":
+		enemies.append_array(director.tick(0, 0, position, enemies))
 
 func current() -> RefCounted:
 	return characters[members[active]]
@@ -77,7 +79,8 @@ func tick(delta: float, movement: Vector2) -> void:
 	var actor := current()
 	enemy_slow_remaining = maxf(0, enemy_slow_remaining - delta)
 	if enemy_slow_remaining <= 0: enemy_slow = 0
-	position += movement.limit_length(1) * (1 - enemy_slow) * actor.stats.move * (1.25 if actor.haste > 0 else 1.0) * delta
+	var actor_movement_speed: float = (1 - enemy_slow) * actor.stats.move * (1.25 if actor.haste > 0 else 1.0)
+	position += movement.limit_length(1) * actor_movement_speed * delta
 	position = SPACE.clamp_point(position, SPACE.PLAYER_MARGIN)
 	var ordinary_count := 0
 	for enemy in enemies:
@@ -100,23 +103,33 @@ func tick(delta: float, movement: Vector2) -> void:
 		if id == actor.id or characters[id].dead: continue
 		var support: Resource = C.definition(id).support
 		if support != null and not mechanics.support_is_reactive(id, support): _cast(support, characters[id], false)
-	var hostile := ENEMIES.step(enemies, position, delta, {"hazards":hazards, "config":director.config, "actor_speed":float(actor.stats.move)})
+	_resolve_hits()
+	var transition_safe := _has_safe_transition()
+	var hostile := ENEMIES.step(enemies, position, delta, {"hazards":hazards, "config":director.config, "actor_speed":actor_movement_speed})
 	for spawn_descriptor in hostile.spawns:
 		enemies.append(director.derivative(spawn_descriptor, enemies))
 	events.append_array(hostile.events)
 	for event in hostile.events:
 		if event.kind == "enemy_slow": enemy_slow = float(event.slow); enemy_slow_remaining = float(event.duration)
 	_refresh_telegraphs()
+	_cancel_transition_sources()
 	projectiles.append_array(hostile.projectiles)
 	effects.append_array(hostile.effects)
 	var incoming: Array = hostile.hits
-	_update_projectiles(delta, incoming)
+	var incoming_sources: Array = hostile.hit_sources
+	_update_projectiles(delta, incoming, incoming_sources)
 	# All already-issued impacts resolve before terminal state. Rendering never budgets damage.
 	_resolve_hits()
-	for amount in incoming:
-		var loss: float = mechanics.receive_hit(actor, float(amount), equipment)
-		if loss > 0: events.append({"kind":"hurt", "amount":loss, "id":actor.id})
+	for incoming_index in incoming.size():
+		if transition_safe or _has_safe_transition(): continue
+		var loss: float = mechanics.receive_hit(actor, float(incoming[incoming_index]), equipment)
+		if loss > 0:
+			events.append({"kind":"hurt", "amount":loss, "id":actor.id})
+			var damage_event: Dictionary = incoming_sources[incoming_index].duplicate() if incoming_index < incoming_sources.size() else {}
+			damage_event.merge({"kind":"damage_taken", "amount":loss, "id":actor.id, "time":director.elapsed}, true)
+			events.append(damage_event)
 	_resolve_hits()
+	_collect_form_events()
 	_cleanup_sources()
 	var boss_dead := false
 	for i in range(enemies.size() - 1, -1, -1):
@@ -125,7 +138,9 @@ func tick(delta: float, movement: Vector2) -> void:
 		var killed: bool = enemy.death_reason in ["", "killed"]
 		if killed:
 			director.defeated(enemy)
-			boss_dead = boss_dead or (enemy.kind == "boss" and enemy.hp_owner == null)
+			var final_boss: bool = enemy.kind == "boss" and enemy.hp_owner == null
+			boss_dead = boss_dead or final_boss
+			if final_boss: events.append({"kind":"boss_defeated", "id":enemy.id, "enemy_id":enemy.id, "position":enemy.position, "phase":enemy.form_index, "form_index":enemy.form_index, "form_count":enemy.form_count, "form_name":enemy.form_name})
 			if enemy.xp > 0: gems.append({"position":enemy.position, "amount":enemy.xp})
 			events.append({"kind":"kill", "position":enemy.position, "id":enemy.id, "living":enemy.rank != "object"})
 		else: events.append({"kind":"enemy_remove", "id":enemy.id, "reason":enemy.death_reason})
@@ -183,7 +198,14 @@ func _resolve_hits() -> void:
 		var group := str(hit.context.get("delivery", -index)) + ":" + str(receiver.id)
 		if deliveries.has(group): continue
 		deliveries[group] = true
+		var previous_budget: float = receiver.remaining_health_budget()
+		var previous_phase: int = receiver.form_index
 		mechanics.resolve_hit(hit.target, hit.context)
+		var applied := maxf(0, previous_budget - receiver.remaining_health_budget())
+		if applied > 0:
+			events.append({"kind":"damage_dealt", "enemy_id":receiver.id, "definition_id":receiver.definition_id, "phase":previous_phase, "amount":applied,
+				"source":str(hit.context.get("source", "")), "ability":str(hit.context.get("ability", "")), "mechanic":str(hit.context.get("mechanic", "")),
+				"direct":bool(hit.context.get("direct", false)), "secondary":bool(hit.context.get("secondary", false)), "time":director.elapsed})
 	_hits.clear()
 
 func _cast(ability: Resource, source: RefCounted, direct: bool, manual: bool = false) -> bool:
@@ -239,7 +261,7 @@ func _execute_payload(cast: Dictionary) -> void:
 		"source":source.id, "ability":str(ability.id), "cast":context.cast, "direct":direct,
 		"visual_time":director.elapsed, "beneficiary":beneficiary, "beneficiaries":beneficiaries})
 
-func _update_projectiles(delta: float, incoming: Array) -> void:
+func _update_projectiles(delta: float, incoming: Array, incoming_sources: Array = []) -> void:
 	for i in range(projectiles.size() - 1, -1, -1):
 		var p: Dictionary = projectiles[i]
 		var start: Vector2 = p.position
@@ -249,6 +271,7 @@ func _update_projectiles(delta: float, incoming: Array) -> void:
 		if p.hostile:
 			if Geometry2D.get_closest_point_to_segment(position, start, p.position).distance_to(position) < 16 + float(p.get("hit_radius", 4)):
 				incoming.append(p.damage)
+				incoming_sources.append({"enemy_id":int(p.get("source_id", p.get("source", 0))), "attack":str(p.get("move_id", "projectile")), "position":p.position})
 				hit = true
 		else:
 			var first: RefCounted
@@ -358,3 +381,28 @@ func _cleanup_sources() -> void:
 	for i in range(hazards.size() - 1, -1, -1):
 		if dead_ids.has(int(hazards[i].owner_id)): hazards.remove_at(i)
 	_refresh_telegraphs()
+
+func _collect_form_events() -> void:
+	for enemy in enemies:
+		if enemy.phase_change_pending:
+			events.append(ENEMIES.phase_event(enemy))
+			enemy.phase_change_pending = false
+	_cancel_transition_sources()
+
+func _cancel_transition_sources() -> void:
+	var transitioning := {}
+	for enemy in enemies:
+		if enemy.transition_remaining > 0: transitioning[enemy.id] = true
+	if transitioning.is_empty(): return
+	for i in range(hazards.size() - 1, -1, -1):
+		if transitioning.has(int(hazards[i].owner_id)): hazards.remove_at(i)
+	for i in range(projectiles.size() - 1, -1, -1):
+		if bool(projectiles[i].get("hostile", false)) and transitioning.has(int(projectiles[i].get("source_id", projectiles[i].get("source", -1)))): projectiles.remove_at(i)
+	for child in enemies:
+		if transitioning.has(child.parent_id) and not child.targetable:
+			child.dead = true; child.death_reason = "source_cancel"
+
+func _has_safe_transition() -> bool:
+	for enemy in enemies:
+		if not enemy.dead and enemy.transition_remaining > 0: return true
+	return false
