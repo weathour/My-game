@@ -1,0 +1,1493 @@
+{
+  "RX_S03_01": {
+    "id": "RX_S03_01",
+    "event_id": "S03",
+    "after_line": "s03_anchor_01",
+    "conditions": {
+      "owned_all": [
+        "F11"
+      ],
+      "alive_all": [
+        "F11"
+      ],
+      "completed_all": [
+        "S02"
+      ]
+    },
+    "priority": 0,
+    "lines": [
+      {
+        "id": "rx_s03_01_01",
+        "speaker": "F11",
+        "text": "等你们点清了，我来拿绷布。",
+        "actors": [
+          {
+            "id": "F11",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      }
+    ]
+  },
+  "RX_S03_02": {
+    "id": "RX_S03_02",
+    "event_id": "S03",
+    "after_line": "s03_anchor_01",
+    "conditions": {
+      "owned_all": [
+        "N01"
+      ],
+      "alive_all": [
+        "N01"
+      ],
+      "completed_all": [
+        "S02"
+      ]
+    },
+    "priority": 0,
+    "lines": [
+      {
+        "id": "rx_s03_02_01",
+        "speaker": "N01",
+        "text": "天黑了，我把这堆布搬到灯下。",
+        "actors": [
+          {
+            "id": "N01",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      }
+    ]
+  },
+  "RX_S03_03": {
+    "id": "RX_S03_03",
+    "event_id": "S03",
+    "after_line": "s03_anchor_01",
+    "conditions": {
+      "owned_all": [
+        "N16"
+      ],
+      "alive_all": [
+        "N16"
+      ],
+      "completed_all": [
+        "S02"
+      ]
+    },
+    "priority": 0,
+    "lines": [
+      {
+        "id": "rx_s03_03_01",
+        "speaker": "N16",
+        "text": "等伤口包扎好了，我再收针。",
+        "actors": [
+          {
+            "id": "N16",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      }
+    ]
+  },
+  "RX_S03_04": {
+    "id": "RX_S03_04",
+    "event_id": "S03",
+    "after_line": "s03_anchor_01",
+    "conditions": {
+      "owned_all": [
+        "N17"
+      ],
+      "alive_all": [
+        "N17"
+      ],
+      "completed_all": [
+        "S02"
+      ]
+    },
+    "priority": 0,
+    "lines": [
+      {
+        "id": "rx_s03_04_01",
+        "speaker": "N17",
+        "text": "等账点完，我去买点能煮的。",
+        "actors": [
+          {
+            "id": "N17",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      }
+    ]
+  },
+  "RX_S04_01": {
+    "id": "RX_S04_01",
+    "event_id": "S04",
+    "after_line": "s04_anchor_01",
+    "conditions": {
+      "owned_all": [
+        "F11"
+      ],
+      "alive_all": [
+        "F11"
+      ],
+      "completed_all": [
+        "S03"
+      ]
+    },
+    "priority": 0,
+    "lines": [
+      {
+        "id": "rx_s04_01_01",
+        "speaker": "F11",
+        "text": "想走的人该能走。粮食先分清楚。",
+        "actors": [
+          {
+            "id": "F11",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      }
+    ]
+  },
+  "RX_S04_02": {
+    "id": "RX_S04_02",
+    "event_id": "S04",
+    "after_line": "s04_anchor_01",
+    "conditions": {
+      "owned_all": [
+        "F03"
+      ],
+      "alive_all": [
+        "F03"
+      ],
+      "completed_all": [
+        "S03"
+      ]
+    },
+    "priority": 0,
+    "lines": [
+      {
+        "id": "rx_s04_02_01",
+        "speaker": "F03",
+        "text": "受伤的先别搬粮，叫我看看。",
+        "actors": [
+          {
+            "id": "F03",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      }
+    ]
+  },
+  "RX_S04_03": {
+    "id": "RX_S04_03",
+    "event_id": "S04",
+    "after_line": "s04_anchor_01",
+    "conditions": {
+      "owned_all": [
+        "F04"
+      ],
+      "alive_all": [
+        "F04"
+      ],
+      "completed_all": [
+        "S03"
+      ]
+    },
+    "priority": 0,
+    "lines": [
+      {
+        "id": "rx_s04_03_01",
+        "speaker": "F04",
+        "text": "账上有数，分的时候也得有人看着。",
+        "actors": [
+          {
+            "id": "F04",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      }
+    ]
+  },
+  "RX_S04_04": {
+    "id": "RX_S04_04",
+    "event_id": "S04",
+    "after_line": "s04_anchor_01",
+    "conditions": {
+      "owned_all": [
+        "N18"
+      ],
+      "alive_all": [
+        "N18"
+      ],
+      "completed_all": [
+        "S03"
+      ]
+    },
+    "priority": 0,
+    "lines": [
+      {
+        "id": "rx_s04_04_01",
+        "speaker": "N18",
+        "text": "这一仓先点袋数，空袋另外放。",
+        "actors": [
+          {
+            "id": "N18",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      }
+    ]
+  },
+  "RX_F01_01": {
+    "id": "RX_F01_01",
+    "event_id": "F01",
+    "after_line": "f01_anchor_01",
+    "conditions": {
+      "owned_all": [
+        "F03"
+      ],
+      "alive_all": [
+        "F03"
+      ],
+      "completed_all": [
+        "S04"
+      ]
+    },
+    "priority": 0,
+    "lines": [
+      {
+        "id": "rx_f01_01_01",
+        "speaker": "F03",
+        "text": "伤者那边还等着水，先把这一桶送过去。",
+        "actors": [
+          {
+            "id": "F03",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      }
+    ]
+  },
+  "RX_F01_02": {
+    "id": "RX_F01_02",
+    "event_id": "F01",
+    "after_line": "f01_anchor_01",
+    "conditions": {
+      "owned_all": [
+        "F04"
+      ],
+      "alive_all": [
+        "F04"
+      ],
+      "completed_all": [
+        "S04"
+      ]
+    },
+    "priority": 0,
+    "lines": [
+      {
+        "id": "rx_f01_02_01",
+        "speaker": "F04",
+        "text": "桶沿还滴着水，走慢些，别洒了一路。",
+        "actors": [
+          {
+            "id": "F04",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      }
+    ]
+  },
+  "RX_F01_03": {
+    "id": "RX_F01_03",
+    "event_id": "F01",
+    "after_line": "f01_anchor_01",
+    "conditions": {
+      "owned_all": [
+        "N18"
+      ],
+      "alive_all": [
+        "N18"
+      ],
+      "completed_all": [
+        "S04"
+      ]
+    },
+    "priority": 0,
+    "lines": [
+      {
+        "id": "rx_f01_03_01",
+        "speaker": "N18",
+        "text": "后屋要两桶水，我先记着，再去取一桶。",
+        "actors": [
+          {
+            "id": "N18",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      }
+    ]
+  },
+  "RX_F01_04": {
+    "id": "RX_F01_04",
+    "event_id": "F01",
+    "after_line": "f01_anchor_01",
+    "conditions": {
+      "owned_all": [
+        "F11"
+      ],
+      "alive_all": [
+        "F11"
+      ],
+      "completed_all": [
+        "S04"
+      ]
+    },
+    "priority": 0,
+    "lines": [
+      {
+        "id": "rx_f01_04_01",
+        "speaker": "F11",
+        "text": "提水的绳子湿了，我来拿另一头。",
+        "actors": [
+          {
+            "id": "F11",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      }
+    ]
+  },
+  "RX_S05_01": {
+    "id": "RX_S05_01",
+    "event_id": "S05",
+    "after_line": "s05_anchor_01",
+    "conditions": {
+      "owned_all": [
+        "F07"
+      ],
+      "alive_all": [
+        "F07"
+      ],
+      "completed_all": [
+        "S04",
+        "B06"
+      ]
+    },
+    "priority": 0,
+    "lines": [
+      {
+        "id": "rx_s05_01_01",
+        "speaker": "F07",
+        "text": "守夜的轮着来，别让一个人熬到天亮。",
+        "actors": [
+          {
+            "id": "F07",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      }
+    ]
+  },
+  "RX_S05_02": {
+    "id": "RX_S05_02",
+    "event_id": "S05",
+    "after_line": "s05_anchor_01",
+    "conditions": {
+      "owned_all": [
+        "F04"
+      ],
+      "alive_all": [
+        "F04"
+      ],
+      "completed_all": [
+        "S04"
+      ]
+    },
+    "priority": 0,
+    "lines": [
+      {
+        "id": "rx_s05_02_01",
+        "speaker": "F04",
+        "text": "她找的人叫什么？我记着，遇见了好问。",
+        "actors": [
+          {
+            "id": "F04",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      }
+    ]
+  },
+  "RX_S05_03": {
+    "id": "RX_S05_03",
+    "event_id": "S05",
+    "after_line": "s05_anchor_01",
+    "conditions": {
+      "owned_all": [
+        "F11"
+      ],
+      "alive_all": [
+        "F11"
+      ],
+      "completed_all": [
+        "S04"
+      ]
+    },
+    "priority": 0,
+    "lines": [
+      {
+        "id": "rx_s05_03_01",
+        "speaker": "F11",
+        "text": "让守夜的人先吃。我再等一会儿。",
+        "actors": [
+          {
+            "id": "F11",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      }
+    ]
+  },
+  "RX_S05_04": {
+    "id": "RX_S05_04",
+    "event_id": "S05",
+    "after_line": "s05_anchor_01",
+    "conditions": {
+      "owned_all": [
+        "F08"
+      ],
+      "alive_all": [
+        "F08"
+      ],
+      "completed_all": [
+        "S04",
+        "B06"
+      ]
+    },
+    "priority": 0,
+    "lines": [
+      {
+        "id": "rx_s05_04_01",
+        "speaker": "F08",
+        "text": "这一锅够不够？我给守夜的留两碗。",
+        "actors": [
+          {
+            "id": "F08",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      }
+    ]
+  },
+  "RX_S06_01": {
+    "id": "RX_S06_01",
+    "event_id": "S06",
+    "after_line": "s06_anchor_01",
+    "conditions": {
+      "owned_all": [
+        "F09"
+      ],
+      "alive_all": [
+        "F09"
+      ],
+      "completed_all": [
+        "S05"
+      ]
+    },
+    "priority": 0,
+    "lines": [
+      {
+        "id": "rx_s06_01_01",
+        "speaker": "F09",
+        "text": "找人的事不能断，我去外院问问。",
+        "actors": [
+          {
+            "id": "F09",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      }
+    ]
+  },
+  "RX_S06_02": {
+    "id": "RX_S06_02",
+    "event_id": "S06",
+    "after_line": "s06_anchor_01",
+    "conditions": {
+      "owned_all": [
+        "F03"
+      ],
+      "alive_all": [
+        "F03"
+      ],
+      "completed_all": [
+        "S05"
+      ]
+    },
+    "priority": 0,
+    "lines": [
+      {
+        "id": "rx_s06_02_01",
+        "speaker": "F03",
+        "text": "伤者安顿在哪一间？我去看看。",
+        "actors": [
+          {
+            "id": "F03",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      }
+    ]
+  },
+  "RX_S06_03": {
+    "id": "RX_S06_03",
+    "event_id": "S06",
+    "after_line": "s06_anchor_01",
+    "conditions": {
+      "owned_all": [
+        "F04"
+      ],
+      "alive_all": [
+        "F04"
+      ],
+      "completed_all": [
+        "S05"
+      ]
+    },
+    "priority": 0,
+    "lines": [
+      {
+        "id": "rx_s06_03_01",
+        "speaker": "F04",
+        "text": "印信归印信，仓里的东西得另列一账。",
+        "actors": [
+          {
+            "id": "F04",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      }
+    ]
+  },
+  "RX_S06_04": {
+    "id": "RX_S06_04",
+    "event_id": "S06",
+    "after_line": "s06_anchor_01",
+    "conditions": {
+      "owned_all": [
+        "F11"
+      ],
+      "alive_all": [
+        "F11"
+      ],
+      "completed_all": [
+        "S05"
+      ]
+    },
+    "priority": 0,
+    "lines": [
+      {
+        "id": "rx_s06_04_01",
+        "speaker": "F11",
+        "text": "我看着我的包。这里人太多了。",
+        "actors": [
+          {
+            "id": "F11",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      }
+    ]
+  },
+  "RX_F02_01": {
+    "id": "RX_F02_01",
+    "event_id": "F02",
+    "after_line": "f02_anchor_01",
+    "conditions": {
+      "owned_all": [
+        "F07"
+      ],
+      "alive_all": [
+        "F07"
+      ],
+      "completed_all": [
+        "S06"
+      ]
+    },
+    "priority": 0,
+    "lines": [
+      {
+        "id": "rx_f02_01_01",
+        "speaker": "F07",
+        "text": "水囊装满了就往旁边放，别堵着泉口。",
+        "actors": [
+          {
+            "id": "F07",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      }
+    ]
+  },
+  "RX_F02_02": {
+    "id": "RX_F02_02",
+    "event_id": "F02",
+    "after_line": "f02_anchor_01",
+    "conditions": {
+      "owned_all": [
+        "F09"
+      ],
+      "alive_all": [
+        "F09"
+      ],
+      "completed_all": [
+        "S06"
+      ]
+    },
+    "priority": 0,
+    "lines": [
+      {
+        "id": "rx_f02_02_01",
+        "speaker": "F09",
+        "text": "这水真凉，润润嗓子正好。",
+        "actors": [
+          {
+            "id": "F09",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      }
+    ]
+  },
+  "RX_F02_03": {
+    "id": "RX_F02_03",
+    "event_id": "F02",
+    "after_line": "f02_anchor_01",
+    "conditions": {
+      "owned_all": [
+        "F03"
+      ],
+      "alive_all": [
+        "F03"
+      ],
+      "completed_all": [
+        "S06"
+      ]
+    },
+    "priority": 0,
+    "lines": [
+      {
+        "id": "rx_f02_03_01",
+        "speaker": "F03",
+        "text": "洗完手再装水，别把灰带进水囊。",
+        "actors": [
+          {
+            "id": "F03",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      }
+    ]
+  },
+  "RX_F02_04": {
+    "id": "RX_F02_04",
+    "event_id": "F02",
+    "after_line": "f02_anchor_01",
+    "conditions": {
+      "owned_all": [
+        "F04"
+      ],
+      "alive_all": [
+        "F04"
+      ],
+      "completed_all": [
+        "S06"
+      ]
+    },
+    "priority": 0,
+    "lines": [
+      {
+        "id": "rx_f02_04_01",
+        "speaker": "F04",
+        "text": "水囊先系紧。漏一路，后面又得找水。",
+        "actors": [
+          {
+            "id": "F04",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      }
+    ]
+  },
+  "RX_S07_01": {
+    "id": "RX_S07_01",
+    "event_id": "S07",
+    "after_line": "s07_anchor_01",
+    "conditions": {
+      "owned_all": [
+        "F03"
+      ],
+      "alive_all": [
+        "F03"
+      ],
+      "completed_all": [
+        "F02"
+      ]
+    },
+    "priority": 0,
+    "lines": [
+      {
+        "id": "rx_s07_01_01",
+        "speaker": "F03",
+        "text": "药拿到了，我去看看伤者。",
+        "actors": [
+          {
+            "id": "F03",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      }
+    ]
+  },
+  "RX_S07_02": {
+    "id": "RX_S07_02",
+    "event_id": "S07",
+    "after_line": "s07_anchor_01",
+    "conditions": {
+      "owned_all": [
+        "F07"
+      ],
+      "alive_all": [
+        "F07"
+      ],
+      "completed_all": [
+        "F02"
+      ]
+    },
+    "priority": 0,
+    "lines": [
+      {
+        "id": "rx_s07_02_01",
+        "speaker": "F07",
+        "text": "都散开些，街口总得留条道。",
+        "actors": [
+          {
+            "id": "F07",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      }
+    ]
+  },
+  "RX_S07_03": {
+    "id": "RX_S07_03",
+    "event_id": "S07",
+    "after_line": "s07_anchor_01",
+    "conditions": {
+      "owned_all": [
+        "F04"
+      ],
+      "alive_all": [
+        "F04"
+      ],
+      "completed_all": [
+        "F02"
+      ]
+    },
+    "priority": 0,
+    "lines": [
+      {
+        "id": "rx_s07_03_01",
+        "speaker": "F04",
+        "text": "街坊都看着呢，你们两个还要站多久？",
+        "actors": [
+          {
+            "id": "F04",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      }
+    ]
+  },
+  "RX_S07_04": {
+    "id": "RX_S07_04",
+    "event_id": "S07",
+    "after_line": "s07_anchor_01",
+    "conditions": {
+      "owned_all": [
+        "F11"
+      ],
+      "alive_all": [
+        "F11"
+      ],
+      "completed_all": [
+        "F02"
+      ]
+    },
+    "priority": 0,
+    "lines": [
+      {
+        "id": "rx_s07_04_01",
+        "speaker": "F11",
+        "text": "他们怕是还在等你们再打起来。",
+        "actors": [
+          {
+            "id": "F11",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      }
+    ]
+  },
+  "RX_S10_01": {
+    "id": "RX_S10_01",
+    "event_id": "S10",
+    "after_line": "s10_anchor_01",
+    "conditions": {
+      "owned_all": [
+        "F02"
+      ],
+      "alive_all": [
+        "F02"
+      ],
+      "completed_all": [
+        "S09"
+      ]
+    },
+    "priority": 0,
+    "lines": [
+      {
+        "id": "rx_s10_01_01",
+        "speaker": "F02",
+        "text": "烟尘越来越近了。要打，就别在这儿站着。",
+        "actors": [
+          {
+            "id": "F02",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      }
+    ]
+  },
+  "RX_S10_02": {
+    "id": "RX_S10_02",
+    "event_id": "S10",
+    "after_line": "s10_anchor_01",
+    "conditions": {
+      "owned_all": [
+        "F06"
+      ],
+      "alive_all": [
+        "F06"
+      ],
+      "completed_all": [
+        "S09"
+      ]
+    },
+    "priority": 0,
+    "lines": [
+      {
+        "id": "rx_s10_02_01",
+        "speaker": "F06",
+        "text": "看东边，尘头后面还有一队。",
+        "actors": [
+          {
+            "id": "F06",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      }
+    ]
+  },
+  "RX_S10_03": {
+    "id": "RX_S10_03",
+    "event_id": "S10",
+    "after_line": "s10_anchor_01",
+    "conditions": {
+      "owned_all": [
+        "F10"
+      ],
+      "alive_all": [
+        "F10"
+      ],
+      "completed_all": [
+        "S09"
+      ]
+    },
+    "priority": 0,
+    "lines": [
+      {
+        "id": "rx_s10_03_01",
+        "speaker": "F10",
+        "text": "门前挤满了人，先给抬伤者的让出空当。",
+        "actors": [
+          {
+            "id": "F10",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      }
+    ]
+  },
+  "RX_S10_04": {
+    "id": "RX_S10_04",
+    "event_id": "S10",
+    "after_line": "s10_anchor_01",
+    "conditions": {
+      "owned_all": [
+        "M08"
+      ],
+      "alive_all": [
+        "M08"
+      ],
+      "completed_all": [
+        "S09"
+      ]
+    },
+    "priority": 0,
+    "lines": [
+      {
+        "id": "rx_s10_04_01",
+        "speaker": "M08",
+        "text": "外头还有人没进城，得留条路。",
+        "actors": [
+          {
+            "id": "M08",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      }
+    ]
+  },
+  "RX_S11_01": {
+    "id": "RX_S11_01",
+    "event_id": "S11",
+    "after_line": "s11_anchor_01",
+    "conditions": {
+      "owned_all": [
+        "F03"
+      ],
+      "alive_all": [
+        "F03"
+      ],
+      "completed_all": [
+        "S10"
+      ]
+    },
+    "priority": 0,
+    "lines": [
+      {
+        "id": "rx_s11_01_01",
+        "speaker": "F03",
+        "text": "伤者先过，能自己走的扶着不能走的。",
+        "actors": [
+          {
+            "id": "F03",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      }
+    ]
+  },
+  "RX_S11_02": {
+    "id": "RX_S11_02",
+    "event_id": "S11",
+    "after_line": "s11_anchor_01",
+    "conditions": {
+      "owned_all": [
+        "F06"
+      ],
+      "alive_all": [
+        "F06"
+      ],
+      "completed_all": [
+        "S10"
+      ]
+    },
+    "priority": 0,
+    "lines": [
+      {
+        "id": "rx_s11_02_01",
+        "speaker": "F06",
+        "text": "通路留宽些，箭袋别挂住担架。",
+        "actors": [
+          {
+            "id": "F06",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      }
+    ]
+  },
+  "RX_S11_03": {
+    "id": "RX_S11_03",
+    "event_id": "S11",
+    "after_line": "s11_anchor_01",
+    "conditions": {
+      "owned_all": [
+        "F10"
+      ],
+      "alive_all": [
+        "F10"
+      ],
+      "completed_all": [
+        "S10"
+      ]
+    },
+    "priority": 0,
+    "lines": [
+      {
+        "id": "rx_s11_03_01",
+        "speaker": "F10",
+        "text": "两边各记一份人数，过了再核。",
+        "actors": [
+          {
+            "id": "F10",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      }
+    ]
+  },
+  "RX_S11_04": {
+    "id": "RX_S11_04",
+    "event_id": "S11",
+    "after_line": "s11_anchor_01",
+    "conditions": {
+      "owned_all": [
+        "M08"
+      ],
+      "alive_all": [
+        "M08"
+      ],
+      "completed_all": [
+        "S10"
+      ]
+    },
+    "priority": 0,
+    "lines": [
+      {
+        "id": "rx_s11_04_01",
+        "speaker": "M08",
+        "text": "门里门外都有伤者，得有人指着路走。",
+        "actors": [
+          {
+            "id": "M08",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      }
+    ]
+  },
+  "RX_S12_01": {
+    "id": "RX_S12_01",
+    "event_id": "S12",
+    "after_line": "s12_anchor_01",
+    "conditions": {
+      "owned_all": [
+        "F03"
+      ],
+      "alive_all": [
+        "F03"
+      ],
+      "completed_all": [
+        "S11"
+      ]
+    },
+    "priority": 0,
+    "lines": [
+      {
+        "id": "rx_s12_01_01",
+        "speaker": "F03",
+        "text": "先把伤口压住，名字一会儿再问。",
+        "actors": [
+          {
+            "id": "F03",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      }
+    ]
+  },
+  "RX_S12_02": {
+    "id": "RX_S12_02",
+    "event_id": "S12",
+    "after_line": "s12_anchor_01",
+    "conditions": {
+      "owned_all": [
+        "F06"
+      ],
+      "alive_all": [
+        "F06"
+      ],
+      "completed_all": [
+        "S11"
+      ]
+    },
+    "priority": 0,
+    "lines": [
+      {
+        "id": "rx_s12_02_01",
+        "speaker": "F06",
+        "text": "门外还有人，报数时别漏了。",
+        "actors": [
+          {
+            "id": "F06",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      }
+    ]
+  },
+  "RX_S12_03": {
+    "id": "RX_S12_03",
+    "event_id": "S12",
+    "after_line": "s12_anchor_01",
+    "conditions": {
+      "owned_all": [
+        "F10"
+      ],
+      "alive_all": [
+        "F10"
+      ],
+      "completed_all": [
+        "S11"
+      ]
+    },
+    "priority": 0,
+    "lines": [
+      {
+        "id": "rx_s12_03_01",
+        "speaker": "F10",
+        "text": "走散的另记一页，别混进已经进城的数里。",
+        "actors": [
+          {
+            "id": "F10",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      }
+    ]
+  },
+  "RX_S12_04": {
+    "id": "RX_S12_04",
+    "event_id": "S12",
+    "after_line": "s12_anchor_01",
+    "conditions": {
+      "owned_all": [
+        "M08"
+      ],
+      "alive_all": [
+        "M08"
+      ],
+      "completed_all": [
+        "S11"
+      ]
+    },
+    "priority": 0,
+    "lines": [
+      {
+        "id": "rx_s12_04_01",
+        "speaker": "M08",
+        "text": "门开着也要有人望哨，外头还没静。",
+        "actors": [
+          {
+            "id": "M08",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      }
+    ]
+  },
+  "RX_F03_01": {
+    "id": "RX_F03_01",
+    "event_id": "F03",
+    "after_line": "f03_anchor_01",
+    "conditions": {
+      "owned_all": [
+        "F02"
+      ],
+      "alive_all": [
+        "F02"
+      ],
+      "completed_all": [
+        "S12"
+      ]
+    },
+    "priority": 0,
+    "lines": [
+      {
+        "id": "rx_f03_01_01",
+        "speaker": "F02",
+        "text": "我把水桶递过去。后面那位，接稳了！",
+        "actors": [
+          {
+            "id": "F02",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      }
+    ]
+  },
+  "RX_F03_02": {
+    "id": "RX_F03_02",
+    "event_id": "F03",
+    "after_line": "f03_anchor_01",
+    "conditions": {
+      "owned_all": [
+        "F03"
+      ],
+      "alive_all": [
+        "F03"
+      ],
+      "completed_all": [
+        "S12"
+      ]
+    },
+    "priority": 0,
+    "lines": [
+      {
+        "id": "rx_f03_02_01",
+        "speaker": "F03",
+        "text": "喝水慢点，别一口呛着。",
+        "actors": [
+          {
+            "id": "F03",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      }
+    ]
+  },
+  "RX_F03_03": {
+    "id": "RX_F03_03",
+    "event_id": "F03",
+    "after_line": "f03_anchor_01",
+    "conditions": {
+      "owned_all": [
+        "F09"
+      ],
+      "alive_all": [
+        "F09"
+      ],
+      "completed_all": [
+        "S12"
+      ]
+    },
+    "priority": 0,
+    "lines": [
+      {
+        "id": "rx_f03_03_01",
+        "speaker": "F09",
+        "text": "嗓子干得很。借半碗水，不抢你的。",
+        "actors": [
+          {
+            "id": "F09",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      }
+    ]
+  },
+  "RX_F03_04": {
+    "id": "RX_F03_04",
+    "event_id": "F03",
+    "after_line": "f03_anchor_01",
+    "conditions": {
+      "owned_all": [
+        "F10"
+      ],
+      "alive_all": [
+        "F10"
+      ],
+      "completed_all": [
+        "S12"
+      ]
+    },
+    "priority": 0,
+    "lines": [
+      {
+        "id": "rx_f03_04_01",
+        "speaker": "F10",
+        "text": "水桶放在路边，担架才过得去。",
+        "actors": [
+          {
+            "id": "F10",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      }
+    ]
+  },
+  "RX_S14_01": {
+    "id": "RX_S14_01",
+    "event_id": "S14",
+    "after_line": "s14_anchor_01",
+    "conditions": {
+      "owned_all": [
+        "F11"
+      ],
+      "alive_all": [
+        "F11"
+      ],
+      "completed_all": [
+        "S13"
+      ]
+    },
+    "priority": 0,
+    "lines": [
+      {
+        "id": "rx_s14_01_01",
+        "speaker": "F11",
+        "text": "界线既然说定了，就别让你的人擅自进城。",
+        "actors": [
+          {
+            "id": "F11",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      }
+    ]
+  },
+  "RX_S14_02": {
+    "id": "RX_S14_02",
+    "event_id": "S14",
+    "after_line": "s14_anchor_01",
+    "conditions": {
+      "owned_all": [
+        "F03"
+      ],
+      "alive_all": [
+        "F03"
+      ],
+      "completed_all": [
+        "S13"
+      ]
+    },
+    "priority": 0,
+    "lines": [
+      {
+        "id": "rx_s14_02_01",
+        "speaker": "F03",
+        "text": "城外这边的伤者，我还要照看。",
+        "actors": [
+          {
+            "id": "F03",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      }
+    ]
+  },
+  "RX_S14_03": {
+    "id": "RX_S14_03",
+    "event_id": "S14",
+    "after_line": "s14_anchor_01",
+    "conditions": {
+      "owned_all": [
+        "F06"
+      ],
+      "alive_all": [
+        "F06"
+      ],
+      "completed_all": [
+        "S13"
+      ]
+    },
+    "priority": 0,
+    "lines": [
+      {
+        "id": "rx_s14_03_01",
+        "speaker": "F06",
+        "text": "水门的通路我记下了，换岗时会交代清楚。",
+        "actors": [
+          {
+            "id": "F06",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      }
+    ]
+  },
+  "RX_S14_04": {
+    "id": "RX_S14_04",
+    "event_id": "S14",
+    "after_line": "s14_anchor_01",
+    "conditions": {
+      "owned_all": [
+        "M02"
+      ],
+      "alive_all": [
+        "M02"
+      ],
+      "completed_all": [
+        "S13",
+        "B17"
+      ]
+    },
+    "priority": 0,
+    "lines": [
+      {
+        "id": "rx_s14_04_01",
+        "speaker": "M02",
+        "text": "城内的守备仍由我们照管。界线之外，互通消息。",
+        "actors": [
+          {
+            "id": "M02",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -49,7 +49,7 @@ func first_reward_order(extra: bool) -> void:
 	expect(state.data.current == "B01" and state.data.pending.candidates.size() == 5 and state.data.pending.picks == (3 if extra else 2), "first reward retains ordinary / elite rule")
 	expect("F11" not in state.data.pending.candidates and "F11" not in state.data.pool and not state.data.owned.has("F11"), "Emma not drawable or granted before story")
 	var pending: Dictionary = state.data.pending.duplicate(true)
-	expect(not state.save_story_checkpoint("S02", "emma.arrival") and not state.resolve_event() and state.data.pending == pending, "reward blocks story and checkpoint")
+	expect(not state.save_story_checkpoint("S02", "s02_01") and not state.resolve_event() and state.data.pending == pending, "reward blocks story and checkpoint")
 	choose_all(state)
 	var previous: Dictionary = state.data.duplicate(true)
 	var directory: String = state.directory
@@ -59,18 +59,18 @@ func first_reward_order(extra: bool) -> void:
 	state.directory = directory
 	expect(state.claim_reward() and state.data.current == "S02", "claim advances to S02")
 	expect(state.data.owned.size() == 1 + (3 if extra else 2), "all first picks granted separately from Emma")
-	expect(state.save_story_checkpoint("S02", "emma.arrival"), "persist first visible line")
+	expect(state.save_story_checkpoint("S02", "s02_01"), "persist first visible line")
 	previous = state.data.duplicate(true)
 	state.directory = "/proc/chronicle-story-line-read-only"
 	print("EXPECTED_FAULT_INJECTION: story line write rejected")
-	expect(not state.save_story_checkpoint("S02", "emma.departure") and state.data == previous, "line save failure restores whole state")
+	expect(not state.save_story_checkpoint("S02", "s02_02") and state.data == previous, "line save failure restores whole state")
 	print("EXPECTED_FAULT_INJECTION: story completion write rejected")
 	expect(not state.resolve_event() and state.data == previous and not state.data.owned.has("F11"), "event save failure retains checkpoint and does not grant Emma")
 	state.directory = directory
-	expect(state.save_story_checkpoint("S02", "emma.departure"), "retry line checkpoint")
+	expect(state.save_story_checkpoint("S02", "s02_02"), "retry line checkpoint")
 	var loaded := fresh("reload")
 	loaded.directory = directory
-	expect(loaded.load_slot("auto") and loaded.data.story_checkpoint == {"event":"S02", "line":"emma.departure"}, "restart restores exact stable line")
+	expect(loaded.load_slot("auto") and loaded.data.story_checkpoint == {"event":"S02", "line":"s02_02"}, "restart restores exact stable line")
 	expect(loaded.resolve_event() and loaded.data.current == "B02" and loaded.data.story_checkpoint.is_empty(), "finishing story clears checkpoint")
 	expect(loaded.data.owned.F11.level == 1 and loaded.data.owned.F11.xp == 0 and "F11" in loaded.data.pool and loaded.data.pending.is_empty(), "story grants one Emma and unlocks pool without another reward")
 	previous = loaded.data.duplicate(true)
@@ -79,7 +79,7 @@ func first_reward_order(extra: bool) -> void:
 
 func checkpoint_validation() -> void:
 	var state := fresh("validation")
-	expect(state.data.story_checkpoint.is_empty() and state.save_story_checkpoint("S01", "opening.road"), "new schema has optional checkpoint")
+	expect(state.data.story_checkpoint.is_empty() and state.save_story_checkpoint("S01", "s01_01"), "new schema has optional checkpoint")
 	var original: Dictionary = state.data.duplicate(true)
 	for checkpoint in [null, [], {"event":"S01"}, {"event":"S01", "line":""}, {"event":"S02", "line":"x"}, {"event":"B01", "line":"x"}, {"event":"S01", "line":1}, {"event":"S01", "line":"x", "extra":true}]:
 		var corrupt: Dictionary = original.duplicate(true)
@@ -98,7 +98,7 @@ func checkpoint_validation() -> void:
 	state.abandon_battle()
 	state.data.current = "F01"
 	state.data.available = ["F01"]
-	expect(state.save_story_checkpoint("F01", "spring.water") and state.resolve_event() and state.data.story_checkpoint.is_empty(), "spring supports and clears checkpoint")
+	expect(state.save_story_checkpoint("F01", "f01_01") and state.resolve_event() and state.data.story_checkpoint.is_empty(), "spring supports and clears checkpoint")
 
 func legacy_recovery() -> void:
 	for extra in [false, true]:

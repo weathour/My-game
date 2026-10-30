@@ -135,7 +135,7 @@ if [[ -n "$GODOT_BIN" ]]; then
       exit 1
     fi
 
-    for name in chronicle_enemy_pack_smoke chronicle_music_pack_smoke; do
+    for name in chronicle_enemy_pack_smoke chronicle_music_pack_smoke chronicle_story_pack_smoke; do
       external_script="$pack_dir/$name.gd"
       log="$CHECK_LOG_DIR/$name.log"
       cp "scripts/tests/$name.gd" "$external_script"
@@ -164,6 +164,7 @@ if [[ -n "$GODOT_BIN" ]]; then
     [[ "$(basename "$smoke")" == "dense_combat_benchmark_smoke.gd" ]] && continue
     [[ "$(basename "$smoke")" == "chronicle_enemy_pack_smoke.gd" ]] && continue
     [[ "$(basename "$smoke")" == "chronicle_music_pack_smoke.gd" ]] && continue
+    [[ "$(basename "$smoke")" == "chronicle_story_pack_smoke.gd" ]] && continue
     run_smoke "$smoke"
   done
 

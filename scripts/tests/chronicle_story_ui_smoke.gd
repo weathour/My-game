@@ -56,7 +56,9 @@ func run() -> void:
 	if failures: quit(1); return
 	var errors := CATALOG.validate()
 	expect(errors.is_empty(), "story catalog validates: " + str(errors))
-	expect(CATALOG.events().size() == 12 and CATALOG.events().S02.lines.size() == 18, "twelve authored story nodes preserve the existing Emma conversation")
+	for id in ["S01","S02","S03","S04","S05","S06","S07","S08","S09","S10","S11","S12","S13","S14","F01","F02","F03","F04","B06","B15","B16","B17"]:
+		expect(CATALOG.has_event(id), "authored required story " + id)
+	expect(CATALOG.has_line(CATALOG.events().S02, "s02_02"), "Emma encounter preserves established checkpoint")
 	var original_motion := SETTINGS.comfort_enabled("reduced_motion")
 	var original_text := SETTINGS.comfort_enabled("large_story_text")
 	SETTINGS.save_comfort("reduced_motion", false)
@@ -157,8 +159,9 @@ func run() -> void:
 	reader = shell.story_view
 	expect((reader.find_child("StoryWords",true,false) as RichTextLabel).visible_characters == -1, "reduced motion reveals text immediately")
 	await capture("06-large-text-960")
+	var last_line: String = CATALOG.events().S02.lines[-1].id
 	var steps := 0
-	while shell.page == "event" and shell.story_view.current_line_id != "s02_18" and steps < 20:
+	while shell.page == "event" and shell.story_view.current_line_id != last_line and steps < CATALOG.events().S02.lines.size():
 		shell.story_view.reveal_current()
 		await settle()
 		await click("event_continue")
@@ -166,7 +169,7 @@ func run() -> void:
 	reader = shell.story_view
 	reader.reveal_current()
 	var outcome := reader.find_child("StoryCompletionHint",true,false) as Label
-	expect(reader.current_line_id == "s02_18" and outcome != null and outcome.visible and "艾玛" in outcome.text, "last sentence exposes separate recruitment result")
+	expect(reader.current_line_id == last_line and outcome != null and outcome.visible and "艾玛" in outcome.text, "last sentence exposes separate recruitment result")
 	expect((reader.find_child("event_continue",true,false) as Button).text == "完成剧情", "last sentence has an explicit completion action")
 	await capture("06-ending-960")
 	await settle()
@@ -194,7 +197,7 @@ func run() -> void:
 func other_scenes() -> void:
 	shell.hide()
 	viewport.size = Vector2i(1280,720)
-	for pair in [["S03","s03_02"],["S04","s04_03"],["S05","s05_02"],["F01","f01_02"]]:
+	for pair in [["S03","s03_02"],["S04","s04_03"],["S05","s05_02"],["F01","f01_03"]]:
 		var reader := VIEW.new()
 		reader.setup(CATALOG.events()[pair[0]], pair[1])
 		viewport.add_child(reader)

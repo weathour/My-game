@@ -1,0 +1,1707 @@
+{
+  "CE04": {
+    "id": "CE04",
+    "title": "药钱怎么付",
+    "location": "歇脚处",
+    "background": "res://assets/story/chronicle/camp.png",
+    "music": "story_banter",
+    "conditions": {
+      "owned_all": [
+        "F03"
+      ],
+      "alive_all": [
+        "F03"
+      ],
+      "completed_all": [
+        "S03"
+      ]
+    },
+    "character_ids": [
+      "F03"
+    ],
+    "source_refs": [
+      "老乞大下-人参议价"
+    ],
+    "lines": [
+      {
+        "id": "ce04_01",
+        "speaker": "",
+        "text": "田秀取出一包药材，放在桌上。贾苇索伸手捻了一撮。",
+        "actors": []
+      },
+      {
+        "id": "ce04_02",
+        "speaker": "F03",
+        "text": "这是我留给伤者用的，你要拿去分，先说好药钱怎么付。",
+        "actors": [
+          {
+            "id": "F03",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce04_03",
+        "speaker": "JIA",
+        "text": "就一包药，你给我还不放心？",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce04_04",
+        "speaker": "F03",
+        "text": "你拿回去救人，我放心。账要说清，我还得买下一包。",
+        "actors": [
+          {
+            "id": "F03",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce04_05",
+        "speaker": "JIA",
+        "text": "什么价？",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce04_06",
+        "speaker": "F03",
+        "text": "照市价，一包三钱。拿现银来，不赊。",
+        "actors": [
+          {
+            "id": "F03",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce04_07",
+        "speaker": "JIA",
+        "text": "银子给你好的，可手里现在不凑手，宽限几日。",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce04_08",
+        "speaker": "F03",
+        "text": "你刚才不是还说一包药不值什么？",
+        "actors": [
+          {
+            "id": "F03",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce04_09",
+        "speaker": "JIA",
+        "text": "值钱的是给药的人。本大爷这张脸押在你这儿，够不够？",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce04_10",
+        "speaker": "F03",
+        "text": "你的脸拿去遮太阳还行，抵药钱不够。",
+        "actors": [
+          {
+            "id": "F03",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce04_11",
+        "speaker": "",
+        "text": "旁边照看行李的伙计抬起头。",
+        "actors": []
+      },
+      {
+        "id": "ce04_12",
+        "speaker": "",
+        "text": "伙计说，既然价钱已经定了，两位也别争，宽限十日付足如何。",
+        "actors": []
+      },
+      {
+        "id": "ce04_13",
+        "speaker": "F03",
+        "text": "十日可以，写在纸上。",
+        "actors": [
+          {
+            "id": "F03",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce04_14",
+        "speaker": "JIA",
+        "text": "十日便十日。你替我包好，我也替你把账写清楚。",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce04_15",
+        "speaker": "",
+        "text": "田秀将药包扎紧，指着他写下的日期，又核对了一遍。",
+        "actors": []
+      },
+      {
+        "id": "ce04_16",
+        "speaker": "F03",
+        "text": "十日后见钱。见不到，我会自己来找你。",
+        "actors": [
+          {
+            "id": "F03",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce04_17",
+        "speaker": "JIA",
+        "text": "你肯来找我，这账倒不急着还了。",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce04_18",
+        "speaker": "F03",
+        "text": "那我就连纸带人，一起搬到你面前。",
+        "actors": [
+          {
+            "id": "F03",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      }
+    ]
+  },
+  "CE08": {
+    "id": "CE08",
+    "title": "借锤",
+    "location": "歇脚处",
+    "background": "res://assets/story/chronicle/camp.png",
+    "music": "story_banter",
+    "conditions": {
+      "owned_all": [
+        "F07"
+      ],
+      "alive_all": [
+        "F07"
+      ],
+      "completed_all": [
+        "S04"
+      ]
+    },
+    "character_ids": [
+      "F07"
+    ],
+    "source_refs": [
+      "水浒七十回53-铁锤"
+    ],
+    "lines": [
+      {
+        "id": "ce08_01",
+        "speaker": "",
+        "text": "空地上传来一阵喝彩。马三娘抡起铁锤，砸碎脚下一块石头。",
+        "actors": []
+      },
+      {
+        "id": "ce08_02",
+        "speaker": "JIA",
+        "text": "好气力！",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce08_03",
+        "speaker": "",
+        "text": "贾苇索走过去，伸手便拿那锤。",
+        "actors": []
+      },
+      {
+        "id": "ce08_04",
+        "speaker": "F07",
+        "text": "贾苇索，谁准你拿我的锤了？",
+        "actors": [
+          {
+            "id": "F07",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce08_05",
+        "speaker": "JIA",
+        "text": "我看它趁手，借我使一回，也让众人看看。",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce08_06",
+        "speaker": "F07",
+        "text": "借给你。你若使不动，就替我挑一日水。",
+        "actors": [
+          {
+            "id": "F07",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce08_07",
+        "speaker": "JIA",
+        "text": "使得动又怎样？",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce08_08",
+        "speaker": "F07",
+        "text": "使得动，我请你吃一碗酒。你敢不敢？",
+        "actors": [
+          {
+            "id": "F07",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce08_09",
+        "speaker": "JIA",
+        "text": "美人请酒，还有不敢的？",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce08_10",
+        "speaker": "",
+        "text": "他接过铁锤，转身抡了一圈，又轻轻放下，面不红，气也不喘。",
+        "actors": []
+      },
+      {
+        "id": "ce08_11",
+        "speaker": "F07",
+        "text": "好！果然使得动。",
+        "actors": [
+          {
+            "id": "F07",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce08_12",
+        "speaker": "JIA",
+        "text": "不使得动，怎么喝你这碗酒？",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce08_13",
+        "speaker": "F07",
+        "text": "我记住的是拿得动锤的人。你若再不问就伸手，可就不是一碗酒的事了。",
+        "actors": [
+          {
+            "id": "F07",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce08_14",
+        "speaker": "JIA",
+        "text": "那下一回我先问：三娘，可肯再陪我比一场？",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce08_15",
+        "speaker": "F07",
+        "text": "可以。赌什么，到时候我说了算。",
+        "actors": [
+          {
+            "id": "F07",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      }
+    ]
+  },
+  "CE09": {
+    "id": "CE09",
+    "title": "轻重",
+    "location": "炉边",
+    "background": "res://assets/story/chronicle/camp.png",
+    "music": "story_banter",
+    "conditions": {
+      "owned_all": [
+        "F08"
+      ],
+      "alive_all": [
+        "F08"
+      ],
+      "completed_all": [
+        "S04"
+      ]
+    },
+    "character_ids": [
+      "F08"
+    ],
+    "source_refs": [
+      "水浒百回04-打造禅杖"
+    ],
+    "lines": [
+      {
+        "id": "ce09_01",
+        "speaker": "",
+        "text": "陶小满翻看贾苇索的刀，指尖停在缺口旁。",
+        "actors": []
+      },
+      {
+        "id": "ce09_02",
+        "speaker": "F08",
+        "text": "这刀缺了口，你舍得换一把吗？",
+        "actors": [
+          {
+            "id": "F08",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce09_03",
+        "speaker": "JIA",
+        "text": "跟了我这么久，先替我留着。你这里有上等好铁没有？",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce09_04",
+        "speaker": "F08",
+        "text": "有。你要打什么？",
+        "actors": [
+          {
+            "id": "F08",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce09_05",
+        "speaker": "JIA",
+        "text": "打一口刀，要一百斤重。",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce09_06",
+        "speaker": "F08",
+        "text": "重了。不是打不出来，怕你使不动。关王的刀也不过八十一斤。",
+        "actors": [
+          {
+            "id": "F08",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce09_07",
+        "speaker": "JIA",
+        "text": "我便不及关王？他也只是个人。",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce09_08",
+        "speaker": "F08",
+        "text": "我好心说，四五十斤也十分重了。",
+        "actors": [
+          {
+            "id": "F08",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce09_09",
+        "speaker": "JIA",
+        "text": "依你说，比关王刀，也打八十一斤的。",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce09_10",
+        "speaker": "F08",
+        "text": "太肥了不好看，也不中使。依我看，打六十二斤；使不动时，休怪我。",
+        "actors": [
+          {
+            "id": "F08",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce09_11",
+        "speaker": "JIA",
+        "text": "好，就依你。",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce09_12",
+        "speaker": "F08",
+        "text": "先说价钱和工期。旧刀留在我这里，我把缺口一并看了。",
+        "actors": [
+          {
+            "id": "F08",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce09_13",
+        "speaker": "JIA",
+        "text": "价钱依你。小满，陪我喝一碗？",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce09_14",
+        "speaker": "F08",
+        "text": "炉子还烧着，我得看火。",
+        "actors": [
+          {
+            "id": "F08",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce09_15",
+        "speaker": "JIA",
+        "text": "这般不给面子？",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce09_16",
+        "speaker": "F08",
+        "text": "等我打好了，再请我也不迟。",
+        "actors": [
+          {
+            "id": "F08",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce09_17",
+        "speaker": "",
+        "text": "贾苇索把旧刀放下，陶小满重新拿起它，对着光看刀口。",
+        "actors": []
+      }
+    ]
+  },
+  "CE10": {
+    "id": "CE10",
+    "title": "猜个谜",
+    "location": "炉边",
+    "background": "res://assets/story/chronicle/camp.png",
+    "music": "story_banter",
+    "conditions": {
+      "owned_all": [
+        "F08"
+      ],
+      "alive_all": [
+        "F08"
+      ],
+      "completed_all": [
+        "S04"
+      ]
+    },
+    "character_ids": [
+      "F08"
+    ],
+    "source_refs": [
+      "朴通事上-猜谜"
+    ],
+    "lines": [
+      {
+        "id": "ce10_01",
+        "speaker": "",
+        "text": "炉火小了，陶小满歇锤擦汗。贾苇索坐在一边，拿她的钳子拨了拨炭。",
+        "actors": []
+      },
+      {
+        "id": "ce10_02",
+        "speaker": "F08",
+        "text": "你有这个闲工夫，我说几个谜，你猜。",
+        "actors": [
+          {
+            "id": "F08",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce10_03",
+        "speaker": "JIA",
+        "text": "你说，我猜。",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce10_04",
+        "speaker": "F08",
+        "text": "当路一棵麻，下雨开花，刮风结子。",
+        "actors": [
+          {
+            "id": "F08",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce10_05",
+        "speaker": "JIA",
+        "text": "这是伞。",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce10_06",
+        "speaker": "F08",
+        "text": "铁人铁马，不着铁鞭不下马。",
+        "actors": [
+          {
+            "id": "F08",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce10_07",
+        "speaker": "JIA",
+        "text": "锁。",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce10_08",
+        "speaker": "F08",
+        "text": "一门房子里，五个人刚坐得下。",
+        "actors": [
+          {
+            "id": "F08",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce10_09",
+        "speaker": "JIA",
+        "text": "靴子。再来。",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce10_10",
+        "speaker": "F08",
+        "text": "两个先生合卖药，一个坐，一个跳。",
+        "actors": [
+          {
+            "id": "F08",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce10_11",
+        "speaker": "JIA",
+        "text": "这一回我倒知道。药刀，一头坐着，一头跳。",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce10_12",
+        "speaker": "F08",
+        "text": "都猜着了，真是个细心人。",
+        "actors": [
+          {
+            "id": "F08",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce10_13",
+        "speaker": "JIA",
+        "text": "你说得这样热闹，我还当你想让我猜别的。",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce10_14",
+        "speaker": "F08",
+        "text": "你想的那个，可不是我出的谜。",
+        "actors": [
+          {
+            "id": "F08",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce10_15",
+        "speaker": "JIA",
+        "text": "那你脸红什么？",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce10_16",
+        "speaker": "F08",
+        "text": "炉火烤的。你若不信，过来坐近些。",
+        "actors": [
+          {
+            "id": "F08",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce10_17",
+        "speaker": "",
+        "text": "贾苇索当真凑过去。陶小满把钳子塞回他手里。",
+        "actors": []
+      },
+      {
+        "id": "ce10_18",
+        "speaker": "F08",
+        "text": "既然坐近了，替我夹稳这块铁。猜谜的嘴先歇歇，别叫火烫着。",
+        "actors": [
+          {
+            "id": "F08",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce10_19",
+        "speaker": "JIA",
+        "text": "好。等你打完，再出个更难的。",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          }
+        ]
+      }
+    ]
+  },
+  "CE12": {
+    "id": "CE12",
+    "title": "墙边和一首",
+    "location": "夜间歇处",
+    "background": "res://assets/story/chronicle/camp.png",
+    "music": "story_banter",
+    "conditions": {
+      "owned_all": [
+        "F09"
+      ],
+      "alive_all": [
+        "F09"
+      ],
+      "completed_all": [
+        "S05"
+      ]
+    },
+    "character_ids": [
+      "F09"
+    ],
+    "source_refs": [
+      "西厢记第一本三折-月下和诗"
+    ],
+    "lines": [
+      {
+        "id": "ce12_01",
+        "speaker": "",
+        "text": "夜里，柳晚晴在院中坐着，低声试了一句曲。墙角传来贾苇索的声音。",
+        "actors": []
+      },
+      {
+        "id": "ce12_02",
+        "speaker": "JIA",
+        "text": "月色溶溶夜，花阴寂寂春；如何临皓魄，不见月中人？",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce12_03",
+        "speaker": "F09",
+        "text": "有人在墙角吟诗？",
+        "actors": [
+          {
+            "id": "F09",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce12_04",
+        "speaker": "JIA",
+        "text": "你听着这首如何？",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce12_05",
+        "speaker": "F09",
+        "text": "诗倒清新，我依韵和一首。",
+        "actors": [
+          {
+            "id": "F09",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce12_06",
+        "speaker": "F09",
+        "text": "兰闺久寂寞，无事度芳春；料得行吟者，应怜长叹人。",
+        "actors": [
+          {
+            "id": "F09",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce12_07",
+        "speaker": "JIA",
+        "text": "好！应得好快。",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce12_08",
+        "speaker": "F09",
+        "text": "你在外头念，我在里头和，倒像隔墙唱起了戏。",
+        "actors": [
+          {
+            "id": "F09",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce12_09",
+        "speaker": "JIA",
+        "text": "若共你对着坐，岂不可以和到天明？",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce12_10",
+        "speaker": "F09",
+        "text": "你有这个嗓子，我可没有。台上唱给人听，台下得留着嗓子。",
+        "actors": [
+          {
+            "id": "F09",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce12_11",
+        "speaker": "",
+        "text": "贾苇索从墙角走出来。柳晚晴抬眼笑了笑，却起身收拾桌上的茶杯。",
+        "actors": []
+      },
+      {
+        "id": "ce12_12",
+        "speaker": "JIA",
+        "text": "这就走了？本大爷还没听够。",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce12_13",
+        "speaker": "F09",
+        "text": "今夜到这里。想听曲，明日人齐的时候再听。",
+        "actors": [
+          {
+            "id": "F09",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce12_14",
+        "speaker": "JIA",
+        "text": "我一个人来，你唱不唱？",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce12_15",
+        "speaker": "F09",
+        "text": "那得先看你肯不肯安静坐着。",
+        "actors": [
+          {
+            "id": "F09",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce12_16",
+        "speaker": "",
+        "text": "她拿起茶杯，回头看他一眼，笑着进屋去了。",
+        "actors": []
+      }
+    ]
+  },
+  "CE13": {
+    "id": "CE13",
+    "title": "祠里的粥",
+    "location": "歇脚处",
+    "background": "res://assets/story/chronicle/camp.png",
+    "music": "story_banter",
+    "conditions": {
+      "owned_all": [
+        "F05"
+      ],
+      "alive_all": [
+        "F05"
+      ],
+      "completed_all": [
+        "B06"
+      ]
+    },
+    "character_ids": [
+      "F05"
+    ],
+    "source_refs": [
+      "水浒百回06-瓦罐寺粥"
+    ],
+    "lines": [
+      {
+        "id": "ce13_01",
+        "speaker": "",
+        "text": "贾苇索走到歇处后面，闻见锅里一股粥香，掀开盖子。",
+        "actors": []
+      },
+      {
+        "id": "ce13_02",
+        "speaker": "JIA",
+        "text": "你刚才说手里缺粮，这不是一锅粥？",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce13_03",
+        "speaker": "F05",
+        "text": "这是留给等着吃饭的人。",
+        "actors": [
+          {
+            "id": "F05",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce13_04",
+        "speaker": "",
+        "text": "祝青蘅把碗和勺都收到一旁。贾苇索肚子饿，找不着碗，见灶边有一只浅盘，便擦了灰，把粥倒进去。",
+        "actors": []
+      },
+      {
+        "id": "ce13_05",
+        "speaker": "F05",
+        "text": "你还真有办法。",
+        "actors": [
+          {
+            "id": "F05",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce13_06",
+        "speaker": "JIA",
+        "text": "饿急了总能想出来。师傅，你也来一口？",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce13_07",
+        "speaker": "",
+        "text": "祝青蘅伸手去拦，贾苇索先捧起粥吃了几口。",
+        "actors": []
+      },
+      {
+        "id": "ce13_08",
+        "speaker": "F05",
+        "text": "这是刚凑到的一点米，给好几个饿着的人熬的。你再吃，他们吃什么？",
+        "actors": [
+          {
+            "id": "F05",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce13_09",
+        "speaker": "",
+        "text": "贾苇索听了，停下手，把盘子推回去。",
+        "actors": []
+      },
+      {
+        "id": "ce13_10",
+        "speaker": "JIA",
+        "text": "你早说是给他们的。",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce13_11",
+        "speaker": "F05",
+        "text": "刚才说了，你只听见粥香。",
+        "actors": [
+          {
+            "id": "F05",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce13_12",
+        "speaker": "JIA",
+        "text": "那我给你找只干净碗来。",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce13_13",
+        "speaker": "F05",
+        "text": "再找把勺。拿手捧过的那边，你自己吃。",
+        "actors": [
+          {
+            "id": "F05",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce13_14",
+        "speaker": "JIA",
+        "text": "师傅倒一点亏都不肯吃。",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce13_15",
+        "speaker": "F05",
+        "text": "我做师傅的，总得给旁人留一口。",
+        "actors": [
+          {
+            "id": "F05",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      }
+    ]
+  },
+  "CE15": {
+    "id": "CE15",
+    "title": "数白点",
+    "location": "歇脚处",
+    "background": "res://assets/story/chronicle/camp.png",
+    "music": "story_banter",
+    "conditions": {
+      "owned_all": [
+        "F02"
+      ],
+      "alive_all": [
+        "F02"
+      ],
+      "completed_all": [
+        "S06"
+      ]
+    },
+    "character_ids": [
+      "F02"
+    ],
+    "source_refs": [
+      "水浒七十回12-教场灰点比武"
+    ],
+    "lines": [
+      {
+        "id": "ce15_01",
+        "speaker": "",
+        "text": "空地上，蕾娜解下剑。贾苇索正要拔刀，旁边看热闹的人忙叫住他们。",
+        "actors": []
+      },
+      {
+        "id": "ce15_02",
+        "speaker": "",
+        "text": "那人说，自家比试，刀剑无情，恐怕伤人；不如换两根木杆，杆头裹布，蘸上白灰，身上点子多的便算输。",
+        "actors": []
+      },
+      {
+        "id": "ce15_03",
+        "speaker": "F02",
+        "text": "好。衣服上留印，比各自说中了几剑要清楚。",
+        "actors": [
+          {
+            "id": "F02",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce15_04",
+        "speaker": "JIA",
+        "text": "听你的。要赌什么？",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce15_05",
+        "speaker": "F02",
+        "text": "一席酒。赢的人挑座位。",
+        "actors": [
+          {
+            "id": "F02",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce15_06",
+        "speaker": "JIA",
+        "text": "那你得坐在我身边。",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce15_07",
+        "speaker": "F02",
+        "text": "你先赢了再说。",
+        "actors": [
+          {
+            "id": "F02",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce15_08",
+        "speaker": "",
+        "text": "两人各取一根木杆，杆头裹好布，蘸上白灰，换了深色衣裳，走到场中。",
+        "actors": []
+      },
+      {
+        "id": "ce15_09",
+        "speaker": "",
+        "text": "蕾娜抢先出手，贾苇索举杆相迎；两人来来往往，斗了几十回合。",
+        "actors": []
+      },
+      {
+        "id": "ce15_10",
+        "speaker": "",
+        "text": "等他们收手，围观的人先看贾苇索身上，斑斑点点，袖子和前襟都是白印；再看蕾娜，只有左肩下一点白。",
+        "actors": []
+      },
+      {
+        "id": "ce15_11",
+        "speaker": "F02",
+        "text": "我身上一点，你身上这么多。",
+        "actors": [
+          {
+            "id": "F02",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce15_12",
+        "speaker": "JIA",
+        "text": "你别急，我再数一遍。",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce15_13",
+        "speaker": "",
+        "text": "贾苇索数到一半，抬头看见蕾娜抱着木杆等他，不由笑了。",
+        "actors": []
+      },
+      {
+        "id": "ce15_14",
+        "speaker": "JIA",
+        "text": "好，是你赢了。这席酒我请。",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce15_15",
+        "speaker": "F02",
+        "text": "座位也由我挑。",
+        "actors": [
+          {
+            "id": "F02",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce15_16",
+        "speaker": "JIA",
+        "text": "你尽管挑，本大爷坐你旁边总可以吧？",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce15_17",
+        "speaker": "F02",
+        "text": "可以。先把袖子上的灰拍干净，别沾到我的酒里。",
+        "actors": [
+          {
+            "id": "F02",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      }
+    ]
+  },
+  "CE16": {
+    "id": "CE16",
+    "title": "把书留下",
+    "location": "歇脚处",
+    "background": "res://assets/story/chronicle/camp.png",
+    "music": "story_travel",
+    "conditions": {
+      "owned_all": [
+        "F02",
+        "F11"
+      ],
+      "alive_all": [
+        "F02",
+        "F11"
+      ],
+      "completed_all": [
+        "S06"
+      ]
+    },
+    "character_ids": [
+      "F02",
+      "F11"
+    ],
+    "source_refs": [
+      "大明奇侠传21-客店赠路费"
+    ],
+    "lines": [
+      {
+        "id": "ce16_01",
+        "speaker": "",
+        "text": "艾玛坐在歇脚处，把一本磨旧的书放在面前。蕾娜见她正与人商量价钱，等那人走开才问。",
+        "actors": []
+      },
+      {
+        "id": "ce16_02",
+        "speaker": "F02",
+        "text": "你要把它卖了？",
+        "actors": [
+          {
+            "id": "F02",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce16_03",
+        "speaker": "F11",
+        "text": "路上需要盘缠。他出的价不高，我还没答应。",
+        "actors": [
+          {
+            "id": "F11",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce16_04",
+        "speaker": "F02",
+        "text": "可以让我看看吗？",
+        "actors": [
+          {
+            "id": "F02",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce16_05",
+        "speaker": "",
+        "text": "艾玛把书递过去。扉页边缘夹着一片干叶，纸上有她自己写的批注。",
+        "actors": []
+      },
+      {
+        "id": "ce16_06",
+        "speaker": "F02",
+        "text": "这是你从家里带来的？",
+        "actors": [
+          {
+            "id": "F02",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce16_07",
+        "speaker": "F11",
+        "text": "是。我们那里有高窗，冬天窗沿上结冰。这本书一直放在窗边。",
+        "actors": [
+          {
+            "id": "F11",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce16_08",
+        "speaker": "F02",
+        "text": "我住过的地方也有一座塔，下面是练剑的空地。可我不认得你说的窗。",
+        "actors": [
+          {
+            "id": "F02",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce16_09",
+        "speaker": "F11",
+        "text": "那不能说我们来自同一个地方。",
+        "actors": [
+          {
+            "id": "F11",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce16_10",
+        "speaker": "F02",
+        "text": "嗯。你还想留着它吧？",
+        "actors": [
+          {
+            "id": "F02",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce16_11",
+        "speaker": "F11",
+        "text": "我不舍得卖。但既然离了家，总得盘算怎么走下去。",
+        "actors": [
+          {
+            "id": "F11",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce16_12",
+        "speaker": "F02",
+        "text": "你不必卖它。我这里还有些钱，可以先借给你。",
+        "actors": [
+          {
+            "id": "F02",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce16_13",
+        "speaker": "F11",
+        "text": "你也离家在外，自己不需要吗？",
+        "actors": [
+          {
+            "id": "F11",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce16_14",
+        "speaker": "F02",
+        "text": "我留够了。你到陌生地方还带着这本书，想必它对你要紧。",
+        "actors": [
+          {
+            "id": "F02",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce16_15",
+        "speaker": "F11",
+        "text": "借多少，什么时候还，我要记下来。",
+        "actors": [
+          {
+            "id": "F11",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce16_16",
+        "speaker": "F02",
+        "text": "好。你写，我看着。",
+        "actors": [
+          {
+            "id": "F02",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce16_17",
+        "speaker": "",
+        "text": "艾玛写好借条，递给蕾娜；蕾娜看过之后，将钱放在桌上。",
+        "actors": []
+      },
+      {
+        "id": "ce16_18",
+        "speaker": "F11",
+        "text": "谢谢。书我先收起来。",
+        "actors": [
+          {
+            "id": "F11",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce16_19",
+        "speaker": "F02",
+        "text": "收好吧。以后若有人说起有高窗的地方，我会留意。",
+        "actors": [
+          {
+            "id": "F02",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce16_20",
+        "speaker": "F11",
+        "text": "我也会问问那座塔。只是都有高塔，也未必是你家。",
+        "actors": [
+          {
+            "id": "F11",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce16_21",
+        "speaker": "F02",
+        "text": "那就多问一句。",
+        "actors": [
+          {
+            "id": "F02",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      }
+    ]
+  }
+}

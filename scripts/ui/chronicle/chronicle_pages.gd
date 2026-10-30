@@ -13,6 +13,8 @@ static func build(shell: Control, page: String) -> void:
 		"reward": reward(shell)
 		"event": event_page(shell)
 		"replay": shell.build_story_replay()
+		"optional": shell.build_optional_story()
+		"lore": story_lore(shell)
 		"preparation": preparation(shell)
 		"failure": failure(shell)
 		"saves": saves(shell)
@@ -26,7 +28,7 @@ static func scaffold(shell: Control, title: String, subtitle: String) -> VBoxCon
 	var row := T.row(column)
 	row.add_child(T.label(title, 24 if shell.size.y < 650 else 30, T.INK, true))
 	T.space(row)
-	shell.quiet_action(row, "返回", func(): shell.open_page(shell.party_return if shell.page == "equipment" else shell.previous_page), "page_back")
+	shell.quiet_action(row, "返回", func(): shell.open_page("journal" if shell.page == "lore" else shell.party_return if shell.page == "equipment" else shell.previous_page), "page_back")
 	if not subtitle.is_empty(): column.add_child(T.paragraph(subtitle, T.MUTED, 13 if shell.size.y < 650 else 14))
 	column.add_theme_constant_override("separation", 6 if shell.size.y < 650 else 10)
 	column.add_child(HSeparator.new())
@@ -157,6 +159,29 @@ static func journal(shell: Control) -> void:
 	for id in stories:
 		var target: String = id
 		shell.action(list, shell.session.nodes[id].name + " · 回顾剧情", func(): shell.open_story_replay(target, "journal"), "journal_replay_" + id)
+	if shell.session.has_method("available_optional_stories"):
+		list.add_child(HSeparator.new())
+		list.add_child(T.label("人物故事", 21, T.GOLD))
+		list.add_child(T.paragraph("人物在途中留下的片段。", T.MUTED, 14))
+		var optional: Dictionary = shell.STORIES.optional_events()
+		var available: Array = shell.session.available_optional_stories()
+		var read: Array = shell.session.read_optional_stories()
+		if available.is_empty() and read.is_empty(): list.add_child(T.paragraph("暂无可读的人物故事。", T.MUTED, 14))
+		for id in optional:
+			if id not in available and id not in read: continue
+			var target: String = id
+			var was_read: bool = id in read
+			var resumable: bool = shell.session.data.get("optional_story_checkpoints", {}).has(id)
+			var suffix := "已读 · 回顾" if was_read else "继续阅读" if resumable else "未读"
+			var button: Button = shell.action(list, str(optional[id].title) + " · " + suffix, func():
+				if was_read: shell.open_story_replay(target, "journal")
+				else: shell.open_optional_story(target), "journal_optional_" + id)
+			button.disabled = not was_read and not shell.session.can_read_optional_story()
+		list.add_child(HSeparator.new())
+		list.add_child(T.label("白门楼资料", 21, T.GOLD))
+		for entry in shell.session.available_story_lore():
+			var target: String = entry.id
+			shell.action(list, str(entry.title), func(): shell.open_story_lore(target), "journal_lore_" + target)
 	list.add_child(HSeparator.new())
 	list.add_child(T.label("行军记录", 21, T.GOLD))
 	if shell.session.data.log.is_empty(): list.add_child(T.paragraph("尚未启程。白门楼的传闻正从徐州传来。"))
@@ -167,6 +192,19 @@ static func journal(shell: Control) -> void:
 			list.add_child(HSeparator.new())
 			index += 1
 	if shell.session.data.finished: column.add_child(T.label("白门楼战役完成 · 全员已返营休整", 24, T.GOLD, true))
+
+static func story_lore(shell: Control) -> void:
+	for entry in shell.session.available_story_lore():
+		if entry.id != shell.lore_entry: continue
+		var column := scaffold(shell, str(entry.title), "")
+		var list := scroll_column(column, "lore_scroll")
+		list.add_child(T.paragraph(str(entry.text), T.INK, 18))
+		for id in entry.get("character_ids", []):
+			if not shell.session.characters.has(id): continue
+			var target: String = id
+			shell.action(list, str(shell.session.characters[id].name), func(): shell.inspect_character(target, "profile"), "lore_character_" + target)
+		return
+	shell.open_page("journal")
 
 static func settings(shell: Control) -> void:
 	var column := scaffold(shell, "设定", "")

@@ -25,11 +25,20 @@ FAIL_WORD = re.compile(r"(?i)(?:^|[^A-Za-z0-9])(?:FAIL(?:ED)?|ERROR)(?:$|[^A-Za-
 REQUIRED_SUCCESS = {
     "chronicle_enemy_pack_smoke": "ENEMY_PACK_SMOKE PASS",
     "chronicle_music_pack_smoke": "CHRONICLE_MUSIC_PACK_SMOKE PASS",
+    "chronicle_story_pack_smoke": "CHRONICLE_STORY_PACK_SMOKE PASS",
     "chronicle_music_playback_smoke": "CHRONICLE_MUSIC_PLAYBACK_SMOKE PASS",
 }
 # Match the test, exact preceding marker and exact error together. Never
 # blanket-ignore ERROR, /proc errors, or arbitrary lines after a fault marker.
 FAULTS = {
+    "chronicle_story_content_smoke": {
+        **{f"EXPECTED_FAULT_INJECTION: optional {phase} write rejected":
+           "ERROR: Could not create directory: '/proc/story-optional-read-only'."
+           for phase in ["first entry", "checkpoint", "completion"]},
+        **{f"EXPECTED_FAULT_INJECTION: victory context write rejected {node}":
+           "ERROR: Could not create directory: '/proc/story-battle-read-only'."
+           for node in ["B06", "B15", "B16", "B17"]},
+    },
     "chronicle_combat_smoke": {
         "EXPECTED_FAULT_INJECTION: victory write rejected":
             "ERROR: Could not create directory: '/proc/chronicle-combat-result-read-only'.",

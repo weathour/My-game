@@ -255,10 +255,7 @@ func show_line(line_id: String) -> void:
 	_replay_hint.visible = _replay
 	_location.visible = not _location.text.is_empty()
 	_set_background(_resolved_background())
-	var speaker := str(line.get("speaker", ""))
-	var speaker_label := str(line.get("speaker_name", _characters.get(speaker, speaker)))
-	if speaker in ["", "narrator"]:
-		speaker_label = ""
+	var speaker_label := _display_speaker(line)
 	_speaker_name.text = speaker_label
 	_name_panel.visible = not speaker_label.is_empty()
 	_words.text = str(line.get("text", "暂无剧情。"))
@@ -595,6 +592,12 @@ func _input(event: InputEvent) -> void:
 func is_history_open() -> bool:
 	return is_instance_valid(_history) and _history.visible
 
+func _display_speaker(line: Dictionary) -> String:
+	var explicit_name := str(line.get("speaker_name", "")).strip_edges()
+	if not explicit_name.is_empty(): return explicit_name
+	var speaker := str(line.get("speaker", ""))
+	return "" if speaker in ["", "narrator"] else str(_characters.get(speaker, speaker))
+
 func history_entries() -> Array[Dictionary]:
 	var result: Array[Dictionary] = []
 	if not _built or _line_index < 0:
@@ -607,9 +610,7 @@ func history_entries() -> Array[Dictionary]:
 		if text.is_empty():
 			continue
 		var speaker := str(line.get("speaker", ""))
-		var display_name := str(line.get("speaker_name", _characters.get(speaker, speaker)))
-		if speaker in ["", "narrator"]:
-			display_name = ""
+		var display_name := _display_speaker(line)
 		result.append({"id": str(line.get("id", "")), "speaker": speaker, "speaker_id": speaker, "speaker_name": display_name, "text": text})
 	return result
 

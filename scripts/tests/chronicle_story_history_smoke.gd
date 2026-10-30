@@ -143,6 +143,7 @@ func run() -> void:
 	await scrolling_and_rebuild()
 	await replay_with_pending_reward()
 	await empty_and_busy()
+	await named_npc_and_narrator()
 	SETTINGS.save_comfort("reduced_motion", original_motion)
 	SETTINGS.save_comfort("large_story_text", original_text)
 	shell.queue_free()
@@ -226,6 +227,11 @@ func scrolling_and_rebuild() -> void:
 	SETTINGS.save_comfort("reduced_motion", true)
 	SETTINGS.save_comfort("large_story_text", true)
 	await fixture("s02_16")
+	var expected_prefix := 0
+	for line in CATALOG.events().S02.lines:
+		expected_prefix += 1
+		if line.id == "s02_16": break
+	var future_line: String = CATALOG.events().S02.lines[expected_prefix].id
 	send_mouse(MOUSE_BUTTON_WHEEL_UP)
 	await frames(14)
 	var scroll := history_scroll()
@@ -260,7 +266,7 @@ func scrolling_and_rebuild() -> void:
 		for id in ["StoryHistoryPanel", "StoryHistoryScroll", "story_history_close"]:
 			var control := shell.find_child(id, true, false) as Control
 			expect(control != null and bounds.encloses(control.get_global_rect()), "large history control fits " + id + str(dimensions))
-		expect(shell.story_view.history_entries().size() == 16 and shell.find_child("StoryHistoryText_s02_17", true, false) == null, "rebuild preserves prefix without future rows")
+		expect(shell.story_view.history_entries().size() == expected_prefix and shell.find_child("StoryHistoryText_" + future_line, true, false) == null, "rebuild preserves prefix without future rows")
 		await capture("02-large-history-" + str(dimensions.x))
 	var ui: Dictionary = shell.story_view.reading_state()
 	var invalid: Dictionary = ui.duplicate(true)
@@ -328,7 +334,7 @@ func replay_with_pending_reward() -> void:
 	shell._advance_story_replay(CATALOG.events().F01.lines[-1].id)
 	await frames(12)
 	send_key(KEY_PAGEUP)
-	expect(shell.story_view.is_history_open() and shell.story_view.history_entries().size() == 2, "spring history available without triggering recovery")
+	expect(shell.story_view.is_history_open() and shell.story_view.history_entries().size() == CATALOG.events().F01.lines.size(), "spring history available without triggering recovery")
 	send_key(KEY_SPACE)
 	await click("story_skip")
 	unchanged("replay history leaves gift, revival and pending cards untouched")
@@ -354,3 +360,31 @@ func empty_and_busy() -> void:
 	expect(not shell.story_view.is_history_open(), "busy commit blocks mouse and button history open")
 	shell.story_view.set_busy(false)
 	unchanged("empty and busy history")
+
+func named_npc_and_narrator() -> void:
+	shell.hide()
+	var view := preload("res://scripts/ui/chronicle/chronicle_story_view.gd").new()
+	var event: Dictionary = CATALOG.events().S01.duplicate(true)
+	event.id = "named_speaker_fixture"
+	event.lines = [{"id":"named_npc","speaker":"","speaker_name":"守门人","text":"fixture npc","actors":[]}, {"id":"true_narrator","speaker":"","text":"fixture narration","actors":[]}]
+	view.setup(event, "named_npc")
+	viewport.add_child(view)
+	await frames()
+	view.reveal_current()
+	var name := view.find_child("StorySpeaker", true, false) as Label
+	expect(name.text == "守门人" and name.is_visible_in_tree(), "named world NPC shows explicit name without a card identity")
+	expect(view.history_entries()[0].speaker_name == "守门人", "named NPC transcript retains explicit name")
+	view.show_line("true_narrator")
+	view.reveal_current()
+	expect(name.text.is_empty() and not name.is_visible_in_tree(), "true narration keeps nameplate hidden")
+	var entries: Array = view.history_entries()
+	expect(entries.size() == 2 and entries[0].speaker_name == "守门人" and entries[1].speaker_name.is_empty(), "history distinguishes named NPC from narration")
+	(view.find_child("story_history", true, false) as Button).pressed.emit()
+	await frames()
+	var npc_name := view.find_child("StoryHistorySpeaker_named_npc", true, false) as Label
+	var narrator_name := view.find_child("StoryHistorySpeaker_true_narrator", true, false) as Label
+	expect(npc_name != null and npc_name.text == "守门人" and npc_name.is_visible_in_tree(), "rendered NPC history name visible")
+	expect(narrator_name != null and not narrator_name.is_visible_in_tree(), "rendered narrator history has no false identity")
+	view.queue_free(); await frames()
+	shell.show()
+	unchanged("NPC/narrator transcript is presentation only")

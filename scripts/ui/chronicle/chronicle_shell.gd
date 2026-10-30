@@ -51,6 +51,8 @@ var story_view: Control
 var route_map: Control
 var route_scroll := -1.0
 var route_view_size := Vector2.ZERO
+var optional_event := ""
+var lore_entry := ""
 var replay_event := ""
 var replay_line := ""
 var replay_return := "route"
@@ -135,7 +137,7 @@ func render() -> void:
 	_render_queued = false
 	if not is_inside_tree() or page == "battle": return
 	var reading_state: Dictionary = {}
-	if page == rendered_page and page in ["event", "replay"] and is_instance_valid(story_view) and story_view.is_inside_tree():
+	if page == rendered_page and page in ["event", "optional", "replay"] and is_instance_valid(story_view) and story_view.is_inside_tree():
 		reading_state = story_view.reading_state()
 	var focus_name := ""
 	var focus := get_viewport().gui_get_focus_owner()
@@ -182,7 +184,7 @@ func render() -> void:
 		if scroll_memory.get(page, {}).has(str(scroll.name)):
 			scroll.set_deferred("scroll_vertical", scroll_memory[page][str(scroll.name)])
 	rendered_page = page
-	if page in ["event", "replay"]:
+	if page in ["event", "optional", "replay"]:
 		pass # The story reader owns its input and initial focus.
 	elif is_instance_valid(enemy_codex) or is_instance_valid(character_sheet):
 		pass # Read-only overlays retain keyboard ownership through page reflow.
@@ -199,13 +201,18 @@ func render() -> void:
 	if is_instance_valid(character_sheet): move_child(character_sheet, -1)
 	if is_instance_valid(modal): move_child(modal, -1)
 
+func story_content(id: String, replay: bool = false) -> Dictionary:
+	# The retained UI rehearsal has no campaign story transactions. Its preview
+	# still uses the authored base reader; formal saves always use frozen contexts.
+	return session.story_event(id, replay) if session.has_method("story_event") else STORIES.for_node(session.nodes[id])
+
 func build_story() -> void:
 	var id: String = session.data.current
 	if not session.data.pending.is_empty() or id not in session.data.available or (session.has_method("event_available") and not session.event_available(id)):
 		page = "reward" if not session.data.pending.is_empty() else "route"
 		queue_render()
 		return
-	var event := STORIES.for_node(session.nodes[id])
+	var event: Dictionary = story_content(id)
 	if id == "S02" and not session.data.owned.has("F11"):
 		event.completion_hint = "剧情结束后，艾玛加入队伍并进入卡池。"
 	elif session.UNLOCKS.has(id):
@@ -215,6 +222,10 @@ func build_story() -> void:
 	if session.nodes[id].kind == "spring": event.finish_label = "饮泉休整"
 	var checkpoint: Dictionary = session.data.get("story_checkpoint", {})
 	var line := STORIES.line_id(event, checkpoint)
+	if session.has_method("save_story_checkpoint") and (checkpoint != {"event":id, "line":line} or not session.data.get("story_contexts", {}).has(id)):
+		if not session.save_story_checkpoint(id, line):
+			build_story_save_error("route")
+			return
 	story_view = STORY_VIEW.new()
 	story_view.name = "CampaignStory"
 	story_view.setup(event, line)
@@ -223,8 +234,6 @@ func build_story() -> void:
 	story_view.leave_requested.connect(func(): open_page("route"))
 	body.add_child(story_view)
 	_apply_music("story:" + id, MUSIC_CONTEXT.story_cue(event, line))
-	if checkpoint != {"event":id, "line":line} and session.has_method("save_story_checkpoint"):
-		if not session.save_story_checkpoint(id, line): story_view.show_error("未能保存阅读位置，请重试。")
 
 func _advance_story(line: String) -> void:
 	if page != "event" or not is_instance_valid(story_view): return
@@ -233,7 +242,7 @@ func _advance_story(line: String) -> void:
 		if session.resolve_event(): resume_view()
 		else: story_view.show_error("未能保存本次结果，请重试。")
 		return
-	var event := STORIES.for_node(session.nodes[session.data.current])
+	var event: Dictionary = story_content(session.data.current)
 	if not STORIES.has_line(event, line):
 		story_view.show_error("未找到这段对白，请返回路线后重试。")
 		return
@@ -242,8 +251,67 @@ func _advance_story(line: String) -> void:
 	else:
 		story_view.show_error("未能保存阅读位置，请重试。")
 
+func open_optional_story(id: String) -> bool:
+	if page == "battle" or not session.has_method("can_read_optional_story") or not session.can_read_optional_story() or not session.optional_story_available(id): return false
+	optional_event = id
+	open_page("optional")
+	return true
+
+func build_optional_story() -> void:
+	if not session.has_method("can_read_optional_story") or not session.can_read_optional_story() or not session.optional_story_available(optional_event):
+		open_page("journal")
+		return
+	var event: Dictionary = story_content(optional_event)
+	event.return_label = "返回见闻"
+	event.finish_label = "读完"
+	var saved_line: String = session.data.get("optional_story_checkpoints", {}).get(optional_event, "")
+	var checkpoint: Dictionary = {} if saved_line.is_empty() else {"event":optional_event, "line":saved_line}
+	var line := STORIES.line_id(event, checkpoint)
+	if checkpoint != {"event":optional_event, "line":line} or not session.data.get("story_contexts", {}).has(optional_event):
+		if not session.save_optional_story_checkpoint(optional_event, line):
+			build_story_save_error("journal")
+			return
+	story_view = STORY_VIEW.new()
+	story_view.name = "OptionalStory"
+	story_view.setup(event, line)
+	story_view.line_presented.connect(_on_story_music_line.bind(event, false))
+	story_view.advance_requested.connect(_advance_optional_story)
+	story_view.leave_requested.connect(func(): open_page("journal"))
+	body.add_child(story_view)
+	_apply_music("story:" + optional_event, MUSIC_CONTEXT.story_cue(event, line))
+
+func build_story_save_error(return_page: String) -> void:
+	var column := STYLE.column(STYLE.panel(page_margin(), false, 22))
+	column.add_child(STYLE.paragraph("未能保存阅读位置，请重试。", STYLE.INK, 18))
+	action(column, "重试", render, "story_entry_retry", true)
+	quiet_action(column, "返回见闻" if return_page == "journal" else "返回路线", func(): open_page(return_page), "story_entry_back")
+
+func _advance_optional_story(line: String) -> void:
+	if page != "optional" or not is_instance_valid(story_view): return
+	story_view.set_busy(true)
+	if line.is_empty():
+		if session.complete_optional_story(optional_event): open_page("journal")
+		else: story_view.show_error("未能保存本次结果，请重试。")
+		return
+	if not STORIES.has_line(story_content(optional_event), line):
+		story_view.show_error("未找到这段对白，请返回见闻后重试。")
+		return
+	if session.save_optional_story_checkpoint(optional_event, line): story_view.show_line(line)
+	else: story_view.show_error("未能保存阅读位置，请重试。")
+
+func open_story_lore(id: String) -> bool:
+	if page == "battle" or session.in_battle or not session.has_method("available_story_lore"): return false
+	for entry in session.available_story_lore():
+		if entry.id == id:
+			lore_entry = id
+			open_page("lore")
+			return true
+	return false
+
 func can_replay_story(id: String) -> bool:
-	if page == "battle" or session.in_battle or id not in session.data.completed or not session.nodes.has(id) or not STORIES.has_event(id): return false
+	if page == "battle" or session.in_battle: return false
+	if session.has_method("read_optional_stories") and id in session.read_optional_stories(): return STORIES.optional_events().has(id)
+	if id not in session.data.completed or not session.nodes.has(id) or not STORIES.has_event(id): return false
 	return session.is_story_node(id) if session.has_method("is_story_node") else session.nodes[id].kind in ["event", "spring"]
 
 func replayable_stories() -> Array[String]:
@@ -257,7 +325,7 @@ func open_story_replay(id: String, return_page: String = "route") -> bool:
 	_replay_snapshot = _music_snapshot(return_page)
 	_last_story_music_line = ""
 	replay_event = id
-	replay_line = STORIES.line_id(STORIES.for_node(session.nodes[id]))
+	replay_line = STORIES.line_id(story_content(id, true))
 	replay_return = "journal" if return_page == "journal" else "route"
 	open_page("replay")
 	return true
@@ -266,7 +334,7 @@ func build_story_replay() -> void:
 	if not can_replay_story(replay_event):
 		close_story_replay()
 		return
-	var event := STORIES.for_node(session.nodes[replay_event])
+	var event: Dictionary = story_content(replay_event, true)
 	event.replay = true
 	event.return_label = "返回见闻" if replay_return == "journal" else "返回路线"
 	story_view = STORY_VIEW.new()
@@ -284,7 +352,7 @@ func _advance_story_replay(line: String) -> void:
 	if not can_replay_story(replay_event) or line.is_empty():
 		close_story_replay()
 		return
-	var event := STORIES.for_node(session.nodes[replay_event])
+	var event: Dictionary = story_content(replay_event, true)
 	if not STORIES.has_line(event, line):
 		story_view.show_error("未找到这段对白，请结束回顾后重试。")
 		return
@@ -304,7 +372,7 @@ func _clear_story_replay() -> void:
 	replay_return = "route"
 
 func _on_session_problem(message: String) -> void:
-	if page == "event" and is_instance_valid(story_view) and story_view.is_inside_tree():
+	if page in ["event", "optional"] and is_instance_valid(story_view) and story_view.is_inside_tree():
 		story_view.show_error(message)
 	else:
 		show_notice(message)
@@ -616,6 +684,7 @@ func _unhandled_key_input(event: InputEvent) -> void:
 			elif page in ["saves", "settings", "journal"]: open_page(previous_page)
 			elif page == "reward": show_notice("请完成本关选卡；也可以保存行军档，稍后继续同一组候选。")
 			elif page == "replay": close_story_replay()
+			elif page in ["optional", "lore"]: open_page("journal")
 			elif page in ["event", "preparation", "failure"]: open_page("route")
 			elif page == "character": open_page(character_return)
 			elif page == "menu": open_page(menu_return)
@@ -637,7 +706,7 @@ func _sync_page_music() -> void:
 			bgm.restore_snapshot(saved.playback)
 			return
 		bgm.resume_music()
-	if page in ["music", "replay", "event", "battle"]: return
+	if page in ["music", "replay", "event", "optional", "battle"]: return
 	_last_story_music_line = ""
 	var cue := MUSIC_CONTEXT.page_cue(page, str(session.data.current), "preparation" if party_preparation else previous_page)
 	if cue.is_empty(): return

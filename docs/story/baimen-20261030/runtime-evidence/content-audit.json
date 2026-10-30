@@ -1,0 +1,74 @@
+{
+  "created_at": "2026-10-30T08:43:12.867238+00:00",
+  "counting_rule": "正文含标点，排除标题、技术 ID、条件和内部设定；人物档案只计当前页面 biography、quote、relationship 三字段。路线摘要另列，不合并进正文总数。",
+  "files": {
+    "story_events": {
+      "path": "assets/data/chronicle/story_events.json",
+      "sha256": "fa06bb583184df7255c4d1118ade2c7204a3d245175a69f234ead97aac30785c",
+      "entries": 22,
+      "lines": 417,
+      "display_characters": 8646,
+      "duplicate_line_ids": []
+    },
+    "character_events": {
+      "path": "assets/data/chronicle/character_events.json",
+      "sha256": "bc7217f73f5056fc79f37903406726c44ee17fabf5f1f64be3a9bd03ed1ce627",
+      "entries": 32,
+      "lines": 572,
+      "display_characters": 11382,
+      "duplicate_line_ids": []
+    },
+    "story_reactions": {
+      "path": "assets/data/chronicle/story_reactions.json",
+      "sha256": "219fb623681e76cbee862f50ec817726d22b89b2edbffc8a9df3f5c5f339638f",
+      "entries": 48,
+      "lines": 48,
+      "display_characters": 743,
+      "duplicate_line_ids": []
+    },
+    "story_lore": {
+      "path": "assets/data/chronicle/story_lore.json",
+      "sha256": "93c25ee5a5f62bb17a4ec2cce167bcc5537bfb76b6add39817b639dff2d514f5",
+      "entries": 17,
+      "lines": 0,
+      "display_characters": 750,
+      "duplicate_line_ids": []
+    },
+    "character_profiles": {
+      "path": "assets/data/chronicle/character_profiles.json",
+      "sha256": "2797aaf672013cd900caa8f3505ad3bc68bb6c68cc1d8013a9c07f3ac0e2ab53",
+      "entries": 38,
+      "lines": 0,
+      "display_characters": 3112,
+      "duplicate_line_ids": []
+    },
+    "route": {
+      "path": "assets/data/chronicle/route.json",
+      "sha256": "0bf160487449c586d1692a97d144921199d4a0a63c1ee0bb358e1f2e60867e39",
+      "entries": 36,
+      "lines": 0,
+      "display_characters": 1175,
+      "duplicate_line_ids": []
+    }
+  },
+  "main_coverage": {
+    "expected": 22,
+    "missing": [],
+    "unexpected": []
+  },
+  "body_display_characters": 24633,
+  "route_summary_characters": 1175,
+  "long_identical_lines_within_event": [],
+  "independent_visual_review": {
+    "reviewer": "root",
+    "images": [
+      "captures/optional-long-960.png",
+      "captures/main-reaction-960.png",
+      "captures/journal-optional-1920.png",
+      "captures/lore-1920.png"
+    ],
+    "body_readable": true,
+    "clipping_or_control_overlap_observed": false,
+    "scope": "Selected actual-render captures; not a full manual campaign playthrough or a new art-direction review."
+  }
+}

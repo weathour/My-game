@@ -1,0 +1,100 @@
+{
+  "status": "frozen_for_implementation",
+  "date": "2026-10-30",
+  "main_events": "assets/data/chronicle/story_events.json",
+  "optional_events": "assets/data/chronicle/character_events.json",
+  "reactions": "assets/data/chronicle/story_reactions.json",
+  "lore": "assets/data/chronicle/story_lore.json",
+  "profiles": "assets/data/chronicle/character_profiles.json",
+  "root_shape": "All four event/lore files are dictionaries keyed by stable id. Profiles retain current schema.",
+  "main_required_ids": [
+    "S01",
+    "S02",
+    "S03",
+    "S04",
+    "S05",
+    "S06",
+    "S07",
+    "S08",
+    "S09",
+    "S10",
+    "S11",
+    "S12",
+    "S13",
+    "S14",
+    "F01",
+    "F02",
+    "F03",
+    "F04",
+    "B06",
+    "B15",
+    "B16",
+    "B17"
+  ],
+  "event_fields": {
+    "required": [
+      "id",
+      "title",
+      "location",
+      "background",
+      "music",
+      "lines"
+    ],
+    "optional_metadata": [
+      "source_refs",
+      "character_ids",
+      "category",
+      "scene_context"
+    ],
+    "line_fields": "Existing id/speaker/text/actors plus supported background/location/music/stinger overrides; preserve old line IDs where possible. Never reuse old ID for unrelated content."
+  },
+  "optional_conditions": {
+    "owned_all": "character IDs actually obtained",
+    "alive_all": "character IDs obtained and not dead",
+    "completed_all": "route node IDs completed",
+    "event_read_all": "optional event IDs already completed"
+  },
+  "condition_semantics": "All fields AND; absent/empty true; unknown keys or malformed types rejected. No expiry. No party predicates for optional events.",
+  "optional_time": "Unspecified interval after all gates and actual acquisition. No assertion of immediate earlier-battle participation. Live conversation needs alive_all. Memories may use owned_all only with explicit framing.",
+  "reaction_fields": {
+    "required": [
+      "id",
+      "event_id",
+      "after_line",
+      "conditions",
+      "lines"
+    ],
+    "optional": [
+      "priority",
+      "battle_id",
+      "source_refs"
+    ]
+  },
+  "reaction_conditions": "Same four predicates plus battle_members_all (array of character IDs); battle_id required if battle_members_all used. Frozen actual entry members of that battle; unknown historical context fails membership. alive_all separately required for present speech by acquired characters.",
+  "reaction_selection": "At each after_line anchor, select at most one eligible reaction; higher priority wins, ties lexical id. Freeze selected reaction IDs at first entry; reload/replay/resize cannot reevaluate based on later ownership. Main lines must make sense with no reactions.",
+  "lore_fields": {
+    "required": [
+      "id",
+      "kind",
+      "title",
+      "text"
+    ],
+    "optional": [
+      "conditions",
+      "source_refs",
+      "character_ids"
+    ]
+  },
+  "lore_conditions": "owned_all/alive_all/completed_all/event_read_all using same semantics, no write or rewards from viewing",
+  "additive_save_fields": [
+    "optional_story_read",
+    "optional_story_checkpoints",
+    "story_contexts",
+    "battle_story_contexts"
+  ],
+  "save_semantics": "Schema 1 additive, old missing fields default empty. optional_story_checkpoints maps each optional event ID to its stable line ID; migrate intermediate singular optional_story_checkpoint {event,line} on read. Preserve original main story_checkpoint shape. First read checkpoints/completion use atomic commit rollback. Replay writes nothing. Failed battle restores snapshot; current postbattle node may not yet be completed.",
+  "baseline_compatibility": "Keep main IDs/known line IDs if context compatible. Explicit migration map if needed. Existing completed main scenes lacking context replay base lines only, not reactions based on current party.",
+  "presentation": "Reuse current story reader and existing journal; character scenes and lore accessible in journal, blocked first-read during battle/pending/deferred mandatory story. No new currency/reward/action points.",
+  "authoring_boundary": "World actors can be unowned; acquired incapacitated characters do not speak immediate dialogue without alive condition. Put conditional remarks into reaction catalog. Main causality cannot depend on random ownership.",
+  "sources": "Public-domain originals may be closely adapted; protected text not user-provided must not be copied/near-paraphrased. Metadata points to source ledger; do not expose technical provenance in player flow."
+}

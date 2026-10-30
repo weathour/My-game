@@ -1,6 +1,9 @@
 extends RefCounted
 ## Formal campaign boundary. Only validated victories mutate progression.
 ## UI rehearsal and legacy saves have separate schemas and directories.
+const STORY_STATE := preload("res://scripts/campaign/campaign_story_state.gd")
+const STORIES := preload("res://scripts/content/story_catalog.gd")
+const STORY_CONDITIONS := preload("res://scripts/content/story_conditions.gd")
 const CONTENT := preload("res://scripts/content/combat_catalog.gd")
 const STORE := preload("res://scripts/campaign/campaign_store.gd")
 const REWARDS := preload("res://scripts/campaign/reward_rules.gd")
@@ -45,6 +48,7 @@ func reset(persist: bool = true) -> bool:
 		"available":["S01"], "pool":INITIAL_POOL.duplicate(), "owned":{"JIA":new_character("JIA")},
 		"party":["", ""], "equipped":{"weapon":"plain_blade", "armor":"cloth_armor", "accessory":"ember_seal"},
 		"inventory":["plain_blade", "cloth_armor", "ember_seal"], "pending":{}, "deferred_reward":{}, "story_checkpoint":{},
+		"optional_story_read":[], "optional_story_checkpoints":{}, "story_contexts":{}, "battle_story_contexts":{},
 		"log":[], "finished":false, "started":false, "reward_seed":int(randi() & 0x7fffffff), "reward_index":0, "last_result":""}
 	entry_snapshot.clear()
 	in_battle = false
@@ -153,6 +157,12 @@ func complete_battle(result: Dictionary) -> bool:
 	if result.characters.JIA.dead or result.characters.JIA.hp <= 0: return false
 	var previous := entry_snapshot.duplicate(true)
 	var id: String = data.current
+	STORY_STATE.defaults(data)
+	# Actual entrants survive auxiliary death/removal and are committed with victory.
+	var entrants: Array = ["JIA"]
+	for member in entry_snapshot.party:
+		if member != "": entrants.append(member)
+	data.battle_story_contexts[id] = entrants
 	for member in roster(): data.owned[member] = result.characters[member].duplicate(true)
 	for index in 2:
 		var member: String = data.party[index]
@@ -188,14 +198,75 @@ func save_story_checkpoint(event_id: String, line_id: String) -> bool:
 	if event_id != data.current or event_id not in data.available or event_id not in nodes: return false
 	if not event_available(event_id): return false
 	var previous := data.duplicate(true)
+	STORY_STATE.defaults(data)
+	if not data.story_contexts.has(event_id): data.story_contexts[event_id] = _initial_story_context(event_id)
+	if not STORIES.has_line(story_event(event_id), line_id): data = previous; return false
 	data.story_checkpoint = {"event":event_id, "line":line_id}
 	return commit(previous)
+
+func _initial_story_context(id: String) -> Dictionary:
+	# A pre-feature in-progress save has already entered its base scene.
+	# Never invent a historical reaction from its later/current inventory.
+	if data.get("story_checkpoint", {}).get("event") == id: return {"reactions":[]}
+	return STORIES.select_context(id, data)
+
+func story_event(id: String, replay: bool = false) -> Dictionary:
+	var event: Dictionary = STORIES.optional_events().get(id, {})
+	if event.is_empty() and nodes.has(id): event = STORIES.for_node(nodes[id])
+	var contexts: Dictionary = data.get("story_contexts", {})
+	# Completed old scenes without historical context deliberately contain base lines only.
+	var context: Dictionary = contexts.get(id, {}) if replay or contexts.has(id) else _initial_story_context(id)
+	return STORIES.resolved(event, context)
+
+func optional_story_available(id: String) -> bool:
+	var catalog := STORIES.optional_events()
+	if not catalog.has(id) or id in data.get("optional_story_read", []): return false
+	if data.get("optional_story_checkpoints", {}).has(id): return true
+	return STORY_CONDITIONS.matches(catalog[id].get("conditions", {}), data)
+
+func can_read_optional_story() -> bool:
+	return not in_battle and data.pending.is_empty() and data.deferred_reward.is_empty()
+
+func available_optional_stories() -> Array[String]:
+	var result: Array[String] = []
+	for id in STORIES.optional_events():
+		if optional_story_available(id): result.append(id)
+	return result
+
+func read_optional_stories() -> Array:
+	return data.get("optional_story_read", []).duplicate()
+
+func save_optional_story_checkpoint(event_id: String, line_id: String) -> bool:
+	if not can_read_optional_story() or not optional_story_available(event_id): return false
+	var previous := data.duplicate(true)
+	STORY_STATE.defaults(data)
+	if not data.story_contexts.has(event_id): data.story_contexts[event_id] = _initial_story_context(event_id)
+	if not STORIES.has_line(story_event(event_id), line_id): data = previous; return false
+	data.optional_story_checkpoints[event_id] = line_id
+	return commit(previous)
+
+func complete_optional_story(id: String) -> bool:
+	if not can_read_optional_story() or not optional_story_available(id): return false
+	var previous := data.duplicate(true)
+	STORY_STATE.defaults(data)
+	if not data.story_contexts.has(id): data.story_contexts[id] = _initial_story_context(id)
+	data.optional_story_read.append(id)
+	data.optional_story_checkpoints.erase(id)
+	return commit(previous)
+
+func available_story_lore() -> Array[Dictionary]:
+	var result: Array[Dictionary] = []
+	for entry in STORIES.lore().values():
+		if STORY_CONDITIONS.matches(entry.get("conditions", {}), data): result.append(entry.duplicate(true))
+	return result
 
 func resolve_event() -> bool:
 	if in_battle or not data.pending.is_empty(): return false
 	var id: String = data.current
 	if not event_available(id): return false
 	var previous := data.duplicate(true)
+	STORY_STATE.defaults(data)
+	if not data.story_contexts.has(id): data.story_contexts[id] = _initial_story_context(id)
 	unlock(id)
 	if awaiting_battle_story():
 		var won: Dictionary = data.deferred_reward.duplicate()
@@ -305,6 +376,7 @@ func read_slot(slot: String) -> Dictionary:
 		value.owned[id].xp = roundf(float(value.owned[id].xp) * 6.0) / 6.0
 	if not value.pending.is_empty(): value.pending.picks = int(value.pending.picks)
 	if not value.has("story_checkpoint"): value.story_checkpoint = {}
+	STORY_STATE.defaults(value)
 	# Schema 1 previously deferred B01 until S02. Recover its reward before the
 	# event, retaining concrete candidates/selections if already generated.
 	if value.deferred_reward.get("id", "") == "B01" and value.current == "S02" and not value.owned.has("F11"):
@@ -364,6 +436,7 @@ func valid(value: Variant) -> bool:
 			if checkpoint.line.is_empty() or checkpoint.event != value.current or checkpoint.event not in value.available: return false
 			if not value.pending.is_empty(): return false
 			if nodes[checkpoint.event].kind not in ["event", "spring"] and not _awaiting_battle_story(value): return false
+	if not STORY_STATE.valid(value, characters, nodes): return false
 	for slot in ["weapon", "armor", "accessory"]:
 		var found := false
 		for item in EQUIPMENT:

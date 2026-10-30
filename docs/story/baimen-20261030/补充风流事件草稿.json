@@ -1,0 +1,1189 @@
+{
+  "CE29": {
+    "id": "CE29",
+    "title": "只怕有人吃醋",
+    "location": "夜间歇处",
+    "background": "res://assets/story/chronicle/camp.png",
+    "music": "story_banter",
+    "conditions": {
+      "owned_all": [
+        "F04",
+        "F09"
+      ],
+      "alive_all": [
+        "F04",
+        "F09"
+      ],
+      "completed_all": [
+        "S05"
+      ]
+    },
+    "character_ids": [
+      "F04",
+      "F09"
+    ],
+    "source_refs": [
+      "梼杌闲评03-席上邀约"
+    ],
+    "lines": [
+      {
+        "id": "ce29_01",
+        "speaker": "",
+        "text": "夜间歇脚，桌边坐着贾苇索、柳晚晴，还有一位同行的客人。有人去请钱绮罗来坐。",
+        "actors": []
+      },
+      {
+        "id": "ce29_02",
+        "speaker": "F04",
+        "text": "谁在那边？",
+        "actors": [
+          {
+            "id": "F04",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce29_03",
+        "speaker": "",
+        "text": "来人说，贾苇索和柳晚晴都在。",
+        "actors": []
+      },
+      {
+        "id": "ce29_04",
+        "speaker": "F04",
+        "text": "柳姑娘？既然请我，我就去坐坐。",
+        "actors": [
+          {
+            "id": "F04",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce29_05",
+        "speaker": "",
+        "text": "钱绮罗进屋见了礼，在柳晚晴身边坐下。",
+        "actors": []
+      },
+      {
+        "id": "ce29_06",
+        "speaker": "JIA",
+        "text": "来得正好，先喝一杯。",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce29_07",
+        "speaker": "F04",
+        "text": "柳姑娘，你唱一段，我就陪。",
+        "actors": [
+          {
+            "id": "F04",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce29_08",
+        "speaker": "F09",
+        "text": "你又要点什么？",
+        "actors": [
+          {
+            "id": "F09",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce29_09",
+        "speaker": "F04",
+        "text": "你拿手的那段，唱完我敬你。",
+        "actors": [
+          {
+            "id": "F04",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce29_10",
+        "speaker": "",
+        "text": "柳晚晴唱了一段。钱绮罗听得入神，等她唱完，才端杯与她碰了一下。",
+        "actors": []
+      },
+      {
+        "id": "ce29_11",
+        "speaker": "F04",
+        "text": "好。再猜拳，输了喝酒。",
+        "actors": [
+          {
+            "id": "F04",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce29_12",
+        "speaker": "",
+        "text": "同行的客人自告奋勇，一连输了好几拳，喝得伏在桌上睡着了。",
+        "actors": []
+      },
+      {
+        "id": "ce29_13",
+        "speaker": "JIA",
+        "text": "你这拳头倒厉害。本大爷出去透口气。",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce29_14",
+        "speaker": "",
+        "text": "他一走，钱绮罗便挨近柳晚晴，低声说话。",
+        "actors": []
+      },
+      {
+        "id": "ce29_15",
+        "speaker": "F04",
+        "text": "我在隔壁歇着，明日你得空，来坐一会儿。",
+        "actors": [
+          {
+            "id": "F04",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce29_16",
+        "speaker": "F09",
+        "text": "你刚才灌倒一个，叫我怎么敢去？",
+        "actors": [
+          {
+            "id": "F09",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce29_17",
+        "speaker": "F04",
+        "text": "你来，我请茶。想听你说话，还能先把你灌醉不成？",
+        "actors": [
+          {
+            "id": "F04",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce29_18",
+        "speaker": "F09",
+        "text": "好，我去。",
+        "actors": [
+          {
+            "id": "F09",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce29_19",
+        "speaker": "",
+        "text": "贾苇索回到屋里，正看见两人分开。钱绮罗起身要走。",
+        "actors": []
+      },
+      {
+        "id": "ce29_20",
+        "speaker": "JIA",
+        "text": "这就走？我还想留你们再喝一杯。",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce29_21",
+        "speaker": "F09",
+        "text": "她明日还有事，先让她歇着吧。",
+        "actors": [
+          {
+            "id": "F09",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce29_22",
+        "speaker": "JIA",
+        "text": "我若留你，你肯陪我？",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce29_23",
+        "speaker": "F09",
+        "text": "那要看你猜拳赢不赢得了。",
+        "actors": [
+          {
+            "id": "F09",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce29_24",
+        "speaker": "JIA",
+        "text": "我怕有人吃醋。",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce29_25",
+        "speaker": "",
+        "text": "钱绮罗笑着出去了。柳晚晴坐回桌边，把酒壶推到贾苇索面前。",
+        "actors": []
+      }
+    ]
+  },
+  "CE30": {
+    "id": "CE30",
+    "title": "一杯代酒",
+    "location": "夜间歇处",
+    "background": "res://assets/story/chronicle/camp.png",
+    "music": "story_banter",
+    "conditions": {
+      "owned_all": [
+        "F08",
+        "F10"
+      ],
+      "alive_all": [
+        "F08",
+        "F10"
+      ],
+      "completed_all": [
+        "S06"
+      ]
+    },
+    "character_ids": [
+      "F08",
+      "F10"
+    ],
+    "source_refs": [
+      "红楼复梦18-酒令错罚"
+    ],
+    "lines": [
+      {
+        "id": "ce30_01",
+        "speaker": "",
+        "text": "歇脚处摆了几盏酒。陆知微提议行令：轮人数数，轮到三、六、九，便掷骰子比点，小的喝酒。",
+        "actors": []
+      },
+      {
+        "id": "ce30_02",
+        "speaker": "F08",
+        "text": "让我先来。",
+        "actors": [
+          {
+            "id": "F08",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce30_03",
+        "speaker": "F10",
+        "text": "数到你时，你得先报数，再掷骰子。",
+        "actors": [
+          {
+            "id": "F10",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce30_04",
+        "speaker": "F08",
+        "text": "知道了。",
+        "actors": [
+          {
+            "id": "F08",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce30_05",
+        "speaker": "",
+        "text": "轮了一圈，陶小满抓起骰子，朝贾苇索笑。",
+        "actors": []
+      },
+      {
+        "id": "ce30_06",
+        "speaker": "F08",
+        "text": "我掷你！",
+        "actors": [
+          {
+            "id": "F08",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce30_07",
+        "speaker": "",
+        "text": "骰子落定，陶小满点大，贾苇索点小。",
+        "actors": []
+      },
+      {
+        "id": "ce30_08",
+        "speaker": "F08",
+        "text": "赢定你了。给他斟酒！",
+        "actors": [
+          {
+            "id": "F08",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce30_09",
+        "speaker": "F10",
+        "text": "且慢，先给小满斟一杯。",
+        "actors": [
+          {
+            "id": "F10",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce30_10",
+        "speaker": "F08",
+        "text": "我赢了，怎么罚我？",
+        "actors": [
+          {
+            "id": "F08",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce30_11",
+        "speaker": "F10",
+        "text": "数到你面前，你连数也没报，就掷起来。贾苇索跟你一块儿掷，也叫你带累了。",
+        "actors": [
+          {
+            "id": "F10",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce30_12",
+        "speaker": "JIA",
+        "text": "该罚，该罚。",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce30_13",
+        "speaker": "",
+        "text": "他端起杯子，陶小满按住桌沿。",
+        "actors": []
+      },
+      {
+        "id": "ce30_14",
+        "speaker": "F08",
+        "text": "你站着。这是我带累的，你那杯我替你喝。",
+        "actors": [
+          {
+            "id": "F08",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce30_15",
+        "speaker": "F10",
+        "text": "且请令官验过酒，再商量谁喝。",
+        "actors": [
+          {
+            "id": "F10",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce30_16",
+        "speaker": "F08",
+        "text": "还有这么多规矩？",
+        "actors": [
+          {
+            "id": "F08",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce30_17",
+        "speaker": "F10",
+        "text": "刚才说好的规矩。你怕累赘，就别点头。",
+        "actors": [
+          {
+            "id": "F10",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce30_18",
+        "speaker": "JIA",
+        "text": "知微，你看这杯可满了？",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce30_19",
+        "speaker": "F10",
+        "text": "还浅些。",
+        "actors": [
+          {
+            "id": "F10",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce30_20",
+        "speaker": "F08",
+        "text": "这人真没良心！我替你代酒，倒要多罚一杯。",
+        "actors": [
+          {
+            "id": "F08",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce30_21",
+        "speaker": "JIA",
+        "text": "代酒是私情，行令是公事。",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce30_22",
+        "speaker": "F08",
+        "text": "行，我添满。喝完这一杯，你再与我掷一回。",
+        "actors": [
+          {
+            "id": "F08",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce30_23",
+        "speaker": "",
+        "text": "陶小满添满杯子，先让陆知微看过，一口喝干，又把骰子推到贾苇索手边。",
+        "actors": []
+      }
+    ]
+  },
+  "CE31": {
+    "id": "CE31",
+    "title": "字里的约",
+    "location": "夜间歇处",
+    "background": "res://assets/story/chronicle/camp.png",
+    "music": "story_banter",
+    "conditions": {
+      "owned_all": [
+        "F04",
+        "F09"
+      ],
+      "alive_all": [
+        "F04",
+        "F09"
+      ],
+      "completed_all": [
+        "S05"
+      ]
+    },
+    "character_ids": [
+      "F04",
+      "F09"
+    ],
+    "source_refs": [
+      "西厢记三本二折-读回简"
+    ],
+    "lines": [
+      {
+        "id": "ce31_01",
+        "speaker": "",
+        "text": "贾苇索托钱绮罗捎一封信给柳晚晴，在院边等她回来。钱绮罗一见他便叹气。",
+        "actors": []
+      },
+      {
+        "id": "ce31_02",
+        "speaker": "JIA",
+        "text": "大事如何了？",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce31_03",
+        "speaker": "F04",
+        "text": "不济事了，你休傻。",
+        "actors": [
+          {
+            "id": "F04",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce31_04",
+        "speaker": "JIA",
+        "text": "本大爷那封信写得好，定是你不用心。",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce31_05",
+        "speaker": "F04",
+        "text": "我不用心？你那信好听！差一点连我也跟着挨骂。",
+        "actors": [
+          {
+            "id": "F04",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce31_06",
+        "speaker": "JIA",
+        "text": "那你可替我说了好话？",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce31_07",
+        "speaker": "F04",
+        "text": "我两下里难做人。柳姑娘回你的书，你自己看。",
+        "actors": [
+          {
+            "id": "F04",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce31_08",
+        "speaker": "",
+        "text": "贾苇索接过纸，一看便笑起来。",
+        "actors": []
+      },
+      {
+        "id": "ce31_09",
+        "speaker": "JIA",
+        "text": "有这场喜事！",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce31_10",
+        "speaker": "F04",
+        "text": "怎么？",
+        "actors": [
+          {
+            "id": "F04",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce31_11",
+        "speaker": "JIA",
+        "text": "她嘴上骂我，信里却叫我夜里去见她。",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce31_12",
+        "speaker": "F04",
+        "text": "你读给我听。",
+        "actors": [
+          {
+            "id": "F04",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce31_13",
+        "speaker": "JIA",
+        "text": "待月西厢下，迎风户半开。隔墙花影动，疑是玉人来。",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce31_14",
+        "speaker": "F04",
+        "text": "怎么见得她叫你去？你解给我听。",
+        "actors": [
+          {
+            "id": "F04",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce31_15",
+        "speaker": "JIA",
+        "text": "待月，是叫我月上去；户半开，是她开门等我；花影动，便是叫我过去。",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce31_16",
+        "speaker": "F04",
+        "text": "她说的是花影，你倒说成了你自己。端的有这说法么？",
+        "actors": [
+          {
+            "id": "F04",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce31_17",
+        "speaker": "JIA",
+        "text": "本大爷猜谜从来不错。",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce31_18",
+        "speaker": "F04",
+        "text": "你猜得这样笃定，去了可别怪我传错话。",
+        "actors": [
+          {
+            "id": "F04",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce31_19",
+        "speaker": "",
+        "text": "钱绮罗抱着胳膊看他又将那张纸读了一遍。",
+        "actors": []
+      },
+      {
+        "id": "ce31_20",
+        "speaker": "JIA",
+        "text": "她现在哪里？",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce31_21",
+        "speaker": "F04",
+        "text": "你自己去问她。信是她写的，话也该由她说。",
+        "actors": [
+          {
+            "id": "F04",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce31_22",
+        "speaker": "",
+        "text": "贾苇索拿着信进了院。柳晚晴正在檐下收拾曲本，见他过来，抬起眼。",
+        "actors": []
+      },
+      {
+        "id": "ce31_23",
+        "speaker": "F09",
+        "text": "你怎么进来了？",
+        "actors": [
+          {
+            "id": "F09",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce31_24",
+        "speaker": "JIA",
+        "text": "你不是叫我待月吗？",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce31_25",
+        "speaker": "F09",
+        "text": "我写的是待月，什么时候叫你自己进来了？",
+        "actors": [
+          {
+            "id": "F09",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce31_26",
+        "speaker": "JIA",
+        "text": "门半开着，我当你在等我。",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce31_27",
+        "speaker": "F09",
+        "text": "门开着，也得先问我。你倒好，替我把话都说完了。",
+        "actors": [
+          {
+            "id": "F09",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce31_28",
+        "speaker": "JIA",
+        "text": "那我现在问：你肯不肯陪我等？",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce31_29",
+        "speaker": "F09",
+        "text": "今晚不肯。先出去。",
+        "actors": [
+          {
+            "id": "F09",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce31_30",
+        "speaker": "JIA",
+        "text": "这就变卦了？",
+        "actors": [
+          {
+            "id": "JIA",
+            "slot": "left",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce31_31",
+        "speaker": "F09",
+        "text": "信你猜得高兴，进门倒忘了问。出去，我还要关门呢。",
+        "actors": [
+          {
+            "id": "F09",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce31_32",
+        "speaker": "",
+        "text": "贾苇索只得退到院外，拿着那张信，又看了一遍。柳晚晴把门掩上，隔着门轻轻笑了一声。",
+        "actors": []
+      }
+    ]
+  },
+  "CE32": {
+    "id": "CE32",
+    "title": "那把扇子",
+    "location": "夜间歇处",
+    "background": "res://assets/story/chronicle/camp.png",
+    "music": "story_banter",
+    "conditions": {
+      "owned_all": [
+        "F04",
+        "F09"
+      ],
+      "alive_all": [
+        "F04",
+        "F09"
+      ],
+      "completed_all": [
+        "S05"
+      ],
+      "event_read_all": [
+        "CE29"
+      ]
+    },
+    "character_ids": [
+      "F04",
+      "F09"
+    ],
+    "source_refs": [
+      "梼杌闲评03-还扇相会"
+    ],
+    "lines": [
+      {
+        "id": "ce32_01",
+        "speaker": "",
+        "text": "柳晚晴到歇脚处找钱绮罗。两人先前说好见面，她在门边等了一阵，却不知钱绮罗去了哪里。",
+        "actors": []
+      },
+      {
+        "id": "ce32_02",
+        "speaker": "",
+        "text": "她把扇子放在桌上，走出门望了一眼；再回来时，扇子不见了。",
+        "actors": []
+      },
+      {
+        "id": "ce32_03",
+        "speaker": "F09",
+        "text": "我的扇子，你可看见了？",
+        "actors": [
+          {
+            "id": "F09",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce32_04",
+        "speaker": "",
+        "text": "屋里的人说，方才有人拾到，送到里屋去了。柳晚晴跟着进去，正见钱绮罗拿着扇子出来。",
+        "actors": []
+      },
+      {
+        "id": "ce32_05",
+        "speaker": "F04",
+        "text": "你可来了。请里头坐。",
+        "actors": [
+          {
+            "id": "F04",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce32_06",
+        "speaker": "F09",
+        "text": "我刚才就在门外等，不知道你在里面。",
+        "actors": [
+          {
+            "id": "F09",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce32_07",
+        "speaker": "F04",
+        "text": "是我不好，教你等了。扇子还你，坐下，我给你倒茶。",
+        "actors": [
+          {
+            "id": "F04",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce32_08",
+        "speaker": "",
+        "text": "柳晚晴收起扇子，两人挨着坐下说话。钱绮罗轻轻握住她的手，她没有抽开；过了一会儿，她看了看天色。",
+        "actors": []
+      },
+      {
+        "id": "ce32_09",
+        "speaker": "F09",
+        "text": "我要走了。改日再来看你。",
+        "actors": [
+          {
+            "id": "F09",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce32_10",
+        "speaker": "F04",
+        "text": "这么快？茶还没喝完。",
+        "actors": [
+          {
+            "id": "F04",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce32_11",
+        "speaker": "F09",
+        "text": "要回去一趟。这个给你，买些吃的。",
+        "actors": [
+          {
+            "id": "F09",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce32_12",
+        "speaker": "",
+        "text": "她从袖里取出一小包银子，钱绮罗却推回去。",
+        "actors": []
+      },
+      {
+        "id": "ce32_13",
+        "speaker": "F04",
+        "text": "这是什么话？我岂是图你的钱？",
+        "actors": [
+          {
+            "id": "F04",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce32_14",
+        "speaker": "F09",
+        "text": "那我收着。",
+        "actors": [
+          {
+            "id": "F09",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce32_15",
+        "speaker": "F04",
+        "text": "你有空就来坐坐，比什么都好。",
+        "actors": [
+          {
+            "id": "F04",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce32_16",
+        "speaker": "",
+        "text": "钱绮罗把银包放回柳晚晴袖中，摸到那把扇子，又抽了出来。",
+        "actors": []
+      },
+      {
+        "id": "ce32_17",
+        "speaker": "F04",
+        "text": "倒是这把扇子，送我罢。",
+        "actors": [
+          {
+            "id": "F04",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce32_18",
+        "speaker": "F09",
+        "text": "你既然喜欢，就送你。",
+        "actors": [
+          {
+            "id": "F09",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce32_19",
+        "speaker": "F04",
+        "text": "那我收下了。",
+        "actors": [
+          {
+            "id": "F04",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce32_20",
+        "speaker": "F09",
+        "text": "下回你再找不到我，拿这扇子招一招，我兴许就来了。",
+        "actors": [
+          {
+            "id": "F09",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "ce32_21",
+        "speaker": "F04",
+        "text": "好，我就在门边等着。",
+        "actors": [
+          {
+            "id": "F04",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -27,6 +27,12 @@ class GuardedCampaign extends "res://scripts/campaign/campaign_service.gd":
 	func save_story_checkpoint(event_id: String, line_id: String) -> bool:
 		return false if blocked("save_story_checkpoint") else super.save_story_checkpoint(event_id, line_id)
 
+	func save_optional_story_checkpoint(id: String, line: String) -> bool:
+		return false if blocked("save_optional_story_checkpoint") else super.save_optional_story_checkpoint(id, line)
+
+	func complete_optional_story(id: String) -> bool:
+		return false if blocked("complete_optional_story") else super.complete_optional_story(id)
+
 	func resolve_event() -> bool:
 		return false if blocked("resolve_event") else super.resolve_event()
 
@@ -276,8 +282,8 @@ func effects_replay(after_emma: Dictionary) -> void:
 	shell.open_page("journal")
 	await frames()
 	watch()
-	expect(shell.replayable_stories() == ["S01", "S02", "S03", "S04", "F01", "S05"], "only completed authored event/spring scripts enter journal")
-	expect(not shell.open_story_replay("S07") and not shell.open_story_replay("F02"), "unproduced event/spring summaries have no replay")
+	expect(shell.replayable_stories() == ["S01", "S02", "S03", "S04", "F01", "S05", "S07", "F02"], "all completed authored event/spring scripts enter journal")
+	expect(not shell.open_story_replay("S08") and not shell.open_story_replay("F03"), "unseen authored event/spring scripts stay gated")
 	for id in ["S03", "S04", "S05", "F01"]:
 		await click("journal_replay_" + id)
 		if id == "F01":
