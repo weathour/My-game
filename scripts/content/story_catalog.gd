@@ -47,12 +47,14 @@ static func validate() -> Array[String]:
 		var event: Dictionary = events()[id]
 		if event.get("id") != id or str(event.get("title", "")).is_empty() or str(event.get("location", "")).is_empty():
 			errors.append("Invalid story identity: " + id)
-		if event.get("music") not in MUSIC.CUES: errors.append("Unknown story music: " + id)
+		if not MUSIC.has_cue(str(event.get("music", ""))): errors.append("Unknown story music: " + id)
 		if not FileAccess.file_exists(str(event.get("background", ""))): errors.append("Missing story background: " + id)
 		var seen: Dictionary = {}
 		var lines: Array = event.get("lines", [])
 		if lines.is_empty(): errors.append("Story has no lines: " + id)
 		for line: Dictionary in lines:
+			for field in ["music", "stinger"]:
+				if line.has(field) and not MUSIC.has_cue(str(line[field])): errors.append("Unknown line music: " + id + "/" + str(line.get("id", "")))
 			var key := str(line.get("id", ""))
 			if key.is_empty() or seen.has(key) or str(line.get("text", "")).is_empty(): errors.append("Invalid story line: " + id + "/" + key)
 			seen[key] = true

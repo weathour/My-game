@@ -1,0 +1,31 @@
+{
+  "manifest_frozen": true,
+  "manifest_file_sha256": "675b67fbda3658b61b021286feb8792124c4aba6bb2d89363f0c612865214ce8",
+  "manifest_locked_file_count": 2082,
+  "manifest_locked_bytes": 1860631202,
+  "python": "3.12.3",
+  "numpy": "2.4.4",
+  "scipy": "1.17.1",
+  "renderer": "my-game-multisample-3.1",
+  "sample_cache": "~/.cache/my-game/music-instruments",
+  "evidence": {
+    "unit_tests": "engine-evidence/unit-tests-v3_1.txt",
+    "p0_render": "engine-evidence/p0-render-report.json",
+    "p0_reaper": "engine-evidence/reaper-p0.json",
+    "full_emma_reaper": "engine-evidence/reaper-character-emma-v3.json"
+  },
+  "listening_review": false,
+  "p0_note": "Initial P0 evidence is historical v1. Source-channel and exact time-selection evidence remains v3. Current 3.1 release adds only one declared region gain override, with 11 tests and a freshly rendered hero_main REAPER reconstruction. No unchanged music was rerendered solely for a version label.",
+  "source_change_policy": "Pinned source WAV/SFZ bytes, hashes and commits unchanged. v3 source-channel policy retained. Exactly one reviewed effective local mapping exception: FHornStac D4_v2_rr2 region volume +12→0; raw upstream value is preserved in the manifest and override declaration is applied by shared fetch/render loader.",
+  "source_channel_investigation": "engine-evidence/stereo-source-investigation.json",
+  "characters_channel_preflight": "engine-evidence/characters-v3-channel-preflight.json",
+  "v3_reaper_verification": "engine-evidence/reaper-character-emma-v3.json",
+  "characters_16_audit": "engine-evidence/characters-16-render-audit-v3.json",
+  "exact_reaper_render_boundary_fix": "engine-evidence/reaper-exact-boundary-fix.json",
+  "exact_reaper_2_4_reconstruction": "checks/military-reaper-2_4-v3-exact/result.json",
+  "local_mapping_override_evidence": "engine-evidence/fhorn-staccato-rr-investigation.json",
+  "local_mapping_override_repro": "engine-evidence/local-mapping-override-repro.json",
+  "local_mapping_affected_preflight": "engine-evidence/fhorn-rr-affected-preflight.json",
+  "local_mapping_render_audit": "engine-evidence/fhorn-rr-render-audit.json",
+  "v3_1_reaper_verification": "checks/horn-rr-fixed-reaper-hero/result.json"
+}

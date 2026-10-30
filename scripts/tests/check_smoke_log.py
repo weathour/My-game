@@ -20,6 +20,13 @@ SUCCESS_CANDIDATE = re.compile(
 )
 KEY_VALUE = re.compile(r"([A-Za-z][A-Za-z0-9_]*)=([A-Za-z0-9_./:+-]+)\Z")
 FAIL_WORD = re.compile(r"(?i)(?:^|[^A-Za-z0-9])(?:FAIL(?:ED)?|ERROR)(?:$|[^A-Za-z0-9])")
+# These integration tests must finish their own complete assertion sequence;
+# an incidental success line from a loaded subsystem cannot substitute for it.
+REQUIRED_SUCCESS = {
+    "chronicle_enemy_pack_smoke": "ENEMY_PACK_SMOKE PASS",
+    "chronicle_music_pack_smoke": "CHRONICLE_MUSIC_PACK_SMOKE PASS",
+    "chronicle_music_playback_smoke": "CHRONICLE_MUSIC_PLAYBACK_SMOKE PASS",
+}
 # Match the test, exact preceding marker and exact error together. Never
 # blanket-ignore ERROR, /proc errors, or arbitrary lines after a fault marker.
 FAULTS = {
@@ -79,7 +86,9 @@ def validate(name: str, text: str) -> list[str]:
                 fields[key] = value
             bad_annotation = FAIL_WORD.search(line) is not None
             if not duplicate_field and not bad_annotation and fields.get("failures", "0") == "0" and fields.get("checks", "0").isdigit():
-                success = True
+                required = REQUIRED_SUCCESS.get(name)
+                if required is None or line == required or line.startswith(required + " "):
+                    success = True
             else:
                 failures.append(line)
         elif SUCCESS_CANDIDATE.match(line):

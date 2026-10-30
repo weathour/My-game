@@ -2,6 +2,7 @@ extends Control
 ## Presentation-only visual-novel reader. The owner commits progress before show_line().
 signal advance_requested(line_id: String)
 signal leave_requested
+signal line_presented(line_id: String)
 
 const STYLE := preload("res://scripts/ui/chronicle/chronicle_theme.gd")
 const PORTRAITS := preload("res://scripts/ui/chronicle/chronicle_portraits.gd")
@@ -244,6 +245,7 @@ func show_line(line_id: String) -> void:
 	_pending = false
 	_error.hide()
 	var line: Dictionary = _lines[_line_index] if _line_index >= 0 else {}
+	line_presented.emit(line_id)
 	_title.text = str(_event.get("title", "剧情"))
 	_location.text = str(line.get("location", _event.get("location", "")))
 	if _replay:

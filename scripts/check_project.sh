@@ -90,8 +90,9 @@ if [[ -n "$GODOT_BIN" ]]; then
     name="$(basename "${script%.gd}")"
     [[ "$name" == "boss_danmaku_stress_smoke" ]] && limit=240
     log="$CHECK_LOG_DIR/${name}.log"
-    # Pixel assertions need a real renderer; CI supplies a virtual X display.
-    if [[ "$name" == *_render_smoke ]]; then
+    # Pixel assertions and actual music playback need a real display; CI
+    # supplies Xvfb. Dummy still decodes/mixes audio without a hardware device.
+    if [[ "$name" == *_render_smoke || "$name" == "chronicle_music_playback_smoke" ]]; then
       display_args=(--rendering-method gl_compatibility --audio-driver Dummy)
     fi
     echo "== Godot ${name//_/ } =="
@@ -105,61 +106,64 @@ if [[ -n "$GODOT_BIN" ]]; then
     fi
   }
 
-  run_enemy_pack_smoke() {
-    local name="chronicle_enemy_pack_smoke"
-    local pack_dir="$CHECK_DATA_DIR/enemy-pack-smoke"
+  run_pack_smokes() {
+    local pack_dir="$CHECK_DATA_DIR/pack-smokes"
     local empty_dir="$pack_dir/empty-cwd"
-    local external_script="$pack_dir/$name.gd"
     local pack="$pack_dir/game.pck"
-    local export_log="$CHECK_LOG_DIR/$name-export.log"
-    local log="$CHECK_LOG_DIR/$name.log"
-    mkdir -p "$empty_dir" "$pack_dir/user-data"
-    cp scripts/tests/chronicle_enemy_pack_smoke.gd "$external_script"
+    local export_log="$CHECK_LOG_DIR/chronicle-pack-export.log"
+    local name external_script log
+    mkdir -p "$empty_dir"
 
-    echo "== Godot Linux development pack export for $name =="
+    echo "== Godot Linux development pack export for isolated pack smokes =="
     if ! XDG_DATA_HOME="$pack_dir/export-data" XDG_CONFIG_HOME="$pack_dir/export-config" \
         timeout 300s "$GODOT_BIN" --headless --path "$ROOT" --export-pack "Linux development" "$pack" \
         >"$export_log" 2>&1; then
       tail -n 80 "$export_log"
-      echo "${name^^}_EXPORT_FAILED"
+      echo "CHRONICLE_PACK_EXPORT_FAILED"
       exit 1
     fi
     if grep -E "$GODOT_ERROR_PATTERN" "$export_log"; then
-      echo "${name^^}_EXPORT_DIAGNOSTIC_FAILED"
+      echo "CHRONICLE_PACK_EXPORT_DIAGNOSTIC_FAILED"
       exit 1
     fi
     if [[ ! -s "$pack" ]]; then
-      echo "${name^^}_PACK_MISSING"
+      echo "CHRONICLE_PACK_MISSING"
       exit 1
     fi
     if [[ -e "$empty_dir/project.godot" || -d "$empty_dir/scripts" || -d "$empty_dir/assets" ]]; then
-      echo "${name^^}_EMPTY_CWD_CONTAMINATED"
+      echo "CHRONICLE_PACK_EMPTY_CWD_CONTAMINATED"
       exit 1
     fi
 
-    echo "== Godot isolated main-pack smoke from empty cwd =="
-    if ! (
-      cd "$empty_dir"
-      XDG_DATA_HOME="$pack_dir/user-data" XDG_CONFIG_HOME="$pack_dir/user-config" \
-        timeout 120s "$GODOT_BIN" --headless --path "$empty_dir" --main-pack "$pack" --script "$external_script"
-    ) 2>&1 | tee "$log"; then
-      echo "${name^^}_FAILED"
-      exit 1
-    fi
-    if ! python3 scripts/tests/check_smoke_log.py "$external_script" "$log"; then
-      exit 1
-    fi
+    for name in chronicle_enemy_pack_smoke chronicle_music_pack_smoke; do
+      external_script="$pack_dir/$name.gd"
+      log="$CHECK_LOG_DIR/$name.log"
+      cp "scripts/tests/$name.gd" "$external_script"
+      echo "== Godot $name against isolated main pack from empty cwd =="
+      if ! (
+        cd "$empty_dir"
+        XDG_DATA_HOME="$pack_dir/$name/data" XDG_CONFIG_HOME="$pack_dir/$name/config" \
+          timeout 120s "$GODOT_BIN" --headless --path "$empty_dir" --main-pack "$pack" --script "$external_script"
+      ) 2>&1 | tee "$log"; then
+        echo "${name^^}_FAILED"
+        exit 1
+      fi
+      if ! python3 scripts/tests/check_smoke_log.py "$external_script" "$log"; then
+        exit 1
+      fi
+    done
   }
 
-  # This test is excluded from the PCK and must run externally against the
-  # exported main pack, with no source project available to satisfy res:// loads.
-  run_enemy_pack_smoke
+  # These tests are excluded from the PCK and must run externally against one
+  # shared export, with no source project available to satisfy res:// loads.
+  run_pack_smokes
 
   for smoke in scripts/tests/*_smoke.gd; do
     # The dense benchmark is deliberately separate because it compares two
     # timed cases and writes result artifacts.
     [[ "$(basename "$smoke")" == "dense_combat_benchmark_smoke.gd" ]] && continue
     [[ "$(basename "$smoke")" == "chronicle_enemy_pack_smoke.gd" ]] && continue
+    [[ "$(basename "$smoke")" == "chronicle_music_pack_smoke.gd" ]] && continue
     run_smoke "$smoke"
   done
 

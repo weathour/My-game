@@ -12,6 +12,7 @@ const TERRAIN := preload("res://assets/ui/chronicle/baimen-terrain.png")
 const EMMA := preload("res://assets/ui/chronicle/emma.png")
 const SETTINGS := preload("res://scripts/game_settings.gd")
 const BGM := preload("res://scripts/bgm_player.gd")
+const MUSIC_CONTEXT := preload("res://scripts/audio/chronicle_music.gd")
 const MUSIC := preload("res://scripts/audio/music_catalog.gd")
 const STORIES := preload("res://scripts/content/story_catalog.gd")
 const CODEX := preload("res://scripts/ui/chronicle/enemy_codex.gd")
@@ -57,10 +58,17 @@ var bgm: AudioStreamPlayer
 var music_preview: AudioStreamPlayer
 var music_index := 0
 var music_return := "home"
+var music_seeking := false
 var scroll_memory := {}
 var focus_memory := {}
 var rendered_page := ""
 var _render_queued := false
+var music_tracks: Array[String] = []
+var _preview_snapshot := {}
+var _replay_snapshot := {}
+var _return_music_snapshot := {}
+var _last_story_music_line := ""
+var _battle_music_outcome := ""
 
 func _ready() -> void:
 	theme = STYLE.make_theme()
@@ -69,6 +77,8 @@ func _ready() -> void:
 	session.problem.connect(_on_session_problem)
 	bgm = BGM.new()
 	bgm.name = "ChronicleMusic"
+	bgm.initial_cue = "title_overture"
+	bgm.context_id = "page:home"
 	add_child(bgm)
 	resized.connect(queue_render)
 	render()
@@ -88,7 +98,9 @@ func open_page(value: String) -> void:
 	PAGES.PARTY.cancel_interaction(self)
 	if is_instance_valid(character_sheet): close_character_sheet(false)
 	if page == "music" and value != "music": close_music()
-	if page == "replay" and value != "replay": _clear_story_replay()
+	if page == "replay" and value != "replay":
+		if value == replay_return: _return_music_snapshot = _replay_snapshot
+		_clear_story_replay()
 	if value in ["roster", "equipment", "preparation"] and page not in ["roster", "equipment", "preparation", "character"]:
 		party_return = "route" if value == "preparation" else page
 		party_preparation = value == "preparation"
@@ -97,6 +109,7 @@ func open_page(value: String) -> void:
 	if value in ["roster", "equipment", "saves", "settings", "journal"] and page in ["world", "route", "home", "reward", "preparation", "event", "menu"]:
 		previous_page = page
 	page = value
+	_sync_page_music()
 	render()
 
 func resume() -> void:
@@ -115,6 +128,7 @@ func resume_view(enter_event: bool = false) -> void:
 	var battle_story: bool = session.has_method("awaiting_battle_story") and session.awaiting_battle_story()
 	if page == "route" and (battle_story or (session.nodes[selected_node].kind in ["event", "spring"] and (enter_event or checkpoint.get("event") == selected_node))):
 		page = "event"
+	_sync_page_music()
 	render()
 
 func render() -> void:
@@ -204,10 +218,11 @@ func build_story() -> void:
 	story_view = STORY_VIEW.new()
 	story_view.name = "CampaignStory"
 	story_view.setup(event, line)
+	story_view.line_presented.connect(_on_story_music_line.bind(event, false))
 	story_view.advance_requested.connect(_advance_story)
 	story_view.leave_requested.connect(func(): open_page("route"))
 	body.add_child(story_view)
-	bgm.set_cue(str(event.get("music", "camp_signal")))
+	_apply_music("story:" + id, MUSIC_CONTEXT.story_cue(event, line))
 	if checkpoint != {"event":id, "line":line} and session.has_method("save_story_checkpoint"):
 		if not session.save_story_checkpoint(id, line): story_view.show_error("未能保存阅读位置，请重试。")
 
@@ -239,6 +254,8 @@ func replayable_stories() -> Array[String]:
 
 func open_story_replay(id: String, return_page: String = "route") -> bool:
 	if not can_replay_story(id): return false
+	_replay_snapshot = _music_snapshot(return_page)
+	_last_story_music_line = ""
 	replay_event = id
 	replay_line = STORIES.line_id(STORIES.for_node(session.nodes[id]))
 	replay_return = "journal" if return_page == "journal" else "route"
@@ -256,10 +273,11 @@ func build_story_replay() -> void:
 	story_view.name = "CampaignStoryReplay"
 	story_view.setup(event, replay_line)
 	# A separate callback owns replay. It has no campaign commit/resolve call.
+	story_view.line_presented.connect(_on_story_music_line.bind(event, true))
 	story_view.advance_requested.connect(_advance_story_replay)
 	story_view.leave_requested.connect(close_story_replay)
 	body.add_child(story_view)
-	bgm.set_cue(str(event.get("music", "camp_signal")))
+	_apply_music("replay:" + replay_event, MUSIC_CONTEXT.story_cue(event, replay_line))
 
 func _advance_story_replay(line: String) -> void:
 	if page != "replay" or not is_instance_valid(story_view): return
@@ -276,10 +294,11 @@ func _advance_story_replay(line: String) -> void:
 func close_story_replay() -> void:
 	if page != "replay": return
 	var target := replay_return
-	_clear_story_replay()
 	open_page(target)
 
 func _clear_story_replay() -> void:
+	_replay_snapshot = {}
+	_last_story_music_line = ""
 	replay_event = ""
 	replay_line = ""
 	replay_return = "route"
@@ -450,9 +469,13 @@ func start_battle() -> void:
 	var request: Dictionary = session.start_battle()
 	if request.is_empty(): return
 	page = "battle"
+	_battle_music_outcome = ""
+	bgm.context_id = "battle:" + str(request.node.id)
+	bgm.restart_cue(MUSIC_CONTEXT.node_cue(str(request.node.id)))
 	frame.hide()
 	battle_view = battle_script.new()
 	battle_view.setup(request, session.characters)
+	if battle_view.has_signal("music_context_changed"): battle_view.music_context_changed.connect(_on_battle_music_context)
 	battle_view.completed.connect(finish_battle)
 	battle_view.failed.connect(func():
 		close_battle()
@@ -463,7 +486,6 @@ func start_battle() -> void:
 		session.abandon_battle()
 		resume_view())
 	add_child(battle_view)
-	bgm.set_cue("stage_frontpost" if request.node.id == "B01" else "stage_rift")
 
 func finish_battle(result: Dictionary) -> void:
 	if session.complete_battle(result):
@@ -476,7 +498,7 @@ func close_battle() -> void:
 		battle_view.queue_free()
 	page = "route"
 	frame.show()
-	bgm.set_cue("camp_signal")
+	bgm.resume_music()
 
 func show_notice(message: String) -> void:
 	confirm("行军提示", message, Callable(), false)
@@ -529,9 +551,14 @@ func _focus_control(reference: WeakRef) -> void:
 		control.grab_focus()
 
 func open_music() -> void:
+	if page == "music": return
 	music_return = page
 	previous_page = page
+	_preview_snapshot = _music_snapshot(page)
+	bgm.cancel_stinger()
 	bgm.pause_music()
+	music_tracks = MUSIC.chapter_cues()
+	if music_tracks.is_empty(): music_tracks.assign(MUSIC.CUES)
 	music_preview = AudioStreamPlayer.new()
 	add_child(music_preview)
 	music_preview.finished.connect(render)
@@ -540,11 +567,18 @@ func open_music() -> void:
 
 func play_track(index: int) -> void:
 	if not is_instance_valid(music_preview): return
-	music_index = posmod(index, MUSIC.CUES.size())
-	var stream := load(MUSIC.path(MUSIC.CUES[music_index])) as AudioStream
+	var next_index := posmod(index, music_tracks.size())
+	var resource_path := MUSIC.path(music_tracks[next_index])
+	var stream := load(resource_path) as AudioStream if ResourceLoader.exists(resource_path) else null
 	if stream == null:
 		show_notice("这首配乐暂时无法读取。")
 		return
+	music_seeking = false
+	music_index = next_index
+	music_preview.volume_linear = 0.0 if BGM.load_music_muted() else BGM.load_music_volume()
+	# Preview plays the published original mix once; duplicate to keep bed loop settings private.
+	stream = stream.duplicate()
+	if stream is AudioStreamOggVorbis: stream.loop = false
 	music_preview.stream = stream
 	music_preview.stream_paused = false
 	music_preview.play()
@@ -555,7 +589,8 @@ func close_music() -> void:
 		music_preview.stop()
 		music_preview.queue_free()
 		music_preview = null
-	bgm.resume_music()
+	_return_music_snapshot = _preview_snapshot
+	_preview_snapshot = {}
 
 func _process(_delta: float) -> void:
 	if page != "music" or not is_instance_valid(music_preview): return
@@ -564,7 +599,7 @@ func _process(_delta: float) -> void:
 	var clock := frame.find_child("music_clock", true, false) as Label
 	if seek == null or music_preview.stream == null: return
 	var position := music_preview.get_playback_position()
-	seek.set_value_no_signal(position)
+	if not music_seeking: seek.set_value_no_signal(position)
 	clock.text = "%02d:%02d / %02d:%02d" % [int(position) / 60, int(position) % 60, int(seek.max_value) / 60, int(seek.max_value) % 60]
 
 func _unhandled_key_input(event: InputEvent) -> void:
@@ -587,3 +622,61 @@ func _unhandled_key_input(event: InputEvent) -> void:
 			elif page == "music": open_page(music_return)
 			else: open_page("home")
 		get_viewport().set_input_as_handled()
+
+func _session_music_key() -> String:
+	return JSON.stringify(session.data)
+
+func _music_snapshot(return_page: String) -> Dictionary:
+	return {"playback":bgm.capture_snapshot(), "session":_session_music_key(), "page":return_page}
+
+func _sync_page_music() -> void:
+	if not _return_music_snapshot.is_empty():
+		var saved := _return_music_snapshot
+		_return_music_snapshot = {}
+		if saved.get("session") == _session_music_key() and saved.get("page") == page:
+			bgm.restore_snapshot(saved.playback)
+			return
+		bgm.resume_music()
+	if page in ["music", "replay", "event", "battle"]: return
+	_last_story_music_line = ""
+	var cue := MUSIC_CONTEXT.page_cue(page, str(session.data.current), "preparation" if party_preparation else previous_page)
+	if cue.is_empty(): return
+	# A pending result stinger owns the short battle tail until its natural completion.
+	if page in ["reward", "failure"] and bgm.context_id == "result:" + str(session.data.current): return
+	_apply_music("page:" + page, cue)
+
+func _apply_music(context: String, cue: String) -> void:
+	var changed: bool = bgm.context_id != context
+	if changed:
+		bgm.cancel_stinger()
+		bgm.context_id = context
+	bgm.set_cue(cue)
+	if changed: bgm.resume_music()
+
+func _on_story_music_line(line: String, event: Dictionary, replay: bool) -> void:
+	var id := str(event.get("id", ""))
+	_apply_music(("replay:" if replay else "story:") + id, MUSIC_CONTEXT.story_cue(event, line))
+	var key := ("replay:" if replay else "story:") + id + ":" + line
+	if key == _last_story_music_line: return
+	_last_story_music_line = key
+	var cue := MUSIC_CONTEXT.line_stinger(event, line)
+	if not cue.is_empty(): bgm.play_stinger(cue)
+
+func _on_battle_music_context(id: String, form_index: int, paused: bool, outcome: String) -> void:
+	if page != "battle": return
+	if paused: bgm.pause_music()
+	else: bgm.resume_music()
+	if not outcome.is_empty():
+		if outcome == _battle_music_outcome: return
+		_battle_music_outcome = outcome
+		bgm.context_id = "result:" + id
+		bgm.cancel_stinger()
+		if outcome == "failed":
+			bgm.play_stinger("stinger_defeat", "story_solitude")
+		elif id not in MUSIC_CONTEXT.SERIOUS_RESULTS:
+			bgm.play_stinger("stinger_important_victory" if id == "B18" else "stinger_victory", "results_flow")
+		return
+	var cue := MUSIC_CONTEXT.battle_cue(id, form_index)
+	if cue != bgm.current_cue:
+		bgm.set_cue(cue, 0.65)
+		if form_index > 0: bgm.play_stinger("stinger_transform")

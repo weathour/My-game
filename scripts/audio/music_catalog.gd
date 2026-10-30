@@ -24,16 +24,49 @@ const ENCOUNTERS := {
 }
 const STAGES := {"chapter1_stage1": "stage_frontpost", "chapter1_stage2": "stage_rift", "chapter1_stage3": "stage_core"}
 
+const MANIFEST := "res://assets/data/audio/music_catalog.json"
+static var _chapter: Dictionary = {}
+static var _loaded := false
 static var arrival_cue: String = ""
 
+static func chapter_cues() -> Array[String]:
+	_load_chapter()
+	var result: Array[String] = []
+	for id: String in _chapter: result.append(id)
+	return result
+
+static func info(cue: String) -> Dictionary:
+	_load_chapter()
+	return _chapter.get(cue, TRACK_INFO.get(cue, {})).duplicate(true)
+
+static func has_cue(cue: String) -> bool:
+	_load_chapter()
+	return cue in CUES or _chapter.has(cue)
+
+static func _load_chapter() -> void:
+	if _loaded: return
+	_loaded = true
+	if not FileAccess.file_exists(MANIFEST): return
+	var parsed: Variant = JSON.parse_string(FileAccess.get_file_as_string(MANIFEST))
+	if not parsed is Dictionary: return
+	for entry: Dictionary in parsed.get("cues", []):
+		var id := str(entry.get("id", ""))
+		if not id.is_empty(): _chapter[id] = entry.duplicate(true)
+
+
 static func path(cue: String) -> String:
-	return "res://assets/music/%s.ogg" % cue if cue in CUES else ""
+	_load_chapter()
+	return str(_chapter[cue].get("path", "")) if _chapter.has(cue) else "res://assets/music/%s.ogg" % cue if cue in CUES else ""
 
 static func is_one_shot(cue: String) -> bool:
-	return cue in ["victory", "defeat"]
+	return cue in ["victory", "defeat"] or (has_cue(cue) and not bool(info(cue).get("loop", true)))
 
 static func same_phase_family(from: String, to: String) -> bool:
-	return from.begins_with("boss_spellcore_") and to.begins_with("boss_spellcore_")
+	if from.begins_with("boss_spellcore_") and to.begins_with("boss_spellcore_"): return true
+	var a := info(from)
+	var b := info(to)
+	var family := str(a.get("phase_family", ""))
+	return not family.is_empty() and family == str(b.get("phase_family", "")) and a.get("bpm") == b.get("bpm") and a.get("beats") == b.get("beats") and bool(a.get("loop", false)) and bool(b.get("loop", false))
 
 static func wave_cue(wave: int) -> String:
 	if wave in [7, 12, 17]:

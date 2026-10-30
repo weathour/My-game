@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 """Make loop-safe, level-matched 48 kHz masters and game Vorbis from REAPER renders."""
 import hashlib
+import argparse
 import fcntl
 import json
 import math
 from pathlib import Path
 import subprocess
-import sys
 import tempfile
 
 import numpy as np
@@ -15,6 +15,8 @@ from scipy.io import wavfile
 HERE = Path(__file__).resolve().parent
 RAW = Path('/tmp/mygame-music-render')
 GAME = HERE.parents[1] / 'assets' / 'music'
+MASTERS = HERE / 'masters'
+QA = HERE / 'audio-qa.json'
 
 
 def ffmpeg(*args):
@@ -31,11 +33,11 @@ def sha(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
-def main():
+def main(selected_ids):
     cues = json.loads((HERE / 'cue-sheet.json').read_text())
-    selected = set(sys.argv[1:]) or {c['id'] for c in cues}
+    selected = set(selected_ids) or {c['id'] for c in cues}
     assert selected <= {c['id'] for c in cues}
-    qa_path = HERE / 'audio-qa.json'
+    qa_path = QA
     reports = json.loads(qa_path.read_text()) if qa_path.exists() else {}
     completed = (RAW / 'render.log').read_text()
     for cue in cues:
@@ -79,7 +81,7 @@ def main():
             # Linear gain keeps phrasing intact. Reserve room for both crossfading
             # streams; encoded true peak is checked again below.
             gain = min(cue['target_lufs'] - float(pre['input_i']), -3.5 - float(pre['input_tp']))
-            master = HERE / 'masters' / (cue_id + '.flac')
+            master = MASTERS / (cue_id + '.flac')
             ffmpeg('-i', loop_file, '-af', f'volume={gain:.6f}dB', '-c:a', 'flac', '-sample_fmt', 's32', '-bits_per_raw_sample', '24', '-compression_level', '8', '-metadata', 'title=' + cue['title'], '-metadata', 'artist=My-game original score', master)
             ogg = GAME / (cue_id + '.ogg')
             ffmpeg('-i', master, '-c:a', 'libvorbis', '-q:a', '6', '-metadata', 'LOOPSTART=0', '-metadata', f'LOOPEND={len(samples)}', ogg)
@@ -107,7 +109,23 @@ def main():
 
 
 if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('cues', nargs='*', help='Cue IDs; default: every cue')
+    parser.add_argument('--raw', type=Path, default=RAW, help='Verified render_batch.py job directory')
+    parser.add_argument('--output', type=Path, help='New/empty staging directory; omit to update official assets')
+    args = parser.parse_args()
+    RAW = args.raw.resolve()
+    lock_path = HERE / '.master.lock'
+    if args.output:
+        destination = args.output.resolve()
+        if destination.exists() and any(destination.iterdir()):
+            parser.error('Staging output directory is not empty')
+        MASTERS, GAME, QA = destination / 'masters', destination / 'music', destination / 'audio-qa.json'
+        MASTERS.mkdir(parents=True, exist_ok=True)
+        GAME.mkdir()
+        lock_path = destination / '.master.lock'
     # Batch jobs share the QA ledger; never let two writers lose each other's rows.
-    with (RAW / 'master.lock').open('w') as lock:
+    # Lock the shared destination, not the now-independent raw job directories.
+    with lock_path.open('w') as lock:
         fcntl.flock(lock, fcntl.LOCK_EX)
-        main()
+        main(args.cues)

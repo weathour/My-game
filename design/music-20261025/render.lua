@@ -1,14 +1,17 @@
 -- Run in REAPER 7.83 with the bundled Synthy McSynthface and Major General MIDI.
 -- The second cycle is the export region: the first establishes instrument/reverb tails.
-local root = assert(debug.getinfo(1, 'S').source:sub(2):match('^(.*)/[^/]+$'))
-local out = '/tmp/mygame-music-render'
-local cues = dofile(out .. '/score.lua')
+-- The launcher owns this instance and supplies fresh output/project directories.
+local config = assert(MYGAME_RENDER_CONFIG, 'Run through render_batch.py')
+local out = config.output
+local cues = dofile(config.score)
 local log = assert(io.open(out .. '/render.log', 'w'))
 local function checked(ok, message)
   if not ok then log:write('ERROR '..message..'\n'); log:flush(); error(message) end
 end
+local function render_all()
 for _, cue in ipairs(cues) do
-  reaper.Main_OnCommand(40023, 0) -- New project; preceding project was saved.
+  -- Opening our own blank project avoids the normal New Project save dialog.
+  reaper.Main_openProject('noprompt:' .. config.empty_project)
   reaper.SetCurrentBPM(0, cue.bpm, true)
   local duration = cue.beats * 60 / cue.bpm
   local repeats = cue.loop and 2 or 1
@@ -63,10 +66,26 @@ for _, cue in ipairs(cues) do
   reaper.GetSetProjectInfo_String(0, 'RENDER_FORMAT', 'evaw', true)
   reaper.GetSetProjectInfo_String(0, 'RENDER_FILE', out, true)
   reaper.GetSetProjectInfo_String(0, 'RENDER_PATTERN', cue.id, true)
-  reaper.Main_SaveProjectEx(0, root .. '/projects/' .. cue.id .. '.rpp', 8)
+  local project_path = config.projects .. '/' .. cue.id .. '.rpp'
+  reaper.Main_SaveProjectEx(0, project_path, 8)
   log:write('START ' .. cue.id .. '\n'); log:flush()
   reaper.Main_OnCommand(42230, 0) -- Render current settings, auto-close render dialog.
+  -- Rendering can change saved render settings; persist those before switching.
+  reaper.Main_SaveProjectEx(0, project_path, 8)
+  local output = io.open(out .. '/' .. cue.id .. '.wav', 'rb')
+  checked(output ~= nil, cue.id .. ': render produced no WAV')
+  local size = output:seek('end'); output:close()
+  checked(size > 44, cue.id .. ': render produced an empty WAV')
   log:write('DONE ' .. cue.id .. '\n'); log:flush()
 end
-log:write('COMPLETE\n'); log:close()
-reaper.Main_OnCommand(40004, 0)
+log:write('COMPLETE\n')
+end
+
+-- A Lua error must become a failed job, not a modal REAPER error dialog.
+local ok, err = xpcall(render_all, debug.traceback)
+if not ok then log:write('ERROR ' .. tostring(err) .. '\n') end
+log:close()
+reaper.defer(function()
+  reaper.Main_openProject('noprompt:' .. config.empty_project)
+  reaper.Main_OnCommand(40004, 0)
+end)

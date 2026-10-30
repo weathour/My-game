@@ -4,7 +4,7 @@
     "title": "听闻鬼城公主",
     "location": "荒道",
     "background": "res://assets/story/chronicle/road.png",
-    "music": "camp_signal",
+    "music": "hero_daily",
     "lines": [
       {
         "id": "s01_01",
@@ -40,7 +40,9 @@
             "slot": "left",
             "expression": "neutral"
           }
-        ]
+        ],
+        "music": "journey_departure",
+        "stinger": "stinger_departure"
       },
       {
         "id": "s01_05",
@@ -61,7 +63,7 @@
     "title": "艾玛随行",
     "location": "白门楼山道",
     "background": "res://assets/story/chronicle/road.png",
-    "music": "camp_signal",
+    "music": "character_emma_wary",
     "lines": [
       {
         "id": "s02_01",
@@ -371,7 +373,7 @@
     "title": "鬼市落脚",
     "location": "鬼市",
     "background": "res://assets/story/chronicle/market.png",
-    "music": "camp_signal",
+    "music": "region_ghost_market",
     "lines": [
       {
         "id": "s03_01",
@@ -406,7 +408,8 @@
             "slot": "right",
             "expression": "neutral"
           }
-        ]
+        ],
+        "music": "story_comedy"
       },
       {
         "id": "s03_t02",
@@ -707,7 +710,8 @@
             "slot": "left",
             "expression": "neutral"
           }
-        ]
+        ],
+        "music": "story_travel"
       }
     ]
   },
@@ -716,7 +720,7 @@
     "title": "第一批追随者",
     "location": "匪寨寨门",
     "background": "res://assets/story/chronicle/camp.png",
-    "music": "camp_signal",
+    "music": "hero_main",
     "lines": [
       {
         "id": "s04_01",
@@ -757,7 +761,8 @@
             "slot": "right",
             "expression": "neutral"
           }
-        ]
+        ],
+        "music": "story_banter"
       },
       {
         "id": "s04_t02",
@@ -1030,7 +1035,7 @@
     "title": "寨中一夜",
     "location": "寨中",
     "background": "res://assets/story/chronicle/camp.png",
-    "music": "camp_signal",
+    "music": "story_travel",
     "lines": [
       {
         "id": "s05_01",
@@ -1071,7 +1076,8 @@
             "slot": "right",
             "expression": "neutral"
           }
-        ]
+        ],
+        "music": "story_solitude"
       },
       {
         "id": "s05_p02",
@@ -1189,7 +1195,7 @@
     "title": "寨后古井",
     "location": "寨后古井",
     "background": "res://assets/story/chronicle/camp.png",
-    "music": "camp_signal",
+    "music": "rest_spring",
     "lines": [
       {
         "id": "f01_01",
@@ -1210,7 +1216,7 @@
     "title": "荒祠战后",
     "location": "荒祠",
     "background": "res://assets/story/chronicle/camp.png",
-    "music": "camp_signal",
+    "music": "story_aftermath",
     "lines": [
       {
         "id": "b06_01",
@@ -1368,7 +1374,7 @@
     "title": "官印易主",
     "location": "官署外院",
     "background": "res://assets/story/chronicle/market.png",
-    "music": "camp_signal",
+    "music": "story_resolve",
     "lines": [
       {
         "id": "s06_01",
@@ -1420,7 +1426,8 @@
             "slot": "right",
             "expression": "neutral"
           }
-        ]
+        ],
+        "music": "story_banter"
       },
       {
         "id": "s06_05",
@@ -1512,7 +1519,8 @@
             "slot": "right",
             "expression": "neutral"
           }
-        ]
+        ],
+        "music": "story_resolve"
       },
       {
         "id": "s06_11",
@@ -1619,7 +1627,7 @@
     "title": "军阵战后",
     "location": "城外军阵",
     "background": "res://assets/story/chronicle/camp.png",
-    "music": "camp_signal",
+    "music": "story_confrontation",
     "lines": [
       {
         "id": "b15_01",
@@ -1739,7 +1747,7 @@
     "title": "主将战后",
     "location": "鬼曹军阵",
     "background": "res://assets/story/chronicle/camp.png",
-    "music": "camp_signal",
+    "music": "story_confrontation",
     "lines": [
       {
         "id": "b16_01",
@@ -1858,7 +1866,7 @@
     "title": "楼前战后",
     "location": "白门楼前",
     "background": "res://assets/story/chronicle/camp.png",
-    "music": "camp_signal",
+    "music": "story_confrontation",
     "lines": [
       {
         "id": "b17_01",
@@ -1988,7 +1996,7 @@
     "title": "一方之主",
     "location": "白门楼",
     "background": "res://assets/story/chronicle/camp.png",
-    "music": "camp_signal",
+    "music": "baimen_epilogue",
     "lines": [
       {
         "id": "s14_01",
@@ -2040,7 +2048,8 @@
             "slot": "right",
             "expression": "neutral"
           }
-        ]
+        ],
+        "music": "character_lingqi_aftermath"
       },
       {
         "id": "s14_05",
@@ -2114,7 +2123,8 @@
         "id": "s14_09",
         "speaker": "",
         "text": "战事暂歇，各人仍要决定自己的去路；白门楼前的旧怨没有消失。",
-        "actors": []
+        "actors": [],
+        "music": "baimen_epilogue"
       }
     ]
   }

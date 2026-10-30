@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-from check_smoke_log import FAULTS, validate
+from check_smoke_log import FAULTS, REQUIRED_SUCCESS, validate
 
 assert not validate("legacy", "LEGACY_SMOKE_OK\n")
 assert not validate("legacy", "LEGACY_SMOKE: PASS\n")
@@ -24,6 +24,11 @@ assert validate("skill_manual_mode_smoke", skill_notes) == ["missing successful 
 assert validate("new", "SCRIPT ERROR: unexpected\nNEW_SMOKE PASS\n")
 assert validate("new", "NEW_SMOKE FAIL 1\nNEW_SMOKE PASS\n")
 assert validate("new", "Godot Engine\n")
+for name, marker in REQUIRED_SUCCESS.items():
+    assert not validate(name, marker + " checks=26 failures=0\n")
+    assert validate(name, "UNRELATED_SMOKE_OK\n")
+    assert validate(name, marker + " checks=26 failures=1\n")
+    assert validate(name, marker + " checks=26 failures=0\nERROR: unexpected\n")
 for name, faults in FAULTS.items():
     for marker, error in faults.items():
         assert not validate(name, marker + "\n" + error + "\nSMOKE_OK\n")

@@ -1,0 +1,452 @@
+{
+  "ready_for_master": true,
+  "listening_review": false,
+  "engine": "my-game-multisample-3.1",
+  "manifest_file_sha256": "675b67fbda3658b61b021286feb8792124c4aba6bb2d89363f0c612865214ce8",
+  "scanned_cues": 70,
+  "affected_cues": [
+    "journey_departure",
+    "hero_main",
+    "boss_lubu_warform",
+    "battle_siege",
+    "army_caochun_human",
+    "stinger_victory"
+  ],
+  "rerendered_cue_count": 6,
+  "unaffected_cues_not_rerendered": 64,
+  "selected_note_hits": 50,
+  "scope": "Only the declared FHornStac D4_v2_rr2 region gain 12→0; musical input, other instrument patches and source bytes unchanged",
+  "checks": [
+    "same musical inputs",
+    "same exact frame counts",
+    "48k stereo float32 finite",
+    "all file hashes verified",
+    "stems exactly reconstruct mix",
+    "every non-override track SHA256 preserved",
+    "no new musical adaptation audit events",
+    "zero clipping"
+  ],
+  "existing_audit_note": "boss_lubu_warform has 12 pre-existing and unchanged explicit unpitched gong key mapping notices; these are retained, not hidden or counted as newly introduced errors.",
+  "cues": [
+    {
+      "cue": "journey_departure",
+      "before_directory": "renders-world-v2/journey_departure",
+      "after_directory": "renders-horn-rr-fixed/journey_departure",
+      "frames": 3291429,
+      "matched_input_and_frames": true,
+      "peak_dbfs_before": -32.95536424361839,
+      "peak_dbfs_after": -38.323183675270165,
+      "peak_change_db": -5.367819431651775,
+      "mono_energy_loss_db_before": -0.47639726531367277,
+      "mono_energy_loss_db_after": -0.4029240141234358,
+      "audit_events_before": 0,
+      "audit_events_after": 0,
+      "new_audit_events": 0,
+      "tracks": [
+        {
+          "name": "A road ahead",
+          "instrument": "oboe",
+          "local_gain_override": false,
+          "unchanged_audio_sha256": true,
+          "audit_events_before": 0,
+          "audit_events_after": 0,
+          "audit_types": {},
+          "mono_energy_loss_db": -0.6421553081279403
+        },
+        {
+          "name": "Steps",
+          "instrument": "acoustic_guitar",
+          "local_gain_override": false,
+          "unchanged_audio_sha256": true,
+          "audit_events_before": 0,
+          "audit_events_after": 0,
+          "audit_types": {},
+          "mono_energy_loss_db": -0.03271536656767467
+        },
+        {
+          "name": "Pace",
+          "instrument": "contrabass_pizz",
+          "local_gain_override": false,
+          "unchanged_audio_sha256": true,
+          "audit_events_before": 0,
+          "audit_events_after": 0,
+          "audit_types": {},
+          "mono_energy_loss_db": -0.7748244381278984
+        },
+        {
+          "name": "Distant hills",
+          "instrument": "horn",
+          "local_gain_override": true,
+          "unchanged_audio_sha256": false,
+          "audit_events_before": 0,
+          "audit_events_after": 0,
+          "audit_types": {},
+          "mono_energy_loss_db": -0.853220831245724
+        }
+      ],
+      "mix_sha256": "89fa125c3d00ee96b120690255799f7c56f424d8f974ffb5f4e29dabb8e0890e"
+    },
+    {
+      "cue": "hero_main",
+      "before_directory": "renders-military-v3/hero_main",
+      "after_directory": "renders-horn-rr-fixed/hero_main",
+      "frames": 4937143,
+      "matched_input_and_frames": true,
+      "peak_dbfs_before": -20.6504814494241,
+      "peak_dbfs_after": -28.48047983486516,
+      "peak_change_db": -7.829998385441062,
+      "mono_energy_loss_db_before": -0.7744984123279876,
+      "mono_energy_loss_db_after": -0.763455297656317,
+      "audit_events_before": 0,
+      "audit_events_after": 0,
+      "new_audit_events": 0,
+      "tracks": [
+        {
+          "name": "lead",
+          "instrument": "horn",
+          "local_gain_override": true,
+          "unchanged_audio_sha256": false,
+          "audit_events_before": 0,
+          "audit_events_after": 0,
+          "audit_types": {},
+          "mono_energy_loss_db": -0.7674255758023164
+        },
+        {
+          "name": "counter",
+          "instrument": "bassoon",
+          "local_gain_override": false,
+          "unchanged_audio_sha256": true,
+          "audit_events_before": 0,
+          "audit_events_after": 0,
+          "audit_types": {},
+          "mono_energy_loss_db": -1.8874165195630135
+        },
+        {
+          "name": "bed",
+          "instrument": "strings",
+          "local_gain_override": false,
+          "unchanged_audio_sha256": true,
+          "audit_events_before": 0,
+          "audit_events_after": 0,
+          "audit_types": {},
+          "mono_energy_loss_db": -1.455498774993142
+        },
+        {
+          "name": "bass",
+          "instrument": "contrabass",
+          "local_gain_override": false,
+          "unchanged_audio_sha256": true,
+          "audit_events_before": 0,
+          "audit_events_after": 0,
+          "audit_types": {},
+          "mono_energy_loss_db": -0.8525384093483481
+        },
+        {
+          "name": "answer",
+          "instrument": "trumpet",
+          "local_gain_override": false,
+          "unchanged_audio_sha256": true,
+          "audit_events_before": 0,
+          "audit_events_after": 0,
+          "audit_types": {},
+          "mono_energy_loss_db": -0.5565611060800193
+        },
+        {
+          "name": "drums",
+          "instrument": "drums",
+          "local_gain_override": false,
+          "unchanged_audio_sha256": true,
+          "audit_events_before": 0,
+          "audit_events_after": 0,
+          "audit_types": {},
+          "mono_energy_loss_db": -0.029343791745130285
+        }
+      ],
+      "mix_sha256": "f800f0f58d7619744a05028dde11b6ac3a697ca8d001196cb4e307839deff2f9"
+    },
+    {
+      "cue": "boss_lubu_warform",
+      "before_directory": "renders-military-v3/boss_lubu_warform",
+      "after_directory": "renders-horn-rr-fixed/boss_lubu_warform",
+      "frames": 5973333,
+      "matched_input_and_frames": true,
+      "peak_dbfs_before": -19.97237562784442,
+      "peak_dbfs_after": -26.407362328406847,
+      "peak_change_db": -6.434986700562426,
+      "mono_energy_loss_db_before": -0.7702983216671465,
+      "mono_energy_loss_db_after": -0.7673669119770049,
+      "audit_events_before": 12,
+      "audit_events_after": 12,
+      "new_audit_events": 0,
+      "tracks": [
+        {
+          "name": "lead",
+          "instrument": "horn",
+          "local_gain_override": true,
+          "unchanged_audio_sha256": false,
+          "audit_events_before": 0,
+          "audit_events_after": 0,
+          "audit_types": {},
+          "mono_energy_loss_db": -0.782385482521847
+        },
+        {
+          "name": "counter",
+          "instrument": "violin",
+          "local_gain_override": false,
+          "unchanged_audio_sha256": true,
+          "audit_events_before": 0,
+          "audit_events_after": 0,
+          "audit_types": {},
+          "mono_energy_loss_db": -1.5736433716170237
+        },
+        {
+          "name": "bed",
+          "instrument": "strings",
+          "local_gain_override": false,
+          "unchanged_audio_sha256": true,
+          "audit_events_before": 0,
+          "audit_events_after": 0,
+          "audit_types": {},
+          "mono_energy_loss_db": -1.6278471928395675
+        },
+        {
+          "name": "bass",
+          "instrument": "contrabass",
+          "local_gain_override": false,
+          "unchanged_audio_sha256": true,
+          "audit_events_before": 0,
+          "audit_events_after": 0,
+          "audit_types": {},
+          "mono_energy_loss_db": -0.8981695024667918
+        },
+        {
+          "name": "drums",
+          "instrument": "drums",
+          "local_gain_override": false,
+          "unchanged_audio_sha256": true,
+          "audit_events_before": 0,
+          "audit_events_after": 0,
+          "audit_types": {},
+          "mono_energy_loss_db": -0.02973775517697971
+        },
+        {
+          "name": "answer",
+          "instrument": "trombone",
+          "local_gain_override": false,
+          "unchanged_audio_sha256": true,
+          "audit_events_before": 0,
+          "audit_events_after": 0,
+          "audit_types": {},
+          "mono_energy_loss_db": -1.3001322467428134
+        },
+        {
+          "name": "pulse",
+          "instrument": "electric_guitar",
+          "local_gain_override": false,
+          "unchanged_audio_sha256": true,
+          "audit_events_before": 0,
+          "audit_events_after": 0,
+          "audit_types": {},
+          "mono_energy_loss_db": -0.06584058007217537
+        },
+        {
+          "name": "color",
+          "instrument": "gong",
+          "local_gain_override": false,
+          "unchanged_audio_sha256": true,
+          "audit_events_before": 12,
+          "audit_events_after": 12,
+          "audit_types": {
+            "unpitched_key_mapping": 12
+          },
+          "mono_energy_loss_db": -0.02582631213463489
+        }
+      ],
+      "mix_sha256": "6623c057201a4be73450bbc6e517cce7a5c78cddbf4e5141199e57fa774ff1be"
+    },
+    {
+      "cue": "battle_siege",
+      "before_directory": "renders-military-v3/battle_siege",
+      "after_directory": "renders-horn-rr-fixed/battle_siege",
+      "frames": 4766897,
+      "matched_input_and_frames": true,
+      "peak_dbfs_before": -20.300778724105605,
+      "peak_dbfs_after": -27.087161226279367,
+      "peak_change_db": -6.786382502173762,
+      "mono_energy_loss_db_before": -0.7919796478476935,
+      "mono_energy_loss_db_after": -0.7782483550724911,
+      "audit_events_before": 0,
+      "audit_events_after": 0,
+      "new_audit_events": 0,
+      "tracks": [
+        {
+          "name": "lead",
+          "instrument": "horn",
+          "local_gain_override": true,
+          "unchanged_audio_sha256": false,
+          "audit_events_before": 0,
+          "audit_events_after": 0,
+          "audit_types": {},
+          "mono_energy_loss_db": -0.8134200175057461
+        },
+        {
+          "name": "answer",
+          "instrument": "trumpet",
+          "local_gain_override": false,
+          "unchanged_audio_sha256": true,
+          "audit_events_before": 0,
+          "audit_events_after": 0,
+          "audit_types": {},
+          "mono_energy_loss_db": -0.4700165016319776
+        },
+        {
+          "name": "bed",
+          "instrument": "trombone",
+          "local_gain_override": false,
+          "unchanged_audio_sha256": true,
+          "audit_events_before": 0,
+          "audit_events_after": 0,
+          "audit_types": {},
+          "mono_energy_loss_db": -1.281299423030269
+        },
+        {
+          "name": "bass",
+          "instrument": "contrabass",
+          "local_gain_override": false,
+          "unchanged_audio_sha256": true,
+          "audit_events_before": 0,
+          "audit_events_after": 0,
+          "audit_types": {},
+          "mono_energy_loss_db": -0.8257515240201997
+        },
+        {
+          "name": "pulse",
+          "instrument": "pizzicato",
+          "local_gain_override": false,
+          "unchanged_audio_sha256": true,
+          "audit_events_before": 0,
+          "audit_events_after": 0,
+          "audit_types": {},
+          "mono_energy_loss_db": -2.2128717718757085
+        },
+        {
+          "name": "drums",
+          "instrument": "drums",
+          "local_gain_override": false,
+          "unchanged_audio_sha256": true,
+          "audit_events_before": 0,
+          "audit_events_after": 0,
+          "audit_types": {},
+          "mono_energy_loss_db": -0.027678507889762716
+        }
+      ],
+      "mix_sha256": "8ca0f1a826a036fcd83be14488229df915ce41665e7c758de17929f2c37ce903"
+    },
+    {
+      "cue": "army_caochun_human",
+      "before_directory": "renders-military-v3/army_caochun_human",
+      "after_directory": "renders-horn-rr-fixed/army_caochun_human",
+      "frames": 5760000,
+      "matched_input_and_frames": true,
+      "peak_dbfs_before": -22.405162725583683,
+      "peak_dbfs_after": -27.707147806941563,
+      "peak_change_db": -5.301985081357881,
+      "mono_energy_loss_db_before": -0.5109318642655516,
+      "mono_energy_loss_db_after": -0.40051492347410705,
+      "audit_events_before": 0,
+      "audit_events_after": 0,
+      "new_audit_events": 0,
+      "tracks": [
+        {
+          "name": "lead",
+          "instrument": "horn",
+          "local_gain_override": true,
+          "unchanged_audio_sha256": false,
+          "audit_events_before": 0,
+          "audit_events_after": 0,
+          "audit_types": {},
+          "mono_energy_loss_db": -0.8148257312971401
+        },
+        {
+          "name": "counter",
+          "instrument": "cello",
+          "local_gain_override": false,
+          "unchanged_audio_sha256": true,
+          "audit_events_before": 0,
+          "audit_events_after": 0,
+          "audit_types": {},
+          "mono_energy_loss_db": -1.56140284384428
+        },
+        {
+          "name": "bed",
+          "instrument": "strings",
+          "local_gain_override": false,
+          "unchanged_audio_sha256": true,
+          "audit_events_before": 0,
+          "audit_events_after": 0,
+          "audit_types": {},
+          "mono_energy_loss_db": -1.6555102790494298
+        },
+        {
+          "name": "bass",
+          "instrument": "bass",
+          "local_gain_override": false,
+          "unchanged_audio_sha256": true,
+          "audit_events_before": 0,
+          "audit_events_after": 0,
+          "audit_types": {},
+          "mono_energy_loss_db": 0.0
+        },
+        {
+          "name": "drums",
+          "instrument": "drums",
+          "local_gain_override": false,
+          "unchanged_audio_sha256": true,
+          "audit_events_before": 0,
+          "audit_events_after": 0,
+          "audit_types": {},
+          "mono_energy_loss_db": -0.02059026795105735
+        }
+      ],
+      "mix_sha256": "d7bf4182cf072c4cab27db15232e1deb3c25b05e7cd79cd15a586c41522eebf0"
+    },
+    {
+      "cue": "stinger_victory",
+      "before_directory": "renders-world-v2/stinger_victory",
+      "after_directory": "renders-horn-rr-fixed/stinger_victory",
+      "frames": 486857,
+      "matched_input_and_frames": true,
+      "peak_dbfs_before": -31.302986059270047,
+      "peak_dbfs_after": -41.03843465949267,
+      "peak_change_db": -9.735448600222625,
+      "mono_energy_loss_db_before": -0.5945933404684451,
+      "mono_energy_loss_db_after": -0.5007942593908566,
+      "audit_events_before": 0,
+      "audit_events_after": 0,
+      "new_audit_events": 0,
+      "tracks": [
+        {
+          "name": "Signal",
+          "instrument": "horn",
+          "local_gain_override": true,
+          "unchanged_audio_sha256": false,
+          "audit_events_before": 0,
+          "audit_events_after": 0,
+          "audit_types": {},
+          "mono_energy_loss_db": -0.4649377080411924
+        },
+        {
+          "name": "Harmonic landing",
+          "instrument": "piano",
+          "local_gain_override": false,
+          "unchanged_audio_sha256": true,
+          "audit_events_before": 0,
+          "audit_events_after": 0,
+          "audit_types": {},
+          "mono_energy_loss_db": -1.0874781972693424
+        }
+      ],
+      "mix_sha256": "13d5dad2d882f262d5905c59a269d2c28af05f834a268a50286aa24122408d5c"
+    }
+  ]
+}

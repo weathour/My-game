@@ -1,0 +1,96 @@
+{
+  "engine": "my-game-multisample-1",
+  "cue": "engine_probe",
+  "bpm": 96,
+  "meter": [
+    3,
+    4
+  ],
+  "loop": true,
+  "target_lufs_metadata_only": -21,
+  "mastering": "No normalization, limiter or reverb. Float32 stems include source region gain, track gain and pan.",
+  "listening_review": false,
+  "tracks": [
+    {
+      "index": 0,
+      "name": "Concert flute",
+      "instrument": "flute",
+      "actual": "Western concert flute",
+      "note_count": 10,
+      "audit": [],
+      "metrics": {
+        "frames": 360000,
+        "sample_rate": 48000,
+        "channels": 2,
+        "seconds": 7.5,
+        "peak_dbfs": -28.817298728743022,
+        "rms_dbfs": -44.288012895029496,
+        "over_0dbfs_samples": 0,
+        "loop_boundary_max_delta": 6.514761480502784e-06
+      },
+      "file": "stems/01_Concert_flute.wav",
+      "sha256": "72d9ee462919fe037bc919607b3a144151076c9e9e325a8cd5a0dd16d623815c"
+    },
+    {
+      "index": 1,
+      "name": "Classical guitar",
+      "instrument": "acoustic_guitar",
+      "actual": "FreePats Spanish classical nylon-string guitar, single recorded dynamic",
+      "note_count": 12,
+      "audit": [],
+      "metrics": {
+        "frames": 360000,
+        "sample_rate": 48000,
+        "channels": 2,
+        "seconds": 7.5,
+        "peak_dbfs": -25.323439769977576,
+        "rms_dbfs": -44.19543316707007,
+        "over_0dbfs_samples": 0,
+        "loop_boundary_max_delta": 1.3079261407256126e-05
+      },
+      "file": "stems/02_Classical_guitar.wav",
+      "sha256": "ade35ae4f2081eb71f6c9ba00006f0088c54d2fe836cb4f6410b2565cc674205"
+    },
+    {
+      "index": 2,
+      "name": "Harpsichord short and held",
+      "instrument": "harpsichord",
+      "actual": "English Zuckermann kit harpsichord",
+      "note_count": 8,
+      "audit": [],
+      "metrics": {
+        "frames": 360000,
+        "sample_rate": 48000,
+        "channels": 2,
+        "seconds": 7.5,
+        "peak_dbfs": -34.95928562083569,
+        "rms_dbfs": -54.52932664666665,
+        "over_0dbfs_samples": 0,
+        "loop_boundary_max_delta": 2.8434626074158587e-05
+      },
+      "file": "stems/03_Harpsichord_short_and_held.wav",
+      "sha256": "679860164b4df0080621fbf7326867d4d38d7485262b454e99e1249b840a8caa"
+    }
+  ],
+  "mix": {
+    "frames": 360000,
+    "sample_rate": 48000,
+    "channels": 2,
+    "seconds": 7.5,
+    "peak_dbfs": -24.08768096049657,
+    "rms_dbfs": -41.04094983060754,
+    "over_0dbfs_samples": 0,
+    "loop_boundary_max_delta": 3.768620081245899e-05,
+    "file": "mix.wav",
+    "sha256": "c4d15005177211e26ea010a49c5be0c94c2648d27d0696b20d5d65b5ce909714"
+  },
+  "manifest_sha256": "0c3912b550d6d6616dd6f91c59be01a3335ca92abacc7b4f2edc51767d7f38f2",
+  "source_commits": {
+    "vsco": "6dd651d55dde97fd4028699be9d4481f26917891",
+    "vcsl": "dfcf4a4918771eee884b96ad4493de82ef84daf6",
+    "freepats_classical": "ef2fb7de0cc0ab561c4ebc28494f3fc2962596e4f32f16d6c96b8a385c7c098b",
+    "fashionbass": "0703973b300a6bacb837602be9b588ab64732a72",
+    "emilyguitar": "b4920dc662fd9cad6dcaccdeecffdd91c8725d8c"
+  },
+  "midi_sha256": "bcf32e3b7dde9065cfcdfc534fd4b34ad0a53e6b0e5fc43b37e87f78cf77dbfb"
+}

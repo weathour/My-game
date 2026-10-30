@@ -1,0 +1,26 @@
+{
+  "manifest_frozen": true,
+  "manifest_file_sha256": "8e7f155e7d00fd654705742f87df0ad6ac8d670f09edc719d9f1f3001dd176e0",
+  "manifest_locked_file_count": 2082,
+  "manifest_locked_bytes": 1860631202,
+  "python": "3.12.3",
+  "numpy": "2.4.4",
+  "scipy": "1.17.1",
+  "renderer": "my-game-multisample-3",
+  "sample_cache": "~/.cache/my-game/music-instruments",
+  "evidence": {
+    "unit_tests": "engine-evidence/unit-tests-v3.txt",
+    "p0_render": "engine-evidence/p0-render-report.json",
+    "p0_reaper": "engine-evidence/reaper-p0.json",
+    "full_emma_reaper": "engine-evidence/reaper-character-emma-v3.json"
+  },
+  "listening_review": false,
+  "p0_note": "The initial integer-period P0 and its REAPER result are historical v1 evidence retained for provenance. Current release checks use v3: 10 signal/controller/export/source-channel tests including the inherited integer-period regression, plus a newly rendered v3 full Emma cue and its successful REAPER reconstruction. No v3 audio-equivalence claim is made for the historical P0.",
+  "source_change_policy": "Source commits/hashes/articulations/gain/mapping unchanged. Authorized v3 preprocessing selects stronger original channel only when full raw mono energy loss is below -4dB; native source cache unchanged.",
+  "source_channel_investigation": "engine-evidence/stereo-source-investigation.json",
+  "characters_channel_preflight": "engine-evidence/characters-v3-channel-preflight.json",
+  "v3_reaper_verification": "engine-evidence/reaper-character-emma-v3.json",
+  "characters_16_audit": "engine-evidence/characters-16-render-audit-v3.json",
+  "exact_reaper_render_boundary_fix": "engine-evidence/reaper-exact-boundary-fix.json",
+  "exact_reaper_2_4_reconstruction": "checks/military-reaper-2_4-v3-exact/result.json"
+}

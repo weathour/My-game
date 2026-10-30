@@ -1,0 +1,12 @@
+# Reproducible large dry PCM and working masters stay local.
+renders*/
+mastering*/
+masters/
+*.RPP-bak
+*.reapeaks
+.master.lock
+# REAPER round-trip PCM is reproducible; retain JSON metrics and source hashes.
+checks/**/reaper_mix.wav
+checks/**/reaper_mix.wav.reapeaks
+**/profile/
+*.reapeaks

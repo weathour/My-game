@@ -220,25 +220,35 @@ static func settings(shell: Control) -> void:
 	shell.action(actions, "退出游戏", func(): shell.get_tree().quit(), "quit_game")
 
 static func music(shell: Control) -> void:
-	var column := scaffold(shell, "音乐鉴赏", "收录已有的 14 首原创配乐。曲名与原作场景记录沿用，新的战役配乐分配另行制作。")
+	var column := scaffold(shell, "音乐鉴赏", "选择曲目，拖动进度条调整播放位置。")
 	var row := T.row(column)
 	row.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	var list := scroll_column(row, "music_list")
-	for i in shell.MUSIC.CUES.size():
+	var last_group := ""
+	for i in shell.music_tracks.size():
 		var index: int = i
-		var cue: String = shell.MUSIC.CUES[i]
-		shell.action(list, "%02d   %s" % [i+1, shell.MUSIC.TRACK_INFO[cue].title], func(): shell.play_track(index), "music_track_%d" % i, shell.music_index == i)
+		var cue: String = shell.music_tracks[i]
+		var info: Dictionary = shell.MUSIC.info(cue)
+		var group := str(info.get("kind", "场景配乐"))
+		if group != last_group:
+			list.add_child(T.label(group, 20, T.INK, true))
+			last_group = group
+		shell.action(list, "%02d   %s" % [i+1, str(info.get("title", cue))], func(): shell.play_track(index), "music_track_%d" % i, shell.music_index == i)
 	var panel := T.panel(row, true, 22)
 	panel.custom_minimum_size.x = 380
 	var player := T.column(panel)
-	var cue: String = shell.MUSIC.CUES[shell.music_index]
+	var cue: String = shell.music_tracks[shell.music_index]
+	var info: Dictionary = shell.MUSIC.info(cue)
 	player.add_child(T.label("已暂停" if shell.music_preview.stream_paused else "正在播放" if shell.music_preview.playing else "播放结束", 15, Color("bfc7b1")))
-	player.add_child(T.paragraph(shell.MUSIC.TRACK_INFO[cue].title, T.LIGHT, 28))
-	player.add_child(T.paragraph(shell.MUSIC.TRACK_INFO[cue].kind, Color("bfc7b1"), 16))
+	player.add_child(T.paragraph(str(info.get("title", cue)), T.LIGHT, 28))
+	player.add_child(T.paragraph(str(info.get("kind", "场景配乐")), Color("bfc7b1"), 16))
+	player.add_child(T.paragraph(str(info.get("scene", "")), Color("bfc7b1"), 16))
 	T.space(player)
 	var seek := HSlider.new()
 	seek.name = "music_seek"
 	seek.max_value = shell.music_preview.stream.get_length() if shell.music_preview.stream != null else 1
+	seek.drag_started.connect(func(): shell.music_seeking = true)
+	seek.drag_ended.connect(func(_changed: bool): shell.music_seeking = false)
 	seek.value_changed.connect(func(value: float): shell.music_preview.seek(value))
 	player.add_child(seek)
 	var clock := T.label("00:00", 15, T.LIGHT)

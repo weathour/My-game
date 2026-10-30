@@ -33,6 +33,14 @@ var _outgoing_gain: float = 0.0
 var _phase_fade: bool = false
 var _after_one_shot: String = ""
 var _resume_timer: Timer
+var context_id := ""
+var _stinger: AudioStreamPlayer
+var _stinger_cue := ""
+var _stinger_remaining := 0.0
+var _stinger_duration := 0.0
+var _stinger_after := ""
+var _duck_gain := 1.0
+var _reported_missing := {}
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
@@ -45,6 +53,11 @@ func _ready() -> void:
 	_other.name = "Crossfade"
 	_other.bus = bus
 	add_child(_other)
+	_stinger = AudioStreamPlayer.new()
+	_stinger.name = "Stinger"
+	_stinger.bus = bus
+	add_child(_stinger)
+	_stinger.finished.connect(cancel_stinger.bind(true))
 	_resume_timer = Timer.new()
 	_resume_timer.one_shot = true
 	_resume_timer.ignore_time_scale = true
@@ -77,6 +90,7 @@ func _exit_tree() -> void:
 		camp_handoff_position = get_saved_playback_position()
 		camp_handoff_ready = true
 	_cancel_resume()
+	cancel_stinger()
 	for player in [self, _other]:
 		if is_instance_valid(player):
 			player.stop()
@@ -92,6 +106,13 @@ func _process(delta: float) -> void:
 		if _context_elapsed >= CONTEXT_INTERVAL:
 			_context_elapsed = 0.0
 			refresh_context()
+	if not paused_by_script and _stinger_remaining > 0.0:
+		if _is_headless_runtime():
+			_stinger_remaining = maxf(0.0, _stinger_remaining - real_delta)
+			if _stinger_remaining <= 0.0: cancel_stinger(true)
+		elif _stinger.playing:
+			_stinger_remaining = maxf(0.0, _stinger_duration - _stinger.get_playback_position())
+	_apply_gains()
 	if paused_by_script or _fade_duration <= 0.0:
 		return
 	_fade_elapsed = minf(_fade_duration, _fade_elapsed + real_delta)
@@ -140,11 +161,17 @@ func refresh_context() -> void:
 	set_cue(cue, 0.45 if terminal else 0.8 if CATALOG.same_phase_family(current_cue, cue) else 1.4)
 
 func set_cue(cue: String, fade_seconds: float = 1.4) -> void:
-	if cue == current_cue or CATALOG.path(cue) == "":
-		return
-	var next_stream: AudioStream = load(CATALOG.path(cue)) if ResourceLoader.exists(CATALOG.path(cue)) else null
-	if next_stream == null:
-		return
+	if cue == current_cue: return
+	var resource_path := CATALOG.path(cue)
+	if resource_path.is_empty() or not ResourceLoader.exists(resource_path):
+		if not _reported_missing.has(cue):
+			_reported_missing[cue] = true
+			push_warning("Music cue unavailable: %s; retaining current bed or using legacy fallback" % cue)
+		if not current_cue.is_empty(): return
+		cue = "camp_signal"
+		resource_path = CATALOG.path(cue)
+	var next_stream := load(resource_path) as AudioStream
+	if next_stream == null: return
 	if CATALOG.is_one_shot(cue):
 		paused_by_script = false
 		_started = true
@@ -183,9 +210,11 @@ func apply_saved_volume() -> void:
 func _apply_gains() -> void:
 	var volume := 0.0 if load_music_muted() else clampf(load_music_volume(), 0.0, 1.0)
 	if is_instance_valid(_active):
-		_active.volume_db = linear_to_db(volume * _active_gain) if volume * _active_gain > 0.0 else MUTED_VOLUME_DB
+		_active.volume_db = linear_to_db(volume * _active_gain * _duck_gain) if volume * _active_gain * _duck_gain > 0.0 else MUTED_VOLUME_DB
+	if is_instance_valid(_stinger):
+		_stinger.volume_db = linear_to_db(volume * stinger_gain()) if volume > 0.0 else MUTED_VOLUME_DB
 	if is_instance_valid(_outgoing):
-		_outgoing.volume_db = linear_to_db(volume * _outgoing_gain) if volume * _outgoing_gain > 0.0 else MUTED_VOLUME_DB
+		_outgoing.volume_db = linear_to_db(volume * _outgoing_gain * _duck_gain) if volume * _outgoing_gain * _duck_gain > 0.0 else MUTED_VOLUME_DB
 
 func _on_finished(player: AudioStreamPlayer) -> void:
 	if player != _active or not CATALOG.is_one_shot(current_cue):
@@ -237,12 +266,11 @@ func start_music(position_seconds: float = 0.0) -> void:
 
 func pause_music() -> void:
 	refresh_context()
-	if CATALOG.is_one_shot(current_cue):
-		return
+	if follow_battle_context and CATALOG.is_one_shot(current_cue): return
 	_cancel_resume()
 	stored_playback_position = get_saved_playback_position()
 	paused_by_script = true
-	for player in [self, _other]:
+	for player in [self, _other, _stinger]:
 		if is_instance_valid(player):
 			player.stream_paused = true
 
@@ -262,6 +290,7 @@ func _cancel_resume() -> void:
 func _finish_resume() -> void:
 	_started = true
 	paused_by_script = false
+	if is_instance_valid(_stinger): _stinger.stream_paused = false
 	if _active.playing:
 		for player in [self, _other]:
 			player.stream_paused = false
@@ -296,3 +325,62 @@ static func save_music_muted(muted: bool) -> void:
 	var config := preload("res://scripts/game_settings.gd")._get_config()
 	config.set_value(SETTINGS_SECTION, MUSIC_MUTED_KEY, muted)
 	config.save(SETTINGS_PATH)
+
+## Independent one-shot overlay. Its timer shares pause ownership with both beds.
+func play_stinger(cue: String, after_cue: String = "") -> bool:
+	cancel_stinger()
+	var resource_path := CATALOG.path(cue)
+	if not CATALOG.is_one_shot(cue) or resource_path.is_empty() or not ResourceLoader.exists(resource_path):
+		push_warning("Stinger unavailable or not a one-shot: " + cue)
+		if not after_cue.is_empty(): set_cue(after_cue, 0.6)
+		return false
+	var audio := load(resource_path) as AudioStream
+	if audio == null: return false
+	audio = audio.duplicate()
+	if audio is AudioStreamOggVorbis: audio.loop = false
+	_stinger.stream = audio
+	_stinger_cue = cue
+	_stinger_after = after_cue
+	_stinger_duration = audio.get_length()
+	_stinger_remaining = _stinger_duration
+	_duck_gain = 0.32
+	_stinger.stream_paused = paused_by_script
+	_apply_gains()
+	if not _is_headless_runtime():
+		_stinger.play()
+		_stinger.stream_paused = paused_by_script
+	return true
+
+func stinger_gain() -> float:
+	return minf(1.0, _stinger_remaining / 0.22) if _stinger_remaining > 0.0 else 0.0
+
+func cancel_stinger(complete: bool = false) -> void:
+	var next := _stinger_after if complete else ""
+	_stinger_after = ""
+	_stinger_remaining = 0.0
+	_stinger_cue = ""
+	_duck_gain = 1.0
+	if is_instance_valid(_stinger):
+		_stinger.stop()
+		_stinger.stream = null
+	_apply_gains()
+	if not next.is_empty(): set_cue(next, 0.6)
+
+func capture_snapshot() -> Dictionary:
+	return {"cue":current_cue, "position":get_saved_playback_position(), "paused":paused_by_script, "started":_started, "context":context_id}
+
+func restore_snapshot(snapshot: Dictionary) -> void:
+	if snapshot.is_empty(): return
+	cancel_stinger()
+	context_id = str(snapshot.get("context", ""))
+	set_cue(str(snapshot.get("cue", "")), 0.0)
+	restore_playback_position(float(snapshot.get("position", 0.0)))
+	_started = bool(snapshot.get("started", true))
+	paused_by_script = bool(snapshot.get("paused", false))
+	if _started and not paused_by_script: resume_music()
+
+func restart_cue(cue: String) -> void:
+	cancel_stinger()
+	set_cue(cue, 0.0)
+	restore_playback_position(0.0)
+	resume_music()

@@ -1,0 +1,489 @@
+{
+  "engine": "my-game-multisample-3",
+  "manifest_file_sha256": "8e7f155e7d00fd654705742f87df0ad6ac8d670f09edc719d9f1f3001dd176e0",
+  "policy": {
+    "engine_version": "my-game-multisample-3",
+    "measurement": "10*log10(mean(((L+R)/2)^2)/mean((L^2+R^2)/2)) over full original decoded sample before offset/resampling",
+    "threshold_db": -4,
+    "action_below_threshold": "Copy original channel with larger full-sample RMS to both outputs; do not average, flip, normalize or rewrite original cache file",
+    "otherwise": "Preserve native stereo",
+    "audit": "Per used source: threshold, original energy loss, left/right RMS and selected channel. Information, not a musical adaptation error.",
+    "reason": "Verified inter-microphone cancellation in VSCO upright piano and some flute sources; authorized evidence-based exception to initial freeze"
+  },
+  "affected_cues": [
+    "story_comedy",
+    "story_warmth",
+    "story_aftermath",
+    "story_discovery",
+    "story_banter",
+    "story_remembrance",
+    "character_emma",
+    "character_emma_wary"
+  ],
+  "unaffected_cues": [
+    "story_travel",
+    "story_tension",
+    "story_confrontation",
+    "story_intrigue",
+    "story_resolve",
+    "story_solitude",
+    "character_lingqi",
+    "character_lingqi_aftermath"
+  ],
+  "cues": [
+    {
+      "cue": "story_travel",
+      "used_sample_files": 32,
+      "selected_source_channels": [],
+      "affected": false
+    },
+    {
+      "cue": "story_comedy",
+      "used_sample_files": 41,
+      "selected_source_channels": [
+        {
+          "file": "vsco/Keys/Upright Nr1/UR1_G4_pp_RR1.wav",
+          "policy": "stronger_original_channel_if_mono_loss_below_threshold",
+          "threshold_db": -4.0,
+          "original_mono_energy_loss_db": -9.402141578534225,
+          "original_channel_rms": [
+            0.0019059180244059204,
+            0.0018250108851302906
+          ],
+          "selected": true,
+          "selected_channel": "left",
+          "operation": "copy one original channel to both outputs",
+          "classification": "source preprocessing information, not a musical adaptation error"
+        },
+        {
+          "file": "vsco/Keys/Upright Nr1/UR1_G4_pp_RR2.wav",
+          "policy": "stronger_original_channel_if_mono_loss_below_threshold",
+          "threshold_db": -4.0,
+          "original_mono_energy_loss_db": -9.804366494122068,
+          "original_channel_rms": [
+            0.0019040216679573386,
+            0.0018717934465307315
+          ],
+          "selected": true,
+          "selected_channel": "left",
+          "operation": "copy one original channel to both outputs",
+          "classification": "source preprocessing information, not a musical adaptation error"
+        },
+        {
+          "file": "vsco/Strings/Violin Section/Pizz/VlnEns_Pizz_D3_v2_rr1.wav",
+          "policy": "stronger_original_channel_if_mono_loss_below_threshold",
+          "threshold_db": -4.0,
+          "original_mono_energy_loss_db": -5.442641783984565,
+          "original_channel_rms": [
+            0.015624201595513105,
+            0.01452766436767672
+          ],
+          "selected": true,
+          "selected_channel": "left",
+          "operation": "copy one original channel to both outputs",
+          "classification": "source preprocessing information, not a musical adaptation error"
+        },
+        {
+          "file": "vsco/Strings/Violin Section/Pizz/VlnEns_Pizz_D3_v2_rr2.wav",
+          "policy": "stronger_original_channel_if_mono_loss_below_threshold",
+          "threshold_db": -4.0,
+          "original_mono_energy_loss_db": -4.155549140803397,
+          "original_channel_rms": [
+            0.009555932779039931,
+            0.013193648696335127
+          ],
+          "selected": true,
+          "selected_channel": "right",
+          "operation": "copy one original channel to both outputs",
+          "classification": "source preprocessing information, not a musical adaptation error"
+        }
+      ],
+      "affected": true
+    },
+    {
+      "cue": "story_warmth",
+      "used_sample_files": 20,
+      "selected_source_channels": [
+        {
+          "file": "vsco/Woodwinds/Flute/susNV/LDFlute_susNV_A4_v3_1.wav",
+          "policy": "stronger_original_channel_if_mono_loss_below_threshold",
+          "threshold_db": -4.0,
+          "original_mono_energy_loss_db": -7.413698697453355,
+          "original_channel_rms": [
+            0.08676322781005189,
+            0.049524321011363746
+          ],
+          "selected": true,
+          "selected_channel": "left",
+          "operation": "copy one original channel to both outputs",
+          "classification": "source preprocessing information, not a musical adaptation error"
+        }
+      ],
+      "affected": true
+    },
+    {
+      "cue": "story_tension",
+      "used_sample_files": 21,
+      "selected_source_channels": [],
+      "affected": false
+    },
+    {
+      "cue": "story_aftermath",
+      "used_sample_files": 21,
+      "selected_source_channels": [
+        {
+          "file": "vsco/Keys/Upright Nr1/UR1_G4_pp_RR1.wav",
+          "policy": "stronger_original_channel_if_mono_loss_below_threshold",
+          "threshold_db": -4.0,
+          "original_mono_energy_loss_db": -9.402141578534225,
+          "original_channel_rms": [
+            0.0019059180244059204,
+            0.0018250108851302906
+          ],
+          "selected": true,
+          "selected_channel": "left",
+          "operation": "copy one original channel to both outputs",
+          "classification": "source preprocessing information, not a musical adaptation error"
+        },
+        {
+          "file": "vsco/Keys/Upright Nr1/UR1_G4_pp_RR2.wav",
+          "policy": "stronger_original_channel_if_mono_loss_below_threshold",
+          "threshold_db": -4.0,
+          "original_mono_energy_loss_db": -9.804366494122068,
+          "original_channel_rms": [
+            0.0019040216679573386,
+            0.0018717934465307315
+          ],
+          "selected": true,
+          "selected_channel": "left",
+          "operation": "copy one original channel to both outputs",
+          "classification": "source preprocessing information, not a musical adaptation error"
+        }
+      ],
+      "affected": true
+    },
+    {
+      "cue": "story_confrontation",
+      "used_sample_files": 24,
+      "selected_source_channels": [],
+      "affected": false
+    },
+    {
+      "cue": "story_intrigue",
+      "used_sample_files": 35,
+      "selected_source_channels": [],
+      "affected": false
+    },
+    {
+      "cue": "story_discovery",
+      "used_sample_files": 19,
+      "selected_source_channels": [
+        {
+          "file": "vsco/Woodwinds/Flute/susNV/LDFlute_susNV_A4_v3_1.wav",
+          "policy": "stronger_original_channel_if_mono_loss_below_threshold",
+          "threshold_db": -4.0,
+          "original_mono_energy_loss_db": -7.413698697453355,
+          "original_channel_rms": [
+            0.08676322781005189,
+            0.049524321011363746
+          ],
+          "selected": true,
+          "selected_channel": "left",
+          "operation": "copy one original channel to both outputs",
+          "classification": "source preprocessing information, not a musical adaptation error"
+        }
+      ],
+      "affected": true
+    },
+    {
+      "cue": "story_resolve",
+      "used_sample_files": 29,
+      "selected_source_channels": [],
+      "affected": false
+    },
+    {
+      "cue": "story_solitude",
+      "used_sample_files": 23,
+      "selected_source_channels": [],
+      "affected": false
+    },
+    {
+      "cue": "story_banter",
+      "used_sample_files": 42,
+      "selected_source_channels": [
+        {
+          "file": "vsco/Woodwinds/Flute/stac/LDFlute_stac_A4_v2_rr1.wav",
+          "policy": "stronger_original_channel_if_mono_loss_below_threshold",
+          "threshold_db": -4.0,
+          "original_mono_energy_loss_db": -5.478028127594266,
+          "original_channel_rms": [
+            0.014793703777553515,
+            0.010667584627636218
+          ],
+          "selected": true,
+          "selected_channel": "left",
+          "operation": "copy one original channel to both outputs",
+          "classification": "source preprocessing information, not a musical adaptation error"
+        },
+        {
+          "file": "vsco/Woodwinds/Flute/stac/LDFlute_stac_A4_v2_rr2.wav",
+          "policy": "stronger_original_channel_if_mono_loss_below_threshold",
+          "threshold_db": -4.0,
+          "original_mono_energy_loss_db": -5.6546389527170255,
+          "original_channel_rms": [
+            0.014845268368361104,
+            0.01160555946039101
+          ],
+          "selected": true,
+          "selected_channel": "left",
+          "operation": "copy one original channel to both outputs",
+          "classification": "source preprocessing information, not a musical adaptation error"
+        },
+        {
+          "file": "vsco/Woodwinds/Flute/susNV/LDFlute_susNV_A4_v3_1.wav",
+          "policy": "stronger_original_channel_if_mono_loss_below_threshold",
+          "threshold_db": -4.0,
+          "original_mono_energy_loss_db": -7.413698697453355,
+          "original_channel_rms": [
+            0.08676322781005189,
+            0.049524321011363746
+          ],
+          "selected": true,
+          "selected_channel": "left",
+          "operation": "copy one original channel to both outputs",
+          "classification": "source preprocessing information, not a musical adaptation error"
+        }
+      ],
+      "affected": true
+    },
+    {
+      "cue": "story_remembrance",
+      "used_sample_files": 30,
+      "selected_source_channels": [
+        {
+          "file": "vsco/Keys/Upright Nr1/UR1_C5_mf_RR1.wav",
+          "policy": "stronger_original_channel_if_mono_loss_below_threshold",
+          "threshold_db": -4.0,
+          "original_mono_energy_loss_db": -8.112105052425502,
+          "original_channel_rms": [
+            0.011371000193605624,
+            0.01833848322498772
+          ],
+          "selected": true,
+          "selected_channel": "right",
+          "operation": "copy one original channel to both outputs",
+          "classification": "source preprocessing information, not a musical adaptation error"
+        },
+        {
+          "file": "vsco/Keys/Upright Nr1/UR1_C5_mf_RR2.wav",
+          "policy": "stronger_original_channel_if_mono_loss_below_threshold",
+          "threshold_db": -4.0,
+          "original_mono_energy_loss_db": -8.177156399000246,
+          "original_channel_rms": [
+            0.01210095372197765,
+            0.016547977189215184
+          ],
+          "selected": true,
+          "selected_channel": "right",
+          "operation": "copy one original channel to both outputs",
+          "classification": "source preprocessing information, not a musical adaptation error"
+        },
+        {
+          "file": "vsco/Keys/Upright Nr1/UR1_C5_pp_RR1.wav",
+          "policy": "stronger_original_channel_if_mono_loss_below_threshold",
+          "threshold_db": -4.0,
+          "original_mono_energy_loss_db": -9.669279000933447,
+          "original_channel_rms": [
+            0.001561448678973107,
+            0.002495008466060831
+          ],
+          "selected": true,
+          "selected_channel": "right",
+          "operation": "copy one original channel to both outputs",
+          "classification": "source preprocessing information, not a musical adaptation error"
+        },
+        {
+          "file": "vsco/Keys/Upright Nr1/UR1_C5_pp_RR2.wav",
+          "policy": "stronger_original_channel_if_mono_loss_below_threshold",
+          "threshold_db": -4.0,
+          "original_mono_energy_loss_db": -11.788176042421433,
+          "original_channel_rms": [
+            0.00200900010649777,
+            0.002081172599082606
+          ],
+          "selected": true,
+          "selected_channel": "right",
+          "operation": "copy one original channel to both outputs",
+          "classification": "source preprocessing information, not a musical adaptation error"
+        },
+        {
+          "file": "vsco/Keys/Upright Nr1/UR1_G4_mf_RR1.wav",
+          "policy": "stronger_original_channel_if_mono_loss_below_threshold",
+          "threshold_db": -4.0,
+          "original_mono_energy_loss_db": -7.62316774433187,
+          "original_channel_rms": [
+            0.015219558310929927,
+            0.014459594244498658
+          ],
+          "selected": true,
+          "selected_channel": "left",
+          "operation": "copy one original channel to both outputs",
+          "classification": "source preprocessing information, not a musical adaptation error"
+        },
+        {
+          "file": "vsco/Keys/Upright Nr1/UR1_G4_mf_RR2.wav",
+          "policy": "stronger_original_channel_if_mono_loss_below_threshold",
+          "threshold_db": -4.0,
+          "original_mono_energy_loss_db": -6.854637308443213,
+          "original_channel_rms": [
+            0.017504516012054636,
+            0.016514995145236227
+          ],
+          "selected": true,
+          "selected_channel": "left",
+          "operation": "copy one original channel to both outputs",
+          "classification": "source preprocessing information, not a musical adaptation error"
+        },
+        {
+          "file": "vsco/Keys/Upright Nr1/UR1_G4_pp_RR1.wav",
+          "policy": "stronger_original_channel_if_mono_loss_below_threshold",
+          "threshold_db": -4.0,
+          "original_mono_energy_loss_db": -9.402141578534225,
+          "original_channel_rms": [
+            0.0019059180244059204,
+            0.0018250108851302906
+          ],
+          "selected": true,
+          "selected_channel": "left",
+          "operation": "copy one original channel to both outputs",
+          "classification": "source preprocessing information, not a musical adaptation error"
+        },
+        {
+          "file": "vsco/Keys/Upright Nr1/UR1_G4_pp_RR2.wav",
+          "policy": "stronger_original_channel_if_mono_loss_below_threshold",
+          "threshold_db": -4.0,
+          "original_mono_energy_loss_db": -9.804366494122068,
+          "original_channel_rms": [
+            0.0019040216679573386,
+            0.0018717934465307315
+          ],
+          "selected": true,
+          "selected_channel": "left",
+          "operation": "copy one original channel to both outputs",
+          "classification": "source preprocessing information, not a musical adaptation error"
+        },
+        {
+          "file": "vsco/Keys/Upright Nr1/UR1_G5_mf_RR1.wav",
+          "policy": "stronger_original_channel_if_mono_loss_below_threshold",
+          "threshold_db": -4.0,
+          "original_mono_energy_loss_db": -7.986878661200707,
+          "original_channel_rms": [
+            0.015163679712405025,
+            0.014231563957746041
+          ],
+          "selected": true,
+          "selected_channel": "left",
+          "operation": "copy one original channel to both outputs",
+          "classification": "source preprocessing information, not a musical adaptation error"
+        },
+        {
+          "file": "vsco/Keys/Upright Nr1/UR1_G5_mf_RR2.wav",
+          "policy": "stronger_original_channel_if_mono_loss_below_threshold",
+          "threshold_db": -4.0,
+          "original_mono_energy_loss_db": -8.69987059711395,
+          "original_channel_rms": [
+            0.016405142874730213,
+            0.01585792843400336
+          ],
+          "selected": true,
+          "selected_channel": "left",
+          "operation": "copy one original channel to both outputs",
+          "classification": "source preprocessing information, not a musical adaptation error"
+        }
+      ],
+      "affected": true
+    },
+    {
+      "cue": "character_emma",
+      "used_sample_files": 24,
+      "selected_source_channels": [
+        {
+          "file": "vsco/Strings/Harp/KSHarp_C5_mf.wav",
+          "policy": "stronger_original_channel_if_mono_loss_below_threshold",
+          "threshold_db": -4.0,
+          "original_mono_energy_loss_db": -4.032930451545353,
+          "original_channel_rms": [
+            0.010302860590366789,
+            0.0031012113632682753
+          ],
+          "selected": true,
+          "selected_channel": "left",
+          "operation": "copy one original channel to both outputs",
+          "classification": "source preprocessing information, not a musical adaptation error"
+        },
+        {
+          "file": "vsco/Strings/Harp/KSHarp_G5_mf.wav",
+          "policy": "stronger_original_channel_if_mono_loss_below_threshold",
+          "threshold_db": -4.0,
+          "original_mono_energy_loss_db": -4.774280720090168,
+          "original_channel_rms": [
+            0.005435629142287638,
+            0.002015286360550047
+          ],
+          "selected": true,
+          "selected_channel": "left",
+          "operation": "copy one original channel to both outputs",
+          "classification": "source preprocessing information, not a musical adaptation error"
+        }
+      ],
+      "affected": true
+    },
+    {
+      "cue": "character_lingqi",
+      "used_sample_files": 26,
+      "selected_source_channels": [],
+      "affected": false
+    },
+    {
+      "cue": "character_emma_wary",
+      "used_sample_files": 31,
+      "selected_source_channels": [
+        {
+          "file": "vsco/Strings/Harp/KSHarp_C5_mf.wav",
+          "policy": "stronger_original_channel_if_mono_loss_below_threshold",
+          "threshold_db": -4.0,
+          "original_mono_energy_loss_db": -4.032930451545353,
+          "original_channel_rms": [
+            0.010302860590366789,
+            0.0031012113632682753
+          ],
+          "selected": true,
+          "selected_channel": "left",
+          "operation": "copy one original channel to both outputs",
+          "classification": "source preprocessing information, not a musical adaptation error"
+        },
+        {
+          "file": "vsco/Strings/Harp/KSHarp_G5_mf.wav",
+          "policy": "stronger_original_channel_if_mono_loss_below_threshold",
+          "threshold_db": -4.0,
+          "original_mono_energy_loss_db": -4.774280720090168,
+          "original_channel_rms": [
+            0.005435629142287638,
+            0.002015286360550047
+          ],
+          "selected": true,
+          "selected_channel": "left",
+          "operation": "copy one original channel to both outputs",
+          "classification": "source preprocessing information, not a musical adaptation error"
+        }
+      ],
+      "affected": true
+    },
+    {
+      "cue": "character_lingqi_aftermath",
+      "used_sample_files": 22,
+      "selected_source_channels": [],
+      "affected": false
+    }
+  ]
+}

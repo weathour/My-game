@@ -1,0 +1,79 @@
+{
+  "scope": "existing renders only; no publication, no listening review",
+  "checks": [
+    {
+      "name": "circular_room_equals_steady_period",
+      "max_abs_error": 2.444721758365631e-09,
+      "pass": true
+    },
+    {
+      "name": "existing_short_cue_prepare_encode",
+      "results": [
+        {
+          "id": "stinger_victory",
+          "frames": 138543,
+          "seconds": 2.8863125,
+          "nominal_seconds": 2.142857142857143,
+          "tail_limited": false,
+          "within_nominal_plus_2s": true,
+          "lufs": -23.92,
+          "true_peak_dbtp": -10.68,
+          "tail_quiet": true,
+          "pass": true
+        },
+        {
+          "id": "stinger_transform",
+          "frames": 157972,
+          "seconds": 3.2910833333333334,
+          "nominal_seconds": 1.8181818181818181,
+          "tail_limited": false,
+          "within_nominal_plus_2s": true,
+          "lufs": -24.29,
+          "true_peak_dbtp": -5.3,
+          "tail_quiet": true,
+          "pass": true
+        },
+        {
+          "id": "stinger_reward_rare",
+          "frames": 186000,
+          "seconds": 3.875,
+          "nominal_seconds": 1.875,
+          "tail_limited": true,
+          "within_nominal_plus_2s": true,
+          "lufs": -24.24,
+          "true_peak_dbtp": -11.75,
+          "tail_quiet": true,
+          "pass": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "name": "old_or_stale_score_rejected",
+      "pass": true,
+      "evidence": "stinger_victory: stale render"
+    },
+    {
+      "name": "publish_partial_cli_refusal",
+      "exit_code": 2,
+      "output_dir_created": false,
+      "diagnostic": "usage: master.py [-h] [--score SCORE] --renders RENDERS [RENDERS ...] --output\n                 OUTPUT [--publish]\n                 [cues ...]\nmaster.py: error: Partial roster cannot be published\n",
+      "pass": true
+    },
+    {
+      "name": "same_job_resume_and_changed_score_rejection",
+      "first_exit": 0,
+      "resume_exit": 0,
+      "changed_score_exit": 2,
+      "diagnostic": "usage: master.py [-h] [--score SCORE] --renders RENDERS [RENDERS ...] --output\n                 OUTPUT [--publish]\n                 [cues ...]\nmaster.py: error: Output belongs to a different master job\n",
+      "pass": true
+    },
+    {
+      "name": "changed_render_source_rejected_on_resume",
+      "first_exit": 0,
+      "changed_exit": 1,
+      "diagnostic": "'prepared_sha256']: raise ValueError('Changed input '+id)\n                                                                                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nValueError: Changed input stinger_victory\n",
+      "pass": true
+    }
+  ]
+}

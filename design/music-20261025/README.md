@@ -54,17 +54,27 @@ REAPER使用随附的Synthy McSynthface原声钢琴与Major General MIDI（Soniv
 
 ## 复现与继续编辑
 
-本机REAPER位于`/home/weathour/.local/opt/reaper-7.83/reaper_linux_x86_64/REAPER/reaper`，隔离配置位于`/tmp/mygame-reaper-session/`。官方安装包SHA256为`76c49970fd9520b2beabf6485e3ae1ccbe434bc935c68aa6e5a143b0e0ab6594`，与[官方散列](https://www.reaper.fm/download.php?hashes=1)核对后解压；没有购买、账号登录或下载付费采样库。
+2026-10-29 更新：批量渲染由[render_batch.py](render_batch.py)在独立虚拟显示中启动 REAPER，保存工程、切换曲目和导出不再需要反复操作桌面弹窗。本机 REAPER 仍位于`/home/weathour/.local/opt/reaper-7.83/reaper_linux_x86_64/REAPER/reaper`；Xvfb 从 Ubuntu 包解压至`~/.local/opt/my-game-xvfb/`，没有修改系统包。任务使用隔离配置，按 REAPER 实际评估或许可状态运行。原 REAPER 安装包 SHA256 为`76c49970fd9520b2beabf6485e3ae1ccbe434bc935c68aa6e5a143b0e0ab6594`，与[官方散列](https://www.reaper.fm/download.php?hashes=1)核对后解压；没有购买、账号登录或下载付费采样库。
 
-在仓库根目录运行：
+在仓库根目录按需运行，示例选择营地与胜利曲：
 
 ```bash
 python3 design/music-20261025/compose.py
-mkdir -p /tmp/mygame-reaper-session
-/home/weathour/.local/opt/reaper-7.83/reaper_linux_x86_64/REAPER/reaper -newinst -nosplash -cfgfile /tmp/mygame-reaper-session/reaper.ini design/music-20261025/render.lua
-python3 design/music-20261025/master.py
+python3 design/music-20261025/render_batch.py camp_signal victory
 ```
 
-`render.lua`写入`/tmp/mygame-music-render/`；REAPER结束后再运行母带步骤。Python后处理使用本机已有NumPy/SciPy与FFmpeg，没有给游戏增加依赖。也可以直接打开RPP逐音编辑，重新渲染对应文件，再将cue ID传给`master.py`只重做该曲。RPP是母带处理前的工程；游戏实际母带还包括`master.py`记录的EQ、宽度、接缝和增益。循环工程的两轮是制作预滚与正式循环，游戏只包含一轮。
+`compose.py`以代码中的显式谱面为源，更新`score.json`、`cue-sheet.json`和 MIDI；不需要改谱时可跳过。渲染命令不指定曲目时处理全部曲目，`--timeout`可设置批次超时秒数，默认600秒。它在`~/.cache/my-game/music-render/`下创建唯一任务目录并打印路径；也可用`--output`指定新的或空的目录，非空目录会被拒绝。每首的工程与原始音频分别保存在任务的`projects/*.rpp`和`*.wav`，并生成`result.json`、日志与哈希。脚本显式保存工程，用本任务空白工程切换曲目，只关闭本任务的 REAPER 和虚拟显示；超时时尝试留下窗口树和截图并以失败退出。
+
+检查任务结果后，可把其中选定曲目送入隔离的母带目录，替换以下示例路径为实际任务目录和新的或空的暂存目录。母带的曲目参数应对应任务中已有的曲目；不指定时处理全部曲目：
+
+```bash
+python3 design/music-20261025/master.py --raw /path/to/JOB_DIR --output /path/to/STAGING_DIR camp_signal victory
+```
+
+暂存目录内的`masters/*.flac`、`music/*.ogg`和`audio-qa.json`供检查及逐曲接纳；渲染与此母带命令都不会自动替换正式工程或游戏音频。不带`--output`运行`master.py`会直接更新所选正式母带、游戏音频及 QA，应明确需要时才使用。接纳部分曲目时，将检查过的对应母带、游戏音频及所需工程分别纳入，并把暂存 QA 的对应曲目行合入正式`audio-qa.json`，不要用部分结果覆盖整份记录。
+
+正式`projects/`中的 RPP 是继续编辑的源档，任务生成的新工程需要保留时应逐曲核对后纳入。`compose.py`和批量渲染从谱面重建工程，不会读取手工修改过的 RPP；直接在 RPP 修改时须保留工程，并确保后续使用的导出音频与它对应。RPP 是母带处理前的工程；游戏实际母带还包括`master.py`记录的 EQ、宽度、接缝和增益。循环工程的两轮是制作预滚与正式循环，游戏只包含一轮。制作依赖本机 Python、NumPy/SciPy 与 FFmpeg；这些不是游戏运行依赖。
+
+本次用营地、胜利和失败三曲连续完成两次独立批次，检查工程及48 kHz 双声道音频、时长和非静音；另用全新配置渲染胜利曲，验证强制超时诊断和非空输出拒绝，并完成胜利曲隔离母带检查。证据见[验证记录](../../docs/implementation/evidence/2026-10-29/music-render/verification.json)。这些检查覆盖运行和音频技术条件，不代表14首全部完成新流程重渲染，也不替代完整试听、实玩混音或艺术质量验收。
 
 REAPER当前使用官方60天完整功能评估；超过试用期继续使用DAW需取得相应许可。游戏只播放导出的Ogg，不需要安装REAPER。音源/混响实现及声音库随REAPER安装，仓库不复制或再分发这些插件或声音库。Sonivox原始引擎/声音库的Apache-2.0来源和JSFX移植的GPLv3+说明保留于随附插件头部；钢琴/MDA与混响来源同样见插件说明。发行素材说明见[THIRD_PARTY_NOTICES.md](../../THIRD_PARTY_NOTICES.md)，不要将原创曲目当作全项目其他美术已清权的证据。

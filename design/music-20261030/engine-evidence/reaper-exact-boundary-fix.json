@@ -1,0 +1,83 @@
+{
+  "issue": "REAPER7.83 custom render bounds lost sub-millisecond precision when its render dialog opened",
+  "fixture": "renders-military-v3/character_liao",
+  "expected_frames": 5456842,
+  "original_custom_bounds_frames": 5456832,
+  "custom_end_before_render_seconds": 113.68420833333333,
+  "custom_end_after_render_seconds": 113.684,
+  "cause_scope": "Verified on installed REAPER7.83 Linux; not a 16-frame renderer limit and not caused by source WAV length or write_rpp item precision",
+  "minimal_fix": "GetSet_LoopTimeRange2 exact [0,N/48000] time selection and RENDER_BOUNDSFLAG=2 instead of custom bounds=0",
+  "official_api_documentation": "https://www.reaper.fm/sdk/reascript/reascripthelp.html#GetSetProjectInfo",
+  "negative_and_isolation_controls": [
+    {
+      "experiment": "reaper-custom-projectrate-check",
+      "result": {
+        "success": false,
+        "listening_review": false,
+        "error": "REAPER render format/duration mismatch"
+      },
+      "actual_frames": 5456832,
+      "sample_rate": 48000,
+      "log": "tempo=152.0 meter=2/4\nmidi_track=1 notes=332 cc=0\nmidi_track=2 notes=15 cc=0\nmidi_track=3 notes=471 cc=0\nmidi_track=4 notes=416 cc=0\nmidi_track=5 notes=436 cc=0\nCOMPLETE\n"
+    },
+    {
+      "experiment": "reaper-time-selection-only-check",
+      "result": {
+        "success": true,
+        "listening_review": false,
+        "frames": 5456842,
+        "sample_rate": 48000,
+        "channels": 2,
+        "frozen_stems": 5,
+        "editable_midi_tracks": 5,
+        "max_absolute_reconstruction_error": 5.960464477539063e-08,
+        "note_count": 1670,
+        "log": "tempo=152.0 meter=2/4\nmidi_track=1 notes=332 cc=0\nmidi_track=2 notes=15 cc=0\nmidi_track=3 notes=471 cc=0\nmidi_track=4 notes=416 cc=0\nmidi_track=5 notes=436 cc=0\ntime_selection_end=113.684208333333331\nCOMPLETE\n"
+      },
+      "actual_frames": 5456842,
+      "sample_rate": 48000,
+      "log": "tempo=152.0 meter=2/4\nmidi_track=1 notes=332 cc=0\nmidi_track=2 notes=15 cc=0\nmidi_track=3 notes=471 cc=0\nmidi_track=4 notes=416 cc=0\nmidi_track=5 notes=436 cc=0\ntime_selection_end=113.684208333333331\nCOMPLETE\n"
+    },
+    {
+      "experiment": "reaper-custom-readback-check",
+      "result": {
+        "success": false,
+        "listening_review": false,
+        "error": "REAPER render format/duration mismatch"
+      },
+      "actual_frames": 5456832,
+      "sample_rate": 48000,
+      "log": "tempo=152.0 meter=2/4\nmidi_track=1 notes=332 cc=0\nmidi_track=2 notes=15 cc=0\nmidi_track=3 notes=471 cc=0\nmidi_track=4 notes=416 cc=0\nmidi_track=5 notes=436 cc=0\ncustom_end_before_render=113.684208333333331\ncustom_end_after_render=113.683999999999997\nCOMPLETE\n"
+    }
+  ],
+  "final_exact_result": "checks/military-reaper-2_4-v3-exact/result.json",
+  "final_result": {
+    "success": true,
+    "listening_review": false,
+    "frames": 5456842,
+    "sample_rate": 48000,
+    "channels": 2,
+    "expected_frames": 5456842,
+    "render_bounds": "exact integer-sample time selection",
+    "frozen_stems": 5,
+    "editable_midi_tracks": 5,
+    "max_absolute_reconstruction_error": 5.960464477539063e-08,
+    "last_64_frames_max_absolute_error": 5.9051671996712685e-08,
+    "note_count": 1670,
+    "log": "tempo=152.0 meter=2/4\nmidi_track=1 notes=332 cc=0\nmidi_track=2 notes=15 cc=0\nmidi_track=3 notes=471 cc=0\nmidi_track=4 notes=416 cc=0\nmidi_track=5 notes=436 cc=0\nexact_time_selection_frames=5456842 end_seconds=113.684208333333331\nCOMPLETE\n"
+  },
+  "unchanged": [
+    "audio_engine.py frozen note/sample rendering",
+    "write_rpp frozen media item durations",
+    "all formal score and mix/stem files",
+    "strict rendered/source shape equality",
+    "1e-6 reconstruction tolerance"
+  ],
+  "not_used": [
+    "tail padding",
+    "cropping",
+    "polarity changes",
+    "relaxed duration assertion"
+  ],
+  "listening_review": false
+}

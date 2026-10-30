@@ -60,12 +60,19 @@ Status: prototype material in the source tree. Its source and usage rights still
 
 ## Original game score (2026-10-25)
 
-- Runtime: 14 Ogg Vorbis files in `assets/music/`; 12 loops and 2 non-looping result cues. This replaces the previous runtime BGM.
+- At that date, 14 Ogg Vorbis files in `assets/music/`, comprising 12 loops and 2 non-looping result cues, replaced the previous runtime BGM. These files and their sources are retained; the 2026-10-30 chronicle score below is a separate production.
 - Composition: original note-level themes and arrangements written by the primary coding assistant for this project. Bach-style independent voices and Touhou-style melodic battle energy are references to methods; no songs, recordings or MIDI from those works were imported. No dialogue voice or voice clone was produced.
 - Authoring: REAPER 7.83 Linux with its bundled Synthy McSynthface (MDA piano), Major General MIDI (Sonivox EAS), and Zita-Rev1-port reverb. The Sonivox engine/bank is identified as Apache-2.0 in the bundled source; the JSFX ports identify GPLv3+ licensing. The repository contains rendered performances, scores and project settings, not redistributed plugin implementations or sound banks.
 - Provenance, software sources, license context, exact reproduction steps and limitations: [soundtrack production record](design/music-20261025/README.md). Full source scores, MIDI, REAPER projects, 24-bit FLAC masters and per-file hashes are retained there.
 - REAPER was used under its official 60-day evaluation; continued DAW use beyond that period requires the appropriate license. The exported game does not depend on REAPER or its trial period.
 - Technical audio checks do not establish human artistic approval or clear unrelated visual assets.
+
+## Chronicle score (2026-10-30)
+
+- Runtime: 70 Ogg Vorbis mixes in `assets/music/chronicle/`, catalogued by `assets/data/audio/music_catalog.json`: 38 main compositions, 8 alternate arrangements and 24 short cues. The full subjective listening review remains outstanding.
+- Source: project-authored scores rendered from pinned CC0 multisample libraries, with a generated additive pad and room effect. Exact libraries, revisions, hashes, instrument names and local mapping corrections are listed in [the music notices](design/music-20261030/THIRD_PARTY_NOTICES.md) and [instrument manifest](design/music-20261030/instrument-manifest.json).
+- Original sample downloads are cached outside the repository. Local frozen stems, MIDI, REAPER projects and FLAC masters are Git-ignored; score sources, manifest and production tools can regenerate them as described in [the production README](design/music-20261030/README.md).
+- REAPER 7.83 was used for isolated project verification under its existing evaluation or license status. The game and its exported validation PCK do not require REAPER. The PCK is a local engineering check, not a public release or clearance of other assets.
 
 ## Chronicle UI geographic data (2026-10-27)
 

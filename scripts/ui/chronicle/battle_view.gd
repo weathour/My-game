@@ -3,6 +3,8 @@ extends Control
 signal completed(result: Dictionary)
 signal cancelled
 signal failed
+signal music_context_changed(node_id: String, form_index: int, paused: bool, outcome: String)
+var _last_music_context := ""
 const T := preload("res://scripts/ui/chronicle/chronicle_theme.gd")
 const BATTLE := preload("res://scripts/battle/battle_session.gd")
 const C := preload("res://scripts/content/combat_catalog.gd")
@@ -116,6 +118,7 @@ func _physics_process(delta: float) -> void:
 	for event in battle.events:
 		if event.kind == "message": feedback.text = event.text; message_time = 2
 		if event.kind == "level": feedback.text = "%s  Lv.%d" % [definitions[event.id].name, event.level]; message_time = 3
+	_publish_music_context()
 	canvas.consume_events(battle.events)
 	battle.events.clear()
 	_sync_camera_obstacles()
@@ -151,6 +154,7 @@ func refresh() -> void:
 func toggle_pause() -> void:
 	if not battle.outcome.is_empty(): return
 	battle.set_paused(not battle.paused)
+	_publish_music_context()
 	if is_instance_valid(overlay): overlay.queue_free(); overlay = null
 	if battle.paused:
 		var column := _modal("行军暂歇", "暂停不推进计时。离开本关会回到进关前状态。")
@@ -205,3 +209,12 @@ func _unhandled_input(event: InputEvent) -> void:
 	elif event.is_action_pressed("battle_skill_two"): battle.request_skill(1)
 	else: return
 	get_viewport().set_input_as_handled()
+
+func _publish_music_context() -> void:
+	var form_index := 0
+	for enemy in battle.enemies:
+		if enemy.rank == "boss": form_index = maxi(form_index, int(enemy.form_index))
+	var key := "%s:%d:%s:%s" % [request.node.id, form_index, battle.paused, battle.outcome]
+	if key == _last_music_context: return
+	_last_music_context = key
+	music_context_changed.emit(str(request.node.id), form_index, bool(battle.paused), str(battle.outcome))
