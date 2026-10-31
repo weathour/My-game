@@ -1,0 +1,51 @@
+{
+  "result": "No blocking finding in reviewed current runtime/audio changes.",
+  "scope": [
+    "Melee eligibility radius/angle/target stickiness/background ranged branch",
+    "PCM contact transient timing and pipeline to first rendered feedback",
+    "Multi-target source/number grouping and clutter budget",
+    "Enemy clip preload and tell/release/death semantics"
+  ],
+  "independent_evidence": {
+    "simulation": "simulation-probe.json: 128 cases across SWEEP/THRUST, 16 angles, radius13/40, edge ±0.1: 0 failures. Background PROJECTILE at reach+1 and radius40 remains rejected. New branch retains original TARGETS.nearest stickiness rule inside per-body eligible list.",
+    "audio": "audio-independent.json: all 22 PCM files measured directly; contact half-peak 1.1875–3ms; hit_light old107.33/37.67/81.96ms now3ms; zero full-scale samples, zero first/last samples. Runtime-loaded timing harness observes matching hit_light half-peak3ms.",
+    "render": "render/timing.json and PNGs: independent OpenGL compatibility run, fixed-seed 3/42 E01 scenarios. Manual cast and damage same sim tick; actor contact frame1 and Jia contact VFX frame1 available before first draw; zero orange hit-sheet body clips. Cold controlled input-to-draw30.56/25.71ms, live scheduled input-to-batch1.47/2.21ms and input-to-draw9.49/13.73ms. Audio play scheduling4.03/7.12ms after controlled input, plus3ms PCM half-peak.",
+    "groups": "group-cache-probe.json: 52 mixed primary/support/DOT events remain total66. Same cast_id10 with sourceJIA/F11 retain separate numeric totals42/14; six contact marks/targets, no mutation of event array, simulation RNG or HP. Support/DOT keep original no-float-number policy; totals/counter include them.",
+    "cache": "group-cache-probe.json: tell pose survives confirm_hit; pause freezes clip; E01 swipe releases on contact_frame2 after epsilon repair; E01 with no death art intentionally fades idle, human B18 death remains death clip and reaches frame1 at200ms. Clip textures preloaded once at setup rather than replacing state/time/geometry.",
+    "warning_priority": "Source inspection battle_canvas.gd draw_foreground draws threat hazards/telegraphs/releases after effects/numbers; budget/primary selection does not filter battle.telegraphs or simulation effects."
+  },
+  "resolved_during_review": [
+    {
+      "issue": "Existing floating-point frame floor could put E01 release at1.1s on frame1 rather than authored contact_frame2.",
+      "owner_fix": "enemy_actor._update_frame now floor(age*fps + .00001).",
+      "recheck": "Independent original cache probe now release_frame2==release_expected2; no runtime edits by reviewer."
+    }
+  ],
+  "limits": [
+    "PCM onset and Dummy play scheduling do not establish acoustic speaker/headphone device latency.",
+    "No subjective audio listening certification or user aesthetic acceptance.",
+    "Crowd screenshots are controlled worst-case fixtures, not a full live campaign traversal.",
+    "Ground artist changes and B02 ground are outside this review; no full regression, commit or push."
+  ],
+  "notes": [
+    "Ordinary distant direct impacts beyond260 world units intentionally receive no selected body/spark contact; they still retain per-source direct numbers and sound/actual projectile visuals. This is current clutter policy, not dropped simulation damage.",
+    "No new hitstop or simulation-time/RNG changes introduced."
+  ],
+  "commands": [
+    {
+      "name": "Independent128-angle/radius probe",
+      "command": "godot-4.6.2 --headless --path . --script /tmp/my-game-latency-review.gd",
+      "result": "128 cases, zero failures"
+    },
+    {
+      "name": "Independent source-group/cache probe",
+      "command": "godot-4.6.2 --headless --path . --script /tmp/my-game-readability-review.gd",
+      "result": "report saved; final clean exit; release contact repaired"
+    },
+    {
+      "name": "Real renderer timing",
+      "command": "godot-4.6.2 --path . --display-driver x11 --rendering-method gl_compatibility --audio-driver Dummy --script scripts/tests/chronicle_feedback_latency_smoke.gd -- --report=.../review/render",
+      "result": "PASS19 at captured version; measured timings retained. Later epsilon repair independently checked in cache probe."
+    }
+  ]
+}

@@ -1,0 +1,93 @@
+{
+  "headless": {
+    "pass": true,
+    "checks": 191
+  },
+  "opengl": {
+    "pass": true,
+    "checks": 215
+  },
+  "new_environment_stages": 18,
+  "fallback_stages": 0,
+  "themes": 6,
+  "capture_sizes": [
+    [
+      960,
+      540
+    ],
+    [
+      1280,
+      720
+    ],
+    [
+      1920,
+      1080
+    ]
+  ],
+  "captures": [
+    "theme-B01-road-1280.png",
+    "theme-B02-city-1280.png",
+    "theme-B03-camp-1280.png",
+    "theme-B06-shrine-1280.png",
+    "theme-B14-river-1280.png",
+    "whitegate-boundary-3145-1735.png",
+    "whitegate-boundary-3145-65.png",
+    "whitegate-boundary-55-1735.png",
+    "whitegate-boundary-55-65.png",
+    "whitegate-center-1280.png",
+    "whitegate-center-1920.png",
+    "whitegate-center-960.png",
+    "whitegate-field-0-1280.png",
+    "whitegate-field-0-1920.png",
+    "whitegate-field-0-960.png",
+    "whitegate-field-1-1280.png",
+    "whitegate-field-1-1920.png",
+    "whitegate-field-1-960.png",
+    "whitegate-field-2-1280.png",
+    "whitegate-field-2-1920.png",
+    "whitegate-field-2-960.png",
+    "whitegate-field-3-1280.png",
+    "whitegate-field-3-1920.png",
+    "whitegate-field-3-960.png"
+  ],
+  "world_bounds": [
+    0,
+    0,
+    3200,
+    1800
+  ],
+  "player_margin": [
+    55,
+    65
+  ],
+  "field_positions": [
+    [
+      440,
+      320
+    ],
+    [
+      2760,
+      320
+    ],
+    [
+      440,
+      1480
+    ],
+    [
+      2760,
+      1480
+    ]
+  ],
+  "geometry_changed": false,
+  "source_stretch": false,
+  "extension": "full_ground_mirror",
+  "baseline_property": "BattleCanvas.ground.baseline",
+  "capture_tint": "ffffff",
+  "evidence_scope": "geometry_and_layout_before_final_tint",
+  "current_visual_state": {
+    "directory": "../color-final",
+    "tint": "d9d9d9",
+    "parameters": "../color-final/color-adjustment.json",
+    "parent_visual_acceptance": true
+  }
+}

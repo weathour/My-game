@@ -7,6 +7,10 @@ Active graph location:
 
 The graph is currently stale and does not describe the new design or cleaned documentation tree. Read [the design consensus](00_当前设计共识.md) and [current status](08_当前实现状态与后续重点.md) first. Documentation-only changes do not require a rebuild; do not recreate deleted specifications from graph nodes.
 
+2026-10-30 latency and readability fix: the protected update again rejected its candidate because Godot extraction was unavailable and 211 runtime GDScript files lacked coverage; the prior graph remains STALE. See the [check log](../design/combat-feedback-20261030/latency-readability-fix/full-check-console.log) and [implementation record](implementation/2026-10-30_打击时序与首关可读性修正.md). The game checks passed independently.
+
+2026-10-30 combat feedback and ground: the protected updater ran after the last runtime change, but Godot extraction remained unavailable and 211 runtime GDScript files lacked coverage. The candidate was rejected and the existing graph retained as STALE. See the [project-check log](../design/combat-feedback-20261030/runtime-evidence/full-check-console.log) and [implementation record](implementation/2026-10-30_战斗反馈与战场环境改进.md); this index limitation is separate from the passing game checks.
+
 ## Update command
 
 After code changes, run:

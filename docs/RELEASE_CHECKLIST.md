@@ -59,6 +59,7 @@
 
 - [ ] 素材与分发边界按 [THIRD_PARTY_NOTICES.md](../THIRD_PARTY_NOTICES.md)和 [LICENSE.md](../LICENSE.md)核对。
 - [ ] 导出包含需要的运行数据，排除编辑器插件、测试、文档、制作源档和不允许分发的占位素材。
+- 2026-10-31 资源整理：导出配置精确排除 `assets/maps/battle_map.png`、`temp_reference_map.png`、`grassland_3.png` 及对应导入资源；三份源图保留在仓库，`grassland_4.png` 因仍有包内引用而保留。旧道路已移出运行素材目录；`graphify-out` 等本地缓存排除出导出包。新包复验结果见[资源审计记录](implementation/2026-10-31_资源体积审计与公开仓库同步.md)，该整理不替代发行包验收。
 - [ ] 成品包包含 `assets/enemies/baimen/` 下动态读取的角色／特效 JSON 清单及其引用资源。临时 PCK 的隔离资源检查已通过 610 项；仍须用匹配模板生成并运行实际独立可执行包，再完成发行验收。
 - [ ] 测试目标系统、字体回退、音频与存档权限。
 - [ ] 若接入Steam，再按[成就适配说明](achievements/STEAM_ADAPTER.md)验收，不默认本次已接入。

@@ -1,0 +1,54 @@
+{
+  "baseline_commit": "5fa3ed236df0eaf3dd72915eba5681819efe6aef",
+  "runtime": "Godot 4.6.2.stable.official.71f334935",
+  "engine": "/home/weathour/.local/bin/godot-4.6.2",
+  "engine_sha256": "5a806b2b385279d9607094d33e946ed828e9606df4cb46d258ca27468dc5c1c9",
+  "captured_date": "2026-10-30",
+  "timezone": "Asia/Shanghai",
+  "temporary_project_root": "/tmp/my-game-feedback-parity-0mep15to",
+  "captured_before_final_direction_default_change": true,
+  "final_change": "After parity capture, damage_dealt.direction fallback changed from an inferred current-position vector to Vector2.ZERO. It only alters an event field; no hashed simulation state or rule input reads this field. No parity rerun was performed.",
+  "commands": {
+    "baseline": "XDG_DATA_HOME=/tmp/my-game-feedback-parity-0mep15to/baseline-xdg/data XDG_CONFIG_HOME=/tmp/my-game-feedback-parity-0mep15to/baseline-xdg/config XDG_CACHE_HOME=/tmp/my-game-feedback-parity-0mep15to/baseline-xdg/cache /home/weathour/.local/bin/godot-4.6.2 --headless --path /tmp/my-game-feedback-parity-0mep15to/baseline --script parity.gd",
+    "current": "XDG_DATA_HOME=/tmp/my-game-feedback-parity-0mep15to/current-xdg/data XDG_CONFIG_HOME=/tmp/my-game-feedback-parity-0mep15to/current-xdg/config XDG_CACHE_HOME=/tmp/my-game-feedback-parity-0mep15to/current-xdg/cache /home/weathour/.local/bin/godot-4.6.2 --headless --path /tmp/my-game-feedback-parity-0mep15to/current --script parity.gd"
+  },
+  "configuration": {
+    "members": [
+      "JIA",
+      "F06",
+      "F11"
+    ],
+    "level": 12,
+    "stages": [
+      "B01",
+      "B15",
+      "B18"
+    ],
+    "seed": "stage.seed",
+    "equipment": {
+      "weapon": "plain_blade",
+      "armor": "iron_armor",
+      "accessory": "ember_seal"
+    },
+    "fixed_delta": "1.0 / 60.0",
+    "frame_cap_per_stage": 12000
+  },
+  "capture_scope": [
+    "each member snapshot, shield, hurt_lock, haste, stats",
+    "enemy identity, HP, form/bank/transition, movement, AI, aim, tell, slow, flash and current attack",
+    "player position/facing, active member and switch/target/slow clocks",
+    "cast and delivery serials",
+    "gems, projectiles, hazards, telegraphs and effects",
+    "director time/kills/RNG/serial/spawn/wave/reward flags",
+    "mechanics states/curses/exposures/refunds/fields",
+    "terminal battle result"
+  ],
+  "excluded_from_state_digest": [
+    "presentation event payloads",
+    "new _last_damage_feedback presentation provenance dictionary",
+    "UI/audio/render state",
+    "wall-clock duration"
+  ],
+  "comparison": "For each stage the baseline and current per-tick state-stream SHA256 is identical, as are frame count and terminal outcome.",
+  "total_frames_per_side": 10658
+}

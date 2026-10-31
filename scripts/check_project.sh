@@ -92,7 +92,7 @@ if [[ -n "$GODOT_BIN" ]]; then
     log="$CHECK_LOG_DIR/${name}.log"
     # Pixel assertions and actual music playback need a real display; CI
     # supplies Xvfb. Dummy still decodes/mixes audio without a hardware device.
-    if [[ "$name" == *_render_smoke || "$name" == "chronicle_music_playback_smoke" ]]; then
+    if [[ "$name" == *_render_smoke || "$name" == "chronicle_music_playback_smoke" || "$name" == "chronicle_combat_feedback_smoke" ]]; then
       display_args=(--rendering-method gl_compatibility --audio-driver Dummy)
     fi
     echo "== Godot ${name//_/ } =="
@@ -135,7 +135,7 @@ if [[ -n "$GODOT_BIN" ]]; then
       exit 1
     fi
 
-    for name in chronicle_enemy_pack_smoke chronicle_music_pack_smoke chronicle_story_pack_smoke; do
+    for name in chronicle_enemy_pack_smoke chronicle_music_pack_smoke chronicle_story_pack_smoke chronicle_combat_feedback_pack_smoke; do
       external_script="$pack_dir/$name.gd"
       log="$CHECK_LOG_DIR/$name.log"
       cp "scripts/tests/$name.gd" "$external_script"
@@ -165,6 +165,7 @@ if [[ -n "$GODOT_BIN" ]]; then
     [[ "$(basename "$smoke")" == "chronicle_enemy_pack_smoke.gd" ]] && continue
     [[ "$(basename "$smoke")" == "chronicle_music_pack_smoke.gd" ]] && continue
     [[ "$(basename "$smoke")" == "chronicle_story_pack_smoke.gd" ]] && continue
+    [[ "$(basename "$smoke")" == "chronicle_combat_feedback_pack_smoke.gd" ]] && continue
     run_smoke "$smoke"
   done
 

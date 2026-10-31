@@ -26,6 +26,7 @@ REQUIRED_SUCCESS = {
     "chronicle_enemy_pack_smoke": "ENEMY_PACK_SMOKE PASS",
     "chronicle_music_pack_smoke": "CHRONICLE_MUSIC_PACK_SMOKE PASS",
     "chronicle_story_pack_smoke": "CHRONICLE_STORY_PACK_SMOKE PASS",
+    "chronicle_combat_feedback_pack_smoke": "CHRONICLE_COMBAT_FEEDBACK_PACK_SMOKE PASS",
     "chronicle_music_playback_smoke": "CHRONICLE_MUSIC_PLAYBACK_SMOKE PASS",
 }
 # Match the test, exact preceding marker and exact error together. Never

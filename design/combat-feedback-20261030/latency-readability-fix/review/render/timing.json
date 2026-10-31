@@ -1,0 +1,81 @@
+{
+  "baseline": false,
+  "observations": [
+    {
+      "actor_contact_frame": 1,
+      "audio": [
+        {
+          "category": "cast_blade",
+          "half_peak_onset_ms": 4.875,
+          "path": "res://assets/sfx/chronicle-feedback/cast_blade_02.wav",
+          "schedule_after_input_ms": 3.986
+        },
+        {
+          "category": "hit_light",
+          "half_peak_onset_ms": 3.0,
+          "path": "res://assets/sfx/chronicle-feedback/hit_light_01.wav",
+          "schedule_after_input_ms": 4.026
+        }
+      ],
+      "cast_sim_time": 0.0166666666666667,
+      "damage_count": 3,
+      "damage_sim_time": 0.0166666666666667,
+      "damage_total": 202.5,
+      "enemies": 3,
+      "first_tick_cpu_ms": 4.966,
+      "input_to_batch_ms": 3.785,
+      "input_to_first_draw_ms": 30.559,
+      "input_to_refresh_ms": 4.975,
+      "jia_vfx_first_frame": 1,
+      "live_input_to_batch_ms": 1.472,
+      "live_input_to_first_draw_ms": 9.487,
+      "live_input_to_refresh_sample_ms": 8.584,
+      "marks_on_first_draw": 4,
+      "ordinary_health_bars_first_draw": 3,
+      "physics_max_ms": 2.234,
+      "physics_p50_ms": 0.742,
+      "physics_p95_ms": 1.178,
+      "pipeline_boundary": "Input handler to tick/refresh/draw. Dummy output is not measured acoustic device latency; PCM onset is measured relative to play scheduling.",
+      "seed": 1701,
+      "whole_body_hit_clips": 0
+    },
+    {
+      "actor_contact_frame": 1,
+      "audio": [
+        {
+          "category": "cast_blade",
+          "half_peak_onset_ms": 4.875,
+          "path": "res://assets/sfx/chronicle-feedback/cast_blade_02.wav",
+          "schedule_after_input_ms": 7.089
+        },
+        {
+          "category": "hit_light",
+          "half_peak_onset_ms": 3.0,
+          "path": "res://assets/sfx/chronicle-feedback/hit_light_01.wav",
+          "schedule_after_input_ms": 7.122
+        }
+      ],
+      "cast_sim_time": 0.0166666666666667,
+      "damage_count": 42,
+      "damage_sim_time": 0.0166666666666667,
+      "damage_total": 2835.0,
+      "enemies": 42,
+      "first_tick_cpu_ms": 9.562,
+      "input_to_batch_ms": 6.112,
+      "input_to_first_draw_ms": 25.71,
+      "input_to_refresh_ms": 9.573,
+      "jia_vfx_first_frame": 1,
+      "live_input_to_batch_ms": 2.21,
+      "live_input_to_first_draw_ms": 13.725,
+      "live_input_to_refresh_sample_ms": 12.466,
+      "marks_on_first_draw": 6,
+      "ordinary_health_bars_first_draw": 4,
+      "physics_max_ms": 5.357,
+      "physics_p50_ms": 1.869,
+      "physics_p95_ms": 2.387,
+      "pipeline_boundary": "Input handler to tick/refresh/draw. Dummy output is not measured acoustic device latency; PCM onset is measured relative to play scheduling.",
+      "seed": 1701,
+      "whole_body_hit_clips": 0
+    }
+  ]
+}

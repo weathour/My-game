@@ -337,7 +337,7 @@ func cashout(enemy_id: int, fraction: float) -> float:
 		layer.accrued *= 1 - fraction
 	return amount
 
-func receive_hit(actor: RefCounted, raw: float, equipment: Dictionary) -> float:
+func receive_hit(actor: RefCounted, raw: float, equipment: Dictionary, result: Dictionary = {}) -> float:
 	var b := battle()
 	if actor.dead or actor.hurt_lock > 0: return 0
 	var window: Dictionary = states[actor.id].windows.get("guard", {})
@@ -345,7 +345,9 @@ func receive_hit(actor: RefCounted, raw: float, equipment: Dictionary) -> float:
 	if guarded:
 		raw *= 1 - clampf(float(window.get("reduction", 0.5)), 0, 0.9)
 		window.charges -= 1
-	var loss := RESOLVER.hit_character(actor, raw, equipment)
+	var loss := RESOLVER.hit_character(actor, raw, equipment, result)
+	result.guarded = guarded
+	if guarded: result.guard_source = str(window.owner)
 	if guarded:
 		var context := {"source":str(window.owner), "ability":"guard_counter", "cast":b.cast_serial, "damage":float(window.attack) * float(window.get("counter_scale", 1.5)),
 			"attack":float(window.attack), "enchant":"", "direct":false, "secondary":true, "damage_type":A.DamageType.PHYSICAL, "slow":0.0, "duration":0.0}

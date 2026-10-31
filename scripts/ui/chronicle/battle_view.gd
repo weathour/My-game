@@ -88,7 +88,7 @@ func _ready() -> void:
 func _layout_hud() -> void:
 	hud.offset_top = -hud.custom_minimum_size.y - 8
 	hud.offset_bottom = -8
-	feedback.offset_top = hud.offset_top - 32
+	feedback.offset_top = hud.offset_top - maxf(32, 24 * feedback.get_line_count() + 8)
 	feedback.offset_bottom = hud.offset_top - 8
 	canvas.safe_bottom = maxf(90, -hud.offset_top + 12)
 	canvas.safe_top = 72
@@ -115,9 +115,7 @@ func _sync_camera_obstacles() -> void:
 func _physics_process(delta: float) -> void:
 	var direction := INPUT.movement()
 	battle.tick(delta, direction)
-	for event in battle.events:
-		if event.kind == "message": feedback.text = event.text; message_time = 2
-		if event.kind == "level": feedback.text = "%s  Lv.%d" % [definitions[event.id].name, event.level]; message_time = 3
+	_present_messages(battle.events)
 	_publish_music_context()
 	canvas.consume_events(battle.events)
 	battle.events.clear()
@@ -133,6 +131,20 @@ func _physics_process(delta: float) -> void:
 		else:
 			show_result()
 			completed.emit(battle.result.duplicate(true))
+
+func _present_messages(events: Array) -> void:
+	var leveled: Array[String] = []
+	var rewards: Array[String] = []
+	for event in events:
+		if event.kind == "message": feedback.text = event.text; message_time = 2
+		if event.kind == "level": leveled.append("%s  Lv.%d" % [definitions[event.id].name, event.level])
+		if event.kind == "elite_defeated":
+			rewards.append("精英已击败，胜利后多选 1 张卡" if event.get("reward_kind", "") == "card" else "精英已击败，胜利后获得装备奖励")
+	if not rewards.is_empty(): feedback.text = "\n".join(rewards); message_time = 4
+	if not leveled.is_empty():
+		feedback.text = "  ·  ".join(leveled) + ("\n" + feedback.text if not rewards.is_empty() else "")
+		message_time = maxf(message_time, 3)
+	if not events.is_empty(): _layout_hud()
 
 func refresh() -> void:
 	var seconds := int(battle.director.elapsed)

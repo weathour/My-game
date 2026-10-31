@@ -27,13 +27,17 @@ static func hit_enemy(enemy: RefCounted, context: Dictionary) -> bool:
 		enemy.slow_time = maxf(enemy.slow_time, duration)
 	return enemy.dead
 
-static func hit_character(character: RefCounted, raw: float, equipment: Dictionary) -> float:
+static func hit_character(character: RefCounted, raw: float, equipment: Dictionary, result: Dictionary = {}) -> float:
 	if character.dead or character.hurt_lock > 0: return 0
+	var previous_hp: float = character.hp
 	var damage: float = raw * 100.0 / (100.0 + character.stats.armor * 3.0)
 	var blocked := minf(character.shield, damage)
 	character.shield -= blocked
 	damage -= blocked
 	character.hp = maxf(0, character.hp - damage)
+	# Capture before armor can replenish a shield. Presentation must not infer
+	# absorption from the final shield difference or mistake overkill for HP loss.
+	result.merge({"processed":true, "health_loss":previous_hp - character.hp, "shield_absorbed":blocked}, true)
 	# This is hit protection, not switch invulnerability. It stays on this person.
 	character.hurt_lock = 0.3
 	character.dead = character.hp <= 0

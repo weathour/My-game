@@ -40,6 +40,8 @@ var cast_serial := 0
 var _switch_intent := 0
 var _skill_intents: Array[int] = []
 var _hits: Array = []
+# Only presentation provenance; never consulted by damage or reward calculations.
+var _last_damage_feedback: Dictionary = {}
 var mechanics: RefCounted
 
 func _init(request: Dictionary) -> void:
@@ -122,7 +124,15 @@ func tick(delta: float, movement: Vector2) -> void:
 	_resolve_hits()
 	for incoming_index in incoming.size():
 		if transition_safe or _has_safe_transition(): continue
-		var loss: float = mechanics.receive_hit(actor, float(incoming[incoming_index]), equipment)
+		var hit_result := {}
+		var loss: float = mechanics.receive_hit(actor, float(incoming[incoming_index]), equipment, hit_result)
+		if bool(hit_result.get("processed", false)):
+			var player_event: Dictionary = incoming_sources[incoming_index].duplicate() if incoming_index < incoming_sources.size() else {}
+			player_event.source_position = player_event.get("position", position)
+			player_event.direction = (position - Vector2(player_event.source_position)).normalized()
+			player_event.merge(hit_result, true)
+			player_event.merge({"kind":"player_hit", "id":actor.id, "position":position, "time":director.elapsed}, true)
+			events.append(player_event)
 		if loss > 0:
 			events.append({"kind":"hurt", "amount":loss, "id":actor.id})
 			var damage_event: Dictionary = incoming_sources[incoming_index].duplicate() if incoming_index < incoming_sources.size() else {}
@@ -137,13 +147,28 @@ func tick(delta: float, movement: Vector2) -> void:
 		if not enemy.dead: continue
 		var killed: bool = enemy.death_reason in ["", "killed"]
 		if killed:
+			var had_card_reward: bool = director.card_elite
+			var had_equipment_reward: bool = director.equipment_elite
 			director.defeated(enemy)
 			var final_boss: bool = enemy.kind == "boss" and enemy.hp_owner == null
 			boss_dead = boss_dead or final_boss
 			if final_boss: events.append({"kind":"boss_defeated", "id":enemy.id, "enemy_id":enemy.id, "position":enemy.position, "phase":enemy.form_index, "form_index":enemy.form_index, "form_count":enemy.form_count, "form_name":enemy.form_name})
 			if enemy.xp > 0: gems.append({"position":enemy.position, "amount":enemy.xp})
-			events.append({"kind":"kill", "position":enemy.position, "id":enemy.id, "living":enemy.rank != "object"})
+			var kill_event := _enemy_feedback(enemy)
+			kill_event.merge({"source":"", "ability":"", "mechanic":"", "cast":0, "cast_id":0, "delivery":0, "direct":false, "secondary":false, "direction":Vector2.ZERO}, true)
+			kill_event.merge(_last_damage_feedback.get(enemy.id, {}), true)
+			# A transformed/banked death retains its causal source but its current
+			# corpse appearance and position, rather than a stale impact snapshot.
+			kill_event.merge(_enemy_feedback(enemy), true)
+			kill_event.merge({"kind":"kill", "id":enemy.id, "living":enemy.rank != "object", "lethal":true, "time":director.elapsed}, true)
+			events.append(kill_event)
+			var reward_kind := "card" if director.card_elite and not had_card_reward else "equipment" if director.equipment_elite and not had_equipment_reward else ""
+			if not reward_kind.is_empty():
+				var reward_event := kill_event.duplicate()
+				reward_event.merge({"kind":"elite_defeated", "reward_kind":reward_kind, "provisional":true, "requires_victory":true}, true)
+				events.append(reward_event)
 		else: events.append({"kind":"enemy_remove", "id":enemy.id, "reason":enemy.death_reason})
+		_last_damage_feedback.erase(enemy.id)
 		enemies.remove_at(i)
 	if characters.JIA.dead:
 		_finish("failed")
@@ -153,7 +178,11 @@ func tick(delta: float, movement: Vector2) -> void:
 		target_id = -1
 		events.append({"kind":"message", "text":"%s阵亡，贾苇索接战。" % actor.id})
 	if boss_dead:
+		var swept_amount := 0.0
+		var swept_count := gems.size()
 		for gem in gems: grant_experience(gem.amount)
+		for gem in gems: swept_amount += float(gem.amount)
+		if swept_count > 0: events.append({"kind":"xp_pickup", "amount":swept_amount, "position":position, "count":swept_count, "collection":"victory_sweep", "time":director.elapsed})
 		gems.clear()
 		if director.elapsed <= director.config.bonus_time: grant_experience(18.0)
 		_finish("victory")
@@ -200,19 +229,37 @@ func _resolve_hits() -> void:
 		deliveries[group] = true
 		var previous_budget: float = receiver.remaining_health_budget()
 		var previous_phase: int = receiver.form_index
+		var feedback := _enemy_feedback(hit.target)
 		mechanics.resolve_hit(hit.target, hit.context)
 		var applied := maxf(0, previous_budget - receiver.remaining_health_budget())
 		if applied > 0:
-			events.append({"kind":"damage_dealt", "enemy_id":receiver.id, "definition_id":receiver.definition_id, "phase":previous_phase, "amount":applied,
+			feedback.merge({"kind":"damage_dealt", "enemy_id":receiver.id, "definition_id":receiver.definition_id, "phase":previous_phase, "amount":applied,
 				"source":str(hit.context.get("source", "")), "ability":str(hit.context.get("ability", "")), "mechanic":str(hit.context.get("mechanic", "")),
-				"direct":bool(hit.context.get("direct", false)), "secondary":bool(hit.context.get("secondary", false)), "time":director.elapsed})
+				"direct":bool(hit.context.get("direct", false)), "secondary":bool(hit.context.get("secondary", false)), "time":director.elapsed,
+				"cast":int(hit.context.get("cast", 0)), "cast_id":int(hit.context.get("cast", 0)), "delivery":int(hit.context.get("delivery", 0)),
+				"damage_type":int(hit.context.get("damage_type", 0)), "lethal":receiver.dead,
+				"direction":hit.context.get("impact_direction", Vector2.ZERO)}, true)
+			events.append(feedback)
+			_last_damage_feedback[receiver.id] = feedback.duplicate()
 	_hits.clear()
+
+func _enemy_feedback(enemy: RefCounted) -> Dictionary:
+	return {"enemy_id":enemy.id, "target_id":enemy.id, "definition_id":enemy.definition_id, "position":enemy.position,
+		"rank":enemy.rank, "enemy_kind":enemy.kind, "target_kind":enemy.kind, "visual_id":enemy.visual_id,
+		"radius":enemy.radius, "body_height":enemy.body_height, "form_count":enemy.form_count, "form_name":enemy.form_name,
+		"material":str(enemy.definition.get("material", enemy.params.get("material", ""))),
+		"target_is_elite":enemy.rank == "field_elite" or enemy.kind in ["card_elite", "equipment_elite"],
+		"target_is_boss":enemy.kind == "boss", "phase":enemy.form_index}
 
 func _cast(ability: Resource, source: RefCounted, direct: bool, manual: bool = false) -> bool:
 	if not manual and source.cooldowns.get(ability.id, 0.0) > 0: return false
 	if not mechanics.can_cast(ability, source): return false
 	var query_reach: float = mechanics.query_reach(ability, source, direct)
-	var target := TARGETS.nearest(enemies, position, query_reach, target_id)
+	# Melee impacts already include each receiver's radius. Use that same
+	# eligibility before aiming, without borrowing a larger neighbor's radius.
+	var melee_shape: bool = ability.kind in [A.Kind.SWEEP, A.Kind.THRUST]
+	var candidates: Array = TARGETS.in_shape(enemies, position, facing, query_reach, false, true) if melee_shape else enemies
+	var target := TARGETS.nearest(candidates, position, INF if melee_shape else query_reach, target_id)
 	cast_serial += 1
 	var cast := ABILITIES.activate(ability, source, position, target, facing, equipment, direct, cast_serial, mechanics.cost(ability, source, manual), manual)
 	if cast.has("error"):
@@ -220,7 +267,9 @@ func _cast(ability: Resource, source: RefCounted, direct: bool, manual: bool = f
 		return false
 	cast = mechanics.prepare(cast)
 	events.append({"kind":"cast", "id":source.id, "ability":str(ability.id), "paid":float(cast.context.paid), "manual":manual, "direct":direct,
-		"shield_spent":float(cast.context.get("shield_spent", 0)), "ammo_spent":int(cast.context.get("ammo_spent", 0)), "time":director.elapsed})
+		"shield_spent":float(cast.context.get("shield_spent", 0)), "ammo_spent":int(cast.context.get("ammo_spent", 0)), "time":director.elapsed,
+		"position":cast.origin, "origin":cast.origin, "direction":cast.direction, "cast":int(cast.context.cast), "cast_id":int(cast.context.cast),
+		"damage_type":ability.damage_type, "ability_kind":ability.kind})
 	if manual: events.append({"kind":"message", "text":ability.title})
 	_execute_payload(cast)
 	mechanics.on_paid(cast)
@@ -302,6 +351,7 @@ func _update_gems(delta: float) -> void:
 		var gap: Vector2 = position - gems[i].position
 		if gap.length() < 125: gems[i].position += gap.normalized() * 330 * delta
 		if gap.length() < 35:
+			events.append({"kind":"xp_pickup", "amount":float(gems[i].amount), "position":gems[i].position, "count":1, "collection":"contact", "time":director.elapsed})
 			grant_experience(gems[i].amount)
 			gems.remove_at(i)
 

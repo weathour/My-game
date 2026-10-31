@@ -1,0 +1,12 @@
+{
+  "cwd": "/home/weathour/programs/desktop-projects/My-game",
+  "godot": "/home/weathour/.local/bin/godot-4.6.2",
+  "timing_original": {
+    "baseline": "XDG_DATA_HOME=/tmp/my-game-hit-timing-20uv9a9n/baseline-xdg/data XDG_CONFIG_HOME=/tmp/my-game-hit-timing-20uv9a9n/baseline-xdg/config XDG_CACHE_HOME=/tmp/my-game-hit-timing-20uv9a9n/baseline-xdg/cache /home/weathour/.local/bin/godot-4.6.2 --headless --path /tmp/my-game-hit-timing-20uv9a9n/baseline --script timing.gd > /tmp/my-game-hit-timing-20uv9a9n/baseline-range-gate.log 2>&1",
+    "current": "XDG_DATA_HOME=/tmp/my-game-hit-timing-20uv9a9n/current-xdg/data XDG_CONFIG_HOME=/tmp/my-game-hit-timing-20uv9a9n/current-xdg/config XDG_CACHE_HOME=/tmp/my-game-hit-timing-20uv9a9n/current-xdg/cache /home/weathour/.local/bin/godot-4.6.2 --headless --path /tmp/my-game-hit-timing-20uv9a9n/current --script timing.gd > /tmp/my-game-hit-timing-20uv9a9n/current-range-gate.log 2>&1"
+  },
+  "fixed_timing": "XDG_DATA_HOME=/tmp/my-game-hit-timing-20uv9a9n/current-fixed-xdg/data XDG_CONFIG_HOME=/tmp/my-game-hit-timing-20uv9a9n/current-fixed-xdg/config XDG_CACHE_HOME=/tmp/my-game-hit-timing-20uv9a9n/current-fixed-xdg/cache /home/weathour/.local/bin/godot-4.6.2 --headless --path /tmp/my-game-hit-timing-20uv9a9n/current --script timing.gd > /tmp/my-game-hit-timing-20uv9a9n/current-after-reach-fix.log 2>&1",
+  "smoke_template": "run_dir=$(mktemp -d /tmp/my-game-reach-TEST_NAME.XXXXXX)\nXDG_DATA_HOME=\"$run_dir/data\" XDG_CONFIG_HOME=\"$run_dir/config\" XDG_CACHE_HOME=\"$run_dir/cache\" /home/weathour/.local/bin/godot-4.6.2 --headless --path . --script scripts/tests/TEST_NAME.gd > \"$run_dir/TEST_NAME.log\" 2>&1",
+  "prepare_reproduction": "python3 design/combat-feedback-20261030/latency-readability-fix/simulation/harness/reproduce.py",
+  "optional_run_reproduction": "python3 design/combat-feedback-20261030/latency-readability-fix/simulation/harness/reproduce.py --run"
+}

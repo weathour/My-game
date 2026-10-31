@@ -2,6 +2,8 @@ extends Control
 signal presentation_events(events: Array)
 ## Scene/animation adapter. No Player, enemy AI, collision bodies, or save dependencies.
 const CAMERA := preload("res://scripts/ui/chronicle/boss_camera.gd")
+const COMBAT_FEEDBACK := preload("res://scripts/ui/chronicle/combat_feedback.gd")
+const GROUND := preload("res://scripts/ui/chronicle/battle_ground.gd")
 const BOSS_FEEDBACK := preload("res://scripts/ui/chronicle/boss_feedback.gd")
 const SETTINGS := preload("res://scripts/game_settings.gd")
 const ENEMY_EFFECTS := preload("res://scripts/ui/chronicle/enemy_battle_effects.gd")
@@ -38,8 +40,8 @@ var safe_top := 82.0
 var safe_bottom := 150.0
 var presentation_finished := false
 var camera_body_envelopes: Dictionary = {}
-var edge_ground: AtlasTexture
-var edge_ground_step := Vector2.ONE
+var ground := GROUND.new()
+var combat_feedback: Node
 
 class Foreground:
 	extends Node2D
@@ -49,10 +51,8 @@ class Foreground:
 
 
 func _ready() -> void:
-	edge_ground = AtlasTexture.new()
-	edge_ground.atlas = ART.map_texture(stage_id)
-	edge_ground.region = Rect2(0,432,64,64)
-	edge_ground_step = edge_ground.region.size * SPACE.SIZE / edge_ground.atlas.get_size()
+	combat_feedback = COMBAT_FEEDBACK.new()
+	add_child(combat_feedback)
 	boss_feedback = BOSS_FEEDBACK.new()
 	add_child(boss_feedback)
 	enemy_effects = ENEMY_EFFECTS.new()
@@ -101,7 +101,7 @@ func refresh(is_moving: bool) -> void:
 		actor_visual.set_moving(actor_moving, battle.facing)
 		_present_casts()
 	ART.fit_actor(actor_visual, id, actor_moving)
-	actor_visual.modulate = Color("ffb1a1") if battle.current().hurt_lock > .15 and not SETTINGS.comfort_enabled("reduced_flash") else ART.tint(id)
+	actor_visual.modulate = (Color("a8dfeb") if combat_feedback.player_guarded else Color("ffb1a1")) if combat_feedback.player_flash > 0 and not combat_feedback.reduced_flash and combat_feedback.player_id == id else ART.tint(id)
 	var live: Dictionary = {}
 	var newly_bound_boss := false
 	for enemy in battle.enemies:
@@ -136,7 +136,9 @@ func refresh(is_moving: bool) -> void:
 		# Preserve the authored hit animation until its own lock expires.
 		if float(node.get("hit_lock_remaining") if node.get("hit_lock_remaining") != null else 0.0) <= 0:
 			if node.has_method("set_moving"): node.set_moving(direction.length_squared() > .001, direction if direction.length_squared() > .001 else enemy.aim)
-		if enemy.hp < entry.hp and node.has_method("play_hit") and not SETTINGS.comfort_enabled("reduced_flash"): node.play_hit()
+		if combat_feedback.contacts.has(enemy.id) and node.has_method("confirm_hit"):
+			var contact: Dictionary = combat_feedback.contacts[enemy.id]
+			if not contact.periodic: node.confirm_hit(battle.director.elapsed, contact.direction, combat_feedback.reduced_flash, combat_feedback.reduced_motion)
 		if node.has_method("present"):
 			var presenter: RefCounted = enemy
 			if not enemy.targetable and enemy.parent_id > 0:
@@ -180,6 +182,7 @@ func refresh(is_moving: bool) -> void:
 	if controlled_body.size.y > 0 and controlled_body.size.y * world_scale < 32.4:
 		actor_visual.scale *= 32.4 / (controlled_body.size.y * world_scale)
 	killed_views.clear()
+	combat_feedback.contacts.clear()
 	queue_redraw()
 	foreground.queue_redraw()
 
@@ -226,6 +229,7 @@ func _sync_camera_body_bounds() -> void:
 func advance_presentation(delta: float) -> void:
 	if boss_feedback == null or battle == null: return
 	boss_feedback.advance(delta, battle.paused, battle.outcome)
+	combat_feedback.advance(delta, battle.paused, battle.outcome)
 	if not battle.outcome.is_empty() and (battle.outcome == "failed" or boss_feedback.victory_remaining <= 0):
 		if not presentation_finished:
 			camera.reset()
@@ -245,6 +249,7 @@ func _exit_tree() -> void:
 	camera.reset()
 	camera_body_envelopes.clear()
 	if boss_feedback != null: boss_feedback.clear()
+	if combat_feedback != null: combat_feedback.clear()
 	_clear_transients()
 
 func consume_events(events: Array) -> void:
@@ -255,6 +260,7 @@ func consume_events(events: Array) -> void:
 		if boss_feedback != null: boss_feedback.consume(events)
 	elif boss_feedback != null:
 		boss_feedback.clear()
+	combat_feedback.consume(events, battle, camera.bounds)
 	enemy_effects.consume(events, battle)
 	for event in events:
 		if event.kind == "kill": killed_views[int(event.id)] = true
@@ -288,6 +294,7 @@ func _clear_transients() -> void:
 	death_views.clear()
 	released_threats.clear()
 	killed_views.clear()
+	if combat_feedback != null: combat_feedback.clear()
 
 func _present_casts() -> void:
 	var selected: Dictionary = {}
@@ -302,6 +309,13 @@ func _present_casts() -> void:
 			actor_visual.present_cast(selected)
 		elif actor_visual.has_method("play_attack"):
 			actor_visual.play_attack(selected.direction, selected.color == "manual")
+
+func _jia_contact_texture(effect: Dictionary) -> Texture2D:
+	# These strips grow into their brightest contact on frame 1. Damage is already
+	# settled: render that contact now, then only the authored dissipating tail.
+	var key := "sweep" if effect.kind == "ring" else "thrust" if effect.get("narrow", false) else "slash"
+	var index := mini(3, 1 + int(clampf(1.0 - float(effect.life) / .22, 0.0, 1.0) * 4))
+	return jia_effects.frames[key][index]
 
 func _draw_authored_effect(painter: Node2D, effect: Dictionary) -> void:
 	# New enemy releases use their actual descriptor, rather than a misleading generic full disc.
@@ -318,7 +332,7 @@ func _draw_authored_effect(painter: Node2D, effect: Dictionary) -> void:
 	var frame := mini(count - 1, int(clampf(1.0 - effect.life / .22, 0.0, 1.0) * count))
 	var texture := frames.get_frame_texture(data.animation, frame)
 	if effect.get("source", "") == "JIA" and effect.kind in ["ring", "slash"]:
-		texture = jia_effects.texture(effect)
+		texture = _jia_contact_texture(effect)
 	var radius: float = effect.radius
 	var dimension := Vector2.ONE * radius * 2
 	var angle := 0.0
@@ -327,7 +341,8 @@ func _draw_authored_effect(painter: Node2D, effect: Dictionary) -> void:
 		angle = effect.direction.angle()
 		point += effect.direction * radius * .5
 		dimension = Vector2(radius, 32 if effect.narrow else radius * 1.4)
-	color.a = minf(1.0, effect.life * 8)
+	var strength := .35 if effect.kind == "ring" else .55 if effect.get("direct", false) else .20
+	color.a = minf(strength, effect.life * 8 * strength)
 	painter.draw_set_transform(origin + point * world_scale, angle, Vector2.ONE * world_scale)
 	painter.draw_texture_rect(texture, Rect2(-dimension * .5, dimension), false, color)
 
@@ -335,8 +350,7 @@ func _draw() -> void:
 	if battle == null: return
 	draw_rect(Rect2(Vector2.ZERO, size), Color("1d2522"))
 	draw_set_transform(origin, 0, Vector2.ONE * world_scale)
-	_draw_edge_ground()
-	draw_texture_rect(ART.map_texture(stage_id), SPACE.BOUNDS, false, ART.map_tint(stage_id))
+	ground.draw(self, stage_id, origin, world_scale, size)
 	var font := get_theme_font("font")
 	var names := ["补给", "修习", "选卡精英", "装备精英"]
 	for i in (4 if battle.director.config.get("fields_enabled", true) else 0):
@@ -361,43 +375,17 @@ func _draw() -> void:
 	draw_arc(battle.position, 20, 0, TAU, 32, Color("e0cf9a"), 2, true)
 	if battle.current().shield > 0: draw_arc(battle.position, 27, 0, TAU, 32, Color("a8c8d0"), 2, true)
 
-func _draw_edge_ground() -> void:
-	if edge_ground == null or not camera.bounds.has_area(): return
-	# Decorative extension only. The arena remains SPACE.BOUNDS; no extra movement,
-	# fields, collision or map coordinates are introduced by this ground patch.
-	var visible: Rect2 = camera.bounds
-	var first := Vector2i(floor(visible.position.x / edge_ground_step.x), floor(visible.position.y / edge_ground_step.y))
-	var last := Vector2i(ceil(visible.end.x / edge_ground_step.x), ceil(visible.end.y / edge_ground_step.y))
-	for y in range(first.y, last.y):
-		for x in range(first.x, last.x):
-			var rect := Rect2(Vector2(x,y) * edge_ground_step, edge_ground_step)
-			if SPACE.BOUNDS.encloses(rect): continue
-			# Alternating mirror tiles share the exact source edge with neighbours,
-			# avoiding a repeated square seam in the decorative extension.
-			var flip := Vector2(-1 if posmod(x,2) else 1, -1 if posmod(y,2) else 1)
-			var corner := rect.position + Vector2(rect.size.x if flip.x < 0 else 0, rect.size.y if flip.y < 0 else 0)
-			draw_set_transform(origin + corner * world_scale, 0, flip * world_scale)
-			draw_texture_rect(edge_ground, Rect2(Vector2.ZERO,rect.size), false, ART.map_tint(stage_id) * Color(.84,.84,.84))
-	draw_set_transform(origin, 0, Vector2.ONE * world_scale)
-
 func draw_foreground(painter: Node2D) -> void:
 	if battle == null: return
 	painter.draw_set_transform(origin, 0, Vector2.ONE * world_scale)
 	enemy_effects.draw(painter, battle)
-	boss_feedback.draw(painter, origin, world_scale, SETTINGS.comfort_enabled("reduced_motion"), SETTINGS.comfort_enabled("reduced_flash"))
 	# The controlled ground marker remains above bodies without changing world y sorting.
 	painter.draw_arc(battle.position, 20, 0, TAU, 32, Color("f1ebbd"), 2, true)
 	painter.draw_line(battle.position + Vector2(-5, 0), battle.position + Vector2(5, 0), Color("f1ebbd"), 2, true)
 	painter.draw_line(battle.position + Vector2(0, -5), battle.position + Vector2(0, 5), Color("f1ebbd"), 2, true)
-	# Persistent threats render over every body, so even the final Boss cannot conceal them.
-	for descriptor in battle.hazards:
-		if str(descriptor.get("phase", "active")) != "tell": THREATS.draw(painter, descriptor, true)
-	for descriptor in battle.telegraphs: THREATS.draw(painter, descriptor)
-	for descriptor in released_threats: THREATS.draw(painter, descriptor, true)
 	for enemy in battle.enemies:
-		_draw_enemy_state(painter, enemy)
 		if not enemy.targetable: continue
-		if enemy.hp >= enemy.max_hp and enemy.rank not in ["boss", "field_elite"] and enemy.kind not in ["boss", "card_elite", "equipment_elite"]: continue
+		if not _health_bar_visible(enemy): continue
 		var owner: RefCounted = enemy.damage_owner()
 		var pos: Vector2 = enemy.position + Vector2(-22, enemy.radius + 10)
 		painter.draw_rect(Rect2(pos, Vector2(44, 4)), Color("30352d"))
@@ -413,7 +401,21 @@ func draw_foreground(painter: Node2D) -> void:
 		if not AUTHORED_EFFECTS.style(effect).is_empty(): continue
 		_draw_authored_effect(painter, effect)
 	authored_effects.draw(painter, battle, origin, world_scale)
+	combat_feedback.draw(painter, origin, world_scale, get_theme_font("font"), size)
+	boss_feedback.draw(painter, origin, world_scale, SETTINGS.comfort_enabled("reduced_motion"), SETTINGS.comfort_enabled("reduced_flash"))
+	painter.draw_set_transform(origin, 0, Vector2.ONE * world_scale)
+	# Persistent threats render over every body, so even the final Boss cannot conceal them.
+	for descriptor in battle.hazards:
+		if str(descriptor.get("phase", "active")) != "tell": THREATS.draw(painter, descriptor, true)
+	for descriptor in battle.telegraphs: THREATS.draw(painter, descriptor)
+	for descriptor in released_threats: THREATS.draw(painter, descriptor, true)
+	for enemy in battle.enemies: _draw_enemy_state(painter, enemy)
 	_draw_minimap(painter)
+
+func _health_bar_visible(enemy: RefCounted) -> bool:
+	if enemy.rank in ["boss", "field_elite"] or enemy.kind in ["boss", "card_elite", "equipment_elite"]: return true
+	if enemy.hp >= enemy.max_hp: return false
+	return enemy.id == battle.target_id or combat_feedback.focused_targets.has(enemy.id)
 
 func _draw_enemy_state(painter: Node2D, enemy: RefCounted) -> void:
 	var point: Vector2 = enemy.position
@@ -437,7 +439,7 @@ func _draw_minimap(painter: Node2D) -> void:
 	# hostile dots and a bright controlled actor, now with four optional fields.
 	var rect := Rect2(size.x - 178, 82, 168, 94.5)
 	painter.draw_rect(rect.grow(4), Color("101a15e0"))
-	painter.draw_texture_rect(ART.map_texture(stage_id), rect, false, Color("758278") * ART.map_tint(stage_id))
+	painter.draw_texture_rect(ART.map_preview_texture(stage_id), rect, false, Color("758278") * ART.map_tint(stage_id))
 	painter.draw_rect(rect, Color("b28b4b"), false, 1)
 	var ratio := rect.size / SPACE.SIZE
 	var viewport_rect := Rect2(rect.position + camera.bounds.position * ratio, camera.bounds.size * ratio)

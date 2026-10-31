@@ -4,6 +4,7 @@ const ENEMIES := preload("res://scripts/content/enemy_catalog.gd")
 const ENEMY_MANIFEST := preload("res://scripts/ui/chronicle/enemy_visual_manifest.gd")
 const ENEMY_ACTOR := preload("res://scripts/ui/chronicle/enemy_actor.gd")
 const STAGES := preload("res://scripts/content/stage_catalog.gd")
+const BATTLE_SPACE := preload("res://scripts/battle/battle_space.gd")
 const SWORD := preload("res://assets/players/sword/sword.tscn")
 const JIA := preload("res://assets/players/jia/jia.tscn")
 const JIA_HEAD := preload("res://assets/players/jia/jia-head.tscn")
@@ -65,6 +66,10 @@ const FIELD := preload("res://effects/wizard/field/field.tscn")
 const BOLTS := [preload("res://effects/gun/bullet/1.png"), preload("res://effects/gun/bullet/2.png"), preload("res://effects/gun/bullet/3.png"), preload("res://effects/gun/bullet/4.png")]
 const MAP_STONE := preload("res://assets/maps/grassland_4_20260613_232523_189_godot_package/PixelworkMapStitch/grassland_4_20260613_232523_189/images/overall/source.png")
 const COLORS := {"JIA":Color.WHITE, "F11":Color.WHITE, "N01":Color("c6cbd4"), "N04":Color("dfc2a5"), "N07":Color("d9c9ad"), "N13":Color("a2d8c0"), "N16":Color("e5cdbc"), "N17":Color("b9c4df")}
+const ENVIRONMENT_MANIFEST := "res://assets/data/chronicle/battle_environments.json"
+static var _environment_manifest: Dictionary = {}
+static var _ground_textures: Dictionary = {}
+static var _ground_previews: Dictionary = {}
 
 # Measured opaque animation bounds after the scene's own authored transforms.
 # Vector2 = height, bottom/ground coordinate. Never normalize by transparent frame size.
@@ -178,10 +183,54 @@ static func _mage_boss(stage: String) -> bool:
 	return STAGES.STAGES.get(stage, {}).get("boss_visual", "") == "mage"
 
 static func map_texture(stage: String) -> Texture2D:
+	var profile := environment(stage)
+	var path := str(profile.get("texture", ""))
+	if not path.is_empty() and ResourceLoader.exists(path):
+		if not _ground_textures.has(path): _ground_textures[path] = load(path)
+		if _ground_textures[path] is Texture2D: return _ground_textures[path]
+	return legacy_map_texture(stage)
+
+static func legacy_map_texture(stage: String) -> Texture2D:
 	return MAP_STONE if STAGES.STAGES.get(stage, {}).get("map", "grass") == "stone" else MAP
 
+static func map_preview_texture(stage: String) -> Texture2D:
+	var texture := map_texture(stage)
+	if not has_environment_texture(stage): return texture
+	var path := texture.resource_path
+	if not _ground_previews.has(path):
+		# Minimap uses the same center-cropped area as the ground's uniform cover.
+		var source := texture.get_size()
+		var factor := maxf(BATTLE_SPACE.SIZE.x / source.x, BATTLE_SPACE.SIZE.y / source.y)
+		var cropped := BATTLE_SPACE.SIZE / factor
+		var preview := AtlasTexture.new()
+		preview.atlas = texture
+		preview.region = Rect2((source - cropped) * .5, cropped)
+		_ground_previews[path] = preview
+	return _ground_previews[path]
+
 static func map_tint(stage: String) -> Color:
+	if has_environment_texture(stage): return Color(str(environment(stage).get("tint", "ffffff")))
+	return legacy_map_tint(stage)
+
+static func legacy_map_tint(stage: String) -> Color:
 	return Color(STAGES.STAGES.get(stage, {}).get("tint", "ffffff"))
+
+static func environment_manifest() -> Dictionary:
+	if _environment_manifest.is_empty():
+		var parsed = JSON.parse_string(FileAccess.get_file_as_string(ENVIRONMENT_MANIFEST))
+		if parsed is Dictionary: _environment_manifest = parsed
+	return _environment_manifest
+
+static func environment(stage: String) -> Dictionary:
+	var manifest := environment_manifest()
+	var overlay: Dictionary = manifest.get("stages", {}).get(stage, {})
+	var profile: Dictionary = manifest.get("environments", {}).get(str(overlay.get("environment", "")), {}).duplicate()
+	profile.merge(overlay, true)
+	return profile
+
+static func has_environment_texture(stage: String) -> bool:
+	var path := str(environment(stage).get("texture", ""))
+	return not path.is_empty() and ResourceLoader.exists(path)
 
 static func enemy_tint(kind: String, stage: String) -> Color:
 	if kind == "charger": return Color("e2ae87")

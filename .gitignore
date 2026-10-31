@@ -45,3 +45,25 @@ __pycache__/
 /design/**/reference/*.webp
 /design/**/reference/*.gif
 /design/**/reference/*.import
+
+# Combat feedback captures are reproducible local evidence. Keep a small
+# review set in Git instead of every resolution, baseline and intermediate run.
+/design/combat-feedback-20261030/**/*.png
+/design/combat-feedback-20261030/**/*.png.import
+/design/combat-feedback-20261030/source-candidates/
+# Full console transcripts and SHA summaries are retained; individual smoke
+# logs duplicate those transcripts and stay local or in the CI job output.
+/design/combat-feedback-20261030/runtime-evidence/full-check/*.log
+/design/combat-feedback-20261030/latency-readability-fix/full-check/*.log
+!/design/combat-feedback-20261030/ground/color-final/whitegate-center-1280.png
+!/design/combat-feedback-20261030/ground/color-final/orange-warning-1280.png
+!/design/combat-feedback-20261030/ground/color-final/theme-B01-road-1280.png
+!/design/combat-feedback-20261030/latency-readability-fix/ground-final/B01-sparse-1280.png
+!/design/combat-feedback-20261030/latency-readability-fix/ground-final/B01-crowd-1280.png
+!/design/combat-feedback-20261030/latency-readability-fix/ground-final/B01-crowd-960.png
+!/design/combat-feedback-20261030/latency-readability-fix/ground-final/B02-crowd-reference-1280.png
+!/design/combat-feedback-20261030/latency-readability-fix/ground-before/B01-crowd-1280.png
+!/design/combat-feedback-20261030/latency-readability-fix/feedback/B01-confirmed-hit.png
+!/design/combat-feedback-20261030/latency-readability-fix/feedback/B01-full-shield-guard.png
+!/design/combat-feedback-20261030/latency-readability-fix/feedback/B15-42-target-cast.png
+!/design/combat-feedback-20261030/latency-readability-fix/after/B01-42-first-draw.png
