@@ -13,7 +13,7 @@
 | 高顺 | [M03_human](characters/M03_human/) | M03 | 城壁铠魂 |
 | 陈宫 | [M04_human](characters/M04_human/) | M04 | 卷轴冥相 |
 
-查看六组人形与战相：[960宽](evidence/forms-960.png)、[1280宽](evidence/forms-1280.png)、[1920宽](evidence/forms-1920.png)；[动作预览](evidence/preview.gif)包含 36 个动画样本。对照图每格右上角的「card view」是卡图立绘局部；实际裁脸头像见[我方头像对照](evidence/friendly-head-crops.png)。画面检查和代理实际操作不等于用户已逐张审美确认；用户的后续反馈可用于迭代。
+查看六组人形与战相：[1280宽对照](evidence/forms-1280.png)；[动作预览](evidence/preview.gif)包含 36 个动画样本。对照图每格右上角的「card view」是卡图立绘局部；实际裁脸头像见[我方头像对照](evidence/friendly-head-crops.png)。画面检查和代理实际操作不等于用户已逐张审美确认；用户的后续反馈可用于迭代。
 
 ## 制作与来源
 

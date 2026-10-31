@@ -86,7 +86,7 @@ S01、S02、S03、S04、S05 和 F01 接入逐句剧情页。新局首关先完�
 
 66项规则／保存检查、实战UI测试、布局夹具回归通过；表现复用后14张真实Godot渲染截图覆盖三种尺寸。故障注入日志中的两次 `/proc` 写入错误为预期。运行与证据命令见实施记录；模拟驾驶不等于人工平衡验收。
 
-2026-10-27 的界面重排通过 Godot headless 启动、原 `chronicle_ui_smoke`（一次预期 `/proc` 故障注入）、真实两关 `chronicle_playable_ui_smoke`（`failures=0`）和三尺寸 `chronicle_reflow_visual_smoke`；留有[15张真实流程渲染](docs/design-reviews/evidence/2026-10-27/ui-reflow/playable/)及[30张布局渲染](docs/design-reviews/evidence/2026-10-27/ui-reflow/layout/)。当时后续章节截图由夹具提供；章末战斗后来已配置开放，当前验证见上方敌人制作记录。
+2026-10-27 的界面重排通过 Godot headless 启动、原 `chronicle_ui_smoke`（一次预期 `/proc` 故障注入）、真实两关 `chronicle_playable_ui_smoke`（`failures=0`）和三尺寸 `chronicle_reflow_visual_smoke`；当时生成15张真实流程渲染和30张布局渲染；当前仓库保留[流程日志](docs/design-reviews/evidence/2026-10-27/ui-reflow/logs/mygame-reflow-playable.log)及[精选布局图](docs/design-reviews/evidence/2026-10-27/ui-reflow/layout/)，完整媒体已本地归档并可从 Git 历史恢复。当时后续章节截图由夹具提供；章末战斗后来已配置开放，当前验证见上方敌人制作记录。
 
 此前战场尺度测试58项、战斗规则测试66项、真实两关UI测试（`failures=0`）及必需headless启动均通过；9张尺度截图和15张真实流程截图见[当时记录](docs/implementation/2026-10-27_战场比例与三角头像HUD.md)。测试中的浮点比较容差用于处理一次序列化往返的1 ULP差异，生产存档逻辑未改。
 
