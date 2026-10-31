@@ -1,0 +1,65 @@
+{
+  "schema": 1,
+  "id": "B07",
+  "generator": "built-in image_gen.imagegen",
+  "selected_sources": [
+    "source/actions-v1.png",
+    "source/master-v1.png"
+  ],
+  "source_images": [
+    {
+      "path": "design/baimen-enemies-20261028/characters/B07/source/actions-v1.png",
+      "sha256": "db4755cca28b6b959f7666c01a6f0caee371017de8dcd44c77f113f17d1c1e6f",
+      "size": [
+        1312,
+        1199
+      ],
+      "rgba": true,
+      "alpha_range": [
+        0,
+        255
+      ],
+      "selected": true,
+      "prompt": "design/baimen-enemies-20261028/characters/B07/source/actions-v1-prompt.txt",
+      "references": [
+        {
+          "path": "design/baimen-enemies-20261028/characters/B07/source/master-v1.png",
+          "role": "identity master",
+          "sha256": "846841ce509a2c4b65f3b64d4bf3f5bb6e70a086c45b2d0ac4575dccd77baa0f"
+        },
+        {
+          "path": "design/jia-combat-20261027/source/dao-v1.png",
+          "role": "pixel style/animation reference only",
+          "sha256": "dc7720a430f1b03f61b87292b845f170f15a5a487c4a9810070fb27ad546099e"
+        },
+        {
+          "path": "design/mechanic-rework-20261013/source/character-animations.png",
+          "role": "pixel style/animation reference only",
+          "sha256": "ad4ea4529a399df65569c5c37d85c0616bb6d09f594749c30818c283c85407c5"
+        }
+      ]
+    },
+    {
+      "path": "design/baimen-enemies-20261028/characters/B07/source/master-v1.png",
+      "sha256": "846841ce509a2c4b65f3b64d4bf3f5bb6e70a086c45b2d0ac4575dccd77baa0f",
+      "size": [
+        1536,
+        1024
+      ],
+      "rgba": true,
+      "alpha_range": [
+        0,
+        254
+      ],
+      "selected": true,
+      "prompt": "design/baimen-enemies-20261028/characters/B07/source/master-v1-prompt.txt",
+      "references": []
+    }
+  ],
+  "rejected_or_partially_rejected": {},
+  "extraction": "Reviewed actual alpha>=128 4-connected components, manual per-pose ground anchors; no blind grid clipping. Fixed calibration per source; no per-pose stretching.",
+  "raster_processing": "Aseprite crop/join/nearest-neighbour resize, shared <=64 colors, binary alpha. Pillow/scipy read-only measurements and QA only.",
+  "measurements": "measurements.json",
+  "export_manifest": "export-manifest.json",
+  "remaining_integration_check": "Root/W3 owns real Godot battle/codex previews at 960/1280/1920 and actual animated action review."
+}

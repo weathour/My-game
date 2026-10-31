@@ -1,0 +1,45 @@
+{
+  "tool": "built-in image_gen.imagegen",
+  "reference_root": "design/baimen-enemies-20261028/characters",
+  "human_aesthetic_acceptance": "pending user review",
+  "sources": [
+    {
+      "path": "design/boss-forms-20261029/characters/M03_human/source/actions-v1.png",
+      "sha256": "e6c9a6b4c73736d8d87cbe66164008ea9f12eefffff700a5c44a8a990c0889e3",
+      "selection": "selected",
+      "generated_origin": "/home/weathour/.codex/generated_images/01a186cc-4bd1-7152-9d88-76057053ee5d/exec-b309fd17-1d7c-45e9-adf2-445d5c23a3bb.png"
+    },
+    {
+      "path": "design/boss-forms-20261029/characters/M03_human/source/master-v1.png",
+      "sha256": "6c8adbe8bbb55a2f1be3c389bc620d76362abd51086d886c95cb7cde11d2bff7",
+      "selection": "selected",
+      "generated_origin": "/home/weathour/.codex/generated_images/01a186cc-4bd1-7152-9d88-76057053ee5d/exec-40f09c5c-94ef-4eb8-8b79-482d8ef4dce4.png"
+    }
+  ],
+  "references": [
+    {
+      "path": "design/baimen-enemies-20261028/characters/M03_WAR/references/current-identity.png",
+      "sha256": "bb1e5f1cc1fa91c5cc6369d71571eb4011f485b5a24998ae3940bb0e7f88056e",
+      "role": "identity_face"
+    },
+    {
+      "path": "design/baimen-enemies-20261028/characters/M03_WAR/source/master-v1.png",
+      "sha256": "a519028d9441f21a2e9349b81fdb9d1939629bc7fe620de7898c59ddd29af0b8",
+      "role": "war_form_continuity"
+    }
+  ],
+  "prompts": [
+    {
+      "path": "design/boss-forms-20261029/characters/M03_human/actions-v1-prompt.txt",
+      "sha256": "8fb76255bcda4a1728f76c0e89d3473edee8b260b6bdcf7eebaef7455f6314c4"
+    },
+    {
+      "path": "design/boss-forms-20261029/characters/M03_human/master-v1-prompt.txt",
+      "sha256": "f5d24181ee1895bd7b8050c005f61677c68cf30d5d7f16304fd140f1d7a62e5e"
+    }
+  ],
+  "selection_notes": {
+    "master-v1": "identity and pose reviewed; user aesthetic approval remains pending",
+    "actions-v1": "16 separate actual alpha-connected bodies; fixed scale; manually reviewed foot/pelvis anchors; no grid crop"
+  }
+}

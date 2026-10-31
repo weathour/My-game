@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://b4e5vjm724g1m"]
+
+[ext_resource type="Texture2D" uid="uid://dv0ftddyg0o2u" path="res://effects/wizard/boom/1.png" id="1_iwfx3"]
+[ext_resource type="Texture2D" uid="uid://jidkjqj8jww3" path="res://effects/wizard/boom/2.png" id="2_wkssw"]
+[ext_resource type="Texture2D" uid="uid://bf56epmip83eu" path="res://effects/wizard/boom/3.png" id="3_jlucn"]
+[ext_resource type="Texture2D" uid="uid://bxsakj5bwkpu" path="res://effects/wizard/boom/4.png" id="4_sggb4"]
+[ext_resource type="Texture2D" uid="uid://3a4wvwywotog" path="res://effects/wizard/boom/5.png" id="5_ptngb"]
+[ext_resource type="Texture2D" uid="uid://5yhju4ikbw4x" path="res://effects/wizard/boom/6.png" id="6_45c13"]
+[ext_resource type="Texture2D" uid="uid://uqcapvy43il7" path="res://effects/wizard/boom/7.png" id="7_66qft"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_567se"]
+animations = [{
+"frames": [{
+"duration": 1.5,
+"texture": ExtResource("1_iwfx3")
+}, {
+"duration": 1.5,
+"texture": ExtResource("2_wkssw")
+}, {
+"duration": 0.1,
+"texture": ExtResource("3_jlucn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_sggb4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_ptngb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_45c13")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_66qft")
+}],
+"loop": false,
+"name": &"boom",
+"speed": 16.0
+}]
+
+[node name="Boom" type="Node2D" unique_id=1977588105]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=671062377]
+sprite_frames = SubResource("SpriteFrames_567se")
+animation = &"boom"
+frame = 6
+frame_progress = 1.0
+speed_scale = 1.25

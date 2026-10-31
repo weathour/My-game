@@ -1,0 +1,46 @@
+name: Project Checks
+
+on:
+  push:
+  pull_request:
+
+env:
+  GODOT_VERSION: '4.6.2'
+  GODOT_SHA256: '30e6b6d141f0cd5bebd629ad1d0ef1324e60091bb20662d026b402ba58c59937'
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install Godot
+        run: |
+          archive="$RUNNER_TEMP/godot.zip"
+          install_dir="$RUNNER_TEMP/godot"
+          curl --fail --location --retry 3 \
+            --output "$archive" \
+            "https://github.com/godotengine/godot/releases/download/${GODOT_VERSION}-stable/Godot_v${GODOT_VERSION}-stable_linux.x86_64.zip"
+          echo "${GODOT_SHA256}  ${archive}" | sha256sum --check -
+          mkdir -p "$install_dir"
+          python3 -m zipfile -e "$archive" "$install_dir"
+          mv "$install_dir/Godot_v${GODOT_VERSION}-stable_linux.x86_64" "$install_dir/godot"
+          chmod +x "$install_dir/godot"
+          echo "$install_dir" >> "$GITHUB_PATH"
+
+      - name: Install virtual display and Chinese fonts for render checks
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y xvfb libgl1-mesa-dri fonts-noto-cjk
+
+      - name: Run project checks
+        env:
+          LIBGL_ALWAYS_SOFTWARE: '1'
+        run: xvfb-run --auto-servernum ./scripts/check_project.sh

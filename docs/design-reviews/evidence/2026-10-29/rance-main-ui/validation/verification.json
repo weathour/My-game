@@ -1,0 +1,349 @@
+{
+  "date": "2026-10-29",
+  "engine": "Godot 4.6.2",
+  "status": "implemented_and_verified",
+  "checks": [
+    {
+      "script": "scripts/tests/chronicle_context_navigation_smoke.gd",
+      "mode": "rendered",
+      "checks": 224,
+      "failures": 0,
+      "log": "docs/design-reviews/evidence/2026-10-29/rance-main-ui/navigation/logs/context-navigation-render.log"
+    },
+    {
+      "script": "scripts/tests/chronicle_context_navigation_smoke.gd",
+      "mode": "headless",
+      "checks": 198,
+      "failures": 0,
+      "log": "docs/design-reviews/evidence/2026-10-29/rance-main-ui/navigation/logs/context-navigation-headless.log"
+    },
+    {
+      "script": "scripts/tests/chronicle_route_map_smoke.gd",
+      "mode": "rendered",
+      "checks": 169,
+      "failures": 0,
+      "log": "docs/design-reviews/evidence/2026-10-29/rance-main-ui/navigation/logs/route-map-render.log"
+    },
+    {
+      "script": "scripts/tests/chronicle_story_replay_smoke.gd",
+      "mode": "headless",
+      "checks": 160,
+      "failures": 0,
+      "log": "docs/design-reviews/evidence/2026-10-29/rance-main-ui/navigation/logs/story-replay-headless.log"
+    },
+    {
+      "script": "scripts/tests/chronicle_playable_ui_smoke.gd",
+      "mode": "headless",
+      "checks": null,
+      "failures": 0,
+      "log": "docs/design-reviews/evidence/2026-10-29/rance-main-ui/navigation/logs/playable-ui-headless.log"
+    }
+  ],
+  "note": "Rendered and headless navigation are runs of the same suite; their counts are not additive. Screenshots and automated interactions do not constitute user visual approval or full campaign playthrough.",
+  "required_startup": {
+    "exit_code": 0,
+    "log": "docs/design-reviews/evidence/2026-10-29/rance-main-ui/validation/startup.log"
+  },
+  "graph_update": {
+    "accepted": false,
+    "reason": "exit=0; Godot extractor=False; missing 199 runtime GDScript files",
+    "prior_graph_retained": true,
+    "log": "docs/design-reviews/evidence/2026-10-29/rance-main-ui/validation/graph-update.log"
+  },
+  "source_sha256": {
+    "project.godot": "3b8c560e5477ae93731b5612ddeb7dfeb8069692ae824222b7487231e9a9db1a",
+    "scripts/tests/chronicle_context_navigation_smoke.gd": "ba71898c92b8f6c646267a96fa67ed45a7c6571626b47822ce23c4dfd6e312d5",
+    "scripts/tests/chronicle_playable_ui_smoke.gd": "0030d621cc6320bf79cf2d14db28650d8bfc868880bea5f6d9abd14853f7b995",
+    "scripts/tests/chronicle_route_map_smoke.gd": "e2a368ba98246fc275b68a20463b5c8f81c02fead97ccaf5e0b740be2f83043b",
+    "scripts/tests/chronicle_story_replay_smoke.gd": "1fb3b2232acda158c0b511f12c9655d237d3dd1fdf1e2a58293461ca4379643f",
+    "scripts/ui/chronicle/chronicle_campaign_chrome.gd": "0149120b95c36ee287b66a133b48b0f27a5081b9ac146bdbecb754ee42fd7de5",
+    "scripts/ui/chronicle/chronicle_map.gd": "6ccd1e23375481701d7872243e7dd6e44a8b6c1b78dff2baf77d881901710361",
+    "scripts/ui/chronicle/chronicle_party_pages.gd": "180ec38ea2a7971955bef7b91359f5f76e02f95045a637e2d0a18ca9116e8642",
+    "scripts/ui/chronicle/chronicle_route_map.gd": "30220db96fdce7befc20be2c941ca1bfda18fe7e9d3bdbf5458749458524c41e",
+    "scripts/ui/chronicle/chronicle_route_page.gd": "71dd5ed1aa98a00de3d2c0e86b376e5bd031be50593be9486325b574b84a904b",
+    "scripts/ui/chronicle/chronicle_shell.gd": "ba2585053dec836700f26194dc8f52551e43f437492a574686c885db1568afc0",
+    "scripts/ui/chronicle/chronicle_world_page.gd": "44057ab06f5e12002e84bcc8eb7fbf988faf9a7095e91a75fc99160ed079da09"
+  },
+  "screenshots": [
+    {
+      "path": "docs/design-reviews/evidence/2026-10-29/rance-main-ui/navigation/01-route-1280.png",
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "713b23115e0d61c678320faa27a4e5498ec37565d21394dd7bb8684a5308fb10"
+    },
+    {
+      "path": "docs/design-reviews/evidence/2026-10-29/rance-main-ui/navigation/01-route-1920.png",
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "50cfa5a04075c2b0300891213c40f4c5730866e0a52a0bcf86f5c81ce289371f"
+    },
+    {
+      "path": "docs/design-reviews/evidence/2026-10-29/rance-main-ui/navigation/01-route-960.png",
+      "size": [
+        960,
+        540
+      ],
+      "sha256": "86d385a8cab2575d3dbee2f9f87b8fdeab53d98549c055473c16fd71e16b561b"
+    },
+    {
+      "path": "docs/design-reviews/evidence/2026-10-29/rance-main-ui/navigation/02-world-1280.png",
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "aa20ec0f4a32c1545837ea1e1922d86b7f599edfee4d4845d227c5ab03bc7343"
+    },
+    {
+      "path": "docs/design-reviews/evidence/2026-10-29/rance-main-ui/navigation/02-world-1920.png",
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "d07feb4ac336e06b03c8fd711d708746be5b69554b175a2f705bc28837f20c49"
+    },
+    {
+      "path": "docs/design-reviews/evidence/2026-10-29/rance-main-ui/navigation/02-world-960.png",
+      "size": [
+        960,
+        540
+      ],
+      "sha256": "cea68e7cf6613888d5185d1d2a5af013d440382355842f15581a3b76b271da8c"
+    },
+    {
+      "path": "docs/design-reviews/evidence/2026-10-29/rance-main-ui/navigation/02b-world-tasks-1280.png",
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "b125c10b1b7ffaafbc3b2f359e741f6ff0da4fa0449db6178d8a74b570b2fc42"
+    },
+    {
+      "path": "docs/design-reviews/evidence/2026-10-29/rance-main-ui/navigation/02b-world-tasks-1920.png",
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "df70c03b74bb50d87ebbb42c7bda06c92b7a1189568bed0001d719159644027e"
+    },
+    {
+      "path": "docs/design-reviews/evidence/2026-10-29/rance-main-ui/navigation/02b-world-tasks-960.png",
+      "size": [
+        960,
+        540
+      ],
+      "sha256": "769ac852a6022b642753e30a27098ddbd65dc6786c818b2e9572a682d702720b"
+    },
+    {
+      "path": "docs/design-reviews/evidence/2026-10-29/rance-main-ui/navigation/02c-world-other-1280.png",
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "0fffccf011f3cb7e28a330ff13177c70132b34ab499db683fd27dce96696db0c"
+    },
+    {
+      "path": "docs/design-reviews/evidence/2026-10-29/rance-main-ui/navigation/02c-world-other-1920.png",
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "46c7ce963af694d5e5b556b9c050e3548e547954138f754d307fb5aff392cf15"
+    },
+    {
+      "path": "docs/design-reviews/evidence/2026-10-29/rance-main-ui/navigation/02c-world-other-960.png",
+      "size": [
+        960,
+        540
+      ],
+      "sha256": "eca0f9c8afb8467d7067f040928793766b2b1a8b1586ff1bdfbfa91a1ee3682b"
+    },
+    {
+      "path": "docs/design-reviews/evidence/2026-10-29/rance-main-ui/navigation/03-party-1280.png",
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "be6361dcf4dfa019526f98721afa7d895d6cbc916c37057895be362a3093ce27"
+    },
+    {
+      "path": "docs/design-reviews/evidence/2026-10-29/rance-main-ui/navigation/03-party-1920.png",
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "8e81296599d65526c65348f8d444a482c239ccd6e7f100c4fa574519f9b55bd2"
+    },
+    {
+      "path": "docs/design-reviews/evidence/2026-10-29/rance-main-ui/navigation/03-party-960.png",
+      "size": [
+        960,
+        540
+      ],
+      "sha256": "dcf41dea5d1dfeead028df7ef16af62c1fe493f9803aab46246c6e480fe243f0"
+    },
+    {
+      "path": "docs/design-reviews/evidence/2026-10-29/rance-main-ui/navigation/04-equipment-1280.png",
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "6e6d437613eab42f18e70b56a8fbf587899751c64a549b18e5726c00f5e6a1a9"
+    },
+    {
+      "path": "docs/design-reviews/evidence/2026-10-29/rance-main-ui/navigation/04-equipment-1920.png",
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "b22af1685c4d911b0dc120c1b896a2e4ce130ad8a35eea7501cc47e02abf73fd"
+    },
+    {
+      "path": "docs/design-reviews/evidence/2026-10-29/rance-main-ui/navigation/04-equipment-960.png",
+      "size": [
+        960,
+        540
+      ],
+      "sha256": "2294afc32c3e016ea063e0328daf2fb43c2514a52d7f213ad49aa6621420d5cd"
+    },
+    {
+      "path": "docs/design-reviews/evidence/2026-10-29/rance-main-ui/navigation/05-preparation-equipment-1280.png",
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "6e6d437613eab42f18e70b56a8fbf587899751c64a549b18e5726c00f5e6a1a9"
+    },
+    {
+      "path": "docs/design-reviews/evidence/2026-10-29/rance-main-ui/navigation/06-preparation-1280.png",
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "f1132c41f4d8d0bd98478df9aa128f790bf0a9c1879fb87c7b20b6e9ed7a61fa"
+    },
+    {
+      "path": "docs/design-reviews/evidence/2026-10-29/rance-main-ui/navigation/07-pending-reward-route-1280.png",
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "d2bdd88fba0388abe2b2a39de4e3a77e75b7e90c3fecb7d949970c3b7b736d87"
+    },
+    {
+      "path": "docs/design-reviews/evidence/2026-10-29/rance-main-ui/navigation/08-menu-after-codex-resize-960.png",
+      "size": [
+        960,
+        540
+      ],
+      "sha256": "f2551a2d83e4e76ddf2f524cb2ad72086cd14aad3d83feeaecd637926e6d0297"
+    },
+    {
+      "path": "docs/design-reviews/evidence/2026-10-29/rance-main-ui/navigation/09-route-after-codex-resize-1280.png",
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "7be3603d90dd2155897f9b58e045153bd889ebceadc084a0c08d254b20d5c287"
+    },
+    {
+      "path": "docs/design-reviews/evidence/2026-10-29/rance-main-ui/navigation/10-completed-story-detail-1280.png",
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "7e4b9e0dfb7f058a87160ca1551960c3613bd87037602e0a1de2719183e8cd7f"
+    },
+    {
+      "path": "docs/design-reviews/evidence/2026-10-29/rance-main-ui/navigation/11-world-pending-1280.png",
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "3ccb3ad026bd36103755be19bf4e41201b8bb543e161e1723b432e3d48f34cd0"
+    },
+    {
+      "path": "docs/design-reviews/evidence/2026-10-29/rance-main-ui/navigation/11-world-pending-960.png",
+      "size": [
+        960,
+        540
+      ],
+      "sha256": "62de93541df959aefaf8268531a3834d39bb5df9eacf1ecf9699e31145f9d468"
+    },
+    {
+      "path": "docs/design-reviews/evidence/2026-10-29/rance-main-ui/navigation/route-interaction/01-branching-1280.png",
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "bdf12d03d966fc7af0e7bc88df3e7485c660b72c2d6081b3cb4f6cecbecefe12"
+    },
+    {
+      "path": "docs/design-reviews/evidence/2026-10-29/rance-main-ui/navigation/route-interaction/02-hover-1280.png",
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "1d434ff9dee0d537c07a15d486139580647b2590bc2e4c95f1c5865766621b58"
+    },
+    {
+      "path": "docs/design-reviews/evidence/2026-10-29/rance-main-ui/navigation/route-interaction/03-route-1280.png",
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "a0973c4bd994741448d99fd6098de6f774cef814c03d3ca12f824a9ba40484c9"
+    },
+    {
+      "path": "docs/design-reviews/evidence/2026-10-29/rance-main-ui/navigation/route-interaction/03-route-1920.png",
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "ad5ac9bb6d01cf199488028a06ae16ba6cb9f6533d8e441a24cd0f4c52332bea"
+    },
+    {
+      "path": "docs/design-reviews/evidence/2026-10-29/rance-main-ui/navigation/route-interaction/03-route-960.png",
+      "size": [
+        960,
+        540
+      ],
+      "sha256": "ebaabddaec47ca3f33679cd2672a922f7482048318e9d231f3f2900a656b7a36"
+    },
+    {
+      "path": "docs/design-reviews/evidence/2026-10-29/rance-main-ui/navigation/route-interaction/04-final-area-960.png",
+      "size": [
+        960,
+        540
+      ],
+      "sha256": "aaa227a925803829a0acb13413c40fe868817f0a088eca93830962ed94991c2e"
+    },
+    {
+      "path": "docs/design-reviews/evidence/2026-10-29/rance-main-ui/navigation/route-interaction/05-skipped-branch-1280.png",
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "dcb1cb409114e32ad9a28476875760958c71d49e00edd0a4a5590d212c598cd4"
+    },
+    {
+      "path": "docs/design-reviews/evidence/2026-10-29/rance-main-ui/navigation/route-interaction/06-pending-branch-1280.png",
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "88d80fa6f3d83fe246f092272f52dbbd2406810ced7d67d4e946196695380350"
+    },
+    {
+      "path": "docs/design-reviews/evidence/2026-10-29/rance-main-ui/navigation/route-interaction/07-authored-1280.png",
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "85823997ff8945a6e59c6e4a9ec2677149899211c02a6bee28922cfcf0fcbe8b"
+    }
+  ]
+}

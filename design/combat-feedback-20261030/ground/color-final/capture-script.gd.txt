@@ -1,0 +1,49 @@
+extends SceneTree
+const VIEW := preload("res://scripts/ui/chronicle/battle_view.gd")
+const C := preload("res://scripts/content/combat_catalog.gd")
+const SPACE := preload("res://scripts/battle/battle_space.gd")
+var output := "res://design/combat-feedback-20261030/ground/color-final"
+var warning_only := false
+func _init() -> void:
+	for arg in OS.get_cmdline_user_args():
+		if arg == "--warning-only": warning_only = true
+	call_deferred("run")
+func frames() -> void:
+	for i in 4: await process_frame
+func run() -> void:
+	var definitions := {}
+	for person in JSON.parse_string(FileAccess.get_file_as_string("res://assets/data/chronicle/characters.json")): definitions[person.id] = person
+	var viewport := SubViewport.new()
+	viewport.size = Vector2i(1280,720)
+	viewport.render_target_update_mode = SubViewport.UPDATE_ALWAYS
+	root.add_child(viewport)
+	for stage in (["B18"] if warning_only else ["B18","B01"]):
+		var view := VIEW.new()
+		view.setup({"attempt_id":"ground-fixture" if stage == "B18" else "ground-theme-B01","members":["JIA","F11","F07"],"characters":{"JIA":C.record("JIA"),"F11":C.record("F11"),"F07":C.record("F07")},"equipment":{"weapon":"plain_blade","armor":"cloth_armor","accessory":"ember_seal"},"stage":C.stage(stage),"seed":1818,"node":{"id":stage,"name":"吕布终战" if stage == "B18" else stage}},definitions)
+		viewport.add_child(view)
+		view.set_physics_process(false)
+		await frames()
+		var battle: RefCounted = view.battle
+		battle.position = SPACE.CENTER
+		if stage == "B18":
+			battle.enemies.clear()
+			battle.director.spawn_remaining = 10000
+			var boss: RefCounted = battle.director.spawn("boss", SPACE.CENTER + Vector2(240,-120))
+			battle.enemies.append(boss)
+			battle.director.boss_spawned = true
+			if warning_only:
+				battle.telegraphs = [{"shape":"disc","origin":battle.position + Vector2(80,-30),"radius":170.0,"remaining":.7,"total":1.0,"damage":20.0}]
+		view.canvas.camera.reset()
+		view.refresh()
+		view.canvas.refresh(false)
+		await frames()
+		await RenderingServer.frame_post_draw
+		DirAccess.make_dir_recursive_absolute(output)
+		var name := "orange-warning-1280" if warning_only else "whitegate-center-1280" if stage == "B18" else "theme-B01-road-1280"
+		viewport.get_texture().get_image().save_png(output.path_join(name+".png"))
+		view.queue_free()
+		await frames()
+	viewport.queue_free()
+	await frames()
+	print("GROUND_COLOR_PREVIEW PASS")
+	quit()

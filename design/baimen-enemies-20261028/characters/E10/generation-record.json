@@ -1,0 +1,36 @@
+{
+  "version": 1,
+  "id": "E10",
+  "generator": "built-in ImageGen",
+  "identity_master": "source/master-v1.png",
+  "references": [
+    {
+      "path": "design/jia-combat-20261027/source/dao-v1.png",
+      "sha256": "dc7720a430f1b03f61b87292b845f170f15a5a487c4a9810070fb27ad546099e",
+      "role": "pixel_drawing_and_animation_style_only"
+    }
+  ],
+  "source_versions": [
+    {
+      "path": "design/baimen-enemies-20261028/characters/E10/source/actions-v1.png",
+      "sha256": "6d4582746603be338a5d01a6fc53cafe959a6fa9d884fcb820f19ac695724a6f",
+      "selected": true,
+      "role": "pose_source",
+      "decision": "selected"
+    },
+    {
+      "path": "design/baimen-enemies-20261028/characters/E10/source/master-v1.png",
+      "sha256": "6cd431cab1a911b74c9980c07c91f38878279ce01ef31b940dbbec34e8aff98a",
+      "selected": true,
+      "role": "identity_master",
+      "decision": "selected"
+    }
+  ],
+  "prompts": [
+    "prompts/actions-v1.txt",
+    "prompts/master-v1.txt"
+  ],
+  "review_notes": "Viewed entire haunted cart master and all20poses. Large tilted wheel, rope/iron cart frame and long diagonal hooked glaive retained. Rows idle/walk/hook sweep/drag alternate/hit. Attack contact frame2 clearly sweeps hook low RIGHT, all hook edges and shaft retained with actual connected regions. Standing cart-and-wheel body219px, fixed source scale all poses. 320x256 canvas preserves extended shaft. Manual ground anchors follow feet instead of the low hook tips in sweep/drag/hit. No slow-field effect baked into pixels.",
+  "export": "scripts/tools/import_baimen_enemy_art.lua",
+  "pixels_policy": "ImageGen-authored; Pillow/scipy read-only component measurements and QA; Aseprite extraction/registration/palette/export."
+}

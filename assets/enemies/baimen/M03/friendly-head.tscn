@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3]
+[ext_resource type="Script" path="res://assets/enemies/baimen/human_friendly_head.gd" id="1"]
+[node name="M03FriendlyHead" type="Node2D"]
+texture_filter = 1
+script = ExtResource("1")
+human_id = "M03_human"
+[node name="Sprite2D" type="Sprite2D" parent="."]

@@ -1,0 +1,44 @@
+{
+  "tool": "built-in image_gen",
+  "source": "source/sheet-v1.png",
+  "prompt": "sheet-v1-prompt.txt",
+  "sha256": "f7eccc487e827afce91175e5bafc0ac031193b2c6874e6aa84bc53c9658f6e6e",
+  "size": [
+    1122,
+    1402
+  ],
+  "mode": "RGBA",
+  "alpha_extrema": [
+    0,
+    255
+  ],
+  "references": [
+    {
+      "path": "design/baimen-enemies-20261028/characters/M03_WAR/source/master-v1.png",
+      "sha256": "a519028d9441f21a2e9349b81fdb9d1939629bc7fe620de7898c59ddd29af0b8"
+    },
+    {
+      "path": "design/baimen-enemies-20261028/characters/M03_WAR/references/current-identity.png",
+      "sha256": "bb1e5f1cc1fa91c5cc6369d71571eb4011f485b5a24998ae3940bb0e7f88056e"
+    },
+    {
+      "path": "design/baimen-women-20261028/source/F07-masanniang-combat-v1.png",
+      "sha256": "da2cc4c7ab1ba88177916085e8f3eb8f1564e722d6476d0731703cc7cfc51d94"
+    }
+  ],
+  "visual_review": "Viewed20 physically separate bodies. Select rows1idle,2move,5hit only (12poses), allRIGHT, gray-haired fortress armor identity, full tips/boots. Reject entire row3attack: middle poses lose/hide tower shield too far for reliable identity. Reject entire row4special: second pose omits tower shield. Independent ImageGen repair clips replace both rows; original preserved without program pixel edits.",
+  "status": "selected_rows_idle_move_hit_only",
+  "generated_path": "/home/weathour/.codex/generated_images/01a1831a-f001-78c2-85f4-f99fc219fd1c/exec-d4e76275-233c-4db2-acb9-db832b7836a0.png",
+  "rejected_regions": [
+    {
+      "row": 3,
+      "clip": "attack",
+      "reason": "tower shield omission/obscurity in middle thrusts"
+    },
+    {
+      "row": 4,
+      "clip": "special",
+      "reason": "second command pose omits tower shield"
+    }
+  ]
+}

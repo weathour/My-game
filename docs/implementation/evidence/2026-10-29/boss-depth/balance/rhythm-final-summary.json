@@ -1,0 +1,1504 @@
+{
+  "revision": "B18_war_combo_final_20261029",
+  "manifest": "rhythm-final-manifest.json",
+  "scope": "B18 only. Earlier B15–B17 evidence retained; their mechanics and config did not change.",
+  "control_pairs": [
+    {
+      "route": "short",
+      "build": "route_original",
+      "only_movement_differs": true,
+      "read_source": "rhythm-read-original-r2.json",
+      "blind_source": "rhythm-blind-original-r1.json",
+      "read": {
+        "route": "short",
+        "build": "route_original",
+        "movement_policy": "read_telegraphs",
+        "driver_revision": "visible_goal_v2",
+        "outcome": "victory",
+        "seconds": 62.2333333333311,
+        "phase_seconds": {
+          "B18:0:combat": 26.8499999999998,
+          "B18:1:combat": 33.7333333333314,
+          "B18:1:observation": 0.649999999999963,
+          "B18:1:transition": 0.983333333333277
+        },
+        "members": [
+          "JIA",
+          "N16",
+          "N17"
+        ],
+        "levels": {
+          "JIA": 14,
+          "N16": 13,
+          "N17": 14
+        },
+        "entry_hp": {
+          "JIA": 428.0,
+          "N16": 362.0,
+          "N17": 413.0
+        },
+        "entry_mp": {
+          "JIA": 22.6208333333326,
+          "N16": 184.2,
+          "N17": 164.2
+        },
+        "exit_hp": {
+          "JIA": 428.0,
+          "N16": 362.0,
+          "N17": 429.0
+        },
+        "exit_mp": {
+          "JIA": 4.87916666666683,
+          "N16": 185.7,
+          "N17": 170.7
+        },
+        "hurt_total": {},
+        "resource_balance": {
+          "JIA": {
+            "net_hp_restored_including_level_growth": 0.0,
+            "net_mp_restored_including_level_growth": 202.258333333334,
+            "paid_mp": 220.0,
+            "received_hp_damage": 0.0
+          },
+          "N16": {
+            "net_hp_restored_including_level_growth": 0.0,
+            "net_mp_restored_including_level_growth": 1.5,
+            "paid_mp": 0.0,
+            "received_hp_damage": 0.0
+          },
+          "N17": {
+            "net_hp_restored_including_level_growth": 16.0,
+            "net_mp_restored_including_level_growth": 6.5,
+            "paid_mp": 0.0,
+            "received_hp_damage": 0.0
+          }
+        },
+        "boss_damage_by_source": {
+          "JIA": 7600.0
+        },
+        "boss_damage_by_ability": {
+          "JIA_basic": 6372.375,
+          "jia_sweep": 1227.625
+        },
+        "support_damage": 0.0,
+        "shield_spent": {
+          "JIA": 0.0,
+          "N16": 0.0,
+          "N17": 0.0
+        },
+        "echo_events": {},
+        "fast_clear": true,
+        "reward_after": {
+          "candidates": [
+            "M05",
+            "F07",
+            "N02",
+            "N17",
+            "N01",
+            "N16",
+            "M02"
+          ],
+          "node": "B18",
+          "picks": 3,
+          "selected": [
+            "N16",
+            "N17",
+            "N01"
+          ]
+        },
+        "committed": true,
+        "plans": 32
+      },
+      "blind": {
+        "route": "short",
+        "build": "route_original",
+        "movement_policy": "blind_approach",
+        "driver_revision": "visible_goal_v2",
+        "outcome": "victory",
+        "seconds": 60.4833333333312,
+        "phase_seconds": {
+          "B18:0:combat": 25.1666666666665,
+          "B18:1:combat": 33.6666666666648,
+          "B18:1:observation": 0.649999999999963,
+          "B18:1:transition": 0.983333333333277
+        },
+        "members": [
+          "JIA",
+          "N16",
+          "N17"
+        ],
+        "levels": {
+          "JIA": 14,
+          "N16": 13,
+          "N17": 14
+        },
+        "entry_hp": {
+          "JIA": 428.0,
+          "N16": 362.0,
+          "N17": 413.0
+        },
+        "entry_mp": {
+          "JIA": 22.6208333333326,
+          "N16": 184.2,
+          "N17": 164.2
+        },
+        "exit_hp": {
+          "JIA": 285.212131147541,
+          "N16": 362.0,
+          "N17": 429.0
+        },
+        "exit_mp": {
+          "JIA": 21.1916666666668,
+          "N16": 185.7,
+          "N17": 170.7
+        },
+        "hurt_total": {
+          "JIA": 657.808524590164
+        },
+        "resource_balance": {
+          "JIA": {
+            "net_hp_restored_including_level_growth": 515.020655737705,
+            "net_mp_restored_including_level_growth": 196.570833333334,
+            "paid_mp": 198.0,
+            "received_hp_damage": 657.808524590164
+          },
+          "N16": {
+            "net_hp_restored_including_level_growth": 0.0,
+            "net_mp_restored_including_level_growth": 1.5,
+            "paid_mp": 0.0,
+            "received_hp_damage": 0.0
+          },
+          "N17": {
+            "net_hp_restored_including_level_growth": 16.0,
+            "net_mp_restored_including_level_growth": 6.5,
+            "paid_mp": 0.0,
+            "received_hp_damage": 0.0
+          }
+        },
+        "boss_damage_by_source": {
+          "JIA": 7600.0
+        },
+        "boss_damage_by_ability": {
+          "JIA_basic": 6372.375,
+          "jia_sweep": 1227.625
+        },
+        "support_damage": 0.0,
+        "shield_spent": {
+          "JIA": 0.0,
+          "N16": 0.0,
+          "N17": 0.0
+        },
+        "echo_events": {},
+        "fast_clear": true,
+        "reward_after": {
+          "candidates": [
+            "M05",
+            "F07",
+            "N02",
+            "N17",
+            "N01",
+            "N16",
+            "M02"
+          ],
+          "node": "B18",
+          "picks": 3,
+          "selected": [
+            "N16",
+            "N17",
+            "N01"
+          ]
+        },
+        "committed": true,
+        "plans": 0
+      }
+    },
+    {
+      "route": "short",
+      "build": "ordinary_heal",
+      "only_movement_differs": true,
+      "read_source": "rhythm-read-ordinary-r1.json",
+      "blind_source": "rhythm-blind-ordinary-r1.json",
+      "read": {
+        "route": "short",
+        "build": "ordinary_heal",
+        "movement_policy": "read_telegraphs",
+        "driver_revision": "visible_goal_v2",
+        "outcome": "victory",
+        "seconds": 75.1333333333304,
+        "phase_seconds": {
+          "B18:0:combat": 27.833333333333,
+          "B18:1:combat": 45.6499999999974,
+          "B18:1:observation": 0.649999999999963,
+          "B18:1:transition": 0.983333333333277
+        },
+        "members": [
+          "JIA",
+          "N16",
+          "N17"
+        ],
+        "levels": {
+          "JIA": 14,
+          "N16": 13,
+          "N17": 14
+        },
+        "entry_hp": {
+          "JIA": 428.0,
+          "N16": 362.0,
+          "N17": 413.0
+        },
+        "entry_mp": {
+          "JIA": 22.6208333333326,
+          "N16": 184.2,
+          "N17": 164.2
+        },
+        "exit_hp": {
+          "JIA": 428.0,
+          "N16": 362.0,
+          "N17": 429.0
+        },
+        "exit_mp": {
+          "JIA": 2.80416666666702,
+          "N16": 185.7,
+          "N17": 170.7
+        },
+        "hurt_total": {},
+        "resource_balance": {
+          "JIA": {
+            "net_hp_restored_including_level_growth": 0.0,
+            "net_mp_restored_including_level_growth": 244.183333333334,
+            "paid_mp": 264.0,
+            "received_hp_damage": 0.0
+          },
+          "N16": {
+            "net_hp_restored_including_level_growth": 0.0,
+            "net_mp_restored_including_level_growth": 1.5,
+            "paid_mp": 0.0,
+            "received_hp_damage": 0.0
+          },
+          "N17": {
+            "net_hp_restored_including_level_growth": 16.0,
+            "net_mp_restored_including_level_growth": 6.5,
+            "paid_mp": 0.0,
+            "received_hp_damage": 0.0
+          }
+        },
+        "boss_damage_by_source": {
+          "JIA": 7600.0
+        },
+        "boss_damage_by_ability": {
+          "JIA_basic": 5986.55,
+          "jia_sweep": 1613.45
+        },
+        "support_damage": 0.0,
+        "shield_spent": {
+          "JIA": 0.0,
+          "N16": 0.0,
+          "N17": 0.0
+        },
+        "echo_events": {},
+        "fast_clear": true,
+        "reward_after": {
+          "candidates": [
+            "M05",
+            "F07",
+            "N02",
+            "N17",
+            "N01",
+            "N16",
+            "M02"
+          ],
+          "node": "B18",
+          "picks": 3,
+          "selected": [
+            "N16",
+            "N17",
+            "N01"
+          ]
+        },
+        "committed": true,
+        "plans": 39
+      },
+      "blind": {
+        "route": "short",
+        "build": "ordinary_heal",
+        "movement_policy": "blind_approach",
+        "driver_revision": "visible_goal_v2",
+        "outcome": "victory",
+        "seconds": 62.4499999999977,
+        "phase_seconds": {
+          "B18:0:combat": 25.1333333333332,
+          "B18:1:combat": 35.6666666666646,
+          "B18:1:observation": 0.649999999999963,
+          "B18:1:transition": 0.983333333333277
+        },
+        "members": [
+          "JIA",
+          "N16",
+          "N17"
+        ],
+        "levels": {
+          "JIA": 14,
+          "N16": 13,
+          "N17": 14
+        },
+        "entry_hp": {
+          "JIA": 428.0,
+          "N16": 362.0,
+          "N17": 413.0
+        },
+        "entry_mp": {
+          "JIA": 22.6208333333326,
+          "N16": 184.2,
+          "N17": 164.2
+        },
+        "exit_hp": {
+          "JIA": 182.646619217082,
+          "N16": 308.339230769231,
+          "N17": 429.0
+        },
+        "exit_mp": {
+          "JIA": 27.5833333333335,
+          "N16": 173.531666666667,
+          "N17": 170.7
+        },
+        "hurt_total": {
+          "JIA": 811.678291814947,
+          "N16": 53.6607692307692
+        },
+        "resource_balance": {
+          "JIA": {
+            "net_hp_restored_including_level_growth": 566.324911032028,
+            "net_mp_restored_including_level_growth": 202.962500000001,
+            "paid_mp": 198.0,
+            "received_hp_damage": 811.678291814947
+          },
+          "N16": {
+            "net_hp_restored_including_level_growth": -7.105427357601e-15,
+            "net_mp_restored_including_level_growth": 21.3316666666672,
+            "paid_mp": 32.0,
+            "received_hp_damage": 53.6607692307692
+          },
+          "N17": {
+            "net_hp_restored_including_level_growth": 16.0,
+            "net_mp_restored_including_level_growth": 6.5,
+            "paid_mp": 0.0,
+            "received_hp_damage": 0.0
+          }
+        },
+        "boss_damage_by_source": {
+          "JIA": 7220.18875,
+          "N16": 379.811249999998
+        },
+        "boss_damage_by_ability": {
+          "JIA_basic": 5808.42,
+          "N16_basic": 379.811249999998,
+          "jia_sweep": 1411.76875
+        },
+        "support_damage": 0.0,
+        "shield_spent": {
+          "JIA": 0.0,
+          "N16": 0.0,
+          "N17": 0.0
+        },
+        "echo_events": {},
+        "fast_clear": true,
+        "reward_after": {
+          "candidates": [
+            "M05",
+            "F07",
+            "N02",
+            "N17",
+            "N01",
+            "N16",
+            "M02"
+          ],
+          "node": "B18",
+          "picks": 3,
+          "selected": [
+            "N16",
+            "N17",
+            "N01"
+          ]
+        },
+        "committed": true,
+        "plans": 0
+      }
+    },
+    {
+      "route": "explore",
+      "build": "route_original",
+      "only_movement_differs": true,
+      "read_source": "rhythm-read-original-r2.json",
+      "blind_source": "rhythm-blind-original-r1.json",
+      "read": {
+        "route": "explore",
+        "build": "route_original",
+        "movement_policy": "read_telegraphs",
+        "driver_revision": "visible_goal_v2",
+        "outcome": "victory",
+        "seconds": 34.4333333333327,
+        "phase_seconds": {
+          "B18:0:combat": 12.1833333333335,
+          "B18:1:combat": 20.5999999999991,
+          "B18:1:observation": 0.650000000000032,
+          "B18:1:transition": 0.983333333333382
+        },
+        "members": [
+          "JIA",
+          "F11",
+          "N07"
+        ],
+        "levels": {
+          "F11": 16,
+          "JIA": 16,
+          "N07": 15
+        },
+        "entry_hp": {
+          "F11": 397.1,
+          "JIA": 462.1,
+          "N07": 376.1
+        },
+        "entry_mp": {
+          "F11": 207.4,
+          "JIA": 167.4,
+          "N07": 162.4
+        },
+        "exit_hp": {
+          "F11": 397.1,
+          "JIA": 462.1,
+          "N07": 392.1
+        },
+        "exit_mp": {
+          "F11": 207.4,
+          "JIA": 85.2166666666614,
+          "N07": 167.4
+        },
+        "hurt_total": {},
+        "resource_balance": {
+          "F11": {
+            "net_hp_restored_including_level_growth": 0.0,
+            "net_mp_restored_including_level_growth": 0.0,
+            "paid_mp": 0.0,
+            "received_hp_damage": 0.0
+          },
+          "JIA": {
+            "net_hp_restored_including_level_growth": 0.0,
+            "net_mp_restored_including_level_growth": 193.816666666661,
+            "paid_mp": 276.0,
+            "received_hp_damage": 0.0
+          },
+          "N07": {
+            "net_hp_restored_including_level_growth": 16.0,
+            "net_mp_restored_including_level_growth": 5.0,
+            "paid_mp": 0.0,
+            "received_hp_damage": 0.0
+          }
+        },
+        "boss_damage_by_source": {
+          "F11": 499.928,
+          "JIA": 6534.622,
+          "N07": 565.449999999999
+        },
+        "boss_damage_by_ability": {
+          "JIA_basic": 4147.697,
+          "bow_support": 565.449999999999,
+          "emma_support": 499.928,
+          "jia_break": 1381.5,
+          "jia_sweep": 1005.425
+        },
+        "support_damage": 1065.378,
+        "shield_spent": {
+          "F11": 0.0,
+          "JIA": 0.0,
+          "N07": 0.0
+        },
+        "echo_events": {},
+        "fast_clear": true,
+        "reward_after": {
+          "candidates": [
+            "F05",
+            "F10",
+            "N10",
+            "M02",
+            "N11",
+            "N16",
+            "M04"
+          ],
+          "node": "B18",
+          "picks": 3,
+          "selected": [
+            "N16",
+            "F05",
+            "F10"
+          ]
+        },
+        "committed": true,
+        "plans": 24
+      },
+      "blind": {
+        "route": "explore",
+        "build": "route_original",
+        "movement_policy": "blind_approach",
+        "driver_revision": "visible_goal_v2",
+        "outcome": "victory",
+        "seconds": 31.0166666666662,
+        "phase_seconds": {
+          "B18:0:combat": 11.6000000000002,
+          "B18:1:combat": 17.7499999999993,
+          "B18:1:observation": 0.650000000000032,
+          "B18:1:transition": 1.00000000000005
+        },
+        "members": [
+          "JIA",
+          "F11",
+          "N07"
+        ],
+        "levels": {
+          "F11": 16,
+          "JIA": 16,
+          "N07": 15
+        },
+        "entry_hp": {
+          "F11": 397.1,
+          "JIA": 462.1,
+          "N07": 376.1
+        },
+        "entry_mp": {
+          "F11": 207.4,
+          "JIA": 167.4,
+          "N07": 162.4
+        },
+        "exit_hp": {
+          "F11": 397.1,
+          "JIA": 144.356881897755,
+          "N07": 392.1
+        },
+        "exit_mp": {
+          "F11": 207.4,
+          "JIA": 87.3999999999952,
+          "N07": 167.4
+        },
+        "hurt_total": {
+          "JIA": 317.743118102245
+        },
+        "resource_balance": {
+          "F11": {
+            "net_hp_restored_including_level_growth": 0.0,
+            "net_mp_restored_including_level_growth": 0.0,
+            "paid_mp": 0.0,
+            "received_hp_damage": 0.0
+          },
+          "JIA": {
+            "net_hp_restored_including_level_growth": 5.6843418860808e-14,
+            "net_mp_restored_including_level_growth": 173.999999999995,
+            "paid_mp": 254.0,
+            "received_hp_damage": 317.743118102245
+          },
+          "N07": {
+            "net_hp_restored_including_level_growth": 16.0,
+            "net_mp_restored_including_level_growth": 5.0,
+            "paid_mp": 0.0,
+            "received_hp_damage": 0.0
+          }
+        },
+        "boss_damage_by_source": {
+          "F11": 499.928,
+          "JIA": 6550.402,
+          "N07": 549.670000000001
+        },
+        "boss_damage_by_ability": {
+          "JIA_basic": 4183.6425,
+          "bow_support": 549.670000000001,
+          "emma_support": 499.928,
+          "jia_break": 1361.3345,
+          "jia_sweep": 1005.425
+        },
+        "support_damage": 1049.598,
+        "shield_spent": {
+          "F11": 0.0,
+          "JIA": 0.0,
+          "N07": 0.0
+        },
+        "echo_events": {},
+        "fast_clear": true,
+        "reward_after": {
+          "candidates": [
+            "F05",
+            "F10",
+            "N10",
+            "M02",
+            "N11",
+            "N16",
+            "M04"
+          ],
+          "node": "B18",
+          "picks": 3,
+          "selected": [
+            "N16",
+            "F05",
+            "F10"
+          ]
+        },
+        "committed": true,
+        "plans": 0
+      }
+    },
+    {
+      "route": "explore",
+      "build": "ordinary_heal",
+      "only_movement_differs": true,
+      "read_source": "rhythm-read-ordinary-r1.json",
+      "blind_source": "rhythm-blind-ordinary-r1.json",
+      "read": {
+        "route": "explore",
+        "build": "ordinary_heal",
+        "movement_policy": "read_telegraphs",
+        "driver_revision": "visible_goal_v2",
+        "outcome": "victory",
+        "seconds": 44.7499999999987,
+        "phase_seconds": {
+          "B18:0:combat": 14.9000000000003,
+          "B18:1:combat": 28.1999999999984,
+          "B18:1:observation": 0.649999999999972,
+          "B18:1:transition": 0.983333333333382
+        },
+        "members": [
+          "JIA",
+          "N16",
+          "N17"
+        ],
+        "levels": {
+          "JIA": 16,
+          "N16": 3,
+          "N17": 1
+        },
+        "entry_hp": {
+          "JIA": 462.1,
+          "N16": 204.1,
+          "N17": 207.1
+        },
+        "entry_mp": {
+          "JIA": 167.4,
+          "N16": 132.4,
+          "N17": 97.4
+        },
+        "exit_hp": {
+          "JIA": 462.1,
+          "N16": 204.1,
+          "N17": 207.1
+        },
+        "exit_mp": {
+          "JIA": 101.053333333326,
+          "N16": 132.4,
+          "N17": 97.4
+        },
+        "hurt_total": {},
+        "resource_balance": {
+          "JIA": {
+            "net_hp_restored_including_level_growth": 0.0,
+            "net_mp_restored_including_level_growth": 253.653333333326,
+            "paid_mp": 320.0,
+            "received_hp_damage": 0.0
+          },
+          "N16": {
+            "net_hp_restored_including_level_growth": 0.0,
+            "net_mp_restored_including_level_growth": 0.0,
+            "paid_mp": 0.0,
+            "received_hp_damage": 0.0
+          },
+          "N17": {
+            "net_hp_restored_including_level_growth": 0.0,
+            "net_mp_restored_including_level_growth": 0.0,
+            "paid_mp": 0.0,
+            "received_hp_damage": 0.0
+          }
+        },
+        "boss_damage_by_source": {
+          "JIA": 7600.0
+        },
+        "boss_damage_by_ability": {
+          "JIA_basic": 4634.38,
+          "jia_break": 1588.725,
+          "jia_sweep": 1376.895
+        },
+        "support_damage": 0.0,
+        "shield_spent": {
+          "JIA": 0.0,
+          "N16": 0.0,
+          "N17": 0.0
+        },
+        "echo_events": {},
+        "fast_clear": true,
+        "reward_after": {
+          "candidates": [
+            "F05",
+            "F10",
+            "N10",
+            "M02",
+            "N11",
+            "N16",
+            "M04"
+          ],
+          "node": "B18",
+          "picks": 3,
+          "selected": [
+            "N16",
+            "F05",
+            "F10"
+          ]
+        },
+        "committed": true,
+        "plans": 28
+      },
+      "blind": {
+        "route": "explore",
+        "build": "ordinary_heal",
+        "movement_policy": "blind_approach",
+        "driver_revision": "visible_goal_v2",
+        "outcome": "victory",
+        "seconds": 34.4833333333327,
+        "phase_seconds": {
+          "B18:0:combat": 13.3166666666669,
+          "B18:1:combat": 19.5166666666657,
+          "B18:1:observation": 0.650000000000032,
+          "B18:1:transition": 0.983333333333382
+        },
+        "members": [
+          "JIA",
+          "N16",
+          "N17"
+        ],
+        "levels": {
+          "JIA": 16,
+          "N16": 3,
+          "N17": 1
+        },
+        "entry_hp": {
+          "JIA": 462.1,
+          "N16": 204.1,
+          "N17": 207.1
+        },
+        "entry_mp": {
+          "JIA": 167.4,
+          "N16": 132.4,
+          "N17": 97.4
+        },
+        "exit_hp": {
+          "JIA": 151.719936839215,
+          "N16": 204.1,
+          "N17": 207.1
+        },
+        "exit_mp": {
+          "JIA": 85.5066666666613,
+          "N16": 132.4,
+          "N17": 97.4
+        },
+        "hurt_total": {
+          "JIA": 389.380063160785
+        },
+        "resource_balance": {
+          "JIA": {
+            "net_hp_restored_including_level_growth": 79.0,
+            "net_mp_restored_including_level_growth": 194.106666666661,
+            "paid_mp": 276.0,
+            "received_hp_damage": 389.380063160785
+          },
+          "N16": {
+            "net_hp_restored_including_level_growth": 0.0,
+            "net_mp_restored_including_level_growth": 0.0,
+            "paid_mp": 0.0,
+            "received_hp_damage": 0.0
+          },
+          "N17": {
+            "net_hp_restored_including_level_growth": 0.0,
+            "net_mp_restored_including_level_growth": 0.0,
+            "paid_mp": 0.0,
+            "received_hp_damage": 0.0
+          }
+        },
+        "boss_damage_by_source": {
+          "JIA": 7600.0
+        },
+        "boss_damage_by_ability": {
+          "JIA_basic": 4634.38,
+          "jia_break": 1588.725,
+          "jia_sweep": 1376.895
+        },
+        "support_damage": 0.0,
+        "shield_spent": {
+          "JIA": 0.0,
+          "N16": 0.0,
+          "N17": 0.0
+        },
+        "echo_events": {},
+        "fast_clear": true,
+        "reward_after": {
+          "candidates": [
+            "F05",
+            "F10",
+            "N10",
+            "M02",
+            "N11",
+            "N16",
+            "M04"
+          ],
+          "node": "B18",
+          "picks": 3,
+          "selected": [
+            "N16",
+            "F05",
+            "F10"
+          ]
+        },
+        "committed": true,
+        "plans": 0
+      }
+    }
+  ],
+  "final_actual_resume_samples": [
+    {
+      "route": "short",
+      "build": "route_original",
+      "movement_policy": "read_telegraphs",
+      "driver_revision": "visible_goal_v2",
+      "outcome": "victory",
+      "seconds": 62.2333333333311,
+      "phase_seconds": {
+        "B18:0:combat": 26.8499999999998,
+        "B18:1:combat": 33.7333333333314,
+        "B18:1:observation": 0.649999999999963,
+        "B18:1:transition": 0.983333333333277
+      },
+      "members": [
+        "JIA",
+        "N16",
+        "N17"
+      ],
+      "levels": {
+        "JIA": 14,
+        "N16": 13,
+        "N17": 14
+      },
+      "entry_hp": {
+        "JIA": 428.0,
+        "N16": 362.0,
+        "N17": 413.0
+      },
+      "entry_mp": {
+        "JIA": 22.6208333333326,
+        "N16": 184.2,
+        "N17": 164.2
+      },
+      "exit_hp": {
+        "JIA": 428.0,
+        "N16": 362.0,
+        "N17": 429.0
+      },
+      "exit_mp": {
+        "JIA": 4.87916666666683,
+        "N16": 185.7,
+        "N17": 170.7
+      },
+      "hurt_total": {},
+      "resource_balance": {
+        "JIA": {
+          "net_hp_restored_including_level_growth": 0.0,
+          "net_mp_restored_including_level_growth": 202.258333333334,
+          "paid_mp": 220.0,
+          "received_hp_damage": 0.0
+        },
+        "N16": {
+          "net_hp_restored_including_level_growth": 0.0,
+          "net_mp_restored_including_level_growth": 1.5,
+          "paid_mp": 0.0,
+          "received_hp_damage": 0.0
+        },
+        "N17": {
+          "net_hp_restored_including_level_growth": 16.0,
+          "net_mp_restored_including_level_growth": 6.5,
+          "paid_mp": 0.0,
+          "received_hp_damage": 0.0
+        }
+      },
+      "boss_damage_by_source": {
+        "JIA": 7600.0
+      },
+      "boss_damage_by_ability": {
+        "JIA_basic": 6372.375,
+        "jia_sweep": 1227.625
+      },
+      "support_damage": 0.0,
+      "shield_spent": {
+        "JIA": 0.0,
+        "N16": 0.0,
+        "N17": 0.0
+      },
+      "echo_events": {},
+      "fast_clear": true,
+      "reward_after": {
+        "candidates": [
+          "M05",
+          "F07",
+          "N02",
+          "N17",
+          "N01",
+          "N16",
+          "M02"
+        ],
+        "node": "B18",
+        "picks": 3,
+        "selected": [
+          "N16",
+          "N17",
+          "N01"
+        ]
+      },
+      "committed": true,
+      "plans": 32
+    },
+    {
+      "route": "explore",
+      "build": "route_original",
+      "movement_policy": "read_telegraphs",
+      "driver_revision": "visible_goal_v2",
+      "outcome": "victory",
+      "seconds": 34.4333333333327,
+      "phase_seconds": {
+        "B18:0:combat": 12.1833333333335,
+        "B18:1:combat": 20.5999999999991,
+        "B18:1:observation": 0.650000000000032,
+        "B18:1:transition": 0.983333333333382
+      },
+      "members": [
+        "JIA",
+        "F11",
+        "N07"
+      ],
+      "levels": {
+        "F11": 16,
+        "JIA": 16,
+        "N07": 15
+      },
+      "entry_hp": {
+        "F11": 397.1,
+        "JIA": 462.1,
+        "N07": 376.1
+      },
+      "entry_mp": {
+        "F11": 207.4,
+        "JIA": 167.4,
+        "N07": 162.4
+      },
+      "exit_hp": {
+        "F11": 397.1,
+        "JIA": 462.1,
+        "N07": 392.1
+      },
+      "exit_mp": {
+        "F11": 207.4,
+        "JIA": 85.2166666666614,
+        "N07": 167.4
+      },
+      "hurt_total": {},
+      "resource_balance": {
+        "F11": {
+          "net_hp_restored_including_level_growth": 0.0,
+          "net_mp_restored_including_level_growth": 0.0,
+          "paid_mp": 0.0,
+          "received_hp_damage": 0.0
+        },
+        "JIA": {
+          "net_hp_restored_including_level_growth": 0.0,
+          "net_mp_restored_including_level_growth": 193.816666666661,
+          "paid_mp": 276.0,
+          "received_hp_damage": 0.0
+        },
+        "N07": {
+          "net_hp_restored_including_level_growth": 16.0,
+          "net_mp_restored_including_level_growth": 5.0,
+          "paid_mp": 0.0,
+          "received_hp_damage": 0.0
+        }
+      },
+      "boss_damage_by_source": {
+        "F11": 499.928,
+        "JIA": 6534.622,
+        "N07": 565.449999999999
+      },
+      "boss_damage_by_ability": {
+        "JIA_basic": 4147.697,
+        "bow_support": 565.449999999999,
+        "emma_support": 499.928,
+        "jia_break": 1381.5,
+        "jia_sweep": 1005.425
+      },
+      "support_damage": 1065.378,
+      "shield_spent": {
+        "F11": 0.0,
+        "JIA": 0.0,
+        "N07": 0.0
+      },
+      "echo_events": {},
+      "fast_clear": true,
+      "reward_after": {
+        "candidates": [
+          "F05",
+          "F10",
+          "N10",
+          "M02",
+          "N11",
+          "N16",
+          "M04"
+        ],
+        "node": "B18",
+        "picks": 3,
+        "selected": [
+          "N16",
+          "F05",
+          "F10"
+        ]
+      },
+      "committed": true,
+      "plans": 24
+    },
+    {
+      "route": "explore",
+      "build": "followup",
+      "movement_policy": "read_telegraphs",
+      "driver_revision": "visible_goal_v2",
+      "outcome": "victory",
+      "seconds": 32.5166666666661,
+      "phase_seconds": {
+        "B18:0:combat": 11.0000000000001,
+        "B18:1:combat": 19.8666666666659,
+        "B18:1:observation": 0.650000000000032,
+        "B18:1:transition": 0.983333333333382
+      },
+      "members": [
+        "JIA",
+        "N07",
+        "N01"
+      ],
+      "levels": {
+        "JIA": 16,
+        "N01": 3,
+        "N07": 15
+      },
+      "entry_hp": {
+        "JIA": 462.1,
+        "N01": 274.1,
+        "N07": 376.1
+      },
+      "entry_mp": {
+        "JIA": 167.4,
+        "N01": 92.4,
+        "N07": 162.4
+      },
+      "exit_hp": {
+        "JIA": 462.1,
+        "N01": 274.1,
+        "N07": 392.1
+      },
+      "exit_mp": {
+        "JIA": 74.099999999995,
+        "N01": 92.4,
+        "N07": 167.4
+      },
+      "hurt_total": {},
+      "resource_balance": {
+        "JIA": {
+          "net_hp_restored_including_level_growth": 0.0,
+          "net_mp_restored_including_level_growth": 182.699999999995,
+          "paid_mp": 276.0,
+          "received_hp_damage": 0.0
+        },
+        "N01": {
+          "net_hp_restored_including_level_growth": 0.0,
+          "net_mp_restored_including_level_growth": 0.0,
+          "paid_mp": 0.0,
+          "received_hp_damage": 0.0
+        },
+        "N07": {
+          "net_hp_restored_including_level_growth": 16.0,
+          "net_mp_restored_including_level_growth": 5.0,
+          "paid_mp": 0.0,
+          "received_hp_damage": 0.0
+        }
+      },
+      "boss_damage_by_source": {
+        "JIA": 6932.184,
+        "N01": 183.896000000001,
+        "N07": 483.92
+      },
+      "boss_damage_by_ability": {
+        "JIA_basic": 4405.181375,
+        "bow_support": 483.92,
+        "jia_break": 1588.725,
+        "jia_sweep": 938.277625000001,
+        "militia_support": 183.896000000001
+      },
+      "support_damage": 667.816,
+      "shield_spent": {
+        "JIA": 0.0,
+        "N01": 0.0,
+        "N07": 0.0
+      },
+      "echo_events": {},
+      "fast_clear": true,
+      "reward_after": {
+        "candidates": [
+          "F05",
+          "F10",
+          "N10",
+          "M02",
+          "N11",
+          "N16",
+          "M04"
+        ],
+        "node": "B18",
+        "picks": 3,
+        "selected": [
+          "N16",
+          "F05",
+          "F10"
+        ]
+      },
+      "committed": true,
+      "plans": 23
+    },
+    {
+      "route": "explore",
+      "build": "shield_conversion",
+      "movement_policy": "read_telegraphs",
+      "driver_revision": "visible_goal_v2",
+      "outcome": "victory",
+      "seconds": 77.9333333333302,
+      "phase_seconds": {
+        "B18:0:combat": 26.8499999999998,
+        "B18:1:combat": 49.4333333333305,
+        "B18:1:observation": 0.649999999999963,
+        "B18:1:transition": 0.983333333333277
+      },
+      "members": [
+        "JIA",
+        "F07",
+        "N16"
+      ],
+      "levels": {
+        "F07": 5,
+        "JIA": 16,
+        "N16": 3
+      },
+      "entry_hp": {
+        "F07": 241.1,
+        "JIA": 462.1,
+        "N16": 204.1
+      },
+      "entry_mp": {
+        "F07": 117.4,
+        "JIA": 167.4,
+        "N16": 132.4
+      },
+      "exit_hp": {
+        "F07": 241.1,
+        "JIA": 462.1,
+        "N16": 204.1
+      },
+      "exit_mp": {
+        "F07": 24.5666666666672,
+        "JIA": 167.4,
+        "N16": 132.4
+      },
+      "hurt_total": {},
+      "resource_balance": {
+        "F07": {
+          "net_hp_restored_including_level_growth": 0.0,
+          "net_mp_restored_including_level_growth": 405.166666666667,
+          "paid_mp": 498.0,
+          "received_hp_damage": 0.0
+        },
+        "JIA": {
+          "net_hp_restored_including_level_growth": 0.0,
+          "net_mp_restored_including_level_growth": 0.0,
+          "paid_mp": 0.0,
+          "received_hp_damage": 0.0
+        },
+        "N16": {
+          "net_hp_restored_including_level_growth": 0.0,
+          "net_mp_restored_including_level_growth": 0.0,
+          "paid_mp": 0.0,
+          "received_hp_damage": 0.0
+        }
+      },
+      "boss_damage_by_source": {
+        "F07": 7600.00000000002
+      },
+      "boss_damage_by_ability": {
+        "F07_basic": 5568.23750000001,
+        "bandit_sweep": 1153.1625,
+        "bandit_thrust": 878.599999999999
+      },
+      "support_damage": 0.0,
+      "shield_spent": {
+        "F07": 0.0,
+        "N16": 0.0
+      },
+      "echo_events": {},
+      "fast_clear": true,
+      "reward_after": {
+        "candidates": [
+          "F05",
+          "F10",
+          "N10",
+          "M02",
+          "N11",
+          "N16",
+          "M04"
+        ],
+        "node": "B18",
+        "picks": 3,
+        "selected": [
+          "N16",
+          "F05",
+          "F10"
+        ]
+      },
+      "committed": true,
+      "plans": 50
+    },
+    {
+      "route": "explore",
+      "build": "curse",
+      "movement_policy": "read_telegraphs",
+      "driver_revision": "visible_goal_v2",
+      "outcome": "victory",
+      "seconds": 105.483333333329,
+      "phase_seconds": {
+        "B18:0:combat": 41.2833333333323,
+        "B18:1:combat": 62.5333333333298,
+        "B18:1:observation": 0.649999999999963,
+        "B18:1:transition": 0.999999999999943
+      },
+      "members": [
+        "JIA",
+        "F05",
+        "N14"
+      ],
+      "levels": {
+        "F05": 6,
+        "JIA": 16,
+        "N14": 4
+      },
+      "entry_hp": {
+        "F05": 232.1,
+        "JIA": 462.1,
+        "N14": 195.1
+      },
+      "entry_mp": {
+        "F05": 162.4,
+        "JIA": 167.4,
+        "N14": 142.4
+      },
+      "exit_hp": {
+        "F05": 232.1,
+        "JIA": 462.1,
+        "N14": 195.1
+      },
+      "exit_mp": {
+        "F05": 128.480000000058,
+        "JIA": 167.4,
+        "N14": 142.4
+      },
+      "hurt_total": {},
+      "resource_balance": {
+        "F05": {
+          "net_hp_restored_including_level_growth": 0.0,
+          "net_mp_restored_including_level_growth": 696.080000000058,
+          "paid_mp": 730.0,
+          "received_hp_damage": 0.0
+        },
+        "JIA": {
+          "net_hp_restored_including_level_growth": 0.0,
+          "net_mp_restored_including_level_growth": 0.0,
+          "paid_mp": 0.0,
+          "received_hp_damage": 0.0
+        },
+        "N14": {
+          "net_hp_restored_including_level_growth": 0.0,
+          "net_mp_restored_including_level_growth": 0.0,
+          "paid_mp": 0.0,
+          "received_hp_damage": 0.0
+        }
+      },
+      "boss_damage_by_source": {
+        "F05": 6838.99375000001,
+        "N14": 761.00625
+      },
+      "boss_damage_by_ability": {
+        "F05_basic": 5053.402725,
+        "F05_curse": 837.899999999999,
+        "F05_spread": 307.800000000001,
+        "curse_dot": 918.272275000002,
+        "curse_support": 482.625
+      },
+      "support_damage": 1400.897275,
+      "shield_spent": {
+        "F05": 0.0,
+        "N14": 0.0
+      },
+      "echo_events": {},
+      "fast_clear": false,
+      "reward_after": {
+        "candidates": [
+          "F05",
+          "F10",
+          "N10",
+          "M02",
+          "N11",
+          "N16",
+          "M04"
+        ],
+        "node": "B18",
+        "picks": 3,
+        "selected": [
+          "N16",
+          "F05",
+          "F10"
+        ]
+      },
+      "committed": true,
+      "plans": 55
+    },
+    {
+      "route": "explore",
+      "build": "strong_echo_heal",
+      "movement_policy": "read_telegraphs",
+      "driver_revision": "visible_goal_v2",
+      "outcome": "victory",
+      "seconds": 33.3499999999994,
+      "phase_seconds": {
+        "B18:0:combat": 12.0666666666668,
+        "B18:1:combat": 19.6166666666658,
+        "B18:1:observation": 0.650000000000032,
+        "B18:1:transition": 1.00000000000005
+      },
+      "members": [
+        "JIA",
+        "F11",
+        "N16"
+      ],
+      "levels": {
+        "F11": 16,
+        "JIA": 16,
+        "N16": 3
+      },
+      "entry_hp": {
+        "F11": 397.1,
+        "JIA": 462.1,
+        "N16": 204.1
+      },
+      "entry_mp": {
+        "F11": 207.4,
+        "JIA": 167.4,
+        "N16": 132.4
+      },
+      "exit_hp": {
+        "F11": 397.1,
+        "JIA": 462.1,
+        "N16": 204.1
+      },
+      "exit_mp": {
+        "F11": 204.600000000003,
+        "JIA": 107.933333333329,
+        "N16": 132.4
+      },
+      "hurt_total": {},
+      "resource_balance": {
+        "F11": {
+          "net_hp_restored_including_level_growth": 0.0,
+          "net_mp_restored_including_level_growth": 207.200000000003,
+          "paid_mp": 210.0,
+          "received_hp_damage": 0.0
+        },
+        "JIA": {
+          "net_hp_restored_including_level_growth": 0.0,
+          "net_mp_restored_including_level_growth": 158.533333333329,
+          "paid_mp": 218.0,
+          "received_hp_damage": 0.0
+        },
+        "N16": {
+          "net_hp_restored_including_level_growth": 0.0,
+          "net_mp_restored_including_level_growth": 0.0,
+          "paid_mp": 0.0,
+          "received_hp_damage": 0.0
+        }
+      },
+      "boss_damage_by_source": {
+        "F11": 4405.167,
+        "JIA": 3194.833
+      },
+      "boss_damage_by_ability": {
+        "F11_basic": 1644.5,
+        "JIA_basic": 1774.958,
+        "emma_frost": 269.099999999999,
+        "emma_ice": 403.650000000001,
+        "emma_star": 1834.365,
+        "emma_support": 253.552,
+        "jia_break": 1036.125,
+        "jia_sweep": 383.75
+      },
+      "support_damage": 966.667,
+      "shield_spent": {
+        "F11": 0.0,
+        "JIA": 0.0,
+        "N16": 0.0
+      },
+      "echo_events": {
+        "F11:echo": 6
+      },
+      "fast_clear": true,
+      "reward_after": {
+        "candidates": [
+          "F05",
+          "F10",
+          "N10",
+          "M02",
+          "N11",
+          "N16",
+          "M04"
+        ],
+        "node": "B18",
+        "picks": 3,
+        "selected": [
+          "N16",
+          "F05",
+          "F10"
+        ]
+      },
+      "committed": true,
+      "plans": 15
+    }
+  ],
+  "final_checks": {
+    "original_resumes": 2,
+    "representative_resumes": 4,
+    "all_victory": true,
+    "real_complete_story_reward": true,
+    "base_reward_picks": 3,
+    "no_extra_hostiles": true
+  },
+  "boundaries": [
+    "Zero received damage is a deterministic 60 Hz visible-warning driver upper-bound result, not a human no-hit playtest.",
+    "One genuine reward seed, finite samples; not a distribution of player outcomes.",
+    "Blind original and ordinary teams may win by quick damage, HP and recovery costs. The ordinary short blind sample ends protagonist HP 182.6 and also exposes healer to damage; it does not stay full merely by pursuing.",
+    "Earlier local-candidate driver and earlier B18 recovery timings are superseded for B18 comparisons.",
+    "Final low-growth F07 shielding sample receives no hits under read driver and spends zero shield; it establishes the no-shield fallback output, not a mature shield-conversion build. Earlier 12/6 shield spending proves a trigger under incoming hits only.",
+    "Neither genuine checkpoint owns F03. A later independent real shield route now verifies the grown F03/F07 combination; see shield-real-summary.json."
+  ],
+  "campaign_reward_seed": 781103,
+  "battle_seeds": {
+    "short": 1718,
+    "explore": 1718
+  },
+  "additional_real_shield_route": "shield-real-summary.json"
+}

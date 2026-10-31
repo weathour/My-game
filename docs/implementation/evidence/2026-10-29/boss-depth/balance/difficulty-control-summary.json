@@ -1,0 +1,1499 @@
+{
+  "samples": 6,
+  "change": "Movement only; same actual CampaignService input, skill cadence and low-HP switching.",
+  "results": [
+    {
+      "route": "short",
+      "build": "route_original",
+      "movement": "blind_approach",
+      "source": "difficulty-blind-original.json",
+      "paired_inputs_equal": true,
+      "read_telegraphs": {
+        "outcome": "victory",
+        "seconds": 61.3666666666645,
+        "entry": {
+          "JIA": {
+            "cooldowns": {
+              "JIA_basic": 0.672947510094213,
+              "armor_guard": 0.0,
+              "jia_break": 0.0,
+              "jia_sweep": 0.0
+            },
+            "dead": false,
+            "hp": 428.0,
+            "level": 14,
+            "mp": 22.6208333333326,
+            "xp": 155.333333333333
+          },
+          "N16": {
+            "cooldowns": {
+              "healer_support": 2.83333333333335
+            },
+            "dead": false,
+            "hp": 362.0,
+            "level": 13,
+            "mp": 184.2,
+            "xp": 55.6666666666667
+          },
+          "N17": {
+            "cooldowns": {
+              "cook_support": 3.03333333333334
+            },
+            "dead": false,
+            "hp": 413.0,
+            "level": 14,
+            "mp": 164.2,
+            "xp": 179.333333333333
+          }
+        },
+        "exit": {
+          "JIA": {
+            "cooldowns": {
+              "JIA_basic": 0.653167864141084,
+              "armor_guard": 0.0,
+              "jia_break": 0.0,
+              "jia_sweep": 4.65
+            },
+            "dead": false,
+            "hp": 424.83606557377,
+            "level": 14,
+            "mp": 2.06250000000016,
+            "xp": 181.333333333333
+          },
+          "N16": {
+            "cooldowns": {
+              "healer_support": 4.61666666666668
+            },
+            "dead": false,
+            "hp": 362.0,
+            "level": 13,
+            "mp": 185.7,
+            "xp": 81.6666666666667
+          },
+          "N17": {
+            "cooldowns": {
+              "cook_support": 1.86666666666668
+            },
+            "dead": false,
+            "hp": 429.0,
+            "level": 15,
+            "mp": 170.7,
+            "xp": 19.3333333333333
+          }
+        },
+        "hurt_total": {
+          "JIA": 488.889836065574
+        },
+        "resource_balance": {
+          "JIA": {
+            "net_hp_restored_including_level_growth": 485.725901639344,
+            "net_mp_restored_including_level_growth": 199.441666666668,
+            "paid_mp": 220.0,
+            "received_hp_damage": 488.889836065574
+          },
+          "N16": {
+            "net_hp_restored_including_level_growth": 0.0,
+            "net_mp_restored_including_level_growth": 1.5,
+            "paid_mp": 0.0,
+            "received_hp_damage": 0.0
+          },
+          "N17": {
+            "net_hp_restored_including_level_growth": 16.0,
+            "net_mp_restored_including_level_growth": 6.5,
+            "paid_mp": 0.0,
+            "received_hp_damage": 0.0
+          }
+        },
+        "boss_remaining": {},
+        "cast_counts": {
+          "JIA:JIA_basic:front": 79,
+          "JIA:jia_sweep:front": 10,
+          "N16:healer_support:support": 9,
+          "N17:cook_support:support": 12
+        },
+        "hurt_by_attack": {
+          "halberd_sweep": 2,
+          "halberd_charge": 2,
+          "halberd_fall": 1,
+          "halberd_finish": 1,
+          "demon_fourfold": 2,
+          "demon_skybreaker": 2,
+          "demon_heavenfall": 1,
+          "demon_final_cleave": 1
+        }
+      },
+      "control": {
+        "outcome": "victory",
+        "seconds": 61.0166666666645,
+        "entry": {
+          "JIA": {
+            "cooldowns": {
+              "JIA_basic": 0.672947510094213,
+              "armor_guard": 0.0,
+              "jia_break": 0.0,
+              "jia_sweep": 0.0
+            },
+            "dead": false,
+            "hp": 428.0,
+            "level": 14,
+            "mp": 22.6208333333326,
+            "xp": 155.333333333333
+          },
+          "N16": {
+            "cooldowns": {
+              "healer_support": 2.83333333333335
+            },
+            "dead": false,
+            "hp": 362.0,
+            "level": 13,
+            "mp": 184.2,
+            "xp": 55.6666666666667
+          },
+          "N17": {
+            "cooldowns": {
+              "cook_support": 3.03333333333334
+            },
+            "dead": false,
+            "hp": 413.0,
+            "level": 14,
+            "mp": 164.2,
+            "xp": 179.333333333333
+          }
+        },
+        "exit": {
+          "JIA": {
+            "cooldowns": {
+              "JIA_basic": 0.119834530807751,
+              "armor_guard": 0.0,
+              "jia_break": 0.0,
+              "jia_sweep": 5.0
+            },
+            "dead": false,
+            "hp": 424.83606557377,
+            "level": 14,
+            "mp": 0.925000000000164,
+            "xp": 181.333333333333
+          },
+          "N16": {
+            "cooldowns": {
+              "healer_support": 4.96666666666667
+            },
+            "dead": false,
+            "hp": 362.0,
+            "level": 13,
+            "mp": 185.7,
+            "xp": 81.6666666666667
+          },
+          "N17": {
+            "cooldowns": {
+              "cook_support": 2.21666666666668
+            },
+            "dead": false,
+            "hp": 429.0,
+            "level": 15,
+            "mp": 170.7,
+            "xp": 19.3333333333333
+          }
+        },
+        "hurt_total": {
+          "JIA": 488.889836065574
+        },
+        "resource_balance": {
+          "JIA": {
+            "net_hp_restored_including_level_growth": 485.725901639344,
+            "net_mp_restored_including_level_growth": 198.304166666668,
+            "paid_mp": 220.0,
+            "received_hp_damage": 488.889836065574
+          },
+          "N16": {
+            "net_hp_restored_including_level_growth": 0.0,
+            "net_mp_restored_including_level_growth": 1.5,
+            "paid_mp": 0.0,
+            "received_hp_damage": 0.0
+          },
+          "N17": {
+            "net_hp_restored_including_level_growth": 16.0,
+            "net_mp_restored_including_level_growth": 6.5,
+            "paid_mp": 0.0,
+            "received_hp_damage": 0.0
+          }
+        },
+        "boss_remaining": {},
+        "cast_counts": {
+          "JIA:JIA_basic:front": 79,
+          "JIA:jia_sweep:front": 10,
+          "N16:healer_support:support": 9,
+          "N17:cook_support:support": 12
+        },
+        "hurt_by_attack": {
+          "halberd_sweep": 2,
+          "halberd_charge": 2,
+          "halberd_fall": 1,
+          "halberd_finish": 1,
+          "demon_fourfold": 2,
+          "demon_skybreaker": 2,
+          "demon_heavenfall": 1,
+          "demon_final_cleave": 1
+        }
+      }
+    },
+    {
+      "route": "explore",
+      "build": "route_original",
+      "movement": "blind_approach",
+      "source": "difficulty-blind-original.json",
+      "paired_inputs_equal": true,
+      "read_telegraphs": {
+        "outcome": "victory",
+        "seconds": 32.6833333333328,
+        "entry": {
+          "F11": {
+            "cooldowns": {
+              "F11_basic": 0.0,
+              "armor_guard": 0.0,
+              "emma_frost": 0.0,
+              "emma_ice": 0.0,
+              "emma_star": 0.0,
+              "emma_support": 3.41666666666667
+            },
+            "dead": false,
+            "hp": 397.1,
+            "level": 16,
+            "mp": 207.4,
+            "xp": 179.333333333333
+          },
+          "JIA": {
+            "cooldowns": {
+              "JIA_basic": 0.413681592039801,
+              "armor_guard": 0.0,
+              "jia_break": 0.733333333333259,
+              "jia_sweep": 4.73333333333333
+            },
+            "dead": false,
+            "hp": 462.1,
+            "level": 16,
+            "mp": 167.4,
+            "xp": 5.33333333333333
+          },
+          "N07": {
+            "cooldowns": {
+              "bow_support": 2.81666666666667
+            },
+            "dead": false,
+            "hp": 376.1,
+            "level": 15,
+            "mp": 162.4,
+            "xp": 179.333333333333
+          }
+        },
+        "exit": {
+          "F11": {
+            "cooldowns": {
+              "F11_basic": 0.0,
+              "armor_guard": 0.0,
+              "emma_frost": 0.0,
+              "emma_ice": 0.0,
+              "emma_star": 0.0,
+              "emma_support": 2.38333333333334
+            },
+            "dead": false,
+            "hp": 397.1,
+            "level": 16,
+            "mp": 207.4,
+            "xp": 205.333333333333
+          },
+          "JIA": {
+            "cooldowns": {
+              "JIA_basic": 0.593824228028504,
+              "armor_guard": 1.65,
+              "jia_break": 9.83333333333333,
+              "jia_sweep": 4.83333333333333
+            },
+            "dead": false,
+            "hp": 182.603361664341,
+            "level": 16,
+            "mp": 75.0666666666616,
+            "xp": 31.3333333333333
+          },
+          "N07": {
+            "cooldowns": {
+              "bow_support": 5.65519853168439e-15
+            },
+            "dead": false,
+            "hp": 392.1,
+            "level": 16,
+            "mp": 167.4,
+            "xp": 7.33333333333333
+          }
+        },
+        "hurt_total": {
+          "JIA": 279.496638335659
+        },
+        "resource_balance": {
+          "F11": {
+            "net_hp_restored_including_level_growth": 0.0,
+            "net_mp_restored_including_level_growth": 0.0,
+            "paid_mp": 0.0,
+            "received_hp_damage": 0.0
+          },
+          "JIA": {
+            "net_hp_restored_including_level_growth": 5.6843418860808e-14,
+            "net_mp_restored_including_level_growth": 183.666666666662,
+            "paid_mp": 276.0,
+            "received_hp_damage": 279.496638335659
+          },
+          "N07": {
+            "net_hp_restored_including_level_growth": 16.0,
+            "net_mp_restored_including_level_growth": 5.0,
+            "paid_mp": 0.0,
+            "received_hp_damage": 0.0
+          }
+        },
+        "boss_remaining": {},
+        "cast_counts": {
+          "F11:emma_support:support": 9,
+          "JIA:JIA_basic:front": 46,
+          "JIA:jia_break:front": 4,
+          "JIA:jia_sweep:front": 6,
+          "N07:bow_support:support": 7
+        },
+        "hurt_by_attack": {
+          "halberd_sweep": 1,
+          "halberd_charge": 1,
+          "halberd_fall": 1,
+          "demon_fourfold": 1,
+          "demon_skybreaker": 1,
+          "demon_heavenfall": 1,
+          "demon_final_cleave": 1
+        }
+      },
+      "control": {
+        "outcome": "victory",
+        "seconds": 32.4833333333328,
+        "entry": {
+          "F11": {
+            "cooldowns": {
+              "F11_basic": 0.0,
+              "armor_guard": 0.0,
+              "emma_frost": 0.0,
+              "emma_ice": 0.0,
+              "emma_star": 0.0,
+              "emma_support": 3.41666666666667
+            },
+            "dead": false,
+            "hp": 397.1,
+            "level": 16,
+            "mp": 207.4,
+            "xp": 179.333333333333
+          },
+          "JIA": {
+            "cooldowns": {
+              "JIA_basic": 0.413681592039801,
+              "armor_guard": 0.0,
+              "jia_break": 0.733333333333259,
+              "jia_sweep": 4.73333333333333
+            },
+            "dead": false,
+            "hp": 462.1,
+            "level": 16,
+            "mp": 167.4,
+            "xp": 5.33333333333333
+          },
+          "N07": {
+            "cooldowns": {
+              "bow_support": 2.81666666666667
+            },
+            "dead": false,
+            "hp": 376.1,
+            "level": 15,
+            "mp": 162.4,
+            "xp": 179.333333333333
+          }
+        },
+        "exit": {
+          "F11": {
+            "cooldowns": {
+              "F11_basic": 0.0,
+              "armor_guard": 0.0,
+              "emma_frost": 0.0,
+              "emma_ice": 0.0,
+              "emma_star": 0.0,
+              "emma_support": 2.58333333333334
+            },
+            "dead": false,
+            "hp": 397.1,
+            "level": 16,
+            "mp": 207.4,
+            "xp": 205.333333333333
+          },
+          "JIA": {
+            "cooldowns": {
+              "JIA_basic": 0.593824228028504,
+              "armor_guard": 1.65,
+              "jia_break": 9.03333333333329,
+              "jia_sweep": 0.0
+            },
+            "dead": false,
+            "hp": 182.603361664341,
+            "level": 16,
+            "mp": 95.9066666666617,
+            "xp": 31.3333333333333
+          },
+          "N07": {
+            "cooldowns": {
+              "bow_support": 0.0
+            },
+            "dead": false,
+            "hp": 392.1,
+            "level": 16,
+            "mp": 167.4,
+            "xp": 7.33333333333333
+          }
+        },
+        "hurt_total": {
+          "JIA": 279.496638335659
+        },
+        "resource_balance": {
+          "F11": {
+            "net_hp_restored_including_level_growth": 0.0,
+            "net_mp_restored_including_level_growth": 0.0,
+            "paid_mp": 0.0,
+            "received_hp_damage": 0.0
+          },
+          "JIA": {
+            "net_hp_restored_including_level_growth": 5.6843418860808e-14,
+            "net_mp_restored_including_level_growth": 182.506666666662,
+            "paid_mp": 254.0,
+            "received_hp_damage": 279.496638335659
+          },
+          "N07": {
+            "net_hp_restored_including_level_growth": 16.0,
+            "net_mp_restored_including_level_growth": 5.0,
+            "paid_mp": 0.0,
+            "received_hp_damage": 0.0
+          }
+        },
+        "boss_remaining": {},
+        "cast_counts": {
+          "F11:emma_support:support": 9,
+          "JIA:JIA_basic:front": 47,
+          "JIA:jia_break:front": 4,
+          "JIA:jia_sweep:front": 5,
+          "N07:bow_support:support": 7
+        },
+        "hurt_by_attack": {
+          "halberd_sweep": 1,
+          "halberd_charge": 1,
+          "halberd_fall": 1,
+          "demon_fourfold": 1,
+          "demon_skybreaker": 1,
+          "demon_heavenfall": 1,
+          "demon_final_cleave": 1
+        }
+      }
+    },
+    {
+      "route": "short",
+      "build": "ordinary_heal",
+      "movement": "blind_approach",
+      "source": "difficulty-blind-ordinary.json",
+      "paired_inputs_equal": true,
+      "read_telegraphs": {
+        "outcome": "victory",
+        "seconds": 120.683333333328,
+        "entry": {
+          "JIA": {
+            "cooldowns": {
+              "JIA_basic": 0.672947510094213,
+              "armor_guard": 0.0,
+              "jia_break": 0.0,
+              "jia_sweep": 0.0
+            },
+            "dead": false,
+            "hp": 428.0,
+            "level": 14,
+            "mp": 22.6208333333326,
+            "xp": 155.333333333333
+          },
+          "N16": {
+            "cooldowns": {
+              "healer_support": 2.83333333333335
+            },
+            "dead": false,
+            "hp": 362.0,
+            "level": 13,
+            "mp": 184.2,
+            "xp": 55.6666666666667
+          },
+          "N17": {
+            "cooldowns": {
+              "cook_support": 3.03333333333334
+            },
+            "dead": false,
+            "hp": 413.0,
+            "level": 14,
+            "mp": 164.2,
+            "xp": 179.333333333333
+          }
+        },
+        "exit": {
+          "JIA": {
+            "cooldowns": {
+              "JIA_basic": 0.653167864141084,
+              "armor_guard": 0.0,
+              "jia_break": 0.0,
+              "jia_sweep": 0.0
+            },
+            "dead": false,
+            "hp": 190.363345195729,
+            "level": 14,
+            "mp": 18.8416666666677,
+            "xp": 175.333333333333
+          },
+          "N16": {
+            "cooldowns": {
+              "healer_support": 1.43333333333335
+            },
+            "dead": false,
+            "hp": 362.0,
+            "level": 13,
+            "mp": 185.7,
+            "xp": 75.6666666666667
+          },
+          "N17": {
+            "cooldowns": {
+              "cook_support": 2.75000000000001
+            },
+            "dead": false,
+            "hp": 429.0,
+            "level": 15,
+            "mp": 170.7,
+            "xp": 13.3333333333333
+          }
+        },
+        "hurt_total": {
+          "JIA": 1277.9615658363
+        },
+        "resource_balance": {
+          "JIA": {
+            "net_hp_restored_including_level_growth": 1040.32491103203,
+            "net_mp_restored_including_level_growth": 392.220833333335,
+            "paid_mp": 396.0,
+            "received_hp_damage": 1277.9615658363
+          },
+          "N16": {
+            "net_hp_restored_including_level_growth": 0.0,
+            "net_mp_restored_including_level_growth": 1.5,
+            "paid_mp": 0.0,
+            "received_hp_damage": 0.0
+          },
+          "N17": {
+            "net_hp_restored_including_level_growth": 16.0,
+            "net_mp_restored_including_level_growth": 6.5,
+            "paid_mp": 0.0,
+            "received_hp_damage": 0.0
+          }
+        },
+        "boss_remaining": {},
+        "cast_counts": {
+          "JIA:JIA_basic:front": 57,
+          "JIA:jia_sweep:front": 18,
+          "N16:healer_support:support": 17,
+          "N17:cook_support:support": 24
+        },
+        "hurt_by_attack": {
+          "halberd_sweep": 5,
+          "halberd_charge": 5,
+          "halberd_fall": 5,
+          "halberd_finish": 5,
+          "demon_fourfold": 2,
+          "demon_skybreaker": 2,
+          "demon_heavenfall": 1,
+          "demon_final_cleave": 1
+        }
+      },
+      "control": {
+        "outcome": "victory",
+        "seconds": 61.0166666666645,
+        "entry": {
+          "JIA": {
+            "cooldowns": {
+              "JIA_basic": 0.672947510094213,
+              "armor_guard": 0.0,
+              "jia_break": 0.0,
+              "jia_sweep": 0.0
+            },
+            "dead": false,
+            "hp": 428.0,
+            "level": 14,
+            "mp": 22.6208333333326,
+            "xp": 155.333333333333
+          },
+          "N16": {
+            "cooldowns": {
+              "healer_support": 2.83333333333335
+            },
+            "dead": false,
+            "hp": 362.0,
+            "level": 13,
+            "mp": 184.2,
+            "xp": 55.6666666666667
+          },
+          "N17": {
+            "cooldowns": {
+              "cook_support": 3.03333333333334
+            },
+            "dead": false,
+            "hp": 413.0,
+            "level": 14,
+            "mp": 164.2,
+            "xp": 179.333333333333
+          }
+        },
+        "exit": {
+          "JIA": {
+            "cooldowns": {
+              "JIA_basic": 0.0531678641410839,
+              "armor_guard": 0.0,
+              "jia_break": 0.0,
+              "jia_sweep": 5.0
+            },
+            "dead": false,
+            "hp": 354.042348754448,
+            "level": 14,
+            "mp": 0.925000000000164,
+            "xp": 181.333333333333
+          },
+          "N16": {
+            "cooldowns": {
+              "healer_support": 4.96666666666667
+            },
+            "dead": false,
+            "hp": 362.0,
+            "level": 13,
+            "mp": 185.7,
+            "xp": 81.6666666666667
+          },
+          "N17": {
+            "cooldowns": {
+              "cook_support": 2.21666666666668
+            },
+            "dead": false,
+            "hp": 429.0,
+            "level": 15,
+            "mp": 170.7,
+            "xp": 19.3333333333333
+          }
+        },
+        "hurt_total": {
+          "JIA": 602.28256227758
+        },
+        "resource_balance": {
+          "JIA": {
+            "net_hp_restored_including_level_growth": 528.324911032028,
+            "net_mp_restored_including_level_growth": 198.304166666668,
+            "paid_mp": 220.0,
+            "received_hp_damage": 602.28256227758
+          },
+          "N16": {
+            "net_hp_restored_including_level_growth": 0.0,
+            "net_mp_restored_including_level_growth": 1.5,
+            "paid_mp": 0.0,
+            "received_hp_damage": 0.0
+          },
+          "N17": {
+            "net_hp_restored_including_level_growth": 16.0,
+            "net_mp_restored_including_level_growth": 6.5,
+            "paid_mp": 0.0,
+            "received_hp_damage": 0.0
+          }
+        },
+        "boss_remaining": {},
+        "cast_counts": {
+          "JIA:JIA_basic:front": 78,
+          "JIA:jia_sweep:front": 10,
+          "N16:healer_support:support": 9,
+          "N17:cook_support:support": 12
+        },
+        "hurt_by_attack": {
+          "halberd_sweep": 2,
+          "halberd_charge": 2,
+          "halberd_fall": 1,
+          "halberd_finish": 1,
+          "demon_fourfold": 2,
+          "demon_skybreaker": 2,
+          "demon_heavenfall": 1,
+          "demon_final_cleave": 1
+        }
+      }
+    },
+    {
+      "route": "explore",
+      "build": "ordinary_heal",
+      "movement": "blind_approach",
+      "source": "difficulty-blind-ordinary.json",
+      "paired_inputs_equal": true,
+      "read_telegraphs": {
+        "outcome": "victory",
+        "seconds": 43.5166666666655,
+        "entry": {
+          "JIA": {
+            "cooldowns": {
+              "JIA_basic": 0.413681592039801,
+              "armor_guard": 0.0,
+              "jia_break": 0.733333333333259,
+              "jia_sweep": 4.73333333333333
+            },
+            "dead": false,
+            "hp": 462.1,
+            "level": 16,
+            "mp": 167.4,
+            "xp": 5.33333333333333
+          },
+          "N16": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 204.1,
+            "level": 3,
+            "mp": 132.4,
+            "xp": 0.0
+          },
+          "N17": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 207.1,
+            "level": 1,
+            "mp": 97.4,
+            "xp": 0.0
+          }
+        },
+        "exit": {
+          "JIA": {
+            "cooldowns": {
+              "JIA_basic": 0.577157561361837,
+              "armor_guard": 0.0,
+              "jia_break": 7.9999999999999,
+              "jia_sweep": 5.0
+            },
+            "dead": false,
+            "hp": 141.992763970891,
+            "level": 16,
+            "mp": 57.8999999999932,
+            "xp": 31.3333333333333
+          },
+          "N16": {
+            "cooldowns": {
+              "healer_support": 5.6
+            },
+            "dead": false,
+            "hp": 204.1,
+            "level": 3,
+            "mp": 132.4,
+            "xp": 26.0
+          },
+          "N17": {
+            "cooldowns": {
+              "cook_support": 1.63333333333335
+            },
+            "dead": false,
+            "hp": 207.1,
+            "level": 1,
+            "mp": 97.4,
+            "xp": 26.0
+          }
+        },
+        "hurt_total": {
+          "JIA": 433.107236029109
+        },
+        "resource_balance": {
+          "JIA": {
+            "net_hp_restored_including_level_growth": 113.0,
+            "net_mp_restored_including_level_growth": 246.499999999993,
+            "paid_mp": 356.0,
+            "received_hp_damage": 433.107236029109
+          },
+          "N16": {
+            "net_hp_restored_including_level_growth": 0.0,
+            "net_mp_restored_including_level_growth": 0.0,
+            "paid_mp": 0.0,
+            "received_hp_damage": 0.0
+          },
+          "N17": {
+            "net_hp_restored_including_level_growth": 0.0,
+            "net_mp_restored_including_level_growth": 0.0,
+            "paid_mp": 0.0,
+            "received_hp_damage": 0.0
+          }
+        },
+        "boss_remaining": {},
+        "cast_counts": {
+          "JIA:JIA_basic:front": 42,
+          "JIA:jia_break:front": 5,
+          "JIA:jia_sweep:front": 8,
+          "N16:healer_support:support": 7,
+          "N17:cook_support:support": 9
+        },
+        "hurt_by_attack": {
+          "halberd_sweep": 2,
+          "halberd_charge": 1,
+          "halberd_fall": 1,
+          "halberd_finish": 1,
+          "demon_fourfold": 1,
+          "demon_skybreaker": 1,
+          "demon_heavenfall": 1,
+          "demon_final_cleave": 1
+        }
+      },
+      "control": {
+        "outcome": "victory",
+        "seconds": 36.5499999999992,
+        "entry": {
+          "JIA": {
+            "cooldowns": {
+              "JIA_basic": 0.413681592039801,
+              "armor_guard": 0.0,
+              "jia_break": 0.733333333333259,
+              "jia_sweep": 4.73333333333333
+            },
+            "dead": false,
+            "hp": 462.1,
+            "level": 16,
+            "mp": 167.4,
+            "xp": 5.33333333333333
+          },
+          "N16": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 204.1,
+            "level": 3,
+            "mp": 132.4,
+            "xp": 0.0
+          },
+          "N17": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 207.1,
+            "level": 1,
+            "mp": 97.4,
+            "xp": 0.0
+          }
+        },
+        "exit": {
+          "JIA": {
+            "cooldowns": {
+              "JIA_basic": 0.593824228028504,
+              "armor_guard": 0.0,
+              "jia_break": 6.46666666666657,
+              "jia_sweep": 0.966666666666681
+            },
+            "dead": false,
+            "hp": 216.611602361664,
+            "level": 16,
+            "mp": 97.4933333333277,
+            "xp": 31.3333333333333
+          },
+          "N16": {
+            "cooldowns": {
+              "healer_support": 5.55000000000001
+            },
+            "dead": false,
+            "hp": 204.1,
+            "level": 3,
+            "mp": 132.4,
+            "xp": 26.0
+          },
+          "N17": {
+            "cooldowns": {
+              "cook_support": 3.58333333333334
+            },
+            "dead": false,
+            "hp": 207.1,
+            "level": 1,
+            "mp": 97.4,
+            "xp": 26.0
+          }
+        },
+        "hurt_total": {
+          "JIA": 341.488397638336
+        },
+        "resource_balance": {
+          "JIA": {
+            "net_hp_restored_including_level_growth": 96.0,
+            "net_mp_restored_including_level_growth": 206.093333333328,
+            "paid_mp": 276.0,
+            "received_hp_damage": 341.488397638336
+          },
+          "N16": {
+            "net_hp_restored_including_level_growth": 0.0,
+            "net_mp_restored_including_level_growth": 0.0,
+            "paid_mp": 0.0,
+            "received_hp_damage": 0.0
+          },
+          "N17": {
+            "net_hp_restored_including_level_growth": 0.0,
+            "net_mp_restored_including_level_growth": 0.0,
+            "paid_mp": 0.0,
+            "received_hp_damage": 0.0
+          }
+        },
+        "boss_remaining": {},
+        "cast_counts": {
+          "JIA:JIA_basic:front": 53,
+          "JIA:jia_break:front": 4,
+          "JIA:jia_sweep:front": 6,
+          "N16:healer_support:support": 6,
+          "N17:cook_support:support": 8
+        },
+        "hurt_by_attack": {
+          "halberd_sweep": 1,
+          "halberd_charge": 1,
+          "halberd_fall": 1,
+          "demon_fourfold": 1,
+          "demon_skybreaker": 1,
+          "demon_heavenfall": 1,
+          "demon_final_cleave": 1
+        }
+      }
+    },
+    {
+      "route": "short",
+      "build": "ordinary_heal",
+      "movement": "stationary",
+      "source": "difficulty-stationary-ordinary.json",
+      "paired_inputs_equal": true,
+      "read_telegraphs": {
+        "outcome": "victory",
+        "seconds": 120.683333333328,
+        "entry": {
+          "JIA": {
+            "cooldowns": {
+              "JIA_basic": 0.672947510094213,
+              "armor_guard": 0.0,
+              "jia_break": 0.0,
+              "jia_sweep": 0.0
+            },
+            "dead": false,
+            "hp": 428.0,
+            "level": 14,
+            "mp": 22.6208333333326,
+            "xp": 155.333333333333
+          },
+          "N16": {
+            "cooldowns": {
+              "healer_support": 2.83333333333335
+            },
+            "dead": false,
+            "hp": 362.0,
+            "level": 13,
+            "mp": 184.2,
+            "xp": 55.6666666666667
+          },
+          "N17": {
+            "cooldowns": {
+              "cook_support": 3.03333333333334
+            },
+            "dead": false,
+            "hp": 413.0,
+            "level": 14,
+            "mp": 164.2,
+            "xp": 179.333333333333
+          }
+        },
+        "exit": {
+          "JIA": {
+            "cooldowns": {
+              "JIA_basic": 0.653167864141084,
+              "armor_guard": 0.0,
+              "jia_break": 0.0,
+              "jia_sweep": 0.0
+            },
+            "dead": false,
+            "hp": 190.363345195729,
+            "level": 14,
+            "mp": 18.8416666666677,
+            "xp": 175.333333333333
+          },
+          "N16": {
+            "cooldowns": {
+              "healer_support": 1.43333333333335
+            },
+            "dead": false,
+            "hp": 362.0,
+            "level": 13,
+            "mp": 185.7,
+            "xp": 75.6666666666667
+          },
+          "N17": {
+            "cooldowns": {
+              "cook_support": 2.75000000000001
+            },
+            "dead": false,
+            "hp": 429.0,
+            "level": 15,
+            "mp": 170.7,
+            "xp": 13.3333333333333
+          }
+        },
+        "hurt_total": {
+          "JIA": 1277.9615658363
+        },
+        "resource_balance": {
+          "JIA": {
+            "net_hp_restored_including_level_growth": 1040.32491103203,
+            "net_mp_restored_including_level_growth": 392.220833333335,
+            "paid_mp": 396.0,
+            "received_hp_damage": 1277.9615658363
+          },
+          "N16": {
+            "net_hp_restored_including_level_growth": 0.0,
+            "net_mp_restored_including_level_growth": 1.5,
+            "paid_mp": 0.0,
+            "received_hp_damage": 0.0
+          },
+          "N17": {
+            "net_hp_restored_including_level_growth": 16.0,
+            "net_mp_restored_including_level_growth": 6.5,
+            "paid_mp": 0.0,
+            "received_hp_damage": 0.0
+          }
+        },
+        "boss_remaining": {},
+        "cast_counts": {
+          "JIA:JIA_basic:front": 57,
+          "JIA:jia_sweep:front": 18,
+          "N16:healer_support:support": 17,
+          "N17:cook_support:support": 24
+        },
+        "hurt_by_attack": {
+          "halberd_sweep": 5,
+          "halberd_charge": 5,
+          "halberd_fall": 5,
+          "halberd_finish": 5,
+          "demon_fourfold": 2,
+          "demon_skybreaker": 2,
+          "demon_heavenfall": 1,
+          "demon_final_cleave": 1
+        }
+      },
+      "control": {
+        "outcome": "failed",
+        "seconds": 393.733333333304,
+        "entry": {
+          "JIA": {
+            "cooldowns": {
+              "JIA_basic": 0.672947510094213,
+              "armor_guard": 0.0,
+              "jia_break": 0.0,
+              "jia_sweep": 0.0
+            },
+            "dead": false,
+            "hp": 428.0,
+            "level": 14,
+            "mp": 22.6208333333326,
+            "xp": 155.333333333333
+          },
+          "N16": {
+            "cooldowns": {
+              "healer_support": 2.83333333333335
+            },
+            "dead": false,
+            "hp": 362.0,
+            "level": 13,
+            "mp": 184.2,
+            "xp": 55.6666666666667
+          },
+          "N17": {
+            "cooldowns": {
+              "cook_support": 3.03333333333334
+            },
+            "dead": false,
+            "hp": 413.0,
+            "level": 14,
+            "mp": 164.2,
+            "xp": 179.333333333333
+          }
+        },
+        "exit": {
+          "JIA": {
+            "cooldowns": {
+              "JIA_basic": 0.0,
+              "armor_guard": 0.0,
+              "jia_break": 0.0,
+              "jia_sweep": 2.28333333333334
+            },
+            "dead": true,
+            "hp": 0.0,
+            "level": 14,
+            "mp": 26.0291666666577,
+            "xp": 155.333333333333
+          },
+          "N16": {
+            "cooldowns": {
+              "N16_basic": 0.0,
+              "healer_aid": 0.0,
+              "healer_support": 1.16666666666669
+            },
+            "dead": false,
+            "hp": 159.143076923077,
+            "level": 13,
+            "mp": 185.7,
+            "xp": 55.6666666666667
+          },
+          "N17": {
+            "cooldowns": {
+              "N17_basic": 0.0,
+              "cook_guard": 0.0,
+              "cook_support": 0.100000000000013
+            },
+            "dead": false,
+            "hp": 197.668363636364,
+            "level": 14,
+            "mp": 165.7,
+            "xp": 179.333333333333
+          }
+        },
+        "hurt_total": {
+          "JIA": 2497.63772241993,
+          "N16": 1301.85692307692,
+          "N17": 462.331636363636
+        },
+        "resource_balance": {
+          "JIA": {
+            "net_hp_restored_including_level_growth": 2069.63772241993,
+            "net_mp_restored_including_level_growth": 947.408333333325,
+            "paid_mp": 944.0,
+            "received_hp_damage": 2497.63772241993
+          },
+          "N16": {
+            "net_hp_restored_including_level_growth": 1099.0,
+            "net_mp_restored_including_level_growth": 321.5,
+            "paid_mp": 320.0,
+            "received_hp_damage": 1301.85692307692
+          },
+          "N17": {
+            "net_hp_restored_including_level_growth": 247.0,
+            "net_mp_restored_including_level_growth": 181.5,
+            "paid_mp": 180.0,
+            "received_hp_damage": 462.331636363636
+          }
+        },
+        "boss_remaining": {
+          "bank": 0.0,
+          "definition": "B18",
+          "hp": 251.853749999999,
+          "phase": 0,
+          "player_distance": 348.862915039062,
+          "position": "(1600.0, 1248.863)"
+        },
+        "cast_counts": {
+          "JIA:JIA_basic:front": 13,
+          "JIA:jia_break:front": 3,
+          "JIA:jia_sweep:front": 38,
+          "N16:N16_basic:front": 6,
+          "N16:healer_aid:front": 10,
+          "N16:healer_support:support": 42,
+          "N17:N17_basic:front": 4,
+          "N17:cook_guard:front": 6,
+          "N17:cook_support:support": 65
+        },
+        "hurt_by_attack": {
+          "halberd_sweep": 21,
+          "halberd_charge": 23,
+          "halberd_fall": 23,
+          "halberd_finish": 23
+        }
+      }
+    },
+    {
+      "route": "explore",
+      "build": "ordinary_heal",
+      "movement": "stationary",
+      "source": "difficulty-stationary-ordinary.json",
+      "paired_inputs_equal": true,
+      "read_telegraphs": {
+        "outcome": "victory",
+        "seconds": 43.5166666666655,
+        "entry": {
+          "JIA": {
+            "cooldowns": {
+              "JIA_basic": 0.413681592039801,
+              "armor_guard": 0.0,
+              "jia_break": 0.733333333333259,
+              "jia_sweep": 4.73333333333333
+            },
+            "dead": false,
+            "hp": 462.1,
+            "level": 16,
+            "mp": 167.4,
+            "xp": 5.33333333333333
+          },
+          "N16": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 204.1,
+            "level": 3,
+            "mp": 132.4,
+            "xp": 0.0
+          },
+          "N17": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 207.1,
+            "level": 1,
+            "mp": 97.4,
+            "xp": 0.0
+          }
+        },
+        "exit": {
+          "JIA": {
+            "cooldowns": {
+              "JIA_basic": 0.577157561361837,
+              "armor_guard": 0.0,
+              "jia_break": 7.9999999999999,
+              "jia_sweep": 5.0
+            },
+            "dead": false,
+            "hp": 141.992763970891,
+            "level": 16,
+            "mp": 57.8999999999932,
+            "xp": 31.3333333333333
+          },
+          "N16": {
+            "cooldowns": {
+              "healer_support": 5.6
+            },
+            "dead": false,
+            "hp": 204.1,
+            "level": 3,
+            "mp": 132.4,
+            "xp": 26.0
+          },
+          "N17": {
+            "cooldowns": {
+              "cook_support": 1.63333333333335
+            },
+            "dead": false,
+            "hp": 207.1,
+            "level": 1,
+            "mp": 97.4,
+            "xp": 26.0
+          }
+        },
+        "hurt_total": {
+          "JIA": 433.107236029109
+        },
+        "resource_balance": {
+          "JIA": {
+            "net_hp_restored_including_level_growth": 113.0,
+            "net_mp_restored_including_level_growth": 246.499999999993,
+            "paid_mp": 356.0,
+            "received_hp_damage": 433.107236029109
+          },
+          "N16": {
+            "net_hp_restored_including_level_growth": 0.0,
+            "net_mp_restored_including_level_growth": 0.0,
+            "paid_mp": 0.0,
+            "received_hp_damage": 0.0
+          },
+          "N17": {
+            "net_hp_restored_including_level_growth": 0.0,
+            "net_mp_restored_including_level_growth": 0.0,
+            "paid_mp": 0.0,
+            "received_hp_damage": 0.0
+          }
+        },
+        "boss_remaining": {},
+        "cast_counts": {
+          "JIA:JIA_basic:front": 42,
+          "JIA:jia_break:front": 5,
+          "JIA:jia_sweep:front": 8,
+          "N16:healer_support:support": 7,
+          "N17:cook_support:support": 9
+        },
+        "hurt_by_attack": {
+          "halberd_sweep": 2,
+          "halberd_charge": 1,
+          "halberd_fall": 1,
+          "halberd_finish": 1,
+          "demon_fourfold": 1,
+          "demon_skybreaker": 1,
+          "demon_heavenfall": 1,
+          "demon_final_cleave": 1
+        }
+      },
+      "control": {
+        "outcome": "failed",
+        "seconds": 109.699999999995,
+        "entry": {
+          "JIA": {
+            "cooldowns": {
+              "JIA_basic": 0.413681592039801,
+              "armor_guard": 0.0,
+              "jia_break": 0.733333333333259,
+              "jia_sweep": 4.73333333333333
+            },
+            "dead": false,
+            "hp": 462.1,
+            "level": 16,
+            "mp": 167.4,
+            "xp": 5.33333333333333
+          },
+          "N16": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 204.1,
+            "level": 3,
+            "mp": 132.4,
+            "xp": 0.0
+          },
+          "N17": {
+            "cooldowns": {},
+            "dead": false,
+            "hp": 207.1,
+            "level": 1,
+            "mp": 97.4,
+            "xp": 0.0
+          }
+        },
+        "exit": {
+          "JIA": {
+            "cooldowns": {
+              "JIA_basic": 0.56049089469517,
+              "armor_guard": 0.0,
+              "jia_break": 0.0,
+              "jia_sweep": 0.81666666666668
+            },
+            "dead": true,
+            "hp": 0.0,
+            "level": 16,
+            "mp": 163.36333333333,
+            "xp": 5.33333333333333
+          },
+          "N16": {
+            "cooldowns": {
+              "N16_basic": 0.0,
+              "healer_aid": 0.0,
+              "healer_support": 0.70000000000002
+            },
+            "dead": false,
+            "hp": 79.2413451689997,
+            "level": 3,
+            "mp": 132.4,
+            "xp": 0.0
+          },
+          "N17": {
+            "cooldowns": {
+              "N17_basic": 0.0,
+              "cook_guard": 0.0,
+              "cook_support": 0.0
+            },
+            "dead": true,
+            "hp": 0.0,
+            "level": 1,
+            "mp": 93.8133333333334,
+            "xp": 0.0
+          }
+        },
+        "hurt_total": {
+          "JIA": 735.032953453247,
+          "N16": 170.858654831,
+          "N17": 263.813249001332
+        },
+        "resource_balance": {
+          "JIA": {
+            "net_hp_restored_including_level_growth": 272.932953453247,
+            "net_mp_restored_including_level_growth": 331.96333333333,
+            "paid_mp": 336.0,
+            "received_hp_damage": 735.032953453247
+          },
+          "N16": {
+            "net_hp_restored_including_level_growth": 46.0,
+            "net_mp_restored_including_level_growth": 64.0,
+            "paid_mp": 64.0,
+            "received_hp_damage": 170.858654831
+          },
+          "N17": {
+            "net_hp_restored_including_level_growth": 56.7132490013316,
+            "net_mp_restored_including_level_growth": 86.4133333333334,
+            "paid_mp": 90.0,
+            "received_hp_damage": 263.813249001332
+          }
+        },
+        "boss_remaining": {
+          "bank": 0.0,
+          "definition": "B18",
+          "hp": 1725.8375,
+          "phase": 0,
+          "player_distance": 49.9920043945312,
+          "position": "(1600.0, 850.008)"
+        },
+        "cast_counts": {
+          "JIA:JIA_basic:front": 5,
+          "JIA:jia_break:front": 2,
+          "JIA:jia_sweep:front": 12,
+          "N16:N16_basic:front": 1,
+          "N16:healer_aid:front": 2,
+          "N16:healer_support:support": 14,
+          "N17:N17_basic:front": 2,
+          "N17:cook_guard:front": 3,
+          "N17:cook_support:support": 11
+        },
+        "hurt_by_attack": {
+          "halberd_sweep": 7,
+          "halberd_charge": 7,
+          "halberd_fall": 6,
+          "halberd_finish": 6
+        }
+      }
+    }
+  ],
+  "interpretation": {
+    "blind_approach": "Four victories. Reading telegraphs is not demonstrated necessary by these samples.",
+    "stationary": "Two failures. Pursuit and maintaining attack range matter; stationary tests lose much basic-attack uptime, so failure does not isolate dodging skill.",
+    "healing": "N16/N17 supports cost zero MP and are cooldown-limited; short stationary lasted 393.73s with 2069.64 inferred protagonist healing, but died. Finite samples do not prove infinite sustain or its impossibility.",
+    "driver": "Read-telegraph driver can spend excessive time out of short melee range. Do not treat its slower clear as an optimal skilled baseline."
+  },
+  "single_boss_boundaries": {
+    "source": "probe-b18-final-r4.json",
+    "max_hostiles": 1,
+    "curse_base_spread_skill_actual_damage": 51.3000000000002,
+    "curse_dot_actual_damage": 446.901180000002,
+    "curse_model": "Each curse hit still applies base damage and self-target finite curse; propagation loops over neighbors, excludes the original enemy, dead, untargetable and proxy receivers. A solo boss has no valid additional recipient.",
+    "code": [
+      "scripts/battle/combat_mechanics.gd:254",
+      "scripts/battle/combat_mechanics.gd:265",
+      "scripts/battle/combat_mechanics.gd:273"
+    ],
+    "slow_model": "Slow multiplies ordinary movement speed only. Windup, attack cooldown, active charge and battle age use unscaled delta; slow duration expires on the battle clock. Reapplying slow cannot freeze attack timers.",
+    "slow_code": [
+      "scripts/battle/enemy_system.gd:32",
+      "scripts/battle/enemy_system.gd:64",
+      "scripts/battle/enemy_system.gd:67",
+      "scripts/battle/enemy_system.gd:72",
+      "scripts/battle/enemy_system.gd:156",
+      "scripts/battle/enemy_system.gd:354"
+    ],
+    "existing_tests": [
+      "scripts/tests/chronicle_character_mechanics_smoke.gd:175",
+      "scripts/tests/chronicle_character_mechanics_smoke.gd:281",
+      "scripts/tests/chronicle_character_mechanics_smoke.gd:493",
+      "scripts/tests/boss_forms_smoke.gd:99",
+      "scripts/tests/boss_forms_smoke.gd:113"
+    ]
+  },
+  "shield_sample_boundary": {
+    "short": {
+      "F07_level": 3,
+      "shield_spent": 12,
+      "thrust_casts": 3
+    },
+    "explore": {
+      "F07_level": 5,
+      "shield_spent": 6,
+      "thrust_casts": 2
+    },
+    "verified": "Shield conversion actually fired; each spent point multiplies that cast damage by +2.5% and adds proportional reach. MP still pays normally.",
+    "not_verified": "A developed shield-generation build. These legal low-level F07 samples obtain shields only from iron_armor; N16 ordinary healing has no overheal-to-shield. Neither genuine route owns F03, so no F03 was injected.",
+    "existing_boundary": "Existing mechanics test independently covers party overheal shields, capped 30 shield conversion and the real later HP opportunity cost."
+  }
+}

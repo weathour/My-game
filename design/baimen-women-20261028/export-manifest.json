@@ -1,0 +1,2856 @@
+{
+  "schema": 1,
+  "generator": "ImageGen source / Aseprite extraction, registration and quantization",
+  "frame_size": [
+    192,
+    192
+  ],
+  "anchor": [
+    96,
+    176
+  ],
+  "portrait_native_size": [
+    64,
+    64
+  ],
+  "portrait_png_size": [
+    128,
+    128
+  ],
+  "alpha_threshold": 128,
+  "export_script": "scripts/tools/import_baimen_women_art.lua",
+  "export_script_sha256": "14d88e62c1928e210b92a63fe9de16ab0956b25000bebf34c895df447d29376d",
+  "audit_script_sha256": "7d36f1b73bc4746fa2b6870203f3a84087cb294b860c4f8f60be4103ad5e8db0",
+  "measurements": "design/baimen-women-20261028/export-measurements.json",
+  "measurements_sha256": "0cb19e331dc656f6f3f50a234ba7a59dbb2b2a6abacf43504a69e97bccf0fce4",
+  "characters": [
+    {
+      "id": "F03",
+      "slug": "tianxiu",
+      "sources": [
+        {
+          "kind": "combat",
+          "path": "design/baimen-women-20261028/source/F03-tianxiu-combat-v1.png",
+          "sha256": "6eccee9893e96bac5d6712cebcdb1c9251c23d0850136ce07e77c4156b966d33",
+          "size": [
+            1122,
+            1402
+          ]
+        },
+        {
+          "kind": "portrait",
+          "path": "design/baimen-women-20261028/source/F03-tianxiu-portrait-v1.png",
+          "sha256": "0a89a1705fdcf7540bcb6eadb97b76fa2d603863acdd1c282326824179bfa0c0",
+          "size": [
+            1254,
+            1254
+          ]
+        }
+      ],
+      "attack_contact_frame": 2,
+      "scale": 0.26578073089701,
+      "standing_body_height_source": 301,
+      "actor_shared_opaque_colors": 63,
+      "actor_frames": 20,
+      "outputs": [
+        {
+          "path": "assets/players/baimen-women/F03/idle.png",
+          "size": [
+            768,
+            192
+          ],
+          "frames": 4,
+          "sha256": "21a7eee3c6841fabecee9608baa6e91c962642ce3f3cb2559904efa444c875df",
+          "alpha": [
+            0,
+            255
+          ],
+          "opaque_colors": 61,
+          "frame_alpha_bounds": [
+            [
+              77,
+              96,
+              116,
+              176
+            ],
+            [
+              76,
+              95,
+              115,
+              176
+            ],
+            [
+              74,
+              96,
+              115,
+              176
+            ],
+            [
+              77,
+              96,
+              116,
+              176
+            ]
+          ],
+          "frame_pixel_sha256": [
+            "958c577faf2c730f6e72bc50525c26cda2a30befed99fde07ed82f878b8da7d0",
+            "92991e619309dda29f37eaa68692a90dda797facd5f997a8eab438e7e1f40d55",
+            "e64f7a4b6176b80bada6e7445c08ad22551f33328a4c66793ad481b5a97d3635",
+            "770e009a67367693c7c5476dccbd2f2e5bfc2754cd6287df2b559c1e948ab342"
+          ]
+        },
+        {
+          "path": "assets/players/baimen-women/F03/idle.aseprite",
+          "size": [
+            192,
+            192
+          ],
+          "frames": 4,
+          "sha256": "a31d6caa63d6f070ac5d8402eb156dce1cd75bd797acc762d23357c823a12999"
+        },
+        {
+          "path": "assets/players/baimen-women/F03/run.png",
+          "size": [
+            1536,
+            192
+          ],
+          "frames": 8,
+          "sha256": "ee4fca0b1cf095ef3edb768527f14d2ce8214828a6f79d0ae41d93c7dde14f0a",
+          "alpha": [
+            0,
+            255
+          ],
+          "opaque_colors": 62,
+          "frame_alpha_bounds": [
+            [
+              63,
+              103,
+              123,
+              176
+            ],
+            [
+              67,
+              103,
+              123,
+              176
+            ],
+            [
+              61,
+              104,
+              123,
+              176
+            ],
+            [
+              64,
+              103,
+              123,
+              176
+            ],
+            [
+              68,
+              105,
+              119,
+              176
+            ],
+            [
+              66,
+              104,
+              122,
+              176
+            ],
+            [
+              65,
+              106,
+              118,
+              176
+            ],
+            [
+              68,
+              104,
+              123,
+              175
+            ]
+          ],
+          "frame_pixel_sha256": [
+            "3c735e712a2e5e5bccaf595756883abed4e3b02d312ab37b0661167ee6a5246f",
+            "ccbb30bec7299bcbd784988a37bbae30ac42f4f67de1e41e5b1de1c3fe784ee0",
+            "1fad09c76d210af188c90a5f396f9bd519ce95f7e11e6127d81e1eda2c509c25",
+            "74be1c44333a41054077c3bfa89c4d8394165cc2d893f2f9f2b437bd84e81bf8",
+            "8cdd646eeea64d56848ba2640e624b1c5e1dbf557cc02d548b1562baa2755340",
+            "7129771093fa50cc4cdd491b5cc920e0eb20f8740474eca0e144df8785829372",
+            "64f5c3974d12dd45fa21712e7da24921d384240d244b790c7217400fa9ade9cb",
+            "a74318b127e8b148684de2ee9ac528c7439a3da130efe5f850ca4b695a42979f"
+          ]
+        },
+        {
+          "path": "assets/players/baimen-women/F03/run.aseprite",
+          "size": [
+            192,
+            192
+          ],
+          "frames": 8,
+          "sha256": "10079039807c4a3d1ad35accc91e01f471fe43fd2e68cee52981e25c79d47ca6"
+        },
+        {
+          "path": "assets/players/baimen-women/F03/attack.png",
+          "size": [
+            768,
+            192
+          ],
+          "frames": 4,
+          "sha256": "e58e3575895a8362123bc4167c49683318776b6a02cdfa107dbd29cbfb10c490",
+          "alpha": [
+            0,
+            255
+          ],
+          "opaque_colors": 62,
+          "frame_alpha_bounds": [
+            [
+              75,
+              107,
+              119,
+              176
+            ],
+            [
+              67,
+              107,
+              123,
+              176
+            ],
+            [
+              66,
+              109,
+              134,
+              176
+            ],
+            [
+              71,
+              108,
+              121,
+              176
+            ]
+          ],
+          "frame_pixel_sha256": [
+            "4171872cbc17c80cfb65a64ac36973d06f434b34de034e874a63837976eb67eb",
+            "36fc468f08ac10265f7e6e9033abf231283f1007168caaf94100dfe5059ffeac",
+            "f2c64eb002097f9834677931dbfddf39cfdc49311f9aeab20115c47ef3aac055",
+            "869b8982c3439f652f6f81f75a5f5c6d304de5469e63804e61427b2f01406779"
+          ]
+        },
+        {
+          "path": "assets/players/baimen-women/F03/attack.aseprite",
+          "size": [
+            192,
+            192
+          ],
+          "frames": 4,
+          "sha256": "ceecfb0e84fb1611875f8b0647a84a701904a54a8619a29a916742da62a82fdf"
+        },
+        {
+          "path": "assets/players/baimen-women/F03/cast.png",
+          "size": [
+            768,
+            192
+          ],
+          "frames": 4,
+          "sha256": "6702f91143dff96747758f471456f75c0d44534bdfbf39fbc131b50b9fbdbd69",
+          "alpha": [
+            0,
+            255
+          ],
+          "opaque_colors": 62,
+          "frame_alpha_bounds": [
+            [
+              75,
+              113,
+              119,
+              176
+            ],
+            [
+              73,
+              113,
+              119,
+              176
+            ],
+            [
+              70,
+              112,
+              122,
+              176
+            ],
+            [
+              76,
+              114,
+              119,
+              176
+            ]
+          ],
+          "frame_pixel_sha256": [
+            "5d232ceefeb2f7614badca13d2be03bb7d6e0640c6cac797644b821bc390b9cd",
+            "a11869599f3117bba21354536fc631b4b7e45332fc39181c08c52339ae39c375",
+            "75aeb3d455d9bb85ecf010fd790279188b31362237d00846bc601e0a41a35c5b",
+            "2f9ad71a249fcdcf41115a7d317f8f366fb51d90cc4039ce303c7856fd62a1c3"
+          ]
+        },
+        {
+          "path": "assets/players/baimen-women/F03/cast.aseprite",
+          "size": [
+            192,
+            192
+          ],
+          "frames": 4,
+          "sha256": "24423f0f8de68c687608e16363485c187cd8cf6630156532e3673b9a1b6987e9"
+        },
+        {
+          "path": "assets/players/baimen-women/F03/head.png",
+          "size": [
+            128,
+            128
+          ],
+          "frames": 1,
+          "sha256": "8e8d8f78051da283f1715c20bcdd5f3a9fdf3c57251651aec466d9d12ce9b580",
+          "alpha": [
+            0,
+            255
+          ],
+          "opaque_colors": 62,
+          "frame_alpha_bounds": [
+            [
+              6,
+              2,
+              124,
+              126
+            ]
+          ],
+          "frame_pixel_sha256": [
+            "946b46a3cd905e62e103a65cf49091ccc43b35555f78e1cf0543a12430e5a585"
+          ]
+        },
+        {
+          "path": "assets/players/baimen-women/F03/head.aseprite",
+          "size": [
+            64,
+            64
+          ],
+          "frames": 1,
+          "sha256": "1ae1a6957972cb9be94a636ffb6506c847b89eb7cfa234e27e16bf87b0343a84"
+        }
+      ]
+    },
+    {
+      "id": "F07",
+      "slug": "masanniang",
+      "sources": [
+        {
+          "kind": "combat",
+          "path": "design/baimen-women-20261028/source/F07-masanniang-combat-v1.png",
+          "sha256": "da2cc4c7ab1ba88177916085e8f3eb8f1564e722d6476d0731703cc7cfc51d94",
+          "size": [
+            1122,
+            1402
+          ]
+        },
+        {
+          "kind": "portrait",
+          "path": "design/baimen-women-20261028/source/F07-masanniang-portrait-v1.png",
+          "sha256": "aba6d48eb9c90e8543766ca9f3161aa7a48b400df616b8332b38372084268888",
+          "size": [
+            1254,
+            1254
+          ]
+        }
+      ],
+      "attack_contact_frame": 1,
+      "scale": 0.2702702702702703,
+      "standing_body_height_source": 296,
+      "actor_shared_opaque_colors": 63,
+      "actor_frames": 20,
+      "outputs": [
+        {
+          "path": "assets/players/baimen-women/F07/idle.png",
+          "size": [
+            768,
+            192
+          ],
+          "frames": 4,
+          "sha256": "9234d018e56fa15640eb6724b3793cc1facc6aa7c5c106088841cf72176aad95",
+          "alpha": [
+            0,
+            255
+          ],
+          "opaque_colors": 61,
+          "frame_alpha_bounds": [
+            [
+              67,
+              96,
+              117,
+              176
+            ],
+            [
+              66,
+              97,
+              120,
+              176
+            ],
+            [
+              66,
+              97,
+              119,
+              176
+            ],
+            [
+              70,
+              96,
+              118,
+              176
+            ]
+          ],
+          "frame_pixel_sha256": [
+            "8eb18fa0d21bae2516303ca0b0911f13b42b75019c1fa24e8d6327d48a4f29bf",
+            "e3a162059f90738ad1d35b69d95e520251884246c7e405e55566258b24d788df",
+            "00e0f4d0601819df60baeb25f4e70c9060ffb0ea7609406c6add8c2e4c7779c5",
+            "d811adcbed0a68f8d179a71d3885bfdb724c858ba9d42da51bbf929f19d094a5"
+          ]
+        },
+        {
+          "path": "assets/players/baimen-women/F07/idle.aseprite",
+          "size": [
+            192,
+            192
+          ],
+          "frames": 4,
+          "sha256": "8355f40a30e4825b8002e22ef9d9beb8a57ac031472bbb5b838af5178876bc37"
+        },
+        {
+          "path": "assets/players/baimen-women/F07/run.png",
+          "size": [
+            1536,
+            192
+          ],
+          "frames": 8,
+          "sha256": "690ded93647b034d44a8e2b58111ac7099268fae497e728a16267a8126a034a0",
+          "alpha": [
+            0,
+            255
+          ],
+          "opaque_colors": 63,
+          "frame_alpha_bounds": [
+            [
+              61,
+              102,
+              127,
+              176
+            ],
+            [
+              59,
+              103,
+              125,
+              176
+            ],
+            [
+              59,
+              102,
+              125,
+              176
+            ],
+            [
+              61,
+              103,
+              123,
+              176
+            ],
+            [
+              63,
+              103,
+              128,
+              174
+            ],
+            [
+              62,
+              104,
+              130,
+              176
+            ],
+            [
+              59,
+              104,
+              131,
+              176
+            ],
+            [
+              64,
+              104,
+              127,
+              176
+            ]
+          ],
+          "frame_pixel_sha256": [
+            "b4bbfefd56d5df627ae1708b2f1c1bcb62a11d89705b92351aa71f595808b439",
+            "d6b34f9b4eefbe4ab4db6bfeeb61c773a50b79cdaa345cc6bf2c50f4c5eb138c",
+            "489f279335f8b6ac31f05b9d46b831f331e9ff6d08f82d21d7dfa8f7ad7e253c",
+            "ed388f0d37004cdfd8d81a0fe05a5d50da50d8a2330f0aa0be4a263cd7ba0c78",
+            "74f72b75472c71fc393f38388ef1e9d49a9d2effabb035a369958f1e901354c1",
+            "b193d42b2acf5ce8d76985291ae7ce169e7c81807b4608ffc7ad299aab25d30d",
+            "46ddd872346280f0055ecad07ac42012711ee667455758573da0312d4c6b9bc0",
+            "414d96c7c776a3c648fc22c0289ed487ca4548de3b53eb3272adccde9d385c41"
+          ]
+        },
+        {
+          "path": "assets/players/baimen-women/F07/run.aseprite",
+          "size": [
+            192,
+            192
+          ],
+          "frames": 8,
+          "sha256": "b8e5f593e4c762965c0387beaf595a63b9925007c2ccaef11ee24c836f3962dc"
+        },
+        {
+          "path": "assets/players/baimen-women/F07/attack.png",
+          "size": [
+            768,
+            192
+          ],
+          "frames": 4,
+          "sha256": "d73c6ce049e21fe45ae027e84d9b27088f1ddc31fc5bc1b2b07445d13d9a4021",
+          "alpha": [
+            0,
+            255
+          ],
+          "opaque_colors": 62,
+          "frame_alpha_bounds": [
+            [
+              65,
+              107,
+              130,
+              176
+            ],
+            [
+              63,
+              110,
+              152,
+              176
+            ],
+            [
+              65,
+              111,
+              155,
+              176
+            ],
+            [
+              69,
+              109,
+              125,
+              176
+            ]
+          ],
+          "frame_pixel_sha256": [
+            "dc774eb2bb0290b72e3f1cc8e5228e133fdd8ba4b9048f083c93ec0ceda5c7f3",
+            "2773222973a6bd335d4cfa5a5c2b8a2037b4528cbda06d295361bb8b26c8c468",
+            "92c2ddb9776a0c1b7d0c9007ea393e8723f29598f2b82adae624500f015afe70",
+            "2de2d6d19c5a95ea4f339b6cd7e2e235d711546b473a68492c5ba70326fa3024"
+          ]
+        },
+        {
+          "path": "assets/players/baimen-women/F07/attack.aseprite",
+          "size": [
+            192,
+            192
+          ],
+          "frames": 4,
+          "sha256": "ec0353f0215cf6c11b062c0f96ebe7ef0cd0cd38413132bbe8ff50e95097216f"
+        },
+        {
+          "path": "assets/players/baimen-women/F07/cast.png",
+          "size": [
+            768,
+            192
+          ],
+          "frames": 4,
+          "sha256": "e6358e0f745b24f707a0298a6a0be493117d50c8743e4e8b54e83ee8db5b2bcf",
+          "alpha": [
+            0,
+            255
+          ],
+          "opaque_colors": 62,
+          "frame_alpha_bounds": [
+            [
+              69,
+              108,
+              124,
+              176
+            ],
+            [
+              61,
+              108,
+              125,
+              175
+            ],
+            [
+              62,
+              111,
+              131,
+              176
+            ],
+            [
+              71,
+              109,
+              123,
+              176
+            ]
+          ],
+          "frame_pixel_sha256": [
+            "3f292f2c64365c74364a06bdfca9dc3cf8f99384c24700fdc9294a063e9da99d",
+            "f4ab424b73c8e22f1953b3dbd90da53b513d7b595727d814bc0a97ee8f868532",
+            "572d7f5c4210de6e2fd1150c77706a272aa73e452dfc79db2b7c0a0d13d36f2a",
+            "3db8e736a06a1da1cf69875a13c81235f80dd2ef578044cabcfc6145ee3f7c56"
+          ]
+        },
+        {
+          "path": "assets/players/baimen-women/F07/cast.aseprite",
+          "size": [
+            192,
+            192
+          ],
+          "frames": 4,
+          "sha256": "1ead1ad6064c2cd0417a50201616fa87753ddc8119ab42e4cf54d3355d39a8d0"
+        },
+        {
+          "path": "assets/players/baimen-women/F07/head.png",
+          "size": [
+            128,
+            128
+          ],
+          "frames": 1,
+          "sha256": "545633d67cad5cd2e6c880af53f02c2f526716ac1c11ede5e400d175f135b181",
+          "alpha": [
+            0,
+            255
+          ],
+          "opaque_colors": 60,
+          "frame_alpha_bounds": [
+            [
+              4,
+              2,
+              124,
+              126
+            ]
+          ],
+          "frame_pixel_sha256": [
+            "e6f02acbff0419d50b48170136216db2f06bf3437ac92a7868cf1d6eb47216e4"
+          ]
+        },
+        {
+          "path": "assets/players/baimen-women/F07/head.aseprite",
+          "size": [
+            64,
+            64
+          ],
+          "frames": 1,
+          "sha256": "4a6160be9de04a4da95be0d5a3f38830b4fc4236380463cfc340bacafc994225"
+        }
+      ]
+    },
+    {
+      "id": "F04",
+      "slug": "qianqiluo",
+      "sources": [
+        {
+          "kind": "combat",
+          "path": "design/baimen-women-20261028/source/F04-qianqiluo-combat-v1.png",
+          "sha256": "aa427ca5f5378752ec7800e5b85d8680802ce7d955d9b64c984bd7e37de54cc4",
+          "size": [
+            1121,
+            1403
+          ]
+        },
+        {
+          "kind": "portrait",
+          "path": "design/baimen-women-20261028/source/F04-qianqiluo-portrait-v1.png",
+          "sha256": "b2c660f1dfdf2ec3ecc22974958df1271a45b7bb4497f35deb4558a57f097013",
+          "size": [
+            1254,
+            1254
+          ]
+        }
+      ],
+      "attack_contact_frame": 2,
+      "scale": 0.2826855123674912,
+      "standing_body_height_source": 283,
+      "actor_shared_opaque_colors": 62,
+      "actor_frames": 20,
+      "outputs": [
+        {
+          "path": "assets/players/baimen-women/F04/idle.png",
+          "size": [
+            768,
+            192
+          ],
+          "frames": 4,
+          "sha256": "491b170c3d308ead379f7129873e035b0833d3f7a51e60a4730e55de3ff66736",
+          "alpha": [
+            0,
+            255
+          ],
+          "opaque_colors": 61,
+          "frame_alpha_bounds": [
+            [
+              72,
+              96,
+              121,
+              176
+            ],
+            [
+              70,
+              94,
+              122,
+              176
+            ],
+            [
+              71,
+              95,
+              120,
+              176
+            ],
+            [
+              71,
+              95,
+              124,
+              176
+            ]
+          ],
+          "frame_pixel_sha256": [
+            "14608b69b2ee436cb7ca007f7124e74d3d2f775d1d8f784081ab1e0f5215e44b",
+            "1ba605df8d23ff9d07dc5a6f36640f9e83d37b83b833cd8c6f6a1b518fc0c691",
+            "0e2ec1a0856638405dc87b1de9b26d97fd2ebb54d0cd40f84c3e126e2383627a",
+            "111c42c1012ae244b23d1b1ea379b865e0beb6aaf42a8d187f27944ea0810e31"
+          ]
+        },
+        {
+          "path": "assets/players/baimen-women/F04/idle.aseprite",
+          "size": [
+            192,
+            192
+          ],
+          "frames": 4,
+          "sha256": "5970259001ed50711e50f2b4a6340900db1d66d6e6cda758cc453d7c01d7810a"
+        },
+        {
+          "path": "assets/players/baimen-women/F04/run.png",
+          "size": [
+            1536,
+            192
+          ],
+          "frames": 8,
+          "sha256": "0ad6a0e014a9414661211c118326351e6c62e8be270aea50e4875100b9808208",
+          "alpha": [
+            0,
+            255
+          ],
+          "opaque_colors": 62,
+          "frame_alpha_bounds": [
+            [
+              65,
+              100,
+              123,
+              176
+            ],
+            [
+              62,
+              100,
+              127,
+              176
+            ],
+            [
+              63,
+              101,
+              126,
+              176
+            ],
+            [
+              64,
+              99,
+              125,
+              176
+            ],
+            [
+              63,
+              102,
+              123,
+              176
+            ],
+            [
+              62,
+              102,
+              126,
+              176
+            ],
+            [
+              66,
+              101,
+              124,
+              176
+            ],
+            [
+              63,
+              101,
+              125,
+              176
+            ]
+          ],
+          "frame_pixel_sha256": [
+            "60a700c5e3acdbdb0b6ac22263b61720493c12ec54e30a4a6de0d0368c1a3bcc",
+            "0d78e6662bfdcca855cb38ba5457ca391043c366d85eae46ccd744ec20ebee03",
+            "72b1d0e65ba9555fc38fb974b36f10858f7c5bf9165bb96fa2b595967fda50b8",
+            "b0788c1041743feddc6850909cd9293f6937683694897475b9e5f7831412a64c",
+            "dfe6c0ac52c933c3bfa55a454c7ea6a9f20dc3b53f19339f9bf9eee4b9407b69",
+            "70a9309979dd7e74d5c8600113b861776d272e1ca5fd58aa96e53685be827f9d",
+            "303b5e5f11400b4ffbe68d348bb27fa24f33972f00af60103aaff9ab1c58c3e8",
+            "6c975d0c23048e6b18a0f1033a80dc02e9854738e94212bf0003150110571f41"
+          ]
+        },
+        {
+          "path": "assets/players/baimen-women/F04/run.aseprite",
+          "size": [
+            192,
+            192
+          ],
+          "frames": 8,
+          "sha256": "a8fbc8ffe4f7b7e3d0524128a1f37734ada93ddc14d98f04d80232dde920edc4"
+        },
+        {
+          "path": "assets/players/baimen-women/F04/attack.png",
+          "size": [
+            768,
+            192
+          ],
+          "frames": 4,
+          "sha256": "1c2cfd8f584769b29d68ef44c6c661df3c734af55201e6bceac28d5ba21afdf4",
+          "alpha": [
+            0,
+            255
+          ],
+          "opaque_colors": 62,
+          "frame_alpha_bounds": [
+            [
+              70,
+              99,
+              117,
+              176
+            ],
+            [
+              65,
+              100,
+              119,
+              176
+            ],
+            [
+              61,
+              103,
+              138,
+              176
+            ],
+            [
+              68,
+              99,
+              130,
+              176
+            ]
+          ],
+          "frame_pixel_sha256": [
+            "34345e5585f19b1145286219637a3cd9b0482736a04cd6dc4fbeee3de892166d",
+            "6f2adbf31262214266d1324eeeab9422a91647278cec57abf04880d71f90f8fd",
+            "0d3382188f4995b4fb8694ea47fe9a1f7354b1d8ab1805ff33cb374473c7e907",
+            "a61cf31e769ef03fa2cb51d86946b144489533a0112e543afeebe971a73478f9"
+          ]
+        },
+        {
+          "path": "assets/players/baimen-women/F04/attack.aseprite",
+          "size": [
+            192,
+            192
+          ],
+          "frames": 4,
+          "sha256": "e52f76b1dd203936c8c1cb7796b9b2b297210d904a70e9f423c3cd481a42ea80"
+        },
+        {
+          "path": "assets/players/baimen-women/F04/cast.png",
+          "size": [
+            768,
+            192
+          ],
+          "frames": 4,
+          "sha256": "5f11735a7f79b18a2c094923514837fb9cdbbe9e079fa4048252be631c98acaa",
+          "alpha": [
+            0,
+            255
+          ],
+          "opaque_colors": 59,
+          "frame_alpha_bounds": [
+            [
+              71,
+              105,
+              120,
+              176
+            ],
+            [
+              70,
+              105,
+              120,
+              176
+            ],
+            [
+              69,
+              106,
+              127,
+              176
+            ],
+            [
+              72,
+              105,
+              119,
+              176
+            ]
+          ],
+          "frame_pixel_sha256": [
+            "57f3603ae352083404689a8c57e8108b7f41ed9a503592cb0c82e16ba9576e14",
+            "286de7ff8164f7db54a04ff96dadd7101f65c7fe43a4c6fb37ba95cd3e502204",
+            "176859c25582fc6be506b15f396420be5395ed05705335af9f3669b34d65070b",
+            "7c0a052f20cdc8bada1d8ee94994799a21e20757393e13d5cf9818f2afbec418"
+          ]
+        },
+        {
+          "path": "assets/players/baimen-women/F04/cast.aseprite",
+          "size": [
+            192,
+            192
+          ],
+          "frames": 4,
+          "sha256": "e7557e0526f245c3832de7bb19a39e04239915c4bf04d48c05f8f4c22be2d486"
+        },
+        {
+          "path": "assets/players/baimen-women/F04/head.png",
+          "size": [
+            128,
+            128
+          ],
+          "frames": 1,
+          "sha256": "9e5d8f34603293bd34dc89973884d6e41a53e87091169ea126b214dd1ec112a9",
+          "alpha": [
+            0,
+            255
+          ],
+          "opaque_colors": 62,
+          "frame_alpha_bounds": [
+            [
+              4,
+              2,
+              122,
+              126
+            ]
+          ],
+          "frame_pixel_sha256": [
+            "bcbdbb2b37e17bb778371e904a7851d969df15ea26cc2d8ce18070cd15c823c7"
+          ]
+        },
+        {
+          "path": "assets/players/baimen-women/F04/head.aseprite",
+          "size": [
+            64,
+            64
+          ],
+          "frames": 1,
+          "sha256": "f27ff2c58c570ae257143994c849cb5cf21a90751c71f91c417c3f6603a771bb"
+        }
+      ]
+    },
+    {
+      "id": "F05",
+      "slug": "zhuqingheng",
+      "sources": [
+        {
+          "kind": "combat",
+          "path": "design/baimen-women-20261028/source/F05-zhuqingheng-combat-v1.png",
+          "sha256": "c1d34f49c7ddd5a0c4bac5ab753f667b2b80749a6d82dc7fd37a3693d229730c",
+          "size": [
+            1122,
+            1402
+          ]
+        },
+        {
+          "kind": "portrait",
+          "path": "design/baimen-women-20261028/source/F05-zhuqingheng-portrait-v1.png",
+          "sha256": "6cd394238682d75ed59d5bb087b922358fd1a622e8a425a625ecd877971e4b09",
+          "size": [
+            1254,
+            1254
+          ]
+        }
+      ],
+      "attack_contact_frame": 2,
+      "scale": 0.2857142857142857,
+      "standing_body_height_source": 280,
+      "actor_shared_opaque_colors": 63,
+      "actor_frames": 20,
+      "outputs": [
+        {
+          "path": "assets/players/baimen-women/F05/idle.png",
+          "size": [
+            768,
+            192
+          ],
+          "frames": 4,
+          "sha256": "5fa3fbdabc172bbadf12e507d57a8d061958f80ad43c543fb30945fb241e5c96",
+          "alpha": [
+            0,
+            255
+          ],
+          "opaque_colors": 62,
+          "frame_alpha_bounds": [
+            [
+              61,
+              96,
+              120,
+              176
+            ],
+            [
+              62,
+              96,
+              120,
+              176
+            ],
+            [
+              59,
+              95,
+              121,
+              176
+            ],
+            [
+              61,
+              96,
+              118,
+              176
+            ]
+          ],
+          "frame_pixel_sha256": [
+            "482a430fdab13775b882b01d5dbf9683a612facda0cf3280a4bffe362dedd334",
+            "78a82b86398049ecdc123903c4ff44125da61f2b22b6c330eb8df89b936d11ce",
+            "8672cf1802eba56fcdcb438863cf4d250d7beec03175a4d09a41fc403ff152db",
+            "0373662058d84e25d25a60f039f8eea3d4d3151287cb762b7f5153238a6e2351"
+          ]
+        },
+        {
+          "path": "assets/players/baimen-women/F05/idle.aseprite",
+          "size": [
+            192,
+            192
+          ],
+          "frames": 4,
+          "sha256": "9b9271956bd5e2d2cf8f1a9c71e765ecac804814500fa65079c55255c648206f"
+        },
+        {
+          "path": "assets/players/baimen-women/F05/run.png",
+          "size": [
+            1536,
+            192
+          ],
+          "frames": 8,
+          "sha256": "bcda51e87300c69af945928f6ca5b42172237242a52259403e4753899cb805f1",
+          "alpha": [
+            0,
+            255
+          ],
+          "opaque_colors": 61,
+          "frame_alpha_bounds": [
+            [
+              57,
+              98,
+              122,
+              176
+            ],
+            [
+              54,
+              99,
+              121,
+              176
+            ],
+            [
+              54,
+              99,
+              120,
+              176
+            ],
+            [
+              53,
+              99,
+              121,
+              176
+            ],
+            [
+              60,
+              106,
+              126,
+              176
+            ],
+            [
+              58,
+              105,
+              129,
+              176
+            ],
+            [
+              57,
+              104,
+              125,
+              176
+            ],
+            [
+              60,
+              104,
+              123,
+              176
+            ]
+          ],
+          "frame_pixel_sha256": [
+            "894fa632cf5fbb9183f1531115051d51762dafb48d730dda2ff43b0eececf005",
+            "7efe203ed083665ba3d06f8e5f0977ce0f5e02bbb09e99b9894fb9963bc2da98",
+            "85f5054c931fd2713ea89ea64c46e7442524158d20ff4e968a2e9a8f77274b76",
+            "ba9b340a229c1ad8c69b2a20e0941a88e88e041b72566c76f9eda1c517ef9ab7",
+            "7c0bac772531e02f3b0b92ae52f657840b9cf76c74dcce7e15f4b3ce61d0e258",
+            "c29ea8321455b49b885f4d371970218a937ee854dd8a528532680ab3faf66c65",
+            "5c6f94215e47fcc61cc58cbc8b1c38bf71e74087e074a883b1879518b5fd95e7",
+            "a31d36fa395ad29755480375e50aa14c91e718269229128edae664446815eb16"
+          ]
+        },
+        {
+          "path": "assets/players/baimen-women/F05/run.aseprite",
+          "size": [
+            192,
+            192
+          ],
+          "frames": 8,
+          "sha256": "c1ca6cadcb8fbfb776dfa159f93aa43e3c7436d9356006918c88cc1fe1a87905"
+        },
+        {
+          "path": "assets/players/baimen-women/F05/attack.png",
+          "size": [
+            768,
+            192
+          ],
+          "frames": 4,
+          "sha256": "fd3b36b9bd3160f9eca17c26f7ab72b62d93e7e3d5ae97720af45c39ac8d043e",
+          "alpha": [
+            0,
+            255
+          ],
+          "opaque_colors": 61,
+          "frame_alpha_bounds": [
+            [
+              66,
+              102,
+              125,
+              176
+            ],
+            [
+              59,
+              102,
+              129,
+              176
+            ],
+            [
+              58,
+              102,
+              137,
+              176
+            ],
+            [
+              58,
+              103,
+              129,
+              176
+            ]
+          ],
+          "frame_pixel_sha256": [
+            "10a0d0caeaae24c3c2792caa99da5938eb77592e46635b574457302d947f20a7",
+            "751616081b77b2caba26c0367683779aa6bd4a56b7a1f40c4740b6512cc2f16b",
+            "247a805f945c71974bdf4c051c57a20a4cf6daea2d66e282682e3e938b63f163",
+            "4b17bc4eab6100604b7af3fec47a657a58c4b50500635a6bfa0c812177b65c58"
+          ]
+        },
+        {
+          "path": "assets/players/baimen-women/F05/attack.aseprite",
+          "size": [
+            192,
+            192
+          ],
+          "frames": 4,
+          "sha256": "9149b8fefb74493e289790075f7ea3056577c9d3816b0a7f3d66d500e3f6357d"
+        },
+        {
+          "path": "assets/players/baimen-women/F05/cast.png",
+          "size": [
+            768,
+            192
+          ],
+          "frames": 4,
+          "sha256": "106b95f687c642ba60426442e1e9079165b7775f591c84cdef15e02066024177",
+          "alpha": [
+            0,
+            255
+          ],
+          "opaque_colors": 61,
+          "frame_alpha_bounds": [
+            [
+              65,
+              100,
+              124,
+              176
+            ],
+            [
+              61,
+              95,
+              121,
+              176
+            ],
+            [
+              62,
+              103,
+              128,
+              176
+            ],
+            [
+              65,
+              101,
+              121,
+              176
+            ]
+          ],
+          "frame_pixel_sha256": [
+            "5aa013ace52657c8238a7165e2c4885e9572c08b9c4ea3b131847df903745ba6",
+            "fe398cc483a48c6f9b04909ab8730a42cbb2bbd23800acda85be43bef3d9343a",
+            "9373d684fe694bbb67ec453c616b0de0178c74b27bbeecd6003f1516870addf3",
+            "8765820bef4a2da0c0f6ade27aa9ab4effe1609df9f6a877c20b65bd42fe2c27"
+          ]
+        },
+        {
+          "path": "assets/players/baimen-women/F05/cast.aseprite",
+          "size": [
+            192,
+            192
+          ],
+          "frames": 4,
+          "sha256": "6065e7408c6be46a5be99afac9b69ee43ec8ac2b7d55de9bcfbdd8b6f633156a"
+        },
+        {
+          "path": "assets/players/baimen-women/F05/head.png",
+          "size": [
+            128,
+            128
+          ],
+          "frames": 1,
+          "sha256": "93d8e2b563394340c2de058ff62b85c5aea9a8898158431957b8231b5e00c9bb",
+          "alpha": [
+            0,
+            255
+          ],
+          "opaque_colors": 62,
+          "frame_alpha_bounds": [
+            [
+              2,
+              2,
+              126,
+              126
+            ]
+          ],
+          "frame_pixel_sha256": [
+            "ecd273ef30e4f0ac01e0c5ae6749c482608e27602a2a9ed51557542f1f505a83"
+          ]
+        },
+        {
+          "path": "assets/players/baimen-women/F05/head.aseprite",
+          "size": [
+            64,
+            64
+          ],
+          "frames": 1,
+          "sha256": "de5975127128dda568309b5beedfe8b5a308b5f5eef299ec46893faa3bde6475"
+        }
+      ]
+    },
+    {
+      "id": "F08",
+      "slug": "taoxiaoman",
+      "sources": [
+        {
+          "kind": "combat",
+          "path": "design/baimen-women-20261028/source/F08-taoxiaoman-combat-v1.png",
+          "sha256": "bd31af8e0fcda73304a4e3f204d8a67a7390cb477edb15c0ac9e0483cc4a66fb",
+          "size": [
+            1122,
+            1402
+          ]
+        },
+        {
+          "kind": "portrait",
+          "path": "design/baimen-women-20261028/source/F08-taoxiaoman-portrait-v1.png",
+          "sha256": "276bdbf256d4adf28c5add9a4f2dcef7dfeacafe191ab8e9fd7f250fddb61560",
+          "size": [
+            1254,
+            1254
+          ]
+        }
+      ],
+      "attack_contact_frame": 2,
+      "scale": 0.2777777777777778,
+      "standing_body_height_source": 288,
+      "actor_shared_opaque_colors": 59,
+      "actor_frames": 20,
+      "outputs": [
+        {
+          "path": "assets/players/baimen-women/F08/idle.png",
+          "size": [
+            768,
+            192
+          ],
+          "frames": 4,
+          "sha256": "8c7728cfc70f99fd08fec61864d6148eca11f56a2051524d6a146087b331a891",
+          "alpha": [
+            0,
+            255
+          ],
+          "opaque_colors": 58,
+          "frame_alpha_bounds": [
+            [
+              74,
+              97,
+              120,
+              176
+            ],
+            [
+              73,
+              96,
+              120,
+              176
+            ],
+            [
+              72,
+              96,
+              118,
+              176
+            ],
+            [
+              71,
+              96,
+              117,
+              176
+            ]
+          ],
+          "frame_pixel_sha256": [
+            "e11886fa95805a8e582e832633663bae498da9eb4fd7d1d2fdb86dbf04356260",
+            "7a6bdffac2459d7d5dd67ef8df9c386d11f4dab44159897c47632d69ad94e68f",
+            "01b01a82604337445c0a62bfb9964054d1e9dca4c46a0d2ddff65157100c9760",
+            "aabb8e2ddd74313a429766af58cf9ab2ab5cdd4d7c93a522fbf74c02b69201cf"
+          ]
+        },
+        {
+          "path": "assets/players/baimen-women/F08/idle.aseprite",
+          "size": [
+            192,
+            192
+          ],
+          "frames": 4,
+          "sha256": "fd0b5770e92dcc49e04e73aa5b3abf3eeffe348a5b3cb6219a32d82951259d22"
+        },
+        {
+          "path": "assets/players/baimen-women/F08/run.png",
+          "size": [
+            1536,
+            192
+          ],
+          "frames": 8,
+          "sha256": "6bb40de987c60c9d1649837e9379e2935466e024cc1d8768128aeb72f20efbee",
+          "alpha": [
+            0,
+            255
+          ],
+          "opaque_colors": 59,
+          "frame_alpha_bounds": [
+            [
+              61,
+              105,
+              122,
+              176
+            ],
+            [
+              63,
+              106,
+              122,
+              176
+            ],
+            [
+              60,
+              106,
+              119,
+              176
+            ],
+            [
+              61,
+              106,
+              121,
+              176
+            ],
+            [
+              63,
+              104,
+              122,
+              176
+            ],
+            [
+              64,
+              105,
+              122,
+              176
+            ],
+            [
+              63,
+              105,
+              121,
+              176
+            ],
+            [
+              62,
+              104,
+              121,
+              176
+            ]
+          ],
+          "frame_pixel_sha256": [
+            "30c3bc291caeccc52d4bc6ad4f0a3319fdc0661fa3a497d6bf2541e6c059d9fa",
+            "e892443cdca658c8aa8630a7e37a5127ca15a2ef29b607d1ae3269ca38d5bb28",
+            "5350c3ce9d5cbbe6bb59e9ed94c701387da8e8de86f8bf63ef1c61bb40c9ffd7",
+            "bcbdae5767acb51bebfa0f14bd3209eace72403161330873d64302fc1af1858a",
+            "20aaf5ca69056798a25731669f51f426d13199613dacbce5d70431fb2d17e87c",
+            "1e32fb4d01954cced0f6d782f83991decd4f112b513740933703480c776e523a",
+            "8edb763976a2ff18ea94f9d5c5891a91d50c3d91863c3269e1f0c50e4753e333",
+            "80e92f85b8ba9918e79c8fcd860179d28ae3ab8bb93e24129e524b5b2ac88191"
+          ]
+        },
+        {
+          "path": "assets/players/baimen-women/F08/run.aseprite",
+          "size": [
+            192,
+            192
+          ],
+          "frames": 8,
+          "sha256": "de16f5129dbb9ac640deee60f1728672c89ae28d4e186caf3a24b3ee1f78de8f"
+        },
+        {
+          "path": "assets/players/baimen-women/F08/attack.png",
+          "size": [
+            768,
+            192
+          ],
+          "frames": 4,
+          "sha256": "0b132886ddcc883a545814aa5c4c7286b25db62bb3cdad5edab07ae5f9fed2e4",
+          "alpha": [
+            0,
+            255
+          ],
+          "opaque_colors": 58,
+          "frame_alpha_bounds": [
+            [
+              71,
+              100,
+              122,
+              176
+            ],
+            [
+              64,
+              94,
+              122,
+              176
+            ],
+            [
+              62,
+              107,
+              135,
+              176
+            ],
+            [
+              59,
+              113,
+              128,
+              176
+            ]
+          ],
+          "frame_pixel_sha256": [
+            "a5028c69c7e39fc1113c914f47f12561ad1f519044e1b964f7a1c97089e89658",
+            "5c1373a274a6b24bd26b480bf86bcf1c98dff6e695f476f53318d0d6f2a528bc",
+            "71b515755fc8a5fa91577a4b5ba949d6a4318dc889c8b03867e68a2c200d2ccc",
+            "c0cfb68afd2d4979916b9d623be73bc49be183a17d70377ca4cf938a0c0261a5"
+          ]
+        },
+        {
+          "path": "assets/players/baimen-women/F08/attack.aseprite",
+          "size": [
+            192,
+            192
+          ],
+          "frames": 4,
+          "sha256": "4f8a158cc38c0fcc78345c737d8783c7439358e4f59661db913762e12459b012"
+        },
+        {
+          "path": "assets/players/baimen-women/F08/cast.png",
+          "size": [
+            768,
+            192
+          ],
+          "frames": 4,
+          "sha256": "d504c478a8d759bd9e472ff6d683832a23ae10bf2816cdce0cdedeac72c6d30c",
+          "alpha": [
+            0,
+            255
+          ],
+          "opaque_colors": 59,
+          "frame_alpha_bounds": [
+            [
+              76,
+              103,
+              116,
+              176
+            ],
+            [
+              72,
+              103,
+              118,
+              176
+            ],
+            [
+              66,
+              104,
+              122,
+              176
+            ],
+            [
+              72,
+              102,
+              118,
+              176
+            ]
+          ],
+          "frame_pixel_sha256": [
+            "147273f4c9b22816d9038b7ebb926fdcb1b022e407e7a27dbe56a115bbdcf6e9",
+            "1352cfc831dd42e2b04108564f1b64e145c9996d6e50cce4cf2aa3350b0fd8ea",
+            "9568ab75def8c2e2a64a5efe11cf6900399d801cbd7ef3c60a0a2490e7789064",
+            "224aa110371477f7e62414f0bdf9e2ffc1221f64e1e60100a7971413229a2ddc"
+          ]
+        },
+        {
+          "path": "assets/players/baimen-women/F08/cast.aseprite",
+          "size": [
+            192,
+            192
+          ],
+          "frames": 4,
+          "sha256": "e06f858e5c8b834197dbf23dc90ef24441694856a0091326cc7b4a43c5ee3b54"
+        },
+        {
+          "path": "assets/players/baimen-women/F08/head.png",
+          "size": [
+            128,
+            128
+          ],
+          "frames": 1,
+          "sha256": "fd66f2855d9d8203d3d819f8e43dc807b74f8c794641c57fd59e7c9a23227275",
+          "alpha": [
+            0,
+            255
+          ],
+          "opaque_colors": 61,
+          "frame_alpha_bounds": [
+            [
+              4,
+              2,
+              124,
+              126
+            ]
+          ],
+          "frame_pixel_sha256": [
+            "5e1e8860af025c33ae2a42735d62b1465f62e883f3e85e8956854219d1dbebf1"
+          ]
+        },
+        {
+          "path": "assets/players/baimen-women/F08/head.aseprite",
+          "size": [
+            64,
+            64
+          ],
+          "frames": 1,
+          "sha256": "8e9a3e5ebd41ff0bf40bb62f9f7027bc24f575e63cec29b15a38f92707de107a"
+        }
+      ]
+    },
+    {
+      "id": "F09",
+      "slug": "liuwanqing",
+      "sources": [
+        {
+          "kind": "combat",
+          "path": "design/baimen-women-20261028/source/F09-liuwanqing-combat-v1.png",
+          "sha256": "f3227ec8bf62f365f001e8c3b690571ca11df04fca94594f75ffd82a9257d973",
+          "size": [
+            1122,
+            1402
+          ]
+        },
+        {
+          "kind": "portrait",
+          "path": "design/baimen-women-20261028/source/F09-liuwanqing-portrait-v1.png",
+          "sha256": "d8673b12f9e5be25b670a1df02ea04d5e16f201e70c35595b2307f389cbfc877",
+          "size": [
+            1254,
+            1254
+          ]
+        }
+      ],
+      "attack_contact_frame": 2,
+      "scale": 0.2807017543859649,
+      "standing_body_height_source": 285,
+      "actor_shared_opaque_colors": 63,
+      "actor_frames": 20,
+      "outputs": [
+        {
+          "path": "assets/players/baimen-women/F09/idle.png",
+          "size": [
+            768,
+            192
+          ],
+          "frames": 4,
+          "sha256": "37dead9e19044a602226348808d5589dd99c115247491e31f201d7ad21ef184b",
+          "alpha": [
+            0,
+            255
+          ],
+          "opaque_colors": 63,
+          "frame_alpha_bounds": [
+            [
+              68,
+              96,
+              120,
+              176
+            ],
+            [
+              66,
+              97,
+              122,
+              176
+            ],
+            [
+              64,
+              97,
+              120,
+              176
+            ],
+            [
+              66,
+              97,
+              117,
+              176
+            ]
+          ],
+          "frame_pixel_sha256": [
+            "a2ee399c0d474ed09277c347bb987b7f3c75579de637dc2b162fa1c5d934c817",
+            "f838a65e4504f86100968d9470795a84866ea923ee9ab791171f7d65456a00b6",
+            "71678af2b4fee919c26fbc07e56cecb47100a8956b3c43c21cce6fde2c1c7e6a",
+            "5ea74cc75d8271dfa0df2d925a23b14691dcc90586efe0e6064830ff8f5ab671"
+          ]
+        },
+        {
+          "path": "assets/players/baimen-women/F09/idle.aseprite",
+          "size": [
+            192,
+            192
+          ],
+          "frames": 4,
+          "sha256": "becb13b06517a14237c102f6d069d341e14f0019915c742ef56c900f88cb7a59"
+        },
+        {
+          "path": "assets/players/baimen-women/F09/run.png",
+          "size": [
+            1536,
+            192
+          ],
+          "frames": 8,
+          "sha256": "db59dddd41c2aa1494a21db5325bf4136bbe9b45da7ac8434325d4d3616bd763",
+          "alpha": [
+            0,
+            255
+          ],
+          "opaque_colors": 63,
+          "frame_alpha_bounds": [
+            [
+              63,
+              104,
+              129,
+              176
+            ],
+            [
+              61,
+              104,
+              128,
+              176
+            ],
+            [
+              61,
+              103,
+              119,
+              176
+            ],
+            [
+              60,
+              103,
+              126,
+              176
+            ],
+            [
+              61,
+              101,
+              124,
+              176
+            ],
+            [
+              61,
+              101,
+              128,
+              176
+            ],
+            [
+              58,
+              101,
+              132,
+              176
+            ],
+            [
+              61,
+              100,
+              127,
+              176
+            ]
+          ],
+          "frame_pixel_sha256": [
+            "21da42ba7bf6d90d847b5029c34f152fb078d58a94c7edb70612ca2f0aa84269",
+            "45fbe6aab3e30707b18ffd39131c290b58e9052524f799585f62c60bab220236",
+            "c626f780e9717e97aa26a3323efd7f469de8755dedfdad9d2115075ff964e837",
+            "579c8f1f818db9371f427481c5d6937d0e6e014598733fcc1c4b98da18648116",
+            "d71f6bddc088ef25454850604303fa55cd3887ce3f63c2f8af3c751ed19e87a1",
+            "174d07d9040b5dfc78ada072c71c6d3928570c2770bf28915a8e2b0a4a13c2fb",
+            "2a15c1d51f79f59923ee8e055ba1183bed1b4594ae276ac097f8e4ba2efc4738",
+            "73436b4cfcd8531a3e0a7556b95f2f4c530eb1c05a3b2e87276760bb4edc41b3"
+          ]
+        },
+        {
+          "path": "assets/players/baimen-women/F09/run.aseprite",
+          "size": [
+            192,
+            192
+          ],
+          "frames": 8,
+          "sha256": "1cf9854a85a946e800aa47057af7b87b5be9d842a6a1e1528db3f547a6208564"
+        },
+        {
+          "path": "assets/players/baimen-women/F09/attack.png",
+          "size": [
+            768,
+            192
+          ],
+          "frames": 4,
+          "sha256": "725cd996dc35802772d9d52e786de692c9cad37901bb8fa420eee751d912d5d5",
+          "alpha": [
+            0,
+            255
+          ],
+          "opaque_colors": 61,
+          "frame_alpha_bounds": [
+            [
+              67,
+              110,
+              130,
+              176
+            ],
+            [
+              64,
+              109,
+              133,
+              176
+            ],
+            [
+              63,
+              109,
+              144,
+              176
+            ],
+            [
+              70,
+              107,
+              122,
+              176
+            ]
+          ],
+          "frame_pixel_sha256": [
+            "b6e741c5127c7e3df4c50de2a2417675f9714a1fba48405d25c325555ce03d9e",
+            "cde63ff0883aa4e57d5ad1e2bf6efd41db61ac878d43975a711d6fcf0e50d996",
+            "ab4edf658055e1344192ac5a26b74ab0aa42623fc09a11c6459b5a4c65391dd1",
+            "fd26ad0d3981255ce218b9c5494f8707b8176734186d111e81d70cdf30880112"
+          ]
+        },
+        {
+          "path": "assets/players/baimen-women/F09/attack.aseprite",
+          "size": [
+            192,
+            192
+          ],
+          "frames": 4,
+          "sha256": "9b60710e0bab69bd2dc46a379a15de0340edc54545d2d0a7275e5e4c4dec592d"
+        },
+        {
+          "path": "assets/players/baimen-women/F09/cast.png",
+          "size": [
+            768,
+            192
+          ],
+          "frames": 4,
+          "sha256": "1ae11c36af2004371307d9078a8d0ca40b6fb8b350b3f209cc3d97c4e4f91b43",
+          "alpha": [
+            0,
+            255
+          ],
+          "opaque_colors": 61,
+          "frame_alpha_bounds": [
+            [
+              61,
+              109,
+              128,
+              176
+            ],
+            [
+              62,
+              105,
+              129,
+              176
+            ],
+            [
+              56,
+              108,
+              138,
+              176
+            ],
+            [
+              66,
+              108,
+              123,
+              176
+            ]
+          ],
+          "frame_pixel_sha256": [
+            "6d433126d3b4b7bd9d2d5c4511219fb8eefb9c2ea5c1f89fdeb13fbd865a4a9e",
+            "cf89a9c14a9c2a76d5b2bf32cb16ef1037ecda02570ac2ec8931d059ea803d39",
+            "b77164a66338ca064f2e4c3a7183bae3f580d588bf36b11a59d85a7778293290",
+            "8bf916f0d53b55e62ee13b5191f8711501c855afb8f30eb6a70ce086096faa82"
+          ]
+        },
+        {
+          "path": "assets/players/baimen-women/F09/cast.aseprite",
+          "size": [
+            192,
+            192
+          ],
+          "frames": 4,
+          "sha256": "314e186e0b802bced6449f36405ec20702262765bf6ea3b40377bf8d1898ec0d"
+        },
+        {
+          "path": "assets/players/baimen-women/F09/head.png",
+          "size": [
+            128,
+            128
+          ],
+          "frames": 1,
+          "sha256": "deb90ca65b67739e64a5bca79346fe45cb73171a9024c1f6b27f78f9def5b58f",
+          "alpha": [
+            0,
+            255
+          ],
+          "opaque_colors": 62,
+          "frame_alpha_bounds": [
+            [
+              8,
+              2,
+              122,
+              126
+            ]
+          ],
+          "frame_pixel_sha256": [
+            "b9050cff993671977f6c14b46917c509036ddce1cafb5945635fd3886376fa3b"
+          ]
+        },
+        {
+          "path": "assets/players/baimen-women/F09/head.aseprite",
+          "size": [
+            64,
+            64
+          ],
+          "frames": 1,
+          "sha256": "4d1bd567370321e5b6b73b9375d71eb7050f61724aec5b99445fab5a77df52f7"
+        }
+      ]
+    },
+    {
+      "id": "F06",
+      "slug": "qinyan",
+      "sources": [
+        {
+          "kind": "combat",
+          "path": "design/baimen-women-20261028/source/F06-qinyan-combat-v1.png",
+          "sha256": "136638a7b73e0161b8752f617626cb8398d614af9ace187b7246c83df39ad9ee",
+          "size": [
+            1122,
+            1402
+          ]
+        },
+        {
+          "kind": "portrait",
+          "path": "design/baimen-women-20261028/source/F06-qinyan-portrait-v1.png",
+          "sha256": "51d413cb69cf85dc45e0e33a2c45f2b7fc1c4f5c892f4f6a95b31515550ee7be",
+          "size": [
+            1254,
+            1254
+          ]
+        }
+      ],
+      "attack_contact_frame": 1,
+      "scale": 0.2826855123674912,
+      "standing_body_height_source": 283,
+      "actor_shared_opaque_colors": 60,
+      "actor_frames": 20,
+      "outputs": [
+        {
+          "path": "assets/players/baimen-women/F06/idle.png",
+          "size": [
+            768,
+            192
+          ],
+          "frames": 4,
+          "sha256": "5c1e93655dad2c6a5ce0e4c5468f848aace34821218329ca8fb0f815d1a7a31f",
+          "alpha": [
+            0,
+            255
+          ],
+          "opaque_colors": 58,
+          "frame_alpha_bounds": [
+            [
+              72,
+              96,
+              125,
+              176
+            ],
+            [
+              72,
+              96,
+              124,
+              176
+            ],
+            [
+              71,
+              96,
+              123,
+              176
+            ],
+            [
+              68,
+              96,
+              122,
+              176
+            ]
+          ],
+          "frame_pixel_sha256": [
+            "3fed5bb7ac5665146a211c882ed1b8deb011b470f12b1ab376058bc584969737",
+            "1dacbeaeb7c4a99cc3dbc16928d830cec79bf0fe99ce5c5f328567492503fc7f",
+            "8b4dd549e6c6d25da8fac1f7738b1a4a0d26874c0a8323a64c1a924b25731580",
+            "72fbe28a47601d1ef2e4e309842f53ce9f95efad355f3929a2a0e138807d5c24"
+          ]
+        },
+        {
+          "path": "assets/players/baimen-women/F06/idle.aseprite",
+          "size": [
+            192,
+            192
+          ],
+          "frames": 4,
+          "sha256": "6c2638cdf294afcba53da1c254bad8fe0a194fe97cf8c7e6415ce0dfd1d5c9a1"
+        },
+        {
+          "path": "assets/players/baimen-women/F06/run.png",
+          "size": [
+            1536,
+            192
+          ],
+          "frames": 8,
+          "sha256": "4601a7e46d0f43dc89ac7a8704eafb438fd14f92fb6db5d154894d45ec17a239",
+          "alpha": [
+            0,
+            255
+          ],
+          "opaque_colors": 59,
+          "frame_alpha_bounds": [
+            [
+              60,
+              102,
+              128,
+              176
+            ],
+            [
+              61,
+              102,
+              127,
+              176
+            ],
+            [
+              59,
+              102,
+              124,
+              176
+            ],
+            [
+              60,
+              102,
+              125,
+              176
+            ],
+            [
+              60,
+              104,
+              128,
+              176
+            ],
+            [
+              58,
+              104,
+              127,
+              176
+            ],
+            [
+              59,
+              103,
+              126,
+              176
+            ],
+            [
+              60,
+              103,
+              125,
+              176
+            ]
+          ],
+          "frame_pixel_sha256": [
+            "4f309b555275153b40cc8fd88d6f65a8c76ed942c0a1b874b3e2e5a536e52a6d",
+            "b6cf59d6a825e9fda17d34e84fc29734b3032c1afd1bbadf0e274f6248b61030",
+            "dda34df1571875800dbb1aa4902c73b0758a8599734b84831c031605755c7b27",
+            "7a5a5665b2cfa97369aebc5e8226eb87747f45273be54cf80782c0c01cda2f35",
+            "627f8226a09b5063a33506c2aee6955e18ca5e6f93fc963e86e0cba48a822228",
+            "6c1d3c908a5184e227bbcdd896cd00e2db0b7437a6189ae8a00b32764351c5da",
+            "1e7eeaae4186e2ea61c2b0d355aab35e4c93ca5cc032ffce4b9d64c73b0d8354",
+            "ae4258b9f50f735c1ee25c7299fef2602beb393801f341b454a4c2508bb70aa4"
+          ]
+        },
+        {
+          "path": "assets/players/baimen-women/F06/run.aseprite",
+          "size": [
+            192,
+            192
+          ],
+          "frames": 8,
+          "sha256": "547c32e90653a14528aed8c9c45db9f2a750570ef2b70eca207208a198777a30"
+        },
+        {
+          "path": "assets/players/baimen-women/F06/attack.png",
+          "size": [
+            768,
+            192
+          ],
+          "frames": 4,
+          "sha256": "9ce076497fa2c7a756d30832bd8924481f3a84c18ff493b99f503c3c55c6a17e",
+          "alpha": [
+            0,
+            255
+          ],
+          "opaque_colors": 60,
+          "frame_alpha_bounds": [
+            [
+              70,
+              103,
+              133,
+              176
+            ],
+            [
+              69,
+              104,
+              132,
+              176
+            ],
+            [
+              71,
+              104,
+              141,
+              176
+            ],
+            [
+              72,
+              103,
+              126,
+              176
+            ]
+          ],
+          "frame_pixel_sha256": [
+            "f573c4b59d76ba42ab313bc76a7666b7f61d0c02b575d4e3f7881a61a9b65c25",
+            "0b99f2b67cf2d4b40a334ace833abfa6460e777f9ead769b46744496eefba638",
+            "6a9c21f9783d260b3459d3cb21044ae1bf2d5dedd24f6c60f5580d48945194ec",
+            "a77f865faf753acb7ad043ee91cdc1e37df0778486710aa8c4264ca4103a58d1"
+          ]
+        },
+        {
+          "path": "assets/players/baimen-women/F06/attack.aseprite",
+          "size": [
+            192,
+            192
+          ],
+          "frames": 4,
+          "sha256": "caaad63f17410d8da65ce7c44c1cbcc7fa56d403f6731642f0d31d39350da6d2"
+        },
+        {
+          "path": "assets/players/baimen-women/F06/cast.png",
+          "size": [
+            768,
+            192
+          ],
+          "frames": 4,
+          "sha256": "31c4542bb1f20baacf54422e6ea2d2fb928cc1288be1a3d56987b5762e577efb",
+          "alpha": [
+            0,
+            255
+          ],
+          "opaque_colors": 59,
+          "frame_alpha_bounds": [
+            [
+              70,
+              103,
+              123,
+              176
+            ],
+            [
+              68,
+              103,
+              126,
+              176
+            ],
+            [
+              69,
+              103,
+              123,
+              176
+            ],
+            [
+              70,
+              103,
+              122,
+              176
+            ]
+          ],
+          "frame_pixel_sha256": [
+            "3ab73a4a49258d87789814371ccdfacd615c7f19838f690a4880e294bf71cde5",
+            "cf264182af5272e45112b066811e7d3865a14a5a52e6687f29ad87201f4fb28a",
+            "958e7ce9005eb3138718e10bdf632a4be6de4f4d640a1c4cad1212444fb225bb",
+            "067e19f4419ccad25c500333e1e1084ae5a0f8503db2e2d09d3ddea83eee8532"
+          ]
+        },
+        {
+          "path": "assets/players/baimen-women/F06/cast.aseprite",
+          "size": [
+            192,
+            192
+          ],
+          "frames": 4,
+          "sha256": "67699762d77fcd65ecdaa11b780cb0f3f75725a2db4cb32970d0182f1620fdf1"
+        },
+        {
+          "path": "assets/players/baimen-women/F06/head.png",
+          "size": [
+            128,
+            128
+          ],
+          "frames": 1,
+          "sha256": "b4964dce2ee29776054cc95c888de91b9fd05fe24582d9e0aff4dab1e468a315",
+          "alpha": [
+            0,
+            255
+          ],
+          "opaque_colors": 63,
+          "frame_alpha_bounds": [
+            [
+              2,
+              2,
+              126,
+              126
+            ]
+          ],
+          "frame_pixel_sha256": [
+            "671de739bc0d1507697b32269ed2d859c027034830b09062cf3b8c7aaa544f70"
+          ]
+        },
+        {
+          "path": "assets/players/baimen-women/F06/head.aseprite",
+          "size": [
+            64,
+            64
+          ],
+          "frames": 1,
+          "sha256": "d4cffe6877adad85eb4c8dafd5b70253fd42c456a863f66d50cd04437984592f"
+        }
+      ]
+    },
+    {
+      "id": "F10",
+      "slug": "luzhiwei",
+      "sources": [
+        {
+          "kind": "combat",
+          "path": "design/baimen-women-20261028/source/F10-luzhiwei-combat-v1.png",
+          "sha256": "30728be5d5651d7b95e78e344e975b59dc9a1d44a3f17718160e0988f94632d4",
+          "size": [
+            1122,
+            1402
+          ]
+        },
+        {
+          "kind": "portrait",
+          "path": "design/baimen-women-20261028/source/F10-luzhiwei-portrait-v1.png",
+          "sha256": "047f4521c9e8a0208483f4465a6a9df8d673917731c8cba7428291e7a3bbe7b2",
+          "size": [
+            1254,
+            1254
+          ]
+        }
+      ],
+      "attack_contact_frame": 1,
+      "scale": 0.2846975088967972,
+      "standing_body_height_source": 281,
+      "actor_shared_opaque_colors": 62,
+      "actor_frames": 20,
+      "outputs": [
+        {
+          "path": "assets/players/baimen-women/F10/idle.png",
+          "size": [
+            768,
+            192
+          ],
+          "frames": 4,
+          "sha256": "cafa7ebc03a23151c8446e2b9a056055274884ab0b6ffc06d3e920ee4397d940",
+          "alpha": [
+            0,
+            255
+          ],
+          "opaque_colors": 59,
+          "frame_alpha_bounds": [
+            [
+              78,
+              96,
+              115,
+              176
+            ],
+            [
+              77,
+              97,
+              115,
+              176
+            ],
+            [
+              76,
+              96,
+              114,
+              176
+            ],
+            [
+              76,
+              96,
+              113,
+              176
+            ]
+          ],
+          "frame_pixel_sha256": [
+            "2cc717e80044eb8b2b17346679989f6e8c5e903c2a81668929449c61a903db3a",
+            "8de65285b29ba574bb9c2d1801fa6a9081fa156bfe76d790fb9612522c071f83",
+            "41a1a4a1152e25f9cc0d0c09d83b0e304a980e6ad8a778360e08c4657cf91544",
+            "a3e1088c4ac1a2b00c05cf70c2b6f82574e8df15f74cb255201c2ad6cef29dd2"
+          ]
+        },
+        {
+          "path": "assets/players/baimen-women/F10/idle.aseprite",
+          "size": [
+            192,
+            192
+          ],
+          "frames": 4,
+          "sha256": "bfa5777fdf7ada338cdd9cbc450748ce13df6c6efab5d0b8fdc9d6060f52f0ad"
+        },
+        {
+          "path": "assets/players/baimen-women/F10/run.png",
+          "size": [
+            1536,
+            192
+          ],
+          "frames": 8,
+          "sha256": "766bce28a820a60eb55dfc1478ae6b0aa8d5e9c36a38b5b9b7c380b62c417d96",
+          "alpha": [
+            0,
+            255
+          ],
+          "opaque_colors": 61,
+          "frame_alpha_bounds": [
+            [
+              65,
+              106,
+              120,
+              176
+            ],
+            [
+              65,
+              107,
+              120,
+              176
+            ],
+            [
+              63,
+              107,
+              120,
+              176
+            ],
+            [
+              63,
+              107,
+              120,
+              176
+            ],
+            [
+              64,
+              108,
+              123,
+              176
+            ],
+            [
+              64,
+              109,
+              130,
+              176
+            ],
+            [
+              64,
+              107,
+              122,
+              176
+            ],
+            [
+              62,
+              107,
+              118,
+              176
+            ]
+          ],
+          "frame_pixel_sha256": [
+            "aea5edb55c120249ba6234bc8749548d54fe17e5774aa92550982948cef99c42",
+            "d697f6067b99d6b3e329b143412adffd0afe2feadb67d9975e85232b53d56c39",
+            "12f0785b69657ba0d32542574a28d70fa6d3e4303e52fdcf568f4ea1c34edd2e",
+            "f951f7da6fa1bf79a1651a87e06654b48ed827c2e05817fd62fec17e52a360a0",
+            "31c49604c2a85af580c96f34bf1b3abe3c8fe5f3ef536b24669be75f1d05e45d",
+            "b796841bc2f38006aa33d4385be1e7d35525ac70990d0d31633c83b1350d82e2",
+            "1b13cd05a8b10ee10563dceb3f1c2077d389ede15246542892f6b3c3b6f0386e",
+            "95b1cc7c43e8e7b1afd6c2495d560a228aa37cefbf260800fa59d010bbac3bd3"
+          ]
+        },
+        {
+          "path": "assets/players/baimen-women/F10/run.aseprite",
+          "size": [
+            192,
+            192
+          ],
+          "frames": 8,
+          "sha256": "71d5056c6ade22e97f57141b66183e1304a0e767e8fa09ba84f7c04c1e848cb4"
+        },
+        {
+          "path": "assets/players/baimen-women/F10/attack.png",
+          "size": [
+            768,
+            192
+          ],
+          "frames": 4,
+          "sha256": "e4ad26510fa66b3b2de77d4cea75f7eca3f8c7529b9be494d7c6715c7e34d2b2",
+          "alpha": [
+            0,
+            255
+          ],
+          "opaque_colors": 59,
+          "frame_alpha_bounds": [
+            [
+              73,
+              101,
+              125,
+              176
+            ],
+            [
+              75,
+              103,
+              133,
+              176
+            ],
+            [
+              69,
+              103,
+              136,
+              176
+            ],
+            [
+              76,
+              104,
+              114,
+              176
+            ]
+          ],
+          "frame_pixel_sha256": [
+            "5de5e6b484dca060680d4619ff5cc51dc1cb744a40470c3f4ac4b9b301947bf7",
+            "96a728d2d00af6572f9fa874ccbd7b4726f1d5872493d8cef239a65f1713b4a5",
+            "77dae61bc07be3b0c4bc8bb064c76ab3c95939db3ace3a957eba36c380ce37e5",
+            "6a27dd5f667806ff18e65791be631f9d419f019c0f5f7bafe62211536a36ae23"
+          ]
+        },
+        {
+          "path": "assets/players/baimen-women/F10/attack.aseprite",
+          "size": [
+            192,
+            192
+          ],
+          "frames": 4,
+          "sha256": "d03b5110a1685f8b70a73c563808f8206b26ceb689e2ff3f2cd534fc400af1d8"
+        },
+        {
+          "path": "assets/players/baimen-women/F10/cast.png",
+          "size": [
+            768,
+            192
+          ],
+          "frames": 4,
+          "sha256": "6c517a1dc6271c0f6ce2552a6cc8293bbe2995afa9819a4440395f23019a3a81",
+          "alpha": [
+            0,
+            255
+          ],
+          "opaque_colors": 60,
+          "frame_alpha_bounds": [
+            [
+              75,
+              103,
+              120,
+              176
+            ],
+            [
+              76,
+              103,
+              122,
+              176
+            ],
+            [
+              67,
+              103,
+              133,
+              176
+            ],
+            [
+              76,
+              103,
+              118,
+              176
+            ]
+          ],
+          "frame_pixel_sha256": [
+            "f67500ead715399cfd855729a4666d45881699d1f6a61ed7c52ded94f49b79e5",
+            "3e52782dd279124b717449335bb7518065f957c206496f24cda3302c7afbd5be",
+            "c70e8ff1c645571cf82b56729244c11925821042b6f55227e11a3d7f9bc21e22",
+            "71a7d64e900083a8a73d14ba73d23ddc44e7fce6e62a62fed7954feb87b45204"
+          ]
+        },
+        {
+          "path": "assets/players/baimen-women/F10/cast.aseprite",
+          "size": [
+            192,
+            192
+          ],
+          "frames": 4,
+          "sha256": "24afade782a0c6af26ccb215a1289ddab0a27c7cfa43626fb69fceabbefa2e3a"
+        },
+        {
+          "path": "assets/players/baimen-women/F10/head.png",
+          "size": [
+            128,
+            128
+          ],
+          "frames": 1,
+          "sha256": "960f70dfe4571a1ac4b444fbae532170412ad43e0df7b32e88dca225f3683e04",
+          "alpha": [
+            0,
+            255
+          ],
+          "opaque_colors": 63,
+          "frame_alpha_bounds": [
+            [
+              2,
+              2,
+              126,
+              126
+            ]
+          ],
+          "frame_pixel_sha256": [
+            "bcd90ce6b134612713cb65ffb4de247a9fa4d2f675d685c834f0131426e6347c"
+          ]
+        },
+        {
+          "path": "assets/players/baimen-women/F10/head.aseprite",
+          "size": [
+            64,
+            64
+          ],
+          "frames": 1,
+          "sha256": "853befcd23c65e62d84efeaeb36806101e343654e5e60a43a6b20325cb724541"
+        }
+      ]
+    },
+    {
+      "id": "F02",
+      "slug": "leina",
+      "sources": [
+        {
+          "kind": "combat",
+          "path": "design/baimen-women-20261028/source/F02-leina-combat-v1.png",
+          "sha256": "11f9d07489c90a47f4fcfce2d733b61ba7704e8399b114204a9b22e10e1a841f",
+          "size": [
+            1122,
+            1402
+          ]
+        },
+        {
+          "kind": "portrait",
+          "path": "design/baimen-women-20261028/source/F02-leina-portrait-v1.png",
+          "sha256": "ce8e88a59db5c9994eeb253a100069d82adde8986ad261eaabf12c59cfbf7719",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "kind": "attack_fix",
+          "path": "design/baimen-women-20261028/source/F02-leina-attack-fix-v1.png",
+          "sha256": "cbec1520fac44275ead47667fe8ccacc824d8d6adfa4d5b8ed55816ec3b98f5d",
+          "size": [
+            2172,
+            724
+          ],
+          "standing_body_height_source": 595,
+          "scale": 0.13445378151260504
+        }
+      ],
+      "attack_contact_frame": 2,
+      "scale": 0.2846975088967972,
+      "standing_body_height_source": 281,
+      "actor_shared_opaque_colors": 62,
+      "actor_frames": 20,
+      "outputs": [
+        {
+          "path": "assets/players/baimen-women/F02/idle.png",
+          "size": [
+            768,
+            192
+          ],
+          "frames": 4,
+          "sha256": "29fb8bed848a9b3f4cf89e24228a4e6ac3eb0860365040260b09197e5b28d0ac",
+          "alpha": [
+            0,
+            255
+          ],
+          "opaque_colors": 62,
+          "frame_alpha_bounds": [
+            [
+              65,
+              96,
+              126,
+              176
+            ],
+            [
+              65,
+              96,
+              127,
+              176
+            ],
+            [
+              64,
+              96,
+              127,
+              176
+            ],
+            [
+              64,
+              96,
+              130,
+              176
+            ]
+          ],
+          "frame_pixel_sha256": [
+            "2cdf63054498b32be0e9123417af30376628a778717a1351fb3544e3f4f8afbd",
+            "f57fed86ac47536b6ce1c0f9fb89b9b46612e14d956e18262c128f411d41a974",
+            "27d5aaecb98efc0b0a2a1c66f396528d63b7e9bacb794c7f3cb88a0f23f5577b",
+            "a840e11947687bd29cc10bde3cdb99b82f4b381f41a742258b97adc46deaba37"
+          ]
+        },
+        {
+          "path": "assets/players/baimen-women/F02/idle.aseprite",
+          "size": [
+            192,
+            192
+          ],
+          "frames": 4,
+          "sha256": "a1bef3e1e37d25c713f07b8537805c201514cdad2dc491289080254ac30e9ad6"
+        },
+        {
+          "path": "assets/players/baimen-women/F02/run.png",
+          "size": [
+            1536,
+            192
+          ],
+          "frames": 8,
+          "sha256": "015a1f8c4f7865cbd79c75665dd951795fc57f5850b0f044a19bc20459a7e1b9",
+          "alpha": [
+            0,
+            255
+          ],
+          "opaque_colors": 62,
+          "frame_alpha_bounds": [
+            [
+              56,
+              107,
+              126,
+              176
+            ],
+            [
+              56,
+              106,
+              130,
+              176
+            ],
+            [
+              56,
+              105,
+              130,
+              176
+            ],
+            [
+              57,
+              105,
+              128,
+              176
+            ],
+            [
+              57,
+              106,
+              131,
+              176
+            ],
+            [
+              54,
+              107,
+              130,
+              176
+            ],
+            [
+              54,
+              105,
+              132,
+              176
+            ],
+            [
+              56,
+              104,
+              128,
+              176
+            ]
+          ],
+          "frame_pixel_sha256": [
+            "236ea5e1e9a6aa739103badbb7f1a3418d0ed2968786f5681e5a993e188efe8e",
+            "8232b39f8a463f789c5e5055a844749d0fbe2088ce85decb25991f5fa9f60b18",
+            "7fd6901d9ffe6064739c2de5db093a186fed6c7f61595eb9305175b262577e31",
+            "bd56d19b32ba0b136aedc6b340b0182989c59627dcc9cafacf2d1b818132bcbd",
+            "ac161612b14975e9c3b77b2c7e3d64b0ec9c4e65d59310214866527145e259c3",
+            "249f775970868368eb14c637d007904367c5c55bd1ae9f924ae50db1fe367730",
+            "503541f5fab7e90010ea7d77e12ce9f224e6bb1cbbc193181642cf44b57091ce",
+            "d1ccf2cc27aa39b5d4efec849f5522f25546d5a425d85f5bd6118e8b77b7e666"
+          ]
+        },
+        {
+          "path": "assets/players/baimen-women/F02/run.aseprite",
+          "size": [
+            192,
+            192
+          ],
+          "frames": 8,
+          "sha256": "be94c50e62db49b8803452f61cea2de0c82800cf834c46b72ce79c45f737a2d2"
+        },
+        {
+          "path": "assets/players/baimen-women/F02/attack.png",
+          "size": [
+            768,
+            192
+          ],
+          "frames": 4,
+          "sha256": "9ec00f4680fdb7a0e55c2edac2c95258c8e6cbfba66c49bfe9d348b3300a5969",
+          "alpha": [
+            0,
+            255
+          ],
+          "opaque_colors": 62,
+          "frame_alpha_bounds": [
+            [
+              62,
+              101,
+              133,
+              176
+            ],
+            [
+              64,
+              109,
+              141,
+              176
+            ],
+            [
+              39,
+              100,
+              186,
+              176
+            ],
+            [
+              51,
+              96,
+              145,
+              176
+            ]
+          ],
+          "frame_pixel_sha256": [
+            "cba782888132fa86ac63b4940c0431605ba4fb8fd138b13f239f482aa1a1ad58",
+            "1234a9ac5d166a7a14a29ca17769e482cb65dd8fa78d04fbce6e94bf35a6d79f",
+            "a74049350b1cadf1782e2d89bef3ff9dd4e29deb80ad7add1c574bb6fb1153b4",
+            "774d76471831f196d855629083d884d39953befb617376d3003c9252ce5a207d"
+          ]
+        },
+        {
+          "path": "assets/players/baimen-women/F02/attack.aseprite",
+          "size": [
+            192,
+            192
+          ],
+          "frames": 4,
+          "sha256": "f55a1964823ebdeeac943b0ce9f4a6ce3e9d405322c46e7a464c626dc4cdf95a"
+        },
+        {
+          "path": "assets/players/baimen-women/F02/cast.png",
+          "size": [
+            768,
+            192
+          ],
+          "frames": 4,
+          "sha256": "8362ce5038fa1b614806c12339c55a1583f92bf21d430d183bb51a1c9e510bee",
+          "alpha": [
+            0,
+            255
+          ],
+          "opaque_colors": 62,
+          "frame_alpha_bounds": [
+            [
+              64,
+              103,
+              124,
+              176
+            ],
+            [
+              64,
+              101,
+              122,
+              176
+            ],
+            [
+              64,
+              101,
+              122,
+              176
+            ],
+            [
+              62,
+              106,
+              127,
+              176
+            ]
+          ],
+          "frame_pixel_sha256": [
+            "a46c3efca445902b8d36802b312d9de05ca78e5cf581e68a749e2ea85b2df81b",
+            "65414000c9da32eb54b1deb68634108925eac20730080eb14050659e6b411fa5",
+            "0c1002389163de19a32585d265dd73c7c4a549fef29be7a7dc64403c9469d96d",
+            "766b0445ad5a60930994471e17d225be45361f8058953219482557df1b40cca2"
+          ]
+        },
+        {
+          "path": "assets/players/baimen-women/F02/cast.aseprite",
+          "size": [
+            192,
+            192
+          ],
+          "frames": 4,
+          "sha256": "d5e090f75a6957c6c35a43f602858f43a7d18b51a7fef64ecc1d0e55153a4c87"
+        },
+        {
+          "path": "assets/players/baimen-women/F02/head.png",
+          "size": [
+            128,
+            128
+          ],
+          "frames": 1,
+          "sha256": "7114c3ff0d19703151ec443d33134a0c4b9cdfbab4b567e6b468eafb97cb57ec",
+          "alpha": [
+            0,
+            255
+          ],
+          "opaque_colors": 59,
+          "frame_alpha_bounds": [
+            [
+              4,
+              2,
+              126,
+              126
+            ]
+          ],
+          "frame_pixel_sha256": [
+            "2fc2bbd49c6819a01ea7cec73fdb9c1d24d1c819ef067a8edffd182ccc09f723"
+          ]
+        },
+        {
+          "path": "assets/players/baimen-women/F02/head.aseprite",
+          "size": [
+            64,
+            64
+          ],
+          "frames": 1,
+          "sha256": "72c29146e44ddace45c5d41a471ecc04ff532e4493087a8a8aad6331071878c6"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-31",
+  "source_baseline": "f75dfc61e0f55cc21d57adc2907dcd209fb97bba",
+  "scope": "Current-game-only local repository migration; no remote writes or publication.",
+  "worktree": {
+    "status": "passed",
+    "project_check": "PROJECT_CHECK_OK",
+    "smoke_scripts": 49,
+    "source_smoke_scripts": 45,
+    "isolated_pck_smoke_scripts": 4,
+    "pck_bytes": 233122752,
+    "pck_checks": {
+      "enemy": 742,
+      "music": 213,
+      "story": 82,
+      "feedback": 184
+    },
+    "music_catalog_mixes": 70,
+    "score_source_rebuild_matches": true,
+    "audio_engine_tests_passed": 11,
+    "existing_save_slots_read_only_valid": 2,
+    "original_user_files_sha_unchanged": 5,
+    "runtime_gd_files": 77,
+    "pck_bytes_note": "First complete worktree check; subsequent post-prune PCK was re-exported after removing an unreferenced legacy shader."
+  },
+  "empty_directory": {
+    "status": "passed",
+    "from_cleanup_commit": "deef79765e5be57cc716800c3962fc391e65145c",
+    "source_file_count": 3578,
+    "source_bytes": 963656924,
+    "all_file_hashes_match": true,
+    "initial_git_and_godot_cache_absent": true,
+    "fresh_import_and_startup": "passed",
+    "focused_checks": {
+      "enemy_campaign": 447,
+      "character_campaign": 196,
+      "story_progress": 86,
+      "battle_scale": 538
+    }
+  },
+  "fresh_local_repository_clone": {
+    "status": "passed",
+    "tested_commit": "a83520412cd0ebf930ff2f3cbbc1875042156a52",
+    "project_check": "PROJECT_CHECK_OK",
+    "exit_code": 0,
+    "smoke_scripts": 49,
+    "source_smoke_scripts": 45,
+    "isolated_pck_smoke_scripts": 4,
+    "pck_bytes": 233122008,
+    "pck_checks": {
+      "enemy": 742,
+      "music": 213,
+      "story": 82,
+      "feedback": 184
+    },
+    "clone_initially_clean": true,
+    "object_alternates": false,
+    "source_baseline_object_in_history": false,
+    "post_test_change": "Final documentation and verification record only; first commit will be amended."
+  },
+  "daily_workspace_switch": {
+    "status": "passed",
+    "current_workspace": "My-game",
+    "source_repository_archive": "../My-game-source-archive-20261031",
+    "headless_startup": "passed",
+    "original_user_files_sha_unchanged": 5,
+    "retained_art_audio_files_matched_source_sha": 1224,
+    "new_history_commits": 1,
+    "remote_configured": false
+  },
+  "limits": [
+    "Automated checks do not establish subjective audio or visual acceptance.",
+    "The existing user data was inspected read-only; source files were not deleted or rewritten.",
+    "No new remote repository or GitHub write is authorized in this phase."
+  ],
+  "post_prune_pack": {
+    "status": "passed",
+    "pck_bytes": 233122008,
+    "resource_entries": 1403,
+    "legacy_runtime_or_development_entries": 0,
+    "pck_checks": {
+      "enemy": 742,
+      "music": 213,
+      "story": 82,
+      "feedback": 184
+    }
+  },
+  "tested_non_document_tree_sha256": "a55a3c6f35552b8cab817412f7ae816e1529db1ccf7f5c9e9c00d1aa211a182c",
+  "non_document_tree_definition": "SHA256 of sorted path + NUL + git blob SHA lines, excluding Markdown and docs/verification records."
+}

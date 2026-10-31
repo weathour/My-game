@@ -1,0 +1,655 @@
+{
+  "version": 1,
+  "id": "E04",
+  "review_status": "accepted_for_export",
+  "review_notes": "Reviewed masterv2 corrects top-door clipping of rejected v1. All20 actual connected pose silhouettes retain asymmetrical broken bronze-bound red door, thin exposed legs and ghost arm. Rows idle/shuffle/arm swipe/shield brace/hit. Attack frame2 arm extends right beyond door while shield opens. Body includes door shield dominant silhouette241px. Ground uses visible feet, scale fixed across20poses. No rectangular grid cuts.",
+  "prompts": [
+    "prompts/actions-v1.txt",
+    "prompts/master-v1.txt",
+    "prompts/master-v2.txt"
+  ],
+  "canvas": {
+    "size": [
+      192,
+      192
+    ],
+    "anchor": [
+      96,
+      176
+    ],
+    "body_height_px": 80
+  },
+  "sources": {
+    "actions": {
+      "path": "source/actions-v1.png",
+      "size": [
+        1312,
+        1199
+      ],
+      "sha256": "f726a3c0ec9afb62d02a917a9d6a819450eb57a541cd18f78cb3a767579489c9",
+      "standing_body_height": 241
+    }
+  },
+  "portrait": {
+    "path": "source/master-v2.png",
+    "size": [
+      1230,
+      1278
+    ],
+    "sha256": "f97082abf429a52ab26920df5ce29d2ce036dc37b2c3ac57b9a9ae3a66e5560b"
+  },
+  "poses": [
+    {
+      "id": "p00",
+      "source": "actions",
+      "anchor_source": [
+        190,
+        250
+      ],
+      "components": [
+        {
+          "bbox": [
+            86,
+            9,
+            300,
+            250
+          ],
+          "area": 30733
+        }
+      ]
+    },
+    {
+      "id": "p01",
+      "source": "actions",
+      "anchor_source": [
+        520,
+        251
+      ],
+      "components": [
+        {
+          "bbox": [
+            418,
+            9,
+            624,
+            251
+          ],
+          "area": 30592
+        },
+        {
+          "bbox": [
+            434,
+            106,
+            435,
+            107
+          ],
+          "area": 1
+        },
+        {
+          "bbox": [
+            435,
+            107,
+            436,
+            108
+          ],
+          "area": 1
+        },
+        {
+          "bbox": [
+            416,
+            134,
+            419,
+            138
+          ],
+          "area": 7
+        }
+      ]
+    },
+    {
+      "id": "p02",
+      "source": "actions",
+      "anchor_source": [
+        850,
+        253
+      ],
+      "components": [
+        {
+          "bbox": [
+            737,
+            9,
+            958,
+            253
+          ],
+          "area": 32215
+        },
+        {
+          "bbox": [
+            764,
+            91,
+            765,
+            92
+          ],
+          "area": 1
+        },
+        {
+          "bbox": [
+            754,
+            176,
+            755,
+            178
+          ],
+          "area": 2
+        },
+        {
+          "bbox": [
+            754,
+            179,
+            755,
+            181
+          ],
+          "area": 2
+        },
+        {
+          "bbox": [
+            753,
+            181,
+            754,
+            182
+          ],
+          "area": 1
+        },
+        {
+          "bbox": [
+            752,
+            182,
+            753,
+            183
+          ],
+          "area": 1
+        },
+        {
+          "bbox": [
+            764,
+            196,
+            766,
+            199
+          ],
+          "area": 4
+        }
+      ]
+    },
+    {
+      "id": "p03",
+      "source": "actions",
+      "anchor_source": [
+        1180,
+        255
+      ],
+      "components": [
+        {
+          "bbox": [
+            1072,
+            9,
+            1288,
+            255
+          ],
+          "area": 33134
+        },
+        {
+          "bbox": [
+            1132,
+            61,
+            1133,
+            62
+          ],
+          "area": 1
+        },
+        {
+          "bbox": [
+            1101,
+            197,
+            1102,
+            198
+          ],
+          "area": 1
+        }
+      ]
+    },
+    {
+      "id": "p04",
+      "source": "actions",
+      "anchor_source": [
+        190,
+        498
+      ],
+      "components": [
+        {
+          "bbox": [
+            87,
+            253,
+            312,
+            498
+          ],
+          "area": 32447
+        }
+      ]
+    },
+    {
+      "id": "p05",
+      "source": "actions",
+      "anchor_source": [
+        520,
+        493
+      ],
+      "components": [
+        {
+          "bbox": [
+            414,
+            256,
+            631,
+            493
+          ],
+          "area": 31533
+        }
+      ]
+    },
+    {
+      "id": "p06",
+      "source": "actions",
+      "anchor_source": [
+        850,
+        496
+      ],
+      "components": [
+        {
+          "bbox": [
+            731,
+            255,
+            958,
+            496
+          ],
+          "area": 32754
+        },
+        {
+          "bbox": [
+            750,
+            439,
+            751,
+            440
+          ],
+          "area": 1
+        }
+      ]
+    },
+    {
+      "id": "p07",
+      "source": "actions",
+      "anchor_source": [
+        1180,
+        496
+      ],
+      "components": [
+        {
+          "bbox": [
+            1066,
+            255,
+            1289,
+            496
+          ],
+          "area": 31843
+        },
+        {
+          "bbox": [
+            1074,
+            390,
+            1075,
+            391
+          ],
+          "area": 1
+        },
+        {
+          "bbox": [
+            1094,
+            426,
+            1095,
+            427
+          ],
+          "area": 1
+        }
+      ]
+    },
+    {
+      "id": "p08",
+      "source": "actions",
+      "anchor_source": [
+        190,
+        710
+      ],
+      "components": [
+        {
+          "bbox": [
+            76,
+            491,
+            325,
+            710
+          ],
+          "area": 32771
+        }
+      ]
+    },
+    {
+      "id": "p09",
+      "source": "actions",
+      "anchor_source": [
+        520,
+        719
+      ],
+      "components": [
+        {
+          "bbox": [
+            380,
+            493,
+            672,
+            719
+          ],
+          "area": 37701
+        }
+      ]
+    },
+    {
+      "id": "p10",
+      "source": "actions",
+      "anchor_source": [
+        850,
+        719
+      ],
+      "components": [
+        {
+          "bbox": [
+            723,
+            494,
+            1049,
+            719
+          ],
+          "area": 37047
+        }
+      ]
+    },
+    {
+      "id": "p11",
+      "source": "actions",
+      "anchor_source": [
+        1180,
+        718
+      ],
+      "components": [
+        {
+          "bbox": [
+            1081,
+            493,
+            1306,
+            718
+          ],
+          "area": 30656
+        }
+      ]
+    },
+    {
+      "id": "p12",
+      "source": "actions",
+      "anchor_source": [
+        190,
+        946
+      ],
+      "components": [
+        {
+          "bbox": [
+            48,
+            724,
+            335,
+            946
+          ],
+          "area": 36084
+        },
+        {
+          "bbox": [
+            74,
+            805,
+            75,
+            807
+          ],
+          "area": 2
+        }
+      ]
+    },
+    {
+      "id": "p13",
+      "source": "actions",
+      "anchor_source": [
+        520,
+        940
+      ],
+      "components": [
+        {
+          "bbox": [
+            413,
+            724,
+            669,
+            940
+          ],
+          "area": 34852
+        },
+        {
+          "bbox": [
+            471,
+            783,
+            472,
+            784
+          ],
+          "area": 1
+        }
+      ]
+    },
+    {
+      "id": "p14",
+      "source": "actions",
+      "anchor_source": [
+        850,
+        946
+      ],
+      "components": [
+        {
+          "bbox": [
+            720,
+            724,
+            1017,
+            946
+          ],
+          "area": 38765
+        }
+      ]
+    },
+    {
+      "id": "p15",
+      "source": "actions",
+      "anchor_source": [
+        1180,
+        955
+      ],
+      "components": [
+        {
+          "bbox": [
+            1068,
+            727,
+            1294,
+            955
+          ],
+          "area": 31329
+        }
+      ]
+    },
+    {
+      "id": "p16",
+      "source": "actions",
+      "anchor_source": [
+        190,
+        1187
+      ],
+      "components": [
+        {
+          "bbox": [
+            27,
+            970,
+            329,
+            1187
+          ],
+          "area": 32522
+        }
+      ]
+    },
+    {
+      "id": "p17",
+      "source": "actions",
+      "anchor_source": [
+        520,
+        1187
+      ],
+      "components": [
+        {
+          "bbox": [
+            361,
+            946,
+            634,
+            1187
+          ],
+          "area": 33377
+        },
+        {
+          "bbox": [
+            494,
+            976,
+            495,
+            977
+          ],
+          "area": 1
+        }
+      ]
+    },
+    {
+      "id": "p18",
+      "source": "actions",
+      "anchor_source": [
+        850,
+        1185
+      ],
+      "components": [
+        {
+          "bbox": [
+            717,
+            961,
+            989,
+            1185
+          ],
+          "area": 34667
+        },
+        {
+          "bbox": [
+            760,
+            1032,
+            761,
+            1033
+          ],
+          "area": 1
+        },
+        {
+          "bbox": [
+            814,
+            1138,
+            815,
+            1139
+          ],
+          "area": 1
+        }
+      ]
+    },
+    {
+      "id": "p19",
+      "source": "actions",
+      "anchor_source": [
+        1180,
+        1185
+      ],
+      "components": [
+        {
+          "bbox": [
+            1077,
+            954,
+            1295,
+            1185
+          ],
+          "area": 30870
+        }
+      ]
+    }
+  ],
+  "clips": {
+    "idle": {
+      "poses": [
+        "p00",
+        "p01",
+        "p02",
+        "p03"
+      ],
+      "fps": 6,
+      "windup_frame": 0,
+      "contact_frame": 2
+    },
+    "move": {
+      "poses": [
+        "p04",
+        "p05",
+        "p06",
+        "p07"
+      ],
+      "fps": 8,
+      "windup_frame": 0,
+      "contact_frame": 2
+    },
+    "attack": {
+      "poses": [
+        "p08",
+        "p09",
+        "p10",
+        "p11"
+      ],
+      "fps": 10,
+      "windup_frame": 0,
+      "contact_frame": 2
+    },
+    "special": {
+      "poses": [
+        "p12",
+        "p13",
+        "p14",
+        "p15"
+      ],
+      "fps": 10,
+      "windup_frame": 0,
+      "contact_frame": 2
+    },
+    "hit": {
+      "poses": [
+        "p16",
+        "p17",
+        "p18",
+        "p19"
+      ],
+      "fps": 10,
+      "windup_frame": 0,
+      "contact_frame": 2
+    }
+  },
+  "action_clips": {
+    "swipe": "attack"
+  },
+  "faces_left": false
+}

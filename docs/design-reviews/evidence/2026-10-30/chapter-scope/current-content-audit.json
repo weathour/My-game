@@ -1,0 +1,246 @@
+{
+  "status": "read_only_current_content_audit",
+  "commit": "2cab57289f98ff350b713764d2c36ce6016fba32",
+  "date": "2026-10-30",
+  "source_sha256": {
+    "assets/data/chronicle/route.json": "4e376813035df760e049c562af24637f02a7c56f060aab436d5b52fc5b0b7afe",
+    "assets/data/chronicle/story_events.json": "7bd4fc2c83919f264dc90e9602e8dd4429a021ea9ec36bb64a2f22d64708c4ed",
+    "assets/data/chronicle/characters.json": "17ecce6580fb29a5d069a3dc7ca0d391f216293306caf06994cd8c8d4c703066",
+    "scripts/ui/chronicle/chronicle_portraits.gd": "f54aacec820ebd91223768963f8fa1a1148928a819b3f3d159a2c2ff95eb9d5e",
+    "scripts/ui/chronicle/chronicle_story_view.gd": "0d5ef2df799cbf3a881a689a9e612fe9be33137c7b1cce78e031a963aa397743",
+    "scripts/content/stage_catalog.gd": "d3695df6564900ab450dbaadc999c11be91bfffdacf59c3245b87edf5e94fbd1"
+  },
+  "counting": {
+    "text_characters": "sum(len(line.text)): includes Chinese characters, punctuation and any other display characters; excludes speaker names, IDs, metadata, profiles and UI",
+    "han_characters": "U+4E00 through U+9FFF characters only, provided separately",
+    "events": "formal top-level entries in story_events.json; missing route events remain summaries",
+    "battle_nodes": "route kind in battle, elite, boss"
+  },
+  "totals": {
+    "events": 12,
+    "lines": 140,
+    "text_characters": 2502,
+    "han_characters": 2146
+  },
+  "events": [
+    {
+      "id": "S01",
+      "lines": 5,
+      "text_characters": 77,
+      "han_characters": 67,
+      "speakers": [
+        "",
+        "JIA"
+      ],
+      "background": "res://assets/story/chronicle/road.png"
+    },
+    {
+      "id": "S02",
+      "lines": 18,
+      "text_characters": 279,
+      "han_characters": 235,
+      "speakers": [
+        "",
+        "F11",
+        "JIA"
+      ],
+      "background": "res://assets/story/chronicle/road.png"
+    },
+    {
+      "id": "S03",
+      "lines": 21,
+      "text_characters": 332,
+      "han_characters": 279,
+      "speakers": [
+        "",
+        "F03",
+        "F04",
+        "F11",
+        "JIA",
+        "N18"
+      ],
+      "background": "res://assets/story/chronicle/market.png"
+    },
+    {
+      "id": "S04",
+      "lines": 21,
+      "text_characters": 380,
+      "han_characters": 329,
+      "speakers": [
+        "",
+        "F07",
+        "F08",
+        "JIA",
+        "M07"
+      ],
+      "background": "res://assets/story/chronicle/camp.png"
+    },
+    {
+      "id": "S05",
+      "lines": 11,
+      "text_characters": 222,
+      "han_characters": 194,
+      "speakers": [
+        "",
+        "F09",
+        "F11",
+        "JIA"
+      ],
+      "background": "res://assets/story/chronicle/camp.png"
+    },
+    {
+      "id": "F01",
+      "lines": 2,
+      "text_characters": 41,
+      "han_characters": 36,
+      "speakers": [
+        ""
+      ],
+      "background": "res://assets/story/chronicle/camp.png"
+    },
+    {
+      "id": "B06",
+      "lines": 10,
+      "text_characters": 165,
+      "han_characters": 142,
+      "speakers": [
+        "",
+        "F05",
+        "F11",
+        "JIA"
+      ],
+      "background": "res://assets/story/chronicle/camp.png"
+    },
+    {
+      "id": "S06",
+      "lines": 17,
+      "text_characters": 332,
+      "han_characters": 284,
+      "speakers": [
+        "",
+        "F02",
+        "F06",
+        "F10",
+        "F11",
+        "JIA",
+        "M08"
+      ],
+      "background": "res://assets/story/chronicle/market.png"
+    },
+    {
+      "id": "B15",
+      "lines": 9,
+      "text_characters": 164,
+      "han_characters": 140,
+      "speakers": [
+        "",
+        "JIA",
+        "M06",
+        "N09",
+        "N11",
+        "N15"
+      ],
+      "background": "res://assets/story/chronicle/camp.png"
+    },
+    {
+      "id": "B16",
+      "lines": 8,
+      "text_characters": 144,
+      "han_characters": 125,
+      "speakers": [
+        "",
+        "JIA",
+        "M05",
+        "N12"
+      ],
+      "background": "res://assets/story/chronicle/camp.png"
+    },
+    {
+      "id": "B17",
+      "lines": 9,
+      "text_characters": 176,
+      "han_characters": 152,
+      "speakers": [
+        "",
+        "JIA",
+        "M02",
+        "M03",
+        "M04"
+      ],
+      "background": "res://assets/story/chronicle/camp.png"
+    },
+    {
+      "id": "S14",
+      "lines": 9,
+      "text_characters": 190,
+      "han_characters": 163,
+      "speakers": [
+        "",
+        "F01",
+        "JIA",
+        "M01"
+      ],
+      "background": "res://assets/story/chronicle/camp.png"
+    }
+  ],
+  "summary_only_events": [
+    {
+      "id": "F02",
+      "name": "官署旧泉",
+      "kind": "spring"
+    },
+    {
+      "id": "S07",
+      "name": "吕玲绮正式登场",
+      "kind": "event"
+    },
+    {
+      "id": "S08",
+      "name": "吕家风波",
+      "kind": "event"
+    },
+    {
+      "id": "S09",
+      "name": "事后对立",
+      "kind": "event"
+    },
+    {
+      "id": "S10",
+      "name": "鬼曹军临城",
+      "kind": "event"
+    },
+    {
+      "id": "S11",
+      "name": "暂时协力守城",
+      "kind": "event"
+    },
+    {
+      "id": "S12",
+      "name": "城门重开",
+      "kind": "event"
+    },
+    {
+      "id": "F03",
+      "name": "城门古泉",
+      "kind": "spring"
+    },
+    {
+      "id": "S13",
+      "name": "救城之后，旧仇仍在",
+      "kind": "event"
+    },
+    {
+      "id": "F04",
+      "name": "楼前整备",
+      "kind": "spring"
+    }
+  ],
+  "route_nodes": 36,
+  "battle_nodes": 18,
+  "roster_identities": 38,
+  "formal_story_backgrounds": [
+    "res://assets/story/chronicle/camp.png",
+    "res://assets/story/chronicle/market.png",
+    "res://assets/story/chronicle/road.png"
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "scope": "One B01 battle_road 0–16 s segment and a bounded synthetic priority schedule, not all possible overlaps or auditory review. PCM per-channel sample checks; mono SFX conservatively copied at full gain to both channels.",
+  "music_path": "assets/music/chronicle/battle_road.ogg",
+  "music_runtime": "bgm_player default .7 × active_gain 1 × duck_gain 1; B01 routes battle_road; no per-hit duck.",
+  "segment_seconds": 16,
+  "sample_rate": 48000,
+  "music_raw_peak": 0.3399829566478729,
+  "music_raw_peak_dbfs": -9.370857072055243,
+  "music_raw_rms_dbfs": -24.81737326995883,
+  "music_default_peak_dbfs": -12.468896271770106,
+  "music_default_rms_dbfs": -27.915412469673694,
+  "voice_gain_before": 0.14,
+  "voice_gain_after": 0.25,
+  "event_gain_cap": 1,
+  "relative_gain_change_db": 5.036239459875991,
+  "clip_levels": [
+    {
+      "clip": "hit_light_01.wav",
+      "raw_peak": 0.398101806640625,
+      "old_default_hit_peak_dbfs": -28.819289184047694,
+      "new_default_hit_peak_dbfs": -23.783049724171704
+    },
+    {
+      "clip": "hit_heavy_01.wav",
+      "raw_peak": 0.281829833984375,
+      "old_default_hit_peak_dbfs": -31.819432857247282,
+      "new_default_hit_peak_dbfs": -26.783193397371292
+    },
+    {
+      "clip": "guard_01.wav",
+      "raw_peak": 0.398101806640625,
+      "old_default_hit_peak_dbfs": -28.819289184047694,
+      "new_default_hit_peak_dbfs": -23.783049724171704
+    }
+  ],
+  "priority_schedule": "At 2.00s and 9.00s six common categories start together. At 3.92s another six common voices start and are cut at 4.00s by Boss cue priority. Three different Boss clips (the whole existing pool) start at 4.00s at .6 gain; a priority-4 player guard starts at 4.01s at .25 gain. Six-common starts include actual category gains .55/1/1/.7/1/.65.",
+  "scenarios": [
+    {
+      "settings": "defaults",
+      "sfx_volume": 0.65,
+      "music_volume": 0.7,
+      "sample_peak": 0.2828241802111734,
+      "sample_peak_dbfs": -10.969669260772747,
+      "rms_dbfs": -27.661160362296926,
+      "samples_at_or_above_full_scale": 0
+    },
+    {
+      "settings": "maximum_settings",
+      "sfx_volume": 1,
+      "music_volume": 1,
+      "sample_peak": 0.42964355007279664,
+      "sample_peak_dbfs": -7.337834071416768,
+      "rms_dbfs": -24.52381089348004,
+      "samples_at_or_above_full_scale": 0
+    }
+  ],
+  "headroom_boundary": "At maximum controls six coherent common sample peaks + measured B01 bed peak <= .938, after capping common event gain at 1.0. Existing three-Boss worst independent peak-sum + full BGM is not universally bounded below 1; no global guarantee is made and Boss gain is unchanged."
+}

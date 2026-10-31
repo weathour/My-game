@@ -1,0 +1,217 @@
+{
+  "status": "PASS",
+  "baseline_commit": "5fa3ed236df0eaf3dd72915eba5681819efe6aef",
+  "engine": "/home/weathour/.local/bin/godot-4.6.2",
+  "engine_version": "Godot 4.6.2.stable.official.71f334935",
+  "engine_sha256": "5a806b2b385279d9607094d33e946ed828e9606df4cb46d258ca27468dc5c1c9",
+  "evidence_date": "2026-10-30",
+  "scope": "Melee cast eligibility now matches the existing per-target radius used by the actual impact shape.",
+  "production_changed_file": "scripts/battle/battle_session.gd",
+  "test_file": "scripts/tests/chronicle_melee_reach_smoke.gd",
+  "rules": {
+    "changed": "SWEEP/THRUST candidate filtering uses existing in_shape(... circle=true), followed by nearest(... reach=INF). Each enemy contributes only its own radius; existing center-distance preference and previous-target stickiness are retained.",
+    "unchanged": [
+      "actual impact shape",
+      "PROJECTILE/NOVA/HEAL/MANA/WARD launch behavior",
+      "attack speed",
+      "damage budgets",
+      "MP cost",
+      "cooldown duration",
+      "J/K input semantics",
+      "experience and reward rules",
+      "map geometry"
+    ]
+  },
+  "behavior_change": {
+    "is_simulation_change": true,
+    "description": "Melee can start and deal its existing damage when a target body first overlaps the existing shape. Encounters can consequently finish earlier and later spawn/kill totals can differ. The old whole-frame parity evidence describes only the pre-reach-fix feedback implementation. It is not a parity claim for this fix.",
+    "timing": [
+      {
+        "mode": "stationary",
+        "head_first_damage_seconds": 13.5666666666669,
+        "feedback_before_reach_fix_first_damage_seconds": 13.5666666666669,
+        "fixed_first_damage_seconds": 13.3333333333336,
+        "improvement_seconds": 0.23333333333329875,
+        "head_and_feedback_timing_match": true,
+        "fixed_damage_matches_first_legal_shape_tick": true,
+        "old_center_gate_seconds": 13.5666666666669,
+        "first_shape_tick_seconds": 13.3333333333336,
+        "target_radius_world_units": 13,
+        "old_unresponsive_edge_band_world_units": 13,
+        "fixed_tick_us": {
+          "frames": 1200,
+          "max": 394,
+          "p50": 127,
+          "p95": 181,
+          "peak_enemy_count": 10
+        },
+        "head_tick_us": {
+          "frames": 1200,
+          "max": 467,
+          "p50": 138,
+          "p95": 188,
+          "peak_enemy_count": 10
+        }
+      },
+      {
+        "mode": "approach",
+        "head_first_damage_seconds": 3.36666666666666,
+        "feedback_before_reach_fix_first_damage_seconds": 3.36666666666666,
+        "fixed_first_damage_seconds": 3.31666666666666,
+        "improvement_seconds": 0.04999999999999982,
+        "head_and_feedback_timing_match": true,
+        "fixed_damage_matches_first_legal_shape_tick": true,
+        "old_center_gate_seconds": 3.36666666666666,
+        "first_shape_tick_seconds": 3.31666666666666,
+        "target_radius_world_units": 13,
+        "old_unresponsive_edge_band_world_units": 13,
+        "fixed_tick_us": {
+          "frames": 1200,
+          "max": 277,
+          "p50": 81,
+          "p95": 112,
+          "peak_enemy_count": 6
+        },
+        "head_tick_us": {
+          "frames": 1200,
+          "max": 1840,
+          "p50": 81,
+          "p95": 120,
+          "peak_enemy_count": 6
+        }
+      },
+      {
+        "mode": "early_J_then_approach",
+        "head_first_damage_seconds": 3.36666666666666,
+        "feedback_before_reach_fix_first_damage_seconds": 3.36666666666666,
+        "fixed_first_damage_seconds": 3.31666666666666,
+        "improvement_seconds": 0.04999999999999982,
+        "head_and_feedback_timing_match": true,
+        "fixed_damage_matches_first_legal_shape_tick": true,
+        "old_center_gate_seconds": 3.36666666666666,
+        "first_shape_tick_seconds": 3.31666666666666,
+        "target_radius_world_units": 13,
+        "old_unresponsive_edge_band_world_units": 13,
+        "fixed_tick_us": {
+          "frames": 1200,
+          "max": 280,
+          "p50": 81,
+          "p95": 113,
+          "peak_enemy_count": 6
+        },
+        "head_tick_us": {
+          "frames": 1200,
+          "max": 543,
+          "p50": 80,
+          "p95": 113,
+          "peak_enemy_count": 6
+        }
+      }
+    ],
+    "existing_combat_smoke_real_runs": [
+      {
+        "stage": "B01",
+        "outcome": "victory",
+        "elapsed_seconds": 61.8,
+        "kills": 46,
+        "level": 4
+      },
+      {
+        "stage": "B02",
+        "outcome": "victory",
+        "elapsed_seconds": 61.3,
+        "kills": 45,
+        "level": 5
+      }
+    ]
+  },
+  "coverage": {
+    "authored_melee_skills": 56,
+    "basic": 24,
+    "manual": 18,
+    "support": 14,
+    "additional_variant": "JIA long_spear replacement basic",
+    "boundary_cases": [
+      "just inside",
+      "exact touch",
+      "just outside",
+      "radius not counted twice",
+      "mixed small/large radii",
+      "invalid previous target",
+      "existing previous-target hysteresis",
+      "dead/untargetable exclusions",
+      "long spear",
+      "background melee source",
+      "manual payment and cooldown",
+      "existing temper reach bonus",
+      "projectile center gate retained",
+      "targetless NOVA retained"
+    ]
+  },
+  "smokes": [
+    {
+      "script": "scripts/tests/chronicle_melee_reach_smoke.gd",
+      "checks": 154,
+      "failures": 0,
+      "status": "PASS",
+      "exit_code": 0,
+      "log": "logs/chronicle_melee_reach_smoke.log",
+      "source_log": "/tmp/my-game-melee-reach.pYrsrh/melee-reach.log",
+      "expected_fault_injections": 0
+    },
+    {
+      "script": "scripts/tests/chronicle_combat_feedback_events_smoke.gd",
+      "checks": 59,
+      "failures": 0,
+      "status": "PASS",
+      "exit_code": 0,
+      "log": "logs/chronicle_combat_feedback_events_smoke.log",
+      "source_log": "/tmp/my-game-reach-chronicle_combat_feedback_events_smoke.O0WcI3/chronicle_combat_feedback_events_smoke.log",
+      "expected_fault_injections": 0
+    },
+    {
+      "script": "scripts/tests/chronicle_character_mechanics_smoke.gd",
+      "checks": 126,
+      "failures": 0,
+      "status": "PASS",
+      "exit_code": 0,
+      "log": "logs/chronicle_character_mechanics_smoke.log",
+      "source_log": "/tmp/my-game-reach-chronicle_character_mechanics_smoke.uUztJq/chronicle_character_mechanics_smoke.log",
+      "expected_fault_injections": 0
+    },
+    {
+      "script": "scripts/tests/chronicle_combat_smoke.gd",
+      "checks": 67,
+      "failures": 0,
+      "status": "PASS",
+      "exit_code": 0,
+      "log": "logs/chronicle_combat_smoke.log",
+      "source_log": "/tmp/my-game-reach-chronicle_combat_smoke.s2TxR6/chronicle_combat_smoke.log",
+      "expected_fault_injections": 2
+    },
+    {
+      "script": "scripts/tests/chronicle_boss_flow_smoke.gd",
+      "checks": 140,
+      "failures": 0,
+      "status": "PASS",
+      "exit_code": 0,
+      "log": "logs/chronicle_boss_flow_smoke.log",
+      "source_log": "/tmp/my-game-reach-chronicle_boss_flow_smoke.AToggL/chronicle_boss_flow_smoke.log",
+      "expected_fault_injections": 0
+    }
+  ],
+  "smoke_checks": 546,
+  "smoke_failures": 0,
+  "timing_measurements": "timing-measurements.json",
+  "input_manifest": "input-sha256.json",
+  "harness": "harness/timing.gd",
+  "reproduction_helper": "harness/reproduce.py",
+  "commands": "commands.json",
+  "temporary_projects": "/tmp/my-game-hit-timing-20uv9a9n",
+  "limitations": [
+    "Simulation tick profiling excludes rendering, sound and full UI. Presentation/audio timing has separate evidence.",
+    "No full-project suite, import pass or Graphify update was run by this worker.",
+    "The initial invalid F11-only timing fixture and mistaken N16-healer support fixture were corrected before accepted results. Their error logs are not included as passing evidence.",
+    "Baseline core code is obtained from Git only into /tmp for reproduction; no historical implementation is embedded in the repository runtime."
+  ]
+}

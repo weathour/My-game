@@ -1,0 +1,592 @@
+{
+  "version": 1,
+  "id": "L04",
+  "review_status": "accepted_for_export",
+  "review_notes": "Inspected20 low six-leg coffin carrier poses. Long horizontal wood coffin and huge ropes match master, distinct from tall L02 rack. Alternate leg plants, foreclaw RIGHT strike, restrained attached-lid opening special. Full standing body170source pixels;120px body chosen to keep long coffin/claw extensions safely inside256frame. Actual 4-connected alpha regions reviewed and detached parts retained. One source body scale across all actions, manual chassis/hip and ground anchors. No blind grid crop or per-pose normalization.",
+  "prompts": [
+    "portrait-prompt.txt",
+    "sheet-prompt.txt"
+  ],
+  "canvas": {
+    "size": [
+      256,
+      256
+    ],
+    "anchor": [
+      128,
+      224
+    ],
+    "body_height_px": 120
+  },
+  "sources": {
+    "sheet": {
+      "path": "source/sheet-v1.png",
+      "size": [
+        1536,
+        1024
+      ],
+      "sha256": "4748bdd4b80e3070ea9fad84e487e04396efd2d7fad78fe49466aef078da473f",
+      "standing_body_height": 170.0
+    }
+  },
+  "portrait": {
+    "path": "source/portrait-v1.png",
+    "size": [
+      1536,
+      1024
+    ],
+    "sha256": "65da84115da84a09d96a774954f6e0edd8e4700c928ca182a1b1008f36646419"
+  },
+  "poses": [
+    {
+      "id": "idle_1",
+      "source": "sheet",
+      "anchor_source": [
+        205,
+        196
+      ],
+      "components": [
+        {
+          "bbox": [
+            52,
+            25,
+            355,
+            196
+          ],
+          "area": 33676
+        }
+      ]
+    },
+    {
+      "id": "idle_2",
+      "source": "sheet",
+      "anchor_source": [
+        585,
+        194
+      ],
+      "components": [
+        {
+          "bbox": [
+            423,
+            26,
+            729,
+            194
+          ],
+          "area": 33311
+        }
+      ]
+    },
+    {
+      "id": "idle_3",
+      "source": "sheet",
+      "anchor_source": [
+        965,
+        194
+      ],
+      "components": [
+        {
+          "bbox": [
+            797,
+            23,
+            1107,
+            194
+          ],
+          "area": 34563
+        }
+      ]
+    },
+    {
+      "id": "idle_4",
+      "source": "sheet",
+      "anchor_source": [
+        1340,
+        193
+      ],
+      "components": [
+        {
+          "bbox": [
+            1174,
+            26,
+            1480,
+            193
+          ],
+          "area": 33503
+        },
+        {
+          "bbox": [
+            1349,
+            156,
+            1351,
+            158
+          ],
+          "area": 4
+        }
+      ]
+    },
+    {
+      "id": "move_1",
+      "source": "sheet",
+      "anchor_source": [
+        205,
+        400
+      ],
+      "components": [
+        {
+          "bbox": [
+            54,
+            225,
+            359,
+            400
+          ],
+          "area": 34528
+        },
+        {
+          "bbox": [
+            227,
+            357,
+            228,
+            358
+          ],
+          "area": 1
+        }
+      ]
+    },
+    {
+      "id": "move_2",
+      "source": "sheet",
+      "anchor_source": [
+        585,
+        403
+      ],
+      "components": [
+        {
+          "bbox": [
+            420,
+            223,
+            729,
+            403
+          ],
+          "area": 34401
+        }
+      ]
+    },
+    {
+      "id": "move_3",
+      "source": "sheet",
+      "anchor_source": [
+        965,
+        408
+      ],
+      "components": [
+        {
+          "bbox": [
+            800,
+            227,
+            1113,
+            408
+          ],
+          "area": 34409
+        }
+      ]
+    },
+    {
+      "id": "move_4",
+      "source": "sheet",
+      "anchor_source": [
+        1340,
+        397
+      ],
+      "components": [
+        {
+          "bbox": [
+            1178,
+            224,
+            1487,
+            397
+          ],
+          "area": 33859
+        }
+      ]
+    },
+    {
+      "id": "attack_1",
+      "source": "sheet",
+      "anchor_source": [
+        205,
+        604
+      ],
+      "components": [
+        {
+          "bbox": [
+            48,
+            435,
+            356,
+            604
+          ],
+          "area": 32626
+        },
+        {
+          "bbox": [
+            58,
+            531,
+            59,
+            534
+          ],
+          "area": 3
+        }
+      ]
+    },
+    {
+      "id": "attack_2",
+      "source": "sheet",
+      "anchor_source": [
+        585,
+        602
+      ],
+      "components": [
+        {
+          "bbox": [
+            428,
+            437,
+            762,
+            602
+          ],
+          "area": 33017
+        },
+        {
+          "bbox": [
+            745,
+            530,
+            749,
+            535
+          ],
+          "area": 11
+        }
+      ]
+    },
+    {
+      "id": "attack_3",
+      "source": "sheet",
+      "anchor_source": [
+        965,
+        608
+      ],
+      "components": [
+        {
+          "bbox": [
+            795,
+            427,
+            1138,
+            608
+          ],
+          "area": 34653
+        }
+      ]
+    },
+    {
+      "id": "attack_4",
+      "source": "sheet",
+      "anchor_source": [
+        1340,
+        604
+      ],
+      "components": [
+        {
+          "bbox": [
+            1178,
+            426,
+            1487,
+            604
+          ],
+          "area": 34675
+        }
+      ]
+    },
+    {
+      "id": "special_1",
+      "source": "sheet",
+      "anchor_source": [
+        205,
+        807
+      ],
+      "components": [
+        {
+          "bbox": [
+            50,
+            638,
+            353,
+            807
+          ],
+          "area": 33099
+        }
+      ]
+    },
+    {
+      "id": "special_2",
+      "source": "sheet",
+      "anchor_source": [
+        585,
+        807
+      ],
+      "components": [
+        {
+          "bbox": [
+            419,
+            638,
+            738,
+            807
+          ],
+          "area": 37852
+        }
+      ]
+    },
+    {
+      "id": "special_3",
+      "source": "sheet",
+      "anchor_source": [
+        965,
+        807
+      ],
+      "components": [
+        {
+          "bbox": [
+            796,
+            630,
+            1107,
+            807
+          ],
+          "area": 38473
+        },
+        {
+          "bbox": [
+            992,
+            771,
+            996,
+            776
+          ],
+          "area": 11
+        }
+      ]
+    },
+    {
+      "id": "special_4",
+      "source": "sheet",
+      "anchor_source": [
+        1340,
+        806
+      ],
+      "components": [
+        {
+          "bbox": [
+            1175,
+            645,
+            1485,
+            806
+          ],
+          "area": 33216
+        },
+        {
+          "bbox": [
+            1370,
+            773,
+            1371,
+            774
+          ],
+          "area": 1
+        }
+      ]
+    },
+    {
+      "id": "hit_1",
+      "source": "sheet",
+      "anchor_source": [
+        205,
+        1002
+      ],
+      "components": [
+        {
+          "bbox": [
+            45,
+            841,
+            358,
+            1002
+          ],
+          "area": 32922
+        },
+        {
+          "bbox": [
+            239,
+            866,
+            241,
+            868
+          ],
+          "area": 3
+        },
+        {
+          "bbox": [
+            241,
+            868,
+            243,
+            870
+          ],
+          "area": 3
+        },
+        {
+          "bbox": [
+            357,
+            930,
+            358,
+            932
+          ],
+          "area": 2
+        }
+      ]
+    },
+    {
+      "id": "hit_2",
+      "source": "sheet",
+      "anchor_source": [
+        585,
+        999
+      ],
+      "components": [
+        {
+          "bbox": [
+            424,
+            854,
+            749,
+            999
+          ],
+          "area": 31333
+        },
+        {
+          "bbox": [
+            632,
+            868,
+            634,
+            870
+          ],
+          "area": 3
+        },
+        {
+          "bbox": [
+            419,
+            879,
+            428,
+            896
+          ],
+          "area": 60
+        },
+        {
+          "bbox": [
+            730,
+            927,
+            736,
+            942
+          ],
+          "area": 56
+        }
+      ]
+    },
+    {
+      "id": "hit_3",
+      "source": "sheet",
+      "anchor_source": [
+        965,
+        1006
+      ],
+      "components": [
+        {
+          "bbox": [
+            800,
+            840,
+            1107,
+            1006
+          ],
+          "area": 31495
+        }
+      ]
+    },
+    {
+      "id": "hit_4",
+      "source": "sheet",
+      "anchor_source": [
+        1340,
+        1004
+      ],
+      "components": [
+        {
+          "bbox": [
+            1177,
+            837,
+            1487,
+            1004
+          ],
+          "area": 33252
+        }
+      ]
+    }
+  ],
+  "clips": {
+    "idle": {
+      "poses": [
+        "idle_1",
+        "idle_2",
+        "idle_3",
+        "idle_4"
+      ],
+      "fps": 6,
+      "contact_frame": 2,
+      "windup_frame": 0
+    },
+    "move": {
+      "poses": [
+        "move_1",
+        "move_2",
+        "move_3",
+        "move_4"
+      ],
+      "fps": 9,
+      "contact_frame": 2,
+      "windup_frame": 0
+    },
+    "attack": {
+      "poses": [
+        "attack_1",
+        "attack_2",
+        "attack_3",
+        "attack_4"
+      ],
+      "fps": 10,
+      "contact_frame": 2,
+      "windup_frame": 0
+    },
+    "special": {
+      "poses": [
+        "special_1",
+        "special_2",
+        "special_3",
+        "special_4"
+      ],
+      "fps": 10,
+      "contact_frame": 2,
+      "windup_frame": 0
+    },
+    "hit": {
+      "poses": [
+        "hit_1",
+        "hit_2",
+        "hit_3",
+        "hit_4"
+      ],
+      "fps": 10,
+      "contact_frame": 2,
+      "windup_frame": 0
+    }
+  },
+  "action_clips": {
+    "summon": "special",
+    "swipe": "attack"
+  },
+  "faces_left": false
+}

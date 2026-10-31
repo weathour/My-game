@@ -1,0 +1,36 @@
+{
+  "version": 1,
+  "id": "E11",
+  "generator": "built-in ImageGen",
+  "identity_master": "source/master-v1.png",
+  "references": [
+    {
+      "path": "design/jia-combat-20261027/source/dao-v1.png",
+      "sha256": "dc7720a430f1b03f61b87292b845f170f15a5a487c4a9810070fb27ad546099e",
+      "role": "pixel_drawing_and_animation_style_only"
+    }
+  ],
+  "source_versions": [
+    {
+      "path": "design/baimen-enemies-20261028/characters/E11/source/actions-v1.png",
+      "sha256": "9249ff36c56949ce3a76ffa558570b91b5321f2f48576c6ae3a1f7e1d16b153a",
+      "selected": true,
+      "role": "pose_source",
+      "decision": "selected"
+    },
+    {
+      "path": "design/baimen-enemies-20261028/characters/E11/source/master-v1.png",
+      "sha256": "9f6c33cb27b97e950c73833a5198be3cdc398411eed6d4e2f2a64a316f02d347",
+      "selected": true,
+      "role": "identity_master",
+      "decision": "selected"
+    }
+  ],
+  "prompts": [
+    "prompts/actions-v1.txt",
+    "prompts/master-v1.txt"
+  ],
+  "review_notes": "Viewed full six-legged coffin porter master and20poses. Long horizontal wood coffin, rope lashings, six short legs and low corpse mask remain distinct from circular urn and stone turtle. Rows idle/multi-leg crawl/long foreclaw swipe/coffin opening/hit. Summon contact frame2 fully raises attached coffin lid, interior empty and no eggs or summoned monsters baked in. Actual connected components include entire lid, lashings, claws. Standing coffin-body189px, same scale across all poses;384x256 canvas preserves long rectangular shape and extended claw. Foot support anchors follow central trunk above ground.",
+  "export": "scripts/tools/import_baimen_enemy_art.lua",
+  "pixels_policy": "ImageGen-authored; Pillow/scipy read-only component measurements and QA; Aseprite extraction/registration/palette/export."
+}

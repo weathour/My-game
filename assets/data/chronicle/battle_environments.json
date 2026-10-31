@@ -1,0 +1,94 @@
+{
+  "version": 1,
+  "geometry": "presentation_only",
+  "fit": "cover",
+  "extension": "mirror_full_ground",
+  "environments": {
+    "road": {
+      "texture": "res://assets/maps/baimen-feedback-20261030/road-v2.png",
+      "tint": "d9d9d9",
+      "flat_traversable": true
+    },
+    "camp": {
+      "texture": "res://assets/maps/baimen-feedback-20261030/camp.png",
+      "tint": "d9d9d9",
+      "flat_traversable": true
+    },
+    "shrine": {
+      "texture": "res://assets/maps/baimen-feedback-20261030/shrine.png",
+      "tint": "d9d9d9",
+      "flat_traversable": true
+    },
+    "river": {
+      "texture": "res://assets/maps/baimen-feedback-20261030/river.png",
+      "tint": "d9d9d9",
+      "flat_traversable": true
+    },
+    "city": {
+      "texture": "res://assets/maps/baimen-feedback-20261030/city-v2.png",
+      "tint": "d9d9d9",
+      "flat_traversable": true
+    },
+    "whitegate": {
+      "texture": "res://assets/maps/baimen-feedback-20261030/whitegate.png",
+      "tint": "d9d9d9",
+      "flat_traversable": true
+    }
+  },
+  "stages": {
+    "B01": {
+      "environment": "road"
+    },
+    "B04": {
+      "environment": "road"
+    },
+    "B02": {
+      "environment": "city"
+    },
+    "B05": {
+      "environment": "city"
+    },
+    "B11": {
+      "environment": "city"
+    },
+    "B12": {
+      "environment": "city"
+    },
+    "B03": {
+      "environment": "camp"
+    },
+    "B15": {
+      "environment": "camp"
+    },
+    "B06": {
+      "environment": "shrine"
+    },
+    "B07": {
+      "environment": "city"
+    },
+    "B09": {
+      "environment": "city"
+    },
+    "B10": {
+      "environment": "city"
+    },
+    "B08": {
+      "environment": "river"
+    },
+    "B14": {
+      "environment": "river"
+    },
+    "B16": {
+      "environment": "river"
+    },
+    "B13": {
+      "environment": "whitegate"
+    },
+    "B17": {
+      "environment": "whitegate"
+    },
+    "B18": {
+      "environment": "whitegate"
+    }
+  }
+}

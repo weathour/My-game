@@ -1,0 +1,606 @@
+{
+  "version": 1,
+  "id": "B18_human",
+  "review_status": "accepted_for_export",
+  "review_notes": "Agent source/identity/anatomy review and component/foot calibration completed; user aesthetic acceptance remains pending. Parts copied by alpha connectivity; small isolated alpha specks <3px omitted. Body scale fixed across poses, no posture height stretching.",
+  "canvas": {
+    "size": [
+      640,
+      512
+    ],
+    "anchor": [
+      288,
+      480
+    ],
+    "body_height_px": 224
+  },
+  "faces_left": false,
+  "sources": {
+    "combat": {
+      "path": "source/actions-v1.png",
+      "size": [
+        1416,
+        1111
+      ],
+      "sha256": "0e82344df457ca5ce8977ea6a7f2bb1bcc3495879a22aaf67e70d867e54c0ca3",
+      "standing_body_height": 230
+    }
+  },
+  "portrait": {
+    "path": "source/master-v2.png",
+    "size": [
+      1134,
+      1387
+    ],
+    "sha256": "69b379a6285e4feceadead35c8014e005e9847f116310f27075c4d764f12f4ce"
+  },
+  "poses": [
+    {
+      "id": "p01",
+      "source": "combat",
+      "anchor_source": [
+        165,
+        276
+      ],
+      "components": [
+        {
+          "bbox": [
+            23,
+            3,
+            345,
+            276
+          ],
+          "area": 38031
+        }
+      ],
+      "body_bbox": [
+        23,
+        3,
+        345,
+        276
+      ]
+    },
+    {
+      "id": "p02",
+      "source": "combat",
+      "anchor_source": [
+        530,
+        279
+      ],
+      "components": [
+        {
+          "bbox": [
+            381,
+            4,
+            702,
+            279
+          ],
+          "area": 37322
+        }
+      ],
+      "body_bbox": [
+        381,
+        4,
+        702,
+        279
+      ]
+    },
+    {
+      "id": "p03",
+      "source": "combat",
+      "anchor_source": [
+        895,
+        278
+      ],
+      "components": [
+        {
+          "bbox": [
+            748,
+            4,
+            1067,
+            278
+          ],
+          "area": 38529
+        },
+        {
+          "bbox": [
+            876,
+            53,
+            879,
+            54
+          ],
+          "area": 3
+        },
+        {
+          "bbox": [
+            848,
+            67,
+            851,
+            69
+          ],
+          "area": 4
+        }
+      ],
+      "body_bbox": [
+        748,
+        4,
+        1067,
+        278
+      ]
+    },
+    {
+      "id": "p04",
+      "source": "combat",
+      "anchor_source": [
+        1245,
+        277
+      ],
+      "components": [
+        {
+          "bbox": [
+            1087,
+            5,
+            1404,
+            277
+          ],
+          "area": 38022
+        },
+        {
+          "bbox": [
+            1086,
+            190,
+            1088,
+            192
+          ],
+          "area": 3
+        }
+      ],
+      "body_bbox": [
+        1087,
+        5,
+        1404,
+        277
+      ]
+    },
+    {
+      "id": "p05",
+      "source": "combat",
+      "anchor_source": [
+        215,
+        548
+      ],
+      "components": [
+        {
+          "bbox": [
+            31,
+            284,
+            365,
+            548
+          ],
+          "area": 41216
+        }
+      ],
+      "body_bbox": [
+        31,
+        284,
+        365,
+        548
+      ]
+    },
+    {
+      "id": "p06",
+      "source": "combat",
+      "anchor_source": [
+        522,
+        549
+      ],
+      "components": [
+        {
+          "bbox": [
+            374,
+            289,
+            732,
+            549
+          ],
+          "area": 39223
+        }
+      ],
+      "body_bbox": [
+        374,
+        289,
+        732,
+        549
+      ]
+    },
+    {
+      "id": "p07",
+      "source": "combat",
+      "anchor_source": [
+        914,
+        544
+      ],
+      "components": [
+        {
+          "bbox": [
+            727,
+            287,
+            1096,
+            544
+          ],
+          "area": 38554
+        },
+        {
+          "bbox": [
+            879,
+            360,
+            883,
+            364
+          ],
+          "area": 8
+        }
+      ],
+      "body_bbox": [
+        727,
+        287,
+        1096,
+        544
+      ]
+    },
+    {
+      "id": "p08",
+      "source": "combat",
+      "anchor_source": [
+        1281,
+        552
+      ],
+      "components": [
+        {
+          "bbox": [
+            1090,
+            287,
+            1416,
+            552
+          ],
+          "area": 38434
+        },
+        {
+          "bbox": [
+            1155,
+            455,
+            1158,
+            457
+          ],
+          "area": 5
+        },
+        {
+          "bbox": [
+            1248,
+            497,
+            1250,
+            499
+          ],
+          "area": 3
+        }
+      ],
+      "body_bbox": [
+        1090,
+        287,
+        1416,
+        552
+      ]
+    },
+    {
+      "id": "p09",
+      "source": "combat",
+      "anchor_source": [
+        185,
+        820
+      ],
+      "components": [
+        {
+          "bbox": [
+            2,
+            553,
+            327,
+            820
+          ],
+          "area": 42685
+        }
+      ],
+      "body_bbox": [
+        2,
+        553,
+        327,
+        820
+      ]
+    },
+    {
+      "id": "p10",
+      "source": "combat",
+      "anchor_source": [
+        520,
+        815
+      ],
+      "components": [
+        {
+          "bbox": [
+            372,
+            570,
+            795,
+            815
+          ],
+          "area": 37628
+        },
+        {
+          "bbox": [
+            452,
+            647,
+            457,
+            649
+          ],
+          "area": 7
+        },
+        {
+          "bbox": [
+            379,
+            679,
+            381,
+            681
+          ],
+          "area": 3
+        },
+        {
+          "bbox": [
+            433,
+            744,
+            437,
+            747
+          ],
+          "area": 7
+        }
+      ],
+      "body_bbox": [
+        372,
+        570,
+        795,
+        815
+      ]
+    },
+    {
+      "id": "p11",
+      "source": "combat",
+      "anchor_source": [
+        904,
+        833
+      ],
+      "components": [
+        {
+          "bbox": [
+            746,
+            536,
+            1054,
+            833
+          ],
+          "area": 35176
+        }
+      ],
+      "body_bbox": [
+        746,
+        536,
+        1054,
+        833
+      ]
+    },
+    {
+      "id": "p12",
+      "source": "combat",
+      "anchor_source": [
+        1246,
+        832
+      ],
+      "components": [
+        {
+          "bbox": [
+            1090,
+            580,
+            1415,
+            832
+          ],
+          "area": 35675
+        }
+      ],
+      "body_bbox": [
+        1090,
+        580,
+        1415,
+        832
+      ]
+    },
+    {
+      "id": "p13",
+      "source": "combat",
+      "anchor_source": [
+        157,
+        1083
+      ],
+      "components": [
+        {
+          "bbox": [
+            19,
+            844,
+            377,
+            1083
+          ],
+          "area": 40987
+        }
+      ],
+      "body_bbox": [
+        19,
+        844,
+        377,
+        1083
+      ]
+    },
+    {
+      "id": "p14",
+      "source": "combat",
+      "anchor_source": [
+        540,
+        1088
+      ],
+      "components": [
+        {
+          "bbox": [
+            389,
+            883,
+            739,
+            1088
+          ],
+          "area": 31134
+        }
+      ],
+      "body_bbox": [
+        389,
+        883,
+        739,
+        1088
+      ]
+    },
+    {
+      "id": "p15",
+      "source": "combat",
+      "anchor_source": [
+        890,
+        1102
+      ],
+      "components": [
+        {
+          "bbox": [
+            710,
+            893,
+            1067,
+            1102
+          ],
+          "area": 29491
+        }
+      ],
+      "body_bbox": [
+        710,
+        893,
+        1067,
+        1102
+      ]
+    },
+    {
+      "id": "p16",
+      "source": "combat",
+      "anchor_source": [
+        1225,
+        1101
+      ],
+      "components": [
+        {
+          "bbox": [
+            1026,
+            974,
+            1410,
+            1101
+          ],
+          "area": 25977
+        },
+        {
+          "bbox": [
+            1279,
+            993,
+            1281,
+            995
+          ],
+          "area": 3
+        }
+      ],
+      "body_bbox": [
+        1026,
+        974,
+        1410,
+        1101
+      ]
+    }
+  ],
+  "clips": {
+    "idle": {
+      "poses": [
+        "p01",
+        "p02",
+        "p03",
+        "p04"
+      ],
+      "fps": 6,
+      "contact_frame": 1,
+      "windup_frame": 0
+    },
+    "move": {
+      "poses": [
+        "p05",
+        "p06",
+        "p07"
+      ],
+      "fps": 10,
+      "contact_frame": 1,
+      "windup_frame": 0
+    },
+    "attack": {
+      "poses": [
+        "p09",
+        "p10",
+        "p11",
+        "p12"
+      ],
+      "fps": 10,
+      "contact_frame": 1,
+      "windup_frame": 0
+    },
+    "special": {
+      "poses": [
+        "p09",
+        "p11",
+        "p12"
+      ],
+      "fps": 9,
+      "contact_frame": 1,
+      "windup_frame": 0
+    },
+    "hit": {
+      "poses": [
+        "p13",
+        "p14"
+      ],
+      "fps": 10,
+      "contact_frame": 0,
+      "windup_frame": 0
+    },
+    "death": {
+      "poses": [
+        "p15",
+        "p16"
+      ],
+      "fps": 7,
+      "contact_frame": 0,
+      "windup_frame": 0
+    }
+  },
+  "action_clips": {
+    "halberd_sweep": "attack",
+    "halberd_charge": "special",
+    "halberd_fall": "special",
+    "halberd_finish": "attack",
+    "slam": "attack",
+    "charge": "special",
+    "marker": "special"
+  },
+  "head_rect_px": [
+    480,
+    220,
+    300,
+    350
+  ]
+}

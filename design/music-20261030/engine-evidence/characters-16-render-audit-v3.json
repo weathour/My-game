@@ -1,0 +1,702 @@
+{
+  "ready_for_master": true,
+  "listening_review": false,
+  "effective_renderer": "my-game-multisample-3",
+  "cue_count": 16,
+  "rerendered_affected_cues": [
+    "story_comedy",
+    "story_warmth",
+    "story_aftermath",
+    "story_discovery",
+    "story_banter",
+    "story_remembrance",
+    "character_emma",
+    "character_emma_wary"
+  ],
+  "reused_unchanged_v2_cues": [
+    "story_travel",
+    "story_tension",
+    "story_confrontation",
+    "story_intrigue",
+    "story_resolve",
+    "story_solitude",
+    "character_lingqi",
+    "character_lingqi_aftermath"
+  ],
+  "note_count": 4568,
+  "track_count": 62,
+  "total_audio_seconds": 1386.4644791666667,
+  "manifest_file_sha256": "8e7f155e7d00fd654705742f87df0ad6ac8d670f09edc719d9f1f3001dd176e0",
+  "checks": [
+    "musical input matches current score",
+    "all stems and mixes 48k stereo float32 finite",
+    "SHA256 verified",
+    "integer sample period and tail lengths",
+    "float64 stem sum rounded to float32 equals mix exactly",
+    "zero adaptation errors/zero clipping",
+    "v3 source microphone selections separately reported",
+    "unaffected v2 audio byte-preserved and guard preflight confirms no selection"
+  ],
+  "cues": [
+    {
+      "id": "character_emma",
+      "frames": 4800000,
+      "seconds": 100.0,
+      "tracks": 4,
+      "notes": 428,
+      "loop": true,
+      "audit_events": 0,
+      "source_selection_info_count": 2,
+      "mono_energy_loss_db": -0.6812049381659263,
+      "v2_mono_energy_loss_db": -0.6819087542925646,
+      "peak_dbfs": -35.21694576601592,
+      "over_0dbfs_samples": 0,
+      "mix_sha256": "5f4d1749797792e5465a896cb6f32d8e6db5344cb709b29d5d7de5ce5c70fe4a",
+      "reused_unchanged_v2": false,
+      "track_mono_checks": [
+        {
+          "name": "Emma / D-A-C-E identity",
+          "instrument": "clarinet",
+          "mono_energy_loss_db": -0.6918802529330266,
+          "selected_sources": 0
+        },
+        {
+          "name": "unfamiliar constellations",
+          "instrument": "harp",
+          "mono_energy_loss_db": -0.5854550633997959,
+          "selected_sources": 2
+        },
+        {
+          "name": "unsettled inner line",
+          "instrument": "viola",
+          "mono_energy_loss_db": -0.8877399718908405,
+          "selected_sources": 0
+        },
+        {
+          "name": "own direction",
+          "instrument": "cello",
+          "mono_energy_loss_db": -0.5012383551320847,
+          "selected_sources": 0
+        }
+      ]
+    },
+    {
+      "id": "character_emma_wary",
+      "frames": 4547368,
+      "seconds": 94.73683333333334,
+      "tracks": 4,
+      "notes": 286,
+      "loop": true,
+      "audit_events": 0,
+      "source_selection_info_count": 2,
+      "mono_energy_loss_db": -0.704328317948736,
+      "v2_mono_energy_loss_db": -0.7057349618634207,
+      "peak_dbfs": -37.28787596380059,
+      "over_0dbfs_samples": 0,
+      "mix_sha256": "eeed0d6dc1b5781e6816673ab737c0b9cdbe85e4a7bc201d603a56a03de990d7",
+      "reused_unchanged_v2": false,
+      "track_mono_checks": [
+        {
+          "name": "Emma / D-A-C-E identity",
+          "instrument": "clarinet",
+          "mono_energy_loss_db": -0.7036116751094175,
+          "selected_sources": 0
+        },
+        {
+          "name": "unfamiliar constellations",
+          "instrument": "harp",
+          "mono_energy_loss_db": -0.53084487501715,
+          "selected_sources": 2
+        },
+        {
+          "name": "unsettled inner line",
+          "instrument": "viola",
+          "mono_energy_loss_db": -0.9780331139415289,
+          "selected_sources": 0
+        },
+        {
+          "name": "own direction",
+          "instrument": "cello",
+          "mono_energy_loss_db": -0.7690105432820842,
+          "selected_sources": 0
+        }
+      ]
+    },
+    {
+      "id": "character_lingqi",
+      "frames": 5236364,
+      "seconds": 109.09091666666667,
+      "tracks": 5,
+      "notes": 402,
+      "loop": true,
+      "audit_events": 0,
+      "source_selection_info_count": 0,
+      "mono_energy_loss_db": -0.5975368057268453,
+      "v2_mono_energy_loss_db": -0.5975368057268453,
+      "peak_dbfs": -38.67893206669948,
+      "over_0dbfs_samples": 0,
+      "mix_sha256": "8eb72e943c13f1322a70330b2280bb3c754ff93a53a5e146da190a28630a49a5",
+      "reused_unchanged_v2": true,
+      "track_mono_checks": [
+        {
+          "name": "personal direction",
+          "instrument": "oboe",
+          "mono_energy_loss_db": -0.5906342075865424,
+          "selected_sources": 0
+        },
+        {
+          "name": "public resolve",
+          "instrument": "horn",
+          "mono_energy_loss_db": -0.584716821545264,
+          "selected_sources": 0
+        },
+        {
+          "name": "violin movement under control",
+          "instrument": "pizzicato",
+          "mono_energy_loss_db": -2.962098938704841,
+          "selected_sources": 0
+        },
+        {
+          "name": "own ground",
+          "instrument": "cello",
+          "mono_energy_loss_db": -0.5917431862597561,
+          "selected_sources": 0
+        },
+        {
+          "name": "orchestral bass drum / sparse punctuation",
+          "instrument": "drums",
+          "mono_energy_loss_db": -0.019232137719929748,
+          "selected_sources": 0
+        }
+      ]
+    },
+    {
+      "id": "character_lingqi_aftermath",
+      "frames": 5760000,
+      "seconds": 120.0,
+      "tracks": 3,
+      "notes": 156,
+      "loop": true,
+      "audit_events": 0,
+      "source_selection_info_count": 0,
+      "mono_energy_loss_db": -0.8113396759976678,
+      "v2_mono_energy_loss_db": -0.8113396759976678,
+      "peak_dbfs": -42.53403459614763,
+      "over_0dbfs_samples": 0,
+      "mix_sha256": "5d7c0bdddd22c8f41af9bfd1f7282d629aa80113a5e8f965f13000d16fefab52",
+      "reused_unchanged_v2": true,
+      "track_mono_checks": [
+        {
+          "name": "agency survives / augmented theme",
+          "instrument": "oboe",
+          "mono_energy_loss_db": -0.6386383020697621,
+          "selected_sources": 0
+        },
+        {
+          "name": "unfilled space",
+          "instrument": "piano",
+          "mono_energy_loss_db": -1.2477173591483457,
+          "selected_sources": 0
+        },
+        {
+          "name": "weight",
+          "instrument": "cello",
+          "mono_energy_loss_db": -0.5335490255830941,
+          "selected_sources": 0
+        }
+      ]
+    },
+    {
+      "id": "story_aftermath",
+      "frames": 4065882,
+      "seconds": 84.705875,
+      "tracks": 3,
+      "notes": 106,
+      "loop": true,
+      "audit_events": 0,
+      "source_selection_info_count": 2,
+      "mono_energy_loss_db": -0.9553564182971619,
+      "v2_mono_energy_loss_db": -1.1382979664168473,
+      "peak_dbfs": -39.963974596985814,
+      "over_0dbfs_samples": 0,
+      "mix_sha256": "f8f6f205563a29d2d70762719a758e1f6e4fea16f5e71769d4cd261089f2f0a5",
+      "reused_unchanged_v2": false,
+      "track_mono_checks": [
+        {
+          "name": "remaining words",
+          "instrument": "oboe",
+          "mono_energy_loss_db": -0.6524733187317734,
+          "selected_sources": 0
+        },
+        {
+          "name": "spaced aftermath",
+          "instrument": "piano",
+          "mono_energy_loss_db": -1.1255621088998193,
+          "selected_sources": 2
+        },
+        {
+          "name": "weight without melodrama",
+          "instrument": "cello",
+          "mono_energy_loss_db": -0.8950567973474021,
+          "selected_sources": 0
+        }
+      ]
+    },
+    {
+      "id": "story_banter",
+      "frames": 2962286,
+      "seconds": 61.71429166666667,
+      "tracks": 4,
+      "notes": 353,
+      "loop": true,
+      "audit_events": 0,
+      "source_selection_info_count": 3,
+      "mono_energy_loss_db": -1.2895657686440964,
+      "v2_mono_energy_loss_db": -1.5764833648836782,
+      "peak_dbfs": -34.204969504919475,
+      "over_0dbfs_samples": 0,
+      "mix_sha256": "6502ab91367efbdbf860ca5fffa33964650ab661b67567341ead0416462080b2",
+      "reused_unchanged_v2": false,
+      "track_mono_checks": [
+        {
+          "name": "first speaker",
+          "instrument": "clarinet",
+          "mono_energy_loss_db": -1.365700281510114,
+          "selected_sources": 0
+        },
+        {
+          "name": "western flute / second speaker",
+          "instrument": "flute",
+          "mono_energy_loss_db": -0.8940449346007271,
+          "selected_sources": 3
+        },
+        {
+          "name": "dry violin three-beat pulse",
+          "instrument": "pizzicato",
+          "mono_energy_loss_db": -2.6495466045994838,
+          "selected_sources": 0
+        },
+        {
+          "name": "shared ground",
+          "instrument": "contrabass",
+          "mono_energy_loss_db": -0.9182403081337591,
+          "selected_sources": 0
+        }
+      ]
+    },
+    {
+      "id": "story_comedy",
+      "frames": 3905085,
+      "seconds": 81.3559375,
+      "tracks": 5,
+      "notes": 498,
+      "loop": true,
+      "audit_events": 0,
+      "source_selection_info_count": 4,
+      "mono_energy_loss_db": -0.9188635722035658,
+      "v2_mono_energy_loss_db": -1.2195086769202141,
+      "peak_dbfs": -29.945530983812347,
+      "over_0dbfs_samples": 0,
+      "mix_sha256": "3d9f93508905556aeb64c843c90d9735b386d75ff33e7d5dea0b4583572d575d",
+      "reused_unchanged_v2": false,
+      "track_mono_checks": [
+        {
+          "name": "dry question",
+          "instrument": "bassoon",
+          "mono_energy_loss_db": -0.992689912236861,
+          "selected_sources": 0
+        },
+        {
+          "name": "short answers",
+          "instrument": "pizzicato",
+          "mono_energy_loss_db": -1.6120636410286604,
+          "selected_sources": 2
+        },
+        {
+          "name": "lean syncopated chords",
+          "instrument": "piano",
+          "mono_energy_loss_db": -0.8249983038798505,
+          "selected_sources": 2
+        },
+        {
+          "name": "comic feet",
+          "instrument": "contrabass",
+          "mono_energy_loss_db": -0.8305608700542275,
+          "selected_sources": 0
+        },
+        {
+          "name": "quiet recorded snare taps",
+          "instrument": "drums",
+          "mono_energy_loss_db": -0.5769704814829939,
+          "selected_sources": 0
+        }
+      ]
+    },
+    {
+      "id": "story_confrontation",
+      "frames": 4388571,
+      "seconds": 91.4285625,
+      "tracks": 4,
+      "notes": 237,
+      "loop": true,
+      "audit_events": 0,
+      "source_selection_info_count": 0,
+      "mono_energy_loss_db": -0.8612121334918456,
+      "v2_mono_energy_loss_db": -0.8612121334918456,
+      "peak_dbfs": -31.500337414058958,
+      "over_0dbfs_samples": 0,
+      "mix_sha256": "18d3155a7f2d36c1974cfad9b187aadc56115ce91f9ddeac611206da89608308",
+      "reused_unchanged_v2": true,
+      "track_mono_checks": [
+        {
+          "name": "formal statement",
+          "instrument": "horn",
+          "mono_energy_loss_db": -0.8070456030904644,
+          "selected_sources": 0
+        },
+        {
+          "name": "opposing reply",
+          "instrument": "bassoon",
+          "mono_energy_loss_db": -1.3720301108230968,
+          "selected_sources": 0
+        },
+        {
+          "name": "closed chamber",
+          "instrument": "viola",
+          "mono_energy_loss_db": -1.0546108762906796,
+          "selected_sources": 0
+        },
+        {
+          "name": "ground",
+          "instrument": "cello",
+          "mono_energy_loss_db": -0.3635266703821948,
+          "selected_sources": 0
+        }
+      ]
+    },
+    {
+      "id": "story_discovery",
+      "frames": 3360000,
+      "seconds": 70.0,
+      "tracks": 4,
+      "notes": 228,
+      "loop": true,
+      "audit_events": 0,
+      "source_selection_info_count": 1,
+      "mono_energy_loss_db": -0.7439269666786058,
+      "v2_mono_energy_loss_db": -1.2907846013855329,
+      "peak_dbfs": -41.33063972200776,
+      "over_0dbfs_samples": 0,
+      "mix_sha256": "90f65088e15bce17c8d43f2c25ba829e8260c92a542e84076c12633fd962d8aa",
+      "reused_unchanged_v2": false,
+      "track_mono_checks": [
+        {
+          "name": "first glint",
+          "instrument": "vibraphone",
+          "mono_energy_loss_db": -0.5803311785321623,
+          "selected_sources": 0
+        },
+        {
+          "name": "western flute / horizon",
+          "instrument": "flute",
+          "mono_energy_loss_db": -0.9174365477229625,
+          "selected_sources": 1
+        },
+        {
+          "name": "frame",
+          "instrument": "harp",
+          "mono_energy_loss_db": -0.45779971275337894,
+          "selected_sources": 0
+        },
+        {
+          "name": "ground opens slowly",
+          "instrument": "contrabass",
+          "mono_energy_loss_db": -0.7227826691151704,
+          "selected_sources": 0
+        }
+      ]
+    },
+    {
+      "id": "story_intrigue",
+      "frames": 3534545,
+      "seconds": 73.63635416666666,
+      "tracks": 4,
+      "notes": 311,
+      "loop": true,
+      "audit_events": 0,
+      "source_selection_info_count": 0,
+      "mono_energy_loss_db": -0.8652200768958029,
+      "v2_mono_energy_loss_db": -0.8652200768958029,
+      "peak_dbfs": -39.206828415881944,
+      "over_0dbfs_samples": 0,
+      "mix_sha256": "916595f7ea7d18348a1a345e1201ba97b8de6a95b1b2f9328fa9a9d4962de154",
+      "reused_unchanged_v2": true,
+      "track_mono_checks": [
+        {
+          "name": "unfinished mechanism",
+          "instrument": "harpsichord",
+          "mono_energy_loss_db": -1.2221821747383255,
+          "selected_sources": 0
+        },
+        {
+          "name": "partial information",
+          "instrument": "clarinet",
+          "mono_energy_loss_db": -0.6603189833895875,
+          "selected_sources": 0
+        },
+        {
+          "name": "off-centre shadow",
+          "instrument": "pizzicato",
+          "mono_energy_loss_db": -2.168953767002104,
+          "selected_sources": 0
+        },
+        {
+          "name": "lower inference",
+          "instrument": "bassoon",
+          "mono_energy_loss_db": -1.774583801953373,
+          "selected_sources": 0
+        }
+      ]
+    },
+    {
+      "id": "story_remembrance",
+      "frames": 4887273,
+      "seconds": 101.8181875,
+      "tracks": 3,
+      "notes": 195,
+      "loop": true,
+      "audit_events": 0,
+      "source_selection_info_count": 10,
+      "mono_energy_loss_db": -0.5009884386390706,
+      "v2_mono_energy_loss_db": -3.185294657369344,
+      "peak_dbfs": -37.09597707647996,
+      "over_0dbfs_samples": 0,
+      "mix_sha256": "cbf33b9cb4c2e2ec3d9d2c46cc7f884dd20827c5aaccac62fc07a1c867d7c195",
+      "reused_unchanged_v2": false,
+      "track_mono_checks": [
+        {
+          "name": "recalled contour",
+          "instrument": "piano",
+          "mono_energy_loss_db": -0.40334419601577653,
+          "selected_sources": 10
+        },
+        {
+          "name": "memory becomes a voice",
+          "instrument": "viola",
+          "mono_energy_loss_db": -0.9562182798596099,
+          "selected_sources": 0
+        },
+        {
+          "name": "past beneath present",
+          "instrument": "cello",
+          "mono_energy_loss_db": -0.48376592677766705,
+          "selected_sources": 0
+        }
+      ]
+    },
+    {
+      "id": "story_resolve",
+      "frames": 3686400,
+      "seconds": 76.8,
+      "tracks": 5,
+      "notes": 361,
+      "loop": true,
+      "audit_events": 0,
+      "source_selection_info_count": 0,
+      "mono_energy_loss_db": -0.32388858849368196,
+      "v2_mono_energy_loss_db": -0.32388858849368196,
+      "peak_dbfs": -33.40993751662961,
+      "over_0dbfs_samples": 0,
+      "mix_sha256": "ec37af08af9e2b1cb98060ee94485c645c36565fad4d52c8dd4a6e5f4e10069c",
+      "reused_unchanged_v2": true,
+      "track_mono_checks": [
+        {
+          "name": "decision",
+          "instrument": "trumpet",
+          "mono_energy_loss_db": -0.33055971645274845,
+          "selected_sources": 0
+        },
+        {
+          "name": "following through",
+          "instrument": "viola",
+          "mono_energy_loss_db": -0.4760807307514853,
+          "selected_sources": 0
+        },
+        {
+          "name": "forward quarters",
+          "instrument": "acoustic_guitar",
+          "mono_energy_loss_db": -0.059366994645735145,
+          "selected_sources": 0
+        },
+        {
+          "name": "steady ground",
+          "instrument": "cello",
+          "mono_energy_loss_db": -0.4604416771281813,
+          "selected_sources": 0
+        },
+        {
+          "name": "quiet commitment",
+          "instrument": "drums",
+          "mono_energy_loss_db": -0.03256916222610952,
+          "selected_sources": 0
+        }
+      ]
+    },
+    {
+      "id": "story_solitude",
+      "frames": 4320000,
+      "seconds": 90.0,
+      "tracks": 3,
+      "notes": 103,
+      "loop": true,
+      "audit_events": 0,
+      "source_selection_info_count": 0,
+      "mono_energy_loss_db": -0.03447245027747916,
+      "v2_mono_energy_loss_db": -0.03447245027747916,
+      "peak_dbfs": -38.00723290225443,
+      "over_0dbfs_samples": 0,
+      "mix_sha256": "39e3dea42f709469bde68263559ee6727effdc6aca070fd3c243be31dff9f3c1",
+      "reused_unchanged_v2": true,
+      "track_mono_checks": [
+        {
+          "name": "a line carried alone",
+          "instrument": "acoustic_guitar",
+          "mono_energy_loss_db": -0.017658257919875214,
+          "selected_sources": 0
+        },
+        {
+          "name": "distant reply",
+          "instrument": "oboe",
+          "mono_energy_loss_db": -1.0333502969292345,
+          "selected_sources": 0
+        },
+        {
+          "name": "occasional horizon",
+          "instrument": "contrabass",
+          "mono_energy_loss_db": -0.698463482299126,
+          "selected_sources": 0
+        }
+      ]
+    },
+    {
+      "id": "story_tension",
+      "frames": 3665455,
+      "seconds": 76.36364583333334,
+      "tracks": 4,
+      "notes": 190,
+      "loop": true,
+      "audit_events": 0,
+      "source_selection_info_count": 0,
+      "mono_energy_loss_db": -0.8622457542238403,
+      "v2_mono_energy_loss_db": -0.8622457542238403,
+      "peak_dbfs": -39.86422561297592,
+      "over_0dbfs_samples": 0,
+      "mix_sha256": "70879cb38ec957d964e8824bdc80b99e7438e944be6e62939a3429b81ec5334f",
+      "reused_unchanged_v2": true,
+      "track_mono_checks": [
+        {
+          "name": "three-note warning",
+          "instrument": "oboe",
+          "mono_energy_loss_db": -0.5900591777870277,
+          "selected_sources": 0
+        },
+        {
+          "name": "separated low-mid attacks",
+          "instrument": "piano",
+          "mono_energy_loss_db": -1.1050304972741891,
+          "selected_sources": 0
+        },
+        {
+          "name": "D / C pedal",
+          "instrument": "cello",
+          "mono_energy_loss_db": -0.3391377769039975,
+          "selected_sources": 0
+        },
+        {
+          "name": "held doubt",
+          "instrument": "viola",
+          "mono_energy_loss_db": -1.2131031993995403,
+          "selected_sources": 0
+        }
+      ]
+    },
+    {
+      "id": "story_travel",
+      "frames": 3793171,
+      "seconds": 79.02439583333333,
+      "tracks": 4,
+      "notes": 407,
+      "loop": true,
+      "audit_events": 0,
+      "source_selection_info_count": 0,
+      "mono_energy_loss_db": -0.4586881383017522,
+      "v2_mono_energy_loss_db": -0.4586881383017522,
+      "peak_dbfs": -36.42267736347604,
+      "over_0dbfs_samples": 0,
+      "mix_sha256": "abbfd3dde8c4c3abae6955a0063b91d601c95ff11f9bb17ecce4b7717a302101",
+      "reused_unchanged_v2": true,
+      "track_mono_checks": [
+        {
+          "name": "walking conversation",
+          "instrument": "clarinet",
+          "mono_energy_loss_db": -0.5312238928073997,
+          "selected_sources": 0
+        },
+        {
+          "name": "six-eighth footpath",
+          "instrument": "acoustic_guitar",
+          "mono_energy_loss_db": -0.042273777268960464,
+          "selected_sources": 0
+        },
+        {
+          "name": "companion speaks lower",
+          "instrument": "bassoon",
+          "mono_energy_loss_db": -1.5181785317133767,
+          "selected_sources": 0
+        },
+        {
+          "name": "footfalls",
+          "instrument": "contrabass",
+          "mono_energy_loss_db": -0.9691574452095522,
+          "selected_sources": 0
+        }
+      ]
+    },
+    {
+      "id": "story_warmth",
+      "frames": 3637895,
+      "seconds": 75.78947916666667,
+      "tracks": 3,
+      "notes": 307,
+      "loop": true,
+      "audit_events": 0,
+      "source_selection_info_count": 1,
+      "mono_energy_loss_db": -0.5095189407278597,
+      "v2_mono_energy_loss_db": -0.785336729432401,
+      "peak_dbfs": -41.69890825502726,
+      "over_0dbfs_samples": 0,
+      "mix_sha256": "38d952ecbd661b89b716d6aa0d14cb0f58a65ecca8178e448ef7df4a30957100",
+      "reused_unchanged_v2": false,
+      "track_mono_checks": [
+        {
+          "name": "western flute / quiet breath",
+          "instrument": "flute",
+          "mono_energy_loss_db": -1.0877594706675162,
+          "selected_sources": 1
+        },
+        {
+          "name": "three-beat shared seat",
+          "instrument": "acoustic_guitar",
+          "mono_energy_loss_db": -0.053288311543024096,
+          "selected_sources": 0
+        },
+        {
+          "name": "warm low replies",
+          "instrument": "cello",
+          "mono_energy_loss_db": -0.5623596663043905,
+          "selected_sources": 0
+        }
+      ]
+    }
+  ]
+}

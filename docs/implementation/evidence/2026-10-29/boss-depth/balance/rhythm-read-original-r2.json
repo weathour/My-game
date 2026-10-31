@@ -1,0 +1,3445 @@
+{
+  "boundary": "Reproducible simulated checkpoint branches; no human balance acceptance; no injected owned characters, levels or resources.",
+  "reports": [
+    {
+      "build": "route_original",
+      "committed": true,
+      "driver_decisions": [
+        {
+          "from": "(1600.0, 685.0012)",
+          "goal": "(1600.0, 534.5012)",
+          "risk": 0.0,
+          "seconds": 1.0,
+          "speed": 215.0,
+          "visible_deadline": 1.5,
+          "warnings": [
+            {
+              "action_id": "slam",
+              "action_serial": 1,
+              "attack_step": 0,
+              "damage": 60.66,
+              "direction": "(0.0, 1.0)",
+              "gap_angle": 1.57079637050629,
+              "gap_width": 1.2,
+              "half_width": 34.0,
+              "inner_radius": 0.0,
+              "length": 240.0,
+              "move_id": "halberd_sweep",
+              "origin": "(1600.0, 600.0)",
+              "owner_id": 1,
+              "phase": "tell",
+              "radius": 300.0,
+              "remaining": 1.5,
+              "shape": "sector",
+              "spread": 2.5,
+              "total": 1.5,
+              "visual_id": "B18_human"
+            }
+          ]
+        },
+        {
+          "from": "(1600.0, 541.6687)",
+          "goal": "(1683.613, 416.5325)",
+          "risk": 0.0,
+          "seconds": 4.43333333333332,
+          "speed": 215.0,
+          "visible_deadline": 1.5,
+          "warnings": [
+            {
+              "action_id": "charge",
+              "action_serial": 2,
+              "attack_step": 1,
+              "damage": 69.759,
+              "direction": "(0.0, -1.0)",
+              "gap_angle": -1.57079637050629,
+              "gap_width": 1.2,
+              "half_width": 48.0,
+              "inner_radius": 0.0,
+              "length": 566.0,
+              "move_id": "halberd_charge",
+              "origin": "(1600.0, 600.0)",
+              "owner_id": 1,
+              "phase": "tell",
+              "radius": 650.0,
+              "remaining": 1.5,
+              "shape": "line",
+              "spread": 1.7,
+              "total": 1.5,
+              "visual_id": "B18_human"
+            }
+          ]
+        },
+        {
+          "from": "(1679.632, 422.4915)",
+          "goal": "(1679.632, 422.4915)",
+          "risk": 0.0,
+          "seconds": 5.94999999999998,
+          "speed": 215.0,
+          "visible_deadline": 0.65,
+          "warnings": [
+            {
+              "action_id": "charge",
+              "action_serial": 2,
+              "attack_step": 1,
+              "damage": 69.759,
+              "direction": "(0.0, -1.0)",
+              "gap_angle": -1.57079637050629,
+              "gap_width": 1.2,
+              "half_width": 48.0,
+              "inner_radius": 0.0,
+              "length": 566.0,
+              "move_id": "halberd_charge",
+              "origin": "(1600.0, 600.0)",
+              "owner_id": 1,
+              "phase": "active",
+              "radius": 650.0,
+              "remaining": 0.65,
+              "shape": "line",
+              "spread": 1.7,
+              "total": 0.65,
+              "visual_id": "B18_human"
+            }
+          ]
+        },
+        {
+          "from": "(1614.154, 103.05)",
+          "goal": "(1398.139, 65.0)",
+          "risk": 0.0,
+          "seconds": 8.71666666666668,
+          "speed": 215.0,
+          "visible_deadline": 1.55,
+          "warnings": [
+            {
+              "action_id": "marker",
+              "action_serial": 3,
+              "attack_step": 2,
+              "damage": 66.726,
+              "direction": "(0.200802, 0.979632)",
+              "gap_angle": 1.36861956119537,
+              "gap_width": 1.2,
+              "half_width": 34.0,
+              "inner_radius": 0.0,
+              "length": 240.0,
+              "move_id": "halberd_fall",
+              "origin": "(1614.154, 103.05)",
+              "owner_id": 1,
+              "phase": "tell",
+              "radius": 175.0,
+              "remaining": 1.55,
+              "shape": "marker",
+              "spread": 1.7,
+              "total": 1.55,
+              "visual_id": "B18_human"
+            }
+          ]
+        },
+        {
+          "from": "(1537.231, 65.0)",
+          "goal": "(1658.853, 65.0)",
+          "risk": 0.0,
+          "seconds": 12.5000000000002,
+          "speed": 215.0,
+          "visible_deadline": 1.7,
+          "warnings": [
+            {
+              "action_id": "slam",
+              "action_serial": 4,
+              "attack_step": 3,
+              "damage": 72.792,
+              "direction": "(-0.896613, 0.442815)",
+              "gap_angle": 2.68285703659058,
+              "gap_width": 1.2,
+              "half_width": 34.0,
+              "inner_radius": 0.0,
+              "length": 240.0,
+              "move_id": "halberd_finish",
+              "origin": "(1600.0, 34.0)",
+              "owner_id": 1,
+              "phase": "tell",
+              "radius": 350.0,
+              "remaining": 1.7,
+              "shape": "sector",
+              "spread": 2.8,
+              "total": 1.7,
+              "visual_id": "B18_human"
+            }
+          ]
+        },
+        {
+          "from": "(1651.899, 65.0)",
+          "goal": "(1545.479, 65.0)",
+          "risk": 0.0,
+          "seconds": 17.5333333333336,
+          "speed": 215.0,
+          "visible_deadline": 1.5,
+          "warnings": [
+            {
+              "action_id": "slam",
+              "action_serial": 5,
+              "attack_step": 4,
+              "damage": 60.66,
+              "direction": "(0.858509, 0.512799)",
+              "gap_angle": 0.538441777229309,
+              "gap_width": 1.2,
+              "half_width": 34.0,
+              "inner_radius": 0.0,
+              "length": 240.0,
+              "move_id": "halberd_sweep",
+              "origin": "(1600.0, 34.0)",
+              "owner_id": 1,
+              "phase": "tell",
+              "radius": 300.0,
+              "remaining": 1.5,
+              "shape": "sector",
+              "spread": 2.5,
+              "total": 1.5,
+              "visual_id": "B18_human"
+            }
+          ]
+        },
+        {
+          "from": "(1551.565, 65.0)",
+          "goal": "(1676.701, 65.0)",
+          "risk": 0.0,
+          "seconds": 20.9666666666668,
+          "speed": 215.0,
+          "visible_deadline": 1.5,
+          "warnings": [
+            {
+              "action_id": "charge",
+              "action_serial": 6,
+              "attack_step": 5,
+              "damage": 69.759,
+              "direction": "(-0.842261, 0.53907)",
+              "gap_angle": 2.57226014137268,
+              "gap_width": 1.2,
+              "half_width": 48.0,
+              "inner_radius": 0.0,
+              "length": 650.0,
+              "move_id": "halberd_charge",
+              "origin": "(1600.0, 34.0)",
+              "owner_id": 1,
+              "phase": "tell",
+              "radius": 650.0,
+              "remaining": 1.5,
+              "shape": "line",
+              "spread": 1.7,
+              "total": 1.5,
+              "visual_id": "B18_human"
+            }
+          ]
+        },
+        {
+          "from": "(1669.816, 65.0)",
+          "goal": "(1669.816, 65.0)",
+          "risk": 0.0,
+          "seconds": 22.4833333333333,
+          "speed": 215.0,
+          "visible_deadline": 0.65,
+          "warnings": [
+            {
+              "action_id": "charge",
+              "action_serial": 6,
+              "attack_step": 5,
+              "damage": 69.759,
+              "direction": "(-0.842261, 0.53907)",
+              "gap_angle": 2.57226014137268,
+              "gap_width": 1.2,
+              "half_width": 48.0,
+              "inner_radius": 0.0,
+              "length": 650.0,
+              "move_id": "halberd_charge",
+              "origin": "(1600.0, 34.0)",
+              "owner_id": 1,
+              "phase": "active",
+              "radius": 650.0,
+              "remaining": 0.65,
+              "shape": "line",
+              "spread": 1.7,
+              "total": 0.65,
+              "visual_id": "B18_human"
+            }
+          ]
+        },
+        {
+          "from": "(1265.637, 274.1313)",
+          "goal": "(1049.622, 363.6075)",
+          "risk": 0.0,
+          "seconds": 25.2499999999998,
+          "speed": 215.0,
+          "visible_deadline": 1.55,
+          "warnings": [
+            {
+              "action_id": "marker",
+              "action_serial": 7,
+              "attack_step": 6,
+              "damage": 66.726,
+              "direction": "(0.888155, -0.459544)",
+              "gap_angle": -0.477481454610825,
+              "gap_width": 1.2,
+              "half_width": 34.0,
+              "inner_radius": 0.0,
+              "length": 240.0,
+              "move_id": "halberd_fall",
+              "origin": "(1265.637, 274.1313)",
+              "owner_id": 1,
+              "phase": "tell",
+              "radius": 175.0,
+              "remaining": 1.55,
+              "shape": "marker",
+              "spread": 1.7,
+              "total": 1.55,
+              "visual_id": "B18_human"
+            }
+          ]
+        },
+        {
+          "from": "(1055.72, 326.1132)",
+          "goal": "(1003.462, 404.3233)",
+          "risk": 0.0,
+          "seconds": 27.8666666666664,
+          "speed": 215.0,
+          "visible_deadline": 1.85,
+          "warnings": [
+            {
+              "action_id": "slam",
+              "action_serial": 8,
+              "attack_step": 0,
+              "damage": 69.759,
+              "direction": "(0.054642, -0.998506)",
+              "gap_angle": -1.51612675189972,
+              "gap_width": 1.2,
+              "half_width": 46.0,
+              "inner_radius": 0.0,
+              "length": 240.0,
+              "move_id": "demon_fourfold",
+              "origin": "(1052.53, 384.3955)",
+              "owner_id": 1,
+              "phase": "tell",
+              "radius": 410.0,
+              "remaining": 1.85,
+              "shape": "sector",
+              "spread": 2.8,
+              "total": 1.85,
+              "visual_id": "B18"
+            }
+          ]
+        },
+        {
+          "from": "(1005.95, 400.599)",
+          "goal": "(1005.95, 400.599)",
+          "risk": 1.0,
+          "seconds": 29.6999999999996,
+          "speed": 215.0,
+          "visible_deadline": 0.1,
+          "warnings": [
+            {
+              "action_id": "slam",
+              "action_serial": 8,
+              "attack_step": 0,
+              "damage": 69.759,
+              "direction": "(0.054642, -0.998506)",
+              "gap_angle": -1.51612675189972,
+              "gap_width": 1.2,
+              "half_width": 46.0,
+              "inner_radius": 0.0,
+              "length": 240.0,
+              "move_id": "demon_fourfold",
+              "origin": "(1052.53, 384.3955)",
+              "owner_id": 1,
+              "phase": "tell",
+              "radius": 410.0,
+              "remaining": 0.0166666666666683,
+              "shape": "sector",
+              "spread": 2.8,
+              "total": 1.85,
+              "visual_id": "B18"
+            }
+          ]
+        },
+        {
+          "from": "(1005.95, 400.599)",
+          "goal": "(1005.95, 400.599)",
+          "risk": 1.0,
+          "seconds": 29.7166666666663,
+          "speed": 215.0,
+          "visible_deadline": 0.1,
+          "warnings": [
+            {
+              "action_id": "slam",
+              "action_serial": 8,
+              "attack_step": 0,
+              "damage": 69.759,
+              "direction": "(0.054642, -0.998506)",
+              "gap_angle": -1.51612675189972,
+              "gap_width": 1.2,
+              "half_width": 46.0,
+              "inner_radius": 0.0,
+              "length": 240.0,
+              "move_id": "demon_fourfold",
+              "origin": "(1052.53, 384.3955)",
+              "owner_id": 1,
+              "phase": "tell",
+              "radius": 410.0,
+              "remaining": 0.00000000000000165839564303383,
+              "shape": "sector",
+              "spread": 2.8,
+              "total": 1.85,
+              "visual_id": "B18"
+            }
+          ]
+        },
+        {
+          "from": "(999.1812, 402.9536)",
+          "goal": "(900.6369, 550.4355)",
+          "risk": 0.0,
+          "seconds": 30.3833333333329,
+          "speed": 215.0,
+          "visible_deadline": 1.75,
+          "warnings": [
+            {
+              "action_id": "charge",
+              "action_serial": 9,
+              "attack_step": 1,
+              "damage": 75.825,
+              "direction": "(-0.944487, 0.32855)",
+              "gap_angle": 2.80682492256165,
+              "gap_width": 1.2,
+              "half_width": 68.0,
+              "inner_radius": 0.0,
+              "length": 940.0,
+              "move_id": "demon_skybreaker",
+              "origin": "(1052.53, 384.3955)",
+              "owner_id": 1,
+              "phase": "tell",
+              "radius": 940.0,
+              "remaining": 1.75,
+              "shape": "line",
+              "spread": 1.7,
+              "total": 1.75,
+              "visual_id": "B18"
+            }
+          ]
+        },
+        {
+          "from": "(903.6232, 545.9663)",
+          "goal": "(903.6232, 545.9663)",
+          "risk": 0.0,
+          "seconds": 32.1499999999995,
+          "speed": 215.0,
+          "visible_deadline": 0.65,
+          "warnings": [
+            {
+              "action_id": "charge",
+              "action_serial": 9,
+              "attack_step": 1,
+              "damage": 75.825,
+              "direction": "(-0.944487, 0.32855)",
+              "gap_angle": 2.80682492256165,
+              "gap_width": 1.2,
+              "half_width": 68.0,
+              "inner_radius": 0.0,
+              "length": 940.0,
+              "move_id": "demon_skybreaker",
+              "origin": "(1052.53, 384.3955)",
+              "owner_id": 1,
+              "phase": "active",
+              "radius": 940.0,
+              "remaining": 0.65,
+              "shape": "line",
+              "spread": 1.7,
+              "total": 0.65,
+              "visual_id": "B18"
+            }
+          ]
+        },
+        {
+          "from": "(685.7415, 589.3898)",
+          "goal": "(617.3289, 657.8024)",
+          "risk": 0.0,
+          "seconds": 33.8333333333327,
+          "speed": 215.0,
+          "visible_deadline": 1.9,
+          "warnings": [
+            {
+              "action_id": "pulse",
+              "action_serial": 10,
+              "attack_step": 2,
+              "damage": 69.759,
+              "direction": "(0.980712, -0.195459)",
+              "gap_angle": 0.703274542093277,
+              "gap_width": 1.75,
+              "half_width": 46.0,
+              "inner_radius": 105.0,
+              "length": 240.0,
+              "move_id": "demon_quake",
+              "origin": "(180.2735, 690.1312)",
+              "owner_id": 1,
+              "phase": "tell",
+              "radius": 520.0,
+              "remaining": 1.9,
+              "shape": "ring_gap",
+              "spread": 1.7,
+              "total": 1.9,
+              "visual_id": "B18"
+            }
+          ]
+        },
+        {
+          "from": "(408.1619, 670.8552)",
+          "goal": "(117.9119, 670.8552)",
+          "risk": 0.0,
+          "seconds": 36.7499999999992,
+          "speed": 215.0,
+          "visible_deadline": 1.9,
+          "warnings": [
+            {
+              "action_id": "marker",
+              "action_serial": 11,
+              "attack_step": 3,
+              "damage": 72.792,
+              "direction": "(0.996442, -0.084284)",
+              "gap_angle": -0.0843841508030891,
+              "gap_width": 1.2,
+              "half_width": 46.0,
+              "inner_radius": 0.0,
+              "length": 240.0,
+              "move_id": "demon_heavenfall",
+              "origin": "(408.1619, 670.8552)",
+              "owner_id": 1,
+              "phase": "tell",
+              "radius": 235.0,
+              "remaining": 1.9,
+              "shape": "marker",
+              "spread": 1.7,
+              "total": 1.9,
+              "visual_id": "B18"
+            }
+          ]
+        },
+        {
+          "from": "(125.0783, 670.8552)",
+          "goal": "(225.241, 650.9316)",
+          "risk": 0.0,
+          "seconds": 39.5666666666657,
+          "speed": 215.0,
+          "visible_deadline": 2.0,
+          "warnings": [
+            {
+              "action_id": "slam",
+              "action_serial": 12,
+              "attack_step": 4,
+              "damage": 81.891,
+              "direction": "(-0.944084, -0.329704)",
+              "gap_angle": -2.80560207366943,
+              "gap_width": 1.2,
+              "half_width": 46.0,
+              "inner_radius": 0.0,
+              "length": 240.0,
+              "move_id": "demon_final_cleave",
+              "origin": "(180.2735, 690.1312)",
+              "owner_id": 1,
+              "phase": "tell",
+              "radius": 460.0,
+              "remaining": 2.0,
+              "shape": "sector",
+              "spread": 3.1,
+              "total": 2.0,
+              "visual_id": "B18"
+            }
+          ]
+        },
+        {
+          "from": "(219.9693, 651.9802)",
+          "goal": "(219.9693, 651.9802)",
+          "risk": 1.0,
+          "seconds": 41.5499999999989,
+          "speed": 215.0,
+          "visible_deadline": 0.1,
+          "warnings": [
+            {
+              "action_id": "slam",
+              "action_serial": 12,
+              "attack_step": 4,
+              "damage": 81.891,
+              "direction": "(-0.944084, -0.329704)",
+              "gap_angle": -2.80560207366943,
+              "gap_width": 1.2,
+              "half_width": 46.0,
+              "inner_radius": 0.0,
+              "length": 240.0,
+              "move_id": "demon_final_cleave",
+              "origin": "(180.2735, 690.1312)",
+              "owner_id": 1,
+              "phase": "tell",
+              "radius": 460.0,
+              "remaining": 0.0166666666666688,
+              "shape": "sector",
+              "spread": 3.1,
+              "total": 2.0,
+              "visual_id": "B18"
+            }
+          ]
+        },
+        {
+          "from": "(219.9693, 651.9802)",
+          "goal": "(219.9693, 651.9802)",
+          "risk": 1.0,
+          "seconds": 41.5666666666656,
+          "speed": 215.0,
+          "visible_deadline": 0.1,
+          "warnings": [
+            {
+              "action_id": "slam",
+              "action_serial": 12,
+              "attack_step": 4,
+              "damage": 81.891,
+              "direction": "(-0.944084, -0.329704)",
+              "gap_angle": -2.80560207366943,
+              "gap_width": 1.2,
+              "half_width": 46.0,
+              "inner_radius": 0.0,
+              "length": 240.0,
+              "move_id": "demon_final_cleave",
+              "origin": "(180.2735, 690.1312)",
+              "owner_id": 1,
+              "phase": "tell",
+              "radius": 460.0,
+              "remaining": 0.00000000000000210248485288389,
+              "shape": "sector",
+              "spread": 3.1,
+              "total": 2.0,
+              "visual_id": "B18"
+            }
+          ]
+        },
+        {
+          "from": "(222.5528, 649.4972)",
+          "goal": "(130.2977, 667.8479)",
+          "risk": 0.0,
+          "seconds": 45.2999999999987,
+          "speed": 215.0,
+          "visible_deadline": 1.85,
+          "warnings": [
+            {
+              "action_id": "slam",
+              "action_serial": 13,
+              "attack_step": 5,
+              "damage": 69.759,
+              "direction": "(0.720997, -0.692938)",
+              "gap_angle": -0.765556275844574,
+              "gap_width": 1.2,
+              "half_width": 46.0,
+              "inner_radius": 0.0,
+              "length": 240.0,
+              "move_id": "demon_fourfold",
+              "origin": "(180.2735, 690.1312)",
+              "owner_id": 1,
+              "phase": "tell",
+              "radius": 410.0,
+              "remaining": 1.85,
+              "shape": "sector",
+              "spread": 2.8,
+              "total": 1.85,
+              "visual_id": "B18"
+            }
+          ]
+        },
+        {
+          "from": "(134.6908, 666.9741)",
+          "goal": "(134.6908, 666.9741)",
+          "risk": 1.0,
+          "seconds": 47.1333333333319,
+          "speed": 215.0,
+          "visible_deadline": 0.1,
+          "warnings": [
+            {
+              "action_id": "slam",
+              "action_serial": 13,
+              "attack_step": 5,
+              "damage": 69.759,
+              "direction": "(0.720997, -0.692938)",
+              "gap_angle": -0.765556275844574,
+              "gap_width": 1.2,
+              "half_width": 46.0,
+              "inner_radius": 0.0,
+              "length": 240.0,
+              "move_id": "demon_fourfold",
+              "origin": "(180.2735, 690.1312)",
+              "owner_id": 1,
+              "phase": "tell",
+              "radius": 410.0,
+              "remaining": 0.0166666666666683,
+              "shape": "sector",
+              "spread": 2.8,
+              "total": 1.85,
+              "visual_id": "B18"
+            }
+          ]
+        },
+        {
+          "from": "(134.6908, 666.9741)",
+          "goal": "(134.6908, 666.9741)",
+          "risk": 1.0,
+          "seconds": 47.1499999999986,
+          "speed": 215.0,
+          "visible_deadline": 0.1,
+          "warnings": [
+            {
+              "action_id": "slam",
+              "action_serial": 13,
+              "attack_step": 5,
+              "damage": 69.759,
+              "direction": "(0.720997, -0.692938)",
+              "gap_angle": -0.765556275844574,
+              "gap_width": 1.2,
+              "half_width": 46.0,
+              "inner_radius": 0.0,
+              "length": 240.0,
+              "move_id": "demon_fourfold",
+              "origin": "(180.2735, 690.1312)",
+              "owner_id": 1,
+              "phase": "tell",
+              "radius": 410.0,
+              "remaining": 0.00000000000000165839564303383,
+              "shape": "sector",
+              "spread": 2.8,
+              "total": 1.85,
+              "visual_id": "B18"
+            }
+          ]
+        },
+        {
+          "from": "(128.3014, 663.7281)",
+          "goal": "(55.0, 762.2723)",
+          "risk": 0.0,
+          "seconds": 47.8166666666652,
+          "speed": 215.0,
+          "visible_deadline": 1.75,
+          "warnings": [
+            {
+              "action_id": "charge",
+              "action_serial": 14,
+              "attack_step": 6,
+              "damage": 75.825,
+              "direction": "(-0.891547, -0.452927)",
+              "gap_angle": -2.671546459198,
+              "gap_width": 1.2,
+              "half_width": 68.0,
+              "inner_radius": 0.0,
+              "length": 150.607248997054,
+              "move_id": "demon_skybreaker",
+              "origin": "(180.2735, 690.1312)",
+              "owner_id": 1,
+              "phase": "tell",
+              "radius": 940.0,
+              "remaining": 1.75,
+              "shape": "line",
+              "spread": 1.7,
+              "total": 1.75,
+              "visual_id": "B18"
+            }
+          ]
+        },
+        {
+          "from": "(57.7261, 758.6074)",
+          "goal": "(57.7261, 758.6074)",
+          "risk": 0.0,
+          "seconds": 49.5833333333318,
+          "speed": 215.0,
+          "visible_deadline": 0.28,
+          "warnings": [
+            {
+              "action_id": "charge",
+              "action_serial": 14,
+              "attack_step": 6,
+              "damage": 75.825,
+              "direction": "(-0.891547, -0.452927)",
+              "gap_angle": -2.671546459198,
+              "gap_width": 1.2,
+              "half_width": 68.0,
+              "inner_radius": 0.0,
+              "length": 150.607248997054,
+              "move_id": "demon_skybreaker",
+              "origin": "(180.2735, 690.1312)",
+              "owner_id": 1,
+              "phase": "active",
+              "radius": 940.0,
+              "remaining": 0.28,
+              "shape": "line",
+              "spread": 1.7,
+              "total": 0.28,
+              "visual_id": "B18"
+            }
+          ]
+        },
+        {
+          "from": "(55.0, 690.8337)",
+          "goal": "(55.0, 690.8337)",
+          "risk": 0.0,
+          "seconds": 50.6666666666651,
+          "speed": 215.0,
+          "visible_deadline": 1.9,
+          "warnings": [
+            {
+              "action_id": "pulse",
+              "action_serial": 15,
+              "attack_step": 7,
+              "damage": 69.759,
+              "direction": "(0.129493, 0.99158)",
+              "gap_angle": 2.34093883037567,
+              "gap_width": 1.75,
+              "half_width": 46.0,
+              "inner_radius": 105.0,
+              "length": 240.0,
+              "move_id": "demon_quake",
+              "origin": "(46.0, 621.917)",
+              "owner_id": 1,
+              "phase": "tell",
+              "radius": 520.0,
+              "remaining": 1.9,
+              "shape": "ring_gap",
+              "spread": 1.7,
+              "total": 1.9,
+              "visual_id": "B18"
+            }
+          ]
+        },
+        {
+          "from": "(55.0, 690.8337)",
+          "goal": "(55.0, 422.6777)",
+          "risk": 0.0,
+          "seconds": 53.5833333333316,
+          "speed": 215.0,
+          "visible_deadline": 1.9,
+          "warnings": [
+            {
+              "action_id": "marker",
+              "action_serial": 16,
+              "attack_step": 8,
+              "damage": 72.792,
+              "direction": "(0.129493, 0.99158)",
+              "gap_angle": 1.44093883037567,
+              "gap_width": 1.2,
+              "half_width": 46.0,
+              "inner_radius": 0.0,
+              "length": 240.0,
+              "move_id": "demon_heavenfall",
+              "origin": "(55.0, 690.8337)",
+              "owner_id": 1,
+              "phase": "tell",
+              "radius": 235.0,
+              "remaining": 1.9,
+              "shape": "marker",
+              "spread": 1.7,
+              "total": 1.9,
+              "visual_id": "B18"
+            }
+          ]
+        },
+        {
+          "from": "(55.0, 429.2512)",
+          "goal": "(55.0, 429.2512)",
+          "risk": 1.0,
+          "seconds": 55.4666666666648,
+          "speed": 215.0,
+          "visible_deadline": 0.1,
+          "warnings": [
+            {
+              "action_id": "marker",
+              "action_serial": 16,
+              "attack_step": 8,
+              "damage": 72.792,
+              "direction": "(0.129493, 0.99158)",
+              "gap_angle": 1.44093883037567,
+              "gap_width": 1.2,
+              "half_width": 46.0,
+              "inner_radius": 0.0,
+              "length": 240.0,
+              "move_id": "demon_heavenfall",
+              "origin": "(55.0, 690.8337)",
+              "owner_id": 1,
+              "phase": "tell",
+              "radius": 235.0,
+              "remaining": 0.0166666666666683,
+              "shape": "marker",
+              "spread": 1.7,
+              "total": 1.9,
+              "visual_id": "B18"
+            }
+          ]
+        },
+        {
+          "from": "(55.0, 429.2512)",
+          "goal": "(55.0, 429.2512)",
+          "risk": 1.0,
+          "seconds": 55.4833333333315,
+          "speed": 215.0,
+          "visible_deadline": 0.1,
+          "warnings": [
+            {
+              "action_id": "marker",
+              "action_serial": 16,
+              "attack_step": 8,
+              "damage": 72.792,
+              "direction": "(0.129493, 0.99158)",
+              "gap_angle": 1.44093883037567,
+              "gap_width": 1.2,
+              "half_width": 46.0,
+              "inner_radius": 0.0,
+              "length": 240.0,
+              "move_id": "demon_heavenfall",
+              "origin": "(55.0, 690.8337)",
+              "owner_id": 1,
+              "phase": "tell",
+              "radius": 235.0,
+              "remaining": 0.00000000000000165839564303383,
+              "shape": "marker",
+              "spread": 1.7,
+              "total": 1.9,
+              "visual_id": "B18"
+            }
+          ]
+        },
+        {
+          "from": "(55.0, 550.7385)",
+          "goal": "(55.0, 652.8635)",
+          "risk": 0.0,
+          "seconds": 56.3999999999981,
+          "speed": 215.0,
+          "visible_deadline": 2.0,
+          "warnings": [
+            {
+              "action_id": "slam",
+              "action_serial": 17,
+              "attack_step": 9,
+              "damage": 81.891,
+              "direction": "(0.125444, -0.992101)",
+              "gap_angle": -1.44502115249634,
+              "gap_width": 1.2,
+              "half_width": 46.0,
+              "inner_radius": 0.0,
+              "length": 240.0,
+              "move_id": "demon_final_cleave",
+              "origin": "(46.0, 621.917)",
+              "owner_id": 1,
+              "phase": "tell",
+              "radius": 460.0,
+              "remaining": 2.0,
+              "shape": "sector",
+              "spread": 3.1,
+              "total": 2.0,
+              "visual_id": "B18"
+            }
+          ]
+        },
+        {
+          "from": "(55.0, 647.4879)",
+          "goal": "(55.0, 647.4879)",
+          "risk": 1.0,
+          "seconds": 58.3833333333313,
+          "speed": 215.0,
+          "visible_deadline": 0.1,
+          "warnings": [
+            {
+              "action_id": "slam",
+              "action_serial": 17,
+              "attack_step": 9,
+              "damage": 81.891,
+              "direction": "(0.125444, -0.992101)",
+              "gap_angle": -1.44502115249634,
+              "gap_width": 1.2,
+              "half_width": 46.0,
+              "inner_radius": 0.0,
+              "length": 240.0,
+              "move_id": "demon_final_cleave",
+              "origin": "(46.0, 621.917)",
+              "owner_id": 1,
+              "phase": "tell",
+              "radius": 460.0,
+              "remaining": 0.0166666666666688,
+              "shape": "sector",
+              "spread": 3.1,
+              "total": 2.0,
+              "visual_id": "B18"
+            }
+          ]
+        },
+        {
+          "from": "(55.0, 647.4879)",
+          "goal": "(55.0, 647.4879)",
+          "risk": 1.0,
+          "seconds": 58.399999999998,
+          "speed": 215.0,
+          "visible_deadline": 0.1,
+          "warnings": [
+            {
+              "action_id": "slam",
+              "action_serial": 17,
+              "attack_step": 9,
+              "damage": 81.891,
+              "direction": "(0.125444, -0.992101)",
+              "gap_angle": -1.44502115249634,
+              "gap_width": 1.2,
+              "half_width": 46.0,
+              "inner_radius": 0.0,
+              "length": 240.0,
+              "move_id": "demon_final_cleave",
+              "origin": "(46.0, 621.917)",
+              "owner_id": 1,
+              "phase": "tell",
+              "radius": 460.0,
+              "remaining": 0.00000000000000210248485288389,
+              "shape": "sector",
+              "spread": 3.1,
+              "total": 2.0,
+              "visual_id": "B18"
+            }
+          ]
+        },
+        {
+          "from": "(65.70699, 677.9085)",
+          "goal": "(55.0, 591.0061)",
+          "risk": 0.0,
+          "seconds": 62.1333333333311,
+          "speed": 215.0,
+          "visible_deadline": 1.85,
+          "warnings": [
+            {
+              "action_id": "slam",
+              "action_serial": 18,
+              "attack_step": 10,
+              "damage": 69.759,
+              "direction": "(0.332, 0.943279)",
+              "gap_angle": 1.23237299919128,
+              "gap_width": 1.2,
+              "half_width": 46.0,
+              "inner_radius": 0.0,
+              "length": 240.0,
+              "move_id": "demon_fourfold",
+              "origin": "(46.0, 621.917)",
+              "owner_id": 1,
+              "phase": "tell",
+              "radius": 410.0,
+              "remaining": 1.85,
+              "shape": "sector",
+              "spread": 2.8,
+              "total": 1.85,
+              "visual_id": "B18"
+            }
+          ]
+        }
+      ],
+      "driver_revision": "visible_goal_v2",
+      "entry_owned": {
+        "F06": {
+          "cooldowns": {
+
+          },
+          "dead": false,
+          "hp": 229.0,
+          "level": 5.0,
+          "mp": 135.7,
+          "xp": 0.0
+        },
+        "F07": {
+          "cooldowns": {
+
+          },
+          "dead": false,
+          "hp": 207.0,
+          "level": 3.0,
+          "mp": 109.2,
+          "xp": 0.0
+        },
+        "F08": {
+          "cooldowns": {
+
+          },
+          "dead": false,
+          "hp": 237.0,
+          "level": 3.0,
+          "mp": 114.2,
+          "xp": 0.0
+        },
+        "F09": {
+          "cooldowns": {
+
+          },
+          "dead": false,
+          "hp": 182.0,
+          "level": 3.0,
+          "mp": 150.7,
+          "xp": 0.0
+        },
+        "F11": {
+          "cooldowns": {
+            "emma_support": 1.00000000000001
+          },
+          "dead": false,
+          "hp": 187.0,
+          "level": 3.0,
+          "mp": 144.2,
+          "xp": 39.6666666666667
+        },
+        "JIA": {
+          "cooldowns": {
+            "JIA_basic": 0.672947510094213,
+            "armor_guard": 0.0,
+            "jia_break": 0.0,
+            "jia_sweep": 0.0
+          },
+          "dead": false,
+          "hp": 428.0,
+          "level": 14.0,
+          "mp": 22.6208333333326,
+          "xp": 155.333333333333
+        },
+        "M06": {
+          "cooldowns": {
+
+          },
+          "dead": false,
+          "hp": 271.0,
+          "level": 7.0,
+          "mp": 154.2,
+          "xp": 0.0
+        },
+        "N01": {
+          "cooldowns": {
+
+          },
+          "dead": false,
+          "hp": 272.0,
+          "level": 3.0,
+          "mp": 94.2,
+          "xp": 0.0
+        },
+        "N04": {
+          "cooldowns": {
+
+          },
+          "dead": false,
+          "hp": 201.0,
+          "level": 2.0,
+          "mp": 94.2,
+          "xp": 0.0
+        },
+        "N07": {
+          "cooldowns": {
+
+          },
+          "dead": false,
+          "hp": 182.0,
+          "level": 3.0,
+          "mp": 104.2,
+          "xp": 0.0
+        },
+        "N16": {
+          "cooldowns": {
+            "healer_support": 2.83333333333335
+          },
+          "dead": false,
+          "hp": 362.0,
+          "level": 13.0,
+          "mp": 184.2,
+          "xp": 55.6666666666667
+        },
+        "N17": {
+          "cooldowns": {
+            "cook_support": 3.03333333333334
+          },
+          "dead": false,
+          "hp": 413.0,
+          "level": 14.0,
+          "mp": 164.2,
+          "xp": 179.333333333333
+        }
+      },
+      "equipment": {
+        "accessory": "frost_jade",
+        "armor": "iron_armor",
+        "weapon": "long_spear"
+      },
+      "injected_owned_or_resources": false,
+      "members": [
+        "JIA",
+        "N16",
+        "N17"
+      ],
+      "metrics": {
+        "active_seconds": {
+          "JIA": 62.2333333333311
+        },
+        "boss_damage_by_ability": {
+          "JIA_basic": 6372.375,
+          "jia_sweep": 1227.625
+        },
+        "boss_damage_by_source": {
+          "JIA": 7600.0
+        },
+        "boss_remaining": {
+
+        },
+        "boss_spawn_seconds": 0.0166666666666667,
+        "boss_support_damage": 0.0,
+        "casts": {
+          "JIA:JIA_basic:front": 79,
+          "JIA:jia_sweep:front": 10,
+          "N16:healer_support:support": 9,
+          "N17:cook_support:support": 12
+        },
+        "damage_attribution_available": true,
+        "damage_by_ability": {
+          "JIA_basic": 6372.375,
+          "jia_sweep": 1227.625
+        },
+        "damage_by_source": {
+          "JIA": 7600.0
+        },
+        "damage_taken_events": [],
+        "elapsed": 62.2333333333311,
+        "entry": {
+          "JIA": {
+            "cooldowns": {
+              "JIA_basic": 0.672947510094213,
+              "armor_guard": 0.0,
+              "jia_break": 0.0,
+              "jia_sweep": 0.0
+            },
+            "dead": false,
+            "hp": 428.0,
+            "level": 14,
+            "mp": 22.6208333333326,
+            "xp": 155.333333333333
+          },
+          "N16": {
+            "cooldowns": {
+              "healer_support": 2.83333333333335
+            },
+            "dead": false,
+            "hp": 362.0,
+            "level": 13,
+            "mp": 184.2,
+            "xp": 55.6666666666667
+          },
+          "N17": {
+            "cooldowns": {
+              "cook_support": 3.03333333333334
+            },
+            "dead": false,
+            "hp": 413.0,
+            "level": 14,
+            "mp": 164.2,
+            "xp": 179.333333333333
+          }
+        },
+        "exit": {
+          "JIA": {
+            "cooldowns": {
+              "JIA_basic": 0.653167864141084,
+              "armor_guard": 0.0,
+              "jia_break": 0.0,
+              "jia_sweep": 3.78333333333334
+            },
+            "dead": false,
+            "hp": 428.0,
+            "level": 14,
+            "mp": 4.87916666666683,
+            "xp": 181.333333333333
+          },
+          "N16": {
+            "cooldowns": {
+              "healer_support": 3.75000000000001
+            },
+            "dead": false,
+            "hp": 362.0,
+            "level": 13,
+            "mp": 185.7,
+            "xp": 81.6666666666667
+          },
+          "N17": {
+            "cooldowns": {
+              "cook_support": 1.00000000000001
+            },
+            "dead": false,
+            "hp": 429.0,
+            "level": 15,
+            "mp": 170.7,
+            "xp": 19.3333333333333
+          }
+        },
+        "hurt_events": [],
+        "hurt_total": {
+
+        },
+        "last_phase": "B18:1:combat",
+        "max_hostiles": 1,
+        "mechanics": {
+
+        },
+        "mp_observed_recovery": {
+          "JIA": 201.716666666668,
+          "N16": 1.43916666666667,
+          "N17": 6.44916666666666
+        },
+        "outcome": "victory",
+        "outcome_reason": "authentic_victory",
+        "paid_mp": {
+          "JIA": 220.0,
+          "N16": 0.0,
+          "N17": 0.0
+        },
+        "phase_damage_attribution": {
+          "B18:0": 3093.615,
+          "B18:1": 4506.385
+        },
+        "phase_marks": [
+          {
+            "active": "JIA",
+            "bank": 0.0,
+            "form_name": "吕布",
+            "hp": 3040.0,
+            "phase": "B18:0:combat",
+            "player_position": "(1600.0, 896.4167)",
+            "resources": {
+              "JIA": {
+                "cooldowns": {
+                  "JIA_basic": 0.656280843427546,
+                  "armor_guard": 0.0,
+                  "jia_break": 0.0,
+                  "jia_sweep": 5.0
+                },
+                "dead": false,
+                "hp": 428.0,
+                "level": 14,
+                "mp": 0.674999999999269,
+                "xp": 155.333333333333
+              },
+              "N16": {
+                "cooldowns": {
+                  "healer_support": 2.81666666666668
+                },
+                "dead": false,
+                "hp": 362.0,
+                "level": 13,
+                "mp": 184.260833333333,
+                "xp": 55.6666666666667
+              },
+              "N17": {
+                "cooldowns": {
+                  "cook_support": 3.01666666666667
+                },
+                "dead": false,
+                "hp": 413.0,
+                "level": 14,
+                "mp": 164.250833333333,
+                "xp": 179.333333333333
+              }
+            },
+            "seconds": 0.0166666666666667
+          },
+          {
+            "active": "JIA",
+            "bank": 53.6150000000006,
+            "form_name": "四臂鬼神相",
+            "hp": 4560.0,
+            "phase": "B18:1:transition",
+            "player_position": "(1054.349, 351.159)",
+            "resources": {
+              "JIA": {
+                "cooldowns": {
+                  "JIA_basic": 0.653167864141084,
+                  "armor_guard": 0.0,
+                  "jia_break": 0.0,
+                  "jia_sweep": 0.0
+                },
+                "dead": false,
+                "hp": 428.0,
+                "level": 14,
+                "mp": 21.9374999999997,
+                "xp": 155.333333333333
+              },
+              "N16": {
+                "cooldowns": {
+                  "healer_support": 4.03333333333334
+                },
+                "dead": false,
+                "hp": 362.0,
+                "level": 13,
+                "mp": 185.7,
+                "xp": 55.6666666666667
+              },
+              "N17": {
+                "cooldowns": {
+                  "cook_support": 1.25000000000001
+                },
+                "dead": false,
+                "hp": 413.0,
+                "level": 14,
+                "mp": 165.7,
+                "xp": 179.333333333333
+              }
+            },
+            "seconds": 26.8666666666664
+          },
+          {
+            "active": "JIA",
+            "bank": 309.662500000001,
+            "form_name": "四臂鬼神相",
+            "hp": 4560.0,
+            "phase": "B18:1:observation",
+            "player_position": "(1055.72, 326.1132)",
+            "resources": {
+              "JIA": {
+                "cooldowns": {
+                  "JIA_basic": 0.336501197474417,
+                  "armor_guard": 0.0,
+                  "jia_break": 0.0,
+                  "jia_sweep": 4.16666666666667
+                },
+                "dead": false,
+                "hp": 428.0,
+                "level": 14,
+                "mp": 3.13333333333301,
+                "xp": 155.333333333333
+              },
+              "N16": {
+                "cooldowns": {
+                  "healer_support": 3.05000000000001
+                },
+                "dead": false,
+                "hp": 362.0,
+                "level": 13,
+                "mp": 185.7,
+                "xp": 55.6666666666667
+              },
+              "N17": {
+                "cooldowns": {
+                  "cook_support": 0.266666666666679
+                },
+                "dead": false,
+                "hp": 413.0,
+                "level": 14,
+                "mp": 165.7,
+                "xp": 179.333333333333
+              }
+            },
+            "seconds": 27.8499999999997
+          },
+          {
+            "active": "JIA",
+            "bank": 0.0,
+            "form_name": "四臂鬼神相",
+            "hp": 4169.665,
+            "phase": "B18:1:combat",
+            "player_position": "(1005.95, 400.599)",
+            "resources": {
+              "JIA": {
+                "cooldowns": {
+                  "JIA_basic": 0.353167864141084,
+                  "armor_guard": 0.0,
+                  "jia_break": 0.0,
+                  "jia_sweep": 3.51666666666667
+                },
+                "dead": false,
+                "hp": 428.0,
+                "level": 14,
+                "mp": 5.245833333333,
+                "xp": 155.333333333333
+              },
+              "N16": {
+                "cooldowns": {
+                  "healer_support": 2.40000000000002
+                },
+                "dead": false,
+                "hp": 362.0,
+                "level": 13,
+                "mp": 185.7,
+                "xp": 55.6666666666667
+              },
+              "N17": {
+                "cooldowns": {
+                  "cook_support": 4.63333333333333
+                },
+                "dead": false,
+                "hp": 413.0,
+                "level": 14,
+                "mp": 165.7,
+                "xp": 179.333333333333
+              }
+            },
+            "seconds": 28.4999999999997
+          }
+        ],
+        "phase_seconds": {
+          "B18:0:combat": 26.8499999999998,
+          "B18:1:combat": 33.7333333333314,
+          "B18:1:observation": 0.649999999999963,
+          "B18:1:transition": 0.983333333333277
+        },
+        "resource_balance": {
+          "JIA": {
+            "net_hp_restored_including_level_growth": 0.0,
+            "net_mp_restored_including_level_growth": 202.258333333334,
+            "paid_mp": 220.0,
+            "received_hp_damage": 0.0
+          },
+          "N16": {
+            "net_hp_restored_including_level_growth": 0.0,
+            "net_mp_restored_including_level_growth": 1.5,
+            "paid_mp": 0.0,
+            "received_hp_damage": 0.0
+          },
+          "N17": {
+            "net_hp_restored_including_level_growth": 16.0,
+            "net_mp_restored_including_level_growth": 6.5,
+            "paid_mp": 0.0,
+            "received_hp_damage": 0.0
+          }
+        },
+        "seen_boss_actions": {
+          "0:charge": true,
+          "0:marker": true,
+          "0:slam": true,
+          "1:charge": true,
+          "1:marker": true,
+          "1:pulse": true,
+          "1:slam": true
+        },
+        "shield_spent": {
+          "JIA": 0.0,
+          "N16": 0.0,
+          "N17": 0.0
+        },
+        "support_damage": 0.0
+      },
+      "movement_policy": "read_telegraphs",
+      "request": {
+        "attempt_id": "B18-265710-3105050779",
+        "characters": {
+          "F06": {
+            "cooldowns": {
+
+            },
+            "dead": false,
+            "hp": 229.0,
+            "level": 5.0,
+            "mp": 135.7,
+            "xp": 0.0
+          },
+          "F07": {
+            "cooldowns": {
+
+            },
+            "dead": false,
+            "hp": 207.0,
+            "level": 3.0,
+            "mp": 109.2,
+            "xp": 0.0
+          },
+          "F08": {
+            "cooldowns": {
+
+            },
+            "dead": false,
+            "hp": 237.0,
+            "level": 3.0,
+            "mp": 114.2,
+            "xp": 0.0
+          },
+          "F09": {
+            "cooldowns": {
+
+            },
+            "dead": false,
+            "hp": 182.0,
+            "level": 3.0,
+            "mp": 150.7,
+            "xp": 0.0
+          },
+          "F11": {
+            "cooldowns": {
+              "emma_support": 1.00000000000001
+            },
+            "dead": false,
+            "hp": 187.0,
+            "level": 3.0,
+            "mp": 144.2,
+            "xp": 39.6666666666667
+          },
+          "JIA": {
+            "cooldowns": {
+              "JIA_basic": 0.672947510094213,
+              "armor_guard": 0.0,
+              "jia_break": 0.0,
+              "jia_sweep": 0.0
+            },
+            "dead": false,
+            "hp": 428.0,
+            "level": 14.0,
+            "mp": 22.6208333333326,
+            "xp": 155.333333333333
+          },
+          "M06": {
+            "cooldowns": {
+
+            },
+            "dead": false,
+            "hp": 271.0,
+            "level": 7.0,
+            "mp": 154.2,
+            "xp": 0.0
+          },
+          "N01": {
+            "cooldowns": {
+
+            },
+            "dead": false,
+            "hp": 272.0,
+            "level": 3.0,
+            "mp": 94.2,
+            "xp": 0.0
+          },
+          "N04": {
+            "cooldowns": {
+
+            },
+            "dead": false,
+            "hp": 201.0,
+            "level": 2.0,
+            "mp": 94.2,
+            "xp": 0.0
+          },
+          "N07": {
+            "cooldowns": {
+
+            },
+            "dead": false,
+            "hp": 182.0,
+            "level": 3.0,
+            "mp": 104.2,
+            "xp": 0.0
+          },
+          "N16": {
+            "cooldowns": {
+              "healer_support": 2.83333333333335
+            },
+            "dead": false,
+            "hp": 362.0,
+            "level": 13.0,
+            "mp": 184.2,
+            "xp": 55.6666666666667
+          },
+          "N17": {
+            "cooldowns": {
+              "cook_support": 3.03333333333334
+            },
+            "dead": false,
+            "hp": 413.0,
+            "level": 14.0,
+            "mp": 164.2,
+            "xp": 179.333333333333
+          }
+        },
+        "equipment": {
+          "accessory": "frost_jade",
+          "armor": "iron_armor",
+          "weapon": "long_spear"
+        },
+        "members": [
+          "JIA",
+          "N16",
+          "N17"
+        ],
+        "node": {
+          "id": "B18",
+          "kind": "boss",
+          "name": "吕布终战",
+          "next": [
+            "S14"
+          ],
+          "segment": 5.0,
+          "summary": "与吕布决战。完成本章后返回天下。"
+        },
+        "seed": 1718,
+        "stage": {
+          "action_budget": {
+            "major": 2,
+            "melee": 2
+          },
+          "bonus_time": 100.0,
+          "boss_definition": "B18",
+          "boss_derivative_cap": 0,
+          "boss_hp": 7600.0,
+          "boss_kills": 0,
+          "boss_name": "吕布",
+          "boss_time": 0.0,
+          "derivative_cap": 0,
+          "encounter_mode": "boss_duel",
+          "enemy_cap": 0,
+          "enemy_damage": 1.8,
+          "enemy_hp": 2.5,
+          "field_elites": [],
+          "fields_enabled": false,
+          "map": "stone",
+          "role_caps": {
+            "heavy": 2,
+            "ranged": 4,
+            "support": 1
+          },
+          "seed": 1718,
+          "spawn_interval": 1.35,
+          "waves": []
+        }
+      },
+      "result": {
+        "attempt_id": "B18-265710-3105050779",
+        "card_elite": false,
+        "characters": {
+          "JIA": {
+            "cooldowns": {
+              "JIA_basic": 0.653167864141084,
+              "armor_guard": 0.0,
+              "jia_break": 0.0,
+              "jia_sweep": 3.78333333333334
+            },
+            "dead": false,
+            "hp": 428.0,
+            "level": 14,
+            "mp": 4.87916666666683,
+            "xp": 181.333333333333
+          },
+          "N16": {
+            "cooldowns": {
+              "healer_support": 3.75000000000001
+            },
+            "dead": false,
+            "hp": 362.0,
+            "level": 13,
+            "mp": 185.7,
+            "xp": 81.6666666666667
+          },
+          "N17": {
+            "cooldowns": {
+              "cook_support": 1.00000000000001
+            },
+            "dead": false,
+            "hp": 429.0,
+            "level": 15,
+            "mp": 170.7,
+            "xp": 19.3333333333333
+          }
+        },
+        "elapsed": 62.2333333333311,
+        "equipment_elite": false,
+        "fast_clear": true,
+        "kills": 0,
+        "outcome": "victory"
+      },
+      "reward_after": {
+        "candidates": [
+          "M05",
+          "F07",
+          "N02",
+          "N17",
+          "N01",
+          "N16",
+          "M02"
+        ],
+        "node": "B18",
+        "picks": 3,
+        "selected": [
+          "N16",
+          "N17",
+          "N01"
+        ]
+      },
+      "route": "short",
+      "skill_requests": 250,
+      "stage": "B18",
+      "switch_requests": 0,
+      "unavailable_equipment": []
+    },
+    {
+      "build": "route_original",
+      "committed": true,
+      "driver_decisions": [
+        {
+          "from": "(1600.0, 682.5513)",
+          "goal": "(1600.0, 530.3363)",
+          "risk": 0.0,
+          "seconds": 1.0,
+          "speed": 217.45,
+          "visible_deadline": 1.5,
+          "warnings": [
+            {
+              "action_id": "slam",
+              "action_serial": 1,
+              "attack_step": 0,
+              "damage": 60.66,
+              "direction": "(0.0, 1.0)",
+              "gap_angle": 1.57079637050629,
+              "gap_width": 1.2,
+              "half_width": 34.0,
+              "inner_radius": 0.0,
+              "length": 240.0,
+              "move_id": "halberd_sweep",
+              "origin": "(1600.0, 600.0)",
+              "owner_id": 1,
+              "phase": "tell",
+              "radius": 300.0,
+              "remaining": 1.5,
+              "shape": "sector",
+              "spread": 2.5,
+              "total": 1.5,
+              "visual_id": "B18_human"
+            }
+          ]
+        },
+        {
+          "from": "(1600.0, 537.5854)",
+          "goal": "(1676.108, 537.5854)",
+          "risk": 0.0,
+          "seconds": 4.43333333333332,
+          "speed": 217.45,
+          "visible_deadline": 1.5,
+          "warnings": [
+            {
+              "action_id": "charge",
+              "action_serial": 2,
+              "attack_step": 1,
+              "damage": 69.759,
+              "direction": "(0.0, -1.0)",
+              "gap_angle": -1.57079637050629,
+              "gap_width": 1.2,
+              "half_width": 48.0,
+              "inner_radius": 0.0,
+              "length": 566.0,
+              "move_id": "halberd_charge",
+              "origin": "(1600.0, 600.0)",
+              "owner_id": 1,
+              "phase": "tell",
+              "radius": 650.0,
+              "remaining": 1.5,
+              "shape": "line",
+              "spread": 1.7,
+              "total": 1.5,
+              "visual_id": "B18_human"
+            }
+          ]
+        },
+        {
+          "from": "(1668.859, 537.5854)",
+          "goal": "(1668.859, 537.5854)",
+          "risk": 1.0,
+          "seconds": 5.89999999999998,
+          "speed": 217.45,
+          "visible_deadline": 0.1,
+          "warnings": [
+            {
+              "action_id": "charge",
+              "action_serial": 2,
+              "attack_step": 1,
+              "damage": 69.759,
+              "direction": "(0.0, -1.0)",
+              "gap_angle": -1.57079637050629,
+              "gap_width": 1.2,
+              "half_width": 48.0,
+              "inner_radius": 0.0,
+              "length": 566.0,
+              "move_id": "halberd_charge",
+              "origin": "(1600.0, 600.0)",
+              "owner_id": 1,
+              "phase": "tell",
+              "radius": 650.0,
+              "remaining": 0.0333333333333337,
+              "shape": "line",
+              "spread": 1.7,
+              "total": 1.5,
+              "visual_id": "B18_human"
+            }
+          ]
+        },
+        {
+          "from": "(1668.859, 537.5854)",
+          "goal": "(1668.859, 537.5854)",
+          "risk": 1.0,
+          "seconds": 5.91666666666665,
+          "speed": 217.45,
+          "visible_deadline": 0.1,
+          "warnings": [
+            {
+              "action_id": "charge",
+              "action_serial": 2,
+              "attack_step": 1,
+              "damage": 69.759,
+              "direction": "(0.0, -1.0)",
+              "gap_angle": -1.57079637050629,
+              "gap_width": 1.2,
+              "half_width": 48.0,
+              "inner_radius": 0.0,
+              "length": 566.0,
+              "move_id": "halberd_charge",
+              "origin": "(1600.0, 600.0)",
+              "owner_id": 1,
+              "phase": "tell",
+              "radius": 650.0,
+              "remaining": 0.016666666666667,
+              "shape": "line",
+              "spread": 1.7,
+              "total": 1.5,
+              "visual_id": "B18_human"
+            }
+          ]
+        },
+        {
+          "from": "(1668.859, 537.5854)",
+          "goal": "(1668.859, 537.5854)",
+          "risk": 1.0,
+          "seconds": 5.93333333333332,
+          "speed": 217.45,
+          "visible_deadline": 0.1,
+          "warnings": [
+            {
+              "action_id": "charge",
+              "action_serial": 2,
+              "attack_step": 1,
+              "damage": 69.759,
+              "direction": "(0.0, -1.0)",
+              "gap_angle": -1.57079637050629,
+              "gap_width": 1.2,
+              "half_width": 48.0,
+              "inner_radius": 0.0,
+              "length": 566.0,
+              "move_id": "halberd_charge",
+              "origin": "(1600.0, 600.0)",
+              "owner_id": 1,
+              "phase": "tell",
+              "radius": 650.0,
+              "remaining": 0.00000000000000032612801348364,
+              "shape": "line",
+              "spread": 1.7,
+              "total": 1.5,
+              "visual_id": "B18_human"
+            }
+          ]
+        },
+        {
+          "from": "(1668.859, 537.5854)",
+          "goal": "(1696.482, 549.0275)",
+          "risk": 0.0,
+          "seconds": 5.94999999999998,
+          "speed": 217.45,
+          "visible_deadline": 0.65,
+          "warnings": [
+            {
+              "action_id": "charge",
+              "action_serial": 2,
+              "attack_step": 1,
+              "damage": 69.759,
+              "direction": "(0.0, -1.0)",
+              "gap_angle": -1.57079637050629,
+              "gap_width": 1.2,
+              "half_width": 48.0,
+              "inner_radius": 0.0,
+              "length": 566.0,
+              "move_id": "halberd_charge",
+              "origin": "(1600.0, 600.0)",
+              "owner_id": 1,
+              "phase": "active",
+              "radius": 650.0,
+              "remaining": 0.65,
+              "shape": "line",
+              "spread": 1.7,
+              "total": 0.65,
+              "visual_id": "B18_human"
+            }
+          ]
+        },
+        {
+          "from": "(1612.124, 101.4243)",
+          "goal": "(1393.648, 65.0)",
+          "risk": 0.0,
+          "seconds": 8.71666666666668,
+          "speed": 217.45,
+          "visible_deadline": 1.55,
+          "warnings": [
+            {
+              "action_id": "marker",
+              "action_serial": 3,
+              "attack_step": 2,
+              "damage": 66.726,
+              "direction": "(0.176984, 0.984214)",
+              "gap_angle": 1.39287567138672,
+              "gap_width": 1.2,
+              "half_width": 34.0,
+              "inner_radius": 0.0,
+              "length": 240.0,
+              "move_id": "halberd_fall",
+              "origin": "(1612.124, 101.4243)",
+              "owner_id": 1,
+              "phase": "tell",
+              "radius": 175.0,
+              "remaining": 1.55,
+              "shape": "marker",
+              "spread": 1.7,
+              "total": 1.55,
+              "visual_id": "B18_human"
+            }
+          ]
+        },
+        {
+          "from": "(1537.583, 65.0)",
+          "goal": "(1643.291, 65.0)",
+          "risk": 0.0,
+          "seconds": 13.2000000000002,
+          "speed": 217.45,
+          "visible_deadline": 1.85,
+          "warnings": [
+            {
+              "action_id": "slam",
+              "action_serial": 4,
+              "attack_step": 0,
+              "damage": 69.759,
+              "direction": "(-0.89562, 0.44482)",
+              "gap_angle": 2.68061923980713,
+              "gap_width": 1.2,
+              "half_width": 46.0,
+              "inner_radius": 0.0,
+              "length": 240.0,
+              "move_id": "demon_fourfold",
+              "origin": "(1600.0, 34.0)",
+              "owner_id": 1,
+              "phase": "tell",
+              "radius": 410.0,
+              "remaining": 1.85,
+              "shape": "sector",
+              "spread": 2.8,
+              "total": 1.85,
+              "visual_id": "B18"
+            }
+          ]
+        },
+        {
+          "from": "(1635.435, 65.0)",
+          "goal": "(1635.435, 65.0)",
+          "risk": 1.0,
+          "seconds": 15.0333333333337,
+          "speed": 217.45,
+          "visible_deadline": 0.1,
+          "warnings": [
+            {
+              "action_id": "slam",
+              "action_serial": 4,
+              "attack_step": 0,
+              "damage": 69.759,
+              "direction": "(-0.89562, 0.44482)",
+              "gap_angle": 2.68061923980713,
+              "gap_width": 1.2,
+              "half_width": 46.0,
+              "inner_radius": 0.0,
+              "length": 240.0,
+              "move_id": "demon_fourfold",
+              "origin": "(1600.0, 34.0)",
+              "owner_id": 1,
+              "phase": "tell",
+              "radius": 410.0,
+              "remaining": 0.0166666666666683,
+              "shape": "sector",
+              "spread": 2.8,
+              "total": 1.85,
+              "visual_id": "B18"
+            }
+          ]
+        },
+        {
+          "from": "(1635.435, 65.0)",
+          "goal": "(1635.435, 65.0)",
+          "risk": 1.0,
+          "seconds": 15.0500000000003,
+          "speed": 217.45,
+          "visible_deadline": 0.1,
+          "warnings": [
+            {
+              "action_id": "slam",
+              "action_serial": 4,
+              "attack_step": 0,
+              "damage": 69.759,
+              "direction": "(-0.89562, 0.44482)",
+              "gap_angle": 2.68061923980713,
+              "gap_width": 1.2,
+              "half_width": 46.0,
+              "inner_radius": 0.0,
+              "length": 240.0,
+              "move_id": "demon_fourfold",
+              "origin": "(1600.0, 34.0)",
+              "owner_id": 1,
+              "phase": "tell",
+              "radius": 410.0,
+              "remaining": 0.00000000000000165839564303383,
+              "shape": "sector",
+              "spread": 2.8,
+              "total": 1.85,
+              "visual_id": "B18"
+            }
+          ]
+        },
+        {
+          "from": "(1643.618, 72.15882)",
+          "goal": "(1506.314, 65.0)",
+          "risk": 0.0,
+          "seconds": 15.716666666667,
+          "speed": 217.45,
+          "visible_deadline": 1.75,
+          "warnings": [
+            {
+              "action_id": "charge",
+              "action_serial": 5,
+              "attack_step": 1,
+              "damage": 75.825,
+              "direction": "(0.752637, 0.658435)",
+              "gap_angle": 0.718738198280334,
+              "gap_width": 1.2,
+              "half_width": 68.0,
+              "inner_radius": 0.0,
+              "length": 940.0,
+              "move_id": "demon_skybreaker",
+              "origin": "(1600.0, 34.0)",
+              "owner_id": 1,
+              "phase": "tell",
+              "radius": 940.0,
+              "remaining": 1.75,
+              "shape": "line",
+              "spread": 1.7,
+              "total": 1.75,
+              "visual_id": "B18"
+            }
+          ]
+        },
+        {
+          "from": "(1513.325, 65.36552)",
+          "goal": "(1513.325, 65.36552)",
+          "risk": 1.0,
+          "seconds": 17.4333333333336,
+          "speed": 217.45,
+          "visible_deadline": 0.1,
+          "warnings": [
+            {
+              "action_id": "charge",
+              "action_serial": 5,
+              "attack_step": 1,
+              "damage": 75.825,
+              "direction": "(0.752637, 0.658435)",
+              "gap_angle": 0.718738198280334,
+              "gap_width": 1.2,
+              "half_width": 68.0,
+              "inner_radius": 0.0,
+              "length": 940.0,
+              "move_id": "demon_skybreaker",
+              "origin": "(1600.0, 34.0)",
+              "owner_id": 1,
+              "phase": "tell",
+              "radius": 940.0,
+              "remaining": 0.0333333333333345,
+              "shape": "line",
+              "spread": 1.7,
+              "total": 1.75,
+              "visual_id": "B18"
+            }
+          ]
+        },
+        {
+          "from": "(1513.325, 65.36552)",
+          "goal": "(1513.325, 65.36552)",
+          "risk": 1.0,
+          "seconds": 17.4500000000003,
+          "speed": 217.45,
+          "visible_deadline": 0.1,
+          "warnings": [
+            {
+              "action_id": "charge",
+              "action_serial": 5,
+              "attack_step": 1,
+              "damage": 75.825,
+              "direction": "(0.752637, 0.658435)",
+              "gap_angle": 0.718738198280334,
+              "gap_width": 1.2,
+              "half_width": 68.0,
+              "inner_radius": 0.0,
+              "length": 940.0,
+              "move_id": "demon_skybreaker",
+              "origin": "(1600.0, 34.0)",
+              "owner_id": 1,
+              "phase": "tell",
+              "radius": 940.0,
+              "remaining": 0.0166666666666679,
+              "shape": "line",
+              "spread": 1.7,
+              "total": 1.75,
+              "visual_id": "B18"
+            }
+          ]
+        },
+        {
+          "from": "(1513.325, 65.36552)",
+          "goal": "(1513.325, 65.36552)",
+          "risk": 1.0,
+          "seconds": 17.466666666667,
+          "speed": 217.45,
+          "visible_deadline": 0.1,
+          "warnings": [
+            {
+              "action_id": "charge",
+              "action_serial": 5,
+              "attack_step": 1,
+              "damage": 75.825,
+              "direction": "(0.752637, 0.658435)",
+              "gap_angle": 0.718738198280334,
+              "gap_width": 1.2,
+              "half_width": 68.0,
+              "inner_radius": 0.0,
+              "length": 940.0,
+              "move_id": "demon_skybreaker",
+              "origin": "(1600.0, 34.0)",
+              "owner_id": 1,
+              "phase": "tell",
+              "radius": 940.0,
+              "remaining": 0.00000000000000121430643318376,
+              "shape": "line",
+              "spread": 1.7,
+              "total": 1.75,
+              "visual_id": "B18"
+            }
+          ]
+        },
+        {
+          "from": "(1513.325, 65.36552)",
+          "goal": "(1513.325, 65.36552)",
+          "risk": 0.0,
+          "seconds": 17.4833333333336,
+          "speed": 217.45,
+          "visible_deadline": 0.65,
+          "warnings": [
+            {
+              "action_id": "charge",
+              "action_serial": 5,
+              "attack_step": 1,
+              "damage": 75.825,
+              "direction": "(0.752637, 0.658435)",
+              "gap_angle": 0.718738198280334,
+              "gap_width": 1.2,
+              "half_width": 68.0,
+              "inner_radius": 0.0,
+              "length": 940.0,
+              "move_id": "demon_skybreaker",
+              "origin": "(1600.0, 34.0)",
+              "owner_id": 1,
+              "phase": "active",
+              "radius": 940.0,
+              "remaining": 0.65,
+              "shape": "line",
+              "spread": 1.7,
+              "total": 0.65,
+              "visual_id": "B18"
+            }
+          ]
+        },
+        {
+          "from": "(1827.978, 298.1646)",
+          "goal": "(1923.95, 317.2547)",
+          "risk": 0.0,
+          "seconds": 19.9333333333335,
+          "speed": 217.45,
+          "visible_deadline": 1.9,
+          "warnings": [
+            {
+              "action_id": "pulse",
+              "action_serial": 6,
+              "attack_step": 2,
+              "damage": 69.759,
+              "direction": "(-0.803899, -0.594766)",
+              "gap_angle": -1.60461769104004,
+              "gap_width": 1.75,
+              "half_width": 46.0,
+              "inner_radius": 105.0,
+              "length": 240.0,
+              "move_id": "demon_quake",
+              "origin": "(2243.172, 605.3475)",
+              "owner_id": 1,
+              "phase": "tell",
+              "radius": 520.0,
+              "remaining": 1.9,
+              "shape": "ring_gap",
+              "spread": 1.7,
+              "total": 1.9,
+              "visual_id": "B18"
+            }
+          ]
+        },
+        {
+          "from": "(1916.842, 315.8408)",
+          "goal": "(1916.842, 315.8408)",
+          "risk": 1.0,
+          "seconds": 21.8166666666667,
+          "speed": 217.45,
+          "visible_deadline": 0.1,
+          "warnings": [
+            {
+              "action_id": "pulse",
+              "action_serial": 6,
+              "attack_step": 2,
+              "damage": 69.759,
+              "direction": "(-0.803899, -0.594766)",
+              "gap_angle": -1.60461769104004,
+              "gap_width": 1.75,
+              "half_width": 46.0,
+              "inner_radius": 105.0,
+              "length": 240.0,
+              "move_id": "demon_quake",
+              "origin": "(2243.172, 605.3475)",
+              "owner_id": 1,
+              "phase": "tell",
+              "radius": 520.0,
+              "remaining": 0.0166666666666683,
+              "shape": "ring_gap",
+              "spread": 1.7,
+              "total": 1.9,
+              "visual_id": "B18"
+            }
+          ]
+        },
+        {
+          "from": "(1916.842, 315.8408)",
+          "goal": "(1916.842, 315.8408)",
+          "risk": 1.0,
+          "seconds": 21.8333333333334,
+          "speed": 217.45,
+          "visible_deadline": 0.1,
+          "warnings": [
+            {
+              "action_id": "pulse",
+              "action_serial": 6,
+              "attack_step": 2,
+              "damage": 69.759,
+              "direction": "(-0.803899, -0.594766)",
+              "gap_angle": -1.60461769104004,
+              "gap_width": 1.75,
+              "half_width": 46.0,
+              "inner_radius": 105.0,
+              "length": 240.0,
+              "move_id": "demon_quake",
+              "origin": "(2243.172, 605.3475)",
+              "owner_id": 1,
+              "phase": "tell",
+              "radius": 520.0,
+              "remaining": 0.00000000000000165839564303383,
+              "shape": "ring_gap",
+              "spread": 1.7,
+              "total": 1.9,
+              "visual_id": "B18"
+            }
+          ]
+        },
+        {
+          "from": "(2079.507, 460.1498)",
+          "goal": "(2287.083, 667.7263)",
+          "risk": 0.0,
+          "seconds": 22.85,
+          "speed": 217.45,
+          "visible_deadline": 1.9,
+          "warnings": [
+            {
+              "action_id": "marker",
+              "action_serial": 7,
+              "attack_step": 3,
+              "damage": 72.792,
+              "direction": "(-0.748051, -0.663641)",
+              "gap_angle": -2.41591691970825,
+              "gap_width": 1.2,
+              "half_width": 46.0,
+              "inner_radius": 0.0,
+              "length": 240.0,
+              "move_id": "demon_heavenfall",
+              "origin": "(2079.507, 460.1498)",
+              "owner_id": 1,
+              "phase": "tell",
+              "radius": 235.0,
+              "remaining": 1.9,
+              "shape": "marker",
+              "spread": 1.7,
+              "total": 1.9,
+              "visual_id": "B18"
+            }
+          ]
+        },
+        {
+          "from": "(2281.961, 662.6038)",
+          "goal": "(2224.576, 576.7223)",
+          "risk": 0.0,
+          "seconds": 25.6666666666665,
+          "speed": 217.45,
+          "visible_deadline": 2.0,
+          "warnings": [
+            {
+              "action_id": "slam",
+              "action_serial": 8,
+              "attack_step": 4,
+              "damage": 81.891,
+              "direction": "(0.560867, 0.827906)",
+              "gap_angle": 0.97536426782608,
+              "gap_width": 1.2,
+              "half_width": 46.0,
+              "inner_radius": 0.0,
+              "length": 240.0,
+              "move_id": "demon_final_cleave",
+              "origin": "(2243.172, 605.3475)",
+              "owner_id": 1,
+              "phase": "tell",
+              "radius": 460.0,
+              "remaining": 2.0,
+              "shape": "sector",
+              "spread": 3.1,
+              "total": 2.0,
+              "visual_id": "B18"
+            }
+          ]
+        },
+        {
+          "from": "(2211.863, 556.8911)",
+          "goal": "(2299.755, 593.2974)",
+          "risk": 0.0,
+          "seconds": 31.3999999999995,
+          "speed": 217.45,
+          "visible_deadline": 1.85,
+          "warnings": [
+            {
+              "action_id": "slam",
+              "action_serial": 9,
+              "attack_step": 5,
+              "damage": 69.759,
+              "direction": "(-0.542706, -0.839923)",
+              "gap_angle": -2.14445185661316,
+              "gap_width": 1.2,
+              "half_width": 46.0,
+              "inner_radius": 0.0,
+              "length": 240.0,
+              "move_id": "demon_fourfold",
+              "origin": "(2243.172, 605.3475)",
+              "owner_id": 1,
+              "phase": "tell",
+              "radius": 410.0,
+              "remaining": 1.85,
+              "shape": "sector",
+              "spread": 2.8,
+              "total": 1.85,
+              "visual_id": "B18"
+            }
+          ]
+        },
+        {
+          "from": "(2295.572, 591.5646)",
+          "goal": "(2295.572, 591.5646)",
+          "risk": 1.0,
+          "seconds": 33.2333333333327,
+          "speed": 217.45,
+          "visible_deadline": 0.1,
+          "warnings": [
+            {
+              "action_id": "slam",
+              "action_serial": 9,
+              "attack_step": 5,
+              "damage": 69.759,
+              "direction": "(-0.542706, -0.839923)",
+              "gap_angle": -2.14445185661316,
+              "gap_width": 1.2,
+              "half_width": 46.0,
+              "inner_radius": 0.0,
+              "length": 240.0,
+              "move_id": "demon_fourfold",
+              "origin": "(2243.172, 605.3475)",
+              "owner_id": 1,
+              "phase": "tell",
+              "radius": 410.0,
+              "remaining": 0.0166666666666683,
+              "shape": "sector",
+              "spread": 2.8,
+              "total": 1.85,
+              "visual_id": "B18"
+            }
+          ]
+        },
+        {
+          "from": "(2295.572, 591.5646)",
+          "goal": "(2295.572, 591.5646)",
+          "risk": 1.0,
+          "seconds": 33.2499999999994,
+          "speed": 217.45,
+          "visible_deadline": 0.1,
+          "warnings": [
+            {
+              "action_id": "slam",
+              "action_serial": 9,
+              "attack_step": 5,
+              "damage": 69.759,
+              "direction": "(-0.542706, -0.839923)",
+              "gap_angle": -2.14445185661316,
+              "gap_width": 1.2,
+              "half_width": 46.0,
+              "inner_radius": 0.0,
+              "length": 240.0,
+              "move_id": "demon_fourfold",
+              "origin": "(2243.172, 605.3475)",
+              "owner_id": 1,
+              "phase": "tell",
+              "radius": 410.0,
+              "remaining": 0.00000000000000165839564303383,
+              "shape": "sector",
+              "spread": 2.8,
+              "total": 1.85,
+              "visual_id": "B18"
+            }
+          ]
+        },
+        {
+          "from": "(2299.077, 590.6426)",
+          "goal": "(2464.818, 659.2946)",
+          "risk": 0.0,
+          "seconds": 33.916666666666,
+          "speed": 217.45,
+          "visible_deadline": 1.75,
+          "warnings": [
+            {
+              "action_id": "charge",
+              "action_serial": 10,
+              "attack_step": 6,
+              "damage": 75.825,
+              "direction": "(0.967104, -0.254382)",
+              "gap_angle": -0.257208436727524,
+              "gap_width": 1.2,
+              "half_width": 68.0,
+              "inner_radius": 0.0,
+              "length": 940.0,
+              "move_id": "demon_skybreaker",
+              "origin": "(2243.172, 605.3475)",
+              "owner_id": 1,
+              "phase": "tell",
+              "radius": 940.0,
+              "remaining": 1.75,
+              "shape": "line",
+              "spread": 1.7,
+              "total": 1.75,
+              "visual_id": "B18"
+            }
+          ]
+        }
+      ],
+      "driver_revision": "visible_goal_v2",
+      "entry_owned": {
+        "F04": {
+          "cooldowns": {
+
+          },
+          "dead": false,
+          "hp": 210.1,
+          "level": 4.0,
+          "mp": 152.4,
+          "xp": 0.0
+        },
+        "F05": {
+          "cooldowns": {
+
+          },
+          "dead": false,
+          "hp": 232.1,
+          "level": 6.0,
+          "mp": 162.4,
+          "xp": 0.0
+        },
+        "F06": {
+          "cooldowns": {
+
+          },
+          "dead": false,
+          "hp": 247.1,
+          "level": 6.0,
+          "mp": 137.4,
+          "xp": 0.0
+        },
+        "F07": {
+          "cooldowns": {
+
+          },
+          "dead": false,
+          "hp": 241.1,
+          "level": 5.0,
+          "mp": 117.4,
+          "xp": 0.0
+        },
+        "F08": {
+          "cooldowns": {
+
+          },
+          "dead": false,
+          "hp": 271.1,
+          "level": 5.0,
+          "mp": 122.4,
+          "xp": 0.0
+        },
+        "F10": {
+          "cooldowns": {
+
+          },
+          "dead": false,
+          "hp": 231.1,
+          "level": 5.0,
+          "mp": 152.4,
+          "xp": 0.0
+        },
+        "F11": {
+          "cooldowns": {
+            "F11_basic": 0.0,
+            "armor_guard": 0.0,
+            "emma_frost": 0.0,
+            "emma_ice": 0.0,
+            "emma_star": 0.0,
+            "emma_support": 3.41666666666667
+          },
+          "dead": false,
+          "hp": 397.1,
+          "level": 16.0,
+          "mp": 207.4,
+          "xp": 179.333333333333
+        },
+        "JIA": {
+          "cooldowns": {
+            "JIA_basic": 0.413681592039801,
+            "armor_guard": 0.0,
+            "jia_break": 0.733333333333259,
+            "jia_sweep": 4.73333333333333
+          },
+          "dead": false,
+          "hp": 462.1,
+          "level": 16.0,
+          "mp": 167.4,
+          "xp": 5.33333333333333
+        },
+        "M07": {
+          "cooldowns": {
+
+          },
+          "dead": false,
+          "hp": 279.1,
+          "level": 3.0,
+          "mp": 102.4,
+          "xp": 0.0
+        },
+        "M08": {
+          "cooldowns": {
+
+          },
+          "dead": false,
+          "hp": 312.1,
+          "level": 6.0,
+          "mp": 132.4,
+          "xp": 0.0
+        },
+        "N01": {
+          "cooldowns": {
+
+          },
+          "dead": false,
+          "hp": 274.1,
+          "level": 3.0,
+          "mp": 92.4,
+          "xp": 0.0
+        },
+        "N07": {
+          "cooldowns": {
+            "bow_support": 2.81666666666667
+          },
+          "dead": false,
+          "hp": 376.1,
+          "level": 15.0,
+          "mp": 162.4,
+          "xp": 179.333333333333
+        },
+        "N11": {
+          "cooldowns": {
+
+          },
+          "dead": false,
+          "hp": 288.1,
+          "level": 7.0,
+          "mp": 127.4,
+          "xp": 0.0
+        },
+        "N13": {
+          "cooldowns": {
+
+          },
+          "dead": false,
+          "hp": 211.1,
+          "level": 5.0,
+          "mp": 162.4,
+          "xp": 0.0
+        },
+        "N14": {
+          "cooldowns": {
+
+          },
+          "dead": false,
+          "hp": 195.1,
+          "level": 4.0,
+          "mp": 142.4,
+          "xp": 0.0
+        },
+        "N16": {
+          "cooldowns": {
+
+          },
+          "dead": false,
+          "hp": 204.1,
+          "level": 3.0,
+          "mp": 132.4,
+          "xp": 0.0
+        },
+        "N17": {
+          "cooldowns": {
+
+          },
+          "dead": false,
+          "hp": 207.1,
+          "level": 1.0,
+          "mp": 97.4,
+          "xp": 0.0
+        },
+        "N18": {
+          "cooldowns": {
+
+          },
+          "dead": false,
+          "hp": 220.1,
+          "level": 4.0,
+          "mp": 122.4,
+          "xp": 0.0
+        }
+      },
+      "equipment": {
+        "accessory": "frost_jade",
+        "armor": "iron_armor",
+        "weapon": "long_spear"
+      },
+      "injected_owned_or_resources": false,
+      "members": [
+        "JIA",
+        "F11",
+        "N07"
+      ],
+      "metrics": {
+        "active_seconds": {
+          "JIA": 34.4333333333327
+        },
+        "boss_damage_by_ability": {
+          "JIA_basic": 4147.697,
+          "bow_support": 565.449999999999,
+          "emma_support": 499.928,
+          "jia_break": 1381.5,
+          "jia_sweep": 1005.425
+        },
+        "boss_damage_by_source": {
+          "F11": 499.928,
+          "JIA": 6534.622,
+          "N07": 565.449999999999
+        },
+        "boss_remaining": {
+
+        },
+        "boss_spawn_seconds": 0.0166666666666667,
+        "boss_support_damage": 1065.378,
+        "casts": {
+          "F11:emma_support:support": 9,
+          "JIA:JIA_basic:front": 45,
+          "JIA:jia_break:front": 4,
+          "JIA:jia_sweep:front": 6,
+          "N07:bow_support:support": 8
+        },
+        "damage_attribution_available": true,
+        "damage_by_ability": {
+          "JIA_basic": 4147.697,
+          "bow_support": 565.449999999999,
+          "emma_support": 499.928,
+          "jia_break": 1381.5,
+          "jia_sweep": 1005.425
+        },
+        "damage_by_source": {
+          "F11": 499.928,
+          "JIA": 6534.622,
+          "N07": 565.449999999999
+        },
+        "damage_taken_events": [],
+        "elapsed": 34.4333333333327,
+        "entry": {
+          "F11": {
+            "cooldowns": {
+              "F11_basic": 0.0,
+              "armor_guard": 0.0,
+              "emma_frost": 0.0,
+              "emma_ice": 0.0,
+              "emma_star": 0.0,
+              "emma_support": 3.41666666666667
+            },
+            "dead": false,
+            "hp": 397.1,
+            "level": 16,
+            "mp": 207.4,
+            "xp": 179.333333333333
+          },
+          "JIA": {
+            "cooldowns": {
+              "JIA_basic": 0.413681592039801,
+              "armor_guard": 0.0,
+              "jia_break": 0.733333333333259,
+              "jia_sweep": 4.73333333333333
+            },
+            "dead": false,
+            "hp": 462.1,
+            "level": 16,
+            "mp": 167.4,
+            "xp": 5.33333333333333
+          },
+          "N07": {
+            "cooldowns": {
+              "bow_support": 2.81666666666667
+            },
+            "dead": false,
+            "hp": 376.1,
+            "level": 15,
+            "mp": 162.4,
+            "xp": 179.333333333333
+          }
+        },
+        "exit": {
+          "F11": {
+            "cooldowns": {
+              "F11_basic": 0.0,
+              "armor_guard": 0.0,
+              "emma_frost": 0.0,
+              "emma_ice": 0.0,
+              "emma_star": 0.0,
+              "emma_support": 0.633333333333341
+            },
+            "dead": false,
+            "hp": 397.1,
+            "level": 16,
+            "mp": 207.4,
+            "xp": 205.333333333333
+          },
+          "JIA": {
+            "cooldowns": {
+              "JIA_basic": 0.593824228028504,
+              "armor_guard": 0.0,
+              "jia_break": 8.58333333333326,
+              "jia_sweep": 3.08333333333334
+            },
+            "dead": false,
+            "hp": 462.1,
+            "level": 16,
+            "mp": 85.2166666666614,
+            "xp": 31.3333333333333
+          },
+          "N07": {
+            "cooldowns": {
+              "bow_support": 2.4
+            },
+            "dead": false,
+            "hp": 392.1,
+            "level": 16,
+            "mp": 167.4,
+            "xp": 7.33333333333333
+          }
+        },
+        "hurt_events": [],
+        "hurt_total": {
+
+        },
+        "last_phase": "B18:1:combat",
+        "max_hostiles": 1,
+        "mechanics": {
+
+        },
+        "mp_observed_recovery": {
+          "JIA": 192.946666666661,
+          "N07": 5.0
+        },
+        "outcome": "victory",
+        "outcome_reason": "authentic_victory",
+        "paid_mp": {
+          "F11": 0.0,
+          "JIA": 276.0,
+          "N07": 0.0
+        },
+        "phase_damage_attribution": {
+          "B18:0": 3092.917,
+          "B18:1": 4507.083
+        },
+        "phase_marks": [
+          {
+            "active": "JIA",
+            "bank": 0.0,
+            "form_name": "吕布",
+            "hp": 3040.0,
+            "phase": "B18:0:combat",
+            "player_position": "(1600.0, 896.3759)",
+            "resources": {
+              "F11": {
+                "cooldowns": {
+                  "F11_basic": 0.0,
+                  "armor_guard": 0.0,
+                  "emma_frost": 0.0,
+                  "emma_ice": 0.0,
+                  "emma_star": 0.0,
+                  "emma_support": 3.4
+                },
+                "dead": false,
+                "hp": 397.1,
+                "level": 16,
+                "mp": 207.4,
+                "xp": 179.333333333333
+              },
+              "JIA": {
+                "cooldowns": {
+                  "JIA_basic": 0.397014925373134,
+                  "armor_guard": 0.0,
+                  "jia_break": 0.716666666666592,
+                  "jia_sweep": 4.71666666666666
+                },
+                "dead": false,
+                "hp": 462.1,
+                "level": 16,
+                "mp": 167.4,
+                "xp": 5.33333333333333
+              },
+              "N07": {
+                "cooldowns": {
+                  "bow_support": 2.8
+                },
+                "dead": false,
+                "hp": 376.1,
+                "level": 15,
+                "mp": 162.4,
+                "xp": 179.333333333333
+              }
+            },
+            "seconds": 0.0166666666666667
+          },
+          {
+            "active": "JIA",
+            "bank": 52.9169999999995,
+            "form_name": "四臂鬼神相",
+            "hp": 4560.0,
+            "phase": "B18:1:transition",
+            "player_position": "(1537.583, 65.0)",
+            "resources": {
+              "F11": {
+                "cooldowns": {
+                  "F11_basic": 0.0,
+                  "armor_guard": 0.0,
+                  "emma_frost": 0.0,
+                  "emma_ice": 0.0,
+                  "emma_star": 0.0,
+                  "emma_support": 1.76666666666667
+                },
+                "dead": false,
+                "hp": 397.1,
+                "level": 16,
+                "mp": 207.4,
+                "xp": 179.333333333333
+              },
+              "JIA": {
+                "cooldowns": {
+                  "JIA_basic": 0.593824228028504,
+                  "armor_guard": 0.0,
+                  "jia_break": 8.81666666666661,
+                  "jia_sweep": 3.31666666666667
+                },
+                "dead": false,
+                "hp": 462.1,
+                "level": 16,
+                "mp": 116.263333333332,
+                "xp": 5.33333333333333
+              },
+              "N07": {
+                "cooldowns": {
+                  "bow_support": 2.4
+                },
+                "dead": false,
+                "hp": 376.1,
+                "level": 15,
+                "mp": 162.4,
+                "xp": 179.333333333333
+              }
+            },
+            "seconds": 12.2000000000002
+          },
+          {
+            "active": "JIA",
+            "bank": 151.771,
+            "form_name": "四臂鬼神相",
+            "hp": 4560.0,
+            "phase": "B18:1:observation",
+            "player_position": "(1537.583, 65.0)",
+            "resources": {
+              "F11": {
+                "cooldowns": {
+                  "F11_basic": 0.0,
+                  "armor_guard": 0.0,
+                  "emma_frost": 0.0,
+                  "emma_ice": 0.0,
+                  "emma_star": 0.0,
+                  "emma_support": 0.783333333333342
+                },
+                "dead": false,
+                "hp": 397.1,
+                "level": 16,
+                "mp": 207.4,
+                "xp": 179.333333333333
+              },
+              "JIA": {
+                "cooldowns": {
+                  "JIA_basic": 0.21049089469517,
+                  "armor_guard": 0.0,
+                  "jia_break": 7.83333333333324,
+                  "jia_sweep": 2.33333333333334
+                },
+                "dead": false,
+                "hp": 462.1,
+                "level": 16,
+                "mp": 121.966666666665,
+                "xp": 5.33333333333333
+              },
+              "N07": {
+                "cooldowns": {
+                  "bow_support": 1.41666666666667
+                },
+                "dead": false,
+                "hp": 376.1,
+                "level": 15,
+                "mp": 162.4,
+                "xp": 179.333333333333
+              }
+            },
+            "seconds": 13.1833333333336
+          },
+          {
+            "active": "JIA",
+            "bank": 0.0,
+            "form_name": "四臂鬼神相",
+            "hp": 4309.375,
+            "phase": "B18:1:combat",
+            "player_position": "(1635.435, 65.0)",
+            "resources": {
+              "F11": {
+                "cooldowns": {
+                  "F11_basic": 0.0,
+                  "armor_guard": 0.0,
+                  "emma_frost": 0.0,
+                  "emma_ice": 0.0,
+                  "emma_star": 0.0,
+                  "emma_support": 0.133333333333341
+                },
+                "dead": false,
+                "hp": 397.1,
+                "level": 16,
+                "mp": 207.4,
+                "xp": 179.333333333333
+              },
+              "JIA": {
+                "cooldowns": {
+                  "JIA_basic": 0.16049089469517,
+                  "armor_guard": 0.0,
+                  "jia_break": 7.18333333333324,
+                  "jia_sweep": 1.68333333333335
+                },
+                "dead": false,
+                "hp": 462.1,
+                "level": 16,
+                "mp": 125.736666666665,
+                "xp": 5.33333333333333
+              },
+              "N07": {
+                "cooldowns": {
+                  "bow_support": 0.766666666666673
+                },
+                "dead": false,
+                "hp": 376.1,
+                "level": 15,
+                "mp": 162.4,
+                "xp": 179.333333333333
+              }
+            },
+            "seconds": 13.8333333333336
+          }
+        ],
+        "phase_seconds": {
+          "B18:0:combat": 12.1833333333335,
+          "B18:1:combat": 20.5999999999991,
+          "B18:1:observation": 0.650000000000032,
+          "B18:1:transition": 0.983333333333382
+        },
+        "resource_balance": {
+          "F11": {
+            "net_hp_restored_including_level_growth": 0.0,
+            "net_mp_restored_including_level_growth": 0.0,
+            "paid_mp": 0.0,
+            "received_hp_damage": 0.0
+          },
+          "JIA": {
+            "net_hp_restored_including_level_growth": 0.0,
+            "net_mp_restored_including_level_growth": 193.816666666661,
+            "paid_mp": 276.0,
+            "received_hp_damage": 0.0
+          },
+          "N07": {
+            "net_hp_restored_including_level_growth": 16.0,
+            "net_mp_restored_including_level_growth": 5.0,
+            "paid_mp": 0.0,
+            "received_hp_damage": 0.0
+          }
+        },
+        "seen_boss_actions": {
+          "0:charge": true,
+          "0:marker": true,
+          "0:slam": true,
+          "1:charge": true,
+          "1:marker": true,
+          "1:pulse": true,
+          "1:slam": true
+        },
+        "shield_spent": {
+          "F11": 0.0,
+          "JIA": 0.0,
+          "N07": 0.0
+        },
+        "support_damage": 1065.378
+      },
+      "movement_policy": "read_telegraphs",
+      "request": {
+        "attempt_id": "B18-449463-85774162",
+        "characters": {
+          "F04": {
+            "cooldowns": {
+
+            },
+            "dead": false,
+            "hp": 210.1,
+            "level": 4.0,
+            "mp": 152.4,
+            "xp": 0.0
+          },
+          "F05": {
+            "cooldowns": {
+
+            },
+            "dead": false,
+            "hp": 232.1,
+            "level": 6.0,
+            "mp": 162.4,
+            "xp": 0.0
+          },
+          "F06": {
+            "cooldowns": {
+
+            },
+            "dead": false,
+            "hp": 247.1,
+            "level": 6.0,
+            "mp": 137.4,
+            "xp": 0.0
+          },
+          "F07": {
+            "cooldowns": {
+
+            },
+            "dead": false,
+            "hp": 241.1,
+            "level": 5.0,
+            "mp": 117.4,
+            "xp": 0.0
+          },
+          "F08": {
+            "cooldowns": {
+
+            },
+            "dead": false,
+            "hp": 271.1,
+            "level": 5.0,
+            "mp": 122.4,
+            "xp": 0.0
+          },
+          "F10": {
+            "cooldowns": {
+
+            },
+            "dead": false,
+            "hp": 231.1,
+            "level": 5.0,
+            "mp": 152.4,
+            "xp": 0.0
+          },
+          "F11": {
+            "cooldowns": {
+              "F11_basic": 0.0,
+              "armor_guard": 0.0,
+              "emma_frost": 0.0,
+              "emma_ice": 0.0,
+              "emma_star": 0.0,
+              "emma_support": 3.41666666666667
+            },
+            "dead": false,
+            "hp": 397.1,
+            "level": 16.0,
+            "mp": 207.4,
+            "xp": 179.333333333333
+          },
+          "JIA": {
+            "cooldowns": {
+              "JIA_basic": 0.413681592039801,
+              "armor_guard": 0.0,
+              "jia_break": 0.733333333333259,
+              "jia_sweep": 4.73333333333333
+            },
+            "dead": false,
+            "hp": 462.1,
+            "level": 16.0,
+            "mp": 167.4,
+            "xp": 5.33333333333333
+          },
+          "M07": {
+            "cooldowns": {
+
+            },
+            "dead": false,
+            "hp": 279.1,
+            "level": 3.0,
+            "mp": 102.4,
+            "xp": 0.0
+          },
+          "M08": {
+            "cooldowns": {
+
+            },
+            "dead": false,
+            "hp": 312.1,
+            "level": 6.0,
+            "mp": 132.4,
+            "xp": 0.0
+          },
+          "N01": {
+            "cooldowns": {
+
+            },
+            "dead": false,
+            "hp": 274.1,
+            "level": 3.0,
+            "mp": 92.4,
+            "xp": 0.0
+          },
+          "N07": {
+            "cooldowns": {
+              "bow_support": 2.81666666666667
+            },
+            "dead": false,
+            "hp": 376.1,
+            "level": 15.0,
+            "mp": 162.4,
+            "xp": 179.333333333333
+          },
+          "N11": {
+            "cooldowns": {
+
+            },
+            "dead": false,
+            "hp": 288.1,
+            "level": 7.0,
+            "mp": 127.4,
+            "xp": 0.0
+          },
+          "N13": {
+            "cooldowns": {
+
+            },
+            "dead": false,
+            "hp": 211.1,
+            "level": 5.0,
+            "mp": 162.4,
+            "xp": 0.0
+          },
+          "N14": {
+            "cooldowns": {
+
+            },
+            "dead": false,
+            "hp": 195.1,
+            "level": 4.0,
+            "mp": 142.4,
+            "xp": 0.0
+          },
+          "N16": {
+            "cooldowns": {
+
+            },
+            "dead": false,
+            "hp": 204.1,
+            "level": 3.0,
+            "mp": 132.4,
+            "xp": 0.0
+          },
+          "N17": {
+            "cooldowns": {
+
+            },
+            "dead": false,
+            "hp": 207.1,
+            "level": 1.0,
+            "mp": 97.4,
+            "xp": 0.0
+          },
+          "N18": {
+            "cooldowns": {
+
+            },
+            "dead": false,
+            "hp": 220.1,
+            "level": 4.0,
+            "mp": 122.4,
+            "xp": 0.0
+          }
+        },
+        "equipment": {
+          "accessory": "frost_jade",
+          "armor": "iron_armor",
+          "weapon": "long_spear"
+        },
+        "members": [
+          "JIA",
+          "F11",
+          "N07"
+        ],
+        "node": {
+          "id": "B18",
+          "kind": "boss",
+          "name": "吕布终战",
+          "next": [
+            "S14"
+          ],
+          "segment": 5.0,
+          "summary": "与吕布决战。完成本章后返回天下。"
+        },
+        "seed": 1718,
+        "stage": {
+          "action_budget": {
+            "major": 2,
+            "melee": 2
+          },
+          "bonus_time": 100.0,
+          "boss_definition": "B18",
+          "boss_derivative_cap": 0,
+          "boss_hp": 7600.0,
+          "boss_kills": 0,
+          "boss_name": "吕布",
+          "boss_time": 0.0,
+          "derivative_cap": 0,
+          "encounter_mode": "boss_duel",
+          "enemy_cap": 0,
+          "enemy_damage": 1.8,
+          "enemy_hp": 2.5,
+          "field_elites": [],
+          "fields_enabled": false,
+          "map": "stone",
+          "role_caps": {
+            "heavy": 2,
+            "ranged": 4,
+            "support": 1
+          },
+          "seed": 1718,
+          "spawn_interval": 1.35,
+          "waves": []
+        }
+      },
+      "result": {
+        "attempt_id": "B18-449463-85774162",
+        "card_elite": false,
+        "characters": {
+          "F11": {
+            "cooldowns": {
+              "F11_basic": 0.0,
+              "armor_guard": 0.0,
+              "emma_frost": 0.0,
+              "emma_ice": 0.0,
+              "emma_star": 0.0,
+              "emma_support": 0.633333333333341
+            },
+            "dead": false,
+            "hp": 397.1,
+            "level": 16,
+            "mp": 207.4,
+            "xp": 205.333333333333
+          },
+          "JIA": {
+            "cooldowns": {
+              "JIA_basic": 0.593824228028504,
+              "armor_guard": 0.0,
+              "jia_break": 8.58333333333326,
+              "jia_sweep": 3.08333333333334
+            },
+            "dead": false,
+            "hp": 462.1,
+            "level": 16,
+            "mp": 85.2166666666614,
+            "xp": 31.3333333333333
+          },
+          "N07": {
+            "cooldowns": {
+              "bow_support": 2.4
+            },
+            "dead": false,
+            "hp": 392.1,
+            "level": 16,
+            "mp": 167.4,
+            "xp": 7.33333333333333
+          }
+        },
+        "elapsed": 34.4333333333327,
+        "equipment_elite": false,
+        "fast_clear": true,
+        "kills": 0,
+        "outcome": "victory"
+      },
+      "reward_after": {
+        "candidates": [
+          "F05",
+          "F10",
+          "N10",
+          "M02",
+          "N11",
+          "N16",
+          "M04"
+        ],
+        "node": "B18",
+        "picks": 3,
+        "selected": [
+          "N16",
+          "F05",
+          "F10"
+        ]
+      },
+      "route": "explore",
+      "skill_requests": 138,
+      "stage": "B18",
+      "switch_requests": 0,
+      "unavailable_equipment": []
+    }
+  ],
+  "source": "docs/implementation/evidence/2026-10-29/boss-depth/balance/campaign-r3.json"
+}

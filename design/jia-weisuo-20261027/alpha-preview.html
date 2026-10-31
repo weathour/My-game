@@ -1,0 +1,22 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Jia Weisuo alpha preview</title>
+<style>
+* { box-sizing: border-box }
+body { margin:0; padding:24px; background:#444; font:16px sans-serif; color:#fff }
+.pair { display:grid; grid-template-columns:1fr 1fr; gap:24px }
+figure { margin:0; text-align:center }
+figcaption { padding:8px }
+.panel { height:780px; display:flex; justify-content:center; align-items:center }
+.light { background:#eee7d9 }
+.dark { background:#10251e }
+img { display:block; object-fit:contain; max-width:100%; max-height:100% }
+.master { margin-top:24px; }
+.checker { height:780px; background:conic-gradient(#ccc 25%,#fff 0 50%,#ccc 0 75%,#fff 0) 0 0 / 24px 24px; }
+.checker img { margin:auto }
+</style>
+<div class="pair">
+<figure><figcaption>RGBA · light background preview</figcaption><div class="panel light"><img src="jia-standing-v1.png"></div></figure>
+<figure><figcaption>RGBA · dark background preview</figcaption><div class="panel dark"><img src="jia-standing-v1.png"></div></figure>
+</div>
+<figure class="master"><figcaption>RGBA · model sheet / checkerboard preview</figcaption><div class="checker"><img src="character-master-v3-transparent.png"></div></figure>

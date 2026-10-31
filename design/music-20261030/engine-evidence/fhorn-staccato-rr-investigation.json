@@ -1,0 +1,382 @@
+{
+  "mapping_file": "vsco/FHornStac.sfz",
+  "mapping_git_blob_sha1": "2ff9d9018f95e0ade0afb608e049b6e180e7617d",
+  "mapping_hash_verified": true,
+  "mapping_commit": "6dd651d55dde97fd4028699be9d4481f26917891",
+  "parser_inheritance_issue": false,
+  "explicit_native_mapping": {
+    "D4_v2_rr1_volume_db": 0,
+    "D4_v2_rr2_volume_db": 12
+  },
+  "native_recording_compensation_rationale": "No recording/author note supporting a +12dB RR2 compensation has been found in the pinned repository metadata; measured raw comparison follows.",
+  "engine_or_audio_modified": false,
+  "rows": [
+    {
+      "source_file": "vsco/Brass/F Horn/stac/MOHorn_stac_D4_v1_rr1.wav",
+      "source_git_blob_sha1": "e6104e3514a59841d25c519a22305f021d750e64",
+      "source_sha256": "40e0ddc7e92c5c5d73241bb78795c03ce902cb8ef1219ea4f62761f5385f2f5f",
+      "source_frames": 65326,
+      "sample_rate": 44100,
+      "region": {
+        "file": "vsco/Brass/F Horn/stac/MOHorn_stac_D4_v1_rr1.wav",
+        "ampeg_attack": 0.001,
+        "ampeg_release": 3,
+        "volume": 20,
+        "lorand": 0.0,
+        "hirand": 0.5,
+        "lokey": 67,
+        "hikey": 75,
+        "pitch_keycenter": 74,
+        "lovel": 0,
+        "hivel": 41
+      },
+      "native_full": {
+        "peak_dbfs": -6.987504482269287,
+        "rms_dbfs": -25.81783787906499
+      },
+      "native_first_225ms": {
+        "peak_dbfs": -6.987504482269287,
+        "rms_dbfs": -17.695264400112677
+      },
+      "channel_selection": {
+        "policy": "stronger_original_channel_if_mono_loss_below_threshold",
+        "threshold_db": -4.0,
+        "original_mono_energy_loss_db": -0.6010063862492326,
+        "original_channel_rms": [
+          0.0602342795509879,
+          0.04013483698992715
+        ],
+        "selected": false,
+        "selected_channel": null,
+        "operation": "preserve native stereo",
+        "classification": "source preprocessing information, not a musical adaptation error"
+      },
+      "render_pitch74_v80_hold225ms": {
+        "peak_dbfs": -10.013871192932129,
+        "rms_dbfs": -28.852286493520385
+      },
+      "same_voice_with_region_gain_0db": {
+        "peak_dbfs": -30.013870239257812,
+        "rms_dbfs": -48.85228667308002
+      }
+    },
+    {
+      "source_file": "vsco/Brass/F Horn/stac/MOHorn_stac_D4_v2_rr1.wav",
+      "source_git_blob_sha1": "a06da55ae32393863f62ec4e26c2703f210a1017",
+      "source_sha256": "06003ac8bfaa154949296447bf6b5cf74df9656137402564ab0717e91bd00714",
+      "source_frames": 64580,
+      "sample_rate": 44100,
+      "region": {
+        "file": "vsco/Brass/F Horn/stac/MOHorn_stac_D4_v2_rr1.wav",
+        "ampeg_attack": 0.001,
+        "ampeg_release": 3,
+        "volume": 0,
+        "lorand": 0.0,
+        "hirand": 0.5,
+        "lokey": 67,
+        "hikey": 75,
+        "pitch_keycenter": 74,
+        "lovel": 42,
+        "hivel": 83
+      },
+      "native_full": {
+        "peak_dbfs": -0.9296525716781616,
+        "rms_dbfs": -19.49284647824947
+      },
+      "native_first_225ms": {
+        "peak_dbfs": -0.9296525716781616,
+        "rms_dbfs": -11.413390995732328
+      },
+      "channel_selection": {
+        "policy": "stronger_original_channel_if_mono_loss_below_threshold",
+        "threshold_db": -4.0,
+        "original_mono_energy_loss_db": -0.7591854506959514,
+        "original_channel_rms": [
+          0.12591355302960816,
+          0.08138267364553134
+        ],
+        "selected": false,
+        "selected_channel": null,
+        "operation": "preserve native stereo",
+        "classification": "source preprocessing information, not a musical adaptation error"
+      },
+      "render_pitch74_v80_hold225ms": {
+        "peak_dbfs": -23.927871704101562,
+        "rms_dbfs": -42.525683050793035
+      },
+      "same_voice_with_region_gain_0db": {
+        "peak_dbfs": -23.927871704101562,
+        "rms_dbfs": -42.525683050793035
+      }
+    },
+    {
+      "source_file": "vsco/Brass/F Horn/stac/MOHorn_stac_D4_v3_rr1.wav",
+      "source_git_blob_sha1": "a7d84979e0f58e5a6ebcf0f6620e50064aef232c",
+      "source_sha256": "14724f3fc89936848381cd8a2399653bacd551364f8118673c0b98ce4d16160f",
+      "source_frames": 51677,
+      "sample_rate": 44100,
+      "region": {
+        "file": "vsco/Brass/F Horn/stac/MOHorn_stac_D4_v3_rr1.wav",
+        "ampeg_attack": 0.001,
+        "ampeg_release": 3,
+        "volume": 0,
+        "lorand": 0.0,
+        "hirand": 0.5,
+        "lokey": 67,
+        "hikey": 75,
+        "pitch_keycenter": 74,
+        "lovel": 84,
+        "hivel": 127
+      },
+      "native_full": {
+        "peak_dbfs": -1.340747356414795,
+        "rms_dbfs": -18.12047241368588
+      },
+      "native_first_225ms": {
+        "peak_dbfs": -1.340747356414795,
+        "rms_dbfs": -11.229336581229637
+      },
+      "channel_selection": {
+        "policy": "stronger_original_channel_if_mono_loss_below_threshold",
+        "threshold_db": -4.0,
+        "original_mono_energy_loss_db": -1.603541274966498,
+        "original_channel_rms": [
+          0.1404458620838004,
+          0.10538318189152542
+        ],
+        "selected": false,
+        "selected_channel": null,
+        "operation": "preserve native stereo",
+        "classification": "source preprocessing information, not a musical adaptation error"
+      },
+      "render_pitch74_v80_hold225ms": {
+        "peak_dbfs": -24.35839080810547,
+        "rms_dbfs": -41.1714687596408
+      },
+      "same_voice_with_region_gain_0db": {
+        "peak_dbfs": -24.35839080810547,
+        "rms_dbfs": -41.1714687596408
+      }
+    },
+    {
+      "source_file": "vsco/Brass/F Horn/stac/MOHorn_stac_D4_v1_rr2.wav",
+      "source_git_blob_sha1": "70d735e5b6dbff7ff8217e16e89402a5f325d43d",
+      "source_sha256": "ba9639f822b58d97263298a7e60042fb72de0f78770e76ed9b4470d8ea153c92",
+      "source_frames": 63571,
+      "sample_rate": 44100,
+      "region": {
+        "file": "vsco/Brass/F Horn/stac/MOHorn_stac_D4_v1_rr2.wav",
+        "ampeg_attack": 0.001,
+        "ampeg_release": 3,
+        "volume": 20,
+        "lorand": 0.5,
+        "hirand": 1.0,
+        "lokey": 67,
+        "hikey": 75,
+        "pitch_keycenter": 74,
+        "lovel": 0,
+        "hivel": 41
+      },
+      "native_full": {
+        "peak_dbfs": -4.448380470275879,
+        "rms_dbfs": -22.681880870305655
+      },
+      "native_first_225ms": {
+        "peak_dbfs": -4.448380470275879,
+        "rms_dbfs": -14.66866768705474
+      },
+      "channel_selection": {
+        "policy": "stronger_original_channel_if_mono_loss_below_threshold",
+        "threshold_db": -4.0,
+        "original_mono_energy_loss_db": -0.6028762360136796,
+        "original_channel_rms": [
+          0.08934039889803629,
+          0.05295123693206543
+        ],
+        "selected": false,
+        "selected_channel": null,
+        "operation": "preserve native stereo",
+        "classification": "source preprocessing information, not a musical adaptation error"
+      },
+      "render_pitch74_v80_hold225ms": {
+        "peak_dbfs": -7.483333587646484,
+        "rms_dbfs": -25.714841269708284
+      },
+      "same_voice_with_region_gain_0db": {
+        "peak_dbfs": -27.483333587646484,
+        "rms_dbfs": -45.71484145023654
+      }
+    },
+    {
+      "source_file": "vsco/Brass/F Horn/stac/MOHorn_stac_D4_v2_rr2.wav",
+      "source_git_blob_sha1": "28bf3a642d65cd12246f0745f3415092ede96a09",
+      "source_sha256": "e96e04228c61ec6895e9b1c3f7c9e742e4e5e4e0a3761ee0d2a8ba09dedab456",
+      "source_frames": 74865,
+      "sample_rate": 44100,
+      "region": {
+        "file": "vsco/Brass/F Horn/stac/MOHorn_stac_D4_v2_rr2.wav",
+        "ampeg_attack": 0.001,
+        "ampeg_release": 3,
+        "volume": 12,
+        "lorand": 0.5,
+        "hirand": 1.0,
+        "lokey": 67,
+        "hikey": 75,
+        "pitch_keycenter": 74,
+        "lovel": 42,
+        "hivel": 83
+      },
+      "native_full": {
+        "peak_dbfs": -0.6833000183105469,
+        "rms_dbfs": -19.77988676595265
+      },
+      "native_first_225ms": {
+        "peak_dbfs": -0.6833000183105469,
+        "rms_dbfs": -11.068197328126752
+      },
+      "channel_selection": {
+        "policy": "stronger_original_channel_if_mono_loss_below_threshold",
+        "threshold_db": -4.0,
+        "original_mono_energy_loss_db": -0.7394521046534147,
+        "original_channel_rms": [
+          0.12345301362398035,
+          0.0761520811861222
+        ],
+        "selected": false,
+        "selected_channel": null,
+        "operation": "preserve native stereo",
+        "classification": "source preprocessing information, not a musical adaptation error"
+      },
+      "render_pitch74_v80_hold225ms": {
+        "peak_dbfs": -11.70393180847168,
+        "rms_dbfs": -30.81355879470805
+      },
+      "same_voice_with_region_gain_0db": {
+        "peak_dbfs": -23.703933715820312,
+        "rms_dbfs": -42.81355887806868
+      }
+    },
+    {
+      "source_file": "vsco/Brass/F Horn/stac/MOHorn_stac_D4_v3_rr2.wav",
+      "source_git_blob_sha1": "5e86bad3c152fbe75bebcf52d82f54f482292da6",
+      "source_sha256": "39dd7864c154d126a549eb075e67a8e2b4894bf4341b7593365625f917a627fe",
+      "source_frames": 64096,
+      "sample_rate": 44100,
+      "region": {
+        "file": "vsco/Brass/F Horn/stac/MOHorn_stac_D4_v3_rr2.wav",
+        "ampeg_attack": 0.001,
+        "ampeg_release": 3,
+        "volume": 4,
+        "lorand": 0.5,
+        "hirand": 1.0,
+        "lokey": 67,
+        "hikey": 75,
+        "pitch_keycenter": 74,
+        "lovel": 84,
+        "hivel": 127
+      },
+      "native_full": {
+        "peak_dbfs": 0.0,
+        "rms_dbfs": -17.8242530123717
+      },
+      "native_first_225ms": {
+        "peak_dbfs": 0.0,
+        "rms_dbfs": -9.77004800052756
+      },
+      "channel_selection": {
+        "policy": "stronger_original_channel_if_mono_loss_below_threshold",
+        "threshold_db": -4.0,
+        "original_mono_energy_loss_db": -1.2024021508371499,
+        "original_channel_rms": [
+          0.16174854665472996,
+          0.0827303111804951
+        ],
+        "selected": false,
+        "selected_channel": null,
+        "operation": "preserve native stereo",
+        "classification": "source preprocessing information, not a musical adaptation error"
+      },
+      "render_pitch74_v80_hold225ms": {
+        "peak_dbfs": -18.998428344726562,
+        "rms_dbfs": -36.8590986643686
+      },
+      "same_voice_with_region_gain_0db": {
+        "peak_dbfs": -22.998428344726562,
+        "rms_dbfs": -40.85909920728248
+      }
+    }
+  ],
+  "reproduction_cases": [
+    {
+      "case": "hero_main_event119",
+      "pitch": 74,
+      "velocity": 80,
+      "hold_seconds": 0.225,
+      "voices": [
+        {
+          "file": "vsco/Brass/F Horn/stac/MOHorn_stac_D4_v2_rr1.wav",
+          "native_region_volume_db": 0,
+          "mapped_voice": {
+            "peak_dbfs": -23.927871704101562,
+            "rms_dbfs": -42.525683050793035
+          },
+          "voice_with_region_volume_zero": {
+            "peak_dbfs": -23.927871704101562,
+            "rms_dbfs": -42.525683050793035
+          }
+        },
+        {
+          "file": "vsco/Brass/F Horn/stac/MOHorn_stac_D4_v2_rr2.wav",
+          "native_region_volume_db": 12,
+          "mapped_voice": {
+            "peak_dbfs": -11.70393180847168,
+            "rms_dbfs": -30.81355879470805
+          },
+          "voice_with_region_volume_zero": {
+            "peak_dbfs": -23.703933715820312,
+            "rms_dbfs": -42.81355887806868
+          }
+        }
+      ],
+      "rr2_minus_rr1_peak_db": 12.223939895629883,
+      "rr2_minus_rr1_rms_db": 11.712124256084984
+    },
+    {
+      "case": "boss_lubu_warform_event90",
+      "pitch": 67,
+      "velocity": 83,
+      "hold_seconds": 0.23333333333333334,
+      "voices": [
+        {
+          "file": "vsco/Brass/F Horn/stac/MOHorn_stac_D4_v2_rr1.wav",
+          "native_region_volume_db": 0,
+          "mapped_voice": {
+            "peak_dbfs": -23.298175811767578,
+            "rms_dbfs": -41.9458035308903
+          },
+          "voice_with_region_volume_zero": {
+            "peak_dbfs": -23.298175811767578,
+            "rms_dbfs": -41.9458035308903
+          }
+        },
+        {
+          "file": "vsco/Brass/F Horn/stac/MOHorn_stac_D4_v2_rr2.wav",
+          "native_region_volume_db": 12,
+          "mapped_voice": {
+            "peak_dbfs": -11.025619506835938,
+            "rms_dbfs": -30.233194762702862
+          },
+          "voice_with_region_volume_zero": {
+            "peak_dbfs": -23.025619506835938,
+            "rms_dbfs": -42.2331941844
+          }
+        }
+      ],
+      "rr2_minus_rr1_peak_db": 12.27255630493164,
+      "rr2_minus_rr1_rms_db": 11.71260876818744
+    }
+  ],
+  "mapping_url": "https://raw.githubusercontent.com/sgossner/VSCO-2-CE/6dd651d55dde97fd4028699be9d4481f26917891/FHornStac.sfz",
+  "primary_readme_url": "https://raw.githubusercontent.com/sgossner/VSCO-2-CE/6dd651d55dde97fd4028699be9d4481f26917891/Readme.txt",
+  "conclusion": "The +12dB is explicit upstream region data, not parser inheritance. The native RR2 recording is within about 0.35dB of RR1 on the measured levels, so recorded-level compensation does not explain the +12dB. No author intent is inferred. No production files or rendering policy were changed."
+}

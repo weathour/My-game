@@ -1,0 +1,31 @@
+# Godot/editor caches and local exports
+.godot/
+/android/
+/builds/
+/artifacts/
+/graphify-out/
+/scripts/graphify-out/
+
+# Local agent state, secrets and Python caches
+/.omx/
+/.kimi-code/
+__pycache__/
+*.pyc
+.env
+.env.*
+!.env.example
+
+# Desktop metadata and editable-source backups
+.DS_Store
+__MACOSX/
+._*
+/design/**/Backups/
+/design/**/preview-frames/
+
+# Downloaded visual references remain local; keep their source records.
+/design/**/reference/*.png
+/design/**/reference/*.jpg
+/design/**/reference/*.jpeg
+/design/**/reference/*.webp
+/design/**/reference/*.gif
+/design/**/reference/*.import

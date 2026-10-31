@@ -1,0 +1,736 @@
+{
+  "status": "integrated_and_verified",
+  "scope": "W3 rendering, codex, native/raster integration and presentation verification; runtime/content gates belong to their owners",
+  "counts": {
+    "catalog_records": 43,
+    "principal_visuals": 39,
+    "new_object_visuals": 2,
+    "new_suites": 41,
+    "resource_manifest_slots": 42,
+    "reused_visuals": {
+      "D01": "E01",
+      "L00_catalog_visual_id": "E01"
+    },
+    "unique_source_poses": 804,
+    "exported_clip_frames": 828,
+    "new_effect_sequences": 8,
+    "new_effect_frames": 32
+  },
+  "checks": {
+    "ui_headless": {
+      "checks": 369,
+      "failures": 0,
+      "log": "design/baimen-enemies-20261028/final-evidence/logs/ui-headless.log"
+    },
+    "ui_opengl": {
+      "checks": 378,
+      "failures": 0,
+      "log": "design/baimen-enemies-20261028/final-evidence/logs/ui-render.log"
+    },
+    "fx_headless": {
+      "checks": 73,
+      "failures": 0,
+      "log": "design/baimen-enemies-20261028/final-evidence/logs/fx-headless.log"
+    },
+    "fx_opengl": {
+      "checks": 85,
+      "failures": 0,
+      "log": "design/baimen-enemies-20261028/final-evidence/logs/fx-render.log"
+    },
+    "actual_playable_ui": {
+      "failures": 0,
+      "log": "design/baimen-enemies-20261028/final-evidence/logs/playable-ui.log"
+    },
+    "pack": "root-owned final-evidence/pack/verification.json; runtime/source snapshots unchanged"
+  },
+  "checks_not_additive": true,
+  "galleries": {
+    "ordinary": {
+      "screens": 120,
+      "gifs": [
+        "design/baimen-enemies-20261028/final-evidence/animations/ordinary/gallery-1280-page00-preview.gif",
+        "design/baimen-enemies-20261028/final-evidence/animations/ordinary/gallery-1280-page01-preview.gif"
+      ]
+    },
+    "elites": {
+      "screens": 80,
+      "gifs": [
+        "design/baimen-enemies-20261028/final-evidence/animations/elites/gallery-1280-page00-preview.gif"
+      ]
+    },
+    "bosses": {
+      "screens": 140,
+      "gifs": [
+        "design/baimen-enemies-20261028/final-evidence/animations/bosses/gallery-1280-page00-preview.gif",
+        "design/baimen-enemies-20261028/final-evidence/animations/bosses/gallery-1280-page01-preview.gif"
+      ]
+    },
+    "featured": {
+      "screens": 84,
+      "gifs": [
+        "design/baimen-enemies-20261028/final-evidence/animations/featured/gallery-1280-page00-preview.gif"
+      ]
+    }
+  },
+  "ui_screens": [
+    "design/baimen-enemies-20261028/final-evidence/screens/boss-profiles-1280.png",
+    "design/baimen-enemies-20261028/final-evidence/screens/boss-profiles-1920.png",
+    "design/baimen-enemies-20261028/final-evidence/screens/boss-profiles-960.png",
+    "design/baimen-enemies-20261028/final-evidence/screens/codex-1280.png",
+    "design/baimen-enemies-20261028/final-evidence/screens/codex-1920.png",
+    "design/baimen-enemies-20261028/final-evidence/screens/codex-960.png",
+    "design/baimen-enemies-20261028/final-evidence/screens/enemy-battle-1280.png",
+    "design/baimen-enemies-20261028/final-evidence/screens/enemy-battle-1920.png",
+    "design/baimen-enemies-20261028/final-evidence/screens/enemy-battle-960.png"
+  ],
+  "fx_screens": [
+    "design/baimen-enemies-20261028/final-evidence/fx/enemy-fx-1280-00.png",
+    "design/baimen-enemies-20261028/final-evidence/fx/enemy-fx-1280-01.png",
+    "design/baimen-enemies-20261028/final-evidence/fx/enemy-fx-1280-02.png",
+    "design/baimen-enemies-20261028/final-evidence/fx/enemy-fx-1280-03.png",
+    "design/baimen-enemies-20261028/final-evidence/fx/enemy-fx-1920-00.png",
+    "design/baimen-enemies-20261028/final-evidence/fx/enemy-fx-1920-01.png",
+    "design/baimen-enemies-20261028/final-evidence/fx/enemy-fx-1920-02.png",
+    "design/baimen-enemies-20261028/final-evidence/fx/enemy-fx-1920-03.png",
+    "design/baimen-enemies-20261028/final-evidence/fx/enemy-fx-960-00.png",
+    "design/baimen-enemies-20261028/final-evidence/fx/enemy-fx-960-01.png",
+    "design/baimen-enemies-20261028/final-evidence/fx/enemy-fx-960-02.png",
+    "design/baimen-enemies-20261028/final-evidence/fx/enemy-fx-960-03.png"
+  ],
+  "recommended_gifs": [
+    "design/baimen-enemies-20261028/final-evidence/animations/featured/gallery-1280-page00-preview.gif",
+    "design/baimen-enemies-20261028/final-evidence/fx/runtime-preview.gif"
+  ],
+  "runtime_hashes": {
+    "scripts/ui/chronicle/battle_art.gd": "eb2bbb9bdb2e38c41fb3c440a1a04127f9cbc7dd921e0f063fb7f3df77a42719",
+    "scripts/ui/chronicle/battle_canvas.gd": "420895c55e4af48ed067086e0178568e7d9d5ff22a23c2805fde6496fccce4f3",
+    "scripts/ui/chronicle/battle_view.gd": "9099ae4aeae48c5623900c1990fa313fcd7eb03df328cab033cc10bfbbab480e",
+    "scripts/ui/chronicle/enemy_actor.gd": "7eccf0973eebfd6b33a627d11ea043ed53c32e05b94070415ee48240fc944bbd",
+    "scripts/ui/chronicle/enemy_codex.gd": "a96f2bec589ecb3fc3a22ef5d5ad0c454cc8c52cde426a5b391e25c70d35c75f",
+    "scripts/ui/chronicle/enemy_threat_view.gd": "379e21a6a826887b5282b67ab01603688978f6c74ed8da8231094247a64f258a",
+    "scripts/ui/chronicle/enemy_visual_manifest.gd": "8c34734045f391301553bcabc717b7028d0591f70196c03157959e11d17365df",
+    "scripts/ui/chronicle/enemy_battle_effects.gd": "619e0a9358066f21271ab2dd5aa2a70e99ff488cb8c64c34bc360634a221fbce",
+    "scripts/battle/enemy_geometry.gd": "7c3d9b9f923cd8f83eae7f69ac6217f177e923cf3844d6800fb7d017e45ced38"
+  },
+  "characters": [
+    {
+      "id": "B01",
+      "source_poses": 20,
+      "runtime_clip_frames": 20,
+      "clips": [
+        "idle",
+        "move",
+        "attack",
+        "special",
+        "hit"
+      ],
+      "colors": 60,
+      "provenance": "design/baimen-enemies-20261028/characters/B01/export-manifest.json",
+      "provenance_sha256": "6731ba11de8b05da0a6250f1d41c5811784d109ee4a21818a18bd38ae1237c20"
+    },
+    {
+      "id": "B02",
+      "source_poses": 20,
+      "runtime_clip_frames": 20,
+      "clips": [
+        "idle",
+        "move",
+        "attack",
+        "special",
+        "hit"
+      ],
+      "colors": 61,
+      "provenance": "design/baimen-enemies-20261028/characters/B02/export-manifest.json",
+      "provenance_sha256": "4eb152b6ff8d131e5cdea1d23aeb11eb412bb1923f8db89c182dd8738799aa9c"
+    },
+    {
+      "id": "B03",
+      "source_poses": 20,
+      "runtime_clip_frames": 20,
+      "clips": [
+        "idle",
+        "move",
+        "attack",
+        "special",
+        "hit"
+      ],
+      "colors": 63,
+      "provenance": "design/baimen-enemies-20261028/characters/B03/export-manifest.json",
+      "provenance_sha256": "14f1ae86b2d817ebbac6c350d052b96a8214e0a4412c61f6d2b4cc91e6e2223a"
+    },
+    {
+      "id": "B04",
+      "source_poses": 20,
+      "runtime_clip_frames": 20,
+      "clips": [
+        "idle",
+        "move",
+        "attack",
+        "special",
+        "hit"
+      ],
+      "colors": 58,
+      "provenance": "design/baimen-enemies-20261028/characters/B04/export-manifest.json",
+      "provenance_sha256": "26420876fe91181fd6b9832828b8e8b03942628e4e7f06b80e8e199c3ac9a2a0"
+    },
+    {
+      "id": "B05",
+      "source_poses": 20,
+      "runtime_clip_frames": 20,
+      "clips": [
+        "idle",
+        "move",
+        "attack",
+        "special",
+        "hit"
+      ],
+      "colors": 61,
+      "provenance": "design/baimen-enemies-20261028/characters/B05/export-manifest.json",
+      "provenance_sha256": "d985201e4a040e221ffc10788dffb44fa6c2dda7d4b4c01ddebd9d36b91ddb65"
+    },
+    {
+      "id": "B06",
+      "source_poses": 20,
+      "runtime_clip_frames": 20,
+      "clips": [
+        "idle",
+        "move",
+        "attack",
+        "special",
+        "hit"
+      ],
+      "colors": 63,
+      "provenance": "design/baimen-enemies-20261028/characters/B06/export-manifest.json",
+      "provenance_sha256": "fcc03b689d563c5fe9e5b75e2189c31e023f81370525afe2a0e6d78281373a48"
+    },
+    {
+      "id": "B07",
+      "source_poses": 20,
+      "runtime_clip_frames": 20,
+      "clips": [
+        "idle",
+        "move",
+        "attack",
+        "special",
+        "hit"
+      ],
+      "colors": 62,
+      "provenance": "design/baimen-enemies-20261028/characters/B07/export-manifest.json",
+      "provenance_sha256": "a661d6d6a156e498dc1f6c34268ff7ef0c3195688f054a9e389640727f791205"
+    },
+    {
+      "id": "B08",
+      "source_poses": 20,
+      "runtime_clip_frames": 20,
+      "clips": [
+        "idle",
+        "move",
+        "attack",
+        "special",
+        "hit"
+      ],
+      "colors": 62,
+      "provenance": "design/baimen-enemies-20261028/characters/B08/export-manifest.json",
+      "provenance_sha256": "d32778c4c8bca1ca7714134ecb1c955e1c79a17e1ebd076b9a7881d993fb802e"
+    },
+    {
+      "id": "B09",
+      "source_poses": 20,
+      "runtime_clip_frames": 20,
+      "clips": [
+        "idle",
+        "move",
+        "attack",
+        "special",
+        "hit"
+      ],
+      "colors": 58,
+      "provenance": "design/baimen-enemies-20261028/characters/B09/export-manifest.json",
+      "provenance_sha256": "78735410f5d83e57297200ede87e02b69a2e7852383950aa7fb2a003a47ac9b3"
+    },
+    {
+      "id": "B10",
+      "source_poses": 20,
+      "runtime_clip_frames": 20,
+      "clips": [
+        "idle",
+        "move",
+        "attack",
+        "special",
+        "hit"
+      ],
+      "colors": 59,
+      "provenance": "design/baimen-enemies-20261028/characters/B10/export-manifest.json",
+      "provenance_sha256": "622631a98dfd0934bcd50afda7562c20f01c89a22a95f9600c9006daccdd5363"
+    },
+    {
+      "id": "B10_R",
+      "source_poses": 20,
+      "runtime_clip_frames": 20,
+      "clips": [
+        "idle",
+        "move",
+        "attack",
+        "special",
+        "hit"
+      ],
+      "colors": 60,
+      "provenance": "design/baimen-enemies-20261028/characters/B10_R/export-manifest.json",
+      "provenance_sha256": "286812296e48dff467179dcd088c9c0e7ca79f716be334acc051befd6245cb20"
+    },
+    {
+      "id": "B11",
+      "source_poses": 20,
+      "runtime_clip_frames": 20,
+      "clips": [
+        "idle",
+        "move",
+        "attack",
+        "special",
+        "hit"
+      ],
+      "colors": 62,
+      "provenance": "design/baimen-enemies-20261028/characters/B11/export-manifest.json",
+      "provenance_sha256": "62b3f5003a5b5980e9d6f8c4011974d8d61fa52c95909ac79676345a50b423e5"
+    },
+    {
+      "id": "B12",
+      "source_poses": 20,
+      "runtime_clip_frames": 20,
+      "clips": [
+        "idle",
+        "move",
+        "attack",
+        "special",
+        "hit"
+      ],
+      "colors": 59,
+      "provenance": "design/baimen-enemies-20261028/characters/B12/export-manifest.json",
+      "provenance_sha256": "7158c876afe3eeb11877449a63eb10bca13c91483faadfc0b38120d21669d2f4"
+    },
+    {
+      "id": "B13",
+      "source_poses": 20,
+      "runtime_clip_frames": 20,
+      "clips": [
+        "idle",
+        "move",
+        "attack",
+        "special",
+        "hit"
+      ],
+      "colors": 62,
+      "provenance": "design/baimen-enemies-20261028/characters/B13/export-manifest.json",
+      "provenance_sha256": "b36bc6b60a169e202d1ae4db9cc5142e634936cc9d1913af8f20973900855695"
+    },
+    {
+      "id": "B14",
+      "source_poses": 20,
+      "runtime_clip_frames": 20,
+      "clips": [
+        "idle",
+        "move",
+        "attack",
+        "special",
+        "hit"
+      ],
+      "colors": 58,
+      "provenance": "design/baimen-enemies-20261028/characters/B14/export-manifest.json",
+      "provenance_sha256": "05bdaf9ffb86ade9f8ceb0c46fd3d557b39dfdb92cc6e0864f21f255ffc2e328"
+    },
+    {
+      "id": "B15",
+      "source_poses": 24,
+      "runtime_clip_frames": 24,
+      "clips": [
+        "idle",
+        "move",
+        "attack",
+        "special",
+        "command",
+        "hit"
+      ],
+      "colors": 58,
+      "provenance": "design/baimen-enemies-20261028/characters/B15/export-manifest.json",
+      "provenance_sha256": "6a20d8a6e8895a8cb0ae5e783ea812a8a6f6fae20aa4a75879192506156eb5a5"
+    },
+    {
+      "id": "B16",
+      "source_poses": 20,
+      "runtime_clip_frames": 20,
+      "clips": [
+        "idle",
+        "move",
+        "attack",
+        "special",
+        "hit"
+      ],
+      "colors": 62,
+      "provenance": "design/baimen-enemies-20261028/characters/B16/export-manifest.json",
+      "provenance_sha256": "a2360a87a4a445b1460ce8d32188cfc3f6854de860ff2ac5f91c58760dfef028"
+    },
+    {
+      "id": "B17",
+      "source_poses": 20,
+      "runtime_clip_frames": 20,
+      "clips": [
+        "idle",
+        "move",
+        "attack",
+        "special",
+        "hit"
+      ],
+      "colors": 58,
+      "provenance": "design/baimen-enemies-20261028/characters/B17/export-manifest.json",
+      "provenance_sha256": "e16a7754a0188e69e8c1f3eb3626ff585f275d5c9bfa2e0d6088a6f5c5a9258c"
+    },
+    {
+      "id": "B18",
+      "source_poses": 24,
+      "runtime_clip_frames": 24,
+      "clips": [
+        "idle",
+        "move",
+        "attack",
+        "special",
+        "slam",
+        "hit"
+      ],
+      "colors": 63,
+      "provenance": "design/baimen-enemies-20261028/characters/B18/export-manifest.json",
+      "provenance_sha256": "06d6680c1ad6b3c97b799d61534392029adc2d9a4c522b435a5ba124af035471"
+    },
+    {
+      "id": "D03",
+      "source_poses": 8,
+      "runtime_clip_frames": 20,
+      "clips": [
+        "idle",
+        "move",
+        "attack",
+        "special",
+        "hit"
+      ],
+      "colors": 57,
+      "provenance": "design/baimen-enemies-20261028/characters/D03/export-manifest.json",
+      "provenance_sha256": "b6456a12d72b05d142ec0d9eab72c478d743d22f64a1230c1fbdd6d17b3ee7a9"
+    },
+    {
+      "id": "D05",
+      "source_poses": 8,
+      "runtime_clip_frames": 20,
+      "clips": [
+        "idle",
+        "move",
+        "attack",
+        "special",
+        "hit"
+      ],
+      "colors": 57,
+      "provenance": "design/baimen-enemies-20261028/characters/D05/export-manifest.json",
+      "provenance_sha256": "07dce938a948fcf64dd9edbb71ad480726b7c54c65adc89fd77b50a4c82bcc13"
+    },
+    {
+      "id": "E01",
+      "source_poses": 20,
+      "runtime_clip_frames": 20,
+      "clips": [
+        "idle",
+        "move",
+        "attack",
+        "special",
+        "hit"
+      ],
+      "colors": 62,
+      "provenance": "design/baimen-enemies-20261028/characters/E01/export-manifest.json",
+      "provenance_sha256": "ed27f4b5143ab5be9484d2bb93307ca9a4ecab5592389a6931d7160674ed2e40"
+    },
+    {
+      "id": "E02",
+      "source_poses": 20,
+      "runtime_clip_frames": 20,
+      "clips": [
+        "idle",
+        "move",
+        "attack",
+        "special",
+        "hit"
+      ],
+      "colors": 60,
+      "provenance": "design/baimen-enemies-20261028/characters/E02/export-manifest.json",
+      "provenance_sha256": "cdc50733566ab3ad7484bcf0fe2cc96268acd6eac5325589cf3eebbda086d374"
+    },
+    {
+      "id": "E03",
+      "source_poses": 20,
+      "runtime_clip_frames": 20,
+      "clips": [
+        "idle",
+        "move",
+        "attack",
+        "special",
+        "hit"
+      ],
+      "colors": 60,
+      "provenance": "design/baimen-enemies-20261028/characters/E03/export-manifest.json",
+      "provenance_sha256": "5d2aab160368b16487a2a4dc8ba4e63a2ee6988d6a69a56ded2cc7fb18c82e19"
+    },
+    {
+      "id": "E04",
+      "source_poses": 20,
+      "runtime_clip_frames": 20,
+      "clips": [
+        "idle",
+        "move",
+        "attack",
+        "special",
+        "hit"
+      ],
+      "colors": 63,
+      "provenance": "design/baimen-enemies-20261028/characters/E04/export-manifest.json",
+      "provenance_sha256": "99974000b7449253b476ea59c07ae95113a06adc5cc377c80c1c2e972d69233a"
+    },
+    {
+      "id": "E05",
+      "source_poses": 20,
+      "runtime_clip_frames": 20,
+      "clips": [
+        "idle",
+        "move",
+        "attack",
+        "special",
+        "hit"
+      ],
+      "colors": 63,
+      "provenance": "design/baimen-enemies-20261028/characters/E05/export-manifest.json",
+      "provenance_sha256": "d724b0217882d3f4bd88dcb6b394adc8ebb1641bc917c678a349604263fdfedf"
+    },
+    {
+      "id": "E06",
+      "source_poses": 20,
+      "runtime_clip_frames": 20,
+      "clips": [
+        "idle",
+        "move",
+        "attack",
+        "special",
+        "hit"
+      ],
+      "colors": 61,
+      "provenance": "design/baimen-enemies-20261028/characters/E06/export-manifest.json",
+      "provenance_sha256": "d906ec204f7d600ea0a56b2e72cf575e36bc624f807b1c82435f23ee8fe84448"
+    },
+    {
+      "id": "E07",
+      "source_poses": 20,
+      "runtime_clip_frames": 20,
+      "clips": [
+        "idle",
+        "move",
+        "attack",
+        "special",
+        "hit"
+      ],
+      "colors": 62,
+      "provenance": "design/baimen-enemies-20261028/characters/E07/export-manifest.json",
+      "provenance_sha256": "695504a6e435c5f32383d0050c4c66bed25cec22fc13b477d98c87c2e8982052"
+    },
+    {
+      "id": "E08",
+      "source_poses": 20,
+      "runtime_clip_frames": 20,
+      "clips": [
+        "idle",
+        "move",
+        "attack",
+        "special",
+        "hit"
+      ],
+      "colors": 63,
+      "provenance": "design/baimen-enemies-20261028/characters/E08/export-manifest.json",
+      "provenance_sha256": "09eb1e87b42020b66e00d33a2c998d0038fc7987355ac45e1d707fe05ed904ef"
+    },
+    {
+      "id": "E09",
+      "source_poses": 20,
+      "runtime_clip_frames": 20,
+      "clips": [
+        "idle",
+        "move",
+        "attack",
+        "special",
+        "hit"
+      ],
+      "colors": 62,
+      "provenance": "design/baimen-enemies-20261028/characters/E09/export-manifest.json",
+      "provenance_sha256": "58ed0a4428d166b705a9dd37eec6f8c969a276a521b454d6e1a826dc0ae3d3dd"
+    },
+    {
+      "id": "E10",
+      "source_poses": 20,
+      "runtime_clip_frames": 20,
+      "clips": [
+        "idle",
+        "move",
+        "attack",
+        "special",
+        "hit"
+      ],
+      "colors": 60,
+      "provenance": "design/baimen-enemies-20261028/characters/E10/export-manifest.json",
+      "provenance_sha256": "861d67acde101ed318ebd123d6d677906b47bae822d7dfacea83210198c762e4"
+    },
+    {
+      "id": "E11",
+      "source_poses": 20,
+      "runtime_clip_frames": 20,
+      "clips": [
+        "idle",
+        "move",
+        "attack",
+        "special",
+        "hit"
+      ],
+      "colors": 60,
+      "provenance": "design/baimen-enemies-20261028/characters/E11/export-manifest.json",
+      "provenance_sha256": "db7b3e576bb0028685e12f866130d48bbf9d3154d19f374f7f92163709c31e13"
+    },
+    {
+      "id": "E12",
+      "source_poses": 20,
+      "runtime_clip_frames": 20,
+      "clips": [
+        "idle",
+        "move",
+        "attack",
+        "special",
+        "hit"
+      ],
+      "colors": 61,
+      "provenance": "design/baimen-enemies-20261028/characters/E12/export-manifest.json",
+      "provenance_sha256": "be8b40c970f93bd7f8bbc75c4147c406f5f2ea12bbc8532a48a803182b0fbe8a"
+    },
+    {
+      "id": "L01",
+      "source_poses": 20,
+      "runtime_clip_frames": 20,
+      "clips": [
+        "idle",
+        "move",
+        "attack",
+        "special",
+        "hit"
+      ],
+      "colors": 63,
+      "provenance": "design/baimen-enemies-20261028/characters/L01/export-manifest.json",
+      "provenance_sha256": "a347a6a6fbf59c31acb8e027815ab82907c32369dc77ff3af01a9d22d04ce633"
+    },
+    {
+      "id": "L02",
+      "source_poses": 20,
+      "runtime_clip_frames": 20,
+      "clips": [
+        "idle",
+        "move",
+        "attack",
+        "special",
+        "hit"
+      ],
+      "colors": 61,
+      "provenance": "design/baimen-enemies-20261028/characters/L02/export-manifest.json",
+      "provenance_sha256": "e24c57c685b37da79d08e1b8ab2990cd57f7700b383015d359570707c8b34bf1"
+    },
+    {
+      "id": "L03",
+      "source_poses": 20,
+      "runtime_clip_frames": 20,
+      "clips": [
+        "idle",
+        "move",
+        "attack",
+        "special",
+        "hit"
+      ],
+      "colors": 63,
+      "provenance": "design/baimen-enemies-20261028/characters/L03/export-manifest.json",
+      "provenance_sha256": "b3d2c071f0a7152f1993eead6df7647c62014d48cabe3d7a665366545bdc943f"
+    },
+    {
+      "id": "L04",
+      "source_poses": 20,
+      "runtime_clip_frames": 20,
+      "clips": [
+        "idle",
+        "move",
+        "attack",
+        "special",
+        "hit"
+      ],
+      "colors": 63,
+      "provenance": "design/baimen-enemies-20261028/characters/L04/export-manifest.json",
+      "provenance_sha256": "74efc50b1807db63ae208d8d1f6f04cbe486983ed0da3a8fe636d359a6d8caba"
+    },
+    {
+      "id": "L05",
+      "source_poses": 20,
+      "runtime_clip_frames": 20,
+      "clips": [
+        "idle",
+        "move",
+        "attack",
+        "special",
+        "hit"
+      ],
+      "colors": 60,
+      "provenance": "design/baimen-enemies-20261028/characters/L05/export-manifest.json",
+      "provenance_sha256": "115828116b6cc2cbbf35816ab5a3748bc1897aaa109f4e8dd156403ec26521ee"
+    },
+    {
+      "id": "L06",
+      "source_poses": 20,
+      "runtime_clip_frames": 20,
+      "clips": [
+        "idle",
+        "move",
+        "attack",
+        "special",
+        "hit"
+      ],
+      "colors": 63,
+      "provenance": "design/baimen-enemies-20261028/characters/L06/export-manifest.json",
+      "provenance_sha256": "efe4df652528e65705769dff439283efad6e7f467c7a823b2a1e6ea6511855df"
+    },
+    {
+      "id": "M03_WAR",
+      "source_poses": 20,
+      "runtime_clip_frames": 20,
+      "clips": [
+        "idle",
+        "move",
+        "attack",
+        "special",
+        "hit"
+      ],
+      "colors": 63,
+      "provenance": "design/baimen-enemies-20261028/characters/M03_WAR/export-manifest.json",
+      "provenance_sha256": "76622eb831130b053a1f6db5a0985b8d2e3ea83542828f463401adc5622e9963"
+    },
+    {
+      "id": "M04_WAR",
+      "source_poses": 20,
+      "runtime_clip_frames": 20,
+      "clips": [
+        "idle",
+        "move",
+        "attack",
+        "special",
+        "hit"
+      ],
+      "colors": 59,
+      "provenance": "design/baimen-enemies-20261028/characters/M04_WAR/export-manifest.json",
+      "provenance_sha256": "8da0a5ce2c87d1852a739320f6bc7580e3264a296fdaff8fb092850bb9b94e9f"
+    }
+  ],
+  "effects_manifest": "design/baimen-enemies-20261028/effects/manifest.json",
+  "limits": "Rendering fixtures establish identity, full-body/weapon bounds, shared scale, warning geometry, read-only inspection and clock/lifecycle behavior. Actual playable UI smoke covers its recorded first-two-stage flow. These are not full-chapter manual-play balance certification or user aesthetic approval."
+}

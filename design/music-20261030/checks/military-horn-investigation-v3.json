@@ -1,0 +1,252 @@
+{
+  "listening_review": false,
+  "production_edits": false,
+  "probe_only": true,
+  "method": "Actual v3 dry renders; same master.room as current master.py; ffmpeg loudnorm measurement only. Target -21LUFS and -3.5dBTP linear ceiling calculation; no normalization applied.",
+  "events": [
+    {
+      "cue": "hero_main",
+      "peak_seconds": 82.297,
+      "index": 119,
+      "event": [
+        153.5,
+        0.42,
+        74,
+        80
+      ],
+      "patch": "FHornStac",
+      "file": "vsco/Brass/F Horn/stac/MOHorn_stac_D4_v2_rr2.wav",
+      "volume_db": 12
+    },
+    {
+      "cue": "boss_lubu_warform",
+      "peak_seconds": 71.478,
+      "index": 90,
+      "event": [
+        128.5,
+        0.42,
+        67,
+        83
+      ],
+      "patch": "FHornStac",
+      "file": "vsco/Brass/F Horn/stac/MOHorn_stac_D4_v2_rr2.wav",
+      "volume_db": 12
+    }
+  ],
+  "same_pitch_velocity_hold_region_probe": {
+    "pitch": 74,
+    "velocity": 80,
+    "hold_seconds": 0.225,
+    "stac_v2_rr1": {
+      "peak_dbfs": -23.93,
+      "rms_dbfs": -42.53
+    },
+    "stac_v2_rr2": {
+      "peak_dbfs": -11.7,
+      "rms_dbfs": -30.81
+    },
+    "sustain": {
+      "peak_dbfs": -20.41,
+      "rms_dbfs": -35.65
+    }
+  },
+  "candidate_changes": {
+    "hero_main": {
+      "lead_articulation": "sustain",
+      "role_gain_db_delta": {
+        "counter": 16,
+        "bed": 14,
+        "answer": 10,
+        "bass": 4,
+        "drums": 4
+      }
+    },
+    "boss_lubu": {
+      "role_gain_db_delta": {
+        "lead": 2,
+        "counter": 20,
+        "bed": 16,
+        "bass": 4,
+        "drums": 4
+      }
+    },
+    "boss_lubu_warform": {
+      "lead_articulation": "sustain",
+      "role_gain_db_delta": {
+        "counter": 16,
+        "bed": 16,
+        "answer": 18,
+        "pulse": 14,
+        "bass": 4,
+        "drums": 3,
+        "color": 6
+      }
+    }
+  },
+  "measurements": [
+    {
+      "kind": "baseline",
+      "cue": "hero_main",
+      "prepared_integrated_lufs": -41.66,
+      "prepared_true_peak": -20.14,
+      "linear_gain_to_target_and_ceiling": 16.64,
+      "achievable_lufs_without_dynamics": -25.019999999999996,
+      "sha256": "0815768966628f4d6e0ee966cd7ed360a547b89b4581d8f9e199280fb268af73",
+      "loudness_measurement": {
+        "input_i": "-41.66",
+        "input_tp": "-20.14",
+        "input_lra": "11.40",
+        "input_thresh": "-52.10",
+        "output_i": "-22.49",
+        "output_tp": "-3.00",
+        "output_lra": "10.80",
+        "output_thresh": "-32.90",
+        "normalization_type": "dynamic",
+        "target_offset": "-0.51"
+      }
+    },
+    {
+      "kind": "baseline",
+      "cue": "boss_lubu",
+      "prepared_integrated_lufs": -45.63,
+      "prepared_true_peak": -31.5,
+      "linear_gain_to_target_and_ceiling": 24.630000000000003,
+      "achievable_lufs_without_dynamics": -21.0,
+      "sha256": "f7e525909cbe31caa925941de2f3f39295d3aaa4d4b1ec95aa6ed8dc5403af0d",
+      "loudness_measurement": {
+        "input_i": "-45.63",
+        "input_tp": "-31.50",
+        "input_lra": "4.50",
+        "input_thresh": "-56.21",
+        "output_i": "-22.80",
+        "output_tp": "-8.98",
+        "output_lra": "4.40",
+        "output_thresh": "-33.48",
+        "normalization_type": "dynamic",
+        "target_offset": "-0.20"
+      },
+      "phase_shared_gain": 16.88,
+      "phase_final_lufs": -28.750000000000004
+    },
+    {
+      "kind": "baseline",
+      "cue": "boss_lubu_warform",
+      "prepared_integrated_lufs": -41.87,
+      "prepared_true_peak": -20.38,
+      "linear_gain_to_target_and_ceiling": 16.88,
+      "achievable_lufs_without_dynamics": -24.99,
+      "sha256": "c42c9d8ae7d8475e4988d09accf34e58294be7252780c03711b256e5f661adaa",
+      "loudness_measurement": {
+        "input_i": "-41.87",
+        "input_tp": "-20.38",
+        "input_lra": "12.00",
+        "input_thresh": "-52.60",
+        "output_i": "-23.16",
+        "output_tp": "-3.00",
+        "output_lra": "9.80",
+        "output_thresh": "-33.86",
+        "normalization_type": "dynamic",
+        "target_offset": "0.16"
+      },
+      "phase_shared_gain": 16.88,
+      "phase_final_lufs": -24.99
+    },
+    {
+      "kind": "candidate",
+      "cue": "hero_main",
+      "prepared_integrated_lufs": -41.37,
+      "prepared_true_peak": -24.27,
+      "linear_gain_to_target_and_ceiling": 20.369999999999997,
+      "achievable_lufs_without_dynamics": -21.0,
+      "sha256": "028df6c7aa69a03cb258e78ae120823802a3b62a8b6e6b9fbeb1053acdefab02",
+      "loudness_measurement": {
+        "input_i": "-41.37",
+        "input_tp": "-24.27",
+        "input_lra": "9.20",
+        "input_thresh": "-51.49",
+        "output_i": "-21.82",
+        "output_tp": "-5.93",
+        "output_lra": "8.10",
+        "output_thresh": "-31.91",
+        "normalization_type": "dynamic",
+        "target_offset": "-1.18"
+      }
+    },
+    {
+      "kind": "candidate",
+      "cue": "boss_lubu",
+      "prepared_integrated_lufs": -43.08,
+      "prepared_true_peak": -28.64,
+      "linear_gain_to_target_and_ceiling": 22.08,
+      "achievable_lufs_without_dynamics": -21.0,
+      "sha256": "7671d1efb2ea6a8f49f0fcf1974ab59a7808fbbc6f56ff621150519f8ed78d11",
+      "loudness_measurement": {
+        "input_i": "-43.08",
+        "input_tp": "-28.64",
+        "input_lra": "4.90",
+        "input_thresh": "-53.29",
+        "output_i": "-22.46",
+        "output_tp": "-7.44",
+        "output_lra": "4.20",
+        "output_thresh": "-32.71",
+        "normalization_type": "dynamic",
+        "target_offset": "-0.54"
+      },
+      "phase_shared_gain": 19.49,
+      "phase_final_lufs": -23.59
+    },
+    {
+      "kind": "candidate",
+      "cue": "boss_lubu_warform",
+      "prepared_integrated_lufs": -41.24,
+      "prepared_true_peak": -22.99,
+      "linear_gain_to_target_and_ceiling": 19.49,
+      "achievable_lufs_without_dynamics": -21.750000000000004,
+      "sha256": "77453bcae3863afe43f237aab4101688a4026ada7a4e58ac9155d61f1e8831af",
+      "loudness_measurement": {
+        "input_i": "-41.24",
+        "input_tp": "-22.99",
+        "input_lra": "10.00",
+        "input_thresh": "-51.48",
+        "output_i": "-22.57",
+        "output_tp": "-5.21",
+        "output_lra": "8.90",
+        "output_thresh": "-32.82",
+        "normalization_type": "dynamic",
+        "target_offset": "-0.43"
+      },
+      "phase_shared_gain": 19.49,
+      "phase_final_lufs": -21.750000000000004
+    },
+    {
+      "kind": "candidate_b",
+      "cue": "boss_lubu_warform",
+      "prepared_integrated_lufs": -41.98,
+      "prepared_true_peak": -23.63,
+      "linear_gain_to_target_and_ceiling": 20.13,
+      "achievable_lufs_without_dynamics": -21.849999999999998,
+      "loudness_measurement": {
+        "input_i": "-41.98",
+        "input_tp": "-23.63",
+        "input_lra": "10.00",
+        "input_thresh": "-52.20",
+        "output_i": "-22.61",
+        "output_tp": "-5.10",
+        "output_lra": "8.80",
+        "output_thresh": "-32.83",
+        "normalization_type": "dynamic",
+        "target_offset": "-0.39"
+      }
+    }
+  ],
+  "candidate_b_delta": {
+    "boss_lubu_warform_lead_db": -1.5
+  },
+  "decision": {
+    "adopt_author_probe": false,
+    "production_score_changed": false,
+    "authority": "root",
+    "resolution": "Apply registered local FHornStac D4_v2_rr2 source region gain override +12 to 0, rerender affected production cues; master each cue independently to target LUFS. Keep authored articulations, role gains, pitches and sync axes unchanged.",
+    "probe_status": "Reference experiments only; not approved production inputs."
+  }
+}

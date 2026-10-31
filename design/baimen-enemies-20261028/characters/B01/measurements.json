@@ -1,0 +1,546 @@
+{
+  "version": 1,
+  "id": "B01",
+  "review_status": "accepted_for_export",
+  "review_notes": "Viewed source master-v2 and all 20 source poses. Blank stele face/rope arms/single blade retained; master-v1 rejected because margin insufficient. Actual connected components measured; non-grid saber extents preserved. Row4 sword extends across nominal cells but remains a separate connected actor and is retained complete. Ground anchors manually set at foot pair centres; fixed source scale for all poses.",
+  "prompts": [
+    "source/actions-v1-prompt.txt",
+    "source/master-v1-prompt.txt",
+    "source/master-v2-prompt.txt"
+  ],
+  "canvas": {
+    "size": [
+      512,
+      512
+    ],
+    "anchor": [
+      230,
+      450
+    ],
+    "body_height_px": 216
+  },
+  "sources": {
+    "actions": {
+      "path": "source/actions-v1.png",
+      "size": [
+        1295,
+        1214
+      ],
+      "sha256": "5da895b0f4a88f3cb2a3a32f8720c671134dd419b14826082df591471bbf0fe8",
+      "standing_body_height": 235
+    }
+  },
+  "portrait": {
+    "path": "source/master-v2.png",
+    "size": [
+      1354,
+      1162
+    ],
+    "sha256": "8b06532cfdeea3a01a3c3ed5d890c8e2f39196f34c66a5fe806a1aab14bb6db2"
+  },
+  "poses": [
+    {
+      "id": "p01",
+      "source": "actions",
+      "anchor_source": [
+        242,
+        249
+      ],
+      "components": [
+        {
+          "bbox": [
+            33,
+            18,
+            320,
+            249
+          ],
+          "area": 27002
+        }
+      ]
+    },
+    {
+      "id": "p02",
+      "source": "actions",
+      "anchor_source": [
+        554,
+        254
+      ],
+      "components": [
+        {
+          "bbox": [
+            347,
+            15,
+            628,
+            254
+          ],
+          "area": 27430
+        }
+      ]
+    },
+    {
+      "id": "p03",
+      "source": "actions",
+      "anchor_source": [
+        885,
+        251
+      ],
+      "components": [
+        {
+          "bbox": [
+            680,
+            15,
+            970,
+            251
+          ],
+          "area": 27378
+        }
+      ]
+    },
+    {
+      "id": "p04",
+      "source": "actions",
+      "anchor_source": [
+        1205,
+        255
+      ],
+      "components": [
+        {
+          "bbox": [
+            1011,
+            14,
+            1284,
+            255
+          ],
+          "area": 27457
+        }
+      ]
+    },
+    {
+      "id": "p05",
+      "source": "actions",
+      "anchor_source": [
+        240,
+        493
+      ],
+      "components": [
+        {
+          "bbox": [
+            22,
+            265,
+            331,
+            493
+          ],
+          "area": 27077
+        }
+      ]
+    },
+    {
+      "id": "p06",
+      "source": "actions",
+      "anchor_source": [
+        565,
+        503
+      ],
+      "components": [
+        {
+          "bbox": [
+            392,
+            264,
+            636,
+            503
+          ],
+          "area": 25311
+        }
+      ]
+    },
+    {
+      "id": "p07",
+      "source": "actions",
+      "anchor_source": [
+        886,
+        503
+      ],
+      "components": [
+        {
+          "bbox": [
+            663,
+            268,
+            970,
+            503
+          ],
+          "area": 27137
+        },
+        {
+          "bbox": [
+            871,
+            461,
+            872,
+            462
+          ],
+          "area": 1
+        }
+      ]
+    },
+    {
+      "id": "p08",
+      "source": "actions",
+      "anchor_source": [
+        1212,
+        493
+      ],
+      "components": [
+        {
+          "bbox": [
+            992,
+            268,
+            1284,
+            493
+          ],
+          "area": 26992
+        }
+      ]
+    },
+    {
+      "id": "p09",
+      "source": "actions",
+      "anchor_source": [
+        208,
+        738
+      ],
+      "components": [
+        {
+          "bbox": [
+            57,
+            489,
+            302,
+            738
+          ],
+          "area": 25369
+        }
+      ]
+    },
+    {
+      "id": "p10",
+      "source": "actions",
+      "anchor_source": [
+        536,
+        741
+      ],
+      "components": [
+        {
+          "bbox": [
+            401,
+            499,
+            634,
+            741
+          ],
+          "area": 24922
+        }
+      ]
+    },
+    {
+      "id": "p11",
+      "source": "actions",
+      "anchor_source": [
+        829,
+        742
+      ],
+      "components": [
+        {
+          "bbox": [
+            707,
+            541,
+            1057,
+            742
+          ],
+          "area": 25069
+        },
+        {
+          "bbox": [
+            858,
+            703,
+            859,
+            704
+          ],
+          "area": 1
+        }
+      ]
+    },
+    {
+      "id": "p12",
+      "source": "actions",
+      "anchor_source": [
+        1153,
+        742
+      ],
+      "components": [
+        {
+          "bbox": [
+            1057,
+            523,
+            1277,
+            742
+          ],
+          "area": 23493
+        }
+      ]
+    },
+    {
+      "id": "p13",
+      "source": "actions",
+      "anchor_source": [
+        232,
+        962
+      ],
+      "components": [
+        {
+          "bbox": [
+            10,
+            753,
+            328,
+            962
+          ],
+          "area": 28883
+        },
+        {
+          "bbox": [
+            125,
+            902,
+            126,
+            903
+          ],
+          "area": 1
+        }
+      ]
+    },
+    {
+      "id": "p14",
+      "source": "actions",
+      "anchor_source": [
+        457,
+        944
+      ],
+      "components": [
+        {
+          "bbox": [
+            339,
+            777,
+            755,
+            944
+          ],
+          "area": 24971
+        },
+        {
+          "bbox": [
+            753,
+            893,
+            756,
+            894
+          ],
+          "area": 3
+        }
+      ]
+    },
+    {
+      "id": "p15",
+      "source": "actions",
+      "anchor_source": [
+        828,
+        952
+      ],
+      "components": [
+        {
+          "bbox": [
+            725,
+            780,
+            1093,
+            952
+          ],
+          "area": 23524
+        }
+      ]
+    },
+    {
+      "id": "p16",
+      "source": "actions",
+      "anchor_source": [
+        1166,
+        954
+      ],
+      "components": [
+        {
+          "bbox": [
+            1067,
+            745,
+            1265,
+            954
+          ],
+          "area": 21835
+        }
+      ]
+    },
+    {
+      "id": "p17",
+      "source": "actions",
+      "anchor_source": [
+        232,
+        1198
+      ],
+      "components": [
+        {
+          "bbox": [
+            64,
+            966,
+            326,
+            1198
+          ],
+          "area": 27353
+        },
+        {
+          "bbox": [
+            174,
+            1137,
+            175,
+            1138
+          ],
+          "area": 1
+        }
+      ]
+    },
+    {
+      "id": "p18",
+      "source": "actions",
+      "anchor_source": [
+        548,
+        1196
+      ],
+      "components": [
+        {
+          "bbox": [
+            419,
+            981,
+            631,
+            1196
+          ],
+          "area": 24942
+        },
+        {
+          "bbox": [
+            513,
+            1145,
+            514,
+            1146
+          ],
+          "area": 1
+        }
+      ]
+    },
+    {
+      "id": "p19",
+      "source": "actions",
+      "anchor_source": [
+        851,
+        1196
+      ],
+      "components": [
+        {
+          "bbox": [
+            649,
+            966,
+            938,
+            1196
+          ],
+          "area": 27367
+        },
+        {
+          "bbox": [
+            796,
+            1159,
+            797,
+            1160
+          ],
+          "area": 1
+        }
+      ]
+    },
+    {
+      "id": "p20",
+      "source": "actions",
+      "anchor_source": [
+        1213,
+        1198
+      ],
+      "components": [
+        {
+          "bbox": [
+            1006,
+            963,
+            1288,
+            1198
+          ],
+          "area": 27474
+        }
+      ]
+    }
+  ],
+  "clips": {
+    "idle": {
+      "poses": [
+        "p01",
+        "p02",
+        "p03",
+        "p04"
+      ],
+      "fps": 6,
+      "windup_frame": 0,
+      "contact_frame": 2
+    },
+    "move": {
+      "poses": [
+        "p05",
+        "p06",
+        "p07",
+        "p08"
+      ],
+      "fps": 9,
+      "windup_frame": 0,
+      "contact_frame": 2
+    },
+    "attack": {
+      "poses": [
+        "p09",
+        "p10",
+        "p11",
+        "p12"
+      ],
+      "fps": 9,
+      "windup_frame": 0,
+      "contact_frame": 2
+    },
+    "special": {
+      "poses": [
+        "p13",
+        "p14",
+        "p15",
+        "p16"
+      ],
+      "fps": 8,
+      "windup_frame": 0,
+      "contact_frame": 2
+    },
+    "hit": {
+      "poses": [
+        "p17",
+        "p18",
+        "p19",
+        "p20"
+      ],
+      "fps": 10,
+      "windup_frame": 0,
+      "contact_frame": 2
+    }
+  },
+  "action_clips": {
+    "swipe": "attack"
+  }
+}

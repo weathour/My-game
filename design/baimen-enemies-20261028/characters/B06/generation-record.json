@@ -1,0 +1,89 @@
+{
+  "schema": 1,
+  "id": "B06",
+  "generator": "built-in image_gen.imagegen",
+  "selected_sources": [
+    "source/actions-v1.png",
+    "source/master-v2.png"
+  ],
+  "source_images": [
+    {
+      "path": "design/baimen-enemies-20261028/characters/B06/source/actions-v1.png",
+      "sha256": "b7cf661d227459b28402450e03b4bcf49d42f1a649b2c94096c537b95b9c28fb",
+      "size": [
+        1375,
+        1144
+      ],
+      "rgba": true,
+      "alpha_range": [
+        0,
+        255
+      ],
+      "selected": true,
+      "prompt": "design/baimen-enemies-20261028/characters/B06/source/actions-v1-prompt.txt",
+      "references": [
+        {
+          "path": "design/baimen-enemies-20261028/characters/B06/source/master-v2.png",
+          "role": "identity master",
+          "sha256": "a049462bcee602e5f497ff4004716ccac3cb35d786b6e8eb78cff900e288caa4"
+        },
+        {
+          "path": "design/jia-combat-20261027/source/dao-v1.png",
+          "role": "pixel style/animation reference only",
+          "sha256": "dc7720a430f1b03f61b87292b845f170f15a5a487c4a9810070fb27ad546099e"
+        },
+        {
+          "path": "design/mechanic-rework-20261013/source/character-animations.png",
+          "role": "pixel style/animation reference only",
+          "sha256": "ad4ea4529a399df65569c5c37d85c0616bb6d09f594749c30818c283c85407c5"
+        }
+      ]
+    },
+    {
+      "path": "design/baimen-enemies-20261028/characters/B06/source/master-v1.png",
+      "sha256": "09da0147ec2d3803086bcf4d3e88550b80eb5005c66b8b716268ff89cbd3c5b5",
+      "size": [
+        1536,
+        1024
+      ],
+      "rgba": true,
+      "alpha_range": [
+        0,
+        254
+      ],
+      "selected": false,
+      "prompt": "design/baimen-enemies-20261028/characters/B06/source/master-v1-prompt.txt",
+      "references": []
+    },
+    {
+      "path": "design/baimen-enemies-20261028/characters/B06/source/master-v2.png",
+      "sha256": "a049462bcee602e5f497ff4004716ccac3cb35d786b6e8eb78cff900e288caa4",
+      "size": [
+        1536,
+        1024
+      ],
+      "rgba": true,
+      "alpha_range": [
+        0,
+        254
+      ],
+      "selected": true,
+      "prompt": "design/baimen-enemies-20261028/characters/B06/source/master-v2-prompt.txt",
+      "references": [
+        {
+          "path": "design/baimen-enemies-20261028/characters/B06/source/master-v1.png",
+          "role": "edit target; same creature, improve transparent framing",
+          "sha256": "09da0147ec2d3803086bcf4d3e88550b80eb5005c66b8b716268ff89cbd3c5b5"
+        }
+      ]
+    }
+  ],
+  "rejected_or_partially_rejected": {
+    "master-v1.png": "Refined true-alpha framing request; v2 selected."
+  },
+  "extraction": "Reviewed actual alpha>=128 4-connected components, manual per-pose ground anchors; no blind grid clipping. Fixed calibration per source; no per-pose stretching.",
+  "raster_processing": "Aseprite crop/join/nearest-neighbour resize, shared <=64 colors, binary alpha. Pillow/scipy read-only measurements and QA only.",
+  "measurements": "measurements.json",
+  "export_manifest": "export-manifest.json",
+  "remaining_integration_check": "Root/W3 owns real Godot battle/codex previews at 960/1280/1920 and actual animated action review."
+}

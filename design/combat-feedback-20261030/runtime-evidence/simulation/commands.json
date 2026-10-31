@@ -1,0 +1,17 @@
+{
+  "working_directory": "/home/weathour/programs/desktop-projects/My-game",
+  "engine": "/home/weathour/.local/bin/godot-4.6.2",
+  "engine_version": "4.6.2.stable.official.71f334935",
+  "smoke_command_template": "run_dir=$(mktemp -d /tmp/my-game-TEST_NAME.XXXXXX)\nXDG_DATA_HOME=\"$run_dir/data\" XDG_CONFIG_HOME=\"$run_dir/config\" XDG_CACHE_HOME=\"$run_dir/cache\" /home/weathour/.local/bin/godot-4.6.2 --headless --path . --script scripts/tests/TEST_NAME.gd",
+  "smoke_scripts": [
+    "scripts/tests/chronicle_combat_feedback_events_smoke.gd",
+    "scripts/tests/chronicle_combat_smoke.gd",
+    "scripts/tests/chronicle_character_mechanics_smoke.gd",
+    "scripts/tests/chronicle_boss_flow_smoke.gd"
+  ],
+  "final_event_command": "run_dir=$(mktemp -d /tmp/my-game-feedback-events-final.XXXXXX)\nXDG_DATA_HOME=\"$run_dir/data\" XDG_CONFIG_HOME=\"$run_dir/config\" XDG_CACHE_HOME=\"$run_dir/cache\" /home/weathour/.local/bin/godot-4.6.2 --headless --path . --script scripts/tests/chronicle_combat_feedback_events_smoke.gd > \"$run_dir/events.log\" 2>&1",
+  "parity_original_commands_file": "parity/comparison.json",
+  "prepare_reproduction_only": "python3 design/combat-feedback-20261030/runtime-evidence/simulation/parity/reproduce.py",
+  "optional_reproduction_run": "python3 design/combat-feedback-20261030/runtime-evidence/simulation/parity/reproduce.py --run",
+  "note": "These commands document completed checks or permit future reproduction. No tests were executed while persisting this evidence."
+}

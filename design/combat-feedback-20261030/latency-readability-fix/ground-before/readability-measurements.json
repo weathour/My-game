@@ -1,0 +1,49 @@
+{
+  "fixtures": [
+    {
+      "cpu_tick_presentation_median_ms": 0.772,
+      "cpu_tick_presentation_p95_ms": 1.813,
+      "fixture": "B01-sparse-1280",
+      "live_at_capture": 4,
+      "requested_enemies": 4,
+      "samples": 45,
+      "screenshot": "B01-sparse-1280.png",
+      "stage": "B01",
+      "texture": "res://assets/maps/baimen-feedback-20261030/road.png",
+      "tint": "d9d9d9",
+      "wall_render_frame_median_ms": 9.947,
+      "wall_render_frame_p95_ms": 16.749
+    },
+    {
+      "cpu_tick_presentation_median_ms": 1.378,
+      "cpu_tick_presentation_p95_ms": 2.715,
+      "fixture": "B01-crowd-1280",
+      "live_at_capture": 24,
+      "requested_enemies": 24,
+      "samples": 45,
+      "screenshot": "B01-crowd-1280.png",
+      "stage": "B01",
+      "texture": "res://assets/maps/baimen-feedback-20261030/road.png",
+      "tint": "d9d9d9",
+      "wall_render_frame_median_ms": 12.42,
+      "wall_render_frame_p95_ms": 19.65
+    },
+    {
+      "cpu_tick_presentation_median_ms": 1.203,
+      "cpu_tick_presentation_p95_ms": 2.854,
+      "fixture": "B02-crowd-reference-1280",
+      "live_at_capture": 24,
+      "requested_enemies": 24,
+      "samples": 45,
+      "screenshot": "B02-crowd-reference-1280.png",
+      "stage": "B02",
+      "texture": "res://assets/maps/baimen-feedback-20261030/city-v2.png",
+      "tint": "d9d9d9",
+      "wall_render_frame_median_ms": 11.474,
+      "wall_render_frame_p95_ms": 15.632
+    }
+  ],
+  "population": "controlled fixtures; real stage enemy stats and simulation; not a full playthrough",
+  "seed": 30418,
+  "timing": "CPU tick and presentation samples; wall frame includes display scheduling, not input latency"
+}

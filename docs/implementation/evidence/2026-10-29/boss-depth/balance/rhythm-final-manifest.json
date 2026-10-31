@@ -1,0 +1,38 @@
+{
+  "revision": "B18_war_combo_final_20261029",
+  "driver_revision": "visible_goal_v2",
+  "B18_war_recovery_seconds": [
+    0.65,
+    0.8,
+    1.0,
+    0.9,
+    3.7
+  ],
+  "B18_human_changes": false,
+  "unchanged_B18_properties": [
+    "tell duration",
+    "attack geometry",
+    "damage",
+    "40/60 HP split",
+    "1.0 safe transformation",
+    "0.65 observation",
+    "7600 total HP"
+  ],
+  "B18_bonus_time": 100,
+  "source_sha256": {
+    "scripts/content/boss_forms.gd": "d3036653578ccfd954e2d86263ac3b7539575460eb3bbb10b3fa5200f70c9d15",
+    "scripts/content/enemy_catalog.gd": "61c727374f5ee1a07fae9890ee0b9d25a17a49891e26b5e1d7bd8c35156959c4",
+    "scripts/content/stage_catalog.gd": "d3695df6564900ab450dbaadc999c11be91bfffdacf59c3245b87edf5e94fbd1",
+    "scripts/battle/battle_session.gd": "f13903075c80fca26a9cc8c5231c74a04fde07cc714b4ba9f24c2d91b357791e",
+    "scripts/battle/enemy_runtime.gd": "6a4099503165646dd9b915001e6f6f0739089109b359cc9895e345675bd857cd",
+    "scripts/battle/enemy_system.gd": "66a5fdb457520de96dc7ab47cd8cf4a7babfdd40a5fc26c006643226ea1e83ba",
+    "scripts/battle/combat_mechanics.gd": "44bbae72c801337f165a1210e9080e9d688ec2e9d0853aa1dcd9a4a64d77499f",
+    "scripts/tests/chronicle_enemy_sessions_smoke.gd": "2b6489ca22f9c6c83f331c099182f115e8aefd564590c17f99e79fe8450a46b3",
+    "scripts/tests/chronicle_boss_balance_probe.gd": "830c366dfadc6c945534d8daf5da7b94a45136365b8a9af0aee1f16fac43f41e"
+  },
+  "campaign_reward_seed": 781103,
+  "battle_seeds": {
+    "short": 1718,
+    "explore": 1718
+  }
+}

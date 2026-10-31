@@ -1,0 +1,1067 @@
+{
+  "research_date": "2026-10-29",
+  "scope": "Rance X first-part gameplay UI reference only: released-game quest selection, selected-region operation view, and in-quest route choice. No code or runtime assets.",
+  "measurement_note": "Bounding boxes are visual estimates. x/y are pixels from the source image top-left; normalized values divide by the stated image size. For release-quest-list, screenshot includes a 32 px Windows title/menu frame; gameplay viewport is approximately y=32..481. Other screenshots are game frames without OS title bars.",
+  "evidence": [
+    {
+      "id": "released-quest-list",
+      "path": "/tmp/my-game-ui-ref-20261029/rance10/release-quest-list.jpg",
+      "source_page": "https://monokuror.hatenablog.jp/entry/2018/03/01/000000",
+      "image_url": "https://cdn-ak.f.st-hatena.com/images/fotolife/m/monokuror/20220709/20220709011952.jpg",
+      "dimensions": [
+        800,
+        482
+      ],
+      "kind": "post-release gameplay screenshot; exact patch/build unverified",
+      "visual_check": "Viewed at native dimensions. This is the gameplay quest-selection page, not the title screen or a developer-only global map."
+    },
+    {
+      "id": "released-selected-region",
+      "path": "/tmp/my-game-ui-ref-20261029/rance10/release-region-panel.jpg",
+      "source_page": "https://game.girldoll.org/rance10-review/",
+      "image_url": "https://game.girldoll.org/wp/wp-content/uploads/180305_13.jpg",
+      "dimensions": [
+        750,
+        422
+      ],
+      "kind": "post-release gameplay screenshot; exact patch/build unverified",
+      "visual_check": "Viewed at native dimensions. Shows a selected front/region with regional force counts and two available operations."
+    },
+    {
+      "id": "released-quest-confirm",
+      "path": "/tmp/my-game-ui-ref-20261029/rance10/release-quest-confirm.jpg",
+      "source_page": "https://monokuror.hatenablog.jp/entry/2018/02/25/000000",
+      "image_url": "https://cdn-ak.f.st-hatena.com/images/fotolife/m/monokuror/20220708/20220708160158.jpg",
+      "dimensions": [
+        800,
+        482
+      ],
+      "kind": "post-release gameplay screenshot; exact patch/build unverified",
+      "visual_check": "Viewed at native dimensions. Shows a confirmation dialog over a dimmed quest-selection page."
+    },
+    {
+      "id": "released-route-choice",
+      "path": "/tmp/my-game-ui-ref-20261029/rance10/release-route-choice.jpg",
+      "source_page": "https://game.girldoll.org/rance10-review/",
+      "image_url": "https://game.girldoll.org/wp/wp-content/uploads/180305_23.jpg",
+      "dimensions": [
+        750,
+        422
+      ],
+      "kind": "post-release gameplay screenshot; exact patch/build unverified",
+      "visual_check": "Viewed at native dimensions. Shows a route split during an active quest, not a title or global-menu screen."
+    },
+    {
+      "id": "official-main-map-dev",
+      "path": "/home/weathour/programs/desktop-projects/My-game/design/rance10-ui-research-20261027/reference/system-03_01.jpg",
+      "source_page": "https://www.alicesoft.com/rance10/system/index.html",
+      "image_url": "https://www.alicesoft.com/rance10/common/img/system/img_system03_01.jpg",
+      "dimensions": [
+        1000,
+        562
+      ],
+      "kind": "official promotional screenshot; development build; official page explicitly warns images/info may differ from product",
+      "visual_check": "Viewed. Use only as corroboration for official intended country/status/map and lower-right formation/help affordance, not as shipped pixel layout."
+    },
+    {
+      "id": "official-route-dev",
+      "path": "/home/weathour/programs/desktop-projects/My-game/design/rance10-ui-research-20261027/reference/system-04_01.jpg",
+      "source_page": "https://www.alicesoft.com/rance10/system/index.html",
+      "image_url": "https://www.alicesoft.com/rance10/common/img/system/img_system04_01.jpg",
+      "dimensions": [
+        1000,
+        562
+      ],
+      "kind": "official promotional screenshot; development build; official page explicitly warns images/info may differ from product",
+      "visual_check": "Viewed. Corroborates route-page panel placement, branch choices, current HP and bottom controls."
+    },
+    {
+      "id": "released-base-country-status",
+      "path": "/tmp/my-game-ui-ref-20261029/rance10/release-main-status-koudenpa.jpg",
+      "source_page": "https://koudenpa.hatenablog.com/entry/2018/02/24/234509",
+      "image_url": "https://cdn-ak.f.st-hatena.com/images/fotolife/k/koudenpa/20180224/20180224234346.jpg",
+      "dimensions": [
+        1024,
+        576
+      ],
+      "kind": "post-release player gameplay screenshot; exact patch/build unverified",
+      "visual_check": "Viewed at native dimensions. It shows the base/world status page with four country force cards, portrait, turn/phase and top-right circular クエスト control; the right-side task list is not open."
+    },
+    {
+      "id": "released-selected-front-operation-koudenpa",
+      "path": "/tmp/my-game-ui-ref-20261029/rance10/release-main-status-after.jpg",
+      "source_page": "https://koudenpa.hatenablog.com/entry/2018/02/24/234509",
+      "image_url": "https://cdn-ak.f.st-hatena.com/images/fotolife/k/koudenpa/20180224/20180224234436.jpg",
+      "dimensions": [
+        1024,
+        576
+      ],
+      "kind": "post-release player gameplay screenshot; exact patch/build unverified",
+      "visual_check": "Viewed at native dimensions. It shows a selected Free Cities front/detail view, with a changed map, enemy/friendly strength, local casualty forecast and one support-quest action. This is not the base country-card layout."
+    }
+  ],
+  "states": [
+    {
+      "id": "main-base-country-status",
+      "evidence_id": "released-base-country-status",
+      "canvas": {
+        "width": 1024,
+        "height": 576,
+        "viewport_bbox_px": [
+          0,
+          0,
+          1024,
+          576
+        ]
+      },
+      "modules": [
+        {
+          "label_ja": "TURN / PHASE",
+          "meaning_zh": "回合与准备/作战/据点阶段",
+          "bbox_px": [
+            10,
+            0,
+            113,
+            140
+          ],
+          "bbox_norm": [
+            0.0098,
+            0,
+            0.1104,
+            0.2431
+          ],
+          "visible_data": "TURN 6；准备/作战/据点三个阶段圆点完整纳入，最右绿色据点圆点约到 x=122；作战阶段为红色。日期小字存在但不在此处逐字转录。",
+          "hierarchy": "左上角状态徽记组：大号回合圆章在上，日期/PHASE和三枚圆点在下，压在世界地图背景上。",
+          "visibility_and_navigation": "这张base状态页可见；阶段如何切换需要通过任务推进，官方规则有说明；点击阶段图标与否未证。",
+          "confidence": "high for module and position; fine date unreadable"
+        },
+        {
+          "label_ja": "人類総数 / 人類死亡率",
+          "meaning_zh": "人类总数与死亡率",
+          "bbox_px": [
+            374,
+            0,
+            239,
+            57
+          ],
+          "bbox_norm": [
+            0.365,
+            0,
+            0.233,
+            0.099
+          ],
+          "visible_data": "约2亿4870万50000人；人类死亡率17%。",
+          "hierarchy": "顶部居中，金色大字为全局态势信息。",
+          "visibility_and_navigation": "base页显示；世界推进后数值会变化。更新时间截图不能证明。",
+          "confidence": "high for position; numeric transcription medium"
+        },
+        {
+          "label_ja": "四地域の戦況カード：ヘルマン共和国",
+          "meaning_zh": "赫尔曼共和国战线卡片",
+          "bbox_px": [
+            289,
+            82,
+            320,
+            183
+          ],
+          "bbox_norm": [
+            0.282,
+            0.142,
+            0.313,
+            0.318
+          ],
+          "visible_data": "区域名/旗徽、交战状态条、左右势力头像标识、魔軍 vs 人類軍数字（截图约28万4000 vs 10万3000）。",
+          "hierarchy": "地图上的四张大卡之一，左上区域。",
+          "visibility_and_navigation": "base页可同时看到四地域卡；单卡是否点击有交互，未证。战线状况会随任务/回合更新，规则说明来自官方。",
+          "confidence": "high for structure; number legibility medium"
+        },
+        {
+          "label_ja": "四地域の戦況カード：リーザス王国",
+          "meaning_zh": "利萨斯王国战线卡片",
+          "bbox_px": [
+            626,
+            83,
+            381,
+            182
+          ],
+          "bbox_norm": [
+            0.611,
+            0.144,
+            0.372,
+            0.316
+          ],
+          "visible_data": "旗徽、交战状态条、势力头像及魔軍 vs 人類軍数字（约25万8000 vs 30万7000）。",
+          "hierarchy": "地图右上区域。",
+          "visibility_and_navigation": "与其他国家卡同时显示。具体是否可点击查看区域详情未有证据。",
+          "confidence": "high for structure; number legibility medium"
+        },
+        {
+          "label_ja": "四地域の戦況カード：ゼス王国",
+          "meaning_zh": "泽斯王国战线卡片",
+          "bbox_px": [
+            277,
+            301,
+            331,
+            178
+          ],
+          "bbox_norm": [
+            0.271,
+            0.523,
+            0.323,
+            0.309
+          ],
+          "visible_data": "旗徽、战线箭头、势力头像及魔軍 vs 人類軍数字（约36万5000 vs 22万1000）。",
+          "hierarchy": "地图左下区域。",
+          "visibility_and_navigation": "与其他国家卡同时显示；具体点击目标未知。",
+          "confidence": "high for structure; number legibility medium"
+        },
+        {
+          "label_ja": "四地域の戦況カード：自由都市地帯",
+          "meaning_zh": "自由都市地带战线卡片",
+          "bbox_px": [
+            637,
+            300,
+            369,
+            180
+          ],
+          "bbox_norm": [
+            0.622,
+            0.521,
+            0.36,
+            0.313
+          ],
+          "visible_data": "旗徽、战线箭头、势力头像及魔軍 vs 人類軍数字（约49万6000 vs 15万8000）。",
+          "hierarchy": "地图右下区域。",
+          "visibility_and_navigation": "与其他国家卡同时显示；具体点击目标未知。",
+          "confidence": "high for structure; number legibility medium"
+        },
+        {
+          "label_ja": "中央世界地図",
+          "meaning_zh": "世界地图底图",
+          "bbox_px": [
+            192,
+            0,
+            832,
+            530
+          ],
+          "bbox_norm": [
+            0.188,
+            0,
+            0.812,
+            0.92
+          ],
+          "visible_data": "地图作为四张国家战线卡片的底层；海岸、地区纹理及标记提供共同空间背景。",
+          "hierarchy": "主背景，卡片压在上面，地图本身明度和细节弱于浮层状态卡。",
+          "visibility_and_navigation": "base页持续可见；这张截图不能证明地图点选行为。",
+          "confidence": "high"
+        },
+        {
+          "label_ja": "クエスト（右上円形ボタン、件数バッジ）",
+          "meaning_zh": "任务入口（右上圆形按钮与数量提示）",
+          "bbox_px": [
+            918,
+            0,
+            96,
+            98
+          ],
+          "bbox_norm": [
+            0.896,
+            0,
+            0.094,
+            0.17
+          ],
+          "visible_data": "圆形按钮写『クエスト』，旁边黄色数字徽标9。",
+          "hierarchy": "右上角独立高对比入口；与国家战况卡分离。",
+          "visibility_and_navigation": "在base页可见；另一发行后截图显示任务列表/标题『作戦クエスト』打开态。没有找到描述点击此按钮的发行后文字或视频操作证据；不能肯定它是打开侧栏列表的控制，打开方式在资料里标未知。",
+          "confidence": "high for appearance; transition intentionally unknown"
+        },
+        {
+          "label_ja": "立ち絵（角色名未确认）",
+          "meaning_zh": "左侧顾问角色立绘",
+          "bbox_px": [
+            0,
+            127,
+            280,
+            449
+          ],
+          "bbox_norm": [
+            0,
+            0.2205,
+            0.2734,
+            0.7795
+          ],
+          "visible_data": "黑发戴眼镜人物从约 y=127 延伸到画面底边 y=575，制服与围裙在底部继续被画框裁切；左下 MENU 按钮叠在立绘前景上。另一个base截图为粉发角色，说明人物图可能随场景状态变化，但规则未知。",
+          "hierarchy": "左侧高面积情境/角色锚点，占宽约27.3%、高约78%；立绘贯穿到画面下边缘，MENU覆盖其下部。",
+          "visibility_and_navigation": "base页两张不同回合截图均显示立绘但人物不同；何时切换不可从这两图确定。",
+          "confidence": "high for placement and difference; character identity and selection rule unknown"
+        },
+        {
+          "label_ja": "MENU",
+          "meaning_zh": "主菜单入口",
+          "bbox_px": [
+            16,
+            516,
+            100,
+            43
+          ],
+          "bbox_norm": [
+            0.016,
+            0.896,
+            0.098,
+            0.075
+          ],
+          "visible_data": "左下角大号矩形按钮『MENU』。",
+          "hierarchy": "底部角落入口，明显但比中央战况低优先级。",
+          "visibility_and_navigation": "base页可见；进入菜单后的画面由另一系统菜单截图显示，但该来源未证明此按钮与OS上方菜单是否相同。",
+          "confidence": "high for appearance; exact menu mapping unknown"
+        },
+        {
+          "label_ja": "ヘルプ / 部隊編成",
+          "meaning_zh": "帮助/队伍编成",
+          "bbox_px": [
+            867,
+            526,
+            148,
+            40
+          ],
+          "bbox_norm": [
+            0.847,
+            0.913,
+            0.145,
+            0.069
+          ],
+          "visible_data": "右下角问号帮助和部队編成并列；截图中按钮清晰可见。",
+          "hierarchy": "固定右下角辅助/整备入口。",
+          "visibility_and_navigation": "官方系统页确认主画面右下编成按钮进入部队编成页；官方支持页也称クエスト画面可以进デッキ編成。帮助目标未知。",
+          "confidence": "high for appearance; lineup destination official-confirmed"
+        }
+      ]
+    },
+    {
+      "id": "quest-list-open",
+      "evidence_id": "released-quest-list",
+      "canvas": {
+        "width": 800,
+        "height": 482,
+        "viewport_bbox_px": [
+          0,
+          32,
+          800,
+          450
+        ]
+      },
+      "modules": [
+        {
+          "label_ja": "TURN",
+          "meaning_zh": "当前回合",
+          "bbox_px": [
+            18,
+            37,
+            61,
+            64
+          ],
+          "bbox_norm_viewport": [
+            0.023,
+            0.011,
+            0.076,
+            0.142
+          ],
+          "visible_data": "TURN 4；其下可见日历日期小字（读数不完全确定）。",
+          "hierarchy": "左上角高对比圆形徽记；第一读取层。",
+          "visibility_and_navigation": "常驻主画面。具体点击行为未由截图证明。",
+          "confidence": "high for position/label; low for date transcription"
+        },
+        {
+          "label_ja": "PHASE / 準備・作戦・拠点",
+          "meaning_zh": "准备/作战/据点阶段",
+          "bbox_px": [
+            18,
+            93,
+            83,
+            55
+          ],
+          "bbox_norm_viewport": [
+            0.023,
+            0.136,
+            0.104,
+            0.122
+          ],
+          "visible_data": "三个带色圆形阶段标识；截图中作战状态为当前高亮（红色）。",
+          "hierarchy": "紧贴回合徽记下方，紧凑次级状态。",
+          "visibility_and_navigation": "主画面显示阶段状态；官方说明各行动阶段选一个Quest推进，战况报告除外。点击阶段圆点是否切换未知。",
+          "confidence": "high for visible labels and geometry; official flow confirmed, direct control affordance unknown"
+        },
+        {
+          "label_ja": "人類総数 / 人類死亡率",
+          "meaning_zh": "人类总数/人类死亡率",
+          "bbox_px": [
+            299,
+            37,
+            241,
+            43
+          ],
+          "bbox_norm_viewport": [
+            0.374,
+            0.011,
+            0.301,
+            0.096
+          ],
+          "visible_data": "约2億6130万50000人；人類死亡率12%（读数按截图）。",
+          "hierarchy": "页面顶端中央，两项世界态势数字；亮色大字。",
+          "visibility_and_navigation": "常驻天下地图主画面；变化与战争推进相关。截图本身不能证明动态更新时机。",
+          "confidence": "high for module/position; number legibility medium"
+        },
+        {
+          "label_ja": "全方面",
+          "meaning_zh": "全战线/全地图",
+          "bbox_px": [
+            246,
+            93,
+            345,
+            258
+          ],
+          "bbox_norm_viewport": [
+            0.308,
+            0.136,
+            0.431,
+            0.573
+          ],
+          "visible_data": "羊皮世界地图，区域轮廓高亮；图面为全域态势，不是可自由移动角色的地图。",
+          "hierarchy": "主视觉中枢，占最大面积。",
+          "visibility_and_navigation": "常驻任务选择画面。地图标记/区域高亮表现地理状况；官方规则文字证实主界面用于查看局势、选择任务，但此静图无法验证点选地图具体打开什么。",
+          "confidence": "high for geometry; medium for what selecting map does"
+        },
+        {
+          "label_ja": "作戦クエスト",
+          "meaning_zh": "作战任务",
+          "bbox_px": [
+            635,
+            36,
+            157,
+            37
+          ],
+          "bbox_norm_viewport": [
+            0.794,
+            0.009,
+            0.196,
+            0.082
+          ],
+          "visible_data": "当前可选任务列表的标题。",
+          "hierarchy": "右栏标题，高亮纸签。",
+          "visibility_and_navigation": "随作战阶段显示；准备阶段列表内容/标题会随阶段变化（官方系统说明阶段不同，实际列表状态需更多逐阶段截图确认）。",
+          "confidence": "high for label/position; visibility inference grounded in official phase model"
+        },
+        {
+          "label_ja": "クエスト行（冒険／大作戦／単独／作戦）",
+          "meaning_zh": "任务选择行（冒险/大战役/单独/作战）",
+          "bbox_px": [
+            595,
+            70,
+            199,
+            363
+          ],
+          "bbox_norm_viewport": [
+            0.744,
+            0.084,
+            0.249,
+            0.807
+          ],
+          "visible_data": "九条可见任务行；每行左侧有类别/势力小图标与色块，右侧显示任务名。例如冒険 魔王探索、大作戦 リーザスで魔人退治２、作戦 ゼス方面支援；最末为単独 チャンスを待つ。",
+          "hierarchy": "固定窄侧栏，九行按钮纵向堆叠，与中央地图并列。",
+          "visibility_and_navigation": "主任务选择列表。官方说明每个行动阶段选择一个Quest执行；静图不能证明排序、滚动或选中详细交互。",
+          "confidence": "high for position/categories/list interaction; individual fine text medium"
+        },
+        {
+          "label_ja": "立ち絵（角色名不確定）",
+          "meaning_zh": "顾问/角色全身立绘",
+          "bbox_px": [
+            2,
+            141,
+            206,
+            213
+          ],
+          "bbox_norm_viewport": [
+            0.003,
+            0.242,
+            0.258,
+            0.473
+          ],
+          "visible_data": "粉发蓝眼女性立绘占左侧约四分之一宽度，朝屏幕内侧；具体角色身份未可靠辨读。",
+          "hierarchy": "强烈人物锚点，压在地图左侧但不遮右侧Quest list。",
+          "visibility_and_navigation": "在此主屏可见；截图不能证明她是否随任务或事件改变。",
+          "confidence": "high for position/scale; identity unknown"
+        },
+        {
+          "label_ja": "選択クエスト情報",
+          "meaning_zh": "当前选中任务说明",
+          "bbox_px": [
+            10,
+            356,
+            392,
+            104
+          ],
+          "bbox_norm_viewport": [
+            0.013,
+            0.72,
+            0.49,
+            0.231
+          ],
+          "visible_data": "魔王の情報を求めてクレインと旅に出る；難易度UP；有利所属（その他）；有利属性（闇、氷）；報酬（ヒラミレモン）。",
+          "hierarchy": "左下大号浅色说明框，与立绘下半部重叠；黑字标签/正文，重要但弱于地图与角色。",
+          "visibility_and_navigation": "对应被选中的任务行；选中关系由说明内容和当前Quest页可见，行与说明的精确联动用这一静态图不能完全证明。",
+          "confidence": "high for box and most text; selected-row mapping medium"
+        },
+        {
+          "label_ja": "システム(S) / ヘルプ(H)",
+          "meaning_zh": "系统菜单/帮助菜单",
+          "bbox_px": [
+            2,
+            20,
+            88,
+            12
+          ],
+          "bbox_norm_viewport": [
+            0.003,
+            -0.027,
+            0.11,
+            0.027
+          ],
+          "visible_data": "Windows客户端窗口内的顶层文字菜单；位于操作画面上方标题栏之下。",
+          "hierarchy": "窄OS/应用菜单条，不与游戏内地图争抢视觉中心。",
+          "visibility_and_navigation": "常驻窗体框架；截图没有打开菜单，具体子项与去向未知。",
+          "confidence": "high for labels and placement; submenu behavior unknown"
+        },
+        {
+          "label_ja": "ヘルプ",
+          "meaning_zh": "帮助",
+          "bbox_px": [
+            666,
+            441,
+            39,
+            34
+          ],
+          "bbox_norm_viewport": [
+            0.833,
+            0.909,
+            0.049,
+            0.076
+          ],
+          "visible_data": "右下角问号按钮，截图中呈暗/不可操作状态。",
+          "hierarchy": "角落小型辅助按钮。",
+          "visibility_and_navigation": "显示在任务列表打开态；帮助目标未核实。",
+          "confidence": "high for presence/position; destination unknown"
+        },
+        {
+          "label_ja": "部隊編成（灰暗）",
+          "meaning_zh": "队伍编成（灰暗态）",
+          "bbox_px": [
+            705,
+            442,
+            55,
+            32
+          ],
+          "bbox_norm_viewport": [
+            0.881,
+            0.911,
+            0.069,
+            0.071
+          ],
+          "visible_data": "帮助右侧的横向按钮，文字『部隊編成』呈灰暗/禁用样式。",
+          "hierarchy": "角落辅助操作，优先级低于任务列表；X关闭按钮在其右侧。",
+          "visibility_and_navigation": "发行后该任务选择截图中灰暗，是否能点未知。官方规则说主画面和Quest画面右下按钮可进编成，支持FAQ称クエスト選択画面入口名『デッキ編成』；不过不能把当前这张图里的灰暗态说成可用。",
+          "confidence": "high for visible label/disabled appearance; destination supported by official docs but this instance appears inactive"
+        },
+        {
+          "label_ja": "X 閉じる",
+          "meaning_zh": "关闭任务选择面板",
+          "bbox_px": [
+            761,
+            438,
+            37,
+            39
+          ],
+          "bbox_norm_viewport": [
+            0.951,
+            0.902,
+            0.046,
+            0.087
+          ],
+          "visible_data": "右下角最右侧方形X按钮，按钮下写『閉じる』。",
+          "hierarchy": "任务列表页独立的返回/关闭控件，位置不同于Help和编成。",
+          "visibility_and_navigation": "在任务列表打开态可见；关闭后应回到先前页面是强推测，但静态截图不能证明返回目标。",
+          "confidence": "high for label/position; destination unknown"
+        }
+      ],
+      "screen_role": "任务列表打开态；与无列表的天下主屏分开记录。"
+    },
+    {
+      "id": "selected-front-operation-panel",
+      "evidence_id": "released-selected-region",
+      "canvas": {
+        "width": 750,
+        "height": 422,
+        "viewport_bbox_px": [
+          0,
+          0,
+          750,
+          422
+        ]
+      },
+      "modules": [
+        {
+          "label_ja": "TURN / PHASE",
+          "meaning_zh": "回合与阶段",
+          "bbox_px": [
+            12,
+            2,
+            96,
+            89
+          ],
+          "bbox_norm": [
+            0.016,
+            0.005,
+            0.128,
+            0.211
+          ],
+          "visible_data": "TURN 7；三阶段圆标；作战为红色当前态。",
+          "hierarchy": "左上状态徽记组。",
+          "visibility_and_navigation": "常驻；阶段选择操作未证。",
+          "confidence": "high"
+        },
+        {
+          "label_ja": "立ち絵（角色名不確定）",
+          "meaning_zh": "角色全身立绘",
+          "bbox_px": [
+            0,
+            98,
+            236,
+            216
+          ],
+          "bbox_norm": [
+            0,
+            0.232,
+            0.315,
+            0.512
+          ],
+          "visible_data": "粉发顾问式角色半身/全身画面，面向内容区。",
+          "hierarchy": "左侧锚点；占屏宽约31.5%。",
+          "visibility_and_navigation": "当前主界面状态可见；更换规则未知。",
+          "confidence": "high for geometry; identity unknown"
+        },
+        {
+          "label_ja": "ヘルマン共和国 / 魔軍兵力 / ヘルマン軍兵力",
+          "meaning_zh": "赫尔曼共和国前线及敌我兵力",
+          "bbox_px": [
+            232,
+            18,
+            486,
+            161
+          ],
+          "bbox_norm": [
+            0.309,
+            0.043,
+            0.648,
+            0.382
+          ],
+          "visible_data": "魔軍兵力43万8000人；ヘルマン軍兵力107万7000人；地图上有战线/交战标记；周围显示战果/灾害或影响比例。",
+          "hierarchy": "上中右大地图与两侧军力数字，信息主层。",
+          "visibility_and_navigation": "这是特定地区选择后的前线信息面板；截图能证明呈现但不能证明由点世界地图触发。官方规则确认地图区域有各国状况显示且战果会降低本轮人类军损失。",
+          "confidence": "high for module/content; trigger unknown"
+        },
+        {
+          "label_ja": "戦力予想 / 主戦力アイコン",
+          "meaning_zh": "战力预估/主力角色小图标",
+          "bbox_px": [
+            235,
+            226,
+            186,
+            42
+          ],
+          "bbox_norm": [
+            0.313,
+            0.536,
+            0.248,
+            0.1
+          ],
+          "visible_data": "下方显示战力预估标签、三个圆形单位/角色图标。数字在图中不清。",
+          "hierarchy": "地图下方辅助判断条。",
+          "visibility_and_navigation": "与当前前线/任务选择状态相邻；触发和精确数据未知。",
+          "confidence": "medium"
+        },
+        {
+          "label_ja": "大作戦／作戦 クエスト選択",
+          "meaning_zh": "该战线可选大战役/支援任务",
+          "bbox_px": [
+            418,
+            251,
+            190,
+            72
+          ],
+          "bbox_norm": [
+            0.557,
+            0.595,
+            0.253,
+            0.171
+          ],
+          "visible_data": "两行可执行选项：大作戦 ヘルマンで魔人退治、作戦 ヘルマン方面支援。",
+          "hierarchy": "地图下沿的横向选项按钮；属于主行动入口。",
+          "visibility_and_navigation": "当前选中地区显示其可用任务；点选的下一步未知。一般任务执行将进入对应Quest，官方规则可证每阶段选一个任务推进。",
+          "confidence": "high for labels/position; exact button response inferred from official task flow"
+        },
+        {
+          "label_ja": "人類被害予想 / 人類被害予測",
+          "meaning_zh": "预计人类损失信息",
+          "bbox_px": [
+            647,
+            105,
+            95,
+            55
+          ],
+          "bbox_norm": [
+            0.863,
+            0.249,
+            0.127,
+            0.13
+          ],
+          "visible_data": "右侧框可见人類被害予測 0.8%。",
+          "hierarchy": "小型关键风险数字，贴近敌我军力区域。",
+          "visibility_and_navigation": "在地区面板显示；更新条件和计算方式截图不能证明。",
+          "confidence": "high"
+        },
+        {
+          "label_ja": "報酬／クエスト情報",
+          "meaning_zh": "当前突出任务的详情",
+          "bbox_px": [
+            4,
+            303,
+            309,
+            102
+          ],
+          "bbox_norm": [
+            0.005,
+            0.718,
+            0.412,
+            0.242
+          ],
+          "visible_data": "魔人パボラを倒す；難易度UP；有利所属（ヘルマン）；有利属性（雷、光）；報酬 戦果。",
+          "hierarchy": "左下白色大卡片承托正文，和人物立绘叠层组合。",
+          "visibility_and_navigation": "针对当前突出任务的描述；与选择按钮的联动合理但静图不能证明。",
+          "confidence": "high for visible data"
+        },
+        {
+          "label_ja": "獲得戦果",
+          "meaning_zh": "可获战果",
+          "bbox_px": [
+            661,
+            214,
+            78,
+            45
+          ],
+          "bbox_norm": [
+            0.881,
+            0.507,
+            0.104,
+            0.107
+          ],
+          "visible_data": "标题与三枚战果标记；具体计数/状态不清。",
+          "hierarchy": "右侧辅助奖励列。",
+          "visibility_and_navigation": "地区/任务选定状态出现；具体与战线的关系未知。",
+          "confidence": "medium"
+        },
+        {
+          "label_ja": "ヘルプ / 閉じる",
+          "meaning_zh": "帮助/关闭",
+          "bbox_px": [
+            644,
+            331,
+            99,
+            47
+          ],
+          "bbox_norm": [
+            0.859,
+            0.785,
+            0.132,
+            0.111
+          ],
+          "visible_data": "右下角问号帮助与X关闭。",
+          "hierarchy": "角落工具/退出当前选择页。",
+          "visibility_and_navigation": "截图可见关闭；帮助与关闭具体回退目标未知。",
+          "confidence": "medium"
+        }
+      ],
+      "screen_role": "选定地区/前线任务面板；不同于四地域战况卡片base页，不与任务列表拼成同一固定页面。"
+    },
+    {
+      "id": "quest-confirm-modal",
+      "evidence_id": "released-quest-confirm",
+      "canvas": {
+        "width": 800,
+        "height": 482,
+        "viewport_bbox_px": [
+          0,
+          32,
+          800,
+          450
+        ]
+      },
+      "modules": [
+        {
+          "label_ja": "確認ダイアログ（はい／いいえ）",
+          "meaning_zh": "任务启动二次确认（是/否）",
+          "bbox_px": [
+            657,
+            141,
+            72,
+            68
+          ],
+          "bbox_norm_viewport": [
+            0.821,
+            0.242,
+            0.09,
+            0.151
+          ],
+          "visible_data": "小型浮层出现『はい』『いいえ』两个按钮。",
+          "hierarchy": "中央略偏右，叠在任务列表选中行附近；背景整体暗化。",
+          "visibility_and_navigation": "出现于选择某任务之后；这是从静图和暗化状态判断的模态确认。『はい』应确认当前所选任务、『いいえ』取消，但静图不证明具体下一步画面。",
+          "confidence": "high for labels/layout/modal; destination after confirmation unknown"
+        },
+        {
+          "label_ja": "背景主画面",
+          "meaning_zh": "被遮罩的地图、任务栏、角色和任务详情",
+          "bbox_px": [
+            0,
+            32,
+            800,
+            450
+          ],
+          "bbox_norm_viewport": [
+            0,
+            0,
+            1,
+            1
+          ],
+          "visible_data": "保留当前任务列表与选中项，整体压暗。",
+          "hierarchy": "背景上下文仍可识别，确认弹窗清晰优先。",
+          "visibility_and_navigation": "取消后具体恢复规则未验证。",
+          "confidence": "high for visual behavior; cancellation transition unknown"
+        }
+      ]
+    },
+    {
+      "id": "active-quest-route-choice",
+      "evidence_id": "released-route-choice",
+      "canvas": {
+        "width": 750,
+        "height": 422,
+        "viewport_bbox_px": [
+          0,
+          0,
+          750,
+          422
+        ]
+      },
+      "modules": [
+        {
+          "label_ja": "TURN / PHASE / QUEST",
+          "meaning_zh": "回合、阶段、任务上下文",
+          "bbox_px": [
+            8,
+            0,
+            344,
+            54
+          ],
+          "bbox_norm": [
+            0.011,
+            0,
+            0.459,
+            0.128
+          ],
+          "visible_data": "TURN 7；当前クエスト大作戦 リーザスで魔人退治；战场与难易度小标签。",
+          "hierarchy": "左上窄标题条，地图之上保持任务上下文。",
+          "visibility_and_navigation": "Quest进行中常驻；具体小字段部分难辨。",
+          "confidence": "high for overall module; some small text unreadable"
+        },
+        {
+          "label_ja": "分岐マップ",
+          "meaning_zh": "任务路线/分岔地图",
+          "bbox_px": [
+            140,
+            0,
+            610,
+            367
+          ],
+          "bbox_norm": [
+            0.187,
+            0,
+            0.813,
+            0.87
+          ],
+          "visible_data": "地图用黄色格状连线表示前进路径；当前/可选格、事件、敌人、宝箱等节点以颜色/图标区分。",
+          "hierarchy": "全屏最大的主视图；线路是空间与选择的视觉主轴。",
+          "visibility_and_navigation": "Quest中显示。官方规则明确玩家只在分岔点决定前进方向；地图上可遇敌、事件、恢复、难度提升、宝箱、经验等。此图只能验证当前节点样式，不能完整验证各颜色对应规则。",
+          "confidence": "high for geometry/route; event icon semantics from official page"
+        },
+        {
+          "label_ja": "緑ルート / 青ルート（分岐選択肢）",
+          "meaning_zh": "路线选项（绿色观察路线/蓝色战斗路线）",
+          "bbox_px": [
+            551,
+            81,
+            196,
+            146
+          ],
+          "bbox_norm": [
+            0.735,
+            0.192,
+            0.261,
+            0.346
+          ],
+          "visible_data": "绿色卡片：『魔人同士の戦いか／様子を見るか』；蓝色卡片：『むむ、俺を無視するな／戦うのは俺様だ／（無茶ルート）』。两张卡分别为绿色与蓝色，均带头像和台词。",
+          "hierarchy": "右侧两张大号彩色卡片，置于路线地图之上；颜色是选项识别线索。",
+          "visibility_and_navigation": "发行后截图显示路线分岔选择状态。选中后沿着哪条实际路径以及哪个按键确认，未从此静图验证。",
+          "confidence": "high for image colors/legible text/position; transitions unknown",
+          "evidence_note": "Do not reuse the red/green choices or text from official development screenshot system-04_01.jpg as retail UI evidence; the released screenshot has green/blue cards and different copy."
+        },
+        {
+          "label_ja": "HP / 隊員ミニカード",
+          "meaning_zh": "队伍总HP与当前队员小头像",
+          "bbox_px": [
+            543,
+            352,
+            202,
+            62
+          ],
+          "bbox_norm": [
+            0.724,
+            0.834,
+            0.269,
+            0.147
+          ],
+          "visible_data": "HP 322216；当前队伍约五枚小卡头像。",
+          "hierarchy": "底部靠右生命值长条和微缩队员卡，信息次于路线卡。",
+          "visibility_and_navigation": "Quest页常驻；官方说明HP为编成队伍的整体耐久值。动态更新细节无法由单帧确认。",
+          "confidence": "high for HP and position; card count may be partly clipped/overlapped"
+        },
+        {
+          "label_ja": "立ち絵（角色名不確定）",
+          "meaning_zh": "角色全身立绘",
+          "bbox_px": [
+            0,
+            101,
+            241,
+            244
+          ],
+          "bbox_norm": [
+            0,
+            0.239,
+            0.321,
+            0.578
+          ],
+          "visible_data": "粉发顾问式角色在左边；不同路线图/场景中继续保留相同人物锚点。",
+          "hierarchy": "高面积左侧角色，与右侧路线卡平衡。",
+          "visibility_and_navigation": "此路口可见；是否随任务变化未知。",
+          "confidence": "high for placement; identity unknown"
+        },
+        {
+          "label_ja": "MENU",
+          "meaning_zh": "游戏菜单入口",
+          "bbox_px": [
+            3,
+            386,
+            73,
+            32
+          ],
+          "bbox_norm": [
+            0.004,
+            0.915,
+            0.097,
+            0.076
+          ],
+          "visible_data": "左下角独立按钮。",
+          "hierarchy": "边角低优先级。",
+          "visibility_and_navigation": "此发行后游戏路线画面有显示；点击后菜单去向静态图无法确认。不要与开发版路线页上同位置菜单一概视为同一版式，因为正式版主地图截图使用窗口菜单条。",
+          "confidence": "high for placement; destination unknown"
+        },
+        {
+          "label_ja": "部隊編成 / ヘルプ",
+          "meaning_zh": "队伍编成/帮助",
+          "bbox_px": [
+            645,
+            384,
+            99,
+            36
+          ],
+          "bbox_norm": [
+            0.86,
+            0.91,
+            0.132,
+            0.085
+          ],
+          "visible_data": "两个小方按钮，帮助问号、部队编成。",
+          "hierarchy": "右下角固定辅助操作。",
+          "visibility_and_navigation": "官方系统页称主画面和Quest画面的右下角按钮可进入部隊編成。截图可见按钮但实际点击/打开后模式未验证。",
+          "confidence": "high for placement; destination from official description"
+        },
+        {
+          "label_ja": "クエスト位置/進行ボタン",
+          "meaning_zh": "当前节点/前进操作",
+          "bbox_px": [
+            706,
+            280,
+            39,
+            48
+          ],
+          "bbox_norm": [
+            0.941,
+            0.664,
+            0.052,
+            0.114
+          ],
+          "visible_data": "右侧浮动圆形双箭头按钮，附近有节点地形。",
+          "hierarchy": "地图边缘的小型继续控制。",
+          "visibility_and_navigation": "可能用于继续/确认路线，但仅凭截图不能判定去向或能否点击；保持未知。",
+          "confidence": "low for function; high for visibility/position"
+        }
+      ],
+      "screen_role": "任务进行中的路线分岔页；发行后截图，不是首页。"
+    }
+  ],
+  "cross_source_findings": [
+    {
+      "claim": "メイン画面用于看当前局势并选择任务；准备与作战阶段各自选择并执行一个任务推进。",
+      "source": "https://www.alicesoft.com/rance10/system/index.html",
+      "evidence": "official system page, sections ゲームの流れ and メイン画面; the site's general disclaimer says images/information are development materials and may differ from the released product."
+    },
+    {
+      "claim": "部隊編成按钮位于主画面与Quest画面右下；阵容上方是配置位，下方为团队标签和卡片列表；HP是整队数值。",
+      "source": "https://www.alicesoft.com/rance10/system/index.html",
+      "evidence": "official system page, 部隊編成 section. Layout description is useful; promotional screenshot is a development build and released screenshots remain the visual authority here."
+    },
+    {
+      "claim": "路口只让玩家选方向；Quest路线节点包括敌人、事件、恢复、难度提升、宝箱、经验等。",
+      "source": "https://www.alicesoft.com/rance10/system/index.html",
+      "evidence": "official system page, クエストの流れ section. Exact branch choice destination and controls are not tested in this study."
+    },
+    {
+      "claim": "发行后帮助页将任务选择屏上的编成入口称为『デッキ編成』，点入编成界面。",
+      "source": "https://www.alicesoft.com/support/rance10.html",
+      "evidence": "official support FAQ for after-game achievement check."
+    },
+    {
+      "claim": "发行后base页显示右上圆形『クエスト』按钮和件数；发行后另一截图显示『作戦クエスト』列表态。",
+      "source": "https://koudenpa.hatenablog.com/entry/2018/02/24/234509 ; https://monokuror.hatenablog.jp/entry/2018/03/01/000000",
+      "evidence": "The first page's screenshot at 23:43:46 shows country-status cards and the クエスト badge; the second page's screenshot shows the open task list. The written text does not describe pressing the control, and no clear video transition was found. The control-to-list transition is therefore unknown, not asserted."
+    }
+  ],
+  "boundaries": [
+    "No full gameplay capture or hands-on interaction was performed. Navigation destinations not documented by official text are marked unknown.",
+    "Player screenshots are post-release but exact patch and state are unverified; small decorative labels and some numbers are difficult to read.",
+    "Official AliceSoft system page supplies authoritative rules and terms but explicitly cautions that screenshots and information are development-stage and may differ from the retail version.",
+    "The character portrait identity is intentionally left unknown where the cropped evidence does not establish it.",
+    "No player-visible numerical combat attributes are present in the two selected main-page states except regional force counts, projected human loss, and route-page party HP. No standalone enemy stat panel is evidenced here.",
+    "The released base-country-status page, selected-front operation panel, and quest-list-open page are separate captures/states. Do not combine their panels into one fixed layout.",
+    "The release-quest-list capture includes a Windows title/menu strip and its own lower-right X 閉じる; the separate base-country-status capture instead shows an in-game MENU button at lower left. Preserve that evidence distinction; the images alone do not establish whether this difference comes from screen state, capture framing, or build/platform.",
+    "Released route-choice cards in release-route-choice.jpg are green and blue with different copy than the official development screenshot system-04_01.jpg (red/green); retail screenshot is the authority for shipped colors and text.",
+    "The released base screenshot proves the top-right クエスト button is visible while four regional force cards are visible and no side quest list is open. No checked text/video proves that clicking that specific button opens the right-side list; transition remains unknown."
+  ]
+}

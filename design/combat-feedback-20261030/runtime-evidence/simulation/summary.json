@@ -1,0 +1,76 @@
+{
+  "status": "PASS",
+  "evidence_persisted_without_rerunning_tests": true,
+  "engine_version": "Godot 4.6.2.stable.official.71f334935",
+  "baseline_commit": "5fa3ed236df0eaf3dd72915eba5681819efe6aef",
+  "tests": [
+    {
+      "script": "scripts/tests/chronicle_combat_feedback_events_smoke.gd",
+      "log": "logs/combat-feedback-events.log",
+      "status": "PASS",
+      "checks": 59,
+      "failures": 0,
+      "exit_code": 0,
+      "capture": "Copied original redirected log from /tmp/my-game-feedback-events-final.MLwcKY/events.log; final rerun performed before this evidence task."
+    },
+    {
+      "script": "scripts/tests/chronicle_combat_smoke.gd",
+      "log": "logs/combat.log",
+      "status": "PASS",
+      "checks": 67,
+      "failures": 0,
+      "exit_code": 0,
+      "capture": "Preserved previously returned combined stdout/stderr from exec chunks 61cc10 and 38b8f1; not a new process run.",
+      "expected_fault_injections": 2
+    },
+    {
+      "script": "scripts/tests/chronicle_character_mechanics_smoke.gd",
+      "log": "logs/character-mechanics.log",
+      "status": "PASS",
+      "checks": 126,
+      "failures": 0,
+      "exit_code": 0,
+      "capture": "Preserved previously returned stdout/stderr from exec chunk 8ab778; not a new process run."
+    },
+    {
+      "script": "scripts/tests/chronicle_boss_flow_smoke.gd",
+      "log": "logs/boss-flow.log",
+      "status": "PASS",
+      "checks": 140,
+      "failures": 0,
+      "exit_code": 0,
+      "capture": "Preserved previously returned stdout/stderr from exec chunks b4959b and 552ef5; not a new process run."
+    }
+  ],
+  "parity": {
+    "status": "PASS",
+    "stage_count": 3,
+    "total_frames_per_side": 10658,
+    "state_digests_match": true,
+    "baseline_log": "logs/parity-baseline.log",
+    "current_log": "logs/parity-current.log",
+    "baseline_summary": "parity/baseline-state-summary.json",
+    "current_summary": "parity/current-state-summary.json",
+    "comparison": "parity/comparison.json",
+    "harness": "parity/parity.gd",
+    "reproduction_helper": "parity/reproduce.py",
+    "capture": "Preserved previous process output: baseline exec chunks bac28d+d4741e; current chunks 6422af+ea1731. Both exit_code=0. No new simulation runs.",
+    "temporary_projects": "/tmp/my-game-feedback-parity-0mep15to"
+  },
+  "counts": {
+    "smoke_test_scripts": 4,
+    "smoke_assertions": 392,
+    "smoke_failures": 0,
+    "parity_stages": 3,
+    "parity_frames_per_side": 10658,
+    "parity_total_executed_frames": 21316
+  },
+  "scope_limits": [
+    "Headless simulation and lifecycle evidence; not player feel or audio acceptance.",
+    "Only per-stage SHA256 digests of the serialized frame streams were retained, not individual frame digests or complete frame snapshots.",
+    "Parity input hashes describe captured temporary projects. Final direction-only event fallback adjustment is recorded in parity/comparison.json.",
+    "Three regression logs and parity logs were saved from existing tool transcript output; only the final event log existed as a standalone redirected log before this task."
+  ],
+  "files_excluded_from_runtime_import": ".gdignore",
+  "commands": "commands.json"
+}

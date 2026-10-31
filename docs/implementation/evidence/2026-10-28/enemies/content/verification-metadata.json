@@ -1,0 +1,176 @@
+{
+  "captured_at": "2026-10-28T16:37:15.732898+00:00",
+  "version_status": "runtime_boundary_review_v3",
+  "engine": "4.6.2.stable.official.71f334935",
+  "all_tests_integrity_passed": true,
+  "balance_finalized_claim": false,
+  "isolated_sessions": {
+    "count": 18,
+    "outcomes": {
+      "victory": 18
+    },
+    "fixed_level_formula": "1 + floor(route_index * 0.6)",
+    "members": "B01 JIA; B02–B18 JIA/F11/N16",
+    "equipment": [
+      "plain_blade",
+      "cloth_armor",
+      "ember_seal"
+    ],
+    "initial_resources": "record() full resources for isolated fixture only",
+    "enemy_stat_override": false,
+    "synthetic_victory": false,
+    "field_selection": "none",
+    "campaign_reachable_build_claim": false,
+    "latest_run_count": 11,
+    "latest_run_outcomes": {
+      "victory": 11
+    },
+    "latest_run_evidence": "charge-boundary-recheck/isolated-charge-stages.json",
+    "latest_affected_stages": [
+      "B04",
+      "B03",
+      "B06",
+      "B07",
+      "B08",
+      "B10",
+      "B13",
+      "B15",
+      "B16",
+      "B17",
+      "B18"
+    ],
+    "retained_unaffected_stages": [
+      "B01",
+      "B02",
+      "B05",
+      "B09",
+      "B11",
+      "B12",
+      "B14"
+    ],
+    "retained_unaffected_evidence": "real-sessions-stable.json",
+    "coverage_note": "18-stage coverage combines 11 newly rerun charge-dependent stages with 7 unchanged non-charge stages from prior stable run; not 18 new runs."
+  },
+  "continuous_campaigns": {
+    "count": 2,
+    "reward_seed": 781103,
+    "routes": [
+      {
+        "route": "short",
+        "finished": true,
+        "actual_battles": 12,
+        "expected": 12,
+        "stop_reason": ""
+      },
+      {
+        "route": "explore",
+        "finished": true,
+        "actual_battles": 15,
+        "expected": 15,
+        "stop_reason": ""
+      }
+    ],
+    "injected_owned": false,
+    "injected_character_level": false,
+    "injected_character_hp_mp": false,
+    "enemy_stat_override": false,
+    "synthetic_victory": false,
+    "initial_state": "new CAMPAIGN reset; only RNG seed selected before begin_campaign",
+    "reward_policy": "select from actual persisted candidates; short prioritizes N16/N17 and avoids F03/N13; explore prioritizes F11/N07; actual choices fully logged",
+    "equipment_policy": "only equip actually awarded inventory; long_spear/iron_armor/frost_jade when earned",
+    "field_policy": "walk normally to equipment field until 3 fixed missing items earned; then short training, explore card elite",
+    "combat_inputs": "ordinary movement using current warning/projectile geometry; skill requests every 30 frames; switch to healthy owned member below 25% HP",
+    "B17_B18_boundary": "all owned records compared exactly between B17 post-story/reward and B18 start request; no fountain or HP/MP/CD override",
+    "short_B17_jia_exit": {
+      "cooldowns": {
+        "JIA_basic": 0.672947510094213,
+        "armor_guard": 0.0,
+        "jia_break": 0.0,
+        "jia_sweep": 2.68333333333334
+      },
+      "dead": false,
+      "hp": 383.526262295082,
+      "level": 14,
+      "mp": 8.35416666666417,
+      "xp": 181.333333333333
+    },
+    "short_B18_jia_entry": {
+      "cooldowns": {
+        "JIA_basic": 0.672947510094213,
+        "armor_guard": 0.0,
+        "jia_break": 0.0,
+        "jia_sweep": 2.68333333333334
+      },
+      "dead": false,
+      "hp": 383.526262295082,
+      "level": 14,
+      "mp": 8.35416666666417,
+      "xp": 181.333333333333
+    },
+    "limits": "two deterministic automated legal builds; not a claim of human difficulty or all-random-build balance",
+    "latest_evidence": "charge-boundary-recheck/continuous-real-campaigns.json"
+  },
+  "transactions": {
+    "synthetic_victory_fixture": true,
+    "route_topology_paths": 64,
+    "representative_full_campaign_routes": 4,
+    "purpose": "state machine/rewards/story/save compatibility only"
+  },
+  "prior_evidence": "initial/final intermediate logs and original B12 timeout preserved; superseded mechanics are not final acceptance evidence",
+  "hash_capture_note": "All listed sources hashed immediately before and after the targeted isolated and continuous runs; hashes identical. Metadata updated only after both process exit codes were 0.",
+  "file_sha256": {
+    "scripts/battle/ability_definition.gd": "e633f09670a3d389028117ef3ed3b72b71aa198edb012cce4ff53cd1a33379bf",
+    "scripts/battle/ability_system.gd": "80b75e8d4c363e49430951290dfd19af6d0b735a8717b4398216b714da3acc49",
+    "scripts/battle/battle_input.gd": "ecbff771999fa8c8c8ed0354a8a3abbfe57749c79edd5287271a44b9bcad3a4d",
+    "scripts/battle/battle_session.gd": "c6cc93261260bcaeebebdbb668470d6c7e80642effb4d6898969ca1732355d42",
+    "scripts/battle/battle_space.gd": "8505ffe3b61661c3e6ae031b16e754d5728101e3b5e95be4859a5d1cbde40485",
+    "scripts/battle/character_runtime.gd": "7d7cf83ac6d611fc2410a518c78b50ab377ac0e9f49f7e5f9f5d8d3f6e674129",
+    "scripts/battle/combat_mechanics.gd": "44bbae72c801337f165a1210e9080e9d688ec2e9d0853aa1dcd9a4a64d77499f",
+    "scripts/battle/combat_resolver.gd": "24437cdbf808d4e85a521d3fd8450f994946463484e601584e78b9e8f8398cc6",
+    "scripts/battle/enemy_geometry.gd": "7c3d9b9f923cd8f83eae7f69ac6217f177e923cf3844d6800fb7d017e45ced38",
+    "scripts/battle/enemy_runtime.gd": "c21be72c1fcc6f8a539630c460e6096c1adefbacc6333ec937c0641a7cc5bcdf",
+    "scripts/battle/enemy_system.gd": "873536554363394e974d5a2f33313b4a0bdfa37cf30b1b870ee00a1ca81d8912",
+    "scripts/battle/stage_director.gd": "1e0bf690e455fcbfaf47e76560650c9ca35f8056c5977c377623e0ec03f09c07",
+    "scripts/battle/targeting.gd": "060455d6bf74a0180d4de29b795f498af33b929da07c9cb00567d6a3162cc344",
+    "scripts/content/enemy_catalog.gd": "dd6760c5878bac8b931e9b42081018487fff08b9d37ecb541123495934324826",
+    "scripts/content/stage_catalog.gd": "49c895779ebafceaab5967b729482a696a102181be80ba6e3598c68d39a922df",
+    "scripts/tests/chronicle_enemy_sessions_smoke.gd": "391657ad6927c78f6accf87bbbb0ef8e252a21a541b92707cdcbf56579b6b042",
+    "scripts/tests/chronicle_enemy_campaign_smoke.gd": "f8e92d4a3385a363b540aa45777a643bff7fd192a646f012ae38293785f8cf0d"
+  },
+  "post_run_text_only_edit": "E12 visible name unified to 碑背石龟; no stats/actions/runtime edits",
+  "charge_boundary_recheck": {
+    "reason": "Original diagonal charge endpoint was clamped then measured by Euclidean distance, allowing movement beyond the radius-inset bounds along the unchanged direction. bounded_ray_length now clips the ray to the first radius-inset rectangular boundary.",
+    "actual_simulation_changes": [
+      "bounded line/charge length near map edges"
+    ],
+    "presentation_fields_added": [
+      "attack_step",
+      "enemy_hazard_release"
+    ],
+    "affected_selection": "current boss/field-elite/ordinary-wave attack actions, including E03; B01/B02 currently have only swipe and are retained without independent rerun",
+    "checks": {
+      "isolated": 89204,
+      "continuous": 442
+    },
+    "failures": 0,
+    "real_battles": {
+      "isolated": 11,
+      "continuous_short": 12,
+      "continuous_explore": 15
+    },
+    "reward_seed": 781103,
+    "numeric_content_changed": false,
+    "injected_characters_levels_resources_or_enemy_hp": false,
+    "synthetic_victory": false,
+    "observed_changes": "charge-boundary-recheck/observed-changes.json",
+    "headless_startup": "charge-boundary-recheck/headless-startup.log",
+    "source_snapshot": "charge-boundary-recheck/run-snapshot.json",
+    "prior_geometry_boundary_test": {
+      "path": "../runtime/charge-boundary.log",
+      "checks": 641,
+      "reused": true,
+      "scope": "four edges/four corners x body radii 11/16/46, real active movement, warned endpoint, 16-unit player padding; later attack_step and enemy_hazard_release are presentation metadata only"
+    },
+    "limits": "Same two deterministic legal builds and isolated fixed-level bot fixtures; this does not certify human difficulty or all random builds."
+  }
+}

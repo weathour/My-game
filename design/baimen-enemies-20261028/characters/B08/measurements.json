@@ -1,0 +1,673 @@
+{
+  "version": 1,
+  "id": "B08",
+  "review_status": "accepted_for_export",
+  "review_notes": "Viewed master,20pose actions sheet and supplementary4pose charge strip. Source actions row4 had two crocodiles connected and is rejected only for that row. Accepted idle/move/jaw-halberd sweep/hit sixteen true bodies plus four complete charge-strip bodies with upright source calibration. Long tail,4feet,gate teeth/boards/halberd all preserved. Manually set ground at feet, not low weapon tip. Fixed calibration per source; no stretch to identical pose heights.",
+  "prompts": [
+    "source/actions-v1-prompt.txt",
+    "source/charge-v1-prompt.txt",
+    "source/master-v1-prompt.txt"
+  ],
+  "canvas": {
+    "size": [
+      512,
+      512
+    ],
+    "anchor": [
+      250,
+      450
+    ],
+    "body_height_px": 192
+  },
+  "sources": {
+    "actions": {
+      "path": "source/actions-v1.png",
+      "size": [
+        1312,
+        1199
+      ],
+      "sha256": "55f211e69ecd18f31785c5b2561d12b873616099418aea6e5ad64975340cfae0",
+      "standing_body_height": 181
+    },
+    "charge": {
+      "path": "source/charge-v1.png",
+      "size": [
+        2172,
+        724
+      ],
+      "sha256": "ab1a0b931d34301d131bb7ebc6b5f81f1ad90cdca603a59485b80cef4630ea10",
+      "standing_body_height": 260
+    }
+  },
+  "portrait": {
+    "path": "source/master-v1.png",
+    "size": [
+      1774,
+      887
+    ],
+    "sha256": "3ce739bd649e172aeea45f3c194cf14bb0559a65c1aba994989a80ef42425b8c"
+  },
+  "poses": [
+    {
+      "id": "p01",
+      "source": "actions",
+      "anchor_source": [
+        203,
+        234
+      ],
+      "components": [
+        {
+          "bbox": [
+            26,
+            63,
+            336,
+            244
+          ],
+          "area": 26076
+        },
+        {
+          "bbox": [
+            270,
+            146,
+            271,
+            147
+          ],
+          "area": 1
+        }
+      ]
+    },
+    {
+      "id": "p02",
+      "source": "actions",
+      "anchor_source": [
+        518,
+        232
+      ],
+      "components": [
+        {
+          "bbox": [
+            342,
+            60,
+            649,
+            242
+          ],
+          "area": 26272
+        },
+        {
+          "bbox": [
+            479,
+            94,
+            480,
+            95
+          ],
+          "area": 1
+        },
+        {
+          "bbox": [
+            568,
+            232,
+            569,
+            233
+          ],
+          "area": 1
+        }
+      ]
+    },
+    {
+      "id": "p03",
+      "source": "actions",
+      "anchor_source": [
+        842,
+        231
+      ],
+      "components": [
+        {
+          "bbox": [
+            661,
+            62,
+            973,
+            241
+          ],
+          "area": 24955
+        },
+        {
+          "bbox": [
+            782,
+            78,
+            783,
+            79
+          ],
+          "area": 1
+        },
+        {
+          "bbox": [
+            860,
+            115,
+            861,
+            116
+          ],
+          "area": 1
+        }
+      ]
+    },
+    {
+      "id": "p04",
+      "source": "actions",
+      "anchor_source": [
+        1157,
+        232
+      ],
+      "components": [
+        {
+          "bbox": [
+            965,
+            62,
+            1301,
+            242
+          ],
+          "area": 26769
+        },
+        {
+          "bbox": [
+            1113,
+            86,
+            1114,
+            87
+          ],
+          "area": 1
+        },
+        {
+          "bbox": [
+            1111,
+            90,
+            1112,
+            91
+          ],
+          "area": 1
+        }
+      ]
+    },
+    {
+      "id": "p05",
+      "source": "actions",
+      "anchor_source": [
+        208,
+        447
+      ],
+      "components": [
+        {
+          "bbox": [
+            28,
+            279,
+            343,
+            459
+          ],
+          "area": 26249
+        }
+      ]
+    },
+    {
+      "id": "p06",
+      "source": "actions",
+      "anchor_source": [
+        522,
+        450
+      ],
+      "components": [
+        {
+          "bbox": [
+            343,
+            279,
+            657,
+            462
+          ],
+          "area": 26274
+        }
+      ]
+    },
+    {
+      "id": "p07",
+      "source": "actions",
+      "anchor_source": [
+        849,
+        446
+      ],
+      "components": [
+        {
+          "bbox": [
+            661,
+            282,
+            989,
+            459
+          ],
+          "area": 27040
+        }
+      ]
+    },
+    {
+      "id": "p08",
+      "source": "actions",
+      "anchor_source": [
+        1162,
+        447
+      ],
+      "components": [
+        {
+          "bbox": [
+            987,
+            279,
+            1299,
+            459
+          ],
+          "area": 26332
+        },
+        {
+          "bbox": [
+            1134,
+            293,
+            1139,
+            298
+          ],
+          "area": 14
+        },
+        {
+          "bbox": [
+            1139,
+            298,
+            1140,
+            299
+          ],
+          "area": 1
+        }
+      ]
+    },
+    {
+      "id": "p09",
+      "source": "actions",
+      "anchor_source": [
+        196,
+        704
+      ],
+      "components": [
+        {
+          "bbox": [
+            8,
+            487,
+            320,
+            724
+          ],
+          "area": 29617
+        },
+        {
+          "bbox": [
+            135,
+            538,
+            136,
+            539
+          ],
+          "area": 1
+        },
+        {
+          "bbox": [
+            137,
+            538,
+            139,
+            540
+          ],
+          "area": 3
+        }
+      ]
+    },
+    {
+      "id": "p10",
+      "source": "actions",
+      "anchor_source": [
+        524,
+        699
+      ],
+      "components": [
+        {
+          "bbox": [
+            334,
+            530,
+            668,
+            711
+          ],
+          "area": 26859
+        },
+        {
+          "bbox": [
+            447,
+            554,
+            448,
+            555
+          ],
+          "area": 1
+        },
+        {
+          "bbox": [
+            453,
+            560,
+            454,
+            561
+          ],
+          "area": 1
+        }
+      ]
+    },
+    {
+      "id": "p11",
+      "source": "actions",
+      "anchor_source": [
+        866,
+        701
+      ],
+      "components": [
+        {
+          "bbox": [
+            683,
+            512,
+            1069,
+            724
+          ],
+          "area": 27824
+        }
+      ]
+    },
+    {
+      "id": "p12",
+      "source": "actions",
+      "anchor_source": [
+        1164,
+        704
+      ],
+      "components": [
+        {
+          "bbox": [
+            982,
+            537,
+            1298,
+            718
+          ],
+          "area": 25600
+        },
+        {
+          "bbox": [
+            1136,
+            566,
+            1137,
+            567
+          ],
+          "area": 1
+        },
+        {
+          "bbox": [
+            1203,
+            588,
+            1204,
+            589
+          ],
+          "area": 1
+        }
+      ]
+    },
+    {
+      "id": "p13",
+      "source": "charge",
+      "anchor_source": [
+        300,
+        500
+      ],
+      "components": [
+        {
+          "bbox": [
+            20,
+            255,
+            516,
+            515
+          ],
+          "area": 56870
+        }
+      ]
+    },
+    {
+      "id": "p14",
+      "source": "charge",
+      "anchor_source": [
+        860,
+        505
+      ],
+      "components": [
+        {
+          "bbox": [
+            576,
+            257,
+            1057,
+            534
+          ],
+          "area": 53737
+        }
+      ]
+    },
+    {
+      "id": "p15",
+      "source": "charge",
+      "anchor_source": [
+        1390,
+        483
+      ],
+      "components": [
+        {
+          "bbox": [
+            1055,
+            259,
+            1718,
+            508
+          ],
+          "area": 62778
+        },
+        {
+          "bbox": [
+            1283,
+            291,
+            1284,
+            292
+          ],
+          "area": 1
+        }
+      ]
+    },
+    {
+      "id": "p16",
+      "source": "charge",
+      "anchor_source": [
+        1965,
+        508
+      ],
+      "components": [
+        {
+          "bbox": [
+            1739,
+            253,
+            2162,
+            534
+          ],
+          "area": 49615
+        },
+        {
+          "bbox": [
+            2025,
+            368,
+            2026,
+            369
+          ],
+          "area": 1
+        }
+      ]
+    },
+    {
+      "id": "p17",
+      "source": "actions",
+      "anchor_source": [
+        194,
+        1135
+      ],
+      "components": [
+        {
+          "bbox": [
+            13,
+            952,
+            311,
+            1146
+          ],
+          "area": 27187
+        },
+        {
+          "bbox": [
+            146,
+            1008,
+            147,
+            1009
+          ],
+          "area": 1
+        }
+      ]
+    },
+    {
+      "id": "p18",
+      "source": "actions",
+      "anchor_source": [
+        530,
+        1156
+      ],
+      "components": [
+        {
+          "bbox": [
+            367,
+            1000,
+            650,
+            1170
+          ],
+          "area": 25761
+        }
+      ]
+    },
+    {
+      "id": "p19",
+      "source": "actions",
+      "anchor_source": [
+        849,
+        1136
+      ],
+      "components": [
+        {
+          "bbox": [
+            659,
+            977,
+            985,
+            1148
+          ],
+          "area": 27023
+        }
+      ]
+    },
+    {
+      "id": "p20",
+      "source": "actions",
+      "anchor_source": [
+        1166,
+        1157
+      ],
+      "components": [
+        {
+          "bbox": [
+            994,
+            971,
+            1298,
+            1170
+          ],
+          "area": 27572
+        },
+        {
+          "bbox": [
+            1115,
+            1000,
+            1116,
+            1001
+          ],
+          "area": 1
+        },
+        {
+          "bbox": [
+            1122,
+            1010,
+            1124,
+            1011
+          ],
+          "area": 2
+        }
+      ]
+    }
+  ],
+  "clips": {
+    "idle": {
+      "poses": [
+        "p01",
+        "p02",
+        "p03",
+        "p04"
+      ],
+      "fps": 6,
+      "windup_frame": 0,
+      "contact_frame": 2
+    },
+    "move": {
+      "poses": [
+        "p05",
+        "p06",
+        "p07",
+        "p08"
+      ],
+      "fps": 9,
+      "windup_frame": 0,
+      "contact_frame": 2
+    },
+    "attack": {
+      "poses": [
+        "p09",
+        "p10",
+        "p11",
+        "p12"
+      ],
+      "fps": 8,
+      "windup_frame": 1,
+      "contact_frame": 2
+    },
+    "special": {
+      "poses": [
+        "p13",
+        "p14",
+        "p15",
+        "p16"
+      ],
+      "fps": 9,
+      "windup_frame": 1,
+      "contact_frame": 2
+    },
+    "hit": {
+      "poses": [
+        "p17",
+        "p18",
+        "p19",
+        "p20"
+      ],
+      "fps": 10,
+      "windup_frame": 0,
+      "contact_frame": 2
+    }
+  },
+  "action_clips": {
+    "swipe": "attack",
+    "charge": "special"
+  }
+}

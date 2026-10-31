@@ -1,0 +1,101 @@
+{
+  "engine": "my-game-multisample-3",
+  "listening_review": false,
+  "mastered": false,
+  "corrections": [
+    {
+      "cues": [
+        "army_cao"
+      ],
+      "change": "High command melody moved from tenor trombone to horn; lower answer moved from horn to trombone. Authored pitches/onsets unchanged."
+    },
+    {
+      "cues": [
+        "boss_lubu_warform"
+      ],
+      "change": "High warform melody moved from tenor trombone to horn; low answer moved to tenor trombone. Chromatic identity and phase axis unchanged."
+    },
+    {
+      "cues": [
+        "battle_siege"
+      ],
+      "change": "High siege melody moved to horn; chordal bed moved to tenor trombone. Authored pitches/onsets unchanged."
+    },
+    {
+      "cues": [
+        "battle_ritual"
+      ],
+      "change": "Bass B1 retained through contrabass instead of extending cello. Percussion keys41/45 replaced by actual key36 bass-drum hits at three explicit velocities."
+    },
+    {
+      "cues": [
+        "army_caochun_warform"
+      ],
+      "change": "First entrance D3 explicitly rewritten D4 for trumpet; only one pitched event moved an octave. Human horn keeps D3; shared phase timing/harmony unchanged."
+    },
+    {
+      "scope": "all drive/gallop passages",
+      "change": "Removed false key42 hi-hat events (actual source gong scrape). Replaced with sparse key40 snare ghost notes on selected offbeats; no key46 hi-hat substitution."
+    }
+  ],
+  "pre_fix_range_or_mapping_issues": 159,
+  "post_fix_selected_region_issues": 0,
+  "phase_frames": {
+    "lubu_axis_108_224": [
+      [
+        "boss_lubu",
+        5973333
+      ],
+      [
+        "boss_lubu_warform",
+        5973333
+      ]
+    ],
+    "caochun_axis_144_288": [
+      [
+        "army_caochun_human",
+        5760000
+      ],
+      [
+        "army_caochun_warform",
+        5760000
+      ]
+    ],
+    "liao_axis_152_288": [
+      [
+        "character_liao",
+        5456842
+      ],
+      [
+        "character_liao_warform",
+        5456842
+      ]
+    ]
+  },
+  "mix_mono_energy_loss_db": [
+    -1.5609131483413694,
+    -0.21676853689219053
+  ],
+  "worst_stem_mono_energy_loss_db": -2.3001720414913995,
+  "artifact_inventory": {
+    "cues": 18,
+    "mixes": 18,
+    "stems": 103,
+    "midi_files": 18,
+    "reaper_projects": 18,
+    "midi_notes": 19596
+  },
+  "actual_reaper_probes": {
+    "6/8": "military-reaper-6_8-v3/result.json",
+    "2/4": "military-reaper-2_4-v3-exact/result.json"
+  },
+  "reaper_boundary_resolution": {
+    "old_probe": "military-reaper-2_4-v3/result.json",
+    "old_shortfall_frames": 10,
+    "cause": "REAPER custom render bounds were rounded to milliseconds by its render dialog.",
+    "fix": "Engine-owned verifier uses exact integer-sample time selection and RENDER_BOUNDSFLAG=2. No audio padding, trimming, or relaxed duration assertion.",
+    "exact_frames": 5456842,
+    "max_absolute_reconstruction_error": 5.960464477539063e-08,
+    "last_64_frames_max_absolute_error": 5.9051671996712685e-08
+  }
+}

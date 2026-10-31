@@ -1,0 +1,122 @@
+{
+  "status": "implemented_and_verified",
+  "baseline": [
+    1280,
+    720
+  ],
+  "reference_states": [
+    "released-main-base",
+    "main-quest-selection",
+    "main-selected-region",
+    "active-quest-route-choice"
+  ],
+  "rectangles": {
+    "phase_badge": [
+      12,
+      8,
+      144,
+      152
+    ],
+    "presenter": [
+      -22,
+      154,
+      338,
+      550
+    ],
+    "world_map": [
+      230,
+      112,
+      1030,
+      484
+    ],
+    "route_map": [
+      230,
+      118,
+      1030,
+      468
+    ],
+    "selected_task_paper": [
+      16,
+      456,
+      428,
+      184
+    ],
+    "conditional_task_choices": [
+      978,
+      136,
+      286,
+      390
+    ],
+    "selected_primary_action": [
+      978,
+      540,
+      286,
+      56
+    ],
+    "local_map_tools": [
+      1158,
+      14,
+      106,
+      92
+    ],
+    "party_resources": [
+      464,
+      604,
+      620,
+      110
+    ],
+    "menu": [
+      16,
+      658,
+      104,
+      48
+    ],
+    "return_world": [
+      128,
+      658,
+      112,
+      48
+    ],
+    "party_preparation": [
+      1110,
+      650,
+      154,
+      54
+    ],
+    "route_context": [
+      176,
+      14,
+      600,
+      96
+    ],
+    "world_context": [
+      400,
+      12,
+      520,
+      88
+    ]
+  },
+  "adaptation": {
+    "960x540": "Positions and regions scale to 75 percent; body text keeps a legible floor; map retains at least 310 px minimum height. Dense descriptions scroll within their box. Main current node and lower-branch keyboard targets keep a safe left inset clear of the task paper.",
+    "1920x1080": "Positions and regions scale to 150 percent; body fonts capped at 135 percent; map remains a continuously draggable canvas.",
+    "ownership": "Shared chrome arranges the regions; world and route modules supply data and actions without changing campaign semantics.",
+    "overlay_note": "Right route choices overlay the full map canvas and shrink to their content; the primary action follows the choices with a 16 px baseline gap. Keyboard-focused map markers are kept clear of both the right choices and lower-left paper."
+  },
+  "runtime_fields": {
+    "phase": "nodes[data.current].segment; large phase number, current segment name and six noninteractive progress marks; never turns",
+    "presenter": "first configured living female companion, otherwise JIA; no unowned presenter",
+    "party": "JIA + actual two auxiliary slots, independent HP/MP, real level and death flags",
+    "equipment": "party_summary().equipment",
+    "world_status": "owned companions excluding JIA, entered pool, completed battle node count; no completion percentage",
+    "route_choices": "real available nodes and state_for/event/battle availability; inspecting never chooses the node"
+  },
+  "explicit_omissions": [
+    "legend",
+    "from/to link lists",
+    "full-width global tab header",
+    "fictional armies/population/turn/AP/food",
+    "shared party HP mechanic",
+    "invented battles in other provinces"
+  ],
+  "verification": "docs/design-reviews/evidence/2026-10-29/rance-main-ui/validation/verification.json"
+}

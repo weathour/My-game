@@ -1,0 +1,109 @@
+{
+  "frame_duration_ms": 55,
+  "effects": [
+    {
+      "effect": "slash",
+      "frames": [
+        {
+          "frame": 0,
+          "opaque_pixels": 957,
+          "alpha_energy": 957.0,
+          "luma_energy": 788.358951372549,
+          "bright_pixels": 858
+        },
+        {
+          "frame": 1,
+          "opaque_pixels": 2542,
+          "alpha_energy": 2542.0,
+          "luma_energy": 2206.0305741176467,
+          "bright_pixels": 2390
+        },
+        {
+          "frame": 2,
+          "opaque_pixels": 1527,
+          "alpha_energy": 1527.0,
+          "luma_energy": 1271.937782745098,
+          "bright_pixels": 1421
+        },
+        {
+          "frame": 3,
+          "opaque_pixels": 371,
+          "alpha_energy": 371.0,
+          "luma_energy": 267.79473568627446,
+          "bright_pixels": 305
+        }
+      ],
+      "peak_luma_frame": 1
+    },
+    {
+      "effect": "thrust",
+      "frames": [
+        {
+          "frame": 0,
+          "opaque_pixels": 803,
+          "alpha_energy": 803.0,
+          "luma_energy": 651.7510698039216,
+          "bright_pixels": 723
+        },
+        {
+          "frame": 1,
+          "opaque_pixels": 1446,
+          "alpha_energy": 1446.0,
+          "luma_energy": 1172.4894556862746,
+          "bright_pixels": 1291
+        },
+        {
+          "frame": 2,
+          "opaque_pixels": 852,
+          "alpha_energy": 852.0,
+          "luma_energy": 681.8718298039216,
+          "bright_pixels": 764
+        },
+        {
+          "frame": 3,
+          "opaque_pixels": 350,
+          "alpha_energy": 350.0,
+          "luma_energy": 269.60252313725493,
+          "bright_pixels": 302
+        }
+      ],
+      "peak_luma_frame": 1
+    },
+    {
+      "effect": "sweep",
+      "frames": [
+        {
+          "frame": 0,
+          "opaque_pixels": 1580,
+          "alpha_energy": 1580.0,
+          "luma_energy": 1284.4030501960783,
+          "bright_pixels": 1447
+        },
+        {
+          "frame": 1,
+          "opaque_pixels": 3680,
+          "alpha_energy": 3680.0,
+          "luma_energy": 3164.9207921568623,
+          "bright_pixels": 3451
+        },
+        {
+          "frame": 2,
+          "opaque_pixels": 2111,
+          "alpha_energy": 2111.0,
+          "luma_energy": 1702.6170149019608,
+          "bright_pixels": 1914
+        },
+        {
+          "frame": 3,
+          "opaque_pixels": 964,
+          "alpha_energy": 964.0,
+          "luma_energy": 738.3225121568628,
+          "bright_pixels": 822
+        }
+      ],
+      "peak_luma_frame": 1
+    }
+  ],
+  "before_mapping": "JIA_effects indexes 0..3 across .22s; source frame 0 is rendered on the settled tick.",
+  "after_mapping": "Canvas _jia_contact_texture starts at source frame 1 on the settled tick, then frames 2/3 dissipate, without changing simulation or effect life."
+}

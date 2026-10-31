@@ -1,0 +1,40 @@
+{
+  "schema": 1,
+  "reviewed_at": "2026-10-28T17:02:13.895687+00:00",
+  "reviewer": "root production agent",
+  "method": "Direct view_image visual inspection of actual Godot rendered captures; no raster redraw or composition.",
+  "result": "passed",
+  "images": [
+    {
+      "path": "design/baimen-enemies-20261028/final-evidence/screens/enemy-battle-1280.png",
+      "sha256": "7865112dc28791bfe5ff8bf0eca35b2481b0541e4fb118648d5d94d09d2a8390"
+    },
+    {
+      "path": "design/baimen-enemies-20261028/final-evidence/animations/featured/gallery-1280-page00-attack-02.png",
+      "sha256": "87525cf83a057b493c6a1f3a4f443730a83f19f27060aae00fa222f860a9f4e2"
+    },
+    {
+      "path": "design/baimen-enemies-20261028/final-evidence/screens/codex-960.png",
+      "sha256": "8092fdcf611457a0c6a1f0d88b86016cd3c69d653157083a736ff2a08def772d"
+    },
+    {
+      "path": "design/baimen-enemies-20261028/final-evidence/fx/enemy-fx-1280-01.png",
+      "sha256": "6f925bab91422edc2805c72cfa83c45e8fbc3d049cfd096a3d310a5593ebaf94"
+    },
+    {
+      "path": "design/baimen-enemies-20261028/final-evidence/playable/10-second-battle-wave.png",
+      "sha256": "3850bc6fe0ce37e4d4b34f62c7032c9c221c51ba8b21f418d94c6ac4f5fbf05d"
+    },
+    {
+      "path": "design/baimen-enemies-20261028/final-evidence/playable/08-compact.png",
+      "sha256": "2abf113b1a3bd8a0c98e2ed6546392e335073701e4863d41234e408a59d8668e"
+    }
+  ],
+  "observations": [
+    "Full standing portraits and combat poses fit the codex preview; shared action-bound scaling keeps the long B18 halberd in its gallery cell.",
+    "Ordinary, heavy, elite and boss bodies remain visually distinct; large foreground bodies fade when covering the player and the player foot marker and actual threat geometry remain readable.",
+    "Compact 960 UI keeps the HUD and scrollable codex available without horizontal clipping.",
+    "Eight new effect designs are visible in the rendered effect fixture; playable first/second-stage captures use the current authored enemy bodies."
+  ],
+  "scope_note": "Battle scale and effect captures are controlled renderer fixtures, not evidence of natural campaign completion. Actual continuous campaign evidence is separately recorded under docs/implementation/evidence/2026-10-28/enemies/content/charge-boundary-recheck/. This is not individual user art approval or human difficulty calibration."
+}

@@ -1,0 +1,66 @@
+{
+  "tests": [
+    {
+      "log": "characters/profiles-headless.log",
+      "result": [
+        "CHRONICLE_CHARACTER_PROFILES_SMOKE PASS checks=82 failures=0"
+      ],
+      "valid": true
+    },
+    {
+      "log": "characters/profiles-rendered.log",
+      "result": [
+        "CHRONICLE_CHARACTER_PROFILES_SMOKE PASS checks=90 failures=0"
+      ],
+      "valid": true
+    },
+    {
+      "log": "characters/playable-ui.log",
+      "result": [
+        "CHRONICLE_PLAYABLE_UI_SMOKE PASS failures=0"
+      ],
+      "valid": true
+    },
+    {
+      "log": "characters/chapter-two.log",
+      "result": [
+        "CHRONICLE_CHAPTER_TWO_SMOKE PASS checks=180 failures=0"
+      ],
+      "valid": true
+    },
+    {
+      "log": "characters/story-ui-regression.log",
+      "result": [
+        "CHRONICLE_STORY_UI_SMOKE PASS checks=87 failures=0"
+      ],
+      "valid": true
+    },
+    {
+      "log": "characters/party-summary.log",
+      "result": [
+        "CHRONICLE_PARTY_SUMMARY_SMOKE PASS checks=155 failures=0"
+      ],
+      "valid": true
+    },
+    {
+      "log": "authored-battle-effects/smoke-headless.log",
+      "result": [
+        "CHRONICLE_AUTHORED_EFFECTS_SMOKE PASS checks=33 failures=0"
+      ],
+      "valid": true
+    },
+    {
+      "log": "authored-battle-effects/smoke-render.log",
+      "result": [
+        "CHRONICLE_AUTHORED_EFFECTS_SMOKE PASS checks=33 failures=0"
+      ],
+      "valid": true
+    }
+  ],
+  "profile_screens": 8,
+  "vfx_screens": 24,
+  "vfx_gifs": 2,
+  "startup": "passed",
+  "import": "passed",
+  "graphify": "stale: missing Godot extraction; prior index retained"
+}

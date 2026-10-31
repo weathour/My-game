@@ -1,0 +1,87 @@
+{
+  "commit": "5fa3ed236df0eaf3dd72915eba5681819efe6aef",
+  "scope": "current formal chronicle battle; not archived or retained rehearsal code",
+  "map": {
+    "bounds": [
+      3200,
+      1800
+    ],
+    "baseline_viewport": [
+      1280,
+      720
+    ],
+    "source_resolution": [
+      1672,
+      941
+    ],
+    "stage_types": {
+      "grass": [
+        "B01",
+        "B03",
+        "B04",
+        "B08",
+        "B14"
+      ],
+      "stone": [
+        "B02",
+        "B05",
+        "B06",
+        "B07",
+        "B09",
+        "B10",
+        "B11",
+        "B12",
+        "B13",
+        "B15",
+        "B16",
+        "B17",
+        "B18"
+      ]
+    },
+    "whole_image_stretched_to_bounds": true,
+    "baked_walls_have_collision": false,
+    "stage_specific_tints": false
+  },
+  "feedback": {
+    "enemy_flash_field_consumed": false,
+    "enemy_hit_animation_seconds": 0.16,
+    "enemy_death_fade_seconds": 0.3,
+    "dedicated_death_manifests": 6,
+    "generic_actual_hit_sfx_wired": false,
+    "generic_kill_sfx_wired": false,
+    "generic_pickup_sfx_wired": false,
+    "shield_only_hit_can_still_tint_hurt": true,
+    "boss_impact_is_enemy_release_not_player_damage": true
+  },
+  "source_locators": [
+    "scripts/battle/battle_session.gd:191",
+    "scripts/battle/combat_resolver.gd:20",
+    "scripts/ui/chronicle/battle_canvas.gd:104",
+    "scripts/ui/chronicle/battle_canvas.gd:123",
+    "scripts/ui/chronicle/battle_canvas.gd:250",
+    "scripts/ui/chronicle/enemy_actor.gd:78",
+    "scripts/ui/chronicle/battle_art.gd:61",
+    "scripts/content/stage_catalog.gd:5"
+  ],
+  "current_capture": {
+    "script": "scripts/tests/chronicle_boss_camera_smoke.gd",
+    "result": "PASS checks=182 failures=0",
+    "isolated_xdg_prefix": "/tmp/battle-map-audit",
+    "rendering": "Vulkan",
+    "tight_hud_camera_fix_present": true,
+    "boss_visible_within_hud_safe_area": true,
+    "images": {
+      "first-human-1280.png": "30055692204a85730fb7aed1e77b258e54d5113c32cf62a58d697e917a05ff9b",
+      "warning-1280.png": "f1e2fdd5ba93385bf6b489232b59ccffa9e8350d61461d8de7aa7cce6ea71dcb",
+      "phase.png": "80e6b52b9822ef7a9a829e4594adcc60268c107cbdae0a7928c7af4d5541d8c4"
+    }
+  },
+  "root_visual_review": [
+    "captures/first-human-1280.png",
+    "captures/warning-1280.png"
+  ],
+  "reference_visual_inferences": [
+    "Halls official screenshot uses a dark ground under bright pickups and attacks; dense damage numbers can still crowd the view."
+  ],
+  "runtime_code_modified": false
+}

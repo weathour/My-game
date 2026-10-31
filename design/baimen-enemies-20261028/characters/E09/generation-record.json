@@ -1,0 +1,36 @@
+{
+  "version": 1,
+  "id": "E09",
+  "generator": "built-in ImageGen",
+  "identity_master": "source/master-v1.png",
+  "references": [
+    {
+      "path": "design/jia-combat-20261027/source/dao-v1.png",
+      "sha256": "dc7720a430f1b03f61b87292b845f170f15a5a487c4a9810070fb27ad546099e",
+      "role": "pixel_drawing_and_animation_style_only"
+    }
+  ],
+  "source_versions": [
+    {
+      "path": "design/baimen-enemies-20261028/characters/E09/source/actions-v1.png",
+      "sha256": "987afb813ff6d203cce67b549542d085f615fa6dd618511db2599e4c90a5cb19",
+      "selected": true,
+      "role": "pose_source",
+      "decision": "selected"
+    },
+    {
+      "path": "design/baimen-enemies-20261028/characters/E09/source/master-v1.png",
+      "sha256": "19de2753c744159e169545da80ccf6e0ed47487713fa97d27ee5d36345ad43a4",
+      "selected": true,
+      "role": "identity_master",
+      "decision": "selected"
+    }
+  ],
+  "prompts": [
+    "prompts/actions-v1.txt",
+    "prompts/master-v1.txt"
+  ],
+  "review_notes": "Inspected bell guardian full master and20poses. Wide bronze bell body and short thick legs distinct from soldiers, full massive wooden striker retained. Rows idle/heavy walk/first slam/second strike/hit. Both runtime slam actions use attack with its own windup/contact/recovery; special preserves alternate second-strike source. Standing bell-body height215px; no pose-by-pose height stretching. 320x256 frame is wider than default to preserve striker on low right follow-through. Ground anchor follows feet, not lowered striker cap. No impact effects baked. Ground review correction: airborne charge feet retain their raised offset above the nominal ground; low weapon cap does not move body grounding.",
+  "export": "scripts/tools/import_baimen_enemy_art.lua",
+  "pixels_policy": "ImageGen-authored; Pillow/scipy read-only component measurements and QA; Aseprite extraction/registration/palette/export."
+}

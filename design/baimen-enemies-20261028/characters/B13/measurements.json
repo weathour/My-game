@@ -1,0 +1,528 @@
+{
+  "version": 1,
+  "id": "B13",
+  "review_status": "accepted_for_export",
+  "review_notes": "Master and all20 source poses viewed. Owl face/beak, crenellated stone torso, broken wings, four masonry feet and foreleg blade armor retained. Attack raises/cuts foreclaw, special is lowered grounded charge with noflight. Full wing tips/feet/blades are true separate actor components; manually measured ground anchors. Standing body216px excludes tallest loose banner tip, source scaling shared across every pose.",
+  "prompts": [
+    "source/actions-v1-prompt.txt",
+    "source/master-v1-prompt.txt"
+  ],
+  "canvas": {
+    "size": [
+      512,
+      512
+    ],
+    "anchor": [
+      256,
+      450
+    ],
+    "body_height_px": 216
+  },
+  "sources": {
+    "actions": {
+      "path": "source/actions-v1.png",
+      "size": [
+        1312,
+        1199
+      ],
+      "sha256": "0f1544d1c1e04055442565f2b01c6d07c52c72c0879722645674483e4bf2cb28",
+      "standing_body_height": 216
+    }
+  },
+  "portrait": {
+    "path": "source/master-v1.png",
+    "size": [
+      1536,
+      1024
+    ],
+    "sha256": "e0ab9d8fc2897829b37f0e3cc3c61a5d7ebcff56e0c82f9dcc2a483d1d878ee0"
+  },
+  "poses": [
+    {
+      "id": "p01",
+      "source": "actions",
+      "anchor_source": [
+        207,
+        241
+      ],
+      "components": [
+        {
+          "bbox": [
+            5,
+            7,
+            339,
+            241
+          ],
+          "area": 41200
+        }
+      ]
+    },
+    {
+      "id": "p02",
+      "source": "actions",
+      "anchor_source": [
+        533,
+        239
+      ],
+      "components": [
+        {
+          "bbox": [
+            342,
+            20,
+            648,
+            239
+          ],
+          "area": 38569
+        }
+      ]
+    },
+    {
+      "id": "p03",
+      "source": "actions",
+      "anchor_source": [
+        866,
+        241
+      ],
+      "components": [
+        {
+          "bbox": [
+            663,
+            13,
+            985,
+            241
+          ],
+          "area": 40900
+        }
+      ]
+    },
+    {
+      "id": "p04",
+      "source": "actions",
+      "anchor_source": [
+        1190,
+        239
+      ],
+      "components": [
+        {
+          "bbox": [
+            992,
+            16,
+            1305,
+            239
+          ],
+          "area": 40710
+        }
+      ]
+    },
+    {
+      "id": "p05",
+      "source": "actions",
+      "anchor_source": [
+        213,
+        485
+      ],
+      "components": [
+        {
+          "bbox": [
+            16,
+            252,
+            343,
+            485
+          ],
+          "area": 43719
+        }
+      ]
+    },
+    {
+      "id": "p06",
+      "source": "actions",
+      "anchor_source": [
+        548,
+        485
+      ],
+      "components": [
+        {
+          "bbox": [
+            355,
+            249,
+            655,
+            485
+          ],
+          "area": 42589
+        }
+      ]
+    },
+    {
+      "id": "p07",
+      "source": "actions",
+      "anchor_source": [
+        880,
+        485
+      ],
+      "components": [
+        {
+          "bbox": [
+            678,
+            255,
+            992,
+            485
+          ],
+          "area": 41484
+        }
+      ]
+    },
+    {
+      "id": "p08",
+      "source": "actions",
+      "anchor_source": [
+        1197,
+        484
+      ],
+      "components": [
+        {
+          "bbox": [
+            996,
+            254,
+            1299,
+            484
+          ],
+          "area": 40020
+        },
+        {
+          "bbox": [
+            1267,
+            388,
+            1268,
+            389
+          ],
+          "area": 1
+        }
+      ]
+    },
+    {
+      "id": "p09",
+      "source": "actions",
+      "anchor_source": [
+        198,
+        727
+      ],
+      "components": [
+        {
+          "bbox": [
+            13,
+            487,
+            313,
+            727
+          ],
+          "area": 42548
+        }
+      ]
+    },
+    {
+      "id": "p10",
+      "source": "actions",
+      "anchor_source": [
+        536,
+        715
+      ],
+      "components": [
+        {
+          "bbox": [
+            348,
+            486,
+            652,
+            715
+          ],
+          "area": 38487
+        },
+        {
+          "bbox": [
+            440,
+            647,
+            441,
+            648
+          ],
+          "area": 1
+        }
+      ]
+    },
+    {
+      "id": "p11",
+      "source": "actions",
+      "anchor_source": [
+        862,
+        709
+      ],
+      "components": [
+        {
+          "bbox": [
+            656,
+            498,
+            1018,
+            709
+          ],
+          "area": 41866
+        }
+      ]
+    },
+    {
+      "id": "p12",
+      "source": "actions",
+      "anchor_source": [
+        1189,
+        722
+      ],
+      "components": [
+        {
+          "bbox": [
+            996,
+            486,
+            1300,
+            722
+          ],
+          "area": 41493
+        }
+      ]
+    },
+    {
+      "id": "p13",
+      "source": "actions",
+      "anchor_source": [
+        214,
+        928
+      ],
+      "components": [
+        {
+          "bbox": [
+            12,
+            744,
+            341,
+            928
+          ],
+          "area": 34928
+        }
+      ]
+    },
+    {
+      "id": "p14",
+      "source": "actions",
+      "anchor_source": [
+        547,
+        934
+      ],
+      "components": [
+        {
+          "bbox": [
+            328,
+            724,
+            693,
+            934
+          ],
+          "area": 38006
+        }
+      ]
+    },
+    {
+      "id": "p15",
+      "source": "actions",
+      "anchor_source": [
+        881,
+        926
+      ],
+      "components": [
+        {
+          "bbox": [
+            665,
+            719,
+            1000,
+            926
+          ],
+          "area": 32964
+        }
+      ]
+    },
+    {
+      "id": "p16",
+      "source": "actions",
+      "anchor_source": [
+        1198,
+        930
+      ],
+      "components": [
+        {
+          "bbox": [
+            999,
+            725,
+            1303,
+            930
+          ],
+          "area": 35846
+        }
+      ]
+    },
+    {
+      "id": "p17",
+      "source": "actions",
+      "anchor_source": [
+        214,
+        1176
+      ],
+      "components": [
+        {
+          "bbox": [
+            30,
+            932,
+            353,
+            1176
+          ],
+          "area": 42815
+        }
+      ]
+    },
+    {
+      "id": "p18",
+      "source": "actions",
+      "anchor_source": [
+        542,
+        1175
+      ],
+      "components": [
+        {
+          "bbox": [
+            375,
+            932,
+            657,
+            1175
+          ],
+          "area": 38753
+        },
+        {
+          "bbox": [
+            386,
+            1086,
+            387,
+            1087
+          ],
+          "area": 1
+        }
+      ]
+    },
+    {
+      "id": "p19",
+      "source": "actions",
+      "anchor_source": [
+        868,
+        1177
+      ],
+      "components": [
+        {
+          "bbox": [
+            680,
+            938,
+            966,
+            1177
+          ],
+          "area": 43304
+        }
+      ]
+    },
+    {
+      "id": "p20",
+      "source": "actions",
+      "anchor_source": [
+        1194,
+        1179
+      ],
+      "components": [
+        {
+          "bbox": [
+            1001,
+            935,
+            1306,
+            1179
+          ],
+          "area": 43811
+        },
+        {
+          "bbox": [
+            1097,
+            1061,
+            1098,
+            1062
+          ],
+          "area": 1
+        },
+        {
+          "bbox": [
+            1272,
+            1072,
+            1273,
+            1073
+          ],
+          "area": 1
+        }
+      ]
+    }
+  ],
+  "clips": {
+    "idle": {
+      "poses": [
+        "p01",
+        "p02",
+        "p03",
+        "p04"
+      ],
+      "fps": 6,
+      "windup_frame": 0,
+      "contact_frame": 2
+    },
+    "move": {
+      "poses": [
+        "p05",
+        "p06",
+        "p07",
+        "p08"
+      ],
+      "fps": 9,
+      "windup_frame": 0,
+      "contact_frame": 2
+    },
+    "attack": {
+      "poses": [
+        "p09",
+        "p10",
+        "p11",
+        "p12"
+      ],
+      "fps": 8,
+      "windup_frame": 1,
+      "contact_frame": 2
+    },
+    "special": {
+      "poses": [
+        "p13",
+        "p14",
+        "p15",
+        "p16"
+      ],
+      "fps": 8,
+      "windup_frame": 1,
+      "contact_frame": 2
+    },
+    "hit": {
+      "poses": [
+        "p17",
+        "p18",
+        "p19",
+        "p20"
+      ],
+      "fps": 10,
+      "windup_frame": 0,
+      "contact_frame": 2
+    }
+  },
+  "action_clips": {
+    "swipe": "attack",
+    "charge": "special"
+  }
+}

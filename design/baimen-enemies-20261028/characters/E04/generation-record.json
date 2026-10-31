@@ -1,0 +1,44 @@
+{
+  "version": 1,
+  "id": "E04",
+  "generator": "built-in ImageGen",
+  "identity_master": "source/master-v2.png",
+  "references": [
+    {
+      "path": "design/jia-combat-20261027/source/dao-v1.png",
+      "sha256": "dc7720a430f1b03f61b87292b845f170f15a5a487c4a9810070fb27ad546099e",
+      "role": "pixel_drawing_and_animation_style_only"
+    }
+  ],
+  "source_versions": [
+    {
+      "path": "design/baimen-enemies-20261028/characters/E04/source/actions-v1.png",
+      "sha256": "f726a3c0ec9afb62d02a917a9d6a819450eb57a541cd18f78cb3a767579489c9",
+      "selected": true,
+      "role": "pose_source",
+      "decision": "selected"
+    },
+    {
+      "path": "design/baimen-enemies-20261028/characters/E04/source/master-v1.png",
+      "sha256": "fae4b6c0091f22a8ac20e8d798f1b36c50e8de5e83b4194323b6bb60c9e79dce",
+      "selected": false,
+      "role": "identity_master",
+      "decision": "retained_rejected_variant"
+    },
+    {
+      "path": "design/baimen-enemies-20261028/characters/E04/source/master-v2.png",
+      "sha256": "f97082abf429a52ab26920df5ce29d2ce036dc37b2c3ac57b9a9ae3a66e5560b",
+      "selected": true,
+      "role": "identity_master",
+      "decision": "selected"
+    }
+  ],
+  "prompts": [
+    "prompts/actions-v1.txt",
+    "prompts/master-v1.txt",
+    "prompts/master-v2.txt"
+  ],
+  "review_notes": "Reviewed masterv2 corrects top-door clipping of rejected v1. All20 actual connected pose silhouettes retain asymmetrical broken bronze-bound red door, thin exposed legs and ghost arm. Rows idle/shuffle/arm swipe/shield brace/hit. Attack frame2 arm extends right beyond door while shield opens. Body includes door shield dominant silhouette241px. Ground uses visible feet, scale fixed across20poses. No rectangular grid cuts.",
+  "export": "scripts/tools/import_baimen_enemy_art.lua",
+  "pixels_policy": "ImageGen-authored; Pillow/scipy read-only component measurements and QA; Aseprite extraction/registration/palette/export."
+}

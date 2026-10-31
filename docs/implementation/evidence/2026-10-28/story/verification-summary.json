@@ -1,0 +1,57 @@
+{
+  "tests": [
+    {
+      "log": "story-progress.log",
+      "result": [
+        "CHRONICLE_STORY_PROGRESS_SMOKE PASS checks=86 failures=0"
+      ],
+      "errors": []
+    },
+    {
+      "log": "combat.log",
+      "result": [
+        "CHRONICLE_COMBAT_SMOKE PASS checks=67 failures=0"
+      ],
+      "errors": []
+    },
+    {
+      "log": "chapter-two.log",
+      "result": [
+        "CHRONICLE_CHAPTER_TWO_SMOKE PASS checks=180 failures=0"
+      ],
+      "errors": []
+    },
+    {
+      "log": "chronicle-ui.log",
+      "result": [
+        "CHRONICLE_UI_SMOKE_OK"
+      ],
+      "errors": []
+    },
+    {
+      "log": "playable-ui.log",
+      "result": [
+        "CHRONICLE_PLAYABLE_UI_SMOKE PASS failures=0"
+      ],
+      "errors": []
+    },
+    {
+      "log": "story-ui-headless.log",
+      "result": [
+        "CHRONICLE_STORY_UI_SMOKE PASS checks=87 failures=0"
+      ],
+      "errors": []
+    },
+    {
+      "log": "story-ui-rendered.log",
+      "result": [
+        "CHRONICLE_STORY_UI_SMOKE PASS checks=100 failures=0"
+      ],
+      "errors": []
+    }
+  ],
+  "screenshots": 13,
+  "headless_startup": "passed",
+  "asset_import": "passed",
+  "graphify": "stale: incomplete Godot extraction; prior graph retained"
+}

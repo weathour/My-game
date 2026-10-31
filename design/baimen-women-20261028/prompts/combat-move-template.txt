@@ -1,0 +1,5 @@
+Use the supplied full-body master as the identity reference for [CHARACTER_NAME]. Create a moving animation source for the same adult character in [COMBAT_ART_STYLE], using [FRAME_COUNT] distinct, sequential frames in [SHEET_LAYOUT]. If a separate animation-style reference is supplied, use it for rendering conventions only; identity, face, hairstyle, costume, colors and signature props must follow this character's master.
+
+Show one complete, readable [WALK_OR_RUN] cycle facing [DIRECTION], with alternating leg support and believable movement for [CHARACTER_BUILD_AND_EQUIPMENT]. The character stays within each frame rather than travelling across the sheet. Preserve the recognizable outfit and equipment, the same body scale and the intended foot contact line in every frame. Keep the full head, feet and props within safe margins; frames are separate for later manual extraction.
+
+Actual transparent RGBA background. No scenery, frame borders, grid lines, labels, ground shadows, speed streaks, magic effects or overlapping duplicate bodies. No redesigned costume or newly invented weapon. Frame dimensions, export and anchoring are set separately after visual review.

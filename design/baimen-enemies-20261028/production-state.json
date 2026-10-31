@@ -1,0 +1,391 @@
+{
+  "schema": 1,
+  "goal_status": "complete",
+  "mechanics_gate": "passed_runtime_campaign_and_independent_boundary_recheck",
+  "mechanics_evidence": "docs/implementation/evidence/2026-10-28/enemies/",
+  "art_phase": "integrated_and_verified",
+  "new_visual_sets": 41,
+  "runtime_manifest_slots": 42,
+  "reuse": {
+    "D01": "E01",
+    "L00_definition_visual": "E01"
+  },
+  "catalog_sha256": "dd6760c5878bac8b931e9b42081018487fff08b9d37ecb541123495934324826",
+  "visuals": [
+    {
+      "id": "E01",
+      "name": "草甲鬼卒",
+      "body_height_world": 52,
+      "status": "integrated_and_verified",
+      "group": "ordinary",
+      "export_manifest": "design/baimen-enemies-20261028/characters/E01/export-manifest.json"
+    },
+    {
+      "id": "E02",
+      "name": "骨弓伥",
+      "body_height_world": 64,
+      "status": "integrated_and_verified",
+      "group": "ordinary",
+      "export_manifest": "design/baimen-enemies-20261028/characters/E02/export-manifest.json"
+    },
+    {
+      "id": "E03",
+      "name": "轭骨奔兽",
+      "body_height_world": 70,
+      "status": "integrated_and_verified",
+      "group": "ordinary",
+      "export_manifest": "design/baimen-enemies-20261028/characters/E03/export-manifest.json"
+    },
+    {
+      "id": "E04",
+      "name": "扉甲卒",
+      "body_height_world": 74,
+      "status": "integrated_and_verified",
+      "group": "ordinary",
+      "export_manifest": "design/baimen-enemies-20261028/characters/E04/export-manifest.json"
+    },
+    {
+      "id": "E05",
+      "name": "纸灯蛛",
+      "body_height_world": 62,
+      "status": "integrated_and_verified",
+      "group": "ordinary",
+      "export_manifest": "design/baimen-enemies-20261028/characters/E05/export-manifest.json"
+    },
+    {
+      "id": "E06",
+      "name": "背瓮行脚",
+      "body_height_world": 68,
+      "status": "integrated_and_verified",
+      "group": "ordinary",
+      "export_manifest": "design/baimen-enemies-20261028/characters/E06/export-manifest.json"
+    },
+    {
+      "id": "E07",
+      "name": "鸣幡吏",
+      "body_height_world": 82,
+      "status": "integrated_and_verified",
+      "group": "ordinary",
+      "export_manifest": "design/baimen-enemies-20261028/characters/E07/export-manifest.json"
+    },
+    {
+      "id": "E08",
+      "name": "供碗祠巫",
+      "body_height_world": 74,
+      "status": "integrated_and_verified",
+      "group": "ordinary",
+      "export_manifest": "design/baimen-enemies-20261028/characters/E08/export-manifest.json"
+    },
+    {
+      "id": "E09",
+      "name": "撼钟尸卫",
+      "body_height_world": 112,
+      "status": "integrated_and_verified",
+      "group": "ordinary",
+      "export_manifest": "design/baimen-enemies-20261028/characters/E09/export-manifest.json"
+    },
+    {
+      "id": "E10",
+      "name": "钩轮牵阵者",
+      "body_height_world": 108,
+      "status": "integrated_and_verified",
+      "group": "ordinary",
+      "export_manifest": "design/baimen-enemies-20261028/characters/E10/export-manifest.json"
+    },
+    {
+      "id": "E11",
+      "name": "负棺驮役",
+      "body_height_world": 104,
+      "status": "integrated_and_verified",
+      "group": "ordinary",
+      "export_manifest": "design/baimen-enemies-20261028/characters/E11/export-manifest.json"
+    },
+    {
+      "id": "E12",
+      "name": "碑背石龟",
+      "body_height_world": 116,
+      "status": "integrated_and_verified",
+      "group": "ordinary",
+      "export_manifest": "design/baimen-enemies-20261028/characters/E12/export-manifest.json"
+    },
+    {
+      "id": "L01",
+      "name": "旌威督军",
+      "body_height_world": 140,
+      "status": "integrated_and_verified",
+      "group": "elite_objects",
+      "export_manifest": "design/baimen-enemies-20261028/characters/L01/export-manifest.json"
+    },
+    {
+      "id": "L02",
+      "name": "织阵灯母",
+      "body_height_world": 138,
+      "status": "integrated_and_verified",
+      "group": "elite_objects",
+      "export_manifest": "design/baimen-enemies-20261028/characters/L02/export-manifest.json"
+    },
+    {
+      "id": "L03",
+      "name": "缚契盾魁",
+      "body_height_world": 146,
+      "status": "integrated_and_verified",
+      "group": "elite_objects",
+      "export_manifest": "design/baimen-enemies-20261028/characters/L03/export-manifest.json"
+    },
+    {
+      "id": "L04",
+      "name": "孵棺驮役",
+      "body_height_world": 150,
+      "status": "integrated_and_verified",
+      "group": "elite_objects",
+      "export_manifest": "design/baimen-enemies-20261028/characters/L04/export-manifest.json"
+    },
+    {
+      "id": "L05",
+      "name": "镜影复唱鬼",
+      "body_height_world": 144,
+      "status": "integrated_and_verified",
+      "group": "elite_objects",
+      "export_manifest": "design/baimen-enemies-20261028/characters/L05/export-manifest.json"
+    },
+    {
+      "id": "L06",
+      "name": "鸣雷行刑鬼",
+      "body_height_world": 152,
+      "status": "integrated_and_verified",
+      "group": "elite_objects",
+      "export_manifest": "design/baimen-enemies-20261028/characters/L06/export-manifest.json"
+    },
+    {
+      "id": "B01",
+      "name": "荒道鬼校·空面碑甲",
+      "body_height_world": 128,
+      "status": "integrated_and_verified",
+      "group": "bosses",
+      "export_manifest": "design/baimen-enemies-20261028/characters/B01/export-manifest.json"
+    },
+    {
+      "id": "B02",
+      "name": "守街尸将·檐面巡将",
+      "body_height_world": 148,
+      "status": "integrated_and_verified",
+      "group": "bosses",
+      "export_manifest": "design/baimen-enemies-20261028/characters/B02/export-manifest.json"
+    },
+    {
+      "id": "B03",
+      "name": "盘寨鬼魁·三面裂旗魁",
+      "body_height_world": 172,
+      "status": "integrated_and_verified",
+      "group": "bosses",
+      "export_manifest": "design/baimen-enemies-20261028/characters/B03/export-manifest.json"
+    },
+    {
+      "id": "B04",
+      "name": "押粮鬼尉·轭骨牛督",
+      "body_height_world": 164,
+      "status": "integrated_and_verified",
+      "group": "bosses",
+      "export_manifest": "design/baimen-enemies-20261028/characters/B04/export-manifest.json"
+    },
+    {
+      "id": "B05",
+      "name": "冥灯术士·悬灯道人",
+      "body_height_world": 166,
+      "status": "integrated_and_verified",
+      "group": "bosses",
+      "export_manifest": "design/baimen-enemies-20261028/characters/B05/export-manifest.json"
+    },
+    {
+      "id": "B06",
+      "name": "荒祠镇将·祠脊石兽",
+      "body_height_world": 184,
+      "status": "integrated_and_verified",
+      "group": "bosses",
+      "export_manifest": "design/baimen-enemies-20261028/characters/B06/export-manifest.json"
+    },
+    {
+      "id": "B07",
+      "name": "官署号令者·悬印司令",
+      "body_height_world": 184,
+      "status": "integrated_and_verified",
+      "group": "bosses",
+      "export_manifest": "design/baimen-enemies-20261028/characters/B07/export-manifest.json"
+    },
+    {
+      "id": "B08",
+      "name": "水门冲将·闸齿鳄首",
+      "body_height_world": 176,
+      "status": "integrated_and_verified",
+      "group": "bosses",
+      "export_manifest": "design/baimen-enemies-20261028/characters/B08/export-manifest.json"
+    },
+    {
+      "id": "B09",
+      "name": "军械库将·炉腹铁鬼",
+      "body_height_world": 184,
+      "status": "integrated_and_verified",
+      "group": "bosses",
+      "export_manifest": "design/baimen-enemies-20261028/characters/B09/export-manifest.json"
+    },
+    {
+      "id": "B10",
+      "name": "封库双禁卫·左锁",
+      "body_height_world": 170,
+      "status": "integrated_and_verified",
+      "group": "bosses",
+      "export_manifest": "design/baimen-enemies-20261028/characters/B10/export-manifest.json"
+    },
+    {
+      "id": "B11",
+      "name": "巡城灯师·伞眼灯灵",
+      "body_height_world": 178,
+      "status": "integrated_and_verified",
+      "group": "bosses",
+      "export_manifest": "design/baimen-enemies-20261028/characters/B11/export-manifest.json"
+    },
+    {
+      "id": "B12",
+      "name": "瘟灯阵主·多手幡灯大巫",
+      "body_height_world": 202,
+      "status": "integrated_and_verified",
+      "group": "bosses",
+      "export_manifest": "design/baimen-enemies-20261028/characters/B12/export-manifest.json"
+    },
+    {
+      "id": "B13",
+      "name": "城垣冲将·石鸱裂垛",
+      "body_height_world": 188,
+      "status": "integrated_and_verified",
+      "group": "bosses",
+      "export_manifest": "design/baimen-enemies-20261028/characters/B13/export-manifest.json"
+    },
+    {
+      "id": "B14",
+      "name": "渡口号令者·引舟鬼帅",
+      "body_height_world": 188,
+      "status": "integrated_and_verified",
+      "group": "bosses",
+      "export_manifest": "design/baimen-enemies-20261028/characters/B14/export-manifest.json"
+    },
+    {
+      "id": "B15",
+      "name": "曹休·鬼猎兽相",
+      "body_height_world": 204,
+      "status": "integrated_and_verified",
+      "group": "featured",
+      "export_manifest": "design/baimen-enemies-20261028/characters/B15/export-manifest.json"
+    },
+    {
+      "id": "B16",
+      "name": "曹纯·虎豹甲骑巨相",
+      "body_height_world": 218,
+      "status": "integrated_and_verified",
+      "group": "featured",
+      "export_manifest": "design/baimen-enemies-20261028/characters/B16/export-manifest.json"
+    },
+    {
+      "id": "B17",
+      "name": "张辽·夜叉裂阵将相",
+      "body_height_world": 220,
+      "status": "integrated_and_verified",
+      "group": "featured",
+      "export_manifest": "design/baimen-enemies-20261028/characters/B17/export-manifest.json"
+    },
+    {
+      "id": "B18",
+      "name": "吕布·四臂鬼神相",
+      "body_height_world": 248,
+      "status": "integrated_and_verified",
+      "group": "featured",
+      "export_manifest": "design/baimen-enemies-20261028/characters/B18/export-manifest.json"
+    },
+    {
+      "id": "B10_R",
+      "name": "封库双禁卫·右锁",
+      "body_height_world": 170,
+      "status": "integrated_and_verified",
+      "group": "bosses",
+      "export_manifest": "design/baimen-enemies-20261028/characters/B10_R/export-manifest.json"
+    },
+    {
+      "id": "M03_WAR",
+      "name": "高顺·城壁铠魂",
+      "body_height_world": 200,
+      "status": "integrated_and_verified",
+      "group": "featured",
+      "export_manifest": "design/baimen-enemies-20261028/characters/M03_WAR/export-manifest.json"
+    },
+    {
+      "id": "M04_WAR",
+      "name": "陈宫·卷轴冥相",
+      "body_height_world": 190,
+      "status": "integrated_and_verified",
+      "group": "featured",
+      "export_manifest": "design/baimen-enemies-20261028/characters/M04_WAR/export-manifest.json"
+    },
+    {
+      "id": "D03",
+      "name": "灯锚",
+      "body_height_world": 46,
+      "status": "integrated_and_verified",
+      "group": "elite_objects",
+      "export_manifest": "design/baimen-enemies-20261028/characters/D03/export-manifest.json"
+    },
+    {
+      "id": "D05",
+      "name": "待孵棺卵",
+      "body_height_world": 38,
+      "status": "integrated_and_verified",
+      "group": "elite_objects",
+      "export_manifest": "design/baimen-enemies-20261028/characters/D05/export-manifest.json"
+    }
+  ],
+  "pipeline": {
+    "schema": "measurements.schema.json",
+    "export": "scripts/tools/import_baimen_enemy_art.lua",
+    "audit": "design/baimen-enemies-20261028/audit_exports.py"
+  },
+  "limitations": [
+    "Initial numeric balance has automated reachable-campaign evidence, not broad human playtest approval.",
+    "Art is implemented and visually checked by production agents; the user has not individually approved each enemy image."
+  ],
+  "counts": {
+    "new_visual_sets": 41,
+    "main_body_sets": 39,
+    "object_sets": 2,
+    "standing_portraits": 41,
+    "selected_source_poses": 804,
+    "animation_clips": 207,
+    "exported_animation_frames": 828,
+    "actor_and_portrait_png_files": 248,
+    "actor_and_portrait_aseprite_files": 289,
+    "new_effect_sets": 8,
+    "new_effect_frames": 32,
+    "effect_png_files": 8,
+    "effect_aseprite_files": 8,
+    "runtime_manifest_slots": 42,
+    "enemy_definitions": 43
+  },
+  "art_manifest": "design/baimen-enemies-20261028/manifest.json",
+  "final_gates": {
+    "runtime_checks": 653,
+    "actual_battle_nodes_covered": 18,
+    "continuous_routes_battles": [
+      12,
+      15
+    ],
+    "presentation_checks_headless": 369,
+    "presentation_checks_opengl": 378,
+    "effect_checks_headless": 73,
+    "effect_checks_opengl": 85,
+    "playable_ui_failures": 0,
+    "packed_resource_checks": 610,
+    "packed_resource_failures": 0,
+    "required_headless_startup_exit_code": 0,
+    "graph_update": "candidate_rejected_missing_gd_extractor_prior_graph_preserved_stale",
+    "root_visual_review": "design/baimen-enemies-20261028/final-evidence/root-visual-review.json",
+    "counting_note": "Headless/OpenGL checks overlap and must not be added."
+  },
+  "completed_at": "2026-10-28T17:05:58.630265+00:00"
+}

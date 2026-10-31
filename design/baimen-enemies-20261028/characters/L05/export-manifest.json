@@ -1,0 +1,336 @@
+{
+  "schema": 1,
+  "id": "L05",
+  "generator": "ImageGen pixels / Aseprite reviewed-part extraction and registration",
+  "measurements": "design/baimen-enemies-20261028/characters/L05/measurements.json",
+  "measurements_sha256": "384a22c18e36512f302354c20ed51c97f4cb798f72a737e2119132cb3dd4574b",
+  "export_script": "scripts/tools/import_baimen_enemy_art.lua",
+  "export_script_sha256": "86a8f2555a17e5bb0b7a86f03f6b1132d6636b3893b91b8fe3971f8dac242dc1",
+  "audit_script_sha256": "8f67b468e4e63de61fd47f4a704e0b9ba6a6cf749078759570ff205e1298c940",
+  "sources": [
+    {
+      "kind": "sheet",
+      "path": "design/baimen-enemies-20261028/characters/L05/source/sheet-v1.png",
+      "sha256": "24e12e6f81f82bc7f713021e71822f2958504bacd40f4b5c8f037db20b6420e5",
+      "size": [
+        1122,
+        1402
+      ],
+      "standing_body_height": 292,
+      "scale": 0.4383561643835616
+    },
+    {
+      "kind": "attack",
+      "path": "design/baimen-enemies-20261028/characters/L05/source/attack-repair-v1.png",
+      "sha256": "21ded9d7277ead55b9fa349c10986253930b3cbc089c395bd26a65fdfed0d4f3",
+      "size": [
+        1254,
+        1254
+      ],
+      "standing_body_height": 480,
+      "scale": 0.26666666666666666
+    },
+    {
+      "kind": "portrait",
+      "path": "design/baimen-enemies-20261028/characters/L05/source/portrait-v1.png",
+      "sha256": "9fc65199971f7ff1e08acb6500d38ba6d5eb12aa7396e3e8977be7997ec022e0",
+      "size": [
+        1214,
+        1295
+      ]
+    }
+  ],
+  "actor_shared_opaque_colors": 60,
+  "actor_frames": 20,
+  "frame_size": [
+    256,
+    256
+  ],
+  "anchor": [
+    128,
+    224
+  ],
+  "outputs": [
+    {
+      "path": "assets/enemies/baimen/L05/idle.png",
+      "sha256": "c1093d51e817238c6a6eed9e804d83ca8cf8a731696738010b1d8d6fc88509db",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "opaque_colors": 56,
+      "frame_alpha_bounds": [
+        [
+          69,
+          96,
+          189,
+          224
+        ],
+        [
+          73,
+          95,
+          188,
+          224
+        ],
+        [
+          72,
+          97,
+          186,
+          224
+        ],
+        [
+          69,
+          97,
+          186,
+          224
+        ]
+      ],
+      "frame_pixel_sha256": [
+        "a8adb11a3979cd30d153e06c4ef46ae1bf0ecb2e5a98c5575af1a2428c66671c",
+        "ba2c4813c7727e41c00f18d6d51cc353ec396ed38d5781c97ac78250f1e2eba4",
+        "ee4079c986c7918ca1b8a7bd30b334e3ee635d83baa1b40031659812a1541cc6",
+        "3c738dca891b72f69d311a5f54f759ac9996d315c48ea213040e0c8978183021"
+      ]
+    },
+    {
+      "path": "assets/enemies/baimen/L05/idle.aseprite",
+      "sha256": "3191d450c691d23e8fa6ac53b2a64e304ba2bd9a917b72248ecec204bd6b025c",
+      "size": [
+        256,
+        256
+      ],
+      "frames": 4
+    },
+    {
+      "path": "assets/enemies/baimen/L05/move.png",
+      "sha256": "9221dc9c9ce23a069a16708cc7422bac58044bb7dd20bea4abd4bf96a90b240f",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "opaque_colors": 57,
+      "frame_alpha_bounds": [
+        [
+          68,
+          106,
+          198,
+          224
+        ],
+        [
+          81,
+          103,
+          198,
+          224
+        ],
+        [
+          71,
+          102,
+          201,
+          224
+        ],
+        [
+          71,
+          103,
+          186,
+          224
+        ]
+      ],
+      "frame_pixel_sha256": [
+        "00c71b835ff66cde9e62698b27a0fb9e616f07a2edb59ed90a731c107942682a",
+        "519df7023f339a7afcf6289cf0391818a41aeb35033dd6777c098cc0fb406c57",
+        "73994ae3ea34cdd4bed4869cce2dd4f202b30ab249c1f923b897ce09f7c1effb",
+        "ca6d819a478fda1ab84f7c9eda30bb1ffdf61394792b236b1ad78412efc059b3"
+      ]
+    },
+    {
+      "path": "assets/enemies/baimen/L05/move.aseprite",
+      "sha256": "403af369e6a26138c37924818fb868caa7ba6a398f2e894c3d45be447a767b9f",
+      "size": [
+        256,
+        256
+      ],
+      "frames": 4
+    },
+    {
+      "path": "assets/enemies/baimen/L05/attack.png",
+      "sha256": "109352ace40eb6a419b8e95923d82d2a6f7132baa38f2221e52d49a08c34615c",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "opaque_colors": 60,
+      "frame_alpha_bounds": [
+        [
+          51,
+          97,
+          197,
+          224
+        ],
+        [
+          55,
+          106,
+          211,
+          224
+        ],
+        [
+          51,
+          95,
+          224,
+          224
+        ],
+        [
+          67,
+          95,
+          199,
+          224
+        ]
+      ],
+      "frame_pixel_sha256": [
+        "affb361b725dc489778f7122470f926fad42025838c0f2a9b8a990cf69107210",
+        "aa13b9a348080aca62f30f773b5fb13c6ceec4b0277da93ddc11e7a4004f3100",
+        "d4088b23c316c75092837d38af3b760b61c1b34e08df984128f15224ea32d9a7",
+        "ed0f27e7d8b7f24ed0c54ec5453bd84d9f06e560b08bfce493997ce318882ba4"
+      ]
+    },
+    {
+      "path": "assets/enemies/baimen/L05/attack.aseprite",
+      "sha256": "e1f8b70bf1933da3b3a1dd523f078e522c9ae12289f71f3511543c632572d51b",
+      "size": [
+        256,
+        256
+      ],
+      "frames": 4
+    },
+    {
+      "path": "assets/enemies/baimen/L05/special.png",
+      "sha256": "f96fb771835e94489219f44f9138dbe049f3ec8a993916f44e599749e04dee86",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "opaque_colors": 55,
+      "frame_alpha_bounds": [
+        [
+          65,
+          103,
+          178,
+          224
+        ],
+        [
+          59,
+          98,
+          188,
+          224
+        ],
+        [
+          68,
+          103,
+          189,
+          224
+        ],
+        [
+          74,
+          107,
+          188,
+          224
+        ]
+      ],
+      "frame_pixel_sha256": [
+        "0114c877d290e537739592387b84314e4fd1b35e63d579de1272844a462b7e0d",
+        "c23b5bc460de838586c5689a66548054a28dafba32a79e0899038b3bb4943dbd",
+        "e0d02c0678ee8d7c6a48c510eca2e24f7071fb73d86751f8758c1313ae600671",
+        "9db30feac7eae1669619f56bb1f436c69f9fc0f7ed871257bc370d1377d8cfdf"
+      ]
+    },
+    {
+      "path": "assets/enemies/baimen/L05/special.aseprite",
+      "sha256": "42df361fa8f56818a61f0847043ce125baf7ce35687fbeff69fdd9f684a4708b",
+      "size": [
+        256,
+        256
+      ],
+      "frames": 4
+    },
+    {
+      "path": "assets/enemies/baimen/L05/hit.png",
+      "sha256": "bef045b2bb6fee024a92de37219728ce1e10a18f4f5e22045ce0b4ffb31213b4",
+      "size": [
+        1024,
+        256
+      ],
+      "frames": 4,
+      "opaque_colors": 54,
+      "frame_alpha_bounds": [
+        [
+          73,
+          105,
+          177,
+          224
+        ],
+        [
+          64,
+          111,
+          184,
+          224
+        ],
+        [
+          67,
+          108,
+          190,
+          224
+        ],
+        [
+          69,
+          106,
+          185,
+          224
+        ]
+      ],
+      "frame_pixel_sha256": [
+        "28a9c0d97762314c5e56ea8c46d2eaf9c499d094c7537d6f036551cf5fa3aa74",
+        "57bdfe4cc5b7a6b55d1fdc11f7f6bfd023e0d99da8de5bc5871d9b72fd23518d",
+        "2064041b9a9d918b2b2e5fa95da48f074620631214278b69ab8ae64aa55b0c57",
+        "9cccd74a76d013dfc52ab5b0169c2ba6c6cbb46650924ed6bd93920bdae8b9bb"
+      ]
+    },
+    {
+      "path": "assets/enemies/baimen/L05/hit.aseprite",
+      "sha256": "cebb8f68c1c2edfd4fe6afb00373a161ce717d3ed2075b84efb89a64973cee85",
+      "size": [
+        256,
+        256
+      ],
+      "frames": 4
+    },
+    {
+      "path": "assets/enemies/baimen/L05/actor.aseprite",
+      "sha256": "660ddcd5509d1795c6b0207fc6cef8edaa63bf083af5b780fcafa741399cd593",
+      "size": [
+        256,
+        256
+      ],
+      "frames": 20
+    },
+    {
+      "path": "assets/enemies/baimen/L05/portrait.png",
+      "sha256": "9fc65199971f7ff1e08acb6500d38ba6d5eb12aa7396e3e8977be7997ec022e0",
+      "size": [
+        1214,
+        1295
+      ]
+    },
+    {
+      "path": "assets/enemies/baimen/L05/portrait.aseprite",
+      "sha256": "95472b021b59e7e623d52c0b4e4d6eb84de882a3c742299660e8ffaef17e8df2",
+      "size": [
+        1214,
+        1295
+      ],
+      "frames": 1
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "manifest_frozen": true,
+  "manifest_file_sha256": "e11951bd793c801dc18cd5b9a9d8039b97be357446718fd739a8d1477a21615d",
+  "manifest_locked_file_count": 2082,
+  "manifest_locked_bytes": 1860631202,
+  "python": "3.12.3",
+  "numpy": "2.4.4",
+  "scipy": "1.17.1",
+  "renderer": "my-game-multisample-2",
+  "sample_cache": "~/.cache/my-game/music-instruments",
+  "evidence": {
+    "unit_tests": "engine-evidence/unit-tests.txt",
+    "p0_render": "engine-evidence/p0-render-report.json",
+    "p0_reaper": "engine-evidence/reaper-p0.json",
+    "full_emma_reaper": "engine-evidence/reaper-character-emma-v2.json"
+  },
+  "listening_review": false,
+  "p0_note": "P0 rendered with v1; its integer sample period is unchanged by v2. Full Emma and fractional-period regression use v2.",
+  "source_change_policy": "No new or replaced source/articulation/trim/mapping during current production; only download/receipt completion."
+}

@@ -1,0 +1,36 @@
+{
+  "version": 1,
+  "id": "E06",
+  "generator": "built-in ImageGen",
+  "identity_master": "source/master-v1.png",
+  "references": [
+    {
+      "path": "design/jia-combat-20261027/source/dao-v1.png",
+      "sha256": "dc7720a430f1b03f61b87292b845f170f15a5a487c4a9810070fb27ad546099e",
+      "role": "pixel_drawing_and_animation_style_only"
+    }
+  ],
+  "source_versions": [
+    {
+      "path": "design/baimen-enemies-20261028/characters/E06/source/actions-v1.png",
+      "sha256": "f131d13497a78f98fbbe5c04ff4196941b625f6f86be9b94d2d64a585e4295f2",
+      "selected": true,
+      "role": "pose_source",
+      "decision": "selected"
+    },
+    {
+      "path": "design/baimen-enemies-20261028/characters/E06/source/master-v1.png",
+      "sha256": "eafb7054ef73c09e58d63dd1662182643bce2f7adaac780a05a36251c383c538",
+      "selected": true,
+      "role": "identity_master",
+      "decision": "selected"
+    }
+  ],
+  "prompts": [
+    "prompts/actions-v1.txt",
+    "prompts/master-v1.txt"
+  ],
+  "review_notes": "Reviewed complete urn-carrier master and20pose source. Dominant round storage urn, small hip pot, squat bent body and short limbs all retained. Rows idle/walk/short swipe/pot throw/hit. Special frame1 lifts the small hip jar; frame2 right arm extended after release, giant back urn remains tied. Body calibration includes dominant back urn246px, unlike a detached weapon. Ground follows feet, same source scale in every pose.",
+  "export": "scripts/tools/import_baimen_enemy_art.lua",
+  "pixels_policy": "ImageGen-authored; Pillow/scipy read-only component measurements and QA; Aseprite extraction/registration/palette/export."
+}

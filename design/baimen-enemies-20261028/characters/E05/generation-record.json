@@ -1,0 +1,36 @@
+{
+  "version": 1,
+  "id": "E05",
+  "generator": "built-in ImageGen",
+  "identity_master": "source/master-v1.png",
+  "references": [
+    {
+      "path": "design/jia-combat-20261027/source/dao-v1.png",
+      "sha256": "dc7720a430f1b03f61b87292b845f170f15a5a487c4a9810070fb27ad546099e",
+      "role": "pixel_drawing_and_animation_style_only"
+    }
+  ],
+  "source_versions": [
+    {
+      "path": "design/baimen-enemies-20261028/characters/E05/source/actions-v1.png",
+      "sha256": "01fc097c2f770721144ba30c2ce3ee3810ca15843598698bec878c5f87355b4a",
+      "selected": true,
+      "role": "pose_source",
+      "decision": "selected"
+    },
+    {
+      "path": "design/baimen-enemies-20261028/characters/E05/source/master-v1.png",
+      "sha256": "947867ebde90b7fe70b3112383ee354d6d984f67ffe4c68617ec85fab70ebd80",
+      "selected": true,
+      "role": "identity_master",
+      "decision": "selected"
+    }
+  ],
+  "prompts": [
+    "prompts/master-v1.txt",
+    "prompts/actions-v1.txt"
+  ],
+  "review_notes": "Inspected the full lamp-spider master and all twenty source poses. Six bamboo legs, paper lantern abdomen and paired paper streamers retained. Actual source connected regions selected separately despite overlapping row vertical bounds. Five-strip fan opens in special; abdomen ribs open in attack. Standing body uses full legs-to-lantern206px. Anchors follow abdomen support over ground, scale shared across all poses. Thin detached pixels within reviewed silhouette retained. Source transparent pixels have nonzero RGB but alpha0; not background.",
+  "export": "scripts/tools/import_baimen_enemy_art.lua",
+  "pixels_policy": "ImageGen-authored; Pillow/scipy read-only component measurements and QA; Aseprite extraction/registration/palette/export."
+}

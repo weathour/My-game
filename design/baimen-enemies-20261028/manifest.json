@@ -1,0 +1,2278 @@
+{
+  "schema": 1,
+  "updated_at": "2026-10-28T17:00:32.255873+00:00",
+  "task": "White Gate complete enemy mechanics, standing portraits, combat animation and combat effects",
+  "authorization": "User requested full chapter enemy delivery and creation of an active goal; no publication or deployment requested.",
+  "production_status": "integrated_and_verified",
+  "generator": "built-in ImageGen raster sources; measured-component Aseprite registration, palette and export; Python read-only image QA",
+  "counts": {
+    "new_visual_sets": 41,
+    "main_body_sets": 39,
+    "object_sets": 2,
+    "standing_portraits": 41,
+    "selected_source_poses": 804,
+    "animation_clips": 207,
+    "exported_animation_frames": 828,
+    "actor_and_portrait_png_files": 248,
+    "actor_and_portrait_aseprite_files": 289,
+    "new_effect_sets": 8,
+    "new_effect_frames": 32,
+    "effect_png_files": 8,
+    "effect_aseprite_files": 8,
+    "runtime_manifest_slots": 42,
+    "enemy_definitions": 43
+  },
+  "counts_note": "selected_source_poses counts the distinct pose IDs actually used by each set. D03/D05 each use 8 authored poses; their static idle is intentionally reused across non-applicable movement/action slots. Exported animation frames include these explicit repetitions. D01 and L00 add no new artwork.",
+  "catalog": {
+    "path": "scripts/content/enemy_catalog.gd",
+    "sha256": "dd6760c5878bac8b931e9b42081018487fff08b9d37ecb541123495934324826"
+  },
+  "visuals": [
+    {
+      "id": "E01",
+      "name": "草甲鬼卒",
+      "kind": "ordinary",
+      "body_height_world": 52,
+      "body_height_px": 80,
+      "status": "final",
+      "runtime_manifest": {
+        "path": "assets/enemies/baimen/E01/manifest.json",
+        "sha256": "65af1155d96dda78e32061c5ca7666139d93d32fc0f6dc925a8251b56b7319d8"
+      },
+      "export_manifest": {
+        "path": "design/baimen-enemies-20261028/characters/E01/export-manifest.json",
+        "sha256": "ed27f4b5143ab5be9484d2bb93307ca9a4ecab5592389a6931d7160674ed2e40"
+      },
+      "measurements": {
+        "path": "design/baimen-enemies-20261028/characters/E01/measurements.json",
+        "sha256": "4cfbf173a25edbe5b6abfe2a5e8055ee927301809ae3b898bba93ad4f6cb87df"
+      },
+      "selected_portrait_source": "design/baimen-enemies-20261028/characters/E01/source/master-v1.png",
+      "selected_source_poses": 20,
+      "exported_animation_frames": 20,
+      "clips": [
+        "attack",
+        "hit",
+        "idle",
+        "move",
+        "special"
+      ],
+      "action_clips": {
+        "swipe": "attack"
+      },
+      "generation_records": [
+        {
+          "path": "design/baimen-enemies-20261028/characters/E01/generation-record.json",
+          "sha256": "e2c8d212fb6594442a95c82916a206634a5c22c90bceb972ae4cd910be3784f6"
+        }
+      ],
+      "prompts": [
+        {
+          "path": "design/baimen-enemies-20261028/characters/E01/prompts/actions-v1.txt",
+          "sha256": "20fc387a2430be6587f7506b90e5fe2e291f21f342cee2a93230aa088492a22a"
+        },
+        {
+          "path": "design/baimen-enemies-20261028/characters/E01/prompts/master-v1.txt",
+          "sha256": "8b43d68764dc4a047cc4be6ad308373f6c4f8b4cbb51d25e49475b81c4e8e628"
+        }
+      ],
+      "static_object_clip_reuse": false
+    },
+    {
+      "id": "E02",
+      "name": "骨弓伥",
+      "kind": "ordinary",
+      "body_height_world": 64,
+      "body_height_px": 80,
+      "status": "final",
+      "runtime_manifest": {
+        "path": "assets/enemies/baimen/E02/manifest.json",
+        "sha256": "0e89d0f1f7f3dfa519aae2035413dc9ca32232a75d411d491baa7789330bfe65"
+      },
+      "export_manifest": {
+        "path": "design/baimen-enemies-20261028/characters/E02/export-manifest.json",
+        "sha256": "cdc50733566ab3ad7484bcf0fe2cc96268acd6eac5325589cf3eebbda086d374"
+      },
+      "measurements": {
+        "path": "design/baimen-enemies-20261028/characters/E02/measurements.json",
+        "sha256": "85be9b2d467ce4136aa3818f1c0c2872265edd7d5f53b98a56a5be80fc83a3b0"
+      },
+      "selected_portrait_source": "design/baimen-enemies-20261028/characters/E02/source/master-v2.png",
+      "selected_source_poses": 20,
+      "exported_animation_frames": 20,
+      "clips": [
+        "attack",
+        "hit",
+        "idle",
+        "move",
+        "special"
+      ],
+      "action_clips": {
+        "shot": "attack"
+      },
+      "generation_records": [
+        {
+          "path": "design/baimen-enemies-20261028/characters/E02/generation-record.json",
+          "sha256": "22cc7b8c6dba8c8f34ff9545f8d524248c05d08ef97871a86dd7969df549dda8"
+        }
+      ],
+      "prompts": [
+        {
+          "path": "design/baimen-enemies-20261028/characters/E02/prompts/actions-v1.txt",
+          "sha256": "a1fb7c5b47d096c51b48ee426ff7b86dabdd86daa0f31c3ed609edd8f7d0a638"
+        },
+        {
+          "path": "design/baimen-enemies-20261028/characters/E02/prompts/master-v1.txt",
+          "sha256": "b09f73387326d182165073ef6d39e6f68cd3cb1f0a6b545a0d594efe308bcf98"
+        },
+        {
+          "path": "design/baimen-enemies-20261028/characters/E02/prompts/master-v2.txt",
+          "sha256": "265ae298f63bda57defb17e6b0e833d966eeffcaefd6e63ddc8a71d097c2e0a2"
+        }
+      ],
+      "static_object_clip_reuse": false
+    },
+    {
+      "id": "E03",
+      "name": "轭骨奔兽",
+      "kind": "ordinary",
+      "body_height_world": 70,
+      "body_height_px": 80,
+      "status": "final",
+      "runtime_manifest": {
+        "path": "assets/enemies/baimen/E03/manifest.json",
+        "sha256": "77d465e2dfe7059341db0689a77bca2638de06bbe1d591592bb69e5486c563b8"
+      },
+      "export_manifest": {
+        "path": "design/baimen-enemies-20261028/characters/E03/export-manifest.json",
+        "sha256": "5d2aab160368b16487a2a4dc8ba4e63a2ee6988d6a69a56ded2cc7fb18c82e19"
+      },
+      "measurements": {
+        "path": "design/baimen-enemies-20261028/characters/E03/measurements.json",
+        "sha256": "717bfb457ff647c419bdfd327e617313185f4aa364f6f4b0060516c1b68ef01f"
+      },
+      "selected_portrait_source": "design/baimen-enemies-20261028/characters/E03/source/master-v1.png",
+      "selected_source_poses": 20,
+      "exported_animation_frames": 20,
+      "clips": [
+        "attack",
+        "hit",
+        "idle",
+        "move",
+        "special"
+      ],
+      "action_clips": {
+        "charge": "special"
+      },
+      "generation_records": [
+        {
+          "path": "design/baimen-enemies-20261028/characters/E03/generation-record.json",
+          "sha256": "d0fcb564ec87ec3640eebf1858d7c6b2d83b0fc77e0afb88d1d41b254a47b08c"
+        }
+      ],
+      "prompts": [
+        {
+          "path": "design/baimen-enemies-20261028/characters/E03/prompts/actions-v1.txt",
+          "sha256": "d078675e8ce84813c5f370810441695d407661f37a0edea359ecce20306e9ff2"
+        },
+        {
+          "path": "design/baimen-enemies-20261028/characters/E03/prompts/actions-v2.txt",
+          "sha256": "feb7230fbf0c3378a2fd0888b1d3f5c8888ca935e8647bf10f108acf5325fa0a"
+        },
+        {
+          "path": "design/baimen-enemies-20261028/characters/E03/prompts/actions-v3.txt",
+          "sha256": "653b301988deb0ba6e2a53fd1308d8e73b4988e29e42205da6554a663a2697a0"
+        },
+        {
+          "path": "design/baimen-enemies-20261028/characters/E03/prompts/master-v1.txt",
+          "sha256": "e9ca53be07c4120e9c044ea4bfcb5f618a45de78609b9055a7ee462c65cc33f3"
+        }
+      ],
+      "static_object_clip_reuse": false
+    },
+    {
+      "id": "E04",
+      "name": "扉甲卒",
+      "kind": "ordinary",
+      "body_height_world": 74,
+      "body_height_px": 80,
+      "status": "final",
+      "runtime_manifest": {
+        "path": "assets/enemies/baimen/E04/manifest.json",
+        "sha256": "53d43344eec60dd10dd96ca254e6802ad2a5d255833c1d495117dc3dbf448fa9"
+      },
+      "export_manifest": {
+        "path": "design/baimen-enemies-20261028/characters/E04/export-manifest.json",
+        "sha256": "99974000b7449253b476ea59c07ae95113a06adc5cc377c80c1c2e972d69233a"
+      },
+      "measurements": {
+        "path": "design/baimen-enemies-20261028/characters/E04/measurements.json",
+        "sha256": "c90496702517c9a2279b462b30b34e3feccc624cec1fba3d74df9a3258a99a58"
+      },
+      "selected_portrait_source": "design/baimen-enemies-20261028/characters/E04/source/master-v2.png",
+      "selected_source_poses": 20,
+      "exported_animation_frames": 20,
+      "clips": [
+        "attack",
+        "hit",
+        "idle",
+        "move",
+        "special"
+      ],
+      "action_clips": {
+        "swipe": "attack"
+      },
+      "generation_records": [
+        {
+          "path": "design/baimen-enemies-20261028/characters/E04/generation-record.json",
+          "sha256": "5b543f2f7e3b8db9eabcdd225c2c1691112430ffa55b8af141f72e2a712e3241"
+        }
+      ],
+      "prompts": [
+        {
+          "path": "design/baimen-enemies-20261028/characters/E04/prompts/actions-v1.txt",
+          "sha256": "8b38e34bade6f533d26143dad4ab82e0a968d776984d12aea794d216cbf11306"
+        },
+        {
+          "path": "design/baimen-enemies-20261028/characters/E04/prompts/master-v1.txt",
+          "sha256": "3d602ddd8c4a35e468952988144993a0c657fa7f125c229192bcaf25bd8df7d6"
+        },
+        {
+          "path": "design/baimen-enemies-20261028/characters/E04/prompts/master-v2.txt",
+          "sha256": "ac940e74132c0d9647b963a6b173fe3e36bbf33d742d8f375cc52617c1a81960"
+        }
+      ],
+      "static_object_clip_reuse": false
+    },
+    {
+      "id": "E05",
+      "name": "纸灯蛛",
+      "kind": "ordinary",
+      "body_height_world": 62,
+      "body_height_px": 80,
+      "status": "final",
+      "runtime_manifest": {
+        "path": "assets/enemies/baimen/E05/manifest.json",
+        "sha256": "fb6fdae9d045d1502c4764e5cc2f22dde62ae87beb28b2ab6db17fc59da13d64"
+      },
+      "export_manifest": {
+        "path": "design/baimen-enemies-20261028/characters/E05/export-manifest.json",
+        "sha256": "d724b0217882d3f4bd88dcb6b394adc8ebb1641bc917c678a349604263fdfedf"
+      },
+      "measurements": {
+        "path": "design/baimen-enemies-20261028/characters/E05/measurements.json",
+        "sha256": "9103f6b70f869025c7f3279443af2de824ba5b8ee8685b254e3dd9871dd0095a"
+      },
+      "selected_portrait_source": "design/baimen-enemies-20261028/characters/E05/source/master-v1.png",
+      "selected_source_poses": 20,
+      "exported_animation_frames": 20,
+      "clips": [
+        "attack",
+        "hit",
+        "idle",
+        "move",
+        "special"
+      ],
+      "action_clips": {
+        "fan": "special"
+      },
+      "generation_records": [
+        {
+          "path": "design/baimen-enemies-20261028/characters/E05/generation-record.json",
+          "sha256": "87b3b90be4897684fececcafed2ff8fcec25ece282877ee4f6c5d0269ec20c30"
+        }
+      ],
+      "prompts": [
+        {
+          "path": "design/baimen-enemies-20261028/characters/E05/prompts/actions-v1.txt",
+          "sha256": "80c08fc309c8b87ac0aab421fa6dcc2296d92a0a8b46b1f761b42afe5e476d3e"
+        },
+        {
+          "path": "design/baimen-enemies-20261028/characters/E05/prompts/master-v1.txt",
+          "sha256": "0520d8d996fdcfa6aad8239bc644b5f4a6d5e3bd6d4003071b07158e14238d71"
+        }
+      ],
+      "static_object_clip_reuse": false
+    },
+    {
+      "id": "E06",
+      "name": "背瓮行脚",
+      "kind": "ordinary",
+      "body_height_world": 68,
+      "body_height_px": 80,
+      "status": "final",
+      "runtime_manifest": {
+        "path": "assets/enemies/baimen/E06/manifest.json",
+        "sha256": "90592905278249114add2d0eecdde7501723cfa5c84f589af17cfc116ac6d5b7"
+      },
+      "export_manifest": {
+        "path": "design/baimen-enemies-20261028/characters/E06/export-manifest.json",
+        "sha256": "d906ec204f7d600ea0a56b2e72cf575e36bc624f807b1c82435f23ee8fe84448"
+      },
+      "measurements": {
+        "path": "design/baimen-enemies-20261028/characters/E06/measurements.json",
+        "sha256": "365433bbf9f7af9c9d9e650a2ec7ca359ac24f69a594ccb50f4ed3919aff3c14"
+      },
+      "selected_portrait_source": "design/baimen-enemies-20261028/characters/E06/source/master-v1.png",
+      "selected_source_poses": 20,
+      "exported_animation_frames": 20,
+      "clips": [
+        "attack",
+        "hit",
+        "idle",
+        "move",
+        "special"
+      ],
+      "action_clips": {
+        "pot": "special"
+      },
+      "generation_records": [
+        {
+          "path": "design/baimen-enemies-20261028/characters/E06/generation-record.json",
+          "sha256": "fb5b91be3a5eb657e4cf29d4590d3bfb874ab9b14179ddefea32856841458f9c"
+        }
+      ],
+      "prompts": [
+        {
+          "path": "design/baimen-enemies-20261028/characters/E06/prompts/actions-v1.txt",
+          "sha256": "4d18539344b6f08a77a55d9fdfc6e3e069c41b40d9819e237478c50bf4f75942"
+        },
+        {
+          "path": "design/baimen-enemies-20261028/characters/E06/prompts/master-v1.txt",
+          "sha256": "ec6507f81d2258094162a589519ff7cf9949203d38f4cedfabd331786c153271"
+        }
+      ],
+      "static_object_clip_reuse": false
+    },
+    {
+      "id": "E07",
+      "name": "鸣幡吏",
+      "kind": "ordinary",
+      "body_height_world": 82,
+      "body_height_px": 80,
+      "status": "final",
+      "runtime_manifest": {
+        "path": "assets/enemies/baimen/E07/manifest.json",
+        "sha256": "06d173716e61730a640ad9ddbf69bdc552ee57a34499fe1999c07a16b44ba5b9"
+      },
+      "export_manifest": {
+        "path": "design/baimen-enemies-20261028/characters/E07/export-manifest.json",
+        "sha256": "695504a6e435c5f32383d0050c4c66bed25cec22fc13b477d98c87c2e8982052"
+      },
+      "measurements": {
+        "path": "design/baimen-enemies-20261028/characters/E07/measurements.json",
+        "sha256": "4fe5ac3c04738aa9e33247a06d00d8164feb87e1f76857c2d38ac8f42fff7f97"
+      },
+      "selected_portrait_source": "design/baimen-enemies-20261028/characters/E07/source/master-v1.png",
+      "selected_source_poses": 20,
+      "exported_animation_frames": 20,
+      "clips": [
+        "attack",
+        "hit",
+        "idle",
+        "move",
+        "special"
+      ],
+      "action_clips": {
+        "command": "special",
+        "swipe": "attack"
+      },
+      "generation_records": [
+        {
+          "path": "design/baimen-enemies-20261028/characters/E07/generation-record.json",
+          "sha256": "70f8660ed2b740833deac8a37092aff30fa8785ac4a7d5b38f15056b68fe0310"
+        }
+      ],
+      "prompts": [
+        {
+          "path": "design/baimen-enemies-20261028/characters/E07/prompts/actions-v1.txt",
+          "sha256": "8c06bfb2566742676e3ece15839f6f265974b48d2e5b0986b21037c29b0e2d67"
+        },
+        {
+          "path": "design/baimen-enemies-20261028/characters/E07/prompts/master-v1.txt",
+          "sha256": "e60ad7648ea7a6af9abbdd9e681cb50c2e0bafeb940e81b0fa5c461866565f58"
+        }
+      ],
+      "static_object_clip_reuse": false
+    },
+    {
+      "id": "E08",
+      "name": "供碗祠巫",
+      "kind": "ordinary",
+      "body_height_world": 74,
+      "body_height_px": 80,
+      "status": "final",
+      "runtime_manifest": {
+        "path": "assets/enemies/baimen/E08/manifest.json",
+        "sha256": "c1be6ea56e2a59dc41f989e838e8f9947ce9cb8af408efd776e211d8ef406947"
+      },
+      "export_manifest": {
+        "path": "design/baimen-enemies-20261028/characters/E08/export-manifest.json",
+        "sha256": "09eb1e87b42020b66e00d33a2c998d0038fc7987355ac45e1d707fe05ed904ef"
+      },
+      "measurements": {
+        "path": "design/baimen-enemies-20261028/characters/E08/measurements.json",
+        "sha256": "6c51c07ba5776b6d905b0f576093aa6d6a73488a1839ac150ee67c04ecff13aa"
+      },
+      "selected_portrait_source": "design/baimen-enemies-20261028/characters/E08/source/master-v1.png",
+      "selected_source_poses": 20,
+      "exported_animation_frames": 20,
+      "clips": [
+        "attack",
+        "hit",
+        "idle",
+        "move",
+        "special"
+      ],
+      "action_clips": {
+        "heal": "special",
+        "swipe": "attack"
+      },
+      "generation_records": [
+        {
+          "path": "design/baimen-enemies-20261028/characters/E08/generation-record.json",
+          "sha256": "eb1de6dc35c6591dc514593a896175d99ea39cf63c6b38aa587f7396598fc575"
+        }
+      ],
+      "prompts": [
+        {
+          "path": "design/baimen-enemies-20261028/characters/E08/prompts/actions-v1.txt",
+          "sha256": "df6fb6264c8489246a3ee5d7bbb97307afb48ba6c4811ec9da14f862bfb83c48"
+        },
+        {
+          "path": "design/baimen-enemies-20261028/characters/E08/prompts/master-v1.txt",
+          "sha256": "96d41dd87bbecb0d76f3c07698e9d7a23e99865c74ecc9ac7743d9971a9d9cf5"
+        }
+      ],
+      "static_object_clip_reuse": false
+    },
+    {
+      "id": "E09",
+      "name": "撼钟尸卫",
+      "kind": "ordinary",
+      "body_height_world": 112,
+      "body_height_px": 128,
+      "status": "final",
+      "runtime_manifest": {
+        "path": "assets/enemies/baimen/E09/manifest.json",
+        "sha256": "c6bbe7b35ae64f1bc1e6f93673430b0d530428501589c843eb2ffdf789cdb2c7"
+      },
+      "export_manifest": {
+        "path": "design/baimen-enemies-20261028/characters/E09/export-manifest.json",
+        "sha256": "58ed0a4428d166b705a9dd37eec6f8c969a276a521b454d6e1a826dc0ae3d3dd"
+      },
+      "measurements": {
+        "path": "design/baimen-enemies-20261028/characters/E09/measurements.json",
+        "sha256": "439aaf1fad5b30f597476d2ea85ba979cb479153fc40a382f2b4a7886610e09a"
+      },
+      "selected_portrait_source": "design/baimen-enemies-20261028/characters/E09/source/master-v1.png",
+      "selected_source_poses": 20,
+      "exported_animation_frames": 20,
+      "clips": [
+        "attack",
+        "hit",
+        "idle",
+        "move",
+        "special"
+      ],
+      "action_clips": {
+        "slam": "attack"
+      },
+      "generation_records": [
+        {
+          "path": "design/baimen-enemies-20261028/characters/E09/generation-record.json",
+          "sha256": "fe7f782d6308691ba5a1b0ce85ece7a1201742149fb191d045d746f77389cd30"
+        }
+      ],
+      "prompts": [
+        {
+          "path": "design/baimen-enemies-20261028/characters/E09/prompts/actions-v1.txt",
+          "sha256": "4384afa4825d67c08cb41143b2449d2761843fdd74b910aa8f877469ec9a9029"
+        },
+        {
+          "path": "design/baimen-enemies-20261028/characters/E09/prompts/master-v1.txt",
+          "sha256": "03528f1a26177d40125260697ce53b574d330fb9f1e88f779c554f635f9bf1cc"
+        }
+      ],
+      "static_object_clip_reuse": false
+    },
+    {
+      "id": "E10",
+      "name": "钩轮牵阵者",
+      "kind": "ordinary",
+      "body_height_world": 108,
+      "body_height_px": 128,
+      "status": "final",
+      "runtime_manifest": {
+        "path": "assets/enemies/baimen/E10/manifest.json",
+        "sha256": "05fb172b432728d9f7cafa8b2f9ff441ec5d14cc400ac75d8e6224bcbf69b851"
+      },
+      "export_manifest": {
+        "path": "design/baimen-enemies-20261028/characters/E10/export-manifest.json",
+        "sha256": "861d67acde101ed318ebd123d6d677906b47bae822d7dfacea83210198c762e4"
+      },
+      "measurements": {
+        "path": "design/baimen-enemies-20261028/characters/E10/measurements.json",
+        "sha256": "5b6387962a6c28e4db804adc92aca9d7a20e2d1bf8f019b704faecf125693ad7"
+      },
+      "selected_portrait_source": "design/baimen-enemies-20261028/characters/E10/source/master-v1.png",
+      "selected_source_poses": 20,
+      "exported_animation_frames": 20,
+      "clips": [
+        "attack",
+        "hit",
+        "idle",
+        "move",
+        "special"
+      ],
+      "action_clips": {
+        "hook": "attack"
+      },
+      "generation_records": [
+        {
+          "path": "design/baimen-enemies-20261028/characters/E10/generation-record.json",
+          "sha256": "d226f94c19f8e000701b07197503549bdbf7c40aff1a310bb655c74962b91b05"
+        }
+      ],
+      "prompts": [
+        {
+          "path": "design/baimen-enemies-20261028/characters/E10/prompts/actions-v1.txt",
+          "sha256": "c24a5e35088fb05c8875c34d7722877fecbad97dc513b2c4affa460b099041f0"
+        },
+        {
+          "path": "design/baimen-enemies-20261028/characters/E10/prompts/master-v1.txt",
+          "sha256": "02adb430fb2615383492a68d7dc829cf91eec68705afb839056d8a009cfb6027"
+        }
+      ],
+      "static_object_clip_reuse": false
+    },
+    {
+      "id": "E11",
+      "name": "负棺驮役",
+      "kind": "ordinary",
+      "body_height_world": 104,
+      "body_height_px": 128,
+      "status": "final",
+      "runtime_manifest": {
+        "path": "assets/enemies/baimen/E11/manifest.json",
+        "sha256": "9ca98417db74e260af5950a53bee62de861f18ddff185779dbfa32b42fde24b7"
+      },
+      "export_manifest": {
+        "path": "design/baimen-enemies-20261028/characters/E11/export-manifest.json",
+        "sha256": "db7b3e576bb0028685e12f866130d48bbf9d3154d19f374f7f92163709c31e13"
+      },
+      "measurements": {
+        "path": "design/baimen-enemies-20261028/characters/E11/measurements.json",
+        "sha256": "01d97da4f2a8344e05285a96516629c5f76cad386c418889aed42e6fe6132559"
+      },
+      "selected_portrait_source": "design/baimen-enemies-20261028/characters/E11/source/master-v1.png",
+      "selected_source_poses": 20,
+      "exported_animation_frames": 20,
+      "clips": [
+        "attack",
+        "hit",
+        "idle",
+        "move",
+        "special"
+      ],
+      "action_clips": {
+        "summon": "special",
+        "swipe": "attack"
+      },
+      "generation_records": [
+        {
+          "path": "design/baimen-enemies-20261028/characters/E11/generation-record.json",
+          "sha256": "4c8e953ce1c7001a19ece4115f12abfa75fd49759a40aba1e3aa86ba9f0b5e96"
+        }
+      ],
+      "prompts": [
+        {
+          "path": "design/baimen-enemies-20261028/characters/E11/prompts/actions-v1.txt",
+          "sha256": "b9063d4cbbc7a1450f9a5cec10c1b5131337288ddf2b142ca601be085e98fd8a"
+        },
+        {
+          "path": "design/baimen-enemies-20261028/characters/E11/prompts/master-v1.txt",
+          "sha256": "2aec8d867a2ec50992450d8fc0e0fac0d437e50052f2f6bbdcf7573a5850dcaf"
+        }
+      ],
+      "static_object_clip_reuse": false
+    },
+    {
+      "id": "E12",
+      "name": "碑背石龟",
+      "kind": "ordinary",
+      "body_height_world": 116,
+      "body_height_px": 128,
+      "status": "final",
+      "runtime_manifest": {
+        "path": "assets/enemies/baimen/E12/manifest.json",
+        "sha256": "200ba0bc7c9413efee9487f83f59a62cf1bc8765a369196c1fcfafe395ce1e92"
+      },
+      "export_manifest": {
+        "path": "design/baimen-enemies-20261028/characters/E12/export-manifest.json",
+        "sha256": "be8b40c970f93bd7f8bbc75c4147c406f5f2ea12bbc8532a48a803182b0fbe8a"
+      },
+      "measurements": {
+        "path": "design/baimen-enemies-20261028/characters/E12/measurements.json",
+        "sha256": "acd8931fa2ef435d467581058e08a6fc426281c9f78d0c08827aa23521903791"
+      },
+      "selected_portrait_source": "design/baimen-enemies-20261028/characters/E12/source/master-v1.png",
+      "selected_source_poses": 20,
+      "exported_animation_frames": 20,
+      "clips": [
+        "attack",
+        "hit",
+        "idle",
+        "move",
+        "special"
+      ],
+      "action_clips": {
+        "pulse": "special",
+        "slam": "attack"
+      },
+      "generation_records": [
+        {
+          "path": "design/baimen-enemies-20261028/characters/E12/generation-record.json",
+          "sha256": "a6f5adc1028794055eb5aed0adcd16aef3edfb01ecc2b233ec15585e17feac20"
+        }
+      ],
+      "prompts": [
+        {
+          "path": "design/baimen-enemies-20261028/characters/E12/prompts/actions-v1.txt",
+          "sha256": "df38751c065c5d01d58ced0085a64dcbc38a151dc811a94c935c0238c7cc3c97"
+        },
+        {
+          "path": "design/baimen-enemies-20261028/characters/E12/prompts/master-v1.txt",
+          "sha256": "f1949b392127d3bc20e83e9725255a5c84b1a252a760a26801c2c90fec5874af"
+        }
+      ],
+      "static_object_clip_reuse": false
+    },
+    {
+      "id": "L01",
+      "name": "旌威督军",
+      "kind": "elite_objects",
+      "body_height_world": 140,
+      "body_height_px": 128,
+      "status": "final",
+      "runtime_manifest": {
+        "path": "assets/enemies/baimen/L01/manifest.json",
+        "sha256": "cc388a70e006b75714c25e44ebef9ce791339d3c8fe60bb5af14426662d0f7e7"
+      },
+      "export_manifest": {
+        "path": "design/baimen-enemies-20261028/characters/L01/export-manifest.json",
+        "sha256": "a347a6a6fbf59c31acb8e027815ab82907c32369dc77ff3af01a9d22d04ce633"
+      },
+      "measurements": {
+        "path": "design/baimen-enemies-20261028/characters/L01/measurements.json",
+        "sha256": "a2724f6ee6a7223d4460b13bb103c7e2283933a2444caa175a7f4eac134f4f6b"
+      },
+      "selected_portrait_source": "design/baimen-enemies-20261028/characters/L01/source/portrait-v1.png",
+      "selected_source_poses": 20,
+      "exported_animation_frames": 20,
+      "clips": [
+        "attack",
+        "hit",
+        "idle",
+        "move",
+        "special"
+      ],
+      "action_clips": {
+        "command": "special",
+        "swipe": "attack"
+      },
+      "generation_records": [
+        {
+          "path": "design/baimen-enemies-20261028/characters/L01/generation-record.json",
+          "sha256": "4544f356ee9efa3b72f9673e5d6466f84ea0fa06ae1fda6af547e97f86f0ba1c"
+        }
+      ],
+      "prompts": [
+        {
+          "path": "design/baimen-enemies-20261028/characters/L01/portrait-prompt.txt",
+          "sha256": "2d510e5e0783e6f0b7f4b6f45885feb4dfb1f8fb234254953070f20f0f69ae89"
+        },
+        {
+          "path": "design/baimen-enemies-20261028/characters/L01/sheet-prompt.txt",
+          "sha256": "c23028ea7fb150ca5624efa3c0da9dafc8c0096ed26524a1c82d7c8444bb5f6d"
+        }
+      ],
+      "static_object_clip_reuse": false
+    },
+    {
+      "id": "L02",
+      "name": "织阵灯母",
+      "kind": "elite_objects",
+      "body_height_world": 138,
+      "body_height_px": 128,
+      "status": "final",
+      "runtime_manifest": {
+        "path": "assets/enemies/baimen/L02/manifest.json",
+        "sha256": "f4db798f1897b278bc99e8d8caa033c201f034569e1d6310f3f706762bb2f5d7"
+      },
+      "export_manifest": {
+        "path": "design/baimen-enemies-20261028/characters/L02/export-manifest.json",
+        "sha256": "e24c57c685b37da79d08e1b8ab2990cd57f7700b383015d359570707c8b34bf1"
+      },
+      "measurements": {
+        "path": "design/baimen-enemies-20261028/characters/L02/measurements.json",
+        "sha256": "2f80a67bd9bf94c1feff9b09570ea0e11681d0bc7b2a163181aad00ab89c3a04"
+      },
+      "selected_portrait_source": "design/baimen-enemies-20261028/characters/L02/source/portrait-v1.png",
+      "selected_source_poses": 20,
+      "exported_animation_frames": 20,
+      "clips": [
+        "attack",
+        "hit",
+        "idle",
+        "move",
+        "special"
+      ],
+      "action_clips": {
+        "fan": "attack"
+      },
+      "generation_records": [
+        {
+          "path": "design/baimen-enemies-20261028/characters/L02/generation-record.json",
+          "sha256": "ba8bee501ebd13f4db3663f6c9c6aea8154f3145f34dcc05e0c01495ef13193f"
+        }
+      ],
+      "prompts": [
+        {
+          "path": "design/baimen-enemies-20261028/characters/L02/portrait-prompt.txt",
+          "sha256": "1f2d07363f8852e65ac7515f8be9e92f63b558c92b6dd74c2edf9287db83db23"
+        },
+        {
+          "path": "design/baimen-enemies-20261028/characters/L02/sheet-prompt.txt",
+          "sha256": "71c70274492c803f041a8b231e84089638abb905880d24c2f62905e11e0816a5"
+        }
+      ],
+      "static_object_clip_reuse": false
+    },
+    {
+      "id": "L03",
+      "name": "缚契盾魁",
+      "kind": "elite_objects",
+      "body_height_world": 146,
+      "body_height_px": 128,
+      "status": "final",
+      "runtime_manifest": {
+        "path": "assets/enemies/baimen/L03/manifest.json",
+        "sha256": "fb66ade3d1a83de901fbcb4bbee775851ce95c2afef54b0cc9e9ad7a55de1e4c"
+      },
+      "export_manifest": {
+        "path": "design/baimen-enemies-20261028/characters/L03/export-manifest.json",
+        "sha256": "b3d2c071f0a7152f1993eead6df7647c62014d48cabe3d7a665366545bdc943f"
+      },
+      "measurements": {
+        "path": "design/baimen-enemies-20261028/characters/L03/measurements.json",
+        "sha256": "96062fda7dd48731a8af23ff048d1079f95a3b88cabeea69320f7fb1e4b4383e"
+      },
+      "selected_portrait_source": "design/baimen-enemies-20261028/characters/L03/source/portrait-v1.png",
+      "selected_source_poses": 20,
+      "exported_animation_frames": 20,
+      "clips": [
+        "attack",
+        "hit",
+        "idle",
+        "move",
+        "special"
+      ],
+      "action_clips": {
+        "swipe": "attack"
+      },
+      "generation_records": [
+        {
+          "path": "design/baimen-enemies-20261028/characters/L03/generation-record.json",
+          "sha256": "b44fd7fada43e0139c41e7287221f7e5cbd0ca6915b2de7c35a28b1f5b8f6f24"
+        }
+      ],
+      "prompts": [
+        {
+          "path": "design/baimen-enemies-20261028/characters/L03/portrait-prompt.txt",
+          "sha256": "43d3fd288b39b97a3ee20b69a75d24318409a4899862cf3b1f054df7c81f1167"
+        },
+        {
+          "path": "design/baimen-enemies-20261028/characters/L03/sheet-prompt.txt",
+          "sha256": "1750af627e64d5561908d9307e1aa9e2a33e1335c4ca6ea5793b8bb0fdbec8ab"
+        }
+      ],
+      "static_object_clip_reuse": false
+    },
+    {
+      "id": "L04",
+      "name": "孵棺驮役",
+      "kind": "elite_objects",
+      "body_height_world": 150,
+      "body_height_px": 120,
+      "status": "final",
+      "runtime_manifest": {
+        "path": "assets/enemies/baimen/L04/manifest.json",
+        "sha256": "1800702e8e6d962f8a61da3a90c7eb73b8111be217a3e3bd3978782e304b222a"
+      },
+      "export_manifest": {
+        "path": "design/baimen-enemies-20261028/characters/L04/export-manifest.json",
+        "sha256": "74efc50b1807db63ae208d8d1f6f04cbe486983ed0da3a8fe636d359a6d8caba"
+      },
+      "measurements": {
+        "path": "design/baimen-enemies-20261028/characters/L04/measurements.json",
+        "sha256": "be1fda4d6a55b58ae5ce034251ed85e12bd5e712a7a31296649cf6a460dacfa8"
+      },
+      "selected_portrait_source": "design/baimen-enemies-20261028/characters/L04/source/portrait-v1.png",
+      "selected_source_poses": 20,
+      "exported_animation_frames": 20,
+      "clips": [
+        "attack",
+        "hit",
+        "idle",
+        "move",
+        "special"
+      ],
+      "action_clips": {
+        "summon": "special",
+        "swipe": "attack"
+      },
+      "generation_records": [
+        {
+          "path": "design/baimen-enemies-20261028/characters/L04/generation-record.json",
+          "sha256": "f0a6dbddc191fc9277d792db0ab3b5ecd4a6f9bf6110bdd381b614fb5f835da1"
+        }
+      ],
+      "prompts": [
+        {
+          "path": "design/baimen-enemies-20261028/characters/L04/portrait-prompt.txt",
+          "sha256": "577a70bd302c9c33ee321506aaf5ad0f396837aea925522328d81dcbe9d7130f"
+        },
+        {
+          "path": "design/baimen-enemies-20261028/characters/L04/sheet-prompt.txt",
+          "sha256": "c8b404730984975d623499d06cc084d210ef8052caf00ca0c3e5481fa8ddb039"
+        }
+      ],
+      "static_object_clip_reuse": false
+    },
+    {
+      "id": "L05",
+      "name": "镜影复唱鬼",
+      "kind": "elite_objects",
+      "body_height_world": 144,
+      "body_height_px": 128,
+      "status": "final",
+      "runtime_manifest": {
+        "path": "assets/enemies/baimen/L05/manifest.json",
+        "sha256": "59d0a4aadbb40ead206dbd2fb6a8def5db6ded4ebd10411cd07df796e682a91d"
+      },
+      "export_manifest": {
+        "path": "design/baimen-enemies-20261028/characters/L05/export-manifest.json",
+        "sha256": "115828116b6cc2cbbf35816ab5a3748bc1897aaa109f4e8dd156403ec26521ee"
+      },
+      "measurements": {
+        "path": "design/baimen-enemies-20261028/characters/L05/measurements.json",
+        "sha256": "384a22c18e36512f302354c20ed51c97f4cb798f72a737e2119132cb3dd4574b"
+      },
+      "selected_portrait_source": "design/baimen-enemies-20261028/characters/L05/source/portrait-v1.png",
+      "selected_source_poses": 20,
+      "exported_animation_frames": 20,
+      "clips": [
+        "attack",
+        "hit",
+        "idle",
+        "move",
+        "special"
+      ],
+      "action_clips": {
+        "hook": "attack"
+      },
+      "generation_records": [
+        {
+          "path": "design/baimen-enemies-20261028/characters/L05/generation-record.json",
+          "sha256": "809d3c851662e40d627bc8039e7b815730a7671e913e4f24af2f83e66de4166d"
+        }
+      ],
+      "prompts": [
+        {
+          "path": "design/baimen-enemies-20261028/characters/L05/attack-repair-prompt.txt",
+          "sha256": "71145345db91fb028be053beddd3aedfcce310ec2f7aa4fae7b8892d1b09dddf"
+        },
+        {
+          "path": "design/baimen-enemies-20261028/characters/L05/portrait-prompt.txt",
+          "sha256": "3517d79688be5e99b61306d2f1c3663dd0490b989e38900b2ce44e1fb6f659d5"
+        },
+        {
+          "path": "design/baimen-enemies-20261028/characters/L05/sheet-prompt.txt",
+          "sha256": "ec6739dfd9fa4885db0c924d0a7fb76cc3eab5de5874d54f818b22a04bc51f52"
+        }
+      ],
+      "static_object_clip_reuse": false
+    },
+    {
+      "id": "L06",
+      "name": "鸣雷行刑鬼",
+      "kind": "elite_objects",
+      "body_height_world": 152,
+      "body_height_px": 128,
+      "status": "final",
+      "runtime_manifest": {
+        "path": "assets/enemies/baimen/L06/manifest.json",
+        "sha256": "8c34240b4c47b21567f00c550a9cdd7c77d60b7db2ffcbc7c24bd6b7cc35613d"
+      },
+      "export_manifest": {
+        "path": "design/baimen-enemies-20261028/characters/L06/export-manifest.json",
+        "sha256": "efe4df652528e65705769dff439283efad6e7f467c7a823b2a1e6ea6511855df"
+      },
+      "measurements": {
+        "path": "design/baimen-enemies-20261028/characters/L06/measurements.json",
+        "sha256": "cb05bdd6fff2ccc4cb18b1c99cb0629daecfe54a44648a9fcd4a0cf4453549c9"
+      },
+      "selected_portrait_source": "design/baimen-enemies-20261028/characters/L06/source/portrait-v1.png",
+      "selected_source_poses": 20,
+      "exported_animation_frames": 20,
+      "clips": [
+        "attack",
+        "hit",
+        "idle",
+        "move",
+        "special"
+      ],
+      "action_clips": {
+        "slam": "attack"
+      },
+      "generation_records": [
+        {
+          "path": "design/baimen-enemies-20261028/characters/L06/generation-record.json",
+          "sha256": "e75a14f00218b65fdd2198edc138e74d8020f020fbac33d7475bc7c73d3995e4"
+        }
+      ],
+      "prompts": [
+        {
+          "path": "design/baimen-enemies-20261028/characters/L06/portrait-prompt.txt",
+          "sha256": "3118069e13bf2a003d6d86f0b7aac6aa28e0d8c410ef1874fdfdce24890d328f"
+        },
+        {
+          "path": "design/baimen-enemies-20261028/characters/L06/sheet-prompt.txt",
+          "sha256": "c452848102bb70faf6361edfd09144104584d942d21371662eea51eae267ed5c"
+        },
+        {
+          "path": "design/baimen-enemies-20261028/characters/L06/sheet-v2-prompt.txt",
+          "sha256": "081eb662c0abc47dd1a2b979017d27f304845cf20acc0d02134188b18dcf4077"
+        }
+      ],
+      "static_object_clip_reuse": false
+    },
+    {
+      "id": "B01",
+      "name": "荒道鬼校·空面碑甲",
+      "kind": "bosses",
+      "body_height_world": 128,
+      "body_height_px": 216,
+      "status": "final",
+      "runtime_manifest": {
+        "path": "assets/enemies/baimen/B01/manifest.json",
+        "sha256": "723feaa7c814d12de663807ed095a31335b1728c2cbd386ea4ecbba3a31a4373"
+      },
+      "export_manifest": {
+        "path": "design/baimen-enemies-20261028/characters/B01/export-manifest.json",
+        "sha256": "6731ba11de8b05da0a6250f1d41c5811784d109ee4a21818a18bd38ae1237c20"
+      },
+      "measurements": {
+        "path": "design/baimen-enemies-20261028/characters/B01/measurements.json",
+        "sha256": "b9c0e662178edaf6b16cc72baa243a1fc2ea6cbc15309544e6dd41fc196a17e7"
+      },
+      "selected_portrait_source": "design/baimen-enemies-20261028/characters/B01/source/master-v2.png",
+      "selected_source_poses": 20,
+      "exported_animation_frames": 20,
+      "clips": [
+        "attack",
+        "hit",
+        "idle",
+        "move",
+        "special"
+      ],
+      "action_clips": {
+        "swipe": "attack"
+      },
+      "generation_records": [
+        {
+          "path": "design/baimen-enemies-20261028/characters/B01/generation-record.json",
+          "sha256": "5bb9bcd703107002dd6f4785a9eb966f337336feecd58992ce86586375a69b8a"
+        }
+      ],
+      "prompts": [
+        {
+          "path": "design/baimen-enemies-20261028/characters/B01/source/actions-v1-prompt.txt",
+          "sha256": "cdf0f0b474bf986b10fb8ff5bcc42115ba504971c18ae34c1723c284fd0ff5af"
+        },
+        {
+          "path": "design/baimen-enemies-20261028/characters/B01/source/master-v1-prompt.txt",
+          "sha256": "9d911e3ff55c7c7621cc474d9f6444bffc7adb7f95454ae5e6dafd0393801467"
+        },
+        {
+          "path": "design/baimen-enemies-20261028/characters/B01/source/master-v2-prompt.txt",
+          "sha256": "e69f8c64ad040791152275b5dd4b9bc4655fb759fac903bce9d4064c12b31f37"
+        }
+      ],
+      "static_object_clip_reuse": false
+    },
+    {
+      "id": "B02",
+      "name": "守街尸将·檐面巡将",
+      "kind": "bosses",
+      "body_height_world": 148,
+      "body_height_px": 216,
+      "status": "final",
+      "runtime_manifest": {
+        "path": "assets/enemies/baimen/B02/manifest.json",
+        "sha256": "172c705367bf4413008f33ec4d184117bb3b96f0c17c6d5c22e6974eca1ea182"
+      },
+      "export_manifest": {
+        "path": "design/baimen-enemies-20261028/characters/B02/export-manifest.json",
+        "sha256": "4eb152b6ff8d131e5cdea1d23aeb11eb412bb1923f8db89c182dd8738799aa9c"
+      },
+      "measurements": {
+        "path": "design/baimen-enemies-20261028/characters/B02/measurements.json",
+        "sha256": "cfbdf08989cffa4068e0d16b5089cc3d25e170cdbee86fe84fb7384f59a26433"
+      },
+      "selected_portrait_source": "design/baimen-enemies-20261028/characters/B02/source/master-v1.png",
+      "selected_source_poses": 20,
+      "exported_animation_frames": 20,
+      "clips": [
+        "attack",
+        "hit",
+        "idle",
+        "move",
+        "special"
+      ],
+      "action_clips": {
+        "swipe": "attack"
+      },
+      "generation_records": [
+        {
+          "path": "design/baimen-enemies-20261028/characters/B02/generation-record.json",
+          "sha256": "98741d8ac3e61a1c9f00516fae3f52c8b89b29879e97725571c6ccd36bdcc484"
+        }
+      ],
+      "prompts": [
+        {
+          "path": "design/baimen-enemies-20261028/characters/B02/source/actions-v1-prompt.txt",
+          "sha256": "a8be6fd1bd7f8d96294e8d4a822fa7cd74fe76319e9b1cfe4631332afe09192f"
+        },
+        {
+          "path": "design/baimen-enemies-20261028/characters/B02/source/actions-v2-prompt.txt",
+          "sha256": "5659a6a1a9472bc48a7e36781334f048febc81f680cd88ad4ea5d84f00f77aff"
+        },
+        {
+          "path": "design/baimen-enemies-20261028/characters/B02/source/master-v1-prompt.txt",
+          "sha256": "4d74c7c3d72bfc3f49f1f22d4e3ea772324a3b618e959221d0401d2560531bfb"
+        }
+      ],
+      "static_object_clip_reuse": false
+    },
+    {
+      "id": "B03",
+      "name": "盘寨鬼魁·三面裂旗魁",
+      "kind": "bosses",
+      "body_height_world": 172,
+      "body_height_px": 216,
+      "status": "final",
+      "runtime_manifest": {
+        "path": "assets/enemies/baimen/B03/manifest.json",
+        "sha256": "380272749af3666929424777a9654822918fa5862156313998063b3764db975c"
+      },
+      "export_manifest": {
+        "path": "design/baimen-enemies-20261028/characters/B03/export-manifest.json",
+        "sha256": "14f1ae86b2d817ebbac6c350d052b96a8214e0a4412c61f6d2b4cc91e6e2223a"
+      },
+      "measurements": {
+        "path": "design/baimen-enemies-20261028/characters/B03/measurements.json",
+        "sha256": "f491fb6ecdd3e0c92fdafbc5609e6ef518367aa70cf9340f7183d390000a5060"
+      },
+      "selected_portrait_source": "design/baimen-enemies-20261028/characters/B03/source/master-v1.png",
+      "selected_source_poses": 20,
+      "exported_animation_frames": 20,
+      "clips": [
+        "attack",
+        "hit",
+        "idle",
+        "move",
+        "special"
+      ],
+      "action_clips": {
+        "charge": "special",
+        "swipe": "attack"
+      },
+      "generation_records": [
+        {
+          "path": "design/baimen-enemies-20261028/characters/B03/generation-record.json",
+          "sha256": "e9f614b8039ecd7f7cc3d6bd873a26aeeac9c9588bdd7be2027eecb748241087"
+        }
+      ],
+      "prompts": [
+        {
+          "path": "design/baimen-enemies-20261028/characters/B03/source/actions-v1-prompt.txt",
+          "sha256": "72c5c72fc7c8c2dd8afb360d1f3bd65a641f0edaf6d8a75be7aa9bbe59a38c07"
+        },
+        {
+          "path": "design/baimen-enemies-20261028/characters/B03/source/actions-v2-prompt.txt",
+          "sha256": "f6beb0b30c856e86110829ce991340ddb17971d51bc185df0f61ace1e4f83888"
+        },
+        {
+          "path": "design/baimen-enemies-20261028/characters/B03/source/charge-v1-prompt.txt",
+          "sha256": "ea509e6660d46f6facef800e235cd48a8897a93252558a4d210cbaf2c68a14b3"
+        },
+        {
+          "path": "design/baimen-enemies-20261028/characters/B03/source/master-v1-prompt.txt",
+          "sha256": "b2ce438fe9f50c5b1de6ed23fdcb16082963af7bf8d2b708e495fb7c147ea5eb"
+        }
+      ],
+      "static_object_clip_reuse": false
+    },
+    {
+      "id": "B04",
+      "name": "押粮鬼尉·轭骨牛督",
+      "kind": "bosses",
+      "body_height_world": 164,
+      "body_height_px": 216,
+      "status": "final",
+      "runtime_manifest": {
+        "path": "assets/enemies/baimen/B04/manifest.json",
+        "sha256": "97a1a0140bde7410d13d97c0c4e5fbde82f057e9c6f41eec0ba654c1c63f8b96"
+      },
+      "export_manifest": {
+        "path": "design/baimen-enemies-20261028/characters/B04/export-manifest.json",
+        "sha256": "26420876fe91181fd6b9832828b8e8b03942628e4e7f06b80e8e199c3ac9a2a0"
+      },
+      "measurements": {
+        "path": "design/baimen-enemies-20261028/characters/B04/measurements.json",
+        "sha256": "be8123f1903d592a904da06fb495a7b85b4f2251843755c902558c2430c45f9a"
+      },
+      "selected_portrait_source": "design/baimen-enemies-20261028/characters/B04/source/master-v1.png",
+      "selected_source_poses": 20,
+      "exported_animation_frames": 20,
+      "clips": [
+        "attack",
+        "hit",
+        "idle",
+        "move",
+        "special"
+      ],
+      "action_clips": {
+        "charge": "special",
+        "swipe": "attack"
+      },
+      "generation_records": [
+        {
+          "path": "design/baimen-enemies-20261028/characters/B04/generation-record.json",
+          "sha256": "90be32df6a8b455f44066f6f30849e7f4278e213ec606779f3768d01b83dad5c"
+        }
+      ],
+      "prompts": [
+        {
+          "path": "design/baimen-enemies-20261028/characters/B04/source/actions-v1-prompt.txt",
+          "sha256": "a2b0c807005debb851f5e9b3adcc5d1f4e285a8f8045108c788ad08f711401b5"
+        },
+        {
+          "path": "design/baimen-enemies-20261028/characters/B04/source/master-v1-prompt.txt",
+          "sha256": "a4cb2df79b67038728eda8c319b2bc90d9cf986f322c5d9b080e458098a988df"
+        }
+      ],
+      "static_object_clip_reuse": false
+    },
+    {
+      "id": "B05",
+      "name": "冥灯术士·悬灯道人",
+      "kind": "bosses",
+      "body_height_world": 166,
+      "body_height_px": 224,
+      "status": "final",
+      "runtime_manifest": {
+        "path": "assets/enemies/baimen/B05/manifest.json",
+        "sha256": "7a55409a284e7cd5493116bd51c4257c49c18cad2f96337d2d592490f00bc730"
+      },
+      "export_manifest": {
+        "path": "design/baimen-enemies-20261028/characters/B05/export-manifest.json",
+        "sha256": "d985201e4a040e221ffc10788dffb44fa6c2dda7d4b4c01ddebd9d36b91ddb65"
+      },
+      "measurements": {
+        "path": "design/baimen-enemies-20261028/characters/B05/measurements.json",
+        "sha256": "1c85750168dbdfb965aeca91e4fa815434e406967a4fe7efb6615fde5d6c1170"
+      },
+      "selected_portrait_source": "design/baimen-enemies-20261028/characters/B05/source/master-v1.png",
+      "selected_source_poses": 20,
+      "exported_animation_frames": 20,
+      "clips": [
+        "attack",
+        "hit",
+        "idle",
+        "move",
+        "special"
+      ],
+      "action_clips": {
+        "fan": "attack",
+        "pot": "special"
+      },
+      "generation_records": [
+        {
+          "path": "design/baimen-enemies-20261028/characters/B05/generation-record.json",
+          "sha256": "45cb3554b3f49b7c5ba0d46f7e997a32a4ab59737e4a46399549437f19e677c4"
+        }
+      ],
+      "prompts": [
+        {
+          "path": "design/baimen-enemies-20261028/characters/B05/source/actions-v1-prompt.txt",
+          "sha256": "3296d387c6446f12969e09ac0e300044a033c9cfbcc903197d263c572b6a9dc2"
+        },
+        {
+          "path": "design/baimen-enemies-20261028/characters/B05/source/master-v1-prompt.txt",
+          "sha256": "0e9ba26aba7e4430ad090ef6644e9201ca2ba9290ede35c0d594890dbbd23130"
+        }
+      ],
+      "static_object_clip_reuse": false
+    },
+    {
+      "id": "B06",
+      "name": "荒祠镇将·祠脊石兽",
+      "kind": "bosses",
+      "body_height_world": 184,
+      "body_height_px": 216,
+      "status": "final",
+      "runtime_manifest": {
+        "path": "assets/enemies/baimen/B06/manifest.json",
+        "sha256": "ea0cb0b328a83f3588ea9297c031c234e0e0b4f14a047442c1a2d90704cc0ced"
+      },
+      "export_manifest": {
+        "path": "design/baimen-enemies-20261028/characters/B06/export-manifest.json",
+        "sha256": "fcc03b689d563c5fe9e5b75e2189c31e023f81370525afe2a0e6d78281373a48"
+      },
+      "measurements": {
+        "path": "design/baimen-enemies-20261028/characters/B06/measurements.json",
+        "sha256": "e756431da967ddf68cf2de36ffb5dcf16b8b3b3b72462d82afbf81a138908623"
+      },
+      "selected_portrait_source": "design/baimen-enemies-20261028/characters/B06/source/master-v2.png",
+      "selected_source_poses": 20,
+      "exported_animation_frames": 20,
+      "clips": [
+        "attack",
+        "hit",
+        "idle",
+        "move",
+        "special"
+      ],
+      "action_clips": {
+        "slam": "attack",
+        "slam@0": "attack",
+        "slam@1": "special"
+      },
+      "generation_records": [
+        {
+          "path": "design/baimen-enemies-20261028/characters/B06/generation-record.json",
+          "sha256": "a1ff80d7aacca6ceda058baa42e602d9adb8b46840886682c9ade56b2d1f187e"
+        }
+      ],
+      "prompts": [
+        {
+          "path": "design/baimen-enemies-20261028/characters/B06/source/actions-v1-prompt.txt",
+          "sha256": "b0afd99818dae88e05a94cf5ed48ec01d8d90ea3de52c7a1b190fce7418f309c"
+        },
+        {
+          "path": "design/baimen-enemies-20261028/characters/B06/source/master-v1-prompt.txt",
+          "sha256": "97f694b883e1d4ca34d65007248df9fbffe7dc930306e3df5a7372336e89e61e"
+        },
+        {
+          "path": "design/baimen-enemies-20261028/characters/B06/source/master-v2-prompt.txt",
+          "sha256": "08c1577edd7d86b47bceedd9816ae26a5aba9fbefdf55d037f211131937821e1"
+        }
+      ],
+      "static_object_clip_reuse": false
+    },
+    {
+      "id": "B07",
+      "name": "官署号令者·悬印司令",
+      "kind": "bosses",
+      "body_height_world": 184,
+      "body_height_px": 224,
+      "status": "final",
+      "runtime_manifest": {
+        "path": "assets/enemies/baimen/B07/manifest.json",
+        "sha256": "9a2e907059c501ab69a2697b8aec7ec0bdd3c5e526a17c9de910286e884c60b8"
+      },
+      "export_manifest": {
+        "path": "design/baimen-enemies-20261028/characters/B07/export-manifest.json",
+        "sha256": "a661d6d6a156e498dc1f6c34268ff7ef0c3195688f054a9e389640727f791205"
+      },
+      "measurements": {
+        "path": "design/baimen-enemies-20261028/characters/B07/measurements.json",
+        "sha256": "62d9748791c41d77081756b6c03f24804ea2ba893e8dc7f7bdad27619eeccd73"
+      },
+      "selected_portrait_source": "design/baimen-enemies-20261028/characters/B07/source/master-v1.png",
+      "selected_source_poses": 20,
+      "exported_animation_frames": 20,
+      "clips": [
+        "attack",
+        "hit",
+        "idle",
+        "move",
+        "special"
+      ],
+      "action_clips": {
+        "command": "special",
+        "swipe": "attack"
+      },
+      "generation_records": [
+        {
+          "path": "design/baimen-enemies-20261028/characters/B07/generation-record.json",
+          "sha256": "c627c1bf9057338b82ee20a8e5a9c6de45f2ea3b8fec89b41f902ce1b0757cc1"
+        }
+      ],
+      "prompts": [
+        {
+          "path": "design/baimen-enemies-20261028/characters/B07/source/actions-v1-prompt.txt",
+          "sha256": "b8a55976d2b1ca23da97c0a740af02adb4b331e18976e3e9bd18c9e8e6252291"
+        },
+        {
+          "path": "design/baimen-enemies-20261028/characters/B07/source/master-v1-prompt.txt",
+          "sha256": "90c7657b7e61a333a96bcbe75bcde6b4e45876201930d1c9e7b065ae3f8c7950"
+        }
+      ],
+      "static_object_clip_reuse": false
+    },
+    {
+      "id": "B08",
+      "name": "水门冲将·闸齿鳄首",
+      "kind": "bosses",
+      "body_height_world": 176,
+      "body_height_px": 192,
+      "status": "final",
+      "runtime_manifest": {
+        "path": "assets/enemies/baimen/B08/manifest.json",
+        "sha256": "c654a1fabc2b47481ec273763b839f8a560461339049184caa070dd35f87284e"
+      },
+      "export_manifest": {
+        "path": "design/baimen-enemies-20261028/characters/B08/export-manifest.json",
+        "sha256": "d32778c4c8bca1ca7714134ecb1c955e1c79a17e1ebd076b9a7881d993fb802e"
+      },
+      "measurements": {
+        "path": "design/baimen-enemies-20261028/characters/B08/measurements.json",
+        "sha256": "28de0aa975f50407dc46d81df5f35abe7a517052ba49d1e55a395b8d28345436"
+      },
+      "selected_portrait_source": "design/baimen-enemies-20261028/characters/B08/source/master-v1.png",
+      "selected_source_poses": 20,
+      "exported_animation_frames": 20,
+      "clips": [
+        "attack",
+        "hit",
+        "idle",
+        "move",
+        "special"
+      ],
+      "action_clips": {
+        "charge": "special",
+        "swipe": "attack"
+      },
+      "generation_records": [
+        {
+          "path": "design/baimen-enemies-20261028/characters/B08/generation-record.json",
+          "sha256": "86cf50ffe960f397a3215d39335353dcd21d03658c84a484b93874e88cf1c8d2"
+        }
+      ],
+      "prompts": [
+        {
+          "path": "design/baimen-enemies-20261028/characters/B08/source/actions-v1-prompt.txt",
+          "sha256": "8a73e4b49d888b05186085470c200df5c7b6a191aab75e7ceb9bb307478f161f"
+        },
+        {
+          "path": "design/baimen-enemies-20261028/characters/B08/source/charge-v1-prompt.txt",
+          "sha256": "b011feb6be861e72f991af8320bfa6fa91d620b03a183b15fe2f889be42ced7a"
+        },
+        {
+          "path": "design/baimen-enemies-20261028/characters/B08/source/master-v1-prompt.txt",
+          "sha256": "5e426d14287619c9b7988563f7ef429583f3d0d6ec727dfc36b827eadcca1f02"
+        }
+      ],
+      "static_object_clip_reuse": false
+    },
+    {
+      "id": "B09",
+      "name": "军械库将·炉腹铁鬼",
+      "kind": "bosses",
+      "body_height_world": 184,
+      "body_height_px": 216,
+      "status": "final",
+      "runtime_manifest": {
+        "path": "assets/enemies/baimen/B09/manifest.json",
+        "sha256": "a28f5239033d1a6721c1d9845874f62c48d454b163bd6b5ac6765eca2661084a"
+      },
+      "export_manifest": {
+        "path": "design/baimen-enemies-20261028/characters/B09/export-manifest.json",
+        "sha256": "78735410f5d83e57297200ede87e02b69a2e7852383950aa7fb2a003a47ac9b3"
+      },
+      "measurements": {
+        "path": "design/baimen-enemies-20261028/characters/B09/measurements.json",
+        "sha256": "b721214b12638db61b3695b481eb9f9c43d21106d89344a76b419e1df7d6b0da"
+      },
+      "selected_portrait_source": "design/baimen-enemies-20261028/characters/B09/source/master-v1.png",
+      "selected_source_poses": 20,
+      "exported_animation_frames": 20,
+      "clips": [
+        "attack",
+        "hit",
+        "idle",
+        "move",
+        "special"
+      ],
+      "action_clips": {
+        "slam": "attack",
+        "slam@0": "attack",
+        "slam@1": "special"
+      },
+      "generation_records": [
+        {
+          "path": "design/baimen-enemies-20261028/characters/B09/generation-record.json",
+          "sha256": "6b80c21a61735a32d86c52294013cf9b5f02f27dd20b41ef782efc11a10f9de2"
+        }
+      ],
+      "prompts": [
+        {
+          "path": "design/baimen-enemies-20261028/characters/B09/source/actions-v1-prompt.txt",
+          "sha256": "48fea5a6f4fd9e9b24d476160f31e2dea63a6cb10bb6f3453bd44fc46f0b17f6"
+        },
+        {
+          "path": "design/baimen-enemies-20261028/characters/B09/source/master-v1-prompt.txt",
+          "sha256": "43338d9e8d3bb730d9728549f012bef09780cb598fdc0e794566deb39c6bec86"
+        }
+      ],
+      "static_object_clip_reuse": false
+    },
+    {
+      "id": "B10",
+      "name": "封库双禁卫·左锁",
+      "kind": "bosses",
+      "body_height_world": 170,
+      "body_height_px": 216,
+      "status": "final",
+      "runtime_manifest": {
+        "path": "assets/enemies/baimen/B10/manifest.json",
+        "sha256": "cf17f42ae9fe0938ccf1afb18af33d251ad88aefb84f2d2a46a64417d1af531e"
+      },
+      "export_manifest": {
+        "path": "design/baimen-enemies-20261028/characters/B10/export-manifest.json",
+        "sha256": "622631a98dfd0934bcd50afda7562c20f01c89a22a95f9600c9006daccdd5363"
+      },
+      "measurements": {
+        "path": "design/baimen-enemies-20261028/characters/B10/measurements.json",
+        "sha256": "3b81a3f8f43c8ec5476434e82d2596c8ce85f594981840fc67c3f0f23ff349f1"
+      },
+      "selected_portrait_source": "design/baimen-enemies-20261028/characters/B10/source/master-v1.png",
+      "selected_source_poses": 20,
+      "exported_animation_frames": 20,
+      "clips": [
+        "attack",
+        "hit",
+        "idle",
+        "move",
+        "special"
+      ],
+      "action_clips": {
+        "slam": "attack",
+        "slam@0": "attack",
+        "slam@1": "special"
+      },
+      "generation_records": [
+        {
+          "path": "design/baimen-enemies-20261028/characters/B10/generation-record.json",
+          "sha256": "12c0431bb71eaf7dd0fd9487d1e1efd103817c1c118e527be4dafccacf34781c"
+        }
+      ],
+      "prompts": [
+        {
+          "path": "design/baimen-enemies-20261028/characters/B10/source/actions-v1-prompt.txt",
+          "sha256": "8687a3fd592dacce70cf80c0129ec092219f31aab4e68d29e645d2c7ea55c80b"
+        },
+        {
+          "path": "design/baimen-enemies-20261028/characters/B10/source/master-v1-prompt.txt",
+          "sha256": "dc0089b18a041899cb95f0d9b1a1b86a292a4373d844fd822e795d78e45b2555"
+        }
+      ],
+      "static_object_clip_reuse": false
+    },
+    {
+      "id": "B11",
+      "name": "巡城灯师·伞眼灯灵",
+      "kind": "bosses",
+      "body_height_world": 178,
+      "body_height_px": 216,
+      "status": "final",
+      "runtime_manifest": {
+        "path": "assets/enemies/baimen/B11/manifest.json",
+        "sha256": "3959196b3bb02cdc6d8904e9fe7cf20e23c99fa10528dd4a241b2d342f3bf1b7"
+      },
+      "export_manifest": {
+        "path": "design/baimen-enemies-20261028/characters/B11/export-manifest.json",
+        "sha256": "62b3f5003a5b5980e9d6f8c4011974d8d61fa52c95909ac79676345a50b423e5"
+      },
+      "measurements": {
+        "path": "design/baimen-enemies-20261028/characters/B11/measurements.json",
+        "sha256": "d7f46b57937e3315603904589bff1faed30e98a6b492f9982b0cea40e0bbf9b9"
+      },
+      "selected_portrait_source": "design/baimen-enemies-20261028/characters/B11/source/master-v1.png",
+      "selected_source_poses": 20,
+      "exported_animation_frames": 20,
+      "clips": [
+        "attack",
+        "hit",
+        "idle",
+        "move",
+        "special"
+      ],
+      "action_clips": {
+        "fan": "attack",
+        "pot": "special"
+      },
+      "generation_records": [
+        {
+          "path": "design/baimen-enemies-20261028/characters/B11/generation-record.json",
+          "sha256": "50d0c13e275cdbeaae1d4b151cc1a0c5614db42ed21553a2f636ab72d29a2946"
+        }
+      ],
+      "prompts": [
+        {
+          "path": "design/baimen-enemies-20261028/characters/B11/source/actions-v1-prompt.txt",
+          "sha256": "606f60f2385d53a3f6cc52d913c3c110ef3cbda2bc9c629cf0e890235e0d4c42"
+        },
+        {
+          "path": "design/baimen-enemies-20261028/characters/B11/source/master-v1-prompt.txt",
+          "sha256": "e6816de047a23b574490b70caaeb075fdb1fbda7b963e2d42a8b64ff4c5de4b6"
+        }
+      ],
+      "static_object_clip_reuse": false
+    },
+    {
+      "id": "B12",
+      "name": "瘟灯阵主·多手幡灯大巫",
+      "kind": "bosses",
+      "body_height_world": 202,
+      "body_height_px": 224,
+      "status": "final",
+      "runtime_manifest": {
+        "path": "assets/enemies/baimen/B12/manifest.json",
+        "sha256": "8fdaa2cd4436b00d19ad3b978bb38aca40aa5332a88febf6b89feba2fbc4b321"
+      },
+      "export_manifest": {
+        "path": "design/baimen-enemies-20261028/characters/B12/export-manifest.json",
+        "sha256": "7158c876afe3eeb11877449a63eb10bca13c91483faadfc0b38120d21669d2f4"
+      },
+      "measurements": {
+        "path": "design/baimen-enemies-20261028/characters/B12/measurements.json",
+        "sha256": "b82fdfde6205541fc8005f258b97569ab030d3f8d395e041dadb5d47a953893c"
+      },
+      "selected_portrait_source": "design/baimen-enemies-20261028/characters/B12/source/master-v1.png",
+      "selected_source_poses": 20,
+      "exported_animation_frames": 20,
+      "clips": [
+        "attack",
+        "hit",
+        "idle",
+        "move",
+        "special"
+      ],
+      "action_clips": {
+        "anchor": "attack",
+        "pulse": "special"
+      },
+      "generation_records": [
+        {
+          "path": "design/baimen-enemies-20261028/characters/B12/generation-record.json",
+          "sha256": "8319919f88e497d2d642e208d577ce364d58dde0bb7970e30474e864c03a1535"
+        }
+      ],
+      "prompts": [
+        {
+          "path": "design/baimen-enemies-20261028/characters/B12/source/actions-v1-prompt.txt",
+          "sha256": "9fb92293394d140af9f2fb9bb94f3db311b6db059ad328e79fbe9b295cb0c9ee"
+        },
+        {
+          "path": "design/baimen-enemies-20261028/characters/B12/source/master-v1-prompt.txt",
+          "sha256": "67b048111febc2869c2be9fcb94f1acdd7d783f7bc9ddae2fbd3da320a4f71c9"
+        }
+      ],
+      "static_object_clip_reuse": false
+    },
+    {
+      "id": "B13",
+      "name": "城垣冲将·石鸱裂垛",
+      "kind": "bosses",
+      "body_height_world": 188,
+      "body_height_px": 216,
+      "status": "final",
+      "runtime_manifest": {
+        "path": "assets/enemies/baimen/B13/manifest.json",
+        "sha256": "c39d620c8f330b347710332df5614b52c009475386936312c3fab31724d2d1a4"
+      },
+      "export_manifest": {
+        "path": "design/baimen-enemies-20261028/characters/B13/export-manifest.json",
+        "sha256": "b36bc6b60a169e202d1ae4db9cc5142e634936cc9d1913af8f20973900855695"
+      },
+      "measurements": {
+        "path": "design/baimen-enemies-20261028/characters/B13/measurements.json",
+        "sha256": "deb44a2cca7a6f2ca4738e93b82b8fd95628c42b47f07aebb49323b615eabca1"
+      },
+      "selected_portrait_source": "design/baimen-enemies-20261028/characters/B13/source/master-v1.png",
+      "selected_source_poses": 20,
+      "exported_animation_frames": 20,
+      "clips": [
+        "attack",
+        "hit",
+        "idle",
+        "move",
+        "special"
+      ],
+      "action_clips": {
+        "charge": "special",
+        "swipe": "attack"
+      },
+      "generation_records": [
+        {
+          "path": "design/baimen-enemies-20261028/characters/B13/generation-record.json",
+          "sha256": "0f9ea421d6cc0294bc7eff4ae0986395770b029718d5b98128850135e693b00a"
+        }
+      ],
+      "prompts": [
+        {
+          "path": "design/baimen-enemies-20261028/characters/B13/source/actions-v1-prompt.txt",
+          "sha256": "36d641b92c0e3b67245dd0af81b97c10b16e65ce5cfe7b6ae6d5ad1bea9e499e"
+        },
+        {
+          "path": "design/baimen-enemies-20261028/characters/B13/source/master-v1-prompt.txt",
+          "sha256": "9afcab7bab27608c136a5119493a6686144a1fb48357058e9709f107cc7c6efe"
+        }
+      ],
+      "static_object_clip_reuse": false
+    },
+    {
+      "id": "B14",
+      "name": "渡口号令者·引舟鬼帅",
+      "kind": "bosses",
+      "body_height_world": 188,
+      "body_height_px": 216,
+      "status": "final",
+      "runtime_manifest": {
+        "path": "assets/enemies/baimen/B14/manifest.json",
+        "sha256": "1f1ceee4ce5d6c1db84e30d6aa8aedddd9ca3be309f43a70da46ca4f527225f4"
+      },
+      "export_manifest": {
+        "path": "design/baimen-enemies-20261028/characters/B14/export-manifest.json",
+        "sha256": "05bdaf9ffb86ade9f8ceb0c46fd3d557b39dfdb92cc6e0864f21f255ffc2e328"
+      },
+      "measurements": {
+        "path": "design/baimen-enemies-20261028/characters/B14/measurements.json",
+        "sha256": "eee6e841c4c9670edeadf192cd25fca523121c6ffde47ee6427e9de134af0dc6"
+      },
+      "selected_portrait_source": "design/baimen-enemies-20261028/characters/B14/source/master-v1.png",
+      "selected_source_poses": 20,
+      "exported_animation_frames": 20,
+      "clips": [
+        "attack",
+        "hit",
+        "idle",
+        "move",
+        "special"
+      ],
+      "action_clips": {
+        "command": "special",
+        "swipe": "attack"
+      },
+      "generation_records": [
+        {
+          "path": "design/baimen-enemies-20261028/characters/B14/generation-record.json",
+          "sha256": "79a85512114ea43977d74bd0327144c8b18c8f1269c29ef42bb9f9813fda2a07"
+        }
+      ],
+      "prompts": [
+        {
+          "path": "design/baimen-enemies-20261028/characters/B14/source/actions-v1-prompt.txt",
+          "sha256": "827323ca874b2aa8d795aaee6e9b899dc07d302f429b8f984cd7285b25dc4545"
+        },
+        {
+          "path": "design/baimen-enemies-20261028/characters/B14/source/master-v1-prompt.txt",
+          "sha256": "de9e474938037eeec4a6b6be48c202d6080189ba4c5fb81257d6ed2bc56cec2c"
+        }
+      ],
+      "static_object_clip_reuse": false
+    },
+    {
+      "id": "B15",
+      "name": "曹休·鬼猎兽相",
+      "kind": "featured",
+      "body_height_world": 204,
+      "body_height_px": 216,
+      "status": "final",
+      "runtime_manifest": {
+        "path": "assets/enemies/baimen/B15/manifest.json",
+        "sha256": "8c0dc9ef371a96c18e7e039ca9537ff1660bd1fd91e28b3226b6f04f4dd799ed"
+      },
+      "export_manifest": {
+        "path": "design/baimen-enemies-20261028/characters/B15/export-manifest.json",
+        "sha256": "6a20d8a6e8895a8cb0ae5e783ea812a8a6f6fae20aa4a75879192506156eb5a5"
+      },
+      "measurements": {
+        "path": "design/baimen-enemies-20261028/characters/B15/measurements.json",
+        "sha256": "8ac2c64b2cf369d0ce0f6c60faecdc130eada4740916470369e2edb7bd5f2a58"
+      },
+      "selected_portrait_source": "design/baimen-enemies-20261028/characters/B15/source/master-v1.png",
+      "selected_source_poses": 24,
+      "exported_animation_frames": 24,
+      "clips": [
+        "attack",
+        "command",
+        "hit",
+        "idle",
+        "move",
+        "special"
+      ],
+      "action_clips": {
+        "charge": "special",
+        "command": "command",
+        "fan": "attack",
+        "shot": "attack"
+      },
+      "generation_records": [
+        {
+          "path": "design/baimen-enemies-20261028/characters/B15/generation-actions-v1.json",
+          "sha256": "43b6d562e99f0037eb294da36824294139b01c9994c48643ec186778af8b2973"
+        },
+        {
+          "path": "design/baimen-enemies-20261028/characters/B15/generation-master-v1.json",
+          "sha256": "8d550f0ca5403abe192cf0d72312d6ada60c8748f1c02789c9325c9bbbc3a61b"
+        }
+      ],
+      "prompts": [
+        {
+          "path": "design/baimen-enemies-20261028/characters/B15/actions-v1-prompt.txt",
+          "sha256": "4bbb8b000a103c941820081ce9c8ffd7b4d8a02a37ac206295081115c1cce672"
+        },
+        {
+          "path": "design/baimen-enemies-20261028/characters/B15/master-v1-prompt.txt",
+          "sha256": "cbfd6c7e6d45c179284d9d27f416634a836edf4225c29c3129f4e453782ab8c4"
+        }
+      ],
+      "static_object_clip_reuse": false
+    },
+    {
+      "id": "B16",
+      "name": "曹纯·虎豹甲骑巨相",
+      "kind": "featured",
+      "body_height_world": 218,
+      "body_height_px": 224,
+      "status": "final",
+      "runtime_manifest": {
+        "path": "assets/enemies/baimen/B16/manifest.json",
+        "sha256": "b96ade28f51323c5c1af4b7e625775609582954e34356a34af064720b3275f9b"
+      },
+      "export_manifest": {
+        "path": "design/baimen-enemies-20261028/characters/B16/export-manifest.json",
+        "sha256": "a2360a87a4a445b1460ce8d32188cfc3f6854de860ff2ac5f91c58760dfef028"
+      },
+      "measurements": {
+        "path": "design/baimen-enemies-20261028/characters/B16/measurements.json",
+        "sha256": "42192d41ee35bf07067e750ae822059feeebfd68d90d21afcccd52f93a3ccf17"
+      },
+      "selected_portrait_source": "design/baimen-enemies-20261028/characters/B16/source/master-v1.png",
+      "selected_source_poses": 20,
+      "exported_animation_frames": 20,
+      "clips": [
+        "attack",
+        "hit",
+        "idle",
+        "move",
+        "special"
+      ],
+      "action_clips": {
+        "charge": "attack",
+        "command": "special",
+        "summon": "special"
+      },
+      "generation_records": [
+        {
+          "path": "design/baimen-enemies-20261028/characters/B16/generation-actions-v1.json",
+          "sha256": "6517ff1ad02a19bf9e6fb372b247fb5d1e3eac3e64f436779f48559ab2c226c1"
+        },
+        {
+          "path": "design/baimen-enemies-20261028/characters/B16/generation-charge-repair-v1.json",
+          "sha256": "83b32000c516b97d9c5b185f241bc72d4f0a16eb859bf0b1044e02b848d6317f"
+        },
+        {
+          "path": "design/baimen-enemies-20261028/characters/B16/generation-command-repair-v1.json",
+          "sha256": "869d726e1fa6cb9f9cd390ae2b06d56c8e231d34889f8752f03d74d5da9de334"
+        },
+        {
+          "path": "design/baimen-enemies-20261028/characters/B16/generation-master-v1.json",
+          "sha256": "076508d78724a979447e8adc77a01851fb008f32adf3ca8bc9c4f7970370e0be"
+        }
+      ],
+      "prompts": [
+        {
+          "path": "design/baimen-enemies-20261028/characters/B16/actions-v1-prompt.txt",
+          "sha256": "9287b5c79513a1c8dedd6ea864e6ba5f394aaab18e1b9db64d8edb0db4d7adee"
+        },
+        {
+          "path": "design/baimen-enemies-20261028/characters/B16/charge-repair-v1-prompt.txt",
+          "sha256": "3b03a8e76cd550cac8667ea096d707e9e972dcc73224f1558d4c17cb582f7e62"
+        },
+        {
+          "path": "design/baimen-enemies-20261028/characters/B16/command-repair-v1-prompt.txt",
+          "sha256": "edb7ba23849615949e9e0e2f4f66529ae595e0116c055b53052272faa912164a"
+        },
+        {
+          "path": "design/baimen-enemies-20261028/characters/B16/master-v1-prompt.txt",
+          "sha256": "f2f129771ee94d6b2bfdadb224ca61d629ee13488a89f33d56fa8e672f907d97"
+        }
+      ],
+      "static_object_clip_reuse": false
+    },
+    {
+      "id": "B17",
+      "name": "张辽·夜叉裂阵将相",
+      "kind": "featured",
+      "body_height_world": 220,
+      "body_height_px": 224,
+      "status": "final",
+      "runtime_manifest": {
+        "path": "assets/enemies/baimen/B17/manifest.json",
+        "sha256": "96722ccbdaffff531d784950991e16df6fa46f41a8ff6caf1a9c1929c57c28be"
+      },
+      "export_manifest": {
+        "path": "design/baimen-enemies-20261028/characters/B17/export-manifest.json",
+        "sha256": "e16a7754a0188e69e8c1f3eb3626ff585f275d5c9bfa2e0d6088a6f5c5a9258c"
+      },
+      "measurements": {
+        "path": "design/baimen-enemies-20261028/characters/B17/measurements.json",
+        "sha256": "7f80dfdcf24bba47c972d72b19ff59408dd5ea7e321d4f15e9b57b65bafcd83e"
+      },
+      "selected_portrait_source": "design/baimen-enemies-20261028/characters/B17/source/master-v1.png",
+      "selected_source_poses": 20,
+      "exported_animation_frames": 20,
+      "clips": [
+        "attack",
+        "hit",
+        "idle",
+        "move",
+        "special"
+      ],
+      "action_clips": {
+        "charge": "attack",
+        "collaboration": "special",
+        "command": "special"
+      },
+      "generation_records": [
+        {
+          "path": "design/baimen-enemies-20261028/characters/B17/generation-actions-v1.json",
+          "sha256": "36d6925d3978c74115d7316d280241b12a042a44acfd3eb8bb1c6c005808bb83"
+        },
+        {
+          "path": "design/baimen-enemies-20261028/characters/B17/generation-master-v1.json",
+          "sha256": "dc0c6b81a1e1764a19bcebbdc79f3f7a4f3fbd441a181ba2b4f0ea86bff804e5"
+        },
+        {
+          "path": "design/baimen-enemies-20261028/characters/B17/generation-move-repair-v1.json",
+          "sha256": "c71993e2d602f0ba874d97e0503a33b0286ee8cf5a81f6f4dd83630140afda86"
+        }
+      ],
+      "prompts": [
+        {
+          "path": "design/baimen-enemies-20261028/characters/B17/actions-v1-prompt.txt",
+          "sha256": "a85e200248fd9e1acba34a80578784945bffa0bf2d81663d1c3e6a12b3919ab1"
+        },
+        {
+          "path": "design/baimen-enemies-20261028/characters/B17/master-v1-prompt.txt",
+          "sha256": "b2d019a3e5e2ee7e4e6360febe3518600ab4a13957318ca0c1e865bf09fcec29"
+        },
+        {
+          "path": "design/baimen-enemies-20261028/characters/B17/move-repair-v1-prompt.txt",
+          "sha256": "0c50ecb5f153302325f6433c62f5db6aa01474114d84960c74a8334f585eaac1"
+        }
+      ],
+      "static_object_clip_reuse": false
+    },
+    {
+      "id": "B18",
+      "name": "吕布·四臂鬼神相",
+      "kind": "featured",
+      "body_height_world": 248,
+      "body_height_px": 224,
+      "status": "final",
+      "runtime_manifest": {
+        "path": "assets/enemies/baimen/B18/manifest.json",
+        "sha256": "117d11ec966757c1cc39ebe53ec14ac12126662035a5b666bc8943b627b9609c"
+      },
+      "export_manifest": {
+        "path": "design/baimen-enemies-20261028/characters/B18/export-manifest.json",
+        "sha256": "06d6680c1ad6b3c97b799d61534392029adc2d9a4c522b435a5ba124af035471"
+      },
+      "measurements": {
+        "path": "design/baimen-enemies-20261028/characters/B18/measurements.json",
+        "sha256": "3c8940cd6276ef8a2fd5e00c0b93d4618fd4854d69c65b03ab4af7c24d06082e"
+      },
+      "selected_portrait_source": "design/baimen-enemies-20261028/characters/B18/source/master-v1.png",
+      "selected_source_poses": 24,
+      "exported_animation_frames": 24,
+      "clips": [
+        "attack",
+        "hit",
+        "idle",
+        "move",
+        "slam",
+        "special"
+      ],
+      "action_clips": {
+        "charge": "special",
+        "pulse": "slam",
+        "slam": "slam",
+        "swipe": "attack"
+      },
+      "generation_records": [
+        {
+          "path": "design/baimen-enemies-20261028/characters/B18/generation-actions-v1.json",
+          "sha256": "7bc8fa2845933ad4be807c400ae353fe067c0bb90af5cb6a5f7551450254f50e"
+        },
+        {
+          "path": "design/baimen-enemies-20261028/characters/B18/generation-master-v1.json",
+          "sha256": "36d6345ff0047ef89e9aff75a16b5df10215ff25a44b1c4845275cab4f807596"
+        }
+      ],
+      "prompts": [
+        {
+          "path": "design/baimen-enemies-20261028/characters/B18/actions-v1-prompt.txt",
+          "sha256": "3ca467653a2939ae8c20b146cef0ed9fe261102a3e6e6f728c89ef947a4cefc7"
+        },
+        {
+          "path": "design/baimen-enemies-20261028/characters/B18/master-v1-prompt.txt",
+          "sha256": "022f937b21c3e5f5e3823350ef78d78530d2296e5481f08f6775fcd6f481798e"
+        }
+      ],
+      "static_object_clip_reuse": false
+    },
+    {
+      "id": "B10_R",
+      "name": "封库双禁卫·右锁",
+      "kind": "bosses",
+      "body_height_world": 170,
+      "body_height_px": 224,
+      "status": "final",
+      "runtime_manifest": {
+        "path": "assets/enemies/baimen/B10_R/manifest.json",
+        "sha256": "5d8149e005f145dfd0131531fb6ffee35f0e37a32059d0c800a59b82a1478458"
+      },
+      "export_manifest": {
+        "path": "design/baimen-enemies-20261028/characters/B10_R/export-manifest.json",
+        "sha256": "286812296e48dff467179dcd088c9c0e7ca79f716be334acc051befd6245cb20"
+      },
+      "measurements": {
+        "path": "design/baimen-enemies-20261028/characters/B10_R/measurements.json",
+        "sha256": "3be3707fca0cc0175f3010a3ce5f6436480dd28fc92bbcbc45d6402aec2e52c2"
+      },
+      "selected_portrait_source": "design/baimen-enemies-20261028/characters/B10_R/source/master-v1.png",
+      "selected_source_poses": 20,
+      "exported_animation_frames": 20,
+      "clips": [
+        "attack",
+        "hit",
+        "idle",
+        "move",
+        "special"
+      ],
+      "action_clips": {
+        "slam": "attack",
+        "slam@0": "attack",
+        "slam@1": "special"
+      },
+      "generation_records": [
+        {
+          "path": "design/baimen-enemies-20261028/characters/B10_R/generation-record.json",
+          "sha256": "ab6c80dba04242672a89c2697db0fd9db6b64a739e5b77481a4d577ccee6573b"
+        }
+      ],
+      "prompts": [
+        {
+          "path": "design/baimen-enemies-20261028/characters/B10_R/source/actions-v1-prompt.txt",
+          "sha256": "09527c03be3f5d7bb3b18f7cc17e6ac7d0afb8670064cb85cdd099d8f7ba3f2d"
+        },
+        {
+          "path": "design/baimen-enemies-20261028/characters/B10_R/source/master-v1-prompt.txt",
+          "sha256": "63d63b621c9f78be4c2d97af2c8683693a5d29d710e8fb5213c3a66ceb295a5c"
+        }
+      ],
+      "static_object_clip_reuse": false
+    },
+    {
+      "id": "M03_WAR",
+      "name": "高顺·城壁铠魂",
+      "kind": "featured",
+      "body_height_world": 200,
+      "body_height_px": 216,
+      "status": "final",
+      "runtime_manifest": {
+        "path": "assets/enemies/baimen/M03_WAR/manifest.json",
+        "sha256": "f8158ff6b68fa9aae3816f75a9262af0815784e1596bcad24b30ed50153f37bb"
+      },
+      "export_manifest": {
+        "path": "design/baimen-enemies-20261028/characters/M03_WAR/export-manifest.json",
+        "sha256": "76622eb831130b053a1f6db5a0985b8d2e3ea83542828f463401adc5622e9963"
+      },
+      "measurements": {
+        "path": "design/baimen-enemies-20261028/characters/M03_WAR/measurements.json",
+        "sha256": "3e8c07424219e822b708b8df861f6f9a455cc54d17e175f0f3baca4f846c05ba"
+      },
+      "selected_portrait_source": "design/baimen-enemies-20261028/characters/M03_WAR/source/master-v1.png",
+      "selected_source_poses": 20,
+      "exported_animation_frames": 20,
+      "clips": [
+        "attack",
+        "hit",
+        "idle",
+        "move",
+        "special"
+      ],
+      "action_clips": {
+        "collaboration": "attack",
+        "command": "special",
+        "swipe": "attack"
+      },
+      "generation_records": [
+        {
+          "path": "design/baimen-enemies-20261028/characters/M03_WAR/generation-attack-repair-v1.json",
+          "sha256": "9b36fe212f478cb567feed77efd6da73d4ad44682c5d292dd5c29d373ad48d37"
+        },
+        {
+          "path": "design/baimen-enemies-20261028/characters/M03_WAR/generation-master-v1.json",
+          "sha256": "a35f6ddb9c1943fbff523614f919da9a2e544950fadc025012460632aac069c2"
+        },
+        {
+          "path": "design/baimen-enemies-20261028/characters/M03_WAR/generation-sheet-v1.json",
+          "sha256": "9bc033d8da714a2aaf7f497da0e80b7a79886f078d25d876addf12ebb2a2d613"
+        },
+        {
+          "path": "design/baimen-enemies-20261028/characters/M03_WAR/generation-special-repair-v1.json",
+          "sha256": "496cb0aa8bf6499fd959633e8b986f87704ede38bf54f9ff1d6affb0d95a1e60"
+        }
+      ],
+      "prompts": [
+        {
+          "path": "design/baimen-enemies-20261028/characters/M03_WAR/attack-repair-v1-prompt.txt",
+          "sha256": "0c2ae613c06357f0cbfb5fe5800643488e0f0915c7ec5645c9adc62d64fab7d4"
+        },
+        {
+          "path": "design/baimen-enemies-20261028/characters/M03_WAR/master-v1-prompt.txt",
+          "sha256": "fef04a3c296e47c0b3056c8b32ca7534a060812538ef060f116cf48faba63767"
+        },
+        {
+          "path": "design/baimen-enemies-20261028/characters/M03_WAR/sheet-v1-prompt.txt",
+          "sha256": "841a6360ce21622e26eb363e3baa33073f07eac812086e06b6bd96094022407f"
+        },
+        {
+          "path": "design/baimen-enemies-20261028/characters/M03_WAR/special-repair-v1-prompt.txt",
+          "sha256": "a29cc6ec370c99f8593f7a6dece7cffa63a33a991e4210ef801b7888ecb8e4c9"
+        }
+      ],
+      "static_object_clip_reuse": false
+    },
+    {
+      "id": "M04_WAR",
+      "name": "陈宫·卷轴冥相",
+      "kind": "featured",
+      "body_height_world": 190,
+      "body_height_px": 192,
+      "status": "final",
+      "runtime_manifest": {
+        "path": "assets/enemies/baimen/M04_WAR/manifest.json",
+        "sha256": "795b38aae993b8f15a81f109196c6244b672f7505bc51572e43a11be101ecf64"
+      },
+      "export_manifest": {
+        "path": "design/baimen-enemies-20261028/characters/M04_WAR/export-manifest.json",
+        "sha256": "8da0a5ce2c87d1852a739320f6bc7580e3264a296fdaff8fb092850bb9b94e9f"
+      },
+      "measurements": {
+        "path": "design/baimen-enemies-20261028/characters/M04_WAR/measurements.json",
+        "sha256": "5f4a587df3793f98fe0fe52daf0dbd4cbb3bfa336a2f857050b39d92fbdd409c"
+      },
+      "selected_portrait_source": "design/baimen-enemies-20261028/characters/M04_WAR/source/master-v2.png",
+      "selected_source_poses": 20,
+      "exported_animation_frames": 20,
+      "clips": [
+        "attack",
+        "hit",
+        "idle",
+        "move",
+        "special"
+      ],
+      "action_clips": {
+        "collaboration": "special",
+        "pulse": "special",
+        "swipe": "attack"
+      },
+      "generation_records": [
+        {
+          "path": "design/baimen-enemies-20261028/characters/M04_WAR/generation-master-v1.json",
+          "sha256": "abb73e96a621d97eb2f03756d9aab8be7aac430554916f226a52dc939ac1fbfb"
+        },
+        {
+          "path": "design/baimen-enemies-20261028/characters/M04_WAR/generation-master-v2.json",
+          "sha256": "c9627e8fc6d70666a7a62b4d2ae038bc015111134a5f60173a5b83607d841467"
+        },
+        {
+          "path": "design/baimen-enemies-20261028/characters/M04_WAR/generation-sheet-v1.json",
+          "sha256": "0aceacb92215e529ad79fcd4b684794e0d47cd6f629c636506beb397239cedc6"
+        }
+      ],
+      "prompts": [
+        {
+          "path": "design/baimen-enemies-20261028/characters/M04_WAR/master-v1-prompt.txt",
+          "sha256": "daca0a0b415b36a092cbbaf2eba62648bfe75cd5a5fac0299bf27314654df9cf"
+        },
+        {
+          "path": "design/baimen-enemies-20261028/characters/M04_WAR/master-v2-prompt.txt",
+          "sha256": "31c0252ad9df08146d7b8f9d6ffa1016013d22ec076c4fd3431a33dd6399333e"
+        },
+        {
+          "path": "design/baimen-enemies-20261028/characters/M04_WAR/sheet-v1-prompt.txt",
+          "sha256": "5237c2ef2ac75629de6108f634e45e985f1ea73cf85c30002d6458d1e95b3b0a"
+        }
+      ],
+      "static_object_clip_reuse": false
+    },
+    {
+      "id": "D03",
+      "name": "灯锚",
+      "kind": "object",
+      "body_height_world": 46,
+      "body_height_px": 64,
+      "status": "final",
+      "runtime_manifest": {
+        "path": "assets/enemies/baimen/D03/manifest.json",
+        "sha256": "8b0b1cf4652f5366964cdf70e77b59ab1f31ea6844fe7ce3bc169168c9ab6a29"
+      },
+      "export_manifest": {
+        "path": "design/baimen-enemies-20261028/characters/D03/export-manifest.json",
+        "sha256": "b6456a12d72b05d142ec0d9eab72c478d743d22f64a1230c1fbdd6d17b3ee7a9"
+      },
+      "measurements": {
+        "path": "design/baimen-enemies-20261028/characters/D03/measurements.json",
+        "sha256": "36d456c8c3d923c0d7659eb74c2d1e15ea19ac9231aa25ba8d19592523b531bd"
+      },
+      "selected_portrait_source": "design/baimen-enemies-20261028/characters/D03/source/portrait-v1.png",
+      "selected_source_poses": 8,
+      "exported_animation_frames": 20,
+      "clips": [
+        "attack",
+        "hit",
+        "idle",
+        "move",
+        "special"
+      ],
+      "action_clips": {},
+      "generation_records": [
+        {
+          "path": "design/baimen-enemies-20261028/characters/D03/generation-record.json",
+          "sha256": "01e8f4f3d21c19e6647d64a584ced9dd9f6a19b4f32cbf330c4b8451a3ebad7b"
+        }
+      ],
+      "prompts": [
+        {
+          "path": "design/baimen-enemies-20261028/characters/D03/portrait-prompt.txt",
+          "sha256": "2b62830dd51d8c1aa8cda5a9620be096e30444b9eea8d9ed66135acb7198baf2"
+        },
+        {
+          "path": "design/baimen-enemies-20261028/characters/D03/sheet-prompt.txt",
+          "sha256": "d19d0c7ff6f63b999e11b148d8bb06c8d7e9211c507a486b653525a19565b032"
+        }
+      ],
+      "static_object_clip_reuse": true
+    },
+    {
+      "id": "D05",
+      "name": "待孵棺卵",
+      "kind": "object",
+      "body_height_world": 38,
+      "body_height_px": 64,
+      "status": "final",
+      "runtime_manifest": {
+        "path": "assets/enemies/baimen/D05/manifest.json",
+        "sha256": "d69a307533614e1216793bc057b4f32d3730a27aefe986094436073770235b0b"
+      },
+      "export_manifest": {
+        "path": "design/baimen-enemies-20261028/characters/D05/export-manifest.json",
+        "sha256": "07dce938a948fcf64dd9edbb71ad480726b7c54c65adc89fd77b50a4c82bcc13"
+      },
+      "measurements": {
+        "path": "design/baimen-enemies-20261028/characters/D05/measurements.json",
+        "sha256": "dced557179356474aa625e703b9ad9b0958601d74ae0471eb5abecd7dcc4752d"
+      },
+      "selected_portrait_source": "design/baimen-enemies-20261028/characters/D05/source/portrait-v1.png",
+      "selected_source_poses": 8,
+      "exported_animation_frames": 20,
+      "clips": [
+        "attack",
+        "hit",
+        "idle",
+        "move",
+        "special"
+      ],
+      "action_clips": {},
+      "generation_records": [
+        {
+          "path": "design/baimen-enemies-20261028/characters/D05/generation-record.json",
+          "sha256": "d563d1473959c9416dcc648dc1c9aa4f78f5e3ce74e91bf2682b67af2b942b66"
+        }
+      ],
+      "prompts": [
+        {
+          "path": "design/baimen-enemies-20261028/characters/D05/portrait-prompt.txt",
+          "sha256": "e22a96252a97a63534b7c8dad173927dc8210d2a16d48d92fb691767aa4d5c5b"
+        },
+        {
+          "path": "design/baimen-enemies-20261028/characters/D05/sheet-prompt.txt",
+          "sha256": "8f117269ea992d169e6d092535e497bfd605f70461df64c65e81a7642b84e866"
+        }
+      ],
+      "static_object_clip_reuse": true
+    }
+  ],
+  "reuse": {
+    "D01": {
+      "source": "E01",
+      "runtime_manifest": {
+        "path": "assets/enemies/baimen/D01/manifest.json",
+        "sha256": "3716c43b1dcacbb0ada0b06b04ef4f9a4ac21c5698649bc70c23afdc71efb0db"
+      }
+    },
+    "L00": {
+      "source": "E01",
+      "kind": "catalog visual_id alias"
+    }
+  },
+  "effects_manifest": {
+    "path": "design/baimen-enemies-20261028/effects/manifest.json",
+    "sha256": "7d8ce86757e7d95364e889ccaca0729481c82bee4e88643e97d639d28a3906cf"
+  },
+  "existing_effect_reuse": {
+    "source": "Current Jia Weisuo slash, thrust and sweep animation assets",
+    "audit": "design/baimen-enemies-20261028/vfx-reuse-audit.json"
+  },
+  "verification": {
+    "mechanics": "docs/implementation/evidence/2026-10-28/enemies/runtime/",
+    "campaigns": "docs/implementation/evidence/2026-10-28/enemies/content/",
+    "rendering": "design/baimen-enemies-20261028/final-evidence/",
+    "root_visual_review": "design/baimen-enemies-20261028/final-evidence/root-visual-review.json",
+    "packed_resource_verification": "design/baimen-enemies-20261028/final-evidence/pack/verification.json",
+    "final_campaign_metadata": "docs/implementation/evidence/2026-10-28/enemies/content/verification-metadata.json",
+    "graph_update": "design/baimen-enemies-20261028/final-evidence/logs/graphify-update.log",
+    "rendering_manifest": "design/baimen-enemies-20261028/final-evidence/verification.json"
+  },
+  "review_scope": {
+    "source_and_integration_review": "production agents plus root visual inspection",
+    "user_individual_art_approval": false,
+    "human_gameplay_balance_finalized": false,
+    "named_identity_provenance": "Six featured war forms retain faces/identity from the current provisional named character atlas; original card provenance remains design/card-rarity-20261027/manifest.json."
+  },
+  "previews": {
+    "featured": "design/baimen-enemies-20261028/final-evidence/animations/featured/gallery-1280-page00-preview.gif",
+    "effects": "design/baimen-enemies-20261028/final-evidence/fx/runtime-preview.gif"
+  }
+}

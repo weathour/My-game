@@ -1,0 +1,112 @@
+{
+  "captured_at": "2026-10-28T23:16:00.850658",
+  "version_status": "runtime_semantics_review_v2",
+  "engine": "4.6.2.stable.official.71f334935",
+  "all_tests_integrity_passed": true,
+  "balance_finalized_claim": false,
+  "isolated_sessions": {
+    "count": 18,
+    "outcomes": {
+      "victory": 18
+    },
+    "fixed_level_formula": "1 + floor(route_index * 0.6)",
+    "members": "B01 JIA; B02–B18 JIA/F11/N16",
+    "equipment": [
+      "plain_blade",
+      "cloth_armor",
+      "ember_seal"
+    ],
+    "initial_resources": "record() full resources for isolated fixture only",
+    "enemy_stat_override": false,
+    "synthetic_victory": false,
+    "field_selection": "none",
+    "campaign_reachable_build_claim": false
+  },
+  "continuous_campaigns": {
+    "count": 2,
+    "reward_seed": 781103,
+    "routes": [
+      {
+        "route": "short",
+        "finished": true,
+        "actual_battles": 12,
+        "expected": 12,
+        "stop_reason": ""
+      },
+      {
+        "route": "explore",
+        "finished": true,
+        "actual_battles": 15,
+        "expected": 15,
+        "stop_reason": ""
+      }
+    ],
+    "injected_owned": false,
+    "injected_character_level": false,
+    "injected_character_hp_mp": false,
+    "enemy_stat_override": false,
+    "synthetic_victory": false,
+    "initial_state": "new CAMPAIGN reset; only RNG seed selected before begin_campaign",
+    "reward_policy": "select from actual persisted candidates; short prioritizes N16/N17 and avoids F03/N13; explore prioritizes F11/N07; actual choices fully logged",
+    "equipment_policy": "only equip actually awarded inventory; long_spear/iron_armor/frost_jade when earned",
+    "field_policy": "walk normally to equipment field until 3 fixed missing items earned; then short training, explore card elite",
+    "combat_inputs": "ordinary movement using current warning/projectile geometry; skill requests every 30 frames; switch to healthy owned member below 25% HP",
+    "B17_B18_boundary": "all owned records compared exactly between B17 post-story/reward and B18 start request; no fountain or HP/MP/CD override",
+    "short_B17_jia_exit": {
+      "cooldowns": {
+        "JIA_basic": 0.672947510094213,
+        "armor_guard": 0.800000000000003,
+        "jia_break": 0.0,
+        "jia_sweep": 1.26666666666668
+      },
+      "dead": false,
+      "hp": 383.017508196721,
+      "level": 14,
+      "mp": 12.7083333333311,
+      "xp": 162.0
+    },
+    "short_B18_jia_entry": {
+      "cooldowns": {
+        "JIA_basic": 0.672947510094213,
+        "armor_guard": 0.800000000000003,
+        "jia_break": 0.0,
+        "jia_sweep": 1.26666666666668
+      },
+      "dead": false,
+      "hp": 383.017508196721,
+      "level": 14,
+      "mp": 12.7083333333311,
+      "xp": 162.0
+    },
+    "limits": "two deterministic automated legal builds; not a claim of human difficulty or all-random-build balance"
+  },
+  "transactions": {
+    "synthetic_victory_fixture": true,
+    "route_topology_paths": 64,
+    "representative_full_campaign_routes": 4,
+    "purpose": "state machine/rewards/story/save compatibility only"
+  },
+  "prior_evidence": "initial/final intermediate logs and original B12 timeout preserved; superseded mechanics are not final acceptance evidence",
+  "hash_capture_note": "captured after runs; W1 final resolver curse_settled-only shield fix does not affect JIA/F11/N16 or F11/N07 campaigns, per W1 scope review",
+  "file_sha256": {
+    "scripts/content/enemy_catalog.gd": "dd6760c5878bac8b931e9b42081018487fff08b9d37ecb541123495934324826",
+    "scripts/content/stage_catalog.gd": "49c895779ebafceaab5967b729482a696a102181be80ba6e3598c68d39a922df",
+    "scripts/tests/chronicle_enemy_content_smoke.gd": "800a9cc28dddda81e48d841810860d9b1352dbbc6b2cbe94723bd98a49392270",
+    "scripts/tests/chronicle_enemy_sessions_smoke.gd": "5b42bc77711d15dccc83fd49d3825de810e633c21907492a3ae5a90f52f2d215",
+    "scripts/tests/chronicle_enemy_campaign_smoke.gd": "f8e92d4a3385a363b540aa45777a643bff7fd192a646f012ae38293785f8cf0d",
+    "scripts/battle/ability_definition.gd": "e633f09670a3d389028117ef3ed3b72b71aa198edb012cce4ff53cd1a33379bf",
+    "scripts/battle/ability_system.gd": "80b75e8d4c363e49430951290dfd19af6d0b735a8717b4398216b714da3acc49",
+    "scripts/battle/battle_input.gd": "ecbff771999fa8c8c8ed0354a8a3abbfe57749c79edd5287271a44b9bcad3a4d",
+    "scripts/battle/battle_session.gd": "c6cc93261260bcaeebebdbb668470d6c7e80642effb4d6898969ca1732355d42",
+    "scripts/battle/battle_space.gd": "8505ffe3b61661c3e6ae031b16e754d5728101e3b5e95be4859a5d1cbde40485",
+    "scripts/battle/character_runtime.gd": "7d7cf83ac6d611fc2410a518c78b50ab377ac0e9f49f7e5f9f5d8d3f6e674129",
+    "scripts/battle/combat_mechanics.gd": "44bbae72c801337f165a1210e9080e9d688ec2e9d0853aa1dcd9a4a64d77499f",
+    "scripts/battle/combat_resolver.gd": "24437cdbf808d4e85a521d3fd8450f994946463484e601584e78b9e8f8398cc6",
+    "scripts/battle/enemy_geometry.gd": "5785362b32c33f325beefbcdb4c9ce0a906791d131f077d8914b8b6255995078",
+    "scripts/battle/enemy_runtime.gd": "c21be72c1fcc6f8a539630c460e6096c1adefbacc6333ec937c0641a7cc5bcdf",
+    "scripts/battle/enemy_system.gd": "69e49c58d7171756b2176338466beb6d9263419289c33b6946409df3c566bd99",
+    "scripts/battle/stage_director.gd": "1e0bf690e455fcbfaf47e76560650c9ca35f8056c5977c377623e0ec03f09c07",
+    "scripts/battle/targeting.gd": "060455d6bf74a0180d4de29b795f498af33b929da07c9cb00567d6a3162cc344"
+  },
+  "post_run_text_only_edit": "E12 visible name unified to 碑背石龟; no stats/actions/runtime edits"
+}

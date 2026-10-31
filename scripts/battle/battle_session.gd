@@ -1,0 +1,458 @@
+extends RefCounted
+## One disposable attempt. No UI, disk access, role talents, or global scene lookups.
+const C := preload("res://scripts/content/combat_catalog.gd")
+const CHARACTER := preload("res://scripts/battle/character_runtime.gd")
+const DIRECTOR := preload("res://scripts/battle/stage_director.gd")
+const ABILITIES := preload("res://scripts/battle/ability_system.gd")
+const A := preload("res://scripts/battle/ability_definition.gd")
+const TARGETS := preload("res://scripts/battle/targeting.gd")
+const RESOLVER := preload("res://scripts/battle/combat_resolver.gd")
+const ENEMIES := preload("res://scripts/battle/enemy_system.gd")
+const SPACE := preload("res://scripts/battle/battle_space.gd")
+const MECHANICS := preload("res://scripts/battle/combat_mechanics.gd")
+
+var attempt_id: String
+var members: Array
+var characters: Dictionary = {}
+var roster: Dictionary
+var equipment: Dictionary
+var director: RefCounted
+var position := SPACE.CENTER
+var facing := Vector2.RIGHT
+var active := 0
+var switch_cooldown := 0.0
+var enemies: Array = []
+var projectiles: Array = []
+var gems: Array = []
+var effects: Array = []
+var hazards: Array = []
+var telegraphs: Array = []
+var delivery_serial := 0
+var target_hold := 0.0
+var enemy_slow := 0.0
+var enemy_slow_remaining := 0.0
+var events: Array = []
+var outcome := ""
+var result: Dictionary = {}
+var paused := false
+var target_id := -1
+var cast_serial := 0
+var _switch_intent := 0
+var _skill_intents: Array[int] = []
+var _hits: Array = []
+# Only presentation provenance; never consulted by damage or reward calculations.
+var _last_damage_feedback: Dictionary = {}
+var mechanics: RefCounted
+
+func _init(request: Dictionary) -> void:
+	attempt_id = request.attempt_id
+	members = request.members.duplicate()
+	roster = request.characters.duplicate(true)
+	equipment = request.equipment.duplicate(true)
+	director = DIRECTOR.new(request.stage, int(request.seed))
+	var bonuses := C.owned_bonuses(roster)
+	for id in members: characters[id] = CHARACTER.new(id, roster[id], C.attributes(id, int(roster[id].level), bonuses, equipment))
+	mechanics = MECHANICS.new(self)
+	if str(director.config.get("encounter_mode", "")) == "boss_duel":
+		enemies.append_array(director.tick(0, 0, position, enemies))
+
+func current() -> RefCounted:
+	return characters[members[active]]
+
+func request_switch(direction: int) -> void:
+	if not paused and outcome.is_empty(): _switch_intent = signi(direction)
+
+func request_skill(slot: int) -> void:
+	if not paused and outcome.is_empty() and slot in [0, 1] and slot not in _skill_intents: _skill_intents.append(slot)
+
+func set_paused(value: bool) -> void:
+	paused = value
+	_switch_intent = 0
+	_skill_intents.clear()
+
+func tick(delta: float, movement: Vector2) -> void:
+	if paused or not outcome.is_empty(): return
+	events.clear()
+	_hits.clear()
+	switch_cooldown = maxf(0, switch_cooldown - delta)
+	for character in characters.values(): character.tick(delta)
+	mechanics.tick(delta)
+	_process_switch()
+	var actor := current()
+	enemy_slow_remaining = maxf(0, enemy_slow_remaining - delta)
+	if enemy_slow_remaining <= 0: enemy_slow = 0
+	var actor_movement_speed: float = (1 - enemy_slow) * actor.stats.move * (1.25 if actor.haste > 0 else 1.0)
+	position += movement.limit_length(1) * actor_movement_speed * delta
+	position = SPACE.clamp_point(position, SPACE.PLAYER_MARGIN)
+	var ordinary_count := 0
+	for enemy in enemies:
+		if not enemy.dead and enemy.parent_id == 0 and enemy.rank in ["ordinary", "heavy"]: ordinary_count += 1
+	enemies.append_array(director.tick(delta, ordinary_count, position, enemies))
+	target_hold = maxf(0, target_hold - delta)
+	var target := TARGETS.nearest(enemies, position, 580, target_id)
+	if target != null:
+		if target.id != target_id and target_hold <= 0: target_id = target.id; target_hold = 0.25
+		for locked in enemies:
+			if locked.id == target_id and not locked.dead: facing = (locked.position - position).normalized(); break
+	elif movement.length_squared() > 0.01: facing = movement.normalized()
+	for slot in _skill_intents:
+		var manuals: Array = C.definition(actor.id).manual
+		if slot < manuals.size(): _cast(manuals[slot], actor, true, true)
+	_skill_intents.clear()
+	_cast(C.basic(actor.id, equipment), actor, true)
+	for ability in C.definition(actor.id).automatic: _cast(ability, actor, true)
+	for id in members:
+		if id == actor.id or characters[id].dead: continue
+		var support: Resource = C.definition(id).support
+		if support != null and not mechanics.support_is_reactive(id, support): _cast(support, characters[id], false)
+	_resolve_hits()
+	var transition_safe := _has_safe_transition()
+	var hostile := ENEMIES.step(enemies, position, delta, {"hazards":hazards, "config":director.config, "actor_speed":actor_movement_speed})
+	for spawn_descriptor in hostile.spawns:
+		enemies.append(director.derivative(spawn_descriptor, enemies))
+	events.append_array(hostile.events)
+	for event in hostile.events:
+		if event.kind == "enemy_slow": enemy_slow = float(event.slow); enemy_slow_remaining = float(event.duration)
+	_refresh_telegraphs()
+	_cancel_transition_sources()
+	projectiles.append_array(hostile.projectiles)
+	effects.append_array(hostile.effects)
+	var incoming: Array = hostile.hits
+	var incoming_sources: Array = hostile.hit_sources
+	_update_projectiles(delta, incoming, incoming_sources)
+	# All already-issued impacts resolve before terminal state. Rendering never budgets damage.
+	_resolve_hits()
+	for incoming_index in incoming.size():
+		if transition_safe or _has_safe_transition(): continue
+		var hit_result := {}
+		var loss: float = mechanics.receive_hit(actor, float(incoming[incoming_index]), equipment, hit_result)
+		if bool(hit_result.get("processed", false)):
+			var player_event: Dictionary = incoming_sources[incoming_index].duplicate() if incoming_index < incoming_sources.size() else {}
+			player_event.source_position = player_event.get("position", position)
+			player_event.direction = (position - Vector2(player_event.source_position)).normalized()
+			player_event.merge(hit_result, true)
+			player_event.merge({"kind":"player_hit", "id":actor.id, "position":position, "time":director.elapsed}, true)
+			events.append(player_event)
+		if loss > 0:
+			events.append({"kind":"hurt", "amount":loss, "id":actor.id})
+			var damage_event: Dictionary = incoming_sources[incoming_index].duplicate() if incoming_index < incoming_sources.size() else {}
+			damage_event.merge({"kind":"damage_taken", "amount":loss, "id":actor.id, "time":director.elapsed}, true)
+			events.append(damage_event)
+	_resolve_hits()
+	_collect_form_events()
+	_cleanup_sources()
+	var boss_dead := false
+	for i in range(enemies.size() - 1, -1, -1):
+		var enemy: RefCounted = enemies[i]
+		if not enemy.dead: continue
+		var killed: bool = enemy.death_reason in ["", "killed"]
+		if killed:
+			var had_card_reward: bool = director.card_elite
+			var had_equipment_reward: bool = director.equipment_elite
+			director.defeated(enemy)
+			var final_boss: bool = enemy.kind == "boss" and enemy.hp_owner == null
+			boss_dead = boss_dead or final_boss
+			if final_boss: events.append({"kind":"boss_defeated", "id":enemy.id, "enemy_id":enemy.id, "position":enemy.position, "phase":enemy.form_index, "form_index":enemy.form_index, "form_count":enemy.form_count, "form_name":enemy.form_name})
+			if enemy.xp > 0: gems.append({"position":enemy.position, "amount":enemy.xp})
+			var kill_event := _enemy_feedback(enemy)
+			kill_event.merge({"source":"", "ability":"", "mechanic":"", "cast":0, "cast_id":0, "delivery":0, "direct":false, "secondary":false, "direction":Vector2.ZERO}, true)
+			kill_event.merge(_last_damage_feedback.get(enemy.id, {}), true)
+			# A transformed/banked death retains its causal source but its current
+			# corpse appearance and position, rather than a stale impact snapshot.
+			kill_event.merge(_enemy_feedback(enemy), true)
+			kill_event.merge({"kind":"kill", "id":enemy.id, "living":enemy.rank != "object", "lethal":true, "time":director.elapsed}, true)
+			events.append(kill_event)
+			var reward_kind := "card" if director.card_elite and not had_card_reward else "equipment" if director.equipment_elite and not had_equipment_reward else ""
+			if not reward_kind.is_empty():
+				var reward_event := kill_event.duplicate()
+				reward_event.merge({"kind":"elite_defeated", "reward_kind":reward_kind, "provisional":true, "requires_victory":true}, true)
+				events.append(reward_event)
+		else: events.append({"kind":"enemy_remove", "id":enemy.id, "reason":enemy.death_reason})
+		_last_damage_feedback.erase(enemy.id)
+		enemies.remove_at(i)
+	if characters.JIA.dead:
+		_finish("failed")
+		return
+	if actor.dead:
+		active = 0
+		target_id = -1
+		events.append({"kind":"message", "text":"%s阵亡，贾苇索接战。" % actor.id})
+	if boss_dead:
+		var swept_amount := 0.0
+		var swept_count := gems.size()
+		for gem in gems: grant_experience(gem.amount)
+		for gem in gems: swept_amount += float(gem.amount)
+		if swept_count > 0: events.append({"kind":"xp_pickup", "amount":swept_amount, "position":position, "count":swept_count, "collection":"victory_sweep", "time":director.elapsed})
+		gems.clear()
+		if director.elapsed <= director.config.bonus_time: grant_experience(18.0)
+		_finish("victory")
+		return
+	_update_gems(delta)
+	if director.field == -1:
+		for i in 4:
+			if position.distance_to(DIRECTOR.FIELD_POSITIONS[i]) < 38: choose_field(i); break
+	for i in range(effects.size() - 1, -1, -1):
+		effects[i].life -= delta
+		if effects[i].life <= 0: effects.remove_at(i)
+
+func _process_switch() -> void:
+	var direction := _switch_intent
+	_switch_intent = 0
+	if direction == 0 or switch_cooldown > 0: return
+	for offset in range(1, members.size()):
+		var next := posmod(active + direction * offset, members.size())
+		if not characters[members[next]].dead:
+			active = next
+			switch_cooldown = 0.5
+			target_id = -1
+			return
+
+func manual_cost(ability: Resource, id: String = "") -> float:
+	var key: String = current().id if id.is_empty() else id
+	if not characters.has(key) or not outcome.is_empty(): return ability.mana_cost
+	return mechanics.cost(ability, characters[key], true)
+
+func mechanic_status(id: String) -> Dictionary:
+	if outcome.is_empty(): return mechanics.status(id)
+	if not characters.has(id): return {}
+	return {"id":id, "dead":characters[id].dead, "shield":0.0, "core":"", "label":"", "value":0.0, "max":0.0, "remaining":0.0, "detail":"", "support_available":false, "windows":[]}
+
+func _resolve_hits() -> void:
+	var deliveries := {}
+	var index := 0
+	while index < _hits.size():
+		var hit: Dictionary = _hits[index]
+		index += 1
+		var receiver: RefCounted = hit.target.damage_owner()
+		var group := str(hit.context.get("delivery", -index)) + ":" + str(receiver.id)
+		if deliveries.has(group): continue
+		deliveries[group] = true
+		var previous_budget: float = receiver.remaining_health_budget()
+		var previous_phase: int = receiver.form_index
+		var feedback := _enemy_feedback(hit.target)
+		mechanics.resolve_hit(hit.target, hit.context)
+		var applied := maxf(0, previous_budget - receiver.remaining_health_budget())
+		if applied > 0:
+			feedback.merge({"kind":"damage_dealt", "enemy_id":receiver.id, "definition_id":receiver.definition_id, "phase":previous_phase, "amount":applied,
+				"source":str(hit.context.get("source", "")), "ability":str(hit.context.get("ability", "")), "mechanic":str(hit.context.get("mechanic", "")),
+				"direct":bool(hit.context.get("direct", false)), "secondary":bool(hit.context.get("secondary", false)), "time":director.elapsed,
+				"cast":int(hit.context.get("cast", 0)), "cast_id":int(hit.context.get("cast", 0)), "delivery":int(hit.context.get("delivery", 0)),
+				"damage_type":int(hit.context.get("damage_type", 0)), "lethal":receiver.dead,
+				"direction":hit.context.get("impact_direction", Vector2.ZERO)}, true)
+			events.append(feedback)
+			_last_damage_feedback[receiver.id] = feedback.duplicate()
+	_hits.clear()
+
+func _enemy_feedback(enemy: RefCounted) -> Dictionary:
+	return {"enemy_id":enemy.id, "target_id":enemy.id, "definition_id":enemy.definition_id, "position":enemy.position,
+		"rank":enemy.rank, "enemy_kind":enemy.kind, "target_kind":enemy.kind, "visual_id":enemy.visual_id,
+		"radius":enemy.radius, "body_height":enemy.body_height, "form_count":enemy.form_count, "form_name":enemy.form_name,
+		"material":str(enemy.definition.get("material", enemy.params.get("material", ""))),
+		"target_is_elite":enemy.rank == "field_elite" or enemy.kind in ["card_elite", "equipment_elite"],
+		"target_is_boss":enemy.kind == "boss", "phase":enemy.form_index}
+
+func _cast(ability: Resource, source: RefCounted, direct: bool, manual: bool = false) -> bool:
+	if not manual and source.cooldowns.get(ability.id, 0.0) > 0: return false
+	if not mechanics.can_cast(ability, source): return false
+	var query_reach: float = mechanics.query_reach(ability, source, direct)
+	# Melee impacts already include each receiver's radius. Use that same
+	# eligibility before aiming, without borrowing a larger neighbor's radius.
+	var melee_shape: bool = ability.kind in [A.Kind.SWEEP, A.Kind.THRUST]
+	var candidates: Array = TARGETS.in_shape(enemies, position, facing, query_reach, false, true) if melee_shape else enemies
+	var target := TARGETS.nearest(candidates, position, INF if melee_shape else query_reach, target_id)
+	cast_serial += 1
+	var cast := ABILITIES.activate(ability, source, position, target, facing, equipment, direct, cast_serial, mechanics.cost(ability, source, manual), manual)
+	if cast.has("error"):
+		if manual: events.append({"kind":"message", "text":cast.error})
+		return false
+	cast = mechanics.prepare(cast)
+	events.append({"kind":"cast", "id":source.id, "ability":str(ability.id), "paid":float(cast.context.paid), "manual":manual, "direct":direct,
+		"shield_spent":float(cast.context.get("shield_spent", 0)), "ammo_spent":int(cast.context.get("ammo_spent", 0)), "time":director.elapsed,
+		"position":cast.origin, "origin":cast.origin, "direction":cast.direction, "cast":int(cast.context.cast), "cast_id":int(cast.context.cast),
+		"damage_type":ability.damage_type, "ability_kind":ability.kind})
+	if manual: events.append({"kind":"message", "text":ability.title})
+	_execute_payload(cast)
+	mechanics.on_paid(cast)
+	return true
+
+func _execute_payload(cast: Dictionary) -> void:
+	var ability: Resource = cast.ability
+	var context: Dictionary = delivery_context(cast.context)
+	context.impact_origin = cast.origin
+	context.impact_direction = cast.direction
+	cast = cast.duplicate()
+	cast.context = context
+	var source: RefCounted = characters[context.source]
+	var targets: Array = mechanics.receivers(source, ability.target_scope)
+	if not mechanics.special(cast):
+		match ability.kind:
+			A.Kind.HEAL:
+				for receiver in targets: receiver.hp = minf(receiver.stats.hp, receiver.hp + ability.damage_scale + source.level * 1.5)
+			A.Kind.MANA:
+				for receiver in targets: receiver.mp = minf(receiver.stats.mp, receiver.mp + ability.damage_scale)
+			A.Kind.WARD:
+				for receiver in targets: mechanics.add_shield(receiver, ability.damage_scale, float(ability.params.get("shield_cap_ratio", 0.35)))
+			A.Kind.PROJECTILE:
+				projectiles.append({"position":cast.origin, "velocity":cast.direction * 420, "life":cast.reach / 420 + 0.2, "hostile":false, "context":context})
+			_:
+				for enemy in TARGETS.in_shape(enemies, cast.origin, cast.direction, cast.reach, ability.kind == A.Kind.THRUST, ability.kind == A.Kind.NOVA):
+					_hits.append({"target":enemy, "context":context})
+	var direct: bool = context.direct
+	var manual: bool = bool(context.get("manual", false))
+	var color := "support" if not direct else "manual" if manual else "basic"
+	var beneficiary := ""
+	var beneficiaries: Array = []
+	if ability.kind in [A.Kind.HEAL, A.Kind.MANA, A.Kind.WARD]:
+		for receiver in targets: beneficiaries.append(receiver.id)
+		if not targets.is_empty(): beneficiary = targets[0].id
+	effects.append({"kind":"ring" if ability.kind == A.Kind.NOVA else "slash" if ability.kind in [A.Kind.SWEEP, A.Kind.THRUST] else "cast", "origin":cast.origin,
+		"direction":cast.direction, "radius":cast.reach if ability.kind in [A.Kind.NOVA, A.Kind.SWEEP, A.Kind.THRUST] else 25, "life":0.22, "color":color, "narrow":ability.kind == A.Kind.THRUST,
+		"source":source.id, "ability":str(ability.id), "cast":context.cast, "direct":direct,
+		"visual_time":director.elapsed, "beneficiary":beneficiary, "beneficiaries":beneficiaries})
+
+func _update_projectiles(delta: float, incoming: Array, incoming_sources: Array = []) -> void:
+	for i in range(projectiles.size() - 1, -1, -1):
+		var p: Dictionary = projectiles[i]
+		var start: Vector2 = p.position
+		p.position += p.velocity * delta
+		p.life -= delta
+		var hit := false
+		if p.hostile:
+			if Geometry2D.get_closest_point_to_segment(position, start, p.position).distance_to(position) < 16 + float(p.get("hit_radius", 4)):
+				incoming.append(p.damage)
+				incoming_sources.append({"enemy_id":int(p.get("source_id", p.get("source", 0))), "attack":str(p.get("move_id", "projectile")), "position":p.position})
+				hit = true
+		else:
+			var first: RefCounted
+			var best := INF
+			for enemy in enemies:
+				if enemy.dead or not enemy.targetable: continue
+				if Geometry2D.get_closest_point_to_segment(enemy.position, start, p.position).distance_to(enemy.position) <= enemy.radius + 5:
+					var distance: float = start.distance_squared_to(enemy.position)
+					if distance < best: first = enemy; best = distance
+			if first != null:
+				var impact: Dictionary = delivery_context(p.context)
+				impact.impact_origin = start
+				impact.impact_direction = p.velocity.normalized()
+				_hits.append({"target":first, "context":impact})
+				if float(p.context.get("splash_radius", 0)) > 0:
+					for other in TARGETS.in_shape(enemies, first.position, Vector2.RIGHT, float(p.context.splash_radius), false, true):
+						if other != first: _hits.append({"target":other, "context":impact})
+				# Pure presentation descriptor: the immutable launch context supplies
+				# identity even when a different party member is now controlled.
+				effects.append({"kind":"impact", "origin":first.position, "direction":p.velocity.normalized(), "radius":26.0,
+					"life":0.22, "color":"basic" if p.context.direct else "support", "source":p.context.source,
+					"ability":p.context.ability, "cast":p.context.cast, "direct":p.context.direct, "visual_time":director.elapsed})
+				hit = true
+		if hit or p.life <= 0: projectiles.remove_at(i)
+
+func _update_gems(delta: float) -> void:
+	for i in range(gems.size() - 1, -1, -1):
+		var gap: Vector2 = position - gems[i].position
+		if gap.length() < 125: gems[i].position += gap.normalized() * 330 * delta
+		if gap.length() < 35:
+			events.append({"kind":"xp_pickup", "amount":float(gems[i].amount), "position":gems[i].position, "count":1, "collection":"contact", "time":director.elapsed})
+			grant_experience(gems[i].amount)
+			gems.remove_at(i)
+
+func grant_experience(amount: float, only_id: String = "") -> void:
+	var recipients: Array = members if only_id.is_empty() else [only_id]
+	var leveled: Array = []
+	for id in recipients:
+		var character: RefCounted = characters[id]
+		character.xp += amount / recipients.size()
+		while character.xp >= C.xp_required(character.level):
+			character.xp -= C.xp_required(character.level)
+			character.level += 1
+			if id not in leveled: leveled.append(id)
+		roster[id] = character.snapshot()
+	if leveled.is_empty(): return
+	var bonuses := C.owned_bonuses(roster)
+	for id in members:
+		var character: RefCounted = characters[id]
+		character.stats = C.attributes(id, character.level, bonuses, equipment)
+		if id in leveled and not character.dead: character.hp = character.stats.hp; character.mp = character.stats.mp
+	for id in leveled: events.append({"kind":"level", "id":id, "level":characters[id].level})
+
+func choose_field(index: int) -> bool:
+	if paused or not outcome.is_empty() or not director.choose_field(index): return false
+	var actor := current()
+	match index:
+		0:
+			var bonuses := C.owned_bonuses(roster)
+			actor.hp = minf(actor.stats.hp, actor.hp + actor.stats.hp * (0.6 + bonuses.get("supply_hp", 0.0)))
+			actor.mp = minf(actor.stats.mp, actor.mp + actor.stats.mp * (0.6 + bonuses.get("supply_mp", 0.0)))
+		1: grant_experience(24.0, actor.id)
+		2, 3: enemies.append(director.spawn("card_elite" if index == 2 else "equipment_elite", SPACE.challenge_position(position)))
+	events.append({"kind":"message", "text":["补给已使用", "当前人物获得修习经验", "额外选卡精英已出现", "装备精英已出现"][index]})
+	return true
+
+func _finish(value: String) -> void:
+	if not outcome.is_empty(): return
+	outcome = value
+	var records := {}
+	for id in members: records[id] = characters[id].snapshot()
+	result = {"attempt_id":attempt_id, "outcome":outcome, "characters":records,
+		"card_elite":director.card_elite, "equipment_elite":director.equipment_elite,
+		"elapsed":director.elapsed, "kills":director.kills, "fast_clear":director.elapsed <= director.config.bonus_time}
+	projectiles.clear()
+	hazards.clear()
+	telegraphs.clear()
+	for enemy in enemies:
+		enemy.telegraph.clear(); enemy.windup = 0; enemy.active_remaining = 0; enemy.state = "removed"; enemy.death_reason = "combat_end"
+	effects.clear()
+	_hits.clear()
+	mechanics.clear()
+	for actor in characters.values(): actor.clear_temporary()
+
+func delivery_context(original: Dictionary) -> Dictionary:
+	delivery_serial += 1
+	var copy := original.duplicate()
+	copy.delivery = delivery_serial
+	return copy
+
+func _refresh_telegraphs() -> void:
+	telegraphs.clear()
+	for enemy in enemies:
+		if not enemy.dead and not enemy.telegraph.is_empty(): telegraphs.append(enemy.telegraph)
+	for hazard in hazards:
+		if hazard.phase == "tell": telegraphs.append(hazard)
+
+func _cleanup_sources() -> void:
+	var dead_ids := {}
+	for enemy in enemies:
+		if enemy.dead: dead_ids[enemy.id] = true
+	for enemy in enemies:
+		if enemy.hp_owner != null:
+			enemy.hp = enemy.hp_owner.hp
+			if enemy.hp_owner.dead: enemy.dead = true; enemy.death_reason = "source_cancel"
+		if dead_ids.has(enemy.parent_id) and enemy.definition_id in ["D03", "D05"]:
+			enemy.dead = true; enemy.death_reason = "source_cancel"
+	for i in range(hazards.size() - 1, -1, -1):
+		if dead_ids.has(int(hazards[i].owner_id)): hazards.remove_at(i)
+	_refresh_telegraphs()
+
+func _collect_form_events() -> void:
+	for enemy in enemies:
+		if enemy.phase_change_pending:
+			events.append(ENEMIES.phase_event(enemy))
+			enemy.phase_change_pending = false
+	_cancel_transition_sources()
+
+func _cancel_transition_sources() -> void:
+	var transitioning := {}
+	for enemy in enemies:
+		if enemy.transition_remaining > 0: transitioning[enemy.id] = true
+	if transitioning.is_empty(): return
+	for i in range(hazards.size() - 1, -1, -1):
+		if transitioning.has(int(hazards[i].owner_id)): hazards.remove_at(i)
+	for i in range(projectiles.size() - 1, -1, -1):
+		if bool(projectiles[i].get("hostile", false)) and transitioning.has(int(projectiles[i].get("source_id", projectiles[i].get("source", -1)))): projectiles.remove_at(i)
+	for child in enemies:
+		if transitioning.has(child.parent_id) and not child.targetable:
+			child.dead = true; child.death_reason = "source_cancel"
+
+func _has_safe_transition() -> bool:
+	for enemy in enemies:
+		if not enemy.dead and enemy.transition_remaining > 0: return true
+	return false

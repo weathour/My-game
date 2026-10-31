@@ -1,0 +1,158 @@
+{
+  "date": "2026-10-29",
+  "baseline_commit": "71a6e65f5a58c1af421d7bca35d84e2797e67dfc",
+  "source_sha256": {
+    "design/music-20261025/render_batch.py": "faffb4e9f4dffd82869849ba8d14002dcd9d37de885b1cc22d9df4759fb2d342",
+    "design/music-20261025/render.lua": "455607e49785b6ed00441b94ce03a5be03fe4716d3d747f3d871bf70cce1f2af",
+    "design/music-20261025/master.py": "a6173921c83e697f17fa54475323eb1ca9de7ff78790f9ad5b28a401102671c4"
+  },
+  "render_jobs": {
+    "batch_1": {
+      "success": true,
+      "job": "/tmp/mygame-render-unattended-check-1",
+      "cues": [
+        "camp_signal",
+        "victory",
+        "defeat"
+      ],
+      "files": [
+        {
+          "cue": "camp_signal",
+          "frames": 9845040,
+          "sample_rate": 48000,
+          "channels": 2,
+          "duration_seconds": 205.105,
+          "wav_sha256": "378adf46ad7b226138de16644480833809fd94c6175efd8d6c04d24488706b44",
+          "project_sha256": "21b739e60cab18e0599860a4501e15971bafe5e76fe6b4f3e4764aec4183a552"
+        },
+        {
+          "cue": "victory",
+          "frames": 634176,
+          "sample_rate": 48000,
+          "channels": 2,
+          "duration_seconds": 13.212,
+          "wav_sha256": "077764c8e0f9e152183a2acf711f4e70312cc6a7daf20be2404959a6b82c31a5",
+          "project_sha256": "4db2adc81c44857808efdf1dbdd4e792a2ced1dcade1deac81745321af8ca20f"
+        },
+        {
+          "cue": "defeat",
+          "frames": 783984,
+          "sample_rate": 48000,
+          "channels": 2,
+          "duration_seconds": 16.333,
+          "wav_sha256": "8820d401639c98aaa0aa97a85151dee7683e6a2d832e58fb3250cc6da6adab81",
+          "project_sha256": "c64e0d69b762ca013ae18a8f4e1fbfdf75fbf6bd9d78fca561988883aea86ccf"
+        }
+      ],
+      "elapsed_seconds": 20.12
+    },
+    "batch_2": {
+      "success": true,
+      "job": "/tmp/mygame-render-unattended-check-2",
+      "cues": [
+        "camp_signal",
+        "victory",
+        "defeat"
+      ],
+      "files": [
+        {
+          "cue": "camp_signal",
+          "frames": 9845040,
+          "sample_rate": 48000,
+          "channels": 2,
+          "duration_seconds": 205.105,
+          "wav_sha256": "f603adc93f7f014bb9d8113414e80e47f2aea8cbcf37b2aeb2734fde38b2c76f",
+          "project_sha256": "8ba6bed256f9dae8ca5168fc26b9778298e37e0a72ffa3081ed53dd854b2af91"
+        },
+        {
+          "cue": "victory",
+          "frames": 634176,
+          "sample_rate": 48000,
+          "channels": 2,
+          "duration_seconds": 13.212,
+          "wav_sha256": "f2307cfb6f76f0c9c39d26871f1624e54cb23aa63d4ce35702575b6c9b07eb9c",
+          "project_sha256": "35eb0fff3bc9ffa4de14181995640e87e1c45bf9f376baebb6d25a7054aa37cf"
+        },
+        {
+          "cue": "defeat",
+          "frames": 783984,
+          "sample_rate": 48000,
+          "channels": 2,
+          "duration_seconds": 16.333,
+          "wav_sha256": "dae3626abb282effa4d2f8921b42aa4313dc8ff4d69d880ed98c1d98e876109f",
+          "project_sha256": "e531cfc71763578fb13ac6b41b1e7897e3794ee6bc86c2050ce25d77cd3d1ab0"
+        }
+      ],
+      "elapsed_seconds": 17.86
+    },
+    "fresh_profile": {
+      "success": true,
+      "job": "/tmp/mygame-render-fresh-profile-check",
+      "cues": [
+        "victory"
+      ],
+      "files": [
+        {
+          "cue": "victory",
+          "frames": 634176,
+          "sample_rate": 48000,
+          "channels": 2,
+          "duration_seconds": 13.212,
+          "wav_sha256": "877103d5cebd298c050dd1c4983487c980ba90babb960cd9107b0cb7ca15bfc2",
+          "project_sha256": "69601a3a90d322a6de49646475739d8466d878c8f3c66f4c3c3df60f2c6c32b9"
+        }
+      ],
+      "elapsed_seconds": 2.43
+    },
+    "forced_timeout": {
+      "success": false,
+      "job": "/tmp/mygame-render-timeout-check",
+      "cues": [
+        "camp_signal"
+      ],
+      "error": "Render timed out; inspect windows.txt/desktop.png",
+      "elapsed_seconds": 0.3
+    },
+    "invalid_score": {
+      "success": false,
+      "job": "/tmp/mygame-render-script-error-check",
+      "cues": [
+        "defeat"
+      ],
+      "error": "REAPER did not complete the batch; see render.log",
+      "elapsed_seconds": 1.27
+    }
+  },
+  "mastering_staging_qa": {
+    "victory": {
+      "duration_seconds": 8.1261875,
+      "sample_rate": 48000,
+      "channels": 2,
+      "integrated_lufs": -21.96,
+      "true_peak_dbtp": -5.58,
+      "mono_loss_db": -2.365,
+      "linear_gain_db": 11.84,
+      "seam_correction_peak": 0.0,
+      "pcm_boundary_step": 0,
+      "vorbis_boundary_step": 0,
+      "frames": 390057,
+      "loop": false,
+      "reaper_source_sha256": "077764c8e0f9e152183a2acf711f4e70312cc6a7daf20be2404959a6b82c31a5",
+      "flac_sha256": "785ded00bfbfbbb8abe1210dc2a3e9b3d8fb63dc5b0ea65556e92a908b02585b",
+      "ogg_sha256": "f41683679eaac8009b6edcaafb385aa81b11eea7d3b5894167b233f68828975e"
+    }
+  },
+  "checks": {
+    "nonempty_render_output_refused_without_changes": true,
+    "unknown_cue_refused_before_job_creation": true,
+    "nonempty_master_output_refused_without_changes": true,
+    "official_audio_sha256_matches_28_original_qa_entries": true,
+    "python_ast_parse": true,
+    "godot_headless_exit": 0,
+    "graphify_update_exit": 0,
+    "graphify_candidate_accepted": false,
+    "graphify_missing_runtime_gd": 206,
+    "render_instances_exited_after_success_and_failure": true
+  },
+  "scope": "Three existing cues rendered twice; one cue with fresh REAPER config; one staged master. No full soundtrack rerender or human listening acceptance. Official RPP, FLAC and Ogg remain unchanged."
+}

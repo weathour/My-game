@@ -1,0 +1,104 @@
+{
+  "status": "implemented_and_visually_reviewed",
+  "scope": "enemy_codex and its tests only; navigation, theme, background asset and campaign transactions owned elsewhere",
+  "reference": "/tmp/my-game-ui-ref-20261029/blackmyth/entry-chiefs-millenium.jpg (layout reference only; no game screenshot used as runtime art)",
+  "behavior": {
+    "default": "one full standing illustration; pixel animation hidden until Moves mode",
+    "scope": "current stage by default; separate stage/all controls",
+    "categories": {
+      "ordinary": 12,
+      "elite": 7,
+      "boss": 18,
+      "other": 6
+    },
+    "all_records": 43,
+    "engineering_values": "body height, hurt radius and raw windup/recovery seconds removed from player interface",
+    "combat": "on-demand combat intelligence; existing short description and counterplay retained",
+    "animation": "all optional clips retained; complete alpha union fitted at one fixed scale per identity; actual selector signal keeps label and clip synchronized; pause freezes frame",
+    "modal": "keyboard focus cycle contained; wheel stays in codex; Escape handled before closed; shell restores resize-safe opener focus"
+  },
+  "checks": {
+    "focused_headless": {
+      "checks": 668,
+      "failures": 0,
+      "log": "docs/design-reviews/evidence/2026-10-29/ui-simplification/codex/headless.log"
+    },
+    "focused_opengl": {
+      "checks": 668,
+      "failures": 0,
+      "log": "docs/design-reviews/evidence/2026-10-29/ui-simplification/codex/render.log"
+    },
+    "existing_presentation_regression": {
+      "checks": 370,
+      "failures": 0,
+      "log": "docs/design-reviews/evidence/2026-10-29/ui-simplification/codex/presentation-regression.log"
+    },
+    "required_startup": {
+      "exit_code": 0,
+      "log": "docs/design-reviews/evidence/2026-10-29/ui-simplification/codex/startup.log"
+    }
+  },
+  "overlapping_checks_not_additive": true,
+  "sizes": [
+    [
+      960,
+      540
+    ],
+    [
+      1280,
+      720
+    ],
+    [
+      1920,
+      1080
+    ]
+  ],
+  "screenshots": [
+    {
+      "path": "docs/design-reviews/evidence/2026-10-29/ui-simplification/codex/screens/moves-1280-b16.png",
+      "sha256": "2ffdd9b9935a7ca37be4e4f6a675f948a4b93240ee52d7a73d3799123640392a"
+    },
+    {
+      "path": "docs/design-reviews/evidence/2026-10-29/ui-simplification/codex/screens/moves-1280-b18.png",
+      "sha256": "4c3fcd5a021425cc43e7b3356b03c40d9bd533996e5844c3fed42b9d3962de7c"
+    },
+    {
+      "path": "docs/design-reviews/evidence/2026-10-29/ui-simplification/codex/screens/moves-1920-b16.png",
+      "sha256": "46b4f8358c36efffd9a360a2cedc1bfa0c1e3752122c8ebe0f9ea53ebf05140d"
+    },
+    {
+      "path": "docs/design-reviews/evidence/2026-10-29/ui-simplification/codex/screens/moves-960-b16.png",
+      "sha256": "c92dff46456ccd502586b1d5fe82ccf69c8a2f4be5e47d6865cfdae493c2b1bc"
+    },
+    {
+      "path": "docs/design-reviews/evidence/2026-10-29/ui-simplification/codex/screens/portrait-1280-b16.png",
+      "sha256": "2e3ea63ae4509008432012be2fb59b6a9da017007e7c394182d82a1884e927ce"
+    },
+    {
+      "path": "docs/design-reviews/evidence/2026-10-29/ui-simplification/codex/screens/portrait-1280-b18.png",
+      "sha256": "5383babd68a5c2fb93fdbb2e99936c3f286ff25be2d4f7a71c3f0f770ae3c74c"
+    },
+    {
+      "path": "docs/design-reviews/evidence/2026-10-29/ui-simplification/codex/screens/portrait-1920-b16.png",
+      "sha256": "4d266455baaac7f03fc943e51cea11a6d322ab7e34131ba2ab1d401b4c1f9cac"
+    },
+    {
+      "path": "docs/design-reviews/evidence/2026-10-29/ui-simplification/codex/screens/portrait-1920-b18.png",
+      "sha256": "e121ea7688505611d1ad1344709eb58cff8aec39daa11548c8aa44872a256ae1"
+    },
+    {
+      "path": "docs/design-reviews/evidence/2026-10-29/ui-simplification/codex/screens/portrait-960-b16.png",
+      "sha256": "d3b722608aef5a9ec31ffb5e8cf3d54aa479bb033d420a69d46ddeed0667222d"
+    },
+    {
+      "path": "docs/design-reviews/evidence/2026-10-29/ui-simplification/codex/screens/portrait-960-b18.png",
+      "sha256": "d89039d2f96bbc95556e3098d9091cdb102b7c8702e18258589f8932a773919e"
+    }
+  ],
+  "code_hashes": {
+    "scripts/ui/chronicle/enemy_codex.gd": "d3aef22cd7a1060cc20fc3dc01ea0628c93b0e8888ae4c41a2bbfc45e11b0f6a",
+    "scripts/tests/chronicle_enemy_codex_smoke.gd": "aaea5aaf71d01d2106a4685eed5ecc5fb991103b6069b05351e8dd3ac73ff2eb",
+    "scripts/tests/chronicle_enemy_presentation_smoke.gd": "6ab42a59694d2b90f2cea9bb33418a093357255e838344353be99e0d01f8b66b"
+  },
+  "visual_review": "Author inspected large B18 standing art, wide B16 animation, corrected B18 heavy-strike selector and 960 layout. Complete bodies/weapons stay visible, current entry is scrolled into view, and no parallel standing/pixel testing panels remain."
+}

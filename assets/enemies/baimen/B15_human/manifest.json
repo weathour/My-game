@@ -1,0 +1,113 @@
+{
+  "action_clips": {
+    "charge": "special",
+    "fan": "attack",
+    "hunter_aim": "attack",
+    "hunter_reposition": "special",
+    "hunter_volley": "attack",
+    "shot": "attack"
+  },
+  "anchor_px": [
+    288,
+    480
+  ],
+  "body_height_px": 224,
+  "clips": {
+    "attack": {
+      "contact_frame": 1,
+      "file": "attack.png",
+      "fps": 10,
+      "frame_size": [
+        640,
+        512
+      ],
+      "frames": 4,
+      "windup_frame": 0
+    },
+    "death": {
+      "contact_frame": 0,
+      "file": "death.png",
+      "fps": 7,
+      "frame_size": [
+        640,
+        512
+      ],
+      "frames": 2,
+      "windup_frame": 0
+    },
+    "hit": {
+      "contact_frame": 0,
+      "file": "hit.png",
+      "fps": 10,
+      "frame_size": [
+        640,
+        512
+      ],
+      "frames": 2,
+      "windup_frame": 0
+    },
+    "idle": {
+      "contact_frame": 1,
+      "file": "idle.png",
+      "fps": 6,
+      "frame_size": [
+        640,
+        512
+      ],
+      "frames": 4,
+      "windup_frame": 0
+    },
+    "move": {
+      "contact_frame": 1,
+      "file": "move.png",
+      "fps": 10,
+      "frame_size": [
+        640,
+        512
+      ],
+      "frames": 4,
+      "windup_frame": 0
+    },
+    "special": {
+      "contact_frame": 1,
+      "file": "special.png",
+      "fps": 9,
+      "frame_size": [
+        640,
+        512
+      ],
+      "frames": 3,
+      "windup_frame": 0
+    }
+  },
+  "faces_left": false,
+  "provenance": "res://design/boss-forms-20261029/characters/B15_human/export-manifest.json",
+  "status": "final",
+  "version": 1,
+  "visual_id": "B15_human",
+  "head_rect_px": [
+    380,
+    150,
+    310,
+    360
+  ],
+  "sources": {
+    "combat": {
+      "path": "design/boss-forms-20261029/characters/B15_human/source/actions-v1.png",
+      "size": [
+        1322,
+        1190
+      ],
+      "sha256": "c2fdb68f8f9a74c34946663a640c63e879066eac129a6ec0dd58cd3c2b45e5db",
+      "standing_body_height": 264
+    },
+    "master": {
+      "path": "design/boss-forms-20261029/characters/B15_human/source/master-v1.png",
+      "size": [
+        1024,
+        1536
+      ],
+      "sha256": "5976e9779f8189a918cc87fc542e3161c3825dd6ca58f3e36df846d4b84752db"
+    }
+  }
+}

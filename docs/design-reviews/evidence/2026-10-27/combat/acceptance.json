@@ -1,0 +1,89 @@
+{
+  "scope": "B01+B02 real combat and eight characters; later encounters gated",
+  "rules_checks": 66,
+  "rules_pass": true,
+  "ui_headless_pass": true,
+  "ui_rendered_pass": true,
+  "ui_layout_fixture_pass": true,
+  "required_start_pass": true,
+  "expected_fault_injections": {
+    "rules.log": 2,
+    "ui-layout-regression.log": 1
+  },
+  "screenshots": {
+    "01-title.png": [
+      1280,
+      720
+    ],
+    "02-pause.png": [
+      1280,
+      720
+    ],
+    "03-first-battle.png": [
+      1280,
+      720
+    ],
+    "04-first-reward.png": [
+      1280,
+      720
+    ],
+    "05-roster.png": [
+      1280,
+      720
+    ],
+    "06-preparation.png": [
+      1280,
+      720
+    ],
+    "07-emma.png": [
+      1280,
+      720
+    ],
+    "08-compact.png": [
+      960,
+      540
+    ],
+    "09-large.png": [
+      1920,
+      1080
+    ],
+    "10-second-battle.png": [
+      1280,
+      720
+    ],
+    "11-extra-reward.png": [
+      1280,
+      720
+    ],
+    "12-next-content.png": [
+      1280,
+      720
+    ]
+  },
+  "graph_update": {
+    "accepted": false,
+    "missing_gd_files": 166,
+    "prior_graph_preserved": true
+  },
+  "source_sha256": {
+    "scripts/battle/enemy_system.gd": "b6fdc17140deb0e9a607b3ba55a89adff0df196323f9dd441a5a1e49bfe07217",
+    "scripts/battle/battle_input.gd": "ecbff771999fa8c8c8ed0354a8a3abbfe57749c79edd5287271a44b9bcad3a4d",
+    "scripts/battle/battle_session.gd": "594ed52225a536203275cb76507f9d3bce717bd0381419e494414429c3ad1ce8",
+    "scripts/battle/ability_system.gd": "1ad77109af9ba4918651e5618db2686dd797002051774b4c2c12aea1d7aef619",
+    "scripts/battle/combat_resolver.gd": "5eeaad95a50bcb8461c001083fe78f84331881442023d7dcff2e2ae14d715f71",
+    "scripts/battle/ability_definition.gd": "c2cbdfa9e753eb5510b44800fae2c4c99172c823c70e1cf2aafc6fa00c6c45bc",
+    "scripts/battle/targeting.gd": "b68823cbca680d5103e30f0c9002fad7f4e46cea97fb6a1f299828be4178f864",
+    "scripts/battle/stage_director.gd": "1fda1c9ca36e61b56c7272ca429cd589ffd8ac0201e4c3e80fbdccfafa8c1222",
+    "scripts/battle/enemy_runtime.gd": "9c3e965c7c1b2a36a258b56f6550281f6f91c9585e9537f306b8d42b66ef16ae",
+    "scripts/battle/character_runtime.gd": "d3527fe8e5c662918ec56a272ae767a6dde0f54108f1c0a4883962e45f723aa8",
+    "scripts/campaign/reward_rules.gd": "6e9704ad3426a2977eb04f45b5afa15b1fe613964b1e6f7bbc12e72a7e470f4c",
+    "scripts/campaign/campaign_store.gd": "ee8b40817ff556e7156ae2474ef9823d05c7effd9ffa8c97b49b071aa0bd13f5",
+    "scripts/campaign/campaign_service.gd": "8f20c8e3734babb7d5b9b577d29d15d70ac705299c320b5bb5fece0d4f6a3a45",
+    "scripts/content/combat_catalog.gd": "66a3180ac17f2a324532d9059a345a2939a49b8d1eaed7156d350f51cc4d6f01",
+    "scripts/ui/chronicle/battle_view.gd": "86399efbb8bf229967af71989ea51c826b0082f3a24dc63157aae7c70d96afa0",
+    "scripts/ui/chronicle/battle_canvas.gd": "a205afad405d1f833e18fd21c5cfbae7318c6f2a3e5ce9b445ab70589b2f9185",
+    "scripts/ui/chronicle/battle_actor_view.gd": "d4ca82688d12d6409b68a8d0fc8172a0d6f2556b8e7fab4b716615b719568004",
+    "scripts/ui/chronicle/chronicle_shell.gd": "2ddeb638061fa9c924a033e42ff95b503aad5b3314aad8cfdd3d8e740d71fec9",
+    "scripts/ui/chronicle/chronicle_pages.gd": "e8a8ed338489b2fe03344a8917b315f439151454a1f386526d19990ef0d04290"
+  }
+}

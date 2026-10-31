@@ -1,0 +1,96 @@
+{
+  "scope": "Read-only independent review of formal combat feedback implementation; no runtime changes, no full regression, no ground review.",
+  "blocking_findings": [],
+  "findings": [
+    {
+      "id": "resume_drops_first_batch",
+      "priority": "P2",
+      "locations": [
+        "scripts/ui/chronicle/combat_feedback.gd:73",
+        "scripts/ui/chronicle/battle_view.gd:115"
+      ],
+      "condition": "Resume a paused battle; next tick settles hit/kill/pickup before feedback.advance synchronizes paused.",
+      "result": "consume returns using previous-frame paused=true, then BattleView clears events permanently. Probe: battle.paused=false; advance(0,true); consume(hit); advance(.016,false): damage_events delta=0, marks=0, numbers=0.",
+      "minimal_fix": "Synchronize presenter pause state from battle.paused before consumption, or sync pause explicitly before tick/consume; add resume-first-tick event test.",
+      "status": "resolved; independently re-probed after owner fix"
+    },
+    {
+      "id": "curse_direct_hits_misclassified",
+      "priority": "P2",
+      "locations": [
+        "scripts/ui/chronicle/combat_feedback.gd:99",
+        "scripts/content/roster_kit_data.gd:1201",
+        "scripts/content/roster_kit_data.gd:1223",
+        "scripts/content/roster_kit_data.gd:2834"
+      ],
+      "condition": "F05_curse/F05_spread/curse_bind initial direct hit has mechanic=curse, direct=true, secondary=false.",
+      "result": "Classified as periodic; no contact mark, number, sound or enemy confirm_hit for nonlethal direct hit. Probe damage_events=1 but marks=0 numbers=0 contacts[1].periodic=true.",
+      "minimal_fix": "Classify DOT by explicit periodic event flag or ability=curse_dot/secondary causal semantics, not mechanic=curse. Preserve direct initial curse hit.",
+      "status": "resolved; independently re-probed after owner fix"
+    },
+    {
+      "id": "secondary_overwrites_primary_contact",
+      "priority": "P2",
+      "locations": [
+        "scripts/ui/chronicle/combat_feedback.gd:103",
+        "scripts/ui/chronicle/battle_canvas.gd:139"
+      ],
+      "condition": "Same target has direct hit then secondary or DOT damage in one batch.",
+      "result": "Last event overwrites contact.periodic, suppressing primary body flash/offset. Probe direct then secondary yields contact_periodic=true.",
+      "minimal_fix": "Merge contacts with nonperiodic impact priority; do not replace existing nonperiodic contact with periodic.",
+      "status": "resolved; independently re-probed after owner fix"
+    },
+    {
+      "id": "all_enemy_tells_duck_player_feedback",
+      "priority": "P2",
+      "locations": [
+        "scripts/ui/chronicle/combat_feedback.gd:84",
+        "scripts/battle/enemy_system.gd:123"
+      ],
+      "condition": "Ordinary enemy_tell is indistinguishable from major threat; every tell stops low-priority voices and resets .22s suppression.",
+      "result": "Synthetic 20 hit batches with ordinary tells at .1s intervals: sounds_started=0, sounds_limited=20. Real encounter frequency/subjective audibility not established.",
+      "minimal_fix": "Attach major/category/position to enemy_tell and limit ducking to relevant major cues or use bounded attenuation without killing every ordinary impact.",
+      "status": "resolved; independently re-probed after owner fix"
+    }
+  ],
+  "verified_by_inspection": [
+    "Player hit facts capture true HP loss and shield absorption before armor regeneration; full shield avoids red tint.",
+    "Boss bank applies encounter-budget delta once and records last effective damaging cast for later kill; no extra damage emitted on bank release.",
+    "Presenter uses local RNG and no simulation writes/time scale changes.",
+    "Hit clip never overrides tell/active/released attack clip; sprite-only displacement does not move geometry.",
+    "Elite events are provisional/requires_victory and text explicitly states victory-after reward; actual persistence remains campaign victory-only.",
+    "Combat feedback marks/numbers/voices have 32/10/6 caps; sound_casts expires after .18s, cooldown category map fixed. Failure/exit clear feedback."
+  ],
+  "residual_bounds": [
+    "Existing death_views has .3s lifetime but no explicit count cap.",
+    "Existing enemy_battle_effects.seen grows by release count until battle end, no count/time prune.",
+    "No direct listening, interactive replay, screenshot audit or full regression in this review."
+  ],
+  "checks": [
+    {
+      "command": "godot-4.6.2 --headless --path . --script /tmp/my-game-feedback-review.gd",
+      "result": "exit 0; independent probes reproduced listed feedback defects"
+    },
+    {
+      "command": "godot-4.6.2 --headless --path . --script scripts/tests/chronicle_combat_feedback_events_smoke.gd",
+      "result": "PASS 59 checks; isolated XDG under /tmp"
+    },
+    {
+      "command": "godot-4.6.2 --headless --path . --script scripts/tests/chronicle_combat_feedback_smoke.gd",
+      "result": "Independent PASS 232 checks; isolated /tmp XDG; no capture, no full suite"
+    },
+    {
+      "command": "godot-4.6.2 --headless --path . --script /tmp/my-game-feedback-review.gd",
+      "result": "Independent rerun exit 0; all four original defect probes now show expected behavior; clean exit after explicit probe-owned node cleanup"
+    }
+  ],
+  "open_findings": [],
+  "review_result": "No remaining blocking or high-priority finding in reviewed scope after fixes. Original four P2 findings resolved by owning executor and independently rechecked.",
+  "recheck": {
+    "direct_curse": "marks=1 numbers=1 contact_periodic=false damage_events=1",
+    "direct_then_secondary": "contact_periodic=false marks=1 numbers=1",
+    "ordinary_tell_every_100ms": "sounds_started=6 limited=14; no longer silenced by every tell. This tight loop uses no wall-clock wait and may saturate real voices.",
+    "resume_first_tick": "marks=1 numbers=1 damage_events_delta=1 battle_paused=false",
+    "source_review": "consume reads current battle.paused and updates voice pause; periodic uses secondary or ability=curse_dot; contacts prefer nonperiodic; ordinary tells only duck when major is established."
+  }
+}

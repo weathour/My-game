@@ -1,0 +1,780 @@
+{
+  "version": 1,
+  "id": "B11",
+  "review_status": "accepted_for_export",
+  "review_notes": "Master and20 full poses viewed. Wide low saffron paper umbrella, darkteal ribs, multiple cool/warm lantern eyes, cream spirit-drapes and red trailing ribbons readable. Eye number simplified in pixel animation while preserving multi-eye identity. Fan clip opens/angles ribs toward right; pot clip dips eye cluster down; no effects baked in. Measured true CCs and manual low-body anchors; complete ribbon ends preserved, same scale across poses.",
+  "prompts": [
+    "source/actions-v1-prompt.txt",
+    "source/master-v1-prompt.txt"
+  ],
+  "canvas": {
+    "size": [
+      512,
+      512
+    ],
+    "anchor": [
+      256,
+      450
+    ],
+    "body_height_px": 216
+  },
+  "sources": {
+    "actions": {
+      "path": "source/actions-v1.png",
+      "size": [
+        1374,
+        1145
+      ],
+      "sha256": "f2ec40d4d0f1c9adb4b24df305b1a89bd9e4bdc86746102fbea0e5e8142b68fa",
+      "standing_body_height": 221
+    }
+  },
+  "portrait": {
+    "path": "source/master-v1.png",
+    "size": [
+      1536,
+      1024
+    ],
+    "sha256": "dd93250c48e100a5bb226d81a38f22d3e52f76aebabc65bbe3f04067b0c3d9c4"
+  },
+  "poses": [
+    {
+      "id": "p01",
+      "source": "actions",
+      "anchor_source": [
+        213,
+        237
+      ],
+      "components": [
+        {
+          "bbox": [
+            27,
+            16,
+            348,
+            237
+          ],
+          "area": 34918
+        },
+        {
+          "bbox": [
+            124,
+            171,
+            125,
+            172
+          ],
+          "area": 1
+        },
+        {
+          "bbox": [
+            29,
+            187,
+            30,
+            188
+          ],
+          "area": 1
+        },
+        {
+          "bbox": [
+            26,
+            201,
+            27,
+            202
+          ],
+          "area": 1
+        },
+        {
+          "bbox": [
+            157,
+            222,
+            158,
+            223
+          ],
+          "area": 1
+        }
+      ]
+    },
+    {
+      "id": "p02",
+      "source": "actions",
+      "anchor_source": [
+        555,
+        233
+      ],
+      "components": [
+        {
+          "bbox": [
+            374,
+            16,
+            695,
+            233
+          ],
+          "area": 34248
+        },
+        {
+          "bbox": [
+            498,
+            191,
+            499,
+            193
+          ],
+          "area": 2
+        },
+        {
+          "bbox": [
+            381,
+            208,
+            382,
+            209
+          ],
+          "area": 1
+        },
+        {
+          "bbox": [
+            537,
+            219,
+            540,
+            224
+          ],
+          "area": 9
+        },
+        {
+          "bbox": [
+            538,
+            225,
+            539,
+            226
+          ],
+          "area": 1
+        }
+      ]
+    },
+    {
+      "id": "p03",
+      "source": "actions",
+      "anchor_source": [
+        897,
+        235
+      ],
+      "components": [
+        {
+          "bbox": [
+            712,
+            18,
+            1031,
+            235
+          ],
+          "area": 33424
+        }
+      ]
+    },
+    {
+      "id": "p04",
+      "source": "actions",
+      "anchor_source": [
+        1230,
+        232
+      ],
+      "components": [
+        {
+          "bbox": [
+            1050,
+            14,
+            1358,
+            232
+          ],
+          "area": 33629
+        }
+      ]
+    },
+    {
+      "id": "p05",
+      "source": "actions",
+      "anchor_source": [
+        235,
+        448
+      ],
+      "components": [
+        {
+          "bbox": [
+            20,
+            252,
+            367,
+            448
+          ],
+          "area": 33464
+        },
+        {
+          "bbox": [
+            362,
+            413,
+            363,
+            414
+          ],
+          "area": 1
+        }
+      ]
+    },
+    {
+      "id": "p06",
+      "source": "actions",
+      "anchor_source": [
+        566,
+        442
+      ],
+      "components": [
+        {
+          "bbox": [
+            363,
+            252,
+            694,
+            442
+          ],
+          "area": 29327
+        },
+        {
+          "bbox": [
+            471,
+            315,
+            472,
+            316
+          ],
+          "area": 1
+        },
+        {
+          "bbox": [
+            437,
+            413,
+            438,
+            414
+          ],
+          "area": 1
+        }
+      ]
+    },
+    {
+      "id": "p07",
+      "source": "actions",
+      "anchor_source": [
+        911,
+        443
+      ],
+      "components": [
+        {
+          "bbox": [
+            707,
+            251,
+            1040,
+            443
+          ],
+          "area": 30787
+        },
+        {
+          "bbox": [
+            758,
+            398,
+            759,
+            399
+          ],
+          "area": 1
+        },
+        {
+          "bbox": [
+            839,
+            398,
+            840,
+            399
+          ],
+          "area": 1
+        }
+      ]
+    },
+    {
+      "id": "p08",
+      "source": "actions",
+      "anchor_source": [
+        1250,
+        442
+      ],
+      "components": [
+        {
+          "bbox": [
+            1049,
+            252,
+            1363,
+            442
+          ],
+          "area": 29693
+        },
+        {
+          "bbox": [
+            1048,
+            393,
+            1049,
+            394
+          ],
+          "area": 1
+        }
+      ]
+    },
+    {
+      "id": "p09",
+      "source": "actions",
+      "anchor_source": [
+        190,
+        681
+      ],
+      "components": [
+        {
+          "bbox": [
+            25,
+            468,
+            321,
+            681
+          ],
+          "area": 31600
+        },
+        {
+          "bbox": [
+            124,
+            631,
+            125,
+            632
+          ],
+          "area": 1
+        },
+        {
+          "bbox": [
+            186,
+            664,
+            187,
+            665
+          ],
+          "area": 1
+        },
+        {
+          "bbox": [
+            100,
+            672,
+            101,
+            673
+          ],
+          "area": 1
+        }
+      ]
+    },
+    {
+      "id": "p10",
+      "source": "actions",
+      "anchor_source": [
+        521,
+        684
+      ],
+      "components": [
+        {
+          "bbox": [
+            326,
+            473,
+            667,
+            684
+          ],
+          "area": 36017
+        }
+      ]
+    },
+    {
+      "id": "p11",
+      "source": "actions",
+      "anchor_source": [
+        866,
+        691
+      ],
+      "components": [
+        {
+          "bbox": [
+            676,
+            469,
+            1014,
+            691
+          ],
+          "area": 37740
+        },
+        {
+          "bbox": [
+            796,
+            600,
+            797,
+            601
+          ],
+          "area": 1
+        },
+        {
+          "bbox": [
+            790,
+            682,
+            791,
+            683
+          ],
+          "area": 1
+        }
+      ]
+    },
+    {
+      "id": "p12",
+      "source": "actions",
+      "anchor_source": [
+        1219,
+        691
+      ],
+      "components": [
+        {
+          "bbox": [
+            1026,
+            458,
+            1357,
+            691
+          ],
+          "area": 44368
+        },
+        {
+          "bbox": [
+            1091,
+            635,
+            1092,
+            636
+          ],
+          "area": 1
+        },
+        {
+          "bbox": [
+            1028,
+            676,
+            1029,
+            678
+          ],
+          "area": 2
+        },
+        {
+          "bbox": [
+            1060,
+            679,
+            1061,
+            680
+          ],
+          "area": 1
+        }
+      ]
+    },
+    {
+      "id": "p13",
+      "source": "actions",
+      "anchor_source": [
+        190,
+        904
+      ],
+      "components": [
+        {
+          "bbox": [
+            28,
+            704,
+            321,
+            904
+          ],
+          "area": 27870
+        },
+        {
+          "bbox": [
+            27,
+            876,
+            28,
+            877
+          ],
+          "area": 1
+        },
+        {
+          "bbox": [
+            114,
+            881,
+            115,
+            882
+          ],
+          "area": 1
+        },
+        {
+          "bbox": [
+            204,
+            890,
+            205,
+            891
+          ],
+          "area": 1
+        }
+      ]
+    },
+    {
+      "id": "p14",
+      "source": "actions",
+      "anchor_source": [
+        561,
+        910
+      ],
+      "components": [
+        {
+          "bbox": [
+            402,
+            700,
+            673,
+            910
+          ],
+          "area": 29197
+        }
+      ]
+    },
+    {
+      "id": "p15",
+      "source": "actions",
+      "anchor_source": [
+        902,
+        910
+      ],
+      "components": [
+        {
+          "bbox": [
+            740,
+            708,
+            1024,
+            910
+          ],
+          "area": 29616
+        }
+      ]
+    },
+    {
+      "id": "p16",
+      "source": "actions",
+      "anchor_source": [
+        1235,
+        902
+      ],
+      "components": [
+        {
+          "bbox": [
+            1078,
+            697,
+            1351,
+            902
+          ],
+          "area": 27586
+        },
+        {
+          "bbox": [
+            1232,
+            868,
+            1234,
+            873
+          ],
+          "area": 7
+        }
+      ]
+    },
+    {
+      "id": "p17",
+      "source": "actions",
+      "anchor_source": [
+        210,
+        1122
+      ],
+      "components": [
+        {
+          "bbox": [
+            27,
+            923,
+            345,
+            1122
+          ],
+          "area": 31930
+        },
+        {
+          "bbox": [
+            133,
+            1028,
+            135,
+            1029
+          ],
+          "area": 2
+        },
+        {
+          "bbox": [
+            164,
+            1083,
+            165,
+            1085
+          ],
+          "area": 2
+        },
+        {
+          "bbox": [
+            162,
+            1085,
+            163,
+            1086
+          ],
+          "area": 1
+        },
+        {
+          "bbox": [
+            231,
+            1090,
+            232,
+            1091
+          ],
+          "area": 1
+        }
+      ]
+    },
+    {
+      "id": "p18",
+      "source": "actions",
+      "anchor_source": [
+        554,
+        1119
+      ],
+      "components": [
+        {
+          "bbox": [
+            387,
+            923,
+            688,
+            1119
+          ],
+          "area": 29992
+        },
+        {
+          "bbox": [
+            403,
+            1015,
+            404,
+            1016
+          ],
+          "area": 1
+        }
+      ]
+    },
+    {
+      "id": "p19",
+      "source": "actions",
+      "anchor_source": [
+        891,
+        1120
+      ],
+      "components": [
+        {
+          "bbox": [
+            720,
+            924,
+            1022,
+            1120
+          ],
+          "area": 28846
+        },
+        {
+          "bbox": [
+            834,
+            1084,
+            835,
+            1085
+          ],
+          "area": 1
+        }
+      ]
+    },
+    {
+      "id": "p20",
+      "source": "actions",
+      "anchor_source": [
+        1231,
+        1121
+      ],
+      "components": [
+        {
+          "bbox": [
+            1058,
+            912,
+            1358,
+            1121
+          ],
+          "area": 31453
+        },
+        {
+          "bbox": [
+            1135,
+            1031,
+            1136,
+            1032
+          ],
+          "area": 1
+        }
+      ]
+    }
+  ],
+  "clips": {
+    "idle": {
+      "poses": [
+        "p01",
+        "p02",
+        "p03",
+        "p04"
+      ],
+      "fps": 6,
+      "windup_frame": 0,
+      "contact_frame": 2
+    },
+    "move": {
+      "poses": [
+        "p05",
+        "p06",
+        "p07",
+        "p08"
+      ],
+      "fps": 9,
+      "windup_frame": 0,
+      "contact_frame": 2
+    },
+    "attack": {
+      "poses": [
+        "p09",
+        "p10",
+        "p11",
+        "p12"
+      ],
+      "fps": 8,
+      "windup_frame": 1,
+      "contact_frame": 2
+    },
+    "special": {
+      "poses": [
+        "p13",
+        "p14",
+        "p15",
+        "p16"
+      ],
+      "fps": 8,
+      "windup_frame": 1,
+      "contact_frame": 2
+    },
+    "hit": {
+      "poses": [
+        "p17",
+        "p18",
+        "p19",
+        "p20"
+      ],
+      "fps": 10,
+      "windup_frame": 0,
+      "contact_frame": 2
+    }
+  },
+  "action_clips": {
+    "fan": "attack",
+    "pot": "special"
+  }
+}

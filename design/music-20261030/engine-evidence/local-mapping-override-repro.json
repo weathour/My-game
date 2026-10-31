@@ -1,0 +1,23 @@
+{
+  "manifest_file_sha256": "675b67fbda3658b61b021286feb8792124c4aba6bb2d89363f0c612865214ce8",
+  "raw_declared_upstream_region_volume": 12,
+  "effective_region_volume": 0,
+  "idempotent_effective_load": true,
+  "raw_manifest_unmodified_by_load": true,
+  "upstream_mapping_bytes_hash_verified": true,
+  "original_sample_bytes_hash_verified": true,
+  "shared_generation_function": "fetch_instruments.load_manifest → apply_mapping_overrides, used by both fetch CLI and renderer CLI/Sampler",
+  "no_upstream_file_rewrite": true,
+  "override": {
+    "id": "vsco_fhorn_staccato_d4_v2_rr2_gain",
+    "patch": "FHornStac",
+    "sample_file": "vsco/Brass/F Horn/stac/MOHorn_stac_D4_v2_rr2.wav",
+    "opcode": "volume",
+    "upstream_value": 12,
+    "local_value": 0,
+    "upstream_mapping_file": "vsco/FHornStac.sfz",
+    "upstream_mapping_git_blob_sha1": "2ff9d9018f95e0ade0afb608e049b6e180e7617d",
+    "evidence": "engine-evidence/fhorn-staccato-rr-investigation.json",
+    "reason": "Recorded RR2 is within 0.35 dB of RR1 on measured native levels; explicit upstream +12 dB region gain causes a reproduced 12.22 dB peak jump. Local gain 0 dB restores matched RR response. No source WAV or upstream SFZ bytes are changed."
+  }
+}

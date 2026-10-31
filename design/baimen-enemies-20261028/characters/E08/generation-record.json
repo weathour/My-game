@@ -1,0 +1,36 @@
+{
+  "version": 1,
+  "id": "E08",
+  "generator": "built-in ImageGen",
+  "identity_master": "source/master-v1.png",
+  "references": [
+    {
+      "path": "design/jia-combat-20261027/source/dao-v1.png",
+      "sha256": "dc7720a430f1b03f61b87292b845f170f15a5a487c4a9810070fb27ad546099e",
+      "role": "pixel_drawing_and_animation_style_only"
+    }
+  ],
+  "source_versions": [
+    {
+      "path": "design/baimen-enemies-20261028/characters/E08/source/actions-v1.png",
+      "sha256": "8b475b594405f51fcd02c3d08a30fb3f9f42077e9c1258f5f4afc55d6ed55fb9",
+      "selected": true,
+      "role": "pose_source",
+      "decision": "selected"
+    },
+    {
+      "path": "design/baimen-enemies-20261028/characters/E08/source/master-v1.png",
+      "sha256": "8f6f315fbcd2de81ba5cb873bbb96a2bafe04a3e2537adfaeae0ee8771f8f994",
+      "selected": true,
+      "role": "identity_master",
+      "decision": "selected"
+    }
+  ],
+  "prompts": [
+    "prompts/actions-v1.txt",
+    "prompts/master-v1.txt"
+  ],
+  "review_notes": "All20 source poses and shrine master visually reviewed. Featureless wooden mask, offering bowl, broad seated robes and wooden altar feet retained. Rows idle/wooden-foot walk/short hand swipe/bowl raise ritual/hit. Special contact frame2 raises bowl overhead. Dominant altar body calibration235px includes mask and feet, excludes lifted bowl overhead. Fixed scale all poses. Actual connected components selected despite row overlap, no grid crop.",
+  "export": "scripts/tools/import_baimen_enemy_art.lua",
+  "pixels_policy": "ImageGen-authored; Pillow/scipy read-only component measurements and QA; Aseprite extraction/registration/palette/export."
+}
