@@ -16,9 +16,9 @@ Current game art, effects and characters include prototype and reference-derived
 
 The current Jia battle-art workflow retains a mechanical-character animation sheet solely as a pixel-style reference. It was generated with ImageGen using a character identity inspired by Maria Custard from Rance; the [reference and provenance](design/jia-combat-20261027/style-reference/README.md) preserve the source commit, original path, hash and prompt. This reference-derived status is not a clearance of character-design rights. Review any retained character visuals and intended distribution individually.
 
-## Shared UI tones and export boundary (2026-10-23)
+## Audio and export boundary
 
-- `scripts/ui/ui_audio.gd` generates short sine tones in code; it introduces no sampled third-party audio. These are development feedback cues, not finished combat sound design.
+- Boss feedback includes synthesized cues from `scripts/ui/chronicle/boss_sound.gd`; the separate sampled combat cues are documented below.
 - `export_presets.cfg` excludes development tools, tests, archives, docs and design artifacts, and explicitly includes runtime story/achievement JSON.
 - `SurvivorsUITheme` still uses system-font fallback. Verify Chinese text on each target OS; no new font redistribution license is implied.
 - A successful local PCK export does not clear prototype images/effects or reference-derived character artwork listed below. Other asset-rights review/replacement remains necessary for public distribution.
@@ -27,7 +27,7 @@ The current Jia battle-art workflow retains a mechanical-character animation she
 
 - Runtime: 70 Ogg Vorbis mixes in `assets/music/chronicle/`, catalogued by `assets/data/audio/music_catalog.json`: 38 main compositions, 8 alternate arrangements and 24 short cues. The full subjective listening review remains outstanding.
 - Source: project-authored scores rendered from pinned CC0 multisample libraries, with a generated additive pad and room effect. Exact libraries, revisions, hashes, instrument names and local mapping corrections are listed in [the music notices](design/music-20261030/THIRD_PARTY_NOTICES.md) and [instrument manifest](design/music-20261030/instrument-manifest.json).
-- Original sample downloads are cached outside the repository. Local frozen stems, MIDI, REAPER projects and FLAC masters are Git-ignored; score sources, manifest and production tools can regenerate them as described in [the production README](design/music-20261030/README.md).
+- Original sample downloads were cached outside the repository; cache completeness must be checked before rebuilding. The frozen stems, MIDI, REAPER projects and FLAC masters were Git-ignored local intermediates and are absent from the current project after the local archives were removed. The score sources, manifest and production tools remain; rebuilding audio requires the appropriate samples and tools, followed by actual verification as described in [the production README](design/music-20261030/README.md).
 - REAPER 7.83 was used for isolated project verification under its existing evaluation or license status. The game and its exported validation PCK do not require REAPER. The PCK is a local engineering check, not a public release or clearance of other assets.
 
 ## Chronicle UI geographic data (2026-10-27)

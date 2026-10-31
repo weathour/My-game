@@ -8,6 +8,7 @@ const SETTINGS := preload("res://scripts/shared/settings.gd")
 const ENEMY_MANIFEST := preload("res://scripts/ui/chronicle/enemy_visual_manifest.gd")
 const DIRECTOR := preload("res://scripts/battle/stage_director.gd")
 const ENEMY_RUNTIME := preload("res://scripts/battle/enemy_runtime.gd")
+const ENEMIES := preload("res://scripts/content/enemy_catalog.gd")
 var viewport: SubViewport
 var view: Control
 var failures := 0
@@ -156,7 +157,7 @@ func run() -> void:
 		view.canvas.refresh(moving)
 		measure(view.canvas.actor_visual, 67.5 if moving else 72, "JIA spear " + ("run" if moving else "idle"))
 	b.equipment.weapon = "plain_blade"
-	var types := ["melee","ranged","card_elite","equipment_elite","boss"]
+	var types := ["E01","E02","card_elite","equipment_elite","boss"]
 	for i in types.size():
 		var enemy: RefCounted = b.director.spawn(types[i], SPACE.CENTER + Vector2(-360 + i * 180, 165))
 		enemy.hp *= .8
@@ -165,8 +166,7 @@ func run() -> void:
 	for i in types.size():
 		var enemy: RefCounted = b.enemies[i]
 		var visual: Node2D = view.canvas.enemy_views[enemy.id].node
-		if enemy.definition_id.is_empty(): measure(visual, float(enemy.body_height), types[i])
-		else: measure_authored_enemy(visual, enemy)
+		measure_authored_enemy(visual, enemy)
 	var boss: RefCounted = b.enemies.back()
 	var boss_bounds := body_bounds(view.canvas.enemy_views[boss.id].node)
 	var boss_screen := Rect2(view.canvas.origin + (boss.position + boss_bounds.position) * view.canvas.world_scale, boss_bounds.size * view.canvas.world_scale)
@@ -176,7 +176,7 @@ func run() -> void:
 	# fixture above now invokes duel zoom, so remove it before testing follow.
 	b.enemies.pop_back()
 	view.canvas.camera.reset()
-	var missing := ENEMY_RUNTIME.new(-77, "melee", SPACE.CENTER)
+	var missing := ENEMY_RUNTIME.new(-77, ENEMIES.definition("E01"), SPACE.CENTER)
 	missing.visual_id = "missing-art-fixture"
 	var placeholder := ART.create_enemy(missing, "B01")
 	viewport.add_child(placeholder)

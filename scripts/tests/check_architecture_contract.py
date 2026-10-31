@@ -2,9 +2,6 @@
 """Check a few high-value boundaries in the current Chronicle architecture."""
 from __future__ import annotations
 
-import io
-import re
-import tokenize
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -12,25 +9,6 @@ ROOT = Path(__file__).resolve().parents[2]
 
 def read(path: str) -> str:
     return (ROOT / path).read_text(encoding="utf-8-sig")
-
-
-def function_body(source: str, name: str) -> tuple[str, ...]:
-    declaration = r"^(?:@|(?:static )?(?:func|var|const|signal|class_name|class|enum)\b)"
-    match = re.search(rf"(?ms)^(?:static )?func {re.escape(name)}\b.*?(?={declaration}|\Z)", source)
-    if match is None:
-        return ()
-    body = False
-    tokens: list[str] = []
-    for token in tokenize.generate_tokens(io.StringIO(match[0]).readline):
-        if not body:
-            body = token.type == tokenize.NEWLINE
-        elif token.type not in {tokenize.INDENT, tokenize.DEDENT, tokenize.NEWLINE, tokenize.NL, tokenize.COMMENT, tokenize.ENDMARKER}:
-            tokens.append(token.string)
-    return tuple(tokens)
-
-
-def delegates(source: str, name: str, calls: str) -> bool:
-    return function_body(source, name) == function_body("func expected():\n" + calls, "expected")
 
 
 def main() -> int:

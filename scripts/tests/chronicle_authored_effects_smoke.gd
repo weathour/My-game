@@ -51,7 +51,7 @@ func fixture(ids: Array) -> void:
 	view.battle.director.spawn_remaining = 10000
 
 func target(battle: RefCounted, offset := Vector2(180,0)) -> RefCounted:
-	var enemy: RefCounted = battle.director.spawn("melee",battle.position + offset)
+	var enemy: RefCounted = battle.director.spawn("E01",battle.position + offset)
 	enemy.hp = 10000
 	enemy.max_hp = 10000
 	battle.enemies.append(enemy)

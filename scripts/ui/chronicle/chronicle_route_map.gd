@@ -59,7 +59,7 @@ static func state_for(state: RefCounted, id: String) -> String:
 	if reward_node == id: return "reward"
 	var available: Array = data.get("available", [])
 	if reward.is_empty() and id in available:
-		if str(state.nodes[id].kind) in ["battle", "elite", "boss"] and state.has_method("battle_available") and not state.battle_available(id):
+		if str(state.nodes[id].kind) in ["battle", "elite", "boss"] and not state.battle_available(id):
 			return "unavailable"
 		return "available"
 	var frontier: Array = available.duplicate()

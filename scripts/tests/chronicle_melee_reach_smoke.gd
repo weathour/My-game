@@ -4,6 +4,7 @@ const B := preload("res://scripts/battle/battle_session.gd")
 const C := preload("res://scripts/content/combat_catalog.gd")
 const A := preload("res://scripts/battle/ability_definition.gd")
 const E := preload("res://scripts/battle/enemy_runtime.gd")
+const CATALOG := preload("res://scripts/content/enemy_catalog.gd")
 var checks := 0
 var failures := 0
 
@@ -24,7 +25,7 @@ func fixture(ids: Array = ["JIA"]) -> RefCounted:
 	return b
 
 func enemy(b: RefCounted, point: Vector2, radius: float = 13) -> RefCounted:
-	var value := E.new(b.enemies.size() + 1, "melee", b.position + point)
+	var value := E.new(b.enemies.size() + 1, CATALOG.definition("E01"), b.position + point)
 	value.radius = radius
 	value.hp = 100000
 	value.max_hp = value.hp

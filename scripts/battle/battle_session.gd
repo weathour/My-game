@@ -6,7 +6,6 @@ const DIRECTOR := preload("res://scripts/battle/stage_director.gd")
 const ABILITIES := preload("res://scripts/battle/ability_system.gd")
 const A := preload("res://scripts/battle/ability_definition.gd")
 const TARGETS := preload("res://scripts/battle/targeting.gd")
-const RESOLVER := preload("res://scripts/battle/combat_resolver.gd")
 const ENEMIES := preload("res://scripts/battle/enemy_system.gd")
 const SPACE := preload("res://scripts/battle/battle_space.gd")
 const MECHANICS := preload("res://scripts/battle/combat_mechanics.gd")
@@ -53,6 +52,7 @@ func _init(request: Dictionary) -> void:
 	var bonuses := C.owned_bonuses(roster)
 	for id in members: characters[id] = CHARACTER.new(id, roster[id], C.attributes(id, int(roster[id].level), bonuses, equipment))
 	mechanics = MECHANICS.new(self)
+	if _fail_configuration(): return
 	if str(director.config.get("encounter_mode", "")) == "boss_duel":
 		enemies.append_array(director.tick(0, 0, position, enemies))
 
@@ -72,6 +72,7 @@ func set_paused(value: bool) -> void:
 
 func tick(delta: float, movement: Vector2) -> void:
 	if paused or not outcome.is_empty(): return
+	if _fail_configuration(): return
 	events.clear()
 	_hits.clear()
 	switch_cooldown = maxf(0, switch_cooldown - delta)
@@ -88,6 +89,7 @@ func tick(delta: float, movement: Vector2) -> void:
 	for enemy in enemies:
 		if not enemy.dead and enemy.parent_id == 0 and enemy.rank in ["ordinary", "heavy"]: ordinary_count += 1
 	enemies.append_array(director.tick(delta, ordinary_count, position, enemies))
+	if _fail_configuration(): return
 	target_hold = maxf(0, target_hold - delta)
 	var target := TARGETS.nearest(enemies, position, 580, target_id)
 	if target != null:
@@ -108,8 +110,16 @@ func tick(delta: float, movement: Vector2) -> void:
 	_resolve_hits()
 	var transition_safe := _has_safe_transition()
 	var hostile := ENEMIES.step(enemies, position, delta, {"hazards":hazards, "config":director.config, "actor_speed":actor_movement_speed})
+	if not hostile.configuration_errors.is_empty():
+		director.configuration_error = "; ".join(hostile.configuration_errors)
+		_fail_configuration()
+		return
 	for spawn_descriptor in hostile.spawns:
-		enemies.append(director.derivative(spawn_descriptor, enemies))
+		var child: RefCounted = director.derivative(spawn_descriptor, enemies)
+		if child == null:
+			_fail_configuration()
+			return
+		enemies.append(child)
 	events.append_array(hostile.events)
 	for event in hostile.events:
 		if event.kind == "enemy_slow": enemy_slow = float(event.slow); enemy_slow_remaining = float(event.duration)
@@ -383,8 +393,20 @@ func choose_field(index: int) -> bool:
 			actor.hp = minf(actor.stats.hp, actor.hp + actor.stats.hp * (0.6 + bonuses.get("supply_hp", 0.0)))
 			actor.mp = minf(actor.stats.mp, actor.mp + actor.stats.mp * (0.6 + bonuses.get("supply_mp", 0.0)))
 		1: grant_experience(24.0, actor.id)
-		2, 3: enemies.append(director.spawn("card_elite" if index == 2 else "equipment_elite", SPACE.challenge_position(position)))
+		2, 3:
+			var elite: RefCounted = director.spawn("card_elite" if index == 2 else "equipment_elite", SPACE.challenge_position(position))
+			if elite == null:
+				_fail_configuration()
+				return false
+			enemies.append(elite)
 	events.append({"kind":"message", "text":["补给已使用", "当前人物获得修习经验", "额外选卡精英已出现", "装备精英已出现"][index]})
+	return true
+
+func _fail_configuration() -> bool:
+	if director.configuration_error.is_empty(): return false
+	_finish("failed")
+	result.configuration_error = director.configuration_error
+	events.append({"kind":"configuration_error", "message":director.configuration_error})
 	return true
 
 func _finish(value: String) -> void:
@@ -394,7 +416,7 @@ func _finish(value: String) -> void:
 	for id in members: records[id] = characters[id].snapshot()
 	result = {"attempt_id":attempt_id, "outcome":outcome, "characters":records,
 		"card_elite":director.card_elite, "equipment_elite":director.equipment_elite,
-		"elapsed":director.elapsed, "kills":director.kills, "fast_clear":director.elapsed <= director.config.bonus_time}
+		"elapsed":director.elapsed, "kills":director.kills, "fast_clear":director.elapsed <= float(director.config.get("bonus_time", 0.0))}
 	projectiles.clear()
 	hazards.clear()
 	telegraphs.clear()

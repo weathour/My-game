@@ -184,8 +184,3 @@ static func environment(stage: String) -> Dictionary:
 static func has_environment_texture(stage: String) -> bool:
 	var path := str(environment(stage).get("texture", ""))
 	return not path.is_empty() and ResourceLoader.exists(path)
-
-static func enemy_tint(kind: String, _stage: String) -> Color:
-	if kind == "charger": return Color("e2ae87")
-	if kind == "guard": return Color("b6c8d5")
-	return Color.WHITE

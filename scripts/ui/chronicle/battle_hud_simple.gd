@@ -1,5 +1,5 @@
 extends Control
-## Legacy bottom-bar composition, adapted to independent resources and two keys.
+## Simple bottom-bar composition with independent resources and two skill keys.
 const PORTRAIT := preload("res://scripts/ui/shared/switch_portrait_display.gd")
 const ICON := preload("res://scripts/ui/shared/skill_cooldown_icon.gd")
 const ART := preload("res://scripts/ui/chronicle/battle_art.gd")
@@ -132,7 +132,7 @@ func refresh() -> void:
 		var active: bool = i == battle.active
 		entry.portrait.set_role_scene(id, ART.portrait(id))
 		entry.portrait.modulate = Color("777777") if actor.dead else ART.tint(id)
-		entry.portrait.set_state(battle.switch_cooldown / .5, 0.0, active)
+		entry.portrait.set_state(battle.switch_cooldown / .5, active)
 		var key := "Q/E" if alive.size() == 2 else "E" if posmod(i - battle.active, battle.members.size()) == 1 else "Q"
 		entry.label.text = "阵亡" if actor.dead else "当前" if active else key + " · " + definitions[id].name
 		# Keep the protagonist's identity and health visible off-field.

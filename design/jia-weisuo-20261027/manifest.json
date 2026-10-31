@@ -203,13 +203,18 @@
   "visual_check": {
     "viewer": "Chromium CSS alpha compositing",
     "preview": "alpha-preview.html",
-    "evidence": "transparency-check.png",
     "backgrounds": [
       "light parchment",
       "dark green",
       "checkerboard"
     ],
-    "result": "No solid background rectangle or obvious matte halo; full standalone figure and sword tip visible. Preview backgrounds are not part of source assets."
+    "result": "No solid background rectangle or obvious matte halo; full standalone figure and sword tip visible. Preview backgrounds are not part of source assets.",
+    "historical_evidence": {
+      "file": "transparency-check.png",
+      "sha256": "ad7dd3cc2234d208ba3b1e3eb8377793ac8682c9ae7af6a48d1d5760f2126dbb",
+      "status": "removed_derived_check_image",
+      "availability": "not_in_current_repository"
+    }
   },
   "costume_variants": {
     "outlaw": [
@@ -228,12 +233,17 @@
   "costume_visual_check": {
     "viewer": "Chromium CSS alpha compositing",
     "preview": "forms-alpha-preview.html",
-    "evidence": "forms-transparency-check.png",
     "backgrounds": [
       "light parchment",
       "dark green"
     ],
     "result": "Four full-body costume variants visually checked on both backgrounds: no solid background rectangle or obvious matte halo; headpieces, sleeves, shoes and sash ends remain visible. Source PNGs remain transparent; preview background colors are CSS only.",
-    "user_approval": "pending_new_costume_review"
+    "user_approval": "pending_new_costume_review",
+    "historical_evidence": {
+      "file": "forms-transparency-check.png",
+      "sha256": "7d71166df4a9380c82d59f56da22b5dca7a68ece6d933a1f7c87f79e3150bf2a",
+      "status": "removed_derived_check_image",
+      "availability": "not_in_current_repository"
+    }
   }
 }

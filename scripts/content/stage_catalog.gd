@@ -13,7 +13,6 @@ const STAGES := {
 		"boss_hp": 550.0,
 		"boss_name": "荒道鬼校·空面碑甲",
 		"seed": 1701,
-		"map": "grass",
 		"enemy_hp": 1,
 		"enemy_damage": 1.0,
 		"boss_definition": "B01",
@@ -61,7 +60,6 @@ const STAGES := {
 		"boss_hp": 900.0,
 		"boss_name": "守街尸将·檐面巡将",
 		"seed": 1702,
-		"map": "stone",
 		"enemy_hp": 1.05,
 		"enemy_damage": 1.047,
 		"boss_definition": "B02",
@@ -112,7 +110,6 @@ const STAGES := {
 		"boss_hp": 1250.0,
 		"boss_name": "押粮鬼尉·轭骨牛督",
 		"seed": 1704,
-		"map": "grass",
 		"enemy_hp": 1.2,
 		"enemy_damage": 1.094,
 		"boss_definition": "B04",
@@ -163,7 +160,6 @@ const STAGES := {
 		"boss_hp": 1150.0,
 		"boss_name": "冥灯术士·悬灯道人",
 		"seed": 1705,
-		"map": "stone",
 		"enemy_hp": 1.2,
 		"enemy_damage": 1.141,
 		"boss_definition": "B05",
@@ -214,7 +210,6 @@ const STAGES := {
 		"boss_hp": 1750.0,
 		"boss_name": "盘寨鬼魁·三面裂旗魁",
 		"seed": 1703,
-		"map": "grass",
 		"enemy_hp": 1.35,
 		"enemy_damage": 1.188,
 		"boss_definition": "B03",
@@ -266,7 +261,6 @@ const STAGES := {
 		"boss_hp": 2150.0,
 		"boss_name": "荒祠镇将·祠脊石兽",
 		"seed": 1706,
-		"map": "stone",
 		"enemy_hp": 1.5,
 		"enemy_damage": 1.235,
 		"boss_definition": "B06",
@@ -317,7 +311,6 @@ const STAGES := {
 		"boss_hp": 2400.0,
 		"boss_name": "官署号令者·悬印司令",
 		"seed": 1707,
-		"map": "stone",
 		"enemy_hp": 1.55,
 		"enemy_damage": 1.282,
 		"boss_definition": "B07",
@@ -369,7 +362,6 @@ const STAGES := {
 		"boss_hp": 2700.0,
 		"boss_name": "水门冲将·闸齿鳄首",
 		"seed": 1708,
-		"map": "grass",
 		"enemy_hp": 1.65,
 		"enemy_damage": 1.329,
 		"boss_definition": "B08",
@@ -420,7 +412,6 @@ const STAGES := {
 		"boss_hp": 2850.0,
 		"boss_name": "军械库将·炉腹铁鬼",
 		"seed": 1709,
-		"map": "stone",
 		"enemy_hp": 1.65,
 		"enemy_damage": 1.376,
 		"boss_definition": "B09",
@@ -471,7 +462,6 @@ const STAGES := {
 		"boss_hp": 3200.0,
 		"boss_name": "封库双禁卫·左锁",
 		"seed": 1710,
-		"map": "stone",
 		"enemy_hp": 1.75,
 		"enemy_damage": 1.424,
 		"boss_definition": "B10",
@@ -522,7 +512,6 @@ const STAGES := {
 		"boss_hp": 3150.0,
 		"boss_name": "巡城灯师·伞眼灯灵",
 		"seed": 1711,
-		"map": "stone",
 		"enemy_hp": 1.8,
 		"enemy_damage": 1.471,
 		"boss_definition": "B11",
@@ -574,7 +563,6 @@ const STAGES := {
 		"boss_hp": 3600.0,
 		"boss_name": "瘟灯阵主·多手幡灯大巫",
 		"seed": 1712,
-		"map": "stone",
 		"enemy_hp": 1.9,
 		"enemy_damage": 1.518,
 		"boss_definition": "B12",
@@ -625,7 +613,6 @@ const STAGES := {
 		"boss_hp": 3650.0,
 		"boss_name": "城垣冲将·石鸱裂垛",
 		"seed": 1713,
-		"map": "stone",
 		"enemy_hp": 2,
 		"enemy_damage": 1.565,
 		"boss_definition": "B13",
@@ -677,7 +664,6 @@ const STAGES := {
 		"boss_hp": 3650.0,
 		"boss_name": "渡口号令者·引舟鬼帅",
 		"seed": 1714,
-		"map": "grass",
 		"enemy_hp": 2,
 		"enemy_damage": 1.612,
 		"boss_definition": "B14",
@@ -729,7 +715,6 @@ const STAGES := {
 		"boss_hp": 4300.0,
 		"boss_name": "曹休",
 		"seed": 1715,
-		"map": "stone",
 		"enemy_hp": 2.15,
 		"enemy_damage": 1.659,
 		"boss_definition": "B15",
@@ -781,7 +766,6 @@ const STAGES := {
 		"boss_hp": 4800.0,
 		"boss_name": "曹纯",
 		"seed": 1716,
-		"map": "stone",
 		"enemy_hp": 2.25,
 		"enemy_damage": 1.706,
 		"boss_definition": "B16",
@@ -833,7 +817,6 @@ const STAGES := {
 		"boss_hp": 6200.0,
 		"boss_name": "张辽",
 		"seed": 1717,
-		"map": "stone",
 		"enemy_hp": 2.35,
 		"enemy_damage": 1.753,
 		"boss_definition": "B17",
@@ -887,7 +870,6 @@ const STAGES := {
 		"boss_hp": 7600.0,
 		"boss_name": "吕布",
 		"seed": 1718,
-		"map": "stone",
 		"enemy_hp": 2.5,
 		"enemy_damage": 1.8,
 		"boss_definition": "B18",
@@ -910,11 +892,47 @@ const STAGES := {
 static func stage(id: String) -> Dictionary:
 	return STAGES.get(id, {}).duplicate(true)
 
+## Fail before simulation when a stage cannot supply its authored spawn definitions.
+static func runtime_errors(value: Dictionary) -> Array[String]:
+	var errors: Array[String] = []
+	for key in ["boss_definition", "boss_time", "boss_kills", "boss_hp", "bonus_time", "enemy_hp", "enemy_damage", "enemy_cap", "spawn_interval", "waves", "field_elites"]:
+		if not value.has(key): errors.append("missing " + key)
+	if not errors.is_empty(): return errors
+	var boss := ENEMIES.definition(str(value.boss_definition))
+	if boss.get("rank", "") != "boss": errors.append("invalid boss definition " + str(value.boss_definition))
+	for error in ENEMIES.runtime_errors(boss): errors.append("boss: " + error)
+	if float(value.boss_hp) <= 0: errors.append("invalid boss health")
+	var duel := str(value.get("encounter_mode", "")) == "boss_duel"
+	if duel:
+		if float(value.boss_time) != 0 or int(value.boss_kills) != 0: errors.append("duel must begin immediately")
+		if bool(value.get("fields_enabled", true)) or not value.field_elites.is_empty() or not value.waves.is_empty() or int(value.enemy_cap) != 0: errors.append("duel cannot spawn waves or field elites")
+	else:
+		if value.waves.is_empty() or float(value.waves[0].get("at", -1)) != 0: errors.append("ordinary encounter requires a wave at time zero")
+		if bool(value.get("fields_enabled", true)) and value.field_elites.size() != 2: errors.append("two field elite definitions required")
+	for elite_id in value.field_elites:
+		var elite := ENEMIES.definition(str(elite_id))
+		if elite.get("rank", "") != "field_elite": errors.append("invalid field elite " + str(elite_id))
+		for error in ENEMIES.runtime_errors(elite): errors.append(str(elite_id) + ": " + error)
+	var previous_time := -1.0
+	for wave in value.waves:
+		for key in ["at", "count", "cycle"]:
+			if not wave.has(key): errors.append("wave missing " + key)
+		if not wave.has_all(["at", "count", "cycle"]): continue
+		if float(wave.at) < previous_time or float(wave.get("interval", value.spawn_interval)) <= 0 or int(wave.count) <= 0: errors.append("invalid wave schedule")
+		previous_time = float(wave.at)
+		if wave.cycle.is_empty(): errors.append("empty authored wave cycle")
+		for enemy_id in wave.cycle:
+			var enemy := ENEMIES.definition(str(enemy_id))
+			if enemy.get("rank", "") not in ["ordinary", "heavy"]: errors.append("invalid ordinary definition " + str(enemy_id))
+			for error in ENEMIES.runtime_errors(enemy): errors.append(str(enemy_id) + ": " + error)
+	return errors
+
 static func validate() -> Array:
 	var errors: Array = []
 	if STAGES.size() != 18: errors.append("chapter must author all 18 combat nodes")
 	for id in STAGES:
 		var value: Dictionary = STAGES[id]
+		for error in runtime_errors(value): errors.append(id + ": " + error)
 		var boss := ENEMIES.definition(value.boss_definition)
 		if boss.is_empty() or boss.rank != "boss": errors.append(id + ": invalid boss")
 		var duel := str(value.get("encounter_mode", "")) == "boss_duel"

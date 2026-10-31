@@ -1,0 +1,112 @@
+{
+  "home": {
+    "eyebrow": "三国志怪 · 战役录",
+    "title": "白门楼",
+    "description": "白骨露于野，千里无鸡鸣。\n山河还在，且从这座鬼城起家。",
+    "continue": "继续行军",
+    "new": "启程白门楼",
+    "load": "读取存档",
+    "music": "音乐鉴赏",
+    "codex": "敌情图鉴",
+    "world": "天下局势",
+    "settings": "设定",
+    "help": "操作说明",
+    "about": "关于",
+    "quit": "退出游戏",
+    "no_saves": "暂无可读取的存档。",
+    "description_compact": "白骨露于野，千里无鸡鸣。"
+  },
+  "menu": {
+    "title": "行军菜单",
+    "return": "返回行军",
+    "return_inspection": "返回天下",
+    "campaign_group": "行军管理",
+    "system_group": "资料与系统",
+    "roster": "整备",
+    "saves": "行军档",
+    "load": "读取存档",
+    "journal": "见闻",
+    "settings": "设定",
+    "codex": "敌情图鉴",
+    "music": "音乐鉴赏",
+    "help": "操作说明",
+    "home": "返回标题",
+    "quit": "退出游戏",
+    "inactive_hint": "开始行军后可使用。"
+  },
+  "saves": {
+    "title_readonly": "读取存档",
+    "description_readonly": "选择一份行军档继续。读取后将回到该档记录的进度。",
+    "title_manage": "行军档",
+    "description_manage": "保存当前行军，或读取已有存档。读取会恢复该档记录的进度。",
+    "empty": "空存档",
+    "automatic": "自动存档",
+    "manual": "手动存档",
+    "save": "保存",
+    "load": "读取"
+  },
+  "help": {
+    "title": "操作说明",
+    "intro": "选择路线、整备队伍，在战斗与故事中继续行军。",
+    "sections": [
+      {
+        "heading": "行军与整备",
+        "body": "在路线图上查看节点不会推进；确认前往后才会进入。出战前可调整上阵人物和全队装备，也可查看敌情。泉水与剧情节点会带来不同遭遇。"
+      },
+      {
+        "heading": "战斗",
+        "body": "用 WASD 或方向键移动，Q／E 切换当前人物，J／K 发动当前人物的关键技能，Esc 暂停。普攻、常规技能和攻击方向自动处理；留意敌人的攻击预警。"
+      },
+      {
+        "heading": "剧情与菜单",
+        "body": "菜单可用 Tab 或方向键选择，Enter 确认，Esc 返回。剧情中可用 Enter、空格或交互键 {interact_key} 继续。已显示的对白可以回看。"
+      },
+      {
+        "heading": "奖励与存档",
+        "body": "胜利后按提示选择奖励。未选完时续档会保留原来的候选与已选进度；战斗中退出或失败会回到本关进场前。读取手动档会恢复该档的行军状态。"
+      }
+    ]
+  },
+  "about": {
+    "title": "关于",
+    "intro": "这是一个以三国覆亡后的鬼怪世界为背景的单人行军游戏。白门楼篇讲述贾苇索与沿途人物的遭遇。",
+    "sections": [
+      {
+        "heading": "制作与资源",
+        "body": "本作包含为项目制作的剧情、角色、地图与音乐，也使用部分第三方资源。以下列出游戏内的主要来源与许可。"
+      },
+      {
+        "heading": "当前内容",
+        "body": "白门楼篇已提供路线、战斗、剧情和人物故事；体验与平衡仍在持续调整。"
+      }
+    ],
+    "licenses": [
+      {
+        "name": "Godot 引擎 · MIT",
+        "body": "Godot Engine\nCopyright (c) 2014-present Godot Engine contributors.\nCopyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n\nhttps://godotengine.org/license/"
+      },
+      {
+        "name": "战斗音效 · CC0",
+        "body": "部分音效经剪辑，原始素材依 CC0 1.0 公开：\nartisticdude — Swishes Sound Pack / RPG Sound Pack\nStarNinjas — 10 Impact/Shield Blocks\nrubberduck — 80 CC0 RPG SFX\nKenney — Interface Sounds\nhttps://creativecommons.org/publicdomain/zero/1.0/"
+      },
+      {
+        "name": "配乐音源 · CC0",
+        "body": "项目配乐使用 CC0 音源及自制合成音色；音源包括 VSCO 2 Community Edition、VCSL、FreePats Classical Guitar、Karoryfer Fashion Bass 和 Emilyguitar。"
+      },
+      {
+        "name": "地图数据 · MIT",
+        "body": "部分地区数据转换自 wonton1984/sanguo-map；自然陆地数据来自 Natural Earth（公有领域）。\n\nCopyright (c) 2026 wonton1984\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n\nhttps://github.com/wonton1984/sanguo-map"
+      },
+      {
+        "name": "本作权利声明",
+        "body": "本项目目前保留所有权利。未经项目所有者书面许可，不得在项目之外复制、再分发、发布或使用项目代码及随附资源。第三方组件和来源素材可能适用各自的条款；本声明不改变其许可。"
+      }
+    ]
+  },
+  "exit": {
+    "title": "退出游戏",
+    "body": "确定退出游戏吗？",
+    "cancel": "继续游戏",
+    "confirm": "退出"
+  }
+}

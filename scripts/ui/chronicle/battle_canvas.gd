@@ -120,22 +120,17 @@ func refresh(is_moving: bool) -> void:
 		if not enemy_views.has(enemy.id):
 			if enemy.rank == "boss": newly_bound_boss = true
 			var visual: Node2D = ART.create_enemy(enemy, stage_id)
-			# Pixel-sheet hit bursts normally attach to SceneTree.current_scene.
-			# Here feedback stays under this arena and follows its pause/scale.
-			if visual.get("hit_sheet") != null: visual.set("hit_sheet", null)
 			var anchor := Node2D.new()
 			actors.add_child(anchor)
 			anchor.add_child(visual)
 			ART.fit_enemy_instance(visual, enemy, stage_id)
-			enemy_views[enemy.id] = {"node":visual, "anchor":anchor, "position":enemy.position, "hp":enemy.hp, "winding":false}
+			enemy_views[enemy.id] = {"node":visual, "anchor":anchor, "position":enemy.position}
 
 		var entry: Dictionary = enemy_views[enemy.id]
 		var node: Node2D = entry.node
 		var direction: Vector2 = enemy.position - entry.position
 		entry.anchor.position = enemy.position
-		# Preserve the authored hit animation until its own lock expires.
-		if float(node.get("hit_lock_remaining") if node.get("hit_lock_remaining") != null else 0.0) <= 0:
-			if node.has_method("set_moving"): node.set_moving(direction.length_squared() > .001, direction if direction.length_squared() > .001 else enemy.aim)
+		if node.has_method("set_moving"): node.set_moving(direction.length_squared() > .001, direction if direction.length_squared() > .001 else enemy.aim)
 		if combat_feedback.contacts.has(enemy.id) and node.has_method("confirm_hit"):
 			var contact: Dictionary = combat_feedback.contacts[enemy.id]
 			if not contact.periodic: node.confirm_hit(battle.director.elapsed, contact.direction, combat_feedback.reduced_flash, combat_feedback.reduced_motion)
@@ -145,16 +140,13 @@ func refresh(is_moving: bool) -> void:
 				for source in battle.enemies:
 					if source.id == enemy.parent_id: presenter = source; break
 			node.present(presenter, battle.director.elapsed, battle.paused)
-		elif enemy.windup > 0 and not entry.winding and node.has_method("play_cast"): node.play_cast()
-		node.modulate = Color("acd8e9") if enemy.slow_time > 0 else ART.enemy_tint(enemy.kind, stage_id)
+		node.modulate = Color("acd8e9") if enemy.slow_time > 0 else Color.WHITE
 		# Retain ground-based sorting, but reveal the controlled body behind tall enemies.
 		var player_body := Rect2(battle.position + Vector2(-18, -72), Vector2(36, 72))
 		var obscures_player: bool = enemy.position.y > battle.position.y and _body_rect(node, enemy.position).intersects(player_body)
 		node.modulate.a = .42 if obscures_player else .78 if not enemy.targetable else 1.0
 		entry["obscures_player"] = obscures_player
 		entry.position = enemy.position
-		entry.hp = enemy.hp
-		entry.winding = enemy.windup > 0
 	for key in enemy_views.keys():
 		if not live.has(key):
 			var node: Node2D = enemy_views[key].anchor

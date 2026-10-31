@@ -48,6 +48,7 @@ func fixture(ids: Array = ["JIA", "F11", "N16"]) -> RefCounted:
 func run() -> void:
 	resources_and_effects()
 	stage_contracts()
+	configuration_failure_contracts()
 	reward_contracts()
 	campaign_lifecycle()
 	var campaign := CAMPAIGN.new()
@@ -150,7 +151,7 @@ func resources_and_effects() -> void:
 	# Projectile identity and enchant remain fixed after a foreground switch.
 	b.characters.F11.mp = 100
 	b.characters.F11.cooldowns.clear()
-	b.enemies.append(b.director.spawn("melee", b.position + Vector2(300, 0)))
+	b.enemies.append(b.director.spawn("E01", b.position + Vector2(300, 0)))
 	b.tick(0.01, Vector2.ZERO)
 	var projectile: Dictionary = b.projectiles[0]
 	var attack: float = projectile.context.damage
@@ -193,7 +194,7 @@ func resources_and_effects() -> void:
 	mage.active = 1
 	mage.characters.F11.level = 2
 	mage.characters.F11.mp = 12
-	mage.enemies.append(mage.director.spawn("melee", mage.position + Vector2(300,0)))
+	mage.enemies.append(mage.director.spawn("E01", mage.position + Vector2(300,0)))
 	mage.tick(0.01, Vector2.ZERO)
 	expect(mage.characters.F11.cooldowns.has("emma_ice") and mage.characters.F11.mp >= 12, "level-unlocked routine is automatic and costs no mana")
 	var spear: Resource = C.basic("JIA", {"weapon":"long_spear"})
@@ -233,6 +234,28 @@ func stage_contracts() -> void:
 	var study := fixture()
 	study.choose_field(1)
 	expect(study.characters.JIA.xp == 24 and study.characters.F11.xp == 0, "study field rewards only current actor")
+
+func configuration_failure_contracts() -> void:
+	var missing_boss_stage: Dictionary = C.stage("B01")
+	missing_boss_stage.boss_definition = "NO_SUCH_BOSS"
+	var missing_boss := BATTLE.new({"attempt_id":"missing-boss", "members":["JIA"], "characters":{"JIA":C.record("JIA")}, "equipment":{}, "stage":missing_boss_stage, "seed":7})
+	expect(missing_boss.outcome == "failed", "missing authored boss fails before combat starts")
+	expect(str(missing_boss.result.get("configuration_error", "")).contains("NO_SUCH_BOSS"), "missing boss exposes its definition ID as configuration error")
+	expect(not missing_boss.result.get("card_elite", false) and not missing_boss.result.get("equipment_elite", false), "invalid boss stage cannot produce reward candidates")
+
+	var empty_wave_stage: Dictionary = C.stage("B01")
+	empty_wave_stage.waves[0].cycle.clear()
+	var empty_wave := BATTLE.new({"attempt_id":"empty-wave", "members":["JIA"], "characters":{"JIA":C.record("JIA")}, "equipment":{}, "stage":empty_wave_stage, "seed":7})
+	expect(empty_wave.outcome == "failed", "empty authored wave fails before it can report a clear")
+	expect(str(empty_wave.result.get("configuration_error", "")).contains("empty authored wave cycle"), "empty wave reports the structural cause")
+	expect(not empty_wave.result.get("card_elite", false) and not empty_wave.result.get("equipment_elite", false), "invalid wave stage cannot produce reward candidates")
+
+	var unknown_spawn := fixture(["JIA"])
+	expect(unknown_spawn.director.spawn("NO_SUCH_ENEMY", unknown_spawn.position) == null, "unknown enemy definition cannot construct a prototype")
+	unknown_spawn.tick(0.0, Vector2.ZERO)
+	expect(unknown_spawn.outcome == "failed", "unknown enemy configuration settles as a failed battle")
+	expect(str(unknown_spawn.result.get("configuration_error", "")).contains("NO_SUCH_ENEMY"), "unknown spawn failure retains its ID")
+	expect(unknown_spawn.enemies.is_empty() and not unknown_spawn.result.get("card_elite", false) and not unknown_spawn.result.get("equipment_elite", false), "failed spawn creates neither an enemy nor rewards")
 
 func reward_contracts() -> void:
 	var defs := {"a":{"kind":"重要人物"}, "b":{"kind":"重要人物"}, "c":{"kind":"军士"}, "d":{"kind":"军士"}, "e":{"kind":"军士"}, "f":{"kind":"军士"}, "g":{"kind":"军士"}, "h":{"kind":"军士"}}

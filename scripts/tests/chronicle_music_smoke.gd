@@ -1,5 +1,5 @@
 extends SceneTree
-## Use --legacy-fixture only while composers are rendering: the substitute exists in memory only.
+## Verify routing with the published music catalog and actual campaign/battle objects.
 const SHELL := preload("res://scenes/chronicle/chronicle_shell.tscn")
 const CATALOG := preload("res://scripts/audio/music_catalog.gd")
 const ROUTING := preload("res://scripts/audio/chronicle_music.gd")
@@ -8,7 +8,6 @@ const STORIES := preload("res://scripts/content/story_catalog.gd")
 const RESOLVER := preload("res://scripts/battle/combat_resolver.gd")
 var failures := 0
 var checks := 0
-var fixture := false
 
 class AudibleMusic extends "res://scripts/audio/music_player.gd":
 	func _is_headless_runtime() -> bool: return false
@@ -20,28 +19,10 @@ func expect(value: bool, message: String) -> void:
 func frames(count: int = 3) -> void:
 	for i in count: await process_frame
 
-func install_fixture() -> void:
-	var ids: Array[String] = []
-	for cue: String in ROUTING.NODE_CUES.values():
-		if cue not in ids: ids.append(cue)
-	for cue: String in ROUTING.WARFORMS.values(): ids.append(cue)
-	for cue in ["title_overture", "region_baimen_road", "world_map", "camp_home", "preparation", "results_flow", "archive_memories", "story_solitude", "story_comedy", "story_banter", "story_travel", "journey_departure", "story_confrontation", "story_aftermath", "stinger_departure", "stinger_transform", "stinger_victory", "stinger_important_victory", "stinger_defeat"]:
-		if cue not in ids: ids.append(cue)
-	CATALOG._loaded = true
-	CATALOG._chapter.clear()
-	for cue in ids:
-		CATALOG._chapter[cue] = {"id":cue, "title":cue, "kind":"Fixture", "category":"stinger" if cue.begins_with("stinger_") else "bed", "loop":not cue.begins_with("stinger_"), "path":"res://assets/music/camp_signal.ogg", "bpm":120, "beats":128}
-	for id: String in ROUTING.WARFORMS:
-		var family := "fixture:" + id
-		CATALOG._chapter[ROUTING.node_cue(id)].phase_family = family
-		CATALOG._chapter[ROUTING.WARFORMS[id]].phase_family = family
-
 func run() -> void:
 	expect(ProjectSettings.globalize_path("user://").begins_with("/tmp/"), "isolated user data required")
 	if failures: quit(1); return
-	fixture = "--legacy-fixture" in OS.get_cmdline_user_args()
-	if fixture: install_fixture()
-	else: expect(CATALOG.chapter_cues().size() == 70, "published chapter manifest contains 70 assets")
+	expect(CATALOG.chapter_cues().size() == 70, "published chapter manifest contains 70 assets")
 	var routes: Array = JSON.parse_string(FileAccess.get_file_as_string("res://assets/data/chronicle/route.json"))
 	expect(routes.size() == 36 and ROUTING.NODE_CUES.size() == 36, "all 36 route nodes explicitly mapped")
 	for id in ["S03", "S04", "S05", "B03", "B04", "B05", "B06", "F01"]:
@@ -161,7 +142,7 @@ func run() -> void:
 	viewport.queue_free()
 	await frames()
 	await create_timer(0.12).timeout # Drain the Dummy audio mixer after freeing players.
-	print("CHRONICLE_MUSIC_SMOKE_", "FIXTURE_" if fixture else "", "OK" if failures == 0 else "FAILED", " checks=", checks, " failures=", failures)
+	print("CHRONICLE_MUSIC_SMOKE ", "PASS" if failures == 0 else "FAIL", " checks=", checks, " failures=", failures)
 	quit(1 if failures else 0)
 
 func verify_overlay_audio() -> void:

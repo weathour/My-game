@@ -48,7 +48,7 @@ func fixture(ids: Array, armor: String = "cloth_armor") -> RefCounted:
 	await frames()
 	var b: RefCounted = view.battle
 	b.director.spawn_remaining = 10000.0
-	var enemy: RefCounted = b.director.spawn("melee", b.position + Vector2(90, 0))
+	var enemy: RefCounted = b.director.spawn("E01", b.position + Vector2(90, 0))
 	enemy.hp = 100000
 	enemy.max_hp = 100000
 	enemy.cooldown = 10000

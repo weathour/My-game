@@ -17,8 +17,6 @@ var current_health: float = 0.0
 var max_health: float = 1.0
 var current_mana: float = 0.0
 var max_mana: float = 1.0
-var switch_energy: float = 0.0
-var switch_energy_required: float = 100.0
 
 func set_status(data: Dictionary, next_key_text: String, next_state_text: String, next_active: bool) -> void:
 	key_text = next_key_text
@@ -33,8 +31,6 @@ func set_status(data: Dictionary, next_key_text: String, next_state_text: String
 	max_health = max(1.0, float(data.get("max_health", 1.0)))
 	current_mana = max(0.0, float(data.get("current_mana", 0.0)))
 	max_mana = max(1.0, float(data.get("max_mana", 1.0)))
-	switch_energy = max(0.0, float(data.get("switch_energy", 0.0)))
-	switch_energy_required = max(1.0, float(data.get("switch_energy_required", 100.0)))
 	queue_redraw()
 
 func _draw() -> void:

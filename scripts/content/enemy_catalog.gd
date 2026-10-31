@@ -38,8 +38,6 @@ const DEFINITIONS := {
 			"聚拢后用范围攻击清群。",
 			"从一侧开路，避开包围。"
 		],
-		"portrait_path": "",
-		"actor_path": "",
 		"palette": [
 			"72694f",
 			"c5ad79",
@@ -83,8 +81,6 @@ const DEFINITIONS := {
 			"看清瞄准方向后侧移避箭。",
 			"清开前排或绕侧接近弓手。"
 		],
-		"portrait_path": "",
-		"actor_path": "",
 		"palette": [
 			"72694f",
 			"c5ad79",
@@ -126,8 +122,6 @@ const DEFINITIONS := {
 			"横向避开锁定路线。",
 			"等待冲锋停步后上前反击。"
 		],
-		"portrait_path": "",
-		"actor_path": "",
 		"palette": [
 			"72694f",
 			"c5ad79",
@@ -171,8 +165,6 @@ const DEFINITIONS := {
 			"从盾面侧后进攻。",
 			"等它放盾再集中攻击，或持续击打正面。"
 		],
-		"portrait_path": "",
-		"actor_path": "",
 		"palette": [
 			"72694f",
 			"c5ad79",
@@ -216,8 +208,6 @@ const DEFINITIONS := {
 			"沿弹幕间隙移动。",
 			"趁发射空档接近并处理来源。"
 		],
-		"portrait_path": "",
-		"actor_path": "",
 		"palette": [
 			"72694f",
 			"c5ad79",
@@ -262,8 +252,6 @@ const DEFINITIONS := {
 			"在落罐前离开标记位置。",
 			"利用投罐后的空档接近来源。"
 		],
-		"portrait_path": "",
-		"actor_path": "",
 		"palette": [
 			"72694f",
 			"c5ad79",
@@ -318,8 +306,6 @@ const DEFINITIONS := {
 			"先处理鸣幡吏，停止后续指挥。",
 			"先清除部众，减少号令收益。"
 		],
-		"portrait_path": "",
-		"actor_path": "",
 		"palette": [
 			"72694f",
 			"c5ad79",
@@ -376,8 +362,6 @@ const DEFINITIONS := {
 			"击败祭巫，停止后续治疗。",
 			"把随从引出治疗范围再逐个处理。"
 		],
-		"portrait_path": "",
-		"actor_path": "",
 		"palette": [
 			"72694f",
 			"c5ad79",
@@ -431,8 +415,6 @@ const DEFINITIONS := {
 			"避过两次预告后抓回气进攻。",
 			"先清周围轻敌，腾出侧移空间。"
 		],
-		"portrait_path": "",
-		"actor_path": "",
 		"palette": [
 			"72694f",
 			"c5ad79",
@@ -476,8 +458,6 @@ const DEFINITIONS := {
 			"离开预告线路，等待钩镰扫过。",
 			"在锁向前穿过线路，从侧面接近。"
 		],
-		"portrait_path": "",
-		"actor_path": "",
 		"palette": [
 			"72694f",
 			"c5ad79",
@@ -535,8 +515,6 @@ const DEFINITIONS := {
 			"在孵化前破坏待孵棺卵。",
 			"优先处理驮役，阻止后续出生。"
 		],
-		"portrait_path": "",
-		"actor_path": "",
 		"palette": [
 			"72694f",
 			"c5ad79",
@@ -604,8 +582,6 @@ const DEFINITIONS := {
 			"沿预告缺口移动到安全处。",
 			"退出范围，等它回气后接近。"
 		],
-		"portrait_path": "",
-		"actor_path": "",
 		"palette": [
 			"72694f",
 			"c5ad79",
@@ -646,8 +622,6 @@ const DEFINITIONS := {
 			"先清附近轻敌，留下走位空间。",
 			"诱出挥击，趁收手时进攻。"
 		],
-		"portrait_path": "",
-		"actor_path": "",
 		"palette": [
 			"72694f",
 			"c5ad79",
@@ -702,8 +676,6 @@ const DEFINITIONS := {
 			"优先击败督军，停止后续指挥。",
 			"先清随从，使其无法继续受令。"
 		],
-		"portrait_path": "",
-		"actor_path": "",
 		"palette": [
 			"72694f",
 			"c5ad79",
@@ -749,8 +721,6 @@ const DEFINITIONS := {
 			"破坏灯锚，扩大安全空间。",
 			"穿过灯阵缺口直接攻击灯母。"
 		],
-		"portrait_path": "",
-		"actor_path": "",
 		"palette": [
 			"72694f",
 			"c5ad79",
@@ -800,8 +770,6 @@ const DEFINITIONS := {
 			"拉开精英与护卫的距离，断开连线。",
 			"先击败护卫，解除这次保护。"
 		],
-		"portrait_path": "",
-		"actor_path": "",
 		"palette": [
 			"72694f",
 			"c5ad79",
@@ -859,8 +827,6 @@ const DEFINITIONS := {
 			"孵化前破坏待孵物。",
 			"优先处理驮役，取消后续孵化。"
 		],
-		"portrait_path": "",
-		"actor_path": "",
 		"palette": [
 			"72694f",
 			"c5ad79",
@@ -906,8 +872,6 @@ const DEFINITIONS := {
 			"避开两次独立预告的危险范围。",
 			"趁虚影出招，从侧面攻击本体。"
 		],
-		"portrait_path": "",
-		"actor_path": "",
 		"palette": [
 			"72694f",
 			"c5ad79",
@@ -963,8 +927,6 @@ const DEFINITIONS := {
 			"看清雷标并提前离开落点。",
 			"把雷标引向暂不经过的位置，再接近本体。"
 		],
-		"portrait_path": "",
-		"actor_path": "",
 		"palette": [
 			"72694f",
 			"c5ad79",
@@ -1009,8 +971,6 @@ const DEFINITIONS := {
 			"诱使横扫落空，趁收势反击。",
 			"先清周围轻敌，再选择侧面接近。"
 		],
-		"portrait_path": "",
-		"actor_path": "",
 		"palette": [
 			"72694f",
 			"c5ad79",
@@ -1055,8 +1015,6 @@ const DEFINITIONS := {
 			"避开横扫后利用回气攻击。",
 			"先清理远射敌人，减少接近压力。"
 		],
-		"portrait_path": "",
-		"actor_path": "",
 		"palette": [
 			"72694f",
 			"c5ad79",
@@ -1113,8 +1071,6 @@ const DEFINITIONS := {
 			"避开分别预告的横扫与冲刺。",
 			"清开一侧的来敌，再集中攻击鬼魁。"
 		],
-		"portrait_path": "",
-		"actor_path": "",
 		"palette": [
 			"72694f",
 			"c5ad79",
@@ -1171,8 +1127,6 @@ const DEFINITIONS := {
 			"横向避开锁定的冲锋路线。",
 			"在冲锋终点附近等待回气再反击。"
 		],
-		"portrait_path": "",
-		"actor_path": "",
 		"palette": [
 			"72694f",
 			"c5ad79",
@@ -1233,8 +1187,6 @@ const DEFINITIONS := {
 			"穿过扇弹的间隙。",
 			"避开灯位，趁术士停手接近。"
 		],
-		"portrait_path": "",
-		"actor_path": "",
 		"palette": [
 			"72694f",
 			"c5ad79",
@@ -1291,8 +1243,6 @@ const DEFINITIONS := {
 			"避过连续重击，抓回气进攻。",
 			"先清附近敌人，再从侧面接近。"
 		],
-		"portrait_path": "",
-		"actor_path": "",
 		"palette": [
 			"72694f",
 			"c5ad79",
@@ -1349,8 +1299,6 @@ const DEFINITIONS := {
 			"先处理随从，减轻号令压力。",
 			"清开道路，优先攻击司令本体。"
 		],
-		"portrait_path": "",
-		"actor_path": "",
 		"palette": [
 			"72694f",
 			"c5ad79",
@@ -1407,8 +1355,6 @@ const DEFINITIONS := {
 			"横移离开预告路线。",
 			"清开侧路，在冲锋落点抓住回气。"
 		],
-		"portrait_path": "",
-		"actor_path": "",
 		"palette": [
 			"72694f",
 			"c5ad79",
@@ -1465,8 +1411,6 @@ const DEFINITIONS := {
 			"避过两拍攻击后从侧面反击。",
 			"先清开附近轻敌，留出移动空间。"
 		],
-		"portrait_path": "",
-		"actor_path": "",
 		"palette": [
 			"72694f",
 			"c5ad79",
@@ -1524,8 +1468,6 @@ const DEFINITIONS := {
 			"留意两体分别预告的动作并逐次避开。",
 			"抓交替空档攻击任一锁卫；一次范围攻击不会双倍结算。"
 		],
-		"portrait_path": "",
-		"actor_path": "",
 		"palette": [
 			"72694f",
 			"c5ad79",
@@ -1586,8 +1528,6 @@ const DEFINITIONS := {
 			"穿过扇形弹幕的空隙。",
 			"绕开延迟灯位，趁灯灵回气接近。"
 		],
-		"portrait_path": "",
-		"actor_path": "",
 		"palette": [
 			"72694f",
 			"c5ad79",
@@ -1649,8 +1589,6 @@ const DEFINITIONS := {
 			"破坏灯锚，扩大可移动空间。",
 			"穿过已有缺口，直接攻击阵主。"
 		],
-		"portrait_path": "",
-		"actor_path": "",
 		"palette": [
 			"72694f",
 			"c5ad79",
@@ -1707,8 +1645,6 @@ const DEFINITIONS := {
 			"避开预告冲线，待其停步反击。",
 			"先清轻敌，留出能横移的路线。"
 		],
-		"portrait_path": "",
-		"actor_path": "",
 		"palette": [
 			"72694f",
 			"c5ad79",
@@ -1765,8 +1701,6 @@ const DEFINITIONS := {
 			"先清随从，减轻号令压力。",
 			"绕开前排，集中处理鬼帅。"
 		],
-		"portrait_path": "",
-		"actor_path": "",
 		"palette": [
 			"72694f",
 			"c5ad79",
@@ -1795,8 +1729,6 @@ const DEFINITIONS := {
 			"横移离开瞄准线，从扇箭间隙接近。",
 			"避开突进路线，趁曹休收势反击。"
 		],
-		"portrait_path": "",
-		"actor_path": "",
 		"palette": [
 			"72694f",
 			"c5ad79",
@@ -1825,8 +1757,6 @@ const DEFINITIONS := {
 			"看清冲锋方向，横移离开路线。",
 			"避开横斩后，趁收势接近攻击。"
 		],
-		"portrait_path": "",
-		"actor_path": "",
 		"palette": [
 			"72694f",
 			"c5ad79",
@@ -1859,8 +1789,6 @@ const DEFINITIONS := {
 			"高顺列阵时离开路线；陈宫布阵时离开落点。",
 			"避过协同后，趁张辽回气反击。"
 		],
-		"portrait_path": "",
-		"actor_path": "",
 		"palette": [
 			"72694f",
 			"c5ad79",
@@ -1889,8 +1817,6 @@ const DEFINITIONS := {
 			"横移避开突进路线，离开落戟标记。",
 			"避过戟刃横扫，趁收势接近反击。"
 		],
-		"portrait_path": "",
-		"actor_path": "",
 		"palette": [
 			"72694f",
 			"c5ad79",
@@ -1933,8 +1859,6 @@ const DEFINITIONS := {
 			"先清援军，腾出行动空间。",
 			"先处理来源，阻止后续召唤。"
 		],
-		"portrait_path": "",
-		"actor_path": "",
 		"palette": [
 			"72694f",
 			"c5ad79",
@@ -1965,8 +1889,6 @@ const DEFINITIONS := {
 			"破坏灯锚，扩大通路。",
 			"从缺口接近来源，不必先破锚。"
 		],
-		"portrait_path": "",
-		"actor_path": "",
 		"palette": [
 			"72694f",
 			"c5ad79",
@@ -1997,8 +1919,6 @@ const DEFINITIONS := {
 			"孵化前破坏待孵物。",
 			"处理来源，取消尚未孵出的援军。"
 		],
-		"portrait_path": "",
-		"actor_path": "",
 		"palette": [
 			"72694f",
 			"c5ad79",
@@ -2054,8 +1974,6 @@ const DEFINITIONS := {
 			"观察右锁的预告并避开。",
 			"抓两体交替空档，攻击任一锁卫。"
 		],
-		"portrait_path": "",
-		"actor_path": "",
 		"palette": [
 			"72694f",
 			"c5ad79",
@@ -2086,8 +2004,6 @@ const DEFINITIONS := {
 			"离开列阵预告的路线。",
 			"趁协同结束后的共同回气攻击张辽。"
 		],
-		"portrait_path": "",
-		"actor_path": "",
 		"palette": [
 			"72694f",
 			"c5ad79",
@@ -2118,8 +2034,6 @@ const DEFINITIONS := {
 			"离开阵区预告的落点。",
 			"趁协同结束后的共同回气攻击张辽。"
 		],
-		"portrait_path": "",
-		"actor_path": "",
 		"palette": [
 			"72694f",
 			"c5ad79",
@@ -2152,11 +2066,27 @@ static func boss_ids() -> Array:
 static func derivative_ids() -> Array:
 	return ["D01", "D03", "D05", "B10_R", "M03_WAR", "M04_WAR"]
 
+## Structural contract used before constructing a body; fixtures may copy a real definition.
+static func runtime_errors(value: Dictionary) -> Array[String]:
+	var errors: Array[String] = []
+	for key in ["id", "behavior_id", "rank", "visual_id", "hp", "damage", "speed", "radius", "xp", "body_height", "attacks", "params"]:
+		if not value.has(key): errors.append("missing " + key)
+	if not errors.is_empty(): return errors
+	if str(value.id).is_empty() or str(value.visual_id).is_empty(): errors.append("missing enemy identity")
+	if float(value.hp) <= 0 or float(value.radius) < 0: errors.append("invalid body stats")
+	if value.attacks.is_empty() and str(value.rank) not in ["object", "proxy"]: errors.append("no authored attacks")
+	for action in value.attacks:
+		for key in ["id", "action", "shape", "range", "windup", "recovery", "damage_scale"]:
+			if not action.has(key): errors.append("attack missing " + key)
+		if float(action.get("windup", 0)) <= 0 or float(action.get("recovery", 0)) <= 0: errors.append("invalid attack timing")
+	return errors
+
 static func validate() -> Array:
 	var errors: Array = []
-	var required := ["id", "name", "behavior_id", "rank", "visual_id", "hp", "damage", "speed", "radius", "xp", "body_height", "attacks", "params", "elite_rule_id", "description", "counterplay", "portrait_path", "actor_path", "palette"]
+	var required := ["id", "name", "behavior_id", "rank", "visual_id", "hp", "damage", "speed", "radius", "xp", "body_height", "attacks", "params", "elite_rule_id", "description", "counterplay", "palette"]
 	for id in DEFINITIONS:
 		var value: Dictionary = DEFINITIONS[id]
+		for error in runtime_errors(definition(id)): errors.append(id + ": " + error)
 		for key in required:
 			if not value.has(key): errors.append(id + ": missing " + key)
 		if value.id != id: errors.append(id + ": identity mismatch")

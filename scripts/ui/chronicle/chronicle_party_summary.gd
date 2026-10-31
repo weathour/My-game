@@ -15,9 +15,6 @@ static func build(shell: Control, parent: Node) -> void:
 	scroll.focus_mode = Control.FOCUS_ALL
 	scroll.get_v_scroll_bar().focus_mode = Control.FOCUS_ALL
 	content.add_theme_constant_override("separation", 5)
-	if not shell.session.has_method("party_summary"):
-		content.add_child(T.paragraph("界面演练，不计算实战加成。", T.MUTED, 13))
-		return
 	var model: Dictionary = shell.session.party_summary()
 	var attributes := content
 	var effects := content

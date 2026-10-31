@@ -38,7 +38,7 @@ func fixture(ids: Array = ["JIA", "F11", "F04"], level: int = 10, freeze_regen: 
 	return b
 
 func dummy(b: RefCounted, offset: Vector2 = Vector2(90, 0)) -> RefCounted:
-	var enemy: RefCounted = b.director.spawn("melee", b.position + offset)
+	var enemy: RefCounted = b.director.spawn("E01", b.position + offset)
 	enemy.hp = 100000.0
 	enemy.max_hp = enemy.hp
 	enemy.cooldown = 10000

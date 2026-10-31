@@ -1,6 +1,6 @@
 extends RefCounted
 ## Formal campaign boundary. Only validated victories mutate progression.
-## UI rehearsal and legacy saves have separate schemas and directories.
+## Campaign storage validates its own schema before loading progress.
 const STORY_STATE := preload("res://scripts/campaign/campaign_story_state.gd")
 const STORIES := preload("res://scripts/content/story_catalog.gd")
 const STORY_CONDITIONS := preload("res://scripts/content/story_conditions.gd")

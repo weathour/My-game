@@ -29,7 +29,7 @@ static func cancel(shell: Control) -> void:
 		for card in shell.frame.find_children("*", "Button", true, false): card.queue_redraw()
 
 static func valid_drop(shell: Control, data: Variant, target: int) -> bool:
-	if not is_instance_valid(shell) or not data is Dictionary or not shell.session.has_method("can_reposition_party"): return false
+	if not is_instance_valid(shell) or not data is Dictionary: return false
 	if data.get("kind") != DRAG_KIND or data.get("session") != shell.session.get_instance_id() or data.get("page") != shell.page: return false
 	if not data.get("id") is String or typeof(data.get("source_slot")) != TYPE_INT: return false
 	return shell.page in ["roster", "preparation"] and shell.session.can_reposition_party(data.id, target, data.source_slot)
@@ -50,7 +50,7 @@ func _ready() -> void:
 	mouse_exited.connect(func(): drop_hover = false; queue_redraw())
 
 func _payload() -> Dictionary:
-	if not is_instance_valid(host) or character_id.is_empty() or slot_index == -2 or not host.session.has_method("can_reposition_party"): return {}
+	if not is_instance_valid(host) or character_id.is_empty() or slot_index == -2: return {}
 	var source: int = host.session.data.party.find(character_id)
 	if not host.session.can_reposition_party(character_id, 0, source): return {}
 	return {"kind":DRAG_KIND, "id":character_id, "source_slot":source, "session":host.session.get_instance_id(), "page":host.page}

@@ -34,10 +34,10 @@
 
 蕾娜原动作图攻击行第 3、4 格的剑尖与邻帧披风粘连，不能无污染切出。经[两帧补画](source/F02-leina-attack-fix-v1.png)替换这两帧，其他 18 帧保留原源图；补画实际提示词为[此版本](prompts/F02-leina-attack-fix-used-v1.txt)，补画按恢复站姿统一采用 `80/595` 的尺度登记，不把原 20 格称为全数合格。量测及来源见[逐帧记录](export-measurements.json)和[派生记录](derivatives.json)。
 
-界面专项 headless／真实渲染各 **PASS 525**；[日志](ui-evidence/portraits-headless.log)和[渲染日志](ui-evidence/portraits-rendered.log)为同一组重叠检查，不相加。战斗专项 [headless **PASS 194**](combat-evidence/headless.log)、[真实 OpenGL **PASS 185**](combat-evidence/gl.log)；后者运行时尚未加入 9 项尺寸断言，最新脚本另对 F02／F06／F09 三种尺寸做了[补验 **PASS 74**](combat-evidence/gl-scale.log)，这些结果不相加或合称“真实渲染 194”。贾苇索美术[兼容回归 **PASS 26**](combat-evidence/jia-regression.log)，特效复用的[回归日志为 **PASS 36**](combat-evidence/authored-effects.log)。
+当时界面专项 headless／真实渲染各 **525 项**通过；战斗专项分别为 **194／185 项**，另有三尺寸 **74 项**补验。各组检查有重叠，不相加。派生截图与日志不再随当前工程保存，源图、量测及导出清单保留；当前工程检查见[状态入口](../../docs/08_当前实现状态与后续重点.md)。
 
 Godot 必需的 headless 启动通过，见[启动日志](godot-startup.log)；本轮有效日志经检查无警告和错误。界面证据含 57 张截图及 81 项界面区域量测，早期未完整生成截图的日志单独保留，不作为通过证据。Graphify 受保护更新因缺少 Godot 提取器、遗漏 190 个运行脚本而拒绝候选，保留 STALE 旧图，见[更新日志](graphify-update.log)；这不影响上述游戏专项检查。
 
-[九人动作总览 GIF](combat-evidence/runtime-preview.gif)由 48 张预览帧按 12 fps 汇出，用于观察完整素材动作循环；实际战斗中的攻击从各人物的接触帧起播。27 张战斗、辅助动作与三尺寸截图见[战斗证据](combat-evidence/)，人物页面、卡片与剧情截图见[界面证据](ui-evidence/)。已抽看动作总览、蕾娜守势、秦雁战斗、九人卡片和钱绮罗剧情／详情；截图验证覆盖和效果不等同于全部角色的人工实玩验收。
+当时曾生成九人动作总览并抽看战斗、卡片、剧情与详情画面；派生 GIF 和截图不再随当前工程保存。截图及自动验证不等同于全部角色的人工实玩验收。
 
 本轮没有制作独立表情差分或八方向动作。后续结合实玩反馈调整动作观感，并按既有计划继续其他人物；未开放的后续关卡不会因美术接入而开放。

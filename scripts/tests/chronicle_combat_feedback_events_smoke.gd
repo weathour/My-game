@@ -36,8 +36,8 @@ func fixture(ids: Array = ["JIA"]) -> RefCounted:
 		if support != null: actor.cooldowns[str(support.id)] = 10000.0
 	return b
 
-func enemy(b: RefCounted, kind: String = "melee", offset: Vector2 = Vector2(90, 0)) -> RefCounted:
-	var e: RefCounted = b.director.spawn(kind, b.position + offset)
+func enemy(b: RefCounted, definition_id: String = "E01", offset: Vector2 = Vector2(90, 0)) -> RefCounted:
+	var e: RefCounted = b.director.spawn(definition_id, b.position + offset)
 	e.speed = 0
 	e.cooldown = 10000
 	b.enemies.append(e)
@@ -65,7 +65,7 @@ func run() -> void:
 
 func lethal_and_removal() -> void:
 	var b := fixture()
-	var e := enemy(b, "melee", Vector2(70, 0))
+	var e := enemy(b, "E01", Vector2(70, 0))
 	var point: Vector2 = e.position
 	b.current().cooldowns.clear()
 	b.current().stats.attack = 100000
@@ -94,7 +94,7 @@ func lethal_and_removal() -> void:
 func multi_target_and_followup() -> void:
 	var b := fixture(["JIA", "F06"])
 	var first := enemy(b)
-	var second := enemy(b, "melee", Vector2(90, 20))
+	var second := enemy(b, "E01", Vector2(90, 20))
 	for e in [first, second]: e.hp = 100000; e.max_hp = e.hp
 	b.characters.F06.cooldowns.clear()
 	var sweep := A.make("feedback_basic", "test", A.Kind.NOVA, 0.1, 150, 0)
@@ -117,7 +117,7 @@ func multi_target_and_followup() -> void:
 	b._hits.append_array([{"target":first,"context":shared}, {"target":first,"context":shared}])
 	b._resolve_hits()
 	expect(rows(b, "damage_dealt").size() == 1, "duplicate receiver in one delivery has one contact")
-	var proxy := enemy(b, "melee", Vector2(100, 50))
+	var proxy := enemy(b, "E01", Vector2(100, 50))
 	proxy.hp_owner = first
 	b.events.clear()
 	b._hits.append_array([{"target":proxy,"context":shared}, {"target":first,"context":shared}])

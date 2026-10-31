@@ -123,7 +123,6 @@ func fixture(current: String, available: Array, completed: Array) -> void:
 	expect(state.valid(state.data), "valid boundary fixture " + current)
 	expect(state.save_slot("auto") and state.save_slot("auto") and state.save_slot("1") and state.save_slot("1"), "persist auto/manual/backup boundary")
 	shell.selected_node = current
-	shell.segment = int(state.nodes[current].segment)
 	shell.route_scroll = -1.0
 	shell.open_page("route")
 	await frames(14)

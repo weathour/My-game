@@ -59,7 +59,7 @@ func run() -> void:
 	b.tick(0,Vector2.ZERO)
 	view.canvas.refresh(false)
 	expect(not actor.attacking, "empty battlefield does not animate failed basic casts")
-	var enemy: RefCounted = b.director.spawn("melee", b.position + Vector2(-80,0))
+	var enemy: RefCounted = b.director.spawn("E01", b.position + Vector2(-80,0))
 	enemy.hp = 10000
 	enemy.max_hp = 10000
 	b.enemies.append(enemy)

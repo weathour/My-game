@@ -106,6 +106,8 @@ func run() -> void:
 	await frames()
 	await check_battle()
 	await check_route_entry()
+	viewport.queue_free()
+	await frames(2)
 	print("CHRONICLE_ENEMY_PRESENTATION_SMOKE ", "PASS" if failures == 0 else "FAIL", " checks=", checks, " failures=", failures)
 	quit(0 if failures == 0 else 1)
 
@@ -116,8 +118,7 @@ func check_actor_clock() -> void:
 	actor.metadata = {"clips":{}}
 	for key in MANIFEST.REQUIRED_CLIPS:
 		actor.metadata.clips[key] = {"frames":4, "fps":10, "frame_size":[192,192], "windup_frame":0, "contact_frame":1}
-	var enemy: RefCounted = RUNTIME.new(990, "melee", Vector2.ZERO)
-	enemy.configure(CATALOG.definition("E01"))
+	var enemy: RefCounted = RUNTIME.new(990, CATALOG.definition("E01"), Vector2.ZERO)
 	enemy.state = "tell"
 	enemy.action_serial = 1
 	enemy.current_action = {"major":false}

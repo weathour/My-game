@@ -44,7 +44,7 @@ Rewardcard/equipmentassignedbyfieldslotnotdefinition,XP18default root only. Stag
 
 ## Boss identities and family/sequence
 Keepall18specificvisual IDs evenwherekitshared. Familiesmapping: A B01/B02; B B04/B03/B08/B13; C B05/B11; D B06/B09/B10; E B07/B14; F B12; G B15; H B16; I B17; J B18.
-Terra fullnames/copy path /tmp/my-game-baimen-enemy-art-direction-candidates.md (latest form revision). Normal humanoid-with-armor is insufficient as finalBoss:
+The retained identity list is below; current source and provenance are recorded with the enemy production files. Normal humanoid-with-armor is insufficient as finalBoss:
 B01 empty-faced stele-armored patrol;B02 huge eaves/copperdeitymaskbody;B04 wagon/yokeboneox/demonfusion;B05 hangingmasklantern/longjointedrobe;B03 three-mask/rippedbannerhulk;B06 shrineroofstonebeast;B07 giantsealbody/scrollarms;B08 floodgate-toothedcrocodilelongbody;B09 furnacebellyfourlegs;B10 lock-facedtwinwardens(twoindependentvisualsB10/B10_R);B11 many-eyedumbrella-lanternspirit;B12 multiarmbanner-lanternwitch;B13 battlementstoneowlbeast;B14 boatcoffinlongbodyspectralmarshal.
 B15 CaoXiu ghosthunterbeastform retainsface+bow; G attacks must include lockedvolley plus staggeredshortcharge/finitecommand (do not makehimjustanotherCaoChuncharger).
 B16 CaoChun tigerpantherarmoredridergiant retainsface+weapon; longcommittedrush/escortdifferentinterval.

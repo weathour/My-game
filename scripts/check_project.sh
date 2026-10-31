@@ -33,7 +33,6 @@ GODOT_ERROR_PATTERN="SCRIPT ERROR|Parser Error|Parse Error|Invalid call|Failed t
 echo "== Python project checks =="
 python3 scripts/tests/check_docs_links.py
 python3 scripts/tests/check_project_config.py
-python3 scripts/tests/check_architecture_contract_self_test.py
 python3 scripts/tests/check_graph_update_self_test.py
 python3 scripts/tests/check_smoke_log_self_test.py
 python3 scripts/tests/check_architecture_contract.py
@@ -72,7 +71,6 @@ if [[ -n "$GODOT_BIN" ]]; then
     local runner=()
     local limit=90
     name="$(basename "${script%.gd}")"
-    [[ "$name" == "boss_danmaku_stress_smoke" ]] && limit=240
     log="$CHECK_LOG_DIR/${name}.log"
     # Pixel assertions and actual music playback need a real display; CI
     # supplies Xvfb. Dummy still decodes/mixes audio without a hardware device.
@@ -152,9 +150,6 @@ if [[ -n "$GODOT_BIN" ]]; then
   run_pack_smokes
 
   for smoke in scripts/tests/*_smoke.gd; do
-    # The dense benchmark is deliberately separate because it compares two
-    # timed cases and writes result artifacts.
-    [[ "$(basename "$smoke")" == "dense_combat_benchmark_smoke.gd" ]] && continue
     [[ "$(basename "$smoke")" == "chronicle_enemy_pack_smoke.gd" ]] && continue
     [[ "$(basename "$smoke")" == "chronicle_music_pack_smoke.gd" ]] && continue
     [[ "$(basename "$smoke")" == "chronicle_story_pack_smoke.gd" ]] && continue

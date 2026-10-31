@@ -42,11 +42,9 @@ var unlocked: bool = false
 var cooldown_overlay: CooldownOverlay
 var auto_mode: bool = false
 var _auto_border_spin: float = 0.0
-var skill_point_highlighted: bool = false
-var skill_point_highlight: Panel
 
 func _ready() -> void:
-	# The upgrade button sits above the icon; only clip the cooldown sweep.
+	# Clip only the cooldown sweep; the animated border can extend outside the icon.
 	clip_contents = false
 	cooldown_overlay = CooldownOverlay.new()
 	cooldown_overlay.clip_contents = true
@@ -58,25 +56,7 @@ func _ready() -> void:
 	cooldown_overlay.offset_bottom = 0.0
 	add_child(cooldown_overlay)
 	cooldown_overlay.set_ratio(cooldown_ratio if unlocked else 0.0)
-	skill_point_highlight = Panel.new()
-	skill_point_highlight.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	skill_point_highlight.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	skill_point_highlight.z_index = 3
-	var highlight_style := StyleBoxFlat.new()
-	highlight_style.bg_color = Color(1.0, 0.8, 0.05, 0.015)
-	highlight_style.border_color = Color(1.0, 0.83, 0.25, 0.6)
-	highlight_style.set_border_width_all(1)
-	skill_point_highlight.add_theme_stylebox_override("panel", highlight_style)
-	skill_point_highlight.visible = skill_point_highlighted
-	add_child(skill_point_highlight)
 	_update_processing()
-
-func set_skill_point_highlighted(enabled: bool) -> void:
-	if skill_point_highlighted == enabled:
-		return
-	skill_point_highlighted = enabled
-	if skill_point_highlight != null:
-		skill_point_highlight.visible = enabled
 
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_VISIBILITY_CHANGED:

@@ -3,7 +3,7 @@ const SPACE := preload("res://scripts/battle/battle_space.gd")
 const GEOMETRY := preload("res://scripts/battle/enemy_geometry.gd")
 
 static func step(enemies: Array, actor: Vector2, delta: float, world: Dictionary = {}) -> Dictionary:
-	var result := {"hits":[], "projectiles":[], "effects":[], "spawns":[], "events":[], "hit_sources":[]}
+	var result := {"hits":[], "projectiles":[], "effects":[], "spawns":[], "events":[], "hit_sources":[], "configuration_errors":[]}
 	var hazards: Array = world.get("hazards", [])
 	var config: Dictionary = world.get("config", {})
 	var used := {"major":0, "melee":0}
@@ -28,7 +28,6 @@ static func step(enemies: Array, actor: Vector2, delta: float, world: Dictionary
 			var was_guarding: bool = enemy.guard_active
 			enemy.guard_active = fmod(enemy.age, float(enemy.params.get("guard_duration", 2.6)) + 1.4) < float(enemy.params.get("guard_duration", 2.6))
 			if enemy.guard_active and not was_guarding: enemy.aim = (actor - enemy.position).normalized()
-		enemy.flash = maxf(0, enemy.flash - delta)
 		enemy.slow_time = maxf(0, enemy.slow_time - delta)
 		if enemy.slow_time <= 0: enemy.slow = 0
 		enemy.command_remaining = maxf(0, enemy.command_remaining - delta)
@@ -55,11 +54,6 @@ static func step(enemies: Array, actor: Vector2, delta: float, world: Dictionary
 			for escort in enemies:
 				if not escort.dead and escort.parent_id == enemy.id and escort.definition_id == "D01" and escort.position.distance_to(enemy.position) <= 220:
 					enemy.protection_remaining = 5; enemy.rule_cooldown = 8; break
-		if enemy.behavior_id == "J" and enemy.form_count == 1:
-			var next_phase := 2 if enemy.hp <= enemy.max_hp * 0.35 else 1 if enemy.hp <= enemy.max_hp * 0.70 else 0
-			if next_phase != enemy.phase:
-				enemy.phase = next_phase
-				result.events.append({"kind":"boss_phase", "id":enemy.id, "phase":next_phase})
 		if enemy.active_remaining > 0:
 			_advance_charge(enemy, actor, delta, enemies, result)
 			continue
@@ -80,6 +74,9 @@ static func step(enemies: Array, actor: Vector2, delta: float, world: Dictionary
 				_move(enemy, actor, enemies, delta, 100)
 				continue
 		var action := _next_action(enemy)
+		if action.is_empty():
+			result.configuration_errors.append("Enemy %s has no authored attacks" % enemy.definition_id)
+			continue
 		if str(action.get("action", "")) == "collaboration":
 			if int(enemy.params.get("collaboration_index", 0)) % 2 == 0:
 				action.shape = "line"; action.length = float(action.get("length", 280.0)); action.half_width = float(action.get("half_width", 36.0)); action.collaborator = "M03_WAR"
@@ -129,19 +126,9 @@ static func _budget(action: Dictionary) -> String:
 	return "major" if bool(action.get("major", str(action.get("action", "")) not in ["swipe", "strike", "shot"])) else "melee"
 
 static func _next_action(enemy: RefCounted) -> Dictionary:
-	if enemy.behavior_id == "J" and enemy.form_count == 1 and not enemy.actions.is_empty():
-		var pattern: Array = [0, 1] if enemy.phase == 0 else [0, 1, 0, 2] if enemy.phase == 1 else [0, 1, 0, 1, 2]
-		var step_index: int = enemy.attack_index % pattern.size()
-		var action: Dictionary = enemy.actions[int(pattern[step_index]) % enemy.actions.size()].duplicate(true)
-		action.combo_step = step_index
-		action.combo_length = pattern.size()
-		action.combo_final = step_index == pattern.size() - 1
-		action.recovery = (2.0 + enemy.phase * 0.25) if action.combo_final else (0.9 - enemy.phase * 0.1)
-		return action
 	if not enemy.actions.is_empty():
 		return enemy.actions[enemy.attack_index % enemy.actions.size()].duplicate(true)
-	var legacy: String = enemy.attack_cycle[enemy.attack_index % enemy.attack_cycle.size()]
-	return {"action":legacy, "shape":"line" if legacy == "charge" else "disc" if legacy == "nova" else "fan" if legacy in ["shot", "fan"] else "sector", "range":enemy.blast_radius + 20 if legacy == "nova" else enemy.attack_range, "radius":enemy.blast_radius if legacy == "nova" else enemy.radius + 28, "windup":1.15 if legacy == "nova" else enemy.attack_delay, "recovery":enemy.recovery, "count":5 if legacy == "fan" else 1, "spread":1.15, "length":240, "damage_scale":1.2 if legacy == "nova" else 1.0}
+	return {}
 
 static func _move(enemy: RefCounted, actor: Vector2, enemies: Array, delta: float, reach: float) -> void:
 	if enemy.behavior_id == "E08": return # A shrine stays anchored; kiting breaks its coverage.
@@ -188,10 +175,9 @@ static func _initialize(enemy: RefCounted, enemies: Array, result: Dictionary, c
 
 static func _release(enemy: RefCounted, actor: Vector2, enemies: Array, hazards: Array, result: Dictionary, config: Dictionary) -> void:
 	var action: Dictionary = enemy.current_action
-	if action.is_empty():
-		# Preserve the public legacy-fixture seam without replacing authored actions.
-		action = {"action":enemy.attack, "shape":"line" if enemy.attack == "charge" else "disc", "range":enemy.attack_range, "radius":enemy.blast_radius if enemy.attack == "nova" else enemy.radius + 28, "length":240, "windup":enemy.attack_delay, "recovery":enemy.recovery, "damage_scale":1.2 if enemy.attack == "nova" else 1.0}
-		if enemy.telegraph.is_empty(): enemy.telegraph = GEOMETRY.descriptor(enemy, action, enemy.position + enemy.aim * 100)
+	if action.is_empty() or enemy.telegraph.is_empty():
+		result.configuration_errors.append("Enemy %s released without an authored action and warning" % enemy.definition_id)
+		return
 	var geometry: Dictionary = enemy.telegraph.duplicate(true)
 	geometry.phase = "active"
 	enemy.cooldown = float(action.get("recovery", 1.6))
@@ -240,7 +226,6 @@ static func _release(enemy: RefCounted, actor: Vector2, enemies: Array, hazards:
 			result.events.append({"kind":"collaboration", "id":enemy.id, "visual_id":visual, "origin":geometry.origin, "duration":1.6})
 			if visual == "M03_WAR":
 				if GEOMETRY.contains(geometry, actor): _record_hit(result, geometry)
-				if enemy.form_count == 1: _summon(enemy, {"spawn_id":"D01", "spawn_count":2, "limit":4}, enemies, result, config)
 			else:
 				var array_tell: Dictionary = geometry.duplicate(true)
 				array_tell.phase = "tell"; array_tell.kind = "collaboration_array"; array_tell.remaining = 0.9; array_tell.total = 0.9

@@ -1,5 +1,5 @@
 extends RefCounted
-## Campaign story content is independent of the legacy quest/save system.
+## Authored campaign story events and read-only lookup.
 const PATH := "res://assets/data/chronicle/story_events.json"
 const CONDITIONS := preload("res://scripts/content/story_conditions.gd")
 const OPTIONAL_PATH := "res://assets/data/chronicle/character_events.json"

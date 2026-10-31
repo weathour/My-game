@@ -18,7 +18,6 @@ static func hit_enemy(enemy: RefCounted, context: Dictionary) -> bool:
 	amount += settled * vulnerability
 	if enemy.protection_remaining > 0: amount *= 1 - float(enemy.params.get("link_reduction", 0.25))
 	enemy.receive_damage(amount)
-	enemy.flash = 0.12
 	var slow: float = context.slow
 	var duration: float = context.duration
 	if context.get("enchant", "") == "frost_jade": slow = maxf(slow, 0.35); duration = maxf(duration, 1.5)

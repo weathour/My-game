@@ -6,4 +6,4 @@ The White Gate chapter has 36 route nodes, 18 configured battles and 38 initial 
 
 The protagonist can protect the city and also commits serious wrongdoing. The assault on the adult 吕玲绮 is stated without depicting the act; the consequences and her resentment remain. The current chapter ends with a specific truce and limited outside-station assignment; this is the implemented story, not an invented territory-management system.
 
-The next production step is to deliver a clean local project containing the current game, necessary production sources and licenses, with existing campaign saves and settings compatible. Battle balance, whole-chapter play and subjective audio and visual acceptance remain open. Later campaigns, world action economy and relationship progression need separate design.
+The current local project contains the game, necessary production sources and licenses. Existing campaign saves and settings remain compatible. Battle balance, whole-chapter play and subjective audio and visual acceptance remain open. Later campaigns, world action economy and relationship progression need separate design.

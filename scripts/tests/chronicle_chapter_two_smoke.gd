@@ -61,14 +61,13 @@ func encounter_contracts() -> void:
 		expect(director.tick(.01,stage.enemy_cap-1,SPACE.CENTER).size() == 1, id + " grouped waves respect enemy cap")
 	var director := DIRECTOR.new(C.stage("B03"),1703)
 	var boss := director.spawn("boss",SPACE.CENTER)
-	boss.attack = "nova"
-	boss.windup = .05
-	var dodge := ENEMIES.step([boss],SPACE.CENTER+Vector2(200,0),.1)
-	expect(dodge.hits.is_empty(), "leaving the telegraphed blast avoids damage")
-	boss.windup = .05
-	var hit := ENEMIES.step([boss],SPACE.CENTER+Vector2(50,0),.1)
-	expect(hit.hits.size() == 1 and hit.effects[0].radius == boss.blast_radius, "blast damage and shown radius share the same source")
-	var charger := director.spawn("charger",SPACE.CENTER)
+	boss.cooldown = 0
+	var boss_tell := ENEMIES.step([boss],SPACE.CENTER+Vector2(200,0),.01)
+	expect(boss.attack == "charge" and boss.windup > 0 and boss_tell.hits.is_empty(), "B03 uses its authored charge warning before striking")
+	var committed: Dictionary = boss.telegraph.duplicate(true)
+	ENEMIES.step([boss],SPACE.CENTER+Vector2(200,200),.1)
+	expect(boss.telegraph.origin == committed.origin and boss.telegraph.direction == committed.direction, "committed boss warning remains locked while the player dodges")
+	var charger := director.spawn("E03",SPACE.CENTER)
 	charger.cooldown = 0
 	var start := ENEMIES.step([charger],SPACE.CENTER+Vector2(200,0),.01)
 	expect(charger.attack == "charge" and charger.windup > 0 and start.hits.is_empty(), "charger warns before striking")
@@ -87,7 +86,7 @@ func new_character_contracts() -> void:
 		b.director.spawn_remaining = 1000
 		b.characters.JIA.hp -= 60
 		b.characters.JIA.mp = 0
-		var enemy: RefCounted = b.director.spawn("guard",b.position+Vector2(100,0))
+		var enemy: RefCounted = b.director.spawn("E01",b.position+Vector2(100,0))
 		enemy.hp = 10000
 		enemy.cooldown = 1000
 		b.enemies.append(enemy)
@@ -204,7 +203,7 @@ func play(state: RefCounted, branch: String, field: int) -> bool:
 	var b: RefCounted = view.battle
 	var captured_wave := false
 	var captured_boss := false
-	var captured_blast := false
+	var captured_warning := false
 	var kinds := {}
 	for frame in 18000:
 		if not b.outcome.is_empty(): break
@@ -219,9 +218,7 @@ func play(state: RefCounted, branch: String, field: int) -> bool:
 		elif not b.gems.is_empty(): movement = (b.gems[0].position-b.position).normalized()
 		for enemy in b.enemies:
 			if enemy.windup <= 0: continue
-			if enemy.attack == "nova" and b.position.distance_to(enemy.position) < enemy.blast_radius+60:
-				movement = (b.position-enemy.position).normalized()
-			elif enemy.attack == "charge" and Geometry2D.get_closest_point_to_segment(b.position, enemy.position, enemy.position+enemy.aim*240).distance_to(b.position) < enemy.radius+36:
+			if enemy.attack == "charge" and Geometry2D.get_closest_point_to_segment(b.position, enemy.position, enemy.position+enemy.aim*240).distance_to(b.position) < enemy.radius+36:
 				movement = enemy.aim.orthogonal()
 		if b.current().hp < b.current().stats.hp * .3:
 			var next: int = posmod(b.active+1,b.members.size())
@@ -237,9 +234,9 @@ func play(state: RefCounted, branch: String, field: int) -> bool:
 			await capture(view,id+"-boss")
 			captured_boss = true
 		for enemy in b.enemies:
-			if enemy.attack == "nova" and enemy.windup > .3 and not captured_blast:
-				await capture(view,id+"-blast")
-				captured_blast = true
+			if enemy.kind == "boss" and enemy.windup > .3 and not captured_warning:
+				await capture(view,id+"-boss-warning")
+				captured_warning = true
 	var summary := {"branch":branch,"stage":id,"outcome":b.outcome,"seconds":snappedf(b.director.elapsed,.1),"kills":b.director.kills,"jia_level":b.characters.JIA.level,"jia_hp":snappedf(b.characters.JIA.hp,.1),"card_elite":b.director.card_elite,"enemy_kinds":kinds.keys()}
 	reports.append(summary)
 	print("CAMPAIGN_RUN ",JSON.stringify(summary))
@@ -267,7 +264,6 @@ func capture_page(state: RefCounted, page: String, name: String) -> void:
 	shell.session = state
 	shell.page = page
 	shell.selected_node = state.data.current
-	shell.segment = int(state.nodes[state.data.current].segment)
 	viewport.add_child(shell)
 	for i in 4: await process_frame
 	if page == "route":

@@ -1,8 +1,12 @@
 extends Control
+signal quit_confirmed
 ## Presentation coordinator. Gameplay state lives in CampaignService; combat is a disposable BattleSession.
+const HOME := preload("res://scripts/ui/chronicle/chronicle_home_page.gd")
+const MENU_NAV := preload("res://scripts/ui/chronicle/chronicle_menu_navigation.gd")
+const MENU_TEXT := preload("res://scripts/ui/chronicle/chronicle_menu_text.gd")
+const UTILITY_PAGES := ["saves", "settings", "help", "about", "music"]
 const STYLE := preload("res://scripts/ui/chronicle/chronicle_theme.gd")
 const SESSION := preload("res://scripts/campaign/campaign_service.gd")
-const MAP := preload("res://scripts/ui/chronicle/chronicle_map.gd")
 const CHROME := preload("res://scripts/ui/chronicle/chronicle_campaign_chrome.gd")
 const WORLD_PAGE := preload("res://scripts/ui/chronicle/chronicle_world_page.gd")
 const ROUTE_PAGE := preload("res://scripts/ui/chronicle/chronicle_route_page.gd")
@@ -22,13 +26,16 @@ const CHARACTER_SHEET := preload("res://scripts/ui/chronicle/chronicle_character
 var session: RefCounted = SESSION.new()
 var battle_script: Script = BATTLE
 var page := "home"
+var navigation_contexts: Dictionary = {}
+var quit_callback: Callable
+var _returning_from_utility := false
+var _modal_close: Callable
 var previous_page := "world"
 var selected_province := "徐州"
 var world_tasks_open := false
 var selected_node := "S01"
 var selected_character := "JIA"
 var roster_filter := "owned"
-var character_return := "roster"
 var reward_focus := ""
 var party_return := "route"
 var party_preparation := false
@@ -39,7 +46,6 @@ var character_sheet_opener_name := ""
 var character_sheet_origin := ""
 var menu_return := "route"
 var search_text := ""
-var segment := 0
 var equipment_slot := "weapon"
 var selected_equipment := "plain_blade"
 var body: Control
@@ -92,18 +98,15 @@ func queue_render() -> void:
 
 func open_page(value: String) -> void:
 	if page == "battle": return
-	# Character inspection is an overlay of the current page, including callers
-	# which previously requested the standalone character route.
-	if value == "character":
-		inspect_character(selected_character)
-		return
+	if value in UTILITY_PAGES and value != page and not _returning_from_utility: _capture_navigation(value)
+	if value == "home": navigation_contexts.clear()
 	PAGES.PARTY.cancel_interaction(self)
 	if is_instance_valid(character_sheet): close_character_sheet(false)
 	if page == "music" and value != "music": close_music()
 	if page == "replay" and value != "replay":
 		if value == replay_return: _return_music_snapshot = _replay_snapshot
 		_clear_story_replay()
-	if value in ["roster", "equipment", "preparation"] and page not in ["roster", "equipment", "preparation", "character"]:
+	if value in ["roster", "equipment", "preparation"] and page not in ["roster", "equipment", "preparation"]:
 		party_return = "route" if value == "preparation" else page
 		party_preparation = value == "preparation"
 	if value == "preparation": party_preparation = true
@@ -119,15 +122,15 @@ func resume() -> void:
 	resume_view(true)
 
 func resume_view(enter_event: bool = false) -> void:
+	navigation_contexts.clear()
 	PAGES.PARTY.cancel_interaction(self)
 	if is_instance_valid(character_sheet): close_character_sheet(false)
 	_clear_story_replay()
 	route_scroll = -1.0
 	selected_node = session.data.current
-	segment = int(session.nodes[selected_node].segment)
 	page = "reward" if not session.data.pending.is_empty() else "route" if session.data.started and not session.data.finished else "world"
 	var checkpoint: Dictionary = session.data.get("story_checkpoint", {})
-	var battle_story: bool = session.has_method("awaiting_battle_story") and session.awaiting_battle_story()
+	var battle_story: bool = session.awaiting_battle_story()
 	if page == "route" and (battle_story or (session.nodes[selected_node].kind in ["event", "spring"] and (enter_event or checkpoint.get("event") == selected_node))):
 		page = "event"
 	_sync_page_music()
@@ -202,13 +205,11 @@ func render() -> void:
 	if is_instance_valid(modal): move_child(modal, -1)
 
 func story_content(id: String, replay: bool = false) -> Dictionary:
-	# The retained UI rehearsal has no campaign story transactions. Its preview
-	# still uses the authored base reader; formal saves always use frozen contexts.
-	return session.story_event(id, replay) if session.has_method("story_event") else STORIES.for_node(session.nodes[id])
+	return session.story_event(id, replay)
 
 func build_story() -> void:
 	var id: String = session.data.current
-	if not session.data.pending.is_empty() or id not in session.data.available or (session.has_method("event_available") and not session.event_available(id)):
+	if not session.data.pending.is_empty() or id not in session.data.available or not session.event_available(id):
 		page = "reward" if not session.data.pending.is_empty() else "route"
 		queue_render()
 		return
@@ -222,7 +223,7 @@ func build_story() -> void:
 	if session.nodes[id].kind == "spring": event.finish_label = "饮泉休整"
 	var checkpoint: Dictionary = session.data.get("story_checkpoint", {})
 	var line := STORIES.line_id(event, checkpoint)
-	if session.has_method("save_story_checkpoint") and (checkpoint != {"event":id, "line":line} or not session.data.get("story_contexts", {}).has(id)):
+	if checkpoint != {"event":id, "line":line} or not session.data.get("story_contexts", {}).has(id):
 		if not session.save_story_checkpoint(id, line):
 			build_story_save_error("route")
 			return
@@ -246,19 +247,19 @@ func _advance_story(line: String) -> void:
 	if not STORIES.has_line(event, line):
 		story_view.show_error("未找到这段对白，请返回路线后重试。")
 		return
-	if not session.has_method("save_story_checkpoint") or session.save_story_checkpoint(session.data.current, line):
+	if session.save_story_checkpoint(session.data.current, line):
 		story_view.show_line(line)
 	else:
 		story_view.show_error("未能保存阅读位置，请重试。")
 
 func open_optional_story(id: String) -> bool:
-	if page == "battle" or not session.has_method("can_read_optional_story") or not session.can_read_optional_story() or not session.optional_story_available(id): return false
+	if page == "battle" or not session.can_read_optional_story() or not session.optional_story_available(id): return false
 	optional_event = id
 	open_page("optional")
 	return true
 
 func build_optional_story() -> void:
-	if not session.has_method("can_read_optional_story") or not session.can_read_optional_story() or not session.optional_story_available(optional_event):
+	if not session.can_read_optional_story() or not session.optional_story_available(optional_event):
 		open_page("journal")
 		return
 	var event: Dictionary = story_content(optional_event)
@@ -300,7 +301,7 @@ func _advance_optional_story(line: String) -> void:
 	else: story_view.show_error("未能保存阅读位置，请重试。")
 
 func open_story_lore(id: String) -> bool:
-	if page == "battle" or session.in_battle or not session.has_method("available_story_lore"): return false
+	if page == "battle" or session.in_battle: return false
 	for entry in session.available_story_lore():
 		if entry.id == id:
 			lore_entry = id
@@ -310,9 +311,9 @@ func open_story_lore(id: String) -> bool:
 
 func can_replay_story(id: String) -> bool:
 	if page == "battle" or session.in_battle: return false
-	if session.has_method("read_optional_stories") and id in session.read_optional_stories(): return STORIES.optional_events().has(id)
+	if id in session.read_optional_stories(): return STORIES.optional_events().has(id)
 	if id not in session.data.completed or not session.nodes.has(id) or not STORIES.has_event(id): return false
-	return session.is_story_node(id) if session.has_method("is_story_node") else session.nodes[id].kind in ["event", "spring"]
+	return session.is_story_node(id)
 
 func replayable_stories() -> Array[String]:
 	var result: Array[String] = []
@@ -490,43 +491,60 @@ func portrait(parent: Control, width: float, bottom: float = 0.0) -> TextureRect
 	return art
 
 func build_home() -> void:
-	portrait(body, size.x * .43)
-	var margin := page_margin()
-	var row := STYLE.row(margin)
-	STYLE.space(row)
-	var panel := STYLE.panel(row, false, 28)
-	panel.custom_minimum_size.x = 370
-	panel.size_flags_vertical = Control.SIZE_SHRINK_CENTER
-	var column := STYLE.column(panel)
-	column.add_child(STYLE.label("三国志怪 · 战役录", 15, STYLE.MUTED))
-	column.add_child(STYLE.label("白门楼", 52, STYLE.INK, true))
-	column.add_child(STYLE.paragraph("白骨露于野，千里无鸡鸣。\n山河还在，且从这座鬼城起家。", STYLE.INK, 18))
-	column.add_child(HSeparator.new())
-	if not session.read_slot("auto").is_empty(): action(column, "继续行军", resume, "continue_campaign", true)
-	action(column, "启程白门楼", func():
-		confirm("重新开始行军？", "自动续档将回到贾苇索独自启程。另存的手动档保留。", func():
-			if session.reset() and session.begin_campaign(): resume_view()), "new_campaign", true)
-	action(column, "天下局势", func(): open_page("world"), "inspect_world")
-	var utilities := STYLE.row(column)
-	action(utilities, "音乐鉴赏", open_music, "music_room")
+	HOME.build(self)
 
-func map_split() -> HBoxContainer:
-	var row := STYLE.row(body)
-	row.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	row.add_theme_constant_override("separation", 0)
-	return row
+func new_campaign() -> void:
+	confirm("重新开始行军？", "自动续档将回到贾苇索独自启程。另存的手动档保留。", func():
+		if session.reset() and session.begin_campaign(): resume_view())
+
+func readable_save_slots() -> Array[String]:
+	var result: Array[String] = []
+	for slot in ["auto", "1", "2", "3"]:
+		if not session.read_slot(slot).is_empty(): result.append(slot)
+	return result
+
+func _capture_navigation(destination: String) -> void:
+	var focus := get_viewport().gui_get_focus_owner()
+	var opener := str(focus.name) if is_instance_valid(focus) and is_instance_valid(frame) and frame.is_ancestor_of(focus) else ""
+	var read_only: bool = page == "home" or not session.data.started
+	if page in UTILITY_PAGES and navigation_contexts.has(page): read_only = read_only or bool(navigation_contexts[page].get("read_only", false))
+	navigation_contexts[destination] = {"return_page":page,"opener_name":opener,"read_only":read_only}
+
+func saves_read_only() -> bool:
+	return not session.data.started or bool(navigation_contexts.get("saves", {}).get("read_only", page == "home"))
+
+func return_from_utility() -> void:
+	var context: Dictionary = navigation_contexts.get(page, {})
+	if context.is_empty():
+		open_page(previous_page)
+		return
+	navigation_contexts.erase(page)
+	var origin: String = str(context.get("return_page", "home"))
+	_returning_from_utility = true
+	open_page(origin)
+	_returning_from_utility = false
+	var opener_name: String = str(context.get("opener_name", ""))
+	var opener := frame.find_child(opener_name, true, false) if not opener_name.is_empty() else null
+	if opener is Control: _focus_control.call_deferred(weakref(opener))
+
+func request_quit() -> void:
+	confirm(MENU_TEXT.text("exit", "title"), MENU_TEXT.text("exit", "body"), _perform_quit, true, true, MENU_TEXT.text("exit", "confirm"), MENU_TEXT.text("exit", "cancel"))
+	modal.name = "QuitConfirmation"
+	MENU_NAV.wire([[modal.find_child("modal_confirm", true, false), modal.find_child("modal_cancel", true, false)]])
+
+func _perform_quit() -> void:
+	quit_confirmed.emit()
+	if quit_callback.is_valid(): quit_callback.call()
+	else: get_tree().quit()
+
+func close_modal() -> void:
+	var close := _modal_close
+	_modal_close = Callable()
+	if close.is_valid(): close.call()
+	elif is_instance_valid(modal): modal.queue_free(); modal = null
 
 func build_world() -> void:
 	WORLD_PAGE.build(self)
-
-func sidebar(parent: Node, title: String, subtitle: String) -> VBoxContainer:
-	var panel := STYLE.panel(parent, false, 20)
-	panel.custom_minimum_size.x = 310 if size.x >= 1150 else 270
-	var column := STYLE.column(panel)
-	column.add_child(STYLE.label(title, 28, STYLE.INK, true))
-	column.add_child(STYLE.paragraph(subtitle, STYLE.MUTED, 14))
-	column.add_child(HSeparator.new())
-	return column
 
 func build_route() -> void:
 	ROUTE_PAGE.build(self)
@@ -570,8 +588,8 @@ func close_battle() -> void:
 func show_notice(message: String) -> void:
 	confirm("行军提示", message, Callable(), false)
 
-func confirm(title: String, message: String, callback: Callable, cancellable: bool = true) -> void:
-	if is_instance_valid(modal): modal.queue_free()
+func confirm(title: String, message: String, callback: Callable, cancellable: bool = true, default_cancel: bool = false, confirm_label: String = "", cancel_label: String = "") -> void:
+	if is_instance_valid(modal): close_modal()
 	var opener := get_viewport().gui_get_focus_owner()
 	modal = ColorRect.new()
 	modal.color = Color(0.08, .1, .08, .78)
@@ -600,16 +618,17 @@ func confirm(title: String, message: String, callback: Callable, cancellable: bo
 		if is_instance_valid(modal):
 			modal.queue_free()
 			modal = null
-		if is_instance_valid(opener): opener.grab_focus()
-	var yes := action(buttons, "确认" if cancellable else "知道了", func(): close.call(); if callback.is_valid(): callback.call(), "modal_confirm", true)
+		if is_instance_valid(opener) and opener.is_inside_tree(): opener.grab_focus()
+	_modal_close = close
+	var yes := action(buttons, confirm_label if not confirm_label.is_empty() else "确认" if cancellable else "知道了", func(): close_modal(); if callback.is_valid(): callback.call(), "modal_confirm", true)
 	var no: Button
-	if cancellable: no = action(buttons, "取消", close, "modal_cancel")
+	if cancellable: no = action(buttons, cancel_label if not cancel_label.is_empty() else "取消", close_modal, "modal_cancel")
 	var targets: Array = [yes, no] if cancellable else [yes]
 	if scroll.focus_mode == Control.FOCUS_ALL: targets.append(scroll)
 	for i in targets.size():
 		targets[i].focus_next = targets[(i + 1) % targets.size()].get_path()
 		targets[i].focus_previous = targets[(i + targets.size() - 1) % targets.size()].get_path()
-	_focus_control.call_deferred(weakref(yes))
+	_focus_control.call_deferred(weakref(no if default_cancel and cancellable else yes))
 
 func _focus_control(reference: WeakRef) -> void:
 	var control: Variant = reference.get_ref()
@@ -621,6 +640,7 @@ func open_music() -> void:
 	if page == "music": return
 	music_tracks = MUSIC.chapter_cues()
 	if music_tracks.is_empty(): return
+	_capture_navigation("music")
 	music_return = page
 	previous_page = page
 	_preview_snapshot = _music_snapshot(page)
@@ -675,19 +695,17 @@ func _unhandled_key_input(event: InputEvent) -> void:
 	if page == "battle" and not is_instance_valid(modal): return
 	if event.keycode == KEY_ESCAPE:
 		if is_instance_valid(modal):
-			modal.queue_free()
-			modal = null
+			close_modal()
 		elif page != "battle":
-			if page == "home": open_page("world")
+			if page == "home": request_quit()
 			elif page in ["roster", "equipment"]: open_page(party_return)
-			elif page in ["saves", "settings", "journal"]: open_page(previous_page)
+			elif page in UTILITY_PAGES: return_from_utility()
+			elif page == "journal": open_page(previous_page)
 			elif page == "reward": show_notice("请完成本关选卡；也可以保存行军档，稍后继续同一组候选。")
 			elif page == "replay": close_story_replay()
 			elif page in ["optional", "lore"]: open_page("journal")
 			elif page in ["event", "preparation", "failure"]: open_page("route")
-			elif page == "character": open_page(character_return)
 			elif page == "menu": open_page(menu_return)
-			elif page == "music": open_page(music_return)
 			else: open_page("home")
 		get_viewport().set_input_as_handled()
 

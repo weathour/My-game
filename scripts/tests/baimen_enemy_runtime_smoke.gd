@@ -16,8 +16,12 @@ func expect(value: bool, message: String) -> void:
 func near(value: float, wanted: float, message: String) -> void: expect(absf(value - wanted) < 0.001, "%s %.3f != %.3f" % [message, value, wanted])
 func fixture(stage_id: String = "B01") -> RefCounted:
 	var stage := C.stage(stage_id)
-	stage.boss_time = 10000.0; stage.boss_kills = 10000; stage.spawn_interval = 10000.0
+	var duel := str(stage.get("encounter_mode", "")) == "boss_duel"
+	if not duel:
+		stage.boss_time = 10000.0; stage.boss_kills = 10000; stage.spawn_interval = 10000.0
 	var b := B.new({"attempt_id":"enemy_fixture", "members":["JIA"], "characters":{"JIA":C.record("JIA", 10)}, "equipment":{"weapon":"plain_blade", "armor":"cloth_armor", "accessory":""}, "stage":stage, "seed":19})
+	if duel: b.enemies.clear() # Keep the authored immediate-duel gates valid; test cases spawn the boss they exercise.
+	expect(b.outcome.is_empty() and b.director.configuration_error.is_empty(), "valid authored test stage: " + stage_id)
 	b.director.spawn_remaining = 10000
 	b.current().cooldowns[C.basic("JIA", b.equipment).id] = 10000
 	for skill in C.definition("JIA").automatic: b.current().cooldowns[skill.id] = 10000
@@ -184,9 +188,9 @@ func phase_and_team_sequences() -> void:
 			else: expect(float(action.recovery) >= 1.8, "human beats and war finisher have real recovery")
 		signatures.append(str(sequence))
 	expect(signatures[0] != signatures[1], "two forms use distinct authored sequences")
-	var nova := {"shape":"disc", "origin":b.position, "radius":190, "remaining":1.5}
-	expect(S._has_exit(nova, [], [], b.position, 215), "1.5-second pointblank slam has a reachable exit")
-	expect(not S._has_exit(nova, [], [], b.position, 10), "movement speed really constrains admission")
+	var pointblank_slam := {"shape":"disc", "origin":b.position, "radius":190, "remaining":1.5}
+	expect(S._has_exit(pointblank_slam, [], [], b.position, 215), "1.5-second pointblank slam has a reachable exit")
+	expect(not S._has_exit(pointblank_slam, [], [], b.position, 10), "movement speed really constrains admission")
 	var commander := add(b, "E07", Vector2(-40, 0))
 	boss.dead = true
 	var release: Dictionary = S.step([commander], b.position, 0.01, {"config":b.director.config})

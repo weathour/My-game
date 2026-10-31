@@ -57,22 +57,27 @@
     "clone_initially_clean": true,
     "object_alternates": false,
     "source_baseline_object_in_history": false,
-    "post_test_change": "Final documentation and verification record only; first commit will be amended."
+    "post_test_change": "Documentation and verification records were amended after the tested commit; no runtime changes are represented by those edits."
   },
   "daily_workspace_switch": {
     "status": "passed",
     "current_workspace": "My-game",
-    "source_repository_archive": "../My-game-source-archive-20261031",
     "headless_startup": "passed",
     "original_user_files_sha_unchanged": 5,
     "retained_art_audio_files_matched_source_sha": 1224,
     "new_history_commits": 1,
-    "remote_configured": false
+    "remote_configured": false,
+    "local_archives_deleted_at_user_request": [
+      "../My-game-source-archive-20261031",
+      "../My-game-local-archive"
+    ],
+    "original_logs_and_test_clone_retained_locally": false
   },
   "limits": [
     "Automated checks do not establish subjective audio or visual acceptance.",
     "The existing user data was inspected read-only; source files were not deleted or rewritten.",
-    "No new remote repository or GitHub write is authorized in this phase."
+    "No new remote repository or GitHub write is authorized in this phase.",
+    "Both adjacent local archives were subsequently deleted at the user’s request; detailed original logs and test clone are no longer retained locally. The remote source history contains committed material only."
   ],
   "post_prune_pack": {
     "status": "passed",

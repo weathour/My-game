@@ -23,4 +23,4 @@ Godot 4.6.2 实时肉鸽游戏：玩家操作固定主角贾苇索，携带最�
 
 开发时运行 Godot 4.6.2 headless 启动以及 `./scripts/check_project.sh`；设置 `GODOT_BIN` 可指定 Godot 程序。自动化与渲染检查用于发现规则和技术问题，不能代替完整试玩、画面审美与主观听审。
 
-当前工程由原型仓库的 `f75dfc6` 基线收敛为独立本地 Git 仓库，已通过空目录与全新克隆检查；原仓库与 Git 历史保存在相邻 `My-game-source-archive-20261031`。本仓库尚未配置远端；本工程保留本游戏需要的素材来源、许可和生产输入。许可见 [LICENSE.md](LICENSE.md) 和 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。
+当前工程由原型仓库的 `f75dfc6` 基线收敛为独立本地 Git 仓库，已通过空目录与全新克隆检查；原型仓库的已提交历史可在[源仓库](https://github.com/weathour/My-game)按 `f75dfc6` 追溯；两份相邻本地归档已按用户要求删除。本仓库尚未配置远端；本工程保留本游戏需要的素材来源、许可和生产输入。许可见 [LICENSE.md](LICENSE.md) 和 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。

@@ -39,17 +39,16 @@ var transition_remaining := 0.0
 var observation_remaining := 0.0
 var phase_damage_bank := 0.0
 var phase_change_pending := false
-var phase := 0
 var age := 0.0
 var id := 0
-var kind := "melee"
+var kind := ""
 var position := Vector2.ZERO
-var hp := 40.0
-var max_hp := 40.0
-var radius := 14.0
-var speed := 65.0
-var damage := 12.0
-var xp := 3.0
+var hp := 0.0
+var max_hp := 0.0
+var radius := 0.0
+var speed := 0.0
+var damage := 0.0
+var xp := 0.0
 var dead := false
 var slow := 0.0
 var slow_time := 0.0
@@ -58,46 +57,27 @@ var windup := 0.0
 var aim := Vector2.RIGHT
 var attack := ""
 var attack_index := 0
-var flash := 0.0
-var attack_cycle: Array = ["strike"]
-var attack_range := 46.0
-var attack_delay := 0.4
-var recovery := 1.25
-var blast_radius := 145.0
 
-func _init(key: int, type: String, point: Vector2) -> void:
+## Every body starts from a current enemy definition, including test fixtures.
+func _init(key: int, value: Dictionary, point: Vector2) -> void:
 	id = key
 	hp_owner_id = key
 	anchor_position = point
-	kind = type
 	position = point
-	if type == "ranged": hp = 32; speed = 46; damage = 13; xp = 4
-	if type in ["card_elite", "equipment_elite"]: hp = 280; radius = 23; speed = 72; damage = 23; xp = 18
-	if type == "boss": hp = 550; radius = 30; speed = 53; damage = 30; xp = 30
-	if type == "charger": hp = 62; radius = 16; speed = 92; damage = 17; xp = 5
-	if type == "guard": hp = 105; radius = 19; speed = 43; damage = 18; xp = 6
-	attack_range = radius + 32
-	if type in ["card_elite", "equipment_elite", "guard"]: recovery = 2.2
-	if type == "ranged": attack_cycle = ["shot"]; attack_range = 310; attack_delay = .65; recovery = 2.2
-	if type == "charger": attack_cycle = ["charge"]; attack_range = 270; attack_delay = .8; recovery = 2.4
-	if type == "boss": attack_cycle = ["charge", "fan"]; attack_range = 310; attack_delay = .95; recovery = 2.2
-	max_hp = hp
-
-func configure(value: Dictionary) -> void:
-	if value.is_empty(): return
+	kind = str(value.id)
 	definition = value.duplicate(true)
-	definition_id = str(value.get("id", ""))
-	behavior_id = str(value.get("behavior_id", definition_id))
-	visual_id = str(value.get("visual_id", definition_id))
+	definition_id = str(value.id)
+	behavior_id = str(value.behavior_id)
+	visual_id = str(value.visual_id)
 	elite_rule_id = str(value.get("elite_rule_id", ""))
-	rank = str(value.get("rank", "ordinary"))
-	for key in ["hp", "damage", "speed", "radius", "xp", "body_height"]:
-		if value.has(key): set(key, float(value[key]))
+	rank = str(value.rank)
+	for attribute in ["hp", "damage", "speed", "radius", "xp", "body_height"]:
+		set(attribute, float(value[attribute]))
 	max_hp = hp
-	params = value.get("params", {}).duplicate(true)
+	params = value.params.duplicate(true)
 	targetable = bool(params.get("targetable", true))
 	counts_for_threshold = bool(params.get("counts_for_threshold", counts_for_threshold))
-	actions = value.get("attacks", []).duplicate(true)
+	actions = value.attacks.duplicate(true)
 	if rank in ["object", "proxy"]: counts_for_threshold = false; xp = 0
 	if rank == "boss": kind = "boss"; counts_for_threshold = false
 	if rank == "field_elite": counts_for_threshold = false
@@ -117,7 +97,6 @@ func configure_form_budget(total_hp: float) -> void:
 
 func _apply_form(index: int) -> void:
 	form_index = index
-	phase = index
 	var value: Dictionary = forms[index]
 	form_name = str(value.name)
 	visual_id = definition_id + ("_human" if index == 0 else "")

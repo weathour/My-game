@@ -1,0 +1,27 @@
+{
+  "status": "retired_historical_machine_local_jobs",
+  "reason": "Each Lua script hard-coded a completed render project path; the referenced rendered projects are not shipped. Original result.json/log evidence is retained. No music was rerendered.",
+  "current_generic_verifier": "design/music-20261030/engine_verify_reaper.py",
+  "files": [
+    {
+      "path": "design/music-20261030/checks/horn-rr-fixed-reaper-hero/verify.lua",
+      "bytes": 3195,
+      "sha256": "5b47ae68fddc4e6fbe18f2240cbe29be66236dd7a359058531caf3dc4ed146da"
+    },
+    {
+      "path": "design/music-20261030/checks/military-reaper-2_4-v3/verify.lua",
+      "bytes": 2593,
+      "sha256": "cef8e0765cfe5b18e654adaf22eb49ec6a173849999a7cbc33c0c3ed8a37b853"
+    },
+    {
+      "path": "design/music-20261030/checks/military-reaper-2_4-v3-exact/verify.lua",
+      "bytes": 3207,
+      "sha256": "25c766f0e92af409e75f8c4dc449eee5f2b3ee23893426320d76620b1f8c1395"
+    },
+    {
+      "path": "design/music-20261030/checks/military-reaper-6_8-v3/verify.lua",
+      "bytes": 2599,
+      "sha256": "4f3892b783a4c3e8ded7111df340f4237f831086731b10df9cea994bbc84a5db"
+    }
+  ]
+}

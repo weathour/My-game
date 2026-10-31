@@ -27,7 +27,7 @@ static func page_cue(page: String, current_node: String, previous: String = "") 
 		"failure": return "story_solitude"
 		"journal": return "archive_memories"
 		"roster", "equipment": return "preparation" if previous == "preparation" else "camp_home"
-		"menu", "settings", "saves": return "" # Utility overlays keep the owning scene's bed.
+		"menu", "settings", "saves", "help", "about": return "" # Utility pages keep the owning scene's bed.
 	return "camp_home"
 
 static func battle_cue(id: String, form_index: int) -> String:

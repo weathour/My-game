@@ -2,7 +2,9 @@ extends RefCounted
 ## Only this object owns stage gates and the mutually exclusive field choice.
 const ENEMY := preload("res://scripts/battle/enemy_runtime.gd")
 const CATALOG := preload("res://scripts/content/enemy_catalog.gd")
+const STAGES := preload("res://scripts/content/stage_catalog.gd")
 const SPACE := preload("res://scripts/battle/battle_space.gd")
+var configuration_error := ""
 var config: Dictionary
 var elapsed := 0.0
 var kills := 0
@@ -19,56 +21,69 @@ const FIELD_POSITIONS := SPACE.FIELD_POSITIONS
 func _init(value: Dictionary, seed_value: int) -> void:
 	config = value.duplicate(true)
 	rng.seed = seed_value
+	configuration_error = "; ".join(STAGES.runtime_errors(config))
 
 func tick(delta: float, live_count: int, actor: Vector2, living: Array = []) -> Array:
+	if not configuration_error.is_empty(): return []
 	elapsed += delta
 	var spawns: Array = []
 	if not boss_spawned and (elapsed >= config.boss_time or kills >= config.boss_kills):
 		boss_spawned = true
 		var boss := spawn("boss", SPACE.challenge_position(actor))
-		spawns.append(boss)
+		if boss != null: spawns.append(boss)
 	if boss_spawned: return spawns
 	spawn_remaining -= delta
 	if spawn_remaining <= 0:
-		var wave: Dictionary = {}
-		for candidate in config.get("waves", []):
+		var wave: Dictionary = config.waves[0]
+		for candidate in config.waves:
 			if elapsed >= candidate.at: wave = candidate
 		spawn_remaining += float(wave.get("interval", config.spawn_interval))
-		var cycle: Array = wave.get("cycle", [])
-		for i in mini(int(wave.get("count", 1)), maxi(0, config.enemy_cap - live_count)):
+		var cycle: Array = wave.cycle
+		for i in mini(int(wave.count), maxi(0, config.enemy_cap - live_count)):
 			var point := SPACE.reinforcement(actor, rng)
-			var kind: String = ("ranged" if serial % 4 == 3 else "melee") if cycle.is_empty() else str(cycle[wave_cursor % cycle.size()])
+			var kind: String = str(cycle[wave_cursor % cycle.size()])
 			var definition := CATALOG.definition(kind)
 			var role: String = str(definition.get("params", {}).get("role", "melee"))
 			var count := 0
 			for existing in living + spawns:
 				if not existing.dead and existing.parent_id == 0 and str(existing.params.get("role", "melee")) == role: count += 1
-			if count < int(config.get("role_caps", {}).get(role, 999)): spawns.append(spawn(kind, point))
+			if count < int(config.get("role_caps", {}).get(role, 999)):
+				var enemy := spawn(kind, point)
+				if enemy == null: return spawns
+				spawns.append(enemy)
 			wave_cursor += 1
 	return spawns
 
 func spawn(kind: String, point: Vector2) -> RefCounted:
-	serial += 1
-	var enemy := ENEMY.new(serial, kind, point)
+	if not configuration_error.is_empty(): return null
 	var definition_id := kind
-	if kind == "boss": definition_id = str(config.get("boss_definition", ""))
+	if kind == "boss": definition_id = str(config.boss_definition)
 	if kind in ["card_elite", "equipment_elite"]:
-		var choices: Array = config.get("field_elites", ["L00", "L00"])
-		definition_id = str(choices[0 if kind == "card_elite" else 1])
-		enemy.reward_tag = "card" if kind == "card_elite" else "equipment"
+		var slot := 0 if kind == "card_elite" else 1
+		if not bool(config.get("fields_enabled", true)) or config.field_elites.size() <= slot:
+			configuration_error = "No field elite definition for " + kind
+			return null
+		definition_id = str(config.field_elites[slot])
 	var definition := CATALOG.definition(definition_id)
-	if not definition.is_empty(): enemy.configure(definition)
-	if kind in ["card_elite", "equipment_elite"]: enemy.kind = kind
-	if enemy.rank != "boss": enemy.hp *= float(config.get("enemy_hp", 1.0))
-	else: enemy.hp = float(config.get("boss_hp", enemy.hp))
+	var errors := CATALOG.runtime_errors(definition)
+	if not errors.is_empty():
+		configuration_error = "Enemy %s: %s" % [definition_id, "; ".join(errors)]
+		return null
+	serial += 1
+	var enemy := ENEMY.new(serial, definition, point)
+	if kind in ["card_elite", "equipment_elite"]:
+		enemy.kind = kind
+		enemy.reward_tag = "card" if kind == "card_elite" else "equipment"
+	if enemy.rank != "boss": enemy.hp *= float(config.enemy_hp)
+	else: enemy.hp = float(config.boss_hp)
 	enemy.max_hp = enemy.hp
-	if enemy.rank == "boss": enemy.configure_form_budget(float(config.get("boss_hp", enemy.hp)))
-	enemy.damage *= float(config.get("enemy_damage", 1.0))
-	if definition.is_empty() and kind == "boss": enemy.attack_cycle = config.get("boss_cycle", ["charge", "fan"]).duplicate()
+	if enemy.rank == "boss": enemy.configure_form_budget(float(config.boss_hp))
+	enemy.damage *= float(config.enemy_damage)
 	return enemy
 
 func derivative(descriptor: Dictionary, living: Array) -> RefCounted:
 	var enemy := spawn(str(descriptor.definition_id), descriptor.position)
+	if enemy == null: return null
 	if descriptor.has("visual_id"): enemy.visual_id = str(descriptor.visual_id)
 	if descriptor.has("body_height"): enemy.body_height = float(descriptor.body_height)
 	enemy.parent_id = int(descriptor.get("parent_id", 0))

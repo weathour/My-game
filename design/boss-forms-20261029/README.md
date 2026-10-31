@@ -13,7 +13,7 @@
 | 高顺 | [M03_human](characters/M03_human/) | M03 | 城壁铠魂 |
 | 陈宫 | [M04_human](characters/M04_human/) | M04 | 卷轴冥相 |
 
-查看六组人形与战相：[1280宽对照](evidence/forms-1280.png)；[动作预览](evidence/preview.gif)包含 36 个动画样本。对照图每格右上角的「card view」是卡图立绘局部；实际裁脸头像见[我方头像对照](evidence/friendly-head-crops.png)。画面检查和代理实际操作不等于用户已逐张审美确认；用户的后续反馈可用于迭代。
+六组人形与战相的原图、动作及来源见上表和各自清单。此前的对照图与动作预览不再随当前工程保存；用户的后续审美反馈可用于迭代。
 
 ## 制作与来源
 
@@ -29,19 +29,19 @@
 
 各套不透明人物共同色数依次为曹休 59、曹纯 57、张辽 63、吕布 62、高顺 57、陈宫 58。可招募人物的卡图、剧情立绘、战斗身体和头像均与对应人形同源；头像由素材中实际头部区域 `head_rect_px` 裁出，并非另绘头像。我方战斗角色按约 72 的人物尺度显示，使用独立动画节点；成功施放、手动动作优先、暂停及朝向已纳入专项检查。
 
-从项目根目录重新导出：
+从项目根目录重新导出（Aseprite 和 Godot 4.6.2 可在 PATH 中查找，也可分别通过 `ASEPRITE_BIN` 与 `GODOT_BIN` 指定）：
 
 ```bash
 python3 design/boss-forms-20261029/prepare_exports.py
 for boss_human_id in B15_human B16_human B17_human B18_human M03_human M04_human; do
-  /home/weathour/programs/aseprite-src/build/bin/aseprite --batch --script-param "id=$boss_human_id" --script scripts/tools/import_boss_forms_art.lua
+  "${ASEPRITE_BIN:-aseprite}" --batch --script-param "id=$boss_human_id" --script scripts/tools/import_boss_forms_art.lua
 done
 python3 design/boss-forms-20261029/finalize_exports.py
 python3 design/boss-forms-20261029/audit_exports.py --all
-/home/weathour/.local/bin/godot-4.6.2 --headless --editor --path . --quit
-/home/weathour/.local/bin/godot-4.6.2 --headless --path . --quit
+"${GODOT_BIN:-godot}" --headless --editor --path . --quit
+"${GODOT_BIN:-godot}" --headless --path . --quit
 ```
 
 ## 本轮检查与边界
 
-六套素材审计通过；[我方素材专项](../../scripts/tests/boss_friendly_art_smoke.gd) headless 与真实 OpenGL 各 **146 项**通过，重叠检查不相加，[渲染日志](evidence/friendly-art-render.log)保留。六组人形／战相的三尺寸对照与 36 个动画样本通过真实渲染检查，见[预览日志](evidence/forms-art-render.log)；吕布在隔离环境重新导出的 7 个 PNG 与现用文件逐字节一致。源图连通分组、脚底锚点和姿态由制作过程检查，主代理已审看三尺寸对照、头像及我方同人外观，完成本轮视觉接入复核；用户尚未逐张审美确认。最终完整战斗回放及总体回归以[执行记录](../../docs/implementation/2026-10-29_Boss深化与双形态战斗.md)为准。
+当时六套素材审计及我方素材专项检查通过，也曾审看三尺寸对照和动作预览；派生预览与日志不再随当前工程保存。源图、测量、动作清单和哈希仍在各角色目录；自动化与代理审看不等于用户逐张审美确认。

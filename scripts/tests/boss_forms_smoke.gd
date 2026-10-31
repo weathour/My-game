@@ -21,6 +21,7 @@ func context(amount: float) -> Dictionary:
 func fixture(id: String = "B18") -> RefCounted:
 	var stage := C.stage(id)
 	stage.boss_time = 0; stage.boss_kills = 0; stage.encounter_mode = "boss_duel"
+	stage.fields_enabled = false; stage.field_elites.clear(); stage.waves.clear(); stage.enemy_cap = 0
 	var b := B.new({"attempt_id":"forms-"+id,"members":["JIA"],"characters":{"JIA":C.record("JIA",10)},"equipment":{"weapon":"plain_blade","armor":"cloth_armor","accessory":""},"stage":stage,"seed":21})
 	b.current().cooldowns[C.basic("JIA", b.equipment).id] = 10000
 	for skill in C.definition("JIA").automatic: b.current().cooldowns[skill.id] = 10000
@@ -97,7 +98,7 @@ func pause_and_safe_transition() -> void:
 	var b := fixture("B17")
 	var boss: RefCounted = b.enemies[0]
 	R.hit_enemy(boss, context(boss.hp + 5))
-	boss.slow = 0.4; boss.slow_time = 0.5; boss.command_remaining = 0.5; boss.flash = 0.5
+	boss.slow = 0.4; boss.slow_time = 0.5; boss.command_remaining = 0.5
 	var enemy: RefCounted = b.director.spawn("E01", b.position + Vector2(30,0))
 	enemy.cooldown = 10000; b.enemies.append(enemy)
 	b.projectiles.append({"position":b.position,"velocity":Vector2.ZERO,"life":3.0,"hostile":true,"source_id":enemy.id,"damage":9999.0})
@@ -113,7 +114,6 @@ func pause_and_safe_transition() -> void:
 	near(b.current().hp, hp, "safe transition blocks attacks from unrelated troops")
 	near(boss.slow_time, 0.4, "slow expires on battle clock during transform")
 	near(boss.command_remaining, 0.4, "command expires on battle clock during transform")
-	near(boss.flash, 0.4, "flash expires on battle clock during transform")
 	expect(b.position.x > start.x, "movement stays usable during transition")
 	expect(b.outcome.is_empty() and b.director.kills == 0, "transition never issues victory or kill rewards")
 	var phase_events := 0

@@ -337,8 +337,7 @@ func _select_clip(index: int) -> void:
 		preview.preview(selected_clip, clock)
 
 func _create_preview(value: Dictionary) -> void:
-	var runtime: RefCounted = RUNTIME.new(0, "melee", Vector2.ZERO)
-	runtime.configure(value)
+	var runtime: RefCounted = RUNTIME.new(0, value, Vector2.ZERO)
 	preview = ART.create_enemy(runtime, stage_id if not stage_id.is_empty() else "B02")
 	animation_stage.add_child(preview)
 	_fit_active_preview()

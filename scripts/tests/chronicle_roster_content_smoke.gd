@@ -4,6 +4,7 @@ const A := preload("res://scripts/battle/ability_definition.gd")
 const RUNTIME := preload("res://scripts/battle/character_runtime.gd")
 const BATTLE := preload("res://scripts/battle/battle_session.gd")
 const ENEMY := preload("res://scripts/battle/enemy_runtime.gd")
+const ENEMIES := preload("res://scripts/content/enemy_catalog.gd")
 var failures := 0
 var checks := 0
 func expect(value: bool, label: String) -> void:
@@ -98,7 +99,7 @@ func all_kit_activations() -> void:
 		var actor: RefCounted = battle.characters[id]
 		for skill in C.definition(id).manual:
 			if skill.unlock_level > actor.level: continue
-			var enemy := ENEMY.new(9001,"melee",battle.position+Vector2(40,0))
+			var enemy := ENEMY.new(9001,ENEMIES.definition("E01"),battle.position+Vector2(40,0))
 			enemy.hp = 10000
 			enemy.max_hp = 10000
 			battle.enemies = [enemy]

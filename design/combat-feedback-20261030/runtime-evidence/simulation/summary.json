@@ -72,5 +72,10 @@
     "Three regression logs and parity logs were saved from existing tool transcript output; only the final event log existed as a standalone redirected log before this task."
   ],
   "files_excluded_from_runtime_import": ".gdignore",
-  "commands": "commands.json"
+  "commands": "commands.json",
+  "reproduction_availability": {
+    "status": "historical_comparison_harness_retired",
+    "reason": "The old baseline commit 5fa3ed236df0eaf3dd72915eba5681819efe6aef is absent from this independent repository; old commands, hashes and measured results remain historical facts.",
+    "current_runtime_tests": "scripts/tests/"
+  }
 }

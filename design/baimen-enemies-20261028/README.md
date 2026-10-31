@@ -21,8 +21,8 @@
 
 ## 审看与验证
 
-可查看[敌人动作画册](final-evidence/animations/)、[六位具名战相动作](final-evidence/animations/featured/gallery-1280-page00-preview.gif)、[图鉴与战斗画面](final-evidence/screens/)、[敌方特效动作](final-evidence/fx/runtime-preview.gif)及[前两关实际自动界面流程](final-evidence/playable/)。动作画册覆盖 41 组素材在三种尺寸下的片段接触帧，共 424 张；图鉴、战斗与特效展示画面使用测试场景布置，不代表自然通关。具体检查范围见[制作记录](../../docs/implementation/2026-10-28_白门楼敌人完整制作.md)和[画面验证清单](final-evidence/verification.json)。
+当时曾审查 41 组素材、三种尺寸下共 424 张动作接触帧，以及图鉴、战斗和特效测试画面；这些派生画册与截图不再随当前工程保存。源图、动作帧、清单和哈希仍可按上述目录核对。
 
-临时 PCK 在空目录、隔离用户数据的环境中启动并通过 **610 项资源检查、0 失败**：42 个运行清单、全部敌人立绘和动作纹理、8 组新特效及 3 组复用特效均可读取，主场景可启动；设计源与 `actor.aseprite` 不入包。证据见[导出日志](final-evidence/pack/export.log)和[隔离包检查](final-evidence/pack/packed-assets.log)。该临时包仅用于验证，尚未发布。
+当时的临时 PCK 在隔离环境中通过 **610 项资源检查、0 失败**；该验证包不是发行包。当前工程的验证范围见[状态入口](../../docs/08_当前实现状态与后续重点.md)。
 
 机制首轮已有独立战斗与两条连续路线的自动验证；自动流程和静态素材审计不等于人工玩过或确认平衡。当前数值、规模与动作观感仍需实际体验和调整。

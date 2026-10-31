@@ -1,5 +1,5 @@
 extends RefCounted
-## Resources are optional during mechanics development; final validation is deliberately strict.
+## Current raster resources resolve explicitly; missing art uses the arena placeholder.
 const ROOT := "res://assets/enemies/baimen/"
 const REQUIRED_CLIPS := ["idle", "move", "attack", "special", "hit"]
 

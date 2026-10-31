@@ -213,5 +213,10 @@
     "No full-project suite, import pass or Graphify update was run by this worker.",
     "The initial invalid F11-only timing fixture and mistaken N16-healer support fixture were corrected before accepted results. Their error logs are not included as passing evidence.",
     "Baseline core code is obtained from Git only into /tmp for reproduction; no historical implementation is embedded in the repository runtime."
-  ]
+  ],
+  "reproduction_availability": {
+    "status": "historical_comparison_harness_retired",
+    "reason": "The old baseline commit 5fa3ed236df0eaf3dd72915eba5681819efe6aef is absent from this independent repository; old commands, hashes and measured results remain historical facts.",
+    "current_runtime_tests": "scripts/tests/"
+  }
 }

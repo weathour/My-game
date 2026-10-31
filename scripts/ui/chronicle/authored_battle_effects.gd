@@ -1,5 +1,5 @@
 extends RefCounted
-## Pure presentation. Never instantiates legacy bullets, collision, Player or ability code.
+## Pure presentation; combat simulation owns damage, targeting and collision.
 ## Transients survive the simulation's short effect descriptor; only battle time ages them.
 const SCENES := {
 	"boom":preload("res://effects/wizard/boom/boom.tscn"),
@@ -30,7 +30,7 @@ func _init() -> void:
 						textures.append(frames.get_frame_texture(animation, frame))
 						lengths.append(frames.get_frame_duration(animation, frame) / frames.get_animation_speed(animation))
 					_store_clip(key, textures, lengths)
-	# wave.tscn contains legacy bullet business logic. Load ONLY its PNGs.
+	# The wave clip uses its six retained source frames directly.
 	var wave: Array[Texture2D] = []
 	var durations: Array[float] = []
 	for i in range(11, 17):

@@ -113,8 +113,8 @@ static func party_strip(shell: Control, parent: Node) -> void:
 		slot.add_child(card)
 		if not id.is_empty():
 			var record: Dictionary = state.data.owned[id]
-			var hp := "生命 %d / %d" % [record.hp, state.resource_max(id, "hp")] if state.has_method("resource_max") else "生命 %d" % record.hp
-			var mp := "魔法 %d / %d" % [record.mp, state.resource_max(id, "mp")] if state.has_method("resource_max") else "魔法 %d" % record.mp
+			var hp := "生命 %d / %d" % [record.hp, state.resource_max(id, "hp")]
+			var mp := "魔法 %d / %d" % [record.mp, state.resource_max(id, "mp")]
 			slot.add_child(T.label(hp, 11 if compact else 12, T.MUTED))
 			slot.add_child(T.label(mp, 11 if compact else 12, T.MUTED))
 		else:
@@ -159,10 +159,7 @@ static func make_card(shell: Control, id: String, target_slot: int) -> Button:
 		else: shell.render())
 	return card
 
-static func character_page(shell: Control) -> void:
-	shell.inspect_character(shell.selected_character)
-
-static func detail(shell: Control, parent: Node, _full: bool = false) -> void:
+static func detail(shell: Control, parent: Node) -> void:
 	SHEET.build_preview(shell, parent)
 
 static func _select_character(shell: Control, id: String) -> void:

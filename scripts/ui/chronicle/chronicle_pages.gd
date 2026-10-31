@@ -1,4 +1,7 @@
 extends RefCounted
+const MENU_NAV := preload("res://scripts/ui/chronicle/chronicle_menu_navigation.gd")
+const MENU_TEXT := preload("res://scripts/ui/chronicle/chronicle_menu_text.gd")
+const INFORMATION := preload("res://scripts/ui/chronicle/chronicle_information_page.gd")
 const T := preload("res://scripts/ui/chronicle/chronicle_theme.gd")
 const SETTINGS := preload("res://scripts/shared/settings.gd")
 const PARTY := preload("res://scripts/ui/chronicle/chronicle_party_pages.gd")
@@ -8,7 +11,6 @@ const BGM := preload("res://scripts/audio/music_player.gd")
 static func build(shell: Control, page: String) -> void:
 	match page:
 		"roster": roster(shell)
-		"character": character_page(shell)
 		"equipment": equipment(shell)
 		"reward": reward(shell)
 		"event": event_page(shell)
@@ -22,13 +24,16 @@ static func build(shell: Control, page: String) -> void:
 		"settings": settings(shell)
 		"music": music(shell)
 		"menu": menu(shell)
+		"help", "about": information(shell, page)
 
 static func scaffold(shell: Control, title: String, subtitle: String) -> VBoxContainer:
 	var column := T.column(T.panel(shell.page_margin(), false, 12 if shell.size.y < 650 else 18))
 	var row := T.row(column)
 	row.add_child(T.label(title, 24 if shell.size.y < 650 else 30, T.INK, true))
 	T.space(row)
-	shell.quiet_action(row, "返回", func(): shell.open_page("journal" if shell.page == "lore" else shell.party_return if shell.page == "equipment" else shell.previous_page), "page_back")
+	shell.quiet_action(row, "返回", func():
+		if shell.page in shell.UTILITY_PAGES: shell.return_from_utility()
+		else: shell.open_page("journal" if shell.page == "lore" else shell.party_return if shell.page == "equipment" else shell.previous_page), "page_back")
 	if not subtitle.is_empty(): column.add_child(T.paragraph(subtitle, T.MUTED, 13 if shell.size.y < 650 else 14))
 	column.add_theme_constant_override("separation", 6 if shell.size.y < 650 else 10)
 	column.add_child(HSeparator.new())
@@ -46,9 +51,6 @@ static func scroll_column(parent: Node, id: String = "content_scroll") -> VBoxCo
 
 static func roster(shell: Control) -> void:
 	PARTY.build(shell)
-
-static func character_page(shell: Control) -> void:
-	PARTY.character_page(shell)
 
 static func equipment(shell: Control) -> void:
 	var state: RefCounted = shell.session
@@ -112,26 +114,28 @@ static func preparation(shell: Control) -> void:
 
 static func saves(shell: Control) -> void:
 	var state: RefCounted = shell.session
-	var column := scaffold(shell, "行军档", "")
+	var read_only: bool = shell.saves_read_only()
+	var column := scaffold(shell, MENU_TEXT.text("saves", "title_readonly" if read_only else "title_manage"), MENU_TEXT.text("saves", "description_readonly" if read_only else "description_manage"))
 	var list := scroll_column(column, "saves_scroll")
 	for slot in ["auto", "1", "2", "3"]:
 		var id: String = slot
 		var saved: Dictionary = state.read_slot(slot)
 		var row := T.row(T.panel(list, false, 16))
 		var info := T.column(row)
-		info.add_child(T.label("自动续档" if slot == "auto" else "手动档 " + slot, 22, T.INK, true))
-		if saved.is_empty(): info.add_child(T.label("空档 / 无可读取记录", 15, T.MUTED))
+		info.add_child(T.label(MENU_TEXT.text("saves", "automatic") if slot == "auto" else MENU_TEXT.text("saves", "manual") + " " + slot, 22, T.INK, true))
+		if saved.is_empty(): info.add_child(T.label(MENU_TEXT.text("saves", "empty"), 15, T.MUTED))
 		else:
 			var location: String = state.nodes[saved.current].name
 			var time := Time.get_datetime_string_from_unix_time(FileAccess.get_modified_time(state.directory.path_join(slot + ".json")))
 			info.add_child(T.label("%s · %d 人物 · %d 节点已过" % [location, saved.owned.size(), saved.completed.size()], 16))
 			info.add_child(T.label(time.replace("T", " ") + (" · 待选卡" if not saved.pending.is_empty() else ""), 13, T.MUTED))
-		if slot != "auto":
-			shell.action(row, "保存", func():
+		if slot != "auto" and not read_only:
+			shell.action(row, MENU_TEXT.text("saves", "save"), func():
+				if shell.saves_read_only(): return
 				shell.confirm("保存到手动档 " + id, "该槽的旧进度将被替换。", func():
 					if state.save_slot(id): shell.render()
 					else: shell.show_notice("保存失败，原有档案保留。")), "save_" + slot)
-		var load_button: Button = shell.action(row, "读取", func():
+		var load_button: Button = shell.action(row, MENU_TEXT.text("saves", "load"), func():
 			shell.confirm("读取行军档？", "当前行军状态将整体替换为这份记录。", func():
 				if state.load_slot(id): shell.resume_view(true)), "load_" + slot)
 		load_button.disabled = saved.is_empty()
@@ -159,29 +163,28 @@ static func journal(shell: Control) -> void:
 	for id in stories:
 		var target: String = id
 		shell.action(list, shell.session.nodes[id].name + " · 回顾剧情", func(): shell.open_story_replay(target, "journal"), "journal_replay_" + id)
-	if shell.session.has_method("available_optional_stories"):
-		list.add_child(HSeparator.new())
-		list.add_child(T.label("人物故事", 21, T.GOLD))
-		list.add_child(T.paragraph("人物在途中留下的片段。", T.MUTED, 14))
-		var optional: Dictionary = shell.STORIES.optional_events()
-		var available: Array = shell.session.available_optional_stories()
-		var read: Array = shell.session.read_optional_stories()
-		if available.is_empty() and read.is_empty(): list.add_child(T.paragraph("暂无可读的人物故事。", T.MUTED, 14))
-		for id in optional:
-			if id not in available and id not in read: continue
-			var target: String = id
-			var was_read: bool = id in read
-			var resumable: bool = shell.session.data.get("optional_story_checkpoints", {}).has(id)
-			var suffix := "已读 · 回顾" if was_read else "继续阅读" if resumable else "未读"
-			var button: Button = shell.action(list, str(optional[id].title) + " · " + suffix, func():
-				if was_read: shell.open_story_replay(target, "journal")
-				else: shell.open_optional_story(target), "journal_optional_" + id)
-			button.disabled = not was_read and not shell.session.can_read_optional_story()
-		list.add_child(HSeparator.new())
-		list.add_child(T.label("白门楼资料", 21, T.GOLD))
-		for entry in shell.session.available_story_lore():
-			var target: String = entry.id
-			shell.action(list, str(entry.title), func(): shell.open_story_lore(target), "journal_lore_" + target)
+	list.add_child(HSeparator.new())
+	list.add_child(T.label("人物故事", 21, T.GOLD))
+	list.add_child(T.paragraph("人物在途中留下的片段。", T.MUTED, 14))
+	var optional: Dictionary = shell.STORIES.optional_events()
+	var available: Array = shell.session.available_optional_stories()
+	var read: Array = shell.session.read_optional_stories()
+	if available.is_empty() and read.is_empty(): list.add_child(T.paragraph("暂无可读的人物故事。", T.MUTED, 14))
+	for id in optional:
+		if id not in available and id not in read: continue
+		var target: String = id
+		var was_read: bool = id in read
+		var resumable: bool = shell.session.data.get("optional_story_checkpoints", {}).has(id)
+		var suffix := "已读 · 回顾" if was_read else "继续阅读" if resumable else "未读"
+		var button: Button = shell.action(list, str(optional[id].title) + " · " + suffix, func():
+			if was_read: shell.open_story_replay(target, "journal")
+			else: shell.open_optional_story(target), "journal_optional_" + id)
+		button.disabled = not was_read and not shell.session.can_read_optional_story()
+	list.add_child(HSeparator.new())
+	list.add_child(T.label("白门楼资料", 21, T.GOLD))
+	for entry in shell.session.available_story_lore():
+		var target: String = entry.id
+		shell.action(list, str(entry.title), func(): shell.open_story_lore(target), "journal_lore_" + target)
 	list.add_child(HSeparator.new())
 	list.add_child(T.label("行军记录", 21, T.GOLD))
 	if shell.session.data.log.is_empty(): list.add_child(T.paragraph("尚未启程。白门楼的传闻正从徐州传来。"))
@@ -255,7 +258,7 @@ static func settings(shell: Control) -> void:
 	var actions := T.row(column)
 	shell.action(actions, "音乐鉴赏", shell.open_music, "settings_music")
 	shell.action(actions, "返回标题", func(): shell.open_page("home"), "settings_home")
-	shell.action(actions, "退出游戏", func(): shell.get_tree().quit(), "quit_game")
+	shell.action(actions, MENU_TEXT.text("home", "quit"), shell.request_quit, "quit_game")
 
 static func music(shell: Control) -> void:
 	var column := scaffold(shell, "音乐鉴赏", "选择曲目，拖动进度条调整播放位置。")
@@ -301,19 +304,59 @@ static func music(shell: Control) -> void:
 	pause.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	shell.action(controls, "下一首", func(): shell.play_track(shell.music_index+1), "music_next")
 
+static func information(shell: Control, kind: String) -> void:
+	var column := scaffold(shell, MENU_TEXT.text(kind, "title"), "")
+	INFORMATION.build(shell, column, kind)
+
 static func menu(shell: Control) -> void:
+	var compact: bool = shell.size.y < 650
 	if shell.session.data.owned.has("F11"): shell.portrait(shell.body, shell.size.x * .36)
 	var center := CenterContainer.new()
 	shell.body.add_child(center)
 	center.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	var panel := T.panel(center, true, 30)
-	panel.custom_minimum_size.x = 470
+	var panel := T.panel(center, true, 18 if compact else 26)
+	panel.name = "system_menu_panel"
+	panel.custom_minimum_size.x = minf(shell.size.x - 40, 760 if compact else 860)
 	var column := T.column(panel)
-	column.add_child(T.label("菜单", 30, T.LIGHT, true))
-	shell.action(column, "返回", func(): shell.open_page(shell.menu_return), "menu_resume", true)
-	for item in [["roster", "整备"], ["saves", "行军档"], ["journal", "见闻"], ["settings", "设定"]]:
-		var page: String = item[0]
-		shell.action(column, item[1], func(): shell.open_page(page), "menu_" + page)
-	shell.quiet_action(column, "敌情图鉴", shell.open_enemy_codex, "menu_codex")
-	shell.action(column, "音乐鉴赏", shell.open_music, "menu_music")
-	shell.action(column, "返回标题", func(): shell.open_page("home"), "menu_home")
+	column.add_theme_constant_override("separation", 8 if compact else 12)
+	column.add_child(T.label(MENU_TEXT.text("menu", "title"), 26 if compact else 30, T.LIGHT, true))
+	var started: bool = shell.session.data.started
+	var resume_text := MENU_TEXT.text("menu", "return" if started else "return_inspection")
+	var resume := _menu_button(shell, column, resume_text, func(): shell.open_page(shell.menu_return), "menu_resume", true)
+	column.add_child(HSeparator.new())
+	var groups := T.row(column)
+	groups.add_theme_constant_override("separation", 20 if compact else 28)
+	var campaign := T.column(groups)
+	var system := T.column(groups)
+	campaign.add_theme_constant_override("separation", 7 if compact else 9)
+	system.add_theme_constant_override("separation", 7 if compact else 9)
+	campaign.add_child(T.label(MENU_TEXT.text("menu", "campaign_group"), 16 if compact else 18, T.GOLD))
+	system.add_child(T.label(MENU_TEXT.text("menu", "system_group"), 16 if compact else 18, T.GOLD))
+	var management := {}
+	for entry in [["roster", "roster"], ["saves", "saves"], ["journal", "journal"]]:
+		var destination: String = entry[0]
+		var label_key: String = "load" if destination == "saves" and not started else entry[1]
+		var button := _menu_button(shell, campaign, MENU_TEXT.text("menu", label_key), func(): shell.open_page(destination), "menu_" + destination)
+		management[destination] = button
+		button.disabled = not started and destination in ["roster", "journal"]
+		if button.disabled: button.tooltip_text = MENU_TEXT.text("menu", "inactive_hint")
+	if not started: campaign.add_child(T.paragraph(MENU_TEXT.text("menu", "inactive_hint"), T.MUTED, 13))
+	var codex := _menu_button(shell, system, MENU_TEXT.text("menu", "codex"), shell.open_enemy_codex, "menu_codex")
+	var music := _menu_button(shell, system, MENU_TEXT.text("menu", "music"), shell.open_music, "menu_music")
+	var settings := _menu_button(shell, system, MENU_TEXT.text("menu", "settings"), func(): shell.open_page("settings"), "menu_settings")
+	var help := _menu_button(shell, system, MENU_TEXT.text("menu", "help"), func(): shell.open_page("help"), "menu_help")
+	column.add_child(HSeparator.new())
+	var footer := T.row(column)
+	footer.add_theme_constant_override("separation", 10)
+	var home := _menu_button(shell, footer, MENU_TEXT.text("menu", "home"), func(): shell.open_page("home"), "menu_home")
+	var about := _menu_button(shell, footer, MENU_TEXT.text("home", "about"), func(): shell.open_page("about"), "menu_about")
+	var quit := _menu_button(shell, footer, MENU_TEXT.text("menu", "quit"), shell.request_quit, "menu_quit")
+
+	MENU_NAV.wire([[resume], [management.roster, codex], [management.saves, music], [management.journal, settings], [null, help], [home, about, quit]])
+
+static func _menu_button(shell: Control, parent: Node, caption: String, callback: Callable, id: String, primary: bool = false) -> Button:
+	var button: Button = shell.action(parent, caption, callback, id, primary)
+	button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	button.custom_minimum_size.y = 38 if shell.size.y < 650 else 46
+	button.add_theme_font_size_override("font_size", 16 if shell.size.y < 650 else 18)
+	return button

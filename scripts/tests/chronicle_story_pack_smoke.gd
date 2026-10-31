@@ -1,6 +1,7 @@
 extends SceneTree
 ## External script run with --main-pack from an empty directory; no source fallback.
 const STORIES := preload("res://scripts/content/story_catalog.gd")
+const MENU_TEXT := preload("res://scripts/ui/chronicle/chronicle_menu_text.gd")
 const CAMPAIGN := preload("res://scripts/campaign/campaign_service.gd")
 const SHELL := preload("res://scenes/chronicle/chronicle_shell.tscn")
 var checks := 0
@@ -18,10 +19,14 @@ func frames(count: int = 5) -> void:
 
 func run() -> void:
 	expect(ProjectSettings.globalize_path("user://").begins_with("/tmp/"), "isolated packed save location")
-	for path in [STORIES.PATH, STORIES.OPTIONAL_PATH, STORIES.REACTIONS_PATH, STORIES.LORE_PATH, "res://assets/data/chronicle/character_profiles.json"]:
+	for path in [STORIES.PATH, STORIES.OPTIONAL_PATH, STORIES.REACTIONS_PATH, STORIES.LORE_PATH, MENU_TEXT.PATH, "res://assets/data/chronicle/character_profiles.json"]:
 		expect(FileAccess.file_exists(path), "raw story JSON packed: " + path)
 		var parsed: Variant = JSON.parse_string(FileAccess.get_file_as_string(path))
-		expect(parsed is Dictionary and not parsed.is_empty(), "packed story dictionary readable: " + path)
+		expect(parsed is Dictionary and not parsed.is_empty(), "packed story/menu dictionary readable: " + path)
+	for key in [["home", "title"], ["home", "new"], ["home", "load"], ["home", "quit"], ["help", "title"], ["help", "intro"], ["about", "title"], ["about", "intro"], ["exit", "title"], ["exit", "body"], ["exit", "cancel"], ["exit", "confirm"]]:
+		expect(not MENU_TEXT.text(str(key[0]), str(key[1])).strip_edges().is_empty(), "packed menu text is nonempty: " + str(key))
+	var menu_data: Variant = JSON.parse_string(FileAccess.get_file_as_string(MENU_TEXT.PATH))
+	expect(menu_data is Dictionary and menu_data.get("help", {}).get("sections", []).size() > 0 and menu_data.get("about", {}).get("licenses", []).size() > 0, "packed help/about sections and license text resolve")
 	if failures: quit(1); return
 	expect(STORIES.events().size() == 22 and STORIES.optional_events().size() == 32 and STORIES.reactions().size() == 48, "complete story catalogs packed")
 	var errors := STORIES.validate()

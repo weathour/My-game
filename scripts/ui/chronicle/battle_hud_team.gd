@@ -104,8 +104,7 @@ func refresh() -> void:
 		portrait.position = Vector2(117 if active else 96.5, base_height * .5) - portrait.size * .5
 		portrait.set_role_scene(id, ART.portrait(id))
 		portrait.modulate = ART.tint(id)
-		# Existing portrait supports an energy ring; new rules explicitly leave it empty.
-		portrait.set_state(battle.switch_cooldown / .5, 0.0, active)
+		portrait.set_state(battle.switch_cooldown / .5, active)
 		var definition := C.definition(id)
 		var routine: Array = definition.get("automatic", [])
 		var skills: Array = [C.basic(id, battle.equipment), routine[0] if active and not routine.is_empty() else definition.get("support") if not active else null]

@@ -35,10 +35,6 @@
       "sha256": "774537204b1264b13021a2e03db5830e69e9b0405f5f6536be4e00809ed29a26"
     },
     {
-      "path": "design/jia-combat-20261027/source/vfx-v1.png",
-      "sha256": "c0a1206533a06e162d734051d733156f2b4ec804b1264d1b9c04bad24cccc9b4"
-    },
-    {
       "path": "design/jia-combat-20261027/source/vfx-v2.png",
       "sha256": "0cdda8082a89fa5d537f42d46b2a1e2589d39471d1b8d80563d8870c5a5a5ae3"
     }
@@ -152,5 +148,14 @@
     "playable_ui": "PASS",
     "headless_startup": "PASS",
     "graph": "prior graph retained; installed extractor unavailable for Godot; 179 runtime files uncovered"
-  }
+  },
+  "retired_source_files": [
+    {
+      "path": "design/jia-combat-20261027/source/vfx-v1.png",
+      "sha256": "c0a1206533a06e162d734051d733156f2b4ec804b1264d1b9c04bad24cccc9b4",
+      "status": "retired_unselected_source",
+      "availability": "removed_from_current_repository",
+      "selected_replacement": "design/jia-combat-20261027/source/vfx-v2.png"
+    }
+  ]
 }

@@ -81,7 +81,7 @@ func build_page(visible_ids: Array, columns: int) -> void:
 		var label := T.label(id + "  " + str(definition.name), 15, T.LIGHT);label.position = position + Vector2(10,4);page.add_child(label)
 		var metadata := MANIFEST.resolved(str(definition.visual_id))
 		if str(metadata.get("status", "")) != "final": failures += 1;push_error("unfinished identity " + id)
-		var runtime: RefCounted = ENEMY.new(index + 1,"melee",Vector2.ZERO);runtime.configure(definition)
+		var runtime: RefCounted = ENEMY.new(index + 1,definition,Vector2.ZERO)
 		var anchor := Node2D.new();anchor.position = position + Vector2(cell.x * .5,cell.y - 10);anchor.scale = Vector2.ONE * scale;page.add_child(anchor)
 		var actor: Node2D = ART.create_enemy(runtime,"B02");anchor.add_child(actor)
 		if actor.has_meta("temporary_enemy_art") or (actor.has_method("preview") and actor.sprite.texture == null): failures += 1;push_error("unloaded final raster " + id)

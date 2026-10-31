@@ -110,13 +110,11 @@ static func style_map_tool(button: Button, shell: Control, round_tool: bool) -> 
 static func select_node(shell: Control, id: String) -> void:
 	if not shell.session.nodes.has(id): return
 	shell.selected_node = id
-	shell.segment = int(shell.session.nodes[id].segment)
 	reset_detail_scroll(shell)
 	shell.render()
 
 static func locate_current(shell: Control) -> void:
 	shell.selected_node = shell.session.data.current
-	shell.segment = int(shell.session.nodes[shell.selected_node].segment)
 	shell.route_scroll = -1.0
 	reset_detail_scroll(shell)
 	shell.focus_memory.erase("route")
@@ -198,7 +196,7 @@ static func build_action(shell: Control, parent: Control, id: String, key: Strin
 			action = shell.action(parent, "回顾 · " + shell.session.nodes[id].name, func(): shell.open_story_replay(id), "route_replay", true)
 	elif key in ["available", "unavailable"]:
 		var node: Dictionary = shell.session.nodes[id]
-		var event: bool = node.kind in ["event", "spring"] or (shell.session.has_method("event_available") and shell.session.event_available(id))
+		var event: bool = node.kind in ["event", "spring"] or shell.session.event_available(id)
 		action = shell.action(parent, "暂不可前往" if key == "unavailable" else "前往 · " + node.name, func():
 			if shell.session.choose_node(id): shell.open_page("event" if event else "preparation"), "route_forward", true)
 		action.disabled = key == "unavailable"

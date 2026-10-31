@@ -8,8 +8,6 @@ var visual_id := ""
 var clip_name := ""
 var clip_started := 0.0
 var last_serial := -1
-var last_state := ""
-var hit_until := 0.0
 var clock := 0.0
 var moving := false
 var action_until := 0.0
@@ -50,12 +48,10 @@ func present(enemy: RefCounted, elapsed: float, is_paused: bool) -> void:
 		wanted = _clip_for_action(str(enemy.current_action.get("id", enemy.current_action.get("action", enemy.attack))), int(enemy.telegraph.get("attack_step", 0)))
 	elif elapsed < action_until or enemy.state == "active":
 		wanted = action_clip
-	if clock < hit_until and not telling and enemy.state != "active" and elapsed >= action_until: wanted = "hit"
 	if wanted != clip_name or (enemy.action_serial != last_serial and telling):
 		_select(wanted, clock)
 		if not telling and _is_action_clip(wanted): clip_started = action_started
 	last_serial = enemy.action_serial
-	last_state = enemy.state
 	_update_frame(clock)
 	var strength := clampf((contact_until - elapsed) / .12, 0, 1)
 	sprite.modulate = Color(1 + strength * .20, 1 + strength * .20, 1 + strength * .20) if contact_flash else Color.WHITE
@@ -71,10 +67,7 @@ func confirm_hit(elapsed: float, direction: Vector2, low_flash: bool, low_motion
 	contact_direction = direction.normalized()
 	contact_flash = not low_flash
 	contact_motion = not low_motion
-	# A confirmed hit may animate idle/recovery, but never masks tell or active clips.
-	# Confirmed damage preserves the readable body pose. The arena draws the
-	# contact spark; the old hit sheet is a bright orange dissolve, not a recoil.
-	hit_until = 0
+	# Brightness and recoil preserve the body's readable tell/active pose.
 
 func play_release(geometry: Dictionary, elapsed: float) -> void:
 	clock = elapsed
@@ -98,9 +91,6 @@ func _clip_for_action(action_id: String, step: int = 0) -> String:
 
 func _is_action_clip(key: String) -> bool:
 	return key not in ["idle", "move", "hit"] and metadata.get("clips", {}).has(key)
-
-func play_hit() -> void:
-	hit_until = clock + .16
 
 func play_death() -> void:
 	telling = false

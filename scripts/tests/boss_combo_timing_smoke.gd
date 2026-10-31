@@ -10,8 +10,8 @@ func expect(ok: bool, label: String) -> void:
 	checks += 1
 	if not ok: failures += 1; push_error(label)
 func run() -> void:
-	var boss := E.new(1,"boss",Vector2(1600,900))
-	boss.configure(C.definition("B18")); boss._apply_form(1); boss.cooldown = 0
+	var boss := E.new(1,C.definition("B18"),Vector2(1600,900))
+	boss._apply_form(1); boss.cooldown = 0
 	var expected: Array = ["demon_fourfold","demon_skybreaker","demon_quake","demon_heavenfall","demon_final_cleave"]
 	var resets: Array = [0.65,0.8,1.0,0.9,3.7]
 	var tells: Array = []

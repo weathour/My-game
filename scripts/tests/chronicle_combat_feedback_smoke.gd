@@ -49,8 +49,9 @@ func mount(stage: String) -> void:
 	await process_frame
 	view.battle.enemies.clear()
 	view.battle.director.spawn_remaining = 10000
-	view.battle.director.config.boss_time = 10000
-	view.battle.director.config.boss_kills = 10000
+	if str(view.battle.director.config.get("encounter_mode", "")) != "boss_duel":
+		view.battle.director.config.boss_time = 10000
+		view.battle.director.config.boss_kills = 10000
 	view.canvas.refresh(false)
 
 func run() -> void:
@@ -107,8 +108,8 @@ func run() -> void:
 	print("CHRONICLE_COMBAT_FEEDBACK_SMOKE ", "PASS" if failures == 0 else "FAIL", " checks=", checks, " failures=", failures)
 	quit(0 if failures == 0 else 1)
 
-func spawn(b: RefCounted, point: Vector2, kind: String = "E01") -> RefCounted:
-	var enemy: RefCounted = b.director.spawn(kind, point)
+func spawn(b: RefCounted, point: Vector2, definition_id: String = "E01") -> RefCounted:
+	var enemy: RefCounted = b.director.spawn(definition_id, point)
 	enemy.cooldown = 10000
 	enemy.speed = 0
 	enemy.hp = 9999
