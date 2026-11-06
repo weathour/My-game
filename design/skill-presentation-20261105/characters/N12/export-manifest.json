@@ -1,0 +1,300 @@
+{
+  "version": 1,
+  "character_id": "N12",
+  "generator": "Built-in ImageGen",
+  "pixel_processing": "Aseprite only; Pillow/scipy used read-only QA",
+  "source": {
+    "path": "source/combat-bundle-v1.png",
+    "size": [
+      1254,
+      1254
+    ],
+    "sha256": "8876d9b823aec60a3dc390dc4ff572d204ea03d28210a0dadc6ecfb3e37847e5",
+    "standing_body_height": 230
+  },
+  "measurements_sha256": "0f06746e1730a1425255673b5fd8bc2b1e1c12bab8e1020416a4ecbea767fda4",
+  "export_script": "scripts/tools/import_chronicle_cast_art.lua",
+  "export_script_sha256": "297d4cb97101b9896fabf1f5ac6223c04084c157eb36de7d38bb79b324d751a8",
+  "actor_shared_opaque_colors": 60,
+  "unique_body_poses": 16,
+  "clips": {
+    "idle": 4,
+    "move": 4,
+    "attack": 4,
+    "special": 4,
+    "hit": 2
+  },
+  "portrait": "Separately drawn bust in source bundle; 64px native head exported at nearest-neighbor 128px",
+  "outputs": [
+    {
+      "path": "assets/players/chronicle-cast/N12/idle.png",
+      "size": [
+        768,
+        192
+      ],
+      "sha256": "1fc2900a828e25f42cecd96392dbe073b2f671d0ccb633704667663d671acbd2",
+      "frames": 4,
+      "frame_alpha_bounds": [
+        [
+          59,
+          96,
+          141,
+          176
+        ],
+        [
+          62,
+          96,
+          143,
+          176
+        ],
+        [
+          61,
+          98,
+          144,
+          176
+        ],
+        [
+          62,
+          98,
+          141,
+          176
+        ]
+      ],
+      "frame_pixel_sha256": [
+        "832cc58f2355874c12ce6e11f842f8152ad96eabc199ea462d3c6c2575b492bd",
+        "445b46f2cd95e921d6e43d9844f9cff70e2518c008d4384f626434834366f4d3",
+        "ad8191ac449e8573cda737d41e9b8f0856db59339ecb5d47d2a34688936799ed",
+        "9c242fa9d14e060ad4338c87bb97a44ca3f754ab4f74b28327ce35af15f1e8f2"
+      ]
+    },
+    {
+      "path": "assets/players/chronicle-cast/N12/idle.aseprite",
+      "sha256": "0813ae0562616771368b9ff7e0face908c224c3332094487af15c3d6ccce1831",
+      "frames": 4,
+      "size": [
+        192,
+        192
+      ]
+    },
+    {
+      "path": "assets/players/chronicle-cast/N12/move.png",
+      "size": [
+        768,
+        192
+      ],
+      "sha256": "eb8d15d4be246db72cfcef6852dc61424bc5a1662ff4a6eba91a98d43907c6df",
+      "frames": 4,
+      "frame_alpha_bounds": [
+        [
+          55,
+          102,
+          143,
+          176
+        ],
+        [
+          51,
+          103,
+          143,
+          176
+        ],
+        [
+          49,
+          104,
+          144,
+          176
+        ],
+        [
+          49,
+          103,
+          144,
+          176
+        ]
+      ],
+      "frame_pixel_sha256": [
+        "46d85d042adb2b68e273c93775f38113d3984b0f2457d429e920e2d1b3ded4e6",
+        "0d3e64b2556b273e2733b4b25d6d672ceca3c4c3c10b2573b9f6b7852f323e6b",
+        "1dc3b3c8c21af2a9134b36cd155215fada983c478093b7acc86921f4156875b9",
+        "b00c8ccc6d248ebd918eaec23af0e772cd45c8412fad28784cdad55ca87dca30"
+      ]
+    },
+    {
+      "path": "assets/players/chronicle-cast/N12/move.aseprite",
+      "sha256": "0bce0dc9d28a98d4fd9de7822da543b0958b50c14b98e1f12f9021459683a290",
+      "frames": 4,
+      "size": [
+        192,
+        192
+      ]
+    },
+    {
+      "path": "assets/players/chronicle-cast/N12/attack.png",
+      "size": [
+        768,
+        192
+      ],
+      "sha256": "58c6f0a23a4411d87ad857ff01b4cef03f64ece9d1479e675e016e4cade1f2b7",
+      "frames": 4,
+      "frame_alpha_bounds": [
+        [
+          58,
+          102,
+          139,
+          176
+        ],
+        [
+          54,
+          102,
+          148,
+          176
+        ],
+        [
+          50,
+          104,
+          152,
+          176
+        ],
+        [
+          56,
+          104,
+          135,
+          176
+        ]
+      ],
+      "frame_pixel_sha256": [
+        "eafab9785b0c9fd5e8784aace95f2761871966c52b9f850479d380b1a3de143b",
+        "7dd83eb90ebeecb5928d59f1f6beb97c9056b0a2712f86d6bdb6713aec3e68b9",
+        "1765c2f8e035feec0ce764a599590b31e91656830efffa648bb43bf8970c91e7",
+        "930dfd17b91b97f7eddf3dcc02ab3cd449c7646f557d7f87d43aa19f308e8f3a"
+      ]
+    },
+    {
+      "path": "assets/players/chronicle-cast/N12/attack.aseprite",
+      "sha256": "b255acbd0dee1ed76405dd7de85661683e044c406b208714fe3cd4f0f8287f99",
+      "frames": 4,
+      "size": [
+        192,
+        192
+      ]
+    },
+    {
+      "path": "assets/players/chronicle-cast/N12/special.png",
+      "size": [
+        768,
+        192
+      ],
+      "sha256": "38676b2f59b7917d175fa5204c2db95964dc1740acc0ca1a0cf2f694335827d0",
+      "frames": 4,
+      "frame_alpha_bounds": [
+        [
+          53,
+          111,
+          146,
+          176
+        ],
+        [
+          51,
+          110,
+          145,
+          176
+        ],
+        [
+          49,
+          111,
+          149,
+          176
+        ],
+        [
+          50,
+          109,
+          142,
+          176
+        ]
+      ],
+      "frame_pixel_sha256": [
+        "c38d221679924ebaeace463d968db28ef905908cd6a5036ccd12ac1f7c9f3b00",
+        "ffa0bce39115bc57f4347e4aefc53a3681c4480c26f1b8d6f170719f319b6a20",
+        "e358d97a8ea843ee1185463970ca88a2a40601be5e45747d05f1a6ec0308f896",
+        "b27bfd326915a73d2547cae807f7823df49b6a31f7d47e7efa32cd9efd4485be"
+      ]
+    },
+    {
+      "path": "assets/players/chronicle-cast/N12/special.aseprite",
+      "sha256": "a9de779322b521d2f76a28328299924ac4ee625b28e5427094150a4f2affd307",
+      "frames": 4,
+      "size": [
+        192,
+        192
+      ]
+    },
+    {
+      "path": "assets/players/chronicle-cast/N12/hit.png",
+      "size": [
+        384,
+        192
+      ],
+      "sha256": "8d5267000c2f94adb4d8446ac19049f91d8a0ede6718826947a4b36af436cf88",
+      "frames": 2,
+      "frame_alpha_bounds": [
+        [
+          62,
+          98,
+          141,
+          176
+        ],
+        [
+          59,
+          96,
+          141,
+          176
+        ]
+      ],
+      "frame_pixel_sha256": [
+        "9c242fa9d14e060ad4338c87bb97a44ca3f754ab4f74b28327ce35af15f1e8f2",
+        "832cc58f2355874c12ce6e11f842f8152ad96eabc199ea462d3c6c2575b492bd"
+      ]
+    },
+    {
+      "path": "assets/players/chronicle-cast/N12/hit.aseprite",
+      "sha256": "5ee492b08fa2f3b4a467045028a8d73d450c8f9fad6def94fbd5d4409b332178",
+      "frames": 2,
+      "size": [
+        192,
+        192
+      ]
+    },
+    {
+      "path": "assets/players/chronicle-cast/N12/actor.aseprite",
+      "sha256": "7bd36754ed82b06d49529915ca7f11bdff15b5d6b742714b0f2ed825794cae4d",
+      "frames": 16,
+      "size": [
+        192,
+        192
+      ]
+    },
+    {
+      "path": "assets/players/chronicle-cast/N12/head.aseprite",
+      "sha256": "0eb6debe57726bbd3ed6d0ced87a0731a65103dfff645da6ab94cd15dc16b682",
+      "frames": 1,
+      "size": [
+        64,
+        64
+      ]
+    },
+    {
+      "path": "assets/players/chronicle-cast/N12/head.png",
+      "sha256": "c18428604b6e081591b600eab6b9bdad1044019752e1f84b99c5f540bfe13819",
+      "size": [
+        128,
+        128
+      ]
+    }
+  ],
+  "checks": {
+    "binary_alpha": true,
+    "frame_sizes": true,
+    "distinct_frames_within_clips": true,
+    "canvas_no_clipping": true,
+    "editable_files": true,
+    "source_hash": true
+  }
+}

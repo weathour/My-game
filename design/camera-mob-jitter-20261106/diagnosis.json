@@ -1,0 +1,165 @@
+{
+  "status": "diagnosis_only_no_runtime_or_formal_test_changes",
+  "probe_frames": 34800,
+  "datasets": {
+    "initial_B17_config": {
+      "cases": 19,
+      "file": "results.json",
+      "note": "E03/E10 not in B17 wave pool; preliminary camera isolation only; final production-stage control in B13/"
+    },
+    "E04_B17": {
+      "cases": 2,
+      "file": "results-E04.json"
+    },
+    "B13_positive_and_negative_control": {
+      "cases": 8,
+      "file": "B13/results-E03,E10,E02,E05.json"
+    }
+  },
+  "production_fixture": {
+    "character": "JIA",
+    "level": "C.record default (1)",
+    "equipment": {
+      "weapon": "plain_blade",
+      "armor": "cloth_armor",
+      "accessory": "ember_seal"
+    },
+    "budget_unchanged": true,
+    "geometry_from_real_EnemySystem_only": true,
+    "B13_budget": {
+      "major": 5,
+      "melee": 10
+    },
+    "B13_role_caps": {
+      "support": 2,
+      "heavy": 4,
+      "ranged": 9
+    },
+    "E03_count": 8,
+    "E10_count": 4,
+    "E02_and_E05_counts": 7,
+    "world_size": [
+      3200,
+      1800
+    ],
+    "initial_foot": [
+      1600,
+      900
+    ],
+    "dimensions": [
+      1280,
+      720
+    ],
+    "safe_top": 72,
+    "safe_bottom": 188,
+    "seconds": 20,
+    "dt": 0.016666666666666666,
+    "moving_fixture": "home.x + sin(time*.65)*180; max117world/sec, below actual movement cap including .25 slow"
+  },
+  "confirmed": [
+    {
+      "mechanism": "ordinary_area_relevant_set_changes_move_focus_even_when_not_actually_threatened",
+      "source": [
+        "boss_camera.gd:107-111",
+        "boss_camera.gd:131-134",
+        "boss_camera.gd:192-193"
+      ],
+      "example": "E12_still frames378->379 and462->463, pulse/ring_gap radius234 enters then leaves relevant; escape_needed=false, escape_valid=false; scale1 throughout; fixed-world marker peak15.297px/frame and vertical span176px; trauma0"
+    },
+    {
+      "mechanism": "long_area_geometry_changes_zoom_without_any_boss",
+      "source": [
+        "boss_camera.gd:131-154",
+        "boss_camera.gd:190-196"
+      ],
+      "example": "B13 E03_still scale1 to.734375 and screen peak11.105px/frame at fixed player foot; E10_still scale1 to.5078125 with peak20.854px/frame at point300world right; trauma0"
+    },
+    {
+      "mechanism": "remaining_changes_defeat_cross_frame_escape_cache_and_change_search_sampling_radius",
+      "source": [
+        "enemy_system.gd:78-80",
+        "enemy_system.gd:328",
+        "boss_camera.gd:241-248",
+        "boss_camera.gd:255-280"
+      ],
+      "example": "E03still/moving escape recomputes1140 of1200 frames despite far fewer relevant-membership changes; per-frame remaining part of detached dictionary equality"
+    },
+    {
+      "mechanism": "safe_endpoint_flips_exist_but_are_not_necessarily_camera_jitter",
+      "source": [
+        "boss_camera.gd:261-280",
+        "boss_camera.gd:120-124"
+      ],
+      "example": "B13 E03_moving35 route direction flips;27 have unchanged focus bounds. Frame167 route(+29.56,-29.56)->(-35.17,+20.31), danger membership/focus unchanged. Cannot blame all flips for all screen movement"
+    },
+    {
+      "mechanism": "double_update_does_not_double_time_or_change_result_in_these_no_boss_cases",
+      "source": [
+        "battle_view.gd:144-147",
+        "battle_canvas.gd:198",
+        "battle_canvas.gd:292"
+      ],
+      "example": "all29cases single delta update versus delta then0 update: max center/origin/zoom differences0"
+    },
+    {
+      "mechanism": "map_hard_constraints_override_smoothing_but_large_correction_is_not_necessarily_screen_motion",
+      "source": [
+        "boss_camera.gd:194-219"
+      ],
+      "example": "edge E03/E10/E06 max post-smoothing corrections65.285/62.425/45.537world; maxima have origin(0,0), so not camera jump magnitudes. Central positive cases correction~0, confirming hard clamps are unnecessary for reproduction"
+    },
+    {
+      "mechanism": "not_trauma_shake",
+      "source": [
+        "boss_camera.gd:63-73",
+        "enemy_system.gd:288-289"
+      ],
+      "example": "all34800 frames trauma0; ordinary attacks produce no boss_impact/phase/defeated"
+    }
+  ],
+  "ranked_candidates": [
+    {
+      "id": "E03",
+      "name": "轭骨奔兽",
+      "action": "charge",
+      "shape": "line",
+      "length": 500,
+      "half_width": 25,
+      "windup": 0.85,
+      "priority": "strong reproduced translation+zoom"
+    },
+    {
+      "id": "E10",
+      "name": "钩轮牵阵者",
+      "action": "hook",
+      "shape": "line",
+      "length": 560,
+      "half_width": 36,
+      "windup": 0.95,
+      "priority": "strong reproduced zoom; active slow_strip prolongs relevant set"
+    },
+    {
+      "id": "E12",
+      "name": "碑背石龟",
+      "action": "pulse",
+      "shape": "ring_gap",
+      "radius": 234,
+      "windup": 1.4,
+      "priority": "strong reproduced back-and-forth translation even while escape_needed=false"
+    }
+  ],
+  "secondary_candidates": [
+    "E06 pot marker90: modest still motion, moving fixture up to9px/frame; initial configB17 not production B12 amplitude acceptance",
+    "E09 slam sector143/169: smaller reproduced motion",
+    "E01/E04 swipe: stationary cohort1px/frame, no zoom in this fixture; cannot rule out mixed geometry"
+  ],
+  "negative_controls": {
+    "B13_E02_bone_archer_and_E05_paper_lantern": "each7 actors; attacks admitted/released with real projectiles; still frame screen delta0, zoom1, escape recomputes0, trauma0. Moving2px/frame reflects ordinary player following. Does not refute user observation of bow scenes with mixed mobs/avoidance"
+  },
+  "limits": [
+    "No user stage or recording; cannot identify a unique offending monster or claim observed subjective jitter is exactly reproduced.",
+    "Enemy-only framing diagnostic omits player offense/health/reinforcement waves; positions are authored-definition cohorts within arena and unchanged production caps, not a saved exact campaign trace.",
+    "No native screenshots or HUD silhouette obstacle geometry; transform-based screen displacement only.",
+    "No repair was authorized or implemented."
+  ]
+}

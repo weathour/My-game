@@ -1,0 +1,4216 @@
+{
+  "human_playtest": false,
+  "source_review": "source_review.json",
+  "comparison": "comparison.json",
+  "geometry_checks": {
+    "checks": [
+      {
+        "label": "actual shared world radius four",
+        "passed": true
+      },
+      {
+        "label": "swept fast projectile crosses tiny actor",
+        "passed": true
+      },
+      {
+        "label": "relative crossing actor and projectile paths hit",
+        "passed": true
+      },
+      {
+        "label": "parallel moving actor with20gap does not hit",
+        "passed": true
+      },
+      {
+        "label": "paths crossing at different times do not hit",
+        "passed": true
+      },
+      {
+        "label": "projectile radius4 plus hurt4 boundary hits",
+        "passed": true
+      },
+      {
+        "label": "projectile radius4 plus hurt4 outside misses",
+        "passed": true
+      },
+      {
+        "label": "disc reaches104 actual padding",
+        "passed": true
+      },
+      {
+        "label": "disc misses104.01",
+        "passed": true
+      },
+      {
+        "label": "line reaches14 actual padding",
+        "passed": true
+      },
+      {
+        "label": "line misses14.01",
+        "passed": true
+      },
+      {
+        "label": "capsule endpoint includes radial padding",
+        "passed": true
+      },
+      {
+        "label": "capsule endpoint outside misses",
+        "passed": true
+      },
+      {
+        "label": "sector front hits",
+        "passed": true
+      },
+      {
+        "label": "sector rear outside hurt4 misses",
+        "passed": true
+      },
+      {
+        "label": "sector origin4 intersects actor",
+        "passed": true
+      },
+      {
+        "label": "ring gap permits actor in gap",
+        "passed": true
+      },
+      {
+        "label": "ring opposite side hurts",
+        "passed": true
+      },
+      {
+        "label": "ring hole remains safe outside padding",
+        "passed": true
+      },
+      {
+        "label": "ring inner edge plus4 hits",
+        "passed": true
+      }
+    ],
+    "failures": 0,
+    "scope": "Production shared hurtbox and area geometry primitives; session wiring verified separately by source inspection and normal sessions."
+  },
+  "marker_deadline_review": {
+    "reviewed": 54,
+    "still_zero": 0,
+    "scope": "Rechecks conservative initial-tell zeros using each marker's own release deadline and production hurt4 geometry. Tests marker series only; active hazards/projectiles are not replayed. Full damage-on reactive sessions separately establish actual successful phase completions."
+  },
+  "growth_to_boss": [
+    {
+      "stage": "B01",
+      "before": {
+        "samples": 3,
+        "seconds_mean": 42.7611111111111,
+        "kills_mean": 28,
+        "xp_picked_mean": 80.0,
+        "xp_ground_mean": 4.0,
+        "xp_generated_mean": 84.0,
+        "actual_jia_xp_mean": 80.0,
+        "jia_exit_levels": [
+          3,
+          3,
+          3
+        ],
+        "stop_reasons": [
+          "boss_appeared",
+          "boss_appeared",
+          "boss_appeared"
+        ]
+      },
+      "after": {
+        "samples": 3,
+        "seconds_mean": 28.0166666666667,
+        "kills_mean": 112.66666666666667,
+        "xp_picked_mean": 107.66666666666667,
+        "xp_ground_mean": 5.0,
+        "xp_generated_mean": 112.66666666666667,
+        "actual_jia_xp_mean": 107.66666666666667,
+        "jia_exit_levels": [
+          3,
+          3,
+          3
+        ],
+        "stop_reasons": [
+          "boss_appeared",
+          "boss_appeared",
+          "boss_appeared"
+        ]
+      }
+    },
+    {
+      "stage": "B05",
+      "before": {
+        "samples": 3,
+        "seconds_mean": 60.50555555555554,
+        "kills_mean": 36.666666666666664,
+        "xp_picked_mean": 155.0,
+        "xp_ground_mean": 12.666666666666666,
+        "xp_generated_mean": 167.66666666666666,
+        "actual_jia_xp_mean": 51.666666666666664,
+        "jia_exit_levels": [
+          4,
+          4,
+          4
+        ],
+        "stop_reasons": [
+          "boss_appeared",
+          "boss_appeared",
+          "boss_appeared"
+        ]
+      },
+      "after": {
+        "samples": 3,
+        "seconds_mean": 32.42222222222223,
+        "kills_mean": 117,
+        "xp_picked_mean": 129.66666666666666,
+        "xp_ground_mean": 8.666666666666666,
+        "xp_generated_mean": 138.33333333333334,
+        "actual_jia_xp_mean": 43.222222222222236,
+        "jia_exit_levels": [
+          4,
+          4,
+          4
+        ],
+        "stop_reasons": [
+          "boss_appeared",
+          "boss_appeared",
+          "boss_appeared"
+        ]
+      }
+    },
+    {
+      "stage": "B12",
+      "before": {
+        "samples": 3,
+        "seconds_mean": 105.088888888889,
+        "kills_mean": 59.666666666666664,
+        "xp_picked_mean": 304.3333333333333,
+        "xp_ground_mean": 15.666666666666666,
+        "xp_generated_mean": 320.0,
+        "actual_jia_xp_mean": 101.44444444444443,
+        "jia_exit_levels": [
+          8,
+          8,
+          8
+        ],
+        "stop_reasons": [
+          "boss_appeared",
+          "boss_appeared",
+          "boss_appeared"
+        ]
+      },
+      "after": {
+        "samples": 3,
+        "seconds_mean": 39.0166666666667,
+        "kills_mean": 202.33333333333334,
+        "xp_picked_mean": 213.33333333333334,
+        "xp_ground_mean": 10.333333333333334,
+        "xp_generated_mean": 223.66666666666666,
+        "actual_jia_xp_mean": 71.11111111111113,
+        "jia_exit_levels": [
+          8,
+          8,
+          8
+        ],
+        "stop_reasons": [
+          "boss_appeared",
+          "boss_appeared",
+          "boss_appeared"
+        ]
+      }
+    }
+  ],
+  "continuous_duels": [
+    {
+      "stage": "B15",
+      "start": "center",
+      "seconds": 35.4333333333333,
+      "outcome": "victory",
+      "hurt_total": 193.065298804781,
+      "entry": {
+        "F11": {
+          "cooldowns": {},
+          "dead": false,
+          "hp": 331.0,
+          "level": 12,
+          "mp": 185.0,
+          "xp": 0.0
+        },
+        "JIA": {
+          "cooldowns": {},
+          "dead": false,
+          "hp": 396.0,
+          "level": 12,
+          "mp": 145.0,
+          "xp": 0.0
+        },
+        "N16": {
+          "cooldowns": {},
+          "dead": false,
+          "hp": 346.0,
+          "level": 12,
+          "mp": 175.0,
+          "xp": 0.0
+        }
+      },
+      "exit": {
+        "F11": {
+          "cooldowns": {
+            "F11_basic": 0.319565217391303,
+            "emma_frost": 1.58333333333335,
+            "emma_ice": 4.65000000000001,
+            "emma_star": 8.58333333333321
+          },
+          "dead": false,
+          "hp": 212.934701195219,
+          "level": 12,
+          "mp": 89.4999999999879,
+          "xp": 19.3333333333333
+        },
+        "JIA": {
+          "cooldowns": {},
+          "dead": false,
+          "hp": 396.0,
+          "level": 12,
+          "mp": 145.0,
+          "xp": 19.3333333333333
+        },
+        "N16": {
+          "cooldowns": {
+            "healer_support": 6.66666666666667
+          },
+          "dead": false,
+          "hp": 346.0,
+          "level": 12,
+          "mp": 175.0,
+          "xp": 19.3333333333333
+        }
+      },
+      "phase_resource_records": [
+        {
+          "active": "F11",
+          "form_index": 0,
+          "phase_damage_bank": 0.0,
+          "resources": {
+            "F11": {
+              "cooldowns": {
+                "F11_basic": 0.869565217391304,
+                "emma_frost": 7.0,
+                "emma_ice": 8.0,
+                "emma_star": 11.0
+              },
+              "dead": false,
+              "hp": 331.0,
+              "level": 12,
+              "mp": 115.0,
+              "xp": 0.0
+            },
+            "JIA": {
+              "cooldowns": {},
+              "dead": false,
+              "hp": 396.0,
+              "level": 12,
+              "mp": 145.0,
+              "xp": 0.0
+            },
+            "N16": {
+              "cooldowns": {
+                "healer_support": 7.0
+              },
+              "dead": false,
+              "hp": 346.0,
+              "level": 12,
+              "mp": 175.0,
+              "xp": 0.0
+            }
+          },
+          "time": 0.0166666666666667,
+          "transition_remaining": 0.0
+        },
+        {
+          "active": "F11",
+          "form_index": 1,
+          "phase_damage_bank": 54.2200000000003,
+          "resources": {
+            "F11": {
+              "cooldowns": {
+                "F11_basic": 0.302898550724637,
+                "emma_frost": 3.00000000000001,
+                "emma_ice": 4.51666666666668,
+                "emma_star": 10.5
+              },
+              "dead": false,
+              "hp": 331.0,
+              "level": 12,
+              "mp": 113.999999999996,
+              "xp": 0.0
+            },
+            "JIA": {
+              "cooldowns": {},
+              "dead": false,
+              "hp": 396.0,
+              "level": 12,
+              "mp": 145.0,
+              "xp": 0.0
+            },
+            "N16": {
+              "cooldowns": {
+                "healer_support": 2.51666666666668
+              },
+              "dead": false,
+              "hp": 346.0,
+              "level": 12,
+              "mp": 175.0,
+              "xp": 0.0
+            }
+          },
+          "time": 11.5166666666668,
+          "transition_remaining": 1.0
+        }
+      ],
+      "actual_xp_gained_by_member": {
+        "F11": 19.3333333333333,
+        "JIA": 19.3333333333333,
+        "N16": 19.3333333333333
+      }
+    },
+    {
+      "stage": "B15",
+      "start": "corner",
+      "seconds": 34.4333333333333,
+      "outcome": "victory",
+      "hurt_total": 193.065298804781,
+      "entry": {
+        "F11": {
+          "cooldowns": {},
+          "dead": false,
+          "hp": 331.0,
+          "level": 12,
+          "mp": 185.0,
+          "xp": 0.0
+        },
+        "JIA": {
+          "cooldowns": {},
+          "dead": false,
+          "hp": 396.0,
+          "level": 12,
+          "mp": 145.0,
+          "xp": 0.0
+        },
+        "N16": {
+          "cooldowns": {},
+          "dead": false,
+          "hp": 346.0,
+          "level": 12,
+          "mp": 175.0,
+          "xp": 0.0
+        }
+      },
+      "exit": {
+        "F11": {
+          "cooldowns": {
+            "F11_basic": 0.319565217391303,
+            "emma_frost": 2.58333333333335,
+            "emma_ice": 5.65000000000001,
+            "emma_star": 9.58333333333326
+          },
+          "dead": false,
+          "hp": 187.934701195219,
+          "level": 12,
+          "mp": 83.4999999999883,
+          "xp": 19.3333333333333
+        },
+        "JIA": {
+          "cooldowns": {},
+          "dead": false,
+          "hp": 396.0,
+          "level": 12,
+          "mp": 145.0,
+          "xp": 19.3333333333333
+        },
+        "N16": {
+          "cooldowns": {
+            "healer_support": 0.65000000000002
+          },
+          "dead": false,
+          "hp": 346.0,
+          "level": 12,
+          "mp": 175.0,
+          "xp": 19.3333333333333
+        }
+      },
+      "phase_resource_records": [
+        {
+          "active": "F11",
+          "form_index": 0,
+          "phase_damage_bank": 0.0,
+          "resources": {
+            "F11": {
+              "cooldowns": {
+                "F11_basic": 0.869565217391304,
+                "emma_frost": 7.0,
+                "emma_ice": 8.0,
+                "emma_star": 11.0
+              },
+              "dead": false,
+              "hp": 331.0,
+              "level": 12,
+              "mp": 115.0,
+              "xp": 0.0
+            },
+            "JIA": {
+              "cooldowns": {},
+              "dead": false,
+              "hp": 396.0,
+              "level": 12,
+              "mp": 145.0,
+              "xp": 0.0
+            },
+            "N16": {
+              "cooldowns": {
+                "healer_support": 7.0
+              },
+              "dead": false,
+              "hp": 346.0,
+              "level": 12,
+              "mp": 175.0,
+              "xp": 0.0
+            }
+          },
+          "time": 0.0166666666666667,
+          "transition_remaining": 0.0
+        },
+        {
+          "active": "F11",
+          "form_index": 1,
+          "phase_damage_bank": 54.2200000000003,
+          "resources": {
+            "F11": {
+              "cooldowns": {
+                "F11_basic": 0.202898550724637,
+                "emma_frost": 3.01666666666668,
+                "emma_ice": 4.53333333333335,
+                "emma_star": 10.5166666666666
+              },
+              "dead": false,
+              "hp": 331.0,
+              "level": 12,
+              "mp": 113.899999999996,
+              "xp": 0.0
+            },
+            "JIA": {
+              "cooldowns": {},
+              "dead": false,
+              "hp": 396.0,
+              "level": 12,
+              "mp": 145.0,
+              "xp": 0.0
+            },
+            "N16": {
+              "cooldowns": {
+                "healer_support": 2.53333333333335
+              },
+              "dead": false,
+              "hp": 346.0,
+              "level": 12,
+              "mp": 175.0,
+              "xp": 0.0
+            }
+          },
+          "time": 11.5000000000002,
+          "transition_remaining": 1.0
+        }
+      ],
+      "actual_xp_gained_by_member": {
+        "F11": 19.3333333333333,
+        "JIA": 19.3333333333333,
+        "N16": 19.3333333333333
+      }
+    },
+    {
+      "stage": "B16",
+      "start": "center",
+      "seconds": 44.8333333333333,
+      "outcome": "victory",
+      "hurt_total": 171.769051792829,
+      "entry": {
+        "F11": {
+          "cooldowns": {},
+          "dead": false,
+          "hp": 331.0,
+          "level": 12,
+          "mp": 185.0,
+          "xp": 0.0
+        },
+        "JIA": {
+          "cooldowns": {},
+          "dead": false,
+          "hp": 396.0,
+          "level": 12,
+          "mp": 145.0,
+          "xp": 0.0
+        },
+        "N16": {
+          "cooldowns": {},
+          "dead": false,
+          "hp": 346.0,
+          "level": 12,
+          "mp": 175.0,
+          "xp": 0.0
+        }
+      },
+      "exit": {
+        "F11": {
+          "cooldowns": {
+            "F11_basic": 0.419565217391303,
+            "emma_frost": 0.0,
+            "emma_ice": 3.26666666666668,
+            "emma_star": 10.1833333333333
+          },
+          "dead": false,
+          "hp": 298.869960159363,
+          "level": 12,
+          "mp": 75.8999999999847,
+          "xp": 19.3333333333333
+        },
+        "JIA": {
+          "cooldowns": {},
+          "dead": false,
+          "hp": 396.0,
+          "level": 12,
+          "mp": 145.0,
+          "xp": 19.3333333333333
+        },
+        "N16": {
+          "cooldowns": {
+            "healer_support": 4.28333333333334
+          },
+          "dead": false,
+          "hp": 346.0,
+          "level": 12,
+          "mp": 175.0,
+          "xp": 19.3333333333333
+        }
+      },
+      "phase_resource_records": [
+        {
+          "active": "F11",
+          "form_index": 0,
+          "phase_damage_bank": 0.0,
+          "resources": {
+            "F11": {
+              "cooldowns": {
+                "F11_basic": 0.869565217391304,
+                "emma_frost": 7.0,
+                "emma_ice": 8.0,
+                "emma_star": 11.0
+              },
+              "dead": false,
+              "hp": 331.0,
+              "level": 12,
+              "mp": 115.0,
+              "xp": 0.0
+            },
+            "JIA": {
+              "cooldowns": {},
+              "dead": false,
+              "hp": 396.0,
+              "level": 12,
+              "mp": 145.0,
+              "xp": 0.0
+            },
+            "N16": {
+              "cooldowns": {
+                "healer_support": 7.0
+              },
+              "dead": false,
+              "hp": 346.0,
+              "level": 12,
+              "mp": 175.0,
+              "xp": 0.0
+            }
+          },
+          "time": 0.0166666666666667,
+          "transition_remaining": 0.0
+        },
+        {
+          "active": "F11",
+          "form_index": 1,
+          "phase_damage_bank": 54.3200000000004,
+          "resources": {
+            "F11": {
+              "cooldowns": {
+                "F11_basic": 0.169565217391303,
+                "emma_frost": 5.35000000000001,
+                "emma_ice": 7.38333333333334,
+                "emma_star": 5.34999999999986
+              },
+              "dead": false,
+              "hp": 291.360988047809,
+              "level": 12,
+              "mp": 116.899999999994,
+              "xp": 0.0
+            },
+            "JIA": {
+              "cooldowns": {},
+              "dead": false,
+              "hp": 396.0,
+              "level": 12,
+              "mp": 145.0,
+              "xp": 0.0
+            },
+            "N16": {
+              "cooldowns": {
+                "healer_support": 4.38333333333334
+              },
+              "dead": false,
+              "hp": 346.0,
+              "level": 12,
+              "mp": 175.0,
+              "xp": 0.0
+            }
+          },
+          "time": 16.666666666667,
+          "transition_remaining": 1.0
+        }
+      ],
+      "actual_xp_gained_by_member": {
+        "F11": 19.3333333333333,
+        "JIA": 19.3333333333333,
+        "N16": 19.3333333333333
+      }
+    },
+    {
+      "stage": "B16",
+      "start": "corner",
+      "seconds": 45.5333333333333,
+      "outcome": "victory",
+      "hurt_total": 92.4910278884462,
+      "entry": {
+        "F11": {
+          "cooldowns": {},
+          "dead": false,
+          "hp": 331.0,
+          "level": 12,
+          "mp": 185.0,
+          "xp": 0.0
+        },
+        "JIA": {
+          "cooldowns": {},
+          "dead": false,
+          "hp": 396.0,
+          "level": 12,
+          "mp": 145.0,
+          "xp": 0.0
+        },
+        "N16": {
+          "cooldowns": {},
+          "dead": false,
+          "hp": 346.0,
+          "level": 12,
+          "mp": 175.0,
+          "xp": 0.0
+        }
+      },
+      "exit": {
+        "F11": {
+          "cooldowns": {
+            "F11_basic": 0.352898550724637,
+            "emma_frost": 6.48333333333334,
+            "emma_ice": 3.01666666666668,
+            "emma_star": 10.9833333333333
+          },
+          "dead": false,
+          "hp": 309.754486055777,
+          "level": 12,
+          "mp": 52.0999999999845,
+          "xp": 19.3333333333333
+        },
+        "JIA": {
+          "cooldowns": {},
+          "dead": false,
+          "hp": 396.0,
+          "level": 12,
+          "mp": 145.0,
+          "xp": 19.3333333333333
+        },
+        "N16": {
+          "cooldowns": {
+            "healer_support": 3.58333333333335
+          },
+          "dead": false,
+          "hp": 346.0,
+          "level": 12,
+          "mp": 175.0,
+          "xp": 19.3333333333333
+        }
+      },
+      "phase_resource_records": [
+        {
+          "active": "F11",
+          "form_index": 0,
+          "phase_damage_bank": 0.0,
+          "resources": {
+            "F11": {
+              "cooldowns": {
+                "F11_basic": 0.869565217391304,
+                "emma_frost": 7.0,
+                "emma_ice": 8.0,
+                "emma_star": 11.0
+              },
+              "dead": false,
+              "hp": 331.0,
+              "level": 12,
+              "mp": 115.0,
+              "xp": 0.0
+            },
+            "JIA": {
+              "cooldowns": {},
+              "dead": false,
+              "hp": 396.0,
+              "level": 12,
+              "mp": 145.0,
+              "xp": 0.0
+            },
+            "N16": {
+              "cooldowns": {
+                "healer_support": 7.0
+              },
+              "dead": false,
+              "hp": 346.0,
+              "level": 12,
+              "mp": 175.0,
+              "xp": 0.0
+            }
+          },
+          "time": 0.0166666666666667,
+          "transition_remaining": 0.0
+        },
+        {
+          "active": "F11",
+          "form_index": 1,
+          "phase_damage_bank": 0.960000000000434,
+          "resources": {
+            "F11": {
+              "cooldowns": {
+                "F11_basic": 0.33623188405797,
+                "emma_frost": 5.56666666666667,
+                "emma_ice": 7.6,
+                "emma_star": 5.56666666666653
+              },
+              "dead": false,
+              "hp": 331.0,
+              "level": 12,
+              "mp": 115.599999999994,
+              "xp": 0.0
+            },
+            "JIA": {
+              "cooldowns": {},
+              "dead": false,
+              "hp": 396.0,
+              "level": 12,
+              "mp": 145.0,
+              "xp": 0.0
+            },
+            "N16": {
+              "cooldowns": {
+                "healer_support": 4.60000000000001
+              },
+              "dead": false,
+              "hp": 346.0,
+              "level": 12,
+              "mp": 175.0,
+              "xp": 0.0
+            }
+          },
+          "time": 16.4500000000003,
+          "transition_remaining": 1.0
+        }
+      ],
+      "actual_xp_gained_by_member": {
+        "F11": 19.3333333333333,
+        "JIA": 19.3333333333333,
+        "N16": 19.3333333333333
+      }
+    },
+    {
+      "stage": "B17",
+      "start": "center",
+      "seconds": 52.2833333333333,
+      "outcome": "victory",
+      "hurt_total": 246.980938247012,
+      "entry": {
+        "F11": {
+          "cooldowns": {},
+          "dead": false,
+          "hp": 331.0,
+          "level": 12,
+          "mp": 185.0,
+          "xp": 0.0
+        },
+        "JIA": {
+          "cooldowns": {},
+          "dead": false,
+          "hp": 396.0,
+          "level": 12,
+          "mp": 145.0,
+          "xp": 0.0
+        },
+        "N16": {
+          "cooldowns": {},
+          "dead": false,
+          "hp": 346.0,
+          "level": 12,
+          "mp": 175.0,
+          "xp": 0.0
+        }
+      },
+      "exit": {
+        "F11": {
+          "cooldowns": {
+            "F11_basic": 0.352898550724637,
+            "emma_frost": 0.0,
+            "emma_ice": 3.83333333333335,
+            "emma_star": 2.7333333333332
+          },
+          "dead": false,
+          "hp": 209.019061752988,
+          "level": 12,
+          "mp": 92.5999999999832,
+          "xp": 19.3333333333333
+        },
+        "JIA": {
+          "cooldowns": {},
+          "dead": false,
+          "hp": 396.0,
+          "level": 12,
+          "mp": 145.0,
+          "xp": 19.3333333333333
+        },
+        "N16": {
+          "cooldowns": {
+            "healer_support": 3.85000000000001
+          },
+          "dead": false,
+          "hp": 346.0,
+          "level": 12,
+          "mp": 175.0,
+          "xp": 19.3333333333333
+        }
+      },
+      "phase_resource_records": [
+        {
+          "active": "F11",
+          "form_index": 0,
+          "phase_damage_bank": 0.0,
+          "resources": {
+            "F11": {
+              "cooldowns": {
+                "F11_basic": 0.869565217391304,
+                "emma_frost": 7.0,
+                "emma_ice": 8.0,
+                "emma_star": 11.0
+              },
+              "dead": false,
+              "hp": 331.0,
+              "level": 12,
+              "mp": 115.0,
+              "xp": 0.0
+            },
+            "JIA": {
+              "cooldowns": {},
+              "dead": false,
+              "hp": 396.0,
+              "level": 12,
+              "mp": 145.0,
+              "xp": 0.0
+            },
+            "N16": {
+              "cooldowns": {
+                "healer_support": 7.0
+              },
+              "dead": false,
+              "hp": 346.0,
+              "level": 12,
+              "mp": 175.0,
+              "xp": 0.0
+            }
+          },
+          "time": 0.0166666666666667,
+          "transition_remaining": 0.0
+        },
+        {
+          "active": "F11",
+          "form_index": 1,
+          "phase_damage_bank": 14.5800000000003,
+          "resources": {
+            "F11": {
+              "cooldowns": {
+                "F11_basic": 0.219565217391303,
+                "emma_frost": 0.0833333333333532,
+                "emma_ice": 2.11666666666669,
+                "emma_star": 0.0833333333332084
+              },
+              "dead": false,
+              "hp": 309.835338645418,
+              "level": 12,
+              "mp": 148.499999999993,
+              "xp": 0.0
+            },
+            "JIA": {
+              "cooldowns": {},
+              "dead": false,
+              "hp": 396.0,
+              "level": 12,
+              "mp": 145.0,
+              "xp": 0.0
+            },
+            "N16": {
+              "cooldowns": {
+                "healer_support": 6.13333333333334
+              },
+              "dead": false,
+              "hp": 346.0,
+              "level": 12,
+              "mp": 175.0,
+              "xp": 0.0
+            }
+          },
+          "time": 21.9333333333334,
+          "transition_remaining": 1.0
+        }
+      ],
+      "actual_xp_gained_by_member": {
+        "F11": 19.3333333333333,
+        "JIA": 19.3333333333333,
+        "N16": 19.3333333333333
+      }
+    },
+    {
+      "stage": "B17",
+      "start": "corner",
+      "seconds": 50.65,
+      "outcome": "victory",
+      "hurt_total": 341.618494023904,
+      "entry": {
+        "F11": {
+          "cooldowns": {},
+          "dead": false,
+          "hp": 331.0,
+          "level": 12,
+          "mp": 185.0,
+          "xp": 0.0
+        },
+        "JIA": {
+          "cooldowns": {},
+          "dead": false,
+          "hp": 396.0,
+          "level": 12,
+          "mp": 145.0,
+          "xp": 0.0
+        },
+        "N16": {
+          "cooldowns": {},
+          "dead": false,
+          "hp": 346.0,
+          "level": 12,
+          "mp": 175.0,
+          "xp": 0.0
+        }
+      },
+      "exit": {
+        "F11": {
+          "cooldowns": {
+            "F11_basic": 0.369565217391303,
+            "emma_frost": 1.36666666666669,
+            "emma_ice": 5.46666666666668,
+            "emma_star": 4.36666666666653
+          },
+          "dead": false,
+          "hp": 158.237934262948,
+          "level": 12,
+          "mp": 82.7999999999838,
+          "xp": 19.3333333333333
+        },
+        "JIA": {
+          "cooldowns": {},
+          "dead": false,
+          "hp": 396.0,
+          "level": 12,
+          "mp": 145.0,
+          "xp": 19.3333333333333
+        },
+        "N16": {
+          "cooldowns": {
+            "healer_support": 5.48333333333334
+          },
+          "dead": false,
+          "hp": 346.0,
+          "level": 12,
+          "mp": 175.0,
+          "xp": 19.3333333333333
+        }
+      },
+      "phase_resource_records": [
+        {
+          "active": "F11",
+          "form_index": 0,
+          "phase_damage_bank": 0.0,
+          "resources": {
+            "F11": {
+              "cooldowns": {
+                "F11_basic": 0.869565217391304,
+                "emma_frost": 7.0,
+                "emma_ice": 8.0,
+                "emma_star": 11.0
+              },
+              "dead": false,
+              "hp": 331.0,
+              "level": 12,
+              "mp": 115.0,
+              "xp": 0.0
+            },
+            "JIA": {
+              "cooldowns": {},
+              "dead": false,
+              "hp": 396.0,
+              "level": 12,
+              "mp": 145.0,
+              "xp": 0.0
+            },
+            "N16": {
+              "cooldowns": {
+                "healer_support": 7.0
+              },
+              "dead": false,
+              "hp": 346.0,
+              "level": 12,
+              "mp": 175.0,
+              "xp": 0.0
+            }
+          },
+          "time": 0.0166666666666667,
+          "transition_remaining": 0.0
+        },
+        {
+          "active": "F11",
+          "form_index": 1,
+          "phase_damage_bank": 1.24000000000029,
+          "resources": {
+            "F11": {
+              "cooldowns": {
+                "F11_basic": 0.402898550724637,
+                "emma_frost": 4.51666666666668,
+                "emma_ice": 6.55000000000001,
+                "emma_star": 4.51666666666653
+              },
+              "dead": false,
+              "hp": 284.835338645418,
+              "level": 12,
+              "mp": 121.899999999994,
+              "xp": 0.0
+            },
+            "JIA": {
+              "cooldowns": {},
+              "dead": false,
+              "hp": 396.0,
+              "level": 12,
+              "mp": 145.0,
+              "xp": 0.0
+            },
+            "N16": {
+              "cooldowns": {
+                "healer_support": 3.55000000000001
+              },
+              "dead": false,
+              "hp": 346.0,
+              "level": 12,
+              "mp": 175.0,
+              "xp": 0.0
+            }
+          },
+          "time": 17.5000000000003,
+          "transition_remaining": 1.0
+        }
+      ],
+      "actual_xp_gained_by_member": {
+        "F11": 19.3333333333333,
+        "JIA": 19.3333333333333,
+        "N16": 19.3333333333333
+      }
+    },
+    {
+      "stage": "B18",
+      "start": "center",
+      "seconds": 57.9666666666667,
+      "outcome": "failed",
+      "hurt_total": 983.127011952191,
+      "entry": {
+        "F11": {
+          "cooldowns": {},
+          "dead": false,
+          "hp": 331.0,
+          "level": 12,
+          "mp": 185.0,
+          "xp": 0.0
+        },
+        "JIA": {
+          "cooldowns": {},
+          "dead": false,
+          "hp": 396.0,
+          "level": 12,
+          "mp": 145.0,
+          "xp": 0.0
+        },
+        "N16": {
+          "cooldowns": {},
+          "dead": false,
+          "hp": 346.0,
+          "level": 12,
+          "mp": 175.0,
+          "xp": 0.0
+        }
+      },
+      "exit": {
+        "F11": {
+          "cooldowns": {
+            "F11_basic": 0.0,
+            "emma_frost": 0.0,
+            "emma_ice": 0.0,
+            "emma_star": 0.0
+          },
+          "dead": true,
+          "hp": 0.0,
+          "level": 12,
+          "mp": 100.399999999987,
+          "xp": 0.0
+        },
+        "JIA": {
+          "cooldowns": {
+            "JIA_basic": 0.0,
+            "jia_break": 0.0,
+            "jia_sweep": 1.05000000000001
+          },
+          "dead": true,
+          "hp": 0.0,
+          "level": 12,
+          "mp": 79.0700000000016,
+          "xp": 0.0
+        },
+        "N16": {
+          "cooldowns": {
+            "healer_support": 5.18333333333334
+          },
+          "dead": false,
+          "hp": 346.0,
+          "level": 12,
+          "mp": 175.0,
+          "xp": 0.0
+        }
+      },
+      "phase_resource_records": [
+        {
+          "active": "F11",
+          "form_index": 0,
+          "phase_damage_bank": 0.0,
+          "resources": {
+            "F11": {
+              "cooldowns": {
+                "F11_basic": 0.869565217391304,
+                "emma_frost": 7.0,
+                "emma_ice": 8.0,
+                "emma_star": 11.0
+              },
+              "dead": false,
+              "hp": 331.0,
+              "level": 12,
+              "mp": 115.0,
+              "xp": 0.0
+            },
+            "JIA": {
+              "cooldowns": {},
+              "dead": false,
+              "hp": 396.0,
+              "level": 12,
+              "mp": 145.0,
+              "xp": 0.0
+            },
+            "N16": {
+              "cooldowns": {
+                "healer_support": 7.0
+              },
+              "dead": false,
+              "hp": 346.0,
+              "level": 12,
+              "mp": 175.0,
+              "xp": 0.0
+            }
+          },
+          "time": 0.0166666666666667,
+          "transition_remaining": 0.0
+        },
+        {
+          "active": "F11",
+          "form_index": 1,
+          "phase_damage_bank": 54.8799999999991,
+          "resources": {
+            "F11": {
+              "cooldowns": {
+                "F11_basic": 0.552898550724637,
+                "emma_frost": 4.93333333333334,
+                "emma_ice": 7.48333333333334,
+                "emma_star": 8.43333333333321
+              },
+              "dead": false,
+              "hp": 86.9912350597609,
+              "level": 12,
+              "mp": 94.3999999999916,
+              "xp": 0.0
+            },
+            "JIA": {
+              "cooldowns": {},
+              "dead": false,
+              "hp": 396.0,
+              "level": 12,
+              "mp": 145.0,
+              "xp": 0.0
+            },
+            "N16": {
+              "cooldowns": {
+                "healer_support": 3.48333333333335
+              },
+              "dead": false,
+              "hp": 346.0,
+              "level": 12,
+              "mp": 175.0,
+              "xp": 0.0
+            }
+          },
+          "time": 24.5833333333332,
+          "transition_remaining": 1.0
+        }
+      ],
+      "actual_xp_gained_by_member": {
+        "F11": 0.0,
+        "JIA": 0.0,
+        "N16": 0.0
+      }
+    },
+    {
+      "stage": "B18",
+      "start": "corner",
+      "seconds": 60.8333333333333,
+      "outcome": "victory",
+      "hurt_total": 748.027219123506,
+      "entry": {
+        "F11": {
+          "cooldowns": {},
+          "dead": false,
+          "hp": 331.0,
+          "level": 12,
+          "mp": 185.0,
+          "xp": 0.0
+        },
+        "JIA": {
+          "cooldowns": {},
+          "dead": false,
+          "hp": 396.0,
+          "level": 12,
+          "mp": 145.0,
+          "xp": 0.0
+        },
+        "N16": {
+          "cooldowns": {},
+          "dead": false,
+          "hp": 346.0,
+          "level": 12,
+          "mp": 175.0,
+          "xp": 0.0
+        }
+      },
+      "exit": {
+        "F11": {
+          "cooldowns": {
+            "F11_basic": 0.0,
+            "emma_frost": 0.0,
+            "emma_ice": 0.0,
+            "emma_star": 0.0
+          },
+          "dead": true,
+          "hp": 0.0,
+          "level": 12,
+          "mp": 77.6999999999886,
+          "xp": 26.0
+        },
+        "JIA": {
+          "cooldowns": {
+            "JIA_basic": 0.689655172413793,
+            "jia_break": 4.18333333333325,
+            "jia_sweep": 0.0
+          },
+          "dead": false,
+          "hp": 155.568,
+          "level": 12,
+          "mp": 52.6566666666688,
+          "xp": 26.0
+        },
+        "N16": {
+          "cooldowns": {
+            "healer_support": 2.31666666666668
+          },
+          "dead": false,
+          "hp": 346.0,
+          "level": 12,
+          "mp": 175.0,
+          "xp": 26.0
+        }
+      },
+      "phase_resource_records": [
+        {
+          "active": "F11",
+          "form_index": 0,
+          "phase_damage_bank": 0.0,
+          "resources": {
+            "F11": {
+              "cooldowns": {
+                "F11_basic": 0.869565217391304,
+                "emma_frost": 7.0,
+                "emma_ice": 8.0,
+                "emma_star": 11.0
+              },
+              "dead": false,
+              "hp": 331.0,
+              "level": 12,
+              "mp": 115.0,
+              "xp": 0.0
+            },
+            "JIA": {
+              "cooldowns": {},
+              "dead": false,
+              "hp": 396.0,
+              "level": 12,
+              "mp": 145.0,
+              "xp": 0.0
+            },
+            "N16": {
+              "cooldowns": {
+                "healer_support": 7.0
+              },
+              "dead": false,
+              "hp": 346.0,
+              "level": 12,
+              "mp": 175.0,
+              "xp": 0.0
+            }
+          },
+          "time": 0.0166666666666667,
+          "transition_remaining": 0.0
+        },
+        {
+          "active": "F11",
+          "form_index": 1,
+          "phase_damage_bank": 54.879999999999,
+          "resources": {
+            "F11": {
+              "cooldowns": {
+                "F11_basic": 0.452898550724637,
+                "emma_frost": 6.01666666666667,
+                "emma_ice": 0.550000000000023,
+                "emma_star": 9.51666666666659
+              },
+              "dead": false,
+              "hp": 86.9912350597609,
+              "level": 12,
+              "mp": 87.899999999992,
+              "xp": 0.0
+            },
+            "JIA": {
+              "cooldowns": {},
+              "dead": false,
+              "hp": 396.0,
+              "level": 12,
+              "mp": 145.0,
+              "xp": 0.0
+            },
+            "N16": {
+              "cooldowns": {
+                "healer_support": 4.56666666666668
+              },
+              "dead": false,
+              "hp": 346.0,
+              "level": 12,
+              "mp": 175.0,
+              "xp": 0.0
+            }
+          },
+          "time": 23.4999999999999,
+          "transition_remaining": 1.0
+        }
+      ],
+      "actual_xp_gained_by_member": {
+        "F11": 26.0,
+        "JIA": 26.0,
+        "N16": 26.0
+      }
+    }
+  ],
+  "cadence": [
+    {
+      "stage": "B17",
+      "start": "center",
+      "strategy": "stationary",
+      "first_tell": {
+        "actor_position": "(1600.0, 900.0)",
+        "boss_distance": 300.0,
+        "initial_approach": true,
+        "move_id": "general_lunge",
+        "previous_move": "",
+        "since_previous_tell": 1.0,
+        "time": 1.0
+      },
+      "largest_subsequent_gap": {
+        "actor_position": "(1600.0, 900.0)",
+        "boss_distance": 297.862854003906,
+        "initial_approach": false,
+        "move_id": "general_cut",
+        "previous_move": "general_lunge",
+        "since_previous_tell": 6.35000000000001,
+        "time": 18.8333333333335
+      }
+    },
+    {
+      "stage": "B17",
+      "start": "center",
+      "strategy": "reactive",
+      "first_tell": {
+        "actor_position": "(1600.0, 900.0)",
+        "boss_distance": 300.0,
+        "initial_approach": true,
+        "move_id": "general_lunge",
+        "previous_move": "",
+        "since_previous_tell": 1.0,
+        "time": 1.0
+      },
+      "largest_subsequent_gap": {
+        "actor_position": "(2119.623, 1361.89)",
+        "boss_distance": 298.071197509766,
+        "initial_approach": false,
+        "move_id": "general_cut",
+        "previous_move": "general_lunge",
+        "since_previous_tell": 3.03333333333348,
+        "time": 12.2166666666669
+      }
+    },
+    {
+      "stage": "B17",
+      "start": "corner",
+      "strategy": "stationary",
+      "first_tell": {
+        "actor_position": "(80.0, 90.0)",
+        "boss_distance": 300.665924072266,
+        "initial_approach": true,
+        "move_id": "general_lunge",
+        "previous_move": "",
+        "since_previous_tell": 1.0,
+        "time": 1.0
+      },
+      "largest_subsequent_gap": {
+        "actor_position": "(80.0, 90.0)",
+        "boss_distance": 297.863189697266,
+        "initial_approach": false,
+        "move_id": "general_cut",
+        "previous_move": "general_lunge",
+        "since_previous_tell": 10.1000000000002,
+        "time": 18.9333333333335
+      }
+    },
+    {
+      "stage": "B17",
+      "start": "corner",
+      "strategy": "reactive",
+      "first_tell": {
+        "actor_position": "(80.0, 90.0)",
+        "boss_distance": 300.665924072266,
+        "initial_approach": true,
+        "move_id": "general_lunge",
+        "previous_move": "",
+        "since_previous_tell": 1.0,
+        "time": 1.0
+      },
+      "largest_subsequent_gap": {
+        "actor_position": "(413.6786, 535.04)",
+        "boss_distance": 297.104309082031,
+        "initial_approach": false,
+        "move_id": "general_cut",
+        "previous_move": "general_lunge",
+        "since_previous_tell": 3.31666666666648,
+        "time": 20.1666666666668
+      }
+    }
+  ],
+  "logic_timing": [
+    {
+      "suite": "mobs",
+      "samples": 58415,
+      "largest_sample_p95_ms": 4.515,
+      "largest_step_ms": 25.971,
+      "peak_alive": 86,
+      "peak_hostile_projectiles": 245,
+      "configuration_errors": 0
+    },
+    {
+      "suite": "boss",
+      "samples": 130773,
+      "largest_sample_p95_ms": 0.645,
+      "largest_step_ms": 8.639,
+      "peak_alive": 2,
+      "peak_hostile_projectiles": 257,
+      "configuration_errors": 0
+    },
+    {
+      "suite": "exposure",
+      "samples": 86400,
+      "largest_sample_p95_ms": 0.578,
+      "largest_step_ms": 3.835,
+      "peak_alive": 2,
+      "peak_hostile_projectiles": 257,
+      "configuration_errors": 0
+    }
+  ],
+  "mob_pressure": [
+    {
+      "stage": "B01",
+      "strategy": "stationary",
+      "before": {
+        "seconds": 44.61666666666664,
+        "mean_alive": 9.33305215581221,
+        "mean_within_240": 1.90741543478119,
+        "kills_per_second": 0.6504900948994803,
+        "hurt_total": 19.081351548883998,
+        "xp_collected": 69.0,
+        "failed_samples": 0
+      },
+      "after": {
+        "seconds": 28.0166666666667,
+        "mean_alive": 28.858219313900467,
+        "mean_within_240": 8.085465000991476,
+        "kills_per_second": 4.009518143961927,
+        "hurt_total": 51.6718444242533,
+        "xp_collected": 101.33333333333333,
+        "failed_samples": 0
+      }
+    },
+    {
+      "stage": "B01",
+      "strategy": "orbit",
+      "before": {
+        "seconds": 50.0,
+        "mean_alive": 14.080444444444467,
+        "mean_within_240": 1.56611111111111,
+        "kills_per_second": 0.38666666666666666,
+        "hurt_total": 0.0,
+        "xp_collected": 53.0,
+        "failed_samples": 0
+      },
+      "after": {
+        "seconds": 50.0,
+        "mean_alive": 50.0011111111111,
+        "mean_within_240": 6.174666666666666,
+        "kills_per_second": 0.37333333333333335,
+        "hurt_total": 0.0,
+        "xp_collected": 17.666666666666668,
+        "failed_samples": 0
+      }
+    },
+    {
+      "stage": "B01",
+      "strategy": "reactive",
+      "before": {
+        "seconds": 42.7611111111111,
+        "mean_alive": 6.52190775147078,
+        "mean_within_240": 0.9478332971013096,
+        "kills_per_second": 0.6550783666099503,
+        "hurt_total": 0.0,
+        "xp_collected": 80.0,
+        "failed_samples": 0
+      },
+      "after": {
+        "seconds": 28.0166666666667,
+        "mean_alive": 29.546500099147334,
+        "mean_within_240": 7.001388062661117,
+        "kills_per_second": 4.021415823914337,
+        "hurt_total": 0.0,
+        "xp_collected": 107.66666666666667,
+        "failed_samples": 0
+      }
+    },
+    {
+      "stage": "B05",
+      "strategy": "stationary",
+      "before": {
+        "seconds": 45.6611111111111,
+        "mean_alive": 9.6030415201467,
+        "mean_within_240": 1.1723346399217833,
+        "kills_per_second": 0.37473373423871903,
+        "hurt_total": 322.14687915006664,
+        "xp_collected": 56.0,
+        "failed_samples": 2
+      },
+      "after": {
+        "seconds": 24.905555555555566,
+        "mean_alive": 32.1029317928254,
+        "mean_within_240": 7.921667352706773,
+        "kills_per_second": 3.5039719979928767,
+        "hurt_total": 309.721646746348,
+        "xp_collected": 94.33333333333333,
+        "failed_samples": 3
+      }
+    },
+    {
+      "stage": "B05",
+      "strategy": "orbit",
+      "before": {
+        "seconds": 50.0,
+        "mean_alive": 11.983333333333366,
+        "mean_within_240": 1.215,
+        "kills_per_second": 0.35333333333333333,
+        "hurt_total": 55.4589641434263,
+        "xp_collected": 60.333333333333336,
+        "failed_samples": 0
+      },
+      "after": {
+        "seconds": 50.0,
+        "mean_alive": 55.585444444444434,
+        "mean_within_240": 5.972666666666667,
+        "kills_per_second": 0.8,
+        "hurt_total": 109.09960159362566,
+        "xp_collected": 47.0,
+        "failed_samples": 0
+      }
+    },
+    {
+      "stage": "B05",
+      "strategy": "reactive",
+      "before": {
+        "seconds": 50.0,
+        "mean_alive": 8.360333333333333,
+        "mean_within_240": 1.0235555555555544,
+        "kills_per_second": 0.5466666666666667,
+        "hurt_total": 113.9484727755644,
+        "xp_collected": 119.0,
+        "failed_samples": 0
+      },
+      "after": {
+        "seconds": 32.42222222222223,
+        "mean_alive": 37.792221101966334,
+        "mean_within_240": 7.903654047340703,
+        "kills_per_second": 3.6097516913050467,
+        "hurt_total": 31.820717131474133,
+        "xp_collected": 129.66666666666666,
+        "failed_samples": 0
+      }
+    },
+    {
+      "stage": "B12",
+      "strategy": "stationary",
+      "before": {
+        "seconds": 43.061111111111096,
+        "mean_alive": 8.080062600863297,
+        "mean_within_240": 0.8009695056377494,
+        "kills_per_second": 0.32442239837795467,
+        "hurt_total": 410.95665399239533,
+        "xp_collected": 21.666666666666668,
+        "failed_samples": 3
+      },
+      "after": {
+        "seconds": 22.150000000000034,
+        "mean_alive": 42.530505423259804,
+        "mean_within_240": 11.1351494200792,
+        "kills_per_second": 4.66345085780732,
+        "hurt_total": 389.40836501901134,
+        "xp_collected": 103.66666666666667,
+        "failed_samples": 3
+      }
+    },
+    {
+      "stage": "B12",
+      "strategy": "orbit",
+      "before": {
+        "seconds": 50.0,
+        "mean_alive": 9.784888888888887,
+        "mean_within_240": 1.109,
+        "kills_per_second": 0.26666666666666666,
+        "hurt_total": 41.5574144486692,
+        "xp_collected": 39.333333333333336,
+        "failed_samples": 0
+      },
+      "after": {
+        "seconds": 50.0,
+        "mean_alive": 71.44677777777777,
+        "mean_within_240": 8.31122222222222,
+        "kills_per_second": 0.8466666666666667,
+        "hurt_total": 360.16425855513336,
+        "xp_collected": 51.0,
+        "failed_samples": 0
+      }
+    },
+    {
+      "stage": "B12",
+      "strategy": "reactive",
+      "before": {
+        "seconds": 50.0,
+        "mean_alive": 6.983888888888886,
+        "mean_within_240": 0.97388888888889,
+        "kills_per_second": 0.5133333333333333,
+        "hurt_total": 88.88669201520914,
+        "xp_collected": 123.33333333333333,
+        "failed_samples": 0
+      },
+      "after": {
+        "seconds": 39.0166666666667,
+        "mean_alive": 49.355830841520735,
+        "mean_within_240": 11.815605866438833,
+        "kills_per_second": 5.18581802648441,
+        "hurt_total": 7.6958174904943,
+        "xp_collected": 213.33333333333334,
+        "failed_samples": 0
+      }
+    }
+  ],
+  "exposure_every_move_released": {
+    "B15:0:center:stationary": {
+      "hunter_aim": 6,
+      "hunter_reposition": 6,
+      "hunter_volley": 6
+    },
+    "B15:0:center:reactive": {
+      "hunter_aim": 6,
+      "hunter_reposition": 6,
+      "hunter_volley": 6
+    },
+    "B15:0:corner:stationary": {
+      "hunter_aim": 6,
+      "hunter_reposition": 6,
+      "hunter_volley": 6
+    },
+    "B15:0:corner:reactive": {
+      "hunter_aim": 6,
+      "hunter_reposition": 6,
+      "hunter_volley": 6
+    },
+    "B15:1:center:stationary": {
+      "beast_hunt": 4,
+      "beast_leap": 4,
+      "beast_rend": 3,
+      "hunt_mark": 3
+    },
+    "B15:1:center:reactive": {
+      "beast_hunt": 4,
+      "beast_leap": 4,
+      "beast_rend": 4,
+      "hunt_mark": 4
+    },
+    "B15:1:corner:stationary": {
+      "beast_hunt": 4,
+      "beast_leap": 4,
+      "beast_rend": 3,
+      "hunt_mark": 3
+    },
+    "B15:1:corner:reactive": {
+      "beast_hunt": 4,
+      "beast_leap": 4,
+      "beast_rend": 4,
+      "hunt_mark": 4
+    },
+    "B16:0:center:stationary": {
+      "rider_cleave": 4,
+      "rider_lance": 5,
+      "rider_return": 4
+    },
+    "B16:0:center:reactive": {
+      "rider_cleave": 5,
+      "rider_lance": 5,
+      "rider_return": 5
+    },
+    "B16:0:corner:stationary": {
+      "rider_cleave": 5,
+      "rider_lance": 5,
+      "rider_return": 5
+    },
+    "B16:0:corner:reactive": {
+      "rider_cleave": 5,
+      "rider_lance": 5,
+      "rider_return": 5
+    },
+    "B16:1:center:stationary": {
+      "cavalry_break": 2,
+      "leopard_return": 2,
+      "tiger_long_charge": 3,
+      "tiger_trample": 2
+    },
+    "B16:1:center:reactive": {
+      "cavalry_break": 3,
+      "leopard_return": 3,
+      "tiger_long_charge": 4,
+      "tiger_trample": 3
+    },
+    "B16:1:corner:stationary": {
+      "cavalry_break": 2,
+      "leopard_return": 2,
+      "tiger_long_charge": 3,
+      "tiger_trample": 3
+    },
+    "B16:1:corner:reactive": {
+      "cavalry_break": 3,
+      "leopard_return": 3,
+      "tiger_long_charge": 4,
+      "tiger_trample": 4
+    },
+    "B17:0:center:stationary": {
+      "general_cut": 4,
+      "general_lunge": 4,
+      "human_formation": 3
+    },
+    "B17:0:center:reactive": {
+      "general_cut": 5,
+      "general_lunge": 6,
+      "human_formation": 5
+    },
+    "B17:0:corner:stationary": {
+      "general_cut": 4,
+      "general_lunge": 4,
+      "human_formation": 3
+    },
+    "B17:0:corner:reactive": {
+      "general_cut": 5,
+      "general_lunge": 6,
+      "human_formation": 5
+    },
+    "B17:1:center:stationary": {
+      "war_formation": 3,
+      "yaksha_break": 4,
+      "yaksha_cleave": 4,
+      "yaksha_pulse": 3
+    },
+    "B17:1:center:reactive": {
+      "war_formation": 4,
+      "yaksha_break": 4,
+      "yaksha_cleave": 4,
+      "yaksha_pulse": 3
+    },
+    "B17:1:corner:stationary": {
+      "war_formation": 3,
+      "yaksha_break": 4,
+      "yaksha_cleave": 3,
+      "yaksha_pulse": 3
+    },
+    "B17:1:corner:reactive": {
+      "war_formation": 4,
+      "yaksha_break": 4,
+      "yaksha_cleave": 4,
+      "yaksha_pulse": 3
+    },
+    "B18:0:center:stationary": {
+      "halberd_charge": 4,
+      "halberd_fall": 3,
+      "halberd_finish": 3,
+      "halberd_sweep": 4
+    },
+    "B18:0:center:reactive": {
+      "halberd_charge": 4,
+      "halberd_fall": 4,
+      "halberd_finish": 4,
+      "halberd_sweep": 4
+    },
+    "B18:0:corner:stationary": {
+      "halberd_charge": 3,
+      "halberd_fall": 3,
+      "halberd_finish": 3,
+      "halberd_sweep": 4
+    },
+    "B18:0:corner:reactive": {
+      "halberd_charge": 4,
+      "halberd_fall": 4,
+      "halberd_finish": 4,
+      "halberd_sweep": 4
+    },
+    "B18:1:center:stationary": {
+      "demon_final_cleave": 2,
+      "demon_fourfold": 3,
+      "demon_heavenfall": 3,
+      "demon_quake": 3,
+      "demon_skybreaker": 3
+    },
+    "B18:1:center:reactive": {
+      "demon_final_cleave": 3,
+      "demon_fourfold": 4,
+      "demon_heavenfall": 3,
+      "demon_quake": 3,
+      "demon_skybreaker": 3
+    },
+    "B18:1:corner:stationary": {
+      "demon_final_cleave": 3,
+      "demon_fourfold": 4,
+      "demon_heavenfall": 3,
+      "demon_quake": 3,
+      "demon_skybreaker": 3
+    },
+    "B18:1:corner:reactive": {
+      "demon_final_cleave": 3,
+      "demon_fourfold": 4,
+      "demon_heavenfall": 3,
+      "demon_quake": 3,
+      "demon_skybreaker": 4
+    }
+  },
+  "limitations": [
+    "Fixed artificial fixtures do not establish reachable campaign builds or human difficulty acceptance.",
+    "Boss isolated-phase samples do not imply continuous-duel success; continuous-duel B18 center fails.",
+    "Boss different-seed repeats at the same fixture are deterministic, not independent difficulty samples.",
+    "Exposure resets HP and disables offense; its damage/outcome is not survival evidence.",
+    "Initial warning zero-direction counts were conservative; marker timing replay uses each own deadline and excludes simultaneous projectiles/hazards.",
+    "CPU Intel Core i5-14600K / Godot4.6.2 headless logic only, excludes rendering/audio/controller. Sampling window coordinated with core; OS not isolated. Largest observed mob tick25.971ms; p95 does not guarantee60FPS.",
+    "Total alive is not on-screen count; local pressure metric radius240 and renderer camera measurements should be read separately.",
+    "Growth compares actual Boss-appearance checkpoints, not full chapter XP economy.",
+    "Original performance/full-suite reports use initial candidate hashes; final B17 regression comprises6 targeted logic samples without renewed whole-suite/FPS claim."
+  ],
+  "final_delta": {
+    "freeze_verification": "final-freeze-verification.json",
+    "source_diff": "final-delta.patch",
+    "behavior_delta": "Only B17 human general_cut approach speed210; authored body speed64/charge820/tell1.25 remain. Runtime override applies only while closing to next move range.",
+    "cadence": [
+      {
+        "stage": "B17",
+        "start": "center",
+        "strategy": "stationary",
+        "initial": {
+          "first_tell": {
+            "actor_position": "(1600.0, 900.0)",
+            "boss_distance": 300.0,
+            "initial_approach": true,
+            "move_id": "general_lunge",
+            "previous_move": "",
+            "since_previous_tell": 1.0,
+            "time": 1.0
+          },
+          "largest_subsequent_gap": {
+            "actor_position": "(1600.0, 900.0)",
+            "boss_distance": 297.862854003906,
+            "initial_approach": false,
+            "move_id": "general_cut",
+            "previous_move": "general_lunge",
+            "since_previous_tell": 6.35000000000001,
+            "time": 18.8333333333335
+          },
+          "release_events": {
+            "general_cut": 4,
+            "general_lunge": 4,
+            "human_formation": 3
+          },
+          "hurt_total": 997.156685258964,
+          "configuration_error": ""
+        },
+        "final": {
+          "first_tell": {
+            "actor_position": "(1600.0, 900.0)",
+            "boss_distance": 300.0,
+            "initial_approach": true,
+            "move_id": "general_lunge",
+            "previous_move": "",
+            "since_previous_tell": 1.0,
+            "time": 1.0
+          },
+          "largest_subsequent_gap": {
+            "actor_position": "(1600.0, 900.0)",
+            "boss_distance": 296.5,
+            "initial_approach": false,
+            "move_id": "general_cut",
+            "previous_move": "general_lunge",
+            "since_previous_tell": 3.93333333333353,
+            "time": 14.0166666666669
+          },
+          "release_events": {
+            "general_cut": 5,
+            "general_lunge": 5,
+            "human_formation": 5
+          },
+          "hurt_total": 1315.69284860558,
+          "configuration_error": ""
+        },
+        "godmode_exposure": true
+      },
+      {
+        "stage": "B17",
+        "start": "center",
+        "strategy": "reactive",
+        "initial": {
+          "first_tell": {
+            "actor_position": "(1600.0, 900.0)",
+            "boss_distance": 300.0,
+            "initial_approach": true,
+            "move_id": "general_lunge",
+            "previous_move": "",
+            "since_previous_tell": 1.0,
+            "time": 1.0
+          },
+          "largest_subsequent_gap": {
+            "actor_position": "(2119.623, 1361.89)",
+            "boss_distance": 298.071197509766,
+            "initial_approach": false,
+            "move_id": "general_cut",
+            "previous_move": "general_lunge",
+            "since_previous_tell": 3.03333333333348,
+            "time": 12.2166666666669
+          },
+          "release_events": {
+            "general_cut": 5,
+            "general_lunge": 6,
+            "human_formation": 5
+          },
+          "hurt_total": 184.658645418327,
+          "configuration_error": ""
+        },
+        "final": {
+          "first_tell": {
+            "actor_position": "(1600.0, 900.0)",
+            "boss_distance": 300.0,
+            "initial_approach": true,
+            "move_id": "general_lunge",
+            "previous_move": "",
+            "since_previous_tell": 1.0,
+            "time": 1.0
+          },
+          "largest_subsequent_gap": {
+            "actor_position": "(2091.703, 1616.925)",
+            "boss_distance": 292.129180908203,
+            "initial_approach": false,
+            "move_id": "general_cut",
+            "previous_move": "general_lunge",
+            "since_previous_tell": 3.04999999999983,
+            "time": 20.3333333333335
+          },
+          "release_events": {
+            "general_cut": 5,
+            "general_lunge": 6,
+            "human_formation": 5
+          },
+          "hurt_total": 184.658645418327,
+          "configuration_error": ""
+        },
+        "godmode_exposure": true
+      },
+      {
+        "stage": "B17",
+        "start": "corner",
+        "strategy": "stationary",
+        "initial": {
+          "first_tell": {
+            "actor_position": "(80.0, 90.0)",
+            "boss_distance": 300.665924072266,
+            "initial_approach": true,
+            "move_id": "general_lunge",
+            "previous_move": "",
+            "since_previous_tell": 1.0,
+            "time": 1.0
+          },
+          "largest_subsequent_gap": {
+            "actor_position": "(80.0, 90.0)",
+            "boss_distance": 297.863189697266,
+            "initial_approach": false,
+            "move_id": "general_cut",
+            "previous_move": "general_lunge",
+            "since_previous_tell": 10.1000000000002,
+            "time": 18.9333333333335
+          },
+          "release_events": {
+            "general_cut": 4,
+            "general_lunge": 4,
+            "human_formation": 3
+          },
+          "hurt_total": 1089.48600796813,
+          "configuration_error": ""
+        },
+        "final": {
+          "first_tell": {
+            "actor_position": "(80.0, 90.0)",
+            "boss_distance": 300.665924072266,
+            "initial_approach": true,
+            "move_id": "general_lunge",
+            "previous_move": "",
+            "since_previous_tell": 1.0,
+            "time": 1.0
+          },
+          "largest_subsequent_gap": {
+            "actor_position": "(80.0, 90.0)",
+            "boss_distance": 296.371185302734,
+            "initial_approach": false,
+            "move_id": "general_cut",
+            "previous_move": "general_lunge",
+            "since_previous_tell": 5.06666666666692,
+            "time": 13.9000000000003
+          },
+          "release_events": {
+            "general_cut": 5,
+            "general_lunge": 5,
+            "human_formation": 5
+          },
+          "hurt_total": 1500.3514940239,
+          "configuration_error": ""
+        },
+        "godmode_exposure": true
+      },
+      {
+        "stage": "B17",
+        "start": "corner",
+        "strategy": "reactive",
+        "initial": {
+          "first_tell": {
+            "actor_position": "(80.0, 90.0)",
+            "boss_distance": 300.665924072266,
+            "initial_approach": true,
+            "move_id": "general_lunge",
+            "previous_move": "",
+            "since_previous_tell": 1.0,
+            "time": 1.0
+          },
+          "largest_subsequent_gap": {
+            "actor_position": "(413.6786, 535.04)",
+            "boss_distance": 297.104309082031,
+            "initial_approach": false,
+            "move_id": "general_cut",
+            "previous_move": "general_lunge",
+            "since_previous_tell": 3.31666666666648,
+            "time": 20.1666666666668
+          },
+          "release_events": {
+            "general_cut": 5,
+            "general_lunge": 6,
+            "human_formation": 5
+          },
+          "hurt_total": 272.371501992032,
+          "configuration_error": ""
+        },
+        "final": {
+          "first_tell": {
+            "actor_position": "(80.0, 90.0)",
+            "boss_distance": 300.665924072266,
+            "initial_approach": true,
+            "move_id": "general_lunge",
+            "previous_move": "",
+            "since_previous_tell": 1.0,
+            "time": 1.0
+          },
+          "largest_subsequent_gap": {
+            "actor_position": "(447.4514, 531.0406)",
+            "boss_distance": 297.971160888672,
+            "initial_approach": false,
+            "move_id": "general_cut",
+            "previous_move": "general_lunge",
+            "since_previous_tell": 3.14999999999982,
+            "time": 20.0000000000001
+          },
+          "release_events": {
+            "general_cut": 5,
+            "general_lunge": 6,
+            "human_formation": 5
+          },
+          "hurt_total": 228.515073705179,
+          "configuration_error": ""
+        },
+        "godmode_exposure": true
+      }
+    ],
+    "continuous_duels": [
+      {
+        "stage": "B17",
+        "start": "center",
+        "initial": {
+          "seconds": 52.2833333333333,
+          "outcome": "victory",
+          "hurt_total": 246.980938247012,
+          "entry": {
+            "F11": {
+              "cooldowns": {},
+              "dead": false,
+              "hp": 331.0,
+              "level": 12,
+              "mp": 185.0,
+              "xp": 0.0
+            },
+            "JIA": {
+              "cooldowns": {},
+              "dead": false,
+              "hp": 396.0,
+              "level": 12,
+              "mp": 145.0,
+              "xp": 0.0
+            },
+            "N16": {
+              "cooldowns": {},
+              "dead": false,
+              "hp": 346.0,
+              "level": 12,
+              "mp": 175.0,
+              "xp": 0.0
+            }
+          },
+          "exit": {
+            "F11": {
+              "cooldowns": {
+                "F11_basic": 0.352898550724637,
+                "emma_frost": 0.0,
+                "emma_ice": 3.83333333333335,
+                "emma_star": 2.7333333333332
+              },
+              "dead": false,
+              "hp": 209.019061752988,
+              "level": 12,
+              "mp": 92.5999999999832,
+              "xp": 19.3333333333333
+            },
+            "JIA": {
+              "cooldowns": {},
+              "dead": false,
+              "hp": 396.0,
+              "level": 12,
+              "mp": 145.0,
+              "xp": 19.3333333333333
+            },
+            "N16": {
+              "cooldowns": {
+                "healer_support": 3.85000000000001
+              },
+              "dead": false,
+              "hp": 346.0,
+              "level": 12,
+              "mp": 175.0,
+              "xp": 19.3333333333333
+            }
+          },
+          "phase_resource_records": [
+            {
+              "active": "F11",
+              "form_index": 0,
+              "phase_damage_bank": 0.0,
+              "resources": {
+                "F11": {
+                  "cooldowns": {
+                    "F11_basic": 0.869565217391304,
+                    "emma_frost": 7.0,
+                    "emma_ice": 8.0,
+                    "emma_star": 11.0
+                  },
+                  "dead": false,
+                  "hp": 331.0,
+                  "level": 12,
+                  "mp": 115.0,
+                  "xp": 0.0
+                },
+                "JIA": {
+                  "cooldowns": {},
+                  "dead": false,
+                  "hp": 396.0,
+                  "level": 12,
+                  "mp": 145.0,
+                  "xp": 0.0
+                },
+                "N16": {
+                  "cooldowns": {
+                    "healer_support": 7.0
+                  },
+                  "dead": false,
+                  "hp": 346.0,
+                  "level": 12,
+                  "mp": 175.0,
+                  "xp": 0.0
+                }
+              },
+              "time": 0.0166666666666667,
+              "transition_remaining": 0.0
+            },
+            {
+              "active": "F11",
+              "form_index": 1,
+              "phase_damage_bank": 14.5800000000003,
+              "resources": {
+                "F11": {
+                  "cooldowns": {
+                    "F11_basic": 0.219565217391303,
+                    "emma_frost": 0.0833333333333532,
+                    "emma_ice": 2.11666666666669,
+                    "emma_star": 0.0833333333332084
+                  },
+                  "dead": false,
+                  "hp": 309.835338645418,
+                  "level": 12,
+                  "mp": 148.499999999993,
+                  "xp": 0.0
+                },
+                "JIA": {
+                  "cooldowns": {},
+                  "dead": false,
+                  "hp": 396.0,
+                  "level": 12,
+                  "mp": 145.0,
+                  "xp": 0.0
+                },
+                "N16": {
+                  "cooldowns": {
+                    "healer_support": 6.13333333333334
+                  },
+                  "dead": false,
+                  "hp": 346.0,
+                  "level": 12,
+                  "mp": 175.0,
+                  "xp": 0.0
+                }
+              },
+              "time": 21.9333333333334,
+              "transition_remaining": 1.0
+            }
+          ],
+          "actual_xp_gained_by_member": {
+            "F11": 19.3333333333333,
+            "JIA": 19.3333333333333,
+            "N16": 19.3333333333333
+          },
+          "release_events": {
+            "general_cut": 3,
+            "general_lunge": 3,
+            "human_formation": 2,
+            "war_formation": 2,
+            "yaksha_break": 3,
+            "yaksha_cleave": 3,
+            "yaksha_pulse": 2
+          },
+          "configuration_error": ""
+        },
+        "final": {
+          "seconds": 51.0333333333333,
+          "outcome": "victory",
+          "hurt_total": 249.289171314741,
+          "entry": {
+            "F11": {
+              "cooldowns": {},
+              "dead": false,
+              "hp": 331.0,
+              "level": 12,
+              "mp": 185.0,
+              "xp": 0.0
+            },
+            "JIA": {
+              "cooldowns": {},
+              "dead": false,
+              "hp": 396.0,
+              "level": 12,
+              "mp": 145.0,
+              "xp": 0.0
+            },
+            "N16": {
+              "cooldowns": {},
+              "dead": false,
+              "hp": 346.0,
+              "level": 12,
+              "mp": 175.0,
+              "xp": 0.0
+            }
+          },
+          "exit": {
+            "F11": {
+              "cooldowns": {
+                "F11_basic": 0.0362318840579701,
+                "emma_frost": 0.983333333333355,
+                "emma_ice": 5.08333333333334,
+                "emma_star": 3.9833333333332
+              },
+              "dead": false,
+              "hp": 206.710828685259,
+              "level": 12,
+              "mp": 85.0999999999837,
+              "xp": 19.3333333333333
+            },
+            "JIA": {
+              "cooldowns": {},
+              "dead": false,
+              "hp": 396.0,
+              "level": 12,
+              "mp": 145.0,
+              "xp": 19.3333333333333
+            },
+            "N16": {
+              "cooldowns": {
+                "healer_support": 5.10000000000001
+              },
+              "dead": false,
+              "hp": 346.0,
+              "level": 12,
+              "mp": 175.0,
+              "xp": 19.3333333333333
+            }
+          },
+          "phase_resource_records": [
+            {
+              "active": "F11",
+              "form_index": 0,
+              "phase_damage_bank": 0.0,
+              "resources": {
+                "F11": {
+                  "cooldowns": {
+                    "F11_basic": 0.869565217391304,
+                    "emma_frost": 7.0,
+                    "emma_ice": 8.0,
+                    "emma_star": 11.0
+                  },
+                  "dead": false,
+                  "hp": 331.0,
+                  "level": 12,
+                  "mp": 115.0,
+                  "xp": 0.0
+                },
+                "JIA": {
+                  "cooldowns": {},
+                  "dead": false,
+                  "hp": 396.0,
+                  "level": 12,
+                  "mp": 145.0,
+                  "xp": 0.0
+                },
+                "N16": {
+                  "cooldowns": {
+                    "healer_support": 7.0
+                  },
+                  "dead": false,
+                  "hp": 346.0,
+                  "level": 12,
+                  "mp": 175.0,
+                  "xp": 0.0
+                }
+              },
+              "time": 0.0166666666666667,
+              "transition_remaining": 0.0
+            },
+            {
+              "active": "F11",
+              "form_index": 1,
+              "phase_damage_bank": 14.5800000000003,
+              "resources": {
+                "F11": {
+                  "cooldowns": {
+                    "F11_basic": 0.252898550724637,
+                    "emma_frost": 0.0,
+                    "emma_ice": 1.98333333333335,
+                    "emma_star": 10.95
+                  },
+                  "dead": false,
+                  "hp": 309.835338645418,
+                  "level": 12,
+                  "mp": 107.299999999992,
+                  "xp": 0.0
+                },
+                "JIA": {
+                  "cooldowns": {},
+                  "dead": false,
+                  "hp": 396.0,
+                  "level": 12,
+                  "mp": 145.0,
+                  "xp": 0.0
+                },
+                "N16": {
+                  "cooldowns": {
+                    "healer_support": 6.0
+                  },
+                  "dead": false,
+                  "hp": 346.0,
+                  "level": 12,
+                  "mp": 175.0,
+                  "xp": 0.0
+                }
+              },
+              "time": 22.0666666666667,
+              "transition_remaining": 1.0
+            }
+          ],
+          "actual_xp_gained_by_member": {
+            "F11": 19.3333333333333,
+            "JIA": 19.3333333333333,
+            "N16": 19.3333333333333
+          },
+          "release_events": {
+            "general_cut": 3,
+            "general_lunge": 3,
+            "human_formation": 2,
+            "war_formation": 2,
+            "yaksha_break": 3,
+            "yaksha_cleave": 2,
+            "yaksha_pulse": 2
+          },
+          "configuration_error": ""
+        },
+        "godmode_exposure": false
+      },
+      {
+        "stage": "B17",
+        "start": "corner",
+        "initial": {
+          "seconds": 50.65,
+          "outcome": "victory",
+          "hurt_total": 341.618494023904,
+          "entry": {
+            "F11": {
+              "cooldowns": {},
+              "dead": false,
+              "hp": 331.0,
+              "level": 12,
+              "mp": 185.0,
+              "xp": 0.0
+            },
+            "JIA": {
+              "cooldowns": {},
+              "dead": false,
+              "hp": 396.0,
+              "level": 12,
+              "mp": 145.0,
+              "xp": 0.0
+            },
+            "N16": {
+              "cooldowns": {},
+              "dead": false,
+              "hp": 346.0,
+              "level": 12,
+              "mp": 175.0,
+              "xp": 0.0
+            }
+          },
+          "exit": {
+            "F11": {
+              "cooldowns": {
+                "F11_basic": 0.369565217391303,
+                "emma_frost": 1.36666666666669,
+                "emma_ice": 5.46666666666668,
+                "emma_star": 4.36666666666653
+              },
+              "dead": false,
+              "hp": 158.237934262948,
+              "level": 12,
+              "mp": 82.7999999999838,
+              "xp": 19.3333333333333
+            },
+            "JIA": {
+              "cooldowns": {},
+              "dead": false,
+              "hp": 396.0,
+              "level": 12,
+              "mp": 145.0,
+              "xp": 19.3333333333333
+            },
+            "N16": {
+              "cooldowns": {
+                "healer_support": 5.48333333333334
+              },
+              "dead": false,
+              "hp": 346.0,
+              "level": 12,
+              "mp": 175.0,
+              "xp": 19.3333333333333
+            }
+          },
+          "phase_resource_records": [
+            {
+              "active": "F11",
+              "form_index": 0,
+              "phase_damage_bank": 0.0,
+              "resources": {
+                "F11": {
+                  "cooldowns": {
+                    "F11_basic": 0.869565217391304,
+                    "emma_frost": 7.0,
+                    "emma_ice": 8.0,
+                    "emma_star": 11.0
+                  },
+                  "dead": false,
+                  "hp": 331.0,
+                  "level": 12,
+                  "mp": 115.0,
+                  "xp": 0.0
+                },
+                "JIA": {
+                  "cooldowns": {},
+                  "dead": false,
+                  "hp": 396.0,
+                  "level": 12,
+                  "mp": 145.0,
+                  "xp": 0.0
+                },
+                "N16": {
+                  "cooldowns": {
+                    "healer_support": 7.0
+                  },
+                  "dead": false,
+                  "hp": 346.0,
+                  "level": 12,
+                  "mp": 175.0,
+                  "xp": 0.0
+                }
+              },
+              "time": 0.0166666666666667,
+              "transition_remaining": 0.0
+            },
+            {
+              "active": "F11",
+              "form_index": 1,
+              "phase_damage_bank": 1.24000000000029,
+              "resources": {
+                "F11": {
+                  "cooldowns": {
+                    "F11_basic": 0.402898550724637,
+                    "emma_frost": 4.51666666666668,
+                    "emma_ice": 6.55000000000001,
+                    "emma_star": 4.51666666666653
+                  },
+                  "dead": false,
+                  "hp": 284.835338645418,
+                  "level": 12,
+                  "mp": 121.899999999994,
+                  "xp": 0.0
+                },
+                "JIA": {
+                  "cooldowns": {},
+                  "dead": false,
+                  "hp": 396.0,
+                  "level": 12,
+                  "mp": 145.0,
+                  "xp": 0.0
+                },
+                "N16": {
+                  "cooldowns": {
+                    "healer_support": 3.55000000000001
+                  },
+                  "dead": false,
+                  "hp": 346.0,
+                  "level": 12,
+                  "mp": 175.0,
+                  "xp": 0.0
+                }
+              },
+              "time": 17.5000000000003,
+              "transition_remaining": 1.0
+            }
+          ],
+          "actual_xp_gained_by_member": {
+            "F11": 19.3333333333333,
+            "JIA": 19.3333333333333,
+            "N16": 19.3333333333333
+          },
+          "release_events": {
+            "general_cut": 2,
+            "general_lunge": 2,
+            "human_formation": 2,
+            "war_formation": 3,
+            "yaksha_break": 3,
+            "yaksha_cleave": 3,
+            "yaksha_pulse": 2
+          },
+          "configuration_error": ""
+        },
+        "final": {
+          "seconds": 50.65,
+          "outcome": "victory",
+          "hurt_total": 341.618494023904,
+          "entry": {
+            "F11": {
+              "cooldowns": {},
+              "dead": false,
+              "hp": 331.0,
+              "level": 12,
+              "mp": 185.0,
+              "xp": 0.0
+            },
+            "JIA": {
+              "cooldowns": {},
+              "dead": false,
+              "hp": 396.0,
+              "level": 12,
+              "mp": 145.0,
+              "xp": 0.0
+            },
+            "N16": {
+              "cooldowns": {},
+              "dead": false,
+              "hp": 346.0,
+              "level": 12,
+              "mp": 175.0,
+              "xp": 0.0
+            }
+          },
+          "exit": {
+            "F11": {
+              "cooldowns": {
+                "F11_basic": 0.369565217391303,
+                "emma_frost": 1.36666666666669,
+                "emma_ice": 5.46666666666668,
+                "emma_star": 4.36666666666653
+              },
+              "dead": false,
+              "hp": 158.237934262948,
+              "level": 12,
+              "mp": 82.7999999999838,
+              "xp": 19.3333333333333
+            },
+            "JIA": {
+              "cooldowns": {},
+              "dead": false,
+              "hp": 396.0,
+              "level": 12,
+              "mp": 145.0,
+              "xp": 19.3333333333333
+            },
+            "N16": {
+              "cooldowns": {
+                "healer_support": 5.48333333333334
+              },
+              "dead": false,
+              "hp": 346.0,
+              "level": 12,
+              "mp": 175.0,
+              "xp": 19.3333333333333
+            }
+          },
+          "phase_resource_records": [
+            {
+              "active": "F11",
+              "form_index": 0,
+              "phase_damage_bank": 0.0,
+              "resources": {
+                "F11": {
+                  "cooldowns": {
+                    "F11_basic": 0.869565217391304,
+                    "emma_frost": 7.0,
+                    "emma_ice": 8.0,
+                    "emma_star": 11.0
+                  },
+                  "dead": false,
+                  "hp": 331.0,
+                  "level": 12,
+                  "mp": 115.0,
+                  "xp": 0.0
+                },
+                "JIA": {
+                  "cooldowns": {},
+                  "dead": false,
+                  "hp": 396.0,
+                  "level": 12,
+                  "mp": 145.0,
+                  "xp": 0.0
+                },
+                "N16": {
+                  "cooldowns": {
+                    "healer_support": 7.0
+                  },
+                  "dead": false,
+                  "hp": 346.0,
+                  "level": 12,
+                  "mp": 175.0,
+                  "xp": 0.0
+                }
+              },
+              "time": 0.0166666666666667,
+              "transition_remaining": 0.0
+            },
+            {
+              "active": "F11",
+              "form_index": 1,
+              "phase_damage_bank": 1.24000000000029,
+              "resources": {
+                "F11": {
+                  "cooldowns": {
+                    "F11_basic": 0.402898550724637,
+                    "emma_frost": 4.51666666666668,
+                    "emma_ice": 6.55000000000001,
+                    "emma_star": 4.51666666666653
+                  },
+                  "dead": false,
+                  "hp": 284.835338645418,
+                  "level": 12,
+                  "mp": 121.899999999994,
+                  "xp": 0.0
+                },
+                "JIA": {
+                  "cooldowns": {},
+                  "dead": false,
+                  "hp": 396.0,
+                  "level": 12,
+                  "mp": 145.0,
+                  "xp": 0.0
+                },
+                "N16": {
+                  "cooldowns": {
+                    "healer_support": 3.55000000000001
+                  },
+                  "dead": false,
+                  "hp": 346.0,
+                  "level": 12,
+                  "mp": 175.0,
+                  "xp": 0.0
+                }
+              },
+              "time": 17.5000000000003,
+              "transition_remaining": 1.0
+            }
+          ],
+          "actual_xp_gained_by_member": {
+            "F11": 19.3333333333333,
+            "JIA": 19.3333333333333,
+            "N16": 19.3333333333333
+          },
+          "release_events": {
+            "general_cut": 2,
+            "general_lunge": 2,
+            "human_formation": 2,
+            "war_formation": 3,
+            "yaksha_break": 3,
+            "yaksha_cleave": 3,
+            "yaksha_pulse": 2
+          },
+          "configuration_error": ""
+        },
+        "godmode_exposure": false
+      }
+    ],
+    "scope": "B17-only final regression; preserves normal resources through both phases. Cadence uses HP reset and offense suppression only to measure complete move timing.",
+    "no_full_suite_rerun": true,
+    "no_new_performance_claim": true,
+    "human_playtest": false
+  },
+  "source_epochs": {
+    "initial_candidate": "Original before/after mobs27, boss96, exposure32, growth9, duel8 and cadence4 retain their original manifest hashes. Runtime core-freeze.json.previous_sha256 records initial frozen source hashes.",
+    "final_candidate": "Only B17 cadence4 and continuous-duel2 were rerun against core-freeze.json final_cadence_candidate. Other scenarios reuse original evidence because the reviewed logic change only alters B17 human general_cut closing speed. UI/audio changes remain outside this pure-logic validation scope.",
+    "initial_source_review": "source_review.json",
+    "final_source_review": "final-freeze-verification.json"
+  },
+  "continuous_duels_final_effective": [
+    {
+      "stage": "B15",
+      "start": "center",
+      "seconds": 35.4333333333333,
+      "outcome": "victory",
+      "hurt_total": 193.065298804781,
+      "entry": {
+        "F11": {
+          "cooldowns": {},
+          "dead": false,
+          "hp": 331.0,
+          "level": 12,
+          "mp": 185.0,
+          "xp": 0.0
+        },
+        "JIA": {
+          "cooldowns": {},
+          "dead": false,
+          "hp": 396.0,
+          "level": 12,
+          "mp": 145.0,
+          "xp": 0.0
+        },
+        "N16": {
+          "cooldowns": {},
+          "dead": false,
+          "hp": 346.0,
+          "level": 12,
+          "mp": 175.0,
+          "xp": 0.0
+        }
+      },
+      "exit": {
+        "F11": {
+          "cooldowns": {
+            "F11_basic": 0.319565217391303,
+            "emma_frost": 1.58333333333335,
+            "emma_ice": 4.65000000000001,
+            "emma_star": 8.58333333333321
+          },
+          "dead": false,
+          "hp": 212.934701195219,
+          "level": 12,
+          "mp": 89.4999999999879,
+          "xp": 19.3333333333333
+        },
+        "JIA": {
+          "cooldowns": {},
+          "dead": false,
+          "hp": 396.0,
+          "level": 12,
+          "mp": 145.0,
+          "xp": 19.3333333333333
+        },
+        "N16": {
+          "cooldowns": {
+            "healer_support": 6.66666666666667
+          },
+          "dead": false,
+          "hp": 346.0,
+          "level": 12,
+          "mp": 175.0,
+          "xp": 19.3333333333333
+        }
+      },
+      "phase_resource_records": [
+        {
+          "active": "F11",
+          "form_index": 0,
+          "phase_damage_bank": 0.0,
+          "resources": {
+            "F11": {
+              "cooldowns": {
+                "F11_basic": 0.869565217391304,
+                "emma_frost": 7.0,
+                "emma_ice": 8.0,
+                "emma_star": 11.0
+              },
+              "dead": false,
+              "hp": 331.0,
+              "level": 12,
+              "mp": 115.0,
+              "xp": 0.0
+            },
+            "JIA": {
+              "cooldowns": {},
+              "dead": false,
+              "hp": 396.0,
+              "level": 12,
+              "mp": 145.0,
+              "xp": 0.0
+            },
+            "N16": {
+              "cooldowns": {
+                "healer_support": 7.0
+              },
+              "dead": false,
+              "hp": 346.0,
+              "level": 12,
+              "mp": 175.0,
+              "xp": 0.0
+            }
+          },
+          "time": 0.0166666666666667,
+          "transition_remaining": 0.0
+        },
+        {
+          "active": "F11",
+          "form_index": 1,
+          "phase_damage_bank": 54.2200000000003,
+          "resources": {
+            "F11": {
+              "cooldowns": {
+                "F11_basic": 0.302898550724637,
+                "emma_frost": 3.00000000000001,
+                "emma_ice": 4.51666666666668,
+                "emma_star": 10.5
+              },
+              "dead": false,
+              "hp": 331.0,
+              "level": 12,
+              "mp": 113.999999999996,
+              "xp": 0.0
+            },
+            "JIA": {
+              "cooldowns": {},
+              "dead": false,
+              "hp": 396.0,
+              "level": 12,
+              "mp": 145.0,
+              "xp": 0.0
+            },
+            "N16": {
+              "cooldowns": {
+                "healer_support": 2.51666666666668
+              },
+              "dead": false,
+              "hp": 346.0,
+              "level": 12,
+              "mp": 175.0,
+              "xp": 0.0
+            }
+          },
+          "time": 11.5166666666668,
+          "transition_remaining": 1.0
+        }
+      ],
+      "actual_xp_gained_by_member": {
+        "F11": 19.3333333333333,
+        "JIA": 19.3333333333333,
+        "N16": 19.3333333333333
+      }
+    },
+    {
+      "stage": "B15",
+      "start": "corner",
+      "seconds": 34.4333333333333,
+      "outcome": "victory",
+      "hurt_total": 193.065298804781,
+      "entry": {
+        "F11": {
+          "cooldowns": {},
+          "dead": false,
+          "hp": 331.0,
+          "level": 12,
+          "mp": 185.0,
+          "xp": 0.0
+        },
+        "JIA": {
+          "cooldowns": {},
+          "dead": false,
+          "hp": 396.0,
+          "level": 12,
+          "mp": 145.0,
+          "xp": 0.0
+        },
+        "N16": {
+          "cooldowns": {},
+          "dead": false,
+          "hp": 346.0,
+          "level": 12,
+          "mp": 175.0,
+          "xp": 0.0
+        }
+      },
+      "exit": {
+        "F11": {
+          "cooldowns": {
+            "F11_basic": 0.319565217391303,
+            "emma_frost": 2.58333333333335,
+            "emma_ice": 5.65000000000001,
+            "emma_star": 9.58333333333326
+          },
+          "dead": false,
+          "hp": 187.934701195219,
+          "level": 12,
+          "mp": 83.4999999999883,
+          "xp": 19.3333333333333
+        },
+        "JIA": {
+          "cooldowns": {},
+          "dead": false,
+          "hp": 396.0,
+          "level": 12,
+          "mp": 145.0,
+          "xp": 19.3333333333333
+        },
+        "N16": {
+          "cooldowns": {
+            "healer_support": 0.65000000000002
+          },
+          "dead": false,
+          "hp": 346.0,
+          "level": 12,
+          "mp": 175.0,
+          "xp": 19.3333333333333
+        }
+      },
+      "phase_resource_records": [
+        {
+          "active": "F11",
+          "form_index": 0,
+          "phase_damage_bank": 0.0,
+          "resources": {
+            "F11": {
+              "cooldowns": {
+                "F11_basic": 0.869565217391304,
+                "emma_frost": 7.0,
+                "emma_ice": 8.0,
+                "emma_star": 11.0
+              },
+              "dead": false,
+              "hp": 331.0,
+              "level": 12,
+              "mp": 115.0,
+              "xp": 0.0
+            },
+            "JIA": {
+              "cooldowns": {},
+              "dead": false,
+              "hp": 396.0,
+              "level": 12,
+              "mp": 145.0,
+              "xp": 0.0
+            },
+            "N16": {
+              "cooldowns": {
+                "healer_support": 7.0
+              },
+              "dead": false,
+              "hp": 346.0,
+              "level": 12,
+              "mp": 175.0,
+              "xp": 0.0
+            }
+          },
+          "time": 0.0166666666666667,
+          "transition_remaining": 0.0
+        },
+        {
+          "active": "F11",
+          "form_index": 1,
+          "phase_damage_bank": 54.2200000000003,
+          "resources": {
+            "F11": {
+              "cooldowns": {
+                "F11_basic": 0.202898550724637,
+                "emma_frost": 3.01666666666668,
+                "emma_ice": 4.53333333333335,
+                "emma_star": 10.5166666666666
+              },
+              "dead": false,
+              "hp": 331.0,
+              "level": 12,
+              "mp": 113.899999999996,
+              "xp": 0.0
+            },
+            "JIA": {
+              "cooldowns": {},
+              "dead": false,
+              "hp": 396.0,
+              "level": 12,
+              "mp": 145.0,
+              "xp": 0.0
+            },
+            "N16": {
+              "cooldowns": {
+                "healer_support": 2.53333333333335
+              },
+              "dead": false,
+              "hp": 346.0,
+              "level": 12,
+              "mp": 175.0,
+              "xp": 0.0
+            }
+          },
+          "time": 11.5000000000002,
+          "transition_remaining": 1.0
+        }
+      ],
+      "actual_xp_gained_by_member": {
+        "F11": 19.3333333333333,
+        "JIA": 19.3333333333333,
+        "N16": 19.3333333333333
+      }
+    },
+    {
+      "stage": "B16",
+      "start": "center",
+      "seconds": 44.8333333333333,
+      "outcome": "victory",
+      "hurt_total": 171.769051792829,
+      "entry": {
+        "F11": {
+          "cooldowns": {},
+          "dead": false,
+          "hp": 331.0,
+          "level": 12,
+          "mp": 185.0,
+          "xp": 0.0
+        },
+        "JIA": {
+          "cooldowns": {},
+          "dead": false,
+          "hp": 396.0,
+          "level": 12,
+          "mp": 145.0,
+          "xp": 0.0
+        },
+        "N16": {
+          "cooldowns": {},
+          "dead": false,
+          "hp": 346.0,
+          "level": 12,
+          "mp": 175.0,
+          "xp": 0.0
+        }
+      },
+      "exit": {
+        "F11": {
+          "cooldowns": {
+            "F11_basic": 0.419565217391303,
+            "emma_frost": 0.0,
+            "emma_ice": 3.26666666666668,
+            "emma_star": 10.1833333333333
+          },
+          "dead": false,
+          "hp": 298.869960159363,
+          "level": 12,
+          "mp": 75.8999999999847,
+          "xp": 19.3333333333333
+        },
+        "JIA": {
+          "cooldowns": {},
+          "dead": false,
+          "hp": 396.0,
+          "level": 12,
+          "mp": 145.0,
+          "xp": 19.3333333333333
+        },
+        "N16": {
+          "cooldowns": {
+            "healer_support": 4.28333333333334
+          },
+          "dead": false,
+          "hp": 346.0,
+          "level": 12,
+          "mp": 175.0,
+          "xp": 19.3333333333333
+        }
+      },
+      "phase_resource_records": [
+        {
+          "active": "F11",
+          "form_index": 0,
+          "phase_damage_bank": 0.0,
+          "resources": {
+            "F11": {
+              "cooldowns": {
+                "F11_basic": 0.869565217391304,
+                "emma_frost": 7.0,
+                "emma_ice": 8.0,
+                "emma_star": 11.0
+              },
+              "dead": false,
+              "hp": 331.0,
+              "level": 12,
+              "mp": 115.0,
+              "xp": 0.0
+            },
+            "JIA": {
+              "cooldowns": {},
+              "dead": false,
+              "hp": 396.0,
+              "level": 12,
+              "mp": 145.0,
+              "xp": 0.0
+            },
+            "N16": {
+              "cooldowns": {
+                "healer_support": 7.0
+              },
+              "dead": false,
+              "hp": 346.0,
+              "level": 12,
+              "mp": 175.0,
+              "xp": 0.0
+            }
+          },
+          "time": 0.0166666666666667,
+          "transition_remaining": 0.0
+        },
+        {
+          "active": "F11",
+          "form_index": 1,
+          "phase_damage_bank": 54.3200000000004,
+          "resources": {
+            "F11": {
+              "cooldowns": {
+                "F11_basic": 0.169565217391303,
+                "emma_frost": 5.35000000000001,
+                "emma_ice": 7.38333333333334,
+                "emma_star": 5.34999999999986
+              },
+              "dead": false,
+              "hp": 291.360988047809,
+              "level": 12,
+              "mp": 116.899999999994,
+              "xp": 0.0
+            },
+            "JIA": {
+              "cooldowns": {},
+              "dead": false,
+              "hp": 396.0,
+              "level": 12,
+              "mp": 145.0,
+              "xp": 0.0
+            },
+            "N16": {
+              "cooldowns": {
+                "healer_support": 4.38333333333334
+              },
+              "dead": false,
+              "hp": 346.0,
+              "level": 12,
+              "mp": 175.0,
+              "xp": 0.0
+            }
+          },
+          "time": 16.666666666667,
+          "transition_remaining": 1.0
+        }
+      ],
+      "actual_xp_gained_by_member": {
+        "F11": 19.3333333333333,
+        "JIA": 19.3333333333333,
+        "N16": 19.3333333333333
+      }
+    },
+    {
+      "stage": "B16",
+      "start": "corner",
+      "seconds": 45.5333333333333,
+      "outcome": "victory",
+      "hurt_total": 92.4910278884462,
+      "entry": {
+        "F11": {
+          "cooldowns": {},
+          "dead": false,
+          "hp": 331.0,
+          "level": 12,
+          "mp": 185.0,
+          "xp": 0.0
+        },
+        "JIA": {
+          "cooldowns": {},
+          "dead": false,
+          "hp": 396.0,
+          "level": 12,
+          "mp": 145.0,
+          "xp": 0.0
+        },
+        "N16": {
+          "cooldowns": {},
+          "dead": false,
+          "hp": 346.0,
+          "level": 12,
+          "mp": 175.0,
+          "xp": 0.0
+        }
+      },
+      "exit": {
+        "F11": {
+          "cooldowns": {
+            "F11_basic": 0.352898550724637,
+            "emma_frost": 6.48333333333334,
+            "emma_ice": 3.01666666666668,
+            "emma_star": 10.9833333333333
+          },
+          "dead": false,
+          "hp": 309.754486055777,
+          "level": 12,
+          "mp": 52.0999999999845,
+          "xp": 19.3333333333333
+        },
+        "JIA": {
+          "cooldowns": {},
+          "dead": false,
+          "hp": 396.0,
+          "level": 12,
+          "mp": 145.0,
+          "xp": 19.3333333333333
+        },
+        "N16": {
+          "cooldowns": {
+            "healer_support": 3.58333333333335
+          },
+          "dead": false,
+          "hp": 346.0,
+          "level": 12,
+          "mp": 175.0,
+          "xp": 19.3333333333333
+        }
+      },
+      "phase_resource_records": [
+        {
+          "active": "F11",
+          "form_index": 0,
+          "phase_damage_bank": 0.0,
+          "resources": {
+            "F11": {
+              "cooldowns": {
+                "F11_basic": 0.869565217391304,
+                "emma_frost": 7.0,
+                "emma_ice": 8.0,
+                "emma_star": 11.0
+              },
+              "dead": false,
+              "hp": 331.0,
+              "level": 12,
+              "mp": 115.0,
+              "xp": 0.0
+            },
+            "JIA": {
+              "cooldowns": {},
+              "dead": false,
+              "hp": 396.0,
+              "level": 12,
+              "mp": 145.0,
+              "xp": 0.0
+            },
+            "N16": {
+              "cooldowns": {
+                "healer_support": 7.0
+              },
+              "dead": false,
+              "hp": 346.0,
+              "level": 12,
+              "mp": 175.0,
+              "xp": 0.0
+            }
+          },
+          "time": 0.0166666666666667,
+          "transition_remaining": 0.0
+        },
+        {
+          "active": "F11",
+          "form_index": 1,
+          "phase_damage_bank": 0.960000000000434,
+          "resources": {
+            "F11": {
+              "cooldowns": {
+                "F11_basic": 0.33623188405797,
+                "emma_frost": 5.56666666666667,
+                "emma_ice": 7.6,
+                "emma_star": 5.56666666666653
+              },
+              "dead": false,
+              "hp": 331.0,
+              "level": 12,
+              "mp": 115.599999999994,
+              "xp": 0.0
+            },
+            "JIA": {
+              "cooldowns": {},
+              "dead": false,
+              "hp": 396.0,
+              "level": 12,
+              "mp": 145.0,
+              "xp": 0.0
+            },
+            "N16": {
+              "cooldowns": {
+                "healer_support": 4.60000000000001
+              },
+              "dead": false,
+              "hp": 346.0,
+              "level": 12,
+              "mp": 175.0,
+              "xp": 0.0
+            }
+          },
+          "time": 16.4500000000003,
+          "transition_remaining": 1.0
+        }
+      ],
+      "actual_xp_gained_by_member": {
+        "F11": 19.3333333333333,
+        "JIA": 19.3333333333333,
+        "N16": 19.3333333333333
+      }
+    },
+    {
+      "stage": "B18",
+      "start": "center",
+      "seconds": 57.9666666666667,
+      "outcome": "failed",
+      "hurt_total": 983.127011952191,
+      "entry": {
+        "F11": {
+          "cooldowns": {},
+          "dead": false,
+          "hp": 331.0,
+          "level": 12,
+          "mp": 185.0,
+          "xp": 0.0
+        },
+        "JIA": {
+          "cooldowns": {},
+          "dead": false,
+          "hp": 396.0,
+          "level": 12,
+          "mp": 145.0,
+          "xp": 0.0
+        },
+        "N16": {
+          "cooldowns": {},
+          "dead": false,
+          "hp": 346.0,
+          "level": 12,
+          "mp": 175.0,
+          "xp": 0.0
+        }
+      },
+      "exit": {
+        "F11": {
+          "cooldowns": {
+            "F11_basic": 0.0,
+            "emma_frost": 0.0,
+            "emma_ice": 0.0,
+            "emma_star": 0.0
+          },
+          "dead": true,
+          "hp": 0.0,
+          "level": 12,
+          "mp": 100.399999999987,
+          "xp": 0.0
+        },
+        "JIA": {
+          "cooldowns": {
+            "JIA_basic": 0.0,
+            "jia_break": 0.0,
+            "jia_sweep": 1.05000000000001
+          },
+          "dead": true,
+          "hp": 0.0,
+          "level": 12,
+          "mp": 79.0700000000016,
+          "xp": 0.0
+        },
+        "N16": {
+          "cooldowns": {
+            "healer_support": 5.18333333333334
+          },
+          "dead": false,
+          "hp": 346.0,
+          "level": 12,
+          "mp": 175.0,
+          "xp": 0.0
+        }
+      },
+      "phase_resource_records": [
+        {
+          "active": "F11",
+          "form_index": 0,
+          "phase_damage_bank": 0.0,
+          "resources": {
+            "F11": {
+              "cooldowns": {
+                "F11_basic": 0.869565217391304,
+                "emma_frost": 7.0,
+                "emma_ice": 8.0,
+                "emma_star": 11.0
+              },
+              "dead": false,
+              "hp": 331.0,
+              "level": 12,
+              "mp": 115.0,
+              "xp": 0.0
+            },
+            "JIA": {
+              "cooldowns": {},
+              "dead": false,
+              "hp": 396.0,
+              "level": 12,
+              "mp": 145.0,
+              "xp": 0.0
+            },
+            "N16": {
+              "cooldowns": {
+                "healer_support": 7.0
+              },
+              "dead": false,
+              "hp": 346.0,
+              "level": 12,
+              "mp": 175.0,
+              "xp": 0.0
+            }
+          },
+          "time": 0.0166666666666667,
+          "transition_remaining": 0.0
+        },
+        {
+          "active": "F11",
+          "form_index": 1,
+          "phase_damage_bank": 54.8799999999991,
+          "resources": {
+            "F11": {
+              "cooldowns": {
+                "F11_basic": 0.552898550724637,
+                "emma_frost": 4.93333333333334,
+                "emma_ice": 7.48333333333334,
+                "emma_star": 8.43333333333321
+              },
+              "dead": false,
+              "hp": 86.9912350597609,
+              "level": 12,
+              "mp": 94.3999999999916,
+              "xp": 0.0
+            },
+            "JIA": {
+              "cooldowns": {},
+              "dead": false,
+              "hp": 396.0,
+              "level": 12,
+              "mp": 145.0,
+              "xp": 0.0
+            },
+            "N16": {
+              "cooldowns": {
+                "healer_support": 3.48333333333335
+              },
+              "dead": false,
+              "hp": 346.0,
+              "level": 12,
+              "mp": 175.0,
+              "xp": 0.0
+            }
+          },
+          "time": 24.5833333333332,
+          "transition_remaining": 1.0
+        }
+      ],
+      "actual_xp_gained_by_member": {
+        "F11": 0.0,
+        "JIA": 0.0,
+        "N16": 0.0
+      }
+    },
+    {
+      "stage": "B18",
+      "start": "corner",
+      "seconds": 60.8333333333333,
+      "outcome": "victory",
+      "hurt_total": 748.027219123506,
+      "entry": {
+        "F11": {
+          "cooldowns": {},
+          "dead": false,
+          "hp": 331.0,
+          "level": 12,
+          "mp": 185.0,
+          "xp": 0.0
+        },
+        "JIA": {
+          "cooldowns": {},
+          "dead": false,
+          "hp": 396.0,
+          "level": 12,
+          "mp": 145.0,
+          "xp": 0.0
+        },
+        "N16": {
+          "cooldowns": {},
+          "dead": false,
+          "hp": 346.0,
+          "level": 12,
+          "mp": 175.0,
+          "xp": 0.0
+        }
+      },
+      "exit": {
+        "F11": {
+          "cooldowns": {
+            "F11_basic": 0.0,
+            "emma_frost": 0.0,
+            "emma_ice": 0.0,
+            "emma_star": 0.0
+          },
+          "dead": true,
+          "hp": 0.0,
+          "level": 12,
+          "mp": 77.6999999999886,
+          "xp": 26.0
+        },
+        "JIA": {
+          "cooldowns": {
+            "JIA_basic": 0.689655172413793,
+            "jia_break": 4.18333333333325,
+            "jia_sweep": 0.0
+          },
+          "dead": false,
+          "hp": 155.568,
+          "level": 12,
+          "mp": 52.6566666666688,
+          "xp": 26.0
+        },
+        "N16": {
+          "cooldowns": {
+            "healer_support": 2.31666666666668
+          },
+          "dead": false,
+          "hp": 346.0,
+          "level": 12,
+          "mp": 175.0,
+          "xp": 26.0
+        }
+      },
+      "phase_resource_records": [
+        {
+          "active": "F11",
+          "form_index": 0,
+          "phase_damage_bank": 0.0,
+          "resources": {
+            "F11": {
+              "cooldowns": {
+                "F11_basic": 0.869565217391304,
+                "emma_frost": 7.0,
+                "emma_ice": 8.0,
+                "emma_star": 11.0
+              },
+              "dead": false,
+              "hp": 331.0,
+              "level": 12,
+              "mp": 115.0,
+              "xp": 0.0
+            },
+            "JIA": {
+              "cooldowns": {},
+              "dead": false,
+              "hp": 396.0,
+              "level": 12,
+              "mp": 145.0,
+              "xp": 0.0
+            },
+            "N16": {
+              "cooldowns": {
+                "healer_support": 7.0
+              },
+              "dead": false,
+              "hp": 346.0,
+              "level": 12,
+              "mp": 175.0,
+              "xp": 0.0
+            }
+          },
+          "time": 0.0166666666666667,
+          "transition_remaining": 0.0
+        },
+        {
+          "active": "F11",
+          "form_index": 1,
+          "phase_damage_bank": 54.879999999999,
+          "resources": {
+            "F11": {
+              "cooldowns": {
+                "F11_basic": 0.452898550724637,
+                "emma_frost": 6.01666666666667,
+                "emma_ice": 0.550000000000023,
+                "emma_star": 9.51666666666659
+              },
+              "dead": false,
+              "hp": 86.9912350597609,
+              "level": 12,
+              "mp": 87.899999999992,
+              "xp": 0.0
+            },
+            "JIA": {
+              "cooldowns": {},
+              "dead": false,
+              "hp": 396.0,
+              "level": 12,
+              "mp": 145.0,
+              "xp": 0.0
+            },
+            "N16": {
+              "cooldowns": {
+                "healer_support": 4.56666666666668
+              },
+              "dead": false,
+              "hp": 346.0,
+              "level": 12,
+              "mp": 175.0,
+              "xp": 0.0
+            }
+          },
+          "time": 23.4999999999999,
+          "transition_remaining": 1.0
+        }
+      ],
+      "actual_xp_gained_by_member": {
+        "F11": 26.0,
+        "JIA": 26.0,
+        "N16": 26.0
+      }
+    },
+    {
+      "stage": "B17",
+      "start": "center",
+      "seconds": 51.0333333333333,
+      "outcome": "victory",
+      "hurt_total": 249.289171314741,
+      "entry": {
+        "F11": {
+          "cooldowns": {},
+          "dead": false,
+          "hp": 331.0,
+          "level": 12,
+          "mp": 185.0,
+          "xp": 0.0
+        },
+        "JIA": {
+          "cooldowns": {},
+          "dead": false,
+          "hp": 396.0,
+          "level": 12,
+          "mp": 145.0,
+          "xp": 0.0
+        },
+        "N16": {
+          "cooldowns": {},
+          "dead": false,
+          "hp": 346.0,
+          "level": 12,
+          "mp": 175.0,
+          "xp": 0.0
+        }
+      },
+      "exit": {
+        "F11": {
+          "cooldowns": {
+            "F11_basic": 0.0362318840579701,
+            "emma_frost": 0.983333333333355,
+            "emma_ice": 5.08333333333334,
+            "emma_star": 3.9833333333332
+          },
+          "dead": false,
+          "hp": 206.710828685259,
+          "level": 12,
+          "mp": 85.0999999999837,
+          "xp": 19.3333333333333
+        },
+        "JIA": {
+          "cooldowns": {},
+          "dead": false,
+          "hp": 396.0,
+          "level": 12,
+          "mp": 145.0,
+          "xp": 19.3333333333333
+        },
+        "N16": {
+          "cooldowns": {
+            "healer_support": 5.10000000000001
+          },
+          "dead": false,
+          "hp": 346.0,
+          "level": 12,
+          "mp": 175.0,
+          "xp": 19.3333333333333
+        }
+      },
+      "phase_resource_records": [
+        {
+          "active": "F11",
+          "form_index": 0,
+          "phase_damage_bank": 0.0,
+          "resources": {
+            "F11": {
+              "cooldowns": {
+                "F11_basic": 0.869565217391304,
+                "emma_frost": 7.0,
+                "emma_ice": 8.0,
+                "emma_star": 11.0
+              },
+              "dead": false,
+              "hp": 331.0,
+              "level": 12,
+              "mp": 115.0,
+              "xp": 0.0
+            },
+            "JIA": {
+              "cooldowns": {},
+              "dead": false,
+              "hp": 396.0,
+              "level": 12,
+              "mp": 145.0,
+              "xp": 0.0
+            },
+            "N16": {
+              "cooldowns": {
+                "healer_support": 7.0
+              },
+              "dead": false,
+              "hp": 346.0,
+              "level": 12,
+              "mp": 175.0,
+              "xp": 0.0
+            }
+          },
+          "time": 0.0166666666666667,
+          "transition_remaining": 0.0
+        },
+        {
+          "active": "F11",
+          "form_index": 1,
+          "phase_damage_bank": 14.5800000000003,
+          "resources": {
+            "F11": {
+              "cooldowns": {
+                "F11_basic": 0.252898550724637,
+                "emma_frost": 0.0,
+                "emma_ice": 1.98333333333335,
+                "emma_star": 10.95
+              },
+              "dead": false,
+              "hp": 309.835338645418,
+              "level": 12,
+              "mp": 107.299999999992,
+              "xp": 0.0
+            },
+            "JIA": {
+              "cooldowns": {},
+              "dead": false,
+              "hp": 396.0,
+              "level": 12,
+              "mp": 145.0,
+              "xp": 0.0
+            },
+            "N16": {
+              "cooldowns": {
+                "healer_support": 6.0
+              },
+              "dead": false,
+              "hp": 346.0,
+              "level": 12,
+              "mp": 175.0,
+              "xp": 0.0
+            }
+          },
+          "time": 22.0666666666667,
+          "transition_remaining": 1.0
+        }
+      ],
+      "actual_xp_gained_by_member": {
+        "F11": 19.3333333333333,
+        "JIA": 19.3333333333333,
+        "N16": 19.3333333333333
+      }
+    },
+    {
+      "stage": "B17",
+      "start": "corner",
+      "seconds": 50.65,
+      "outcome": "victory",
+      "hurt_total": 341.618494023904,
+      "entry": {
+        "F11": {
+          "cooldowns": {},
+          "dead": false,
+          "hp": 331.0,
+          "level": 12,
+          "mp": 185.0,
+          "xp": 0.0
+        },
+        "JIA": {
+          "cooldowns": {},
+          "dead": false,
+          "hp": 396.0,
+          "level": 12,
+          "mp": 145.0,
+          "xp": 0.0
+        },
+        "N16": {
+          "cooldowns": {},
+          "dead": false,
+          "hp": 346.0,
+          "level": 12,
+          "mp": 175.0,
+          "xp": 0.0
+        }
+      },
+      "exit": {
+        "F11": {
+          "cooldowns": {
+            "F11_basic": 0.369565217391303,
+            "emma_frost": 1.36666666666669,
+            "emma_ice": 5.46666666666668,
+            "emma_star": 4.36666666666653
+          },
+          "dead": false,
+          "hp": 158.237934262948,
+          "level": 12,
+          "mp": 82.7999999999838,
+          "xp": 19.3333333333333
+        },
+        "JIA": {
+          "cooldowns": {},
+          "dead": false,
+          "hp": 396.0,
+          "level": 12,
+          "mp": 145.0,
+          "xp": 19.3333333333333
+        },
+        "N16": {
+          "cooldowns": {
+            "healer_support": 5.48333333333334
+          },
+          "dead": false,
+          "hp": 346.0,
+          "level": 12,
+          "mp": 175.0,
+          "xp": 19.3333333333333
+        }
+      },
+      "phase_resource_records": [
+        {
+          "active": "F11",
+          "form_index": 0,
+          "phase_damage_bank": 0.0,
+          "resources": {
+            "F11": {
+              "cooldowns": {
+                "F11_basic": 0.869565217391304,
+                "emma_frost": 7.0,
+                "emma_ice": 8.0,
+                "emma_star": 11.0
+              },
+              "dead": false,
+              "hp": 331.0,
+              "level": 12,
+              "mp": 115.0,
+              "xp": 0.0
+            },
+            "JIA": {
+              "cooldowns": {},
+              "dead": false,
+              "hp": 396.0,
+              "level": 12,
+              "mp": 145.0,
+              "xp": 0.0
+            },
+            "N16": {
+              "cooldowns": {
+                "healer_support": 7.0
+              },
+              "dead": false,
+              "hp": 346.0,
+              "level": 12,
+              "mp": 175.0,
+              "xp": 0.0
+            }
+          },
+          "time": 0.0166666666666667,
+          "transition_remaining": 0.0
+        },
+        {
+          "active": "F11",
+          "form_index": 1,
+          "phase_damage_bank": 1.24000000000029,
+          "resources": {
+            "F11": {
+              "cooldowns": {
+                "F11_basic": 0.402898550724637,
+                "emma_frost": 4.51666666666668,
+                "emma_ice": 6.55000000000001,
+                "emma_star": 4.51666666666653
+              },
+              "dead": false,
+              "hp": 284.835338645418,
+              "level": 12,
+              "mp": 121.899999999994,
+              "xp": 0.0
+            },
+            "JIA": {
+              "cooldowns": {},
+              "dead": false,
+              "hp": 396.0,
+              "level": 12,
+              "mp": 145.0,
+              "xp": 0.0
+            },
+            "N16": {
+              "cooldowns": {
+                "healer_support": 3.55000000000001
+              },
+              "dead": false,
+              "hp": 346.0,
+              "level": 12,
+              "mp": 175.0,
+              "xp": 0.0
+            }
+          },
+          "time": 17.5000000000003,
+          "transition_remaining": 1.0
+        }
+      ],
+      "actual_xp_gained_by_member": {
+        "F11": 19.3333333333333,
+        "JIA": 19.3333333333333,
+        "N16": 19.3333333333333
+      }
+    }
+  ],
+  "cadence_final_effective": [
+    {
+      "stage": "B17",
+      "start": "center",
+      "strategy": "stationary",
+      "first_tell": {
+        "actor_position": "(1600.0, 900.0)",
+        "boss_distance": 300.0,
+        "initial_approach": true,
+        "move_id": "general_lunge",
+        "previous_move": "",
+        "since_previous_tell": 1.0,
+        "time": 1.0
+      },
+      "largest_subsequent_gap": {
+        "actor_position": "(1600.0, 900.0)",
+        "boss_distance": 296.5,
+        "initial_approach": false,
+        "move_id": "general_cut",
+        "previous_move": "general_lunge",
+        "since_previous_tell": 3.93333333333353,
+        "time": 14.0166666666669
+      }
+    },
+    {
+      "stage": "B17",
+      "start": "center",
+      "strategy": "reactive",
+      "first_tell": {
+        "actor_position": "(1600.0, 900.0)",
+        "boss_distance": 300.0,
+        "initial_approach": true,
+        "move_id": "general_lunge",
+        "previous_move": "",
+        "since_previous_tell": 1.0,
+        "time": 1.0
+      },
+      "largest_subsequent_gap": {
+        "actor_position": "(2091.703, 1616.925)",
+        "boss_distance": 292.129180908203,
+        "initial_approach": false,
+        "move_id": "general_cut",
+        "previous_move": "general_lunge",
+        "since_previous_tell": 3.04999999999983,
+        "time": 20.3333333333335
+      }
+    },
+    {
+      "stage": "B17",
+      "start": "corner",
+      "strategy": "stationary",
+      "first_tell": {
+        "actor_position": "(80.0, 90.0)",
+        "boss_distance": 300.665924072266,
+        "initial_approach": true,
+        "move_id": "general_lunge",
+        "previous_move": "",
+        "since_previous_tell": 1.0,
+        "time": 1.0
+      },
+      "largest_subsequent_gap": {
+        "actor_position": "(80.0, 90.0)",
+        "boss_distance": 296.371185302734,
+        "initial_approach": false,
+        "move_id": "general_cut",
+        "previous_move": "general_lunge",
+        "since_previous_tell": 5.06666666666692,
+        "time": 13.9000000000003
+      }
+    },
+    {
+      "stage": "B17",
+      "start": "corner",
+      "strategy": "reactive",
+      "first_tell": {
+        "actor_position": "(80.0, 90.0)",
+        "boss_distance": 300.665924072266,
+        "initial_approach": true,
+        "move_id": "general_lunge",
+        "previous_move": "",
+        "since_previous_tell": 1.0,
+        "time": 1.0
+      },
+      "largest_subsequent_gap": {
+        "actor_position": "(447.4514, 531.0406)",
+        "boss_distance": 297.971160888672,
+        "initial_approach": false,
+        "move_id": "general_cut",
+        "previous_move": "general_lunge",
+        "since_previous_tell": 3.14999999999982,
+        "time": 20.0000000000001
+      }
+    }
+  ]
+}

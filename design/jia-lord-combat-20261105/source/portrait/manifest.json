@@ -1,0 +1,83 @@
+{
+  "version": 1,
+  "id": "JIA_campaign_head",
+  "generator": "built-in image_gen.imagegen",
+  "selected_source": {
+    "path": "design/jia-lord-combat-20261105/source/portrait/campaign-head-v1.png",
+    "bytes": 1775019,
+    "sha256": "5102309b0d4fe8d2eff6baba009412f87ed3ed5674a0ff1d1cb663afb16686a2",
+    "size": [
+      1254,
+      1254
+    ]
+  },
+  "selection": "v1 selected after full source and exported portrait review. Independently generated bust, not body crop. No earlier portrait generation discarded. User approved campaign-v2 is sole identity authority; final portrait aesthetic acceptance remains pending.",
+  "exact_prompt": {
+    "path": "design/jia-lord-combat-20261105/prompts/campaign-head-v1.txt",
+    "bytes": 2550,
+    "sha256": "6a58bfcf9213c61eff773e8a48aa6bc691ceea3a7271bf2aac7fce88c4c140b8"
+  },
+  "references": [
+    {
+      "path": "design/jia-lord-combat-20261105/jia-lord-campaign-v2.png",
+      "bytes": 2900168,
+      "sha256": "d0b2f3950fa2287e085037d62764cc86c507128ddc68f651b786fbd7d39bd84d",
+      "size": [
+        1024,
+        1536
+      ],
+      "role": "sole approved identity and costume master"
+    },
+    {
+      "path": "design/jia-combat-20261027/source/portrait-v1.png",
+      "bytes": 1415772,
+      "sha256": "b5861d5ecb3ac0e805eba1becae82798d43da82c75964f55ed425a2b28febd27",
+      "size": [
+        1254,
+        1254
+      ],
+      "role": "pixel technique only; old costume not authoritative"
+    }
+  ],
+  "export_script": {
+    "path": "design/jia-lord-combat-20261105/source/portrait/export_campaign_head.lua",
+    "bytes": 1444,
+    "sha256": "4d437d1fadef57695a09680496685608b120747e2dd341579b967b4967030141"
+  },
+  "aseprite_version": "1.x-e784f4d-dev",
+  "export_command": "/home/weathour/programs/aseprite-src/build/bin/aseprite --batch --script design/jia-lord-combat-20261105/source/portrait/export_campaign_head.lua",
+  "native_working_size": [
+    128,
+    128
+  ],
+  "runtime_size": [
+    128,
+    128
+  ],
+  "outputs": [
+    {
+      "path": "assets/players/jia-campaign/campaign-head.png",
+      "bytes": 23200,
+      "sha256": "be637acf39df1fdd3a535225a9285e8e72feeaef42a8ef7377a5815cfc2fc6b8",
+      "size": [
+        128,
+        128
+      ]
+    },
+    {
+      "path": "assets/players/jia-campaign/campaign-head.aseprite",
+      "bytes": 7136,
+      "sha256": "fbc8989c03293bb353c3a21150b565eba63c95e69b7c49f18fe916de348bdd59"
+    }
+  ],
+  "qa": "qa.json",
+  "review_preview": {
+    "path": "design/jia-lord-combat-20261105/source/portrait/export-review-4x.png",
+    "bytes": 32353,
+    "sha256": "a5a466ee45ce91a143ae202294fb6b945c9b90522bb7340aa6dac4d4e8ae5221",
+    "size": [
+      512,
+      512
+    ]
+  }
+}

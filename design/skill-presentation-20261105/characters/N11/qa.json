@@ -1,0 +1,23 @@
+{
+  "id": "N11",
+  "status": "passed",
+  "read_only_raster_checks": {
+    "binary_alpha": true,
+    "frame_sizes": true,
+    "distinct_frames_within_clips": true,
+    "canvas_no_clipping": true,
+    "editable_files": true,
+    "source_hash": true
+  },
+  "visual_review": "Swift charcoal horse with unarmored head/legs and light black lamellar rider. Lance held diagonally at idle and horizontally in pursuit. All 16 poses preserve complete horse and weapon. Whole mounted actor body is calibrated to80px; first idle measured body y32..252=220 source pixels. All 16 actual distinct source poses measured with alpha-connected component extraction. Source scaling is fixed from standing human body calibration; hunched/galloping frames are not stretched. Tiny disconnected alpha specks below 3 pixels omitted. User aesthetic acceptance remains pending.",
+  "actor_shared_opaque_colors": 60,
+  "export_visual_review": {
+    "source_sheet": true,
+    "idle": true,
+    "move": true,
+    "attack": true,
+    "special": true,
+    "head": true,
+    "hit": "reuse p04 and p01, reviewed idle"
+  }
+}

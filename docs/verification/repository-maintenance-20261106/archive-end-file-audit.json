@@ -1,0 +1,31 @@
+{
+  "status": "archive_metadata_changes_recorded",
+  "at": 1793975227.5256233,
+  "archive_original_file_count": 9428,
+  "unchanged_original_count": 9427,
+  "changed_original_files": [
+    "design/skill-presentation-20261105/qa/skill-presentation-results.json"
+  ],
+  "missing_original_files": [],
+  "new_non_cache_files": [],
+  "generated_cache": {
+    "files": 4985,
+    "bytes": 910117189,
+    "excluded_from_index_archive": true
+  },
+  "no_production_edit_by_validator": true,
+  "expected_generated_report": {
+    "path": "design/skill-presentation-20261105/qa/skill-presentation-results.json",
+    "writer": "scripts/tests/chronicle_skill_presentation_smoke.gd:742-745 default report destination",
+    "top_level_keys_changed": [
+      "audio_teardown"
+    ],
+    "semantic_result": {
+      "actors": 38,
+      "abilities": 137,
+      "checks": 3934,
+      "failures": 0
+    },
+    "no_input_source_changed": true
+  }
+}

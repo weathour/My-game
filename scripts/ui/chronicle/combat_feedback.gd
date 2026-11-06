@@ -1,5 +1,12 @@
 extends Node
 ## Consumes confirmed facts only. Clocks, voices and cosmetic RNG belong to this attempt.
+const AUDIO := preload("res://scripts/audio/combat_audio.gd")
+const SOUND_CATALOG := preload("res://scripts/audio/skill_sound_catalog.gd")
+const COMBAT_CATALOG := preload("res://scripts/content/combat_catalog.gd")
+var audio: Node
+var cast_kinds := {}
+var enemy_releases := {}
+
 const ABILITY := preload("res://scripts/battle/ability_definition.gd")
 const SETTINGS := preload("res://scripts/shared/settings.gd")
 const MAX_MARKS := 12
@@ -7,7 +14,7 @@ const CONTACTS_PER_CAST := 3
 const MAX_FOCUSED_TARGETS := 6
 const CONTACT_RANGE := 260.0
 const MAX_NUMBERS := 6
-const MAX_VOICES := 6
+const MAX_VOICES := 14
 const VOICE_GAIN := .25
 const MAX_EVENT_GAIN := 1.0
 const CATEGORIES := {"cast_blade":3, "hit_light":3, "hit_heavy":2, "guard":2, "death_ghost":3, "magic":3, "pickup":2, "level":2, "elite":2}
@@ -45,25 +52,20 @@ func _ready() -> void:
 			var path := "res://assets/sfx/chronicle-feedback/%s_%02d.wav" % [category, index + 1]
 			if ResourceLoader.exists(path): variants.append(load(path))
 		streams[category] = variants
-	for i in MAX_VOICES:
-		var voice := AudioStreamPlayer.new()
-		voice.playback_type = AudioServer.PLAYBACK_TYPE_STREAM
-		add_child(voice)
-		voice.set_meta("priority", 0)
-		voices.append(voice)
+	audio = AUDIO.new()
+	add_child(audio)
+	voices = audio.voices
 
 func refresh_settings() -> void:
 	sfx_volume = SETTINGS.load_sfx_volume()
 	reduced_motion = SETTINGS.comfort_enabled("reduced_motion")
 	reduced_flash = SETTINGS.comfort_enabled("reduced_flash")
-	for voice in voices:
-		if sfx_volume <= 0: voice.stop()
-		voice.volume_db = linear_to_db(maxf(.00001, sfx_volume * VOICE_GAIN))
+	if is_instance_valid(audio): audio._update_gains()
 
 func advance(delta: float, is_paused: bool, outcome: String) -> void:
 	if paused != is_paused: refresh_settings()
 	paused = is_paused
-	for voice in voices: voice.stream_paused = paused
+	if is_instance_valid(audio): audio.advance(delta, paused)
 	if outcome == "failed": clear(); return
 	if paused: return
 	clock += maxf(0, delta)
@@ -89,18 +91,13 @@ func consume(events: Array, battle: RefCounted, visible_world: Rect2) -> void:
 		# A new controlled body must not inherit the previous actor's flash, numbers or sound tails.
 		var boss_window := boss_priority_until
 		var threat_window := suppressed_until
-		clear()
+		if is_instance_valid(audio): audio.cancel_owner("character:" + player_id)
+		clear(false)
 		boss_priority_until = boss_window
 		suppressed_until = threat_window
 		player_id = str(battle.current().id)
-	# Reserve the mix for authored major enemy cues before considering ordinary facts.
-	for event in events:
-		if str(event.get("kind", "")) in ["boss_phase", "boss_impact", "boss_defeated"] or _major_warning(event, battle):
-			suppressed_until = maxf(suppressed_until, clock + .22)
-			var major := str(event.get("kind", "")) != "enemy_tell"
-			if major: boss_priority_until = maxf(boss_priority_until, clock + .3)
-			for voice in voices:
-				if int(voice.get_meta("priority")) < (4 if major else 3): voice.stop()
+	audio.screen_width=maxf(400,visible_world.size.x) if visible_world.has_area() else 900.0
+	_consume_audio(events, battle)
 	var primary_contacts := _primary_contacts(events, battle, visible_world)
 	var contact_counts := {}
 	var death_counts := {}
@@ -132,9 +129,6 @@ func consume(events: Array, battle: RefCounted, visible_world: Rect2) -> void:
 				if not sound_groups.has(cast_key) and not sound_casts.has(cast_key):
 					sound_groups[cast_key] = true
 					sound_casts[cast_key] = clock
-					if not periodic and visible:
-						var category := "magic" if str(event.get("damage_type", "")) not in ["physical", "0", ""] else "hit_heavy" if bool(event.get("target_is_elite", false)) else "hit_light"
-						_sound(category, 2 if direct else 1, 1 if direct and point.distance_to(battle.position) <= CONTACT_RANGE else .35)
 			"kill":
 				if bool(event.get("target_is_boss", false)) or str(event.get("rank", "")) == "boss": continue
 				if visible:
@@ -143,26 +137,18 @@ func consume(events: Array, battle: RefCounted, visible_world: Rect2) -> void:
 					if important or int(death_counts.get(key, 0)) < 2:
 						death_counts[key] = int(death_counts.get(key, 0)) + 1
 						_mark("death", point, .28, Vector2.UP, important)
-					_sound("death_ghost", 1, .7)
 			"player_hit":
-				player_guarded = float(event.get("health_loss", 0)) <= 0 and float(event.get("shield_absorbed", 0)) > 0
+				player_guarded = bool(event.get("guarded",false)) or (float(event.get("health_loss", 0)) <= 0 and float(event.get("shield_absorbed", 0)) > 0)
 				player_flash = .17
 				_mark("guard" if player_guarded else "hurt", point, .25, Vector2.UP, true)
-				_sound("guard" if player_guarded else "hit_heavy", 4, 1.15)
 			"xp_pickup":
 				_mark("pickup", point, .28, Vector2.UP, str(event.get("collection", "")) == "victory_sweep")
-				_sound("pickup", 0, .65)
 			"level":
 				if not sound_groups.has("level"):
 					sound_groups.level = true
 					_mark("level", battle.position, .65, Vector2.UP, true)
-					_sound("level", 3, 1)
 			"elite_defeated":
 				_mark("elite", point, .65, Vector2.UP, true)
-				_sound("elite", 3, 1.1)
-			"cast":
-				if bool(event.get("direct", false)) and visible and int(event.get("ability_kind", -1)) in [ABILITY.Kind.SWEEP, ABILITY.Kind.THRUST] and int(event.get("damage_type", -1)) == ABILITY.DamageType.PHYSICAL:
-					_sound("cast_blade", 0, .55)
 
 func _cast_key(event: Dictionary, periodic: bool) -> String:
 	return "%s:%s:%s" % [event.get("cast_id", event.get("cast", 0)), event.get("source", ""), periodic]
@@ -224,34 +210,124 @@ func _number(key: String, point: Vector2, amount: float, allowed: bool) -> void:
 	counters.numbers_peak = maxi(counters.numbers_peak, numbers.size())
 
 func _sound(category: String, priority: int, gain: float) -> void:
-	if sfx_volume <= 0 or paused: return
-	if (priority < 3 and clock < suppressed_until) or (priority < 4 and clock < boss_priority_until):
-		counters.sounds_limited += 1
-		return
-	if clock < float(cooldowns.get(category, -1)):
-		counters.sounds_limited += 1; return
-	var variants: Array = streams.get(category, [])
-	if variants.is_empty(): return
-	var selected: AudioStreamPlayer
-	for voice in voices:
-		if not voice.playing: selected = voice; break
-	if selected == null:
-		for voice in voices:
-			if int(voice.get_meta("priority")) < priority: selected = voice; break
-	if selected == null: counters.sounds_limited += 1; return
-	selected.stop()
-	selected.stream = variants[rng.randi_range(0, variants.size() - 1)]
-	selected.pitch_scale = rng.randf_range(.96, 1.04)
-	selected.volume_db = linear_to_db(maxf(.00001, sfx_volume * VOICE_GAIN * clampf(gain, 0, MAX_EVENT_GAIN)))
-	selected.set_meta("priority", priority)
-	selected.play()
-	if trace_enabled: trace_records.append({"kind":"audio_start","category":category,"path":selected.stream.resource_path,"wall_usec":Time.get_ticks_usec(),"clock":clock})
-	cooldowns[category] = clock + float(COOLDOWNS.get(category, .1))
-	counters.sounds_started += 1
-	var playing := 0
-	for voice in voices:
-		if voice.playing: playing += 1
-	counters.voices_peak = maxi(counters.voices_peak, playing)
+	# Compatibility for isolated feedback probes; production uses explicit profiles.
+	var cue := str({"cast_blade":"blade.cast","hit_light":"blade.impact","hit_heavy":"heavy_blade.impact","magic":"arcane.impact","death_ghost":"feedback.death"}.get(category, SOUND_CATALOG.global_cue(category)))
+	if is_instance_valid(audio):
+		audio.trace_enabled = trace_enabled
+		audio.trace_records = trace_records
+		var volume_category := str({"cast_blade":"player_attack","hit_light":"player_attack","hit_heavy":"player_attack","magic":"player_skill","death_ghost":"death","guard":"hurt","pickup":"pickup","level":"rewards","elite":"rewards"}.get(category,"player_skill"))
+		audio.play_cue(cue, audio.listener, {"priority":priority,"gain_db":linear_to_db(clampf(gain,0.001,1.0)),"category":volume_category})
+		_sync_audio_counters()
+
+func _sync_audio_counters() -> void:
+	counters.sounds_started = audio.counters.started
+	counters.sounds_limited = audio.counters.limited
+	counters.voices_peak = audio.counters.voices_peak
+
+func _consume_audio(events: Array, battle: RefCounted) -> void:
+	if not is_instance_valid(audio): return
+	audio.listener = battle.position
+	audio.paused = bool(battle.paused)
+	audio.trace_enabled = trace_enabled
+	audio.trace_records = trace_records
+	for event: Dictionary in events:
+		var kind := str(event.get("kind", ""))
+		var owner := "enemy:"+str(event.get("target_id",event.get("target",event.get("enemy_id",event.get("id",0))))) if kind=="kill" else "enemy:"+str(event.get("enemy_id",event.get("id",0)))
+		if kind in ["boss_phase","kill","enemy_remove"]: audio.cancel_owner(owner,-1,"tell")
+		if kind in ["enemy_release","enemy_hazard_release"]: audio.cancel_owner(owner,int(event.get("action_serial",-1)),"tell")
+		var point: Vector2 = event.get("position",battle.position)
+		var cast := int(event.get("cast_id",event.get("cast",0)))
+		var source := str(event.get("source",event.get("id","")))
+		if kind == "cast":
+			var ability := str(event.get("ability",""))
+			cast_kinds[str(source)+":"+str(cast)] = int(event.get("ability_kind",-1))
+			if cast_kinds.size()>256: cast_kinds.erase(cast_kinds.keys()[0])
+			var profile := SOUND_CATALOG.character(source,ability,int(event.get("ability_kind",-1)))
+			var options := _profile_options(profile,"character:"+source,cast,"cast")
+			options.category = _character_category(source, ability)
+			options.key = "cast:%s:%d" % [source,cast]
+			if bool(event.get("manual",false)): options.priority=5; options.critical=true
+			_play_profile(profile,"cast",point,options,{"owner":source,"ability":ability})
+		elif kind in ["damage_dealt", "ability_effect"]:
+			var counter := str(event.get("ability",""))=="guard_counter"
+			if (bool(event.get("secondary",false)) or bool(event.get("periodic",false))) and not counter: continue
+			var profile := SOUND_CATALOG.character(source,str(event.get("ability","")),int(cast_kinds.get(str(source)+":"+str(cast),-1)))
+			var options := _profile_options(profile,"character:"+source,cast,"impact")
+			options.category = _character_category(source, str(event.get("ability","")))
+			options.key = "impact:%s:%d" % [source,cast]
+			if counter: options.key += ":delivery:"+str(event.get("delivery",0))
+			_play_profile(profile,"impact",point,options,{"owner":source,"ability":str(event.get("ability",""))})
+		elif kind in ["enemy_tell","enemy_release","enemy_hazard_release","player_hit"]:
+			var metadata := _enemy_metadata(event,battle)
+			var profile := SOUND_CATALOG.enemy(str(metadata.get("definition_id","")),int(metadata.get("form_index",0)),str(metadata.get("move_id","")))
+			var stage := "tell" if kind=="enemy_tell" else "impact" if kind=="player_hit" else "release"
+			var options := _profile_options(profile,"enemy:"+str(metadata.get("enemy_id",0)),int(event.get("action_serial",metadata.get("action_serial",0))),stage)
+			options.key = "%s:%s:%s" % [options.owner,options.serial,stage] if stage=="release" else "%s:%s:%s:%s" % [options.owner,options.serial,stage,event.get("kind","")]
+			options.form_index=int(metadata.get("form_index",0))
+			options.category = "boss" if str(metadata.get("rank",""))=="boss" or str(metadata.get("definition_id","")).begins_with("B") else "enemy_attack"
+			if stage=="release":
+				# Staggered markers are one attack launch, even after mixer dedup expires.
+				var release_serial := int(options.serial)
+				if enemy_releases.has(options.owner) and release_serial <= int(enemy_releases[options.owner]): continue
+				enemy_releases[options.owner] = release_serial
+			if stage=="tell":
+				var distance: float = Vector2(metadata.get("position",point)).distance_to(battle.position)
+				var boss := str(metadata.get("rank",""))=="boss" or str(metadata.get("definition_id","")).begins_with("B")
+				var elite := str(metadata.get("rank",""))=="field_elite" or str(metadata.get("definition_id","")).begins_with("L")
+				options.priority = 5 if boss or bool(metadata.get("major",false)) else 3 if elite else 1 if distance>650 else 2
+				options.critical = boss and bool(metadata.get("major",false))
+				if profile.get("stage_priorities",{}).has(stage): options.priority=maxi(int(options.priority),int(profile.stage_priorities[stage]))
+			_play_profile(profile,stage,metadata.get("position",point),options,{"definition":str(metadata.get("definition_id","")),"form":int(metadata.get("form_index",0)),"move":str(metadata.get("move_id",""))})
+			if kind=="player_hit":
+				var guarded := bool(event.get("guarded",false)) or (float(event.get("health_loss",0))<=0 and float(event.get("shield_absorbed",0))>0)
+				audio.play_cue(SOUND_CATALOG.global_cue("guard" if guarded else "hurt"),point,{"priority":5,"owner":"character:"+str(event.get("id","")),"stage":"hurt","category":"hurt"})
+		elif kind in ["boss_phase","boss_defeated"]:
+			var metadata := _enemy_metadata(event,battle)
+			var stage := "phase" if kind=="boss_phase" else "defeated"
+			var profile:=SOUND_CATALOG.boss_profile(str(metadata.get("definition_id","")),int(metadata.get("form_index",0)))
+			var options:=_profile_options(profile,"enemy:"+str(event.get("id",0)),0,stage)
+			options.priority=6;options.critical=true;options.category="boss"
+			_play_profile(profile,stage,point,options,{"definition":str(metadata.get("definition_id","")),"form":int(metadata.get("form_index",0)),"move":"boss_event"})
+		elif kind in ["kill","xp_pickup","level","elite_defeated"]:
+			if kind=="kill" and (bool(event.get("target_is_boss",false)) or str(event.get("rank",""))=="boss" or str(event.get("definition_id","")).begins_with("B")): continue
+			var category := str({"kill":"death","xp_pickup":"pickup","level":"level","elite_defeated":"elite"}[kind])
+			audio.play_cue(SOUND_CATALOG.global_cue(category),point,{"priority":3 if category in ["level","elite"] else 0,"stage":category,"category":"rewards" if category in ["level","elite"] else category})
+	# A batch may contain both admission and cancellation. Only genuinely active
+	# source warnings survive; already released one-shots remain independent.
+	for index in audio.records.size():
+		var record: Dictionary=audio.records[index]
+		if record.get("stage")!="tell" or not str(record.get("owner","")).begins_with("enemy:"): continue
+		var valid:=false
+		for enemy in battle.enemies:
+			if "enemy:"+str(enemy.id)==record.owner and not enemy.dead and enemy.windup>0 and enemy.action_serial==int(record.serial) and enemy.form_index==int(record.get("form_index",enemy.form_index)): valid=true; break
+		if not valid: audio._stop_voice(index)
+	_sync_audio_counters()
+
+func _character_category(source: String, ability: String) -> String:
+	var definition := COMBAT_CATALOG.definition(source)
+	var basic: Resource = definition.get("basic")
+	return "player_attack" if basic != null and str(basic.id) == ability else "player_skill"
+
+func _profile_options(profile: Dictionary, owner: String, serial: int, stage: String) -> Dictionary:
+	var options := {"gain_db":float(profile.get("gain_db",0)),"pitch_scale":float(profile.get("pitch_scale",1)),"owner":owner,"serial":serial,"stage":stage}
+	if profile.get("stage_priorities",{}).has(stage): options.priority=int(profile.stage_priorities[stage])
+	return options
+
+func _enemy_metadata(event: Dictionary, battle: RefCounted) -> Dictionary:
+	var result := event.duplicate()
+	var geometry: Dictionary = event.get("geometry",{})
+	if not result.has("move_id"): result.move_id = str(geometry.get("move_id",event.get("attack",event.get("action_id",""))))
+	if not result.has("position"): result.position = geometry.get("origin",battle.position)
+	result.enemy_id = int(event.get("enemy_id",event.get("id",0)))
+	if not result.has("definition_id"):
+		for enemy in battle.enemies:
+			if enemy.id==result.enemy_id:
+				result.definition_id=enemy.definition_id
+				result.form_index=enemy.form_index
+				result.major=bool(enemy.current_action.get("major",false))
+				result.rank=enemy.rank
+				if str(result.move_id).is_empty(): result.move_id=str(enemy.current_action.get("id",""))
+	return result
 
 func draw(painter: Node2D, origin: Vector2, scale: float, font: Font, screen_size: Vector2) -> void:
 	painter.draw_set_transform(origin, 0, Vector2.ONE * scale)
@@ -305,7 +381,7 @@ func number_layout(origin: Vector2, scale: float, font: Font, screen_size: Vecto
 		result.append({"point":point,"rect":rect,"text":text,"alpha":1 - age})
 	return result
 
-func clear() -> void:
+func clear(clear_audio: bool = true) -> void:
 	marks.clear()
 	numbers.clear()
 	contacts.clear()
@@ -315,11 +391,21 @@ func clear() -> void:
 	suppressed_until = 0
 	boss_priority_until = 0
 	player_flash = 0
-	for voice in voices:
-		voice.stream_paused = false
-		voice.stop()
-		voice.stream = null
+	if clear_audio:
+		enemy_releases.clear()
+		if is_instance_valid(audio): audio.clear()
 
 func _exit_tree() -> void:
 	clear()
 	streams.clear()
+
+func _play_profile(profile: Dictionary, stage: String, point: Vector2, options: Dictionary, identity: Dictionary) -> void:
+	var cue:=str(profile.get(stage,""))
+	var intentional:=not str(profile.get(stage+"_silence_reason",profile.get("silence_reason",""))).is_empty()
+	var has_identity: bool=not str(identity.get("ability",identity.get("move",""))).is_empty()
+	if profile.is_empty() or not profile.has(stage) or (cue.is_empty() and not intentional):
+		if has_identity:
+			var detail:=identity.duplicate(true);detail.stage=stage
+			audio.report_missing_binding(JSON.stringify(detail),detail)
+		return
+	if not cue.is_empty(): audio.play_cue(cue,point,options)

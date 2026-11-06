@@ -1,6 +1,7 @@
 extends RefCounted
 ## Read-only projection of the same content and records used to enter a battle.
 const C := preload("res://scripts/content/combat_catalog.gd")
+const INFO := preload("res://scripts/content/skill_information.gd")
 const A := preload("res://scripts/battle/ability_definition.gd")
 const STAT_NAMES := {"hp":"生命上限", "mp":"魔法上限", "attack":"攻击", "armor":"防御", "speed":"攻击速度", "move":"移动速度", "regen":"魔法回复", "supply_hp":"补给生命恢复", "supply_mp":"补给魔法恢复"}
 
@@ -33,10 +34,18 @@ static func build(data: Dictionary, characters: Dictionary) -> Dictionary:
 		if ability == null: continue
 		var active: bool = not record.dead and int(record.level) >= ability.unlock_level
 		var stats := C.attributes(id, int(record.level), bonuses, data.equipped)
-		var description := str(definition.back_text) + "\n" + C.ability_description(ability, int(record.level), stats.attack)
+		var information := INFO.describe(C._ability_view(ability, int(record.level), stats.attack), "support", str(id))
+		var lines: Array[String] = []
+		for line in [information.summary, information.trigger]:
+			if not str(line).is_empty(): lines.append(str(line))
+		for line in information.key_facts: lines.append(str(line))
+		var description := "\n".join(lines)
+		var extra_trait := INFO.describe({}, "trait", str(id))
+		# Mark's identity is already conveyed by the support trigger; do not repeat it.
+		var mechanic := "" if definition.trait == "mark" else str(extra_trait.summary)
 		if record.dead: description = "阵亡 · 支援停止"
 		elif int(record.level) < ability.unlock_level: description = "Lv.%d 解锁" % ability.unlock_level
-		result.supports.append({"id":id, "title":"%s · %s" % [characters[id].name, ability.title], "text":description, "active":active, "interval":ability.cooldown, "mechanic":C.trait_description(id)})
+		result.supports.append({"id":id, "title":"%s · %s" % [characters[id].name, ability.title], "text":description, "active":active, "interval":ability.cooldown, "mechanic":mechanic})
 	for slot in ["weapon", "armor", "accessory"]:
 		for item in C.EQUIPMENT:
 			if item.id == data.equipped.get(slot):

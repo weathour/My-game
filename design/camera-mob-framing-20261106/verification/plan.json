@@ -1,0 +1,48 @@
+{
+  "status": "complete",
+  "created_at": 1793968326.2468204,
+  "runtime_owner": "/root/category_audio_runtime",
+  "owned_tests": [
+    "scripts/tests/chronicle_camera_mob_framing_smoke.gd",
+    "scripts/tests/chronicle_boss_camera_smoke.gd",
+    "scripts/tests/chronicle_boss_camera_cache_smoke.gd"
+  ],
+  "new_regression": {
+    "actual_AI_cases": 12,
+    "frames_each": 600,
+    "total_frames": 7200,
+    "ordinary_ids": [
+      "E03",
+      "E10",
+      "E12",
+      "E06",
+      "E02",
+      "E05"
+    ],
+    "checks": [
+      "same no-enemy follow/zoom1 at every frame",
+      "query read-only AI geometry events and RNG",
+      "real field_elite/Boss/proxy source qualification",
+      "ordinary huge outline does not alter mixed elite envelope",
+      "ordinary active poison vetoes unsafe elite escape but never drives alone",
+      "three sizes and comfort"
+    ]
+  },
+  "prior_full_freeze": "design/zhang-liao-summons-20261106/verification/recovery-frozen-inputs.json",
+  "prior_full_freeze_sha256": "ef29a5c0de4f26740899c2d253680eec74b471b09fd32b597b66daef8748652e",
+  "before_diagnostic": "design/camera-mob-jitter-20261106/",
+  "planned_regressions": [
+    "Godot4.6.2 headless startup",
+    "new camera mob smoke",
+    "boss camera cache smoke",
+    "boss camera smoke",
+    "B17 summon core and actual render17case",
+    "fresh complete scripts/check_project.sh with durable launcher; actual discovered count",
+    "input/binary/harness/entry end guard and strict log audit"
+  ],
+  "GPU": "no Godot started by verification owner; awaiting runtime owner handoff",
+  "completed_at": 1793969423.7169514,
+  "result": "result.json",
+  "final_audit": "final-project-check-audit.json",
+  "gpu_released": true
+}

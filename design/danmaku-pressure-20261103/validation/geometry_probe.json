@@ -1,0 +1,86 @@
+{
+  "checks": [
+    {
+      "label": "actual shared world radius four",
+      "passed": true
+    },
+    {
+      "label": "swept fast projectile crosses tiny actor",
+      "passed": true
+    },
+    {
+      "label": "relative crossing actor and projectile paths hit",
+      "passed": true
+    },
+    {
+      "label": "parallel moving actor with20gap does not hit",
+      "passed": true
+    },
+    {
+      "label": "paths crossing at different times do not hit",
+      "passed": true
+    },
+    {
+      "label": "projectile radius4 plus hurt4 boundary hits",
+      "passed": true
+    },
+    {
+      "label": "projectile radius4 plus hurt4 outside misses",
+      "passed": true
+    },
+    {
+      "label": "disc reaches104 actual padding",
+      "passed": true
+    },
+    {
+      "label": "disc misses104.01",
+      "passed": true
+    },
+    {
+      "label": "line reaches14 actual padding",
+      "passed": true
+    },
+    {
+      "label": "line misses14.01",
+      "passed": true
+    },
+    {
+      "label": "capsule endpoint includes radial padding",
+      "passed": true
+    },
+    {
+      "label": "capsule endpoint outside misses",
+      "passed": true
+    },
+    {
+      "label": "sector front hits",
+      "passed": true
+    },
+    {
+      "label": "sector rear outside hurt4 misses",
+      "passed": true
+    },
+    {
+      "label": "sector origin4 intersects actor",
+      "passed": true
+    },
+    {
+      "label": "ring gap permits actor in gap",
+      "passed": true
+    },
+    {
+      "label": "ring opposite side hurts",
+      "passed": true
+    },
+    {
+      "label": "ring hole remains safe outside padding",
+      "passed": true
+    },
+    {
+      "label": "ring inner edge plus4 hits",
+      "passed": true
+    }
+  ],
+  "failures": 0,
+  "scope": "Production shared hurtbox and area geometry primitives; session wiring verified separately by source inspection and normal sessions."
+}

@@ -45,26 +45,15 @@ func run() -> void:
 	var feedback := FEEDBACK.new()
 	root.add_child(feedback)
 	await process_frame
-	expect(feedback.voices.size() == 3, "audio voice pool is bounded at three")
+	expect(feedback.voices.is_empty(), "Boss visual adapter owns no competing audio pool")
 	var old_volume := SETTINGS.load_sfx_volume()
-	SETTINGS.save_sfx_volume(0)
-	feedback.consume([{"kind":"boss_impact","position":Vector2.ZERO}])
-	var playing := false
-	for voice in feedback.voices: playing = playing or voice.playing
-	expect(not playing, "mute setting starts no playback")
-	if DisplayServer.get_name() != "headless":
-		SETTINGS.save_sfx_volume(.65)
-		feedback.consume([{"kind":"boss_phase","position":Vector2.ZERO}])
-		playing = false
-		for voice in feedback.voices: playing = playing or voice.playing
-		expect(playing, "nonzero setting plays the actual combat stream")
-		feedback.advance(0, true, "")
-		var paused := true
-		for voice in feedback.voices:
-			if voice.stream != null: paused = paused and voice.stream_paused
-		expect(paused, "pause suspends all attempt-owned voices")
+	feedback.consume([{"kind":"boss_phase","position":Vector2.ZERO}])
+	expect(feedback.marks.size()==1 and feedback.phase_remaining>0, "Boss transition retains visual timing under unified audio ownership")
+	var remaining: float = feedback.phase_remaining
+	feedback.advance(0.1,true,"")
+	expect(is_equal_approx(feedback.phase_remaining,remaining), "pause freezes Boss presentation timing")
 	feedback.clear()
-	playing = false
+	var playing := false
 	for voice in feedback.voices: playing = playing or voice.playing or voice.stream != null
 	expect(not playing and feedback.sounds.is_empty(), "terminal cleanup releases playing and cached streams")
 	feedback.queue_free()

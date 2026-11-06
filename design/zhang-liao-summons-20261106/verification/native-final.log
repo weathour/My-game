@@ -1,0 +1,10 @@
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+OpenGL API 3.3.0 NVIDIA 580.173.02 - Compatibility - Using Device: NVIDIA - NVIDIA GeForce RTX 5080
+
+SUMMON_NATIVE_BOUNDS { "case": "960-war-chengong-normal-edge-close", "frame": 138, "phase": "impact", "source": [P: (778.6052, 262.0591), S: (132.4914, 107.2339)], "proxy": [P: (834.7196, 305.6656), S: (92.61107, 90.69761)], "safe": [P: (0.0, 72.0), S: (960.0, 324.0)], "camera": { "mode": "warning", "center": (2189.298, 1230.935), "zoom": 0.60775350665492, "scale": 0.451171875, "origin": (-508.0, -321.0), "base_origin": (-508.0, -321.0), "bounds": [P: (1125.957, 711.4805), S: (2127.792, 1196.883)], "safe_screen": [P: (24.0, 72.0), S: (912.0, 324.0)], "focus_bounds": [P: (2496.124, 1239.0), S: (715.8762, 561.0)], "requested_bounds": [P: (2496.124, 1239.0), S: (715.8762, 561.0)], "safe_route": [], "escape_valid": false, "escape_needed": true, "trauma": 0.0, "shake": (0.0, 0.0) } }
+ERROR: full authored bodies and weapons stay outside the HUD crop 960-war-chengong-normal-edge-close
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://scripts/tests/zhang_liao_summon_smoke.gd:19)
+       [1] render_case (res://scripts/tests/zhang_liao_summon_render_smoke.gd:143)
+ZHANG_LIAO_SUMMON_RENDER_SMOKE FAIL checks=31077 failures=1 cases=17 frames=3230

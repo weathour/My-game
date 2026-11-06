@@ -2,6 +2,7 @@ extends Node2D
 ## Pure presentation: identity-specific sheets, fixed feet, successful cast events.
 const C := preload("res://scripts/content/combat_catalog.gd")
 const A := preload("res://scripts/battle/ability_definition.gd")
+const ACTION := preload("res://scripts/ui/chronicle/actor_action_presentation.gd")
 const CLIPS := [[&"idle", 4, 5.0, true], [&"run", 8, 11.0, true], [&"attack", 4, 16.0, false], [&"cast", 4, 10.0, false]]
 @export var character_id := "F02"
 @export_range(0, 3) var attack_contact_frame := 1
@@ -10,6 +11,7 @@ var moving := false
 var attacking := false
 var manual_attack := false
 var facing_left := false
+var action := ACTION.new()
 
 func _ready() -> void:
 	sprite = $AnimatedSprite2D
@@ -30,7 +32,11 @@ func _ready() -> void:
 			frame.region = Rect2(index * 192, 0, 192, 192)
 			sprite.sprite_frames.add_frame(clip[0], frame)
 	sprite.animation_finished.connect(_finish_attack)
+	action.configure(sprite)
 	set_moving(false)
+
+func _process(delta: float) -> void:
+	if sprite != null: action.advance(sprite, delta)
 
 func set_moving(is_moving: bool, direction: Vector2 = Vector2.ZERO) -> void:
 	moving = is_moving
@@ -50,16 +56,27 @@ static func cast_clip(id: String, ability_id: String) -> StringName:
 	return &"attack"
 
 func present_cast(effect: Dictionary) -> void:
-	_play(cast_clip(character_id, str(effect.get("ability", ""))), effect.direction, effect.get("color", "") == "manual")
+	var manual := bool(effect.get("manual", effect.get("color", "") == "manual"))
+	if attacking and manual_attack and not manual: return
+	if not action.accepts(effect): return
+	var clip := cast_clip(character_id, str(effect.get("ability", "")))
+	var profile: Dictionary = effect.get("profile", {})
+	var motion := str(profile.get("motion", ""))
+	# NOVA can be a physical sweeping strike; retain its authored weapon action.
+	if motion in ACTION.CAST_MOTIONS and motion != "burst": clip = &"cast"
+	_play(clip, effect.get("direction", Vector2.RIGHT), manual, effect)
 
 func play_attack(direction: Vector2, is_manual: bool = false) -> void:
 	_play(&"attack", direction, is_manual)
 
-func _play(clip: StringName, direction: Vector2, is_manual: bool) -> void:
+func _play(clip: StringName, direction: Vector2, is_manual: bool, effect: Dictionary = {}) -> void:
 	if attacking and manual_attack and not is_manual: return
-	if absf(direction.x) > .01: sprite.flip_h = direction.x < 0
+	if absf(direction.x) > .01: facing_left = direction.x < 0
+	sprite.flip_h = facing_left
 	attacking = true
 	manual_attack = is_manual
+	if effect.is_empty(): effect = {"direction": direction, "manual": is_manual}
+	action.begin(sprite, effect, clip, is_manual)
 	sprite.stop()
 	sprite.play(clip)
 	# Damage lands immediately; defensive preparation is not a fake hit.
@@ -68,4 +85,8 @@ func _play(clip: StringName, direction: Vector2, is_manual: bool) -> void:
 func _finish_attack() -> void:
 	attacking = false
 	manual_attack = false
+	action.finish(sprite)
 	set_moving(moving)
+
+func presentation_snapshot() -> Dictionary:
+	return action.snapshot(attacking, manual_attack, facing_left)

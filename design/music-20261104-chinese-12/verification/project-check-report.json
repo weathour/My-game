@@ -1,0 +1,324 @@
+{
+  "status": "PASS",
+  "result": "PROJECT_CHECK_OK",
+  "actual_uninterrupted_full_run": true,
+  "full_log": "design/music-20261104-chinese-12/verification/full-project-check.log",
+  "full_log_sha256": "026be9626a6001c5aeafef69467027e276631ab2a23e660cbf54a7ba809a29a1",
+  "total_smokes": 52,
+  "source_smokes": 48,
+  "PCK_smokes": 4,
+  "smokes": [
+    {
+      "script": "scripts/tests/baimen_enemy_runtime_smoke.gd",
+      "script_sha256": "83a720ea582a911f6a2d8b5ab4c4adbd7bea5c7a3cfbab3a450f758a3b8d45b2",
+      "log": "design/music-20261104-chinese-12/verification/godot-checks/baimen_enemy_runtime_smoke.log",
+      "log_sha256": "6e2986cde6e1b2c022292ddef24fc576c8a19de572b65589fdd2415a3ba6a207"
+    },
+    {
+      "script": "scripts/tests/baimen_women_combat_art_smoke.gd",
+      "script_sha256": "eea6d59b814dd7a17fd5107fd3db6a5e846948dbf7ddb58cb922b2dd667039ea",
+      "log": "design/music-20261104-chinese-12/verification/godot-checks/baimen_women_combat_art_smoke.log",
+      "log_sha256": "646534b58adfc9313717be686e2d2e8dee305d9a09ec6657978a8085258df9a9"
+    },
+    {
+      "script": "scripts/tests/baimen_women_portraits_smoke.gd",
+      "script_sha256": "d6d73eef067cc7f5b2abcdeacdd86d0e049c1a0b023c897a940f001bf0d8d3e5",
+      "log": "design/music-20261104-chinese-12/verification/godot-checks/baimen_women_portraits_smoke.log",
+      "log_sha256": "6472c4e2426574abe0ef8061bb0884d5d96544d31c095f621f0b00f5f95eaed6"
+    },
+    {
+      "script": "scripts/tests/boss_combo_timing_smoke.gd",
+      "script_sha256": "08c410f92fdb31c1f87475e7e352bec5432760f9d288a7eb652ea25ef8863844",
+      "log": "design/music-20261104-chinese-12/verification/godot-checks/boss_combo_timing_smoke.log",
+      "log_sha256": "7db6254f1907ea07a1d10489b3671acaf75a184518456ba3cda1d9b54d15b45b"
+    },
+    {
+      "script": "scripts/tests/boss_forms_smoke.gd",
+      "script_sha256": "1edea44a6f2ed4a20a33f2d05af2e31e549532f63deaefa47dbace08ddd496f0",
+      "log": "design/music-20261104-chinese-12/verification/godot-checks/boss_forms_smoke.log",
+      "log_sha256": "51247d6284ec4fc4f7366e20931d34ca965366908d7ab729104cac73830b3b3e"
+    },
+    {
+      "script": "scripts/tests/boss_friendly_art_smoke.gd",
+      "script_sha256": "39aeb561620bbe1482404b1165909988f603af8b7d25c1402014ea056383604f",
+      "log": "design/music-20261104-chinese-12/verification/godot-checks/boss_friendly_art_smoke.log",
+      "log_sha256": "97c3180872ba707da4b4aa7f86aecf2499f0c0d44c4910de22bbabc15f2adabb"
+    },
+    {
+      "script": "scripts/tests/chronicle_authored_effects_smoke.gd",
+      "script_sha256": "b55270456a11204bb0fb7e98673b4b3d1c142627a55f68f4253128705398b04e",
+      "log": "design/music-20261104-chinese-12/verification/godot-checks/chronicle_authored_effects_smoke.log",
+      "log_sha256": "53e196869708d490aabf3bac3edc36f98b9dd66590d261f4fbfb3e75ea9e9dd3"
+    },
+    {
+      "script": "scripts/tests/chronicle_battle_ground_smoke.gd",
+      "script_sha256": "31ed9fb32f33d9da34921b90e3cc785627b0f3867b49fa14e31171a0246e372c",
+      "log": "design/music-20261104-chinese-12/verification/godot-checks/chronicle_battle_ground_smoke.log",
+      "log_sha256": "6ad8d0616112a94d4e17ed06efcd552a0da41e7628af99633941ff6c6ed90239"
+    },
+    {
+      "script": "scripts/tests/chronicle_battle_scale_smoke.gd",
+      "script_sha256": "eb03efc6bbd7b0e3fd1f2ba238aae8d529a08f66374a5a6fd2f8e6e1684b4990",
+      "log": "design/music-20261104-chinese-12/verification/godot-checks/chronicle_battle_scale_smoke.log",
+      "log_sha256": "e58d3545db29612c5626a6ad57cbcf37da91925db89cb33d4719a25de1eb8c92"
+    },
+    {
+      "script": "scripts/tests/chronicle_boss_camera_smoke.gd",
+      "script_sha256": "95dd39e6e3b2bb3c7b4357a2d5b8753df9d6ae555c8c52ee1652b052f9577c0f",
+      "log": "design/music-20261104-chinese-12/verification/godot-checks/chronicle_boss_camera_smoke.log",
+      "log_sha256": "f6d95e91a34d3cd1fb38a79eeefbf7a03ddd9f15b2293a2d6a0f57a5a8552eef"
+    },
+    {
+      "script": "scripts/tests/chronicle_boss_flow_smoke.gd",
+      "script_sha256": "25d32eedf06cd0b84e92d023253fd9395be86661b381b57e9e90948ac1d5e4b5",
+      "log": "design/music-20261104-chinese-12/verification/godot-checks/chronicle_boss_flow_smoke.log",
+      "log_sha256": "1f3ac022a81b003abce8719c8a118fd60fda53572df43588b2136c959d1900c4"
+    },
+    {
+      "script": "scripts/tests/chronicle_boss_sound_smoke.gd",
+      "script_sha256": "0c694d5ffdfdfb6bfb66f3f7bdb4df2bb846a37f50e5a2c9026e19069e47aa31",
+      "log": "design/music-20261104-chinese-12/verification/godot-checks/chronicle_boss_sound_smoke.log",
+      "log_sha256": "c4ca2756c7c0f69173556c80b8c3848613edf9075503ae43e126189d6ba81990"
+    },
+    {
+      "script": "scripts/tests/chronicle_chapter_two_smoke.gd",
+      "script_sha256": "a374daac8fd5c79342aee1da766c0bfbd6f870b3e15cf95e22369dfc3a1a2e9d",
+      "log": "design/music-20261104-chinese-12/verification/godot-checks/chronicle_chapter_two_smoke.log",
+      "log_sha256": "8c5a6832ff6c3a910f789cf2cfa48f28d5e941515232af5c184b5bd1aa9f9ca1"
+    },
+    {
+      "script": "scripts/tests/chronicle_character_campaign_smoke.gd",
+      "script_sha256": "7bc9695683bad7ed847ae691167f73847542cdbb98dd76bd8253f4db42f28f07",
+      "log": "design/music-20261104-chinese-12/verification/godot-checks/chronicle_character_campaign_smoke.log",
+      "log_sha256": "20d3e782d39e8d7c63173bdce636a588661fa193768cd6d94f908d0fb21b6e1a"
+    },
+    {
+      "script": "scripts/tests/chronicle_character_mechanics_smoke.gd",
+      "script_sha256": "f629a69dcd58b3bb373fc1f393bbec16b8f737b591f2acbfd14beff0ea055c94",
+      "log": "design/music-20261104-chinese-12/verification/godot-checks/chronicle_character_mechanics_smoke.log",
+      "log_sha256": "1d6a2ba8cf44c282a15f7efb74bc0101e85e80a6c4c397850ff63e67d9ea55e7"
+    },
+    {
+      "script": "scripts/tests/chronicle_character_panels_smoke.gd",
+      "script_sha256": "1ca2eee5ee1aec38716e5f3844fae71285c4d17e3e0c950cc2e304db62dc8c60",
+      "log": "design/music-20261104-chinese-12/verification/godot-checks/chronicle_character_panels_smoke.log",
+      "log_sha256": "4aec0f04c34f296f5dedeed97771f3c9711e673167d38eb5a6c81c72f87ff7bb"
+    },
+    {
+      "script": "scripts/tests/chronicle_character_profiles_smoke.gd",
+      "script_sha256": "3fd27773e4a1ad38022c76d3d7cbda6e7c2d55fcbe8aecc07df9760b4fe93c63",
+      "log": "design/music-20261104-chinese-12/verification/godot-checks/chronicle_character_profiles_smoke.log",
+      "log_sha256": "9a59b1881276b1daddcd848738e8687b2a715878e29b0d9ebbb0f54348073f89"
+    },
+    {
+      "script": "scripts/tests/chronicle_combat_feedback_events_smoke.gd",
+      "script_sha256": "1cca272161a0c367498308ee6dd6e1c37a8e34e28d1d92233531dd8ecffdd305",
+      "log": "design/music-20261104-chinese-12/verification/godot-checks/chronicle_combat_feedback_events_smoke.log",
+      "log_sha256": "d66776256fc235108ae5b4912660e07980d4ed554b05a344de51aced3697768a"
+    },
+    {
+      "script": "scripts/tests/chronicle_combat_feedback_pack_smoke.gd",
+      "script_sha256": "c4ef9b3905bdf684993186a28d2dbda9791165725fa85daeedf3117b112b847d",
+      "log": "design/music-20261104-chinese-12/verification/godot-checks/chronicle_combat_feedback_pack_smoke.log",
+      "log_sha256": "2329ef194119e71edfda6237d8d9cecd13a9f632e24d428fc3bc6e3b1dc7ad0a"
+    },
+    {
+      "script": "scripts/tests/chronicle_combat_feedback_smoke.gd",
+      "script_sha256": "907d5b6e1ee32cf8dea3d8a67d3a5a6080e8973a568257c0ed9235e5a322edf3",
+      "log": "design/music-20261104-chinese-12/verification/godot-checks/chronicle_combat_feedback_smoke.log",
+      "log_sha256": "dcb4020a553af89a5154cc7b9f27fb6f04dcc0b0d85de994ab9bd604905ee842"
+    },
+    {
+      "script": "scripts/tests/chronicle_combat_smoke.gd",
+      "script_sha256": "c632dda9a24b4010395e1fd21e3f6780edcf8fe6a710ca7157f86fbd27e4f0f3",
+      "log": "design/music-20261104-chinese-12/verification/godot-checks/chronicle_combat_smoke.log",
+      "log_sha256": "e3291f30dd4e78686d84714a6f420aeb466610c717b68f65595abfb864a2a58e"
+    },
+    {
+      "script": "scripts/tests/chronicle_context_navigation_smoke.gd",
+      "script_sha256": "1529b24bb6eba8a0a08938b15a354403317484da9b25d534da7a506807efcfa9",
+      "log": "design/music-20261104-chinese-12/verification/godot-checks/chronicle_context_navigation_smoke.log",
+      "log_sha256": "55fa5ec68b43faf4415cbd03d760769c39d2fc3745b2f8935aba869ff41d3a17"
+    },
+    {
+      "script": "scripts/tests/chronicle_danmaku_smoke.gd",
+      "script_sha256": "7ea399742d7e564781ae7a43fc1fa9cfdb533b9f470fd7dc07189cdaa64aac58",
+      "log": "design/music-20261104-chinese-12/verification/godot-checks/chronicle_danmaku_smoke.log",
+      "log_sha256": "6dc72846ae45a1e2310b426d1f106d00533611692e0b104df3a79814c0e5440f"
+    },
+    {
+      "script": "scripts/tests/chronicle_enemy_campaign_smoke.gd",
+      "script_sha256": "b0caa8a0a4c508ba092b5899d8469b15595c7e2fe1eeaceca6762fa4573166ee",
+      "log": "design/music-20261104-chinese-12/verification/godot-checks/chronicle_enemy_campaign_smoke.log",
+      "log_sha256": "bab1759e8dd921a23aa838926e3fe0befb98304ee04bf623fb48dbad86ffb677"
+    },
+    {
+      "script": "scripts/tests/chronicle_enemy_codex_smoke.gd",
+      "script_sha256": "28f554860c2088562969daed2938ecbc0b963f0af84b9792a30de08f6cb6afb1",
+      "log": "design/music-20261104-chinese-12/verification/godot-checks/chronicle_enemy_codex_smoke.log",
+      "log_sha256": "0f9439503aefe500f93e6a8b6d4c4447cbd56836600e080c25906c360e6521f9"
+    },
+    {
+      "script": "scripts/tests/chronicle_enemy_content_smoke.gd",
+      "script_sha256": "800a9cc28dddda81e48d841810860d9b1352dbbc6b2cbe94723bd98a49392270",
+      "log": "design/music-20261104-chinese-12/verification/godot-checks/chronicle_enemy_content_smoke.log",
+      "log_sha256": "4f95a56d76c5473bf30dede7145033029f6ccfb21d7fba8777f45d839d4c8c57"
+    },
+    {
+      "script": "scripts/tests/chronicle_enemy_effects_smoke.gd",
+      "script_sha256": "ac2f0263d54a94cddf561ade5d65f7b95e4dddf79d177f94c57dfaf821b88c71",
+      "log": "design/music-20261104-chinese-12/verification/godot-checks/chronicle_enemy_effects_smoke.log",
+      "log_sha256": "ac4fc3ab6186f232e44035505987fb1b34c0f99ae8fd5f6ecc94728e101787e2"
+    },
+    {
+      "script": "scripts/tests/chronicle_enemy_pack_smoke.gd",
+      "script_sha256": "6155b26d4429c5086e99bc5f87f81d4bc2d53b138037fd8ee26690a23fe3850b",
+      "log": "design/music-20261104-chinese-12/verification/godot-checks/chronicle_enemy_pack_smoke.log",
+      "log_sha256": "06ffb1ea8e46ab058aa395c4dc90c8c85df4a0b65d684b0900b45968bab8e556"
+    },
+    {
+      "script": "scripts/tests/chronicle_enemy_presentation_smoke.gd",
+      "script_sha256": "ede6f87637bb0081633f0a6c065b33fce40b3a672d3792cd1b47dc1ab5407b08",
+      "log": "design/music-20261104-chinese-12/verification/godot-checks/chronicle_enemy_presentation_smoke.log",
+      "log_sha256": "a06f4f665f2152af5e0412095922a2f8cc95ea1432ca2dba037ef0455f039c2c"
+    },
+    {
+      "script": "scripts/tests/chronicle_enemy_sessions_smoke.gd",
+      "script_sha256": "fb0015450df8aa061bc3dcf9b387454647bd8fef47f58295ed19fde20f321bcf",
+      "log": "design/music-20261104-chinese-12/verification/godot-checks/chronicle_enemy_sessions_smoke.log",
+      "log_sha256": "61289a4abaf35aa47c3b89c933882ceed3c6860b6ef08178da86a3fd9ff08002"
+    },
+    {
+      "script": "scripts/tests/chronicle_feedback_latency_smoke.gd",
+      "script_sha256": "0412522e501eb83c523c5538b73575f331142554bef9e09b3984eeca35f029d7",
+      "log": "design/music-20261104-chinese-12/verification/godot-checks/chronicle_feedback_latency_smoke.log",
+      "log_sha256": "c7bd5d1835c72d3941409bbf8288500c2ba3c1e78cad151ca0b383126ea4eb16"
+    },
+    {
+      "script": "scripts/tests/chronicle_home_menu_render_smoke.gd",
+      "script_sha256": "3123321c0c86dfe315c0fd6de0facf341b6fe57a43cff6e936b543f796db7ca4",
+      "log": "design/music-20261104-chinese-12/verification/godot-checks/chronicle_home_menu_render_smoke.log",
+      "log_sha256": "805fce2d6a166a8308d961868866429ab3031e5cb2837a65dfb765c1e7d6bfed"
+    },
+    {
+      "script": "scripts/tests/chronicle_mechanic_hud_smoke.gd",
+      "script_sha256": "f88b0d482f5c3f624c6ec7f7f6042d42d6be9cebce921a1c774dc82702c1d2c6",
+      "log": "design/music-20261104-chinese-12/verification/godot-checks/chronicle_mechanic_hud_smoke.log",
+      "log_sha256": "d81d85b36bf6cf128acf5d7ad8eb912146705bd5bc087da5a3d14ae7b3841e0f"
+    },
+    {
+      "script": "scripts/tests/chronicle_melee_reach_smoke.gd",
+      "script_sha256": "a97c417126cd5e96284120538b5b2818bab20956810c58ef533ef584c0380714",
+      "log": "design/music-20261104-chinese-12/verification/godot-checks/chronicle_melee_reach_smoke.log",
+      "log_sha256": "898a1e40caf38e4953d15d072675a31a8aefa44f8cd2b69b8b9dbd1833afc759"
+    },
+    {
+      "script": "scripts/tests/chronicle_music_pack_smoke.gd",
+      "script_sha256": "10b47bfec26b9367354d1ed5118e6de513372f0ab4c9aeaa9d59d8625e3738c3",
+      "log": "design/music-20261104-chinese-12/verification/godot-checks/chronicle_music_pack_smoke.log",
+      "log_sha256": "2c7d5d872cb0209fe7cbd8963924e00db6b435d4b5f0cec358d58587afba7437"
+    },
+    {
+      "script": "scripts/tests/chronicle_music_playback_smoke.gd",
+      "script_sha256": "30ca9ae8d74fcbe3ef623ac96d2bc07123390849e211e145df073ae34c022552",
+      "log": "design/music-20261104-chinese-12/verification/godot-checks/chronicle_music_playback_smoke.log",
+      "log_sha256": "868fb10a39631f383d4de6c51abde785263cf803802ce11cc40bcae866f5714e"
+    },
+    {
+      "script": "scripts/tests/chronicle_music_smoke.gd",
+      "script_sha256": "2d874d0e2cd1f4ca6625b7d669560cc6dda0b4bbe4d063918bbdcf0662609c59",
+      "log": "design/music-20261104-chinese-12/verification/godot-checks/chronicle_music_smoke.log",
+      "log_sha256": "5592711b39ee67fbfb093fd7d6ffbfec471f851535bec29a25c63957485d533b"
+    },
+    {
+      "script": "scripts/tests/chronicle_party_drag_smoke.gd",
+      "script_sha256": "61c2e60f7e24e30a35cb06a05f06a63c0eeaa1780534619f9269ebc71b2e0899",
+      "log": "design/music-20261104-chinese-12/verification/godot-checks/chronicle_party_drag_smoke.log",
+      "log_sha256": "9bde423bbd0a5ab2a056e7f05e78457e062b6a90464448df98bcae1b07f2af72"
+    },
+    {
+      "script": "scripts/tests/chronicle_party_summary_smoke.gd",
+      "script_sha256": "494976c46235b7cab88c9c64146cc6137dc9d98e08d169a0a017ec9fe50f306b",
+      "log": "design/music-20261104-chinese-12/verification/godot-checks/chronicle_party_summary_smoke.log",
+      "log_sha256": "9dcaf6eddfad29e8032f83f48c82b0f42a63a3f1e63795237cb5dc1e55a666f1"
+    },
+    {
+      "script": "scripts/tests/chronicle_playable_ui_smoke.gd",
+      "script_sha256": "c514e46794686d181275a83b184045337c5abf75b434d3c9e6402b23631663e3",
+      "log": "design/music-20261104-chinese-12/verification/godot-checks/chronicle_playable_ui_smoke.log",
+      "log_sha256": "f4c26efab5c3ce0921fe82262f97a43b69dee796a69c4200389b84cbe5fda6f6"
+    },
+    {
+      "script": "scripts/tests/chronicle_reflow_visual_smoke.gd",
+      "script_sha256": "e4c398b9dda097792619fa7d5a6986fa8329b070655225b5b669cc80b623ef46",
+      "log": "design/music-20261104-chinese-12/verification/godot-checks/chronicle_reflow_visual_smoke.log",
+      "log_sha256": "42a6d351ea1ff4939ab440f75ceae977601805721bf55bfec70c5e2d9aea1dd1"
+    },
+    {
+      "script": "scripts/tests/chronicle_roster_content_smoke.gd",
+      "script_sha256": "0a3b8bc6713450d2bf7be83da2d1113c202c0c9ddde71a6cbc6a6ef2518fa7bc",
+      "log": "design/music-20261104-chinese-12/verification/godot-checks/chronicle_roster_content_smoke.log",
+      "log_sha256": "526478e66deb2e434c6f961488afa5431ff25ce730e43359a3e54e6c97bac70f"
+    },
+    {
+      "script": "scripts/tests/chronicle_route_map_smoke.gd",
+      "script_sha256": "348fd0c51432934a866b5f885c257aa34d20c3e97c02a9a0cbf9e6e7a7c938af",
+      "log": "design/music-20261104-chinese-12/verification/godot-checks/chronicle_route_map_smoke.log",
+      "log_sha256": "44c497df7cd766f143ed055202c2a586b971f6f5d7a3fcfb77a24af273525d49"
+    },
+    {
+      "script": "scripts/tests/chronicle_skill_audio_smoke.gd",
+      "script_sha256": "0f4feb53eb2c12a1b0ab387c3bd84ebcbb008b885157e2c2c411ed281158a325",
+      "log": "design/music-20261104-chinese-12/verification/godot-checks/chronicle_skill_audio_smoke.log",
+      "log_sha256": "d04f108283de6c91a88ec6faa1adba8b9e03c1add19509a910e15b768bded809"
+    },
+    {
+      "script": "scripts/tests/chronicle_story_content_smoke.gd",
+      "script_sha256": "f714a153eeb8d818f7afa287baf379dd9c7a4b03d7683b5600fd8442cb21d79c",
+      "log": "design/music-20261104-chinese-12/verification/godot-checks/chronicle_story_content_smoke.log",
+      "log_sha256": "344b98a5dfec0588a9e336ce51ee74e6ae9e6a1abff1aea15279dac5e3d9dded"
+    },
+    {
+      "script": "scripts/tests/chronicle_story_history_smoke.gd",
+      "script_sha256": "b47197103e717c382a51d9a93a322ab4cf070d443b52cf6d47e05192717ec448",
+      "log": "design/music-20261104-chinese-12/verification/godot-checks/chronicle_story_history_smoke.log",
+      "log_sha256": "31a66e450e4d8eb7a29f30bcb204d630c4e61ff3a7a73289dd1175c990fdc9ff"
+    },
+    {
+      "script": "scripts/tests/chronicle_story_optional_render_smoke.gd",
+      "script_sha256": "5e20e7dd88ffcc1e5783747b5665331ab2f730f356f977bcd32c24f180935886",
+      "log": "design/music-20261104-chinese-12/verification/godot-checks/chronicle_story_optional_render_smoke.log",
+      "log_sha256": "d23f9d04ff2c7bff7562e8e72af93dc6371fa44c65e4b703e89a128ce1605b09"
+    },
+    {
+      "script": "scripts/tests/chronicle_story_pack_smoke.gd",
+      "script_sha256": "82c5152ae740ba49d7da2df50993f9829adbd79455a0da8ab8f89ad274fc1322",
+      "log": "design/music-20261104-chinese-12/verification/godot-checks/chronicle_story_pack_smoke.log",
+      "log_sha256": "edd8b0675bbc487960730c19527d321b126ad8359af062d628bbd1c26bd91083"
+    },
+    {
+      "script": "scripts/tests/chronicle_story_progress_smoke.gd",
+      "script_sha256": "ecb8c0ceb627522afd290c644ef4e645e832c234560b4487e0bac5340fbd7845",
+      "log": "design/music-20261104-chinese-12/verification/godot-checks/chronicle_story_progress_smoke.log",
+      "log_sha256": "b0a26d2d929e1dbc425e071237046cafd1199e1b8dd1b302c1168ef739781be7"
+    },
+    {
+      "script": "scripts/tests/chronicle_story_replay_smoke.gd",
+      "script_sha256": "6d60d15249c212a8c8712232ac55db60e20c20988dd9e3f94059304dc81e7c90",
+      "log": "design/music-20261104-chinese-12/verification/godot-checks/chronicle_story_replay_smoke.log",
+      "log_sha256": "bc44636029b1161f9d48e9e2c8b8bb8e9123bbb04459d23a1ae25b55b352f4ea"
+    },
+    {
+      "script": "scripts/tests/chronicle_story_ui_smoke.gd",
+      "script_sha256": "5228440441e7797c82c33203b1957a073bae09cff6fd553980db3640f6b28153",
+      "log": "design/music-20261104-chinese-12/verification/godot-checks/chronicle_story_ui_smoke.log",
+      "log_sha256": "a294cd3807654ba5bee75451702a45d852135807580b425a5c2a94857256646e"
+    },
+    {
+      "script": "scripts/tests/jia_combat_art_smoke.gd",
+      "script_sha256": "c1f664606c7683cd834b52e3b35d412462294a5a3f89f7283adcbbb2385f74d7",
+      "log": "design/music-20261104-chinese-12/verification/godot-checks/jia_combat_art_smoke.log",
+      "log_sha256": "49475f313cab4245c29914f71c845030d77a59500b6739bf007b5e474f6fdeb2"
+    }
+  ]
+}

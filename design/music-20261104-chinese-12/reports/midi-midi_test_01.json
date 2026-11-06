@@ -1,0 +1,387 @@
+{
+  "schema_version": 1,
+  "cue_id": "midi_test_01",
+  "title": "The Beautiful People",
+  "status": "PASS",
+  "source_midi": "/home/weathour/programs/desktop-projects/My-game/design/music-20261103-midi-test/inputs/midi_test_01.mid",
+  "source_sha256": "3bf77b5352dd8020628d9a7f2c5cb7a2ea53b015dc610b3ae14c9b18234e5cc8",
+  "D1_midi": "/home/weathour/programs/desktop-projects/My-game/design/music-20261104-chinese-12/arrangements/midi_test_01/D1.mid",
+  "D2_midi": "/home/weathour/programs/desktop-projects/My-game/design/music-20261104-chinese-12/arrangements/midi_test_01/D2.mid",
+  "checks": {
+    "frozen_source_sha_unchanged": true,
+    "source_sha_matches_existing_report": true,
+    "source_note_count_matches_existing_report": true,
+    "D1_byte_identical_to_source": true,
+    "D1_all_messages_exact": true,
+    "D1_note_pairs_exact": true,
+    "D2_all_nonpitch_message_fields_exact": true,
+    "D2_note_pairs_match_plan": true,
+    "all_note_counts_exact": true,
+    "tempo_and_meter_exact": true,
+    "duration_exact": true,
+    "drum_event_pairs_exact": true,
+    "D2_has_bounded_pitch_changes": true,
+    "D1_D2_same_timbre_assignments": true,
+    "erhu_has_no_overlapping_keydowns": true
+  },
+  "mapping_preventions": {
+    "new_semitone_against_retained_accompaniment_prevented": 35
+  },
+  "statistics": {
+    "event_count": 3564,
+    "changed_note_count": 100,
+    "changed_note_fraction_all_events": 0.028058361391694726,
+    "changed_note_fraction_pitched_events": 0.05305039787798409,
+    "mapping_delta_counts": {
+      "0": 3464,
+      "-1": 100
+    },
+    "mapping_reason_counts": {
+      "protected_original_riff_bass_harmony_or_drums": 3365,
+      "already_in_target_collection": 81,
+      "nearest_target_backbone_pitch": 100,
+      "target_collision_register_contour_or_fifth_skeleton_exempt": 18
+    },
+    "per_instrument_family": {
+      "bass": {
+        "note_count": 675,
+        "changed_note_count": 0,
+        "source_pitch_range": [
+          23,
+          43
+        ],
+        "output_pitch_range": [
+          23,
+          43
+        ],
+        "source_pitch_classes": [
+          0,
+          1,
+          2,
+          3,
+          5,
+          7,
+          8,
+          11
+        ],
+        "output_pitch_classes": [
+          0,
+          1,
+          2,
+          3,
+          5,
+          7,
+          8,
+          11
+        ],
+        "changed_duration_seconds": 0
+      },
+      "drums": {
+        "note_count": 1679,
+        "changed_note_count": 0,
+        "source_pitch_range": [
+          35,
+          57
+        ],
+        "output_pitch_range": [
+          35,
+          57
+        ],
+        "source_pitch_classes": [
+          0,
+          1,
+          2,
+          3,
+          5,
+          7,
+          9,
+          10,
+          11
+        ],
+        "output_pitch_classes": [
+          0,
+          1,
+          2,
+          3,
+          5,
+          7,
+          9,
+          10,
+          11
+        ],
+        "changed_duration_seconds": 0
+      },
+      "electric_guitar": {
+        "note_count": 1010,
+        "changed_note_count": 0,
+        "source_pitch_range": [
+          26,
+          74
+        ],
+        "output_pitch_range": [
+          26,
+          74
+        ],
+        "source_pitch_classes": [
+          0,
+          1,
+          2,
+          3,
+          5,
+          6,
+          7,
+          8,
+          9,
+          11
+        ],
+        "output_pitch_classes": [
+          0,
+          1,
+          2,
+          3,
+          5,
+          6,
+          7,
+          8,
+          9,
+          11
+        ],
+        "changed_duration_seconds": 0
+      },
+      "pad": {
+        "note_count": 1,
+        "changed_note_count": 0,
+        "source_pitch_range": [
+          50,
+          50
+        ],
+        "output_pitch_range": [
+          50,
+          50
+        ],
+        "source_pitch_classes": [
+          2
+        ],
+        "output_pitch_classes": [
+          2
+        ],
+        "changed_duration_seconds": 0
+      },
+      "pipa": {
+        "note_count": 1,
+        "changed_note_count": 0,
+        "source_pitch_range": [
+          61,
+          61
+        ],
+        "output_pitch_range": [
+          61,
+          61
+        ],
+        "source_pitch_classes": [
+          1
+        ],
+        "output_pitch_classes": [
+          1
+        ],
+        "changed_duration_seconds": 0
+      },
+      "ruan": {
+        "note_count": 198,
+        "changed_note_count": 100,
+        "source_pitch_range": [
+          47,
+          56
+        ],
+        "output_pitch_range": [
+          47,
+          56
+        ],
+        "source_pitch_classes": [
+          0,
+          2,
+          3,
+          5,
+          8,
+          11
+        ],
+        "output_pitch_classes": [
+          0,
+          2,
+          5,
+          8,
+          11
+        ],
+        "changed_duration_seconds": 27.637141691666606
+      }
+    },
+    "erhu_note_count": 0,
+    "erhu_no_overlap": true,
+    "d1_d2_assignment_identical": true,
+    "drum_pitch_and_channel_unchanged": true,
+    "no_new_semitone_conflicts_against_retained_accompaniment": true,
+    "changed_notes_with_preexisting_semitone_conflicts": 18,
+    "changed_source_ids": [
+      "t02-c00-on000247-s34076-e34399-p51",
+      "t02-c00-on000255-s34549-e34872-p51",
+      "t02-c00-on000267-s35506-e35829-p51",
+      "t02-c00-on000275-s35991-e36313-p51",
+      "t02-c00-on000299-s37939-e38251-p51",
+      "t02-c00-on000307-s38412-e38723-p51",
+      "t02-c00-on000319-s39358-e39681-p51",
+      "t02-c00-on000327-s39842-e40165-p51",
+      "t02-c00-on000351-s41768-e42079-p51",
+      "t02-c00-on000359-s42240-e42563-p51",
+      "t02-c00-on000371-s43198-e43520-p51",
+      "t02-c00-on000379-s43705-e44016-p51",
+      "t02-c00-on000403-s45596-e45919-p51",
+      "t02-c00-on000411-s46080-e46392-p51",
+      "t02-c00-on000423-s47037-e47360-p51",
+      "t02-c00-on000431-s47522-e47845-p51",
+      "t02-c00-on001255-s141594-e141905-p51",
+      "t02-c00-on001263-s142066-e142389-p51",
+      "t02-c00-on001275-s143024-e143346-p51",
+      "t02-c00-on001283-s143508-e143819-p51",
+      "t02-c00-on001307-s145422-e145733-p51",
+      "t02-c00-on001315-s145895-e146218-p51",
+      "t02-c00-on001327-s146863-e147186-p51",
+      "t02-c00-on001335-s147348-e147671-p51",
+      "t02-c00-on001359-s149262-e149585-p51",
+      "t02-c00-on001367-s149746-e150069-p51",
+      "t02-c00-on001379-s150703-e151026-p51",
+      "t02-c00-on001387-s151188-e151511-p51",
+      "t02-c00-on001411-s153113-e153425-p51",
+      "t02-c00-on001419-s153586-e153909-p51",
+      "t02-c00-on001431-s154555-e154866-p51",
+      "t02-c00-on001439-s155028-e155350-p51",
+      "t02-c00-on001521-s172301-e172624-p51",
+      "t02-c00-on001529-s172786-e173097-p51",
+      "t02-c00-on001541-s173743-e174054-p51",
+      "t02-c00-on001549-s174216-e174538-p51",
+      "t02-c00-on001573-s176141-e176464-p51",
+      "t02-c00-on001581-s176626-e176948-p51",
+      "t02-c00-on001593-s177583-e177906-p51",
+      "t02-c00-on001601-s178067-e178390-p51",
+      "t02-c00-on001625-s179993-e180304-p51",
+      "t02-c00-on001633-s180465-e180788-p51",
+      "t02-c00-on001645-s181423-e181745-p51",
+      "t02-c00-on001653-s181907-e182218-p51",
+      "t02-c00-on001677-s183821-e184144-p51",
+      "t02-c00-on001685-s184305-e184628-p51",
+      "t02-c00-on001697-s185274-e185585-p51",
+      "t02-c00-on001705-s185747-e186070-p51",
+      "t02-c00-on001782-s203022-e203334-p51",
+      "t02-c00-on001790-s203495-e203818-p51",
+      "t02-c00-on001802-s204464-e204775-p51",
+      "t02-c00-on001810-s204937-e205260-p51",
+      "t02-c00-on001834-s206863-e207186-p51",
+      "t02-c00-on001842-s207347-e207658-p51",
+      "t02-c00-on001854-s208304-e208616-p51",
+      "t02-c00-on001862-s208777-e209100-p51",
+      "t02-c00-on001886-s210703-e211026-p51",
+      "t02-c00-on001894-s211187-e211510-p51",
+      "t02-c00-on001906-s212145-e212456-p51",
+      "t02-c00-on001914-s212617-e212940-p51",
+      "t02-c00-on001938-s214543-e214855-p51",
+      "t02-c00-on001946-s215016-e215339-p51",
+      "t02-c00-on001958-s215985-e216296-p51",
+      "t02-c00-on001966-s216458-e216792-p51",
+      "t02-c00-on001990-s218395-e218707-p51",
+      "t02-c00-on001998-s218868-e219191-p51",
+      "t02-c00-on002010-s219837-e220148-p51",
+      "t02-c00-on002018-s220310-e220633-p51",
+      "t02-c00-on002042-s222224-e222547-p51",
+      "t02-c00-on002050-s222708-e223031-p51",
+      "t02-c00-on002062-s223666-e223989-p51",
+      "t02-c00-on002070-s224150-e224473-p51",
+      "t02-c00-on002078-s224634-e224946-p51",
+      "t02-c00-on002098-s226076-e226387-p51",
+      "t02-c00-on002106-s226549-e226872-p51",
+      "t02-c00-on002118-s227506-e227829-p51",
+      "t02-c00-on002126-s227990-e228313-p51",
+      "t02-c00-on002150-s229905-e230228-p51",
+      "t02-c00-on002158-s230389-e230700-p51",
+      "t02-c00-on002170-s231346-e231669-p51",
+      "t02-c00-on002178-s231831-e232142-p51",
+      "t02-c00-on002186-s232303-e232626-p51",
+      "t02-c00-on002207-s233745-e234068-p51",
+      "t02-c00-on002215-s234229-e234552-p51",
+      "t02-c00-on002228-s235198-e235510-p51",
+      "t02-c00-on002237-s235671-e235982-p51",
+      "t02-c00-on002263-s237585-e237897-p51",
+      "t02-c00-on002271-s238058-e238381-p51",
+      "t02-c00-on002284-s239027-e239338-p51",
+      "t02-c00-on002293-s239500-e239823-p51",
+      "t02-c00-on002301-s239984-e240307-p51",
+      "t02-c00-on002323-s241437-e241749-p51",
+      "t02-c00-on002331-s241910-e242233-p51",
+      "t02-c00-on002344-s242879-e243190-p51",
+      "t02-c00-on002353-s243352-e243663-p51",
+      "t02-c00-on002379-s245255-e245589-p51",
+      "t02-c00-on002387-s245750-e246073-p51",
+      "t02-c00-on002400-s246719-e247031-p51",
+      "t02-c00-on002409-s247192-e247503-p51",
+      "t02-c00-on002417-s247665-e247976-p51"
+    ],
+    "adjacent_stream_direction_reversals": [],
+    "adjacent_stream_collapsed_steps": [
+      [
+        "t02-c00-on002078-s224634-e224946-p51",
+        "t02-c00-on002082-s224946-e225107-p50",
+        -1
+      ],
+      [
+        "t02-c00-on002186-s232303-e232626-p51",
+        "t02-c00-on002190-s232626-e232788-p50",
+        -1
+      ],
+      [
+        "t02-c00-on002301-s239984-e240307-p51",
+        "t02-c00-on002305-s240307-e240469-p50",
+        -1
+      ],
+      [
+        "t02-c00-on002417-s247665-e247976-p51",
+        "t02-c00-on002421-s247976-e248138-p50",
+        -1
+      ]
+    ],
+    "source_repeated_pitch_with_multiple_outputs": [],
+    "stream_warning": "Adjacency in a polyphonic plucked event stream is diagnostic, not verified melodic voice leading."
+  },
+  "sections": [
+    {
+      "section_id": "s00",
+      "start_s": 0.0,
+      "end_s": 218.02305485833412,
+      "pitch_class_numbers": [
+        0,
+        2,
+        5,
+        7,
+        9
+      ],
+      "pitch_classes": [
+        "C",
+        "D",
+        "F",
+        "G",
+        "A"
+      ],
+      "set_anchor_pc": 5,
+      "target_center": null,
+      "target_center_pc": null,
+      "target_mode": null,
+      "selection_rule": "upper_color_only_collection_original_chromatic_riff_exempt",
+      "modal_claim": "arrangement_target_collection_only; original tonic/mode not inferred"
+    }
+  ],
+  "acceptance_limit": "Structural/event audit only. These candidates require audio rendering and listening; target collection scores are not music-quality scores.",
+  "reuse_provenance": {
+    "original_report": "/home/weathour/programs/desktop-projects/My-game/design/music-20261104-chinese-trial/reports/midi-midi_test_01.json",
+    "original_report_sha256": "cbea0002e62d8dea60964fd1ac0ef5722fa7e4a685b460303355f86a35f7219a",
+    "source_epoch": "first_three_approved_trial",
+    "musical_and_audio_inputs_unchanged": true,
+    "full_outputs_copied_without_reencoding": false
+  }
+}

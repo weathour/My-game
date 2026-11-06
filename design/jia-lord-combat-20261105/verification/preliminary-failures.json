@@ -1,0 +1,36 @@
+{
+  "status": "all_local_gaps_resolved_before_final_freeze",
+  "cases": [
+    {
+      "evidence": "progression-preimport.log",
+      "classification": "new asset import prerequisite",
+      "finding": "Standing PNG existed but had no Godot import; six late UI checks failed with ResourceLoader error.",
+      "resolution": "Runtime owner completed unified import; unchanged progression assertions then passed374."
+    },
+    {
+      "evidence": "art-check-initial.log",
+      "classification": "incorrect test assumption about editable source color depth",
+      "finding": "actor.aseprite uses valid indexed8-bit palette; initial check incorrectly required32-bit.",
+      "resolution": "Accept valid indexed8/RGBA32 editable source headers; exported PNG RGBA, binary alpha,48 unique frames and palette limits remain strict."
+    },
+    {
+      "evidence": "native-first-cast-overlay.log",
+      "classification": "preview fixture isolation",
+      "finding": "Successful preceding casts left presentation lifetimes frozen over art-only preview because no simulation ticks occurred.",
+      "resolution": "Only new native fixture clears prior transients before preview; clean native346PASS with144 pose renders, no runtime edit."
+    },
+    {
+      "evidence": "affected-regression/chronicle_battle_scale_smoke.log",
+      "classification": "legacy test interface assumption and false PASS report",
+      "finding": "New available common-Jia body_profile method was mistaken for a manifest marker; fourNil-to-Dictionary SCRIPT ERRORs occurred despite PASS556/exit0.",
+      "resolution": "Root approved only manifest-type gate in measure(); original alpha references and tolerances retained. Repaired scale564PASS/exit0/strict validator empty."
+    }
+  ],
+  "current_accepted_targeted_results": "targeted-result.json",
+  "current_accepted_affected_regressions": "affected-regression/final-result.json",
+  "pending": [
+    "Luna fresh-export after benchmark",
+    "new complete official60 smoke check",
+    "extra new-appearance and bounds validation against same official exportedPCK"
+  ]
+}

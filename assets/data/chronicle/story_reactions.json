@@ -1489,5 +1489,33 @@
         ]
       }
     ]
+  },
+  "RX_S14_LORD_01": {
+    "id": "RX_S14_LORD_01",
+    "event_id": "S14",
+    "after_line": "s14_lord_33",
+    "conditions": {
+      "owned_all": [
+        "F11"
+      ],
+      "alive_all": [
+        "F11"
+      ]
+    },
+    "priority": 0,
+    "lines": [
+      {
+        "id": "rx_s14_lord_01_01",
+        "speaker": "F11",
+        "text": "不去。酒你自己喝，我还要回房。",
+        "actors": [
+          {
+            "id": "F11",
+            "slot": "right",
+            "expression": "neutral"
+          }
+        ]
+      }
+    ]
   }
 }

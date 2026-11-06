@@ -1,0 +1,2066 @@
+{
+  "version": 1,
+  "status": "pass_with_reviewed_non_clipping_edge_contact",
+  "renderer": "Godot4.6.2 native gl_compatibility OpenGL3.3 NVIDIA RTX5080",
+  "command": "env DISPLAY=:0 XDG_DATA_HOME=/tmp/mygame-roster-art-qa/data XDG_CONFIG_HOME=/tmp/mygame-roster-art-qa/config XDG_CACHE_HOME=/tmp/mygame-roster-art-qa/cache /home/weathour/.local/bin/godot-4.6.2 --rendering-method gl_compatibility --path . --script scripts/tests/chronicle_roster_art_preview.gd",
+  "postcheck": "python3 design/skill-presentation-20261105/art-preview/audit_captures.py",
+  "captures": 78,
+  "reviewed_characters": 38,
+  "inputs": [
+    {
+      "path": "assets/data/chronicle/skill_presentation_profiles.json",
+      "sha256": "c5dfbf05b35d5440a333cce5709781afe11cec0a17de7c286db25c85358a8938"
+    },
+    {
+      "path": "assets/enemies/baimen/B15_human/attack.png",
+      "sha256": "2f4e12ac66dc9c2b87744f2b45e67fced2089b7cb2e80d3c923646114e3b76b8"
+    },
+    {
+      "path": "assets/enemies/baimen/B15_human/death.png",
+      "sha256": "68159f4b56937801ecdab9e33d6b3b6dc3961e5518a1df50a6fb04302acb6633"
+    },
+    {
+      "path": "assets/enemies/baimen/B15_human/hit.png",
+      "sha256": "e39f3a7bc3c8c357e1e21f9bae190621807dc978c98cffca84d0ab2744e51f13"
+    },
+    {
+      "path": "assets/enemies/baimen/B15_human/idle.png",
+      "sha256": "860da3bcc3fc13272c36fb4ac01862e837bbc4c05830a729cebd7cb6ae2c1c64"
+    },
+    {
+      "path": "assets/enemies/baimen/B15_human/manifest.json",
+      "sha256": "b77e8d552e7472d48c1300a51eff133c0e2acc2a352a616fbd71fc86d6bd2439"
+    },
+    {
+      "path": "assets/enemies/baimen/B15_human/move.png",
+      "sha256": "99373f23d9d8347cf4d10307ff8c99710b1c1111d58a419129e00af114d72432"
+    },
+    {
+      "path": "assets/enemies/baimen/B15_human/portrait.png",
+      "sha256": "5976e9779f8189a918cc87fc542e3161c3825dd6ca58f3e36df846d4b84752db"
+    },
+    {
+      "path": "assets/enemies/baimen/B15_human/special.png",
+      "sha256": "79e450a7f93a278355db73aba0dfe75ff29090a0864461aa8c446043c587f028"
+    },
+    {
+      "path": "assets/enemies/baimen/B16_human/attack.png",
+      "sha256": "0f62f7cf31f90c1d4dfa3c164a08bce6c20d98219610fef6cf580a0fc2104d5e"
+    },
+    {
+      "path": "assets/enemies/baimen/B16_human/death.png",
+      "sha256": "3680e8546a43bb6cdd17d6f98f7c9343fa6d3cf0c0c432eb3283fb273df87ae3"
+    },
+    {
+      "path": "assets/enemies/baimen/B16_human/hit.png",
+      "sha256": "d648b2d3b0653a35e0943a4b6fb35c0d2763a4d21c5f06ee5ae2819f818a0b8b"
+    },
+    {
+      "path": "assets/enemies/baimen/B16_human/idle.png",
+      "sha256": "9c70e129a7acbecc2082d854bc4fe3e744b84686f7c0d52af3ff3a2be687afb1"
+    },
+    {
+      "path": "assets/enemies/baimen/B16_human/manifest.json",
+      "sha256": "cf1f99b32e88ff8a90d55b66d94e0b56e18bd95fb0328dd3dab3412814ad8dd0"
+    },
+    {
+      "path": "assets/enemies/baimen/B16_human/move.png",
+      "sha256": "255444b363a67f402215a96efbdaaf35d50a932a6653f0d17b17f827822ce30f"
+    },
+    {
+      "path": "assets/enemies/baimen/B16_human/portrait.png",
+      "sha256": "f693932d2a512bd07d91d4106997dfa76996d29933db84b65150e0e7d00324b1"
+    },
+    {
+      "path": "assets/enemies/baimen/B16_human/special.png",
+      "sha256": "07d814d57f952201bd9d5f057b703f30ec3bdc90dc991e4678e9aeea894084e0"
+    },
+    {
+      "path": "assets/enemies/baimen/B17_human/attack.png",
+      "sha256": "22c731c4cb33924b47f77e6e8ab6367839f724da3ceeba85b2db16eb524f1554"
+    },
+    {
+      "path": "assets/enemies/baimen/B17_human/death.png",
+      "sha256": "87b634dd26ff050bc3b7c64db16f2e4cab46be4694927fda9b800299208cf20e"
+    },
+    {
+      "path": "assets/enemies/baimen/B17_human/hit.png",
+      "sha256": "38dafcaf74732960127cbe4a30f441c0a8be2cdb84abda158e9dd64a9863826a"
+    },
+    {
+      "path": "assets/enemies/baimen/B17_human/idle.png",
+      "sha256": "dee1f2eb59060406fc7782df802436442b8acaec2651ddf23df5ed47c99771c2"
+    },
+    {
+      "path": "assets/enemies/baimen/B17_human/manifest.json",
+      "sha256": "3e5c47f9eec34c2a0cc244cd6d5080d56e84f31ae112e3655b28c5b99bf14c05"
+    },
+    {
+      "path": "assets/enemies/baimen/B17_human/move.png",
+      "sha256": "4679b06a391f0fef92b3edfa082a9af927b10aa2c271cc9e2ed448edfaee0c3e"
+    },
+    {
+      "path": "assets/enemies/baimen/B17_human/portrait.png",
+      "sha256": "2155e938db40e9810b312f2c48bcac52d64dc88ce8d95bc2592a2763a69fb14e"
+    },
+    {
+      "path": "assets/enemies/baimen/B17_human/special.png",
+      "sha256": "3078958ffc26ff01acdaea8245e75d9042b7966d2893e2dbc93e9285339c20c0"
+    },
+    {
+      "path": "assets/enemies/baimen/B18_human/attack.png",
+      "sha256": "7004f15d7bdd0aee03883cacff2d38fab1033c63caedcb9815ee3a7ea76ac670"
+    },
+    {
+      "path": "assets/enemies/baimen/B18_human/death.png",
+      "sha256": "c00a217b5bf658eb413c7733e1ae23bcc506600a39ee443c979391b721f66c9a"
+    },
+    {
+      "path": "assets/enemies/baimen/B18_human/hit.png",
+      "sha256": "1e81dc9da98bfb85a8fb937dc57952a78b2aeb55fce2a55006a60ebf1945f0aa"
+    },
+    {
+      "path": "assets/enemies/baimen/B18_human/idle.png",
+      "sha256": "0839558e712d8ab73421e21fc773b548752f5064e8cf5aec83cea765f88b836d"
+    },
+    {
+      "path": "assets/enemies/baimen/B18_human/manifest.json",
+      "sha256": "d786d305551137bad4b5f861750a6882f53c7db4fbc70e1bf3fbc720bd750c6e"
+    },
+    {
+      "path": "assets/enemies/baimen/B18_human/move.png",
+      "sha256": "ae6ec6426a35aeae7bb5cfcfb722a37f77ae431fdc6feccb11f3e11b69e234a8"
+    },
+    {
+      "path": "assets/enemies/baimen/B18_human/portrait.png",
+      "sha256": "69b379a6285e4feceadead35c8014e005e9847f116310f27075c4d764f12f4ce"
+    },
+    {
+      "path": "assets/enemies/baimen/B18_human/special.png",
+      "sha256": "1bec8a1c37eded822cdcabe526254a2e5bc1eb950d944656ae0964fc4f30065f"
+    },
+    {
+      "path": "assets/enemies/baimen/M01/friendly.tscn",
+      "sha256": "03d222a583e0efda6d7880b3f25d73d83fd14a17e2edc820297f18d416ba7f67"
+    },
+    {
+      "path": "assets/enemies/baimen/M02/friendly.tscn",
+      "sha256": "aa6db2c636cb12d198bc520f08cd06c221a75df6c3f5e8b9e1e059e848ffed8b"
+    },
+    {
+      "path": "assets/enemies/baimen/M03/friendly.tscn",
+      "sha256": "f6e8ec87ce8feaa0ed7d8863ca46bff01802baf935eac9bbe8460eaa15cb86db"
+    },
+    {
+      "path": "assets/enemies/baimen/M03_human/attack.png",
+      "sha256": "326f121139c2b305eaf43d0bb9705837ecb07005770337e4693e4344aea92925"
+    },
+    {
+      "path": "assets/enemies/baimen/M03_human/death.png",
+      "sha256": "08c244589e8a7640abd579fb876fdd0f7bd759d155fec80539bb25f3f2e2fa3e"
+    },
+    {
+      "path": "assets/enemies/baimen/M03_human/hit.png",
+      "sha256": "4525dc30d08c512605201a9e755463c49cb10a1bd33f32822ef4d80738cc6c6e"
+    },
+    {
+      "path": "assets/enemies/baimen/M03_human/idle.png",
+      "sha256": "6dd9cea5aaabd28eeb128766e15458ebafb8e20877af6d288f721ecd6634f742"
+    },
+    {
+      "path": "assets/enemies/baimen/M03_human/manifest.json",
+      "sha256": "c2fdf71819a9658c4f88c46ddfb4a9661f9f7d3ac8f561825505de0385e27555"
+    },
+    {
+      "path": "assets/enemies/baimen/M03_human/move.png",
+      "sha256": "000eb16e2a1f2bb72acce11fef6ef82b0e66504154b6e179cd6041ed58fbbfc7"
+    },
+    {
+      "path": "assets/enemies/baimen/M03_human/portrait.png",
+      "sha256": "6c8adbe8bbb55a2f1be3c389bc620d76362abd51086d886c95cb7cde11d2bff7"
+    },
+    {
+      "path": "assets/enemies/baimen/M03_human/special.png",
+      "sha256": "2a417ff22e77c09321e28648219391638738a7cd6a542ba9807c4c75e28495fe"
+    },
+    {
+      "path": "assets/enemies/baimen/M04/friendly.tscn",
+      "sha256": "1accb221060d8aa70a90f6db31c736c3a24b18255a6da81be34e2885d3f928f4"
+    },
+    {
+      "path": "assets/enemies/baimen/M04_human/attack.png",
+      "sha256": "e34b530472fff45ec283d0e7518d4c873473c7a2496a50cc80d2b6149d7d2b51"
+    },
+    {
+      "path": "assets/enemies/baimen/M04_human/death.png",
+      "sha256": "a7e1934377b6dfe332dba4f80746b39840789b70d2ce803a0a1afa8d2d4889a9"
+    },
+    {
+      "path": "assets/enemies/baimen/M04_human/hit.png",
+      "sha256": "eb15e4e8e7fd33bcc3c746a90c88370d27af4b1e4d746b49c6a295f8d5374dd1"
+    },
+    {
+      "path": "assets/enemies/baimen/M04_human/idle.png",
+      "sha256": "a3f5fa47c33fa2f3cd4bc83631d9cc3e4e3524534faf97f37ee3185d797a1ab8"
+    },
+    {
+      "path": "assets/enemies/baimen/M04_human/manifest.json",
+      "sha256": "76b1b8abaa10da696247f6ce39d75eabe11c563c9b1b42d43fade63f154568ea"
+    },
+    {
+      "path": "assets/enemies/baimen/M04_human/move.png",
+      "sha256": "03e984186f8e3c5a6d88e6799df24ac541d0ac1115abb92bb414e5ff11c2efc4"
+    },
+    {
+      "path": "assets/enemies/baimen/M04_human/portrait.png",
+      "sha256": "1bb1c509ac0b0ebb144829afd68092c858a12b6b63b231d91725f3adf263f7a5"
+    },
+    {
+      "path": "assets/enemies/baimen/M04_human/special.png",
+      "sha256": "be48c91ea2ff5ae7d31f7621dc5666ca3adb8f637c987bc7039f63a3f5ef294b"
+    },
+    {
+      "path": "assets/enemies/baimen/M05/friendly.tscn",
+      "sha256": "94acc381788c35c2ec326d2d8cb0032868d2e21716776fb6ca3ef3af18f98c61"
+    },
+    {
+      "path": "assets/enemies/baimen/M06/friendly.tscn",
+      "sha256": "a4655d315916ba5f7f2b1977fb37e5398518662d445dba3ecd894ba726fc24b5"
+    },
+    {
+      "path": "assets/enemies/baimen/human_friendly_visual.gd",
+      "sha256": "906d2b225942fac20ffaa294c7e9e3d0c6b010896ebd70366ffdd53846f0e919"
+    },
+    {
+      "path": "assets/players/baimen-women/F02/F02.tscn",
+      "sha256": "9c2602ababcb40add8b6c214bffd33ec6a289ce7b2df678715f437a0e5119d8e"
+    },
+    {
+      "path": "assets/players/baimen-women/F02/attack.png",
+      "sha256": "9ec00f4680fdb7a0e55c2edac2c95258c8e6cbfba66c49bfe9d348b3300a5969"
+    },
+    {
+      "path": "assets/players/baimen-women/F02/cast.png",
+      "sha256": "8362ce5038fa1b614806c12339c55a1583f92bf21d430d183bb51a1c9e510bee"
+    },
+    {
+      "path": "assets/players/baimen-women/F02/head.png",
+      "sha256": "7114c3ff0d19703151ec443d33134a0c4b9cdfbab4b567e6b468eafb97cb57ec"
+    },
+    {
+      "path": "assets/players/baimen-women/F02/idle.png",
+      "sha256": "29fb8bed848a9b3f4cf89e24228a4e6ac3eb0860365040260b09197e5b28d0ac"
+    },
+    {
+      "path": "assets/players/baimen-women/F02/run.png",
+      "sha256": "015a1f8c4f7865cbd79c75665dd951795fc57f5850b0f044a19bc20459a7e1b9"
+    },
+    {
+      "path": "assets/players/baimen-women/F03/F03.tscn",
+      "sha256": "7467f3be82f80aabd9dd7d5f74d5e3a4b62c42ee3de1e6388a6b4aa53afe4c84"
+    },
+    {
+      "path": "assets/players/baimen-women/F03/attack.png",
+      "sha256": "e58e3575895a8362123bc4167c49683318776b6a02cdfa107dbd29cbfb10c490"
+    },
+    {
+      "path": "assets/players/baimen-women/F03/cast.png",
+      "sha256": "6702f91143dff96747758f471456f75c0d44534bdfbf39fbc131b50b9fbdbd69"
+    },
+    {
+      "path": "assets/players/baimen-women/F03/head.png",
+      "sha256": "8e8d8f78051da283f1715c20bcdd5f3a9fdf3c57251651aec466d9d12ce9b580"
+    },
+    {
+      "path": "assets/players/baimen-women/F03/idle.png",
+      "sha256": "21a7eee3c6841fabecee9608baa6e91c962642ce3f3cb2559904efa444c875df"
+    },
+    {
+      "path": "assets/players/baimen-women/F03/run.png",
+      "sha256": "ee4fca0b1cf095ef3edb768527f14d2ce8214828a6f79d0ae41d93c7dde14f0a"
+    },
+    {
+      "path": "assets/players/baimen-women/F04/F04.tscn",
+      "sha256": "14bbcdff2de9b60d5f2655fb2d232cfecc9ba219237790b7109ffeaebc2d1285"
+    },
+    {
+      "path": "assets/players/baimen-women/F04/attack.png",
+      "sha256": "1c2cfd8f584769b29d68ef44c6c661df3c734af55201e6bceac28d5ba21afdf4"
+    },
+    {
+      "path": "assets/players/baimen-women/F04/cast.png",
+      "sha256": "5f11735a7f79b18a2c094923514837fb9cdbbe9e079fa4048252be631c98acaa"
+    },
+    {
+      "path": "assets/players/baimen-women/F04/head.png",
+      "sha256": "9e5d8f34603293bd34dc89973884d6e41a53e87091169ea126b214dd1ec112a9"
+    },
+    {
+      "path": "assets/players/baimen-women/F04/idle.png",
+      "sha256": "491b170c3d308ead379f7129873e035b0833d3f7a51e60a4730e55de3ff66736"
+    },
+    {
+      "path": "assets/players/baimen-women/F04/run.png",
+      "sha256": "0ad6a0e014a9414661211c118326351e6c62e8be270aea50e4875100b9808208"
+    },
+    {
+      "path": "assets/players/baimen-women/F05/F05.tscn",
+      "sha256": "59a677cbda9e1b4c35e7dec4afd5af310655db25d739390fb8f3864eea743866"
+    },
+    {
+      "path": "assets/players/baimen-women/F05/attack.png",
+      "sha256": "fd3b36b9bd3160f9eca17c26f7ab72b62d93e7e3d5ae97720af45c39ac8d043e"
+    },
+    {
+      "path": "assets/players/baimen-women/F05/cast.png",
+      "sha256": "106b95f687c642ba60426442e1e9079165b7775f591c84cdef15e02066024177"
+    },
+    {
+      "path": "assets/players/baimen-women/F05/head.png",
+      "sha256": "93d8e2b563394340c2de058ff62b85c5aea9a8898158431957b8231b5e00c9bb"
+    },
+    {
+      "path": "assets/players/baimen-women/F05/idle.png",
+      "sha256": "5fa3fbdabc172bbadf12e507d57a8d061958f80ad43c543fb30945fb241e5c96"
+    },
+    {
+      "path": "assets/players/baimen-women/F05/run.png",
+      "sha256": "bcda51e87300c69af945928f6ca5b42172237242a52259403e4753899cb805f1"
+    },
+    {
+      "path": "assets/players/baimen-women/F06/F06.tscn",
+      "sha256": "432953746ec97992d1fe98af919ce31b2774f368f24855221153364aab2ccd71"
+    },
+    {
+      "path": "assets/players/baimen-women/F06/attack.png",
+      "sha256": "9ce076497fa2c7a756d30832bd8924481f3a84c18ff493b99f503c3c55c6a17e"
+    },
+    {
+      "path": "assets/players/baimen-women/F06/cast.png",
+      "sha256": "31c4542bb1f20baacf54422e6ea2d2fb928cc1288be1a3d56987b5762e577efb"
+    },
+    {
+      "path": "assets/players/baimen-women/F06/head.png",
+      "sha256": "b4964dce2ee29776054cc95c888de91b9fd05fe24582d9e0aff4dab1e468a315"
+    },
+    {
+      "path": "assets/players/baimen-women/F06/idle.png",
+      "sha256": "5c1e93655dad2c6a5ce0e4c5468f848aace34821218329ca8fb0f815d1a7a31f"
+    },
+    {
+      "path": "assets/players/baimen-women/F06/run.png",
+      "sha256": "4601a7e46d0f43dc89ac7a8704eafb438fd14f92fb6db5d154894d45ec17a239"
+    },
+    {
+      "path": "assets/players/baimen-women/F07/F07.tscn",
+      "sha256": "299b86a14dd0660fafd8a2835944c1907ba87e28b942185170762f5329b74a8c"
+    },
+    {
+      "path": "assets/players/baimen-women/F07/attack.png",
+      "sha256": "d73c6ce049e21fe45ae027e84d9b27088f1ddc31fc5bc1b2b07445d13d9a4021"
+    },
+    {
+      "path": "assets/players/baimen-women/F07/cast.png",
+      "sha256": "e6358e0f745b24f707a0298a6a0be493117d50c8743e4e8b54e83ee8db5b2bcf"
+    },
+    {
+      "path": "assets/players/baimen-women/F07/head.png",
+      "sha256": "545633d67cad5cd2e6c880af53f02c2f526716ac1c11ede5e400d175f135b181"
+    },
+    {
+      "path": "assets/players/baimen-women/F07/idle.png",
+      "sha256": "9234d018e56fa15640eb6724b3793cc1facc6aa7c5c106088841cf72176aad95"
+    },
+    {
+      "path": "assets/players/baimen-women/F07/run.png",
+      "sha256": "690ded93647b034d44a8e2b58111ac7099268fae497e728a16267a8126a034a0"
+    },
+    {
+      "path": "assets/players/baimen-women/F08/F08.tscn",
+      "sha256": "91bbc0b9eedf5bfdad59ad1281baa07f1841dc002665ec7248eb83d922e64dac"
+    },
+    {
+      "path": "assets/players/baimen-women/F08/attack.png",
+      "sha256": "0b132886ddcc883a545814aa5c4c7286b25db62bb3cdad5edab07ae5f9fed2e4"
+    },
+    {
+      "path": "assets/players/baimen-women/F08/cast.png",
+      "sha256": "d504c478a8d759bd9e472ff6d683832a23ae10bf2816cdce0cdedeac72c6d30c"
+    },
+    {
+      "path": "assets/players/baimen-women/F08/head.png",
+      "sha256": "fd66f2855d9d8203d3d819f8e43dc807b74f8c794641c57fd59e7c9a23227275"
+    },
+    {
+      "path": "assets/players/baimen-women/F08/idle.png",
+      "sha256": "8c7728cfc70f99fd08fec61864d6148eca11f56a2051524d6a146087b331a891"
+    },
+    {
+      "path": "assets/players/baimen-women/F08/run.png",
+      "sha256": "6bb40de987c60c9d1649837e9379e2935466e024cc1d8768128aeb72f20efbee"
+    },
+    {
+      "path": "assets/players/baimen-women/F09/F09.tscn",
+      "sha256": "158407b7508d8f59e91a2855432f6441819e89d5ecb3845d6ed5e8a48d9d83cb"
+    },
+    {
+      "path": "assets/players/baimen-women/F09/attack.png",
+      "sha256": "725cd996dc35802772d9d52e786de692c9cad37901bb8fa420eee751d912d5d5"
+    },
+    {
+      "path": "assets/players/baimen-women/F09/cast.png",
+      "sha256": "1ae11c36af2004371307d9078a8d0ca40b6fb8b350b3f209cc3d97c4e4f91b43"
+    },
+    {
+      "path": "assets/players/baimen-women/F09/head.png",
+      "sha256": "deb90ca65b67739e64a5bca79346fe45cb73171a9024c1f6b27f78f9def5b58f"
+    },
+    {
+      "path": "assets/players/baimen-women/F09/idle.png",
+      "sha256": "37dead9e19044a602226348808d5589dd99c115247491e31f201d7ad21ef184b"
+    },
+    {
+      "path": "assets/players/baimen-women/F09/run.png",
+      "sha256": "db59dddd41c2aa1494a21db5325bf4136bbe9b45da7ac8434325d4d3616bd763"
+    },
+    {
+      "path": "assets/players/baimen-women/F10/F10.tscn",
+      "sha256": "3afa118240ed57da3eae9a7e10bcf8ae08997470371694a7f957f9deead07b18"
+    },
+    {
+      "path": "assets/players/baimen-women/F10/attack.png",
+      "sha256": "e4ad26510fa66b3b2de77d4cea75f7eca3f8c7529b9be494d7c6715c7e34d2b2"
+    },
+    {
+      "path": "assets/players/baimen-women/F10/cast.png",
+      "sha256": "6c517a1dc6271c0f6ce2552a6cc8293bbe2995afa9819a4440395f23019a3a81"
+    },
+    {
+      "path": "assets/players/baimen-women/F10/head.png",
+      "sha256": "960f70dfe4571a1ac4b444fbae532170412ad43e0df7b32e88dca225f3683e04"
+    },
+    {
+      "path": "assets/players/baimen-women/F10/idle.png",
+      "sha256": "cafa7ebc03a23151c8446e2b9a056055274884ab0b6ffc06d3e920ee4397d940"
+    },
+    {
+      "path": "assets/players/baimen-women/F10/run.png",
+      "sha256": "766bce28a820a60eb55dfc1478ae6b0aa8d5e9c36a38b5b9b7c380b62c417d96"
+    },
+    {
+      "path": "assets/players/baimen-women/women_visual.gd",
+      "sha256": "b781c8eff3a0ab2bb2c803421a2b6eaee783ea316a78399facc6bae9aea508c2"
+    },
+    {
+      "path": "assets/players/chronicle-cast/F01/F01.tscn",
+      "sha256": "ea4171a3099e362fa66eca2c29b2a9b482d6b7937aef60f765ce7fde2e82f74a"
+    },
+    {
+      "path": "assets/players/chronicle-cast/F01/attack.png",
+      "sha256": "98842f31e3600878df3ec0c0a280018f37937224d0f053659590423b47519885"
+    },
+    {
+      "path": "assets/players/chronicle-cast/F01/head.png",
+      "sha256": "6b57dfdf8a49f6add7b20eef6967c465fe5107d9e7672c521e4ca6b43eec1954"
+    },
+    {
+      "path": "assets/players/chronicle-cast/F01/hit.png",
+      "sha256": "ac66fc214f04415fa0d4a96d4260ed9e814ab94cd8e7611c63aac829a8522b40"
+    },
+    {
+      "path": "assets/players/chronicle-cast/F01/idle.png",
+      "sha256": "84cd4f78052350fe2c796db26d4c2acc6597c21d2f0ffdc2e8897f1fde3a309a"
+    },
+    {
+      "path": "assets/players/chronicle-cast/F01/manifest.json",
+      "sha256": "baf5e51fc2f59a4cba0c2a814c6010af5c855cbf887466cd132efb4b386f959f"
+    },
+    {
+      "path": "assets/players/chronicle-cast/F01/move.png",
+      "sha256": "057b808ddacd4c9e98a4529ca818a1ad268193ed254a9244d982ce80f7378d52"
+    },
+    {
+      "path": "assets/players/chronicle-cast/F01/special.png",
+      "sha256": "f7efb6cc6af2e685ae6ecf54e933ba08d0884f625d428861ee5e1758734892ee"
+    },
+    {
+      "path": "assets/players/chronicle-cast/F11/F11.tscn",
+      "sha256": "a440f78475dce683cd33a9a43c314a6962f33f2e07751d4bc0b1f29b5a3eced6"
+    },
+    {
+      "path": "assets/players/chronicle-cast/F11/attack.png",
+      "sha256": "5c890148d4949d7dd8cf9474d0b510cdedcb73f63690da282a67de458aab6422"
+    },
+    {
+      "path": "assets/players/chronicle-cast/F11/head.png",
+      "sha256": "b91f58dfc07401d72509ae9fdc748132075aacaf9bc7b5a4943833d24e461aa8"
+    },
+    {
+      "path": "assets/players/chronicle-cast/F11/hit.png",
+      "sha256": "3290ce9f1b0e2874115f0f2edb550ba189b3f3e7b8e8ae003da7de7192a0ea42"
+    },
+    {
+      "path": "assets/players/chronicle-cast/F11/idle.png",
+      "sha256": "2b67d7b60b90323ca644c32a3d0ec3ce51afa3e5b5ac8ff12f0d363e619c5d3b"
+    },
+    {
+      "path": "assets/players/chronicle-cast/F11/manifest.json",
+      "sha256": "e207cab4cc14f36ae37cdca4fe4b179dc33da69a28400036e248c321266a55d0"
+    },
+    {
+      "path": "assets/players/chronicle-cast/F11/move.png",
+      "sha256": "4ea8851685d9558ff3e533b99ac3d874772943d49b4dca056631ba64d20cee29"
+    },
+    {
+      "path": "assets/players/chronicle-cast/F11/special.png",
+      "sha256": "396784eb20cd0180d6efa349bcb37ab18dd442baae60227e1c4fdf53e5194bbd"
+    },
+    {
+      "path": "assets/players/chronicle-cast/M07/M07.tscn",
+      "sha256": "8bb9c1c33d0f1039969a49e3dbf381ebd278c6ff1146cc2df7fc1013ede051c1"
+    },
+    {
+      "path": "assets/players/chronicle-cast/M07/attack.png",
+      "sha256": "27655bafcca6809f8324c128e8307fee67c98a08969bdab61249ae3f13f1a10f"
+    },
+    {
+      "path": "assets/players/chronicle-cast/M07/head.png",
+      "sha256": "c4760051f17002b8cef7a23f6d5e569a0dae9c881aa26db04b202429106ff920"
+    },
+    {
+      "path": "assets/players/chronicle-cast/M07/hit.png",
+      "sha256": "0d8a9f5012c55048e167f271af92fcdc9c95d7eb518d7e54e145bb6568812abd"
+    },
+    {
+      "path": "assets/players/chronicle-cast/M07/idle.png",
+      "sha256": "607031ba8134a8c3513650e8a77abec9f4c50f47d8cc307e3eed1177ec61c717"
+    },
+    {
+      "path": "assets/players/chronicle-cast/M07/manifest.json",
+      "sha256": "37712a88747a5b602a073fb1e393ccce64af725a690b0e71ae75298212d649dc"
+    },
+    {
+      "path": "assets/players/chronicle-cast/M07/move.png",
+      "sha256": "7bb115d735699dbcc31fcbcc13563c45b01052896fe5d76ba4faec5b2b6308f0"
+    },
+    {
+      "path": "assets/players/chronicle-cast/M07/special.png",
+      "sha256": "1326558270ea39b3fb80759570268d3fc1545ef619e12b153b2108b104455193"
+    },
+    {
+      "path": "assets/players/chronicle-cast/M08/M08.tscn",
+      "sha256": "ce22b2200d4c8ef512cb8279d8849c5bb489d0f02d4ea23220934e8f563b72f3"
+    },
+    {
+      "path": "assets/players/chronicle-cast/M08/attack.png",
+      "sha256": "02f943316cbb0c8ff81382f545ff3306b735e4126c93d8d8b8cc7b3b1bbf6ca0"
+    },
+    {
+      "path": "assets/players/chronicle-cast/M08/head.png",
+      "sha256": "3b6272abb793292cbac7497bbb034666cb96a8b3ff0f612a1d821ecb526a6558"
+    },
+    {
+      "path": "assets/players/chronicle-cast/M08/hit.png",
+      "sha256": "e55ec8383eb207c9a655e42f98cbb6023b48fbe3b011d6f07386f4bab65ba3ca"
+    },
+    {
+      "path": "assets/players/chronicle-cast/M08/idle.png",
+      "sha256": "df010a69e807875901ae3e796f60ba21614f4ab279b7497b090d136e59510bb1"
+    },
+    {
+      "path": "assets/players/chronicle-cast/M08/manifest.json",
+      "sha256": "d12906a4968481682a9abf839ec63ddd3b5eee75ce2733e56e2d6e57b6f0ff0f"
+    },
+    {
+      "path": "assets/players/chronicle-cast/M08/move.png",
+      "sha256": "4029edaf602479de714205b3c59b763beeac61963240f01ce109feff64466abd"
+    },
+    {
+      "path": "assets/players/chronicle-cast/M08/special.png",
+      "sha256": "30f03817c4bdd9ce07a7ee7cb5b98043b014cfeeea28e59bad54cf0d3ee484c3"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N01/N01.tscn",
+      "sha256": "e951a3ace16ecd80fe680cf02ff4e381cb77371d2f89a18f7ceca9ef0b67c574"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N01/attack.png",
+      "sha256": "cbe75f013d731b87cbfbcd112caf77c291e7926f9fb4b070f70a6cda8affbc3f"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N01/head.png",
+      "sha256": "95f0429b1e46b2d51446820a08a794b16b7f21210a60d8384974409d3b40e5f9"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N01/hit.png",
+      "sha256": "02bdf788230ebe0524aa8caa5cbe3ddb9a93bedbe0c9e76c108f7346bd6dcdcc"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N01/idle.png",
+      "sha256": "04f91ac1395602b3364bf8db87f4e45b173e9015cac972bf77f95113c15ad819"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N01/manifest.json",
+      "sha256": "11cec1369a503aa24dc50e53706cc7696a4fb821f58b7223fbcd1cb0cd7246b7"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N01/move.png",
+      "sha256": "d16c35d31ecd51234bd2621e90d6bb63d7b394763c2be38758d593a36fe146a1"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N01/special.png",
+      "sha256": "ea3eaeaa6d660b1f1dab7d6c2a1d2895302a567f526d3d553432e3e7523bf19e"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N02/N02.tscn",
+      "sha256": "b8029e1537cbf86073e74fc3b7d706ace449e41af1b7767bfeb6efa5189a0a47"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N02/attack.png",
+      "sha256": "8141baf3803eb98b8419bde9ea29799eb9c8b894d033ad22ff21b99c64d32c58"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N02/head.png",
+      "sha256": "8a7632a733d533220e907e98f292791e0bc53e41c43b43e1280dce42701808cb"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N02/hit.png",
+      "sha256": "23a80a48f860c37d1c86ec14a5df9a715f93d0e5ccb8fa6e5e4ed4fd38ca1601"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N02/idle.png",
+      "sha256": "96073fee646aa626bd7c0fccb27295f13d02236e4de102b4b0f1eac5ef42469e"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N02/manifest.json",
+      "sha256": "3ce7a46b488204c7df81d8001863aae13773a09d6e5141112f0ec67ae242ce54"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N02/move.png",
+      "sha256": "9aa7de5e54c915f91d5986a26932cc3fec72c147cbe8861794e6e520e13252d5"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N02/special.png",
+      "sha256": "8c8a7f7400b48a227f3508bfdb33cb3e773181ded045dd6da8849894baa08095"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N03/N03.tscn",
+      "sha256": "3b77ddc50121af0fe2a17c4440d8f9f2873c1093a3ed9d1f906dd499e9f2ea51"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N03/attack.png",
+      "sha256": "6b8f4a804e601b1ed55ff330b4bb5123b9f8902451050c52fce43126879e51d2"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N03/head.png",
+      "sha256": "210c30a30a6a32c4b74034798b13e8841e3b861263edeff1141c6b1b875de85f"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N03/hit.png",
+      "sha256": "7efdd7d105829032417ea3e6e6886f36fc6e76ee59fd91ccb5290a9dda367a55"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N03/idle.png",
+      "sha256": "4c7d53d2345690acc317be0e081a4a43489453f3b1631dd2cfb05c35034ac889"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N03/manifest.json",
+      "sha256": "3f6301bc2ba127c2b8e548e8332825152eaa85df21d4820fcf21212c83166eb2"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N03/move.png",
+      "sha256": "1f283f85fed2478d81eb3d762ebfc53d2f99ab774114f5cf31601646b1651be8"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N03/special.png",
+      "sha256": "2477c2aef279e7cb29311a465749575721e41b45f1ff2c7f719579f4dffb7515"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N04/N04.tscn",
+      "sha256": "d5cfab6a5d8a913319ae92baaafe153a1461d538ae455f432a1390d6472fbf93"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N04/attack.png",
+      "sha256": "d91869bc1ea43686469cc781741626c69c0358f78c54c2ee917404839bd2487a"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N04/head.png",
+      "sha256": "09276ce4575bde42c169eedfce0a2f50b388002bc938b19058a41784c11231ea"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N04/hit.png",
+      "sha256": "73c59570625e2a3ed36d6fb60305b807d51e7cff5036d26241308e91ce8bb8c1"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N04/idle.png",
+      "sha256": "c8388025f080ebe390fa86343ebaa51d8dc713413cf9ef75a657dd9d0f7dad1a"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N04/manifest.json",
+      "sha256": "1e5b6ada3644c00d4af10a58f8b4bc9ff088cd9d3325c1889f9fb933d66df3e1"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N04/move.png",
+      "sha256": "7861066033bb514e19a5ef0893dcd2879931b876ffd200fbd08443eb4bccb298"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N04/special.png",
+      "sha256": "f4e26cbf797b575dc8e98c15879ae021ff9cc50e6dba5fd8d6fa8778cdeda5cf"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N05/N05.tscn",
+      "sha256": "2d6923635ea239f898eec72fc0e12e63e49609836f0fa666277c35f288c18aa5"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N05/attack.png",
+      "sha256": "1fb0cf9040b68d129c077d120d5a1fb23f4a9ae531804d67f67e79f010bd1490"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N05/head.png",
+      "sha256": "98b652b9ea9062ad803d3248d038c1492b00f5e7863992e0f025235526e818bc"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N05/hit.png",
+      "sha256": "bcc1b17f19a444b601a89abf6d3bbeeff728456e3e41bfe89aa78cac1354ff83"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N05/idle.png",
+      "sha256": "22a6485d94f1e9f094cafdd3e42e7451dbe4ccc1a4182e533e2c6e7a0a5f6f32"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N05/manifest.json",
+      "sha256": "ecfbe175c916328ca4060cbaa044cb1ff68db659fe52d376b24daea0393f29dd"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N05/move.png",
+      "sha256": "ee58e87fce0c1ad6e05bfaff73ff17e0975a28ec839e08b14c743739f073bc61"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N05/special.png",
+      "sha256": "aba7d216b255998645227ab29def02955fe74c1f895b37382e1bcd964203cb63"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N06/N06.tscn",
+      "sha256": "771de16df624d010f00df6a615c7bf0b3fbdc48d2d277e0bc295554f5acb3ca7"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N06/attack.png",
+      "sha256": "0d0127e640ade2445c2ca72d77386b1e8d5143354b5d176276897db79a78d5b3"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N06/head.png",
+      "sha256": "8809a461da1943959b6d093e106e6b3b4d0b34d94e77c1196f0c2ba8ea4673f7"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N06/hit.png",
+      "sha256": "3d9e8c3b7f546e1c147186d46c41e9a9204bb88c2087de228625fb86cb5005b9"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N06/idle.png",
+      "sha256": "61c055d904cf06ab5ddf3798d7b97ee80373eff2023461017b084a0afd8723d9"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N06/manifest.json",
+      "sha256": "9d65b794a44200ec5b4329660077dc52c59671df59f0b72fc333acce8de56e61"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N06/move.png",
+      "sha256": "13735f5e1aa58d0f4a3bd6a7f889b3cf336f02df2450fcf7834c624eb03ea69f"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N06/special.png",
+      "sha256": "b154ff9eb660d31af104dbea3f7a4d2b5bba05ac52570fffcf515b25fdc6f9d2"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N07/N07.tscn",
+      "sha256": "a0bdc3330485ef1a076363aa82c4d78bc5bad1c5da86d3c440f26e7646a7b82b"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N07/attack.png",
+      "sha256": "bcce0f9cfbbf131ff9d1ccab004344930557afba4cdc91d687cc52b90aa85136"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N07/head.png",
+      "sha256": "54718f7b1b9382aaf40292f503350e4d95af8d502e449c40e481a7bd88c85846"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N07/hit.png",
+      "sha256": "1af12e768ba1832fc0a6ffbba291494be7cea34d975fc3ab1ab08bc660d3ffae"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N07/idle.png",
+      "sha256": "af7ad6adb13e525dc948bbfd211f83b89c0298e75c53f36f4c794ee9ca0d8b04"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N07/manifest.json",
+      "sha256": "7f54e643047a34506387a72538b091f9fa7d057171f76777fdb36181921b3b81"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N07/move.png",
+      "sha256": "676b595309a818e1f18a9d1818b14a6ce937d6131faa406712000e38e675a438"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N07/special.png",
+      "sha256": "1fe35fef2061d05cf438fb47a80cc05329c2b4edc592afdd7f30f25d18197921"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N08/N08.tscn",
+      "sha256": "a9c1917ff8db87ac719508e6c262a3497e53eb17bb409d49249efb3858d12866"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N08/attack.png",
+      "sha256": "7119e21485452aa3be6bcc73b4dfdfd82aa052457f13d17fac5450115be183bb"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N08/head.png",
+      "sha256": "575dca63d5844cd535ed147b7f81e3b511485ac6cb55b1471322cb4f6a4c0da9"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N08/hit.png",
+      "sha256": "2e3562d077fd5812f61feeb1dec3ad8f5e4a10adb1a561890c780b241e45d267"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N08/idle.png",
+      "sha256": "9329d7b1edc829c00160c5791fec95bde9aeacfc0067f160103a9d663acb2262"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N08/manifest.json",
+      "sha256": "4e717b619adc43c90c17cae5e49ddf971bc14059bf48792af3326df87a7bba64"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N08/move.png",
+      "sha256": "5e71784aaacdc410a7a510fc15e30422f9671d5fc68881f9772d811eecf28677"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N08/special.png",
+      "sha256": "bccb7ef9b84e59f077b316c6c1030d8194c604564eb1e4f9cb225b24a98d5d67"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N09/N09.tscn",
+      "sha256": "be1c7eafb754ccf76799c48e5bce02d35a0afd385ef1ef73566bf7607d141102"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N09/attack.png",
+      "sha256": "d277c71a1811d7a8ce959020cc358c8f3f48dc53e9df349aafe0f64cccc54a82"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N09/head.png",
+      "sha256": "5fc7b713a0789c01f5e8a4b7ad58451bcde43e350efdd756a83a3e50cc176181"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N09/hit.png",
+      "sha256": "d282856dcc7888387d5f4cde9d198d42aac449150bee6fd84063431d32d50579"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N09/idle.png",
+      "sha256": "65b03855cb893c575038159b7dc7564f63c1b92299ca41b1fd56870d702ea408"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N09/manifest.json",
+      "sha256": "92a63e1bdb197e2ffca00b87888f932d67023ac73e4722d81376a68656039982"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N09/move.png",
+      "sha256": "6430abd71b2041ac510e33a7cf20cac3e19953441745e3e16ca5b81ba71f0c90"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N09/special.png",
+      "sha256": "d72bda6287ebeba9b61eae1ff1514c83ef51ce08044573219b5d4b6afba8c517"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N10/N10.tscn",
+      "sha256": "37d78f9ca3bbd8b1e5f1d6e866ae81050825f7e481b2d98598564bcb38e307f9"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N10/attack.png",
+      "sha256": "5ce25e7309693c5896a28f372e426311eeabc76bb810642415d5e6f3d7fc0ceb"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N10/head.png",
+      "sha256": "f845ac40c3f1436096270409e0d4c4568a6833d808f7e2999e17035cac269c2d"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N10/hit.png",
+      "sha256": "ee6cf90cff6aeebabdc5349eecacc9d980378e99206b6c95f2fcedeb81f05784"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N10/idle.png",
+      "sha256": "9852806fb1425c72f8d42e170872784ff3a2859835678e49885e95324a7bf7be"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N10/manifest.json",
+      "sha256": "b064dc93f2c22e606a9b6f75ee13280ac95969f6428b945bc4f97895a58a11e1"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N10/move.png",
+      "sha256": "72ecbc4a27d44f7b1df7affcca3a264057f81fd2053c82167e24b99269e8974f"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N10/special.png",
+      "sha256": "d30653d23bc8e644c164e0cb5f624e46f78e6fecd0de44adfa0434b98fc1f0a0"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N11/N11.tscn",
+      "sha256": "b7c94e04f2a01fe10152c6b047f5863dc25fabf1ac1ff871af151619f405461b"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N11/attack.png",
+      "sha256": "d351f88b72731a3a3c4a97d3b514f4c59acc9ee0f60f019487981dcb084e7eb4"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N11/head.png",
+      "sha256": "1fb9c8599a56f99666f33fd3ae2b8149ac8e6c0df0cb62f42026ebfb56bdfcfe"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N11/hit.png",
+      "sha256": "4bafcaca42ad01c1f8420a46eab61be5ef84316f41645b444e0f382572a11e75"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N11/idle.png",
+      "sha256": "51a99dd67dd71514df6fffc5a53c29a272e6b077151263372679ccff1b9ab0a6"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N11/manifest.json",
+      "sha256": "ce69359a7ca2e87fb88076759ab97ce64ec10566499aa969e9a64a3339058f9c"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N11/move.png",
+      "sha256": "ba151fc9cef75903591b87dfa1adf8df1ae2eccdb862389223d89e24053b9957"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N11/special.png",
+      "sha256": "48ff38c25aa30849cc5f32165f68dafb3a0fd187be43fbe4af86baacbe79b2fa"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N12/N12.tscn",
+      "sha256": "2e06ac6e1bbf7fad8441882b4072de30900e43e30dc1618545d89b9f1696f60c"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N12/attack.png",
+      "sha256": "58c6f0a23a4411d87ad857ff01b4cef03f64ece9d1479e675e016e4cade1f2b7"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N12/head.png",
+      "sha256": "c18428604b6e081591b600eab6b9bdad1044019752e1f84b99c5f540bfe13819"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N12/hit.png",
+      "sha256": "8d5267000c2f94adb4d8446ac19049f91d8a0ede6718826947a4b36af436cf88"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N12/idle.png",
+      "sha256": "1fc2900a828e25f42cecd96392dbe073b2f671d0ccb633704667663d671acbd2"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N12/manifest.json",
+      "sha256": "31000b32bcdc3b0f1570954db97e6ba80ed6980b2a692614686a3ad9e8931e54"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N12/move.png",
+      "sha256": "eb8d15d4be246db72cfcef6852dc61424bc5a1662ff4a6eba91a98d43907c6df"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N12/special.png",
+      "sha256": "38676b2f59b7917d175fa5204c2db95964dc1740acc0ca1a0cf2f694335827d0"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N13/N13.tscn",
+      "sha256": "24b8cc0b6067ca2979a8a1ab0ad93d98820923f092e07b2c52fbf50ff1831b67"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N13/attack.png",
+      "sha256": "d6b5c53c913251df7ec8b640df28ce799794c0d7df9c1ab31bae95ebc0d4222b"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N13/head.png",
+      "sha256": "eba411dbce17ecf41f9480ad4f2ffe6e08b79cd812e1b8ae1a750ff069462635"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N13/hit.png",
+      "sha256": "f7e8965e61b2b3d3caaa8260d916022d6aed93c8ece084eb1c450e6ee2f75bd8"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N13/idle.png",
+      "sha256": "51d8035046be192413869148b6a3948d9ca76f815ed0be869d45038a07598049"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N13/manifest.json",
+      "sha256": "78d3b822ca3daa0729dfb4958a9bdf25c41305cdc77ef1f1698296a14bd76f11"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N13/move.png",
+      "sha256": "022f7cf664bb64c46b8fad64748daa57a0798564cf346b8b6c8edb5e60a2e7f5"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N13/special.png",
+      "sha256": "7683a106bbe46ad185c1b7506849685939a407b35c9a29bd25c6b9ac1ee90fdc"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N14/N14.tscn",
+      "sha256": "a1caa8f0932a926efa2e1a6901c1ca9379dc683c24f9fd919faf4ac0852c29b8"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N14/attack.png",
+      "sha256": "4bdf41e1af138b7bf9f89b2016b43b0b28b4bbbc1f3f06e7400eb669b313760e"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N14/head.png",
+      "sha256": "f0c96b193cb1395fd9da7c2a9a10277db7ff48ae3da8d3775962ca9cb6333128"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N14/hit.png",
+      "sha256": "038ea2463a444f9b5e6ee5e94ab32cf99fae618760258ade036a741c3c8533d0"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N14/idle.png",
+      "sha256": "89cca02a6c69639d9fe70f92f3e3b5cd51b731507a17855c7c78d49ebdf2c909"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N14/manifest.json",
+      "sha256": "1f5d86c918f65517944eea6fe0407b79c7f25b3dd622e98343410a1d6a8d9a6d"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N14/move.png",
+      "sha256": "ccedcfb048d703576ffaf1cf899e1428127b74831abd8471eb341904915e8c35"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N14/special.png",
+      "sha256": "15e1d419dfac15f55d1203732257735e05bc9ea428fcf2cea70154228450efc5"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N15/N15.tscn",
+      "sha256": "5c5baf9c7612a89a4c6b05991873c912bb4d9b27cd9da8884105666b9d5afb3f"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N15/attack.png",
+      "sha256": "286fae7caf280b895e601ef19417591a991b2b0847384b62cb26fe7b5cbf1f91"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N15/head.png",
+      "sha256": "5405be9d027c3ec2aab57a8e088a956844b5a465e320c69bfbf40a70a86e81f3"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N15/hit.png",
+      "sha256": "f0743a500ca685f1ce70d50c5d2335b3bef5b954c35d34fadcb8d1a11eea376c"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N15/idle.png",
+      "sha256": "8204261e1c350377f4e23b800044a1b5490086acc343aa5443ad8e1a1e2dd6f5"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N15/manifest.json",
+      "sha256": "8e0510f822e460e8887fd3bd8cb101cf2157a8251ed3dee12d0b190f6103666f"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N15/move.png",
+      "sha256": "00215f1bf1a9c313f03aeeb58bc74fa23be2622401e55feb6e190b3958b53dd2"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N15/special.png",
+      "sha256": "1e2a8cb25df146ad73a31678d9151e70e5217553c9f57da62162dfc12fe2f00d"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N16/N16.tscn",
+      "sha256": "a88bf4c5116b574a71142fbdf10cd8d725c523a85ff702f2ae2c7c0884db2ea6"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N16/attack.png",
+      "sha256": "88f95f5a4334826608ba07805e15ef96e55579854c478f8baf30bc1917f72283"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N16/head.png",
+      "sha256": "b3acf6fc73aa14e6470a1fa2261a7646e0216c2a75dbf6832902a25acee4ef92"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N16/hit.png",
+      "sha256": "c48f3bdaed656990f4aa6635b3a87d93dde4ec851d8256d668e7742392d6d914"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N16/idle.png",
+      "sha256": "b49da331efc70e0e9e6cda9d259502b9dc540d674f25fd240a9c382c17e6990c"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N16/manifest.json",
+      "sha256": "1d5fa3fdfbed381fa33b93d751e14d64b2f9632dfd33b708865c27f379f8c34b"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N16/move.png",
+      "sha256": "02a63580b51915317baad03afaa7563b656dcce8005af428d9e7bf9919e7887c"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N16/special.png",
+      "sha256": "bc6c8338268789fcffbfa9740dc76b9b70241d82ed1d0ee062e9b54487a54c3f"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N17/N17.tscn",
+      "sha256": "beea0650057c2c9682552e9961a032df368d7f648bec082a4f586676a4034713"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N17/attack.png",
+      "sha256": "49b846d6e05b7d3508c5b419cadb80b87f6e0ca127a5a11f9cae8ae369e69ece"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N17/head.png",
+      "sha256": "5be8caa8142bed2f6f34390a20e15a6feb8c26d0acf7f1c4e2b8eeffcb376345"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N17/hit.png",
+      "sha256": "a795d9d317d2833f570004130c293b1c2d1d8edb904df3f217c91e00cd91ba50"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N17/idle.png",
+      "sha256": "e2b98143b477fe00acfabea7da85ee423033c3b47c2c776a2e31a789d9eca0a0"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N17/manifest.json",
+      "sha256": "e85ea50c7c276aa0599d31a36fe2db6cdf2ca916eace081833c6f47912703558"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N17/move.png",
+      "sha256": "aea399242c2ab49316ff9ede4b64f80be51ba94410feeeb9bfc230726fd0b61a"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N17/special.png",
+      "sha256": "e02fd786c9af1761fc31451c2bfc763de6bf7310046a966afc8e71fe40fceeff"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N18/N18.tscn",
+      "sha256": "c7fa479ef599aedc4e56b41c3387b75327077a807d4d5da5ae4ffaf9c74003dc"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N18/attack.png",
+      "sha256": "11abc4136d758ace4aae1e1a1b7fe769ddac32e6501d290884f55e282072b5c1"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N18/head.png",
+      "sha256": "65f7d6c41a1dfda34295cf4a6a8fae03b8e57ac9b2a54fd2995fb69fdfc8db77"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N18/hit.png",
+      "sha256": "d0fffbf254fc59bb6488dabd94f466373635c0f4a70b02d8fae091c49f7f2760"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N18/idle.png",
+      "sha256": "c308d06cb8b1b48fed05b27078e52bb64c1b8912a76cdb378dba240a2bba517f"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N18/manifest.json",
+      "sha256": "7f998bbb7f6abf14855e5ac00cc940098601ad877ee3d21f9b47e32e9565843e"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N18/move.png",
+      "sha256": "1fab6a04ded6c00a9d8b6ab57b12c3ec838282cae190164ddbdee5ae860da899"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N18/special.png",
+      "sha256": "c2d65f1f1e7ce2068511ef6b82603d13007e5d1c29f8715058d9d93c478070e9"
+    },
+    {
+      "path": "assets/players/jia/dao-attack.png",
+      "sha256": "3a9ab69c36d1c3cc2cca3563ae573e9c729965e548cf50e3e6dd5817cd5fb468"
+    },
+    {
+      "path": "assets/players/jia/dao-idle.png",
+      "sha256": "cdc10d809bb8b41d0b90584113ab206317290d57fd5b98575b9230f9697d8329"
+    },
+    {
+      "path": "assets/players/jia/dao-run.png",
+      "sha256": "dcc5e38083fac6b8dcb8c18efb053f661a62e933ba5d0812e1bee56cfa0b9439"
+    },
+    {
+      "path": "assets/players/jia/jia-head.png",
+      "sha256": "4c3a9d7455417e12cbdfce4896e4265133ceef2a41d82ddb02dcada8b3930570"
+    },
+    {
+      "path": "assets/players/jia/jia.tscn",
+      "sha256": "17f08d57cd2b61c4f4947b5b43862f3295d3a8fc18d511d7007d00f9ad6911d7"
+    },
+    {
+      "path": "assets/players/jia/jia_visual.gd",
+      "sha256": "352f23738c3af83ad69b151ded0dbba89c713941d2b0a659830d7663e966106a"
+    },
+    {
+      "path": "assets/players/jia/spear-attack.png",
+      "sha256": "882a1756fbd453374478447346a8ce8162b772865735d27d68683eb8ed8c77c1"
+    },
+    {
+      "path": "assets/players/jia/spear-idle.png",
+      "sha256": "eb7406f243c861b254dd91a665f5301e3ea5a4d3b33234c7a6477bd031012b24"
+    },
+    {
+      "path": "assets/players/jia/spear-run.png",
+      "sha256": "074338e22c9e83495ce65ae4335bacbddfd1d06af9225f5a33daa68b9b514336"
+    },
+    {
+      "path": "assets/players/jia/vfx-slash.png",
+      "sha256": "7fb06ea509cb254e801b503403aee73c290b03e850f31094f248bb5113cff770"
+    },
+    {
+      "path": "assets/players/jia/vfx-sweep.png",
+      "sha256": "ef757af84127689fe12046a73e8db4df258b966d2ba8d332a682eaad6b8deb56"
+    },
+    {
+      "path": "assets/players/jia/vfx-thrust.png",
+      "sha256": "e42e898033d44e66cbcc7dce6adc32e0f5731b40194444bf22e02e416902cfb1"
+    },
+    {
+      "path": "scripts/battle/battle_space.gd",
+      "sha256": "69f899eb40cbf7987a466a76c85ddd0d1e65a3862011de56d90ef6d669ea3b94"
+    },
+    {
+      "path": "scripts/battle/player_hurtbox.gd",
+      "sha256": "3ff2fae94debe76ad31a369b28e03def0bd806a81fb296d4dda2e8a0a00631fe"
+    },
+    {
+      "path": "scripts/tests/chronicle_roster_art_preview.gd",
+      "sha256": "631d3dce7f7bdcd37e255764e6709f664256c4f0d31e9d570af7be39c627b9b8"
+    },
+    {
+      "path": "scripts/ui/chronicle/actor_action_presentation.gd",
+      "sha256": "12f82ea50802de8f4b524ed3646436bf4f27eb43aec376ba7dbf4a7d07aec510"
+    },
+    {
+      "path": "scripts/ui/chronicle/battle_art.gd",
+      "sha256": "674da644adff42441483a77105a0e9bc3a47367cacd63f55d26b6e1b2219f051"
+    },
+    {
+      "path": "scripts/ui/chronicle/battle_canvas.gd",
+      "sha256": "572616e734e3e776cdb82d7e61d49ed8fd891c5b7b706d3c99e769d0ea4fd61e"
+    },
+    {
+      "path": "scripts/ui/chronicle/roster_actor_visual.gd",
+      "sha256": "75550b785037cfea10a0ddef725bf8e97b53c6b56da148d4f5f7986e15cfbc89"
+    },
+    {
+      "path": "scripts/ui/chronicle/skill_presentation.gd",
+      "sha256": "031506482f9fa951d041166367b7bf26eced30dd29438874328e6f1eece5da02"
+    },
+    {
+      "path": "scripts/ui/chronicle/skill_presentation_profiles.gd",
+      "sha256": "2b391278d4bc4229c340655b7468ac6060562aaa5e5d5fc9926c916b1455603c"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "design/skill-presentation-20261105/art-preview/audit_captures.py",
+      "bytes": 2096,
+      "sha256": "3ae12708292b4a07cdddf7876a6dda9e3e6e452e79d3c566794972f98b20ac08"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/capture-pixel-qa.json",
+      "bytes": 241452,
+      "sha256": "f4c584d3e103a47903807accd35a66ae445c07a42200bb20e4e48cab5aa41b6c"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/native.log",
+      "bytes": 245,
+      "sha256": "340253f5b266004dc9873b2ea099807905d6f0174c7760e43ab81c961c9ea46d"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/nova-action-regression.json",
+      "bytes": 2381,
+      "sha256": "778f66c71040771c25844745002e237be3204d01b4b8b4ebdcf66757cd958d76"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/preflight-before-import.log",
+      "bytes": 248,
+      "sha256": "885c15456be70970c8b269ee4a77bf82e71af5414cb62a67325b336d08eb60ad"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/preflight.json",
+      "bytes": 424,
+      "sha256": "6fc481bf533a503506462cb131b6f91ee91bab4ff641f7a2ff277b52cf3e4f42"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-1280-left-page01.png",
+      "bytes": 163736,
+      "sha256": "8ca10eb93629e575b3e44e8acb029c1f489e7884e3aeedde8043bf2d2f5584b5"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-1280-left-page01.png.import",
+      "bytes": 1020,
+      "sha256": "ddd2558db338d02e7bd9466d83882249c935a9bcf09b256658334df01eea1e64"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-1280-left-page02.png",
+      "bytes": 182602,
+      "sha256": "73c8c443fe5efdf6a411ba731aa561dc7db4fdcec4b623523e25cc7e687958fa"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-1280-left-page02.png.import",
+      "bytes": 1020,
+      "sha256": "30f8540387cb7cd7a6d1241bb7ac4274e6e769e129f98c8decfcccc17877bf6f"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-1280-left-page03.png",
+      "bytes": 140458,
+      "sha256": "316dbaff75a954a26c0ab73a35137b13529102c697c869aeb5d6bbb8e58d9d42"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-1280-left-page03.png.import",
+      "bytes": 1020,
+      "sha256": "e5594361a1c6bb6cdf761e7b548254f7feab823788237bb10b736657b91c2240"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-1280-left-page04.png",
+      "bytes": 112966,
+      "sha256": "335a850240243096772f9d108023cdef82daca1106aef899cc58793ecae00dd2"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-1280-left-page04.png.import",
+      "bytes": 1019,
+      "sha256": "f44cc56dae561bc65f928dd93a09c69cd829cbfa804c5c9f3e02e52422ff0eda"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-1280-left-page05.png",
+      "bytes": 109130,
+      "sha256": "a8675abe142b05c197db4bb2f6e4cf70c930be44a4c04e9e45523272e8966b90"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-1280-left-page05.png.import",
+      "bytes": 1020,
+      "sha256": "d422009f046aaaac9b38dcbe7dfc3cf29694146d3dc5ed5a0dc2dc43dd1ad2c4"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-1280-left-page06.png",
+      "bytes": 108473,
+      "sha256": "eea7222cc56f36da5eb240177d03664421f317e9cd0b0fac9a5937c299106bbc"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-1280-left-page06.png.import",
+      "bytes": 1020,
+      "sha256": "7da13dfd96fad05eec41d0011378af2156704e9762cb1ef9c697938644d18f93"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-1280-left-page07.png",
+      "bytes": 116892,
+      "sha256": "30afc7b9b3c0320d287566911e0eead19755dca9f08274708f6cbc7395f89198"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-1280-left-page07.png.import",
+      "bytes": 1020,
+      "sha256": "cd4b002b2563a57c347473ab3dcc8ff0aa902d01d957c2343fc19b37919f5f81"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-1280-left-page08.png",
+      "bytes": 118742,
+      "sha256": "a3786a452a9a7334891abf5a59059e5627330498dd5b82d140f81edd0bc2e619"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-1280-left-page08.png.import",
+      "bytes": 1020,
+      "sha256": "a17a54a4d2a41008632690cc9af4341e9cb50a28f6db2ba4291af0ca23834737"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-1280-left-page09.png",
+      "bytes": 111349,
+      "sha256": "521cfb9d4cdd596d38d9c5c9550766a9614704e264797066871206e2bfeca376"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-1280-left-page09.png.import",
+      "bytes": 1020,
+      "sha256": "338698410724a535076fbc49737dc72c30b7c3ec6853bded075f1ec0575fdc80"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-1280-left-page10.png",
+      "bytes": 123382,
+      "sha256": "5ede83275701190527a9dfd0e9ca3c1a2dfeef7bbdf831641bc0333da7aabeba"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-1280-left-page10.png.import",
+      "bytes": 1020,
+      "sha256": "9749833f3d5bc06f2f2cbce4df014f6945f07d0dc4572bfe68bddaad10b6b9bb"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-1280-left-page11.png",
+      "bytes": 121246,
+      "sha256": "fae67338a6c9b9af0e6e068c52b84422f7edb35575ff240d8daa97163336635c"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-1280-left-page11.png.import",
+      "bytes": 1020,
+      "sha256": "ac4c080e68db5fbdfd74df5ac93fa07a09d08e91f03c7185faa66e49b8aed9e9"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-1280-left-page12.png",
+      "bytes": 122772,
+      "sha256": "98c7a838158b918c45cb8b60717706a6e17240ae5c4e2e3aaa6335a6e5da2c07"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-1280-left-page12.png.import",
+      "bytes": 1020,
+      "sha256": "da67a1b9d9b1ff1ffe4b4c5163a513955ea09b9639af43f4c65b5ed40d42911a"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-1280-left-page13.png",
+      "bytes": 76383,
+      "sha256": "89d3bc2972740184b4d8d7b1187742d1f3d61bbdf268eaa52a4146c5893e14c6"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-1280-left-page13.png.import",
+      "bytes": 1020,
+      "sha256": "af1dfd82fdb7b1348a1688eda9ad54e826261418aea8264460aea0a19a940cef"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-1280-right-page01.png",
+      "bytes": 164358,
+      "sha256": "dbc262ae57855215533c6912aa7b990f3831ae4667f2fc1551e1248238f2d2d0"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-1280-right-page01.png.import",
+      "bytes": 1022,
+      "sha256": "1fe56cdae42b67b75d15d64c471a65c5f40b3063321c867e14d2370f033155ba"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-1280-right-page02.png",
+      "bytes": 179902,
+      "sha256": "f2f48bb796a81d1a4a88ec899d1fa523666f2fe8b579e32b0c91920748d17eba"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-1280-right-page02.png.import",
+      "bytes": 1023,
+      "sha256": "ae79b74d359eec32196349e3630125c58149b6ea4f74a1d455c5a153d143cf73"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-1280-right-page03.png",
+      "bytes": 139062,
+      "sha256": "1f581e7e145ad4c29079b33f65cddc367cbffbbed0bdb9cda3a6550273a28cfa"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-1280-right-page03.png.import",
+      "bytes": 1023,
+      "sha256": "57669681e3ca8ff66feb85953f85c808d7a097c1084d1b6edc7d065ab7bd2af8"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-1280-right-page04.png",
+      "bytes": 112436,
+      "sha256": "5f5d29c505e6ae3b43459611018d29f43312eb9d11fac78d85eda0de6fd0ee99"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-1280-right-page04.png.import",
+      "bytes": 1022,
+      "sha256": "22430816553ca1d68ca4e5a8f86119dc8fbeea2e2e13518cb7eecf8b04c76495"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-1280-right-page05.png",
+      "bytes": 107214,
+      "sha256": "0156e4a5daa2606ba343f16f6c1401a8caec3a9bb0fe6567b0ef92152fd4142a"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-1280-right-page05.png.import",
+      "bytes": 1022,
+      "sha256": "75aa15721684fb5ed00e56f0a50490953393ca6c9264b49e5dcd8e22f8679dc9"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-1280-right-page06.png",
+      "bytes": 107519,
+      "sha256": "a514c4ff42f18260bb23823a55e336311bdebe8082c4bba0ba0a0bcefd673aa8"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-1280-right-page06.png.import",
+      "bytes": 1022,
+      "sha256": "8e0d1083a8a352a1c999dd0e03369d41237182bd215a9273f1e94dc3ea80b541"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-1280-right-page07.png",
+      "bytes": 114523,
+      "sha256": "e7db48fa81cba524099621b47226d9c4e118d1c3395fc58ce4bd2b325d552d83"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-1280-right-page07.png.import",
+      "bytes": 1023,
+      "sha256": "5d69c6efced9abd683fac5cce677c37f3164fc699ea7cc6bfa1bd88cb48dff9e"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-1280-right-page08.png",
+      "bytes": 118219,
+      "sha256": "8800e3e752eabdfe2a32f67c13b8332caab6467eda0f8e8cbcb16f9e1eb26840"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-1280-right-page08.png.import",
+      "bytes": 1023,
+      "sha256": "1bea1cc6e340fb41456431c38066332a051445fb3c049689fb9ce84c5134fe24"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-1280-right-page09.png",
+      "bytes": 110353,
+      "sha256": "f5f20d4f5e19e90ddad556e47f9ccbdde3aa0847119552d1abf391eb41eb8876"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-1280-right-page09.png.import",
+      "bytes": 1023,
+      "sha256": "556c752e8b9d7156e3437b658ecae42ab6c7bfef27b3c6e1d281bfe3fb931697"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-1280-right-page10.png",
+      "bytes": 122699,
+      "sha256": "ff420472e061f6922710d84bf74f2fe3603af40a97ee9e4fcbed40eb2c7e55b0"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-1280-right-page10.png.import",
+      "bytes": 1023,
+      "sha256": "2148f3c256685a1e845568deff357285cf109ee9d9036a5e544cfef8add65bf9"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-1280-right-page11.png",
+      "bytes": 120549,
+      "sha256": "0a40f800a38cc88299d047ca82b79417b9736c9a28cb66d1bac8bb7d292a52eb"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-1280-right-page11.png.import",
+      "bytes": 1023,
+      "sha256": "edaf3f09155e5c630663b2df1350b2188ea2a150918f9329188ee6b3dd7add32"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-1280-right-page12.png",
+      "bytes": 120543,
+      "sha256": "dbfade209dd50c920ba244f140beb4d7bbebdf46a0fbee25cc3259c41ef64e7d"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-1280-right-page12.png.import",
+      "bytes": 1023,
+      "sha256": "929af639e6860fb6e3edb1fe2c5460049c45cb42863d953cb3cf68abf488c8d2"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-1280-right-page13.png",
+      "bytes": 76923,
+      "sha256": "4b225561cd7c9e92bd16657231339f8db61987a887de6be1cb574bde82abfdbc"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-1280-right-page13.png.import",
+      "bytes": 1023,
+      "sha256": "f3bd1d1a065b42e78495dd0ce8bf3aca1b316c9276379d8a93710b24224098d3"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-1920-left-page01.png",
+      "bytes": 283233,
+      "sha256": "07c4770902655d2df5cae4f7b3162fcb014838d03d0bd36d0c8d3b4a3b3fb78e"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-1920-left-page01.png.import",
+      "bytes": 1020,
+      "sha256": "dc3b2187fc7c44ca21dab6fb41423dfe6f80a6408ede0269c9e5d979397d0d67"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-1920-left-page02.png",
+      "bytes": 349202,
+      "sha256": "7132b4b46429ba8ee75638ba3f493d7a7e6cf2e7babd5378ed3c5b3f4af72524"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-1920-left-page02.png.import",
+      "bytes": 1020,
+      "sha256": "adb98aa808dabe50c381385f60a9740f7adb55b594ebed091181025667f66674"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-1920-left-page03.png",
+      "bytes": 212983,
+      "sha256": "47fc190d1cedbad0fb12f585eddbcc507fd8f2786027970f1a006ff20c6a8cf7"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-1920-left-page03.png.import",
+      "bytes": 1020,
+      "sha256": "68cd716428afdee7ca099d1012a730bbf2cc56232de2149ffeec2bf9590f9ede"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-1920-left-page04.png",
+      "bytes": 129714,
+      "sha256": "398e695e9200819562a246e286197aa1ba7c0abd791c0ba8b276b5914bdc940b"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-1920-left-page04.png.import",
+      "bytes": 1020,
+      "sha256": "4365b37011a2497a013f3aa9e0337653b3e920e5d5a621621ec7ec9e8990e824"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-1920-left-page05.png",
+      "bytes": 117478,
+      "sha256": "cca0292e5377ec0a2a4349f6bf2fe33350beae739f99ece51dea97d82b06def1"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-1920-left-page05.png.import",
+      "bytes": 1020,
+      "sha256": "05376b0e0f7cc45465c417a02cc9a4edfe11498523befe67bd5db3dafcddd3e3"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-1920-left-page06.png",
+      "bytes": 118015,
+      "sha256": "2a25c7fec4b4e73dc64f4c67885dd7a7f3538d800e5c4c7c2bf16af39a79c915"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-1920-left-page06.png.import",
+      "bytes": 1020,
+      "sha256": "faf89d54b33f08de32a1d2da6e47d6d91487337433a1886f16ea0fcb3c46edc4"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-1920-left-page07.png",
+      "bytes": 134082,
+      "sha256": "e97b5f10206c4b9429318ebb51bbd8f621bd580c38721bc6fd50977ac33624cb"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-1920-left-page07.png.import",
+      "bytes": 1020,
+      "sha256": "ba55a959924bad40e545faf2996ccf8ec21175426a8a73b8b41b9b9d44ee1359"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-1920-left-page08.png",
+      "bytes": 138694,
+      "sha256": "14640ceb5dc7fb60b9a384ed7952b7fee8bb2d8964b3dd8f588c3e5104b6c8fe"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-1920-left-page08.png.import",
+      "bytes": 1020,
+      "sha256": "fe5d5c7b0639671da9d9bef7a471540731e53512c12131828cbdb3cbcdcecdc4"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-1920-left-page09.png",
+      "bytes": 127894,
+      "sha256": "a61e1b67274c57657ee43094141a30d75e490aa3b0c6954a6b71261371674afb"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-1920-left-page09.png.import",
+      "bytes": 1019,
+      "sha256": "745d22d6f0a35501d9132b119ae191a9e83db4233860241e1954f258eca416bb"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-1920-left-page10.png",
+      "bytes": 141961,
+      "sha256": "4b3609f21cc8cc5ff435d43f19ab545cdd33bdd7944f044df9e2300ddf6db7f6"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-1920-left-page10.png.import",
+      "bytes": 1020,
+      "sha256": "d2f45caf35460c3d596fe94496fca72a8b8447f1440d017bfc8b6e6cfbcb61bd"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-1920-left-page11.png",
+      "bytes": 139725,
+      "sha256": "1797fcdff0b4748e017b7acaf502eafabaced37dd03cf1eb28444f2b7850b808"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-1920-left-page11.png.import",
+      "bytes": 1020,
+      "sha256": "00c8b233ab0d526cbb411dd66d27ea122971599d3b53b40caff813b0fbc02496"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-1920-left-page12.png",
+      "bytes": 141560,
+      "sha256": "7789624ce1bb06f046377d76b2fa2ca304e56e7f06c7f69e27a98f02e8c3f6f1"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-1920-left-page12.png.import",
+      "bytes": 1019,
+      "sha256": "104706284e909b2be958d8dee8f0236560f850415a18dba20ad6447d3f03f6ae"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-1920-left-page13.png",
+      "bytes": 91129,
+      "sha256": "942e4c8e9635c181f2be5a335604cf3d776c76260b088e06d10f2ed190c2a39d"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-1920-left-page13.png.import",
+      "bytes": 1020,
+      "sha256": "c9cc256272eac23b563213029334c95f446c8d12ebb8244cfc912db8f27186a3"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-1920-right-page01.png",
+      "bytes": 289010,
+      "sha256": "edde69d95137a02ea421127c9347a179ab339d9826ddef2c6f795a50d4361b64"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-1920-right-page01.png.import",
+      "bytes": 1023,
+      "sha256": "dc860a80f0c07296743961d4e00c68bfdedc5e4ffd6653f281b73c72989e440b"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-1920-right-page02.png",
+      "bytes": 345576,
+      "sha256": "c160f07c364494b3d7a66be5e2d9b9b6271532292e8383f649a148d0e682fb23"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-1920-right-page02.png.import",
+      "bytes": 1023,
+      "sha256": "eea8d35c0afafd1cd34166da28cab1ec5ede92d9063cdcee7dc7aece72185007"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-1920-right-page03.png",
+      "bytes": 213245,
+      "sha256": "a63d9ddabfce6acc1a26988d9284bbf4f01f886552a00eeef7bf9b4e68a0508e"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-1920-right-page03.png.import",
+      "bytes": 1023,
+      "sha256": "79a0163a8e7b1200fa59667aa7a06f62ff972533d380d32f0287145fad39b3cb"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-1920-right-page04.png",
+      "bytes": 129615,
+      "sha256": "aec3603a5d647340cf679f8a6e07bda0d4d4508e9f33b909e1a64f8deda6354e"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-1920-right-page04.png.import",
+      "bytes": 1022,
+      "sha256": "39fa2822536ae815ba73d80fc01c2e0cd0cd8485408989769f13a49e684a81b4"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-1920-right-page05.png",
+      "bytes": 118072,
+      "sha256": "83a489c3d0c1b8221bc726f1ca3bfd7283ba3da2008afe29da6ac739aaf91908"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-1920-right-page05.png.import",
+      "bytes": 1022,
+      "sha256": "97f6b0ccb3c7b11b57ad8c25b79efe3870afcfdce0d3b3dd96ead6c82428c4b9"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-1920-right-page06.png",
+      "bytes": 118743,
+      "sha256": "fc24dfafd4085b462910ab6e869194d4cfeb8e1d2244e5f0162f0c3d49ea0271"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-1920-right-page06.png.import",
+      "bytes": 1023,
+      "sha256": "0db4f4b3e124a67b85dd0fa18b4cf4b23bdb27a1bc6473591c1405fbc0f1c7aa"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-1920-right-page07.png",
+      "bytes": 133501,
+      "sha256": "52956b51977647a5b386182a7c9de5c630f7183fa0543de9e7db9ba1d183fd58"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-1920-right-page07.png.import",
+      "bytes": 1023,
+      "sha256": "7af40cd87c7265abd4b08575a507a7fece6a63db9a0561ca111d4af5ccab594a"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-1920-right-page08.png",
+      "bytes": 138563,
+      "sha256": "404fae5456c8321ec4df2c1cf657ada826abc99ea9fe28ac3161e4e94f8bd87e"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-1920-right-page08.png.import",
+      "bytes": 1023,
+      "sha256": "a896205460b8ff05c88577fe5bec7b00e1182bb9d12707ff53995c25f160aeba"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-1920-right-page09.png",
+      "bytes": 128451,
+      "sha256": "e145e1bc6ceb01687b3ade8377d100b794937caec6201383ea899a52a112def9"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-1920-right-page09.png.import",
+      "bytes": 1023,
+      "sha256": "0ddeef3f994f6b010ed84367ea2a21f58a63b3543763115a2c2aa064170c7c80"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-1920-right-page10.png",
+      "bytes": 142546,
+      "sha256": "afe37bbf0e3a1fc2c81a4f1e2fc7cab665efc785b9318a4bf58ccc70913a67cc"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-1920-right-page10.png.import",
+      "bytes": 1023,
+      "sha256": "bee00c948c1d4e0de7afa597222b56dbfc54ee58109d5a0bee3d89503222e675"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-1920-right-page11.png",
+      "bytes": 140057,
+      "sha256": "2f66d762015fdcd4349acdb87da1bd7f2d2f70fe80dec9bac4717f975c3cbb79"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-1920-right-page11.png.import",
+      "bytes": 1022,
+      "sha256": "c2cbf8f2b3c1ceac0658e40707a07a3284a5f01c4a0f2909b0261cc4fd581382"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-1920-right-page12.png",
+      "bytes": 140676,
+      "sha256": "88fbaadb934c764748182ca6dad4bf0c0bcaa71138241508d6c20adedd156b23"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-1920-right-page12.png.import",
+      "bytes": 1023,
+      "sha256": "acf678bbeacd563e5b30891fb53652c9b4d7a0a9fbf7284b4bc95231702b08fb"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-1920-right-page13.png",
+      "bytes": 91678,
+      "sha256": "19ffc8d7783ab108e3a06447223779f60c18dbbd52c13ca78c7d0bb6fe2f025f"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-1920-right-page13.png.import",
+      "bytes": 1023,
+      "sha256": "fd1d6e0c2f3708f3c5ed12fad9b7d48b5e1fc38ae47e14748e07f03a845a9898"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-960-left-page01.png",
+      "bytes": 107205,
+      "sha256": "1dfae031068ddbc4fb373426c436b04cac6aa5dcfb0a6571e0a325c76f60b90a"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-960-left-page01.png.import",
+      "bytes": 1017,
+      "sha256": "e6919c58f55828d0b1255ea7f8575c0e9db69a36985ebd61bfd4a6817325adcf"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-960-left-page02.png",
+      "bytes": 114135,
+      "sha256": "aea483799e985db49a6c60a91859fc2d056a60e945f763da16aa60d79607fa8d"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-960-left-page02.png.import",
+      "bytes": 1017,
+      "sha256": "7936d13633b8308e660aa13f5e69155c0c59ba58dea1d7b00720a7f2ae1b0171"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-960-left-page03.png",
+      "bytes": 100937,
+      "sha256": "239abdfe702cea1ec1a167ffc8d6adcb37ead9511fea679c48671857ba66b150"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-960-left-page03.png.import",
+      "bytes": 1017,
+      "sha256": "1ec3088bc9dd6798a51647682f43e0c3b60fc3fd8a638634d4c9a074d0011987"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-960-left-page04.png",
+      "bytes": 89411,
+      "sha256": "3f2602bf0edf199c9a84c16e9f1893ece191af6c078c3a7459fd7acea7c909af"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-960-left-page04.png.import",
+      "bytes": 1017,
+      "sha256": "4dc2150b74075bf2fd9ee49ca8c39aa6bc5af75dfc86e978c95ca552981b71b9"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-960-left-page05.png",
+      "bytes": 80536,
+      "sha256": "03da5b610e9706b38609c5bfba65a8df9658a6a708c2c36accdbd600431d8d3b"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-960-left-page05.png.import",
+      "bytes": 1017,
+      "sha256": "36f829313439954bf398947d0a21399b8c9abae54393d05ff430cb0d7151e89e"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-960-left-page06.png",
+      "bytes": 80549,
+      "sha256": "ec12169f54fb97f2a111b4d8a078fe8a5c97b83c3f7367e8cb4b049d707dcd4b"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-960-left-page06.png.import",
+      "bytes": 1017,
+      "sha256": "9732c1db84f476dd1719ee6365aa179e1ff175a3a951cd7b66b71991a4a7b571"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-960-left-page07.png",
+      "bytes": 92803,
+      "sha256": "8f1a5dd8b53f28633f3169513f88b6461efa71d7fe389f976158e89368248834"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-960-left-page07.png.import",
+      "bytes": 1016,
+      "sha256": "bfcb834f874741b4867720587686eb68fe9476bb252687e36b7e6605e0a7f9ae"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-960-left-page08.png",
+      "bytes": 97298,
+      "sha256": "3594c515ab2f5b1be2a5eaab51b3eb53511d53da1645a78aee67fc1486d295be"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-960-left-page08.png.import",
+      "bytes": 1017,
+      "sha256": "b37ec515459fd6eea5c5bd63f6a9fa870392f32e5b7acb2c0698cefa032531f7"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-960-left-page09.png",
+      "bytes": 90139,
+      "sha256": "dbe0c2fe0c7078847d885edd2a9114bb1685e3c05da0922ef9e09ac220473235"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-960-left-page09.png.import",
+      "bytes": 1017,
+      "sha256": "a70888f7e795341d8278736bca9672e7a5bf7daf74d87518d3cc47987ac4577e"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-960-left-page10.png",
+      "bytes": 100900,
+      "sha256": "027dd4db56285dcb31e083370bb728681735ee24bd2a249023f1b27ddeecd90f"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-960-left-page10.png.import",
+      "bytes": 1017,
+      "sha256": "d01a15295f3d9a888a0e44e66551f8f9d1f8aa32b2b089eb65601bb25b6325dd"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-960-left-page11.png",
+      "bytes": 97115,
+      "sha256": "c3c149467ad97a998c3373c48164bbafe846901acc85ed7c5f7b51bf4a040f04"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-960-left-page11.png.import",
+      "bytes": 1017,
+      "sha256": "61aba27806024e1fe789c3bae144cd6e5c16fa10f869a0f393ec38237ef68e2d"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-960-left-page12.png",
+      "bytes": 99019,
+      "sha256": "378bed0438ea72f5c15b34b5c933dada0acad7f0208327c888dcc67cb5f6cb2a"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-960-left-page12.png.import",
+      "bytes": 1016,
+      "sha256": "2d8cf0b04626da893d9fa9144c72434366b2dbdc93a1c128faccbfda1de8d00f"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-960-left-page13.png",
+      "bytes": 60203,
+      "sha256": "54197a9b7d0435711d03d2745a952adf128a65a799f56fdca22b294b00802bea"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-960-left-page13.png.import",
+      "bytes": 1016,
+      "sha256": "cb870cd708a254153e8b11196848a9bf963badabfc454e8fc3a212aa426081f4"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-960-right-page01.png",
+      "bytes": 106871,
+      "sha256": "08d29169cda016f3bdb6035aa87c07cd58e2552cb6293416cf463cb3cecf8563"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-960-right-page01.png.import",
+      "bytes": 1019,
+      "sha256": "9cb0810763b471b30c925ac2ce4f76a27e7504c1f45915bc90ec28d897604041"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-960-right-page02.png",
+      "bytes": 113495,
+      "sha256": "dc5a8ba053287026d81e1e8a78cb307b27d094684e4b214de3d98c082f667579"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-960-right-page02.png.import",
+      "bytes": 1020,
+      "sha256": "3c6ddf1361c959bab1aec9161ad7e38601c977a7d2a1001e02c7c725c25b19ec"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-960-right-page03.png",
+      "bytes": 100592,
+      "sha256": "011f1595fa2fc84e15f8675c0fbf2305a8997ed930ff50ec3c6c6ba06a0d436c"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-960-right-page03.png.import",
+      "bytes": 1020,
+      "sha256": "6ed1779d092cc959286e12fda3f34100eb7d3dd6a7ef9637582b7877bc742b40"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-960-right-page04.png",
+      "bytes": 90020,
+      "sha256": "bc1cc7bb27580877e7f9ca132889ac39c84b79484b0aa80cb8bd58a5b5588fe8"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-960-right-page04.png.import",
+      "bytes": 1020,
+      "sha256": "9e374597eab70ab88b6dcc0bf29bd30973cac29d79d55076a6349d4fc9702cbb"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-960-right-page05.png",
+      "bytes": 80230,
+      "sha256": "4a8ce754d03703beb27be09d2f796697835dc1f14326b897b8e9c0630a08bae3"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-960-right-page05.png.import",
+      "bytes": 1020,
+      "sha256": "96115313e3ad3c8b3137546957bbdfc9c5ec1fe628bde97d84f055d7a4d9dea8"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-960-right-page06.png",
+      "bytes": 80653,
+      "sha256": "e953643645595f86a6f078bca1fe85fecb823e5e8def5ece414aa51f3da218b2"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-960-right-page06.png.import",
+      "bytes": 1020,
+      "sha256": "cf921d408ef04ea9cbf96e712c952f527804b72c88cfefb6991f271235d0213d"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-960-right-page07.png",
+      "bytes": 91415,
+      "sha256": "6fd9189667b43155cbaa9ee2872d68cbd259eed15f1eba4af64f7a24bb83e398"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-960-right-page07.png.import",
+      "bytes": 1020,
+      "sha256": "2576ecbfd32111699877975ec82a343eb855723f7baad17b18a1a9ce9c05888f"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-960-right-page08.png",
+      "bytes": 95251,
+      "sha256": "e67a0fd853cbed380d78257468ced10b80df6d614a0f7d9836db48caa0c4fad9"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-960-right-page08.png.import",
+      "bytes": 1020,
+      "sha256": "eb81255ca043fbf447d2a39423f6a2135a4d559badffbdc1ff3f712bddf74b00"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-960-right-page09.png",
+      "bytes": 89640,
+      "sha256": "993e0fa8cb9cea4ee62a0dd336d0ac330525564922a862fece4dc4d19e842a0c"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-960-right-page09.png.import",
+      "bytes": 1020,
+      "sha256": "7f6f0f6b0a553ec0ec8bceca1064cce9dde77dc19938ee0685e4a4adc36817d2"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-960-right-page10.png",
+      "bytes": 100461,
+      "sha256": "909daf7501a2b097ad256a2af590dc25fe3374398f57403f17e2b353dd90729f"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-960-right-page10.png.import",
+      "bytes": 1020,
+      "sha256": "9d9438bc58b17765fd6d8b0942984b290ef9a20d4179f11303d4c532c06e2f60"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-960-right-page11.png",
+      "bytes": 95636,
+      "sha256": "1ae49e2b4b4ed2a34011b22f71f878609229698488fadd03b4f4abd3e4287650"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-960-right-page11.png.import",
+      "bytes": 1020,
+      "sha256": "9f5c9fd10ae78b1d64fbfcdd149c3afa26bdd89b859633b3cde80f23a39177a7"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-960-right-page12.png",
+      "bytes": 96493,
+      "sha256": "6655e4078766c1230cba6019cfc10e3256d1cb3760b060d84222256706314d56"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-960-right-page12.png.import",
+      "bytes": 1020,
+      "sha256": "2f30ce5db64c05aa1d6575038e2b214e76e5cfce37e6b9e21e55fea359896469"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-960-right-page13.png",
+      "bytes": 61200,
+      "sha256": "138a4beddeec5f597d7f3994581e8c1a5406fd88b5b8d910ca8af938ea5b1fde"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/roster-960-right-page13.png.import",
+      "bytes": 1020,
+      "sha256": "c8b9c6b7907891fcda7d0f223619dcc12c0e0d5eac412866d10d075fa8fbfa9b"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/runtime-art-qa.json",
+      "bytes": 369882,
+      "sha256": "d8aa289e4a4dae85461d7e88a88d7341abcc78de012a6d1c176b985d805a936b"
+    },
+    {
+      "path": "design/skill-presentation-20261105/art-preview/visual-review.json",
+      "bytes": 3786,
+      "sha256": "f34d72f4e365f9f94a4dfbb65fb49a4244fca8e85cbad7a5fda25e8dca23cd03"
+    }
+  ],
+  "regression_reverification": "Complete 38 actual native rerun after women_visual NOVA burst fix; manual representatives explicitly cover three affected ability IDs. See nova-action-regression.json."
+}

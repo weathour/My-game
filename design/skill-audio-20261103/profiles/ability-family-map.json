@@ -1,0 +1,1311 @@
+{
+  "F01": {
+    "F01_basic": {
+      "family": "thrust",
+      "design_basis": "技能几何是THRUST直线刺击",
+      "owner_name": "吕玲绮",
+      "slot": "basic",
+      "title": "普攻",
+      "kind": "THRUST",
+      "mechanic": ""
+    },
+    "F01_dash": {
+      "family": "thrust",
+      "design_basis": "技能几何是THRUST直线刺击",
+      "owner_name": "吕玲绮",
+      "slot": "manual",
+      "title": "绮锋突进",
+      "kind": "THRUST",
+      "mechanic": "dash"
+    },
+    "F01_expose": {
+      "family": "blade",
+      "design_basis": "吕玲绮破阵为近身范围兵器攻击；裂阵字样不表示指挥阵法",
+      "owner_name": "吕玲绮",
+      "slot": "manual",
+      "title": "裂阵",
+      "kind": "NOVA",
+      "mechanic": "expose"
+    },
+    "F01_support": {
+      "family": "thrust",
+      "design_basis": "技能几何是THRUST直线刺击",
+      "owner_name": "吕玲绮",
+      "slot": "support",
+      "title": "飞锋援击",
+      "kind": "THRUST",
+      "mechanic": ""
+    }
+  },
+  "F02": {
+    "F02_basic": {
+      "family": "blade",
+      "design_basis": "近身横斩/范围挥击身份",
+      "owner_name": "蕾娜",
+      "slot": "basic",
+      "title": "普攻",
+      "kind": "SWEEP",
+      "mechanic": ""
+    },
+    "F02_guard": {
+      "family": "shield",
+      "design_basis": "护身/护盾类 WARD 技能",
+      "owner_name": "蕾娜",
+      "slot": "manual",
+      "title": "守势反击",
+      "kind": "WARD",
+      "mechanic": "guard"
+    },
+    "F02_riposte": {
+      "family": "thrust",
+      "design_basis": "技能几何是THRUST直线刺击",
+      "owner_name": "蕾娜",
+      "slot": "manual",
+      "title": "迎锋斩",
+      "kind": "THRUST",
+      "mechanic": "expose"
+    },
+    "F02_support": {
+      "family": "shield",
+      "design_basis": "护身/护盾类 WARD 技能",
+      "owner_name": "蕾娜",
+      "slot": "support",
+      "title": "护剑",
+      "kind": "WARD",
+      "mechanic": "guard"
+    }
+  },
+  "F03": {
+    "F03_basic": {
+      "family": "arcane",
+      "design_basis": "角色法术投射技能的专属奥术音色",
+      "owner_name": "田秀",
+      "slot": "basic",
+      "title": "普攻",
+      "kind": "PROJECTILE",
+      "mechanic": ""
+    },
+    "physician_heal": {
+      "family": "heal",
+      "design_basis": "治疗技能标题/目标作用为恢复生命",
+      "owner_name": "田秀",
+      "slot": "manual",
+      "title": "回春",
+      "kind": "HEAL",
+      "mechanic": "party_heal"
+    },
+    "physician_ward": {
+      "family": "shield",
+      "design_basis": "护身/护盾类 WARD 技能",
+      "owner_name": "田秀",
+      "slot": "manual",
+      "title": "护命",
+      "kind": "WARD",
+      "mechanic": ""
+    },
+    "physician_support": {
+      "family": "heal",
+      "design_basis": "治疗技能标题/目标作用为恢复生命",
+      "owner_name": "田秀",
+      "slot": "support",
+      "title": "敷药",
+      "kind": "HEAL",
+      "mechanic": ""
+    }
+  },
+  "F04": {
+    "F04_basic": {
+      "family": "arcane",
+      "design_basis": "角色法术投射技能的专属奥术音色",
+      "owner_name": "钱绮罗",
+      "slot": "basic",
+      "title": "普攻",
+      "kind": "PROJECTILE",
+      "mechanic": ""
+    },
+    "F04_settle": {
+      "family": "mana",
+      "design_basis": "技能明确恢复或补给魔法",
+      "owner_name": "钱绮罗",
+      "slot": "manual",
+      "title": "集中结账",
+      "kind": "MANA",
+      "mechanic": "refund_settle"
+    },
+    "F04_supply": {
+      "family": "mana",
+      "design_basis": "技能明确恢复或补给魔法",
+      "owner_name": "钱绮罗",
+      "slot": "manual",
+      "title": "应急补给",
+      "kind": "MANA",
+      "mechanic": ""
+    },
+    "F04_support": {
+      "family": "arcane",
+      "design_basis": "角色法术投射技能的专属奥术音色",
+      "owner_name": "钱绮罗",
+      "slot": "support",
+      "title": "护身碎银",
+      "kind": "PROJECTILE",
+      "mechanic": ""
+    }
+  },
+  "F05": {
+    "F05_basic": {
+      "family": "arcane",
+      "design_basis": "角色法术投射技能的专属奥术音色",
+      "owner_name": "祝青蘅",
+      "slot": "basic",
+      "title": "普攻",
+      "kind": "PROJECTILE",
+      "mechanic": ""
+    },
+    "F05_curse": {
+      "family": "curse",
+      "design_basis": "技能名/机制明确为诅咒",
+      "owner_name": "祝青蘅",
+      "slot": "manual",
+      "title": "青蘅符",
+      "kind": "PROJECTILE",
+      "mechanic": "curse"
+    },
+    "F05_spread": {
+      "family": "curse",
+      "design_basis": "技能名/机制明确为诅咒",
+      "owner_name": "祝青蘅",
+      "slot": "manual",
+      "title": "散咒",
+      "kind": "NOVA",
+      "mechanic": "curse"
+    },
+    "F05_support": {
+      "family": "curse",
+      "design_basis": "技能名/机制明确为诅咒",
+      "owner_name": "祝青蘅",
+      "slot": "support",
+      "title": "缠咒",
+      "kind": "PROJECTILE",
+      "mechanic": "curse"
+    }
+  },
+  "F06": {
+    "F06_basic": {
+      "family": "bow",
+      "design_basis": "远程投射按角色/技能身份选定为弹射武器音色",
+      "owner_name": "秦雁",
+      "slot": "basic",
+      "title": "普攻",
+      "kind": "PROJECTILE",
+      "mechanic": ""
+    },
+    "F06_volley": {
+      "family": "bow",
+      "design_basis": "角色/技能身份是弓弩、射击或箭矢",
+      "owner_name": "秦雁",
+      "slot": "manual",
+      "title": "穿云齐射",
+      "kind": "THRUST",
+      "mechanic": "ammo_volley"
+    },
+    "F06_pin": {
+      "family": "bow",
+      "design_basis": "钉阵矢是弓箭射击技能",
+      "owner_name": "秦雁",
+      "slot": "manual",
+      "title": "钉阵矢",
+      "kind": "THRUST",
+      "mechanic": ""
+    },
+    "F06_support": {
+      "family": "bow",
+      "design_basis": "角色/技能身份是弓弩、射击或箭矢",
+      "owner_name": "秦雁",
+      "slot": "support",
+      "title": "特制箭追射",
+      "kind": "PROJECTILE",
+      "mechanic": "ammo_followup"
+    }
+  },
+  "F07": {
+    "F07_basic": {
+      "family": "blade",
+      "design_basis": "近身横斩/范围挥击身份",
+      "owner_name": "马三娘",
+      "slot": "basic",
+      "title": "普攻",
+      "kind": "SWEEP",
+      "mechanic": ""
+    },
+    "bandit_sweep": {
+      "family": "wind",
+      "design_basis": "技能名明确为风系",
+      "owner_name": "马三娘",
+      "slot": "manual",
+      "title": "寨风斩",
+      "kind": "NOVA",
+      "mechanic": ""
+    },
+    "bandit_thrust": {
+      "family": "thrust",
+      "design_basis": "技能几何是THRUST直线刺击",
+      "owner_name": "马三娘",
+      "slot": "manual",
+      "title": "断阵刺",
+      "kind": "THRUST",
+      "mechanic": "shield_strike"
+    },
+    "bandit_support": {
+      "family": "blade",
+      "design_basis": "近身横斩/范围挥击身份",
+      "owner_name": "马三娘",
+      "slot": "support",
+      "title": "援斩",
+      "kind": "SWEEP",
+      "mechanic": ""
+    }
+  },
+  "F08": {
+    "F08_basic": {
+      "family": "blunt",
+      "design_basis": "陶小满铁匠身份的基础SWEEP按锤击处理",
+      "owner_name": "陶小满",
+      "slot": "basic",
+      "title": "普攻",
+      "kind": "SWEEP",
+      "mechanic": ""
+    },
+    "F08_temper": {
+      "family": "buff",
+      "design_basis": "temper机制为持续强化/延长",
+      "owner_name": "陶小满",
+      "slot": "manual",
+      "title": "炉火淬刃",
+      "kind": "WARD",
+      "mechanic": "temper"
+    },
+    "F08_break": {
+      "family": "blunt",
+      "design_basis": "钝击/盾击身份",
+      "owner_name": "陶小满",
+      "slot": "manual",
+      "title": "落锤",
+      "kind": "NOVA",
+      "mechanic": "expose"
+    },
+    "F08_support": {
+      "family": "buff",
+      "design_basis": "temper机制为持续强化/延长",
+      "owner_name": "陶小满",
+      "slot": "support",
+      "title": "余火淬刃",
+      "kind": "WARD",
+      "mechanic": "temper"
+    }
+  },
+  "F09": {
+    "F09_basic": {
+      "family": "arcane",
+      "design_basis": "角色法术投射技能的专属奥术音色",
+      "owner_name": "柳晚晴",
+      "slot": "basic",
+      "title": "普攻",
+      "kind": "PROJECTILE",
+      "mechanic": ""
+    },
+    "F09_extend": {
+      "family": "buff",
+      "design_basis": "extend机制为持续强化/延长",
+      "owner_name": "柳晚晴",
+      "slot": "manual",
+      "title": "续一阕",
+      "kind": "WARD",
+      "mechanic": "extend"
+    },
+    "F09_rally": {
+      "family": "buff",
+      "design_basis": "rally机制为持续强化/延长",
+      "owner_name": "柳晚晴",
+      "slot": "manual",
+      "title": "高歌",
+      "kind": "WARD",
+      "mechanic": "rally"
+    },
+    "F09_support": {
+      "family": "buff",
+      "design_basis": "extend机制为持续强化/延长",
+      "owner_name": "柳晚晴",
+      "slot": "support",
+      "title": "轻歌",
+      "kind": "WARD",
+      "mechanic": "extend"
+    }
+  },
+  "F10": {
+    "F10_basic": {
+      "family": "arcane",
+      "design_basis": "角色法术投射技能的专属奥术音色",
+      "owner_name": "陆知微",
+      "slot": "basic",
+      "title": "普攻",
+      "kind": "PROJECTILE",
+      "mechanic": ""
+    },
+    "F10_ward": {
+      "family": "shield",
+      "design_basis": "护身/护盾类 WARD 技能",
+      "owner_name": "陆知微",
+      "slot": "manual",
+      "title": "整册护身",
+      "kind": "WARD",
+      "mechanic": ""
+    },
+    "F10_expose": {
+      "family": "arcane",
+      "design_basis": "角色法术投射技能的专属奥术音色",
+      "owner_name": "陆知微",
+      "slot": "manual",
+      "title": "点破",
+      "kind": "PROJECTILE",
+      "mechanic": "expose"
+    },
+    "F10_support": {
+      "family": "shield",
+      "design_basis": "护身/护盾类 WARD 技能",
+      "owner_name": "陆知微",
+      "slot": "support",
+      "title": "护行符",
+      "kind": "WARD",
+      "mechanic": ""
+    }
+  },
+  "F11": {
+    "F11_basic": {
+      "family": "arcane",
+      "design_basis": "角色法术投射技能的专属奥术音色",
+      "owner_name": "艾玛",
+      "slot": "basic",
+      "title": "普攻",
+      "kind": "PROJECTILE",
+      "mechanic": ""
+    },
+    "emma_ice": {
+      "family": "ice",
+      "design_basis": "技能名或角色身份明确为冰霜",
+      "owner_name": "艾玛",
+      "slot": "automatic",
+      "title": "冰星",
+      "kind": "PROJECTILE",
+      "mechanic": ""
+    },
+    "emma_frost": {
+      "family": "ice",
+      "design_basis": "技能名或角色身份明确为冰霜",
+      "owner_name": "艾玛",
+      "slot": "manual",
+      "title": "霜环",
+      "kind": "NOVA",
+      "mechanic": "echo_record"
+    },
+    "emma_star": {
+      "family": "fire",
+      "design_basis": "技能名明确为火焰",
+      "owner_name": "艾玛",
+      "slot": "manual",
+      "title": "星火",
+      "kind": "PROJECTILE",
+      "mechanic": "echo_record"
+    },
+    "emma_support": {
+      "family": "arcane",
+      "design_basis": "角色法术投射技能的专属奥术音色",
+      "owner_name": "艾玛",
+      "slot": "support",
+      "title": "术法支援",
+      "kind": "PROJECTILE",
+      "mechanic": ""
+    }
+  },
+  "JIA": {
+    "JIA_basic": {
+      "family": "blade",
+      "design_basis": "贾苇索默认普攻横斩；长枪装备另有THRUST覆写",
+      "owner_name": "贾苇索",
+      "slot": "basic",
+      "title": "普攻",
+      "kind": "SWEEP",
+      "mechanic": ""
+    },
+    "jia_sweep": {
+      "family": "blade",
+      "design_basis": "近身横斩/范围挥击身份",
+      "owner_name": "贾苇索",
+      "slot": "manual",
+      "title": "横扫",
+      "kind": "NOVA",
+      "mechanic": ""
+    },
+    "jia_break": {
+      "family": "thrust",
+      "design_basis": "破阵为直线突刺技能",
+      "owner_name": "贾苇索",
+      "slot": "manual",
+      "title": "破阵",
+      "kind": "THRUST",
+      "mechanic": "expose"
+    }
+  },
+  "M01": {
+    "M01_basic": {
+      "family": "heavy_blade",
+      "design_basis": "戟/重型兵器挥击身份",
+      "owner_name": "吕布",
+      "slot": "basic",
+      "title": "普攻",
+      "kind": "SWEEP",
+      "mechanic": ""
+    },
+    "M01_cleave": {
+      "family": "heavy_blade",
+      "design_basis": "戟/重型兵器挥击身份",
+      "owner_name": "吕布",
+      "slot": "manual",
+      "title": "方天破军",
+      "kind": "NOVA",
+      "mechanic": "expose"
+    },
+    "M01_rally": {
+      "family": "buff",
+      "design_basis": "rally机制为持续强化/延长",
+      "owner_name": "吕布",
+      "slot": "manual",
+      "title": "鬼神降临",
+      "kind": "WARD",
+      "mechanic": "rally"
+    },
+    "M01_support": {
+      "family": "heavy_blade",
+      "design_basis": "掠阵横戟是吕布戟类横击，不是指挥动作",
+      "owner_name": "吕布",
+      "slot": "support",
+      "title": "掠阵横戟",
+      "kind": "SWEEP",
+      "mechanic": ""
+    }
+  },
+  "M02": {
+    "M02_basic": {
+      "family": "thrust",
+      "design_basis": "技能几何是THRUST直线刺击",
+      "owner_name": "张辽",
+      "slot": "basic",
+      "title": "普攻",
+      "kind": "THRUST",
+      "mechanic": ""
+    },
+    "M02_dash": {
+      "family": "thrust",
+      "design_basis": "技能几何是THRUST直线刺击",
+      "owner_name": "张辽",
+      "slot": "manual",
+      "title": "破阵突击",
+      "kind": "THRUST",
+      "mechanic": "dash"
+    },
+    "M02_expose": {
+      "family": "thrust",
+      "design_basis": "技能几何是THRUST直线刺击",
+      "owner_name": "张辽",
+      "slot": "manual",
+      "title": "斩将",
+      "kind": "THRUST",
+      "mechanic": "expose"
+    },
+    "M02_support": {
+      "family": "thrust",
+      "design_basis": "技能几何是THRUST直线刺击",
+      "owner_name": "张辽",
+      "slot": "support",
+      "title": "追锋",
+      "kind": "THRUST",
+      "mechanic": ""
+    }
+  },
+  "M03": {
+    "M03_basic": {
+      "family": "thrust",
+      "design_basis": "技能几何是THRUST直线刺击",
+      "owner_name": "高顺",
+      "slot": "basic",
+      "title": "普攻",
+      "kind": "THRUST",
+      "mechanic": ""
+    },
+    "M03_guard": {
+      "family": "shield",
+      "design_basis": "护身/护盾类 WARD 技能",
+      "owner_name": "高顺",
+      "slot": "manual",
+      "title": "陷阵守御",
+      "kind": "WARD",
+      "mechanic": ""
+    },
+    "M03_field": {
+      "family": "command",
+      "design_basis": "mechanic明确为布阵场域",
+      "owner_name": "高顺",
+      "slot": "manual",
+      "title": "铁壁阵",
+      "kind": "NOVA",
+      "mechanic": "field"
+    },
+    "M03_support": {
+      "family": "shield",
+      "design_basis": "护身/护盾类 WARD 技能",
+      "owner_name": "高顺",
+      "slot": "support",
+      "title": "陷阵护盾",
+      "kind": "WARD",
+      "mechanic": ""
+    }
+  },
+  "M04": {
+    "M04_basic": {
+      "family": "arcane",
+      "design_basis": "角色法术投射技能的专属奥术音色",
+      "owner_name": "陈宫",
+      "slot": "basic",
+      "title": "普攻",
+      "kind": "PROJECTILE",
+      "mechanic": ""
+    },
+    "M04_field": {
+      "family": "command",
+      "design_basis": "mechanic明确为布阵场域",
+      "owner_name": "陈宫",
+      "slot": "manual",
+      "title": "阵前令",
+      "kind": "NOVA",
+      "mechanic": "field"
+    },
+    "M04_bind": {
+      "family": "blade",
+      "design_basis": "近身横斩/范围挥击身份",
+      "owner_name": "陈宫",
+      "slot": "manual",
+      "title": "锁魂阵",
+      "kind": "NOVA",
+      "mechanic": ""
+    },
+    "M04_support": {
+      "family": "arcane",
+      "design_basis": "角色法术投射技能的专属奥术音色",
+      "owner_name": "陈宫",
+      "slot": "support",
+      "title": "阵中令",
+      "kind": "PROJECTILE",
+      "mechanic": "expose"
+    }
+  },
+  "M05": {
+    "M05_basic": {
+      "family": "thrust",
+      "design_basis": "技能几何是THRUST直线刺击",
+      "owner_name": "曹纯",
+      "slot": "basic",
+      "title": "普攻",
+      "kind": "THRUST",
+      "mechanic": ""
+    },
+    "M05_dash": {
+      "family": "thrust",
+      "design_basis": "技能几何是THRUST直线刺击",
+      "owner_name": "曹纯",
+      "slot": "manual",
+      "title": "虎豹突贯",
+      "kind": "THRUST",
+      "mechanic": "dash"
+    },
+    "M05_rally": {
+      "family": "buff",
+      "design_basis": "rally机制为持续强化/延长",
+      "owner_name": "曹纯",
+      "slot": "manual",
+      "title": "催阵",
+      "kind": "WARD",
+      "mechanic": "rally"
+    },
+    "M05_support": {
+      "family": "thrust",
+      "design_basis": "骑军掠阵为曹纯骑枪突刺支援",
+      "owner_name": "曹纯",
+      "slot": "support",
+      "title": "骑军掠阵",
+      "kind": "THRUST",
+      "mechanic": ""
+    }
+  },
+  "M06": {
+    "M06_basic": {
+      "family": "bow",
+      "design_basis": "远程投射按角色/技能身份选定为弹射武器音色",
+      "owner_name": "曹休",
+      "slot": "basic",
+      "title": "普攻",
+      "kind": "PROJECTILE",
+      "mechanic": ""
+    },
+    "M06_expose": {
+      "family": "bow",
+      "design_basis": "远程投射按角色/技能身份选定为弹射武器音色",
+      "owner_name": "曹休",
+      "slot": "manual",
+      "title": "定点狙击",
+      "kind": "PROJECTILE",
+      "mechanic": "expose"
+    },
+    "M06_dash": {
+      "family": "bow",
+      "design_basis": "角色/技能身份是弓弩、射击或箭矢",
+      "owner_name": "曹休",
+      "slot": "manual",
+      "title": "退阵射",
+      "kind": "THRUST",
+      "mechanic": "dash"
+    },
+    "M06_support": {
+      "family": "bow",
+      "design_basis": "角色/技能身份是弓弩、射击或箭矢",
+      "owner_name": "曹休",
+      "slot": "support",
+      "title": "定射",
+      "kind": "PROJECTILE",
+      "mechanic": ""
+    }
+  },
+  "M07": {
+    "M07_basic": {
+      "family": "blade",
+      "design_basis": "近身横斩/范围挥击身份",
+      "owner_name": "臧霸",
+      "slot": "basic",
+      "title": "普攻",
+      "kind": "SWEEP",
+      "mechanic": ""
+    },
+    "M07_sweep": {
+      "family": "blade",
+      "design_basis": "近身横斩/范围挥击身份",
+      "owner_name": "臧霸",
+      "slot": "manual",
+      "title": "扫寨",
+      "kind": "NOVA",
+      "mechanic": ""
+    },
+    "M07_rally": {
+      "family": "buff",
+      "design_basis": "rally机制为持续强化/延长",
+      "owner_name": "臧霸",
+      "slot": "manual",
+      "title": "聚众",
+      "kind": "WARD",
+      "mechanic": "rally"
+    },
+    "M07_support": {
+      "family": "blade",
+      "design_basis": "近身横斩/范围挥击身份",
+      "owner_name": "臧霸",
+      "slot": "support",
+      "title": "清围",
+      "kind": "NOVA",
+      "mechanic": ""
+    }
+  },
+  "M08": {
+    "M08_basic": {
+      "family": "thrust",
+      "design_basis": "技能几何是THRUST直线刺击",
+      "owner_name": "侯成",
+      "slot": "basic",
+      "title": "普攻",
+      "kind": "THRUST",
+      "mechanic": ""
+    },
+    "M08_break": {
+      "family": "thrust",
+      "design_basis": "技能几何是THRUST直线刺击",
+      "owner_name": "侯成",
+      "slot": "manual",
+      "title": "破坚",
+      "kind": "THRUST",
+      "mechanic": "expose"
+    },
+    "M08_guard": {
+      "family": "shield",
+      "design_basis": "护身/护盾类 WARD 技能",
+      "owner_name": "侯成",
+      "slot": "manual",
+      "title": "固阵",
+      "kind": "WARD",
+      "mechanic": ""
+    },
+    "M08_support": {
+      "family": "thrust",
+      "design_basis": "技能几何是THRUST直线刺击",
+      "owner_name": "侯成",
+      "slot": "support",
+      "title": "破甲援刺",
+      "kind": "THRUST",
+      "mechanic": "expose"
+    }
+  },
+  "N01": {
+    "N01_basic": {
+      "family": "blade",
+      "design_basis": "近身横斩/范围挥击身份",
+      "owner_name": "乡勇刀手",
+      "slot": "basic",
+      "title": "普攻",
+      "kind": "SWEEP",
+      "mechanic": ""
+    },
+    "N01_strike": {
+      "family": "blade",
+      "design_basis": "近身横斩/范围挥击身份",
+      "owner_name": "乡勇刀手",
+      "slot": "manual",
+      "title": "蓄势一击",
+      "kind": "SWEEP",
+      "mechanic": ""
+    },
+    "militia_support": {
+      "family": "blade",
+      "design_basis": "近身横斩/范围挥击身份",
+      "owner_name": "乡勇刀手",
+      "slot": "support",
+      "title": "援斩",
+      "kind": "SWEEP",
+      "mechanic": ""
+    }
+  },
+  "N02": {
+    "N02_basic": {
+      "family": "blunt",
+      "design_basis": "钝击/盾击身份",
+      "owner_name": "白门盾卒",
+      "slot": "basic",
+      "title": "普攻",
+      "kind": "SWEEP",
+      "mechanic": ""
+    },
+    "N02_ward": {
+      "family": "shield",
+      "design_basis": "护身/护盾类 WARD 技能",
+      "owner_name": "白门盾卒",
+      "slot": "manual",
+      "title": "举盾",
+      "kind": "WARD",
+      "mechanic": ""
+    },
+    "N02_support": {
+      "family": "shield",
+      "design_basis": "护身/护盾类 WARD 技能",
+      "owner_name": "白门盾卒",
+      "slot": "support",
+      "title": "薄盾",
+      "kind": "WARD",
+      "mechanic": ""
+    }
+  },
+  "N03": {
+    "N03_basic": {
+      "family": "thrust",
+      "design_basis": "陷阵盾卫该普攻数据为THRUST直线攻击",
+      "owner_name": "陷阵盾卫",
+      "slot": "basic",
+      "title": "普攻",
+      "kind": "THRUST",
+      "mechanic": ""
+    },
+    "N03_guard": {
+      "family": "shield",
+      "design_basis": "护身/护盾类 WARD 技能",
+      "owner_name": "陷阵盾卫",
+      "slot": "manual",
+      "title": "陷阵重盾",
+      "kind": "WARD",
+      "mechanic": ""
+    },
+    "N03_support": {
+      "family": "shield",
+      "design_basis": "护身/护盾类 WARD 技能",
+      "owner_name": "陷阵盾卫",
+      "slot": "support",
+      "title": "重盾援护",
+      "kind": "WARD",
+      "mechanic": ""
+    }
+  },
+  "N04": {
+    "N04_basic": {
+      "family": "thrust",
+      "design_basis": "技能几何是THRUST直线刺击",
+      "owner_name": "乡勇枪手",
+      "slot": "basic",
+      "title": "普攻",
+      "kind": "THRUST",
+      "mechanic": ""
+    },
+    "N04_strike": {
+      "family": "thrust",
+      "design_basis": "技能几何是THRUST直线刺击",
+      "owner_name": "乡勇枪手",
+      "slot": "manual",
+      "title": "蓄势一击",
+      "kind": "THRUST",
+      "mechanic": ""
+    },
+    "spear_support": {
+      "family": "thrust",
+      "design_basis": "技能几何是THRUST直线刺击",
+      "owner_name": "乡勇枪手",
+      "slot": "support",
+      "title": "援刺",
+      "kind": "THRUST",
+      "mechanic": ""
+    }
+  },
+  "N05": {
+    "N05_basic": {
+      "family": "heavy_blade",
+      "design_basis": "戟/重型兵器挥击身份",
+      "owner_name": "城门戟卒",
+      "slot": "basic",
+      "title": "普攻",
+      "kind": "SWEEP",
+      "mechanic": ""
+    },
+    "N05_sweep": {
+      "family": "heavy_blade",
+      "design_basis": "戟/重型兵器挥击身份",
+      "owner_name": "城门戟卒",
+      "slot": "manual",
+      "title": "戟门拦截",
+      "kind": "NOVA",
+      "mechanic": ""
+    },
+    "N05_support": {
+      "family": "heavy_blade",
+      "design_basis": "戟/重型兵器挥击身份",
+      "owner_name": "城门戟卒",
+      "slot": "support",
+      "title": "援戟",
+      "kind": "SWEEP",
+      "mechanic": ""
+    }
+  },
+  "N06": {
+    "N06_basic": {
+      "family": "thrust",
+      "design_basis": "陷阵锐卒普攻数据为THRUST刺击",
+      "owner_name": "陷阵锐卒",
+      "slot": "basic",
+      "title": "普攻",
+      "kind": "THRUST",
+      "mechanic": ""
+    },
+    "N06_break": {
+      "family": "thrust",
+      "design_basis": "锐卒攻坚是THRUST贯刺",
+      "owner_name": "陷阵锐卒",
+      "slot": "manual",
+      "title": "锐卒攻坚",
+      "kind": "THRUST",
+      "mechanic": "expose"
+    },
+    "N06_support": {
+      "family": "thrust",
+      "design_basis": "破坚援刺是THRUST刺击支援",
+      "owner_name": "陷阵锐卒",
+      "slot": "support",
+      "title": "破坚援刺",
+      "kind": "THRUST",
+      "mechanic": "expose"
+    }
+  },
+  "N07": {
+    "N07_basic": {
+      "family": "bow",
+      "design_basis": "角色/技能身份是弓弩、射击或箭矢",
+      "owner_name": "猎户弓手",
+      "slot": "basic",
+      "title": "普攻",
+      "kind": "PROJECTILE",
+      "mechanic": ""
+    },
+    "N07_strike": {
+      "family": "bow",
+      "design_basis": "角色/技能身份是弓弩、射击或箭矢",
+      "owner_name": "猎户弓手",
+      "slot": "manual",
+      "title": "蓄势一击",
+      "kind": "PROJECTILE",
+      "mechanic": ""
+    },
+    "bow_support": {
+      "family": "bow",
+      "design_basis": "角色/技能身份是弓弩、射击或箭矢",
+      "owner_name": "猎户弓手",
+      "slot": "support",
+      "title": "援射",
+      "kind": "PROJECTILE",
+      "mechanic": ""
+    }
+  },
+  "N08": {
+    "N08_basic": {
+      "family": "bow",
+      "design_basis": "角色/技能身份是弓弩、射击或箭矢",
+      "owner_name": "白门弩手",
+      "slot": "basic",
+      "title": "普攻",
+      "kind": "THRUST",
+      "mechanic": ""
+    },
+    "N08_bolt": {
+      "family": "bow",
+      "design_basis": "贯阵弩是弩箭射击；贯阵字样不表示指挥",
+      "owner_name": "白门弩手",
+      "slot": "manual",
+      "title": "贯阵弩",
+      "kind": "THRUST",
+      "mechanic": ""
+    },
+    "N08_support": {
+      "family": "bow",
+      "design_basis": "角色/技能身份是弓弩、射击或箭矢",
+      "owner_name": "白门弩手",
+      "slot": "support",
+      "title": "贯穿援射",
+      "kind": "THRUST",
+      "mechanic": ""
+    }
+  },
+  "N09": {
+    "N09_basic": {
+      "family": "bow",
+      "design_basis": "角色/技能身份是弓弩、射击或箭矢",
+      "owner_name": "曹军劲弩手",
+      "slot": "basic",
+      "title": "普攻",
+      "kind": "PROJECTILE",
+      "mechanic": ""
+    },
+    "N09_aim": {
+      "family": "bow",
+      "design_basis": "角色/技能身份是弓弩、射击或箭矢",
+      "owner_name": "曹军劲弩手",
+      "slot": "manual",
+      "title": "定敌弩",
+      "kind": "PROJECTILE",
+      "mechanic": ""
+    },
+    "N09_support": {
+      "family": "bow",
+      "design_basis": "角色/技能身份是弓弩、射击或箭矢",
+      "owner_name": "曹军劲弩手",
+      "slot": "support",
+      "title": "连弩援射",
+      "kind": "PROJECTILE",
+      "mechanic": ""
+    }
+  },
+  "N10": {
+    "N10_basic": {
+      "family": "thrust",
+      "design_basis": "技能几何是THRUST直线刺击",
+      "owner_name": "并州游骑",
+      "slot": "basic",
+      "title": "普攻",
+      "kind": "THRUST",
+      "mechanic": ""
+    },
+    "N10_dash": {
+      "family": "thrust",
+      "design_basis": "技能几何是THRUST直线刺击",
+      "owner_name": "并州游骑",
+      "slot": "manual",
+      "title": "游骑突围",
+      "kind": "THRUST",
+      "mechanic": "dash"
+    },
+    "N10_support": {
+      "family": "thrust",
+      "design_basis": "冲阵为自动THRUST支援刺击，不是位移突进",
+      "owner_name": "并州游骑",
+      "slot": "support",
+      "title": "冲阵",
+      "kind": "THRUST",
+      "mechanic": ""
+    }
+  },
+  "N11": {
+    "N11_basic": {
+      "family": "thrust",
+      "design_basis": "技能几何是THRUST直线刺击",
+      "owner_name": "虎豹轻骑",
+      "slot": "basic",
+      "title": "普攻",
+      "kind": "THRUST",
+      "mechanic": ""
+    },
+    "N11_dash": {
+      "family": "thrust",
+      "design_basis": "技能几何是THRUST直线刺击",
+      "owner_name": "虎豹轻骑",
+      "slot": "manual",
+      "title": "轻骑逐敌",
+      "kind": "THRUST",
+      "mechanic": "dash"
+    },
+    "N11_support": {
+      "family": "thrust",
+      "design_basis": "技能几何是THRUST直线刺击",
+      "owner_name": "虎豹轻骑",
+      "slot": "support",
+      "title": "掠锋",
+      "kind": "THRUST",
+      "mechanic": ""
+    }
+  },
+  "N12": {
+    "N12_basic": {
+      "family": "thrust",
+      "design_basis": "技能几何是THRUST直线刺击",
+      "owner_name": "虎豹重骑",
+      "slot": "basic",
+      "title": "普攻",
+      "kind": "THRUST",
+      "mechanic": ""
+    },
+    "N12_charge": {
+      "family": "thrust",
+      "design_basis": "技能几何是THRUST直线刺击",
+      "owner_name": "虎豹重骑",
+      "slot": "manual",
+      "title": "重骑压阵",
+      "kind": "THRUST",
+      "mechanic": "dash"
+    },
+    "N12_support": {
+      "family": "thrust",
+      "design_basis": "技能几何是THRUST直线刺击",
+      "owner_name": "虎豹重骑",
+      "slot": "support",
+      "title": "重冲",
+      "kind": "THRUST",
+      "mechanic": ""
+    }
+  },
+  "N13": {
+    "N13_basic": {
+      "family": "arcane",
+      "design_basis": "角色法术投射技能的专属奥术音色",
+      "owner_name": "游方符师",
+      "slot": "basic",
+      "title": "普攻",
+      "kind": "PROJECTILE",
+      "mechanic": ""
+    },
+    "N13_strike": {
+      "family": "arcane",
+      "design_basis": "角色法术投射技能的专属奥术音色",
+      "owner_name": "游方符师",
+      "slot": "manual",
+      "title": "蓄势一击",
+      "kind": "PROJECTILE",
+      "mechanic": ""
+    },
+    "N13_mana": {
+      "family": "mana",
+      "design_basis": "技能明确恢复或补给魔法",
+      "owner_name": "游方符师",
+      "slot": "manual",
+      "title": "回元符",
+      "kind": "MANA",
+      "mechanic": ""
+    },
+    "talisman_support": {
+      "family": "mana",
+      "design_basis": "技能明确恢复或补给魔法",
+      "owner_name": "游方符师",
+      "slot": "support",
+      "title": "回元",
+      "kind": "MANA",
+      "mechanic": ""
+    }
+  },
+  "N14": {
+    "N14_basic": {
+      "family": "curse",
+      "design_basis": "技能名/机制明确为诅咒",
+      "owner_name": "荒祠咒师",
+      "slot": "basic",
+      "title": "普攻",
+      "kind": "PROJECTILE",
+      "mechanic": ""
+    },
+    "curse_bind": {
+      "family": "curse",
+      "design_basis": "技能名/机制明确为诅咒",
+      "owner_name": "荒祠咒师",
+      "slot": "manual",
+      "title": "缚行咒",
+      "kind": "NOVA",
+      "mechanic": "curse"
+    },
+    "curse_support": {
+      "family": "curse",
+      "design_basis": "技能名/机制明确为诅咒",
+      "owner_name": "荒祠咒师",
+      "slot": "support",
+      "title": "缚行咒",
+      "kind": "PROJECTILE",
+      "mechanic": "curse"
+    }
+  },
+  "N15": {
+    "N15_basic": {
+      "family": "arcane",
+      "design_basis": "角色法术投射技能的专属奥术音色",
+      "owner_name": "曹军祭师",
+      "slot": "basic",
+      "title": "普攻",
+      "kind": "PROJECTILE",
+      "mechanic": ""
+    },
+    "N15_curse": {
+      "family": "curse",
+      "design_basis": "技能名/机制明确为诅咒",
+      "owner_name": "曹军祭师",
+      "slot": "manual",
+      "title": "祭咒",
+      "kind": "PROJECTILE",
+      "mechanic": "curse"
+    },
+    "N15_cashout": {
+      "family": "curse",
+      "design_basis": "技能名/机制明确为诅咒",
+      "owner_name": "曹军祭师",
+      "slot": "manual",
+      "title": "催咒",
+      "kind": "PROJECTILE",
+      "mechanic": "curse_cashout"
+    },
+    "N15_support": {
+      "family": "curse",
+      "design_basis": "技能名/机制明确为诅咒",
+      "owner_name": "曹军祭师",
+      "slot": "support",
+      "title": "弱敌咒",
+      "kind": "PROJECTILE",
+      "mechanic": "expose"
+    }
+  },
+  "N16": {
+    "N16_basic": {
+      "family": "blunt",
+      "design_basis": "郎中基础SWEEP按药杵/钝器挥击身份处理",
+      "owner_name": "行脚郎中",
+      "slot": "basic",
+      "title": "普攻",
+      "kind": "SWEEP",
+      "mechanic": ""
+    },
+    "healer_aid": {
+      "family": "heal",
+      "design_basis": "治疗技能标题/目标作用为恢复生命",
+      "owner_name": "行脚郎中",
+      "slot": "manual",
+      "title": "急救",
+      "kind": "HEAL",
+      "mechanic": ""
+    },
+    "healer_support": {
+      "family": "heal",
+      "design_basis": "治疗技能标题/目标作用为恢复生命",
+      "owner_name": "行脚郎中",
+      "slot": "support",
+      "title": "敷药",
+      "kind": "HEAL",
+      "mechanic": ""
+    }
+  },
+  "N17": {
+    "N17_basic": {
+      "family": "blunt",
+      "design_basis": "伙夫基础SWEEP按炊具钝击身份处理",
+      "owner_name": "随军伙夫",
+      "slot": "basic",
+      "title": "普攻",
+      "kind": "SWEEP",
+      "mechanic": ""
+    },
+    "cook_guard": {
+      "family": "shield",
+      "design_basis": "护身/护盾类 WARD 技能",
+      "owner_name": "随军伙夫",
+      "slot": "manual",
+      "title": "护身",
+      "kind": "WARD",
+      "mechanic": ""
+    },
+    "cook_support": {
+      "family": "heal",
+      "design_basis": "治疗技能标题/目标作用为恢复生命",
+      "owner_name": "随军伙夫",
+      "slot": "support",
+      "title": "热汤",
+      "kind": "HEAL",
+      "mechanic": ""
+    }
+  },
+  "N18": {
+    "N18_basic": {
+      "family": "blunt",
+      "design_basis": "军需小吏基础SWEEP按非刀剑钝击处理",
+      "owner_name": "军需小吏",
+      "slot": "basic",
+      "title": "普攻",
+      "kind": "SWEEP",
+      "mechanic": ""
+    },
+    "clerk_guard": {
+      "family": "shield",
+      "design_basis": "护身/护盾类 WARD 技能",
+      "owner_name": "军需小吏",
+      "slot": "manual",
+      "title": "护身符",
+      "kind": "WARD",
+      "mechanic": ""
+    },
+    "N18_rally": {
+      "family": "buff",
+      "design_basis": "rally机制为持续强化/延长",
+      "owner_name": "军需小吏",
+      "slot": "manual",
+      "title": "行军令",
+      "kind": "WARD",
+      "mechanic": "rally"
+    },
+    "clerk_support": {
+      "family": "buff",
+      "design_basis": "rally机制为持续强化/延长",
+      "owner_name": "军需小吏",
+      "slot": "support",
+      "title": "军需援护",
+      "kind": "WARD",
+      "mechanic": "rally"
+    }
+  }
+}

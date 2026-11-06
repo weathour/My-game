@@ -305,5 +305,8 @@ func run() -> void:
 	await frames()
 	viewport.queue_free()
 	await frames(2)
+	# Frame-only waits can finish before the native audio thread releases the
+	# just-freed scene's Vorbis playback references on a fast renderer.
+	await create_timer(0.3).timeout
 	print("CHRONICLE_HOME_MENU_RENDER_SMOKE ", "PASS" if failures == 0 else "FAIL", " checks=", checks, " failures=", failures)
 	quit(0 if failures == 0 else 1)

@@ -28,7 +28,7 @@ func run() -> void:
 	var menu_data: Variant = JSON.parse_string(FileAccess.get_file_as_string(MENU_TEXT.PATH))
 	expect(menu_data is Dictionary and menu_data.get("help", {}).get("sections", []).size() > 0 and menu_data.get("about", {}).get("licenses", []).size() > 0, "packed help/about sections and license text resolve")
 	if failures: quit(1); return
-	expect(STORIES.events().size() == 22 and STORIES.optional_events().size() == 32 and STORIES.reactions().size() == 48, "complete story catalogs packed")
+	expect(STORIES.events().size() == 22 and STORIES.optional_events().size() == 32 and STORIES.reactions().size() == 49, "complete story catalogs packed")
 	var errors := STORIES.validate()
 	expect(errors.is_empty(), "packed catalog references valid: " + str(errors))
 	for catalog in [STORIES.events(), STORIES.optional_events()]:

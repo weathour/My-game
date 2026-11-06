@@ -1,0 +1,545 @@
+{
+  "status": "passed",
+  "audited_at": 1793946313.283329,
+  "official_status": {
+    "status": "passed",
+    "runner_pid": 200321,
+    "started_at": 1793946099.9277232,
+    "name": "skill-information-project-check-recovered",
+    "log": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/skill-information-project-check-recovered.log",
+    "log_directory": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/skill-information-project-check-recovered",
+    "reuse_manifest": "/home/weathour/programs/desktop-projects/My-game/design/skill-information-20261106/verification/partial-recovery-manifest.json",
+    "child_pid": 200322,
+    "child_pgid": 200322,
+    "returncode": 0,
+    "finished_at": 1793946266.70772,
+    "elapsed_seconds": 166.77999711036682
+  },
+  "validated_smokes": 63,
+  "source_smokes": 59,
+  "official_pack_smokes": 4,
+  "reused_smokes_from_current_partial": 40,
+  "fresh_source_smokes": 19,
+  "fresh_pack_smokes": 4,
+  "prior_round_results_reused": false,
+  "project_check_ok": true,
+  "frozen_input_files": 1878,
+  "frozen_input_sha256": "535a878c0ddb727e8285782778405118c4c92188814cdc14afe3ec3677d56505",
+  "runtime_inputs_unchanged": true,
+  "test_entries_unchanged_since_final_freeze": true,
+  "godot_unchanged": true,
+  "harness_unchanged": true,
+  "partial_run": "partial-run.json",
+  "recovery_manifest": "partial-recovery-manifest.json",
+  "pack": {
+    "path": "/tmp/my-game-check.pM7fgF/pack-smokes/game.pck",
+    "bytes": 237767328,
+    "sha256": "8ff5f9dbdbca8e8ffd32a4a2648e5a0eed68aee782a2b04c14c9c0996c68b762"
+  },
+  "smokes": [
+    {
+      "script": "scripts/tests/baimen_enemy_runtime_smoke.gd",
+      "script_sha256": "3fa1415413a1f212da6256e56ac485b8c754c37a70e2a8ba5849ff667e7354f6",
+      "log": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/skill-information-project-check-recovered/baimen_enemy_runtime_smoke.log",
+      "log_sha256": "6e2986cde6e1b2c022292ddef24fc576c8a19de572b65589fdd2415a3ba6a207",
+      "validator_failures": [],
+      "reused_from_current_partial": true
+    },
+    {
+      "script": "scripts/tests/baimen_women_combat_art_smoke.gd",
+      "script_sha256": "eea6d59b814dd7a17fd5107fd3db6a5e846948dbf7ddb58cb922b2dd667039ea",
+      "log": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/skill-information-project-check-recovered/baimen_women_combat_art_smoke.log",
+      "log_sha256": "646534b58adfc9313717be686e2d2e8dee305d9a09ec6657978a8085258df9a9",
+      "validator_failures": [],
+      "reused_from_current_partial": true
+    },
+    {
+      "script": "scripts/tests/baimen_women_portraits_smoke.gd",
+      "script_sha256": "d6d73eef067cc7f5b2abcdeacdd86d0e049c1a0b023c897a940f001bf0d8d3e5",
+      "log": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/skill-information-project-check-recovered/baimen_women_portraits_smoke.log",
+      "log_sha256": "6472c4e2426574abe0ef8061bb0884d5d96544d31c095f621f0b00f5f95eaed6",
+      "validator_failures": [],
+      "reused_from_current_partial": true
+    },
+    {
+      "script": "scripts/tests/boss_combo_timing_smoke.gd",
+      "script_sha256": "08c410f92fdb31c1f87475e7e352bec5432760f9d288a7eb652ea25ef8863844",
+      "log": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/skill-information-project-check-recovered/boss_combo_timing_smoke.log",
+      "log_sha256": "bfea216ba0167181fc0932ac37ea3c3a2335a58f5271a249e496dafb47b8cdad",
+      "validator_failures": [],
+      "reused_from_current_partial": true
+    },
+    {
+      "script": "scripts/tests/boss_forms_smoke.gd",
+      "script_sha256": "4944f5bd41244fc81d821a43da5f0e2bd0d845886cb2de51db4923f9305c2dff",
+      "log": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/skill-information-project-check-recovered/boss_forms_smoke.log",
+      "log_sha256": "51247d6284ec4fc4f7366e20931d34ca965366908d7ab729104cac73830b3b3e",
+      "validator_failures": [],
+      "reused_from_current_partial": true
+    },
+    {
+      "script": "scripts/tests/boss_friendly_art_smoke.gd",
+      "script_sha256": "39aeb561620bbe1482404b1165909988f603af8b7d25c1402014ea056383604f",
+      "log": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/skill-information-project-check-recovered/boss_friendly_art_smoke.log",
+      "log_sha256": "97c3180872ba707da4b4aa7f86aecf2499f0c0d44c4910de22bbabc15f2adabb",
+      "validator_failures": [],
+      "reused_from_current_partial": true
+    },
+    {
+      "script": "scripts/tests/chronicle_audio_settings_render_smoke.gd",
+      "script_sha256": "b79efa82c78bfc7f7b4fbf9070488f2c0a2b2aecdc3ca9f7a0514809e73b2ef6",
+      "log": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/skill-information-project-check-recovered/chronicle_audio_settings_render_smoke.log",
+      "log_sha256": "450544211f4efa034bec81931cccf97f548573d5fa7bad6813bf8dee44e31b83",
+      "validator_failures": [],
+      "reused_from_current_partial": true
+    },
+    {
+      "script": "scripts/tests/chronicle_authored_effects_smoke.gd",
+      "script_sha256": "b55270456a11204bb0fb7e98673b4b3d1c142627a55f68f4253128705398b04e",
+      "log": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/skill-information-project-check-recovered/chronicle_authored_effects_smoke.log",
+      "log_sha256": "53e196869708d490aabf3bac3edc36f98b9dd66590d261f4fbfb3e75ea9e9dd3",
+      "validator_failures": [],
+      "reused_from_current_partial": true
+    },
+    {
+      "script": "scripts/tests/chronicle_battle_ground_smoke.gd",
+      "script_sha256": "31ed9fb32f33d9da34921b90e3cc785627b0f3867b49fa14e31171a0246e372c",
+      "log": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/skill-information-project-check-recovered/chronicle_battle_ground_smoke.log",
+      "log_sha256": "6ad8d0616112a94d4e17ed06efcd552a0da41e7628af99633941ff6c6ed90239",
+      "validator_failures": [],
+      "reused_from_current_partial": true
+    },
+    {
+      "script": "scripts/tests/chronicle_battle_scale_smoke.gd",
+      "script_sha256": "7790431b7b477ada425254b6331f10830f9470991e2e60f372cf301ffeb08061",
+      "log": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/skill-information-project-check-recovered/chronicle_battle_scale_smoke.log",
+      "log_sha256": "5a692dbde0d701cda1a5ea9699eb224027e18cfb0151a291df8722aad34107fc",
+      "validator_failures": [],
+      "reused_from_current_partial": true
+    },
+    {
+      "script": "scripts/tests/chronicle_boss_camera_cache_smoke.gd",
+      "script_sha256": "e291fd1a68398852864e1b5335a4a35fcf5eba58923c98945a499a8b4e9b3753",
+      "log": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/skill-information-project-check-recovered/chronicle_boss_camera_cache_smoke.log",
+      "log_sha256": "283b87eec6c6bc1ba2ed9c980aa23ff70d864386f43571f9ca4ade3d4effa949",
+      "validator_failures": [],
+      "reused_from_current_partial": true
+    },
+    {
+      "script": "scripts/tests/chronicle_boss_camera_smoke.gd",
+      "script_sha256": "ba5873fd40ae89bd0aac847947201b87423c2d163faedff0f8e03e0c026be0a0",
+      "log": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/skill-information-project-check-recovered/chronicle_boss_camera_smoke.log",
+      "log_sha256": "f6d95e91a34d3cd1fb38a79eeefbf7a03ddd9f15b2293a2d6a0f57a5a8552eef",
+      "validator_failures": [],
+      "reused_from_current_partial": true
+    },
+    {
+      "script": "scripts/tests/chronicle_boss_flow_smoke.gd",
+      "script_sha256": "25d32eedf06cd0b84e92d023253fd9395be86661b381b57e9e90948ac1d5e4b5",
+      "log": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/skill-information-project-check-recovered/chronicle_boss_flow_smoke.log",
+      "log_sha256": "1f3ac022a81b003abce8719c8a118fd60fda53572df43588b2136c959d1900c4",
+      "validator_failures": [],
+      "reused_from_current_partial": true
+    },
+    {
+      "script": "scripts/tests/chronicle_boss_sound_smoke.gd",
+      "script_sha256": "0c694d5ffdfdfb6bfb66f3f7bdb4df2bb846a37f50e5a2c9026e19069e47aa31",
+      "log": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/skill-information-project-check-recovered/chronicle_boss_sound_smoke.log",
+      "log_sha256": "c4ca2756c7c0f69173556c80b8c3848613edf9075503ae43e126189d6ba81990",
+      "validator_failures": [],
+      "reused_from_current_partial": true
+    },
+    {
+      "script": "scripts/tests/chronicle_chapter_two_smoke.gd",
+      "script_sha256": "a374daac8fd5c79342aee1da766c0bfbd6f870b3e15cf95e22369dfc3a1a2e9d",
+      "log": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/skill-information-project-check-recovered/chronicle_chapter_two_smoke.log",
+      "log_sha256": "ecad0b5331034dd3c641b8e77df65142124ede1b286b33ad3484bbf1612331e7",
+      "validator_failures": [],
+      "reused_from_current_partial": true
+    },
+    {
+      "script": "scripts/tests/chronicle_character_campaign_smoke.gd",
+      "script_sha256": "7bc9695683bad7ed847ae691167f73847542cdbb98dd76bd8253f4db42f28f07",
+      "log": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/skill-information-project-check-recovered/chronicle_character_campaign_smoke.log",
+      "log_sha256": "20d3e782d39e8d7c63173bdce636a588661fa193768cd6d94f908d0fb21b6e1a",
+      "validator_failures": [],
+      "reused_from_current_partial": true
+    },
+    {
+      "script": "scripts/tests/chronicle_character_mechanics_smoke.gd",
+      "script_sha256": "afb8aa395b79615e8c8f515490c963376c592a440ebe6a6631486c7d11d8f331",
+      "log": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/skill-information-project-check-recovered/chronicle_character_mechanics_smoke.log",
+      "log_sha256": "1d6a2ba8cf44c282a15f7efb74bc0101e85e80a6c4c397850ff63e67d9ea55e7",
+      "validator_failures": [],
+      "reused_from_current_partial": true
+    },
+    {
+      "script": "scripts/tests/chronicle_character_panels_smoke.gd",
+      "script_sha256": "7772dcac11fed3dafd81c54343a9c5ba05086a3d218cc70de1874a79676a3cb1",
+      "log": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/skill-information-project-check-recovered/chronicle_character_panels_smoke.log",
+      "log_sha256": "88e17969dc10b04d23d0a1337bf2392f0faee9d786fc468700938ec64707704d",
+      "validator_failures": [],
+      "reused_from_current_partial": true
+    },
+    {
+      "script": "scripts/tests/chronicle_character_profiles_smoke.gd",
+      "script_sha256": "3fd27773e4a1ad38022c76d3d7cbda6e7c2d55fcbe8aecc07df9760b4fe93c63",
+      "log": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/skill-information-project-check-recovered/chronicle_character_profiles_smoke.log",
+      "log_sha256": "9a59b1881276b1daddcd848738e8687b2a715878e29b0d9ebbb0f54348073f89",
+      "validator_failures": [],
+      "reused_from_current_partial": true
+    },
+    {
+      "script": "scripts/tests/chronicle_combat_feedback_events_smoke.gd",
+      "script_sha256": "dd9d09da785467a3e9a6542cd33e401b86387dcb4e45023d3333906da767f375",
+      "log": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/skill-information-project-check-recovered/chronicle_combat_feedback_events_smoke.log",
+      "log_sha256": "d66776256fc235108ae5b4912660e07980d4ed554b05a344de51aced3697768a",
+      "validator_failures": [],
+      "reused_from_current_partial": true
+    },
+    {
+      "script": "scripts/tests/chronicle_combat_feedback_pack_smoke.gd",
+      "script_sha256": "1145db5f876b7e7975ac33a93abd225a0cd7de75f7aca0818edfe591b725ebe4",
+      "log": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/skill-information-project-check-recovered/chronicle_combat_feedback_pack_smoke.log",
+      "log_sha256": "72b9258ff8bcd50ee4c8876c1908193dda84306e0f1b2a8f876c930b1bf511be",
+      "validator_failures": [],
+      "reused_from_current_partial": false
+    },
+    {
+      "script": "scripts/tests/chronicle_combat_feedback_smoke.gd",
+      "script_sha256": "368d4d1891e397f6486233e82b25e1079c19301dcdcd71e774af4224ec7338d0",
+      "log": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/skill-information-project-check-recovered/chronicle_combat_feedback_smoke.log",
+      "log_sha256": "dcb4020a553af89a5154cc7b9f27fb6f04dcc0b0d85de994ab9bd604905ee842",
+      "validator_failures": [],
+      "reused_from_current_partial": true
+    },
+    {
+      "script": "scripts/tests/chronicle_combat_smoke.gd",
+      "script_sha256": "92ca00c9b5522604c67d74c877f927295647732f32ee281f64592beac6618a03",
+      "log": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/skill-information-project-check-recovered/chronicle_combat_smoke.log",
+      "log_sha256": "75690169070b270afca8301a539e294798d3e9cdfd153c3402a1eef2b6417490",
+      "validator_failures": [],
+      "reused_from_current_partial": true
+    },
+    {
+      "script": "scripts/tests/chronicle_context_navigation_smoke.gd",
+      "script_sha256": "1529b24bb6eba8a0a08938b15a354403317484da9b25d534da7a506807efcfa9",
+      "log": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/skill-information-project-check-recovered/chronicle_context_navigation_smoke.log",
+      "log_sha256": "55fa5ec68b43faf4415cbd03d760769c39d2fc3745b2f8935aba869ff41d3a17",
+      "validator_failures": [],
+      "reused_from_current_partial": true
+    },
+    {
+      "script": "scripts/tests/chronicle_danmaku_smoke.gd",
+      "script_sha256": "b61597cbf52859d06451c3314b0d5f216237c051083a5ebb8c92251a6741e02a",
+      "log": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/skill-information-project-check-recovered/chronicle_danmaku_smoke.log",
+      "log_sha256": "845102c7254afa233a009c16b6d30ec5b45b7250d82e323102f63d90d0e94279",
+      "validator_failures": [],
+      "reused_from_current_partial": true
+    },
+    {
+      "script": "scripts/tests/chronicle_enemy_campaign_smoke.gd",
+      "script_sha256": "b0caa8a0a4c508ba092b5899d8469b15595c7e2fe1eeaceca6762fa4573166ee",
+      "log": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/skill-information-project-check-recovered/chronicle_enemy_campaign_smoke.log",
+      "log_sha256": "ad8c443ad281c9b010310fa271db596ef89d91bf5d6e70dd85eb0ca3fae58273",
+      "validator_failures": [],
+      "reused_from_current_partial": true
+    },
+    {
+      "script": "scripts/tests/chronicle_enemy_codex_smoke.gd",
+      "script_sha256": "28f554860c2088562969daed2938ecbc0b963f0af84b9792a30de08f6cb6afb1",
+      "log": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/skill-information-project-check-recovered/chronicle_enemy_codex_smoke.log",
+      "log_sha256": "0f9439503aefe500f93e6a8b6d4c4447cbd56836600e080c25906c360e6521f9",
+      "validator_failures": [],
+      "reused_from_current_partial": true
+    },
+    {
+      "script": "scripts/tests/chronicle_enemy_content_smoke.gd",
+      "script_sha256": "800a9cc28dddda81e48d841810860d9b1352dbbc6b2cbe94723bd98a49392270",
+      "log": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/skill-information-project-check-recovered/chronicle_enemy_content_smoke.log",
+      "log_sha256": "4f95a56d76c5473bf30dede7145033029f6ccfb21d7fba8777f45d839d4c8c57",
+      "validator_failures": [],
+      "reused_from_current_partial": true
+    },
+    {
+      "script": "scripts/tests/chronicle_enemy_effects_smoke.gd",
+      "script_sha256": "ac2f0263d54a94cddf561ade5d65f7b95e4dddf79d177f94c57dfaf821b88c71",
+      "log": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/skill-information-project-check-recovered/chronicle_enemy_effects_smoke.log",
+      "log_sha256": "ac4fc3ab6186f232e44035505987fb1b34c0f99ae8fd5f6ecc94728e101787e2",
+      "validator_failures": [],
+      "reused_from_current_partial": true
+    },
+    {
+      "script": "scripts/tests/chronicle_enemy_pack_smoke.gd",
+      "script_sha256": "6155b26d4429c5086e99bc5f87f81d4bc2d53b138037fd8ee26690a23fe3850b",
+      "log": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/skill-information-project-check-recovered/chronicle_enemy_pack_smoke.log",
+      "log_sha256": "d65a26e772333a1dd66a835a3adcec4b98c68cab14b1ef7026abdba5fb3eaf92",
+      "validator_failures": [],
+      "reused_from_current_partial": false
+    },
+    {
+      "script": "scripts/tests/chronicle_enemy_presentation_smoke.gd",
+      "script_sha256": "ede6f87637bb0081633f0a6c065b33fce40b3a672d3792cd1b47dc1ab5407b08",
+      "log": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/skill-information-project-check-recovered/chronicle_enemy_presentation_smoke.log",
+      "log_sha256": "a06f4f665f2152af5e0412095922a2f8cc95ea1432ca2dba037ef0455f039c2c",
+      "validator_failures": [],
+      "reused_from_current_partial": true
+    },
+    {
+      "script": "scripts/tests/chronicle_enemy_sessions_smoke.gd",
+      "script_sha256": "789ede1af5e195fd6445b95c265310691bd9cb5bbf9548d4b677f5d6e41db06c",
+      "log": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/skill-information-project-check-recovered/chronicle_enemy_sessions_smoke.log",
+      "log_sha256": "9e2c0fc4f4e1817691004618e159dbe9d23a4c4d0b5a3040df3e0193fa0abd92",
+      "validator_failures": [],
+      "reused_from_current_partial": true
+    },
+    {
+      "script": "scripts/tests/chronicle_feedback_latency_smoke.gd",
+      "script_sha256": "0412522e501eb83c523c5538b73575f331142554bef9e09b3984eeca35f029d7",
+      "log": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/skill-information-project-check-recovered/chronicle_feedback_latency_smoke.log",
+      "log_sha256": "c7bd5d1835c72d3941409bbf8288500c2ba3c1e78cad151ca0b383126ea4eb16",
+      "validator_failures": [],
+      "reused_from_current_partial": true
+    },
+    {
+      "script": "scripts/tests/chronicle_home_menu_render_smoke.gd",
+      "script_sha256": "3123321c0c86dfe315c0fd6de0facf341b6fe57a43cff6e936b543f796db7ca4",
+      "log": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/skill-information-project-check-recovered/chronicle_home_menu_render_smoke.log",
+      "log_sha256": "805fce2d6a166a8308d961868866429ab3031e5cb2837a65dfb765c1e7d6bfed",
+      "validator_failures": [],
+      "reused_from_current_partial": true
+    },
+    {
+      "script": "scripts/tests/chronicle_mechanic_hud_smoke.gd",
+      "script_sha256": "f88b0d482f5c3f624c6ec7f7f6042d42d6be9cebce921a1c774dc82702c1d2c6",
+      "log": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/skill-information-project-check-recovered/chronicle_mechanic_hud_smoke.log",
+      "log_sha256": "d81d85b36bf6cf128acf5d7ad8eb912146705bd5bc087da5a3d14ae7b3841e0f",
+      "validator_failures": [],
+      "reused_from_current_partial": true
+    },
+    {
+      "script": "scripts/tests/chronicle_melee_reach_smoke.gd",
+      "script_sha256": "a97c417126cd5e96284120538b5b2818bab20956810c58ef533ef584c0380714",
+      "log": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/skill-information-project-check-recovered/chronicle_melee_reach_smoke.log",
+      "log_sha256": "898a1e40caf38e4953d15d072675a31a8aefa44f8cd2b69b8b9dbd1833afc759",
+      "validator_failures": [],
+      "reused_from_current_partial": true
+    },
+    {
+      "script": "scripts/tests/chronicle_music_pack_smoke.gd",
+      "script_sha256": "39f784bb86ada9a9ba4a22855b1664b388919b5ca9753254f347ed22b82393d2",
+      "log": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/skill-information-project-check-recovered/chronicle_music_pack_smoke.log",
+      "log_sha256": "e30e12496eadecdfde3f972d0f2138c4d8d493e6f91ed6e17c6c4def2aa9853f",
+      "validator_failures": [],
+      "reused_from_current_partial": false
+    },
+    {
+      "script": "scripts/tests/chronicle_music_playback_smoke.gd",
+      "script_sha256": "fa3e5d47ac658ac4da67c0930ed08c208e702608eeb2505eb2918f1390e3d8dc",
+      "log": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/skill-information-project-check-recovered/chronicle_music_playback_smoke.log",
+      "log_sha256": "7838d368f780c72109d167dc87b40284bd3ff8ce1e8a0d476ab1ed4fea2245bc",
+      "validator_failures": [],
+      "reused_from_current_partial": true
+    },
+    {
+      "script": "scripts/tests/chronicle_music_smoke.gd",
+      "script_sha256": "a59607808b9e00208cf9a8cba204ca75f59c55becc457869151975253a959879",
+      "log": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/skill-information-project-check-recovered/chronicle_music_smoke.log",
+      "log_sha256": "df0a09ea4efcd5efba8b00e8e5722da655d2ba1fdcf7c978ebfc00c19d6c0f04",
+      "validator_failures": [],
+      "reused_from_current_partial": true
+    },
+    {
+      "script": "scripts/tests/chronicle_party_drag_smoke.gd",
+      "script_sha256": "61c2e60f7e24e30a35cb06a05f06a63c0eeaa1780534619f9269ebc71b2e0899",
+      "log": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/skill-information-project-check-recovered/chronicle_party_drag_smoke.log",
+      "log_sha256": "9bde423bbd0a5ab2a056e7f05e78457e062b6a90464448df98bcae1b07f2af72",
+      "validator_failures": [],
+      "reused_from_current_partial": true
+    },
+    {
+      "script": "scripts/tests/chronicle_party_summary_smoke.gd",
+      "script_sha256": "5e366ab32a67e52af20e741a2bf5b1ffad5997c26b7af7733085e6c1d1d22fc7",
+      "log": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/skill-information-project-check-recovered/chronicle_party_summary_smoke.log",
+      "log_sha256": "9dcaf6eddfad29e8032f83f48c82b0f42a63a3f1e63795237cb5dc1e55a666f1",
+      "validator_failures": [],
+      "reused_from_current_partial": true
+    },
+    {
+      "script": "scripts/tests/chronicle_playable_ui_smoke.gd",
+      "script_sha256": "4272561d92c41876d4f5ad7eeb154ea68d7d0f8b9e311e0d9362aa771ed5c728",
+      "log": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/skill-information-project-check-recovered/chronicle_playable_ui_smoke.log",
+      "log_sha256": "7ba64be39ac9efc9b52c01e03d506e5b77730fd5010bc2a3c781b2bb917b87ad",
+      "validator_failures": [],
+      "reused_from_current_partial": true
+    },
+    {
+      "script": "scripts/tests/chronicle_player_hurtbox_center_smoke.gd",
+      "script_sha256": "aba43798cf37ec3c3290d9970cdb4de48d4571169c45ff6228db86cbd8bee2cc",
+      "log": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/skill-information-project-check-recovered/chronicle_player_hurtbox_center_smoke.log",
+      "log_sha256": "145d495ef7023f4f09d0c0fa45a69ff5d2b60ce21eafadcdf1bd2dd33b1dc04d",
+      "validator_failures": [],
+      "reused_from_current_partial": true
+    },
+    {
+      "script": "scripts/tests/chronicle_reflow_visual_smoke.gd",
+      "script_sha256": "efb027c722982594fdb355316e693f3a485360863184624c345a02b7ea3107e4",
+      "log": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/skill-information-project-check-recovered/chronicle_reflow_visual_smoke.log",
+      "log_sha256": "42a6d351ea1ff4939ab440f75ceae977601805721bf55bfec70c5e2d9aea1dd1",
+      "validator_failures": [],
+      "reused_from_current_partial": false
+    },
+    {
+      "script": "scripts/tests/chronicle_roster_content_smoke.gd",
+      "script_sha256": "0a3b8bc6713450d2bf7be83da2d1113c202c0c9ddde71a6cbc6a6ef2518fa7bc",
+      "log": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/skill-information-project-check-recovered/chronicle_roster_content_smoke.log",
+      "log_sha256": "526478e66deb2e434c6f961488afa5431ff25ce730e43359a3e54e6c97bac70f",
+      "validator_failures": [],
+      "reused_from_current_partial": false
+    },
+    {
+      "script": "scripts/tests/chronicle_route_map_smoke.gd",
+      "script_sha256": "348fd0c51432934a866b5f885c257aa34d20c3e97c02a9a0cbf9e6e7a7c938af",
+      "log": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/skill-information-project-check-recovered/chronicle_route_map_smoke.log",
+      "log_sha256": "44c497df7cd766f143ed055202c2a586b971f6f5d7a3fcfb77a24af273525d49",
+      "validator_failures": [],
+      "reused_from_current_partial": false
+    },
+    {
+      "script": "scripts/tests/chronicle_skill_audio_smoke.gd",
+      "script_sha256": "261a01909a35b7d909ce901b61414d82f81a85c566ae50d223f4f5f340254dc4",
+      "log": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/skill-information-project-check-recovered/chronicle_skill_audio_smoke.log",
+      "log_sha256": "425d4465d2c56888b07cb1749bd729ab2fc6d5a56136f72cefa6654243bb019b",
+      "validator_failures": [],
+      "reused_from_current_partial": false
+    },
+    {
+      "script": "scripts/tests/chronicle_skill_cache_smoke.gd",
+      "script_sha256": "c9f02b0d451b7a6b1311a4d825b891ad807c909831ee179f641025a23d277c7b",
+      "log": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/skill-information-project-check-recovered/chronicle_skill_cache_smoke.log",
+      "log_sha256": "a353aad9582c26c6dbf6489e8aae66944579bd87bc2dc136083b6b8bce9c306b",
+      "validator_failures": [],
+      "reused_from_current_partial": false
+    },
+    {
+      "script": "scripts/tests/chronicle_skill_information_render_smoke.gd",
+      "script_sha256": "4b3d2e589e05e4a23007f63226136585602d0ec0dbf24dea200b79d2997dcdd1",
+      "log": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/skill-information-project-check-recovered/chronicle_skill_information_render_smoke.log",
+      "log_sha256": "fa977e3c979b35a957f2a0e70aa877fbe571f186b76f99c4e6e127cd17577d76",
+      "validator_failures": [],
+      "reused_from_current_partial": false
+    },
+    {
+      "script": "scripts/tests/chronicle_skill_information_smoke.gd",
+      "script_sha256": "ff8f40a0100ee58f84c0d621a54552f6682b9faba036742da83ab9993cb231f1",
+      "log": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/skill-information-project-check-recovered/chronicle_skill_information_smoke.log",
+      "log_sha256": "da5dbc36ac65c5c9c6137c5f791b321856e4816e1204227c728194eef510497e",
+      "validator_failures": [],
+      "reused_from_current_partial": false
+    },
+    {
+      "script": "scripts/tests/chronicle_skill_presentation_smoke.gd",
+      "script_sha256": "b46ccfa67cdc362104a313ff2b8738f4a0b5e9c04a62963480cf91bf67ef10b3",
+      "log": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/skill-information-project-check-recovered/chronicle_skill_presentation_smoke.log",
+      "log_sha256": "9a211aaa3b834791c70c9aa2dedf817c80f3c2926d805a1e8c5a320c8462189d",
+      "validator_failures": [],
+      "reused_from_current_partial": false
+    },
+    {
+      "script": "scripts/tests/chronicle_sprite_bounds_smoke.gd",
+      "script_sha256": "94a53577ef611cda35c7bb4e9cf9ffddc01cec61d6c57c7e0ba6aadf77e54669",
+      "log": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/skill-information-project-check-recovered/chronicle_sprite_bounds_smoke.log",
+      "log_sha256": "0ead04c4e7a73cd1d475fac4cb9fe0b36a740ea946fca68045c9f39550925021",
+      "validator_failures": [],
+      "reused_from_current_partial": false
+    },
+    {
+      "script": "scripts/tests/chronicle_story_content_smoke.gd",
+      "script_sha256": "b880ae958c9508564228de461895b20cfff10597d4ad28f4a25c18b7783f3f8f",
+      "log": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/skill-information-project-check-recovered/chronicle_story_content_smoke.log",
+      "log_sha256": "de1439fec2ac843d5058af349e9d006596f773fb927567e8884eec40b1d37b9b",
+      "validator_failures": [],
+      "reused_from_current_partial": false
+    },
+    {
+      "script": "scripts/tests/chronicle_story_history_smoke.gd",
+      "script_sha256": "b47197103e717c382a51d9a93a322ab4cf070d443b52cf6d47e05192717ec448",
+      "log": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/skill-information-project-check-recovered/chronicle_story_history_smoke.log",
+      "log_sha256": "31a66e450e4d8eb7a29f30bcb204d630c4e61ff3a7a73289dd1175c990fdc9ff",
+      "validator_failures": [],
+      "reused_from_current_partial": false
+    },
+    {
+      "script": "scripts/tests/chronicle_story_optional_render_smoke.gd",
+      "script_sha256": "5e20e7dd88ffcc1e5783747b5665331ab2f730f356f977bcd32c24f180935886",
+      "log": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/skill-information-project-check-recovered/chronicle_story_optional_render_smoke.log",
+      "log_sha256": "d23f9d04ff2c7bff7562e8e72af93dc6371fa44c65e4b703e89a128ce1605b09",
+      "validator_failures": [],
+      "reused_from_current_partial": false
+    },
+    {
+      "script": "scripts/tests/chronicle_story_pack_smoke.gd",
+      "script_sha256": "6446769664b75d4263dff84b071e3a823419546b8f8f79cb5f12f601c7fe2e10",
+      "log": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/skill-information-project-check-recovered/chronicle_story_pack_smoke.log",
+      "log_sha256": "c9da7354a8f17cb0ba536331f248e864b0911a46fa3fcf1978019424b0a3afc7",
+      "validator_failures": [],
+      "reused_from_current_partial": false
+    },
+    {
+      "script": "scripts/tests/chronicle_story_progress_smoke.gd",
+      "script_sha256": "ecb8c0ceb627522afd290c644ef4e645e832c234560b4487e0bac5340fbd7845",
+      "log": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/skill-information-project-check-recovered/chronicle_story_progress_smoke.log",
+      "log_sha256": "b0a26d2d929e1dbc425e071237046cafd1199e1b8dd1b302c1168ef739781be7",
+      "validator_failures": [],
+      "reused_from_current_partial": false
+    },
+    {
+      "script": "scripts/tests/chronicle_story_replay_smoke.gd",
+      "script_sha256": "6d60d15249c212a8c8712232ac55db60e20c20988dd9e3f94059304dc81e7c90",
+      "log": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/skill-information-project-check-recovered/chronicle_story_replay_smoke.log",
+      "log_sha256": "bc44636029b1161f9d48e9e2c8b8bb8e9123bbb04459d23a1ae25b55b352f4ea",
+      "validator_failures": [],
+      "reused_from_current_partial": false
+    },
+    {
+      "script": "scripts/tests/chronicle_story_ui_smoke.gd",
+      "script_sha256": "5228440441e7797c82c33203b1957a073bae09cff6fd553980db3640f6b28153",
+      "log": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/skill-information-project-check-recovered/chronicle_story_ui_smoke.log",
+      "log_sha256": "350fa8a2264a99979edcae9d850e0cff4bf133df85446ee0352b90070e5b7de2",
+      "validator_failures": [],
+      "reused_from_current_partial": false
+    },
+    {
+      "script": "scripts/tests/jia_campaign_combat_smoke.gd",
+      "script_sha256": "7f50d01984d9e988f3c8ec1ab5e637d2c02f41c9a9ba3bba721c1439255bbfc5",
+      "log": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/skill-information-project-check-recovered/jia_campaign_combat_smoke.log",
+      "log_sha256": "50f75023897f7b91909092b030908005589f7fef86132573c20c2e663540e913",
+      "validator_failures": [],
+      "reused_from_current_partial": false
+    },
+    {
+      "script": "scripts/tests/jia_campaign_progression_smoke.gd",
+      "script_sha256": "b71092335b9dabc271639a3e02e1db781844af4422b6fd383664249f4e112f25",
+      "log": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/skill-information-project-check-recovered/jia_campaign_progression_smoke.log",
+      "log_sha256": "a9228ffe42ac2e5e9c3e5cde3024b9cf6f9ba9042286874b30ccf5819ff5a8ea",
+      "validator_failures": [],
+      "reused_from_current_partial": false
+    },
+    {
+      "script": "scripts/tests/jia_combat_art_smoke.gd",
+      "script_sha256": "ba90c70ad0b32e2fde4c8501f2e8cf392a7cb91406f849c7e60c4da33d62974e",
+      "log": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/skill-information-project-check-recovered/jia_combat_art_smoke.log",
+      "log_sha256": "5949001ea3083e14762e6822acf786bba3c861a3ab50ba8fd0048737db073e84",
+      "validator_failures": [],
+      "reused_from_current_partial": false
+    },
+    {
+      "script": "scripts/tests/jia_lord_epilogue_smoke.gd",
+      "script_sha256": "8f4689bb37efbc494ec7b1e8debb2f2e8ebd8943861b80ea6fc7984a97960581",
+      "log": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/skill-information-project-check-recovered/jia_lord_epilogue_smoke.log",
+      "log_sha256": "b8b6674037f5b7132461e2ba516cbfb478d716530cd181e1e6fb0151dfeaf9d1",
+      "validator_failures": [],
+      "reused_from_current_partial": false
+    }
+  ]
+}

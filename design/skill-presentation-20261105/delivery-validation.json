@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "status": "complete",
+  "scope_counts": {
+    "characters": 38,
+    "abilities": 137,
+    "ability_slots": {
+      "basic": 38,
+      "manual": 61,
+      "automatic": 1,
+      "support": 37
+    },
+    "owned_passives_not_ability_rows": 37,
+    "trait_owners_not_extra_abilities": 9
+  },
+  "batches": {
+    "B1": "complete",
+    "B2": "complete",
+    "B3": "complete",
+    "B4": "complete",
+    "B5": "complete",
+    "B6": "complete"
+  },
+  "models": {
+    "new_models": 22,
+    "independent_body_drawings": 352,
+    "independent_battle_portraits": 22,
+    "exported_body_frames_with_reuse": 396,
+    "editable_aseprite_files": 154,
+    "runtime_png_files": 132,
+    "evidence": "verification/model-coverage.json"
+  },
+  "generation": "generation-manifest.json",
+  "visual": {
+    "all_ability_frames": 137,
+    "actor_roster": 38,
+    "resolutions": [
+      [
+        960,
+        540
+      ],
+      [
+        1280,
+        720
+      ],
+      [
+        1920,
+        1080
+      ]
+    ],
+    "ability_evidence": "verification/ability-visuals/review.json",
+    "actor_evidence": "art-preview/visual-review.json",
+    "nova_regression_evidence": "art-preview/nova-action-regression.json",
+    "integrated_evidence": "qa/final-render-report.json",
+    "owned_evidence": "qa/owned-cap-report.json"
+  },
+  "project_check": {
+    "status": "passed",
+    "project_check": "design/skill-presentation-20261105/verification/project-check-recovered.log",
+    "project_check_status": "design/skill-presentation-20261105/verification/project-check-recovered-status.json",
+    "audit": "design/skill-presentation-20261105/verification/final-project-check-audit.json",
+    "effective_smokes": 55,
+    "reused_source_smokes_with_unchanged_guarded_inputs": 43,
+    "newly_executed_source_smokes": 8,
+    "newly_exported_pack_smokes": 4,
+    "native_integrated_checks": 4036,
+    "headless_integrated_checks": 3934,
+    "owned_panel_headless_and_native_checks_each": 384,
+    "user_aesthetic_review_required_to_complete_implementation": false
+  },
+  "frozen_numeric_definitions": {
+    "scripts/content/roster_kit_data.gd": "bdb57613d8ae34f845c272869ef37bc590966fdccc9410d5518f27dd3790f737",
+    "scripts/content/combat_catalog.gd": "a50549c0305cc2d21bc1b745905526080eb9442d63a0b941ba7f8d757e9606e9",
+    "scripts/battle/ability_definition.gd": "e633f09670a3d389028117ef3ed3b72b71aa198edb012cce4ff53cd1a33379bf"
+  },
+  "runtime_assets_and_test_inputs_are_guarded_by": "verification/reuse/cache.json",
+  "limits": [
+    "Native B12 performance samples are local fixture measurements, not cross-machine FPS or saturation of every visual budget.",
+    "Technical and agent visual review complete; user aesthetic feedback remains open, without a separate implementation approval gate.",
+    "Demo package and before/after animation were excluded by the user."
+  ]
+}

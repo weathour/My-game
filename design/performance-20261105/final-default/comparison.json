@@ -1,0 +1,427 @@
+{
+  "schema_version": 1,
+  "status": "PASS",
+  "baseline": "baseline/results.json",
+  "same_renderer_after": "after/results.json",
+  "final_default": "final-default/results.json",
+  "actual_renderer": "GL Compatibility/OpenGL 3.3.0 NVIDIA on RTX 5080",
+  "logic_facts_match_baseline": true,
+  "scenario_facts": [
+    {
+      "stage": "B01",
+      "requested_active_frames": 720,
+      "active_frames_baseline_after_final": [
+        720,
+        720,
+        720
+      ],
+      "terminal_frames_baseline_after_final": [
+        0,
+        0,
+        0
+      ],
+      "event_counts_equal_baseline_final": true,
+      "wave_population_samples_equal_baseline_final": true,
+      "switch_schedule_equal_baseline_final": true,
+      "population_max_equal_except_removed_cache_field": true,
+      "final_counts_equal_except_removed_cache_field": true,
+      "ordinary_alive_population_baseline_final": [
+        {
+          "max": 32.0,
+          "p50": 20.0,
+          "p90": 29.0,
+          "p95": 32.0,
+          "samples": 12
+        },
+        {
+          "max": 32.0,
+          "p50": 20.0,
+          "p90": 29.0,
+          "p95": 32.0,
+          "samples": 12
+        }
+      ],
+      "projectile_max_baseline_final": [
+        2,
+        2
+      ]
+    },
+    {
+      "stage": "B12",
+      "requested_active_frames": 1500,
+      "active_frames_baseline_after_final": [
+        1500,
+        1500,
+        1500
+      ],
+      "terminal_frames_baseline_after_final": [
+        0,
+        0,
+        0
+      ],
+      "event_counts_equal_baseline_final": true,
+      "wave_population_samples_equal_baseline_final": true,
+      "switch_schedule_equal_baseline_final": true,
+      "population_max_equal_except_removed_cache_field": true,
+      "final_counts_equal_except_removed_cache_field": true,
+      "ordinary_alive_population_baseline_final": [
+        {
+          "max": 80.0,
+          "p50": 74.0,
+          "p90": 80.0,
+          "p95": 80.0,
+          "samples": 25
+        },
+        {
+          "max": 80.0,
+          "p50": 74.0,
+          "p90": 80.0,
+          "p95": 80.0,
+          "samples": 25
+        }
+      ],
+      "projectile_max_baseline_final": [
+        245,
+        245
+      ]
+    },
+    {
+      "stage": "B18",
+      "requested_active_frames": 720,
+      "active_frames_baseline_after_final": [
+        720,
+        720,
+        720
+      ],
+      "terminal_frames_baseline_after_final": [
+        0,
+        0,
+        0
+      ],
+      "event_counts_equal_baseline_final": true,
+      "wave_population_samples_equal_baseline_final": true,
+      "switch_schedule_equal_baseline_final": true,
+      "population_max_equal_except_removed_cache_field": true,
+      "final_counts_equal_except_removed_cache_field": true,
+      "ordinary_alive_population_baseline_final": [
+        {
+          "max": 0.0,
+          "p50": 0.0,
+          "p90": 0.0,
+          "p95": 0.0,
+          "samples": 12
+        },
+        {
+          "max": 0.0,
+          "p50": 0.0,
+          "p90": 0.0,
+          "p95": 0.0,
+          "samples": 12
+        }
+      ],
+      "projectile_max_baseline_final": [
+        100,
+        100
+      ]
+    }
+  ],
+  "frame_wall_metrics": [
+    {
+      "stage": "B01",
+      "baseline_GL": {
+        "p50_ms": 18.606,
+        "p95_ms": 28.446,
+        "p99_ms": 39.339,
+        "max_ms": 54.07,
+        "over_33_33ms": 12,
+        "over_50ms": 1
+      },
+      "explicit_GL_after": {
+        "p50_ms": 8.256,
+        "p95_ms": 10.861,
+        "p99_ms": 12.732,
+        "max_ms": 35.48,
+        "over_33_33ms": 1,
+        "over_50ms": 0
+      },
+      "final_default_GL": {
+        "p50_ms": 8.085,
+        "p95_ms": 12.958,
+        "p99_ms": 17.064,
+        "max_ms": 55.124,
+        "over_33_33ms": 3,
+        "over_50ms": 1
+      }
+    },
+    {
+      "stage": "B12",
+      "baseline_GL": {
+        "p50_ms": 37.333,
+        "p95_ms": 50.89,
+        "p99_ms": 63.268,
+        "max_ms": 80.185,
+        "over_33_33ms": 892,
+        "over_50ms": 85
+      },
+      "explicit_GL_after": {
+        "p50_ms": 12.167,
+        "p95_ms": 21.746,
+        "p99_ms": 27.478,
+        "max_ms": 59.718,
+        "over_33_33ms": 6,
+        "over_50ms": 1
+      },
+      "final_default_GL": {
+        "p50_ms": 21.763,
+        "p95_ms": 31.097,
+        "p99_ms": 38.527,
+        "max_ms": 72.096,
+        "over_33_33ms": 49,
+        "over_50ms": 5
+      }
+    },
+    {
+      "stage": "B18",
+      "baseline_GL": {
+        "p50_ms": 23.037,
+        "p95_ms": 30.972,
+        "p99_ms": 43.595,
+        "max_ms": 70.878,
+        "over_33_33ms": 18,
+        "over_50ms": 2
+      },
+      "explicit_GL_after": {
+        "p50_ms": 8.261,
+        "p95_ms": 10.38,
+        "p99_ms": 13.141,
+        "max_ms": 31.523,
+        "over_33_33ms": 0,
+        "over_50ms": 0
+      },
+      "final_default_GL": {
+        "p50_ms": 8.094,
+        "p95_ms": 13.242,
+        "p99_ms": 17.834,
+        "max_ms": 46.856,
+        "over_33_33ms": 3,
+        "over_50ms": 0
+      }
+    }
+  ],
+  "recurrent_actor_switches": [
+    {
+      "stage": "B01",
+      "actor": "JIA",
+      "final_default": [
+        {
+          "frame": 0,
+          "canvas_refresh_ms": 7.3,
+          "frame_wall_ms": 24.348,
+          "spriteframes_id": -9223371927802869349,
+          "atlas_texture_count": 32
+        },
+        {
+          "frame": 630,
+          "canvas_refresh_ms": 1.253,
+          "frame_wall_ms": 44.046,
+          "spriteframes_id": -9223371883443909981,
+          "atlas_texture_count": 32
+        }
+      ],
+      "explicit_GL_after": [
+        {
+          "frame": 0,
+          "canvas_refresh_ms": 7.429,
+          "frame_wall_ms": 24.492,
+          "spriteframes_id": -9223371927802869349
+        },
+        {
+          "frame": 630,
+          "canvas_refresh_ms": 1.038,
+          "frame_wall_ms": 35.48,
+          "spriteframes_id": -9223371883443910038
+        }
+      ],
+      "same_spriteframes_id_on_recurrence": false
+    },
+    {
+      "stage": "B12",
+      "actor": "F11",
+      "final_default": [
+        {
+          "frame": 210,
+          "canvas_refresh_ms": 5.73,
+          "frame_wall_ms": 55.396,
+          "spriteframes_id": -9223371844822759090,
+          "atlas_texture_count": 18
+        },
+        {
+          "frame": 840,
+          "canvas_refresh_ms": 2.694,
+          "frame_wall_ms": 72.096,
+          "spriteframes_id": -9223371792628839525,
+          "atlas_texture_count": 18
+        },
+        {
+          "frame": 1470,
+          "canvas_refresh_ms": 2.688,
+          "frame_wall_ms": 57.514,
+          "spriteframes_id": -9223371758201992800,
+          "atlas_texture_count": 18
+        }
+      ],
+      "explicit_GL_after": [
+        {
+          "frame": 210,
+          "canvas_refresh_ms": 3.511,
+          "frame_wall_ms": 38.494,
+          "spriteframes_id": -9223371842943710736
+        },
+        {
+          "frame": 840,
+          "canvas_refresh_ms": 4.92,
+          "frame_wall_ms": 59.718,
+          "spriteframes_id": -9223371791269885255
+        },
+        {
+          "frame": 1470,
+          "canvas_refresh_ms": 2.953,
+          "frame_wall_ms": 34.067,
+          "spriteframes_id": -9223371755651855449
+        }
+      ],
+      "same_spriteframes_id_on_recurrence": false
+    },
+    {
+      "stage": "B12",
+      "actor": "JIA",
+      "final_default": [
+        {
+          "frame": 0,
+          "canvas_refresh_ms": 0.348,
+          "frame_wall_ms": 9.039,
+          "spriteframes_id": -9223371863630017949,
+          "atlas_texture_count": 32
+        },
+        {
+          "frame": 630,
+          "canvas_refresh_ms": 2.305,
+          "frame_wall_ms": 60.322,
+          "spriteframes_id": -9223371806973359238,
+          "atlas_texture_count": 32
+        },
+        {
+          "frame": 1260,
+          "canvas_refresh_ms": 2.183,
+          "frame_wall_ms": 68.474,
+          "spriteframes_id": -9223371770147371006,
+          "atlas_texture_count": 32
+        }
+      ],
+      "explicit_GL_after": [
+        {
+          "frame": 0,
+          "canvas_refresh_ms": 0.216,
+          "frame_wall_ms": 6.654,
+          "spriteframes_id": -9223371863210587913
+        },
+        {
+          "frame": 630,
+          "canvas_refresh_ms": 1.046,
+          "frame_wall_ms": 28.244,
+          "spriteframes_id": -9223371805530518718
+        },
+        {
+          "frame": 1260,
+          "canvas_refresh_ms": 1.038,
+          "frame_wall_ms": 42.934,
+          "spriteframes_id": -9223371767362352455
+        }
+      ],
+      "same_spriteframes_id_on_recurrence": false
+    },
+    {
+      "stage": "B12",
+      "actor": "N16",
+      "final_default": [
+        {
+          "frame": 420,
+          "canvas_refresh_ms": 5.09,
+          "frame_wall_ms": 46.022,
+          "spriteframes_id": -9223371825931613466,
+          "atlas_texture_count": 18
+        },
+        {
+          "frame": 1050,
+          "canvas_refresh_ms": 2.918,
+          "frame_wall_ms": 44.571,
+          "spriteframes_id": -9223371779542611963,
+          "atlas_texture_count": 18
+        }
+      ],
+      "explicit_GL_after": [
+        {
+          "frame": 420,
+          "canvas_refresh_ms": 3.973,
+          "frame_wall_ms": 38.56,
+          "spriteframes_id": -9223371824052565305
+        },
+        {
+          "frame": 1050,
+          "canvas_refresh_ms": 2.658,
+          "frame_wall_ms": 24.081,
+          "spriteframes_id": -9223371777378350268
+        }
+      ],
+      "same_spriteframes_id_on_recurrence": false
+    },
+    {
+      "stage": "B18",
+      "actor": "JIA",
+      "final_default": [
+        {
+          "frame": 0,
+          "canvas_refresh_ms": 18.453,
+          "frame_wall_ms": 26.341,
+          "spriteframes_id": -9223371741961647869,
+          "atlas_texture_count": 32
+        },
+        {
+          "frame": 630,
+          "canvas_refresh_ms": 0.438,
+          "frame_wall_ms": 46.856,
+          "spriteframes_id": -9223371713859811068,
+          "atlas_texture_count": 32
+        }
+      ],
+      "explicit_GL_after": [
+        {
+          "frame": 0,
+          "canvas_refresh_ms": 16.367,
+          "frame_wall_ms": 23.628,
+          "spriteframes_id": -9223371738690090334
+        },
+        {
+          "frame": 630,
+          "canvas_refresh_ms": 0.41,
+          "frame_wall_ms": 31.523,
+          "spriteframes_id": -9223371710588253462
+        }
+      ],
+      "same_spriteframes_id_on_recurrence": false
+    }
+  ],
+  "interpretation_limits": [
+    "Final run is the project default GL renderer with no --rendering-method override.",
+    "The final run uses a changed runtime and same logical fixture, but observed frame-wall tail is noisier than the preceding explicit-GL after run; report p50/p95/p99/max and long-frame counts, do not claim every after-to-final measurement improved.",
+    "SpriteFrames resource identity is logged. The intended cache retains source PNG textures while controllers/SpriteFrames are rebuilt, so SpriteFrames ID changes are expected; this run did not directly instrument underlying source PNG Texture2D IDs and cannot prove texture-object reuse or GPU upload avoidance.",
+    "Per-switch canvas_refresh_ms and frame_wall_ms are samples, not controlled repeated independent trials. A lower refresh duration does not prove a lower end-to-end hitch."
+  ],
+  "all_scenarios_fully_active": true,
+  "actor_cache_observation": {
+    "purpose": "Assess repeat switches, separating per-switch Canvas refresh from full sampled frame wall.",
+    "source_texture_identity_measured": false,
+    "spriteframes_identity_note": "New controller/SpriteFrames identities on repeated actor switches are expected by the fixture contract; source PNG Texture2D object identity and GPU uploads were not measured.",
+    "recurrent_switch_interpretation": "Results are mixed: later F11 Canvas refresh samples are lower in final-default than same-GL after at frames 840 and 1470, while the first F11 switch is higher; end-to-end switch frame-wall samples are higher in final-default for these frames. This does not establish a consistent end-to-end hitch reduction."
+  }
+}

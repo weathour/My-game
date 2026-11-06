@@ -1,0 +1,109 @@
+{
+  "schema_version": 1,
+  "created_utc": "2026-11-03T09:40:01.025001+00:00",
+  "status": "PASS",
+  "scope": "chapter_one_local_music_effect_test",
+  "paths_relative_to": "repository_root_unless_absolute",
+  "implementation": {
+    "chapter_nodes": 36,
+    "battle_nodes": 18,
+    "complete_routes": 64,
+    "all_12_new_cues_invoked_per_complete_route": true,
+    "story_events": 22,
+    "line_music_overrides": 9,
+    "character_events": 32,
+    "catalog_new_cues": 12,
+    "catalog_retained_warm_cues": 4,
+    "chapter_map": "design/music-20261103-midi-test/chapter-music-map.json"
+  },
+  "frozen_inputs": {
+    "files": 12,
+    "repo_copies": 12,
+    "source_note_on_off_pairs": 42063,
+    "source_drum_pairs_audited": 15106,
+    "all_original_and_repo_midi_sha256_unchanged": true,
+    "manifest": "design/music-20261103-midi-test/experiment-manifest.json",
+    "verification_scope": "source_MIDI_and_pre_instrument_mapping_event_logs",
+    "drum_adapter": "one_shot_sample_decay_and_hat_choke; private_synth_MIDI_note_off_stream_differs_from_source"
+  },
+  "audio": {
+    "report": "design/music-20261103-midi-test/audio-production-release-report.json",
+    "report_sha256": "e553b4ca50eb450e4cab8015812a9bde1b20d07193533e558697cd98da2632b0",
+    "game_ogg": 12,
+    "comparison_flac_24bit": 12,
+    "comparison_mp3_320k": 12,
+    "manual_listening_review": "not_performed",
+    "all_abc_playlist": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/扒谱试验/MuScriptor-large/全部完整伴奏_全曲对照/全部A-B-C对照播放.m3u8",
+    "all_c_playlist": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/扒谱试验/MuScriptor-large/全部完整伴奏_全曲对照/全部C音色试听.m3u8"
+  },
+  "music_retirement": {
+    "retired_ogg_files": 66,
+    "retired_import_files": 66,
+    "retained_warm_files": 4,
+    "retained_warm_sha256_unchanged": true,
+    "exact_authorized_deletions_verified": true,
+    "legacy_70_asset_publish_disabled": true,
+    "report": "design/music-20261103-midi-test/runtime/retired-assets.json",
+    "legacy_publish_guard_report": "design/music-20261103-midi-test/legacy-publish-retirement-check.json"
+  },
+  "runtime": {
+    "report": "design/music-20261103-midi-test/runtime/validation-report.json",
+    "report_sha256": "d3dc4d9e55fb27a83d4e86fe415ef1cb2c23037cd2560709ff15d7774f597f14",
+    "godot_version": "4.6.2.stable.official.71f334935",
+    "headless_import": "PASS",
+    "headless_startup": "PASS",
+    "full_check": "PROJECT_CHECK_OK",
+    "smokes_total": 50,
+    "source_smokes": 46,
+    "independent_pck_smokes": 4,
+    "music_routing_checks": 2315,
+    "real_playback_checks": 41,
+    "pck_music_checks": 95,
+    "master_capture_fixture": {
+      "categories": [
+        "cast_blade",
+        "hit_light",
+        "magic"
+      ],
+      "cue": "midi_test_03",
+      "finite": true,
+      "frames": 45056,
+      "music_gain": 0.7,
+      "rms": 0.0431941940189196,
+      "sample_peak": 0.278342872858047,
+      "sfx_gain": 0.65,
+      "start_seconds": 12.0
+    },
+    "runtime_source_hashes_verified": true,
+    "all_50_smoke_log_hashes_verified": true,
+    "nonmusic_story_and_route_fields_unchanged": true
+  },
+  "player_data": {
+    "report": "design/music-20261103-midi-test/player-data-after.json",
+    "existing_files_verified_unchanged": 53,
+    "changed_files": 0,
+    "new_files": 0,
+    "deleted_files": 0
+  },
+  "local_playable_build": {
+    "launcher": "builds/linux-midi-test-20261103/run.sh",
+    "manifest": "builds/linux-midi-test-20261103/build-manifest.json",
+    "manifest_sha256": "162efff930e8eb3021f117155d85e7f422d0509856966b61de717b77bdbfb476",
+    "pck_bytes": 213101088,
+    "pck_sha256": "9a199538ef1c7a700c37165cd6f033011af2d7441c8b0b7a34f446fa440c6edf",
+    "isolated_headless_startup": "PASS",
+    "isolated_empty_cwd_real_playback": "PASS",
+    "package_local_player_data": true,
+    "notice_and_provenance_files": 47,
+    "notice_file_hashes_match_current_sources": true
+  },
+  "final_static_checks": {
+    "documentation_links": "DOC_LINK_CHECK_OK",
+    "git_diff_check": "PASS",
+    "production_and_validation_python_syntax": "PASS files=12"
+  },
+  "acceptance_boundary": {
+    "technical_implementation_complete": true,
+    "human_listening_and_artistic_acceptance": "not_performed"
+  }
+}

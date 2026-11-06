@@ -1,6 +1,7 @@
 extends RefCounted
-## Read-only UI projection. Numeric effects and descriptions come from the battle catalog.
+## Read-only UI projection. Battle values and shared explanations retain separate source authority.
 const C := preload("res://scripts/content/combat_catalog.gd")
+const INFO := preload("res://scripts/content/skill_information.gd")
 const SUMMARY := preload("res://scripts/campaign/party_summary.gd")
 const ATTRIBUTE_ORDER := ["hp", "mp", "attack", "armor", "speed", "move", "regen"]
 
@@ -9,6 +10,17 @@ static func build(data: Dictionary, characters: Dictionary, id: String) -> Dicti
 	var level: int = int(data.owned[id].level) if owned else C.entry_level(id)
 	var bonuses: Dictionary = C.owned_bonuses(data.owned)
 	var model: Dictionary = C.character_details(id, level, bonuses, data.equipped)
+	var character_info: Dictionary = INFO.character(id)
+	model.overview = str(character_info.get("overview", ""))
+	model.tags = character_info.get("tags", []).duplicate()
+	model.basic_info = INFO.describe(model.basic, "basic", id)
+	model.automatic_info = []
+	for ability in model.automatic: model.automatic_info.append(INFO.describe(ability, "automatic", id))
+	model.manual_info = []
+	for index in model.manual.size(): model.manual_info.append(INFO.describe(model.manual[index], "manual_j" if index == 0 else "manual_k", id))
+	model.support_info = INFO.describe(model.support, "support", id) if not model.support.is_empty() else {}
+	model.trait_info = INFO.describe({}, "trait", id) if not str(model.trait).is_empty() else {}
+	model.owned_text = precise_owned_text(id)
 	model.owned = owned
 	model.preview = not owned
 	model.dead = owned and bool(data.owned[id].dead)
@@ -26,6 +38,7 @@ static func build(data: Dictionary, characters: Dictionary, id: String) -> Dicti
 		model.attribute_lines.append("%s  %s\n  Lv.1基础 %s  累计成长 %s  持有 %s  装备 %s" % [SUMMARY.STAT_NAMES.get(key, key), String.num(model.stats[key], 3), String.num(model.base_stats[key], 3), signed(growth), signed(passive), signed(equipment)])
 	model.attribute_rows.sort_custom(func(a: Dictionary,b: Dictionary): return ATTRIBUTE_ORDER.find(str(a.key)) < ATTRIBUTE_ORDER.find(str(b.key)))
 	model.owned_lines = []
+	model.owned_rows = owned_rows(data, id)
 	var definition: Dictionary = C.definition(id)
 	for key in definition.get("owned", {}):
 		var amount: float = float(definition.owned[key]) * level
@@ -48,6 +61,39 @@ static func build(data: Dictionary, characters: Dictionary, id: String) -> Dicti
 		if model.next_unlock.is_empty() or int(ability.unlock_level) < int(model.next_unlock.level):
 			model.next_unlock = {"id":str(ability.id),"title":str(ability.title),"level":int(ability.unlock_level)}
 	return model
+
+static func precise_owned_text(id: String) -> String:
+	var definition := C.definition(id)
+	var text := str(definition.get("owned_text", ""))
+	for key in definition.get("owned", {}):
+		var is_ratio: bool = key in ["supply_hp", "supply_mp"]
+		var value := float(definition.owned[key]) * (100.0 if is_ratio else 1.0)
+		var prefix := str(C.STAT_LABELS.get(key, key)) + "＋"
+		var suffix := "%" if is_ratio else ""
+		# The catalog's short two-decimal text is retained for other surfaces;
+		# detailed contribution displays must preserve rates such as .012.
+		text = text.replace(prefix + C._number(value) + suffix, prefix + String.num(value, 6) + suffix)
+	return text
+
+static func owned_rows(data: Dictionary, id: String) -> Array[Dictionary]:
+	var result: Array[Dictionary] = []
+	var is_owned: bool = data.owned.has(id)
+	var level: int = int(data.owned[id].level) if is_owned else C.entry_level(id)
+	var raw := C.owned_raw_bonuses(data.owned)
+	for key in C.definition(id).get("owned", {}):
+		var step := float(C.definition(id).owned[key])
+		var card_raw := step * level
+		var global_raw := float(raw.get(key, 0.0))
+		var cap := float(C.OWNED_CAPS.get(key, INF))
+		var actual := minf(global_raw, cap)
+		var acquired := minf(global_raw + (0.0 if is_owned else card_raw), cap)
+		result.append({"key": key, "title": SUMMARY.STAT_NAMES.get(key, key),
+			"owned": is_owned, "level": level, "card_raw": card_raw,
+			"per_level": step, "global_raw": global_raw, "actual": actual,
+			"cap": cap, "capped": global_raw >= cap,
+			"acquisition_delta": acquired - actual,
+			"next_delta": minf(global_raw + step, cap) - actual if is_owned else minf(global_raw + card_raw + step, cap) - acquired})
+	return result
 
 static func signed(value: float) -> String:
 	return ("+" if value >= 0 else "") + String.num(value, 3)

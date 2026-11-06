@@ -1,0 +1,1129 @@
+{
+  "schema_version": 2,
+  "status": "PASS",
+  "scope": "12 complete frozen MIDI files; three accepted arrangements byte-reused, nine new arrangements",
+  "method": "Independent original production parse_midi decoder; raw source/derived message comparison; direct interval-overlap harmony scan; fresh raw SF2 region scan; accepted artifact SHA comparison",
+  "generator_path": "/home/weathour/programs/desktop-projects/My-game/design/music-20261104-chinese-12/tools/arrange_all.py",
+  "generator_sha256": "2d59a5c256064a5c80579d3af4fe98dbea8901fcf8cb295e702931e536a89486",
+  "source_parser": "/home/weathour/programs/desktop-projects/My-game/design/music-20261103-midi-test/tools/render_non_drum_stems.py",
+  "source_parser_sha256": "c1d78a141eedb00df1a1ae98023356d6a5c1f903df69586d233bae2adf6f6d76",
+  "accepted_indices": [
+    1,
+    4,
+    8
+  ],
+  "new_indices": [
+    2,
+    3,
+    5,
+    6,
+    7,
+    9,
+    10,
+    11,
+    12
+  ],
+  "totals": {
+    "note_pairs": 42063,
+    "pitched_notes": 26957,
+    "drum_notes": 15106,
+    "D2_changed_notes": 707
+  },
+  "aggregate_checks": {
+    "twelve_songs_present": true,
+    "source_pair_total_42063": true,
+    "pitched_total_26957": true,
+    "drum_total_15106": true,
+    "all_songs_pass": true
+  },
+  "results": [
+    {
+      "cue_id": "midi_test_01",
+      "title": "The Beautiful People",
+      "status": "PASS",
+      "reused_accepted_trial": true,
+      "source_sha256": "3bf77b5352dd8020628d9a7f2c5cb7a2ea53b015dc610b3ae14c9b18234e5cc8",
+      "note_count": 3564,
+      "pitched_note_count": 1885,
+      "drum_note_count": 1679,
+      "changed_note_count": 100,
+      "changed_raw_message_count": 200,
+      "maximum_seconds_difference_from_original_production_parser": 5.684341886080802e-14,
+      "checks": {
+        "source_sha_matches_frozen_report_and_both_plans": true,
+        "original_note_pairs_and_count_exact": true,
+        "stable_source_ids_and_raw_message_indices_exact_and_unique": true,
+        "D1_byte_identical_source": true,
+        "D1_plan_pitch_exact_source": true,
+        "D1_D2_same_event_ids_and_orchestration": true,
+        "independent_global_seconds_match_within_1ns": true,
+        "D2_only_declared_paired_note_pitch_messages_changed": true,
+        "D2_note_pairs_match_plan_with_independent_FIFO_parser": true,
+        "end_tick_and_duration_unchanged": true,
+        "D2_has_real_changes_bounded_by_one_semitone": true,
+        "protected_bass_drums_and_retained_accompaniment_pitch_exact": true,
+        "drums_keep_channel_9_and_source_pitch": true,
+        "erhu_single_keydown_line": true,
+        "no_new_semitone_against_any_sustained_retained_accompaniment": true,
+        "original_protected_octave_and_fifth_skeleton_exact": true,
+        "actual_SF2_zone_transposition_at_most_four_semitones": true,
+        "accepted_three_reused_byte_exact": true
+      },
+      "new_semitone_conflicts": [],
+      "broken_protected_skeleton": [],
+      "sample_zone_checks": {
+        "D1:pipa": {
+          "matched_zone_count": 1,
+          "max_absolute_transposition_semitones": 0,
+          "missing_zone_source_ids": []
+        },
+        "D1:ruan": {
+          "matched_zone_count": 198,
+          "max_absolute_transposition_semitones": 3,
+          "missing_zone_source_ids": []
+        },
+        "D2:pipa": {
+          "matched_zone_count": 1,
+          "max_absolute_transposition_semitones": 0,
+          "missing_zone_source_ids": []
+        },
+        "D2:ruan": {
+          "matched_zone_count": 198,
+          "max_absolute_transposition_semitones": 3,
+          "missing_zone_source_ids": []
+        }
+      },
+      "accepted_reuse_sha256": {
+        "D1.mid": {
+          "accepted_path": "/home/weathour/programs/desktop-projects/My-game/design/music-20261104-chinese-trial/arrangements/midi_test_01/D1.mid",
+          "accepted_sha256": "3bf77b5352dd8020628d9a7f2c5cb7a2ea53b015dc610b3ae14c9b18234e5cc8",
+          "current_sha256": "3bf77b5352dd8020628d9a7f2c5cb7a2ea53b015dc610b3ae14c9b18234e5cc8",
+          "byte_identical": true
+        },
+        "D2.mid": {
+          "accepted_path": "/home/weathour/programs/desktop-projects/My-game/design/music-20261104-chinese-trial/arrangements/midi_test_01/D2.mid",
+          "accepted_sha256": "1700b898aad515812afaaf127e4676facc3e17147beb2b0c8884f045b4c400e4",
+          "current_sha256": "1700b898aad515812afaaf127e4676facc3e17147beb2b0c8884f045b4c400e4",
+          "byte_identical": true
+        },
+        "plan-D1.json": {
+          "accepted_path": "/home/weathour/programs/desktop-projects/My-game/design/music-20261104-chinese-trial/arrangements/midi_test_01/plan-D1.json",
+          "accepted_sha256": "253ce92789daef394e2a199c049c734df3f8e486bd67d4c68b0359e29d19ab51",
+          "current_sha256": "253ce92789daef394e2a199c049c734df3f8e486bd67d4c68b0359e29d19ab51",
+          "byte_identical": true
+        },
+        "plan-D2.json": {
+          "accepted_path": "/home/weathour/programs/desktop-projects/My-game/design/music-20261104-chinese-trial/arrangements/midi_test_01/plan-D2.json",
+          "accepted_sha256": "879295ebebe4b30285df5a1710577b89f930fd7e8b049bfdb2764505fb664d39",
+          "current_sha256": "879295ebebe4b30285df5a1710577b89f930fd7e8b049bfdb2764505fb664d39",
+          "byte_identical": true
+        }
+      },
+      "artifacts": {
+        "D1.mid": {
+          "path": "/home/weathour/programs/desktop-projects/My-game/design/music-20261104-chinese-12/arrangements/midi_test_01/D1.mid",
+          "sha256": "3bf77b5352dd8020628d9a7f2c5cb7a2ea53b015dc610b3ae14c9b18234e5cc8"
+        },
+        "D2.mid": {
+          "path": "/home/weathour/programs/desktop-projects/My-game/design/music-20261104-chinese-12/arrangements/midi_test_01/D2.mid",
+          "sha256": "1700b898aad515812afaaf127e4676facc3e17147beb2b0c8884f045b4c400e4"
+        },
+        "plan-D1.json": {
+          "path": "/home/weathour/programs/desktop-projects/My-game/design/music-20261104-chinese-12/arrangements/midi_test_01/plan-D1.json",
+          "sha256": "253ce92789daef394e2a199c049c734df3f8e486bd67d4c68b0359e29d19ab51"
+        },
+        "plan-D2.json": {
+          "path": "/home/weathour/programs/desktop-projects/My-game/design/music-20261104-chinese-12/arrangements/midi_test_01/plan-D2.json",
+          "sha256": "879295ebebe4b30285df5a1710577b89f930fd7e8b049bfdb2764505fb664d39"
+        }
+      }
+    },
+    {
+      "cue_id": "midi_test_02",
+      "title": "mOBSCENE",
+      "status": "PASS",
+      "reused_accepted_trial": false,
+      "source_sha256": "277b128bff29eba29fb325bd888fb1e4f49aa9b66f850f1f46b9005ab058c99c",
+      "note_count": 3104,
+      "pitched_note_count": 1920,
+      "drum_note_count": 1184,
+      "changed_note_count": 45,
+      "changed_raw_message_count": 90,
+      "maximum_seconds_difference_from_original_production_parser": 2.842170943040401e-14,
+      "checks": {
+        "source_sha_matches_frozen_report_and_both_plans": true,
+        "original_note_pairs_and_count_exact": true,
+        "stable_source_ids_and_raw_message_indices_exact_and_unique": true,
+        "D1_byte_identical_source": true,
+        "D1_plan_pitch_exact_source": true,
+        "D1_D2_same_event_ids_and_orchestration": true,
+        "independent_global_seconds_match_within_1ns": true,
+        "D2_only_declared_paired_note_pitch_messages_changed": true,
+        "D2_note_pairs_match_plan_with_independent_FIFO_parser": true,
+        "end_tick_and_duration_unchanged": true,
+        "D2_has_real_changes_bounded_by_one_semitone": true,
+        "protected_bass_drums_and_retained_accompaniment_pitch_exact": true,
+        "drums_keep_channel_9_and_source_pitch": true,
+        "erhu_single_keydown_line": true,
+        "no_new_semitone_against_any_sustained_retained_accompaniment": true,
+        "original_protected_octave_and_fifth_skeleton_exact": true,
+        "actual_SF2_zone_transposition_at_most_four_semitones": true,
+        "accepted_three_reused_byte_exact": true
+      },
+      "new_semitone_conflicts": [],
+      "broken_protected_skeleton": [],
+      "sample_zone_checks": {
+        "D1:pipa": {
+          "matched_zone_count": 153,
+          "max_absolute_transposition_semitones": 2,
+          "missing_zone_source_ids": []
+        },
+        "D1:ruan": {
+          "matched_zone_count": 285,
+          "max_absolute_transposition_semitones": 3,
+          "missing_zone_source_ids": []
+        },
+        "D1:erhu": {
+          "matched_zone_count": 14,
+          "max_absolute_transposition_semitones": 2,
+          "missing_zone_source_ids": []
+        },
+        "D2:pipa": {
+          "matched_zone_count": 153,
+          "max_absolute_transposition_semitones": 1,
+          "missing_zone_source_ids": []
+        },
+        "D2:ruan": {
+          "matched_zone_count": 285,
+          "max_absolute_transposition_semitones": 3,
+          "missing_zone_source_ids": []
+        },
+        "D2:erhu": {
+          "matched_zone_count": 14,
+          "max_absolute_transposition_semitones": 3,
+          "missing_zone_source_ids": []
+        }
+      },
+      "accepted_reuse_sha256": {},
+      "artifacts": {
+        "D1.mid": {
+          "path": "/home/weathour/programs/desktop-projects/My-game/design/music-20261104-chinese-12/arrangements/midi_test_02/D1.mid",
+          "sha256": "277b128bff29eba29fb325bd888fb1e4f49aa9b66f850f1f46b9005ab058c99c"
+        },
+        "D2.mid": {
+          "path": "/home/weathour/programs/desktop-projects/My-game/design/music-20261104-chinese-12/arrangements/midi_test_02/D2.mid",
+          "sha256": "4332c746d01a6260e9ecbbcb790ae78e3dd2b45b0930b40bf71281dade10fd2f"
+        },
+        "plan-D1.json": {
+          "path": "/home/weathour/programs/desktop-projects/My-game/design/music-20261104-chinese-12/arrangements/midi_test_02/plan-D1.json",
+          "sha256": "c2172c4131444c7c4532c23c4f8b0c7193279e2a872a21e80562449782106ed4"
+        },
+        "plan-D2.json": {
+          "path": "/home/weathour/programs/desktop-projects/My-game/design/music-20261104-chinese-12/arrangements/midi_test_02/plan-D2.json",
+          "sha256": "9f89324620c4e93eb213e892c1331cce8f0da20681f398be6702dfd765462f77"
+        }
+      }
+    },
+    {
+      "cue_id": "midi_test_03",
+      "title": "The Fight Song",
+      "status": "PASS",
+      "reused_accepted_trial": false,
+      "source_sha256": "058d6ee5c72221df2d05785ee3603f44557bbce19dfdb5afe7edd6f61d2a1d3a",
+      "note_count": 3890,
+      "pitched_note_count": 2328,
+      "drum_note_count": 1562,
+      "changed_note_count": 14,
+      "changed_raw_message_count": 28,
+      "maximum_seconds_difference_from_original_production_parser": 2.842170943040401e-14,
+      "checks": {
+        "source_sha_matches_frozen_report_and_both_plans": true,
+        "original_note_pairs_and_count_exact": true,
+        "stable_source_ids_and_raw_message_indices_exact_and_unique": true,
+        "D1_byte_identical_source": true,
+        "D1_plan_pitch_exact_source": true,
+        "D1_D2_same_event_ids_and_orchestration": true,
+        "independent_global_seconds_match_within_1ns": true,
+        "D2_only_declared_paired_note_pitch_messages_changed": true,
+        "D2_note_pairs_match_plan_with_independent_FIFO_parser": true,
+        "end_tick_and_duration_unchanged": true,
+        "D2_has_real_changes_bounded_by_one_semitone": true,
+        "protected_bass_drums_and_retained_accompaniment_pitch_exact": true,
+        "drums_keep_channel_9_and_source_pitch": true,
+        "erhu_single_keydown_line": true,
+        "no_new_semitone_against_any_sustained_retained_accompaniment": true,
+        "original_protected_octave_and_fifth_skeleton_exact": true,
+        "actual_SF2_zone_transposition_at_most_four_semitones": true,
+        "accepted_three_reused_byte_exact": true
+      },
+      "new_semitone_conflicts": [],
+      "broken_protected_skeleton": [],
+      "sample_zone_checks": {
+        "D1:pipa": {
+          "matched_zone_count": 314,
+          "max_absolute_transposition_semitones": 2,
+          "missing_zone_source_ids": []
+        },
+        "D1:ruan": {
+          "matched_zone_count": 346,
+          "max_absolute_transposition_semitones": 3,
+          "missing_zone_source_ids": []
+        },
+        "D1:erhu": {
+          "matched_zone_count": 7,
+          "max_absolute_transposition_semitones": 3,
+          "missing_zone_source_ids": []
+        },
+        "D2:pipa": {
+          "matched_zone_count": 314,
+          "max_absolute_transposition_semitones": 2,
+          "missing_zone_source_ids": []
+        },
+        "D2:ruan": {
+          "matched_zone_count": 346,
+          "max_absolute_transposition_semitones": 3,
+          "missing_zone_source_ids": []
+        },
+        "D2:erhu": {
+          "matched_zone_count": 7,
+          "max_absolute_transposition_semitones": 3,
+          "missing_zone_source_ids": []
+        }
+      },
+      "accepted_reuse_sha256": {},
+      "artifacts": {
+        "D1.mid": {
+          "path": "/home/weathour/programs/desktop-projects/My-game/design/music-20261104-chinese-12/arrangements/midi_test_03/D1.mid",
+          "sha256": "058d6ee5c72221df2d05785ee3603f44557bbce19dfdb5afe7edd6f61d2a1d3a"
+        },
+        "D2.mid": {
+          "path": "/home/weathour/programs/desktop-projects/My-game/design/music-20261104-chinese-12/arrangements/midi_test_03/D2.mid",
+          "sha256": "fcdb5cfc3aff47ec61c8e37eb3575b89a78c64c8c9beb0bfbc03a9f96734b436"
+        },
+        "plan-D1.json": {
+          "path": "/home/weathour/programs/desktop-projects/My-game/design/music-20261104-chinese-12/arrangements/midi_test_03/plan-D1.json",
+          "sha256": "ff37bedc5a4a6c40cb41e2cfc2cfeb4fff152b852a7e259f7d53d4b7df7e5f67"
+        },
+        "plan-D2.json": {
+          "path": "/home/weathour/programs/desktop-projects/My-game/design/music-20261104-chinese-12/arrangements/midi_test_03/plan-D2.json",
+          "sha256": "177214f8f4f34f4377d19d1d3ee3076f66d01f549cb091ea69ff102f991f9566"
+        }
+      }
+    },
+    {
+      "cue_id": "midi_test_04",
+      "title": "Disposable Teens",
+      "status": "PASS",
+      "reused_accepted_trial": true,
+      "source_sha256": "6d36cfc0c0cd15d69a43ea892220c09e24966acf7e22952b6a275f5b725eb4fb",
+      "note_count": 4337,
+      "pitched_note_count": 2846,
+      "drum_note_count": 1491,
+      "changed_note_count": 19,
+      "changed_raw_message_count": 38,
+      "maximum_seconds_difference_from_original_production_parser": 2.842170943040401e-14,
+      "checks": {
+        "source_sha_matches_frozen_report_and_both_plans": true,
+        "original_note_pairs_and_count_exact": true,
+        "stable_source_ids_and_raw_message_indices_exact_and_unique": true,
+        "D1_byte_identical_source": true,
+        "D1_plan_pitch_exact_source": true,
+        "D1_D2_same_event_ids_and_orchestration": true,
+        "independent_global_seconds_match_within_1ns": true,
+        "D2_only_declared_paired_note_pitch_messages_changed": true,
+        "D2_note_pairs_match_plan_with_independent_FIFO_parser": true,
+        "end_tick_and_duration_unchanged": true,
+        "D2_has_real_changes_bounded_by_one_semitone": true,
+        "protected_bass_drums_and_retained_accompaniment_pitch_exact": true,
+        "drums_keep_channel_9_and_source_pitch": true,
+        "erhu_single_keydown_line": true,
+        "no_new_semitone_against_any_sustained_retained_accompaniment": true,
+        "original_protected_octave_and_fifth_skeleton_exact": true,
+        "actual_SF2_zone_transposition_at_most_four_semitones": true,
+        "accepted_three_reused_byte_exact": true
+      },
+      "new_semitone_conflicts": [],
+      "broken_protected_skeleton": [],
+      "sample_zone_checks": {
+        "D1:pipa": {
+          "matched_zone_count": 508,
+          "max_absolute_transposition_semitones": 2,
+          "missing_zone_source_ids": []
+        },
+        "D1:ruan": {
+          "matched_zone_count": 108,
+          "max_absolute_transposition_semitones": 2,
+          "missing_zone_source_ids": []
+        },
+        "D2:pipa": {
+          "matched_zone_count": 508,
+          "max_absolute_transposition_semitones": 2,
+          "missing_zone_source_ids": []
+        },
+        "D2:ruan": {
+          "matched_zone_count": 108,
+          "max_absolute_transposition_semitones": 2,
+          "missing_zone_source_ids": []
+        }
+      },
+      "accepted_reuse_sha256": {
+        "D1.mid": {
+          "accepted_path": "/home/weathour/programs/desktop-projects/My-game/design/music-20261104-chinese-trial/arrangements/midi_test_04/D1.mid",
+          "accepted_sha256": "6d36cfc0c0cd15d69a43ea892220c09e24966acf7e22952b6a275f5b725eb4fb",
+          "current_sha256": "6d36cfc0c0cd15d69a43ea892220c09e24966acf7e22952b6a275f5b725eb4fb",
+          "byte_identical": true
+        },
+        "D2.mid": {
+          "accepted_path": "/home/weathour/programs/desktop-projects/My-game/design/music-20261104-chinese-trial/arrangements/midi_test_04/D2.mid",
+          "accepted_sha256": "848ee51d5e35e5718d678542a681d91e4dd1e12c51f06eac128c9a9cb4279420",
+          "current_sha256": "848ee51d5e35e5718d678542a681d91e4dd1e12c51f06eac128c9a9cb4279420",
+          "byte_identical": true
+        },
+        "plan-D1.json": {
+          "accepted_path": "/home/weathour/programs/desktop-projects/My-game/design/music-20261104-chinese-trial/arrangements/midi_test_04/plan-D1.json",
+          "accepted_sha256": "1ea7c0f0129fa6ab095b7b1faaa1eb19067897fd7b9a53d5e452723706c135a2",
+          "current_sha256": "1ea7c0f0129fa6ab095b7b1faaa1eb19067897fd7b9a53d5e452723706c135a2",
+          "byte_identical": true
+        },
+        "plan-D2.json": {
+          "accepted_path": "/home/weathour/programs/desktop-projects/My-game/design/music-20261104-chinese-trial/arrangements/midi_test_04/plan-D2.json",
+          "accepted_sha256": "32f0090281d3d2f3e519c751fe4216656021c24c1fc184ada09f1a90d0d3ca31",
+          "current_sha256": "32f0090281d3d2f3e519c751fe4216656021c24c1fc184ada09f1a90d0d3ca31",
+          "byte_identical": true
+        }
+      },
+      "artifacts": {
+        "D1.mid": {
+          "path": "/home/weathour/programs/desktop-projects/My-game/design/music-20261104-chinese-12/arrangements/midi_test_04/D1.mid",
+          "sha256": "6d36cfc0c0cd15d69a43ea892220c09e24966acf7e22952b6a275f5b725eb4fb"
+        },
+        "D2.mid": {
+          "path": "/home/weathour/programs/desktop-projects/My-game/design/music-20261104-chinese-12/arrangements/midi_test_04/D2.mid",
+          "sha256": "848ee51d5e35e5718d678542a681d91e4dd1e12c51f06eac128c9a9cb4279420"
+        },
+        "plan-D1.json": {
+          "path": "/home/weathour/programs/desktop-projects/My-game/design/music-20261104-chinese-12/arrangements/midi_test_04/plan-D1.json",
+          "sha256": "1ea7c0f0129fa6ab095b7b1faaa1eb19067897fd7b9a53d5e452723706c135a2"
+        },
+        "plan-D2.json": {
+          "path": "/home/weathour/programs/desktop-projects/My-game/design/music-20261104-chinese-12/arrangements/midi_test_04/plan-D2.json",
+          "sha256": "32f0090281d3d2f3e519c751fe4216656021c24c1fc184ada09f1a90d0d3ca31"
+        }
+      }
+    },
+    {
+      "cue_id": "midi_test_05",
+      "title": "The Nobodies",
+      "status": "PASS",
+      "reused_accepted_trial": false,
+      "source_sha256": "50fa90065eab0d7ffbb8f65ac3fb78b1d9e8a2bb3c34b21bc09a7c36165121c0",
+      "note_count": 2501,
+      "pitched_note_count": 1492,
+      "drum_note_count": 1009,
+      "changed_note_count": 38,
+      "changed_raw_message_count": 76,
+      "maximum_seconds_difference_from_original_production_parser": 2.842170943040401e-14,
+      "checks": {
+        "source_sha_matches_frozen_report_and_both_plans": true,
+        "original_note_pairs_and_count_exact": true,
+        "stable_source_ids_and_raw_message_indices_exact_and_unique": true,
+        "D1_byte_identical_source": true,
+        "D1_plan_pitch_exact_source": true,
+        "D1_D2_same_event_ids_and_orchestration": true,
+        "independent_global_seconds_match_within_1ns": true,
+        "D2_only_declared_paired_note_pitch_messages_changed": true,
+        "D2_note_pairs_match_plan_with_independent_FIFO_parser": true,
+        "end_tick_and_duration_unchanged": true,
+        "D2_has_real_changes_bounded_by_one_semitone": true,
+        "protected_bass_drums_and_retained_accompaniment_pitch_exact": true,
+        "drums_keep_channel_9_and_source_pitch": true,
+        "erhu_single_keydown_line": true,
+        "no_new_semitone_against_any_sustained_retained_accompaniment": true,
+        "original_protected_octave_and_fifth_skeleton_exact": true,
+        "actual_SF2_zone_transposition_at_most_four_semitones": true,
+        "accepted_three_reused_byte_exact": true
+      },
+      "new_semitone_conflicts": [],
+      "broken_protected_skeleton": [],
+      "sample_zone_checks": {
+        "D1:pipa": {
+          "matched_zone_count": 287,
+          "max_absolute_transposition_semitones": 2,
+          "missing_zone_source_ids": []
+        },
+        "D1:ruan": {
+          "matched_zone_count": 61,
+          "max_absolute_transposition_semitones": 1,
+          "missing_zone_source_ids": []
+        },
+        "D1:zheng": {
+          "matched_zone_count": 30,
+          "max_absolute_transposition_semitones": 3,
+          "missing_zone_source_ids": []
+        },
+        "D1:erhu": {
+          "matched_zone_count": 5,
+          "max_absolute_transposition_semitones": 1,
+          "missing_zone_source_ids": []
+        },
+        "D2:pipa": {
+          "matched_zone_count": 287,
+          "max_absolute_transposition_semitones": 2,
+          "missing_zone_source_ids": []
+        },
+        "D2:ruan": {
+          "matched_zone_count": 61,
+          "max_absolute_transposition_semitones": 1,
+          "missing_zone_source_ids": []
+        },
+        "D2:zheng": {
+          "matched_zone_count": 30,
+          "max_absolute_transposition_semitones": 3,
+          "missing_zone_source_ids": []
+        },
+        "D2:erhu": {
+          "matched_zone_count": 5,
+          "max_absolute_transposition_semitones": 1,
+          "missing_zone_source_ids": []
+        }
+      },
+      "accepted_reuse_sha256": {},
+      "artifacts": {
+        "D1.mid": {
+          "path": "/home/weathour/programs/desktop-projects/My-game/design/music-20261104-chinese-12/arrangements/midi_test_05/D1.mid",
+          "sha256": "50fa90065eab0d7ffbb8f65ac3fb78b1d9e8a2bb3c34b21bc09a7c36165121c0"
+        },
+        "D2.mid": {
+          "path": "/home/weathour/programs/desktop-projects/My-game/design/music-20261104-chinese-12/arrangements/midi_test_05/D2.mid",
+          "sha256": "76fef7fe97d84ecfbd1d5ddaac86fc963eb0bae015c7574ed9eb5f1cff1a9312"
+        },
+        "plan-D1.json": {
+          "path": "/home/weathour/programs/desktop-projects/My-game/design/music-20261104-chinese-12/arrangements/midi_test_05/plan-D1.json",
+          "sha256": "8a82de19704bc496646b32498297197cc31e562fd93be2f6535d1fd900032e5b"
+        },
+        "plan-D2.json": {
+          "path": "/home/weathour/programs/desktop-projects/My-game/design/music-20261104-chinese-12/arrangements/midi_test_05/plan-D2.json",
+          "sha256": "9d28d228edc638719746d581985e72ba25082e7c71bd527923e5ec815931f7f7"
+        }
+      }
+    },
+    {
+      "cue_id": "midi_test_06",
+      "title": "Antichrist Superstar",
+      "status": "PASS",
+      "reused_accepted_trial": false,
+      "source_sha256": "b1e48dee25ba68a55d8ea9aa85bd691e15282674da85de0d19f2746d2117585e",
+      "note_count": 3240,
+      "pitched_note_count": 1956,
+      "drum_note_count": 1284,
+      "changed_note_count": 68,
+      "changed_raw_message_count": 136,
+      "maximum_seconds_difference_from_original_production_parser": 2.842170943040401e-14,
+      "checks": {
+        "source_sha_matches_frozen_report_and_both_plans": true,
+        "original_note_pairs_and_count_exact": true,
+        "stable_source_ids_and_raw_message_indices_exact_and_unique": true,
+        "D1_byte_identical_source": true,
+        "D1_plan_pitch_exact_source": true,
+        "D1_D2_same_event_ids_and_orchestration": true,
+        "independent_global_seconds_match_within_1ns": true,
+        "D2_only_declared_paired_note_pitch_messages_changed": true,
+        "D2_note_pairs_match_plan_with_independent_FIFO_parser": true,
+        "end_tick_and_duration_unchanged": true,
+        "D2_has_real_changes_bounded_by_one_semitone": true,
+        "protected_bass_drums_and_retained_accompaniment_pitch_exact": true,
+        "drums_keep_channel_9_and_source_pitch": true,
+        "erhu_single_keydown_line": true,
+        "no_new_semitone_against_any_sustained_retained_accompaniment": true,
+        "original_protected_octave_and_fifth_skeleton_exact": true,
+        "actual_SF2_zone_transposition_at_most_four_semitones": true,
+        "accepted_three_reused_byte_exact": true
+      },
+      "new_semitone_conflicts": [],
+      "broken_protected_skeleton": [],
+      "sample_zone_checks": {
+        "D1:pipa": {
+          "matched_zone_count": 315,
+          "max_absolute_transposition_semitones": 2,
+          "missing_zone_source_ids": []
+        },
+        "D1:ruan": {
+          "matched_zone_count": 179,
+          "max_absolute_transposition_semitones": 3,
+          "missing_zone_source_ids": []
+        },
+        "D1:erhu": {
+          "matched_zone_count": 21,
+          "max_absolute_transposition_semitones": 3,
+          "missing_zone_source_ids": []
+        },
+        "D2:pipa": {
+          "matched_zone_count": 315,
+          "max_absolute_transposition_semitones": 2,
+          "missing_zone_source_ids": []
+        },
+        "D2:ruan": {
+          "matched_zone_count": 179,
+          "max_absolute_transposition_semitones": 3,
+          "missing_zone_source_ids": []
+        },
+        "D2:erhu": {
+          "matched_zone_count": 21,
+          "max_absolute_transposition_semitones": 3,
+          "missing_zone_source_ids": []
+        }
+      },
+      "accepted_reuse_sha256": {},
+      "artifacts": {
+        "D1.mid": {
+          "path": "/home/weathour/programs/desktop-projects/My-game/design/music-20261104-chinese-12/arrangements/midi_test_06/D1.mid",
+          "sha256": "b1e48dee25ba68a55d8ea9aa85bd691e15282674da85de0d19f2746d2117585e"
+        },
+        "D2.mid": {
+          "path": "/home/weathour/programs/desktop-projects/My-game/design/music-20261104-chinese-12/arrangements/midi_test_06/D2.mid",
+          "sha256": "809db1731e88b042b8184f52ea2325bb2a182366b13a498622d106da479ac4dd"
+        },
+        "plan-D1.json": {
+          "path": "/home/weathour/programs/desktop-projects/My-game/design/music-20261104-chinese-12/arrangements/midi_test_06/plan-D1.json",
+          "sha256": "3bd9e5c35a3c402f4e0949b4fe8f1fd0cbd41b7653c885be216d7cc50ddc2390"
+        },
+        "plan-D2.json": {
+          "path": "/home/weathour/programs/desktop-projects/My-game/design/music-20261104-chinese-12/arrangements/midi_test_06/plan-D2.json",
+          "sha256": "8d59e617b27e59796da263dc36f3f30fa55404aa906a5bb7a79c7500f401e66f"
+        }
+      }
+    },
+    {
+      "cue_id": "midi_test_07",
+      "title": "Little Horn",
+      "status": "PASS",
+      "reused_accepted_trial": false,
+      "source_sha256": "37ecee25ebd64e725dea9917576a39d19308658724bb2d3c57c0f13ca5ff89f3",
+      "note_count": 3219,
+      "pitched_note_count": 2084,
+      "drum_note_count": 1135,
+      "changed_note_count": 55,
+      "changed_raw_message_count": 110,
+      "maximum_seconds_difference_from_original_production_parser": 2.842170943040401e-14,
+      "checks": {
+        "source_sha_matches_frozen_report_and_both_plans": true,
+        "original_note_pairs_and_count_exact": true,
+        "stable_source_ids_and_raw_message_indices_exact_and_unique": true,
+        "D1_byte_identical_source": true,
+        "D1_plan_pitch_exact_source": true,
+        "D1_D2_same_event_ids_and_orchestration": true,
+        "independent_global_seconds_match_within_1ns": true,
+        "D2_only_declared_paired_note_pitch_messages_changed": true,
+        "D2_note_pairs_match_plan_with_independent_FIFO_parser": true,
+        "end_tick_and_duration_unchanged": true,
+        "D2_has_real_changes_bounded_by_one_semitone": true,
+        "protected_bass_drums_and_retained_accompaniment_pitch_exact": true,
+        "drums_keep_channel_9_and_source_pitch": true,
+        "erhu_single_keydown_line": true,
+        "no_new_semitone_against_any_sustained_retained_accompaniment": true,
+        "original_protected_octave_and_fifth_skeleton_exact": true,
+        "actual_SF2_zone_transposition_at_most_four_semitones": true,
+        "accepted_three_reused_byte_exact": true
+      },
+      "new_semitone_conflicts": [],
+      "broken_protected_skeleton": [],
+      "sample_zone_checks": {
+        "D1:pipa": {
+          "matched_zone_count": 2,
+          "max_absolute_transposition_semitones": 0,
+          "missing_zone_source_ids": []
+        },
+        "D1:ruan": {
+          "matched_zone_count": 398,
+          "max_absolute_transposition_semitones": 4,
+          "missing_zone_source_ids": []
+        },
+        "D1:erhu": {
+          "matched_zone_count": 7,
+          "max_absolute_transposition_semitones": 3,
+          "missing_zone_source_ids": []
+        },
+        "D2:pipa": {
+          "matched_zone_count": 2,
+          "max_absolute_transposition_semitones": 0,
+          "missing_zone_source_ids": []
+        },
+        "D2:ruan": {
+          "matched_zone_count": 398,
+          "max_absolute_transposition_semitones": 4,
+          "missing_zone_source_ids": []
+        },
+        "D2:erhu": {
+          "matched_zone_count": 7,
+          "max_absolute_transposition_semitones": 3,
+          "missing_zone_source_ids": []
+        }
+      },
+      "accepted_reuse_sha256": {},
+      "artifacts": {
+        "D1.mid": {
+          "path": "/home/weathour/programs/desktop-projects/My-game/design/music-20261104-chinese-12/arrangements/midi_test_07/D1.mid",
+          "sha256": "37ecee25ebd64e725dea9917576a39d19308658724bb2d3c57c0f13ca5ff89f3"
+        },
+        "D2.mid": {
+          "path": "/home/weathour/programs/desktop-projects/My-game/design/music-20261104-chinese-12/arrangements/midi_test_07/D2.mid",
+          "sha256": "471b9a119c5fb140de69628ea5626d5c9e890c2639cdf1014d42fbdd02142511"
+        },
+        "plan-D1.json": {
+          "path": "/home/weathour/programs/desktop-projects/My-game/design/music-20261104-chinese-12/arrangements/midi_test_07/plan-D1.json",
+          "sha256": "b4dcc98941f64cc179caca35ceab1425756c2b1702dc622ac456b5619da1ff08"
+        },
+        "plan-D2.json": {
+          "path": "/home/weathour/programs/desktop-projects/My-game/design/music-20261104-chinese-12/arrangements/midi_test_07/plan-D2.json",
+          "sha256": "f92b1bdc1de833bc9e0c01f090bc285d2e8f16d63e8c58bf00220b3803402705"
+        }
+      }
+    },
+    {
+      "cue_id": "midi_test_08",
+      "title": "Man That You Fear",
+      "status": "PASS",
+      "reused_accepted_trial": true,
+      "source_sha256": "419c590d01212e338488c8f6d34053bc4f4b5684ea293a642e918fe991cfa40b",
+      "note_count": 3569,
+      "pitched_note_count": 2901,
+      "drum_note_count": 668,
+      "changed_note_count": 83,
+      "changed_raw_message_count": 166,
+      "maximum_seconds_difference_from_original_production_parser": 5.684341886080802e-14,
+      "checks": {
+        "source_sha_matches_frozen_report_and_both_plans": true,
+        "original_note_pairs_and_count_exact": true,
+        "stable_source_ids_and_raw_message_indices_exact_and_unique": true,
+        "D1_byte_identical_source": true,
+        "D1_plan_pitch_exact_source": true,
+        "D1_D2_same_event_ids_and_orchestration": true,
+        "independent_global_seconds_match_within_1ns": true,
+        "D2_only_declared_paired_note_pitch_messages_changed": true,
+        "D2_note_pairs_match_plan_with_independent_FIFO_parser": true,
+        "end_tick_and_duration_unchanged": true,
+        "D2_has_real_changes_bounded_by_one_semitone": true,
+        "protected_bass_drums_and_retained_accompaniment_pitch_exact": true,
+        "drums_keep_channel_9_and_source_pitch": true,
+        "erhu_single_keydown_line": true,
+        "no_new_semitone_against_any_sustained_retained_accompaniment": true,
+        "original_protected_octave_and_fifth_skeleton_exact": true,
+        "actual_SF2_zone_transposition_at_most_four_semitones": true,
+        "accepted_three_reused_byte_exact": true
+      },
+      "new_semitone_conflicts": [],
+      "broken_protected_skeleton": [],
+      "sample_zone_checks": {
+        "D1:zheng": {
+          "matched_zone_count": 371,
+          "max_absolute_transposition_semitones": 4,
+          "missing_zone_source_ids": []
+        },
+        "D1:erhu": {
+          "matched_zone_count": 145,
+          "max_absolute_transposition_semitones": 3,
+          "missing_zone_source_ids": []
+        },
+        "D2:zheng": {
+          "matched_zone_count": 371,
+          "max_absolute_transposition_semitones": 4,
+          "missing_zone_source_ids": []
+        },
+        "D2:erhu": {
+          "matched_zone_count": 145,
+          "max_absolute_transposition_semitones": 3,
+          "missing_zone_source_ids": []
+        }
+      },
+      "accepted_reuse_sha256": {
+        "D1.mid": {
+          "accepted_path": "/home/weathour/programs/desktop-projects/My-game/design/music-20261104-chinese-trial/arrangements/midi_test_08/D1.mid",
+          "accepted_sha256": "419c590d01212e338488c8f6d34053bc4f4b5684ea293a642e918fe991cfa40b",
+          "current_sha256": "419c590d01212e338488c8f6d34053bc4f4b5684ea293a642e918fe991cfa40b",
+          "byte_identical": true
+        },
+        "D2.mid": {
+          "accepted_path": "/home/weathour/programs/desktop-projects/My-game/design/music-20261104-chinese-trial/arrangements/midi_test_08/D2.mid",
+          "accepted_sha256": "18b84255653e18c65558c8c46cb361e1fb7d9caccc7c1ab473df413c3adc9bcc",
+          "current_sha256": "18b84255653e18c65558c8c46cb361e1fb7d9caccc7c1ab473df413c3adc9bcc",
+          "byte_identical": true
+        },
+        "plan-D1.json": {
+          "accepted_path": "/home/weathour/programs/desktop-projects/My-game/design/music-20261104-chinese-trial/arrangements/midi_test_08/plan-D1.json",
+          "accepted_sha256": "da8fdd0ac18f4cb5b9edb81f37a17ba7bc1c75e6e39c055038e3ddcf00b4620c",
+          "current_sha256": "da8fdd0ac18f4cb5b9edb81f37a17ba7bc1c75e6e39c055038e3ddcf00b4620c",
+          "byte_identical": true
+        },
+        "plan-D2.json": {
+          "accepted_path": "/home/weathour/programs/desktop-projects/My-game/design/music-20261104-chinese-trial/arrangements/midi_test_08/plan-D2.json",
+          "accepted_sha256": "4ef2f334c170738c8c052ce94825ba7d9ecd20557eb4d9b806017899f8b120e5",
+          "current_sha256": "4ef2f334c170738c8c052ce94825ba7d9ecd20557eb4d9b806017899f8b120e5",
+          "byte_identical": true
+        }
+      },
+      "artifacts": {
+        "D1.mid": {
+          "path": "/home/weathour/programs/desktop-projects/My-game/design/music-20261104-chinese-12/arrangements/midi_test_08/D1.mid",
+          "sha256": "419c590d01212e338488c8f6d34053bc4f4b5684ea293a642e918fe991cfa40b"
+        },
+        "D2.mid": {
+          "path": "/home/weathour/programs/desktop-projects/My-game/design/music-20261104-chinese-12/arrangements/midi_test_08/D2.mid",
+          "sha256": "18b84255653e18c65558c8c46cb361e1fb7d9caccc7c1ab473df413c3adc9bcc"
+        },
+        "plan-D1.json": {
+          "path": "/home/weathour/programs/desktop-projects/My-game/design/music-20261104-chinese-12/arrangements/midi_test_08/plan-D1.json",
+          "sha256": "da8fdd0ac18f4cb5b9edb81f37a17ba7bc1c75e6e39c055038e3ddcf00b4620c"
+        },
+        "plan-D2.json": {
+          "path": "/home/weathour/programs/desktop-projects/My-game/design/music-20261104-chinese-12/arrangements/midi_test_08/plan-D2.json",
+          "sha256": "4ef2f334c170738c8c052ce94825ba7d9ecd20557eb4d9b806017899f8b120e5"
+        }
+      }
+    },
+    {
+      "cue_id": "midi_test_09",
+      "title": "Deformography",
+      "status": "PASS",
+      "reused_accepted_trial": false,
+      "source_sha256": "442f966928a3be34f3eef5679c35d51f091452e7c4510fe2aabd3cd79c96f18b",
+      "note_count": 4484,
+      "pitched_note_count": 2892,
+      "drum_note_count": 1592,
+      "changed_note_count": 91,
+      "changed_raw_message_count": 182,
+      "maximum_seconds_difference_from_original_production_parser": 5.684341886080802e-14,
+      "checks": {
+        "source_sha_matches_frozen_report_and_both_plans": true,
+        "original_note_pairs_and_count_exact": true,
+        "stable_source_ids_and_raw_message_indices_exact_and_unique": true,
+        "D1_byte_identical_source": true,
+        "D1_plan_pitch_exact_source": true,
+        "D1_D2_same_event_ids_and_orchestration": true,
+        "independent_global_seconds_match_within_1ns": true,
+        "D2_only_declared_paired_note_pitch_messages_changed": true,
+        "D2_note_pairs_match_plan_with_independent_FIFO_parser": true,
+        "end_tick_and_duration_unchanged": true,
+        "D2_has_real_changes_bounded_by_one_semitone": true,
+        "protected_bass_drums_and_retained_accompaniment_pitch_exact": true,
+        "drums_keep_channel_9_and_source_pitch": true,
+        "erhu_single_keydown_line": true,
+        "no_new_semitone_against_any_sustained_retained_accompaniment": true,
+        "original_protected_octave_and_fifth_skeleton_exact": true,
+        "actual_SF2_zone_transposition_at_most_four_semitones": true,
+        "accepted_three_reused_byte_exact": true
+      },
+      "new_semitone_conflicts": [],
+      "broken_protected_skeleton": [],
+      "sample_zone_checks": {
+        "D1:pipa": {
+          "matched_zone_count": 384,
+          "max_absolute_transposition_semitones": 2,
+          "missing_zone_source_ids": []
+        },
+        "D1:ruan": {
+          "matched_zone_count": 51,
+          "max_absolute_transposition_semitones": 4,
+          "missing_zone_source_ids": []
+        },
+        "D1:erhu": {
+          "matched_zone_count": 49,
+          "max_absolute_transposition_semitones": 3,
+          "missing_zone_source_ids": []
+        },
+        "D2:pipa": {
+          "matched_zone_count": 384,
+          "max_absolute_transposition_semitones": 2,
+          "missing_zone_source_ids": []
+        },
+        "D2:ruan": {
+          "matched_zone_count": 51,
+          "max_absolute_transposition_semitones": 4,
+          "missing_zone_source_ids": []
+        },
+        "D2:erhu": {
+          "matched_zone_count": 49,
+          "max_absolute_transposition_semitones": 3,
+          "missing_zone_source_ids": []
+        }
+      },
+      "accepted_reuse_sha256": {},
+      "artifacts": {
+        "D1.mid": {
+          "path": "/home/weathour/programs/desktop-projects/My-game/design/music-20261104-chinese-12/arrangements/midi_test_09/D1.mid",
+          "sha256": "442f966928a3be34f3eef5679c35d51f091452e7c4510fe2aabd3cd79c96f18b"
+        },
+        "D2.mid": {
+          "path": "/home/weathour/programs/desktop-projects/My-game/design/music-20261104-chinese-12/arrangements/midi_test_09/D2.mid",
+          "sha256": "9b70d3dda196c9a56bf4e2c7a41e1a474aac8537b7af25ed723f8c672129c034"
+        },
+        "plan-D1.json": {
+          "path": "/home/weathour/programs/desktop-projects/My-game/design/music-20261104-chinese-12/arrangements/midi_test_09/plan-D1.json",
+          "sha256": "f446f943adf645f843b22ed2ad9beec6887a0859fe7b81b947e5f96295b6afd5"
+        },
+        "plan-D2.json": {
+          "path": "/home/weathour/programs/desktop-projects/My-game/design/music-20261104-chinese-12/arrangements/midi_test_09/plan-D2.json",
+          "sha256": "eb6f250a6e9ed1ca3e9c669624a7e2da59c65c82e81562794ffe4011f3977396"
+        }
+      }
+    },
+    {
+      "cue_id": "midi_test_10",
+      "title": "Kinderfeld",
+      "status": "PASS",
+      "reused_accepted_trial": false,
+      "source_sha256": "ce55a52e2f92c2b3a97e766c90704128c8378863fda1953d8eb3b992afad3eb7",
+      "note_count": 3288,
+      "pitched_note_count": 2126,
+      "drum_note_count": 1162,
+      "changed_note_count": 98,
+      "changed_raw_message_count": 196,
+      "maximum_seconds_difference_from_original_production_parser": 5.684341886080802e-14,
+      "checks": {
+        "source_sha_matches_frozen_report_and_both_plans": true,
+        "original_note_pairs_and_count_exact": true,
+        "stable_source_ids_and_raw_message_indices_exact_and_unique": true,
+        "D1_byte_identical_source": true,
+        "D1_plan_pitch_exact_source": true,
+        "D1_D2_same_event_ids_and_orchestration": true,
+        "independent_global_seconds_match_within_1ns": true,
+        "D2_only_declared_paired_note_pitch_messages_changed": true,
+        "D2_note_pairs_match_plan_with_independent_FIFO_parser": true,
+        "end_tick_and_duration_unchanged": true,
+        "D2_has_real_changes_bounded_by_one_semitone": true,
+        "protected_bass_drums_and_retained_accompaniment_pitch_exact": true,
+        "drums_keep_channel_9_and_source_pitch": true,
+        "erhu_single_keydown_line": true,
+        "no_new_semitone_against_any_sustained_retained_accompaniment": true,
+        "original_protected_octave_and_fifth_skeleton_exact": true,
+        "actual_SF2_zone_transposition_at_most_four_semitones": true,
+        "accepted_three_reused_byte_exact": true
+      },
+      "new_semitone_conflicts": [],
+      "broken_protected_skeleton": [],
+      "sample_zone_checks": {
+        "D1:pipa": {
+          "matched_zone_count": 355,
+          "max_absolute_transposition_semitones": 2,
+          "missing_zone_source_ids": []
+        },
+        "D1:ruan": {
+          "matched_zone_count": 61,
+          "max_absolute_transposition_semitones": 4,
+          "missing_zone_source_ids": []
+        },
+        "D1:erhu": {
+          "matched_zone_count": 23,
+          "max_absolute_transposition_semitones": 2,
+          "missing_zone_source_ids": []
+        },
+        "D2:pipa": {
+          "matched_zone_count": 355,
+          "max_absolute_transposition_semitones": 2,
+          "missing_zone_source_ids": []
+        },
+        "D2:ruan": {
+          "matched_zone_count": 61,
+          "max_absolute_transposition_semitones": 4,
+          "missing_zone_source_ids": []
+        },
+        "D2:erhu": {
+          "matched_zone_count": 23,
+          "max_absolute_transposition_semitones": 2,
+          "missing_zone_source_ids": []
+        }
+      },
+      "accepted_reuse_sha256": {},
+      "artifacts": {
+        "D1.mid": {
+          "path": "/home/weathour/programs/desktop-projects/My-game/design/music-20261104-chinese-12/arrangements/midi_test_10/D1.mid",
+          "sha256": "ce55a52e2f92c2b3a97e766c90704128c8378863fda1953d8eb3b992afad3eb7"
+        },
+        "D2.mid": {
+          "path": "/home/weathour/programs/desktop-projects/My-game/design/music-20261104-chinese-12/arrangements/midi_test_10/D2.mid",
+          "sha256": "65e1642d4a62a69d9fc900fd30add945de877dfc18b28bdc2a21e99e6d44cc74"
+        },
+        "plan-D1.json": {
+          "path": "/home/weathour/programs/desktop-projects/My-game/design/music-20261104-chinese-12/arrangements/midi_test_10/plan-D1.json",
+          "sha256": "30152bbaa33208894d4e4adc33d157dff3ecf26452d5f9f23a2c02588e6fbfe5"
+        },
+        "plan-D2.json": {
+          "path": "/home/weathour/programs/desktop-projects/My-game/design/music-20261104-chinese-12/arrangements/midi_test_10/plan-D2.json",
+          "sha256": "a11d08dd354ff0cba442628efe2a3af7c709097bf0c5a1d54ebd7268fb75694c"
+        }
+      }
+    },
+    {
+      "cue_id": "midi_test_11",
+      "title": "Minute of Decay",
+      "status": "PASS",
+      "reused_accepted_trial": false,
+      "source_sha256": "e32a9ed41b24f012eccb60ebb06504493244341f2b276be6723c7fc5da90e2c0",
+      "note_count": 3002,
+      "pitched_note_count": 1749,
+      "drum_note_count": 1253,
+      "changed_note_count": 56,
+      "changed_raw_message_count": 112,
+      "maximum_seconds_difference_from_original_production_parser": 5.684341886080802e-14,
+      "checks": {
+        "source_sha_matches_frozen_report_and_both_plans": true,
+        "original_note_pairs_and_count_exact": true,
+        "stable_source_ids_and_raw_message_indices_exact_and_unique": true,
+        "D1_byte_identical_source": true,
+        "D1_plan_pitch_exact_source": true,
+        "D1_D2_same_event_ids_and_orchestration": true,
+        "independent_global_seconds_match_within_1ns": true,
+        "D2_only_declared_paired_note_pitch_messages_changed": true,
+        "D2_note_pairs_match_plan_with_independent_FIFO_parser": true,
+        "end_tick_and_duration_unchanged": true,
+        "D2_has_real_changes_bounded_by_one_semitone": true,
+        "protected_bass_drums_and_retained_accompaniment_pitch_exact": true,
+        "drums_keep_channel_9_and_source_pitch": true,
+        "erhu_single_keydown_line": true,
+        "no_new_semitone_against_any_sustained_retained_accompaniment": true,
+        "original_protected_octave_and_fifth_skeleton_exact": true,
+        "actual_SF2_zone_transposition_at_most_four_semitones": true,
+        "accepted_three_reused_byte_exact": true
+      },
+      "new_semitone_conflicts": [],
+      "broken_protected_skeleton": [],
+      "sample_zone_checks": {
+        "D1:pipa": {
+          "matched_zone_count": 222,
+          "max_absolute_transposition_semitones": 2,
+          "missing_zone_source_ids": []
+        },
+        "D1:ruan": {
+          "matched_zone_count": 66,
+          "max_absolute_transposition_semitones": 2,
+          "missing_zone_source_ids": []
+        },
+        "D1:erhu": {
+          "matched_zone_count": 70,
+          "max_absolute_transposition_semitones": 2,
+          "missing_zone_source_ids": []
+        },
+        "D2:pipa": {
+          "matched_zone_count": 222,
+          "max_absolute_transposition_semitones": 2,
+          "missing_zone_source_ids": []
+        },
+        "D2:ruan": {
+          "matched_zone_count": 66,
+          "max_absolute_transposition_semitones": 2,
+          "missing_zone_source_ids": []
+        },
+        "D2:erhu": {
+          "matched_zone_count": 70,
+          "max_absolute_transposition_semitones": 2,
+          "missing_zone_source_ids": []
+        }
+      },
+      "accepted_reuse_sha256": {},
+      "artifacts": {
+        "D1.mid": {
+          "path": "/home/weathour/programs/desktop-projects/My-game/design/music-20261104-chinese-12/arrangements/midi_test_11/D1.mid",
+          "sha256": "e32a9ed41b24f012eccb60ebb06504493244341f2b276be6723c7fc5da90e2c0"
+        },
+        "D2.mid": {
+          "path": "/home/weathour/programs/desktop-projects/My-game/design/music-20261104-chinese-12/arrangements/midi_test_11/D2.mid",
+          "sha256": "d0a7cefa099c531567698287271d83c4c657656b93324e95767ce6e55b133119"
+        },
+        "plan-D1.json": {
+          "path": "/home/weathour/programs/desktop-projects/My-game/design/music-20261104-chinese-12/arrangements/midi_test_11/plan-D1.json",
+          "sha256": "eb4b30d36fd72867ea12111955ba9b675402546c8e7fa29e8aa154933414839c"
+        },
+        "plan-D2.json": {
+          "path": "/home/weathour/programs/desktop-projects/My-game/design/music-20261104-chinese-12/arrangements/midi_test_11/plan-D2.json",
+          "sha256": "7dc2844f81055c663b42f541ae2eca3031c0d2d35dffb3278eefafeef931372c"
+        }
+      }
+    },
+    {
+      "cue_id": "midi_test_12",
+      "title": "President Dead",
+      "status": "PASS",
+      "reused_accepted_trial": false,
+      "source_sha256": "b6ef19ffa363a56b51d31cab55d4c723f3977afe46378f93ed2beebf4f67a61e",
+      "note_count": 3865,
+      "pitched_note_count": 2778,
+      "drum_note_count": 1087,
+      "changed_note_count": 40,
+      "changed_raw_message_count": 80,
+      "maximum_seconds_difference_from_original_production_parser": 2.842170943040401e-14,
+      "checks": {
+        "source_sha_matches_frozen_report_and_both_plans": true,
+        "original_note_pairs_and_count_exact": true,
+        "stable_source_ids_and_raw_message_indices_exact_and_unique": true,
+        "D1_byte_identical_source": true,
+        "D1_plan_pitch_exact_source": true,
+        "D1_D2_same_event_ids_and_orchestration": true,
+        "independent_global_seconds_match_within_1ns": true,
+        "D2_only_declared_paired_note_pitch_messages_changed": true,
+        "D2_note_pairs_match_plan_with_independent_FIFO_parser": true,
+        "end_tick_and_duration_unchanged": true,
+        "D2_has_real_changes_bounded_by_one_semitone": true,
+        "protected_bass_drums_and_retained_accompaniment_pitch_exact": true,
+        "drums_keep_channel_9_and_source_pitch": true,
+        "erhu_single_keydown_line": true,
+        "no_new_semitone_against_any_sustained_retained_accompaniment": true,
+        "original_protected_octave_and_fifth_skeleton_exact": true,
+        "actual_SF2_zone_transposition_at_most_four_semitones": true,
+        "accepted_three_reused_byte_exact": true
+      },
+      "new_semitone_conflicts": [],
+      "broken_protected_skeleton": [],
+      "sample_zone_checks": {
+        "D1:pipa": {
+          "matched_zone_count": 485,
+          "max_absolute_transposition_semitones": 2,
+          "missing_zone_source_ids": []
+        },
+        "D1:ruan": {
+          "matched_zone_count": 135,
+          "max_absolute_transposition_semitones": 4,
+          "missing_zone_source_ids": []
+        },
+        "D1:erhu": {
+          "matched_zone_count": 10,
+          "max_absolute_transposition_semitones": 3,
+          "missing_zone_source_ids": []
+        },
+        "D2:pipa": {
+          "matched_zone_count": 485,
+          "max_absolute_transposition_semitones": 2,
+          "missing_zone_source_ids": []
+        },
+        "D2:ruan": {
+          "matched_zone_count": 135,
+          "max_absolute_transposition_semitones": 3,
+          "missing_zone_source_ids": []
+        },
+        "D2:erhu": {
+          "matched_zone_count": 10,
+          "max_absolute_transposition_semitones": 3,
+          "missing_zone_source_ids": []
+        }
+      },
+      "accepted_reuse_sha256": {},
+      "artifacts": {
+        "D1.mid": {
+          "path": "/home/weathour/programs/desktop-projects/My-game/design/music-20261104-chinese-12/arrangements/midi_test_12/D1.mid",
+          "sha256": "b6ef19ffa363a56b51d31cab55d4c723f3977afe46378f93ed2beebf4f67a61e"
+        },
+        "D2.mid": {
+          "path": "/home/weathour/programs/desktop-projects/My-game/design/music-20261104-chinese-12/arrangements/midi_test_12/D2.mid",
+          "sha256": "5ac731ade60d0753ec3a2aaba5eed7a392562b2d5bc98c829cf513870273746f"
+        },
+        "plan-D1.json": {
+          "path": "/home/weathour/programs/desktop-projects/My-game/design/music-20261104-chinese-12/arrangements/midi_test_12/plan-D1.json",
+          "sha256": "a220fed3031a5de2182bdffa9c6784fa3b807c1ac1320dfe425ae796f19b722c"
+        },
+        "plan-D2.json": {
+          "path": "/home/weathour/programs/desktop-projects/My-game/design/music-20261104-chinese-12/arrangements/midi_test_12/plan-D2.json",
+          "sha256": "1915cc5b18aa38b85478a280b83198ac96d3c10c04b8f640f28e6f3cb125d8b3"
+        }
+      }
+    }
+  ],
+  "acceptance_limit": "Event and declared-rule verification only. Original automatic-transcription errors, preserved chromatic conflicts, and repeated-pitch safety exemptions remain. Musical effect is evaluated by rendered listening."
+}

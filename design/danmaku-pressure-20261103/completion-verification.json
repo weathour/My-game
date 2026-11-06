@@ -1,0 +1,204 @@
+{
+  "schema_version": 1,
+  "status": "COMPLETE_WITH_KNOWN_FORCED_EXIT_DIAGNOSTIC",
+  "utc": "2026-11-03T16:32:06.905616+00:00",
+  "task": "chapter_one_horde_pressure_boss_danmaku_and_true_red_hurtbox_upgrade",
+  "implementation_scope": {
+    "combat_nodes": 18,
+    "enemy_definitions": 43,
+    "authored_action_records": 87,
+    "major_bosses": 4,
+    "major_boss_forms": 8,
+    "controlled_hurt_radius_world": 4,
+    "b18_solo_preserved": true
+  },
+  "engineering_validation": {
+    "godot_version": "4.6.2.stable.official.71f334935",
+    "uninterrupted_project_check": true,
+    "result": "PROJECT_CHECK_OK",
+    "smokes_total": 52,
+    "source_smokes": 48,
+    "pck_smokes": 4,
+    "source_and_log_hash_pairs_independently_rechecked": 52,
+    "continuous_campaign_checks": 454,
+    "continuous_campaigns": [
+      {
+        "battles": 12,
+        "expected": 12,
+        "finished": true,
+        "reward_seed": 781103,
+        "route": "short",
+        "stopped": ""
+      },
+      {
+        "battles": 15,
+        "expected": 15,
+        "finished": true,
+        "reward_seed": 781103,
+        "route": "explore",
+        "stopped": ""
+      }
+    ],
+    "isolated_session_checks": 93409,
+    "isolated_sessions": 18,
+    "isolated_session_victories": 18,
+    "compiled_package_function_checks": 493,
+    "ordered_real_home_and_bgm_checks": 6
+  },
+  "player_data": {
+    "before_count": 53,
+    "after_count": 53,
+    "changed": [],
+    "added": [],
+    "removed": []
+  },
+  "protected_inputs": {
+    "before_count": 346,
+    "after_count": 346,
+    "changed": [],
+    "added": [],
+    "removed": [],
+    "music_ogg_files": 16,
+    "sfx_wav_files": 325,
+    "other_configuration_files": 5
+  },
+  "package": {
+    "launcher": "builds/linux-danmaku-pressure-20261103/run.sh",
+    "manifest": {
+      "path": "builds/linux-danmaku-pressure-20261103/build-manifest.json",
+      "sha256": "99ca45b0679ffa8e4dd872b91c4b53055546593e35d38c6a92b88efaa72c542d"
+    },
+    "pck_sha256": "551c4334bde630cdf7c27ce436649fb5ca46b2fb77a781a2233a3bccad69b42c",
+    "pck_bytes": 240345276,
+    "independent_integrity_checks": 162,
+    "notices_and_source_copies": 70,
+    "isolated_progress": true,
+    "status": "PASS_WITH_KNOWN_FORCED_EXIT_DIAGNOSTIC"
+  },
+  "evidence": {
+    "runtime/validation-report.json": {
+      "path": "design/danmaku-pressure-20261103/runtime/validation-report.json",
+      "sha256": "4302367ed590f3610cfc0f328c565553b8638592b795d4632fbb0d720fa7d5d3"
+    },
+    "runtime/core-freeze.json": {
+      "path": "design/danmaku-pressure-20261103/runtime/core-freeze.json",
+      "sha256": "9ada054d3d5fe849f750f37c83516fb54295acd6bf7b63f61547fefd96dcc686"
+    },
+    "runtime/player-data-before.json": {
+      "path": "design/danmaku-pressure-20261103/runtime/player-data-before.json",
+      "sha256": "0861209173c44d1b944fa35ab3a90a278f4c55c9caa87332f1d70925a662e7ac"
+    },
+    "runtime/player-data-after.json": {
+      "path": "design/danmaku-pressure-20261103/runtime/player-data-after.json",
+      "sha256": "b1da3e82e34ef23f84db6957658ac40343e35de576db31702438543bfefdf417"
+    },
+    "runtime/protected-inputs-before.json": {
+      "path": "design/danmaku-pressure-20261103/runtime/protected-inputs-before.json",
+      "sha256": "83facb6eb6874855613fc90591291815546f75cb5d53a7cca5031bd296e1f59f"
+    },
+    "runtime/protected-inputs-after.json": {
+      "path": "design/danmaku-pressure-20261103/runtime/protected-inputs-after.json",
+      "sha256": "61800478dab995cb8053fbe1f96bac2ac1d77c06e994480118b03d023bea4910"
+    },
+    "runtime/presentation-review.json": {
+      "path": "design/danmaku-pressure-20261103/runtime/presentation-review.json",
+      "sha256": "d2ae00c8e28d09a88e18f6ca770d3083b1f2b5a2c2dddce1efaa6bc469d808c2"
+    },
+    "runtime/package-integrity-review.json": {
+      "path": "design/danmaku-pressure-20261103/runtime/package-integrity-review.json",
+      "sha256": "ad2f037797b533b6b0ee0172729dad6fc3b574e04c10eb93e8018e733adc079d"
+    },
+    "runtime/package-function-review.json": {
+      "path": "design/danmaku-pressure-20261103/runtime/package-function-review.json",
+      "sha256": "38fe4038ae16a7b575ebddc945f979ef9272698860b81ca48ccfd3b90c418f55"
+    },
+    "encounters/validation.json": {
+      "path": "design/danmaku-pressure-20261103/encounters/validation.json",
+      "sha256": "713a8cc9c65d461688def8af00a5b67f0d814249026a1a79126b94cbf46d6981"
+    },
+    "compatibility/profile-compatibility.json": {
+      "path": "design/danmaku-pressure-20261103/compatibility/profile-compatibility.json",
+      "sha256": "e569db0c322d13c7b8fc20a49c5d5de1b285bf4f5c039ff82e671c76ec9d7c58"
+    },
+    "validation/acceptance_summary.json": {
+      "path": "design/danmaku-pressure-20261103/validation/acceptance_summary.json",
+      "sha256": "ca76f2db6db091914684b61968565f37a2da09f2f17ee6b27d13acc14688e734"
+    },
+    "validation/final-delta-validation.json": {
+      "path": "design/danmaku-pressure-20261103/validation/final-delta-validation.json",
+      "sha256": "ce722c932997bf2bedcfd0562f3472056ae3d2a8c361b6407063b86e5ff1f358"
+    },
+    "validation/final-freeze-verification.json": {
+      "path": "design/danmaku-pressure-20261103/validation/final-freeze-verification.json",
+      "sha256": "17aad3c77f39f71109dbeb0e11e9ee720a47a8c34ff5f828fbc1e200614f565d"
+    },
+    "interface.json": {
+      "path": "design/danmaku-pressure-20261103/interface.json",
+      "sha256": "0538484ed70762c83338eb875cbbd72b8b6731d1c3607a94e487434322342030"
+    }
+  },
+  "visual_review": {
+    "original_resolution_real_simulation_snapshots_reviewed": 10,
+    "synthetic_stress_snapshots_reviewed": 2,
+    "projectile_impact_visual_delta_images_reviewed": 2,
+    "sizes": [
+      960,
+      1280,
+      1920
+    ],
+    "synthetic_and_actual_snapshot_provenance_separate": true,
+    "phase_fixture_and_exposure_godmode_flags_retained": true
+  },
+  "source_epochs": {
+    "full_independent_before_after_candidate_preserved": true,
+    "final_delta_limited_to_B17_approach_speed_and_consumption": true,
+    "targeted_final_cadence_and_duel_retested": true,
+    "unchanged_suites_reused_with_explicit_provenance": true
+  },
+  "known_diagnostics": {
+    "direct_short_frame_graphical_quit_after_exit_clean": false,
+    "same_vorbis_tail_reference_reproduced_in_prior_audio_package": true,
+    "ordered_scene_unload_and_native_drain_clean": true,
+    "details": "docs/KNOWN_ISSUES.md"
+  },
+  "scope_limits": {
+    "human_playtest_performed": false,
+    "fixed_lv12_B18_center_duel_failed_corner_duel_won": true,
+    "two_actual_campaign_clears_are_fixed_seed_reference_controller_results": true,
+    "logic_tick_and_synthetic_presentation_timings_are_not_rendered_fps_guarantees": true
+  },
+  "documentation_checks": {
+    "status": "PASS",
+    "checks": {
+      "doc_links": "DOC_LINK_CHECK_OK",
+      "project_config": "PROJECT_CONFIG_CHECK_OK",
+      "git_diff_check": "exit_0"
+    },
+    "logs": [
+      {
+        "path": "design/danmaku-pressure-20261103/runtime/final-logs/final-docs-links.log",
+        "sha256": "969673262de0b13d6eac327a05de650c19a7212568ded9da870aedab3dc7b952"
+      },
+      {
+        "path": "design/danmaku-pressure-20261103/runtime/final-logs/final-project-config.log",
+        "sha256": "6ef17438bb692dd0f3849d7cc7024f078ad7cf5c593f12502e6cf625dc2a87f0"
+      },
+      {
+        "path": "design/danmaku-pressure-20261103/runtime/final-logs/final-diff-check.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ]
+  },
+  "documentation_final_sha256": {
+    "docs/README_文档索引.md": "32c2a21384dbb05229d6a85ee2c46d19df3e4b893f27acffa1987319fe6fc197",
+    "docs/00_当前设计共识.md": "2bd701164dc18df70bf4ad0efd7cfa6619b793c57a56f521f22e0c704d68d71b",
+    "docs/05_敌人_Boss_关卡_难度.md": "7d8e2c290c8e513c1a710fba7315d09e27f3a298f947dc12f13da0fc96f52d4c",
+    "docs/06_UI_菜单_存档_音频.md": "f6a0c9e69e53b05a5aacf44277ae217fddd64d0dd2d55ac5ce50eeb7e6afc555",
+    "docs/08_当前实现状态与后续重点.md": "2134f43b4065d194fcbf46f82a0371522594cf93b48910489527adbfc7042cf5",
+    "docs/18_白门楼敌人图鉴与战斗规格.md": "02d44b397ad8d755579fbad7e17819145f16e6a4446429201bc1d5125bd27c33",
+    "docs/KNOWN_ISSUES.md": "90117f972e8efbdb8ab7e4ab084c1bf160ba671d82f05664b986c32556828f7f",
+    "docs/implementation/2026-11-03_怪群压力与Boss弹幕升级.md": "25ac938c0025a287e6065d236e441c5c33820c7be3894c68ddd30ddf1b4dfeba",
+    "design/danmaku-pressure-20261103/README.md": "9d3bd1ce727f736eae22e3e2dab840c5198a4c38e764f31218f6e90e0b7e5393",
+    "CHANGELOG.md": "fd076de82e7d56672e3ea631bab695bd160457bdac0a3b30a82e576edf13adc5"
+  }
+}

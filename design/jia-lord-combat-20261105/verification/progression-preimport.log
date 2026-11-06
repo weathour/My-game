@@ -1,0 +1,55 @@
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+ERROR: No loader found for resource: res://assets/ui/chronicle/characters/JIA-campaign-standing.png (expected type: unknown)
+   at: _load (core/io/resource_loader.cpp:358)
+   GDScript backtrace (most recent call first):
+       [0] standing (res://scripts/ui/chronicle/chronicle_portraits.gd:35)
+       [1] _campaign_frame (res://scripts/ui/chronicle/chronicle_portraits.gd:65)
+       [2] texture (res://scripts/ui/chronicle/chronicle_portraits.gd:72)
+       [3] configure (res://scripts/ui/chronicle/chronicle_card.gd:27)
+       [4] make_card (res://scripts/ui/chronicle/chronicle_party_pages.gd:154)
+       [5] party_strip (res://scripts/ui/chronicle/chronicle_party_pages.gd:111)
+       [6] build (res://scripts/ui/chronicle/chronicle_party_pages.gd:25)
+       [7] roster (res://scripts/ui/chronicle/chronicle_pages.gd:54)
+       [8] build (res://scripts/ui/chronicle/chronicle_pages.gd:14)
+       [9] render (res://scripts/ui/chronicle/chronicle_shell.gd:184)
+       [10] open_page (res://scripts/ui/chronicle/chronicle_shell.gd:119)
+       [11] check_historical_replay (res://scripts/tests/jia_campaign_progression_smoke.gd:155)
+       [12] frames (res://scripts/tests/jia_campaign_progression_smoke.gd:26)
+ERROR: card follows current campaign context rostercampaign
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://scripts/tests/jia_campaign_progression_smoke.gd:23)
+       [1] check_historical_replay (res://scripts/tests/jia_campaign_progression_smoke.gd:160)
+       [2] frames (res://scripts/tests/jia_campaign_progression_smoke.gd:26)
+ERROR: card follows current campaign context preparationcampaign
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://scripts/tests/jia_campaign_progression_smoke.gd:23)
+       [1] check_historical_replay (res://scripts/tests/jia_campaign_progression_smoke.gd:160)
+       [2] frames (res://scripts/tests/jia_campaign_progression_smoke.gd:26)
+ERROR: character sheet follows campaign appearance campaign
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://scripts/tests/jia_campaign_progression_smoke.gd:23)
+       [1] check_historical_replay (res://scripts/tests/jia_campaign_progression_smoke.gd:164)
+       [2] frames (res://scripts/tests/jia_campaign_progression_smoke.gd:26)
+ERROR: replay texture follows historical event, not late current save S12
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://scripts/tests/jia_campaign_progression_smoke.gd:23)
+       [1] check_historical_replay (res://scripts/tests/jia_campaign_progression_smoke.gd:188)
+       [2] frames (res://scripts/tests/jia_campaign_progression_smoke.gd:26)
+ERROR: replay texture follows historical event, not late current save S13
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://scripts/tests/jia_campaign_progression_smoke.gd:23)
+       [1] check_historical_replay (res://scripts/tests/jia_campaign_progression_smoke.gd:188)
+       [2] frames (res://scripts/tests/jia_campaign_progression_smoke.gd:26)
+ERROR: replay texture follows historical event, not late current save CE25
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://scripts/tests/jia_campaign_progression_smoke.gd:23)
+       [1] check_historical_replay (res://scripts/tests/jia_campaign_progression_smoke.gd:188)
+       [2] frames (res://scripts/tests/jia_campaign_progression_smoke.gd:26)
+JIA_CAMPAIGN_PROGRESSION_SMOKE FAIL checks=369 failures=6

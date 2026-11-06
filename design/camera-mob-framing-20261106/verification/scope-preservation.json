@@ -1,0 +1,23 @@
+{
+  "status": "passed",
+  "recorded_at": 1793968763.4459941,
+  "comparison": "previous formal final recovery freeze to current round freeze; no git HEAD assumption",
+  "unchanged_global_inputs": 1906,
+  "changed_global_inputs": {
+    "scripts/ui/chronicle/boss_camera.gd": {
+      "before": "e39da7da815c8ba9e18d7aa373bae670e5105bf0117d72034ac6ec4a4ed35a05",
+      "after": "f61f7883f5e60699643411a869371e4e805bfa7db8ad36b6ead72de10f707b0b"
+    }
+  },
+  "global_files_added": [],
+  "global_files_removed": [],
+  "old_test_entries_changed_only_owner_qualification": [
+    "scripts/tests/chronicle_boss_camera_cache_smoke.gd",
+    "scripts/tests/chronicle_boss_camera_smoke.gd"
+  ],
+  "new_test_entries": [
+    "scripts/tests/chronicle_camera_mob_framing_smoke.gd"
+  ],
+  "all_assets_JSON_geometry_AI_battle_rules_unchanged": true,
+  "current_round_global_count": 1907
+}

@@ -1,0 +1,1284 @@
+{
+  "version": 1,
+  "id": "JIA_CAMPAIGN",
+  "review_status": "accepted_for_export",
+  "review_notes": "Approved campaign-v2 only. Root and art owner inspected pixel model and both24-pose action sheets. Warlord double crimson plumes, beast-head golden shoulder/chest armor, layered scales/tassets, gold-bordered crimson cape, adult Jia grin/stubble, red ribbon and reed knot retained. All48 separately generated poses use actual alpha-connected regions, not grid slices; detached tiny alpha specks omitted. Straight spearheads point right at contact. All active clips have contact frame1. Uniform source body calibration excludes plumes, cape and weapons. Run row ground planes retain small natural airborne phases; no per-frame body stretching. Technical export review is separate from user animation-aesthetic acceptance.",
+  "canvas": {
+    "size": [
+      256,
+      256
+    ],
+    "anchor": [
+      128,
+      236
+    ],
+    "body_height_px": 80
+  },
+  "faces_left": false,
+  "sources": {
+    "dao": {
+      "path": "dao-actions-v1.png",
+      "sha256": "893dfd5800989b20c422dc6be26e3de6ef59e727ce421d436e179f83c40ade83",
+      "size": [
+        1024,
+        1536
+      ],
+      "standing_body_height": 210,
+      "standing_body_reference": {
+        "pose": "dao-p01",
+        "helmet_crown_y": 41,
+        "boot_ground_y": 251,
+        "excludes": [
+          "long red feathers",
+          "cape extent",
+          "weapon extent"
+        ]
+      }
+    },
+    "spear": {
+      "path": "spear-actions-v1.png",
+      "sha256": "43b9e719e3d2905b1cace6df5499c7b3d4e75e78c7d5ae76f4d235036161f7a0",
+      "size": [
+        1024,
+        1536
+      ],
+      "standing_body_height": 211,
+      "standing_body_reference": {
+        "pose": "spear-p01",
+        "helmet_crown_y": 44,
+        "boot_ground_y": 255,
+        "excludes": [
+          "long red feathers",
+          "cape extent",
+          "weapon extent"
+        ]
+      }
+    }
+  },
+  "poses": [
+    {
+      "id": "dao-p01",
+      "source": "dao",
+      "components": [
+        {
+          "bbox": [
+            24,
+            16,
+            218,
+            251
+          ],
+          "area": 25166
+        }
+      ],
+      "anchor_source": [
+        134,
+        251
+      ],
+      "hip_x_source": 134,
+      "visible_foot_y": 251,
+      "ground_source_y": 251,
+      "registration_note": "Manual belt/hip x; source boot row ground plane. Airborne run boot pixels may sit above ground."
+    },
+    {
+      "id": "dao-p02",
+      "source": "dao",
+      "components": [
+        {
+          "bbox": [
+            283,
+            16,
+            472,
+            251
+          ],
+          "area": 24937
+        }
+      ],
+      "anchor_source": [
+        392,
+        251
+      ],
+      "hip_x_source": 392,
+      "visible_foot_y": 251,
+      "ground_source_y": 251,
+      "registration_note": "Manual belt/hip x; source boot row ground plane. Airborne run boot pixels may sit above ground."
+    },
+    {
+      "id": "dao-p03",
+      "source": "dao",
+      "components": [
+        {
+          "bbox": [
+            534,
+            16,
+            729,
+            251
+          ],
+          "area": 24711
+        }
+      ],
+      "anchor_source": [
+        648,
+        251
+      ],
+      "hip_x_source": 648,
+      "visible_foot_y": 251,
+      "ground_source_y": 251,
+      "registration_note": "Manual belt/hip x; source boot row ground plane. Airborne run boot pixels may sit above ground."
+    },
+    {
+      "id": "dao-p04",
+      "source": "dao",
+      "components": [
+        {
+          "bbox": [
+            794,
+            16,
+            983,
+            251
+          ],
+          "area": 24798
+        }
+      ],
+      "anchor_source": [
+        906,
+        251
+      ],
+      "hip_x_source": 906,
+      "visible_foot_y": 251,
+      "ground_source_y": 251,
+      "registration_note": "Manual belt/hip x; source boot row ground plane. Airborne run boot pixels may sit above ground."
+    },
+    {
+      "id": "dao-p05",
+      "source": "dao",
+      "components": [
+        {
+          "bbox": [
+            20,
+            270,
+            225,
+            499
+          ],
+          "area": 24747
+        }
+      ],
+      "anchor_source": [
+        137,
+        500
+      ],
+      "hip_x_source": 137,
+      "visible_foot_y": 499,
+      "ground_source_y": 500,
+      "registration_note": "Manual belt/hip x; source boot row ground plane. Airborne run boot pixels may sit above ground."
+    },
+    {
+      "id": "dao-p06",
+      "source": "dao",
+      "components": [
+        {
+          "bbox": [
+            275,
+            270,
+            474,
+            499
+          ],
+          "area": 23158
+        }
+      ],
+      "anchor_source": [
+        395,
+        500
+      ],
+      "hip_x_source": 395,
+      "visible_foot_y": 499,
+      "ground_source_y": 500,
+      "registration_note": "Manual belt/hip x; source boot row ground plane. Airborne run boot pixels may sit above ground."
+    },
+    {
+      "id": "dao-p07",
+      "source": "dao",
+      "components": [
+        {
+          "bbox": [
+            521,
+            269,
+            730,
+            499
+          ],
+          "area": 22882
+        }
+      ],
+      "anchor_source": [
+        652,
+        500
+      ],
+      "hip_x_source": 652,
+      "visible_foot_y": 499,
+      "ground_source_y": 500,
+      "registration_note": "Manual belt/hip x; source boot row ground plane. Airborne run boot pixels may sit above ground."
+    },
+    {
+      "id": "dao-p08",
+      "source": "dao",
+      "components": [
+        {
+          "bbox": [
+            781,
+            275,
+            988,
+            499
+          ],
+          "area": 23300
+        }
+      ],
+      "anchor_source": [
+        910,
+        500
+      ],
+      "hip_x_source": 910,
+      "visible_foot_y": 499,
+      "ground_source_y": 500,
+      "registration_note": "Manual belt/hip x; source boot row ground plane. Airborne run boot pixels may sit above ground."
+    },
+    {
+      "id": "dao-p09",
+      "source": "dao",
+      "components": [
+        {
+          "bbox": [
+            14,
+            529,
+            217,
+            755
+          ],
+          "area": 23497
+        }
+      ],
+      "anchor_source": [
+        135,
+        755
+      ],
+      "hip_x_source": 135,
+      "visible_foot_y": 755,
+      "ground_source_y": 755,
+      "registration_note": "Manual belt/hip x; source boot row ground plane. Airborne run boot pixels may sit above ground."
+    },
+    {
+      "id": "dao-p10",
+      "source": "dao",
+      "components": [
+        {
+          "bbox": [
+            263,
+            532,
+            471,
+            755
+          ],
+          "area": 22447
+        }
+      ],
+      "anchor_source": [
+        391,
+        755
+      ],
+      "hip_x_source": 391,
+      "visible_foot_y": 755,
+      "ground_source_y": 755,
+      "registration_note": "Manual belt/hip x; source boot row ground plane. Airborne run boot pixels may sit above ground."
+    },
+    {
+      "id": "dao-p11",
+      "source": "dao",
+      "components": [
+        {
+          "bbox": [
+            518,
+            530,
+            736,
+            751
+          ],
+          "area": 21780
+        }
+      ],
+      "anchor_source": [
+        652,
+        755
+      ],
+      "hip_x_source": 652,
+      "visible_foot_y": 751,
+      "ground_source_y": 755,
+      "registration_note": "Manual belt/hip x; source boot row ground plane. Airborne run boot pixels may sit above ground."
+    },
+    {
+      "id": "dao-p12",
+      "source": "dao",
+      "components": [
+        {
+          "bbox": [
+            780,
+            533,
+            997,
+            741
+          ],
+          "area": 22191
+        }
+      ],
+      "anchor_source": [
+        910,
+        755
+      ],
+      "hip_x_source": 910,
+      "visible_foot_y": 741,
+      "ground_source_y": 755,
+      "registration_note": "Manual belt/hip x; source boot row ground plane. Airborne run boot pixels may sit above ground."
+    },
+    {
+      "id": "dao-p13",
+      "source": "dao",
+      "components": [
+        {
+          "bbox": [
+            14,
+            782,
+            216,
+            1010
+          ],
+          "area": 26718
+        }
+      ],
+      "anchor_source": [
+        130,
+        1010
+      ],
+      "hip_x_source": 130,
+      "visible_foot_y": 1010,
+      "ground_source_y": 1010,
+      "registration_note": "Manual belt/hip x; source boot row ground plane. Airborne run boot pixels may sit above ground."
+    },
+    {
+      "id": "dao-p14",
+      "source": "dao",
+      "components": [
+        {
+          "bbox": [
+            262,
+            787,
+            491,
+            1010
+          ],
+          "area": 21725
+        }
+      ],
+      "anchor_source": [
+        393,
+        1010
+      ],
+      "hip_x_source": 393,
+      "visible_foot_y": 1010,
+      "ground_source_y": 1010,
+      "registration_note": "Manual belt/hip x; source boot row ground plane. Airborne run boot pixels may sit above ground."
+    },
+    {
+      "id": "dao-p15",
+      "source": "dao",
+      "components": [
+        {
+          "bbox": [
+            512,
+            790,
+            768,
+            1010
+          ],
+          "area": 23772
+        }
+      ],
+      "anchor_source": [
+        646,
+        1010
+      ],
+      "hip_x_source": 646,
+      "visible_foot_y": 1010,
+      "ground_source_y": 1010,
+      "registration_note": "Manual belt/hip x; source boot row ground plane. Airborne run boot pixels may sit above ground."
+    },
+    {
+      "id": "dao-p16",
+      "source": "dao",
+      "components": [
+        {
+          "bbox": [
+            787,
+            786,
+            989,
+            1010
+          ],
+          "area": 23819
+        }
+      ],
+      "anchor_source": [
+        903,
+        1010
+      ],
+      "hip_x_source": 903,
+      "visible_foot_y": 1010,
+      "ground_source_y": 1010,
+      "registration_note": "Manual belt/hip x; source boot row ground plane. Airborne run boot pixels may sit above ground."
+    },
+    {
+      "id": "dao-p17",
+      "source": "dao",
+      "components": [
+        {
+          "bbox": [
+            12,
+            1053,
+            217,
+            1265
+          ],
+          "area": 23518
+        }
+      ],
+      "anchor_source": [
+        126,
+        1266
+      ],
+      "hip_x_source": 126,
+      "visible_foot_y": 1265,
+      "ground_source_y": 1266,
+      "registration_note": "Manual belt/hip x; source boot row ground plane. Airborne run boot pixels may sit above ground."
+    },
+    {
+      "id": "dao-p18",
+      "source": "dao",
+      "components": [
+        {
+          "bbox": [
+            257,
+            1043,
+            511,
+            1266
+          ],
+          "area": 24759
+        }
+      ],
+      "anchor_source": [
+        389,
+        1266
+      ],
+      "hip_x_source": 389,
+      "visible_foot_y": 1266,
+      "ground_source_y": 1266,
+      "registration_note": "Manual belt/hip x; source boot row ground plane. Airborne run boot pixels may sit above ground."
+    },
+    {
+      "id": "dao-p19",
+      "source": "dao",
+      "components": [
+        {
+          "bbox": [
+            517,
+            1043,
+            762,
+            1265
+          ],
+          "area": 24813
+        }
+      ],
+      "anchor_source": [
+        646,
+        1266
+      ],
+      "hip_x_source": 646,
+      "visible_foot_y": 1265,
+      "ground_source_y": 1266,
+      "registration_note": "Manual belt/hip x; source boot row ground plane. Airborne run boot pixels may sit above ground."
+    },
+    {
+      "id": "dao-p20",
+      "source": "dao",
+      "components": [
+        {
+          "bbox": [
+            781,
+            1039,
+            989,
+            1265
+          ],
+          "area": 24752
+        }
+      ],
+      "anchor_source": [
+        903,
+        1266
+      ],
+      "hip_x_source": 903,
+      "visible_foot_y": 1265,
+      "ground_source_y": 1266,
+      "registration_note": "Manual belt/hip x; source boot row ground plane. Airborne run boot pixels may sit above ground."
+    },
+    {
+      "id": "dao-p21",
+      "source": "dao",
+      "components": [
+        {
+          "bbox": [
+            13,
+            1298,
+            193,
+            1523
+          ],
+          "area": 23950
+        }
+      ],
+      "anchor_source": [
+        124,
+        1523
+      ],
+      "hip_x_source": 124,
+      "visible_foot_y": 1523,
+      "ground_source_y": 1523,
+      "registration_note": "Manual belt/hip x; source boot row ground plane. Airborne run boot pixels may sit above ground."
+    },
+    {
+      "id": "dao-p22",
+      "source": "dao",
+      "components": [
+        {
+          "bbox": [
+            254,
+            1299,
+            509,
+            1523
+          ],
+          "area": 24714
+        }
+      ],
+      "anchor_source": [
+        384,
+        1523
+      ],
+      "hip_x_source": 384,
+      "visible_foot_y": 1523,
+      "ground_source_y": 1523,
+      "registration_note": "Manual belt/hip x; source boot row ground plane. Airborne run boot pixels may sit above ground."
+    },
+    {
+      "id": "dao-p23",
+      "source": "dao",
+      "components": [
+        {
+          "bbox": [
+            506,
+            1311,
+            791,
+            1523
+          ],
+          "area": 25688
+        }
+      ],
+      "anchor_source": [
+        639,
+        1523
+      ],
+      "hip_x_source": 639,
+      "visible_foot_y": 1523,
+      "ground_source_y": 1523,
+      "registration_note": "Manual belt/hip x; source boot row ground plane. Airborne run boot pixels may sit above ground."
+    },
+    {
+      "id": "dao-p24",
+      "source": "dao",
+      "components": [
+        {
+          "bbox": [
+            788,
+            1296,
+            996,
+            1523
+          ],
+          "area": 24266
+        }
+      ],
+      "anchor_source": [
+        905,
+        1523
+      ],
+      "hip_x_source": 905,
+      "visible_foot_y": 1523,
+      "ground_source_y": 1523,
+      "registration_note": "Manual belt/hip x; source boot row ground plane. Airborne run boot pixels may sit above ground."
+    },
+    {
+      "id": "spear-p01",
+      "source": "spear",
+      "components": [
+        {
+          "bbox": [
+            9,
+            18,
+            248,
+            255
+          ],
+          "area": 26428
+        }
+      ],
+      "anchor_source": [
+        125,
+        255
+      ],
+      "hip_x_source": 125,
+      "visible_foot_y": 255,
+      "ground_source_y": 255,
+      "registration_note": "Manual belt/hip x; source boot row ground plane. Airborne run boot pixels may sit above ground."
+    },
+    {
+      "id": "spear-p02",
+      "source": "spear",
+      "components": [
+        {
+          "bbox": [
+            267,
+            18,
+            503,
+            255
+          ],
+          "area": 26551
+        }
+      ],
+      "anchor_source": [
+        382,
+        255
+      ],
+      "hip_x_source": 382,
+      "visible_foot_y": 255,
+      "ground_source_y": 255,
+      "registration_note": "Manual belt/hip x; source boot row ground plane. Airborne run boot pixels may sit above ground."
+    },
+    {
+      "id": "spear-p03",
+      "source": "spear",
+      "components": [
+        {
+          "bbox": [
+            521,
+            17,
+            760,
+            255
+          ],
+          "area": 26376
+        }
+      ],
+      "anchor_source": [
+        638,
+        255
+      ],
+      "hip_x_source": 638,
+      "visible_foot_y": 255,
+      "ground_source_y": 255,
+      "registration_note": "Manual belt/hip x; source boot row ground plane. Airborne run boot pixels may sit above ground."
+    },
+    {
+      "id": "spear-p04",
+      "source": "spear",
+      "components": [
+        {
+          "bbox": [
+            777,
+            19,
+            1017,
+            255
+          ],
+          "area": 26174
+        }
+      ],
+      "anchor_source": [
+        894,
+        255
+      ],
+      "hip_x_source": 894,
+      "visible_foot_y": 255,
+      "ground_source_y": 255,
+      "registration_note": "Manual belt/hip x; source boot row ground plane. Airborne run boot pixels may sit above ground."
+    },
+    {
+      "id": "spear-p05",
+      "source": "spear",
+      "components": [
+        {
+          "bbox": [
+            9,
+            285,
+            249,
+            500
+          ],
+          "area": 20613
+        }
+      ],
+      "anchor_source": [
+        130,
+        501
+      ],
+      "hip_x_source": 130,
+      "visible_foot_y": 500,
+      "ground_source_y": 501,
+      "registration_note": "Manual belt/hip x; source boot row ground plane. Airborne run boot pixels may sit above ground."
+    },
+    {
+      "id": "spear-p06",
+      "source": "spear",
+      "components": [
+        {
+          "bbox": [
+            262,
+            288,
+            504,
+            501
+          ],
+          "area": 19890
+        }
+      ],
+      "anchor_source": [
+        388,
+        501
+      ],
+      "hip_x_source": 388,
+      "visible_foot_y": 501,
+      "ground_source_y": 501,
+      "registration_note": "Manual belt/hip x; source boot row ground plane. Airborne run boot pixels may sit above ground."
+    },
+    {
+      "id": "spear-p07",
+      "source": "spear",
+      "components": [
+        {
+          "bbox": [
+            519,
+            285,
+            762,
+            498
+          ],
+          "area": 20101
+        }
+      ],
+      "anchor_source": [
+        647,
+        501
+      ],
+      "hip_x_source": 647,
+      "visible_foot_y": 498,
+      "ground_source_y": 501,
+      "registration_note": "Manual belt/hip x; source boot row ground plane. Airborne run boot pixels may sit above ground."
+    },
+    {
+      "id": "spear-p08",
+      "source": "spear",
+      "components": [
+        {
+          "bbox": [
+            770,
+            290,
+            1018,
+            491
+          ],
+          "area": 21597
+        }
+      ],
+      "anchor_source": [
+        903,
+        501
+      ],
+      "hip_x_source": 903,
+      "visible_foot_y": 491,
+      "ground_source_y": 501,
+      "registration_note": "Manual belt/hip x; source boot row ground plane. Airborne run boot pixels may sit above ground."
+    },
+    {
+      "id": "spear-p09",
+      "source": "spear",
+      "components": [
+        {
+          "bbox": [
+            9,
+            530,
+            250,
+            743
+          ],
+          "area": 20209
+        }
+      ],
+      "anchor_source": [
+        131,
+        746
+      ],
+      "hip_x_source": 131,
+      "visible_foot_y": 743,
+      "ground_source_y": 746,
+      "registration_note": "Manual belt/hip x; source boot row ground plane. Airborne run boot pixels may sit above ground."
+    },
+    {
+      "id": "spear-p10",
+      "source": "spear",
+      "components": [
+        {
+          "bbox": [
+            268,
+            530,
+            506,
+            745
+          ],
+          "area": 19325
+        }
+      ],
+      "anchor_source": [
+        390,
+        746
+      ],
+      "hip_x_source": 390,
+      "visible_foot_y": 745,
+      "ground_source_y": 746,
+      "registration_note": "Manual belt/hip x; source boot row ground plane. Airborne run boot pixels may sit above ground."
+    },
+    {
+      "id": "spear-p11",
+      "source": "spear",
+      "components": [
+        {
+          "bbox": [
+            522,
+            530,
+            764,
+            746
+          ],
+          "area": 19370
+        }
+      ],
+      "anchor_source": [
+        650,
+        746
+      ],
+      "hip_x_source": 650,
+      "visible_foot_y": 746,
+      "ground_source_y": 746,
+      "registration_note": "Manual belt/hip x; source boot row ground plane. Airborne run boot pixels may sit above ground."
+    },
+    {
+      "id": "spear-p12",
+      "source": "spear",
+      "components": [
+        {
+          "bbox": [
+            773,
+            533,
+            1019,
+            727
+          ],
+          "area": 21454
+        }
+      ],
+      "anchor_source": [
+        906,
+        746
+      ],
+      "hip_x_source": 906,
+      "visible_foot_y": 727,
+      "ground_source_y": 746,
+      "registration_note": "Manual belt/hip x; source boot row ground plane. Airborne run boot pixels may sit above ground."
+    },
+    {
+      "id": "spear-p13",
+      "source": "spear",
+      "components": [
+        {
+          "bbox": [
+            13,
+            789,
+            226,
+            994
+          ],
+          "area": 21372
+        }
+      ],
+      "anchor_source": [
+        122,
+        994
+      ],
+      "hip_x_source": 122,
+      "visible_foot_y": 994,
+      "ground_source_y": 994,
+      "registration_note": "Manual belt/hip x; source boot row ground plane. Airborne run boot pixels may sit above ground."
+    },
+    {
+      "id": "spear-p14",
+      "source": "spear",
+      "components": [
+        {
+          "bbox": [
+            263,
+            792,
+            501,
+            994
+          ],
+          "area": 19434
+        }
+      ],
+      "anchor_source": [
+        382,
+        994
+      ],
+      "hip_x_source": 382,
+      "visible_foot_y": 994,
+      "ground_source_y": 994,
+      "registration_note": "Manual belt/hip x; source boot row ground plane. Airborne run boot pixels may sit above ground."
+    },
+    {
+      "id": "spear-p15",
+      "source": "spear",
+      "components": [
+        {
+          "bbox": [
+            513,
+            794,
+            779,
+            994
+          ],
+          "area": 21591
+        }
+      ],
+      "anchor_source": [
+        638,
+        994
+      ],
+      "hip_x_source": 638,
+      "visible_foot_y": 994,
+      "ground_source_y": 994,
+      "registration_note": "Manual belt/hip x; source boot row ground plane. Airborne run boot pixels may sit above ground."
+    },
+    {
+      "id": "spear-p16",
+      "source": "spear",
+      "components": [
+        {
+          "bbox": [
+            785,
+            788,
+            1005,
+            994
+          ],
+          "area": 22009
+        }
+      ],
+      "anchor_source": [
+        891,
+        994
+      ],
+      "hip_x_source": 891,
+      "visible_foot_y": 994,
+      "ground_source_y": 994,
+      "registration_note": "Manual belt/hip x; source boot row ground plane. Airborne run boot pixels may sit above ground."
+    },
+    {
+      "id": "spear-p17",
+      "source": "spear",
+      "components": [
+        {
+          "bbox": [
+            14,
+            1045,
+            237,
+            1246
+          ],
+          "area": 21249
+        }
+      ],
+      "anchor_source": [
+        118,
+        1246
+      ],
+      "hip_x_source": 118,
+      "visible_foot_y": 1246,
+      "ground_source_y": 1246,
+      "registration_note": "Manual belt/hip x; source boot row ground plane. Airborne run boot pixels may sit above ground."
+    },
+    {
+      "id": "spear-p18",
+      "source": "spear",
+      "components": [
+        {
+          "bbox": [
+            261,
+            1045,
+            499,
+            1246
+          ],
+          "area": 20276
+        }
+      ],
+      "anchor_source": [
+        379,
+        1246
+      ],
+      "hip_x_source": 379,
+      "visible_foot_y": 1246,
+      "ground_source_y": 1246,
+      "registration_note": "Manual belt/hip x; source boot row ground plane. Airborne run boot pixels may sit above ground."
+    },
+    {
+      "id": "spear-p19",
+      "source": "spear",
+      "components": [
+        {
+          "bbox": [
+            514,
+            1041,
+            765,
+            1246
+          ],
+          "area": 21239
+        }
+      ],
+      "anchor_source": [
+        636,
+        1246
+      ],
+      "hip_x_source": 636,
+      "visible_foot_y": 1246,
+      "ground_source_y": 1246,
+      "registration_note": "Manual belt/hip x; source boot row ground plane. Airborne run boot pixels may sit above ground."
+    },
+    {
+      "id": "spear-p20",
+      "source": "spear",
+      "components": [
+        {
+          "bbox": [
+            776,
+            1040,
+            1015,
+            1246
+          ],
+          "area": 22710
+        }
+      ],
+      "anchor_source": [
+        891,
+        1246
+      ],
+      "hip_x_source": 891,
+      "visible_foot_y": 1246,
+      "ground_source_y": 1246,
+      "registration_note": "Manual belt/hip x; source boot row ground plane. Airborne run boot pixels may sit above ground."
+    },
+    {
+      "id": "spear-p21",
+      "source": "spear",
+      "components": [
+        {
+          "bbox": [
+            9,
+            1311,
+            230,
+            1515
+          ],
+          "area": 21950
+        }
+      ],
+      "anchor_source": [
+        118,
+        1515
+      ],
+      "hip_x_source": 118,
+      "visible_foot_y": 1515,
+      "ground_source_y": 1515,
+      "registration_note": "Manual belt/hip x; source boot row ground plane. Airborne run boot pixels may sit above ground."
+    },
+    {
+      "id": "spear-p22",
+      "source": "spear",
+      "components": [
+        {
+          "bbox": [
+            245,
+            1313,
+            495,
+            1514
+          ],
+          "area": 21704
+        }
+      ],
+      "anchor_source": [
+        372,
+        1515
+      ],
+      "hip_x_source": 372,
+      "visible_foot_y": 1514,
+      "ground_source_y": 1515,
+      "registration_note": "Manual belt/hip x; source boot row ground plane. Airborne run boot pixels may sit above ground."
+    },
+    {
+      "id": "spear-p23",
+      "source": "spear",
+      "components": [
+        {
+          "bbox": [
+            484,
+            1324,
+            769,
+            1513
+          ],
+          "area": 23603
+        }
+      ],
+      "anchor_source": [
+        627,
+        1515
+      ],
+      "hip_x_source": 627,
+      "visible_foot_y": 1513,
+      "ground_source_y": 1515,
+      "registration_note": "Manual belt/hip x; source boot row ground plane. Airborne run boot pixels may sit above ground."
+    },
+    {
+      "id": "spear-p24",
+      "source": "spear",
+      "components": [
+        {
+          "bbox": [
+            774,
+            1308,
+            1010,
+            1515
+          ],
+          "area": 22804
+        }
+      ],
+      "anchor_source": [
+        891,
+        1515
+      ],
+      "hip_x_source": 891,
+      "visible_foot_y": 1515,
+      "ground_source_y": 1515,
+      "registration_note": "Manual belt/hip x; source boot row ground plane. Airborne run boot pixels may sit above ground."
+    }
+  ],
+  "clips": {
+    "dao-idle": {
+      "poses": [
+        "dao-p01",
+        "dao-p02",
+        "dao-p03",
+        "dao-p04"
+      ],
+      "fps": 5,
+      "windup_frame": 0,
+      "contact_frame": 0
+    },
+    "dao-run": {
+      "poses": [
+        "dao-p05",
+        "dao-p06",
+        "dao-p07",
+        "dao-p08",
+        "dao-p09",
+        "dao-p10",
+        "dao-p11",
+        "dao-p12"
+      ],
+      "fps": 11,
+      "windup_frame": 0,
+      "contact_frame": 0
+    },
+    "dao-attack": {
+      "poses": [
+        "dao-p13",
+        "dao-p14",
+        "dao-p15",
+        "dao-p16"
+      ],
+      "fps": 16,
+      "windup_frame": 0,
+      "contact_frame": 1
+    },
+    "dao-sweep": {
+      "poses": [
+        "dao-p17",
+        "dao-p18",
+        "dao-p19",
+        "dao-p20"
+      ],
+      "fps": 12,
+      "windup_frame": 0,
+      "contact_frame": 1
+    },
+    "dao-break": {
+      "poses": [
+        "dao-p21",
+        "dao-p22",
+        "dao-p23",
+        "dao-p24"
+      ],
+      "fps": 14,
+      "windup_frame": 0,
+      "contact_frame": 1
+    },
+    "spear-idle": {
+      "poses": [
+        "spear-p01",
+        "spear-p02",
+        "spear-p03",
+        "spear-p04"
+      ],
+      "fps": 5,
+      "windup_frame": 0,
+      "contact_frame": 0
+    },
+    "spear-run": {
+      "poses": [
+        "spear-p05",
+        "spear-p06",
+        "spear-p07",
+        "spear-p08",
+        "spear-p09",
+        "spear-p10",
+        "spear-p11",
+        "spear-p12"
+      ],
+      "fps": 11,
+      "windup_frame": 0,
+      "contact_frame": 0
+    },
+    "spear-attack": {
+      "poses": [
+        "spear-p13",
+        "spear-p14",
+        "spear-p15",
+        "spear-p16"
+      ],
+      "fps": 16,
+      "windup_frame": 0,
+      "contact_frame": 1
+    },
+    "spear-sweep": {
+      "poses": [
+        "spear-p17",
+        "spear-p18",
+        "spear-p19",
+        "spear-p20"
+      ],
+      "fps": 12,
+      "windup_frame": 0,
+      "contact_frame": 1
+    },
+    "spear-break": {
+      "poses": [
+        "spear-p21",
+        "spear-p22",
+        "spear-p23",
+        "spear-p24"
+      ],
+      "fps": 14,
+      "windup_frame": 0,
+      "contact_frame": 1
+    }
+  }
+}

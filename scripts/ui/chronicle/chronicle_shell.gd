@@ -1,4 +1,5 @@
 extends Control
+const JIA_APPEARANCE := preload("res://scripts/ui/chronicle/jia_appearance.gd")
 signal quit_confirmed
 ## Presentation coordinator. Gameplay state lives in CampaignService; combat is a disposable BattleSession.
 const HOME := preload("res://scripts/ui/chronicle/chronicle_home_page.gd")
@@ -85,7 +86,7 @@ func _ready() -> void:
 	session.problem.connect(_on_session_problem)
 	bgm = BGM.new()
 	bgm.name = "ChronicleMusic"
-	bgm.initial_cue = "title_overture"
+	bgm.initial_cue = "midi_test_01"
 	bgm.context_id = "page:home"
 	add_child(bgm)
 	resized.connect(queue_render)
@@ -205,7 +206,10 @@ func render() -> void:
 	if is_instance_valid(modal): move_child(modal, -1)
 
 func story_content(id: String, replay: bool = false) -> Dictionary:
-	return session.story_event(id, replay)
+	var event: Dictionary = session.story_event(id, replay)
+	# UI-only context; never enters saved story_contexts or global progress.
+	event.jia_appearance = JIA_APPEARANCE.for_story(event)
+	return event
 
 func build_story() -> void:
 	var id: String = session.data.current
@@ -407,7 +411,7 @@ func inspect_character(id: String, tab: String = "abilities") -> void:
 	character_sheet.name = "CharacterInspection"
 	character_sheet.z_index = 30
 	character_sheet.theme = STYLE.make_theme()
-	character_sheet.setup(session, id, tab, return_label)
+	character_sheet.setup(session, id, tab, return_label, JIA_APPEARANCE.for_scene(session.data, page))
 	character_sheet.closed.connect(func(): close_character_sheet())
 	add_child(character_sheet)
 	character_sheet.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
@@ -561,6 +565,7 @@ func start_battle() -> void:
 	battle_view = battle_script.new()
 	battle_view.setup(request, session.characters)
 	if battle_view.has_signal("music_context_changed"): battle_view.music_context_changed.connect(_on_battle_music_context)
+	battle_view.music_duck.connect(bgm.set_combat_mix_gain)
 	battle_view.completed.connect(finish_battle)
 	battle_view.failed.connect(func():
 		close_battle()
@@ -578,6 +583,7 @@ func finish_battle(result: Dictionary) -> void:
 		resume_view()
 
 func close_battle() -> void:
+	bgm.set_combat_mix_gain(1.0)
 	if is_instance_valid(battle_view):
 		remove_child(battle_view)
 		battle_view.queue_free()
@@ -662,7 +668,7 @@ func play_track(index: int) -> void:
 		return
 	music_seeking = false
 	music_index = next_index
-	music_preview.volume_linear = 0.0 if BGM.load_music_muted() else BGM.load_music_volume()
+	music_preview.volume_linear = SETTINGS.load_music_gain()
 	# Preview plays the published original mix once; duplicate to keep bed loop settings private.
 	stream = stream.duplicate()
 	if stream is AudioStreamOggVorbis: stream.loop = false
@@ -681,7 +687,7 @@ func close_music() -> void:
 
 func _process(_delta: float) -> void:
 	if page != "music" or not is_instance_valid(music_preview): return
-	music_preview.volume_linear = 0.0 if BGM.load_music_muted() else BGM.load_music_volume()
+	music_preview.volume_linear = SETTINGS.load_music_gain()
 	var seek := frame.find_child("music_seek", true, false) as HSlider
 	var clock := frame.find_child("music_clock", true, false) as Label
 	if seek == null or music_preview.stream == null: return
@@ -727,8 +733,6 @@ func _sync_page_music() -> void:
 	_last_story_music_line = ""
 	var cue := MUSIC_CONTEXT.page_cue(page, str(session.data.current), "preparation" if party_preparation else previous_page)
 	if cue.is_empty(): return
-	# A pending result stinger owns the short battle tail until its natural completion.
-	if page in ["reward", "failure"] and bgm.context_id == "result:" + str(session.data.current): return
 	_apply_music("page:" + page, cue)
 
 func _apply_music(context: String, cue: String) -> void:
@@ -757,12 +761,8 @@ func _on_battle_music_context(id: String, form_index: int, paused: bool, outcome
 		_battle_music_outcome = outcome
 		bgm.context_id = "result:" + id
 		bgm.cancel_stinger()
-		if outcome == "failed":
-			bgm.play_stinger("stinger_defeat", "story_solitude")
-		elif id not in MUSIC_CONTEXT.SERIOUS_RESULTS:
-			bgm.play_stinger("stinger_important_victory" if id == "B18" else "stinger_victory", "results_flow")
+		if outcome == "failed": bgm.set_cue("midi_test_08")
 		return
+	# Full-song battle playback is independent of Boss form changes.
 	var cue := MUSIC_CONTEXT.battle_cue(id, form_index)
-	if cue != bgm.current_cue:
-		bgm.set_cue(cue, 0.65)
-		if form_index > 0: bgm.play_stinger("stinger_transform")
+	if cue != bgm.current_cue: bgm.set_cue(cue)

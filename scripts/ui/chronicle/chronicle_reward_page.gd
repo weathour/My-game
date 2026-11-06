@@ -1,6 +1,21 @@
 extends RefCounted
 const T := preload("res://scripts/ui/chronicle/chronicle_theme.gd")
 const CARD := preload("res://scripts/ui/chronicle/chronicle_card.gd")
+const DETAILS := preload("res://scripts/ui/chronicle/character_detail_projection.gd")
+const SUMMARY := preload("res://scripts/campaign/party_summary.gd")
+const INFO := preload("res://scripts/content/skill_information.gd")
+const COPY_PATH := "res://assets/data/chronicle/skill_presentation_copy.json"
+
+static func passive_preview(data: Dictionary, id: String) -> String:
+	var copy: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(COPY_PATH))
+	var words: Dictionary = copy.get("owned_bonus", {})
+	var lines: Array[String] = []
+	for row in DETAILS.owned_rows(data, id):
+		var key := "next_effective_delta" if row.owned else "acquisition_effective_delta"
+		var gain := float(row.next_delta) if row.owned else float(row.acquisition_delta)
+		lines.append("%s · %s %s" % [row.title, words.get(key, ""), SUMMARY.amount_text(row.key, gain)])
+	if not lines.is_empty(): lines.append(str(words.get("reward_preview_note", "")))
+	return "\n".join(lines)
 
 static func build(shell: Control) -> void:
 	var state: RefCounted = shell.session
@@ -43,18 +58,17 @@ static func build(shell: Control) -> void:
 	var person_name := T.label("", 18, T.GOLD, true)
 	detail_heading.add_child(person_name)
 	T.space(detail_heading)
-	var detail_button: Button = shell.action(detail_heading, "人物详情", func():
-		var person: Dictionary = state.characters[shell.reward_focus]
-		shell.show_notice("%s\n\n前台能力：%s\n\n后台支援：%s\n\n持有加成：%s" % [person.name, person.front, person.back, person.owned]), "reward_details")
+	var detail_button: Button = shell.action(detail_heading, "人物详情", func(): shell.inspect_character(shell.reward_focus,"abilities"), "reward_details")
 	T.compact_button(detail_button)
 	var descriptions := T.row(info)
 	var labels: Array = []
-	for title in ["前台能力", "后台支援", "持有加成"]:
+	for title in [INFO.ui("playstyle","玩法特点"), "后台支援", "持有加成"]:
 		var block := T.column(descriptions)
 		block.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		block.add_theme_constant_override("separation", 3)
 		block.add_child(T.label(title, 13, T.GOLD))
 		var words := T.paragraph("", T.LIGHT, 13 if compact else 14)
+		words.mouse_filter = Control.MOUSE_FILTER_PASS
 		words.max_lines_visible = 2
 		words.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
 		words.custom_minimum_size = Vector2(0, 42)
@@ -64,7 +78,20 @@ static func build(shell: Control) -> void:
 		shell.reward_focus = id
 		var person: Dictionary = state.characters[id]
 		person_name.text = person.name
-		for i in 3: labels[i].text = person[["front", "back", "owned"][i]]
+		var detail: Dictionary = DETAILS.build(state.data,state.characters,id)
+		labels[0].text = str(detail.overview)
+		labels[0].name = "reward_playstyle_summary"
+		labels[0].tooltip_text = str(detail.overview)
+		labels[1].text = str(detail.support_info.get("summary",detail.support_state))
+		labels[1].name = "reward_support_summary"
+		labels[1].tooltip_text = "\n".join([str(detail.support_info.get("summary",detail.support_state)),str(detail.support_info.get("trigger",""))])
+		labels[2].text = str(person.owned)
+		labels[2].name = "reward_owned_preview"
+		labels[2].tooltip_text = DETAILS.precise_owned_text(id)
+		var preview := passive_preview(state.data, id)
+		if not preview.is_empty():
+			labels[2].text = preview
+			labels[2].tooltip_text = DETAILS.precise_owned_text(id) + "\n" + preview
 	if shell.reward_focus not in pending.candidates: shell.reward_focus = pending.candidates[0]
 	show_person.call(shell.reward_focus)
 	for id in pending.candidates:

@@ -1,6 +1,8 @@
 # 全作通用与白门楼配乐
 
-本目录保存全作通用与白门楼配乐的谱面、音源清单、构建与验证工具。38 首主体、8 个替代编曲和 24 个短提示，共 70 个混音资产，已生成并接入游戏；它们合计约 75.32 分钟，不是 70 首主体曲。范围和当前进度见[实施记录](../../docs/implementation/2026-10-30_通用与白门楼配乐制作.md)。工程检查已完成，完整主观听审尚未完成。
+本目录保存全作通用与白门楼旧配乐的谱面、音源清单、构建与验证工具。2026-10-30 的交付包含 38 首主体、8 个替代编曲和 24 个短提示，共 70 个混音资产，合计约 75.32 分钟，不是 70 首主体曲。该批次的历史范围和检查见[实施记录](../../docs/implementation/2026-10-30_通用与白门楼配乐制作.md)，完整主观听审尚未完成。
+
+2026-11-03 的[十二首 MIDI 换音色测试](../music-20261103-midi-test/README.md)已替代旧 70 项运行包，仅《有灯可归》《石隙清泉》《此行有我·闲篇》《火边一席》四首按适用语境保留，其余 66 项游戏音频及导入文件已清退。旧谱面、音源来源和工具继续保留供追溯与离线重建，也有组件被新流程复用；旧 70 项的发布入口已退役，不再用于覆盖当前游戏资源或曲目表。实际实施进度见[当前状态](../../docs/08_当前实现状态与后续重点.md)。
 
 ## 制作材料
 
@@ -18,7 +20,7 @@
 
 ## 播放与曲目
 
-主线标题、菜单和设定中都可进入「音乐鉴赏」，按曲名和用途浏览、播放、暂停或拖动进度条；音乐音量与静音沿用设定。也可以直接打开游戏文件，例如[贾苇索《此行有我》](../../assets/music/chronicle/hero_main.ogg)、[喜剧《歪一步再走》](../../assets/music/chronicle/story_comedy.ogg)、[吕布人形《白门之前》](../../assets/music/chronicle/boss_lubu.ogg)及[吕布战相](../../assets/music/chronicle/boss_lubu_warform.ogg)。完整曲目及用途见[游戏目录](../../assets/data/audio/music_catalog.json)。
+2026-10-30 的「音乐鉴赏」曾按曲名和用途提供此批音乐的播放与拖动；该记录不代表退役曲目在新测试中继续使用。新曲与四首保留旧曲的安排见[第一章音乐对应表](../../docs/implementation/2026-11-03_第一章音乐对应表.md)，当前游戏曲目以[游戏目录](../../assets/data/audio/music_catalog.json)及实施状态为准。
 
 ## 从谱面重建
 
@@ -32,7 +34,7 @@ python3 design/music-20261030/audio_engine.py --score "$MUSIC_JOB/score/score.js
 python3 design/music-20261030/master.py --score "$MUSIC_JOB/score/score.json" --renders "$MUSIC_JOB/renders" --output "$MUSIC_JOB/master"
 ```
 
-`score/` 含汇编谱面与暂存曲目表，`renders/<曲目 ID>/` 含干分轨、混音、MIDI、RPP 和报告；`master/` 含 `masters/*.flac`、`music/*.ogg` 和 `audio-qa.json`。只需部分曲目时可按脚本 `--help` 在命令末尾指定 ID。最终游戏文件已在 `assets/music/chronicle/`；另一次重建如需实际替换游戏资源，给母带命令添加 `--publish`，它只接受通过检查的完整 70 项，并更新游戏曲目表及本目录的 QA 与生产锁。不要把局部暂存误当成完整发布。
+`score/` 含汇编谱面与暂存曲目表，`renders/<曲目 ID>/` 含干分轨、混音、MIDI、RPP 和报告；`master/` 含 `masters/*.flac`、`music/*.ogg` 和 `audio-qa.json`。只需部分曲目时可按脚本 `--help` 在命令末尾指定 ID。这里的重建只用于离线资料，不写入当前游戏；旧 70 项发布入口已退役，不能用它恢复旧目录。新的音乐制作入口见[十二首 MIDI 本地测试](../music-20261103-midi-test/README.md)。
 
 可选的工程复验需要 REAPER 和 Xvfb，默认指向本机已安装的 REAPER 7.83 与独立 Xvfb；其他位置用 `--reaper`、`--xvfb` 指定。下面以完整艾玛曲为例，在新目录用独立实例重开工程并比对导出：
 
@@ -66,7 +68,7 @@ REAPER 的使用仍受其现有评估或许可状态约束。此复验不会替�
 
 REAPER 7.83 曾将自定义渲染终点舍入，导致 2/4 张辽工程重建短 10 帧；改用精确采样时间选区后，完整长度和分轨重建通过。对照及修复见[边界检查](engine-evidence/reaper-exact-boundary-fix.json)，不依靠补尾或放宽长度断言。
 
-当时的最终母带位于被 Git 忽略的 `mastering-final-v4/`，输入取自 [production-lock.json](production-lock.json) 所列的五个本地渲染根目录。当前工程中该目录和 `renders-characters-v3/` 均不存在；两份相邻本地归档已按用户要求删除，未跟踪的干分轨、MIDI、RPP 和 FLAC 母带不能从 Git 历史恢复。当前保留 70 个游戏 Ogg、显式谱面、冻结清单与程序；如需重建音频，应先核对音源缓存、工具和许可，再实际渲染验证。谱面哈希一致不等于音频母带已重建。
+当时的最终母带位于被 Git 忽略的 `mastering-final-v4/`，输入取自 [production-lock.json](production-lock.json) 所列的五个本地渲染根目录。当前工程中该目录和 `renders-characters-v3/` 均不存在；两份相邻本地归档已按用户要求删除，未跟踪的干分轨、MIDI、RPP 和 FLAC 母带不能从 Git 历史恢复。当时保留了 70 个游戏 Ogg、显式谱面、冻结清单与程序；本轮已清退其中 66 个不再使用的游戏 Ogg，谱面、清单和程序保留。如需离线重建音频，应先核对音源缓存、工具和许可，再实际渲染验证。谱面哈希一致不等于音频母带已重建。
 
 最终 70 个游戏 Ogg 的哈希与 QA 一致；最高真峰值 −4.42 dBTP，最差单声道折叠损失 −1.5244 dB，目标响度最大偏差 0.71 LU，见[交付统计](checks/delivery-summary.json)。64 项已验证预处理与 61 项编码在相同输入、增益及哈希条件下复用，其余重做，见[复用记录](checks/master-reuse-v4.json)。
 

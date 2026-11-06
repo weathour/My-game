@@ -1,0 +1,69 @@
+[
+  {
+    "name": "startup",
+    "command": [
+      "/home/weathour/.local/bin/godot-4.6.2",
+      "--headless",
+      "--path",
+      "/home/weathour/programs/desktop-projects/My-game",
+      "--quit"
+    ],
+    "started_at": 1793968424.774458,
+    "status": "passed",
+    "pid": 449892,
+    "returncode": 0,
+    "elapsed_seconds": 0.9153251647949219,
+    "strict_failures": []
+  },
+  {
+    "name": "chronicle_camera_mob_framing_smoke",
+    "command": [
+      "/home/weathour/.local/bin/godot-4.6.2",
+      "--headless",
+      "--path",
+      "/home/weathour/programs/desktop-projects/My-game",
+      "--script",
+      "res://scripts/tests/chronicle_camera_mob_framing_smoke.gd"
+    ],
+    "started_at": 1793968425.6901243,
+    "status": "passed",
+    "pid": 449993,
+    "returncode": 0,
+    "elapsed_seconds": 12.543005466461182,
+    "strict_failures": []
+  },
+  {
+    "name": "chronicle_boss_camera_cache_smoke",
+    "command": [
+      "/home/weathour/.local/bin/godot-4.6.2",
+      "--headless",
+      "--path",
+      "/home/weathour/programs/desktop-projects/My-game",
+      "--script",
+      "res://scripts/tests/chronicle_boss_camera_cache_smoke.gd"
+    ],
+    "started_at": 1793968438.2333376,
+    "status": "passed",
+    "pid": 450118,
+    "returncode": 0,
+    "elapsed_seconds": 0.8181519508361816,
+    "strict_failures": []
+  },
+  {
+    "name": "chronicle_boss_camera_smoke",
+    "command": [
+      "/home/weathour/.local/bin/godot-4.6.2",
+      "--headless",
+      "--path",
+      "/home/weathour/programs/desktop-projects/My-game",
+      "--script",
+      "res://scripts/tests/chronicle_boss_camera_smoke.gd"
+    ],
+    "started_at": 1793968439.0516713,
+    "status": "passed",
+    "pid": 450149,
+    "returncode": 0,
+    "elapsed_seconds": 2.2205159664154053,
+    "strict_failures": []
+  }
+]

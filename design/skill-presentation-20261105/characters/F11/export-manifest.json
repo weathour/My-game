@@ -1,0 +1,182 @@
+{
+  "version": 1,
+  "character_id": "F11",
+  "producer": "Built-in image_gen; Aseprite extraction/nearest-neighbor resize/64-color quantization/binary alpha/export; Pillow read-only analysis",
+  "selected_source_version": "combat-bundle-v1",
+  "selection_record": "Only v1 generated; accepted after identity, complete weapon, two arms/two legs and direction review. No rejected versions.",
+  "reference_identity_authority": "scripts/ui/chronicle/chronicle_portraits.gd and assets/data/chronicle/character_profiles.json",
+  "standing_body_height_source": 222,
+  "independent_actor_drawings": 16,
+  "clip_frames": {
+    "idle": 4,
+    "move": 4,
+    "attack": 4,
+    "special": 4,
+    "hit": 2
+  },
+  "hit_frame_reuse": [
+    "p13",
+    "p01"
+  ],
+  "outputs": [
+    {
+      "path": "assets/players/chronicle-cast/F11/actor.aseprite",
+      "sha256": "824465b8224464354a824c2c3246c3857f07f36113b65b4e2654d3f02cb01dd4",
+      "bytes": 45224
+    },
+    {
+      "path": "assets/players/chronicle-cast/F11/attack.aseprite",
+      "sha256": "e1544bd77251750d4afe9b9109b9d37dff1b04e1e882851ebfab1f6b7e7045cf",
+      "bytes": 19957
+    },
+    {
+      "path": "assets/players/chronicle-cast/F11/attack.png",
+      "sha256": "5c890148d4949d7dd8cf9474d0b510cdedcb73f63690da282a67de458aab6422",
+      "bytes": 39541,
+      "size": [
+        768,
+        192
+      ]
+    },
+    {
+      "path": "assets/players/chronicle-cast/F11/head.aseprite",
+      "sha256": "96f00d7d150740fda875ac13c8e0aa247915d96f6ef3ca92d22656c67047a01c",
+      "bytes": 2485
+    },
+    {
+      "path": "assets/players/chronicle-cast/F11/head.png",
+      "sha256": "b91f58dfc07401d72509ae9fdc748132075aacaf9bc7b5a4943833d24e461aa8",
+      "bytes": 7770,
+      "size": [
+        128,
+        128
+      ]
+    },
+    {
+      "path": "assets/players/chronicle-cast/F11/hit.aseprite",
+      "sha256": "8b63b12e85fae56d7cdb20cefd386aa4b2eca67b56e03a3cf65a8c46d72a2a7b",
+      "bytes": 10261
+    },
+    {
+      "path": "assets/players/chronicle-cast/F11/hit.png",
+      "sha256": "3290ce9f1b0e2874115f0f2edb550ba189b3f3e7b8e8ae003da7de7192a0ea42",
+      "bytes": 19758,
+      "size": [
+        384,
+        192
+      ]
+    },
+    {
+      "path": "assets/players/chronicle-cast/F11/idle.aseprite",
+      "sha256": "35aa6c7c81ad598c9d42930fd51753f92ea34b7cc496e6de1dbf8950f3e4b434",
+      "bytes": 19459
+    },
+    {
+      "path": "assets/players/chronicle-cast/F11/idle.png",
+      "sha256": "2b67d7b60b90323ca644c32a3d0ec3ce51afa3e5b5ac8ff12f0d363e619c5d3b",
+      "bytes": 37709,
+      "size": [
+        768,
+        192
+      ]
+    },
+    {
+      "path": "assets/players/chronicle-cast/F11/manifest.json",
+      "sha256": "e207cab4cc14f36ae37cdca4fe4b179dc33da69a28400036e248c321266a55d0",
+      "bytes": 1265
+    },
+    {
+      "path": "assets/players/chronicle-cast/F11/move.aseprite",
+      "sha256": "8d07734ceeb7bbaf14b398d7870740b9d647e1120581a072118c11485adff5f2",
+      "bytes": 19371
+    },
+    {
+      "path": "assets/players/chronicle-cast/F11/move.png",
+      "sha256": "4ea8851685d9558ff3e533b99ac3d874772943d49b4dca056631ba64d20cee29",
+      "bytes": 38181,
+      "size": [
+        768,
+        192
+      ]
+    },
+    {
+      "path": "assets/players/chronicle-cast/F11/special.aseprite",
+      "sha256": "c1deeb61b13dd316e4e28ec477d54814a9a0c2314e6939420eba5530b42dba69",
+      "bytes": 20086
+    },
+    {
+      "path": "assets/players/chronicle-cast/F11/special.png",
+      "sha256": "396784eb20cd0180d6efa349bcb37ab18dd442baae60227e1c4fdf53e5194bbd",
+      "bytes": 39715,
+      "size": [
+        768,
+        192
+      ]
+    }
+  ],
+  "inputs": [
+    {
+      "path": "design/skill-presentation-20261105/characters/F11/analyze_source.py",
+      "sha256": "5fd3b00e96b3b86983dd2dec6704218878cb13b68416b3686a639626cd4a5370",
+      "bytes": 915
+    },
+    {
+      "path": "design/skill-presentation-20261105/characters/F11/audit_exports.py",
+      "sha256": "ef46656f34b3b92d5808e4d2cd968fa998ba69b66b8c6c5b839561433c011551",
+      "bytes": 5051
+    },
+    {
+      "path": "design/skill-presentation-20261105/characters/F11/export-contact-sheet.png",
+      "sha256": "c352a4e8c02dac47f77ae5fa8fa7afeceedc2cd4d2e4a5eb06230a8534ca1353",
+      "bytes": 175587
+    },
+    {
+      "path": "design/skill-presentation-20261105/characters/F11/export_contact.lua",
+      "sha256": "46d4b534d77e64a0f7ffb57a586cdca804c8d2b1560863c76f6e802db453a54b",
+      "bytes": 344
+    },
+    {
+      "path": "design/skill-presentation-20261105/characters/F11/measurements.json",
+      "sha256": "ccba36e508ceab92e34f86a5c2d8acb19ba7853d12ccbfb728cefd5c7975a72c",
+      "bytes": 9155
+    },
+    {
+      "path": "design/skill-presentation-20261105/characters/F11/prompt-v1.txt",
+      "sha256": "88f02f90a4857b05d9f4ed08924735a0fd3bbce4882f291cd265bd751a18da6b",
+      "bytes": 2147
+    },
+    {
+      "path": "design/skill-presentation-20261105/characters/F11/source/combat-bundle-v1.png",
+      "sha256": "96fb9b5d53dcde36714dd0a969efb4669e2df3ea7dbb5ac66b633fc274bd1c04",
+      "bytes": 2238878
+    },
+    {
+      "path": "design/skill-presentation-20261105/characters/F11/source/component-analysis.json",
+      "sha256": "0b62368490a5a96e0c15bd63f6a3b3b759acbaa5f9cbc0d8c4e0eafbe2ed0529",
+      "bytes": 1948
+    },
+    {
+      "path": "design/skill-presentation-20261105/characters/F11/source/extract_identity.lua",
+      "sha256": "69b433aba51d726d863223880e8742a0482c7569ab5d20580b819c43d009f37e",
+      "bytes": 205
+    },
+    {
+      "path": "design/skill-presentation-20261105/characters/F11/source/generation-record.json",
+      "sha256": "07de5cca11478f91fd1e239be29a22ba30b61c8f27f9a394c6c7a7a243aa6b3e",
+      "bytes": 1966
+    },
+    {
+      "path": "design/skill-presentation-20261105/characters/F11/source/identity-reference.png",
+      "sha256": "04f1d17ec65ccc4a4356673d4e569187c06f8d61e999feaf4f3a1700c11dacd8",
+      "bytes": 2880601
+    },
+    {
+      "path": "design/skill-presentation-20261105/characters/F11/source/source-selection.json",
+      "sha256": "282cc5896b54d6db6dd2352ba62cdc7bb540f9970d1fbe34f51603598ed562dd",
+      "bytes": 1679
+    }
+  ],
+  "qa": "QA.json",
+  "aesthetic_status": "pending_user_review",
+  "runtime_status": "technical_exports_checked"
+}

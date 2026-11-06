@@ -1,0 +1,3280 @@
+{
+  "status": "strict_three_run_control_passed_performance_review",
+  "recorded_at": 1793960494.5037591,
+  "order": [
+    "paired-A3 old",
+    "paired-B2 new",
+    "paired-A4 old"
+  ],
+  "all_three_exit0_and_strict_pass": true,
+  "no_prior_failures_overwritten": true,
+  "A2_teardown_fault_remains_rejected": "before-control-audit.json",
+  "same_fixture_bytes": {
+    "b17_dense_bench.gd": true,
+    "live_performance_base.gd": true,
+    "b17_bench_teardown.gd": true
+  },
+  "wrapper_scope": "_reset_view waits0.3s and2 process frames outside all scenario timing/state sampling",
+  "wrapper_sha256": "9dc447c35cebab805f849771dd17a0ddbc1fb124de39d51e6187aac096e0c939",
+  "empty_cwd": true,
+  "isolated_XDG_each_run": true,
+  "global_binary_and_entries_unchanged_since_after_pack": true,
+  "inputs": {
+    "file": "after-pack-inputs.json",
+    "sha256": "9b0c253fcac53ca74850a531544f50cd7d053b9cd4a9fd8af8c2690501a9fa74"
+  },
+  "all_9000_measured_frame_states_match_A1": true,
+  "all_event_counts_population_and_fixture_inputs_match": true,
+  "runs": [
+    {
+      "name": "paired-A3",
+      "role": "old_control",
+      "pack": "/tmp/my-game-check.pM7fgF/pack-smokes/game.pck",
+      "command": [
+        "/home/weathour/.local/bin/godot-4.6.2",
+        "--path",
+        "/tmp/liao-paired-control-dmelp51p/empty-cwd",
+        "--main-pack",
+        "/tmp/my-game-check.pM7fgF/pack-smokes/game.pck",
+        "--rendering-method",
+        "gl_compatibility",
+        "--audio-driver",
+        "Dummy",
+        "--script",
+        "/tmp/liao-paired-control-dmelp51p/b17_bench_teardown.gd",
+        "--",
+        "--out=/home/weathour/programs/desktop-projects/My-game/design/zhang-liao-summons-20261106/verification/paired-A3"
+      ],
+      "started_at": 1793960052.6304522,
+      "status": "passed",
+      "child_pid": 331899,
+      "returncode": 0,
+      "finished_at": 1793960177.6576178,
+      "elapsed_seconds": 125.02716565132141,
+      "strict_failures": [],
+      "log_sha256": "3da039e5dd5e9a2a75ed0b770f22249ac707b1dcb1fcd1e21edf7f6ae6af3c91",
+      "results_sha256": "6f69f5d4e6cde2cbceaf1dd6704413401379c06da1efc813dadd5db31c3af8d1",
+      "pack_sha256": "8ff5f9dbdbca8e8ffd32a4a2648e5a0eed68aee782a2b04c14c9c0996c68b762",
+      "strict_revalidated": [],
+      "host_monitor": {
+        "file": "paired-A3-host.jsonl",
+        "sha256": "9ad6b1834000a39cd4a561695d6aa3d06efa416124d12d9c5035f292fdc160ed",
+        "samples": 25,
+        "worker_counts": [
+          16
+        ],
+        "load1_min": 15.45,
+        "load1_max": 18.61,
+        "full_worker_intervals": 18,
+        "worker_turnover_intervals": 6,
+        "exact_same_workers_core_min_median_max": [
+          15.136963443507826,
+          15.751716247796884,
+          15.942501570118637
+        ],
+        "intervals": [
+          {
+            "start": 1793960052.6315491,
+            "seconds": 5.001010179519653,
+            "same_workers": 16,
+            "turnover": 0,
+            "worker_core_equivalent_lower_bound": 15.760815749343395,
+            "godot_core_equivalent": 0.897818608405885
+          },
+          {
+            "start": 1793960057.6325593,
+            "seconds": 5.00184965133667,
+            "same_workers": 16,
+            "turnover": 0,
+            "worker_core_equivalent_lower_bound": 15.640214211375627,
+            "godot_core_equivalent": 0.9836361232259756
+          },
+          {
+            "start": 1793960062.634409,
+            "seconds": 5.00095796585083,
+            "same_workers": 16,
+            "turnover": 0,
+            "worker_core_equivalent_lower_bound": 15.77897685580222,
+            "godot_core_equivalent": 0.9878107422083762
+          },
+          {
+            "start": 1793960067.635367,
+            "seconds": 5.000865697860718,
+            "same_workers": 16,
+            "turnover": 0,
+            "worker_core_equivalent_lower_bound": 15.673286333910063,
+            "godot_core_equivalent": 0.9678324299071795
+          },
+          {
+            "start": 1793960072.6362326,
+            "seconds": 5.0010504722595215,
+            "same_workers": 16,
+            "turnover": 0,
+            "worker_core_equivalent_lower_bound": 15.344776147665664,
+            "godot_core_equivalent": 0.9937912099804316
+          },
+          {
+            "start": 1793960077.637283,
+            "seconds": 5.001008033752441,
+            "same_workers": 16,
+            "turnover": 0,
+            "worker_core_equivalent_lower_bound": 15.624849924779795,
+            "godot_core_equivalent": 0.9898004495477347
+          },
+          {
+            "start": 1793960082.6382911,
+            "seconds": 5.00100302696228,
+            "same_workers": 16,
+            "turnover": 0,
+            "worker_core_equivalent_lower_bound": 15.136963443507826,
+            "godot_core_equivalent": 0.9618070563180008
+          },
+          {
+            "start": 1793960087.6392941,
+            "seconds": 5.000956058502197,
+            "same_workers": 16,
+            "turnover": 0,
+            "worker_core_equivalent_lower_bound": 15.770984403254651,
+            "godot_core_equivalent": 0.9898107366059395
+          },
+          {
+            "start": 1793960092.6402502,
+            "seconds": 5.001037120819092,
+            "same_workers": 16,
+            "turnover": 0,
+            "worker_core_equivalent_lower_bound": 15.620759876944318,
+            "godot_core_equivalent": 0.9697988402864819
+          },
+          {
+            "start": 1793960097.6412873,
+            "seconds": 5.001068353652954,
+            "same_workers": 16,
+            "turnover": 0,
+            "worker_core_equivalent_lower_bound": 15.916599088644206,
+            "godot_core_equivalent": 0.9897885111656894
+          },
+          {
+            "start": 1793960102.6423557,
+            "seconds": 5.001097202301025,
+            "same_workers": 16,
+            "turnover": 0,
+            "worker_core_equivalent_lower_bound": 15.942501570118637,
+            "godot_core_equivalent": 0.9917823628218793
+          },
+          {
+            "start": 1793960107.643453,
+            "seconds": 5.001051187515259,
+            "same_workers": 16,
+            "turnover": 0,
+            "worker_core_equivalent_lower_bound": 15.902656665170822,
+            "godot_core_equivalent": 0.9937910678473404
+          },
+          {
+            "start": 1793960112.644504,
+            "seconds": 5.001035451889038,
+            "same_workers": 16,
+            "turnover": 0,
+            "worker_core_equivalent_lower_bound": 15.816724508545848,
+            "godot_core_equivalent": 0.9518028907797497
+          },
+          {
+            "start": 1793960117.6455395,
+            "seconds": 5.001006126403809,
+            "same_workers": 16,
+            "turnover": 0,
+            "worker_core_equivalent_lower_bound": 15.836813232810858,
+            "godot_core_equivalent": 0.9658056554858133
+          },
+          {
+            "start": 1793960122.6465456,
+            "seconds": 5.0009942054748535,
+            "same_workers": 16,
+            "turnover": 0,
+            "worker_core_equivalent_lower_bound": 15.720874044191154,
+            "godot_core_equivalent": 0.9858039816568622
+          },
+          {
+            "start": 1793960127.6475399,
+            "seconds": 5.000978708267212,
+            "same_workers": 13,
+            "turnover": 6,
+            "worker_core_equivalent_lower_bound": 12.633527092518102,
+            "godot_core_equivalent": 0.9758089935341607
+          },
+          {
+            "start": 1793960132.6485186,
+            "seconds": 5.001015901565552,
+            "same_workers": 15,
+            "turnover": 2,
+            "worker_core_equivalent_lower_bound": 14.766999636390176,
+            "godot_core_equivalent": 0.9738021425757648
+          },
+          {
+            "start": 1793960137.6495345,
+            "seconds": 5.0010271072387695,
+            "same_workers": 16,
+            "turnover": 0,
+            "worker_core_equivalent_lower_bound": 15.630789100673404,
+            "godot_core_equivalent": 0.9718003713607871
+          },
+          {
+            "start": 1793960142.6505616,
+            "seconds": 5.0010786056518555,
+            "same_workers": 12,
+            "turnover": 8,
+            "worker_core_equivalent_lower_bound": 11.89343433490128,
+            "godot_core_equivalent": 0.9517946777762271
+          },
+          {
+            "start": 1793960147.6516402,
+            "seconds": 5.00107479095459,
+            "same_workers": 12,
+            "turnover": 8,
+            "worker_core_equivalent_lower_bound": 11.84145458234514,
+            "godot_core_equivalent": 0.9817889564220664
+          },
+          {
+            "start": 1793960152.652715,
+            "seconds": 5.0010387897491455,
+            "same_workers": 15,
+            "turnover": 2,
+            "worker_core_equivalent_lower_bound": 14.842916266147059,
+            "godot_core_equivalent": 0.9917939469229331
+          },
+          {
+            "start": 1793960157.6537538,
+            "seconds": 5.001032590866089,
+            "same_workers": 14,
+            "turnover": 4,
+            "worker_core_equivalent_lower_bound": 13.611189042103705,
+            "godot_core_equivalent": 0.9897955892230552
+          },
+          {
+            "start": 1793960162.6547863,
+            "seconds": 5.001074552536011,
+            "same_workers": 16,
+            "turnover": 0,
+            "worker_core_equivalent_lower_bound": 15.742616746250372,
+            "godot_core_equivalent": 0.9917868545840437
+          },
+          {
+            "start": 1793960167.655861,
+            "seconds": 5.00109076499939,
+            "same_workers": 16,
+            "turnover": 0,
+            "worker_core_equivalent_lower_bound": 15.910529070353656,
+            "godot_core_equivalent": 0.9997818945804736
+          }
+        ]
+      }
+    },
+    {
+      "name": "paired-B2",
+      "role": "new",
+      "pack": "/tmp/liao-summons-after-build-jd45stkd/game.pck",
+      "command": [
+        "/home/weathour/.local/bin/godot-4.6.2",
+        "--path",
+        "/tmp/liao-paired-control-dmelp51p/empty-cwd",
+        "--main-pack",
+        "/tmp/liao-summons-after-build-jd45stkd/game.pck",
+        "--rendering-method",
+        "gl_compatibility",
+        "--audio-driver",
+        "Dummy",
+        "--script",
+        "/tmp/liao-paired-control-dmelp51p/b17_bench_teardown.gd",
+        "--",
+        "--out=/home/weathour/programs/desktop-projects/My-game/design/zhang-liao-summons-20261106/verification/paired-B2"
+      ],
+      "started_at": 1793960177.6589339,
+      "status": "passed",
+      "child_pid": 333006,
+      "returncode": 0,
+      "finished_at": 1793960297.7213292,
+      "elapsed_seconds": 120.06239533424377,
+      "strict_failures": [],
+      "log_sha256": "8cb1c5bb04e1408e3a56ba876e5964c85ec481e749a0e1db17e57b4b3d28f87f",
+      "results_sha256": "7a32e27d60d3e1bc2da7805278105bbe0bdb5c23de9069f3762c86dfb8720958",
+      "pack_sha256": "0a876e4d46684a73241359153f96c4ec278f7cda9914d9c9146fda0c01643ba0",
+      "strict_revalidated": [],
+      "host_monitor": {
+        "file": "paired-B2-host.jsonl",
+        "sha256": "dd2831a3bc2effd9155b05965b20d1cdece06fb3ee7b606ddfb6974781c21760",
+        "samples": 24,
+        "worker_counts": [
+          16
+        ],
+        "load1_min": 18.21,
+        "load1_max": 19.06,
+        "full_worker_intervals": 13,
+        "worker_turnover_intervals": 10,
+        "exact_same_workers_core_min_median_max": [
+          15.024183049186561,
+          15.877200844948,
+          15.945293121784816
+        ],
+        "intervals": [
+          {
+            "start": 1793960177.6602783,
+            "seconds": 5.003448247909546,
+            "same_workers": 16,
+            "turnover": 0,
+            "worker_core_equivalent_lower_bound": 15.937009048372909,
+            "godot_core_equivalent": 0.9153687163474782
+          },
+          {
+            "start": 1793960182.6637266,
+            "seconds": 5.001627206802368,
+            "same_workers": 16,
+            "turnover": 0,
+            "worker_core_equivalent_lower_bound": 15.894827165822662,
+            "godot_core_equivalent": 0.9876785685429427
+          },
+          {
+            "start": 1793960187.6653538,
+            "seconds": 5.001497745513916,
+            "same_workers": 16,
+            "turnover": 0,
+            "worker_core_equivalent_lower_bound": 15.941224820407779,
+            "godot_core_equivalent": 0.9957017384376114
+          },
+          {
+            "start": 1793960192.6668515,
+            "seconds": 5.001531600952148,
+            "same_workers": 16,
+            "turnover": 0,
+            "worker_core_equivalent_lower_bound": 15.857142637047753,
+            "godot_core_equivalent": 1.0016931611601216
+          },
+          {
+            "start": 1793960197.6683831,
+            "seconds": 5.001471042633057,
+            "same_workers": 16,
+            "turnover": 0,
+            "worker_core_equivalent_lower_bound": 15.731371696311655,
+            "godot_core_equivalent": 0.9737135251784153
+          },
+          {
+            "start": 1793960202.6698542,
+            "seconds": 5.00294041633606,
+            "same_workers": 16,
+            "turnover": 0,
+            "worker_core_equivalent_lower_bound": 15.756733728548324,
+            "godot_core_equivalent": 0.9874193152229958
+          },
+          {
+            "start": 1793960207.6727946,
+            "seconds": 5.002747535705566,
+            "same_workers": 16,
+            "turnover": 0,
+            "worker_core_equivalent_lower_bound": 15.739351114166272,
+            "godot_core_equivalent": 0.9414826485613814
+          },
+          {
+            "start": 1793960212.675542,
+            "seconds": 5.0042405128479,
+            "same_workers": 16,
+            "turnover": 0,
+            "worker_core_equivalent_lower_bound": 15.926492700616212,
+            "godot_core_equivalent": 0.9871627847056968
+          },
+          {
+            "start": 1793960217.6797826,
+            "seconds": 5.001511335372925,
+            "same_workers": 16,
+            "turnover": 0,
+            "worker_core_equivalent_lower_bound": 15.877200844948,
+            "godot_core_equivalent": 0.9877014503720323
+          },
+          {
+            "start": 1793960222.681294,
+            "seconds": 5.002103090286255,
+            "same_workers": 16,
+            "turnover": 0,
+            "worker_core_equivalent_lower_bound": 15.945293121784816,
+            "godot_core_equivalent": 0.9615955355539745
+          },
+          {
+            "start": 1793960227.683397,
+            "seconds": 5.00397801399231,
+            "same_workers": 16,
+            "turnover": 0,
+            "worker_core_equivalent_lower_bound": 15.875369511589964,
+            "godot_core_equivalent": 0.9732256989104128
+          },
+          {
+            "start": 1793960232.687375,
+            "seconds": 5.001508951187134,
+            "same_workers": 14,
+            "turnover": 4,
+            "worker_core_equivalent_lower_bound": 13.90580336430108,
+            "godot_core_equivalent": 0.9397164027636953
+          },
+          {
+            "start": 1793960237.688884,
+            "seconds": 5.001631021499634,
+            "same_workers": 15,
+            "turnover": 2,
+            "worker_core_equivalent_lower_bound": 14.899139836520114,
+            "godot_core_equivalent": 0.995675206466321
+          },
+          {
+            "start": 1793960242.690515,
+            "seconds": 5.003267049789429,
+            "same_workers": 16,
+            "turnover": 0,
+            "worker_core_equivalent_lower_bound": 15.024183049186561,
+            "godot_core_equivalent": 0.987354852507403
+          },
+          {
+            "start": 1793960247.693782,
+            "seconds": 5.008977890014648,
+            "same_workers": 14,
+            "turnover": 4,
+            "worker_core_equivalent_lower_bound": 13.320082752412567,
+            "godot_core_equivalent": 0.9962112250380518
+          },
+          {
+            "start": 1793960252.70276,
+            "seconds": 5.0044543743133545,
+            "same_workers": 15,
+            "turnover": 2,
+            "worker_core_equivalent_lower_bound": 14.600992342951615,
+            "godot_core_equivalent": 1.0071027974336393
+          },
+          {
+            "start": 1793960257.7072144,
+            "seconds": 5.001523733139038,
+            "same_workers": 14,
+            "turnover": 4,
+            "worker_core_equivalent_lower_bound": 13.669834164135791,
+            "godot_core_equivalent": 0.983700220674976
+          },
+          {
+            "start": 1793960262.708738,
+            "seconds": 5.001570701599121,
+            "same_workers": 13,
+            "turnover": 6,
+            "worker_core_equivalent_lower_bound": 12.887951374833227,
+            "godot_core_equivalent": 0.9676960076666596
+          },
+          {
+            "start": 1793960267.7103088,
+            "seconds": 5.0018556118011475,
+            "same_workers": 16,
+            "turnover": 0,
+            "worker_core_equivalent_lower_bound": 15.880106537381153,
+            "godot_core_equivalent": 0.9936312412285573
+          },
+          {
+            "start": 1793960272.7121644,
+            "seconds": 5.002465724945068,
+            "same_workers": 15,
+            "turnover": 2,
+            "worker_core_equivalent_lower_bound": 14.946629144734624,
+            "godot_core_equivalent": 0.979516956121436
+          },
+          {
+            "start": 1793960277.7146301,
+            "seconds": 5.001660346984863,
+            "same_workers": 15,
+            "turnover": 2,
+            "worker_core_equivalent_lower_bound": 14.919045841444028,
+            "godot_core_equivalent": 0.9896713604281392
+          },
+          {
+            "start": 1793960282.7162905,
+            "seconds": 5.001484155654907,
+            "same_workers": 15,
+            "turnover": 2,
+            "worker_core_equivalent_lower_bound": 14.949562504454125,
+            "godot_core_equivalent": 0.9917056308959821
+          },
+          {
+            "start": 1793960287.7177746,
+            "seconds": 5.001575469970703,
+            "same_workers": 14,
+            "turnover": 4,
+            "worker_core_equivalent_lower_bound": 13.839639212802975,
+            "godot_core_equivalent": 0.9916875252167388
+          }
+        ]
+      }
+    },
+    {
+      "name": "paired-A4",
+      "role": "old_control",
+      "pack": "/tmp/my-game-check.pM7fgF/pack-smokes/game.pck",
+      "command": [
+        "/home/weathour/.local/bin/godot-4.6.2",
+        "--path",
+        "/tmp/liao-paired-control-dmelp51p/empty-cwd",
+        "--main-pack",
+        "/tmp/my-game-check.pM7fgF/pack-smokes/game.pck",
+        "--rendering-method",
+        "gl_compatibility",
+        "--audio-driver",
+        "Dummy",
+        "--script",
+        "/tmp/liao-paired-control-dmelp51p/b17_bench_teardown.gd",
+        "--",
+        "--out=/home/weathour/programs/desktop-projects/My-game/design/zhang-liao-summons-20261106/verification/paired-A4"
+      ],
+      "started_at": 1793960297.7225401,
+      "status": "passed",
+      "child_pid": 333834,
+      "returncode": 0,
+      "finished_at": 1793960417.7806528,
+      "elapsed_seconds": 120.05811262130737,
+      "strict_failures": [],
+      "log_sha256": "490d7e8bb6cce06155d7d96f498fa13a34d584e74ffbb14ac8913d4003c18c94",
+      "results_sha256": "6a8aeaf307cf5c717de7879537e126efd33258f3c94fbe19ee586da6d852fb59",
+      "pack_sha256": "8ff5f9dbdbca8e8ffd32a4a2648e5a0eed68aee782a2b04c14c9c0996c68b762",
+      "strict_revalidated": [],
+      "host_monitor": {
+        "file": "paired-A4-host.jsonl",
+        "sha256": "0ac923a45a8e22e279a5c897bc6e73265e521da93ca2d6fb0d3b736ac4c66172",
+        "samples": 24,
+        "worker_counts": [
+          16
+        ],
+        "load1_min": 18.28,
+        "load1_max": 19.8,
+        "full_worker_intervals": 13,
+        "worker_turnover_intervals": 10,
+        "exact_same_workers_core_min_median_max": [
+          15.506299170214756,
+          15.741306145255498,
+          15.966929127043748
+        ],
+        "intervals": [
+          {
+            "start": 1793960297.7270074,
+            "seconds": 5.002464056015015,
+            "same_workers": 16,
+            "turnover": 0,
+            "worker_core_equivalent_lower_bound": 15.784221358883666,
+            "godot_core_equivalent": 0.9095517627016295
+          },
+          {
+            "start": 1793960302.7294714,
+            "seconds": 5.002454519271851,
+            "same_workers": 16,
+            "turnover": 0,
+            "worker_core_equivalent_lower_bound": 15.616333881506439,
+            "godot_core_equivalent": 0.9815181689477295
+          },
+          {
+            "start": 1793960307.731926,
+            "seconds": 5.00339674949646,
+            "same_workers": 16,
+            "turnover": 0,
+            "worker_core_equivalent_lower_bound": 15.741306145255498,
+            "godot_core_equivalent": 0.981333331300209
+          },
+          {
+            "start": 1793960312.7353227,
+            "seconds": 5.002400875091553,
+            "same_workers": 16,
+            "turnover": 0,
+            "worker_core_equivalent_lower_bound": 15.624497506623666,
+            "godot_core_equivalent": 0.9715334938867839
+          },
+          {
+            "start": 1793960317.7377236,
+            "seconds": 5.002042531967163,
+            "same_workers": 16,
+            "turnover": 0,
+            "worker_core_equivalent_lower_bound": 15.917497600462758,
+            "godot_core_equivalent": 0.9736022772450851
+          },
+          {
+            "start": 1793960322.7397661,
+            "seconds": 5.001495599746704,
+            "same_workers": 16,
+            "turnover": 0,
+            "worker_core_equivalent_lower_bound": 15.8972448169357,
+            "godot_core_equivalent": 1.0056991753136275
+          },
+          {
+            "start": 1793960327.7412617,
+            "seconds": 5.002412557601929,
+            "same_workers": 16,
+            "turnover": 0,
+            "worker_core_equivalent_lower_bound": 15.908324050375661,
+            "godot_core_equivalent": 0.9575379768949419
+          },
+          {
+            "start": 1793960332.7436743,
+            "seconds": 5.002782344818115,
+            "same_workers": 16,
+            "turnover": 0,
+            "worker_core_equivalent_lower_bound": 15.60531612590841,
+            "godot_core_equivalent": 0.9634638622630782
+          },
+          {
+            "start": 1793960337.7464566,
+            "seconds": 5.003335237503052,
+            "same_workers": 15,
+            "turnover": 2,
+            "worker_core_equivalent_lower_bound": 14.756156942392964,
+            "godot_core_equivalent": 0.9693533952404969
+          },
+          {
+            "start": 1793960342.7497919,
+            "seconds": 5.001610517501831,
+            "same_workers": 16,
+            "turnover": 0,
+            "worker_core_equivalent_lower_bound": 15.884883423446402,
+            "godot_core_equivalent": 0.9656889482095165
+          },
+          {
+            "start": 1793960347.7514024,
+            "seconds": 5.001557350158691,
+            "same_workers": 15,
+            "turnover": 2,
+            "worker_core_equivalent_lower_bound": 14.879365523548133,
+            "godot_core_equivalent": 0.9776954771586991
+          },
+          {
+            "start": 1793960352.7529597,
+            "seconds": 5.002840518951416,
+            "same_workers": 16,
+            "turnover": 0,
+            "worker_core_equivalent_lower_bound": 15.966929127043748,
+            "godot_core_equivalent": 0.9594549300176505
+          },
+          {
+            "start": 1793960357.7558002,
+            "seconds": 5.00267219543457,
+            "same_workers": 13,
+            "turnover": 6,
+            "worker_core_equivalent_lower_bound": 12.911099803609902,
+            "godot_core_equivalent": 1.0014647780784267
+          },
+          {
+            "start": 1793960362.7584724,
+            "seconds": 5.001791715621948,
+            "same_workers": 15,
+            "turnover": 2,
+            "worker_core_equivalent_lower_bound": 14.912656152201466,
+            "godot_core_equivalent": 1.005639635950845
+          },
+          {
+            "start": 1793960367.7602642,
+            "seconds": 5.001529693603516,
+            "same_workers": 15,
+            "turnover": 2,
+            "worker_core_equivalent_lower_bound": 14.87344963584597,
+            "godot_core_equivalent": 0.9976947665394716
+          },
+          {
+            "start": 1793960372.7617939,
+            "seconds": 5.002586603164673,
+            "same_workers": 15,
+            "turnover": 2,
+            "worker_core_equivalent_lower_bound": 14.776355886220474,
+            "godot_core_equivalent": 0.9794932879123431
+          },
+          {
+            "start": 1793960377.7643805,
+            "seconds": 5.00251030921936,
+            "same_workers": 13,
+            "turnover": 6,
+            "worker_core_equivalent_lower_bound": 12.729608949059266,
+            "godot_core_equivalent": 0.9795082262938174
+          },
+          {
+            "start": 1793960382.7668908,
+            "seconds": 5.00235390663147,
+            "same_workers": 15,
+            "turnover": 2,
+            "worker_core_equivalent_lower_bound": 14.7110743009294,
+            "godot_core_equivalent": 0.9495529681942472
+          },
+          {
+            "start": 1793960387.7692447,
+            "seconds": 5.002483129501343,
+            "same_workers": 16,
+            "turnover": 0,
+            "worker_core_equivalent_lower_bound": 15.506299170214756,
+            "godot_core_equivalent": 0.9895085844084452
+          },
+          {
+            "start": 1793960392.7717278,
+            "seconds": 5.001482248306274,
+            "same_workers": 16,
+            "turnover": 0,
+            "worker_core_equivalent_lower_bound": 15.629366679542223,
+            "godot_core_equivalent": 0.9777101581548097
+          },
+          {
+            "start": 1793960397.77321,
+            "seconds": 5.001511573791504,
+            "same_workers": 14,
+            "turnover": 4,
+            "worker_core_equivalent_lower_bound": 13.491921193105497,
+            "godot_core_equivalent": 0.9857020077357733
+          },
+          {
+            "start": 1793960402.7747216,
+            "seconds": 5.003527402877808,
+            "same_workers": 16,
+            "turnover": 0,
+            "worker_core_equivalent_lower_bound": 15.704920483658041,
+            "godot_core_equivalent": 0.9853048865415405
+          },
+          {
+            "start": 1793960407.778249,
+            "seconds": 5.0015363693237305,
+            "same_workers": 15,
+            "turnover": 2,
+            "worker_core_equivalent_lower_bound": 14.807450057593764,
+            "godot_core_equivalent": 0.953706950779398
+          }
+        ]
+      }
+    }
+  ],
+  "rows": [
+    {
+      "case": "B17-human-gaoshun-dense",
+      "runs": {
+        "paired-A3": {
+          "logic_equal_to_original_A1": {
+            "logic_event_sha256": true,
+            "logic_state_sha256": true,
+            "event_counts": true,
+            "population_max": true,
+            "fixture_adjustments": true,
+            "seed": true,
+            "frames_measured": true,
+            "all_750_frame_states": true
+          },
+          "mismatch_frames": [],
+          "warm_wall": {
+            "max_ms": 116.798,
+            "over_16_67ms": 614,
+            "over_33_33ms": 373,
+            "over_50ms": 134,
+            "p50_ms": 36.411,
+            "p95_ms": 78.029,
+            "p99_ms": 84.369,
+            "samples": 630
+          },
+          "full_wall": {
+            "max_ms": 116.798,
+            "over_16_67ms": 616,
+            "over_33_33ms": 374,
+            "over_50ms": 135,
+            "p50_ms": 33.3,
+            "p95_ms": 77.522,
+            "p99_ms": 84.369,
+            "samples": 750
+          },
+          "warm_median_stages": {
+            "advance_presentation_ms": 1.526,
+            "battle_tick_ms": 3.828,
+            "canvas_consume_events_ms": 0.321,
+            "canvas_refresh_ms": 2.603,
+            "frame_wall_ms": 36.411,
+            "hud_view_refresh_ms": 0.3,
+            "input_trace_ms": 0.009,
+            "present_messages_ms": 0.039,
+            "publish_music_context_ms": 0.02,
+            "sync_camera_obstacles_ms": 0.019
+          },
+          "warm_stage_summaries": {
+            "advance_presentation_ms": {
+              "max_ms": 6.734,
+              "over_16_67ms": 0,
+              "over_33_33ms": 0,
+              "over_50ms": 0,
+              "p50_ms": 1.526,
+              "p95_ms": 2.775,
+              "p99_ms": 3.252,
+              "samples": 630
+            },
+            "battle_tick_ms": {
+              "max_ms": 78.154,
+              "over_16_67ms": 127,
+              "over_33_33ms": 79,
+              "over_50ms": 8,
+              "p50_ms": 3.828,
+              "p95_ms": 41.294,
+              "p99_ms": 50.563,
+              "samples": 630
+            },
+            "canvas_consume_events_ms": {
+              "max_ms": 20.445,
+              "over_16_67ms": 1,
+              "over_33_33ms": 0,
+              "over_50ms": 0,
+              "p50_ms": 0.321,
+              "p95_ms": 1.119,
+              "p99_ms": 5.583,
+              "samples": 630
+            },
+            "canvas_refresh_ms": {
+              "max_ms": 20.013,
+              "over_16_67ms": 1,
+              "over_33_33ms": 0,
+              "over_50ms": 0,
+              "p50_ms": 2.603,
+              "p95_ms": 3.518,
+              "p99_ms": 5.534,
+              "samples": 630
+            },
+            "frame_wall_ms": {
+              "max_ms": 116.798,
+              "over_16_67ms": 614,
+              "over_33_33ms": 373,
+              "over_50ms": 134,
+              "p50_ms": 36.411,
+              "p95_ms": 78.029,
+              "p99_ms": 84.369,
+              "samples": 630
+            },
+            "hud_view_refresh_ms": {
+              "max_ms": 7.498,
+              "over_16_67ms": 0,
+              "over_33_33ms": 0,
+              "over_50ms": 0,
+              "p50_ms": 0.3,
+              "p95_ms": 3.831,
+              "p99_ms": 4.148,
+              "samples": 630
+            },
+            "input_trace_ms": {
+              "max_ms": 0.321,
+              "over_16_67ms": 0,
+              "over_33_33ms": 0,
+              "over_50ms": 0,
+              "p50_ms": 0.009,
+              "p95_ms": 0.011,
+              "p99_ms": 0.016,
+              "samples": 630
+            },
+            "present_messages_ms": {
+              "max_ms": 3.853,
+              "over_16_67ms": 0,
+              "over_33_33ms": 0,
+              "over_50ms": 0,
+              "p50_ms": 0.039,
+              "p95_ms": 0.054,
+              "p99_ms": 3.292,
+              "samples": 630
+            },
+            "publish_music_context_ms": {
+              "max_ms": 0.402,
+              "over_16_67ms": 0,
+              "over_33_33ms": 0,
+              "over_50ms": 0,
+              "p50_ms": 0.02,
+              "p95_ms": 0.025,
+              "p99_ms": 0.045,
+              "samples": 630
+            },
+            "sync_camera_obstacles_ms": {
+              "max_ms": 0.128,
+              "over_16_67ms": 0,
+              "over_33_33ms": 0,
+              "over_50ms": 0,
+              "p50_ms": 0.019,
+              "p95_ms": 0.032,
+              "p99_ms": 0.036,
+              "samples": 630
+            }
+          },
+          "gpu": {
+            "max_ms": 7.28900003433228,
+            "over_16_67ms": 0,
+            "over_33_33ms": 0,
+            "over_50ms": 0,
+            "p50_ms": 0.493000000715256,
+            "p95_ms": 2.9449999332428,
+            "p99_ms": 4.31799983978271,
+            "samples": 750
+          },
+          "viewport_cpu": {
+            "max_ms": 11.9980001449585,
+            "over_16_67ms": 0,
+            "over_33_33ms": 0,
+            "over_50ms": 0,
+            "p50_ms": 5.23400020599365,
+            "p95_ms": 8.1850004196167,
+            "p99_ms": 10.3570003509521,
+            "samples": 750
+          },
+          "warm_readbacks": {
+            "max": 0.0,
+            "p50": 0.0,
+            "p95": 0.0,
+            "p99": 0.0,
+            "samples": 630,
+            "total": 0.0
+          },
+          "event_counts": {
+            "ability_effect": 1,
+            "ability_release": 26,
+            "boss_impact": 4,
+            "cast": 24,
+            "collaboration": 2,
+            "damage_dealt": 424,
+            "damage_taken": 16,
+            "enemy_hazard_release": 1,
+            "enemy_release": 204,
+            "enemy_remove": 6,
+            "enemy_tell": 223,
+            "hurt": 16,
+            "kill": 54,
+            "mechanic": 2,
+            "message": 12,
+            "player_hit": 16,
+            "xp_pickup": 49
+          },
+          "population_max": {
+            "authored_transients": 4,
+            "effects": 15,
+            "enemies": 95,
+            "enemy_views": 95,
+            "gems": 33,
+            "hazards": 3,
+            "pending_patterns": 4,
+            "projectiles": 369,
+            "skill_states": 77,
+            "skill_transients": 83,
+            "telegraphs": 17
+          }
+        },
+        "paired-B2": {
+          "logic_equal_to_original_A1": {
+            "logic_event_sha256": true,
+            "logic_state_sha256": true,
+            "event_counts": true,
+            "population_max": true,
+            "fixture_adjustments": true,
+            "seed": true,
+            "frames_measured": true,
+            "all_750_frame_states": true
+          },
+          "mismatch_frames": [],
+          "warm_wall": {
+            "max_ms": 106.303,
+            "over_16_67ms": 623,
+            "over_33_33ms": 260,
+            "over_50ms": 125,
+            "p50_ms": 31.442,
+            "p95_ms": 76.672,
+            "p99_ms": 87.543,
+            "samples": 630
+          },
+          "full_wall": {
+            "max_ms": 109.203,
+            "over_16_67ms": 624,
+            "over_33_33ms": 261,
+            "over_50ms": 126,
+            "p50_ms": 29.688,
+            "p95_ms": 74.869,
+            "p99_ms": 87.543,
+            "samples": 750
+          },
+          "warm_median_stages": {
+            "advance_presentation_ms": 1.501,
+            "battle_tick_ms": 3.696,
+            "canvas_consume_events_ms": 0.325,
+            "canvas_refresh_ms": 2.498,
+            "frame_wall_ms": 31.442,
+            "hud_view_refresh_ms": 0.284,
+            "input_trace_ms": 0.009,
+            "present_messages_ms": 0.038,
+            "publish_music_context_ms": 0.02,
+            "sync_camera_obstacles_ms": 0.02
+          },
+          "warm_stage_summaries": {
+            "advance_presentation_ms": {
+              "max_ms": 3.727,
+              "over_16_67ms": 0,
+              "over_33_33ms": 0,
+              "over_50ms": 0,
+              "p50_ms": 1.501,
+              "p95_ms": 2.682,
+              "p99_ms": 3.134,
+              "samples": 630
+            },
+            "battle_tick_ms": {
+              "max_ms": 57.088,
+              "over_16_67ms": 127,
+              "over_33_33ms": 75,
+              "over_50ms": 6,
+              "p50_ms": 3.696,
+              "p95_ms": 40.693,
+              "p99_ms": 49.798,
+              "samples": 630
+            },
+            "canvas_consume_events_ms": {
+              "max_ms": 20.661,
+              "over_16_67ms": 1,
+              "over_33_33ms": 0,
+              "over_50ms": 0,
+              "p50_ms": 0.325,
+              "p95_ms": 1.12,
+              "p99_ms": 4.539,
+              "samples": 630
+            },
+            "canvas_refresh_ms": {
+              "max_ms": 15.461,
+              "over_16_67ms": 0,
+              "over_33_33ms": 0,
+              "over_50ms": 0,
+              "p50_ms": 2.498,
+              "p95_ms": 3.344,
+              "p99_ms": 4.705,
+              "samples": 630
+            },
+            "frame_wall_ms": {
+              "max_ms": 106.303,
+              "over_16_67ms": 623,
+              "over_33_33ms": 260,
+              "over_50ms": 125,
+              "p50_ms": 31.442,
+              "p95_ms": 76.672,
+              "p99_ms": 87.543,
+              "samples": 630
+            },
+            "hud_view_refresh_ms": {
+              "max_ms": 9.278,
+              "over_16_67ms": 0,
+              "over_33_33ms": 0,
+              "over_50ms": 0,
+              "p50_ms": 0.284,
+              "p95_ms": 3.929,
+              "p99_ms": 4.17,
+              "samples": 630
+            },
+            "input_trace_ms": {
+              "max_ms": 0.037,
+              "over_16_67ms": 0,
+              "over_33_33ms": 0,
+              "over_50ms": 0,
+              "p50_ms": 0.009,
+              "p95_ms": 0.011,
+              "p99_ms": 0.015,
+              "samples": 630
+            },
+            "present_messages_ms": {
+              "max_ms": 3.962,
+              "over_16_67ms": 0,
+              "over_33_33ms": 0,
+              "over_50ms": 0,
+              "p50_ms": 0.038,
+              "p95_ms": 0.052,
+              "p99_ms": 3.355,
+              "samples": 630
+            },
+            "publish_music_context_ms": {
+              "max_ms": 0.083,
+              "over_16_67ms": 0,
+              "over_33_33ms": 0,
+              "over_50ms": 0,
+              "p50_ms": 0.02,
+              "p95_ms": 0.024,
+              "p99_ms": 0.041,
+              "samples": 630
+            },
+            "sync_camera_obstacles_ms": {
+              "max_ms": 0.145,
+              "over_16_67ms": 0,
+              "over_33_33ms": 0,
+              "over_50ms": 0,
+              "p50_ms": 0.02,
+              "p95_ms": 0.031,
+              "p99_ms": 0.035,
+              "samples": 630
+            }
+          },
+          "gpu": {
+            "max_ms": 9.17500019073486,
+            "over_16_67ms": 0,
+            "over_33_33ms": 0,
+            "over_50ms": 0,
+            "p50_ms": 0.508000016212463,
+            "p95_ms": 2.41700005531311,
+            "p99_ms": 3.59699988365173,
+            "samples": 750
+          },
+          "viewport_cpu": {
+            "max_ms": 16.068000793457,
+            "over_16_67ms": 0,
+            "over_33_33ms": 0,
+            "over_50ms": 0,
+            "p50_ms": 4.76900005340576,
+            "p95_ms": 7.21400022506714,
+            "p99_ms": 9.01299953460693,
+            "samples": 750
+          },
+          "warm_readbacks": {
+            "max": 0.0,
+            "p50": 0.0,
+            "p95": 0.0,
+            "p99": 0.0,
+            "samples": 630,
+            "total": 0.0
+          },
+          "event_counts": {
+            "ability_effect": 1,
+            "ability_release": 26,
+            "boss_impact": 4,
+            "cast": 24,
+            "collaboration": 2,
+            "damage_dealt": 424,
+            "damage_taken": 16,
+            "enemy_hazard_release": 1,
+            "enemy_release": 204,
+            "enemy_remove": 6,
+            "enemy_tell": 223,
+            "hurt": 16,
+            "kill": 54,
+            "mechanic": 2,
+            "message": 12,
+            "player_hit": 16,
+            "xp_pickup": 49
+          },
+          "population_max": {
+            "authored_transients": 4,
+            "effects": 15,
+            "enemies": 95,
+            "enemy_views": 95,
+            "gems": 33,
+            "hazards": 3,
+            "pending_patterns": 4,
+            "projectiles": 369,
+            "skill_states": 77,
+            "skill_transients": 83,
+            "telegraphs": 17
+          }
+        },
+        "paired-A4": {
+          "logic_equal_to_original_A1": {
+            "logic_event_sha256": true,
+            "logic_state_sha256": true,
+            "event_counts": true,
+            "population_max": true,
+            "fixture_adjustments": true,
+            "seed": true,
+            "frames_measured": true,
+            "all_750_frame_states": true
+          },
+          "mismatch_frames": [],
+          "warm_wall": {
+            "max_ms": 108.558,
+            "over_16_67ms": 582,
+            "over_33_33ms": 418,
+            "over_50ms": 133,
+            "p50_ms": 36.381,
+            "p95_ms": 76.499,
+            "p99_ms": 83.98,
+            "samples": 630
+          },
+          "full_wall": {
+            "max_ms": 116.876,
+            "over_16_67ms": 585,
+            "over_33_33ms": 419,
+            "over_50ms": 134,
+            "p50_ms": 35.0,
+            "p95_ms": 75.556,
+            "p99_ms": 83.98,
+            "samples": 750
+          },
+          "warm_median_stages": {
+            "advance_presentation_ms": 1.564,
+            "battle_tick_ms": 3.921,
+            "canvas_consume_events_ms": 0.329,
+            "canvas_refresh_ms": 2.667,
+            "frame_wall_ms": 36.381,
+            "hud_view_refresh_ms": 0.295,
+            "input_trace_ms": 0.009,
+            "present_messages_ms": 0.039,
+            "publish_music_context_ms": 0.02,
+            "sync_camera_obstacles_ms": 0.02
+          },
+          "warm_stage_summaries": {
+            "advance_presentation_ms": {
+              "max_ms": 3.261,
+              "over_16_67ms": 0,
+              "over_33_33ms": 0,
+              "over_50ms": 0,
+              "p50_ms": 1.564,
+              "p95_ms": 2.685,
+              "p99_ms": 3.096,
+              "samples": 630
+            },
+            "battle_tick_ms": {
+              "max_ms": 51.79,
+              "over_16_67ms": 127,
+              "over_33_33ms": 81,
+              "over_50ms": 7,
+              "p50_ms": 3.921,
+              "p95_ms": 40.796,
+              "p99_ms": 50.284,
+              "samples": 630
+            },
+            "canvas_consume_events_ms": {
+              "max_ms": 20.633,
+              "over_16_67ms": 1,
+              "over_33_33ms": 0,
+              "over_50ms": 0,
+              "p50_ms": 0.329,
+              "p95_ms": 1.082,
+              "p99_ms": 4.804,
+              "samples": 630
+            },
+            "canvas_refresh_ms": {
+              "max_ms": 20.712,
+              "over_16_67ms": 1,
+              "over_33_33ms": 0,
+              "over_50ms": 0,
+              "p50_ms": 2.667,
+              "p95_ms": 3.51,
+              "p99_ms": 4.881,
+              "samples": 630
+            },
+            "frame_wall_ms": {
+              "max_ms": 108.558,
+              "over_16_67ms": 582,
+              "over_33_33ms": 418,
+              "over_50ms": 133,
+              "p50_ms": 36.381,
+              "p95_ms": 76.499,
+              "p99_ms": 83.98,
+              "samples": 630
+            },
+            "hud_view_refresh_ms": {
+              "max_ms": 6.953,
+              "over_16_67ms": 0,
+              "over_33_33ms": 0,
+              "over_50ms": 0,
+              "p50_ms": 0.295,
+              "p95_ms": 3.892,
+              "p99_ms": 4.356,
+              "samples": 630
+            },
+            "input_trace_ms": {
+              "max_ms": 0.099,
+              "over_16_67ms": 0,
+              "over_33_33ms": 0,
+              "over_50ms": 0,
+              "p50_ms": 0.009,
+              "p95_ms": 0.011,
+              "p99_ms": 0.016,
+              "samples": 630
+            },
+            "present_messages_ms": {
+              "max_ms": 3.82,
+              "over_16_67ms": 0,
+              "over_33_33ms": 0,
+              "over_50ms": 0,
+              "p50_ms": 0.039,
+              "p95_ms": 0.053,
+              "p99_ms": 3.406,
+              "samples": 630
+            },
+            "publish_music_context_ms": {
+              "max_ms": 0.124,
+              "over_16_67ms": 0,
+              "over_33_33ms": 0,
+              "over_50ms": 0,
+              "p50_ms": 0.02,
+              "p95_ms": 0.024,
+              "p99_ms": 0.042,
+              "samples": 630
+            },
+            "sync_camera_obstacles_ms": {
+              "max_ms": 0.308,
+              "over_16_67ms": 0,
+              "over_33_33ms": 0,
+              "over_50ms": 0,
+              "p50_ms": 0.02,
+              "p95_ms": 0.031,
+              "p99_ms": 0.035,
+              "samples": 630
+            }
+          },
+          "gpu": {
+            "max_ms": 5.15100002288818,
+            "over_16_67ms": 0,
+            "over_33_33ms": 0,
+            "over_50ms": 0,
+            "p50_ms": 0.483999997377396,
+            "p95_ms": 2.84999990463257,
+            "p99_ms": 4.07399988174438,
+            "samples": 750
+          },
+          "viewport_cpu": {
+            "max_ms": 11.8479995727539,
+            "over_16_67ms": 0,
+            "over_33_33ms": 0,
+            "over_50ms": 0,
+            "p50_ms": 6.12900018692017,
+            "p95_ms": 8.10499954223633,
+            "p99_ms": 8.60900020599365,
+            "samples": 750
+          },
+          "warm_readbacks": {
+            "max": 0.0,
+            "p50": 0.0,
+            "p95": 0.0,
+            "p99": 0.0,
+            "samples": 630,
+            "total": 0.0
+          },
+          "event_counts": {
+            "ability_effect": 1,
+            "ability_release": 26,
+            "boss_impact": 4,
+            "cast": 24,
+            "collaboration": 2,
+            "damage_dealt": 424,
+            "damage_taken": 16,
+            "enemy_hazard_release": 1,
+            "enemy_release": 204,
+            "enemy_remove": 6,
+            "enemy_tell": 223,
+            "hurt": 16,
+            "kill": 54,
+            "mechanic": 2,
+            "message": 12,
+            "player_hit": 16,
+            "xp_pickup": 49
+          },
+          "population_max": {
+            "authored_transients": 4,
+            "effects": 15,
+            "enemies": 95,
+            "enemy_views": 95,
+            "gems": 33,
+            "hazards": 3,
+            "pending_patterns": 4,
+            "projectiles": 369,
+            "skill_states": 77,
+            "skill_transients": 83,
+            "telegraphs": 17
+          }
+        }
+      },
+      "B2_vs_bracketing_old_mean": {
+        "p50_ms": -4.954000000000001,
+        "p95_ms": -0.5919999999999987,
+        "over_33_33ms": -135.5,
+        "over_50ms": -8.5
+      }
+    },
+    {
+      "case": "B17-human-chengong-dense",
+      "runs": {
+        "paired-A3": {
+          "logic_equal_to_original_A1": {
+            "logic_event_sha256": true,
+            "logic_state_sha256": true,
+            "event_counts": true,
+            "population_max": true,
+            "fixture_adjustments": true,
+            "seed": true,
+            "frames_measured": true,
+            "all_750_frame_states": true
+          },
+          "mismatch_frames": [],
+          "warm_wall": {
+            "max_ms": 78.571,
+            "over_16_67ms": 553,
+            "over_33_33ms": 338,
+            "over_50ms": 11,
+            "p50_ms": 33.792,
+            "p95_ms": 43.24,
+            "p99_ms": 56.805,
+            "samples": 630
+          },
+          "full_wall": {
+            "max_ms": 115.046,
+            "over_16_67ms": 616,
+            "over_33_33ms": 381,
+            "over_50ms": 12,
+            "p50_ms": 33.493,
+            "p95_ms": 42.832,
+            "p99_ms": 56.805,
+            "samples": 750
+          },
+          "warm_median_stages": {
+            "advance_presentation_ms": 1.295,
+            "battle_tick_ms": 3.721,
+            "canvas_consume_events_ms": 0.315,
+            "canvas_refresh_ms": 2.784,
+            "frame_wall_ms": 33.792,
+            "hud_view_refresh_ms": 0.298,
+            "input_trace_ms": 0.009,
+            "present_messages_ms": 0.04,
+            "publish_music_context_ms": 0.019,
+            "sync_camera_obstacles_ms": 0.019
+          },
+          "warm_stage_summaries": {
+            "advance_presentation_ms": {
+              "max_ms": 8.355,
+              "over_16_67ms": 0,
+              "over_33_33ms": 0,
+              "over_50ms": 0,
+              "p50_ms": 1.295,
+              "p95_ms": 2.425,
+              "p99_ms": 2.885,
+              "samples": 630
+            },
+            "battle_tick_ms": {
+              "max_ms": 21.456,
+              "over_16_67ms": 3,
+              "over_33_33ms": 0,
+              "over_50ms": 0,
+              "p50_ms": 3.721,
+              "p95_ms": 14.371,
+              "p99_ms": 16.116,
+              "samples": 630
+            },
+            "canvas_consume_events_ms": {
+              "max_ms": 21.738,
+              "over_16_67ms": 1,
+              "over_33_33ms": 0,
+              "over_50ms": 0,
+              "p50_ms": 0.315,
+              "p95_ms": 1.098,
+              "p99_ms": 4.242,
+              "samples": 630
+            },
+            "canvas_refresh_ms": {
+              "max_ms": 6.186,
+              "over_16_67ms": 0,
+              "over_33_33ms": 0,
+              "over_50ms": 0,
+              "p50_ms": 2.784,
+              "p95_ms": 3.477,
+              "p99_ms": 3.89,
+              "samples": 630
+            },
+            "frame_wall_ms": {
+              "max_ms": 78.571,
+              "over_16_67ms": 553,
+              "over_33_33ms": 338,
+              "over_50ms": 11,
+              "p50_ms": 33.792,
+              "p95_ms": 43.24,
+              "p99_ms": 56.805,
+              "samples": 630
+            },
+            "hud_view_refresh_ms": {
+              "max_ms": 8.32,
+              "over_16_67ms": 0,
+              "over_33_33ms": 0,
+              "over_50ms": 0,
+              "p50_ms": 0.298,
+              "p95_ms": 3.902,
+              "p99_ms": 4.077,
+              "samples": 630
+            },
+            "input_trace_ms": {
+              "max_ms": 0.4,
+              "over_16_67ms": 0,
+              "over_33_33ms": 0,
+              "over_50ms": 0,
+              "p50_ms": 0.009,
+              "p95_ms": 0.01,
+              "p99_ms": 0.014,
+              "samples": 630
+            },
+            "present_messages_ms": {
+              "max_ms": 3.956,
+              "over_16_67ms": 0,
+              "over_33_33ms": 0,
+              "over_50ms": 0,
+              "p50_ms": 0.04,
+              "p95_ms": 0.054,
+              "p99_ms": 3.46,
+              "samples": 630
+            },
+            "publish_music_context_ms": {
+              "max_ms": 0.103,
+              "over_16_67ms": 0,
+              "over_33_33ms": 0,
+              "over_50ms": 0,
+              "p50_ms": 0.019,
+              "p95_ms": 0.022,
+              "p99_ms": 0.04,
+              "samples": 630
+            },
+            "sync_camera_obstacles_ms": {
+              "max_ms": 0.126,
+              "over_16_67ms": 0,
+              "over_33_33ms": 0,
+              "over_50ms": 0,
+              "p50_ms": 0.019,
+              "p95_ms": 0.031,
+              "p99_ms": 0.039,
+              "samples": 630
+            }
+          },
+          "gpu": {
+            "max_ms": 4.66699981689453,
+            "over_16_67ms": 0,
+            "over_33_33ms": 0,
+            "over_50ms": 0,
+            "p50_ms": 0.395999997854233,
+            "p95_ms": 1.84200000762939,
+            "p99_ms": 3.84999990463257,
+            "samples": 750
+          },
+          "viewport_cpu": {
+            "max_ms": 13.2379999160767,
+            "over_16_67ms": 0,
+            "over_33_33ms": 0,
+            "over_50ms": 0,
+            "p50_ms": 5.44299983978271,
+            "p95_ms": 7.90799999237061,
+            "p99_ms": 8.26399993896484,
+            "samples": 750
+          },
+          "warm_readbacks": {
+            "max": 0.0,
+            "p50": 0.0,
+            "p95": 0.0,
+            "p99": 0.0,
+            "samples": 630,
+            "total": 0.0
+          },
+          "event_counts": {
+            "ability_effect": 1,
+            "ability_release": 26,
+            "boss_impact": 3,
+            "cast": 24,
+            "collaboration": 1,
+            "damage_dealt": 402,
+            "damage_taken": 12,
+            "enemy_hazard_release": 3,
+            "enemy_release": 205,
+            "enemy_remove": 6,
+            "enemy_tell": 226,
+            "hurt": 12,
+            "kill": 42,
+            "mechanic": 2,
+            "message": 12,
+            "player_hit": 12,
+            "xp_pickup": 37
+          },
+          "population_max": {
+            "authored_transients": 4,
+            "effects": 14,
+            "enemies": 95,
+            "enemy_views": 95,
+            "gems": 26,
+            "hazards": 3,
+            "pending_patterns": 5,
+            "projectiles": 318,
+            "skill_states": 80,
+            "skill_transients": 85,
+            "telegraphs": 15
+          }
+        },
+        "paired-B2": {
+          "logic_equal_to_original_A1": {
+            "logic_event_sha256": true,
+            "logic_state_sha256": true,
+            "event_counts": true,
+            "population_max": true,
+            "fixture_adjustments": true,
+            "seed": true,
+            "frames_measured": true,
+            "all_750_frame_states": true
+          },
+          "mismatch_frames": [],
+          "warm_wall": {
+            "max_ms": 79.473,
+            "over_16_67ms": 575,
+            "over_33_33ms": 239,
+            "over_50ms": 18,
+            "p50_ms": 30.57,
+            "p95_ms": 44.706,
+            "p99_ms": 57.719,
+            "samples": 630
+          },
+          "full_wall": {
+            "max_ms": 96.278,
+            "over_16_67ms": 637,
+            "over_33_33ms": 300,
+            "over_50ms": 19,
+            "p50_ms": 30.573,
+            "p95_ms": 43.982,
+            "p99_ms": 57.719,
+            "samples": 750
+          },
+          "warm_median_stages": {
+            "advance_presentation_ms": 1.186,
+            "battle_tick_ms": 3.58,
+            "canvas_consume_events_ms": 0.25,
+            "canvas_refresh_ms": 2.617,
+            "frame_wall_ms": 30.57,
+            "hud_view_refresh_ms": 0.296,
+            "input_trace_ms": 0.009,
+            "present_messages_ms": 0.031,
+            "publish_music_context_ms": 0.02,
+            "sync_camera_obstacles_ms": 0.019
+          },
+          "warm_stage_summaries": {
+            "advance_presentation_ms": {
+              "max_ms": 4.138,
+              "over_16_67ms": 0,
+              "over_33_33ms": 0,
+              "over_50ms": 0,
+              "p50_ms": 1.186,
+              "p95_ms": 2.452,
+              "p99_ms": 2.869,
+              "samples": 630
+            },
+            "battle_tick_ms": {
+              "max_ms": 25.15,
+              "over_16_67ms": 15,
+              "over_33_33ms": 0,
+              "over_50ms": 0,
+              "p50_ms": 3.58,
+              "p95_ms": 15.598,
+              "p99_ms": 17.275,
+              "samples": 630
+            },
+            "canvas_consume_events_ms": {
+              "max_ms": 22.012,
+              "over_16_67ms": 1,
+              "over_33_33ms": 0,
+              "over_50ms": 0,
+              "p50_ms": 0.25,
+              "p95_ms": 1.04,
+              "p99_ms": 3.664,
+              "samples": 630
+            },
+            "canvas_refresh_ms": {
+              "max_ms": 7.464,
+              "over_16_67ms": 0,
+              "over_33_33ms": 0,
+              "over_50ms": 0,
+              "p50_ms": 2.617,
+              "p95_ms": 3.705,
+              "p99_ms": 4.851,
+              "samples": 630
+            },
+            "frame_wall_ms": {
+              "max_ms": 79.473,
+              "over_16_67ms": 575,
+              "over_33_33ms": 239,
+              "over_50ms": 18,
+              "p50_ms": 30.57,
+              "p95_ms": 44.706,
+              "p99_ms": 57.719,
+              "samples": 630
+            },
+            "hud_view_refresh_ms": {
+              "max_ms": 6.443,
+              "over_16_67ms": 0,
+              "over_33_33ms": 0,
+              "over_50ms": 0,
+              "p50_ms": 0.296,
+              "p95_ms": 4.025,
+              "p99_ms": 4.458,
+              "samples": 630
+            },
+            "input_trace_ms": {
+              "max_ms": 0.094,
+              "over_16_67ms": 0,
+              "over_33_33ms": 0,
+              "over_50ms": 0,
+              "p50_ms": 0.009,
+              "p95_ms": 0.01,
+              "p99_ms": 0.014,
+              "samples": 630
+            },
+            "present_messages_ms": {
+              "max_ms": 3.928,
+              "over_16_67ms": 0,
+              "over_33_33ms": 0,
+              "over_50ms": 0,
+              "p50_ms": 0.031,
+              "p95_ms": 0.054,
+              "p99_ms": 3.436,
+              "samples": 630
+            },
+            "publish_music_context_ms": {
+              "max_ms": 0.213,
+              "over_16_67ms": 0,
+              "over_33_33ms": 0,
+              "over_50ms": 0,
+              "p50_ms": 0.02,
+              "p95_ms": 0.025,
+              "p99_ms": 0.044,
+              "samples": 630
+            },
+            "sync_camera_obstacles_ms": {
+              "max_ms": 0.345,
+              "over_16_67ms": 0,
+              "over_33_33ms": 0,
+              "over_50ms": 0,
+              "p50_ms": 0.019,
+              "p95_ms": 0.032,
+              "p99_ms": 0.041,
+              "samples": 630
+            }
+          },
+          "gpu": {
+            "max_ms": 5.4520001411438,
+            "over_16_67ms": 0,
+            "over_33_33ms": 0,
+            "over_50ms": 0,
+            "p50_ms": 0.393999993801117,
+            "p95_ms": 1.47200000286102,
+            "p99_ms": 3.91000008583069,
+            "samples": 750
+          },
+          "viewport_cpu": {
+            "max_ms": 17.701000213623,
+            "over_16_67ms": 1,
+            "over_33_33ms": 0,
+            "over_50ms": 0,
+            "p50_ms": 4.36299991607666,
+            "p95_ms": 7.78700017929077,
+            "p99_ms": 8.75800037384033,
+            "samples": 750
+          },
+          "warm_readbacks": {
+            "max": 0.0,
+            "p50": 0.0,
+            "p95": 0.0,
+            "p99": 0.0,
+            "samples": 630,
+            "total": 0.0
+          },
+          "event_counts": {
+            "ability_effect": 1,
+            "ability_release": 26,
+            "boss_impact": 3,
+            "cast": 24,
+            "collaboration": 1,
+            "damage_dealt": 402,
+            "damage_taken": 12,
+            "enemy_hazard_release": 3,
+            "enemy_release": 205,
+            "enemy_remove": 6,
+            "enemy_tell": 226,
+            "hurt": 12,
+            "kill": 42,
+            "mechanic": 2,
+            "message": 12,
+            "player_hit": 12,
+            "xp_pickup": 37
+          },
+          "population_max": {
+            "authored_transients": 4,
+            "effects": 14,
+            "enemies": 95,
+            "enemy_views": 95,
+            "gems": 26,
+            "hazards": 3,
+            "pending_patterns": 5,
+            "projectiles": 318,
+            "skill_states": 80,
+            "skill_transients": 85,
+            "telegraphs": 15
+          }
+        },
+        "paired-A4": {
+          "logic_equal_to_original_A1": {
+            "logic_event_sha256": true,
+            "logic_state_sha256": true,
+            "event_counts": true,
+            "population_max": true,
+            "fixture_adjustments": true,
+            "seed": true,
+            "frames_measured": true,
+            "all_750_frame_states": true
+          },
+          "mismatch_frames": [],
+          "warm_wall": {
+            "max_ms": 74.513,
+            "over_16_67ms": 564,
+            "over_33_33ms": 249,
+            "over_50ms": 7,
+            "p50_ms": 29.457,
+            "p95_ms": 42.891,
+            "p99_ms": 53.437,
+            "samples": 630
+          },
+          "full_wall": {
+            "max_ms": 106.692,
+            "over_16_67ms": 626,
+            "over_33_33ms": 298,
+            "over_50ms": 9,
+            "p50_ms": 29.345,
+            "p95_ms": 42.24,
+            "p99_ms": 53.75,
+            "samples": 750
+          },
+          "warm_median_stages": {
+            "advance_presentation_ms": 1.103,
+            "battle_tick_ms": 3.606,
+            "canvas_consume_events_ms": 0.246,
+            "canvas_refresh_ms": 2.432,
+            "frame_wall_ms": 29.457,
+            "hud_view_refresh_ms": 0.294,
+            "input_trace_ms": 0.009,
+            "present_messages_ms": 0.031,
+            "publish_music_context_ms": 0.02,
+            "sync_camera_obstacles_ms": 0.019
+          },
+          "warm_stage_summaries": {
+            "advance_presentation_ms": {
+              "max_ms": 3.538,
+              "over_16_67ms": 0,
+              "over_33_33ms": 0,
+              "over_50ms": 0,
+              "p50_ms": 1.103,
+              "p95_ms": 2.412,
+              "p99_ms": 2.739,
+              "samples": 630
+            },
+            "battle_tick_ms": {
+              "max_ms": 21.451,
+              "over_16_67ms": 12,
+              "over_33_33ms": 0,
+              "over_50ms": 0,
+              "p50_ms": 3.606,
+              "p95_ms": 15.07,
+              "p99_ms": 17.934,
+              "samples": 630
+            },
+            "canvas_consume_events_ms": {
+              "max_ms": 20.785,
+              "over_16_67ms": 1,
+              "over_33_33ms": 0,
+              "over_50ms": 0,
+              "p50_ms": 0.246,
+              "p95_ms": 1.053,
+              "p99_ms": 3.656,
+              "samples": 630
+            },
+            "canvas_refresh_ms": {
+              "max_ms": 7.245,
+              "over_16_67ms": 0,
+              "over_33_33ms": 0,
+              "over_50ms": 0,
+              "p50_ms": 2.432,
+              "p95_ms": 3.547,
+              "p99_ms": 4.894,
+              "samples": 630
+            },
+            "frame_wall_ms": {
+              "max_ms": 74.513,
+              "over_16_67ms": 564,
+              "over_33_33ms": 249,
+              "over_50ms": 7,
+              "p50_ms": 29.457,
+              "p95_ms": 42.891,
+              "p99_ms": 53.437,
+              "samples": 630
+            },
+            "hud_view_refresh_ms": {
+              "max_ms": 6.835,
+              "over_16_67ms": 0,
+              "over_33_33ms": 0,
+              "over_50ms": 0,
+              "p50_ms": 0.294,
+              "p95_ms": 3.998,
+              "p99_ms": 4.454,
+              "samples": 630
+            },
+            "input_trace_ms": {
+              "max_ms": 4.027,
+              "over_16_67ms": 0,
+              "over_33_33ms": 0,
+              "over_50ms": 0,
+              "p50_ms": 0.009,
+              "p95_ms": 0.011,
+              "p99_ms": 0.017,
+              "samples": 630
+            },
+            "present_messages_ms": {
+              "max_ms": 3.745,
+              "over_16_67ms": 0,
+              "over_33_33ms": 0,
+              "over_50ms": 0,
+              "p50_ms": 0.031,
+              "p95_ms": 0.051,
+              "p99_ms": 3.628,
+              "samples": 630
+            },
+            "publish_music_context_ms": {
+              "max_ms": 0.12,
+              "over_16_67ms": 0,
+              "over_33_33ms": 0,
+              "over_50ms": 0,
+              "p50_ms": 0.02,
+              "p95_ms": 0.024,
+              "p99_ms": 0.046,
+              "samples": 630
+            },
+            "sync_camera_obstacles_ms": {
+              "max_ms": 0.122,
+              "over_16_67ms": 0,
+              "over_33_33ms": 0,
+              "over_50ms": 0,
+              "p50_ms": 0.019,
+              "p95_ms": 0.03,
+              "p99_ms": 0.037,
+              "samples": 630
+            }
+          },
+          "gpu": {
+            "max_ms": 4.74900007247925,
+            "over_16_67ms": 0,
+            "over_33_33ms": 0,
+            "over_50ms": 0,
+            "p50_ms": 0.388999998569489,
+            "p95_ms": 1.50300002098083,
+            "p99_ms": 3.39000010490417,
+            "samples": 750
+          },
+          "viewport_cpu": {
+            "max_ms": 10.0260000228882,
+            "over_16_67ms": 0,
+            "over_33_33ms": 0,
+            "over_50ms": 0,
+            "p50_ms": 3.96099996566772,
+            "p95_ms": 7.64599990844727,
+            "p99_ms": 8.4060001373291,
+            "samples": 750
+          },
+          "warm_readbacks": {
+            "max": 0.0,
+            "p50": 0.0,
+            "p95": 0.0,
+            "p99": 0.0,
+            "samples": 630,
+            "total": 0.0
+          },
+          "event_counts": {
+            "ability_effect": 1,
+            "ability_release": 26,
+            "boss_impact": 3,
+            "cast": 24,
+            "collaboration": 1,
+            "damage_dealt": 402,
+            "damage_taken": 12,
+            "enemy_hazard_release": 3,
+            "enemy_release": 205,
+            "enemy_remove": 6,
+            "enemy_tell": 226,
+            "hurt": 12,
+            "kill": 42,
+            "mechanic": 2,
+            "message": 12,
+            "player_hit": 12,
+            "xp_pickup": 37
+          },
+          "population_max": {
+            "authored_transients": 4,
+            "effects": 14,
+            "enemies": 95,
+            "enemy_views": 95,
+            "gems": 26,
+            "hazards": 3,
+            "pending_patterns": 5,
+            "projectiles": 318,
+            "skill_states": 80,
+            "skill_transients": 85,
+            "telegraphs": 15
+          }
+        }
+      },
+      "B2_vs_bracketing_old_mean": {
+        "p50_ms": -1.0545000000000009,
+        "p95_ms": 1.640500000000003,
+        "over_33_33ms": -54.5,
+        "over_50ms": 9.0
+      }
+    },
+    {
+      "case": "B17-war-gaoshun-dense",
+      "runs": {
+        "paired-A3": {
+          "logic_equal_to_original_A1": {
+            "logic_event_sha256": true,
+            "logic_state_sha256": true,
+            "event_counts": true,
+            "population_max": true,
+            "fixture_adjustments": true,
+            "seed": true,
+            "frames_measured": true,
+            "all_750_frame_states": true
+          },
+          "mismatch_frames": [],
+          "warm_wall": {
+            "max_ms": 98.936,
+            "over_16_67ms": 616,
+            "over_33_33ms": 442,
+            "over_50ms": 31,
+            "p50_ms": 37.805,
+            "p95_ms": 49.962,
+            "p99_ms": 67.101,
+            "samples": 630
+          },
+          "full_wall": {
+            "max_ms": 102.576,
+            "over_16_67ms": 619,
+            "over_33_33ms": 443,
+            "over_50ms": 32,
+            "p50_ms": 35.679,
+            "p95_ms": 49.474,
+            "p99_ms": 67.101,
+            "samples": 750
+          },
+          "warm_median_stages": {
+            "advance_presentation_ms": 1.517,
+            "battle_tick_ms": 3.964,
+            "canvas_consume_events_ms": 0.345,
+            "canvas_refresh_ms": 2.663,
+            "frame_wall_ms": 37.805,
+            "hud_view_refresh_ms": 0.298,
+            "input_trace_ms": 0.009,
+            "present_messages_ms": 0.039,
+            "publish_music_context_ms": 0.02,
+            "sync_camera_obstacles_ms": 0.019
+          },
+          "warm_stage_summaries": {
+            "advance_presentation_ms": {
+              "max_ms": 10.351,
+              "over_16_67ms": 0,
+              "over_33_33ms": 0,
+              "over_50ms": 0,
+              "p50_ms": 1.517,
+              "p95_ms": 2.556,
+              "p99_ms": 2.74,
+              "samples": 630
+            },
+            "battle_tick_ms": {
+              "max_ms": 29.325,
+              "over_16_67ms": 2,
+              "over_33_33ms": 0,
+              "over_50ms": 0,
+              "p50_ms": 3.964,
+              "p95_ms": 6.337,
+              "p99_ms": 13.549,
+              "samples": 630
+            },
+            "canvas_consume_events_ms": {
+              "max_ms": 20.037,
+              "over_16_67ms": 1,
+              "over_33_33ms": 0,
+              "over_50ms": 0,
+              "p50_ms": 0.345,
+              "p95_ms": 1.066,
+              "p99_ms": 5.105,
+              "samples": 630
+            },
+            "canvas_refresh_ms": {
+              "max_ms": 6.013,
+              "over_16_67ms": 0,
+              "over_33_33ms": 0,
+              "over_50ms": 0,
+              "p50_ms": 2.663,
+              "p95_ms": 3.712,
+              "p99_ms": 5.046,
+              "samples": 630
+            },
+            "frame_wall_ms": {
+              "max_ms": 98.936,
+              "over_16_67ms": 616,
+              "over_33_33ms": 442,
+              "over_50ms": 31,
+              "p50_ms": 37.805,
+              "p95_ms": 49.962,
+              "p99_ms": 67.101,
+              "samples": 630
+            },
+            "hud_view_refresh_ms": {
+              "max_ms": 7.052,
+              "over_16_67ms": 0,
+              "over_33_33ms": 0,
+              "over_50ms": 0,
+              "p50_ms": 0.298,
+              "p95_ms": 4.024,
+              "p99_ms": 4.304,
+              "samples": 630
+            },
+            "input_trace_ms": {
+              "max_ms": 0.053,
+              "over_16_67ms": 0,
+              "over_33_33ms": 0,
+              "over_50ms": 0,
+              "p50_ms": 0.009,
+              "p95_ms": 0.011,
+              "p99_ms": 0.016,
+              "samples": 630
+            },
+            "present_messages_ms": {
+              "max_ms": 3.975,
+              "over_16_67ms": 0,
+              "over_33_33ms": 0,
+              "over_50ms": 0,
+              "p50_ms": 0.039,
+              "p95_ms": 0.053,
+              "p99_ms": 3.561,
+              "samples": 630
+            },
+            "publish_music_context_ms": {
+              "max_ms": 0.167,
+              "over_16_67ms": 0,
+              "over_33_33ms": 0,
+              "over_50ms": 0,
+              "p50_ms": 0.02,
+              "p95_ms": 0.024,
+              "p99_ms": 0.045,
+              "samples": 630
+            },
+            "sync_camera_obstacles_ms": {
+              "max_ms": 0.198,
+              "over_16_67ms": 0,
+              "over_33_33ms": 0,
+              "over_50ms": 0,
+              "p50_ms": 0.019,
+              "p95_ms": 0.031,
+              "p99_ms": 0.037,
+              "samples": 630
+            }
+          },
+          "gpu": {
+            "max_ms": 6.27699995040894,
+            "over_16_67ms": 0,
+            "over_33_33ms": 0,
+            "over_50ms": 0,
+            "p50_ms": 0.448000013828278,
+            "p95_ms": 3.29900002479553,
+            "p99_ms": 4.80999994277954,
+            "samples": 750
+          },
+          "viewport_cpu": {
+            "max_ms": 16.3770008087158,
+            "over_16_67ms": 0,
+            "over_33_33ms": 0,
+            "over_50ms": 0,
+            "p50_ms": 5.59299993515015,
+            "p95_ms": 8.57800006866455,
+            "p99_ms": 9.5930004119873,
+            "samples": 750
+          },
+          "warm_readbacks": {
+            "max": 0.0,
+            "p50": 0.0,
+            "p95": 0.0,
+            "p99": 0.0,
+            "samples": 630,
+            "total": 0.0
+          },
+          "event_counts": {
+            "ability_effect": 1,
+            "ability_release": 26,
+            "boss_impact": 3,
+            "boss_phase": 1,
+            "cast": 24,
+            "collaboration": 1,
+            "damage_dealt": 425,
+            "damage_taken": 16,
+            "enemy_release": 208,
+            "enemy_remove": 7,
+            "enemy_tell": 232,
+            "hurt": 16,
+            "kill": 59,
+            "mechanic": 2,
+            "message": 12,
+            "player_hit": 16,
+            "xp_pickup": 53
+          },
+          "population_max": {
+            "authored_transients": 4,
+            "effects": 14,
+            "enemies": 95,
+            "enemy_views": 95,
+            "gems": 34,
+            "hazards": 0,
+            "pending_patterns": 5,
+            "projectiles": 453,
+            "skill_states": 78,
+            "skill_transients": 83,
+            "telegraphs": 15
+          }
+        },
+        "paired-B2": {
+          "logic_equal_to_original_A1": {
+            "logic_event_sha256": true,
+            "logic_state_sha256": true,
+            "event_counts": true,
+            "population_max": true,
+            "fixture_adjustments": true,
+            "seed": true,
+            "frames_measured": true,
+            "all_750_frame_states": true
+          },
+          "mismatch_frames": [],
+          "warm_wall": {
+            "max_ms": 87.623,
+            "over_16_67ms": 617,
+            "over_33_33ms": 320,
+            "over_50ms": 21,
+            "p50_ms": 33.427,
+            "p95_ms": 46.982,
+            "p99_ms": 63.288,
+            "samples": 630
+          },
+          "full_wall": {
+            "max_ms": 113.065,
+            "over_16_67ms": 620,
+            "over_33_33ms": 321,
+            "over_50ms": 22,
+            "p50_ms": 31.422,
+            "p95_ms": 45.901,
+            "p99_ms": 63.288,
+            "samples": 750
+          },
+          "warm_median_stages": {
+            "advance_presentation_ms": 1.338,
+            "battle_tick_ms": 3.754,
+            "canvas_consume_events_ms": 0.337,
+            "canvas_refresh_ms": 2.345,
+            "frame_wall_ms": 33.427,
+            "hud_view_refresh_ms": 0.273,
+            "input_trace_ms": 0.009,
+            "present_messages_ms": 0.039,
+            "publish_music_context_ms": 0.021,
+            "sync_camera_obstacles_ms": 0.02
+          },
+          "warm_stage_summaries": {
+            "advance_presentation_ms": {
+              "max_ms": 6.165,
+              "over_16_67ms": 0,
+              "over_33_33ms": 0,
+              "over_50ms": 0,
+              "p50_ms": 1.338,
+              "p95_ms": 2.487,
+              "p99_ms": 2.676,
+              "samples": 630
+            },
+            "battle_tick_ms": {
+              "max_ms": 29.233,
+              "over_16_67ms": 2,
+              "over_33_33ms": 0,
+              "over_50ms": 0,
+              "p50_ms": 3.754,
+              "p95_ms": 5.849,
+              "p99_ms": 11.309,
+              "samples": 630
+            },
+            "canvas_consume_events_ms": {
+              "max_ms": 21.181,
+              "over_16_67ms": 1,
+              "over_33_33ms": 0,
+              "over_50ms": 0,
+              "p50_ms": 0.337,
+              "p95_ms": 1.033,
+              "p99_ms": 4.829,
+              "samples": 630
+            },
+            "canvas_refresh_ms": {
+              "max_ms": 8.51,
+              "over_16_67ms": 0,
+              "over_33_33ms": 0,
+              "over_50ms": 0,
+              "p50_ms": 2.345,
+              "p95_ms": 3.016,
+              "p99_ms": 3.815,
+              "samples": 630
+            },
+            "frame_wall_ms": {
+              "max_ms": 87.623,
+              "over_16_67ms": 617,
+              "over_33_33ms": 320,
+              "over_50ms": 21,
+              "p50_ms": 33.427,
+              "p95_ms": 46.982,
+              "p99_ms": 63.288,
+              "samples": 630
+            },
+            "hud_view_refresh_ms": {
+              "max_ms": 6.958,
+              "over_16_67ms": 0,
+              "over_33_33ms": 0,
+              "over_50ms": 0,
+              "p50_ms": 0.273,
+              "p95_ms": 4.097,
+              "p99_ms": 4.371,
+              "samples": 630
+            },
+            "input_trace_ms": {
+              "max_ms": 0.071,
+              "over_16_67ms": 0,
+              "over_33_33ms": 0,
+              "over_50ms": 0,
+              "p50_ms": 0.009,
+              "p95_ms": 0.011,
+              "p99_ms": 0.015,
+              "samples": 630
+            },
+            "present_messages_ms": {
+              "max_ms": 3.898,
+              "over_16_67ms": 0,
+              "over_33_33ms": 0,
+              "over_50ms": 0,
+              "p50_ms": 0.039,
+              "p95_ms": 0.052,
+              "p99_ms": 3.51,
+              "samples": 630
+            },
+            "publish_music_context_ms": {
+              "max_ms": 0.06,
+              "over_16_67ms": 0,
+              "over_33_33ms": 0,
+              "over_50ms": 0,
+              "p50_ms": 0.021,
+              "p95_ms": 0.024,
+              "p99_ms": 0.037,
+              "samples": 630
+            },
+            "sync_camera_obstacles_ms": {
+              "max_ms": 0.047,
+              "over_16_67ms": 0,
+              "over_33_33ms": 0,
+              "over_50ms": 0,
+              "p50_ms": 0.02,
+              "p95_ms": 0.03,
+              "p99_ms": 0.033,
+              "samples": 630
+            }
+          },
+          "gpu": {
+            "max_ms": 5.70499992370605,
+            "over_16_67ms": 0,
+            "over_33_33ms": 0,
+            "over_50ms": 0,
+            "p50_ms": 0.458999991416931,
+            "p95_ms": 2.78099989891052,
+            "p99_ms": 4.38500022888184,
+            "samples": 750
+          },
+          "viewport_cpu": {
+            "max_ms": 11.6049995422363,
+            "over_16_67ms": 0,
+            "over_33_33ms": 0,
+            "over_50ms": 0,
+            "p50_ms": 4.85200023651123,
+            "p95_ms": 7.44299983978271,
+            "p99_ms": 8.82100009918213,
+            "samples": 750
+          },
+          "warm_readbacks": {
+            "max": 0.0,
+            "p50": 0.0,
+            "p95": 0.0,
+            "p99": 0.0,
+            "samples": 630,
+            "total": 0.0
+          },
+          "event_counts": {
+            "ability_effect": 1,
+            "ability_release": 26,
+            "boss_impact": 3,
+            "boss_phase": 1,
+            "cast": 24,
+            "collaboration": 1,
+            "damage_dealt": 425,
+            "damage_taken": 16,
+            "enemy_release": 208,
+            "enemy_remove": 7,
+            "enemy_tell": 232,
+            "hurt": 16,
+            "kill": 59,
+            "mechanic": 2,
+            "message": 12,
+            "player_hit": 16,
+            "xp_pickup": 53
+          },
+          "population_max": {
+            "authored_transients": 4,
+            "effects": 14,
+            "enemies": 95,
+            "enemy_views": 95,
+            "gems": 34,
+            "hazards": 0,
+            "pending_patterns": 5,
+            "projectiles": 453,
+            "skill_states": 78,
+            "skill_transients": 83,
+            "telegraphs": 15
+          }
+        },
+        "paired-A4": {
+          "logic_equal_to_original_A1": {
+            "logic_event_sha256": true,
+            "logic_state_sha256": true,
+            "event_counts": true,
+            "population_max": true,
+            "fixture_adjustments": true,
+            "seed": true,
+            "frames_measured": true,
+            "all_750_frame_states": true
+          },
+          "mismatch_frames": [],
+          "warm_wall": {
+            "max_ms": 93.325,
+            "over_16_67ms": 615,
+            "over_33_33ms": 356,
+            "over_50ms": 24,
+            "p50_ms": 34.286,
+            "p95_ms": 48.259,
+            "p99_ms": 63.751,
+            "samples": 630
+          },
+          "full_wall": {
+            "max_ms": 109.375,
+            "over_16_67ms": 616,
+            "over_33_33ms": 357,
+            "over_50ms": 25,
+            "p50_ms": 32.921,
+            "p95_ms": 47.481,
+            "p99_ms": 63.751,
+            "samples": 750
+          },
+          "warm_median_stages": {
+            "advance_presentation_ms": 1.42,
+            "battle_tick_ms": 3.849,
+            "canvas_consume_events_ms": 0.341,
+            "canvas_refresh_ms": 2.236,
+            "frame_wall_ms": 34.286,
+            "hud_view_refresh_ms": 0.272,
+            "input_trace_ms": 0.009,
+            "present_messages_ms": 0.039,
+            "publish_music_context_ms": 0.02,
+            "sync_camera_obstacles_ms": 0.02
+          },
+          "warm_stage_summaries": {
+            "advance_presentation_ms": {
+              "max_ms": 5.109,
+              "over_16_67ms": 0,
+              "over_33_33ms": 0,
+              "over_50ms": 0,
+              "p50_ms": 1.42,
+              "p95_ms": 2.511,
+              "p99_ms": 2.763,
+              "samples": 630
+            },
+            "battle_tick_ms": {
+              "max_ms": 28.517,
+              "over_16_67ms": 2,
+              "over_33_33ms": 0,
+              "over_50ms": 0,
+              "p50_ms": 3.849,
+              "p95_ms": 6.429,
+              "p99_ms": 12.955,
+              "samples": 630
+            },
+            "canvas_consume_events_ms": {
+              "max_ms": 23.779,
+              "over_16_67ms": 1,
+              "over_33_33ms": 0,
+              "over_50ms": 0,
+              "p50_ms": 0.341,
+              "p95_ms": 1.035,
+              "p99_ms": 4.746,
+              "samples": 630
+            },
+            "canvas_refresh_ms": {
+              "max_ms": 8.398,
+              "over_16_67ms": 0,
+              "over_33_33ms": 0,
+              "over_50ms": 0,
+              "p50_ms": 2.236,
+              "p95_ms": 3.375,
+              "p99_ms": 4.213,
+              "samples": 630
+            },
+            "frame_wall_ms": {
+              "max_ms": 93.325,
+              "over_16_67ms": 615,
+              "over_33_33ms": 356,
+              "over_50ms": 24,
+              "p50_ms": 34.286,
+              "p95_ms": 48.259,
+              "p99_ms": 63.751,
+              "samples": 630
+            },
+            "hud_view_refresh_ms": {
+              "max_ms": 7.149,
+              "over_16_67ms": 0,
+              "over_33_33ms": 0,
+              "over_50ms": 0,
+              "p50_ms": 0.272,
+              "p95_ms": 4.069,
+              "p99_ms": 4.294,
+              "samples": 630
+            },
+            "input_trace_ms": {
+              "max_ms": 0.285,
+              "over_16_67ms": 0,
+              "over_33_33ms": 0,
+              "over_50ms": 0,
+              "p50_ms": 0.009,
+              "p95_ms": 0.011,
+              "p99_ms": 0.016,
+              "samples": 630
+            },
+            "present_messages_ms": {
+              "max_ms": 3.828,
+              "over_16_67ms": 0,
+              "over_33_33ms": 0,
+              "over_50ms": 0,
+              "p50_ms": 0.039,
+              "p95_ms": 0.052,
+              "p99_ms": 3.641,
+              "samples": 630
+            },
+            "publish_music_context_ms": {
+              "max_ms": 0.055,
+              "over_16_67ms": 0,
+              "over_33_33ms": 0,
+              "over_50ms": 0,
+              "p50_ms": 0.02,
+              "p95_ms": 0.023,
+              "p99_ms": 0.042,
+              "samples": 630
+            },
+            "sync_camera_obstacles_ms": {
+              "max_ms": 0.133,
+              "over_16_67ms": 0,
+              "over_33_33ms": 0,
+              "over_50ms": 0,
+              "p50_ms": 0.02,
+              "p95_ms": 0.03,
+              "p99_ms": 0.042,
+              "samples": 630
+            }
+          },
+          "gpu": {
+            "max_ms": 6.64099979400635,
+            "over_16_67ms": 0,
+            "over_33_33ms": 0,
+            "over_50ms": 0,
+            "p50_ms": 0.465000003576279,
+            "p95_ms": 2.98900008201599,
+            "p99_ms": 4.21799993515015,
+            "samples": 750
+          },
+          "viewport_cpu": {
+            "max_ms": 10.6199998855591,
+            "over_16_67ms": 0,
+            "over_33_33ms": 0,
+            "over_50ms": 0,
+            "p50_ms": 5.09800004959106,
+            "p95_ms": 8.21000003814697,
+            "p99_ms": 8.98600006103516,
+            "samples": 750
+          },
+          "warm_readbacks": {
+            "max": 0.0,
+            "p50": 0.0,
+            "p95": 0.0,
+            "p99": 0.0,
+            "samples": 630,
+            "total": 0.0
+          },
+          "event_counts": {
+            "ability_effect": 1,
+            "ability_release": 26,
+            "boss_impact": 3,
+            "boss_phase": 1,
+            "cast": 24,
+            "collaboration": 1,
+            "damage_dealt": 425,
+            "damage_taken": 16,
+            "enemy_release": 208,
+            "enemy_remove": 7,
+            "enemy_tell": 232,
+            "hurt": 16,
+            "kill": 59,
+            "mechanic": 2,
+            "message": 12,
+            "player_hit": 16,
+            "xp_pickup": 53
+          },
+          "population_max": {
+            "authored_transients": 4,
+            "effects": 14,
+            "enemies": 95,
+            "enemy_views": 95,
+            "gems": 34,
+            "hazards": 0,
+            "pending_patterns": 5,
+            "projectiles": 453,
+            "skill_states": 78,
+            "skill_transients": 83,
+            "telegraphs": 15
+          }
+        }
+      },
+      "B2_vs_bracketing_old_mean": {
+        "p50_ms": -2.6185000000000045,
+        "p95_ms": -2.1285000000000025,
+        "over_33_33ms": -79.0,
+        "over_50ms": -6.5
+      }
+    },
+    {
+      "case": "B17-war-chengong-dense",
+      "runs": {
+        "paired-A3": {
+          "logic_equal_to_original_A1": {
+            "logic_event_sha256": true,
+            "logic_state_sha256": true,
+            "event_counts": true,
+            "population_max": true,
+            "fixture_adjustments": true,
+            "seed": true,
+            "frames_measured": true,
+            "all_750_frame_states": true
+          },
+          "mismatch_frames": [],
+          "warm_wall": {
+            "max_ms": 86.249,
+            "over_16_67ms": 560,
+            "over_33_33ms": 319,
+            "over_50ms": 21,
+            "p50_ms": 33.546,
+            "p95_ms": 47.353,
+            "p99_ms": 59.744,
+            "samples": 630
+          },
+          "full_wall": {
+            "max_ms": 86.506,
+            "over_16_67ms": 622,
+            "over_33_33ms": 361,
+            "over_50ms": 23,
+            "p50_ms": 32.816,
+            "p95_ms": 46.826,
+            "p99_ms": 59.744,
+            "samples": 750
+          },
+          "warm_median_stages": {
+            "advance_presentation_ms": 1.446,
+            "battle_tick_ms": 3.806,
+            "canvas_consume_events_ms": 0.331,
+            "canvas_refresh_ms": 2.543,
+            "frame_wall_ms": 33.546,
+            "hud_view_refresh_ms": 0.296,
+            "input_trace_ms": 0.009,
+            "present_messages_ms": 0.038,
+            "publish_music_context_ms": 0.02,
+            "sync_camera_obstacles_ms": 0.02
+          },
+          "warm_stage_summaries": {
+            "advance_presentation_ms": {
+              "max_ms": 4.599,
+              "over_16_67ms": 0,
+              "over_33_33ms": 0,
+              "over_50ms": 0,
+              "p50_ms": 1.446,
+              "p95_ms": 2.499,
+              "p99_ms": 2.801,
+              "samples": 630
+            },
+            "battle_tick_ms": {
+              "max_ms": 42.234,
+              "over_16_67ms": 18,
+              "over_33_33ms": 1,
+              "over_50ms": 0,
+              "p50_ms": 3.806,
+              "p95_ms": 16.336,
+              "p99_ms": 17.381,
+              "samples": 630
+            },
+            "canvas_consume_events_ms": {
+              "max_ms": 21.576,
+              "over_16_67ms": 1,
+              "over_33_33ms": 0,
+              "over_50ms": 0,
+              "p50_ms": 0.331,
+              "p95_ms": 1.051,
+              "p99_ms": 4.269,
+              "samples": 630
+            },
+            "canvas_refresh_ms": {
+              "max_ms": 9.986,
+              "over_16_67ms": 0,
+              "over_33_33ms": 0,
+              "over_50ms": 0,
+              "p50_ms": 2.543,
+              "p95_ms": 3.544,
+              "p99_ms": 4.516,
+              "samples": 630
+            },
+            "frame_wall_ms": {
+              "max_ms": 86.249,
+              "over_16_67ms": 560,
+              "over_33_33ms": 319,
+              "over_50ms": 21,
+              "p50_ms": 33.546,
+              "p95_ms": 47.353,
+              "p99_ms": 59.744,
+              "samples": 630
+            },
+            "hud_view_refresh_ms": {
+              "max_ms": 8.003,
+              "over_16_67ms": 0,
+              "over_33_33ms": 0,
+              "over_50ms": 0,
+              "p50_ms": 0.296,
+              "p95_ms": 4.007,
+              "p99_ms": 4.24,
+              "samples": 630
+            },
+            "input_trace_ms": {
+              "max_ms": 0.046,
+              "over_16_67ms": 0,
+              "over_33_33ms": 0,
+              "over_50ms": 0,
+              "p50_ms": 0.009,
+              "p95_ms": 0.01,
+              "p99_ms": 0.015,
+              "samples": 630
+            },
+            "present_messages_ms": {
+              "max_ms": 6.196,
+              "over_16_67ms": 0,
+              "over_33_33ms": 0,
+              "over_50ms": 0,
+              "p50_ms": 0.038,
+              "p95_ms": 0.053,
+              "p99_ms": 3.497,
+              "samples": 630
+            },
+            "publish_music_context_ms": {
+              "max_ms": 0.211,
+              "over_16_67ms": 0,
+              "over_33_33ms": 0,
+              "over_50ms": 0,
+              "p50_ms": 0.02,
+              "p95_ms": 0.025,
+              "p99_ms": 0.049,
+              "samples": 630
+            },
+            "sync_camera_obstacles_ms": {
+              "max_ms": 0.064,
+              "over_16_67ms": 0,
+              "over_33_33ms": 0,
+              "over_50ms": 0,
+              "p50_ms": 0.02,
+              "p95_ms": 0.031,
+              "p99_ms": 0.033,
+              "samples": 630
+            }
+          },
+          "gpu": {
+            "max_ms": 6.15199995040894,
+            "over_16_67ms": 0,
+            "over_33_33ms": 0,
+            "over_50ms": 0,
+            "p50_ms": 0.449000000953674,
+            "p95_ms": 3.53600001335144,
+            "p99_ms": 4.89400005340576,
+            "samples": 750
+          },
+          "viewport_cpu": {
+            "max_ms": 12.9729995727539,
+            "over_16_67ms": 0,
+            "over_33_33ms": 0,
+            "over_50ms": 0,
+            "p50_ms": 5.24900007247925,
+            "p95_ms": 8.73799991607666,
+            "p99_ms": 9.44699954986572,
+            "samples": 750
+          },
+          "warm_readbacks": {
+            "max": 0.0,
+            "p50": 0.0,
+            "p95": 0.0,
+            "p99": 0.0,
+            "samples": 630,
+            "total": 0.0
+          },
+          "event_counts": {
+            "ability_effect": 1,
+            "ability_release": 26,
+            "boss_impact": 3,
+            "boss_phase": 1,
+            "cast": 24,
+            "collaboration": 1,
+            "damage_dealt": 414,
+            "damage_taken": 15,
+            "enemy_hazard_release": 3,
+            "enemy_release": 207,
+            "enemy_remove": 6,
+            "enemy_tell": 227,
+            "hurt": 15,
+            "kill": 47,
+            "mechanic": 2,
+            "message": 12,
+            "player_hit": 15,
+            "xp_pickup": 42
+          },
+          "population_max": {
+            "authored_transients": 4,
+            "effects": 12,
+            "enemies": 95,
+            "enemy_views": 95,
+            "gems": 20,
+            "hazards": 3,
+            "pending_patterns": 5,
+            "projectiles": 459,
+            "skill_states": 78,
+            "skill_transients": 84,
+            "telegraphs": 15
+          }
+        },
+        "paired-B2": {
+          "logic_equal_to_original_A1": {
+            "logic_event_sha256": true,
+            "logic_state_sha256": true,
+            "event_counts": true,
+            "population_max": true,
+            "fixture_adjustments": true,
+            "seed": true,
+            "frames_measured": true,
+            "all_750_frame_states": true
+          },
+          "mismatch_frames": [],
+          "warm_wall": {
+            "max_ms": 88.722,
+            "over_16_67ms": 540,
+            "over_33_33ms": 393,
+            "over_50ms": 19,
+            "p50_ms": 35.251,
+            "p95_ms": 46.787,
+            "p99_ms": 59.312,
+            "samples": 630
+          },
+          "full_wall": {
+            "max_ms": 88.722,
+            "over_16_67ms": 603,
+            "over_33_33ms": 430,
+            "over_50ms": 20,
+            "p50_ms": 34.504,
+            "p95_ms": 46.562,
+            "p99_ms": 59.312,
+            "samples": 750
+          },
+          "warm_median_stages": {
+            "advance_presentation_ms": 1.458,
+            "battle_tick_ms": 3.887,
+            "canvas_consume_events_ms": 0.338,
+            "canvas_refresh_ms": 2.746,
+            "frame_wall_ms": 35.251,
+            "hud_view_refresh_ms": 0.294,
+            "input_trace_ms": 0.009,
+            "present_messages_ms": 0.039,
+            "publish_music_context_ms": 0.02,
+            "sync_camera_obstacles_ms": 0.02
+          },
+          "warm_stage_summaries": {
+            "advance_presentation_ms": {
+              "max_ms": 5.614,
+              "over_16_67ms": 0,
+              "over_33_33ms": 0,
+              "over_50ms": 0,
+              "p50_ms": 1.458,
+              "p95_ms": 2.522,
+              "p99_ms": 2.794,
+              "samples": 630
+            },
+            "battle_tick_ms": {
+              "max_ms": 43.429,
+              "over_16_67ms": 21,
+              "over_33_33ms": 1,
+              "over_50ms": 0,
+              "p50_ms": 3.887,
+              "p95_ms": 15.615,
+              "p99_ms": 18.419,
+              "samples": 630
+            },
+            "canvas_consume_events_ms": {
+              "max_ms": 20.665,
+              "over_16_67ms": 1,
+              "over_33_33ms": 0,
+              "over_50ms": 0,
+              "p50_ms": 0.338,
+              "p95_ms": 1.048,
+              "p99_ms": 4.599,
+              "samples": 630
+            },
+            "canvas_refresh_ms": {
+              "max_ms": 7.074,
+              "over_16_67ms": 0,
+              "over_33_33ms": 0,
+              "over_50ms": 0,
+              "p50_ms": 2.746,
+              "p95_ms": 3.6,
+              "p99_ms": 3.9,
+              "samples": 630
+            },
+            "frame_wall_ms": {
+              "max_ms": 88.722,
+              "over_16_67ms": 540,
+              "over_33_33ms": 393,
+              "over_50ms": 19,
+              "p50_ms": 35.251,
+              "p95_ms": 46.787,
+              "p99_ms": 59.312,
+              "samples": 630
+            },
+            "hud_view_refresh_ms": {
+              "max_ms": 7.26,
+              "over_16_67ms": 0,
+              "over_33_33ms": 0,
+              "over_50ms": 0,
+              "p50_ms": 0.294,
+              "p95_ms": 4.068,
+              "p99_ms": 4.334,
+              "samples": 630
+            },
+            "input_trace_ms": {
+              "max_ms": 0.078,
+              "over_16_67ms": 0,
+              "over_33_33ms": 0,
+              "over_50ms": 0,
+              "p50_ms": 0.009,
+              "p95_ms": 0.01,
+              "p99_ms": 0.016,
+              "samples": 630
+            },
+            "present_messages_ms": {
+              "max_ms": 4.073,
+              "over_16_67ms": 0,
+              "over_33_33ms": 0,
+              "over_50ms": 0,
+              "p50_ms": 0.039,
+              "p95_ms": 0.053,
+              "p99_ms": 3.544,
+              "samples": 630
+            },
+            "publish_music_context_ms": {
+              "max_ms": 0.238,
+              "over_16_67ms": 0,
+              "over_33_33ms": 0,
+              "over_50ms": 0,
+              "p50_ms": 0.02,
+              "p95_ms": 0.024,
+              "p99_ms": 0.049,
+              "samples": 630
+            },
+            "sync_camera_obstacles_ms": {
+              "max_ms": 0.311,
+              "over_16_67ms": 0,
+              "over_33_33ms": 0,
+              "over_50ms": 0,
+              "p50_ms": 0.02,
+              "p95_ms": 0.031,
+              "p99_ms": 0.047,
+              "samples": 630
+            }
+          },
+          "gpu": {
+            "max_ms": 6.93800020217896,
+            "over_16_67ms": 0,
+            "over_33_33ms": 0,
+            "over_50ms": 0,
+            "p50_ms": 0.444999992847443,
+            "p95_ms": 3.3529999256134,
+            "p99_ms": 4.69399976730347,
+            "samples": 750
+          },
+          "viewport_cpu": {
+            "max_ms": 14.5069999694824,
+            "over_16_67ms": 0,
+            "over_33_33ms": 0,
+            "over_50ms": 0,
+            "p50_ms": 5.00600004196167,
+            "p95_ms": 8.3149995803833,
+            "p99_ms": 9.66600036621094,
+            "samples": 750
+          },
+          "warm_readbacks": {
+            "max": 0.0,
+            "p50": 0.0,
+            "p95": 0.0,
+            "p99": 0.0,
+            "samples": 630,
+            "total": 0.0
+          },
+          "event_counts": {
+            "ability_effect": 1,
+            "ability_release": 26,
+            "boss_impact": 3,
+            "boss_phase": 1,
+            "cast": 24,
+            "collaboration": 1,
+            "damage_dealt": 414,
+            "damage_taken": 15,
+            "enemy_hazard_release": 3,
+            "enemy_release": 207,
+            "enemy_remove": 6,
+            "enemy_tell": 227,
+            "hurt": 15,
+            "kill": 47,
+            "mechanic": 2,
+            "message": 12,
+            "player_hit": 15,
+            "xp_pickup": 42
+          },
+          "population_max": {
+            "authored_transients": 4,
+            "effects": 12,
+            "enemies": 95,
+            "enemy_views": 95,
+            "gems": 20,
+            "hazards": 3,
+            "pending_patterns": 5,
+            "projectiles": 459,
+            "skill_states": 78,
+            "skill_transients": 84,
+            "telegraphs": 15
+          }
+        },
+        "paired-A4": {
+          "logic_equal_to_original_A1": {
+            "logic_event_sha256": true,
+            "logic_state_sha256": true,
+            "event_counts": true,
+            "population_max": true,
+            "fixture_adjustments": true,
+            "seed": true,
+            "frames_measured": true,
+            "all_750_frame_states": true
+          },
+          "mismatch_frames": [],
+          "warm_wall": {
+            "max_ms": 93.685,
+            "over_16_67ms": 545,
+            "over_33_33ms": 322,
+            "over_50ms": 29,
+            "p50_ms": 33.663,
+            "p95_ms": 49.268,
+            "p99_ms": 63.447,
+            "samples": 630
+          },
+          "full_wall": {
+            "max_ms": 93.685,
+            "over_16_67ms": 607,
+            "over_33_33ms": 381,
+            "over_50ms": 30,
+            "p50_ms": 33.456,
+            "p95_ms": 48.266,
+            "p99_ms": 63.447,
+            "samples": 750
+          },
+          "warm_median_stages": {
+            "advance_presentation_ms": 1.324,
+            "battle_tick_ms": 3.795,
+            "canvas_consume_events_ms": 0.309,
+            "canvas_refresh_ms": 2.551,
+            "frame_wall_ms": 33.663,
+            "hud_view_refresh_ms": 0.276,
+            "input_trace_ms": 0.009,
+            "present_messages_ms": 0.037,
+            "publish_music_context_ms": 0.02,
+            "sync_camera_obstacles_ms": 0.019
+          },
+          "warm_stage_summaries": {
+            "advance_presentation_ms": {
+              "max_ms": 5.652,
+              "over_16_67ms": 0,
+              "over_33_33ms": 0,
+              "over_50ms": 0,
+              "p50_ms": 1.324,
+              "p95_ms": 2.582,
+              "p99_ms": 3.201,
+              "samples": 630
+            },
+            "battle_tick_ms": {
+              "max_ms": 44.332,
+              "over_16_67ms": 6,
+              "over_33_33ms": 1,
+              "over_50ms": 0,
+              "p50_ms": 3.795,
+              "p95_ms": 15.528,
+              "p99_ms": 16.359,
+              "samples": 630
+            },
+            "canvas_consume_events_ms": {
+              "max_ms": 22.474,
+              "over_16_67ms": 1,
+              "over_33_33ms": 0,
+              "over_50ms": 0,
+              "p50_ms": 0.309,
+              "p95_ms": 1.089,
+              "p99_ms": 4.415,
+              "samples": 630
+            },
+            "canvas_refresh_ms": {
+              "max_ms": 10.307,
+              "over_16_67ms": 0,
+              "over_33_33ms": 0,
+              "over_50ms": 0,
+              "p50_ms": 2.551,
+              "p95_ms": 3.467,
+              "p99_ms": 4.196,
+              "samples": 630
+            },
+            "frame_wall_ms": {
+              "max_ms": 93.685,
+              "over_16_67ms": 545,
+              "over_33_33ms": 322,
+              "over_50ms": 29,
+              "p50_ms": 33.663,
+              "p95_ms": 49.268,
+              "p99_ms": 63.447,
+              "samples": 630
+            },
+            "hud_view_refresh_ms": {
+              "max_ms": 7.46,
+              "over_16_67ms": 0,
+              "over_33_33ms": 0,
+              "over_50ms": 0,
+              "p50_ms": 0.276,
+              "p95_ms": 4.071,
+              "p99_ms": 4.333,
+              "samples": 630
+            },
+            "input_trace_ms": {
+              "max_ms": 0.088,
+              "over_16_67ms": 0,
+              "over_33_33ms": 0,
+              "over_50ms": 0,
+              "p50_ms": 0.009,
+              "p95_ms": 0.011,
+              "p99_ms": 0.015,
+              "samples": 630
+            },
+            "present_messages_ms": {
+              "max_ms": 8.179,
+              "over_16_67ms": 0,
+              "over_33_33ms": 0,
+              "over_50ms": 0,
+              "p50_ms": 0.037,
+              "p95_ms": 0.051,
+              "p99_ms": 3.526,
+              "samples": 630
+            },
+            "publish_music_context_ms": {
+              "max_ms": 2.379,
+              "over_16_67ms": 0,
+              "over_33_33ms": 0,
+              "over_50ms": 0,
+              "p50_ms": 0.02,
+              "p95_ms": 0.024,
+              "p99_ms": 0.053,
+              "samples": 630
+            },
+            "sync_camera_obstacles_ms": {
+              "max_ms": 0.382,
+              "over_16_67ms": 0,
+              "over_33_33ms": 0,
+              "over_50ms": 0,
+              "p50_ms": 0.019,
+              "p95_ms": 0.03,
+              "p99_ms": 0.032,
+              "samples": 630
+            }
+          },
+          "gpu": {
+            "max_ms": 6.7039999961853,
+            "over_16_67ms": 0,
+            "over_33_33ms": 0,
+            "over_50ms": 0,
+            "p50_ms": 0.446999996900558,
+            "p95_ms": 3.19000005722046,
+            "p99_ms": 4.55600023269653,
+            "samples": 750
+          },
+          "viewport_cpu": {
+            "max_ms": 23.8479995727539,
+            "over_16_67ms": 2,
+            "over_33_33ms": 0,
+            "over_50ms": 0,
+            "p50_ms": 4.76100015640259,
+            "p95_ms": 8.7519998550415,
+            "p99_ms": 10.5080003738403,
+            "samples": 750
+          },
+          "warm_readbacks": {
+            "max": 0.0,
+            "p50": 0.0,
+            "p95": 0.0,
+            "p99": 0.0,
+            "samples": 630,
+            "total": 0.0
+          },
+          "event_counts": {
+            "ability_effect": 1,
+            "ability_release": 26,
+            "boss_impact": 3,
+            "boss_phase": 1,
+            "cast": 24,
+            "collaboration": 1,
+            "damage_dealt": 414,
+            "damage_taken": 15,
+            "enemy_hazard_release": 3,
+            "enemy_release": 207,
+            "enemy_remove": 6,
+            "enemy_tell": 227,
+            "hurt": 15,
+            "kill": 47,
+            "mechanic": 2,
+            "message": 12,
+            "player_hit": 15,
+            "xp_pickup": 42
+          },
+          "population_max": {
+            "authored_transients": 4,
+            "effects": 12,
+            "enemies": 95,
+            "enemy_views": 95,
+            "gems": 20,
+            "hazards": 3,
+            "pending_patterns": 5,
+            "projectiles": 459,
+            "skill_states": 78,
+            "skill_transients": 84,
+            "telegraphs": 15
+          }
+        }
+      },
+      "B2_vs_bracketing_old_mean": {
+        "p50_ms": 1.646499999999996,
+        "p95_ms": -1.5235000000000056,
+        "over_33_33ms": 72.5,
+        "over_50ms": -6.0
+      }
+    }
+  ],
+  "limits": [
+    "Single bounded A-B-A triplet under observed16-worker load; does not estimate uncontented absolute latency.",
+    "Worker PID turnover intervals cannot fully recover exited-worker CPU ticks; exact intervals reported separately.",
+    "B2 human-Chen p95 and >50 counts exceed both old controls; small absolute noisy changes retained, not claimed universal improvement.",
+    "B2 war-Chen >33 count exceeds both old controls even though p95 and >50 are within bracket; retained, not hidden."
+  ],
+  "observation": "All3 runs retain16 external workers. New-pack2x initial wall-time regression is not reproduced against same-load old controls; old A3/A4 also exhibit slowed tick/input. Does not prove zero overhead or predict unloaded-machine performance."
+}

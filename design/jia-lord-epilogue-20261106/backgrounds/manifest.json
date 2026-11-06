@@ -1,0 +1,241 @@
+{
+  "version": 1,
+  "date": "2026-11-06",
+  "status": "background_art_ready_for_runtime",
+  "owner_scope": "assets/story/chronicle/lord-hall.png, lord-chamber.png and this backgrounds production directory only",
+  "generated_asset_count": 2,
+  "source_versions_selected": 2,
+  "unselected_versions": [],
+  "assets": [
+    {
+      "id": "lord-hall",
+      "selected_version": "v1",
+      "generator": "built-in image_gen.imagegen",
+      "generated_original": "/home/weathour/.codex/generated_images/01a1a9ec-261f-71e1-83ea-ff043bd6c5e7/exec-89c2dfd4-74fd-4236-9850-986cffb94942.png",
+      "raw_source": {
+        "path": "design/jia-lord-epilogue-20261106/backgrounds/source/lord-hall-v1.png",
+        "bytes": 2629290,
+        "sha256": "d9e41d93359e341edbddc129bf812cb94acafa68aa197eba6cac0a75edb9d1eb",
+        "size": [
+          1672,
+          941
+        ],
+        "mode": "RGB"
+      },
+      "exact_prompt": {
+        "path": "design/jia-lord-epilogue-20261106/backgrounds/prompts/lord-hall-v1.txt",
+        "sha256": "f547f854ba20981f40b9a718a71f9814c0c2b5b8c6b626a9a982255f255b05ce"
+      },
+      "actual_imagegen_references": [
+        {
+          "role": "style and same outer-command-compound architecture reference",
+          "file": {
+            "path": "assets/story/chronicle/camp.png",
+            "bytes": 2833765,
+            "sha256": "62ed4a914977cc031cc305b801a4c7e4686e86302e1ae840228212cd886a8c13",
+            "size": [
+              1672,
+              941
+            ],
+            "mode": "RGB"
+          }
+        }
+      ],
+      "processing": {
+        "tool": "Aseprite",
+        "script": "design/jia-lord-epilogue-20261106/backgrounds/qa/export_backgrounds.lua",
+        "operation": "Whole-image bilinear resize from1672x941 to1536x864; no cropping, no generated contents added, no transparency processing.",
+        "source_pixel_size": [
+          1672,
+          941
+        ],
+        "runtime_pixel_size": [
+          1536,
+          864
+        ],
+        "source_aspect_error_percent": 0.05313496280551222,
+        "retained_composition": "Entire source canvas retained; tiny generator aspect rounding normalized to exact16:9."
+      },
+      "output": {
+        "path": "assets/story/chronicle/lord-hall.png",
+        "bytes": 1920377,
+        "sha256": "b98bfac5023b69f4b5bb8988d04aabe0f70e3212c95bd3a229afbc5aba3bb7f2",
+        "size": [
+          1536,
+          864
+        ],
+        "mode": "RGB"
+      },
+      "actual_layout": {
+        "time": "day, soft late-morning sunshine with two warm lamps",
+        "architecture": "Three-bay high-beamed hall, red-black weathered wood columns, patched pale plaster, stone raised platform and central command seat/desk, orderly side seats and low tables, blank crimson banners, closed tied scrolls/books, courtyard and tiled eaves through right doorway.",
+        "dialogue_area": "Lower quarter is a broad subdued stone floor. Portrait faces overlay the left/right midground; principal command desk remains deeper in the center.",
+        "story_use": "New regional lord formal council/rebuilding/governance."
+      },
+      "selection": "v1 selected after local source and final-runtime view_image review; no rejected background generations."
+    },
+    {
+      "id": "lord-chamber",
+      "selected_version": "v1",
+      "generator": "built-in image_gen.imagegen",
+      "generated_original": "/home/weathour/.codex/generated_images/01a1a9ec-261f-71e1-83ea-ff043bd6c5e7/exec-fa40500f-f4d8-4810-a952-d93c1d4260ec.png",
+      "raw_source": {
+        "path": "design/jia-lord-epilogue-20261106/backgrounds/source/lord-chamber-v1.png",
+        "bytes": 2466568,
+        "sha256": "f37630e02318410f91bdd747f859b1170055d082c41175693e0eb4df12d81c23",
+        "size": [
+          1672,
+          941
+        ],
+        "mode": "RGB"
+      },
+      "exact_prompt": {
+        "path": "design/jia-lord-epilogue-20261106/backgrounds/prompts/lord-chamber-v1.txt",
+        "sha256": "0c4d72f281d00865343a4a3a2ee4cd44c071da1bf97acbb5648f420e242076e6"
+      },
+      "actual_imagegen_references": [
+        {
+          "role": "style and same outer-command-compound architecture reference",
+          "file": {
+            "path": "assets/story/chronicle/camp.png",
+            "bytes": 2833765,
+            "sha256": "62ed4a914977cc031cc305b801a4c7e4686e86302e1ae840228212cd886a8c13",
+            "size": [
+              1672,
+              941
+            ],
+            "mode": "RGB"
+          }
+        }
+      ],
+      "processing": {
+        "tool": "Aseprite",
+        "script": "design/jia-lord-epilogue-20261106/backgrounds/qa/export_backgrounds.lua",
+        "operation": "Whole-image bilinear resize from1672x941 to1536x864; no cropping, no generated contents added, no transparency processing.",
+        "source_pixel_size": [
+          1672,
+          941
+        ],
+        "runtime_pixel_size": [
+          1536,
+          864
+        ],
+        "source_aspect_error_percent": 0.05313496280551222,
+        "retained_composition": "Entire source canvas retained; tiny generator aspect rounding normalized to exact16:9."
+      },
+      "output": {
+        "path": "assets/story/chronicle/lord-chamber.png",
+        "bytes": 1782410,
+        "sha256": "3fde1c77dade675ddcded075884a8b8b009d0632a8f681316b6ddfeecb867c14",
+        "size": [
+          1536,
+          864
+        ],
+        "mode": "RGB"
+      },
+      "actual_layout": {
+        "time": "night, blue moonlit lattice windows and two warm oil lamps",
+        "architecture": "Same red-black timber and patched plaster, rear-central writing desk with scrolls, left low couch/cushions and mountain-painted folding screen, wrapped medicine/travel bags, right low shelf with horizontally laid armor pieces and folded crimson cloak.",
+        "dialogue_area": "Lower quarter is dark wooden floor. Pale casual portraits remain distinct against darker timber/screen sides; central night window and desk remain behind them.",
+        "story_use": "Private rest, practical daily conversation and light joking; no sexual staging."
+      },
+      "selection": "v1 selected after local source and final-runtime view_image review; no rejected background generations."
+    }
+  ],
+  "additional_context_images_inspected": [
+    {
+      "role": "Viewed for formal/crimson and casual/ivory portrait overlay contrast only; NOT passed to ImageGen and NOT modified.",
+      "file": {
+        "path": "design/jia-weisuo-20261027/jia-lord-smirk-v1.png",
+        "bytes": 2450588,
+        "sha256": "7b7db70adc10121752b97127583acf60c5880afa63e99dd551c2b39f492cc2c1",
+        "size": [
+          1024,
+          1536
+        ],
+        "mode": "RGBA"
+      }
+    },
+    {
+      "role": "Viewed for formal/crimson and casual/ivory portrait overlay contrast only; NOT passed to ImageGen and NOT modified.",
+      "file": {
+        "path": "design/jia-weisuo-20261027/jia-lord-laugh-v1.png",
+        "bytes": 2582549,
+        "sha256": "fe82bc77c8b9dac6c0cb9c2c705c05c6740cb67a1990726ada61c9f58c64ee2b",
+        "size": [
+          1024,
+          1536
+        ],
+        "mode": "RGBA"
+      }
+    },
+    {
+      "role": "Viewed for formal/crimson and casual/ivory portrait overlay contrast only; NOT passed to ImageGen and NOT modified.",
+      "file": {
+        "path": "design/jia-weisuo-20261027/jia-casual-laugh-v1.png",
+        "bytes": 2344114,
+        "sha256": "89c0794f9649fbe73a94d5d764ad4b58075d8b2448a24074ea15c11392471bad",
+        "size": [
+          1024,
+          1536
+        ],
+        "mode": "RGBA"
+      }
+    },
+    {
+      "role": "Viewed for formal/crimson and casual/ivory portrait overlay contrast only; NOT passed to ImageGen and NOT modified.",
+      "file": {
+        "path": "design/jia-weisuo-20261027/jia-casual-approach-v1.png",
+        "bytes": 2394721,
+        "sha256": "21f6c1edf3edaa261626b959b975849a56ad815d1167560e551a1fd88d62f143",
+        "size": [
+          1024,
+          1536
+        ],
+        "mode": "RGBA"
+      }
+    }
+  ],
+  "reproduction": {
+    "export_command": "/home/weathour/programs/aseprite-src/build/bin/aseprite --batch --script design/jia-lord-epilogue-20261106/backgrounds/qa/export_backgrounds.lua",
+    "audit_command": "python3 design/jia-lord-epilogue-20261106/backgrounds/qa/audit_backgrounds.py"
+  },
+  "qa": "design/jia-lord-epilogue-20261106/backgrounds/qa/background-qa.json",
+  "production_files": [
+    {
+      "path": "design/jia-lord-epilogue-20261106/backgrounds/prompts/lord-chamber-v1.txt",
+      "bytes": 2724,
+      "sha256": "0c4d72f281d00865343a4a3a2ee4cd44c071da1bf97acbb5648f420e242076e6"
+    },
+    {
+      "path": "design/jia-lord-epilogue-20261106/backgrounds/prompts/lord-hall-v1.txt",
+      "bytes": 3073,
+      "sha256": "f547f854ba20981f40b9a718a71f9814c0c2b5b8c6b626a9a982255f255b05ce"
+    },
+    {
+      "path": "design/jia-lord-epilogue-20261106/backgrounds/qa/audit_backgrounds.py",
+      "bytes": 6240,
+      "sha256": "b9cc1e363fb66aee0d1e3aaf486e00c85d2955d0a9548037aaf7dfda175f5fd2"
+    },
+    {
+      "path": "design/jia-lord-epilogue-20261106/backgrounds/qa/background-qa.json",
+      "bytes": 3666,
+      "sha256": "3aa567dea333a9a364dc4f8c1b53810fc54d699c2c6660a480d03bc5c493cd1b"
+    },
+    {
+      "path": "design/jia-lord-epilogue-20261106/backgrounds/qa/export_backgrounds.lua",
+      "bytes": 508,
+      "sha256": "2a8519613395ffaf786bd1a3d091385972c9e5bac2c2c3642b91cf2966d45a21"
+    },
+    {
+      "path": "design/jia-lord-epilogue-20261106/backgrounds/source/lord-chamber-v1.png",
+      "bytes": 2466568,
+      "sha256": "f37630e02318410f91bdd747f859b1170055d082c41175693e0eb4df12d81c23"
+    },
+    {
+      "path": "design/jia-lord-epilogue-20261106/backgrounds/source/lord-hall-v1.png",
+      "bytes": 2629290,
+      "sha256": "d9e41d93359e341edbddc129bf812cb94acafa68aa197eba6cac0a75edb9d1eb"
+    }
+  ]
+}

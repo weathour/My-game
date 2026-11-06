@@ -1,0 +1,1599 @@
+{
+  "schema_version": 1,
+  "status": "PASS",
+  "method": "Same external PCK-only fixture and seeds, source-free empty cwd; B01/B13. Default GL for after, explicit GL override for verified pre-art baseline. Percentiles follow the harness: sorted index ceil((n−1)q).",
+  "baseline": {
+    "report": "baseline/results.json",
+    "pck": {
+      "path": "/tmp/my-game-check.T3n1sj/pack-smokes/game.pck",
+      "exists": true,
+      "bytes": 225996316,
+      "sha256": "e2dd4dde223e0326a4a84a7890124de63620b9fb9d9f0391b17315cba489a079",
+      "matches_verified_pack_report": true
+    },
+    "renderer": {
+      "adapter": "NVIDIA GeForce RTX 5080",
+      "display_server": "X11",
+      "method_label": "gl_compatibility",
+      "project_default_method": "gl_compatibility",
+      "window_no_focus": true,
+      "window_position": "(320, 164)"
+    },
+    "log_diagnostics": {
+      "warning_count": 44,
+      "warning_kind": "invalid UIDs in packed actor scene references; Godot reports using text resource paths instead",
+      "script_error_count": 0,
+      "error_count": 0,
+      "process_exit": 0,
+      "project_result": "PCK_COMBAT_BENCH PASS",
+      "empty_cwd_after": []
+    }
+  },
+  "after": {
+    "report": "after/results.json",
+    "pck": {
+      "path": "/tmp/jia-lord-combat-fresh-build/game.pck",
+      "bytes": 228248568,
+      "sha256": "292dd492473a73403a851e38b670e0b37d8ad2c4e47b10a0d93850a365f7c3bf"
+    },
+    "renderer": {
+      "adapter": "NVIDIA GeForce RTX 5080",
+      "display_server": "X11",
+      "method_label": "project-default",
+      "project_default_method": "gl_compatibility",
+      "window_no_focus": true,
+      "window_position": "(1920, 904)"
+    },
+    "runtime_log": {
+      "path": "after/native-benchmark.log",
+      "warning_lines": 44,
+      "error_lines": 0,
+      "exit_status": 0,
+      "pass_marker": "PCK_COMBAT_BENCH PASS",
+      "cwd_after": []
+    },
+    "export_log": {
+      "path": "after/export.log",
+      "error_lines": 0,
+      "warning_lines": 0,
+      "exit_status": 0
+    }
+  },
+  "freeze_hashes": {
+    "project.godot": "8c41f1994a2af553268f57f6161a6ba196930a4297478d01c16acdd6b7e8f16e",
+    "export_presets.cfg": "7bfdd57b57f098610a4e243d6c9c22673e132748400f319ca1dd945a6f936a42",
+    "scripts/ui/chronicle/battle_canvas.gd": "da52700e73f8cd790f61b683cbc2dfd7288ee0455c4c8fdf0e35b265a606d372",
+    "scripts/ui/chronicle/battle_view.gd": "9609ebf7fcb17cd75ac2019d0347c36166b1f52cf055787fa0467faf56f14834",
+    "scripts/ui/chronicle/jia_appearance.gd": "c35278be418f35630d96dc3b1ec6168624a114855e6005b554b274ace3e7ded6",
+    "assets/players/jia-campaign/manifest.json": "7e40ae6b2b41b140f6e13580b5e8225ed62abf722555725128da46343b6208e2",
+    "assets/players/jia-campaign/jia-campaign.tscn": "f0789aefdf45e0650131cd706c506c31a9d9acce25e7f1fbb1342e50e9dff294",
+    "assets/players/jia-campaign/jia_campaign_visual.gd": "22d921d870273522b8642eb01de293dcb3fa9f2a0e2c97c414d8b02673820a78",
+    "assets/players/jia-campaign/dao-idle.png": "aabd1d1e947a24dbd07975e9b47c91d565bbf06b300f120ff9bfdb992fb16bfc",
+    "assets/players/jia-campaign/dao-run.png": "af028b7ca97dbd95ce46ca07f96c8c03abd3d79c7ba7abbf5cbe377572c00d75",
+    "assets/players/jia-campaign/dao-attack.png": "756add418edb117944f75bef2a4de757e62b2f71e223137828cf47f695a70536",
+    "assets/players/jia-campaign/dao-sweep.png": "950df211ce0ea6d22562d9ebed972f7fc7e4b7098716e060ef992b0092b10638",
+    "assets/players/jia-campaign/dao-break.png": "cfe8168be581c00a10058cb185b75217b2ec0ddb5654df20159933df35072bab",
+    "assets/players/jia-campaign/spear-idle.png": "e85b895198bd198f6f3ebf3840c8d4064944f0d814c598a2ee9bb6eeb9efeece",
+    "assets/players/jia-campaign/spear-run.png": "74392f8a8a72ee11ab2d34c58f16001f88cdb46a72e5837d5674f78f7d2173da",
+    "assets/players/jia-campaign/spear-attack.png": "43a1cd8542309b2324c71c549190360fae71c8161a8a00284429329e00123147",
+    "assets/players/jia-campaign/spear-sweep.png": "8f48515416520c0b0055a8ee66e6051c2d39b19905509b5041fee7244088d2f2",
+    "assets/players/jia-campaign/spear-break.png": "67f0fd0a814eafbf9c69b0742d8b24a5d5f4f5d13b4d9b6c8e7f77d3d685ba4f",
+    "assets/players/jia-campaign/campaign-head.png": "be637acf39df1fdd3a535225a9285e8e72feeaef42a8ef7377a5815cfc2fc6b8"
+  },
+  "scenarios": [
+    {
+      "stage_id": "B01",
+      "seed": 2026110511,
+      "input_facts_identical": true,
+      "baseline_facts": {
+        "stage_id": "B01",
+        "seed": 2026110511,
+        "frames_requested": 360,
+        "active_frames": 360,
+        "terminal_frames": 0,
+        "party": [
+          "JIA",
+          "F11",
+          "N16"
+        ],
+        "fixture_adjustments": [
+          {
+            "factor": 10.0,
+            "purpose": "avoid terminal frames while real damage/AI remains enabled",
+            "type": "party_hp_multiplier"
+          }
+        ],
+        "event_counts": {
+          "ability_release": 10,
+          "cast": 10,
+          "damage_dealt": 10,
+          "kill": 10,
+          "message": 8,
+          "xp_pickup": 5
+        },
+        "population_max": {
+          "effects": 3,
+          "enemies": 24,
+          "enemy_views": 24,
+          "hazards": 0,
+          "projectiles": 2
+        },
+        "wave_population_samples": [
+          {
+            "bosses": 0,
+            "derivatives": 0,
+            "effects": 2,
+            "enemies": 0,
+            "enemy_views": 0,
+            "frame": 0,
+            "ordinary_alive": 0,
+            "projectiles": 0
+          },
+          {
+            "bosses": 0,
+            "derivatives": 0,
+            "effects": 0,
+            "enemies": 4,
+            "enemy_views": 4,
+            "frame": 60,
+            "ordinary_alive": 4,
+            "projectiles": 1
+          },
+          {
+            "bosses": 0,
+            "derivatives": 0,
+            "effects": 0,
+            "enemies": 7,
+            "enemy_views": 7,
+            "frame": 120,
+            "ordinary_alive": 7,
+            "projectiles": 0
+          },
+          {
+            "bosses": 0,
+            "derivatives": 0,
+            "effects": 0,
+            "enemies": 15,
+            "enemy_views": 15,
+            "frame": 180,
+            "ordinary_alive": 15,
+            "projectiles": 0
+          },
+          {
+            "bosses": 0,
+            "derivatives": 0,
+            "effects": 0,
+            "enemies": 18,
+            "enemy_views": 18,
+            "frame": 240,
+            "ordinary_alive": 18,
+            "projectiles": 2
+          },
+          {
+            "bosses": 0,
+            "derivatives": 0,
+            "effects": 0,
+            "enemies": 20,
+            "enemy_views": 20,
+            "frame": 300,
+            "ordinary_alive": 20,
+            "projectiles": 1
+          }
+        ],
+        "final_counts": {
+          "effects": 0,
+          "enemies": 18,
+          "enemy_views": 18,
+          "hazards": 0,
+          "outcome": "",
+          "projectiles": 0
+        },
+        "player_hp_samples": [
+          {
+            "frame": 0,
+            "hp": {
+              "F11": 2990.0,
+              "JIA": 364.0,
+              "N16": 3140.0
+            }
+          },
+          {
+            "frame": 120,
+            "hp": {
+              "F11": 2990.0,
+              "JIA": 364.0,
+              "N16": 3140.0
+            }
+          },
+          {
+            "frame": 240,
+            "hp": {
+              "F11": 2990.0,
+              "JIA": 364.0,
+              "N16": 3140.0
+            }
+          }
+        ]
+      },
+      "after_facts": {
+        "stage_id": "B01",
+        "seed": 2026110511,
+        "frames_requested": 360,
+        "active_frames": 360,
+        "terminal_frames": 0,
+        "party": [
+          "JIA",
+          "F11",
+          "N16"
+        ],
+        "fixture_adjustments": [
+          {
+            "factor": 10.0,
+            "purpose": "avoid terminal frames while real damage/AI remains enabled",
+            "type": "party_hp_multiplier"
+          }
+        ],
+        "event_counts": {
+          "ability_release": 10,
+          "cast": 10,
+          "damage_dealt": 10,
+          "kill": 10,
+          "message": 8,
+          "xp_pickup": 5
+        },
+        "population_max": {
+          "effects": 3,
+          "enemies": 24,
+          "enemy_views": 24,
+          "hazards": 0,
+          "projectiles": 2
+        },
+        "wave_population_samples": [
+          {
+            "bosses": 0,
+            "derivatives": 0,
+            "effects": 2,
+            "enemies": 0,
+            "enemy_views": 0,
+            "frame": 0,
+            "ordinary_alive": 0,
+            "projectiles": 0
+          },
+          {
+            "bosses": 0,
+            "derivatives": 0,
+            "effects": 0,
+            "enemies": 4,
+            "enemy_views": 4,
+            "frame": 60,
+            "ordinary_alive": 4,
+            "projectiles": 1
+          },
+          {
+            "bosses": 0,
+            "derivatives": 0,
+            "effects": 0,
+            "enemies": 7,
+            "enemy_views": 7,
+            "frame": 120,
+            "ordinary_alive": 7,
+            "projectiles": 0
+          },
+          {
+            "bosses": 0,
+            "derivatives": 0,
+            "effects": 0,
+            "enemies": 15,
+            "enemy_views": 15,
+            "frame": 180,
+            "ordinary_alive": 15,
+            "projectiles": 0
+          },
+          {
+            "bosses": 0,
+            "derivatives": 0,
+            "effects": 0,
+            "enemies": 18,
+            "enemy_views": 18,
+            "frame": 240,
+            "ordinary_alive": 18,
+            "projectiles": 2
+          },
+          {
+            "bosses": 0,
+            "derivatives": 0,
+            "effects": 0,
+            "enemies": 20,
+            "enemy_views": 20,
+            "frame": 300,
+            "ordinary_alive": 20,
+            "projectiles": 1
+          }
+        ],
+        "final_counts": {
+          "effects": 0,
+          "enemies": 18,
+          "enemy_views": 18,
+          "hazards": 0,
+          "outcome": "",
+          "projectiles": 0
+        },
+        "player_hp_samples": [
+          {
+            "frame": 0,
+            "hp": {
+              "F11": 2990.0,
+              "JIA": 364.0,
+              "N16": 3140.0
+            }
+          },
+          {
+            "frame": 120,
+            "hp": {
+              "F11": 2990.0,
+              "JIA": 364.0,
+              "N16": 3140.0
+            }
+          },
+          {
+            "frame": 240,
+            "hp": {
+              "F11": 2990.0,
+              "JIA": 364.0,
+              "N16": 3140.0
+            }
+          }
+        ]
+      },
+      "metrics": {
+        "baseline": {
+          "frame_wall_ms": {
+            "samples": 360,
+            "p50": 7.772,
+            "p95": 12.874,
+            "p99": 24.445,
+            "max": 53.711
+          },
+          "battle_tick_ms": {
+            "samples": 360,
+            "p50": 0.475,
+            "p95": 0.874,
+            "p99": 1.654,
+            "max": 2.772
+          },
+          "canvas_refresh_ms": {
+            "samples": 360,
+            "p50": 0.445,
+            "p95": 1.095,
+            "p99": 2.407,
+            "max": 7.966
+          },
+          "hud_view_refresh_ms": {
+            "samples": 360,
+            "p50": 0.264,
+            "p95": 3.542,
+            "p99": 4.058,
+            "max": 8.561
+          },
+          "sync_camera_obstacles_ms": {
+            "samples": 360,
+            "p50": 0.025,
+            "p95": 0.033,
+            "p99": 0.102,
+            "max": 0.78
+          },
+          "wall_threshold_counts": {
+            ">16.67ms": 7,
+            ">33.33ms": 1,
+            ">50ms": 1
+          },
+          "canvas_trace": {
+            "samples": 360,
+            "draw_us": {
+              "samples": 360,
+              "p50": 275.0,
+              "p95": 393.0,
+              "p99": 873.0,
+              "max": 1804
+            },
+            "foreground_us": {
+              "samples": 360,
+              "p50": 406.0,
+              "p95": 1038.0,
+              "p99": 5497.0,
+              "max": 9953
+            },
+            "bounds_readbacks_total": 0,
+            "bounds_readback_us_total": 0,
+            "process_frame_delta_not_one_count": 0
+          }
+        },
+        "after": {
+          "frame_wall_ms": {
+            "samples": 360,
+            "p50": 7.883,
+            "p95": 13.253,
+            "p99": 20.555,
+            "max": 48.777
+          },
+          "battle_tick_ms": {
+            "samples": 360,
+            "p50": 0.457,
+            "p95": 0.798,
+            "p99": 1.209,
+            "max": 3.339
+          },
+          "canvas_refresh_ms": {
+            "samples": 360,
+            "p50": 0.434,
+            "p95": 0.898,
+            "p99": 3.35,
+            "max": 7.699
+          },
+          "hud_view_refresh_ms": {
+            "samples": 360,
+            "p50": 0.274,
+            "p95": 3.692,
+            "p99": 5.108,
+            "max": 7.49
+          },
+          "sync_camera_obstacles_ms": {
+            "samples": 360,
+            "p50": 0.026,
+            "p95": 0.039,
+            "p99": 0.096,
+            "max": 1.57
+          },
+          "wall_threshold_counts": {
+            ">16.67ms": 4,
+            ">33.33ms": 1,
+            ">50ms": 0
+          },
+          "canvas_trace": {
+            "samples": 360,
+            "draw_us": {
+              "samples": 360,
+              "p50": 283.0,
+              "p95": 428.0,
+              "p99": 1090.0,
+              "max": 6581
+            },
+            "foreground_us": {
+              "samples": 360,
+              "p50": 417.0,
+              "p95": 1100.0,
+              "p99": 2669.0,
+              "max": 7319
+            },
+            "bounds_readbacks_total": 0,
+            "bounds_readback_us_total": 0,
+            "process_frame_delta_not_one_count": 0
+          }
+        }
+      },
+      "JIA_switches_after": [
+        {
+          "frame": 0,
+          "appearance": "common",
+          "script_path": "res://assets/players/jia/jia_visual.gd",
+          "last_clip": "dao-attack",
+          "texture_count": 6,
+          "texture_paths": [
+            "res://assets/players/jia/dao-attack.png",
+            "res://assets/players/jia/dao-idle.png",
+            "res://assets/players/jia/dao-run.png",
+            "res://assets/players/jia/spear-attack.png",
+            "res://assets/players/jia/spear-idle.png",
+            "res://assets/players/jia/spear-run.png"
+          ],
+          "texture_rids": [
+            "RID(322122547221)",
+            "RID(326417514518)",
+            "RID(330712481815)",
+            "RID(335007449112)",
+            "RID(339302416409)",
+            "RID(343597383706)"
+          ],
+          "refresh_ms": 7.699
+        }
+      ],
+      "baseline_first_appearance": {
+        "appearance": null,
+        "script_path": "res://assets/players/jia/jia_visual.gd"
+      },
+      "after_first_appearance": {
+        "appearance": "common",
+        "script_path": "res://assets/players/jia/jia_visual.gd"
+      }
+    },
+    {
+      "stage_id": "B13",
+      "seed": 2026110513,
+      "input_facts_identical": true,
+      "baseline_facts": {
+        "stage_id": "B13",
+        "seed": 2026110513,
+        "frames_requested": 1500,
+        "active_frames": 1500,
+        "terminal_frames": 0,
+        "party": [
+          "JIA",
+          "F11",
+          "N16"
+        ],
+        "fixture_adjustments": [
+          {
+            "factor": 10.0,
+            "purpose": "avoid terminal frames while real damage/AI remains enabled",
+            "type": "party_hp_multiplier"
+          },
+          {
+            "factor": 8.0,
+            "purpose": "hold the real B13 wave near its authored cap during the 25-second sample",
+            "type": "ordinary_enemy_hp_multiplier"
+          },
+          {
+            "boss_kills": 100000,
+            "boss_time": 100000.0,
+            "purpose": "keep the B13 sample in its real dense ordinary wave",
+            "type": "boss_gate_deferred"
+          }
+        ],
+        "event_counts": {
+          "ability_release": 54,
+          "cast": 50,
+          "damage_dealt": 209,
+          "damage_taken": 2,
+          "enemy_release": 141,
+          "enemy_tell": 144,
+          "hurt": 2,
+          "kill": 22,
+          "mechanic": 4,
+          "message": 25,
+          "player_hit": 2,
+          "xp_pickup": 14
+        },
+        "population_max": {
+          "effects": 10,
+          "enemies": 82,
+          "enemy_views": 82,
+          "hazards": 0,
+          "projectiles": 25
+        },
+        "wave_population_samples": [
+          {
+            "bosses": 0,
+            "derivatives": 0,
+            "effects": 2,
+            "enemies": 0,
+            "enemy_views": 0,
+            "frame": 0,
+            "ordinary_alive": 0,
+            "projectiles": 0
+          },
+          {
+            "bosses": 0,
+            "derivatives": 0,
+            "effects": 0,
+            "enemies": 6,
+            "enemy_views": 6,
+            "frame": 60,
+            "ordinary_alive": 6,
+            "projectiles": 1
+          },
+          {
+            "bosses": 0,
+            "derivatives": 0,
+            "effects": 0,
+            "enemies": 18,
+            "enemy_views": 18,
+            "frame": 120,
+            "ordinary_alive": 18,
+            "projectiles": 0
+          },
+          {
+            "bosses": 0,
+            "derivatives": 0,
+            "effects": 2,
+            "enemies": 24,
+            "enemy_views": 24,
+            "frame": 180,
+            "ordinary_alive": 24,
+            "projectiles": 1
+          },
+          {
+            "bosses": 0,
+            "derivatives": 0,
+            "effects": 2,
+            "enemies": 35,
+            "enemy_views": 35,
+            "frame": 240,
+            "ordinary_alive": 35,
+            "projectiles": 2
+          },
+          {
+            "bosses": 0,
+            "derivatives": 0,
+            "effects": 2,
+            "enemies": 40,
+            "enemy_views": 40,
+            "frame": 300,
+            "ordinary_alive": 40,
+            "projectiles": 4
+          },
+          {
+            "bosses": 0,
+            "derivatives": 0,
+            "effects": 2,
+            "enemies": 51,
+            "enemy_views": 51,
+            "frame": 360,
+            "ordinary_alive": 51,
+            "projectiles": 7
+          },
+          {
+            "bosses": 0,
+            "derivatives": 0,
+            "effects": 4,
+            "enemies": 62,
+            "enemy_views": 62,
+            "frame": 420,
+            "ordinary_alive": 62,
+            "projectiles": 10
+          },
+          {
+            "bosses": 0,
+            "derivatives": 0,
+            "effects": 2,
+            "enemies": 67,
+            "enemy_views": 67,
+            "frame": 480,
+            "ordinary_alive": 67,
+            "projectiles": 14
+          },
+          {
+            "bosses": 0,
+            "derivatives": 0,
+            "effects": 4,
+            "enemies": 78,
+            "enemy_views": 78,
+            "frame": 540,
+            "ordinary_alive": 78,
+            "projectiles": 16
+          },
+          {
+            "bosses": 0,
+            "derivatives": 0,
+            "effects": 2,
+            "enemies": 82,
+            "enemy_views": 82,
+            "frame": 600,
+            "ordinary_alive": 82,
+            "projectiles": 18
+          },
+          {
+            "bosses": 0,
+            "derivatives": 0,
+            "effects": 5,
+            "enemies": 78,
+            "enemy_views": 78,
+            "frame": 660,
+            "ordinary_alive": 78,
+            "projectiles": 18
+          },
+          {
+            "bosses": 0,
+            "derivatives": 0,
+            "effects": 4,
+            "enemies": 81,
+            "enemy_views": 81,
+            "frame": 720,
+            "ordinary_alive": 81,
+            "projectiles": 19
+          },
+          {
+            "bosses": 0,
+            "derivatives": 0,
+            "effects": 2,
+            "enemies": 82,
+            "enemy_views": 82,
+            "frame": 780,
+            "ordinary_alive": 82,
+            "projectiles": 17
+          },
+          {
+            "bosses": 0,
+            "derivatives": 0,
+            "effects": 4,
+            "enemies": 78,
+            "enemy_views": 78,
+            "frame": 840,
+            "ordinary_alive": 78,
+            "projectiles": 19
+          },
+          {
+            "bosses": 0,
+            "derivatives": 0,
+            "effects": 5,
+            "enemies": 82,
+            "enemy_views": 82,
+            "frame": 900,
+            "ordinary_alive": 82,
+            "projectiles": 17
+          },
+          {
+            "bosses": 0,
+            "derivatives": 0,
+            "effects": 3,
+            "enemies": 82,
+            "enemy_views": 82,
+            "frame": 960,
+            "ordinary_alive": 82,
+            "projectiles": 17
+          },
+          {
+            "bosses": 0,
+            "derivatives": 0,
+            "effects": 0,
+            "enemies": 82,
+            "enemy_views": 82,
+            "frame": 1020,
+            "ordinary_alive": 82,
+            "projectiles": 21
+          },
+          {
+            "bosses": 0,
+            "derivatives": 0,
+            "effects": 2,
+            "enemies": 82,
+            "enemy_views": 82,
+            "frame": 1080,
+            "ordinary_alive": 82,
+            "projectiles": 19
+          },
+          {
+            "bosses": 0,
+            "derivatives": 0,
+            "effects": 0,
+            "enemies": 82,
+            "enemy_views": 82,
+            "frame": 1140,
+            "ordinary_alive": 82,
+            "projectiles": 21
+          },
+          {
+            "bosses": 0,
+            "derivatives": 0,
+            "effects": 2,
+            "enemies": 82,
+            "enemy_views": 82,
+            "frame": 1200,
+            "ordinary_alive": 82,
+            "projectiles": 17
+          },
+          {
+            "bosses": 0,
+            "derivatives": 0,
+            "effects": 4,
+            "enemies": 81,
+            "enemy_views": 81,
+            "frame": 1260,
+            "ordinary_alive": 81,
+            "projectiles": 18
+          },
+          {
+            "bosses": 0,
+            "derivatives": 0,
+            "effects": 2,
+            "enemies": 82,
+            "enemy_views": 82,
+            "frame": 1320,
+            "ordinary_alive": 82,
+            "projectiles": 19
+          },
+          {
+            "bosses": 0,
+            "derivatives": 0,
+            "effects": 2,
+            "enemies": 82,
+            "enemy_views": 82,
+            "frame": 1380,
+            "ordinary_alive": 82,
+            "projectiles": 19
+          },
+          {
+            "bosses": 0,
+            "derivatives": 0,
+            "effects": 6,
+            "enemies": 75,
+            "enemy_views": 75,
+            "frame": 1440,
+            "ordinary_alive": 75,
+            "projectiles": 23
+          }
+        ],
+        "final_counts": {
+          "effects": 1,
+          "enemies": 82,
+          "enemy_views": 82,
+          "hazards": 0,
+          "outcome": "",
+          "projectiles": 22
+        },
+        "player_hp_samples": [
+          {
+            "frame": 0,
+            "hp": {
+              "F11": 2990.0,
+              "JIA": 364.0,
+              "N16": 3140.0
+            }
+          },
+          {
+            "frame": 120,
+            "hp": {
+              "F11": 2990.0,
+              "JIA": 364.0,
+              "N16": 3140.0
+            }
+          },
+          {
+            "frame": 240,
+            "hp": {
+              "F11": 2990.0,
+              "JIA": 364.0,
+              "N16": 3140.0
+            }
+          },
+          {
+            "frame": 360,
+            "hp": {
+              "F11": 2990.0,
+              "JIA": 364.0,
+              "N16": 3140.0
+            }
+          },
+          {
+            "frame": 480,
+            "hp": {
+              "F11": 2990.0,
+              "JIA": 364.0,
+              "N16": 3140.0
+            }
+          },
+          {
+            "frame": 600,
+            "hp": {
+              "F11": 2990.0,
+              "JIA": 364.0,
+              "N16": 3140.0
+            }
+          },
+          {
+            "frame": 720,
+            "hp": {
+              "F11": 2990.0,
+              "JIA": 364.0,
+              "N16": 3140.0
+            }
+          },
+          {
+            "frame": 840,
+            "hp": {
+              "F11": 2990.0,
+              "JIA": 364.0,
+              "N16": 3140.0
+            }
+          },
+          {
+            "frame": 960,
+            "hp": {
+              "F11": 2969.55918367347,
+              "JIA": 364.0,
+              "N16": 3140.0
+            }
+          },
+          {
+            "frame": 1080,
+            "hp": {
+              "F11": 2949.11836734694,
+              "JIA": 364.0,
+              "N16": 3140.0
+            }
+          },
+          {
+            "frame": 1200,
+            "hp": {
+              "F11": 2949.11836734694,
+              "JIA": 364.0,
+              "N16": 3140.0
+            }
+          },
+          {
+            "frame": 1320,
+            "hp": {
+              "F11": 2949.11836734694,
+              "JIA": 364.0,
+              "N16": 3140.0
+            }
+          },
+          {
+            "frame": 1440,
+            "hp": {
+              "F11": 2949.11836734694,
+              "JIA": 364.0,
+              "N16": 3140.0
+            }
+          }
+        ]
+      },
+      "after_facts": {
+        "stage_id": "B13",
+        "seed": 2026110513,
+        "frames_requested": 1500,
+        "active_frames": 1500,
+        "terminal_frames": 0,
+        "party": [
+          "JIA",
+          "F11",
+          "N16"
+        ],
+        "fixture_adjustments": [
+          {
+            "factor": 10.0,
+            "purpose": "avoid terminal frames while real damage/AI remains enabled",
+            "type": "party_hp_multiplier"
+          },
+          {
+            "factor": 8.0,
+            "purpose": "hold the real B13 wave near its authored cap during the 25-second sample",
+            "type": "ordinary_enemy_hp_multiplier"
+          },
+          {
+            "boss_kills": 100000,
+            "boss_time": 100000.0,
+            "purpose": "keep the B13 sample in its real dense ordinary wave",
+            "type": "boss_gate_deferred"
+          }
+        ],
+        "event_counts": {
+          "ability_release": 54,
+          "cast": 50,
+          "damage_dealt": 209,
+          "damage_taken": 2,
+          "enemy_release": 141,
+          "enemy_tell": 144,
+          "hurt": 2,
+          "kill": 22,
+          "mechanic": 4,
+          "message": 25,
+          "player_hit": 2,
+          "xp_pickup": 14
+        },
+        "population_max": {
+          "effects": 10,
+          "enemies": 82,
+          "enemy_views": 82,
+          "hazards": 0,
+          "projectiles": 25
+        },
+        "wave_population_samples": [
+          {
+            "bosses": 0,
+            "derivatives": 0,
+            "effects": 2,
+            "enemies": 0,
+            "enemy_views": 0,
+            "frame": 0,
+            "ordinary_alive": 0,
+            "projectiles": 0
+          },
+          {
+            "bosses": 0,
+            "derivatives": 0,
+            "effects": 0,
+            "enemies": 6,
+            "enemy_views": 6,
+            "frame": 60,
+            "ordinary_alive": 6,
+            "projectiles": 1
+          },
+          {
+            "bosses": 0,
+            "derivatives": 0,
+            "effects": 0,
+            "enemies": 18,
+            "enemy_views": 18,
+            "frame": 120,
+            "ordinary_alive": 18,
+            "projectiles": 0
+          },
+          {
+            "bosses": 0,
+            "derivatives": 0,
+            "effects": 2,
+            "enemies": 24,
+            "enemy_views": 24,
+            "frame": 180,
+            "ordinary_alive": 24,
+            "projectiles": 1
+          },
+          {
+            "bosses": 0,
+            "derivatives": 0,
+            "effects": 2,
+            "enemies": 35,
+            "enemy_views": 35,
+            "frame": 240,
+            "ordinary_alive": 35,
+            "projectiles": 2
+          },
+          {
+            "bosses": 0,
+            "derivatives": 0,
+            "effects": 2,
+            "enemies": 40,
+            "enemy_views": 40,
+            "frame": 300,
+            "ordinary_alive": 40,
+            "projectiles": 4
+          },
+          {
+            "bosses": 0,
+            "derivatives": 0,
+            "effects": 2,
+            "enemies": 51,
+            "enemy_views": 51,
+            "frame": 360,
+            "ordinary_alive": 51,
+            "projectiles": 7
+          },
+          {
+            "bosses": 0,
+            "derivatives": 0,
+            "effects": 4,
+            "enemies": 62,
+            "enemy_views": 62,
+            "frame": 420,
+            "ordinary_alive": 62,
+            "projectiles": 10
+          },
+          {
+            "bosses": 0,
+            "derivatives": 0,
+            "effects": 2,
+            "enemies": 67,
+            "enemy_views": 67,
+            "frame": 480,
+            "ordinary_alive": 67,
+            "projectiles": 14
+          },
+          {
+            "bosses": 0,
+            "derivatives": 0,
+            "effects": 4,
+            "enemies": 78,
+            "enemy_views": 78,
+            "frame": 540,
+            "ordinary_alive": 78,
+            "projectiles": 16
+          },
+          {
+            "bosses": 0,
+            "derivatives": 0,
+            "effects": 2,
+            "enemies": 82,
+            "enemy_views": 82,
+            "frame": 600,
+            "ordinary_alive": 82,
+            "projectiles": 18
+          },
+          {
+            "bosses": 0,
+            "derivatives": 0,
+            "effects": 5,
+            "enemies": 78,
+            "enemy_views": 78,
+            "frame": 660,
+            "ordinary_alive": 78,
+            "projectiles": 18
+          },
+          {
+            "bosses": 0,
+            "derivatives": 0,
+            "effects": 4,
+            "enemies": 81,
+            "enemy_views": 81,
+            "frame": 720,
+            "ordinary_alive": 81,
+            "projectiles": 19
+          },
+          {
+            "bosses": 0,
+            "derivatives": 0,
+            "effects": 2,
+            "enemies": 82,
+            "enemy_views": 82,
+            "frame": 780,
+            "ordinary_alive": 82,
+            "projectiles": 17
+          },
+          {
+            "bosses": 0,
+            "derivatives": 0,
+            "effects": 4,
+            "enemies": 78,
+            "enemy_views": 78,
+            "frame": 840,
+            "ordinary_alive": 78,
+            "projectiles": 19
+          },
+          {
+            "bosses": 0,
+            "derivatives": 0,
+            "effects": 5,
+            "enemies": 82,
+            "enemy_views": 82,
+            "frame": 900,
+            "ordinary_alive": 82,
+            "projectiles": 17
+          },
+          {
+            "bosses": 0,
+            "derivatives": 0,
+            "effects": 3,
+            "enemies": 82,
+            "enemy_views": 82,
+            "frame": 960,
+            "ordinary_alive": 82,
+            "projectiles": 17
+          },
+          {
+            "bosses": 0,
+            "derivatives": 0,
+            "effects": 0,
+            "enemies": 82,
+            "enemy_views": 82,
+            "frame": 1020,
+            "ordinary_alive": 82,
+            "projectiles": 21
+          },
+          {
+            "bosses": 0,
+            "derivatives": 0,
+            "effects": 2,
+            "enemies": 82,
+            "enemy_views": 82,
+            "frame": 1080,
+            "ordinary_alive": 82,
+            "projectiles": 19
+          },
+          {
+            "bosses": 0,
+            "derivatives": 0,
+            "effects": 0,
+            "enemies": 82,
+            "enemy_views": 82,
+            "frame": 1140,
+            "ordinary_alive": 82,
+            "projectiles": 21
+          },
+          {
+            "bosses": 0,
+            "derivatives": 0,
+            "effects": 2,
+            "enemies": 82,
+            "enemy_views": 82,
+            "frame": 1200,
+            "ordinary_alive": 82,
+            "projectiles": 17
+          },
+          {
+            "bosses": 0,
+            "derivatives": 0,
+            "effects": 4,
+            "enemies": 81,
+            "enemy_views": 81,
+            "frame": 1260,
+            "ordinary_alive": 81,
+            "projectiles": 18
+          },
+          {
+            "bosses": 0,
+            "derivatives": 0,
+            "effects": 2,
+            "enemies": 82,
+            "enemy_views": 82,
+            "frame": 1320,
+            "ordinary_alive": 82,
+            "projectiles": 19
+          },
+          {
+            "bosses": 0,
+            "derivatives": 0,
+            "effects": 2,
+            "enemies": 82,
+            "enemy_views": 82,
+            "frame": 1380,
+            "ordinary_alive": 82,
+            "projectiles": 19
+          },
+          {
+            "bosses": 0,
+            "derivatives": 0,
+            "effects": 6,
+            "enemies": 75,
+            "enemy_views": 75,
+            "frame": 1440,
+            "ordinary_alive": 75,
+            "projectiles": 23
+          }
+        ],
+        "final_counts": {
+          "effects": 1,
+          "enemies": 82,
+          "enemy_views": 82,
+          "hazards": 0,
+          "outcome": "",
+          "projectiles": 22
+        },
+        "player_hp_samples": [
+          {
+            "frame": 0,
+            "hp": {
+              "F11": 2990.0,
+              "JIA": 364.0,
+              "N16": 3140.0
+            }
+          },
+          {
+            "frame": 120,
+            "hp": {
+              "F11": 2990.0,
+              "JIA": 364.0,
+              "N16": 3140.0
+            }
+          },
+          {
+            "frame": 240,
+            "hp": {
+              "F11": 2990.0,
+              "JIA": 364.0,
+              "N16": 3140.0
+            }
+          },
+          {
+            "frame": 360,
+            "hp": {
+              "F11": 2990.0,
+              "JIA": 364.0,
+              "N16": 3140.0
+            }
+          },
+          {
+            "frame": 480,
+            "hp": {
+              "F11": 2990.0,
+              "JIA": 364.0,
+              "N16": 3140.0
+            }
+          },
+          {
+            "frame": 600,
+            "hp": {
+              "F11": 2990.0,
+              "JIA": 364.0,
+              "N16": 3140.0
+            }
+          },
+          {
+            "frame": 720,
+            "hp": {
+              "F11": 2990.0,
+              "JIA": 364.0,
+              "N16": 3140.0
+            }
+          },
+          {
+            "frame": 840,
+            "hp": {
+              "F11": 2990.0,
+              "JIA": 364.0,
+              "N16": 3140.0
+            }
+          },
+          {
+            "frame": 960,
+            "hp": {
+              "F11": 2969.55918367347,
+              "JIA": 364.0,
+              "N16": 3140.0
+            }
+          },
+          {
+            "frame": 1080,
+            "hp": {
+              "F11": 2949.11836734694,
+              "JIA": 364.0,
+              "N16": 3140.0
+            }
+          },
+          {
+            "frame": 1200,
+            "hp": {
+              "F11": 2949.11836734694,
+              "JIA": 364.0,
+              "N16": 3140.0
+            }
+          },
+          {
+            "frame": 1320,
+            "hp": {
+              "F11": 2949.11836734694,
+              "JIA": 364.0,
+              "N16": 3140.0
+            }
+          },
+          {
+            "frame": 1440,
+            "hp": {
+              "F11": 2949.11836734694,
+              "JIA": 364.0,
+              "N16": 3140.0
+            }
+          }
+        ]
+      },
+      "metrics": {
+        "baseline": {
+          "frame_wall_ms": {
+            "samples": 1500,
+            "p50": 14.679,
+            "p95": 22.1,
+            "p99": 29.583,
+            "max": 71.757
+          },
+          "battle_tick_ms": {
+            "samples": 1500,
+            "p50": 3.058,
+            "p95": 4.348,
+            "p99": 5.346,
+            "max": 12.867
+          },
+          "canvas_refresh_ms": {
+            "samples": 1500,
+            "p50": 2.06,
+            "p95": 2.949,
+            "p99": 4.037,
+            "max": 10.385
+          },
+          "hud_view_refresh_ms": {
+            "samples": 1500,
+            "p50": 0.302,
+            "p95": 4.116,
+            "p99": 5.303,
+            "max": 6.771
+          },
+          "sync_camera_obstacles_ms": {
+            "samples": 1500,
+            "p50": 0.027,
+            "p95": 0.032,
+            "p99": 0.09,
+            "max": 1.539
+          },
+          "wall_threshold_counts": {
+            ">16.67ms": 415,
+            ">33.33ms": 13,
+            ">50ms": 3
+          },
+          "canvas_trace": {
+            "samples": 1500,
+            "draw_us": {
+              "samples": 1500,
+              "p50": 336.0,
+              "p95": 468.0,
+              "p99": 847.0,
+              "max": 2147
+            },
+            "foreground_us": {
+              "samples": 1500,
+              "p50": 2269.0,
+              "p95": 3995.0,
+              "p99": 5874.0,
+              "max": 11155
+            },
+            "bounds_readbacks_total": 0,
+            "bounds_readback_us_total": 0,
+            "process_frame_delta_not_one_count": 0
+          }
+        },
+        "after": {
+          "frame_wall_ms": {
+            "samples": 1500,
+            "p50": 13.936,
+            "p95": 20.678,
+            "p99": 28.314,
+            "max": 64.205
+          },
+          "battle_tick_ms": {
+            "samples": 1500,
+            "p50": 3.029,
+            "p95": 4.053,
+            "p99": 4.892,
+            "max": 8.249
+          },
+          "canvas_refresh_ms": {
+            "samples": 1500,
+            "p50": 2.012,
+            "p95": 2.803,
+            "p99": 3.485,
+            "max": 12.787
+          },
+          "hud_view_refresh_ms": {
+            "samples": 1500,
+            "p50": 0.297,
+            "p95": 3.966,
+            "p99": 4.475,
+            "max": 10.294
+          },
+          "sync_camera_obstacles_ms": {
+            "samples": 1500,
+            "p50": 0.027,
+            "p95": 0.033,
+            "p99": 0.085,
+            "max": 0.395
+          },
+          "wall_threshold_counts": {
+            ">16.67ms": 325,
+            ">33.33ms": 11,
+            ">50ms": 4
+          },
+          "canvas_trace": {
+            "samples": 1500,
+            "draw_us": {
+              "samples": 1500,
+              "p50": 334.0,
+              "p95": 470.0,
+              "p99": 669.0,
+              "max": 4763
+            },
+            "foreground_us": {
+              "samples": 1500,
+              "p50": 2265.0,
+              "p95": 3625.0,
+              "p99": 6088.0,
+              "max": 10971
+            },
+            "bounds_readbacks_total": 0,
+            "bounds_readback_us_total": 0,
+            "process_frame_delta_not_one_count": 0
+          }
+        }
+      },
+      "JIA_switches_after": [
+        {
+          "frame": 0,
+          "appearance": "campaign",
+          "script_path": "res://assets/players/jia-campaign/jia_campaign_visual.gd",
+          "last_clip": "dao-sweep",
+          "texture_count": 10,
+          "texture_paths": [
+            "res://assets/players/jia-campaign/dao-attack.png",
+            "res://assets/players/jia-campaign/dao-break.png",
+            "res://assets/players/jia-campaign/dao-idle.png",
+            "res://assets/players/jia-campaign/dao-run.png",
+            "res://assets/players/jia-campaign/dao-sweep.png",
+            "res://assets/players/jia-campaign/spear-attack.png",
+            "res://assets/players/jia-campaign/spear-break.png",
+            "res://assets/players/jia-campaign/spear-idle.png",
+            "res://assets/players/jia-campaign/spear-run.png",
+            "res://assets/players/jia-campaign/spear-sweep.png"
+          ],
+          "texture_rids": [
+            "RID(7610682048641)",
+            "RID(7614977015926)",
+            "RID(7619271983223)",
+            "RID(7623566950520)",
+            "RID(7627861917817)",
+            "RID(7632156885114)",
+            "RID(7636451852385)",
+            "RID(7640746819682)",
+            "RID(7645041787014)",
+            "RID(7649336754311)"
+          ],
+          "refresh_ms": 9.968
+        },
+        {
+          "frame": 630,
+          "appearance": "campaign",
+          "script_path": "res://assets/players/jia-campaign/jia_campaign_visual.gd",
+          "last_clip": "dao-attack",
+          "texture_count": 10,
+          "texture_paths": [
+            "res://assets/players/jia-campaign/dao-attack.png",
+            "res://assets/players/jia-campaign/dao-break.png",
+            "res://assets/players/jia-campaign/dao-idle.png",
+            "res://assets/players/jia-campaign/dao-run.png",
+            "res://assets/players/jia-campaign/dao-sweep.png",
+            "res://assets/players/jia-campaign/spear-attack.png",
+            "res://assets/players/jia-campaign/spear-break.png",
+            "res://assets/players/jia-campaign/spear-idle.png",
+            "res://assets/players/jia-campaign/spear-run.png",
+            "res://assets/players/jia-campaign/spear-sweep.png"
+          ],
+          "texture_rids": [
+            "RID(7610682048641)",
+            "RID(7614977015926)",
+            "RID(7619271983223)",
+            "RID(7623566950520)",
+            "RID(7627861917817)",
+            "RID(7632156885114)",
+            "RID(7636451852385)",
+            "RID(7640746819682)",
+            "RID(7645041787014)",
+            "RID(7649336754311)"
+          ],
+          "refresh_ms": 2.801
+        },
+        {
+          "frame": 1260,
+          "appearance": "campaign",
+          "script_path": "res://assets/players/jia-campaign/jia_campaign_visual.gd",
+          "last_clip": "dao-attack",
+          "texture_count": 10,
+          "texture_paths": [
+            "res://assets/players/jia-campaign/dao-attack.png",
+            "res://assets/players/jia-campaign/dao-break.png",
+            "res://assets/players/jia-campaign/dao-idle.png",
+            "res://assets/players/jia-campaign/dao-run.png",
+            "res://assets/players/jia-campaign/dao-sweep.png",
+            "res://assets/players/jia-campaign/spear-attack.png",
+            "res://assets/players/jia-campaign/spear-break.png",
+            "res://assets/players/jia-campaign/spear-idle.png",
+            "res://assets/players/jia-campaign/spear-run.png",
+            "res://assets/players/jia-campaign/spear-sweep.png"
+          ],
+          "texture_rids": [
+            "RID(7610682048641)",
+            "RID(7614977015926)",
+            "RID(7619271983223)",
+            "RID(7623566950520)",
+            "RID(7627861917817)",
+            "RID(7632156885114)",
+            "RID(7636451852385)",
+            "RID(7640746819682)",
+            "RID(7645041787014)",
+            "RID(7649336754311)"
+          ],
+          "refresh_ms": 2.438
+        }
+      ],
+      "baseline_first_appearance": {
+        "appearance": null,
+        "script_path": "res://assets/players/jia/jia_visual.gd"
+      },
+      "after_first_appearance": {
+        "appearance": "campaign",
+        "script_path": "res://assets/players/jia-campaign/jia_campaign_visual.gd"
+      }
+    }
+  ],
+  "interpretation_limits": [
+    "This is one controlled benchmark run per PCK/scenario on an RTX 5080/X11/GL Compatibility environment. Frame timing variance is substantial; small changes do not establish a general performance improvement.",
+    "B13 is the campaign-stage dense fixture, not a full campaign completion. Party HP is multiplied by 10 and ordinary enemy HP by 8 to sustain the requested load; damage, AI, casts, cooldowns and movement remain active.",
+    "The B13 source presentation changes from common to campaign. It intentionally increases JIA texture count from 6 to 10; timings reflect the actual new appearance, including any loading and rendering cost."
+  ],
+  "input_validation": {
+    "baseline_status": "PASS",
+    "after_status": "PASS",
+    "baseline_cwd_empty": true,
+    "after_cwd_empty": true,
+    "simulation_facts_identical": true,
+    "pack_sha256": "292dd492473a73403a851e38b670e0b37d8ad2c4e47b10a0d93850a365f7c3bf",
+    "default_renderer_gl": true,
+    "all_process_frame_deltas_one_after": true,
+    "B13_JIA_campaign_appearance": true,
+    "B01_JIA_common_appearance": true,
+    "B13_JIA_texture_RIDs_reused_across_revisits": true
+  }
+}

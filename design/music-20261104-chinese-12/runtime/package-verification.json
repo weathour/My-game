@@ -1,0 +1,133 @@
+{
+  "schema_version": 1,
+  "status": "PASS",
+  "date": "2026-11-04",
+  "package": "builds/linux-chinese-d2-20261104",
+  "variant": "D2",
+  "godot_version": "4.6.2.stable.official.71f334935",
+  "pck": {
+    "path": "builds/linux-chinese-d2-20261104/game.pck",
+    "sha256": "1ae064725a2f32e9e062e3d02b367f72f2997a577568a8ed527796f13da3f7a9",
+    "bytes": 249184200,
+    "cue_count": 16,
+    "new_d2_cues": 12,
+    "retained_warm_cues": 4
+  },
+  "runtime_binary": {
+    "path": "builds/linux-chinese-d2-20261104/godot-4.6.2",
+    "sha256": "5a806b2b385279d9607094d33e946ed828e9606df4cb46d258ca27468dc5c1c9"
+  },
+  "launcher": {
+    "path": "builds/linux-chinese-d2-20261104/run.sh",
+    "sha256": "3234b8372e56f30230a13dc54df79ec5a48215d39dbf560a6b63ef579e9df4d6",
+    "isolated_user_data": "builds/linux-chinese-d2-20261104/test-user-data"
+  },
+  "bindings": {
+    "catalog_sha256": "371f9cedfa93704f7de336b7fdbad4f99aee3b8af880dce9e8cd486ce9d45a76",
+    "d2_render_report_sha256": "8b7baadb445e77ba50aff6ec5de904a132352afe4c843863de20271063f194f4",
+    "music_render_hashes_match_report": true,
+    "notices_docs_hashes_frozen": true,
+    "notices_and_licenses_checked": 107,
+    "build_manifest_sha256": "3da204ad0fb294d45c8e3a5982867091bb85479222342cd149b77388eefda676",
+    "notices_refresh_verified_utc": "2026-11-04T03:56:58.446129+00:00"
+  },
+  "source_independence": {
+    "pck_smoke_working_directory": "/tmp/codex-d2-pack-smoke/empty-cwd",
+    "external_smoke_script": true,
+    "project_godot_or_source_directories_in_working_directory": false
+  },
+  "checks": [
+    {
+      "name": "launcher_headless_startup",
+      "status": "PASS",
+      "log": "design/music-20261104-chinese-12/runtime/package-checks/launcher-headless-startup.log",
+      "log_sha256": "da76a36a586ec310ae98a6bf8844ab87166457610861a810027a91d273cbb93f",
+      "result": "run.sh exited 0 with --headless --quit-after 120"
+    },
+    {
+      "name": "music_pack_smoke",
+      "status": "PASS",
+      "log": "design/music-20261104-chinese-12/runtime/package-checks/chronicle_music_pack_smoke.log",
+      "log_sha256": "4a0e8e40ebd3bfc636945c20a999c2c720faf37d61efd46b9bd9722c12caa01a",
+      "result_fields": [
+        "16",
+        "167",
+        "0"
+      ]
+    },
+    {
+      "name": "music_playback_smoke",
+      "status": "PASS",
+      "log": "design/music-20261104-chinese-12/runtime/package-checks/chronicle_music_playback_smoke.log",
+      "log_sha256": "768ba1bca593ceee14363bc9138b21092cf641744e7ca1e16bae11b8a5cb4c0b",
+      "result_fields": [
+        "69",
+        "0",
+        "X11"
+      ]
+    },
+    {
+      "name": "d2_runsh_direct_graphical_close",
+      "status": "BASELINE_DIAGNOSTIC",
+      "log": "design/music-20261104-chinese-12/runtime/package-checks/d2-runsh-window-close.log",
+      "log_sha256": "5f937ed300bafe4c223462b7ed6b2992d22ab1fd854a1ebe9ae16ba1cd9f0609"
+    },
+    {
+      "name": "old_c_direct_graphical_close_control",
+      "status": "BASELINE_REPRODUCED",
+      "log": "design/music-20261104-chinese-12/runtime/package-checks/old-c-direct-window-close.log",
+      "log_sha256": "5f937ed300bafe4c223462b7ed6b2992d22ab1fd854a1ebe9ae16ba1cd9f0609"
+    },
+    {
+      "name": "d2_isolated_direct_graphical_close_control",
+      "status": "PASS_NO_DIAGNOSTIC",
+      "log": "design/music-20261104-chinese-12/runtime/package-checks/d2-direct-window-close.log",
+      "log_sha256": "79e1b3c80ba421f82cda2a88aa2584a5a43c1e9ad0a399b38d4e8bf32787d6dc"
+    }
+  ],
+  "screenshots": [
+    {
+      "path": "design/music-20261104-chinese-12/runtime/package-checks/music-room-1280.png",
+      "sha256": "5a96a12c450e9a158802d0be19c554637720bd5beb5382ea96db5faba0f8cefb",
+      "bytes": 558383
+    },
+    {
+      "path": "design/music-20261104-chinese-12/runtime/package-checks/music-room-960.png",
+      "sha256": "978e4b36c36403828e9a6cf16a074e3e4ccb11ce8584bc0028b641b3e8cf140b",
+      "bytes": 416878
+    }
+  ],
+  "notes": [
+    "Graphical package playback smoke verified title playback advancement and all 12 D2 previews; it unloaded the scene and drained audio before exit.",
+    "The direct full-app close diagnostics are retained in shutdown_diagnostic_comparison; the old C package reproduces the same diagnostics (baseline reproduced)."
+  ],
+  "shutdown_diagnostic_comparison": {
+    "status": "BASELINE_REPRODUCED",
+    "display_and_close": "X11 :0, Godot 4.6.2, gl_compatibility, Dummy audio, app window closed by WM_DELETE_WINDOW after graphical startup",
+    "d2_launcher_runsh": {
+      "log": "design/music-20261104-chinese-12/runtime/package-checks/d2-runsh-window-close.log",
+      "sha256": "5f937ed300bafe4c223462b7ed6b2992d22ab1fd854a1ebe9ae16ba1cd9f0609",
+      "xdg": "launcher package-local test-user-data",
+      "diagnostics": [
+        "WARNING: ObjectDB instances leaked at exit",
+        "ERROR: 1 resources still in use at exit"
+      ]
+    },
+    "old_c_pck_control": {
+      "log": "design/music-20261104-chinese-12/runtime/package-checks/old-c-direct-window-close.log",
+      "sha256": "5f937ed300bafe4c223462b7ed6b2992d22ab1fd854a1ebe9ae16ba1cd9f0609",
+      "xdg": "new isolated /tmp directories; old package test-user-data was not used or modified",
+      "diagnostics": [
+        "WARNING: ObjectDB instances leaked at exit",
+        "ERROR: 1 resources still in use at exit"
+      ]
+    },
+    "d2_isolated_direct_control": {
+      "log": "design/music-20261104-chinese-12/runtime/package-checks/d2-direct-window-close.log",
+      "sha256": "79e1b3c80ba421f82cda2a88aa2584a5a43c1e9ad0a399b38d4e8bf32787d6dc",
+      "xdg": "new isolated /tmp directories",
+      "diagnostics": []
+    },
+    "attribution": "The same ObjectDB/resource-in-use diagnostics reproduce on the older C PCK/runtime, so they predate this D2 music replacement. Different startup samples produced different outcomes; the exact trigger is undetermined."
+  }
+}

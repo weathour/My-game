@@ -1,0 +1,217 @@
+{
+  "schema_version": 1,
+  "created_utc": "2026-11-03T11:01:44.793019+00:00",
+  "status": "PASS",
+  "scope": "chapter_one_character_and_enemy_skill_audio_update",
+  "paths_relative_to": "repository_root_unless_absolute",
+  "coverage": {
+    "character_owners": 38,
+    "character_ability_configurations": 137,
+    "trait_decisions": 9,
+    "enemy_definitions": 43,
+    "authored_enemy_action_configurations": 87,
+    "unique_enemy_action_keys": 81,
+    "runtime_enemy_action_aliases": 1,
+    "bosses": 18,
+    "boss_event_contexts": 22,
+    "new_cues": 101,
+    "retained_utility_cues": 3,
+    "total_cues": 104,
+    "new_unique_wav_variants": 303,
+    "retained_utility_variants": 6,
+    "total_variant_references": 309
+  },
+  "audio": {
+    "qa": "design/skill-audio-20261103/audio/qa/sfx-bank-verification.json",
+    "qa_sha256": "60d76666bb94c58daac76efc0cda8e590d8886f2fab1a83ef0caa5148cbf2aa2",
+    "new_waveform_hashes_verified": 303,
+    "all_bank_resources_resolve": true,
+    "source_and_runtime_encoding": "48kHz_mono_PCM16; compress/mode=0 for all303 new imports",
+    "offline_preview_index": "design/skill-audio-20261103/audio/previews/preview-index.json",
+    "offline_preview_is_not_gameplay_capture": true
+  },
+  "profiles": {
+    "path": "assets/data/audio/skill_sound_profiles.json",
+    "sha256": "6252cd564482dc70b280a8e39d75bf35adf1cff89668cf8576d6bedd9826fd0f",
+    "coverage_audit": "design/skill-audio-20261103/profiles/coverage-audit.json",
+    "all_bank_profile_references_resolve": true,
+    "unique_profile_referenced_cues": 62,
+    "duplicate_authored_move_id_groups": 6,
+    "runtime_enemy_action_aliases": 1,
+    "unknown_runtime_bindings": 0
+  },
+  "runtime": {
+    "report": "design/skill-audio-20261103/runtime/validation-report.json",
+    "report_sha256": "1ba55f5f4e12c00105d3be0b76cf40aba7b91a17ce100f61b67adca1ea4dd3e7",
+    "godot_version": "4.6.2.stable.official.71f334935",
+    "headless_import": "PASS",
+    "headless_startup": "PASS",
+    "full_project_check": "PROJECT_CHECK_OK",
+    "smokes_total": 51,
+    "source_smokes": 47,
+    "independent_pck_smokes": 4,
+    "skill_audio_checks": 2233,
+    "real_enemy_session_checks": 133547,
+    "feedback_state_rng_parity_checks": 212,
+    "independent_feedback_pck_checks": 806,
+    "native_packaged_skill_checks": 198,
+    "source_file_hashes_verified": 16,
+    "all_51_recorded_smoke_log_hashes_verified": true,
+    "dense_mix_fixtures": {
+      "scope": "fixed SFX-only fixture and the independently selected dense windows of all twelve BGM; no claim about every gameplay instant or artistic audibility",
+      "settings": {
+        "music_volume": 0.7,
+        "sfx_volume": 0.65
+      },
+      "results": [
+        {
+          "finite": true,
+          "frames": 20480,
+          "music": "none",
+          "peak": 0.15838311612606,
+          "rms": 0.0290691092457174,
+          "start_seconds": 0.0
+        },
+        {
+          "finite": true,
+          "frames": 24576,
+          "music": "midi_test_01",
+          "peak": 0.344843029975891,
+          "rms": 0.0538369568307042,
+          "start_seconds": 87.0
+        },
+        {
+          "finite": true,
+          "frames": 24576,
+          "music": "midi_test_02",
+          "peak": 0.315898716449738,
+          "rms": 0.0596584047826839,
+          "start_seconds": 102.0
+        },
+        {
+          "finite": true,
+          "frames": 20480,
+          "music": "midi_test_03",
+          "peak": 0.25661164522171,
+          "rms": 0.0508058842545458,
+          "start_seconds": 138.0
+        },
+        {
+          "finite": true,
+          "frames": 24576,
+          "music": "midi_test_04",
+          "peak": 0.316199332475662,
+          "rms": 0.0551189935231979,
+          "start_seconds": 112.0
+        },
+        {
+          "finite": true,
+          "frames": 24576,
+          "music": "midi_test_05",
+          "peak": 0.33170747756958,
+          "rms": 0.0605463922104913,
+          "start_seconds": 194.0
+        },
+        {
+          "finite": true,
+          "frames": 20480,
+          "music": "midi_test_06",
+          "peak": 0.253879249095917,
+          "rms": 0.0541751739100036,
+          "start_seconds": 52.0
+        },
+        {
+          "finite": true,
+          "frames": 20992,
+          "music": "midi_test_07",
+          "peak": 0.298373013734818,
+          "rms": 0.0555573175227992,
+          "start_seconds": 81.0
+        },
+        {
+          "finite": true,
+          "frames": 24576,
+          "music": "midi_test_08",
+          "peak": 0.214162111282349,
+          "rms": 0.0420866174595703,
+          "start_seconds": 282.0
+        },
+        {
+          "finite": true,
+          "frames": 24576,
+          "music": "midi_test_09",
+          "peak": 0.320209413766861,
+          "rms": 0.0594323241805033,
+          "start_seconds": 161.0
+        },
+        {
+          "finite": true,
+          "frames": 20480,
+          "music": "midi_test_10",
+          "peak": 0.232040226459503,
+          "rms": 0.052456512842817,
+          "start_seconds": 142.0
+        },
+        {
+          "finite": true,
+          "frames": 24576,
+          "music": "midi_test_11",
+          "peak": 0.402150541543961,
+          "rms": 0.0660239905330639,
+          "start_seconds": 157.0
+        },
+        {
+          "finite": true,
+          "frames": 24576,
+          "music": "midi_test_12",
+          "peak": 0.318158596754074,
+          "rms": 0.0621390797868577,
+          "start_seconds": 153.0
+        }
+      ],
+      "maximum_sample_peak": 0.402150541543961,
+      "finite_unclipped_lossless_captures": 13,
+      "window_authority": "dense-music-test-windows.json"
+    }
+  },
+  "protected_inputs": {
+    "report": "design/skill-audio-20261103/runtime/protected-inputs-after.json",
+    "files_verified_unchanged": 20,
+    "numeric_definition_and_route_files": 4,
+    "existing_bgm_files": 16
+  },
+  "player_data": {
+    "report": "design/skill-audio-20261103/runtime/player-data-after.json",
+    "files_verified_unchanged": 53,
+    "changed_or_deleted_files": 0,
+    "new_matching_files": 0
+  },
+  "local_build": {
+    "launcher": "builds/linux-skill-audio-20261103/run.sh",
+    "manifest": "builds/linux-skill-audio-20261103/build-manifest.json",
+    "manifest_sha256": "8f0f14d3d6f767787a8dcf163d131a20d46a92e4e74926e1bcf9e71f64ada214",
+    "pck_bytes": 231735188,
+    "pck_sha256": "9f8c2aefdaeb2f9499efe8dda705f764f5bc70c19dc7bb8457a7d5767f8b1690",
+    "headless_startup": "PASS",
+    "native_skill_functional": "PASS checks=198",
+    "notice_and_provenance_files": 70,
+    "notice_file_hashes_match_current_sources": true,
+    "notice_links": {
+      "status": "PASS",
+      "checked": 26,
+      "missing": []
+    },
+    "isolated_test_user_data": true
+  },
+  "final_static_checks": {
+    "documentation_links": "DOC_LINK_CHECK_OK",
+    "git_diff_check": "PASS",
+    "production_python_syntax": "PASS files=7",
+    "locked_tool_hashes": "PASS files=4"
+  },
+  "acceptance_boundary": {
+    "technical_implementation_complete": true,
+    "manual_listening_and_artistic_acceptance": "not_performed",
+    "capture_scope": "SFX-only and12 fixed dense-music fixtures, not every possible gameplay mix"
+  }
+}

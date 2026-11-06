@@ -17,6 +17,7 @@ static func build(battle: RefCounted, id: String, definitions: Dictionary) -> Di
 		"relay":
 			var previous: String = str(state.get("detail", ""))
 			main = "接力 待首次施法" if previous.is_empty() else "接力 需换人" if previous == id else "接力 可接"
+		"curse": main = str(state.get("label","")) + (" · " + str(state.get("detail","")) if not str(state.get("detail","")).is_empty() else "")
 		"mark": main = "追击 %d/%d" % [value, state.max]
 		"guard":
 			if remaining > 0: main = "守势 %d次 · %ss" % [value, number(remaining)]
@@ -31,6 +32,7 @@ static func build(battle: RefCounted, id: String, definitions: Dictionary) -> Di
 			if str(window.key) == core: continue
 			if window.key == "guard": extra.append("守势 %d次 · %ss" % [window.get("charges", 0), number(window.remaining)])
 			elif window.key == "temper": extra.append("淬刃 %ss" % number(window.remaining))
+			elif window.key == "rally": extra.append("强化 %ss" % number(window.remaining))
 		if float(state.get("shield", 0)) > 0: extra.append("盾 %s" % number(state.shield))
 	var compact: String = main
 	if not extra.is_empty(): compact += ("\n" if not compact.is_empty() else "") + "\n".join(extra)

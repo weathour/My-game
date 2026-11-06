@@ -5,6 +5,7 @@ const CAMERA := preload("res://scripts/ui/chronicle/boss_camera.gd")
 const C := preload("res://scripts/content/combat_catalog.gd")
 const SETTINGS := preload("res://scripts/shared/settings.gd")
 const GEOMETRY := preload("res://scripts/battle/enemy_geometry.gd")
+const HURTBOX := preload("res://scripts/battle/player_hurtbox.gd")
 const SPACE := preload("res://scripts/battle/battle_space.gd")
 var checks := 0
 var failures := 0
@@ -115,7 +116,7 @@ func run() -> void:
 		expect(warning.escape_valid and warning.safe_route.size() == 2, "geometry finds reachable escape")
 		if warning.escape_valid:
 			var escape: Vector2 = warning.safe_route[1]
-			expect(not GEOMETRY.contains(g, escape, 18), "framed escape is outside true hit geometry")
+			expect(not GEOMETRY.contains_actor(g, escape, HURTBOX.RADIUS), "framed escape is outside true hit geometry")
 			expect(escape.distance_to(battle.position) <= battle.current().stats.move * g.remaining + .1, "escape remains within actual move budget")
 			expect(warning.safe_screen.grow(1).has_point(warning.base_origin + escape * warning.scale), "escape lies in HUD-free viewport")
 		expect(battle.director.elapsed == stage_clock and battle.current().cooldowns == cooldowns and Engine.time_scale == 1, "presentation changes no simulation clocks or cooldowns")
@@ -233,13 +234,13 @@ func run() -> void:
 	expect(long_route.valid and battle.position.distance_to(long_route.point) > 180 * .9, "escape uses full actual tell rather than truncating at .9 seconds")
 	# Geometry families: public camera diagnostics must not claim an impossible escape.
 	for shape in ["disc", "sector", "ring_gap"]:
-		var descriptor := {"shape":shape, "origin":battle.position - Vector2(90,0), "direction":Vector2.RIGHT, "radius":135.0, "inner_radius":30.0, "spread":1.7, "gap_angle":PI, "gap_width":1.3, "remaining":1.2, "total":1.2, "damage":20.0}
+		var descriptor := {"owner_id":boss.id, "shape":shape, "origin":battle.position - Vector2(90,0), "direction":Vector2.RIGHT, "radius":135.0, "inner_radius":30.0, "spread":1.7, "gap_angle":PI, "gap_width":1.3, "remaining":1.2, "total":1.2, "damage":20.0}
 		battle.telegraphs = [descriptor]
 		settle(1)
 		var state: Dictionary = view.canvas.camera_state()
 		expect(state.escape_valid, "safe route for " + shape)
-		if state.escape_valid: expect(not GEOMETRY.contains(descriptor, state.safe_route[1], 18), "route respects " + shape)
-	battle.telegraphs = [{"shape":"disc", "origin":battle.position, "radius":900.0, "remaining":.05, "total":1.0, "damage":20.0}]
+		if state.escape_valid: expect(not GEOMETRY.contains_actor(descriptor, state.safe_route[1], HURTBOX.RADIUS+6.0), "route respects " + shape)
+	battle.telegraphs = [{"owner_id":boss.id, "shape":"disc", "origin":battle.position, "radius":900.0, "remaining":.05, "total":1.0, "damage":20.0}]
 	settle(1)
 	expect(not view.canvas.camera_state().escape_valid, "unreachable escape is never fabricated")
 	battle.telegraphs.clear()
@@ -269,7 +270,7 @@ func run() -> void:
 	await frames()
 	# Audio stop commands cross the mixer thread. Let it release playback refs
 	# after the attempt nodes disappear, rather than quitting within the same mix.
-	if DisplayServer.get_name() != "headless": await create_timer(.12).timeout
+	await create_timer(.3).timeout
 	SETTINGS.save_comfort("reduced_motion", old_motion)
 	SETTINGS.save_comfort("reduced_flash", old_flash)
 	if not capture_dir.is_empty():

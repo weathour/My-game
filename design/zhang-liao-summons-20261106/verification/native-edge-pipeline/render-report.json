@@ -1,0 +1,1926 @@
+{
+	"cases": [
+		{
+			"case": "960-war-chengong-normal-edge-close",
+			"comfort": false,
+			"dimensions": [
+				960,
+				540
+			],
+			"edge_close": true,
+			"effect_contacts": [
+				{
+					"action_serial": 1,
+					"alpha": 0.48,
+					"clock": 1.41666666666667,
+					"form_index": 1,
+					"frame": 4,
+					"marker": 0,
+					"owner_id": 1,
+					"path": "res://assets/enemies/baimen/zhang_liao_summons/fx-chengong_seal.png",
+					"position": "(2978.876, 1171.099)",
+					"role": "chengong_seal",
+					"texture_id": -9223371927819646829,
+					"world_size": "(260.0, 260.0)"
+				},
+				{
+					"action_serial": 1,
+					"alpha": 0.48,
+					"clock": 1.41666666666667,
+					"form_index": 1,
+					"frame": 4,
+					"marker": 1,
+					"owner_id": 1,
+					"path": "res://assets/enemies/baimen/zhang_liao_summons/fx-chengong_seal.png",
+					"position": "(2850.0, 1464.0)",
+					"role": "chengong_seal",
+					"texture_id": -9223371927819646829,
+					"world_size": "(260.0, 260.0)"
+				},
+				{
+					"action_serial": 1,
+					"alpha": 0.48,
+					"clock": 1.41666666666667,
+					"form_index": 1,
+					"frame": 4,
+					"marker": 2,
+					"owner_id": 1,
+					"path": "res://assets/enemies/baimen/zhang_liao_summons/fx-chengong_seal.png",
+					"position": "(2721.124, 1756.901)",
+					"role": "chengong_seal",
+					"texture_id": -9223371927819646829,
+					"world_size": "(260.0, 260.0)"
+				},
+				{
+					"action_serial": 1,
+					"alpha": 0.48,
+					"clock": 2.31666666666666,
+					"form_index": 1,
+					"frame": 5,
+					"marker": 0,
+					"owner_id": 1,
+					"path": "res://assets/enemies/baimen/zhang_liao_summons/fx-chengong_seal.png",
+					"position": "(2978.876, 1171.099)",
+					"role": "chengong_seal",
+					"texture_id": -9223371927819646829,
+					"world_size": "(260.0, 260.0)"
+				},
+				{
+					"action_serial": 1,
+					"alpha": 0.48,
+					"clock": 2.55,
+					"form_index": 1,
+					"frame": 5,
+					"marker": 1,
+					"owner_id": 1,
+					"path": "res://assets/enemies/baimen/zhang_liao_summons/fx-chengong_seal.png",
+					"position": "(2850.0, 1464.0)",
+					"role": "chengong_seal",
+					"texture_id": -9223371927819646829,
+					"world_size": "(260.0, 260.0)"
+				},
+				{
+					"action_serial": 1,
+					"alpha": 0.48,
+					"clock": 2.76666666666666,
+					"form_index": 1,
+					"frame": 5,
+					"marker": 2,
+					"owner_id": 1,
+					"path": "res://assets/enemies/baimen/zhang_liao_summons/fx-chengong_seal.png",
+					"position": "(2721.124, 1756.901)",
+					"role": "chengong_seal",
+					"texture_id": -9223371927819646829,
+					"world_size": "(260.0, 260.0)"
+				}
+			],
+			"effect_draw_count": 433,
+			"effect_texture_ids": {
+				"chengong_seal": -9223371927819646829
+			},
+			"fixture_party_hp_multiplier": 10,
+			"frames": 190,
+			"movie_frames": "",
+			"phase_images": {
+				"array_tell": {
+					"clock": 1.41666666666667,
+					"frame": 84
+				},
+				"impact": {
+					"clock": 2.31666666666666,
+					"frame": 138
+				},
+				"manifest": {
+					"clock": 0.483333333333333,
+					"frame": 28
+				},
+				"order": {
+					"clock": 0.0166666666666667,
+					"frame": 0
+				},
+				"recover": {
+					"clock": 2.46666666666666,
+					"frame": 147
+				},
+				"unfurl": {
+					"clock": 0.800000000000001,
+					"frame": 47
+				},
+				"vanish": {
+					"clock": 2.91666666666666,
+					"frame": 174
+				}
+			},
+			"phases": [
+				"order",
+				"manifest",
+				"unfurl",
+				"array_tell",
+				"impact",
+				"recover",
+				"vanish"
+			],
+			"poses_fit": true,
+			"proxy_frames": [
+				0,
+				1,
+				2,
+				3,
+				4,
+				5,
+				6,
+				7,
+				8,
+				9
+			],
+			"runtime_alpha_readbacks": 0,
+			"source_frames": [
+				0,
+				1,
+				2,
+				3,
+				4,
+				5
+			],
+			"trace": [
+				{
+					"clock": 0.0166666666666667,
+					"frame": 0,
+					"phase": "order",
+					"proxy_frame": 0,
+					"proxy_screen": "[P: (866.3013, 304.038), S: (69.85041, 90.46203)]",
+					"scale": 0.45,
+					"source_frame": 0,
+					"source_screen": "[P: (825.7812, 260.9866), S: (86.18302, 106.5134)]"
+				},
+				{
+					"clock": 0.0333333333333333,
+					"frame": 1,
+					"phase": "order",
+					"proxy_frame": 0,
+					"proxy_screen": "[P: (864.3013, 302.038), S: (69.85041, 90.46203)]",
+					"scale": 0.45,
+					"source_frame": 0,
+					"source_screen": "[P: (823.7812, 258.9866), S: (86.18302, 106.5134)]"
+				},
+				{
+					"clock": 0.05,
+					"frame": 2,
+					"phase": "order",
+					"proxy_frame": 0,
+					"proxy_screen": "[P: (864.3013, 303.038), S: (69.85041, 90.46203)]",
+					"scale": 0.45,
+					"source_frame": 0,
+					"source_screen": "[P: (823.7812, 259.9866), S: (86.18302, 106.5134)]"
+				},
+				{
+					"clock": 0.0666666666666667,
+					"frame": 3,
+					"phase": "order",
+					"proxy_frame": 0,
+					"proxy_screen": "[P: (864.3013, 303.038), S: (69.85041, 90.46203)]",
+					"scale": 0.45,
+					"source_frame": 0,
+					"source_screen": "[P: (823.7812, 259.9866), S: (86.18302, 106.5134)]"
+				},
+				{
+					"clock": 0.0833333333333333,
+					"frame": 4,
+					"phase": "order",
+					"proxy_frame": 0,
+					"proxy_screen": "[P: (864.3013, 303.038), S: (69.85041, 90.46203)]",
+					"scale": 0.45,
+					"source_frame": 0,
+					"source_screen": "[P: (823.7812, 259.9866), S: (86.18302, 106.5134)]"
+				},
+				{
+					"clock": 0.1,
+					"frame": 5,
+					"phase": "order",
+					"proxy_frame": 0,
+					"proxy_screen": "[P: (864.3013, 303.038), S: (69.85041, 90.46203)]",
+					"scale": 0.45,
+					"source_frame": 0,
+					"source_screen": "[P: (823.7812, 259.9866), S: (86.18302, 106.5134)]"
+				},
+				{
+					"clock": 0.116666666666667,
+					"frame": 6,
+					"phase": "order",
+					"proxy_frame": 0,
+					"proxy_screen": "[P: (864.3013, 303.038), S: (69.85041, 90.46203)]",
+					"scale": 0.45,
+					"source_frame": 0,
+					"source_screen": "[P: (823.7812, 259.9866), S: (86.18302, 106.5134)]"
+				},
+				{
+					"clock": 0.133333333333333,
+					"frame": 7,
+					"phase": "order",
+					"proxy_frame": 0,
+					"proxy_screen": "[P: (864.3013, 303.038), S: (69.85041, 90.46203)]",
+					"scale": 0.45,
+					"source_frame": 0,
+					"source_screen": "[P: (823.7812, 259.9866), S: (86.18302, 106.5134)]"
+				},
+				{
+					"clock": 0.15,
+					"frame": 8,
+					"phase": "order",
+					"proxy_frame": 0,
+					"proxy_screen": "[P: (864.3013, 303.038), S: (69.85041, 90.46203)]",
+					"scale": 0.45,
+					"source_frame": 0,
+					"source_screen": "[P: (823.7812, 259.9866), S: (86.18302, 106.5134)]"
+				},
+				{
+					"clock": 0.166666666666667,
+					"frame": 9,
+					"phase": "order",
+					"proxy_frame": 0,
+					"proxy_screen": "[P: (864.3013, 303.038), S: (69.85041, 90.46203)]",
+					"scale": 0.45,
+					"source_frame": 0,
+					"source_screen": "[P: (823.7812, 259.9866), S: (86.18302, 106.5134)]"
+				},
+				{
+					"clock": 0.183333333333333,
+					"frame": 10,
+					"phase": "order",
+					"proxy_frame": 0,
+					"proxy_screen": "[P: (864.3013, 303.038), S: (69.85041, 90.46203)]",
+					"scale": 0.45,
+					"source_frame": 0,
+					"source_screen": "[P: (823.7812, 259.9866), S: (86.18302, 106.5134)]"
+				},
+				{
+					"clock": 0.2,
+					"frame": 11,
+					"phase": "order",
+					"proxy_frame": 0,
+					"proxy_screen": "[P: (864.3013, 303.038), S: (69.85041, 90.46203)]",
+					"scale": 0.45,
+					"source_frame": 0,
+					"source_screen": "[P: (823.7812, 259.9866), S: (86.18302, 106.5134)]"
+				},
+				{
+					"clock": 0.216666666666667,
+					"frame": 12,
+					"phase": "order",
+					"proxy_frame": 0,
+					"proxy_screen": "[P: (864.3013, 303.038), S: (69.85041, 90.46203)]",
+					"scale": 0.45,
+					"source_frame": 0,
+					"source_screen": "[P: (823.7812, 259.9866), S: (86.18302, 106.5134)]"
+				},
+				{
+					"clock": 0.233333333333333,
+					"frame": 13,
+					"phase": "order",
+					"proxy_frame": 0,
+					"proxy_screen": "[P: (864.3013, 303.038), S: (69.85041, 90.46203)]",
+					"scale": 0.45,
+					"source_frame": 0,
+					"source_screen": "[P: (823.7812, 259.9866), S: (86.18302, 106.5134)]"
+				},
+				{
+					"clock": 0.25,
+					"frame": 14,
+					"phase": "order",
+					"proxy_frame": 0,
+					"proxy_screen": "[P: (864.3013, 303.038), S: (69.85041, 90.46203)]",
+					"scale": 0.45,
+					"source_frame": 0,
+					"source_screen": "[P: (823.7812, 259.9866), S: (86.18302, 106.5134)]"
+				},
+				{
+					"clock": 0.266666666666667,
+					"frame": 15,
+					"phase": "order",
+					"proxy_frame": 0,
+					"proxy_screen": "[P: (864.3013, 303.038), S: (69.85041, 90.46203)]",
+					"scale": 0.45,
+					"source_frame": 0,
+					"source_screen": "[P: (823.7812, 259.9866), S: (86.18302, 106.5134)]"
+				},
+				{
+					"clock": 0.283333333333333,
+					"frame": 16,
+					"phase": "order",
+					"proxy_frame": 0,
+					"proxy_screen": "[P: (864.3013, 303.038), S: (69.85041, 90.46203)]",
+					"scale": 0.45,
+					"source_frame": 0,
+					"source_screen": "[P: (823.7812, 259.9866), S: (86.18302, 106.5134)]"
+				},
+				{
+					"clock": 0.3,
+					"frame": 17,
+					"phase": "order",
+					"proxy_frame": 0,
+					"proxy_screen": "[P: (864.3013, 303.038), S: (69.85041, 90.46203)]",
+					"scale": 0.45,
+					"source_frame": 0,
+					"source_screen": "[P: (823.7812, 259.9866), S: (86.18302, 106.5134)]"
+				},
+				{
+					"clock": 0.316666666666667,
+					"frame": 18,
+					"phase": "order",
+					"proxy_frame": 0,
+					"proxy_screen": "[P: (864.3013, 303.038), S: (69.85041, 90.46203)]",
+					"scale": 0.45,
+					"source_frame": 0,
+					"source_screen": "[P: (823.7812, 259.9866), S: (86.18302, 106.5134)]"
+				},
+				{
+					"clock": 0.333333333333333,
+					"frame": 19,
+					"phase": "order",
+					"proxy_frame": 0,
+					"proxy_screen": "[P: (864.3013, 303.038), S: (69.85041, 90.46203)]",
+					"scale": 0.45,
+					"source_frame": 0,
+					"source_screen": "[P: (823.7812, 259.9866), S: (86.18302, 106.5134)]"
+				},
+				{
+					"clock": 0.35,
+					"frame": 20,
+					"phase": "order",
+					"proxy_frame": 0,
+					"proxy_screen": "[P: (864.3013, 303.038), S: (69.85041, 90.46203)]",
+					"scale": 0.45,
+					"source_frame": 0,
+					"source_screen": "[P: (823.7812, 259.9866), S: (86.18302, 106.5134)]"
+				},
+				{
+					"clock": 0.366666666666667,
+					"frame": 21,
+					"phase": "manifest",
+					"proxy_frame": 0,
+					"proxy_screen": "[P: (864.3013, 265.038), S: (69.85041, 90.46203)]",
+					"scale": 0.45,
+					"source_frame": 0,
+					"source_screen": "[P: (823.7812, 221.9866), S: (86.18302, 106.5134)]"
+				},
+				{
+					"clock": 0.383333333333333,
+					"frame": 22,
+					"phase": "manifest",
+					"proxy_frame": 0,
+					"proxy_screen": "[P: (864.3013, 266.038), S: (69.85041, 90.46203)]",
+					"scale": 0.45,
+					"source_frame": 0,
+					"source_screen": "[P: (823.7812, 222.9866), S: (86.18302, 106.5134)]"
+				},
+				{
+					"clock": 0.4,
+					"frame": 23,
+					"phase": "manifest",
+					"proxy_frame": 0,
+					"proxy_screen": "[P: (864.3013, 266.038), S: (69.85041, 90.46203)]",
+					"scale": 0.45,
+					"source_frame": 0,
+					"source_screen": "[P: (823.7812, 222.9866), S: (86.18302, 106.5134)]"
+				},
+				{
+					"clock": 0.416666666666667,
+					"frame": 24,
+					"phase": "manifest",
+					"proxy_frame": 0,
+					"proxy_screen": "[P: (861.3013, 300.038), S: (69.85041, 90.46203)]",
+					"scale": 0.45,
+					"source_frame": 0,
+					"source_screen": "[P: (820.7812, 256.9866), S: (86.18302, 106.5134)]"
+				},
+				{
+					"clock": 0.433333333333333,
+					"frame": 25,
+					"phase": "manifest",
+					"proxy_frame": 0,
+					"proxy_screen": "[P: (862.3013, 300.038), S: (69.85041, 90.46203)]",
+					"scale": 0.45,
+					"source_frame": 0,
+					"source_screen": "[P: (821.7812, 256.9866), S: (86.18302, 106.5134)]"
+				},
+				{
+					"clock": 0.45,
+					"frame": 26,
+					"phase": "manifest",
+					"proxy_frame": 0,
+					"proxy_screen": "[P: (863.3013, 300.038), S: (69.85041, 90.46203)]",
+					"scale": 0.45,
+					"source_frame": 0,
+					"source_screen": "[P: (822.7812, 256.9866), S: (86.18302, 106.5134)]"
+				},
+				{
+					"clock": 0.466666666666667,
+					"frame": 27,
+					"phase": "manifest",
+					"proxy_frame": 0,
+					"proxy_screen": "[P: (864.3013, 301.038), S: (69.85041, 90.46203)]",
+					"scale": 0.45,
+					"source_frame": 0,
+					"source_screen": "[P: (823.7812, 257.9866), S: (86.18302, 106.5134)]"
+				},
+				{
+					"clock": 0.483333333333333,
+					"frame": 28,
+					"phase": "manifest",
+					"proxy_frame": 0,
+					"proxy_screen": "[P: (864.3013, 301.038), S: (69.85041, 90.46203)]",
+					"scale": 0.45,
+					"source_frame": 1,
+					"source_screen": "[P: (818.9197, 246.9375), S: (89.71875, 117.5625)]"
+				},
+				{
+					"clock": 0.5,
+					"frame": 29,
+					"phase": "manifest",
+					"proxy_frame": 0,
+					"proxy_screen": "[P: (864.3013, 301.038), S: (69.85041, 90.46203)]",
+					"scale": 0.45,
+					"source_frame": 1,
+					"source_screen": "[P: (818.9197, 246.9375), S: (89.71875, 117.5625)]"
+				},
+				{
+					"clock": 0.516666666666667,
+					"frame": 30,
+					"phase": "manifest",
+					"proxy_frame": 0,
+					"proxy_screen": "[P: (864.3013, 301.038), S: (69.85041, 90.46203)]",
+					"scale": 0.45,
+					"source_frame": 1,
+					"source_screen": "[P: (818.9197, 246.9375), S: (89.71875, 117.5625)]"
+				},
+				{
+					"clock": 0.533333333333333,
+					"frame": 31,
+					"phase": "manifest",
+					"proxy_frame": 0,
+					"proxy_screen": "[P: (864.3013, 302.038), S: (69.85041, 90.46203)]",
+					"scale": 0.45,
+					"source_frame": 1,
+					"source_screen": "[P: (818.9197, 247.9375), S: (89.71875, 117.5625)]"
+				},
+				{
+					"clock": 0.55,
+					"frame": 32,
+					"phase": "manifest",
+					"proxy_frame": 0,
+					"proxy_screen": "[P: (864.3013, 302.038), S: (69.85041, 90.46203)]",
+					"scale": 0.45,
+					"source_frame": 1,
+					"source_screen": "[P: (818.9197, 247.9375), S: (89.71875, 117.5625)]"
+				},
+				{
+					"clock": 0.566666666666667,
+					"frame": 33,
+					"phase": "manifest",
+					"proxy_frame": 0,
+					"proxy_screen": "[P: (864.3013, 302.038), S: (69.85041, 90.46203)]",
+					"scale": 0.45,
+					"source_frame": 1,
+					"source_screen": "[P: (818.9197, 247.9375), S: (89.71875, 117.5625)]"
+				},
+				{
+					"clock": 0.583333333333333,
+					"frame": 34,
+					"phase": "manifest",
+					"proxy_frame": 1,
+					"proxy_screen": "[P: (856.4844, 302.2746), S: (77.10271, 91.22541)]",
+					"scale": 0.45,
+					"source_frame": 1,
+					"source_screen": "[P: (814.9197, 248.9375), S: (89.71875, 117.5625)]"
+				},
+				{
+					"clock": 0.6,
+					"frame": 35,
+					"phase": "manifest",
+					"proxy_frame": 1,
+					"proxy_screen": "[P: (856.4844, 302.2746), S: (77.10271, 91.22541)]",
+					"scale": 0.45,
+					"source_frame": 1,
+					"source_screen": "[P: (814.9197, 248.9375), S: (89.71875, 117.5625)]"
+				},
+				{
+					"clock": 0.616666666666667,
+					"frame": 36,
+					"phase": "manifest",
+					"proxy_frame": 1,
+					"proxy_screen": "[P: (856.4844, 302.2746), S: (77.10271, 91.22541)]",
+					"scale": 0.45,
+					"source_frame": 1,
+					"source_screen": "[P: (814.9197, 248.9375), S: (89.71875, 117.5625)]"
+				},
+				{
+					"clock": 0.633333333333334,
+					"frame": 37,
+					"phase": "manifest",
+					"proxy_frame": 1,
+					"proxy_screen": "[P: (856.4844, 302.2746), S: (77.10271, 91.22541)]",
+					"scale": 0.45,
+					"source_frame": 1,
+					"source_screen": "[P: (814.9197, 248.9375), S: (89.71875, 117.5625)]"
+				},
+				{
+					"clock": 0.65,
+					"frame": 38,
+					"phase": "manifest",
+					"proxy_frame": 1,
+					"proxy_screen": "[P: (856.4844, 302.2746), S: (77.10271, 91.22541)]",
+					"scale": 0.45,
+					"source_frame": 1,
+					"source_screen": "[P: (814.9197, 248.9375), S: (89.71875, 117.5625)]"
+				},
+				{
+					"clock": 0.666666666666667,
+					"frame": 39,
+					"phase": "manifest",
+					"proxy_frame": 1,
+					"proxy_screen": "[P: (856.4844, 302.2746), S: (77.10271, 91.22541)]",
+					"scale": 0.45,
+					"source_frame": 1,
+					"source_screen": "[P: (814.9197, 248.9375), S: (89.71875, 117.5625)]"
+				},
+				{
+					"clock": 0.683333333333334,
+					"frame": 40,
+					"phase": "manifest",
+					"proxy_frame": 1,
+					"proxy_screen": "[P: (856.4844, 302.2746), S: (77.10271, 91.22541)]",
+					"scale": 0.45,
+					"source_frame": 1,
+					"source_screen": "[P: (814.9197, 248.9375), S: (89.71875, 117.5625)]"
+				},
+				{
+					"clock": 0.700000000000001,
+					"frame": 41,
+					"phase": "manifest",
+					"proxy_frame": 1,
+					"proxy_screen": "[P: (856.4844, 302.2746), S: (77.10271, 91.22541)]",
+					"scale": 0.45,
+					"source_frame": 1,
+					"source_screen": "[P: (814.9197, 248.9375), S: (89.71875, 117.5625)]"
+				},
+				{
+					"clock": 0.716666666666667,
+					"frame": 42,
+					"phase": "manifest",
+					"proxy_frame": 1,
+					"proxy_screen": "[P: (856.4844, 302.2746), S: (77.10271, 91.22541)]",
+					"scale": 0.45,
+					"source_frame": 1,
+					"source_screen": "[P: (814.9197, 248.9375), S: (89.71875, 117.5625)]"
+				},
+				{
+					"clock": 0.733333333333334,
+					"frame": 43,
+					"phase": "manifest",
+					"proxy_frame": 1,
+					"proxy_screen": "[P: (856.4844, 302.2746), S: (77.10271, 91.22541)]",
+					"scale": 0.45,
+					"source_frame": 1,
+					"source_screen": "[P: (814.9197, 248.9375), S: (89.71875, 117.5625)]"
+				},
+				{
+					"clock": 0.750000000000001,
+					"frame": 44,
+					"phase": "manifest",
+					"proxy_frame": 1,
+					"proxy_screen": "[P: (856.4844, 302.2746), S: (77.10271, 91.22541)]",
+					"scale": 0.45,
+					"source_frame": 1,
+					"source_screen": "[P: (814.9197, 248.9375), S: (89.71875, 117.5625)]"
+				},
+				{
+					"clock": 0.766666666666667,
+					"frame": 45,
+					"phase": "manifest",
+					"proxy_frame": 1,
+					"proxy_screen": "[P: (856.4844, 302.2746), S: (77.10271, 91.22541)]",
+					"scale": 0.45,
+					"source_frame": 1,
+					"source_screen": "[P: (814.9197, 248.9375), S: (89.71875, 117.5625)]"
+				},
+				{
+					"clock": 0.783333333333334,
+					"frame": 46,
+					"phase": "manifest",
+					"proxy_frame": 1,
+					"proxy_screen": "[P: (856.4844, 302.2746), S: (77.10271, 91.22541)]",
+					"scale": 0.45,
+					"source_frame": 1,
+					"source_screen": "[P: (814.9197, 248.9375), S: (89.71875, 117.5625)]"
+				},
+				{
+					"clock": 0.800000000000001,
+					"frame": 47,
+					"phase": "unfurl",
+					"proxy_frame": 2,
+					"proxy_screen": "[P: (845.1785, 299.2209), S: (88.93531, 94.27901)]",
+					"scale": 0.45,
+					"source_frame": 1,
+					"source_screen": "[P: (813.9197, 248.9375), S: (89.71875, 117.5625)]"
+				},
+				{
+					"clock": 0.816666666666668,
+					"frame": 48,
+					"phase": "unfurl",
+					"proxy_frame": 2,
+					"proxy_screen": "[P: (845.1785, 299.2209), S: (88.93531, 94.27901)]",
+					"scale": 0.45,
+					"source_frame": 1,
+					"source_screen": "[P: (813.9197, 248.9375), S: (89.71875, 117.5625)]"
+				},
+				{
+					"clock": 0.833333333333334,
+					"frame": 49,
+					"phase": "unfurl",
+					"proxy_frame": 2,
+					"proxy_screen": "[P: (845.1785, 299.2209), S: (88.93531, 94.27901)]",
+					"scale": 0.45,
+					"source_frame": 1,
+					"source_screen": "[P: (813.9197, 248.9375), S: (89.71875, 117.5625)]"
+				},
+				{
+					"clock": 0.850000000000001,
+					"frame": 50,
+					"phase": "unfurl",
+					"proxy_frame": 2,
+					"proxy_screen": "[P: (845.1785, 299.2209), S: (88.93531, 94.27901)]",
+					"scale": 0.45,
+					"source_frame": 1,
+					"source_screen": "[P: (813.9197, 248.9375), S: (89.71875, 117.5625)]"
+				},
+				{
+					"clock": 0.866666666666668,
+					"frame": 51,
+					"phase": "unfurl",
+					"proxy_frame": 2,
+					"proxy_screen": "[P: (845.1785, 299.2209), S: (88.93531, 94.27901)]",
+					"scale": 0.45,
+					"source_frame": 1,
+					"source_screen": "[P: (813.9197, 248.9375), S: (89.71875, 117.5625)]"
+				},
+				{
+					"clock": 0.883333333333334,
+					"frame": 52,
+					"phase": "unfurl",
+					"proxy_frame": 2,
+					"proxy_screen": "[P: (845.1785, 299.2209), S: (88.93531, 94.27901)]",
+					"scale": 0.45,
+					"source_frame": 1,
+					"source_screen": "[P: (813.9197, 248.9375), S: (89.71875, 117.5625)]"
+				},
+				{
+					"clock": 0.900000000000001,
+					"frame": 53,
+					"phase": "unfurl",
+					"proxy_frame": 2,
+					"proxy_screen": "[P: (845.1785, 297.2209), S: (88.93531, 94.27901)]",
+					"scale": 0.45,
+					"source_frame": 1,
+					"source_screen": "[P: (813.9197, 246.9375), S: (89.71875, 117.5625)]"
+				},
+				{
+					"clock": 0.916666666666668,
+					"frame": 54,
+					"phase": "unfurl",
+					"proxy_frame": 2,
+					"proxy_screen": "[P: (845.1785, 297.2209), S: (88.93531, 94.27901)]",
+					"scale": 0.45,
+					"source_frame": 1,
+					"source_screen": "[P: (813.9197, 246.9375), S: (89.71875, 117.5625)]"
+				},
+				{
+					"clock": 0.933333333333335,
+					"frame": 55,
+					"phase": "unfurl",
+					"proxy_frame": 2,
+					"proxy_screen": "[P: (845.1785, 298.2209), S: (88.93531, 94.27901)]",
+					"scale": 0.45,
+					"source_frame": 1,
+					"source_screen": "[P: (813.9197, 247.9375), S: (89.71875, 117.5625)]"
+				},
+				{
+					"clock": 0.950000000000001,
+					"frame": 56,
+					"phase": "unfurl",
+					"proxy_frame": 2,
+					"proxy_screen": "[P: (845.1785, 298.2209), S: (88.93531, 94.27901)]",
+					"scale": 0.45,
+					"source_frame": 2,
+					"source_screen": "[P: (795.3572, 247.0535), S: (111.375, 118.4465)]"
+				},
+				{
+					"clock": 0.966666666666668,
+					"frame": 57,
+					"phase": "unfurl",
+					"proxy_frame": 2,
+					"proxy_screen": "[P: (845.1785, 298.2209), S: (88.93531, 94.27901)]",
+					"scale": 0.45,
+					"source_frame": 2,
+					"source_screen": "[P: (795.3572, 247.0535), S: (111.375, 118.4465)]"
+				},
+				{
+					"clock": 0.983333333333335,
+					"frame": 58,
+					"phase": "unfurl",
+					"proxy_frame": 2,
+					"proxy_screen": "[P: (845.1785, 299.2209), S: (88.93531, 94.27901)]",
+					"scale": 0.45,
+					"source_frame": 2,
+					"source_screen": "[P: (795.3572, 248.0535), S: (111.375, 118.4465)]"
+				},
+				{
+					"clock": 1.0,
+					"frame": 59,
+					"phase": "unfurl",
+					"proxy_frame": 3,
+					"proxy_screen": "[P: (841.0869, 303.4197), S: (93.13396, 90.08036)]",
+					"scale": 0.45,
+					"source_frame": 2,
+					"source_screen": "[P: (789.3572, 248.0535), S: (111.375, 118.4465)]"
+				},
+				{
+					"clock": 1.01666666666667,
+					"frame": 60,
+					"phase": "unfurl",
+					"proxy_frame": 3,
+					"proxy_screen": "[P: (841.0869, 303.4197), S: (93.13396, 90.08036)]",
+					"scale": 0.45,
+					"source_frame": 2,
+					"source_screen": "[P: (789.3572, 248.0535), S: (111.375, 118.4465)]"
+				},
+				{
+					"clock": 1.03333333333333,
+					"frame": 61,
+					"phase": "unfurl",
+					"proxy_frame": 3,
+					"proxy_screen": "[P: (841.0869, 303.4197), S: (93.13396, 90.08036)]",
+					"scale": 0.45,
+					"source_frame": 2,
+					"source_screen": "[P: (789.3572, 248.0535), S: (111.375, 118.4465)]"
+				},
+				{
+					"clock": 1.05,
+					"frame": 62,
+					"phase": "unfurl",
+					"proxy_frame": 3,
+					"proxy_screen": "[P: (841.0869, 303.4197), S: (93.13396, 90.08036)]",
+					"scale": 0.45,
+					"source_frame": 2,
+					"source_screen": "[P: (789.3572, 248.0535), S: (111.375, 118.4465)]"
+				},
+				{
+					"clock": 1.06666666666667,
+					"frame": 63,
+					"phase": "unfurl",
+					"proxy_frame": 3,
+					"proxy_screen": "[P: (841.0869, 303.4197), S: (93.13396, 90.08036)]",
+					"scale": 0.45,
+					"source_frame": 2,
+					"source_screen": "[P: (789.3572, 248.0535), S: (111.375, 118.4465)]"
+				},
+				{
+					"clock": 1.08333333333333,
+					"frame": 64,
+					"phase": "unfurl",
+					"proxy_frame": 3,
+					"proxy_screen": "[P: (841.0869, 303.4197), S: (93.13396, 90.08036)]",
+					"scale": 0.45,
+					"source_frame": 2,
+					"source_screen": "[P: (789.3572, 248.0535), S: (111.375, 118.4465)]"
+				},
+				{
+					"clock": 1.1,
+					"frame": 65,
+					"phase": "unfurl",
+					"proxy_frame": 3,
+					"proxy_screen": "[P: (841.0869, 303.4197), S: (93.13396, 90.08036)]",
+					"scale": 0.45,
+					"source_frame": 2,
+					"source_screen": "[P: (789.3572, 248.0535), S: (111.375, 118.4465)]"
+				},
+				{
+					"clock": 1.11666666666667,
+					"frame": 66,
+					"phase": "unfurl",
+					"proxy_frame": 3,
+					"proxy_screen": "[P: (841.0869, 303.4197), S: (93.13396, 90.08036)]",
+					"scale": 0.45,
+					"source_frame": 2,
+					"source_screen": "[P: (789.3572, 248.0535), S: (111.375, 118.4465)]"
+				},
+				{
+					"clock": 1.13333333333333,
+					"frame": 67,
+					"phase": "unfurl",
+					"proxy_frame": 3,
+					"proxy_screen": "[P: (841.0869, 303.4197), S: (93.13396, 90.08036)]",
+					"scale": 0.45,
+					"source_frame": 2,
+					"source_screen": "[P: (789.3572, 248.0535), S: (111.375, 118.4465)]"
+				},
+				{
+					"clock": 1.15,
+					"frame": 68,
+					"phase": "unfurl",
+					"proxy_frame": 3,
+					"proxy_screen": "[P: (841.0869, 303.4197), S: (93.13396, 90.08036)]",
+					"scale": 0.45,
+					"source_frame": 2,
+					"source_screen": "[P: (789.3572, 248.0535), S: (111.375, 118.4465)]"
+				},
+				{
+					"clock": 1.16666666666667,
+					"frame": 69,
+					"phase": "unfurl",
+					"proxy_frame": 3,
+					"proxy_screen": "[P: (841.0869, 303.4197), S: (93.13396, 90.08036)]",
+					"scale": 0.45,
+					"source_frame": 2,
+					"source_screen": "[P: (789.3572, 248.0535), S: (111.375, 118.4465)]"
+				},
+				{
+					"clock": 1.18333333333333,
+					"frame": 70,
+					"phase": "unfurl",
+					"proxy_frame": 3,
+					"proxy_screen": "[P: (841.0869, 303.4197), S: (93.13396, 90.08036)]",
+					"scale": 0.45,
+					"source_frame": 2,
+					"source_screen": "[P: (789.3572, 248.0535), S: (111.375, 118.4465)]"
+				},
+				{
+					"clock": 1.2,
+					"frame": 71,
+					"phase": "unfurl",
+					"proxy_frame": 3,
+					"proxy_screen": "[P: (841.0869, 303.4197), S: (93.13396, 90.08036)]",
+					"scale": 0.45,
+					"source_frame": 2,
+					"source_screen": "[P: (789.3572, 248.0535), S: (111.375, 118.4465)]"
+				},
+				{
+					"clock": 1.21666666666667,
+					"frame": 72,
+					"phase": "unfurl",
+					"proxy_frame": 4,
+					"proxy_screen": "[P: (847.5758, 295.7857), S: (83.97323, 97.71426)]",
+					"scale": 0.45,
+					"source_frame": 2,
+					"source_screen": "[P: (789.3572, 248.0535), S: (111.375, 118.4465)]"
+				},
+				{
+					"clock": 1.23333333333333,
+					"frame": 73,
+					"phase": "unfurl",
+					"proxy_frame": 4,
+					"proxy_screen": "[P: (847.5758, 295.7857), S: (83.97323, 97.71426)]",
+					"scale": 0.45,
+					"source_frame": 2,
+					"source_screen": "[P: (789.3572, 248.0535), S: (111.375, 118.4465)]"
+				},
+				{
+					"clock": 1.25,
+					"frame": 74,
+					"phase": "unfurl",
+					"proxy_frame": 4,
+					"proxy_screen": "[P: (847.5758, 295.7857), S: (83.97323, 97.71426)]",
+					"scale": 0.45,
+					"source_frame": 2,
+					"source_screen": "[P: (789.3572, 248.0535), S: (111.375, 118.4465)]"
+				},
+				{
+					"clock": 1.26666666666667,
+					"frame": 75,
+					"phase": "unfurl",
+					"proxy_frame": 4,
+					"proxy_screen": "[P: (847.5758, 295.7857), S: (83.97323, 97.71426)]",
+					"scale": 0.45,
+					"source_frame": 2,
+					"source_screen": "[P: (789.3572, 248.0535), S: (111.375, 118.4465)]"
+				},
+				{
+					"clock": 1.28333333333333,
+					"frame": 76,
+					"phase": "unfurl",
+					"proxy_frame": 4,
+					"proxy_screen": "[P: (847.5758, 295.7857), S: (83.97323, 97.71426)]",
+					"scale": 0.45,
+					"source_frame": 2,
+					"source_screen": "[P: (789.3572, 248.0535), S: (111.375, 118.4465)]"
+				},
+				{
+					"clock": 1.3,
+					"frame": 77,
+					"phase": "unfurl",
+					"proxy_frame": 4,
+					"proxy_screen": "[P: (847.5758, 295.7857), S: (83.97323, 97.71426)]",
+					"scale": 0.45,
+					"source_frame": 2,
+					"source_screen": "[P: (789.3572, 248.0535), S: (111.375, 118.4465)]"
+				},
+				{
+					"clock": 1.31666666666667,
+					"frame": 78,
+					"phase": "unfurl",
+					"proxy_frame": 4,
+					"proxy_screen": "[P: (847.5758, 295.7857), S: (83.97323, 97.71426)]",
+					"scale": 0.45,
+					"source_frame": 2,
+					"source_screen": "[P: (789.3572, 248.0535), S: (111.375, 118.4465)]"
+				},
+				{
+					"clock": 1.33333333333333,
+					"frame": 79,
+					"phase": "unfurl",
+					"proxy_frame": 4,
+					"proxy_screen": "[P: (847.5758, 295.7857), S: (83.97323, 97.71426)]",
+					"scale": 0.45,
+					"source_frame": 2,
+					"source_screen": "[P: (789.3572, 248.0535), S: (111.375, 118.4465)]"
+				},
+				{
+					"clock": 1.35,
+					"frame": 80,
+					"phase": "unfurl",
+					"proxy_frame": 4,
+					"proxy_screen": "[P: (847.5758, 295.7857), S: (83.97323, 97.71426)]",
+					"scale": 0.45,
+					"source_frame": 2,
+					"source_screen": "[P: (789.3572, 248.0535), S: (111.375, 118.4465)]"
+				},
+				{
+					"clock": 1.36666666666667,
+					"frame": 81,
+					"phase": "unfurl",
+					"proxy_frame": 4,
+					"proxy_screen": "[P: (847.5758, 295.7857), S: (83.97323, 97.71426)]",
+					"scale": 0.45,
+					"source_frame": 2,
+					"source_screen": "[P: (789.3572, 248.0535), S: (111.375, 118.4465)]"
+				},
+				{
+					"clock": 1.38333333333333,
+					"frame": 82,
+					"phase": "unfurl",
+					"proxy_frame": 4,
+					"proxy_screen": "[P: (847.5758, 295.7857), S: (83.97323, 97.71426)]",
+					"scale": 0.45,
+					"source_frame": 2,
+					"source_screen": "[P: (789.3572, 248.0535), S: (111.375, 118.4465)]"
+				},
+				{
+					"clock": 1.4,
+					"frame": 83,
+					"phase": "unfurl",
+					"proxy_frame": 4,
+					"proxy_screen": "[P: (847.5758, 295.7857), S: (83.97323, 97.71426)]",
+					"scale": 0.45,
+					"source_frame": 2,
+					"source_screen": "[P: (789.3572, 248.0535), S: (111.375, 118.4465)]"
+				},
+				{
+					"clock": 1.41666666666667,
+					"frame": 84,
+					"phase": "array_tell",
+					"proxy_frame": 5,
+					"proxy_screen": "[P: (822.5446, 301.1295), S: (111.4553, 92.37051)]",
+					"scale": 0.45,
+					"source_frame": 3,
+					"source_screen": "[P: (781.683, 268.3839), S: (124.192, 98.11609)]"
+				},
+				{
+					"clock": 1.43333333333333,
+					"frame": 85,
+					"phase": "array_tell",
+					"proxy_frame": 5,
+					"proxy_screen": "[P: (822.5446, 301.1295), S: (111.4553, 92.37051)]",
+					"scale": 0.45,
+					"source_frame": 3,
+					"source_screen": "[P: (781.683, 268.3839), S: (124.192, 98.11609)]"
+				},
+				{
+					"clock": 1.45,
+					"frame": 86,
+					"phase": "array_tell",
+					"proxy_frame": 5,
+					"proxy_screen": "[P: (822.5446, 301.1295), S: (111.4553, 92.37051)]",
+					"scale": 0.45,
+					"source_frame": 3,
+					"source_screen": "[P: (781.683, 268.3839), S: (124.192, 98.11609)]"
+				},
+				{
+					"clock": 1.46666666666667,
+					"frame": 87,
+					"phase": "array_tell",
+					"proxy_frame": 5,
+					"proxy_screen": "[P: (822.5446, 301.1295), S: (111.4553, 92.37051)]",
+					"scale": 0.45,
+					"source_frame": 3,
+					"source_screen": "[P: (781.683, 268.3839), S: (124.192, 98.11609)]"
+				},
+				{
+					"clock": 1.48333333333333,
+					"frame": 88,
+					"phase": "array_tell",
+					"proxy_frame": 5,
+					"proxy_screen": "[P: (822.5446, 301.1295), S: (111.4553, 92.37051)]",
+					"scale": 0.45,
+					"source_frame": 3,
+					"source_screen": "[P: (781.683, 268.3839), S: (124.192, 98.11609)]"
+				},
+				{
+					"clock": 1.5,
+					"frame": 89,
+					"phase": "array_tell",
+					"proxy_frame": 5,
+					"proxy_screen": "[P: (822.5446, 301.1295), S: (111.4553, 92.37051)]",
+					"scale": 0.45,
+					"source_frame": 3,
+					"source_screen": "[P: (781.683, 268.3839), S: (124.192, 98.11609)]"
+				},
+				{
+					"clock": 1.51666666666667,
+					"frame": 90,
+					"phase": "array_tell",
+					"proxy_frame": 5,
+					"proxy_screen": "[P: (822.5446, 301.1295), S: (111.4553, 92.37051)]",
+					"scale": 0.45,
+					"source_frame": 3,
+					"source_screen": "[P: (781.683, 268.3839), S: (124.192, 98.11609)]"
+				},
+				{
+					"clock": 1.53333333333333,
+					"frame": 91,
+					"phase": "array_tell",
+					"proxy_frame": 5,
+					"proxy_screen": "[P: (822.5446, 301.1295), S: (111.4553, 92.37051)]",
+					"scale": 0.45,
+					"source_frame": 3,
+					"source_screen": "[P: (781.683, 268.3839), S: (124.192, 98.11609)]"
+				},
+				{
+					"clock": 1.55,
+					"frame": 92,
+					"phase": "array_tell",
+					"proxy_frame": 5,
+					"proxy_screen": "[P: (822.5446, 301.1295), S: (111.4553, 92.37051)]",
+					"scale": 0.45,
+					"source_frame": 3,
+					"source_screen": "[P: (781.683, 268.3839), S: (124.192, 98.11609)]"
+				},
+				{
+					"clock": 1.56666666666667,
+					"frame": 93,
+					"phase": "array_tell",
+					"proxy_frame": 5,
+					"proxy_screen": "[P: (822.5446, 301.1295), S: (111.4553, 92.37051)]",
+					"scale": 0.45,
+					"source_frame": 3,
+					"source_screen": "[P: (781.683, 268.3839), S: (124.192, 98.11609)]"
+				},
+				{
+					"clock": 1.58333333333333,
+					"frame": 94,
+					"phase": "array_tell",
+					"proxy_frame": 5,
+					"proxy_screen": "[P: (822.5446, 301.1295), S: (111.4553, 92.37051)]",
+					"scale": 0.45,
+					"source_frame": 3,
+					"source_screen": "[P: (781.683, 268.3839), S: (124.192, 98.11609)]"
+				},
+				{
+					"clock": 1.6,
+					"frame": 95,
+					"phase": "array_tell",
+					"proxy_frame": 5,
+					"proxy_screen": "[P: (822.5446, 301.1295), S: (111.4553, 92.37051)]",
+					"scale": 0.45,
+					"source_frame": 3,
+					"source_screen": "[P: (781.683, 268.3839), S: (124.192, 98.11609)]"
+				},
+				{
+					"clock": 1.61666666666667,
+					"frame": 96,
+					"phase": "array_tell",
+					"proxy_frame": 5,
+					"proxy_screen": "[P: (822.5446, 301.1295), S: (111.4553, 92.37051)]",
+					"scale": 0.45,
+					"source_frame": 3,
+					"source_screen": "[P: (781.683, 268.3839), S: (124.192, 98.11609)]"
+				},
+				{
+					"clock": 1.63333333333333,
+					"frame": 97,
+					"phase": "array_tell",
+					"proxy_frame": 5,
+					"proxy_screen": "[P: (822.5446, 301.1295), S: (111.4553, 92.37051)]",
+					"scale": 0.45,
+					"source_frame": 3,
+					"source_screen": "[P: (781.683, 268.3839), S: (124.192, 98.11609)]"
+				},
+				{
+					"clock": 1.65,
+					"frame": 98,
+					"phase": "array_tell",
+					"proxy_frame": 5,
+					"proxy_screen": "[P: (822.5446, 301.1295), S: (111.4553, 92.37051)]",
+					"scale": 0.45,
+					"source_frame": 3,
+					"source_screen": "[P: (781.683, 268.3839), S: (124.192, 98.11609)]"
+				},
+				{
+					"clock": 1.66666666666667,
+					"frame": 99,
+					"phase": "array_tell",
+					"proxy_frame": 5,
+					"proxy_screen": "[P: (822.5446, 301.1295), S: (111.4553, 92.37051)]",
+					"scale": 0.45,
+					"source_frame": 3,
+					"source_screen": "[P: (781.683, 268.3839), S: (124.192, 98.11609)]"
+				},
+				{
+					"clock": 1.68333333333333,
+					"frame": 100,
+					"phase": "array_tell",
+					"proxy_frame": 5,
+					"proxy_screen": "[P: (822.5446, 301.1295), S: (111.4553, 92.37051)]",
+					"scale": 0.45,
+					"source_frame": 3,
+					"source_screen": "[P: (781.683, 268.3839), S: (124.192, 98.11609)]"
+				},
+				{
+					"clock": 1.7,
+					"frame": 101,
+					"phase": "array_tell",
+					"proxy_frame": 5,
+					"proxy_screen": "[P: (822.5446, 301.1295), S: (111.4553, 92.37051)]",
+					"scale": 0.45,
+					"source_frame": 3,
+					"source_screen": "[P: (781.683, 268.3839), S: (124.192, 98.11609)]"
+				},
+				{
+					"clock": 1.71666666666667,
+					"frame": 102,
+					"phase": "array_tell",
+					"proxy_frame": 5,
+					"proxy_screen": "[P: (822.5446, 301.1295), S: (111.4553, 92.37051)]",
+					"scale": 0.45,
+					"source_frame": 3,
+					"source_screen": "[P: (781.683, 268.3839), S: (124.192, 98.11609)]"
+				},
+				{
+					"clock": 1.73333333333333,
+					"frame": 103,
+					"phase": "array_tell",
+					"proxy_frame": 5,
+					"proxy_screen": "[P: (822.5446, 301.1295), S: (111.4553, 92.37051)]",
+					"scale": 0.45,
+					"source_frame": 3,
+					"source_screen": "[P: (781.683, 268.3839), S: (124.192, 98.11609)]"
+				},
+				{
+					"clock": 1.75,
+					"frame": 104,
+					"phase": "array_tell",
+					"proxy_frame": 5,
+					"proxy_screen": "[P: (822.5446, 301.1295), S: (111.4553, 92.37051)]",
+					"scale": 0.45,
+					"source_frame": 3,
+					"source_screen": "[P: (781.683, 268.3839), S: (124.192, 98.11609)]"
+				},
+				{
+					"clock": 1.76666666666667,
+					"frame": 105,
+					"phase": "array_tell",
+					"proxy_frame": 5,
+					"proxy_screen": "[P: (822.5446, 301.1295), S: (111.4553, 92.37051)]",
+					"scale": 0.45,
+					"source_frame": 3,
+					"source_screen": "[P: (781.683, 268.3839), S: (124.192, 98.11609)]"
+				},
+				{
+					"clock": 1.78333333333333,
+					"frame": 106,
+					"phase": "array_tell",
+					"proxy_frame": 5,
+					"proxy_screen": "[P: (822.5446, 301.1295), S: (111.4553, 92.37051)]",
+					"scale": 0.45,
+					"source_frame": 3,
+					"source_screen": "[P: (781.683, 268.3839), S: (124.192, 98.11609)]"
+				},
+				{
+					"clock": 1.8,
+					"frame": 107,
+					"phase": "array_tell",
+					"proxy_frame": 5,
+					"proxy_screen": "[P: (822.5446, 301.1295), S: (111.4553, 92.37051)]",
+					"scale": 0.45,
+					"source_frame": 3,
+					"source_screen": "[P: (781.683, 268.3839), S: (124.192, 98.11609)]"
+				},
+				{
+					"clock": 1.81666666666667,
+					"frame": 108,
+					"phase": "array_tell",
+					"proxy_frame": 5,
+					"proxy_screen": "[P: (822.5446, 301.1295), S: (111.4553, 92.37051)]",
+					"scale": 0.45,
+					"source_frame": 3,
+					"source_screen": "[P: (781.683, 268.3839), S: (124.192, 98.11609)]"
+				},
+				{
+					"clock": 1.83333333333333,
+					"frame": 109,
+					"phase": "array_tell",
+					"proxy_frame": 5,
+					"proxy_screen": "[P: (822.5446, 301.1295), S: (111.4553, 92.37051)]",
+					"scale": 0.45,
+					"source_frame": 3,
+					"source_screen": "[P: (781.683, 268.3839), S: (124.192, 98.11609)]"
+				},
+				{
+					"clock": 1.85,
+					"frame": 110,
+					"phase": "array_tell",
+					"proxy_frame": 5,
+					"proxy_screen": "[P: (822.5446, 301.1295), S: (111.4553, 92.37051)]",
+					"scale": 0.45,
+					"source_frame": 3,
+					"source_screen": "[P: (781.683, 268.3839), S: (124.192, 98.11609)]"
+				},
+				{
+					"clock": 1.86666666666666,
+					"frame": 111,
+					"phase": "array_tell",
+					"proxy_frame": 5,
+					"proxy_screen": "[P: (822.5446, 301.1295), S: (111.4553, 92.37051)]",
+					"scale": 0.45,
+					"source_frame": 3,
+					"source_screen": "[P: (781.683, 268.3839), S: (124.192, 98.11609)]"
+				},
+				{
+					"clock": 1.88333333333333,
+					"frame": 112,
+					"phase": "array_tell",
+					"proxy_frame": 6,
+					"proxy_screen": "[P: (831.3236, 305.7098), S: (92.37051, 87.79015)]",
+					"scale": 0.45,
+					"source_frame": 3,
+					"source_screen": "[P: (781.683, 268.3839), S: (124.192, 98.11609)]"
+				},
+				{
+					"clock": 1.9,
+					"frame": 113,
+					"phase": "array_tell",
+					"proxy_frame": 6,
+					"proxy_screen": "[P: (831.3236, 305.7098), S: (92.37051, 87.79015)]",
+					"scale": 0.45,
+					"source_frame": 3,
+					"source_screen": "[P: (781.683, 268.3839), S: (124.192, 98.11609)]"
+				},
+				{
+					"clock": 1.91666666666666,
+					"frame": 114,
+					"phase": "array_tell",
+					"proxy_frame": 6,
+					"proxy_screen": "[P: (831.3236, 305.7098), S: (92.37051, 87.79015)]",
+					"scale": 0.45,
+					"source_frame": 3,
+					"source_screen": "[P: (781.683, 268.3839), S: (124.192, 98.11609)]"
+				},
+				{
+					"clock": 1.93333333333333,
+					"frame": 115,
+					"phase": "array_tell",
+					"proxy_frame": 6,
+					"proxy_screen": "[P: (831.3236, 305.7098), S: (92.37051, 87.79015)]",
+					"scale": 0.45,
+					"source_frame": 4,
+					"source_screen": "[P: (777.2634, 259.5446), S: (132.1473, 106.9554)]"
+				},
+				{
+					"clock": 1.95,
+					"frame": 116,
+					"phase": "array_tell",
+					"proxy_frame": 6,
+					"proxy_screen": "[P: (831.3236, 305.7098), S: (92.37051, 87.79015)]",
+					"scale": 0.45,
+					"source_frame": 4,
+					"source_screen": "[P: (777.2634, 259.5446), S: (132.1473, 106.9554)]"
+				},
+				{
+					"clock": 1.96666666666666,
+					"frame": 117,
+					"phase": "array_tell",
+					"proxy_frame": 6,
+					"proxy_screen": "[P: (831.3236, 305.7098), S: (92.37051, 87.79015)]",
+					"scale": 0.45,
+					"source_frame": 4,
+					"source_screen": "[P: (777.2634, 259.5446), S: (132.1473, 106.9554)]"
+				},
+				{
+					"clock": 1.98333333333333,
+					"frame": 118,
+					"phase": "array_tell",
+					"proxy_frame": 6,
+					"proxy_screen": "[P: (831.3236, 305.7098), S: (92.37051, 87.79015)]",
+					"scale": 0.45,
+					"source_frame": 4,
+					"source_screen": "[P: (777.2634, 259.5446), S: (132.1473, 106.9554)]"
+				},
+				{
+					"clock": 2.0,
+					"frame": 119,
+					"phase": "array_tell",
+					"proxy_frame": 6,
+					"proxy_screen": "[P: (831.3236, 305.7098), S: (92.37051, 87.79015)]",
+					"scale": 0.45,
+					"source_frame": 4,
+					"source_screen": "[P: (777.2634, 259.5446), S: (132.1473, 106.9554)]"
+				},
+				{
+					"clock": 2.01666666666666,
+					"frame": 120,
+					"phase": "array_tell",
+					"proxy_frame": 6,
+					"proxy_screen": "[P: (831.3236, 305.7098), S: (92.37051, 87.79015)]",
+					"scale": 0.45,
+					"source_frame": 4,
+					"source_screen": "[P: (777.2634, 259.5446), S: (132.1473, 106.9554)]"
+				},
+				{
+					"clock": 2.03333333333333,
+					"frame": 121,
+					"phase": "array_tell",
+					"proxy_frame": 6,
+					"proxy_screen": "[P: (831.3236, 305.7098), S: (92.37051, 87.79015)]",
+					"scale": 0.45,
+					"source_frame": 4,
+					"source_screen": "[P: (777.2634, 259.5446), S: (132.1473, 106.9554)]"
+				},
+				{
+					"clock": 2.05,
+					"frame": 122,
+					"phase": "array_tell",
+					"proxy_frame": 6,
+					"proxy_screen": "[P: (831.3236, 305.7098), S: (92.37051, 87.79015)]",
+					"scale": 0.45,
+					"source_frame": 4,
+					"source_screen": "[P: (777.2634, 259.5446), S: (132.1473, 106.9554)]"
+				},
+				{
+					"clock": 2.06666666666666,
+					"frame": 123,
+					"phase": "array_tell",
+					"proxy_frame": 6,
+					"proxy_screen": "[P: (831.3236, 305.7098), S: (92.37051, 87.79015)]",
+					"scale": 0.45,
+					"source_frame": 4,
+					"source_screen": "[P: (777.2634, 259.5446), S: (132.1473, 106.9554)]"
+				},
+				{
+					"clock": 2.08333333333333,
+					"frame": 124,
+					"phase": "array_tell",
+					"proxy_frame": 6,
+					"proxy_screen": "[P: (831.3236, 305.7098), S: (92.37051, 87.79015)]",
+					"scale": 0.45,
+					"source_frame": 4,
+					"source_screen": "[P: (777.2634, 259.5446), S: (132.1473, 106.9554)]"
+				},
+				{
+					"clock": 2.1,
+					"frame": 125,
+					"phase": "array_tell",
+					"proxy_frame": 6,
+					"proxy_screen": "[P: (831.3236, 305.7098), S: (92.37051, 87.79015)]",
+					"scale": 0.45,
+					"source_frame": 4,
+					"source_screen": "[P: (777.2634, 259.5446), S: (132.1473, 106.9554)]"
+				},
+				{
+					"clock": 2.11666666666666,
+					"frame": 126,
+					"phase": "array_tell",
+					"proxy_frame": 6,
+					"proxy_screen": "[P: (831.3236, 305.7098), S: (92.37051, 87.79015)]",
+					"scale": 0.45,
+					"source_frame": 4,
+					"source_screen": "[P: (777.2634, 259.5446), S: (132.1473, 106.9554)]"
+				},
+				{
+					"clock": 2.13333333333333,
+					"frame": 127,
+					"phase": "array_tell",
+					"proxy_frame": 6,
+					"proxy_screen": "[P: (831.3236, 305.7098), S: (92.37051, 87.79015)]",
+					"scale": 0.45,
+					"source_frame": 4,
+					"source_screen": "[P: (777.2634, 259.5446), S: (132.1473, 106.9554)]"
+				},
+				{
+					"clock": 2.15,
+					"frame": 128,
+					"phase": "array_tell",
+					"proxy_frame": 6,
+					"proxy_screen": "[P: (831.3236, 305.7098), S: (92.37051, 87.79015)]",
+					"scale": 0.45,
+					"source_frame": 4,
+					"source_screen": "[P: (777.2634, 259.5446), S: (132.1473, 106.9554)]"
+				},
+				{
+					"clock": 2.16666666666666,
+					"frame": 129,
+					"phase": "array_tell",
+					"proxy_frame": 6,
+					"proxy_screen": "[P: (831.3236, 305.7098), S: (92.37051, 87.79015)]",
+					"scale": 0.45,
+					"source_frame": 4,
+					"source_screen": "[P: (777.2634, 259.5446), S: (132.1473, 106.9554)]"
+				},
+				{
+					"clock": 2.18333333333333,
+					"frame": 130,
+					"phase": "array_tell",
+					"proxy_frame": 6,
+					"proxy_screen": "[P: (831.3236, 305.7098), S: (92.37051, 87.79015)]",
+					"scale": 0.45,
+					"source_frame": 4,
+					"source_screen": "[P: (777.2634, 259.5446), S: (132.1473, 106.9554)]"
+				},
+				{
+					"clock": 2.2,
+					"frame": 131,
+					"phase": "array_tell",
+					"proxy_frame": 6,
+					"proxy_screen": "[P: (831.3236, 305.7098), S: (92.37051, 87.79015)]",
+					"scale": 0.45,
+					"source_frame": 4,
+					"source_screen": "[P: (777.2634, 259.5446), S: (132.1473, 106.9554)]"
+				},
+				{
+					"clock": 2.21666666666666,
+					"frame": 132,
+					"phase": "array_tell",
+					"proxy_frame": 6,
+					"proxy_screen": "[P: (831.3236, 305.7098), S: (92.37051, 87.79015)]",
+					"scale": 0.45,
+					"source_frame": 4,
+					"source_screen": "[P: (777.2634, 259.5446), S: (132.1473, 106.9554)]"
+				},
+				{
+					"clock": 2.23333333333333,
+					"frame": 133,
+					"phase": "array_tell",
+					"proxy_frame": 6,
+					"proxy_screen": "[P: (831.3236, 305.7098), S: (92.37051, 87.79015)]",
+					"scale": 0.45,
+					"source_frame": 4,
+					"source_screen": "[P: (777.2634, 259.5446), S: (132.1473, 106.9554)]"
+				},
+				{
+					"clock": 2.25,
+					"frame": 134,
+					"phase": "array_tell",
+					"proxy_frame": 6,
+					"proxy_screen": "[P: (831.3236, 305.7098), S: (92.37051, 87.79015)]",
+					"scale": 0.45,
+					"source_frame": 4,
+					"source_screen": "[P: (777.2634, 259.5446), S: (132.1473, 106.9554)]"
+				},
+				{
+					"clock": 2.26666666666666,
+					"frame": 135,
+					"phase": "array_tell",
+					"proxy_frame": 6,
+					"proxy_screen": "[P: (831.3236, 305.7098), S: (92.37051, 87.79015)]",
+					"scale": 0.45,
+					"source_frame": 4,
+					"source_screen": "[P: (777.2634, 259.5446), S: (132.1473, 106.9554)]"
+				},
+				{
+					"clock": 2.28333333333333,
+					"frame": 136,
+					"phase": "array_tell",
+					"proxy_frame": 6,
+					"proxy_screen": "[P: (831.3236, 305.7098), S: (92.37051, 87.79015)]",
+					"scale": 0.45,
+					"source_frame": 4,
+					"source_screen": "[P: (777.2634, 259.5446), S: (132.1473, 106.9554)]"
+				},
+				{
+					"clock": 2.3,
+					"frame": 137,
+					"phase": "array_tell",
+					"proxy_frame": 6,
+					"proxy_screen": "[P: (831.3236, 305.7098), S: (92.37051, 87.79015)]",
+					"scale": 0.45,
+					"source_frame": 4,
+					"source_screen": "[P: (777.2634, 259.5446), S: (132.1473, 106.9554)]"
+				},
+				{
+					"clock": 2.31666666666666,
+					"frame": 138,
+					"phase": "impact",
+					"proxy_frame": 7,
+					"proxy_screen": "[P: (832.7196, 303.6656), S: (92.61107, 90.69761)]",
+					"scale": 0.451171875,
+					"source_frame": 4,
+					"source_screen": "[P: (776.6052, 260.0591), S: (132.4914, 107.2339)]"
+				},
+				{
+					"clock": 2.33333333333333,
+					"frame": 139,
+					"phase": "impact",
+					"proxy_frame": 7,
+					"proxy_screen": "[P: (831.1576, 301.8042), S: (93.81381, 91.8755)]",
+					"scale": 0.45703125,
+					"source_frame": 4,
+					"source_screen": "[P: (774.3145, 257.6313), S: (134.2121, 108.6265)]"
+				},
+				{
+					"clock": 2.35,
+					"frame": 140,
+					"phase": "impact",
+					"proxy_frame": 7,
+					"proxy_screen": "[P: (830.5955, 300.9427), S: (95.01655, 93.05339)]",
+					"scale": 0.462890625,
+					"source_frame": 4,
+					"source_screen": "[P: (773.0236, 256.2035), S: (135.9328, 110.0192)]"
+				},
+				{
+					"clock": 2.36666666666666,
+					"frame": 141,
+					"phase": "impact",
+					"proxy_frame": 7,
+					"proxy_screen": "[P: (829.0334, 300.0812), S: (96.21929, 94.23128)]",
+					"scale": 0.46875,
+					"source_frame": 4,
+					"source_screen": "[P: (770.7328, 254.7756), S: (137.6534, 111.4118)]"
+				},
+				{
+					"clock": 2.38333333333333,
+					"frame": 142,
+					"phase": "impact",
+					"proxy_frame": 7,
+					"proxy_screen": "[P: (827.4713, 298.2197), S: (97.42204, 95.40917)]",
+					"scale": 0.474609375,
+					"source_frame": 4,
+					"source_screen": "[P: (768.4419, 252.3478), S: (139.3741, 112.8045)]"
+				},
+				{
+					"clock": 2.4,
+					"frame": 143,
+					"phase": "impact",
+					"proxy_frame": 7,
+					"proxy_screen": "[P: (825.9093, 297.3583), S: (98.62477, 96.58707)]",
+					"scale": 0.48046875,
+					"source_frame": 4,
+					"source_screen": "[P: (766.1511, 250.92), S: (141.0948, 114.1971)]"
+				},
+				{
+					"clock": 2.41666666666666,
+					"frame": 144,
+					"phase": "impact",
+					"proxy_frame": 7,
+					"proxy_screen": "[P: (825.9093, 297.3583), S: (98.62477, 96.58707)]",
+					"scale": 0.48046875,
+					"source_frame": 4,
+					"source_screen": "[P: (766.1511, 250.92), S: (141.0948, 114.1971)]"
+				},
+				{
+					"clock": 2.43333333333333,
+					"frame": 145,
+					"phase": "impact",
+					"proxy_frame": 7,
+					"proxy_screen": "[P: (825.3472, 296.4968), S: (99.82751, 97.76495)]",
+					"scale": 0.486328125,
+					"source_frame": 5,
+					"source_screen": "[P: (783.9659, 229.4312), S: (103.171, 135.6508)]"
+				},
+				{
+					"clock": 2.45,
+					"frame": 146,
+					"phase": "impact",
+					"proxy_frame": 7,
+					"proxy_screen": "[P: (823.785, 294.6353), S: (101.0303, 98.94285)]",
+					"scale": 0.4921875,
+					"source_frame": 5,
+					"source_screen": "[P: (781.9053, 226.7617), S: (104.414, 137.2852)]"
+				},
+				{
+					"clock": 2.46666666666666,
+					"frame": 147,
+					"phase": "recover",
+					"proxy_frame": 7,
+					"proxy_screen": "[P: (823.785, 294.6353), S: (101.0303, 98.94285)]",
+					"scale": 0.4921875,
+					"source_frame": 5,
+					"source_screen": "[P: (781.9053, 226.7617), S: (104.414, 137.2852)]"
+				},
+				{
+					"clock": 2.48333333333333,
+					"frame": 148,
+					"phase": "recover",
+					"proxy_frame": 7,
+					"proxy_screen": "[P: (822.223, 293.7738), S: (102.233, 100.1207)]",
+					"scale": 0.498046875,
+					"source_frame": 5,
+					"source_screen": "[P: (779.8446, 225.0922), S: (105.6571, 138.9195)]"
+				},
+				{
+					"clock": 2.5,
+					"frame": 149,
+					"phase": "recover",
+					"proxy_frame": 7,
+					"proxy_screen": "[P: (820.6609, 292.9123), S: (103.4357, 101.2986)]",
+					"scale": 0.50390625,
+					"source_frame": 5,
+					"source_screen": "[P: (777.7839, 223.4227), S: (106.9001, 140.5539)]"
+				},
+				{
+					"clock": 2.51666666666666,
+					"frame": 150,
+					"phase": "recover",
+					"proxy_frame": 7,
+					"proxy_screen": "[P: (820.6609, 292.9123), S: (103.4357, 101.2986)]",
+					"scale": 0.50390625,
+					"source_frame": 5,
+					"source_screen": "[P: (777.7839, 223.4227), S: (106.9001, 140.5539)]"
+				},
+				{
+					"clock": 2.53333333333333,
+					"frame": 151,
+					"phase": "recover",
+					"proxy_frame": 8,
+					"proxy_screen": "[P: (813.4778, 290.6185), S: (111.9891, 102.9089)]",
+					"scale": 0.509765625,
+					"source_frame": 5,
+					"source_screen": "[P: (775.7234, 220.7532), S: (108.1431, 142.1882)]"
+				},
+				{
+					"clock": 2.55,
+					"frame": 152,
+					"phase": "impact",
+					"proxy_frame": 7,
+					"proxy_screen": "[P: (819.0989, 291.0508), S: (104.6385, 102.4765)]",
+					"scale": 0.509765625,
+					"source_frame": 5,
+					"source_screen": "[P: (775.7234, 220.7532), S: (108.1431, 142.1882)]"
+				},
+				{
+					"clock": 2.56666666666666,
+					"frame": 153,
+					"phase": "impact",
+					"proxy_frame": 7,
+					"proxy_screen": "[P: (818.5367, 290.1893), S: (105.8412, 103.6544)]",
+					"scale": 0.515625,
+					"source_frame": 5,
+					"source_screen": "[P: (774.6627, 219.0837), S: (109.3861, 143.8226)]"
+				},
+				{
+					"clock": 2.58333333333333,
+					"frame": 154,
+					"phase": "impact",
+					"proxy_frame": 7,
+					"proxy_screen": "[P: (818.5367, 290.1893), S: (105.8412, 103.6544)]",
+					"scale": 0.515625,
+					"source_frame": 5,
+					"source_screen": "[P: (774.6627, 219.0837), S: (109.3861, 143.8226)]"
+				},
+				{
+					"clock": 2.6,
+					"frame": 155,
+					"phase": "impact",
+					"proxy_frame": 7,
+					"proxy_screen": "[P: (816.9747, 289.3279), S: (107.044, 104.8323)]",
+					"scale": 0.521484375,
+					"source_frame": 5,
+					"source_screen": "[P: (772.6021, 217.4142), S: (110.6292, 145.4569)]"
+				},
+				{
+					"clock": 2.61666666666666,
+					"frame": 156,
+					"phase": "impact",
+					"proxy_frame": 7,
+					"proxy_screen": "[P: (816.9747, 289.3279), S: (107.044, 104.8323)]",
+					"scale": 0.521484375,
+					"source_frame": 5,
+					"source_screen": "[P: (772.6021, 217.4142), S: (110.6292, 145.4569)]"
+				},
+				{
+					"clock": 2.63333333333333,
+					"frame": 157,
+					"phase": "impact",
+					"proxy_frame": 7,
+					"proxy_screen": "[P: (815.4126, 287.4664), S: (108.2467, 106.0102)]",
+					"scale": 0.52734375,
+					"source_frame": 5,
+					"source_screen": "[P: (770.5414, 214.7447), S: (111.8722, 147.0912)]"
+				},
+				{
+					"clock": 2.65,
+					"frame": 158,
+					"phase": "impact",
+					"proxy_frame": 7,
+					"proxy_screen": "[P: (815.4126, 287.4664), S: (108.2467, 106.0102)]",
+					"scale": 0.52734375,
+					"source_frame": 5,
+					"source_screen": "[P: (770.5414, 214.7447), S: (111.8722, 147.0912)]"
+				},
+				{
+					"clock": 2.66666666666666,
+					"frame": 159,
+					"phase": "impact",
+					"proxy_frame": 7,
+					"proxy_screen": "[P: (815.4126, 287.4664), S: (108.2467, 106.0102)]",
+					"scale": 0.52734375,
+					"source_frame": 5,
+					"source_screen": "[P: (770.5414, 214.7447), S: (111.8722, 147.0912)]"
+				},
+				{
+					"clock": 2.68333333333333,
+					"frame": 160,
+					"phase": "impact",
+					"proxy_frame": 7,
+					"proxy_screen": "[P: (813.8505, 286.6049), S: (109.4494, 107.1881)]",
+					"scale": 0.533203125,
+					"source_frame": 5,
+					"source_screen": "[P: (768.4807, 213.0752), S: (113.1152, 148.7256)]"
+				},
+				{
+					"clock": 2.7,
+					"frame": 161,
+					"phase": "recover",
+					"proxy_frame": 8,
+					"proxy_screen": "[P: (807.9709, 286.1526), S: (117.1381, 107.6404)]",
+					"scale": 0.533203125,
+					"source_frame": 5,
+					"source_screen": "[P: (768.4807, 213.0752), S: (113.1152, 148.7256)]"
+				},
+				{
+					"clock": 2.71666666666666,
+					"frame": 162,
+					"phase": "recover",
+					"proxy_frame": 8,
+					"proxy_screen": "[P: (807.9709, 286.1526), S: (117.1381, 107.6404)]",
+					"scale": 0.533203125,
+					"source_frame": 5,
+					"source_screen": "[P: (768.4807, 213.0752), S: (113.1152, 148.7256)]"
+				},
+				{
+					"clock": 2.73333333333333,
+					"frame": 163,
+					"phase": "recover",
+					"proxy_frame": 9,
+					"proxy_screen": "[P: (816.9463, 281.5427), S: (101.9647, 111.5667)]",
+					"scale": 0.5390625,
+					"source_frame": 5,
+					"source_screen": "[P: (767.42, 210.4057), S: (114.3582, 150.3599)]"
+				},
+				{
+					"clock": 2.75,
+					"frame": 164,
+					"phase": "recover",
+					"proxy_frame": 9,
+					"proxy_screen": "[P: (816.9463, 281.5427), S: (101.9647, 111.5667)]",
+					"scale": 0.5390625,
+					"source_frame": 5,
+					"source_screen": "[P: (767.42, 210.4057), S: (114.3582, 150.3599)]"
+				},
+				{
+					"clock": 2.76666666666666,
+					"frame": 165,
+					"phase": "impact",
+					"proxy_frame": 7,
+					"proxy_screen": "[P: (810.1643, 283.0204), S: (113.0577, 110.7218)]",
+					"scale": 0.55078125,
+					"source_frame": 5,
+					"source_screen": "[P: (763.2988, 207.0667), S: (116.8443, 153.6286)]"
+				},
+				{
+					"clock": 2.78333333333333,
+					"frame": 166,
+					"phase": "impact",
+					"proxy_frame": 7,
+					"proxy_screen": "[P: (808.6022, 281.1589), S: (114.2604, 111.8996)]",
+					"scale": 0.556640625,
+					"source_frame": 5,
+					"source_screen": "[P: (761.2382, 204.3972), S: (118.0873, 155.263)]"
+				},
+				{
+					"clock": 2.79999999999999,
+					"frame": 167,
+					"phase": "impact",
+					"proxy_frame": 7,
+					"proxy_screen": "[P: (806.478, 279.436), S: (116.6659, 114.2554)]",
+					"scale": 0.568359375,
+					"source_frame": 5,
+					"source_screen": "[P: (758.1168, 201.0582), S: (120.5734, 158.5317)]"
+				},
+				{
+					"clock": 2.81666666666666,
+					"frame": 168,
+					"phase": "impact",
+					"proxy_frame": 7,
+					"proxy_screen": "[P: (804.9159, 277.5745), S: (117.8686, 115.4333)]",
+					"scale": 0.57421875,
+					"source_frame": 5,
+					"source_screen": "[P: (756.0562, 198.3887), S: (121.8164, 160.166)]"
+				},
+				{
+					"clock": 2.83333333333333,
+					"frame": 169,
+					"phase": "impact",
+					"proxy_frame": 7,
+					"proxy_screen": "[P: (803.3539, 276.713), S: (119.0714, 116.6112)]",
+					"scale": 0.580078125,
+					"source_frame": 5,
+					"source_screen": "[P: (753.9955, 196.7192), S: (123.0594, 161.8004)]"
+				},
+				{
+					"clock": 2.84999999999999,
+					"frame": 170,
+					"phase": "impact",
+					"proxy_frame": 7,
+					"proxy_screen": "[P: (801.2297, 273.9901), S: (121.4769, 118.967)]",
+					"scale": 0.591796875,
+					"source_frame": 5,
+					"source_screen": "[P: (750.8743, 192.3801), S: (125.5455, 165.0691)]"
+				},
+				{
+					"clock": 2.86666666666666,
+					"frame": 171,
+					"phase": "impact",
+					"proxy_frame": 7,
+					"proxy_screen": "[P: (799.6676, 273.1285), S: (122.6796, 120.1449)]",
+					"scale": 0.59765625,
+					"source_frame": 5,
+					"source_screen": "[P: (748.8136, 190.7106), S: (126.7885, 166.7034)]"
+				},
+				{
+					"clock": 2.88333333333333,
+					"frame": 172,
+					"phase": "impact",
+					"proxy_frame": 7,
+					"proxy_screen": "[P: (798.1055, 272.2671), S: (123.8823, 121.3228)]",
+					"scale": 0.603515625,
+					"source_frame": 5,
+					"source_screen": "[P: (746.7529, 189.0411), S: (128.0315, 168.3378)]"
+				},
+				{
+					"clock": 2.89999999999999,
+					"frame": 173,
+					"phase": "impact",
+					"proxy_frame": 7,
+					"proxy_screen": "[P: (796.5435, 270.4056), S: (125.0851, 122.5007)]",
+					"scale": 0.609375,
+					"source_frame": 5,
+					"source_screen": "[P: (744.6923, 186.3716), S: (129.2745, 169.9721)]"
+				},
+				{
+					"clock": 2.91666666666666,
+					"frame": 174,
+					"phase": "vanish",
+					"proxy_frame": 9,
+					"proxy_screen": "[P: (800.1561, 265.8912), S: (116.3727, 127.3315)]",
+					"scale": 0.615234375,
+					"source_frame": 5,
+					"source_screen": "[P: (743.6316, 184.7021), S: (130.5176, 171.6065)]"
+				}
+			]
+		}
+	],
+	"checks": 2292,
+	"failures": 0,
+	"frames": 190,
+	"image_model_direct_animation": false,
+	"native_pause_hold_frames_omitted_from_movies": 12,
+	"simulation_step": 0.0166666666666667,
+	"source": "actual Godot GL frame capture"
+}

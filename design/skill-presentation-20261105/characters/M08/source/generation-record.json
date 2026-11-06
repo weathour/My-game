@@ -1,0 +1,51 @@
+{
+  "generator": "built-in image_gen",
+  "version": "v1",
+  "prompt": "prompt-v1.txt",
+  "transparent_background": true,
+  "generated_original": "/home/weathour/.codex/generated_images/01a1a9ec-261f-71e1-83ea-ff043bd6c5e7/exec-258d4e30-90ce-4daf-8d7a-145d137fa707.png",
+  "selected_local_raw": "source/combat-bundle-v1.png",
+  "actual_source_size": [
+    1254,
+    1254
+  ],
+  "requested_composition_size": [
+    1536,
+    1536
+  ],
+  "identity_reference": {
+    "original_atlas": "assets/ui/chronicle/cards/named-transparent.png",
+    "source_rect_xywh": [
+      1086,
+      543,
+      362,
+      543
+    ],
+    "sha256_original": "573efee6dbb5b3f3fb515e9141c75bc66012ad6deb4ac034978d447a7d955bf0",
+    "extraction": "source/extract_identity.lua",
+    "output": "source/identity-reference.png",
+    "role": "identity; not a runtime body frame or portrait crop"
+  },
+  "imagegen_references": [
+    {
+      "path": "design/skill-presentation-20261105/characters/M08/source/identity-reference.png",
+      "role": "identity"
+    },
+    {
+      "path": "design/baimen-women-20261028/source/F02-leina-combat-v1.png",
+      "role": "pixel style only"
+    }
+  ],
+  "additional_inspected_style_reference": "design/jia-combat-20261027/style-reference/character-animations.png",
+  "style_reference_hashes": {
+    "design/baimen-women-20261028/source/F02-leina-combat-v1.png": "11f9d07489c90a47f4fcfce2d733b61ba7704e8399b114204a9b22e10e1a841f",
+    "design/jia-combat-20261027/style-reference/character-animations.png": "ad4ea4529a399df65569c5c37d85c0616bb6d09f594749c30818c283c85407c5"
+  },
+  "version_selection": {
+    "selected": "v1",
+    "rejected": [],
+    "review": "Identity, anatomy, weapon grip/direction, complete canvas, per-pose difference, independently drawn portrait inspected via view_image."
+  },
+  "raw_preserved": true,
+  "alpha_processing": "Source original RGBA retained unmodified. Aseprite runtime threshold >=128, shared color quantization <=64, nearest-neighbor resize."
+}

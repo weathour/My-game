@@ -1,0 +1,141 @@
+{
+  "method": "perf_counter within already imported Python process; one cold build +20 cached modifier applications per parsed MIDI",
+  "rows": [
+    {
+      "cue_id": "midi_test_01",
+      "note_count": 3564,
+      "parse_ms": 33.02213782444596,
+      "cold_build_ms": 24.536612909287214,
+      "cached_median_ms": 0.12798397801816463,
+      "cached_max_ms": 0.22062566131353378,
+      "candidates": 112,
+      "rate": 0.5,
+      "phase": 0.484375
+    },
+    {
+      "cue_id": "midi_test_02",
+      "note_count": 3104,
+      "parse_ms": 30.02329496666789,
+      "cold_build_ms": 18.165608402341604,
+      "cached_median_ms": 0.10255700908601284,
+      "cached_max_ms": 0.11814199388027191,
+      "candidates": 112,
+      "rate": 1.0,
+      "phase": 0.0
+    },
+    {
+      "cue_id": "midi_test_03",
+      "note_count": 3890,
+      "parse_ms": 32.33120031654835,
+      "cold_build_ms": 19.163508899509907,
+      "cached_median_ms": 0.10744086466729641,
+      "cached_max_ms": 0.12384727597236633,
+      "candidates": 112,
+      "rate": 1.0,
+      "phase": 0.1875
+    },
+    {
+      "cue_id": "midi_test_04",
+      "note_count": 4337,
+      "parse_ms": 37.22036583349109,
+      "cold_build_ms": 20.18781006336212,
+      "cached_median_ms": 0.12173480354249477,
+      "cached_max_ms": 0.13309437781572342,
+      "candidates": 112,
+      "rate": 1.0,
+      "phase": 0.1875
+    },
+    {
+      "cue_id": "midi_test_05",
+      "note_count": 2501,
+      "parse_ms": 24.28436791524291,
+      "cold_build_ms": 18.305650912225246,
+      "cached_median_ms": 0.1054189633578062,
+      "cached_max_ms": 0.13925880193710327,
+      "candidates": 112,
+      "rate": 1.0,
+      "phase": 0.96875
+    },
+    {
+      "cue_id": "midi_test_06",
+      "note_count": 3240,
+      "parse_ms": 27.134856209158897,
+      "cold_build_ms": 18.722577020525932,
+      "cached_median_ms": 0.11049490422010422,
+      "cached_max_ms": 0.1400359906256199,
+      "candidates": 112,
+      "rate": 1.0,
+      "phase": 0.0
+    },
+    {
+      "cue_id": "midi_test_07",
+      "note_count": 3219,
+      "parse_ms": 27.506303042173386,
+      "cold_build_ms": 18.590301275253296,
+      "cached_median_ms": 0.1051838044077158,
+      "cached_max_ms": 0.13833167031407356,
+      "candidates": 112,
+      "rate": 0.5,
+      "phase": 0.5
+    },
+    {
+      "cue_id": "midi_test_08",
+      "note_count": 3569,
+      "parse_ms": 33.49410090595484,
+      "cold_build_ms": 19.026894122362137,
+      "cached_median_ms": 0.10953214950859547,
+      "cached_max_ms": 0.1285802572965622,
+      "candidates": 112,
+      "rate": 1.0,
+      "phase": 0.0
+    },
+    {
+      "cue_id": "midi_test_09",
+      "note_count": 4484,
+      "parse_ms": 38.57283806428313,
+      "cold_build_ms": 20.391917321830988,
+      "cached_median_ms": 0.11027767322957516,
+      "cached_max_ms": 0.1453133299946785,
+      "candidates": 112,
+      "rate": 0.5,
+      "phase": 0.0
+    },
+    {
+      "cue_id": "midi_test_10",
+      "note_count": 3288,
+      "parse_ms": 28.783534187823534,
+      "cold_build_ms": 19.76849604398012,
+      "cached_median_ms": 0.11459551751613617,
+      "cached_max_ms": 0.16096094623208046,
+      "candidates": 112,
+      "rate": 1.0,
+      "phase": 0.65625
+    },
+    {
+      "cue_id": "midi_test_11",
+      "note_count": 3002,
+      "parse_ms": 28.788046445697546,
+      "cold_build_ms": 19.407170359045267,
+      "cached_median_ms": 0.11311331763863564,
+      "cached_max_ms": 0.15085982158780098,
+      "candidates": 112,
+      "rate": 1.0,
+      "phase": 0.125
+    },
+    {
+      "cue_id": "midi_test_12",
+      "note_count": 3865,
+      "parse_ms": 33.15859893336892,
+      "cold_build_ms": 19.583480898290873,
+      "cached_median_ms": 0.10555284097790718,
+      "cached_max_ms": 0.1230333000421524,
+      "candidates": 112,
+      "rate": 0.5,
+      "phase": 0.59375
+    }
+  ],
+  "max_cold_ms": 24.536612909287214,
+  "max_cached_ms": 0.22062566131353378,
+  "cache_policy": "MidiData intrinsic notes/tempo/trim key; detached ranking rows; no layer/phase state in cache",
+  "scope": "local engineering latency, not perceptual quality or a universal device guarantee"
+}

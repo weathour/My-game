@@ -1,0 +1,12 @@
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+OpenGL API 3.3.0 NVIDIA 580.173.02 - Compatibility - Using Device: NVIDIA - NVIDIA GeForce RTX 5080
+
+TOOLTIP_BOUNDS { "layout": "team_band", "dimensions": (960, 540), "rect": [P: (548.0, 12.0), S: (400.0, 992.0)], "minimum": (27.0, 236.0), "tooltip_size": (960.0, 540.0), "anchor": [P: (710.2857, 389.2143), S: (115.1429, 37.14286)] }
+ERROR: long echo conditions fit viewport team_band(960, 540)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://scripts/tests/chronicle_skill_information_render_smoke.gd:29)
+       [1] check_hover (res://scripts/tests/chronicle_skill_information_render_smoke.gd:122)
+       [2] hover (res://scripts/tests/chronicle_skill_information_render_smoke.gd:101)
+       [3] frames (res://scripts/tests/chronicle_skill_information_render_smoke.gd:32)
+SKILL_HOVER_STRESS FAIL checks=504 failures=1

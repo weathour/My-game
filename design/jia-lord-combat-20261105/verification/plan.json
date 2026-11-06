@@ -1,0 +1,52 @@
+{
+  "status": "completed",
+  "owned_tests": [
+    "scripts/tests/jia_campaign_progression_smoke.gd",
+    "scripts/tests/jia_campaign_combat_smoke.gd",
+    "scripts/tests/check_jia_campaign_art.py"
+  ],
+  "baseline_source": "prior validated performance PCK; Luna owns actual B13 before fixture",
+  "route_oracle": "S11.next from route.json, then graph descendants; historical optional gate from character_events.json",
+  "first_cao_nodes": [
+    "B13",
+    "B14"
+  ],
+  "common_before": [
+    "B01",
+    "B12",
+    "S10",
+    "S11"
+  ],
+  "checks": [
+    "schema-1 real save/load/retry without new flags",
+    "future available cannot unlock",
+    "whole-campaign completed fallback",
+    "actual shell early/late replay, no campaign/file mutations",
+    "cards/detail early and late contexts, protagonist remains fixed",
+    "both HUD layouts use new independent head for JIA only",
+    "all 48 imported cells and exact bounds, no runtime readback",
+    "80 authored body pixels ->72 world; foot anchor128/236; unchanged core0/-36radius4",
+    "cast success/failure/cooldown/mana/contact/priority/direction/movement/pause/switch/cleanup",
+    "three native viewport sizes with all 10 complete playing clips and frame-order evidence",
+    "full official suite under new durable name and new source freeze",
+    "same exported PCK extra campaign combat + full imported bounds from external script and empty cwd"
+  ],
+  "native_dimensions": [
+    [
+      960,
+      540
+    ],
+    [
+      1280,
+      720
+    ],
+    [
+      1920,
+      1080
+    ]
+  ],
+  "native_test": "jia_campaign_combat_smoke.gd -- --capture=<verification/native>",
+  "early_run_note": "progression-preimport.log records six late UI failures caused by missing import of new standing PNG; do not treat as accepted PASS",
+  "gpu_rule": "native/performance/full operations serialize with root and Luna; preserve normal game/editor/player data",
+  "result": "result.json"
+}

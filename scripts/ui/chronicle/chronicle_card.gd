@@ -14,15 +14,17 @@ var important := false
 var fallen := false
 var rarity := "common"
 var portrait: Texture2D
+var appearance := ART.JIA_APPEARANCE.COMMON
 
-func configure(id: String, title: String, line: String, tag: String = "", chosen: bool = false, tier: String = "common") -> void:
+func configure(id: String, title: String, line: String, tag: String = "", chosen: bool = false, tier: String = "common", appearance_context: String = ART.JIA_APPEARANCE.COMMON) -> void:
 	character_id = id
 	character_name = title
 	subtitle = line
 	badge = tag
 	selected_card = chosen
 	rarity = tier
-	portrait = ART.texture(id)
+	appearance = appearance_context
+	portrait = ART.texture(id, appearance)
 	tooltip_text = title + " · " + RARITY.style(rarity).label + "\n" + line
 	queue_redraw()
 

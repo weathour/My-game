@@ -1,10 +1,12 @@
 extends RefCounted
 ## View-only framing. The simulation's geometry supplies both danger and escape tests.
 const SPACE := preload("res://scripts/battle/battle_space.gd")
+const HURTBOX := preload("res://scripts/battle/player_hurtbox.gd")
 const GEOMETRY := preload("res://scripts/battle/enemy_geometry.gd")
 const THREATS := preload("res://scripts/ui/chronicle/enemy_threat_view.gd")
 const MIN_ZOOM := .60
 const MAX_ZOOM := 1.0
+const MAX_OWNER_HOPS := 8
 var center := Vector2.ZERO
 var zoom := 1.0
 var scale := 1.0
@@ -31,6 +33,13 @@ var visual_bounds: Dictionary = {}
 var framed_dimensions := Vector2.ZERO
 var framed_safe_screen := Rect2()
 var framed_hud_obstacles: Array[Rect2] = []
+var _escape_inputs_valid := false
+var _escape_player := Vector2.ZERO
+var _escape_speed := 0.0
+var _escape_frame_hint := Vector2.ZERO
+var _escape_dangers: Array[Dictionary] = []
+var _escape_active: Array[Dictionary] = []
+var _escape_result: Dictionary = {}
 
 func reset() -> void:
 	initialized = false
@@ -47,11 +56,17 @@ func reset() -> void:
 	framed_dimensions = Vector2.ZERO
 	framed_safe_screen = Rect2()
 	framed_hud_obstacles.clear()
+	_escape_inputs_valid = false
+	_escape_dangers.clear()
+	_escape_active.clear()
+	_escape_result.clear()
 
 func consume(events: Array) -> void:
 	for event in events:
 		match str(event.get("kind", "")):
-			"boss_impact": trauma = minf(.72, trauma + .42)
+			"boss_impact":
+				# Sustained firing must not shake the view while threading bullet gaps.
+				if THREATS.is_area_impact(event.get("geometry", {})): trauma = minf(.72, trauma + .42)
 			"boss_phase": trauma = maxf(trauma, .48)
 			"boss_defeated":
 				trauma = maxf(trauma, .68)
@@ -82,7 +97,9 @@ func update(battle: RefCounted, dimensions: Vector2, delta: float, reduced_motio
 	var foot_extent := 27.0 if battle.current().shield > 0 else 24.0
 	var essential := Rect2(player + Vector2(-52, -108), Vector2(104, 108 + foot_extent))
 	var boss: RefCounted
+	var living_sources: Dictionary = {}
 	for enemy in battle.enemies:
+		if not enemy.dead and enemy.rank in ["field_elite", "boss", "proxy"]: living_sources[enemy.id] = enemy
 		if enemy.rank == "boss" and not enemy.dead and enemy.targetable and enemy.hp_owner_id == enemy.id:
 			if boss == null or enemy.position.distance_squared_to(player) < boss.position.distance_squared_to(player): boss = enemy
 	var relevant: Array[Dictionary] = []
@@ -91,16 +108,18 @@ func update(battle: RefCounted, dimensions: Vector2, delta: float, reduced_motio
 		if float(hazard.get("damage", 1)) <= 0: continue
 		if str(hazard.get("phase", "")) != "tell": active.append(hazard)
 	for descriptor in battle.telegraphs:
-		if float(descriptor.get("damage", 1)) <= 0: continue
-		if GEOMETRY.contains(descriptor, player, 100): relevant.append(descriptor)
+		if float(descriptor.get("damage", 1)) <= 0 or THREATS.warning_policy(descriptor) != "area": continue
+		if framing_owner(descriptor, living_sources) == 0: continue
+		if GEOMETRY.contains_actor(descriptor, player, 100): relevant.append(descriptor)
 	for hazard in active:
-		if GEOMETRY.contains(hazard, player, 100): relevant.append(hazard)
+		if framing_owner(hazard, living_sources) == 0: continue
+		if GEOMETRY.contains_actor(hazard, player, 100): relevant.append(hazard)
 	safe_route.clear()
 	escape_valid = false
 	escape_needed = false
 	if not relevant.is_empty():
 		var speed: float = float(battle.current().stats.move) * (1 - battle.enemy_slow) * (1.25 if battle.current().haste > 0 else 1.0)
-		var route := _escape(player, relevant, active, speed, boss.position if boss != null else player - Vector2(0, 100))
+		var route := _cached_escape(player, relevant, active, speed, boss.position if boss != null else player - Vector2(0, 100))
 		escape_valid = route.valid
 		escape_needed = route.needed
 		if escape_valid:
@@ -212,6 +231,30 @@ func update(battle: RefCounted, dimensions: Vector2, delta: float, reduced_motio
 	framed_safe_screen = safe_screen
 	framed_hud_obstacles = hud_obstacles.duplicate()
 
+## Only elite/Boss danger drives framing. Ordinary summons remain ordinary;
+## a parent link is meaningful here only for an actual proxy body.
+## All active hazards are still passed separately to the escape path veto.
+static func framing_owner(descriptor: Dictionary, living_sources: Dictionary) -> int:
+	var owner_id := int(descriptor.get("owner_id", 0))
+	var source: RefCounted = living_sources.get(owner_id)
+	if owner_id <= 0 or source == null or source.dead: return 0
+	if source.rank in ["field_elite", "boss"]: return owner_id
+	if source.rank != "proxy": return 0
+	var visited: Dictionary = {}
+	for _hop in MAX_OWNER_HOPS:
+		if owner_id <= 0 or visited.has(owner_id): return 0
+		visited[owner_id] = true
+		source = living_sources.get(owner_id)
+		if source == null or source.dead: return 0
+		if source.rank in ["field_elite", "boss"]: return owner_id
+		if source.rank != "proxy": return 0
+		var shared_id := int(source.hp_owner_id)
+		if shared_id != owner_id and source.hp_owner != null and living_sources.get(shared_id) == source.hp_owner:
+			owner_id = shared_id
+		else:
+			owner_id = int(source.parent_id)
+	return 0
+
 func _contain(rect: Rect2, required: Rect2) -> Rect2:
 	var result := rect
 	if required.position.x < result.position.x: result.position.x = required.position.x
@@ -220,11 +263,26 @@ func _contain(rect: Rect2, required: Rect2) -> Rect2:
 	if required.end.y > result.end.y: result.position.y = required.end.y - result.size.y
 	return result
 
+func _cached_escape(player: Vector2, dangers: Array[Dictionary], active: Array[Dictionary], move_speed: float, frame_hint: Vector2) -> Dictionary:
+	# advance_presentation and refresh both frame the same simulation state.
+	# Cache only the pure route search, so pose/HUD/window changes still frame
+	# immediately. Detached values detect in-place descriptor edits at any clock.
+	if _escape_inputs_valid and player == _escape_player and move_speed == _escape_speed and frame_hint == _escape_frame_hint and dangers == _escape_dangers and active == _escape_active:
+		return _escape_result
+	_escape_player = player
+	_escape_speed = move_speed
+	_escape_frame_hint = frame_hint
+	_escape_dangers = dangers.duplicate(true)
+	_escape_active = active.duplicate(true)
+	_escape_result = _escape(player, dangers, active, move_speed, frame_hint)
+	_escape_inputs_valid = true
+	return _escape_result
+
 func _escape(player: Vector2, dangers: Array[Dictionary], active: Array[Dictionary], move_speed: float, frame_hint: Vector2) -> Dictionary:
 	var threatened := false
 	var available := INF
 	for danger in dangers:
-		if GEOMETRY.contains(danger, player, 18):
+		if GEOMETRY.contains_actor(danger, player, HURTBOX.RADIUS):
 			threatened = true
 			if str(danger.get("phase", "tell")) == "tell": available = minf(available, maxf(0, float(danger.get("remaining", .9))))
 			else: available = minf(available, .9)
@@ -238,11 +296,11 @@ func _escape(player: Vector2, dangers: Array[Dictionary], active: Array[Dictiona
 			if not Rect2(SPACE.PLAYER_MARGIN, SPACE.SIZE - SPACE.PLAYER_MARGIN * 2).has_point(point): continue
 			var safe := true
 			for danger in dangers:
-				if GEOMETRY.contains(danger, point, 20): safe = false; break
+				if GEOMETRY.contains_actor(danger, point, HURTBOX.RADIUS + 6.0): safe = false; break
 			if not safe: continue
 			for hazard in active:
 				for step in range(1, 7):
-					if GEOMETRY.contains(hazard, player.lerp(point, step / 6.0), 18): safe = false; break
+					if GEOMETRY.contains_actor(hazard, player.lerp(point, step / 6.0), HURTBOX.RADIUS): safe = false; break
 				if not safe: break
 			# The tiny tie-break chooses an equally short safe endpoint that shares
 			# space with the boss, avoiding unnecessary downward camera pressure.

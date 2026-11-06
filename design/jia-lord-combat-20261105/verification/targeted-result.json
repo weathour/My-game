@@ -1,0 +1,52 @@
+{
+  "status": "passed",
+  "art_poses": 48,
+  "art_palette": 60,
+  "portrait_palette": 63,
+  "progression_checks": 374,
+  "headless_combat_checks": 172,
+  "native_combat_checks": 346,
+  "native_dimensions": [
+    [
+      960,
+      540
+    ],
+    [
+      1280,
+      720
+    ],
+    [
+      1920,
+      1080
+    ]
+  ],
+  "native_clip_plays": 30,
+  "native_pose_renders": 144,
+  "native_clean_preview": true,
+  "native_gifs": [
+    "native/native-960.gif",
+    "native/native-1280.gif",
+    "native/native-1920.gif"
+  ],
+  "source_sha256": {
+    "scripts/tests/check_jia_campaign_art.py": "fdf7a59c2a9068de7952e0eab26907850b165e6349ca515eca7ea741ec99b8e3",
+    "scripts/tests/jia_campaign_progression_smoke.gd": "81ef3da91aa0ea3aab57a8b26ec573f6b4e0f13d4fa18663e94808d7144f920e",
+    "scripts/tests/jia_campaign_combat_smoke.gd": "7f50d01984d9e988f3c8ec1ab5e637d2c02f41c9a9ba3bba721c1439255bbfc5"
+  },
+  "logs": {
+    "art-check.log": "1c8c1205b246c1a93ff8a193118e339f605ef06ec8e60c6966d3e661bbe58c0b",
+    "progression-smoke.log": "a9228ffe42ac2e5e9c3e5cde3024b9cf6f9ba9042286874b30ccf5819ff5a8ea",
+    "combat-smoke.log": "50f75023897f7b91909092b030908005589f7fef86132573c20c2e663540e913",
+    "native-smoke.log": "3bb8e829172307c3cbdec1160b90459d66ec6d21e403f46e661fd5b9600748fb"
+  },
+  "reviewed_native_samples": [
+    "overview-960.png",
+    "overview-1280.png",
+    "overview-1920.png",
+    "1280-dao-attack-01.png",
+    "1280-spear-break-01.png",
+    "1920-dao-run-04.png"
+  ],
+  "full_suite": "awaiting_root_final_signal",
+  "extra_pack": "pending_same_official_export"
+}

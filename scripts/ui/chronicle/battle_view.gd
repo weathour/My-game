@@ -1,8 +1,10 @@
 extends Control
+const JIA_APPEARANCE := preload("res://scripts/ui/chronicle/jia_appearance.gd")
 ## Presents a real BattleSession. All victory/failure signals originate in the simulation.
 signal completed(result: Dictionary)
 signal cancelled
 signal failed
+signal music_duck(gain: float)
 signal music_context_changed(node_id: String, form_index: int, paused: bool, outcome: String)
 var _last_music_context := ""
 const T := preload("res://scripts/ui/chronicle/chronicle_theme.gd")
@@ -12,6 +14,10 @@ const INPUT := preload("res://scripts/battle/battle_input.gd")
 const HUD := preload("res://scripts/ui/chronicle/battle_hud.gd")
 const CANVAS := preload("res://scripts/ui/chronicle/battle_canvas.gd")
 const SETTINGS := preload("res://scripts/shared/settings.gd")
+const AUDIO_SETTINGS := preload("res://scripts/ui/chronicle/audio_settings_panel.gd")
+const SKILL_TOOLTIP := preload("res://scripts/ui/chronicle/battle_skill_tooltip.gd")
+const SKILL_INSPECTOR := preload("res://scripts/ui/chronicle/battle_skill_inspector.gd")
+const INFO := preload("res://scripts/content/skill_information.gd")
 var battle: RefCounted
 var request: Dictionary
 var definitions: Dictionary
@@ -23,6 +29,9 @@ var boss_bar: ProgressBar
 var boss_row: HBoxContainer
 var hud: Control
 var overlay: Control
+var pause_audio_open := false
+var pause_skills_open := false
+var skill_tooltip: Control
 var sent := false
 var message_time := 0.0
 
@@ -33,6 +42,7 @@ func setup(value: Dictionary, chars: Dictionary) -> void:
 
 func _ready() -> void:
 	INPUT.install()
+	resized.connect(_layout_audio_settings)
 	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	var background := ColorRect.new()
 	background.color = Color("202925")
@@ -42,7 +52,9 @@ func _ready() -> void:
 	canvas = CANVAS.new()
 	canvas.battle = battle
 	canvas.stage_id = request.node.id
+	canvas.jia_appearance = JIA_APPEARANCE.for_battle(request)
 	add_child(canvas)
+	canvas.music_duck.connect(func(gain: float): music_duck.emit(gain))
 	canvas.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	var layout := VBoxContainer.new()
 	layout.z_index = 10
@@ -79,10 +91,19 @@ func _ready() -> void:
 	hud.z_index = 10
 	hud.battle = battle
 	hud.definitions = definitions
+	hud.jia_appearance = JIA_APPEARANCE.for_battle(request)
 	add_child(hud)
 	hud.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_WIDE)
 	hud.minimum_size_changed.connect(_layout_hud)
 	_layout_hud()
+	skill_tooltip = SKILL_TOOLTIP.new()
+	skill_tooltip.name = "battle_skill_tooltip"
+	skill_tooltip.z_index = 18
+	skill_tooltip.battle = battle
+	add_child(skill_tooltip)
+	hud.skill_hovered.connect(skill_tooltip.show_for)
+	hud.skill_unhovered.connect(skill_tooltip.leave)
+	hud.layout_changed.connect(skill_tooltip.dismiss)
 	refresh()
 
 func _layout_hud() -> void:
@@ -152,44 +173,152 @@ func refresh() -> void:
 	feedback.visible = message_time > 0
 	boss_row.visible = battle.director.boss_spawned
 	boss_bar.visible = battle.director.boss_spawned
-	boss_label.text = battle.director.config.boss_name if battle.director.boss_spawned else "击破足够敌人可提前迎战首领"
+	var boss_text: String = battle.director.config.boss_name if battle.director.boss_spawned else "击破足够敌人可提前迎战首领"
 	for enemy in battle.enemies:
 		if enemy.rank == "boss" and enemy.hp_owner_id == enemy.id:
 			boss_bar.max_value = enemy.max_hp
 			boss_bar.value = enemy.hp
 			if enemy.form_count > 1:
 				var state_text := " · 变身中" if enemy.transition_remaining > 0 else ""
-				boss_label.text = "%s · %s  %d/%d%s" % [battle.director.config.boss_name, "人形" if enemy.form_index == 0 else enemy.form_name, enemy.form_index + 1, enemy.form_count, state_text]
+				boss_text = "%s · %s  %d/%d%s" % [battle.director.config.boss_name, "人形" if enemy.form_index == 0 else enemy.form_name, enemy.form_index + 1, enemy.form_count, state_text]
 			break
+	boss_label.text = boss_text
 	hud.refresh()
 
 func toggle_pause() -> void:
 	if not battle.outcome.is_empty(): return
+	pause_audio_open = false
+	pause_skills_open = false
+	skill_tooltip.dismiss()
 	battle.set_paused(not battle.paused)
 	_publish_music_context()
-	if is_instance_valid(overlay): overlay.queue_free(); overlay = null
+	_clear_overlay()
 	if battle.paused:
-		var column := _modal("行军暂歇", "暂停不推进计时。离开本关会回到进关前状态。")
-		var resume_button := T.button("继续战斗 · Esc", toggle_pause, true)
-		column.add_child(resume_button)
-		column.add_child(T.paragraph("WASD / 方向键移动 · Q / E 切人 · J / K 关键技能"))
-		if battle.director.config.get("encounter_mode", "") == "boss_duel":
-			column.add_child(T.paragraph("此战独对吕布。击败人形后迎战鬼神相，两阶段全部击破后通关。"))
-		else:
-			column.add_child(T.paragraph("击破%d名敌人或战斗达到%d秒时，首领出现。" % [battle.director.config.boss_kills, battle.director.config.boss_time]))
-		column.add_child(T.paragraph("%d秒内击败首领可获得额外经验。" % battle.director.config.bonus_time))
-		var choice := OptionButton.new()
-		choice.name = "battle_hud_layout"
-		for key in SETTINGS.get_hud_layout_options(): choice.add_item(SETTINGS.get_hud_layout_label(key))
-		choice.select(SETTINGS.get_hud_layout_options().find(hud.layout_key))
-		choice.item_selected.connect(func(index: int):
-			var key: String = SETTINGS.get_hud_layout_options()[index]
-			SETTINGS.save_hud_layout(key)
-			hud.set_layout(key))
-		column.add_child(choice)
-		column.add_child(T.button("撤回进关前", func(): cancelled.emit()))
-		resume_button.grab_focus()
+		_show_pause_menu()
 	refresh()
+
+func _clear_overlay() -> void:
+	if is_instance_valid(overlay):
+		remove_child(overlay)
+		overlay.queue_free()
+	overlay = null
+
+func _show_pause_menu() -> void:
+	var compact := size.y < 650
+	var column := _modal("行军暂歇", "暂停不推进计时。离开本关会回到进关前状态。")
+	var resume_button := T.button("继续战斗 · Esc", toggle_pause, true)
+	resume_button.name = "battle_resume"
+	if compact: T.compact_button(resume_button)
+	column.add_child(resume_button)
+	var skills_button := T.button(INFO.ui("skill_information"), open_skill_information)
+	skills_button.name = "battle_skill_information"
+	if compact: T.compact_button(skills_button)
+	column.add_child(skills_button)
+	var audio_button := T.button("声音设置", open_audio_settings)
+	audio_button.name = "battle_audio_settings"
+	if compact: T.compact_button(audio_button)
+	column.add_child(audio_button)
+	column.add_child(T.paragraph("WASD / 方向键移动 · Q / E 切人 · J / K 关键技能", T.MUTED, 14 if compact else 16))
+	if battle.director.config.get("encounter_mode", "") == "boss_duel":
+		column.add_child(T.paragraph("此战独对吕布。击败人形后迎战鬼神相，两阶段全部击破后通关。", T.MUTED, 14 if compact else 16))
+	else:
+		column.add_child(T.paragraph("击破%d名敌人或战斗达到%d秒时，首领出现。" % [battle.director.config.boss_kills, battle.director.config.boss_time], T.MUTED, 14 if compact else 16))
+	column.add_child(T.paragraph("%d秒内击败首领可获得额外经验。" % battle.director.config.bonus_time, T.MUTED, 14 if compact else 16))
+	var choice := OptionButton.new()
+	choice.name = "battle_hud_layout"
+	for key in SETTINGS.get_hud_layout_options(): choice.add_item(SETTINGS.get_hud_layout_label(key))
+	choice.select(SETTINGS.get_hud_layout_options().find(hud.layout_key))
+	choice.item_selected.connect(func(index: int):
+		var key: String = SETTINGS.get_hud_layout_options()[index]
+		SETTINGS.save_hud_layout(key)
+		hud.set_layout(key))
+	column.add_child(choice)
+	var cancel_button := T.button("撤回进关前", func(): cancelled.emit())
+	if compact: T.compact_button(cancel_button)
+	column.add_child(cancel_button)
+	resume_button.grab_focus()
+
+func open_skill_information() -> void:
+	if not battle.paused or not battle.outcome.is_empty(): return
+	pause_skills_open = true
+	skill_tooltip.dismiss()
+	_clear_overlay()
+	var inspector := SKILL_INSPECTOR.new()
+	inspector.name = "battle_skill_inspector"
+	inspector.z_index = 20
+	inspector.battle = battle
+	inspector.back_requested.connect(close_skill_information)
+	inspector.resume_requested.connect(toggle_pause)
+	overlay = inspector
+	add_child(inspector)
+
+func close_skill_information() -> void:
+	if not pause_skills_open: return
+	pause_skills_open = false
+	_clear_overlay()
+	if not battle.paused: return
+	_show_pause_menu()
+	var skills_button := overlay.find_child("battle_skill_information", true, false) as Button
+	if skills_button != null: skills_button.grab_focus()
+
+func open_audio_settings() -> void:
+	if not battle.paused or not battle.outcome.is_empty(): return
+	pause_audio_open = true
+	_clear_overlay()
+	var compact := size.y < 650
+	overlay = ColorRect.new()
+	overlay.name = "battle_audio_overlay"
+	overlay.z_index = 20
+	overlay.color = Color(0.07, 0.09, 0.07, 0.8)
+	add_child(overlay)
+	overlay.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	var center := CenterContainer.new()
+	overlay.add_child(center)
+	center.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	var panel := T.panel(center, false, 16 if compact else 24)
+	panel.name = "battle_audio_panel"
+	panel.custom_minimum_size = _audio_panel_size()
+	var column := T.column(panel)
+	var header := T.row(column)
+	header.add_child(T.label("声音设置", 24 if compact else 30, T.INK, true))
+	T.space(header)
+	var back := T.button("返回暂歇", close_audio_settings)
+	back.name = "battle_audio_back"
+	T.compact_button(back)
+	header.add_child(back)
+	column.add_child(HSeparator.new())
+	var scroll := ScrollContainer.new()
+	scroll.name = "audio_channels_scroll"
+	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	scroll.follow_focus = true
+	scroll.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	column.add_child(scroll)
+	var audio_settings := AUDIO_SETTINGS.new()
+	audio_settings.compact = compact
+	scroll.add_child(audio_settings)
+	column.add_child(HSeparator.new())
+	var resume_button := T.button("继续战斗", toggle_pause, true)
+	resume_button.name = "battle_resume"
+	column.add_child(resume_button)
+	back.grab_focus()
+
+func _audio_panel_size() -> Vector2:
+	return Vector2(minf(760, maxf(280, size.x - 48)), minf(680, maxf(240, size.y - 48)))
+
+func _layout_audio_settings() -> void:
+	if not pause_audio_open or not is_instance_valid(overlay): return
+	var panel := overlay.find_child("battle_audio_panel", true, false) as Control
+	if panel != null: panel.custom_minimum_size = _audio_panel_size()
+
+func close_audio_settings() -> void:
+	if not pause_audio_open: return
+	pause_audio_open = false
+	_clear_overlay()
+	if not battle.paused: return
+	_show_pause_menu()
+	var audio_button := overlay.find_child("battle_audio_settings", true, false) as Button
+	if audio_button != null: audio_button.grab_focus()
 
 func show_result() -> void:
 	var column := _modal("首领已败", "正在保存本关战果；保存失败时可重新提交。")
@@ -198,6 +327,7 @@ func show_result() -> void:
 	retry.grab_focus()
 
 func _modal(title: String, detail: String) -> VBoxContainer:
+	var compact := size.y < 650
 	overlay = ColorRect.new()
 	overlay.z_index = 20
 	overlay.color = Color(0.07,0.09,0.07,0.8)
@@ -206,15 +336,19 @@ func _modal(title: String, detail: String) -> VBoxContainer:
 	var center := CenterContainer.new()
 	overlay.add_child(center)
 	center.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	var panel := T.panel(center, false, 25)
+	var panel := T.panel(center, false, 16 if compact else 25)
 	panel.custom_minimum_size.x = minf(460, maxf(280, size.x - 48))
 	var column := T.column(panel)
-	column.add_child(T.label(title, 30, T.INK, true))
-	column.add_child(T.paragraph(detail))
+	column.add_theme_constant_override("separation", 6 if compact else 10)
+	column.add_child(T.label(title, 24 if compact else 30, T.INK, true))
+	column.add_child(T.paragraph(detail, T.MUTED, 14 if compact else 16))
 	return column
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("battle_pause"): toggle_pause()
+	if event.is_action_pressed("battle_pause"):
+		if pause_skills_open: close_skill_information()
+		elif pause_audio_open: close_audio_settings()
+		else: toggle_pause()
 	elif event.is_action_pressed("battle_previous"): battle.request_switch(-1)
 	elif event.is_action_pressed("battle_next"): battle.request_switch(1)
 	elif event.is_action_pressed("battle_skill_one"): battle.request_skill(0)

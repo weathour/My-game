@@ -1,0 +1,105 @@
+{
+  "version": 1,
+  "only_approved_identity": "design/jia-lord-combat-20261105/jia-lord-campaign-v2.png",
+  "approval_scope": "Campaign-v2 approved by user; ready-v1 not evaluated, campaign-v1 rejected and not used for new pixel generation.",
+  "source_records": [
+    {
+      "version": "pixel-model-v1",
+      "selected": true,
+      "generated_by": "built-in image_gen.imagegen",
+      "generated_original": "/home/weathour/.codex/generated_images/01a1a9ec-261f-71e1-83ea-ff043bd6c5e7/exec-0ac72109-0978-483e-9c6e-cb12c0b62d5b.png",
+      "local_raw": "design/jia-lord-combat-20261105/source/pixel-model-v1.png",
+      "sha256": "c71bd55a5bcb7eb311e5c9bcec1e805af01a90a5ea132ed6b7ad0f9701fabbc7",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "transparent_background_requested": true,
+      "exact_prompt": {
+        "path": "design/jia-lord-combat-20261105/prompts/pixel-model-v1.txt",
+        "sha256": "c259d4f8eb13711ed2f11341e72c7b35aa5aea031abb5aab40f814874e8638e3"
+      },
+      "referenced_image_paths": [
+        {
+          "path": "design/jia-lord-combat-20261105/jia-lord-campaign-v2.png",
+          "sha256": "d0b2f3950fa2287e085037d62764cc86c507128ddc68f651b786fbd7d39bd84d",
+          "role": "approved campaign-v2 identity/costume"
+        },
+        {
+          "path": "design/jia-combat-20261027/source/dao-v1.png",
+          "sha256": "dc7720a430f1b03f61b87292b845f170f15a5a487c4a9810070fb27ad546099e",
+          "role": "existing Jia pixel technique only; old costume not copied"
+        }
+      ],
+      "review": "Art owner and root viewed local source. Pixel model approved as production direction; action sheets preserve v2 silhouette, forward weapon grips and 24 distinct drawn poses per source. Full quantized runtime contacts reviewed independently."
+    },
+    {
+      "version": "dao-actions-v1",
+      "selected": true,
+      "generated_by": "built-in image_gen.imagegen",
+      "generated_original": "/home/weathour/.codex/generated_images/01a1a9ec-261f-71e1-83ea-ff043bd6c5e7/exec-0d5a6de6-292c-439f-a3bf-b6f44cdffd12.png",
+      "local_raw": "design/jia-lord-combat-20261105/source/dao-actions-v1.png",
+      "sha256": "893dfd5800989b20c422dc6be26e3de6ef59e727ce421d436e179f83c40ade83",
+      "size": [
+        1024,
+        1536
+      ],
+      "mode": "RGBA",
+      "transparent_background_requested": true,
+      "exact_prompt": {
+        "path": "design/jia-lord-combat-20261105/prompts/dao-actions-v1.txt",
+        "sha256": "6209efe650755db3bc52d287d8b427d375a6c4dcdee37baba835fdfbdd1705b8"
+      },
+      "referenced_image_paths": [
+        {
+          "path": "design/jia-lord-combat-20261105/source/pixel-model-v1.png",
+          "sha256": "c71bd55a5bcb7eb311e5c9bcec1e805af01a90a5ea132ed6b7ad0f9701fabbc7",
+          "role": "selected pixel model, same identity"
+        },
+        {
+          "path": "design/jia-lord-combat-20261105/jia-lord-campaign-v2.png",
+          "sha256": "d0b2f3950fa2287e085037d62764cc86c507128ddc68f651b786fbd7d39bd84d",
+          "role": "approved campaign-v2 identity/costume"
+        }
+      ],
+      "review": "Art owner and root viewed local source. Pixel model approved as production direction; action sheets preserve v2 silhouette, forward weapon grips and 24 distinct drawn poses per source. Full quantized runtime contacts reviewed independently."
+    },
+    {
+      "version": "spear-actions-v1",
+      "selected": true,
+      "generated_by": "built-in image_gen.imagegen",
+      "generated_original": "/home/weathour/.codex/generated_images/01a1a9ec-261f-71e1-83ea-ff043bd6c5e7/exec-71b66363-144d-46bc-867b-03b470d62167.png",
+      "local_raw": "design/jia-lord-combat-20261105/source/spear-actions-v1.png",
+      "sha256": "43b9e719e3d2905b1cace6df5499c7b3d4e75e78c7d5ae76f4d235036161f7a0",
+      "size": [
+        1024,
+        1536
+      ],
+      "mode": "RGBA",
+      "transparent_background_requested": true,
+      "exact_prompt": {
+        "path": "design/jia-lord-combat-20261105/prompts/spear-actions-v1.txt",
+        "sha256": "4ac15f940e6c19b33017bee154b806d8100141778bb6b03a583e936edf6cc5dd"
+      },
+      "referenced_image_paths": [
+        {
+          "path": "design/jia-lord-combat-20261105/source/pixel-model-v1.png",
+          "sha256": "c71bd55a5bcb7eb311e5c9bcec1e805af01a90a5ea132ed6b7ad0f9701fabbc7",
+          "role": "selected pixel model, same identity"
+        },
+        {
+          "path": "design/jia-lord-combat-20261105/jia-lord-campaign-v2.png",
+          "sha256": "d0b2f3950fa2287e085037d62764cc86c507128ddc68f651b786fbd7d39bd84d",
+          "role": "approved campaign-v2 identity/costume"
+        }
+      ],
+      "review": "Art owner and root viewed local source. Pixel model approved as production direction; action sheets preserve v2 silhouette, forward weapon grips and 24 distinct drawn poses per source. Full quantized runtime contacts reviewed independently."
+    }
+  ],
+  "independent_portrait_record": "design/jia-lord-combat-20261105/source/portrait/manifest.json",
+  "retained_rejected_action_generations": [],
+  "originals_retained_unmodified": true,
+  "raw_alpha_notes": "Original RGBA action sheets contain colored RGB at alpha0/near0. Aseprite threshold>=128 discards background only in runtime export, preserving raw generator files unchanged.",
+  "preview_notes": "Static Aseprite previews crop registered runtime256 frames to x64..200,y128..256 and enlarge2x by nearest neighbor, retaining at least20 native pixels below lowest boots. These previews do not alter runtime assets."
+}

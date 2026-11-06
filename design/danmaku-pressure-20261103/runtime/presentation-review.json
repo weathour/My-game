@@ -1,0 +1,398 @@
+{
+  "schema_version": 1,
+  "status": "PASS",
+  "utc": "2026-11-03T15:23:02.307756+00:00",
+  "review_method": "original_resolution_view_image_model_visual_inspection",
+  "human_playtest_performed": false,
+  "gameplay_reachability_inferred_from_screenshots": false,
+  "real_simulation_report": {
+    "path": "artifacts/danmaku-pressure-20261103/presentation-real/real-pressure-render.json",
+    "sha256": "26f02e022ad9731e15a9fa95e00b537edebc8ff07e9641f912afaa44b9250143",
+    "checks": 218,
+    "failures": 0,
+    "frames": 26
+  },
+  "reviewed_real_images": [
+    {
+      "path": "artifacts/danmaku-pressure-20261103/presentation-real/real-B01-density-01-1280.png",
+      "sha256": "4f46a4323b6c91e730e1bddea52d77ff6b30e66c5f86740efbf1717ef7e214f4",
+      "actual_source_provenance": {
+        "frame": 832.0,
+        "godmode_exposure": false,
+        "metric": "density",
+        "phase_fixture": -1.0,
+        "seconds": 13.8666666666669,
+        "seed": 1701.0,
+        "start": "center",
+        "strategy": "orbit",
+        "suite": "mobs"
+      },
+      "dimensions": "(1280, 720)",
+      "controlled_red_screen_radius": 4.0,
+      "camera_scale": 1.0,
+      "sampled_safe_screen_coverage": {
+        "area_union_fraction": 0.0,
+        "bullet_instant_fraction": 0.0,
+        "bullet_swept_0_75s_fraction": 0.0,
+        "sample_cells": 640,
+        "sweep_horizon_seconds": 0.75
+      },
+      "observed": {
+        "controlled_red_dot_visible": true,
+        "projectile_cores_distinct_from_background": null,
+        "area_boundary_visible": null,
+        "ordinary_bullet_trajectory_sheet_absent": true
+      }
+    },
+    {
+      "path": "artifacts/danmaku-pressure-20261103/presentation-real/real-B12-density-02-1280.png",
+      "sha256": "30513f38b1ddd6fea94bde2799ee9b29b68496df8a27c8eabee579275cfb04fb",
+      "actual_source_provenance": {
+        "frame": 1634.0,
+        "godmode_exposure": false,
+        "metric": "density",
+        "phase_fixture": -1.0,
+        "seconds": 27.2333333333331,
+        "seed": 1701.0,
+        "start": "center",
+        "strategy": "orbit",
+        "suite": "mobs"
+      },
+      "dimensions": "(1280, 720)",
+      "controlled_red_screen_radius": 4.0,
+      "camera_scale": 1.0,
+      "sampled_safe_screen_coverage": {
+        "area_union_fraction": 0.0,
+        "bullet_instant_fraction": 0.0046875,
+        "bullet_swept_0_75s_fraction": 0.0953125,
+        "sample_cells": 640,
+        "sweep_horizon_seconds": 0.75
+      },
+      "observed": {
+        "controlled_red_dot_visible": true,
+        "projectile_cores_distinct_from_background": true,
+        "area_boundary_visible": null,
+        "ordinary_bullet_trajectory_sheet_absent": true
+      }
+    },
+    {
+      "path": "artifacts/danmaku-pressure-20261103/presentation-real/real-B18-area-18-1280.png",
+      "sha256": "e0a705ca7a81c7ef718517f7c1e0e29b4d17f4fec9602b703362d94cdb12d1ca",
+      "actual_source_provenance": {
+        "frame": 512.0,
+        "godmode_exposure": true,
+        "metric": "area",
+        "phase_fixture": 1.0,
+        "seconds": 8.53333333333334,
+        "seed": 1701.0,
+        "start": "center",
+        "strategy": "stationary",
+        "suite": "exposure"
+      },
+      "dimensions": "(1280, 720)",
+      "controlled_red_screen_radius": 2.0,
+      "camera_scale": 0.5,
+      "sampled_safe_screen_coverage": {
+        "area_union_fraction": 0.11875,
+        "bullet_instant_fraction": 0.0015625,
+        "bullet_swept_0_75s_fraction": 0.040625,
+        "sample_cells": 640,
+        "sweep_horizon_seconds": 0.75
+      },
+      "observed": {
+        "controlled_red_dot_visible": true,
+        "projectile_cores_distinct_from_background": true,
+        "area_boundary_visible": true,
+        "ordinary_bullet_trajectory_sheet_absent": true
+      }
+    },
+    {
+      "path": "artifacts/danmaku-pressure-20261103/presentation-real/real-B18-bullet-17-1280.png",
+      "sha256": "0d1a56ae56536cfbd08f7c0cc05b604ced1d10561caeb85ba5e50d1fcb21f4d9",
+      "actual_source_provenance": {
+        "frame": 778.0,
+        "godmode_exposure": true,
+        "metric": "bullet",
+        "phase_fixture": 1.0,
+        "seconds": 12.9666666666669,
+        "seed": 1701.0,
+        "start": "center",
+        "strategy": "reactive",
+        "suite": "exposure"
+      },
+      "dimensions": "(1280, 720)",
+      "controlled_red_screen_radius": 4.0,
+      "camera_scale": 1.0,
+      "sampled_safe_screen_coverage": {
+        "area_union_fraction": 0.0,
+        "bullet_instant_fraction": 0.0046875,
+        "bullet_swept_0_75s_fraction": 0.06875,
+        "sample_cells": 640,
+        "sweep_horizon_seconds": 0.75
+      },
+      "observed": {
+        "controlled_red_dot_visible": true,
+        "projectile_cores_distinct_from_background": true,
+        "area_boundary_visible": null,
+        "ordinary_bullet_trajectory_sheet_absent": true
+      }
+    },
+    {
+      "path": "artifacts/danmaku-pressure-20261103/presentation-real/real-B15-area-12-1280.png",
+      "sha256": "c98806c652ce14d86bb9628f5ddfe402f19dc1b3af15805a1a2d4c44ba3acb27",
+      "actual_source_provenance": {
+        "frame": 670.0,
+        "godmode_exposure": true,
+        "metric": "area",
+        "phase_fixture": 1.0,
+        "seconds": 11.1666666666668,
+        "seed": 1701.0,
+        "start": "center",
+        "strategy": "stationary",
+        "suite": "exposure"
+      },
+      "dimensions": "(1280, 720)",
+      "controlled_red_screen_radius": 3.625,
+      "camera_scale": 0.90625,
+      "sampled_safe_screen_coverage": {
+        "area_union_fraction": 0.203125,
+        "bullet_instant_fraction": 0.0015625,
+        "bullet_swept_0_75s_fraction": 0.025,
+        "sample_cells": 640,
+        "sweep_horizon_seconds": 0.75
+      },
+      "observed": {
+        "controlled_red_dot_visible": true,
+        "projectile_cores_distinct_from_background": true,
+        "area_boundary_visible": true,
+        "ordinary_bullet_trajectory_sheet_absent": true
+      }
+    },
+    {
+      "path": "artifacts/danmaku-pressure-20261103/presentation-real/real-B16-bullet-13-1280.png",
+      "sha256": "9c791fd49256e7e9dd1ad13db9570beafd315f88461552b79789a926a493aa0f",
+      "actual_source_provenance": {
+        "frame": 800.0,
+        "godmode_exposure": true,
+        "metric": "bullet",
+        "phase_fixture": 1.0,
+        "seconds": 13.3333333333336,
+        "seed": 1701.0,
+        "start": "center",
+        "strategy": "reactive",
+        "suite": "exposure"
+      },
+      "dimensions": "(1280, 720)",
+      "controlled_red_screen_radius": 3.625,
+      "camera_scale": 0.90625,
+      "sampled_safe_screen_coverage": {
+        "area_union_fraction": 0.0,
+        "bullet_instant_fraction": 0.0109375,
+        "bullet_swept_0_75s_fraction": 0.1890625,
+        "sample_cells": 640,
+        "sweep_horizon_seconds": 0.75
+      },
+      "observed": {
+        "controlled_red_dot_visible": true,
+        "projectile_cores_distinct_from_background": true,
+        "area_boundary_visible": null,
+        "ordinary_bullet_trajectory_sheet_absent": true
+      }
+    },
+    {
+      "path": "artifacts/danmaku-pressure-20261103/presentation-real/real-B17-area-16-1280.png",
+      "sha256": "4386588a15ba727c41adba5ad737c475680727ecc146af107013c9d053d87491",
+      "actual_source_provenance": {
+        "frame": 659.0,
+        "godmode_exposure": true,
+        "metric": "area",
+        "phase_fixture": 1.0,
+        "seconds": 10.9833333333335,
+        "seed": 1701.0,
+        "start": "center",
+        "strategy": "stationary",
+        "suite": "exposure"
+      },
+      "dimensions": "(1280, 720)",
+      "controlled_red_screen_radius": 2.0,
+      "camera_scale": 0.5,
+      "sampled_safe_screen_coverage": {
+        "area_union_fraction": 0.1390625,
+        "bullet_instant_fraction": 0.003125,
+        "bullet_swept_0_75s_fraction": 0.0765625,
+        "sample_cells": 640,
+        "sweep_horizon_seconds": 0.75
+      },
+      "observed": {
+        "controlled_red_dot_visible": true,
+        "projectile_cores_distinct_from_background": true,
+        "area_boundary_visible": true,
+        "ordinary_bullet_trajectory_sheet_absent": true
+      }
+    },
+    {
+      "path": "artifacts/danmaku-pressure-20261103/presentation-real/real-B18-area-18-960.png",
+      "sha256": "c60b2df1746b06edc533d9cb00b070ba9ca0f1034ec9226d9878d5b1f7fed129",
+      "actual_source_provenance": {
+        "frame": 512.0,
+        "godmode_exposure": true,
+        "metric": "area",
+        "phase_fixture": 1.0,
+        "seconds": 8.53333333333334,
+        "seed": 1701.0,
+        "start": "center",
+        "strategy": "stationary",
+        "suite": "exposure"
+      },
+      "dimensions": "(960, 600)",
+      "controlled_red_screen_radius": 1.8,
+      "camera_scale": 0.45,
+      "sampled_safe_screen_coverage": {
+        "area_union_fraction": 0.171875,
+        "bullet_instant_fraction": 0.0,
+        "bullet_swept_0_75s_fraction": 0.046875,
+        "sample_cells": 640,
+        "sweep_horizon_seconds": 0.75
+      },
+      "observed": {
+        "controlled_red_dot_visible": true,
+        "projectile_cores_distinct_from_background": true,
+        "area_boundary_visible": true,
+        "ordinary_bullet_trajectory_sheet_absent": true
+      }
+    },
+    {
+      "path": "artifacts/danmaku-pressure-20261103/presentation-real/real-B18-bullet-09-1920.png",
+      "sha256": "43394b305c924bdd10ccc16c289897911193fa773f3ab7525b391164888bcccb",
+      "actual_source_provenance": {
+        "frame": 778.0,
+        "godmode_exposure": false,
+        "metric": "bullet",
+        "phase_fixture": 1.0,
+        "seconds": 12.9666666666669,
+        "seed": 1701.0,
+        "start": "center",
+        "strategy": "reactive",
+        "suite": "boss"
+      },
+      "dimensions": "(1920, 1080)",
+      "controlled_red_screen_radius": 6.0,
+      "camera_scale": 1.5,
+      "sampled_safe_screen_coverage": {
+        "area_union_fraction": 0.0,
+        "bullet_instant_fraction": 0.0046875,
+        "bullet_swept_0_75s_fraction": 0.065625,
+        "sample_cells": 640,
+        "sweep_horizon_seconds": 0.75
+      },
+      "observed": {
+        "controlled_red_dot_visible": true,
+        "projectile_cores_distinct_from_background": true,
+        "area_boundary_visible": null,
+        "ordinary_bullet_trajectory_sheet_absent": true
+      }
+    },
+    {
+      "path": "artifacts/danmaku-pressure-20261103/presentation-real/real-B18-area-10-1280.png",
+      "sha256": "c4a1964416b692b035ed6e9f57e556a73433acc28fe4969a83ce5c3008ad89bc",
+      "actual_source_provenance": {
+        "frame": 512.0,
+        "godmode_exposure": false,
+        "metric": "area",
+        "phase_fixture": 1.0,
+        "seconds": 8.53333333333334,
+        "seed": 1701.0,
+        "start": "center",
+        "strategy": "stationary",
+        "suite": "boss"
+      },
+      "dimensions": "(1280, 720)",
+      "controlled_red_screen_radius": 1.84375,
+      "camera_scale": 0.4609375,
+      "sampled_safe_screen_coverage": {
+        "area_union_fraction": 0.10625,
+        "bullet_instant_fraction": 0.0,
+        "bullet_swept_0_75s_fraction": 0.0453125,
+        "sample_cells": 640,
+        "sweep_horizon_seconds": 0.75
+      },
+      "observed": {
+        "controlled_red_dot_visible": true,
+        "projectile_cores_distinct_from_background": true,
+        "area_boundary_visible": true,
+        "ordinary_bullet_trajectory_sheet_absent": true
+      }
+    }
+  ],
+  "reviewed_synthetic_images": [
+    {
+      "path": "artifacts/danmaku-pressure-20261103/presentation-synthetic/dense-1280.png",
+      "sha256": "179eba6f35f103ce50fa1faf63096e07f19773e6b204f6c2227171f0946739f7",
+      "observed": {
+        "controlled_red_dot_visible": true,
+        "projectile_cores_visible": true,
+        "truthful_charge_and_ground_outlines_visible": true
+      },
+      "synthetic_stress_scene": true
+    },
+    {
+      "path": "artifacts/danmaku-pressure-20261103/presentation-synthetic/dense-960.png",
+      "sha256": "63bfcafb458568e12a1eab7de1ced5dd40b8b267944cf1da8fcd15ec3f979f31",
+      "observed": {
+        "controlled_red_dot_visible": true,
+        "projectile_cores_visible": true,
+        "truthful_charge_and_ground_outlines_visible": true
+      },
+      "synthetic_stress_scene": true
+    }
+  ],
+  "final_delta": {
+    "projectile_only_boss_impact_outline_and_camera_trauma": {
+      "status": "PASS",
+      "headless_checks": 11,
+      "graphical_checks": 13,
+      "graphical_log": "design/danmaku-pressure-20261103/runtime/final-logs/boss-projectile-graphical.log",
+      "images_reviewed": [
+        {
+          "path": "artifacts/danmaku-pressure-20261103/boss-impact-regression/boss-fan-no-false-area.png",
+          "sha256": "83f8bbdd2de7e6ecc57d6fc08df8ba859fcab73d473f47a72e1aaad92fccab62"
+        },
+        {
+          "path": "artifacts/danmaku-pressure-20261103/boss-impact-regression/boss-area-impact-retained.png",
+          "sha256": "b09e89bb3dd0e7fabc8ebfebd5e8c59adb1e5fe69adfdfb8579ff151dae4568e"
+        }
+      ],
+      "observed_projectile_only_whole_area_absent": true,
+      "observed_true_area_impact_outline_retained": true
+    },
+    "simulation_cadence_B17": {
+      "status": "PASS_targeted_validation_complete",
+      "final_core_freeze": "design/danmaku-pressure-20261103/runtime/core-freeze.json",
+      "final_core_sha256": {
+        "scripts/battle/enemy_system.gd": "f789c9be281c2b2bedbdb18e273ff5d6929c9993a7ed934a03d7da8a61c8be41",
+        "scripts/battle/enemy_geometry.gd": "046d03f340a98435f18cdcde29b346a7751d0ecc7f57d969727e1c5a04915473",
+        "scripts/battle/enemy_runtime.gd": "4f32969329fc6216331710cf1487d57eec6c2184913617b5f66b80ff094a9db4",
+        "scripts/battle/battle_session.gd": "6a776a857a5b0caeb402f90d28fd41f2fc5e917ec19e0b5824ff4d982297aa06",
+        "scripts/battle/stage_director.gd": "1de0a86031775da2a7f88df5d96fc72076846b4f5435fe3064957b33d1db082f",
+        "scripts/battle/targeting.gd": "060455d6bf74a0180d4de29b795f498af33b929da07c9cb00567d6a3162cc344",
+        "scripts/battle/battle_space.gd": "8505ffe3b61661c3e6ae031b16e754d5728101e3b5e95be4859a5d1cbde40485",
+        "scripts/battle/player_hurtbox.gd": "37b8b6f8024bb6409f1134c0923975aebed9a82dad9d7f7301dd19875b39bbf8",
+        "scripts/battle/enemy_spatial_grid.gd": "731d8970d6cd6c71b20671e0c0362e453e000d8a7fd60722b48222d9b387b9d9",
+        "scripts/battle/projectile_patterns.gd": "efa2645e704eb8383889fd9536142707dd7265c48c8fc0493274256d8c7075c8",
+        "scripts/content/enemy_catalog.gd": "b899d117783d949a0499d6848381b26a0b787ee1ad588869db1a21456e8da8b1",
+        "scripts/content/boss_forms.gd": "0993068afc9274b5b9096d5551affdb8e35f58a9372880a80150ea20bdb47f8c",
+        "scripts/content/stage_catalog.gd": "f37242fecea5cdaa0e23d038789ae2a0d7de04bdd44c9caae9a9e09f54eb4c40"
+      },
+      "cadence_evidence": "design/danmaku-pressure-20261103/validation/final-after-cadence.json",
+      "continuous_duel_evidence": "design/danmaku-pressure-20261103/validation/final-after-duel.json",
+      "visual_pattern_geometry_and_presentation_unchanged_by_delta": true,
+      "original_snapshots_not_relabelled_as_final_cadence_runs": true
+    }
+  },
+  "limitations": [
+    "phase_fixture_and_godmode_exposure_retained_in_each_image_provenance",
+    "not_a_human_campaign_playthrough",
+    "sampled_coverage_is_not_a_continuous_safe_path_proof",
+    "rendered_snapshots_do_not_measure_rendering_framerate"
+  ]
+}

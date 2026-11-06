@@ -1,0 +1,280 @@
+{
+  "schema_version": 1,
+  "locked_at": "2026-11-04",
+  "scope": "local full-song D1/D2 listening trials only; no production replacement or raw-sample redistribution",
+  "sources": [
+    {
+      "id": "dsk_asian_dreamz_sf2",
+      "status": "acquired",
+      "title": "DSK Asian DreamZ SF2",
+      "author_publisher": "DSK Music / Victor Castilla",
+      "copyright_in_file": "DSK Music © 2008",
+      "format": "SoundFont 2.01 / mono signed 16-bit PCM / 44.1 and 48 kHz",
+      "source_url": "https://www.dskmusic.com/dsk-asian-dreamz/",
+      "download_url": "https://rekkerd.org/samples/DSK_Asian_DreamZ_sf2.zip",
+      "distribution_page_url": "https://rekkerd.org/dsk-soundfonts/",
+      "license": {
+        "id": "LicenseRef-DSK-Free-Private-Commercial-Use",
+        "license_text_verbatim": "DSK Music Virtual Instruments are 100% free for private and commercial use.",
+        "license_evidence_url": "https://www.dskmusic.com/dsk-asian-dreamz/",
+        "raw_sample_redistribution": "Not explicitly granted in the published statement or included readme; retain sample bank and exported WAV only in local cache.",
+        "rendered_music_use": "Private and commercial instrument use expressly permitted by publisher. Local trial rendering falls within this statement. No separate output license or attribution requirement found; do not imply ownership of samples.",
+        "eula_in_archive": false,
+        "included_readme_contains_only": "Publisher name, free instruments/soundfonts label, contact and website.",
+        "recording_provenance": "Publisher calls this a real-instrument rompler and labels its samples PIPA/LUAN/GUZHEN/ERHU/BAN-DI. Performer, microphones, original recording session and independent verification of acoustic origin were not supplied. Treat names as publisher-attributed, sample-based SF2 identities."
+      },
+      "archive": {
+        "path": "/home/weathour/.cache/my-game/chinese-instruments-20261104/DSK_Asian_DreamZ_sf2.zip",
+        "sha256": "f0b8a7943e8d7368b0c5ec492d1803088a6ce2210ec1528ec7b1301c4fa1a9d2",
+        "bytes": 9708276
+      },
+      "bank": {
+        "path": "/home/weathour/.cache/my-game/chinese-instruments-20261104/DSK_Asian_DreamZ/DSK Asian DreamZ.SF2",
+        "sha256": "e61d0f590db00434fa1a904ab210fdf4439fef13617d89d33eacc8edfc403e5e",
+        "bytes": 11548250
+      },
+      "readme": {
+        "path": "/home/weathour/.cache/my-game/chinese-instruments-20261104/DSK_Asian_DreamZ/DSK Music - Readme.txt",
+        "sha256": "800793dbfd397ff9c418c8c5dc057702a1dab01cbaa21201a6960719020b7326",
+        "bytes": 187
+      },
+      "evidence": [
+        {
+          "path": "/home/weathour/.cache/my-game/chinese-instruments-20261104/dsk-product.html",
+          "sha256": "8b0caada0e06029cf00f1371bc55d5bf298c78be271da119ce875d836e1413e0",
+          "bytes": 81478
+        },
+        {
+          "path": "/home/weathour/.cache/my-game/chinese-instruments-20261104/dsk-soundfont-distribution.html",
+          "sha256": "1b0b6339b75272084597c8ccaedf6ed7da745697c90d6c9b932829d7079887ac",
+          "bytes": 165530
+        }
+      ],
+      "regions_manifest": "dsk-regions.json",
+      "patches": [
+        {
+          "id": "unused_duplicate",
+          "sf2_name": "DSK Music © 2008",
+          "bank": 0,
+          "program_zero_based": 7,
+          "sampled_root_range": [
+            71,
+            88
+          ],
+          "mapped_key_range": [
+            21,
+            108
+          ],
+          "use": false
+        },
+        {
+          "id": "chinese_percussion",
+          "sf2_name": "Chinese Percussion",
+          "bank": 0,
+          "program_zero_based": 6,
+          "sampled_root_range": [
+            55,
+            70
+          ],
+          "mapped_key_range": [
+            54,
+            70
+          ],
+          "use": true
+        },
+        {
+          "id": "ban_di",
+          "sf2_name": "BAN-DI",
+          "bank": 0,
+          "program_zero_based": 5,
+          "sampled_root_range": [
+            71,
+            88
+          ],
+          "mapped_key_range": [
+            21,
+            108
+          ],
+          "use": true
+        },
+        {
+          "id": "erhu",
+          "sf2_name": "ERHU",
+          "bank": 0,
+          "program_zero_based": 4,
+          "sampled_root_range": [
+            65,
+            84
+          ],
+          "mapped_key_range": [
+            21,
+            108
+          ],
+          "use": true
+        },
+        {
+          "id": "guzhen",
+          "sf2_name": "GUZHEN",
+          "bank": 0,
+          "program_zero_based": 3,
+          "sampled_root_range": [
+            58,
+            77
+          ],
+          "mapped_key_range": [
+            21,
+            127
+          ],
+          "use": true
+        },
+        {
+          "id": "luan",
+          "sf2_name": "LUAN",
+          "bank": 0,
+          "program_zero_based": 2,
+          "sampled_root_range": [
+            50,
+            79
+          ],
+          "mapped_key_range": [
+            21,
+            108
+          ],
+          "use": true
+        },
+        {
+          "id": "pipa_trem",
+          "sf2_name": "PIPA TREM",
+          "bank": 0,
+          "program_zero_based": 1,
+          "sampled_root_range": [
+            59,
+            91
+          ],
+          "mapped_key_range": [
+            21,
+            108
+          ],
+          "use": true
+        },
+        {
+          "id": "pipa",
+          "sf2_name": "PIPA",
+          "bank": 0,
+          "program_zero_based": 0,
+          "sampled_root_range": [
+            57,
+            91
+          ],
+          "mapped_key_range": [
+            21,
+            108
+          ],
+          "use": true
+        }
+      ],
+      "practical_ranges": {
+        "basis": "Sample-header/overridden root range with no more than 4 semitones outside endpoints; mapped SF2 key range is much wider and is not evidence of recorded or playable acoustic range. Internal zones normally select nearby samples.",
+        "pipa": [
+          53,
+          95
+        ],
+        "pipa_trem": [
+          55,
+          95
+        ],
+        "luan": [
+          46,
+          83
+        ],
+        "guzhen": [
+          54,
+          81
+        ],
+        "erhu": [
+          61,
+          88
+        ],
+        "ban_di": [
+          67,
+          92
+        ]
+      },
+      "family_aliases": {
+        "pipa": 0,
+        "pipa_trem": 1,
+        "ruan": 2,
+        "zheng": 3,
+        "erhu": 4,
+        "dizi": 5
+      },
+      "alias_caveat": "ruan/zheng/dizi are renderer family labels; preserve the original publisher spelling LUAN/GUZHEN/BAN-DI in source attribution. No sheng or yangqin substitute is provided."
+    },
+    {
+      "id": "berklee_bisa_erhu",
+      "status": "license_and_metadata_verified_audio_not_acquired",
+      "title": "BISA Chinese Erhu Sample Pack",
+      "source_url": "https://remix.berklee.edu/bisa-chinese-erhu/",
+      "sample_page": "https://remix.berklee.edu/bisa-chinese-erhu-oneshots-vibrato/7",
+      "contributors": {
+        "instrumentalist": "Yu Chun Chan",
+        "recording_engineer": "Josefina Ugarte",
+        "editor": "Asher Deverna"
+      },
+      "license": {
+        "id": "CC-BY-version-unspecified",
+        "license_text_verbatim": "These sounds are accessible for all, under a CC BY License.",
+        "version": "The public pack page does not specify a version or link to a versioned deed; do not invent one.",
+        "attribution_required": true
+      },
+      "selected_candidate_samples": [
+        {
+          "title": "Regular (A4)",
+          "note": 69,
+          "metadata_duration_seconds": 3,
+          "original_url": "https://remix.berklee.edu/context/bisa-chinese-erhu-oneshots-vibrato/article/1006/type/native/viewcontent"
+        },
+        {
+          "title": "Regular (E5)",
+          "note": 76,
+          "metadata_duration_seconds": 3,
+          "original_url": "https://remix.berklee.edu/context/bisa-chinese-erhu-oneshots-vibrato/article/1007/type/native/viewcontent"
+        }
+      ],
+      "access_result": "Original file endpoints redirect to a Cloudflare challenge and return HTTP 403. Public per-note page exposed an S3 HLS stream, but bounded followup encountered network TLS EOF before media acquisition. No challenge bypass was attempted, and no audio from this source is used in the trial.",
+      "evidence": [
+        {
+          "path": "/home/weathour/.cache/my-game/chinese-instruments-20261104/berklee-pack.html",
+          "sha256": "85fb4f9d0f325f19b2af961589a971a6bc9afd44a4b6b6a8415290e764471589",
+          "bytes": 17969
+        },
+        {
+          "path": "/home/weathour/.cache/my-game/chinese-instruments-20261104/berklee-erhu-a4.html",
+          "sha256": "b315bdff3e28e85723e416ad509006ffe04915cab9eeec897545df35deedad6f",
+          "bytes": 29808
+        }
+      ]
+    }
+  ],
+  "excluded_candidates": [
+    {
+      "id": "samplescience_nu_guzheng",
+      "url": "https://www.samplescience.info/2021/05/nu-guzheng.html",
+      "reason": "Download requires Gumroad email checkout; public page did not supply applicable sample license. Not acquired."
+    }
+  ],
+  "remaining_gaps": [
+    "No acquired author-verifiable recording chain for plucked instruments. DSK publisher sample labels are documented rather than promoted to independently verified recording facts.",
+    "No verified free sheng, yangqin, sanxian or zhongruan recording source acquired. LUAN is only the publisher label; its exact ruan subtype is not established."
+  ],
+  "reproduction": {
+    "command": "python design/music-20261104-chinese-trial/sources/acquire_sources.py --export-wav",
+    "offline_inspection": "python design/music-20261104-chinese-trial/sources/acquire_sources.py --offline --export-wav",
+    "dependencies": [
+      "Python 3 standard library",
+      "requests"
+    ],
+    "sample_data_location": "local cache only",
+    "output_manifest": "dsk-regions.json"
+  }
+}

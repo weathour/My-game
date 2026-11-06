@@ -1,0 +1,89 @@
+{
+  "scope": "fixed body-middle danger core; foot-anchor entity positions retained",
+  "center_offset_world": [
+    0,
+    -36
+  ],
+  "normalized_standing_body_height_world": 72,
+  "hurt_radius_world": 4,
+  "runtime_contract": {
+    "H.center": "foot anchor -> stable body core; animation independent",
+    "G.contains": "unchanged generic mathematical point test",
+    "G.contains_actor": "foot anchor -> H.center exactly once -> contains",
+    "G.descriptor": "foot anchor API; aim and marker origin locked to H.center",
+    "PATTERNS": "unchanged generic target point API; caller supplies H.center for immediate/delayed bursts",
+    "boss_camera_and_safe_exit": "candidate routes remain foot anchors; danger containment uses contains_actor",
+    "unchanged": "movement/attack reach/pickup/body spacing/save coordinates; all combat numbers and radii"
+  },
+  "owned_production_and_driver_fingerprints": {
+    "scripts/battle/battle_space.gd": "69f899eb40cbf7987a466a76c85ddd0d1e65a3862011de56d90ef6d669ea3b94",
+    "scripts/battle/player_hurtbox.gd": "3ff2fae94debe76ad31a369b28e03def0bd806a81fb296d4dda2e8a0a00631fe",
+    "scripts/battle/enemy_geometry.gd": "1f81cb206a5071547f2f831c9587ac9a30302c27203cd3373058750e88aeb503",
+    "scripts/battle/enemy_system.gd": "78fb28a8d09aeefb1ff2cc603be6e28523bed0e77bd309df48192d4a0d0fef4a",
+    "scripts/ui/chronicle/battle_art.gd": "1541d8e50b48b6d3b7144d023b64fb26cfc7b1ac509b6ce0930208cd31ed3aa7",
+    "scripts/ui/chronicle/boss_camera.gd": "2cb452c37c58ffcd7cbf2c0939bdb6a69a180f83950286fb8cf4a285879d5c91",
+    "scripts/tests/reference_walk_driver.gd": "6f96b053aa0150c4e399bba2e3771376d3ce3a0d68b796a8f6be0d6a98666cd0"
+  },
+  "startup_log": "startup.log",
+  "checks": [
+    {
+      "script": "scripts/tests/chronicle_danmaku_smoke.gd",
+      "log": "danmaku.log",
+      "validator_errors": [],
+      "summary": "CHRONICLE_DANMAKU_SMOKE PASS checks=288 failures=0"
+    },
+    {
+      "script": "scripts/tests/chronicle_enemy_sessions_smoke.gd",
+      "log": "enemy-sessions-sample.log",
+      "validator_errors": [],
+      "summary": "CHRONICLE_ENEMY_SESSIONS_SMOKE PASS checks=13983 failures=0 sessions=3"
+    },
+    {
+      "script": "scripts/tests/baimen_enemy_runtime_smoke.gd",
+      "log": "baimen_enemy_runtime_smoke.log",
+      "validator_errors": [],
+      "summary": "BAIMEN_ENEMY_RUNTIME_SMOKE PASS checks=743 failures=0"
+    },
+    {
+      "script": "scripts/tests/boss_forms_smoke.gd",
+      "log": "boss_forms_smoke.log",
+      "validator_errors": [],
+      "summary": "BOSS_FORMS_SMOKE PASS checks=672 failures=0 authored_moves=30"
+    },
+    {
+      "script": "scripts/tests/chronicle_character_mechanics_smoke.gd",
+      "log": "chronicle_character_mechanics_smoke.log",
+      "validator_errors": [],
+      "summary": "CHRONICLE_CHARACTER_MECHANICS_SMOKE PASS checks=126 failures=0"
+    },
+    {
+      "script": "scripts/tests/chronicle_combat_feedback_events_smoke.gd",
+      "log": "chronicle_combat_feedback_events_smoke.log",
+      "validator_errors": [],
+      "summary": "CHRONICLE_COMBAT_FEEDBACK_EVENTS_SMOKE PASS checks=59 failures=0"
+    },
+    {
+      "script": "scripts/tests/chronicle_combat_smoke.gd",
+      "log": "chronicle_combat_smoke.log",
+      "validator_errors": [],
+      "summary": "CHRONICLE_COMBAT_SMOKE PASS checks=77 failures=0"
+    },
+    {
+      "script": "scripts/tests/chronicle_boss_camera_smoke.gd",
+      "log": "chronicle_boss_camera_smoke.log",
+      "validator_errors": [],
+      "summary": "CHRONICLE_BOSS_CAMERA_SMOKE PASS checks=165 failures=0"
+    },
+    {
+      "script": "scripts/tests/chronicle_combat_feedback_smoke.gd",
+      "log": "chronicle_combat_feedback_smoke.log",
+      "validator_errors": [],
+      "summary": "CHRONICLE_COMBAT_FEEDBACK_SMOKE PASS checks=332 failures=0"
+    }
+  ],
+  "limitations": [
+    "Headless render smoke cannot establish native visual placement; independent rendered acceptance is assigned separately.",
+    "Session driver outcomes are bounded regression observations, not a play balance proof.",
+    "Full project check is owned by the parent agent."
+  ]
+}

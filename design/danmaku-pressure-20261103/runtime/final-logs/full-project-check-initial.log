@@ -1,0 +1,277 @@
+Check logs: /home/weathour/programs/desktop-projects/My-game/design/danmaku-pressure-20261103/runtime/full-check-logs
+== Python project checks ==
+DOC_LINK_CHECK_OK
+PROJECT_CONFIG_CHECK_OK
+{"graph_update_accepted": false, "reason": "exit=0; Godot extractor=True; missing 1 runtime GDScript files", "missing": ["scripts/new.gd"]}
+GRAPHIFY_UPDATE_REJECTED: exit=0; Godot extractor=True; missing 1 runtime GDScript files
+{"graph_update_accepted": false, "reason": "exit=0; Godot extractor=False; missing 0 runtime GDScript files", "missing": []}
+GRAPHIFY_UPDATE_REJECTED: exit=0; Godot extractor=False; missing 0 runtime GDScript files
+{"graph_update_accepted": true, "reason": "exit=0; Godot extractor=True; missing 0 runtime GDScript files", "missing": []}
+GRAPH_UPDATE_SELF_TEST_OK
+SMOKE_LOG_SELF_TEST_OK
+ARCHITECTURE_CONTRACT_CHECK_OK
+CHRONICLE_STORY_CONTENT_CHECK_OK
+== Godot asset import ==
+GODOT_ASSET_IMPORT_OK
+== Godot headless parse ==
+GODOT_PARSE_CHECK_OK
+== Godot Chronicle entry scene smoke ==
+CHRONICLE_ENTRY_SCENE_SMOKE_OK
+== Godot Linux development pack export for isolated pack smokes ==
+CHRONICLE_PACK path=/tmp/my-game-check.CNpq9n/pack-smokes/game.pck bytes=240345276
+== Godot chronicle_enemy_pack_smoke against isolated main pack from empty cwd ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+ENEMY_PACK_SMOKE PASS checks=742 failures=0
+== Godot chronicle_music_pack_smoke against isolated main pack from empty cwd ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+CHRONICLE_MUSIC_PACK_SMOKE PASS cues=16 checks=95 failures=0
+== Godot chronicle_story_pack_smoke against isolated main pack from empty cwd ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+CHRONICLE_STORY_PACK_SMOKE PASS checks=97 failures=0
+== Godot chronicle_combat_feedback_pack_smoke against isolated main pack from empty cwd ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+CHRONICLE_COMBAT_FEEDBACK_PACK_SMOKE PASS checks=806 failures=0
+== Godot baimen enemy runtime smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+ERROR: line includes player radius
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://scripts/tests/baimen_enemy_runtime_smoke.gd:15)
+       [1] geometries (res://scripts/tests/baimen_enemy_runtime_smoke.gd:85)
+       [2] run (res://scripts/tests/baimen_enemy_runtime_smoke.gd:37)
+ERROR: B01 shared major budget includes ordinary and boss
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://scripts/tests/baimen_enemy_runtime_smoke.gd:15)
+       [1] geometries (res://scripts/tests/baimen_enemy_runtime_smoke.gd:98)
+       [2] run (res://scripts/tests/baimen_enemy_runtime_smoke.gd:37)
+ERROR: collision padding matches clipped warned line
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://scripts/tests/baimen_enemy_runtime_smoke.gd:15)
+       [1] charge_boundary_geometry (res://scripts/tests/baimen_enemy_runtime_smoke.gd:336)
+       [2] run (res://scripts/tests/baimen_enemy_runtime_smoke.gd:38)
+ERROR: collision padding matches clipped warned line
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://scripts/tests/baimen_enemy_runtime_smoke.gd:15)
+       [1] charge_boundary_geometry (res://scripts/tests/baimen_enemy_runtime_smoke.gd:336)
+       [2] run (res://scripts/tests/baimen_enemy_runtime_smoke.gd:38)
+ERROR: collision padding matches clipped warned line
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://scripts/tests/baimen_enemy_runtime_smoke.gd:15)
+       [1] charge_boundary_geometry (res://scripts/tests/baimen_enemy_runtime_smoke.gd:336)
+       [2] run (res://scripts/tests/baimen_enemy_runtime_smoke.gd:38)
+ERROR: collision padding matches clipped warned line
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://scripts/tests/baimen_enemy_runtime_smoke.gd:15)
+       [1] charge_boundary_geometry (res://scripts/tests/baimen_enemy_runtime_smoke.gd:336)
+       [2] run (res://scripts/tests/baimen_enemy_runtime_smoke.gd:38)
+ERROR: collision padding matches clipped warned line
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://scripts/tests/baimen_enemy_runtime_smoke.gd:15)
+       [1] charge_boundary_geometry (res://scripts/tests/baimen_enemy_runtime_smoke.gd:336)
+       [2] run (res://scripts/tests/baimen_enemy_runtime_smoke.gd:38)
+ERROR: collision padding matches clipped warned line
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://scripts/tests/baimen_enemy_runtime_smoke.gd:15)
+       [1] charge_boundary_geometry (res://scripts/tests/baimen_enemy_runtime_smoke.gd:336)
+       [2] run (res://scripts/tests/baimen_enemy_runtime_smoke.gd:38)
+ERROR: collision padding matches clipped warned line
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://scripts/tests/baimen_enemy_runtime_smoke.gd:15)
+       [1] charge_boundary_geometry (res://scripts/tests/baimen_enemy_runtime_smoke.gd:336)
+       [2] run (res://scripts/tests/baimen_enemy_runtime_smoke.gd:38)
+ERROR: collision padding matches clipped warned line
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://scripts/tests/baimen_enemy_runtime_smoke.gd:15)
+       [1] charge_boundary_geometry (res://scripts/tests/baimen_enemy_runtime_smoke.gd:336)
+       [2] run (res://scripts/tests/baimen_enemy_runtime_smoke.gd:38)
+ERROR: collision padding matches clipped warned line
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://scripts/tests/baimen_enemy_runtime_smoke.gd:15)
+       [1] charge_boundary_geometry (res://scripts/tests/baimen_enemy_runtime_smoke.gd:336)
+       [2] run (res://scripts/tests/baimen_enemy_runtime_smoke.gd:38)
+ERROR: collision padding matches clipped warned line
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://scripts/tests/baimen_enemy_runtime_smoke.gd:15)
+       [1] charge_boundary_geometry (res://scripts/tests/baimen_enemy_runtime_smoke.gd:336)
+       [2] run (res://scripts/tests/baimen_enemy_runtime_smoke.gd:38)
+ERROR: collision padding matches clipped warned line
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://scripts/tests/baimen_enemy_runtime_smoke.gd:15)
+       [1] charge_boundary_geometry (res://scripts/tests/baimen_enemy_runtime_smoke.gd:336)
+       [2] run (res://scripts/tests/baimen_enemy_runtime_smoke.gd:38)
+ERROR: collision padding matches clipped warned line
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://scripts/tests/baimen_enemy_runtime_smoke.gd:15)
+       [1] charge_boundary_geometry (res://scripts/tests/baimen_enemy_runtime_smoke.gd:336)
+       [2] run (res://scripts/tests/baimen_enemy_runtime_smoke.gd:38)
+ERROR: collision padding matches clipped warned line
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://scripts/tests/baimen_enemy_runtime_smoke.gd:15)
+       [1] charge_boundary_geometry (res://scripts/tests/baimen_enemy_runtime_smoke.gd:336)
+       [2] run (res://scripts/tests/baimen_enemy_runtime_smoke.gd:38)
+ERROR: collision padding matches clipped warned line
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://scripts/tests/baimen_enemy_runtime_smoke.gd:15)
+       [1] charge_boundary_geometry (res://scripts/tests/baimen_enemy_runtime_smoke.gd:336)
+       [2] run (res://scripts/tests/baimen_enemy_runtime_smoke.gd:38)
+ERROR: collision padding matches clipped warned line
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://scripts/tests/baimen_enemy_runtime_smoke.gd:15)
+       [1] charge_boundary_geometry (res://scripts/tests/baimen_enemy_runtime_smoke.gd:336)
+       [2] run (res://scripts/tests/baimen_enemy_runtime_smoke.gd:38)
+ERROR: collision padding matches clipped warned line
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://scripts/tests/baimen_enemy_runtime_smoke.gd:15)
+       [1] charge_boundary_geometry (res://scripts/tests/baimen_enemy_runtime_smoke.gd:336)
+       [2] run (res://scripts/tests/baimen_enemy_runtime_smoke.gd:38)
+ERROR: collision padding matches clipped warned line
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://scripts/tests/baimen_enemy_runtime_smoke.gd:15)
+       [1] charge_boundary_geometry (res://scripts/tests/baimen_enemy_runtime_smoke.gd:336)
+       [2] run (res://scripts/tests/baimen_enemy_runtime_smoke.gd:38)
+ERROR: collision padding matches clipped warned line
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://scripts/tests/baimen_enemy_runtime_smoke.gd:15)
+       [1] charge_boundary_geometry (res://scripts/tests/baimen_enemy_runtime_smoke.gd:336)
+       [2] run (res://scripts/tests/baimen_enemy_runtime_smoke.gd:38)
+ERROR: collision padding matches clipped warned line
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://scripts/tests/baimen_enemy_runtime_smoke.gd:15)
+       [1] charge_boundary_geometry (res://scripts/tests/baimen_enemy_runtime_smoke.gd:336)
+       [2] run (res://scripts/tests/baimen_enemy_runtime_smoke.gd:38)
+ERROR: collision padding matches clipped warned line
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://scripts/tests/baimen_enemy_runtime_smoke.gd:15)
+       [1] charge_boundary_geometry (res://scripts/tests/baimen_enemy_runtime_smoke.gd:336)
+       [2] run (res://scripts/tests/baimen_enemy_runtime_smoke.gd:38)
+ERROR: collision padding matches clipped warned line
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://scripts/tests/baimen_enemy_runtime_smoke.gd:15)
+       [1] charge_boundary_geometry (res://scripts/tests/baimen_enemy_runtime_smoke.gd:336)
+       [2] run (res://scripts/tests/baimen_enemy_runtime_smoke.gd:38)
+ERROR: collision padding matches clipped warned line
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://scripts/tests/baimen_enemy_runtime_smoke.gd:15)
+       [1] charge_boundary_geometry (res://scripts/tests/baimen_enemy_runtime_smoke.gd:336)
+       [2] run (res://scripts/tests/baimen_enemy_runtime_smoke.gd:38)
+ERROR: collision padding matches clipped warned line
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://scripts/tests/baimen_enemy_runtime_smoke.gd:15)
+       [1] charge_boundary_geometry (res://scripts/tests/baimen_enemy_runtime_smoke.gd:336)
+       [2] run (res://scripts/tests/baimen_enemy_runtime_smoke.gd:38)
+ERROR: collision padding matches clipped warned line
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://scripts/tests/baimen_enemy_runtime_smoke.gd:15)
+       [1] charge_boundary_geometry (res://scripts/tests/baimen_enemy_runtime_smoke.gd:336)
+       [2] run (res://scripts/tests/baimen_enemy_runtime_smoke.gd:38)
+ERROR: recovery drops shield 10.000 != 20.000
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://scripts/tests/baimen_enemy_runtime_smoke.gd:15)
+       [1] near (res://scripts/tests/baimen_enemy_runtime_smoke.gd:16)
+       [2] limits_and_shield (res://scripts/tests/baimen_enemy_runtime_smoke.gd:119)
+       [3] run (res://scripts/tests/baimen_enemy_runtime_smoke.gd:39)
+ERROR: human beats and war finisher have real recovery
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://scripts/tests/baimen_enemy_runtime_smoke.gd:15)
+       [1] phase_and_team_sequences (res://scripts/tests/baimen_enemy_runtime_smoke.gd:188)
+       [2] run (res://scripts/tests/baimen_enemy_runtime_smoke.gd:40)
+ERROR: human beats and war finisher have real recovery
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://scripts/tests/baimen_enemy_runtime_smoke.gd:15)
+       [1] phase_and_team_sequences (res://scripts/tests/baimen_enemy_runtime_smoke.gd:188)
+       [2] run (res://scripts/tests/baimen_enemy_runtime_smoke.gd:40)
+ERROR: human beats and war finisher have real recovery
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://scripts/tests/baimen_enemy_runtime_smoke.gd:15)
+       [1] phase_and_team_sequences (res://scripts/tests/baimen_enemy_runtime_smoke.gd:188)
+       [2] run (res://scripts/tests/baimen_enemy_runtime_smoke.gd:40)
+ERROR: war form intermediate beats sustain pressure
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://scripts/tests/baimen_enemy_runtime_smoke.gd:15)
+       [1] phase_and_team_sequences (res://scripts/tests/baimen_enemy_runtime_smoke.gd:187)
+       [2] run (res://scripts/tests/baimen_enemy_runtime_smoke.gd:40)
+ERROR: war form intermediate beats sustain pressure
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://scripts/tests/baimen_enemy_runtime_smoke.gd:15)
+       [1] phase_and_team_sequences (res://scripts/tests/baimen_enemy_runtime_smoke.gd:187)
+       [2] run (res://scripts/tests/baimen_enemy_runtime_smoke.gd:40)
+ERROR: war form intermediate beats sustain pressure
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://scripts/tests/baimen_enemy_runtime_smoke.gd:15)
+       [1] phase_and_team_sequences (res://scripts/tests/baimen_enemy_runtime_smoke.gd:187)
+       [2] run (res://scripts/tests/baimen_enemy_runtime_smoke.gd:40)
+ERROR: war form intermediate beats sustain pressure
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://scripts/tests/baimen_enemy_runtime_smoke.gd:15)
+       [1] phase_and_team_sequences (res://scripts/tests/baimen_enemy_runtime_smoke.gd:187)
+       [2] run (res://scripts/tests/baimen_enemy_runtime_smoke.gd:40)
+ERROR: form final beat commits full recovery
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://scripts/tests/baimen_enemy_runtime_smoke.gd:15)
+       [1] phase_and_team_sequences (res://scripts/tests/baimen_enemy_runtime_smoke.gd:217)
+       [2] run (res://scripts/tests/baimen_enemy_runtime_smoke.gd:40)
+ERROR: form final beat commits full recovery
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://scripts/tests/baimen_enemy_runtime_smoke.gd:15)
+       [1] phase_and_team_sequences (res://scripts/tests/baimen_enemy_runtime_smoke.gd:217)
+       [2] run (res://scripts/tests/baimen_enemy_runtime_smoke.gd:40)
+ERROR: Chen adds new delayed tell instead of instant marker damage or soldiers
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://scripts/tests/baimen_enemy_runtime_smoke.gd:15)
+       [1] phase_and_team_sequences (res://scripts/tests/baimen_enemy_runtime_smoke.gd:262)
+       [2] run (res://scripts/tests/baimen_enemy_runtime_smoke.gd:40)
+ERROR: collaboration ends in common long recovery
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://scripts/tests/baimen_enemy_runtime_smoke.gd:15)
+       [1] phase_and_team_sequences (res://scripts/tests/baimen_enemy_runtime_smoke.gd:263)
+       [2] run (res://scripts/tests/baimen_enemy_runtime_smoke.gd:40)
+ERROR: source-orphaned projectile ends within original TTL
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://scripts/tests/baimen_enemy_runtime_smoke.gd:15)
+       [1] impact_and_source_matrix (res://scripts/tests/baimen_enemy_runtime_smoke.gd:288)
+       [2] run (res://scripts/tests/baimen_enemy_runtime_smoke.gd:41)
+BAIMEN_ENEMY_RUNTIME_SMOKE FAIL checks=741 failures=39
+BAIMEN_ENEMY_RUNTIME_SMOKE_FAILED

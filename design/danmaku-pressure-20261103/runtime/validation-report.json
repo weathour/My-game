@@ -1,0 +1,1250 @@
+{
+  "status": "PASS_WITH_KNOWN_FORCED_EXIT_DIAGNOSTIC",
+  "utc": "2026-11-03T16:26:26.862500+00:00",
+  "godot_version": "4.6.2.stable.official.71f334935",
+  "startup": {
+    "headless": true,
+    "full_import_parse_entry": true,
+    "log_directory": "design/danmaku-pressure-20261103/runtime/full-check-logs"
+  },
+  "full_project_check": {
+    "result": "PROJECT_CHECK_OK",
+    "actual_uninterrupted_final_run": true,
+    "log": "design/danmaku-pressure-20261103/runtime/final-logs/full-project-check.log",
+    "log_sha256": "59005d375ad16111f4ef537efac81ed43ce595764dd0d9d9218028eedac9619f",
+    "total_smokes": 52,
+    "source_smokes": 48,
+    "pck_smokes": 4,
+    "numeric_checks_sum": 113261,
+    "smokes_without_numeric_counter": [
+      "scripts/tests/chronicle_playable_ui_smoke.gd",
+      "scripts/tests/chronicle_reflow_visual_smoke.gd"
+    ],
+    "smokes": [
+      {
+        "script": "scripts/tests/baimen_enemy_runtime_smoke.gd",
+        "log": "design/danmaku-pressure-20261103/runtime/full-check-logs/baimen_enemy_runtime_smoke.log",
+        "type": "source",
+        "checks": 743,
+        "script_sha256": "83a720ea582a911f6a2d8b5ab4c4adbd7bea5c7a3cfbab3a450f758a3b8d45b2",
+        "log_sha256": "6e2986cde6e1b2c022292ddef24fc576c8a19de572b65589fdd2415a3ba6a207"
+      },
+      {
+        "script": "scripts/tests/baimen_women_combat_art_smoke.gd",
+        "log": "design/danmaku-pressure-20261103/runtime/full-check-logs/baimen_women_combat_art_smoke.log",
+        "type": "source",
+        "checks": 266,
+        "script_sha256": "eea6d59b814dd7a17fd5107fd3db6a5e846948dbf7ddb58cb922b2dd667039ea",
+        "log_sha256": "646534b58adfc9313717be686e2d2e8dee305d9a09ec6657978a8085258df9a9"
+      },
+      {
+        "script": "scripts/tests/baimen_women_portraits_smoke.gd",
+        "log": "design/danmaku-pressure-20261103/runtime/full-check-logs/baimen_women_portraits_smoke.log",
+        "type": "source",
+        "checks": 525,
+        "script_sha256": "d6d73eef067cc7f5b2abcdeacdd86d0e049c1a0b023c897a940f001bf0d8d3e5",
+        "log_sha256": "6472c4e2426574abe0ef8061bb0884d5d96544d31c095f621f0b00f5f95eaed6"
+      },
+      {
+        "script": "scripts/tests/boss_combo_timing_smoke.gd",
+        "log": "design/danmaku-pressure-20261103/runtime/full-check-logs/boss_combo_timing_smoke.log",
+        "type": "source",
+        "checks": 41,
+        "script_sha256": "08c410f92fdb31c1f87475e7e352bec5432760f9d288a7eb652ea25ef8863844",
+        "log_sha256": "7db6254f1907ea07a1d10489b3671acaf75a184518456ba3cda1d9b54d15b45b"
+      },
+      {
+        "script": "scripts/tests/boss_forms_smoke.gd",
+        "log": "design/danmaku-pressure-20261103/runtime/full-check-logs/boss_forms_smoke.log",
+        "type": "source",
+        "checks": 672,
+        "script_sha256": "1edea44a6f2ed4a20a33f2d05af2e31e549532f63deaefa47dbace08ddd496f0",
+        "log_sha256": "51247d6284ec4fc4f7366e20931d34ca965366908d7ab729104cac73830b3b3e"
+      },
+      {
+        "script": "scripts/tests/boss_friendly_art_smoke.gd",
+        "log": "design/danmaku-pressure-20261103/runtime/full-check-logs/boss_friendly_art_smoke.log",
+        "type": "source",
+        "checks": 146,
+        "script_sha256": "39aeb561620bbe1482404b1165909988f603af8b7d25c1402014ea056383604f",
+        "log_sha256": "97c3180872ba707da4b4aa7f86aecf2499f0c0d44c4910de22bbabc15f2adabb"
+      },
+      {
+        "script": "scripts/tests/chronicle_authored_effects_smoke.gd",
+        "log": "design/danmaku-pressure-20261103/runtime/full-check-logs/chronicle_authored_effects_smoke.log",
+        "type": "source",
+        "checks": 36,
+        "script_sha256": "b55270456a11204bb0fb7e98673b4b3d1c142627a55f68f4253128705398b04e",
+        "log_sha256": "53e196869708d490aabf3bac3edc36f98b9dd66590d261f4fbfb3e75ea9e9dd3"
+      },
+      {
+        "script": "scripts/tests/chronicle_battle_ground_smoke.gd",
+        "log": "design/danmaku-pressure-20261103/runtime/full-check-logs/chronicle_battle_ground_smoke.log",
+        "type": "source",
+        "checks": 191,
+        "script_sha256": "31ed9fb32f33d9da34921b90e3cc785627b0f3867b49fa14e31171a0246e372c",
+        "log_sha256": "6ad8d0616112a94d4e17ed06efcd552a0da41e7628af99633941ff6c6ed90239"
+      },
+      {
+        "script": "scripts/tests/chronicle_battle_scale_smoke.gd",
+        "log": "design/danmaku-pressure-20261103/runtime/full-check-logs/chronicle_battle_scale_smoke.log",
+        "type": "source",
+        "checks": 560,
+        "script_sha256": "eb03efc6bbd7b0e3fd1f2ba238aae8d529a08f66374a5a6fd2f8e6e1684b4990",
+        "log_sha256": "e58d3545db29612c5626a6ad57cbcf37da91925db89cb33d4719a25de1eb8c92"
+      },
+      {
+        "script": "scripts/tests/chronicle_boss_camera_smoke.gd",
+        "log": "design/danmaku-pressure-20261103/runtime/full-check-logs/chronicle_boss_camera_smoke.log",
+        "type": "source",
+        "checks": 165,
+        "script_sha256": "95dd39e6e3b2bb3c7b4357a2d5b8753df9d6ae555c8c52ee1652b052f9577c0f",
+        "log_sha256": "f6d95e91a34d3cd1fb38a79eeefbf7a03ddd9f15b2293a2d6a0f57a5a8552eef"
+      },
+      {
+        "script": "scripts/tests/chronicle_boss_flow_smoke.gd",
+        "log": "design/danmaku-pressure-20261103/runtime/full-check-logs/chronicle_boss_flow_smoke.log",
+        "type": "source",
+        "checks": 140,
+        "script_sha256": "25d32eedf06cd0b84e92d023253fd9395be86661b381b57e9e90948ac1d5e4b5",
+        "log_sha256": "1f3ac022a81b003abce8719c8a118fd60fda53572df43588b2136c959d1900c4"
+      },
+      {
+        "script": "scripts/tests/chronicle_boss_sound_smoke.gd",
+        "log": "design/danmaku-pressure-20261103/runtime/full-check-logs/chronicle_boss_sound_smoke.log",
+        "type": "source",
+        "checks": 23,
+        "script_sha256": "0c694d5ffdfdfb6bfb66f3f7bdb4df2bb846a37f50e5a2c9026e19069e47aa31",
+        "log_sha256": "c4ca2756c7c0f69173556c80b8c3848613edf9075503ae43e126189d6ba81990"
+      },
+      {
+        "script": "scripts/tests/chronicle_chapter_two_smoke.gd",
+        "log": "design/danmaku-pressure-20261103/runtime/full-check-logs/chronicle_chapter_two_smoke.log",
+        "type": "source",
+        "checks": 189,
+        "script_sha256": "a374daac8fd5c79342aee1da766c0bfbd6f870b3e15cf95e22369dfc3a1a2e9d",
+        "log_sha256": "8c5a6832ff6c3a910f789cf2cfa48f28d5e941515232af5c184b5bd1aa9f9ca1"
+      },
+      {
+        "script": "scripts/tests/chronicle_character_campaign_smoke.gd",
+        "log": "design/danmaku-pressure-20261103/runtime/full-check-logs/chronicle_character_campaign_smoke.log",
+        "type": "source",
+        "checks": 196,
+        "script_sha256": "7bc9695683bad7ed847ae691167f73847542cdbb98dd76bd8253f4db42f28f07",
+        "log_sha256": "20d3e782d39e8d7c63173bdce636a588661fa193768cd6d94f908d0fb21b6e1a"
+      },
+      {
+        "script": "scripts/tests/chronicle_character_mechanics_smoke.gd",
+        "log": "design/danmaku-pressure-20261103/runtime/full-check-logs/chronicle_character_mechanics_smoke.log",
+        "type": "source",
+        "checks": 126,
+        "script_sha256": "f629a69dcd58b3bb373fc1f393bbec16b8f737b591f2acbfd14beff0ea055c94",
+        "log_sha256": "1d6a2ba8cf44c282a15f7efb74bc0101e85e80a6c4c397850ff63e67d9ea55e7"
+      },
+      {
+        "script": "scripts/tests/chronicle_character_panels_smoke.gd",
+        "log": "design/danmaku-pressure-20261103/runtime/full-check-logs/chronicle_character_panels_smoke.log",
+        "type": "source",
+        "checks": 362,
+        "script_sha256": "1ca2eee5ee1aec38716e5f3844fae71285c4d17e3e0c950cc2e304db62dc8c60",
+        "log_sha256": "4aec0f04c34f296f5dedeed97771f3c9711e673167d38eb5a6c81c72f87ff7bb"
+      },
+      {
+        "script": "scripts/tests/chronicle_character_profiles_smoke.gd",
+        "log": "design/danmaku-pressure-20261103/runtime/full-check-logs/chronicle_character_profiles_smoke.log",
+        "type": "source",
+        "checks": 121,
+        "script_sha256": "3fd27773e4a1ad38022c76d3d7cbda6e7c2d55fcbe8aecc07df9760b4fe93c63",
+        "log_sha256": "9a59b1881276b1daddcd848738e8687b2a715878e29b0d9ebbb0f54348073f89"
+      },
+      {
+        "script": "scripts/tests/chronicle_combat_feedback_events_smoke.gd",
+        "log": "design/danmaku-pressure-20261103/runtime/full-check-logs/chronicle_combat_feedback_events_smoke.log",
+        "type": "source",
+        "checks": 59,
+        "script_sha256": "1cca272161a0c367498308ee6dd6e1c37a8e34e28d1d92233531dd8ecffdd305",
+        "log_sha256": "d66776256fc235108ae5b4912660e07980d4ed554b05a344de51aced3697768a"
+      },
+      {
+        "script": "scripts/tests/chronicle_combat_feedback_pack_smoke.gd",
+        "log": "design/danmaku-pressure-20261103/runtime/full-check-logs/chronicle_combat_feedback_pack_smoke.log",
+        "type": "pck",
+        "checks": 806,
+        "script_sha256": "c4ef9b3905bdf684993186a28d2dbda9791165725fa85daeedf3117b112b847d",
+        "log_sha256": "2329ef194119e71edfda6237d8d9cecd13a9f632e24d428fc3bc6e3b1dc7ad0a"
+      },
+      {
+        "script": "scripts/tests/chronicle_combat_feedback_smoke.gd",
+        "log": "design/danmaku-pressure-20261103/runtime/full-check-logs/chronicle_combat_feedback_smoke.log",
+        "type": "source",
+        "checks": 332,
+        "script_sha256": "907d5b6e1ee32cf8dea3d8a67d3a5a6080e8973a568257c0ed9235e5a322edf3",
+        "log_sha256": "dcb4020a553af89a5154cc7b9f27fb6f04dcc0b0d85de994ab9bd604905ee842"
+      },
+      {
+        "script": "scripts/tests/chronicle_combat_smoke.gd",
+        "log": "design/danmaku-pressure-20261103/runtime/full-check-logs/chronicle_combat_smoke.log",
+        "type": "source",
+        "checks": 77,
+        "script_sha256": "c632dda9a24b4010395e1fd21e3f6780edcf8fe6a710ca7157f86fbd27e4f0f3",
+        "log_sha256": "e333588c16d0b9d45c502a0a28f22ce41c103cdd6e55f0d319dab781b78e0c07"
+      },
+      {
+        "script": "scripts/tests/chronicle_context_navigation_smoke.gd",
+        "log": "design/danmaku-pressure-20261103/runtime/full-check-logs/chronicle_context_navigation_smoke.log",
+        "type": "source",
+        "checks": 223,
+        "script_sha256": "1529b24bb6eba8a0a08938b15a354403317484da9b25d534da7a506807efcfa9",
+        "log_sha256": "55fa5ec68b43faf4415cbd03d760769c39d2fc3745b2f8935aba869ff41d3a17"
+      },
+      {
+        "script": "scripts/tests/chronicle_danmaku_smoke.gd",
+        "log": "design/danmaku-pressure-20261103/runtime/full-check-logs/chronicle_danmaku_smoke.log",
+        "type": "source",
+        "checks": 279,
+        "script_sha256": "7ea399742d7e564781ae7a43fc1fa9cfdb533b9f470fd7dc07189cdaa64aac58",
+        "log_sha256": "6dc72846ae45a1e2310b426d1f106d00533611692e0b104df3a79814c0e5440f"
+      },
+      {
+        "script": "scripts/tests/chronicle_enemy_campaign_smoke.gd",
+        "log": "design/danmaku-pressure-20261103/runtime/full-check-logs/chronicle_enemy_campaign_smoke.log",
+        "type": "source",
+        "checks": 454,
+        "script_sha256": "b0caa8a0a4c508ba092b5899d8469b15595c7e2fe1eeaceca6762fa4573166ee",
+        "log_sha256": "458887fbffc1476f4adc0835f44b54554bdb0de8707b9684f673fc966720f6ab"
+      },
+      {
+        "script": "scripts/tests/chronicle_enemy_codex_smoke.gd",
+        "log": "design/danmaku-pressure-20261103/runtime/full-check-logs/chronicle_enemy_codex_smoke.log",
+        "type": "source",
+        "checks": 704,
+        "script_sha256": "28f554860c2088562969daed2938ecbc0b963f0af84b9792a30de08f6cb6afb1",
+        "log_sha256": "0f9439503aefe500f93e6a8b6d4c4447cbd56836600e080c25906c360e6521f9"
+      },
+      {
+        "script": "scripts/tests/chronicle_enemy_content_smoke.gd",
+        "log": "design/danmaku-pressure-20261103/runtime/full-check-logs/chronicle_enemy_content_smoke.log",
+        "type": "source",
+        "checks": 2857,
+        "script_sha256": "800a9cc28dddda81e48d841810860d9b1352dbbc6b2cbe94723bd98a49392270",
+        "log_sha256": "4f95a56d76c5473bf30dede7145033029f6ccfb21d7fba8777f45d839d4c8c57"
+      },
+      {
+        "script": "scripts/tests/chronicle_enemy_effects_smoke.gd",
+        "log": "design/danmaku-pressure-20261103/runtime/full-check-logs/chronicle_enemy_effects_smoke.log",
+        "type": "source",
+        "checks": 73,
+        "script_sha256": "ac2f0263d54a94cddf561ade5d65f7b95e4dddf79d177f94c57dfaf821b88c71",
+        "log_sha256": "ac4fc3ab6186f232e44035505987fb1b34c0f99ae8fd5f6ecc94728e101787e2"
+      },
+      {
+        "script": "scripts/tests/chronicle_enemy_pack_smoke.gd",
+        "log": "design/danmaku-pressure-20261103/runtime/full-check-logs/chronicle_enemy_pack_smoke.log",
+        "type": "pck",
+        "checks": 742,
+        "script_sha256": "6155b26d4429c5086e99bc5f87f81d4bc2d53b138037fd8ee26690a23fe3850b",
+        "log_sha256": "06ffb1ea8e46ab058aa395c4dc90c8c85df4a0b65d684b0900b45968bab8e556"
+      },
+      {
+        "script": "scripts/tests/chronicle_enemy_presentation_smoke.gd",
+        "log": "design/danmaku-pressure-20261103/runtime/full-check-logs/chronicle_enemy_presentation_smoke.log",
+        "type": "source",
+        "checks": 509,
+        "script_sha256": "ede6f87637bb0081633f0a6c065b33fce40b3a672d3792cd1b47dc1ab5407b08",
+        "log_sha256": "a06f4f665f2152af5e0412095922a2f8cc95ea1432ca2dba037ef0455f039c2c"
+      },
+      {
+        "script": "scripts/tests/chronicle_enemy_sessions_smoke.gd",
+        "log": "design/danmaku-pressure-20261103/runtime/full-check-logs/chronicle_enemy_sessions_smoke.log",
+        "type": "source",
+        "checks": 93409,
+        "script_sha256": "fb0015450df8aa061bc3dcf9b387454647bd8fef47f58295ed19fde20f321bcf",
+        "log_sha256": "61289a4abaf35aa47c3b89c933882ceed3c6860b6ef08178da86a3fd9ff08002"
+      },
+      {
+        "script": "scripts/tests/chronicle_feedback_latency_smoke.gd",
+        "log": "design/danmaku-pressure-20261103/runtime/full-check-logs/chronicle_feedback_latency_smoke.log",
+        "type": "source",
+        "checks": 20,
+        "script_sha256": "0412522e501eb83c523c5538b73575f331142554bef9e09b3984eeca35f029d7",
+        "log_sha256": "c7bd5d1835c72d3941409bbf8288500c2ba3c1e78cad151ca0b383126ea4eb16"
+      },
+      {
+        "script": "scripts/tests/chronicle_home_menu_render_smoke.gd",
+        "log": "design/danmaku-pressure-20261103/runtime/full-check-logs/chronicle_home_menu_render_smoke.log",
+        "type": "source",
+        "checks": 444,
+        "script_sha256": "8089251b4e39f54b8e5ec4cb79813cc417060622d924af2a4e0fde4dc89ac175",
+        "log_sha256": "805fce2d6a166a8308d961868866429ab3031e5cb2837a65dfb765c1e7d6bfed"
+      },
+      {
+        "script": "scripts/tests/chronicle_mechanic_hud_smoke.gd",
+        "log": "design/danmaku-pressure-20261103/runtime/full-check-logs/chronicle_mechanic_hud_smoke.log",
+        "type": "source",
+        "checks": 322,
+        "script_sha256": "f88b0d482f5c3f624c6ec7f7f6042d42d6be9cebce921a1c774dc82702c1d2c6",
+        "log_sha256": "d81d85b36bf6cf128acf5d7ad8eb912146705bd5bc087da5a3d14ae7b3841e0f"
+      },
+      {
+        "script": "scripts/tests/chronicle_melee_reach_smoke.gd",
+        "log": "design/danmaku-pressure-20261103/runtime/full-check-logs/chronicle_melee_reach_smoke.log",
+        "type": "source",
+        "checks": 154,
+        "script_sha256": "a97c417126cd5e96284120538b5b2818bab20956810c58ef533ef584c0380714",
+        "log_sha256": "898a1e40caf38e4953d15d072675a31a8aefa44f8cd2b69b8b9dbd1833afc759"
+      },
+      {
+        "script": "scripts/tests/chronicle_music_pack_smoke.gd",
+        "log": "design/danmaku-pressure-20261103/runtime/full-check-logs/chronicle_music_pack_smoke.log",
+        "type": "pck",
+        "checks": 95,
+        "script_sha256": "10b47bfec26b9367354d1ed5118e6de513372f0ab4c9aeaa9d59d8625e3738c3",
+        "log_sha256": "2c7d5d872cb0209fe7cbd8963924e00db6b435d4b5f0cec358d58587afba7437"
+      },
+      {
+        "script": "scripts/tests/chronicle_music_playback_smoke.gd",
+        "log": "design/danmaku-pressure-20261103/runtime/full-check-logs/chronicle_music_playback_smoke.log",
+        "type": "source",
+        "checks": 41,
+        "script_sha256": "30ca9ae8d74fcbe3ef623ac96d2bc07123390849e211e145df073ae34c022552",
+        "log_sha256": "868fb10a39631f383d4de6c51abde785263cf803802ce11cc40bcae866f5714e"
+      },
+      {
+        "script": "scripts/tests/chronicle_music_smoke.gd",
+        "log": "design/danmaku-pressure-20261103/runtime/full-check-logs/chronicle_music_smoke.log",
+        "type": "source",
+        "checks": 2315,
+        "script_sha256": "2d874d0e2cd1f4ca6625b7d669560cc6dda0b4bbe4d063918bbdcf0662609c59",
+        "log_sha256": "5592711b39ee67fbfb093fd7d6ffbfec471f851535bec29a25c63957485d533b"
+      },
+      {
+        "script": "scripts/tests/chronicle_party_drag_smoke.gd",
+        "log": "design/danmaku-pressure-20261103/runtime/full-check-logs/chronicle_party_drag_smoke.log",
+        "type": "source",
+        "checks": 143,
+        "script_sha256": "61c2e60f7e24e30a35cb06a05f06a63c0eeaa1780534619f9269ebc71b2e0899",
+        "log_sha256": "9bde423bbd0a5ab2a056e7f05e78457e062b6a90464448df98bcae1b07f2af72"
+      },
+      {
+        "script": "scripts/tests/chronicle_party_summary_smoke.gd",
+        "log": "design/danmaku-pressure-20261103/runtime/full-check-logs/chronicle_party_summary_smoke.log",
+        "type": "source",
+        "checks": 155,
+        "script_sha256": "494976c46235b7cab88c9c64146cc6137dc9d98e08d169a0a017ec9fe50f306b",
+        "log_sha256": "9dcaf6eddfad29e8032f83f48c82b0f42a63a3f1e63795237cb5dc1e55a666f1"
+      },
+      {
+        "script": "scripts/tests/chronicle_playable_ui_smoke.gd",
+        "log": "design/danmaku-pressure-20261103/runtime/full-check-logs/chronicle_playable_ui_smoke.log",
+        "type": "source",
+        "checks": null,
+        "script_sha256": "c514e46794686d181275a83b184045337c5abf75b434d3c9e6402b23631663e3",
+        "log_sha256": "f4c26efab5c3ce0921fe82262f97a43b69dee796a69c4200389b84cbe5fda6f6"
+      },
+      {
+        "script": "scripts/tests/chronicle_reflow_visual_smoke.gd",
+        "log": "design/danmaku-pressure-20261103/runtime/full-check-logs/chronicle_reflow_visual_smoke.log",
+        "type": "source",
+        "checks": null,
+        "script_sha256": "e4c398b9dda097792619fa7d5a6986fa8329b070655225b5b669cc80b623ef46",
+        "log_sha256": "42a6d351ea1ff4939ab440f75ceae977601805721bf55bfec70c5e2d9aea1dd1"
+      },
+      {
+        "script": "scripts/tests/chronicle_roster_content_smoke.gd",
+        "log": "design/danmaku-pressure-20261103/runtime/full-check-logs/chronicle_roster_content_smoke.log",
+        "type": "source",
+        "checks": 1164,
+        "script_sha256": "0a3b8bc6713450d2bf7be83da2d1113c202c0c9ddde71a6cbc6a6ef2518fa7bc",
+        "log_sha256": "526478e66deb2e434c6f961488afa5431ff25ce730e43359a3e54e6c97bac70f"
+      },
+      {
+        "script": "scripts/tests/chronicle_route_map_smoke.gd",
+        "log": "design/danmaku-pressure-20261103/runtime/full-check-logs/chronicle_route_map_smoke.log",
+        "type": "source",
+        "checks": 160,
+        "script_sha256": "348fd0c51432934a866b5f885c257aa34d20c3e97c02a9a0cbf9e6e7a7c938af",
+        "log_sha256": "44c497df7cd766f143ed055202c2a586b971f6f5d7a3fcfb77a24af273525d49"
+      },
+      {
+        "script": "scripts/tests/chronicle_skill_audio_smoke.gd",
+        "log": "design/danmaku-pressure-20261103/runtime/full-check-logs/chronicle_skill_audio_smoke.log",
+        "type": "source",
+        "checks": 2236,
+        "script_sha256": "0f4feb53eb2c12a1b0ab387c3bd84ebcbb008b885157e2c2c411ed281158a325",
+        "log_sha256": "2c152cdf861a0a347e90ab9ca24ea8b4678358b17297570535fa078e1538fa0d"
+      },
+      {
+        "script": "scripts/tests/chronicle_story_content_smoke.gd",
+        "log": "design/danmaku-pressure-20261103/runtime/full-check-logs/chronicle_story_content_smoke.log",
+        "type": "source",
+        "checks": 320,
+        "script_sha256": "f714a153eeb8d818f7afa287baf379dd9c7a4b03d7683b5600fd8442cb21d79c",
+        "log_sha256": "344b98a5dfec0588a9e336ce51ee74e6ae9e6a1abff1aea15279dac5e3d9dded"
+      },
+      {
+        "script": "scripts/tests/chronicle_story_history_smoke.gd",
+        "log": "design/danmaku-pressure-20261103/runtime/full-check-logs/chronicle_story_history_smoke.log",
+        "type": "source",
+        "checks": 105,
+        "script_sha256": "b47197103e717c382a51d9a93a322ab4cf070d443b52cf6d47e05192717ec448",
+        "log_sha256": "31a66e450e4d8eb7a29f30bcb204d630c4e61ff3a7a73289dd1175c990fdc9ff"
+      },
+      {
+        "script": "scripts/tests/chronicle_story_optional_render_smoke.gd",
+        "log": "design/danmaku-pressure-20261103/runtime/full-check-logs/chronicle_story_optional_render_smoke.log",
+        "type": "source",
+        "checks": 79,
+        "script_sha256": "5e20e7dd88ffcc1e5783747b5665331ab2f730f356f977bcd32c24f180935886",
+        "log_sha256": "d23f9d04ff2c7bff7562e8e72af93dc6371fa44c65e4b703e89a128ce1605b09"
+      },
+      {
+        "script": "scripts/tests/chronicle_story_pack_smoke.gd",
+        "log": "design/danmaku-pressure-20261103/runtime/full-check-logs/chronicle_story_pack_smoke.log",
+        "type": "pck",
+        "checks": 97,
+        "script_sha256": "82c5152ae740ba49d7da2df50993f9829adbd79455a0da8ab8f89ad274fc1322",
+        "log_sha256": "edd8b0675bbc487960730c19527d321b126ad8359af062d628bbd1c26bd91083"
+      },
+      {
+        "script": "scripts/tests/chronicle_story_progress_smoke.gd",
+        "log": "design/danmaku-pressure-20261103/runtime/full-check-logs/chronicle_story_progress_smoke.log",
+        "type": "source",
+        "checks": 86,
+        "script_sha256": "ecb8c0ceb627522afd290c644ef4e645e832c234560b4487e0bac5340fbd7845",
+        "log_sha256": "b0a26d2d929e1dbc425e071237046cafd1199e1b8dd1b302c1168ef739781be7"
+      },
+      {
+        "script": "scripts/tests/chronicle_story_replay_smoke.gd",
+        "log": "design/danmaku-pressure-20261103/runtime/full-check-logs/chronicle_story_replay_smoke.log",
+        "type": "source",
+        "checks": 162,
+        "script_sha256": "6d60d15249c212a8c8712232ac55db60e20c20988dd9e3f94059304dc81e7c90",
+        "log_sha256": "bc44636029b1161f9d48e9e2c8b8bb8e9123bbb04459d23a1ae25b55b352f4ea"
+      },
+      {
+        "script": "scripts/tests/chronicle_story_ui_smoke.gd",
+        "log": "design/danmaku-pressure-20261103/runtime/full-check-logs/chronicle_story_ui_smoke.log",
+        "type": "source",
+        "checks": 111,
+        "script_sha256": "5228440441e7797c82c33203b1957a073bae09cff6fd553980db3640f6b28153",
+        "log_sha256": "a294cd3807654ba5bee75451702a45d852135807580b425a5c2a94857256646e"
+      },
+      {
+        "script": "scripts/tests/jia_combat_art_smoke.gd",
+        "log": "design/danmaku-pressure-20261103/runtime/full-check-logs/jia_combat_art_smoke.log",
+        "type": "source",
+        "checks": 26,
+        "script_sha256": "c1f664606c7683cd834b52e3b35d412462294a5a3f89f7283adcbbb2385f74d7",
+        "log_sha256": "49475f313cab4245c29914f71c845030d77a59500b6739bf007b5e474f6fdeb2"
+      }
+    ]
+  },
+  "frozen_core": {
+    "manifest": "design/danmaku-pressure-20261103/runtime/core-freeze.json",
+    "all_13_source_hashes_match": true,
+    "sha256": {
+      "scripts/battle/enemy_system.gd": "f789c9be281c2b2bedbdb18e273ff5d6929c9993a7ed934a03d7da8a61c8be41",
+      "scripts/battle/enemy_geometry.gd": "046d03f340a98435f18cdcde29b346a7751d0ecc7f57d969727e1c5a04915473",
+      "scripts/battle/enemy_runtime.gd": "4f32969329fc6216331710cf1487d57eec6c2184913617b5f66b80ff094a9db4",
+      "scripts/battle/battle_session.gd": "6a776a857a5b0caeb402f90d28fd41f2fc5e917ec19e0b5824ff4d982297aa06",
+      "scripts/battle/stage_director.gd": "1de0a86031775da2a7f88df5d96fc72076846b4f5435fe3064957b33d1db082f",
+      "scripts/battle/targeting.gd": "060455d6bf74a0180d4de29b795f498af33b929da07c9cb00567d6a3162cc344",
+      "scripts/battle/battle_space.gd": "8505ffe3b61661c3e6ae031b16e754d5728101e3b5e95be4859a5d1cbde40485",
+      "scripts/battle/player_hurtbox.gd": "37b8b6f8024bb6409f1134c0923975aebed9a82dad9d7f7301dd19875b39bbf8",
+      "scripts/battle/enemy_spatial_grid.gd": "731d8970d6cd6c71b20671e0c0362e453e000d8a7fd60722b48222d9b387b9d9",
+      "scripts/battle/projectile_patterns.gd": "efa2645e704eb8383889fd9536142707dd7265c48c8fc0493274256d8c7075c8",
+      "scripts/content/enemy_catalog.gd": "b899d117783d949a0499d6848381b26a0b787ee1ad588869db1a21456e8da8b1",
+      "scripts/content/boss_forms.gd": "0993068afc9274b5b9096d5551affdb8e35f58a9372880a80150ea20bdb47f8c",
+      "scripts/content/stage_catalog.gd": "f37242fecea5cdaa0e23d038789ae2a0d7de04bdd44c9caae9a9e09f54eb4c40"
+    },
+    "delta_since_original_independent_probe": [
+      "scripts/battle/enemy_system.gd",
+      "scripts/content/boss_forms.gd"
+    ]
+  },
+  "independent_validation": {
+    "summary": "design/danmaku-pressure-20261103/validation/acceptance_summary.json",
+    "final_b17_cadence": "design/danmaku-pressure-20261103/validation/final-after-cadence.json",
+    "final_b17_continuous_duel": "design/danmaku-pressure-20261103/validation/final-after-duel.json",
+    "source_epochs_preserved": true,
+    "human_playtest": false
+  },
+  "presentation": {
+    "actual_render": "artifacts/danmaku-pressure-20261103/presentation-real/real-pressure-render.json",
+    "root_review": "design/danmaku-pressure-20261103/runtime/presentation-review.json",
+    "projectile_impact_regression": "artifacts/danmaku-pressure-20261103/boss-impact-regression/report.json",
+    "actual_render_checks": 218,
+    "projectile_impact_headless_checks": 11,
+    "projectile_impact_graphical_checks": 13
+  },
+  "final_fixed_input_sessions": {
+    "eighteen_isolated_sessions": [
+      {
+        "actions": [
+          "E01:swipe",
+          "B01:swipe"
+        ],
+        "boss_spawned": true,
+        "fixture_level": 1,
+        "jia_hp": 284.0,
+        "kills": 144,
+        "members": [
+          "JIA"
+        ],
+        "outcome": "victory",
+        "remaining": {},
+        "seconds": 41.2,
+        "seen": [
+          "E01",
+          "B01"
+        ],
+        "stage": "B01",
+        "strategy": "approach_and_dodge",
+        "warning_frames": 697
+      },
+      {
+        "actions": [
+          "E02:shot",
+          "E01:swipe",
+          "B02:swipe"
+        ],
+        "boss_spawned": true,
+        "fixture_level": 1,
+        "jia_hp": 236.0,
+        "kills": 161,
+        "members": [
+          "JIA",
+          "F11",
+          "N16"
+        ],
+        "outcome": "victory",
+        "remaining": {},
+        "seconds": 52.0,
+        "seen": [
+          "E01",
+          "E02",
+          "B02"
+        ],
+        "stage": "B02",
+        "strategy": "approach_and_dodge",
+        "warning_frames": 2685
+      },
+      {
+        "actions": [
+          "E03:charge",
+          "E01:swipe",
+          "E02:shot",
+          "B04:charge",
+          "B04:swipe",
+          "E04:swipe"
+        ],
+        "boss_spawned": true,
+        "fixture_level": 2,
+        "jia_hp": 128.9,
+        "kills": 183,
+        "members": [
+          "JIA",
+          "F11",
+          "N16"
+        ],
+        "outcome": "victory",
+        "remaining": {},
+        "seconds": 87.5,
+        "seen": [
+          "E01",
+          "E03",
+          "E02",
+          "E04",
+          "B04"
+        ],
+        "stage": "B04",
+        "strategy": "approach_and_dodge",
+        "warning_frames": 3774
+      },
+      {
+        "actions": [
+          "E05:fan",
+          "E04:swipe",
+          "E01:swipe",
+          "B05:fan",
+          "B05:pot"
+        ],
+        "boss_spawned": true,
+        "fixture_level": 2,
+        "jia_hp": 179.8,
+        "kills": 164,
+        "members": [
+          "JIA",
+          "F11",
+          "N16"
+        ],
+        "outcome": "victory",
+        "remaining": {},
+        "seconds": 60.5,
+        "seen": [
+          "E01",
+          "E04",
+          "E05",
+          "B05"
+        ],
+        "stage": "B05",
+        "strategy": "approach_and_dodge",
+        "warning_frames": 3246
+      },
+      {
+        "actions": [
+          "E02:shot",
+          "E03:charge",
+          "E04:swipe",
+          "E01:swipe",
+          "B03:charge",
+          "B03:swipe"
+        ],
+        "boss_spawned": true,
+        "fixture_level": 3,
+        "jia_hp": 206.6,
+        "kills": 226,
+        "members": [
+          "JIA",
+          "F11",
+          "N16"
+        ],
+        "outcome": "victory",
+        "remaining": {},
+        "seconds": 78.0,
+        "seen": [
+          "E01",
+          "E03",
+          "E04",
+          "E02",
+          "B03"
+        ],
+        "stage": "B03",
+        "strategy": "approach_and_dodge",
+        "warning_frames": 4131
+      },
+      {
+        "actions": [
+          "E02:shot",
+          "E03:charge",
+          "E01:swipe",
+          "E04:swipe",
+          "E05:fan",
+          "B06:slam"
+        ],
+        "boss_spawned": true,
+        "fixture_level": 4,
+        "jia_hp": 238.1,
+        "kills": 200,
+        "members": [
+          "JIA",
+          "F11",
+          "N16"
+        ],
+        "outcome": "victory",
+        "remaining": {},
+        "seconds": 67.5,
+        "seen": [
+          "E01",
+          "E04",
+          "E02",
+          "E03",
+          "E05",
+          "B06"
+        ],
+        "stage": "B06",
+        "strategy": "approach_and_dodge",
+        "warning_frames": 3863
+      },
+      {
+        "actions": [
+          "E07:command",
+          "E02:shot",
+          "E04:swipe",
+          "E01:swipe",
+          "B07:command",
+          "B07:swipe"
+        ],
+        "boss_spawned": true,
+        "fixture_level": 4,
+        "jia_hp": 166.7,
+        "kills": 206,
+        "members": [
+          "JIA",
+          "F11",
+          "N16"
+        ],
+        "outcome": "victory",
+        "remaining": {},
+        "seconds": 74.9,
+        "seen": [
+          "E01",
+          "E07",
+          "E04",
+          "E02",
+          "B07"
+        ],
+        "stage": "B07",
+        "strategy": "approach_and_dodge",
+        "warning_frames": 4163
+      },
+      {
+        "actions": [
+          "E02:shot",
+          "E03:charge",
+          "E04:swipe",
+          "E01:swipe",
+          "E10:hook",
+          "E07:command",
+          "B08:charge",
+          "B08:swipe"
+        ],
+        "boss_spawned": true,
+        "fixture_level": 5,
+        "jia_hp": 300.0,
+        "kills": 233,
+        "members": [
+          "JIA",
+          "F11",
+          "N16"
+        ],
+        "outcome": "victory",
+        "remaining": {},
+        "seconds": 146.3,
+        "seen": [
+          "E01",
+          "E03",
+          "E04",
+          "E02",
+          "E10",
+          "E07",
+          "B08"
+        ],
+        "stage": "B08",
+        "strategy": "approach_and_dodge",
+        "warning_frames": 5888
+      },
+      {
+        "actions": [
+          "E09:slam",
+          "E04:swipe",
+          "E01:swipe",
+          "E02:shot",
+          "E10:hook",
+          "B09:slam",
+          "E07:command"
+        ],
+        "boss_spawned": true,
+        "fixture_level": 5,
+        "jia_hp": 106.8,
+        "kills": 244,
+        "members": [
+          "JIA",
+          "F11",
+          "N16"
+        ],
+        "outcome": "victory",
+        "remaining": {},
+        "seconds": 71.5,
+        "seen": [
+          "E01",
+          "E09",
+          "E04",
+          "E02",
+          "E07",
+          "E10",
+          "B09"
+        ],
+        "stage": "B09",
+        "strategy": "approach_and_dodge",
+        "warning_frames": 3215
+      },
+      {
+        "actions": [
+          "E02:shot",
+          "E04:swipe",
+          "E01:swipe",
+          "E09:slam",
+          "E03:charge",
+          "B10:slam",
+          "B10_R:slam",
+          "E07:command"
+        ],
+        "boss_spawned": true,
+        "fixture_level": 6,
+        "jia_hp": 219.5,
+        "kills": 228,
+        "members": [
+          "JIA",
+          "F11",
+          "N16"
+        ],
+        "outcome": "victory",
+        "remaining": {},
+        "seconds": 66.0,
+        "seen": [
+          "E01",
+          "E09",
+          "E04",
+          "E02",
+          "E03",
+          "E07",
+          "B10",
+          "B10_R"
+        ],
+        "stage": "B10",
+        "strategy": "approach_and_dodge",
+        "warning_frames": 3707
+      },
+      {
+        "actions": [
+          "E08:heal",
+          "E05:fan",
+          "E01:swipe",
+          "E04:swipe",
+          "E10:hook",
+          "B11:fan",
+          "B11:pot"
+        ],
+        "boss_spawned": true,
+        "fixture_level": 7,
+        "jia_hp": 318.4,
+        "kills": 253,
+        "members": [
+          "JIA",
+          "F11",
+          "N16"
+        ],
+        "outcome": "victory",
+        "remaining": {},
+        "seconds": 74.0,
+        "seen": [
+          "E01",
+          "E08",
+          "E05",
+          "E04",
+          "E10",
+          "B11"
+        ],
+        "stage": "B11",
+        "strategy": "approach_and_dodge",
+        "warning_frames": 4195
+      },
+      {
+        "actions": [
+          "E11:summon",
+          "E05:fan",
+          "E01:swipe",
+          "E11:swipe",
+          "D01:swipe",
+          "E08:heal",
+          "B12:anchor",
+          "E04:swipe",
+          "B12:pulse"
+        ],
+        "boss_spawned": true,
+        "fixture_level": 7,
+        "jia_hp": 332.0,
+        "kills": 252,
+        "members": [
+          "JIA",
+          "F11",
+          "N16"
+        ],
+        "outcome": "victory",
+        "remaining": {},
+        "seconds": 73.8,
+        "seen": [
+          "E01",
+          "E11",
+          "E05",
+          "D05",
+          "D01",
+          "E08",
+          "E04",
+          "B12",
+          "D03"
+        ],
+        "stage": "B12",
+        "strategy": "approach_and_dodge",
+        "warning_frames": 4282
+      },
+      {
+        "actions": [
+          "E03:charge",
+          "E02:shot",
+          "E07:command",
+          "E01:swipe",
+          "E04:swipe",
+          "E10:hook",
+          "B13:charge",
+          "E09:slam",
+          "B13:swipe"
+        ],
+        "boss_spawned": true,
+        "fixture_level": 8,
+        "jia_hp": 348.0,
+        "kills": 333,
+        "members": [
+          "JIA",
+          "F11",
+          "N16"
+        ],
+        "outcome": "victory",
+        "remaining": {},
+        "seconds": 143.6,
+        "seen": [
+          "E01",
+          "E03",
+          "E04",
+          "E07",
+          "E02",
+          "E10",
+          "E09",
+          "B13"
+        ],
+        "stage": "B13",
+        "strategy": "approach_and_dodge",
+        "warning_frames": 6217
+      },
+      {
+        "actions": [
+          "E02:shot",
+          "E07:command",
+          "E01:swipe",
+          "E12:slam",
+          "E12:pulse",
+          "E07:swipe",
+          "B14:command",
+          "B14:swipe",
+          "E04:swipe"
+        ],
+        "boss_spawned": true,
+        "fixture_level": 8,
+        "jia_hp": 269.8,
+        "kills": 311,
+        "members": [
+          "JIA",
+          "F11",
+          "N16"
+        ],
+        "outcome": "victory",
+        "remaining": {},
+        "seconds": 93.4,
+        "seen": [
+          "E01",
+          "E12",
+          "E07",
+          "E02",
+          "E04",
+          "B14"
+        ],
+        "stage": "B14",
+        "strategy": "approach_and_dodge",
+        "warning_frames": 5294
+      },
+      {
+        "actions": [
+          "E02:shot",
+          "E01:swipe",
+          "E07:command",
+          "E12:slam",
+          "E12:pulse",
+          "E03:charge",
+          "E04:swipe",
+          "E07:swipe",
+          "B15:shot",
+          "B15:fan",
+          "B15:charge",
+          "B15:marker",
+          "B15:slam"
+        ],
+        "boss_spawned": true,
+        "fixture_level": 9,
+        "jia_hp": 325.8,
+        "kills": 328,
+        "members": [
+          "JIA",
+          "F11",
+          "N16"
+        ],
+        "outcome": "victory",
+        "remaining": {},
+        "seconds": 127.9,
+        "seen": [
+          "E01",
+          "E12",
+          "E02",
+          "E07",
+          "E03",
+          "E04",
+          "B15"
+        ],
+        "stage": "B15",
+        "strategy": "approach_and_dodge",
+        "warning_frames": 6812
+      },
+      {
+        "actions": [
+          "E02:shot",
+          "E04:swipe",
+          "E01:swipe",
+          "E11:summon",
+          "D01:swipe",
+          "E08:heal",
+          "E03:charge",
+          "E11:swipe",
+          "E12:slam",
+          "E12:pulse",
+          "B16:charge",
+          "B16:slam",
+          "B16:pulse"
+        ],
+        "boss_spawned": true,
+        "fixture_level": 10,
+        "jia_hp": 288.8,
+        "kills": 349,
+        "members": [
+          "JIA",
+          "F11",
+          "N16"
+        ],
+        "outcome": "victory",
+        "remaining": {},
+        "seconds": 104.9,
+        "seen": [
+          "E01",
+          "E11",
+          "E04",
+          "E02",
+          "D05",
+          "D01",
+          "E12",
+          "E08",
+          "E03",
+          "B16"
+        ],
+        "stage": "B16",
+        "strategy": "approach_and_dodge",
+        "warning_frames": 5393
+      },
+      {
+        "actions": [
+          "E02:shot",
+          "E07:command",
+          "E01:swipe",
+          "E04:swipe",
+          "E07:swipe",
+          "E09:slam",
+          "B17:charge",
+          "B17:slam",
+          "B17:collaboration",
+          "B17:pulse"
+        ],
+        "boss_spawned": true,
+        "fixture_level": 10,
+        "jia_hp": 137.7,
+        "kills": 335,
+        "members": [
+          "JIA",
+          "F11",
+          "N16"
+        ],
+        "outcome": "victory",
+        "remaining": {},
+        "seconds": 110.7,
+        "seen": [
+          "E01",
+          "E09",
+          "E07",
+          "E04",
+          "E02",
+          "B17",
+          "M03_WAR",
+          "M04_WAR"
+        ],
+        "stage": "B17",
+        "strategy": "approach_and_dodge",
+        "warning_frames": 5283
+      },
+      {
+        "actions": [
+          "B18:slam",
+          "B18:charge",
+          "B18:marker",
+          "B18:pulse"
+        ],
+        "boss_spawned": true,
+        "fixture_level": 11,
+        "jia_hp": 380.0,
+        "kills": 0,
+        "members": [
+          "JIA",
+          "F11",
+          "N16"
+        ],
+        "outcome": "victory",
+        "remaining": {},
+        "seconds": 76.2,
+        "seen": [
+          "B18"
+        ],
+        "stage": "B18",
+        "strategy": "approach_and_dodge",
+        "warning_frames": 3026
+      }
+    ],
+    "continuous_campaigns": [
+      {
+        "battles": 12,
+        "expected": 12,
+        "finished": true,
+        "reward_seed": 781103,
+        "route": "short",
+        "stopped": ""
+      },
+      {
+        "battles": 15,
+        "expected": 15,
+        "finished": true,
+        "reward_seed": 781103,
+        "route": "explore",
+        "stopped": ""
+      }
+    ],
+    "isolated_fixture_levels_are_not_a_campaign_reachability_claim": true
+  },
+  "compatibility_audit": "design/danmaku-pressure-20261103/compatibility/profile-compatibility.json",
+  "regression_repair_evidence": {
+    "enemy_runtime": "final-logs/repaired-enemy-runtime.log",
+    "combo": "final-logs/repaired-combo.log",
+    "forms": "final-logs/repaired-forms.log",
+    "chapter": "final-logs/repaired-chapter.log",
+    "combat": "final-logs/repaired-combat.log",
+    "ui": "final-logs/repaired-playable-ui.log",
+    "driver_contract": "final-logs/driver-contract.log",
+    "earlier_continuous_failure_and_explore_success": "final-logs/repaired-continuous-campaign.log",
+    "short_r4_input_success": "final-logs/repaired-continuous-short-v4.log",
+    "initial_checks": [
+      "final-logs/full-project-check-initial.log",
+      "final-logs/full-project-check-second.log",
+      "final-logs/full-project-check-third.log",
+      "final-logs/full-project-check-fourth.log"
+    ]
+  },
+  "package": {
+    "directory": "builds/linux-danmaku-pressure-20261103",
+    "launcher": "builds/linux-danmaku-pressure-20261103/run.sh",
+    "manifest": "builds/linux-danmaku-pressure-20261103/build-manifest.json",
+    "runtime_sha256": "5a806b2b385279d9607094d33e946ed828e9606df4cb46d258ca27468dc5c1c9",
+    "pck_sha256": "551c4334bde630cdf7c27ce436649fb5ca46b2fb77a781a2233a3bccad69b42c",
+    "pck_bytes": 240345276,
+    "notices_and_sources": 70,
+    "notice_hashes_match": true,
+    "launch_headless": true,
+    "graphical_home_and_playing_bgm_checks": 6,
+    "graphical_ordered_unload_clean": true,
+    "graphical_direct_forced_exit_clean": false,
+    "forced_exit_diagnostic": {
+      "resource": "midi_test_01.ogg / OggPacketSequence",
+      "direct_logs": [
+        "final-logs/package-launch-graphical-initial-fast-exit.log",
+        "final-logs/package-launch-graphical.log"
+      ],
+      "prior_audio_package_reproduced": true,
+      "control_log": "final-logs/old-audio-package-forced-quit-control-2.log",
+      "ordered_unload_log": "final-logs/package-launch-graphical-graceful.log",
+      "native_drain_seconds": 0.3
+    },
+    "functional_checks": [
+      {
+        "name": "package-danmaku",
+        "checks": 279,
+        "log": "design/danmaku-pressure-20261103/runtime/final-logs/package-danmaku.log",
+        "sha256": "6dc72846ae45a1e2310b426d1f106d00533611692e0b104df3a79814c0e5440f"
+      },
+      {
+        "name": "package-skill-audio",
+        "checks": 201,
+        "log": "design/danmaku-pressure-20261103/runtime/final-logs/package-skill-audio.log",
+        "sha256": "34cf3a291e6fa662c4f6754efe95eed0bb602884d3c9334bf86427815d9a3354"
+      },
+      {
+        "name": "package-boss-impact",
+        "checks": 13,
+        "log": "design/danmaku-pressure-20261103/runtime/final-logs/package-boss-impact.log",
+        "sha256": "90c32e149d8e12a4a31882e7b1b3e72ff1b4d762a859102171ab80a40662b949"
+      }
+    ],
+    "test_data": "builds/linux-danmaku-pressure-20261103/test-user-data",
+    "empty_cwd": true
+  },
+  "final_integration_test_files": [
+    {
+      "path": "scripts/tests/baimen_enemy_runtime_smoke.gd",
+      "sha256": "83a720ea582a911f6a2d8b5ab4c4adbd7bea5c7a3cfbab3a450f758a3b8d45b2"
+    },
+    {
+      "path": "scripts/tests/boss_combo_timing_smoke.gd",
+      "sha256": "08c410f92fdb31c1f87475e7e352bec5432760f9d288a7eb652ea25ef8863844"
+    },
+    {
+      "path": "scripts/tests/boss_forms_smoke.gd",
+      "sha256": "1edea44a6f2ed4a20a33f2d05af2e31e549532f63deaefa47dbace08ddd496f0"
+    },
+    {
+      "path": "scripts/tests/chronicle_chapter_two_smoke.gd",
+      "sha256": "a374daac8fd5c79342aee1da766c0bfbd6f870b3e15cf95e22369dfc3a1a2e9d"
+    },
+    {
+      "path": "scripts/tests/chronicle_combat_smoke.gd",
+      "sha256": "c632dda9a24b4010395e1fd21e3f6780edcf8fe6a710ca7157f86fbd27e4f0f3"
+    },
+    {
+      "path": "scripts/tests/chronicle_enemy_sessions_smoke.gd",
+      "sha256": "fb0015450df8aa061bc3dcf9b387454647bd8fef47f58295ed19fde20f321bcf"
+    },
+    {
+      "path": "scripts/tests/chronicle_enemy_campaign_smoke.gd",
+      "sha256": "b0caa8a0a4c508ba092b5899d8469b15595c7e2fe1eeaceca6762fa4573166ee"
+    },
+    {
+      "path": "scripts/tests/chronicle_playable_ui_smoke.gd",
+      "sha256": "c514e46794686d181275a83b184045337c5abf75b434d3c9e6402b23631663e3"
+    },
+    {
+      "path": "scripts/tests/reference_walk_driver.gd",
+      "sha256": "a7705e97199a9743f37fe7349254ff114cfef2a8f4e1f2dabe8228ee5fd4d515"
+    },
+    {
+      "path": "scripts/tests/chronicle_danmaku_smoke.gd",
+      "sha256": "7ea399742d7e564781ae7a43fc1fa9cfdb533b9f470fd7dc07189cdaa64aac58"
+    },
+    {
+      "path": "scripts/tests/chronicle_skill_audio_smoke.gd",
+      "sha256": "0f4feb53eb2c12a1b0ab387c3bd84ebcbb008b885157e2c2c411ed281158a325"
+    },
+    {
+      "path": "scripts/check_project.sh",
+      "sha256": "0e7f9879559495b5f8f9273f9c4300bc18516463aae8dede98412dcce29b49d5"
+    }
+  ],
+  "test_input_semantics": {
+    "helper": "scripts/tests/reference_walk_driver.gd",
+    "projectile_only_is_not_instant_area": true,
+    "actual_r4_relative_swept_paths": true,
+    "reaction_padding_world_units": 2,
+    "continuous_campaign_resource_injection": false,
+    "continuous_ingame_limit_seconds": 450,
+    "isolated_session_ingame_limit_seconds": 360,
+    "continuous_wall_timeout_seconds": 480,
+    "isolated_session_wall_timeout_seconds": 300
+  },
+  "scope_limits": [
+    "Direct graphical quit-after exits retain an Ogg/Vorbis playback reference on some runs; reproduced in the prior audio PCK. The actual home/BGM startup and ordered scene unload with .3-second native drain pass without diagnostics.",
+    "Automated fixed-input runs and bounded PNG inspection do not establish human play balance or subjective audio quality.",
+    "Independent baseline scenarios retain their original frozen source epoch; only the B17 cadence/continuous-duel delta was independently rerun against the final core.",
+    "Logic-step timing from isolated headless probes is not a sustained rendering frame-rate claim."
+  ],
+  "protected_data_final_audit_owner": "root; see completion/audit record for player data and protected media hashes"
+}

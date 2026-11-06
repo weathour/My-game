@@ -1,0 +1,89 @@
+{
+  "status": "passed",
+  "runner_pid": 331898,
+  "started_at": 1793960052.630221,
+  "runs": [
+    {
+      "name": "paired-A3",
+      "role": "old_control",
+      "pack": "/tmp/my-game-check.pM7fgF/pack-smokes/game.pck",
+      "command": [
+        "/home/weathour/.local/bin/godot-4.6.2",
+        "--path",
+        "/tmp/liao-paired-control-dmelp51p/empty-cwd",
+        "--main-pack",
+        "/tmp/my-game-check.pM7fgF/pack-smokes/game.pck",
+        "--rendering-method",
+        "gl_compatibility",
+        "--audio-driver",
+        "Dummy",
+        "--script",
+        "/tmp/liao-paired-control-dmelp51p/b17_bench_teardown.gd",
+        "--",
+        "--out=/home/weathour/programs/desktop-projects/My-game/design/zhang-liao-summons-20261106/verification/paired-A3"
+      ],
+      "started_at": 1793960052.6304522,
+      "status": "passed",
+      "child_pid": 331899,
+      "returncode": 0,
+      "finished_at": 1793960177.6576178,
+      "elapsed_seconds": 125.02716565132141,
+      "strict_failures": []
+    },
+    {
+      "name": "paired-B2",
+      "role": "new",
+      "pack": "/tmp/liao-summons-after-build-jd45stkd/game.pck",
+      "command": [
+        "/home/weathour/.local/bin/godot-4.6.2",
+        "--path",
+        "/tmp/liao-paired-control-dmelp51p/empty-cwd",
+        "--main-pack",
+        "/tmp/liao-summons-after-build-jd45stkd/game.pck",
+        "--rendering-method",
+        "gl_compatibility",
+        "--audio-driver",
+        "Dummy",
+        "--script",
+        "/tmp/liao-paired-control-dmelp51p/b17_bench_teardown.gd",
+        "--",
+        "--out=/home/weathour/programs/desktop-projects/My-game/design/zhang-liao-summons-20261106/verification/paired-B2"
+      ],
+      "started_at": 1793960177.6589339,
+      "status": "passed",
+      "child_pid": 333006,
+      "returncode": 0,
+      "finished_at": 1793960297.7213292,
+      "elapsed_seconds": 120.06239533424377,
+      "strict_failures": []
+    },
+    {
+      "name": "paired-A4",
+      "role": "old_control",
+      "pack": "/tmp/my-game-check.pM7fgF/pack-smokes/game.pck",
+      "command": [
+        "/home/weathour/.local/bin/godot-4.6.2",
+        "--path",
+        "/tmp/liao-paired-control-dmelp51p/empty-cwd",
+        "--main-pack",
+        "/tmp/my-game-check.pM7fgF/pack-smokes/game.pck",
+        "--rendering-method",
+        "gl_compatibility",
+        "--audio-driver",
+        "Dummy",
+        "--script",
+        "/tmp/liao-paired-control-dmelp51p/b17_bench_teardown.gd",
+        "--",
+        "--out=/home/weathour/programs/desktop-projects/My-game/design/zhang-liao-summons-20261106/verification/paired-A4"
+      ],
+      "started_at": 1793960297.7225401,
+      "status": "passed",
+      "child_pid": 333834,
+      "returncode": 0,
+      "finished_at": 1793960417.7806528,
+      "elapsed_seconds": 120.05811262130737,
+      "strict_failures": []
+    }
+  ],
+  "finished_at": 1793960417.781632
+}

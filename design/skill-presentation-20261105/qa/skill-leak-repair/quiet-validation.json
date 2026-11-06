@@ -1,0 +1,102 @@
+{
+  "status": "PASS",
+  "script_sha256": "b46ccfa67cdc362104a313ff2b8738f4a0b5e9c04a62963480cf91bf67ef10b3",
+  "consecutive_quiet_runs": [
+    {
+      "run": 1,
+      "returncode": 0,
+      "log": "fixed-quiet-1.log",
+      "validator_errors": [],
+      "checks": 3934,
+      "failures": 0,
+      "abilities": 137,
+      "actors": 38,
+      "verbose": false,
+      "lifecycle_trace_enabled": false,
+      "audio_teardown": {
+        "condition": "all actual test WAV/playback weakrefs released; no extra sound or assertion suppressed",
+        "initial_live": [
+          {
+            "class": "AudioStreamWAV",
+            "id": -9223371859586708958,
+            "path": "res://assets/sfx/skill-combat-20261103/blade_cast_03.wav"
+          },
+          {
+            "class": "AudioStreamPlaybackWAV",
+            "id": -9223371859536377322,
+            "path": ""
+          }
+        ],
+        "mix_age_after": 0.006173,
+        "mix_age_before": 0.084019,
+        "remaining_live": [],
+        "wait_usec": 108050,
+        "watched_objects": 2
+      }
+    },
+    {
+      "run": 2,
+      "returncode": 0,
+      "log": "fixed-quiet-2.log",
+      "validator_errors": [],
+      "checks": 3934,
+      "failures": 0,
+      "abilities": 137,
+      "actors": 38,
+      "verbose": false,
+      "lifecycle_trace_enabled": false,
+      "audio_teardown": {
+        "condition": "all actual test WAV/playback weakrefs released; no extra sound or assertion suppressed",
+        "initial_live": [
+          {
+            "class": "AudioStreamWAV",
+            "id": -9223371859586708958,
+            "path": "res://assets/sfx/skill-combat-20261103/blade_cast_03.wav"
+          },
+          {
+            "class": "AudioStreamPlaybackWAV",
+            "id": -9223371859536377322,
+            "path": ""
+          }
+        ],
+        "mix_age_after": 0.002329,
+        "mix_age_before": 0.080237,
+        "remaining_live": [],
+        "wait_usec": 108036,
+        "watched_objects": 2
+      }
+    },
+    {
+      "run": 3,
+      "returncode": 0,
+      "log": "fixed-quiet-3.log",
+      "validator_errors": [],
+      "checks": 3934,
+      "failures": 0,
+      "abilities": 137,
+      "actors": 38,
+      "verbose": false,
+      "lifecycle_trace_enabled": false,
+      "audio_teardown": {
+        "condition": "all actual test WAV/playback weakrefs released; no extra sound or assertion suppressed",
+        "initial_live": [
+          {
+            "class": "AudioStreamWAV",
+            "id": -9223371859586708958,
+            "path": "res://assets/sfx/skill-combat-20261103/blade_cast_03.wav"
+          },
+          {
+            "class": "AudioStreamPlaybackWAV",
+            "id": -9223371859536377322,
+            "path": ""
+          }
+        ],
+        "mix_age_after": 0.005062,
+        "mix_age_before": 0.03341,
+        "remaining_live": [],
+        "wait_usec": 157605,
+        "watched_objects": 2
+      }
+    }
+  ]
+}

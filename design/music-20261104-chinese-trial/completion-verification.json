@@ -1,0 +1,197 @@
+{
+  "schema_version": 1,
+  "status": "COMPLETE_TECHNICAL_VERIFICATION_HUMAN_LISTENING_PENDING",
+  "utc": "2026-11-03T19:34:39.233162+00:00",
+  "scope": "offline_three_full_song_C_D1_D2_comparison",
+  "summary": [
+    {
+      "index": 1,
+      "title": "The Beautiful People",
+      "duration_seconds": 221.764625,
+      "common_full_song_lufs": -20.810000000000002,
+      "Chinese_families": [
+        "pipa",
+        "ruan"
+      ],
+      "D2_changed_note_count": 100
+    },
+    {
+      "index": 4,
+      "title": "Disposable Teens",
+      "duration_seconds": 189.823125,
+      "common_full_song_lufs": -19.46,
+      "Chinese_families": [
+        "pipa",
+        "ruan"
+      ],
+      "D2_changed_note_count": 19
+    },
+    {
+      "index": 8,
+      "title": "Man That You Fear",
+      "duration_seconds": 291.95908333333335,
+      "common_full_song_lufs": -24.81,
+      "Chinese_families": [
+        "erhu",
+        "zheng"
+      ],
+      "D2_changed_note_count": 83
+    }
+  ],
+  "full_song_files": 18,
+  "full_song_flac": 9,
+  "full_song_mp3": 9,
+  "individual_comparison_mp3": 9,
+  "joined_comparison_mp3": 3,
+  "playlists": [
+    {
+      "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐首轮_20261104/先听短对照.m3u8",
+      "sha256": "5b33614b54ca57d1c1a60fbbce8279cebee3f0bf6e1ce24afb948e5914bb8f03"
+    },
+    {
+      "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐首轮_20261104/全部全曲_C-D1-D2.m3u8",
+      "sha256": "d1faeccc3db283d7d5b9ba7bf883821c5018125062d2229b17bd0a48a0c9aed6"
+    },
+    {
+      "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐首轮_20261104/中国器乐全曲_D1-D2.m3u8",
+      "sha256": "1ad38bc866503a535f042aa3256f47756a871bf789442e102fafd8459ee7431a"
+    }
+  ],
+  "source_events": {
+    "D1_source_bytes_identical": true,
+    "D2_only_declared_paired_pitch_changes": true,
+    "D2_changes_total": 202,
+    "new_accompaniment_semitone_conflicts": 0,
+    "tempos_timing_velocities_note_counts_drums_unchanged": true,
+    "erhu_key_down_monophony": true
+  },
+  "audio_checks": {
+    "actual_decoding_finite_nonsilent": true,
+    "per_song_full_target_lufs_matched": true,
+    "no_new_bus_compression_or_limiter": true,
+    "mp3_bitrate": 320000,
+    "flac_bits": 24,
+    "rate": 48000,
+    "channels": 2,
+    "DSK_max_sample_transposition_semitones": 4,
+    "missing_sample_regions": 0,
+    "D1_D2_decoded_difference_check": "reports/root-audio-difference-check.json",
+    "true_peak_ceiling_dbTP": -3.0,
+    "measured_max_full_song_true_peak_dbTP": -3.48
+  },
+  "comparison_limits": {
+    "C_is_existing_finished_mix": true,
+    "track08_C_contains_prior_bus_compression_while_D1_D2_do_not": true,
+    "D1_D2_share_instrumentation_processing_and_layer_gain": true,
+    "whole_song_targets_differ_between_songs": true,
+    "manual_listening_performed": false,
+    "D2_is_partial_melodic_core_rewrite_not_full_song_pentatonic_conversion": true
+  },
+  "protected_inputs": {
+    "checked_files": 367,
+    "changed": [],
+    "details": "reports/protected-inputs-after.json"
+  },
+  "game_runtime_checks": {
+    "status": "PASS",
+    "full_check": "verification/project-check-report.json",
+    "actual_uninterrupted_full_check": true,
+    "smokes": 52,
+    "source_smokes": 48,
+    "PCK_smokes": 4,
+    "initial_preexisting_audio_teardown_failure_preserved": "verification/full-project-check-initial.log",
+    "targeted_cleanup_recheck": "verification/home-menu-teardown-recheck.log"
+  },
+  "output_root": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐首轮_20261104",
+  "documentation_checks": {
+    "status": "PASS",
+    "docs_links": "DOC_LINK_CHECK_OK",
+    "project_config": "PROJECT_CONFIG_CHECK_OK",
+    "git_diff_check": "exit_0"
+  },
+  "current_production_gameplay_or_audio_modified": false,
+  "test_harness_change": {
+    "path": "scripts/tests/chronicle_home_menu_render_smoke.gd",
+    "change": "0.3s native audio drain after releasing test scene; 444 assertions preserved",
+    "production_exit_behavior_modified": false
+  },
+  "evidence": [
+    {
+      "path": "design/music-20261104-chinese-trial/baseline.json",
+      "sha256": "d25563511487d9208255470c2a10540dccac6360e191605a1c550b3d742f4e5a"
+    },
+    {
+      "path": "design/music-20261104-chinese-trial/render-status.json",
+      "sha256": "412768c5986fe8a75d98d3ea4cb7dfcf8cef217b482931360d25854abb39b479"
+    },
+    {
+      "path": "design/music-20261104-chinese-trial/sources/lock.json",
+      "sha256": "5de097740250d46d96ccead4b2c6bb07b55f1bad38b2e1e240e7efeb4aae08b9"
+    },
+    {
+      "path": "design/music-20261104-chinese-trial/sources/dsk-regions.json",
+      "sha256": "63d8fea8a21d33f33c15568220a684297708607d74d4696b471885ccff846708"
+    },
+    {
+      "path": "design/music-20261104-chinese-trial/reports/midi-independent-verification.json",
+      "sha256": "cb6b68c704b752c8235540046a92d430d4929d1e14b6691b523af8a10566e3fe"
+    },
+    {
+      "path": "design/music-20261104-chinese-trial/reports/comparisons.json",
+      "sha256": "758d0bd0c06818164a798aa76e3da72d2339807f42a4b8ce17364590ba6533d1"
+    },
+    {
+      "path": "design/music-20261104-chinese-trial/reports/root-audio-difference-check.json",
+      "sha256": "6a12f4c3f6515a5c55dfcd5c439a660a0424d21b640bf0e3e66fd3ff5dc954a2"
+    },
+    {
+      "path": "design/music-20261104-chinese-trial/reports/protected-inputs-after.json",
+      "sha256": "440dc967a39626db4e1d7966431eefc4ffcdbf2bccb5996d0ee5efd0abaca337"
+    },
+    {
+      "path": "design/music-20261104-chinese-trial/verification/project-check-report.json",
+      "sha256": "26675760f4c3e37e6016fb8f4c8e8677b7f4c54f76e394fd18b6a1e50fd06f23"
+    },
+    {
+      "path": "design/music-20261104-chinese-trial/verification/final-docs-links.log",
+      "sha256": "969673262de0b13d6eac327a05de650c19a7212568ded9da870aedab3dc7b952"
+    },
+    {
+      "path": "design/music-20261104-chinese-trial/verification/final-config.log",
+      "sha256": "6ef17438bb692dd0f3849d7cc7024f078ad7cf5c593f12502e6cf625dc2a87f0"
+    },
+    {
+      "path": "design/music-20261104-chinese-trial/verification/final-diff-check.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "design/music-20261104-chinese-trial/reports/audio-midi_test_01.json",
+      "sha256": "1b5b18746b342fb9e857a914e071714356371f08fbe86517237d3ff43987dbb9"
+    },
+    {
+      "path": "design/music-20261104-chinese-trial/reports/midi-midi_test_01.json",
+      "sha256": "cbea0002e62d8dea60964fd1ac0ef5722fa7e4a685b460303355f86a35f7219a"
+    },
+    {
+      "path": "design/music-20261104-chinese-trial/reports/audio-midi_test_04.json",
+      "sha256": "22de3e50aebeb720a996606cbd2e619820ca21001b5bd0894fc0aaae681d44f2"
+    },
+    {
+      "path": "design/music-20261104-chinese-trial/reports/midi-midi_test_04.json",
+      "sha256": "688e456301925360aefa4dcaf249d3bfe8f9bcbb599abf01fb4f3be1e14d5cc7"
+    },
+    {
+      "path": "design/music-20261104-chinese-trial/reports/audio-midi_test_08.json",
+      "sha256": "b8a17a0cad6a1e47ceddd95f02ee57964977a37f67b52f66c25e7727c9ed2547"
+    },
+    {
+      "path": "design/music-20261104-chinese-trial/reports/midi-midi_test_08.json",
+      "sha256": "aeaa3dda0e42c9a3926c73da7ca90c83e3a1c69d866c13f3c492b24a0f511690"
+    }
+  ],
+  "output_checksum_manifest": {
+    "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐首轮_20261104/checksums.sha256",
+    "sha256": "56b33bf45e60db2af2e68eb0321f38fd875fa4193fca527d0a9895703867f8ee",
+    "file_count": 54
+  }
+}

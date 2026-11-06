@@ -1,4 +1,5 @@
 extends SceneTree
+const H := preload("res://scripts/battle/player_hurtbox.gd")
 ## Resource conservation and attribution tests, independent of art and campaign unlocks.
 const B := preload("res://scripts/battle/battle_session.gd")
 const C := preload("res://scripts/content/combat_catalog.gd")
@@ -424,7 +425,7 @@ func simulate(b: RefCounted, name: String, actions: Array, seconds: float) -> Ar
 			var action: Dictionary = actions[index]
 			index += 1
 			if action.has("incoming"):
-				b.projectiles.append({"position":b.position, "velocity":Vector2.ZERO, "life":0.1, "hostile":true, "damage":float(action.incoming), "source":1})
+				b.projectiles.append({"position":H.center(b.position), "velocity":Vector2.ZERO, "life":0.1, "hostile":true, "damage":float(action.incoming), "source":1})
 				continue
 			var desired: int = b.members.find(action.id)
 			if desired != b.active:

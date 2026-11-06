@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "/home/weathour/programs/desktop-projects/My-game/scripts/tests/check_jia_campaign_art.py", line 104, in <module>
+    main()
+  File "/home/weathour/programs/desktop-projects/My-game/scripts/tests/check_jia_campaign_art.py", line 96, in main
+    result = inspect()
+             ^^^^^^^^^
+  File "/home/weathour/programs/desktop-projects/My-game/scripts/tests/check_jia_campaign_art.py", line 78, in inspect
+    assert magic == 0xA5E0 and actual_count == count and (width, height) == dimensions and depth == 32, (path, "editable source header", magic, actual_count, width, height, depth)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (PosixPath('/home/weathour/programs/desktop-projects/My-game/assets/players/jia-campaign/actor.aseprite'), 'editable source header', 42464, 48, 256, 256, 8)

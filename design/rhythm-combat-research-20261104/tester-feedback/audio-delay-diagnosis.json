@@ -1,0 +1,121 @@
+{
+  "schema_version": 1,
+  "scope": "Read-only latency diagnosis for the rhythm tester on the current WHP01K Bluetooth output. No microphone capture, unrelated audio capture, system default changes, or existing-app shutdown.",
+  "environment": {
+    "qt": "PySide6 / Qt Multimedia 6.10.2",
+    "pipewire": "1.0.5",
+    "default_output": "WHP01K (bluez_output.C4_6E_7B_12_03_2E.1)",
+    "bluetooth_codec": "aptx",
+    "preferred_qt_format": "48 kHz, stereo, SampleFormat.Unknown",
+    "requested_qt_format": "48 kHz, stereo, PCM16; QAudioDevice.isFormatSupported returned true",
+    "qt_warning": "No sample format supported found for device bluez_output.C4_6E_7B_12_03_2E.1, although the requested PCM16 format reports supported and the sink processed samples."
+  },
+  "observations": {
+    "qt_qiodevice_ring_buffer": {
+      "configured_by_application": false,
+      "qt_documented_default": "250 ms",
+      "actual_buffer_bytes_after_start": 48000,
+      "pcm_frame_bytes": 4,
+      "actual_buffer_frames": 12000,
+      "equivalent_at_48000_hz_ms": 250,
+      "bytes_free_during_active_probe": 0,
+      "interpretation": "The Qt QIODevice ring buffer was full at the sampled active times. This is an app/backend queue capacity observation; it does not by itself establish the exact additional acoustic delay because processedUSecs has no documented audible-presentation guarantee."
+    },
+    "pipewire_sink_latency": {
+      "direction": "Input latency parameter on the Audio/Sink node",
+      "min_ns": 150000000,
+      "max_ns": 150000000,
+      "min_ms": 150,
+      "max_ms": 150,
+      "process_latency_parameter": "No ProcessLatency parameter was reported for this node.",
+      "interpretation": "PipeWire reports 150 ms downstream playback latency for the WHP01K sink. This is a graph-reported estimate/latency parameter, not an acoustic loopback measurement at the ear."
+    },
+    "qt_clock_probe": {
+      "probe_volume": 0.02,
+      "active_at_wall_elapsed_0_0952s": {
+        "qt_elapsed_us": 96631,
+        "processed_us": 106666,
+        "buffer_bytes": 48000,
+        "bytes_free": 0
+      },
+      "active_before_suspend_at_wall_elapsed_0_9952s": {
+        "qt_elapsed_us": 996616,
+        "processed_us": 1002666,
+        "buffer_bytes": 48000,
+        "bytes_free": 0
+      },
+      "after_suspend_for_approximately_0_262s": {
+        "qt_elapsed_us": 1258988,
+        "processed_us": 1002666
+      },
+      "after_resume_approximately_0_838s": {
+        "wall_elapsed_total_s": 2.0953,
+        "qt_elapsed_us": 2096659,
+        "processed_us": 1834666
+      },
+      "interpretation": "In this approximately 2-second sample, processedUSecs stopped during suspend and then advanced at approximately the active playback rate; no evidence of sustained drift was observed. The sample is too short to quantify long-term clock drift, and it cannot show when sound reached the listener."
+    },
+    "transport_restart_behavior": {
+      "current_implementation": "AudioTransport._discard_backend calls QAudioSink.stop() for seek, click-mix rebuild, reload, and stop.",
+      "qt_documented_stop_behavior": "On Linux and Darwin, QAudioSink.stop synchronously drains the underlying audio buffer; QAudioSink.reset immediately halts and discards buffered audio.",
+      "risk": "Seek or set_clicks can spend time draining old queued audio before starting the new sink, while the application rebases the logical position to the target/current processed frame. The user may hear old queued samples or an apparent gap around a restart. This is a code-path risk, not proven as the cause of the reported mismatch."
+    }
+  },
+  "conclusions": [
+    "Qt documents processedUSecs only as audio data processed since start(); it does not document this clock as sound already audible at the listener.",
+    "The current WHP01K path has a measured graph-reported sink latency of 150 ms, and Qt's actual QIODevice ring buffer is 250 ms. These are distinct queue/latency observations and must not be blindly added as a precise end-to-end delay.",
+    "The observed processed counter follows active playback and pauses across suspend; no obvious long-term drift was found in the short probe.",
+    "A true acoustic output-delay value remains uncalibrated. The PipeWire estimate cannot account exactly for Bluetooth endpoint buffering, DSP, codec, or the listener-side presentation time."
+  ],
+  "recommendations": [
+    "Add a separate output-presentation compensation value used to align visual playhead, on-screen hit windows/effects, and audible audio. Keep this distinct from player input correction; the latter needs its own measurement and should not inherit output latency automatically.",
+    "For the tester, expose the selected output device and report preferred/actual format and graph latency. WHP01K currently has Unknown preferred format despite accepting requested PCM16; a selectable wired/USB output is a useful low-latency comparison without changing the OS default.",
+    "Optionally test a smaller QIODevice ring-buffer target (for example 20–50 ms) and measure underruns and PipeWire-reported latency again. A smaller Qt ring can reduce one source of queued audio, but it will not remove Bluetooth sink latency and may increase dropouts.",
+    "Consider QAudioSink.reset() for interactive seek/click-rebuild teardown to discard queued old audio immediately; retain stop/drain where natural completion requires graceful drain. Validate behavior on the target Qt/backend before changing code."
+  ],
+  "evidence_files": [
+    "audio-buffer-probe.py",
+    "audio-buffer-probe.log",
+    "audio-pipewire-status.log",
+    "audio-pipewire-whp01k-node.log",
+    "audio-pipewire-whp01k-latency.log",
+    "audio-pipewire-whp01k-process-latency.log",
+    "../tester-verification/audio-output-devices.log",
+    "../tester-verification/audio-sink-smoke-v3.log"
+  ],
+  "primary_sources": [
+    {
+      "title": "Qt 6.10 QAudioSink documentation",
+      "url": "https://doc.qt.io/qt-6/qaudiosink.html",
+      "relevant_sections": [
+        "Threading model and buffering (250 ms default QIODevice ring buffer)",
+        "processedUSecs (audio data processed since start)",
+        "stop (Linux/Darwin drains underlying buffer)",
+        "reset (immediately discards buffered audio)",
+        "suspend (stops processing, preserves buffered audio)"
+      ]
+    },
+    {
+      "title": "PipeWire latency support",
+      "url": "https://docs.pipewire.org/page_latency.html",
+      "relevant_sections": [
+        "Latency object direction, propagation, and aggregate downstream playback latency"
+      ]
+    },
+    {
+      "title": "PulseAudio pa_timing_info documentation",
+      "url": "https://freedesktop.org/software/pulseaudio/doxygen/structpa__timing__info.html",
+      "relevant_sections": [
+        "sink_usec is time for a sample to play on the sink",
+        "estimated total output latency includes sink, buffer, and transport",
+        "sound-card clock domain caveat"
+      ]
+    }
+  ],
+  "limitations": [
+    "No microphone or loopback capture was performed, so acoustic arrival time was not measured.",
+    "PipeWire reports a fixed 150 ms sink latency, but endpoint Bluetooth buffering may vary and is not directly measured here.",
+    "The Qt clock comparison lasted about two seconds; it is not a long-term drift study.",
+    "The QIODevice ring capacity was full during the sampled instants, but its exact additive contribution to end-to-end audible latency is not inferable from these observations alone."
+  ]
+}

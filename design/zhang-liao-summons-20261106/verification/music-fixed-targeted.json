@@ -1,0 +1,41 @@
+{
+  "status": "passed",
+  "source_sha256": "144bb659f43d3b3df9f3933030126c5135e32de1911c94390431d7051d303c66",
+  "external_sha256": "144bb659f43d3b3df9f3933030126c5135e32de1911c94390431d7051d303c66",
+  "exact_original_assertion_preserved": true,
+  "timeout_ms": 1500,
+  "runs": [
+    {
+      "name": "startup",
+      "command": [
+        "/home/weathour/.local/bin/godot-4.6.2",
+        "--headless",
+        "--path",
+        "/home/weathour/programs/desktop-projects/My-game",
+        "--quit"
+      ],
+      "returncode": 0,
+      "seconds": 1.619093656539917,
+      "strict_failures": [],
+      "log": "music-fixed-startup.log"
+    },
+    {
+      "name": "targeted",
+      "command": [
+        "/home/weathour/.local/bin/godot-4.6.2",
+        "--rendering-method",
+        "gl_compatibility",
+        "--audio-driver",
+        "Dummy",
+        "--path",
+        "/home/weathour/programs/desktop-projects/My-game",
+        "--script",
+        "/tmp/liao-music-diagnostic-19mca1qz/fixed.gd"
+      ],
+      "returncode": 0,
+      "seconds": 8.547005653381348,
+      "strict_failures": [],
+      "log": "music-fixed-targeted.log"
+    }
+  ]
+}

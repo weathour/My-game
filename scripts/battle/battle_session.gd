@@ -1,5 +1,7 @@
 extends RefCounted
 ## One disposable attempt. No UI, disk access, role talents, or global scene lookups.
+const HURTBOX := preload("res://scripts/battle/player_hurtbox.gd")
+const SPATIAL := preload("res://scripts/battle/enemy_spatial_grid.gd")
 const C := preload("res://scripts/content/combat_catalog.gd")
 const CHARACTER := preload("res://scripts/battle/character_runtime.gd")
 const DIRECTOR := preload("res://scripts/battle/stage_director.gd")
@@ -22,11 +24,16 @@ var active := 0
 var switch_cooldown := 0.0
 var enemies: Array = []
 var projectiles: Array = []
+var pending_patterns: Array = []
+var spatial := SPATIAL.new()
+var _actor_previous_position := SPACE.CENTER
 var gems: Array = []
 var effects: Array = []
 var hazards: Array = []
 var telegraphs: Array = []
 var delivery_serial := 0
+# Cosmetic facts have their own identity and never consume gameplay delivery ids.
+var presentation_serial := 0
 var target_hold := 0.0
 var enemy_slow := 0.0
 var enemy_slow_remaining := 0.0
@@ -80,6 +87,7 @@ func tick(delta: float, movement: Vector2) -> void:
 	mechanics.tick(delta)
 	_process_switch()
 	var actor := current()
+	_actor_previous_position=position
 	enemy_slow_remaining = maxf(0, enemy_slow_remaining - delta)
 	if enemy_slow_remaining <= 0: enemy_slow = 0
 	var actor_movement_speed: float = (1 - enemy_slow) * actor.stats.move * (1.25 if actor.haste > 0 else 1.0)
@@ -88,7 +96,8 @@ func tick(delta: float, movement: Vector2) -> void:
 	var ordinary_count := 0
 	for enemy in enemies:
 		if not enemy.dead and enemy.parent_id == 0 and enemy.rank in ["ordinary", "heavy"]: ordinary_count += 1
-	enemies.append_array(director.tick(delta, ordinary_count, position, enemies))
+	enemies.append_array(director.tick(delta, ordinary_count, position, enemies, movement.limit_length(1)*actor_movement_speed))
+	spatial.rebuild(enemies)
 	if _fail_configuration(): return
 	target_hold = maxf(0, target_hold - delta)
 	var target := TARGETS.nearest(enemies, position, 580, target_id)
@@ -109,7 +118,7 @@ func tick(delta: float, movement: Vector2) -> void:
 		if support != null and not mechanics.support_is_reactive(id, support): _cast(support, characters[id], false)
 	_resolve_hits()
 	var transition_safe := _has_safe_transition()
-	var hostile := ENEMIES.step(enemies, position, delta, {"hazards":hazards, "config":director.config, "actor_speed":actor_movement_speed})
+	var hostile := ENEMIES.step(enemies, position, delta, {"hazards":hazards, "patterns":pending_patterns, "spatial":spatial, "projectiles":projectiles, "actor_previous":_actor_previous_position, "config":director.config, "actor_speed":actor_movement_speed})
 	if not hostile.configuration_errors.is_empty():
 		director.configuration_error = "; ".join(hostile.configuration_errors)
 		_fail_configuration()
@@ -162,7 +171,7 @@ func tick(delta: float, movement: Vector2) -> void:
 			director.defeated(enemy)
 			var final_boss: bool = enemy.kind == "boss" and enemy.hp_owner == null
 			boss_dead = boss_dead or final_boss
-			if final_boss: events.append({"kind":"boss_defeated", "id":enemy.id, "enemy_id":enemy.id, "position":enemy.position, "phase":enemy.form_index, "form_index":enemy.form_index, "form_count":enemy.form_count, "form_name":enemy.form_name})
+			if final_boss: events.append({"kind":"boss_defeated", "id":enemy.id, "enemy_id":enemy.id, "position":enemy.position, "phase":enemy.form_index, "form_index":enemy.form_index, "definition_id":enemy.definition_id, "form_count":enemy.form_count, "form_name":enemy.form_name})
 			if enemy.xp > 0: gems.append({"position":enemy.position, "amount":enemy.xp})
 			var kill_event := _enemy_feedback(enemy)
 			kill_event.merge({"source":"", "ability":"", "mechanic":"", "cast":0, "cast_id":0, "delivery":0, "direct":false, "secondary":false, "direction":Vector2.ZERO}, true)
@@ -245,10 +254,10 @@ func _resolve_hits() -> void:
 		if applied > 0:
 			feedback.merge({"kind":"damage_dealt", "enemy_id":receiver.id, "definition_id":receiver.definition_id, "phase":previous_phase, "amount":applied,
 				"source":str(hit.context.get("source", "")), "ability":str(hit.context.get("ability", "")), "mechanic":str(hit.context.get("mechanic", "")),
-				"direct":bool(hit.context.get("direct", false)), "secondary":bool(hit.context.get("secondary", false)), "time":director.elapsed,
+				"direct":bool(hit.context.get("direct", false)), "secondary":bool(hit.context.get("secondary", false)), "manual":bool(hit.context.get("manual",false)), "ability_kind":int(hit.context.get("ability_kind",-1)), "time":director.elapsed,
 				"cast":int(hit.context.get("cast", 0)), "cast_id":int(hit.context.get("cast", 0)), "delivery":int(hit.context.get("delivery", 0)),
 				"damage_type":int(hit.context.get("damage_type", 0)), "lethal":receiver.dead,
-				"direction":hit.context.get("impact_direction", Vector2.ZERO)}, true)
+				"direction":hit.context.get("impact_direction", Vector2.ZERO), "slow":float(hit.context.get("slow",0)), "duration":float(hit.context.get("duration",0))}, true)
 			events.append(feedback)
 			_last_damage_feedback[receiver.id] = feedback.duplicate()
 	_hits.clear()
@@ -286,6 +295,10 @@ func _cast(ability: Resource, source: RefCounted, direct: bool, manual: bool = f
 	return true
 
 func _execute_payload(cast: Dictionary) -> void:
+	var sound_before := {}
+	for id in members:
+		var actor: RefCounted = characters[id]
+		sound_before[id] = {"hp":actor.hp,"mp":actor.mp,"shield":actor.shield}
 	var ability: Resource = cast.ability
 	var context: Dictionary = delivery_context(cast.context)
 	context.impact_origin = cast.origin
@@ -307,6 +320,13 @@ func _execute_payload(cast: Dictionary) -> void:
 			_:
 				for enemy in TARGETS.in_shape(enemies, cast.origin, cast.direction, cast.reach, ability.kind == A.Kind.THRUST, ability.kind == A.Kind.NOVA):
 					_hits.append({"target":enemy, "context":context})
+	for id in sound_before:
+		var actor: RefCounted = characters[id]
+		var hp_delta: float = actor.hp-float(sound_before[id].hp)
+		var mp_delta: float = actor.mp-float(sound_before[id].mp)
+		var shield_delta: float = actor.shield-float(sound_before[id].shield)
+		if hp_delta>0 or mp_delta>0 or shield_delta>0:
+			add_presentation_fact({"kind":"ability_effect","source":source.id,"ability":str(ability.id),"cast":context.cast,"cast_id":context.cast,"delivery":int(context.get("delivery",0)),"secondary":bool(context.get("secondary",false)),"recipient":id,"position":cast.origin,"hp_delta":maxf(0,hp_delta),"mp_delta":maxf(0,mp_delta),"shield_delta":maxf(0,shield_delta),"direct":bool(context.direct)})
 	var direct: bool = context.direct
 	var manual: bool = bool(context.get("manual", false))
 	var color := "support" if not direct else "manual" if manual else "basic"
@@ -315,10 +335,13 @@ func _execute_payload(cast: Dictionary) -> void:
 	if ability.kind in [A.Kind.HEAL, A.Kind.MANA, A.Kind.WARD]:
 		for receiver in targets: beneficiaries.append(receiver.id)
 		if not targets.is_empty(): beneficiary = targets[0].id
-	effects.append({"kind":"ring" if ability.kind == A.Kind.NOVA else "slash" if ability.kind in [A.Kind.SWEEP, A.Kind.THRUST] else "cast", "origin":cast.origin,
+	add_presentation_effect({"kind":"ring" if ability.kind == A.Kind.NOVA else "slash" if ability.kind in [A.Kind.SWEEP, A.Kind.THRUST] else "cast", "origin":cast.origin,
 		"direction":cast.direction, "radius":cast.reach if ability.kind in [A.Kind.NOVA, A.Kind.SWEEP, A.Kind.THRUST] else 25, "life":0.22, "color":color, "narrow":ability.kind == A.Kind.THRUST,
 		"source":source.id, "ability":str(ability.id), "cast":context.cast, "direct":direct,
-		"visual_time":director.elapsed, "beneficiary":beneficiary, "beneficiaries":beneficiaries})
+		"visual_time":director.elapsed, "beneficiary":beneficiary, "beneficiaries":beneficiaries, "delivery":int(context.get("delivery",0)),
+		"ability_kind":ability.kind, "mechanic":ability.mechanic, "manual":manual, "secondary":bool(context.get("secondary",false)),
+		"shield_spent":float(context.get("shield_spent",0)), "ammo_spent":int(context.get("ammo_spent",0)), "position_after":position,
+		"footprint_radius":float(ability.params.get("radius",cast.reach)) if ability.mechanic == "field" else cast.reach})
 
 func _update_projectiles(delta: float, incoming: Array, incoming_sources: Array = []) -> void:
 	for i in range(projectiles.size() - 1, -1, -1):
@@ -328,9 +351,11 @@ func _update_projectiles(delta: float, incoming: Array, incoming_sources: Array 
 		p.life -= delta
 		var hit := false
 		if p.hostile:
-			if Geometry2D.get_closest_point_to_segment(position, start, p.position).distance_to(position) < 16 + float(p.get("hit_radius", 4)):
+			var actor_start: Vector2=position if bool(p.get("new_this_tick",false)) else _actor_previous_position
+			p.erase("new_this_tick")
+			if HURTBOX.contains_swept(start,p.position,float(p.get("hit_radius",4)),actor_start,position):
 				incoming.append(p.damage)
-				incoming_sources.append({"enemy_id":int(p.get("source_id", p.get("source", 0))), "attack":str(p.get("move_id", "projectile")), "position":p.position})
+				incoming_sources.append({"enemy_id":int(p.get("source_id", p.get("source", 0))), "attack":str(p.get("move_id", "projectile")), "move_id":str(p.get("move_id", "projectile")), "definition_id":str(p.get("definition_id","")), "form_index":int(p.get("form_index",0)), "action_serial":int(p.get("action_serial",0)), "position":p.position})
 				hit = true
 		else:
 			var first: RefCounted
@@ -350,9 +375,10 @@ func _update_projectiles(delta: float, incoming: Array, incoming_sources: Array 
 						if other != first: _hits.append({"target":other, "context":impact})
 				# Pure presentation descriptor: the immutable launch context supplies
 				# identity even when a different party member is now controlled.
-				effects.append({"kind":"impact", "origin":first.position, "direction":p.velocity.normalized(), "radius":26.0,
+				add_presentation_effect({"kind":"impact", "origin":first.position, "direction":p.velocity.normalized(), "radius":26.0,
 					"life":0.22, "color":"basic" if p.context.direct else "support", "source":p.context.source,
-					"ability":p.context.ability, "cast":p.context.cast, "direct":p.context.direct, "visual_time":director.elapsed})
+					"ability":p.context.ability, "cast":p.context.cast, "direct":p.context.direct, "visual_time":director.elapsed,
+					"delivery":int(impact.get("delivery",0)), "target_id":first.damage_owner().id, "body_height":first.body_height, "secondary":bool(p.context.get("secondary",false))})
 				hit = true
 		if hit or p.life <= 0: projectiles.remove_at(i)
 
@@ -418,6 +444,7 @@ func _finish(value: String) -> void:
 		"card_elite":director.card_elite, "equipment_elite":director.equipment_elite,
 		"elapsed":director.elapsed, "kills":director.kills, "fast_clear":director.elapsed <= float(director.config.get("bonus_time", 0.0))}
 	projectiles.clear()
+	pending_patterns.clear()
 	hazards.clear()
 	telegraphs.clear()
 	for enemy in enemies:
@@ -452,6 +479,8 @@ func _cleanup_sources() -> void:
 			enemy.dead = true; enemy.death_reason = "source_cancel"
 	for i in range(hazards.size() - 1, -1, -1):
 		if dead_ids.has(int(hazards[i].owner_id)): hazards.remove_at(i)
+	for index in range(pending_patterns.size()-1,-1,-1):
+		if dead_ids.has(int(pending_patterns[index].source_id)): pending_patterns.remove_at(index)
 	_refresh_telegraphs()
 
 func _collect_form_events() -> void:
@@ -470,6 +499,8 @@ func _cancel_transition_sources() -> void:
 		if transitioning.has(int(hazards[i].owner_id)): hazards.remove_at(i)
 	for i in range(projectiles.size() - 1, -1, -1):
 		if bool(projectiles[i].get("hostile", false)) and transitioning.has(int(projectiles[i].get("source_id", projectiles[i].get("source", -1)))): projectiles.remove_at(i)
+	for index in range(pending_patterns.size()-1,-1,-1):
+		if transitioning.has(int(pending_patterns[index].source_id)): pending_patterns.remove_at(index)
 	for child in enemies:
 		if transitioning.has(child.parent_id) and not child.targetable:
 			child.dead = true; child.death_reason = "source_cancel"
@@ -478,3 +509,28 @@ func _has_safe_transition() -> bool:
 	for enemy in enemies:
 		if not enemy.dead and enemy.transition_remaining > 0: return true
 	return false
+
+static func hurt_radius() -> float:
+	return HURTBOX.RADIUS
+
+# These records are presentation facts only; no consumer is permitted to resolve hits.
+func add_presentation_effect(effect: Dictionary) -> void:
+	presentation_serial += 1
+	var descriptor := effect.duplicate(true)
+	descriptor.presentation_id = presentation_serial
+	effects.append(descriptor)
+	if str(descriptor.get("kind", "")) != "impact":
+		var fact := descriptor.duplicate(true)
+		fact.effect_kind = str(fact.kind)
+		fact.kind = "ability_release"
+		events.append(fact)
+
+func presentation_states() -> Array[Dictionary]:
+	if not outcome.is_empty(): return []
+	return mechanics.presentation_states()
+
+func add_presentation_fact(fact: Dictionary) -> void:
+	presentation_serial += 1
+	var entry := fact.duplicate(true)
+	entry.presentation_id = presentation_serial
+	events.append(entry)

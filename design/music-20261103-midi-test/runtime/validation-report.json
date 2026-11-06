@@ -1,0 +1,510 @@
+{
+  "status": "PASS",
+  "created_utc": "2026-11-03T09:36:13.991234+00:00",
+  "godot_version": "4.6.2.stable.official.71f334935",
+  "scope": "first chapter frozen-MIDI timbre-test runtime replacement",
+  "coverage": {
+    "catalog_cues": 16,
+    "new_cues": 12,
+    "retained_original_cues": 4,
+    "retired_original_cues_removed": 66,
+    "route_nodes": 36,
+    "battle_nodes": 18,
+    "story_events": 22,
+    "line_overrides": 9,
+    "character_events": 32,
+    "complete_routes": 64,
+    "battles_per_complete_route": [
+      12,
+      15
+    ],
+    "new_cues_per_complete_route": [
+      12,
+      12
+    ]
+  },
+  "data_compatibility": {
+    "route_json_unchanged": true,
+    "story_nonmusic_fields_unchanged": true,
+    "character_event_nonmusic_fields_unchanged": true,
+    "player_data_verification_owner": "root task; all engine checks use isolated XDG directories"
+  },
+  "runtime_checks": {
+    "headless_import": "PASS",
+    "headless_startup": "PASS",
+    "music_smoke": "CHRONICLE_MUSIC_SMOKE PASS checks=2315 failures=0",
+    "real_playback": "CHRONICLE_MUSIC_PLAYBACK_SMOKE PASS checks=41 failures=0 display=X11",
+    "pck_music": "CHRONICLE_MUSIC_PACK_SMOKE PASS cues=16 checks=95 failures=0",
+    "master_capture_fixture": {
+      "categories": [
+        "cast_blade",
+        "hit_light",
+        "magic"
+      ],
+      "cue": "midi_test_03",
+      "finite": true,
+      "frames": 45056,
+      "music_gain": 0.7,
+      "rms": 0.0431941940189196,
+      "sample_peak": 0.278342872858047,
+      "sfx_gain": 0.65,
+      "start_seconds": 12.0
+    },
+    "music_room_visual_review": [
+      "1280x720 readable track/control layout",
+      "960x600 readable track/control layout"
+    ],
+    "retained_asset_baseline": "retained-assets-baseline.json",
+    "retirement_evidence": "retired-assets.json",
+    "nonmusic_baseline": "nonmusic-story-baseline.json",
+    "published_media_static_guard": "MIDI_RUNTIME_STATIC_OK cues=16 story_events=22 line_overrides=9 character_events=32 frozen_inputs=12 nonmusic_data=unchanged new_assets_checked=12 retired=0"
+  },
+  "full_project_check": {
+    "result": "PROJECT_CHECK_OK",
+    "smokes_total": 50,
+    "source_smokes": 46,
+    "pck_smokes": 4,
+    "stdout_log": "artifacts/music-midi-test-20261103/verification/full-check.stdout.log",
+    "smokes": [
+      {
+        "name": "baimen_enemy_runtime_smoke",
+        "type": "source",
+        "result": "BAIMEN_ENEMY_RUNTIME_SMOKE PASS checks=741 failures=0",
+        "checks": 741,
+        "log": "artifacts/music-midi-test-20261103/verification/full-check/baimen_enemy_runtime_smoke.log",
+        "sha256": "5a368d8dea0115ea07918a95c48773d1458617ee574045238d88163b77259ab4"
+      },
+      {
+        "name": "baimen_women_combat_art_smoke",
+        "type": "source",
+        "result": "BAIMEN_WOMEN_COMBAT_ART_SMOKE PASS checks=266 failures=0",
+        "checks": 266,
+        "log": "artifacts/music-midi-test-20261103/verification/full-check/baimen_women_combat_art_smoke.log",
+        "sha256": "646534b58adfc9313717be686e2d2e8dee305d9a09ec6657978a8085258df9a9"
+      },
+      {
+        "name": "baimen_women_portraits_smoke",
+        "type": "source",
+        "result": "BAIMEN_WOMEN_PORTRAITS_SMOKE PASS checks=525 failures=0",
+        "checks": 525,
+        "log": "artifacts/music-midi-test-20261103/verification/full-check/baimen_women_portraits_smoke.log",
+        "sha256": "6472c4e2426574abe0ef8061bb0884d5d96544d31c095f621f0b00f5f95eaed6"
+      },
+      {
+        "name": "boss_combo_timing_smoke",
+        "type": "source",
+        "result": "BOSS_COMBO_TIMING_SMOKE PASS checks=41 failures=0",
+        "checks": 41,
+        "log": "artifacts/music-midi-test-20261103/verification/full-check/boss_combo_timing_smoke.log",
+        "sha256": "54a4bd5222179da7fa57a88aa8fbf735db0b8a970a07e76cfec8718ce4ecc4e1"
+      },
+      {
+        "name": "boss_forms_smoke",
+        "type": "source",
+        "result": "BOSS_FORMS_SMOKE PASS checks=672 failures=0 authored_moves=30",
+        "checks": 672,
+        "log": "artifacts/music-midi-test-20261103/verification/full-check/boss_forms_smoke.log",
+        "sha256": "51247d6284ec4fc4f7366e20931d34ca965366908d7ab729104cac73830b3b3e"
+      },
+      {
+        "name": "boss_friendly_art_smoke",
+        "type": "source",
+        "result": "BOSS_FRIENDLY_ART_SMOKE PASS checks=146 failures=0 portrait_capture=unavailable",
+        "checks": 146,
+        "log": "artifacts/music-midi-test-20261103/verification/full-check/boss_friendly_art_smoke.log",
+        "sha256": "97c3180872ba707da4b4aa7f86aecf2499f0c0d44c4910de22bbabc15f2adabb"
+      },
+      {
+        "name": "chronicle_authored_effects_smoke",
+        "type": "source",
+        "result": "CHRONICLE_AUTHORED_EFFECTS_SMOKE PASS checks=36 failures=0",
+        "checks": 36,
+        "log": "artifacts/music-midi-test-20261103/verification/full-check/chronicle_authored_effects_smoke.log",
+        "sha256": "53e196869708d490aabf3bac3edc36f98b9dd66590d261f4fbfb3e75ea9e9dd3"
+      },
+      {
+        "name": "chronicle_battle_ground_smoke",
+        "type": "source",
+        "result": "CHRONICLE_BATTLE_GROUND_SMOKE PASS checks=191 failures=0",
+        "checks": 191,
+        "log": "artifacts/music-midi-test-20261103/verification/full-check/chronicle_battle_ground_smoke.log",
+        "sha256": "6ad8d0616112a94d4e17ed06efcd552a0da41e7628af99633941ff6c6ed90239"
+      },
+      {
+        "name": "chronicle_battle_scale_smoke",
+        "type": "source",
+        "result": "CHRONICLE_BATTLE_SCALE_SMOKE PASS checks=560 failures=0",
+        "checks": 560,
+        "log": "artifacts/music-midi-test-20261103/verification/full-check/chronicle_battle_scale_smoke.log",
+        "sha256": "e58d3545db29612c5626a6ad57cbcf37da91925db89cb33d4719a25de1eb8c92"
+      },
+      {
+        "name": "chronicle_boss_camera_smoke",
+        "type": "source",
+        "result": "CHRONICLE_BOSS_CAMERA_SMOKE PASS checks=165 failures=0",
+        "checks": 165,
+        "log": "artifacts/music-midi-test-20261103/verification/full-check/chronicle_boss_camera_smoke.log",
+        "sha256": "f6d95e91a34d3cd1fb38a79eeefbf7a03ddd9f15b2293a2d6a0f57a5a8552eef"
+      },
+      {
+        "name": "chronicle_boss_flow_smoke",
+        "type": "source",
+        "result": "CHRONICLE_BOSS_FLOW_SMOKE PASS checks=140 failures=0",
+        "checks": 140,
+        "log": "artifacts/music-midi-test-20261103/verification/full-check/chronicle_boss_flow_smoke.log",
+        "sha256": "1f3ac022a81b003abce8719c8a118fd60fda53572df43588b2136c959d1900c4"
+      },
+      {
+        "name": "chronicle_boss_sound_smoke",
+        "type": "source",
+        "result": "CHRONICLE_BOSS_SOUND_SMOKE PASS checks=22 failures=0",
+        "checks": 22,
+        "log": "artifacts/music-midi-test-20261103/verification/full-check/chronicle_boss_sound_smoke.log",
+        "sha256": "d44d4e209f6aa1c5da81880f86da9c2a1d978fa4daa7e2b09360cf18b4bc5374"
+      },
+      {
+        "name": "chronicle_chapter_two_smoke",
+        "type": "source",
+        "result": "CHRONICLE_CHAPTER_TWO_SMOKE PASS checks=185 failures=0",
+        "checks": 185,
+        "log": "artifacts/music-midi-test-20261103/verification/full-check/chronicle_chapter_two_smoke.log",
+        "sha256": "078aebd495e05055c4359a0f9613cb8ed83c81a79d7c679ecfe3ebebfe819f68"
+      },
+      {
+        "name": "chronicle_character_campaign_smoke",
+        "type": "source",
+        "result": "CHRONICLE_CHARACTER_CAMPAIGN_SMOKE PASS checks=196 failures=0",
+        "checks": 196,
+        "log": "artifacts/music-midi-test-20261103/verification/full-check/chronicle_character_campaign_smoke.log",
+        "sha256": "20d3e782d39e8d7c63173bdce636a588661fa193768cd6d94f908d0fb21b6e1a"
+      },
+      {
+        "name": "chronicle_character_mechanics_smoke",
+        "type": "source",
+        "result": "CHRONICLE_CHARACTER_MECHANICS_SMOKE PASS checks=126 failures=0",
+        "checks": 126,
+        "log": "artifacts/music-midi-test-20261103/verification/full-check/chronicle_character_mechanics_smoke.log",
+        "sha256": "1d6a2ba8cf44c282a15f7efb74bc0101e85e80a6c4c397850ff63e67d9ea55e7"
+      },
+      {
+        "name": "chronicle_character_panels_smoke",
+        "type": "source",
+        "result": "CHRONICLE_CHARACTER_PANELS_SMOKE PASS checks=362 failures=0",
+        "checks": 362,
+        "log": "artifacts/music-midi-test-20261103/verification/full-check/chronicle_character_panels_smoke.log",
+        "sha256": "4aec0f04c34f296f5dedeed97771f3c9711e673167d38eb5a6c81c72f87ff7bb"
+      },
+      {
+        "name": "chronicle_character_profiles_smoke",
+        "type": "source",
+        "result": "CHRONICLE_CHARACTER_PROFILES_SMOKE PASS checks=121 failures=0",
+        "checks": 121,
+        "log": "artifacts/music-midi-test-20261103/verification/full-check/chronicle_character_profiles_smoke.log",
+        "sha256": "9a59b1881276b1daddcd848738e8687b2a715878e29b0d9ebbb0f54348073f89"
+      },
+      {
+        "name": "chronicle_combat_feedback_events_smoke",
+        "type": "source",
+        "result": "CHRONICLE_COMBAT_FEEDBACK_EVENTS_SMOKE PASS checks=59 failures=0",
+        "checks": 59,
+        "log": "artifacts/music-midi-test-20261103/verification/full-check/chronicle_combat_feedback_events_smoke.log",
+        "sha256": "d66776256fc235108ae5b4912660e07980d4ed554b05a344de51aced3697768a"
+      },
+      {
+        "name": "chronicle_combat_feedback_pack_smoke",
+        "type": "pck",
+        "result": "CHRONICLE_COMBAT_FEEDBACK_PACK_SMOKE PASS checks=184 failures=0",
+        "checks": 184,
+        "log": "artifacts/music-midi-test-20261103/verification/full-check/chronicle_combat_feedback_pack_smoke.log",
+        "sha256": "18035372a1e2adb3ffdba47efd9bf2a6db8834309d8613ff3dd998741eef255a"
+      },
+      {
+        "name": "chronicle_combat_feedback_smoke",
+        "type": "source",
+        "result": "CHRONICLE_COMBAT_FEEDBACK_SMOKE PASS checks=218 failures=0",
+        "checks": 218,
+        "log": "artifacts/music-midi-test-20261103/verification/full-check/chronicle_combat_feedback_smoke.log",
+        "sha256": "7eba3169872df80f08e8f989817599531bc05292f15bccc2a4af8a89664af1b5"
+      },
+      {
+        "name": "chronicle_combat_smoke",
+        "type": "source",
+        "result": "CHRONICLE_COMBAT_SMOKE PASS checks=77 failures=0",
+        "checks": 77,
+        "log": "artifacts/music-midi-test-20261103/verification/full-check/chronicle_combat_smoke.log",
+        "sha256": "51ed0db1c77846ec94ac909553c9710a6846b9f560c581be3f3a3f85cf872ea4"
+      },
+      {
+        "name": "chronicle_context_navigation_smoke",
+        "type": "source",
+        "result": "CHRONICLE_CONTEXT_NAVIGATION_SMOKE PASS checks=223 failures=0",
+        "checks": 223,
+        "log": "artifacts/music-midi-test-20261103/verification/full-check/chronicle_context_navigation_smoke.log",
+        "sha256": "55fa5ec68b43faf4415cbd03d760769c39d2fc3745b2f8935aba869ff41d3a17"
+      },
+      {
+        "name": "chronicle_enemy_campaign_smoke",
+        "type": "source",
+        "result": "CHRONICLE_ENEMY_CAMPAIGN_SMOKE PASS checks=447 failures=0 routes=2",
+        "checks": 447,
+        "log": "artifacts/music-midi-test-20261103/verification/full-check/chronicle_enemy_campaign_smoke.log",
+        "sha256": "eeb282cd5f976c24428c658c7c298229c7eb92bf4b2be3637b4b7194f113856d"
+      },
+      {
+        "name": "chronicle_enemy_codex_smoke",
+        "type": "source",
+        "result": "CHRONICLE_ENEMY_CODEX_SMOKE PASS checks=704 failures=0",
+        "checks": 704,
+        "log": "artifacts/music-midi-test-20261103/verification/full-check/chronicle_enemy_codex_smoke.log",
+        "sha256": "0f9439503aefe500f93e6a8b6d4c4447cbd56836600e080c25906c360e6521f9"
+      },
+      {
+        "name": "chronicle_enemy_content_smoke",
+        "type": "source",
+        "result": "CHRONICLE_ENEMY_CONTENT_SMOKE PASS checks=2857 failures=0 paths=64 transaction_routes=4",
+        "checks": 2857,
+        "log": "artifacts/music-midi-test-20261103/verification/full-check/chronicle_enemy_content_smoke.log",
+        "sha256": "4f95a56d76c5473bf30dede7145033029f6ccfb21d7fba8777f45d839d4c8c57"
+      },
+      {
+        "name": "chronicle_enemy_effects_smoke",
+        "type": "source",
+        "result": "CHRONICLE_ENEMY_EFFECTS_SMOKE PASS checks=73 failures=0",
+        "checks": 73,
+        "log": "artifacts/music-midi-test-20261103/verification/full-check/chronicle_enemy_effects_smoke.log",
+        "sha256": "ac4fc3ab6186f232e44035505987fb1b34c0f99ae8fd5f6ecc94728e101787e2"
+      },
+      {
+        "name": "chronicle_enemy_pack_smoke",
+        "type": "pck",
+        "result": "ENEMY_PACK_SMOKE PASS checks=742 failures=0",
+        "checks": 742,
+        "log": "artifacts/music-midi-test-20261103/verification/full-check/chronicle_enemy_pack_smoke.log",
+        "sha256": "06ffb1ea8e46ab058aa395c4dc90c8c85df4a0b65d684b0900b45968bab8e556"
+      },
+      {
+        "name": "chronicle_enemy_presentation_smoke",
+        "type": "source",
+        "result": "CHRONICLE_ENEMY_PRESENTATION_SMOKE PASS checks=509 failures=0",
+        "checks": 509,
+        "log": "artifacts/music-midi-test-20261103/verification/full-check/chronicle_enemy_presentation_smoke.log",
+        "sha256": "a06f4f665f2152af5e0412095922a2f8cc95ea1432ca2dba037ef0455f039c2c"
+      },
+      {
+        "name": "chronicle_enemy_sessions_smoke",
+        "type": "source",
+        "result": "CHRONICLE_ENEMY_SESSIONS_SMOKE PASS checks=133529 failures=0 sessions=18",
+        "checks": 133529,
+        "log": "artifacts/music-midi-test-20261103/verification/full-check/chronicle_enemy_sessions_smoke.log",
+        "sha256": "288a39533bebf374a747b79daaa95191b9bb262b207030ee32aa085935780a95"
+      },
+      {
+        "name": "chronicle_feedback_latency_smoke",
+        "type": "source",
+        "result": "CHRONICLE_FEEDBACK_LATENCY_SMOKE PASS checks=20 failures=0",
+        "checks": 20,
+        "log": "artifacts/music-midi-test-20261103/verification/full-check/chronicle_feedback_latency_smoke.log",
+        "sha256": "c7bd5d1835c72d3941409bbf8288500c2ba3c1e78cad151ca0b383126ea4eb16"
+      },
+      {
+        "name": "chronicle_home_menu_render_smoke",
+        "type": "source",
+        "result": "CHRONICLE_HOME_MENU_RENDER_SMOKE PASS checks=444 failures=0",
+        "checks": 444,
+        "log": "artifacts/music-midi-test-20261103/verification/full-check/chronicle_home_menu_render_smoke.log",
+        "sha256": "805fce2d6a166a8308d961868866429ab3031e5cb2837a65dfb765c1e7d6bfed"
+      },
+      {
+        "name": "chronicle_mechanic_hud_smoke",
+        "type": "source",
+        "result": "CHRONICLE_MECHANIC_HUD_SMOKE PASS checks=322 failures=0",
+        "checks": 322,
+        "log": "artifacts/music-midi-test-20261103/verification/full-check/chronicle_mechanic_hud_smoke.log",
+        "sha256": "d81d85b36bf6cf128acf5d7ad8eb912146705bd5bc087da5a3d14ae7b3841e0f"
+      },
+      {
+        "name": "chronicle_melee_reach_smoke",
+        "type": "source",
+        "result": "CHRONICLE_MELEE_REACH_SMOKE PASS checks=154 failures=0",
+        "checks": 154,
+        "log": "artifacts/music-midi-test-20261103/verification/full-check/chronicle_melee_reach_smoke.log",
+        "sha256": "898a1e40caf38e4953d15d072675a31a8aefa44f8cd2b69b8b9dbd1833afc759"
+      },
+      {
+        "name": "chronicle_music_pack_smoke",
+        "type": "pck",
+        "result": "CHRONICLE_MUSIC_PACK_SMOKE PASS cues=16 checks=95 failures=0",
+        "checks": 95,
+        "log": "artifacts/music-midi-test-20261103/verification/full-check/chronicle_music_pack_smoke.log",
+        "sha256": "2c7d5d872cb0209fe7cbd8963924e00db6b435d4b5f0cec358d58587afba7437"
+      },
+      {
+        "name": "chronicle_music_playback_smoke",
+        "type": "source",
+        "result": "CHRONICLE_MUSIC_PLAYBACK_SMOKE PASS checks=41 failures=0 display=X11",
+        "checks": 41,
+        "log": "artifacts/music-midi-test-20261103/verification/full-check/chronicle_music_playback_smoke.log",
+        "sha256": "f1705a456e64012a8babdf362a178ba245321db1a0e9d56ed13be6578e27c184"
+      },
+      {
+        "name": "chronicle_music_smoke",
+        "type": "source",
+        "result": "CHRONICLE_MUSIC_SMOKE PASS checks=2315 failures=0",
+        "checks": 2315,
+        "log": "artifacts/music-midi-test-20261103/verification/full-check/chronicle_music_smoke.log",
+        "sha256": "fa203e39716e40ed8aebc9a9c2444ba7bb031f73835bd49b228823994d907e8c"
+      },
+      {
+        "name": "chronicle_party_drag_smoke",
+        "type": "source",
+        "result": "CHRONICLE_PARTY_DRAG_SMOKE PASS checks=143 failures=0",
+        "checks": 143,
+        "log": "artifacts/music-midi-test-20261103/verification/full-check/chronicle_party_drag_smoke.log",
+        "sha256": "9bde423bbd0a5ab2a056e7f05e78457e062b6a90464448df98bcae1b07f2af72"
+      },
+      {
+        "name": "chronicle_party_summary_smoke",
+        "type": "source",
+        "result": "CHRONICLE_PARTY_SUMMARY_SMOKE PASS checks=155 failures=0",
+        "checks": 155,
+        "log": "artifacts/music-midi-test-20261103/verification/full-check/chronicle_party_summary_smoke.log",
+        "sha256": "9dcaf6eddfad29e8032f83f48c82b0f42a63a3f1e63795237cb5dc1e55a666f1"
+      },
+      {
+        "name": "chronicle_playable_ui_smoke",
+        "type": "source",
+        "result": "CHRONICLE_PLAYABLE_UI_SMOKE PASS failures=0",
+        "checks": null,
+        "log": "artifacts/music-midi-test-20261103/verification/full-check/chronicle_playable_ui_smoke.log",
+        "sha256": "fa2494ef35f647f36acaa0321272f30c4b20c261b2016286c4081c9113ab2ad5"
+      },
+      {
+        "name": "chronicle_reflow_visual_smoke",
+        "type": "source",
+        "result": "CHRONICLE_REFLOW_VISUAL_SMOKE PASS",
+        "checks": null,
+        "log": "artifacts/music-midi-test-20261103/verification/full-check/chronicle_reflow_visual_smoke.log",
+        "sha256": "42a6d351ea1ff4939ab440f75ceae977601805721bf55bfec70c5e2d9aea1dd1"
+      },
+      {
+        "name": "chronicle_roster_content_smoke",
+        "type": "source",
+        "result": "CHRONICLE_ROSTER_CONTENT_SMOKE PASS checks=1164 failures=0",
+        "checks": 1164,
+        "log": "artifacts/music-midi-test-20261103/verification/full-check/chronicle_roster_content_smoke.log",
+        "sha256": "526478e66deb2e434c6f961488afa5431ff25ce730e43359a3e54e6c97bac70f"
+      },
+      {
+        "name": "chronicle_route_map_smoke",
+        "type": "source",
+        "result": "CHRONICLE_ROUTE_MAP_SMOKE PASS checks=160 failures=0",
+        "checks": 160,
+        "log": "artifacts/music-midi-test-20261103/verification/full-check/chronicle_route_map_smoke.log",
+        "sha256": "44c497df7cd766f143ed055202c2a586b971f6f5d7a3fcfb77a24af273525d49"
+      },
+      {
+        "name": "chronicle_story_content_smoke",
+        "type": "source",
+        "result": "CHRONICLE_STORY_CONTENT_SMOKE PASS checks=320 failures=0",
+        "checks": 320,
+        "log": "artifacts/music-midi-test-20261103/verification/full-check/chronicle_story_content_smoke.log",
+        "sha256": "344b98a5dfec0588a9e336ce51ee74e6ae9e6a1abff1aea15279dac5e3d9dded"
+      },
+      {
+        "name": "chronicle_story_history_smoke",
+        "type": "source",
+        "result": "CHRONICLE_STORY_HISTORY_SMOKE PASS checks=105 failures=0",
+        "checks": 105,
+        "log": "artifacts/music-midi-test-20261103/verification/full-check/chronicle_story_history_smoke.log",
+        "sha256": "31a66e450e4d8eb7a29f30bcb204d630c4e61ff3a7a73289dd1175c990fdc9ff"
+      },
+      {
+        "name": "chronicle_story_optional_render_smoke",
+        "type": "source",
+        "result": "CHRONICLE_STORY_OPTIONAL_RENDER_SMOKE PASS checks=79 failures=0",
+        "checks": 79,
+        "log": "artifacts/music-midi-test-20261103/verification/full-check/chronicle_story_optional_render_smoke.log",
+        "sha256": "d23f9d04ff2c7bff7562e8e72af93dc6371fa44c65e4b703e89a128ce1605b09"
+      },
+      {
+        "name": "chronicle_story_pack_smoke",
+        "type": "pck",
+        "result": "CHRONICLE_STORY_PACK_SMOKE PASS checks=97 failures=0",
+        "checks": 97,
+        "log": "artifacts/music-midi-test-20261103/verification/full-check/chronicle_story_pack_smoke.log",
+        "sha256": "edd8b0675bbc487960730c19527d321b126ad8359af062d628bbd1c26bd91083"
+      },
+      {
+        "name": "chronicle_story_progress_smoke",
+        "type": "source",
+        "result": "CHRONICLE_STORY_PROGRESS_SMOKE PASS checks=86 failures=0",
+        "checks": 86,
+        "log": "artifacts/music-midi-test-20261103/verification/full-check/chronicle_story_progress_smoke.log",
+        "sha256": "b0a26d2d929e1dbc425e071237046cafd1199e1b8dd1b302c1168ef739781be7"
+      },
+      {
+        "name": "chronicle_story_replay_smoke",
+        "type": "source",
+        "result": "CHRONICLE_STORY_REPLAY_SMOKE PASS checks=162 failures=0",
+        "checks": 162,
+        "log": "artifacts/music-midi-test-20261103/verification/full-check/chronicle_story_replay_smoke.log",
+        "sha256": "bc44636029b1161f9d48e9e2c8b8bb8e9123bbb04459d23a1ae25b55b352f4ea"
+      },
+      {
+        "name": "chronicle_story_ui_smoke",
+        "type": "source",
+        "result": "CHRONICLE_STORY_UI_SMOKE PASS checks=111 failures=0",
+        "checks": 111,
+        "log": "artifacts/music-midi-test-20261103/verification/full-check/chronicle_story_ui_smoke.log",
+        "sha256": "a294cd3807654ba5bee75451702a45d852135807580b425a5c2a94857256646e"
+      },
+      {
+        "name": "jia_combat_art_smoke",
+        "type": "source",
+        "result": "JIA_COMBAT_ART_SMOKE PASS checks=26 failures=0",
+        "checks": 26,
+        "log": "artifacts/music-midi-test-20261103/verification/full-check/jia_combat_art_smoke.log",
+        "sha256": "49475f313cab4245c29914f71c845030d77a59500b6739bf007b5e474f6fdeb2"
+      }
+    ]
+  },
+  "build": {
+    "directory": "builds/linux-midi-test-20261103",
+    "launcher": "builds/linux-midi-test-20261103/run.sh",
+    "manifest": "builds/linux-midi-test-20261103/build-manifest.json",
+    "type": "local_linux_development_pack_with_godot_runtime",
+    "preset": "Linux development",
+    "pck_bytes": 213101088,
+    "pck_sha256": "9a199538ef1c7a700c37165cd6f033011af2d7441c8b0b7a34f446fa440c6edf",
+    "notices_and_licenses_count": 47,
+    "isolated_launcher_headless_startup": "PASS",
+    "isolated_empty_cwd_real_playback": "PASS checks=41 failures=0",
+    "headless_log": "artifacts/music-midi-test-20261103/verification/build-startup.log",
+    "playback_log": "artifacts/music-midi-test-20261103/verification/build-music-playback.log",
+    "music_notice_local_links": {
+      "status": "PASS",
+      "documents_checked": 3,
+      "targets_checked": 25,
+      "missing": []
+    },
+    "manifest_sha256": "162efff930e8eb3021f117155d85e7f422d0509856966b61de717b77bdbfb476",
+    "packaged_source_materials_match_current_repo": true,
+    "final_source_material_status": "implemented_and_verified"
+  },
+  "source_hashes": {
+    "assets/data/audio/music_catalog.json": "6401b53db7cb2f1a5a61d1176ccf0aaeecef5949d1251185057707caffaf4450",
+    "assets/data/chronicle/story_events.json": "e36153b0d936c77c601b75d0f9d4ebb2e190b4c4e2215179a3cdeb7c86e4d153",
+    "assets/data/chronicle/character_events.json": "c301ec697dcfc129cab3c4c5f96df9872c87248bb0abc1f94f8847b561d2d089",
+    "scripts/audio/chronicle_music.gd": "113e8eb294d9ac76c449034441e00aeb125e765f103b1b7a13d48200c3193aba",
+    "scripts/audio/music_player.gd": "6aa8262066cfadbc4455397de6f75ebb4c9401749dc6f88077935d591571db26",
+    "scripts/audio/music_catalog.gd": "c118286e609b00b9790872c0039680ebb8f20e3a73a784abeab569640bf7d22e",
+    "scripts/ui/chronicle/chronicle_shell.gd": "a4b66f247d15ac73033631fa28671048ba1cbb11c1b8e4132891b8b65d80804a",
+    "scripts/ui/chronicle/chronicle_pages.gd": "2d0e8c626410236a0b402afe00762f583170994129dbf934a6498d31474ad28c",
+    "scripts/content/story_catalog.gd": "e8bfebed19deaae82b342d1a12bab102ec353293deddee8c97a155ae042e89ad"
+  },
+  "listening_and_approval": {
+    "manual_listening": "not performed",
+    "technical_checks_do_not_establish_artistic_acceptance": true,
+    "capture_scope": "one short fixed B01/SFX fixture; does not claim all gameplay mixes are unclipped"
+  }
+}

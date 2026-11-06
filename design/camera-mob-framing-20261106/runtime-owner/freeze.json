@@ -1,0 +1,142 @@
+{
+  "runtime_file": "scripts/ui/chronicle/boss_camera.gd",
+  "runtime_sha256": "f61f7883f5e60699643411a869371e4e805bfa7db8ad36b6ead72de10f707b0b",
+  "paired_cases": [
+    {
+      "stage": "B13",
+      "case": "E02_moving",
+      "frames": 1200,
+      "events_player_hazard_telegraph_counts_unchanged": true,
+      "zoom1_follow_no_escape": true,
+      "camera_equals_ordinary_follow_control": true
+    },
+    {
+      "stage": "B13",
+      "case": "E02_still",
+      "frames": 1200,
+      "events_player_hazard_telegraph_counts_unchanged": true,
+      "zoom1_follow_no_escape": true,
+      "camera_equals_ordinary_follow_control": true
+    },
+    {
+      "stage": "B13",
+      "case": "E03_moving",
+      "frames": 1200,
+      "events_player_hazard_telegraph_counts_unchanged": true,
+      "zoom1_follow_no_escape": true,
+      "camera_equals_ordinary_follow_control": true
+    },
+    {
+      "stage": "B13",
+      "case": "E03_still",
+      "frames": 1200,
+      "events_player_hazard_telegraph_counts_unchanged": true,
+      "zoom1_follow_no_escape": true,
+      "camera_equals_ordinary_follow_control": true
+    },
+    {
+      "stage": "B13",
+      "case": "E05_moving",
+      "frames": 1200,
+      "events_player_hazard_telegraph_counts_unchanged": true,
+      "zoom1_follow_no_escape": true,
+      "camera_equals_ordinary_follow_control": true
+    },
+    {
+      "stage": "B13",
+      "case": "E05_still",
+      "frames": 1200,
+      "events_player_hazard_telegraph_counts_unchanged": true,
+      "zoom1_follow_no_escape": true,
+      "camera_equals_ordinary_follow_control": true
+    },
+    {
+      "stage": "B13",
+      "case": "E10_moving",
+      "frames": 1200,
+      "events_player_hazard_telegraph_counts_unchanged": true,
+      "zoom1_follow_no_escape": true,
+      "camera_equals_ordinary_follow_control": true
+    },
+    {
+      "stage": "B13",
+      "case": "E10_still",
+      "frames": 1200,
+      "events_player_hazard_telegraph_counts_unchanged": true,
+      "zoom1_follow_no_escape": true,
+      "camera_equals_ordinary_follow_control": true
+    },
+    {
+      "stage": "B17",
+      "case": "E01_moving",
+      "frames": 1200,
+      "events_player_hazard_telegraph_counts_unchanged": true,
+      "zoom1_follow_no_escape": true,
+      "camera_equals_ordinary_follow_control": true
+    },
+    {
+      "stage": "B17",
+      "case": "E01_still",
+      "frames": 1200,
+      "events_player_hazard_telegraph_counts_unchanged": true,
+      "zoom1_follow_no_escape": true,
+      "camera_equals_ordinary_follow_control": true
+    },
+    {
+      "stage": "B17",
+      "case": "E04_moving",
+      "frames": 1200,
+      "events_player_hazard_telegraph_counts_unchanged": true,
+      "zoom1_follow_no_escape": true,
+      "camera_equals_ordinary_follow_control": true
+    },
+    {
+      "stage": "B17",
+      "case": "E04_still",
+      "frames": 1200,
+      "events_player_hazard_telegraph_counts_unchanged": true,
+      "zoom1_follow_no_escape": true,
+      "camera_equals_ordinary_follow_control": true
+    },
+    {
+      "stage": "B17",
+      "case": "E06_moving",
+      "frames": 1200,
+      "events_player_hazard_telegraph_counts_unchanged": true,
+      "zoom1_follow_no_escape": true,
+      "camera_equals_ordinary_follow_control": true
+    },
+    {
+      "stage": "B17",
+      "case": "E06_still",
+      "frames": 1200,
+      "events_player_hazard_telegraph_counts_unchanged": true,
+      "zoom1_follow_no_escape": true,
+      "camera_equals_ordinary_follow_control": true
+    },
+    {
+      "stage": "B17",
+      "case": "E12_moving",
+      "frames": 1200,
+      "events_player_hazard_telegraph_counts_unchanged": true,
+      "zoom1_follow_no_escape": true,
+      "camera_equals_ordinary_follow_control": true
+    },
+    {
+      "stage": "B17",
+      "case": "E12_still",
+      "frames": 1200,
+      "events_player_hazard_telegraph_counts_unchanged": true,
+      "zoom1_follow_no_escape": true,
+      "camera_equals_ordinary_follow_control": true
+    }
+  ],
+  "source_contract": "framing_owner(descriptor,living_sources)->eligible live elite/Boss root id or0; proxy-only bounded8 ownership chain; all positive active hazards remain path blockers",
+  "checks": {
+    "startup": "exit0 clean",
+    "owner_contract": "29 checks0 failures; field elite warning154frames, route45frames, center_offset76.378world; ordinary poison veto85frames",
+    "paired_diagnostic_frames": 19200,
+    "camera_controls": "16cases all exactly match E02 same-input normal follow",
+    "prior_selftest_oracle_correction": "initial elite selftest incorrectly demanded zoom<1 for a footprint that fits viewport; corrected to actual framing center shift>1, original failed log retained, no runtime change for that failure"
+  }
+}

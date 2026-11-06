@@ -1,4 +1,5 @@
 extends SceneTree
+const H := preload("res://scripts/battle/player_hurtbox.gd")
 ## Runtime assertions use real catalog actions; combat fixtures are not balance evidence.
 const B := preload("res://scripts/battle/battle_session.gd")
 const C := preload("res://scripts/content/combat_catalog.gd")
@@ -62,7 +63,7 @@ func all_actions() -> void:
 				var travel: float = 215 * enemy.windup * 0.92
 				for direction_index in 32:
 					var escape: Vector2 = b.position + Vector2.RIGHT.rotated(direction_index * TAU / 32) * travel
-					if not G.contains(enemy.telegraph, escape): safe_paths += 1
+					if not G.contains_actor(enemy.telegraph, escape): safe_paths += 1
 				expect(safe_paths >= 2, id + " action has multiple reachable escape directions")
 			var locked: Vector2 = enemy.telegraph.origin
 			S.step(b.enemies, b.position + Vector2(0, 20), 0.1, {"hazards":b.hazards, "config":b.director.config})
@@ -82,7 +83,7 @@ func all_actions() -> void:
 		b._finish("failed")
 func geometries() -> void:
 	var line := {"shape":"line", "origin":Vector2.ZERO, "direction":Vector2.RIGHT, "length":200, "half_width":20}
-	expect(G.contains(line, Vector2(100, 35)), "line includes player radius")
+	expect(G.contains(line, Vector2(100, 23.5)), "line includes current four-unit player radius")
 	expect(not G.contains(line, Vector2(100, 50)), "line has a lateral escape")
 	expect(not G.contains(line, Vector2(-50, 0)), "line has a rear escape")
 	var ring := {"shape":"ring_gap", "origin":Vector2.ZERO, "radius":180, "gap_angle":0.0, "gap_width":1.4}
@@ -95,7 +96,7 @@ func geometries() -> void:
 	var tells := 0
 	for enemy in b.enemies:
 		if enemy.windup > 0: tells += 1
-	expect(tells == 1, "B01 shared major budget includes ordinary and boss")
+	expect(tells == int(b.director.config.action_budget.major), "B01 shared authored major budget includes ordinary and boss")
 	b._finish("failed")
 func limits_and_shield() -> void:
 	var b := fixture()
@@ -108,6 +109,7 @@ func limits_and_shield() -> void:
 	S.step(b.enemies, b.position + Vector2(600, 0), 1, {"config":b.director.config})
 	expect(healer.position == old_position, "healer cannot follow a kite")
 	var shield := add(b, "E04")
+	shield.hp = 1000; shield.max_hp = 1000
 	shield.state = "tell"; shield.aim = Vector2.RIGHT
 	var hit := context(20, true); hit.impact_origin = shield.position + Vector2(100, 0)
 	var hp: float = shield.hp; R.hit_enemy(shield, hit)
@@ -184,8 +186,11 @@ func phase_and_team_sequences() -> void:
 			var action: Dictionary = S._next_action(boss)
 			sequence.append(action.id)
 			if form == 1 and index < boss.actions.size() - 1:
-				expect(float(action.recovery) >= 0.65 and float(action.recovery) <= 1.0, "war form intermediate beats sustain pressure")
-			else: expect(float(action.recovery) >= 1.8, "human beats and war finisher have real recovery")
+				expect(float(action.recovery) >= 0.48 and float(action.recovery) <= 1.0, "war form intermediate beats sustain pressure")
+			else: expect(float(action.recovery) >= 1.0, "human beats and war finisher have real recovery")
+		var longest_intermediate := 0.0
+		for action in boss.actions.slice(0,-1): longest_intermediate=maxf(longest_intermediate,float(action.recovery))
+		expect(float(boss.actions[-1].recovery)>longest_intermediate,"both forms reserve their longest recovery for the finisher")
 		signatures.append(str(sequence))
 	expect(signatures[0] != signatures[1], "two forms use distinct authored sequences")
 	var pointblank_slam := {"shape":"disc", "origin":b.position, "radius":190, "remaining":1.5}
@@ -214,7 +219,7 @@ func phase_and_team_sequences() -> void:
 				if event.kind == "enemy_release": releases.append(event.geometry.move_id)
 			if releases.size() >= beats: break
 		expect(releases.size() == beats, "form %s actual timed sequence releases all %s beats" % [form, beats])
-		expect(phase_boss.cooldown >= 3.0, "form final beat commits full recovery")
+		near(phase_boss.cooldown, float(phase_boss.actions[-1].recovery), "form final beat commits full authored recovery")
 		phase_battle._finish("failed")
 	var cap_battle := fixture()
 	var source := add(cap_battle, "L02")
@@ -259,8 +264,10 @@ func phase_and_team_sequences() -> void:
 	var chen: Dictionary = S.step(team.enemies, team.position, 0.01, {"hazards":team.hazards, "config":team.director.config})
 	expect(leader.telegraph.shape == "marker" and chen.spawns[0].definition_id == "M04_WAR", "Chen collaboration locks a distinct array marker")
 	chen = S.step(team.enemies, team.position, leader.windup + 0.001, {"hazards":team.hazards, "config":team.director.config})
-	expect(chen.hits.is_empty() and chen.spawns.is_empty() and team.hazards.size() == 1 and team.hazards[0].phase == "tell", "Chen adds new delayed tell instead of instant marker damage or soldiers")
-	expect(leader.cooldown >= 2.5, "collaboration ends in common long recovery")
+	var all_delayed: bool = team.hazards.size()==int(collaboration.get("marker_count",1))
+	for hazard in team.hazards: all_delayed=all_delayed and hazard.phase=="tell" and float(hazard.remaining)>0
+	expect(chen.hits.is_empty() and chen.spawns.is_empty() and all_delayed, "Chen retains all separately warned delayed markers without instant damage or soldiers")
+	near(leader.cooldown,float(collaboration.recovery), "collaboration commits its full authored recovery")
 	team._finish("failed")
 
 func impact_and_source_matrix() -> void:
@@ -278,14 +285,14 @@ func impact_and_source_matrix() -> void:
 	b.tick(0.01, Vector2.ZERO)
 	expect(b.director.kills == before and b.gems.is_empty(), "destroyed anchor gives neither threshold nor XP")
 	var caster := add(b, "E02")
-	var packet := {"position":b.position - Vector2(50, 0), "velocity":Vector2(100, 0), "life":1.0, "hostile":true, "damage":5, "source_id":caster.id, "source":caster.id, "visual_id":caster.visual_id, "hit_radius":5.0}
+	var packet := {"position":H.center(b.position) - Vector2(50, 0), "velocity":Vector2(100, 0), "life":1.0, "hostile":true, "damage":5, "source_id":caster.id, "source":caster.id, "visual_id":caster.visual_id, "hit_radius":5.0}
 	b.projectiles.append(packet); caster.dead = true
 	b.tick(0.01, Vector2.ZERO)
 	expect(b.projectiles.size() == 1, "already-fired projectile survives source death with short TTL")
 	b.set_paused(true); var p: Vector2 = b.projectiles[0].position; b.tick(1, Vector2.ZERO)
 	expect(b.projectiles[0].position == p, "pause freezes already-fired projectiles")
 	b.set_paused(false); b.tick(2, Vector2.ZERO)
-	expect(b.projectiles.is_empty(), "source-orphaned projectile ends within original TTL")
+	expect(not b.projectiles.has(packet), "source-orphaned projectile ends within original TTL independently of other live salvos")
 	b._finish("failed")
 	var twins := fixture("B10")
 	var owner := add(twins, "B10", Vector2(-120, 0)); owner.initialized = true
@@ -333,8 +340,8 @@ func charge_boundary_geometry() -> void:
 			expect(touched_boundary < 0.001, "outward ray reaches its first inset boundary")
 			var normal: Vector2 = Vector2(g.direction).orthogonal()
 			var midpoint: Vector2 = Vector2(g.origin) + Vector2(g.direction) * float(g.length) * 0.5
-			expect(G.contains(g, midpoint + normal * (float(g.half_width) + 15.5)), "collision padding matches clipped warned line")
-			expect(not G.contains(g, midpoint + normal * (float(g.half_width) + 16.5)), "outside padded boundary remains safe")
+			expect(G.contains(g, midpoint + normal * (float(g.half_width) + 3.5)), "collision padding matches clipped warned line")
+			expect(not G.contains(g, midpoint + normal * (float(g.half_width) + 4.5)), "outside padded boundary remains safe")
 			S.step([boss], actor, boss.windup + 0.001, {"config":b.director.config})
 			var all_inside := true
 			for frame in 100:

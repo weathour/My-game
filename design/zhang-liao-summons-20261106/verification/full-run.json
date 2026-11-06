@@ -1,0 +1,25 @@
+{
+  "status": "launched",
+  "name": "zhang-liao-summons-project-check",
+  "runner_pid": 336725,
+  "started_at": 1793960666.567709,
+  "global_inputs": 1907,
+  "source_smoke_count": 65,
+  "input_sha256": "4bd12cc1c65dfa421e76ec6299e43cbb2616f864b7585e0e3074f84c79b12f74",
+  "binary": {
+    "path": "/home/weathour/.local/opt/godot-4.6.2/Godot_v4.6.2-stable_linux.x86_64",
+    "sha256": "5a806b2b385279d9607094d33e946ed828e9606df4cb46d258ca27468dc5c1c9"
+  },
+  "harness": {
+    "scripts/check_project.sh": "f45f877309bbc05f8b9cd5cc5b2c174383fbff86924c082f05cc298f3d204fd2",
+    "scripts/tests/check_project_reuse.py": "a26f9f09408255ae3f7e70ca0266df3ec7bdf694d2d7399758c656df5bdce098",
+    "scripts/tests/check_smoke_log.py": "b85ee7b7dfa4f2d8a64dcf5b78ab29109b984f0205736166e30f51cc3bb2a683",
+    "design/skill-presentation-20261105/verification/run_full_check.py": "35ac2cd3e878e99a17d9e157e1d6a693ca8c81c53aa8cf0a52f8e3dae0072f65"
+  },
+  "baseline": "frozen-inputs.json",
+  "reuse": null,
+  "status_path": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/zhang-liao-summons-project-check-status.json",
+  "stdout_path": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/zhang-liao-summons-project-check.log",
+  "log_directory": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/zhang-liao-summons-project-check",
+  "performance_gate": "same-load control completed; few tail increments retained; unloaded baseline incomparable"
+}

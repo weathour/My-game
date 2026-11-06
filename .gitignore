@@ -11,6 +11,9 @@
 /.kimi-code/
 __pycache__/
 *.pyc
+/tools/rhythm_tester/.venv/
+/tools/rhythm_tester/.native/
+/tools/rhythm_tester/results/
 .env
 .env.*
 !.env.example
@@ -22,6 +25,26 @@ __MACOSX/
 /design/**/Backups/
 /design/**/preview-frames/
 
+# Rebuildable per-frame Godot captures; version final clips, keyframes and audits.
+/design/**/movie-frames/
+
+# Superseded Zhang Liao capture matrices stay local; retain one image per failure.
+/design/zhang-liao-summons-20261106/verification/native/*.png
+/design/zhang-liao-summons-20261106/verification/native/*.png.import
+/design/zhang-liao-summons-20261106/verification/native-final/*.png
+/design/zhang-liao-summons-20261106/verification/native-final/*.png.import
+/design/zhang-liao-summons-20261106/verification/native-edge-fixed/*.png
+/design/zhang-liao-summons-20261106/verification/native-edge-fixed/*.png.import
+/design/zhang-liao-summons-20261106/verification/native-edge-pipeline/*.png
+/design/zhang-liao-summons-20261106/verification/native-edge-pipeline/*.png.import
+!/design/zhang-liao-summons-20261106/verification/native/960-war-gaoshun-comfort-bounds-failure.png
+!/design/zhang-liao-summons-20261106/verification/native/960-war-gaoshun-comfort-bounds-failure.png.import
+!/design/zhang-liao-summons-20261106/verification/native-final/960-war-chengong-normal-edge-close-bounds-failure.png
+!/design/zhang-liao-summons-20261106/verification/native-final/960-war-chengong-normal-edge-close-bounds-failure.png.import
+
+# An absolute output path must not create a second home tree inside the project.
+/home/
+
 # Downloaded visual references remain local; keep their source records.
 /design/**/reference/*.png
 /design/**/reference/*.jpg
@@ -29,3 +52,21 @@ __MACOSX/
 /design/**/reference/*.webp
 /design/**/reference/*.gif
 /design/**/reference/*.import
+
+# External Zhang Liao action-study downloads are local references, not game art.
+/design/zhang-liao-summons-20261106/references/*.mp4
+/design/zhang-liao-summons-20261106/references/*.jpg
+/design/zhang-liao-summons-20261106/references/*.html
+/design/zhang-liao-summons-20261106/references/*.import
+
+# Rebuildable MIDI-test renders; keep frozen MIDI, recipes, source locks and QA.
+/design/music-20261103-midi-test/trials/
+/design/music-20261103-midi-test/renders/
+/design/music-20261103-midi-test/mastering/
+/design/music-20261103-midi-test/**/*.wav
+/design/music-20261103-midi-test/**/*.flac
+/design/music-20261103-midi-test/**/*.mp3
+
+# Rebuildable skill-audio audition renders; production WAVs live under assets/.
+/design/skill-audio-20261103/audio/previews/
+/design/skill-audio-20261103/audio/tmp/

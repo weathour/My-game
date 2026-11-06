@@ -1,0 +1,66 @@
+{
+  "status": "passed",
+  "recorded_at": 1793946468.6326478,
+  "official_smokes": 63,
+  "official_source_smokes": 59,
+  "official_pack_smokes": 4,
+  "reused_source_smokes_from_current_partial": 40,
+  "fresh_source_smokes_in_recovered_run": 19,
+  "fresh_pack_smokes_in_recovered_run": 4,
+  "prior_round_results_reused": false,
+  "official_partial_elapsed_seconds": 777.571789264679,
+  "official_recovery_elapsed_seconds": 166.77999711036682,
+  "strict_log_validation": true,
+  "final_exit_code": 0,
+  "frozen_global_files": 1878,
+  "frozen_test_entries": 63,
+  "runtime_inputs_unchanged": true,
+  "binary_harness_entries_unchanged_since_final_freeze": true,
+  "targeted_info_checks": 1575,
+  "targeted_native_input_checks": 566,
+  "fixed_hover_stress_checks": 576,
+  "hover_stress_iterations": 18,
+  "native_sizes": [
+    [
+      960,
+      540
+    ],
+    [
+      1280,
+      720
+    ],
+    [
+      1920,
+      1080
+    ]
+  ],
+  "native_layouts": [
+    "legacy",
+    "team_band"
+  ],
+  "native_battle_reward_screenshots": 19,
+  "extra_same_pack_information_checks": 1575,
+  "extra_pack_external_script_byte_identical": true,
+  "extra_pack_empty_cwd": true,
+  "extra_source_project_res_fallback": false,
+  "no_additional_export": true,
+  "pack": {
+    "path": "/tmp/my-game-check.pM7fgF/pack-smokes/game.pck",
+    "bytes": 237767328,
+    "sha256": "8ff5f9dbdbca8e8ffd32a4a2648e5a0eed68aee782a2b04c14c9c0996c68b762"
+  },
+  "full_suite_audit": "full-suite-audit.json",
+  "extra_pack_audit": "extra-pack-audit.json",
+  "source_freeze": "frozen-inputs.json",
+  "targeted_results": "targeted-results.json",
+  "projection_scope_audit": "combat-catalog-projection-audit.json",
+  "initial_python_failure_preserved": "initial-run.json",
+  "partial_reflow_failure_preserved": "partial-run.json",
+  "initial_tooltip_failure_preserved": "hover-stress-before-layout-fix.log",
+  "harness_integration": "existing *_smoke.gd discovery registers both new scripts; *_render_smoke selects real GL path; no harness behavior change",
+  "remaining_work": [],
+  "final_character_screenshots": 9,
+  "final_character_native_log": "character-final-native.log",
+  "final_character_native_checks": 9,
+  "historical_owner_qa": "character-owner-screenshots.json"
+}

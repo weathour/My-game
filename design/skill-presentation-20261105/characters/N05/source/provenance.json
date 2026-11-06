@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "id": "N05",
+  "generator": "built-in image_gen.imagegen",
+  "selected": "source/asset-bundle-v1.png",
+  "selected_sha256": "87cfd667e17647d57866e80da411b318c9b52868b293e36732defee0b428b398",
+  "prompt": "source/prompt-v1.txt",
+  "references": [
+    {
+      "path": "design/skill-presentation-20261105/characters/N04/source/identity-reference.png",
+      "role": "identity family",
+      "sha256": "5287e6448cac05cb741d7c1a890969da0320a7d6448ed563d0bc4d50d6ed6274",
+      "source_sheet": "assets/ui/chronicle/cards/common-transparent.png",
+      "source_sheet_sha256": "97f64dc6b9fe57aa212724c65972084184a7fa98035e63abd908f06a8b270393",
+      "lossless_aseprite_crop_bbox": [
+        418,
+        0,
+        836,
+        627
+      ]
+    },
+    {
+      "path": "design/jia-combat-20261027/style-reference/character-animations.png",
+      "role": "pixel style only",
+      "sha256": "ad4ea4529a399df65569c5c37d85c0616bb6d09f594749c30818c283c85407c5"
+    }
+  ],
+  "selection": "Selected v1 after source inspection. No discarded image generations for this character.",
+  "body_poses": 16,
+  "portrait_independent": true,
+  "hit_reuses": [
+    "p01",
+    "p02"
+  ],
+  "export_command": "/home/weathour/programs/aseprite-src/build/bin/aseprite --batch --script-param id=N05 --script scripts/tools/import_chronicle_cast_art.lua",
+  "aseprite_version": "1.x-e784f4d-dev",
+  "prompt_sha256": "14b06b71277086b7faecc1b51f1041cccdec45caf722df93803fdadc20c3f6d1"
+}

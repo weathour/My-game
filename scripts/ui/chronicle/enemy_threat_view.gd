@@ -30,18 +30,49 @@ static func outline(g: Dictionary) -> PackedVector2Array:
 			for i in 64: points.append(center + Vector2.from_angle(TAU * i / 64) * radius)
 	return points
 
-static func draw(painter: CanvasItem, g: Dictionary, active: bool = false) -> void:
-	var points := outline(g)
-	if points.size() < 3: return
+## Ordinary visible bullets describe their danger with their own cores. Only a
+## deliberately aimed fast shot asks for a line; ground and melee areas stay exact.
+static func warning_policy(g: Dictionary) -> String:
+	var configured := str(g.get("warning_policy", ""))
+	if configured in ["area", "aim", "none"]: return configured
+	return "none" if str(g.get("action_id", "")) in ["shot", "fan"] else "area"
+
+static func is_area_impact(g: Dictionary) -> bool:
+	return not g.is_empty() and not bool(g.get("projectile_only", false)) and warning_policy(g) == "area" and float(g.get("damage", 1)) > 0
+
+static func impact_outline(g: Dictionary) -> PackedVector2Array:
+	return outline(g) if is_area_impact(g) else PackedVector2Array()
+
+static func visible(g: Dictionary) -> bool:
+	return warning_policy(g) != "none"
+
+static func draw(painter: CanvasItem, g: Dictionary, active: bool = false, world_scale: float = 1.0) -> void:
+	var policy := warning_policy(g)
+	if policy == "none": return
 	var phase := str(g.get("phase", "active" if active else "tell"))
 	var amount := clampf(1 - float(g.get("remaining", 0)) / maxf(.001, float(g.get("total", 1))), 0, 1)
 	var supportive: bool = str(g.get("action_id", "")) in ["heal", "command", "summon"]
-	var color := Color("9dccb4") if supportive else Color("ffb76f") if phase == "tell" else Color("ff694f")
-	# The body may cross this area; top-layer boundary remains visible above it.
-	painter.draw_colored_polygon(points, Color(color, .10 + .11 * amount if phase == "tell" else .24))
+	var color := Color("9dccb4") if supportive else Color("ffc075") if phase == "tell" else Color("ff7759")
+	var center: Vector2 = g.get("origin", Vector2.ZERO)
+	var stroke := 1.5 / maxf(.25, world_scale)
+	if policy == "aim":
+		if phase != "tell": return
+		var direction: Vector2 = g.get("direction", Vector2.RIGHT)
+		var reach := float(g.get("length", 0)) if str(g.get("shape", "")) == "line" else float(g.get("radius", 400))
+		var end := center + direction * reach
+		painter.draw_line(center, end, Color("1c1313", .75), stroke * 2.4, true)
+		painter.draw_line(center, end, Color(color, .72), stroke, true)
+		var tip := center + direction * minf(reach, 34.0)
+		painter.draw_polyline(PackedVector2Array([tip - direction.rotated(-.55) * 11, tip, tip - direction.rotated(.55) * 11]), color, stroke, true)
+		return
+	var points := outline(g)
+	if points.size() < 3: return
+	# Danger edges outrank decoration. Low-opacity interiors leave overlapping
+	# patterns, the controlled dot and solid projectiles readable at high density.
+	painter.draw_colored_polygon(points, Color(color, .035 + .035 * amount if phase == "tell" else .09))
 	var closed := points.duplicate()
 	closed.append(points[0])
-	painter.draw_polyline(closed, Color(color, .9), 2.0, true)
-	var center: Vector2 = g.get("origin", Vector2.ZERO)
+	painter.draw_polyline(closed, Color("21181b", .70), stroke * 2.5, true)
+	painter.draw_polyline(closed, Color(color, .92), stroke, true)
 	if phase == "tell":
-		painter.draw_arc(center, 9, -PI / 2, -PI / 2 + TAU * amount, 20, color, 2, true)
+		painter.draw_arc(center, 9, -PI / 2, -PI / 2 + TAU * amount, 20, color, stroke, true)

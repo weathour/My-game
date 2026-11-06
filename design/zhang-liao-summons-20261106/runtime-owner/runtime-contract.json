@@ -1,0 +1,141 @@
+{
+  "scope": "B17 collaboration presentation only; no enemy simulation, descriptor, timing, hp, input or rewards changes",
+  "events": [
+    "enemy_tell",
+    "enemy_release",
+    "enemy_hazard_release",
+    "boss_phase",
+    "kill",
+    "enemy_remove"
+  ],
+  "identity": [
+    "owner_id",
+    "form_index",
+    "action_serial"
+  ],
+  "hazard_identity_suffix": "marker_index only for enemy_hazard_release",
+  "phases": [
+    "order",
+    "manifest",
+    "advance",
+    "unfurl",
+    "array_tell",
+    "impact",
+    "recover",
+    "vanish"
+  ],
+  "timeline": {
+    "nominal_tell_sec": 1.4,
+    "nominal_total_sec": 2.9,
+    "reveal_fraction_of_tell": 0.25,
+    "gaoshun_contact": "actual enemy_release",
+    "chengong_contact": "actual enemy_hazard_release; primary +0.9sec and later existing markers, never inferred early"
+  },
+  "clips": {
+    "boss": {
+      "frames": 6,
+      "release_frame": 3,
+      "contact_frame": 3
+    },
+    "gaoshun": {
+      "frames": 8,
+      "release_frame": 4,
+      "contact_frame": 4
+    },
+    "chengong": {
+      "frames": 10,
+      "release_frame": 5,
+      "contact_frame": 7
+    }
+  },
+  "art_manifest": "assets/enemies/baimen/zhang_liao_summons/manifest.json",
+  "clip_lookup": "kind=effect => FX:role, otherwise visual_id:role; compiled texture once in warmup",
+  "canonical_source_frame": {
+    "frame_size": [
+      768,
+      640
+    ],
+    "anchor_px": [
+      384,
+      608
+    ],
+    "body_height_px": 224
+  },
+  "normalization": "Sprite local scale = original visual body_height / new clip body_height; parent keeps established world body height",
+  "api": [
+    "consume(events,battle)",
+    "sync(battle)",
+    "present_actor(enemy,node,battle)->bool",
+    "draw(painter,battle,visible_rect)",
+    "clear(reset_hidden=false)",
+    "snapshot()->detached primitives"
+  ],
+  "limits": {
+    "active_entries": 4,
+    "seen_keys": 256,
+    "pulses_per_entry": 4,
+    "cancelled_proxy_keys": 32,
+    "expected_actor_strips": 8,
+    "expected_FX_strips": 2,
+    "source_actor_frames": 60,
+    "source_FX_frames": 16,
+    "max_uncompressed_RGBA_MiB": 128.5,
+    "markers_per_entry": 5
+  },
+  "comfort": {
+    "reduced_motion": "suppress cosmetic proxy rush translation; retain contact frames and original warning geometry",
+    "reduced_flash": "halve FX alpha; no new camera shake/fullscreen flash"
+  },
+  "verification_scope_now": "Actual imported resources and production-event stateflow passed. Native visual quality and dense performance pending independent validation.",
+  "effect_source_frame_size": [
+    512,
+    512
+  ],
+  "FX": {
+    "gaoshun_entry": {
+      "frames": 8,
+      "release_frame": 4,
+      "contact_frame": 4,
+      "world_size": [
+        260,
+        260
+      ]
+    },
+    "chengong_seal": {
+      "frames": 8,
+      "release_frame": 4,
+      "contact_frame": 5,
+      "world_size": [
+        260,
+        260
+      ],
+      "markers": "separate actual hazard impact time per admitted marker; no whole-clip restart after hit"
+    }
+  },
+  "trace": "trace_draws defaults false; opt-in last_drawn_effects records actual painter frame/path/id/size; snapshot effect_frames gives each marker time/frame",
+  "self_checks": {
+    "startup_exit": 0,
+    "bounds_textures": 415,
+    "bounds_regions": 2087,
+    "resources_checks": 360,
+    "actual_frames": 76,
+    "alpha_readbacks": 0,
+    "state_checks": 560,
+    "native_not_claimed": true
+  },
+  "frozen_sha256": {
+    "scripts/ui/chronicle/zhang_liao_summon_presentation.gd": "383707184e9122f8b2b2b53340beded9fa9f3ab6160c3c2c59692cdf7f6ff800",
+    "scripts/ui/chronicle/enemy_actor.gd": "724eafa9653362b2c1b66cee1a6fdd2a5a0e5abd960ea87968428837c660616a",
+    "scripts/ui/chronicle/enemy_battle_effects.gd": "1bfc036fb8bad96467c2e11e4df9fc2a43126422e8d7ad786784ba55b53ea72d",
+    "scripts/ui/chronicle/battle_canvas.gd": "2013d1eb51e3dcc5ec2a0e30197de6d5bf37653c3b6689872d11631913ffd1ce",
+    "assets/enemies/baimen/zhang_liao_summons/manifest.json": "8959c84773ae430ea0d63aa6c20a1fa47d9af52fb3e84090e68939512e59bb78",
+    "assets/data/chronicle/battle_sprite_bounds.json": "265b6c9bdebb079693134edeae744de2581df75d416a1c39c0be0bd1ac801e09"
+  },
+  "visual_revision_2": {
+    "camera": "active proxy real sprite envelope merged with owner, separately cached only during collaboration",
+    "chengong_stage": "once per admission, side-front base ±200/+60; near-player alternate side, clipped using warmup cached opaque full-pose bounds; no sim or marker position mutation",
+    "normal_FX_alpha": 0.48,
+    "reduced_flash_FX_alpha": 0.24,
+    "native_status": "pending independent rerun after first-pass clipping/overlap findings"
+  }
+}

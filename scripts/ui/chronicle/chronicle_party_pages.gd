@@ -1,4 +1,5 @@
 extends RefCounted
+const JIA_APPEARANCE := preload("res://scripts/ui/chronicle/jia_appearance.gd")
 const T := preload("res://scripts/ui/chronicle/chronicle_theme.gd")
 const CARD := preload("res://scripts/ui/chronicle/chronicle_card.gd")
 const DRAG_CARD := preload("res://scripts/ui/chronicle/chronicle_party_drag_card.gd")
@@ -150,7 +151,7 @@ static func make_card(shell: Control, id: String, target_slot: int) -> Button:
 	var tag := "尚未入池" if id not in shell.session.data.pool else "未获得"
 	if owned: tag = "主角" if id == "JIA" else "辅助" if id in shell.session.data.party else ""
 	var subtitle: String = "Lv.%d · %s" % [shell.session.data.owned[id].level, person.role] if owned else person.role
-	card.configure(id, person.name, subtitle, tag, shell.selected_character == id, person.get("rarity", "common"))
+	card.configure(id, person.name, subtitle, tag, shell.selected_character == id, person.get("rarity", "common"), JIA_APPEARANCE.for_campaign(shell.session.data))
 	card.tooltip_text += "\n" + ("主角固定出战" if id == "JIA" else "尚未获得，可预览能力" if not owned else "已阵亡，无法上阵" if card.fallen else "请先完成本关选卡，再调整编队" if not shell.session.data.pending.is_empty() else "拖入辅助位；拖回人物列表移出编队。空格拾起，Tab选择位置，Enter放入，Esc取消。")
 	card.pressed.connect(func():
 		if DRAG_CARD.suppressing_click(shell): return

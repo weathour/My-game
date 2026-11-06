@@ -1,0 +1,46 @@
+{
+  "wrapper": "/tmp/camera-mob-native-1mldihis/boss_camera_native.gd",
+  "wrapper_sha256": "daf298e541ed932036a32dadcca5fc2f911312c69dbdc1efc6a834fe6c02f994",
+  "wrapper_scope": "adds only native NO_FOCUS; inherited original assertions and input",
+  "runs": [
+    {
+      "name": "boss-camera-native",
+      "command": [
+        "/home/weathour/.local/bin/godot-4.6.2",
+        "--rendering-method",
+        "gl_compatibility",
+        "--audio-driver",
+        "Dummy",
+        "--path",
+        "/home/weathour/programs/desktop-projects/My-game",
+        "--script",
+        "/tmp/camera-mob-native-1mldihis/boss_camera_native.gd",
+        "--",
+        "--capture=/home/weathour/programs/desktop-projects/My-game/design/camera-mob-framing-20261106/verification/native-boss"
+      ],
+      "returncode": 0,
+      "strict_failures": [],
+      "elapsed_seconds": 4.32049560546875
+    },
+    {
+      "name": "b17-edge-native",
+      "command": [
+        "/home/weathour/.local/bin/godot-4.6.2",
+        "--rendering-method",
+        "gl_compatibility",
+        "--audio-driver",
+        "Dummy",
+        "--path",
+        "/home/weathour/programs/desktop-projects/My-game",
+        "--script",
+        "res://scripts/tests/zhang_liao_summon_render_smoke.gd",
+        "--",
+        "--case=960-war-chengong-normal-edge-close",
+        "--capture=/home/weathour/programs/desktop-projects/My-game/design/camera-mob-framing-20261106/verification/native-b17-edge"
+      ],
+      "returncode": 0,
+      "strict_failures": [],
+      "elapsed_seconds": 3.919738531112671
+    }
+  ]
+}

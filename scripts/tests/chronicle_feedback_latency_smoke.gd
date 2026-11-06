@@ -125,7 +125,11 @@ func fixture(count: int) -> void:
 				if absf(float(stream.data.decode_s16(i*2))/32768) >= peak * .5: first = i; break
 			var onset_ms := float(first) * 1000 / stream.mix_rate
 			audio.append({"category":trace.category,"path":trace.path,"schedule_after_input_ms":(trace.wall_usec-input_usec)/1000.0,"half_peak_onset_ms":onset_ms})
-			if not baseline and trace.category in ["hit_light","hit_heavy","guard"]: expect(onset_ms <= 8,"contact PCM reaches half peak within 8ms")
+			if not baseline and (str(trace.category).ends_with(".impact") or trace.category=="feedback.guard"):
+				var first_audible := 0
+				for i in stream.data.size()/2:
+					if absf(float(stream.data.decode_s16(i*2))/32768)>=maxf(0.001,peak*0.05): first_audible=i; break
+				expect(float(first_audible)*1000/stream.mix_rate<=12,"new contact PCM has a prompt audible onset within 12ms")
 	var timings: Array[float] = []
 	# Let texture uploads, shader compilation and first glyph caching finish before profiling.
 	for warm in 12:

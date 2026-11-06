@@ -1,0 +1,97 @@
+{
+  "version": 1,
+  "status": "art_export_frozen_for_runtime_validation",
+  "runtime_root": "assets/enemies/baimen/zhang_liao_summons/",
+  "actor_frame_size": [
+    768,
+    640
+  ],
+  "actor_anchor_px": [
+    384,
+    608
+  ],
+  "actor_body_height_px": 224,
+  "faces_left": false,
+  "expected_actor_poses": 60,
+  "expected_effect_poses": 16,
+  "palette_policy": "Each actor visual_id shares its full approved existing runtime opaque RGB palette, all <=63 colors plus transparent index0; no actor recoloring or source redraw. Each FX independently <=64 total palette entries.",
+  "clips": {
+    "B17_human-order_gaoshun": {
+      "frames": 6,
+      "release_frame": 3,
+      "contact_frame": 3
+    },
+    "B17-order_gaoshun": {
+      "frames": 6,
+      "release_frame": 3,
+      "contact_frame": 3
+    },
+    "B17_human-order_chengong": {
+      "frames": 6,
+      "release_frame": 3,
+      "contact_frame": 3
+    },
+    "B17-order_chengong": {
+      "frames": 6,
+      "release_frame": 3,
+      "contact_frame": 3
+    },
+    "M03_human-gaoshun": {
+      "frames": 8,
+      "release_frame": 4,
+      "contact_frame": 4
+    },
+    "M03_WAR-gaoshun": {
+      "frames": 8,
+      "release_frame": 4,
+      "contact_frame": 4
+    },
+    "M04_human-chengong": {
+      "frames": 10,
+      "release_frame": 5,
+      "contact_frame": 7
+    },
+    "M04_WAR-chengong": {
+      "frames": 10,
+      "release_frame": 5,
+      "contact_frame": 7
+    },
+    "FX:gaoshun_entry": {
+      "frames": 8,
+      "anchor_px": [
+        256,
+        480
+      ],
+      "world_size": [
+        260,
+        260
+      ],
+      "frame_size": [
+        512,
+        512
+      ],
+      "release_frame": 4,
+      "contact_frame": 4
+    },
+    "FX:chengong_seal": {
+      "frames": 8,
+      "anchor_px": [
+        256,
+        256
+      ],
+      "world_size": [
+        260,
+        260
+      ],
+      "frame_size": [
+        512,
+        512
+      ],
+      "release_frame": 4,
+      "contact_frame": 5
+    }
+  },
+  "runtime_actor_scale": "External Sprite local scale=old manifest body/new224, with native actor profile unchanged; restore old profile on ordinary clip return.",
+  "runtime_effect_sampling": "Actual Gao entry window and each actual Chen marker impact; no extra attackable soldiers and no damage clock changes.",
+  "legacy_preserved": true
+}

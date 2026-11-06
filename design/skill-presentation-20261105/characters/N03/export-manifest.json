@@ -1,0 +1,125 @@
+{
+  "version": 1,
+  "visual_id": "N03",
+  "generator": "built-in image_gen.imagegen",
+  "exporter": "scripts/tools/import_chronicle_cast_art.lua",
+  "measurements": "measurements.json",
+  "source": {
+    "path": "source/asset-bundle-v1.png",
+    "size": [
+      1122,
+      1402
+    ],
+    "sha256": "d34d854ffae9907e8f8836d71555a8649b60bea3f0ee1cb12d27f9246870674b",
+    "standing_body_height": 259
+  },
+  "portrait_source": {
+    "path": "source/asset-bundle-v1.png",
+    "size": [
+      1122,
+      1402
+    ],
+    "sha256": "d34d854ffae9907e8f8836d71555a8649b60bea3f0ee1cb12d27f9246870674b",
+    "bbox": [
+      351,
+      1075,
+      745,
+      1393
+    ],
+    "independently_drawn": true
+  },
+  "body_height_px": 80,
+  "anchor_px": [
+    96,
+    176
+  ],
+  "faces_left": false,
+  "outputs": [
+    {
+      "path": "assets/players/chronicle-cast/N03/idle.png",
+      "size": [
+        768,
+        192
+      ],
+      "sha256": "4c7d53d2345690acc317be0e081a4a43489453f3b1631dd2cfb05c35034ac889"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N03/move.png",
+      "size": [
+        768,
+        192
+      ],
+      "sha256": "1f283f85fed2478d81eb3d762ebfc53d2f99ab774114f5cf31601646b1651be8"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N03/attack.png",
+      "size": [
+        768,
+        192
+      ],
+      "sha256": "6b8f4a804e601b1ed55ff330b4bb5123b9f8902451050c52fce43126879e51d2"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N03/special.png",
+      "size": [
+        768,
+        192
+      ],
+      "sha256": "2477c2aef279e7cb29311a465749575721e41b45f1ff2c7f719579f4dffb7515"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N03/hit.png",
+      "size": [
+        384,
+        192
+      ],
+      "sha256": "7efdd7d105829032417ea3e6e6886f36fc6e76ee59fd91ccb5290a9dda367a55"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N03/head.png",
+      "size": [
+        128,
+        128
+      ],
+      "sha256": "210c30a30a6a32c4b74034798b13e8841e3b861263edeff1141c6b1b875de85f"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N03/actor.aseprite",
+      "bytes": 39879,
+      "sha256": "2f8de5ce637465a6304f62a5eca93936ae8bdd588ac796ad7ef5a55d165be67f"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N03/attack.aseprite",
+      "bytes": 16987,
+      "sha256": "830283ba91e1fd88bdfac3d9166d7152d059038e4f1bf1fa0de050e9f97ec97e"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N03/head.aseprite",
+      "bytes": 2139,
+      "sha256": "183af960e67a3b3433a976dd769d853c1a9f0ea4665d33d92f28eeaa637895f0"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N03/hit.aseprite",
+      "bytes": 9874,
+      "sha256": "82fe1de02b75be1d7608d088d8669f45e5f46e5d0a69bd5e73e58a5d5e01a7fb"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N03/idle.aseprite",
+      "bytes": 18733,
+      "sha256": "8b2efd177f975da5dfa0eca30f7d9eb5cbe3ae08e59bfec8b0158e385bb4f0db"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N03/move.aseprite",
+      "bytes": 17177,
+      "sha256": "94f14e41ab8bc2964b5a0a08afb9fec375b2d785de98261520c1cf84ebe3e5de"
+    },
+    {
+      "path": "assets/players/chronicle-cast/N03/special.aseprite",
+      "bytes": 17758,
+      "sha256": "2e3c7b538078ae7c19e5cc4a5e92654c3c74a1ea53abea2f71ea5be983995c19"
+    }
+  ],
+  "review_status": "raster_audit_passed",
+  "source_review": "Source v1 selected; all sixteen unique body poses and separately authored bust reviewed. Hit is a two-pose reuse of idle p01/p02, not a newly drawn hit action.",
+  "qa": "qa.json"
+}

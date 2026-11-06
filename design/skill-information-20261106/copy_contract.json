@@ -1,0 +1,2259 @@
+{
+  "schema_version": 1,
+  "final_copy_path": "assets/data/chronicle/skill_information_copy.json",
+  "final_copy_shape": {
+    "schema_version": 1,
+    "characters": {
+      "<id>": {
+        "overview": "String",
+        "tags": [
+          "String"
+        ]
+      }
+    },
+    "abilities": {
+      "<ability id or explicit variant>": {
+        "summary": "String"
+      }
+    },
+    "templates": {
+      "<key>": "String with named {placeholder} substitutions"
+    },
+    "ui": {
+      "<key>": "Optional shared UI labels; INFO.ui(key,fallback)"
+    }
+  },
+  "formatting": "Runtime supplies already-formatted plain numbers; percent placeholders are percentages (e.g. 12), seconds are seconds. Template writes unit/sign. Extra template keys permitted. No copy of numeric kit tables.",
+  "characters": {
+    "JIA": {
+      "name_from_runtime": "贾苇索",
+      "required": [
+        "overview",
+        "tags"
+      ],
+      "trait_from_runtime": ""
+    },
+    "M01": {
+      "name_from_runtime": "吕布",
+      "required": [
+        "overview",
+        "tags"
+      ],
+      "trait_from_runtime": ""
+    },
+    "M02": {
+      "name_from_runtime": "张辽",
+      "required": [
+        "overview",
+        "tags"
+      ],
+      "trait_from_runtime": ""
+    },
+    "M03": {
+      "name_from_runtime": "高顺",
+      "required": [
+        "overview",
+        "tags"
+      ],
+      "trait_from_runtime": ""
+    },
+    "M04": {
+      "name_from_runtime": "陈宫",
+      "required": [
+        "overview",
+        "tags"
+      ],
+      "trait_from_runtime": ""
+    },
+    "M05": {
+      "name_from_runtime": "曹纯",
+      "required": [
+        "overview",
+        "tags"
+      ],
+      "trait_from_runtime": ""
+    },
+    "M06": {
+      "name_from_runtime": "曹休",
+      "required": [
+        "overview",
+        "tags"
+      ],
+      "trait_from_runtime": ""
+    },
+    "M07": {
+      "name_from_runtime": "臧霸",
+      "required": [
+        "overview",
+        "tags"
+      ],
+      "trait_from_runtime": ""
+    },
+    "M08": {
+      "name_from_runtime": "侯成",
+      "required": [
+        "overview",
+        "tags"
+      ],
+      "trait_from_runtime": ""
+    },
+    "F01": {
+      "name_from_runtime": "吕玲绮",
+      "required": [
+        "overview",
+        "tags"
+      ],
+      "trait_from_runtime": ""
+    },
+    "F02": {
+      "name_from_runtime": "蕾娜",
+      "required": [
+        "overview",
+        "tags"
+      ],
+      "trait_from_runtime": ""
+    },
+    "F03": {
+      "name_from_runtime": "田秀",
+      "required": [
+        "overview",
+        "tags"
+      ],
+      "trait_from_runtime": ""
+    },
+    "F04": {
+      "name_from_runtime": "钱绮罗",
+      "required": [
+        "overview",
+        "tags"
+      ],
+      "trait_from_runtime": "refund"
+    },
+    "F05": {
+      "name_from_runtime": "祝青蘅",
+      "required": [
+        "overview",
+        "tags"
+      ],
+      "trait_from_runtime": "curse"
+    },
+    "F06": {
+      "name_from_runtime": "秦雁",
+      "required": [
+        "overview",
+        "tags"
+      ],
+      "trait_from_runtime": "ammo"
+    },
+    "F07": {
+      "name_from_runtime": "马三娘",
+      "required": [
+        "overview",
+        "tags"
+      ],
+      "trait_from_runtime": ""
+    },
+    "F08": {
+      "name_from_runtime": "陶小满",
+      "required": [
+        "overview",
+        "tags"
+      ],
+      "trait_from_runtime": ""
+    },
+    "F09": {
+      "name_from_runtime": "柳晚晴",
+      "required": [
+        "overview",
+        "tags"
+      ],
+      "trait_from_runtime": ""
+    },
+    "F10": {
+      "name_from_runtime": "陆知微",
+      "required": [
+        "overview",
+        "tags"
+      ],
+      "trait_from_runtime": "relay"
+    },
+    "F11": {
+      "name_from_runtime": "艾玛",
+      "required": [
+        "overview",
+        "tags"
+      ],
+      "trait_from_runtime": "echo"
+    },
+    "N01": {
+      "name_from_runtime": "乡勇刀手",
+      "required": [
+        "overview",
+        "tags"
+      ],
+      "trait_from_runtime": "mark"
+    },
+    "N02": {
+      "name_from_runtime": "白门盾卒",
+      "required": [
+        "overview",
+        "tags"
+      ],
+      "trait_from_runtime": ""
+    },
+    "N03": {
+      "name_from_runtime": "陷阵盾卫",
+      "required": [
+        "overview",
+        "tags"
+      ],
+      "trait_from_runtime": ""
+    },
+    "N04": {
+      "name_from_runtime": "乡勇枪手",
+      "required": [
+        "overview",
+        "tags"
+      ],
+      "trait_from_runtime": ""
+    },
+    "N05": {
+      "name_from_runtime": "城门戟卒",
+      "required": [
+        "overview",
+        "tags"
+      ],
+      "trait_from_runtime": ""
+    },
+    "N06": {
+      "name_from_runtime": "陷阵锐卒",
+      "required": [
+        "overview",
+        "tags"
+      ],
+      "trait_from_runtime": ""
+    },
+    "N07": {
+      "name_from_runtime": "猎户弓手",
+      "required": [
+        "overview",
+        "tags"
+      ],
+      "trait_from_runtime": "mark"
+    },
+    "N08": {
+      "name_from_runtime": "白门弩手",
+      "required": [
+        "overview",
+        "tags"
+      ],
+      "trait_from_runtime": ""
+    },
+    "N09": {
+      "name_from_runtime": "曹军劲弩手",
+      "required": [
+        "overview",
+        "tags"
+      ],
+      "trait_from_runtime": "mark"
+    },
+    "N10": {
+      "name_from_runtime": "并州游骑",
+      "required": [
+        "overview",
+        "tags"
+      ],
+      "trait_from_runtime": ""
+    },
+    "N11": {
+      "name_from_runtime": "虎豹轻骑",
+      "required": [
+        "overview",
+        "tags"
+      ],
+      "trait_from_runtime": ""
+    },
+    "N12": {
+      "name_from_runtime": "虎豹重骑",
+      "required": [
+        "overview",
+        "tags"
+      ],
+      "trait_from_runtime": ""
+    },
+    "N13": {
+      "name_from_runtime": "游方符师",
+      "required": [
+        "overview",
+        "tags"
+      ],
+      "trait_from_runtime": ""
+    },
+    "N14": {
+      "name_from_runtime": "荒祠咒师",
+      "required": [
+        "overview",
+        "tags"
+      ],
+      "trait_from_runtime": "curse"
+    },
+    "N15": {
+      "name_from_runtime": "曹军祭师",
+      "required": [
+        "overview",
+        "tags"
+      ],
+      "trait_from_runtime": ""
+    },
+    "N16": {
+      "name_from_runtime": "行脚郎中",
+      "required": [
+        "overview",
+        "tags"
+      ],
+      "trait_from_runtime": ""
+    },
+    "N17": {
+      "name_from_runtime": "随军伙夫",
+      "required": [
+        "overview",
+        "tags"
+      ],
+      "trait_from_runtime": ""
+    },
+    "N18": {
+      "name_from_runtime": "军需小吏",
+      "required": [
+        "overview",
+        "tags"
+      ],
+      "trait_from_runtime": ""
+    }
+  },
+  "abilities": {
+    "JIA_basic": {
+      "character_id": "JIA",
+      "slot": "basic",
+      "title_from_runtime": "普攻",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "jia_sweep": {
+      "character_id": "JIA",
+      "slot": "manual",
+      "title_from_runtime": "横扫",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "jia_break": {
+      "character_id": "JIA",
+      "slot": "manual",
+      "title_from_runtime": "破阵",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "M01_basic": {
+      "character_id": "M01",
+      "slot": "basic",
+      "title_from_runtime": "普攻",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "M01_cleave": {
+      "character_id": "M01",
+      "slot": "manual",
+      "title_from_runtime": "方天破军",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "M01_rally": {
+      "character_id": "M01",
+      "slot": "manual",
+      "title_from_runtime": "鬼神降临",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "M01_support": {
+      "character_id": "M01",
+      "slot": "support",
+      "title_from_runtime": "掠阵横戟",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "M02_basic": {
+      "character_id": "M02",
+      "slot": "basic",
+      "title_from_runtime": "普攻",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "M02_dash": {
+      "character_id": "M02",
+      "slot": "manual",
+      "title_from_runtime": "破阵突击",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "M02_expose": {
+      "character_id": "M02",
+      "slot": "manual",
+      "title_from_runtime": "斩将",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "M02_support": {
+      "character_id": "M02",
+      "slot": "support",
+      "title_from_runtime": "追锋",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "M03_basic": {
+      "character_id": "M03",
+      "slot": "basic",
+      "title_from_runtime": "普攻",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "M03_guard": {
+      "character_id": "M03",
+      "slot": "manual",
+      "title_from_runtime": "陷阵守御",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "M03_field": {
+      "character_id": "M03",
+      "slot": "manual",
+      "title_from_runtime": "铁壁阵",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "M03_support": {
+      "character_id": "M03",
+      "slot": "support",
+      "title_from_runtime": "陷阵护盾",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "M04_basic": {
+      "character_id": "M04",
+      "slot": "basic",
+      "title_from_runtime": "普攻",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "M04_field": {
+      "character_id": "M04",
+      "slot": "manual",
+      "title_from_runtime": "阵前令",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "M04_bind": {
+      "character_id": "M04",
+      "slot": "manual",
+      "title_from_runtime": "锁魂阵",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "M04_support": {
+      "character_id": "M04",
+      "slot": "support",
+      "title_from_runtime": "阵中令",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "M05_basic": {
+      "character_id": "M05",
+      "slot": "basic",
+      "title_from_runtime": "普攻",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "M05_dash": {
+      "character_id": "M05",
+      "slot": "manual",
+      "title_from_runtime": "虎豹突贯",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "M05_rally": {
+      "character_id": "M05",
+      "slot": "manual",
+      "title_from_runtime": "催阵",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "M05_support": {
+      "character_id": "M05",
+      "slot": "support",
+      "title_from_runtime": "骑军掠阵",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "M06_basic": {
+      "character_id": "M06",
+      "slot": "basic",
+      "title_from_runtime": "普攻",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "M06_expose": {
+      "character_id": "M06",
+      "slot": "manual",
+      "title_from_runtime": "定点狙击",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "M06_dash": {
+      "character_id": "M06",
+      "slot": "manual",
+      "title_from_runtime": "退阵射",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "M06_support": {
+      "character_id": "M06",
+      "slot": "support",
+      "title_from_runtime": "定射",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "M07_basic": {
+      "character_id": "M07",
+      "slot": "basic",
+      "title_from_runtime": "普攻",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "M07_sweep": {
+      "character_id": "M07",
+      "slot": "manual",
+      "title_from_runtime": "扫寨",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "M07_rally": {
+      "character_id": "M07",
+      "slot": "manual",
+      "title_from_runtime": "聚众",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "M07_support": {
+      "character_id": "M07",
+      "slot": "support",
+      "title_from_runtime": "清围",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "M08_basic": {
+      "character_id": "M08",
+      "slot": "basic",
+      "title_from_runtime": "普攻",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "M08_break": {
+      "character_id": "M08",
+      "slot": "manual",
+      "title_from_runtime": "破坚",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "M08_guard": {
+      "character_id": "M08",
+      "slot": "manual",
+      "title_from_runtime": "固阵",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "M08_support": {
+      "character_id": "M08",
+      "slot": "support",
+      "title_from_runtime": "破甲援刺",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "F01_basic": {
+      "character_id": "F01",
+      "slot": "basic",
+      "title_from_runtime": "普攻",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "F01_dash": {
+      "character_id": "F01",
+      "slot": "manual",
+      "title_from_runtime": "绮锋突进",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "F01_expose": {
+      "character_id": "F01",
+      "slot": "manual",
+      "title_from_runtime": "裂阵",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "F01_support": {
+      "character_id": "F01",
+      "slot": "support",
+      "title_from_runtime": "飞锋援击",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "F02_basic": {
+      "character_id": "F02",
+      "slot": "basic",
+      "title_from_runtime": "普攻",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "F02_guard": {
+      "character_id": "F02",
+      "slot": "manual",
+      "title_from_runtime": "守势反击",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "F02_riposte": {
+      "character_id": "F02",
+      "slot": "manual",
+      "title_from_runtime": "迎锋斩",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "F02_support": {
+      "character_id": "F02",
+      "slot": "support",
+      "title_from_runtime": "护剑",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "F03_basic": {
+      "character_id": "F03",
+      "slot": "basic",
+      "title_from_runtime": "普攻",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "physician_heal": {
+      "character_id": "F03",
+      "slot": "manual",
+      "title_from_runtime": "回春",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "physician_ward": {
+      "character_id": "F03",
+      "slot": "manual",
+      "title_from_runtime": "护命",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "physician_support": {
+      "character_id": "F03",
+      "slot": "support",
+      "title_from_runtime": "敷药",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "F04_basic": {
+      "character_id": "F04",
+      "slot": "basic",
+      "title_from_runtime": "普攻",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "F04_settle": {
+      "character_id": "F04",
+      "slot": "manual",
+      "title_from_runtime": "集中结账",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "F04_supply": {
+      "character_id": "F04",
+      "slot": "manual",
+      "title_from_runtime": "应急补给",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "F04_support": {
+      "character_id": "F04",
+      "slot": "support",
+      "title_from_runtime": "护身碎银",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "F05_basic": {
+      "character_id": "F05",
+      "slot": "basic",
+      "title_from_runtime": "普攻",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "F05_curse": {
+      "character_id": "F05",
+      "slot": "manual",
+      "title_from_runtime": "青蘅符",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "F05_spread": {
+      "character_id": "F05",
+      "slot": "manual",
+      "title_from_runtime": "散咒",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "F05_support": {
+      "character_id": "F05",
+      "slot": "support",
+      "title_from_runtime": "缠咒",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "F06_basic": {
+      "character_id": "F06",
+      "slot": "basic",
+      "title_from_runtime": "普攻",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "F06_volley": {
+      "character_id": "F06",
+      "slot": "manual",
+      "title_from_runtime": "穿云齐射",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "F06_pin": {
+      "character_id": "F06",
+      "slot": "manual",
+      "title_from_runtime": "钉阵矢",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "F06_support": {
+      "character_id": "F06",
+      "slot": "support",
+      "title_from_runtime": "特制箭追射",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "F07_basic": {
+      "character_id": "F07",
+      "slot": "basic",
+      "title_from_runtime": "普攻",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "bandit_sweep": {
+      "character_id": "F07",
+      "slot": "manual",
+      "title_from_runtime": "寨风斩",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "bandit_thrust": {
+      "character_id": "F07",
+      "slot": "manual",
+      "title_from_runtime": "断阵刺",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "bandit_support": {
+      "character_id": "F07",
+      "slot": "support",
+      "title_from_runtime": "援斩",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "F08_basic": {
+      "character_id": "F08",
+      "slot": "basic",
+      "title_from_runtime": "普攻",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "F08_temper": {
+      "character_id": "F08",
+      "slot": "manual",
+      "title_from_runtime": "炉火淬刃",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "F08_break": {
+      "character_id": "F08",
+      "slot": "manual",
+      "title_from_runtime": "落锤",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "F08_support": {
+      "character_id": "F08",
+      "slot": "support",
+      "title_from_runtime": "余火淬刃",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "F09_basic": {
+      "character_id": "F09",
+      "slot": "basic",
+      "title_from_runtime": "普攻",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "F09_extend": {
+      "character_id": "F09",
+      "slot": "manual",
+      "title_from_runtime": "续一阕",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "F09_rally": {
+      "character_id": "F09",
+      "slot": "manual",
+      "title_from_runtime": "高歌",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "F09_support": {
+      "character_id": "F09",
+      "slot": "support",
+      "title_from_runtime": "轻歌",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "F10_basic": {
+      "character_id": "F10",
+      "slot": "basic",
+      "title_from_runtime": "普攻",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "F10_ward": {
+      "character_id": "F10",
+      "slot": "manual",
+      "title_from_runtime": "整册护身",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "F10_expose": {
+      "character_id": "F10",
+      "slot": "manual",
+      "title_from_runtime": "点破",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "F10_support": {
+      "character_id": "F10",
+      "slot": "support",
+      "title_from_runtime": "护行符",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "F11_basic": {
+      "character_id": "F11",
+      "slot": "basic",
+      "title_from_runtime": "普攻",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "emma_frost": {
+      "character_id": "F11",
+      "slot": "manual",
+      "title_from_runtime": "霜环",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "emma_star": {
+      "character_id": "F11",
+      "slot": "manual",
+      "title_from_runtime": "星火",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "emma_ice": {
+      "character_id": "F11",
+      "slot": "automatic",
+      "title_from_runtime": "冰星",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "emma_support": {
+      "character_id": "F11",
+      "slot": "support",
+      "title_from_runtime": "术法支援",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "N01_basic": {
+      "character_id": "N01",
+      "slot": "basic",
+      "title_from_runtime": "普攻",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "N01_strike": {
+      "character_id": "N01",
+      "slot": "manual",
+      "title_from_runtime": "蓄势一击",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "militia_support": {
+      "character_id": "N01",
+      "slot": "support",
+      "title_from_runtime": "援斩",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "N02_basic": {
+      "character_id": "N02",
+      "slot": "basic",
+      "title_from_runtime": "普攻",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "N02_ward": {
+      "character_id": "N02",
+      "slot": "manual",
+      "title_from_runtime": "举盾",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "N02_support": {
+      "character_id": "N02",
+      "slot": "support",
+      "title_from_runtime": "薄盾",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "N03_basic": {
+      "character_id": "N03",
+      "slot": "basic",
+      "title_from_runtime": "普攻",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "N03_guard": {
+      "character_id": "N03",
+      "slot": "manual",
+      "title_from_runtime": "陷阵重盾",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "N03_support": {
+      "character_id": "N03",
+      "slot": "support",
+      "title_from_runtime": "重盾援护",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "N04_basic": {
+      "character_id": "N04",
+      "slot": "basic",
+      "title_from_runtime": "普攻",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "N04_strike": {
+      "character_id": "N04",
+      "slot": "manual",
+      "title_from_runtime": "蓄势一击",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "spear_support": {
+      "character_id": "N04",
+      "slot": "support",
+      "title_from_runtime": "援刺",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "N05_basic": {
+      "character_id": "N05",
+      "slot": "basic",
+      "title_from_runtime": "普攻",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "N05_sweep": {
+      "character_id": "N05",
+      "slot": "manual",
+      "title_from_runtime": "戟门拦截",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "N05_support": {
+      "character_id": "N05",
+      "slot": "support",
+      "title_from_runtime": "援戟",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "N06_basic": {
+      "character_id": "N06",
+      "slot": "basic",
+      "title_from_runtime": "普攻",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "N06_break": {
+      "character_id": "N06",
+      "slot": "manual",
+      "title_from_runtime": "锐卒攻坚",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "N06_support": {
+      "character_id": "N06",
+      "slot": "support",
+      "title_from_runtime": "破坚援刺",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "N07_basic": {
+      "character_id": "N07",
+      "slot": "basic",
+      "title_from_runtime": "普攻",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "N07_strike": {
+      "character_id": "N07",
+      "slot": "manual",
+      "title_from_runtime": "蓄势一击",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "bow_support": {
+      "character_id": "N07",
+      "slot": "support",
+      "title_from_runtime": "援射",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "N08_basic": {
+      "character_id": "N08",
+      "slot": "basic",
+      "title_from_runtime": "普攻",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "N08_bolt": {
+      "character_id": "N08",
+      "slot": "manual",
+      "title_from_runtime": "贯阵弩",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "N08_support": {
+      "character_id": "N08",
+      "slot": "support",
+      "title_from_runtime": "贯穿援射",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "N09_basic": {
+      "character_id": "N09",
+      "slot": "basic",
+      "title_from_runtime": "普攻",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "N09_aim": {
+      "character_id": "N09",
+      "slot": "manual",
+      "title_from_runtime": "定敌弩",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "N09_support": {
+      "character_id": "N09",
+      "slot": "support",
+      "title_from_runtime": "连弩援射",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "N10_basic": {
+      "character_id": "N10",
+      "slot": "basic",
+      "title_from_runtime": "普攻",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "N10_dash": {
+      "character_id": "N10",
+      "slot": "manual",
+      "title_from_runtime": "游骑突围",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "N10_support": {
+      "character_id": "N10",
+      "slot": "support",
+      "title_from_runtime": "冲阵",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "N11_basic": {
+      "character_id": "N11",
+      "slot": "basic",
+      "title_from_runtime": "普攻",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "N11_dash": {
+      "character_id": "N11",
+      "slot": "manual",
+      "title_from_runtime": "轻骑逐敌",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "N11_support": {
+      "character_id": "N11",
+      "slot": "support",
+      "title_from_runtime": "掠锋",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "N12_basic": {
+      "character_id": "N12",
+      "slot": "basic",
+      "title_from_runtime": "普攻",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "N12_charge": {
+      "character_id": "N12",
+      "slot": "manual",
+      "title_from_runtime": "重骑压阵",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "N12_support": {
+      "character_id": "N12",
+      "slot": "support",
+      "title_from_runtime": "重冲",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "N13_basic": {
+      "character_id": "N13",
+      "slot": "basic",
+      "title_from_runtime": "普攻",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "N13_strike": {
+      "character_id": "N13",
+      "slot": "manual",
+      "title_from_runtime": "蓄势一击",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "N13_mana": {
+      "character_id": "N13",
+      "slot": "manual",
+      "title_from_runtime": "回元符",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "talisman_support": {
+      "character_id": "N13",
+      "slot": "support",
+      "title_from_runtime": "回元",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "N14_basic": {
+      "character_id": "N14",
+      "slot": "basic",
+      "title_from_runtime": "普攻",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "curse_bind": {
+      "character_id": "N14",
+      "slot": "manual",
+      "title_from_runtime": "缚行咒",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "curse_support": {
+      "character_id": "N14",
+      "slot": "support",
+      "title_from_runtime": "缚行咒",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "N15_basic": {
+      "character_id": "N15",
+      "slot": "basic",
+      "title_from_runtime": "普攻",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "N15_curse": {
+      "character_id": "N15",
+      "slot": "manual",
+      "title_from_runtime": "祭咒",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "N15_cashout": {
+      "character_id": "N15",
+      "slot": "manual",
+      "title_from_runtime": "催咒",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "N15_support": {
+      "character_id": "N15",
+      "slot": "support",
+      "title_from_runtime": "弱敌咒",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "N16_basic": {
+      "character_id": "N16",
+      "slot": "basic",
+      "title_from_runtime": "普攻",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "healer_aid": {
+      "character_id": "N16",
+      "slot": "manual",
+      "title_from_runtime": "急救",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "healer_support": {
+      "character_id": "N16",
+      "slot": "support",
+      "title_from_runtime": "敷药",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "N17_basic": {
+      "character_id": "N17",
+      "slot": "basic",
+      "title_from_runtime": "普攻",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "cook_guard": {
+      "character_id": "N17",
+      "slot": "manual",
+      "title_from_runtime": "护身",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "cook_support": {
+      "character_id": "N17",
+      "slot": "support",
+      "title_from_runtime": "热汤",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "N18_basic": {
+      "character_id": "N18",
+      "slot": "basic",
+      "title_from_runtime": "普攻",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "clerk_guard": {
+      "character_id": "N18",
+      "slot": "manual",
+      "title_from_runtime": "护身符",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "N18_rally": {
+      "character_id": "N18",
+      "slot": "manual",
+      "title_from_runtime": "行军令",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "clerk_support": {
+      "character_id": "N18",
+      "slot": "support",
+      "title_from_runtime": "军需援护",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Plain-language actual behavior. No raw engine distances or final HP-loss promise. Numeric/trigger rules are separate structured lines."
+    },
+    "JIA_basic:THRUST": {
+      "character_id": "JIA",
+      "slot": "basic",
+      "title_from_runtime": "突刺",
+      "required_copy": [
+        "summary"
+      ],
+      "summary_constraints": "Long-spear equipped variant, distinct from dao sweep. Same numeric source combat_catalog.basic."
+    }
+  },
+  "templates": {
+    "category.basic": {
+      "placeholders": [],
+      "meaning": "Localized ability category, no claim all characters have a trait."
+    },
+    "category.automatic": {
+      "placeholders": [],
+      "meaning": "Localized ability category, no claim all characters have a trait."
+    },
+    "category.manual": {
+      "placeholders": [],
+      "meaning": "Localized ability category, no claim all characters have a trait."
+    },
+    "category.support": {
+      "placeholders": [],
+      "meaning": "Localized ability category, no claim all characters have a trait."
+    },
+    "category.trait": {
+      "placeholders": [],
+      "meaning": "Localized ability category, no claim all characters have a trait."
+    },
+    "shape.SWEEP": {
+      "placeholders": [],
+      "meaning": "Qualitative shape/role only; do not output engine distance units."
+    },
+    "shape.THRUST": {
+      "placeholders": [],
+      "meaning": "Qualitative shape/role only; do not output engine distance units."
+    },
+    "shape.PROJECTILE": {
+      "placeholders": [],
+      "meaning": "Qualitative shape/role only; do not output engine distance units."
+    },
+    "shape.NOVA": {
+      "placeholders": [],
+      "meaning": "Qualitative shape/role only; do not output engine distance units."
+    },
+    "shape.HEAL": {
+      "placeholders": [],
+      "meaning": "Qualitative shape/role only; do not output engine distance units."
+    },
+    "shape.MANA": {
+      "placeholders": [],
+      "meaning": "Qualitative shape/role only; do not output engine distance units."
+    },
+    "shape.WARD": {
+      "placeholders": [],
+      "meaning": "Qualitative shape/role only; do not output engine distance units."
+    },
+    "damage_type.PHYSICAL": {
+      "placeholders": [],
+      "meaning": "Damage-type label."
+    },
+    "damage_type.MAGIC": {
+      "placeholders": [],
+      "meaning": "Damage-type label."
+    },
+    "scope.active": {
+      "placeholders": [],
+      "meaning": "Actual beneficiary scope; party means living assigned members."
+    },
+    "scope.self": {
+      "placeholders": [],
+      "meaning": "Actual beneficiary scope; party means living assigned members."
+    },
+    "scope.party": {
+      "placeholders": [],
+      "meaning": "Actual beneficiary scope; party means living assigned members."
+    },
+    "scope.lowest_hp": {
+      "placeholders": [],
+      "meaning": "Actual beneficiary scope; party means living assigned members."
+    },
+    "scope.lowest_mp": {
+      "placeholders": [],
+      "meaning": "Actual beneficiary scope; party means living assigned members."
+    },
+    "trigger.basic": {
+      "placeholders": [],
+      "meaning": "Current controlled character automatically attacks eligible targets."
+    },
+    "trigger.automatic": {
+      "placeholders": [],
+      "meaning": "Current controlled character automatically attempts this skill after unlock/cooldown."
+    },
+    "trigger.manual": {
+      "placeholders": [
+        "key"
+      ],
+      "meaning": "Explicit key activation; success requires level, MP, cooldown and target where required."
+    },
+    "trigger.support": {
+      "placeholders": [
+        "seconds"
+      ],
+      "meaning": "Assigned alive off-field character periodically attempts support, free MP."
+    },
+    "trigger.mark": {
+      "placeholders": [
+        "hits",
+        "seconds"
+      ],
+      "meaning": "Off-field support attempts after this many real foreground basic hits; actual support cooldown, not unused trait interval."
+    },
+    "trigger.ammo": {
+      "placeholders": [
+        "seconds"
+      ],
+      "meaning": "Off-field support reacts to foreground direct hits, bounded by actual support cooldown."
+    },
+    "trigger.trait": {
+      "placeholders": [],
+      "meaning": "Additional passive rules, not a separately pressed skill."
+    },
+    "fact.damage": {
+      "placeholders": [
+        "percent",
+        "damage_type"
+      ],
+      "meaning": "Base percentage of caster attack, not guaranteed HP loss."
+    },
+    "fact.heal": {
+      "placeholders": [
+        "amount",
+        "scope"
+      ],
+      "meaning": "Healing amount includes source level formula, subject to max HP."
+    },
+    "fact.mana": {
+      "placeholders": [
+        "amount",
+        "scope"
+      ],
+      "meaning": "MP restoration subject to recipient max MP."
+    },
+    "fact.shield": {
+      "placeholders": [
+        "amount",
+        "scope",
+        "cap_percent"
+      ],
+      "meaning": "Shield amount and total recipient HP-based shield cap."
+    },
+    "fact.slow": {
+      "placeholders": [
+        "percent",
+        "seconds"
+      ],
+      "meaning": "Slow strength and duration."
+    },
+    "fact.cooldown": {
+      "placeholders": [
+        "seconds"
+      ],
+      "meaning": "Cooldown or base attack interval in seconds."
+    },
+    "fact.cost": {
+      "placeholders": [
+        "amount"
+      ],
+      "meaning": "Nominal or current manual MP cost supplied by projection."
+    },
+    "fact.unlock": {
+      "placeholders": [
+        "level"
+      ],
+      "meaning": "Unlock level."
+    },
+    "fact.range": {
+      "placeholders": [
+        "shape"
+      ],
+      "meaning": "Qualitative shape; no naked world-unit distances."
+    },
+    "fact.echo_record": {
+      "placeholders": [
+        "charges",
+        "seconds"
+      ],
+      "meaning": "First layer: latest paid concrete spell replaces record, with charges and lifetime only. Strength scaling remains in expanded detail.echo_record_strength."
+    },
+    "condition.echo_record": {
+      "placeholders": [],
+      "meaning": "Off-field alive owner, another living teammate actually pays for successful manual skill; consumes one charge."
+    },
+    "detail.echo_record_snapshot": {
+      "placeholders": [],
+      "meaning": "Snapshot original prepared cast damage at recording, not current attack and not original enemy HP loss; original spell shape."
+    },
+    "detail.echo_record_secondary": {
+      "placeholders": [],
+      "meaning": "No original accessory/spark/paid recursion; aim/origin chosen at replay time."
+    },
+    "fact.expose": {
+      "placeholders": [
+        "percent",
+        "seconds"
+      ],
+      "meaning": "Vulnerability applied to surviving hit targets after damage."
+    },
+    "detail.expose": {
+      "placeholders": [],
+      "meaning": "Same class strongest multiplier, not additive."
+    },
+    "fact.guard": {
+      "placeholders": [
+        "scope",
+        "seconds",
+        "charges",
+        "reduction_percent",
+        "counter_percent"
+      ],
+      "meaning": "Finite guard lifetime, hostile-hit charges, reduction and counter scale."
+    },
+    "condition.guard": {
+      "placeholders": [],
+      "meaning": "Absorbed hostile hit can consume guard; owner and recipient need not be same."
+    },
+    "detail.guard": {
+      "placeholders": [],
+      "meaning": "Counter uses guard caster snapshot; no recursive hit/counter chain."
+    },
+    "fact.party_heal": {
+      "placeholders": [
+        "cap_percent"
+      ],
+      "meaning": "Per-recipient overheal becomes own shield capped by own max HP."
+    },
+    "condition.party_heal": {
+      "placeholders": [],
+      "meaning": "Living assigned recipients only; never resurrects."
+    },
+    "condition.refund_settle": {
+      "placeholders": [],
+      "meaning": "Settle remaining accounts owned by this character; no fresh refund copied; pays own cost/CD."
+    },
+    "fact.curse": {
+      "placeholders": [
+        "seconds",
+        "percent"
+      ],
+      "meaning": "Additional total curse damage from caster attack across duration, not damage every tick."
+    },
+    "detail.curse": {
+      "placeholders": [],
+      "meaning": "Same source refreshes, does not stack without bound."
+    },
+    "fact.curse_spread": {
+      "placeholders": [
+        "count",
+        "percent"
+      ],
+      "meaning": "Copies bounded fraction of pre-existing remaining curses to up to count nearby enemies."
+    },
+    "condition.curse_spread": {
+      "placeholders": [],
+      "meaning": "Requires pre-existing curse; no recursive spread."
+    },
+    "fact.curse_cashout": {
+      "placeholders": [
+        "percent"
+      ],
+      "meaning": "Settles/removes this fraction of existing remaining curse pool."
+    },
+    "condition.curse_cashout": {
+      "placeholders": [],
+      "meaning": "Base attack remains available without a curse."
+    },
+    "fact.ammo_volley": {
+      "placeholders": [
+        "count",
+        "percent"
+      ],
+      "meaning": "Spends up to count arrows; each increases this strike damage by percent."
+    },
+    "condition.ammo_volley": {
+      "placeholders": [],
+      "meaning": "Zero arrows retains base volley; MP/cooldown still required."
+    },
+    "fact.ammo_followup": {
+      "placeholders": [
+        "percent"
+      ],
+      "meaning": "One special arrow if available; otherwise this percentage of ordinary support damage."
+    },
+    "detail.ammo_followup": {
+      "placeholders": [],
+      "meaning": "No current foreground accessory and no recursive direct hit trigger."
+    },
+    "fact.shield_strike": {
+      "placeholders": [
+        "amount",
+        "percent"
+      ],
+      "meaning": "Consumes at most amount own shield, each point increases this strike damage by percent."
+    },
+    "condition.shield_strike": {
+      "placeholders": [],
+      "meaning": "Zero shield retains base attack; more shield also broadens reach, no engine units."
+    },
+    "fact.temper": {
+      "placeholders": [
+        "scope",
+        "seconds",
+        "percent"
+      ],
+      "meaning": "Direct attacks gain reach and bounded secondary spark; spark percent of temper caster snapshot attack."
+    },
+    "detail.temper": {
+      "placeholders": [],
+      "meaning": "Only direct foreground attacks; no support inheritance; spark does not retrigger hits."
+    },
+    "fact.extend": {
+      "placeholders": [
+        "seconds",
+        "cap_seconds"
+      ],
+      "meaning": "Extends other living teammates active echo/temper windows, total extension capped per instance."
+    },
+    "condition.extend": {
+      "placeholders": [],
+      "meaning": "Does not add charges, revive expired effects, extend self, or create a fresh window."
+    },
+    "fact.rally": {
+      "placeholders": [
+        "scope",
+        "seconds",
+        "attack_percent",
+        "speed_percent"
+      ],
+      "meaning": "Attack damage and basic attack speed buff, duration and recipient scope."
+    },
+    "detail.rally": {
+      "placeholders": [],
+      "meaning": "Same class strongest, no additive stacking."
+    },
+    "condition.dash_forward": {
+      "placeholders": [],
+      "meaning": "Advance along auto-aim direction; qualitative movement only."
+    },
+    "condition.dash_back": {
+      "placeholders": [],
+      "meaning": "Retreat opposite auto-aim direction; qualitative movement only."
+    },
+    "detail.dash": {
+      "placeholders": [],
+      "meaning": "Movement grants no invulnerability."
+    },
+    "fact.field": {
+      "placeholders": [
+        "seconds",
+        "interval",
+        "percent"
+      ],
+      "meaning": "Placed area lifetime, pulse interval and damage percentage of caster snapshot."
+    },
+    "fact.field_heal": {
+      "placeholders": [
+        "amount",
+        "scope"
+      ],
+      "meaning": "Per pulse heal to qualifying recipients within the area."
+    },
+    "fact.field_mana": {
+      "placeholders": [
+        "amount",
+        "scope"
+      ],
+      "meaning": "Per pulse mana to qualifying recipients within the area."
+    },
+    "detail.field": {
+      "placeholders": [],
+      "meaning": "Origin stays at deployment for current kits; source attribution/snapshot retained after leaving foreground; no paid recursion."
+    },
+    "trait.echo.fact": {
+      "placeholders": [
+        "charges",
+        "seconds"
+      ],
+      "meaning": "First layer: latest paid concrete spell replaces record, with charges and lifetime only. Strength scaling remains in expanded detail.echo_record_strength."
+    },
+    "trait.echo.condition": {
+      "placeholders": [],
+      "meaning": "Latest successful paid J/K replaces record; owner must be off field and alive for teammate actual paid trigger."
+    },
+    "trait.echo.detail": {
+      "placeholders": [],
+      "meaning": "Snapshot damage, diminished slow, no accessory/paid recursion."
+    },
+    "trait.mark.fact": {
+      "placeholders": [
+        "hits",
+        "seconds"
+      ],
+      "meaning": "Count threshold and actual support cooldown."
+    },
+    "trait.mark.condition": {
+      "placeholders": [],
+      "meaning": "Off-field/alive; actual foreground basic hit; count capped, failed CD attempt retains count until later valid hit."
+    },
+    "trait.mark.detail": {
+      "placeholders": [],
+      "meaning": "One cast hitting multiple targets is deduplicated; support/secondary hits do not build it."
+    },
+    "trait.ammo.fact": {
+      "placeholders": [
+        "capacity",
+        "initial",
+        "interval",
+        "amount",
+        "cast_amount",
+        "seconds"
+      ],
+      "meaning": "Capacity, initial arrows, timed refill, teammate paid refill and actual support cooldown."
+    },
+    "trait.ammo.condition": {
+      "placeholders": [],
+      "meaning": "Foreground basic does not spend arrows; off-field direct-hit follow-up spends at most one; no arrows has fallback."
+    },
+    "trait.ammo.detail": {
+      "placeholders": [],
+      "meaning": "Teammate refill requires successful actual MP payment, no secondary recursion."
+    },
+    "trait.refund.fact": {
+      "placeholders": [
+        "percent",
+        "seconds",
+        "ticks"
+      ],
+      "meaning": "Fraction of other teammate actual MP payment refunded to original payer over timed installments."
+    },
+    "trait.refund.condition": {
+      "placeholders": [],
+      "meaning": "Owner must be living assigned off-field; refund is not a fresh paid cast."
+    },
+    "trait.refund.detail": {
+      "placeholders": [],
+      "meaning": "Settlement only pays the outstanding balance, never copies it."
+    },
+    "trait.relay.fact": {
+      "placeholders": [
+        "percent",
+        "minimum"
+      ],
+      "meaning": "Different previous/current successful payer gets discount; actual minimum cost."
+    },
+    "trait.relay.condition": {
+      "placeholders": [],
+      "meaning": "Only successful actual paid manual casts update payer; switching and same payer do not qualify."
+    },
+    "trait.relay.detail": {
+      "placeholders": [],
+      "meaning": "Living assigned provider, strongest provider discount; no secondary trigger."
+    },
+    "trait.curse.fact": {
+      "placeholders": [
+        "interval",
+        "seconds",
+        "percent"
+      ],
+      "meaning": "Own direct nonmanual attacks apply bounded total curse damage, with interval."
+    },
+    "trait.curse.condition": {
+      "placeholders": [],
+      "meaning": "Not every hit; surviving targets, same-source refresh, no secondary recursion."
+    },
+    "trait.curse.detail": {
+      "placeholders": [],
+      "meaning": "Configured passive curse is separate from manual curse mechanics."
+    },
+    "missing.title": {
+      "placeholders": [],
+      "meaning": "Unconfigured key title."
+    },
+    "missing.summary": {
+      "placeholders": [],
+      "meaning": "Clearly no skill equipped; not a locked future skill."
+    },
+    "state.missing": {
+      "placeholders": [],
+      "meaning": "Reason for current manual availability; paused is separate boolean and does not mask reason."
+    },
+    "state.dead": {
+      "placeholders": [],
+      "meaning": "Reason for current manual availability; paused is separate boolean and does not mask reason."
+    },
+    "state.locked": {
+      "placeholders": [
+        "level"
+      ],
+      "meaning": "Reason for current manual availability; paused is separate boolean and does not mask reason."
+    },
+    "state.ended": {
+      "placeholders": [],
+      "meaning": "Reason for current manual availability; paused is separate boolean and does not mask reason."
+    },
+    "state.inactive": {
+      "placeholders": [],
+      "meaning": "Reason for current manual availability; paused is separate boolean and does not mask reason."
+    },
+    "state.cooldown": {
+      "placeholders": [
+        "seconds"
+      ],
+      "meaning": "Reason for current manual availability; paused is separate boolean and does not mask reason."
+    },
+    "state.mana": {
+      "placeholders": [
+        "amount"
+      ],
+      "meaning": "Reason for current manual availability; paused is separate boolean and does not mask reason."
+    },
+    "state.no_target": {
+      "placeholders": [],
+      "meaning": "Reason for current manual availability; paused is separate boolean and does not mask reason."
+    },
+    "state.ready": {
+      "placeholders": [],
+      "meaning": "Reason for current manual availability; paused is separate boolean and does not mask reason."
+    },
+    "heading.overview": {
+      "placeholders": [],
+      "meaning": "Optional shared UI heading/label."
+    },
+    "heading.basic": {
+      "placeholders": [],
+      "meaning": "Optional shared UI heading/label."
+    },
+    "heading.automatic": {
+      "placeholders": [],
+      "meaning": "Optional shared UI heading/label."
+    },
+    "heading.manual": {
+      "placeholders": [],
+      "meaning": "Optional shared UI heading/label."
+    },
+    "heading.support": {
+      "placeholders": [],
+      "meaning": "Optional shared UI heading/label."
+    },
+    "heading.trait": {
+      "placeholders": [],
+      "meaning": "Optional shared UI heading/label."
+    },
+    "heading.details": {
+      "placeholders": [],
+      "meaning": "Optional shared UI heading/label."
+    },
+    "heading.conditions": {
+      "placeholders": [],
+      "meaning": "Optional shared UI heading/label."
+    },
+    "heading.facts": {
+      "placeholders": [],
+      "meaning": "Optional shared UI heading/label."
+    },
+    "heading.owned": {
+      "placeholders": [],
+      "meaning": "Optional shared UI heading/label."
+    },
+    "heading.missing": {
+      "placeholders": [],
+      "meaning": "Optional shared UI heading/label."
+    },
+    "heading.empty_trait": {
+      "placeholders": [],
+      "meaning": "Optional shared UI heading/label."
+    },
+    "detail.shape.SWEEP": {
+      "placeholders": [],
+      "meaning": "Auto-aim toward eligible target, broad forward area can hit multiple; not manual aim."
+    },
+    "detail.shape.THRUST": {
+      "placeholders": [],
+      "meaning": "Auto-aim toward eligible target, all eligible enemies within narrow forward line; no target fails before cost/CD."
+    },
+    "detail.shape.PROJECTILE": {
+      "placeholders": [],
+      "meaning": "Actual travelling projectile resolves on contact; selected target is not guaranteed hit; eligible target required at cast."
+    },
+    "detail.shape.NOVA": {
+      "placeholders": [],
+      "meaning": "Around cast origin, may activate without enemies; cannot promise a target was hit."
+    },
+    "detail.shape.HEAL": {
+      "placeholders": [],
+      "meaning": "Living recipients only, max HP cap; source level determines healing increment."
+    },
+    "detail.shape.MANA": {
+      "placeholders": [],
+      "meaning": "Restores to living recipients with max MP cap, no resource duplication."
+    },
+    "detail.shape.WARD": {
+      "placeholders": [],
+      "meaning": "Total shield cap per recipient, no resurrection."
+    },
+    "trait.echo.summary": {
+      "placeholders": [],
+      "meaning": "Non-numeric concise description of this extra passive rule; facts retain all numeric rules. Do not duplicate the fact string."
+    },
+    "trait.mark.summary": {
+      "placeholders": [],
+      "meaning": "Non-numeric concise description of this extra passive rule; facts retain all numeric rules. Do not duplicate the fact string."
+    },
+    "trait.ammo.summary": {
+      "placeholders": [],
+      "meaning": "Non-numeric concise description of this extra passive rule; facts retain all numeric rules. Do not duplicate the fact string."
+    },
+    "trait.refund.summary": {
+      "placeholders": [],
+      "meaning": "Non-numeric concise description of this extra passive rule; facts retain all numeric rules. Do not duplicate the fact string."
+    },
+    "trait.relay.summary": {
+      "placeholders": [],
+      "meaning": "Non-numeric concise description of this extra passive rule; facts retain all numeric rules. Do not duplicate the fact string."
+    },
+    "trait.curse.summary": {
+      "placeholders": [],
+      "meaning": "Non-numeric concise description of this extra passive rule; facts retain all numeric rules. Do not duplicate the fact string."
+    },
+    "detail.echo_record_strength": {
+      "placeholders": [
+        "damage_percent",
+        "slow_percent"
+      ],
+      "meaning": "Expanded detail shared by concrete echo_record ability and echo trait: recorded prepared cast damage scaling and slow strength/duration scaling. Not original actual HP loss or recalculated current attack."
+    }
+  },
+  "runtime_api": {
+    "character": "character(id)->overview,tags",
+    "describe": "describe(view,slot,id)->summary,category,facts,conditions,details,trigger; slots basic/automatic/manual_j/manual_k/support/trait, aliases manual_J/K/manual accepted; key_facts adds effect/mechanic numeric rows only, excluding qualitative shape/cooldown/cost/unlock, for compact party summaries",
+    "trait": "describe({},trait,id)",
+    "manual_model": "manual_model(battle,id,slot int0/1); no mutation, states missing/dead/locked/ended/inactive/cooldown/mana/no_target/ready; paused separate",
+    "text": "text(key,values={}) uses templates; placeholders supplied by runtime, not parsed from old description",
+    "runtime_view": "runtime_view(battle,id,slot,index=0)-> view with actual actor level/attack/speed, manual effective mana_cost + nominal_mana_cost; live basic interval includes active rally speed window; no mutations"
+  },
+  "model_fields": {
+    "manual_model": [
+      "character_id",
+      "character_name",
+      "key",
+      "title",
+      "present",
+      "ability_id",
+      "summary",
+      "category",
+      "facts",
+      "conditions",
+      "details",
+      "trigger",
+      "cost",
+      "nominal_cost",
+      "remaining",
+      "cooldown",
+      "state",
+      "state_text",
+      "unlocked",
+      "paused",
+      "target_required",
+      "has_target"
+    ],
+    "runtime_view": [
+      "id",
+      "title",
+      "unlock_level",
+      "unlocked",
+      "level",
+      "attack",
+      "cooldown",
+      "mana_cost",
+      "nominal_mana_cost",
+      "reach",
+      "kind",
+      "damage_scale",
+      "slow",
+      "duration",
+      "damage_type",
+      "mechanic",
+      "params",
+      "target_scope"
+    ]
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "requested_pcm_buffer": {
+    "milliseconds": 50,
+    "sample_rate_hz": 48000,
+    "channels": 2,
+    "sample_format": "signed PCM16",
+    "requested_bytes": 9600
+  },
+  "live_output": {
+    "device": "WHP01K",
+    "qt_preferred_format_valid": false,
+    "qt_preferred_sample_format": "Unknown",
+    "requested_format_reported_supported": true,
+    "actual_qt_buffer_bytes_after_start": 9600,
+    "actual_qt_buffer_ms": 50,
+    "volume": 0.015,
+    "result": "PASS: start, position advance, pause/resume, seek restart, natural finish and stop completed with no AudioTransport errors.",
+    "backend_diagnostic": "Qt still logged 'No sample format supported found' for the WHP01K node, even though QAudioDevice reports the requested format supported and the live sink processed playback."
+  },
+  "teardown_policy": {
+    "reset_discard": [
+      "interactive seek",
+      "stop",
+      "close",
+      "reload/load replacement",
+      "backend failure"
+    ],
+    "stop_drain": [
+      "set_clicks mix rebuild",
+      "natural finish after QAudioSink IdleState"
+    ],
+    "presentation_offset": "Not applied in AudioTransport. position_seconds continues to return the Qt processed-PCM clock."
+  },
+  "verification": {
+    "unit_tests": "PASS: 15 passed, 1 opt-in live test skipped in default run (latest full audio suite).",
+    "live_audio_test": "PASS: opt-in live test on WHP01K at volume 0.015.",
+    "py_compile": "PASS",
+    "ruff": "Not run: Ruff executable/module is absent from the supplied project virtual environment."
+  },
+  "limits": [
+    "The 50 ms value is QAudioSink's actual Qt ring-buffer size, not an end-to-end audio latency measurement.",
+    "This change does not remove the previously observed 150 ms PipeWire Bluetooth sink latency and does not claim to fix acoustic synchronization.",
+    "The existing user tester process and its user data were left untouched."
+  ],
+  "logs": [
+    "audio-live-buffer-seek-finish.log",
+    "audio-unit-tests.log"
+  ]
+}

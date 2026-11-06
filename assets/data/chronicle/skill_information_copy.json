@@ -1,0 +1,844 @@
+{
+  "schema_version": 1,
+  "characters": {
+    "JIA": {
+      "overview": "近身横扫清群，破阵命中后让敌人更易受伤。",
+      "tags": [
+        "近战",
+        "易伤"
+      ]
+    },
+    "M01": {
+      "overview": "前台使敌人易伤并强化自身；后台以横戟支援。",
+      "tags": [
+        "近战",
+        "易伤",
+        "自身强化"
+      ]
+    },
+    "M02": {
+      "overview": "前台突进减速、斩将施加易伤；后台追锋也能减速。",
+      "tags": [
+        "突进",
+        "减速",
+        "易伤"
+      ]
+    },
+    "M03": {
+      "overview": "前台为队伍施盾并布阵，阵内持续伤敌、回血；后台为出场者加盾。",
+      "tags": [
+        "护盾",
+        "场域",
+        "治疗"
+      ]
+    },
+    "M04": {
+      "overview": "前台布阵伤敌并以锁魂阵减速；后台命中可使敌人易伤。",
+      "tags": [
+        "场域",
+        "减速",
+        "易伤"
+      ]
+    },
+    "M05": {
+      "overview": "前台突进贯阵并强化队伍；后台用直线攻击支援。",
+      "tags": [
+        "突进",
+        "队伍强化"
+      ]
+    },
+    "M06": {
+      "overview": "前台狙击施加易伤，退阵射可后撤；后台以定射支援。",
+      "tags": [
+        "远程",
+        "易伤",
+        "后撤"
+      ]
+    },
+    "M07": {
+      "overview": "前台扫寨清群并强化自身；后台清围伤敌。",
+      "tags": [
+        "范围攻击",
+        "自身强化"
+      ]
+    },
+    "M08": {
+      "overview": "前台突刺使敌人易伤并用护盾自保；后台援刺也可施加易伤。",
+      "tags": [
+        "易伤",
+        "护盾"
+      ]
+    },
+    "F01": {
+      "overview": "前台突进并使周围敌人易伤；后台以直线援击支援。",
+      "tags": [
+        "突进",
+        "易伤"
+      ]
+    },
+    "F02": {
+      "overview": "前台可守势减伤反击或施加易伤；后台为出场者提供守势。",
+      "tags": [
+        "守势",
+        "反击",
+        "易伤"
+      ]
+    },
+    "F03": {
+      "overview": "前台治疗和护盾支援队伍，溢出治疗转盾；后台治疗生命比例最低者。",
+      "tags": [
+        "治疗",
+        "护盾"
+      ]
+    },
+    "F04": {
+      "overview": "后台返还队友部分耗魔；前台可提前结账，为魔法比例最低者补魔。",
+      "tags": [
+        "回魔",
+        "耗魔返还"
+      ]
+    },
+    "F05": {
+      "overview": "前台施加咒伤并扩散已有咒伤；后台也能附咒。",
+      "tags": [
+        "持续伤害",
+        "咒伤扩散"
+      ]
+    },
+    "F06": {
+      "overview": "齐射可耗特制箭强化，钉阵矢可减速；后台追射无箭也能支援。",
+      "tags": [
+        "远程",
+        "特制箭",
+        "减速"
+      ]
+    },
+    "F07": {
+      "overview": "前台寨风斩清群，有盾时可耗盾强化断阵刺；后台援斩可减速。",
+      "tags": [
+        "近战",
+        "耗盾强化",
+        "减速"
+      ]
+    },
+    "F08": {
+      "overview": "前台淬刃强化直接攻击并以落锤施加易伤；后台也能为出场者淬刃。",
+      "tags": [
+        "淬刃",
+        "易伤"
+      ]
+    },
+    "F09": {
+      "overview": "前台延长队友生效中的回响与淬刃并强化队伍；后台也能延续这些效果。",
+      "tags": [
+        "效果延续",
+        "队伍强化"
+      ]
+    },
+    "F10": {
+      "overview": "配置存活时，不同人接续耗魔施法可减耗；技能提供护盾和易伤。",
+      "tags": [
+        "接续减耗",
+        "护盾",
+        "易伤"
+      ]
+    },
+    "F11": {
+      "overview": "霜环减速；J/K 成功耗魔留回响，存活在后台时队友耗魔可触发。",
+      "tags": [
+        "减速",
+        "法术回响"
+      ]
+    },
+    "N01": {
+      "overview": "前台横扫；后台配合出场者的普攻命中发起援斩。",
+      "tags": [
+        "近战",
+        "追击"
+      ]
+    },
+    "N02": {
+      "overview": "前台给自己施盾；后台为出场者提供护盾。",
+      "tags": [
+        "近战",
+        "护盾"
+      ]
+    },
+    "N03": {
+      "overview": "前台用重盾自保；后台为出场者施盾。",
+      "tags": [
+        "近战",
+        "护盾"
+      ]
+    },
+    "N04": {
+      "overview": "前台直线突刺，后台自动援刺。",
+      "tags": [
+        "直线攻击",
+        "后台支援"
+      ]
+    },
+    "N05": {
+      "overview": "前台范围拦截并减速，后台援戟也能减速。",
+      "tags": [
+        "范围攻击",
+        "减速"
+      ]
+    },
+    "N06": {
+      "overview": "前台攻坚和后台援刺都能使命中敌人易伤。",
+      "tags": [
+        "直线攻击",
+        "易伤"
+      ]
+    },
+    "N07": {
+      "overview": "前台远程射击，后台配合出场者的普攻命中追射。",
+      "tags": [
+        "远程",
+        "追击"
+      ]
+    },
+    "N08": {
+      "overview": "前台直线贯穿，后台用贯穿援射支援。",
+      "tags": [
+        "直线攻击",
+        "后台支援"
+      ]
+    },
+    "N09": {
+      "overview": "前台用定敌弩攻击，后台配合普攻命中触发连弩援射。",
+      "tags": [
+        "远程",
+        "追击"
+      ]
+    },
+    "N10": {
+      "overview": "前台向前突进，后台用冲阵支援。",
+      "tags": [
+        "突进",
+        "后台支援"
+      ]
+    },
+    "N11": {
+      "overview": "前台向前突进，后台掠锋可减速。",
+      "tags": [
+        "突进",
+        "减速"
+      ]
+    },
+    "N12": {
+      "overview": "前台突进时减速敌人，后台重冲也能减速。",
+      "tags": [
+        "突进",
+        "减速"
+      ]
+    },
+    "N13": {
+      "overview": "前台以符术攻击、为魔法比例最低者回魔；后台也能回魔。",
+      "tags": [
+        "远程",
+        "回魔"
+      ]
+    },
+    "N14": {
+      "overview": "前台施加咒伤并减速，普攻也可附咒；后台咒术同样能减速。",
+      "tags": [
+        "持续伤害",
+        "减速"
+      ]
+    },
+    "N15": {
+      "overview": "前台施加咒伤并可提前结算；后台使敌人易伤。",
+      "tags": [
+        "持续伤害",
+        "咒伤结算",
+        "易伤"
+      ]
+    },
+    "N16": {
+      "overview": "前台与后台都治疗生命比例最低的存活编队成员。",
+      "tags": [
+        "治疗"
+      ]
+    },
+    "N17": {
+      "overview": "前台可为自己施盾；后台热汤治疗生命比例最低的存活成员。",
+      "tags": [
+        "护盾",
+        "治疗"
+      ]
+    },
+    "N18": {
+      "overview": "前台施盾并强化队伍，后台也能强化出场者。",
+      "tags": [
+        "护盾",
+        "队伍强化"
+      ]
+    }
+  },
+  "ui": {
+    "playstyle": "玩法特点",
+    "character_overview": "玩法特点",
+    "foreground": "出场作战",
+    "mechanics": "额外机制",
+    "extra_mechanic": "额外机制",
+    "expand_details": "展开细节",
+    "collapse_details": "收起细节",
+    "not_equipped": "未配备",
+    "background_and_owned": "后台与持有",
+    "owned_condition": "获得后生效；未配置或阵亡仍保留。",
+    "skill_information": "技能说明",
+    "back_to_pause": "返回暂歇",
+    "resume": "继续战斗",
+    "hover_hint": "完整说明可在 Esc 暂歇中查看",
+    "pause_skill_help": "选择人物和技能查看说明",
+    "support": "后台支援",
+    "owned": "持有加成"
+  },
+  "abilities": {
+    "JIA_basic": {
+      "summary": "自动横扫前方敌人。"
+    },
+    "jia_sweep": {
+      "summary": "攻击周围的敌人。"
+    },
+    "jia_break": {
+      "summary": "贯穿直线上的敌人，使命中后存活的目标易伤。"
+    },
+    "M01_basic": {
+      "summary": "自动横扫前方敌人。"
+    },
+    "M01_cleave": {
+      "summary": "攻击周围敌人，使命中后存活的目标易伤。"
+    },
+    "M01_rally": {
+      "summary": "强化自己的直接攻击伤害与普攻速度。"
+    },
+    "M01_support": {
+      "summary": "横戟攻击前方敌人。"
+    },
+    "M02_basic": {
+      "summary": "自动攻击前方直线上的敌人。"
+    },
+    "M02_dash": {
+      "summary": "朝目标突进，并攻击、减速直线上的敌人。"
+    },
+    "M02_expose": {
+      "summary": "直线突刺，使命中后存活的目标易伤。"
+    },
+    "M02_support": {
+      "summary": "直线援击敌人并减速。"
+    },
+    "M03_basic": {
+      "summary": "自动攻击前方直线上的敌人。"
+    },
+    "M03_guard": {
+      "summary": "为存活编队成员提供护盾。"
+    },
+    "M03_field": {
+      "summary": "布阵持续伤敌；出场角色在阵内时为存活编队成员回血。"
+    },
+    "M03_support": {
+      "summary": "为出场角色提供护盾。"
+    },
+    "M04_basic": {
+      "summary": "自动发射弹体攻击目标。"
+    },
+    "M04_field": {
+      "summary": "布下阵地，持续攻击范围内敌人。"
+    },
+    "M04_bind": {
+      "summary": "攻击周围敌人并减速。"
+    },
+    "M04_support": {
+      "summary": "发射弹体，使命中后存活的目标易伤。"
+    },
+    "M05_basic": {
+      "summary": "自动攻击前方直线上的敌人。"
+    },
+    "M05_dash": {
+      "summary": "朝目标突进，并攻击直线上的敌人。"
+    },
+    "M05_rally": {
+      "summary": "强化存活编队成员的直接攻击伤害与普攻速度。"
+    },
+    "M05_support": {
+      "summary": "对直线上的敌人发起援击。"
+    },
+    "M06_basic": {
+      "summary": "自动发射弹体攻击目标。"
+    },
+    "M06_expose": {
+      "summary": "向目标射击，使命中后存活的目标易伤。"
+    },
+    "M06_dash": {
+      "summary": "向后撤退，并直线攻击敌人。"
+    },
+    "M06_support": {
+      "summary": "向目标发射弹体支援。"
+    },
+    "M07_basic": {
+      "summary": "自动横扫前方敌人。"
+    },
+    "M07_sweep": {
+      "summary": "攻击周围的敌人。"
+    },
+    "M07_rally": {
+      "summary": "强化自己的直接攻击伤害与普攻速度。"
+    },
+    "M07_support": {
+      "summary": "攻击出场角色周围的敌人。"
+    },
+    "M08_basic": {
+      "summary": "自动攻击前方直线上的敌人。"
+    },
+    "M08_break": {
+      "summary": "直线突刺，使命中后存活的目标易伤。"
+    },
+    "M08_guard": {
+      "summary": "为自己提供护盾。"
+    },
+    "M08_support": {
+      "summary": "直线援刺，使命中后存活的目标易伤。"
+    },
+    "F01_basic": {
+      "summary": "自动攻击前方直线上的敌人。"
+    },
+    "F01_dash": {
+      "summary": "朝目标突进，并攻击直线上的敌人。"
+    },
+    "F01_expose": {
+      "summary": "攻击周围敌人，使命中后存活的目标易伤。"
+    },
+    "F01_support": {
+      "summary": "对直线上的敌人发起援击。"
+    },
+    "F02_basic": {
+      "summary": "自动横扫前方敌人。"
+    },
+    "F02_guard": {
+      "summary": "架起守势，受到敌人攻击时减伤并反击。"
+    },
+    "F02_riposte": {
+      "summary": "直线攻击，使命中后存活的目标易伤。"
+    },
+    "F02_support": {
+      "summary": "为出场角色提供守势，受击时减伤并反击。"
+    },
+    "F03_basic": {
+      "summary": "自动发射弹体攻击目标。"
+    },
+    "physician_heal": {
+      "summary": "治疗存活编队成员，溢出治疗转为各自的护盾。"
+    },
+    "physician_ward": {
+      "summary": "为存活编队成员提供护盾。"
+    },
+    "physician_support": {
+      "summary": "治疗生命比例最低的存活编队成员。"
+    },
+    "F04_basic": {
+      "summary": "自动发射弹体攻击目标。"
+    },
+    "F04_settle": {
+      "summary": "提前结清由自己产生、尚未返给队友的魔法。"
+    },
+    "F04_supply": {
+      "summary": "为魔法比例最低的存活编队成员补魔。"
+    },
+    "F04_support": {
+      "summary": "发射碎银攻击敌人。"
+    },
+    "F05_basic": {
+      "summary": "自动发射弹体攻击目标。"
+    },
+    "F05_curse": {
+      "summary": "以符咒攻击敌人，附加咒伤并可扩散已有咒伤。"
+    },
+    "F05_spread": {
+      "summary": "攻击周围敌人，附加咒伤并可扩散已有咒伤。"
+    },
+    "F05_support": {
+      "summary": "以咒术攻击敌人并附加咒伤。"
+    },
+    "F06_basic": {
+      "summary": "自动发射弹体攻击目标。"
+    },
+    "F06_volley": {
+      "summary": "直线攻击敌人，可耗特制箭增加伤害；无箭仍可攻击。"
+    },
+    "F06_pin": {
+      "summary": "直线攻击敌人并减速。"
+    },
+    "F06_support": {
+      "summary": "前台直接攻击命中时可追射；有箭时耗箭，无箭仍可支援。"
+    },
+    "F07_basic": {
+      "summary": "自动横扫前方敌人。"
+    },
+    "bandit_sweep": {
+      "summary": "攻击周围的敌人。"
+    },
+    "bandit_thrust": {
+      "summary": "直线突刺，可消耗自身护盾强化；无盾仍可攻击。"
+    },
+    "bandit_support": {
+      "summary": "横扫前方敌人并减速。"
+    },
+    "F08_basic": {
+      "summary": "自动横扫前方敌人。"
+    },
+    "F08_temper": {
+      "summary": "为出场角色淬刃，强化直接攻击并附带次级火花。"
+    },
+    "F08_break": {
+      "summary": "攻击周围敌人，使命中后存活的目标易伤。"
+    },
+    "F08_support": {
+      "summary": "为出场角色淬刃，强化直接攻击并附带次级火花。"
+    },
+    "F09_basic": {
+      "summary": "自动发射弹体攻击目标。"
+    },
+    "F09_extend": {
+      "summary": "延长其他存活队友仍有效的回响记录和淬刃。"
+    },
+    "F09_rally": {
+      "summary": "强化存活编队成员的直接攻击伤害与普攻速度。"
+    },
+    "F09_support": {
+      "summary": "延长其他存活队友仍有效的回响记录和淬刃。"
+    },
+    "F10_basic": {
+      "summary": "自动发射弹体攻击目标。"
+    },
+    "F10_ward": {
+      "summary": "为自己提供护盾。"
+    },
+    "F10_expose": {
+      "summary": "发射弹体，使命中后存活的目标易伤。"
+    },
+    "F10_support": {
+      "summary": "为出场角色提供护盾。"
+    },
+    "F11_basic": {
+      "summary": "自动发射弹体攻击目标。"
+    },
+    "emma_frost": {
+      "summary": "攻击周围敌人并减速；成功耗魔后留下回响记录。"
+    },
+    "emma_star": {
+      "summary": "发射弹体攻击敌人；成功耗魔后留下回响记录。"
+    },
+    "emma_ice": {
+      "summary": "自动发射冰星，攻击并减速命中的敌人。"
+    },
+    "emma_support": {
+      "summary": "发射术法弹体攻击敌人。"
+    },
+    "N01_basic": {
+      "summary": "自动横扫前方敌人。"
+    },
+    "N01_strike": {
+      "summary": "横扫前方的敌人。"
+    },
+    "militia_support": {
+      "summary": "配合前台普攻命中，横扫前方敌人。"
+    },
+    "N02_basic": {
+      "summary": "自动横扫前方敌人。"
+    },
+    "N02_ward": {
+      "summary": "为自己提供护盾。"
+    },
+    "N02_support": {
+      "summary": "为出场角色提供护盾。"
+    },
+    "N03_basic": {
+      "summary": "自动攻击前方直线上的敌人。"
+    },
+    "N03_guard": {
+      "summary": "为自己提供护盾。"
+    },
+    "N03_support": {
+      "summary": "为出场角色提供护盾。"
+    },
+    "N04_basic": {
+      "summary": "自动攻击前方直线上的敌人。"
+    },
+    "N04_strike": {
+      "summary": "直线突刺敌人。"
+    },
+    "spear_support": {
+      "summary": "直线援刺敌人。"
+    },
+    "N05_basic": {
+      "summary": "自动横扫前方敌人。"
+    },
+    "N05_sweep": {
+      "summary": "攻击周围敌人并减速。"
+    },
+    "N05_support": {
+      "summary": "横扫前方敌人并减速。"
+    },
+    "N06_basic": {
+      "summary": "自动攻击前方直线上的敌人。"
+    },
+    "N06_break": {
+      "summary": "直线攻击，使命中后存活的目标易伤。"
+    },
+    "N06_support": {
+      "summary": "直线援刺，使命中后存活的目标易伤。"
+    },
+    "N07_basic": {
+      "summary": "自动发射弹体攻击目标。"
+    },
+    "N07_strike": {
+      "summary": "向目标发射一箭。"
+    },
+    "bow_support": {
+      "summary": "配合前台普攻命中，向敌人发射援箭。"
+    },
+    "N08_basic": {
+      "summary": "自动攻击前方直线上的敌人。"
+    },
+    "N08_bolt": {
+      "summary": "直线贯穿敌人。"
+    },
+    "N08_support": {
+      "summary": "向直线上的敌人发起贯穿援射。"
+    },
+    "N09_basic": {
+      "summary": "自动发射弹体攻击目标。"
+    },
+    "N09_aim": {
+      "summary": "向目标发射弩箭。"
+    },
+    "N09_support": {
+      "summary": "配合前台普攻命中，向敌人发射援箭。"
+    },
+    "N10_basic": {
+      "summary": "自动攻击前方直线上的敌人。"
+    },
+    "N10_dash": {
+      "summary": "朝目标突进，并攻击直线上的敌人。"
+    },
+    "N10_support": {
+      "summary": "直线攻击敌人。"
+    },
+    "N11_basic": {
+      "summary": "自动攻击前方直线上的敌人。"
+    },
+    "N11_dash": {
+      "summary": "朝目标突进，并攻击直线上的敌人。"
+    },
+    "N11_support": {
+      "summary": "直线攻击敌人并减速。"
+    },
+    "N12_basic": {
+      "summary": "自动攻击前方直线上的敌人。"
+    },
+    "N12_charge": {
+      "summary": "朝目标突进，并攻击、减速直线上的敌人。"
+    },
+    "N12_support": {
+      "summary": "直线攻击敌人并减速。"
+    },
+    "N13_basic": {
+      "summary": "自动发射弹体攻击目标。"
+    },
+    "N13_strike": {
+      "summary": "发射弹体攻击敌人。"
+    },
+    "N13_mana": {
+      "summary": "为魔法比例最低的存活编队成员补魔。"
+    },
+    "talisman_support": {
+      "summary": "为魔法比例最低的存活编队成员补魔。"
+    },
+    "N14_basic": {
+      "summary": "自动发射弹体攻击目标。"
+    },
+    "curse_bind": {
+      "summary": "攻击周围敌人，附加咒伤并减速。"
+    },
+    "curse_support": {
+      "summary": "发射咒术弹体，附加咒伤并减速。"
+    },
+    "N15_basic": {
+      "summary": "自动发射弹体攻击目标。"
+    },
+    "N15_curse": {
+      "summary": "发射咒术弹体，对命中敌人附加咒伤。"
+    },
+    "N15_cashout": {
+      "summary": "攻击敌人并提前结算其已有咒伤；无咒伤仍可攻击。"
+    },
+    "N15_support": {
+      "summary": "发射咒术弹体，使命中后存活的目标易伤。"
+    },
+    "N16_basic": {
+      "summary": "自动横扫前方敌人。"
+    },
+    "healer_aid": {
+      "summary": "治疗生命比例最低的存活编队成员。"
+    },
+    "healer_support": {
+      "summary": "治疗生命比例最低的存活编队成员。"
+    },
+    "N17_basic": {
+      "summary": "自动横扫前方敌人。"
+    },
+    "cook_guard": {
+      "summary": "为自己提供护盾。"
+    },
+    "cook_support": {
+      "summary": "治疗生命比例最低的存活编队成员。"
+    },
+    "N18_basic": {
+      "summary": "自动横扫前方敌人。"
+    },
+    "clerk_guard": {
+      "summary": "为自己提供护盾。"
+    },
+    "N18_rally": {
+      "summary": "强化存活编队成员的直接攻击伤害与普攻速度。"
+    },
+    "clerk_support": {
+      "summary": "强化出场角色的直接攻击伤害与普攻速度。"
+    },
+    "JIA_basic:THRUST": {
+      "summary": "自动突刺，攻击前方直线上的敌人。"
+    }
+  },
+  "templates": {
+    "category.basic": "自动普攻",
+    "category.automatic": "常规自动技",
+    "category.manual": "手动技能",
+    "category.support": "后台支援",
+    "category.trait": "额外机制",
+    "shape.SWEEP": "前方扇形",
+    "shape.THRUST": "前方直线",
+    "shape.PROJECTILE": "飞行弹体",
+    "shape.NOVA": "周围范围",
+    "shape.HEAL": "治疗",
+    "shape.MANA": "回魔",
+    "shape.WARD": "护盾",
+    "damage_type.PHYSICAL": "物理",
+    "damage_type.MAGIC": "魔法",
+    "scope.active": "出场角色",
+    "scope.self": "施放者本人",
+    "scope.party": "所有存活编队成员",
+    "scope.lowest_hp": "生命比例最低的存活编队成员",
+    "scope.lowest_mp": "魔法比例最低的存活编队成员",
+    "trigger.basic": "出场时自动攻击目标，不耗魔法。",
+    "trigger.automatic": "出场时满足解锁与冷却条件后自动尝试，不耗魔法。",
+    "trigger.manual": "按 {key} 使用；须满足等级、魔法、冷却和该招的目标条件。",
+    "trigger.support": "配置、存活且处于后台时，每 {seconds} 秒尝试支援，不耗魔法。",
+    "trigger.mark": "配置、存活且处于后台时，前台普攻命中累计 {hits} 次后尝试支援；支援冷却 {seconds} 秒。",
+    "trigger.ammo": "配置、存活且处于后台时，前台直接攻击命中可触发追射；支援冷却 {seconds} 秒。",
+    "trigger.trait": "满足条件时自动生效，无需单独按键。",
+    "fact.damage": "基础伤害：{percent}% 攻击力（{damage_type}）",
+    "fact.heal": "{scope}恢复 {amount} 生命。",
+    "fact.mana": "{scope}恢复 {amount} 魔法。",
+    "fact.shield": "为{scope}提供 {amount} 护盾；每人总盾不超过自身生命上限的 {cap_percent}%。",
+    "fact.slow": "减速 {percent}%，持续 {seconds} 秒。",
+    "fact.cooldown": "冷却 {seconds} 秒",
+    "fact.cost": "{amount} 魔法",
+    "fact.unlock": "{level} 级解锁",
+    "fact.range": "{shape}",
+    "fact.echo_record": "本次技能替换旧记录，可回响 {charges} 次，持续 {seconds} 秒。",
+    "condition.echo_record": "本人配置、存活且在后台时，其他存活队友实际耗魔施放手动技能会消耗一次记录。",
+    "detail.echo_record_snapshot": "回响沿用原技能形状和记录时的施放伤害；目标在回响实际命中时的防护、易伤等仍影响最终伤害。",
+    "detail.echo_record_secondary": "回响在触发时确定起点与方向；不继承饰品附魔，也不会再次触发耗魔或次级追击。",
+    "fact.expose": "伤害结算后，命中且存活的目标易伤 {seconds} 秒，受到的后续伤害增加 {percent}%。",
+    "detail.expose": "同类易伤取最强，不相加；本次新施加的易伤不加强本次命中。",
+    "fact.guard": "为{scope}提供 {seconds} 秒守势，可触发 {charges} 次减伤反击；减伤 {reduction_percent}%，反击基础伤害为守势提供者施放效果时攻击力的 {counter_percent}%。",
+    "condition.guard": "敌击即使被护盾吸收也可触发；守势提供者和受益者可以不同。",
+    "detail.guard": "反击使用守势提供者施放效果时的攻击力快照，不会递归触发命中或反击。",
+    "fact.party_heal": "溢出治疗转为各人的护盾；总盾不超过各自生命上限的 {cap_percent}%。",
+    "condition.party_heal": "只作用于存活的本关编队成员，不会复活。",
+    "condition.refund_settle": "尝试返还该角色产生的待返余额；目标阵亡或魔法已满时无法实际收满。本技能仍耗魔并进入冷却，不复制收益。",
+    "fact.curse": "附加咒伤：{seconds} 秒内累计造成攻击力 {percent}% 的伤害。",
+    "detail.curse": "同来源咒伤刷新，不会无限叠加。",
+    "fact.curse_spread": "已有咒伤可向附近至多 {count} 个敌人复制剩余咒伤的 {percent}%。",
+    "condition.curse_spread": "目标须原有咒伤才会传播；传播不会再次递归。",
+    "fact.curse_cashout": "提前结算并移除已有剩余咒伤的 {percent}%。",
+    "condition.curse_cashout": "目标没有咒伤时仍有基础攻击。",
+    "fact.ammo_volley": "最多消耗 {count} 支特制箭，每支使本击伤害增加 {percent}%。",
+    "condition.ammo_volley": "没有特制箭时仍有基础齐射，仍需支付魔法并进入冷却。",
+    "fact.ammo_followup": "有特制箭时消耗 1 支；无箭时改为 {percent}% 威力的普通支援。",
+    "detail.ammo_followup": "追射不继承出场角色的饰品，也不会递归触发直接命中。",
+    "fact.shield_strike": "最多消耗自身 {amount} 点护盾；每点使本击伤害增加 {percent}%。",
+    "condition.shield_strike": "无盾仍可发动基础攻击；范围按消耗护盾的比例扩大，满额时增幅最大。",
+    "fact.temper": "在 {seconds} 秒内，{scope}的直接攻击范围增加并附带次级火花；火花基础伤害为淬刃提供者施放效果时攻击力的 {percent}%。",
+    "detail.temper": "仅直接前台攻击生效；后台支援不继承，火花不再次触发命中。",
+    "fact.extend": "其他存活队友的有效回响记录与淬刃延长 {seconds} 秒；每个效果累计延长最多 {cap_seconds} 秒。",
+    "condition.extend": "不补次数，不恢复已结束的效果，也不延长自己的效果。",
+    "fact.rally": "{scope}的直接攻击伤害增加 {attack_percent}%，普攻速度增加 {speed_percent}%，持续 {seconds} 秒。",
+    "detail.rally": "同类强化取最强，不相加。",
+    "condition.dash_forward": "沿自动选定目标的方向向前突进。",
+    "condition.dash_back": "朝自动选定目标的反方向后撤。",
+    "detail.dash": "位移本身不提供无敌。",
+    "fact.field": "阵地持续 {seconds} 秒，每 {interval} 秒造成施放者攻击力 {percent}% 的基础伤害。",
+    "fact.field_heal": "出场角色在阵内时，{scope}每次恢复 {amount} 生命。",
+    "fact.field_mana": "出场角色在阵内时，{scope}每次恢复 {amount} 魔法。",
+    "detail.field": "阵地留在施放位置；切人后保留来源和施放时快照，不再次触发耗魔联动。",
+    "trait.echo.fact": "最近一次成功耗魔的技能留下 {charges} 次回响，持续 {seconds} 秒。",
+    "trait.echo.condition": "最近一次成功耗魔的 J 或 K 替换旧记录；本人存活且在后台时，其他存活队友实际耗魔施法才会触发。",
+    "trait.echo.detail": "回响使用原技能施放时的伤害快照，按命中时目标状态结算；不继承饰品附魔，也不再触发耗魔联动。",
+    "trait.mark.fact": "普攻命中累计 {hits} 次后尝试支援；支援冷却 {seconds} 秒。",
+    "trait.mark.condition": "本人须配置、存活且在后台；冷却中计满会保留，后续普攻再次命中时才尝试。",
+    "trait.mark.detail": "同一次攻击连续命中多名敌人只累计一次；支援与次级伤害不计。",
+    "trait.ammo.fact": "特制箭上限 {capacity} 支，进关 {initial} 支；每 {interval} 秒补 {amount} 支，其他队友成功耗魔补 {cast_amount} 支；后台追射冷却 {seconds} 秒。",
+    "trait.ammo.condition": "配置且存活时可按时补箭；前台普攻不耗箭，后台追射有箭时至多消耗 1 支，无箭仍有普通支援。",
+    "trait.ammo.detail": "队友补箭须成功实际支付魔法，次级效果不触发补箭。",
+    "trait.refund.fact": "其他队友实际耗魔的 {percent}% 在 {seconds} 秒内分 {ticks} 次返还原施法者。",
+    "trait.refund.condition": "生成返还记录时，本人须配置、存活且在后台；返还不算新的耗魔施法。",
+    "trait.refund.detail": "返还不超过原施法者的魔法上限，阵亡时无法接收；提前结账只结清尚未返还的余额，不复制收益。",
+    "trait.relay.fact": "不同人物接续耗魔施法时，下次耗魔减少 {percent}%；原耗魔超过 {minimum} 时，折后不低于 {minimum}。",
+    "trait.relay.condition": "仅成功实际耗魔的手动技能记入施法者；单纯切人或同一人连续施法不会获得减耗。",
+    "trait.relay.detail": "提供者须已配置且存活；多个同类效果取最强，次级效果不触发。",
+    "trait.curse.fact": "本人直接普攻或自动技能命中最多每 {interval} 秒附咒一次；{seconds} 秒内累计造成攻击力 {percent}% 的咒伤。",
+    "trait.curse.condition": "仅对命中后存活的目标生效；同源刷新，次级伤害不触发。",
+    "trait.curse.detail": "被动附咒与手动施咒的触发条件不同；同来源咒伤按刷新规则处理。",
+    "missing.title": "未配备",
+    "missing.summary": "该键没有配备技能。",
+    "state.missing": "未配备",
+    "state.dead": "人物已阵亡",
+    "state.locked": "Lv.{level} 解锁",
+    "state.ended": "战斗已结束",
+    "state.inactive": "当前未出场",
+    "state.cooldown": "冷却中，还剩 {seconds} 秒",
+    "state.mana": "魔法不足，需要 {amount} 魔法",
+    "state.no_target": "范围内没有目标",
+    "state.ready": "可施放",
+    "heading.overview": "玩法特点",
+    "heading.basic": "自动普攻",
+    "heading.automatic": "常规自动技",
+    "heading.manual": "手动技能",
+    "heading.support": "后台支援",
+    "heading.trait": "额外机制",
+    "heading.details": "细节",
+    "heading.conditions": "触发条件",
+    "heading.facts": "效果数值",
+    "heading.owned": "持有加成",
+    "heading.missing": "未配备",
+    "heading.empty_trait": "没有单列的额外机制",
+    "detail.shape.SWEEP": "朝自动选中的目标攻击前方，可命中多名敌人。",
+    "detail.shape.THRUST": "朝自动选中的目标攻击前方直线；没有目标不会扣魔或进入冷却。",
+    "detail.shape.PROJECTILE": "自动朝目标方向发射，接触敌人时结算；飞行途中可能落空或先命中其他敌人。",
+    "detail.shape.NOVA": "以施放处为中心；可以在没有敌人时施放，不代表一定命中。",
+    "detail.shape.HEAL": "只治疗存活成员，不超过生命上限；治疗量随施放者等级变化。",
+    "detail.shape.MANA": "只为存活成员回魔，不超过魔法上限，不复制资源。",
+    "detail.shape.WARD": "护盾有每名受益者各自的总量上限，不能复活。",
+    "trait.echo.summary": "耗魔法术可留下回响，供队友施法触发。",
+    "trait.mark.summary": "前台普攻命中可积累后台追击。",
+    "trait.ammo.summary": "特制箭可强化齐射和后台追射。",
+    "trait.refund.summary": "后台为队友返还部分耗魔。",
+    "trait.relay.summary": "不同人物接续耗魔施法可节省魔法。",
+    "trait.curse.summary": "直接普攻或自动技能命中可附加咒伤。",
+    "detail.echo_record_strength": "回响伤害为记录伤害的 {damage_percent}%；若原技能含减速，回响的减速强度与时长均为原来的 {slow_percent}%。"
+  }
+}

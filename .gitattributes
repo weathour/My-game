@@ -1,2 +1,8 @@
 # Normalize EOL for all files that Git considers text files.
 * text=auto eol=lf
+
+# Third-party production inputs and recorded sessions retain their locked bytes.
+/design/**/sources/** -text
+/design/rhythm-combat-research-20261104/*.csv -text
+/design/rhythm-combat-research-20261104/tester-feedback/*.csv -text
+/design/rhythm-combat-research-20261104/tester-verification/*.csv -text

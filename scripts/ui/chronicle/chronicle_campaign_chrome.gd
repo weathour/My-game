@@ -1,4 +1,5 @@
 extends RefCounted
+const JIA_APPEARANCE := preload("res://scripts/ui/chronicle/jia_appearance.gd")
 ## Campaign presentation regions. All values are projections of the existing save.
 const T := preload("res://scripts/ui/chronicle/chronicle_theme.gd")
 const PORTRAITS := preload("res://scripts/ui/chronicle/chronicle_portraits.gd")
@@ -60,7 +61,7 @@ static func build(shell: Control, parent: Control, mode: String) -> Dictionary:
 	seal.tooltip_text = SEGMENTS[seal.phase]
 	root.add_child(seal)
 	place(seal, Rect2(12, 8, 144, 152), viewport)
-	_build_presenter(shell, root, viewport)
+	_build_presenter(shell, root, viewport, mode)
 	var detail_panel := _panel(root, Rect2(16, 456, 428, 184), viewport, PAPER, 14, "panel")
 	detail_panel.name = "campaign_detail_paper"
 	detail_panel.add_theme_color_override("font_color", PAPER_INK)
@@ -128,11 +129,15 @@ static func presenter_id(shell: Control) -> String:
 			return str(id)
 	return "JIA"
 
-static func _build_presenter(shell: Control, parent: Control, viewport: Vector2) -> void:
+static func _build_presenter(shell: Control, parent: Control, viewport: Vector2, scene: String = "formal") -> void:
 	var id := presenter_id(shell)
 	var art := TextureRect.new()
 	art.name = "campaign_presenter"
-	art.texture = PORTRAITS.dialogue(id)
+	var appearance := JIA_APPEARANCE.for_scene(shell.session.data, scene)
+	art.texture = PORTRAITS.dialogue(id, appearance)
+	art.set_meta("character_id", id)
+	art.set_meta("appearance", appearance if id == "JIA" else JIA_APPEARANCE.COMMON)
+	art.set_meta("scene", scene)
 	art.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	art.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 	art.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -196,7 +201,7 @@ static func _party_member(shell: Control, parent: Control, id: String, index: in
 	row.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	row.add_theme_constant_override("separation", 5)
 	var portrait := TextureRect.new()
-	portrait.texture = PORTRAITS.texture(id)
+	portrait.texture = PORTRAITS.texture(id, JIA_APPEARANCE.for_campaign(shell.session.data))
 	portrait.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	portrait.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
 	portrait.custom_minimum_size.x = 44 * clampf(viewport.x / BASE.x, .75, 1.5)

@@ -1,0 +1,571 @@
+{
+  "index": 8,
+  "title": "Man That You Fear",
+  "status": "PASS",
+  "source_sha256": "419c590d01212e338488c8f6d34053bc4f4b5684ea293a642e918fe991cfa40b",
+  "offset_seconds": 0.8388,
+  "duration_seconds": 291.95908333333335,
+  "sample_rate": 48000,
+  "chinese_soundfont": "/home/weathour/.cache/my-game/chinese-instruments-20261104/DSK_Asian_DreamZ/DSK Asian DreamZ.SF2",
+  "soundfont_sha256": "e61d0f590db00434fa1a904ab210fdf4439fef13617d89d33eacc8edfc403e5e",
+  "chinese_source_claim": "Publisher-named sample-based patches; original recording chain not independently verified",
+  "variants": {
+    "D1": {
+      "plan_sha256": "da8fdd0ac18f4cb5b9edb81f37a17ba7bc1c75e6e39c055038e3ddcf00b4620c",
+      "families": {
+        "bass": {
+          "event_count": 169,
+          "peak": 0.28451845049858093,
+          "rms": 0.009752281465345822,
+          "mapping_audit": []
+        },
+        "electric_guitar": {
+          "event_count": 1450,
+          "peak": 0.3824535012245178,
+          "rms": 0.024953638680610513,
+          "mapping_audit": []
+        },
+        "erhu": {
+          "event_count": 145,
+          "peak": 0.21763120591640472,
+          "rms": 0.04085855124797605,
+          "mapping_audit": [],
+          "sf2_region_loop_modes": {
+            "1": 6
+          },
+          "nonloop_sample_duration_exceeded_count": 0,
+          "nonloop_sample_duration_exceeded_examples": [],
+          "natural_decay_policy": "SF2 native envelopes and loop flags unchanged; nonloop source may decay before noteoff",
+          "max_actual_sample_transposition_semitones": 3,
+          "actual_sample_transposition_range": [
+            -3,
+            3
+          ],
+          "bank": 0,
+          "program_zero_based": 4,
+          "recorded_root_span": [
+            65,
+            84
+          ],
+          "outside_recorded_root_span_count": 67,
+          "beyond_four_semitone_extension_count": 0,
+          "missing_sf2_zone_event_count": 0,
+          "pitch_range": [
+            62,
+            79
+          ]
+        },
+        "pad": {
+          "event_count": 53,
+          "peak": 0.058496009558439255,
+          "rms": 0.00394872798092464,
+          "mapping_audit": []
+        },
+        "piano": {
+          "event_count": 713,
+          "peak": 0.2079528272151947,
+          "rms": 0.014666887480276098,
+          "mapping_audit": []
+        },
+        "zheng": {
+          "event_count": 371,
+          "peak": 0.44077494740486145,
+          "rms": 0.03712924186432325,
+          "mapping_audit": [],
+          "sf2_region_loop_modes": {
+            "1": 5
+          },
+          "nonloop_sample_duration_exceeded_count": 0,
+          "nonloop_sample_duration_exceeded_examples": [],
+          "natural_decay_policy": "SF2 native envelopes and loop flags unchanged; nonloop source may decay before noteoff",
+          "max_actual_sample_transposition_semitones": 4,
+          "actual_sample_transposition_range": [
+            -4,
+            3
+          ],
+          "bank": 0,
+          "program_zero_based": 3,
+          "recorded_root_span": [
+            58,
+            77
+          ],
+          "outside_recorded_root_span_count": 63,
+          "beyond_four_semitone_extension_count": 0,
+          "missing_sf2_zone_event_count": 0,
+          "pitch_range": [
+            54,
+            76
+          ]
+        }
+      },
+      "stems": [
+        {
+          "path": "/home/weathour/programs/desktop-projects/My-game/design/music-20261103-midi-test/trials/08_non_drum/drums.wav",
+          "sha256": "32f4b84190157ce43c97df74af1c67fc35c940244689d982eb82e2ba9fa37edb",
+          "reuse": "unchanged original drums"
+        },
+        {
+          "path": "/home/weathour/.cache/my-game/chinese-trial-render-20261104/midi_test_08/D1/bass.wav",
+          "sha256": "516f924b4bd55b3a0e215292dc59b1b5df4816457003f23ffe5fba2af0b3a9db"
+        },
+        {
+          "path": "/home/weathour/.cache/my-game/chinese-trial-render-20261104/midi_test_08/D1/electric_guitar.wav",
+          "sha256": "33e3ab82b3eb455f675bc682b828c065879ed569048391f30f4a7c7d88dd4d9c"
+        },
+        {
+          "path": "/home/weathour/.cache/my-game/chinese-trial-render-20261104/midi_test_08/D1/erhu.wav",
+          "sha256": "c7a2925b0e9fe1b48c57e736843ab2bfd8129928ad8815a9a49990e4e613a0da"
+        },
+        {
+          "path": "/home/weathour/.cache/my-game/chinese-trial-render-20261104/midi_test_08/D1/pad.wav",
+          "sha256": "a31bea614f254abc5d2ff7b251a1e549f78c80b4ebcecd6b7cfa52af71c1ccf4"
+        },
+        {
+          "path": "/home/weathour/.cache/my-game/chinese-trial-render-20261104/midi_test_08/D1/piano.wav",
+          "sha256": "67d7d346f2033b0252cc8b3c3ded2a4b46dd6b8b3cff1967e307dde05fe024c5"
+        },
+        {
+          "path": "/home/weathour/.cache/my-game/chinese-trial-render-20261104/midi_test_08/D1/zheng.wav",
+          "sha256": "9a7ca3b7982eacb0acf7fa7d0462b550ec48bacdc525c9d242a6cb686c6fa3be"
+        }
+      ],
+      "chinese_shared_gain": 0.205994420881896,
+      "chinese_to_backbone_rms_db": -9.000000005717965,
+      "full_event_count": 3569,
+      "drum_event_count": 668,
+      "event_coverage": "Every pitched plan event appears in exactly one family; drums reuse unchanged kit/fallback stems; no doubled old guitar track."
+    },
+    "D2": {
+      "plan_sha256": "4ef2f334c170738c8c052ce94825ba7d9ecd20557eb4d9b806017899f8b120e5",
+      "families": {
+        "bass": {
+          "event_count": 169,
+          "peak": 0.28451845049858093,
+          "rms": 0.009752281465345822,
+          "mapping_audit": []
+        },
+        "electric_guitar": {
+          "event_count": 1450,
+          "peak": 0.3824535012245178,
+          "rms": 0.024953638680610513,
+          "mapping_audit": []
+        },
+        "erhu": {
+          "event_count": 145,
+          "peak": 0.21763120591640472,
+          "rms": 0.04044323302703915,
+          "mapping_audit": [],
+          "sf2_region_loop_modes": {
+            "1": 6
+          },
+          "nonloop_sample_duration_exceeded_count": 0,
+          "nonloop_sample_duration_exceeded_examples": [],
+          "natural_decay_policy": "SF2 native envelopes and loop flags unchanged; nonloop source may decay before noteoff",
+          "max_actual_sample_transposition_semitones": 3,
+          "actual_sample_transposition_range": [
+            -3,
+            2
+          ],
+          "bank": 0,
+          "program_zero_based": 4,
+          "recorded_root_span": [
+            65,
+            84
+          ],
+          "outside_recorded_root_span_count": 67,
+          "beyond_four_semitone_extension_count": 0,
+          "missing_sf2_zone_event_count": 0,
+          "pitch_range": [
+            62,
+            79
+          ]
+        },
+        "pad": {
+          "event_count": 53,
+          "peak": 0.058496009558439255,
+          "rms": 0.00394872798092464,
+          "mapping_audit": []
+        },
+        "piano": {
+          "event_count": 713,
+          "peak": 0.2079528272151947,
+          "rms": 0.014666887480276098,
+          "mapping_audit": []
+        },
+        "zheng": {
+          "event_count": 371,
+          "peak": 0.4408104419708252,
+          "rms": 0.037350062198373196,
+          "mapping_audit": [],
+          "sf2_region_loop_modes": {
+            "1": 5
+          },
+          "nonloop_sample_duration_exceeded_count": 0,
+          "nonloop_sample_duration_exceeded_examples": [],
+          "natural_decay_policy": "SF2 native envelopes and loop flags unchanged; nonloop source may decay before noteoff",
+          "max_actual_sample_transposition_semitones": 4,
+          "actual_sample_transposition_range": [
+            -4,
+            3
+          ],
+          "bank": 0,
+          "program_zero_based": 3,
+          "recorded_root_span": [
+            58,
+            77
+          ],
+          "outside_recorded_root_span_count": 83,
+          "beyond_four_semitone_extension_count": 0,
+          "missing_sf2_zone_event_count": 0,
+          "pitch_range": [
+            54,
+            76
+          ]
+        }
+      },
+      "stems": [
+        {
+          "path": "/home/weathour/programs/desktop-projects/My-game/design/music-20261103-midi-test/trials/08_non_drum/drums.wav",
+          "sha256": "32f4b84190157ce43c97df74af1c67fc35c940244689d982eb82e2ba9fa37edb",
+          "reuse": "unchanged original drums"
+        },
+        {
+          "path": "/home/weathour/.cache/my-game/chinese-trial-render-20261104/midi_test_08/D2/bass.wav",
+          "sha256": "516f924b4bd55b3a0e215292dc59b1b5df4816457003f23ffe5fba2af0b3a9db"
+        },
+        {
+          "path": "/home/weathour/.cache/my-game/chinese-trial-render-20261104/midi_test_08/D2/electric_guitar.wav",
+          "sha256": "33e3ab82b3eb455f675bc682b828c065879ed569048391f30f4a7c7d88dd4d9c"
+        },
+        {
+          "path": "/home/weathour/.cache/my-game/chinese-trial-render-20261104/midi_test_08/D2/erhu.wav",
+          "sha256": "da74bcf4a1017de2ec155e695445c56e2d47cccc47c1822a9427bb902a7fb8b3"
+        },
+        {
+          "path": "/home/weathour/.cache/my-game/chinese-trial-render-20261104/midi_test_08/D2/pad.wav",
+          "sha256": "a31bea614f254abc5d2ff7b251a1e549f78c80b4ebcecd6b7cfa52af71c1ccf4"
+        },
+        {
+          "path": "/home/weathour/.cache/my-game/chinese-trial-render-20261104/midi_test_08/D2/piano.wav",
+          "sha256": "67d7d346f2033b0252cc8b3c3ded2a4b46dd6b8b3cff1967e307dde05fe024c5"
+        },
+        {
+          "path": "/home/weathour/.cache/my-game/chinese-trial-render-20261104/midi_test_08/D2/zheng.wav",
+          "sha256": "a72cc7124dfaaf7e155077b23ef494119de86a034f4354c2d962b9af80b9cdc6"
+        }
+      ],
+      "chinese_shared_gain": 0.205994420881896,
+      "chinese_to_backbone_rms_db": -9.021271046032302,
+      "full_event_count": 3569,
+      "drum_event_count": 668,
+      "event_coverage": "Every pitched plan event appears in exactly one family; drums reuse unchanged kit/fallback stems; no doubled old guitar track."
+    }
+  },
+  "processing": {
+    "fluidsynth_gain": 0.7,
+    "reverb": false,
+    "chorus": false,
+    "sample_rate": 48000,
+    "polyphony": 256,
+    "note_timing": "source ticks and tempo map unchanged; FluidSynth playback scheduling",
+    "backbone": "pinned existing sample renderer and amp processing",
+    "chinese_gain": "D1 aggregate RMS -9 dB relative to backbone, fixed and shared with D2",
+    "bus": "no compression or limiting; fixed gain only",
+    "backbone_amp_scope": "Each source track rendered and amp-processed independently before summing family; source track note ordering retained.",
+    "fluidsynth_unused_channel_warning": "SF2 has no GM drum preset for unused channel 9; render-only MIDI only uses non-drum channels. No voice-allocation or note-drop warnings.",
+    "native_sf2_decay": "Preserve SF2 native loop and envelope flags; PIPA/LUAN are nonlooping, ERHU/GUZHEN loop natively. No extra notes or synthetic tremolo."
+  },
+  "common_target_lufs": -24.81,
+  "pre_gain_measurements": {
+    "D1": {
+      "input_i": "-26.52",
+      "input_tp": "-5.21",
+      "input_lra": "9.20",
+      "input_thresh": "-36.73",
+      "output_i": "-16.18",
+      "output_tp": "-2.00",
+      "output_lra": "8.90",
+      "output_thresh": "-26.50",
+      "normalization_type": "dynamic",
+      "target_offset": "-1.82"
+    },
+    "D2": {
+      "input_i": "-26.52",
+      "input_tp": "-5.21",
+      "input_lra": "9.20",
+      "input_thresh": "-36.73",
+      "output_i": "-16.18",
+      "output_tp": "-2.00",
+      "output_lra": "8.80",
+      "output_thresh": "-26.50",
+      "normalization_type": "dynamic",
+      "target_offset": "-1.82"
+    },
+    "C": {
+      "input_i": "-18.68",
+      "input_tp": "-0.80",
+      "input_lra": "7.40",
+      "input_thresh": "-28.82",
+      "output_i": "-16.46",
+      "output_tp": "-2.00",
+      "output_lra": "5.80",
+      "output_thresh": "-26.55",
+      "normalization_type": "dynamic",
+      "target_offset": "-1.54"
+    }
+  },
+  "outputs": {
+    "C": {
+      "fixed_gain_db": -6.129999999999999,
+      "encoded_from": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/扒谱试验/MuScriptor-large/全部完整伴奏_全曲对照/08 - Man That You Fear/C - 游戏音色.flac",
+      "encoded_from_sha256": "041bbb59d90ad6b2cbd727839e633a116edaee9d72e401aa1e6bcd572fbcde22",
+      "files": {
+        "flac": {
+          "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐全12曲_20261104/08 - Man That You Fear/C - 现游戏音色_响度匹配.flac",
+          "sha256": "b65440c48481522f73630b32b9ca6e6407685f3bd3256e353dda75af531e1bf4",
+          "probe": {
+            "programs": [],
+            "streams": [
+              {
+                "codec_name": "flac",
+                "sample_fmt": "s32",
+                "sample_rate": "48000",
+                "channels": 2,
+                "bits_per_sample": 0,
+                "bits_per_raw_sample": "24"
+              }
+            ],
+            "format": {
+              "duration": "291.959083",
+              "size": "43044864"
+            }
+          },
+          "loudness": {
+            "input_i": "-24.81",
+            "input_tp": "-6.93",
+            "input_lra": "7.40",
+            "input_thresh": "-34.95",
+            "output_i": "-16.47",
+            "output_tp": "-2.00",
+            "output_lra": "6.60",
+            "output_thresh": "-26.67",
+            "normalization_type": "dynamic",
+            "target_offset": "-1.53"
+          },
+          "decoded_finite": true,
+          "decoded_sample_count_per_channel": 14014036,
+          "decoded_peak": 0.4502028226852417,
+          "decoded_rms": 0.04265619672871523
+        },
+        "mp3": {
+          "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐全12曲_20261104/08 - Man That You Fear/C - 现游戏音色_响度匹配.mp3",
+          "sha256": "6ae18498fe9626e4fcfd497fa411f7c7d5883c0a70f96f04c580c4d39219ac4a",
+          "probe": {
+            "programs": [],
+            "streams": [
+              {
+                "codec_name": "mp3",
+                "sample_fmt": "fltp",
+                "sample_rate": "48000",
+                "channels": 2,
+                "bits_per_sample": 0,
+                "bit_rate": "320000"
+              }
+            ],
+            "format": {
+              "duration": "291.984000",
+              "size": "11680365"
+            }
+          },
+          "loudness": {
+            "input_i": "-24.81",
+            "input_tp": "-6.93",
+            "input_lra": "7.40",
+            "input_thresh": "-34.95",
+            "output_i": "-16.47",
+            "output_tp": "-2.00",
+            "output_lra": "6.60",
+            "output_thresh": "-26.67",
+            "normalization_type": "dynamic",
+            "target_offset": "-1.53"
+          },
+          "decoded_finite": true,
+          "decoded_sample_count_per_channel": 14014036,
+          "decoded_peak": 0.450268030166626,
+          "decoded_rms": 0.04265682136969986
+        }
+      }
+    },
+    "D1": {
+      "fixed_gain_db": 1.7100000000000009,
+      "encoded_from": "/home/weathour/.cache/my-game/chinese-trial-render-20261104/midi_test_08/D1/aligned.wav",
+      "encoded_from_sha256": "57fc3cba372a8db96bcc2c88d81a5a4cdb8463c0232351ebee02d617155dc2b1",
+      "files": {
+        "flac": {
+          "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐全12曲_20261104/08 - Man That You Fear/D1 - 中国器乐_原音高.flac",
+          "sha256": "cf694e1cb8a2001ac6fc724d850473a2cdf8466b02aaf7eb4dc711636ad69a88",
+          "probe": {
+            "programs": [],
+            "streams": [
+              {
+                "codec_name": "flac",
+                "sample_fmt": "s32",
+                "sample_rate": "48000",
+                "channels": 2,
+                "bits_per_sample": 0,
+                "bits_per_raw_sample": "24"
+              }
+            ],
+            "format": {
+              "duration": "291.959083",
+              "size": "43840284"
+            }
+          },
+          "loudness": {
+            "input_i": "-24.80",
+            "input_tp": "-3.50",
+            "input_lra": "9.20",
+            "input_thresh": "-35.02",
+            "output_i": "-16.20",
+            "output_tp": "-2.00",
+            "output_lra": "8.80",
+            "output_thresh": "-26.47",
+            "normalization_type": "dynamic",
+            "target_offset": "-1.80"
+          },
+          "decoded_finite": true,
+          "decoded_sample_count_per_channel": 14014036,
+          "decoded_peak": 0.6680312156677246,
+          "decoded_rms": 0.041634415992169126
+        },
+        "mp3": {
+          "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐全12曲_20261104/08 - Man That You Fear/D1 - 中国器乐_原音高.mp3",
+          "sha256": "c84b41e44e89f6cb6df59fd8ee0ef32a1153db48bf5d360e758b0491952e07bf",
+          "probe": {
+            "programs": [],
+            "streams": [
+              {
+                "codec_name": "mp3",
+                "sample_fmt": "fltp",
+                "sample_rate": "48000",
+                "channels": 2,
+                "bits_per_sample": 0,
+                "bit_rate": "320000"
+              }
+            ],
+            "format": {
+              "duration": "291.984000",
+              "size": "11680365"
+            }
+          },
+          "loudness": {
+            "input_i": "-24.80",
+            "input_tp": "-3.48",
+            "input_lra": "9.20",
+            "input_thresh": "-35.02",
+            "output_i": "-16.20",
+            "output_tp": "-2.00",
+            "output_lra": "8.80",
+            "output_thresh": "-26.46",
+            "normalization_type": "dynamic",
+            "target_offset": "-1.80"
+          },
+          "decoded_finite": true,
+          "decoded_sample_count_per_channel": 14014036,
+          "decoded_peak": 0.6695845127105713,
+          "decoded_rms": 0.04163584822923549
+        }
+      }
+    },
+    "D2": {
+      "fixed_gain_db": 1.7100000000000009,
+      "encoded_from": "/home/weathour/.cache/my-game/chinese-trial-render-20261104/midi_test_08/D2/aligned.wav",
+      "encoded_from_sha256": "bbe504aeeb1c494d0ac545e60cb0dd1da590faeb572f8a5c52c98d223cc33ce1",
+      "files": {
+        "flac": {
+          "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐全12曲_20261104/08 - Man That You Fear/D2 - 中国器乐_有限调式.flac",
+          "sha256": "2cfeeaab26a524806c5a55a72c33156aebdeff7f86731f528130cb92d3b990b0",
+          "probe": {
+            "programs": [],
+            "streams": [
+              {
+                "codec_name": "flac",
+                "sample_fmt": "s32",
+                "sample_rate": "48000",
+                "channels": 2,
+                "bits_per_sample": 0,
+                "bits_per_raw_sample": "24"
+              }
+            ],
+            "format": {
+              "duration": "291.959083",
+              "size": "43824219"
+            }
+          },
+          "loudness": {
+            "input_i": "-24.81",
+            "input_tp": "-3.50",
+            "input_lra": "9.10",
+            "input_thresh": "-35.02",
+            "output_i": "-16.20",
+            "output_tp": "-2.00",
+            "output_lra": "8.70",
+            "output_thresh": "-26.46",
+            "normalization_type": "dynamic",
+            "target_offset": "-1.80"
+          },
+          "decoded_finite": true,
+          "decoded_sample_count_per_channel": 14014036,
+          "decoded_peak": 0.6680312156677246,
+          "decoded_rms": 0.04162389379478695
+        },
+        "mp3": {
+          "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐全12曲_20261104/08 - Man That You Fear/D2 - 中国器乐_有限调式.mp3",
+          "sha256": "3a414a521a5a4edea14ac252e98ad3793bd871d1e118cbe08c85e49505d10d72",
+          "probe": {
+            "programs": [],
+            "streams": [
+              {
+                "codec_name": "mp3",
+                "sample_fmt": "fltp",
+                "sample_rate": "48000",
+                "channels": 2,
+                "bits_per_sample": 0,
+                "bit_rate": "320000"
+              }
+            ],
+            "format": {
+              "duration": "291.984000",
+              "size": "11680365"
+            }
+          },
+          "loudness": {
+            "input_i": "-24.81",
+            "input_tp": "-3.48",
+            "input_lra": "9.10",
+            "input_thresh": "-35.02",
+            "output_i": "-16.20",
+            "output_tp": "-2.00",
+            "output_lra": "8.70",
+            "output_thresh": "-26.46",
+            "normalization_type": "dynamic",
+            "target_offset": "-1.80"
+          },
+          "decoded_finite": true,
+          "decoded_sample_count_per_channel": 14014036,
+          "decoded_peak": 0.6695845127105713,
+          "decoded_rms": 0.04162525767350833
+        }
+      }
+    }
+  },
+  "manual_listening_review": "not performed",
+  "render_script_sha256": "59e0577985e5612a8f4e75595ff8155fa910f77d25ef518ad8586372136a55e0",
+  "reuse_provenance": {
+    "original_report": "/home/weathour/programs/desktop-projects/My-game/design/music-20261104-chinese-trial/reports/audio-midi_test_08.json",
+    "original_report_sha256": "b8a17a0cad6a1e47ceddd95f02ee57964977a37f67b52f66c25e7727c9ed2547",
+    "source_epoch": "first_three_approved_trial",
+    "musical_and_audio_inputs_unchanged": true,
+    "full_outputs_copied_without_reencoding": true
+  }
+}

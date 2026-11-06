@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-03",
+  "runtime": {
+    "python": "3.12.3",
+    "python_packages": {
+      "mido": "1.3.3",
+      "numpy": "2.4.4",
+      "scipy": "1.17.1"
+    },
+    "ffmpeg": "6.1.1-3ubuntu5",
+    "ffprobe": "6.1.1-3ubuntu5",
+    "install_scope": "User-local venv and extracted binaries only; no system package installation"
+  },
+  "fluidsynth": {
+    "version": "2.3.4",
+    "distribution": "Ubuntu 24.04 Noble archive packages extracted locally",
+    "archive_base_url": "https://archive.ubuntu.com/ubuntu/",
+    "packages": [
+      {
+        "name": "fluidsynth",
+        "version": "2.3.4-1build3",
+        "archive_path": "pool/universe/f/fluidsynth/fluidsynth_2.3.4-1build3_amd64.deb",
+        "sha256": "c91c2528fed6d2ec97ba65dc6cba93c6a2096ea3147e47889a420bb9df8f36b0"
+      },
+      {
+        "name": "libfluidsynth3",
+        "version": "2.3.4-1build3",
+        "archive_path": "pool/universe/f/fluidsynth/libfluidsynth3_2.3.4-1build3_amd64.deb",
+        "sha256": "645b2c03798b6e02d289cc27f4b2b25a040db705cf527017e3a6cdbe568b3438"
+      },
+      {
+        "name": "libinstpatch-1.0-2",
+        "version": "1.1.6-1build2",
+        "archive_path": "pool/universe/libi/libinstpatch/libinstpatch-1.0-2_1.1.6-1build2_amd64.deb",
+        "sha256": "d48c40a9c428e40d5bbe8762802390322b06a062c735292767e73d1c6ea9007e"
+      }
+    ],
+    "local_prefix": "/home/weathour/.local/share/my-game/music-transcription/midi-render"
+  },
+  "mapping_source_manifest": "../music-20261030/instrument-manifest.json",
+  "mapping_source_manifest_sha256": "675b67fbda3658b61b021286feb8792124c4aba6bb2d89363f0c612865214ce8",
+  "how_to_rebuild": [
+    "Create a user-local venv and install the pinned Python packages.",
+    "Download each official Ubuntu .deb above, verify its SHA-256, then extract with dpkg-deb -x under the local renderer prefix.",
+    "Run sources/generaluser/fetch-generaluser.sh and sources/muldjordkit/fetch-muldjordkit.sh to fetch the separately pinned soundfonts.",
+    "Run tools/render_all_cues.py from the repository root after required user-local cache paths are populated."
+  ]
+}

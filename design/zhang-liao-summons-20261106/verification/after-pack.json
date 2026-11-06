@@ -1,0 +1,28 @@
+{
+  "status": "passed",
+  "recorded_at": 1793958117.3196287,
+  "purpose": "early same-input performance gate before final full suite",
+  "pack": {
+    "path": "/tmp/liao-summons-after-build-jd45stkd/game.pck",
+    "bytes": 239815412,
+    "sha256": "0a876e4d46684a73241359153f96c4ec278f7cda9914d9c9146fda0c01643ba0"
+  },
+  "source_freeze": "after-pack-inputs.json",
+  "inputs_unchanged": true,
+  "resource_probe": {
+    "external_script": "/tmp/liao-summons-after-build-jd45stkd/zhang_liao_summon_smoke-all-ten-strips.gd",
+    "sha256": "dce5dacabe9baf1e1016a617cfbab49180e01af863cfad985bcc7b0b6818b776",
+    "byte_identical_to_frozen_entry": true,
+    "cwd": "/tmp/liao-summons-after-build-jd45stkd/empty-cwd",
+    "empty_cwd": true,
+    "source_project_res_fallback": false,
+    "returncode": 0,
+    "strict_failures": [],
+    "checks": 4172,
+    "new_subdirectory_manifest_and_all_actor_fx_textures_loaded": true,
+    "log": "after-pack-all-ten-strips.log",
+    "explicit_cached_strip_count": 10
+  },
+  "source_runtime_global_unchanged_since_native": true,
+  "test_maintenance": "tighten pre-art placeholder>=6 cached strips to final exact8actor+2FX=10; no runtime/pack inputs changed"
+}

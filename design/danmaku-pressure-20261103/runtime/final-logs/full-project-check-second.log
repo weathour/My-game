@@ -1,0 +1,114 @@
+Check logs: /home/weathour/programs/desktop-projects/My-game/design/danmaku-pressure-20261103/runtime/full-check-logs
+== Python project checks ==
+DOC_LINK_CHECK_OK
+PROJECT_CONFIG_CHECK_OK
+{"graph_update_accepted": false, "reason": "exit=0; Godot extractor=True; missing 1 runtime GDScript files", "missing": ["scripts/new.gd"]}
+GRAPHIFY_UPDATE_REJECTED: exit=0; Godot extractor=True; missing 1 runtime GDScript files
+{"graph_update_accepted": false, "reason": "exit=0; Godot extractor=False; missing 0 runtime GDScript files", "missing": []}
+GRAPHIFY_UPDATE_REJECTED: exit=0; Godot extractor=False; missing 0 runtime GDScript files
+{"graph_update_accepted": true, "reason": "exit=0; Godot extractor=True; missing 0 runtime GDScript files", "missing": []}
+GRAPH_UPDATE_SELF_TEST_OK
+SMOKE_LOG_SELF_TEST_OK
+ARCHITECTURE_CONTRACT_CHECK_OK
+CHRONICLE_STORY_CONTENT_CHECK_OK
+== Godot asset import ==
+GODOT_ASSET_IMPORT_OK
+== Godot headless parse ==
+GODOT_PARSE_CHECK_OK
+== Godot Chronicle entry scene smoke ==
+CHRONICLE_ENTRY_SCENE_SMOKE_OK
+== Godot Linux development pack export for isolated pack smokes ==
+CHRONICLE_PACK path=/tmp/my-game-check.qlVBZq/pack-smokes/game.pck bytes=240345276
+== Godot chronicle_enemy_pack_smoke against isolated main pack from empty cwd ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+ENEMY_PACK_SMOKE PASS checks=742 failures=0
+== Godot chronicle_music_pack_smoke against isolated main pack from empty cwd ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+CHRONICLE_MUSIC_PACK_SMOKE PASS cues=16 checks=95 failures=0
+== Godot chronicle_story_pack_smoke against isolated main pack from empty cwd ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+CHRONICLE_STORY_PACK_SMOKE PASS checks=97 failures=0
+== Godot chronicle_combat_feedback_pack_smoke against isolated main pack from empty cwd ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+CHRONICLE_COMBAT_FEEDBACK_PACK_SMOKE PASS checks=806 failures=0
+== Godot baimen enemy runtime smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+BAIMEN_ENEMY_RUNTIME_SMOKE PASS checks=743 failures=0
+== Godot baimen women combat art smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+BAIMEN_WOMEN_COMBAT_ART_SMOKE PASS checks=266 failures=0
+== Godot baimen women portraits smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+BAIMEN_WOMEN_PORTRAITS_SMOKE PASS checks=525 failures=0
+== Godot boss combo timing smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+ERROR: actual reset matches authored recovery plus moving charge
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://scripts/tests/boss_combo_timing_smoke.gd:11)
+       [1] run (res://scripts/tests/boss_combo_timing_smoke.gd:38)
+BOSS_COMBO_BEAT {"cycle":0,"move":"demon_fourfold","next_tell":2.26,"release":1.78,"release_to_next_tell":0.48,"tell":0.01,"warning":1.77}
+ERROR: actual reset matches authored recovery plus moving charge
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://scripts/tests/boss_combo_timing_smoke.gd:11)
+       [1] run (res://scripts/tests/boss_combo_timing_smoke.gd:38)
+BOSS_COMBO_BEAT {"cycle":0,"move":"demon_skybreaker","next_tell":4.64,"release":3.51,"release_to_next_tell":1.13,"tell":2.26,"warning":1.25}
+ERROR: actual reset matches authored recovery plus moving charge
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://scripts/tests/boss_combo_timing_smoke.gd:11)
+       [1] run (res://scripts/tests/boss_combo_timing_smoke.gd:38)
+BOSS_COMBO_BEAT {"cycle":0,"move":"demon_quake","next_tell":7.02,"release":6.44,"release_to_next_tell":0.58,"tell":4.64,"warning":1.8}
+ERROR: actual reset matches authored recovery plus moving charge
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://scripts/tests/boss_combo_timing_smoke.gd:11)
+       [1] run (res://scripts/tests/boss_combo_timing_smoke.gd:38)
+BOSS_COMBO_BEAT {"cycle":0,"move":"demon_heavenfall","next_tell":9.08,"release":8.55,"release_to_next_tell":0.53,"tell":7.02,"warning":1.53}
+ERROR: actual reset matches authored recovery plus moving charge
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://scripts/tests/boss_combo_timing_smoke.gd:11)
+       [1] run (res://scripts/tests/boss_combo_timing_smoke.gd:38)
+BOSS_COMBO_BEAT {"cycle":0,"move":"demon_final_cleave","next_tell":13.18,"release":11.03,"release_to_next_tell":2.15,"tell":9.08,"warning":1.95}
+ERROR: actual reset matches authored recovery plus moving charge
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://scripts/tests/boss_combo_timing_smoke.gd:11)
+       [1] run (res://scripts/tests/boss_combo_timing_smoke.gd:38)
+BOSS_COMBO_BEAT {"cycle":1,"move":"demon_fourfold","next_tell":15.43,"release":14.95,"release_to_next_tell":0.48,"tell":13.18,"warning":1.77}
+ERROR: actual reset matches authored recovery plus moving charge
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://scripts/tests/boss_combo_timing_smoke.gd:11)
+       [1] run (res://scripts/tests/boss_combo_timing_smoke.gd:38)
+BOSS_COMBO_BEAT {"cycle":1,"move":"demon_skybreaker","next_tell":17.65,"release":16.68,"release_to_next_tell":0.97,"tell":15.43,"warning":1.25}
+ERROR: actual reset matches authored recovery plus moving charge
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://scripts/tests/boss_combo_timing_smoke.gd:11)
+       [1] run (res://scripts/tests/boss_combo_timing_smoke.gd:38)
+BOSS_COMBO_BEAT {"cycle":1,"move":"demon_quake","next_tell":20.03,"release":19.45,"release_to_next_tell":0.58,"tell":17.65,"warning":1.8}
+ERROR: actual reset matches authored recovery plus moving charge
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://scripts/tests/boss_combo_timing_smoke.gd:11)
+       [1] run (res://scripts/tests/boss_combo_timing_smoke.gd:38)
+BOSS_COMBO_BEAT {"cycle":1,"move":"demon_heavenfall","next_tell":22.09,"release":21.56,"release_to_next_tell":0.53,"tell":20.03,"warning":1.53}
+ERROR: actual reset matches authored recovery plus moving charge
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://scripts/tests/boss_combo_timing_smoke.gd:11)
+       [1] run (res://scripts/tests/boss_combo_timing_smoke.gd:38)
+BOSS_COMBO_BEAT {"cycle":1,"move":"demon_final_cleave","next_tell":26.19,"release":24.04,"release_to_next_tell":2.15,"tell":22.09,"warning":1.95}
+BOSS_COMBO_TIMING_SMOKE FAIL checks=41 failures=10
+BOSS_COMBO_TIMING_SMOKE_FAILED

@@ -66,7 +66,7 @@ func run() -> void:
 	battle.tick(0.001, Vector2.ZERO)
 	var actual_heal: float = battle.current().hp - 5
 	var healing_number := RegEx.new()
-	healing_number.compile("恢复([0-9.]+)生命")
+	healing_number.compile("恢复\\s*([0-9.]+)\\s*生命")
 	var displayed_heal := healing_number.search(summary.supports[1].text)
 	expect(actual_heal > 0 and displayed_heal != null and is_equal_approx(float(displayed_heal.get_string(1)), actual_heal), "displayed heal agrees with actual support cast")
 	state.data.owned.N16.dead = true

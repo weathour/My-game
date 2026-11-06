@@ -1,0 +1,66 @@
+{
+  "status": "technical_and_agent_visual_review_pass",
+  "user_aesthetic_status": "not_claimed",
+  "reviewed_characters": 38,
+  "imported_animation_clips_read": 188,
+  "imported_authored_frames_read": 720,
+  "actual_runtime_direction_action_cases": 304,
+  "root_and_foot_stability_cases": 304,
+  "manifest_mirror_anchor_math_cases": 224,
+  "maximum_manifest_foot_anchor_error_world": 0.0,
+  "maximum_observed_sprite_followthrough_world": 0.96428570151329,
+  "actual_red_core_center_pixel_samples": 912,
+  "core_center_relative_to_ground_world": [
+    0,
+    -36
+  ],
+  "core_radius_world": 4,
+  "visual_scope": {
+    "all_ids": "All 38 identity-labelled actor scenes retain idle, move, basic and manual evidence. Manual representatives explicitly use F05_spread, bandit_sweep and F08_break for the three affected NOVA actions. Other 35 manual representatives are unchanged. Full 38 actual native rerun followed the women_visual selection fix; affected pages 05 and 06 were reviewed at 960 left, 1280 right and 1920 right.",
+    "rendering": "Crisp nearest-neighbor pixel rendering, full character/weapon silhouettes, foot ground lines and fixed body core examined. No other wrong-facing or clipped character/weapon issue identified.",
+    "proportion": "72 world-unit authored standing reference retained; run/crouch heights remain natural. Cavalry use combined rider-and-horse standing body72 per approved export. Older six generals retain longer head/body proportions; newer ordinary cast use broader chibi heads. This observed source-style variation is recorded without claiming user aesthetic approval."
+  },
+  "resolved_issues": [
+    {
+      "issue": "Asymmetric 640px friendly sheets anchorX288 shifted the drawn body away from fixed core when flipped.",
+      "affected_ids": [
+        "M01",
+        "M02",
+        "M03",
+        "M04",
+        "M05",
+        "M06"
+      ],
+      "resolution": "Root changed human_friendly_visual._apply_facing to mirror sprite offset and action.home together. Final actual images and 224 manifest direction/action anchor checks report zero drift. Roster visual also supports future asymmetric anchors.",
+      "final_status": "verified_fixed"
+    },
+    {
+      "issue": "NOVA burst override incorrectly selected women cast clip.",
+      "affected_abilities": [
+        "F05_spread",
+        "bandit_sweep",
+        "F08_break"
+      ],
+      "resolution": "Root preserved original ability-kind clip selection for burst while retaining cast overrides for buffs. Real present_cast on all three abilities selects attack at contact, both facings, feet/core unchanged.",
+      "final_status": "verified_fixed",
+      "evidence": "nova-action-regression.json"
+    }
+  ],
+  "retained_warnings": [
+    {
+      "warning": "JIA/spear-attack frame2 opaque touches original192px frame edge",
+      "review": "Root inspected original full connected-source extraction and import_jia_art.lua containment assertion x+part.width<=192. Complete spear tip occupies final image pixel; transparent border absent. This is edge contact, not discarded source pixels or actual truncation.",
+      "action": "Existing PNG and frame/anchor specification retained."
+    }
+  ],
+  "limits": [
+    "Actor gallery renders actual runtime PackedScenes and calls actual present_cast/profile adapter and battle hurtbox painter; it is not an integrated combat gameplay or performance test.",
+    "All clip images were read; natural move loops and cast completion were advanced. Captures are static representative poses rather than a user animation-aesthetic approval.",
+    "Technical/agent visual checks do not establish user aesthetic or balance acceptance."
+  ],
+  "manual_representatives": {
+    "F05": "F05_spread",
+    "F07": "bandit_sweep",
+    "F08": "F08_break"
+  }
+}

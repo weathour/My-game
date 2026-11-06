@@ -1,0 +1,30 @@
+{
+  "external_directory": "/tmp/liao-paired-control-dmelp51p",
+  "cwd": "/tmp/liao-paired-control-dmelp51p/empty-cwd",
+  "fixture_sha256": {
+    "b17_dense_bench.gd": "b3155cb21454a649e8c451034ce1b15ab3187a04a42235b1badb1254d4a7076c",
+    "live_performance_base.gd": "6049e557855b39739b899ff7e58d5d9015b5e4192d2cfe40ca7b0af2005cd634",
+    "b17_bench_teardown.gd": "9dc447c35cebab805f849771dd17a0ddbc1fb124de39d51e6187aac096e0c939"
+  },
+  "original_two_files_unchanged": true,
+  "only_wrapper_change": "_reset_view waits0.3s and2 process frames outside all scenario timing/state sampling",
+  "runs": [
+    {
+      "name": "paired-A3",
+      "role": "old_control",
+      "pack": "/tmp/my-game-check.pM7fgF/pack-smokes/game.pck"
+    },
+    {
+      "name": "paired-B2",
+      "role": "new",
+      "pack": "/tmp/liao-summons-after-build-jd45stkd/game.pck"
+    },
+    {
+      "name": "paired-A4",
+      "role": "old_control",
+      "pack": "/tmp/my-game-check.pM7fgF/pack-smokes/game.pck"
+    }
+  ],
+  "fresh_isolated_XDG_each_run": true,
+  "external_host_monitor": "all parent task thread child lists; exact worker CPU ticks; no priority/affinity/termination changes"
+}

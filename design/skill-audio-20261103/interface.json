@@ -1,0 +1,211 @@
+{
+  "schema_version": 1,
+  "status": "frozen_for_parallel_implementation",
+  "bank_path": "res://assets/sfx/skill-combat-20261103/catalog.json",
+  "profiles_path": "res://assets/data/audio/skill_sound_profiles.json",
+  "source_snapshot": "design/skill-audio-20261103/runtime/combat-content-baseline.json",
+  "cue_id_pattern": "{family}.{phase}",
+  "families": [
+    "blade",
+    "heavy_blade",
+    "thrust",
+    "blunt",
+    "bow",
+    "dash",
+    "earth",
+    "fire",
+    "ice",
+    "lightning",
+    "wind",
+    "water",
+    "poison",
+    "arcane",
+    "curse",
+    "heal",
+    "shield",
+    "mana",
+    "cleanse",
+    "summon",
+    "buff",
+    "beast",
+    "bone",
+    "armor",
+    "command",
+    "flesh",
+    "boss_hunter",
+    "boss_cavalry",
+    "boss_general",
+    "boss_demon"
+  ],
+  "common_phases": [
+    "cast",
+    "impact",
+    "tell"
+  ],
+  "boss_only_phases": [
+    "phase",
+    "defeat"
+  ],
+  "global_new_cues": [
+    "feedback.hurt",
+    "feedback.guard",
+    "feedback.death"
+  ],
+  "retained_utility_cues": {
+    "feedback.pickup": "pickup",
+    "feedback.level": "level",
+    "feedback.elite": "elite"
+  },
+  "bank_schema": {
+    "schema_version": 1,
+    "cues": {
+      "blade.cast": {
+        "variants": [
+          "res://assets/sfx/skill-combat-20261103/blade_cast_01.wav"
+        ],
+        "gain_db": -4.0,
+        "cooldown_sec": 0.08,
+        "max_instances": 2,
+        "priority": 2,
+        "spatial": {
+          "max_distance": 1200.0,
+          "panning_strength": 0.55
+        },
+        "duck": {}
+      }
+    }
+  },
+  "phase_default_proposals": {
+    "cast": {
+      "priority": 2,
+      "gain_db": -4,
+      "cooldown_sec": 0.08,
+      "max_instances": 2
+    },
+    "impact": {
+      "priority": 1,
+      "gain_db": -5,
+      "cooldown_sec": 0.055,
+      "max_instances": 3
+    },
+    "tell": {
+      "priority": 4,
+      "gain_db": -3,
+      "cooldown_sec": 0.08,
+      "max_instances": 2
+    },
+    "phase": {
+      "priority": 6,
+      "gain_db": -3,
+      "cooldown_sec": 0.25,
+      "max_instances": 1
+    },
+    "defeat": {
+      "priority": 6,
+      "gain_db": -3,
+      "cooldown_sec": 0.25,
+      "max_instances": 1
+    }
+  },
+  "profiles_schema": {
+    "schema_version": 1,
+    "character_abilities": {
+      "JIA": {
+        "JIA_basic": {
+          "family": "blade",
+          "cast": "blade.cast",
+          "impact": "blade.impact",
+          "gain_db": 0,
+          "pitch_scale": 1.0,
+          "kind_overrides": {
+            "THRUST": {
+              "family": "thrust",
+              "cast": "thrust.cast",
+              "impact": "thrust.impact"
+            }
+          }
+        }
+      }
+    },
+    "enemy_actions": {
+      "B18": {
+        "0": {
+          "halberd_sweep": {
+            "family": "heavy_blade",
+            "tell": "heavy_blade.tell",
+            "release": "heavy_blade.cast",
+            "impact": "heavy_blade.impact",
+            "gain_db": 1,
+            "pitch_scale": 0.9,
+            "stage_priorities": {
+              "tell": 5,
+              "release": 4,
+              "impact": 4
+            }
+          }
+        }
+      }
+    },
+    "boss_events": {
+      "B18": {
+        "0": {
+          "phase": "boss_demon.phase",
+          "defeated": "boss_demon.defeat"
+        },
+        "1": {
+          "phase": "boss_demon.phase",
+          "defeated": "boss_demon.defeat"
+        }
+      }
+    },
+    "trait_bindings": {},
+    "ability_aliases": {},
+    "global_cues": {
+      "hurt": "feedback.hurt",
+      "guard": "feedback.guard",
+      "death": "feedback.death",
+      "pickup": "feedback.pickup",
+      "level": "feedback.level",
+      "elite": "feedback.elite"
+    }
+  },
+  "profile_keys": {
+    "character": "owner_id/ability_id",
+    "enemy": "definition_id/string(form_index)/move_id",
+    "enemy_action_id_is_not_move_id": true
+  },
+  "silence_policy": "empty cue string requires explicit silence_reason; pure owned/stat modifications and non-emitting trait stages are documented, never hidden fallback",
+  "audio_policy": {
+    "sample_rate": 48000,
+    "channels": 1,
+    "encoding": "PCM16 WAV",
+    "looping": false,
+    "variants_per_new_cue": 3,
+    "sample_peak_target_dbfs": -4,
+    "sample_peak_ceiling_dbfs": -3,
+    "no_BGM_file_edits": true
+  },
+  "runtime_policy": {
+    "attempt_owned_shared_voice_pool": true,
+    "reserved_warning_voices": 2,
+    "source_rng_separate_from_gameplay": true,
+    "ordinary_cast_does_not_duck_BGM": true,
+    "critical_duck_initial_gain_db": -2.5,
+    "critical_duck_is_runtime_gain_only": true,
+    "original_player_settings_unchanged": true,
+    "all_gameplay_numeric_sources_frozen": true,
+    "tell_priority_by_threat": {
+      "ordinary": [
+        1,
+        2
+      ],
+      "elite": 3,
+      "major_or_boss": [
+        4,
+        5
+      ]
+    },
+    "high_priority_cannot_be_blocked_by_low_priority_same_cue_limits": true
+  },
+  "retained_utility_variants_per_cue": 2
+}

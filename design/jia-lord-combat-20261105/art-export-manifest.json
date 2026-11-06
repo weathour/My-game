@@ -1,0 +1,405 @@
+{
+  "version": 1,
+  "identity": "JIA approved campaign-v2 only",
+  "status": "art_export_audited_ready_for_runtime",
+  "user_animation_aesthetic_status": "not_claimed",
+  "runtime_acceptance": "separate runtime/validation owners",
+  "approved_identity_master": "design/jia-lord-combat-20261105/jia-lord-campaign-v2.png",
+  "unapproved_ready_v1_used": false,
+  "rejected_campaign_v1_used": false,
+  "process": "Built-in ImageGen pixel model, two independent24-pose action sheets, independently generated128 portrait. Aseprite source-component extraction/fixed source scale/shared48-pose <=64 color palette/binary alpha/nearest neighbor and editable exports.",
+  "actor_poses": 48,
+  "clip_frames": {
+    "dao-attack": 4,
+    "dao-break": 4,
+    "dao-idle": 4,
+    "dao-run": 8,
+    "dao-sweep": 4,
+    "spear-attack": 4,
+    "spear-break": 4,
+    "spear-idle": 4,
+    "spear-run": 8,
+    "spear-sweep": 4
+  },
+  "actor_shared_opaque_colors": 60,
+  "portrait_opaque_colors": 63,
+  "source_versions": {
+    "pixel-model-v1": "selected, art owner and root reviewed",
+    "dao-actions-v1": "selected24 independent poses",
+    "spear-actions-v1": "selected24 independent poses",
+    "campaign-head-v1": "selected independent bust"
+  },
+  "rejected_generated_action_versions": [],
+  "vfx": "Existing Jia slash/thrust/sweep VFX reused by runtime, no new persistent effects.",
+  "body_scale": "80px helmet-crown to boot reference; excludes feathers/weapons/cape. World .9=72. Run source ground planes retain natural airborne phases.",
+  "inputs": [
+    {
+      "path": "design/jia-lord-combat-20261105/source/analyze_sources.py",
+      "sha256": "81cacdefd0545f52b5808f0e1bad5d22e8e4cb2adebd3189f47e3a07e7fc990e",
+      "bytes": 954
+    },
+    {
+      "path": "design/jia-lord-combat-20261105/source/build_measurements.py",
+      "sha256": "5ed8c7c776525c7ed0473e0dc5699ef38ab955e174cc1341ff2985bd1bb97822",
+      "bytes": 4062
+    },
+    {
+      "path": "design/jia-lord-combat-20261105/source/dao-actions-v1-components.json",
+      "sha256": "9c6a38388c04b1e34375d228e832af9cfff4b8022b58d10d9be700f42908304f",
+      "bytes": 3474
+    },
+    {
+      "path": "design/jia-lord-combat-20261105/source/dao-actions-v1.png",
+      "sha256": "893dfd5800989b20c422dc6be26e3de6ef59e727ce421d436e179f83c40ade83",
+      "bytes": 2901079
+    },
+    {
+      "path": "design/jia-lord-combat-20261105/source/generation-record.json",
+      "sha256": "ff1f269036ad590a53750c171247d0d6e362fc72b84a157e61d1314159271011",
+      "bytes": 5555
+    },
+    {
+      "path": "design/jia-lord-combat-20261105/source/measurements.json",
+      "sha256": "608b516da5258f71a0895a0136684ab2458e2216b9466b08b9f2485f640f4cab",
+      "bytes": 28490
+    },
+    {
+      "path": "design/jia-lord-combat-20261105/source/pixel-model-v1.png",
+      "sha256": "c71bd55a5bcb7eb311e5c9bcec1e805af01a90a5ea132ed6b7ad0f9701fabbc7",
+      "bytes": 1736969
+    },
+    {
+      "path": "design/jia-lord-combat-20261105/source/portrait/campaign-head-v1.png",
+      "sha256": "5102309b0d4fe8d2eff6baba009412f87ed3ed5674a0ff1d1cb663afb16686a2",
+      "bytes": 1775019
+    },
+    {
+      "path": "design/jia-lord-combat-20261105/source/portrait/export-review-4x.png",
+      "sha256": "a5a466ee45ce91a143ae202294fb6b945c9b90522bb7340aa6dac4d4e8ae5221",
+      "bytes": 32353
+    },
+    {
+      "path": "design/jia-lord-combat-20261105/source/portrait/export_campaign_head.lua",
+      "sha256": "4d437d1fadef57695a09680496685608b120747e2dd341579b967b4967030141",
+      "bytes": 1444
+    },
+    {
+      "path": "design/jia-lord-combat-20261105/source/portrait/manifest.json",
+      "sha256": "5dbcf33c8402ce6a24fa205ecfd2910da441d05633c59f4ad816a2752864368b",
+      "bytes": 2684
+    },
+    {
+      "path": "design/jia-lord-combat-20261105/source/portrait/qa.json",
+      "sha256": "48ba3f3ff7d15d5efb1e57683b26bc97333e9a14e4a4fec6f2412b59db130a16",
+      "bytes": 1126
+    },
+    {
+      "path": "design/jia-lord-combat-20261105/source/pose-selection.json",
+      "sha256": "56d9ab7556873f532d5dc67d45f1e7c4be0ad7af8f15f8b25b458eb1b6a7e516",
+      "bytes": 4691
+    },
+    {
+      "path": "design/jia-lord-combat-20261105/source/spear-actions-v1-components.json",
+      "sha256": "b5bb801e7b5313157df0151b78e2e69d0e7b76d8b6a13430e0c0e3d2293ffc16",
+      "bytes": 2945
+    },
+    {
+      "path": "design/jia-lord-combat-20261105/source/spear-actions-v1.png",
+      "sha256": "43b9e719e3d2905b1cace6df5499c7b3d4e75e78c7d5ae76f4d235036161f7a0",
+      "bytes": 2755604
+    },
+    {
+      "path": "design/jia-lord-combat-20261105/prompts/campaign-head-v1.txt",
+      "sha256": "6a58bfcf9213c61eff773e8a48aa6bc691ceea3a7271bf2aac7fce88c4c140b8",
+      "bytes": 2550
+    },
+    {
+      "path": "design/jia-lord-combat-20261105/prompts/dao-actions-v1.txt",
+      "sha256": "6209efe650755db3bc52d287d8b427d375a6c4dcdee37baba835fdfbdd1705b8",
+      "bytes": 3351
+    },
+    {
+      "path": "design/jia-lord-combat-20261105/prompts/pixel-model-v1.txt",
+      "sha256": "c259d4f8eb13711ed2f11341e72c7b35aa5aea031abb5aab40f814874e8638e3",
+      "bytes": 2456
+    },
+    {
+      "path": "design/jia-lord-combat-20261105/prompts/spear-actions-v1.txt",
+      "sha256": "4ac15f940e6c19b33017bee154b806d8100141778bb6b03a583e936edf6cc5dd",
+      "bytes": 3426
+    },
+    {
+      "path": "design/jia-lord-combat-20261105/jia-lord-campaign-v2.png",
+      "sha256": "d0b2f3950fa2287e085037d62764cc86c507128ddc68f651b786fbd7d39bd84d",
+      "bytes": 2900168
+    },
+    {
+      "path": "scripts/tools/import_jia_campaign_art.lua",
+      "sha256": "4e0d4c24e9fea780a5cd79b02cd252594019c9e0d18b8b7a5363dbde5564f050",
+      "bytes": 7831
+    },
+    {
+      "path": "design/jia-lord-combat-20261105/qa/audit_campaign_art.py",
+      "sha256": "aeb008a127c6f2549e9f7131de3a98fa6018e87c33fe7b1449ea3a3b95be89c8",
+      "bytes": 8413
+    },
+    {
+      "path": "design/jia-lord-combat-20261105/qa/export_contact_sheet.lua",
+      "sha256": "899ab7b48a46e78a57244e759c39b4d444b27146ddb25abe94a977cfbc34e8b2",
+      "bytes": 528
+    }
+  ],
+  "outputs": [
+    {
+      "path": "assets/players/jia-campaign/actor.aseprite",
+      "sha256": "6f5876a997c1e5c3ffec2c5c83c054ab0a3f34eb04d1a98f112b75ff0c66806b",
+      "bytes": 137174
+    },
+    {
+      "path": "assets/players/jia-campaign/campaign-head.aseprite",
+      "sha256": "fbc8989c03293bb353c3a21150b565eba63c95e69b7c49f18fe916de348bdd59",
+      "bytes": 7136
+    },
+    {
+      "path": "assets/players/jia-campaign/campaign-head.png",
+      "sha256": "be637acf39df1fdd3a535225a9285e8e72feeaef42a8ef7377a5815cfc2fc6b8",
+      "bytes": 23200,
+      "size": [
+        128,
+        128
+      ]
+    },
+    {
+      "path": "assets/players/jia-campaign/dao-attack.aseprite",
+      "sha256": "55fa0e4eb16677809ba1d6773bbaa296d2163b2430cb66e3263e50b12b05af89",
+      "bytes": 20800
+    },
+    {
+      "path": "assets/players/jia-campaign/dao-attack.png",
+      "sha256": "756add418edb117944f75bef2a4de757e62b2f71e223137828cf47f695a70536",
+      "bytes": 39248,
+      "size": [
+        1024,
+        256
+      ]
+    },
+    {
+      "path": "assets/players/jia-campaign/dao-break.aseprite",
+      "sha256": "ff4d262356b20c53d882b40e324658db63eba40c329cdc15ed960c01d201aeff",
+      "bytes": 21249
+    },
+    {
+      "path": "assets/players/jia-campaign/dao-break.png",
+      "sha256": "cfe8168be581c00a10058cb185b75217b2ec0ddb5654df20159933df35072bab",
+      "bytes": 40061,
+      "size": [
+        1024,
+        256
+      ]
+    },
+    {
+      "path": "assets/players/jia-campaign/dao-idle.aseprite",
+      "sha256": "91050aee8e21ea67e4aa94408af82118b00b845338960970c0f1a98564a78388",
+      "bytes": 22051
+    },
+    {
+      "path": "assets/players/jia-campaign/dao-idle.png",
+      "sha256": "aabd1d1e947a24dbd07975e9b47c91d565bbf06b300f120ff9bfdb992fb16bfc",
+      "bytes": 42525,
+      "size": [
+        1024,
+        256
+      ]
+    },
+    {
+      "path": "assets/players/jia-campaign/dao-run.aseprite",
+      "sha256": "1c1aa781615560ae4d80d1eceb93e75f156119cf40b0899678facc13cdbcf5b6",
+      "bytes": 38441
+    },
+    {
+      "path": "assets/players/jia-campaign/dao-run.png",
+      "sha256": "af028b7ca97dbd95ce46ca07f96c8c03abd3d79c7ba7abbf5cbe377572c00d75",
+      "bytes": 68159,
+      "size": [
+        2048,
+        256
+      ]
+    },
+    {
+      "path": "assets/players/jia-campaign/dao-sweep.aseprite",
+      "sha256": "1afa018a7ab8bbbaac148816cb70ec39f5647dac29670c9c027e34d9588fae25",
+      "bytes": 21057
+    },
+    {
+      "path": "assets/players/jia-campaign/dao-sweep.png",
+      "sha256": "950df211ce0ea6d22562d9ebed972f7fc7e4b7098716e060ef992b0092b10638",
+      "bytes": 39895,
+      "size": [
+        1024,
+        256
+      ]
+    },
+    {
+      "path": "assets/players/jia-campaign/manifest.json",
+      "sha256": "7e40ae6b2b41b140f6e13580b5e8225ed62abf722555725128da46343b6208e2",
+      "bytes": 2747
+    },
+    {
+      "path": "assets/players/jia-campaign/spear-attack.aseprite",
+      "sha256": "5f788a9faea2209e37e792793d61b583b726d98300047993bc414cf3b0333c0f",
+      "bytes": 19345
+    },
+    {
+      "path": "assets/players/jia-campaign/spear-attack.png",
+      "sha256": "43a1cd8542309b2324c71c549190360fae71c8161a8a00284429329e00123147",
+      "bytes": 35960,
+      "size": [
+        1024,
+        256
+      ]
+    },
+    {
+      "path": "assets/players/jia-campaign/spear-break.aseprite",
+      "sha256": "be529f8ad8c99efa7ebc743e1f2697688642846c21bd9f5269e2c84f81528898",
+      "bytes": 19831
+    },
+    {
+      "path": "assets/players/jia-campaign/spear-break.png",
+      "sha256": "67f0fd0a814eafbf9c69b0742d8b24a5d5f4f5d13b4d9b6c8e7f77d3d685ba4f",
+      "bytes": 37026,
+      "size": [
+        1024,
+        256
+      ]
+    },
+    {
+      "path": "assets/players/jia-campaign/spear-idle.aseprite",
+      "sha256": "219f41ea05a8b98204ce544603714d5ba9b3b56173cfad3b68a6f974562cd7ec",
+      "bytes": 22979
+    },
+    {
+      "path": "assets/players/jia-campaign/spear-idle.png",
+      "sha256": "e85b895198bd198f6f3ebf3840c8d4064944f0d814c598a2ee9bb6eeb9efeece",
+      "bytes": 44888,
+      "size": [
+        1024,
+        256
+      ]
+    },
+    {
+      "path": "assets/players/jia-campaign/spear-run.aseprite",
+      "sha256": "e405920d538ff276c18db2c47296674ffbc7b7739eeb211c5157c86c0610eb79",
+      "bytes": 36081
+    },
+    {
+      "path": "assets/players/jia-campaign/spear-run.png",
+      "sha256": "74392f8a8a72ee11ab2d34c58f16001f88cdb46a72e5837d5674f78f7d2173da",
+      "bytes": 63401,
+      "size": [
+        2048,
+        256
+      ]
+    },
+    {
+      "path": "assets/players/jia-campaign/spear-sweep.aseprite",
+      "sha256": "f8e71c4d8ce5db5170415c87bf0c7b58640dc8d1e48457eee69f508e528c4523",
+      "bytes": 19391
+    },
+    {
+      "path": "assets/players/jia-campaign/spear-sweep.png",
+      "sha256": "8f48515416520c0b0055a8ee66e6051c2d39b19905509b5041fee7244088d2f2",
+      "bytes": 35710,
+      "size": [
+        1024,
+        256
+      ]
+    }
+  ],
+  "qa_outputs": [
+    {
+      "path": "design/jia-lord-combat-20261105/qa/alpha_review.lua",
+      "sha256": "894ccf22708c3b17cb3f93b6f24bdb564ef2abd4061e743ddbf3d768f6fd1960",
+      "bytes": 367
+    },
+    {
+      "path": "design/jia-lord-combat-20261105/qa/art-qa.json",
+      "sha256": "0b5dad8814e7da879e89ae1bf2d2e80e764978a53f3857e67b1be7c764a1340f",
+      "bytes": 30816
+    },
+    {
+      "path": "design/jia-lord-combat-20261105/qa/audit_campaign_art.py",
+      "sha256": "aeb008a127c6f2549e9f7131de3a98fa6018e87c33fe7b1449ea3a3b95be89c8",
+      "bytes": 8413
+    },
+    {
+      "path": "design/jia-lord-combat-20261105/qa/dao-alpha-review.png",
+      "sha256": "f62386e7a3364e9a187045636ad8535a17cd894e2344f6c0b846ce212514d276",
+      "bytes": 1709496
+    },
+    {
+      "path": "design/jia-lord-combat-20261105/qa/dao-alpha-review.png.import",
+      "sha256": "bba63d473a59521d5ffa6c180b30cc1b8517bc32af5e2e3796eca8dbd9cf70e2",
+      "bytes": 987
+    },
+    {
+      "path": "design/jia-lord-combat-20261105/qa/dao-idle-calibration.png",
+      "sha256": "03871360cb793184a5a947a8edbc5813ba03a95ce691eb9347c87ab5d9853c26",
+      "bytes": 104088
+    },
+    {
+      "path": "design/jia-lord-combat-20261105/qa/dao-idle-calibration.png.import",
+      "sha256": "128735949f852ce07372f93e897421533b946dab0044c9e9226e8e153c792825",
+      "bytes": 999
+    },
+    {
+      "path": "design/jia-lord-combat-20261105/qa/dao-runtime-contact-sheet.png",
+      "sha256": "5fe3fc61a414128cb3be9b5d7f4fe5937603a08df61ee2845072ef904d048ec3",
+      "bytes": 252167
+    },
+    {
+      "path": "design/jia-lord-combat-20261105/qa/dao-runtime-contact-sheet.png.import",
+      "sha256": "ff6e7b60d1e7b9870e201e4340b5644066851e47803e3f533409cd18c2e7c8b2",
+      "bytes": 1013
+    },
+    {
+      "path": "design/jia-lord-combat-20261105/qa/export_contact_sheet.lua",
+      "sha256": "899ab7b48a46e78a57244e759c39b4d444b27146ddb25abe94a977cfbc34e8b2",
+      "bytes": 528
+    },
+    {
+      "path": "design/jia-lord-combat-20261105/qa/spear-alpha-review.png",
+      "sha256": "55e0d00f27a0df2bb17016b84ec364fa23388fed1ac58184d89db3fef7033224",
+      "bytes": 1575518
+    },
+    {
+      "path": "design/jia-lord-combat-20261105/qa/spear-alpha-review.png.import",
+      "sha256": "45421fc23c2dbe1e187fa8e4addde57ce190712bb284730bec5d593132d54410",
+      "bytes": 993
+    },
+    {
+      "path": "design/jia-lord-combat-20261105/qa/spear-idle-calibration.png",
+      "sha256": "0905ff4b0180fdf8122942d79716e0f43281b0010f71d7259800b3a9ae5a2b63",
+      "bytes": 108346
+    },
+    {
+      "path": "design/jia-lord-combat-20261105/qa/spear-idle-calibration.png.import",
+      "sha256": "c3438487803e8e294bbfb10b09d8cec8c7313a2e0b647420062654956a27c92d",
+      "bytes": 1004
+    },
+    {
+      "path": "design/jia-lord-combat-20261105/qa/spear-runtime-contact-sheet.png",
+      "sha256": "3e68efaa6231035bd876324eebb80fc7c5fdfc33a116916c8a98f4bad6bc810a",
+      "bytes": 240657
+    },
+    {
+      "path": "design/jia-lord-combat-20261105/qa/spear-runtime-contact-sheet.png.import",
+      "sha256": "6ecec901ef87dca662f128785a3ee84c6d5396a8efbe4dca6b512fccb17d7c54",
+      "bytes": 1020
+    }
+  ],
+  "qa": "design/jia-lord-combat-20261105/qa/art-qa.json",
+  "static_contact_previews": [
+    "design/jia-lord-combat-20261105/qa/dao-runtime-contact-sheet.png",
+    "design/jia-lord-combat-20261105/qa/spear-runtime-contact-sheet.png"
+  ]
+}

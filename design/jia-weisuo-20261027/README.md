@@ -1,5 +1,7 @@
 # 贾苇索形象素材
 
+2026-11-05 现状：用户已确认后续的[诸侯亲征 v2 战斗形象](../jia-lord-combat-20261105/jia-lord-campaign-v2.png)并授权按剧情启用；像素动作和切换已接入，专项及完整工程检查通过。相关设计与此前各候选状态见[亲征制作目录](../jia-lord-combat-20261105/README.md)。本页其余内容保留当时的素材记录。
+
 2026-10-27。用户选择约27—30岁、精悍痞帅，并确认了[v2外貌](character-master-v2.png)。沿[角色战斗美术流程](../../docs/art/角色战斗美术制作流程.md)，先确定身份，再派生不同用途的素材；[v1首版](character-master-v1.png)与v2均保留。
 
 基于v2，内置 image_gen 生成了[透明设定板v3](character-master-v3-transparent.png)（1536×1024 RGBA）和[独立全身立绘](jia-standing-v1.png)（1024×1536 RGBA）。人物图不包含纸底或场景，立绘可直接叠于场景。[v1提示词](character-master-v1-prompt.txt)、[v2提示词](character-master-v2-prompt.txt)、[v3提示词](character-master-v3-transparent-prompt.txt)、[立绘提示词](jia-standing-v1-prompt.txt)与[生成清单](manifest.json)保留制作来源。
@@ -18,4 +20,4 @@
 
 提示词：[诸侯坏笑](jia-lord-smirk-v1-prompt.txt)、[诸侯大笑](jia-lord-laugh-v1-prompt.txt)、[日常大笑](jia-casual-laugh-v1-prompt.txt)、[日常走近](jia-casual-approach-v1-prompt.txt)；尺寸、哈希和素材引用见[生成清单](manifest.json)。
 
-起家立绘已用于主角卡和人物详情，诸侯／日常四张新立绘尚未接入游戏；战斗像素动画和独立小头像已接入，详见[战斗素材记录](../jia-combat-20261027/README.md)。
+起家立绘已用于主角卡和人物详情，本页所列的原诸侯／日常四张立绘尚未接入游戏；起家战斗像素动画和独立小头像已接入，详见[战斗素材记录](../jia-combat-20261027/README.md)。后续亲征 v2 的接入状态以文首记录为准。

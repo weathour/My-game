@@ -1,0 +1,27 @@
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+OpenGL API 3.3.0 NVIDIA 580.173.02 - Compatibility - Using Device: NVIDIA - NVIDIA GeForce RTX 5080
+
+SCRIPT ERROR: Invalid type in function '_count_histogram' in base 'SceneTree (chronicle_live_performance_bench.gd)'. The array of argument 1 (Array) does not have the same element type as the expected typed array argument.
+          at: _scenario (res://scripts/tests/chronicle_live_performance_bench.gd:393)
+          GDScript backtrace (most recent call first):
+              [0] _scenario (res://scripts/tests/chronicle_live_performance_bench.gd:393)
+              [1] _bench_frame (res://scripts/tests/chronicle_live_performance_bench.gd:291)
+SCRIPT ERROR: Invalid type in function '_count_histogram' in base 'SceneTree (chronicle_live_performance_bench.gd)'. The array of argument 1 (Array) does not have the same element type as the expected typed array argument.
+          at: _scenario (res://scripts/tests/chronicle_live_performance_bench.gd:393)
+          GDScript backtrace (most recent call first):
+              [0] _scenario (res://scripts/tests/chronicle_live_performance_bench.gd:393)
+              [1] _bench_frame (res://scripts/tests/chronicle_live_performance_bench.gd:291)
+SCRIPT ERROR: Invalid type in function '_count_histogram' in base 'SceneTree (chronicle_live_performance_bench.gd)'. The array of argument 1 (Array) does not have the same element type as the expected typed array argument.
+          at: _scenario (res://scripts/tests/chronicle_live_performance_bench.gd:393)
+          GDScript backtrace (most recent call first):
+              [0] _scenario (res://scripts/tests/chronicle_live_performance_bench.gd:393)
+              [1] _bench_frame (res://scripts/tests/chronicle_live_performance_bench.gd:291)
+ERROR: all requested scenarios completed
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _expect (res://scripts/tests/chronicle_live_performance_bench.gd:39)
+       [1] run (res://scripts/tests/chronicle_live_performance_bench.gd:452)
+       [2] _reset_view (res://scripts/tests/chronicle_live_performance_bench.gd:86)
+       [3] _frames (res://scripts/tests/chronicle_live_performance_bench.gd:42)
+LIVE_PERF_BENCH_REPORT /home/weathour/programs/desktop-projects/My-game/design/performance-20261105/baseline/results.json
+CHRONICLE_LIVE_PERFORMANCE_BENCH FAIL failures=1

@@ -83,6 +83,25 @@ func play_release(geometry: Dictionary, elapsed: float) -> void:
 	action_until = elapsed + (sprite.hframes - contact) / fps
 	_update_frame(elapsed)
 
+func present_summon_frame(clip: Dictionary, frame: int, direction: Vector2, alpha: float, offset: Vector2, elapsed: float) -> bool:
+	var image: Texture2D = clip.get("texture")
+	if image == null: return false
+	clock = elapsed
+	telling = false
+	clip_name = "summon:" + str(clip.get("id", ""))
+	if sprite.texture != image: sprite.texture = image
+	var count := maxi(1, int(clip.get("frames", 1)))
+	if sprite.hframes != count: sprite.hframes = count
+	sprite.frame = clampi(frame, 0, count - 1)
+	if absf(direction.x) > .01: sprite.flip_h = direction.x > 0 if bool(clip.get("faces_left",false)) else direction.x < 0
+	var dimensions: Array = clip.get("frame_size", [768,640])
+	var anchor: Array = clip.get("anchor_px", [384,608])
+	var ratio := float(metadata.get("body_height_px",224)) / maxf(1,float(clip.get("body_height_px",224)))
+	sprite.scale = Vector2.ONE * ratio
+	sprite.position = (Vector2(float(dimensions[0]),float(dimensions[1]))*.5-Vector2(float(anchor[0]),float(anchor[1])))*ratio+offset
+	sprite.modulate = Color(1,1,1,clampf(alpha,0,1))
+	return true
+
 func _clip_for_action(action_id: String, step: int = 0) -> String:
 	var routes: Dictionary = metadata.get("action_clips", {})
 	var mapped := str(routes.get(action_id + "@" + str(posmod(step, 2)), routes.get(action_id, "")))
@@ -110,6 +129,7 @@ func preview(action: String, elapsed: float) -> void:
 	sprite.frame = int(maxf(0, elapsed - clip_started) * float(clip.get("fps", 8))) % sprite.hframes
 
 func _select(key: String, elapsed: float) -> void:
+	sprite.scale = Vector2.ONE
 	clip_name = key if metadata.get("clips", {}).has(key) else "idle"
 	clip_started = elapsed
 	var clip: Dictionary = metadata.get("clips", {}).get(clip_name, {})

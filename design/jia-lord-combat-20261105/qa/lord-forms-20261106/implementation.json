@@ -1,0 +1,61 @@
+{
+  "scope": "presentation only; no campaign_service/save schema/battle data/controller changes",
+  "unlock": "B18 in completed only",
+  "battle_context": "historical node; campaign for B13/B14 and their existing successors",
+  "story_precedence": [
+    "explicit actor.texture",
+    "JIA actor.appearance/expression",
+    "event.jia_appearance",
+    "historical route/AND-OR authored gates"
+  ],
+  "rest_entry": {
+    "scene": [
+      "world",
+      "route"
+    ],
+    "requires": [
+      "finished",
+      "B18 completed"
+    ],
+    "presenter": "lord_casual",
+    "detail": "inherits source scene",
+    "formal_cards": "lord_formal"
+  },
+  "pose_map": {
+    "lord_formal": {
+      "neutral": "smirk",
+      "smirk": "smirk",
+      "laugh": "laugh",
+      "approach": "smirk"
+    },
+    "lord_casual": {
+      "neutral": "laugh",
+      "smirk": "laugh",
+      "laugh": "laugh",
+      "approach": "approach"
+    }
+  },
+  "source_sha256": {
+    "scripts/ui/chronicle/jia_appearance.gd": "7b2bbaadc6b5014ea5dd9d5b9b722ffa60887a511b229bc4b28bd515a8e3d675",
+    "scripts/ui/chronicle/chronicle_portraits.gd": "9e9e6d74138ee742e4be3c0ab2254585437c8d9826ac6e153fc46c1581e69a1e",
+    "scripts/ui/chronicle/chronicle_story_view.gd": "fb2b39979e9caf1d32112631a24984ccd22cc1144aaaf8fb24dabe0d7f66bf5d",
+    "scripts/content/story_catalog.gd": "688f4d224ddccaee9baa95e0628077a25b44d1a46d028915b94e34a76eb75c15",
+    "scripts/ui/chronicle/chronicle_campaign_chrome.gd": "65110d6c2dbba7ca7260ba882b37e4310bdfeaaf37d7d8e9e91b172a2a937f61",
+    "scripts/ui/chronicle/chronicle_shell.gd": "c213e0b325085f5c9db41be940bb02f7440b54ed00d9339fe98b3e79e211d6aa",
+    "scripts/ui/chronicle/chronicle_character_sheet.gd": "9b366400f4fb32cb538ab2354ad61655c821595b40dc672147f4038ad92f5058"
+  },
+  "self_checks": {
+    "import": 0,
+    "startup": 0,
+    "common_jia": {
+      "checks": 27,
+      "failures": 0
+    },
+    "story_ui": {
+      "checks": 111,
+      "failures": 0,
+      "strict_log_validator": 0
+    }
+  },
+  "independent_lord_and_native_validation": "owned by validation_recovery; not claimed here"
+}

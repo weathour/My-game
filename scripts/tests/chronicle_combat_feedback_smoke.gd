@@ -1,4 +1,5 @@
 extends SceneTree
+const H := preload("res://scripts/battle/player_hurtbox.gd")
 ## Confirmed damage + real renderer + cosmetic-budget and deterministic-state checks.
 const VIEW := preload("res://scripts/ui/chronicle/battle_view.gd")
 const BATTLE := preload("res://scripts/battle/battle_session.gd")
@@ -6,6 +7,8 @@ const FEEDBACK := preload("res://scripts/ui/chronicle/combat_feedback.gd")
 const C := preload("res://scripts/content/combat_catalog.gd")
 const ABILITY := preload("res://scripts/battle/ability_definition.gd")
 const SETTINGS := preload("res://scripts/shared/settings.gd")
+const MUSIC := preload("res://scripts/audio/music_catalog.gd")
+const BGM := preload("res://scripts/audio/music_player.gd")
 var checks := 0
 var failures := 0
 var capture_dir := ""
@@ -28,7 +31,7 @@ func request(stage: String) -> Dictionary:
 	return {"attempt_id":"feedback-"+stage,"members":["JIA","F11","F07"],"characters":records,"equipment":{"weapon":"plain_blade","armor":"cloth_armor","accessory":"ember_seal"},"stage":C.stage(stage),"seed":30418,"node":{"id":stage,"name":stage}}
 
 func context(b: RefCounted, amount: float, cast: int = 41) -> Dictionary:
-	return b.delivery_context({"source":"JIA","ability":"feedback_probe","mechanic":"","cast":cast,"damage":amount,"enchant":"","direct":true,"secondary":false,"damage_type":0,"slow":0.0,"duration":0.0,"impact_origin":b.position,"impact_direction":Vector2.RIGHT})
+	return b.delivery_context({"source":"JIA","ability":"JIA_basic","mechanic":"","cast":cast,"damage":amount,"enchant":"","direct":true,"secondary":false,"damage_type":0,"slow":0.0,"duration":0.0,"impact_origin":b.position,"impact_direction":Vector2.RIGHT})
 
 func capture(label: String) -> void:
 	await process_frame
@@ -70,7 +73,7 @@ func run() -> void:
 	root.add_child(viewport)
 	await mount("B01")
 	var feedback: Node = view.canvas.combat_feedback
-	expect(feedback.voices.size() == 6, "fixed six player-feedback voices")
+	expect(feedback.voices.size() == 14, "shared fourteen-voice combat pool with reserved warnings")
 	var count := 0
 	for category in feedback.CATEGORIES:
 		expect(feedback.streams[category].size() == feedback.CATEGORIES[category], "loaded clip variants " + category)
@@ -83,9 +86,8 @@ func run() -> void:
 	for variants in feedback.streams.values():
 		for stream in variants:
 			for i in stream.data.size() / 2: sample_peak = maxf(sample_peak, absf(float(stream.data.decode_s16(i * 2)) / 32768))
-	var common_peak_bound: float = sample_peak * feedback.VOICE_GAIN * feedback.MAX_EVENT_GAIN * feedback.MAX_VOICES
-	expect(common_peak_bound + .339983 < .95, "six full-volume common voices plus measured B01 bed retain sample headroom")
-	measurements.append({"fixture":"B01-bounded-level-check","first_seconds":16,"music_raw_peak":.3399829566478729,"music_raw_rms":.057429010901512846,"default_music_gain":.7,"default_sfx_gain":.65,"voice_gain":feedback.VOICE_GAIN,"max_event_gain":feedback.MAX_EVENT_GAIN,"six_common_peak_bound":common_peak_bound,"full_music_plus_six_common_bound":common_peak_bound + .339983})
+	expect(feedback.audio.MAX_VOICES == 14 and feedback.audio.RESERVED_WARNINGS == 2, "all combat sound shares a bounded pool with two warning reserves")
+	expect(AudioServer.get_bus_effect_count(AudioServer.get_bus_index(feedback.audio._sfx_bus)) == 1, "attempt combat mix includes a final safety limiter")
 	await sparse_and_lethal()
 	await crowd()
 	await shield_pause_comfort()
@@ -170,7 +172,7 @@ func crowd() -> void:
 	for round_index in 40:
 		var events: Array = []
 		for i in 42:
-			events.append({"kind":"damage_dealt","position":b.position,"target_id":targets[i].id,"amount":1,"direct":true,"cast_id":100 + round_index * 42 + i,"source":"JIA"})
+			events.append({"kind":"damage_dealt","position":b.position,"target_id":targets[i].id,"amount":1,"direct":true,"cast_id":100 + round_index * 42 + i,"source":"JIA","ability":"JIA_basic"})
 		f.consume(events, b, view.canvas.camera.bounds)
 		f.advance(.004, false, "")
 	expect(f.marks.size() <= f.MAX_MARKS and f.numbers.size() <= f.MAX_NUMBERS and f.counters.voices_peak <= f.MAX_VOICES, "1680-event stress obeys all fixed budgets")
@@ -183,7 +185,7 @@ func shield_pause_comfort() -> void:
 	var f: Node = view.canvas.combat_feedback
 	b.current().shield = 100
 	var hp: float = b.current().hp
-	b.projectiles.append({"position":b.position,"velocity":Vector2.ZERO,"life":1.0,"hostile":true,"damage":5,"source_id":88,"move_id":"probe"})
+	b.projectiles.append({"position":H.center(b.position),"velocity":Vector2.ZERO,"life":1.0,"hostile":true,"damage":5,"source_id":88,"move_id":"probe"})
 	b.tick(.001, Vector2.ZERO)
 	view.canvas.consume_events(b.events)
 	view.canvas.refresh(false)
@@ -245,7 +247,7 @@ func pickup_and_health_loss() -> void:
 	var f: Node = view.canvas.combat_feedback
 	var hp: float = b.current().hp
 	b.current().shield = 0
-	b.projectiles.append({"position":b.position,"velocity":Vector2.ZERO,"life":1.0,"hostile":true,"damage":5,"source_id":88,"move_id":"probe"})
+	b.projectiles.append({"position":H.center(b.position),"velocity":Vector2.ZERO,"life":1.0,"hostile":true,"damage":5,"source_id":88,"move_id":"probe"})
 	b.tick(.001,Vector2.ZERO)
 	view.canvas.consume_events(b.events); view.canvas.refresh(false)
 	expect(b.current().hp < hp and not f.player_guarded and view.canvas.actor_visual.modulate == Color("ffb1a1"), "real health loss chooses damage tint")
@@ -307,7 +309,7 @@ func rewards_and_numbers() -> void:
 	expect(f.marks.is_empty() and f.numbers.is_empty() and f.counters.offscreen_skipped > 0, "offscreen impact drops cosmetic work")
 	f.clear()
 	for category in ["cast_blade","hit_light","hit_heavy","guard","death_ghost","magic","pickup","level","elite"]: f._sound(category, 1, 1)
-	expect(f.counters.voices_peak == 6 and f.voices.size() == 6, "actual concurrent playback reaches fixed six-voice ceiling")
+	expect(f.counters.voices_peak > 0 and f.counters.voices_peak <= 12 and f.voices.size() == 14, "ordinary playback honors shared pool and two unoccupied warning reserves")
 	f.clear()
 	for i in 20:
 		var event := remote.duplicate(); event.position = b.position + Vector2((i % 5 - 2) * 35, (i / 5) * 35); event.cast_id = 500 + i; event.amount = 11 + i
@@ -352,7 +354,7 @@ func cast_audio_routing() -> void:
 			if event.kind == "cast": found = event.ability_kind == row.expected and event.damage_type == ABILITY.DamageType.PHYSICAL
 		expect(found,"successful event preserves real ability kind " + str(row.ability.id))
 		f.consume(b.events,b,Rect2())
-		expect(f.counters.sounds_started == 0,"ward/mana/projectile never plays a blade swish " + str(row.ability.id))
+		expect(f.counters.sounds_started > 0,"ward/mana/projectile has its own authored cast sound " + str(row.ability.id))
 		f.clear(); await process_frame; f.free()
 	var b := BATTLE.new(request("B01"))
 	spawn(b,b.position + Vector2(70,0))
@@ -376,7 +378,7 @@ func event_priority_regressions() -> void:
 	var enemy := spawn(b,b.position + Vector2(80,0))
 	view.canvas.refresh(false)
 	var f: Node = view.canvas.combat_feedback
-	var direct := {"kind":"damage_dealt","position":enemy.position,"target_id":enemy.id,"amount":10.0,"direct":true,"secondary":false,"mechanic":"curse","cast_id":600,"source":"JIA","damage_type":0,"direction":Vector2.RIGHT}
+	var direct := {"kind":"damage_dealt","position":enemy.position,"target_id":enemy.id,"amount":10.0,"direct":true,"secondary":false,"mechanic":"curse","cast_id":600,"source":"JIA","ability":"JIA_basic","damage_type":0,"direction":Vector2.RIGHT}
 	f.consume([direct],b,view.canvas.camera.bounds)
 	expect(f.marks.size() == 1 and f.numbers.size() == 1 and not f.contacts[enemy.id].periodic, "initial direct curse has full impact feedback")
 	var periodic: Dictionary = direct.duplicate(); periodic.direct = false; periodic.secondary = true
@@ -400,9 +402,11 @@ func event_priority_regressions() -> void:
 		f.advance(.1,false,"")
 	expect(f.counters.sounds_started > before, "frequent ordinary tells retain an audible impact channel")
 	f.clear()
-	enemy.current_action = {"major":true}
-	f.consume([{"kind":"enemy_tell","id":enemy.id},direct],b,view.canvas.camera.bounds)
-	expect(f.suppressed_until > f.clock, "genuine major warning keeps audio priority")
+	enemy.current_action = {"major":true,"id":"swipe"}
+	enemy.windup=1.0
+	enemy.action_serial=1
+	f.consume([{"kind":"enemy_tell","id":enemy.id,"action_serial":1},direct],b,view.canvas.camera.bounds)
+	expect(f.audio.counters.warnings_started > 0, "genuine major warning has its own prioritized sound")
 
 func boss_priority() -> void:
 	await mount("B18")
@@ -413,21 +417,15 @@ func boss_priority() -> void:
 	var f: Node = view.canvas.combat_feedback
 	f.consume([],b,view.canvas.camera.bounds)
 	SETTINGS.save_sfx_volume(1); f.refresh_settings()
-	for category in ["cast_blade","hit_light","hit_heavy","death_ghost","magic","pickup"]: f._sound(category,1,5)
-	for voice in f.voices: expect(db_to_linear(voice.volume_db) <= f.VOICE_GAIN + .00001, "maximum settings honor event gain cap")
-	view.canvas.consume_events([{"kind":"boss_phase","id":boss.id,"position":boss.position}])
-	var playing := false
-	for voice in f.voices: playing = playing or voice.playing
-	expect(not playing and f.suppressed_until > f.clock, "Boss cue preempts all six ordinary voices")
-	expect(view.canvas.boss_feedback.voices.size() == 3, "Boss retains separate bounded three-voice pool")
-	view.canvas.boss_feedback.consume([{"kind":"boss_impact","position":boss.position},{"kind":"boss_defeated","position":boss.position}])
-	var boss_playing := 0
-	for voice in view.canvas.boss_feedback.voices:
-		if voice.playing: boss_playing += 1
-	if DisplayServer.get_name() != "headless": expect(boss_playing == 3, "actual Boss pool reaches three while common six stay preempted")
-	f._sound("guard",4,1.15)
-	for voice in f.voices:
-		if voice.playing: expect(db_to_linear(voice.volume_db) <= f.VOICE_GAIN + .00001, "priority player guard retains capped maximum gain")
+	for category in ["cast_blade","hit_light","hit_heavy","death_ghost","magic","pickup"]: f._sound(category,1,1)
+	view.canvas.consume_events([{"kind":"boss_phase","id":boss.id,"position":boss.position,"definition_id":"B18","form_index":1}])
+	var warning := false
+	for index in f.audio.records.size():
+		if int(f.audio.records[index].get("priority",0))>=6: warning=true
+	expect(warning and f.audio.counters.voices_peak<=14, "Boss transition enters unified priority pool without exceeding shared budget")
+	expect(view.canvas.boss_feedback.voices.is_empty(), "Boss visual feedback no longer owns a competing audio pool")
+	f._sound("guard",5,1)
+	expect(f.audio.counters.started>0,"player guard remains audible through priority scheduling")
 	SETTINGS.save_sfx_volume(.65)
 	await capture("B18-boss-priority")
 	f.advance(.1,false,"failed")

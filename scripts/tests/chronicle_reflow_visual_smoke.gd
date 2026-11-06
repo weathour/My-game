@@ -102,10 +102,15 @@ func run() -> void:
 			expect(shell.reward_focus == "M03", "keyboard focus updates detail")
 			await capture("reward-%d-%d" % [count,dimensions.x])
 			if dimensions.x == 960 and count == 7:
+				var before: Dictionary = state.data.duplicate(true)
+				var rng_before: int = state.reward_rng.state
 				await click("reward_details")
-				fits("modal_confirm")
+				expect(is_instance_valid(shell.character_sheet) and shell.character_sheet.character_id=="M03" and shell.character_sheet.active_tab=="abilities", "reward details open the focused character's abilities sheet")
+				fits("character_back")
 				await capture("reward-details-960")
-				await click("modal_confirm")
+				await click("character_back")
+				expect(state.data==before and state.reward_rng.state==rng_before, "reward inspection preserves the draft, ownership and RNG")
+				expect(not is_instance_valid(shell.character_sheet) and viewport.gui_get_focus_owner()==shell.find_child("reward_details",true,false), "reward details close restores its entry focus")
 			state.data.pending = {}
 	shell.queue_free()
 	await frames()

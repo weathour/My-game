@@ -14,10 +14,7 @@ var phase_remaining := 0.0
 var paused := false
 
 func _ready() -> void:
-	for i in MAX_VOICES:
-		var voice := AudioStreamPlayer.new()
-		add_child(voice)
-		voices.append(voice)
+	pass
 
 func consume(events: Array) -> void:
 	for event in events:
@@ -31,13 +28,18 @@ func consume(events: Array) -> void:
 			duration = .48
 			victory_remaining = duration
 		var geometry: Dictionary = event.get("geometry", {}).duplicate(true)
+		# A projectile fan describes release directions, not an instantaneous
+		# damaging sector. Its individual solid bullets already show danger.
+		if kind == "boss_impact" and not THREATS.is_area_impact(geometry): continue
 		marks.append({"kind":kind, "point":point, "geometry":geometry, "start":clock, "duration":duration})
 		while marks.size() > 8: marks.pop_front()
-		_sound(kind)
 
 func advance(delta: float, is_paused: bool, outcome: String) -> void:
 	paused = is_paused
-	for voice in voices: voice.stream_paused = paused
+	for voice in voices:
+		voice.stream_paused = paused
+		var gain := SETTINGS.load_sfx_gain("boss") * MAX_GAIN
+		voice.volume_db = linear_to_db(gain) if gain > 0.0 else -80.0
 	if paused: return
 	if outcome == "failed": clear(); return
 	clock += maxf(0, delta)
@@ -57,7 +59,7 @@ func clear() -> void:
 
 func _sound(kind: String) -> void:
 	if voices.is_empty() or DisplayServer.get_name() == "headless": return
-	var volume := SETTINGS.load_sfx_volume()
+	var volume := SETTINGS.load_sfx_gain("boss")
 	if volume <= 0: return
 	if not sounds.has(kind):
 		sounds[kind] = SOUNDS.create(kind)
@@ -78,7 +80,7 @@ func draw(painter: Node2D, origin: Vector2, scale: float, reduced_motion: bool, 
 		color.a = alpha
 		if mark.kind == "boss_impact" and not mark.geometry.is_empty():
 			# Outline the actual released footprint, never invent a larger damage disc.
-			var outline := THREATS.outline(mark.geometry)
+			var outline := THREATS.impact_outline(mark.geometry)
 			if outline.size() > 2:
 				outline.append(outline[0])
 				painter.draw_polyline(outline, color, 3 if reduced_flash else 5, true)

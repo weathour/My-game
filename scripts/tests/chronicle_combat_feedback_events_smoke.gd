@@ -1,4 +1,5 @@
 extends SceneTree
+const H := preload("res://scripts/battle/player_hurtbox.gd")
 ## Result provenance only. Fixtures never change production balance or save schemas.
 const B := preload("res://scripts/battle/battle_session.gd")
 const C := preload("res://scripts/content/combat_catalog.gd")
@@ -49,7 +50,7 @@ func context(b: RefCounted, amount: float, source: String = "JIA", direct: bool 
 		"slow":0.0, "duration":0.0, "impact_origin":b.position, "impact_direction":Vector2.RIGHT})
 
 func incoming(b: RefCounted, amount: float) -> void:
-	b.projectiles.append({"position":b.position, "velocity":Vector2.ZERO, "life":1.0, "hostile":true, "damage":amount, "source_id":88, "move_id":"probe"})
+	b.projectiles.append({"position":H.center(b.position), "velocity":Vector2.ZERO, "life":1.0, "hostile":true, "damage":amount, "source_id":88, "move_id":"probe"})
 
 func run() -> void:
 	expect(ProjectSettings.globalize_path("user://").begins_with("/tmp/"), "saves isolated in temporary XDG")

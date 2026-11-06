@@ -1,0 +1,287 @@
+{
+  "status": "passed",
+  "audited_at": 1793950109.9060318,
+  "elapsed_seconds": 66.43831777572632,
+  "frames": 3000,
+  "cases": [
+    {
+      "case": "B17-human-gaoshun-dense",
+      "frames": 750,
+      "observed_proxies": [
+        "M03_human",
+        "M04_human"
+      ],
+      "boss_collaboration_trace_events": 7,
+      "logic_event_sha256": "c35dd69fe450a1dd9e735c3226d2e89766f4aaeac84cd676a6e53cbbaf07c55e",
+      "logic_state_sha256": "0443b6c74245333d077f58d78ba109e8df5dafeef373a6b7e08fae94231e1a69",
+      "warm_wall": {
+        "max_ms": 115.483,
+        "over_16_67ms": 271,
+        "over_33_33ms": 89,
+        "over_50ms": 29,
+        "p50_ms": 16.123,
+        "p95_ms": 46.216,
+        "p99_ms": 81.198,
+        "samples": 630
+      },
+      "full_wall": {
+        "max_ms": 115.483,
+        "over_16_67ms": 272,
+        "over_33_33ms": 90,
+        "over_50ms": 30,
+        "p50_ms": 15.332,
+        "p95_ms": 42.593,
+        "p99_ms": 77.223,
+        "samples": 750
+      },
+      "population_max": {
+        "authored_transients": 4,
+        "effects": 15,
+        "enemies": 95,
+        "enemy_views": 95,
+        "gems": 33,
+        "hazards": 3,
+        "pending_patterns": 4,
+        "projectiles": 369,
+        "skill_states": 77,
+        "skill_transients": 83,
+        "telegraphs": 17
+      },
+      "events": {
+        "ability_effect": 1,
+        "ability_release": 26,
+        "boss_impact": 4,
+        "cast": 24,
+        "collaboration": 2,
+        "damage_dealt": 424,
+        "damage_taken": 16,
+        "enemy_hazard_release": 1,
+        "enemy_release": 204,
+        "enemy_remove": 6,
+        "enemy_tell": 223,
+        "hurt": 16,
+        "kill": 54,
+        "mechanic": 2,
+        "message": 12,
+        "player_hit": 16,
+        "xp_pickup": 49
+      }
+    },
+    {
+      "case": "B17-human-chengong-dense",
+      "frames": 750,
+      "observed_proxies": [
+        "M04_human"
+      ],
+      "boss_collaboration_trace_events": 6,
+      "logic_event_sha256": "72cb05aff02ff832df30e46b03df196088da7aabded431b0f85b9fc81a6095fe",
+      "logic_state_sha256": "82717480c03ce2d9a52f5559f42723775d9735b3d72d222c173c9818b5708cb3",
+      "warm_wall": {
+        "max_ms": 85.84,
+        "over_16_67ms": 198,
+        "over_33_33ms": 58,
+        "over_50ms": 25,
+        "p50_ms": 15.003,
+        "p95_ms": 44.388,
+        "p99_ms": 66.372,
+        "samples": 630
+      },
+      "full_wall": {
+        "max_ms": 95.815,
+        "over_16_67ms": 265,
+        "over_33_33ms": 60,
+        "over_50ms": 26,
+        "p50_ms": 15.058,
+        "p95_ms": 43.021,
+        "p99_ms": 66.372,
+        "samples": 750
+      },
+      "population_max": {
+        "authored_transients": 4,
+        "effects": 14,
+        "enemies": 95,
+        "enemy_views": 95,
+        "gems": 26,
+        "hazards": 3,
+        "pending_patterns": 5,
+        "projectiles": 318,
+        "skill_states": 80,
+        "skill_transients": 85,
+        "telegraphs": 15
+      },
+      "events": {
+        "ability_effect": 1,
+        "ability_release": 26,
+        "boss_impact": 3,
+        "cast": 24,
+        "collaboration": 1,
+        "damage_dealt": 402,
+        "damage_taken": 12,
+        "enemy_hazard_release": 3,
+        "enemy_release": 205,
+        "enemy_remove": 6,
+        "enemy_tell": 226,
+        "hurt": 12,
+        "kill": 42,
+        "mechanic": 2,
+        "message": 12,
+        "player_hit": 12,
+        "xp_pickup": 37
+      }
+    },
+    {
+      "case": "B17-war-gaoshun-dense",
+      "frames": 750,
+      "observed_proxies": [
+        "M03_WAR"
+      ],
+      "boss_collaboration_trace_events": 3,
+      "logic_event_sha256": "f245180ed9632b771688082ea5b182f22cf4b258914807496ae262e4e27a766c",
+      "logic_state_sha256": "adfc50f0e6f748418de4c741a1d8810a58a57369bc2d94891e07f1bb49243082",
+      "warm_wall": {
+        "max_ms": 94.799,
+        "over_16_67ms": 397,
+        "over_33_33ms": 81,
+        "over_50ms": 31,
+        "p50_ms": 18.314,
+        "p95_ms": 48.398,
+        "p99_ms": 71.462,
+        "samples": 630
+      },
+      "full_wall": {
+        "max_ms": 94.799,
+        "over_16_67ms": 398,
+        "over_33_33ms": 82,
+        "over_50ms": 32,
+        "p50_ms": 17.279,
+        "p95_ms": 47.831,
+        "p99_ms": 71.049,
+        "samples": 750
+      },
+      "population_max": {
+        "authored_transients": 4,
+        "effects": 14,
+        "enemies": 95,
+        "enemy_views": 95,
+        "gems": 34,
+        "hazards": 0,
+        "pending_patterns": 5,
+        "projectiles": 453,
+        "skill_states": 78,
+        "skill_transients": 83,
+        "telegraphs": 15
+      },
+      "events": {
+        "ability_effect": 1,
+        "ability_release": 26,
+        "boss_impact": 3,
+        "boss_phase": 1,
+        "cast": 24,
+        "collaboration": 1,
+        "damage_dealt": 425,
+        "damage_taken": 16,
+        "enemy_release": 208,
+        "enemy_remove": 7,
+        "enemy_tell": 232,
+        "hurt": 16,
+        "kill": 59,
+        "mechanic": 2,
+        "message": 12,
+        "player_hit": 16,
+        "xp_pickup": 53
+      }
+    },
+    {
+      "case": "B17-war-chengong-dense",
+      "frames": 750,
+      "observed_proxies": [
+        "M04_WAR"
+      ],
+      "boss_collaboration_trace_events": 6,
+      "logic_event_sha256": "75994ec43b2f05047b10c4d769b4aa0d5723021ea843d50cbdf3517e566f23d6",
+      "logic_state_sha256": "635a5e6809f74eb0eafaac0cf09e8d2b4595fd761930dd6605116b78b5cc75f4",
+      "warm_wall": {
+        "max_ms": 45.679,
+        "over_16_67ms": 400,
+        "over_33_33ms": 7,
+        "over_50ms": 0,
+        "p50_ms": 17.84,
+        "p95_ms": 23.592,
+        "p99_ms": 34.502,
+        "samples": 630
+      },
+      "full_wall": {
+        "max_ms": 47.566,
+        "over_16_67ms": 461,
+        "over_33_33ms": 10,
+        "over_50ms": 0,
+        "p50_ms": 17.841,
+        "p95_ms": 23.523,
+        "p99_ms": 37.114,
+        "samples": 750
+      },
+      "population_max": {
+        "authored_transients": 4,
+        "effects": 12,
+        "enemies": 95,
+        "enemy_views": 95,
+        "gems": 20,
+        "hazards": 3,
+        "pending_patterns": 5,
+        "projectiles": 459,
+        "skill_states": 78,
+        "skill_transients": 84,
+        "telegraphs": 15
+      },
+      "events": {
+        "ability_effect": 1,
+        "ability_release": 26,
+        "boss_impact": 3,
+        "boss_phase": 1,
+        "cast": 24,
+        "collaboration": 1,
+        "damage_dealt": 414,
+        "damage_taken": 15,
+        "enemy_hazard_release": 3,
+        "enemy_release": 207,
+        "enemy_remove": 6,
+        "enemy_tell": 227,
+        "hurt": 15,
+        "kill": 47,
+        "mechanic": 2,
+        "message": 12,
+        "player_hit": 15,
+        "xp_pickup": 42
+      }
+    }
+  ],
+  "strict_failures": [],
+  "warning_count": 44,
+  "warnings": "old exported scene UID lookup uses packed text resource paths; no source-project fallback",
+  "pack": {
+    "path": "/tmp/my-game-check.pM7fgF/pack-smokes/game.pck",
+    "bytes": 237767328,
+    "sha256": "8ff5f9dbdbca8e8ffd32a4a2648e5a0eed68aee782a2b04c14c9c0996c68b762"
+  },
+  "fixture_sha256": {
+    "b17_dense_bench.gd": "b3155cb21454a649e8c451034ce1b15ab3187a04a42235b1badb1254d4a7076c",
+    "live_performance_base.gd": "6049e557855b39739b899ff7e58d5d9015b5e4192d2cfe40ca7b0af2005cd634"
+  },
+  "empty_cwd": true,
+  "same_fixture_required_after": true,
+  "raw_results": "before/results.json",
+  "raw_results_sha256": "4e02e8bf0b1c767ba7a7638fc5679abfcfdf8fa099cfe792e473aed30fec8400",
+  "native_log": "before-native.log",
+  "native_log_sha256": "633bde456b81ee5df9a168976f9af956be9e2c8de641954a290f1b4d908e8688",
+  "calibration_failures_preserved": [
+    "before-initial-run.json",
+    "before-calibration2-run.json"
+  ],
+  "gpu_released": true,
+  "godot": {
+    "path": "/home/weathour/.local/bin/godot-4.6.2",
+    "sha256": "5a806b2b385279d9607094d33e946ed828e9606df4cb46d258ca27468dc5c1c9",
+    "same_as_prior_binary_freeze": true,
+    "mtime_precedes_capture": true
+  }
+}

@@ -23,11 +23,11 @@ func _init(value: Dictionary, seed_value: int) -> void:
 	rng.seed = seed_value
 	configuration_error = "; ".join(STAGES.runtime_errors(config))
 
-func tick(delta: float, live_count: int, actor: Vector2, living: Array = []) -> Array:
+func tick(delta: float, live_count: int, actor: Vector2, living: Array = [], actor_velocity: Vector2 = Vector2.ZERO) -> Array:
 	if not configuration_error.is_empty(): return []
 	elapsed += delta
 	var spawns: Array = []
-	if not boss_spawned and (elapsed >= config.boss_time or kills >= config.boss_kills):
+	if not boss_spawned and (elapsed >= config.boss_time or (elapsed>=float(config.get("boss_min_time",0.0)) and kills >= config.boss_kills)):
 		boss_spawned = true
 		var boss := spawn("boss", SPACE.challenge_position(actor))
 		if boss != null: spawns.append(boss)
@@ -39,19 +39,35 @@ func tick(delta: float, live_count: int, actor: Vector2, living: Array = []) -> 
 			if elapsed >= candidate.at: wave = candidate
 		spawn_remaining += float(wave.get("interval", config.spawn_interval))
 		var cycle: Array = wave.cycle
-		for i in mini(int(wave.count), maxi(0, config.enemy_cap - live_count)):
-			var point := SPACE.reinforcement(actor, rng)
-			var kind: String = str(cycle[wave_cursor % cycle.size()])
-			var definition := CATALOG.definition(kind)
-			var role: String = str(definition.get("params", {}).get("role", "melee"))
-			var count := 0
-			for existing in living + spawns:
-				if not existing.dead and existing.parent_id == 0 and str(existing.params.get("role", "melee")) == role: count += 1
-			if count < int(config.get("role_caps", {}).get(role, 999)):
-				var enemy := spawn(kind, point)
-				if enemy == null: return spawns
-				spawns.append(enemy)
-			wave_cursor += 1
+		var role_counts: Dictionary={}
+		for existing in living:
+			if not existing.dead and existing.parent_id==0:
+				var role:=str(existing.params.get("role","melee"))
+				role_counts[role]=int(role_counts.get(role,0))+1
+		var base_angle:=rng.randf_range(-PI,PI)
+		if actor_velocity.length_squared()>1: base_angle=actor_velocity.angle()
+		var formation:=str(wave.get("formation","surround"))
+		var count:=mini(int(wave.count),maxi(0,config.enemy_cap-live_count))
+		for i in count:
+			var point: Vector2
+			if not wave.has("formation"): point=SPACE.reinforcement(actor,rng)
+			else:
+				var angle:=base_angle
+				if formation=="surround": angle+=TAU*i/maxi(1,count)+rng.randf_range(-.15,.15)
+				elif formation=="flank": angle+=(-1 if i%2==0 else 1)*PI*.5+rng.randf_range(-.25,.25)
+				else: angle+=(float(i)/maxi(1,count-1)-.5)*float(wave.get("formation_spread",1.1))
+				var center: Vector2=actor+actor_velocity*float(wave.get("intercept_lead",1.0)) if formation=="intercept" else actor
+				var radius:=float(wave.get("spawn_radius",620.0))
+				point=SPACE.clamp_point(center+Vector2(cos(angle)*radius,sin(angle)*radius*.70),Vector2(45,45))
+				if point.distance_to(actor)<260: point=SPACE.reinforcement(actor,rng)
+			var kind:=str(cycle[wave_cursor%cycle.size()])
+			var definition:=CATALOG.definition(kind)
+			var role:=str(definition.get("params",{}).get("role","melee"))
+			if int(role_counts.get(role,0))<int(config.get("role_caps",{}).get(role,999)):
+				var enemy:=spawn(kind,point)
+				if enemy==null: return spawns
+				spawns.append(enemy);role_counts[role]=int(role_counts.get(role,0))+1
+			wave_cursor+=1
 	return spawns
 
 func spawn(kind: String, point: Vector2) -> RefCounted:

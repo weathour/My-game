@@ -68,94 +68,915 @@ const FORM_COPY := {
 	]
 }
 
+const FORM_DEFINITIONS := {
+	"B15": [
+		{
+			"name": "曹休",
+			"body_height": 120,
+			"radius": 30,
+			"speed": 66,
+			"attacks": [
+				{
+					"id": "hunter_aim",
+					"action": "shot",
+					"shape": "line",
+					"range": 1300,
+					"windup": 0.9,
+					"recovery": 1.102,
+					"damage_scale": 1.0,
+					"major": true,
+					"length": 1300,
+					"half_width": 12,
+					"speed": 420,
+					"life": 3.2,
+					"warning_policy": "aim",
+					"bullet_style": "needle",
+					"hit_radius": 4.0,
+					"burst_count": 3,
+					"burst_interval": 0.24,
+					"angle_step": 0.08,
+					"aim_each_burst": true
+				},
+				{
+					"id": "hunter_volley",
+					"action": "fan",
+					"shape": "fan",
+					"range": 1200,
+					"windup": 1.0,
+					"recovery": 1.218,
+					"damage_scale": 0.8,
+					"major": true,
+					"radius": 1200,
+					"count": 19,
+					"spread": 2.8,
+					"speed": 260,
+					"life": 5.0,
+					"warning_policy": "none",
+					"bullet_style": "orb",
+					"hit_radius": 4.0,
+					"burst_count": 3,
+					"burst_interval": 0.32,
+					"angle_step": 0.08,
+					"aim_each_burst": false
+				},
+				{
+					"id": "hunter_reposition",
+					"action": "charge",
+					"shape": "line",
+					"range": 820,
+					"windup": 1.15,
+					"recovery": 1.508,
+					"damage_scale": 0.9,
+					"major": true,
+					"length": 820,
+					"half_width": 38.4,
+					"warning_policy": "area",
+					"secondary_pattern": {
+						"kind": "fan",
+						"count": 23,
+						"speed": 205,
+						"life": 5.0,
+						"hit_radius": 4.5,
+						"burst_count": 2,
+						"burst_interval": 0.34,
+						"angle_step": 0.14,
+						"angle_offset": 0.0,
+						"aim_each_burst": false,
+						"bullet_style": "orb",
+						"spread": 4.0
+					}
+				}
+			]
+		},
+		{
+			"name": "鬼猎兽相",
+			"body_height": 204,
+			"radius": 43,
+			"speed": 78,
+			"attacks": [
+				{
+					"id": "beast_hunt",
+					"action": "fan",
+					"shape": "fan",
+					"range": 1200,
+					"windup": 1.0,
+					"recovery": 1.16,
+					"damage_scale": 0.9,
+					"major": true,
+					"radius": 1200,
+					"count": 27,
+					"spread": 3.8,
+					"speed": 240,
+					"life": 5.0,
+					"warning_policy": "none",
+					"bullet_style": "orb",
+					"hit_radius": 4.0,
+					"burst_count": 4,
+					"burst_interval": 0.32,
+					"angle_step": 0.08,
+					"aim_each_burst": false
+				},
+				{
+					"id": "beast_leap",
+					"action": "charge",
+					"shape": "line",
+					"range": 820,
+					"windup": 1.25,
+					"recovery": 1.276,
+					"damage_scale": 1.15,
+					"major": true,
+					"length": 820,
+					"half_width": 60.0,
+					"warning_policy": "area",
+					"secondary_pattern": {
+						"kind": "fan",
+						"count": 31,
+						"speed": 205,
+						"life": 5.0,
+						"hit_radius": 4.5,
+						"burst_count": 3,
+						"burst_interval": 0.34,
+						"angle_step": 0.14,
+						"angle_offset": 0.0,
+						"aim_each_burst": false,
+						"bullet_style": "orb",
+						"spread": 4.0
+					}
+				},
+				{
+					"id": "hunt_mark",
+					"action": "marker",
+					"shape": "marker",
+					"range": 1050,
+					"windup": 1.227,
+					"recovery": 1.276,
+					"damage_scale": 1.1,
+					"major": true,
+					"radius": 208.79999999999998,
+					"warning_policy": "area",
+					"marker_count": 5,
+					"marker_spacing": 334.08,
+					"marker_delay": 0.18,
+					"secondary_pattern": {
+						"kind": "ring",
+						"count": 44,
+						"speed": 175,
+						"life": 5.0,
+						"hit_radius": 4.5,
+						"burst_count": 2,
+						"burst_interval": 0.34,
+						"angle_step": 0.1,
+						"angle_offset": 0.0,
+						"aim_each_burst": false,
+						"bullet_style": "orb",
+						"gap_width": 1.1,
+						"gap_angle_offset": 0.65
+					}
+				},
+				{
+					"id": "beast_rend",
+					"action": "slam",
+					"shape": "sector",
+					"range": 341.59999999999997,
+					"windup": 1.25,
+					"recovery": 1.798,
+					"damage_scale": 1.2,
+					"major": true,
+					"radius": 341.59999999999997,
+					"spread": 2.6,
+					"warning_policy": "area",
+					"secondary_pattern": {
+						"kind": "ring",
+						"count": 44,
+						"speed": 195,
+						"life": 5.0,
+						"hit_radius": 4.5,
+						"burst_count": 2,
+						"burst_interval": 0.34,
+						"angle_step": 0.12,
+						"angle_offset": 0.0,
+						"aim_each_burst": false,
+						"bullet_style": "orb",
+						"gap_width": 1.0,
+						"gap_angle_offset": 0.65
+					}
+				}
+			]
+		}
+	],
+	"B16": [
+		{
+			"name": "曹纯",
+			"body_height": 128,
+			"radius": 31,
+			"speed": 62,
+			"attacks": [
+				{
+					"id": "rider_lance",
+					"action": "charge",
+					"shape": "line",
+					"range": 820,
+					"windup": 1.15,
+					"recovery": 1.276,
+					"damage_scale": 1.0,
+					"major": true,
+					"length": 820,
+					"half_width": 45.6,
+					"warning_policy": "area",
+					"secondary_pattern": {
+						"kind": "fan",
+						"count": 23,
+						"speed": 205,
+						"life": 5.0,
+						"hit_radius": 4.5,
+						"burst_count": 2,
+						"burst_interval": 0.34,
+						"angle_step": 0.14,
+						"angle_offset": 0.0,
+						"aim_each_burst": false,
+						"bullet_style": "orb",
+						"spread": 4.0
+					}
+				},
+				{
+					"id": "rider_cleave",
+					"action": "slam",
+					"shape": "sector",
+					"range": 280.59999999999997,
+					"windup": 1.25,
+					"recovery": 1.218,
+					"damage_scale": 0.9,
+					"major": true,
+					"radius": 280.59999999999997,
+					"spread": 2.4,
+					"warning_policy": "area",
+					"secondary_pattern": {
+						"kind": "ring",
+						"count": 32,
+						"speed": 180,
+						"life": 5.0,
+						"hit_radius": 4.5,
+						"burst_count": 2,
+						"burst_interval": 0.34,
+						"angle_step": 0.12,
+						"angle_offset": 0.0,
+						"aim_each_burst": false,
+						"bullet_style": "orb",
+						"gap_width": 1.0,
+						"gap_angle_offset": 0.65
+					}
+				},
+				{
+					"id": "rider_return",
+					"action": "charge",
+					"shape": "line",
+					"range": 820,
+					"windup": 1.15,
+					"recovery": 1.74,
+					"damage_scale": 1.1,
+					"major": true,
+					"length": 820,
+					"half_width": 50.4,
+					"warning_policy": "area",
+					"secondary_pattern": {
+						"kind": "fan",
+						"count": 23,
+						"speed": 205,
+						"life": 5.0,
+						"hit_radius": 4.5,
+						"burst_count": 2,
+						"burst_interval": 0.34,
+						"angle_step": 0.14,
+						"angle_offset": 0.0,
+						"aim_each_burst": false,
+						"bullet_style": "orb",
+						"spread": 4.0
+					}
+				}
+			]
+		},
+		{
+			"name": "虎豹甲骑巨相",
+			"body_height": 218,
+			"radius": 44,
+			"speed": 70,
+			"attacks": [
+				{
+					"id": "tiger_long_charge",
+					"action": "charge",
+					"shape": "line",
+					"range": 1125.0,
+					"windup": 1.25,
+					"recovery": 1.45,
+					"damage_scale": 1.2,
+					"major": true,
+					"length": 1125.0,
+					"half_width": 74.39999999999999,
+					"warning_policy": "area",
+					"secondary_pattern": {
+						"kind": "fan",
+						"count": 31,
+						"speed": 205,
+						"life": 5.0,
+						"hit_radius": 4.5,
+						"burst_count": 3,
+						"burst_interval": 0.34,
+						"angle_step": 0.14,
+						"angle_offset": 0.0,
+						"aim_each_burst": false,
+						"bullet_style": "orb",
+						"spread": 4.0
+					}
+				},
+				{
+					"id": "tiger_trample",
+					"action": "slam",
+					"shape": "sector",
+					"range": 378.2,
+					"windup": 1.337,
+					"recovery": 1.276,
+					"damage_scale": 1.05,
+					"major": true,
+					"radius": 378.2,
+					"spread": 2.8,
+					"warning_policy": "area",
+					"secondary_pattern": {
+						"kind": "ring",
+						"count": 44,
+						"speed": 195,
+						"life": 5.0,
+						"hit_radius": 4.5,
+						"burst_count": 2,
+						"burst_interval": 0.34,
+						"angle_step": 0.12,
+						"angle_offset": 0.0,
+						"aim_each_burst": false,
+						"bullet_style": "orb",
+						"gap_width": 1.0,
+						"gap_angle_offset": 0.65
+					}
+				},
+				{
+					"id": "leopard_return",
+					"action": "charge",
+					"shape": "line",
+					"range": 900.0,
+					"windup": 1.25,
+					"recovery": 1.392,
+					"damage_scale": 1.1,
+					"major": true,
+					"length": 900.0,
+					"half_width": 64.8,
+					"warning_policy": "area",
+					"secondary_pattern": {
+						"kind": "fan",
+						"count": 31,
+						"speed": 205,
+						"life": 5.0,
+						"hit_radius": 4.5,
+						"burst_count": 3,
+						"burst_interval": 0.34,
+						"angle_step": 0.14,
+						"angle_offset": 0.0,
+						"aim_each_burst": false,
+						"bullet_style": "orb",
+						"spread": 4.0
+					}
+				},
+				{
+					"id": "cavalry_break",
+					"action": "pulse",
+					"shape": "ring_gap",
+					"range": 468.0,
+					"windup": 1.8,
+					"recovery": 1.972,
+					"damage_scale": 1.25,
+					"major": true,
+					"radius": 468.0,
+					"inner_radius": 85,
+					"gap_width": 1.75,
+					"gap_angle": 0.9,
+					"warning_policy": "area",
+					"secondary_pattern": {
+						"kind": "ring",
+						"count": 44,
+						"speed": 185,
+						"life": 5.0,
+						"hit_radius": 4.5,
+						"burst_count": 3,
+						"burst_interval": 0.34,
+						"angle_step": 0.1,
+						"angle_offset": 0.0,
+						"aim_each_burst": false,
+						"bullet_style": "orb",
+						"gap_width": 1.0,
+						"gap_angle_offset": 0.65
+					}
+				}
+			]
+		}
+	],
+	"B17": [
+		{
+			"name": "张辽",
+			"body_height": 130,
+			"radius": 32,
+			"speed": 64,
+			"attacks": [
+				{
+					"id": "general_lunge",
+					"action": "charge",
+					"shape": "line",
+					"range": 820,
+					"windup": 1.15,
+					"recovery": 1.044,
+					"damage_scale": 1.0,
+					"major": true,
+					"length": 820,
+					"half_width": 45.6,
+					"warning_policy": "area",
+					"secondary_pattern": {
+						"kind": "fan",
+						"count": 23,
+						"speed": 205,
+						"life": 5.0,
+						"hit_radius": 4.5,
+						"burst_count": 2,
+						"burst_interval": 0.34,
+						"angle_step": 0.14,
+						"angle_offset": 0.0,
+						"aim_each_burst": false,
+						"bullet_style": "orb",
+						"spread": 4.0
+					}
+				},
+				{
+					"id": "general_cut",
+					"action": "slam",
+					"shape": "sector",
+					"range": 298.9,
+					"windup": 1.25,
+					"recovery": 0.986,
+					"damage_scale": 0.95,
+					"major": true,
+					"radius": 298.9,
+					"spread": 2.4,
+					"warning_policy": "area",
+					"secondary_pattern": {
+						"kind": "ring",
+						"count": 32,
+						"speed": 180,
+						"life": 5.0,
+						"hit_radius": 4.5,
+						"burst_count": 2,
+						"burst_interval": 0.34,
+						"angle_step": 0.12,
+						"angle_offset": 0.0,
+						"aim_each_burst": false,
+						"bullet_style": "orb",
+						"gap_width": 1.0,
+						"gap_angle_offset": 0.65
+					},
+					"approach_speed": 210
+				},
+				{
+					"id": "human_formation",
+					"action": "collaboration",
+					"shape": "line",
+					"range": 1200,
+					"windup": 1.4,
+					"recovery": 1.5,
+					"damage_scale": 1.0,
+					"major": true,
+					"length": 1100,
+					"half_width": 80,
+					"radius": 225,
+					"warning_policy": "area",
+					"marker_count": 3,
+					"marker_spacing": 320,
+					"marker_delay": 0.22,
+					"secondary_pattern": {
+						"kind": "fan",
+						"count": 27,
+						"speed": 200,
+						"life": 5.0,
+						"hit_radius": 4.5,
+						"burst_count": 3,
+						"burst_interval": 0.34,
+						"angle_step": 0.12,
+						"angle_offset": 0.0,
+						"aim_each_burst": false,
+						"bullet_style": "orb",
+						"spread": 4.6
+					}
+				}
+			]
+		},
+		{
+			"name": "夜叉裂阵将相",
+			"body_height": 220,
+			"radius": 45,
+			"speed": 72,
+			"attacks": [
+				{
+					"id": "yaksha_break",
+					"action": "charge",
+					"shape": "line",
+					"range": 825.0,
+					"windup": 1.25,
+					"recovery": 1.102,
+					"damage_scale": 1.1,
+					"major": true,
+					"length": 825.0,
+					"half_width": 64.8,
+					"warning_policy": "area",
+					"secondary_pattern": {
+						"kind": "fan",
+						"count": 31,
+						"speed": 205,
+						"life": 5.0,
+						"hit_radius": 4.5,
+						"burst_count": 3,
+						"burst_interval": 0.34,
+						"angle_step": 0.14,
+						"angle_offset": 0.0,
+						"aim_each_burst": false,
+						"bullet_style": "orb",
+						"spread": 4.0
+					}
+				},
+				{
+					"id": "yaksha_cleave",
+					"action": "slam",
+					"shape": "sector",
+					"range": 414.8,
+					"windup": 1.466,
+					"recovery": 1.044,
+					"damage_scale": 1.05,
+					"major": true,
+					"radius": 414.8,
+					"spread": 2.65,
+					"warning_policy": "area",
+					"secondary_pattern": {
+						"kind": "ring",
+						"count": 44,
+						"speed": 195,
+						"life": 5.0,
+						"hit_radius": 4.5,
+						"burst_count": 2,
+						"burst_interval": 0.34,
+						"angle_step": 0.12,
+						"angle_offset": 0.0,
+						"aim_each_burst": false,
+						"bullet_style": "orb",
+						"gap_width": 1.0,
+						"gap_angle_offset": 0.65
+					}
+				},
+				{
+					"id": "war_formation",
+					"action": "collaboration",
+					"shape": "line",
+					"range": 1200,
+					"windup": 1.4,
+					"recovery": 1.5,
+					"damage_scale": 1.15,
+					"major": true,
+					"length": 1100,
+					"half_width": 80,
+					"radius": 225,
+					"warning_policy": "area",
+					"marker_count": 3,
+					"marker_spacing": 320,
+					"marker_delay": 0.22,
+					"secondary_pattern": {
+						"kind": "fan",
+						"count": 35,
+						"speed": 200,
+						"life": 5.0,
+						"hit_radius": 4.5,
+						"burst_count": 3,
+						"burst_interval": 0.34,
+						"angle_step": 0.12,
+						"angle_offset": 0.0,
+						"aim_each_burst": false,
+						"bullet_style": "orb",
+						"spread": 4.6
+					}
+				},
+				{
+					"id": "yaksha_pulse",
+					"action": "pulse",
+					"shape": "ring_gap",
+					"range": 504.0,
+					"windup": 1.8,
+					"recovery": 1.972,
+					"damage_scale": 1.2,
+					"major": true,
+					"radius": 504.0,
+					"inner_radius": 90,
+					"gap_width": 1.75,
+					"gap_angle": 0.9,
+					"warning_policy": "area",
+					"secondary_pattern": {
+						"kind": "ring",
+						"count": 44,
+						"speed": 185,
+						"life": 5.0,
+						"hit_radius": 4.5,
+						"burst_count": 3,
+						"burst_interval": 0.34,
+						"angle_step": 0.1,
+						"angle_offset": 0.0,
+						"aim_each_burst": false,
+						"bullet_style": "orb",
+						"gap_width": 1.0,
+						"gap_angle_offset": 0.65
+					}
+				}
+			]
+		}
+	],
+	"B18": [
+		{
+			"name": "吕布",
+			"body_height": 144,
+			"radius": 34,
+			"speed": 70,
+			"attacks": [
+				{
+					"id": "halberd_sweep",
+					"action": "slam",
+					"shape": "sector",
+					"range": 366.0,
+					"windup": 1.294,
+					"recovery": 1.102,
+					"damage_scale": 1.0,
+					"major": true,
+					"radius": 366.0,
+					"spread": 2.5,
+					"warning_policy": "area",
+					"secondary_pattern": {
+						"kind": "ring",
+						"count": 32,
+						"speed": 180,
+						"life": 5.0,
+						"hit_radius": 4.5,
+						"burst_count": 2,
+						"burst_interval": 0.34,
+						"angle_step": 0.12,
+						"angle_offset": 0.0,
+						"aim_each_burst": false,
+						"bullet_style": "orb",
+						"gap_width": 1.0,
+						"gap_angle_offset": 0.65
+					}
+				},
+				{
+					"id": "halberd_charge",
+					"action": "charge",
+					"shape": "line",
+					"range": 820,
+					"windup": 1.15,
+					"recovery": 1.218,
+					"damage_scale": 1.15,
+					"major": true,
+					"length": 820,
+					"half_width": 57.599999999999994,
+					"warning_policy": "area",
+					"secondary_pattern": {
+						"kind": "fan",
+						"count": 23,
+						"speed": 205,
+						"life": 5.0,
+						"hit_radius": 4.5,
+						"burst_count": 2,
+						"burst_interval": 0.34,
+						"angle_step": 0.14,
+						"angle_offset": 0.0,
+						"aim_each_burst": false,
+						"bullet_style": "orb",
+						"spread": 4.0
+					}
+				},
+				{
+					"id": "halberd_fall",
+					"action": "marker",
+					"shape": "marker",
+					"range": 1050,
+					"windup": 1.2,
+					"recovery": 1.276,
+					"damage_scale": 1.1,
+					"major": true,
+					"radius": 203.0,
+					"warning_policy": "area",
+					"marker_count": 3,
+					"marker_spacing": 324.8,
+					"marker_delay": 0.18,
+					"secondary_pattern": {
+						"kind": "ring",
+						"count": 34,
+						"speed": 175,
+						"life": 5.0,
+						"hit_radius": 4.5,
+						"burst_count": 2,
+						"burst_interval": 0.34,
+						"angle_step": 0.1,
+						"angle_offset": 0.0,
+						"aim_each_burst": false,
+						"bullet_style": "orb",
+						"gap_width": 1.1,
+						"gap_angle_offset": 0.65
+					}
+				},
+				{
+					"id": "halberd_finish",
+					"action": "slam",
+					"shape": "sector",
+					"range": 427.0,
+					"windup": 1.509,
+					"recovery": 1.914,
+					"damage_scale": 1.2,
+					"major": true,
+					"radius": 427.0,
+					"spread": 2.8,
+					"warning_policy": "area",
+					"secondary_pattern": {
+						"kind": "ring",
+						"count": 32,
+						"speed": 180,
+						"life": 5.0,
+						"hit_radius": 4.5,
+						"burst_count": 2,
+						"burst_interval": 0.34,
+						"angle_step": 0.12,
+						"angle_offset": 0.0,
+						"aim_each_burst": false,
+						"bullet_style": "orb",
+						"gap_width": 1.0,
+						"gap_angle_offset": 0.65
+					}
+				}
+			]
+		},
+		{
+			"name": "四臂鬼神相",
+			"body_height": 248,
+			"radius": 46,
+			"speed": 80,
+			"attacks": [
+				{
+					"id": "demon_fourfold",
+					"action": "slam",
+					"shape": "sector",
+					"range": 500.2,
+					"windup": 1.768,
+					"recovery": 0.48,
+					"damage_scale": 1.15,
+					"major": true,
+					"radius": 500.2,
+					"spread": 2.8,
+					"warning_policy": "area",
+					"secondary_pattern": {
+						"kind": "ring",
+						"count": 44,
+						"speed": 195,
+						"life": 5.0,
+						"hit_radius": 4.5,
+						"burst_count": 2,
+						"burst_interval": 0.34,
+						"angle_step": 0.12,
+						"angle_offset": 0.0,
+						"aim_each_burst": false,
+						"bullet_style": "orb",
+						"gap_width": 1.0,
+						"gap_angle_offset": 0.65
+					}
+				},
+				{
+					"id": "demon_skybreaker",
+					"action": "charge",
+					"shape": "line",
+					"range": 1175.0,
+					"windup": 1.25,
+					"recovery": 0.48,
+					"damage_scale": 1.25,
+					"major": true,
+					"length": 1175.0,
+					"half_width": 81.6,
+					"warning_policy": "area",
+					"secondary_pattern": {
+						"kind": "fan",
+						"count": 31,
+						"speed": 205,
+						"life": 5.0,
+						"hit_radius": 4.5,
+						"burst_count": 3,
+						"burst_interval": 0.34,
+						"angle_step": 0.14,
+						"angle_offset": 0.0,
+						"aim_each_burst": false,
+						"bullet_style": "orb",
+						"spread": 4.0
+					}
+				},
+				{
+					"id": "demon_quake",
+					"action": "pulse",
+					"shape": "ring_gap",
+					"range": 624.0,
+					"windup": 1.8,
+					"recovery": 0.58,
+					"damage_scale": 1.15,
+					"major": true,
+					"radius": 624.0,
+					"inner_radius": 105,
+					"gap_width": 1.75,
+					"gap_angle": 0.9,
+					"warning_policy": "area",
+					"secondary_pattern": {
+						"kind": "ring",
+						"count": 44,
+						"speed": 185,
+						"life": 5.0,
+						"hit_radius": 4.5,
+						"burst_count": 3,
+						"burst_interval": 0.34,
+						"angle_step": 0.1,
+						"angle_offset": 0.0,
+						"aim_each_burst": false,
+						"bullet_style": "orb",
+						"gap_width": 1.0,
+						"gap_angle_offset": 0.65
+					}
+				},
+				{
+					"id": "demon_heavenfall",
+					"action": "marker",
+					"shape": "marker",
+					"range": 1050,
+					"windup": 1.524,
+					"recovery": 0.522,
+					"damage_scale": 1.2,
+					"major": true,
+					"radius": 272.59999999999997,
+					"warning_policy": "area",
+					"marker_count": 5,
+					"marker_spacing": 436.16,
+					"marker_delay": 0.18,
+					"secondary_pattern": {
+						"kind": "ring",
+						"count": 44,
+						"speed": 175,
+						"life": 5.0,
+						"hit_radius": 4.5,
+						"burst_count": 2,
+						"burst_interval": 0.34,
+						"angle_step": 0.1,
+						"angle_offset": 0.0,
+						"aim_each_burst": false,
+						"bullet_style": "orb",
+						"gap_width": 1.1,
+						"gap_angle_offset": 0.65
+					}
+				},
+				{
+					"id": "demon_final_cleave",
+					"action": "slam",
+					"shape": "sector",
+					"range": 550,
+					"windup": 1.944,
+					"recovery": 2.146,
+					"damage_scale": 1.35,
+					"major": true,
+					"radius": 550,
+					"spread": 3.1,
+					"warning_policy": "area",
+					"secondary_pattern": {
+						"kind": "ring",
+						"count": 44,
+						"speed": 195,
+						"life": 5.0,
+						"hit_radius": 4.5,
+						"burst_count": 2,
+						"burst_interval": 0.34,
+						"angle_step": 0.12,
+						"angle_offset": 0.0,
+						"aim_each_burst": false,
+						"bullet_style": "orb",
+						"gap_width": 1.0,
+						"gap_angle_offset": 0.65
+					}
+				}
+			]
+		}
+	]
+}
+
 static func forms(id: String) -> Array:
 	var result := _authored(id)
 	for index in result.size(): result[index].merge(FORM_COPY[id][index], true)
 	return result
 
 static func _authored(id: String) -> Array:
-	match id:
-		"B15":
-			return [
-				_form("曹休", 120, 30, 66, [
-					_line("hunter_aim", "shot", 760, 12, 1.35, 1.9, 1.0, {"speed":420, "life":2.2}),
-					_fan("hunter_volley", 640, 5, 1.25, 1.55, 2.1, 0.8),
-					_line("hunter_reposition", "charge", 340, 32, 1.2, 2.6, 0.9)]),
-				_form("鬼猎兽相", 204, 43, 78, [
-					_fan("beast_hunt", 860, 7, 1.55, 1.55, 2.0, 0.9),
-					_line("beast_leap", "charge", 510, 50, 1.4, 2.2, 1.15),
-					_marker("hunt_mark", 180, 1.55, 2.2, 1.1),
-					_sector("beast_rend", 280, 2.6, 1.5, 3.1, 1.2)])]
-		"B16":
-			return [
-				_form("曹纯", 128, 31, 62, [
-					_line("rider_lance", "charge", 600, 38, 1.4, 2.2, 1.0),
-					_sector("rider_cleave", 230, 2.4, 1.35, 2.1, 0.9),
-					_line("rider_return", "charge", 440, 42, 1.3, 3.0, 1.1)]),
-				_form("虎豹甲骑巨相", 218, 44, 70, [
-					_line("tiger_long_charge", "charge", 900, 62, 1.65, 2.5, 1.2),
-					_sector("tiger_trample", 310, 2.8, 1.6, 2.2, 1.05),
-					_line("leopard_return", "charge", 720, 54, 1.5, 2.4, 1.1),
-					_ring("cavalry_break", 390, 85, 1.6, 1.75, 3.4, 1.25)])]
-		"B17":
-			return [
-				_form("张辽", 130, 32, 64, [
-					_line("general_lunge", "charge", 460, 38, 1.3, 1.8, 1.0),
-					_sector("general_cut", 245, 2.4, 1.35, 1.7, 0.95),
-					_collaboration("human_formation", 1.45, 3.0, 1.0)]),
-				_form("夜叉裂阵将相", 220, 45, 72, [
-					_line("yaksha_break", "charge", 660, 54, 1.5, 1.9, 1.1),
-					_sector("yaksha_cleave", 340, 2.65, 1.65, 1.8, 1.05),
-					_collaboration("war_formation", 1.65, 3.3, 1.15),
-					_ring("yaksha_pulse", 420, 90, 1.65, 1.8, 3.4, 1.2)])]
-		"B18":
-			return [
-				_form("吕布", 144, 34, 70, [
-					_sector("halberd_sweep", 300, 2.5, 1.5, 1.9, 1.0),
-					_line("halberd_charge", "charge", 650, 48, 1.5, 2.1, 1.15),
-					_marker("halberd_fall", 175, 1.55, 2.2, 1.1),
-					_sector("halberd_finish", 350, 2.8, 1.7, 3.3, 1.2)]),
-				_form("四臂鬼神相", 248, 46, 80, [
-					_sector("demon_fourfold", 410, 2.8, 1.85, 0.65, 1.15),
-					_line("demon_skybreaker", "charge", 940, 68, 1.75, 0.8, 1.25),
-					_ring("demon_quake", 520, 105, 1.75, 1.9, 1.0, 1.15),
-					_marker("demon_heavenfall", 235, 1.9, 0.9, 1.2),
-					_sector("demon_final_cleave", 460, 3.1, 2.0, 3.7, 1.35)])]
-	return []
-
-static func _form(label: String, height: float, radius: float, speed: float, attacks: Array) -> Dictionary:
-	return {"name":label, "body_height":height, "radius":radius, "speed":speed, "attacks":attacks}
-
-static func _base(id: String, action: String, shape: String, reach: float, tell: float, rest: float, damage: float) -> Dictionary:
-	return {"id":id, "action":action, "shape":shape, "range":reach, "windup":tell, "recovery":rest, "damage_scale":damage, "major":true}
-
-static func _line(id: String, action: String, length: float, width: float, tell: float, rest: float, damage: float, extra: Dictionary = {}) -> Dictionary:
-	var value := _base(id, action, "line", length, tell, rest, damage)
-	value.merge({"length":length, "half_width":width}, true)
-	value.merge(extra, true)
-	return value
-
-static func _sector(id: String, radius: float, spread: float, tell: float, rest: float, damage: float) -> Dictionary:
-	var value := _base(id, "slam", "sector", radius, tell, rest, damage)
-	value.merge({"radius":radius, "spread":spread}, true)
-	return value
-
-static func _marker(id: String, radius: float, tell: float, rest: float, damage: float) -> Dictionary:
-	var value := _base(id, "marker", "marker", 1050, tell, rest, damage)
-	value.radius = radius
-	return value
-
-static func _fan(id: String, reach: float, count: int, spread: float, tell: float, rest: float, damage: float) -> Dictionary:
-	var value := _base(id, "fan", "fan", reach, tell, rest, damage)
-	value.merge({"radius":reach, "count":count, "spread":spread, "speed":310, "life":3.0}, true)
-	return value
-
-static func _ring(id: String, radius: float, inner: float, gap: float, tell: float, rest: float, damage: float) -> Dictionary:
-	var value := _base(id, "pulse", "ring_gap", radius, tell, rest, damage)
-	value.merge({"radius":radius, "inner_radius":inner, "gap_width":gap, "gap_angle":0.9}, true)
-	return value
-
-static func _collaboration(id: String, tell: float, rest: float, damage: float) -> Dictionary:
-	var value := _base(id, "collaboration", "line", 820, tell, rest, damage)
-	value.merge({"length":720, "half_width":55, "radius":185}, true)
-	return value
+	return FORM_DEFINITIONS.get(id, []).duplicate(true)

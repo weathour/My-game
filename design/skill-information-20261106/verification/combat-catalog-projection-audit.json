@@ -1,0 +1,23 @@
+{
+  "status": "passed",
+  "audited_at": 1793945138.7225688,
+  "historical_baseline_unchanged": true,
+  "original_C_sha256": "a50549c0305cc2d21bc1b745905526080eb9442d63a0b941ba7f8d757e9606e9",
+  "HEAD_C_matches_original_baseline": true,
+  "current_C_sha256": "77b7c91cf8366efe4469eb2a90d86e9bdd4e8610e23b15c6e4898f86a2df0bfc",
+  "exact_two_approved_replacements_reconstruct_current_file": true,
+  "changes": [
+    "trait_description N07 displays actual support cooldown",
+    "_ability_view adds read-only damage_scale/slow/duration/damage_type/level/attack"
+  ],
+  "unchanged_numerical_inputs": {
+    "scripts/content/roster_kit_data.gd": {
+      "sha256": "bdb57613d8ae34f845c272869ef37bc590966fdccc9410d5518f27dd3790f737",
+      "equals_original_art_baseline": true
+    },
+    "scripts/battle/ability_definition.gd": {
+      "sha256": "e633f09670a3d389028117ef3ed3b72b71aa198edb012cce4ff53cd1a33379bf",
+      "equals_original_art_baseline": true
+    }
+  }
+}

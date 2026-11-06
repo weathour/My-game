@@ -1,0 +1,45 @@
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+OpenGL API 3.3.0 NVIDIA 580.173.02 - Compatibility - Using Device: NVIDIA - NVIDIA GeForce RTX 5080
+
+PASS isolated XDG settings
+EVENTS ["cast","damage_dealt"] ROUTING [{"category":"player_attack","cue":"blade.cast","owner":"character:JIA","stage":"cast"},{"category":"player_attack","cue":"blade.impact","owner":"character:JIA","stage":"impact"}]
+PASS real basic cast -> player_attack
+PASS real basic confirmed damage -> player_attack
+EVENTS ["cast","damage_dealt"] ROUTING [{"category":"player_attack","cue":"thrust.cast","owner":"character:JIA","stage":"cast"},{"category":"player_attack","cue":"thrust.impact","owner":"character:JIA","stage":"impact"}]
+PASS equipped spear basic cast and impact retain attack category
+EVENTS ["cast","message","damage_dealt"] ROUTING [{"category":"player_skill","cue":"blade.cast","owner":"character:JIA","stage":"cast"},{"category":"player_skill","cue":"blade.impact","owner":"character:JIA","stage":"impact"}]
+PASS real manual skill cast -> player_skill
+PASS real manual skill damage -> player_skill
+EVENTS ["cast","ability_effect"] ROUTING [{"category":"player_skill","cue":"heal.cast","owner":"character:F03","stage":"cast"},{"category":"player_skill","cue":"heal.impact","owner":"character:F03","stage":"impact"}]
+PASS real background support cast -> player_skill
+PASS real support healing effect -> player_skill
+EVENTS ["cast"] ROUTING [{"category":"player_skill","cue":"ice.cast","owner":"character:F11","stage":"cast"}]
+PASS real automatic ability cast -> player_skill (F11)
+EVENTS ["enemy_tell"] ROUTING [{"category":"enemy_attack","cue":"blade.tell","owner":"enemy:1","stage":"tell"}]
+PASS ordinary real tell -> enemy_attack
+EVENTS ["enemy_release","player_hit","hurt","damage_taken"] ROUTING [{"category":"enemy_attack","cue":"blade.cast","owner":"enemy:1","stage":"release"},{"category":"enemy_attack","cue":"blade.impact","owner":"enemy:1","stage":"impact"},{"category":"hurt","cue":"feedback.hurt","owner":"character:JIA","stage":"hurt"}]
+PASS ordinary real release -> enemy_attack
+PASS ordinary real player_hit source impact -> enemy_attack
+PASS ordinary real player_hit extra accent -> hurt
+EVENTS ["enemy_tell"] ROUTING [{"category":"boss","cue":"blade.tell","owner":"enemy:1","stage":"tell"}]
+PASS Boss real tell -> boss
+EVENTS ["boss_impact","enemy_release","player_hit","hurt","damage_taken"] ROUTING [{"category":"boss","cue":"blade.cast","owner":"enemy:1","stage":"release"},{"category":"boss","cue":"blade.impact","owner":"enemy:1","stage":"impact"},{"category":"hurt","cue":"feedback.hurt","owner":"character:JIA","stage":"hurt"}]
+PASS Boss real release -> boss
+PASS Boss real player_hit source impact -> boss
+EVENTS ["boss_phase"] ROUTING [{"category":"boss","cue":"boss_demon.phase","owner":"enemy:1","stage":"phase"}]
+PASS Boss real form depletion -> boss phase
+EVENTS ["boss_defeated","kill","xp_pickup"] ROUTING [{"category":"boss","cue":"boss_demon.defeat","owner":"enemy:1","stage":"defeated"},{"category":"pickup","cue":"feedback.pickup","owner":"","stage":"pickup"}]
+PASS Boss real final defeat -> boss defeated
+EVENTS ["enemy_release","player_hit","damage_dealt"] ROUTING [{"category":"enemy_attack","cue":"blade.cast","owner":"enemy:1","stage":"release"},{"category":"enemy_attack","cue":"blade.impact","owner":"enemy:1","stage":"impact"},{"category":"hurt","cue":"feedback.guard","owner":"character:JIA","stage":"hurt"},{"category":"player_skill","cue":"blunt.impact","owner":"character:F02","stage":"impact"}]
+PASS real protected player_hit extra guard -> hurt
+PASS real guard counter delivery -> player_skill
+EVENTS ["kill"] ROUTING [{"category":"death","cue":"feedback.death","owner":"","stage":"death"}]
+PASS real non-Boss kill -> death
+EVENTS ["xp_pickup","level"] ROUTING [{"category":"pickup","cue":"feedback.pickup","owner":"","stage":"pickup"},{"category":"rewards","cue":"feedback.level","owner":"","stage":"level"}]
+PASS real contact XP collection -> pickup
+PASS real party level event -> rewards
+EVENTS ["kill","elite_defeated"] ROUTING [{"category":"death","cue":"feedback.death","owner":"","stage":"death"},{"category":"rewards","cue":"feedback.elite","owner":"","stage":"elite"}]
+PASS real card_elite reward event -> rewards
+EVENTS ["kill","elite_defeated"] ROUTING [{"category":"death","cue":"feedback.death","owner":"","stage":"death"},{"category":"rewards","cue":"feedback.elite","owner":"","stage":"elite"}]
+PASS real equipment_elite reward event -> rewards
+EVENT_ROUTING PASS checks=25 failures=0

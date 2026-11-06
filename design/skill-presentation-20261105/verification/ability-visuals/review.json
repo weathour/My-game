@@ -1,0 +1,1663 @@
+{
+  "schema_version": 1,
+  "status": "current_single_frame_geometry_review_complete",
+  "date": "2026-11-05",
+  "scope": "137 actual successful roster payloads rendered by the current production universal skill VFX helper. Every contact-sheet tile inspected with view_image; five full-size frames also inspected.",
+  "not_claimed": [
+    "No before/after comparison or demo.",
+    "No actor-model or anchor acceptance from these VFX-only frames. Actor/ground, Jia legacy strips and 13 legacy authored base layers are deliberately absent here.",
+    "A release/contact/receiver/state frame is not a temporal animation or end-to-end pressure proof.",
+    "Captures use normal motion at initial transient age; low-motion time behavior is not proved by these static images.",
+    "Family styles intentionally share vocabulary; 137 images are not a claim of 137 unique hand-authored assets."
+  ],
+  "execution": {
+    "native_log": "../ability-visuals-native.log",
+    "native_checks": 1124,
+    "real_draw_callbacks": 137,
+    "render_method": "gl_compatibility",
+    "capture_count": 137,
+    "capture_renderer_sha256": "031506482f9fa951d041166367b7bf26eced30dd29438874328e6f1eece5da02",
+    "profile_sha256": "c5dfbf05b35d5440a333cce5709781afe11cec0a17de7c286db25c85358a8938",
+    "relayout_log": "../ability-visuals-sheets.log",
+    "relayout_checks": 12,
+    "sheets": 12,
+    "headless_default_log": "../runtime-unit.log",
+    "headless_default_checks": 974,
+    "capture_hashes_verified": 137,
+    "sheet_hashes_verified": 12,
+    "renderer_hash_matches_current": true
+  },
+  "observed_frame_content": {
+    "actual_contact_frames": 102,
+    "positive_receiver_delta_frames": 20,
+    "actual_state_start_frames": 63,
+    "interpretation": "Other frames remain valid release/state-only or no-benefit fixtures; no fabricated positive delta label is added."
+  },
+  "review_findings": [
+    {
+      "id": "geometry",
+      "result": "No malformed polygon/NaN, missing native draw, extreme accidental fill, or canvas call error found across all137 tiles."
+    },
+    {
+      "id": "families",
+      "result": "Observed distinct cleave arcs, halberd hook, spear points, bow/crossbow streaks, medicine crosses, ledger marks, voice waves, curse polygons, shield contours and finite area boundaries. This is a current geometry/readability check, not a subjective quality score."
+    },
+    {
+      "id": "full_size_long_reach",
+      "ability_ids": [
+        "M06_dash",
+        "F06_pin",
+        "F06_volley"
+      ],
+      "result": "Checked original1280x720 frames because contact-sheet effect ROI can truncate long streak tips. Lengths match authored480/570/560 world reach; no accidental canvas-wide infinity."
+    },
+    {
+      "id": "full_size_benefit_and_curse",
+      "ability_ids": [
+        "physician_heal",
+        "F05_spread"
+      ],
+      "result": "Actual per-recipient HP/shield figures are readable in the original; curse contact/state and circular footprint remain separate local/ground geometry."
+    },
+    {
+      "id": "qa_sheet_false_double_image",
+      "result": "Found first-layout benefit-region crop reintroduced pieces of large circles/shields. Fixed SheetProbe to render labeled QA FACT text directly from original benefit_facts. No runtime repeat occurred;137 original PNG bytes were retained; all12 revised pages reinspected."
+    }
+  ],
+  "pages_inspected": [
+    {
+      "file": "sheet-01.png",
+      "ability_ids": [
+        "JIA_basic",
+        "jia_sweep",
+        "jia_break",
+        "M01_basic",
+        "M01_cleave",
+        "M01_rally",
+        "M01_support",
+        "M02_basic",
+        "M02_dash",
+        "M02_expose",
+        "M02_support",
+        "M03_basic"
+      ],
+      "result": "reviewed_relayout; main geometry and QA FACT-only footer clear"
+    },
+    {
+      "file": "sheet-02.png",
+      "ability_ids": [
+        "M03_guard",
+        "M03_field",
+        "M03_support",
+        "M04_basic",
+        "M04_field",
+        "M04_bind",
+        "M04_support",
+        "M05_basic",
+        "M05_dash",
+        "M05_rally",
+        "M05_support",
+        "M06_basic"
+      ],
+      "result": "reviewed_relayout; main geometry and QA FACT-only footer clear"
+    },
+    {
+      "file": "sheet-03.png",
+      "ability_ids": [
+        "M06_expose",
+        "M06_dash",
+        "M06_support",
+        "M07_basic",
+        "M07_sweep",
+        "M07_rally",
+        "M07_support",
+        "M08_basic",
+        "M08_break",
+        "M08_guard",
+        "M08_support",
+        "F01_basic"
+      ],
+      "result": "reviewed_relayout; main geometry and QA FACT-only footer clear"
+    },
+    {
+      "file": "sheet-04.png",
+      "ability_ids": [
+        "F01_dash",
+        "F01_expose",
+        "F01_support",
+        "F02_basic",
+        "F02_guard",
+        "F02_riposte",
+        "F02_support",
+        "F03_basic",
+        "physician_heal",
+        "physician_ward",
+        "physician_support",
+        "F04_basic"
+      ],
+      "result": "reviewed_relayout; main geometry and QA FACT-only footer clear"
+    },
+    {
+      "file": "sheet-05.png",
+      "ability_ids": [
+        "F04_settle",
+        "F04_supply",
+        "F04_support",
+        "F05_basic",
+        "F05_curse",
+        "F05_spread",
+        "F05_support",
+        "F06_basic",
+        "F06_volley",
+        "F06_pin",
+        "F06_support",
+        "F07_basic"
+      ],
+      "result": "reviewed_relayout; main geometry and QA FACT-only footer clear"
+    },
+    {
+      "file": "sheet-06.png",
+      "ability_ids": [
+        "bandit_sweep",
+        "bandit_thrust",
+        "bandit_support",
+        "F08_basic",
+        "F08_temper",
+        "F08_break",
+        "F08_support",
+        "F09_basic",
+        "F09_extend",
+        "F09_rally",
+        "F09_support",
+        "F10_basic"
+      ],
+      "result": "reviewed_relayout; main geometry and QA FACT-only footer clear"
+    },
+    {
+      "file": "sheet-07.png",
+      "ability_ids": [
+        "F10_ward",
+        "F10_expose",
+        "F10_support",
+        "F11_basic",
+        "emma_frost",
+        "emma_star",
+        "emma_ice",
+        "emma_support",
+        "N01_basic",
+        "N01_strike",
+        "militia_support",
+        "N02_basic"
+      ],
+      "result": "reviewed_relayout; main geometry and QA FACT-only footer clear"
+    },
+    {
+      "file": "sheet-08.png",
+      "ability_ids": [
+        "N02_ward",
+        "N02_support",
+        "N03_basic",
+        "N03_guard",
+        "N03_support",
+        "N04_basic",
+        "N04_strike",
+        "spear_support",
+        "N05_basic",
+        "N05_sweep",
+        "N05_support",
+        "N06_basic"
+      ],
+      "result": "reviewed_relayout; main geometry and QA FACT-only footer clear"
+    },
+    {
+      "file": "sheet-09.png",
+      "ability_ids": [
+        "N06_break",
+        "N06_support",
+        "N07_basic",
+        "N07_strike",
+        "bow_support",
+        "N08_basic",
+        "N08_bolt",
+        "N08_support",
+        "N09_basic",
+        "N09_aim",
+        "N09_support",
+        "N10_basic"
+      ],
+      "result": "reviewed_relayout; main geometry and QA FACT-only footer clear"
+    },
+    {
+      "file": "sheet-10.png",
+      "ability_ids": [
+        "N10_dash",
+        "N10_support",
+        "N11_basic",
+        "N11_dash",
+        "N11_support",
+        "N12_basic",
+        "N12_charge",
+        "N12_support",
+        "N13_basic",
+        "N13_strike",
+        "N13_mana",
+        "talisman_support"
+      ],
+      "result": "reviewed_relayout; main geometry and QA FACT-only footer clear"
+    },
+    {
+      "file": "sheet-11.png",
+      "ability_ids": [
+        "N14_basic",
+        "curse_bind",
+        "curse_support",
+        "N15_basic",
+        "N15_curse",
+        "N15_cashout",
+        "N15_support",
+        "N16_basic",
+        "healer_aid",
+        "healer_support",
+        "N17_basic",
+        "cook_guard"
+      ],
+      "result": "reviewed_relayout; main geometry and QA FACT-only footer clear"
+    },
+    {
+      "file": "sheet-12.png",
+      "ability_ids": [
+        "cook_support",
+        "N18_basic",
+        "clerk_guard",
+        "N18_rally",
+        "clerk_support"
+      ],
+      "result": "reviewed_relayout; main geometry and QA FACT-only footer clear"
+    }
+  ],
+  "ability_reviews": [
+    {
+      "ability_id": "JIA_basic",
+      "source": "JIA",
+      "slot": "basic",
+      "frame": "JIA_basic.png",
+      "sheet": "sheet-01.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 1.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "jia_sweep",
+      "source": "JIA",
+      "slot": "manual",
+      "frame": "jia_sweep.png",
+      "sheet": "sheet-01.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 1.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "jia_break",
+      "source": "JIA",
+      "slot": "manual",
+      "frame": "jia_break.png",
+      "sheet": "sheet-01.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 1.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "M01_basic",
+      "source": "M01",
+      "slot": "basic",
+      "frame": "M01_basic.png",
+      "sheet": "sheet-01.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 1.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "M01_cleave",
+      "source": "M01",
+      "slot": "manual",
+      "frame": "M01_cleave.png",
+      "sheet": "sheet-01.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 1.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "M01_rally",
+      "source": "M01",
+      "slot": "manual",
+      "frame": "M01_rally.png",
+      "sheet": "sheet-01.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 0.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "M01_support",
+      "source": "M01",
+      "slot": "support",
+      "frame": "M01_support.png",
+      "sheet": "sheet-01.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 1.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "M02_basic",
+      "source": "M02",
+      "slot": "basic",
+      "frame": "M02_basic.png",
+      "sheet": "sheet-01.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 1.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "M02_dash",
+      "source": "M02",
+      "slot": "manual",
+      "frame": "M02_dash.png",
+      "sheet": "sheet-01.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 1.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "M02_expose",
+      "source": "M02",
+      "slot": "manual",
+      "frame": "M02_expose.png",
+      "sheet": "sheet-01.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 1.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "M02_support",
+      "source": "M02",
+      "slot": "support",
+      "frame": "M02_support.png",
+      "sheet": "sheet-01.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 1.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "M03_basic",
+      "source": "M03",
+      "slot": "basic",
+      "frame": "M03_basic.png",
+      "sheet": "sheet-01.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 1.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "M03_guard",
+      "source": "M03",
+      "slot": "manual",
+      "frame": "M03_guard.png",
+      "sheet": "sheet-02.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 0.0,
+      "positive_receiver_delta_facts": 2
+    },
+    {
+      "ability_id": "M03_field",
+      "source": "M03",
+      "slot": "manual",
+      "frame": "M03_field.png",
+      "sheet": "sheet-02.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 0.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "M03_support",
+      "source": "M03",
+      "slot": "support",
+      "frame": "M03_support.png",
+      "sheet": "sheet-02.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 0.0,
+      "positive_receiver_delta_facts": 1
+    },
+    {
+      "ability_id": "M04_basic",
+      "source": "M04",
+      "slot": "basic",
+      "frame": "M04_basic.png",
+      "sheet": "sheet-02.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 1.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "M04_field",
+      "source": "M04",
+      "slot": "manual",
+      "frame": "M04_field.png",
+      "sheet": "sheet-02.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 0.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "M04_bind",
+      "source": "M04",
+      "slot": "manual",
+      "frame": "M04_bind.png",
+      "sheet": "sheet-02.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 1.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "M04_support",
+      "source": "M04",
+      "slot": "support",
+      "frame": "M04_support.png",
+      "sheet": "sheet-02.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 1.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "M05_basic",
+      "source": "M05",
+      "slot": "basic",
+      "frame": "M05_basic.png",
+      "sheet": "sheet-02.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 1.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "M05_dash",
+      "source": "M05",
+      "slot": "manual",
+      "frame": "M05_dash.png",
+      "sheet": "sheet-02.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 1.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "M05_rally",
+      "source": "M05",
+      "slot": "manual",
+      "frame": "M05_rally.png",
+      "sheet": "sheet-02.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 0.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "M05_support",
+      "source": "M05",
+      "slot": "support",
+      "frame": "M05_support.png",
+      "sheet": "sheet-02.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 1.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "M06_basic",
+      "source": "M06",
+      "slot": "basic",
+      "frame": "M06_basic.png",
+      "sheet": "sheet-02.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 1.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "M06_expose",
+      "source": "M06",
+      "slot": "manual",
+      "frame": "M06_expose.png",
+      "sheet": "sheet-03.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 1.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "M06_dash",
+      "source": "M06",
+      "slot": "manual",
+      "frame": "M06_dash.png",
+      "sheet": "sheet-03.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 1.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "M06_support",
+      "source": "M06",
+      "slot": "support",
+      "frame": "M06_support.png",
+      "sheet": "sheet-03.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 1.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "M07_basic",
+      "source": "M07",
+      "slot": "basic",
+      "frame": "M07_basic.png",
+      "sheet": "sheet-03.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 1.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "M07_sweep",
+      "source": "M07",
+      "slot": "manual",
+      "frame": "M07_sweep.png",
+      "sheet": "sheet-03.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 1.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "M07_rally",
+      "source": "M07",
+      "slot": "manual",
+      "frame": "M07_rally.png",
+      "sheet": "sheet-03.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 0.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "M07_support",
+      "source": "M07",
+      "slot": "support",
+      "frame": "M07_support.png",
+      "sheet": "sheet-03.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 1.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "M08_basic",
+      "source": "M08",
+      "slot": "basic",
+      "frame": "M08_basic.png",
+      "sheet": "sheet-03.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 1.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "M08_break",
+      "source": "M08",
+      "slot": "manual",
+      "frame": "M08_break.png",
+      "sheet": "sheet-03.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 1.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "M08_guard",
+      "source": "M08",
+      "slot": "manual",
+      "frame": "M08_guard.png",
+      "sheet": "sheet-03.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 0.0,
+      "positive_receiver_delta_facts": 1
+    },
+    {
+      "ability_id": "M08_support",
+      "source": "M08",
+      "slot": "support",
+      "frame": "M08_support.png",
+      "sheet": "sheet-03.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 1.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "F01_basic",
+      "source": "F01",
+      "slot": "basic",
+      "frame": "F01_basic.png",
+      "sheet": "sheet-03.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 1.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "F01_dash",
+      "source": "F01",
+      "slot": "manual",
+      "frame": "F01_dash.png",
+      "sheet": "sheet-04.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 1.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "F01_expose",
+      "source": "F01",
+      "slot": "manual",
+      "frame": "F01_expose.png",
+      "sheet": "sheet-04.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 1.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "F01_support",
+      "source": "F01",
+      "slot": "support",
+      "frame": "F01_support.png",
+      "sheet": "sheet-04.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 1.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "F02_basic",
+      "source": "F02",
+      "slot": "basic",
+      "frame": "F02_basic.png",
+      "sheet": "sheet-04.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 1.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "F02_guard",
+      "source": "F02",
+      "slot": "manual",
+      "frame": "F02_guard.png",
+      "sheet": "sheet-04.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 0.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "F02_riposte",
+      "source": "F02",
+      "slot": "manual",
+      "frame": "F02_riposte.png",
+      "sheet": "sheet-04.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 1.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "F02_support",
+      "source": "F02",
+      "slot": "support",
+      "frame": "F02_support.png",
+      "sheet": "sheet-04.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 0.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "F03_basic",
+      "source": "F03",
+      "slot": "basic",
+      "frame": "F03_basic.png",
+      "sheet": "sheet-04.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 1.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "physician_heal",
+      "source": "F03",
+      "slot": "manual",
+      "frame": "physician_heal.png",
+      "sheet": "sheet-04.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 0.0,
+      "positive_receiver_delta_facts": 2
+    },
+    {
+      "ability_id": "physician_ward",
+      "source": "F03",
+      "slot": "manual",
+      "frame": "physician_ward.png",
+      "sheet": "sheet-04.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 0.0,
+      "positive_receiver_delta_facts": 2
+    },
+    {
+      "ability_id": "physician_support",
+      "source": "F03",
+      "slot": "support",
+      "frame": "physician_support.png",
+      "sheet": "sheet-04.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 0.0,
+      "positive_receiver_delta_facts": 1
+    },
+    {
+      "ability_id": "F04_basic",
+      "source": "F04",
+      "slot": "basic",
+      "frame": "F04_basic.png",
+      "sheet": "sheet-04.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 1.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "F04_settle",
+      "source": "F04",
+      "slot": "manual",
+      "frame": "F04_settle.png",
+      "sheet": "sheet-05.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 0.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "F04_supply",
+      "source": "F04",
+      "slot": "manual",
+      "frame": "F04_supply.png",
+      "sheet": "sheet-05.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 0.0,
+      "positive_receiver_delta_facts": 1
+    },
+    {
+      "ability_id": "F04_support",
+      "source": "F04",
+      "slot": "support",
+      "frame": "F04_support.png",
+      "sheet": "sheet-05.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 1.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "F05_basic",
+      "source": "F05",
+      "slot": "basic",
+      "frame": "F05_basic.png",
+      "sheet": "sheet-05.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 1.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "F05_curse",
+      "source": "F05",
+      "slot": "manual",
+      "frame": "F05_curse.png",
+      "sheet": "sheet-05.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 1.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "F05_spread",
+      "source": "F05",
+      "slot": "manual",
+      "frame": "F05_spread.png",
+      "sheet": "sheet-05.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 1.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "F05_support",
+      "source": "F05",
+      "slot": "support",
+      "frame": "F05_support.png",
+      "sheet": "sheet-05.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 1.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "F06_basic",
+      "source": "F06",
+      "slot": "basic",
+      "frame": "F06_basic.png",
+      "sheet": "sheet-05.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 1.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "F06_volley",
+      "source": "F06",
+      "slot": "manual",
+      "frame": "F06_volley.png",
+      "sheet": "sheet-05.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 1.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "F06_pin",
+      "source": "F06",
+      "slot": "manual",
+      "frame": "F06_pin.png",
+      "sheet": "sheet-05.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 1.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "F06_support",
+      "source": "F06",
+      "slot": "support",
+      "frame": "F06_support.png",
+      "sheet": "sheet-05.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 1.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "F07_basic",
+      "source": "F07",
+      "slot": "basic",
+      "frame": "F07_basic.png",
+      "sheet": "sheet-05.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 1.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "bandit_sweep",
+      "source": "F07",
+      "slot": "manual",
+      "frame": "bandit_sweep.png",
+      "sheet": "sheet-06.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 1.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "bandit_thrust",
+      "source": "F07",
+      "slot": "manual",
+      "frame": "bandit_thrust.png",
+      "sheet": "sheet-06.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 1.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "bandit_support",
+      "source": "F07",
+      "slot": "support",
+      "frame": "bandit_support.png",
+      "sheet": "sheet-06.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 1.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "F08_basic",
+      "source": "F08",
+      "slot": "basic",
+      "frame": "F08_basic.png",
+      "sheet": "sheet-06.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 1.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "F08_temper",
+      "source": "F08",
+      "slot": "manual",
+      "frame": "F08_temper.png",
+      "sheet": "sheet-06.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 0.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "F08_break",
+      "source": "F08",
+      "slot": "manual",
+      "frame": "F08_break.png",
+      "sheet": "sheet-06.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 1.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "F08_support",
+      "source": "F08",
+      "slot": "support",
+      "frame": "F08_support.png",
+      "sheet": "sheet-06.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 0.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "F09_basic",
+      "source": "F09",
+      "slot": "basic",
+      "frame": "F09_basic.png",
+      "sheet": "sheet-06.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 1.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "F09_extend",
+      "source": "F09",
+      "slot": "manual",
+      "frame": "F09_extend.png",
+      "sheet": "sheet-06.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 0.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "F09_rally",
+      "source": "F09",
+      "slot": "manual",
+      "frame": "F09_rally.png",
+      "sheet": "sheet-06.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 0.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "F09_support",
+      "source": "F09",
+      "slot": "support",
+      "frame": "F09_support.png",
+      "sheet": "sheet-06.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 0.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "F10_basic",
+      "source": "F10",
+      "slot": "basic",
+      "frame": "F10_basic.png",
+      "sheet": "sheet-06.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 1.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "F10_ward",
+      "source": "F10",
+      "slot": "manual",
+      "frame": "F10_ward.png",
+      "sheet": "sheet-07.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 0.0,
+      "positive_receiver_delta_facts": 1
+    },
+    {
+      "ability_id": "F10_expose",
+      "source": "F10",
+      "slot": "manual",
+      "frame": "F10_expose.png",
+      "sheet": "sheet-07.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 1.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "F10_support",
+      "source": "F10",
+      "slot": "support",
+      "frame": "F10_support.png",
+      "sheet": "sheet-07.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 0.0,
+      "positive_receiver_delta_facts": 1
+    },
+    {
+      "ability_id": "F11_basic",
+      "source": "F11",
+      "slot": "basic",
+      "frame": "F11_basic.png",
+      "sheet": "sheet-07.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 1.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "emma_frost",
+      "source": "F11",
+      "slot": "manual",
+      "frame": "emma_frost.png",
+      "sheet": "sheet-07.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 1.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "emma_star",
+      "source": "F11",
+      "slot": "manual",
+      "frame": "emma_star.png",
+      "sheet": "sheet-07.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 1.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "emma_ice",
+      "source": "F11",
+      "slot": "automatic",
+      "frame": "emma_ice.png",
+      "sheet": "sheet-07.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 1.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "emma_support",
+      "source": "F11",
+      "slot": "support",
+      "frame": "emma_support.png",
+      "sheet": "sheet-07.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 1.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "N01_basic",
+      "source": "N01",
+      "slot": "basic",
+      "frame": "N01_basic.png",
+      "sheet": "sheet-07.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 1.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "N01_strike",
+      "source": "N01",
+      "slot": "manual",
+      "frame": "N01_strike.png",
+      "sheet": "sheet-07.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 1.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "militia_support",
+      "source": "N01",
+      "slot": "support",
+      "frame": "militia_support.png",
+      "sheet": "sheet-07.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 1.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "N02_basic",
+      "source": "N02",
+      "slot": "basic",
+      "frame": "N02_basic.png",
+      "sheet": "sheet-07.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 1.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "N02_ward",
+      "source": "N02",
+      "slot": "manual",
+      "frame": "N02_ward.png",
+      "sheet": "sheet-08.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 0.0,
+      "positive_receiver_delta_facts": 1
+    },
+    {
+      "ability_id": "N02_support",
+      "source": "N02",
+      "slot": "support",
+      "frame": "N02_support.png",
+      "sheet": "sheet-08.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 0.0,
+      "positive_receiver_delta_facts": 1
+    },
+    {
+      "ability_id": "N03_basic",
+      "source": "N03",
+      "slot": "basic",
+      "frame": "N03_basic.png",
+      "sheet": "sheet-08.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 1.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "N03_guard",
+      "source": "N03",
+      "slot": "manual",
+      "frame": "N03_guard.png",
+      "sheet": "sheet-08.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 0.0,
+      "positive_receiver_delta_facts": 1
+    },
+    {
+      "ability_id": "N03_support",
+      "source": "N03",
+      "slot": "support",
+      "frame": "N03_support.png",
+      "sheet": "sheet-08.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 0.0,
+      "positive_receiver_delta_facts": 1
+    },
+    {
+      "ability_id": "N04_basic",
+      "source": "N04",
+      "slot": "basic",
+      "frame": "N04_basic.png",
+      "sheet": "sheet-08.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 1.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "N04_strike",
+      "source": "N04",
+      "slot": "manual",
+      "frame": "N04_strike.png",
+      "sheet": "sheet-08.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 1.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "spear_support",
+      "source": "N04",
+      "slot": "support",
+      "frame": "spear_support.png",
+      "sheet": "sheet-08.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 1.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "N05_basic",
+      "source": "N05",
+      "slot": "basic",
+      "frame": "N05_basic.png",
+      "sheet": "sheet-08.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 1.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "N05_sweep",
+      "source": "N05",
+      "slot": "manual",
+      "frame": "N05_sweep.png",
+      "sheet": "sheet-08.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 1.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "N05_support",
+      "source": "N05",
+      "slot": "support",
+      "frame": "N05_support.png",
+      "sheet": "sheet-08.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 1.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "N06_basic",
+      "source": "N06",
+      "slot": "basic",
+      "frame": "N06_basic.png",
+      "sheet": "sheet-08.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 1.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "N06_break",
+      "source": "N06",
+      "slot": "manual",
+      "frame": "N06_break.png",
+      "sheet": "sheet-09.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 1.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "N06_support",
+      "source": "N06",
+      "slot": "support",
+      "frame": "N06_support.png",
+      "sheet": "sheet-09.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 1.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "N07_basic",
+      "source": "N07",
+      "slot": "basic",
+      "frame": "N07_basic.png",
+      "sheet": "sheet-09.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 1.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "N07_strike",
+      "source": "N07",
+      "slot": "manual",
+      "frame": "N07_strike.png",
+      "sheet": "sheet-09.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 1.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "bow_support",
+      "source": "N07",
+      "slot": "support",
+      "frame": "bow_support.png",
+      "sheet": "sheet-09.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 1.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "N08_basic",
+      "source": "N08",
+      "slot": "basic",
+      "frame": "N08_basic.png",
+      "sheet": "sheet-09.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 1.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "N08_bolt",
+      "source": "N08",
+      "slot": "manual",
+      "frame": "N08_bolt.png",
+      "sheet": "sheet-09.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 1.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "N08_support",
+      "source": "N08",
+      "slot": "support",
+      "frame": "N08_support.png",
+      "sheet": "sheet-09.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 1.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "N09_basic",
+      "source": "N09",
+      "slot": "basic",
+      "frame": "N09_basic.png",
+      "sheet": "sheet-09.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 1.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "N09_aim",
+      "source": "N09",
+      "slot": "manual",
+      "frame": "N09_aim.png",
+      "sheet": "sheet-09.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 1.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "N09_support",
+      "source": "N09",
+      "slot": "support",
+      "frame": "N09_support.png",
+      "sheet": "sheet-09.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 1.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "N10_basic",
+      "source": "N10",
+      "slot": "basic",
+      "frame": "N10_basic.png",
+      "sheet": "sheet-09.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 1.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "N10_dash",
+      "source": "N10",
+      "slot": "manual",
+      "frame": "N10_dash.png",
+      "sheet": "sheet-10.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 1.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "N10_support",
+      "source": "N10",
+      "slot": "support",
+      "frame": "N10_support.png",
+      "sheet": "sheet-10.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 1.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "N11_basic",
+      "source": "N11",
+      "slot": "basic",
+      "frame": "N11_basic.png",
+      "sheet": "sheet-10.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 1.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "N11_dash",
+      "source": "N11",
+      "slot": "manual",
+      "frame": "N11_dash.png",
+      "sheet": "sheet-10.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 1.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "N11_support",
+      "source": "N11",
+      "slot": "support",
+      "frame": "N11_support.png",
+      "sheet": "sheet-10.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 1.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "N12_basic",
+      "source": "N12",
+      "slot": "basic",
+      "frame": "N12_basic.png",
+      "sheet": "sheet-10.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 1.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "N12_charge",
+      "source": "N12",
+      "slot": "manual",
+      "frame": "N12_charge.png",
+      "sheet": "sheet-10.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 1.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "N12_support",
+      "source": "N12",
+      "slot": "support",
+      "frame": "N12_support.png",
+      "sheet": "sheet-10.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 1.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "N13_basic",
+      "source": "N13",
+      "slot": "basic",
+      "frame": "N13_basic.png",
+      "sheet": "sheet-10.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 1.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "N13_strike",
+      "source": "N13",
+      "slot": "manual",
+      "frame": "N13_strike.png",
+      "sheet": "sheet-10.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 1.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "N13_mana",
+      "source": "N13",
+      "slot": "manual",
+      "frame": "N13_mana.png",
+      "sheet": "sheet-10.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 0.0,
+      "positive_receiver_delta_facts": 1
+    },
+    {
+      "ability_id": "talisman_support",
+      "source": "N13",
+      "slot": "support",
+      "frame": "talisman_support.png",
+      "sheet": "sheet-10.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 0.0,
+      "positive_receiver_delta_facts": 1
+    },
+    {
+      "ability_id": "N14_basic",
+      "source": "N14",
+      "slot": "basic",
+      "frame": "N14_basic.png",
+      "sheet": "sheet-11.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 1.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "curse_bind",
+      "source": "N14",
+      "slot": "manual",
+      "frame": "curse_bind.png",
+      "sheet": "sheet-11.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 1.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "curse_support",
+      "source": "N14",
+      "slot": "support",
+      "frame": "curse_support.png",
+      "sheet": "sheet-11.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 1.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "N15_basic",
+      "source": "N15",
+      "slot": "basic",
+      "frame": "N15_basic.png",
+      "sheet": "sheet-11.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 1.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "N15_curse",
+      "source": "N15",
+      "slot": "manual",
+      "frame": "N15_curse.png",
+      "sheet": "sheet-11.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 1.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "N15_cashout",
+      "source": "N15",
+      "slot": "manual",
+      "frame": "N15_cashout.png",
+      "sheet": "sheet-11.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 1.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "N15_support",
+      "source": "N15",
+      "slot": "support",
+      "frame": "N15_support.png",
+      "sheet": "sheet-11.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 1.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "N16_basic",
+      "source": "N16",
+      "slot": "basic",
+      "frame": "N16_basic.png",
+      "sheet": "sheet-11.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 1.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "healer_aid",
+      "source": "N16",
+      "slot": "manual",
+      "frame": "healer_aid.png",
+      "sheet": "sheet-11.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 0.0,
+      "positive_receiver_delta_facts": 1
+    },
+    {
+      "ability_id": "healer_support",
+      "source": "N16",
+      "slot": "support",
+      "frame": "healer_support.png",
+      "sheet": "sheet-11.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 0.0,
+      "positive_receiver_delta_facts": 1
+    },
+    {
+      "ability_id": "N17_basic",
+      "source": "N17",
+      "slot": "basic",
+      "frame": "N17_basic.png",
+      "sheet": "sheet-11.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 1.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "cook_guard",
+      "source": "N17",
+      "slot": "manual",
+      "frame": "cook_guard.png",
+      "sheet": "sheet-11.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 0.0,
+      "positive_receiver_delta_facts": 1
+    },
+    {
+      "ability_id": "cook_support",
+      "source": "N17",
+      "slot": "support",
+      "frame": "cook_support.png",
+      "sheet": "sheet-12.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 0.0,
+      "positive_receiver_delta_facts": 1
+    },
+    {
+      "ability_id": "N18_basic",
+      "source": "N18",
+      "slot": "basic",
+      "frame": "N18_basic.png",
+      "sheet": "sheet-12.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 1.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "clerk_guard",
+      "source": "N18",
+      "slot": "manual",
+      "frame": "clerk_guard.png",
+      "sheet": "sheet-12.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 0.0,
+      "positive_receiver_delta_facts": 1
+    },
+    {
+      "ability_id": "N18_rally",
+      "source": "N18",
+      "slot": "manual",
+      "frame": "N18_rally.png",
+      "sheet": "sheet-12.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 0.0,
+      "positive_receiver_delta_facts": 0
+    },
+    {
+      "ability_id": "clerk_support",
+      "source": "N18",
+      "slot": "support",
+      "frame": "clerk_support.png",
+      "sheet": "sheet-12.png",
+      "result": "current_frame_geometry_inspected",
+      "actual_contacts": 0.0,
+      "positive_receiver_delta_facts": 0
+    }
+  ],
+  "separate_acceptance": {
+    "lifecycle": "skill_presentation_unit974 includes real echo delivery, nonmutation, failure, pause, actual finite expiry and terminal cleanup; comprehensive observer smoke owned separately",
+    "full_scene_and_pressure": "Independent Luna native full-scene/resolution/comfort/performance acceptance; this review does not replace it"
+  },
+  "low_motion_patch": {
+    "file": "scripts/ui/chronicle/skill_presentation.gd",
+    "changes": [
+      "State start/pulse/end glyph radius fixed spatially under reduced_motion.",
+      "All cosmetic release/contact/weapon age progression fixed under reduced_motion; alpha remains live.",
+      "Friendly projectile glyph spin stops under reduced_motion while actual projectile positions keep advancing."
+    ],
+    "scope": "existing settings consistency fix only; no game numbers/timing changed"
+  }
+}

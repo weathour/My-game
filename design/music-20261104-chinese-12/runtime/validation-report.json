@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "status": "PASS",
+  "date": "2026-11-04",
+  "scope": "D2 runtime music and music-room playback verification",
+  "godot": "4.6.2.stable.official.71f334935",
+  "display": "X11 :0",
+  "audio_driver": "Dummy",
+  "player_data": "isolated XDG_DATA_HOME and XDG_CONFIG_HOME under /tmp",
+  "checks": [
+    {
+      "name": "chronicle_music_smoke",
+      "status": "PASS",
+      "checks": 2387,
+      "failures": 0,
+      "log": "design/music-20261104-chinese-12/runtime/targeted-checks/chronicle_music_smoke.log",
+      "log_sha256": "88af49d52c26036f24207d6f7e78692dd2eb00ffca5c4ad7ed69c3e647bd6d85"
+    },
+    {
+      "name": "chronicle_music_playback_smoke",
+      "status": "PASS",
+      "checks": 69,
+      "failures": 0,
+      "log": "design/music-20261104-chinese-12/runtime/targeted-checks/chronicle_music_playback_smoke.log",
+      "log_sha256": "9bdca36e2cba7b7006d04aa0c127447a07d3f667fec90219196c47c45d6e4e14"
+    },
+    {
+      "name": "d2_runtime_verifier",
+      "status": "PASS",
+      "cue_count": 12,
+      "retained_warm_count": 4,
+      "log": "design/music-20261104-chinese-12/runtime/targeted-checks/d2-runtime-verifier.log",
+      "log_sha256": "e2d6d905c144d3d3cf46e65e91ce320d12c4ed3b92f2a872bb0112d2c8c77c00"
+    }
+  ],
+  "screenshots": [
+    {
+      "path": "design/music-20261104-chinese-12/runtime/screenshots/music-room-1280.png",
+      "sha256": "5a96a12c450e9a158802d0be19c554637720bd5beb5382ea96db5faba0f8cefb",
+      "bytes": 558383
+    },
+    {
+      "path": "design/music-20261104-chinese-12/runtime/screenshots/music-room-960.png",
+      "sha256": "978e4b36c36403828e9a6cf16a074e3e4ccb11ce8584bc0028b641b3e8cf140b",
+      "bytes": 416878
+    }
+  ],
+  "notes": [
+    "12 D2 cues decoded and advanced in the music room.",
+    "Playback and music-room UI behavior verified; captures are not subjective listening approval."
+  ]
+}

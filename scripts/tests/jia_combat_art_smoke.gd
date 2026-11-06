@@ -50,7 +50,10 @@ func run() -> void:
 	view.canvas.refresh(false)
 	var actor: Node2D = view.canvas.actor_visual
 	expect(actor.scene_file_path == ART.JIA.resource_path, "dedicated protagonist scene")
-	expect(ART.actor("N01") == ART.SWORD and ART.actor("F11") == ART.MAGE, "other characters keep authored scenes")
+	var n01_scene: PackedScene = ART.actor("N01")
+	var f11_scene: PackedScene = ART.actor("F11")
+	expect(n01_scene != ART.SWORD and n01_scene.resource_path.contains("/chronicle-cast/N01/"), "N01 resolves its own manifested actor rather than a temporary sword family scene")
+	expect(f11_scene != ART.MAGE and f11_scene.resource_path.contains("/chronicle-cast/F11/"), "F11 resolves its own manifested actor rather than a temporary wizard family scene")
 	expect(ART.portrait("JIA") == ART.JIA_HEAD, "triangle HUD uses Jia portrait")
 	expect(actor.sprite.animation == &"dao-idle", "default dao idle")
 	expect(actor.scale == Vector2.ONE * .9, "fixed authored body scale")

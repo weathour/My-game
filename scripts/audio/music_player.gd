@@ -1,6 +1,7 @@
 extends AudioStreamPlayer
 
 const CATALOG := preload("res://scripts/audio/music_catalog.gd")
+const SETTINGS := preload("res://scripts/shared/settings.gd")
 const SETTINGS_PATH := "user://settings.cfg"
 const SETTINGS_SECTION := "audio"
 const MUSIC_VOLUME_KEY := "music_volume_linear"
@@ -8,7 +9,7 @@ const MUSIC_MUTED_KEY := "music_muted"
 const DEFAULT_VOLUME_LINEAR := 0.7
 const MUTED_VOLUME_DB := -80.0
 
-@export var initial_cue: String = "title_overture"
+@export var initial_cue: String = "midi_test_01"
 
 var current_cue: String = ""
 var stored_playback_position: float = 0.0
@@ -32,6 +33,7 @@ var _stinger_remaining := 0.0
 var _stinger_duration := 0.0
 var _stinger_after := ""
 var _duck_gain := 1.0
+var combat_mix_gain := 1.0
 var _reported_missing := {}
 
 func _ready() -> void:
@@ -100,6 +102,7 @@ func _process(delta: float) -> void:
 		_fade_duration = 0.0
 
 func set_cue(cue: String, fade_seconds: float = 1.4) -> void:
+	if not CATALOG.has_cue(cue): cue = "midi_test_11"
 	if cue == current_cue: return
 	var resource_path := CATALOG.path(cue)
 	if resource_path.is_empty() or not ResourceLoader.exists(resource_path):
@@ -109,6 +112,7 @@ func set_cue(cue: String, fade_seconds: float = 1.4) -> void:
 		return
 	var next_stream := load(resource_path) as AudioStream
 	if next_stream == null: return
+	next_stream = next_stream.duplicate()
 	if CATALOG.is_one_shot(cue):
 		paused_by_script = false
 		_started = true
@@ -145,13 +149,13 @@ func apply_saved_volume() -> void:
 	_apply_gains()
 
 func _apply_gains() -> void:
-	var volume := 0.0 if load_music_muted() else clampf(load_music_volume(), 0.0, 1.0)
+	var volume := SETTINGS.load_music_gain()
 	if is_instance_valid(_active):
-		_active.volume_db = linear_to_db(volume * _active_gain * _duck_gain) if volume * _active_gain * _duck_gain > 0.0 else MUTED_VOLUME_DB
+		_active.volume_db = linear_to_db(volume * _active_gain * _duck_gain * combat_mix_gain) if volume * _active_gain * _duck_gain * combat_mix_gain > 0.0 else MUTED_VOLUME_DB
 	if is_instance_valid(_stinger):
 		_stinger.volume_db = linear_to_db(volume * stinger_gain()) if volume > 0.0 else MUTED_VOLUME_DB
 	if is_instance_valid(_outgoing):
-		_outgoing.volume_db = linear_to_db(volume * _outgoing_gain * _duck_gain) if volume * _outgoing_gain * _duck_gain > 0.0 else MUTED_VOLUME_DB
+		_outgoing.volume_db = linear_to_db(volume * _outgoing_gain * _duck_gain * combat_mix_gain) if volume * _outgoing_gain * _duck_gain * combat_mix_gain > 0.0 else MUTED_VOLUME_DB
 
 func _on_finished(player: AudioStreamPlayer) -> void:
 	if player != _active or not CATALOG.is_one_shot(current_cue):
@@ -234,24 +238,16 @@ func _is_headless_runtime() -> bool:
 	return str(DisplayServer.get_name()).to_lower() == "headless"
 
 static func load_music_volume() -> float:
-	var config := preload("res://scripts/shared/settings.gd")._get_config()
-
-	return float(config.get_value(SETTINGS_SECTION, MUSIC_VOLUME_KEY, DEFAULT_VOLUME_LINEAR))
+	return SETTINGS.load_audio_volume("music")
 
 static func save_music_volume(saved_volume_linear: float) -> void:
-	var config := preload("res://scripts/shared/settings.gd")._get_config()
-	config.set_value(SETTINGS_SECTION, MUSIC_VOLUME_KEY, clamp(saved_volume_linear, 0.0, 1.0))
-	config.save(SETTINGS_PATH)
+	SETTINGS.save_audio_volume("music", saved_volume_linear)
 
 static func load_music_muted() -> bool:
-	var config := preload("res://scripts/shared/settings.gd")._get_config()
-
-	return bool(config.get_value(SETTINGS_SECTION, MUSIC_MUTED_KEY, false))
+	return SETTINGS.load_music_muted()
 
 static func save_music_muted(muted: bool) -> void:
-	var config := preload("res://scripts/shared/settings.gd")._get_config()
-	config.set_value(SETTINGS_SECTION, MUSIC_MUTED_KEY, muted)
-	config.save(SETTINGS_PATH)
+	SETTINGS.save_music_muted(muted)
 
 ## Independent one-shot overlay. Its timer shares pause ownership with both beds.
 func play_stinger(cue: String, after_cue: String = "") -> bool:
@@ -300,8 +296,10 @@ func restore_snapshot(snapshot: Dictionary) -> void:
 	if snapshot.is_empty(): return
 	cancel_stinger()
 	context_id = str(snapshot.get("context", ""))
-	set_cue(str(snapshot.get("cue", "")), 0.0)
-	restore_playback_position(float(snapshot.get("position", 0.0)))
+	var saved_cue := str(snapshot.get("cue", ""))
+	var valid_cue := CATALOG.has_cue(saved_cue)
+	set_cue(saved_cue, 0.0)
+	restore_playback_position(float(snapshot.get("position", 0.0)) if valid_cue else 0.0)
 	_started = bool(snapshot.get("started", true))
 	paused_by_script = bool(snapshot.get("paused", false))
 	if _started and not paused_by_script: resume_music()
@@ -311,3 +309,7 @@ func restart_cue(cue: String) -> void:
 	set_cue(cue, 0.0)
 	restore_playback_position(0.0)
 	resume_music()
+
+func set_combat_mix_gain(gain: float) -> void:
+	combat_mix_gain = clampf(gain,0.0,1.0)
+	_apply_gains()

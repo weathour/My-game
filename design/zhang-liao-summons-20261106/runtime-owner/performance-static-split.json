@@ -1,0 +1,381 @@
+{
+  "method": "Original before/after measured arrays split by actual tell clock and fixed authored 2.9 second visual lifetime; exploratory, not causal A/B. No code changes/re-runs.",
+  "rows": [
+    {
+      "case": "B17-human-gaoshun-dense",
+      "summon_active": true,
+      "samples": 192,
+      "medians": {
+        "battle_tick_ms": {
+          "before": 14.864,
+          "after": 28.751,
+          "ratio": 1.934
+        },
+        "canvas_refresh_ms": {
+          "before": 0.9455,
+          "after": 2.2395,
+          "ratio": 2.369
+        },
+        "advance_presentation_ms": {
+          "before": 0.9425,
+          "after": 1.863,
+          "ratio": 1.977
+        },
+        "hud_view_refresh_ms": {
+          "before": 0.166,
+          "after": 0.283,
+          "ratio": 1.705
+        },
+        "input_trace_ms": {
+          "before": 0.004,
+          "after": 0.009,
+          "ratio": 2.25
+        },
+        "frame_wall_ms": {
+          "before": 31.5565,
+          "after": 56.967,
+          "ratio": 1.805
+        },
+        "foreground_ms": {
+          "before": 5.0405,
+          "after": 9.3745,
+          "ratio": 1.86
+        },
+        "draw_ms": {
+          "before": 0.3855,
+          "after": 0.6715,
+          "ratio": 1.742
+        }
+      }
+    },
+    {
+      "case": "B17-human-gaoshun-dense",
+      "summon_active": false,
+      "samples": 438,
+      "medians": {
+        "battle_tick_ms": {
+          "before": 1.6775,
+          "after": 3.7235,
+          "ratio": 2.22
+        },
+        "canvas_refresh_ms": {
+          "before": 1.293,
+          "after": 2.6085,
+          "ratio": 2.017
+        },
+        "advance_presentation_ms": {
+          "before": 0.6845,
+          "after": 1.4175,
+          "ratio": 2.071
+        },
+        "hud_view_refresh_ms": {
+          "before": 0.163,
+          "after": 0.276,
+          "ratio": 1.693
+        },
+        "input_trace_ms": {
+          "before": 0.004,
+          "after": 0.009,
+          "ratio": 2.25
+        },
+        "frame_wall_ms": {
+          "before": 15.5675,
+          "after": 31.684,
+          "ratio": 2.035
+        },
+        "foreground_ms": {
+          "before": 4.491,
+          "after": 9.39,
+          "ratio": 2.091
+        },
+        "draw_ms": {
+          "before": 0.368,
+          "after": 0.673,
+          "ratio": 1.829
+        }
+      }
+    },
+    {
+      "case": "B17-human-chengong-dense",
+      "summon_active": true,
+      "samples": 54,
+      "medians": {
+        "battle_tick_ms": {
+          "before": 8.1725,
+          "after": 16.068,
+          "ratio": 1.966
+        },
+        "canvas_refresh_ms": {
+          "before": 0.961,
+          "after": 2.514,
+          "ratio": 2.616
+        },
+        "advance_presentation_ms": {
+          "before": 0.276,
+          "after": 0.5855,
+          "ratio": 2.121
+        },
+        "hud_view_refresh_ms": {
+          "before": 0.156,
+          "after": 0.297,
+          "ratio": 1.904
+        },
+        "input_trace_ms": {
+          "before": 0.003,
+          "after": 0.008,
+          "ratio": 2.667
+        },
+        "frame_wall_ms": {
+          "before": 14.857,
+          "after": 29.738,
+          "ratio": 2.002
+        },
+        "foreground_ms": {
+          "before": 1.633,
+          "after": 3.625,
+          "ratio": 2.22
+        },
+        "draw_ms": {
+          "before": 0.379,
+          "after": 0.7435,
+          "ratio": 1.962
+        }
+      }
+    },
+    {
+      "case": "B17-human-chengong-dense",
+      "summon_active": false,
+      "samples": 576,
+      "medians": {
+        "battle_tick_ms": {
+          "before": 1.649,
+          "after": 3.6435,
+          "ratio": 2.21
+        },
+        "canvas_refresh_ms": {
+          "before": 1.21,
+          "after": 2.622,
+          "ratio": 2.167
+        },
+        "advance_presentation_ms": {
+          "before": 0.668,
+          "after": 1.3235,
+          "ratio": 1.981
+        },
+        "hud_view_refresh_ms": {
+          "before": 0.162,
+          "after": 0.3,
+          "ratio": 1.852
+        },
+        "input_trace_ms": {
+          "before": 0.004,
+          "after": 0.009,
+          "ratio": 2.25
+        },
+        "frame_wall_ms": {
+          "before": 15.0075,
+          "after": 31.8195,
+          "ratio": 2.12
+        },
+        "foreground_ms": {
+          "before": 4.5385,
+          "after": 9.3745,
+          "ratio": 2.066
+        },
+        "draw_ms": {
+          "before": 0.374,
+          "after": 0.7185,
+          "ratio": 1.921
+        }
+      }
+    },
+    {
+      "case": "B17-war-gaoshun-dense",
+      "summon_active": true,
+      "samples": 54,
+      "medians": {
+        "battle_tick_ms": {
+          "before": 1.3545,
+          "after": 3.1945,
+          "ratio": 2.358
+        },
+        "canvas_refresh_ms": {
+          "before": 0.879,
+          "after": 2.423,
+          "ratio": 2.757
+        },
+        "advance_presentation_ms": {
+          "before": 0.1245,
+          "after": 0.267,
+          "ratio": 2.145
+        },
+        "hud_view_refresh_ms": {
+          "before": 0.147,
+          "after": 0.288,
+          "ratio": 1.959
+        },
+        "input_trace_ms": {
+          "before": 0.003,
+          "after": 0.008,
+          "ratio": 2.667
+        },
+        "frame_wall_ms": {
+          "before": 8.7505,
+          "after": 21.471,
+          "ratio": 2.454
+        },
+        "foreground_ms": {
+          "before": 2.2755,
+          "after": 5.4285,
+          "ratio": 2.386
+        },
+        "draw_ms": {
+          "before": 0.348,
+          "after": 0.712,
+          "ratio": 2.046
+        }
+      }
+    },
+    {
+      "case": "B17-war-gaoshun-dense",
+      "summon_active": false,
+      "samples": 576,
+      "medians": {
+        "battle_tick_ms": {
+          "before": 1.8205,
+          "after": 3.8415,
+          "ratio": 2.11
+        },
+        "canvas_refresh_ms": {
+          "before": 1.2145,
+          "after": 2.522,
+          "ratio": 2.077
+        },
+        "advance_presentation_ms": {
+          "before": 0.7535,
+          "after": 1.497,
+          "ratio": 1.987
+        },
+        "hud_view_refresh_ms": {
+          "before": 0.167,
+          "after": 0.273,
+          "ratio": 1.635
+        },
+        "input_trace_ms": {
+          "before": 0.004,
+          "after": 0.009,
+          "ratio": 2.25
+        },
+        "frame_wall_ms": {
+          "before": 18.62,
+          "after": 34.073,
+          "ratio": 1.83
+        },
+        "foreground_ms": {
+          "before": 5.4595,
+          "after": 9.9755,
+          "ratio": 1.827
+        },
+        "draw_ms": {
+          "before": 0.3925,
+          "after": 0.679,
+          "ratio": 1.73
+        }
+      }
+    },
+    {
+      "case": "B17-war-chengong-dense",
+      "summon_active": true,
+      "samples": 54,
+      "medians": {
+        "battle_tick_ms": {
+          "before": 8.2645,
+          "after": 15.7655,
+          "ratio": 1.908
+        },
+        "canvas_refresh_ms": {
+          "before": 0.996,
+          "after": 2.5045,
+          "ratio": 2.515
+        },
+        "advance_presentation_ms": {
+          "before": 0.291,
+          "after": 0.585,
+          "ratio": 2.01
+        },
+        "hud_view_refresh_ms": {
+          "before": 0.166,
+          "after": 0.2865,
+          "ratio": 1.726
+        },
+        "input_trace_ms": {
+          "before": 0.004,
+          "after": 0.008,
+          "ratio": 2.0
+        },
+        "frame_wall_ms": {
+          "before": 15.23,
+          "after": 32.2325,
+          "ratio": 2.116
+        },
+        "foreground_ms": {
+          "before": 2.0115,
+          "after": 4.623,
+          "ratio": 2.298
+        },
+        "draw_ms": {
+          "before": 0.4005,
+          "after": 0.752,
+          "ratio": 1.878
+        }
+      }
+    },
+    {
+      "case": "B17-war-chengong-dense",
+      "summon_active": false,
+      "samples": 576,
+      "medians": {
+        "battle_tick_ms": {
+          "before": 1.781,
+          "after": 3.7875,
+          "ratio": 2.127
+        },
+        "canvas_refresh_ms": {
+          "before": 1.2905,
+          "after": 2.568,
+          "ratio": 1.99
+        },
+        "advance_presentation_ms": {
+          "before": 0.7775,
+          "after": 1.537,
+          "ratio": 1.977
+        },
+        "hud_view_refresh_ms": {
+          "before": 0.172,
+          "after": 0.281,
+          "ratio": 1.634
+        },
+        "input_trace_ms": {
+          "before": 0.004,
+          "after": 0.009,
+          "ratio": 2.25
+        },
+        "frame_wall_ms": {
+          "before": 18.027,
+          "after": 34.4625,
+          "ratio": 1.912
+        },
+        "foreground_ms": {
+          "before": 5.499,
+          "after": 10.5775,
+          "ratio": 1.924
+        },
+        "draw_ms": {
+          "before": 0.402,
+          "after": 0.69,
+          "ratio": 1.716
+        }
+      }
+    }
+  ]
+}

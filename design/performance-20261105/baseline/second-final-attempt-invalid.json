@@ -1,0 +1,72 @@
+{
+  "engine": {
+    "build": "official",
+    "hash": "71f334935c000924d403448e698df4441130df18",
+    "hex": 263682,
+    "major": 4,
+    "minor": 6,
+    "patch": 2,
+    "status": "stable",
+    "string": "4.6.2-stable (official)",
+    "timestamp": 0
+  },
+  "failures": [
+    "all requested scenarios completed"
+  ],
+  "first_stage_scenario_wall_ms": 14577.447,
+  "fixture": {
+    "equipment": {
+      "accessory": "ember_seal",
+      "armor": "cloth_armor",
+      "weapon": "plain_blade"
+    },
+    "input_trace": "8-way deterministic movement direction changes every 45 frames; switch every 210; manual skill requests every 84/132 frames; standard battle auto-attack and enemy AI remain enabled",
+    "level": 10,
+    "measurement": "per-frame manual equivalent of BattleView._physics_process with timed battle/UI segments, then wait for RenderingServer.frame_post_draw; view physics process disabled to prevent double stepping",
+    "party_by_stage": {
+      "B01": [
+        "JIA",
+        "F11",
+        "N16"
+      ],
+      "B12": [
+        "JIA",
+        "F11",
+        "N16"
+      ],
+      "B18": [
+        "JIA",
+        "M01",
+        "N16"
+      ]
+    },
+    "resolution": [
+      1280,
+      720
+    ],
+    "settings": {
+      "category_volumes": 1.0,
+      "master": 1.0,
+      "master_muted": false,
+      "music": 0.7,
+      "music_muted": false,
+      "reduced_flash": false,
+      "reduced_motion": false,
+      "sfx": 0.65
+    },
+    "step_seconds": 0.0166666666666667
+  },
+  "renderer": {
+    "adapter": "NVIDIA GeForce RTX 5080",
+    "audio_driver": "Dummy",
+    "display_server": "X11",
+    "method": "gl_compatibility",
+    "window_no_focus": true,
+    "window_position": "(320, 164)"
+  },
+  "scenario_count": 0,
+  "scenarios": [],
+  "schema_version": 1,
+  "status": "INVALID_DO_NOT_COMPARE",
+  "invalid_reason": "Simulation completed but final report assembly rejected untyped sample arrays in _count_histogram; all scenarios were omitted and log contains SCRIPT ERROR. No performance conclusion should be drawn."
+}

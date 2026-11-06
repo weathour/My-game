@@ -46,6 +46,7 @@ func consume(events: Array, battle: RefCounted) -> void:
 		seen[key] = true
 		var g: Dictionary = event.geometry.duplicate(true)
 		var action := str(g.get("action_id", "swipe"))
+		if action == "collaboration" and str(event.get("definition_id","")) == "B17": continue
 		var style := str({"shot":"lantern_pulse", "fan":"lantern_pulse", "charge":"charge_dust", "pot":"pot_miasma", "heal":"heal_seal", "command":"command_seal", "summon":"coffin_smoke", "anchor":"lantern_pulse", "pulse":"lantern_pulse", "collaboration":"command_seal", "marker":"lightning", "hook":"thrust", "slam":"sweep", "swipe":"slash"}.get(action, "slash"))
 		if event.kind == "enemy_hazard_release" and str(g.get("shape", "")) == "marker": style = "lightning"
 		if action in ["shot", "fan"] and event.kind != "enemy_hazard_release": g["radius"] = 25.0; g["shape"] = "disc"
@@ -55,6 +56,8 @@ func consume(events: Array, battle: RefCounted) -> void:
 				if enemy.id in g.get("beneficiaries", []): _add(style, {"origin":enemy.position, "radius":enemy.radius + 15}, battle.director.elapsed, .5, int(event.id))
 
 func _add(style: String, geometry: Dictionary, clock: float, duration: float, source_id: int) -> void:
+	# Decorative saturation is bounded independently of actual damage objects.
+	if transients.size() >= 64: transients.pop_front()
 	transients.append({"style":style, "geometry":geometry, "start":clock, "duration":duration, "source_id":source_id})
 
 func clear() -> void:
@@ -77,33 +80,49 @@ func texture(style: String, age: float, loop: bool = false) -> Texture2D:
 
 func draw_projectile(painter: Node2D, projectile: Dictionary, elapsed: float, screen_origin: Vector2, world_scale: float) -> bool:
 	if not projectile.get("hostile", false): return false
-	var image := texture("bone_bolt", elapsed, true)
-	if image == null: return false
 	var direction: Vector2 = projectile.velocity.normalized()
-	var size := Vector2(42, 21)
+	var radius := float(projectile.get("hit_radius", 5.0))
+	var style := str(projectile.get("bullet_style", "bone"))
+	var color := Color(str(projectile.get("bullet_color", "ff947d" if style == "bone" else "ffd271" if style == "needle" else "ff72b1")))
+	var stroke := .85 / maxf(.25, world_scale)
 	painter.draw_set_transform(screen_origin + projectile.position * world_scale, direction.angle(), Vector2.ONE * world_scale)
-	# The bone tip lies at the simulated projectile position; the soft trail is behind it.
-	var anchor_data: Array = clips.bone_bolt.anchor
-	var ratio: Vector2 = Vector2(anchor_data[0],anchor_data[1]) / clips.bone_bolt.frame_size
-	painter.draw_texture_rect(image, Rect2(-ratio * size, size), false, Color.WHITE)
+	# Existing bone art remains a soft trailing identity cue. The solid circle
+	# centered on the simulation position is the exact collision radius for every
+	# style, including a needle; there are no per-bullet prediction lines.
+	if style == "bone":
+		var image := texture("bone_bolt", elapsed, true)
+		if image != null:
+			var size := Vector2(30, 15)
+			var anchor_data: Array = clips.bone_bolt.anchor
+			var ratio: Vector2 = Vector2(anchor_data[0],anchor_data[1]) / clips.bone_bolt.frame_size
+			painter.draw_texture_rect(image, Rect2(-ratio * size, size), false, Color(1, 1, 1, .36))
+	elif style == "needle":
+		painter.draw_line(Vector2(-radius - 8, 0), Vector2(-radius, 0), Color(color, .42), stroke * 1.4, true)
+	painter.draw_circle(Vector2.ZERO, radius + stroke * 2.2, Color("21121c"))
+	painter.draw_circle(Vector2.ZERO, radius + stroke, Color("fff0da"))
+	painter.draw_circle(Vector2.ZERO, radius, color)
 	return true
 
 func draw(painter: Node2D, battle: RefCounted) -> void:
+	if not battle.outcome.is_empty(): return
 	for hazard in battle.hazards:
 		var style := "pot_miasma" if str(hazard.get("kind", "")) == "pot" else "lightning" if str(hazard.get("shape", "")) == "marker" else "lantern_pulse"
 		if str(hazard.get("phase", "")) == "tell": continue
-		_draw_geometry(painter, style, hazard, battle.director.elapsed, .70, true)
+		_draw_geometry(painter, style, hazard, battle.director.elapsed, .18, true)
 	for enemy in battle.enemies:
 		if enemy.definition_id == "D05" or (enemy.parent_id > 0 and enemy.definition_id == "D01" and enemy.age < .4):
 			_draw_geometry(painter, "coffin_smoke", {"origin":enemy.position, "radius":enemy.radius + 20}, enemy.age, .65, true)
 		if enemy.state == "active" and enemy.attack == "charge":
 			_draw_geometry(painter, "charge_dust", {"origin":enemy.position - enemy.aim * 28, "radius":45, "direction":enemy.aim}, battle.director.elapsed, .6, true)
 	for entry in transients:
-		_draw_geometry(painter, entry.style, entry.geometry, battle.director.elapsed - entry.start, .8)
+		_draw_geometry(painter, entry.style, entry.geometry, battle.director.elapsed - entry.start, .32)
 
 func _draw_geometry(painter: Node2D, style: String, g: Dictionary, age: float, alpha: float, loop: bool = false) -> void:
 	var image := texture(style, age, loop)
 	if image == null: return
+	# Large attack fields get their readable boundary from the descriptor renderer.
+	# Raster smoke and slashes add identity without washing out the field.
+	if float(g.get("radius", 40)) > 200 or float(g.get("length", 0)) > 400: alpha *= .55
 	if SETTINGS.comfort_enabled("reduced_flash"): alpha *= .5
 	var point: Vector2 = g.get("origin", Vector2.ZERO)
 	var radius := float(g.get("radius", 40))

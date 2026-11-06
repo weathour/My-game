@@ -1,0 +1,234 @@
+Check logs: /home/weathour/programs/desktop-projects/My-game/design/danmaku-pressure-20261103/runtime/full-check-logs
+== Python project checks ==
+DOC_LINK_CHECK_OK
+PROJECT_CONFIG_CHECK_OK
+{"graph_update_accepted": false, "reason": "exit=0; Godot extractor=True; missing 1 runtime GDScript files", "missing": ["scripts/new.gd"]}
+GRAPHIFY_UPDATE_REJECTED: exit=0; Godot extractor=True; missing 1 runtime GDScript files
+{"graph_update_accepted": false, "reason": "exit=0; Godot extractor=False; missing 0 runtime GDScript files", "missing": []}
+GRAPHIFY_UPDATE_REJECTED: exit=0; Godot extractor=False; missing 0 runtime GDScript files
+{"graph_update_accepted": true, "reason": "exit=0; Godot extractor=True; missing 0 runtime GDScript files", "missing": []}
+GRAPH_UPDATE_SELF_TEST_OK
+SMOKE_LOG_SELF_TEST_OK
+ARCHITECTURE_CONTRACT_CHECK_OK
+CHRONICLE_STORY_CONTENT_CHECK_OK
+== Godot asset import ==
+GODOT_ASSET_IMPORT_OK
+== Godot headless parse ==
+GODOT_PARSE_CHECK_OK
+== Godot Chronicle entry scene smoke ==
+CHRONICLE_ENTRY_SCENE_SMOKE_OK
+== Godot Linux development pack export for isolated pack smokes ==
+CHRONICLE_PACK path=/tmp/my-game-check.RxjHs9/pack-smokes/game.pck bytes=248915432
+== Godot chronicle_enemy_pack_smoke against isolated main pack from empty cwd ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+ENEMY_PACK_SMOKE PASS checks=742 failures=0
+== Godot chronicle_music_pack_smoke against isolated main pack from empty cwd ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+CHRONICLE_MUSIC_PACK_SMOKE PASS cues=16 checks=95 failures=0
+== Godot chronicle_story_pack_smoke against isolated main pack from empty cwd ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+CHRONICLE_STORY_PACK_SMOKE PASS checks=97 failures=0
+== Godot chronicle_combat_feedback_pack_smoke against isolated main pack from empty cwd ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+CHRONICLE_COMBAT_FEEDBACK_PACK_SMOKE PASS checks=806 failures=0
+== Godot baimen enemy runtime smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+BAIMEN_ENEMY_RUNTIME_SMOKE PASS checks=743 failures=0
+== Godot baimen women combat art smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+BAIMEN_WOMEN_COMBAT_ART_SMOKE PASS checks=266 failures=0
+== Godot baimen women portraits smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+BAIMEN_WOMEN_PORTRAITS_SMOKE PASS checks=525 failures=0
+== Godot boss combo timing smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+BOSS_COMBO_BEAT {"cycle":0,"move":"demon_fourfold","next_tell":2.26,"release":1.78,"release_to_next_tell":0.48,"tell":0.01,"warning":1.77}
+BOSS_COMBO_BEAT {"cycle":0,"move":"demon_skybreaker","next_tell":4.64,"release":3.51,"release_to_next_tell":1.13,"tell":2.26,"warning":1.25}
+BOSS_COMBO_BEAT {"cycle":0,"move":"demon_quake","next_tell":7.02,"release":6.44,"release_to_next_tell":0.58,"tell":4.64,"warning":1.8}
+BOSS_COMBO_BEAT {"cycle":0,"move":"demon_heavenfall","next_tell":9.08,"release":8.55,"release_to_next_tell":0.53,"tell":7.02,"warning":1.53}
+BOSS_COMBO_BEAT {"cycle":0,"move":"demon_final_cleave","next_tell":13.18,"release":11.03,"release_to_next_tell":2.15,"tell":9.08,"warning":1.95}
+BOSS_COMBO_BEAT {"cycle":1,"move":"demon_fourfold","next_tell":15.43,"release":14.95,"release_to_next_tell":0.48,"tell":13.18,"warning":1.77}
+BOSS_COMBO_BEAT {"cycle":1,"move":"demon_skybreaker","next_tell":17.65,"release":16.68,"release_to_next_tell":0.97,"tell":15.43,"warning":1.25}
+BOSS_COMBO_BEAT {"cycle":1,"move":"demon_quake","next_tell":20.03,"release":19.45,"release_to_next_tell":0.58,"tell":17.65,"warning":1.8}
+BOSS_COMBO_BEAT {"cycle":1,"move":"demon_heavenfall","next_tell":22.09,"release":21.56,"release_to_next_tell":0.53,"tell":20.03,"warning":1.53}
+BOSS_COMBO_BEAT {"cycle":1,"move":"demon_final_cleave","next_tell":26.19,"release":24.04,"release_to_next_tell":2.15,"tell":22.09,"warning":1.95}
+BOSS_COMBO_TIMING_SMOKE PASS checks=41 failures=0
+== Godot boss forms smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+BOSS_FORMS_SMOKE PASS checks=672 failures=0 authored_moves=30
+== Godot boss friendly art smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+BOSS_FRIENDLY_ART_SMOKE_START
+BOSS_FRIENDLY_ART_ID_DONE M01
+BOSS_FRIENDLY_ART_ID_DONE M02
+BOSS_FRIENDLY_ART_ID_DONE M03
+BOSS_FRIENDLY_ART_ID_DONE M04
+BOSS_FRIENDLY_ART_ID_DONE M05
+BOSS_FRIENDLY_ART_ID_DONE M06
+BOSS_FRIENDLY_ART_RENDER
+BOSS_FRIENDLY_ART_SMOKE PASS checks=146 failures=0 portrait_capture=unavailable
+== Godot chronicle authored effects smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+CHRONICLE_AUTHORED_EFFECTS_SMOKE PASS checks=36 failures=0
+== Godot chronicle battle ground smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+CHRONICLE_BATTLE_GROUND_SMOKE PASS checks=191 failures=0
+== Godot chronicle battle scale smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+CHRONICLE_BATTLE_SCALE_SMOKE PASS checks=560 failures=0
+== Godot chronicle boss camera smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+CHRONICLE_BOSS_CAMERA_SMOKE PASS checks=165 failures=0
+== Godot chronicle boss flow smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+CHRONICLE_BOSS_FLOW_SMOKE PASS checks=140 failures=0
+== Godot chronicle boss sound smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+CHRONICLE_BOSS_SOUND_SMOKE PASS checks=23 failures=0
+== Godot chronicle chapter two smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+CAMPAIGN_RUN {"branch":"B04","card_elite":false,"enemy_kinds":["E01","equipment_elite","boss"],"jia_hp":284.0,"jia_level":5,"kills":144,"outcome":"victory","seconds":39.6,"stage":"B01"}
+CAMPAIGN_RUN {"branch":"B04","card_elite":true,"enemy_kinds":["E01","E02","card_elite","boss"],"jia_hp":300.0,"jia_level":6,"kills":159,"outcome":"victory","seconds":52.5,"stage":"B02"}
+CAMPAIGN_RUN {"branch":"B04","card_elite":false,"enemy_kinds":["E01","E03","equipment_elite","E02","E04","boss"],"jia_hp":77.2,"jia_level":7,"kills":183,"outcome":"victory","seconds":59.0,"stage":"B04"}
+CAMPAIGN_RUN {"branch":"B04","card_elite":true,"enemy_kinds":["E01","E03","E04","E02","card_elite","E06","boss"],"jia_hp":95.4,"jia_level":8,"kills":212,"outcome":"victory","seconds":58.8,"stage":"B03"}
+CAMPAIGN_RUN {"branch":"B04","card_elite":true,"enemy_kinds":["E01","E04","E02","E03","card_elite","boss"],"jia_hp":121.7,"jia_level":9,"kills":197,"outcome":"victory","seconds":62.8,"stage":"B06"}
+CAMPAIGN_RUN {"branch":"B05","card_elite":false,"enemy_kinds":["E01","equipment_elite","boss"],"jia_hp":284.0,"jia_level":5,"kills":144,"outcome":"victory","seconds":39.6,"stage":"B01"}
+CAMPAIGN_RUN {"branch":"B05","card_elite":true,"enemy_kinds":["E01","E02","card_elite","boss"],"jia_hp":300.0,"jia_level":6,"kills":159,"outcome":"victory","seconds":52.5,"stage":"B02"}
+CAMPAIGN_RUN {"branch":"B05","card_elite":false,"enemy_kinds":["E01","E04","E05","equipment_elite","boss"],"jia_hp":87.6,"jia_level":7,"kills":163,"outcome":"victory","seconds":44.6,"stage":"B05"}
+CAMPAIGN_RUN {"branch":"B05","card_elite":true,"enemy_kinds":["E01","E03","E04","E02","card_elite","E06","boss"],"jia_hp":96.9,"jia_level":8,"kills":225,"outcome":"victory","seconds":71.7,"stage":"B03"}
+CAMPAIGN_RUN {"branch":"B05","card_elite":true,"enemy_kinds":["E01","E04","E02","E03","card_elite","boss"],"jia_hp":121.7,"jia_level":9,"kills":197,"outcome":"victory","seconds":62.8,"stage":"B06"}
+CHRONICLE_CHAPTER_TWO_SMOKE PASS checks=189 failures=0
+== Godot chronicle character campaign smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+EXPECTED_FAULT_INJECTION: post-battle story save rejected
+ERROR: Could not create directory: '/proc/character-campaign-story-write-rejected'.
+   at: make_dir_recursive (core/io/dir_access.cpp:178)
+   GDScript backtrace (most recent call first):
+       [0] write (res://scripts/campaign/campaign_store.gd:5)
+       [1] save_slot (res://scripts/campaign/campaign_service.gd:367)
+       [2] commit (res://scripts/campaign/campaign_service.gd:62)
+       [3] resolve_event (res://scripts/campaign/campaign_service.gd:276)
+       [4] post_battle_story (res://scripts/tests/chronicle_character_campaign_smoke.gd:84)
+       [5] run (res://scripts/tests/chronicle_character_campaign_smoke.gd:42)
+EXPECTED_FAULT_INJECTION: post-battle story save rejected
+ERROR: Could not create directory: '/proc/character-campaign-story-write-rejected'.
+   at: make_dir_recursive (core/io/dir_access.cpp:178)
+   GDScript backtrace (most recent call first):
+       [0] write (res://scripts/campaign/campaign_store.gd:5)
+       [1] save_slot (res://scripts/campaign/campaign_service.gd:367)
+       [2] commit (res://scripts/campaign/campaign_service.gd:62)
+       [3] resolve_event (res://scripts/campaign/campaign_service.gd:276)
+       [4] post_battle_story (res://scripts/tests/chronicle_character_campaign_smoke.gd:84)
+       [5] run (res://scripts/tests/chronicle_character_campaign_smoke.gd:42)
+       [6] post_battle_story (res://scripts/tests/chronicle_character_campaign_smoke.gd:117)
+CHRONICLE_CHARACTER_CAMPAIGN_SMOKE PASS checks=196 failures=0
+== Godot chronicle character mechanics smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+LOOP echo_refund t=0.0 F11/emma_frost paid=28.0 shield_spent=0.0 ammo_spent=0
+LOOP echo_refund t=0.6 JIA/jia_sweep paid=22.0 shield_spent=0.0 ammo_spent=0
+LOOP echo_refund t=0.6 echo owner=F11 charges_left=1
+LOOP echo_refund t=2.02 refund to=F11 returned=1.87 unpaid=3.73
+LOOP echo_refund t=2.62 refund to=JIA returned=1.47 unpaid=2.93
+LOOP echo_refund t=3.0 F04/F04_settle paid=18.0 shield_spent=0.0 ammo_spent=0
+LOOP echo_refund t=3.0 refund to=F11 returned=3.73 unpaid=0.0
+LOOP echo_refund t=3.0 refund to=JIA returned=2.93 unpaid=0.0
+LOOP echo_refund t=3.0 echo owner=F11 charges_left=0
+LOOP echo_refund t=5.8 JIA/jia_sweep paid=22.0 shield_spent=0.0 ammo_spent=0
+LOOP echo_relay t=0.0 F11/emma_frost paid=28.0 shield_spent=0.0 ammo_spent=0
+LOOP echo_relay t=0.6 JIA/jia_sweep paid=17.6 shield_spent=0.0 ammo_spent=0
+LOOP echo_relay t=0.6 echo owner=F11 charges_left=1
+LOOP echo_relay t=5.8 JIA/jia_sweep paid=22.0 shield_spent=0.0 ammo_spent=0
+LOOP echo_relay t=5.8 echo owner=F11 charges_left=0
+LOOP shield_spend t=0.0 F03/physician_heal paid=34.0 shield_spent=0.0 ammo_spent=0
+LOOP shield_spend t=0.6 F07/bandit_thrust paid=38.0 shield_spent=30.0 ammo_spent=0
+LOOP shield_hold t=0.0 F03/physician_heal paid=34.0 shield_spent=0.0 ammo_spent=0
+LOOP shield_hold t=0.6 F07/bandit_sweep paid=28.0 shield_spent=0.0 ammo_spent=0
+LOOP shield_compare spend_hp=128.69 hold_hp=158.69
+LOOP ammo_temper t=0.0 F08/F08_temper paid=30.0 shield_spent=0.0 ammo_spent=0
+LOOP ammo_temper t=0.0 free_followup arrows_spent=1
+LOOP ammo_temper t=0.0 arrows=5.0 next_refill=7.98
+LOOP ammo_temper t=1.2 F06/F06_volley paid=30.0 shield_spent=0.0 ammo_spent=4
+LOOP ammo_temper t=1.2 arrows=1.0 next_refill=6.78
+LOOP ammo_temper t=2.5 JIA/jia_sweep paid=22.0 shield_spent=0.0 ammo_spent=0
+LOOP ammo_temper t=2.5 free_followup arrows_spent=1
+LOOP ammo_temper t=4.6 free_followup arrows_spent=1
+LOOP ammo_temper t=4.6 arrows=0.0 next_refill=3.38
+LOOP ammo_temper t=6.7 free_followup arrows_spent=0
+LOOP ammo_temper t=8.0 arrows=2.0 next_refill=7.98
+LOOP ammo_temper t=8.8 free_followup arrows_spent=1
+LOOP ammo_temper t=8.8 arrows=1.0 next_refill=7.18
+LOOP ammo_temper t=11.5 F06/F06_volley paid=30.0 shield_spent=0.0 ammo_spent=1
+LOOP ammo_temper t=11.5 arrows=0.0 next_refill=4.48
+LOOP empty_switches t=0.0 arrows=0.0 next_refill=7.98
+CHRONICLE_CHARACTER_MECHANICS_SMOKE PASS checks=126 failures=0
+== Godot chronicle character panels smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+CHRONICLE_CHARACTER_PANELS_SMOKE PASS checks=362 failures=0
+== Godot chronicle character profiles smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+CHRONICLE_CHARACTER_PROFILES_SMOKE PASS checks=121 failures=0
+== Godot chronicle combat feedback events smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+CHRONICLE_COMBAT_FEEDBACK_EVENTS_SMOKE PASS checks=59 failures=0
+== Godot chronicle combat feedback smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+OpenGL API 3.3.0 NVIDIA 580.173.02 - Compatibility - Using Device: NVIDIA - NVIDIA GeForce RTX 5080
+
+CHRONICLE_COMBAT_FEEDBACK_SMOKE PASS checks=332 failures=0
+== Godot chronicle combat smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+EXPECTED_FAULT_INJECTION: victory write rejected
+ERROR: Could not create directory: '/proc/chronicle-combat-result-read-only'.
+   at: make_dir_recursive (core/io/dir_access.cpp:178)
+   GDScript backtrace (most recent call first):
+       [0] write (res://scripts/campaign/campaign_store.gd:5)
+       [1] save_slot (res://scripts/campaign/campaign_service.gd:367)
+       [2] commit (res://scripts/campaign/campaign_service.gd:62)
+       [3] complete_battle (res://scripts/campaign/campaign_service.gd:189)
+       [4] campaign_lifecycle (res://scripts/tests/chronicle_combat_smoke.gd:295)
+       [5] run (res://scripts/tests/chronicle_combat_smoke.gd:53)
+REAL_BATTLE outcome=victory time=51.8 kills=144 level=5 cpu_ms=1445
+REAL_BATTLE outcome=failed time=57.5 kills=162 level=5 cpu_ms=1938
+ERROR: B02 wins with independent companions
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://scripts/tests/chronicle_combat_smoke.gd:19)
+       [1] run (res://scripts/tests/chronicle_combat_smoke.gd:100)
+ERROR: second-stage result commits
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://scripts/tests/chronicle_combat_smoke.gd:19)
+       [1] run (res://scripts/tests/chronicle_combat_smoke.gd:101)
+ERROR: configured Emma gains experience
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://scripts/tests/chronicle_combat_smoke.gd:19)
+       [1] run (res://scripts/tests/chronicle_combat_smoke.gd:103)
+SCRIPT ERROR: Invalid access to property or key 'candidates' on a base object of type 'Dictionary'.
+          at: run (res://scripts/tests/chronicle_combat_smoke.gd:106)
+          GDScript backtrace (most recent call first):
+              [0] run (res://scripts/tests/chronicle_combat_smoke.gd:106)
+CHRONICLE_COMBAT_SMOKE_FAILED

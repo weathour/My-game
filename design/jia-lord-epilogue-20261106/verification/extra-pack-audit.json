@@ -1,0 +1,32 @@
+{
+  "status": "passed",
+  "returncode": 0,
+  "validator_failures": [],
+  "elapsed_seconds": 8.57866907119751,
+  "pack": "/tmp/my-game-check.nac8BM/pack-smokes/game.pck",
+  "pack_bytes": 237701096,
+  "pack_sha256": "b3e70f45572df6f14a379da37b6c0ea75327b399da268c823b853265f952e784",
+  "command": [
+    "/home/weathour/.local/bin/godot-4.6.2",
+    "--headless",
+    "--path",
+    "/tmp/lord-epilogue-final-pack-wcndt25m/empty-cwd",
+    "--main-pack",
+    "/tmp/my-game-check.nac8BM/pack-smokes/game.pck",
+    "--script",
+    "/tmp/lord-epilogue-final-pack-wcndt25m/jia_lord_epilogue_smoke.gd"
+  ],
+  "cwd": "/tmp/lord-epilogue-final-pack-wcndt25m/empty-cwd",
+  "cwd_files_after": [],
+  "external_script": "/tmp/lord-epilogue-final-pack-wcndt25m/jia_lord_epilogue_smoke.gd",
+  "source_script_sha256": "8f4689bb37efbc494ec7b1e8debb2f2e8ebd8943861b80ea6fc7984a97960581",
+  "external_script_sha256": "8f4689bb37efbc494ec7b1e8debb2f2e8ebd8943861b80ea6fc7984a97960581",
+  "extra_res_source_files": false,
+  "baseline_data_used_for_runtime": false,
+  "no_reexport": true,
+  "log": "/home/weathour/programs/desktop-projects/My-game/design/jia-lord-epilogue-20261106/verification/epilogue-pack.log",
+  "log_sha256": "13d188147ab217afe33d32d9c3983a6def9aad7ca3d6a6a00165a7f310425080",
+  "success_lines": [
+    "JIA_LORD_EPILOGUE_SMOKE PASS checks=689 failures=0"
+  ]
+}

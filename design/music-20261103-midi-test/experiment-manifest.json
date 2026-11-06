@@ -1,0 +1,507 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-03",
+  "phase": "chapter_one_local_music_effect_test_implemented_and_verified",
+  "objective": "A local effect test using 12 existing whole-song MIDI files with unchanged musical events and new instrument/sound rendering.",
+  "approved_timbre_direction": "Keep electric guitar, electric bass and drum kit as the core; replace sound sources and add sparse synth/ethnic color.",
+  "midi_freeze": {
+    "full_input_files_immutable": true,
+    "note_events_unchanged": true,
+    "pitch_and_octaves_unchanged": true,
+    "onsets_and_note_offs_unchanged": true,
+    "velocity_and_existing_cc_unchanged": true,
+    "tempo_map_and_meter_unchanged": true,
+    "track_and_section_order_unchanged": true,
+    "no_recomposition_or_variants": true,
+    "automatic_transcription_errors_retained_for_this_test": true,
+    "verification_scope": "frozen_source_midi_and_pre_instrument_mapping_note_event_logs"
+  },
+  "allowed_render_changes": [
+    "instrument/patch/sample-source replacement",
+    "drum-sound mapping preserving hit times and musical drum roles",
+    "gain and panning",
+    "amp/cabinet/distortion/EQ/compression/reverb as sound rendering, with latency alignment",
+    "sparse composite timbre or reassignment of existing auxiliary material without new or shifted musical note events"
+  ],
+  "old_music": {
+    "initial_keep_count": 4,
+    "initial_keep_whitelist": [
+      {
+        "id": "camp_home",
+        "title": "有灯可归",
+        "path": "res://assets/music/chronicle/camp_home.ogg",
+        "decision_basis": "initial execution whitelist for warm/daily/rest use; not a new subjective listening approval"
+      },
+      {
+        "id": "rest_spring",
+        "title": "石隙清泉",
+        "path": "res://assets/music/chronicle/rest_spring.ogg",
+        "decision_basis": "initial execution whitelist for warm/daily/rest use; not a new subjective listening approval"
+      },
+      {
+        "id": "hero_daily",
+        "title": "此行有我·闲篇",
+        "path": "res://assets/music/chronicle/hero_daily.ogg",
+        "decision_basis": "initial execution whitelist for warm/daily/rest use; not a new subjective listening approval"
+      },
+      {
+        "id": "story_warmth",
+        "title": "火边一席",
+        "path": "res://assets/music/chronicle/story_warmth.ogg",
+        "decision_basis": "initial execution whitelist for warm/daily/rest use; not a new subjective listening approval"
+      }
+    ],
+    "retire_from_test_runtime_and_music_room": [
+      {
+        "id": "title_overture",
+        "title": "山河未歇"
+      },
+      {
+        "id": "world_map",
+        "title": "万里故山"
+      },
+      {
+        "id": "preparation",
+        "title": "拂去甲上尘"
+      },
+      {
+        "id": "results_flow",
+        "title": "战后清点"
+      },
+      {
+        "id": "archive_memories",
+        "title": "卷中旧事"
+      },
+      {
+        "id": "journey_departure",
+        "title": "行囊与远路"
+      },
+      {
+        "id": "region_baimen_road",
+        "title": "远处白门"
+      },
+      {
+        "id": "region_ghost_market",
+        "title": "灯下买卖"
+      },
+      {
+        "id": "region_old_city",
+        "title": "旧城残照"
+      },
+      {
+        "id": "baimen_epilogue",
+        "title": "白门余声"
+      },
+      {
+        "id": "hero_main",
+        "title": "此行有我"
+      },
+      {
+        "id": "army_cao",
+        "title": "鬼曹列阵"
+      },
+      {
+        "id": "boss_lubu",
+        "title": "白门之前"
+      },
+      {
+        "id": "boss_lubu_warform",
+        "title": "白门之前·战相"
+      },
+      {
+        "id": "battle_road",
+        "title": "荒道交锋"
+      },
+      {
+        "id": "battle_siege",
+        "title": "城寨争锋"
+      },
+      {
+        "id": "battle_ritual",
+        "title": "祠中异战"
+      },
+      {
+        "id": "battle_skirmish",
+        "title": "交手几回"
+      },
+      {
+        "id": "battle_pursuit",
+        "title": "追兵渐近"
+      },
+      {
+        "id": "battle_defense",
+        "title": "守住这一线"
+      },
+      {
+        "id": "battle_duel",
+        "title": "进退一招"
+      },
+      {
+        "id": "battle_desperate",
+        "title": "尚未破围"
+      },
+      {
+        "id": "army_caoxiu_warform",
+        "title": "曹休·待发"
+      },
+      {
+        "id": "army_caochun_human",
+        "title": "曹纯·逐阵"
+      },
+      {
+        "id": "army_caochun_warform",
+        "title": "曹纯·逐阵·战相"
+      },
+      {
+        "id": "character_liao",
+        "title": "张辽·持阵"
+      },
+      {
+        "id": "character_liao_warform",
+        "title": "张辽·持阵·战相"
+      },
+      {
+        "id": "story_travel",
+        "title": "路边接话"
+      },
+      {
+        "id": "story_comedy",
+        "title": "歪一步再走"
+      },
+      {
+        "id": "story_tension",
+        "title": "门闩未落"
+      },
+      {
+        "id": "story_aftermath",
+        "title": "尚未说完"
+      },
+      {
+        "id": "story_confrontation",
+        "title": "立在门前"
+      },
+      {
+        "id": "story_intrigue",
+        "title": "隔屏的棋子"
+      },
+      {
+        "id": "story_discovery",
+        "title": "窗后还有天"
+      },
+      {
+        "id": "story_resolve",
+        "title": "迈出这一程"
+      },
+      {
+        "id": "story_solitude",
+        "title": "各自的远方"
+      },
+      {
+        "id": "story_banter",
+        "title": "你一句我半句"
+      },
+      {
+        "id": "story_remembrance",
+        "title": "旧事未冷"
+      },
+      {
+        "id": "character_emma",
+        "title": "门外的星图"
+      },
+      {
+        "id": "character_lingqi",
+        "title": "不肯折腰"
+      },
+      {
+        "id": "character_emma_wary",
+        "title": "门外的星图·戒备"
+      },
+      {
+        "id": "character_lingqi_aftermath",
+        "title": "不肯折腰·余波"
+      },
+      {
+        "id": "stinger_victory",
+        "title": "小胜"
+      },
+      {
+        "id": "stinger_important_victory",
+        "title": "一战得胜"
+      },
+      {
+        "id": "stinger_defeat",
+        "title": "暂歇"
+      },
+      {
+        "id": "stinger_recruit",
+        "title": "新的同行者"
+      },
+      {
+        "id": "stinger_elite",
+        "title": "强敌近前"
+      },
+      {
+        "id": "stinger_boss",
+        "title": "首领现身"
+      },
+      {
+        "id": "stinger_transform",
+        "title": "战相初现"
+      },
+      {
+        "id": "stinger_discovery",
+        "title": "灯火之外"
+      },
+      {
+        "id": "stinger_restore",
+        "title": "泉声一滴"
+      },
+      {
+        "id": "stinger_chapter_close",
+        "title": "一程暂歇"
+      },
+      {
+        "id": "stinger_departure",
+        "title": "启行"
+      },
+      {
+        "id": "stinger_arrival",
+        "title": "望见城门"
+      },
+      {
+        "id": "stinger_danger",
+        "title": "危声"
+      },
+      {
+        "id": "stinger_alliance",
+        "title": "暂且同路"
+      },
+      {
+        "id": "stinger_betrayal",
+        "title": "裂隙"
+      },
+      {
+        "id": "stinger_resolve",
+        "title": "定意"
+      },
+      {
+        "id": "stinger_mourning",
+        "title": "无言"
+      },
+      {
+        "id": "stinger_warmth",
+        "title": "灯下"
+      },
+      {
+        "id": "stinger_comic",
+        "title": "话锋一转"
+      },
+      {
+        "id": "stinger_reward_rare",
+        "title": "匣中微光"
+      },
+      {
+        "id": "stinger_gate_open",
+        "title": "门开"
+      },
+      {
+        "id": "stinger_retreat",
+        "title": "收旗"
+      },
+      {
+        "id": "stinger_memory",
+        "title": "旧影"
+      },
+      {
+        "id": "stinger_mystery",
+        "title": "问影"
+      }
+    ],
+    "retire_count": 66,
+    "retired_source_preservation": "Preserve original production inputs, licenses and provenance separately from test routing; no destructive cleanup is part of goal definition."
+  },
+  "comparison": {
+    "A": "Existing original instrumental reference",
+    "B": "Existing GeneralUser GS MIDI replay",
+    "C": "New game-timbre render from the exact same frozen MIDI",
+    "equal_timing_and_level": true,
+    "frozen_velocity_caveat": "All current generated note velocities are 100; this test does not reconstruct performance dynamics.",
+    "all_abc_playlist": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/扒谱试验/MuScriptor-large/全部完整伴奏_全曲对照/全部A-B-C对照播放.m3u8",
+    "all_c_playlist": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/扒谱试验/MuScriptor-large/全部完整伴奏_全曲对照/全部C音色试听.m3u8"
+  },
+  "target_deliverables": [
+    "12 complete C renders with playable MP3 and lossless FLAC, plus game OGG",
+    "A/B/C per-song and aggregate listening playlists reusing existing A/B",
+    "per-track instrument mapping and render/source hash records",
+    "explicit test route coverage for title/world/route/preparation/battles/results and story music/stinger overrides",
+    "local playable test build with the approved warm whitelist and new reference-derived music only"
+  ],
+  "runtime_test_rules": {
+    "complete_song_playback_then_repeat": true,
+    "no_internal_recut_reordering_or_adaptive_recomposition": true,
+    "phase_change_first_pass": "Continue the selected whole song across form changes; suppress retired musical stingers. New phase-specific compositions are outside this test.",
+    "musical_vs_effects": "Music retirement does not remove hit, skill, UI or warning sound effects."
+  },
+  "inputs": [
+    {
+      "index": 1,
+      "title": "The Beautiful People",
+      "midi_file": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/扒谱试验/MuScriptor-large/全部完整伴奏_全曲对照/01 - The Beautiful People/The Beautiful People - 全曲.mid",
+      "midi_sha256": "3bf77b5352dd8020628d9a7f2c5cb7a2ea53b015dc610b3ae14c9b18234e5cc8",
+      "midi_note_count": 3564,
+      "transcription_report": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/扒谱试验/MuScriptor-large/全部完整伴奏_全曲对照/01 - The Beautiful People/transcription-report.json",
+      "original_instrumental": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/01 - The Beautiful People - Mattjina & Tom Smit.flac",
+      "existing_gm_comparison_report": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/扒谱试验/MuScriptor-large/全部完整伴奏_全曲对照/01 - The Beautiful People/comparison-report.json",
+      "repo_midi_file": "design/music-20261103-midi-test/inputs/midi_test_01.mid"
+    },
+    {
+      "index": 2,
+      "title": "mOBSCENE",
+      "midi_file": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/扒谱试验/MuScriptor-large/全部完整伴奏_全曲对照/02 - mOBSCENE/mOBSCENE - 全曲.mid",
+      "midi_sha256": "277b128bff29eba29fb325bd888fb1e4f49aa9b66f850f1f46b9005ab058c99c",
+      "midi_note_count": 3104,
+      "transcription_report": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/扒谱试验/MuScriptor-large/全部完整伴奏_全曲对照/02 - mOBSCENE/transcription-report.json",
+      "original_instrumental": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/02 - mOBSCENE - Mattjina & Tom Smit.flac",
+      "existing_gm_comparison_report": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/扒谱试验/MuScriptor-large/全部完整伴奏_全曲对照/02 - mOBSCENE/comparison-report.json",
+      "repo_midi_file": "design/music-20261103-midi-test/inputs/midi_test_02.mid"
+    },
+    {
+      "index": 3,
+      "title": "The Fight Song",
+      "midi_file": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/扒谱试验/MuScriptor-large/全部完整伴奏_全曲对照/03 - The Fight Song/The Fight Song - 全曲.mid",
+      "midi_sha256": "058d6ee5c72221df2d05785ee3603f44557bbce19dfdb5afe7edd6f61d2a1d3a",
+      "midi_note_count": 3890,
+      "transcription_report": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/扒谱试验/MuScriptor-large/全部完整伴奏_全曲对照/03 - The Fight Song/transcription-report.json",
+      "original_instrumental": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/完整伴奏_SORA/01 - The Fight Song - SORA.m4a",
+      "existing_gm_comparison_report": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/扒谱试验/MuScriptor-large/全部完整伴奏_全曲对照/03 - The Fight Song/comparison-report.json",
+      "repo_midi_file": "design/music-20261103-midi-test/inputs/midi_test_03.mid"
+    },
+    {
+      "index": 4,
+      "title": "Disposable Teens",
+      "midi_file": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/扒谱试验/MuScriptor-large/全部完整伴奏_全曲对照/04 - Disposable Teens/Disposable Teens - 全曲.mid",
+      "midi_sha256": "6d36cfc0c0cd15d69a43ea892220c09e24966acf7e22952b6a275f5b725eb4fb",
+      "midi_note_count": 4337,
+      "transcription_report": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/扒谱试验/MuScriptor-large/全部完整伴奏_全曲对照/04 - Disposable Teens/transcription-report.json",
+      "original_instrumental": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/完整伴奏_SORA/02 - Disposable Teens - SORA.m4a",
+      "existing_gm_comparison_report": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/扒谱试验/MuScriptor-large/全部完整伴奏_全曲对照/04 - Disposable Teens/comparison-report.json",
+      "repo_midi_file": "design/music-20261103-midi-test/inputs/midi_test_04.mid"
+    },
+    {
+      "index": 5,
+      "title": "The Nobodies",
+      "midi_file": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/扒谱试验/MuScriptor-large/全部完整伴奏_全曲对照/05 - The Nobodies/The Nobodies - 全曲.mid",
+      "midi_sha256": "50fa90065eab0d7ffbb8f65ac3fb78b1d9e8a2bb3c34b21bc09a7c36165121c0",
+      "midi_note_count": 2501,
+      "transcription_report": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/扒谱试验/MuScriptor-large/全部完整伴奏_全曲对照/05 - The Nobodies/transcription-report.json",
+      "original_instrumental": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/完整伴奏_SORA/03 - The Nobodies - SORA.m4a",
+      "existing_gm_comparison_report": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/扒谱试验/MuScriptor-large/全部完整伴奏_全曲对照/05 - The Nobodies/comparison-report.json",
+      "repo_midi_file": "design/music-20261103-midi-test/inputs/midi_test_05.mid"
+    },
+    {
+      "index": 6,
+      "title": "Antichrist Superstar",
+      "midi_file": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/扒谱试验/MuScriptor-large/全部完整伴奏_全曲对照/06 - Antichrist Superstar/Antichrist Superstar - 全曲.mid",
+      "midi_sha256": "b1e48dee25ba68a55d8ea9aa85bd691e15282674da85de0d19f2746d2117585e",
+      "midi_note_count": 3240,
+      "transcription_report": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/扒谱试验/MuScriptor-large/全部完整伴奏_全曲对照/06 - Antichrist Superstar/transcription-report.json",
+      "original_instrumental": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/完整伴奏_SORA/04 - Antichrist Superstar - SORA.m4a",
+      "existing_gm_comparison_report": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/扒谱试验/MuScriptor-large/全部完整伴奏_全曲对照/06 - Antichrist Superstar/comparison-report.json",
+      "repo_midi_file": "design/music-20261103-midi-test/inputs/midi_test_06.mid"
+    },
+    {
+      "index": 7,
+      "title": "Little Horn",
+      "midi_file": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/扒谱试验/MuScriptor-large/全部完整伴奏_全曲对照/07 - Little Horn/Little Horn - 全曲.mid",
+      "midi_sha256": "37ecee25ebd64e725dea9917576a39d19308658724bb2d3c57c0f13ca5ff89f3",
+      "midi_note_count": 3219,
+      "transcription_report": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/扒谱试验/MuScriptor-large/全部完整伴奏_全曲对照/07 - Little Horn/transcription-report.json",
+      "original_instrumental": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/完整伴奏_SORA/05 - Little Horn - SORA.m4a",
+      "existing_gm_comparison_report": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/扒谱试验/MuScriptor-large/全部完整伴奏_全曲对照/07 - Little Horn/comparison-report.json",
+      "repo_midi_file": "design/music-20261103-midi-test/inputs/midi_test_07.mid"
+    },
+    {
+      "index": 8,
+      "title": "Man That You Fear",
+      "midi_file": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/扒谱试验/MuScriptor-large/全部完整伴奏_全曲对照/08 - Man That You Fear/Man That You Fear - 全曲.mid",
+      "midi_sha256": "419c590d01212e338488c8f6d34053bc4f4b5684ea293a642e918fe991cfa40b",
+      "midi_note_count": 3569,
+      "transcription_report": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/扒谱试验/MuScriptor-large/全部完整伴奏_全曲对照/08 - Man That You Fear/transcription-report.json",
+      "original_instrumental": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/完整伴奏_SORA/06 - Man That You Fear - SORA.m4a",
+      "existing_gm_comparison_report": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/扒谱试验/MuScriptor-large/全部完整伴奏_全曲对照/08 - Man That You Fear/comparison-report.json",
+      "repo_midi_file": "design/music-20261103-midi-test/inputs/midi_test_08.mid"
+    },
+    {
+      "index": 9,
+      "title": "Deformography",
+      "midi_file": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/扒谱试验/MuScriptor-large/全部完整伴奏_全曲对照/09 - Deformography/Deformography - 全曲.mid",
+      "midi_sha256": "442f966928a3be34f3eef5679c35d51f091452e7c4510fe2aabd3cd79c96f18b",
+      "midi_note_count": 4484,
+      "transcription_report": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/扒谱试验/MuScriptor-large/全部完整伴奏_全曲对照/09 - Deformography/transcription-report.json",
+      "original_instrumental": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/完整伴奏_SORA/07 - Deformography - SORA.m4a",
+      "existing_gm_comparison_report": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/扒谱试验/MuScriptor-large/全部完整伴奏_全曲对照/09 - Deformography/comparison-report.json",
+      "repo_midi_file": "design/music-20261103-midi-test/inputs/midi_test_09.mid"
+    },
+    {
+      "index": 10,
+      "title": "Kinderfeld",
+      "midi_file": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/扒谱试验/MuScriptor-large/全部完整伴奏_全曲对照/10 - Kinderfeld/Kinderfeld - 全曲.mid",
+      "midi_sha256": "ce55a52e2f92c2b3a97e766c90704128c8378863fda1953d8eb3b992afad3eb7",
+      "midi_note_count": 3288,
+      "transcription_report": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/扒谱试验/MuScriptor-large/全部完整伴奏_全曲对照/10 - Kinderfeld/transcription-report.json",
+      "original_instrumental": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/完整伴奏_SORA/08 - Kinderfeld - SORA.m4a",
+      "existing_gm_comparison_report": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/扒谱试验/MuScriptor-large/全部完整伴奏_全曲对照/10 - Kinderfeld/comparison-report.json",
+      "repo_midi_file": "design/music-20261103-midi-test/inputs/midi_test_10.mid"
+    },
+    {
+      "index": 11,
+      "title": "Minute of Decay",
+      "midi_file": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/扒谱试验/MuScriptor-large/全部完整伴奏_全曲对照/11 - Minute of Decay/Minute of Decay - 全曲.mid",
+      "midi_sha256": "e32a9ed41b24f012eccb60ebb06504493244341f2b276be6723c7fc5da90e2c0",
+      "midi_note_count": 3002,
+      "transcription_report": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/扒谱试验/MuScriptor-large/全部完整伴奏_全曲对照/11 - Minute of Decay/transcription-report.json",
+      "original_instrumental": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/完整伴奏_SORA/09 - Minute of Decay - SORA.m4a",
+      "existing_gm_comparison_report": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/扒谱试验/MuScriptor-large/全部完整伴奏_全曲对照/11 - Minute of Decay/comparison-report.json",
+      "repo_midi_file": "design/music-20261103-midi-test/inputs/midi_test_11.mid"
+    },
+    {
+      "index": 12,
+      "title": "President Dead",
+      "midi_file": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/扒谱试验/MuScriptor-large/全部完整伴奏_全曲对照/12 - President Dead/President Dead - 全曲.mid",
+      "midi_sha256": "b6ef19ffa363a56b51d31cab55d4c723f3977afe46378f93ed2beebf4f67a61e",
+      "midi_note_count": 3865,
+      "transcription_report": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/扒谱试验/MuScriptor-large/全部完整伴奏_全曲对照/12 - President Dead/transcription-report.json",
+      "original_instrumental": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/完整伴奏_SORA/10 - President Dead - SORA.m4a",
+      "existing_gm_comparison_report": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/扒谱试验/MuScriptor-large/全部完整伴奏_全曲对照/12 - President Dead/comparison-report.json",
+      "repo_midi_file": "design/music-20261103-midi-test/inputs/midi_test_12.mid"
+    }
+  ],
+  "required_verification": [
+    "All 12 source MIDI SHA256 values remain unchanged.",
+    "Frozen-source note-on/off pairs and drum-trigger provenance match exactly before instrument adaptation; the documented drum one-shot/choke adapter may remap private synth control events.",
+    "Audio is complete, finite, audible and unclipped; comparisons are start- and level-matched.",
+    "Every affected scene route and data-level music/stinger override resolves to an allowed cue or explicit silence.",
+    "No retired old cue remains selectable or reachable in test runtime.",
+    "Godot startup, affected audio checks and scripts/check_project.sh pass when implementation changes are completed.",
+    "Subjective atmosphere and in-game effect judged from actual listening/play, separately from technical checks."
+  ],
+  "source_music_catalog_sha256": "82a01e3cb1fb91e39f842c30c37054664ceada2e3ee88a87a70c086bb29329bb",
+  "current_runtime_still_old_catalog": false,
+  "chapter_assignment_manifest": "chapter-music-map.json",
+  "chapter_assignment_status": "implemented_and_verified",
+  "runtime_assets_ready": true,
+  "audio_production_report": "audio-production-release-report.json",
+  "instrument_adapter_policy": {
+    "drums": "one_shot_sample_decay_with_closed_or_pedal_hat_choke",
+    "source_drum_note_on_off_pairs_verified": 15106,
+    "private_fluidsynth_midi_preserves_source_note_off_stream": false,
+    "source_midi_modified": false,
+    "new_musical_note_triggers_added": false,
+    "report": "audio-production-release-report.json"
+  },
+  "runtime_music_catalog_sha256": "6401b53db7cb2f1a5a61d1176ccf0aaeecef5949d1251185057707caffaf4450",
+  "completion_verification": "completion-verification.json",
+  "runtime_validation_report": "runtime/validation-report.json",
+  "local_test_launcher": "builds/linux-midi-test-20261103/run.sh",
+  "manual_listening_review": "not_performed"
+}

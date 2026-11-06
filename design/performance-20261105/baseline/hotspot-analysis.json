@@ -1,0 +1,248 @@
+{
+  "schema_version": 1,
+  "baseline_results": "results.json",
+  "interpretation": "Per-frame Pearson correlations and conditional long-frame rates describe co-movement in this fixture; they do not identify causality. GPU/CPU values are RenderingServer viewport measurements; Canvas timings are opt-in callback instrumentation; hud_view_refresh is separately timed. Several measured segments and process/render scheduling do not explain all frame-wall time.",
+  "stage_hotspots": [
+    {
+      "stage_id": "B01",
+      "warm_frame_wall_ms": {
+        "p50": 18.606,
+        "p95": 28.446,
+        "p99": 39.339,
+        "max": 54.07
+      },
+      "p95_by_measurement": {
+        "battle_tick_ms": 1.262,
+        "canvas_refresh_ms": 1.668,
+        "camera_sync_ms": 0.031,
+        "foreground_draw_ms": 1.375,
+        "canvas_draw_ms": 0.488,
+        "bounds_readback_ms": 0.279,
+        "viewport_cpu_ms": 1.682000041008,
+        "viewport_gpu_ms": 0.114000000059605,
+        "hud_view_refresh_ms": 8.914
+      },
+      "pearson_with_frame_wall": {
+        "battle_tick_ms": 0.10322692234236475,
+        "canvas_refresh_ms": 0.30521353425188913,
+        "camera_sync_ms": 0.018383940747430664,
+        "foreground_draw_ms": 0.2401188688718258,
+        "canvas_draw_ms": 0.04067026850709448,
+        "bounds_readback_ms": 0.2355803309734051,
+        "viewport_cpu_ms": 0.03772504776077384,
+        "viewport_gpu_ms": 0.02426052016799056,
+        "hud_view_refresh_ms": 0.48054695795012986
+      },
+      "bounds_readback_association": {
+        "frames_over_16.67ms": {
+          "total": 444,
+          "readback_frames": 24,
+          "readback_sample_count": 30,
+          "rate_given_readback": 0.8,
+          "rate_without_readback": 0.7368421052631579,
+          "hud_p95_ms": 9.413
+        },
+        "frames_over_33.33ms": {
+          "total": 12,
+          "readback_frames": 3,
+          "readback_sample_count": 30,
+          "rate_given_readback": 0.1,
+          "rate_without_readback": 0.015789473684210527,
+          "hud_p95_ms": 14.928
+        },
+        "frames_over_50ms": {
+          "total": 1,
+          "readback_frames": 1,
+          "readback_sample_count": 30,
+          "rate_given_readback": 0.03333333333333333,
+          "rate_without_readback": 0.0,
+          "hud_p95_ms": 8.825
+        }
+      },
+      "context": {
+        "active_frames": 720,
+        "terminal_frames": 0,
+        "frames": 720,
+        "readback_samples": 30,
+        "readback_total_ms": 17.396,
+        "ordinary_alive_p90": 29.0,
+        "ordinary_alive_max": 32.0,
+        "projectiles_max": 2,
+        "human_actor_frames": 0,
+        "human_actor_canvas_p95_ms": 0,
+        "human_actor_switches": []
+      },
+      "hud_refresh_distribution_ms": {
+        "p50": 4.323,
+        "p95": 8.914,
+        "p99": 13.4,
+        "max": 17.892
+      }
+    },
+    {
+      "stage_id": "B12",
+      "warm_frame_wall_ms": {
+        "p50": 37.333,
+        "p95": 50.89,
+        "p99": 63.268,
+        "max": 80.185
+      },
+      "p95_by_measurement": {
+        "battle_tick_ms": 5.925,
+        "canvas_refresh_ms": 3.48,
+        "camera_sync_ms": 0.032,
+        "foreground_draw_ms": 10.312,
+        "canvas_draw_ms": 0.673,
+        "bounds_readback_ms": 0.437,
+        "viewport_cpu_ms": 6.0770001411438,
+        "viewport_gpu_ms": 0.166999995708466,
+        "hud_view_refresh_ms": 8.334
+      },
+      "pearson_with_frame_wall": {
+        "battle_tick_ms": 0.7186884082044117,
+        "canvas_refresh_ms": 0.6772809885299795,
+        "camera_sync_ms": -0.07851590153099341,
+        "foreground_draw_ms": 0.8655097932127361,
+        "canvas_draw_ms": 0.23469793892502663,
+        "bounds_readback_ms": 0.09910009108774634,
+        "viewport_cpu_ms": 0.5912572045014468,
+        "viewport_gpu_ms": 0.06976099610562386,
+        "hud_view_refresh_ms": 0.03878145790480701
+      },
+      "bounds_readback_association": {
+        "frames_over_16.67ms": {
+          "total": 1367,
+          "readback_frames": 90,
+          "readback_sample_count": 90,
+          "rate_given_readback": 1.0,
+          "rate_without_readback": 0.9899224806201551,
+          "hud_p95_ms": 8.334
+        },
+        "frames_over_33.33ms": {
+          "total": 892,
+          "readback_frames": 62,
+          "readback_sample_count": 90,
+          "rate_given_readback": 0.6888888888888889,
+          "rate_without_readback": 0.6434108527131783,
+          "hud_p95_ms": 8.164
+        },
+        "frames_over_50ms": {
+          "total": 85,
+          "readback_frames": 13,
+          "readback_sample_count": 90,
+          "rate_given_readback": 0.14444444444444443,
+          "rate_without_readback": 0.05581395348837209,
+          "hud_p95_ms": 14.608
+        }
+      },
+      "context": {
+        "active_frames": 1500,
+        "terminal_frames": 0,
+        "frames": 1500,
+        "readback_samples": 90,
+        "readback_total_ms": 56.046,
+        "ordinary_alive_p90": 80.0,
+        "ordinary_alive_max": 80.0,
+        "projectiles_max": 245,
+        "human_actor_frames": 0,
+        "human_actor_canvas_p95_ms": 0,
+        "human_actor_switches": []
+      },
+      "hud_refresh_distribution_ms": {
+        "p50": 4.341,
+        "p95": 8.334,
+        "p99": 11.508,
+        "max": 19.35
+      }
+    },
+    {
+      "stage_id": "B18",
+      "warm_frame_wall_ms": {
+        "p50": 23.037,
+        "p95": 30.972,
+        "p99": 43.595,
+        "max": 70.878
+      },
+      "p95_by_measurement": {
+        "battle_tick_ms": 0.546,
+        "canvas_refresh_ms": 0.996,
+        "camera_sync_ms": 0.031,
+        "foreground_draw_ms": 3.181,
+        "canvas_draw_ms": 0.169,
+        "bounds_readback_ms": 0.351,
+        "viewport_cpu_ms": 2.08500003814697,
+        "viewport_gpu_ms": 0.090999998152256,
+        "hud_view_refresh_ms": 6.779
+      },
+      "pearson_with_frame_wall": {
+        "battle_tick_ms": 0.3267460901561788,
+        "canvas_refresh_ms": 0.32735066799948964,
+        "camera_sync_ms": -0.04672107013646676,
+        "foreground_draw_ms": 0.5125405357459262,
+        "canvas_draw_ms": 0.18192285908101513,
+        "bounds_readback_ms": 0.23841181825119023,
+        "viewport_cpu_ms": 0.2589143110219202,
+        "viewport_gpu_ms": 0.17292802130589083,
+        "hud_view_refresh_ms": 0.5413871686259975
+      },
+      "bounds_readback_association": {
+        "frames_over_16.67ms": {
+          "total": 523,
+          "readback_frames": 33,
+          "readback_sample_count": 33,
+          "rate_given_readback": 1.0,
+          "rate_without_readback": 0.8641975308641975,
+          "hud_p95_ms": 6.874
+        },
+        "frames_over_33.33ms": {
+          "total": 18,
+          "readback_frames": 7,
+          "readback_sample_count": 33,
+          "rate_given_readback": 0.21212121212121213,
+          "rate_without_readback": 0.019400352733686066,
+          "hud_p95_ms": 11.524
+        },
+        "frames_over_50ms": {
+          "total": 2,
+          "readback_frames": 1,
+          "readback_sample_count": 33,
+          "rate_given_readback": 0.030303030303030304,
+          "rate_without_readback": 0.001763668430335097,
+          "hud_p95_ms": 8.381
+        }
+      },
+      "context": {
+        "active_frames": 720,
+        "terminal_frames": 0,
+        "frames": 720,
+        "readback_samples": 33,
+        "readback_total_ms": 70.861,
+        "ordinary_alive_p90": 0.0,
+        "ordinary_alive_max": 0.0,
+        "projectiles_max": 100,
+        "human_actor_frames": 210,
+        "human_actor_canvas_p95_ms": 3.631,
+        "human_actor_switches": [
+          [
+            210,
+            "M01",
+            4.674,
+            43.925
+          ]
+        ]
+      },
+      "hud_refresh_distribution_ms": {
+        "p50": 3.702,
+        "p95": 6.779,
+        "p99": 8.337,
+        "max": 11.524
+      }
+    }
+  ],
+  "limitations": [
+    "Baseline lifecycle timing did not enclose the synchronous viewport.add_child(view) call, so BattleView._ready cost is not separately measured. The after-run script now times it as view_add_child_ready_ms; that field is not comparable to this baseline.",
+    "The first benchmark sample in each stage records process-frame and drawn-frame delta 0; all subsequent samples record delta 1. This is the one bootstrap-boundary sample, not two awaited frames.",
+    "B12 is an intentionally dense fixture with ordinary-enemy HP x8 and boss gate deferred. Enemy AI, attacks, collisions, movement, party damage and skill requests remain active. Party HP x10 is also a fixture adjustment.",
+    "A fixed 1280x720 NVIDIA RTX 5080 / OpenGL compatibility workload is device-specific; it does not guarantee all user systems have the same frame times."
+  ]
+}

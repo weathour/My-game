@@ -1,0 +1,2785 @@
+{
+  "schema_version": 1,
+  "character_abilities": {
+    "F01": {
+      "F01_basic": {
+        "family": "thrust",
+        "cast": "thrust.cast",
+        "impact": "thrust.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "技能几何是THRUST直线刺击"
+      },
+      "F01_dash": {
+        "family": "thrust",
+        "cast": "dash.cast",
+        "impact": "thrust.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "技能几何是THRUST直线刺击"
+      },
+      "F01_expose": {
+        "family": "blade",
+        "cast": "blade.cast",
+        "impact": "blade.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "吕玲绮破阵为近身范围兵器攻击；裂阵字样不表示指挥阵法"
+      },
+      "F01_support": {
+        "family": "thrust",
+        "cast": "thrust.cast",
+        "impact": "thrust.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "技能几何是THRUST直线刺击"
+      }
+    },
+    "F02": {
+      "F02_basic": {
+        "family": "blade",
+        "cast": "blade.cast",
+        "impact": "blade.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "近身横斩/范围挥击身份"
+      },
+      "F02_guard": {
+        "family": "shield",
+        "cast": "shield.cast",
+        "impact": "",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "护身/护盾类 WARD 技能",
+        "impact_silence_reason": "纯临时强化/窗口效果没有实际HP/MP/护盾增量事件；只播cast，不把数值状态变化伪装成命中。"
+      },
+      "F02_riposte": {
+        "family": "thrust",
+        "cast": "thrust.cast",
+        "impact": "thrust.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "技能几何是THRUST直线刺击"
+      },
+      "F02_support": {
+        "family": "shield",
+        "cast": "shield.cast",
+        "impact": "",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "护身/护盾类 WARD 技能",
+        "impact_silence_reason": "纯临时强化/窗口效果没有实际HP/MP/护盾增量事件；只播cast，不把数值状态变化伪装成命中。"
+      }
+    },
+    "F03": {
+      "F03_basic": {
+        "family": "arcane",
+        "cast": "arcane.cast",
+        "impact": "arcane.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "角色法术投射技能的专属奥术音色"
+      },
+      "physician_heal": {
+        "family": "heal",
+        "cast": "heal.cast",
+        "impact": "heal.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "治疗技能标题/目标作用为恢复生命; 成功HP/MP/护盾增量由ability_effect确认后发对应impact，满值无增量则无声"
+      },
+      "physician_ward": {
+        "family": "shield",
+        "cast": "shield.cast",
+        "impact": "shield.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "护身/护盾类 WARD 技能; 成功HP/MP/护盾增量由ability_effect确认后发对应impact，满值无增量则无声"
+      },
+      "physician_support": {
+        "family": "heal",
+        "cast": "heal.cast",
+        "impact": "heal.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "治疗技能标题/目标作用为恢复生命; 成功HP/MP/护盾增量由ability_effect确认后发对应impact，满值无增量则无声"
+      }
+    },
+    "F04": {
+      "F04_basic": {
+        "family": "arcane",
+        "cast": "arcane.cast",
+        "impact": "arcane.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "角色法术投射技能的专属奥术音色"
+      },
+      "F04_settle": {
+        "family": "mana",
+        "cast": "mana.cast",
+        "impact": "mana.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "技能明确恢复或补给魔法; 成功HP/MP/护盾增量由ability_effect确认后发对应impact，满值无增量则无声"
+      },
+      "F04_supply": {
+        "family": "mana",
+        "cast": "mana.cast",
+        "impact": "mana.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "技能明确恢复或补给魔法; 成功HP/MP/护盾增量由ability_effect确认后发对应impact，满值无增量则无声"
+      },
+      "F04_support": {
+        "family": "arcane",
+        "cast": "arcane.cast",
+        "impact": "arcane.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "角色法术投射技能的专属奥术音色"
+      }
+    },
+    "F05": {
+      "F05_basic": {
+        "family": "arcane",
+        "cast": "arcane.cast",
+        "impact": "arcane.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "角色法术投射技能的专属奥术音色"
+      },
+      "F05_curse": {
+        "family": "curse",
+        "cast": "curse.cast",
+        "impact": "curse.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "技能名/机制明确为诅咒"
+      },
+      "F05_spread": {
+        "family": "curse",
+        "cast": "curse.cast",
+        "impact": "curse.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "技能名/机制明确为诅咒"
+      },
+      "F05_support": {
+        "family": "curse",
+        "cast": "curse.cast",
+        "impact": "curse.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "技能名/机制明确为诅咒"
+      }
+    },
+    "F06": {
+      "F06_basic": {
+        "family": "bow",
+        "cast": "bow.cast",
+        "impact": "bow.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "远程投射按角色/技能身份选定为弹射武器音色"
+      },
+      "F06_volley": {
+        "family": "bow",
+        "cast": "bow.cast",
+        "impact": "bow.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "角色/技能身份是弓弩、射击或箭矢"
+      },
+      "F06_pin": {
+        "family": "bow",
+        "cast": "bow.cast",
+        "impact": "bow.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "钉阵矢是弓箭射击技能"
+      },
+      "F06_support": {
+        "family": "bow",
+        "cast": "bow.cast",
+        "impact": "bow.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "角色/技能身份是弓弩、射击或箭矢"
+      }
+    },
+    "F07": {
+      "F07_basic": {
+        "family": "blade",
+        "cast": "blade.cast",
+        "impact": "blade.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "近身横斩/范围挥击身份"
+      },
+      "bandit_sweep": {
+        "family": "wind",
+        "cast": "wind.cast",
+        "impact": "wind.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "技能名明确为风系"
+      },
+      "bandit_thrust": {
+        "family": "thrust",
+        "cast": "thrust.cast",
+        "impact": "thrust.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "技能几何是THRUST直线刺击"
+      },
+      "bandit_support": {
+        "family": "blade",
+        "cast": "blade.cast",
+        "impact": "blade.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "近身横斩/范围挥击身份"
+      }
+    },
+    "F08": {
+      "F08_basic": {
+        "family": "blunt",
+        "cast": "blunt.cast",
+        "impact": "blunt.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "陶小满铁匠身份的基础SWEEP按锤击处理"
+      },
+      "F08_temper": {
+        "family": "buff",
+        "cast": "buff.cast",
+        "impact": "",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "temper机制为持续强化/延长",
+        "impact_silence_reason": "纯临时强化/窗口效果没有实际HP/MP/护盾增量事件；只播cast，不把数值状态变化伪装成命中。"
+      },
+      "F08_break": {
+        "family": "blunt",
+        "cast": "blunt.cast",
+        "impact": "blunt.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "钝击/盾击身份"
+      },
+      "F08_support": {
+        "family": "buff",
+        "cast": "buff.cast",
+        "impact": "",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "temper机制为持续强化/延长",
+        "impact_silence_reason": "纯临时强化/窗口效果没有实际HP/MP/护盾增量事件；只播cast，不把数值状态变化伪装成命中。"
+      }
+    },
+    "F09": {
+      "F09_basic": {
+        "family": "arcane",
+        "cast": "arcane.cast",
+        "impact": "arcane.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "角色法术投射技能的专属奥术音色"
+      },
+      "F09_extend": {
+        "family": "buff",
+        "cast": "buff.cast",
+        "impact": "",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "extend机制为持续强化/延长",
+        "impact_silence_reason": "纯临时强化/窗口效果没有实际HP/MP/护盾增量事件；只播cast，不把数值状态变化伪装成命中。"
+      },
+      "F09_rally": {
+        "family": "buff",
+        "cast": "buff.cast",
+        "impact": "",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "rally机制为持续强化/延长",
+        "impact_silence_reason": "纯临时强化/窗口效果没有实际HP/MP/护盾增量事件；只播cast，不把数值状态变化伪装成命中。"
+      },
+      "F09_support": {
+        "family": "buff",
+        "cast": "buff.cast",
+        "impact": "",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "extend机制为持续强化/延长",
+        "impact_silence_reason": "纯临时强化/窗口效果没有实际HP/MP/护盾增量事件；只播cast，不把数值状态变化伪装成命中。"
+      }
+    },
+    "F10": {
+      "F10_basic": {
+        "family": "arcane",
+        "cast": "arcane.cast",
+        "impact": "arcane.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "角色法术投射技能的专属奥术音色"
+      },
+      "F10_ward": {
+        "family": "shield",
+        "cast": "shield.cast",
+        "impact": "shield.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "护身/护盾类 WARD 技能; 成功HP/MP/护盾增量由ability_effect确认后发对应impact，满值无增量则无声"
+      },
+      "F10_expose": {
+        "family": "arcane",
+        "cast": "arcane.cast",
+        "impact": "arcane.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "角色法术投射技能的专属奥术音色"
+      },
+      "F10_support": {
+        "family": "shield",
+        "cast": "shield.cast",
+        "impact": "shield.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "护身/护盾类 WARD 技能; 成功HP/MP/护盾增量由ability_effect确认后发对应impact，满值无增量则无声"
+      }
+    },
+    "F11": {
+      "F11_basic": {
+        "family": "arcane",
+        "cast": "arcane.cast",
+        "impact": "arcane.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "角色法术投射技能的专属奥术音色"
+      },
+      "emma_ice": {
+        "family": "ice",
+        "cast": "ice.cast",
+        "impact": "ice.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "技能名或角色身份明确为冰霜"
+      },
+      "emma_frost": {
+        "family": "ice",
+        "cast": "ice.cast",
+        "impact": "ice.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "技能名或角色身份明确为冰霜"
+      },
+      "emma_star": {
+        "family": "fire",
+        "cast": "fire.cast",
+        "impact": "fire.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "技能名明确为火焰"
+      },
+      "emma_support": {
+        "family": "arcane",
+        "cast": "arcane.cast",
+        "impact": "arcane.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "角色法术投射技能的专属奥术音色"
+      }
+    },
+    "JIA": {
+      "JIA_basic": {
+        "family": "blade",
+        "cast": "blade.cast",
+        "impact": "blade.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "贾苇索默认普攻横斩；长枪装备另有THRUST覆写",
+        "kind_overrides": {
+          "THRUST": {
+            "family": "thrust",
+            "cast": "thrust.cast",
+            "impact": "thrust.impact",
+            "design_basis": "破阵长枪装备改变基础普攻THRUST几何"
+          }
+        }
+      },
+      "jia_sweep": {
+        "family": "blade",
+        "cast": "blade.cast",
+        "impact": "blade.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "近身横斩/范围挥击身份"
+      },
+      "jia_break": {
+        "family": "thrust",
+        "cast": "thrust.cast",
+        "impact": "thrust.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "破阵为直线突刺技能"
+      }
+    },
+    "M01": {
+      "M01_basic": {
+        "family": "heavy_blade",
+        "cast": "heavy_blade.cast",
+        "impact": "heavy_blade.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "戟/重型兵器挥击身份"
+      },
+      "M01_cleave": {
+        "family": "heavy_blade",
+        "cast": "heavy_blade.cast",
+        "impact": "heavy_blade.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "戟/重型兵器挥击身份"
+      },
+      "M01_rally": {
+        "family": "buff",
+        "cast": "buff.cast",
+        "impact": "",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "rally机制为持续强化/延长",
+        "impact_silence_reason": "纯临时强化/窗口效果没有实际HP/MP/护盾增量事件；只播cast，不把数值状态变化伪装成命中。"
+      },
+      "M01_support": {
+        "family": "heavy_blade",
+        "cast": "heavy_blade.cast",
+        "impact": "heavy_blade.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "掠阵横戟是吕布戟类横击，不是指挥动作"
+      }
+    },
+    "M02": {
+      "M02_basic": {
+        "family": "thrust",
+        "cast": "thrust.cast",
+        "impact": "thrust.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "技能几何是THRUST直线刺击"
+      },
+      "M02_dash": {
+        "family": "thrust",
+        "cast": "dash.cast",
+        "impact": "thrust.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "技能几何是THRUST直线刺击"
+      },
+      "M02_expose": {
+        "family": "thrust",
+        "cast": "thrust.cast",
+        "impact": "thrust.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "技能几何是THRUST直线刺击"
+      },
+      "M02_support": {
+        "family": "thrust",
+        "cast": "thrust.cast",
+        "impact": "thrust.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "技能几何是THRUST直线刺击"
+      }
+    },
+    "M03": {
+      "M03_basic": {
+        "family": "thrust",
+        "cast": "thrust.cast",
+        "impact": "thrust.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "技能几何是THRUST直线刺击"
+      },
+      "M03_guard": {
+        "family": "shield",
+        "cast": "shield.cast",
+        "impact": "shield.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "护身/护盾类 WARD 技能; 成功HP/MP/护盾增量由ability_effect确认后发对应impact，满值无增量则无声"
+      },
+      "M03_field": {
+        "family": "command",
+        "cast": "command.cast",
+        "impact": "command.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "mechanic明确为布阵场域"
+      },
+      "M03_support": {
+        "family": "shield",
+        "cast": "shield.cast",
+        "impact": "shield.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "护身/护盾类 WARD 技能; 成功HP/MP/护盾增量由ability_effect确认后发对应impact，满值无增量则无声"
+      }
+    },
+    "M04": {
+      "M04_basic": {
+        "family": "arcane",
+        "cast": "arcane.cast",
+        "impact": "arcane.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "角色法术投射技能的专属奥术音色"
+      },
+      "M04_field": {
+        "family": "command",
+        "cast": "command.cast",
+        "impact": "command.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "mechanic明确为布阵场域"
+      },
+      "M04_bind": {
+        "family": "blade",
+        "cast": "blade.cast",
+        "impact": "blade.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "近身横斩/范围挥击身份"
+      },
+      "M04_support": {
+        "family": "arcane",
+        "cast": "arcane.cast",
+        "impact": "arcane.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "角色法术投射技能的专属奥术音色"
+      }
+    },
+    "M05": {
+      "M05_basic": {
+        "family": "thrust",
+        "cast": "thrust.cast",
+        "impact": "thrust.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "技能几何是THRUST直线刺击"
+      },
+      "M05_dash": {
+        "family": "thrust",
+        "cast": "dash.cast",
+        "impact": "thrust.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "技能几何是THRUST直线刺击"
+      },
+      "M05_rally": {
+        "family": "buff",
+        "cast": "buff.cast",
+        "impact": "",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "rally机制为持续强化/延长",
+        "impact_silence_reason": "纯临时强化/窗口效果没有实际HP/MP/护盾增量事件；只播cast，不把数值状态变化伪装成命中。"
+      },
+      "M05_support": {
+        "family": "thrust",
+        "cast": "thrust.cast",
+        "impact": "thrust.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "骑军掠阵为曹纯骑枪突刺支援"
+      }
+    },
+    "M06": {
+      "M06_basic": {
+        "family": "bow",
+        "cast": "bow.cast",
+        "impact": "bow.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "远程投射按角色/技能身份选定为弹射武器音色"
+      },
+      "M06_expose": {
+        "family": "bow",
+        "cast": "bow.cast",
+        "impact": "bow.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "远程投射按角色/技能身份选定为弹射武器音色"
+      },
+      "M06_dash": {
+        "family": "bow",
+        "cast": "dash.cast",
+        "impact": "bow.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "角色/技能身份是弓弩、射击或箭矢"
+      },
+      "M06_support": {
+        "family": "bow",
+        "cast": "bow.cast",
+        "impact": "bow.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "角色/技能身份是弓弩、射击或箭矢"
+      }
+    },
+    "M07": {
+      "M07_basic": {
+        "family": "blade",
+        "cast": "blade.cast",
+        "impact": "blade.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "近身横斩/范围挥击身份"
+      },
+      "M07_sweep": {
+        "family": "blade",
+        "cast": "blade.cast",
+        "impact": "blade.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "近身横斩/范围挥击身份"
+      },
+      "M07_rally": {
+        "family": "buff",
+        "cast": "buff.cast",
+        "impact": "",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "rally机制为持续强化/延长",
+        "impact_silence_reason": "纯临时强化/窗口效果没有实际HP/MP/护盾增量事件；只播cast，不把数值状态变化伪装成命中。"
+      },
+      "M07_support": {
+        "family": "blade",
+        "cast": "blade.cast",
+        "impact": "blade.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "近身横斩/范围挥击身份"
+      }
+    },
+    "M08": {
+      "M08_basic": {
+        "family": "thrust",
+        "cast": "thrust.cast",
+        "impact": "thrust.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "技能几何是THRUST直线刺击"
+      },
+      "M08_break": {
+        "family": "thrust",
+        "cast": "thrust.cast",
+        "impact": "thrust.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "技能几何是THRUST直线刺击"
+      },
+      "M08_guard": {
+        "family": "shield",
+        "cast": "shield.cast",
+        "impact": "shield.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "护身/护盾类 WARD 技能; 成功HP/MP/护盾增量由ability_effect确认后发对应impact，满值无增量则无声"
+      },
+      "M08_support": {
+        "family": "thrust",
+        "cast": "thrust.cast",
+        "impact": "thrust.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "技能几何是THRUST直线刺击"
+      }
+    },
+    "N01": {
+      "N01_basic": {
+        "family": "blade",
+        "cast": "blade.cast",
+        "impact": "blade.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "近身横斩/范围挥击身份"
+      },
+      "N01_strike": {
+        "family": "blade",
+        "cast": "blade.cast",
+        "impact": "blade.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "近身横斩/范围挥击身份"
+      },
+      "militia_support": {
+        "family": "blade",
+        "cast": "blade.cast",
+        "impact": "blade.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "近身横斩/范围挥击身份"
+      }
+    },
+    "N02": {
+      "N02_basic": {
+        "family": "blunt",
+        "cast": "blunt.cast",
+        "impact": "blunt.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "钝击/盾击身份"
+      },
+      "N02_ward": {
+        "family": "shield",
+        "cast": "shield.cast",
+        "impact": "shield.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "护身/护盾类 WARD 技能; 成功HP/MP/护盾增量由ability_effect确认后发对应impact，满值无增量则无声"
+      },
+      "N02_support": {
+        "family": "shield",
+        "cast": "shield.cast",
+        "impact": "shield.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "护身/护盾类 WARD 技能; 成功HP/MP/护盾增量由ability_effect确认后发对应impact，满值无增量则无声"
+      }
+    },
+    "N03": {
+      "N03_basic": {
+        "family": "thrust",
+        "cast": "thrust.cast",
+        "impact": "thrust.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "陷阵盾卫该普攻数据为THRUST直线攻击"
+      },
+      "N03_guard": {
+        "family": "shield",
+        "cast": "shield.cast",
+        "impact": "shield.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "护身/护盾类 WARD 技能; 成功HP/MP/护盾增量由ability_effect确认后发对应impact，满值无增量则无声"
+      },
+      "N03_support": {
+        "family": "shield",
+        "cast": "shield.cast",
+        "impact": "shield.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "护身/护盾类 WARD 技能; 成功HP/MP/护盾增量由ability_effect确认后发对应impact，满值无增量则无声"
+      }
+    },
+    "N04": {
+      "N04_basic": {
+        "family": "thrust",
+        "cast": "thrust.cast",
+        "impact": "thrust.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "技能几何是THRUST直线刺击"
+      },
+      "N04_strike": {
+        "family": "thrust",
+        "cast": "thrust.cast",
+        "impact": "thrust.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "技能几何是THRUST直线刺击"
+      },
+      "spear_support": {
+        "family": "thrust",
+        "cast": "thrust.cast",
+        "impact": "thrust.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "技能几何是THRUST直线刺击"
+      }
+    },
+    "N05": {
+      "N05_basic": {
+        "family": "heavy_blade",
+        "cast": "heavy_blade.cast",
+        "impact": "heavy_blade.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "戟/重型兵器挥击身份"
+      },
+      "N05_sweep": {
+        "family": "heavy_blade",
+        "cast": "heavy_blade.cast",
+        "impact": "heavy_blade.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "戟/重型兵器挥击身份"
+      },
+      "N05_support": {
+        "family": "heavy_blade",
+        "cast": "heavy_blade.cast",
+        "impact": "heavy_blade.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "戟/重型兵器挥击身份"
+      }
+    },
+    "N06": {
+      "N06_basic": {
+        "family": "thrust",
+        "cast": "thrust.cast",
+        "impact": "thrust.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "陷阵锐卒普攻数据为THRUST刺击"
+      },
+      "N06_break": {
+        "family": "thrust",
+        "cast": "thrust.cast",
+        "impact": "thrust.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "锐卒攻坚是THRUST贯刺"
+      },
+      "N06_support": {
+        "family": "thrust",
+        "cast": "thrust.cast",
+        "impact": "thrust.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "破坚援刺是THRUST刺击支援"
+      }
+    },
+    "N07": {
+      "N07_basic": {
+        "family": "bow",
+        "cast": "bow.cast",
+        "impact": "bow.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "角色/技能身份是弓弩、射击或箭矢"
+      },
+      "N07_strike": {
+        "family": "bow",
+        "cast": "bow.cast",
+        "impact": "bow.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "角色/技能身份是弓弩、射击或箭矢"
+      },
+      "bow_support": {
+        "family": "bow",
+        "cast": "bow.cast",
+        "impact": "bow.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "角色/技能身份是弓弩、射击或箭矢"
+      }
+    },
+    "N08": {
+      "N08_basic": {
+        "family": "bow",
+        "cast": "bow.cast",
+        "impact": "bow.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "角色/技能身份是弓弩、射击或箭矢"
+      },
+      "N08_bolt": {
+        "family": "bow",
+        "cast": "bow.cast",
+        "impact": "bow.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "贯阵弩是弩箭射击；贯阵字样不表示指挥"
+      },
+      "N08_support": {
+        "family": "bow",
+        "cast": "bow.cast",
+        "impact": "bow.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "角色/技能身份是弓弩、射击或箭矢"
+      }
+    },
+    "N09": {
+      "N09_basic": {
+        "family": "bow",
+        "cast": "bow.cast",
+        "impact": "bow.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "角色/技能身份是弓弩、射击或箭矢"
+      },
+      "N09_aim": {
+        "family": "bow",
+        "cast": "bow.cast",
+        "impact": "bow.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "角色/技能身份是弓弩、射击或箭矢"
+      },
+      "N09_support": {
+        "family": "bow",
+        "cast": "bow.cast",
+        "impact": "bow.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "角色/技能身份是弓弩、射击或箭矢"
+      }
+    },
+    "N10": {
+      "N10_basic": {
+        "family": "thrust",
+        "cast": "thrust.cast",
+        "impact": "thrust.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "技能几何是THRUST直线刺击"
+      },
+      "N10_dash": {
+        "family": "thrust",
+        "cast": "dash.cast",
+        "impact": "thrust.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "技能几何是THRUST直线刺击"
+      },
+      "N10_support": {
+        "family": "thrust",
+        "cast": "thrust.cast",
+        "impact": "thrust.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "冲阵为自动THRUST支援刺击，不是位移突进"
+      }
+    },
+    "N11": {
+      "N11_basic": {
+        "family": "thrust",
+        "cast": "thrust.cast",
+        "impact": "thrust.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "技能几何是THRUST直线刺击"
+      },
+      "N11_dash": {
+        "family": "thrust",
+        "cast": "dash.cast",
+        "impact": "thrust.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "技能几何是THRUST直线刺击"
+      },
+      "N11_support": {
+        "family": "thrust",
+        "cast": "thrust.cast",
+        "impact": "thrust.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "技能几何是THRUST直线刺击"
+      }
+    },
+    "N12": {
+      "N12_basic": {
+        "family": "thrust",
+        "cast": "thrust.cast",
+        "impact": "thrust.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "技能几何是THRUST直线刺击"
+      },
+      "N12_charge": {
+        "family": "thrust",
+        "cast": "dash.cast",
+        "impact": "thrust.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "技能几何是THRUST直线刺击"
+      },
+      "N12_support": {
+        "family": "thrust",
+        "cast": "thrust.cast",
+        "impact": "thrust.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "技能几何是THRUST直线刺击"
+      }
+    },
+    "N13": {
+      "N13_basic": {
+        "family": "arcane",
+        "cast": "arcane.cast",
+        "impact": "arcane.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "角色法术投射技能的专属奥术音色"
+      },
+      "N13_strike": {
+        "family": "arcane",
+        "cast": "arcane.cast",
+        "impact": "arcane.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "角色法术投射技能的专属奥术音色"
+      },
+      "N13_mana": {
+        "family": "mana",
+        "cast": "mana.cast",
+        "impact": "mana.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "技能明确恢复或补给魔法; 成功HP/MP/护盾增量由ability_effect确认后发对应impact，满值无增量则无声"
+      },
+      "talisman_support": {
+        "family": "mana",
+        "cast": "mana.cast",
+        "impact": "mana.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "技能明确恢复或补给魔法; 成功HP/MP/护盾增量由ability_effect确认后发对应impact，满值无增量则无声"
+      }
+    },
+    "N14": {
+      "N14_basic": {
+        "family": "curse",
+        "cast": "curse.cast",
+        "impact": "curse.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "技能名/机制明确为诅咒"
+      },
+      "curse_bind": {
+        "family": "curse",
+        "cast": "curse.cast",
+        "impact": "curse.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "技能名/机制明确为诅咒"
+      },
+      "curse_support": {
+        "family": "curse",
+        "cast": "curse.cast",
+        "impact": "curse.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "技能名/机制明确为诅咒"
+      }
+    },
+    "N15": {
+      "N15_basic": {
+        "family": "arcane",
+        "cast": "arcane.cast",
+        "impact": "arcane.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "角色法术投射技能的专属奥术音色"
+      },
+      "N15_curse": {
+        "family": "curse",
+        "cast": "curse.cast",
+        "impact": "curse.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "技能名/机制明确为诅咒"
+      },
+      "N15_cashout": {
+        "family": "curse",
+        "cast": "curse.cast",
+        "impact": "curse.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "技能名/机制明确为诅咒"
+      },
+      "N15_support": {
+        "family": "curse",
+        "cast": "curse.cast",
+        "impact": "curse.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "技能名/机制明确为诅咒"
+      }
+    },
+    "N16": {
+      "N16_basic": {
+        "family": "blunt",
+        "cast": "blunt.cast",
+        "impact": "blunt.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "郎中基础SWEEP按药杵/钝器挥击身份处理"
+      },
+      "healer_aid": {
+        "family": "heal",
+        "cast": "heal.cast",
+        "impact": "heal.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "治疗技能标题/目标作用为恢复生命; 成功HP/MP/护盾增量由ability_effect确认后发对应impact，满值无增量则无声"
+      },
+      "healer_support": {
+        "family": "heal",
+        "cast": "heal.cast",
+        "impact": "heal.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "治疗技能标题/目标作用为恢复生命; 成功HP/MP/护盾增量由ability_effect确认后发对应impact，满值无增量则无声"
+      }
+    },
+    "N17": {
+      "N17_basic": {
+        "family": "blunt",
+        "cast": "blunt.cast",
+        "impact": "blunt.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "伙夫基础SWEEP按炊具钝击身份处理"
+      },
+      "cook_guard": {
+        "family": "shield",
+        "cast": "shield.cast",
+        "impact": "shield.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "护身/护盾类 WARD 技能; 成功HP/MP/护盾增量由ability_effect确认后发对应impact，满值无增量则无声"
+      },
+      "cook_support": {
+        "family": "heal",
+        "cast": "heal.cast",
+        "impact": "heal.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "治疗技能标题/目标作用为恢复生命; 成功HP/MP/护盾增量由ability_effect确认后发对应impact，满值无增量则无声"
+      }
+    },
+    "N18": {
+      "N18_basic": {
+        "family": "blunt",
+        "cast": "blunt.cast",
+        "impact": "blunt.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "军需小吏基础SWEEP按非刀剑钝击处理"
+      },
+      "clerk_guard": {
+        "family": "shield",
+        "cast": "shield.cast",
+        "impact": "shield.impact",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "护身/护盾类 WARD 技能; 成功HP/MP/护盾增量由ability_effect确认后发对应impact，满值无增量则无声"
+      },
+      "N18_rally": {
+        "family": "buff",
+        "cast": "buff.cast",
+        "impact": "",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "rally机制为持续强化/延长",
+        "impact_silence_reason": "纯临时强化/窗口效果没有实际HP/MP/护盾增量事件；只播cast，不把数值状态变化伪装成命中。"
+      },
+      "clerk_support": {
+        "family": "buff",
+        "cast": "buff.cast",
+        "impact": "",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "rally机制为持续强化/延长",
+        "impact_silence_reason": "纯临时强化/窗口效果没有实际HP/MP/护盾增量事件；只播cast，不把数值状态变化伪装成命中。"
+      }
+    }
+  },
+  "enemy_actions": {
+    "E01": {
+      "0": {
+        "swipe": {
+          "family": "blade",
+          "tell": "blade.tell",
+          "release": "blade.cast",
+          "impact": "blade.impact",
+          "gain_db": 0,
+          "pitch_scale": 1.0,
+          "stage_priorities": {
+            "tell": 1,
+            "release": 1,
+            "impact": 1
+          },
+          "design_basis": "近身挥击动作"
+        }
+      }
+    },
+    "E02": {
+      "0": {
+        "shot": {
+          "family": "bow",
+          "tell": "bow.tell",
+          "release": "bow.cast",
+          "impact": "bow.impact",
+          "gain_db": 0,
+          "pitch_scale": 1.0,
+          "stage_priorities": {
+            "tell": 4,
+            "release": 1,
+            "impact": 1
+          },
+          "design_basis": "敌人/动作是射击、扇箭或投射攻击"
+        }
+      }
+    },
+    "E03": {
+      "0": {
+        "charge": {
+          "family": "bone",
+          "tell": "dash.tell",
+          "release": "dash.cast",
+          "impact": "bone.impact",
+          "gain_db": 0,
+          "pitch_scale": 1.0,
+          "stage_priorities": {
+            "tell": 4,
+            "release": 1,
+            "impact": 1
+          },
+          "design_basis": "敌人视觉身份为骨/尸类"
+        }
+      }
+    },
+    "E04": {
+      "0": {
+        "swipe": {
+          "family": "blade",
+          "tell": "blade.tell",
+          "release": "blade.cast",
+          "impact": "blade.impact",
+          "gain_db": 0,
+          "pitch_scale": 1.0,
+          "stage_priorities": {
+            "tell": 1,
+            "release": 1,
+            "impact": 1
+          },
+          "design_basis": "近身挥击动作"
+        }
+      }
+    },
+    "E05": {
+      "0": {
+        "fan": {
+          "family": "bow",
+          "tell": "bow.tell",
+          "release": "bow.cast",
+          "impact": "bow.impact",
+          "gain_db": 0,
+          "pitch_scale": 1.0,
+          "stage_priorities": {
+            "tell": 4,
+            "release": 1,
+            "impact": 1
+          },
+          "design_basis": "敌人/动作是射击、扇箭或投射攻击"
+        }
+      }
+    },
+    "E06": {
+      "0": {
+        "pot": {
+          "family": "earth",
+          "tell": "earth.tell",
+          "release": "earth.cast",
+          "impact": "earth.impact",
+          "gain_db": 0,
+          "pitch_scale": 1.0,
+          "stage_priorities": {
+            "tell": 4,
+            "release": 1,
+            "impact": 1
+          },
+          "design_basis": "落点/环形震击/地面标记机制"
+        }
+      }
+    },
+    "E07": {
+      "0": {
+        "command": {
+          "family": "command",
+          "tell": "command.tell",
+          "release": "command.cast",
+          "impact": "command.impact",
+          "gain_db": 0,
+          "pitch_scale": 1.0,
+          "stage_priorities": {
+            "tell": 4,
+            "release": 1,
+            "impact": 1
+          },
+          "design_basis": "动作类型command是指挥/治疗/召唤"
+        },
+        "swipe": {
+          "family": "blade",
+          "tell": "blade.tell",
+          "release": "blade.cast",
+          "impact": "blade.impact",
+          "gain_db": 0,
+          "pitch_scale": 1.0,
+          "stage_priorities": {
+            "tell": 1,
+            "release": 1,
+            "impact": 1
+          },
+          "design_basis": "近身挥击动作"
+        }
+      }
+    },
+    "E08": {
+      "0": {
+        "heal": {
+          "family": "arcane",
+          "tell": "arcane.tell",
+          "release": "arcane.cast",
+          "impact": "arcane.impact",
+          "gain_db": 0,
+          "pitch_scale": 1.0,
+          "stage_priorities": {
+            "tell": 4,
+            "release": 1,
+            "impact": 1
+          },
+          "design_basis": "敌人身份/动作属于仪式、符术或灯阵"
+        },
+        "swipe": {
+          "family": "arcane",
+          "tell": "arcane.tell",
+          "release": "arcane.cast",
+          "impact": "arcane.impact",
+          "gain_db": 0,
+          "pitch_scale": 1.0,
+          "stage_priorities": {
+            "tell": 1,
+            "release": 1,
+            "impact": 1
+          },
+          "design_basis": "敌人身份/动作属于仪式、符术或灯阵"
+        }
+      }
+    },
+    "E09": {
+      "0": {
+        "slam": {
+          "family": "bone",
+          "tell": "bone.tell",
+          "release": "bone.cast",
+          "impact": "bone.impact",
+          "gain_db": 0,
+          "pitch_scale": 1.0,
+          "stage_priorities": {
+            "tell": 4,
+            "release": 1,
+            "impact": 1
+          },
+          "design_basis": "敌人视觉身份为骨/尸类"
+        }
+      }
+    },
+    "E10": {
+      "0": {
+        "hook": {
+          "family": "arcane",
+          "tell": "arcane.tell",
+          "release": "arcane.cast",
+          "impact": "arcane.impact",
+          "gain_db": 0,
+          "pitch_scale": 1.0,
+          "stage_priorities": {
+            "tell": 4,
+            "release": 1,
+            "impact": 1
+          },
+          "design_basis": "敌人身份/动作属于仪式、符术或灯阵"
+        }
+      }
+    },
+    "E11": {
+      "0": {
+        "summon": {
+          "family": "command",
+          "tell": "command.tell",
+          "release": "command.cast",
+          "impact": "command.impact",
+          "gain_db": 0,
+          "pitch_scale": 1.0,
+          "stage_priorities": {
+            "tell": 4,
+            "release": 1,
+            "impact": 1
+          },
+          "design_basis": "动作类型summon是指挥/治疗/召唤"
+        },
+        "swipe": {
+          "family": "blade",
+          "tell": "blade.tell",
+          "release": "blade.cast",
+          "impact": "blade.impact",
+          "gain_db": 0,
+          "pitch_scale": 1.0,
+          "stage_priorities": {
+            "tell": 2,
+            "release": 1,
+            "impact": 1
+          },
+          "design_basis": "近身挥击动作"
+        }
+      }
+    },
+    "E12": {
+      "0": {
+        "stele_arc_1": {
+          "family": "blunt",
+          "tell": "blunt.tell",
+          "release": "blunt.cast",
+          "impact": "blunt.impact",
+          "gain_db": 0,
+          "pitch_scale": 1.0,
+          "stage_priorities": {
+            "tell": 4,
+            "release": 1,
+            "impact": 1
+          },
+          "design_basis": "近身重击/砸击动作"
+        },
+        "stele_arc_2": {
+          "family": "blunt",
+          "tell": "blunt.tell",
+          "release": "blunt.cast",
+          "impact": "blunt.impact",
+          "gain_db": 0,
+          "pitch_scale": 1.0,
+          "stage_priorities": {
+            "tell": 4,
+            "release": 1,
+            "impact": 1
+          },
+          "design_basis": "近身重击/砸击动作"
+        },
+        "pulse": {
+          "family": "earth",
+          "tell": "earth.tell",
+          "release": "earth.cast",
+          "impact": "earth.impact",
+          "gain_db": 0,
+          "pitch_scale": 1.0,
+          "stage_priorities": {
+            "tell": 4,
+            "release": 1,
+            "impact": 1
+          },
+          "design_basis": "落点/环形震击/地面标记机制"
+        }
+      }
+    },
+    "L00": {
+      "0": {
+        "swipe": {
+          "family": "blade",
+          "tell": "blade.tell",
+          "release": "blade.cast",
+          "impact": "blade.impact",
+          "gain_db": 0,
+          "pitch_scale": 1.0,
+          "stage_priorities": {
+            "tell": 3,
+            "release": 2,
+            "impact": 2
+          },
+          "design_basis": "近身挥击动作"
+        }
+      }
+    },
+    "L01": {
+      "0": {
+        "command": {
+          "family": "command",
+          "tell": "command.tell",
+          "release": "command.cast",
+          "impact": "command.impact",
+          "gain_db": 0,
+          "pitch_scale": 1.0,
+          "stage_priorities": {
+            "tell": 4,
+            "release": 2,
+            "impact": 2
+          },
+          "design_basis": "动作类型command是指挥/治疗/召唤"
+        },
+        "swipe": {
+          "family": "blade",
+          "tell": "blade.tell",
+          "release": "blade.cast",
+          "impact": "blade.impact",
+          "gain_db": 0,
+          "pitch_scale": 1.0,
+          "stage_priorities": {
+            "tell": 3,
+            "release": 2,
+            "impact": 2
+          },
+          "design_basis": "近身挥击动作"
+        }
+      }
+    },
+    "L02": {
+      "0": {
+        "fan": {
+          "family": "bow",
+          "tell": "bow.tell",
+          "release": "bow.cast",
+          "impact": "bow.impact",
+          "gain_db": 0,
+          "pitch_scale": 1.0,
+          "stage_priorities": {
+            "tell": 4,
+            "release": 2,
+            "impact": 2
+          },
+          "design_basis": "敌人/动作是射击、扇箭或投射攻击"
+        }
+      }
+    },
+    "L03": {
+      "0": {
+        "swipe": {
+          "family": "blade",
+          "tell": "blade.tell",
+          "release": "blade.cast",
+          "impact": "blade.impact",
+          "gain_db": 0,
+          "pitch_scale": 1.0,
+          "stage_priorities": {
+            "tell": 3,
+            "release": 2,
+            "impact": 2
+          },
+          "design_basis": "近身挥击动作"
+        }
+      }
+    },
+    "L04": {
+      "0": {
+        "summon": {
+          "family": "command",
+          "tell": "command.tell",
+          "release": "command.cast",
+          "impact": "command.impact",
+          "gain_db": 0,
+          "pitch_scale": 1.0,
+          "stage_priorities": {
+            "tell": 4,
+            "release": 2,
+            "impact": 2
+          },
+          "design_basis": "动作类型summon是指挥/治疗/召唤"
+        },
+        "swipe": {
+          "family": "blade",
+          "tell": "blade.tell",
+          "release": "blade.cast",
+          "impact": "blade.impact",
+          "gain_db": 0,
+          "pitch_scale": 1.0,
+          "stage_priorities": {
+            "tell": 3,
+            "release": 2,
+            "impact": 2
+          },
+          "design_basis": "近身挥击动作"
+        }
+      }
+    },
+    "L05": {
+      "0": {
+        "hook": {
+          "family": "flesh",
+          "tell": "flesh.tell",
+          "release": "flesh.cast",
+          "impact": "flesh.impact",
+          "gain_db": 0,
+          "pitch_scale": 1.0,
+          "stage_priorities": {
+            "tell": 4,
+            "release": 2,
+            "impact": 2
+          },
+          "design_basis": "钩索牵引动作"
+        }
+      }
+    },
+    "L06": {
+      "0": {
+        "slam": {
+          "family": "blunt",
+          "tell": "blunt.tell",
+          "release": "blunt.cast",
+          "impact": "blunt.impact",
+          "gain_db": 0,
+          "pitch_scale": 1.0,
+          "stage_priorities": {
+            "tell": 4,
+            "release": 2,
+            "impact": 2
+          },
+          "design_basis": "近身重击/砸击动作"
+        }
+      }
+    },
+    "B01": {
+      "0": {
+        "swipe": {
+          "family": "blade",
+          "tell": "blade.tell",
+          "release": "blade.cast",
+          "impact": "blade.impact",
+          "gain_db": 1,
+          "pitch_scale": 0.95,
+          "stage_priorities": {
+            "tell": 5,
+            "release": 4,
+            "impact": 4
+          },
+          "design_basis": "近身挥击动作"
+        }
+      }
+    },
+    "B02": {
+      "0": {
+        "swipe": {
+          "family": "bone",
+          "tell": "bone.tell",
+          "release": "bone.cast",
+          "impact": "bone.impact",
+          "gain_db": 1,
+          "pitch_scale": 0.95,
+          "stage_priorities": {
+            "tell": 5,
+            "release": 4,
+            "impact": 4
+          },
+          "design_basis": "敌人视觉身份为骨/尸类"
+        }
+      }
+    },
+    "B03": {
+      "0": {
+        "charge": {
+          "family": "thrust",
+          "tell": "dash.tell",
+          "release": "dash.cast",
+          "impact": "thrust.impact",
+          "gain_db": 1,
+          "pitch_scale": 0.95,
+          "stage_priorities": {
+            "tell": 5,
+            "release": 4,
+            "impact": 4
+          },
+          "design_basis": "直线冲击按敌人兵器/动作身份归为刺击"
+        },
+        "swipe": {
+          "family": "blade",
+          "tell": "blade.tell",
+          "release": "blade.cast",
+          "impact": "blade.impact",
+          "gain_db": 1,
+          "pitch_scale": 0.95,
+          "stage_priorities": {
+            "tell": 5,
+            "release": 4,
+            "impact": 4
+          },
+          "design_basis": "近身挥击动作"
+        }
+      }
+    },
+    "B04": {
+      "0": {
+        "charge": {
+          "family": "bone",
+          "tell": "dash.tell",
+          "release": "dash.cast",
+          "impact": "bone.impact",
+          "gain_db": 1,
+          "pitch_scale": 0.95,
+          "stage_priorities": {
+            "tell": 5,
+            "release": 4,
+            "impact": 4
+          },
+          "design_basis": "敌人视觉身份为骨/尸类"
+        },
+        "swipe": {
+          "family": "bone",
+          "tell": "bone.tell",
+          "release": "bone.cast",
+          "impact": "bone.impact",
+          "gain_db": 1,
+          "pitch_scale": 0.95,
+          "stage_priorities": {
+            "tell": 5,
+            "release": 4,
+            "impact": 4
+          },
+          "design_basis": "敌人视觉身份为骨/尸类"
+        }
+      }
+    },
+    "B05": {
+      "0": {
+        "fan": {
+          "family": "bow",
+          "tell": "bow.tell",
+          "release": "bow.cast",
+          "impact": "bow.impact",
+          "gain_db": 1,
+          "pitch_scale": 0.95,
+          "stage_priorities": {
+            "tell": 5,
+            "release": 4,
+            "impact": 4
+          },
+          "design_basis": "敌人/动作是射击、扇箭或投射攻击"
+        },
+        "pot": {
+          "family": "arcane",
+          "tell": "arcane.tell",
+          "release": "arcane.cast",
+          "impact": "arcane.impact",
+          "gain_db": 1,
+          "pitch_scale": 0.95,
+          "stage_priorities": {
+            "tell": 5,
+            "release": 4,
+            "impact": 4
+          },
+          "design_basis": "敌人身份/动作属于仪式、符术或灯阵"
+        }
+      }
+    },
+    "B06": {
+      "0": {
+        "slam": {
+          "family": "arcane",
+          "tell": "arcane.tell",
+          "release": "arcane.cast",
+          "impact": "arcane.impact",
+          "gain_db": 1,
+          "pitch_scale": 0.95,
+          "stage_priorities": {
+            "tell": 5,
+            "release": 4,
+            "impact": 4
+          },
+          "design_basis": "敌人身份/动作属于仪式、符术或灯阵"
+        }
+      }
+    },
+    "B07": {
+      "0": {
+        "command": {
+          "family": "command",
+          "tell": "command.tell",
+          "release": "command.cast",
+          "impact": "command.impact",
+          "gain_db": 1,
+          "pitch_scale": 0.95,
+          "stage_priorities": {
+            "tell": 5,
+            "release": 4,
+            "impact": 4
+          },
+          "design_basis": "动作类型command是指挥/治疗/召唤"
+        },
+        "swipe": {
+          "family": "blade",
+          "tell": "blade.tell",
+          "release": "blade.cast",
+          "impact": "blade.impact",
+          "gain_db": 1,
+          "pitch_scale": 0.95,
+          "stage_priorities": {
+            "tell": 5,
+            "release": 4,
+            "impact": 4
+          },
+          "design_basis": "近身挥击动作"
+        }
+      }
+    },
+    "B08": {
+      "0": {
+        "charge": {
+          "family": "thrust",
+          "tell": "dash.tell",
+          "release": "dash.cast",
+          "impact": "thrust.impact",
+          "gain_db": 1,
+          "pitch_scale": 0.95,
+          "stage_priorities": {
+            "tell": 5,
+            "release": 4,
+            "impact": 4
+          },
+          "design_basis": "直线冲击按敌人兵器/动作身份归为刺击"
+        },
+        "swipe": {
+          "family": "blade",
+          "tell": "blade.tell",
+          "release": "blade.cast",
+          "impact": "blade.impact",
+          "gain_db": 1,
+          "pitch_scale": 0.95,
+          "stage_priorities": {
+            "tell": 5,
+            "release": 4,
+            "impact": 4
+          },
+          "design_basis": "近身挥击动作"
+        }
+      }
+    },
+    "B09": {
+      "0": {
+        "slam": {
+          "family": "blunt",
+          "tell": "blunt.tell",
+          "release": "blunt.cast",
+          "impact": "blunt.impact",
+          "gain_db": 1,
+          "pitch_scale": 0.95,
+          "stage_priorities": {
+            "tell": 5,
+            "release": 4,
+            "impact": 4
+          },
+          "design_basis": "近身重击/砸击动作"
+        }
+      }
+    },
+    "B10": {
+      "0": {
+        "slam": {
+          "family": "blunt",
+          "tell": "blunt.tell",
+          "release": "blunt.cast",
+          "impact": "blunt.impact",
+          "gain_db": 1,
+          "pitch_scale": 0.95,
+          "stage_priorities": {
+            "tell": 5,
+            "release": 4,
+            "impact": 4
+          },
+          "design_basis": "近身重击/砸击动作"
+        }
+      }
+    },
+    "B11": {
+      "0": {
+        "fan": {
+          "family": "bow",
+          "tell": "bow.tell",
+          "release": "bow.cast",
+          "impact": "bow.impact",
+          "gain_db": 1,
+          "pitch_scale": 0.95,
+          "stage_priorities": {
+            "tell": 5,
+            "release": 4,
+            "impact": 4
+          },
+          "design_basis": "敌人/动作是射击、扇箭或投射攻击"
+        },
+        "pot": {
+          "family": "arcane",
+          "tell": "arcane.tell",
+          "release": "arcane.cast",
+          "impact": "arcane.impact",
+          "gain_db": 1,
+          "pitch_scale": 0.95,
+          "stage_priorities": {
+            "tell": 5,
+            "release": 4,
+            "impact": 4
+          },
+          "design_basis": "敌人身份/动作属于仪式、符术或灯阵"
+        }
+      }
+    },
+    "B12": {
+      "0": {
+        "anchor": {
+          "family": "arcane",
+          "tell": "arcane.tell",
+          "release": "arcane.cast",
+          "impact": "arcane.impact",
+          "gain_db": 1,
+          "pitch_scale": 0.95,
+          "stage_priorities": {
+            "tell": 5,
+            "release": 4,
+            "impact": 4
+          },
+          "design_basis": "敌人身份/动作属于仪式、符术或灯阵"
+        },
+        "pulse": {
+          "family": "arcane",
+          "tell": "arcane.tell",
+          "release": "arcane.cast",
+          "impact": "arcane.impact",
+          "gain_db": 1,
+          "pitch_scale": 0.95,
+          "stage_priorities": {
+            "tell": 5,
+            "release": 4,
+            "impact": 4
+          },
+          "design_basis": "敌人身份/动作属于仪式、符术或灯阵"
+        }
+      }
+    },
+    "B13": {
+      "0": {
+        "charge": {
+          "family": "thrust",
+          "tell": "dash.tell",
+          "release": "dash.cast",
+          "impact": "thrust.impact",
+          "gain_db": 1,
+          "pitch_scale": 0.95,
+          "stage_priorities": {
+            "tell": 5,
+            "release": 4,
+            "impact": 4
+          },
+          "design_basis": "直线冲击按敌人兵器/动作身份归为刺击"
+        },
+        "swipe": {
+          "family": "blade",
+          "tell": "blade.tell",
+          "release": "blade.cast",
+          "impact": "blade.impact",
+          "gain_db": 1,
+          "pitch_scale": 0.95,
+          "stage_priorities": {
+            "tell": 5,
+            "release": 4,
+            "impact": 4
+          },
+          "design_basis": "近身挥击动作"
+        }
+      }
+    },
+    "B14": {
+      "0": {
+        "command": {
+          "family": "command",
+          "tell": "command.tell",
+          "release": "command.cast",
+          "impact": "command.impact",
+          "gain_db": 1,
+          "pitch_scale": 0.95,
+          "stage_priorities": {
+            "tell": 5,
+            "release": 4,
+            "impact": 4
+          },
+          "design_basis": "动作类型command是指挥/治疗/召唤"
+        },
+        "swipe": {
+          "family": "blade",
+          "tell": "blade.tell",
+          "release": "blade.cast",
+          "impact": "blade.impact",
+          "gain_db": 1,
+          "pitch_scale": 0.95,
+          "stage_priorities": {
+            "tell": 5,
+            "release": 4,
+            "impact": 4
+          },
+          "design_basis": "近身挥击动作"
+        }
+      }
+    },
+    "B15": {
+      "0": {
+        "hunter_aim": {
+          "family": "bow",
+          "tell": "bow.tell",
+          "release": "bow.cast",
+          "impact": "bow.impact",
+          "gain_db": 1,
+          "pitch_scale": 0.95,
+          "stage_priorities": {
+            "tell": 5,
+            "release": 4,
+            "impact": 4
+          },
+          "design_basis": "曹休人形定点射击"
+        },
+        "hunter_volley": {
+          "family": "bow",
+          "tell": "bow.tell",
+          "release": "bow.cast",
+          "impact": "bow.impact",
+          "gain_db": 1,
+          "pitch_scale": 0.95,
+          "stage_priorities": {
+            "tell": 5,
+            "release": 4,
+            "impact": 4
+          },
+          "design_basis": "曹休人形扇形箭雨"
+        },
+        "hunter_reposition": {
+          "family": "bow",
+          "tell": "dash.tell",
+          "release": "dash.cast",
+          "impact": "bow.impact",
+          "gain_db": 1,
+          "pitch_scale": 0.95,
+          "stage_priorities": {
+            "tell": 5,
+            "release": 4,
+            "impact": 4
+          },
+          "design_basis": "曹休人形退阵射击身份；释放层使用突进声，命中层保持弓箭声"
+        }
+      },
+      "1": {
+        "beast_hunt": {
+          "family": "bow",
+          "tell": "bow.tell",
+          "release": "bow.cast",
+          "impact": "bow.impact",
+          "gain_db": 3,
+          "pitch_scale": 0.82,
+          "stage_priorities": {
+            "tell": 5,
+            "release": 4,
+            "impact": 4
+          },
+          "design_basis": "兽相扇射追猎"
+        },
+        "beast_leap": {
+          "family": "beast",
+          "tell": "dash.tell",
+          "release": "dash.cast",
+          "impact": "beast.impact",
+          "gain_db": 3,
+          "pitch_scale": 0.82,
+          "stage_priorities": {
+            "tell": 5,
+            "release": 4,
+            "impact": 4
+          },
+          "design_basis": "兽相扑跃"
+        },
+        "hunt_mark": {
+          "family": "earth",
+          "tell": "earth.tell",
+          "release": "earth.cast",
+          "impact": "earth.impact",
+          "gain_db": 3,
+          "pitch_scale": 0.82,
+          "stage_priorities": {
+            "tell": 5,
+            "release": 4,
+            "impact": 4
+          },
+          "design_basis": "兽相地面落点标记"
+        },
+        "beast_rend": {
+          "family": "heavy_blade",
+          "tell": "heavy_blade.tell",
+          "release": "heavy_blade.cast",
+          "impact": "heavy_blade.impact",
+          "gain_db": 3,
+          "pitch_scale": 0.82,
+          "stage_priorities": {
+            "tell": 5,
+            "release": 4,
+            "impact": 4
+          },
+          "design_basis": "兽相近身大范围撕裂挥击"
+        }
+      }
+    },
+    "B16": {
+      "0": {
+        "rider_lance": {
+          "family": "thrust",
+          "tell": "dash.tell",
+          "release": "dash.cast",
+          "impact": "thrust.impact",
+          "gain_db": 1,
+          "pitch_scale": 0.95,
+          "stage_priorities": {
+            "tell": 5,
+            "release": 4,
+            "impact": 4
+          },
+          "design_basis": "曹纯骑枪冲刺；释放层使用突进声，impact保留枪刺音"
+        },
+        "rider_cleave": {
+          "family": "heavy_blade",
+          "tell": "heavy_blade.tell",
+          "release": "heavy_blade.cast",
+          "impact": "heavy_blade.impact",
+          "gain_db": 1,
+          "pitch_scale": 0.95,
+          "stage_priorities": {
+            "tell": 5,
+            "release": 4,
+            "impact": 4
+          },
+          "design_basis": "曹纯近身枪戟横斩"
+        },
+        "rider_return": {
+          "family": "thrust",
+          "tell": "dash.tell",
+          "release": "dash.cast",
+          "impact": "thrust.impact",
+          "gain_db": 1,
+          "pitch_scale": 0.95,
+          "stage_priorities": {
+            "tell": 5,
+            "release": 4,
+            "impact": 4
+          },
+          "design_basis": "曹纯骑枪折返冲击；释放层突进，命中保留刺击"
+        }
+      },
+      "1": {
+        "tiger_long_charge": {
+          "family": "armor",
+          "tell": "dash.tell",
+          "release": "dash.cast",
+          "impact": "armor.impact",
+          "gain_db": 3,
+          "pitch_scale": 0.82,
+          "stage_priorities": {
+            "tell": 5,
+            "release": 4,
+            "impact": 4
+          },
+          "design_basis": "虎豹甲骑巨相装甲长冲；释放层突进，命中落在甲骑重体"
+        },
+        "tiger_trample": {
+          "family": "blunt",
+          "tell": "blunt.tell",
+          "release": "blunt.cast",
+          "impact": "blunt.impact",
+          "gain_db": 3,
+          "pitch_scale": 0.82,
+          "stage_priorities": {
+            "tell": 5,
+            "release": 4,
+            "impact": 4
+          },
+          "design_basis": "巨相踏击"
+        },
+        "leopard_return": {
+          "family": "armor",
+          "tell": "dash.tell",
+          "release": "dash.cast",
+          "impact": "armor.impact",
+          "gain_db": 3,
+          "pitch_scale": 0.82,
+          "stage_priorities": {
+            "tell": 5,
+            "release": 4,
+            "impact": 4
+          },
+          "design_basis": "虎豹甲骑巨相装甲折返冲锋"
+        },
+        "cavalry_break": {
+          "family": "earth",
+          "tell": "earth.tell",
+          "release": "earth.cast",
+          "impact": "earth.impact",
+          "gain_db": 3,
+          "pitch_scale": 0.82,
+          "stage_priorities": {
+            "tell": 5,
+            "release": 4,
+            "impact": 4
+          },
+          "design_basis": "骑兵巨相环形地面震击"
+        }
+      }
+    },
+    "B17": {
+      "0": {
+        "general_lunge": {
+          "family": "thrust",
+          "tell": "dash.tell",
+          "release": "dash.cast",
+          "impact": "thrust.impact",
+          "gain_db": 1,
+          "pitch_scale": 0.95,
+          "stage_priorities": {
+            "tell": 5,
+            "release": 4,
+            "impact": 4
+          },
+          "design_basis": "张辽人形突刺；释放层突进，impact保留兵器刺击"
+        },
+        "general_cut": {
+          "family": "blade",
+          "tell": "blade.tell",
+          "release": "blade.cast",
+          "impact": "blade.impact",
+          "gain_db": 1,
+          "pitch_scale": 0.95,
+          "stage_priorities": {
+            "tell": 5,
+            "release": 4,
+            "impact": 4
+          },
+          "design_basis": "张辽人形横斩"
+        },
+        "human_formation": {
+          "family": "command",
+          "tell": "command.tell",
+          "release": "command.cast",
+          "impact": "command.impact",
+          "gain_db": 1,
+          "pitch_scale": 0.95,
+          "stage_priorities": {
+            "tell": 5,
+            "release": 4,
+            "impact": 4
+          },
+          "design_basis": "张辽与友军协同布阵"
+        }
+      },
+      "1": {
+        "yaksha_break": {
+          "family": "heavy_blade",
+          "tell": "dash.tell",
+          "release": "dash.cast",
+          "impact": "heavy_blade.impact",
+          "gain_db": 3,
+          "pitch_scale": 0.82,
+          "stage_priorities": {
+            "tell": 5,
+            "release": 4,
+            "impact": 4
+          },
+          "design_basis": "夜叉将相重甲冲阵；释放层突进，命中层使用重兵器声"
+        },
+        "yaksha_cleave": {
+          "family": "heavy_blade",
+          "tell": "heavy_blade.tell",
+          "release": "heavy_blade.cast",
+          "impact": "heavy_blade.impact",
+          "gain_db": 3,
+          "pitch_scale": 0.82,
+          "stage_priorities": {
+            "tell": 5,
+            "release": 4,
+            "impact": 4
+          },
+          "design_basis": "夜叉相重型横斩"
+        },
+        "war_formation": {
+          "family": "command",
+          "tell": "command.tell",
+          "release": "command.cast",
+          "impact": "command.impact",
+          "gain_db": 3,
+          "pitch_scale": 0.82,
+          "stage_priorities": {
+            "tell": 5,
+            "release": 4,
+            "impact": 4
+          },
+          "design_basis": "夜叉相与友军协同布阵"
+        },
+        "yaksha_pulse": {
+          "family": "earth",
+          "tell": "earth.tell",
+          "release": "earth.cast",
+          "impact": "earth.impact",
+          "gain_db": 3,
+          "pitch_scale": 0.82,
+          "stage_priorities": {
+            "tell": 5,
+            "release": 4,
+            "impact": 4
+          },
+          "design_basis": "夜叉相环形震击"
+        }
+      }
+    },
+    "B18": {
+      "0": {
+        "halberd_sweep": {
+          "family": "heavy_blade",
+          "tell": "heavy_blade.tell",
+          "release": "heavy_blade.cast",
+          "impact": "heavy_blade.impact",
+          "gain_db": 1,
+          "pitch_scale": 0.95,
+          "stage_priorities": {
+            "tell": 5,
+            "release": 4,
+            "impact": 4
+          },
+          "design_basis": "吕布方天戟横扫"
+        },
+        "halberd_charge": {
+          "family": "heavy_blade",
+          "tell": "dash.tell",
+          "release": "dash.cast",
+          "impact": "heavy_blade.impact",
+          "gain_db": 1,
+          "pitch_scale": 0.95,
+          "stage_priorities": {
+            "tell": 5,
+            "release": 4,
+            "impact": 4
+          },
+          "design_basis": "吕布持戟冲锋；释放层突进，impact保留戟刃身份"
+        },
+        "halberd_fall": {
+          "family": "earth",
+          "tell": "earth.tell",
+          "release": "earth.cast",
+          "impact": "earth.impact",
+          "gain_db": 1,
+          "pitch_scale": 0.95,
+          "stage_priorities": {
+            "tell": 5,
+            "release": 4,
+            "impact": 4
+          },
+          "design_basis": "吕布落戟地面标记"
+        },
+        "halberd_finish": {
+          "family": "heavy_blade",
+          "tell": "heavy_blade.tell",
+          "release": "heavy_blade.cast",
+          "impact": "heavy_blade.impact",
+          "gain_db": 1,
+          "pitch_scale": 0.95,
+          "stage_priorities": {
+            "tell": 5,
+            "release": 4,
+            "impact": 4
+          },
+          "design_basis": "吕布终结横扫"
+        }
+      },
+      "1": {
+        "demon_fourfold": {
+          "family": "heavy_blade",
+          "tell": "heavy_blade.tell",
+          "release": "heavy_blade.cast",
+          "impact": "heavy_blade.impact",
+          "gain_db": 3,
+          "pitch_scale": 0.82,
+          "stage_priorities": {
+            "tell": 5,
+            "release": 4,
+            "impact": 4
+          },
+          "design_basis": "鬼神相多臂挥戟"
+        },
+        "demon_skybreaker": {
+          "family": "heavy_blade",
+          "tell": "dash.tell",
+          "release": "dash.cast",
+          "impact": "heavy_blade.impact",
+          "gain_db": 3,
+          "pitch_scale": 0.82,
+          "stage_priorities": {
+            "tell": 5,
+            "release": 4,
+            "impact": 4
+          },
+          "design_basis": "鬼神相持戟长冲；释放层突进，impact保留重戟身份"
+        },
+        "demon_quake": {
+          "family": "earth",
+          "tell": "earth.tell",
+          "release": "earth.cast",
+          "impact": "earth.impact",
+          "gain_db": 3,
+          "pitch_scale": 0.82,
+          "stage_priorities": {
+            "tell": 5,
+            "release": 4,
+            "impact": 4
+          },
+          "design_basis": "鬼神相环形震击"
+        },
+        "demon_heavenfall": {
+          "family": "earth",
+          "tell": "earth.tell",
+          "release": "earth.cast",
+          "impact": "earth.impact",
+          "gain_db": 3,
+          "pitch_scale": 0.82,
+          "stage_priorities": {
+            "tell": 5,
+            "release": 4,
+            "impact": 4
+          },
+          "design_basis": "鬼神相落戟地面标记"
+        },
+        "demon_final_cleave": {
+          "family": "heavy_blade",
+          "tell": "heavy_blade.tell",
+          "release": "heavy_blade.cast",
+          "impact": "heavy_blade.impact",
+          "gain_db": 3,
+          "pitch_scale": 0.82,
+          "stage_priorities": {
+            "tell": 5,
+            "release": 4,
+            "impact": 4
+          },
+          "design_basis": "鬼神相终结重斩"
+        }
+      }
+    },
+    "D01": {
+      "0": {
+        "swipe": {
+          "family": "blade",
+          "tell": "blade.tell",
+          "release": "blade.cast",
+          "impact": "blade.impact",
+          "gain_db": 0,
+          "pitch_scale": 1.0,
+          "stage_priorities": {
+            "tell": 1,
+            "release": 1,
+            "impact": 1
+          },
+          "design_basis": "近身挥击动作"
+        }
+      }
+    },
+    "B10_R": {
+      "0": {
+        "slam": {
+          "family": "blunt",
+          "tell": "blunt.tell",
+          "release": "blunt.cast",
+          "impact": "blunt.impact",
+          "gain_db": 0,
+          "pitch_scale": 1.0,
+          "stage_priorities": {
+            "tell": 4,
+            "release": 1,
+            "impact": 1
+          },
+          "design_basis": "近身重击/砸击动作"
+        }
+      }
+    }
+  },
+  "enemy_action_aliases": {
+    "command_fallback_swipe": {
+      "family": "blade",
+      "tell": "blade.tell",
+      "release": "blade.cast",
+      "impact": "blade.impact",
+      "stage_priorities": {
+        "tell": 1,
+        "release": 1,
+        "impact": 1
+      },
+      "design_basis": "enemy_system.gd无跟随者时把command降为近身swipe，此运行时动作不在静态87条表中，按fallback近战挥击绑定。"
+    }
+  },
+  "boss_events": {
+    "B01": {
+      "0": {
+        "phase": "boss_general.phase",
+        "defeated": "boss_general.defeat",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "碑甲鬼校以重甲军将身份出现; 独立身份阶段/终结提示"
+      }
+    },
+    "B02": {
+      "0": {
+        "phase": "boss_general.phase",
+        "defeated": "boss_general.defeat",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "守街尸将是近战军将身份; 独立身份阶段/终结提示"
+      }
+    },
+    "B03": {
+      "0": {
+        "phase": "boss_demon.phase",
+        "defeated": "boss_demon.defeat",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "三面裂旗鬼魁以异相首领身份出现; 独立身份阶段/终结提示"
+      }
+    },
+    "B04": {
+      "0": {
+        "phase": "boss_cavalry.phase",
+        "defeated": "boss_cavalry.defeat",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "轭骨牛督是押粮兽骑重击首领; 独立身份阶段/终结提示"
+      }
+    },
+    "B05": {
+      "0": {
+        "phase": "boss_demon.phase",
+        "defeated": "boss_demon.defeat",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "冥灯术士以灯法异相首领身份出现; 独立身份阶段/终结提示"
+      }
+    },
+    "B06": {
+      "0": {
+        "phase": "boss_demon.phase",
+        "defeated": "boss_demon.defeat",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "祠脊石兽是祭祠异兽首领; 独立身份阶段/终结提示"
+      }
+    },
+    "B07": {
+      "0": {
+        "phase": "boss_general.phase",
+        "defeated": "boss_general.defeat",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "悬印司令以军令统帅身份出现; 独立身份阶段/终结提示"
+      }
+    },
+    "B08": {
+      "0": {
+        "phase": "boss_cavalry.phase",
+        "defeated": "boss_cavalry.defeat",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "闸齿鳄首以冲击型水门首领身份出现; 独立身份阶段/终结提示"
+      }
+    },
+    "B09": {
+      "0": {
+        "phase": "boss_demon.phase",
+        "defeated": "boss_demon.defeat",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "炉腹铁鬼以熔炉异相重甲首领身份出现; 独立身份阶段/终结提示"
+      }
+    },
+    "B10": {
+      "0": {
+        "phase": "boss_cavalry.phase",
+        "defeated": "boss_cavalry.defeat",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "封库双禁卫以双重装禁卫身份出现; 独立身份阶段/终结提示"
+      }
+    },
+    "B11": {
+      "0": {
+        "phase": "boss_hunter.phase",
+        "defeated": "boss_hunter.defeat",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "伞眼灯灵以巡城远程灯师身份出现; 独立身份阶段/终结提示"
+      }
+    },
+    "B12": {
+      "0": {
+        "phase": "boss_demon.phase",
+        "defeated": "boss_demon.defeat",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "多手幡灯大巫以瘟灯异相首领身份出现; 独立身份阶段/终结提示"
+      }
+    },
+    "B13": {
+      "0": {
+        "phase": "boss_cavalry.phase",
+        "defeated": "boss_cavalry.defeat",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "石鸱裂垛以城垣冲击首领身份出现; 独立身份阶段/终结提示"
+      }
+    },
+    "B14": {
+      "0": {
+        "phase": "boss_general.phase",
+        "defeated": "boss_general.defeat",
+        "gain_db": 0,
+        "pitch_scale": 1.0,
+        "design_basis": "引舟鬼帅以渡口军令统帅身份出现; 独立身份阶段/终结提示"
+      }
+    },
+    "B15": {
+      "0": {
+        "phase": "boss_hunter.phase",
+        "defeated": "boss_hunter.defeat",
+        "gain_db": 1,
+        "pitch_scale": 1.0,
+        "design_basis": "曹休及鬼猎兽相保持猎手身份声纹; 独立身份阶段/终结提示"
+      },
+      "1": {
+        "phase": "boss_hunter.phase",
+        "defeated": "boss_hunter.defeat",
+        "gain_db": 3,
+        "pitch_scale": 0.86,
+        "design_basis": "曹休及鬼猎兽相保持猎手身份声纹；阶段1相较人形更低沉、更强; 独立身份阶段/终结提示"
+      }
+    },
+    "B16": {
+      "0": {
+        "phase": "boss_cavalry.phase",
+        "defeated": "boss_cavalry.defeat",
+        "gain_db": 1,
+        "pitch_scale": 1.0,
+        "design_basis": "曹纯及虎豹甲骑巨相保持骑军身份声纹; 独立身份阶段/终结提示"
+      },
+      "1": {
+        "phase": "boss_cavalry.phase",
+        "defeated": "boss_cavalry.defeat",
+        "gain_db": 3,
+        "pitch_scale": 0.86,
+        "design_basis": "曹纯及虎豹甲骑巨相保持骑军身份声纹；阶段1相较人形更低沉、更强; 独立身份阶段/终结提示"
+      }
+    },
+    "B17": {
+      "0": {
+        "phase": "boss_general.phase",
+        "defeated": "boss_general.defeat",
+        "gain_db": 1,
+        "pitch_scale": 1.0,
+        "design_basis": "张辽及夜叉裂阵将相保持将军身份声纹; 独立身份阶段/终结提示"
+      },
+      "1": {
+        "phase": "boss_general.phase",
+        "defeated": "boss_general.defeat",
+        "gain_db": 3,
+        "pitch_scale": 0.86,
+        "design_basis": "张辽及夜叉裂阵将相保持将军身份声纹；阶段1相较人形更低沉、更强; 独立身份阶段/终结提示"
+      }
+    },
+    "B18": {
+      "0": {
+        "phase": "boss_demon.phase",
+        "defeated": "boss_demon.defeat",
+        "gain_db": 1,
+        "pitch_scale": 1.0,
+        "design_basis": "吕布及四臂鬼神相保持鬼神身份声纹; 独立身份阶段/终结提示"
+      },
+      "1": {
+        "phase": "boss_demon.phase",
+        "defeated": "boss_demon.defeat",
+        "gain_db": 3,
+        "pitch_scale": 0.86,
+        "design_basis": "吕布及四臂鬼神相保持鬼神身份声纹；阶段1相较人形更低沉、更强; 独立身份阶段/终结提示"
+      }
+    }
+  },
+  "trait_bindings": {
+    "F04": {
+      "trait": "refund",
+      "family": "buff",
+      "cue": "",
+      "silence_reason": "被动通过原技能/实际伤害事件触发；独立trait仅改标记、资源、回响或结算，不增加周期性音效，避免重复播报。"
+    },
+    "F05": {
+      "trait": "curse",
+      "family": "curse",
+      "cue": "",
+      "silence_reason": "被动通过原技能/实际伤害事件触发；独立trait仅改标记、资源、回响或结算，不增加周期性音效，避免重复播报。"
+    },
+    "F06": {
+      "trait": "ammo",
+      "family": "buff",
+      "cue": "",
+      "silence_reason": "被动通过原技能/实际伤害事件触发；独立trait仅改标记、资源、回响或结算，不增加周期性音效，避免重复播报。"
+    },
+    "F10": {
+      "trait": "relay",
+      "family": "buff",
+      "cue": "",
+      "silence_reason": "被动通过原技能/实际伤害事件触发；独立trait仅改标记、资源、回响或结算，不增加周期性音效，避免重复播报。"
+    },
+    "F11": {
+      "trait": "echo",
+      "family": "buff",
+      "cue": "",
+      "silence_reason": "被动通过原技能/实际伤害事件触发；独立trait仅改标记、资源、回响或结算，不增加周期性音效，避免重复播报。"
+    },
+    "N01": {
+      "trait": "mark",
+      "family": "buff",
+      "cue": "",
+      "silence_reason": "被动通过原技能/实际伤害事件触发；独立trait仅改标记、资源、回响或结算，不增加周期性音效，避免重复播报。"
+    },
+    "N07": {
+      "trait": "mark",
+      "family": "buff",
+      "cue": "",
+      "silence_reason": "被动通过原技能/实际伤害事件触发；独立trait仅改标记、资源、回响或结算，不增加周期性音效，避免重复播报。"
+    },
+    "N09": {
+      "trait": "mark",
+      "family": "buff",
+      "cue": "",
+      "silence_reason": "被动通过原技能/实际伤害事件触发；独立trait仅改标记、资源、回响或结算，不增加周期性音效，避免重复播报。"
+    },
+    "N14": {
+      "trait": "curse",
+      "family": "curse",
+      "cue": "",
+      "silence_reason": "被动通过原技能/实际伤害事件触发；独立trait仅改标记、资源、回响或结算，不增加周期性音效，避免重复播报。"
+    }
+  },
+  "ability_aliases": {
+    "curse_dot": {
+      "family": "curse",
+      "cast": "",
+      "cast_silence_reason": "持续咒伤没有独立施放动作。",
+      "impact": "",
+      "impact_silence_reason": "周期伤害由原施加技能的短命中音覆盖；不为每tick增添噪声。",
+      "design_basis": "combat_mechanics._queue_dot显式标记curse_dot；profile仅记录其身份，周期tick静音以避免重复提示。"
+    },
+    "guard_counter": {
+      "family": "shield",
+      "cast": "",
+      "cast_silence_reason": "防御能力的被动反击由guard事件反应触发，没有独立施放事件。",
+      "impact": "blunt.impact",
+      "design_basis": "combat_mechanics guard处理在命中队列显式写ability=guard_counter；使用盾挡后的钝击反击音",
+      "gain_db": -2
+    }
+  },
+  "global_cues": {
+    "hurt": "feedback.hurt",
+    "guard": "feedback.guard",
+    "death": "feedback.death",
+    "pickup": "feedback.pickup",
+    "level": "feedback.level",
+    "elite": "feedback.elite"
+  }
+}

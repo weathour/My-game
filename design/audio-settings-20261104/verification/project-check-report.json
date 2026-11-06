@@ -1,0 +1,418 @@
+{
+  "status": "PASS",
+  "utc": "2026-11-04T04:35:39.319493+00:00",
+  "result": "PROJECT_CHECK_OK",
+  "godot_version": "4.6.2.stable.official.71f334935",
+  "full_log": "design/audio-settings-20261104/verification/full-project-check.log",
+  "full_log_sha256": "59613961f27095cfda91cb8e449dc7cf33f6bf47f2cf4f264a77ad3f386f3352",
+  "total_smokes": 53,
+  "source_smokes": 49,
+  "initial_PCK_smokes": 4,
+  "full_run_used_pre_cleanup_pack": true,
+  "final_clean_pack_followup": {
+    "reason": "Exclude generated builds/ from exports and guard the artifact boundary; runtime code unchanged.",
+    "report": "design/audio-settings-20261104/verification/package-report.json",
+    "preset_sha256": "01b46ab9c4cefe671437a495dcf2316acb8dae3bf65204062db3b5e12bcb70a3",
+    "PCK_smokes": 4,
+    "audio_settings_checks": 314,
+    "namespace_audit": "PASS",
+    "pck_sha256": "d11d57a7e07ae2df273053ca79a393f6318b39b18698d86403d611cf995952c4"
+  },
+  "new_audio_settings_source_checks": 300,
+  "targeted_audio_settings_with_captures": 314,
+  "actual_event_routing": {
+    "checks": 25,
+    "failures": 0,
+    "script": "design/audio-settings-20261104/verification/event-routing.gd",
+    "script_sha256": "1f16100350d50ed3282aca9d1e4b2f7eb413f1b9bfc2bcd43f51311c0af5a64e",
+    "log": "design/audio-settings-20261104/verification/event-routing.log",
+    "log_sha256": "bb769377d30b4da05e2a48e21455a395faf51c7255358a9966f9f131068c9bb9"
+  },
+  "existing_music_asset_hashes_unchanged": 12,
+  "current_runtime_sources": {
+    "scripts/shared/settings.gd": "4bf117294b26979c7d8ec12082f29fcffee270028a9d0f46f3915df582660803",
+    "scripts/audio/combat_audio.gd": "2909f66f234968633928778cbe07c475a49856e0b9dd22b9ca4b82cde1bfb24b",
+    "scripts/audio/music_player.gd": "14025c257ce5e962af8e01f4eb015797a38dc2ef8120190db95927b2a9378405",
+    "scripts/ui/chronicle/combat_feedback.gd": "16bd5fbdfc2ec60ac22c521be4b25360b30d245aa4e2660fc1bdb14da961e08c",
+    "scripts/ui/chronicle/chronicle_shell.gd": "9290842a7f66f22f3387cb57371f862737d14eaedd45d718e2bf622bb4022c3c",
+    "scripts/ui/chronicle/battle_view.gd": "355502d0b28c3b3acc9148c9a17be4bb13a6e16a37abcd2b87186d9dfb7d5b58",
+    "scripts/ui/chronicle/audio_settings_panel.gd": "96022068aff74583ca9a25b832b4f176087190c494f433e419d07d92006ec47f",
+    "scripts/ui/chronicle/chronicle_pages.gd": "e863976a5727a6477da771705330052a23106ad35effd863aef62e1d6c03382b"
+  },
+  "source_smoke_results": [
+    {
+      "script": "scripts/tests/baimen_enemy_runtime_smoke.gd",
+      "log": "design/audio-settings-20261104/verification/godot-checks/baimen_enemy_runtime_smoke.log",
+      "log_sha256": "6e2986cde6e1b2c022292ddef24fc576c8a19de572b65589fdd2415a3ba6a207",
+      "result": "BAIMEN_ENEMY_RUNTIME_SMOKE PASS checks=743 failures=0",
+      "script_sha256": "83a720ea582a911f6a2d8b5ab4c4adbd7bea5c7a3cfbab3a450f758a3b8d45b2"
+    },
+    {
+      "script": "scripts/tests/baimen_women_combat_art_smoke.gd",
+      "log": "design/audio-settings-20261104/verification/godot-checks/baimen_women_combat_art_smoke.log",
+      "log_sha256": "646534b58adfc9313717be686e2d2e8dee305d9a09ec6657978a8085258df9a9",
+      "result": "BAIMEN_WOMEN_COMBAT_ART_SMOKE PASS checks=266 failures=0",
+      "script_sha256": "eea6d59b814dd7a17fd5107fd3db6a5e846948dbf7ddb58cb922b2dd667039ea"
+    },
+    {
+      "script": "scripts/tests/baimen_women_portraits_smoke.gd",
+      "log": "design/audio-settings-20261104/verification/godot-checks/baimen_women_portraits_smoke.log",
+      "log_sha256": "6472c4e2426574abe0ef8061bb0884d5d96544d31c095f621f0b00f5f95eaed6",
+      "result": "BAIMEN_WOMEN_PORTRAITS_SMOKE PASS checks=525 failures=0",
+      "script_sha256": "d6d73eef067cc7f5b2abcdeacdd86d0e049c1a0b023c897a940f001bf0d8d3e5"
+    },
+    {
+      "script": "scripts/tests/boss_combo_timing_smoke.gd",
+      "log": "design/audio-settings-20261104/verification/godot-checks/boss_combo_timing_smoke.log",
+      "log_sha256": "7db6254f1907ea07a1d10489b3671acaf75a184518456ba3cda1d9b54d15b45b",
+      "result": "BOSS_COMBO_TIMING_SMOKE PASS checks=41 failures=0",
+      "script_sha256": "08c410f92fdb31c1f87475e7e352bec5432760f9d288a7eb652ea25ef8863844"
+    },
+    {
+      "script": "scripts/tests/boss_forms_smoke.gd",
+      "log": "design/audio-settings-20261104/verification/godot-checks/boss_forms_smoke.log",
+      "log_sha256": "51247d6284ec4fc4f7366e20931d34ca965366908d7ab729104cac73830b3b3e",
+      "result": "BOSS_FORMS_SMOKE PASS checks=672 failures=0 authored_moves=30",
+      "script_sha256": "1edea44a6f2ed4a20a33f2d05af2e31e549532f63deaefa47dbace08ddd496f0"
+    },
+    {
+      "script": "scripts/tests/boss_friendly_art_smoke.gd",
+      "log": "design/audio-settings-20261104/verification/godot-checks/boss_friendly_art_smoke.log",
+      "log_sha256": "97c3180872ba707da4b4aa7f86aecf2499f0c0d44c4910de22bbabc15f2adabb",
+      "result": "BOSS_FRIENDLY_ART_SMOKE PASS checks=146 failures=0 portrait_capture=unavailable",
+      "script_sha256": "39aeb561620bbe1482404b1165909988f603af8b7d25c1402014ea056383604f"
+    },
+    {
+      "script": "scripts/tests/chronicle_audio_settings_render_smoke.gd",
+      "log": "design/audio-settings-20261104/verification/godot-checks/chronicle_audio_settings_render_smoke.log",
+      "log_sha256": "450544211f4efa034bec81931cccf97f548573d5fa7bad6813bf8dee44e31b83",
+      "result": "CHRONICLE_AUDIO_SETTINGS_RENDER_SMOKE PASS checks=300 failures=0",
+      "script_sha256": "b79efa82c78bfc7f7b4fbf9070488f2c0a2b2aecdc3ca9f7a0514809e73b2ef6"
+    },
+    {
+      "script": "scripts/tests/chronicle_authored_effects_smoke.gd",
+      "log": "design/audio-settings-20261104/verification/godot-checks/chronicle_authored_effects_smoke.log",
+      "log_sha256": "53e196869708d490aabf3bac3edc36f98b9dd66590d261f4fbfb3e75ea9e9dd3",
+      "result": "CHRONICLE_AUTHORED_EFFECTS_SMOKE PASS checks=36 failures=0",
+      "script_sha256": "b55270456a11204bb0fb7e98673b4b3d1c142627a55f68f4253128705398b04e"
+    },
+    {
+      "script": "scripts/tests/chronicle_battle_ground_smoke.gd",
+      "log": "design/audio-settings-20261104/verification/godot-checks/chronicle_battle_ground_smoke.log",
+      "log_sha256": "6ad8d0616112a94d4e17ed06efcd552a0da41e7628af99633941ff6c6ed90239",
+      "result": "CHRONICLE_BATTLE_GROUND_SMOKE PASS checks=191 failures=0",
+      "script_sha256": "31ed9fb32f33d9da34921b90e3cc785627b0f3867b49fa14e31171a0246e372c"
+    },
+    {
+      "script": "scripts/tests/chronicle_battle_scale_smoke.gd",
+      "log": "design/audio-settings-20261104/verification/godot-checks/chronicle_battle_scale_smoke.log",
+      "log_sha256": "e58d3545db29612c5626a6ad57cbcf37da91925db89cb33d4719a25de1eb8c92",
+      "result": "CHRONICLE_BATTLE_SCALE_SMOKE PASS checks=560 failures=0",
+      "script_sha256": "eb03efc6bbd7b0e3fd1f2ba238aae8d529a08f66374a5a6fd2f8e6e1684b4990"
+    },
+    {
+      "script": "scripts/tests/chronicle_boss_camera_smoke.gd",
+      "log": "design/audio-settings-20261104/verification/godot-checks/chronicle_boss_camera_smoke.log",
+      "log_sha256": "f6d95e91a34d3cd1fb38a79eeefbf7a03ddd9f15b2293a2d6a0f57a5a8552eef",
+      "result": "CHRONICLE_BOSS_CAMERA_SMOKE PASS checks=165 failures=0",
+      "script_sha256": "95dd39e6e3b2bb3c7b4357a2d5b8753df9d6ae555c8c52ee1652b052f9577c0f"
+    },
+    {
+      "script": "scripts/tests/chronicle_boss_flow_smoke.gd",
+      "log": "design/audio-settings-20261104/verification/godot-checks/chronicle_boss_flow_smoke.log",
+      "log_sha256": "1f3ac022a81b003abce8719c8a118fd60fda53572df43588b2136c959d1900c4",
+      "result": "CHRONICLE_BOSS_FLOW_SMOKE PASS checks=140 failures=0",
+      "script_sha256": "25d32eedf06cd0b84e92d023253fd9395be86661b381b57e9e90948ac1d5e4b5"
+    },
+    {
+      "script": "scripts/tests/chronicle_boss_sound_smoke.gd",
+      "log": "design/audio-settings-20261104/verification/godot-checks/chronicle_boss_sound_smoke.log",
+      "log_sha256": "c4ca2756c7c0f69173556c80b8c3848613edf9075503ae43e126189d6ba81990",
+      "result": "CHRONICLE_BOSS_SOUND_SMOKE PASS checks=23 failures=0",
+      "script_sha256": "0c694d5ffdfdfb6bfb66f3f7bdb4df2bb846a37f50e5a2c9026e19069e47aa31"
+    },
+    {
+      "script": "scripts/tests/chronicle_chapter_two_smoke.gd",
+      "log": "design/audio-settings-20261104/verification/godot-checks/chronicle_chapter_two_smoke.log",
+      "log_sha256": "8c5a6832ff6c3a910f789cf2cfa48f28d5e941515232af5c184b5bd1aa9f9ca1",
+      "result": "CHRONICLE_CHAPTER_TWO_SMOKE PASS checks=189 failures=0",
+      "script_sha256": "a374daac8fd5c79342aee1da766c0bfbd6f870b3e15cf95e22369dfc3a1a2e9d"
+    },
+    {
+      "script": "scripts/tests/chronicle_character_campaign_smoke.gd",
+      "log": "design/audio-settings-20261104/verification/godot-checks/chronicle_character_campaign_smoke.log",
+      "log_sha256": "20d3e782d39e8d7c63173bdce636a588661fa193768cd6d94f908d0fb21b6e1a",
+      "result": "CHRONICLE_CHARACTER_CAMPAIGN_SMOKE PASS checks=196 failures=0",
+      "script_sha256": "7bc9695683bad7ed847ae691167f73847542cdbb98dd76bd8253f4db42f28f07"
+    },
+    {
+      "script": "scripts/tests/chronicle_character_mechanics_smoke.gd",
+      "log": "design/audio-settings-20261104/verification/godot-checks/chronicle_character_mechanics_smoke.log",
+      "log_sha256": "1d6a2ba8cf44c282a15f7efb74bc0101e85e80a6c4c397850ff63e67d9ea55e7",
+      "result": "CHRONICLE_CHARACTER_MECHANICS_SMOKE PASS checks=126 failures=0",
+      "script_sha256": "f629a69dcd58b3bb373fc1f393bbec16b8f737b591f2acbfd14beff0ea055c94"
+    },
+    {
+      "script": "scripts/tests/chronicle_character_panels_smoke.gd",
+      "log": "design/audio-settings-20261104/verification/godot-checks/chronicle_character_panels_smoke.log",
+      "log_sha256": "4aec0f04c34f296f5dedeed97771f3c9711e673167d38eb5a6c81c72f87ff7bb",
+      "result": "CHRONICLE_CHARACTER_PANELS_SMOKE PASS checks=362 failures=0",
+      "script_sha256": "1ca2eee5ee1aec38716e5f3844fae71285c4d17e3e0c950cc2e304db62dc8c60"
+    },
+    {
+      "script": "scripts/tests/chronicle_character_profiles_smoke.gd",
+      "log": "design/audio-settings-20261104/verification/godot-checks/chronicle_character_profiles_smoke.log",
+      "log_sha256": "9a59b1881276b1daddcd848738e8687b2a715878e29b0d9ebbb0f54348073f89",
+      "result": "CHRONICLE_CHARACTER_PROFILES_SMOKE PASS checks=121 failures=0",
+      "script_sha256": "3fd27773e4a1ad38022c76d3d7cbda6e7c2d55fcbe8aecc07df9760b4fe93c63"
+    },
+    {
+      "script": "scripts/tests/chronicle_combat_feedback_events_smoke.gd",
+      "log": "design/audio-settings-20261104/verification/godot-checks/chronicle_combat_feedback_events_smoke.log",
+      "log_sha256": "d66776256fc235108ae5b4912660e07980d4ed554b05a344de51aced3697768a",
+      "result": "CHRONICLE_COMBAT_FEEDBACK_EVENTS_SMOKE PASS checks=59 failures=0",
+      "script_sha256": "1cca272161a0c367498308ee6dd6e1c37a8e34e28d1d92233531dd8ecffdd305"
+    },
+    {
+      "script": "scripts/tests/chronicle_combat_feedback_smoke.gd",
+      "log": "design/audio-settings-20261104/verification/godot-checks/chronicle_combat_feedback_smoke.log",
+      "log_sha256": "dcb4020a553af89a5154cc7b9f27fb6f04dcc0b0d85de994ab9bd604905ee842",
+      "result": "CHRONICLE_COMBAT_FEEDBACK_SMOKE PASS checks=332 failures=0",
+      "script_sha256": "907d5b6e1ee32cf8dea3d8a67d3a5a6080e8973a568257c0ed9235e5a322edf3"
+    },
+    {
+      "script": "scripts/tests/chronicle_combat_smoke.gd",
+      "log": "design/audio-settings-20261104/verification/godot-checks/chronicle_combat_smoke.log",
+      "log_sha256": "46789966af9ffec6ea26d4cd727ec9167a93d903032bbea94b24c6b4fc56aaf5",
+      "result": "CHRONICLE_COMBAT_SMOKE PASS checks=77 failures=0",
+      "script_sha256": "c632dda9a24b4010395e1fd21e3f6780edcf8fe6a710ca7157f86fbd27e4f0f3"
+    },
+    {
+      "script": "scripts/tests/chronicle_context_navigation_smoke.gd",
+      "log": "design/audio-settings-20261104/verification/godot-checks/chronicle_context_navigation_smoke.log",
+      "log_sha256": "55fa5ec68b43faf4415cbd03d760769c39d2fc3745b2f8935aba869ff41d3a17",
+      "result": "CHRONICLE_CONTEXT_NAVIGATION_SMOKE PASS checks=223 failures=0",
+      "script_sha256": "1529b24bb6eba8a0a08938b15a354403317484da9b25d534da7a506807efcfa9"
+    },
+    {
+      "script": "scripts/tests/chronicle_danmaku_smoke.gd",
+      "log": "design/audio-settings-20261104/verification/godot-checks/chronicle_danmaku_smoke.log",
+      "log_sha256": "6dc72846ae45a1e2310b426d1f106d00533611692e0b104df3a79814c0e5440f",
+      "result": "CHRONICLE_DANMAKU_SMOKE PASS checks=279 failures=0",
+      "script_sha256": "7ea399742d7e564781ae7a43fc1fa9cfdb533b9f470fd7dc07189cdaa64aac58"
+    },
+    {
+      "script": "scripts/tests/chronicle_enemy_campaign_smoke.gd",
+      "log": "design/audio-settings-20261104/verification/godot-checks/chronicle_enemy_campaign_smoke.log",
+      "log_sha256": "95a418b8e10b5f2d1ec63004929bde403656453f1742a2b9e904edd0b6c8bf54",
+      "result": "CHRONICLE_ENEMY_CAMPAIGN_SMOKE PASS checks=454 failures=0 routes=2",
+      "script_sha256": "b0caa8a0a4c508ba092b5899d8469b15595c7e2fe1eeaceca6762fa4573166ee"
+    },
+    {
+      "script": "scripts/tests/chronicle_enemy_codex_smoke.gd",
+      "log": "design/audio-settings-20261104/verification/godot-checks/chronicle_enemy_codex_smoke.log",
+      "log_sha256": "0f9439503aefe500f93e6a8b6d4c4447cbd56836600e080c25906c360e6521f9",
+      "result": "CHRONICLE_ENEMY_CODEX_SMOKE PASS checks=704 failures=0",
+      "script_sha256": "28f554860c2088562969daed2938ecbc0b963f0af84b9792a30de08f6cb6afb1"
+    },
+    {
+      "script": "scripts/tests/chronicle_enemy_content_smoke.gd",
+      "log": "design/audio-settings-20261104/verification/godot-checks/chronicle_enemy_content_smoke.log",
+      "log_sha256": "4f95a56d76c5473bf30dede7145033029f6ccfb21d7fba8777f45d839d4c8c57",
+      "result": "CHRONICLE_ENEMY_CONTENT_SMOKE PASS checks=2857 failures=0 paths=64 transaction_routes=4",
+      "script_sha256": "800a9cc28dddda81e48d841810860d9b1352dbbc6b2cbe94723bd98a49392270"
+    },
+    {
+      "script": "scripts/tests/chronicle_enemy_effects_smoke.gd",
+      "log": "design/audio-settings-20261104/verification/godot-checks/chronicle_enemy_effects_smoke.log",
+      "log_sha256": "ac4fc3ab6186f232e44035505987fb1b34c0f99ae8fd5f6ecc94728e101787e2",
+      "result": "CHRONICLE_ENEMY_EFFECTS_SMOKE PASS checks=73 failures=0",
+      "script_sha256": "ac2f0263d54a94cddf561ade5d65f7b95e4dddf79d177f94c57dfaf821b88c71"
+    },
+    {
+      "script": "scripts/tests/chronicle_enemy_presentation_smoke.gd",
+      "log": "design/audio-settings-20261104/verification/godot-checks/chronicle_enemy_presentation_smoke.log",
+      "log_sha256": "a06f4f665f2152af5e0412095922a2f8cc95ea1432ca2dba037ef0455f039c2c",
+      "result": "CHRONICLE_ENEMY_PRESENTATION_SMOKE PASS checks=509 failures=0",
+      "script_sha256": "ede6f87637bb0081633f0a6c065b33fce40b3a672d3792cd1b47dc1ab5407b08"
+    },
+    {
+      "script": "scripts/tests/chronicle_enemy_sessions_smoke.gd",
+      "log": "design/audio-settings-20261104/verification/godot-checks/chronicle_enemy_sessions_smoke.log",
+      "log_sha256": "61289a4abaf35aa47c3b89c933882ceed3c6860b6ef08178da86a3fd9ff08002",
+      "result": "CHRONICLE_ENEMY_SESSIONS_SMOKE PASS checks=93409 failures=0 sessions=18",
+      "script_sha256": "fb0015450df8aa061bc3dcf9b387454647bd8fef47f58295ed19fde20f321bcf"
+    },
+    {
+      "script": "scripts/tests/chronicle_feedback_latency_smoke.gd",
+      "log": "design/audio-settings-20261104/verification/godot-checks/chronicle_feedback_latency_smoke.log",
+      "log_sha256": "c7bd5d1835c72d3941409bbf8288500c2ba3c1e78cad151ca0b383126ea4eb16",
+      "result": "CHRONICLE_FEEDBACK_LATENCY_SMOKE PASS checks=20 failures=0",
+      "script_sha256": "0412522e501eb83c523c5538b73575f331142554bef9e09b3984eeca35f029d7"
+    },
+    {
+      "script": "scripts/tests/chronicle_home_menu_render_smoke.gd",
+      "log": "design/audio-settings-20261104/verification/godot-checks/chronicle_home_menu_render_smoke.log",
+      "log_sha256": "805fce2d6a166a8308d961868866429ab3031e5cb2837a65dfb765c1e7d6bfed",
+      "result": "CHRONICLE_HOME_MENU_RENDER_SMOKE PASS checks=444 failures=0",
+      "script_sha256": "3123321c0c86dfe315c0fd6de0facf341b6fe57a43cff6e936b543f796db7ca4"
+    },
+    {
+      "script": "scripts/tests/chronicle_mechanic_hud_smoke.gd",
+      "log": "design/audio-settings-20261104/verification/godot-checks/chronicle_mechanic_hud_smoke.log",
+      "log_sha256": "d81d85b36bf6cf128acf5d7ad8eb912146705bd5bc087da5a3d14ae7b3841e0f",
+      "result": "CHRONICLE_MECHANIC_HUD_SMOKE PASS checks=322 failures=0",
+      "script_sha256": "f88b0d482f5c3f624c6ec7f7f6042d42d6be9cebce921a1c774dc82702c1d2c6"
+    },
+    {
+      "script": "scripts/tests/chronicle_melee_reach_smoke.gd",
+      "log": "design/audio-settings-20261104/verification/godot-checks/chronicle_melee_reach_smoke.log",
+      "log_sha256": "898a1e40caf38e4953d15d072675a31a8aefa44f8cd2b69b8b9dbd1833afc759",
+      "result": "CHRONICLE_MELEE_REACH_SMOKE PASS checks=154 failures=0",
+      "script_sha256": "a97c417126cd5e96284120538b5b2818bab20956810c58ef533ef584c0380714"
+    },
+    {
+      "script": "scripts/tests/chronicle_music_playback_smoke.gd",
+      "log": "design/audio-settings-20261104/verification/godot-checks/chronicle_music_playback_smoke.log",
+      "log_sha256": "7c63e4834da883f929a59dc4a9e334b092815ca06e8ff6b12608c1d6ad302183",
+      "result": "CHRONICLE_MUSIC_PLAYBACK_SMOKE PASS checks=65 failures=0 display=X11",
+      "script_sha256": "fa3e5d47ac658ac4da67c0930ed08c208e702608eeb2505eb2918f1390e3d8dc"
+    },
+    {
+      "script": "scripts/tests/chronicle_music_smoke.gd",
+      "log": "design/audio-settings-20261104/verification/godot-checks/chronicle_music_smoke.log",
+      "log_sha256": "0064c27642dffd2389688492495af03480b0cae33af3fc85507892afc527e993",
+      "result": "CHRONICLE_MUSIC_SMOKE PASS checks=2387 failures=0",
+      "script_sha256": "a59607808b9e00208cf9a8cba204ca75f59c55becc457869151975253a959879"
+    },
+    {
+      "script": "scripts/tests/chronicle_party_drag_smoke.gd",
+      "log": "design/audio-settings-20261104/verification/godot-checks/chronicle_party_drag_smoke.log",
+      "log_sha256": "9bde423bbd0a5ab2a056e7f05e78457e062b6a90464448df98bcae1b07f2af72",
+      "result": "CHRONICLE_PARTY_DRAG_SMOKE PASS checks=143 failures=0",
+      "script_sha256": "61c2e60f7e24e30a35cb06a05f06a63c0eeaa1780534619f9269ebc71b2e0899"
+    },
+    {
+      "script": "scripts/tests/chronicle_party_summary_smoke.gd",
+      "log": "design/audio-settings-20261104/verification/godot-checks/chronicle_party_summary_smoke.log",
+      "log_sha256": "9dcaf6eddfad29e8032f83f48c82b0f42a63a3f1e63795237cb5dc1e55a666f1",
+      "result": "CHRONICLE_PARTY_SUMMARY_SMOKE PASS checks=155 failures=0",
+      "script_sha256": "494976c46235b7cab88c9c64146cc6137dc9d98e08d169a0a017ec9fe50f306b"
+    },
+    {
+      "script": "scripts/tests/chronicle_playable_ui_smoke.gd",
+      "log": "design/audio-settings-20261104/verification/godot-checks/chronicle_playable_ui_smoke.log",
+      "log_sha256": "f4c26efab5c3ce0921fe82262f97a43b69dee796a69c4200389b84cbe5fda6f6",
+      "result": "CHRONICLE_PLAYABLE_UI_SMOKE PASS failures=0",
+      "script_sha256": "c514e46794686d181275a83b184045337c5abf75b434d3c9e6402b23631663e3"
+    },
+    {
+      "script": "scripts/tests/chronicle_reflow_visual_smoke.gd",
+      "log": "design/audio-settings-20261104/verification/godot-checks/chronicle_reflow_visual_smoke.log",
+      "log_sha256": "42a6d351ea1ff4939ab440f75ceae977601805721bf55bfec70c5e2d9aea1dd1",
+      "result": "CHRONICLE_REFLOW_VISUAL_SMOKE PASS",
+      "script_sha256": "e4c398b9dda097792619fa7d5a6986fa8329b070655225b5b669cc80b623ef46"
+    },
+    {
+      "script": "scripts/tests/chronicle_roster_content_smoke.gd",
+      "log": "design/audio-settings-20261104/verification/godot-checks/chronicle_roster_content_smoke.log",
+      "log_sha256": "526478e66deb2e434c6f961488afa5431ff25ce730e43359a3e54e6c97bac70f",
+      "result": "CHRONICLE_ROSTER_CONTENT_SMOKE PASS checks=1164 failures=0",
+      "script_sha256": "0a3b8bc6713450d2bf7be83da2d1113c202c0c9ddde71a6cbc6a6ef2518fa7bc"
+    },
+    {
+      "script": "scripts/tests/chronicle_route_map_smoke.gd",
+      "log": "design/audio-settings-20261104/verification/godot-checks/chronicle_route_map_smoke.log",
+      "log_sha256": "44c497df7cd766f143ed055202c2a586b971f6f5d7a3fcfb77a24af273525d49",
+      "result": "CHRONICLE_ROUTE_MAP_SMOKE PASS checks=160 failures=0",
+      "script_sha256": "348fd0c51432934a866b5f885c257aa34d20c3e97c02a9a0cbf9e6e7a7c938af"
+    },
+    {
+      "script": "scripts/tests/chronicle_skill_audio_smoke.gd",
+      "log": "design/audio-settings-20261104/verification/godot-checks/chronicle_skill_audio_smoke.log",
+      "log_sha256": "8646d95d9b6d680493bc17de08a4ead1861c3d544aaf79a2396eb6d2f23365d8",
+      "result": "CHRONICLE_SKILL_AUDIO_SMOKE PASS checks=2249 failures=0",
+      "script_sha256": "c24f89c9ffbe8ce03728d26b4074f5bbf61057444ba3a04eb3def80756652455"
+    },
+    {
+      "script": "scripts/tests/chronicle_story_content_smoke.gd",
+      "log": "design/audio-settings-20261104/verification/godot-checks/chronicle_story_content_smoke.log",
+      "log_sha256": "344b98a5dfec0588a9e336ce51ee74e6ae9e6a1abff1aea15279dac5e3d9dded",
+      "result": "CHRONICLE_STORY_CONTENT_SMOKE PASS checks=320 failures=0",
+      "script_sha256": "f714a153eeb8d818f7afa287baf379dd9c7a4b03d7683b5600fd8442cb21d79c"
+    },
+    {
+      "script": "scripts/tests/chronicle_story_history_smoke.gd",
+      "log": "design/audio-settings-20261104/verification/godot-checks/chronicle_story_history_smoke.log",
+      "log_sha256": "31a66e450e4d8eb7a29f30bcb204d630c4e61ff3a7a73289dd1175c990fdc9ff",
+      "result": "CHRONICLE_STORY_HISTORY_SMOKE PASS checks=105 failures=0",
+      "script_sha256": "b47197103e717c382a51d9a93a322ab4cf070d443b52cf6d47e05192717ec448"
+    },
+    {
+      "script": "scripts/tests/chronicle_story_optional_render_smoke.gd",
+      "log": "design/audio-settings-20261104/verification/godot-checks/chronicle_story_optional_render_smoke.log",
+      "log_sha256": "d23f9d04ff2c7bff7562e8e72af93dc6371fa44c65e4b703e89a128ce1605b09",
+      "result": "CHRONICLE_STORY_OPTIONAL_RENDER_SMOKE PASS checks=79 failures=0",
+      "script_sha256": "5e20e7dd88ffcc1e5783747b5665331ab2f730f356f977bcd32c24f180935886"
+    },
+    {
+      "script": "scripts/tests/chronicle_story_progress_smoke.gd",
+      "log": "design/audio-settings-20261104/verification/godot-checks/chronicle_story_progress_smoke.log",
+      "log_sha256": "b0a26d2d929e1dbc425e071237046cafd1199e1b8dd1b302c1168ef739781be7",
+      "result": "CHRONICLE_STORY_PROGRESS_SMOKE PASS checks=86 failures=0",
+      "script_sha256": "ecb8c0ceb627522afd290c644ef4e645e832c234560b4487e0bac5340fbd7845"
+    },
+    {
+      "script": "scripts/tests/chronicle_story_replay_smoke.gd",
+      "log": "design/audio-settings-20261104/verification/godot-checks/chronicle_story_replay_smoke.log",
+      "log_sha256": "bc44636029b1161f9d48e9e2c8b8bb8e9123bbb04459d23a1ae25b55b352f4ea",
+      "result": "CHRONICLE_STORY_REPLAY_SMOKE PASS checks=162 failures=0",
+      "script_sha256": "6d60d15249c212a8c8712232ac55db60e20c20988dd9e3f94059304dc81e7c90"
+    },
+    {
+      "script": "scripts/tests/chronicle_story_ui_smoke.gd",
+      "log": "design/audio-settings-20261104/verification/godot-checks/chronicle_story_ui_smoke.log",
+      "log_sha256": "a294cd3807654ba5bee75451702a45d852135807580b425a5c2a94857256646e",
+      "result": "CHRONICLE_STORY_UI_SMOKE PASS checks=111 failures=0",
+      "script_sha256": "5228440441e7797c82c33203b1957a073bae09cff6fd553980db3640f6b28153"
+    },
+    {
+      "script": "scripts/tests/jia_combat_art_smoke.gd",
+      "log": "design/audio-settings-20261104/verification/godot-checks/jia_combat_art_smoke.log",
+      "log_sha256": "49475f313cab4245c29914f71c845030d77a59500b6739bf007b5e474f6fdeb2",
+      "result": "JIA_COMBAT_ART_SMOKE PASS checks=26 failures=0",
+      "script_sha256": "c1f664606c7683cd834b52e3b35d412462294a5a3f89f7283adcbbb2385f74d7"
+    }
+  ],
+  "pre_cleanup_pack_results": [
+    {
+      "script": "scripts/tests/chronicle_combat_feedback_pack_smoke.gd",
+      "log": "design/audio-settings-20261104/verification/godot-checks/chronicle_combat_feedback_pack_smoke.log",
+      "log_sha256": "2329ef194119e71edfda6237d8d9cecd13a9f632e24d428fc3bc6e3b1dc7ad0a",
+      "result": "CHRONICLE_COMBAT_FEEDBACK_PACK_SMOKE PASS checks=806 failures=0"
+    },
+    {
+      "script": "scripts/tests/chronicle_enemy_pack_smoke.gd",
+      "log": "design/audio-settings-20261104/verification/godot-checks/chronicle_enemy_pack_smoke.log",
+      "log_sha256": "06ffb1ea8e46ab058aa395c4dc90c8c85df4a0b65d684b0900b45968bab8e556",
+      "result": "ENEMY_PACK_SMOKE PASS checks=742 failures=0"
+    },
+    {
+      "script": "scripts/tests/chronicle_music_pack_smoke.gd",
+      "log": "design/audio-settings-20261104/verification/godot-checks/chronicle_music_pack_smoke.log",
+      "log_sha256": "4a0e8e40ebd3bfc636945c20a999c2c720faf37d61efd46b9bd9722c12caa01a",
+      "result": "CHRONICLE_MUSIC_PACK_SMOKE PASS cues=16 checks=167 failures=0"
+    },
+    {
+      "script": "scripts/tests/chronicle_story_pack_smoke.gd",
+      "log": "design/audio-settings-20261104/verification/godot-checks/chronicle_story_pack_smoke.log",
+      "log_sha256": "edd8b0675bbc487960730c19527d321b126ad8359af062d628bbd1c26bd91083",
+      "result": "CHRONICLE_STORY_PACK_SMOKE PASS checks=97 failures=0"
+    }
+  ],
+  "documentation_checks": {
+    "links": "DOC_LINK_CHECK_OK",
+    "project_config": "PROJECT_CONFIG_CHECK_OK",
+    "git_diff_check": "exit_0"
+  }
+}

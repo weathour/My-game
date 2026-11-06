@@ -1,0 +1,446 @@
+{
+  "status": "failed_preserved",
+  "failure": "chronicle_music_playback_smoke",
+  "global_binary_entry_harness_unchanged": true,
+  "recorded_at": 1793961549.269866,
+  "runner": {
+    "status": "failed",
+    "runner_pid": 336725,
+    "started_at": 1793960666.5944178,
+    "name": "zhang-liao-summons-project-check",
+    "log": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/zhang-liao-summons-project-check.log",
+    "log_directory": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/zhang-liao-summons-project-check",
+    "reuse_manifest": null,
+    "child_pid": 336726,
+    "child_pgid": 336726,
+    "returncode": 1,
+    "finished_at": 1793961470.658677,
+    "elapsed_seconds": 804.0642597675323
+  },
+  "strict_passed_logs": 38,
+  "failed_logs": [
+    "chronicle_music_playback_smoke"
+  ],
+  "unexecuted_entries": [
+    "chronicle_music_smoke",
+    "chronicle_party_drag_smoke",
+    "chronicle_party_summary_smoke",
+    "chronicle_playable_ui_smoke",
+    "chronicle_player_hurtbox_center_smoke",
+    "chronicle_reflow_visual_smoke",
+    "chronicle_roster_content_smoke",
+    "chronicle_route_map_smoke",
+    "chronicle_skill_audio_smoke",
+    "chronicle_skill_cache_smoke",
+    "chronicle_skill_information_render_smoke",
+    "chronicle_skill_information_smoke",
+    "chronicle_skill_presentation_smoke",
+    "chronicle_sprite_bounds_smoke",
+    "chronicle_story_content_smoke",
+    "chronicle_story_history_smoke",
+    "chronicle_story_optional_render_smoke",
+    "chronicle_story_progress_smoke",
+    "chronicle_story_replay_smoke",
+    "chronicle_story_ui_smoke",
+    "jia_campaign_combat_smoke",
+    "jia_campaign_progression_smoke",
+    "jia_combat_art_smoke",
+    "jia_lord_epilogue_smoke",
+    "zhang_liao_summon_render_smoke",
+    "zhang_liao_summon_smoke"
+  ],
+  "logs": [
+    {
+      "name": "baimen_enemy_runtime_smoke",
+      "path": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/zhang-liao-summons-project-check/baimen_enemy_runtime_smoke.log",
+      "sha256": "6e2986cde6e1b2c022292ddef24fc576c8a19de572b65589fdd2415a3ba6a207",
+      "strict_failures": [],
+      "completed_in_stdout": true,
+      "pass_lines": [
+        "BAIMEN_ENEMY_RUNTIME_SMOKE PASS checks=743 failures=0"
+      ]
+    },
+    {
+      "name": "baimen_women_combat_art_smoke",
+      "path": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/zhang-liao-summons-project-check/baimen_women_combat_art_smoke.log",
+      "sha256": "646534b58adfc9313717be686e2d2e8dee305d9a09ec6657978a8085258df9a9",
+      "strict_failures": [],
+      "completed_in_stdout": true,
+      "pass_lines": [
+        "BAIMEN_WOMEN_COMBAT_ART_SMOKE PASS checks=266 failures=0"
+      ]
+    },
+    {
+      "name": "baimen_women_portraits_smoke",
+      "path": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/zhang-liao-summons-project-check/baimen_women_portraits_smoke.log",
+      "sha256": "6472c4e2426574abe0ef8061bb0884d5d96544d31c095f621f0b00f5f95eaed6",
+      "strict_failures": [],
+      "completed_in_stdout": true,
+      "pass_lines": [
+        "BAIMEN_WOMEN_PORTRAITS_SMOKE PASS checks=525 failures=0"
+      ]
+    },
+    {
+      "name": "boss_combo_timing_smoke",
+      "path": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/zhang-liao-summons-project-check/boss_combo_timing_smoke.log",
+      "sha256": "bfea216ba0167181fc0932ac37ea3c3a2335a58f5271a249e496dafb47b8cdad",
+      "strict_failures": [],
+      "completed_in_stdout": true,
+      "pass_lines": [
+        "BOSS_COMBO_TIMING_SMOKE PASS checks=41 failures=0"
+      ]
+    },
+    {
+      "name": "boss_forms_smoke",
+      "path": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/zhang-liao-summons-project-check/boss_forms_smoke.log",
+      "sha256": "51247d6284ec4fc4f7366e20931d34ca965366908d7ab729104cac73830b3b3e",
+      "strict_failures": [],
+      "completed_in_stdout": true,
+      "pass_lines": [
+        "BOSS_FORMS_SMOKE PASS checks=672 failures=0 authored_moves=30"
+      ]
+    },
+    {
+      "name": "boss_friendly_art_smoke",
+      "path": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/zhang-liao-summons-project-check/boss_friendly_art_smoke.log",
+      "sha256": "97c3180872ba707da4b4aa7f86aecf2499f0c0d44c4910de22bbabc15f2adabb",
+      "strict_failures": [],
+      "completed_in_stdout": true,
+      "pass_lines": [
+        "BOSS_FRIENDLY_ART_SMOKE PASS checks=146 failures=0 portrait_capture=unavailable"
+      ]
+    },
+    {
+      "name": "chronicle_audio_settings_render_smoke",
+      "path": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/zhang-liao-summons-project-check/chronicle_audio_settings_render_smoke.log",
+      "sha256": "450544211f4efa034bec81931cccf97f548573d5fa7bad6813bf8dee44e31b83",
+      "strict_failures": [],
+      "completed_in_stdout": true,
+      "pass_lines": [
+        "CHRONICLE_AUDIO_SETTINGS_RENDER_SMOKE PASS checks=300 failures=0"
+      ]
+    },
+    {
+      "name": "chronicle_authored_effects_smoke",
+      "path": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/zhang-liao-summons-project-check/chronicle_authored_effects_smoke.log",
+      "sha256": "53e196869708d490aabf3bac3edc36f98b9dd66590d261f4fbfb3e75ea9e9dd3",
+      "strict_failures": [],
+      "completed_in_stdout": true,
+      "pass_lines": [
+        "CHRONICLE_AUTHORED_EFFECTS_SMOKE PASS checks=36 failures=0"
+      ]
+    },
+    {
+      "name": "chronicle_battle_ground_smoke",
+      "path": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/zhang-liao-summons-project-check/chronicle_battle_ground_smoke.log",
+      "sha256": "6ad8d0616112a94d4e17ed06efcd552a0da41e7628af99633941ff6c6ed90239",
+      "strict_failures": [],
+      "completed_in_stdout": true,
+      "pass_lines": [
+        "CHRONICLE_BATTLE_GROUND_SMOKE PASS checks=191 failures=0"
+      ]
+    },
+    {
+      "name": "chronicle_battle_scale_smoke",
+      "path": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/zhang-liao-summons-project-check/chronicle_battle_scale_smoke.log",
+      "sha256": "5a692dbde0d701cda1a5ea9699eb224027e18cfb0151a291df8722aad34107fc",
+      "strict_failures": [],
+      "completed_in_stdout": true,
+      "pass_lines": [
+        "CHRONICLE_BATTLE_SCALE_SMOKE PASS checks=564 failures=0"
+      ]
+    },
+    {
+      "name": "chronicle_boss_camera_cache_smoke",
+      "path": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/zhang-liao-summons-project-check/chronicle_boss_camera_cache_smoke.log",
+      "sha256": "31afd2c6aadd9bfb56a3aae1a4f5ffe70eb67acffde973e8deb9afde984e0bf2",
+      "strict_failures": [],
+      "completed_in_stdout": true,
+      "pass_lines": [
+        "CHRONICLE_BOSS_CAMERA_CACHE_SMOKE PASS checks=57 failures=0"
+      ]
+    },
+    {
+      "name": "chronicle_boss_camera_smoke",
+      "path": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/zhang-liao-summons-project-check/chronicle_boss_camera_smoke.log",
+      "sha256": "f6d95e91a34d3cd1fb38a79eeefbf7a03ddd9f15b2293a2d6a0f57a5a8552eef",
+      "strict_failures": [],
+      "completed_in_stdout": true,
+      "pass_lines": [
+        "CHRONICLE_BOSS_CAMERA_SMOKE PASS checks=165 failures=0"
+      ]
+    },
+    {
+      "name": "chronicle_boss_flow_smoke",
+      "path": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/zhang-liao-summons-project-check/chronicle_boss_flow_smoke.log",
+      "sha256": "1f3ac022a81b003abce8719c8a118fd60fda53572df43588b2136c959d1900c4",
+      "strict_failures": [],
+      "completed_in_stdout": true,
+      "pass_lines": [
+        "CHRONICLE_BOSS_FLOW_SMOKE PASS checks=140 failures=0"
+      ]
+    },
+    {
+      "name": "chronicle_boss_sound_smoke",
+      "path": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/zhang-liao-summons-project-check/chronicle_boss_sound_smoke.log",
+      "sha256": "c4ca2756c7c0f69173556c80b8c3848613edf9075503ae43e126189d6ba81990",
+      "strict_failures": [],
+      "completed_in_stdout": true,
+      "pass_lines": [
+        "CHRONICLE_BOSS_SOUND_SMOKE PASS checks=23 failures=0"
+      ]
+    },
+    {
+      "name": "chronicle_chapter_two_smoke",
+      "path": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/zhang-liao-summons-project-check/chronicle_chapter_two_smoke.log",
+      "sha256": "ecad0b5331034dd3c641b8e77df65142124ede1b286b33ad3484bbf1612331e7",
+      "strict_failures": [],
+      "completed_in_stdout": true,
+      "pass_lines": [
+        "CHRONICLE_CHAPTER_TWO_SMOKE PASS checks=189 failures=0"
+      ]
+    },
+    {
+      "name": "chronicle_character_campaign_smoke",
+      "path": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/zhang-liao-summons-project-check/chronicle_character_campaign_smoke.log",
+      "sha256": "20d3e782d39e8d7c63173bdce636a588661fa193768cd6d94f908d0fb21b6e1a",
+      "strict_failures": [],
+      "completed_in_stdout": true,
+      "pass_lines": [
+        "CHRONICLE_CHARACTER_CAMPAIGN_SMOKE PASS checks=196 failures=0"
+      ]
+    },
+    {
+      "name": "chronicle_character_mechanics_smoke",
+      "path": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/zhang-liao-summons-project-check/chronicle_character_mechanics_smoke.log",
+      "sha256": "1d6a2ba8cf44c282a15f7efb74bc0101e85e80a6c4c397850ff63e67d9ea55e7",
+      "strict_failures": [],
+      "completed_in_stdout": true,
+      "pass_lines": [
+        "CHRONICLE_CHARACTER_MECHANICS_SMOKE PASS checks=126 failures=0"
+      ]
+    },
+    {
+      "name": "chronicle_character_panels_smoke",
+      "path": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/zhang-liao-summons-project-check/chronicle_character_panels_smoke.log",
+      "sha256": "88e17969dc10b04d23d0a1337bf2392f0faee9d786fc468700938ec64707704d",
+      "strict_failures": [],
+      "completed_in_stdout": true,
+      "pass_lines": [
+        "CHRONICLE_CHARACTER_PANELS_SMOKE PASS checks=509 failures=0"
+      ]
+    },
+    {
+      "name": "chronicle_character_profiles_smoke",
+      "path": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/zhang-liao-summons-project-check/chronicle_character_profiles_smoke.log",
+      "sha256": "9a59b1881276b1daddcd848738e8687b2a715878e29b0d9ebbb0f54348073f89",
+      "strict_failures": [],
+      "completed_in_stdout": true,
+      "pass_lines": [
+        "CHRONICLE_CHARACTER_PROFILES_SMOKE PASS checks=121 failures=0"
+      ]
+    },
+    {
+      "name": "chronicle_combat_feedback_events_smoke",
+      "path": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/zhang-liao-summons-project-check/chronicle_combat_feedback_events_smoke.log",
+      "sha256": "d66776256fc235108ae5b4912660e07980d4ed554b05a344de51aced3697768a",
+      "strict_failures": [],
+      "completed_in_stdout": true,
+      "pass_lines": [
+        "CHRONICLE_COMBAT_FEEDBACK_EVENTS_SMOKE PASS checks=59 failures=0"
+      ]
+    },
+    {
+      "name": "chronicle_combat_feedback_pack_smoke",
+      "path": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/zhang-liao-summons-project-check/chronicle_combat_feedback_pack_smoke.log",
+      "sha256": "72b9258ff8bcd50ee4c8876c1908193dda84306e0f1b2a8f876c930b1bf511be",
+      "strict_failures": [],
+      "completed_in_stdout": false,
+      "pass_lines": [
+        "CHRONICLE_COMBAT_FEEDBACK_PACK_SMOKE PASS checks=1074 failures=0"
+      ]
+    },
+    {
+      "name": "chronicle_combat_feedback_smoke",
+      "path": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/zhang-liao-summons-project-check/chronicle_combat_feedback_smoke.log",
+      "sha256": "dcb4020a553af89a5154cc7b9f27fb6f04dcc0b0d85de994ab9bd604905ee842",
+      "strict_failures": [],
+      "completed_in_stdout": true,
+      "pass_lines": [
+        "CHRONICLE_COMBAT_FEEDBACK_SMOKE PASS checks=332 failures=0"
+      ]
+    },
+    {
+      "name": "chronicle_combat_smoke",
+      "path": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/zhang-liao-summons-project-check/chronicle_combat_smoke.log",
+      "sha256": "a99c7672b2d3264a44aec60dd5003efd4e0452fa949f3d984215b39f0d6a7188",
+      "strict_failures": [],
+      "completed_in_stdout": true,
+      "pass_lines": [
+        "CHRONICLE_COMBAT_SMOKE PASS checks=77 failures=0"
+      ]
+    },
+    {
+      "name": "chronicle_context_navigation_smoke",
+      "path": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/zhang-liao-summons-project-check/chronicle_context_navigation_smoke.log",
+      "sha256": "55fa5ec68b43faf4415cbd03d760769c39d2fc3745b2f8935aba869ff41d3a17",
+      "strict_failures": [],
+      "completed_in_stdout": true,
+      "pass_lines": [
+        "CHRONICLE_CONTEXT_NAVIGATION_SMOKE PASS checks=223 failures=0"
+      ]
+    },
+    {
+      "name": "chronicle_danmaku_smoke",
+      "path": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/zhang-liao-summons-project-check/chronicle_danmaku_smoke.log",
+      "sha256": "845102c7254afa233a009c16b6d30ec5b45b7250d82e323102f63d90d0e94279",
+      "strict_failures": [],
+      "completed_in_stdout": true,
+      "pass_lines": [
+        "CHRONICLE_DANMAKU_SMOKE PASS checks=288 failures=0"
+      ]
+    },
+    {
+      "name": "chronicle_enemy_campaign_smoke",
+      "path": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/zhang-liao-summons-project-check/chronicle_enemy_campaign_smoke.log",
+      "sha256": "80fb1190fcbd4783eec88566b035e662e033755ef4944d7b30655fde403f7f38",
+      "strict_failures": [],
+      "completed_in_stdout": true,
+      "pass_lines": [
+        "CHRONICLE_ENEMY_CAMPAIGN_SMOKE PASS checks=454 failures=0 routes=2"
+      ]
+    },
+    {
+      "name": "chronicle_enemy_codex_smoke",
+      "path": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/zhang-liao-summons-project-check/chronicle_enemy_codex_smoke.log",
+      "sha256": "0f9439503aefe500f93e6a8b6d4c4447cbd56836600e080c25906c360e6521f9",
+      "strict_failures": [],
+      "completed_in_stdout": true,
+      "pass_lines": [
+        "CHRONICLE_ENEMY_CODEX_SMOKE PASS checks=704 failures=0"
+      ]
+    },
+    {
+      "name": "chronicle_enemy_content_smoke",
+      "path": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/zhang-liao-summons-project-check/chronicle_enemy_content_smoke.log",
+      "sha256": "4f95a56d76c5473bf30dede7145033029f6ccfb21d7fba8777f45d839d4c8c57",
+      "strict_failures": [],
+      "completed_in_stdout": true,
+      "pass_lines": [
+        "CHRONICLE_ENEMY_CONTENT_SMOKE PASS checks=2857 failures=0 paths=64 transaction_routes=4"
+      ]
+    },
+    {
+      "name": "chronicle_enemy_effects_smoke",
+      "path": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/zhang-liao-summons-project-check/chronicle_enemy_effects_smoke.log",
+      "sha256": "ac4fc3ab6186f232e44035505987fb1b34c0f99ae8fd5f6ecc94728e101787e2",
+      "strict_failures": [],
+      "completed_in_stdout": true,
+      "pass_lines": [
+        "CHRONICLE_ENEMY_EFFECTS_SMOKE PASS checks=73 failures=0"
+      ]
+    },
+    {
+      "name": "chronicle_enemy_pack_smoke",
+      "path": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/zhang-liao-summons-project-check/chronicle_enemy_pack_smoke.log",
+      "sha256": "d65a26e772333a1dd66a835a3adcec4b98c68cab14b1ef7026abdba5fb3eaf92",
+      "strict_failures": [],
+      "completed_in_stdout": false,
+      "pass_lines": [
+        "ENEMY_PACK_SMOKE PASS checks=742 failures=0"
+      ]
+    },
+    {
+      "name": "chronicle_enemy_presentation_smoke",
+      "path": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/zhang-liao-summons-project-check/chronicle_enemy_presentation_smoke.log",
+      "sha256": "a06f4f665f2152af5e0412095922a2f8cc95ea1432ca2dba037ef0455f039c2c",
+      "strict_failures": [],
+      "completed_in_stdout": true,
+      "pass_lines": [
+        "CHRONICLE_ENEMY_PRESENTATION_SMOKE PASS checks=509 failures=0"
+      ]
+    },
+    {
+      "name": "chronicle_enemy_sessions_smoke",
+      "path": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/zhang-liao-summons-project-check/chronicle_enemy_sessions_smoke.log",
+      "sha256": "9e2c0fc4f4e1817691004618e159dbe9d23a4c4d0b5a3040df3e0193fa0abd92",
+      "strict_failures": [],
+      "completed_in_stdout": true,
+      "pass_lines": [
+        "CHRONICLE_ENEMY_SESSIONS_SMOKE PASS checks=89096 failures=0 sessions=18"
+      ]
+    },
+    {
+      "name": "chronicle_feedback_latency_smoke",
+      "path": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/zhang-liao-summons-project-check/chronicle_feedback_latency_smoke.log",
+      "sha256": "c7bd5d1835c72d3941409bbf8288500c2ba3c1e78cad151ca0b383126ea4eb16",
+      "strict_failures": [],
+      "completed_in_stdout": true,
+      "pass_lines": [
+        "CHRONICLE_FEEDBACK_LATENCY_SMOKE PASS checks=20 failures=0"
+      ]
+    },
+    {
+      "name": "chronicle_home_menu_render_smoke",
+      "path": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/zhang-liao-summons-project-check/chronicle_home_menu_render_smoke.log",
+      "sha256": "805fce2d6a166a8308d961868866429ab3031e5cb2837a65dfb765c1e7d6bfed",
+      "strict_failures": [],
+      "completed_in_stdout": true,
+      "pass_lines": [
+        "CHRONICLE_HOME_MENU_RENDER_SMOKE PASS checks=444 failures=0"
+      ]
+    },
+    {
+      "name": "chronicle_mechanic_hud_smoke",
+      "path": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/zhang-liao-summons-project-check/chronicle_mechanic_hud_smoke.log",
+      "sha256": "d81d85b36bf6cf128acf5d7ad8eb912146705bd5bc087da5a3d14ae7b3841e0f",
+      "strict_failures": [],
+      "completed_in_stdout": true,
+      "pass_lines": [
+        "CHRONICLE_MECHANIC_HUD_SMOKE PASS checks=322 failures=0"
+      ]
+    },
+    {
+      "name": "chronicle_melee_reach_smoke",
+      "path": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/zhang-liao-summons-project-check/chronicle_melee_reach_smoke.log",
+      "sha256": "898a1e40caf38e4953d15d072675a31a8aefa44f8cd2b69b8b9dbd1833afc759",
+      "strict_failures": [],
+      "completed_in_stdout": true,
+      "pass_lines": [
+        "CHRONICLE_MELEE_REACH_SMOKE PASS checks=154 failures=0"
+      ]
+    },
+    {
+      "name": "chronicle_music_pack_smoke",
+      "path": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/zhang-liao-summons-project-check/chronicle_music_pack_smoke.log",
+      "sha256": "e30e12496eadecdfde3f972d0f2138c4d8d493e6f91ed6e17c6c4def2aa9853f",
+      "strict_failures": [],
+      "completed_in_stdout": false,
+      "pass_lines": []
+    },
+    {
+      "name": "chronicle_music_playback_smoke",
+      "path": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/zhang-liao-summons-project-check/chronicle_music_playback_smoke.log",
+      "sha256": "52beb8fa72e26dc59145d7001315136de91d98db4b066d828d6a6ccd2a3d22d3",
+      "strict_failures": [
+        "ERROR: music room actually decodes and advances published D2 cue: midi_test_01",
+        "CHRONICLE_MUSIC_PLAYBACK_SMOKE FAIL checks=65 failures=1 display=X11",
+        "missing successful smoke result"
+      ],
+      "completed_in_stdout": false,
+      "pass_lines": []
+    },
+    {
+      "name": "chronicle_story_pack_smoke",
+      "path": "/home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/zhang-liao-summons-project-check/chronicle_story_pack_smoke.log",
+      "sha256": "c9da7354a8f17cb0ba536331f248e864b0911a46fa3fcf1978019424b0a3afc7",
+      "strict_failures": [],
+      "completed_in_stdout": false,
+      "pass_lines": [
+        "CHRONICLE_STORY_PACK_SMOKE PASS checks=99 failures=0"
+      ]
+    }
+  ],
+  "preflight_checkpoint": "full-preflight-checkpoint.json",
+  "no_reuse": "fresh run; failed evidence excluded from any future recovery"
+}

@@ -1,0 +1,91 @@
+{
+  "status": "passed",
+  "pack": {
+    "path": "/tmp/my-game-check.bgJcWG/pack-smokes/game.pck",
+    "bytes": 228248728,
+    "sha256": "481acf77c2e5c70c1aeb0f15d1972c954d43340ed41b95f2c4b482d6ef681e14"
+  },
+  "no_reexport": true,
+  "external_fixture": "/tmp/jia-campaign-final-pack-a_pgkpcn",
+  "b14_fixture_source": "extends \"/tmp/jia-campaign-final-pack-a_pgkpcn/jia_campaign_combat_smoke.gd\"\n\nfunc request_for(_node: String) -> Dictionary:\n\treturn super.request_for(\"B14\")\n",
+  "cases": [
+    {
+      "label": "campaign-B13",
+      "returncode": 0,
+      "validator_failures": [],
+      "command": [
+        "/home/weathour/.local/bin/godot-4.6.2",
+        "--headless",
+        "--path",
+        "/tmp/jia-campaign-final-pack-a_pgkpcn/empty-cwd",
+        "--main-pack",
+        "/tmp/my-game-check.bgJcWG/pack-smokes/game.pck",
+        "--script",
+        "/tmp/jia-campaign-final-pack-a_pgkpcn/jia_campaign_combat_smoke.gd"
+      ],
+      "cwd": "/tmp/jia-campaign-final-pack-a_pgkpcn/empty-cwd",
+      "cwd_files_after": [],
+      "external_script_sha256": "7f50d01984d9e988f3c8ec1ab5e637d2c02f41c9a9ba3bba721c1439255bbfc5",
+      "source_script_sha256": "7f50d01984d9e988f3c8ec1ab5e637d2c02f41c9a9ba3bba721c1439255bbfc5",
+      "source_copy_sha256": "7f50d01984d9e988f3c8ec1ab5e637d2c02f41c9a9ba3bba721c1439255bbfc5",
+      "log": "/home/weathour/programs/desktop-projects/My-game/design/jia-lord-combat-20261105/verification/campaign-B13-pack.log",
+      "log_sha256": "1529779fa79d4ade0643c4d3f8786f972b9a963c8f88f3877b3e5faa216aa2da",
+      "elapsed_seconds": 3.470264196395874,
+      "success_lines": [
+        "JIA_CAMPAIGN_COMBAT_SMOKE PASS checks=172 failures=0"
+      ]
+    },
+    {
+      "label": "campaign-B14",
+      "returncode": 0,
+      "validator_failures": [],
+      "command": [
+        "/home/weathour/.local/bin/godot-4.6.2",
+        "--headless",
+        "--path",
+        "/tmp/jia-campaign-final-pack-a_pgkpcn/empty-cwd",
+        "--main-pack",
+        "/tmp/my-game-check.bgJcWG/pack-smokes/game.pck",
+        "--script",
+        "/tmp/jia-campaign-final-pack-a_pgkpcn/jia_campaign_combat_b14_smoke.gd"
+      ],
+      "cwd": "/tmp/jia-campaign-final-pack-a_pgkpcn/empty-cwd",
+      "cwd_files_after": [],
+      "external_script_sha256": "a8337baf35c7979b85a37b09ed7ec4a639a3ee7672814edafb049c097553bcaf",
+      "source_script_sha256": "7f50d01984d9e988f3c8ec1ab5e637d2c02f41c9a9ba3bba721c1439255bbfc5",
+      "source_copy_sha256": "7f50d01984d9e988f3c8ec1ab5e637d2c02f41c9a9ba3bba721c1439255bbfc5",
+      "log": "/home/weathour/programs/desktop-projects/My-game/design/jia-lord-combat-20261105/verification/campaign-B14-pack.log",
+      "log_sha256": "1529779fa79d4ade0643c4d3f8786f972b9a963c8f88f3877b3e5faa216aa2da",
+      "elapsed_seconds": 3.3696744441986084,
+      "success_lines": [
+        "JIA_CAMPAIGN_COMBAT_SMOKE PASS checks=172 failures=0"
+      ]
+    },
+    {
+      "label": "sprite-bounds",
+      "returncode": 0,
+      "validator_failures": [],
+      "command": [
+        "/home/weathour/.local/bin/godot-4.6.2",
+        "--headless",
+        "--path",
+        "/tmp/jia-campaign-final-pack-a_pgkpcn/empty-cwd",
+        "--main-pack",
+        "/tmp/my-game-check.bgJcWG/pack-smokes/game.pck",
+        "--script",
+        "/tmp/jia-campaign-final-pack-a_pgkpcn/chronicle_sprite_bounds_smoke.gd"
+      ],
+      "cwd": "/tmp/jia-campaign-final-pack-a_pgkpcn/empty-cwd",
+      "cwd_files_after": [],
+      "external_script_sha256": "94a53577ef611cda35c7bb4e9cf9ffddc01cec61d6c57c7e0ba6aadf77e54669",
+      "source_script_sha256": "94a53577ef611cda35c7bb4e9cf9ffddc01cec61d6c57c7e0ba6aadf77e54669",
+      "source_copy_sha256": "94a53577ef611cda35c7bb4e9cf9ffddc01cec61d6c57c7e0ba6aadf77e54669",
+      "log": "/home/weathour/programs/desktop-projects/My-game/design/jia-lord-combat-20261105/verification/sprite-bounds-pack.log",
+      "log_sha256": "0ead04c4e7a73cd1d475fac4cb9fe0b36a740ea946fca68045c9f39550925021",
+      "elapsed_seconds": 1.9671571254730225,
+      "success_lines": [
+        "CHRONICLE_SPRITE_BOUNDS_SMOKE_OK checks=6412 failures=0"
+      ]
+    }
+  ]
+}

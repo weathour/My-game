@@ -1,4 +1,5 @@
 extends Control
+const JIA_APPEARANCE := preload("res://scripts/ui/chronicle/jia_appearance.gd")
 ## Read-only character sheet; shell owns its context, lifetime and opener restoration.
 signal closed
 const T := preload("res://scripts/ui/chronicle/chronicle_theme.gd")
@@ -7,8 +8,12 @@ const CARD := preload("res://scripts/ui/chronicle/chronicle_card.gd")
 const ART := preload("res://scripts/ui/chronicle/chronicle_portraits.gd")
 const PROFILES := preload("res://scripts/content/character_profiles.gd")
 const SETTINGS := preload("res://scripts/shared/settings.gd")
+const SUMMARY := preload("res://scripts/campaign/party_summary.gd")
+const COPY_PATH := "res://assets/data/chronicle/skill_presentation_copy.json"
+const INFO := preload("res://scripts/content/skill_information.gd")
 var state: RefCounted
 var character_id := "JIA"
+var appearance_context := ""
 var active_tab := "abilities"
 var return_label := "关闭"
 var model: Dictionary = {}
@@ -27,6 +32,8 @@ var scroll_positions := {"abilities":0,"growth":0,"profile":0}
 var _closing := false
 var _transition: Tween
 var _revision := 0
+var presentation_copy: Dictionary = {}
+var expanded_details: Dictionary = {}
 
 class AttributeTable:
 	extends GridContainer
@@ -40,16 +47,19 @@ class AttributeTable:
 			var y := cell.position.y + cell.size.y + 3
 			draw_line(Vector2(0,y),Vector2(size.x,y),Color(.75,.66,.45,.25 if index == 0 else .09),1)
 
-func setup(value: RefCounted, id: String, tab: String = "abilities", label: String = "关闭") -> void:
+func setup(value: RefCounted, id: String, tab: String = "abilities", label: String = "关闭", appearance: String = "") -> void:
 	state = value
 	character_id = id
 	active_tab = _tab_key(tab)
 	return_label = label
+	appearance_context = JIA_APPEARANCE.normalize_appearance(appearance) if not appearance.is_empty() else ""
 
 func show_character(id: String, tab: String = "abilities") -> void:
 	if state == null or not state.characters.has(id): return
 	_save_scroll()
-	if character_id != id: scroll_positions = {"abilities":0,"growth":0,"profile":0}
+	if character_id != id:
+		scroll_positions = {"abilities":0,"growth":0,"profile":0}
+		expanded_details.clear()
 	character_id = id
 	active_tab = _tab_key(tab)
 	if is_inside_tree(): _refresh()
@@ -58,6 +68,8 @@ static func _tab_key(value: String) -> String:
 	return "growth" if value in ["growth","stats"] else value if value in ["abilities","profile"] else "abilities"
 
 func _ready() -> void:
+	var copy = JSON.parse_string(FileAccess.get_file_as_string(COPY_PATH))
+	if copy is Dictionary: presentation_copy = copy
 	mouse_filter = Control.MOUSE_FILTER_STOP
 	mouse_force_pass_scroll_events = false
 	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
@@ -152,7 +164,7 @@ func _refresh() -> void:
 	var person: Dictionary = state.characters[character_id]
 	title.text = str(person.name)
 	identity.text = _identity_text(person,profile)
-	portrait.texture = ART.standing(character_id)
+	portrait.texture = ART.standing(character_id, appearance_context if not appearance_context.is_empty() else JIA_APPEARANCE.for_campaign(state.data))
 	level_status.name = "character_sheet_status" if model.owned else "character_preview"
 	if model.owned:
 		resources.text = "Lv.%d   生命 %s / %s   魔法 %s / %s%s" % [model.level,_number(model.resources.hp),_number(model.resources.max_hp),_number(model.resources.mp),_number(model.resources.max_mp)," · 阵亡" if model.dead else ""]
@@ -202,30 +214,143 @@ func _words(value: String, node_name: String, color: Color = T.LIGHT, font_size:
 	content.add_child(label)
 	return label
 
-func _ability(ability: Dictionary, category: String, key: String) -> void:
+func _ability(ability: Dictionary, information: Dictionary, category: String, key: String) -> void:
 	if ability.is_empty(): return
 	var unlocked: bool = ability.unlocked
-	var heading := ("自动普攻" if str(ability.title) == "普攻" else "普攻 · " + str(ability.title)) if key == "basic" else category + " · " + str(ability.title)
-	_words(heading,"character_ability_" + key,T.LIGHT if unlocked else T.MUTED,16)
-	var status := ("解锁 · 预览可用" if model.preview else "已解锁") if unlocked else ("解锁 · 入手尚未解锁" if model.preview else "解锁 · 当前等级不足")
-	_words("Lv.%d %s · %s魔法 · 冷却%s秒" % [ability.unlock_level,status,_number(ability.mana_cost),_number(ability.cooldown)],"character_ability_meta_" + key,T.GOLD if unlocked else T.MUTED,12)
-	_words(str(ability.description),"character_ability_description_" + key,T.LIGHT if unlocked else T.MUTED,14)
+	var block := T.column(content)
+	block.name = "character_ability_block_" + key
+	block.add_theme_constant_override("separation", 5)
+	var heading := category if key == "basic" and str(ability.title) == "普攻" else category + " · " + str(ability.title)
+	var heading_row := T.row(block)
+	heading_row.name = "character_ability_heading_" + key
+	var heading_label := T.paragraph(heading,T.LIGHT if unlocked else T.MUTED,16)
+	heading_label.name = "character_ability_" + key
+	heading_row.add_child(heading_label)
+	var status := "入手尚未解锁" if model.preview else "当前等级不足"
+	var state_line := T.label(status,12,T.MUTED)
+	state_line.name = "character_ability_meta_" + key
+	state_line.visible = not unlocked
+	state_line.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	heading_row.add_child(state_line)
+	_information(block,information,key,T.LIGHT if unlocked else T.MUTED,heading_row)
+
+func _information(parent: VBoxContainer, information: Dictionary, key: String, color: Color = T.LIGHT, actions: HBoxContainer = null) -> void:
+	var summary := T.paragraph(str(information.get("summary", "")),color,14)
+	summary.name = "character_ability_description_" + key
+	summary.add_theme_constant_override("line_spacing",3)
+	parent.add_child(summary)
+	var trigger := str(information.get("trigger", ""))
+	if not trigger.is_empty():
+		var trigger_label := T.paragraph(trigger,T.INK,12)
+		trigger_label.name = "character_ability_trigger_" + key
+		trigger_label.visible = key in ["support","trait"]
+		parent.add_child(trigger_label)
+	var conditions: Array = information.get("conditions", [])
+	if not conditions.is_empty():
+		var condition := T.paragraph("\n".join(conditions),T.INK,12)
+		condition.name = "character_ability_conditions_" + key
+		parent.add_child(condition)
+	var facts: Array = information.get("facts", [])
+	if not facts.is_empty():
+		var numbers := T.paragraph(" · ".join(facts),T.GOLD,12)
+		numbers.name = "character_ability_facts_" + key
+		parent.add_child(numbers)
+	var details: Array = information.get("details", [])
+	if details.is_empty(): return
+	var toggle := T.quiet_button(_ui("expand_details","展开细节"),func(): pass)
+	toggle.name = "character_ability_expand_" + key
+	toggle.toggle_mode = true
+	var initially_expanded: bool = bool(expanded_details.get(key,false))
+	toggle.set_pressed_no_signal(initially_expanded)
+	if initially_expanded: toggle.text = _ui("collapse_details","收起细节")
+	toggle.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
+	T.compact_button(toggle)
+	if actions != null: actions.add_child(toggle)
+	else: parent.add_child(toggle)
+	var detail_body := T.column(parent)
+	detail_body.name = "character_ability_details_" + key
+	detail_body.visible = initially_expanded
+	detail_body.focus_mode = Control.FOCUS_ALL
+	detail_body.set_meta("character_detail_focus",true)
+	detail_body.add_theme_constant_override("separation",5)
+	for index in details.size():
+		var line := T.paragraph(str(details[index]),T.INK,13)
+		line.name = "character_ability_detail_%s_%d" % [key,index]
+		line.add_theme_constant_override("line_spacing",3)
+		detail_body.add_child(line)
+	toggle.toggled.connect(func(expanded: bool):
+		expanded_details[key] = expanded
+		detail_body.visible = expanded
+		toggle.text = _ui("collapse_details","收起细节") if expanded else _ui("expand_details","展开细节")
+		_sync_focus()
+	)
 
 func _build_abilities() -> void:
-	if not str(model.trait_description).is_empty():
-		_section("人物机制")
-		_words(str(model.trait_description),"character_trait_summary")
-	_section("前台能力")
-	_ability(model.basic,"自动", "basic")
-	for index in model.automatic.size(): _ability(model.automatic[index],"自动技能 · 不耗魔法","automatic_%d" % index)
-	for index in model.manual.size(): _ability(model.manual[index],"手动技能 · " + ("J" if index == 0 else "K"),"manual_%d" % index)
-	_section("后台支援")
-	_words(str(model.support_state),"character_support_state",T.GOLD)
-	_words(str(model.back_text),"character_back_summary")
-	_ability(model.support,"支援 · 不耗魔法","support")
-	_section("持有加成")
+	_words(str(model.overview),"character_playstyle_summary",T.LIGHT,15)
+	_tags(content,model.tags,"character_playstyle_tags")
+	_section(_ui("foreground","出场作战"))
+	_ability(model.basic,model.basic_info,"自动普攻", "basic")
+	for index in model.automatic.size(): _ability(model.automatic[index],model.automatic_info[index],"常规自动","automatic_%d" % index)
+	for index in model.manual.size(): _ability(model.manual[index],model.manual_info[index],"J" if index == 0 else "K","manual_%d" % index)
+	if model.manual.size() < 2: _words("K · " + _ui("not_equipped","未配备"),"character_ability_manual_1",T.MUTED,14)
+	if not model.trait_info.is_empty():
+		_section(_ui("mechanics","额外机制"))
+		var trait_block := T.column(content)
+		trait_block.name = "character_trait_block"
+		trait_block.add_theme_constant_override("separation",5)
+		_information(trait_block,model.trait_info,"trait")
+	_section(_ui("background_and_owned","后台与持有"))
+	_words("后台支援","character_support_heading",T.GOLD,15)
+	_words(str(model.support_state),"character_support_state",T.GOLD,12)
+	if not model.support.is_empty(): _ability(model.support,model.support_info,"后台支援","support")
+	_words("持有加成","character_owned_heading",T.GOLD,15)
 	_words(str(model.owned_text),"character_owned_summary")
-	for index in model.owned_lines.size(): _words(str(model.owned_lines[index]),"character_owned_source_%d" % index,T.MUTED,13)
+	_build_owned_rows()
+
+static func _ui(key: String, fallback: String) -> String:
+	return str(INFO.ui(key, fallback))
+
+static func _tags(parent: Node, values: Array, node_name: String) -> void:
+	if values.is_empty(): return
+	var tags := HFlowContainer.new()
+	tags.name = node_name
+	tags.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	tags.add_theme_constant_override("h_separation",6)
+	tags.add_theme_constant_override("v_separation",4)
+	parent.add_child(tags)
+	for index in values.size():
+		var tag := T.label(str(values[index]),12,T.GOLD)
+		tag.name = node_name + "_" + str(index)
+		tag.add_theme_stylebox_override("normal",T.box(Color("26382b"),Color.TRANSPARENT,5))
+		tags.add_child(tag)
+
+func _build_owned_rows() -> void:
+	var words: Dictionary = presentation_copy.get("owned_bonus", {})
+	for index in model.owned_rows.size():
+		var bonus: Dictionary = model.owned_rows[index]
+		var block := T.column(T.panel(content, true, 10, false))
+		block.name = "character_owned_bonus_" + str(bonus.key)
+		block.add_theme_constant_override("separation", 5)
+		block.add_child(T.label(str(bonus.title),15,T.GOLD,true))
+		var source := T.paragraph("%s · Lv.%d  %s" % [words.get("card_raw", ""), bonus.level, SUMMARY.amount_text(bonus.key, bonus.card_raw)],T.LIGHT,13)
+		source.name = "character_owned_source_%d" % index
+		source.tooltip_text = str(model.owned_lines[index])
+		block.add_child(source)
+		var total := T.paragraph("%s  %s / %s" % [words.get("global_actual_cap", ""), SUMMARY.amount_text(bonus.key, bonus.actual), SUMMARY.amount_text(bonus.key, bonus.cap)],T.MUTED,12)
+		total.name = "character_owned_total_" + str(bonus.key)
+		block.add_child(total)
+		var bar := T.bar(block, float(bonus.actual), float(bonus.cap), T.GOLD if bonus.capped else T.OLIVE.lightened(.30))
+		bar.step = .000001
+		bar.max_value = float(bonus.cap)
+		bar.value = float(bonus.actual)
+		bar.name = "character_owned_cap_" + str(bonus.key)
+		bar.custom_minimum_size.y = 5
+		var key := "next_effective_delta" if bonus.owned else "next_preview_delta"
+		var next := T.paragraph("%s  %s" % [words.get(key, ""), SUMMARY.amount_text(bonus.key, bonus.next_delta)],T.MUTED if is_zero_approx(bonus.next_delta) else T.LIGHT,12)
+		next.name = "character_owned_next_" + str(bonus.key)
+		block.add_child(next)
+		if bonus.capped: block.add_child(T.paragraph(str(words.get("global_capped", "")),T.GOLD,12))
+		if not bonus.owned: block.add_child(T.paragraph(str(words.get("preview_not_owned", "")),T.MUTED,12))
 
 func _build_stats() -> void:
 	var experience := T.row(content)
@@ -279,8 +404,13 @@ static func _number(value: float) -> String:
 func _sync_focus() -> void:
 	var controls: Array[Control] = []
 	for button in find_children("*","BaseButton",true,false):
+		if content.is_ancestor_of(button): continue
 		if button is Control and button.is_visible_in_tree() and not button.disabled: controls.append(button)
 	controls.append(scroll)
+	for control in content.find_children("*","Control",true,false):
+		if not control.is_visible_in_tree(): continue
+		if control is BaseButton and not control.disabled: controls.append(control)
+		elif control.has_meta("character_detail_focus"): controls.append(control)
 	for index in controls.size():
 		var button: Control = controls[index]
 		button.focus_previous = button.get_path_to(controls[posmod(index - 1,controls.size())])
@@ -329,7 +459,7 @@ static func build_preview(shell: Control, parent: Node) -> void:
 	var details := T.quiet_button("详情",func(): shell.inspect_character(id,"abilities"))
 	details.name = "character_preview_expand";heading.add_child(details)
 	var title_label := T.paragraph(_identity_text(person,profile),T.GOLD,13)
-	title_label.name = "character_preview_title";title_label.max_lines_visible = 2;column.add_child(title_label)
+	title_label.name = "character_preview_title";column.add_child(title_label)
 	column.add_child(T.label("Lv.%d" % value.level if value.owned else "能力预览 · 入手等级 Lv.%d" % value.level,12,T.MUTED))
 	var middle := ScrollContainer.new()
 	middle.name = "character_preview_summary_scroll"
@@ -339,12 +469,15 @@ static func build_preview(shell: Control, parent: Node) -> void:
 	column.add_child(middle)
 	var summaries := T.column(middle)
 	summaries.add_theme_constant_override("separation",6)
-	var foreground := str(value.basic.title)
-	if not value.manual.is_empty(): foreground += " · " + str(value.manual[0].title)
-	var support := str(value.support_state)
-	if not value.support.is_empty(): support = str(value.support.title) + " · " + support
-	for entry in [["前台能力",foreground],["后台支援",support],["持有加成",str(value.owned_text)]]:
-		var summary := T.paragraph(str(entry[0]) + "  " + str(entry[1]),T.LIGHT,13)
-		summary.max_lines_visible = 2
-		summary.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
+	var overview := T.paragraph(str(value.overview),T.LIGHT,14)
+	overview.name = "character_preview_playstyle"
+	overview.add_theme_constant_override("line_spacing",3)
+	summaries.add_child(overview)
+	_tags(summaries,value.tags,"character_preview_tags")
+	var support_state := T.paragraph(str(value.support_state),T.GOLD,12)
+	support_state.name = "character_preview_support_state"
+	summaries.add_child(support_state)
+	for entry in [["后台支援",str(value.support_info.get("summary", value.support_state))],["持有加成",str(value.owned_text)]]:
+		var summary := T.paragraph(str(entry[0]) + "  " + str(entry[1]),T.INK,13)
+		summary.name = "character_preview_support" if entry[0] == "后台支援" else "character_preview_owned"
 		summaries.add_child(summary)

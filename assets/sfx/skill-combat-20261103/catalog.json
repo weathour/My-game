@@ -1,0 +1,1669 @@
+{
+  "schema_version": 1,
+  "cues": {
+    "blade.cast": {
+      "variants": [
+        "res://assets/sfx/skill-combat-20261103/blade_cast_01.wav",
+        "res://assets/sfx/skill-combat-20261103/blade_cast_02.wav",
+        "res://assets/sfx/skill-combat-20261103/blade_cast_03.wav"
+      ],
+      "gain_db": -4.0,
+      "cooldown_sec": 0.08,
+      "max_instances": 2,
+      "priority": 2,
+      "spatial": {
+        "max_distance": 1200.0,
+        "panning_strength": 0.55
+      },
+      "duck": {}
+    },
+    "blade.impact": {
+      "variants": [
+        "res://assets/sfx/skill-combat-20261103/blade_impact_01.wav",
+        "res://assets/sfx/skill-combat-20261103/blade_impact_02.wav",
+        "res://assets/sfx/skill-combat-20261103/blade_impact_03.wav"
+      ],
+      "gain_db": -5.0,
+      "cooldown_sec": 0.055,
+      "max_instances": 3,
+      "priority": 1,
+      "spatial": {
+        "max_distance": 1200.0,
+        "panning_strength": 0.55
+      },
+      "duck": {}
+    },
+    "blade.tell": {
+      "variants": [
+        "res://assets/sfx/skill-combat-20261103/blade_tell_01.wav",
+        "res://assets/sfx/skill-combat-20261103/blade_tell_02.wav",
+        "res://assets/sfx/skill-combat-20261103/blade_tell_03.wav"
+      ],
+      "gain_db": -3.0,
+      "cooldown_sec": 0.08,
+      "max_instances": 2,
+      "priority": 4,
+      "spatial": {
+        "max_distance": 1200.0,
+        "panning_strength": 0.55
+      },
+      "duck": {}
+    },
+    "heavy_blade.cast": {
+      "variants": [
+        "res://assets/sfx/skill-combat-20261103/heavy_blade_cast_01.wav",
+        "res://assets/sfx/skill-combat-20261103/heavy_blade_cast_02.wav",
+        "res://assets/sfx/skill-combat-20261103/heavy_blade_cast_03.wav"
+      ],
+      "gain_db": -4.0,
+      "cooldown_sec": 0.08,
+      "max_instances": 2,
+      "priority": 2,
+      "spatial": {
+        "max_distance": 1200.0,
+        "panning_strength": 0.55
+      },
+      "duck": {}
+    },
+    "heavy_blade.impact": {
+      "variants": [
+        "res://assets/sfx/skill-combat-20261103/heavy_blade_impact_01.wav",
+        "res://assets/sfx/skill-combat-20261103/heavy_blade_impact_02.wav",
+        "res://assets/sfx/skill-combat-20261103/heavy_blade_impact_03.wav"
+      ],
+      "gain_db": -5.0,
+      "cooldown_sec": 0.055,
+      "max_instances": 3,
+      "priority": 1,
+      "spatial": {
+        "max_distance": 1200.0,
+        "panning_strength": 0.55
+      },
+      "duck": {}
+    },
+    "heavy_blade.tell": {
+      "variants": [
+        "res://assets/sfx/skill-combat-20261103/heavy_blade_tell_01.wav",
+        "res://assets/sfx/skill-combat-20261103/heavy_blade_tell_02.wav",
+        "res://assets/sfx/skill-combat-20261103/heavy_blade_tell_03.wav"
+      ],
+      "gain_db": -3.0,
+      "cooldown_sec": 0.08,
+      "max_instances": 2,
+      "priority": 4,
+      "spatial": {
+        "max_distance": 1200.0,
+        "panning_strength": 0.55
+      },
+      "duck": {}
+    },
+    "thrust.cast": {
+      "variants": [
+        "res://assets/sfx/skill-combat-20261103/thrust_cast_01.wav",
+        "res://assets/sfx/skill-combat-20261103/thrust_cast_02.wav",
+        "res://assets/sfx/skill-combat-20261103/thrust_cast_03.wav"
+      ],
+      "gain_db": -4.0,
+      "cooldown_sec": 0.08,
+      "max_instances": 2,
+      "priority": 2,
+      "spatial": {
+        "max_distance": 1200.0,
+        "panning_strength": 0.55
+      },
+      "duck": {}
+    },
+    "thrust.impact": {
+      "variants": [
+        "res://assets/sfx/skill-combat-20261103/thrust_impact_01.wav",
+        "res://assets/sfx/skill-combat-20261103/thrust_impact_02.wav",
+        "res://assets/sfx/skill-combat-20261103/thrust_impact_03.wav"
+      ],
+      "gain_db": -5.0,
+      "cooldown_sec": 0.055,
+      "max_instances": 3,
+      "priority": 1,
+      "spatial": {
+        "max_distance": 1200.0,
+        "panning_strength": 0.55
+      },
+      "duck": {}
+    },
+    "thrust.tell": {
+      "variants": [
+        "res://assets/sfx/skill-combat-20261103/thrust_tell_01.wav",
+        "res://assets/sfx/skill-combat-20261103/thrust_tell_02.wav",
+        "res://assets/sfx/skill-combat-20261103/thrust_tell_03.wav"
+      ],
+      "gain_db": -3.0,
+      "cooldown_sec": 0.08,
+      "max_instances": 2,
+      "priority": 4,
+      "spatial": {
+        "max_distance": 1200.0,
+        "panning_strength": 0.55
+      },
+      "duck": {}
+    },
+    "blunt.cast": {
+      "variants": [
+        "res://assets/sfx/skill-combat-20261103/blunt_cast_01.wav",
+        "res://assets/sfx/skill-combat-20261103/blunt_cast_02.wav",
+        "res://assets/sfx/skill-combat-20261103/blunt_cast_03.wav"
+      ],
+      "gain_db": -4.0,
+      "cooldown_sec": 0.08,
+      "max_instances": 2,
+      "priority": 2,
+      "spatial": {
+        "max_distance": 1200.0,
+        "panning_strength": 0.55
+      },
+      "duck": {}
+    },
+    "blunt.impact": {
+      "variants": [
+        "res://assets/sfx/skill-combat-20261103/blunt_impact_01.wav",
+        "res://assets/sfx/skill-combat-20261103/blunt_impact_02.wav",
+        "res://assets/sfx/skill-combat-20261103/blunt_impact_03.wav"
+      ],
+      "gain_db": -5.0,
+      "cooldown_sec": 0.055,
+      "max_instances": 3,
+      "priority": 1,
+      "spatial": {
+        "max_distance": 1200.0,
+        "panning_strength": 0.55
+      },
+      "duck": {}
+    },
+    "blunt.tell": {
+      "variants": [
+        "res://assets/sfx/skill-combat-20261103/blunt_tell_01.wav",
+        "res://assets/sfx/skill-combat-20261103/blunt_tell_02.wav",
+        "res://assets/sfx/skill-combat-20261103/blunt_tell_03.wav"
+      ],
+      "gain_db": -3.0,
+      "cooldown_sec": 0.08,
+      "max_instances": 2,
+      "priority": 4,
+      "spatial": {
+        "max_distance": 1200.0,
+        "panning_strength": 0.55
+      },
+      "duck": {}
+    },
+    "bow.cast": {
+      "variants": [
+        "res://assets/sfx/skill-combat-20261103/bow_cast_01.wav",
+        "res://assets/sfx/skill-combat-20261103/bow_cast_02.wav",
+        "res://assets/sfx/skill-combat-20261103/bow_cast_03.wav"
+      ],
+      "gain_db": -4.0,
+      "cooldown_sec": 0.08,
+      "max_instances": 2,
+      "priority": 2,
+      "spatial": {
+        "max_distance": 1200.0,
+        "panning_strength": 0.55
+      },
+      "duck": {}
+    },
+    "bow.impact": {
+      "variants": [
+        "res://assets/sfx/skill-combat-20261103/bow_impact_01.wav",
+        "res://assets/sfx/skill-combat-20261103/bow_impact_02.wav",
+        "res://assets/sfx/skill-combat-20261103/bow_impact_03.wav"
+      ],
+      "gain_db": -5.0,
+      "cooldown_sec": 0.055,
+      "max_instances": 3,
+      "priority": 1,
+      "spatial": {
+        "max_distance": 1200.0,
+        "panning_strength": 0.55
+      },
+      "duck": {}
+    },
+    "bow.tell": {
+      "variants": [
+        "res://assets/sfx/skill-combat-20261103/bow_tell_01.wav",
+        "res://assets/sfx/skill-combat-20261103/bow_tell_02.wav",
+        "res://assets/sfx/skill-combat-20261103/bow_tell_03.wav"
+      ],
+      "gain_db": -3.0,
+      "cooldown_sec": 0.08,
+      "max_instances": 2,
+      "priority": 4,
+      "spatial": {
+        "max_distance": 1200.0,
+        "panning_strength": 0.55
+      },
+      "duck": {}
+    },
+    "dash.cast": {
+      "variants": [
+        "res://assets/sfx/skill-combat-20261103/dash_cast_01.wav",
+        "res://assets/sfx/skill-combat-20261103/dash_cast_02.wav",
+        "res://assets/sfx/skill-combat-20261103/dash_cast_03.wav"
+      ],
+      "gain_db": -4.0,
+      "cooldown_sec": 0.08,
+      "max_instances": 2,
+      "priority": 2,
+      "spatial": {
+        "max_distance": 1200.0,
+        "panning_strength": 0.55
+      },
+      "duck": {}
+    },
+    "dash.impact": {
+      "variants": [
+        "res://assets/sfx/skill-combat-20261103/dash_impact_01.wav",
+        "res://assets/sfx/skill-combat-20261103/dash_impact_02.wav",
+        "res://assets/sfx/skill-combat-20261103/dash_impact_03.wav"
+      ],
+      "gain_db": -5.0,
+      "cooldown_sec": 0.055,
+      "max_instances": 3,
+      "priority": 1,
+      "spatial": {
+        "max_distance": 1200.0,
+        "panning_strength": 0.55
+      },
+      "duck": {}
+    },
+    "dash.tell": {
+      "variants": [
+        "res://assets/sfx/skill-combat-20261103/dash_tell_01.wav",
+        "res://assets/sfx/skill-combat-20261103/dash_tell_02.wav",
+        "res://assets/sfx/skill-combat-20261103/dash_tell_03.wav"
+      ],
+      "gain_db": -3.0,
+      "cooldown_sec": 0.08,
+      "max_instances": 2,
+      "priority": 4,
+      "spatial": {
+        "max_distance": 1200.0,
+        "panning_strength": 0.55
+      },
+      "duck": {}
+    },
+    "earth.cast": {
+      "variants": [
+        "res://assets/sfx/skill-combat-20261103/earth_cast_01.wav",
+        "res://assets/sfx/skill-combat-20261103/earth_cast_02.wav",
+        "res://assets/sfx/skill-combat-20261103/earth_cast_03.wav"
+      ],
+      "gain_db": -4.0,
+      "cooldown_sec": 0.08,
+      "max_instances": 2,
+      "priority": 2,
+      "spatial": {
+        "max_distance": 1200.0,
+        "panning_strength": 0.55
+      },
+      "duck": {}
+    },
+    "earth.impact": {
+      "variants": [
+        "res://assets/sfx/skill-combat-20261103/earth_impact_01.wav",
+        "res://assets/sfx/skill-combat-20261103/earth_impact_02.wav",
+        "res://assets/sfx/skill-combat-20261103/earth_impact_03.wav"
+      ],
+      "gain_db": -5.0,
+      "cooldown_sec": 0.055,
+      "max_instances": 3,
+      "priority": 1,
+      "spatial": {
+        "max_distance": 1200.0,
+        "panning_strength": 0.55
+      },
+      "duck": {}
+    },
+    "earth.tell": {
+      "variants": [
+        "res://assets/sfx/skill-combat-20261103/earth_tell_01.wav",
+        "res://assets/sfx/skill-combat-20261103/earth_tell_02.wav",
+        "res://assets/sfx/skill-combat-20261103/earth_tell_03.wav"
+      ],
+      "gain_db": -3.0,
+      "cooldown_sec": 0.08,
+      "max_instances": 2,
+      "priority": 4,
+      "spatial": {
+        "max_distance": 1200.0,
+        "panning_strength": 0.55
+      },
+      "duck": {}
+    },
+    "fire.cast": {
+      "variants": [
+        "res://assets/sfx/skill-combat-20261103/fire_cast_01.wav",
+        "res://assets/sfx/skill-combat-20261103/fire_cast_02.wav",
+        "res://assets/sfx/skill-combat-20261103/fire_cast_03.wav"
+      ],
+      "gain_db": -4.0,
+      "cooldown_sec": 0.08,
+      "max_instances": 2,
+      "priority": 2,
+      "spatial": {
+        "max_distance": 1200.0,
+        "panning_strength": 0.55
+      },
+      "duck": {}
+    },
+    "fire.impact": {
+      "variants": [
+        "res://assets/sfx/skill-combat-20261103/fire_impact_01.wav",
+        "res://assets/sfx/skill-combat-20261103/fire_impact_02.wav",
+        "res://assets/sfx/skill-combat-20261103/fire_impact_03.wav"
+      ],
+      "gain_db": -5.0,
+      "cooldown_sec": 0.055,
+      "max_instances": 3,
+      "priority": 1,
+      "spatial": {
+        "max_distance": 1200.0,
+        "panning_strength": 0.55
+      },
+      "duck": {}
+    },
+    "fire.tell": {
+      "variants": [
+        "res://assets/sfx/skill-combat-20261103/fire_tell_01.wav",
+        "res://assets/sfx/skill-combat-20261103/fire_tell_02.wav",
+        "res://assets/sfx/skill-combat-20261103/fire_tell_03.wav"
+      ],
+      "gain_db": -3.0,
+      "cooldown_sec": 0.08,
+      "max_instances": 2,
+      "priority": 4,
+      "spatial": {
+        "max_distance": 1200.0,
+        "panning_strength": 0.55
+      },
+      "duck": {}
+    },
+    "ice.cast": {
+      "variants": [
+        "res://assets/sfx/skill-combat-20261103/ice_cast_01.wav",
+        "res://assets/sfx/skill-combat-20261103/ice_cast_02.wav",
+        "res://assets/sfx/skill-combat-20261103/ice_cast_03.wav"
+      ],
+      "gain_db": -4.0,
+      "cooldown_sec": 0.08,
+      "max_instances": 2,
+      "priority": 2,
+      "spatial": {
+        "max_distance": 1200.0,
+        "panning_strength": 0.55
+      },
+      "duck": {}
+    },
+    "ice.impact": {
+      "variants": [
+        "res://assets/sfx/skill-combat-20261103/ice_impact_01.wav",
+        "res://assets/sfx/skill-combat-20261103/ice_impact_02.wav",
+        "res://assets/sfx/skill-combat-20261103/ice_impact_03.wav"
+      ],
+      "gain_db": -5.0,
+      "cooldown_sec": 0.055,
+      "max_instances": 3,
+      "priority": 1,
+      "spatial": {
+        "max_distance": 1200.0,
+        "panning_strength": 0.55
+      },
+      "duck": {}
+    },
+    "ice.tell": {
+      "variants": [
+        "res://assets/sfx/skill-combat-20261103/ice_tell_01.wav",
+        "res://assets/sfx/skill-combat-20261103/ice_tell_02.wav",
+        "res://assets/sfx/skill-combat-20261103/ice_tell_03.wav"
+      ],
+      "gain_db": -3.0,
+      "cooldown_sec": 0.08,
+      "max_instances": 2,
+      "priority": 4,
+      "spatial": {
+        "max_distance": 1200.0,
+        "panning_strength": 0.55
+      },
+      "duck": {}
+    },
+    "lightning.cast": {
+      "variants": [
+        "res://assets/sfx/skill-combat-20261103/lightning_cast_01.wav",
+        "res://assets/sfx/skill-combat-20261103/lightning_cast_02.wav",
+        "res://assets/sfx/skill-combat-20261103/lightning_cast_03.wav"
+      ],
+      "gain_db": -4.0,
+      "cooldown_sec": 0.08,
+      "max_instances": 2,
+      "priority": 2,
+      "spatial": {
+        "max_distance": 1200.0,
+        "panning_strength": 0.55
+      },
+      "duck": {}
+    },
+    "lightning.impact": {
+      "variants": [
+        "res://assets/sfx/skill-combat-20261103/lightning_impact_01.wav",
+        "res://assets/sfx/skill-combat-20261103/lightning_impact_02.wav",
+        "res://assets/sfx/skill-combat-20261103/lightning_impact_03.wav"
+      ],
+      "gain_db": -5.0,
+      "cooldown_sec": 0.055,
+      "max_instances": 3,
+      "priority": 1,
+      "spatial": {
+        "max_distance": 1200.0,
+        "panning_strength": 0.55
+      },
+      "duck": {}
+    },
+    "lightning.tell": {
+      "variants": [
+        "res://assets/sfx/skill-combat-20261103/lightning_tell_01.wav",
+        "res://assets/sfx/skill-combat-20261103/lightning_tell_02.wav",
+        "res://assets/sfx/skill-combat-20261103/lightning_tell_03.wav"
+      ],
+      "gain_db": -3.0,
+      "cooldown_sec": 0.08,
+      "max_instances": 2,
+      "priority": 4,
+      "spatial": {
+        "max_distance": 1200.0,
+        "panning_strength": 0.55
+      },
+      "duck": {}
+    },
+    "wind.cast": {
+      "variants": [
+        "res://assets/sfx/skill-combat-20261103/wind_cast_01.wav",
+        "res://assets/sfx/skill-combat-20261103/wind_cast_02.wav",
+        "res://assets/sfx/skill-combat-20261103/wind_cast_03.wav"
+      ],
+      "gain_db": -4.0,
+      "cooldown_sec": 0.08,
+      "max_instances": 2,
+      "priority": 2,
+      "spatial": {
+        "max_distance": 1200.0,
+        "panning_strength": 0.55
+      },
+      "duck": {}
+    },
+    "wind.impact": {
+      "variants": [
+        "res://assets/sfx/skill-combat-20261103/wind_impact_01.wav",
+        "res://assets/sfx/skill-combat-20261103/wind_impact_02.wav",
+        "res://assets/sfx/skill-combat-20261103/wind_impact_03.wav"
+      ],
+      "gain_db": -5.0,
+      "cooldown_sec": 0.055,
+      "max_instances": 3,
+      "priority": 1,
+      "spatial": {
+        "max_distance": 1200.0,
+        "panning_strength": 0.55
+      },
+      "duck": {}
+    },
+    "wind.tell": {
+      "variants": [
+        "res://assets/sfx/skill-combat-20261103/wind_tell_01.wav",
+        "res://assets/sfx/skill-combat-20261103/wind_tell_02.wav",
+        "res://assets/sfx/skill-combat-20261103/wind_tell_03.wav"
+      ],
+      "gain_db": -3.0,
+      "cooldown_sec": 0.08,
+      "max_instances": 2,
+      "priority": 4,
+      "spatial": {
+        "max_distance": 1200.0,
+        "panning_strength": 0.55
+      },
+      "duck": {}
+    },
+    "water.cast": {
+      "variants": [
+        "res://assets/sfx/skill-combat-20261103/water_cast_01.wav",
+        "res://assets/sfx/skill-combat-20261103/water_cast_02.wav",
+        "res://assets/sfx/skill-combat-20261103/water_cast_03.wav"
+      ],
+      "gain_db": -4.0,
+      "cooldown_sec": 0.08,
+      "max_instances": 2,
+      "priority": 2,
+      "spatial": {
+        "max_distance": 1200.0,
+        "panning_strength": 0.55
+      },
+      "duck": {}
+    },
+    "water.impact": {
+      "variants": [
+        "res://assets/sfx/skill-combat-20261103/water_impact_01.wav",
+        "res://assets/sfx/skill-combat-20261103/water_impact_02.wav",
+        "res://assets/sfx/skill-combat-20261103/water_impact_03.wav"
+      ],
+      "gain_db": -5.0,
+      "cooldown_sec": 0.055,
+      "max_instances": 3,
+      "priority": 1,
+      "spatial": {
+        "max_distance": 1200.0,
+        "panning_strength": 0.55
+      },
+      "duck": {}
+    },
+    "water.tell": {
+      "variants": [
+        "res://assets/sfx/skill-combat-20261103/water_tell_01.wav",
+        "res://assets/sfx/skill-combat-20261103/water_tell_02.wav",
+        "res://assets/sfx/skill-combat-20261103/water_tell_03.wav"
+      ],
+      "gain_db": -3.0,
+      "cooldown_sec": 0.08,
+      "max_instances": 2,
+      "priority": 4,
+      "spatial": {
+        "max_distance": 1200.0,
+        "panning_strength": 0.55
+      },
+      "duck": {}
+    },
+    "poison.cast": {
+      "variants": [
+        "res://assets/sfx/skill-combat-20261103/poison_cast_01.wav",
+        "res://assets/sfx/skill-combat-20261103/poison_cast_02.wav",
+        "res://assets/sfx/skill-combat-20261103/poison_cast_03.wav"
+      ],
+      "gain_db": -4.0,
+      "cooldown_sec": 0.08,
+      "max_instances": 2,
+      "priority": 2,
+      "spatial": {
+        "max_distance": 1200.0,
+        "panning_strength": 0.55
+      },
+      "duck": {}
+    },
+    "poison.impact": {
+      "variants": [
+        "res://assets/sfx/skill-combat-20261103/poison_impact_01.wav",
+        "res://assets/sfx/skill-combat-20261103/poison_impact_02.wav",
+        "res://assets/sfx/skill-combat-20261103/poison_impact_03.wav"
+      ],
+      "gain_db": -5.0,
+      "cooldown_sec": 0.055,
+      "max_instances": 3,
+      "priority": 1,
+      "spatial": {
+        "max_distance": 1200.0,
+        "panning_strength": 0.55
+      },
+      "duck": {}
+    },
+    "poison.tell": {
+      "variants": [
+        "res://assets/sfx/skill-combat-20261103/poison_tell_01.wav",
+        "res://assets/sfx/skill-combat-20261103/poison_tell_02.wav",
+        "res://assets/sfx/skill-combat-20261103/poison_tell_03.wav"
+      ],
+      "gain_db": -3.0,
+      "cooldown_sec": 0.08,
+      "max_instances": 2,
+      "priority": 4,
+      "spatial": {
+        "max_distance": 1200.0,
+        "panning_strength": 0.55
+      },
+      "duck": {}
+    },
+    "arcane.cast": {
+      "variants": [
+        "res://assets/sfx/skill-combat-20261103/arcane_cast_01.wav",
+        "res://assets/sfx/skill-combat-20261103/arcane_cast_02.wav",
+        "res://assets/sfx/skill-combat-20261103/arcane_cast_03.wav"
+      ],
+      "gain_db": -4.0,
+      "cooldown_sec": 0.08,
+      "max_instances": 2,
+      "priority": 2,
+      "spatial": {
+        "max_distance": 1200.0,
+        "panning_strength": 0.55
+      },
+      "duck": {}
+    },
+    "arcane.impact": {
+      "variants": [
+        "res://assets/sfx/skill-combat-20261103/arcane_impact_01.wav",
+        "res://assets/sfx/skill-combat-20261103/arcane_impact_02.wav",
+        "res://assets/sfx/skill-combat-20261103/arcane_impact_03.wav"
+      ],
+      "gain_db": -5.0,
+      "cooldown_sec": 0.055,
+      "max_instances": 3,
+      "priority": 1,
+      "spatial": {
+        "max_distance": 1200.0,
+        "panning_strength": 0.55
+      },
+      "duck": {}
+    },
+    "arcane.tell": {
+      "variants": [
+        "res://assets/sfx/skill-combat-20261103/arcane_tell_01.wav",
+        "res://assets/sfx/skill-combat-20261103/arcane_tell_02.wav",
+        "res://assets/sfx/skill-combat-20261103/arcane_tell_03.wav"
+      ],
+      "gain_db": -3.0,
+      "cooldown_sec": 0.08,
+      "max_instances": 2,
+      "priority": 4,
+      "spatial": {
+        "max_distance": 1200.0,
+        "panning_strength": 0.55
+      },
+      "duck": {}
+    },
+    "curse.cast": {
+      "variants": [
+        "res://assets/sfx/skill-combat-20261103/curse_cast_01.wav",
+        "res://assets/sfx/skill-combat-20261103/curse_cast_02.wav",
+        "res://assets/sfx/skill-combat-20261103/curse_cast_03.wav"
+      ],
+      "gain_db": -4.0,
+      "cooldown_sec": 0.08,
+      "max_instances": 2,
+      "priority": 2,
+      "spatial": {
+        "max_distance": 1200.0,
+        "panning_strength": 0.55
+      },
+      "duck": {}
+    },
+    "curse.impact": {
+      "variants": [
+        "res://assets/sfx/skill-combat-20261103/curse_impact_01.wav",
+        "res://assets/sfx/skill-combat-20261103/curse_impact_02.wav",
+        "res://assets/sfx/skill-combat-20261103/curse_impact_03.wav"
+      ],
+      "gain_db": -5.0,
+      "cooldown_sec": 0.055,
+      "max_instances": 3,
+      "priority": 1,
+      "spatial": {
+        "max_distance": 1200.0,
+        "panning_strength": 0.55
+      },
+      "duck": {}
+    },
+    "curse.tell": {
+      "variants": [
+        "res://assets/sfx/skill-combat-20261103/curse_tell_01.wav",
+        "res://assets/sfx/skill-combat-20261103/curse_tell_02.wav",
+        "res://assets/sfx/skill-combat-20261103/curse_tell_03.wav"
+      ],
+      "gain_db": -3.0,
+      "cooldown_sec": 0.08,
+      "max_instances": 2,
+      "priority": 4,
+      "spatial": {
+        "max_distance": 1200.0,
+        "panning_strength": 0.55
+      },
+      "duck": {}
+    },
+    "heal.cast": {
+      "variants": [
+        "res://assets/sfx/skill-combat-20261103/heal_cast_01.wav",
+        "res://assets/sfx/skill-combat-20261103/heal_cast_02.wav",
+        "res://assets/sfx/skill-combat-20261103/heal_cast_03.wav"
+      ],
+      "gain_db": -4.0,
+      "cooldown_sec": 0.08,
+      "max_instances": 2,
+      "priority": 2,
+      "spatial": {
+        "max_distance": 1200.0,
+        "panning_strength": 0.55
+      },
+      "duck": {}
+    },
+    "heal.impact": {
+      "variants": [
+        "res://assets/sfx/skill-combat-20261103/heal_impact_01.wav",
+        "res://assets/sfx/skill-combat-20261103/heal_impact_02.wav",
+        "res://assets/sfx/skill-combat-20261103/heal_impact_03.wav"
+      ],
+      "gain_db": -5.0,
+      "cooldown_sec": 0.055,
+      "max_instances": 3,
+      "priority": 1,
+      "spatial": {
+        "max_distance": 1200.0,
+        "panning_strength": 0.55
+      },
+      "duck": {}
+    },
+    "heal.tell": {
+      "variants": [
+        "res://assets/sfx/skill-combat-20261103/heal_tell_01.wav",
+        "res://assets/sfx/skill-combat-20261103/heal_tell_02.wav",
+        "res://assets/sfx/skill-combat-20261103/heal_tell_03.wav"
+      ],
+      "gain_db": -3.0,
+      "cooldown_sec": 0.08,
+      "max_instances": 2,
+      "priority": 4,
+      "spatial": {
+        "max_distance": 1200.0,
+        "panning_strength": 0.55
+      },
+      "duck": {}
+    },
+    "shield.cast": {
+      "variants": [
+        "res://assets/sfx/skill-combat-20261103/shield_cast_01.wav",
+        "res://assets/sfx/skill-combat-20261103/shield_cast_02.wav",
+        "res://assets/sfx/skill-combat-20261103/shield_cast_03.wav"
+      ],
+      "gain_db": -4.0,
+      "cooldown_sec": 0.08,
+      "max_instances": 2,
+      "priority": 2,
+      "spatial": {
+        "max_distance": 1200.0,
+        "panning_strength": 0.55
+      },
+      "duck": {}
+    },
+    "shield.impact": {
+      "variants": [
+        "res://assets/sfx/skill-combat-20261103/shield_impact_01.wav",
+        "res://assets/sfx/skill-combat-20261103/shield_impact_02.wav",
+        "res://assets/sfx/skill-combat-20261103/shield_impact_03.wav"
+      ],
+      "gain_db": -5.0,
+      "cooldown_sec": 0.055,
+      "max_instances": 3,
+      "priority": 1,
+      "spatial": {
+        "max_distance": 1200.0,
+        "panning_strength": 0.55
+      },
+      "duck": {}
+    },
+    "shield.tell": {
+      "variants": [
+        "res://assets/sfx/skill-combat-20261103/shield_tell_01.wav",
+        "res://assets/sfx/skill-combat-20261103/shield_tell_02.wav",
+        "res://assets/sfx/skill-combat-20261103/shield_tell_03.wav"
+      ],
+      "gain_db": -3.0,
+      "cooldown_sec": 0.08,
+      "max_instances": 2,
+      "priority": 4,
+      "spatial": {
+        "max_distance": 1200.0,
+        "panning_strength": 0.55
+      },
+      "duck": {}
+    },
+    "mana.cast": {
+      "variants": [
+        "res://assets/sfx/skill-combat-20261103/mana_cast_01.wav",
+        "res://assets/sfx/skill-combat-20261103/mana_cast_02.wav",
+        "res://assets/sfx/skill-combat-20261103/mana_cast_03.wav"
+      ],
+      "gain_db": -4.0,
+      "cooldown_sec": 0.08,
+      "max_instances": 2,
+      "priority": 2,
+      "spatial": {
+        "max_distance": 1200.0,
+        "panning_strength": 0.55
+      },
+      "duck": {}
+    },
+    "mana.impact": {
+      "variants": [
+        "res://assets/sfx/skill-combat-20261103/mana_impact_01.wav",
+        "res://assets/sfx/skill-combat-20261103/mana_impact_02.wav",
+        "res://assets/sfx/skill-combat-20261103/mana_impact_03.wav"
+      ],
+      "gain_db": -5.0,
+      "cooldown_sec": 0.055,
+      "max_instances": 3,
+      "priority": 1,
+      "spatial": {
+        "max_distance": 1200.0,
+        "panning_strength": 0.55
+      },
+      "duck": {}
+    },
+    "mana.tell": {
+      "variants": [
+        "res://assets/sfx/skill-combat-20261103/mana_tell_01.wav",
+        "res://assets/sfx/skill-combat-20261103/mana_tell_02.wav",
+        "res://assets/sfx/skill-combat-20261103/mana_tell_03.wav"
+      ],
+      "gain_db": -3.0,
+      "cooldown_sec": 0.08,
+      "max_instances": 2,
+      "priority": 4,
+      "spatial": {
+        "max_distance": 1200.0,
+        "panning_strength": 0.55
+      },
+      "duck": {}
+    },
+    "cleanse.cast": {
+      "variants": [
+        "res://assets/sfx/skill-combat-20261103/cleanse_cast_01.wav",
+        "res://assets/sfx/skill-combat-20261103/cleanse_cast_02.wav",
+        "res://assets/sfx/skill-combat-20261103/cleanse_cast_03.wav"
+      ],
+      "gain_db": -4.0,
+      "cooldown_sec": 0.08,
+      "max_instances": 2,
+      "priority": 2,
+      "spatial": {
+        "max_distance": 1200.0,
+        "panning_strength": 0.55
+      },
+      "duck": {}
+    },
+    "cleanse.impact": {
+      "variants": [
+        "res://assets/sfx/skill-combat-20261103/cleanse_impact_01.wav",
+        "res://assets/sfx/skill-combat-20261103/cleanse_impact_02.wav",
+        "res://assets/sfx/skill-combat-20261103/cleanse_impact_03.wav"
+      ],
+      "gain_db": -5.0,
+      "cooldown_sec": 0.055,
+      "max_instances": 3,
+      "priority": 1,
+      "spatial": {
+        "max_distance": 1200.0,
+        "panning_strength": 0.55
+      },
+      "duck": {}
+    },
+    "cleanse.tell": {
+      "variants": [
+        "res://assets/sfx/skill-combat-20261103/cleanse_tell_01.wav",
+        "res://assets/sfx/skill-combat-20261103/cleanse_tell_02.wav",
+        "res://assets/sfx/skill-combat-20261103/cleanse_tell_03.wav"
+      ],
+      "gain_db": -3.0,
+      "cooldown_sec": 0.08,
+      "max_instances": 2,
+      "priority": 4,
+      "spatial": {
+        "max_distance": 1200.0,
+        "panning_strength": 0.55
+      },
+      "duck": {}
+    },
+    "summon.cast": {
+      "variants": [
+        "res://assets/sfx/skill-combat-20261103/summon_cast_01.wav",
+        "res://assets/sfx/skill-combat-20261103/summon_cast_02.wav",
+        "res://assets/sfx/skill-combat-20261103/summon_cast_03.wav"
+      ],
+      "gain_db": -4.0,
+      "cooldown_sec": 0.08,
+      "max_instances": 2,
+      "priority": 2,
+      "spatial": {
+        "max_distance": 1200.0,
+        "panning_strength": 0.55
+      },
+      "duck": {}
+    },
+    "summon.impact": {
+      "variants": [
+        "res://assets/sfx/skill-combat-20261103/summon_impact_01.wav",
+        "res://assets/sfx/skill-combat-20261103/summon_impact_02.wav",
+        "res://assets/sfx/skill-combat-20261103/summon_impact_03.wav"
+      ],
+      "gain_db": -5.0,
+      "cooldown_sec": 0.055,
+      "max_instances": 3,
+      "priority": 1,
+      "spatial": {
+        "max_distance": 1200.0,
+        "panning_strength": 0.55
+      },
+      "duck": {}
+    },
+    "summon.tell": {
+      "variants": [
+        "res://assets/sfx/skill-combat-20261103/summon_tell_01.wav",
+        "res://assets/sfx/skill-combat-20261103/summon_tell_02.wav",
+        "res://assets/sfx/skill-combat-20261103/summon_tell_03.wav"
+      ],
+      "gain_db": -3.0,
+      "cooldown_sec": 0.08,
+      "max_instances": 2,
+      "priority": 4,
+      "spatial": {
+        "max_distance": 1200.0,
+        "panning_strength": 0.55
+      },
+      "duck": {}
+    },
+    "buff.cast": {
+      "variants": [
+        "res://assets/sfx/skill-combat-20261103/buff_cast_01.wav",
+        "res://assets/sfx/skill-combat-20261103/buff_cast_02.wav",
+        "res://assets/sfx/skill-combat-20261103/buff_cast_03.wav"
+      ],
+      "gain_db": -4.0,
+      "cooldown_sec": 0.08,
+      "max_instances": 2,
+      "priority": 2,
+      "spatial": {
+        "max_distance": 1200.0,
+        "panning_strength": 0.55
+      },
+      "duck": {}
+    },
+    "buff.impact": {
+      "variants": [
+        "res://assets/sfx/skill-combat-20261103/buff_impact_01.wav",
+        "res://assets/sfx/skill-combat-20261103/buff_impact_02.wav",
+        "res://assets/sfx/skill-combat-20261103/buff_impact_03.wav"
+      ],
+      "gain_db": -5.0,
+      "cooldown_sec": 0.055,
+      "max_instances": 3,
+      "priority": 1,
+      "spatial": {
+        "max_distance": 1200.0,
+        "panning_strength": 0.55
+      },
+      "duck": {}
+    },
+    "buff.tell": {
+      "variants": [
+        "res://assets/sfx/skill-combat-20261103/buff_tell_01.wav",
+        "res://assets/sfx/skill-combat-20261103/buff_tell_02.wav",
+        "res://assets/sfx/skill-combat-20261103/buff_tell_03.wav"
+      ],
+      "gain_db": -3.0,
+      "cooldown_sec": 0.08,
+      "max_instances": 2,
+      "priority": 4,
+      "spatial": {
+        "max_distance": 1200.0,
+        "panning_strength": 0.55
+      },
+      "duck": {}
+    },
+    "beast.cast": {
+      "variants": [
+        "res://assets/sfx/skill-combat-20261103/beast_cast_01.wav",
+        "res://assets/sfx/skill-combat-20261103/beast_cast_02.wav",
+        "res://assets/sfx/skill-combat-20261103/beast_cast_03.wav"
+      ],
+      "gain_db": -4.0,
+      "cooldown_sec": 0.08,
+      "max_instances": 2,
+      "priority": 2,
+      "spatial": {
+        "max_distance": 1200.0,
+        "panning_strength": 0.55
+      },
+      "duck": {}
+    },
+    "beast.impact": {
+      "variants": [
+        "res://assets/sfx/skill-combat-20261103/beast_impact_01.wav",
+        "res://assets/sfx/skill-combat-20261103/beast_impact_02.wav",
+        "res://assets/sfx/skill-combat-20261103/beast_impact_03.wav"
+      ],
+      "gain_db": -5.0,
+      "cooldown_sec": 0.055,
+      "max_instances": 3,
+      "priority": 1,
+      "spatial": {
+        "max_distance": 1200.0,
+        "panning_strength": 0.55
+      },
+      "duck": {}
+    },
+    "beast.tell": {
+      "variants": [
+        "res://assets/sfx/skill-combat-20261103/beast_tell_01.wav",
+        "res://assets/sfx/skill-combat-20261103/beast_tell_02.wav",
+        "res://assets/sfx/skill-combat-20261103/beast_tell_03.wav"
+      ],
+      "gain_db": -3.0,
+      "cooldown_sec": 0.08,
+      "max_instances": 2,
+      "priority": 4,
+      "spatial": {
+        "max_distance": 1200.0,
+        "panning_strength": 0.55
+      },
+      "duck": {}
+    },
+    "bone.cast": {
+      "variants": [
+        "res://assets/sfx/skill-combat-20261103/bone_cast_01.wav",
+        "res://assets/sfx/skill-combat-20261103/bone_cast_02.wav",
+        "res://assets/sfx/skill-combat-20261103/bone_cast_03.wav"
+      ],
+      "gain_db": -4.0,
+      "cooldown_sec": 0.08,
+      "max_instances": 2,
+      "priority": 2,
+      "spatial": {
+        "max_distance": 1200.0,
+        "panning_strength": 0.55
+      },
+      "duck": {}
+    },
+    "bone.impact": {
+      "variants": [
+        "res://assets/sfx/skill-combat-20261103/bone_impact_01.wav",
+        "res://assets/sfx/skill-combat-20261103/bone_impact_02.wav",
+        "res://assets/sfx/skill-combat-20261103/bone_impact_03.wav"
+      ],
+      "gain_db": -5.0,
+      "cooldown_sec": 0.055,
+      "max_instances": 3,
+      "priority": 1,
+      "spatial": {
+        "max_distance": 1200.0,
+        "panning_strength": 0.55
+      },
+      "duck": {}
+    },
+    "bone.tell": {
+      "variants": [
+        "res://assets/sfx/skill-combat-20261103/bone_tell_01.wav",
+        "res://assets/sfx/skill-combat-20261103/bone_tell_02.wav",
+        "res://assets/sfx/skill-combat-20261103/bone_tell_03.wav"
+      ],
+      "gain_db": -3.0,
+      "cooldown_sec": 0.08,
+      "max_instances": 2,
+      "priority": 4,
+      "spatial": {
+        "max_distance": 1200.0,
+        "panning_strength": 0.55
+      },
+      "duck": {}
+    },
+    "armor.cast": {
+      "variants": [
+        "res://assets/sfx/skill-combat-20261103/armor_cast_01.wav",
+        "res://assets/sfx/skill-combat-20261103/armor_cast_02.wav",
+        "res://assets/sfx/skill-combat-20261103/armor_cast_03.wav"
+      ],
+      "gain_db": -4.0,
+      "cooldown_sec": 0.08,
+      "max_instances": 2,
+      "priority": 2,
+      "spatial": {
+        "max_distance": 1200.0,
+        "panning_strength": 0.55
+      },
+      "duck": {}
+    },
+    "armor.impact": {
+      "variants": [
+        "res://assets/sfx/skill-combat-20261103/armor_impact_01.wav",
+        "res://assets/sfx/skill-combat-20261103/armor_impact_02.wav",
+        "res://assets/sfx/skill-combat-20261103/armor_impact_03.wav"
+      ],
+      "gain_db": -5.0,
+      "cooldown_sec": 0.055,
+      "max_instances": 3,
+      "priority": 1,
+      "spatial": {
+        "max_distance": 1200.0,
+        "panning_strength": 0.55
+      },
+      "duck": {}
+    },
+    "armor.tell": {
+      "variants": [
+        "res://assets/sfx/skill-combat-20261103/armor_tell_01.wav",
+        "res://assets/sfx/skill-combat-20261103/armor_tell_02.wav",
+        "res://assets/sfx/skill-combat-20261103/armor_tell_03.wav"
+      ],
+      "gain_db": -3.0,
+      "cooldown_sec": 0.08,
+      "max_instances": 2,
+      "priority": 4,
+      "spatial": {
+        "max_distance": 1200.0,
+        "panning_strength": 0.55
+      },
+      "duck": {}
+    },
+    "command.cast": {
+      "variants": [
+        "res://assets/sfx/skill-combat-20261103/command_cast_01.wav",
+        "res://assets/sfx/skill-combat-20261103/command_cast_02.wav",
+        "res://assets/sfx/skill-combat-20261103/command_cast_03.wav"
+      ],
+      "gain_db": -4.0,
+      "cooldown_sec": 0.08,
+      "max_instances": 2,
+      "priority": 2,
+      "spatial": {
+        "max_distance": 1200.0,
+        "panning_strength": 0.55
+      },
+      "duck": {}
+    },
+    "command.impact": {
+      "variants": [
+        "res://assets/sfx/skill-combat-20261103/command_impact_01.wav",
+        "res://assets/sfx/skill-combat-20261103/command_impact_02.wav",
+        "res://assets/sfx/skill-combat-20261103/command_impact_03.wav"
+      ],
+      "gain_db": -5.0,
+      "cooldown_sec": 0.055,
+      "max_instances": 3,
+      "priority": 1,
+      "spatial": {
+        "max_distance": 1200.0,
+        "panning_strength": 0.55
+      },
+      "duck": {}
+    },
+    "command.tell": {
+      "variants": [
+        "res://assets/sfx/skill-combat-20261103/command_tell_01.wav",
+        "res://assets/sfx/skill-combat-20261103/command_tell_02.wav",
+        "res://assets/sfx/skill-combat-20261103/command_tell_03.wav"
+      ],
+      "gain_db": -3.0,
+      "cooldown_sec": 0.08,
+      "max_instances": 2,
+      "priority": 4,
+      "spatial": {
+        "max_distance": 1200.0,
+        "panning_strength": 0.55
+      },
+      "duck": {}
+    },
+    "flesh.cast": {
+      "variants": [
+        "res://assets/sfx/skill-combat-20261103/flesh_cast_01.wav",
+        "res://assets/sfx/skill-combat-20261103/flesh_cast_02.wav",
+        "res://assets/sfx/skill-combat-20261103/flesh_cast_03.wav"
+      ],
+      "gain_db": -4.0,
+      "cooldown_sec": 0.08,
+      "max_instances": 2,
+      "priority": 2,
+      "spatial": {
+        "max_distance": 1200.0,
+        "panning_strength": 0.55
+      },
+      "duck": {}
+    },
+    "flesh.impact": {
+      "variants": [
+        "res://assets/sfx/skill-combat-20261103/flesh_impact_01.wav",
+        "res://assets/sfx/skill-combat-20261103/flesh_impact_02.wav",
+        "res://assets/sfx/skill-combat-20261103/flesh_impact_03.wav"
+      ],
+      "gain_db": -5.0,
+      "cooldown_sec": 0.055,
+      "max_instances": 3,
+      "priority": 1,
+      "spatial": {
+        "max_distance": 1200.0,
+        "panning_strength": 0.55
+      },
+      "duck": {}
+    },
+    "flesh.tell": {
+      "variants": [
+        "res://assets/sfx/skill-combat-20261103/flesh_tell_01.wav",
+        "res://assets/sfx/skill-combat-20261103/flesh_tell_02.wav",
+        "res://assets/sfx/skill-combat-20261103/flesh_tell_03.wav"
+      ],
+      "gain_db": -3.0,
+      "cooldown_sec": 0.08,
+      "max_instances": 2,
+      "priority": 4,
+      "spatial": {
+        "max_distance": 1200.0,
+        "panning_strength": 0.55
+      },
+      "duck": {}
+    },
+    "boss_hunter.cast": {
+      "variants": [
+        "res://assets/sfx/skill-combat-20261103/boss_hunter_cast_01.wav",
+        "res://assets/sfx/skill-combat-20261103/boss_hunter_cast_02.wav",
+        "res://assets/sfx/skill-combat-20261103/boss_hunter_cast_03.wav"
+      ],
+      "gain_db": -4.0,
+      "cooldown_sec": 0.08,
+      "max_instances": 2,
+      "priority": 2,
+      "spatial": {
+        "max_distance": 1200.0,
+        "panning_strength": 0.55
+      },
+      "duck": {}
+    },
+    "boss_hunter.impact": {
+      "variants": [
+        "res://assets/sfx/skill-combat-20261103/boss_hunter_impact_01.wav",
+        "res://assets/sfx/skill-combat-20261103/boss_hunter_impact_02.wav",
+        "res://assets/sfx/skill-combat-20261103/boss_hunter_impact_03.wav"
+      ],
+      "gain_db": -5.0,
+      "cooldown_sec": 0.055,
+      "max_instances": 3,
+      "priority": 1,
+      "spatial": {
+        "max_distance": 1200.0,
+        "panning_strength": 0.55
+      },
+      "duck": {}
+    },
+    "boss_hunter.tell": {
+      "variants": [
+        "res://assets/sfx/skill-combat-20261103/boss_hunter_tell_01.wav",
+        "res://assets/sfx/skill-combat-20261103/boss_hunter_tell_02.wav",
+        "res://assets/sfx/skill-combat-20261103/boss_hunter_tell_03.wav"
+      ],
+      "gain_db": -3.0,
+      "cooldown_sec": 0.08,
+      "max_instances": 2,
+      "priority": 4,
+      "spatial": {
+        "max_distance": 1200.0,
+        "panning_strength": 0.55
+      },
+      "duck": {}
+    },
+    "boss_cavalry.cast": {
+      "variants": [
+        "res://assets/sfx/skill-combat-20261103/boss_cavalry_cast_01.wav",
+        "res://assets/sfx/skill-combat-20261103/boss_cavalry_cast_02.wav",
+        "res://assets/sfx/skill-combat-20261103/boss_cavalry_cast_03.wav"
+      ],
+      "gain_db": -4.0,
+      "cooldown_sec": 0.08,
+      "max_instances": 2,
+      "priority": 2,
+      "spatial": {
+        "max_distance": 1200.0,
+        "panning_strength": 0.55
+      },
+      "duck": {}
+    },
+    "boss_cavalry.impact": {
+      "variants": [
+        "res://assets/sfx/skill-combat-20261103/boss_cavalry_impact_01.wav",
+        "res://assets/sfx/skill-combat-20261103/boss_cavalry_impact_02.wav",
+        "res://assets/sfx/skill-combat-20261103/boss_cavalry_impact_03.wav"
+      ],
+      "gain_db": -5.0,
+      "cooldown_sec": 0.055,
+      "max_instances": 3,
+      "priority": 1,
+      "spatial": {
+        "max_distance": 1200.0,
+        "panning_strength": 0.55
+      },
+      "duck": {}
+    },
+    "boss_cavalry.tell": {
+      "variants": [
+        "res://assets/sfx/skill-combat-20261103/boss_cavalry_tell_01.wav",
+        "res://assets/sfx/skill-combat-20261103/boss_cavalry_tell_02.wav",
+        "res://assets/sfx/skill-combat-20261103/boss_cavalry_tell_03.wav"
+      ],
+      "gain_db": -3.0,
+      "cooldown_sec": 0.08,
+      "max_instances": 2,
+      "priority": 4,
+      "spatial": {
+        "max_distance": 1200.0,
+        "panning_strength": 0.55
+      },
+      "duck": {}
+    },
+    "boss_general.cast": {
+      "variants": [
+        "res://assets/sfx/skill-combat-20261103/boss_general_cast_01.wav",
+        "res://assets/sfx/skill-combat-20261103/boss_general_cast_02.wav",
+        "res://assets/sfx/skill-combat-20261103/boss_general_cast_03.wav"
+      ],
+      "gain_db": -4.0,
+      "cooldown_sec": 0.08,
+      "max_instances": 2,
+      "priority": 2,
+      "spatial": {
+        "max_distance": 1200.0,
+        "panning_strength": 0.55
+      },
+      "duck": {}
+    },
+    "boss_general.impact": {
+      "variants": [
+        "res://assets/sfx/skill-combat-20261103/boss_general_impact_01.wav",
+        "res://assets/sfx/skill-combat-20261103/boss_general_impact_02.wav",
+        "res://assets/sfx/skill-combat-20261103/boss_general_impact_03.wav"
+      ],
+      "gain_db": -5.0,
+      "cooldown_sec": 0.055,
+      "max_instances": 3,
+      "priority": 1,
+      "spatial": {
+        "max_distance": 1200.0,
+        "panning_strength": 0.55
+      },
+      "duck": {}
+    },
+    "boss_general.tell": {
+      "variants": [
+        "res://assets/sfx/skill-combat-20261103/boss_general_tell_01.wav",
+        "res://assets/sfx/skill-combat-20261103/boss_general_tell_02.wav",
+        "res://assets/sfx/skill-combat-20261103/boss_general_tell_03.wav"
+      ],
+      "gain_db": -3.0,
+      "cooldown_sec": 0.08,
+      "max_instances": 2,
+      "priority": 4,
+      "spatial": {
+        "max_distance": 1200.0,
+        "panning_strength": 0.55
+      },
+      "duck": {}
+    },
+    "boss_demon.cast": {
+      "variants": [
+        "res://assets/sfx/skill-combat-20261103/boss_demon_cast_01.wav",
+        "res://assets/sfx/skill-combat-20261103/boss_demon_cast_02.wav",
+        "res://assets/sfx/skill-combat-20261103/boss_demon_cast_03.wav"
+      ],
+      "gain_db": -4.0,
+      "cooldown_sec": 0.08,
+      "max_instances": 2,
+      "priority": 2,
+      "spatial": {
+        "max_distance": 1200.0,
+        "panning_strength": 0.55
+      },
+      "duck": {}
+    },
+    "boss_demon.impact": {
+      "variants": [
+        "res://assets/sfx/skill-combat-20261103/boss_demon_impact_01.wav",
+        "res://assets/sfx/skill-combat-20261103/boss_demon_impact_02.wav",
+        "res://assets/sfx/skill-combat-20261103/boss_demon_impact_03.wav"
+      ],
+      "gain_db": -5.0,
+      "cooldown_sec": 0.055,
+      "max_instances": 3,
+      "priority": 1,
+      "spatial": {
+        "max_distance": 1200.0,
+        "panning_strength": 0.55
+      },
+      "duck": {}
+    },
+    "boss_demon.tell": {
+      "variants": [
+        "res://assets/sfx/skill-combat-20261103/boss_demon_tell_01.wav",
+        "res://assets/sfx/skill-combat-20261103/boss_demon_tell_02.wav",
+        "res://assets/sfx/skill-combat-20261103/boss_demon_tell_03.wav"
+      ],
+      "gain_db": -3.0,
+      "cooldown_sec": 0.08,
+      "max_instances": 2,
+      "priority": 4,
+      "spatial": {
+        "max_distance": 1200.0,
+        "panning_strength": 0.55
+      },
+      "duck": {}
+    },
+    "boss_hunter.phase": {
+      "variants": [
+        "res://assets/sfx/skill-combat-20261103/boss_hunter_phase_01.wav",
+        "res://assets/sfx/skill-combat-20261103/boss_hunter_phase_02.wav",
+        "res://assets/sfx/skill-combat-20261103/boss_hunter_phase_03.wav"
+      ],
+      "gain_db": -3.0,
+      "cooldown_sec": 0.25,
+      "max_instances": 1,
+      "priority": 6,
+      "spatial": {
+        "max_distance": 1200.0,
+        "panning_strength": 0.55
+      },
+      "duck": {}
+    },
+    "boss_hunter.defeat": {
+      "variants": [
+        "res://assets/sfx/skill-combat-20261103/boss_hunter_defeat_01.wav",
+        "res://assets/sfx/skill-combat-20261103/boss_hunter_defeat_02.wav",
+        "res://assets/sfx/skill-combat-20261103/boss_hunter_defeat_03.wav"
+      ],
+      "gain_db": -3.0,
+      "cooldown_sec": 0.25,
+      "max_instances": 1,
+      "priority": 6,
+      "spatial": {
+        "max_distance": 1200.0,
+        "panning_strength": 0.55
+      },
+      "duck": {}
+    },
+    "boss_cavalry.phase": {
+      "variants": [
+        "res://assets/sfx/skill-combat-20261103/boss_cavalry_phase_01.wav",
+        "res://assets/sfx/skill-combat-20261103/boss_cavalry_phase_02.wav",
+        "res://assets/sfx/skill-combat-20261103/boss_cavalry_phase_03.wav"
+      ],
+      "gain_db": -3.0,
+      "cooldown_sec": 0.25,
+      "max_instances": 1,
+      "priority": 6,
+      "spatial": {
+        "max_distance": 1200.0,
+        "panning_strength": 0.55
+      },
+      "duck": {}
+    },
+    "boss_cavalry.defeat": {
+      "variants": [
+        "res://assets/sfx/skill-combat-20261103/boss_cavalry_defeat_01.wav",
+        "res://assets/sfx/skill-combat-20261103/boss_cavalry_defeat_02.wav",
+        "res://assets/sfx/skill-combat-20261103/boss_cavalry_defeat_03.wav"
+      ],
+      "gain_db": -3.0,
+      "cooldown_sec": 0.25,
+      "max_instances": 1,
+      "priority": 6,
+      "spatial": {
+        "max_distance": 1200.0,
+        "panning_strength": 0.55
+      },
+      "duck": {}
+    },
+    "boss_general.phase": {
+      "variants": [
+        "res://assets/sfx/skill-combat-20261103/boss_general_phase_01.wav",
+        "res://assets/sfx/skill-combat-20261103/boss_general_phase_02.wav",
+        "res://assets/sfx/skill-combat-20261103/boss_general_phase_03.wav"
+      ],
+      "gain_db": -3.0,
+      "cooldown_sec": 0.25,
+      "max_instances": 1,
+      "priority": 6,
+      "spatial": {
+        "max_distance": 1200.0,
+        "panning_strength": 0.55
+      },
+      "duck": {}
+    },
+    "boss_general.defeat": {
+      "variants": [
+        "res://assets/sfx/skill-combat-20261103/boss_general_defeat_01.wav",
+        "res://assets/sfx/skill-combat-20261103/boss_general_defeat_02.wav",
+        "res://assets/sfx/skill-combat-20261103/boss_general_defeat_03.wav"
+      ],
+      "gain_db": -3.0,
+      "cooldown_sec": 0.25,
+      "max_instances": 1,
+      "priority": 6,
+      "spatial": {
+        "max_distance": 1200.0,
+        "panning_strength": 0.55
+      },
+      "duck": {}
+    },
+    "boss_demon.phase": {
+      "variants": [
+        "res://assets/sfx/skill-combat-20261103/boss_demon_phase_01.wav",
+        "res://assets/sfx/skill-combat-20261103/boss_demon_phase_02.wav",
+        "res://assets/sfx/skill-combat-20261103/boss_demon_phase_03.wav"
+      ],
+      "gain_db": -3.0,
+      "cooldown_sec": 0.25,
+      "max_instances": 1,
+      "priority": 6,
+      "spatial": {
+        "max_distance": 1200.0,
+        "panning_strength": 0.55
+      },
+      "duck": {}
+    },
+    "boss_demon.defeat": {
+      "variants": [
+        "res://assets/sfx/skill-combat-20261103/boss_demon_defeat_01.wav",
+        "res://assets/sfx/skill-combat-20261103/boss_demon_defeat_02.wav",
+        "res://assets/sfx/skill-combat-20261103/boss_demon_defeat_03.wav"
+      ],
+      "gain_db": -3.0,
+      "cooldown_sec": 0.25,
+      "max_instances": 1,
+      "priority": 6,
+      "spatial": {
+        "max_distance": 1200.0,
+        "panning_strength": 0.55
+      },
+      "duck": {}
+    },
+    "feedback.hurt": {
+      "variants": [
+        "res://assets/sfx/skill-combat-20261103/feedback_hurt_01.wav",
+        "res://assets/sfx/skill-combat-20261103/feedback_hurt_02.wav",
+        "res://assets/sfx/skill-combat-20261103/feedback_hurt_03.wav"
+      ],
+      "gain_db": -5.0,
+      "cooldown_sec": 0.055,
+      "max_instances": 3,
+      "priority": 1,
+      "spatial": {
+        "max_distance": 1200.0,
+        "panning_strength": 0.55
+      },
+      "duck": {}
+    },
+    "feedback.guard": {
+      "variants": [
+        "res://assets/sfx/skill-combat-20261103/feedback_guard_01.wav",
+        "res://assets/sfx/skill-combat-20261103/feedback_guard_02.wav",
+        "res://assets/sfx/skill-combat-20261103/feedback_guard_03.wav"
+      ],
+      "gain_db": -5.0,
+      "cooldown_sec": 0.055,
+      "max_instances": 3,
+      "priority": 1,
+      "spatial": {
+        "max_distance": 1200.0,
+        "panning_strength": 0.55
+      },
+      "duck": {}
+    },
+    "feedback.death": {
+      "variants": [
+        "res://assets/sfx/skill-combat-20261103/feedback_death_01.wav",
+        "res://assets/sfx/skill-combat-20261103/feedback_death_02.wav",
+        "res://assets/sfx/skill-combat-20261103/feedback_death_03.wav"
+      ],
+      "gain_db": -3.0,
+      "cooldown_sec": 0.25,
+      "max_instances": 1,
+      "priority": 6,
+      "spatial": {
+        "max_distance": 1200.0,
+        "panning_strength": 0.55
+      },
+      "duck": {}
+    },
+    "feedback.pickup": {
+      "variants": [
+        "res://assets/sfx/chronicle-feedback/pickup_01.wav",
+        "res://assets/sfx/chronicle-feedback/pickup_02.wav"
+      ],
+      "gain_db": 0.0,
+      "cooldown_sec": 0.08,
+      "max_instances": 2,
+      "priority": 2,
+      "spatial": {
+        "max_distance": 1200.0,
+        "panning_strength": 0.55
+      },
+      "duck": {},
+      "retained_utility": true
+    },
+    "feedback.level": {
+      "variants": [
+        "res://assets/sfx/chronicle-feedback/level_01.wav",
+        "res://assets/sfx/chronicle-feedback/level_02.wav"
+      ],
+      "gain_db": 0.0,
+      "cooldown_sec": 0.08,
+      "max_instances": 2,
+      "priority": 2,
+      "spatial": {
+        "max_distance": 1200.0,
+        "panning_strength": 0.55
+      },
+      "duck": {},
+      "retained_utility": true
+    },
+    "feedback.elite": {
+      "variants": [
+        "res://assets/sfx/chronicle-feedback/elite_01.wav",
+        "res://assets/sfx/chronicle-feedback/elite_02.wav"
+      ],
+      "gain_db": 0.0,
+      "cooldown_sec": 0.08,
+      "max_instances": 2,
+      "priority": 2,
+      "spatial": {
+        "max_distance": 1200.0,
+        "panning_strength": 0.55
+      },
+      "duck": {},
+      "retained_utility": true
+    }
+  }
+}

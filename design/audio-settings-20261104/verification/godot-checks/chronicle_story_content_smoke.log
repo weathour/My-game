@@ -1,0 +1,74 @@
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+EXPECTED_FAULT_INJECTION: optional first entry write rejected
+ERROR: Could not create directory: '/proc/story-optional-read-only'.
+   at: make_dir_recursive (core/io/dir_access.cpp:178)
+   GDScript backtrace (most recent call first):
+       [0] write (res://scripts/campaign/campaign_store.gd:5)
+       [1] save_slot (res://scripts/campaign/campaign_service.gd:367)
+       [2] commit (res://scripts/campaign/campaign_service.gd:62)
+       [3] save_optional_story_checkpoint (res://scripts/campaign/campaign_service.gd:246)
+       [4] optional_transactions (res://scripts/tests/chronicle_story_content_smoke.gd:86)
+       [5] run (res://scripts/tests/chronicle_story_content_smoke.gd:38)
+EXPECTED_FAULT_INJECTION: optional checkpoint write rejected
+ERROR: Could not create directory: '/proc/story-optional-read-only'.
+   at: make_dir_recursive (core/io/dir_access.cpp:178)
+   GDScript backtrace (most recent call first):
+       [0] write (res://scripts/campaign/campaign_store.gd:5)
+       [1] save_slot (res://scripts/campaign/campaign_service.gd:367)
+       [2] commit (res://scripts/campaign/campaign_service.gd:62)
+       [3] save_optional_story_checkpoint (res://scripts/campaign/campaign_service.gd:246)
+       [4] optional_transactions (res://scripts/tests/chronicle_story_content_smoke.gd:92)
+       [5] run (res://scripts/tests/chronicle_story_content_smoke.gd:38)
+EXPECTED_FAULT_INJECTION: optional completion write rejected
+ERROR: Could not create directory: '/proc/story-optional-read-only'.
+   at: make_dir_recursive (core/io/dir_access.cpp:178)
+   GDScript backtrace (most recent call first):
+       [0] write (res://scripts/campaign/campaign_store.gd:5)
+       [1] save_slot (res://scripts/campaign/campaign_service.gd:367)
+       [2] commit (res://scripts/campaign/campaign_service.gd:62)
+       [3] complete_optional_story (res://scripts/campaign/campaign_service.gd:255)
+       [4] optional_transactions (res://scripts/tests/chronicle_story_content_smoke.gd:94)
+       [5] run (res://scripts/tests/chronicle_story_content_smoke.gd:38)
+EXPECTED_FAULT_INJECTION: victory context write rejected B06
+ERROR: Could not create directory: '/proc/story-battle-read-only'.
+   at: make_dir_recursive (core/io/dir_access.cpp:178)
+   GDScript backtrace (most recent call first):
+       [0] write (res://scripts/campaign/campaign_store.gd:5)
+       [1] save_slot (res://scripts/campaign/campaign_service.gd:367)
+       [2] commit (res://scripts/campaign/campaign_service.gd:62)
+       [3] complete_battle (res://scripts/campaign/campaign_service.gd:189)
+       [4] battle_entry_context (res://scripts/tests/chronicle_story_content_smoke.gd:158)
+       [5] run (res://scripts/tests/chronicle_story_content_smoke.gd:41)
+EXPECTED_FAULT_INJECTION: victory context write rejected B15
+ERROR: Could not create directory: '/proc/story-battle-read-only'.
+   at: make_dir_recursive (core/io/dir_access.cpp:178)
+   GDScript backtrace (most recent call first):
+       [0] write (res://scripts/campaign/campaign_store.gd:5)
+       [1] save_slot (res://scripts/campaign/campaign_service.gd:367)
+       [2] commit (res://scripts/campaign/campaign_service.gd:62)
+       [3] complete_battle (res://scripts/campaign/campaign_service.gd:189)
+       [4] battle_entry_context (res://scripts/tests/chronicle_story_content_smoke.gd:158)
+       [5] run (res://scripts/tests/chronicle_story_content_smoke.gd:41)
+EXPECTED_FAULT_INJECTION: victory context write rejected B16
+ERROR: Could not create directory: '/proc/story-battle-read-only'.
+   at: make_dir_recursive (core/io/dir_access.cpp:178)
+   GDScript backtrace (most recent call first):
+       [0] write (res://scripts/campaign/campaign_store.gd:5)
+       [1] save_slot (res://scripts/campaign/campaign_service.gd:367)
+       [2] commit (res://scripts/campaign/campaign_service.gd:62)
+       [3] complete_battle (res://scripts/campaign/campaign_service.gd:189)
+       [4] battle_entry_context (res://scripts/tests/chronicle_story_content_smoke.gd:158)
+       [5] run (res://scripts/tests/chronicle_story_content_smoke.gd:41)
+EXPECTED_FAULT_INJECTION: victory context write rejected B17
+ERROR: Could not create directory: '/proc/story-battle-read-only'.
+   at: make_dir_recursive (core/io/dir_access.cpp:178)
+   GDScript backtrace (most recent call first):
+       [0] write (res://scripts/campaign/campaign_store.gd:5)
+       [1] save_slot (res://scripts/campaign/campaign_service.gd:367)
+       [2] commit (res://scripts/campaign/campaign_service.gd:62)
+       [3] complete_battle (res://scripts/campaign/campaign_service.gd:189)
+       [4] battle_entry_context (res://scripts/tests/chronicle_story_content_smoke.gd:158)
+       [5] run (res://scripts/tests/chronicle_story_content_smoke.gd:41)
+STORY_REACHABILITY {"optional_unreachable":[],"reaction_unreachable":[],"route_count":64,"shadowed":[]}
+CHRONICLE_STORY_CONTENT_SMOKE PASS checks=320 failures=0

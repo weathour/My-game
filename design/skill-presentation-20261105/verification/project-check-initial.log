@@ -1,0 +1,52 @@
+Check logs: /home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/verification/project-check
+== Python project checks ==
+DOC_LINK_CHECK_OK
+PROJECT_CONFIG_CHECK_OK
+{"graph_update_accepted": false, "reason": "exit=0; Godot extractor=True; missing 1 runtime GDScript files", "missing": ["scripts/new.gd"]}
+GRAPHIFY_UPDATE_REJECTED: exit=0; Godot extractor=True; missing 1 runtime GDScript files
+{"graph_update_accepted": false, "reason": "exit=0; Godot extractor=False; missing 0 runtime GDScript files", "missing": []}
+GRAPHIFY_UPDATE_REJECTED: exit=0; Godot extractor=False; missing 0 runtime GDScript files
+{"graph_update_accepted": true, "reason": "exit=0; Godot extractor=True; missing 0 runtime GDScript files", "missing": []}
+GRAPH_UPDATE_SELF_TEST_OK
+SMOKE_LOG_SELF_TEST_OK
+ARCHITECTURE_CONTRACT_CHECK_OK
+CHRONICLE_STORY_CONTENT_CHECK_OK
+CHRONICLE_CAST_ART_AUDIT PASS characters=22 failures=0
+== Godot asset import ==
+GODOT_ASSET_IMPORT_OK
+== Godot headless parse ==
+GODOT_PARSE_CHECK_OK
+== Godot Chronicle entry scene smoke ==
+CHRONICLE_ENTRY_SCENE_SMOKE_OK
+== Godot Linux development pack export for isolated pack smokes ==
+CHRONICLE_PACK path=/tmp/my-game-check.Cbbi6p/pack-smokes/game.pck bytes=225863952
+== Godot chronicle_enemy_pack_smoke against isolated main pack from empty cwd ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+ENEMY_PACK_SMOKE PASS checks=742 failures=0
+== Godot chronicle_music_pack_smoke against isolated main pack from empty cwd ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+CHRONICLE_MUSIC_PACK_SMOKE PASS cues=16 checks=170 failures=0
+== Godot chronicle_story_pack_smoke against isolated main pack from empty cwd ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+CHRONICLE_STORY_PACK_SMOKE PASS checks=97 failures=0
+== Godot chronicle_combat_feedback_pack_smoke against isolated main pack from empty cwd ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+CHRONICLE_COMBAT_FEEDBACK_PACK_SMOKE PASS checks=1074 failures=0
+== Godot baimen enemy runtime smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+BAIMEN_ENEMY_RUNTIME_SMOKE PASS checks=743 failures=0
+== Godot baimen women combat art smoke ==
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+ERROR: F07 real manual uses its own attack or support clip and wins basic
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://scripts/tests/baimen_women_combat_art_smoke.gd:21)
+       [1] run (res://scripts/tests/baimen_women_combat_art_smoke.gd:152)
+BAIMEN_WOMEN_COMBAT_ART_SMOKE FAIL checks=266 failures=1
+BAIMEN_WOMEN_COMBAT_ART_SMOKE_FAILED

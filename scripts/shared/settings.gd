@@ -26,6 +26,56 @@ const ACTION_INTERACT := "interact"
 static var cached_config: ConfigFile
 
 const COMFORT_DEFAULTS := {"reduced_motion": false, "reduced_flash": false, "large_story_text": false}
+const AUDIO_CATEGORIES := ["player_attack", "player_skill", "enemy_attack", "boss", "hurt", "death", "pickup", "rewards"]
+const AUDIO_VOLUME_DEFAULTS := {"master": 1.0, "music": 0.7, "sfx": 0.65}
+
+static func _audio_volume_key(channel: String) -> String:
+	if channel == "music": return "music_volume_linear"
+	if channel in ["master", "sfx"] or channel in AUDIO_CATEGORIES: return channel + "_volume"
+	return ""
+
+static func load_audio_volume(channel: String) -> float:
+	var key := _audio_volume_key(channel)
+	if key.is_empty(): return 1.0
+	var fallback := float(AUDIO_VOLUME_DEFAULTS.get(channel, 1.0))
+	var value: Variant = _get_config().get_value("audio", key, fallback)
+	if not value is float and not value is int:
+		if not value is String or not value.is_valid_float(): return fallback
+	var level := float(value)
+	return clampf(level, 0.0, 1.0) if is_finite(level) else fallback
+
+static func save_audio_volume(channel: String, value: float) -> void:
+	var key := _audio_volume_key(channel)
+	if key.is_empty() or not is_finite(value): return
+	var config := _get_config()
+	config.set_value("audio", key, clampf(value, 0.0, 1.0))
+	config.save(SETTINGS_PATH)
+
+static func load_audio_muted() -> bool:
+	return bool(_get_config().get_value("audio", "master_muted", false))
+
+static func save_audio_muted(muted: bool) -> void:
+	var config := _get_config()
+	config.set_value("audio", "master_muted", muted)
+	config.save(SETTINGS_PATH)
+
+static func load_music_muted() -> bool:
+	return bool(_get_config().get_value("audio", "music_muted", false))
+
+static func save_music_muted(muted: bool) -> void:
+	var config := _get_config()
+	config.set_value("audio", "music_muted", muted)
+	config.save(SETTINGS_PATH)
+
+static func load_master_gain() -> float:
+	return 0.0 if load_audio_muted() else load_audio_volume("master")
+
+static func load_music_gain() -> float:
+	return 0.0 if load_music_muted() else load_master_gain() * load_audio_volume("music")
+
+static func load_sfx_gain(category: String = "") -> float:
+	var category_gain := load_audio_volume(category) if category in AUDIO_CATEGORIES else 1.0
+	return load_master_gain() * load_audio_volume("sfx") * category_gain
 
 static func comfort_enabled(key: String) -> bool:
 	return bool(_get_config().get_value("comfort", key, COMFORT_DEFAULTS.get(key, false)))
@@ -41,12 +91,10 @@ static func story_font_size(base: int) -> int:
 	return int(round(base * 1.2)) if comfort_enabled("large_story_text") else base
 
 static func load_sfx_volume() -> float:
-	return clampf(float(_get_config().get_value("audio", "sfx_volume", 0.65)), 0.0, 1.0)
+	return load_audio_volume("sfx")
 
 static func save_sfx_volume(value: float) -> void:
-	var config := _get_config()
-	config.set_value("audio", "sfx_volume", clampf(value, 0.0, 1.0))
-	config.save(SETTINGS_PATH)
+	save_audio_volume("sfx", value)
 
 const WINDOW_SIZE_OPTIONS := {
 	"1280x720": Vector2i(1280, 720),

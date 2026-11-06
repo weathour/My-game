@@ -1,37 +1,72 @@
 extends RefCounted
 ## Presentation-only routing. Node identities never depend on the hovered map node.
 const NODE_CUES := {
-	"S01":"hero_daily", "B01":"battle_road", "S02":"character_emma_wary", "B02":"battle_road", "S03":"region_ghost_market",
-	"B04":"battle_road", "B05":"battle_ritual", "B03":"battle_siege", "S04":"hero_main", "F01":"rest_spring", "B06":"battle_ritual", "S05":"story_banter",
-	"B07":"battle_siege", "B08":"battle_siege", "B09":"battle_siege", "B10":"battle_siege", "S06":"story_resolve", "F02":"rest_spring",
-	"S07":"character_lingqi", "S08":"story_tension", "S09":"character_lingqi_aftermath", "B11":"battle_ritual", "B12":"battle_ritual", "S10":"army_cao",
-	"S11":"story_confrontation", "B13":"battle_siege", "B14":"battle_road", "B15":"army_cao", "S12":"region_old_city", "F03":"rest_spring", "B16":"army_caochun_human", "S13":"story_aftermath",
-	"F04":"rest_spring", "B17":"character_liao", "B18":"boss_lubu", "S14":"baimen_epilogue"
+	"S01": "hero_daily",
+	"B01": "midi_test_03",
+	"S02": "midi_test_05",
+	"B02": "midi_test_09",
+	"S03": "midi_test_10",
+	"B04": "midi_test_04",
+	"B05": "midi_test_10",
+	"B03": "midi_test_02",
+	"S04": "midi_test_11",
+	"F01": "rest_spring",
+	"B06": "midi_test_06",
+	"S05": "story_warmth",
+	"B07": "midi_test_09",
+	"B08": "midi_test_03",
+	"B09": "midi_test_02",
+	"B10": "midi_test_05",
+	"S06": "midi_test_05",
+	"F02": "rest_spring",
+	"S07": "midi_test_05",
+	"S08": "midi_test_08",
+	"S09": "midi_test_08",
+	"B11": "midi_test_10",
+	"B12": "midi_test_06",
+	"S10": "midi_test_06",
+	"S11": "midi_test_03",
+	"B13": "midi_test_03",
+	"B14": "midi_test_09",
+	"B15": "midi_test_04",
+	"S12": "midi_test_05",
+	"F03": "rest_spring",
+	"B16": "midi_test_07",
+	"S13": "midi_test_08",
+	"F04": "rest_spring",
+	"B17": "midi_test_12",
+	"B18": "midi_test_01",
+	"S14": "midi_test_11"
 }
-const WARFORMS := {"B15":"army_caoxiu_warform", "B16":"army_caochun_warform", "B17":"character_liao_warform", "B18":"boss_lubu_warform"}
-const SERIOUS_RESULTS := ["B06", "B15", "B16", "B17"]
+const ROUTE_SEGMENT_CUES := ["midi_test_11", "midi_test_10", "midi_test_09", "midi_test_10", "midi_test_06", "midi_test_05"]
+static var _node_segments := {}
 
 static func node_cue(id: String) -> String:
-	return str(NODE_CUES.get(id, "region_baimen_road"))
+	return str(NODE_CUES.get(id, "midi_test_11"))
+
+static func route_cue(current_node: String) -> String:
+	if _node_segments.is_empty():
+		var nodes: Variant = JSON.parse_string(FileAccess.get_file_as_string("res://assets/data/chronicle/route.json"))
+		if nodes is Array:
+			for node: Dictionary in nodes: _node_segments[str(node.id)] = int(node.segment)
+	var segment := int(_node_segments.get(current_node, -1))
+	return str(ROUTE_SEGMENT_CUES[segment]) if segment >= 0 and segment < ROUTE_SEGMENT_CUES.size() else "midi_test_11"
 
 static func page_cue(page: String, current_node: String, previous: String = "") -> String:
 	match page:
-		"home": return "title_overture"
-		"world": return "world_map"
-		"route":
-			if current_node in ["S03", "S04", "S05", "B03", "B04", "B05", "B06", "F01"]: return "region_ghost_market"
-			if current_node in ["S07", "S08", "S09", "S10", "S11", "S12", "S13", "S14", "B11", "B12", "B13", "B14", "B15", "B16", "B17", "B18", "F03", "F04"]: return "region_old_city"
-			return "region_baimen_road"
-		"preparation": return "preparation"
-		"reward": return "results_flow"
-		"failure": return "story_solitude"
-		"journal": return "archive_memories"
-		"roster", "equipment": return "preparation" if previous == "preparation" else "camp_home"
-		"menu", "settings", "saves", "help", "about": return "" # Utility pages keep the owning scene's bed.
-	return "camp_home"
+		"home": return "midi_test_01"
+		"world", "journal": return "midi_test_11"
+		"route": return route_cue(current_node)
+		"preparation": return "midi_test_05"
+		"reward": return node_cue(current_node) # Same battle bed continues; reload starts the same full song.
+		"failure": return "midi_test_08"
+		"camp": return "camp_home"
+		"roster", "equipment": return "midi_test_05" if previous == "preparation" else "camp_home"
+		"menu", "settings", "saves", "help", "about", "music": return ""
+	return "midi_test_11"
 
-static func battle_cue(id: String, form_index: int) -> String:
-	return str(WARFORMS[id]) if form_index > 0 and WARFORMS.has(id) else node_cue(id)
+static func battle_cue(id: String, _form_index: int) -> String:
+	return node_cue(id)
 
 static func story_cue(event: Dictionary, line_id: String) -> String:
 	var cue := str(event.get("music", node_cue(str(event.get("id", "")))))

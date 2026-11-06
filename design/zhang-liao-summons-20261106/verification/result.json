@@ -1,0 +1,76 @@
+{
+  "status": "passed_after_failure_localization_and_guarded_recovery",
+  "recorded_at": 1793962516.883223,
+  "coverage": {
+    "discovered_entries": 65,
+    "source_entries_executed_or_reused": 61,
+    "pack_entries": 4,
+    "same_round_source_reused": 34,
+    "same_round_pack_reused": 4,
+    "fresh_source_recovery": 27,
+    "extra_official_pack_fresh": 1,
+    "entry_methods": {
+      "same_round_source_receipt": 34,
+      "same_round_pack_receipt": 4,
+      "fresh_recovery_source": 27
+    },
+    "entries_without_numeric_pass_count": [
+      "scripts/tests/chronicle_music_pack_smoke.gd",
+      "scripts/tests/chronicle_playable_ui_smoke.gd",
+      "scripts/tests/chronicle_reflow_visual_smoke.gd",
+      "scripts/tests/chronicle_sprite_bounds_smoke.gd"
+    ],
+    "numeric_check_subtotal_for_checks_equals_markers": 156972
+  },
+  "all_strict_logs_revalidated": true,
+  "guard": {
+    "global_inputs": 1907,
+    "global_input_sha256": "4bd12cc1c65dfa421e76ec6299e43cbb2616f864b7585e0e3074f84c79b12f74",
+    "runtime_assets_global_unchanged_during_full_and_recovery": true,
+    "binary_unchanged": true,
+    "production_harness_unchanged": true,
+    "all_current_entry_sha_verified": true,
+    "only_original_entry_change": [
+      "scripts/tests/chronicle_music_playback_smoke.gd"
+    ],
+    "original_entry_sha": "fa3e5d47ac658ac4da67c0930ed08c208e702608eeb2505eb2918f1390e3d8dc",
+    "fixed_entry_sha": "144bb659f43d3b3df9f3933030126c5135e32de1911c94390431d7051d303c66",
+    "music_threshold_unchanged": {
+      "stream": "AudioStreamOggVorbis",
+      "playing": true,
+      "position_gt_seconds": 0.04,
+      "bounded_wall_wait_ms": 1500
+    }
+  },
+  "pack": {
+    "path": "/tmp/my-game-check.CN5c3R/pack-smokes/game.pck",
+    "bytes": 239817556,
+    "sha256": "0c82e8800c8880ff06626aa9a26f717f3f387e8c8bc59cca1a0e453e7f3805c9"
+  },
+  "qa_performance_pack": {
+    "path": "/tmp/liao-summons-after-build-jd45stkd/game.pck",
+    "bytes": 239815412,
+    "sha256": "0a876e4d46684a73241359153f96c4ec278f7cda9914d9c9146fda0c01643ba0"
+  },
+  "same_pack_reexported_for_recovery": false,
+  "official_extra_pack": "official-pack-summon.json",
+  "preserved_failure": "full-failed-audit.json",
+  "music_diagnostics": [
+    "music-original-targeted.json",
+    "music-diagnostic-probes.json",
+    "music-fixed-targeted.json"
+  ],
+  "art": "art-audit.json",
+  "native": "native-approved-audit.json",
+  "media": "animations.json",
+  "scope": "scope-preservation.json",
+  "performance": {
+    "decision": "同负载控制完成，存在少数尾部指标增量；空闲场景基线不可比",
+    "audit": "paired-control-audit.json",
+    "not_all_metric_performance_pass": true
+  },
+  "final_audit": "final-project-check-audit.json",
+  "original_full_status": "failed at804.064s; preserved",
+  "recovery_status": "exit0 after318.577s; 34+4same-round reused +27fresh",
+  "gpu_released": true
+}

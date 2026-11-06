@@ -1,0 +1,39 @@
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+LOOP echo_refund t=0.0 F11/emma_frost paid=28.0 shield_spent=0.0 ammo_spent=0
+LOOP echo_refund t=0.6 JIA/jia_sweep paid=22.0 shield_spent=0.0 ammo_spent=0
+LOOP echo_refund t=0.6 echo owner=F11 charges_left=1
+LOOP echo_refund t=2.02 refund to=F11 returned=1.87 unpaid=3.73
+LOOP echo_refund t=2.62 refund to=JIA returned=1.47 unpaid=2.93
+LOOP echo_refund t=3.0 F04/F04_settle paid=18.0 shield_spent=0.0 ammo_spent=0
+LOOP echo_refund t=3.0 refund to=F11 returned=3.73 unpaid=0.0
+LOOP echo_refund t=3.0 refund to=JIA returned=2.93 unpaid=0.0
+LOOP echo_refund t=3.0 echo owner=F11 charges_left=0
+LOOP echo_refund t=5.8 JIA/jia_sweep paid=22.0 shield_spent=0.0 ammo_spent=0
+LOOP echo_relay t=0.0 F11/emma_frost paid=28.0 shield_spent=0.0 ammo_spent=0
+LOOP echo_relay t=0.6 JIA/jia_sweep paid=17.6 shield_spent=0.0 ammo_spent=0
+LOOP echo_relay t=0.6 echo owner=F11 charges_left=1
+LOOP echo_relay t=5.8 JIA/jia_sweep paid=22.0 shield_spent=0.0 ammo_spent=0
+LOOP echo_relay t=5.8 echo owner=F11 charges_left=0
+LOOP shield_spend t=0.0 F03/physician_heal paid=34.0 shield_spent=0.0 ammo_spent=0
+LOOP shield_spend t=0.6 F07/bandit_thrust paid=38.0 shield_spent=30.0 ammo_spent=0
+LOOP shield_hold t=0.0 F03/physician_heal paid=34.0 shield_spent=0.0 ammo_spent=0
+LOOP shield_hold t=0.6 F07/bandit_sweep paid=28.0 shield_spent=0.0 ammo_spent=0
+LOOP shield_compare spend_hp=128.69 hold_hp=158.69
+LOOP ammo_temper t=0.0 F08/F08_temper paid=30.0 shield_spent=0.0 ammo_spent=0
+LOOP ammo_temper t=0.0 free_followup arrows_spent=1
+LOOP ammo_temper t=0.0 arrows=5.0 next_refill=7.98
+LOOP ammo_temper t=1.2 F06/F06_volley paid=30.0 shield_spent=0.0 ammo_spent=4
+LOOP ammo_temper t=1.2 arrows=1.0 next_refill=6.78
+LOOP ammo_temper t=2.5 JIA/jia_sweep paid=22.0 shield_spent=0.0 ammo_spent=0
+LOOP ammo_temper t=2.5 free_followup arrows_spent=1
+LOOP ammo_temper t=4.6 free_followup arrows_spent=1
+LOOP ammo_temper t=4.6 arrows=0.0 next_refill=3.38
+LOOP ammo_temper t=6.7 free_followup arrows_spent=0
+LOOP ammo_temper t=8.0 arrows=2.0 next_refill=7.98
+LOOP ammo_temper t=8.8 free_followup arrows_spent=1
+LOOP ammo_temper t=8.8 arrows=1.0 next_refill=7.18
+LOOP ammo_temper t=11.5 F06/F06_volley paid=30.0 shield_spent=0.0 ammo_spent=1
+LOOP ammo_temper t=11.5 arrows=0.0 next_refill=4.48
+LOOP empty_switches t=0.0 arrows=0.0 next_refill=7.98
+CHRONICLE_CHARACTER_MECHANICS_SMOKE PASS checks=126 failures=0

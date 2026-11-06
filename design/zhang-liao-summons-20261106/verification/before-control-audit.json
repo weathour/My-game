@@ -1,0 +1,188 @@
+{
+  "status": "diagnostic_only_teardown_rejected",
+  "recorded_at": 1793959547.8745673,
+  "measurement_complete": true,
+  "strict_failures": [
+    "ERROR: 3 resources still in use at exit (run with --verbose for details)."
+  ],
+  "no_errors_ignored": true,
+  "run": {
+    "status": "passed",
+    "runner_pid": 325378,
+    "started_at": 1793959189.0990329,
+    "command": [
+      "/home/weathour/.local/bin/godot-4.6.2",
+      "--path",
+      "/tmp/b17-before-four-cases-aby2qiy5/empty-cwd",
+      "--main-pack",
+      "/tmp/my-game-check.pM7fgF/pack-smokes/game.pck",
+      "--rendering-method",
+      "gl_compatibility",
+      "--audio-driver",
+      "Dummy",
+      "--script",
+      "/tmp/b17-before-four-cases-aby2qiy5/b17_dense_bench.gd",
+      "--",
+      "--out=/home/weathour/programs/desktop-projects/My-game/design/zhang-liao-summons-20261106/verification/before-control"
+    ],
+    "child_pid": 325379,
+    "returncode": 0,
+    "finished_at": 1793959303.128048,
+    "elapsed_seconds": 114.0290150642395
+  },
+  "rows": [
+    {
+      "case": "B17-human-gaoshun-dense",
+      "A2_all_750_states_match_A1_and_B1": true,
+      "A2_event_stream_matches": true,
+      "A1_warm_wall": {
+        "max_ms": 115.483,
+        "over_16_67ms": 271,
+        "over_33_33ms": 89,
+        "over_50ms": 29,
+        "p50_ms": 16.123,
+        "p95_ms": 46.216,
+        "p99_ms": 81.198,
+        "samples": 630
+      },
+      "B1_warm_wall": {
+        "max_ms": 100.516,
+        "over_16_67ms": 580,
+        "over_33_33ms": 317,
+        "over_50ms": 127,
+        "p50_ms": 33.402,
+        "p95_ms": 74.43,
+        "p99_ms": 85.373,
+        "samples": 630
+      },
+      "A2_warm_wall": {
+        "max_ms": 105.939,
+        "over_16_67ms": 600,
+        "over_33_33ms": 348,
+        "over_50ms": 131,
+        "p50_ms": 34.645,
+        "p95_ms": 76.166,
+        "p99_ms": 85.007,
+        "samples": 630
+      },
+      "A2_median_tick": 3.8,
+      "A2_median_input": 0.009,
+      "A2_median_canvas": 2.502
+    },
+    {
+      "case": "B17-human-chengong-dense",
+      "A2_all_750_states_match_A1_and_B1": true,
+      "A2_event_stream_matches": true,
+      "A1_warm_wall": {
+        "max_ms": 85.84,
+        "over_16_67ms": 198,
+        "over_33_33ms": 58,
+        "over_50ms": 25,
+        "p50_ms": 15.003,
+        "p95_ms": 44.388,
+        "p99_ms": 66.372,
+        "samples": 630
+      },
+      "B1_warm_wall": {
+        "max_ms": 73.069,
+        "over_16_67ms": 587,
+        "over_33_33ms": 252,
+        "over_50ms": 8,
+        "p50_ms": 31.23,
+        "p95_ms": 43.302,
+        "p99_ms": 51.21,
+        "samples": 630
+      },
+      "A2_warm_wall": {
+        "max_ms": 81.841,
+        "over_16_67ms": 555,
+        "over_33_33ms": 277,
+        "over_50ms": 8,
+        "p50_ms": 32.037,
+        "p95_ms": 43.786,
+        "p99_ms": 51.944,
+        "samples": 630
+      },
+      "A2_median_tick": 3.652,
+      "A2_median_input": 0.009,
+      "A2_median_canvas": 2.663
+    },
+    {
+      "case": "B17-war-gaoshun-dense",
+      "A2_all_750_states_match_A1_and_B1": true,
+      "A2_event_stream_matches": true,
+      "A1_warm_wall": {
+        "max_ms": 94.799,
+        "over_16_67ms": 397,
+        "over_33_33ms": 81,
+        "over_50ms": 31,
+        "p50_ms": 18.314,
+        "p95_ms": 48.398,
+        "p99_ms": 71.462,
+        "samples": 630
+      },
+      "B1_warm_wall": {
+        "max_ms": 77.971,
+        "over_16_67ms": 624,
+        "over_33_33ms": 323,
+        "over_50ms": 14,
+        "p50_ms": 33.537,
+        "p95_ms": 42.647,
+        "p99_ms": 61.756,
+        "samples": 630
+      },
+      "A2_warm_wall": {
+        "max_ms": 92.377,
+        "over_16_67ms": 608,
+        "over_33_33ms": 337,
+        "over_50ms": 29,
+        "p50_ms": 33.963,
+        "p95_ms": 48.818,
+        "p99_ms": 66.844,
+        "samples": 630
+      },
+      "A2_median_tick": 3.857,
+      "A2_median_input": 0.009,
+      "A2_median_canvas": 2.45
+    },
+    {
+      "case": "B17-war-chengong-dense",
+      "A2_all_750_states_match_A1_and_B1": true,
+      "A2_event_stream_matches": true,
+      "A1_warm_wall": {
+        "max_ms": 45.679,
+        "over_16_67ms": 400,
+        "over_33_33ms": 7,
+        "over_50ms": 0,
+        "p50_ms": 17.84,
+        "p95_ms": 23.592,
+        "p99_ms": 34.502,
+        "samples": 630
+      },
+      "B1_warm_wall": {
+        "max_ms": 90.481,
+        "over_16_67ms": 584,
+        "over_33_33ms": 358,
+        "over_50ms": 16,
+        "p50_ms": 34.324,
+        "p95_ms": 45.834,
+        "p99_ms": 56.867,
+        "samples": 630
+      },
+      "A2_warm_wall": {
+        "max_ms": 83.906,
+        "over_16_67ms": 558,
+        "over_33_33ms": 219,
+        "over_50ms": 12,
+        "p50_ms": 29.314,
+        "p95_ms": 42.992,
+        "p99_ms": 58.387,
+        "samples": 630
+      },
+      "A2_median_tick": 3.395,
+      "A2_median_input": 0.008,
+      "A2_median_canvas": 2.087
+    }
+  ],
+  "host_monitor_limitation": "main-thread children list missed workers created by a different parent thread; zero counts do not establish idle host"
+}

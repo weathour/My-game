@@ -1,0 +1,23 @@
+PASS actual default D2 audio and MIDI load
+PASS output presentation correction defaults to zero, no guessed acoustic latency
+qt.multimedia.ffmpeg: Using Qt multimedia with FFmpeg version 7.1.2 LGPL version 2.1 or later
+No sample format supported found for device "bluez_output.C4_6E_7B_12_03_2E.1"
+qt.core.qfuture.continuations: Parent future has 2 result(s), but only the first result will be handled in the continuation.
+PASS real audio clock advances
+PASS timing and window changes keep the exact audio stream
+PASS timing change does not reset playback position
+PASS visual timeline uses output correction once
+PASS native tester owns focus
+PASS real key is captured after compensation changes
+PASS raw input remains unchanged and presentation subtracts150ms
+PASS input correction subtracts30ms independently
+PASS reference mode change without clicks does not rebuild music
+No sample format supported found for device "bluez_output.C4_6E_7B_12_03_2E.1"
+FAIL blind mode without clicks keeps playback continuous
+Traceback (most recent call last):
+  File "/home/weathour/programs/desktop-projects/My-game/design/rhythm-combat-research-20261104/tester-feedback/check_gui_feedback.py", line 64, in <module>
+    check(w.transport._sink is sink,'blind mode without clicks keeps playback continuous')
+  File "/home/weathour/programs/desktop-projects/My-game/design/rhythm-combat-research-20261104/tester-feedback/check_gui_feedback.py", line 31, in check
+    if not ok:raise AssertionError(label)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: blind mode without clicks keeps playback continuous

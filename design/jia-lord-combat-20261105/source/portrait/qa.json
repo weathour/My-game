@@ -1,0 +1,31 @@
+{
+  "status": "passed",
+  "source_mode": "RGBA",
+  "source_size": [
+    1254,
+    1254
+  ],
+  "runtime_size": [
+    128,
+    128
+  ],
+  "runtime_mode": "RGBA",
+  "runtime_alpha_values": [
+    0,
+    255
+  ],
+  "runtime_opaque_colors": 63,
+  "runtime_bounds": [
+    3,
+    2,
+    124,
+    126
+  ],
+  "editable_canvas_size": [
+    128,
+    128
+  ],
+  "preparation": "Alpha >=128 to binary, transparent-bounds crop, fixed aspect nearest-neighbor fit inside124x124, centered128x128 canvas, indexed <=64-color quantization without dithering; direct128 preparation, no64 native intermediate.",
+  "visual_review": "Reviewed local original and runtime128 plus4x nearest-neighbor view. Adult warm face, short dark stubble/moustache, mischievous grin, gold/black beast-crested helmet, two red sweeping pheasant feathers with red ribbons, gold beast-head shoulder armor and red cloak recognizable. Feather detail and shoulder ornaments simplified by pixel downscale. Bust chest cut is intentional.",
+  "runtime_scope": "No Godot import, controller, bounds, or scene changed by portrait worker; integration/rendering belongs to owner."
+}

@@ -30,6 +30,13 @@ echo "Check logs: $CHECK_LOG_DIR"
 
 GODOT_ERROR_PATTERN="SCRIPT ERROR|Parser Error|Parse Error|Invalid call|Failed to load script|Failed to instantiate|Compilation failed|^ERROR:"
 
+# Recovery is explicit and fails closed if any shared source/resource or the
+# original evidence changed. The default full check path remains unchanged.
+if [[ -n "${PROJECT_CHECK_REUSE_MANIFEST:-}" ]]; then
+  python3 scripts/tests/check_project_reuse.py check --manifest "$PROJECT_CHECK_REUSE_MANIFEST" --godot "$GODOT_BIN"
+  python3 scripts/tests/check_project_reuse.py self-test
+fi
+
 echo "== Python project checks =="
 python3 scripts/tests/check_docs_links.py
 python3 scripts/tests/check_project_config.py
@@ -37,6 +44,10 @@ python3 scripts/tests/check_graph_update_self_test.py
 python3 scripts/tests/check_smoke_log_self_test.py
 python3 scripts/tests/check_architecture_contract.py
 python3 scripts/tests/check_story_content.py
+python3 scripts/tests/check_chronicle_cast_art.py
+python3 scripts/tests/check_jia_campaign_art.py
+python3 scripts/tests/check_zhang_liao_summon_art.py
+python3 scripts/tools/build_battle_sprite_bounds.py --check
 
 if [[ -n "$GODOT_BIN" ]]; then
   echo "== Godot asset import =="
@@ -70,11 +81,22 @@ if [[ -n "$GODOT_BIN" ]]; then
     local display_args=(--headless)
     local runner=()
     local limit=90
+    # Dense encounters and two continuous, resource-carrying routes exercise many
+    # more production ticks than short UI fixtures. Keep their wall budget bounded.
+    if [[ "$script" == *chronicle_enemy_campaign_smoke.gd ]]; then limit=480; fi
+    if [[ "$script" == *chronicle_enemy_sessions_smoke.gd ]]; then limit=300; fi
     name="$(basename "${script%.gd}")"
     log="$CHECK_LOG_DIR/${name}.log"
+    if [[ -n "${PROJECT_CHECK_REUSE_MANIFEST:-}" ]]; then
+      local reuse_status=0
+      python3 scripts/tests/check_project_reuse.py reuse --manifest "$PROJECT_CHECK_REUSE_MANIFEST" \
+        --godot "$GODOT_BIN" --script "$script" --output-log "$log" || reuse_status=$?
+      if [[ "$reuse_status" == 0 ]]; then return; fi
+      if [[ "$reuse_status" != 3 ]]; then exit "$reuse_status"; fi
+    fi
     # Pixel assertions and actual music playback need a real display; CI
     # supplies Xvfb. Dummy still decodes/mixes audio without a hardware device.
-    if [[ "$name" == *_render_smoke || "$name" == "chronicle_music_smoke" || "$name" == "chronicle_music_playback_smoke" || "$name" == "chronicle_combat_feedback_smoke" || "$name" == "chronicle_party_drag_smoke" ]]; then
+    if [[ "$name" == *_render_smoke || "$name" == "chronicle_music_smoke" || "$name" == "chronicle_music_playback_smoke" || "$name" == "chronicle_skill_audio_smoke" || "$name" == "chronicle_combat_feedback_smoke" || "$name" == "chronicle_party_drag_smoke" ]]; then
       display_args=(--rendering-method gl_compatibility --audio-driver Dummy)
       if command -v xvfb-run >/dev/null 2>&1; then
         runner=(xvfb-run --auto-servernum)
@@ -157,6 +179,10 @@ if [[ -n "$GODOT_BIN" ]]; then
     run_smoke "$smoke"
   done
 
+fi
+
+if [[ -n "${PROJECT_CHECK_REUSE_MANIFEST:-}" ]]; then
+  python3 scripts/tests/check_project_reuse.py check --manifest "$PROJECT_CHECK_REUSE_MANIFEST" --godot "$GODOT_BIN"
 fi
 
 if [[ -f graphify-out/graph.json ]] && command -v graphify >/dev/null 2>&1; then

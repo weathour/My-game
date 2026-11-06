@@ -1,0 +1,70 @@
+{
+  "status": "passed_staged_tree_archive_clean_directory_validation",
+  "at": 1793975361.7948558,
+  "candidate": "/tmp/my-game-repository-candidate-iew_fls6",
+  "tree": "a468d3066c7fd3116c556a43cd59b69f84105924",
+  "method": "git write-tree then git archive extracted into independent empty directory; NOT a git clone",
+  "coverage": {
+    "fresh_total": 66,
+    "fresh_source": 62,
+    "fresh_pack": 4,
+    "reuse": 0,
+    "extra_same_pack_camera_fresh_checks": 21725
+  },
+  "PROJECT_CHECK_OK": true,
+  "durable_status": "status.json",
+  "end_guard": {
+    "retained_global_inputs": 1906,
+    "all_retained_global_hashes_match_previous1907_freeze": true,
+    "only_approved_removed_global": "addons/godot_mcp/tools/script_tools_native_backup.gd",
+    "all66_entry_hashes_match_previous_freeze": true,
+    "all_candidate_global_entry_binary_harness_hashes_unchanged_during_validation": true,
+    "binary": {
+      "path": "/home/weathour/.local/opt/godot-4.6.2/Godot_v4.6.2-stable_linux.x86_64",
+      "sha256": "5a806b2b385279d9607094d33e946ed828e9606df4cb46d258ca27468dc5c1c9"
+    },
+    "production_harness": {
+      "scripts/check_project.sh": "f45f877309bbc05f8b9cd5cc5b2c174383fbff86924c082f05cc298f3d204fd2",
+      "scripts/tests/check_smoke_log.py": "b85ee7b7dfa4f2d8a64dcf5b78ab29109b984f0205736166e30f51cc3bb2a683",
+      "scripts/tests/check_project_reuse.py": "a26f9f09408255ae3f7e70ca0266df3ec7bdf694d2d7399758c656df5bdce098"
+    },
+    "camera_sha256": "f61f7883f5e60699643411a869371e4e805bfa7db8ad36b6ead72de10f707b0b"
+  },
+  "archive_end_file_audit": "archive-end-file-audit.json",
+  "expected_test_output_change": {
+    "path": "design/skill-presentation-20261105/qa/skill-presentation-results.json",
+    "writer": "scripts/tests/chronicle_skill_presentation_smoke.gd:742-745 default report destination",
+    "top_level_keys_changed": [
+      "audio_teardown"
+    ],
+    "semantic_result": {
+      "actors": 38,
+      "abilities": 137,
+      "checks": 3934,
+      "failures": 0
+    },
+    "no_input_source_changed": true
+  },
+  "preflight_inventory": "preflight-inventory.json",
+  "credential_review": "own metadata/name scan has no flags; root same-index-tree content review reused; no settings/user records printed",
+  "pack": {
+    "path": "/tmp/my-game-check.AYKkJx/pack-smokes/game.pck",
+    "bytes": 239494336,
+    "sha256": "ebbb3c3fde43becf9cff22adac830cd4e26843484b5ccde44e0779ac2ad65538"
+  },
+  "extra_same_pack_camera": "extra-pack-camera.json",
+  "source_project_cache_fallback": false,
+  "original_project_editor203952_untouched": true,
+  "generated_candidate_cache_excluded_from_commit": {
+    "files": 4985,
+    "bytes": 910117189,
+    "excluded_from_index_archive": true
+  },
+  "all_logs_strict_revalidated": true,
+  "stdout_sha256": "997803cc541e2728423dab0ad052c9a9d0dbfe81106745820f611c3ad99f1973",
+  "full_returncode": 0,
+  "full_elapsed_seconds": 638.3824710845947,
+  "total_preflight_and_full_seconds": 667.6969120502472,
+  "final_audit": "final-audit.json",
+  "gpu_released": true
+}

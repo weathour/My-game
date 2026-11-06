@@ -1,0 +1,212 @@
+{
+  "schema_version": 1,
+  "status": "read_only_hotspot_audit; awaiting owner/Luna live moving-and-casting baseline before source edits",
+  "date": "2026-11-05",
+  "source_freeze_sha256": {
+    "scripts/ui/chronicle/skill_presentation.gd": "031506482f9fa951d041166367b7bf26eced30dd29438874328e6f1eece5da02",
+    "scripts/ui/chronicle/skill_presentation_profiles.gd": "2b391278d4bc4229c340655b7468ac6060562aaa5e5d5fc9926c916b1455603c",
+    "scripts/ui/chronicle/authored_battle_effects.gd": "c72dab1ab290353a440a45fe00b9281b549af95bb2a74a9a3eeb93a99a62ffc0",
+    "scripts/battle/combat_mechanics.gd": "5b7edf5e0a1f63e24b20c58f9f9dd82e02b1803e2546d097e5e761e625a8d716",
+    "assets/data/chronicle/skill_presentation_profiles.json": "c5dfbf05b35d5440a333cce5709781afe11cec0a17de7c286db25c85358a8938"
+  },
+  "scope_owner": [
+    "scripts/ui/chronicle/skill_presentation.gd",
+    "scripts/ui/chronicle/skill_presentation_profiles.gd",
+    "scripts/ui/chronicle/authored_battle_effects.gd"
+  ],
+  "read_only_route_coordination_required": "scripts/battle/combat_mechanics.gd presentation_states only; no source edit authorized by this audit",
+  "hotspots": [
+    {
+      "id": "profiles_per_projectile",
+      "cadence": "Every rendered friendly projectile, every rendered frame; specialized legacy projectiles call the same universal helper for their trail.",
+      "evidence": [
+        {
+          "file": "scripts/ui/chronicle/skill_presentation.gd",
+          "line": 138,
+          "needle": "var profile:=PROFILES.profile(str(projectile.context.source)"
+        },
+        {
+          "file": "scripts/ui/chronicle/skill_presentation_profiles.gd",
+          "line": 18,
+          "needle": "var row: Dictionary = _data.get(\"ability_profiles\""
+        },
+        {
+          "file": "scripts/ui/chronicle/authored_battle_effects.gd",
+          "line": 118,
+          "needle": "skill.draw_projectile(painter,projectile,origin,scale,false)"
+        }
+      ],
+      "known_work": "Full profile dictionary duplicate(true), string classification and hex-to-Color parsing. Current paths perform2-4 hex parses per arrow projectile draw,2 for trail-only; glyphs add their own parse.",
+      "proposal": "Introduce private/read-only compiled render-profile cache keyed by source+ability+kind_override; compile RGB Color values and static role tags once. Keep public profile()/all_profiles() independent mutable copies so external edits cannot poison cached rendering. Alias/source mismatch and JIA spear variant must remain exact.",
+      "priority": "P0; no quality or budget change",
+      "measurement_needed": "Live friendly projectile count and profile/Color construction calls per frame; corresponding CPU delta under sustained moving/casting workload."
+    },
+    {
+      "id": "state_reconstruction_and_deepcopy",
+      "cadence": "Every skill.sync, even repeated same-clock refreshes and pauses.",
+      "evidence": [
+        {
+          "file": "scripts/ui/chronicle/skill_presentation.gd",
+          "line": 53,
+          "needle": "for snapshot: Dictionary in battle.presentation_states():"
+        },
+        {
+          "file": "scripts/ui/chronicle/skill_presentation.gd",
+          "line": 55,
+          "needle": "var entry:=snapshot.duplicate(true)"
+        },
+        {
+          "file": "scripts/ui/chronicle/skill_presentation.gd",
+          "line": 56,
+          "needle": "entry.profile=_state_profile(snapshot)"
+        },
+        {
+          "file": "scripts/battle/combat_mechanics.gd",
+          "line": 529,
+          "needle": "func presentation_states()"
+        },
+        {
+          "file": "scripts/battle/combat_mechanics.gd",
+          "line": 563,
+          "needle": "return result.duplicate(true)"
+        }
+      ],
+      "known_work": "Mechanics builds an entire fresh Array of fresh primitive-valued Dictionaries; it then deep-copies the array. Renderer deep-copies each record again and deep-copies a profile per record. On a change, another deep copy includes the full profile. MAX_STATE_DRAWS64 limits drawing only, not this construction.",
+      "proposal": "First remove only redundant ownership copies: fresh primitive-valued projection records are already detached; renderer can own the returned record and share immutable compiled profiles. Tail events need a shallow value snapshot, not a deep profile copy. Reuse a state key profile if source/ability/kind are unchanged.",
+      "priority": "P0, mechanics route edit requires explicit root coordination before touching source",
+      "risks": [
+        "Do not return aliases to runtime windows/fields/pools. Current SHA has only primitive record values, but a future nested field must preserve detachment.",
+        "Do not filter/cap the underlying truth list just because drawing has a64-state cap.",
+        "Do not change start/pulse/end comparisons or remaining/value arithmetic."
+      ],
+      "measurement_needed": "Actual projected-state count, records built/copied per physics tick and per same-clock refresh, especially curse/exposure/slow density."
+    },
+    {
+      "id": "same_clock_resync",
+      "cadence": "Canvas refresh may run more than once for one elapsed time (pause/resize/layout or multiple presentation calls).",
+      "evidence": [
+        {
+          "file": "scripts/ui/chronicle/authored_battle_effects.gd",
+          "line": 78,
+          "needle": "skill.sync(battle)"
+        },
+        {
+          "file": "scripts/ui/chronicle/skill_presentation.gd",
+          "line": 41,
+          "needle": "clock = battle.director.elapsed"
+        }
+      ],
+      "proposal": "Coordinate with Canvas owner to avoid duplicate synchronization on one already-observed state revision. Prefer a presentation-only revision/dirty token reflecting real tick, successful payload, resolve/receive/status mutation and switch. If a token is unavailable, keep sync correctness and optimize its internals first.",
+      "priority": "P1 after baseline/ownership agreement",
+      "risks": [
+        "Clock-only early-return is unsafe: direct casts, repeated echo, zero-delta ticks, manual state fixtures and switches can change facts while clock is unchanged.",
+        "Pause may still have settings/layout or a terminal clear; do not freeze those updates.",
+        "A renderer-local cache must reset on new battle, terminal outcome and clear()."
+      ]
+    },
+    {
+      "id": "clip_initial_readback",
+      "cadence": "Cold authored-effect construction at each BattleCanvas, not every steady-state frame.",
+      "evidence": [
+        {
+          "file": "scripts/ui/chronicle/authored_battle_effects.gd",
+          "line": 20,
+          "needle": "func _init()"
+        },
+        {
+          "file": "scripts/ui/chronicle/authored_battle_effects.gd",
+          "line": 48,
+          "needle": "var used := textures[i].get_image().get_used_rect()"
+        }
+      ],
+      "known_work": "PackedScene frame extraction, repeated Texture2D.get_image GPU/CPU readback for every clip frame, bounds union, and AtlasTexture allocation; repeated between battles.",
+      "proposal": "Cache immutable clips and cropped atlases once per source set; additionally precompute exact opaque union bounds offline with asset hashes to eliminate first-battle readback too. Preserve identical source regions, frame durations and normalized dimensions.",
+      "priority": "P0 for entry/first-use stalls, separate from continuous-frame diagnosis",
+      "measurement_needed": "Cold entry/init wall/CPU time and first-use readback count. Do not infer a steady-state FPS explanation merely from cold cost."
+    },
+    {
+      "id": "draw_material_geometry_allocations",
+      "cadence": "Per transient/state/glyph each draw; existing caps112 universal +64 legacy +64 state draws bound count but not per-item cost.",
+      "evidence": [
+        {
+          "file": "scripts/ui/chronicle/skill_presentation.gd",
+          "line": 164,
+          "needle": "func _glyph("
+        },
+        {
+          "file": "scripts/ui/chronicle/skill_presentation.gd",
+          "line": 167,
+          "needle": "var points:=PackedVector2Array()"
+        },
+        {
+          "file": "scripts/ui/chronicle/skill_presentation.gd",
+          "line": 204,
+          "needle": "var color:=Color(str(profile.palette),alpha*float(profile.strength))"
+        },
+        {
+          "file": "scripts/ui/chronicle/skill_presentation.gd",
+          "line": 376,
+          "needle": "func _draw_benefit("
+        }
+      ],
+      "known_work": "Repeated string dispatch, Color parsing, PackedVector arrays, sin/cos vectors, shield/arrow polygons, and unchanged benefit label/name formatting. Curse contacts can call glyph for each chip.",
+      "proposal": "Preparse Colors and static tags in compiled profiles, memoize fixed glyph/weapon stencil directions and constant PackedVector geometry, and format immutable benefit text at fact creation. Keep dynamic positions, alpha, age, range, rotation and actual projectile movement live. Only pursue larger geometry refactors if measured draw CPU remains material after P0.",
+      "priority": "P1",
+      "risks": [
+        "Do not change visual dimensions, motion, effect density or material distinctions as a shortcut.",
+        "Geometry memoization must preserve current floating-point/order behavior or be checked against all137 native frames.",
+        "Reduced motion fixes decorative geometry; actual projectiles, state values and effect expiry remain truthful."
+      ]
+    },
+    {
+      "id": "legacy_style_and_duplicate_event_copy",
+      "cadence": "Each remembered effect and each legacy transient draw.",
+      "evidence": [
+        {
+          "file": "scripts/ui/chronicle/authored_battle_effects.gd",
+          "line": 92,
+          "needle": "if style(effect).is_empty(): return"
+        },
+        {
+          "file": "scripts/ui/chronicle/authored_battle_effects.gd",
+          "line": 96,
+          "needle": "var entry := effect.duplicate(true)"
+        },
+        {
+          "file": "scripts/ui/chronicle/authored_battle_effects.gd",
+          "line": 143,
+          "needle": "var effect:=fact.duplicate(true)"
+        },
+        {
+          "file": "scripts/ui/chronicle/authored_battle_effects.gd",
+          "line": 166,
+          "needle": "var kind := style(effect)"
+        }
+      ],
+      "known_work": "Ability/source-to-style string dispatch repeats in remember, draw filtering and _draw_event; consume copies a release, then _remember copies it again.",
+      "proposal": "Store resolved style once on the renderer-owned entry; convert the event to one owned shallow/deep snapshot at the ingestion boundary, preserving recipient arrays and original source/cast/delivery/presentation_id. Do not remove existing legacy base layers or merge different deliveries.",
+      "priority": "P1; small safe allocation reduction after baseline"
+    }
+  ],
+  "acceptance_constraints": [
+    "All137 successful ability/failure/actual benefit facts and multi-delivery identity preserved.",
+    "No changes to MP/CD/damage/physics/movement/hit time/RNG/time_scale or source ownership.",
+    "No quality drop, effect deletion, density/budget reduction, or material homogenization before the actual bottleneck is measured.",
+    "Preserve pause/terminal/switch/settings and reduced-motion/reduced-flash behavior.",
+    "Public profile copies and presentation state snapshots remain externally non-mutating to runtime/caches.",
+    "Match current frame output/shape/Color semantics wherever the optimization is declared lossless.",
+    "Do not use the prior120-frame12-stationary fixture to contradict the real user report."
+  ],
+  "suggested_order": [
+    "Luna/root freeze sustained moving/casting live baseline and captures first.",
+    "P0 compiled immutable render profiles/Colors, single-owned state snapshots and per-state style reuse.",
+    "P0 exact precomputed clip bounds/static immutable clip atlas cache for first-use stalls.",
+    "Repeat identical sustained workload; compare CPU/frame percentiles, allocation/readback/call counts and fact counters.",
+    "Only then measured P1 revision-based duplicate-sync or glyph/static-geometry work; coordinate Canvas and mechanics route ownership first."
+  ],
+  "what_this_audit_does_not_claim": [
+    "No runtime timings or FPS collected here.",
+    "A costly-looking source path is not proof it dominates the user hitch.",
+    "No source files or live baseline inputs changed."
+  ]
+}

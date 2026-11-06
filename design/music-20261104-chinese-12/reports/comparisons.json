@@ -1,0 +1,1980 @@
+{
+  "status": "PASS",
+  "clips": [
+    {
+      "index": 1,
+      "cue_id": "midi_test_01",
+      "title": "The Beautiful People",
+      "start_seconds_in_aligned_full_audio": 173,
+      "duration_per_variant_seconds": 45.0,
+      "selection": {
+        "changed_note_onsets": 52,
+        "chinese_note_onsets": 69,
+        "method": "max distinct changed onset half-second bins, then note count and Chinese-layer presence; no amplitude selection"
+      },
+      "common_excerpt_target_lufs": -19.68,
+      "individual_clips": {
+        "C": {
+          "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐全12曲_20261104/01 - The Beautiful People/试听片段 - C.mp3",
+          "sha256": "6cc5d57297d5b4b9c75568c3d94cef8c64bd2d20774302ab4df59be1322fca99",
+          "probe": {
+            "programs": [],
+            "streams": [
+              {
+                "codec_name": "mp3",
+                "sample_fmt": "fltp",
+                "sample_rate": "48000",
+                "channels": 2,
+                "bits_per_sample": 0,
+                "bit_rate": "320000"
+              }
+            ],
+            "format": {
+              "duration": "45.024000",
+              "size": "1801965"
+            }
+          },
+          "loudness": {
+            "input_i": "-19.69",
+            "input_tp": "-4.00",
+            "input_lra": "1.20",
+            "input_thresh": "-29.93",
+            "output_i": "-17.47",
+            "output_tp": "-2.00",
+            "output_lra": "0.90",
+            "output_thresh": "-27.63",
+            "normalization_type": "dynamic",
+            "target_offset": "-0.53"
+          },
+          "finite": true,
+          "fixed_gain_db": 0.1700000000000017
+        },
+        "D1": {
+          "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐全12曲_20261104/01 - The Beautiful People/试听片段 - D1.mp3",
+          "sha256": "36604f30d88d495f3d3ce524e3dff6592291bf8e95e2f2be8b392ec5817dfd98",
+          "probe": {
+            "programs": [],
+            "streams": [
+              {
+                "codec_name": "mp3",
+                "sample_fmt": "fltp",
+                "sample_rate": "48000",
+                "channels": 2,
+                "bits_per_sample": 0,
+                "bit_rate": "320000"
+              }
+            ],
+            "format": {
+              "duration": "45.024000",
+              "size": "1801965"
+            }
+          },
+          "loudness": {
+            "input_i": "-19.68",
+            "input_tp": "-5.80",
+            "input_lra": "1.10",
+            "input_thresh": "-29.91",
+            "output_i": "-17.49",
+            "output_tp": "-2.00",
+            "output_lra": "1.20",
+            "output_thresh": "-27.64",
+            "normalization_type": "dynamic",
+            "target_offset": "-0.51"
+          },
+          "finite": true,
+          "fixed_gain_db": 0.03999999999999915
+        },
+        "D2": {
+          "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐全12曲_20261104/01 - The Beautiful People/试听片段 - D2.mp3",
+          "sha256": "e1ebd54421085c6bba0ddcd7ffefbce552f395f297709d4b460fccff9e61569c",
+          "probe": {
+            "programs": [],
+            "streams": [
+              {
+                "codec_name": "mp3",
+                "sample_fmt": "fltp",
+                "sample_rate": "48000",
+                "channels": 2,
+                "bits_per_sample": 0,
+                "bit_rate": "320000"
+              }
+            ],
+            "format": {
+              "duration": "45.024000",
+              "size": "1801965"
+            }
+          },
+          "loudness": {
+            "input_i": "-19.68",
+            "input_tp": "-5.36",
+            "input_lra": "1.10",
+            "input_thresh": "-29.91",
+            "output_i": "-17.51",
+            "output_tp": "-2.00",
+            "output_lra": "1.20",
+            "output_thresh": "-27.65",
+            "normalization_type": "dynamic",
+            "target_offset": "-0.49"
+          },
+          "finite": true,
+          "fixed_gain_db": 0.10999999999999943
+        }
+      },
+      "joined_order": [
+        "C",
+        "D1",
+        "D2"
+      ],
+      "gap_seconds": 0.8,
+      "joined": {
+        "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐全12曲_20261104/01 - The Beautiful People/快速对照 - C-D1-D2.mp3",
+        "sha256": "5fb3dbd3a97151a35673eeeee673da862996381974ef5e3b32a4660f7655b483",
+        "probe": {
+          "programs": [],
+          "streams": [
+            {
+              "codec_name": "mp3",
+              "sample_fmt": "fltp",
+              "sample_rate": "48000",
+              "channels": 2,
+              "bits_per_sample": 0,
+              "bit_rate": "320000"
+            }
+          ],
+          "format": {
+            "duration": "136.632000",
+            "size": "5466285"
+          }
+        },
+        "loudness": {
+          "input_i": "-19.70",
+          "input_tp": "-4.00",
+          "input_lra": "2.00",
+          "input_thresh": "-29.99",
+          "output_i": "-17.78",
+          "output_tp": "-2.00",
+          "output_lra": "1.90",
+          "output_thresh": "-28.02",
+          "normalization_type": "dynamic",
+          "target_offset": "-0.22"
+        },
+        "finite": true
+      },
+      "source_audio_report_sha256": "1b5b18746b342fb9e857a914e071714356371f08fbe86517237d3ff43987dbb9",
+      "reuse_provenance": {
+        "original_comparisons_report": "/home/weathour/programs/desktop-projects/My-game/design/music-20261104-chinese-trial/reports/comparisons.json",
+        "original_comparisons_report_sha256": "758d0bd0c06818164a798aa76e3da72d2339807f42a4b8ce17364590ba6533d1",
+        "copied_without_reencoding": true
+      },
+      "current_audio_report_sha256": "7f0268d04cda602ccff9621471fe36977b950ae3ba4f3e849e3750d1d02bc3a8"
+    },
+    {
+      "index": 2,
+      "cue_id": "midi_test_02",
+      "title": "mOBSCENE",
+      "start_seconds_in_aligned_full_audio": 62,
+      "duration_per_variant_seconds": 45.0,
+      "selection": {
+        "changed_note_onsets": 31,
+        "chinese_note_onsets": 75,
+        "method": "max distinct changed onset half-second bins, then note count and Chinese-layer presence; no amplitude selection"
+      },
+      "common_excerpt_target_lufs": -20.85,
+      "individual_clips": {
+        "C": {
+          "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐全12曲_20261104/02 - mOBSCENE/试听片段 - C.mp3",
+          "sha256": "51cd8594df96ab571d8fd5c30eefbea4fca5850a52f4bdefe7ada363b8966951",
+          "probe": {
+            "programs": [],
+            "streams": [
+              {
+                "codec_name": "mp3",
+                "sample_fmt": "fltp",
+                "sample_rate": "48000",
+                "channels": 2,
+                "bits_per_sample": 0,
+                "bit_rate": "320000"
+              }
+            ],
+            "format": {
+              "duration": "45.024000",
+              "size": "1801965"
+            }
+          },
+          "loudness": {
+            "input_i": "-20.85",
+            "input_tp": "-3.97",
+            "input_lra": "6.20",
+            "input_thresh": "-30.85",
+            "output_i": "-18.09",
+            "output_tp": "-2.00",
+            "output_lra": "6.10",
+            "output_thresh": "-28.09",
+            "normalization_type": "dynamic",
+            "target_offset": "0.09"
+          },
+          "finite": true,
+          "fixed_gain_db": 0.41000000000000014
+        },
+        "D1": {
+          "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐全12曲_20261104/02 - mOBSCENE/试听片段 - D1.mp3",
+          "sha256": "8b79bdfd340306a02b7ad1cf73b32674308c3787625f4ad63cf84807a66236b8",
+          "probe": {
+            "programs": [],
+            "streams": [
+              {
+                "codec_name": "mp3",
+                "sample_fmt": "fltp",
+                "sample_rate": "48000",
+                "channels": 2,
+                "bits_per_sample": 0,
+                "bit_rate": "320000"
+              }
+            ],
+            "format": {
+              "duration": "45.024000",
+              "size": "1801965"
+            }
+          },
+          "loudness": {
+            "input_i": "-20.85",
+            "input_tp": "-3.98",
+            "input_lra": "6.40",
+            "input_thresh": "-30.85",
+            "output_i": "-17.97",
+            "output_tp": "-2.00",
+            "output_lra": "5.90",
+            "output_thresh": "-27.97",
+            "normalization_type": "dynamic",
+            "target_offset": "-0.03"
+          },
+          "finite": true,
+          "fixed_gain_db": 0.10999999999999943
+        },
+        "D2": {
+          "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐全12曲_20261104/02 - mOBSCENE/试听片段 - D2.mp3",
+          "sha256": "cf8e5d71209bced6c0729617fb49464285f399fa938882eaad33e3effed5145f",
+          "probe": {
+            "programs": [],
+            "streams": [
+              {
+                "codec_name": "mp3",
+                "sample_fmt": "fltp",
+                "sample_rate": "48000",
+                "channels": 2,
+                "bits_per_sample": 0,
+                "bit_rate": "320000"
+              }
+            ],
+            "format": {
+              "duration": "45.024000",
+              "size": "1801965"
+            }
+          },
+          "loudness": {
+            "input_i": "-20.85",
+            "input_tp": "-4.01",
+            "input_lra": "6.40",
+            "input_thresh": "-30.85",
+            "output_i": "-17.97",
+            "output_tp": "-2.00",
+            "output_lra": "6.00",
+            "output_thresh": "-27.97",
+            "normalization_type": "dynamic",
+            "target_offset": "-0.03"
+          },
+          "finite": true,
+          "fixed_gain_db": 0.09999999999999787
+        }
+      },
+      "joined_order": [
+        "C",
+        "D1",
+        "D2"
+      ],
+      "gap_seconds": 0.8,
+      "joined": {
+        "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐全12曲_20261104/02 - mOBSCENE/快速对照 - C-D1-D2.mp3",
+        "sha256": "96567c60ebcaac977476da549dc5ab0cc75d1319dac931422c53bd4777d5e78d",
+        "probe": {
+          "programs": [],
+          "streams": [
+            {
+              "codec_name": "mp3",
+              "sample_fmt": "fltp",
+              "sample_rate": "48000",
+              "channels": 2,
+              "bits_per_sample": 0,
+              "bit_rate": "320000"
+            }
+          ],
+          "format": {
+            "duration": "136.632000",
+            "size": "5466285"
+          }
+        },
+        "loudness": {
+          "input_i": "-21.00",
+          "input_tp": "-3.97",
+          "input_lra": "6.00",
+          "input_thresh": "-31.00",
+          "output_i": "-18.01",
+          "output_tp": "-2.00",
+          "output_lra": "6.10",
+          "output_thresh": "-28.01",
+          "normalization_type": "dynamic",
+          "target_offset": "0.01"
+        },
+        "finite": true
+      },
+      "source_audio_report_sha256": "299c0f8a930bb8734491b3170df26036e3232d7e34f812aa66b5199d54584355"
+    },
+    {
+      "index": 3,
+      "cue_id": "midi_test_03",
+      "title": "The Fight Song",
+      "start_seconds_in_aligned_full_audio": 95,
+      "duration_per_variant_seconds": 45.0,
+      "selection": {
+        "changed_note_onsets": 9,
+        "chinese_note_onsets": 187,
+        "method": "max distinct changed onset half-second bins, then note count and Chinese-layer presence; no amplitude selection"
+      },
+      "common_excerpt_target_lufs": -18.77,
+      "individual_clips": {
+        "C": {
+          "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐全12曲_20261104/03 - The Fight Song/试听片段 - C.mp3",
+          "sha256": "461c3e85a8c75f9abd391cd89d0733ff6c1b32eeaffa7aa97d772f399e4541ea",
+          "probe": {
+            "programs": [],
+            "streams": [
+              {
+                "codec_name": "mp3",
+                "sample_fmt": "fltp",
+                "sample_rate": "48000",
+                "channels": 2,
+                "bits_per_sample": 0,
+                "bit_rate": "320000"
+              }
+            ],
+            "format": {
+              "duration": "45.024000",
+              "size": "1801965"
+            }
+          },
+          "loudness": {
+            "input_i": "-18.76",
+            "input_tp": "-4.74",
+            "input_lra": "0.80",
+            "input_thresh": "-28.76",
+            "output_i": "-17.91",
+            "output_tp": "-3.86",
+            "output_lra": "0.80",
+            "output_thresh": "-27.91",
+            "normalization_type": "dynamic",
+            "target_offset": "-0.09"
+          },
+          "finite": true,
+          "fixed_gain_db": -0.509999999999998
+        },
+        "D1": {
+          "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐全12曲_20261104/03 - The Fight Song/试听片段 - D1.mp3",
+          "sha256": "71643985bba54459018c92358e29eac5aa6119cfcbe445ad28922d40112f5298",
+          "probe": {
+            "programs": [],
+            "streams": [
+              {
+                "codec_name": "mp3",
+                "sample_fmt": "fltp",
+                "sample_rate": "48000",
+                "channels": 2,
+                "bits_per_sample": 0,
+                "bit_rate": "320000"
+              }
+            ],
+            "format": {
+              "duration": "45.024000",
+              "size": "1801965"
+            }
+          },
+          "loudness": {
+            "input_i": "-18.77",
+            "input_tp": "-3.94",
+            "input_lra": "0.90",
+            "input_thresh": "-28.77",
+            "output_i": "-17.87",
+            "output_tp": "-3.11",
+            "output_lra": "0.90",
+            "output_thresh": "-27.87",
+            "normalization_type": "dynamic",
+            "target_offset": "-0.13"
+          },
+          "finite": true,
+          "fixed_gain_db": -0.5
+        },
+        "D2": {
+          "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐全12曲_20261104/03 - The Fight Song/试听片段 - D2.mp3",
+          "sha256": "05404c9e02f5621343ce8ebf9ee3ccc8532a5c87876e53facb7887124b674e4b",
+          "probe": {
+            "programs": [],
+            "streams": [
+              {
+                "codec_name": "mp3",
+                "sample_fmt": "fltp",
+                "sample_rate": "48000",
+                "channels": 2,
+                "bits_per_sample": 0,
+                "bit_rate": "320000"
+              }
+            ],
+            "format": {
+              "duration": "45.024000",
+              "size": "1801965"
+            }
+          },
+          "loudness": {
+            "input_i": "-18.77",
+            "input_tp": "-4.38",
+            "input_lra": "0.90",
+            "input_thresh": "-28.77",
+            "output_i": "-17.87",
+            "output_tp": "-3.40",
+            "output_lra": "0.90",
+            "output_thresh": "-27.87",
+            "normalization_type": "dynamic",
+            "target_offset": "-0.13"
+          },
+          "finite": true,
+          "fixed_gain_db": -0.5
+        }
+      },
+      "joined_order": [
+        "C",
+        "D1",
+        "D2"
+      ],
+      "gap_seconds": 0.8,
+      "joined": {
+        "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐全12曲_20261104/03 - The Fight Song/快速对照 - C-D1-D2.mp3",
+        "sha256": "8096508c56713556a3fc6bd01832c3aa2c238add9cd4992135d27d8fb1e238b0",
+        "probe": {
+          "programs": [],
+          "streams": [
+            {
+              "codec_name": "mp3",
+              "sample_fmt": "fltp",
+              "sample_rate": "48000",
+              "channels": 2,
+              "bits_per_sample": 0,
+              "bit_rate": "320000"
+            }
+          ],
+          "format": {
+            "duration": "136.632000",
+            "size": "5466285"
+          }
+        },
+        "loudness": {
+          "input_i": "-18.80",
+          "input_tp": "-4.00",
+          "input_lra": "1.00",
+          "input_thresh": "-28.81",
+          "output_i": "-17.96",
+          "output_tp": "-3.18",
+          "output_lra": "1.10",
+          "output_thresh": "-27.96",
+          "normalization_type": "dynamic",
+          "target_offset": "-0.04"
+        },
+        "finite": true
+      },
+      "source_audio_report_sha256": "21e72facd8de7993959eec639e7fc39949c52da39dee211f8994e4aeeaee55b8"
+    },
+    {
+      "index": 4,
+      "cue_id": "midi_test_04",
+      "title": "Disposable Teens",
+      "start_seconds_in_aligned_full_audio": 137,
+      "duration_per_variant_seconds": 45.0,
+      "selection": {
+        "changed_note_onsets": 19,
+        "chinese_note_onsets": 193,
+        "method": "max distinct changed onset half-second bins, then note count and Chinese-layer presence; no amplitude selection"
+      },
+      "common_excerpt_target_lufs": -19.52,
+      "individual_clips": {
+        "C": {
+          "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐全12曲_20261104/04 - Disposable Teens/试听片段 - C.mp3",
+          "sha256": "ba47ae7556429a30053308c3af652287ba6abf5a707612a69ee4363e0415e234",
+          "probe": {
+            "programs": [],
+            "streams": [
+              {
+                "codec_name": "mp3",
+                "sample_fmt": "fltp",
+                "sample_rate": "48000",
+                "channels": 2,
+                "bits_per_sample": 0,
+                "bit_rate": "320000"
+              }
+            ],
+            "format": {
+              "duration": "45.024000",
+              "size": "1801965"
+            }
+          },
+          "loudness": {
+            "input_i": "-19.51",
+            "input_tp": "-3.99",
+            "input_lra": "1.60",
+            "input_thresh": "-29.51",
+            "output_i": "-17.66",
+            "output_tp": "-2.40",
+            "output_lra": "1.70",
+            "output_thresh": "-27.66",
+            "normalization_type": "dynamic",
+            "target_offset": "-0.34"
+          },
+          "finite": true,
+          "fixed_gain_db": -0.3200000000000003
+        },
+        "D1": {
+          "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐全12曲_20261104/04 - Disposable Teens/试听片段 - D1.mp3",
+          "sha256": "7eeffc1652fe7a9e4ca8b1b7a7bc0d5d2bbc7213cd7e9e46eed8abebe4fe9765",
+          "probe": {
+            "programs": [],
+            "streams": [
+              {
+                "codec_name": "mp3",
+                "sample_fmt": "fltp",
+                "sample_rate": "48000",
+                "channels": 2,
+                "bits_per_sample": 0,
+                "bit_rate": "320000"
+              }
+            ],
+            "format": {
+              "duration": "45.024000",
+              "size": "1801965"
+            }
+          },
+          "loudness": {
+            "input_i": "-19.52",
+            "input_tp": "-4.58",
+            "input_lra": "1.60",
+            "input_thresh": "-29.52",
+            "output_i": "-17.66",
+            "output_tp": "-2.72",
+            "output_lra": "1.40",
+            "output_thresh": "-27.66",
+            "normalization_type": "dynamic",
+            "target_offset": "-0.34"
+          },
+          "finite": true,
+          "fixed_gain_db": -0.14000000000000057
+        },
+        "D2": {
+          "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐全12曲_20261104/04 - Disposable Teens/试听片段 - D2.mp3",
+          "sha256": "00f81a6ade24b2dcc8c30f7ed44c9665c4554173f146b1c9254c1cf09968a7b6",
+          "probe": {
+            "programs": [],
+            "streams": [
+              {
+                "codec_name": "mp3",
+                "sample_fmt": "fltp",
+                "sample_rate": "48000",
+                "channels": 2,
+                "bits_per_sample": 0,
+                "bit_rate": "320000"
+              }
+            ],
+            "format": {
+              "duration": "45.024000",
+              "size": "1801965"
+            }
+          },
+          "loudness": {
+            "input_i": "-19.52",
+            "input_tp": "-4.28",
+            "input_lra": "1.50",
+            "input_thresh": "-29.52",
+            "output_i": "-17.66",
+            "output_tp": "-2.47",
+            "output_lra": "1.40",
+            "output_thresh": "-27.66",
+            "normalization_type": "dynamic",
+            "target_offset": "-0.34"
+          },
+          "finite": true,
+          "fixed_gain_db": -0.129999999999999
+        }
+      },
+      "joined_order": [
+        "C",
+        "D1",
+        "D2"
+      ],
+      "gap_seconds": 0.8,
+      "joined": {
+        "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐全12曲_20261104/04 - Disposable Teens/快速对照 - C-D1-D2.mp3",
+        "sha256": "dc9fab148e38c611ea31aea290c2ad04a26f7cf6fae995b8b98b55d8bae996ea",
+        "probe": {
+          "programs": [],
+          "streams": [
+            {
+              "codec_name": "mp3",
+              "sample_fmt": "fltp",
+              "sample_rate": "48000",
+              "channels": 2,
+              "bits_per_sample": 0,
+              "bit_rate": "320000"
+            }
+          ],
+          "format": {
+            "duration": "136.632000",
+            "size": "5466285"
+          }
+        },
+        "loudness": {
+          "input_i": "-19.54",
+          "input_tp": "-3.99",
+          "input_lra": "1.80",
+          "input_thresh": "-29.55",
+          "output_i": "-17.86",
+          "output_tp": "-2.40",
+          "output_lra": "1.80",
+          "output_thresh": "-27.87",
+          "normalization_type": "dynamic",
+          "target_offset": "-0.14"
+        },
+        "finite": true
+      },
+      "source_audio_report_sha256": "22de3e50aebeb720a996606cbd2e619820ca21001b5bd0894fc0aaae681d44f2",
+      "reuse_provenance": {
+        "original_comparisons_report": "/home/weathour/programs/desktop-projects/My-game/design/music-20261104-chinese-trial/reports/comparisons.json",
+        "original_comparisons_report_sha256": "758d0bd0c06818164a798aa76e3da72d2339807f42a4b8ce17364590ba6533d1",
+        "copied_without_reencoding": true
+      },
+      "current_audio_report_sha256": "8c79cca5b54025dcf666dff7969063d7b46e3bcc89998ed0d943c950c96b79cc"
+    },
+    {
+      "index": 5,
+      "cue_id": "midi_test_05",
+      "title": "The Nobodies",
+      "start_seconds_in_aligned_full_audio": 165,
+      "duration_per_variant_seconds": 45.0,
+      "selection": {
+        "changed_note_onsets": 15,
+        "chinese_note_onsets": 88,
+        "method": "max distinct changed onset half-second bins, then note count and Chinese-layer presence; no amplitude selection"
+      },
+      "common_excerpt_target_lufs": -21.26,
+      "individual_clips": {
+        "C": {
+          "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐全12曲_20261104/05 - The Nobodies/试听片段 - C.mp3",
+          "sha256": "099f836daa60363b54c739d1f478b61a755f0272aeecdfbf69f818ea5f70e779",
+          "probe": {
+            "programs": [],
+            "streams": [
+              {
+                "codec_name": "mp3",
+                "sample_fmt": "fltp",
+                "sample_rate": "48000",
+                "channels": 2,
+                "bits_per_sample": 0,
+                "bit_rate": "320000"
+              }
+            ],
+            "format": {
+              "duration": "45.024000",
+              "size": "1801965"
+            }
+          },
+          "loudness": {
+            "input_i": "-21.26",
+            "input_tp": "-4.82",
+            "input_lra": "6.30",
+            "input_thresh": "-31.33",
+            "output_i": "-16.33",
+            "output_tp": "-2.00",
+            "output_lra": "3.60",
+            "output_thresh": "-26.41",
+            "normalization_type": "dynamic",
+            "target_offset": "-1.67"
+          },
+          "finite": true,
+          "fixed_gain_db": 1.7399999999999984
+        },
+        "D1": {
+          "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐全12曲_20261104/05 - The Nobodies/试听片段 - D1.mp3",
+          "sha256": "06f5cca1e10caf5288ab576e27614959bf7286603942a4e7cf034fe2ef248833",
+          "probe": {
+            "programs": [],
+            "streams": [
+              {
+                "codec_name": "mp3",
+                "sample_fmt": "fltp",
+                "sample_rate": "48000",
+                "channels": 2,
+                "bits_per_sample": 0,
+                "bit_rate": "320000"
+              }
+            ],
+            "format": {
+              "duration": "45.024000",
+              "size": "1801965"
+            }
+          },
+          "loudness": {
+            "input_i": "-21.26",
+            "input_tp": "-4.34",
+            "input_lra": "7.00",
+            "input_thresh": "-31.33",
+            "output_i": "-16.17",
+            "output_tp": "-2.00",
+            "output_lra": "4.40",
+            "output_thresh": "-26.24",
+            "normalization_type": "dynamic",
+            "target_offset": "-1.83"
+          },
+          "finite": true,
+          "fixed_gain_db": 1.6600000000000001
+        },
+        "D2": {
+          "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐全12曲_20261104/05 - The Nobodies/试听片段 - D2.mp3",
+          "sha256": "921f87fa739ebe8855d1c56cc8a421868d80bb7d72b45d8150abc82ade16b857",
+          "probe": {
+            "programs": [],
+            "streams": [
+              {
+                "codec_name": "mp3",
+                "sample_fmt": "fltp",
+                "sample_rate": "48000",
+                "channels": 2,
+                "bits_per_sample": 0,
+                "bit_rate": "320000"
+              }
+            ],
+            "format": {
+              "duration": "45.024000",
+              "size": "1801965"
+            }
+          },
+          "loudness": {
+            "input_i": "-21.26",
+            "input_tp": "-4.00",
+            "input_lra": "6.90",
+            "input_thresh": "-31.33",
+            "output_i": "-16.15",
+            "output_tp": "-2.00",
+            "output_lra": "4.40",
+            "output_thresh": "-26.22",
+            "normalization_type": "dynamic",
+            "target_offset": "-1.85"
+          },
+          "finite": true,
+          "fixed_gain_db": 1.629999999999999
+        }
+      },
+      "joined_order": [
+        "C",
+        "D1",
+        "D2"
+      ],
+      "gap_seconds": 0.8,
+      "joined": {
+        "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐全12曲_20261104/05 - The Nobodies/快速对照 - C-D1-D2.mp3",
+        "sha256": "0fd1de4ba56f76e7c05b8139d380423c83d058d888bf49391fe3fd471e45cdac",
+        "probe": {
+          "programs": [],
+          "streams": [
+            {
+              "codec_name": "mp3",
+              "sample_fmt": "fltp",
+              "sample_rate": "48000",
+              "channels": 2,
+              "bits_per_sample": 0,
+              "bit_rate": "320000"
+            }
+          ],
+          "format": {
+            "duration": "136.632000",
+            "size": "5466285"
+          }
+        },
+        "loudness": {
+          "input_i": "-21.36",
+          "input_tp": "-3.99",
+          "input_lra": "6.80",
+          "input_thresh": "-31.45",
+          "output_i": "-17.21",
+          "output_tp": "-2.00",
+          "output_lra": "6.90",
+          "output_thresh": "-27.30",
+          "normalization_type": "dynamic",
+          "target_offset": "-0.79"
+        },
+        "finite": true
+      },
+      "source_audio_report_sha256": "9a528b355889a0aab2d290f792e120a565e1e3451cf0ad23e1a5e5789a69eed0"
+    },
+    {
+      "index": 6,
+      "cue_id": "midi_test_06",
+      "title": "Antichrist Superstar",
+      "start_seconds_in_aligned_full_audio": 66,
+      "duration_per_variant_seconds": 45.0,
+      "selection": {
+        "changed_note_onsets": 29,
+        "chinese_note_onsets": 108,
+        "method": "max distinct changed onset half-second bins, then note count and Chinese-layer presence; no amplitude selection"
+      },
+      "common_excerpt_target_lufs": -21.08,
+      "individual_clips": {
+        "C": {
+          "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐全12曲_20261104/06 - Antichrist Superstar/试听片段 - C.mp3",
+          "sha256": "790c52290ea7e9dcdbfbcc40aa65a96f4867c1e19bab91a6eefcefca5a83866b",
+          "probe": {
+            "programs": [],
+            "streams": [
+              {
+                "codec_name": "mp3",
+                "sample_fmt": "fltp",
+                "sample_rate": "48000",
+                "channels": 2,
+                "bits_per_sample": 0,
+                "bit_rate": "320000"
+              }
+            ],
+            "format": {
+              "duration": "45.024000",
+              "size": "1801965"
+            }
+          },
+          "loudness": {
+            "input_i": "-21.08",
+            "input_tp": "-4.00",
+            "input_lra": "1.90",
+            "input_thresh": "-31.08",
+            "output_i": "-18.05",
+            "output_tp": "-2.00",
+            "output_lra": "1.90",
+            "output_thresh": "-28.05",
+            "normalization_type": "dynamic",
+            "target_offset": "0.05"
+          },
+          "finite": true,
+          "fixed_gain_db": 1.490000000000002
+        },
+        "D1": {
+          "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐全12曲_20261104/06 - Antichrist Superstar/试听片段 - D1.mp3",
+          "sha256": "f3aee5b1c1399357f7a01482b38aaf0774e63af72f8176afd7b449f5e332c570",
+          "probe": {
+            "programs": [],
+            "streams": [
+              {
+                "codec_name": "mp3",
+                "sample_fmt": "fltp",
+                "sample_rate": "48000",
+                "channels": 2,
+                "bits_per_sample": 0,
+                "bit_rate": "320000"
+              }
+            ],
+            "format": {
+              "duration": "45.024000",
+              "size": "1801965"
+            }
+          },
+          "loudness": {
+            "input_i": "-21.08",
+            "input_tp": "-4.22",
+            "input_lra": "1.60",
+            "input_thresh": "-31.08",
+            "output_i": "-18.19",
+            "output_tp": "-2.00",
+            "output_lra": "1.60",
+            "output_thresh": "-28.19",
+            "normalization_type": "dynamic",
+            "target_offset": "0.19"
+          },
+          "finite": true,
+          "fixed_gain_db": 1.3300000000000018
+        },
+        "D2": {
+          "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐全12曲_20261104/06 - Antichrist Superstar/试听片段 - D2.mp3",
+          "sha256": "d0e4a78438c732fe0e5a256e02f35155d9e1d7b0c40108a87bfaae03999eeb74",
+          "probe": {
+            "programs": [],
+            "streams": [
+              {
+                "codec_name": "mp3",
+                "sample_fmt": "fltp",
+                "sample_rate": "48000",
+                "channels": 2,
+                "bits_per_sample": 0,
+                "bit_rate": "320000"
+              }
+            ],
+            "format": {
+              "duration": "45.024000",
+              "size": "1801965"
+            }
+          },
+          "loudness": {
+            "input_i": "-21.08",
+            "input_tp": "-4.19",
+            "input_lra": "1.70",
+            "input_thresh": "-31.08",
+            "output_i": "-18.24",
+            "output_tp": "-2.00",
+            "output_lra": "1.50",
+            "output_thresh": "-28.24",
+            "normalization_type": "dynamic",
+            "target_offset": "0.24"
+          },
+          "finite": true,
+          "fixed_gain_db": 1.370000000000001
+        }
+      },
+      "joined_order": [
+        "C",
+        "D1",
+        "D2"
+      ],
+      "gap_seconds": 0.8,
+      "joined": {
+        "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐全12曲_20261104/06 - Antichrist Superstar/快速对照 - C-D1-D2.mp3",
+        "sha256": "70fba4c7dfcee340514790e0acd02f6b4aeb9162fcaccbf5ecad61ad854bc2b0",
+        "probe": {
+          "programs": [],
+          "streams": [
+            {
+              "codec_name": "mp3",
+              "sample_fmt": "fltp",
+              "sample_rate": "48000",
+              "channels": 2,
+              "bits_per_sample": 0,
+              "bit_rate": "320000"
+            }
+          ],
+          "format": {
+            "duration": "136.632000",
+            "size": "5466285"
+          }
+        },
+        "loudness": {
+          "input_i": "-21.11",
+          "input_tp": "-4.00",
+          "input_lra": "1.80",
+          "input_thresh": "-31.11",
+          "output_i": "-18.03",
+          "output_tp": "-2.00",
+          "output_lra": "1.80",
+          "output_thresh": "-28.03",
+          "normalization_type": "dynamic",
+          "target_offset": "0.03"
+        },
+        "finite": true
+      },
+      "source_audio_report_sha256": "1a29ad3aa0ac26b6b3bf4d87216082336a4d56089e7c1e3de4d8f84a99443f04"
+    },
+    {
+      "index": 7,
+      "cue_id": "midi_test_07",
+      "title": "Little Horn",
+      "start_seconds_in_aligned_full_audio": 8,
+      "duration_per_variant_seconds": 45.0,
+      "selection": {
+        "changed_note_onsets": 29,
+        "chinese_note_onsets": 132,
+        "method": "max distinct changed onset half-second bins, then note count and Chinese-layer presence; no amplitude selection"
+      },
+      "common_excerpt_target_lufs": -20.900000000000002,
+      "individual_clips": {
+        "C": {
+          "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐全12曲_20261104/07 - Little Horn/试听片段 - C.mp3",
+          "sha256": "8b9a6ad3f7a0e5f07548eef21d31cfdb17f2b813466c72f9e23cd1c58df9fe8e",
+          "probe": {
+            "programs": [],
+            "streams": [
+              {
+                "codec_name": "mp3",
+                "sample_fmt": "fltp",
+                "sample_rate": "48000",
+                "channels": 2,
+                "bits_per_sample": 0,
+                "bit_rate": "320000"
+              }
+            ],
+            "format": {
+              "duration": "45.024000",
+              "size": "1801965"
+            }
+          },
+          "loudness": {
+            "input_i": "-20.90",
+            "input_tp": "-4.03",
+            "input_lra": "5.70",
+            "input_thresh": "-30.90",
+            "output_i": "-16.42",
+            "output_tp": "-2.00",
+            "output_lra": "3.50",
+            "output_thresh": "-26.42",
+            "normalization_type": "dynamic",
+            "target_offset": "-1.58"
+          },
+          "finite": true,
+          "fixed_gain_db": -0.14000000000000057
+        },
+        "D1": {
+          "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐全12曲_20261104/07 - Little Horn/试听片段 - D1.mp3",
+          "sha256": "b4e8e7110cafb0768312009b27d9304a65c8ba24ac7b30e61baed0379de21c73",
+          "probe": {
+            "programs": [],
+            "streams": [
+              {
+                "codec_name": "mp3",
+                "sample_fmt": "fltp",
+                "sample_rate": "48000",
+                "channels": 2,
+                "bits_per_sample": 0,
+                "bit_rate": "320000"
+              }
+            ],
+            "format": {
+              "duration": "45.024000",
+              "size": "1801965"
+            }
+          },
+          "loudness": {
+            "input_i": "-20.89",
+            "input_tp": "-4.74",
+            "input_lra": "6.10",
+            "input_thresh": "-30.89",
+            "output_i": "-16.23",
+            "output_tp": "-2.00",
+            "output_lra": "4.00",
+            "output_thresh": "-26.23",
+            "normalization_type": "dynamic",
+            "target_offset": "-1.77"
+          },
+          "finite": true,
+          "fixed_gain_db": 0.019999999999999574
+        },
+        "D2": {
+          "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐全12曲_20261104/07 - Little Horn/试听片段 - D2.mp3",
+          "sha256": "83fe1051423d1e8538828ab06675befb97d12c3b016a77f952a84ab226cf547f",
+          "probe": {
+            "programs": [],
+            "streams": [
+              {
+                "codec_name": "mp3",
+                "sample_fmt": "fltp",
+                "sample_rate": "48000",
+                "channels": 2,
+                "bits_per_sample": 0,
+                "bit_rate": "320000"
+              }
+            ],
+            "format": {
+              "duration": "45.024000",
+              "size": "1801965"
+            }
+          },
+          "loudness": {
+            "input_i": "-20.90",
+            "input_tp": "-4.85",
+            "input_lra": "6.10",
+            "input_thresh": "-30.90",
+            "output_i": "-16.22",
+            "output_tp": "-2.00",
+            "output_lra": "3.90",
+            "output_thresh": "-26.22",
+            "normalization_type": "dynamic",
+            "target_offset": "-1.78"
+          },
+          "finite": true,
+          "fixed_gain_db": -0.010000000000001563
+        }
+      },
+      "joined_order": [
+        "C",
+        "D1",
+        "D2"
+      ],
+      "gap_seconds": 0.8,
+      "joined": {
+        "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐全12曲_20261104/07 - Little Horn/快速对照 - C-D1-D2.mp3",
+        "sha256": "373a33f9601f49cd271c74e1b7095568d40f19eed0e017be1ee67390a2734a88",
+        "probe": {
+          "programs": [],
+          "streams": [
+            {
+              "codec_name": "mp3",
+              "sample_fmt": "fltp",
+              "sample_rate": "48000",
+              "channels": 2,
+              "bits_per_sample": 0,
+              "bit_rate": "320000"
+            }
+          ],
+          "format": {
+            "duration": "136.632000",
+            "size": "5466285"
+          }
+        },
+        "loudness": {
+          "input_i": "-20.95",
+          "input_tp": "-4.03",
+          "input_lra": "6.00",
+          "input_thresh": "-30.96",
+          "output_i": "-17.26",
+          "output_tp": "-2.00",
+          "output_lra": "6.30",
+          "output_thresh": "-27.26",
+          "normalization_type": "dynamic",
+          "target_offset": "-0.74"
+        },
+        "finite": true
+      },
+      "source_audio_report_sha256": "f461a4a0858dca8ce41e2a2ee303a969e56a95d526c672541413b62c340b4da8"
+    },
+    {
+      "index": 8,
+      "cue_id": "midi_test_08",
+      "title": "Man That You Fear",
+      "start_seconds_in_aligned_full_audio": 117,
+      "duration_per_variant_seconds": 45.0,
+      "selection": {
+        "changed_note_onsets": 35,
+        "chinese_note_onsets": 194,
+        "method": "max distinct changed onset half-second bins, then note count and Chinese-layer presence; no amplitude selection"
+      },
+      "common_excerpt_target_lufs": -19.24,
+      "individual_clips": {
+        "C": {
+          "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐全12曲_20261104/08 - Man That You Fear/试听片段 - C.mp3",
+          "sha256": "018329029158a1b09f09746ed57116f2a64ba6878788205d6e77bf313a481390",
+          "probe": {
+            "programs": [],
+            "streams": [
+              {
+                "codec_name": "mp3",
+                "sample_fmt": "fltp",
+                "sample_rate": "48000",
+                "channels": 2,
+                "bits_per_sample": 0,
+                "bit_rate": "320000"
+              }
+            ],
+            "format": {
+              "duration": "45.024000",
+              "size": "1801965"
+            }
+          },
+          "loudness": {
+            "input_i": "-19.25",
+            "input_tp": "-4.30",
+            "input_lra": "1.50",
+            "input_thresh": "-29.25",
+            "output_i": "-17.91",
+            "output_tp": "-2.94",
+            "output_lra": "1.40",
+            "output_thresh": "-27.91",
+            "normalization_type": "dynamic",
+            "target_offset": "-0.09"
+          },
+          "finite": true,
+          "fixed_gain_db": 4.34
+        },
+        "D1": {
+          "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐全12曲_20261104/08 - Man That You Fear/试听片段 - D1.mp3",
+          "sha256": "eeb81be11fd5d9b13df170d1c120095cc93c156d3921691dda2e668cc9d0e3ce",
+          "probe": {
+            "programs": [],
+            "streams": [
+              {
+                "codec_name": "mp3",
+                "sample_fmt": "fltp",
+                "sample_rate": "48000",
+                "channels": 2,
+                "bits_per_sample": 0,
+                "bit_rate": "320000"
+              }
+            ],
+            "format": {
+              "duration": "45.024000",
+              "size": "1801965"
+            }
+          },
+          "loudness": {
+            "input_i": "-19.24",
+            "input_tp": "-4.16",
+            "input_lra": "2.20",
+            "input_thresh": "-29.24",
+            "output_i": "-17.74",
+            "output_tp": "-2.72",
+            "output_lra": "2.10",
+            "output_thresh": "-27.74",
+            "normalization_type": "dynamic",
+            "target_offset": "-0.26"
+          },
+          "finite": true,
+          "fixed_gain_db": 4.580000000000002
+        },
+        "D2": {
+          "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐全12曲_20261104/08 - Man That You Fear/试听片段 - D2.mp3",
+          "sha256": "2ef0cc1cbd382830550e27ba754e364f2bbe08228f89b9a74f001510501e4270",
+          "probe": {
+            "programs": [],
+            "streams": [
+              {
+                "codec_name": "mp3",
+                "sample_fmt": "fltp",
+                "sample_rate": "48000",
+                "channels": 2,
+                "bits_per_sample": 0,
+                "bit_rate": "320000"
+              }
+            ],
+            "format": {
+              "duration": "45.024000",
+              "size": "1801965"
+            }
+          },
+          "loudness": {
+            "input_i": "-19.24",
+            "input_tp": "-4.02",
+            "input_lra": "2.30",
+            "input_thresh": "-29.24",
+            "output_i": "-17.73",
+            "output_tp": "-2.62",
+            "output_lra": "2.20",
+            "output_thresh": "-27.73",
+            "normalization_type": "dynamic",
+            "target_offset": "-0.27"
+          },
+          "finite": true,
+          "fixed_gain_db": 4.59
+        }
+      },
+      "joined_order": [
+        "C",
+        "D1",
+        "D2"
+      ],
+      "gap_seconds": 0.8,
+      "joined": {
+        "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐全12曲_20261104/08 - Man That You Fear/快速对照 - C-D1-D2.mp3",
+        "sha256": "37ec2efffb45fa0ec97cb28cef12e07a25732d125e29da5beac06f6920a42a57",
+        "probe": {
+          "programs": [],
+          "streams": [
+            {
+              "codec_name": "mp3",
+              "sample_fmt": "fltp",
+              "sample_rate": "48000",
+              "channels": 2,
+              "bits_per_sample": 0,
+              "bit_rate": "320000"
+            }
+          ],
+          "format": {
+            "duration": "136.632000",
+            "size": "5466285"
+          }
+        },
+        "loudness": {
+          "input_i": "-19.28",
+          "input_tp": "-4.01",
+          "input_lra": "2.20",
+          "input_thresh": "-29.28",
+          "output_i": "-17.95",
+          "output_tp": "-2.68",
+          "output_lra": "2.20",
+          "output_thresh": "-27.95",
+          "normalization_type": "dynamic",
+          "target_offset": "-0.05"
+        },
+        "finite": true
+      },
+      "source_audio_report_sha256": "b8a17a0cad6a1e47ceddd95f02ee57964977a37f67b52f66c25e7727c9ed2547",
+      "reuse_provenance": {
+        "original_comparisons_report": "/home/weathour/programs/desktop-projects/My-game/design/music-20261104-chinese-trial/reports/comparisons.json",
+        "original_comparisons_report_sha256": "758d0bd0c06818164a798aa76e3da72d2339807f42a4b8ce17364590ba6533d1",
+        "copied_without_reencoding": true
+      },
+      "current_audio_report_sha256": "fea7f702a32659bace0dfd8a56aff09cfd993aef75db604e7d9ad2eee783ee63"
+    },
+    {
+      "index": 9,
+      "cue_id": "midi_test_09",
+      "title": "Deformography",
+      "start_seconds_in_aligned_full_audio": 223,
+      "duration_per_variant_seconds": 45.0,
+      "selection": {
+        "changed_note_onsets": 52,
+        "chinese_note_onsets": 134,
+        "method": "max distinct changed onset half-second bins, then note count and Chinese-layer presence; no amplitude selection"
+      },
+      "common_excerpt_target_lufs": -19.92,
+      "individual_clips": {
+        "C": {
+          "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐全12曲_20261104/09 - Deformography/试听片段 - C.mp3",
+          "sha256": "1e3518b1333019166c6f4c312cfcffe0be9522fb4114c745d0b849caa9a7cdf7",
+          "probe": {
+            "programs": [],
+            "streams": [
+              {
+                "codec_name": "mp3",
+                "sample_fmt": "fltp",
+                "sample_rate": "48000",
+                "channels": 2,
+                "bits_per_sample": 0,
+                "bit_rate": "320000"
+              }
+            ],
+            "format": {
+              "duration": "45.024000",
+              "size": "1801965"
+            }
+          },
+          "loudness": {
+            "input_i": "-19.92",
+            "input_tp": "-4.92",
+            "input_lra": "1.50",
+            "input_thresh": "-29.92",
+            "output_i": "-17.78",
+            "output_tp": "-3.03",
+            "output_lra": "1.10",
+            "output_thresh": "-27.78",
+            "normalization_type": "dynamic",
+            "target_offset": "-0.22"
+          },
+          "finite": true,
+          "fixed_gain_db": 0.05999999999999872
+        },
+        "D1": {
+          "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐全12曲_20261104/09 - Deformography/试听片段 - D1.mp3",
+          "sha256": "f748c1674274ed4347f23586d721210b9e303e287607460eb76158a0594d090b",
+          "probe": {
+            "programs": [],
+            "streams": [
+              {
+                "codec_name": "mp3",
+                "sample_fmt": "fltp",
+                "sample_rate": "48000",
+                "channels": 2,
+                "bits_per_sample": 0,
+                "bit_rate": "320000"
+              }
+            ],
+            "format": {
+              "duration": "45.024000",
+              "size": "1801965"
+            }
+          },
+          "loudness": {
+            "input_i": "-19.92",
+            "input_tp": "-4.08",
+            "input_lra": "1.60",
+            "input_thresh": "-29.93",
+            "output_i": "-17.71",
+            "output_tp": "-2.14",
+            "output_lra": "1.30",
+            "output_thresh": "-27.72",
+            "normalization_type": "dynamic",
+            "target_offset": "-0.29"
+          },
+          "finite": true,
+          "fixed_gain_db": -0.4800000000000004
+        },
+        "D2": {
+          "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐全12曲_20261104/09 - Deformography/试听片段 - D2.mp3",
+          "sha256": "3cb6c2d1f878b4304883b890ef24f8391c6b53d2afeb16decaaf7de0557bc38d",
+          "probe": {
+            "programs": [],
+            "streams": [
+              {
+                "codec_name": "mp3",
+                "sample_fmt": "fltp",
+                "sample_rate": "48000",
+                "channels": 2,
+                "bits_per_sample": 0,
+                "bit_rate": "320000"
+              }
+            ],
+            "format": {
+              "duration": "45.024000",
+              "size": "1801965"
+            }
+          },
+          "loudness": {
+            "input_i": "-19.92",
+            "input_tp": "-4.00",
+            "input_lra": "1.70",
+            "input_thresh": "-29.94",
+            "output_i": "-17.72",
+            "output_tp": "-2.00",
+            "output_lra": "1.20",
+            "output_thresh": "-27.73",
+            "normalization_type": "dynamic",
+            "target_offset": "-0.28"
+          },
+          "finite": true,
+          "fixed_gain_db": -0.5
+        }
+      },
+      "joined_order": [
+        "C",
+        "D1",
+        "D2"
+      ],
+      "gap_seconds": 0.8,
+      "joined": {
+        "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐全12曲_20261104/09 - Deformography/快速对照 - C-D1-D2.mp3",
+        "sha256": "5985336e25a0a165f272400333d38328ef318ec8fc5470a94bfeb05fd2ea08f5",
+        "probe": {
+          "programs": [],
+          "streams": [
+            {
+              "codec_name": "mp3",
+              "sample_fmt": "fltp",
+              "sample_rate": "48000",
+              "channels": 2,
+              "bits_per_sample": 0,
+              "bit_rate": "320000"
+            }
+          ],
+          "format": {
+            "duration": "136.632000",
+            "size": "5466285"
+          }
+        },
+        "loudness": {
+          "input_i": "-19.92",
+          "input_tp": "-4.01",
+          "input_lra": "1.80",
+          "input_thresh": "-29.95",
+          "output_i": "-17.91",
+          "output_tp": "-2.07",
+          "output_lra": "1.80",
+          "output_thresh": "-27.93",
+          "normalization_type": "dynamic",
+          "target_offset": "-0.09"
+        },
+        "finite": true
+      },
+      "source_audio_report_sha256": "ce0e576d0e0bc6f381c9245270a837a77206923479a10d25c024723699354755"
+    },
+    {
+      "index": 10,
+      "cue_id": "midi_test_10",
+      "title": "Kinderfeld",
+      "start_seconds_in_aligned_full_audio": 167,
+      "duration_per_variant_seconds": 45.0,
+      "selection": {
+        "changed_note_onsets": 38,
+        "chinese_note_onsets": 125,
+        "method": "max distinct changed onset half-second bins, then note count and Chinese-layer presence; no amplitude selection"
+      },
+      "common_excerpt_target_lufs": -20.709999999999997,
+      "individual_clips": {
+        "C": {
+          "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐全12曲_20261104/10 - Kinderfeld/试听片段 - C.mp3",
+          "sha256": "0da422fe19ed1f0f95131cd43a1b3bfc6bd54b6a40c8366a75c091ced45b8439",
+          "probe": {
+            "programs": [],
+            "streams": [
+              {
+                "codec_name": "mp3",
+                "sample_fmt": "fltp",
+                "sample_rate": "48000",
+                "channels": 2,
+                "bits_per_sample": 0,
+                "bit_rate": "320000"
+              }
+            ],
+            "format": {
+              "duration": "45.024000",
+              "size": "1801965"
+            }
+          },
+          "loudness": {
+            "input_i": "-20.71",
+            "input_tp": "-4.73",
+            "input_lra": "1.70",
+            "input_thresh": "-30.71",
+            "output_i": "-17.90",
+            "output_tp": "-2.00",
+            "output_lra": "1.30",
+            "output_thresh": "-27.90",
+            "normalization_type": "dynamic",
+            "target_offset": "-0.10"
+          },
+          "finite": true,
+          "fixed_gain_db": -0.629999999999999
+        },
+        "D1": {
+          "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐全12曲_20261104/10 - Kinderfeld/试听片段 - D1.mp3",
+          "sha256": "5545995da12325f2680a34a71aa460e5795856dfe145426a80bfd88e466f5058",
+          "probe": {
+            "programs": [],
+            "streams": [
+              {
+                "codec_name": "mp3",
+                "sample_fmt": "fltp",
+                "sample_rate": "48000",
+                "channels": 2,
+                "bits_per_sample": 0,
+                "bit_rate": "320000"
+              }
+            ],
+            "format": {
+              "duration": "45.024000",
+              "size": "1801965"
+            }
+          },
+          "loudness": {
+            "input_i": "-20.71",
+            "input_tp": "-4.01",
+            "input_lra": "1.40",
+            "input_thresh": "-30.71",
+            "output_i": "-17.84",
+            "output_tp": "-2.00",
+            "output_lra": "1.20",
+            "output_thresh": "-27.84",
+            "normalization_type": "dynamic",
+            "target_offset": "-0.16"
+          },
+          "finite": true,
+          "fixed_gain_db": -0.21999999999999886
+        },
+        "D2": {
+          "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐全12曲_20261104/10 - Kinderfeld/试听片段 - D2.mp3",
+          "sha256": "048a1bb23d3e9bea9997d00f6826530c872881a50679b7649c66cc07a0ddedc7",
+          "probe": {
+            "programs": [],
+            "streams": [
+              {
+                "codec_name": "mp3",
+                "sample_fmt": "fltp",
+                "sample_rate": "48000",
+                "channels": 2,
+                "bits_per_sample": 0,
+                "bit_rate": "320000"
+              }
+            ],
+            "format": {
+              "duration": "45.024000",
+              "size": "1801965"
+            }
+          },
+          "loudness": {
+            "input_i": "-20.71",
+            "input_tp": "-4.03",
+            "input_lra": "1.40",
+            "input_thresh": "-30.71",
+            "output_i": "-17.85",
+            "output_tp": "-2.00",
+            "output_lra": "1.20",
+            "output_thresh": "-27.85",
+            "normalization_type": "dynamic",
+            "target_offset": "-0.15"
+          },
+          "finite": true,
+          "fixed_gain_db": -0.21999999999999886
+        }
+      },
+      "joined_order": [
+        "C",
+        "D1",
+        "D2"
+      ],
+      "gap_seconds": 0.8,
+      "joined": {
+        "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐全12曲_20261104/10 - Kinderfeld/快速对照 - C-D1-D2.mp3",
+        "sha256": "c7b97b5c6faef8d7fc106075af70c464b6404f1510bf1548b67c203395bf859a",
+        "probe": {
+          "programs": [],
+          "streams": [
+            {
+              "codec_name": "mp3",
+              "sample_fmt": "fltp",
+              "sample_rate": "48000",
+              "channels": 2,
+              "bits_per_sample": 0,
+              "bit_rate": "320000"
+            }
+          ],
+          "format": {
+            "duration": "136.632000",
+            "size": "5466285"
+          }
+        },
+        "loudness": {
+          "input_i": "-20.70",
+          "input_tp": "-3.99",
+          "input_lra": "1.50",
+          "input_thresh": "-30.70",
+          "output_i": "-17.96",
+          "output_tp": "-2.00",
+          "output_lra": "1.50",
+          "output_thresh": "-27.96",
+          "normalization_type": "dynamic",
+          "target_offset": "-0.04"
+        },
+        "finite": true
+      },
+      "source_audio_report_sha256": "87c35394b1b16c365243a365e4f339ed30641abcde1eba62842bcb06b8c6be30"
+    },
+    {
+      "index": 11,
+      "cue_id": "midi_test_11",
+      "title": "Minute of Decay",
+      "start_seconds_in_aligned_full_audio": 66,
+      "duration_per_variant_seconds": 45.0,
+      "selection": {
+        "changed_note_onsets": 19,
+        "chinese_note_onsets": 49,
+        "method": "max distinct changed onset half-second bins, then note count and Chinese-layer presence; no amplitude selection"
+      },
+      "common_excerpt_target_lufs": -20.09,
+      "individual_clips": {
+        "C": {
+          "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐全12曲_20261104/11 - Minute of Decay/试听片段 - C.mp3",
+          "sha256": "30f0dd6e78afa51d2d586c93329c2df05825f854c9421d34157f058fa29f3939",
+          "probe": {
+            "programs": [],
+            "streams": [
+              {
+                "codec_name": "mp3",
+                "sample_fmt": "fltp",
+                "sample_rate": "48000",
+                "channels": 2,
+                "bits_per_sample": 0,
+                "bit_rate": "320000"
+              }
+            ],
+            "format": {
+              "duration": "45.024000",
+              "size": "1801965"
+            }
+          },
+          "loudness": {
+            "input_i": "-20.09",
+            "input_tp": "-4.02",
+            "input_lra": "3.20",
+            "input_thresh": "-30.20",
+            "output_i": "-17.92",
+            "output_tp": "-2.00",
+            "output_lra": "1.80",
+            "output_thresh": "-27.99",
+            "normalization_type": "dynamic",
+            "target_offset": "-0.08"
+          },
+          "finite": true,
+          "fixed_gain_db": 2.5700000000000003
+        },
+        "D1": {
+          "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐全12曲_20261104/11 - Minute of Decay/试听片段 - D1.mp3",
+          "sha256": "a34b07afcbf369bc04792c75fdb756c78c5671cd314c7afc000069b8f02ea484",
+          "probe": {
+            "programs": [],
+            "streams": [
+              {
+                "codec_name": "mp3",
+                "sample_fmt": "fltp",
+                "sample_rate": "48000",
+                "channels": 2,
+                "bits_per_sample": 0,
+                "bit_rate": "320000"
+              }
+            ],
+            "format": {
+              "duration": "45.024000",
+              "size": "1801965"
+            }
+          },
+          "loudness": {
+            "input_i": "-20.08",
+            "input_tp": "-4.48",
+            "input_lra": "2.50",
+            "input_thresh": "-30.09",
+            "output_i": "-17.86",
+            "output_tp": "-2.00",
+            "output_lra": "2.20",
+            "output_thresh": "-27.87",
+            "normalization_type": "dynamic",
+            "target_offset": "-0.14"
+          },
+          "finite": true,
+          "fixed_gain_db": 3.120000000000001
+        },
+        "D2": {
+          "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐全12曲_20261104/11 - Minute of Decay/试听片段 - D2.mp3",
+          "sha256": "119ac4ad45116af940c5de797ceb5fd23e456ece333c61e5b05414676b4eda53",
+          "probe": {
+            "programs": [],
+            "streams": [
+              {
+                "codec_name": "mp3",
+                "sample_fmt": "fltp",
+                "sample_rate": "48000",
+                "channels": 2,
+                "bits_per_sample": 0,
+                "bit_rate": "320000"
+              }
+            ],
+            "format": {
+              "duration": "45.024000",
+              "size": "1801965"
+            }
+          },
+          "loudness": {
+            "input_i": "-20.09",
+            "input_tp": "-4.48",
+            "input_lra": "2.50",
+            "input_thresh": "-30.10",
+            "output_i": "-17.85",
+            "output_tp": "-2.00",
+            "output_lra": "2.20",
+            "output_thresh": "-27.86",
+            "normalization_type": "dynamic",
+            "target_offset": "-0.15"
+          },
+          "finite": true,
+          "fixed_gain_db": 3.1099999999999994
+        }
+      },
+      "joined_order": [
+        "C",
+        "D1",
+        "D2"
+      ],
+      "gap_seconds": 0.8,
+      "joined": {
+        "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐全12曲_20261104/11 - Minute of Decay/快速对照 - C-D1-D2.mp3",
+        "sha256": "8ebc0d35a45dd41cb6526d0a47faef48078521ca85702328f143e3bcbb5d65a2",
+        "probe": {
+          "programs": [],
+          "streams": [
+            {
+              "codec_name": "mp3",
+              "sample_fmt": "fltp",
+              "sample_rate": "48000",
+              "channels": 2,
+              "bits_per_sample": 0,
+              "bit_rate": "320000"
+            }
+          ],
+          "format": {
+            "duration": "136.632000",
+            "size": "5466285"
+          }
+        },
+        "loudness": {
+          "input_i": "-20.06",
+          "input_tp": "-4.02",
+          "input_lra": "2.50",
+          "input_thresh": "-30.08",
+          "output_i": "-17.97",
+          "output_tp": "-2.00",
+          "output_lra": "2.60",
+          "output_thresh": "-28.00",
+          "normalization_type": "dynamic",
+          "target_offset": "-0.03"
+        },
+        "finite": true
+      },
+      "source_audio_report_sha256": "a754d694eaaa42ae8d0ea8a11006fc17cef49ad215cbf0ece704f41efd5f1abf"
+    },
+    {
+      "index": 12,
+      "cue_id": "midi_test_12",
+      "title": "President Dead",
+      "start_seconds_in_aligned_full_audio": 127,
+      "duration_per_variant_seconds": 45.0,
+      "selection": {
+        "changed_note_onsets": 25,
+        "chinese_note_onsets": 186,
+        "method": "max distinct changed onset half-second bins, then note count and Chinese-layer presence; no amplitude selection"
+      },
+      "common_excerpt_target_lufs": -19.95,
+      "individual_clips": {
+        "C": {
+          "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐全12曲_20261104/12 - President Dead/试听片段 - C.mp3",
+          "sha256": "dd013101be4bd77cf7c38948ea20ea18522655deb6848371aa9b3e1f48bd6667",
+          "probe": {
+            "programs": [],
+            "streams": [
+              {
+                "codec_name": "mp3",
+                "sample_fmt": "fltp",
+                "sample_rate": "48000",
+                "channels": 2,
+                "bits_per_sample": 0,
+                "bit_rate": "320000"
+              }
+            ],
+            "format": {
+              "duration": "45.024000",
+              "size": "1801965"
+            }
+          },
+          "loudness": {
+            "input_i": "-19.95",
+            "input_tp": "-3.97",
+            "input_lra": "5.90",
+            "input_thresh": "-29.95",
+            "output_i": "-16.43",
+            "output_tp": "-2.00",
+            "output_lra": "3.70",
+            "output_thresh": "-26.43",
+            "normalization_type": "dynamic",
+            "target_offset": "-1.57"
+          },
+          "finite": true,
+          "fixed_gain_db": -0.5
+        },
+        "D1": {
+          "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐全12曲_20261104/12 - President Dead/试听片段 - D1.mp3",
+          "sha256": "9738fd7afb74eabef87428eb7201812b30ef4e772173f675f07cea25761796c3",
+          "probe": {
+            "programs": [],
+            "streams": [
+              {
+                "codec_name": "mp3",
+                "sample_fmt": "fltp",
+                "sample_rate": "48000",
+                "channels": 2,
+                "bits_per_sample": 0,
+                "bit_rate": "320000"
+              }
+            ],
+            "format": {
+              "duration": "45.024000",
+              "size": "1801965"
+            }
+          },
+          "loudness": {
+            "input_i": "-19.95",
+            "input_tp": "-5.47",
+            "input_lra": "6.10",
+            "input_thresh": "-29.95",
+            "output_i": "-16.50",
+            "output_tp": "-2.00",
+            "output_lra": "4.00",
+            "output_thresh": "-26.50",
+            "normalization_type": "dynamic",
+            "target_offset": "-1.50"
+          },
+          "finite": true,
+          "fixed_gain_db": -0.5199999999999996
+        },
+        "D2": {
+          "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐全12曲_20261104/12 - President Dead/试听片段 - D2.mp3",
+          "sha256": "46597178bb51510fa751ea60933fd3c8f74992a3297c600a0d932aa1409fc310",
+          "probe": {
+            "programs": [],
+            "streams": [
+              {
+                "codec_name": "mp3",
+                "sample_fmt": "fltp",
+                "sample_rate": "48000",
+                "channels": 2,
+                "bits_per_sample": 0,
+                "bit_rate": "320000"
+              }
+            ],
+            "format": {
+              "duration": "45.024000",
+              "size": "1801965"
+            }
+          },
+          "loudness": {
+            "input_i": "-19.95",
+            "input_tp": "-5.00",
+            "input_lra": "6.20",
+            "input_thresh": "-29.95",
+            "output_i": "-16.49",
+            "output_tp": "-2.00",
+            "output_lra": "4.00",
+            "output_thresh": "-26.49",
+            "normalization_type": "dynamic",
+            "target_offset": "-1.51"
+          },
+          "finite": true,
+          "fixed_gain_db": -0.5199999999999996
+        }
+      },
+      "joined_order": [
+        "C",
+        "D1",
+        "D2"
+      ],
+      "gap_seconds": 0.8,
+      "joined": {
+        "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐全12曲_20261104/12 - President Dead/快速对照 - C-D1-D2.mp3",
+        "sha256": "06be15a71951b0bbdcee03748758bca99a435f052cf6fa31b5855705f0aa44cf",
+        "probe": {
+          "programs": [],
+          "streams": [
+            {
+              "codec_name": "mp3",
+              "sample_fmt": "fltp",
+              "sample_rate": "48000",
+              "channels": 2,
+              "bits_per_sample": 0,
+              "bit_rate": "320000"
+            }
+          ],
+          "format": {
+            "duration": "136.632000",
+            "size": "5466285"
+          }
+        },
+        "loudness": {
+          "input_i": "-20.01",
+          "input_tp": "-3.97",
+          "input_lra": "6.10",
+          "input_thresh": "-30.02",
+          "output_i": "-17.29",
+          "output_tp": "-2.00",
+          "output_lra": "6.60",
+          "output_thresh": "-27.31",
+          "normalization_type": "dynamic",
+          "target_offset": "-0.71"
+        },
+        "finite": true
+      },
+      "source_audio_report_sha256": "a0b8a982551851292613f7bcf38fe91e30fd8eee2b7fae0ef416027a738ad231"
+    }
+  ],
+  "playlists": [
+    {
+      "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐全12曲_20261104/先听12首短对照.m3u8",
+      "sha256": "77ac8dcf4140d7ffeedca8a0463e19b57ab822109712ea5e67dbba727692558d"
+    },
+    {
+      "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐全12曲_20261104/全部12首全曲_C-D1-D2.m3u8",
+      "sha256": "885ed7aa655fda626541d283a0b40fa6108458f2d4034d72e7e0266e6a9e13de"
+    },
+    {
+      "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐全12曲_20261104/仅中国器乐全曲_D1-D2.m3u8",
+      "sha256": "cf5b2f6f316f58d29e4892f9f2637366ce2c0759ea2dfca0e8dac0ba197d2443"
+    },
+    {
+      "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐全12曲_20261104/仅D1_中国器乐原音高.m3u8",
+      "sha256": "233e5860f63e9f85a9f4eeaafc73467c11a5e365b6b50031dd4c53de09746d31"
+    },
+    {
+      "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐全12曲_20261104/仅D2_中国器乐有限调式.m3u8",
+      "sha256": "80fefad5ff12977bfcf0d9ae1fa920062e4d6b2611560d50ff8e78dc657dd21e"
+    }
+  ],
+  "musical_source_edits": false,
+  "clip_level_matching": "per-song common achievable target, fixed gain only; full songs remain unchanged",
+  "manual_listening_review": "not performed"
+}

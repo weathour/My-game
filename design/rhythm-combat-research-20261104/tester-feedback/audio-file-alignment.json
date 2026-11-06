@@ -1,0 +1,727 @@
+{
+  "method": "positive spectral flux at5ms hop/32ms support, compare nominal MIDI onset families",
+  "limitations": "dense periodic attacks cause aliases; instrument attacks differ; not tactus truth or device latency",
+  "songs": [
+    {
+      "cue_id": "midi_test_02",
+      "midi_sha256": "4332c746d01a6260e9ecbbcb790ae78e3dd2b45b0930b40bf71281dade10fd2f",
+      "declared_trim_sec": 1.6462,
+      "audio_file": "assets/music/midi_test/midi_test_02.ogg",
+      "results": [
+        {
+          "start_sec": 0.0,
+          "end_sec": 30.0,
+          "family": "all",
+          "onset_count": 121,
+          "best_lag_ms": 0.0,
+          "top_lags_ms": [
+            0.0,
+            -230.0,
+            230.0,
+            5.0,
+            235.0
+          ],
+          "score_at_zero_over_best": 1.0
+        },
+        {
+          "start_sec": 0.0,
+          "end_sec": 30.0,
+          "family": "kick",
+          "onset_count": 56,
+          "best_lag_ms": 0.0,
+          "top_lags_ms": [
+            0.0,
+            -5.0,
+            225.0,
+            230.0,
+            -230.0
+          ],
+          "score_at_zero_over_best": 1.0
+        },
+        {
+          "start_sec": 0.0,
+          "end_sec": 30.0,
+          "family": "snare",
+          "onset_count": 30,
+          "best_lag_ms": 0.0,
+          "top_lags_ms": [
+            0.0,
+            -5.0,
+            5.0,
+            -230.0,
+            230.0
+          ],
+          "score_at_zero_over_best": 1.0
+        },
+        {
+          "start_sec": 0.0,
+          "end_sec": 30.0,
+          "family": "bass",
+          "onset_count": 76,
+          "best_lag_ms": 0.0,
+          "top_lags_ms": [
+            0.0,
+            -230.0,
+            230.0,
+            -235.0,
+            5.0
+          ],
+          "score_at_zero_over_best": 1.0
+        },
+        {
+          "start_sec": 30.0,
+          "end_sec": 60.0,
+          "family": "all",
+          "onset_count": 142,
+          "best_lag_ms": 0.0,
+          "top_lags_ms": [
+            0.0,
+            230.0,
+            -230.0,
+            5.0,
+            -5.0
+          ],
+          "score_at_zero_over_best": 1.0
+        },
+        {
+          "start_sec": 30.0,
+          "end_sec": 60.0,
+          "family": "kick",
+          "onset_count": 56,
+          "best_lag_ms": 0.0,
+          "top_lags_ms": [
+            0.0,
+            -230.0,
+            -5.0,
+            225.0,
+            230.0
+          ],
+          "score_at_zero_over_best": 1.0
+        },
+        {
+          "start_sec": 30.0,
+          "end_sec": 60.0,
+          "family": "snare",
+          "onset_count": 38,
+          "best_lag_ms": 0.0,
+          "top_lags_ms": [
+            0.0,
+            -5.0,
+            230.0,
+            -230.0,
+            5.0
+          ],
+          "score_at_zero_over_best": 1.0
+        },
+        {
+          "start_sec": 30.0,
+          "end_sec": 60.0,
+          "family": "bass",
+          "onset_count": 96,
+          "best_lag_ms": 0.0,
+          "top_lags_ms": [
+            0.0,
+            -230.0,
+            230.0,
+            5.0,
+            -235.0
+          ],
+          "score_at_zero_over_best": 1.0
+        },
+        {
+          "start_sec": 60.0,
+          "end_sec": 90.0,
+          "family": "all",
+          "onset_count": 130,
+          "best_lag_ms": 0.0,
+          "top_lags_ms": [
+            0.0,
+            -230.0,
+            230.0,
+            5.0,
+            235.0
+          ],
+          "score_at_zero_over_best": 1.0
+        },
+        {
+          "start_sec": 60.0,
+          "end_sec": 90.0,
+          "family": "kick",
+          "onset_count": 60,
+          "best_lag_ms": -5.0,
+          "top_lags_ms": [
+            -5.0,
+            0.0,
+            225.0,
+            230.0,
+            -230.0
+          ],
+          "score_at_zero_over_best": 0.9640748375405358
+        },
+        {
+          "start_sec": 60.0,
+          "end_sec": 90.0,
+          "family": "snare",
+          "onset_count": 40,
+          "best_lag_ms": 0.0,
+          "top_lags_ms": [
+            0.0,
+            -5.0,
+            5.0,
+            -230.0,
+            230.0
+          ],
+          "score_at_zero_over_best": 1.0
+        },
+        {
+          "start_sec": 60.0,
+          "end_sec": 90.0,
+          "family": "bass",
+          "onset_count": 72,
+          "best_lag_ms": 0.0,
+          "top_lags_ms": [
+            0.0,
+            230.0,
+            -230.0,
+            -235.0,
+            -5.0
+          ],
+          "score_at_zero_over_best": 1.0
+        },
+        {
+          "start_sec": 90.0,
+          "end_sec": 120.0,
+          "family": "all",
+          "onset_count": 126,
+          "best_lag_ms": 0.0,
+          "top_lags_ms": [
+            0.0,
+            -230.0,
+            230.0,
+            5.0,
+            235.0
+          ],
+          "score_at_zero_over_best": 1.0
+        },
+        {
+          "start_sec": 90.0,
+          "end_sec": 120.0,
+          "family": "kick",
+          "onset_count": 57,
+          "best_lag_ms": 0.0,
+          "top_lags_ms": [
+            0.0,
+            -5.0,
+            -230.0,
+            230.0,
+            225.0
+          ],
+          "score_at_zero_over_best": 1.0
+        },
+        {
+          "start_sec": 90.0,
+          "end_sec": 120.0,
+          "family": "snare",
+          "onset_count": 38,
+          "best_lag_ms": 0.0,
+          "top_lags_ms": [
+            0.0,
+            -230.0,
+            230.0,
+            -5.0,
+            5.0
+          ],
+          "score_at_zero_over_best": 1.0
+        },
+        {
+          "start_sec": 90.0,
+          "end_sec": 120.0,
+          "family": "bass",
+          "onset_count": 97,
+          "best_lag_ms": 0.0,
+          "top_lags_ms": [
+            0.0,
+            -230.0,
+            230.0,
+            5.0,
+            -5.0
+          ],
+          "score_at_zero_over_best": 1.0
+        },
+        {
+          "start_sec": 120.0,
+          "end_sec": 150.0,
+          "family": "all",
+          "onset_count": 138,
+          "best_lag_ms": 0.0,
+          "top_lags_ms": [
+            0.0,
+            -230.0,
+            230.0,
+            5.0,
+            235.0
+          ],
+          "score_at_zero_over_best": 1.0
+        },
+        {
+          "start_sec": 120.0,
+          "end_sec": 150.0,
+          "family": "kick",
+          "onset_count": 52,
+          "best_lag_ms": 0.0,
+          "top_lags_ms": [
+            0.0,
+            -230.0,
+            -5.0,
+            230.0,
+            225.0
+          ],
+          "score_at_zero_over_best": 1.0
+        },
+        {
+          "start_sec": 120.0,
+          "end_sec": 150.0,
+          "family": "snare",
+          "onset_count": 53,
+          "best_lag_ms": 0.0,
+          "top_lags_ms": [
+            0.0,
+            -5.0,
+            5.0,
+            -230.0,
+            230.0
+          ],
+          "score_at_zero_over_best": 1.0
+        },
+        {
+          "start_sec": 120.0,
+          "end_sec": 150.0,
+          "family": "bass",
+          "onset_count": 103,
+          "best_lag_ms": 0.0,
+          "top_lags_ms": [
+            0.0,
+            230.0,
+            -230.0,
+            235.0,
+            5.0
+          ],
+          "score_at_zero_over_best": 1.0
+        },
+        {
+          "start_sec": 150.0,
+          "end_sec": 180.0,
+          "family": "all",
+          "onset_count": 132,
+          "best_lag_ms": 0.0,
+          "top_lags_ms": [
+            0.0,
+            230.0,
+            -230.0,
+            5.0,
+            235.0
+          ],
+          "score_at_zero_over_best": 1.0
+        },
+        {
+          "start_sec": 150.0,
+          "end_sec": 180.0,
+          "family": "kick",
+          "onset_count": 60,
+          "best_lag_ms": -5.0,
+          "top_lags_ms": [
+            -5.0,
+            0.0,
+            225.0,
+            -230.0,
+            230.0
+          ],
+          "score_at_zero_over_best": 0.8838115086621601
+        },
+        {
+          "start_sec": 150.0,
+          "end_sec": 180.0,
+          "family": "snare",
+          "onset_count": 43,
+          "best_lag_ms": 0.0,
+          "top_lags_ms": [
+            0.0,
+            -5.0,
+            -230.0,
+            230.0,
+            5.0
+          ],
+          "score_at_zero_over_best": 1.0
+        },
+        {
+          "start_sec": 150.0,
+          "end_sec": 180.0,
+          "family": "bass",
+          "onset_count": 89,
+          "best_lag_ms": 0.0,
+          "top_lags_ms": [
+            0.0,
+            -5.0,
+            -235.0,
+            230.0,
+            -230.0
+          ],
+          "score_at_zero_over_best": 1.0
+        }
+      ]
+    },
+    {
+      "cue_id": "midi_test_10",
+      "midi_sha256": "65e1642d4a62a69d9fc900fd30add945de877dfc18b28bdc2a21e99e6d44cc74",
+      "declared_trim_sec": 0.5555,
+      "audio_file": "assets/music/midi_test/midi_test_10.ogg",
+      "results": [
+        {
+          "start_sec": 0.0,
+          "end_sec": 30.0,
+          "family": "all",
+          "onset_count": 98,
+          "best_lag_ms": 0.0,
+          "top_lags_ms": [
+            0.0,
+            -5.0,
+            280.0,
+            275.0,
+            -280.0
+          ],
+          "score_at_zero_over_best": 1.0
+        },
+        {
+          "start_sec": 0.0,
+          "end_sec": 30.0,
+          "family": "kick",
+          "onset_count": 41,
+          "best_lag_ms": 0.0,
+          "top_lags_ms": [
+            0.0,
+            -5.0,
+            -280.0,
+            -285.0,
+            5.0
+          ],
+          "score_at_zero_over_best": 1.0
+        },
+        {
+          "start_sec": 0.0,
+          "end_sec": 30.0,
+          "family": "snare",
+          "onset_count": 13,
+          "best_lag_ms": 0.0,
+          "top_lags_ms": [
+            0.0,
+            -5.0,
+            -280.0,
+            -275.0,
+            5.0
+          ],
+          "score_at_zero_over_best": 1.0
+        },
+        {
+          "start_sec": 0.0,
+          "end_sec": 30.0,
+          "family": "bass",
+          "onset_count": 65,
+          "best_lag_ms": -5.0,
+          "top_lags_ms": [
+            -5.0,
+            0.0,
+            -280.0,
+            280.0,
+            275.0
+          ],
+          "score_at_zero_over_best": 0.9993123634401593
+        },
+        {
+          "start_sec": 30.0,
+          "end_sec": 60.0,
+          "family": "all",
+          "onset_count": 104,
+          "best_lag_ms": 0.0,
+          "top_lags_ms": [
+            0.0,
+            -5.0,
+            280.0,
+            -280.0,
+            275.0
+          ],
+          "score_at_zero_over_best": 1.0
+        },
+        {
+          "start_sec": 30.0,
+          "end_sec": 60.0,
+          "family": "kick",
+          "onset_count": 45,
+          "best_lag_ms": 0.0,
+          "top_lags_ms": [
+            0.0,
+            -5.0,
+            -280.0,
+            5.0,
+            -285.0
+          ],
+          "score_at_zero_over_best": 1.0
+        },
+        {
+          "start_sec": 30.0,
+          "end_sec": 60.0,
+          "family": "snare",
+          "onset_count": 13,
+          "best_lag_ms": -5.0,
+          "top_lags_ms": [
+            -5.0,
+            0.0,
+            -275.0,
+            -280.0,
+            -270.0
+          ],
+          "score_at_zero_over_best": 0.9959031116000091
+        },
+        {
+          "start_sec": 30.0,
+          "end_sec": 60.0,
+          "family": "bass",
+          "onset_count": 65,
+          "best_lag_ms": -5.0,
+          "top_lags_ms": [
+            -5.0,
+            0.0,
+            280.0,
+            -280.0,
+            275.0
+          ],
+          "score_at_zero_over_best": 0.9939131191375434
+        },
+        {
+          "start_sec": 60.0,
+          "end_sec": 90.0,
+          "family": "all",
+          "onset_count": 120,
+          "best_lag_ms": 0.0,
+          "top_lags_ms": [
+            0.0,
+            280.0,
+            -5.0,
+            275.0,
+            -280.0
+          ],
+          "score_at_zero_over_best": 1.0
+        },
+        {
+          "start_sec": 60.0,
+          "end_sec": 90.0,
+          "family": "kick",
+          "onset_count": 22,
+          "best_lag_ms": 0.0,
+          "top_lags_ms": [
+            0.0,
+            -5.0,
+            -280.0,
+            275.0,
+            -285.0
+          ],
+          "score_at_zero_over_best": 1.0
+        },
+        {
+          "start_sec": 60.0,
+          "end_sec": 90.0,
+          "family": "bass",
+          "onset_count": 84,
+          "best_lag_ms": 0.0,
+          "top_lags_ms": [
+            0.0,
+            -5.0,
+            -280.0,
+            280.0,
+            275.0
+          ],
+          "score_at_zero_over_best": 1.0
+        },
+        {
+          "start_sec": 90.0,
+          "end_sec": 120.0,
+          "family": "all",
+          "onset_count": 104,
+          "best_lag_ms": 0.0,
+          "top_lags_ms": [
+            0.0,
+            280.0,
+            -5.0,
+            -280.0,
+            275.0
+          ],
+          "score_at_zero_over_best": 1.0
+        },
+        {
+          "start_sec": 90.0,
+          "end_sec": 120.0,
+          "family": "kick",
+          "onset_count": 43,
+          "best_lag_ms": 0.0,
+          "top_lags_ms": [
+            0.0,
+            -5.0,
+            -280.0,
+            -285.0,
+            5.0
+          ],
+          "score_at_zero_over_best": 1.0
+        },
+        {
+          "start_sec": 90.0,
+          "end_sec": 120.0,
+          "family": "snare",
+          "onset_count": 13,
+          "best_lag_ms": 0.0,
+          "top_lags_ms": [
+            0.0,
+            -5.0,
+            -280.0,
+            -275.0,
+            5.0
+          ],
+          "score_at_zero_over_best": 1.0
+        },
+        {
+          "start_sec": 90.0,
+          "end_sec": 120.0,
+          "family": "bass",
+          "onset_count": 67,
+          "best_lag_ms": 0.0,
+          "top_lags_ms": [
+            0.0,
+            -5.0,
+            280.0,
+            -280.0,
+            275.0
+          ],
+          "score_at_zero_over_best": 1.0
+        },
+        {
+          "start_sec": 120.0,
+          "end_sec": 150.0,
+          "family": "all",
+          "onset_count": 174,
+          "best_lag_ms": 0.0,
+          "top_lags_ms": [
+            0.0,
+            -5.0,
+            280.0,
+            -280.0,
+            275.0
+          ],
+          "score_at_zero_over_best": 1.0
+        },
+        {
+          "start_sec": 120.0,
+          "end_sec": 150.0,
+          "family": "kick",
+          "onset_count": 46,
+          "best_lag_ms": 0.0,
+          "top_lags_ms": [
+            0.0,
+            -5.0,
+            280.0,
+            275.0,
+            -280.0
+          ],
+          "score_at_zero_over_best": 1.0
+        },
+        {
+          "start_sec": 120.0,
+          "end_sec": 150.0,
+          "family": "snare",
+          "onset_count": 13,
+          "best_lag_ms": 0.0,
+          "top_lags_ms": [
+            0.0,
+            -280.0,
+            -5.0,
+            -285.0,
+            -275.0
+          ],
+          "score_at_zero_over_best": 1.0
+        },
+        {
+          "start_sec": 120.0,
+          "end_sec": 150.0,
+          "family": "bass",
+          "onset_count": 72,
+          "best_lag_ms": 0.0,
+          "top_lags_ms": [
+            0.0,
+            -5.0,
+            -280.0,
+            280.0,
+            275.0
+          ],
+          "score_at_zero_over_best": 1.0
+        },
+        {
+          "start_sec": 150.0,
+          "end_sec": 180.0,
+          "family": "all",
+          "onset_count": 118,
+          "best_lag_ms": 0.0,
+          "top_lags_ms": [
+            0.0,
+            -5.0,
+            280.0,
+            -280.0,
+            275.0
+          ],
+          "score_at_zero_over_best": 1.0
+        },
+        {
+          "start_sec": 150.0,
+          "end_sec": 180.0,
+          "family": "kick",
+          "onset_count": 45,
+          "best_lag_ms": 0.0,
+          "top_lags_ms": [
+            0.0,
+            -5.0,
+            5.0,
+            280.0,
+            275.0
+          ],
+          "score_at_zero_over_best": 1.0
+        },
+        {
+          "start_sec": 150.0,
+          "end_sec": 180.0,
+          "family": "snare",
+          "onset_count": 14,
+          "best_lag_ms": -280.0,
+          "top_lags_ms": [
+            -280.0,
+            0.0,
+            -5.0,
+            -285.0,
+            280.0
+          ],
+          "score_at_zero_over_best": 0.9875968422623302
+        },
+        {
+          "start_sec": 150.0,
+          "end_sec": 180.0,
+          "family": "bass",
+          "onset_count": 72,
+          "best_lag_ms": 0.0,
+          "top_lags_ms": [
+            0.0,
+            -5.0,
+            280.0,
+            275.0,
+            5.0
+          ],
+          "score_at_zero_over_best": 1.0
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "status": "PASS",
+  "checks": 384,
+  "failures": 0,
+  "fixture": {
+    "selected_character": "N07",
+    "owned": false,
+    "global_speed_actual": 0.335,
+    "global_speed_cap": 0.35,
+    "acquisition_delta": 0.012,
+    "next_level_delta": 0.003,
+    "owned_summary_contains": "每级每秒普攻次数＋0.012",
+    "reward_detail_contains": "每级每秒普攻次数＋0.012",
+    "reward_preview_contains": "+0.012 次/秒",
+    "stale_plus_0_01_phrase_absent": true
+  },
+  "environment": {
+    "godot": "4.6.2",
+    "renderer": "gl_compatibility",
+    "audio": "Dummy",
+    "user_data_isolated": true
+  },
+  "screenshots": [
+    {
+      "viewport": [
+        960,
+        540
+      ],
+      "screenshot": "owned-cap-captures-final2/owned-speed-preview-960.png",
+      "sha256": "4e0f3babdb1541ea190d62eb03a68ab96b0426cd7cca4da39bbd6944a9506a9c"
+    },
+    {
+      "viewport": [
+        1280,
+        720
+      ],
+      "screenshot": "owned-cap-captures-final2/owned-speed-preview-1280.png",
+      "sha256": "cac220eae726f1b1bfd4d0ee9b159ef2a322e6b8afe084cebd0344329ab5f9c6"
+    },
+    {
+      "viewport": [
+        1920,
+        1080
+      ],
+      "screenshot": "owned-cap-captures-final2/owned-speed-preview-1920.png",
+      "sha256": "f733732d3ab49bcde00c0d4a20925a23d918d4dca64c8c363a823abdf8d0fe3e"
+    }
+  ],
+  "log": "owned-cap-native-final.log"
+}

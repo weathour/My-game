@@ -1,0 +1,30 @@
+{
+  "date": "2026-11-06",
+  "tool": "built-in image_gen.imagegen",
+  "model_id_exposed": false,
+  "model_id_verified": false,
+  "prompt_file": "prompt.txt",
+  "request": {
+    "animation_format": "GIF",
+    "frame_count_in_prompt": 8,
+    "frame_duration_ms_in_prompt": 100,
+    "transparent_background": false
+  },
+  "response": {
+    "mime_type_from_tool": "image/png",
+    "file_format_from_decoder": "PNG",
+    "size": [
+      1448,
+      1086
+    ],
+    "mode": "RGB",
+    "n_frames": 1,
+    "is_animated": false,
+    "magic_hex": "89504e470d0a1a0a0000000d49484452",
+    "sha256": "95c9aaa126097778f95a54503da752cf41da65084893c31fb02b56c81e127807",
+    "bytes": 1181182,
+    "file": "original-output.png"
+  },
+  "outcome": "this_builtin_call_returned_single_frame_png_not_gif",
+  "scope": "one built-in wrapper call; not an API/model capability test; no game assets replaced; output not converted"
+}

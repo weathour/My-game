@@ -1,9 +1,11 @@
 extends SceneTree
+const LOCAL_DRIVER := preload("res://scripts/tests/reference_walk_driver.gd")
 const SHELL := preload("res://scenes/chronicle/chronicle_shell.tscn")
 const TARGET := preload("res://scripts/battle/targeting.gd")
 const PARTY_DRAG := preload("res://scripts/ui/chronicle/chronicle_party_drag_card.gd")
 const DIRECTOR := preload("res://scripts/battle/stage_director.gd")
 const SETTINGS := preload("res://scripts/shared/settings.gd")
+const ART := preload("res://scripts/ui/chronicle/battle_art.gd")
 var shell: Control
 var failures := 0
 var capture_dir := ""
@@ -155,6 +157,7 @@ func run() -> void:
 	await capture("02-pause")
 	await key(KEY_ESCAPE)
 	await play_stage(3, "03-first-battle")
+	if failures: quit(1); return
 	expect(shell.page == "reward" and shell.session.data.current == "B01", "real victory opens first reward")
 	expect("long_spear" in shell.session.data.inventory, "equipment elite yielded weapon")
 	expect(not shell.session.data.owned.has("F11") and "F11" not in shell.session.data.pending.candidates, "first reward precedes Emma recruitment and pool unlock")
@@ -193,7 +196,13 @@ func run() -> void:
 	expect(not view.battle.paused, "battle resumes normally after carry cleanup")
 	await key(KEY_E)
 	expect(view.battle.current().id == "F11", "keyboard switches to Emma")
-	expect(view.canvas.actor_visual.scene_file_path == "res://assets/players/wizard/wizard.tscn", "Emma reuses the existing mage scene")
+	var emma_visual: Node = view.canvas.actor_visual
+	var emma_scene: PackedScene = ART.ROSTER.get("F11")
+	expect(emma_scene != null and emma_scene == ART.actor("F11") and emma_visual.scene_file_path == emma_scene.resource_path, "Emma resolves her dedicated roster scene")
+	expect(str(emma_visual.get("character_id")) == "F11", "Emma actor retains its independent character identity")
+	expect(emma_visual.has_method("present_cast"), "Emma actor exposes the successful-cast presentation API")
+	var emma_sprite := emma_visual.get_node_or_null("AnimatedSprite2D") as AnimatedSprite2D
+	expect(emma_sprite != null and emma_sprite.sprite_frames != null and emma_sprite.sprite_frames.has_animation(&"idle") and emma_sprite.sprite_frames.has_animation(&"special"), "Emma actor owns manifested SpriteFrames for her actions")
 	expect(view.hud.presentation.actor_name.text.begins_with("艾玛") and view.hud.presentation.skills[0].key.text == "J", "simple HUD follows controlled member")
 	expect(view.hud.presentation.members[0].label.text.begins_with("主") and view.hud.presentation.members[0].hp.value > 0, "protagonist health remains visible off-field")
 	var mana: float = view.battle.current().mp
@@ -245,6 +254,7 @@ func run() -> void:
 	await key(KEY_Q)
 	expect(view.battle.current().id == "JIA", "return to protagonist")
 	await play_stage(2, "10-second-battle")
+	if failures: quit(1); return
 	expect(shell.page == "reward" and shell.session.data.pending.picks == 3, "extra elite yields actual five choose three")
 	await capture("11-extra-reward")
 	var candidates: Array = shell.session.data.pending.candidates.duplicate()
@@ -275,13 +285,8 @@ func play_stage(field: int, screenshot: String) -> void:
 	var captured_wave := false
 	for frame in 18000:
 		if not b.outcome.is_empty(): break
-		var target := TARGET.nearest(b.enemies, b.position, 2000)
-		var movement := Vector2.ZERO
+		var movement: Vector2 = LOCAL_DRIVER.drive(b)
 		if b.director.field == -1: movement = (DIRECTOR.FIELD_POSITIONS[field] - b.position).normalized()
-		elif target != null:
-			if b.position.distance_to(target.position) > 75: movement = (target.position - b.position).normalized()
-			if target.kind == "boss" and target.windup > 0: movement = target.aim.orthogonal()
-		elif not b.gems.is_empty(): movement = (b.gems[0].position - b.position).normalized()
 		if frame % 15 == 0: b.request_skill(0); b.request_skill(1)
 		b.tick(1.0 / 60.0, movement)
 		if frame >= 480 and not captured_wave:
@@ -295,6 +300,7 @@ func play_stage(field: int, screenshot: String) -> void:
 			view.refresh()
 			await capture(screenshot)
 			captured = true
+	print("UI_BATTLE_RESULT ",JSON.stringify({"scene":screenshot,"stage":b.director.config.get("id",""),"outcome":b.outcome,"seconds":b.director.elapsed,"hp":b.current().hp,"kills":b.director.kills}))
 	expect(b.outcome == "victory", "actual win " + screenshot)
 	view._physics_process(0)
 	# The real terminal signal follows the bounded .48-second local boss finish.

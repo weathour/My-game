@@ -137,6 +137,8 @@ func special(cast: Dictionary) -> bool:
 				window.life = float(p.get("duration", 5))
 				window.extended = 0.0
 				window.owner = source.id
+				window.ability = str(ability.id)
+				window.cast = int(cast.context.cast)
 				window.attack = float(source.stats.attack)
 				window.charges = int(p.get("charges", 1))
 				if ability.mechanic == "rally":
@@ -179,7 +181,7 @@ func on_paid(cast: Dictionary) -> void:
 				var amount: float = context.paid * fraction
 				var duration := maxf(0.1, float(p.get("duration", 6)))
 				var ticks := maxi(1, int(p.get("ticks", 3)))
-				refunds.append({"owner":id, "payer":payer, "balance":amount, "portion":amount / ticks, "interval":duration / ticks, "until":duration / ticks, "life":duration})
+				refunds.append({"owner":id, "payer":payer, "cast":int(context.cast), "ability":str(context.ability), "balance":amount, "portion":amount / ticks, "interval":duration / ticks, "until":duration / ticks, "life":duration})
 			"echo":
 				if id != b.current().id and not state.echo.is_empty() and state.echo.life > 0 and state.echo.remaining > 0:
 					state.echo.remaining -= 1
@@ -200,7 +202,7 @@ func _emit_echo(record: Dictionary) -> void:
 	var target := TARGETS.nearest(b.enemies, b.position, float(record.reach), b.target_id)
 	var direction: Vector2 = b.facing if target == null else (target.position - b.position).normalized()
 	b._execute_payload({"ability":record.ability, "context":record.context, "origin":b.position, "direction":direction, "reach":record.reach})
-	b.events.append({"kind":"mechanic", "id":record.context.source, "mechanic":"echo", "remaining":record.remaining})
+	b.add_presentation_fact({"kind":"mechanic", "id":record.context.source, "mechanic":"echo", "remaining":record.remaining})
 
 func extend_windows(excluding: String, seconds: float, cap: float, allowed: Array) -> void:
 	var b := battle()
@@ -277,7 +279,7 @@ func resolve_hit(enemy: RefCounted, original: Dictionary) -> void:
 			if spread_targets.size() > 256: spread_targets.erase(spread_targets.keys()[0])
 	elif context.get("mechanic", "") == "expose" and not enemy.dead:
 		if not exposures.has(enemy.id): exposures[enemy.id] = {"instances":[], "multiplier":0.0, "life":0.0}
-		exposures[enemy.id].instances.append({"multiplier":float(params.get("multiplier", 0.15)), "life":float(params.get("duration", 4))})
+		exposures[enemy.id].instances.append({"multiplier":float(params.get("multiplier", 0.15)), "life":float(params.get("duration", 4)), "source":str(context.source), "ability":str(context.ability), "cast":int(context.cast)})
 		_refresh_exposure(exposures[enemy.id])
 	if not bool(context.direct): return
 	var source: String = context.source
@@ -354,8 +356,8 @@ func receive_hit(actor: RefCounted, raw: float, equipment: Dictionary, result: D
 		context.make_read_only()
 		context = b.delivery_context(context)
 		for enemy in TARGETS.in_shape(b.enemies, b.position, b.facing, float(window.get("radius", 150)), false, true): b._hits.append({"target":enemy, "context":context})
-		b.effects.append({"kind":"ring", "origin":b.position, "direction":b.facing, "radius":float(window.get("radius", 150)), "life":0.25, "color":"support",
-			"source":str(window.owner), "ability":"guard_counter", "cast":b.cast_serial, "direct":false, "visual_time":b.director.elapsed})
+		b.add_presentation_effect({"kind":"ring", "origin":b.position, "direction":b.facing, "radius":float(window.get("radius", 150)), "life":0.25, "color":"support",
+			"source":str(window.owner), "ability":"guard_counter", "cast":b.cast_serial, "direct":false, "visual_time":b.director.elapsed, "secondary":true, "delivery":int(context.get("delivery",0))})
 	return loss
 
 func add_shield(actor: RefCounted, amount: float, cap_ratio: float = 0.35) -> void:
@@ -441,7 +443,7 @@ func _refund_payment(account: Dictionary, amount: float) -> void:
 		var previous: float = actor.mp
 		actor.mp = minf(actor.stats.mp, actor.mp + amount)
 		if amount > 0:
-			b.events.append({"kind":"mechanic", "mechanic":"refund", "id":str(account.owner), "payer":str(account.payer), "amount":actor.mp - previous, "balance":float(account.balance)})
+			b.add_presentation_fact({"kind":"mechanic", "mechanic":"refund", "id":str(account.owner), "cast":int(account.get("cast",0)), "ability":str(account.get("ability","")), "payer":str(account.payer), "amount":actor.mp - previous, "balance":float(account.balance)})
 
 func _enemy(id: int) -> RefCounted:
 	for enemy in battle().enemies:
@@ -460,12 +462,16 @@ func _pulse_field(field: Dictionary) -> void:
 	var pulse: Dictionary = b.delivery_context(field.context)
 	for enemy in TARGETS.in_shape(b.enemies, field.position, Vector2.RIGHT, field.radius, false, true): b._hits.append({"target":enemy, "context":pulse})
 	for actor in receivers(b.characters[field.source], field.scope):
+		var hp_before: float = actor.hp
+		var mp_before: float = actor.mp
 		# Shared controlled-body position is intentional; inactive bodies have no separate world positions.
 		if b.position.distance_to(field.position) <= field.radius:
 			actor.hp = minf(actor.stats.hp, actor.hp + field.heal)
 			actor.mp = minf(actor.stats.mp, actor.mp + field.mana)
-	b.effects.append({"kind":"ring", "origin":field.position, "radius":field.radius, "life":0.3, "color":"support", "direction":Vector2.RIGHT,
-		"source":field.source, "ability":field.context.ability, "cast":field.context.cast, "direct":false, "visual_time":b.director.elapsed})
+			if actor.hp > hp_before or actor.mp > mp_before:
+				b.add_presentation_fact({"kind":"ability_effect","source":field.source,"ability":field.context.ability,"cast":field.context.cast,"delivery":int(pulse.get("delivery",0)),"recipient":actor.id,"position":b.position,"hp_delta":actor.hp-hp_before,"mp_delta":actor.mp-mp_before,"shield_delta":0.0,"direct":false,"secondary":true})
+	b.add_presentation_effect({"kind":"ring", "origin":field.position, "radius":field.radius, "life":0.3, "color":"support", "direction":Vector2.RIGHT,
+		"source":field.source, "ability":field.context.ability, "cast":field.context.cast, "direct":false, "visual_time":b.director.elapsed, "secondary":true, "delivery":int(pulse.get("delivery",0)), "mechanic":"field"})
 
 func status(id: String) -> Dictionary:
 	var b := battle()
@@ -518,3 +524,40 @@ func clear() -> void:
 	spread_targets.clear()
 	spark_casts.clear()
 	last_payer = ""
+
+# Detached snapshots. Stable keys identify real state instances; renderer owns all aging/transition art.
+func presentation_states() -> Array[Dictionary]:
+	var b := battle()
+	var result: Array[Dictionary] = []
+	for id in states:
+		var actor: RefCounted = b.characters[id]
+		if actor.dead: continue
+		var state: Dictionary = states[id]
+		if actor.shield > 0:
+			result.append({"key":"shield:"+id,"kind":"shield","source":id,"recipient":id,"value":actor.shield,"remaining":0.0,"position":b.position})
+		if not state.echo.is_empty() and state.echo.life > 0 and state.echo.remaining > 0:
+			result.append({"key":"echo:%s:%d" % [id,int(state.echo.context.cast)],"kind":"echo","source":id,"recipient":id,"ability":state.echo.context.ability,"cast":state.echo.context.cast,"remaining":state.echo.life,"value":state.echo.remaining,"position":b.position})
+		if state.trait in ["ammo","mark","relay"]:
+			var value: float = float(state.ammo) if state.trait == "ammo" else float(state.mark) if state.trait == "mark" else float(not last_payer.is_empty() and last_payer != id)
+			result.append({"key":str(state.trait)+":"+id,"kind":str(state.trait),"source":id,"recipient":id,"value":value,"remaining":float(state.refill) if state.trait == "ammo" else 0.0,"position":b.position})
+		for kind in state.windows:
+			if kind == "rally": continue
+			var window: Dictionary = state.windows[kind]
+			if window.life <= 0 or kind == "guard" and int(window.get("charges",0)) <= 0: continue
+			result.append({"key":"window:%s:%s:%d" % [id,kind,int(window.get("cast",0))],"kind":kind,"source":str(window.get("owner",id)),"recipient":id,"ability":str(window.get("ability","")),"cast":int(window.get("cast",0)),"remaining":window.life,"value":float(window.get("charges",0)),"position":b.position})
+		for window in state.rallies:
+			result.append({"key":"rally:%s:%s:%d" % [id,window.owner,int(window.get("cast",0))],"kind":"rally","source":window.owner,"recipient":id,"ability":str(window.get("ability","")),"cast":int(window.get("cast",0)),"remaining":window.life,"value":float(window.get("attack_multiplier",0)),"position":b.position})
+	for account in refunds:
+		result.append({"key":"refund:%s:%s:%d" % [account.owner,account.payer,int(account.get("cast",0))],"kind":"refund","source":account.owner,"recipient":account.payer,"ability":str(account.get("ability","")),"remaining":account.life,"value":account.balance,"position":b.position})
+	for field in fields:
+		result.append({"key":"field:%s:%d" % [field.source,int(field.context.cast)],"kind":"field","source":field.source,"ability":field.context.ability,"cast":field.context.cast,"remaining":field.life,"radius":field.radius,"position":field.position,"value":0.0})
+	for enemy in b.enemies:
+		if enemy.dead or not enemy.targetable: continue
+		if enemy.slow_time > 0 and enemy.slow > 0:
+			result.append({"key":"slow:%d" % enemy.id,"kind":"slow","source":"","target_id":enemy.id,"remaining":enemy.slow_time,"value":enemy.slow,"position":enemy.position})
+		for layer in curses.get(enemy.id,[]):
+			result.append({"key":"curse:%d:%s" % [enemy.id,layer.source],"kind":"curse","source":layer.source,"target_id":enemy.id,"remaining":layer.life,"value":layer.remaining,"position":enemy.position})
+		if exposures.has(enemy.id):
+			for exposure in exposures[enemy.id].instances:
+				result.append({"key":"expose:%d:%s:%d" % [enemy.id,str(exposure.get("source","")),int(exposure.get("cast",0))],"kind":"expose","source":str(exposure.get("source","")),"target_id":enemy.id,"ability":str(exposure.get("ability","")),"remaining":exposure.life,"value":exposure.multiplier,"position":enemy.position})
+	return result # Every record above is fresh and contains only primitive/Vector2 values.

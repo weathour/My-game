@@ -1,0 +1,44 @@
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+OpenGL API 3.3.0 NVIDIA 580.173.02 - Compatibility - Using Device: NVIDIA - NVIDIA GeForce RTX 5080
+
+ERROR: B01 sampled exactly one process frame per iteration
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _expect (res://scripts/tests/chronicle_live_performance_bench.gd:39)
+       [1] _scenario (res://scripts/tests/chronicle_live_performance_bench.gd:414)
+       [2] _bench_frame (res://scripts/tests/chronicle_live_performance_bench.gd:291)
+ERROR: B01 sampled exactly one rendered frame per iteration
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _expect (res://scripts/tests/chronicle_live_performance_bench.gd:39)
+       [1] _scenario (res://scripts/tests/chronicle_live_performance_bench.gd:415)
+       [2] _bench_frame (res://scripts/tests/chronicle_live_performance_bench.gd:291)
+LIVE_PERF_STAGE {"canvas":{"max_ms":2.637,"over_16_67ms":0,"over_33_33ms":0,"over_50ms":0,"p50_ms":0.417,"p95_ms":0.907,"p99_ms":1.512,"samples":600},"frames":720,"population_max":{"authored_transients":4,"effects":4,"enemies":32,"enemy_views":32,"gems":8,"hazards":0,"pending_patterns":0,"projectiles":2,"skill_states":1,"skill_transients":6,"telegraphs":2,"texture_bounds_cache_entries":46},"stage":"B01","tick":{"max_ms":1.462,"over_16_67ms":0,"over_33_33ms":0,"over_50ms":0,"p50_ms":0.441,"p95_ms":0.853,"p99_ms":1.01,"samples":600},"wall":{"max_ms":39.494,"over_16_67ms":46,"over_33_33ms":1,"over_50ms":0,"p50_ms":11.438,"p95_ms":17.685,"p99_ms":19.992,"samples":720}}
+ERROR: B12 sampled exactly one process frame per iteration
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _expect (res://scripts/tests/chronicle_live_performance_bench.gd:39)
+       [1] _scenario (res://scripts/tests/chronicle_live_performance_bench.gd:414)
+       [2] _bench_frame (res://scripts/tests/chronicle_live_performance_bench.gd:291)
+ERROR: B12 sampled exactly one rendered frame per iteration
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _expect (res://scripts/tests/chronicle_live_performance_bench.gd:39)
+       [1] _scenario (res://scripts/tests/chronicle_live_performance_bench.gd:415)
+       [2] _bench_frame (res://scripts/tests/chronicle_live_performance_bench.gd:291)
+LIVE_PERF_STAGE {"canvas":{"max_ms":9.198,"over_16_67ms":0,"over_33_33ms":0,"over_50ms":0,"p50_ms":1.139,"p95_ms":3.072,"p99_ms":4.539,"samples":1380},"frames":1500,"population_max":{"authored_transients":5,"effects":10,"enemies":86,"enemy_views":86,"gems":11,"hazards":0,"pending_patterns":4,"projectiles":245,"skill_states":24,"skill_transients":32,"telegraphs":9,"texture_bounds_cache_entries":114},"stage":"B12","tick":{"max_ms":19.336,"over_16_67ms":2,"over_33_33ms":0,"over_50ms":0,"p50_ms":1.611,"p95_ms":5.526,"p99_ms":8.618,"samples":1380},"wall":{"max_ms":76.841,"over_16_67ms":883,"over_33_33ms":479,"over_50ms":41,"p50_ms":18.513,"p95_ms":46.412,"p99_ms":56.706,"samples":1500}}
+ERROR: B18 sampled exactly one process frame per iteration
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _expect (res://scripts/tests/chronicle_live_performance_bench.gd:39)
+       [1] _scenario (res://scripts/tests/chronicle_live_performance_bench.gd:414)
+       [2] _bench_frame (res://scripts/tests/chronicle_live_performance_bench.gd:291)
+ERROR: B18 sampled exactly one rendered frame per iteration
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _expect (res://scripts/tests/chronicle_live_performance_bench.gd:39)
+       [1] _scenario (res://scripts/tests/chronicle_live_performance_bench.gd:415)
+       [2] _bench_frame (res://scripts/tests/chronicle_live_performance_bench.gd:291)
+LIVE_PERF_STAGE {"canvas":{"max_ms":12.896,"over_16_67ms":0,"over_33_33ms":0,"over_50ms":0,"p50_ms":0.348,"p95_ms":1.217,"p99_ms":5.037,"samples":600},"frames":720,"population_max":{"authored_transients":0,"effects":2,"enemies":1,"enemy_views":1,"gems":0,"hazards":2,"pending_patterns":1,"projectiles":100,"skill_states":2,"skill_transients":5,"telegraphs":3,"texture_bounds_cache_entries":51},"stage":"B18","tick":{"max_ms":2.64,"over_16_67ms":0,"over_33_33ms":0,"over_50ms":0,"p50_ms":0.365,"p95_ms":0.716,"p99_ms":1.473,"samples":600},"wall":{"max_ms":84.048,"over_16_67ms":566,"over_33_33ms":36,"over_50ms":4,"p50_ms":23.685,"p95_ms":33.345,"p99_ms":44.224,"samples":720}}
+LIVE_PERF_BENCH_REPORT /home/weathour/programs/desktop-projects/My-game/design/performance-20261105/baseline/results.json
+CHRONICLE_LIVE_PERFORMANCE_BENCH FAIL failures=6

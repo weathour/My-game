@@ -1,0 +1,57 @@
+PASS actual default02 OGG and D2 MIDI decoded
+PASS initial state is ready without autoplay
+PASS transport uses original class clock and playback methods
+PASS native main window owns focus
+qt.multimedia.ffmpeg: Using Qt multimedia with FFmpeg version 7.1.2 LGPL version 2.1 or later
+No sample format supported found for device "bluez_output.C4_6E_7B_12_03_2E.1"
+qt.core.qfuture.continuations: Parent future has 2 result(s), but only the first result will be handled in the continuation.
+PASS actual default audio backend starts at0.02 volume and advances
+INPUT_STATE J playing True QPushButton 正在播放
+PASS real native J input recorded
+PASS raw J is bracketed by actual transport samples
+PASS native J keeps keyboard source
+INPUT_STATE K playing True QPushButton 正在播放
+PASS real native K input recorded
+PASS raw K is bracketed by actual transport samples
+PASS native K keeps keyboard source
+INPUT_STATE SPACE playing True QPushButton 正在播放
+PASS real native SPACE input recorded
+PASS raw SPACE is bracketed by actual transport samples
+PASS native SPACE keeps keyboard source
+PASS J K SPACE timestamps progress with real music
+PASS native P pauses real playback
+PASS paused real transport position freezes
+PASS paused native key is not captured
+No sample format supported found for device "bluez_output.C4_6E_7B_12_03_2E.1"
+PASS native Home seeks real transport and creates a new trial
+PASS native main window owns focus
+PASS real backend resumes after seek
+INPUT_STATE J-after-seek playing True QPushButton 正在播放
+PASS real native J-after-seek input recorded
+PASS raw J-after-seek is bracketed by actual transport samples
+PASS native J-after-seek keeps keyboard source
+PASS blind change creates a reference-free trial
+PASS native main window owns focus
+INPUT_STATE blind-J playing True QPushButton 正在播放
+PASS real native blind-J input recorded
+PASS raw blind-J is bracketed by actual transport samples
+PASS native blind-J keeps keyboard source
+INPUT_STATE blind-K playing True QPushButton 正在播放
+PASS real native blind-K input recorded
+PASS raw blind-K is bracketed by actual transport samples
+PASS native blind-K keeps keyboard source
+INPUT_STATE blind-SPACE playing True QPushButton 正在播放
+PASS real native blind-SPACE input recorded
+PASS raw blind-SPACE is bracketed by actual transport samples
+PASS native blind-SPACE keeps keyboard source
+PASS real blind taps have no target assignment or score
+PASS blind raw timestamps progress naturally
+PASS live blind interface hides timing and scoring
+PASS all real keyboard events survive multi-trial export
+PASS export preserves measured real transport timestamps exactly
+PASS real trial exports retain exact MIDI and OGG resource hashes
+PASS CSV preserves every measured raw audio timestamp
+PASS real stop tears down playback and resets position
+No sample format supported found for device "bluez_output.C4_6E_7B_12_03_2E.1"
+PASS real close releases transport audio
+NATIVE_END_TO_END_OK 44 taps= 7

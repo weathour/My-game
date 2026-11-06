@@ -1,0 +1,2184 @@
+{
+  "schema_version": 1,
+  "source_snapshot": "design/skill-audio-20261103/runtime/combat-content-baseline.json",
+  "characters": 38,
+  "abilities": 137,
+  "traits": 9,
+  "enemy_definitions": 43,
+  "enemy_actions": 87,
+  "unique_enemy_move_keys": 81,
+  "duplicate_move_id_records": [
+    {
+      "enemy": "E09",
+      "form": "0",
+      "move_id": "slam",
+      "count": 2,
+      "shared_family": "bone"
+    },
+    {
+      "enemy": "L06",
+      "form": "0",
+      "move_id": "slam",
+      "count": 2,
+      "shared_family": "blunt"
+    },
+    {
+      "enemy": "B06",
+      "form": "0",
+      "move_id": "slam",
+      "count": 2,
+      "shared_family": "arcane"
+    },
+    {
+      "enemy": "B09",
+      "form": "0",
+      "move_id": "slam",
+      "count": 2,
+      "shared_family": "blunt"
+    },
+    {
+      "enemy": "B10",
+      "form": "0",
+      "move_id": "slam",
+      "count": 2,
+      "shared_family": "blunt"
+    },
+    {
+      "enemy": "B10_R",
+      "form": "0",
+      "move_id": "slam",
+      "count": 2,
+      "shared_family": "blunt"
+    }
+  ],
+  "boss_actions": 30,
+  "boss_action_forms": 22,
+  "boss_event_contexts": 22,
+  "runtime_enemy_action_aliases": 1,
+  "priority_policy": {
+    "ordinary_tell": "1–2; any major=4",
+    "elite_tell": "3; any major=4",
+    "boss_tell": "5",
+    "ordinary_release_impact": 1,
+    "elite_release_impact": 2,
+    "boss_release_impact": 4,
+    "character_cast": 2,
+    "character_impact": 1
+  },
+  "silent": [
+    {
+      "type": "trait",
+      "owner": "F04",
+      "trait": "refund",
+      "reason": "被动通过原技能/实际伤害事件触发；独立trait仅改标记、资源、回响或结算，不增加周期性音效，避免重复播报。"
+    },
+    {
+      "type": "trait",
+      "owner": "F05",
+      "trait": "curse",
+      "reason": "被动通过原技能/实际伤害事件触发；独立trait仅改标记、资源、回响或结算，不增加周期性音效，避免重复播报。"
+    },
+    {
+      "type": "trait",
+      "owner": "F06",
+      "trait": "ammo",
+      "reason": "被动通过原技能/实际伤害事件触发；独立trait仅改标记、资源、回响或结算，不增加周期性音效，避免重复播报。"
+    },
+    {
+      "type": "trait",
+      "owner": "F10",
+      "trait": "relay",
+      "reason": "被动通过原技能/实际伤害事件触发；独立trait仅改标记、资源、回响或结算，不增加周期性音效，避免重复播报。"
+    },
+    {
+      "type": "trait",
+      "owner": "F11",
+      "trait": "echo",
+      "reason": "被动通过原技能/实际伤害事件触发；独立trait仅改标记、资源、回响或结算，不增加周期性音效，避免重复播报。"
+    },
+    {
+      "type": "trait",
+      "owner": "N01",
+      "trait": "mark",
+      "reason": "被动通过原技能/实际伤害事件触发；独立trait仅改标记、资源、回响或结算，不增加周期性音效，避免重复播报。"
+    },
+    {
+      "type": "trait",
+      "owner": "N07",
+      "trait": "mark",
+      "reason": "被动通过原技能/实际伤害事件触发；独立trait仅改标记、资源、回响或结算，不增加周期性音效，避免重复播报。"
+    },
+    {
+      "type": "trait",
+      "owner": "N09",
+      "trait": "mark",
+      "reason": "被动通过原技能/实际伤害事件触发；独立trait仅改标记、资源、回响或结算，不增加周期性音效，避免重复播报。"
+    },
+    {
+      "type": "trait",
+      "owner": "N14",
+      "trait": "curse",
+      "reason": "被动通过原技能/实际伤害事件触发；独立trait仅改标记、资源、回响或结算，不增加周期性音效，避免重复播报。"
+    }
+  ],
+  "owned_stat_silence": [
+    {
+      "owner": "F01",
+      "modifiers": {
+        "speed": 0.01
+      },
+      "reason": "owned字段仅为持有/等级属性修正，不是战斗触发事件；无需独立音效。"
+    },
+    {
+      "owner": "F02",
+      "modifiers": {
+        "armor": 0.14
+      },
+      "reason": "owned字段仅为持有/等级属性修正，不是战斗触发事件；无需独立音效。"
+    },
+    {
+      "owner": "F03",
+      "modifiers": {
+        "armor": 0.12
+      },
+      "reason": "owned字段仅为持有/等级属性修正，不是战斗触发事件；无需独立音效。"
+    },
+    {
+      "owner": "F04",
+      "modifiers": {
+        "mp": 0.6
+      },
+      "reason": "owned字段仅为持有/等级属性修正，不是战斗触发事件；无需独立音效。"
+    },
+    {
+      "owner": "F05",
+      "modifiers": {
+        "regen": 0.12
+      },
+      "reason": "owned字段仅为持有/等级属性修正，不是战斗触发事件；无需独立音效。"
+    },
+    {
+      "owner": "F06",
+      "modifiers": {
+        "speed": 0.009
+      },
+      "reason": "owned字段仅为持有/等级属性修正，不是战斗触发事件；无需独立音效。"
+    },
+    {
+      "owner": "F07",
+      "modifiers": {
+        "attack": 0.4
+      },
+      "reason": "owned字段仅为持有/等级属性修正，不是战斗触发事件；无需独立音效。"
+    },
+    {
+      "owner": "F08",
+      "modifiers": {
+        "attack": 0.25
+      },
+      "reason": "owned字段仅为持有/等级属性修正，不是战斗触发事件；无需独立音效。"
+    },
+    {
+      "owner": "F09",
+      "modifiers": {
+        "mp": 0.5
+      },
+      "reason": "owned字段仅为持有/等级属性修正，不是战斗触发事件；无需独立音效。"
+    },
+    {
+      "owner": "F10",
+      "modifiers": {
+        "regen": 0.1
+      },
+      "reason": "owned字段仅为持有/等级属性修正，不是战斗触发事件；无需独立音效。"
+    },
+    {
+      "owner": "F11",
+      "modifiers": {
+        "regen": 0.15
+      },
+      "reason": "owned字段仅为持有/等级属性修正，不是战斗触发事件；无需独立音效。"
+    },
+    {
+      "owner": "JIA",
+      "modifiers": {},
+      "reason": "owned字段仅为持有/等级属性修正，不是战斗触发事件；无需独立音效。"
+    },
+    {
+      "owner": "M01",
+      "modifiers": {
+        "attack": 0.3
+      },
+      "reason": "owned字段仅为持有/等级属性修正，不是战斗触发事件；无需独立音效。"
+    },
+    {
+      "owner": "M02",
+      "modifiers": {
+        "move": 0.3
+      },
+      "reason": "owned字段仅为持有/等级属性修正，不是战斗触发事件；无需独立音效。"
+    },
+    {
+      "owner": "M03",
+      "modifiers": {
+        "armor": 0.16
+      },
+      "reason": "owned字段仅为持有/等级属性修正，不是战斗触发事件；无需独立音效。"
+    },
+    {
+      "owner": "M04",
+      "modifiers": {
+        "regen": 0.12
+      },
+      "reason": "owned字段仅为持有/等级属性修正，不是战斗触发事件；无需独立音效。"
+    },
+    {
+      "owner": "M05",
+      "modifiers": {
+        "hp": 0.8
+      },
+      "reason": "owned字段仅为持有/等级属性修正，不是战斗触发事件；无需独立音效。"
+    },
+    {
+      "owner": "M06",
+      "modifiers": {
+        "mp": 0.6
+      },
+      "reason": "owned字段仅为持有/等级属性修正，不是战斗触发事件；无需独立音效。"
+    },
+    {
+      "owner": "M07",
+      "modifiers": {
+        "hp": 0.7
+      },
+      "reason": "owned字段仅为持有/等级属性修正，不是战斗触发事件；无需独立音效。"
+    },
+    {
+      "owner": "M08",
+      "modifiers": {
+        "armor": 0.12
+      },
+      "reason": "owned字段仅为持有/等级属性修正，不是战斗触发事件；无需独立音效。"
+    },
+    {
+      "owner": "N01",
+      "modifiers": {
+        "attack": 0.5
+      },
+      "reason": "owned字段仅为持有/等级属性修正，不是战斗触发事件；无需独立音效。"
+    },
+    {
+      "owner": "N02",
+      "modifiers": {
+        "armor": 0.12
+      },
+      "reason": "owned字段仅为持有/等级属性修正，不是战斗触发事件；无需独立音效。"
+    },
+    {
+      "owner": "N03",
+      "modifiers": {
+        "hp": 1
+      },
+      "reason": "owned字段仅为持有/等级属性修正，不是战斗触发事件；无需独立音效。"
+    },
+    {
+      "owner": "N04",
+      "modifiers": {
+        "attack": 0.35
+      },
+      "reason": "owned字段仅为持有/等级属性修正，不是战斗触发事件；无需独立音效。"
+    },
+    {
+      "owner": "N05",
+      "modifiers": {
+        "armor": 0.1
+      },
+      "reason": "owned字段仅为持有/等级属性修正，不是战斗触发事件；无需独立音效。"
+    },
+    {
+      "owner": "N06",
+      "modifiers": {
+        "attack": 0.3
+      },
+      "reason": "owned字段仅为持有/等级属性修正，不是战斗触发事件；无需独立音效。"
+    },
+    {
+      "owner": "N07",
+      "modifiers": {
+        "speed": 0.012
+      },
+      "reason": "owned字段仅为持有/等级属性修正，不是战斗触发事件；无需独立音效。"
+    },
+    {
+      "owner": "N08",
+      "modifiers": {
+        "attack": 0.3
+      },
+      "reason": "owned字段仅为持有/等级属性修正，不是战斗触发事件；无需独立音效。"
+    },
+    {
+      "owner": "N09",
+      "modifiers": {
+        "mp": 0.5
+      },
+      "reason": "owned字段仅为持有/等级属性修正，不是战斗触发事件；无需独立音效。"
+    },
+    {
+      "owner": "N10",
+      "modifiers": {
+        "move": 0.45
+      },
+      "reason": "owned字段仅为持有/等级属性修正，不是战斗触发事件；无需独立音效。"
+    },
+    {
+      "owner": "N11",
+      "modifiers": {
+        "move": 0.35
+      },
+      "reason": "owned字段仅为持有/等级属性修正，不是战斗触发事件；无需独立音效。"
+    },
+    {
+      "owner": "N12",
+      "modifiers": {
+        "armor": 0.12
+      },
+      "reason": "owned字段仅为持有/等级属性修正，不是战斗触发事件；无需独立音效。"
+    },
+    {
+      "owner": "N13",
+      "modifiers": {
+        "regen": 0.25
+      },
+      "reason": "owned字段仅为持有/等级属性修正，不是战斗触发事件；无需独立音效。"
+    },
+    {
+      "owner": "N14",
+      "modifiers": {
+        "regen": 0.12
+      },
+      "reason": "owned字段仅为持有/等级属性修正，不是战斗触发事件；无需独立音效。"
+    },
+    {
+      "owner": "N15",
+      "modifiers": {
+        "mp": 0.6
+      },
+      "reason": "owned字段仅为持有/等级属性修正，不是战斗触发事件；无需独立音效。"
+    },
+    {
+      "owner": "N16",
+      "modifiers": {
+        "supply_hp": 0.025
+      },
+      "reason": "owned字段仅为持有/等级属性修正，不是战斗触发事件；无需独立音效。"
+    },
+    {
+      "owner": "N17",
+      "modifiers": {
+        "supply_mp": 0.04
+      },
+      "reason": "owned字段仅为持有/等级属性修正，不是战斗触发事件；无需独立音效。"
+    },
+    {
+      "owner": "N18",
+      "modifiers": {
+        "supply_mp": 0.03
+      },
+      "reason": "owned字段仅为持有/等级属性修正，不是战斗触发事件；无需独立音效。"
+    }
+  ],
+  "bindings": [
+    {
+      "type": "ability",
+      "owner": "F01",
+      "id": "F01_basic",
+      "slot": "basic",
+      "family": "thrust",
+      "basis": "技能几何是THRUST直线刺击"
+    },
+    {
+      "type": "ability",
+      "owner": "F01",
+      "id": "F01_dash",
+      "slot": "manual",
+      "family": "thrust",
+      "basis": "技能几何是THRUST直线刺击"
+    },
+    {
+      "type": "ability",
+      "owner": "F01",
+      "id": "F01_expose",
+      "slot": "manual",
+      "family": "blade",
+      "basis": "吕玲绮破阵为近身范围兵器攻击；裂阵字样不表示指挥阵法"
+    },
+    {
+      "type": "ability",
+      "owner": "F01",
+      "id": "F01_support",
+      "slot": "support",
+      "family": "thrust",
+      "basis": "技能几何是THRUST直线刺击"
+    },
+    {
+      "type": "ability",
+      "owner": "F02",
+      "id": "F02_basic",
+      "slot": "basic",
+      "family": "blade",
+      "basis": "近身横斩/范围挥击身份"
+    },
+    {
+      "type": "ability",
+      "owner": "F02",
+      "id": "F02_guard",
+      "slot": "manual",
+      "family": "shield",
+      "basis": "护身/护盾类 WARD 技能"
+    },
+    {
+      "type": "ability",
+      "owner": "F02",
+      "id": "F02_riposte",
+      "slot": "manual",
+      "family": "thrust",
+      "basis": "技能几何是THRUST直线刺击"
+    },
+    {
+      "type": "ability",
+      "owner": "F02",
+      "id": "F02_support",
+      "slot": "support",
+      "family": "shield",
+      "basis": "护身/护盾类 WARD 技能"
+    },
+    {
+      "type": "ability",
+      "owner": "F03",
+      "id": "F03_basic",
+      "slot": "basic",
+      "family": "arcane",
+      "basis": "角色法术投射技能的专属奥术音色"
+    },
+    {
+      "type": "ability",
+      "owner": "F03",
+      "id": "physician_heal",
+      "slot": "manual",
+      "family": "heal",
+      "basis": "治疗技能标题/目标作用为恢复生命; 成功HP/MP/护盾增量由ability_effect确认后发对应impact，满值无增量则无声"
+    },
+    {
+      "type": "ability",
+      "owner": "F03",
+      "id": "physician_ward",
+      "slot": "manual",
+      "family": "shield",
+      "basis": "护身/护盾类 WARD 技能; 成功HP/MP/护盾增量由ability_effect确认后发对应impact，满值无增量则无声"
+    },
+    {
+      "type": "ability",
+      "owner": "F03",
+      "id": "physician_support",
+      "slot": "support",
+      "family": "heal",
+      "basis": "治疗技能标题/目标作用为恢复生命; 成功HP/MP/护盾增量由ability_effect确认后发对应impact，满值无增量则无声"
+    },
+    {
+      "type": "ability",
+      "owner": "F04",
+      "id": "F04_basic",
+      "slot": "basic",
+      "family": "arcane",
+      "basis": "角色法术投射技能的专属奥术音色"
+    },
+    {
+      "type": "ability",
+      "owner": "F04",
+      "id": "F04_settle",
+      "slot": "manual",
+      "family": "mana",
+      "basis": "技能明确恢复或补给魔法; 成功HP/MP/护盾增量由ability_effect确认后发对应impact，满值无增量则无声"
+    },
+    {
+      "type": "ability",
+      "owner": "F04",
+      "id": "F04_supply",
+      "slot": "manual",
+      "family": "mana",
+      "basis": "技能明确恢复或补给魔法; 成功HP/MP/护盾增量由ability_effect确认后发对应impact，满值无增量则无声"
+    },
+    {
+      "type": "ability",
+      "owner": "F04",
+      "id": "F04_support",
+      "slot": "support",
+      "family": "arcane",
+      "basis": "角色法术投射技能的专属奥术音色"
+    },
+    {
+      "type": "ability",
+      "owner": "F05",
+      "id": "F05_basic",
+      "slot": "basic",
+      "family": "arcane",
+      "basis": "角色法术投射技能的专属奥术音色"
+    },
+    {
+      "type": "ability",
+      "owner": "F05",
+      "id": "F05_curse",
+      "slot": "manual",
+      "family": "curse",
+      "basis": "技能名/机制明确为诅咒"
+    },
+    {
+      "type": "ability",
+      "owner": "F05",
+      "id": "F05_spread",
+      "slot": "manual",
+      "family": "curse",
+      "basis": "技能名/机制明确为诅咒"
+    },
+    {
+      "type": "ability",
+      "owner": "F05",
+      "id": "F05_support",
+      "slot": "support",
+      "family": "curse",
+      "basis": "技能名/机制明确为诅咒"
+    },
+    {
+      "type": "ability",
+      "owner": "F06",
+      "id": "F06_basic",
+      "slot": "basic",
+      "family": "bow",
+      "basis": "远程投射按角色/技能身份选定为弹射武器音色"
+    },
+    {
+      "type": "ability",
+      "owner": "F06",
+      "id": "F06_volley",
+      "slot": "manual",
+      "family": "bow",
+      "basis": "角色/技能身份是弓弩、射击或箭矢"
+    },
+    {
+      "type": "ability",
+      "owner": "F06",
+      "id": "F06_pin",
+      "slot": "manual",
+      "family": "bow",
+      "basis": "钉阵矢是弓箭射击技能"
+    },
+    {
+      "type": "ability",
+      "owner": "F06",
+      "id": "F06_support",
+      "slot": "support",
+      "family": "bow",
+      "basis": "角色/技能身份是弓弩、射击或箭矢"
+    },
+    {
+      "type": "ability",
+      "owner": "F07",
+      "id": "F07_basic",
+      "slot": "basic",
+      "family": "blade",
+      "basis": "近身横斩/范围挥击身份"
+    },
+    {
+      "type": "ability",
+      "owner": "F07",
+      "id": "bandit_sweep",
+      "slot": "manual",
+      "family": "wind",
+      "basis": "技能名明确为风系"
+    },
+    {
+      "type": "ability",
+      "owner": "F07",
+      "id": "bandit_thrust",
+      "slot": "manual",
+      "family": "thrust",
+      "basis": "技能几何是THRUST直线刺击"
+    },
+    {
+      "type": "ability",
+      "owner": "F07",
+      "id": "bandit_support",
+      "slot": "support",
+      "family": "blade",
+      "basis": "近身横斩/范围挥击身份"
+    },
+    {
+      "type": "ability",
+      "owner": "F08",
+      "id": "F08_basic",
+      "slot": "basic",
+      "family": "blunt",
+      "basis": "陶小满铁匠身份的基础SWEEP按锤击处理"
+    },
+    {
+      "type": "ability",
+      "owner": "F08",
+      "id": "F08_temper",
+      "slot": "manual",
+      "family": "buff",
+      "basis": "temper机制为持续强化/延长"
+    },
+    {
+      "type": "ability",
+      "owner": "F08",
+      "id": "F08_break",
+      "slot": "manual",
+      "family": "blunt",
+      "basis": "钝击/盾击身份"
+    },
+    {
+      "type": "ability",
+      "owner": "F08",
+      "id": "F08_support",
+      "slot": "support",
+      "family": "buff",
+      "basis": "temper机制为持续强化/延长"
+    },
+    {
+      "type": "ability",
+      "owner": "F09",
+      "id": "F09_basic",
+      "slot": "basic",
+      "family": "arcane",
+      "basis": "角色法术投射技能的专属奥术音色"
+    },
+    {
+      "type": "ability",
+      "owner": "F09",
+      "id": "F09_extend",
+      "slot": "manual",
+      "family": "buff",
+      "basis": "extend机制为持续强化/延长"
+    },
+    {
+      "type": "ability",
+      "owner": "F09",
+      "id": "F09_rally",
+      "slot": "manual",
+      "family": "buff",
+      "basis": "rally机制为持续强化/延长"
+    },
+    {
+      "type": "ability",
+      "owner": "F09",
+      "id": "F09_support",
+      "slot": "support",
+      "family": "buff",
+      "basis": "extend机制为持续强化/延长"
+    },
+    {
+      "type": "ability",
+      "owner": "F10",
+      "id": "F10_basic",
+      "slot": "basic",
+      "family": "arcane",
+      "basis": "角色法术投射技能的专属奥术音色"
+    },
+    {
+      "type": "ability",
+      "owner": "F10",
+      "id": "F10_ward",
+      "slot": "manual",
+      "family": "shield",
+      "basis": "护身/护盾类 WARD 技能; 成功HP/MP/护盾增量由ability_effect确认后发对应impact，满值无增量则无声"
+    },
+    {
+      "type": "ability",
+      "owner": "F10",
+      "id": "F10_expose",
+      "slot": "manual",
+      "family": "arcane",
+      "basis": "角色法术投射技能的专属奥术音色"
+    },
+    {
+      "type": "ability",
+      "owner": "F10",
+      "id": "F10_support",
+      "slot": "support",
+      "family": "shield",
+      "basis": "护身/护盾类 WARD 技能; 成功HP/MP/护盾增量由ability_effect确认后发对应impact，满值无增量则无声"
+    },
+    {
+      "type": "ability",
+      "owner": "F11",
+      "id": "F11_basic",
+      "slot": "basic",
+      "family": "arcane",
+      "basis": "角色法术投射技能的专属奥术音色"
+    },
+    {
+      "type": "ability",
+      "owner": "F11",
+      "id": "emma_ice",
+      "slot": "automatic",
+      "family": "ice",
+      "basis": "技能名或角色身份明确为冰霜"
+    },
+    {
+      "type": "ability",
+      "owner": "F11",
+      "id": "emma_frost",
+      "slot": "manual",
+      "family": "ice",
+      "basis": "技能名或角色身份明确为冰霜"
+    },
+    {
+      "type": "ability",
+      "owner": "F11",
+      "id": "emma_star",
+      "slot": "manual",
+      "family": "fire",
+      "basis": "技能名明确为火焰"
+    },
+    {
+      "type": "ability",
+      "owner": "F11",
+      "id": "emma_support",
+      "slot": "support",
+      "family": "arcane",
+      "basis": "角色法术投射技能的专属奥术音色"
+    },
+    {
+      "type": "ability",
+      "owner": "JIA",
+      "id": "JIA_basic",
+      "slot": "basic",
+      "family": "blade",
+      "basis": "贾苇索默认普攻横斩；长枪装备另有THRUST覆写"
+    },
+    {
+      "type": "ability",
+      "owner": "JIA",
+      "id": "jia_sweep",
+      "slot": "manual",
+      "family": "blade",
+      "basis": "近身横斩/范围挥击身份"
+    },
+    {
+      "type": "ability",
+      "owner": "JIA",
+      "id": "jia_break",
+      "slot": "manual",
+      "family": "thrust",
+      "basis": "破阵为直线突刺技能"
+    },
+    {
+      "type": "ability",
+      "owner": "M01",
+      "id": "M01_basic",
+      "slot": "basic",
+      "family": "heavy_blade",
+      "basis": "戟/重型兵器挥击身份"
+    },
+    {
+      "type": "ability",
+      "owner": "M01",
+      "id": "M01_cleave",
+      "slot": "manual",
+      "family": "heavy_blade",
+      "basis": "戟/重型兵器挥击身份"
+    },
+    {
+      "type": "ability",
+      "owner": "M01",
+      "id": "M01_rally",
+      "slot": "manual",
+      "family": "buff",
+      "basis": "rally机制为持续强化/延长"
+    },
+    {
+      "type": "ability",
+      "owner": "M01",
+      "id": "M01_support",
+      "slot": "support",
+      "family": "heavy_blade",
+      "basis": "掠阵横戟是吕布戟类横击，不是指挥动作"
+    },
+    {
+      "type": "ability",
+      "owner": "M02",
+      "id": "M02_basic",
+      "slot": "basic",
+      "family": "thrust",
+      "basis": "技能几何是THRUST直线刺击"
+    },
+    {
+      "type": "ability",
+      "owner": "M02",
+      "id": "M02_dash",
+      "slot": "manual",
+      "family": "thrust",
+      "basis": "技能几何是THRUST直线刺击"
+    },
+    {
+      "type": "ability",
+      "owner": "M02",
+      "id": "M02_expose",
+      "slot": "manual",
+      "family": "thrust",
+      "basis": "技能几何是THRUST直线刺击"
+    },
+    {
+      "type": "ability",
+      "owner": "M02",
+      "id": "M02_support",
+      "slot": "support",
+      "family": "thrust",
+      "basis": "技能几何是THRUST直线刺击"
+    },
+    {
+      "type": "ability",
+      "owner": "M03",
+      "id": "M03_basic",
+      "slot": "basic",
+      "family": "thrust",
+      "basis": "技能几何是THRUST直线刺击"
+    },
+    {
+      "type": "ability",
+      "owner": "M03",
+      "id": "M03_guard",
+      "slot": "manual",
+      "family": "shield",
+      "basis": "护身/护盾类 WARD 技能; 成功HP/MP/护盾增量由ability_effect确认后发对应impact，满值无增量则无声"
+    },
+    {
+      "type": "ability",
+      "owner": "M03",
+      "id": "M03_field",
+      "slot": "manual",
+      "family": "command",
+      "basis": "mechanic明确为布阵场域"
+    },
+    {
+      "type": "ability",
+      "owner": "M03",
+      "id": "M03_support",
+      "slot": "support",
+      "family": "shield",
+      "basis": "护身/护盾类 WARD 技能; 成功HP/MP/护盾增量由ability_effect确认后发对应impact，满值无增量则无声"
+    },
+    {
+      "type": "ability",
+      "owner": "M04",
+      "id": "M04_basic",
+      "slot": "basic",
+      "family": "arcane",
+      "basis": "角色法术投射技能的专属奥术音色"
+    },
+    {
+      "type": "ability",
+      "owner": "M04",
+      "id": "M04_field",
+      "slot": "manual",
+      "family": "command",
+      "basis": "mechanic明确为布阵场域"
+    },
+    {
+      "type": "ability",
+      "owner": "M04",
+      "id": "M04_bind",
+      "slot": "manual",
+      "family": "blade",
+      "basis": "近身横斩/范围挥击身份"
+    },
+    {
+      "type": "ability",
+      "owner": "M04",
+      "id": "M04_support",
+      "slot": "support",
+      "family": "arcane",
+      "basis": "角色法术投射技能的专属奥术音色"
+    },
+    {
+      "type": "ability",
+      "owner": "M05",
+      "id": "M05_basic",
+      "slot": "basic",
+      "family": "thrust",
+      "basis": "技能几何是THRUST直线刺击"
+    },
+    {
+      "type": "ability",
+      "owner": "M05",
+      "id": "M05_dash",
+      "slot": "manual",
+      "family": "thrust",
+      "basis": "技能几何是THRUST直线刺击"
+    },
+    {
+      "type": "ability",
+      "owner": "M05",
+      "id": "M05_rally",
+      "slot": "manual",
+      "family": "buff",
+      "basis": "rally机制为持续强化/延长"
+    },
+    {
+      "type": "ability",
+      "owner": "M05",
+      "id": "M05_support",
+      "slot": "support",
+      "family": "thrust",
+      "basis": "骑军掠阵为曹纯骑枪突刺支援"
+    },
+    {
+      "type": "ability",
+      "owner": "M06",
+      "id": "M06_basic",
+      "slot": "basic",
+      "family": "bow",
+      "basis": "远程投射按角色/技能身份选定为弹射武器音色"
+    },
+    {
+      "type": "ability",
+      "owner": "M06",
+      "id": "M06_expose",
+      "slot": "manual",
+      "family": "bow",
+      "basis": "远程投射按角色/技能身份选定为弹射武器音色"
+    },
+    {
+      "type": "ability",
+      "owner": "M06",
+      "id": "M06_dash",
+      "slot": "manual",
+      "family": "bow",
+      "basis": "角色/技能身份是弓弩、射击或箭矢"
+    },
+    {
+      "type": "ability",
+      "owner": "M06",
+      "id": "M06_support",
+      "slot": "support",
+      "family": "bow",
+      "basis": "角色/技能身份是弓弩、射击或箭矢"
+    },
+    {
+      "type": "ability",
+      "owner": "M07",
+      "id": "M07_basic",
+      "slot": "basic",
+      "family": "blade",
+      "basis": "近身横斩/范围挥击身份"
+    },
+    {
+      "type": "ability",
+      "owner": "M07",
+      "id": "M07_sweep",
+      "slot": "manual",
+      "family": "blade",
+      "basis": "近身横斩/范围挥击身份"
+    },
+    {
+      "type": "ability",
+      "owner": "M07",
+      "id": "M07_rally",
+      "slot": "manual",
+      "family": "buff",
+      "basis": "rally机制为持续强化/延长"
+    },
+    {
+      "type": "ability",
+      "owner": "M07",
+      "id": "M07_support",
+      "slot": "support",
+      "family": "blade",
+      "basis": "近身横斩/范围挥击身份"
+    },
+    {
+      "type": "ability",
+      "owner": "M08",
+      "id": "M08_basic",
+      "slot": "basic",
+      "family": "thrust",
+      "basis": "技能几何是THRUST直线刺击"
+    },
+    {
+      "type": "ability",
+      "owner": "M08",
+      "id": "M08_break",
+      "slot": "manual",
+      "family": "thrust",
+      "basis": "技能几何是THRUST直线刺击"
+    },
+    {
+      "type": "ability",
+      "owner": "M08",
+      "id": "M08_guard",
+      "slot": "manual",
+      "family": "shield",
+      "basis": "护身/护盾类 WARD 技能; 成功HP/MP/护盾增量由ability_effect确认后发对应impact，满值无增量则无声"
+    },
+    {
+      "type": "ability",
+      "owner": "M08",
+      "id": "M08_support",
+      "slot": "support",
+      "family": "thrust",
+      "basis": "技能几何是THRUST直线刺击"
+    },
+    {
+      "type": "ability",
+      "owner": "N01",
+      "id": "N01_basic",
+      "slot": "basic",
+      "family": "blade",
+      "basis": "近身横斩/范围挥击身份"
+    },
+    {
+      "type": "ability",
+      "owner": "N01",
+      "id": "N01_strike",
+      "slot": "manual",
+      "family": "blade",
+      "basis": "近身横斩/范围挥击身份"
+    },
+    {
+      "type": "ability",
+      "owner": "N01",
+      "id": "militia_support",
+      "slot": "support",
+      "family": "blade",
+      "basis": "近身横斩/范围挥击身份"
+    },
+    {
+      "type": "ability",
+      "owner": "N02",
+      "id": "N02_basic",
+      "slot": "basic",
+      "family": "blunt",
+      "basis": "钝击/盾击身份"
+    },
+    {
+      "type": "ability",
+      "owner": "N02",
+      "id": "N02_ward",
+      "slot": "manual",
+      "family": "shield",
+      "basis": "护身/护盾类 WARD 技能; 成功HP/MP/护盾增量由ability_effect确认后发对应impact，满值无增量则无声"
+    },
+    {
+      "type": "ability",
+      "owner": "N02",
+      "id": "N02_support",
+      "slot": "support",
+      "family": "shield",
+      "basis": "护身/护盾类 WARD 技能; 成功HP/MP/护盾增量由ability_effect确认后发对应impact，满值无增量则无声"
+    },
+    {
+      "type": "ability",
+      "owner": "N03",
+      "id": "N03_basic",
+      "slot": "basic",
+      "family": "thrust",
+      "basis": "陷阵盾卫该普攻数据为THRUST直线攻击"
+    },
+    {
+      "type": "ability",
+      "owner": "N03",
+      "id": "N03_guard",
+      "slot": "manual",
+      "family": "shield",
+      "basis": "护身/护盾类 WARD 技能; 成功HP/MP/护盾增量由ability_effect确认后发对应impact，满值无增量则无声"
+    },
+    {
+      "type": "ability",
+      "owner": "N03",
+      "id": "N03_support",
+      "slot": "support",
+      "family": "shield",
+      "basis": "护身/护盾类 WARD 技能; 成功HP/MP/护盾增量由ability_effect确认后发对应impact，满值无增量则无声"
+    },
+    {
+      "type": "ability",
+      "owner": "N04",
+      "id": "N04_basic",
+      "slot": "basic",
+      "family": "thrust",
+      "basis": "技能几何是THRUST直线刺击"
+    },
+    {
+      "type": "ability",
+      "owner": "N04",
+      "id": "N04_strike",
+      "slot": "manual",
+      "family": "thrust",
+      "basis": "技能几何是THRUST直线刺击"
+    },
+    {
+      "type": "ability",
+      "owner": "N04",
+      "id": "spear_support",
+      "slot": "support",
+      "family": "thrust",
+      "basis": "技能几何是THRUST直线刺击"
+    },
+    {
+      "type": "ability",
+      "owner": "N05",
+      "id": "N05_basic",
+      "slot": "basic",
+      "family": "heavy_blade",
+      "basis": "戟/重型兵器挥击身份"
+    },
+    {
+      "type": "ability",
+      "owner": "N05",
+      "id": "N05_sweep",
+      "slot": "manual",
+      "family": "heavy_blade",
+      "basis": "戟/重型兵器挥击身份"
+    },
+    {
+      "type": "ability",
+      "owner": "N05",
+      "id": "N05_support",
+      "slot": "support",
+      "family": "heavy_blade",
+      "basis": "戟/重型兵器挥击身份"
+    },
+    {
+      "type": "ability",
+      "owner": "N06",
+      "id": "N06_basic",
+      "slot": "basic",
+      "family": "thrust",
+      "basis": "陷阵锐卒普攻数据为THRUST刺击"
+    },
+    {
+      "type": "ability",
+      "owner": "N06",
+      "id": "N06_break",
+      "slot": "manual",
+      "family": "thrust",
+      "basis": "锐卒攻坚是THRUST贯刺"
+    },
+    {
+      "type": "ability",
+      "owner": "N06",
+      "id": "N06_support",
+      "slot": "support",
+      "family": "thrust",
+      "basis": "破坚援刺是THRUST刺击支援"
+    },
+    {
+      "type": "ability",
+      "owner": "N07",
+      "id": "N07_basic",
+      "slot": "basic",
+      "family": "bow",
+      "basis": "角色/技能身份是弓弩、射击或箭矢"
+    },
+    {
+      "type": "ability",
+      "owner": "N07",
+      "id": "N07_strike",
+      "slot": "manual",
+      "family": "bow",
+      "basis": "角色/技能身份是弓弩、射击或箭矢"
+    },
+    {
+      "type": "ability",
+      "owner": "N07",
+      "id": "bow_support",
+      "slot": "support",
+      "family": "bow",
+      "basis": "角色/技能身份是弓弩、射击或箭矢"
+    },
+    {
+      "type": "ability",
+      "owner": "N08",
+      "id": "N08_basic",
+      "slot": "basic",
+      "family": "bow",
+      "basis": "角色/技能身份是弓弩、射击或箭矢"
+    },
+    {
+      "type": "ability",
+      "owner": "N08",
+      "id": "N08_bolt",
+      "slot": "manual",
+      "family": "bow",
+      "basis": "贯阵弩是弩箭射击；贯阵字样不表示指挥"
+    },
+    {
+      "type": "ability",
+      "owner": "N08",
+      "id": "N08_support",
+      "slot": "support",
+      "family": "bow",
+      "basis": "角色/技能身份是弓弩、射击或箭矢"
+    },
+    {
+      "type": "ability",
+      "owner": "N09",
+      "id": "N09_basic",
+      "slot": "basic",
+      "family": "bow",
+      "basis": "角色/技能身份是弓弩、射击或箭矢"
+    },
+    {
+      "type": "ability",
+      "owner": "N09",
+      "id": "N09_aim",
+      "slot": "manual",
+      "family": "bow",
+      "basis": "角色/技能身份是弓弩、射击或箭矢"
+    },
+    {
+      "type": "ability",
+      "owner": "N09",
+      "id": "N09_support",
+      "slot": "support",
+      "family": "bow",
+      "basis": "角色/技能身份是弓弩、射击或箭矢"
+    },
+    {
+      "type": "ability",
+      "owner": "N10",
+      "id": "N10_basic",
+      "slot": "basic",
+      "family": "thrust",
+      "basis": "技能几何是THRUST直线刺击"
+    },
+    {
+      "type": "ability",
+      "owner": "N10",
+      "id": "N10_dash",
+      "slot": "manual",
+      "family": "thrust",
+      "basis": "技能几何是THRUST直线刺击"
+    },
+    {
+      "type": "ability",
+      "owner": "N10",
+      "id": "N10_support",
+      "slot": "support",
+      "family": "thrust",
+      "basis": "冲阵为自动THRUST支援刺击，不是位移突进"
+    },
+    {
+      "type": "ability",
+      "owner": "N11",
+      "id": "N11_basic",
+      "slot": "basic",
+      "family": "thrust",
+      "basis": "技能几何是THRUST直线刺击"
+    },
+    {
+      "type": "ability",
+      "owner": "N11",
+      "id": "N11_dash",
+      "slot": "manual",
+      "family": "thrust",
+      "basis": "技能几何是THRUST直线刺击"
+    },
+    {
+      "type": "ability",
+      "owner": "N11",
+      "id": "N11_support",
+      "slot": "support",
+      "family": "thrust",
+      "basis": "技能几何是THRUST直线刺击"
+    },
+    {
+      "type": "ability",
+      "owner": "N12",
+      "id": "N12_basic",
+      "slot": "basic",
+      "family": "thrust",
+      "basis": "技能几何是THRUST直线刺击"
+    },
+    {
+      "type": "ability",
+      "owner": "N12",
+      "id": "N12_charge",
+      "slot": "manual",
+      "family": "thrust",
+      "basis": "技能几何是THRUST直线刺击"
+    },
+    {
+      "type": "ability",
+      "owner": "N12",
+      "id": "N12_support",
+      "slot": "support",
+      "family": "thrust",
+      "basis": "技能几何是THRUST直线刺击"
+    },
+    {
+      "type": "ability",
+      "owner": "N13",
+      "id": "N13_basic",
+      "slot": "basic",
+      "family": "arcane",
+      "basis": "角色法术投射技能的专属奥术音色"
+    },
+    {
+      "type": "ability",
+      "owner": "N13",
+      "id": "N13_strike",
+      "slot": "manual",
+      "family": "arcane",
+      "basis": "角色法术投射技能的专属奥术音色"
+    },
+    {
+      "type": "ability",
+      "owner": "N13",
+      "id": "N13_mana",
+      "slot": "manual",
+      "family": "mana",
+      "basis": "技能明确恢复或补给魔法; 成功HP/MP/护盾增量由ability_effect确认后发对应impact，满值无增量则无声"
+    },
+    {
+      "type": "ability",
+      "owner": "N13",
+      "id": "talisman_support",
+      "slot": "support",
+      "family": "mana",
+      "basis": "技能明确恢复或补给魔法; 成功HP/MP/护盾增量由ability_effect确认后发对应impact，满值无增量则无声"
+    },
+    {
+      "type": "ability",
+      "owner": "N14",
+      "id": "N14_basic",
+      "slot": "basic",
+      "family": "curse",
+      "basis": "技能名/机制明确为诅咒"
+    },
+    {
+      "type": "ability",
+      "owner": "N14",
+      "id": "curse_bind",
+      "slot": "manual",
+      "family": "curse",
+      "basis": "技能名/机制明确为诅咒"
+    },
+    {
+      "type": "ability",
+      "owner": "N14",
+      "id": "curse_support",
+      "slot": "support",
+      "family": "curse",
+      "basis": "技能名/机制明确为诅咒"
+    },
+    {
+      "type": "ability",
+      "owner": "N15",
+      "id": "N15_basic",
+      "slot": "basic",
+      "family": "arcane",
+      "basis": "角色法术投射技能的专属奥术音色"
+    },
+    {
+      "type": "ability",
+      "owner": "N15",
+      "id": "N15_curse",
+      "slot": "manual",
+      "family": "curse",
+      "basis": "技能名/机制明确为诅咒"
+    },
+    {
+      "type": "ability",
+      "owner": "N15",
+      "id": "N15_cashout",
+      "slot": "manual",
+      "family": "curse",
+      "basis": "技能名/机制明确为诅咒"
+    },
+    {
+      "type": "ability",
+      "owner": "N15",
+      "id": "N15_support",
+      "slot": "support",
+      "family": "curse",
+      "basis": "技能名/机制明确为诅咒"
+    },
+    {
+      "type": "ability",
+      "owner": "N16",
+      "id": "N16_basic",
+      "slot": "basic",
+      "family": "blunt",
+      "basis": "郎中基础SWEEP按药杵/钝器挥击身份处理"
+    },
+    {
+      "type": "ability",
+      "owner": "N16",
+      "id": "healer_aid",
+      "slot": "manual",
+      "family": "heal",
+      "basis": "治疗技能标题/目标作用为恢复生命; 成功HP/MP/护盾增量由ability_effect确认后发对应impact，满值无增量则无声"
+    },
+    {
+      "type": "ability",
+      "owner": "N16",
+      "id": "healer_support",
+      "slot": "support",
+      "family": "heal",
+      "basis": "治疗技能标题/目标作用为恢复生命; 成功HP/MP/护盾增量由ability_effect确认后发对应impact，满值无增量则无声"
+    },
+    {
+      "type": "ability",
+      "owner": "N17",
+      "id": "N17_basic",
+      "slot": "basic",
+      "family": "blunt",
+      "basis": "伙夫基础SWEEP按炊具钝击身份处理"
+    },
+    {
+      "type": "ability",
+      "owner": "N17",
+      "id": "cook_guard",
+      "slot": "manual",
+      "family": "shield",
+      "basis": "护身/护盾类 WARD 技能; 成功HP/MP/护盾增量由ability_effect确认后发对应impact，满值无增量则无声"
+    },
+    {
+      "type": "ability",
+      "owner": "N17",
+      "id": "cook_support",
+      "slot": "support",
+      "family": "heal",
+      "basis": "治疗技能标题/目标作用为恢复生命; 成功HP/MP/护盾增量由ability_effect确认后发对应impact，满值无增量则无声"
+    },
+    {
+      "type": "ability",
+      "owner": "N18",
+      "id": "N18_basic",
+      "slot": "basic",
+      "family": "blunt",
+      "basis": "军需小吏基础SWEEP按非刀剑钝击处理"
+    },
+    {
+      "type": "ability",
+      "owner": "N18",
+      "id": "clerk_guard",
+      "slot": "manual",
+      "family": "shield",
+      "basis": "护身/护盾类 WARD 技能; 成功HP/MP/护盾增量由ability_effect确认后发对应impact，满值无增量则无声"
+    },
+    {
+      "type": "ability",
+      "owner": "N18",
+      "id": "N18_rally",
+      "slot": "manual",
+      "family": "buff",
+      "basis": "rally机制为持续强化/延长"
+    },
+    {
+      "type": "ability",
+      "owner": "N18",
+      "id": "clerk_support",
+      "slot": "support",
+      "family": "buff",
+      "basis": "rally机制为持续强化/延长"
+    },
+    {
+      "type": "enemy_action",
+      "enemy": "E01",
+      "form": "0",
+      "move_id": "swipe",
+      "family": "blade",
+      "basis": "近身挥击动作"
+    },
+    {
+      "type": "enemy_action",
+      "enemy": "E02",
+      "form": "0",
+      "move_id": "shot",
+      "family": "bow",
+      "basis": "敌人/动作是射击、扇箭或投射攻击"
+    },
+    {
+      "type": "enemy_action",
+      "enemy": "E03",
+      "form": "0",
+      "move_id": "charge",
+      "family": "bone",
+      "basis": "敌人视觉身份为骨/尸类"
+    },
+    {
+      "type": "enemy_action",
+      "enemy": "E04",
+      "form": "0",
+      "move_id": "swipe",
+      "family": "blade",
+      "basis": "近身挥击动作"
+    },
+    {
+      "type": "enemy_action",
+      "enemy": "E05",
+      "form": "0",
+      "move_id": "fan",
+      "family": "bow",
+      "basis": "敌人/动作是射击、扇箭或投射攻击"
+    },
+    {
+      "type": "enemy_action",
+      "enemy": "E06",
+      "form": "0",
+      "move_id": "pot",
+      "family": "earth",
+      "basis": "落点/环形震击/地面标记机制"
+    },
+    {
+      "type": "enemy_action",
+      "enemy": "E07",
+      "form": "0",
+      "move_id": "command",
+      "family": "command",
+      "basis": "动作类型command是指挥/治疗/召唤"
+    },
+    {
+      "type": "enemy_action",
+      "enemy": "E07",
+      "form": "0",
+      "move_id": "swipe",
+      "family": "blade",
+      "basis": "近身挥击动作"
+    },
+    {
+      "type": "enemy_action",
+      "enemy": "E08",
+      "form": "0",
+      "move_id": "heal",
+      "family": "arcane",
+      "basis": "敌人身份/动作属于仪式、符术或灯阵"
+    },
+    {
+      "type": "enemy_action",
+      "enemy": "E08",
+      "form": "0",
+      "move_id": "swipe",
+      "family": "arcane",
+      "basis": "敌人身份/动作属于仪式、符术或灯阵"
+    },
+    {
+      "type": "enemy_action",
+      "enemy": "E09",
+      "form": "0",
+      "move_id": "slam",
+      "family": "bone",
+      "basis": "敌人视觉身份为骨/尸类"
+    },
+    {
+      "type": "enemy_action",
+      "enemy": "E09",
+      "form": "0",
+      "move_id": "slam",
+      "family": "bone",
+      "basis": "敌人视觉身份为骨/尸类"
+    },
+    {
+      "type": "enemy_action",
+      "enemy": "E10",
+      "form": "0",
+      "move_id": "hook",
+      "family": "arcane",
+      "basis": "敌人身份/动作属于仪式、符术或灯阵"
+    },
+    {
+      "type": "enemy_action",
+      "enemy": "E11",
+      "form": "0",
+      "move_id": "summon",
+      "family": "command",
+      "basis": "动作类型summon是指挥/治疗/召唤"
+    },
+    {
+      "type": "enemy_action",
+      "enemy": "E11",
+      "form": "0",
+      "move_id": "swipe",
+      "family": "blade",
+      "basis": "近身挥击动作"
+    },
+    {
+      "type": "enemy_action",
+      "enemy": "E12",
+      "form": "0",
+      "move_id": "stele_arc_1",
+      "family": "blunt",
+      "basis": "近身重击/砸击动作"
+    },
+    {
+      "type": "enemy_action",
+      "enemy": "E12",
+      "form": "0",
+      "move_id": "stele_arc_2",
+      "family": "blunt",
+      "basis": "近身重击/砸击动作"
+    },
+    {
+      "type": "enemy_action",
+      "enemy": "E12",
+      "form": "0",
+      "move_id": "pulse",
+      "family": "earth",
+      "basis": "落点/环形震击/地面标记机制"
+    },
+    {
+      "type": "enemy_action",
+      "enemy": "L00",
+      "form": "0",
+      "move_id": "swipe",
+      "family": "blade",
+      "basis": "近身挥击动作"
+    },
+    {
+      "type": "enemy_action",
+      "enemy": "L01",
+      "form": "0",
+      "move_id": "command",
+      "family": "command",
+      "basis": "动作类型command是指挥/治疗/召唤"
+    },
+    {
+      "type": "enemy_action",
+      "enemy": "L01",
+      "form": "0",
+      "move_id": "swipe",
+      "family": "blade",
+      "basis": "近身挥击动作"
+    },
+    {
+      "type": "enemy_action",
+      "enemy": "L02",
+      "form": "0",
+      "move_id": "fan",
+      "family": "bow",
+      "basis": "敌人/动作是射击、扇箭或投射攻击"
+    },
+    {
+      "type": "enemy_action",
+      "enemy": "L03",
+      "form": "0",
+      "move_id": "swipe",
+      "family": "blade",
+      "basis": "近身挥击动作"
+    },
+    {
+      "type": "enemy_action",
+      "enemy": "L04",
+      "form": "0",
+      "move_id": "summon",
+      "family": "command",
+      "basis": "动作类型summon是指挥/治疗/召唤"
+    },
+    {
+      "type": "enemy_action",
+      "enemy": "L04",
+      "form": "0",
+      "move_id": "swipe",
+      "family": "blade",
+      "basis": "近身挥击动作"
+    },
+    {
+      "type": "enemy_action",
+      "enemy": "L05",
+      "form": "0",
+      "move_id": "hook",
+      "family": "flesh",
+      "basis": "钩索牵引动作"
+    },
+    {
+      "type": "enemy_action",
+      "enemy": "L06",
+      "form": "0",
+      "move_id": "slam",
+      "family": "blunt",
+      "basis": "近身重击/砸击动作"
+    },
+    {
+      "type": "enemy_action",
+      "enemy": "L06",
+      "form": "0",
+      "move_id": "slam",
+      "family": "blunt",
+      "basis": "近身重击/砸击动作"
+    },
+    {
+      "type": "enemy_action",
+      "enemy": "B01",
+      "form": "0",
+      "move_id": "swipe",
+      "family": "blade",
+      "basis": "近身挥击动作"
+    },
+    {
+      "type": "enemy_action",
+      "enemy": "B02",
+      "form": "0",
+      "move_id": "swipe",
+      "family": "bone",
+      "basis": "敌人视觉身份为骨/尸类"
+    },
+    {
+      "type": "enemy_action",
+      "enemy": "B03",
+      "form": "0",
+      "move_id": "charge",
+      "family": "thrust",
+      "basis": "直线冲击按敌人兵器/动作身份归为刺击"
+    },
+    {
+      "type": "enemy_action",
+      "enemy": "B03",
+      "form": "0",
+      "move_id": "swipe",
+      "family": "blade",
+      "basis": "近身挥击动作"
+    },
+    {
+      "type": "enemy_action",
+      "enemy": "B04",
+      "form": "0",
+      "move_id": "charge",
+      "family": "bone",
+      "basis": "敌人视觉身份为骨/尸类"
+    },
+    {
+      "type": "enemy_action",
+      "enemy": "B04",
+      "form": "0",
+      "move_id": "swipe",
+      "family": "bone",
+      "basis": "敌人视觉身份为骨/尸类"
+    },
+    {
+      "type": "enemy_action",
+      "enemy": "B05",
+      "form": "0",
+      "move_id": "fan",
+      "family": "bow",
+      "basis": "敌人/动作是射击、扇箭或投射攻击"
+    },
+    {
+      "type": "enemy_action",
+      "enemy": "B05",
+      "form": "0",
+      "move_id": "pot",
+      "family": "arcane",
+      "basis": "敌人身份/动作属于仪式、符术或灯阵"
+    },
+    {
+      "type": "enemy_action",
+      "enemy": "B06",
+      "form": "0",
+      "move_id": "slam",
+      "family": "arcane",
+      "basis": "敌人身份/动作属于仪式、符术或灯阵"
+    },
+    {
+      "type": "enemy_action",
+      "enemy": "B06",
+      "form": "0",
+      "move_id": "slam",
+      "family": "arcane",
+      "basis": "敌人身份/动作属于仪式、符术或灯阵"
+    },
+    {
+      "type": "enemy_action",
+      "enemy": "B07",
+      "form": "0",
+      "move_id": "command",
+      "family": "command",
+      "basis": "动作类型command是指挥/治疗/召唤"
+    },
+    {
+      "type": "enemy_action",
+      "enemy": "B07",
+      "form": "0",
+      "move_id": "swipe",
+      "family": "blade",
+      "basis": "近身挥击动作"
+    },
+    {
+      "type": "enemy_action",
+      "enemy": "B08",
+      "form": "0",
+      "move_id": "charge",
+      "family": "thrust",
+      "basis": "直线冲击按敌人兵器/动作身份归为刺击"
+    },
+    {
+      "type": "enemy_action",
+      "enemy": "B08",
+      "form": "0",
+      "move_id": "swipe",
+      "family": "blade",
+      "basis": "近身挥击动作"
+    },
+    {
+      "type": "enemy_action",
+      "enemy": "B09",
+      "form": "0",
+      "move_id": "slam",
+      "family": "blunt",
+      "basis": "近身重击/砸击动作"
+    },
+    {
+      "type": "enemy_action",
+      "enemy": "B09",
+      "form": "0",
+      "move_id": "slam",
+      "family": "blunt",
+      "basis": "近身重击/砸击动作"
+    },
+    {
+      "type": "enemy_action",
+      "enemy": "B10",
+      "form": "0",
+      "move_id": "slam",
+      "family": "blunt",
+      "basis": "近身重击/砸击动作"
+    },
+    {
+      "type": "enemy_action",
+      "enemy": "B10",
+      "form": "0",
+      "move_id": "slam",
+      "family": "blunt",
+      "basis": "近身重击/砸击动作"
+    },
+    {
+      "type": "enemy_action",
+      "enemy": "B11",
+      "form": "0",
+      "move_id": "fan",
+      "family": "bow",
+      "basis": "敌人/动作是射击、扇箭或投射攻击"
+    },
+    {
+      "type": "enemy_action",
+      "enemy": "B11",
+      "form": "0",
+      "move_id": "pot",
+      "family": "arcane",
+      "basis": "敌人身份/动作属于仪式、符术或灯阵"
+    },
+    {
+      "type": "enemy_action",
+      "enemy": "B12",
+      "form": "0",
+      "move_id": "anchor",
+      "family": "arcane",
+      "basis": "敌人身份/动作属于仪式、符术或灯阵"
+    },
+    {
+      "type": "enemy_action",
+      "enemy": "B12",
+      "form": "0",
+      "move_id": "pulse",
+      "family": "arcane",
+      "basis": "敌人身份/动作属于仪式、符术或灯阵"
+    },
+    {
+      "type": "enemy_action",
+      "enemy": "B13",
+      "form": "0",
+      "move_id": "charge",
+      "family": "thrust",
+      "basis": "直线冲击按敌人兵器/动作身份归为刺击"
+    },
+    {
+      "type": "enemy_action",
+      "enemy": "B13",
+      "form": "0",
+      "move_id": "swipe",
+      "family": "blade",
+      "basis": "近身挥击动作"
+    },
+    {
+      "type": "enemy_action",
+      "enemy": "B14",
+      "form": "0",
+      "move_id": "command",
+      "family": "command",
+      "basis": "动作类型command是指挥/治疗/召唤"
+    },
+    {
+      "type": "enemy_action",
+      "enemy": "B14",
+      "form": "0",
+      "move_id": "swipe",
+      "family": "blade",
+      "basis": "近身挥击动作"
+    },
+    {
+      "type": "enemy_action",
+      "enemy": "B15",
+      "form": "0",
+      "move_id": "hunter_aim",
+      "family": "bow",
+      "basis": "曹休人形定点射击"
+    },
+    {
+      "type": "enemy_action",
+      "enemy": "B15",
+      "form": "0",
+      "move_id": "hunter_volley",
+      "family": "bow",
+      "basis": "曹休人形扇形箭雨"
+    },
+    {
+      "type": "enemy_action",
+      "enemy": "B15",
+      "form": "0",
+      "move_id": "hunter_reposition",
+      "family": "bow",
+      "basis": "曹休人形退阵射击身份；释放层使用突进声，命中层保持弓箭声"
+    },
+    {
+      "type": "enemy_action",
+      "enemy": "B15",
+      "form": "1",
+      "move_id": "beast_hunt",
+      "family": "bow",
+      "basis": "兽相扇射追猎"
+    },
+    {
+      "type": "enemy_action",
+      "enemy": "B15",
+      "form": "1",
+      "move_id": "beast_leap",
+      "family": "beast",
+      "basis": "兽相扑跃"
+    },
+    {
+      "type": "enemy_action",
+      "enemy": "B15",
+      "form": "1",
+      "move_id": "hunt_mark",
+      "family": "earth",
+      "basis": "兽相地面落点标记"
+    },
+    {
+      "type": "enemy_action",
+      "enemy": "B15",
+      "form": "1",
+      "move_id": "beast_rend",
+      "family": "heavy_blade",
+      "basis": "兽相近身大范围撕裂挥击"
+    },
+    {
+      "type": "enemy_action",
+      "enemy": "B16",
+      "form": "0",
+      "move_id": "rider_lance",
+      "family": "thrust",
+      "basis": "曹纯骑枪冲刺；释放层使用突进声，impact保留枪刺音"
+    },
+    {
+      "type": "enemy_action",
+      "enemy": "B16",
+      "form": "0",
+      "move_id": "rider_cleave",
+      "family": "heavy_blade",
+      "basis": "曹纯近身枪戟横斩"
+    },
+    {
+      "type": "enemy_action",
+      "enemy": "B16",
+      "form": "0",
+      "move_id": "rider_return",
+      "family": "thrust",
+      "basis": "曹纯骑枪折返冲击；释放层突进，命中保留刺击"
+    },
+    {
+      "type": "enemy_action",
+      "enemy": "B16",
+      "form": "1",
+      "move_id": "tiger_long_charge",
+      "family": "armor",
+      "basis": "虎豹甲骑巨相装甲长冲；释放层突进，命中落在甲骑重体"
+    },
+    {
+      "type": "enemy_action",
+      "enemy": "B16",
+      "form": "1",
+      "move_id": "tiger_trample",
+      "family": "blunt",
+      "basis": "巨相踏击"
+    },
+    {
+      "type": "enemy_action",
+      "enemy": "B16",
+      "form": "1",
+      "move_id": "leopard_return",
+      "family": "armor",
+      "basis": "虎豹甲骑巨相装甲折返冲锋"
+    },
+    {
+      "type": "enemy_action",
+      "enemy": "B16",
+      "form": "1",
+      "move_id": "cavalry_break",
+      "family": "earth",
+      "basis": "骑兵巨相环形地面震击"
+    },
+    {
+      "type": "enemy_action",
+      "enemy": "B17",
+      "form": "0",
+      "move_id": "general_lunge",
+      "family": "thrust",
+      "basis": "张辽人形突刺；释放层突进，impact保留兵器刺击"
+    },
+    {
+      "type": "enemy_action",
+      "enemy": "B17",
+      "form": "0",
+      "move_id": "general_cut",
+      "family": "blade",
+      "basis": "张辽人形横斩"
+    },
+    {
+      "type": "enemy_action",
+      "enemy": "B17",
+      "form": "0",
+      "move_id": "human_formation",
+      "family": "command",
+      "basis": "张辽与友军协同布阵"
+    },
+    {
+      "type": "enemy_action",
+      "enemy": "B17",
+      "form": "1",
+      "move_id": "yaksha_break",
+      "family": "heavy_blade",
+      "basis": "夜叉将相重甲冲阵；释放层突进，命中层使用重兵器声"
+    },
+    {
+      "type": "enemy_action",
+      "enemy": "B17",
+      "form": "1",
+      "move_id": "yaksha_cleave",
+      "family": "heavy_blade",
+      "basis": "夜叉相重型横斩"
+    },
+    {
+      "type": "enemy_action",
+      "enemy": "B17",
+      "form": "1",
+      "move_id": "war_formation",
+      "family": "command",
+      "basis": "夜叉相与友军协同布阵"
+    },
+    {
+      "type": "enemy_action",
+      "enemy": "B17",
+      "form": "1",
+      "move_id": "yaksha_pulse",
+      "family": "earth",
+      "basis": "夜叉相环形震击"
+    },
+    {
+      "type": "enemy_action",
+      "enemy": "B18",
+      "form": "0",
+      "move_id": "halberd_sweep",
+      "family": "heavy_blade",
+      "basis": "吕布方天戟横扫"
+    },
+    {
+      "type": "enemy_action",
+      "enemy": "B18",
+      "form": "0",
+      "move_id": "halberd_charge",
+      "family": "heavy_blade",
+      "basis": "吕布持戟冲锋；释放层突进，impact保留戟刃身份"
+    },
+    {
+      "type": "enemy_action",
+      "enemy": "B18",
+      "form": "0",
+      "move_id": "halberd_fall",
+      "family": "earth",
+      "basis": "吕布落戟地面标记"
+    },
+    {
+      "type": "enemy_action",
+      "enemy": "B18",
+      "form": "0",
+      "move_id": "halberd_finish",
+      "family": "heavy_blade",
+      "basis": "吕布终结横扫"
+    },
+    {
+      "type": "enemy_action",
+      "enemy": "B18",
+      "form": "1",
+      "move_id": "demon_fourfold",
+      "family": "heavy_blade",
+      "basis": "鬼神相多臂挥戟"
+    },
+    {
+      "type": "enemy_action",
+      "enemy": "B18",
+      "form": "1",
+      "move_id": "demon_skybreaker",
+      "family": "heavy_blade",
+      "basis": "鬼神相持戟长冲；释放层突进，impact保留重戟身份"
+    },
+    {
+      "type": "enemy_action",
+      "enemy": "B18",
+      "form": "1",
+      "move_id": "demon_quake",
+      "family": "earth",
+      "basis": "鬼神相环形震击"
+    },
+    {
+      "type": "enemy_action",
+      "enemy": "B18",
+      "form": "1",
+      "move_id": "demon_heavenfall",
+      "family": "earth",
+      "basis": "鬼神相落戟地面标记"
+    },
+    {
+      "type": "enemy_action",
+      "enemy": "B18",
+      "form": "1",
+      "move_id": "demon_final_cleave",
+      "family": "heavy_blade",
+      "basis": "鬼神相终结重斩"
+    },
+    {
+      "type": "enemy_action",
+      "enemy": "D01",
+      "form": "0",
+      "move_id": "swipe",
+      "family": "blade",
+      "basis": "近身挥击动作"
+    },
+    {
+      "type": "enemy_action",
+      "enemy": "B10_R",
+      "form": "0",
+      "move_id": "slam",
+      "family": "blunt",
+      "basis": "近身重击/砸击动作"
+    },
+    {
+      "type": "enemy_action",
+      "enemy": "B10_R",
+      "form": "0",
+      "move_id": "slam",
+      "family": "blunt",
+      "basis": "近身重击/砸击动作"
+    }
+  ]
+}

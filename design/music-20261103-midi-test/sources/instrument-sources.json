@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-03",
+  "renderer": {
+    "name": "FluidSynth",
+    "version": "2.3.4",
+    "source": "Ubuntu 24.04 Noble binary packages extracted under the user's private renderer environment; no system install",
+    "runtime_environment": "/home/weathour/.local/share/my-game/music-transcription/midi-render"
+  },
+  "instruments": {
+    "electric_guitar": {
+      "name": "Emilyguitar clean DI",
+      "creator": "Karoryfer",
+      "source": "https://github.com/sfzinstruments/karoryfer.emilyguitar",
+      "revision": "b4920dc662fd9cad6dcaccdeecffdd91c8725d8c",
+      "license": "CC0-1.0",
+      "file": "/home/weathour/.cache/my-game/music-instruments/emilyguitar/emily_clean.sfz",
+      "sample_ranges": "MIDI key 33-89 multisample; pitches beyond region are rendered by resampling nearest region without altering MIDI pitch",
+      "effects": "constant gain, tanh amp stage, low-pass cab coloration, high-pass cleanup"
+    },
+    "electric_bass": {
+      "name": "Fashionbass clean DI",
+      "creator": "Karoryfer",
+      "source": "https://github.com/sfzinstruments/karoryfer.fashionbass",
+      "revision": "0703973b300a6bacb837602be9b588ab64732a72",
+      "license": "CC0-1.0",
+      "file": "/home/weathour/.cache/my-game/music-instruments/fashionbass/fashionbass_clean.sfz",
+      "sample_ranges": "MIDI key 23-65 multisample; pitches beyond region are rendered by resampling nearest region without altering MIDI pitch",
+      "effects": "constant gain, mild tanh amp saturation, low-pass"
+    },
+    "drums": {
+      "name": "MuldjordKit SF2 2020-10-18",
+      "author": "Lars Muldjord; FreePats stereo SF2 mapping by Roberto",
+      "source_page": "https://freepats.zenvoid.org/Percussion/acoustic-drum-kit.html",
+      "download_url": "https://github.com/freepats/muldjordkit/releases/download/2020-10-18/MuldjordKit-SF2-20201018.7z",
+      "version": "2020-10-18",
+      "license": "CC-BY-4.0",
+      "archive_sha256": "aef4c9e0a96f9a899a7838f65ff07565f6af247bbb4ff31e24dba3331a671a96",
+      "soundfont_sha256": "fec611c55b5e1c53ea3e6df1e6779c9f18502fc6455ee45edc51d5a2b4881055",
+      "soundfont_bytes": 219362048,
+      "cache_path": "/home/weathour/.cache/my-game/music-instruments/muldjordkit/MuldjordKit-SF2-20201018/MuldjordKit 20201018.sf2",
+      "preset": "bank 0, program 0 MuldjordKit; renderer maps source GM drum roles to SF2 keys 48-66",
+      "limitations": "FreePats SF2 stereo mapping is a subset of the original 16-channel DrumGizmo kit. GM tambourine (source note 54) is not in this kit and uses GeneralUser GS percussion fallback only when that note occurs."
+    },
+    "drum_fallback": {
+      "name": "GeneralUser GS 2.0.3 GM drum map; used only for source GM note 54 tambourine",
+      "author": "S. Christian Collins",
+      "source": "https://github.com/mrbumpy409/GeneralUser-GS/tree/684543d5e5efaef08d02be50dcda8d552478fa60",
+      "revision": "684543d5e5efaef08d02be50dcda8d552478fa60",
+      "license": "included in sources/generaluser/GeneralUser-GS-LICENSE.txt",
+      "file": "/home/weathour/.local/share/my-game/music-transcription/midi-render/soundfonts/GeneralUser-GS.sf2",
+      "sha256": "9575028c7a1f589f5770fccc8cff2734566af40cd26ed836944e9a5152688cfe"
+    },
+    "auxiliary": {
+      "piano": "VSCO Upright Piano Nr1 multisample; CC0-1.0, pinned by ../music-20261030/instrument-manifest.json",
+      "pad_and_synth_lead": "Existing MIDI synth notes use deterministic additive pad/pluck patch in ../music-20261030/audio_engine.py"
+    }
+  },
+  "drum_role_mapping": {
+    "35": 48,
+    "36": 49,
+    "37": 65,
+    "38": 50,
+    "40": 51,
+    "41": 64,
+    "42": 52,
+    "43": 63,
+    "44": 52,
+    "45": 62,
+    "46": 53,
+    "47": 61,
+    "49": 58,
+    "51": 54,
+    "53": 55,
+    "54": "not present in MuldjordKit; GeneralUser tambourine fallback",
+    "57": 59
+  },
+  "attribution": "MuldjordKit by Lars Muldjord; FreePats stereo SF2 mapping by Roberto; licensed CC BY 4.0. The MIDI-derived game music uses this kit with an explicit GM-role mapping and sound processing."
+}

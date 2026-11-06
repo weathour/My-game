@@ -1,0 +1,44 @@
+{
+  "status": "passed",
+  "recorded_at": 1793874057.7933943,
+  "official_smokes": 60,
+  "official_source_smokes": 56,
+  "official_pack_smokes": 4,
+  "official_elapsed_seconds": 969.1286771297455,
+  "old_results_reused": false,
+  "all_exit_codes_zero": true,
+  "strict_log_validation": true,
+  "runtime_inputs_unchanged": true,
+  "frozen_global_files": 1867,
+  "frozen_test_entries": 60,
+  "binary_and_harness_unchanged": true,
+  "extra_same_pack_cases": {
+    "campaign-B13": [
+      "JIA_CAMPAIGN_COMBAT_SMOKE PASS checks=172 failures=0"
+    ],
+    "campaign-B14": [
+      "JIA_CAMPAIGN_COMBAT_SMOKE PASS checks=172 failures=0"
+    ],
+    "sprite-bounds": [
+      "CHRONICLE_SPRITE_BOUNDS_SMOKE_OK checks=6412 failures=0"
+    ]
+  },
+  "official_pack": {
+    "path": "/tmp/my-game-check.bgJcWG/pack-smokes/game.pck",
+    "bytes": 228248728,
+    "sha256": "481acf77c2e5c70c1aeb0f15d1972c954d43340ed41b95f2c4b482d6ef681e14"
+  },
+  "benchmark_pack": {
+    "path": "/tmp/jia-lord-combat-fresh-build/game.pck",
+    "bytes": 228248568,
+    "sha256": "292dd492473a73403a851e38b670e0b37d8ad2c4e47b10a0d93850a365f7c3bf"
+  },
+  "packs_byte_identical": false,
+  "full_suite_audit": "full-suite-audit.json",
+  "extra_pack_audit": "extra-pack-audit.json",
+  "pack_identity": "pack-identity.json",
+  "source_freeze": "frozen-inputs.json",
+  "targeted_and_native": "targeted-result.json",
+  "scope_preservation": "scope-preservation.json",
+  "historical_failure_resolution": "preliminary-failures.json"
+}

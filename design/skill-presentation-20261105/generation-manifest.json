@@ -1,0 +1,1148 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-05",
+  "generator_mode": "built-in image_gen; no CLI fallback",
+  "workflow": "docs/art/角色战斗美术制作流程.md",
+  "runtime_root": "assets/players/chronicle-cast/",
+  "counts": {
+    "new_models": 22,
+    "independent_body_drawings": 352,
+    "independent_portraits": 22,
+    "exported_frames_including_reuse": 396,
+    "png": 132,
+    "aseprite": 154
+  },
+  "characters": [
+    {
+      "character_id": "M07",
+      "tool": "built-in image_gen.imagegen",
+      "prompts": [
+        {
+          "path": "design/skill-presentation-20261105/characters/M07/prompt-v1.txt",
+          "sha256": "b86534868c2c93e9df187088bb9cb91276abcf90c76dc907ff2ed0bea6fe1862",
+          "text": "Use case: stylized-concept. Asset type: production pixel-art action sheet for Godot.\nInput 1 is the approved IDENTITY for Zang Ba / 臧霸 M07: rugged broad adult Chinese general, loose black topknot, thick short beard, scarred stern brow, weathered brown fur shoulder mantle, dark iron lamellar armor, tan rope belt and red cord. Preserve identity. Input 2 is pixel GAME STYLE only; do not copy that woman's identity.\nGenerate ONE transparent RGBA production sheet, 1536x1536, with exactly FOUR columns and FIVE rows, spacious non-touching isolated figures. Rows 1-4 contain 16 independently drawn full-body sprites: row1 four distinct breathing/ready idle phases; row2 four distinct running phases facing right; row3 four distinct heavy single-edged Chinese broad dao attacks from raised windup, decisive rightward slash/contact, followthrough, recovery; row4 four distinct sweeping rally special phases with broad low-to-high dao swing then commanding free hand. Strong readable rightward action. The same one-handed broad curved DAO in every figure, never spear. Two arms and two legs, hands genuinely gripping handle, blade always extending from grip. Consistent body scale per pose; full weapons and boots within each separated cell; idle standing body about 230px high excluding raised weapon, all figures fit within ~330x265 with at least 35px transparent gaps. 3/4 side view facing RIGHT, slightly heroic chibi sprite proportions matching reference 2, crisp pixel clusters, limited palette, no antialiasing or smooth painting. Row5: only ONE independently drawn head-and-shoulders portrait at left, stern face, fur armor and black beard, around 200px square. Leave remaining row5 transparent. No labels, text, panels, shadows, ground, effects or background. Actual transparent alpha. Do not duplicate identical poses.\n"
+        }
+      ],
+      "selected_sources": [
+        {
+          "role": "combat",
+          "path": "design/skill-presentation-20261105/characters/M07/source/combat-bundle-v1.png",
+          "sha256": "b015673a47d08e4193a2a3b6392480185c4def73aa4b8349e338cc3274e09a56",
+          "size": [
+            1254,
+            1254
+          ],
+          "standing_body_height_source_px": 241
+        }
+      ],
+      "production_records": [
+        "design/skill-presentation-20261105/characters/M07/export-manifest.json",
+        "design/skill-presentation-20261105/characters/M07/measurements.json"
+      ],
+      "runtime_manifest": "assets/players/chronicle-cast/M07/manifest.json",
+      "portrait": {
+        "path": "source/combat-bundle-v1.png",
+        "size": [
+          1254,
+          1254
+        ],
+        "sha256": "b015673a47d08e4193a2a3b6392480185c4def73aa4b8349e338cc3274e09a56",
+        "bbox": [
+          31,
+          993,
+          283,
+          1246
+        ]
+      },
+      "authored_body_drawings": 16,
+      "independently_drawn_portraits": 1,
+      "exported_clip_frames": {
+        "idle": 4,
+        "move": 4,
+        "attack": 4,
+        "special": 4,
+        "hit_reuse": 2
+      }
+    },
+    {
+      "character_id": "M08",
+      "tool": "built-in image_gen.imagegen",
+      "prompts": [
+        {
+          "path": "design/skill-presentation-20261105/characters/M08/prompt-v1.txt",
+          "sha256": "69af3ba3c8bec543f1774d68bbf3254c117147e3eea9bb327081b25daf83fe52",
+          "text": "Use case: stylized-concept. Asset type: transparent Godot production pixel action sheet.\nInput 1 is approved IDENTITY Hou Cheng / 侯成 M08: adult Chinese soldier, neat black topknot with small gold crown ring, narrow moustache and pointed goatee, stern lean face, engraved SILVER gray plate/lamellar armor, navy underclothes, prominent deep red scarf with trailing end. Preserve. Input2 is pixel GAME STYLE only.\nONE true transparent RGBA sheet exactly FOUR columns FIVE rows. Rows1-4 sixteen full-body distinct sprite poses, uniform body scale, separated by ample transparent margins, facing RIGHT in 3/4 side view. Row1 four subtly different ready breathing idle phases; row2 four genuinely different RUNNING leg phases; row3 four spear thrust phases: windup spear angled up-right, horizontal forward contact spearhead pointing RIGHT, extended followthrough, retracted recovery; row4 four solid braced formation/armor-piercing special phases: planted low guard, coiled low spear, strong rightward thrust, stern upright spear recovery. ONE long Chinese spear in each figure, silver leaf spearhead at forward/right endpoint, dark shaft with red tassel behind spearhead. Both hands grip one uninterrupted shaft, no bent or duplicated weapons. Full spear within each cell. Standing body about 210px tall and total figure+weapon max 330x255. Row5 only one separately drawn head-and-shoulders portrait at left about 200px square, keep other row5 space transparent. 1536px square composition. Crisp deliberate pixel clusters, limited color palette, heroic chibi RPG sprite proportions like reference2. Preserve visible small red scarf, silver armor, black goatee and topknot throughout. Avoid giant helmet, fur mantle, sword, extra limbs, smooth painterly edges, background, grid lines, text, effects or ground shadows. No overlapping cells, no cropped boots or spear. All 16 poses independently drawn.\n"
+        }
+      ],
+      "selected_sources": [
+        {
+          "role": "combat",
+          "path": "design/skill-presentation-20261105/characters/M08/source/combat-bundle-v1.png",
+          "sha256": "7351ee0cf463079b073df7042ae3121a871f7ef4fc703d9e8ddd4f260354bcec",
+          "size": [
+            1254,
+            1254
+          ],
+          "standing_body_height_source_px": 239
+        }
+      ],
+      "production_records": [
+        "design/skill-presentation-20261105/characters/M08/export-manifest.json",
+        "design/skill-presentation-20261105/characters/M08/measurements.json"
+      ],
+      "runtime_manifest": "assets/players/chronicle-cast/M08/manifest.json",
+      "portrait": {
+        "path": "source/combat-bundle-v1.png",
+        "size": [
+          1254,
+          1254
+        ],
+        "sha256": "7351ee0cf463079b073df7042ae3121a871f7ef4fc703d9e8ddd4f260354bcec",
+        "bbox": [
+          13,
+          976,
+          298,
+          1254
+        ]
+      },
+      "authored_body_drawings": 16,
+      "independently_drawn_portraits": 1,
+      "exported_clip_frames": {
+        "idle": 4,
+        "move": 4,
+        "attack": 4,
+        "special": 4,
+        "hit_reuse": 2
+      }
+    },
+    {
+      "character_id": "F01",
+      "tool": "built-in image_gen.imagegen",
+      "prompts": [
+        {
+          "path": "design/skill-presentation-20261105/characters/F01/prompt-v1.txt",
+          "sha256": "b8b07de4396cd783755570935e08f11bfe64589a7eb3dcc27a9f38f60815c919",
+          "text": "Use case: stylized-concept. Asset type: Godot transparent pixel-art production action sheet.\nInput1 is approved IDENTITY Lu Lingqi / 吕玲绮 F01: ADULT Chinese woman warrior, long high black ponytail with red ribbons and small silver flower ornament, stern confident face, black-and-crimson lacquered lamellar armor, engraved bronze/gold shoulder plates, fitted armor skirt and sturdy dark boots. Preserve identity, modest practical combat outfit. Input2 pixel GAME STYLE only.\nCreate ONE genuinely transparent RGBA sheet, FOUR columns FIVE rows with ample empty gaps between each sprite. Rows1-4 EXACTLY sixteen separate independently drawn full-body action frames. Same character/body size, right-facing 3/4 side view. Row1 four distinct idle ready breathing phases; row2 four distinct RUNNING leg phases, ponytail and ribbons streaming; row3 four distinct two-handed HALBERD forward thrust phases: coiled windup, rightward contact, extended rightward lunge, recovery. Row4 four distinct forceful halberd sweep/dash special phases: low bracing, turning windup, rightward sweep contact, planted recovery. Weapon is ONE straight long dark shaft with a silver spearpoint and ONE side crescent blade at its forward RIGHT end, red tassel under blade: historical Chinese ji halberd. Both hands consistently grip the same straight shaft, spearpoint always ahead of her in contact frames. No bows, swords, dual weapons or bending shafts. Full weapon and all boots in each frame. Standing body about 210px tall excluding weapon; wide figure+weapon fits max330x255. Row5 ONLY one independently DRAWN head-and-shoulders portrait at left, 200px square, black ponytail/red ribbons/flower, red-black armor and bronze shoulders; remaining row5 transparent. Square 1536x1536 composition. Crisp pixel clusters and limited palette, heroic chibi RPG sprites matching ref2 density and proportions. No text, labels, panels, ground, shadows, glows, slash effects, antialiasing, painterly smoothing or background. Clean silhouette, exactly two arms/two legs per pose, no cropped halberds, no merged adjacent frames, never duplicate an identical frame.\n"
+        }
+      ],
+      "selected_sources": [
+        {
+          "role": "combat",
+          "path": "design/skill-presentation-20261105/characters/F01/source/combat-bundle-v1.png",
+          "sha256": "c18e739842d6843412a1ec3e4502a6744f0cb9f86899f51c3b2b137a0ed917df",
+          "size": [
+            1254,
+            1254
+          ],
+          "standing_body_height_source_px": 238
+        }
+      ],
+      "production_records": [
+        "design/skill-presentation-20261105/characters/F01/export-manifest.json",
+        "design/skill-presentation-20261105/characters/F01/measurements.json"
+      ],
+      "runtime_manifest": "assets/players/chronicle-cast/F01/manifest.json",
+      "portrait": {
+        "path": "source/combat-bundle-v1.png",
+        "size": [
+          1254,
+          1254
+        ],
+        "sha256": "c18e739842d6843412a1ec3e4502a6744f0cb9f86899f51c3b2b137a0ed917df",
+        "bbox": [
+          8,
+          964,
+          301,
+          1245
+        ]
+      },
+      "authored_body_drawings": 16,
+      "independently_drawn_portraits": 1,
+      "exported_clip_frames": {
+        "idle": 4,
+        "move": 4,
+        "attack": 4,
+        "special": 4,
+        "hit_reuse": 2
+      }
+    },
+    {
+      "character_id": "F11",
+      "tool": "built-in image_gen.imagegen",
+      "prompts": [
+        {
+          "path": "design/skill-presentation-20261105/characters/F11/prompt-v1.txt",
+          "sha256": "88f02f90a4857b05d9f4ed08924735a0fd3bbce4882f291cd265bd751a18da6b",
+          "text": "Use case: stylized-concept. Asset type: Godot transparent pixel-art production action sheet.\nInput1 is approved IDENTITY Emma / 艾玛 F11: ADULT western fantasy sorceress, long SILVERY PALE LAVENDER hair with a crown braid, violet eyes, small gold circlet, elegant practical black and deep purple dress/coat with gold trim, cape panels, black boots. Her single dark staff has ornate gold fittings and a large faceted purple crystal at top. Preserve this identity. Input2 is pixel GAME STYLE only.\nCreate ONE truly transparent RGBA production sheet, FOUR columns FIVE rows with wide transparent separation. Rows1-4 exactly sixteen independently drawn full-body frames at consistent body scale facing RIGHT 3/4 side view. Row1 four distinct idle breathing poses with staff in one hand; row2 four genuinely different RUNNING leg phases, hair/coat trailing left; row3 four distinct rightward staff-bolt CASTING phases: staff held back at windup, both hands directing staff diagonally forward-right at contact, outstretched forward casting followthrough, recovery. Row4 four distinct FROST RING / spell recording special gestures: low staff brace, staff raised overhead in two hands, right hand extended commanding palm with staff upright in left, relaxed recovery. Full staff including purple crystal within every sprite. No actual spell effects on sheet. One staff per sprite, hands grasp shaft, straight intact staff, exactly two arms/two legs. Standing body about210px tall excluding staff, full figure+staff max330x255 with at least25px transparent gap. Row5 ONLY one separately drawn head-and-shoulders portrait at left about200px square: pale lavender hair, violet eyes, braid/circlet and purple/gold collar. Rest of row5 empty transparent. 1536px square composition. Heroic chibi RPG pixel proportions like input2, crisp deliberate pixel clusters, reduced palette, strong readable silhouette. Keep purple clothing black boots and adult face throughout. No text, grid lines, labels, background, shadow, ground, glows, frost particles, smooth painting, antialiasing, cropped staff or merged neighboring poses. Sixteen poses must differ visibly.\n"
+        }
+      ],
+      "selected_sources": [
+        {
+          "role": "combat",
+          "path": "design/skill-presentation-20261105/characters/F11/source/combat-bundle-v1.png",
+          "sha256": "96fb9b5d53dcde36714dd0a969efb4669e2df3ea7dbb5ac66b633fc274bd1c04",
+          "size": [
+            1254,
+            1254
+          ],
+          "standing_body_height_source_px": 222
+        }
+      ],
+      "production_records": [
+        "design/skill-presentation-20261105/characters/F11/export-manifest.json",
+        "design/skill-presentation-20261105/characters/F11/measurements.json"
+      ],
+      "runtime_manifest": "assets/players/chronicle-cast/F11/manifest.json",
+      "portrait": {
+        "path": "source/combat-bundle-v1.png",
+        "size": [
+          1254,
+          1254
+        ],
+        "sha256": "96fb9b5d53dcde36714dd0a969efb4669e2df3ea7dbb5ac66b633fc274bd1c04",
+        "bbox": [
+          0,
+          990,
+          296,
+          1254
+        ]
+      },
+      "authored_body_drawings": 16,
+      "independently_drawn_portraits": 1,
+      "exported_clip_frames": {
+        "idle": 4,
+        "move": 4,
+        "attack": 4,
+        "special": 4,
+        "hit_reuse": 2
+      }
+    },
+    {
+      "character_id": "N01",
+      "tool": "built-in image_gen.imagegen",
+      "prompts": [
+        {
+          "path": "design/skill-presentation-20261105/characters/N01/source/prompt-v1.txt",
+          "sha256": "626ed4d6ae505e2ea4bbb58eec16daadd36c3c74a25ff791affe18984b0008e8",
+          "text": "Use case: stylized-concept\nAsset type: production pixel-art combat animation sprite sheet plus separately drawn HUD bust for a Godot historical fantasy game.\nPrimary request: create ONE asset bundle for N01 乡勇刀手.\nInput images: Image 1 is identity reference (preserve face, hair and costume materials, adjust equipment to this exact role); Image 2 is PIXEL ART STYLE reference only (do not copy blue hair or modern clothes).\nSubject: Mature rugged black-haired Chinese militia swordsman, off-white headband, rough brown lamellar vest, cream scarf, ragged sleeves, dark trousers. Carries a SINGLE short broad Chinese dao sword; no shield. Identical rugged face and beard as identity reference.\nStyle: high quality hand-pixelled chibi action RPG sprite, clear dark pixel outline, short readable 3-head proportions, hard-edged flat clusters, muted historical earth palette with strong silhouette. True transparent RGBA background.\nComposition: exactly 4 columns by 5 rows on a spacious 1024x1280 portrait transparent canvas. First FOUR rows each contain FOUR full-body poses of this same one character, 16 bodies total, visually separated with generous transparent gutters. Last row contains ONLY ONE separately newly drawn large head-and-shoulders bust portrait centered in the row, same man, no body copied/cropped. No other drawings.\nEach full-body pose roughly 140 pixels visible body height; all use same scale and fully intact weapon within their own area. Face RIGHT in every combat pose; camera side three-quarter.\nRows 1-4 are four poses EACH in this order: idle with dao lowered, breathing and changing weight; run holding dao securely, alternating legs; attack: backswing, rightward cut, full extension, recovery; special charged dao: deep crouched windup, overhead lift, forceful low forward slash, grounded recovery.\nRow5: independent square bust portrait facing three-quarter toward viewer, face large and readable, face/hair/shoulder costume drawn specifically for portrait, no weapon crossing face.\nConstraints: 16 actually different body poses, two anatomically plausible arms and legs, hands grip weapon correctly, complete feet, whole weapon visible. Unconnected transparent gutters around every figure. NO shadows or floor planes, NO labels, NO text, NO grid lines, NO watermark, NO palette swatches. No effects, slash arcs, projectiles or magic baked into bodies. Keep weapons separate from neighboring cells.\n"
+        }
+      ],
+      "selected_sources": [
+        {
+          "role": "combat",
+          "path": "design/skill-presentation-20261105/characters/N01/source/asset-bundle-v1.png",
+          "sha256": "8e521bc30a05f8273dd7712b98fbc9bc150580398ff083e6b076a14efe8ad24f",
+          "size": [
+            1122,
+            1402
+          ],
+          "standing_body_height_source_px": 259
+        }
+      ],
+      "production_records": [
+        "design/skill-presentation-20261105/characters/N01/export-manifest.json",
+        "design/skill-presentation-20261105/characters/N01/measurements.json"
+      ],
+      "runtime_manifest": "assets/players/chronicle-cast/N01/manifest.json",
+      "portrait": {
+        "path": "source/asset-bundle-v1.png",
+        "size": [
+          1122,
+          1402
+        ],
+        "sha256": "8e521bc30a05f8273dd7712b98fbc9bc150580398ff083e6b076a14efe8ad24f",
+        "bbox": [
+          346,
+          1053,
+          733,
+          1391
+        ],
+        "independently_drawn": true
+      },
+      "authored_body_drawings": 16,
+      "independently_drawn_portraits": 1,
+      "exported_clip_frames": {
+        "idle": 4,
+        "move": 4,
+        "attack": 4,
+        "special": 4,
+        "hit_reuse": 2
+      }
+    },
+    {
+      "character_id": "N02",
+      "tool": "built-in image_gen.imagegen",
+      "prompts": [
+        {
+          "path": "design/skill-presentation-20261105/characters/N02/source/prompt-v1.txt",
+          "sha256": "4ce078f5627c9296f6c4ca14addab3307c683f83b4365a222e711626ab021d5e",
+          "text": "Use case: stylized-concept\nAsset type: production pixel-art combat animation sprite sheet plus separately drawn HUD bust for a Godot historical fantasy game.\nPrimary request: create ONE asset bundle for N02 白门盾卒.\nInput images: Image 1 is identity reference (preserve face, hair and costume materials, adjust equipment to this exact role); Image 2 is PIXEL ART STYLE reference only (do not copy blue hair or modern clothes).\nSubject: Stocky mature black-haired Chinese shield infantryman, off-white head wrap, short black beard, worn brown lamellar armor over cream tunic, thick boots. Carries one medium round wooden shield with iron boss on left arm and SHORT dao sword in right. Face from reference, stronger shield silhouette.\nStyle: high quality hand-pixelled chibi action RPG sprite, clear dark pixel outline, short readable 3-head proportions, hard-edged flat clusters, muted historical earth palette with strong silhouette. True transparent RGBA background.\nComposition: exactly 4 columns by 5 rows on a spacious 1024x1280 portrait transparent canvas. First FOUR rows each contain FOUR full-body poses of this same one character, 16 bodies total, visually separated with generous transparent gutters. Last row contains ONLY ONE separately newly drawn large head-and-shoulders bust portrait centered in the row, same man, no body copied/cropped. No other drawings.\nEach full-body pose roughly 140 pixels visible body height; all use same scale and fully intact weapon within their own area. Face RIGHT in every combat pose; camera side three-quarter.\nRows 1-4 are four poses EACH in this order: idle shield at chest, breathing and weight shifts; run alternating legs with shield tilted; attack: sword pullback, sword outward cut from behind shield, extension, recovery; special shield guard: knees bent, shield lifted up, full braced shield forward, shield recovery.\nRow5: independent square bust portrait facing three-quarter toward viewer, face large and readable, face/hair/shoulder costume drawn specifically for portrait, no weapon crossing face.\nConstraints: 16 actually different body poses, two anatomically plausible arms and legs, hands grip weapon correctly, complete feet, whole weapon visible. Unconnected transparent gutters around every figure. NO shadows or floor planes, NO labels, NO text, NO grid lines, NO watermark, NO palette swatches. No effects, slash arcs, projectiles or magic baked into bodies. Keep weapons separate from neighboring cells.\n"
+        }
+      ],
+      "selected_sources": [
+        {
+          "role": "combat",
+          "path": "design/skill-presentation-20261105/characters/N02/source/asset-bundle-v1.png",
+          "sha256": "13476089b1237f4dc25e567131b46e8f14f4d5f3e582f64c2972207fdcf15822",
+          "size": [
+            1122,
+            1402
+          ],
+          "standing_body_height_source_px": 253
+        }
+      ],
+      "production_records": [
+        "design/skill-presentation-20261105/characters/N02/export-manifest.json",
+        "design/skill-presentation-20261105/characters/N02/measurements.json"
+      ],
+      "runtime_manifest": "assets/players/chronicle-cast/N02/manifest.json",
+      "portrait": {
+        "path": "source/asset-bundle-v1.png",
+        "size": [
+          1122,
+          1402
+        ],
+        "sha256": "13476089b1237f4dc25e567131b46e8f14f4d5f3e582f64c2972207fdcf15822",
+        "bbox": [
+          346,
+          1081,
+          726,
+          1389
+        ],
+        "independently_drawn": true
+      },
+      "authored_body_drawings": 16,
+      "independently_drawn_portraits": 1,
+      "exported_clip_frames": {
+        "idle": 4,
+        "move": 4,
+        "attack": 4,
+        "special": 4,
+        "hit_reuse": 2
+      }
+    },
+    {
+      "character_id": "N03",
+      "tool": "built-in image_gen.imagegen",
+      "prompts": [
+        {
+          "path": "design/skill-presentation-20261105/characters/N03/source/prompt-v1.txt",
+          "sha256": "8d11de8c50d4b8724ec924a5ae01e03479b53b81cf6a8669f9e68a3317b5bed0",
+          "text": "Use case: stylized-concept\nAsset type: production pixel-art combat animation sprite sheet plus separately drawn HUD bust for a Godot historical fantasy game.\nPrimary request: create ONE asset bundle for N03 陷阵盾卫.\nInput images: Image 1 is identity reference (preserve face, hair and costume materials, adjust equipment to this exact role); Image 2 is PIXEL ART STYLE reference only (do not copy blue hair or modern clothes).\nSubject: Heavy broad-shouldered mature Chinese elite shield guard, black beard, cream cloth headband beneath worn dark iron helmet, dark brown lamellar armor, cream sash, knee armor. Carries LARGE rectangular iron-rimmed tower shield and one short spear. Rugged facial identity based on reference. Heavier silhouette than ordinary shield man.\nStyle: high quality hand-pixelled chibi action RPG sprite, clear dark pixel outline, short readable 3-head proportions, hard-edged flat clusters, muted historical earth palette with strong silhouette. True transparent RGBA background.\nComposition: exactly 4 columns by 5 rows on a spacious 1024x1280 portrait transparent canvas. First FOUR rows each contain FOUR full-body poses of this same one character, 16 bodies total, visually separated with generous transparent gutters. Last row contains ONLY ONE separately newly drawn large head-and-shoulders bust portrait centered in the row, same man, no body copied/cropped. No other drawings.\nEach full-body pose roughly 140 pixels visible body height; all use same scale and fully intact weapon within their own area. Face RIGHT in every combat pose; camera side three-quarter.\nRows 1-4 are four poses EACH in this order: idle behind large tower shield, four different breathing/guard stances; run deliberate heavy strides with shield; attack: short spear back, rightward spear thrust past shield, full thrust, recover; special heavy shield: crouch, brace tower shield upright, push shield forward, kneeling defensive lock.\nRow5: independent square bust portrait facing three-quarter toward viewer, face large and readable, face/hair/shoulder costume drawn specifically for portrait, no weapon crossing face.\nConstraints: 16 actually different body poses, two anatomically plausible arms and legs, hands grip weapon correctly, complete feet, whole weapon visible. Unconnected transparent gutters around every figure. NO shadows or floor planes, NO labels, NO text, NO grid lines, NO watermark, NO palette swatches. No effects, slash arcs, projectiles or magic baked into bodies. Keep weapons separate from neighboring cells.\n"
+        }
+      ],
+      "selected_sources": [
+        {
+          "role": "combat",
+          "path": "design/skill-presentation-20261105/characters/N03/source/asset-bundle-v1.png",
+          "sha256": "d34d854ffae9907e8f8836d71555a8649b60bea3f0ee1cb12d27f9246870674b",
+          "size": [
+            1122,
+            1402
+          ],
+          "standing_body_height_source_px": 259
+        }
+      ],
+      "production_records": [
+        "design/skill-presentation-20261105/characters/N03/export-manifest.json",
+        "design/skill-presentation-20261105/characters/N03/measurements.json"
+      ],
+      "runtime_manifest": "assets/players/chronicle-cast/N03/manifest.json",
+      "portrait": {
+        "path": "source/asset-bundle-v1.png",
+        "size": [
+          1122,
+          1402
+        ],
+        "sha256": "d34d854ffae9907e8f8836d71555a8649b60bea3f0ee1cb12d27f9246870674b",
+        "bbox": [
+          351,
+          1075,
+          745,
+          1393
+        ],
+        "independently_drawn": true
+      },
+      "authored_body_drawings": 16,
+      "independently_drawn_portraits": 1,
+      "exported_clip_frames": {
+        "idle": 4,
+        "move": 4,
+        "attack": 4,
+        "special": 4,
+        "hit_reuse": 2
+      }
+    },
+    {
+      "character_id": "N04",
+      "tool": "built-in image_gen.imagegen",
+      "prompts": [
+        {
+          "path": "design/skill-presentation-20261105/characters/N04/source/prompt-v1.txt",
+          "sha256": "6186dbbf2778fcf2b8ed9b5dae0f5feb538765a216d95070928f76eb3c5af487",
+          "text": "Use case: stylized-concept\nAsset type: production pixel-art combat animation sprite sheet plus separately drawn HUD bust for a Godot historical fantasy game.\nPrimary request: create ONE asset bundle for N04 乡勇枪手.\nInput images: Image 1 is identity reference (preserve face, hair and costume materials, adjust equipment to this exact role); Image 2 is PIXEL ART STYLE reference only (do not copy blue hair or modern clothes).\nSubject: Lean young Chinese militia spearman, charcoal cloth turban, clean-shaven serious face, ragged charcoal-blue tunic, worn tan woven shoulder fabric, rope belt, cloth gaiters. Holds a long wooden spear with plain steel leaf point. Exact face/clothing family from identity reference; no shield.\nStyle: high quality hand-pixelled chibi action RPG sprite, clear dark pixel outline, short readable 3-head proportions, hard-edged flat clusters, muted historical earth palette with strong silhouette. True transparent RGBA background.\nComposition: exactly 4 columns by 5 rows on a spacious 1024x1280 portrait transparent canvas. First FOUR rows each contain FOUR full-body poses of this same one character, 16 bodies total, visually separated with generous transparent gutters. Last row contains ONLY ONE separately newly drawn large head-and-shoulders bust portrait centered in the row, same man, no body copied/cropped. No other drawings.\nEach full-body pose roughly 140 pixels visible body height; all use same scale and fully intact weapon within their own area. Face RIGHT in every combat pose; camera side three-quarter.\nRows 1-4 are four poses EACH in this order: idle spear diagonal and breathing, four changed weight/arm poses; run with long spear diagonally held, alternating strides; attack: spear pullback, rightward thrust, full horizontal extension, recovery; special charged long spear: low windup, deep forward lunge, maximum two-handed thrust, low recovery.\nRow5: independent square bust portrait facing three-quarter toward viewer, face large and readable, face/hair/shoulder costume drawn specifically for portrait, no weapon crossing face.\nConstraints: 16 actually different body poses, two anatomically plausible arms and legs, hands grip weapon correctly, complete feet, whole weapon visible. Unconnected transparent gutters around every figure. NO shadows or floor planes, NO labels, NO text, NO grid lines, NO watermark, NO palette swatches. No effects, slash arcs, projectiles or magic baked into bodies. Keep weapons separate from neighboring cells.\nImportant: leave 30 pixels transparent margin on the outer canvas edges. Long weapons must never be cropped. Keep each pose entirely separated from its neighbors.\n"
+        }
+      ],
+      "selected_sources": [
+        {
+          "role": "combat",
+          "path": "design/skill-presentation-20261105/characters/N04/source/asset-bundle-v1.png",
+          "sha256": "7832388e39c50d44de763301f6674ea29dad45c1bbb9523ad05ac3a325b23def",
+          "size": [
+            1122,
+            1402
+          ],
+          "standing_body_height_source_px": 224
+        }
+      ],
+      "production_records": [
+        "design/skill-presentation-20261105/characters/N04/export-manifest.json",
+        "design/skill-presentation-20261105/characters/N04/measurements.json"
+      ],
+      "runtime_manifest": "assets/players/chronicle-cast/N04/manifest.json",
+      "portrait": {
+        "path": "source/asset-bundle-v1.png",
+        "size": [
+          1122,
+          1402
+        ],
+        "sha256": "7832388e39c50d44de763301f6674ea29dad45c1bbb9523ad05ac3a325b23def",
+        "bbox": [
+          372,
+          1050,
+          723,
+          1377
+        ],
+        "independently_drawn": true
+      },
+      "authored_body_drawings": 16,
+      "independently_drawn_portraits": 1,
+      "exported_clip_frames": {
+        "idle": 4,
+        "move": 4,
+        "attack": 4,
+        "special": 4,
+        "hit_reuse": 2
+      }
+    },
+    {
+      "character_id": "N05",
+      "tool": "built-in image_gen.imagegen",
+      "prompts": [
+        {
+          "path": "design/skill-presentation-20261105/characters/N05/source/prompt-v1.txt",
+          "sha256": "14b06b71277086b7faecc1b51f1041cccdec45caf722df93803fdadc20c3f6d1",
+          "text": "Use case: stylized-concept\nAsset type: production pixel-art combat animation sprite sheet plus separately drawn HUD bust for a Godot historical fantasy game.\nPrimary request: create ONE asset bundle for N05 城门戟卒.\nInput images: Image 1 is identity reference (preserve face, hair and costume materials, adjust equipment to this exact role); Image 2 is PIXEL ART STYLE reference only (do not copy blue hair or modern clothes).\nSubject: Young Chinese gate halberd infantryman with charcoal cloth head wrap and tied topknot, clean-shaven serious face from identity reference, blue-gray tunic under worn dark leather lamellar chest armor, tan shoulder panels, rope belt. Holds a long Chinese ji halberd: wood shaft, steel spear point plus unmistakable side crescent hook blade. No shield.\nStyle: high quality hand-pixelled chibi action RPG sprite, clear dark pixel outline, short readable 3-head proportions, hard-edged flat clusters, muted historical earth palette with strong silhouette. True transparent RGBA background.\nComposition: exactly 4 columns by 5 rows on a spacious 1024x1280 portrait transparent canvas. First FOUR rows each contain FOUR full-body poses of this same one character, 16 bodies total, visually separated with generous transparent gutters. Last row contains ONLY ONE separately newly drawn large head-and-shoulders bust portrait centered in the row, same man, no body copied/cropped. No other drawings.\nEach full-body pose roughly 140 pixels visible body height; all use same scale and fully intact weapon within their own area. Face RIGHT in every combat pose; camera side three-quarter.\nRows 1-4 are four poses EACH in this order: idle halberd diagonal, breathing/weight shift; run alternating strides halberd held diagonally; attack: polearm behind shoulder, rightward horizontal sweep, full hooked blade extension, recover; special interception: pivot windup, wide low halberd sweep, halberd extended across front, low braced finish.\nRow5: independent square bust portrait facing three-quarter toward viewer, face large and readable, face/hair/shoulder costume drawn specifically for portrait, no weapon crossing face.\nConstraints: 16 actually different body poses, two anatomically plausible arms and legs, hands grip weapon correctly, complete feet, whole weapon visible. Unconnected transparent gutters around every figure. NO shadows or floor planes, NO labels, NO text, NO grid lines, NO watermark, NO palette swatches. No effects, slash arcs, projectiles or magic baked into bodies. Keep weapons separate from neighboring cells.\nImportant: leave 30 pixels transparent margin on the outer canvas edges. Long weapons must never be cropped. Keep each pose entirely separated from its neighbors.\n"
+        }
+      ],
+      "selected_sources": [
+        {
+          "role": "combat",
+          "path": "design/skill-presentation-20261105/characters/N05/source/asset-bundle-v1.png",
+          "sha256": "87cfd667e17647d57866e80da411b318c9b52868b293e36732defee0b428b398",
+          "size": [
+            1122,
+            1402
+          ],
+          "standing_body_height_source_px": 232
+        }
+      ],
+      "production_records": [
+        "design/skill-presentation-20261105/characters/N05/export-manifest.json",
+        "design/skill-presentation-20261105/characters/N05/measurements.json"
+      ],
+      "runtime_manifest": "assets/players/chronicle-cast/N05/manifest.json",
+      "portrait": {
+        "path": "source/asset-bundle-v1.png",
+        "size": [
+          1122,
+          1402
+        ],
+        "sha256": "87cfd667e17647d57866e80da411b318c9b52868b293e36732defee0b428b398",
+        "bbox": [
+          380,
+          1032,
+          695,
+          1370
+        ],
+        "independently_drawn": true
+      },
+      "authored_body_drawings": 16,
+      "independently_drawn_portraits": 1,
+      "exported_clip_frames": {
+        "idle": 4,
+        "move": 4,
+        "attack": 4,
+        "special": 4,
+        "hit_reuse": 2
+      }
+    },
+    {
+      "character_id": "N06",
+      "tool": "built-in image_gen.imagegen",
+      "prompts": [
+        {
+          "path": "design/skill-presentation-20261105/characters/N06/source/prompt-v1.txt",
+          "sha256": "159285e1f272c0cc25ae59cc8ceb9acddfbd05a2ec2ee15ea8754334c75f4a2e",
+          "text": "Use case: stylized-concept\nAsset type: production pixel-art combat animation sprite sheet plus separately drawn HUD bust for a Godot historical fantasy game.\nPrimary request: create ONE asset bundle for N06 陷阵锐卒.\nInput images: Image 1 is identity reference (preserve face, hair and costume materials, adjust equipment to this exact role); Image 2 is PIXEL ART STYLE reference only (do not copy blue hair or modern clothes).\nSubject: Lean athletic young Chinese assault spearman, charcoal cloth head wrap, clean-shaven sharp face from identity reference, darker close-fitted navy lamellar vest over ragged slate tunic, tan belt and forearm wraps, reinforced gaiters. Holds a very long sturdy armor-piercing spear with narrow triangular steel point and dark red knot under blade. No shield.\nStyle: high quality hand-pixelled chibi action RPG sprite, clear dark pixel outline, short readable 3-head proportions, hard-edged flat clusters, muted historical earth palette with strong silhouette. True transparent RGBA background.\nComposition: exactly 4 columns by 5 rows on a spacious 1024x1280 portrait transparent canvas. First FOUR rows each contain FOUR full-body poses of this same one character, 16 bodies total, visually separated with generous transparent gutters. Last row contains ONLY ONE separately newly drawn large head-and-shoulders bust portrait centered in the row, same man, no body copied/cropped. No other drawings.\nEach full-body pose roughly 140 pixels visible body height; all use same scale and fully intact weapon within their own area. Face RIGHT in every combat pose; camera side three-quarter.\nRows 1-4 are four poses EACH in this order: idle forward offensive spear guard, breathing/weight shift; fast low run alternating strides spear near horizontal; attack: two-handed spear retract, level rightward thrust, full thrust, recover; special breaching spear: deep lowered windup, forceful extended lunge, spear locked forward with rear leg straight, recoil recovery.\nRow5: independent square bust portrait facing three-quarter toward viewer, face large and readable, face/hair/shoulder costume drawn specifically for portrait, no weapon crossing face.\nConstraints: 16 actually different body poses, two anatomically plausible arms and legs, hands grip weapon correctly, complete feet, whole weapon visible. Unconnected transparent gutters around every figure. NO shadows or floor planes, NO labels, NO text, NO grid lines, NO watermark, NO palette swatches. No effects, slash arcs, projectiles or magic baked into bodies. Keep weapons separate from neighboring cells.\nImportant: leave 30 pixels transparent margin on the outer canvas edges. Long weapons must never be cropped. Keep each pose entirely separated from its neighbors.\n"
+        }
+      ],
+      "selected_sources": [
+        {
+          "role": "combat",
+          "path": "design/skill-presentation-20261105/characters/N06/source/asset-bundle-v1.png",
+          "sha256": "46092fb84e30c60994acdd9c5cf538ab213f69d2843084187162c3bf4c5d6ec3",
+          "size": [
+            1122,
+            1402
+          ],
+          "standing_body_height_source_px": 221
+        }
+      ],
+      "production_records": [
+        "design/skill-presentation-20261105/characters/N06/export-manifest.json",
+        "design/skill-presentation-20261105/characters/N06/measurements.json"
+      ],
+      "runtime_manifest": "assets/players/chronicle-cast/N06/manifest.json",
+      "portrait": {
+        "path": "source/asset-bundle-v1.png",
+        "size": [
+          1122,
+          1402
+        ],
+        "sha256": "46092fb84e30c60994acdd9c5cf538ab213f69d2843084187162c3bf4c5d6ec3",
+        "bbox": [
+          370,
+          1048,
+          703,
+          1387
+        ],
+        "independently_drawn": true
+      },
+      "authored_body_drawings": 16,
+      "independently_drawn_portraits": 1,
+      "exported_clip_frames": {
+        "idle": 4,
+        "move": 4,
+        "attack": 4,
+        "special": 4,
+        "hit_reuse": 2
+      }
+    },
+    {
+      "character_id": "N07",
+      "tool": "built-in image_gen.imagegen",
+      "prompts": [
+        {
+          "path": "design/skill-presentation-20261105/characters/N07/source/prompt-v1.txt",
+          "sha256": "03f41b414068476bfe6f1b275cd306216630d8f67edb4d6c2af564ca20da12ec",
+          "text": "Use case: stylized-concept\nAsset type: production pixel-art combat animation sprite sheet plus separately drawn HUD bust for a Godot historical fantasy game.\nPrimary request: create ONE asset bundle for N07 猎户弓手.\nInput images: Image 1 is identity reference (preserve face, hair and costume materials, adjust equipment to this exact role); Image 2 is PIXEL ART STYLE reference only (do not copy blue hair or modern clothes).\nSubject: Rugged mature Chinese hunter archer, loose black topknot, moustache and pointed short beard, straw cape on shoulders over dark rough tunic, charcoal trousers, cloth boots; face and straw cape from identity reference. Holds one clearly curved wooden hunting BOW with visible bowstring, quiver over back; not crossbow.\nStyle: high quality hand-pixelled chibi action RPG sprite, clear dark pixel outline, short readable 3-head proportions, hard-edged flat clusters, muted historical earth palette with strong silhouette. True transparent RGBA background.\nComposition: exactly 4 columns by 5 rows on a spacious 1024x1280 portrait transparent canvas. First FOUR rows each contain FOUR full-body poses of this same one character, 16 bodies total, visually separated with generous transparent gutters. Last row contains ONLY ONE separately newly drawn large head-and-shoulders bust portrait centered in the row, same man, no body copied/cropped. No other drawings.\nEach full-body pose roughly 140 pixels visible body height; all use same scale and fully intact weapon within their own area. Face RIGHT in every combat pose; camera side three-quarter.\nRows 1-4 are four poses EACH in this order: idle bow lowered, breathing and weight shifting; run alternating legs with bow secure; attack: nock arrow, draw bowstring toward cheek, release arrow with bow arm horizontal right, recover; special charged shot: low wide stance, full deep bow draw, high-tension release rightward, bow arm followthrough.\nRow5: independent square bust portrait facing three-quarter toward viewer, face large and readable, face/hair/shoulder costume drawn specifically for portrait, no weapon crossing face.\nConstraints: 16 actually different body poses, two anatomically plausible arms and legs, hands grip weapon correctly, complete feet, whole weapon visible. Unconnected transparent gutters around every figure. NO shadows or floor planes, NO labels, NO text, NO grid lines, NO watermark, NO palette swatches. No effects, slash arcs, projectiles or magic baked into bodies. Keep weapons separate from neighboring cells.\nImportant: leave 30 pixels transparent margin on the outer canvas edges. Weapon must never be cropped. Keep each pose entirely separated from its neighbors.\n"
+        }
+      ],
+      "selected_sources": [
+        {
+          "role": "combat",
+          "path": "design/skill-presentation-20261105/characters/N07/source/asset-bundle-v1.png",
+          "sha256": "8f90d76b0aa48cb6a79bcbec01decaf2c3e5840980a21aca43d9bd43fa2148af",
+          "size": [
+            1122,
+            1402
+          ],
+          "standing_body_height_source_px": 245
+        }
+      ],
+      "production_records": [
+        "design/skill-presentation-20261105/characters/N07/export-manifest.json",
+        "design/skill-presentation-20261105/characters/N07/measurements.json"
+      ],
+      "runtime_manifest": "assets/players/chronicle-cast/N07/manifest.json",
+      "portrait": {
+        "path": "source/asset-bundle-v1.png",
+        "size": [
+          1122,
+          1402
+        ],
+        "sha256": "8f90d76b0aa48cb6a79bcbec01decaf2c3e5840980a21aca43d9bd43fa2148af",
+        "bbox": [
+          389,
+          1104,
+          677,
+          1390
+        ],
+        "independently_drawn": true
+      },
+      "authored_body_drawings": 16,
+      "independently_drawn_portraits": 1,
+      "exported_clip_frames": {
+        "idle": 4,
+        "move": 4,
+        "attack": 4,
+        "special": 4,
+        "hit_reuse": 2
+      }
+    },
+    {
+      "character_id": "N08",
+      "tool": "built-in image_gen.imagegen",
+      "prompts": [
+        {
+          "path": "design/skill-presentation-20261105/characters/N08/source/prompt-v1.txt",
+          "sha256": "b06a9c3634e9bc6d88cb06699480c0710ab168ce2b2c6a1b93c2e9a4d499c8c4",
+          "text": "Use case: stylized-concept\nAsset type: production pixel-art combat animation sprite sheet plus separately drawn HUD bust for a Godot historical fantasy game.\nPrimary request: create ONE asset bundle for N08 白门弩手.\nInput images: Image 1 is identity reference (preserve face, hair and costume materials, adjust equipment to this exact role); Image 2 is PIXEL ART STYLE reference only (do not copy blue hair or modern clothes).\nSubject: Rugged mature Chinese crossbow militia, black topknot, short moustache and beard, straw shoulder cape over worn charcoal and brown leather vest, cloth boots; face from identity reference. Carries compact wooden CROSSBOW with unmistakable horizontal bow prod attached perpendicular to straight stock, visible trigger grip, bolt laid on top. Back bolt quiver. Not hand bow.\nStyle: high quality hand-pixelled chibi action RPG sprite, clear dark pixel outline, short readable 3-head proportions, hard-edged flat clusters, muted historical earth palette with strong silhouette. True transparent RGBA background.\nComposition: exactly 4 columns by 5 rows on a spacious 1024x1280 portrait transparent canvas. First FOUR rows each contain FOUR full-body poses of this same one character, 16 bodies total, visually separated with generous transparent gutters. Last row contains ONLY ONE separately newly drawn large head-and-shoulders bust portrait centered in the row, same man, no body copied/cropped. No other drawings.\nEach full-body pose roughly 140 pixels visible body height; all use same scale and fully intact weapon within their own area. Face RIGHT in every combat pose; camera side three-quarter.\nRows 1-4 are four poses EACH in this order: idle crossbow lowered at waist and breathing four stances; run with crossbow held across body alternating legs; attack: lift crossbow, shoulder and aim right, fire/recoil, lower/reload; special piercing bolt: kneel load heavy bolt, steady braced rightward aim, strong recoil release, keep crossbow lowered in recovery.\nRow5: independent square bust portrait facing three-quarter toward viewer, face large and readable, face/hair/shoulder costume drawn specifically for portrait, no weapon crossing face.\nConstraints: 16 actually different body poses, two anatomically plausible arms and legs, hands grip weapon correctly, complete feet, whole weapon visible. Unconnected transparent gutters around every figure. NO shadows or floor planes, NO labels, NO text, NO grid lines, NO watermark, NO palette swatches. No effects, slash arcs, projectiles or magic baked into bodies. Keep weapons separate from neighboring cells.\nImportant: leave 30 pixels transparent margin on the outer canvas edges. Weapon must never be cropped. Keep each pose entirely separated from its neighbors.\n"
+        }
+      ],
+      "selected_sources": [
+        {
+          "role": "combat",
+          "path": "design/skill-presentation-20261105/characters/N08/source/asset-bundle-v1.png",
+          "sha256": "8c8f4abec0c2fccdd4cd367329c5c08953e0da21dc841b4a063ce0957c3a36eb",
+          "size": [
+            1122,
+            1402
+          ],
+          "standing_body_height_source_px": 244
+        }
+      ],
+      "production_records": [
+        "design/skill-presentation-20261105/characters/N08/export-manifest.json",
+        "design/skill-presentation-20261105/characters/N08/measurements.json"
+      ],
+      "runtime_manifest": "assets/players/chronicle-cast/N08/manifest.json",
+      "portrait": {
+        "path": "source/asset-bundle-v1.png",
+        "size": [
+          1122,
+          1402
+        ],
+        "sha256": "8c8f4abec0c2fccdd4cd367329c5c08953e0da21dc841b4a063ce0957c3a36eb",
+        "bbox": [
+          401,
+          1067,
+          689,
+          1386
+        ],
+        "independently_drawn": true
+      },
+      "authored_body_drawings": 16,
+      "independently_drawn_portraits": 1,
+      "exported_clip_frames": {
+        "idle": 4,
+        "move": 4,
+        "attack": 4,
+        "special": 4,
+        "hit_reuse": 2
+      }
+    },
+    {
+      "character_id": "N09",
+      "tool": "built-in image_gen.imagegen",
+      "prompts": [
+        {
+          "path": "design/skill-presentation-20261105/characters/N09/source/prompt-v1.txt",
+          "sha256": "c87ce2539ce7b9ed88936cf30e9b286e1fa628f42b4dd39114cc4f278df6f893",
+          "text": "Use case: stylized-concept\nAsset type: production pixel-art combat animation sprite sheet plus separately drawn HUD bust for a Godot historical fantasy game.\nPrimary request: create ONE asset bundle for N09 曹军劲弩手.\nInput images: Image 1 is identity reference (preserve face, hair and costume materials, adjust equipment to this exact role); Image 2 is PIXEL ART STYLE reference only (do not copy blue hair or modern clothes).\nSubject: Disciplined mature Chinese heavy crossbow soldier, black topknot under dark blue head cloth, moustache and pointed beard from identity reference, dark navy lamellar armor, compact straw rain shoulder mantle, dark trousers, sturdy boots. Carries large reinforced dark wooden military CROSSBOW with broad steel horizontal prod perpendicular to straight stock, shoulder stock and visible trigger; bolt quiver back. Distinct stocky military silhouette.\nStyle: high quality hand-pixelled chibi action RPG sprite, clear dark pixel outline, short readable 3-head proportions, hard-edged flat clusters, muted historical earth palette with strong silhouette. True transparent RGBA background.\nComposition: exactly 4 columns by 5 rows on a spacious 1024x1280 portrait transparent canvas. First FOUR rows each contain FOUR full-body poses of this same one character, 16 bodies total, visually separated with generous transparent gutters. Last row contains ONLY ONE separately newly drawn large head-and-shoulders bust portrait centered in the row, same man, no body copied/cropped. No other drawings.\nEach full-body pose roughly 140 pixels visible body height; all use same scale and fully intact weapon within their own area. Face RIGHT in every combat pose; camera side three-quarter.\nRows 1-4 are four poses EACH in this order: idle heavy crossbow guard and weight shift four poses; run heavy crossbow across body alternating strides; attack: shoulder heavy crossbow, precise rightward aim, release/recoil, reload; special fixed-target heavy shot: planted wide stance, deep steady shoulder aim, strong firing recoil with raised elbow, controlled ready recovery.\nRow5: independent square bust portrait facing three-quarter toward viewer, face large and readable, face/hair/shoulder costume drawn specifically for portrait, no weapon crossing face.\nConstraints: 16 actually different body poses, two anatomically plausible arms and legs, hands grip weapon correctly, complete feet, whole weapon visible. Unconnected transparent gutters around every figure. NO shadows or floor planes, NO labels, NO text, NO grid lines, NO watermark, NO palette swatches. No effects, slash arcs, projectiles or magic baked into bodies. Keep weapons separate from neighboring cells.\nImportant: leave 30 pixels transparent margin on the outer canvas edges. Weapon must never be cropped. Keep each pose entirely separated from its neighbors.\n"
+        }
+      ],
+      "selected_sources": [
+        {
+          "role": "combat",
+          "path": "design/skill-presentation-20261105/characters/N09/source/asset-bundle-v1.png",
+          "sha256": "9811ed5438ffed27d673f7dbe18a248b9d0b3f51807f265ee9c224c43a030e9e",
+          "size": [
+            1122,
+            1402
+          ],
+          "standing_body_height_source_px": 249
+        }
+      ],
+      "production_records": [
+        "design/skill-presentation-20261105/characters/N09/export-manifest.json",
+        "design/skill-presentation-20261105/characters/N09/measurements.json"
+      ],
+      "runtime_manifest": "assets/players/chronicle-cast/N09/manifest.json",
+      "portrait": {
+        "path": "source/asset-bundle-v1.png",
+        "size": [
+          1122,
+          1402
+        ],
+        "sha256": "9811ed5438ffed27d673f7dbe18a248b9d0b3f51807f265ee9c224c43a030e9e",
+        "bbox": [
+          373,
+          1060,
+          696,
+          1380
+        ],
+        "independently_drawn": true
+      },
+      "authored_body_drawings": 16,
+      "independently_drawn_portraits": 1,
+      "exported_clip_frames": {
+        "idle": 4,
+        "move": 4,
+        "attack": 4,
+        "special": 4,
+        "hit_reuse": 2
+      }
+    },
+    {
+      "character_id": "N10",
+      "tool": "built-in image_gen.imagegen",
+      "prompts": [
+        {
+          "path": "design/skill-presentation-20261105/characters/N10/prompt-v1.txt",
+          "sha256": "c0d0dabcc4d18b75c74253789811197276d01729ff68ab345945616fa6a25d6b",
+          "text": "Use case: stylized-concept. Asset type: production pixel-art sprite asset bundle for a Chinese historical fantasy action game. Create ONE unique character sheet on genuinely transparent RGBA background. Reference image 1 supplies the character's face, age, main costume identity. Reference image 2 supplies ONLY crisp outlined pixel-art technique, chibi action sprite proportions and readable shaded clusters; DO NOT copy that blue-haired character.\nComposition: 4 columns × 5 rows with generous transparent gutters, regular aligned cells; first FOUR rows contain EXACTLY 16 isolated full-body action frames, all facing screen-right in side-three-quarter game view. Row1 = FOUR subtly DIFFERENT idle poses (breathing, arm/weapon angle and cloth settling); row2 = FOUR clearly DIFFERENT locomotion cycle poses; row3 = FOUR clearly DIFFERENT weapon attack poses (windup, full extension/contact, follow-through, recover); row4 = FOUR clearly DIFFERENT SPECIAL action poses as specified. Row5 contains ONLY ONE separately drawn large head-and-shoulders bust portrait centered in column2; other cells empty. This portrait is freshly drawn with expressive face and shoulders, NOT cropped or enlarged from a body frame. Each body frame consistent design and source scale, complete feet/hooves and complete weapon at all times, no neighboring figures touching. Natural posture variation, no exaggerated squash/stretch. Horizontal weapon fits within its cell. Transparent empty gutters at least 24px. No labels, no text, no cell grid lines, no panels, no ground shadows. Pixel art only, strong dark outlines, small limited palette of muted colors, hard clusters, no gradients or blurry antialiasing. Do not add large external effects or scenery. Output approximately 1536x1536 or tall square format to fit 5 rows.\nCharacter N10: 并州游骑 / Bingzhou outrider. Mature black moustache and short beard, dark iron helmet, long red scarf, economical brown leather lamellar armor. Mounted on a lean chestnut horse with simple saddle and no barding. Long wooden cavalry spear with small red tassel. Slim mobile frontier cavalry silhouette.\nRow4 special: explosive low galloping breakout, rider leans forward and levels spear. Every one of the 16 poses includes rider AND complete horse, with horse leg positions genuinely different; keep all horse ears, hooves, tail and full lance within each isolated cell. Match mounted unit scale consistently across all frames.\n"
+        }
+      ],
+      "selected_sources": [
+        {
+          "role": "combat",
+          "path": "design/skill-presentation-20261105/characters/N10/source/combat-bundle-v1.png",
+          "sha256": "0f850c218b010500aa6e7ce7be20cd688a60f3cd9feb77d3994c0e9fbca5d69b",
+          "size": [
+            1254,
+            1254
+          ],
+          "standing_body_height_source_px": 213
+        }
+      ],
+      "production_records": [
+        "design/skill-presentation-20261105/characters/N10/export-manifest.json",
+        "design/skill-presentation-20261105/characters/N10/measurements.json"
+      ],
+      "runtime_manifest": "assets/players/chronicle-cast/N10/manifest.json",
+      "portrait": {
+        "path": "source/combat-bundle-v1.png",
+        "size": [
+          1254,
+          1254
+        ],
+        "sha256": "0f850c218b010500aa6e7ce7be20cd688a60f3cd9feb77d3994c0e9fbca5d69b",
+        "bbox": [
+          319,
+          948,
+          618,
+          1244
+        ]
+      },
+      "authored_body_drawings": 16,
+      "independently_drawn_portraits": 1,
+      "exported_clip_frames": {
+        "idle": 4,
+        "move": 4,
+        "attack": 4,
+        "special": 4,
+        "hit_reuse": 2
+      }
+    },
+    {
+      "character_id": "N11",
+      "tool": "built-in image_gen.imagegen",
+      "prompts": [
+        {
+          "path": "design/skill-presentation-20261105/characters/N11/prompt-v1.txt",
+          "sha256": "14b06c4f9c0b8cbbc67bbf7a9290bef1a9fcaeda844fb0e63d5f25c744288f19",
+          "text": "Use case: stylized-concept. Asset type: production pixel-art sprite asset bundle for a Chinese historical fantasy action game. Create ONE unique character sheet on genuinely transparent RGBA background. Reference image 1 supplies the character's face, age, main costume identity. Reference image 2 supplies ONLY crisp outlined pixel-art technique, chibi action sprite proportions and readable shaded clusters; DO NOT copy that blue-haired character.\nComposition: 4 columns × 5 rows with generous transparent gutters, regular aligned cells; first FOUR rows contain EXACTLY 16 isolated full-body action frames, all facing screen-right in side-three-quarter game view. Row1 = FOUR subtly DIFFERENT idle poses (breathing, arm/weapon angle and cloth settling); row2 = FOUR clearly DIFFERENT locomotion cycle poses; row3 = FOUR clearly DIFFERENT weapon attack poses (windup, full extension/contact, follow-through, recover); row4 = FOUR clearly DIFFERENT SPECIAL action poses as specified. Row5 contains ONLY ONE separately drawn large head-and-shoulders bust portrait centered in column2; other cells empty. This portrait is freshly drawn with expressive face and shoulders, NOT cropped or enlarged from a body frame. Each body frame consistent design and source scale, complete feet/hooves and complete weapon at all times, no neighboring figures touching. Natural posture variation, no exaggerated squash/stretch. Horizontal weapon fits within its cell. Transparent empty gutters at least 24px. No labels, no text, no cell grid lines, no panels, no ground shadows. Pixel art only, strong dark outlines, small limited palette of muted colors, hard clusters, no gradients or blurry antialiasing. Do not add large external effects or scenery. Output approximately 1536x1536 or tall square format to fit 5 rows.\nCharacter N11: 虎豹轻骑 / Tiger Leopard light cavalry. Mature moustached cavalryman, close iron helmet with short red crest, cropped red neck scarf, fitted black light lamellar armor and bronze fittings. Mounted on a swift dark charcoal horse with light red saddle cloth, exposed legs and head. Long slim steel-tipped lance. Aerodynamic and distinctly lighter than heavy cavalry.\nRow4 special: fast pursuit gallop, lance extended low, scarf streaming and horse stretched. Every one of the 16 poses includes rider AND complete horse, with horse leg positions genuinely different; keep all horse ears, hooves, tail and full lance within each isolated cell. Match mounted unit scale consistently across all frames.\n"
+        }
+      ],
+      "selected_sources": [
+        {
+          "role": "combat",
+          "path": "design/skill-presentation-20261105/characters/N11/source/combat-bundle-v1.png",
+          "sha256": "bc45eff0a1049ecd8771977fea55d73dc7a498e9fa9edf19bd5f5136d3eb06de",
+          "size": [
+            1254,
+            1254
+          ],
+          "standing_body_height_source_px": 220
+        }
+      ],
+      "production_records": [
+        "design/skill-presentation-20261105/characters/N11/export-manifest.json",
+        "design/skill-presentation-20261105/characters/N11/measurements.json"
+      ],
+      "runtime_manifest": "assets/players/chronicle-cast/N11/manifest.json",
+      "portrait": {
+        "path": "source/combat-bundle-v1.png",
+        "size": [
+          1254,
+          1254
+        ],
+        "sha256": "bc45eff0a1049ecd8771977fea55d73dc7a498e9fa9edf19bd5f5136d3eb06de",
+        "bbox": [
+          330,
+          975,
+          605,
+          1241
+        ]
+      },
+      "authored_body_drawings": 16,
+      "independently_drawn_portraits": 1,
+      "exported_clip_frames": {
+        "idle": 4,
+        "move": 4,
+        "attack": 4,
+        "special": 4,
+        "hit_reuse": 2
+      }
+    },
+    {
+      "character_id": "N12",
+      "tool": "built-in image_gen.imagegen",
+      "prompts": [
+        {
+          "path": "design/skill-presentation-20261105/characters/N12/prompt-v1.txt",
+          "sha256": "646eb05a8b71cd0f9da46e3256f46f9009160ca75b28c32968cf7829a6c44f72",
+          "text": "Use case: stylized-concept. Asset type: production pixel-art sprite asset bundle for a Chinese historical fantasy action game. Create ONE unique character sheet on genuinely transparent RGBA background. Reference image 1 supplies the character's face, age, main costume identity. Reference image 2 supplies ONLY crisp outlined pixel-art technique, chibi action sprite proportions and readable shaded clusters; DO NOT copy that blue-haired character.\nComposition: 4 columns × 5 rows with generous transparent gutters, regular aligned cells; first FOUR rows contain EXACTLY 16 isolated full-body action frames, all facing screen-right in side-three-quarter game view. Row1 = FOUR subtly DIFFERENT idle poses (breathing, arm/weapon angle and cloth settling); row2 = FOUR clearly DIFFERENT locomotion cycle poses; row3 = FOUR clearly DIFFERENT weapon attack poses (windup, full extension/contact, follow-through, recover); row4 = FOUR clearly DIFFERENT SPECIAL action poses as specified. Row5 contains ONLY ONE separately drawn large head-and-shoulders bust portrait centered in column2; other cells empty. This portrait is freshly drawn with expressive face and shoulders, NOT cropped or enlarged from a body frame. Each body frame consistent design and source scale, complete feet/hooves and complete weapon at all times, no neighboring figures touching. Natural posture variation, no exaggerated squash/stretch. Horizontal weapon fits within its cell. Transparent empty gutters at least 24px. No labels, no text, no cell grid lines, no panels, no ground shadows. Pixel art only, strong dark outlines, small limited palette of muted colors, hard clusters, no gradients or blurry antialiasing. Do not add large external effects or scenery. Output approximately 1536x1536 or tall square format to fit 5 rows.\nCharacter N12: 虎豹重骑 / Tiger Leopard heavy cavalry. Stout mature moustached cavalryman, large dark iron helmet with tall red crest and cheek guards, heavy black and bronze lamellar armor and broad red scarf. Mounted on a powerful broad brown warhorse with dark iron frontal barding and armored neck. Thick long heavy lance. Broad imposing silhouette.\nRow4 special: powerful armored charge, rider braces lance, heavy horse plants then drives forward. Every one of the 16 poses includes rider AND complete horse, with horse leg positions genuinely different; keep all horse ears, hooves, tail and full lance within each isolated cell. Match mounted unit scale consistently across all frames.\n"
+        }
+      ],
+      "selected_sources": [
+        {
+          "role": "combat",
+          "path": "design/skill-presentation-20261105/characters/N12/source/combat-bundle-v1.png",
+          "sha256": "8876d9b823aec60a3dc390dc4ff572d204ea03d28210a0dadc6ecfb3e37847e5",
+          "size": [
+            1254,
+            1254
+          ],
+          "standing_body_height_source_px": 230
+        }
+      ],
+      "production_records": [
+        "design/skill-presentation-20261105/characters/N12/export-manifest.json",
+        "design/skill-presentation-20261105/characters/N12/measurements.json"
+      ],
+      "runtime_manifest": "assets/players/chronicle-cast/N12/manifest.json",
+      "portrait": {
+        "path": "source/combat-bundle-v1.png",
+        "size": [
+          1254,
+          1254
+        ],
+        "sha256": "8876d9b823aec60a3dc390dc4ff572d204ea03d28210a0dadc6ecfb3e37847e5",
+        "bbox": [
+          328,
+          976,
+          610,
+          1240
+        ]
+      },
+      "authored_body_drawings": 16,
+      "independently_drawn_portraits": 1,
+      "exported_clip_frames": {
+        "idle": 4,
+        "move": 4,
+        "attack": 4,
+        "special": 4,
+        "hit_reuse": 2
+      }
+    },
+    {
+      "character_id": "N13",
+      "tool": "built-in image_gen.imagegen",
+      "prompts": [
+        {
+          "path": "design/skill-presentation-20261105/characters/N13/prompt-v1.txt",
+          "sha256": "32468d33d0c09b2f8d666e60c2499710de9341b5204a8c19b3b212df21a7f112",
+          "text": "Use case: stylized-concept. Asset type: production pixel-art sprite asset bundle for a Chinese historical fantasy action game. Create ONE unique character sheet on genuinely transparent RGBA background. Reference image 1 supplies the character's face, age, main costume identity. Reference image 2 supplies ONLY crisp outlined pixel-art technique, chibi action sprite proportions and readable shaded clusters; DO NOT copy that blue-haired character.\nComposition: 4 columns × 5 rows with generous transparent gutters, regular aligned cells; first FOUR rows contain EXACTLY 16 isolated full-body action frames, all facing screen-right in side-three-quarter game view. Row1 = FOUR subtly DIFFERENT idle poses (breathing, arm/weapon angle and cloth settling); row2 = FOUR clearly DIFFERENT locomotion cycle poses; row3 = FOUR clearly DIFFERENT weapon attack poses (windup, full extension/contact, follow-through, recover); row4 = FOUR clearly DIFFERENT SPECIAL action poses as specified. Row5 contains ONLY ONE separately drawn large head-and-shoulders bust portrait centered in column2; other cells empty. This portrait is freshly drawn with expressive face and shoulders, NOT cropped or enlarged from a body frame. Each body frame consistent design and source scale, complete feet/hooves and complete weapon at all times, no neighboring figures touching. Natural posture variation, no exaggerated squash/stretch. Horizontal weapon fits within its cell. Transparent empty gutters at least 24px. No labels, no text, no cell grid lines, no panels, no ground shadows. Pixel art only, strong dark outlines, small limited palette of muted colors, hard clusters, no gradients or blurry antialiasing. Do not add large external effects or scenery. Output approximately 1536x1536 or tall square format to fit 5 rows.\nCharacter N13: 游方符师 / wandering talisman adept. Elderly Chinese man with long white beard and grey eyebrows, soft charcoal scholar headwrap, ochre patched robe with dark edging, rope belt, brass gourd at waist and yellow paper talisman cards. Carries talismans in right hand; no sword or spear. Slender hunched scholarly silhouette.\nRow4 special: mana restoration ritual, raise yellow talismans then draw hands toward chest then open palms. Row3 basic attack: draw paper charm back, thrust charm hand forward, release magical projectile gesture, return to stance. Separate talisman or bell remains held in the hand, avoid detached magic or floating particles. Preserve elderly face and beard throughout.\n"
+        }
+      ],
+      "selected_sources": [
+        {
+          "role": "combat",
+          "path": "design/skill-presentation-20261105/characters/N13/source/combat-bundle-v1.png",
+          "sha256": "3b260f317df5ae3f0b1632c2cf07ea855640b9b0e2828827353f4e865e1165ad",
+          "size": [
+            1254,
+            1254
+          ],
+          "standing_body_height_source_px": 222
+        }
+      ],
+      "production_records": [
+        "design/skill-presentation-20261105/characters/N13/export-manifest.json",
+        "design/skill-presentation-20261105/characters/N13/measurements.json"
+      ],
+      "runtime_manifest": "assets/players/chronicle-cast/N13/manifest.json",
+      "portrait": {
+        "path": "source/combat-bundle-v1.png",
+        "size": [
+          1254,
+          1254
+        ],
+        "sha256": "3b260f317df5ae3f0b1632c2cf07ea855640b9b0e2828827353f4e865e1165ad",
+        "bbox": [
+          334,
+          997,
+          599,
+          1243
+        ]
+      },
+      "authored_body_drawings": 16,
+      "independently_drawn_portraits": 1,
+      "exported_clip_frames": {
+        "idle": 4,
+        "move": 4,
+        "attack": 4,
+        "special": 4,
+        "hit_reuse": 2
+      }
+    },
+    {
+      "character_id": "N14",
+      "tool": "built-in image_gen.imagegen",
+      "prompts": [
+        {
+          "path": "design/skill-presentation-20261105/characters/N14/prompt-v1.txt",
+          "sha256": "22ea451a3400d89a3c9e7f0d11e863a72118b5e98bf56ca7464ffe340486e653",
+          "text": "Use case: stylized-concept. Asset type: production pixel-art sprite asset bundle for a Chinese historical fantasy action game. Create ONE unique character sheet on genuinely transparent RGBA background. Reference image 1 supplies the character's face, age, main costume identity. Reference image 2 supplies ONLY crisp outlined pixel-art technique, chibi action sprite proportions and readable shaded clusters; DO NOT copy that blue-haired character.\nComposition: 4 columns × 5 rows with generous transparent gutters, regular aligned cells; first FOUR rows contain EXACTLY 16 isolated full-body action frames, all facing screen-right in side-three-quarter game view. Row1 = FOUR subtly DIFFERENT idle poses (breathing, arm/weapon angle and cloth settling); row2 = FOUR clearly DIFFERENT locomotion cycle poses; row3 = FOUR clearly DIFFERENT weapon attack poses (windup, full extension/contact, follow-through, recover); row4 = FOUR clearly DIFFERENT SPECIAL action poses as specified. Row5 contains ONLY ONE separately drawn large head-and-shoulders bust portrait centered in column2; other cells empty. This portrait is freshly drawn with expressive face and shoulders, NOT cropped or enlarged from a body frame. Each body frame consistent design and source scale, complete feet/hooves and complete weapon at all times, no neighboring figures touching. Natural posture variation, no exaggerated squash/stretch. Horizontal weapon fits within its cell. Transparent empty gutters at least 24px. No labels, no text, no cell grid lines, no panels, no ground shadows. Pixel art only, strong dark outlines, small limited palette of muted colors, hard clusters, no gradients or blurry antialiasing. Do not add large external effects or scenery. Output approximately 1536x1536 or tall square format to fit 5 rows.\nCharacter N14: 荒祠咒师 / abandoned shrine curse adept. Elderly Chinese man with wispy white beard, tall folded black cloth cap and dark violet scarf, patched charcoal and faded mustard ritual robe, bone-bead bracelet and hooked wooden ritual staff. Holds yellow talisman strips. Lean crooked staff-bearing silhouette distinct from wandering adept.\nRow4 special: binding curse ritual, plant hooked staff and draw a circular ward with free hand, talisman strips unfurl. Row3 basic attack: draw paper charm back, thrust charm hand forward, release magical projectile gesture, return to stance. Separate talisman or bell remains held in the hand, avoid detached magic or floating particles. Preserve elderly face and beard throughout.\n"
+        }
+      ],
+      "selected_sources": [
+        {
+          "role": "combat",
+          "path": "design/skill-presentation-20261105/characters/N14/source/combat-bundle-v1.png",
+          "sha256": "fd988df8ef5d9108881b5265ea342bfcafaab04a74cea61692cfcd827e3ddbeb",
+          "size": [
+            1254,
+            1254
+          ],
+          "standing_body_height_source_px": 226
+        }
+      ],
+      "production_records": [
+        "design/skill-presentation-20261105/characters/N14/export-manifest.json",
+        "design/skill-presentation-20261105/characters/N14/measurements.json"
+      ],
+      "runtime_manifest": "assets/players/chronicle-cast/N14/manifest.json",
+      "portrait": {
+        "path": "source/combat-bundle-v1.png",
+        "size": [
+          1254,
+          1254
+        ],
+        "sha256": "fd988df8ef5d9108881b5265ea342bfcafaab04a74cea61692cfcd827e3ddbeb",
+        "bbox": [
+          324,
+          995,
+          606,
+          1247
+        ]
+      },
+      "authored_body_drawings": 16,
+      "independently_drawn_portraits": 1,
+      "exported_clip_frames": {
+        "idle": 4,
+        "move": 4,
+        "attack": 4,
+        "special": 4,
+        "hit_reuse": 2
+      }
+    },
+    {
+      "character_id": "N15",
+      "tool": "built-in image_gen.imagegen",
+      "prompts": [
+        {
+          "path": "design/skill-presentation-20261105/characters/N15/prompt-v1.txt",
+          "sha256": "0ab98aa9196395e821100dfc4663d7e9c5aaf53a8b08557150e740a0888c496d",
+          "text": "Use case: stylized-concept. Asset type: production pixel-art sprite asset bundle for a Chinese historical fantasy action game. Create ONE unique character sheet on genuinely transparent RGBA background. Reference image 1 supplies the character's face, age, main costume identity. Reference image 2 supplies ONLY crisp outlined pixel-art technique, chibi action sprite proportions and readable shaded clusters; DO NOT copy that blue-haired character.\nComposition: 4 columns × 5 rows with generous transparent gutters, regular aligned cells; first FOUR rows contain EXACTLY 16 isolated full-body action frames, all facing screen-right in side-three-quarter game view. Row1 = FOUR subtly DIFFERENT idle poses (breathing, arm/weapon angle and cloth settling); row2 = FOUR clearly DIFFERENT locomotion cycle poses; row3 = FOUR clearly DIFFERENT weapon attack poses (windup, full extension/contact, follow-through, recover); row4 = FOUR clearly DIFFERENT SPECIAL action poses as specified. Row5 contains ONLY ONE separately drawn large head-and-shoulders bust portrait centered in column2; other cells empty. This portrait is freshly drawn with expressive face and shoulders, NOT cropped or enlarged from a body frame. Each body frame consistent design and source scale, complete feet/hooves and complete weapon at all times, no neighboring figures touching. Natural posture variation, no exaggerated squash/stretch. Horizontal weapon fits within its cell. Transparent empty gutters at least 24px. No labels, no text, no cell grid lines, no panels, no ground shadows. Pixel art only, strong dark outlines, small limited palette of muted colors, hard clusters, no gradients or blurry antialiasing. Do not add large external effects or scenery. Output approximately 1536x1536 or tall square format to fit 5 rows.\nCharacter N15: 曹军祭师 / Cao army ritual priest. Elderly stern Chinese man with long silver beard, black formal squared ritual cap with small red knot, orderly dark burgundy ceremonial robe with brass edging over black chest guard, broad cloth sash, small bronze ritual bell in left hand and paper charm in right. Upright military ritual silhouette.\nRow4 special: detonate curse, raise bronze bell overhead and thrust paper charm forward then recoil. Row3 basic attack: draw paper charm back, thrust charm hand forward, release magical projectile gesture, return to stance. Separate talisman or bell remains held in the hand, avoid detached magic or floating particles. Preserve elderly face and beard throughout.\n"
+        }
+      ],
+      "selected_sources": [
+        {
+          "role": "combat",
+          "path": "design/skill-presentation-20261105/characters/N15/source/combat-bundle-v1.png",
+          "sha256": "8820a854ab434858b03c010891e68dc561ecbfb02b5174f3e34c5d81220e9cce",
+          "size": [
+            1254,
+            1254
+          ],
+          "standing_body_height_source_px": 220
+        }
+      ],
+      "production_records": [
+        "design/skill-presentation-20261105/characters/N15/export-manifest.json",
+        "design/skill-presentation-20261105/characters/N15/measurements.json"
+      ],
+      "runtime_manifest": "assets/players/chronicle-cast/N15/manifest.json",
+      "portrait": {
+        "path": "source/combat-bundle-v1.png",
+        "size": [
+          1254,
+          1254
+        ],
+        "sha256": "8820a854ab434858b03c010891e68dc561ecbfb02b5174f3e34c5d81220e9cce",
+        "bbox": [
+          328,
+          1007,
+          614,
+          1245
+        ]
+      },
+      "authored_body_drawings": 16,
+      "independently_drawn_portraits": 1,
+      "exported_clip_frames": {
+        "idle": 4,
+        "move": 4,
+        "attack": 4,
+        "special": 4,
+        "hit_reuse": 2
+      }
+    },
+    {
+      "character_id": "N16",
+      "tool": "built-in image_gen.imagegen",
+      "prompts": [
+        {
+          "path": "design/skill-presentation-20261105/characters/N16/prompt-v1.txt",
+          "sha256": "5d5e3b049889a8b66059990ed7f700f62a7238467a5607f4efd0acc273c4e7f0",
+          "text": "Use case: stylized-concept. Asset type: production pixel-art sprite asset bundle for a Chinese historical fantasy action game. Create ONE unique character sheet on genuinely transparent RGBA background. Reference image 1 supplies the character's face, age, main costume identity. Reference image 2 supplies ONLY crisp outlined pixel-art technique, chibi action sprite proportions and readable shaded clusters; DO NOT copy that blue-haired character.\nComposition: 4 columns × 5 rows with generous transparent gutters, regular aligned cells; first FOUR rows contain EXACTLY 16 isolated full-body action frames, all facing screen-right in side-three-quarter game view. Row1 = FOUR subtly DIFFERENT idle poses (breathing, arm/weapon angle and cloth settling); row2 = FOUR clearly DIFFERENT locomotion cycle poses; row3 = FOUR clearly DIFFERENT weapon attack poses (windup, full extension/contact, follow-through, recover); row4 = FOUR clearly DIFFERENT SPECIAL action poses as specified. Row5 contains ONLY ONE separately drawn large head-and-shoulders bust portrait centered in column2; other cells empty. This portrait is freshly drawn with expressive face and shoulders, NOT cropped or enlarged from a body frame. Each body frame consistent design and source scale, complete feet/hooves and complete weapon at all times, no neighboring figures touching. Natural posture variation, no exaggerated squash/stretch. Horizontal weapon fits within its cell. Transparent empty gutters at least 24px. No labels, no text, no cell grid lines, no panels, no ground shadows. Pixel art only, strong dark outlines, small limited palette of muted colors, hard clusters, no gradients or blurry antialiasing. Do not add large external effects or scenery. Output approximately 1536x1536 or tall square format to fit 5 rows.\nCharacter N16: 行脚郎中 / travelling physician. Kind middle-aged Chinese man with short black beard, blue-grey cloth headwrap and patched blue-grey robe, cream crossing collar, straw sandals, large wicker herb basket on back with green leaves, medicine pouches and bandage roll. Holds a short wooden medicine pestle for modest defensive sweep. Robust approachable healer silhouette.\nRow4 special: emergency aid sequence, reach into herb bag, prepare herb bundle and unfurl white bandage then offer it. Row3 basic attack: defensive sweep with held implement, draw arm back, sweeping contact toward right, follow-through and recover, real changing silhouette and legs. Preserve outfit props and face; two arms and two legs, hands clearly grasp tools.\n"
+        }
+      ],
+      "selected_sources": [
+        {
+          "role": "combat",
+          "path": "design/skill-presentation-20261105/characters/N16/source/combat-bundle-v1.png",
+          "sha256": "71b55347f701cbe188366c890261708768a347f6df2234df1a390e2cf4e6f92b",
+          "size": [
+            1254,
+            1254
+          ],
+          "standing_body_height_source_px": 227
+        }
+      ],
+      "production_records": [
+        "design/skill-presentation-20261105/characters/N16/export-manifest.json",
+        "design/skill-presentation-20261105/characters/N16/measurements.json"
+      ],
+      "runtime_manifest": "assets/players/chronicle-cast/N16/manifest.json",
+      "portrait": {
+        "path": "source/combat-bundle-v1.png",
+        "size": [
+          1254,
+          1254
+        ],
+        "sha256": "71b55347f701cbe188366c890261708768a347f6df2234df1a390e2cf4e6f92b",
+        "bbox": [
+          342,
+          993,
+          615,
+          1240
+        ]
+      },
+      "authored_body_drawings": 16,
+      "independently_drawn_portraits": 1,
+      "exported_clip_frames": {
+        "idle": 4,
+        "move": 4,
+        "attack": 4,
+        "special": 4,
+        "hit_reuse": 2
+      }
+    },
+    {
+      "character_id": "N17",
+      "tool": "built-in image_gen.imagegen",
+      "prompts": [
+        {
+          "path": "design/skill-presentation-20261105/characters/N17/prompt-v1.txt",
+          "sha256": "ca3237e70b8b6a8f7c9ca40af3e23fcb33779a77fba6b9d1cf25b466d26eb8f9",
+          "text": "Use case: stylized-concept. Asset type: production pixel-art sprite asset bundle for a Chinese historical fantasy action game. Create ONE unique character sheet on genuinely transparent RGBA background. Reference image 1 supplies the character's face, age, main costume identity. Reference image 2 supplies ONLY crisp outlined pixel-art technique, chibi action sprite proportions and readable shaded clusters; DO NOT copy that blue-haired character.\nComposition: 4 columns × 5 rows with generous transparent gutters, regular aligned cells; first FOUR rows contain EXACTLY 16 isolated full-body action frames, all facing screen-right in side-three-quarter game view. Row1 = FOUR subtly DIFFERENT idle poses (breathing, arm/weapon angle and cloth settling); row2 = FOUR clearly DIFFERENT locomotion cycle poses; row3 = FOUR clearly DIFFERENT weapon attack poses (windup, full extension/contact, follow-through, recover); row4 = FOUR clearly DIFFERENT SPECIAL action poses as specified. Row5 contains ONLY ONE separately drawn large head-and-shoulders bust portrait centered in column2; other cells empty. This portrait is freshly drawn with expressive face and shoulders, NOT cropped or enlarged from a body frame. Each body frame consistent design and source scale, complete feet/hooves and complete weapon at all times, no neighboring figures touching. Natural posture variation, no exaggerated squash/stretch. Horizontal weapon fits within its cell. Transparent empty gutters at least 24px. No labels, no text, no cell grid lines, no panels, no ground shadows. Pixel art only, strong dark outlines, small limited palette of muted colors, hard clusters, no gradients or blurry antialiasing. Do not add large external effects or scenery. Output approximately 1536x1536 or tall square format to fit 5 rows.\nCharacter N17: 随军伙夫 / army cook. Stocky cheerful middle-aged Chinese man, friendly black moustache and short goatee, cream cook headwrap, brown rolled-sleeve tunic, large cream stained apron, dark trousers, cloth shoes. Holds long wooden soup ladle in right hand and small dark iron cooking pot in left. Recognizable round apron silhouette.\nRow4 special: guard and hot soup sequence, raise round iron pot as shield and stir with wooden ladle then offer steaming bowl; steam small and connected. Row3 basic attack: defensive sweep with held implement, draw arm back, sweeping contact toward right, follow-through and recover, real changing silhouette and legs. Preserve outfit props and face; two arms and two legs, hands clearly grasp tools.\n"
+        }
+      ],
+      "selected_sources": [
+        {
+          "role": "combat",
+          "path": "design/skill-presentation-20261105/characters/N17/source/combat-bundle-v1.png",
+          "sha256": "9cec9197519313699b8f3de6427eb5a566aa32e3da117d89a9c8497c50521bf8",
+          "size": [
+            1254,
+            1254
+          ],
+          "standing_body_height_source_px": 231
+        }
+      ],
+      "production_records": [
+        "design/skill-presentation-20261105/characters/N17/export-manifest.json",
+        "design/skill-presentation-20261105/characters/N17/measurements.json"
+      ],
+      "runtime_manifest": "assets/players/chronicle-cast/N17/manifest.json",
+      "portrait": {
+        "path": "source/combat-bundle-v1.png",
+        "size": [
+          1254,
+          1254
+        ],
+        "sha256": "9cec9197519313699b8f3de6427eb5a566aa32e3da117d89a9c8497c50521bf8",
+        "bbox": [
+          326,
+          997,
+          615,
+          1241
+        ]
+      },
+      "authored_body_drawings": 16,
+      "independently_drawn_portraits": 1,
+      "exported_clip_frames": {
+        "idle": 4,
+        "move": 4,
+        "attack": 4,
+        "special": 4,
+        "hit_reuse": 2
+      }
+    },
+    {
+      "character_id": "N18",
+      "tool": "built-in image_gen.imagegen",
+      "prompts": [
+        {
+          "path": "design/skill-presentation-20261105/characters/N18/prompt-v1.txt",
+          "sha256": "01916e15765afb8c11055d4ea8ef242d5c9a43b788de37fbad5036572f24f06d",
+          "text": "Use case: stylized-concept. Asset type: production pixel-art sprite asset bundle for a Chinese historical fantasy action game. Create ONE unique character sheet on genuinely transparent RGBA background. Reference image 1 supplies the character's face, age, main costume identity. Reference image 2 supplies ONLY crisp outlined pixel-art technique, chibi action sprite proportions and readable shaded clusters; DO NOT copy that blue-haired character.\nComposition: 4 columns × 5 rows with generous transparent gutters, regular aligned cells; first FOUR rows contain EXACTLY 16 isolated full-body action frames, all facing screen-right in side-three-quarter game view. Row1 = FOUR subtly DIFFERENT idle poses (breathing, arm/weapon angle and cloth settling); row2 = FOUR clearly DIFFERENT locomotion cycle poses; row3 = FOUR clearly DIFFERENT weapon attack poses (windup, full extension/contact, follow-through, recover); row4 = FOUR clearly DIFFERENT SPECIAL action poses as specified. Row5 contains ONLY ONE separately drawn large head-and-shoulders bust portrait centered in column2; other cells empty. This portrait is freshly drawn with expressive face and shoulders, NOT cropped or enlarged from a body frame. Each body frame consistent design and source scale, complete feet/hooves and complete weapon at all times, no neighboring figures touching. Natural posture variation, no exaggerated squash/stretch. Horizontal weapon fits within its cell. Transparent empty gutters at least 24px. No labels, no text, no cell grid lines, no panels, no ground shadows. Pixel art only, strong dark outlines, small limited palette of muted colors, hard clusters, no gradients or blurry antialiasing. Do not add large external effects or scenery. Output approximately 1536x1536 or tall square format to fit 5 rows.\nCharacter N18: 军需小吏 / military quartermaster clerk. Middle-aged Chinese man with neat short black beard and blue-grey folded clerk cap, dark indigo short official robe, cream collar, brown leather belt, small brass tally tokens, bamboo ledger held in left hand, short wooden tally baton in right, compact canvas supply satchel on hip. Tidy administrative silhouette, no herbs or basket.\nRow4 special: marching order ward, open bamboo ledger, raise wooden tally baton high, point command and present brass order token. Row3 basic attack: defensive sweep with held implement, draw arm back, sweeping contact toward right, follow-through and recover, real changing silhouette and legs. Preserve outfit props and face; two arms and two legs, hands clearly grasp tools.\n"
+        }
+      ],
+      "selected_sources": [
+        {
+          "role": "combat",
+          "path": "design/skill-presentation-20261105/characters/N18/source/combat-bundle-v1.png",
+          "sha256": "b8e74e39cae7e99cee06f3e2a14d7f950da4fc2dda531c83f05c0c1c3f54661a",
+          "size": [
+            1254,
+            1254
+          ],
+          "standing_body_height_source_px": 231
+        }
+      ],
+      "production_records": [
+        "design/skill-presentation-20261105/characters/N18/export-manifest.json",
+        "design/skill-presentation-20261105/characters/N18/measurements.json"
+      ],
+      "runtime_manifest": "assets/players/chronicle-cast/N18/manifest.json",
+      "portrait": {
+        "path": "source/combat-bundle-v1.png",
+        "size": [
+          1254,
+          1254
+        ],
+        "sha256": "b8e74e39cae7e99cee06f3e2a14d7f950da4fc2dda531c83f05c0c1c3f54661a",
+        "bbox": [
+          350,
+          1003,
+          613,
+          1240
+        ]
+      },
+      "authored_body_drawings": 16,
+      "independently_drawn_portraits": 1,
+      "exported_clip_frames": {
+        "idle": 4,
+        "move": 4,
+        "attack": 4,
+        "special": 4,
+        "hit_reuse": 2
+      }
+    }
+  ]
+}

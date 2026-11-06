@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "scope": "AudioTransport Idle/EOF state handling only. GUI screenshot failure remains under independent trace; this code defect is confirmed, but this report does not claim it as the observed GUI failure's proven root cause.",
+  "behavior": {
+    "IdleState": "Treated as a buffering/underrun condition, not EOF by itself.",
+    "completion_gate": "Static QBuffer must be atEnd and the processed playback frame must reach the PCM end.",
+    "tail_drain": "If source EOF is reached while processed PCM remains, keep the sink and poll every 10 ms until the processed clock reaches the end; then use stop/drain and emit finished.",
+    "UnderrunError": "Recoverable; it does not clear the sink or emit finished.",
+    "other_errors": "OpenError, IOError, FatalError and other unexpected errors remain failure paths and clear the backend."
+  },
+  "unit_cases": {
+    "midstream_idle_not_finished": "PASS: buffer not atEnd; sink remains attached and playing; no finished/error signal.",
+    "midstream_underrun_error_not_finished": "PASS: UnderrunError does not clear sink or emit finished.",
+    "source_eof_processed_tail_pending": "PASS: keep sink during tail; timer observes processed end; then stop/drain and emit exactly once.",
+    "source_eof_processed_at_end": "PASS: true EOF completes and drains.",
+    "fatal_error": "PASS: fatal output error resets backend and reports error.",
+    "stopped_with_underrun_error": "PASS: StoppedState does not retain a silent playing state; it returns to ready, resets the backend, and reports premature stop."
+  },
+  "verification": {
+    "audio_unit_suite": "PASS: 15 passed, 1 opt-in hardware test skipped (latest full audio suite).",
+    "py_compile": "PASS",
+    "live_audio": "PASS: after the completed native trace, the repaired transport passed the opt-in low-volume WHP01K play/pause/resume/seek/natural-finish test with no AudioTransport errors; requested and actual Qt ring buffers were both 9600 bytes (50 ms)."
+  },
+  "evidence": [
+    "audio-unit-tests.log",
+    "audio-buffer-fix-results.json"
+  ],
+  "source": "tools/rhythm_tester/audio.py and tools/rhythm_tester/tests/test_audio.py"
+}

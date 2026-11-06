@@ -1,23 +1,34 @@
 extends Control
+const JIA_APPEARANCE := preload("res://scripts/ui/chronicle/jia_appearance.gd")
 signal presentation_events(events: Array)
+signal music_duck(gain: float)
 ## Scene/animation adapter. No Player, enemy AI, collision bodies, or save dependencies.
 const CAMERA := preload("res://scripts/ui/chronicle/boss_camera.gd")
 const COMBAT_FEEDBACK := preload("res://scripts/ui/chronicle/combat_feedback.gd")
 const GROUND := preload("res://scripts/ui/chronicle/battle_ground.gd")
 const BOSS_FEEDBACK := preload("res://scripts/ui/chronicle/boss_feedback.gd")
 const SETTINGS := preload("res://scripts/shared/settings.gd")
+const ZHANG_LIAO_SUMMONS := preload("res://scripts/ui/chronicle/zhang_liao_summon_presentation.gd")
 const ENEMY_EFFECTS := preload("res://scripts/ui/chronicle/enemy_battle_effects.gd")
 const THREATS := preload("res://scripts/ui/chronicle/enemy_threat_view.gd")
 const ART := preload("res://scripts/ui/chronicle/battle_art.gd")
 const SPACE := preload("res://scripts/battle/battle_space.gd")
+const HURTBOX := preload("res://scripts/battle/player_hurtbox.gd")
 const DIRECTOR := preload("res://scripts/battle/stage_director.gd")
 const JIA_EFFECTS := preload("res://scripts/ui/chronicle/jia_effects.gd")
 const AUTHORED_EFFECTS := preload("res://scripts/ui/chronicle/authored_battle_effects.gd")
+const SPRITE_BOUNDS := preload("res://scripts/ui/chronicle/battle_sprite_bounds.gd")
 var battle: RefCounted
 var stage_id := "B01"
+var jia_appearance := ""
+var actor_appearance := ""
 var actor_anchor: Node2D
 var actor_visual: Node2D
 var actor_kind := ""
+# Hold only the party's last three sheet sets until this battle view is freed.
+# A fresh controller still resets its action/pose on each switch, while shared
+# source textures stay uploaded instead of being evicted with the old actor.
+var actor_frame_assets: Dictionary = {}
 var world_scale := 1.0
 var origin := Vector2.ZERO
 var moving := false
@@ -29,10 +40,12 @@ var foreground: Foreground
 var jia_effects: RefCounted
 var authored_effects: RefCounted
 var last_seen_cast := 0
+var pending_actor_casts: Array[Dictionary] = []
+var actor_effects_seen: Dictionary = {}
 var killed_views: Dictionary = {}
 var death_views: Array[Dictionary] = []
 var released_threats: Array[Dictionary] = []
-var opaque_bounds: Dictionary = {}
+var zhang_liao_summons: RefCounted
 var enemy_effects: RefCounted
 var camera: RefCounted = CAMERA.new()
 var boss_feedback: Node
@@ -40,8 +53,14 @@ var safe_top := 82.0
 var safe_bottom := 150.0
 var presentation_finished := false
 var camera_body_envelopes: Dictionary = {}
+var summon_camera_envelopes: Dictionary = {}
 var ground := GROUND.new()
 var combat_feedback: Node
+# Opt-in benchmark counters; disabled in ordinary play and never consulted by
+# simulation or rendering decisions. The draw callbacks run after refresh().
+var performance_trace_enabled := false
+var performance_counters := {"draw_us":0, "foreground_us":0, "draw_calls":0,
+	"foreground_calls":0, "bounds_readbacks":0, "bounds_readback_us":0}
 
 class Foreground:
 	extends Node2D
@@ -51,11 +70,15 @@ class Foreground:
 
 
 func _ready() -> void:
+	if jia_appearance.is_empty(): jia_appearance = JIA_APPEARANCE.for_node(stage_id)
 	combat_feedback = COMBAT_FEEDBACK.new()
 	add_child(combat_feedback)
+	combat_feedback.audio.music_duck.connect(func(gain: float): music_duck.emit(gain))
 	boss_feedback = BOSS_FEEDBACK.new()
 	add_child(boss_feedback)
 	enemy_effects = ENEMY_EFFECTS.new()
+	zhang_liao_summons = ZHANG_LIAO_SUMMONS.new(enemy_effects)
+	if stage_id == "B17": zhang_liao_summons.warmup()
 	jia_effects = JIA_EFFECTS.new()
 	authored_effects = AUTHORED_EFFECTS.new()
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -86,13 +109,20 @@ func refresh(is_moving: bool) -> void:
 	enemy_effects.sync(battle)
 	actors.process_mode = Node.PROCESS_MODE_DISABLED if battle.paused else Node.PROCESS_MODE_INHERIT
 	var id: String = battle.current().id
-	if id != actor_kind:
+	var appearance := jia_appearance if id == "JIA" else JIA_APPEARANCE.COMMON
+	if id != actor_kind or appearance != actor_appearance:
 		if is_instance_valid(actor_anchor): actors.remove_child(actor_anchor); actor_anchor.queue_free()
-		actor_visual = ART.actor(id).instantiate()
+		actor_visual = ART.actor(id, appearance).instantiate()
 		actor_anchor = Node2D.new()
 		actors.add_child(actor_anchor)
 		actor_anchor.add_child(actor_visual)
 		actor_kind = id
+		actor_appearance = appearance
+		var actor_sprite = actor_visual.get("sprite")
+		if actor_sprite is AnimatedSprite2D:
+			if not actor_frame_assets.has(id) and actor_frame_assets.size() >= 3:
+				actor_frame_assets.erase(actor_frame_assets.keys()[0])
+			actor_frame_assets[id] = actor_sprite.sprite_frames
 		actor_moving = false
 	actor_anchor.position = battle.position
 	if not battle.paused:
@@ -104,6 +134,7 @@ func refresh(is_moving: bool) -> void:
 	actor_visual.modulate = (Color("a8dfeb") if combat_feedback.player_guarded else Color("ffb1a1")) if combat_feedback.player_flash > 0 and not combat_feedback.reduced_flash and combat_feedback.player_id == id else ART.tint(id)
 	var live: Dictionary = {}
 	var newly_bound_boss := false
+	zhang_liao_summons.sync(battle)
 	for enemy in battle.enemies:
 		live[enemy.id] = true
 		if enemy_views.has(enemy.id) and str(enemy_views[enemy.id].node.get_meta("visual_id", "")) != str(enemy.visual_id):
@@ -134,7 +165,7 @@ func refresh(is_moving: bool) -> void:
 		if combat_feedback.contacts.has(enemy.id) and node.has_method("confirm_hit"):
 			var contact: Dictionary = combat_feedback.contacts[enemy.id]
 			if not contact.periodic: node.confirm_hit(battle.director.elapsed, contact.direction, combat_feedback.reduced_flash, combat_feedback.reduced_motion)
-		if node.has_method("present"):
+		if not zhang_liao_summons.present_actor(enemy,node,battle) and node.has_method("present"):
 			var presenter: RefCounted = enemy
 			if not enemy.targetable and enemy.parent_id > 0:
 				for source in battle.enemies:
@@ -143,7 +174,9 @@ func refresh(is_moving: bool) -> void:
 		node.modulate = Color("acd8e9") if enemy.slow_time > 0 else Color.WHITE
 		# Retain ground-based sorting, but reveal the controlled body behind tall enemies.
 		var player_body := Rect2(battle.position + Vector2(-18, -72), Vector2(36, 72))
-		var obscures_player: bool = enemy.position.y > battle.position.y and _body_rect(node, enemy.position).intersects(player_body)
+		var visual_ground: Vector2=enemy.position
+		if not enemy.targetable and enemy.parent_id>0: visual_ground=zhang_liao_summons.presentation_point(enemy)
+		var obscures_player: bool = visual_ground.y > battle.position.y and _body_rect(node, enemy.position).intersects(player_body)
 		node.modulate.a = .42 if obscures_player else .78 if not enemy.targetable else 1.0
 		entry["obscures_player"] = obscures_player
 		entry.position = enemy.position
@@ -190,13 +223,14 @@ func _body_rect(node: Node2D, point: Vector2) -> Rect2:
 		var cell: Vector2i = Vector2i(texture.get_size()) / Vector2i(sprite.hframes, sprite.vframes)
 		region = Rect2i(Vector2i(sprite.frame % sprite.hframes, sprite.frame / sprite.hframes) * cell, cell)
 	if texture == null: return Rect2(point, Vector2.ZERO)
-	var key := str(texture.get_instance_id()) + ":" + str(region)
-	if not opaque_bounds.has(key):
-		var pixels := texture.get_image()
-		if region.has_area(): pixels = pixels.get_region(region)
-		opaque_bounds[key] = pixels.get_used_rect()
+	var previous_readbacks: int = SPRITE_BOUNDS.readbacks if performance_trace_enabled else 0
+	var previous_readback_us: int = SPRITE_BOUNDS.readback_usec if performance_trace_enabled else 0
+	var used: Rect2i = SPRITE_BOUNDS.used_rect(texture, region)
+	if performance_trace_enabled:
+		performance_counters.bounds_readbacks += SPRITE_BOUNDS.readbacks - previous_readbacks
+		performance_counters.bounds_readback_us += SPRITE_BOUNDS.readback_usec - previous_readback_us
 	var dimensions: Vector2 = Vector2(region.size) if region.has_area() else texture.get_size()
-	var bounds := Rect2(opaque_bounds[key])
+	var bounds := Rect2(used)
 	bounds.position += sprite.offset - dimensions * .5
 	if sprite.flip_h: bounds.position.x = -bounds.end.x
 	return Transform2D(0, point) * node.transform * sprite.transform * bounds
@@ -217,6 +251,32 @@ func _sync_camera_body_bounds() -> void:
 		camera_body_envelopes[key] = Rect2(camera_body_envelopes.get(key, relative)).merge(relative)
 		var envelope: Rect2 = camera_body_envelopes[key]
 		camera.visual_bounds[enemy.id] = Rect2(enemy.position + envelope.position, envelope.size)
+
+	# Active B17 collaborators are part of their owner's readable silhouette.
+	# Keep their cast-local pose envelope separate from the ordinary boss form,
+	# so the framing addition disappears when this collaboration is cancelled.
+	var active_summons: Dictionary={}
+	if zhang_liao_summons!=null:
+		for binding: Dictionary in zhang_liao_summons.framing_entries():
+			var owner_id:=int(binding.owner_id)
+			var proxy_id:=int(binding.proxy_id)
+			if not camera.visual_bounds.has(owner_id) or not enemy_views.has(owner_id) or not enemy_views.has(proxy_id): continue
+			var proxy_node: Node2D=enemy_views[proxy_id].node
+			if not proxy_node.visible: continue
+			var owner_point: Vector2=enemy_views[owner_id].position
+			var rect:=_body_rect(proxy_node,enemy_views[proxy_id].position)
+			if not rect.has_area(): continue
+			# The camera origin is finally snapped to pixels; reserve two screen
+			# pixels instead of allowing a fractional edge to cross the HUD.
+			rect=rect.grow(2.0/maxf(.25,world_scale))
+			var relative:=Rect2(rect.position-owner_point,rect.size)
+			var key:=str(binding.key)+":"+str(proxy_id)
+			active_summons[key]=true
+			summon_camera_envelopes[key]=Rect2(summon_camera_envelopes.get(key,relative)).merge(relative)
+			var envelope: Rect2=summon_camera_envelopes[key]
+			camera.visual_bounds[owner_id]=Rect2(camera.visual_bounds[owner_id]).merge(Rect2(owner_point+envelope.position,envelope.size))
+	for key in summon_camera_envelopes.keys():
+		if not active_summons.has(key): summon_camera_envelopes.erase(key)
 
 func advance_presentation(delta: float) -> void:
 	if boss_feedback == null or battle == null: return
@@ -240,6 +300,7 @@ func camera_state() -> Dictionary:
 func _exit_tree() -> void:
 	camera.reset()
 	camera_body_envelopes.clear()
+	summon_camera_envelopes.clear()
 	if boss_feedback != null: boss_feedback.clear()
 	if combat_feedback != null: combat_feedback.clear()
 	_clear_transients()
@@ -252,16 +313,20 @@ func consume_events(events: Array) -> void:
 		if boss_feedback != null: boss_feedback.consume(events)
 	elif boss_feedback != null:
 		boss_feedback.clear()
+	authored_effects.consume(events,battle)
+	for event: Dictionary in events:
+		if str(event.get("kind","")) == "ability_release": _record_actor_cast(event)
 	combat_feedback.consume(events, battle, camera.bounds)
 	enemy_effects.consume(events, battle)
+	zhang_liao_summons.consume(events,battle)
 	for event in events:
 		if event.kind == "kill": killed_views[int(event.id)] = true
 		if event.kind == "enemy_release" and event.has("geometry"):
 			var geometry: Dictionary = event.geometry.duplicate(true)
-			if enemy_views.has(int(event.id)):
+			if enemy_views.has(int(event.id)) and not zhang_liao_summons.owns_event(event):
 				var actor: Node2D = enemy_views[int(event.id)].node
 				if actor.has_method("play_release"): actor.play_release(geometry, battle.director.elapsed)
-			if str(geometry.get("action_id", "")) == "collaboration":
+			if str(geometry.get("action_id", "")) == "collaboration" and not zhang_liao_summons.owns_event(event):
 				for child in battle.enemies:
 					if child.parent_id == int(event.id) and not child.targetable and enemy_views.has(child.id):
 						var apparition: Node2D = enemy_views[child.id].node
@@ -287,20 +352,37 @@ func _clear_transients() -> void:
 	released_threats.clear()
 	killed_views.clear()
 	if combat_feedback != null: combat_feedback.clear()
+	if authored_effects != null: authored_effects.clear()
+	if zhang_liao_summons != null: zhang_liao_summons.clear()
+	summon_camera_envelopes.clear()
+	pending_actor_casts.clear();actor_effects_seen.clear()
+
+func _record_actor_cast(effect: Dictionary) -> void:
+	if not bool(effect.get("direct",false)): return
+	var key := AUTHORED_EFFECTS.SKILL.effect_key(effect)
+	if actor_effects_seen.has(key): return
+	actor_effects_seen[key] = battle.director.elapsed
+	var entry := effect.duplicate(true)
+	if entry.has("effect_kind"): entry.kind = entry.effect_kind
+	pending_actor_casts.append(entry)
+	while pending_actor_casts.size()>16: pending_actor_casts.pop_front()
 
 func _present_casts() -> void:
+	# The event queue survives a long frame that has already aged out .22s effects.
+	for effect: Dictionary in battle.effects:
+		if str(effect.get("kind","")) != "impact": _record_actor_cast(effect)
 	var selected: Dictionary = {}
-	for effect in battle.effects:
-		if effect.kind == "impact": continue
-		if int(effect.get("cast", 0)) <= last_seen_cast: continue
-		if effect.get("source", "") != actor_kind or not effect.get("direct", false): continue
-		if selected.is_empty() or effect.color == "manual": selected = effect
-	last_seen_cast = battle.cast_serial
-	if not selected.is_empty():
-		if actor_visual.has_method("present_cast"):
-			actor_visual.present_cast(selected)
-		elif actor_visual.has_method("play_attack"):
-			actor_visual.play_attack(selected.direction, selected.color == "manual")
+	for effect: Dictionary in pending_actor_casts:
+		if str(effect.get("source","")) != actor_kind: continue
+		if selected.is_empty() or bool(effect.get("manual",str(effect.get("color","")) == "manual")): selected=effect
+	pending_actor_casts.clear()
+	last_seen_cast=battle.cast_serial
+	for key in actor_effects_seen.keys():
+		if battle.director.elapsed-float(actor_effects_seen[key])>4: actor_effects_seen.erase(key)
+	if selected.is_empty(): return
+	selected=AUTHORED_EFFECTS.SKILL.decorated(selected)
+	if actor_visual.has_method("present_cast"): actor_visual.present_cast(selected)
+	elif actor_visual.has_method("play_attack"): actor_visual.play_attack(selected.direction,bool(selected.manual))
 
 func _jia_contact_texture(effect: Dictionary) -> Texture2D:
 	# These strips grow into their brightest contact on frame 1. Damage is already
@@ -340,6 +422,7 @@ func _draw_authored_effect(painter: Node2D, effect: Dictionary) -> void:
 
 func _draw() -> void:
 	if battle == null: return
+	var draw_started := Time.get_ticks_usec() if performance_trace_enabled else 0
 	draw_rect(Rect2(Vector2.ZERO, size), Color("1d2522"))
 	draw_set_transform(origin, 0, Vector2.ONE * world_scale)
 	ground.draw(self, stage_id, origin, world_scale, size)
@@ -357,24 +440,30 @@ func _draw() -> void:
 		draw_colored_polygon(PackedVector2Array([gem.position + Vector2(0,-5), gem.position + Vector2(4,0), gem.position + Vector2(0,5), gem.position + Vector2(-4,0)]), Color("a5d4ce"))
 	for enemy in battle.enemies:
 		var point: Vector2 = enemy.position
-		# Foot marks expose the actual hurt radius independently of tall combat art.
-		if enemy.targetable:
-			draw_arc(point, enemy.radius, 0, TAU, 32, Color("ad8b68", .50), 1, true)
+		# Mark important bodies and the selected target. Hundreds of ordinary
+		# foot circles would compete with enemy bullets and the controlled red dot.
+		if enemy.targetable and (enemy.id == battle.target_id or enemy.rank in ["heavy", "field_elite", "boss"]):
+			draw_arc(point, enemy.radius, 0, TAU, 32, Color("ad8b68", .38), 1, true)
 		if enemy.rank in ["heavy", "field_elite", "boss"]:
 			draw_circle(point, 3, Color("e7ca9b"))
 		if enemy.id == battle.target_id: draw_arc(point, enemy.radius + 4, 0.3, 2.8, 16, Color("e3dcac"), 1.5, true)
 	draw_set_transform(origin, 0, Vector2.ONE * world_scale)
-	draw_arc(battle.position, 20, 0, TAU, 32, Color("e0cf9a"), 2, true)
 	if battle.current().shield > 0: draw_arc(battle.position, 27, 0, TAU, 32, Color("a8c8d0"), 2, true)
+	if performance_trace_enabled:
+		performance_counters.draw_us = Time.get_ticks_usec() - draw_started
+		performance_counters.draw_calls += 1
 
 func draw_foreground(painter: Node2D) -> void:
 	if battle == null: return
+	var draw_started := Time.get_ticks_usec() if performance_trace_enabled else 0
 	painter.draw_set_transform(origin, 0, Vector2.ONE * world_scale)
+	# Projectile simulation and the minimap still include the entire arena. Only
+	# commands whose full artwork cannot touch the viewport are omitted. 96 world
+	# pixels cover the -32 height offset, longest 68px strip and 27px trail; the
+	# extra screen-space allowance covers outlined hostile collision cores.
+	var projectile_view := Rect2(-origin / world_scale, size / world_scale).grow(96.0 + 8.0 / world_scale)
+	zhang_liao_summons.draw(painter,battle,Rect2(-origin/world_scale,size/world_scale))
 	enemy_effects.draw(painter, battle)
-	# The controlled ground marker remains above bodies without changing world y sorting.
-	painter.draw_arc(battle.position, 20, 0, TAU, 32, Color("f1ebbd"), 2, true)
-	painter.draw_line(battle.position + Vector2(-5, 0), battle.position + Vector2(5, 0), Color("f1ebbd"), 2, true)
-	painter.draw_line(battle.position + Vector2(0, -5), battle.position + Vector2(0, 5), Color("f1ebbd"), 2, true)
 	for enemy in battle.enemies:
 		if not enemy.targetable: continue
 		if not _health_bar_visible(enemy): continue
@@ -383,7 +472,8 @@ func draw_foreground(painter: Node2D) -> void:
 		painter.draw_rect(Rect2(pos, Vector2(44, 4)), Color("30352d"))
 		painter.draw_rect(Rect2(pos, Vector2(44 * owner.hp / maxf(1, owner.max_hp), 4)), Color("bc7563"))
 	for p in battle.projectiles:
-		if enemy_effects.draw_projectile(painter, p, battle.director.elapsed, origin, world_scale): continue
+		if p.get("hostile", false): continue
+		if not projectile_view.grow(float(p.get("hit_radius", 5.0))).has_point(p.position): continue
 		if authored_effects.draw_projectile(painter, p, origin, world_scale): continue
 		var color := Color("ed957d") if p.hostile else Color("a9ddff") if not p.context.direct else Color.WHITE
 		var texture: Texture2D = ART.BOLTS[int(battle.director.elapsed * 14) % ART.BOLTS.size()]
@@ -391,18 +481,44 @@ func draw_foreground(painter: Node2D) -> void:
 		painter.draw_texture_rect(texture, Rect2(-16, -8, 32, 16), false, color)
 	for effect in battle.effects:
 		if not AUTHORED_EFFECTS.style(effect).is_empty(): continue
-		_draw_authored_effect(painter, effect)
-	authored_effects.draw(painter, battle, origin, world_scale)
+		# Keep Jia's dedicated contact strips. All roster effects have explicit profiles.
+		if str(effect.get("source","")) == "JIA" or str(effect.get("source","")) == "": _draw_authored_effect(painter, effect)
+	authored_effects.draw(painter, battle, origin, world_scale, get_theme_font("font"))
 	combat_feedback.draw(painter, origin, world_scale, get_theme_font("font"), size)
 	boss_feedback.draw(painter, origin, world_scale, SETTINGS.comfort_enabled("reduced_motion"), SETTINGS.comfort_enabled("reduced_flash"))
 	painter.draw_set_transform(origin, 0, Vector2.ONE * world_scale)
 	# Persistent threats render over every body, so even the final Boss cannot conceal them.
-	for descriptor in battle.hazards:
-		if str(descriptor.get("phase", "active")) != "tell": THREATS.draw(painter, descriptor, true)
-	for descriptor in battle.telegraphs: THREATS.draw(painter, descriptor)
-	for descriptor in released_threats: THREATS.draw(painter, descriptor, true)
-	for enemy in battle.enemies: _draw_enemy_state(painter, enemy)
+	if battle.outcome.is_empty():
+		for descriptor in battle.hazards:
+			if str(descriptor.get("phase", "active")) != "tell": THREATS.draw(painter, descriptor, true, world_scale)
+		for descriptor in battle.telegraphs: THREATS.draw(painter, descriptor, false, world_scale)
+		for descriptor in released_threats: THREATS.draw(painter, descriptor, true, world_scale)
+		for enemy in battle.enemies: _draw_enemy_state(painter, enemy)
+		# Hostile cores stay above friendly effects and translucent warning interiors.
+		# Their real positions and radii remain visible in overlapping attack patterns.
+		for projectile in battle.projectiles:
+			if not projectile.get("hostile", false): continue
+			if not projectile_view.grow(float(projectile.get("hit_radius", 5.0))).has_point(projectile.position): continue
+			enemy_effects.draw_projectile(painter, projectile, battle.director.elapsed, origin, world_scale)
 	_draw_minimap(painter)
+	_draw_controlled_hurtbox(painter)
+	if performance_trace_enabled:
+		performance_counters.foreground_us = Time.get_ticks_usec() - draw_started
+		performance_counters.foreground_calls += 1
+
+func controlled_hurtbox() -> Dictionary:
+	# Shared with hostile collision. White/dark contrast rims are presentation,
+	# while the red filled circle alone is the exact damage-receiving area.
+	return {"center":HURTBOX.center(battle.position), "radius":HURTBOX.RADIUS, "visible":battle.outcome.is_empty()}
+
+func _draw_controlled_hurtbox(painter: Node2D) -> void:
+	var hit := controlled_hurtbox()
+	if not hit.visible: return
+	painter.draw_set_transform(origin, 0, Vector2.ONE * world_scale)
+	var rim := .85 / maxf(.25, world_scale)
+	painter.draw_circle(hit.center, hit.radius + rim * 2, Color("1a0d17"))
+	painter.draw_circle(hit.center, hit.radius + rim, Color("fff4e9"))
+	painter.draw_circle(hit.center, hit.radius, Color("ff294a"))
 
 func _health_bar_visible(enemy: RefCounted) -> bool:
 	if enemy.rank in ["boss", "field_elite"] or enemy.kind in ["boss", "card_elite", "equipment_elite"]: return true

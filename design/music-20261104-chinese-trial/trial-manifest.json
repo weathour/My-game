@@ -1,0 +1,228 @@
+{
+  "schema_version": 1,
+  "status": "complete_technical_checks_passed_listening_pending",
+  "date": "2026-11-04",
+  "scope": "three_complete_song_offline_chinese_instrument_and_constrained_mode_trials",
+  "selected": [
+    {
+      "index": 1,
+      "cue_id": "midi_test_01",
+      "title": "The Beautiful People",
+      "frozen_midi": "/home/weathour/programs/desktop-projects/My-game/design/music-20261103-midi-test/inputs/midi_test_01.mid",
+      "source_sha256": "3bf77b5352dd8020628d9a7f2c5cb7a2ea53b015dc610b3ae14c9b18234e5cc8",
+      "original_comparison_report": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/扒谱试验/MuScriptor-large/全部完整伴奏_全曲对照/01 - The Beautiful People/comparison-report.json",
+      "baseline_C_flac": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/扒谱试验/MuScriptor-large/全部完整伴奏_全曲对照/01 - The Beautiful People/C - 游戏音色.flac",
+      "baseline_C_mp3": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/扒谱试验/MuScriptor-large/全部完整伴奏_全曲对照/01 - The Beautiful People/C - 游戏音色.mp3"
+    },
+    {
+      "index": 4,
+      "cue_id": "midi_test_04",
+      "title": "Disposable Teens",
+      "frozen_midi": "/home/weathour/programs/desktop-projects/My-game/design/music-20261103-midi-test/inputs/midi_test_04.mid",
+      "source_sha256": "6d36cfc0c0cd15d69a43ea892220c09e24966acf7e22952b6a275f5b725eb4fb",
+      "original_comparison_report": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/扒谱试验/MuScriptor-large/全部完整伴奏_全曲对照/04 - Disposable Teens/comparison-report.json",
+      "baseline_C_flac": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/扒谱试验/MuScriptor-large/全部完整伴奏_全曲对照/04 - Disposable Teens/C - 游戏音色.flac",
+      "baseline_C_mp3": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/扒谱试验/MuScriptor-large/全部完整伴奏_全曲对照/04 - Disposable Teens/C - 游戏音色.mp3"
+    },
+    {
+      "index": 8,
+      "cue_id": "midi_test_08",
+      "title": "Man That You Fear",
+      "frozen_midi": "/home/weathour/programs/desktop-projects/My-game/design/music-20261103-midi-test/inputs/midi_test_08.mid",
+      "source_sha256": "419c590d01212e338488c8f6d34053bc4f4b5684ea293a642e918fe991cfa40b",
+      "original_comparison_report": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/扒谱试验/MuScriptor-large/全部完整伴奏_全曲对照/08 - Man That You Fear/comparison-report.json",
+      "baseline_C_flac": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/扒谱试验/MuScriptor-large/全部完整伴奏_全曲对照/08 - Man That You Fear/C - 游戏音色.flac",
+      "baseline_C_mp3": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/扒谱试验/MuScriptor-large/全部完整伴奏_全曲对照/08 - Man That You Fear/C - 游戏音色.mp3"
+    }
+  ],
+  "variants": {
+    "C": "current game-timbre reference copied and loudness-matched for this trial",
+    "D1": "Chinese instrument reassignment; source note pitch/timing/velocity/tempo unchanged",
+    "D2": "same assignment and rendering as D1, with bounded Chinese-part melodic-core pitch changes"
+  },
+  "frozen_source_events_preserved_in_D1": true,
+  "D2_preserves_note_count_timing_velocity_drums_and_tempos": true,
+  "existing_game_audio_routing_changes": false,
+  "sample_source_lock": "sources/lock.json",
+  "musical_input_baseline": "baseline.json",
+  "output_root": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐首轮_20261104",
+  "requirements": {
+    "complete_songs": 3,
+    "new_full_renders": 6,
+    "matched_C_copies": 3,
+    "formats": [
+      "FLAC_24bit_48k_stereo",
+      "MP3_320kbps"
+    ],
+    "loudness": "one common achievable target within each C/D1/D2 group; fixed gain",
+    "source_samples_are_not_redistributed": true,
+    "manual_listening_approval": false
+  },
+  "full_song_outputs": [
+    {
+      "cue_id": "midi_test_01",
+      "variant": "C",
+      "format": "flac",
+      "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐首轮_20261104/01 - The Beautiful People/C - 现游戏音色_响度匹配.flac",
+      "sha256": "38a14773504c2157535b18996bbceb8dc9da7861cb8a13efc654c3f68a5c3599"
+    },
+    {
+      "cue_id": "midi_test_01",
+      "variant": "C",
+      "format": "mp3",
+      "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐首轮_20261104/01 - The Beautiful People/C - 现游戏音色_响度匹配.mp3",
+      "sha256": "e4b59c43030d1bc884e8323f09b0d7554aaa8a4787a67caec377a6eed3d813ab"
+    },
+    {
+      "cue_id": "midi_test_01",
+      "variant": "D1",
+      "format": "flac",
+      "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐首轮_20261104/01 - The Beautiful People/D1 - 中国器乐_原音高.flac",
+      "sha256": "13421f29c47e7059f3e9ce9c729ad861704b0081c2dd204d98ba49174a11db1c"
+    },
+    {
+      "cue_id": "midi_test_01",
+      "variant": "D1",
+      "format": "mp3",
+      "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐首轮_20261104/01 - The Beautiful People/D1 - 中国器乐_原音高.mp3",
+      "sha256": "3ba560e3cb1ed30c16fe4f69c9d83f7aa494df64e17a253575627a1ab2e8c7b1"
+    },
+    {
+      "cue_id": "midi_test_01",
+      "variant": "D2",
+      "format": "flac",
+      "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐首轮_20261104/01 - The Beautiful People/D2 - 中国器乐_有限调式.flac",
+      "sha256": "f0a57daf357781ce30c0dd0fe78769687fde91438b0b2fc673f64211def0b022"
+    },
+    {
+      "cue_id": "midi_test_01",
+      "variant": "D2",
+      "format": "mp3",
+      "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐首轮_20261104/01 - The Beautiful People/D2 - 中国器乐_有限调式.mp3",
+      "sha256": "1f9abc767164f25b41eb28d8a2ef15b763a91a838e082d283b48825783911ca5"
+    },
+    {
+      "cue_id": "midi_test_04",
+      "variant": "C",
+      "format": "flac",
+      "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐首轮_20261104/04 - Disposable Teens/C - 现游戏音色_响度匹配.flac",
+      "sha256": "8f11e1ed0c7d971a9147a92eeb373a6441feaf665cd59a3a7b932b259f2782bd"
+    },
+    {
+      "cue_id": "midi_test_04",
+      "variant": "C",
+      "format": "mp3",
+      "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐首轮_20261104/04 - Disposable Teens/C - 现游戏音色_响度匹配.mp3",
+      "sha256": "c4f39f49c856c780fd1d8d319c14ad5f9d202e6ce70e8415152f2bc5fe4a9018"
+    },
+    {
+      "cue_id": "midi_test_04",
+      "variant": "D1",
+      "format": "flac",
+      "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐首轮_20261104/04 - Disposable Teens/D1 - 中国器乐_原音高.flac",
+      "sha256": "d36bcd13a38be37709e7a15c940f47ca2315f34d297c9bcc5866b4374baffadb"
+    },
+    {
+      "cue_id": "midi_test_04",
+      "variant": "D1",
+      "format": "mp3",
+      "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐首轮_20261104/04 - Disposable Teens/D1 - 中国器乐_原音高.mp3",
+      "sha256": "0da7518ef390c97f77c9c311bb47d17a90983add2888bb0be8b4eb95b677b769"
+    },
+    {
+      "cue_id": "midi_test_04",
+      "variant": "D2",
+      "format": "flac",
+      "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐首轮_20261104/04 - Disposable Teens/D2 - 中国器乐_有限调式.flac",
+      "sha256": "d27f6d6c07ae5fbd4fe37e1f68dc0f3fb8f41b68c57af4a22f41a9834057d82f"
+    },
+    {
+      "cue_id": "midi_test_04",
+      "variant": "D2",
+      "format": "mp3",
+      "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐首轮_20261104/04 - Disposable Teens/D2 - 中国器乐_有限调式.mp3",
+      "sha256": "705440718a48bc96af7425bfd2295ee33476ed74971323ca91ee893d9e39ed93"
+    },
+    {
+      "cue_id": "midi_test_08",
+      "variant": "C",
+      "format": "flac",
+      "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐首轮_20261104/08 - Man That You Fear/C - 现游戏音色_响度匹配.flac",
+      "sha256": "b65440c48481522f73630b32b9ca6e6407685f3bd3256e353dda75af531e1bf4"
+    },
+    {
+      "cue_id": "midi_test_08",
+      "variant": "C",
+      "format": "mp3",
+      "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐首轮_20261104/08 - Man That You Fear/C - 现游戏音色_响度匹配.mp3",
+      "sha256": "6ae18498fe9626e4fcfd497fa411f7c7d5883c0a70f96f04c580c4d39219ac4a"
+    },
+    {
+      "cue_id": "midi_test_08",
+      "variant": "D1",
+      "format": "flac",
+      "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐首轮_20261104/08 - Man That You Fear/D1 - 中国器乐_原音高.flac",
+      "sha256": "cf694e1cb8a2001ac6fc724d850473a2cdf8466b02aaf7eb4dc711636ad69a88"
+    },
+    {
+      "cue_id": "midi_test_08",
+      "variant": "D1",
+      "format": "mp3",
+      "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐首轮_20261104/08 - Man That You Fear/D1 - 中国器乐_原音高.mp3",
+      "sha256": "c84b41e44e89f6cb6df59fd8ee0ef32a1153db48bf5d360e758b0491952e07bf"
+    },
+    {
+      "cue_id": "midi_test_08",
+      "variant": "D2",
+      "format": "flac",
+      "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐首轮_20261104/08 - Man That You Fear/D2 - 中国器乐_有限调式.flac",
+      "sha256": "2cfeeaab26a524806c5a55a72c33156aebdeff7f86731f528130cb92d3b990b0"
+    },
+    {
+      "cue_id": "midi_test_08",
+      "variant": "D2",
+      "format": "mp3",
+      "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐首轮_20261104/08 - Man That You Fear/D2 - 中国器乐_有限调式.mp3",
+      "sha256": "3a414a521a5a4edea14ac252e98ad3793bd871d1e118cbe08c85e49505d10d72"
+    }
+  ],
+  "summary": [
+    {
+      "index": 1,
+      "title": "The Beautiful People",
+      "duration_seconds": 221.764625,
+      "common_full_song_lufs": -20.810000000000002,
+      "Chinese_families": [
+        "pipa",
+        "ruan"
+      ],
+      "D2_changed_note_count": 100
+    },
+    {
+      "index": 4,
+      "title": "Disposable Teens",
+      "duration_seconds": 189.823125,
+      "common_full_song_lufs": -19.46,
+      "Chinese_families": [
+        "pipa",
+        "ruan"
+      ],
+      "D2_changed_note_count": 19
+    },
+    {
+      "index": 8,
+      "title": "Man That You Fear",
+      "duration_seconds": 291.95908333333335,
+      "common_full_song_lufs": -24.81,
+      "Chinese_families": [
+        "erhu",
+        "zheng"
+      ],
+      "D2_changed_note_count": 83
+    }
+  ],
+  "comparisons_report": "reports/comparisons.json",
+  "manual_listening_approval": false,
+  "completion_verification": "completion-verification.json",
+  "project_check_report": "verification/project-check-report.json"
+}

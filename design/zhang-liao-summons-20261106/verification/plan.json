@@ -1,0 +1,171 @@
+{
+  "updated_at": 1793954903.662535,
+  "status": "complete_after_guarded_recovery",
+  "owners": {
+    "verification": "/root/validation_recovery",
+    "runtime": "/root/category_audio_runtime",
+    "art": "/root/named_combat_art",
+    "reference_and_approval": "/root",
+    "docs": "/root/d2_delivery_docs"
+  },
+  "before_pack": "before-inputs.json",
+  "before_attempts": [
+    {
+      "metadata": "before-initial-run.json",
+      "status": "failed",
+      "reason": "45-frame wide orbit did not reach second collaboration in either form"
+    },
+    {
+      "metadata": "before-calibration2-run.json",
+      "status": "failed_calibration",
+      "reason": "12-frame orbit and real collaboration start reached Chen only in human form"
+    }
+  ],
+  "approved_bounded_fix": "4 explicit human/war x Gao/Chen scenes, 750 frames each; each form totals1500; actual collaboration_index0/1 and initial attack_index2; all production action definitions and subsequent AI retained",
+  "fixture_files": [
+    "b17_dense_bench.gd",
+    "live_performance_base.gd"
+  ],
+  "benchmark_required": [
+    "matching fixture bytes before/after",
+    "source-outside empty-cwd same-pack runtime dependencies only",
+    "same seed2026110617 movement/skills/switch input",
+    "true requested B17 forms and corresponding actual proxies",
+    "tell/release/recovery in every case and hazard_release in Chen cases",
+    "every-frame simulation SHA and complete event-stream SHA equal",
+    "p95/full+warm frame wall and >33.33/>50 counts",
+    "population maxima and logical event counts equal"
+  ],
+  "runtime_api": {
+    "module": "scripts/ui/chronicle/zhang_liao_summon_presentation.gd",
+    "canvas_member": "zhang_liao_summons",
+    "methods": [
+      "warmup",
+      "consume(events,battle)",
+      "sync(battle)",
+      "present_actor(enemy,node,battle)",
+      "draw(painter,battle,visible)",
+      "clear(reset_hidden=false)",
+      "snapshot"
+    ],
+    "snapshot_fields": [
+      "clock",
+      "active_count",
+      "seen_count",
+      "resource_count",
+      "hidden_count",
+      "entries(owner_id,form_index,action_serial,collaborator,proxy_id,phase,start,elapsed,total_duration,release_time,impact_time,last_impact,source_frame,proxy_frame,pulse_count,missing_clip)",
+      "entries[].effect_frames(role,marker,frame,impact_time)"
+    ],
+    "phases": [
+      "order",
+      "manifest",
+      "advance",
+      "unfurl",
+      "array_tell",
+      "impact",
+      "recover",
+      "vanish"
+    ],
+    "caps": {
+      "entries": 4,
+      "seen": 256,
+      "pulses_per_entry": 4
+    },
+    "actor_api": "present_summon_frame(clip,frame,direction,alpha,offset,elapsed)->bool",
+    "qa_draw_trace": "trace_draws=false by default; when true, snapshot.last_drawn_effects records actual painter role/marker/frame/clock/position/world_size/texture_id/path/alpha"
+  },
+  "art_contract_reported": {
+    "manifest": "assets/enemies/baimen/zhang_liao_summons/manifest.json",
+    "flat_strips": true,
+    "frame_size": [
+      768,
+      640
+    ],
+    "anchor": [
+      384,
+      608
+    ],
+    "body_height": 224,
+    "faces_left": false,
+    "boss_frames": 6,
+    "gaoshun_frames": 8,
+    "chengong_frames": 10,
+    "boss_contact": 3,
+    "gaoshun_contact": 4,
+    "chengong_release": 5,
+    "chengong_contact": 7,
+    "art_freeze_received": true,
+    "effects": {
+      "flat_clip_keys": [
+        "FX:gaoshun_entry",
+        "FX:chengong_seal"
+      ],
+      "frame_size": [
+        512,
+        512
+      ],
+      "frames_each": 8,
+      "entry_anchor": [
+        256,
+        480
+      ],
+      "seal_anchor": [
+        256,
+        256
+      ],
+      "entry_release_contact": [
+        4,
+        4
+      ],
+      "seal_release_contact": [
+        4,
+        5
+      ],
+      "world_size_each": [
+        260,
+        260
+      ],
+      "binary_alpha": true,
+      "independent_total_palette_max": 64
+    },
+    "M04_WAR_body_core": "224px crown-to-main-garment core, excluding outer giant scroll; lowest suspended scroll defines virtual ground; pending final measurement coordinates"
+  },
+  "targeted_pending": [
+    "independent simulation and geometry oracle for four cases",
+    "new presenter detached snapshot/cache/serial/limits tests",
+    "pause/sameclock/in-place stale events/phase/death/end/reentry cleanup",
+    "actual native every-frame whole-action playback at960/1280/1920 + comfort settings",
+    "runtime captured animation GIF/video, explicitly labeled capture composition",
+    "independent pixels/palette/anchor/scale and metadata consistency checks"
+  ],
+  "full_suite": "not started; wait root code/art freeze; new fresh durable normal check, expected63+new tests; preserve strict logs/hash and extra same-PCK source-outside verification",
+  "authoritative_before": "before-audit.json",
+  "new_test_scripts": [
+    "scripts/tests/zhang_liao_summon_smoke.gd",
+    "scripts/tests/zhang_liao_summon_render_smoke.gd"
+  ],
+  "test_check_only": {
+    "both_exit_zero": true,
+    "art_execution": false,
+    "native_execution": false
+  },
+  "read_only_art_checker": "scripts/tests/check_zhang_liao_summon_art.py",
+  "art_checker_harness_integration": "root approved one Python line after targeted checker passes",
+  "targeted_completed": {
+    "art": "art-audit.json",
+    "source_core_body224": "independent-body-calibration.json",
+    "core_fresh_checks": 4164,
+    "core_logs": [
+      "core-smoke.log",
+      "core-teardown-repeat.log"
+    ],
+    "initial_core_shutdown_error_preserved": "core-resource-leak-initial.log",
+    "native_failed_diagnostic": "native-attempt1-audit.json"
+  },
+  "completed_at": 1793962561.777446,
+  "current_result": "result.json",
+  "final_audit": "final-project-check-audit.json",
+  "pending_actions": [],
+  "gpu_released": true
+}

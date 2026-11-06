@@ -1,0 +1,541 @@
+{
+  "index": 4,
+  "title": "Disposable Teens",
+  "status": "PASS",
+  "source_sha256": "6d36cfc0c0cd15d69a43ea892220c09e24966acf7e22952b6a275f5b725eb4fb",
+  "offset_seconds": 0.4478,
+  "duration_seconds": 189.823125,
+  "sample_rate": 48000,
+  "chinese_soundfont": "/home/weathour/.cache/my-game/chinese-instruments-20261104/DSK_Asian_DreamZ/DSK Asian DreamZ.SF2",
+  "soundfont_sha256": "e61d0f590db00434fa1a904ab210fdf4439fef13617d89d33eacc8edfc403e5e",
+  "chinese_source_claim": "Publisher-named sample-based patches; original recording chain not independently verified",
+  "variants": {
+    "D1": {
+      "plan_sha256": "1ea7c0f0129fa6ab095b7b1faaa1eb19067897fd7b9a53d5e452723706c135a2",
+      "families": {
+        "bass": {
+          "event_count": 730,
+          "peak": 0.1875859797000885,
+          "rms": 0.02320171555278529,
+          "mapping_audit": []
+        },
+        "electric_guitar": {
+          "event_count": 1500,
+          "peak": 0.16971144080162048,
+          "rms": 0.023923419388895348,
+          "mapping_audit": []
+        },
+        "pipa": {
+          "event_count": 508,
+          "peak": 0.31135234236717224,
+          "rms": 0.054298385019525094,
+          "mapping_audit": [],
+          "sf2_region_loop_modes": {
+            "0": 10
+          },
+          "nonloop_sample_duration_exceeded_count": 0,
+          "nonloop_sample_duration_exceeded_examples": [],
+          "natural_decay_policy": "SF2 native envelopes and loop flags unchanged; nonloop source may decay before noteoff",
+          "max_actual_sample_transposition_semitones": 2,
+          "actual_sample_transposition_range": [
+            -1,
+            2
+          ],
+          "bank": 0,
+          "program_zero_based": 0,
+          "recorded_root_span": [
+            57,
+            91
+          ],
+          "outside_recorded_root_span_count": 0,
+          "beyond_four_semitone_extension_count": 0,
+          "missing_sf2_zone_event_count": 0,
+          "pitch_range": [
+            57,
+            80
+          ]
+        },
+        "ruan": {
+          "event_count": 108,
+          "peak": 0.2766595780849457,
+          "rms": 0.0306180955720933,
+          "mapping_audit": [],
+          "sf2_region_loop_modes": {
+            "0": 8
+          },
+          "nonloop_sample_duration_exceeded_count": 0,
+          "nonloop_sample_duration_exceeded_examples": [],
+          "natural_decay_policy": "SF2 native envelopes and loop flags unchanged; nonloop source may decay before noteoff",
+          "max_actual_sample_transposition_semitones": 2,
+          "actual_sample_transposition_range": [
+            -2,
+            1
+          ],
+          "bank": 0,
+          "program_zero_based": 2,
+          "recorded_root_span": [
+            50,
+            79
+          ],
+          "outside_recorded_root_span_count": 14,
+          "beyond_four_semitone_extension_count": 0,
+          "missing_sf2_zone_event_count": 0,
+          "pitch_range": [
+            48,
+            55
+          ]
+        }
+      },
+      "stems": [
+        {
+          "path": "/home/weathour/programs/desktop-projects/My-game/design/music-20261103-midi-test/trials/04_non_drum/drums.wav",
+          "sha256": "6961448ff790a48bfbf10ee6810514f71f7ce83f714be5e74b12059828e4d7ef",
+          "reuse": "unchanged original drums"
+        },
+        {
+          "path": "/home/weathour/programs/desktop-projects/My-game/design/music-20261103-midi-test/trials/04_non_drum/drum_fallback.wav",
+          "sha256": "f6632bbbd86fbcc2847098bc169323091d9b2ea7a5c75bed643dd11277535855",
+          "reuse": "unchanged original drums"
+        },
+        {
+          "path": "/home/weathour/.cache/my-game/chinese-trial-render-20261104/midi_test_04/D1/bass.wav",
+          "sha256": "6201ab3870ec0f49447106c85af9cdcda084d8d49b765a1befd55e713768490e"
+        },
+        {
+          "path": "/home/weathour/.cache/my-game/chinese-trial-render-20261104/midi_test_04/D1/electric_guitar.wav",
+          "sha256": "8ff0004863407ac085cf359efac5de8692293d7c14e59a4e9d3257381fe826a8"
+        },
+        {
+          "path": "/home/weathour/.cache/my-game/chinese-trial-render-20261104/midi_test_04/D1/pipa.wav",
+          "sha256": "5298bad4d8f8d6edb173ced15a738560c7e1994475ece1142ec1eda3ea5fa873"
+        },
+        {
+          "path": "/home/weathour/.cache/my-game/chinese-trial-render-20261104/midi_test_04/D1/ruan.wav",
+          "sha256": "5b1cf249502ed8c6c4b2d8f2695cae33c952463f1d786893516140d11071a4b3"
+        }
+      ],
+      "chinese_shared_gain": 0.22107661403778983,
+      "chinese_to_backbone_rms_db": -9.000000005717968,
+      "full_event_count": 4337,
+      "drum_event_count": 1491,
+      "event_coverage": "Every pitched plan event appears in exactly one family; drums reuse unchanged kit/fallback stems; no doubled old guitar track."
+    },
+    "D2": {
+      "plan_sha256": "32f0090281d3d2f3e519c751fe4216656021c24c1fc184ada09f1a90d0d3ca31",
+      "families": {
+        "bass": {
+          "event_count": 730,
+          "peak": 0.1875859797000885,
+          "rms": 0.02320171555278529,
+          "mapping_audit": []
+        },
+        "electric_guitar": {
+          "event_count": 1500,
+          "peak": 0.16971144080162048,
+          "rms": 0.023923419388895348,
+          "mapping_audit": []
+        },
+        "pipa": {
+          "event_count": 508,
+          "peak": 0.31141215562820435,
+          "rms": 0.054101490983257804,
+          "mapping_audit": [],
+          "sf2_region_loop_modes": {
+            "0": 10
+          },
+          "nonloop_sample_duration_exceeded_count": 0,
+          "nonloop_sample_duration_exceeded_examples": [],
+          "natural_decay_policy": "SF2 native envelopes and loop flags unchanged; nonloop source may decay before noteoff",
+          "max_actual_sample_transposition_semitones": 2,
+          "actual_sample_transposition_range": [
+            -2,
+            2
+          ],
+          "bank": 0,
+          "program_zero_based": 0,
+          "recorded_root_span": [
+            57,
+            91
+          ],
+          "outside_recorded_root_span_count": 0,
+          "beyond_four_semitone_extension_count": 0,
+          "missing_sf2_zone_event_count": 0,
+          "pitch_range": [
+            57,
+            81
+          ]
+        },
+        "ruan": {
+          "event_count": 108,
+          "peak": 0.2766595780849457,
+          "rms": 0.0306180955720933,
+          "mapping_audit": [],
+          "sf2_region_loop_modes": {
+            "0": 8
+          },
+          "nonloop_sample_duration_exceeded_count": 0,
+          "nonloop_sample_duration_exceeded_examples": [],
+          "natural_decay_policy": "SF2 native envelopes and loop flags unchanged; nonloop source may decay before noteoff",
+          "max_actual_sample_transposition_semitones": 2,
+          "actual_sample_transposition_range": [
+            -2,
+            1
+          ],
+          "bank": 0,
+          "program_zero_based": 2,
+          "recorded_root_span": [
+            50,
+            79
+          ],
+          "outside_recorded_root_span_count": 14,
+          "beyond_four_semitone_extension_count": 0,
+          "missing_sf2_zone_event_count": 0,
+          "pitch_range": [
+            48,
+            55
+          ]
+        }
+      },
+      "stems": [
+        {
+          "path": "/home/weathour/programs/desktop-projects/My-game/design/music-20261103-midi-test/trials/04_non_drum/drums.wav",
+          "sha256": "6961448ff790a48bfbf10ee6810514f71f7ce83f714be5e74b12059828e4d7ef",
+          "reuse": "unchanged original drums"
+        },
+        {
+          "path": "/home/weathour/programs/desktop-projects/My-game/design/music-20261103-midi-test/trials/04_non_drum/drum_fallback.wav",
+          "sha256": "f6632bbbd86fbcc2847098bc169323091d9b2ea7a5c75bed643dd11277535855",
+          "reuse": "unchanged original drums"
+        },
+        {
+          "path": "/home/weathour/.cache/my-game/chinese-trial-render-20261104/midi_test_04/D2/bass.wav",
+          "sha256": "6201ab3870ec0f49447106c85af9cdcda084d8d49b765a1befd55e713768490e"
+        },
+        {
+          "path": "/home/weathour/.cache/my-game/chinese-trial-render-20261104/midi_test_04/D2/electric_guitar.wav",
+          "sha256": "8ff0004863407ac085cf359efac5de8692293d7c14e59a4e9d3257381fe826a8"
+        },
+        {
+          "path": "/home/weathour/.cache/my-game/chinese-trial-render-20261104/midi_test_04/D2/pipa.wav",
+          "sha256": "de8a0873fc97a65d9a75810ce2d745d6e3770c8799ecd94bb9369ecbaadf7150"
+        },
+        {
+          "path": "/home/weathour/.cache/my-game/chinese-trial-render-20261104/midi_test_04/D2/ruan.wav",
+          "sha256": "5b1cf249502ed8c6c4b2d8f2695cae33c952463f1d786893516140d11071a4b3"
+        }
+      ],
+      "chinese_shared_gain": 0.22107661403778983,
+      "chinese_to_backbone_rms_db": -9.023926717390614,
+      "full_event_count": 4337,
+      "drum_event_count": 1491,
+      "event_coverage": "Every pitched plan event appears in exactly one family; drums reuse unchanged kit/fallback stems; no doubled old guitar track."
+    }
+  },
+  "processing": {
+    "fluidsynth_gain": 0.7,
+    "reverb": false,
+    "chorus": false,
+    "sample_rate": 48000,
+    "polyphony": 256,
+    "note_timing": "source ticks and tempo map unchanged; FluidSynth playback scheduling",
+    "backbone": "pinned existing sample renderer and amp processing",
+    "chinese_gain": "D1 aggregate RMS -9 dB relative to backbone, fixed and shared with D2",
+    "bus": "no compression or limiting; fixed gain only",
+    "backbone_amp_scope": "Each source track rendered and amp-processed independently before summing family; source track note ordering retained.",
+    "fluidsynth_unused_channel_warning": "SF2 has no GM drum preset for unused channel 9; render-only MIDI only uses non-drum channels. No voice-allocation or note-drop warnings.",
+    "native_sf2_decay": "Preserve SF2 native loop and envelope flags; PIPA/LUAN are nonlooping, ERHU/GUZHEN loop natively. No extra notes or synthetic tremolo."
+  },
+  "common_target_lufs": -19.46,
+  "pre_gain_measurements": {
+    "D1": {
+      "input_i": "-25.32",
+      "input_tp": "-9.36",
+      "input_lra": "2.20",
+      "input_thresh": "-35.34",
+      "output_i": "-18.18",
+      "output_tp": "-2.24",
+      "output_lra": "4.20",
+      "output_thresh": "-28.23",
+      "normalization_type": "dynamic",
+      "target_offset": "0.18"
+    },
+    "D2": {
+      "input_i": "-25.32",
+      "input_tp": "-9.36",
+      "input_lra": "2.20",
+      "input_thresh": "-35.34",
+      "output_i": "-18.18",
+      "output_tp": "-2.24",
+      "output_lra": "4.20",
+      "output_thresh": "-28.23",
+      "normalization_type": "dynamic",
+      "target_offset": "0.18"
+    },
+    "C": {
+      "input_i": "-18.00",
+      "input_tp": "-2.22",
+      "input_lra": "2.20",
+      "input_thresh": "-28.03",
+      "output_i": "-17.94",
+      "output_tp": "-2.00",
+      "output_lra": "2.20",
+      "output_thresh": "-27.98",
+      "normalization_type": "dynamic",
+      "target_offset": "-0.06"
+    }
+  },
+  "outputs": {
+    "C": {
+      "fixed_gain_db": -1.4600000000000009,
+      "encoded_from": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/扒谱试验/MuScriptor-large/全部完整伴奏_全曲对照/04 - Disposable Teens/C - 游戏音色.flac",
+      "encoded_from_sha256": "6d10900964a3aef0abce0d849351f00dd24b6fab60a1abdede146394cb00eb0b",
+      "files": {
+        "flac": {
+          "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐全12曲_20261104/04 - Disposable Teens/C - 现游戏音色_响度匹配.flac",
+          "sha256": "8f11e1ed0c7d971a9147a92eeb373a6441feaf665cd59a3a7b932b259f2782bd",
+          "probe": {
+            "programs": [],
+            "streams": [
+              {
+                "codec_name": "flac",
+                "sample_fmt": "s32",
+                "sample_rate": "48000",
+                "channels": 2,
+                "bits_per_sample": 0,
+                "bits_per_raw_sample": "24"
+              }
+            ],
+            "format": {
+              "duration": "189.823125",
+              "size": "32405359"
+            }
+          },
+          "loudness": {
+            "input_i": "-19.46",
+            "input_tp": "-3.68",
+            "input_lra": "2.10",
+            "input_thresh": "-29.49",
+            "output_i": "-17.98",
+            "output_tp": "-2.22",
+            "output_lra": "2.30",
+            "output_thresh": "-28.02",
+            "normalization_type": "dynamic",
+            "target_offset": "-0.02"
+          },
+          "decoded_finite": true,
+          "decoded_sample_count_per_channel": 9111510,
+          "decoded_peak": 0.654666543006897,
+          "decoded_rms": 0.08008810189254492
+        },
+        "mp3": {
+          "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐全12曲_20261104/04 - Disposable Teens/C - 现游戏音色_响度匹配.mp3",
+          "sha256": "c4f39f49c856c780fd1d8d319c14ad5f9d202e6ce70e8415152f2bc5fe4a9018",
+          "probe": {
+            "programs": [],
+            "streams": [
+              {
+                "codec_name": "mp3",
+                "sample_fmt": "fltp",
+                "sample_rate": "48000",
+                "channels": 2,
+                "bits_per_sample": 0,
+                "bit_rate": "320000"
+              }
+            ],
+            "format": {
+              "duration": "189.864000",
+              "size": "7595565"
+            }
+          },
+          "loudness": {
+            "input_i": "-19.46",
+            "input_tp": "-3.69",
+            "input_lra": "2.10",
+            "input_thresh": "-29.49",
+            "output_i": "-17.98",
+            "output_tp": "-2.23",
+            "output_lra": "2.30",
+            "output_thresh": "-28.02",
+            "normalization_type": "dynamic",
+            "target_offset": "-0.02"
+          },
+          "decoded_finite": true,
+          "decoded_sample_count_per_channel": 9111510,
+          "decoded_peak": 0.6535221934318542,
+          "decoded_rms": 0.0800902559727968
+        }
+      }
+    },
+    "D1": {
+      "fixed_gain_db": 5.859999999999999,
+      "encoded_from": "/home/weathour/.cache/my-game/chinese-trial-render-20261104/midi_test_04/D1/aligned.wav",
+      "encoded_from_sha256": "51609e2bcf9234758b9c1bdc25c7fac2e2cce9648ef18a1c84145b09aaff2f46",
+      "files": {
+        "flac": {
+          "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐全12曲_20261104/04 - Disposable Teens/D1 - 中国器乐_原音高.flac",
+          "sha256": "d36bcd13a38be37709e7a15c940f47ca2315f34d297c9bcc5866b4374baffadb",
+          "probe": {
+            "programs": [],
+            "streams": [
+              {
+                "codec_name": "flac",
+                "sample_fmt": "s32",
+                "sample_rate": "48000",
+                "channels": 2,
+                "bits_per_sample": 0,
+                "bits_per_raw_sample": "24"
+              }
+            ],
+            "format": {
+              "duration": "189.823125",
+              "size": "32661701"
+            }
+          },
+          "loudness": {
+            "input_i": "-19.46",
+            "input_tp": "-3.50",
+            "input_lra": "2.10",
+            "input_thresh": "-29.49",
+            "output_i": "-18.04",
+            "output_tp": "-2.00",
+            "output_lra": "2.20",
+            "output_thresh": "-28.08",
+            "normalization_type": "dynamic",
+            "target_offset": "0.04"
+          },
+          "decoded_finite": true,
+          "decoded_sample_count_per_channel": 9111510,
+          "decoded_peak": 0.6683745384216309,
+          "decoded_rms": 0.08053039739456752
+        },
+        "mp3": {
+          "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐全12曲_20261104/04 - Disposable Teens/D1 - 中国器乐_原音高.mp3",
+          "sha256": "0da7518ef390c97f77c9c311bb47d17a90983add2888bb0be8b4eb95b677b769",
+          "probe": {
+            "programs": [],
+            "streams": [
+              {
+                "codec_name": "mp3",
+                "sample_fmt": "fltp",
+                "sample_rate": "48000",
+                "channels": 2,
+                "bits_per_sample": 0,
+                "bit_rate": "320000"
+              }
+            ],
+            "format": {
+              "duration": "189.864000",
+              "size": "7595565"
+            }
+          },
+          "loudness": {
+            "input_i": "-19.46",
+            "input_tp": "-3.49",
+            "input_lra": "2.10",
+            "input_thresh": "-29.49",
+            "output_i": "-18.04",
+            "output_tp": "-2.00",
+            "output_lra": "2.20",
+            "output_thresh": "-28.08",
+            "normalization_type": "dynamic",
+            "target_offset": "0.04"
+          },
+          "decoded_finite": true,
+          "decoded_sample_count_per_channel": 9111510,
+          "decoded_peak": 0.6682592034339905,
+          "decoded_rms": 0.08053345682444128
+        }
+      }
+    },
+    "D2": {
+      "fixed_gain_db": 5.859999999999999,
+      "encoded_from": "/home/weathour/.cache/my-game/chinese-trial-render-20261104/midi_test_04/D2/aligned.wav",
+      "encoded_from_sha256": "88cbd6d975915e94df7ff3e50801c12cbae701837f923042fbd63ea6c1732f50",
+      "files": {
+        "flac": {
+          "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐全12曲_20261104/04 - Disposable Teens/D2 - 中国器乐_有限调式.flac",
+          "sha256": "d27f6d6c07ae5fbd4fe37e1f68dc0f3fb8f41b68c57af4a22f41a9834057d82f",
+          "probe": {
+            "programs": [],
+            "streams": [
+              {
+                "codec_name": "flac",
+                "sample_fmt": "s32",
+                "sample_rate": "48000",
+                "channels": 2,
+                "bits_per_sample": 0,
+                "bits_per_raw_sample": "24"
+              }
+            ],
+            "format": {
+              "duration": "189.823125",
+              "size": "32661839"
+            }
+          },
+          "loudness": {
+            "input_i": "-19.46",
+            "input_tp": "-3.50",
+            "input_lra": "2.10",
+            "input_thresh": "-29.49",
+            "output_i": "-18.05",
+            "output_tp": "-2.00",
+            "output_lra": "2.20",
+            "output_thresh": "-28.09",
+            "normalization_type": "dynamic",
+            "target_offset": "0.05"
+          },
+          "decoded_finite": true,
+          "decoded_sample_count_per_channel": 9111510,
+          "decoded_peak": 0.6683745384216309,
+          "decoded_rms": 0.0805075692769566
+        },
+        "mp3": {
+          "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐全12曲_20261104/04 - Disposable Teens/D2 - 中国器乐_有限调式.mp3",
+          "sha256": "705440718a48bc96af7425bfd2295ee33476ed74971323ca91ee893d9e39ed93",
+          "probe": {
+            "programs": [],
+            "streams": [
+              {
+                "codec_name": "mp3",
+                "sample_fmt": "fltp",
+                "sample_rate": "48000",
+                "channels": 2,
+                "bits_per_sample": 0,
+                "bit_rate": "320000"
+              }
+            ],
+            "format": {
+              "duration": "189.864000",
+              "size": "7595565"
+            }
+          },
+          "loudness": {
+            "input_i": "-19.46",
+            "input_tp": "-3.49",
+            "input_lra": "2.10",
+            "input_thresh": "-29.49",
+            "output_i": "-18.05",
+            "output_tp": "-2.00",
+            "output_lra": "2.20",
+            "output_thresh": "-28.09",
+            "normalization_type": "dynamic",
+            "target_offset": "0.05"
+          },
+          "decoded_finite": true,
+          "decoded_sample_count_per_channel": 9111510,
+          "decoded_peak": 0.6682592034339905,
+          "decoded_rms": 0.08051025835385277
+        }
+      }
+    }
+  },
+  "manual_listening_review": "not performed",
+  "render_script_sha256": "59e0577985e5612a8f4e75595ff8155fa910f77d25ef518ad8586372136a55e0",
+  "reuse_provenance": {
+    "original_report": "/home/weathour/programs/desktop-projects/My-game/design/music-20261104-chinese-trial/reports/audio-midi_test_04.json",
+    "original_report_sha256": "22de3e50aebeb720a996606cbd2e619820ca21001b5bd0894fc0aaae681d44f2",
+    "source_epoch": "first_three_approved_trial",
+    "musical_and_audio_inputs_unchanged": true,
+    "full_outputs_copied_without_reencoding": true
+  }
+}

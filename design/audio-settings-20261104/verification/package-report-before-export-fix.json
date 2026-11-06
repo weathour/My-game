@@ -1,0 +1,182 @@
+{
+  "schema_version": 1,
+  "status": "PASS_WITH_EXPORT_SCOPE_FINDING",
+  "package": {
+    "pck": {
+      "path": "builds/linux-audio-settings-20261104/game.pck",
+      "sha256": "9df935af4b41f32e93cac7476e3d1b44ed540a7fda8ab32a3bf67bfe7595bef4",
+      "bytes": 262530396
+    },
+    "binary": {
+      "path": "builds/linux-audio-settings-20261104/godot-4.6.2",
+      "sha256": "5a806b2b385279d9607094d33e946ed828e9606df4cb46d258ca27468dc5c1c9",
+      "bytes": 138965552
+    },
+    "launcher": {
+      "path": "builds/linux-audio-settings-20261104/run.sh",
+      "sha256": "3234b8372e56f30230a13dc54df79ec5a48215d39dbf560a6b63ef579e9df4d6",
+      "bytes": 417
+    },
+    "source_pck": {
+      "path": "builds/linux-audio-settings-20261104/game.pck",
+      "bytes": 262530396
+    }
+  },
+  "external_smoke": {
+    "status": "PASS",
+    "checks": 314,
+    "failures": 0,
+    "source_script": {
+      "path": "/tmp/chronicle_audio_settings_render_smoke.gd",
+      "sha256": "b79efa82c78bfc7f7b4fbf9070488f2c0a2b2aecdc3ca9f7a0514809e73b2ef6",
+      "bytes": 24154
+    },
+    "cwd": "/tmp/audio-settings-package-cwd",
+    "cwd_empty_after_run": true,
+    "xdg_data_home": "/tmp/audio-settings-package-data",
+    "xdg_config_home": "/tmp/audio-settings-package-config",
+    "audio_driver": "Dummy",
+    "rendering_method": "gl_compatibility",
+    "coverage": [
+      "11 slider controls and disk reload/persistence through packaged runtime",
+      "legacy and unknown settings preservation; finite clamp and nonfinite ignore",
+      "eight category cue routing, independent mute/gain, master/music mute",
+      "real paused battle audio gain and unchanged battle snapshot/timers",
+      "Esc subpage return then resume, keyboard slider input",
+      "11-slider reachability and fixed controls at 960x540, 1280x720, 1920x1080"
+    ],
+    "screenshots": {
+      "audio-settings-battle-1280.png": {
+        "path": "design/audio-settings-20261104/verification/package-screenshots/audio-settings-battle-1280.png",
+        "sha256": "63c2cc0a71e9979467f11462ebc8779b8df8339ed1490a48522eff75d517f5f6",
+        "bytes": 522859
+      },
+      "audio-settings-battle-1920.png": {
+        "path": "design/audio-settings-20261104/verification/package-screenshots/audio-settings-battle-1920.png",
+        "sha256": "ccdb8d5f919f2eb0c5cf344038abcaea2eb5adc5cf6b12feb616431fcfd04b75",
+        "bytes": 712765
+      },
+      "audio-settings-battle-960.png": {
+        "path": "design/audio-settings-20261104/verification/package-screenshots/audio-settings-battle-960.png",
+        "sha256": "c71c0aa995d7c17c97d1510fdbc3843e5abdb00cfedae225feec7c039eeb406c",
+        "bytes": 361690
+      },
+      "audio-settings-title-1280.png": {
+        "path": "design/audio-settings-20261104/verification/package-screenshots/audio-settings-title-1280.png",
+        "sha256": "f8edc465d70b5a1c9a32adbdb7c182bae557a2aefcffef3e5604fdfeaf6fae4c",
+        "bytes": 622003
+      },
+      "audio-settings-title-1920.png": {
+        "path": "design/audio-settings-20261104/verification/package-screenshots/audio-settings-title-1920.png",
+        "sha256": "93aede4a928fb9c3166a8edaa468854c19d71dc4edcfcf3f4a7c18b4041201d5",
+        "bytes": 1045356
+      },
+      "audio-settings-title-960.png": {
+        "path": "design/audio-settings-20261104/verification/package-screenshots/audio-settings-title-960.png",
+        "sha256": "441fe57f9db8b5ce0e3d34858af1272c87503bff68e54eb9a50545178c7fbaab",
+        "bytes": 394023
+      }
+    }
+  },
+  "launcher_headless": {
+    "status": "PASS",
+    "command": "./run.sh --headless --quit --audio-driver Dummy",
+    "uses_package_test_user_data": true,
+    "log": {
+      "path": "design/audio-settings-20261104/verification/package-checks/launcher-headless.log",
+      "sha256": "da76a36a586ec310ae98a6bf8844ab87166457610861a810027a91d273cbb93f",
+      "bytes": 73
+    }
+  },
+  "export_scope_audit": {
+    "status": "FAIL_SCOPE_LEAK",
+    "tool": "external GDScript using DirAccess/FileAccess over res:// under --main-pack",
+    "new_pack": {
+      "resource_count": 2321,
+      "embedded_file_bytes": 262301838,
+      "absent_roots": {
+        ".git": true,
+        "builds": false,
+        "design": true,
+        "scripts/tests": true
+      },
+      "test_verification_artifacts": [],
+      "builds_root_bytes": 38042658,
+      "builds_file_count": 175,
+      "log": {
+        "path": "design/audio-settings-20261104/verification/package-checks/pack-audit-new.log",
+        "sha256": "e1fe2d3ad6f3692fdf11507befa9f68226b262254d40a4a639baec474510a915",
+        "bytes": 560
+      }
+    },
+    "previous_d2_pack": {
+      "pck": {
+        "path": "builds/linux-chinese-d2-20261104/game.pck",
+        "sha256": "1ae064725a2f32e9e062e3d02b367f72f2997a577568a8ed527796f13da3f7a9",
+        "bytes": 249184200
+      },
+      "resource_count": 2219,
+      "embedded_file_bytes": 248966326,
+      "builds_root_bytes": 24716358,
+      "builds_file_count": 105,
+      "log": {
+        "path": "design/audio-settings-20261104/verification/package-checks/pack-audit-old.log",
+        "sha256": "84fbab716a24d4d9019ece244de055d242fd8ca3cbad810e1e1702189b2e5beb",
+        "bytes": 560
+      }
+    },
+    "comparison": {
+      "pck_size_delta_bytes": 13346196,
+      "embedded_file_bytes_delta": 13335512,
+      "builds_subtree_bytes_delta": 13326300,
+      "builds_file_count_delta": 70,
+      "new_pack_contains_design_or_tests": false,
+      "new_pack_contains_current_test_images_reports_or_script": false,
+      "finding": "Both packs include res://builds; new pack includes 175 files totaling 38,042,658 bytes under that root. The 13,326,300-byte growth in builds accounts for nearly all of the 13,346,196-byte PCK size increase. The currently produced verification screenshots, reports and test script were not found in the pack. Export preset/PCK were not changed."
+    },
+    "comparison_logs": {
+      "new": {
+        "path": "design/audio-settings-20261104/verification/package-checks/pack-compare-new.log",
+        "sha256": "52af87dd62a8898f2a7f923bc28668312c304e1a8a0424d276ce3566726d3d2b",
+        "bytes": 965
+      },
+      "previous": {
+        "path": "design/audio-settings-20261104/verification/package-checks/pack-compare-old.log",
+        "sha256": "22cd507f395ecc80b986a3bdeddacbe4f27c47ee9456dcec452783fdc3811ba2",
+        "bytes": 965
+      }
+    }
+  },
+  "logs": {
+    "audio-settings-pack-smoke.log": {
+      "path": "design/audio-settings-20261104/verification/package-checks/audio-settings-pack-smoke.log",
+      "sha256": "33c975166c1b08a0eefdf281e9c11f8d2d713a52e672f084002ccfc5921140b2",
+      "bytes": 1296
+    },
+    "launcher-headless.log": {
+      "path": "design/audio-settings-20261104/verification/package-checks/launcher-headless.log",
+      "sha256": "da76a36a586ec310ae98a6bf8844ab87166457610861a810027a91d273cbb93f",
+      "bytes": 73
+    },
+    "pack-audit-new.log": {
+      "path": "design/audio-settings-20261104/verification/package-checks/pack-audit-new.log",
+      "sha256": "e1fe2d3ad6f3692fdf11507befa9f68226b262254d40a4a639baec474510a915",
+      "bytes": 560
+    },
+    "pack-audit-old.log": {
+      "path": "design/audio-settings-20261104/verification/package-checks/pack-audit-old.log",
+      "sha256": "84fbab716a24d4d9019ece244de055d242fd8ca3cbad810e1e1702189b2e5beb",
+      "bytes": 560
+    },
+    "pack-compare-new.log": {
+      "path": "design/audio-settings-20261104/verification/package-checks/pack-compare-new.log",
+      "sha256": "52af87dd62a8898f2a7f923bc28668312c304e1a8a0424d276ce3566726d3d2b",
+      "bytes": 965
+    },
+    "pack-compare-old.log": {
+      "path": "design/audio-settings-20261104/verification/package-checks/pack-compare-old.log",
+      "sha256": "22cd507f395ecc80b986a3bdeddacbe4f27c47ee9456dcec452783fdc3811ba2",
+      "bytes": 965
+    }
+  }
+}

@@ -1,0 +1,113 @@
+{
+  "schema_version": 1,
+  "scope": "read-only current visual baseline for character-skill presentation planning",
+  "capture_date": "2026-11-05",
+  "capture_method": {
+    "source_smoke": "scripts/tests/chronicle_combat_feedback_smoke.gd",
+    "command_mode": "Godot 4.6.2, DISPLAY=:0, gl_compatibility, Dummy audio, isolated XDG_DATA_HOME and XDG_CONFIG_HOME",
+    "result": "PASS",
+    "checks": 346,
+    "failures": 0,
+    "source_art_or_runtime_changed": false,
+    "capture_note": "Existing smoke screenshots are single rendered states after selected real feedback events or deterministic fixture setup; they are not continuous cast recordings."
+  },
+  "contact_sheet": "current-feedback-contact-sheet.png",
+  "samples": [
+    {
+      "label": "B01 confirmed hit",
+      "image": "baseline-source/B01-confirmed-hit.png",
+      "evidence": "One settled 13-damage event, player and one enemy, at 1280x720.",
+      "visual_read": "The contact mark and 13 number are legible, but the effect is small relative to the screen; no full cast or weapon-motion arc is shown."
+    },
+    {
+      "label": "B01 shield guard",
+      "image": "baseline-source/B01-full-shield-guard.png",
+      "evidence": "A projectile fully absorbed by shield; the smoke confirms no HP loss and a cyan guard cue.",
+      "visual_read": "The cyan ring distinguishes guard from health loss, though the small player scale makes the cue occupy little screen area."
+    },
+    {
+      "label": "B01 enemy tell and party",
+      "image": "baseline-source/B01-comfort-tell.png",
+      "evidence": "Party and enemy tell state rendered under the smoke's feedback comfort fixture.",
+      "visual_read": "The target's action is not immediately self-explanatory from this still; ally ornament and enemy tell compete at similar small scale."
+    },
+    {
+      "label": "B01 XP pickup",
+      "image": "baseline-source/B01-xp-pickup.png",
+      "evidence": "The smoke injects an XP gem and confirms one actual collection event.",
+      "visual_read": "The resulting pickup cue is subtle in the full-screen frame and difficult to distinguish from nearby transient feedback."
+    },
+    {
+      "label": "B15 dense 42-target cast",
+      "image": "baseline-source/B15-42-target-cast.png",
+      "evidence": "A deterministic 42-target confirmed damage fixture; aggregate damage is 210 and the feedback pool applies its budgets.",
+      "visual_read": "The aggregate total remains readable, but a dense ring of enemy silhouettes and impact accents crowds the player; this is the clearest test for protecting the player core and action target."
+    },
+    {
+      "label": "B18 boss priority",
+      "image": "baseline-source/B18-boss-priority.png",
+      "evidence": "Boss phase feedback is raised through the common priority pool in a B18 fixture.",
+      "visual_read": "Boss identity and phase bar are prominent; the player's skill expression is not the focus of this capture."
+    }
+  ],
+  "audit_findings": {
+    "strongest_current_signals": [
+      "Confirmed damage is separated from full shield absorption by a different player-side tint/ring.",
+      "Crowd damage aggregates into one explicit total, while the smoke enforces a maximum of three selected contacts per cast.",
+      "Boss phase presentation has a dedicated boss visual layer and remains visible in the B18 frame."
+    ],
+    "candidate_weak_points_for_first_batch": [
+      "The screenshots do not establish that a skill's source, travel path, impact point, and secondary consequence read as one causal sequence.",
+      "Light versus heavy hit distinctions are not demonstrated by this six-frame set; current sample is one plain 13-damage contact plus guard and lethal fixtures.",
+      "No captured frame demonstrates a heal, a persistent field over time, or a linked/echo skill consequence.",
+      "The dense B15 fixture makes the player and contact layer visually busy; no pixel-level red-core visibility metric is collected by this smoke."
+    ],
+    "limits": [
+      "This is a current-code renderer baseline, not a user aesthetic approval.",
+      "Frames are static captures at 1280x720; they do not measure animation readability, input timing, draw-call cost, or FPS.",
+      "The B15 42-target setup is a synthetic visual stress fixture, not a claim about a typical live encounter.",
+      "The baseline does not cover every character, equipment interaction, accessibility setting, or screen size."
+    ]
+  },
+  "proposed_minimum_acceptance": {
+    "B01_sparse": {
+      "fixture": "one controlled character, one ordinary target, one boss-class target at a time; sample cast start, travel/active state, impact, and consequence for one direct skill, one shield/heal skill, and one persistent or linked effect.",
+      "checks": [
+        "A viewer can point to the caster, intended target, and impact/result without relying on floating text alone.",
+        "Light and heavy confirmed hits use visibly different scale or timing while retaining reduced-flash accessibility behavior.",
+        "Shield, healing, and health damage remain distinguishable at 960x540 and 1280x720."
+      ]
+    },
+    "B12_dense": {
+      "fixture": "use the actual B12 encounter at its normal spawn pacing, then add a reproducible bounded stress capture with 42 nearby targets for visual load comparison.",
+      "checks": [
+        "The four-world-unit red danger core remains visible; reserve its center and a small surrounding margin from opaque effect fills.",
+        "Target/impact cues are not hidden by aggregate numbers or decorative particles; preserve the existing three-contact-per-cast and six-total-number bounds unless evidence supports a change.",
+        "Peak concurrent effect counts and image-level core occlusion are recorded; no FPS claim is made unless measured on declared hardware."
+      ]
+    },
+    "B18_boss": {
+      "fixture": "boss windup, player skill cast, boss hit/phase transition, and any persistent/linked consequence in one repeatable encounter segment.",
+      "checks": [
+        "Boss tell, player cast source, confirmed hit, and phase change remain distinguishable in a single short sequence.",
+        "Critical boss telegraph contrast and player danger-core visibility survive overlapping skill effects.",
+        "Audio/visual priority and reduced-motion/reduced-flash variants are compared without moving the timing of confirmed events."
+      ]
+    }
+  },
+  "performance_and_clutter_constraints_proposal": {
+    "current_code_budgets_for_reference": {
+      "combat_marks": 12,
+      "selected_contacts_per_cast": 3,
+      "damage_number_groups": 6,
+      "shared_combat_audio_voices": 14
+    },
+    "proposed_guardrails": [
+      "Keep decorative skill particles outside a protected disk centered on the player danger core; validate pixel coverage in dense captures rather than assuming sprites are transparent enough.",
+      "Give gameplay tells and confirmed hit results a higher visual priority than trails, glow, or repeated small particles.",
+      "For the first batch, retain bounded pools and report peak active instances; do not raise existing caps without a measured readability/performance reason.",
+      "Record rendering backend, viewport size, effect counts, and capture interval before making any performance statement."
+    ],
+    "measurement_status": "No new effect-count or frame-time profiler was run; these are proposed acceptance controls, not measured performance results."
+  }
+}

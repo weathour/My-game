@@ -1,0 +1,643 @@
+{
+  "status": "PASS",
+  "created_utc": "2026-11-03T10:58:17.719566+00:00",
+  "godot_version": "4.6.2.stable.official.71f334935",
+  "coverage": {
+    "character_owners": 38,
+    "character_ability_configurations": 137,
+    "trait_decisions": 9,
+    "enemy_definitions": 43,
+    "authored_enemy_action_configurations": 87,
+    "unique_enemy_action_keys": 81,
+    "runtime_enemy_action_aliases": 1,
+    "bosses": 18,
+    "boss_event_contexts": 22,
+    "new_cues": 101,
+    "retained_utility_cues": 3,
+    "total_cues": 104,
+    "new_unique_wav_variants": 303,
+    "retained_utility_variants": 6,
+    "total_variant_references": 309
+  },
+  "runtime": {
+    "shared_voice_pool": 14,
+    "reserved_warning_voices": 2,
+    "ordinary_tells_do_not_occupy_warning_reserve": true,
+    "important_cue_throttle_buckets_and_preemption": true,
+    "spatialization": "per-voice stereo pan and world-distance attenuation; shared attempt bus limiter",
+    "ordinary_cast_does_not_duck_bgm": true,
+    "critical_duck_changes_runtime_gain_only": true,
+    "silent_sfx_does_not_duck_bgm": true,
+    "actual_beneficial_delta_observed_without_resettling": true,
+    "guard_counter_impact_grouped_by_delivery": true,
+    "same_batch_warning_cancellation_and_terminal_sync": true,
+    "native_audio_exit_drain_in_short_package_test_seconds": 0.3,
+    "boss_visual_timing_unchanged_seconds": 0.48,
+    "import_encoding": "all 303 Godot WAV import configurations explicitly use compress/mode=0; native PCM16 verified"
+  },
+  "verification": {
+    "headless_import": "PASS after repairing default QOA import settings to PCM16",
+    "headless_startup": "PASS",
+    "project_check": "PROJECT_CHECK_OK",
+    "smokes_total": 51,
+    "source_smokes": 47,
+    "pck_smokes": 4,
+    "skill_audio": "CHRONICLE_SKILL_AUDIO_SMOKE PASS checks=2233 failures=0",
+    "real_enemy_sessions": "CHRONICLE_ENEMY_SESSIONS_SMOKE PASS checks=133547 failures=0 sessions=18",
+    "real_session_unknown_bindings": 0,
+    "real_sessions": 18,
+    "feedback_state_rng_parity": {
+      "result": "CHRONICLE_COMBAT_FEEDBACK_SMOKE PASS checks=212 failures=0",
+      "fixtures": [
+        "B01",
+        "B15",
+        "B18"
+      ],
+      "ticks_per_fixture": 420,
+      "compares": [
+        "position",
+        "hp",
+        "enemy_hp",
+        "cast_serial",
+        "elapsed",
+        "director_rng_state"
+      ]
+    },
+    "protected_inputs_unchanged": 20,
+    "protected_input_baseline": "protected-inputs-before.json",
+    "final_wav_sha_match_count": 303,
+    "audio_qa_report": "../audio/qa/sfx-bank-verification.json",
+    "audio_qa_report_sha256": "60d76666bb94c58daac76efc0cda8e590d8886f2fab1a83ef0caa5148cbf2aa2",
+    "full_check_stdout": "artifacts/skill-audio-20261103/verification/full-check.stdout.log",
+    "smokes": [
+      {
+        "name": "baimen_enemy_runtime_smoke",
+        "type": "source",
+        "result": "BAIMEN_ENEMY_RUNTIME_SMOKE PASS checks=741 failures=0",
+        "checks": 741,
+        "log": "artifacts/skill-audio-20261103/verification/full-check/baimen_enemy_runtime_smoke.log",
+        "sha256": "5a368d8dea0115ea07918a95c48773d1458617ee574045238d88163b77259ab4"
+      },
+      {
+        "name": "baimen_women_combat_art_smoke",
+        "type": "source",
+        "result": "BAIMEN_WOMEN_COMBAT_ART_SMOKE PASS checks=266 failures=0",
+        "checks": 266,
+        "log": "artifacts/skill-audio-20261103/verification/full-check/baimen_women_combat_art_smoke.log",
+        "sha256": "646534b58adfc9313717be686e2d2e8dee305d9a09ec6657978a8085258df9a9"
+      },
+      {
+        "name": "baimen_women_portraits_smoke",
+        "type": "source",
+        "result": "BAIMEN_WOMEN_PORTRAITS_SMOKE PASS checks=525 failures=0",
+        "checks": 525,
+        "log": "artifacts/skill-audio-20261103/verification/full-check/baimen_women_portraits_smoke.log",
+        "sha256": "6472c4e2426574abe0ef8061bb0884d5d96544d31c095f621f0b00f5f95eaed6"
+      },
+      {
+        "name": "boss_combo_timing_smoke",
+        "type": "source",
+        "result": "BOSS_COMBO_TIMING_SMOKE PASS checks=41 failures=0",
+        "checks": 41,
+        "log": "artifacts/skill-audio-20261103/verification/full-check/boss_combo_timing_smoke.log",
+        "sha256": "54a4bd5222179da7fa57a88aa8fbf735db0b8a970a07e76cfec8718ce4ecc4e1"
+      },
+      {
+        "name": "boss_forms_smoke",
+        "type": "source",
+        "result": "BOSS_FORMS_SMOKE PASS checks=672 failures=0 authored_moves=30",
+        "checks": 672,
+        "log": "artifacts/skill-audio-20261103/verification/full-check/boss_forms_smoke.log",
+        "sha256": "51247d6284ec4fc4f7366e20931d34ca965366908d7ab729104cac73830b3b3e"
+      },
+      {
+        "name": "boss_friendly_art_smoke",
+        "type": "source",
+        "result": "BOSS_FRIENDLY_ART_SMOKE PASS checks=146 failures=0 portrait_capture=unavailable",
+        "checks": 146,
+        "log": "artifacts/skill-audio-20261103/verification/full-check/boss_friendly_art_smoke.log",
+        "sha256": "97c3180872ba707da4b4aa7f86aecf2499f0c0d44c4910de22bbabc15f2adabb"
+      },
+      {
+        "name": "chronicle_authored_effects_smoke",
+        "type": "source",
+        "result": "CHRONICLE_AUTHORED_EFFECTS_SMOKE PASS checks=36 failures=0",
+        "checks": 36,
+        "log": "artifacts/skill-audio-20261103/verification/full-check/chronicle_authored_effects_smoke.log",
+        "sha256": "53e196869708d490aabf3bac3edc36f98b9dd66590d261f4fbfb3e75ea9e9dd3"
+      },
+      {
+        "name": "chronicle_battle_ground_smoke",
+        "type": "source",
+        "result": "CHRONICLE_BATTLE_GROUND_SMOKE PASS checks=191 failures=0",
+        "checks": 191,
+        "log": "artifacts/skill-audio-20261103/verification/full-check/chronicle_battle_ground_smoke.log",
+        "sha256": "6ad8d0616112a94d4e17ed06efcd552a0da41e7628af99633941ff6c6ed90239"
+      },
+      {
+        "name": "chronicle_battle_scale_smoke",
+        "type": "source",
+        "result": "CHRONICLE_BATTLE_SCALE_SMOKE PASS checks=560 failures=0",
+        "checks": 560,
+        "log": "artifacts/skill-audio-20261103/verification/full-check/chronicle_battle_scale_smoke.log",
+        "sha256": "e58d3545db29612c5626a6ad57cbcf37da91925db89cb33d4719a25de1eb8c92"
+      },
+      {
+        "name": "chronicle_boss_camera_smoke",
+        "type": "source",
+        "result": "CHRONICLE_BOSS_CAMERA_SMOKE PASS checks=165 failures=0",
+        "checks": 165,
+        "log": "artifacts/skill-audio-20261103/verification/full-check/chronicle_boss_camera_smoke.log",
+        "sha256": "f6d95e91a34d3cd1fb38a79eeefbf7a03ddd9f15b2293a2d6a0f57a5a8552eef"
+      },
+      {
+        "name": "chronicle_boss_flow_smoke",
+        "type": "source",
+        "result": "CHRONICLE_BOSS_FLOW_SMOKE PASS checks=140 failures=0",
+        "checks": 140,
+        "log": "artifacts/skill-audio-20261103/verification/full-check/chronicle_boss_flow_smoke.log",
+        "sha256": "1f3ac022a81b003abce8719c8a118fd60fda53572df43588b2136c959d1900c4"
+      },
+      {
+        "name": "chronicle_boss_sound_smoke",
+        "type": "source",
+        "result": "CHRONICLE_BOSS_SOUND_SMOKE PASS checks=23 failures=0",
+        "checks": 23,
+        "log": "artifacts/skill-audio-20261103/verification/full-check/chronicle_boss_sound_smoke.log",
+        "sha256": "c4ca2756c7c0f69173556c80b8c3848613edf9075503ae43e126189d6ba81990"
+      },
+      {
+        "name": "chronicle_chapter_two_smoke",
+        "type": "source",
+        "result": "CHRONICLE_CHAPTER_TWO_SMOKE PASS checks=185 failures=0",
+        "checks": 185,
+        "log": "artifacts/skill-audio-20261103/verification/full-check/chronicle_chapter_two_smoke.log",
+        "sha256": "078aebd495e05055c4359a0f9613cb8ed83c81a79d7c679ecfe3ebebfe819f68"
+      },
+      {
+        "name": "chronicle_character_campaign_smoke",
+        "type": "source",
+        "result": "CHRONICLE_CHARACTER_CAMPAIGN_SMOKE PASS checks=196 failures=0",
+        "checks": 196,
+        "log": "artifacts/skill-audio-20261103/verification/full-check/chronicle_character_campaign_smoke.log",
+        "sha256": "20d3e782d39e8d7c63173bdce636a588661fa193768cd6d94f908d0fb21b6e1a"
+      },
+      {
+        "name": "chronicle_character_mechanics_smoke",
+        "type": "source",
+        "result": "CHRONICLE_CHARACTER_MECHANICS_SMOKE PASS checks=126 failures=0",
+        "checks": 126,
+        "log": "artifacts/skill-audio-20261103/verification/full-check/chronicle_character_mechanics_smoke.log",
+        "sha256": "1d6a2ba8cf44c282a15f7efb74bc0101e85e80a6c4c397850ff63e67d9ea55e7"
+      },
+      {
+        "name": "chronicle_character_panels_smoke",
+        "type": "source",
+        "result": "CHRONICLE_CHARACTER_PANELS_SMOKE PASS checks=362 failures=0",
+        "checks": 362,
+        "log": "artifacts/skill-audio-20261103/verification/full-check/chronicle_character_panels_smoke.log",
+        "sha256": "4aec0f04c34f296f5dedeed97771f3c9711e673167d38eb5a6c81c72f87ff7bb"
+      },
+      {
+        "name": "chronicle_character_profiles_smoke",
+        "type": "source",
+        "result": "CHRONICLE_CHARACTER_PROFILES_SMOKE PASS checks=121 failures=0",
+        "checks": 121,
+        "log": "artifacts/skill-audio-20261103/verification/full-check/chronicle_character_profiles_smoke.log",
+        "sha256": "9a59b1881276b1daddcd848738e8687b2a715878e29b0d9ebbb0f54348073f89"
+      },
+      {
+        "name": "chronicle_combat_feedback_events_smoke",
+        "type": "source",
+        "result": "CHRONICLE_COMBAT_FEEDBACK_EVENTS_SMOKE PASS checks=59 failures=0",
+        "checks": 59,
+        "log": "artifacts/skill-audio-20261103/verification/full-check/chronicle_combat_feedback_events_smoke.log",
+        "sha256": "d66776256fc235108ae5b4912660e07980d4ed554b05a344de51aced3697768a"
+      },
+      {
+        "name": "chronicle_combat_feedback_pack_smoke",
+        "type": "pck",
+        "result": "CHRONICLE_COMBAT_FEEDBACK_PACK_SMOKE PASS checks=806 failures=0",
+        "checks": 806,
+        "log": "artifacts/skill-audio-20261103/verification/full-check/chronicle_combat_feedback_pack_smoke.log",
+        "sha256": "2329ef194119e71edfda6237d8d9cecd13a9f632e24d428fc3bc6e3b1dc7ad0a"
+      },
+      {
+        "name": "chronicle_combat_feedback_smoke",
+        "type": "source",
+        "result": "CHRONICLE_COMBAT_FEEDBACK_SMOKE PASS checks=212 failures=0",
+        "checks": 212,
+        "log": "artifacts/skill-audio-20261103/verification/full-check/chronicle_combat_feedback_smoke.log",
+        "sha256": "7887fcc708960a9686fec50bcbe3b89c9373012b7ac1fbb772dbcea747d15521"
+      },
+      {
+        "name": "chronicle_combat_smoke",
+        "type": "source",
+        "result": "CHRONICLE_COMBAT_SMOKE PASS checks=77 failures=0",
+        "checks": 77,
+        "log": "artifacts/skill-audio-20261103/verification/full-check/chronicle_combat_smoke.log",
+        "sha256": "e9879e3afb7c60b6fb752574d33f76accf2ec552a92f2d29156979a5bb4b6f8b"
+      },
+      {
+        "name": "chronicle_context_navigation_smoke",
+        "type": "source",
+        "result": "CHRONICLE_CONTEXT_NAVIGATION_SMOKE PASS checks=223 failures=0",
+        "checks": 223,
+        "log": "artifacts/skill-audio-20261103/verification/full-check/chronicle_context_navigation_smoke.log",
+        "sha256": "55fa5ec68b43faf4415cbd03d760769c39d2fc3745b2f8935aba869ff41d3a17"
+      },
+      {
+        "name": "chronicle_enemy_campaign_smoke",
+        "type": "source",
+        "result": "CHRONICLE_ENEMY_CAMPAIGN_SMOKE PASS checks=447 failures=0 routes=2",
+        "checks": 447,
+        "log": "artifacts/skill-audio-20261103/verification/full-check/chronicle_enemy_campaign_smoke.log",
+        "sha256": "e8766a8339b35c56a5738602aa9112ee91940099c4e169a0327f1ec53d72943d"
+      },
+      {
+        "name": "chronicle_enemy_codex_smoke",
+        "type": "source",
+        "result": "CHRONICLE_ENEMY_CODEX_SMOKE PASS checks=704 failures=0",
+        "checks": 704,
+        "log": "artifacts/skill-audio-20261103/verification/full-check/chronicle_enemy_codex_smoke.log",
+        "sha256": "0f9439503aefe500f93e6a8b6d4c4447cbd56836600e080c25906c360e6521f9"
+      },
+      {
+        "name": "chronicle_enemy_content_smoke",
+        "type": "source",
+        "result": "CHRONICLE_ENEMY_CONTENT_SMOKE PASS checks=2857 failures=0 paths=64 transaction_routes=4",
+        "checks": 2857,
+        "log": "artifacts/skill-audio-20261103/verification/full-check/chronicle_enemy_content_smoke.log",
+        "sha256": "4f95a56d76c5473bf30dede7145033029f6ccfb21d7fba8777f45d839d4c8c57"
+      },
+      {
+        "name": "chronicle_enemy_effects_smoke",
+        "type": "source",
+        "result": "CHRONICLE_ENEMY_EFFECTS_SMOKE PASS checks=73 failures=0",
+        "checks": 73,
+        "log": "artifacts/skill-audio-20261103/verification/full-check/chronicle_enemy_effects_smoke.log",
+        "sha256": "ac4fc3ab6186f232e44035505987fb1b34c0f99ae8fd5f6ecc94728e101787e2"
+      },
+      {
+        "name": "chronicle_enemy_pack_smoke",
+        "type": "pck",
+        "result": "ENEMY_PACK_SMOKE PASS checks=742 failures=0",
+        "checks": 742,
+        "log": "artifacts/skill-audio-20261103/verification/full-check/chronicle_enemy_pack_smoke.log",
+        "sha256": "06ffb1ea8e46ab058aa395c4dc90c8c85df4a0b65d684b0900b45968bab8e556"
+      },
+      {
+        "name": "chronicle_enemy_presentation_smoke",
+        "type": "source",
+        "result": "CHRONICLE_ENEMY_PRESENTATION_SMOKE PASS checks=509 failures=0",
+        "checks": 509,
+        "log": "artifacts/skill-audio-20261103/verification/full-check/chronicle_enemy_presentation_smoke.log",
+        "sha256": "a06f4f665f2152af5e0412095922a2f8cc95ea1432ca2dba037ef0455f039c2c"
+      },
+      {
+        "name": "chronicle_enemy_sessions_smoke",
+        "type": "source",
+        "result": "CHRONICLE_ENEMY_SESSIONS_SMOKE PASS checks=133547 failures=0 sessions=18",
+        "checks": 133547,
+        "log": "artifacts/skill-audio-20261103/verification/full-check/chronicle_enemy_sessions_smoke.log",
+        "sha256": "7eca543358e743b8adb510f5a232146967f347b6e3d265aa0fbe4cc23c756bab"
+      },
+      {
+        "name": "chronicle_feedback_latency_smoke",
+        "type": "source",
+        "result": "CHRONICLE_FEEDBACK_LATENCY_SMOKE PASS checks=20 failures=0",
+        "checks": 20,
+        "log": "artifacts/skill-audio-20261103/verification/full-check/chronicle_feedback_latency_smoke.log",
+        "sha256": "c7bd5d1835c72d3941409bbf8288500c2ba3c1e78cad151ca0b383126ea4eb16"
+      },
+      {
+        "name": "chronicle_home_menu_render_smoke",
+        "type": "source",
+        "result": "CHRONICLE_HOME_MENU_RENDER_SMOKE PASS checks=444 failures=0",
+        "checks": 444,
+        "log": "artifacts/skill-audio-20261103/verification/full-check/chronicle_home_menu_render_smoke.log",
+        "sha256": "805fce2d6a166a8308d961868866429ab3031e5cb2837a65dfb765c1e7d6bfed"
+      },
+      {
+        "name": "chronicle_mechanic_hud_smoke",
+        "type": "source",
+        "result": "CHRONICLE_MECHANIC_HUD_SMOKE PASS checks=322 failures=0",
+        "checks": 322,
+        "log": "artifacts/skill-audio-20261103/verification/full-check/chronicle_mechanic_hud_smoke.log",
+        "sha256": "d81d85b36bf6cf128acf5d7ad8eb912146705bd5bc087da5a3d14ae7b3841e0f"
+      },
+      {
+        "name": "chronicle_melee_reach_smoke",
+        "type": "source",
+        "result": "CHRONICLE_MELEE_REACH_SMOKE PASS checks=154 failures=0",
+        "checks": 154,
+        "log": "artifacts/skill-audio-20261103/verification/full-check/chronicle_melee_reach_smoke.log",
+        "sha256": "898a1e40caf38e4953d15d072675a31a8aefa44f8cd2b69b8b9dbd1833afc759"
+      },
+      {
+        "name": "chronicle_music_pack_smoke",
+        "type": "pck",
+        "result": "CHRONICLE_MUSIC_PACK_SMOKE PASS cues=16 checks=95 failures=0",
+        "checks": 95,
+        "log": "artifacts/skill-audio-20261103/verification/full-check/chronicle_music_pack_smoke.log",
+        "sha256": "2c7d5d872cb0209fe7cbd8963924e00db6b435d4b5f0cec358d58587afba7437"
+      },
+      {
+        "name": "chronicle_music_playback_smoke",
+        "type": "source",
+        "result": "CHRONICLE_MUSIC_PLAYBACK_SMOKE PASS checks=41 failures=0 display=X11",
+        "checks": 41,
+        "log": "artifacts/skill-audio-20261103/verification/full-check/chronicle_music_playback_smoke.log",
+        "sha256": "5b60b06862419175cb33a70510d02f7611179bf9f0c958bcfc2cb49114e47b96"
+      },
+      {
+        "name": "chronicle_music_smoke",
+        "type": "source",
+        "result": "CHRONICLE_MUSIC_SMOKE PASS checks=2315 failures=0",
+        "checks": 2315,
+        "log": "artifacts/skill-audio-20261103/verification/full-check/chronicle_music_smoke.log",
+        "sha256": "5592711b39ee67fbfb093fd7d6ffbfec471f851535bec29a25c63957485d533b"
+      },
+      {
+        "name": "chronicle_party_drag_smoke",
+        "type": "source",
+        "result": "CHRONICLE_PARTY_DRAG_SMOKE PASS checks=143 failures=0",
+        "checks": 143,
+        "log": "artifacts/skill-audio-20261103/verification/full-check/chronicle_party_drag_smoke.log",
+        "sha256": "9bde423bbd0a5ab2a056e7f05e78457e062b6a90464448df98bcae1b07f2af72"
+      },
+      {
+        "name": "chronicle_party_summary_smoke",
+        "type": "source",
+        "result": "CHRONICLE_PARTY_SUMMARY_SMOKE PASS checks=155 failures=0",
+        "checks": 155,
+        "log": "artifacts/skill-audio-20261103/verification/full-check/chronicle_party_summary_smoke.log",
+        "sha256": "9dcaf6eddfad29e8032f83f48c82b0f42a63a3f1e63795237cb5dc1e55a666f1"
+      },
+      {
+        "name": "chronicle_playable_ui_smoke",
+        "type": "source",
+        "result": "CHRONICLE_PLAYABLE_UI_SMOKE PASS failures=0",
+        "checks": null,
+        "log": "artifacts/skill-audio-20261103/verification/full-check/chronicle_playable_ui_smoke.log",
+        "sha256": "fa2494ef35f647f36acaa0321272f30c4b20c261b2016286c4081c9113ab2ad5"
+      },
+      {
+        "name": "chronicle_reflow_visual_smoke",
+        "type": "source",
+        "result": "CHRONICLE_REFLOW_VISUAL_SMOKE PASS",
+        "checks": null,
+        "log": "artifacts/skill-audio-20261103/verification/full-check/chronicle_reflow_visual_smoke.log",
+        "sha256": "42a6d351ea1ff4939ab440f75ceae977601805721bf55bfec70c5e2d9aea1dd1"
+      },
+      {
+        "name": "chronicle_roster_content_smoke",
+        "type": "source",
+        "result": "CHRONICLE_ROSTER_CONTENT_SMOKE PASS checks=1164 failures=0",
+        "checks": 1164,
+        "log": "artifacts/skill-audio-20261103/verification/full-check/chronicle_roster_content_smoke.log",
+        "sha256": "526478e66deb2e434c6f961488afa5431ff25ce730e43359a3e54e6c97bac70f"
+      },
+      {
+        "name": "chronicle_route_map_smoke",
+        "type": "source",
+        "result": "CHRONICLE_ROUTE_MAP_SMOKE PASS checks=160 failures=0",
+        "checks": 160,
+        "log": "artifacts/skill-audio-20261103/verification/full-check/chronicle_route_map_smoke.log",
+        "sha256": "44c497df7cd766f143ed055202c2a586b971f6f5d7a3fcfb77a24af273525d49"
+      },
+      {
+        "name": "chronicle_skill_audio_smoke",
+        "type": "source",
+        "result": "CHRONICLE_SKILL_AUDIO_SMOKE PASS checks=2233 failures=0",
+        "checks": 2233,
+        "log": "artifacts/skill-audio-20261103/verification/full-check/chronicle_skill_audio_smoke.log",
+        "sha256": "6def21dc7efa14ee2f1dccf0c9b8048fdee044c6788b174f706d9d607d764a88"
+      },
+      {
+        "name": "chronicle_story_content_smoke",
+        "type": "source",
+        "result": "CHRONICLE_STORY_CONTENT_SMOKE PASS checks=320 failures=0",
+        "checks": 320,
+        "log": "artifacts/skill-audio-20261103/verification/full-check/chronicle_story_content_smoke.log",
+        "sha256": "344b98a5dfec0588a9e336ce51ee74e6ae9e6a1abff1aea15279dac5e3d9dded"
+      },
+      {
+        "name": "chronicle_story_history_smoke",
+        "type": "source",
+        "result": "CHRONICLE_STORY_HISTORY_SMOKE PASS checks=105 failures=0",
+        "checks": 105,
+        "log": "artifacts/skill-audio-20261103/verification/full-check/chronicle_story_history_smoke.log",
+        "sha256": "31a66e450e4d8eb7a29f30bcb204d630c4e61ff3a7a73289dd1175c990fdc9ff"
+      },
+      {
+        "name": "chronicle_story_optional_render_smoke",
+        "type": "source",
+        "result": "CHRONICLE_STORY_OPTIONAL_RENDER_SMOKE PASS checks=79 failures=0",
+        "checks": 79,
+        "log": "artifacts/skill-audio-20261103/verification/full-check/chronicle_story_optional_render_smoke.log",
+        "sha256": "d23f9d04ff2c7bff7562e8e72af93dc6371fa44c65e4b703e89a128ce1605b09"
+      },
+      {
+        "name": "chronicle_story_pack_smoke",
+        "type": "pck",
+        "result": "CHRONICLE_STORY_PACK_SMOKE PASS checks=97 failures=0",
+        "checks": 97,
+        "log": "artifacts/skill-audio-20261103/verification/full-check/chronicle_story_pack_smoke.log",
+        "sha256": "edd8b0675bbc487960730c19527d321b126ad8359af062d628bbd1c26bd91083"
+      },
+      {
+        "name": "chronicle_story_progress_smoke",
+        "type": "source",
+        "result": "CHRONICLE_STORY_PROGRESS_SMOKE PASS checks=86 failures=0",
+        "checks": 86,
+        "log": "artifacts/skill-audio-20261103/verification/full-check/chronicle_story_progress_smoke.log",
+        "sha256": "b0a26d2d929e1dbc425e071237046cafd1199e1b8dd1b302c1168ef739781be7"
+      },
+      {
+        "name": "chronicle_story_replay_smoke",
+        "type": "source",
+        "result": "CHRONICLE_STORY_REPLAY_SMOKE PASS checks=162 failures=0",
+        "checks": 162,
+        "log": "artifacts/skill-audio-20261103/verification/full-check/chronicle_story_replay_smoke.log",
+        "sha256": "bc44636029b1161f9d48e9e2c8b8bb8e9123bbb04459d23a1ae25b55b352f4ea"
+      },
+      {
+        "name": "chronicle_story_ui_smoke",
+        "type": "source",
+        "result": "CHRONICLE_STORY_UI_SMOKE PASS checks=111 failures=0",
+        "checks": 111,
+        "log": "artifacts/skill-audio-20261103/verification/full-check/chronicle_story_ui_smoke.log",
+        "sha256": "a294cd3807654ba5bee75451702a45d852135807580b425a5c2a94857256646e"
+      },
+      {
+        "name": "jia_combat_art_smoke",
+        "type": "source",
+        "result": "JIA_COMBAT_ART_SMOKE PASS checks=26 failures=0",
+        "checks": 26,
+        "log": "artifacts/skill-audio-20261103/verification/full-check/jia_combat_art_smoke.log",
+        "sha256": "49475f313cab4245c29914f71c845030d77a59500b6739bf007b5e474f6fdeb2"
+      }
+    ]
+  },
+  "dense_mix_fixtures": {
+    "scope": "fixed SFX-only fixture and the independently selected dense windows of all twelve BGM; no claim about every gameplay instant or artistic audibility",
+    "settings": {
+      "music_volume": 0.7,
+      "sfx_volume": 0.65
+    },
+    "results": [
+      {
+        "finite": true,
+        "frames": 20480,
+        "music": "none",
+        "peak": 0.15838311612606,
+        "rms": 0.0290691092457174,
+        "start_seconds": 0.0
+      },
+      {
+        "finite": true,
+        "frames": 24576,
+        "music": "midi_test_01",
+        "peak": 0.344843029975891,
+        "rms": 0.0538369568307042,
+        "start_seconds": 87.0
+      },
+      {
+        "finite": true,
+        "frames": 24576,
+        "music": "midi_test_02",
+        "peak": 0.315898716449738,
+        "rms": 0.0596584047826839,
+        "start_seconds": 102.0
+      },
+      {
+        "finite": true,
+        "frames": 20480,
+        "music": "midi_test_03",
+        "peak": 0.25661164522171,
+        "rms": 0.0508058842545458,
+        "start_seconds": 138.0
+      },
+      {
+        "finite": true,
+        "frames": 24576,
+        "music": "midi_test_04",
+        "peak": 0.316199332475662,
+        "rms": 0.0551189935231979,
+        "start_seconds": 112.0
+      },
+      {
+        "finite": true,
+        "frames": 24576,
+        "music": "midi_test_05",
+        "peak": 0.33170747756958,
+        "rms": 0.0605463922104913,
+        "start_seconds": 194.0
+      },
+      {
+        "finite": true,
+        "frames": 20480,
+        "music": "midi_test_06",
+        "peak": 0.253879249095917,
+        "rms": 0.0541751739100036,
+        "start_seconds": 52.0
+      },
+      {
+        "finite": true,
+        "frames": 20992,
+        "music": "midi_test_07",
+        "peak": 0.298373013734818,
+        "rms": 0.0555573175227992,
+        "start_seconds": 81.0
+      },
+      {
+        "finite": true,
+        "frames": 24576,
+        "music": "midi_test_08",
+        "peak": 0.214162111282349,
+        "rms": 0.0420866174595703,
+        "start_seconds": 282.0
+      },
+      {
+        "finite": true,
+        "frames": 24576,
+        "music": "midi_test_09",
+        "peak": 0.320209413766861,
+        "rms": 0.0594323241805033,
+        "start_seconds": 161.0
+      },
+      {
+        "finite": true,
+        "frames": 20480,
+        "music": "midi_test_10",
+        "peak": 0.232040226459503,
+        "rms": 0.052456512842817,
+        "start_seconds": 142.0
+      },
+      {
+        "finite": true,
+        "frames": 24576,
+        "music": "midi_test_11",
+        "peak": 0.402150541543961,
+        "rms": 0.0660239905330639,
+        "start_seconds": 157.0
+      },
+      {
+        "finite": true,
+        "frames": 24576,
+        "music": "midi_test_12",
+        "peak": 0.318158596754074,
+        "rms": 0.0621390797868577,
+        "start_seconds": 153.0
+      }
+    ],
+    "maximum_sample_peak": 0.402150541543961,
+    "finite_unclipped_lossless_captures": 13,
+    "window_authority": "dense-music-test-windows.json"
+  },
+  "build": {
+    "directory": "builds/linux-skill-audio-20261103",
+    "launcher": "builds/linux-skill-audio-20261103/run.sh",
+    "manifest": "builds/linux-skill-audio-20261103/build-manifest.json",
+    "manifest_sha256": "8f0f14d3d6f767787a8dcf163d131a20d46a92e4e74926e1bcf9e71f64ada214",
+    "type": "local_linux_development_pack_with_godot_runtime",
+    "preset": "Linux development",
+    "pck_bytes": 231735188,
+    "pck_sha256": "9f8c2aefdaeb2f9499efe8dda705f764f5bc70c19dc7bb8457a7d5767f8b1690",
+    "notices_and_source_files": 70,
+    "isolated_launcher_headless_startup": "PASS",
+    "isolated_empty_cwd_native_skill_functional_test": "PASS checks=198 failures=0; no error or cleanup diagnostics",
+    "headless_log": "artifacts/skill-audio-20261103/verification/build-startup.log",
+    "native_skill_log": "artifacts/skill-audio-20261103/verification/build-skill-audio-smoke.log",
+    "native_test_script": "artifacts/skill-audio-20261103/verification/package-skill-runtime-smoke.gd",
+    "test_player_data": "package-local test-user-data; existing player directory untouched",
+    "notice_source_hashes_match_current_repo": true,
+    "music_and_skill_notice_links": {
+      "status": "PASS",
+      "checked": 26,
+      "missing": []
+    },
+    "final_documents_synced": true
+  },
+  "source_hashes": {
+    "scripts/audio/combat_audio.gd": "65f754ee50b1802ad10cdf3b47c0f44a789131e0cb57a901a33d873a8e12bc3b",
+    "scripts/audio/skill_sound_catalog.gd": "7f3af48cd90c2114a4b8fbd9b69955b1af357e219de4f4387889ceba40fdef38",
+    "scripts/audio/music_player.gd": "878254f52d6023f9a49827022a94b299c78bf20c19b623e7ccfb2ddb87a60fd4",
+    "scripts/ui/chronicle/combat_feedback.gd": "6c86a82f9e382fbc54fe96f11406353f5df343c5c9f0966cb51f065065f5c698",
+    "scripts/ui/chronicle/boss_feedback.gd": "75bd3d7ce352682a5a6ae3629c3c8e3ec644117334cff09bf31459fa1f567a0b",
+    "scripts/ui/chronicle/battle_canvas.gd": "baaaa1136a41c7661113b9f0e9c037a06b0bbd7b3508cdadc086518b63e35a26",
+    "scripts/ui/chronicle/battle_view.gd": "7b6d58aab53e803468bc702e7a68525ee30da0634c33ca659166d9579531be5c",
+    "scripts/ui/chronicle/chronicle_shell.gd": "8cefda6bd0197efe83eeac7969b92b48fe7a1e34a9e60825f5dc757f65b40a94",
+    "scripts/battle/battle_session.gd": "82343fa7afdc6ccca9163ec37477257abfd5b4b6e7f1a545e1ab21a6b9df4d30",
+    "scripts/battle/enemy_system.gd": "e50a36dee03c8794405a0d00ab1ae161f0033cf37e40274f19cead5f245132e5",
+    "scripts/tests/chronicle_skill_audio_smoke.gd": "5097eec78eae1d61bf06d4aea7d0971fcee2c855ffb4f05be6c3be6bb733a912",
+    "scripts/tests/chronicle_enemy_sessions_smoke.gd": "911885312f806f11ace48b4b93329ded9450dda7591778000b025076565c781d",
+    "export_presets.cfg": "44c1083d08bce27c2e69b8ea6aabc8d0ad56a8433c92ae1926ee2b9a29385a6b",
+    "scripts/check_project.sh": "68b737312048149be56e463d1fcee6eaa001f013c3862af1775e40e081d8b01f",
+    "assets/data/audio/skill_sound_profiles.json": "6252cd564482dc70b280a8e39d75bf35adf1cff89668cf8576d6bedd9826fd0f",
+    "assets/sfx/skill-combat-20261103/catalog.json": "0c736fcd4a8383b0eae33c8cd7bbd1f01e6654283b55b556f3a0d32bd847eb4f"
+  },
+  "manual_listening_review": "not performed; technical validation does not establish artistic acceptance",
+  "player_file_reconciliation_owner": "root task owns player-data-after.json and completion-verification.json"
+}

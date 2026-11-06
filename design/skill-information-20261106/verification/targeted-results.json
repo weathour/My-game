@@ -1,0 +1,73 @@
+{
+  "recorded_at": 1793944913.811227,
+  "fresh_targeted": {
+    "chronicle_skill_information_smoke": {
+      "log": "chronicle_skill_information_smoke.log",
+      "strict_failures": [],
+      "final_line": "CHRONICLE_SKILL_INFORMATION_SMOKE PASS checks=1575 failures=0"
+    },
+    "chronicle_skill_information_render_smoke": {
+      "log": "render-smoke.log",
+      "strict_failures": [],
+      "final_line": "CHRONICLE_SKILL_INFORMATION_RENDER_SMOKE PASS checks=566 failures=0"
+    },
+    "chronicle_character_panels_smoke": {
+      "log": "chronicle_character_panels_smoke.log",
+      "strict_failures": [],
+      "final_line": "CHRONICLE_CHARACTER_PANELS_SMOKE PASS checks=509 failures=0"
+    },
+    "chronicle_party_summary_smoke": {
+      "log": "chronicle_party_summary_smoke.log",
+      "strict_failures": [],
+      "final_line": "CHRONICLE_PARTY_SUMMARY_SMOKE PASS checks=155 failures=0"
+    },
+    "chronicle_reflow_visual_smoke": {
+      "log": "chronicle_reflow_visual_smoke.log",
+      "strict_failures": [],
+      "final_line": "CHRONICLE_REFLOW_VISUAL_SMOKE PASS"
+    }
+  },
+  "native_sizes": [
+    [
+      960,
+      540
+    ],
+    [
+      1280,
+      720
+    ],
+    [
+      1920,
+      1080
+    ]
+  ],
+  "layouts": [
+    "legacy",
+    "team_band"
+  ],
+  "actual_input": [
+    "mouse motion through SubViewport",
+    "Esc/Tab/Enter and popup Up/Down",
+    "popup Esc stays in paused inspector",
+    "reward details Enter/Esc then intentional card selection and claim"
+  ],
+  "initial_failures_preserved": [
+    "data-smoke-initial.log",
+    "render-smoke-initial.log",
+    "render-quick-before-popup-guard.log",
+    "render-quick-home-after-guard.log",
+    "render-node-identity-parse-failure.log",
+    "render-claim-tooltip-bounds-failure.log",
+    "hover-stress-before-layout-fix.log"
+  ],
+  "intermittent_tooltip_bounds_investigation": "fixed minimum_size_changed/coalesced initial layout; fixed stress and formal native cleanPASS",
+  "fixed_hover_stress": {
+    "log": "hover-stress.log",
+    "checks": 576,
+    "failures": [],
+    "iterations": 18,
+    "every_visible_painted_frame_fits": true
+  },
+  "native_battle_reward_screenshots": 19,
+  "preserved_character_owner_screenshots": 9
+}

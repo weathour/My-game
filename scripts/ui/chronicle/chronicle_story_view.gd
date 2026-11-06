@@ -1,4 +1,5 @@
 extends Control
+const JIA_APPEARANCE := preload("res://scripts/ui/chronicle/jia_appearance.gd")
 ## Presentation-only visual-novel reader. The owner commits progress before show_line().
 signal advance_requested(line_id: String)
 signal leave_requested
@@ -247,7 +248,7 @@ func show_line(line_id: String) -> void:
 	var line: Dictionary = _lines[_line_index] if _line_index >= 0 else {}
 	line_presented.emit(line_id)
 	_title.text = str(_event.get("title", "剧情"))
-	_location.text = str(line.get("location", _event.get("location", "")))
+	_location.text = _resolved_location()
 	if _replay:
 		_location.text = "剧情回顾" + (" · " + _location.text if not _location.text.is_empty() else "")
 	_return_button.text = str(_event.get("return_label", "返回路线"))
@@ -268,6 +269,13 @@ func show_line(line_id: String) -> void:
 	_refresh_controls()
 	_layout()
 	_set_actors(line)
+
+func _resolved_location() -> String:
+	var result := str(_event.get("location", ""))
+	for index in range(_line_index + 1):
+		var candidate := str(_lines[index].get("location", ""))
+		if not candidate.is_empty(): result = candidate
+	return result
 
 func _resolved_background() -> String:
 	var result := str(_event.get("background", ""))
@@ -308,16 +316,21 @@ func _set_actors(line: Dictionary) -> void:
 			continue
 		var actor: Dictionary = raw_actor
 		var actor_id := str(actor.get("id", ""))
+		var appearance := JIA_APPEARANCE.COMMON
+		if actor_id == "JIA":
+			var event_appearance := str(_event.get("jia_appearance", JIA_APPEARANCE.for_story(_event)))
+			appearance = JIA_APPEARANCE.normalize_appearance(str(actor.get("appearance", event_appearance)))
+		var expression := JIA_APPEARANCE.normalize_expression(str(actor.get("expression", "neutral")))
 		var texture: Texture2D = _safe_texture(str(actor.get("texture", "")))
 		if texture == null and _characters.has(actor_id):
 			# Dialogue composition is independent of the full-body character detail image.
-			texture = PORTRAITS.dialogue(actor_id)
+			texture = PORTRAITS.dialogue(actor_id, appearance, expression)
 		if texture == null:
 			continue
 		var slot := str(actor.get("slot", "center"))
 		if slot not in ["left", "center", "right"]:
 			slot = "center"
-		desired[actor_id] = {"texture": texture, "slot": slot}
+		desired[actor_id] = {"texture": texture, "slot": slot, "appearance":appearance, "expression":expression, "pose":JIA_APPEARANCE.portrait_pose(appearance, expression)}
 	for actor_id: String in _actors.keys():
 		if desired.has(actor_id):
 			continue
@@ -349,6 +362,7 @@ func _set_actors(line: Dictionary) -> void:
 		var changed: bool = portrait.texture != desired[actor_id].texture
 		portrait.texture = desired[actor_id].texture
 		portrait.set_meta("slot", desired[actor_id].slot)
+		for field in ["appearance", "expression", "pose"]: portrait.set_meta(field, desired[actor_id][field])
 		var speaker := str(line.get("speaker", ""))
 		var tint := Color.WHITE if speaker == actor_id else Color(0.72, 0.76, 0.70)
 		if speaker in ["", "narrator"]:
@@ -361,6 +375,9 @@ func _set_actors(line: Dictionary) -> void:
 		else:
 			if is_new or changed:
 				portrait.modulate = Color(tint, 0.0)
+			# An existing actor changing clothes/pose only fades. Entry movement
+			# belongs to a new actor, not to a texture or expression change.
+			if is_new:
 				portrait.position.x += 14.0 if desired[actor_id].slot == "right" else -14.0
 			var tween := create_tween().set_parallel(true)
 			_actor_tweens[actor_id] = tween

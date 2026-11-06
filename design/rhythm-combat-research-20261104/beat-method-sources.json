@@ -1,0 +1,286 @@
+{
+  "schema_version": 1,
+  "review_date": "2026-11-04",
+  "status": "bounded_primary_source_research_not_implementation",
+  "scope": {
+    "focus": "BeatRoot symbolic-event tracking, metrical-level/phase ambiguity, full-file lookahead and bounded evaluation",
+    "primary_source_count": 3,
+    "modern_audio_models": "parent workstream; not re-reviewed here",
+    "algorithm_executed": false,
+    "project_MIDI_files_inspected_this_package": false,
+    "runtime_modified": false,
+    "training_proposed": false
+  },
+  "sources": [
+    {
+      "id": "S1",
+      "kind": "author_original_paper",
+      "authors": [
+        "Simon Dixon"
+      ],
+      "year": 2001,
+      "title": "An Interactive Beat Tracking and Visualisation System",
+      "venue": "ICMC 2001, pp.215-218",
+      "url": "https://webspace.eecs.qmul.ac.uk/s.e.dixon/pub/2001/icmc.pdf",
+      "legacy_url": "https://eecs.qmul.ac.uk/~simond/pub/2001/icmc.pdf",
+      "legacy_url_note": "legacy address redirected during current open; webspace author-hosted copy read successfully",
+      "read_scope": "full four-page paper",
+      "evidence": [
+        {
+          "locator": "Section2, p.2",
+          "facts": [
+            "Original system accepts audio or MIDI.",
+            "MIDI onset times come directly from events; near-simultaneous notes are grouped as chords.",
+            "Pitch, velocity and duration estimate event salience.",
+            "IOI clustering proposes tempi; agents evaluate tempo and phase hypotheses.",
+            "Processing is offline."
+          ]
+        },
+        {
+          "locator": "Abstract and Section3, pp.1-2",
+          "facts": [
+            "Output is estimated beat times; the interface can correct errors or choose another metrical level.",
+            "Computed clicks accompany the source for listening."
+          ]
+        }
+      ],
+      "limits": "Original MIDI support is established; a current executable/port MIDI reader was not tested. No automatic downbeat-label guarantee follows from this paper."
+    },
+    {
+      "id": "S2",
+      "kind": "author_original_paper",
+      "authors": [
+        "Simon Dixon"
+      ],
+      "year": 2007,
+      "title": "Evaluation of the Audio Beat Tracking System BeatRoot",
+      "venue": "Journal of New Music Research 36(1),39-50",
+      "doi": "10.1080/09298210701653310",
+      "url": "https://www.eecs.qmul.ac.uk/~simond/pub/2007/jnmr07.pdf",
+      "author_mirror": "https://webspace.eecs.qmul.ac.uk/s.e.dixon/pub/2007/jnmr07.pdf",
+      "read_scope": "architecture, onset/tempo/agent stages, interface, previous tests, Tables2-3 and conclusions",
+      "evidence": [
+        {
+          "locator": "Architecture/Onset Detection, pp.3-4",
+          "facts": [
+            "The described revised pipeline starts from audio and spectral-flux onsets.",
+            "Symbolic duration/pitch/intensity salience is distinguished from audio features."
+          ]
+        },
+        {
+          "locator": "Beat Tracking and Interface, pp.6-10",
+          "facts": [
+            "Agents can interpolate beats without an onset.",
+            "Automatic beat output and user annotation of metrical hierarchy are distinct.",
+            "Perceived beats and nominal on-beat performed-note timing are different annotation targets."
+          ]
+        },
+        {
+          "locator": "Table2, p.15; Conclusions, pp.16-17",
+          "facts": [
+            "Blind audio evaluation:613/1360 excerpts matched annotation rate;535/1360 used double rate.",
+            "These audio results are not a MIDI benchmark or our twelve-song result.",
+            "Regular beats without large discontinuities are assumed.",
+            "The system is not designed as a real-time tracker."
+          ]
+        }
+      ],
+      "limits": "Multiple hypotheses reduce search failure; they do not guarantee the listener-preferred tactus or phase. Historical claims are not current-project acceptance evidence."
+    },
+    {
+      "id": "S3",
+      "kind": "official_library_documentation",
+      "organization": "Mido project",
+      "title": "Standard MIDI Files — Tempo and Time Resolution",
+      "version_observed": "1.3.2 stable documentation",
+      "url": "https://mido.readthedocs.io/en/stable/files/midi.html",
+      "read_scope": "Opening, File Types, Time Attribute, Tempo and Time Resolution",
+      "evidence": [
+        {
+          "locator": "Opening/File Types",
+          "facts": [
+            "MidiFile reads the complete file into memory.",
+            "Type1 tracks are synchronous; Type2 tracks are asynchronous."
+          ]
+        },
+        {
+          "locator": "Tempo and Time Resolution",
+          "facts": [
+            "PPQN describes ticks per quarter note.",
+            "set_tempo stores microseconds per quarter; the documented default is500000.",
+            "Tempo and time-signature messages may change during a file.",
+            "Ticks require the tempo mapping to become seconds."
+          ]
+        }
+      ],
+      "limits": "These are file-time semantics, not a perceptual tactus detector or a certification that metadata matches listening."
+    }
+  ],
+  "terminology": {
+    "note_onset": "一次音符/事件开始；不是主拍定义。MIDI事件时间可直接读，实际音色包络的可听起音仍可能不同。",
+    "beat_tactus": "听者可持续跟随的拍脉冲；必须明确目标拍层和相位。",
+    "downbeat": "小节首拍/拍号层级位置；beat时间输出不自动提供downbeat标签。",
+    "metadata_grid": "PPQN、tempo-map和time-signature形成的文件计时/记谱网格。",
+    "source_refs": [
+      "S1",
+      "S2",
+      "S3"
+    ]
+  },
+  "method_contract": {
+    "symbolic_BeatRoot_original": {
+      "input": "绝对时间事件+由音符音高/力度/时值估算的salience；多轨先合并到共同时间轴，再聚合近同时音。",
+      "processing": "IOI候选+tempo/phase多假设事件匹配。",
+      "output": "节拍时间序列；允许无实际note_on的预测拍。",
+      "not_output": [
+        "所有鼓onset",
+        "保证听者偏好的唯一拍层",
+        "保证小节首拍/downbeat",
+        "完整切分节奏parse"
+      ],
+      "MIDI_support": "2001原系统明确支持；未验证当前下载软件/Java版本的MIDI输入能力。",
+      "source_refs": [
+        "S1",
+        "S2"
+      ]
+    },
+    "multitimbral_salience_inference": {
+      "status": "engineering_inference_not_validated_for_our_tracks",
+      "points": [
+        "事件级方法可读取全部乐器，不必先从混音中分离onset。",
+        "原近似权重不能直接视为跨音色感知显著性真值；尤其鼓音高与持续时值的意义不同。",
+        "保留分轨/乐器信息比较salience权重是有界适配候选，不应承诺任意编配通用。"
+      ],
+      "evidence_basis": [
+        "S1",
+        "S2"
+      ]
+    }
+  },
+  "metadata_and_ambiguity": {
+    "status": "source_supported_distinctions_plus_project_inferences",
+    "file_grid_limits": [
+      "四分音符文件速度不指定听者选择四分、二分还是八分层。",
+      "同一BPM/PPQN可存在半速、倍速或其他拍层解释；time signature本身也不能证明人会按分母音符拍。",
+      "密集镲片/鼓花、强反拍或提前进入的切分并不都该成为输入主拍。",
+      "规则相位候选可能相差半拍；没有事件的拍仍可能被听者补足。",
+      "文件起点不等于第一完整小节首拍；本研究未检查12文件的pickup或tempo-map。",
+      "MIDI事件已知不等于渲染音频各音色的可听起音、整体延迟或响度已校准。"
+    ],
+    "candidate_policy": "保留拍层与相位候选及其分数；选择游戏主拍需人听评估。分数差和算法分歧可选取审查片段，算法一致不能充当真值。",
+    "source_refs": [
+      "S1",
+      "S2",
+      "S3"
+    ]
+  },
+  "full_file_vs_causal_audio": {
+    "status": "project_engineering_inference",
+    "known_file_advantages": [
+      "可在播放前读取未来note_on/note_off及tempo-map，完整时值salience无需等待音符结束。",
+      "可做前后文评分、拍层/相位选择并固定输出轨；不必在每次战斗输入时重新追踪。",
+      "这与只观察过去音频、必须立即预测下一拍的因果任务不同。"
+    ],
+    "not_solved_by_lookahead": [
+      "听者偏好的拍层",
+      "切分引起的相位歧义",
+      "自由节奏/弱拍材料是否适合作为连续输入网格",
+      "实际OGG与MIDI的时间和可听重音对应"
+    ],
+    "heavy_model_requirement": "不必先训练重型模型：已有事件/多假设方法足以形成非学习基线；能否满足12曲仍需实测。若以后比较预训练audio模型，它是可选对照，不是本阶段新训练项目。",
+    "runtime_claim_limit": "历史离线效率不能转换成Godot加载时长承诺；当前硬件、文件密度及实现需要独立计时。",
+    "source_refs": [
+      "S1",
+      "S2",
+      "S3"
+    ]
+  },
+  "twelve_track_claim_boundaries": {
+    "track_count": 12,
+    "track_count_authority": "task brief; this package did not recompute corpus inventory",
+    "can_say_now": [
+      "有原始MIDI事件输入的成熟非学习节拍跟踪路线。",
+      "metadata可构造可重复的计时基线，事件方法可给替代主拍候选。",
+      "全文件前瞻可避开在线因果约束。",
+      "存在需要专项评估的拍层/相位/渲染对应风险。"
+    ],
+    "cannot_say_without_annotations_and_execution": [
+      "12曲已找到感知正确主拍或通过准确率门槛。",
+      "同metadata一致、多个算法一致或节拍间隔平滑即为正确。",
+      "任意MIDI100%适配。",
+      "beat跟踪结果已包含可靠downbeat。",
+      "主拍选择与总战斗体验已验证。"
+    ],
+    "evaluation_annotation_role": "人工tap/听审仅给评估参考和发现失败；不是要求逐曲制作上线手谱。上线候选仍由算法产生。"
+  },
+  "minimal_validation_proposal": {
+    "status": "not_run_engineering_proposal_not_literature_standard",
+    "data": [
+      "冻结12个实际播放OGG及对应MIDI的哈希、tempo-map与渲染偏移。",
+      "每曲抽取稳定段、密集/切分段、开头或转段各约30秒；避免只选四平八稳鼓段。",
+      "少量片段用于定规则，其余保留盲评；12曲仍只是当前库验收，不能外推任意MIDI。"
+    ],
+    "references": [
+      "建议3名听者分别听实际OGG盲tap；先不显示MIDI网格/算法click。",
+      "重复一次部分片段，估计个人抖动；保留拍层分歧，不强迫单一真值。",
+      "参考标注分开记录首选tactus、可接受替代拍层和无稳定拍/不确定段。",
+      "可用click叠加听审复核算法相位；这一步不能替代独立tap参考。"
+    ],
+    "comparators": [
+      "tempo-map/metadata四分层基线，并显式测试半/倍速候选。",
+      "一个记录实现/参数的BeatRoot式symbolic候选；当前软件MIDI入口先核验，必要时仅适配事件输入。",
+      "现代audio对照由父任务单独研究；不新增训练范围。"
+    ],
+    "metrics": [
+      {
+        "id": "strict_preferred_level",
+        "report": "对首选拍层作一对一时间匹配，precision/recall/F1；错误半/倍速不能在主指标里自动当正确。",
+        "window_candidate": "±min(70ms,0.1*local_IBI)；候选阈值，不冒称通行标准。"
+      },
+      {
+        "id": "level_phase_diagnostics",
+        "report": "分别统计1:1、1:2、2:1等拍层、半拍偏相、连续失锁时长和拍层跳变；替代层可接受结果另列。"
+      },
+      {
+        "id": "timing",
+        "report": "已匹配拍的绝对时差中位数/P95，同时报告未匹配拍，避免仅靠已匹配子集掩盖漏拍。"
+      },
+      {
+        "id": "human_agreement",
+        "report": "逐听者结果、拍层分歧和重复tap误差；不把多数意见或算法一致称为普遍唯一节拍。"
+      },
+      {
+        "id": "engineering",
+        "report": "全曲轨时间单调、无重复/越界、换段/tempo事件/loop处理；加载耗时、内存和MIDI-OGG偏移独立核验。"
+      }
+    ],
+    "acceptance_candidates": {
+      "status": "proposed_go_no_go_for_current_corpus_not_validated_numbers",
+      "clear_beat_segments": "各曲清晰有拍评估段strict_F1建议>=0.90，匹配时差P95<=70ms；逐曲/逐类报告，不靠总平均掩盖一曲失败。",
+      "phase_and_level": "无未标出的持续半拍偏相或半/倍速切换；若只能达替代拍层，应明确判为需要产品决策，不伪装首选tactus已过。",
+      "ambiguous_segments": "允许不确定/多拍层标签；若游戏仍要求连续基础输入，须先由独立听审确认稳定可跟随的算法候选，不用隐藏的逐曲手谱补过。",
+      "failure_reporting": "不满足当前阈值就记录不能自动选定；调整方法/全局先验后重评保留片段，不以算法一致放行。"
+    },
+    "prohibited_shortcuts": [
+      "不把BeatRoot历史audio统计当本库MIDI准确率。",
+      "不通过只放宽到半/倍速正确率掩盖游戏默认拍层错误。",
+      "不让同一套metadata既决定算法又充当感知准确率真值。",
+      "不把评估标注文件暗中作为逐曲上线手谱。"
+    ]
+  },
+  "verification": {
+    "source_access": "primary PDFs and official documentation read with web; no third-party summary used as evidence",
+    "source_checks": [
+      "S1 original audio/MIDI distinction read inSection2",
+      "S2 audio-versus-symbolic distinction and Table2 rates checked",
+      "S3 full-file/PPQN/tempo semantics checked"
+    ],
+    "runtime_or_benchmark_results": null,
+    "pending": [
+      "current BeatRoot implementation MIDI-input compatibility",
+      "actual12-file parse and timing inventory",
+      "human tap reference",
+      "candidate beat extraction and quantitative comparison"
+    ]
+  }
+}

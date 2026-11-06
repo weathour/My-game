@@ -1,0 +1,1281 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-03",
+  "status": "implemented_and_verified",
+  "authority": "Specific chapter allocation for the unchanged-MIDI timbre experiment; no runtime route or audio asset has been replaced.",
+  "route_source_sha256": "0bf160487449c586d1692a97d144921199d4a0a63c1ee0bb358e1f2e60867e39",
+  "story_source_sha256": "fa06bb583184df7255c4d1118ade2c7204a3d245175a69f234ead97aac30785c",
+  "character_events_source_sha256": "bc7217f73f5056fc79f37903406726c44ee17fabf5f1f64be3a9bd03ed1ce627",
+  "new_test_cues": [
+    {
+      "cue_id": "midi_test_01",
+      "title": "The Beautiful People",
+      "input_index": 1,
+      "midi_file": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/扒谱试验/MuScriptor-large/全部完整伴奏_全曲对照/01 - The Beautiful People/The Beautiful People - 全曲.mid",
+      "midi_sha256": "3bf77b5352dd8020628d9a7f2c5cb7a2ea53b015dc610b3ae14c9b18234e5cc8",
+      "proposed_game_asset": "res://assets/music/midi_test/midi_test_01.ogg",
+      "asset_status": "published_and_runtime_verified",
+      "repo_midi_file": "design/music-20261103-midi-test/inputs/midi_test_01.mid",
+      "asset_sha256": "f6ea3b1476c8fd12c1afab00ab2c16c7b7da385cefdd904535033f6d20639e49",
+      "duration_seconds": 221.764625
+    },
+    {
+      "cue_id": "midi_test_02",
+      "title": "mOBSCENE",
+      "input_index": 2,
+      "midi_file": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/扒谱试验/MuScriptor-large/全部完整伴奏_全曲对照/02 - mOBSCENE/mOBSCENE - 全曲.mid",
+      "midi_sha256": "277b128bff29eba29fb325bd888fb1e4f49aa9b66f850f1f46b9005ab058c99c",
+      "proposed_game_asset": "res://assets/music/midi_test/midi_test_02.ogg",
+      "asset_status": "published_and_runtime_verified",
+      "repo_midi_file": "design/music-20261103-midi-test/inputs/midi_test_02.mid",
+      "asset_sha256": "f450db01f5297cde45aecf5ea4c8fc1c089baab5b0a719dd5f3f857f99b7d0d3",
+      "duration_seconds": 208.815917
+    },
+    {
+      "cue_id": "midi_test_03",
+      "title": "The Fight Song",
+      "input_index": 3,
+      "midi_file": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/扒谱试验/MuScriptor-large/全部完整伴奏_全曲对照/03 - The Fight Song/The Fight Song - 全曲.mid",
+      "midi_sha256": "058d6ee5c72221df2d05785ee3603f44557bbce19dfdb5afe7edd6f61d2a1d3a",
+      "proposed_game_asset": "res://assets/music/midi_test/midi_test_03.ogg",
+      "asset_status": "published_and_runtime_verified",
+      "repo_midi_file": "design/music-20261103-midi-test/inputs/midi_test_03.mid",
+      "asset_sha256": "2caeed865d0afe72865e60288664b4fe87f9e061e10d2954025e63e4db89f02c",
+      "duration_seconds": 178.770438
+    },
+    {
+      "cue_id": "midi_test_04",
+      "title": "Disposable Teens",
+      "input_index": 4,
+      "midi_file": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/扒谱试验/MuScriptor-large/全部完整伴奏_全曲对照/04 - Disposable Teens/Disposable Teens - 全曲.mid",
+      "midi_sha256": "6d36cfc0c0cd15d69a43ea892220c09e24966acf7e22952b6a275f5b725eb4fb",
+      "proposed_game_asset": "res://assets/music/midi_test/midi_test_04.ogg",
+      "asset_status": "published_and_runtime_verified",
+      "repo_midi_file": "design/music-20261103-midi-test/inputs/midi_test_04.mid",
+      "asset_sha256": "fb51039ac1ebb2bdfe3fa51a17cfac9e111080d804f48f40a5158249ca645759",
+      "duration_seconds": 189.823125
+    },
+    {
+      "cue_id": "midi_test_05",
+      "title": "The Nobodies",
+      "input_index": 5,
+      "midi_file": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/扒谱试验/MuScriptor-large/全部完整伴奏_全曲对照/05 - The Nobodies/The Nobodies - 全曲.mid",
+      "midi_sha256": "50fa90065eab0d7ffbb8f65ac3fb78b1d9e8a2bb3c34b21bc09a7c36165121c0",
+      "proposed_game_asset": "res://assets/music/midi_test/midi_test_05.ogg",
+      "asset_status": "published_and_runtime_verified",
+      "repo_midi_file": "design/music-20261103-midi-test/inputs/midi_test_05.mid",
+      "asset_sha256": "b3160d493a5a3b2c1a0b21b05c64890e107fbec9ede215a3f9c6fba6787d5bac",
+      "duration_seconds": 220.310938
+    },
+    {
+      "cue_id": "midi_test_06",
+      "title": "Antichrist Superstar",
+      "input_index": 6,
+      "midi_file": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/扒谱试验/MuScriptor-large/全部完整伴奏_全曲对照/06 - Antichrist Superstar/Antichrist Superstar - 全曲.mid",
+      "midi_sha256": "b1e48dee25ba68a55d8ea9aa85bd691e15282674da85de0d19f2746d2117585e",
+      "proposed_game_asset": "res://assets/music/midi_test/midi_test_06.ogg",
+      "asset_status": "published_and_runtime_verified",
+      "repo_midi_file": "design/music-20261103-midi-test/inputs/midi_test_06.mid",
+      "asset_sha256": "f85a8e4b0f34574734640912b5daaf602f1406753e119cd7400038419fc05432",
+      "duration_seconds": 269.269313
+    },
+    {
+      "cue_id": "midi_test_07",
+      "title": "Little Horn",
+      "input_index": 7,
+      "midi_file": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/扒谱试验/MuScriptor-large/全部完整伴奏_全曲对照/07 - Little Horn/Little Horn - 全曲.mid",
+      "midi_sha256": "37ecee25ebd64e725dea9917576a39d19308658724bb2d3c57c0f13ca5ff89f3",
+      "proposed_game_asset": "res://assets/music/midi_test/midi_test_07.ogg",
+      "asset_status": "published_and_runtime_verified",
+      "repo_midi_file": "design/music-20261103-midi-test/inputs/midi_test_07.mid",
+      "asset_sha256": "5ce75b02de0cc804d173e69fd41b6ef123081ac9ba6dc955beb604b2e8505aab",
+      "duration_seconds": 162.028854
+    },
+    {
+      "cue_id": "midi_test_08",
+      "title": "Man That You Fear",
+      "input_index": 8,
+      "midi_file": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/扒谱试验/MuScriptor-large/全部完整伴奏_全曲对照/08 - Man That You Fear/Man That You Fear - 全曲.mid",
+      "midi_sha256": "419c590d01212e338488c8f6d34053bc4f4b5684ea293a642e918fe991cfa40b",
+      "proposed_game_asset": "res://assets/music/midi_test/midi_test_08.ogg",
+      "asset_status": "published_and_runtime_verified",
+      "repo_midi_file": "design/music-20261103-midi-test/inputs/midi_test_08.mid",
+      "asset_sha256": "dae3bd96de35e646a194b2a46a7096a360faa35413c7289414ce78bb49438dd9",
+      "duration_seconds": 291.959083
+    },
+    {
+      "cue_id": "midi_test_09",
+      "title": "Deformography",
+      "input_index": 9,
+      "midi_file": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/扒谱试验/MuScriptor-large/全部完整伴奏_全曲对照/09 - Deformography/Deformography - 全曲.mid",
+      "midi_sha256": "442f966928a3be34f3eef5679c35d51f091452e7c4510fe2aabd3cd79c96f18b",
+      "proposed_game_asset": "res://assets/music/midi_test/midi_test_09.ogg",
+      "asset_status": "published_and_runtime_verified",
+      "repo_midi_file": "design/music-20261103-midi-test/inputs/midi_test_09.mid",
+      "asset_sha256": "65a90044211859756c5c382bd3edd7507178a23ac91f7c97907cfaa72a8454c3",
+      "duration_seconds": 274.854604
+    },
+    {
+      "cue_id": "midi_test_10",
+      "title": "Kinderfeld",
+      "input_index": 10,
+      "midi_file": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/扒谱试验/MuScriptor-large/全部完整伴奏_全曲对照/10 - Kinderfeld/Kinderfeld - 全曲.mid",
+      "midi_sha256": "ce55a52e2f92c2b3a97e766c90704128c8378863fda1953d8eb3b992afad3eb7",
+      "proposed_game_asset": "res://assets/music/midi_test/midi_test_10.ogg",
+      "asset_status": "published_and_runtime_verified",
+      "repo_midi_file": "design/music-20261103-midi-test/inputs/midi_test_10.mid",
+      "asset_sha256": "b658f0334c08d992457480a04b123b6ddd74fd60d8f9497de5ba3c3dca19c513",
+      "duration_seconds": 288.953271
+    },
+    {
+      "cue_id": "midi_test_11",
+      "title": "Minute of Decay",
+      "input_index": 11,
+      "midi_file": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/扒谱试验/MuScriptor-large/全部完整伴奏_全曲对照/11 - Minute of Decay/Minute of Decay - 全曲.mid",
+      "midi_sha256": "e32a9ed41b24f012eccb60ebb06504493244341f2b276be6723c7fc5da90e2c0",
+      "proposed_game_asset": "res://assets/music/midi_test/midi_test_11.ogg",
+      "asset_status": "published_and_runtime_verified",
+      "repo_midi_file": "design/music-20261103-midi-test/inputs/midi_test_11.mid",
+      "asset_sha256": "2c673b8d02926ce1f9c1de12fb8f2c8fe652821f50d2b5a55987431ee669f6cb",
+      "duration_seconds": 280.609333
+    },
+    {
+      "cue_id": "midi_test_12",
+      "title": "President Dead",
+      "input_index": 12,
+      "midi_file": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/扒谱试验/MuScriptor-large/全部完整伴奏_全曲对照/12 - President Dead/President Dead - 全曲.mid",
+      "midi_sha256": "b6ef19ffa363a56b51d31cab55d4c723f3977afe46378f93ed2beebf4f67a61e",
+      "proposed_game_asset": "res://assets/music/midi_test/midi_test_12.ogg",
+      "asset_status": "published_and_runtime_verified",
+      "repo_midi_file": "design/music-20261103-midi-test/inputs/midi_test_12.mid",
+      "asset_sha256": "2e4b7e43f9cf2c19b7e06c7acae86d0a4ce79f646315c84570e3db606555042b",
+      "duration_seconds": 199.018229
+    }
+  ],
+  "retained_warm_cues": [
+    {
+      "cue_id": "camp_home",
+      "title": "有灯可归"
+    },
+    {
+      "cue_id": "rest_spring",
+      "title": "石隙清泉"
+    },
+    {
+      "cue_id": "hero_daily",
+      "title": "此行有我·闲篇"
+    },
+    {
+      "cue_id": "story_warmth",
+      "title": "火边一席"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "S01",
+      "name": "听闻鬼城公主",
+      "kind": "event",
+      "segment": 0,
+      "next": [
+        "B01"
+      ],
+      "cue_id": "hero_daily",
+      "title": "此行有我·闲篇",
+      "origin": "retained_warm_original",
+      "selection_basis": "first-pass scene-function assignment, pending new-timbre listening and in-game evaluation"
+    },
+    {
+      "id": "B01",
+      "name": "城外异乡人",
+      "kind": "battle",
+      "segment": 0,
+      "next": [
+        "S02"
+      ],
+      "cue_id": "midi_test_03",
+      "title": "The Fight Song",
+      "origin": "frozen_midi_timbre_test",
+      "selection_basis": "first-pass scene-function assignment, pending new-timbre listening and in-game evaluation",
+      "test_role": "开场战斗建立电声骨架",
+      "all_forms_use_same_cue": true
+    },
+    {
+      "id": "S02",
+      "name": "艾玛随行",
+      "kind": "event",
+      "segment": 0,
+      "next": [
+        "B02"
+      ],
+      "cue_id": "midi_test_05",
+      "title": "The Nobodies",
+      "origin": "frozen_midi_timbre_test",
+      "selection_basis": "first-pass scene-function assignment, pending new-timbre listening and in-game evaluation"
+    },
+    {
+      "id": "B02",
+      "name": "入城旧街",
+      "kind": "battle",
+      "segment": 0,
+      "next": [
+        "S03"
+      ],
+      "cue_id": "midi_test_09",
+      "title": "Deformography",
+      "origin": "frozen_midi_timbre_test",
+      "selection_basis": "first-pass scene-function assignment, pending new-timbre listening and in-game evaluation",
+      "test_role": "旧街推进，与首战拉开节奏差别",
+      "all_forms_use_same_cue": true
+    },
+    {
+      "id": "S03",
+      "name": "鬼市落脚",
+      "kind": "event",
+      "segment": 0,
+      "next": [
+        "B04",
+        "B05"
+      ],
+      "cue_id": "midi_test_10",
+      "title": "Kinderfeld",
+      "origin": "frozen_midi_timbre_test",
+      "selection_basis": "first-pass scene-function assignment, pending new-timbre listening and in-game evaluation"
+    },
+    {
+      "id": "B04",
+      "name": "运粮道",
+      "kind": "battle",
+      "segment": 1,
+      "next": [
+        "B03"
+      ],
+      "cue_id": "midi_test_04",
+      "title": "Disposable Teens",
+      "origin": "frozen_midi_timbre_test",
+      "selection_basis": "first-pass scene-function assignment, pending new-timbre listening and in-game evaluation",
+      "test_role": "运粮道突进与短促交锋",
+      "all_forms_use_same_cue": true
+    },
+    {
+      "id": "B05",
+      "name": "冥市暗巷",
+      "kind": "battle",
+      "segment": 1,
+      "next": [
+        "B03"
+      ],
+      "cue_id": "midi_test_10",
+      "title": "Kinderfeld",
+      "origin": "frozen_midi_timbre_test",
+      "selection_basis": "first-pass scene-function assignment, pending new-timbre listening and in-game evaluation",
+      "test_role": "暗巷和灯师的不安氛围",
+      "all_forms_use_same_cue": true
+    },
+    {
+      "id": "B03",
+      "name": "匪寨夺旗",
+      "kind": "battle",
+      "segment": 1,
+      "next": [
+        "S04"
+      ],
+      "cue_id": "midi_test_02",
+      "title": "mOBSCENE",
+      "origin": "frozen_midi_timbre_test",
+      "selection_basis": "first-pass scene-function assignment, pending new-timbre listening and in-game evaluation",
+      "test_role": "匪寨集中交锋",
+      "all_forms_use_same_cue": true
+    },
+    {
+      "id": "S04",
+      "name": "第一批追随者",
+      "kind": "event",
+      "segment": 1,
+      "next": [
+        "F01"
+      ],
+      "cue_id": "midi_test_11",
+      "title": "Minute of Decay",
+      "origin": "frozen_midi_timbre_test",
+      "selection_basis": "first-pass scene-function assignment, pending new-timbre listening and in-game evaluation"
+    },
+    {
+      "id": "F01",
+      "name": "寨后古井",
+      "kind": "spring",
+      "segment": 1,
+      "next": [
+        "B06",
+        "S05"
+      ],
+      "cue_id": "rest_spring",
+      "title": "石隙清泉",
+      "origin": "retained_warm_original",
+      "selection_basis": "first-pass scene-function assignment, pending new-timbre listening and in-game evaluation"
+    },
+    {
+      "id": "B06",
+      "name": "荒祠兵冢",
+      "kind": "elite",
+      "segment": 1,
+      "next": [
+        "S05"
+      ],
+      "cue_id": "midi_test_06",
+      "title": "Antichrist Superstar",
+      "origin": "frozen_midi_timbre_test",
+      "selection_basis": "first-pass scene-function assignment, pending new-timbre listening and in-game evaluation",
+      "test_role": "荒祠可选精英的沉重压力",
+      "all_forms_use_same_cue": true
+    },
+    {
+      "id": "S05",
+      "name": "寨中一夜",
+      "kind": "event",
+      "segment": 1,
+      "next": [
+        "B07"
+      ],
+      "cue_id": "story_warmth",
+      "title": "火边一席",
+      "origin": "retained_warm_original",
+      "selection_basis": "first-pass scene-function assignment, pending new-timbre listening and in-game evaluation"
+    },
+    {
+      "id": "B07",
+      "name": "官署外街",
+      "kind": "battle",
+      "segment": 2,
+      "next": [
+        "B08",
+        "B09"
+      ],
+      "cue_id": "midi_test_09",
+      "title": "Deformography",
+      "origin": "frozen_midi_timbre_test",
+      "selection_basis": "first-pass scene-function assignment, pending new-timbre listening and in-game evaluation",
+      "test_role": "官署街面持续推进",
+      "all_forms_use_same_cue": true
+    },
+    {
+      "id": "B08",
+      "name": "夺水门",
+      "kind": "battle",
+      "segment": 2,
+      "next": [
+        "B10",
+        "S06"
+      ],
+      "cue_id": "midi_test_03",
+      "title": "The Fight Song",
+      "origin": "frozen_midi_timbre_test",
+      "selection_basis": "first-pass scene-function assignment, pending new-timbre listening and in-game evaluation",
+      "test_role": "夺门冲击",
+      "all_forms_use_same_cue": true
+    },
+    {
+      "id": "B09",
+      "name": "夺军械库",
+      "kind": "battle",
+      "segment": 2,
+      "next": [
+        "B10",
+        "S06"
+      ],
+      "cue_id": "midi_test_02",
+      "title": "mOBSCENE",
+      "origin": "frozen_midi_timbre_test",
+      "selection_basis": "first-pass scene-function assignment, pending new-timbre listening and in-game evaluation",
+      "test_role": "军械库重击与对抗",
+      "all_forms_use_same_cue": true
+    },
+    {
+      "id": "B10",
+      "name": "封库禁卫",
+      "kind": "elite",
+      "segment": 2,
+      "next": [
+        "S06"
+      ],
+      "cue_id": "midi_test_05",
+      "title": "The Nobodies",
+      "origin": "frozen_midi_timbre_test",
+      "selection_basis": "first-pass scene-function assignment, pending new-timbre listening and in-game evaluation",
+      "test_role": "双禁卫对峙，改变前段推进节奏",
+      "all_forms_use_same_cue": true
+    },
+    {
+      "id": "S06",
+      "name": "官印易主",
+      "kind": "event",
+      "segment": 2,
+      "next": [
+        "F02"
+      ],
+      "cue_id": "midi_test_05",
+      "title": "The Nobodies",
+      "origin": "frozen_midi_timbre_test",
+      "selection_basis": "first-pass scene-function assignment, pending new-timbre listening and in-game evaluation"
+    },
+    {
+      "id": "F02",
+      "name": "官署旧泉",
+      "kind": "spring",
+      "segment": 2,
+      "next": [
+        "S07"
+      ],
+      "cue_id": "rest_spring",
+      "title": "石隙清泉",
+      "origin": "retained_warm_original",
+      "selection_basis": "first-pass scene-function assignment, pending new-timbre listening and in-game evaluation"
+    },
+    {
+      "id": "S07",
+      "name": "吕玲绮正式登场",
+      "kind": "event",
+      "segment": 3,
+      "next": [
+        "S08"
+      ],
+      "cue_id": "midi_test_05",
+      "title": "The Nobodies",
+      "origin": "frozen_midi_timbre_test",
+      "selection_basis": "first-pass scene-function assignment, pending new-timbre listening and in-game evaluation"
+    },
+    {
+      "id": "S08",
+      "name": "吕家风波",
+      "kind": "event",
+      "segment": 3,
+      "next": [
+        "S09"
+      ],
+      "cue_id": "midi_test_08",
+      "title": "Man That You Fear",
+      "origin": "frozen_midi_timbre_test",
+      "selection_basis": "first-pass scene-function assignment, pending new-timbre listening and in-game evaluation"
+    },
+    {
+      "id": "S09",
+      "name": "事后对立",
+      "kind": "event",
+      "segment": 3,
+      "next": [
+        "B11"
+      ],
+      "cue_id": "midi_test_08",
+      "title": "Man That You Fear",
+      "origin": "frozen_midi_timbre_test",
+      "selection_basis": "first-pass scene-function assignment, pending new-timbre listening and in-game evaluation"
+    },
+    {
+      "id": "B11",
+      "name": "旧城巷战",
+      "kind": "battle",
+      "segment": 3,
+      "next": [
+        "B12",
+        "S10"
+      ],
+      "cue_id": "midi_test_10",
+      "title": "Kinderfeld",
+      "origin": "frozen_midi_timbre_test",
+      "selection_basis": "first-pass scene-function assignment, pending new-timbre listening and in-game evaluation",
+      "test_role": "旧城灯巷的不安氛围",
+      "all_forms_use_same_cue": true
+    },
+    {
+      "id": "B12",
+      "name": "瘟灯鬼巷",
+      "kind": "elite",
+      "segment": 3,
+      "next": [
+        "S10"
+      ],
+      "cue_id": "midi_test_06",
+      "title": "Antichrist Superstar",
+      "origin": "frozen_midi_timbre_test",
+      "selection_basis": "first-pass scene-function assignment, pending new-timbre listening and in-game evaluation",
+      "test_role": "瘟灯巫阵的精英压力",
+      "all_forms_use_same_cue": true
+    },
+    {
+      "id": "S10",
+      "name": "鬼曹军临城",
+      "kind": "event",
+      "segment": 3,
+      "next": [
+        "S11"
+      ],
+      "cue_id": "midi_test_06",
+      "title": "Antichrist Superstar",
+      "origin": "frozen_midi_timbre_test",
+      "selection_basis": "first-pass scene-function assignment, pending new-timbre listening and in-game evaluation"
+    },
+    {
+      "id": "S11",
+      "name": "暂时协力守城",
+      "kind": "event",
+      "segment": 4,
+      "next": [
+        "B13",
+        "B14"
+      ],
+      "cue_id": "midi_test_03",
+      "title": "The Fight Song",
+      "origin": "frozen_midi_timbre_test",
+      "selection_basis": "first-pass scene-function assignment, pending new-timbre listening and in-game evaluation"
+    },
+    {
+      "id": "B13",
+      "name": "东门城墙",
+      "kind": "battle",
+      "segment": 4,
+      "next": [
+        "B15"
+      ],
+      "cue_id": "midi_test_03",
+      "title": "The Fight Song",
+      "origin": "frozen_midi_timbre_test",
+      "selection_basis": "first-pass scene-function assignment, pending new-timbre listening and in-game evaluation",
+      "test_role": "守城反攻",
+      "all_forms_use_same_cue": true
+    },
+    {
+      "id": "B14",
+      "name": "外河渡口",
+      "kind": "battle",
+      "segment": 4,
+      "next": [
+        "B15"
+      ],
+      "cue_id": "midi_test_09",
+      "title": "Deformography",
+      "origin": "frozen_midi_timbre_test",
+      "selection_basis": "first-pass scene-function assignment, pending new-timbre listening and in-game evaluation",
+      "test_role": "渡口阻截的持续压力",
+      "all_forms_use_same_cue": true
+    },
+    {
+      "id": "B15",
+      "name": "破围城军阵",
+      "kind": "battle",
+      "segment": 4,
+      "next": [
+        "S12"
+      ],
+      "cue_id": "midi_test_04",
+      "title": "Disposable Teens",
+      "origin": "frozen_midi_timbre_test",
+      "selection_basis": "first-pass scene-function assignment, pending new-timbre listening and in-game evaluation",
+      "test_role": "曹休整场两形态共用一曲",
+      "all_forms_use_same_cue": true
+    },
+    {
+      "id": "S12",
+      "name": "城门重开",
+      "kind": "event",
+      "segment": 4,
+      "next": [
+        "F03"
+      ],
+      "cue_id": "midi_test_05",
+      "title": "The Nobodies",
+      "origin": "frozen_midi_timbre_test",
+      "selection_basis": "first-pass scene-function assignment, pending new-timbre listening and in-game evaluation"
+    },
+    {
+      "id": "F03",
+      "name": "城门古泉",
+      "kind": "spring",
+      "segment": 4,
+      "next": [
+        "B16"
+      ],
+      "cue_id": "rest_spring",
+      "title": "石隙清泉",
+      "origin": "retained_warm_original",
+      "selection_basis": "first-pass scene-function assignment, pending new-timbre listening and in-game evaluation"
+    },
+    {
+      "id": "B16",
+      "name": "鬼曹主将",
+      "kind": "battle",
+      "segment": 4,
+      "next": [
+        "S13"
+      ],
+      "cue_id": "midi_test_07",
+      "title": "Little Horn",
+      "origin": "frozen_midi_timbre_test",
+      "selection_basis": "first-pass scene-function assignment, pending new-timbre listening and in-game evaluation",
+      "test_role": "曹纯冲锋整场两形态共用一曲",
+      "all_forms_use_same_cue": true
+    },
+    {
+      "id": "S13",
+      "name": "救城之后，旧仇仍在",
+      "kind": "event",
+      "segment": 4,
+      "next": [
+        "F04"
+      ],
+      "cue_id": "midi_test_08",
+      "title": "Man That You Fear",
+      "origin": "frozen_midi_timbre_test",
+      "selection_basis": "first-pass scene-function assignment, pending new-timbre listening and in-game evaluation"
+    },
+    {
+      "id": "F04",
+      "name": "楼前整备",
+      "kind": "spring",
+      "segment": 5,
+      "next": [
+        "B17"
+      ],
+      "cue_id": "rest_spring",
+      "title": "石隙清泉",
+      "origin": "retained_warm_original",
+      "selection_basis": "first-pass scene-function assignment, pending new-timbre listening and in-game evaluation"
+    },
+    {
+      "id": "B17",
+      "name": "白门楼前精英关",
+      "kind": "elite",
+      "segment": 5,
+      "next": [
+        "B18"
+      ],
+      "cue_id": "midi_test_12",
+      "title": "President Dead",
+      "origin": "frozen_midi_timbre_test",
+      "selection_basis": "first-pass scene-function assignment, pending new-timbre listening and in-game evaluation",
+      "test_role": "张辽及协同战整场两形态共用一曲",
+      "all_forms_use_same_cue": true
+    },
+    {
+      "id": "B18",
+      "name": "吕布终战",
+      "kind": "boss",
+      "segment": 5,
+      "next": [
+        "S14"
+      ],
+      "cue_id": "midi_test_01",
+      "title": "The Beautiful People",
+      "origin": "frozen_midi_timbre_test",
+      "selection_basis": "first-pass scene-function assignment, pending new-timbre listening and in-game evaluation",
+      "test_role": "终战回收标题曲，同曲跨两形态续播",
+      "all_forms_use_same_cue": true
+    },
+    {
+      "id": "S14",
+      "name": "一方之主",
+      "kind": "event",
+      "segment": 5,
+      "next": [],
+      "cue_id": "midi_test_11",
+      "title": "Minute of Decay",
+      "origin": "frozen_midi_timbre_test",
+      "selection_basis": "first-pass scene-function assignment, pending new-timbre listening and in-game evaluation"
+    }
+  ],
+  "story_events": [
+    {
+      "event_id": "S01",
+      "title": "此行有我·闲篇",
+      "context": "route_event_or_spring",
+      "cue_id": "hero_daily",
+      "origin": "retained_warm_original"
+    },
+    {
+      "event_id": "S02",
+      "title": "The Nobodies",
+      "context": "route_event_or_spring",
+      "cue_id": "midi_test_05",
+      "origin": "frozen_midi_timbre_test"
+    },
+    {
+      "event_id": "S03",
+      "title": "Kinderfeld",
+      "context": "route_event_or_spring",
+      "cue_id": "midi_test_10",
+      "origin": "frozen_midi_timbre_test"
+    },
+    {
+      "event_id": "S04",
+      "title": "Minute of Decay",
+      "context": "route_event_or_spring",
+      "cue_id": "midi_test_11",
+      "origin": "frozen_midi_timbre_test"
+    },
+    {
+      "event_id": "F01",
+      "title": "石隙清泉",
+      "context": "route_event_or_spring",
+      "cue_id": "rest_spring",
+      "origin": "retained_warm_original"
+    },
+    {
+      "event_id": "B06",
+      "title": "Minute of Decay",
+      "context": "post_battle_story",
+      "cue_id": "midi_test_11",
+      "origin": "frozen_midi_timbre_test"
+    },
+    {
+      "event_id": "S05",
+      "title": "火边一席",
+      "context": "route_event_or_spring",
+      "cue_id": "story_warmth",
+      "origin": "retained_warm_original"
+    },
+    {
+      "event_id": "S06",
+      "title": "The Nobodies",
+      "context": "route_event_or_spring",
+      "cue_id": "midi_test_05",
+      "origin": "frozen_midi_timbre_test"
+    },
+    {
+      "event_id": "F02",
+      "title": "石隙清泉",
+      "context": "route_event_or_spring",
+      "cue_id": "rest_spring",
+      "origin": "retained_warm_original"
+    },
+    {
+      "event_id": "S07",
+      "title": "The Nobodies",
+      "context": "route_event_or_spring",
+      "cue_id": "midi_test_05",
+      "origin": "frozen_midi_timbre_test"
+    },
+    {
+      "event_id": "S08",
+      "title": "Man That You Fear",
+      "context": "route_event_or_spring",
+      "cue_id": "midi_test_08",
+      "origin": "frozen_midi_timbre_test"
+    },
+    {
+      "event_id": "S09",
+      "title": "Man That You Fear",
+      "context": "route_event_or_spring",
+      "cue_id": "midi_test_08",
+      "origin": "frozen_midi_timbre_test"
+    },
+    {
+      "event_id": "S10",
+      "title": "Antichrist Superstar",
+      "context": "route_event_or_spring",
+      "cue_id": "midi_test_06",
+      "origin": "frozen_midi_timbre_test"
+    },
+    {
+      "event_id": "S11",
+      "title": "The Fight Song",
+      "context": "route_event_or_spring",
+      "cue_id": "midi_test_03",
+      "origin": "frozen_midi_timbre_test"
+    },
+    {
+      "event_id": "S12",
+      "title": "The Nobodies",
+      "context": "route_event_or_spring",
+      "cue_id": "midi_test_05",
+      "origin": "frozen_midi_timbre_test"
+    },
+    {
+      "event_id": "F03",
+      "title": "石隙清泉",
+      "context": "route_event_or_spring",
+      "cue_id": "rest_spring",
+      "origin": "retained_warm_original"
+    },
+    {
+      "event_id": "S13",
+      "title": "Man That You Fear",
+      "context": "route_event_or_spring",
+      "cue_id": "midi_test_08",
+      "origin": "frozen_midi_timbre_test"
+    },
+    {
+      "event_id": "F04",
+      "title": "石隙清泉",
+      "context": "route_event_or_spring",
+      "cue_id": "rest_spring",
+      "origin": "retained_warm_original"
+    },
+    {
+      "event_id": "B15",
+      "title": "The Nobodies",
+      "context": "post_battle_story",
+      "cue_id": "midi_test_05",
+      "origin": "frozen_midi_timbre_test"
+    },
+    {
+      "event_id": "B16",
+      "title": "The Nobodies",
+      "context": "post_battle_story",
+      "cue_id": "midi_test_05",
+      "origin": "frozen_midi_timbre_test"
+    },
+    {
+      "event_id": "B17",
+      "title": "Man That You Fear",
+      "context": "post_battle_story",
+      "cue_id": "midi_test_08",
+      "origin": "frozen_midi_timbre_test"
+    },
+    {
+      "event_id": "S14",
+      "title": "Minute of Decay",
+      "context": "route_event_or_spring",
+      "cue_id": "midi_test_11",
+      "origin": "frozen_midi_timbre_test"
+    }
+  ],
+  "line_music_overrides": [
+    {
+      "event_id": "S01",
+      "line_id": "s01_04",
+      "cue_id": "hero_daily",
+      "title": "此行有我·闲篇",
+      "origin": "retained_warm_original",
+      "stinger": null,
+      "clear_legacy_stinger": true
+    },
+    {
+      "event_id": "S03",
+      "line_id": "s03_new01",
+      "cue_id": "midi_test_10",
+      "title": "Kinderfeld",
+      "origin": "frozen_midi_timbre_test",
+      "stinger": null,
+      "clear_legacy_stinger": true
+    },
+    {
+      "event_id": "S03",
+      "line_id": "s03_04",
+      "cue_id": "midi_test_10",
+      "title": "Kinderfeld",
+      "origin": "frozen_midi_timbre_test",
+      "stinger": null,
+      "clear_legacy_stinger": true
+    },
+    {
+      "event_id": "S04",
+      "line_id": "s04_t01",
+      "cue_id": "midi_test_11",
+      "title": "Minute of Decay",
+      "origin": "frozen_midi_timbre_test",
+      "stinger": null,
+      "clear_legacy_stinger": true
+    },
+    {
+      "event_id": "S05",
+      "line_id": "s05_p01",
+      "cue_id": "midi_test_08",
+      "title": "Man That You Fear",
+      "origin": "frozen_midi_timbre_test",
+      "stinger": null,
+      "clear_legacy_stinger": true
+    },
+    {
+      "event_id": "S06",
+      "line_id": "s06_04",
+      "cue_id": "midi_test_05",
+      "title": "The Nobodies",
+      "origin": "frozen_midi_timbre_test",
+      "stinger": null,
+      "clear_legacy_stinger": true
+    },
+    {
+      "event_id": "S06",
+      "line_id": "s06_10",
+      "cue_id": "midi_test_05",
+      "title": "The Nobodies",
+      "origin": "frozen_midi_timbre_test",
+      "stinger": null,
+      "clear_legacy_stinger": true
+    },
+    {
+      "event_id": "S14",
+      "line_id": "s14_04",
+      "cue_id": "midi_test_08",
+      "title": "Man That You Fear",
+      "origin": "frozen_midi_timbre_test",
+      "stinger": null,
+      "clear_legacy_stinger": true
+    },
+    {
+      "event_id": "S14",
+      "line_id": "s14_09",
+      "cue_id": "midi_test_11",
+      "title": "Minute of Decay",
+      "origin": "frozen_midi_timbre_test",
+      "stinger": null,
+      "clear_legacy_stinger": true
+    }
+  ],
+  "character_events": [
+    {
+      "event_id": "CE01",
+      "title": "The Nobodies",
+      "cue_id": "midi_test_05",
+      "origin": "frozen_midi_timbre_test",
+      "line_music_policy": "inherit_event_cue"
+    },
+    {
+      "event_id": "CE02",
+      "title": "有灯可归",
+      "cue_id": "camp_home",
+      "origin": "retained_warm_original",
+      "line_music_policy": "inherit_event_cue"
+    },
+    {
+      "event_id": "CE03",
+      "title": "Kinderfeld",
+      "cue_id": "midi_test_10",
+      "origin": "frozen_midi_timbre_test",
+      "line_music_policy": "inherit_event_cue"
+    },
+    {
+      "event_id": "CE04",
+      "title": "此行有我·闲篇",
+      "cue_id": "hero_daily",
+      "origin": "retained_warm_original",
+      "line_music_policy": "inherit_event_cue"
+    },
+    {
+      "event_id": "CE05",
+      "title": "Kinderfeld",
+      "cue_id": "midi_test_10",
+      "origin": "frozen_midi_timbre_test",
+      "line_music_policy": "inherit_event_cue"
+    },
+    {
+      "event_id": "CE06",
+      "title": "Kinderfeld",
+      "cue_id": "midi_test_10",
+      "origin": "frozen_midi_timbre_test",
+      "line_music_policy": "inherit_event_cue"
+    },
+    {
+      "event_id": "CE07",
+      "title": "此行有我·闲篇",
+      "cue_id": "hero_daily",
+      "origin": "retained_warm_original",
+      "line_music_policy": "inherit_event_cue"
+    },
+    {
+      "event_id": "CE08",
+      "title": "此行有我·闲篇",
+      "cue_id": "hero_daily",
+      "origin": "retained_warm_original",
+      "line_music_policy": "inherit_event_cue"
+    },
+    {
+      "event_id": "CE09",
+      "title": "此行有我·闲篇",
+      "cue_id": "hero_daily",
+      "origin": "retained_warm_original",
+      "line_music_policy": "inherit_event_cue"
+    },
+    {
+      "event_id": "CE10",
+      "title": "此行有我·闲篇",
+      "cue_id": "hero_daily",
+      "origin": "retained_warm_original",
+      "line_music_policy": "inherit_event_cue"
+    },
+    {
+      "event_id": "CE11",
+      "title": "此行有我·闲篇",
+      "cue_id": "hero_daily",
+      "origin": "retained_warm_original",
+      "line_music_policy": "inherit_event_cue"
+    },
+    {
+      "event_id": "CE12",
+      "title": "此行有我·闲篇",
+      "cue_id": "hero_daily",
+      "origin": "retained_warm_original",
+      "line_music_policy": "inherit_event_cue"
+    },
+    {
+      "event_id": "CE13",
+      "title": "火边一席",
+      "cue_id": "story_warmth",
+      "origin": "retained_warm_original",
+      "line_music_policy": "inherit_event_cue"
+    },
+    {
+      "event_id": "CE14",
+      "title": "Minute of Decay",
+      "cue_id": "midi_test_11",
+      "origin": "frozen_midi_timbre_test",
+      "line_music_policy": "inherit_event_cue"
+    },
+    {
+      "event_id": "CE15",
+      "title": "此行有我·闲篇",
+      "cue_id": "hero_daily",
+      "origin": "retained_warm_original",
+      "line_music_policy": "inherit_event_cue"
+    },
+    {
+      "event_id": "CE16",
+      "title": "此行有我·闲篇",
+      "cue_id": "hero_daily",
+      "origin": "retained_warm_original",
+      "line_music_policy": "inherit_event_cue"
+    },
+    {
+      "event_id": "CE17",
+      "title": "Man That You Fear",
+      "cue_id": "midi_test_08",
+      "origin": "frozen_midi_timbre_test",
+      "line_music_policy": "inherit_event_cue"
+    },
+    {
+      "event_id": "CE18",
+      "title": "此行有我·闲篇",
+      "cue_id": "hero_daily",
+      "origin": "retained_warm_original",
+      "line_music_policy": "inherit_event_cue"
+    },
+    {
+      "event_id": "CE19",
+      "title": "The Fight Song",
+      "cue_id": "midi_test_03",
+      "origin": "frozen_midi_timbre_test",
+      "line_music_policy": "inherit_event_cue"
+    },
+    {
+      "event_id": "CE20",
+      "title": "此行有我·闲篇",
+      "cue_id": "hero_daily",
+      "origin": "retained_warm_original",
+      "line_music_policy": "inherit_event_cue"
+    },
+    {
+      "event_id": "CE21",
+      "title": "Man That You Fear",
+      "cue_id": "midi_test_08",
+      "origin": "frozen_midi_timbre_test",
+      "line_music_policy": "inherit_event_cue"
+    },
+    {
+      "event_id": "CE22",
+      "title": "Man That You Fear",
+      "cue_id": "midi_test_08",
+      "origin": "frozen_midi_timbre_test",
+      "line_music_policy": "inherit_event_cue"
+    },
+    {
+      "event_id": "CE23",
+      "title": "Minute of Decay",
+      "cue_id": "midi_test_11",
+      "origin": "frozen_midi_timbre_test",
+      "line_music_policy": "inherit_event_cue"
+    },
+    {
+      "event_id": "CE24",
+      "title": "Minute of Decay",
+      "cue_id": "midi_test_11",
+      "origin": "frozen_midi_timbre_test",
+      "line_music_policy": "inherit_event_cue"
+    },
+    {
+      "event_id": "CE25",
+      "title": "Minute of Decay",
+      "cue_id": "midi_test_11",
+      "origin": "frozen_midi_timbre_test",
+      "line_music_policy": "inherit_event_cue"
+    },
+    {
+      "event_id": "CE26",
+      "title": "Minute of Decay",
+      "cue_id": "midi_test_11",
+      "origin": "frozen_midi_timbre_test",
+      "line_music_policy": "inherit_event_cue"
+    },
+    {
+      "event_id": "CE27",
+      "title": "此行有我·闲篇",
+      "cue_id": "hero_daily",
+      "origin": "retained_warm_original",
+      "line_music_policy": "inherit_event_cue"
+    },
+    {
+      "event_id": "CE28",
+      "title": "此行有我·闲篇",
+      "cue_id": "hero_daily",
+      "origin": "retained_warm_original",
+      "line_music_policy": "inherit_event_cue"
+    },
+    {
+      "event_id": "CE29",
+      "title": "火边一席",
+      "cue_id": "story_warmth",
+      "origin": "retained_warm_original",
+      "line_music_policy": "inherit_event_cue"
+    },
+    {
+      "event_id": "CE30",
+      "title": "火边一席",
+      "cue_id": "story_warmth",
+      "origin": "retained_warm_original",
+      "line_music_policy": "inherit_event_cue"
+    },
+    {
+      "event_id": "CE31",
+      "title": "火边一席",
+      "cue_id": "story_warmth",
+      "origin": "retained_warm_original",
+      "line_music_policy": "inherit_event_cue"
+    },
+    {
+      "event_id": "CE32",
+      "title": "火边一席",
+      "cue_id": "story_warmth",
+      "origin": "retained_warm_original",
+      "line_music_policy": "inherit_event_cue"
+    }
+  ],
+  "pages": {
+    "home": {
+      "cue_id": "midi_test_01",
+      "title": "The Beautiful People",
+      "origin": "frozen_midi_timbre_test"
+    },
+    "world": {
+      "cue_id": "midi_test_11",
+      "title": "Minute of Decay",
+      "origin": "frozen_midi_timbre_test"
+    },
+    "route": {
+      "policy": "use actual campaign current-node segment, never hovered or merely inspected node",
+      "by_segment": [
+        {
+          "segment": 0,
+          "cue_id": "midi_test_11",
+          "title": "Minute of Decay",
+          "origin": "frozen_midi_timbre_test"
+        },
+        {
+          "segment": 1,
+          "cue_id": "midi_test_10",
+          "title": "Kinderfeld",
+          "origin": "frozen_midi_timbre_test"
+        },
+        {
+          "segment": 2,
+          "cue_id": "midi_test_09",
+          "title": "Deformography",
+          "origin": "frozen_midi_timbre_test"
+        },
+        {
+          "segment": 3,
+          "cue_id": "midi_test_10",
+          "title": "Kinderfeld",
+          "origin": "frozen_midi_timbre_test"
+        },
+        {
+          "segment": 4,
+          "cue_id": "midi_test_06",
+          "title": "Antichrist Superstar",
+          "origin": "frozen_midi_timbre_test"
+        },
+        {
+          "segment": 5,
+          "cue_id": "midi_test_05",
+          "title": "The Nobodies",
+          "origin": "frozen_midi_timbre_test"
+        }
+      ]
+    },
+    "preparation": {
+      "cue_id": "midi_test_05",
+      "title": "The Nobodies",
+      "origin": "frozen_midi_timbre_test"
+    },
+    "reward": {
+      "policy": "continue_last_battle_cue_and_position",
+      "retired_stinger": null
+    },
+    "failure": {
+      "cue_id": "midi_test_08",
+      "title": "Man That You Fear",
+      "origin": "frozen_midi_timbre_test"
+    },
+    "journal": {
+      "cue_id": "midi_test_11",
+      "title": "Minute of Decay",
+      "origin": "frozen_midi_timbre_test"
+    },
+    "roster": {
+      "policy": "inherit_preparation_cue_if_opened_from_preparation_else_use_camp_home"
+    },
+    "equipment": {
+      "policy": "inherit_preparation_cue_if_opened_from_preparation_else_use_camp_home"
+    },
+    "camp": {
+      "cue_id": "camp_home",
+      "title": "有灯可归",
+      "origin": "retained_warm_original"
+    },
+    "utilities": {
+      "pages": [
+        "menu",
+        "settings",
+        "saves",
+        "help",
+        "about"
+      ],
+      "policy": "inherit_owning_scene_cue_and_position"
+    },
+    "music_room": {
+      "policy": "list all 12 new test renders plus 4 retained warm cues; restore owning scene state on exit"
+    },
+    "unknown_fallback": {
+      "cue_id": "midi_test_11",
+      "title": "Minute of Decay",
+      "origin": "frozen_midi_timbre_test"
+    }
+  },
+  "playback_rules": {
+    "battle_enter": "start selected full song at 0 once",
+    "within_battle_all_forms": "continue same cue and playback position",
+    "same_cue_across_adjacent_story_contexts": "continue existing playback position",
+    "song_end": "repeat the full song",
+    "cross_scene_cue_change": "ordinary fade only; no internal musical editing",
+    "legacy_musical_stingers": "disable all; keep nonmusical hit, skill, UI and warning SFX",
+    "song_meaning": "Assignments concern the instrumental material, not song-title/lyric translations."
+  },
+  "coverage_validation": {
+    "route_nodes": 36,
+    "battle_nodes": 18,
+    "main_story_and_spring_and_postbattle_events": 22,
+    "line_music_overrides": 9,
+    "character_events": 32,
+    "complete_routes_enumerated": 64,
+    "battle_nodes_per_complete_route": [
+      12,
+      15
+    ],
+    "reference_songs_invoked_per_complete_route": [
+      12,
+      12
+    ],
+    "all_12_reference_songs_on_every_complete_route": true,
+    "unique_reference_songs_used_in_battles": 10,
+    "all_targets_in_new12_or_retained4": true,
+    "full_song_listening": "Invocation coverage does not guarantee a full song is heard before scene change; whole-song listening is available in the music room.",
+    "runtime_verification_report": "runtime/validation-report.json",
+    "runtime_verified": true
+  }
+}

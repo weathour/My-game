@@ -1,0 +1,76 @@
+{
+  "status": "passed_fresh_full_and_same_pack_external",
+  "recorded_at": 1793969423.7160094,
+  "coverage": {
+    "discovered_entries": 66,
+    "fresh_source": 62,
+    "fresh_pack": 4,
+    "reused": 0,
+    "extra_same_official_pack_fresh": 1
+  },
+  "stdout_sha256": "def01558ff5bbaf8da43ae47a97fad424d78a20f01b5e2cc6dd78b52b8892b7b",
+  "PROJECT_CHECK_OK": true,
+  "all_smoke_logs_strict_revalidated": true,
+  "end_guard": {
+    "global_inputs": 1907,
+    "input_sha256": "a61e50589d66f7147ba074498f053ce59127913b0823cf2dc7c095dad0018c7f",
+    "global_unchanged_since_freeze": true,
+    "all66_entry_hashes_unchanged": true,
+    "binary_unchanged": true,
+    "harness4_hashes_unchanged": true,
+    "production_harness_not_modified_this_round": true
+  },
+  "runtime": {
+    "path": "scripts/ui/chronicle/boss_camera.gd",
+    "sha256": "f61f7883f5e60699643411a869371e4e805bfa7db8ad36b6ead72de10f707b0b"
+  },
+  "pack": {
+    "path": "/tmp/my-game-check.FTYPcW/pack-smokes/game.pck",
+    "bytes": 239821396,
+    "sha256": "35c88461f5e01ee5ab36f1cd4be67732b49626f8e47c77f7ef4b7dc7ea3e1cf5"
+  },
+  "extra_official_pack": "official-pack-camera.json",
+  "targeted": "targeted-audit.json",
+  "scope": "scope-preservation.json",
+  "runtime_owner_evidence": "../runtime-owner/freeze.json",
+  "new_regression": {
+    "checks": 21725,
+    "actual_AI_cases": 12,
+    "actual_AI_frames": 7200,
+    "maximum_difference_from_no_enemy_follow": 0,
+    "ordinary_cases": [
+      "E03",
+      "E10",
+      "E12",
+      "E06 pot",
+      "E02",
+      "E05"
+    ],
+    "three_size_comfort_owner_and_poison_veto": true,
+    "read_only_AI_geometry_events_RNG_MP_CD_intents": true
+  },
+  "retained_regressions": {
+    "camera": 165,
+    "camera_cache": 57,
+    "native_camera_capture": 182,
+    "native_B17_edge": 2292,
+    "formal_B17_render": {
+      "checks": 31078,
+      "cases": 17,
+      "frames": 3230
+    },
+    "formal_B17_core": 4172,
+    "campaign": {
+      "checks": 454,
+      "routes": 2
+    },
+    "sessions": {
+      "checks": 89096,
+      "sessions": 18
+    }
+  },
+  "full_returncode": 0,
+  "full_elapsed_seconds": 636.6026420593262,
+  "final_audit": "final-project-check-audit.json",
+  "gpu_released": true
+}

@@ -1,0 +1,1894 @@
+{
+  "status": "PASS",
+  "sample_rate": 48000,
+  "channels": 1,
+  "format": "PCM16 WAV",
+  "cues": 17,
+  "new_variants": 51,
+  "retained_utility_cues": [
+    "feedback.pickup",
+    "feedback.level",
+    "feedback.elite"
+  ],
+  "files": [
+    {
+      "cue_id": "blade.cast",
+      "variant": 1,
+      "path": "res://assets/sfx/skill-combat-20261103/blade_cast_01.wav",
+      "sha256": "bfd1e78c8d695817cdab5c4d4213928726f5df5f670ecce49b82ad91aef350aa",
+      "duration_sec": 0.29,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -17.541025994806205,
+      "frames": 13920,
+      "sample_rate": 48000,
+      "channels": 1,
+      "encoding": "PCM16",
+      "family": "blade",
+      "phase": "cast",
+      "source_layer_contributions": [
+        {
+          "file": "blade_01.ogg",
+          "sha256": "caf7a7cb9b25cda4bd487c1d12d18b74a34bb18c816fd67277cf3c8d7ef32a3a",
+          "post_filter_envelope_weighted_rms": 0.11763862074707086,
+          "weight": 1.25,
+          "layer_index": 0
+        },
+        {
+          "file": "metal_03.ogg",
+          "sha256": "35ec56e5136e7091f36470c3e502e714819c9ff843baff0910b095571459f274",
+          "post_filter_envelope_weighted_rms": 0.014158821236870615,
+          "weight": 0.775,
+          "layer_index": 1
+        }
+      ],
+      "design_metrics": {
+        "pre_gain_mix_rms": 0.1327277794747017,
+        "source_layer_power_fraction_estimate": 0.7969339571305296
+      },
+      "design_role": "physical material-led transient/scrape/rumble"
+    },
+    {
+      "cue_id": "blade.cast",
+      "variant": 2,
+      "path": "res://assets/sfx/skill-combat-20261103/blade_cast_02.wav",
+      "sha256": "145b4a5d07a970b84203bd47ade6d487e4ac3f779c2894ab153004a9a2dcac64",
+      "duration_sec": 0.29,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -18.4785857248194,
+      "frames": 13920,
+      "sample_rate": 48000,
+      "channels": 1,
+      "encoding": "PCM16",
+      "family": "blade",
+      "phase": "cast",
+      "source_layer_contributions": [
+        {
+          "file": "blade_01.ogg",
+          "sha256": "caf7a7cb9b25cda4bd487c1d12d18b74a34bb18c816fd67277cf3c8d7ef32a3a",
+          "post_filter_envelope_weighted_rms": 0.11763862074707086,
+          "weight": 1.25,
+          "layer_index": 0
+        },
+        {
+          "file": "metal_03.ogg",
+          "sha256": "35ec56e5136e7091f36470c3e502e714819c9ff843baff0910b095571459f274",
+          "post_filter_envelope_weighted_rms": 0.01691571564871312,
+          "weight": 0.775,
+          "layer_index": 1
+        }
+      ],
+      "design_metrics": {
+        "pre_gain_mix_rms": 0.11914723114304943,
+        "source_layer_power_fraction_estimate": 0.9949932482385587
+      },
+      "design_role": "physical material-led transient/scrape/rumble"
+    },
+    {
+      "cue_id": "blade.cast",
+      "variant": 3,
+      "path": "res://assets/sfx/skill-combat-20261103/blade_cast_03.wav",
+      "sha256": "46bff9c1abfb47bdb826758b3cbf7fef435e67ac90b0d5f09f8c130391856ce9",
+      "duration_sec": 0.29,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -18.420143441660542,
+      "frames": 13920,
+      "sample_rate": 48000,
+      "channels": 1,
+      "encoding": "PCM16",
+      "family": "blade",
+      "phase": "cast",
+      "source_layer_contributions": [
+        {
+          "file": "blade_01.ogg",
+          "sha256": "caf7a7cb9b25cda4bd487c1d12d18b74a34bb18c816fd67277cf3c8d7ef32a3a",
+          "post_filter_envelope_weighted_rms": 0.11835716649219652,
+          "weight": 1.25,
+          "layer_index": 0
+        },
+        {
+          "file": "metal_03.ogg",
+          "sha256": "35ec56e5136e7091f36470c3e502e714819c9ff843baff0910b095571459f274",
+          "post_filter_envelope_weighted_rms": 0.02141671289567044,
+          "weight": 0.775,
+          "layer_index": 1
+        }
+      ],
+      "design_metrics": {
+        "pre_gain_mix_rms": 0.11995164700395625,
+        "source_layer_power_fraction_estimate": 1.0
+      },
+      "design_role": "physical material-led transient/scrape/rumble"
+    },
+    {
+      "cue_id": "blade.impact",
+      "variant": 1,
+      "path": "res://assets/sfx/skill-combat-20261103/blade_impact_01.wav",
+      "sha256": "c39084ffc944f47328cfc44586547008de6dbc4f5d4ca30f2fc4443c77987228",
+      "duration_sec": 0.25,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -18.32358633623028,
+      "frames": 12000,
+      "sample_rate": 48000,
+      "channels": 1,
+      "encoding": "PCM16",
+      "family": "blade",
+      "phase": "impact",
+      "source_layer_contributions": [
+        {
+          "file": "blade_01.ogg",
+          "sha256": "caf7a7cb9b25cda4bd487c1d12d18b74a34bb18c816fd67277cf3c8d7ef32a3a",
+          "post_filter_envelope_weighted_rms": 0.12616417922376488,
+          "weight": 1.25,
+          "layer_index": 0
+        },
+        {
+          "file": "metal_03.ogg",
+          "sha256": "35ec56e5136e7091f36470c3e502e714819c9ff843baff0910b095571459f274",
+          "post_filter_envelope_weighted_rms": 0.06768831095171819,
+          "weight": 0.775,
+          "layer_index": 1
+        }
+      ],
+      "design_metrics": {
+        "pre_gain_mix_rms": 0.12129253505318337,
+        "source_layer_power_fraction_estimate": 1.0
+      },
+      "design_role": "physical material-led transient/scrape/rumble"
+    },
+    {
+      "cue_id": "blade.impact",
+      "variant": 2,
+      "path": "res://assets/sfx/skill-combat-20261103/blade_impact_02.wav",
+      "sha256": "14bfce83d9c57118f5233d4dd1bee86f7dd213ebfffbfff5e123208931f7d7cf",
+      "duration_sec": 0.25,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -18.560917855973543,
+      "frames": 12000,
+      "sample_rate": 48000,
+      "channels": 1,
+      "encoding": "PCM16",
+      "family": "blade",
+      "phase": "impact",
+      "source_layer_contributions": [
+        {
+          "file": "blade_01.ogg",
+          "sha256": "caf7a7cb9b25cda4bd487c1d12d18b74a34bb18c816fd67277cf3c8d7ef32a3a",
+          "post_filter_envelope_weighted_rms": 0.12616417922376488,
+          "weight": 1.25,
+          "layer_index": 0
+        },
+        {
+          "file": "metal_03.ogg",
+          "sha256": "35ec56e5136e7091f36470c3e502e714819c9ff843baff0910b095571459f274",
+          "post_filter_envelope_weighted_rms": 0.06768831095171819,
+          "weight": 0.775,
+          "layer_index": 1
+        }
+      ],
+      "design_metrics": {
+        "pre_gain_mix_rms": 0.11802320737123793,
+        "source_layer_power_fraction_estimate": 1.0
+      },
+      "design_role": "physical material-led transient/scrape/rumble"
+    },
+    {
+      "cue_id": "blade.impact",
+      "variant": 3,
+      "path": "res://assets/sfx/skill-combat-20261103/blade_impact_03.wav",
+      "sha256": "4094e61e040cd8c121774de4f7cebdc54b8c0cced83a7c4b3b5f85e49e514105",
+      "duration_sec": 0.25,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -18.22762001612745,
+      "frames": 12000,
+      "sample_rate": 48000,
+      "channels": 1,
+      "encoding": "PCM16",
+      "family": "blade",
+      "phase": "impact",
+      "source_layer_contributions": [
+        {
+          "file": "blade_01.ogg",
+          "sha256": "caf7a7cb9b25cda4bd487c1d12d18b74a34bb18c816fd67277cf3c8d7ef32a3a",
+          "post_filter_envelope_weighted_rms": 0.12616417922376488,
+          "weight": 1.25,
+          "layer_index": 0
+        },
+        {
+          "file": "metal_03.ogg",
+          "sha256": "35ec56e5136e7091f36470c3e502e714819c9ff843baff0910b095571459f274",
+          "post_filter_envelope_weighted_rms": 0.06768831095171819,
+          "weight": 0.775,
+          "layer_index": 1
+        }
+      ],
+      "design_metrics": {
+        "pre_gain_mix_rms": 0.12264002844076446,
+        "source_layer_power_fraction_estimate": 1.0
+      },
+      "design_role": "physical material-led transient/scrape/rumble"
+    },
+    {
+      "cue_id": "blade.tell",
+      "variant": 1,
+      "path": "res://assets/sfx/skill-combat-20261103/blade_tell_01.wav",
+      "sha256": "996b10ec76ff8a20e5d662aab941b2f6e51959943e2c8b6b5be3d64a6728ee07",
+      "duration_sec": 0.43,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -15.349945875120646,
+      "frames": 20640,
+      "sample_rate": 48000,
+      "channels": 1,
+      "encoding": "PCM16",
+      "family": "blade",
+      "phase": "tell",
+      "source_layer_contributions": [
+        {
+          "file": "blade_01.ogg",
+          "sha256": "caf7a7cb9b25cda4bd487c1d12d18b74a34bb18c816fd67277cf3c8d7ef32a3a",
+          "post_filter_envelope_weighted_rms": 0.070973081233345,
+          "weight": 1.25,
+          "layer_index": 0
+        },
+        {
+          "file": "metal_03.ogg",
+          "sha256": "35ec56e5136e7091f36470c3e502e714819c9ff843baff0910b095571459f274",
+          "post_filter_envelope_weighted_rms": 0.015487814046478305,
+          "weight": 0.775,
+          "layer_index": 1
+        }
+      ],
+      "design_metrics": {
+        "pre_gain_mix_rms": 0.17081111711704872,
+        "source_layer_power_fraction_estimate": 0.18086685881214548
+      },
+      "design_role": "physical material-led transient/scrape/rumble"
+    },
+    {
+      "cue_id": "blade.tell",
+      "variant": 2,
+      "path": "res://assets/sfx/skill-combat-20261103/blade_tell_02.wav",
+      "sha256": "9fc2003841dafadaaf57142c0aa9ff1209bc47c95e579edc9ac8116d8b7e4601",
+      "duration_sec": 0.43,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -15.269283760404278,
+      "frames": 20640,
+      "sample_rate": 48000,
+      "channels": 1,
+      "encoding": "PCM16",
+      "family": "blade",
+      "phase": "tell",
+      "source_layer_contributions": [
+        {
+          "file": "blade_01.ogg",
+          "sha256": "caf7a7cb9b25cda4bd487c1d12d18b74a34bb18c816fd67277cf3c8d7ef32a3a",
+          "post_filter_envelope_weighted_rms": 0.070973081233345,
+          "weight": 1.25,
+          "layer_index": 0
+        },
+        {
+          "file": "metal_03.ogg",
+          "sha256": "35ec56e5136e7091f36470c3e502e714819c9ff843baff0910b095571459f274",
+          "post_filter_envelope_weighted_rms": 0.015487814046478305,
+          "weight": 0.775,
+          "layer_index": 1
+        }
+      ],
+      "design_metrics": {
+        "pre_gain_mix_rms": 0.1724046366283231,
+        "source_layer_power_fraction_estimate": 0.1775388404608358
+      },
+      "design_role": "physical material-led transient/scrape/rumble"
+    },
+    {
+      "cue_id": "blade.tell",
+      "variant": 3,
+      "path": "res://assets/sfx/skill-combat-20261103/blade_tell_03.wav",
+      "sha256": "1b5fc90f4f967649f73e93b7eb1916cd5af00472327b5da26c43794adc24f6ee",
+      "duration_sec": 0.43,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -14.969018440687169,
+      "frames": 20640,
+      "sample_rate": 48000,
+      "channels": 1,
+      "encoding": "PCM16",
+      "family": "blade",
+      "phase": "tell",
+      "source_layer_contributions": [
+        {
+          "file": "blade_01.ogg",
+          "sha256": "caf7a7cb9b25cda4bd487c1d12d18b74a34bb18c816fd67277cf3c8d7ef32a3a",
+          "post_filter_envelope_weighted_rms": 0.070973081233345,
+          "weight": 1.25,
+          "layer_index": 0
+        },
+        {
+          "file": "metal_03.ogg",
+          "sha256": "35ec56e5136e7091f36470c3e502e714819c9ff843baff0910b095571459f274",
+          "post_filter_envelope_weighted_rms": 0.015487814046478305,
+          "weight": 0.775,
+          "layer_index": 1
+        }
+      ],
+      "design_metrics": {
+        "pre_gain_mix_rms": 0.1784687852274673,
+        "source_layer_power_fraction_estimate": 0.16567871860452393
+      },
+      "design_role": "physical material-led transient/scrape/rumble"
+    },
+    {
+      "cue_id": "arcane.cast",
+      "variant": 1,
+      "path": "res://assets/sfx/skill-combat-20261103/arcane_cast_01.wav",
+      "sha256": "bbf6cda2f5d1d14c9c48a05849842f5abdc5293c149f954c6de529943d467c2d",
+      "duration_sec": 0.29,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -17.925345279704818,
+      "frames": 13920,
+      "sample_rate": 48000,
+      "channels": 1,
+      "encoding": "PCM16",
+      "family": "arcane",
+      "phase": "cast",
+      "source_layer_contributions": [
+        {
+          "file": "spell_01.ogg",
+          "sha256": "09821a53c418c5eeeac4fa25bada9d245e822fed302eeeae9ae4151522a45ae5",
+          "post_filter_envelope_weighted_rms": 0.10352670464445402,
+          "weight": 0.58,
+          "layer_index": 0
+        },
+        {
+          "file": "spell_02.ogg",
+          "sha256": "bf9c48b76921e56aa266172d969a2c08215d6ce0ffae7c3584f23fa05d3f8bd4",
+          "post_filter_envelope_weighted_rms": 0.042116288166579766,
+          "weight": 0.3596,
+          "layer_index": 1
+        }
+      ],
+      "design_metrics": {
+        "pre_gain_mix_rms": 0.12698321505979523,
+        "source_layer_power_fraction_estimate": 0.7746830460289796
+      },
+      "design_role": "tonal/elemental identity plus source texture"
+    },
+    {
+      "cue_id": "arcane.cast",
+      "variant": 2,
+      "path": "res://assets/sfx/skill-combat-20261103/arcane_cast_02.wav",
+      "sha256": "0d7013146d32a79414e0bf31f31bad2af09e7ed1ac60e5344d8bf0e7acca9fd7",
+      "duration_sec": 0.29,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -15.498706628358212,
+      "frames": 13920,
+      "sample_rate": 48000,
+      "channels": 1,
+      "encoding": "PCM16",
+      "family": "arcane",
+      "phase": "cast",
+      "source_layer_contributions": [
+        {
+          "file": "spell_01.ogg",
+          "sha256": "09821a53c418c5eeeac4fa25bada9d245e822fed302eeeae9ae4151522a45ae5",
+          "post_filter_envelope_weighted_rms": 0.06567126510649754,
+          "weight": 0.58,
+          "layer_index": 0
+        },
+        {
+          "file": "spell_02.ogg",
+          "sha256": "bf9c48b76921e56aa266172d969a2c08215d6ce0ffae7c3584f23fa05d3f8bd4",
+          "post_filter_envelope_weighted_rms": 0.017277492107001823,
+          "weight": 0.3596,
+          "layer_index": 1
+        }
+      ],
+      "design_metrics": {
+        "pre_gain_mix_rms": 0.1679104333684435,
+        "source_layer_power_fraction_estimate": 0.1635539802689213
+      },
+      "design_role": "tonal/elemental identity plus source texture"
+    },
+    {
+      "cue_id": "arcane.cast",
+      "variant": 3,
+      "path": "res://assets/sfx/skill-combat-20261103/arcane_cast_03.wav",
+      "sha256": "d65f667e5ff038f949e69125f3ca77c42ed334a10b66f03b2476e6ab7e815dc3",
+      "duration_sec": 0.29,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -15.946376606867382,
+      "frames": 13920,
+      "sample_rate": 48000,
+      "channels": 1,
+      "encoding": "PCM16",
+      "family": "arcane",
+      "phase": "cast",
+      "source_layer_contributions": [
+        {
+          "file": "spell_01.ogg",
+          "sha256": "09821a53c418c5eeeac4fa25bada9d245e822fed302eeeae9ae4151522a45ae5",
+          "post_filter_envelope_weighted_rms": 0.06380758107518969,
+          "weight": 0.58,
+          "layer_index": 0
+        },
+        {
+          "file": "spell_02.ogg",
+          "sha256": "bf9c48b76921e56aa266172d969a2c08215d6ce0ffae7c3584f23fa05d3f8bd4",
+          "post_filter_envelope_weighted_rms": 0.03572030489552918,
+          "weight": 0.3596,
+          "layer_index": 1
+        }
+      ],
+      "design_metrics": {
+        "pre_gain_mix_rms": 0.15947549834202845,
+        "source_layer_power_fraction_estimate": 0.21025700742396738
+      },
+      "design_role": "tonal/elemental identity plus source texture"
+    },
+    {
+      "cue_id": "arcane.impact",
+      "variant": 1,
+      "path": "res://assets/sfx/skill-combat-20261103/arcane_impact_01.wav",
+      "sha256": "eeb12a50a3f349531b8830ead67ab9ba2a35eabc2ca1653b22896f44fb012132",
+      "duration_sec": 0.25,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -17.291785449345404,
+      "frames": 12000,
+      "sample_rate": 48000,
+      "channels": 1,
+      "encoding": "PCM16",
+      "family": "arcane",
+      "phase": "impact",
+      "source_layer_contributions": [
+        {
+          "file": "spell_01.ogg",
+          "sha256": "09821a53c418c5eeeac4fa25bada9d245e822fed302eeeae9ae4151522a45ae5",
+          "post_filter_envelope_weighted_rms": 0.1217086375288074,
+          "weight": 0.58,
+          "layer_index": 0
+        },
+        {
+          "file": "spell_02.ogg",
+          "sha256": "bf9c48b76921e56aa266172d969a2c08215d6ce0ffae7c3584f23fa05d3f8bd4",
+          "post_filter_envelope_weighted_rms": 0.06628104994021793,
+          "weight": 0.3596,
+          "layer_index": 1
+        }
+      ],
+      "design_metrics": {
+        "pre_gain_mix_rms": 0.13659168648963632,
+        "source_layer_power_fraction_estimate": 1.0
+      },
+      "design_role": "tonal/elemental identity plus source texture"
+    },
+    {
+      "cue_id": "arcane.impact",
+      "variant": 2,
+      "path": "res://assets/sfx/skill-combat-20261103/arcane_impact_02.wav",
+      "sha256": "77542b4344961b420962290a02171f4b33102ca66862d0a659334cb22b9bdd66",
+      "duration_sec": 0.25,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -17.06558958868714,
+      "frames": 12000,
+      "sample_rate": 48000,
+      "channels": 1,
+      "encoding": "PCM16",
+      "family": "arcane",
+      "phase": "impact",
+      "source_layer_contributions": [
+        {
+          "file": "spell_01.ogg",
+          "sha256": "09821a53c418c5eeeac4fa25bada9d245e822fed302eeeae9ae4151522a45ae5",
+          "post_filter_envelope_weighted_rms": 0.1217086375288074,
+          "weight": 0.58,
+          "layer_index": 0
+        },
+        {
+          "file": "spell_02.ogg",
+          "sha256": "bf9c48b76921e56aa266172d969a2c08215d6ce0ffae7c3584f23fa05d3f8bd4",
+          "post_filter_envelope_weighted_rms": 0.06628104994021793,
+          "weight": 0.3596,
+          "layer_index": 1
+        }
+      ],
+      "design_metrics": {
+        "pre_gain_mix_rms": 0.14019537248976574,
+        "source_layer_power_fraction_estimate": 0.977177394311393
+      },
+      "design_role": "tonal/elemental identity plus source texture"
+    },
+    {
+      "cue_id": "arcane.impact",
+      "variant": 3,
+      "path": "res://assets/sfx/skill-combat-20261103/arcane_impact_03.wav",
+      "sha256": "36f73108e67abca0d9df91592d20b886c6fc5e8a4e29766eb30d566c93870a2f",
+      "duration_sec": 0.25,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -16.06667720227891,
+      "frames": 12000,
+      "sample_rate": 48000,
+      "channels": 1,
+      "encoding": "PCM16",
+      "family": "arcane",
+      "phase": "impact",
+      "source_layer_contributions": [
+        {
+          "file": "spell_01.ogg",
+          "sha256": "09821a53c418c5eeeac4fa25bada9d245e822fed302eeeae9ae4151522a45ae5",
+          "post_filter_envelope_weighted_rms": 0.1217086375288074,
+          "weight": 0.58,
+          "layer_index": 0
+        },
+        {
+          "file": "spell_02.ogg",
+          "sha256": "bf9c48b76921e56aa266172d969a2c08215d6ce0ffae7c3584f23fa05d3f8bd4",
+          "post_filter_envelope_weighted_rms": 0.06628104994021793,
+          "weight": 0.3596,
+          "layer_index": 1
+        }
+      ],
+      "design_metrics": {
+        "pre_gain_mix_rms": 0.15728211688576163,
+        "source_layer_power_fraction_estimate": 0.7763938342576626
+      },
+      "design_role": "tonal/elemental identity plus source texture"
+    },
+    {
+      "cue_id": "arcane.tell",
+      "variant": 1,
+      "path": "res://assets/sfx/skill-combat-20261103/arcane_tell_01.wav",
+      "sha256": "8316977d095a457c8b29e4abaff9ac18cbc717df13789f2c3ce7c99713d5e38a",
+      "duration_sec": 0.43,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -17.012528104084414,
+      "frames": 20640,
+      "sample_rate": 48000,
+      "channels": 1,
+      "encoding": "PCM16",
+      "family": "arcane",
+      "phase": "tell",
+      "source_layer_contributions": [
+        {
+          "file": "spell_01.ogg",
+          "sha256": "09821a53c418c5eeeac4fa25bada9d245e822fed302eeeae9ae4151522a45ae5",
+          "post_filter_envelope_weighted_rms": 0.0378586232151187,
+          "weight": 0.58,
+          "layer_index": 0
+        },
+        {
+          "file": "spell_02.ogg",
+          "sha256": "bf9c48b76921e56aa266172d969a2c08215d6ce0ffae7c3584f23fa05d3f8bd4",
+          "post_filter_envelope_weighted_rms": 0.020644253650580622,
+          "weight": 0.3596,
+          "layer_index": 1
+        }
+      ],
+      "design_metrics": {
+        "pre_gain_mix_rms": 0.14105455967949218,
+        "source_layer_power_fraction_estimate": 0.09345718856971709
+      },
+      "design_role": "tonal/elemental identity plus source texture"
+    },
+    {
+      "cue_id": "arcane.tell",
+      "variant": 2,
+      "path": "res://assets/sfx/skill-combat-20261103/arcane_tell_02.wav",
+      "sha256": "a9fd353649514132215340ce832cbadc7d2d4d1f2be5d0efb4d5fd49a766af07",
+      "duration_sec": 0.43,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -16.65571410422149,
+      "frames": 20640,
+      "sample_rate": 48000,
+      "channels": 1,
+      "encoding": "PCM16",
+      "family": "arcane",
+      "phase": "tell",
+      "source_layer_contributions": [
+        {
+          "file": "spell_01.ogg",
+          "sha256": "09821a53c418c5eeeac4fa25bada9d245e822fed302eeeae9ae4151522a45ae5",
+          "post_filter_envelope_weighted_rms": 0.04024746723549758,
+          "weight": 0.58,
+          "layer_index": 0
+        },
+        {
+          "file": "spell_02.ogg",
+          "sha256": "bf9c48b76921e56aa266172d969a2c08215d6ce0ffae7c3584f23fa05d3f8bd4",
+          "post_filter_envelope_weighted_rms": 0.024287133289382555,
+          "weight": 0.3596,
+          "layer_index": 1
+        }
+      ],
+      "design_metrics": {
+        "pre_gain_mix_rms": 0.1469695792762668,
+        "source_layer_power_fraction_estimate": 0.10230174107822562
+      },
+      "design_role": "tonal/elemental identity plus source texture"
+    },
+    {
+      "cue_id": "arcane.tell",
+      "variant": 3,
+      "path": "res://assets/sfx/skill-combat-20261103/arcane_tell_03.wav",
+      "sha256": "7ceed5e27a630d15992ecabced3e50a1116edd3667e116f48e1bc3775ba27b82",
+      "duration_sec": 0.43,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -16.51754459768872,
+      "frames": 20640,
+      "sample_rate": 48000,
+      "channels": 1,
+      "encoding": "PCM16",
+      "family": "arcane",
+      "phase": "tell",
+      "source_layer_contributions": [
+        {
+          "file": "spell_01.ogg",
+          "sha256": "09821a53c418c5eeeac4fa25bada9d245e822fed302eeeae9ae4151522a45ae5",
+          "post_filter_envelope_weighted_rms": 0.0371826176079796,
+          "weight": 0.58,
+          "layer_index": 0
+        },
+        {
+          "file": "spell_02.ogg",
+          "sha256": "bf9c48b76921e56aa266172d969a2c08215d6ce0ffae7c3584f23fa05d3f8bd4",
+          "post_filter_envelope_weighted_rms": 0.013419087808954578,
+          "weight": 0.3596,
+          "layer_index": 1
+        }
+      ],
+      "design_metrics": {
+        "pre_gain_mix_rms": 0.1493261991478736,
+        "source_layer_power_fraction_estimate": 0.07007789858858667
+      },
+      "design_role": "tonal/elemental identity plus source texture"
+    },
+    {
+      "cue_id": "beast.cast",
+      "variant": 1,
+      "path": "res://assets/sfx/skill-combat-20261103/beast_cast_01.wav",
+      "sha256": "9982cfbd557bbac55ed0b3f0a76621fe3fd3af3d7988f27ba4f312a871e76af6",
+      "duration_sec": 0.29,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -16.871250686944954,
+      "frames": 13920,
+      "sample_rate": 48000,
+      "channels": 1,
+      "encoding": "PCM16",
+      "family": "beast",
+      "phase": "cast",
+      "source_layer_contributions": [
+        {
+          "file": "creature_hurt_01.ogg",
+          "sha256": "9948f9ce067e1aae7bd780e974d51ceae03f2611a52afffb0e092ba47e9dc8e1",
+          "post_filter_envelope_weighted_rms": 0.1300740899439277,
+          "weight": 1.25,
+          "layer_index": 0
+        },
+        {
+          "file": "creature_roar_01.ogg",
+          "sha256": "ca1b9198490f29037e6e6487dd6db6165ca8b2583a445c0edd6b9f474d2d1f5f",
+          "post_filter_envelope_weighted_rms": 0.28177487257910955,
+          "weight": 0.775,
+          "layer_index": 1
+        }
+      ],
+      "design_metrics": {
+        "pre_gain_mix_rms": 0.1433675155302855,
+        "source_layer_power_fraction_estimate": 1.0
+      },
+      "design_role": "physical material-led transient/scrape/rumble"
+    },
+    {
+      "cue_id": "beast.cast",
+      "variant": 2,
+      "path": "res://assets/sfx/skill-combat-20261103/beast_cast_02.wav",
+      "sha256": "e0202acefc82f322cbf468dd0c7a9c1969c5b344f379c698066de74fdb1f152f",
+      "duration_sec": 0.29,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -17.659867879125397,
+      "frames": 13920,
+      "sample_rate": 48000,
+      "channels": 1,
+      "encoding": "PCM16",
+      "family": "beast",
+      "phase": "cast",
+      "source_layer_contributions": [
+        {
+          "file": "creature_hurt_01.ogg",
+          "sha256": "9948f9ce067e1aae7bd780e974d51ceae03f2611a52afffb0e092ba47e9dc8e1",
+          "post_filter_envelope_weighted_rms": 0.2744646438000481,
+          "weight": 1.25,
+          "layer_index": 0
+        },
+        {
+          "file": "creature_roar_01.ogg",
+          "sha256": "ca1b9198490f29037e6e6487dd6db6165ca8b2583a445c0edd6b9f474d2d1f5f",
+          "post_filter_envelope_weighted_rms": 0.2818303182864066,
+          "weight": 0.775,
+          "layer_index": 1
+        }
+      ],
+      "design_metrics": {
+        "pre_gain_mix_rms": 0.13092417031085068,
+        "source_layer_power_fraction_estimate": 1.0
+      },
+      "design_role": "physical material-led transient/scrape/rumble"
+    },
+    {
+      "cue_id": "beast.cast",
+      "variant": 3,
+      "path": "res://assets/sfx/skill-combat-20261103/beast_cast_03.wav",
+      "sha256": "38f47012ab0fbe3d5227ae59921605a92de0758188279976e5ee271b72108de4",
+      "duration_sec": 0.29,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -17.285843668910776,
+      "frames": 13920,
+      "sample_rate": 48000,
+      "channels": 1,
+      "encoding": "PCM16",
+      "family": "beast",
+      "phase": "cast",
+      "source_layer_contributions": [
+        {
+          "file": "creature_hurt_01.ogg",
+          "sha256": "9948f9ce067e1aae7bd780e974d51ceae03f2611a52afffb0e092ba47e9dc8e1",
+          "post_filter_envelope_weighted_rms": 0.023744018774660446,
+          "weight": 1.25,
+          "layer_index": 0
+        },
+        {
+          "file": "creature_roar_01.ogg",
+          "sha256": "ca1b9198490f29037e6e6487dd6db6165ca8b2583a445c0edd6b9f474d2d1f5f",
+          "post_filter_envelope_weighted_rms": 0.17116497824810747,
+          "weight": 0.775,
+          "layer_index": 1
+        }
+      ],
+      "design_metrics": {
+        "pre_gain_mix_rms": 0.13668510480425963,
+        "source_layer_power_fraction_estimate": 1.0
+      },
+      "design_role": "physical material-led transient/scrape/rumble"
+    },
+    {
+      "cue_id": "beast.impact",
+      "variant": 1,
+      "path": "res://assets/sfx/skill-combat-20261103/beast_impact_01.wav",
+      "sha256": "e08892a6b58ddc92a70b0174bfe7561436a2e7acb8ba6d8af4bbcda0714eddda",
+      "duration_sec": 0.25,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -14.481701627269718,
+      "frames": 12000,
+      "sample_rate": 48000,
+      "channels": 1,
+      "encoding": "PCM16",
+      "family": "beast",
+      "phase": "impact",
+      "source_layer_contributions": [
+        {
+          "file": "creature_hurt_01.ogg",
+          "sha256": "9948f9ce067e1aae7bd780e974d51ceae03f2611a52afffb0e092ba47e9dc8e1",
+          "post_filter_envelope_weighted_rms": 0.32750304088978904,
+          "weight": 1.25,
+          "layer_index": 0
+        },
+        {
+          "file": "creature_roar_01.ogg",
+          "sha256": "ca1b9198490f29037e6e6487dd6db6165ca8b2583a445c0edd6b9f474d2d1f5f",
+          "post_filter_envelope_weighted_rms": 0.21785533116210581,
+          "weight": 0.775,
+          "layer_index": 1
+        }
+      ],
+      "design_metrics": {
+        "pre_gain_mix_rms": 0.1887678510276025,
+        "source_layer_power_fraction_estimate": 1.0
+      },
+      "design_role": "physical material-led transient/scrape/rumble"
+    },
+    {
+      "cue_id": "beast.impact",
+      "variant": 2,
+      "path": "res://assets/sfx/skill-combat-20261103/beast_impact_02.wav",
+      "sha256": "85899699e0815039fda60a4516410fa794140d10a0fe4fe4dacb773c1b12684b",
+      "duration_sec": 0.25,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -14.939046402734704,
+      "frames": 12000,
+      "sample_rate": 48000,
+      "channels": 1,
+      "encoding": "PCM16",
+      "family": "beast",
+      "phase": "impact",
+      "source_layer_contributions": [
+        {
+          "file": "creature_hurt_01.ogg",
+          "sha256": "9948f9ce067e1aae7bd780e974d51ceae03f2611a52afffb0e092ba47e9dc8e1",
+          "post_filter_envelope_weighted_rms": 0.32750304088978904,
+          "weight": 1.25,
+          "layer_index": 0
+        },
+        {
+          "file": "creature_roar_01.ogg",
+          "sha256": "ca1b9198490f29037e6e6487dd6db6165ca8b2583a445c0edd6b9f474d2d1f5f",
+          "post_filter_envelope_weighted_rms": 0.21785533116210581,
+          "weight": 0.775,
+          "layer_index": 1
+        }
+      ],
+      "design_metrics": {
+        "pre_gain_mix_rms": 0.17908572538317058,
+        "source_layer_power_fraction_estimate": 1.0
+      },
+      "design_role": "physical material-led transient/scrape/rumble"
+    },
+    {
+      "cue_id": "beast.impact",
+      "variant": 3,
+      "path": "res://assets/sfx/skill-combat-20261103/beast_impact_03.wav",
+      "sha256": "0bb200379de9e462ca306cd623abba0b7225faa86251d1554b1a104678f74b09",
+      "duration_sec": 0.25,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -14.272564750513784,
+      "frames": 12000,
+      "sample_rate": 48000,
+      "channels": 1,
+      "encoding": "PCM16",
+      "family": "beast",
+      "phase": "impact",
+      "source_layer_contributions": [
+        {
+          "file": "creature_hurt_01.ogg",
+          "sha256": "9948f9ce067e1aae7bd780e974d51ceae03f2611a52afffb0e092ba47e9dc8e1",
+          "post_filter_envelope_weighted_rms": 0.32750304088978904,
+          "weight": 1.25,
+          "layer_index": 0
+        },
+        {
+          "file": "creature_roar_01.ogg",
+          "sha256": "ca1b9198490f29037e6e6487dd6db6165ca8b2583a445c0edd6b9f474d2d1f5f",
+          "post_filter_envelope_weighted_rms": 0.21785533116210581,
+          "weight": 0.775,
+          "layer_index": 1
+        }
+      ],
+      "design_metrics": {
+        "pre_gain_mix_rms": 0.19336810670057253,
+        "source_layer_power_fraction_estimate": 1.0
+      },
+      "design_role": "physical material-led transient/scrape/rumble"
+    },
+    {
+      "cue_id": "beast.tell",
+      "variant": 1,
+      "path": "res://assets/sfx/skill-combat-20261103/beast_tell_01.wav",
+      "sha256": "929a6cff7c844d0928e12c41dcec3218c9c609dc086474460f29e5ceed33a594",
+      "duration_sec": 0.43,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -15.940544575672572,
+      "frames": 20640,
+      "sample_rate": 48000,
+      "channels": 1,
+      "encoding": "PCM16",
+      "family": "beast",
+      "phase": "tell",
+      "source_layer_contributions": [
+        {
+          "file": "creature_hurt_01.ogg",
+          "sha256": "9948f9ce067e1aae7bd780e974d51ceae03f2611a52afffb0e092ba47e9dc8e1",
+          "post_filter_envelope_weighted_rms": 0.15345238762231786,
+          "weight": 1.25,
+          "layer_index": 0
+        },
+        {
+          "file": "creature_roar_01.ogg",
+          "sha256": "ca1b9198490f29037e6e6487dd6db6165ca8b2583a445c0edd6b9f474d2d1f5f",
+          "post_filter_envelope_weighted_rms": 0.32501131551118556,
+          "weight": 0.775,
+          "layer_index": 1
+        }
+      ],
+      "design_metrics": {
+        "pre_gain_mix_rms": 0.15958280503566996,
+        "source_layer_power_fraction_estimate": 1.0
+      },
+      "design_role": "physical material-led transient/scrape/rumble"
+    },
+    {
+      "cue_id": "beast.tell",
+      "variant": 2,
+      "path": "res://assets/sfx/skill-combat-20261103/beast_tell_02.wav",
+      "sha256": "76d6a5e28e333f516bd202c7521221385fd5f26c4f3a3295bc9af1bd7a1c06f7",
+      "duration_sec": 0.43,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -14.980514347749486,
+      "frames": 20640,
+      "sample_rate": 48000,
+      "channels": 1,
+      "encoding": "PCM16",
+      "family": "beast",
+      "phase": "tell",
+      "source_layer_contributions": [
+        {
+          "file": "creature_hurt_01.ogg",
+          "sha256": "9948f9ce067e1aae7bd780e974d51ceae03f2611a52afffb0e092ba47e9dc8e1",
+          "post_filter_envelope_weighted_rms": 0.023870538034286324,
+          "weight": 1.25,
+          "layer_index": 0
+        },
+        {
+          "file": "creature_roar_01.ogg",
+          "sha256": "ca1b9198490f29037e6e6487dd6db6165ca8b2583a445c0edd6b9f474d2d1f5f",
+          "post_filter_envelope_weighted_rms": 0.29193546071141663,
+          "weight": 0.775,
+          "layer_index": 1
+        }
+      ],
+      "design_metrics": {
+        "pre_gain_mix_rms": 0.17823273669140935,
+        "source_layer_power_fraction_estimate": 1.0
+      },
+      "design_role": "physical material-led transient/scrape/rumble"
+    },
+    {
+      "cue_id": "beast.tell",
+      "variant": 3,
+      "path": "res://assets/sfx/skill-combat-20261103/beast_tell_03.wav",
+      "sha256": "bba1e4003bff398660ae4917ee4ec9a298b0604b3ba2a7018c8a43aafdf7522d",
+      "duration_sec": 0.43,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -14.458991047308169,
+      "frames": 20640,
+      "sample_rate": 48000,
+      "channels": 1,
+      "encoding": "PCM16",
+      "family": "beast",
+      "phase": "tell",
+      "source_layer_contributions": [
+        {
+          "file": "creature_hurt_01.ogg",
+          "sha256": "9948f9ce067e1aae7bd780e974d51ceae03f2611a52afffb0e092ba47e9dc8e1",
+          "post_filter_envelope_weighted_rms": 0.0531967775587791,
+          "weight": 1.25,
+          "layer_index": 0
+        },
+        {
+          "file": "creature_roar_01.ogg",
+          "sha256": "ca1b9198490f29037e6e6487dd6db6165ca8b2583a445c0edd6b9f474d2d1f5f",
+          "post_filter_envelope_weighted_rms": 0.28146192322849534,
+          "weight": 0.775,
+          "layer_index": 1
+        }
+      ],
+      "design_metrics": {
+        "pre_gain_mix_rms": 0.18926209660776486,
+        "source_layer_power_fraction_estimate": 1.0
+      },
+      "design_role": "physical material-led transient/scrape/rumble"
+    },
+    {
+      "cue_id": "boss_demon.cast",
+      "variant": 1,
+      "path": "res://assets/sfx/skill-combat-20261103/boss_demon_cast_01.wav",
+      "sha256": "6989580b5f1da08af2679395748bdda3e7b4baae034dac10acef5a2026105216",
+      "duration_sec": 0.35,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -16.473169866976875,
+      "frames": 16800,
+      "sample_rate": 48000,
+      "channels": 1,
+      "encoding": "PCM16",
+      "family": "boss_demon",
+      "phase": "cast",
+      "source_layer_contributions": [
+        {
+          "file": "creature_roar_01.ogg",
+          "sha256": "ca1b9198490f29037e6e6487dd6db6165ca8b2583a445c0edd6b9f474d2d1f5f",
+          "post_filter_envelope_weighted_rms": 0.45012730773794457,
+          "weight": 1.25,
+          "layer_index": 0
+        },
+        {
+          "file": "creature_monster_02.ogg",
+          "sha256": "2892a32ddfc8d0fc3896f6487adf5a2eb6f3f5766fa02151bddd55e18f218f2f",
+          "post_filter_envelope_weighted_rms": 0.009846732550120278,
+          "weight": 0.775,
+          "layer_index": 1
+        }
+      ],
+      "design_metrics": {
+        "pre_gain_mix_rms": 0.1500910728777324,
+        "source_layer_power_fraction_estimate": 1.0
+      },
+      "design_role": "physical material-led transient/scrape/rumble"
+    },
+    {
+      "cue_id": "boss_demon.cast",
+      "variant": 2,
+      "path": "res://assets/sfx/skill-combat-20261103/boss_demon_cast_02.wav",
+      "sha256": "8ec497be7834240e082602b4588d12dd65c0fba12e08d13716ab18db2597cb03",
+      "duration_sec": 0.35,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -14.958936912824154,
+      "frames": 16800,
+      "sample_rate": 48000,
+      "channels": 1,
+      "encoding": "PCM16",
+      "family": "boss_demon",
+      "phase": "cast",
+      "source_layer_contributions": [
+        {
+          "file": "creature_roar_01.ogg",
+          "sha256": "ca1b9198490f29037e6e6487dd6db6165ca8b2583a445c0edd6b9f474d2d1f5f",
+          "post_filter_envelope_weighted_rms": 0.5264026376617668,
+          "weight": 1.25,
+          "layer_index": 0
+        },
+        {
+          "file": "creature_monster_02.ogg",
+          "sha256": "2892a32ddfc8d0fc3896f6487adf5a2eb6f3f5766fa02151bddd55e18f218f2f",
+          "post_filter_envelope_weighted_rms": 0.009846732550120278,
+          "weight": 0.775,
+          "layer_index": 1
+        }
+      ],
+      "design_metrics": {
+        "pre_gain_mix_rms": 0.17867605808729214,
+        "source_layer_power_fraction_estimate": 1.0
+      },
+      "design_role": "physical material-led transient/scrape/rumble"
+    },
+    {
+      "cue_id": "boss_demon.cast",
+      "variant": 3,
+      "path": "res://assets/sfx/skill-combat-20261103/boss_demon_cast_03.wav",
+      "sha256": "a2fdcd9a154ab117ddf40fa65dacd55914e8dd55560f21f3ff0d57ac34aed777",
+      "duration_sec": 0.35,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -14.684192218294434,
+      "frames": 16800,
+      "sample_rate": 48000,
+      "channels": 1,
+      "encoding": "PCM16",
+      "family": "boss_demon",
+      "phase": "cast",
+      "source_layer_contributions": [
+        {
+          "file": "creature_roar_01.ogg",
+          "sha256": "ca1b9198490f29037e6e6487dd6db6165ca8b2583a445c0edd6b9f474d2d1f5f",
+          "post_filter_envelope_weighted_rms": 0.5079900286059684,
+          "weight": 1.25,
+          "layer_index": 0
+        },
+        {
+          "file": "creature_monster_02.ogg",
+          "sha256": "2892a32ddfc8d0fc3896f6487adf5a2eb6f3f5766fa02151bddd55e18f218f2f",
+          "post_filter_envelope_weighted_rms": 0.009846732550120278,
+          "weight": 0.775,
+          "layer_index": 1
+        }
+      ],
+      "design_metrics": {
+        "pre_gain_mix_rms": 0.18441816583010798,
+        "source_layer_power_fraction_estimate": 1.0
+      },
+      "design_role": "physical material-led transient/scrape/rumble"
+    },
+    {
+      "cue_id": "boss_demon.impact",
+      "variant": 1,
+      "path": "res://assets/sfx/skill-combat-20261103/boss_demon_impact_01.wav",
+      "sha256": "21b31c535292f1bae23639dd9c6178f7796323b1c5ec50c8703f0a0e7328ed84",
+      "duration_sec": 0.4,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -13.662021100483352,
+      "frames": 19200,
+      "sample_rate": 48000,
+      "channels": 1,
+      "encoding": "PCM16",
+      "family": "boss_demon",
+      "phase": "impact",
+      "source_layer_contributions": [
+        {
+          "file": "creature_roar_01.ogg",
+          "sha256": "ca1b9198490f29037e6e6487dd6db6165ca8b2583a445c0edd6b9f474d2d1f5f",
+          "post_filter_envelope_weighted_rms": 0.5529384745935236,
+          "weight": 1.25,
+          "layer_index": 0
+        },
+        {
+          "file": "creature_monster_02.ogg",
+          "sha256": "2892a32ddfc8d0fc3896f6487adf5a2eb6f3f5766fa02151bddd55e18f218f2f",
+          "post_filter_envelope_weighted_rms": 0.009210774896584598,
+          "weight": 0.775,
+          "layer_index": 1
+        }
+      ],
+      "design_metrics": {
+        "pre_gain_mix_rms": 0.20744940697708414,
+        "source_layer_power_fraction_estimate": 1.0
+      },
+      "design_role": "physical material-led transient/scrape/rumble"
+    },
+    {
+      "cue_id": "boss_demon.impact",
+      "variant": 2,
+      "path": "res://assets/sfx/skill-combat-20261103/boss_demon_impact_02.wav",
+      "sha256": "1e8a4bb5783e095744da25bc83f008a25d089418cd93230264791cb06414a5d1",
+      "duration_sec": 0.4,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -13.544008634581425,
+      "frames": 19200,
+      "sample_rate": 48000,
+      "channels": 1,
+      "encoding": "PCM16",
+      "family": "boss_demon",
+      "phase": "impact",
+      "source_layer_contributions": [
+        {
+          "file": "creature_roar_01.ogg",
+          "sha256": "ca1b9198490f29037e6e6487dd6db6165ca8b2583a445c0edd6b9f474d2d1f5f",
+          "post_filter_envelope_weighted_rms": 0.5529384745935236,
+          "weight": 1.25,
+          "layer_index": 0
+        },
+        {
+          "file": "creature_monster_02.ogg",
+          "sha256": "2892a32ddfc8d0fc3896f6487adf5a2eb6f3f5766fa02151bddd55e18f218f2f",
+          "post_filter_envelope_weighted_rms": 0.009210774896584598,
+          "weight": 0.775,
+          "layer_index": 1
+        }
+      ],
+      "design_metrics": {
+        "pre_gain_mix_rms": 0.21028728577547262,
+        "source_layer_power_fraction_estimate": 1.0
+      },
+      "design_role": "physical material-led transient/scrape/rumble"
+    },
+    {
+      "cue_id": "boss_demon.impact",
+      "variant": 3,
+      "path": "res://assets/sfx/skill-combat-20261103/boss_demon_impact_03.wav",
+      "sha256": "a5e68bd417d5034abffb10decbb3fd897d0414e798c8f08fa97bdecbf2be05ae",
+      "duration_sec": 0.4,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -13.482806299405022,
+      "frames": 19200,
+      "sample_rate": 48000,
+      "channels": 1,
+      "encoding": "PCM16",
+      "family": "boss_demon",
+      "phase": "impact",
+      "source_layer_contributions": [
+        {
+          "file": "creature_roar_01.ogg",
+          "sha256": "ca1b9198490f29037e6e6487dd6db6165ca8b2583a445c0edd6b9f474d2d1f5f",
+          "post_filter_envelope_weighted_rms": 0.5529384745935236,
+          "weight": 1.25,
+          "layer_index": 0
+        },
+        {
+          "file": "creature_monster_02.ogg",
+          "sha256": "2892a32ddfc8d0fc3896f6487adf5a2eb6f3f5766fa02151bddd55e18f218f2f",
+          "post_filter_envelope_weighted_rms": 0.009210774896584598,
+          "weight": 0.775,
+          "layer_index": 1
+        }
+      ],
+      "design_metrics": {
+        "pre_gain_mix_rms": 0.21177415546535366,
+        "source_layer_power_fraction_estimate": 1.0
+      },
+      "design_role": "physical material-led transient/scrape/rumble"
+    },
+    {
+      "cue_id": "boss_demon.tell",
+      "variant": 1,
+      "path": "res://assets/sfx/skill-combat-20261103/boss_demon_tell_01.wav",
+      "sha256": "c9c361e5063a7bf3ca181612359b88c1f773598506b50d8c0047a112ddb6cef9",
+      "duration_sec": 0.49,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -14.903774770645057,
+      "frames": 23520,
+      "sample_rate": 48000,
+      "channels": 1,
+      "encoding": "PCM16",
+      "family": "boss_demon",
+      "phase": "tell",
+      "source_layer_contributions": [
+        {
+          "file": "creature_roar_01.ogg",
+          "sha256": "ca1b9198490f29037e6e6487dd6db6165ca8b2583a445c0edd6b9f474d2d1f5f",
+          "post_filter_envelope_weighted_rms": 0.4970330937036998,
+          "weight": 1.25,
+          "layer_index": 0
+        },
+        {
+          "file": "creature_monster_02.ogg",
+          "sha256": "2892a32ddfc8d0fc3896f6487adf5a2eb6f3f5766fa02151bddd55e18f218f2f",
+          "post_filter_envelope_weighted_rms": 0.005213530442690013,
+          "weight": 0.775,
+          "layer_index": 1
+        }
+      ],
+      "design_metrics": {
+        "pre_gain_mix_rms": 0.1798143538693026,
+        "source_layer_power_fraction_estimate": 1.0
+      },
+      "design_role": "physical material-led transient/scrape/rumble"
+    },
+    {
+      "cue_id": "boss_demon.tell",
+      "variant": 2,
+      "path": "res://assets/sfx/skill-combat-20261103/boss_demon_tell_02.wav",
+      "sha256": "2c8f87dbaa556bd58ab627c17ad33b1877a64a0d45640e232a6205ede471d2c6",
+      "duration_sec": 0.49,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -15.453784192875538,
+      "frames": 23520,
+      "sample_rate": 48000,
+      "channels": 1,
+      "encoding": "PCM16",
+      "family": "boss_demon",
+      "phase": "tell",
+      "source_layer_contributions": [
+        {
+          "file": "creature_roar_01.ogg",
+          "sha256": "ca1b9198490f29037e6e6487dd6db6165ca8b2583a445c0edd6b9f474d2d1f5f",
+          "post_filter_envelope_weighted_rms": 0.473466168936855,
+          "weight": 1.25,
+          "layer_index": 0
+        },
+        {
+          "file": "creature_monster_02.ogg",
+          "sha256": "2892a32ddfc8d0fc3896f6487adf5a2eb6f3f5766fa02151bddd55e18f218f2f",
+          "post_filter_envelope_weighted_rms": 0.005213530442690013,
+          "weight": 0.775,
+          "layer_index": 1
+        }
+      ],
+      "design_metrics": {
+        "pre_gain_mix_rms": 0.1687811685057264,
+        "source_layer_power_fraction_estimate": 1.0
+      },
+      "design_role": "physical material-led transient/scrape/rumble"
+    },
+    {
+      "cue_id": "boss_demon.tell",
+      "variant": 3,
+      "path": "res://assets/sfx/skill-combat-20261103/boss_demon_tell_03.wav",
+      "sha256": "6cede42edf247cf1dfb51159d62e5858aa1dc87ff3fd0bc2a16d4404a11b508a",
+      "duration_sec": 0.49,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -15.6754243548779,
+      "frames": 23520,
+      "sample_rate": 48000,
+      "channels": 1,
+      "encoding": "PCM16",
+      "family": "boss_demon",
+      "phase": "tell",
+      "source_layer_contributions": [
+        {
+          "file": "creature_roar_01.ogg",
+          "sha256": "ca1b9198490f29037e6e6487dd6db6165ca8b2583a445c0edd6b9f474d2d1f5f",
+          "post_filter_envelope_weighted_rms": 0.45110861492473553,
+          "weight": 1.25,
+          "layer_index": 0
+        },
+        {
+          "file": "creature_monster_02.ogg",
+          "sha256": "2892a32ddfc8d0fc3896f6487adf5a2eb6f3f5766fa02151bddd55e18f218f2f",
+          "post_filter_envelope_weighted_rms": 0.005213530442690013,
+          "weight": 0.775,
+          "layer_index": 1
+        }
+      ],
+      "design_metrics": {
+        "pre_gain_mix_rms": 0.16452882581384143,
+        "source_layer_power_fraction_estimate": 1.0
+      },
+      "design_role": "physical material-led transient/scrape/rumble"
+    },
+    {
+      "cue_id": "boss_demon.phase",
+      "variant": 1,
+      "path": "res://assets/sfx/skill-combat-20261103/boss_demon_phase_01.wav",
+      "sha256": "3271aa24d05f58eb2eef01b8c1fd0e2f422fb12df454eaa7b26772e53ca7c33a",
+      "duration_sec": 1.0088125,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -17.758463921612083,
+      "frames": 48423,
+      "sample_rate": 48000,
+      "channels": 1,
+      "encoding": "PCM16",
+      "family": "boss_demon",
+      "phase": "phase",
+      "source_layer_contributions": [
+        {
+          "file": "creature_roar_01.ogg",
+          "sha256": "ca1b9198490f29037e6e6487dd6db6165ca8b2583a445c0edd6b9f474d2d1f5f",
+          "post_filter_envelope_weighted_rms": 0.3515897335906619,
+          "weight": 1.25,
+          "layer_index": 0
+        },
+        {
+          "file": "creature_monster_02.ogg",
+          "sha256": "2892a32ddfc8d0fc3896f6487adf5a2eb6f3f5766fa02151bddd55e18f218f2f",
+          "post_filter_envelope_weighted_rms": 0.0057999057588844485,
+          "weight": 0.775,
+          "layer_index": 1
+        },
+        {
+          "file": "spell_fire_05.ogg",
+          "sha256": "18025b21a4ecb3b41acc0dccb0697a8930262109ea198ff8c5ef0853d3ed1cfa",
+          "post_filter_envelope_weighted_rms": 0.009491873975680491,
+          "weight": 0.775,
+          "layer_index": 2
+        }
+      ],
+      "design_metrics": {
+        "pre_gain_mix_rms": 0.12944638804170602,
+        "source_layer_power_fraction_estimate": 1.0
+      },
+      "design_role": "physical material-led transient/scrape/rumble"
+    },
+    {
+      "cue_id": "boss_demon.phase",
+      "variant": 2,
+      "path": "res://assets/sfx/skill-combat-20261103/boss_demon_phase_02.wav",
+      "sha256": "7d9bf673d3617a08ce4ce1efab580f3532ba6859a060249604d43133c20d045f",
+      "duration_sec": 1.1211875,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -18.5966183469645,
+      "frames": 53817,
+      "sample_rate": 48000,
+      "channels": 1,
+      "encoding": "PCM16",
+      "family": "boss_demon",
+      "phase": "phase",
+      "source_layer_contributions": [
+        {
+          "file": "creature_roar_01.ogg",
+          "sha256": "ca1b9198490f29037e6e6487dd6db6165ca8b2583a445c0edd6b9f474d2d1f5f",
+          "post_filter_envelope_weighted_rms": 0.3335049536622649,
+          "weight": 1.25,
+          "layer_index": 0
+        },
+        {
+          "file": "creature_monster_02.ogg",
+          "sha256": "2892a32ddfc8d0fc3896f6487adf5a2eb6f3f5766fa02151bddd55e18f218f2f",
+          "post_filter_envelope_weighted_rms": 0.00550157503635833,
+          "weight": 0.775,
+          "layer_index": 1
+        },
+        {
+          "file": "spell_fire_05.ogg",
+          "sha256": "18025b21a4ecb3b41acc0dccb0697a8930262109ea198ff8c5ef0853d3ed1cfa",
+          "post_filter_envelope_weighted_rms": 0.009486607041515974,
+          "weight": 0.775,
+          "layer_index": 2
+        }
+      ],
+      "design_metrics": {
+        "pre_gain_mix_rms": 0.11753905670115543,
+        "source_layer_power_fraction_estimate": 1.0
+      },
+      "design_role": "physical material-led transient/scrape/rumble"
+    },
+    {
+      "cue_id": "boss_demon.phase",
+      "variant": 3,
+      "path": "res://assets/sfx/skill-combat-20261103/boss_demon_phase_03.wav",
+      "sha256": "248024cbba1bc41663daac76e49c34eebab442af646a3e11a036d4d366ae9dd0",
+      "duration_sec": 1.0342708333333333,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -17.59838977962537,
+      "frames": 49645,
+      "sample_rate": 48000,
+      "channels": 1,
+      "encoding": "PCM16",
+      "family": "boss_demon",
+      "phase": "phase",
+      "source_layer_contributions": [
+        {
+          "file": "creature_roar_01.ogg",
+          "sha256": "ca1b9198490f29037e6e6487dd6db6165ca8b2583a445c0edd6b9f474d2d1f5f",
+          "post_filter_envelope_weighted_rms": 0.3472356234950153,
+          "weight": 1.25,
+          "layer_index": 0
+        },
+        {
+          "file": "creature_monster_02.ogg",
+          "sha256": "2892a32ddfc8d0fc3896f6487adf5a2eb6f3f5766fa02151bddd55e18f218f2f",
+          "post_filter_envelope_weighted_rms": 0.005728079349277281,
+          "weight": 0.775,
+          "layer_index": 1
+        },
+        {
+          "file": "spell_fire_05.ogg",
+          "sha256": "18025b21a4ecb3b41acc0dccb0697a8930262109ea198ff8c5ef0853d3ed1cfa",
+          "post_filter_envelope_weighted_rms": 0.009860705320095784,
+          "weight": 0.775,
+          "layer_index": 2
+        }
+      ],
+      "design_metrics": {
+        "pre_gain_mix_rms": 0.13185409008152618,
+        "source_layer_power_fraction_estimate": 1.0
+      },
+      "design_role": "physical material-led transient/scrape/rumble"
+    },
+    {
+      "cue_id": "boss_demon.defeat",
+      "variant": 1,
+      "path": "res://assets/sfx/skill-combat-20261103/boss_demon_defeat_01.wav",
+      "sha256": "c39410845d29b65a7d87456f70bf74dc6154debc75a5c2f2ac6423f4ac73a678",
+      "duration_sec": 1.10375,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -18.062406181966598,
+      "frames": 52980,
+      "sample_rate": 48000,
+      "channels": 1,
+      "encoding": "PCM16",
+      "family": "boss_demon",
+      "phase": "defeat",
+      "source_layer_contributions": [
+        {
+          "file": "creature_roar_01.ogg",
+          "sha256": "ca1b9198490f29037e6e6487dd6db6165ca8b2583a445c0edd6b9f474d2d1f5f",
+          "post_filter_envelope_weighted_rms": 0.33612905486399924,
+          "weight": 1.25,
+          "layer_index": 0
+        },
+        {
+          "file": "creature_monster_02.ogg",
+          "sha256": "2892a32ddfc8d0fc3896f6487adf5a2eb6f3f5766fa02151bddd55e18f218f2f",
+          "post_filter_envelope_weighted_rms": 0.005544862818161292,
+          "weight": 0.775,
+          "layer_index": 1
+        },
+        {
+          "file": "spell_fire_05.ogg",
+          "sha256": "18025b21a4ecb3b41acc0dccb0697a8930262109ea198ff8c5ef0853d3ed1cfa",
+          "post_filter_envelope_weighted_rms": 0.009567134290369657,
+          "weight": 0.775,
+          "layer_index": 2
+        }
+      ],
+      "design_metrics": {
+        "pre_gain_mix_rms": 0.12499518073713704,
+        "source_layer_power_fraction_estimate": 1.0
+      },
+      "design_role": "physical material-led transient/scrape/rumble"
+    },
+    {
+      "cue_id": "boss_demon.defeat",
+      "variant": 2,
+      "path": "res://assets/sfx/skill-combat-20261103/boss_demon_defeat_02.wav",
+      "sha256": "eb468863576da6a5f36746180850dc95872bd6118c7474437dd2d8b5fe5bc4d0",
+      "duration_sec": 1.0560416666666668,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -17.346624104949754,
+      "frames": 50690,
+      "sample_rate": 48000,
+      "channels": 1,
+      "encoding": "PCM16",
+      "family": "boss_demon",
+      "phase": "defeat",
+      "source_layer_contributions": [
+        {
+          "file": "creature_roar_01.ogg",
+          "sha256": "ca1b9198490f29037e6e6487dd6db6165ca8b2583a445c0edd6b9f474d2d1f5f",
+          "post_filter_envelope_weighted_rms": 0.34363776496787235,
+          "weight": 1.25,
+          "layer_index": 0
+        },
+        {
+          "file": "creature_monster_02.ogg",
+          "sha256": "2892a32ddfc8d0fc3896f6487adf5a2eb6f3f5766fa02151bddd55e18f218f2f",
+          "post_filter_envelope_weighted_rms": 0.005668728240875684,
+          "weight": 0.775,
+          "layer_index": 1
+        },
+        {
+          "file": "spell_fire_05.ogg",
+          "sha256": "18025b21a4ecb3b41acc0dccb0697a8930262109ea198ff8c5ef0853d3ed1cfa",
+          "post_filter_envelope_weighted_rms": 0.009614686643711932,
+          "weight": 0.775,
+          "layer_index": 2
+        }
+      ],
+      "design_metrics": {
+        "pre_gain_mix_rms": 0.13573185653566308,
+        "source_layer_power_fraction_estimate": 1.0
+      },
+      "design_role": "physical material-led transient/scrape/rumble"
+    },
+    {
+      "cue_id": "boss_demon.defeat",
+      "variant": 3,
+      "path": "res://assets/sfx/skill-combat-20261103/boss_demon_defeat_03.wav",
+      "sha256": "f18dd2765667894ae586e37083201cdd8d8d68ea114bf663ceed0f296f9ec7a6",
+      "duration_sec": 1.1719791666666666,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -17.5437876737362,
+      "frames": 56255,
+      "sample_rate": 48000,
+      "channels": 1,
+      "encoding": "PCM16",
+      "family": "boss_demon",
+      "phase": "defeat",
+      "source_layer_contributions": [
+        {
+          "file": "creature_roar_01.ogg",
+          "sha256": "ca1b9198490f29037e6e6487dd6db6165ca8b2583a445c0edd6b9f474d2d1f5f",
+          "post_filter_envelope_weighted_rms": 0.3261981298353516,
+          "weight": 1.25,
+          "layer_index": 0
+        },
+        {
+          "file": "creature_monster_02.ogg",
+          "sha256": "2892a32ddfc8d0fc3896f6487adf5a2eb6f3f5766fa02151bddd55e18f218f2f",
+          "post_filter_envelope_weighted_rms": 0.005381039976474562,
+          "weight": 0.775,
+          "layer_index": 1
+        },
+        {
+          "file": "spell_fire_05.ogg",
+          "sha256": "18025b21a4ecb3b41acc0dccb0697a8930262109ea198ff8c5ef0853d3ed1cfa",
+          "post_filter_envelope_weighted_rms": 0.009316841586205368,
+          "weight": 0.775,
+          "layer_index": 2
+        }
+      ],
+      "design_metrics": {
+        "pre_gain_mix_rms": 0.13268563074937947,
+        "source_layer_power_fraction_estimate": 1.0
+      },
+      "design_role": "physical material-led transient/scrape/rumble"
+    },
+    {
+      "cue_id": "feedback.hurt",
+      "variant": 1,
+      "path": "res://assets/sfx/skill-combat-20261103/feedback_hurt_01.wav",
+      "sha256": "cf7c043aa8fcc224e6be293d4bcb9c093cc5c83640702a88ed71039e0b1059d7",
+      "duration_sec": 0.25,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -17.056261467858786,
+      "frames": 12000,
+      "sample_rate": 48000,
+      "channels": 1,
+      "encoding": "PCM16",
+      "family": "flesh",
+      "phase": "impact",
+      "source_layer_contributions": [
+        {
+          "file": "hit_02.ogg",
+          "sha256": "22f2bfcfb8e211ea19b0af0adc1ae7df7bce137a7a159303840f9b95992d5d61",
+          "post_filter_envelope_weighted_rms": 0.02380750370491896,
+          "weight": 1.25,
+          "layer_index": 0
+        },
+        {
+          "file": "creature_hurt_02.ogg",
+          "sha256": "a4ea983e62ace874754c51d78239bd8b6532227119bd511c38fa827b2ccbca70",
+          "post_filter_envelope_weighted_rms": 0.10807556395883301,
+          "weight": 0.775,
+          "layer_index": 1
+        }
+      ],
+      "design_metrics": {
+        "pre_gain_mix_rms": 0.14034596794301984,
+        "source_layer_power_fraction_estimate": 0.6217764395133032
+      },
+      "design_role": "physical material-led transient/scrape/rumble"
+    },
+    {
+      "cue_id": "feedback.hurt",
+      "variant": 2,
+      "path": "res://assets/sfx/skill-combat-20261103/feedback_hurt_02.wav",
+      "sha256": "03c760a381a4f6d7e35ff22c88c22e7c41594e6600a4d42984638371a21c50d0",
+      "duration_sec": 0.25,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -16.55174564597326,
+      "frames": 12000,
+      "sample_rate": 48000,
+      "channels": 1,
+      "encoding": "PCM16",
+      "family": "flesh",
+      "phase": "impact",
+      "source_layer_contributions": [
+        {
+          "file": "hit_02.ogg",
+          "sha256": "22f2bfcfb8e211ea19b0af0adc1ae7df7bce137a7a159303840f9b95992d5d61",
+          "post_filter_envelope_weighted_rms": 0.02380750370491896,
+          "weight": 1.25,
+          "layer_index": 0
+        },
+        {
+          "file": "creature_hurt_02.ogg",
+          "sha256": "a4ea983e62ace874754c51d78239bd8b6532227119bd511c38fa827b2ccbca70",
+          "post_filter_envelope_weighted_rms": 0.10807556395883301,
+          "weight": 0.775,
+          "layer_index": 1
+        }
+      ],
+      "design_metrics": {
+        "pre_gain_mix_rms": 0.14873940677952513,
+        "source_layer_power_fraction_estimate": 0.5535821165279721
+      },
+      "design_role": "physical material-led transient/scrape/rumble"
+    },
+    {
+      "cue_id": "feedback.hurt",
+      "variant": 3,
+      "path": "res://assets/sfx/skill-combat-20261103/feedback_hurt_03.wav",
+      "sha256": "2923bea4d22a0d99dd9aad2ffeabf6382615bdac1e6d2ddf4246db7990daf42e",
+      "duration_sec": 0.25,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -15.879470387859332,
+      "frames": 12000,
+      "sample_rate": 48000,
+      "channels": 1,
+      "encoding": "PCM16",
+      "family": "flesh",
+      "phase": "impact",
+      "source_layer_contributions": [
+        {
+          "file": "hit_02.ogg",
+          "sha256": "22f2bfcfb8e211ea19b0af0adc1ae7df7bce137a7a159303840f9b95992d5d61",
+          "post_filter_envelope_weighted_rms": 0.02380750370491896,
+          "weight": 1.25,
+          "layer_index": 0
+        },
+        {
+          "file": "creature_hurt_02.ogg",
+          "sha256": "a4ea983e62ace874754c51d78239bd8b6532227119bd511c38fa827b2ccbca70",
+          "post_filter_envelope_weighted_rms": 0.10807556395883301,
+          "weight": 0.775,
+          "layer_index": 1
+        }
+      ],
+      "design_metrics": {
+        "pre_gain_mix_rms": 0.1607087880459419,
+        "source_layer_power_fraction_estimate": 0.4741927284583242
+      },
+      "design_role": "physical material-led transient/scrape/rumble"
+    },
+    {
+      "cue_id": "feedback.guard",
+      "variant": 1,
+      "path": "res://assets/sfx/skill-combat-20261103/feedback_guard_01.wav",
+      "sha256": "6b4859f3ff0763f5005f4f6c432efc270e3e16e680003133e0effd93babb2868",
+      "duration_sec": 0.25,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -17.247783505173835,
+      "frames": 12000,
+      "sample_rate": 48000,
+      "channels": 1,
+      "encoding": "PCM16",
+      "family": "shield",
+      "phase": "impact",
+      "source_layer_contributions": [
+        {
+          "file": "metal_05.ogg",
+          "sha256": "b00d199e024b2d5f336bb3fee7ed2f890770caca739a497cb1bdc517119ea380",
+          "post_filter_envelope_weighted_rms": 0.18152923147035202,
+          "weight": 1.25,
+          "layer_index": 0
+        },
+        {
+          "file": "chain_02.ogg",
+          "sha256": "dd3b753e54fd4e6ed94c36231d1950fafd681ff4a93462cfa3980099a6454ecb",
+          "post_filter_envelope_weighted_rms": 0.01788896337336424,
+          "weight": 0.775,
+          "layer_index": 1
+        }
+      ],
+      "design_metrics": {
+        "pre_gain_mix_rms": 0.13728534448351581,
+        "source_layer_power_fraction_estimate": 1.0
+      },
+      "design_role": "physical material-led transient/scrape/rumble"
+    },
+    {
+      "cue_id": "feedback.guard",
+      "variant": 2,
+      "path": "res://assets/sfx/skill-combat-20261103/feedback_guard_02.wav",
+      "sha256": "bdf7a3679161dca873a5ad8ec289d57222b97e10e9deec5b08096de7f472dfc5",
+      "duration_sec": 0.25,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -17.24769852877118,
+      "frames": 12000,
+      "sample_rate": 48000,
+      "channels": 1,
+      "encoding": "PCM16",
+      "family": "shield",
+      "phase": "impact",
+      "source_layer_contributions": [
+        {
+          "file": "metal_05.ogg",
+          "sha256": "b00d199e024b2d5f336bb3fee7ed2f890770caca739a497cb1bdc517119ea380",
+          "post_filter_envelope_weighted_rms": 0.18152923147035202,
+          "weight": 1.25,
+          "layer_index": 0
+        },
+        {
+          "file": "chain_02.ogg",
+          "sha256": "dd3b753e54fd4e6ed94c36231d1950fafd681ff4a93462cfa3980099a6454ecb",
+          "post_filter_envelope_weighted_rms": 0.01788896337336424,
+          "weight": 0.775,
+          "layer_index": 1
+        }
+      ],
+      "design_metrics": {
+        "pre_gain_mix_rms": 0.13728659392422712,
+        "source_layer_power_fraction_estimate": 1.0
+      },
+      "design_role": "physical material-led transient/scrape/rumble"
+    },
+    {
+      "cue_id": "feedback.guard",
+      "variant": 3,
+      "path": "res://assets/sfx/skill-combat-20261103/feedback_guard_03.wav",
+      "sha256": "0bd1bf079851e69184ff5f0d305c9d0a0b0e9c3753d24c4e56a26e8b6013ed69",
+      "duration_sec": 0.25,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -17.39537976335749,
+      "frames": 12000,
+      "sample_rate": 48000,
+      "channels": 1,
+      "encoding": "PCM16",
+      "family": "shield",
+      "phase": "impact",
+      "source_layer_contributions": [
+        {
+          "file": "metal_05.ogg",
+          "sha256": "b00d199e024b2d5f336bb3fee7ed2f890770caca739a497cb1bdc517119ea380",
+          "post_filter_envelope_weighted_rms": 0.18152923147035202,
+          "weight": 1.25,
+          "layer_index": 0
+        },
+        {
+          "file": "chain_02.ogg",
+          "sha256": "dd3b753e54fd4e6ed94c36231d1950fafd681ff4a93462cfa3980099a6454ecb",
+          "post_filter_envelope_weighted_rms": 0.01788896337336424,
+          "weight": 0.775,
+          "layer_index": 1
+        }
+      ],
+      "design_metrics": {
+        "pre_gain_mix_rms": 0.13497215791609002,
+        "source_layer_power_fraction_estimate": 1.0
+      },
+      "design_role": "physical material-led transient/scrape/rumble"
+    },
+    {
+      "cue_id": "feedback.death",
+      "variant": 1,
+      "path": "res://assets/sfx/skill-combat-20261103/feedback_death_01.wav",
+      "sha256": "9cdc93fd4679d0e8a060f02a2f8dc136ad78525216a6324a21a74255cb4b462c",
+      "duration_sec": 1.1023541666666667,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -18.55604492450052,
+      "frames": 52913,
+      "sample_rate": 48000,
+      "channels": 1,
+      "encoding": "PCM16",
+      "family": "beast",
+      "phase": "defeat",
+      "source_layer_contributions": [
+        {
+          "file": "creature_hurt_01.ogg",
+          "sha256": "9948f9ce067e1aae7bd780e974d51ceae03f2611a52afffb0e092ba47e9dc8e1",
+          "post_filter_envelope_weighted_rms": 0.15843173634869065,
+          "weight": 1.25,
+          "layer_index": 0
+        },
+        {
+          "file": "creature_roar_01.ogg",
+          "sha256": "ca1b9198490f29037e6e6487dd6db6165ca8b2583a445c0edd6b9f474d2d1f5f",
+          "post_filter_envelope_weighted_rms": 0.20853191339492197,
+          "weight": 0.775,
+          "layer_index": 1
+        }
+      ],
+      "design_metrics": {
+        "pre_gain_mix_rms": 0.11808944136348623,
+        "source_layer_power_fraction_estimate": 1.0
+      },
+      "design_role": "physical material-led transient/scrape/rumble"
+    },
+    {
+      "cue_id": "feedback.death",
+      "variant": 2,
+      "path": "res://assets/sfx/skill-combat-20261103/feedback_death_02.wav",
+      "sha256": "35df453789e283b60342eb63cc3acdb71d24d5e1fa5938606e0d545c8b857d48",
+      "duration_sec": 1.0921666666666667,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -18.65022762518461,
+      "frames": 52424,
+      "sample_rate": 48000,
+      "channels": 1,
+      "encoding": "PCM16",
+      "family": "beast",
+      "phase": "defeat",
+      "source_layer_contributions": [
+        {
+          "file": "creature_hurt_01.ogg",
+          "sha256": "9948f9ce067e1aae7bd780e974d51ceae03f2611a52afffb0e092ba47e9dc8e1",
+          "post_filter_envelope_weighted_rms": 0.15916893012983344,
+          "weight": 1.25,
+          "layer_index": 0
+        },
+        {
+          "file": "creature_roar_01.ogg",
+          "sha256": "ca1b9198490f29037e6e6487dd6db6165ca8b2583a445c0edd6b9f474d2d1f5f",
+          "post_filter_envelope_weighted_rms": 0.20950222675048735,
+          "weight": 0.775,
+          "layer_index": 1
+        }
+      ],
+      "design_metrics": {
+        "pre_gain_mix_rms": 0.11681589547433134,
+        "source_layer_power_fraction_estimate": 1.0
+      },
+      "design_role": "physical material-led transient/scrape/rumble"
+    },
+    {
+      "cue_id": "feedback.death",
+      "variant": 3,
+      "path": "res://assets/sfx/skill-combat-20261103/feedback_death_03.wav",
+      "sha256": "bc5b576737ee568a10f4ab792c34ad4ac872475abf6f81e9dad2c14e58c6d781",
+      "duration_sec": 1.0371875,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -17.944807398451633,
+      "frames": 49785,
+      "sample_rate": 48000,
+      "channels": 1,
+      "encoding": "PCM16",
+      "family": "beast",
+      "phase": "defeat",
+      "source_layer_contributions": [
+        {
+          "file": "creature_hurt_01.ogg",
+          "sha256": "9948f9ce067e1aae7bd780e974d51ceae03f2611a52afffb0e092ba47e9dc8e1",
+          "post_filter_envelope_weighted_rms": 0.16333306765139566,
+          "weight": 1.25,
+          "layer_index": 0
+        },
+        {
+          "file": "creature_roar_01.ogg",
+          "sha256": "ca1b9198490f29037e6e6487dd6db6165ca8b2583a445c0edd6b9f474d2d1f5f",
+          "post_filter_envelope_weighted_rms": 0.21498317132020286,
+          "weight": 0.775,
+          "layer_index": 1
+        }
+      ],
+      "design_metrics": {
+        "pre_gain_mix_rms": 0.12669888718902106,
+        "source_layer_power_fraction_estimate": 1.0
+      },
+      "design_role": "physical material-led transient/scrape/rumble"
+    }
+  ],
+  "source_layer_policy": "Each new variant combines source-specific recorded textures with deterministic family- and phase-specific synthesis and material processing. Physical families use recorded material/foley layers as foreground; tonal signatures are reserved for elemental/magical families. Missing or negligible source layers fail generation."
+}

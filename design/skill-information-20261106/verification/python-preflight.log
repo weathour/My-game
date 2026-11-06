@@ -1,0 +1,23 @@
+COMMAND python3 scripts/tests/check_docs_links.py
+DOC_LINK_CHECK_OK
+COMMAND python3 scripts/tests/check_project_config.py
+PROJECT_CONFIG_CHECK_OK
+COMMAND python3 scripts/tests/check_graph_update_self_test.py
+{"graph_update_accepted": false, "reason": "exit=0; Godot extractor=True; missing 1 runtime GDScript files", "missing": ["scripts/new.gd"]}
+GRAPHIFY_UPDATE_REJECTED: exit=0; Godot extractor=True; missing 1 runtime GDScript files
+{"graph_update_accepted": false, "reason": "exit=0; Godot extractor=False; missing 0 runtime GDScript files", "missing": []}
+GRAPHIFY_UPDATE_REJECTED: exit=0; Godot extractor=False; missing 0 runtime GDScript files
+{"graph_update_accepted": true, "reason": "exit=0; Godot extractor=True; missing 0 runtime GDScript files", "missing": []}
+GRAPH_UPDATE_SELF_TEST_OK
+COMMAND python3 scripts/tests/check_smoke_log_self_test.py
+SMOKE_LOG_SELF_TEST_OK
+COMMAND python3 scripts/tests/check_architecture_contract.py
+ARCHITECTURE_CONTRACT_CHECK_OK
+COMMAND python3 scripts/tests/check_story_content.py
+CHRONICLE_STORY_CONTENT_CHECK_OK
+COMMAND python3 scripts/tests/check_chronicle_cast_art.py
+CHRONICLE_CAST_ART_AUDIT PASS characters=22 failures=0
+COMMAND python3 scripts/tests/check_jia_campaign_art.py
+JIA_CAMPAIGN_ART_CHECK_OK poses=48 colors=60 sheets=10
+COMMAND python3 scripts/tools/build_battle_sprite_bounds.py --check
+BATTLE_SPRITE_BOUNDS_OK textures=405 regions=2001

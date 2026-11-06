@@ -1,0 +1,142 @@
+{
+  "status": "PASS",
+  "scope": "Only scripts/tests/chronicle_skill_presentation_smoke.gd and task-local QA diagnostics; no runtime/assets/game values changed",
+  "script_sha256": "b46ccfa67cdc362104a313ff2b8738f4a0b5e9c04a62963480cf91bf67ef10b3",
+  "original_assertions_retained": 3934,
+  "diagnosis": {
+    "confirmed_leaked_objects": [
+      {
+        "class": "AudioStreamPlaybackWAV",
+        "refcount": 1
+      },
+      {
+        "class": "AudioStreamWAV",
+        "refcount": 1,
+        "resource_path": "res://assets/sfx/skill-combat-20261103/blade_cast_03.wav"
+      }
+    ],
+    "direct_resource_evidence": "diagnostic-verbose-1.log (failed run; verbose success was not used as acceptance)",
+    "node_observation": "inline-trace.json: fixture actor/feedback/view/viewport weakrefs gone, orphan_nodes empty; node deletion alone was insufficient.",
+    "await_scope_observation": "inline-trace.json: synchronous _finish still nested under frames -> verify_pause_switch_and_cleanup -> run. Deferred finish removes this resumed scope, but deferred-only-quiet-3.log proves that alone still leaked.",
+    "mixer_observation": "audio-observed-results.json and final quiet reports: exact WAV/playback weakrefs remain valid after owning nodes disappear; both become invalid after mixer advances. No evidence of a persistent runtime self-cycle.",
+    "failed_partial_fix_preserved": [
+      "deferred-only-quiet-1.log",
+      "deferred-only-quiet-2.log",
+      "deferred-only-quiet-3.log"
+    ]
+  },
+  "repair": [
+    "Defer report phase until run and nested await functions have returned.",
+    "Close/drop report FileAccess explicitly; defer final quit until report function returns. FileAccess is not claimed as the leaked audio root cause.",
+    "Observe only weakrefs to actual fixture sound streams/playbacks while live; after fixture deletion wait until all those exact refs expire.",
+    "Polling follows AudioServer.get_time_to_next_mix(); stop immediately on object release, bounded at one second. If resources remain, mark test failure with object class/path. No sound suppression, extra gameplay mutation, error filter, or arbitrary longer frame/sleep drain."
+  ],
+  "acceptance": [
+    {
+      "run": 1,
+      "returncode": 0,
+      "log": "fixed-quiet-1.log",
+      "validator_errors": [],
+      "checks": 3934,
+      "failures": 0,
+      "abilities": 137,
+      "actors": 38,
+      "verbose": false,
+      "lifecycle_trace_enabled": false,
+      "audio_teardown": {
+        "condition": "all actual test WAV/playback weakrefs released; no extra sound or assertion suppressed",
+        "initial_live": [
+          {
+            "class": "AudioStreamWAV",
+            "id": -9223371859586708958,
+            "path": "res://assets/sfx/skill-combat-20261103/blade_cast_03.wav"
+          },
+          {
+            "class": "AudioStreamPlaybackWAV",
+            "id": -9223371859536377322,
+            "path": ""
+          }
+        ],
+        "mix_age_after": 0.006173,
+        "mix_age_before": 0.084019,
+        "remaining_live": [],
+        "wait_usec": 108050,
+        "watched_objects": 2
+      }
+    },
+    {
+      "run": 2,
+      "returncode": 0,
+      "log": "fixed-quiet-2.log",
+      "validator_errors": [],
+      "checks": 3934,
+      "failures": 0,
+      "abilities": 137,
+      "actors": 38,
+      "verbose": false,
+      "lifecycle_trace_enabled": false,
+      "audio_teardown": {
+        "condition": "all actual test WAV/playback weakrefs released; no extra sound or assertion suppressed",
+        "initial_live": [
+          {
+            "class": "AudioStreamWAV",
+            "id": -9223371859586708958,
+            "path": "res://assets/sfx/skill-combat-20261103/blade_cast_03.wav"
+          },
+          {
+            "class": "AudioStreamPlaybackWAV",
+            "id": -9223371859536377322,
+            "path": ""
+          }
+        ],
+        "mix_age_after": 0.002329,
+        "mix_age_before": 0.080237,
+        "remaining_live": [],
+        "wait_usec": 108036,
+        "watched_objects": 2
+      }
+    },
+    {
+      "run": 3,
+      "returncode": 0,
+      "log": "fixed-quiet-3.log",
+      "validator_errors": [],
+      "checks": 3934,
+      "failures": 0,
+      "abilities": 137,
+      "actors": 38,
+      "verbose": false,
+      "lifecycle_trace_enabled": false,
+      "audio_teardown": {
+        "condition": "all actual test WAV/playback weakrefs released; no extra sound or assertion suppressed",
+        "initial_live": [
+          {
+            "class": "AudioStreamWAV",
+            "id": -9223371859586708958,
+            "path": "res://assets/sfx/skill-combat-20261103/blade_cast_03.wav"
+          },
+          {
+            "class": "AudioStreamPlaybackWAV",
+            "id": -9223371859536377322,
+            "path": ""
+          }
+        ],
+        "mix_age_after": 0.005062,
+        "mix_age_before": 0.03341,
+        "remaining_live": [],
+        "wait_usec": 157605,
+        "watched_objects": 2
+      }
+    }
+  ],
+  "mixer_wait_ms": [
+    108.05,
+    108.036,
+    157.605
+  ],
+  "log_validation": "Existing check_smoke_log.validate called for each quiet run; zero errors. Explicit checks also reject ObjectDB/resource-leak diagnostics.",
+  "remaining_limits": [
+    "An engine hang or unreleased audio after one second fails visibly; the repair does not hide such a future failure.",
+    "Full check restoration and native/PCK gates remain parent-owned."
+  ]
+}

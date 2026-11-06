@@ -1,0 +1,153 @@
+{
+  "status": "PASS",
+  "scope": "offline_budget_and_tempo_arithmetic_only_not_runtime_or_balance_test",
+  "tempo_error_method": "Compare the cumulative piecewise tempo integral with holding the tick-zero tempo forever. Sample every MIDI quarter note. Both subtract the identical declared audio trim; no manual beat offset is inferred. First100 means nominal game-audio interval [0,100] seconds. Reported maxima are over these samples, not continuous extrema.",
+  "tempo_error": [
+    {
+      "cue_id": "midi_test_01",
+      "effective_tempo_changes": 12,
+      "fixed_initial_tempo_max_error_seconds_full_midi": 2.314809,
+      "fixed_initial_tempo_max_error_seconds_game_first_100_seconds": 2.314809
+    },
+    {
+      "cue_id": "midi_test_02",
+      "effective_tempo_changes": 0,
+      "fixed_initial_tempo_max_error_seconds_full_midi": 0.0,
+      "fixed_initial_tempo_max_error_seconds_game_first_100_seconds": 0.0
+    },
+    {
+      "cue_id": "midi_test_03",
+      "effective_tempo_changes": 0,
+      "fixed_initial_tempo_max_error_seconds_full_midi": 0.0,
+      "fixed_initial_tempo_max_error_seconds_game_first_100_seconds": 0.0
+    },
+    {
+      "cue_id": "midi_test_04",
+      "effective_tempo_changes": 0,
+      "fixed_initial_tempo_max_error_seconds_full_midi": 0.0,
+      "fixed_initial_tempo_max_error_seconds_game_first_100_seconds": 0.0
+    },
+    {
+      "cue_id": "midi_test_05",
+      "effective_tempo_changes": 0,
+      "fixed_initial_tempo_max_error_seconds_full_midi": 0.0,
+      "fixed_initial_tempo_max_error_seconds_game_first_100_seconds": 0.0
+    },
+    {
+      "cue_id": "midi_test_06",
+      "effective_tempo_changes": 15,
+      "fixed_initial_tempo_max_error_seconds_full_midi": 14.252729,
+      "fixed_initial_tempo_max_error_seconds_game_first_100_seconds": 5.456853
+    },
+    {
+      "cue_id": "midi_test_07",
+      "effective_tempo_changes": 12,
+      "fixed_initial_tempo_max_error_seconds_full_midi": 0.42737,
+      "fixed_initial_tempo_max_error_seconds_game_first_100_seconds": 0.21176
+    },
+    {
+      "cue_id": "midi_test_08",
+      "effective_tempo_changes": 8,
+      "fixed_initial_tempo_max_error_seconds_full_midi": 0.738516,
+      "fixed_initial_tempo_max_error_seconds_game_first_100_seconds": 0.0
+    },
+    {
+      "cue_id": "midi_test_09",
+      "effective_tempo_changes": 11,
+      "fixed_initial_tempo_max_error_seconds_full_midi": 0.461921,
+      "fixed_initial_tempo_max_error_seconds_game_first_100_seconds": 0.375303
+    },
+    {
+      "cue_id": "midi_test_10",
+      "effective_tempo_changes": 0,
+      "fixed_initial_tempo_max_error_seconds_full_midi": 0.0,
+      "fixed_initial_tempo_max_error_seconds_game_first_100_seconds": 0.0
+    },
+    {
+      "cue_id": "midi_test_11",
+      "effective_tempo_changes": 0,
+      "fixed_initial_tempo_max_error_seconds_full_midi": 0.0,
+      "fixed_initial_tempo_max_error_seconds_game_first_100_seconds": 0.0
+    },
+    {
+      "cue_id": "midi_test_12",
+      "effective_tempo_changes": 0,
+      "fixed_initial_tempo_max_error_seconds_full_midi": 0.0,
+      "fixed_initial_tempo_max_error_seconds_game_first_100_seconds": 0.0
+    }
+  ],
+  "damage_budget_example": {
+    "inputs": {
+      "reference_base_attack": 27,
+      "reference_base_speed": 1.45,
+      "source_character": "JIA",
+      "source_file": "scripts/content/roster_kit_data.gd",
+      "reference_damage_rate": 39.15,
+      "ignored": [
+        "armor",
+        "AoE",
+        "hit rate",
+        "Space",
+        "traits",
+        "equipment",
+        "support",
+        "levels",
+        "music-accent modifiers"
+      ]
+    },
+    "proposal_formula": "accepted_action_damage = reference_damage_rate * local_music_pulse_seconds",
+    "cases": [
+      {
+        "bpm": 60,
+        "pulse_seconds": 1.0,
+        "one_action_each_quarter_pulse": true,
+        "fixed_damage_27_DPS": 27.0,
+        "normalized_damage_per_action": 39.15,
+        "normalized_nominal_DPS": 39.15
+      },
+      {
+        "bpm": 90,
+        "pulse_seconds": 0.666667,
+        "one_action_each_quarter_pulse": true,
+        "fixed_damage_27_DPS": 40.5,
+        "normalized_damage_per_action": 26.1,
+        "normalized_nominal_DPS": 39.15
+      },
+      {
+        "bpm": 120,
+        "pulse_seconds": 0.5,
+        "one_action_each_quarter_pulse": true,
+        "fixed_damage_27_DPS": 54.0,
+        "normalized_damage_per_action": 19.575,
+        "normalized_nominal_DPS": 39.15
+      },
+      {
+        "bpm": 130,
+        "pulse_seconds": 0.461538,
+        "one_action_each_quarter_pulse": true,
+        "fixed_damage_27_DPS": 58.5,
+        "normalized_damage_per_action": 18.069231,
+        "normalized_nominal_DPS": 39.15
+      },
+      {
+        "bpm": 180,
+        "pulse_seconds": 0.333333,
+        "one_action_each_quarter_pulse": true,
+        "fixed_damage_27_DPS": 81.0,
+        "normalized_damage_per_action": 13.05,
+        "normalized_nominal_DPS": 39.15
+      }
+    ],
+    "conditions": [
+      "one successful baseline action per pulse",
+      "use current local pulse duration; never bank idle seconds",
+      "utility and hit-trigger budgets require independent limits",
+      "not a claim of existing game DPS or proof of full-system balance"
+    ]
+  },
+  "checks": [
+    "fixed-tempo songs give negligible comparison error",
+    "piecewise tempo rows come from audited maps",
+    "normalization identities hold for five illustrative BPMs"
+  ]
+}

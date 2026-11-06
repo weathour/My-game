@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Guard the current Chronicle entry scene and its shared window autoload."""
+"""Guard the Chronicle entry scene, window autoload and export boundary."""
 from __future__ import annotations
 
 import re
@@ -36,7 +36,7 @@ def main() -> int:
         ("display", "window/size/viewport_height"): "720",
         ("display", "window/stretch/mode"): '"canvas_items"',
         ("display", "window/vsync/vsync_mode"): "0",
-        ("rendering", "renderer/rendering_method"): '"mobile"',
+        ("rendering", "renderer/rendering_method"): '"gl_compatibility"',
     }
     for (section, key), value in expected.items():
         if data.get(section, {}).get(key) != value:
@@ -48,6 +48,11 @@ def main() -> int:
         failures.append(f"autoload WindowDisplayManager: expected {expected_autoload}, got {autoloads.get('WindowDisplayManager')}")
     if set(autoloads) != {"WindowDisplayManager"}:
         failures.append(f"unexpected autoloads: {sorted(set(autoloads) - {'WindowDisplayManager'})}")
+
+    export = sections((ROOT / "export_presets.cfg").read_text(encoding="utf-8-sig"))
+    excludes = export.get("preset.0", {}).get("exclude_filter", "").strip('"').split(",")
+    if "builds/*" not in excludes:
+        failures.append("Linux development export must exclude builds/* to avoid packaging earlier builds")
 
     for rel in (
         "scenes/chronicle/chronicle_shell.tscn",

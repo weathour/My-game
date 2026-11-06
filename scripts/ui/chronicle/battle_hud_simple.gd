@@ -1,4 +1,7 @@
 extends Control
+signal skill_hovered(anchor: Control)
+signal skill_unhovered(anchor: Control)
+const JIA_APPEARANCE := preload("res://scripts/ui/chronicle/jia_appearance.gd")
 ## Simple bottom-bar composition with independent resources and two skill keys.
 const PORTRAIT := preload("res://scripts/ui/shared/switch_portrait_display.gd")
 const ICON := preload("res://scripts/ui/shared/skill_cooldown_icon.gd")
@@ -6,11 +9,13 @@ const ART := preload("res://scripts/ui/chronicle/battle_art.gd")
 const C := preload("res://scripts/content/combat_catalog.gd")
 const T := preload("res://scripts/ui/chronicle/chronicle_theme.gd")
 const MECHANIC := preload("res://scripts/ui/chronicle/battle_mechanic_status.gd")
+const INFO := preload("res://scripts/content/skill_information.gd")
 const WIDTH := 780.0
 const HEIGHT := 168.0
 const STATUS_BOTTOM_PADDING := 12.0
 var active_layout := -1
 var layout_tween: Tween
+var jia_appearance := JIA_APPEARANCE.COMMON
 var battle: RefCounted
 var definitions: Dictionary
 var band: Control
@@ -78,7 +83,16 @@ func _ready() -> void:
 		var key := _label("J" if i == 0 else "K", origin + Vector2(0, 8), 23, 46)
 		var title := _label("", origin + Vector2(53, 0), 15)
 		var state := _label("", origin + Vector2(53, 26), 13)
-		skills.append({"icon":icon, "key":key, "title":title, "state":state})
+		var hit := Control.new()
+		hit.name = "manual_skill_hit_%d" % i
+		hit.mouse_filter = Control.MOUSE_FILTER_PASS
+		hit.position = origin - Vector2(3, 4)
+		hit.size = Vector2(139, 60)
+		hit.set_meta("skill_slot", i)
+		hit.mouse_entered.connect(func(): skill_hovered.emit(hit))
+		hit.mouse_exited.connect(func(): skill_unhovered.emit(hit))
+		band.add_child(hit)
+		skills.append({"icon":icon, "key":key, "title":title, "state":state, "hit":hit})
 	resized.connect(_layout)
 	_layout()
 	refresh()
@@ -130,24 +144,30 @@ func refresh() -> void:
 		var id: String = battle.members[i]
 		var actor: RefCounted = battle.characters[id]
 		var active: bool = i == battle.active
-		entry.portrait.set_role_scene(id, ART.portrait(id))
+		entry.portrait.set_role_scene(id, ART.portrait(id, jia_appearance))
 		entry.portrait.modulate = Color("777777") if actor.dead else ART.tint(id)
 		entry.portrait.set_state(battle.switch_cooldown / .5, active)
 		var key := "Q/E" if alive.size() == 2 else "E" if posmod(i - battle.active, battle.members.size()) == 1 else "Q"
-		entry.label.text = "阵亡" if actor.dead else "当前" if active else key + " · " + definitions[id].name
+		var member_text: String = "阵亡" if actor.dead else "当前" if active else key + " · " + definitions[id].name
 		# Keep the protagonist's identity and health visible off-field.
-		if i == 0: entry.label.text = "主 · " + entry.label.text
+		# Compose once: assigning the unprefixed text first reshapes the same label
+		# twice on every physics frame even when its final content is unchanged.
+		if i == 0: member_text = "主 · " + member_text
+		entry.label.text = member_text
 		entry.hp.max_value = actor.stats.hp
 		entry.hp.value = actor.hp
 		entry.mp.max_value = actor.stats.mp
 		entry.mp.value = 0 if actor.dead else actor.mp
 		var model: Dictionary = MECHANIC.build(battle, id, definitions)
-		entry.mechanic.name = "member_mechanic_" + id
+		var mechanic_name := "member_mechanic_" + id
+		if str(entry.mechanic.name) != mechanic_name: entry.mechanic.name = mechanic_name
 		entry.mechanic.text = model.compact
 		# Label's font metrics include the real height of every explicit line.
 		entry.mechanic.size = Vector2(136, entry.mechanic.get_minimum_size().y)
 		entry.mechanic.visible = not active and not str(model.compact).is_empty()
-		entry.mechanic.add_theme_color_override("font_color", T.GOLD if model.active else T.MUTED)
+		var status_color: Color = T.GOLD if model.active else T.MUTED
+		if entry.mechanic.get_theme_color("font_color") != status_color:
+			entry.mechanic.add_theme_color_override("font_color", status_color)
 		if entry.mechanic.visible:
 			var target_y: float = 100.0 - 135.0 * .5 + entry.mechanic.position.y
 			var content_bottom: float = band.position.y + target_y + entry.mechanic.get_minimum_size().y
@@ -160,7 +180,9 @@ func refresh() -> void:
 	var active_status: Dictionary = MECHANIC.build(battle, actor.id, definitions)
 	mechanic_text.text = active_status.text
 	mechanic_text.visible = not str(active_status.text).is_empty()
-	mechanic_text.add_theme_color_override("font_color", T.GOLD if active_status.active else T.MUTED)
+	var active_color: Color = T.GOLD if active_status.active else T.MUTED
+	if mechanic_text.get_theme_color("font_color") != active_color:
+		mechanic_text.add_theme_color_override("font_color", active_color)
 	health.max_value = actor.stats.hp
 	health.value = actor.hp
 	mana.max_value = actor.stats.mp
@@ -173,8 +195,14 @@ func refresh() -> void:
 	for i in 2:
 		var entry: Dictionary = skills[i]
 		var present := i < manual.size()
-		for control in entry.values(): control.visible = present
-		if not present: continue
+		if entry.hit.get_meta("skill_character_id", "") != actor.id:
+			entry.hit.set_meta("skill_character_id", actor.id)
+		if not present:
+			entry.icon.set_state(false, Color("514938"), 0)
+			entry.title.text = INFO.ui("not_equipped")
+			entry.key.modulate = Color("aaa69c")
+			entry.state.text = ""
+			continue
 		var skill: Resource = manual[i]
 		var unlocked: bool = actor.level >= skill.unlock_level and not actor.dead
 		var remaining: float = actor.cooldowns.get(skill.id, 0.0)

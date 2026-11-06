@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "status": "P0 implementation frozen; direct contracts and existing headless smokes PASS; combined live after measured by parent/Luna",
+  "source_sha256": {
+    "scripts/ui/chronicle/skill_presentation.gd": "4e262eef5906fde3168f29abd706cb4729d67937e6bf14f2778697e84cbb023d",
+    "scripts/ui/chronicle/skill_presentation_profiles.gd": "de2a4ad086fb9e3dc2d0b62617f492493b1e7d1c31178b21a875284050d6ed54",
+    "scripts/ui/chronicle/authored_battle_effects.gd": "934ccf230202e9804df05dce40f47a953842a76c1a2127fbba31ccbe27c6c9bf",
+    "scripts/battle/combat_mechanics.gd": "5cdabc2310e63b68d68adc442fb8d6f9f9a127c1fad7aa6406830ada12c3bfda"
+  },
+  "changes": [
+    "Internal compiled render_profile cache: immutable shared dictionaries/parsed Colors/static style/normalized equipment variants/canonical glyph and contact directions. Public profile()/all_profiles() continue returning independent mutable copies.",
+    "No production per-projectile profile deep copy or HTML color parse; specialized legacy trails receive the already resolved render profile.",
+    "Presentation snapshots contain fresh primitive-valued records, so removed only redundant final deep copy and renderer deep recopy. State style caches reused, transient shallow value snapshots share immutable profiles.",
+    "Legacy transient style resolved once; release ingestion no longer deep-copies all ability events twice; benefit label content formatted once per new fact.",
+    "Legacy44 frame atlas entries from6 clips share immutable cache. Exact imported alpha unions replace production get_image; the automatic contract recomputes every source-frame union and verifies original durations.",
+    "Conservative world viewport rectangle includes parent canvas transforms and margins. Entire footprint/reach/dash endpoints determine visibility; screen-space receiver text remains visible; no simulation/state/fact/lifecycle culling or budget reduction."
+  ],
+  "unchanged": [
+    "137 ability source/slot/shape/material/motion/color identity",
+    "cast/delivery/contact/actual recipient semantics and old dedup keys",
+    "simulation numbers, MP/CD/physics/movement/hit timing/RNG/time_scale",
+    "actual projectile motion; pause/reduced motion/reduced flash/terminal cleanup",
+    "all pre-existing112/64/3/1 rendering limits"
+  ],
+  "checks": [
+    {
+      "script": "scripts/tests/skill_presentation_unit.gd",
+      "log": "unit.log",
+      "summary": "SKILL_PRESENTATION_UNIT PASS checks=974 failures=0 abilities=137"
+    },
+    {
+      "script": "design/performance-20261105/runtime-owner/cache-contract.gd",
+      "log": "cache-contract.log",
+      "summary": "SKILL_PRESENTATION_CACHE_CONTRACT PASS checks=4572 failures=0"
+    },
+    {
+      "script": "scripts/tests/chronicle_authored_effects_smoke.gd",
+      "log": "chronicle_authored_effects_smoke.log",
+      "summary": "CHRONICLE_AUTHORED_EFFECTS_SMOKE PASS checks=36 failures=0"
+    },
+    {
+      "script": "scripts/tests/chronicle_combat_feedback_smoke.gd",
+      "log": "chronicle_combat_feedback_smoke.log",
+      "summary": "CHRONICLE_COMBAT_FEEDBACK_SMOKE PASS checks=332 failures=0"
+    },
+    {
+      "script": "scripts/tests/chronicle_feedback_latency_smoke.gd",
+      "log": "chronicle_feedback_latency_smoke.log",
+      "summary": "CHRONICLE_FEEDBACK_LATENCY_SMOKE PASS checks=20 failures=0"
+    },
+    {
+      "script": "scripts/tests/chronicle_skill_presentation_smoke.gd",
+      "log": "chronicle_skill_presentation_smoke.log",
+      "summary": "CHRONICLE_SKILL_PRESENTATION_SMOKE PASS checks=3934 failures=0 abilities=137 actors=38 captures=0"
+    }
+  ],
+  "startup": "startup.log; no errors",
+  "new_automatic_contract": {
+    "path": "scripts/tests/chronicle_skill_cache_smoke.gd",
+    "sha256": "c9f02b0d451b7a6b1311a4d825b891ad807c909831ee179f641025a23d277c7b",
+    "expected_marker": "CHRONICLE_SKILL_CACHE_SMOKE PASS checks=4572 failures=0",
+    "suite_count_after_addition": 58,
+    "current_execution_status": "Copied from passing direct contract with comment/marker adaptation only. Automatic new-path execution deferred to validation after mobile baseline/after completes."
+  },
+  "evidence_scope": [
+    "The direct4572 numerical/alpha/cache/culling contract is not a new live-performance measurement.",
+    "Root/Luna own same-GL after/default mobile timing, exact gameplay-trace equivalence and final suite. Improvements come from combined ownership changes; no per-component causal timing claim here."
+  ]
+}

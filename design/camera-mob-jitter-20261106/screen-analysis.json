@@ -1,0 +1,1738 @@
+{
+  "method": "headless transforms from real EnemySystem rules, not a full fight or native image measurement",
+  "scope_limits": [
+    "No user recording/stage is available; these cases establish possible mechanisms, not unique attribution.",
+    "Only no-Boss camera + stage B17 enemy parameters/budgets are exercised; player offense/health and reinforcement director omitted.",
+    "No production actions, geometry, timings, numerical stats or camera code are modified.",
+    "No real HUD silhouette obstacles in diagnostic; safe top72/bottom188 reflects simpleHUD168+20 at1280x720.",
+    "Route angular flips do not necessarily change focus; origin delta alone overstates visible camera motion.",
+    "Large post-smoothing correction near map edge can keep origin fixed, so is not itself a screen-jump measurement."
+  ],
+  "source_sha256": {
+    "scripts/ui/chronicle/boss_camera.gd": "e39da7da815c8ba9e18d7aa373bae670e5105bf0117d72034ac6ec4a4ed35a05",
+    "scripts/ui/chronicle/battle_canvas.gd": "10906c17b6248c8f8076f969b69bb977ee6220f6c91ac4b7b7364bab727eb6fd",
+    "scripts/battle/enemy_system.gd": "78fb28a8d09aeefb1ff2cc603be6e28523bed0e77bd309df48192d4a0d0fef4a",
+    "scripts/battle/enemy_geometry.gd": "1f81cb206a5071547f2f831c9587ac9a30302c27203cd3373058750e88aeb503",
+    "scripts/content/enemy_catalog.gd": "b899d117783d949a0499d6848381b26a0b787ee1ad588869db1a21456e8da8b1",
+    "scripts/content/stage_catalog.gd": "f37242fecea5cdaa0e23d038789ae2a0d7de04bdd44c9caae9a9e09f54eb4c40"
+  },
+  "cases": [
+    {
+      "case": "E01_moving",
+      "frames": 1200,
+      "trauma_max": 0.0,
+      "scale_min": 1.0,
+      "scale_max": 1.0,
+      "screen_step_at_previous_player_max_px": 4.123105625617661,
+      "screen_step_at_previous_player_p95_px": 2.23606797749979,
+      "screen_step_300_world_right_max_px": 4.123105625617661,
+      "fixed_world_marker_screen_span_px": [
+        358.0,
+        15.0
+      ],
+      "route_flips": 1,
+      "route_flips_without_focus_change": 0,
+      "route_flip_samples": [
+        {
+          "frame": 1055,
+          "danger_set_changed": false,
+          "focus_changed": true,
+          "screen_step_at_previous_player_px": 0.0
+        }
+      ],
+      "largest": [
+        {
+          "frame": 1140,
+          "time": 19.0166666666667,
+          "screen_step_at_previous_player_px": 4.123105625617661,
+          "screen_step_300_world_right_px": 4.123105625617661,
+          "scale_before": 1.0,
+          "scale_after": 1.0,
+          "danger_set_changed": true,
+          "route_flipped": false,
+          "post_smoothing_correction_world": 0.0,
+          "trauma": 0.0
+        },
+        {
+          "frame": 1143,
+          "time": 19.0666666666667,
+          "screen_step_at_previous_player_px": 4.123105625617661,
+          "screen_step_300_world_right_px": 4.123105625617661,
+          "scale_before": 1.0,
+          "scale_after": 1.0,
+          "danger_set_changed": false,
+          "route_flipped": false,
+          "post_smoothing_correction_world": 0.0,
+          "trauma": 0.0
+        },
+        {
+          "frame": 262,
+          "time": 4.38333333333333,
+          "screen_step_at_previous_player_px": 3.605551275463989,
+          "screen_step_300_world_right_px": 3.605551275463989,
+          "scale_before": 1.0,
+          "scale_after": 1.0,
+          "danger_set_changed": false,
+          "route_flipped": false,
+          "post_smoothing_correction_world": 0.0,
+          "trauma": 0.0
+        },
+        {
+          "frame": 550,
+          "time": 9.18333333333333,
+          "screen_step_at_previous_player_px": 3.605551275463989,
+          "screen_step_300_world_right_px": 3.605551275463989,
+          "scale_before": 1.0,
+          "scale_after": 1.0,
+          "danger_set_changed": false,
+          "route_flipped": false,
+          "post_smoothing_correction_world": 0.0,
+          "trauma": 0.0
+        },
+        {
+          "frame": 1141,
+          "time": 19.0333333333333,
+          "screen_step_at_previous_player_px": 3.605551275463989,
+          "screen_step_300_world_right_px": 3.605551275463989,
+          "scale_before": 1.0,
+          "scale_after": 1.0,
+          "danger_set_changed": false,
+          "route_flipped": false,
+          "post_smoothing_correction_world": 0.0,
+          "trauma": 0.0
+        },
+        {
+          "frame": 261,
+          "time": 4.36666666666667,
+          "screen_step_at_previous_player_px": 3.1622776601683795,
+          "screen_step_300_world_right_px": 3.1622776601683795,
+          "scale_before": 1.0,
+          "scale_after": 1.0,
+          "danger_set_changed": true,
+          "route_flipped": false,
+          "post_smoothing_correction_world": 0.0,
+          "trauma": 0.0
+        },
+        {
+          "frame": 264,
+          "time": 4.41666666666667,
+          "screen_step_at_previous_player_px": 3.1622776601683795,
+          "screen_step_300_world_right_px": 3.1622776601683795,
+          "scale_before": 1.0,
+          "scale_after": 1.0,
+          "danger_set_changed": false,
+          "route_flipped": false,
+          "post_smoothing_correction_world": 0.0,
+          "trauma": 0.0
+        },
+        {
+          "frame": 266,
+          "time": 4.45,
+          "screen_step_at_previous_player_px": 3.1622776601683795,
+          "screen_step_300_world_right_px": 3.1622776601683795,
+          "scale_before": 1.0,
+          "scale_after": 1.0,
+          "danger_set_changed": false,
+          "route_flipped": false,
+          "post_smoothing_correction_world": 0.0,
+          "trauma": 0.0
+        }
+      ]
+    },
+    {
+      "case": "E01_still",
+      "frames": 1200,
+      "trauma_max": 0.0,
+      "scale_min": 1.0,
+      "scale_max": 1.0,
+      "screen_step_at_previous_player_max_px": 1.0,
+      "screen_step_at_previous_player_p95_px": 1.0,
+      "screen_step_300_world_right_max_px": 1.0,
+      "fixed_world_marker_screen_span_px": [
+        0.0,
+        10.0
+      ],
+      "route_flips": 0,
+      "route_flips_without_focus_change": 0,
+      "route_flip_samples": [],
+      "largest": []
+    },
+    {
+      "case": "E02_moving",
+      "frames": 1200,
+      "trauma_max": 0.0,
+      "scale_min": 1.0,
+      "scale_max": 1.0,
+      "screen_step_at_previous_player_max_px": 2.0,
+      "screen_step_at_previous_player_p95_px": 2.0,
+      "screen_step_300_world_right_max_px": 2.0,
+      "fixed_world_marker_screen_span_px": [
+        358.0,
+        0.0
+      ],
+      "route_flips": 0,
+      "route_flips_without_focus_change": 0,
+      "route_flip_samples": [],
+      "largest": []
+    },
+    {
+      "case": "E02_still",
+      "frames": 1200,
+      "trauma_max": 0.0,
+      "scale_min": 1.0,
+      "scale_max": 1.0,
+      "screen_step_at_previous_player_max_px": 0.0,
+      "screen_step_at_previous_player_p95_px": 0.0,
+      "screen_step_300_world_right_max_px": 0.0,
+      "fixed_world_marker_screen_span_px": [
+        0.0,
+        0.0
+      ],
+      "route_flips": 0,
+      "route_flips_without_focus_change": 0,
+      "route_flip_samples": [],
+      "largest": []
+    },
+    {
+      "case": "E03_moving",
+      "frames": 1200,
+      "trauma_max": 0.0,
+      "scale_min": 0.5234375,
+      "scale_max": 1.0,
+      "screen_step_at_previous_player_max_px": 15.68591093430053,
+      "screen_step_at_previous_player_p95_px": 7.270351298755657,
+      "screen_step_300_world_right_max_px": 24.380857384713547,
+      "fixed_world_marker_screen_span_px": [
+        306.5,
+        191.6875
+      ],
+      "route_flips": 35,
+      "route_flips_without_focus_change": 27,
+      "route_flip_samples": [
+        {
+          "frame": 167,
+          "danger_set_changed": false,
+          "focus_changed": false,
+          "screen_step_at_previous_player_px": 1.4142135623730951
+        },
+        {
+          "frame": 323,
+          "danger_set_changed": false,
+          "focus_changed": false,
+          "screen_step_at_previous_player_px": 0.0
+        },
+        {
+          "frame": 478,
+          "danger_set_changed": false,
+          "focus_changed": false,
+          "screen_step_at_previous_player_px": 1.4142135623730951
+        },
+        {
+          "frame": 481,
+          "danger_set_changed": true,
+          "focus_changed": true,
+          "screen_step_at_previous_player_px": 3.605551275463989
+        },
+        {
+          "frame": 539,
+          "danger_set_changed": true,
+          "focus_changed": true,
+          "screen_step_at_previous_player_px": 8.06225774829855
+        },
+        {
+          "frame": 753,
+          "danger_set_changed": true,
+          "focus_changed": true,
+          "screen_step_at_previous_player_px": 6.246505838574023
+        },
+        {
+          "frame": 779,
+          "danger_set_changed": true,
+          "focus_changed": true,
+          "screen_step_at_previous_player_px": 3.407336757602524
+        },
+        {
+          "frame": 800,
+          "danger_set_changed": true,
+          "focus_changed": true,
+          "screen_step_at_previous_player_px": 9.0
+        }
+      ],
+      "largest": [
+        {
+          "frame": 663,
+          "time": 11.0666666666667,
+          "screen_step_at_previous_player_px": 15.68591093430053,
+          "screen_step_300_world_right_px": 24.380857384713547,
+          "scale_before": 0.96875,
+          "scale_after": 0.9296875,
+          "danger_set_changed": true,
+          "route_flipped": false,
+          "post_smoothing_correction_world": 0.0,
+          "trauma": 0.0
+        },
+        {
+          "frame": 448,
+          "time": 7.48333333333333,
+          "screen_step_at_previous_player_px": 13.713593072829408,
+          "screen_step_300_world_right_px": 15.968660481967412,
+          "scale_before": 0.6328125,
+          "scale_after": 0.640625,
+          "danger_set_changed": true,
+          "route_flipped": false,
+          "post_smoothing_correction_world": 6.103515625e-05,
+          "trauma": 0.0
+        },
+        {
+          "frame": 664,
+          "time": 11.0833333333333,
+          "screen_step_at_previous_player_px": 13.177295516529751,
+          "screen_step_300_world_right_px": 20.0264656205784,
+          "scale_before": 0.9296875,
+          "scale_after": 0.8984375,
+          "danger_set_changed": false,
+          "route_flipped": false,
+          "post_smoothing_correction_world": 0.0,
+          "trauma": 0.0
+        },
+        {
+          "frame": 390,
+          "time": 6.51666666666667,
+          "screen_step_at_previous_player_px": 12.929010809688252,
+          "screen_step_300_world_right_px": 9.025520733975188,
+          "scale_before": 0.75,
+          "scale_after": 0.734375,
+          "danger_set_changed": true,
+          "route_flipped": false,
+          "post_smoothing_correction_world": 0.0,
+          "trauma": 0.0
+        },
+        {
+          "frame": 449,
+          "time": 7.5,
+          "screen_step_at_previous_player_px": 12.763269907389128,
+          "screen_step_300_world_right_px": 15.005314300664692,
+          "scale_before": 0.640625,
+          "scale_after": 0.6484375,
+          "danger_set_changed": false,
+          "route_flipped": false,
+          "post_smoothing_correction_world": 6.103515625e-05,
+          "trauma": 0.0
+        },
+        {
+          "frame": 149,
+          "time": 2.5,
+          "screen_step_at_previous_player_px": 12.72687166567339,
+          "screen_step_300_world_right_px": 8.89034896119562,
+          "scale_before": 0.78125,
+          "scale_after": 0.796875,
+          "danger_set_changed": true,
+          "route_flipped": false,
+          "post_smoothing_correction_world": 0.0,
+          "trauma": 0.0
+        },
+        {
+          "frame": 450,
+          "time": 7.51666666666667,
+          "screen_step_at_previous_player_px": 12.649110640673518,
+          "screen_step_300_world_right_px": 12.649110640673518,
+          "scale_before": 0.6484375,
+          "scale_after": 0.6484375,
+          "danger_set_changed": false,
+          "route_flipped": false,
+          "post_smoothing_correction_world": 6.103515625e-05,
+          "trauma": 0.0
+        },
+        {
+          "frame": 891,
+          "time": 14.8666666666667,
+          "screen_step_at_previous_player_px": 12.63227524339347,
+          "screen_step_300_world_right_px": 7.875639328788591,
+          "scale_before": 0.796875,
+          "scale_after": 0.7734375,
+          "danger_set_changed": true,
+          "route_flipped": false,
+          "post_smoothing_correction_world": 0.00013647876039613,
+          "trauma": 0.0
+        }
+      ]
+    },
+    {
+      "case": "E03_moving_edge",
+      "frames": 1200,
+      "trauma_max": 0.0,
+      "scale_min": 0.7109375,
+      "scale_max": 1.0,
+      "screen_step_at_previous_player_max_px": 21.441773931935657,
+      "screen_step_at_previous_player_p95_px": 5.577132528848361,
+      "screen_step_300_world_right_max_px": 31.904924988283263,
+      "fixed_world_marker_screen_span_px": [
+        92.5,
+        86.71875
+      ],
+      "route_flips": 12,
+      "route_flips_without_focus_change": 12,
+      "route_flip_samples": [
+        {
+          "frame": 218,
+          "danger_set_changed": false,
+          "focus_changed": false,
+          "screen_step_at_previous_player_px": 4.203055444567835
+        },
+        {
+          "frame": 369,
+          "danger_set_changed": false,
+          "focus_changed": false,
+          "screen_step_at_previous_player_px": 2.749753705656038
+        },
+        {
+          "frame": 371,
+          "danger_set_changed": false,
+          "focus_changed": false,
+          "screen_step_at_previous_player_px": 2.7394909624346133
+        },
+        {
+          "frame": 378,
+          "danger_set_changed": false,
+          "focus_changed": false,
+          "screen_step_at_previous_player_px": 0.0
+        },
+        {
+          "frame": 381,
+          "danger_set_changed": false,
+          "focus_changed": false,
+          "screen_step_at_previous_player_px": 2.6935917902667965
+        },
+        {
+          "frame": 385,
+          "danger_set_changed": false,
+          "focus_changed": false,
+          "screen_step_at_previous_player_px": 0.0
+        },
+        {
+          "frame": 811,
+          "danger_set_changed": false,
+          "focus_changed": false,
+          "screen_step_at_previous_player_px": 4.079156208869973
+        },
+        {
+          "frame": 981,
+          "danger_set_changed": false,
+          "focus_changed": false,
+          "screen_step_at_previous_player_px": 0.0
+        }
+      ],
+      "largest": [
+        {
+          "frame": 208,
+          "time": 3.48333333333333,
+          "screen_step_at_previous_player_px": 21.441773931935657,
+          "screen_step_300_world_right_px": 31.904924988283263,
+          "scale_before": 0.984375,
+          "scale_after": 0.9453125,
+          "danger_set_changed": true,
+          "route_flipped": false,
+          "post_smoothing_correction_world": 58.8138389587402,
+          "trauma": 0.0
+        },
+        {
+          "frame": 655,
+          "time": 10.9333333333333,
+          "screen_step_at_previous_player_px": 21.149030246344502,
+          "screen_step_300_world_right_px": 31.57908572407665,
+          "scale_before": 0.984375,
+          "scale_after": 0.9453125,
+          "danger_set_changed": true,
+          "route_flipped": false,
+          "post_smoothing_correction_world": 58.9048080444336,
+          "trauma": 0.0
+        },
+        {
+          "frame": 209,
+          "time": 3.5,
+          "screen_step_at_previous_player_px": 17.121029806704026,
+          "screen_step_300_world_right_px": 25.487956018675508,
+          "scale_before": 0.9453125,
+          "scale_after": 0.9140625,
+          "danger_set_changed": false,
+          "route_flipped": false,
+          "post_smoothing_correction_world": 57.5688400268555,
+          "trauma": 0.0
+        },
+        {
+          "frame": 657,
+          "time": 10.9666666666667,
+          "screen_step_at_previous_player_px": 16.98823979801308,
+          "screen_step_300_world_right_px": 25.340205003507027,
+          "scale_before": 0.9140625,
+          "scale_after": 0.8828125,
+          "danger_set_changed": false,
+          "route_flipped": false,
+          "post_smoothing_correction_world": 61.7774353027344,
+          "trauma": 0.0
+        },
+        {
+          "frame": 656,
+          "time": 10.95,
+          "screen_step_at_previous_player_px": 16.953918357247925,
+          "screen_step_300_world_right_px": 25.301957129224913,
+          "scale_before": 0.9453125,
+          "scale_after": 0.9140625,
+          "danger_set_changed": false,
+          "route_flipped": false,
+          "post_smoothing_correction_world": 57.6598930358887,
+          "trauma": 0.0
+        },
+        {
+          "frame": 804,
+          "time": 13.4166666666667,
+          "screen_step_at_previous_player_px": 16.589815880215866,
+          "screen_step_300_world_right_px": 24.89461955824914,
+          "scale_before": 0.9765625,
+          "scale_after": 0.9453125,
+          "danger_set_changed": true,
+          "route_flipped": false,
+          "post_smoothing_correction_world": 54.3170623779297,
+          "trauma": 0.0
+        },
+        {
+          "frame": 805,
+          "time": 13.4333333333333,
+          "screen_step_at_previous_player_px": 16.551689344571294,
+          "screen_step_300_world_right_px": 24.851791699805155,
+          "scale_before": 0.9453125,
+          "scale_after": 0.9140625,
+          "danger_set_changed": false,
+          "route_flipped": false,
+          "post_smoothing_correction_world": 58.1110153198242,
+          "trauma": 0.0
+        },
+        {
+          "frame": 59,
+          "time": 1.0,
+          "screen_step_at_previous_player_px": 16.31744519497611,
+          "screen_step_300_world_right_px": 24.58789487664994,
+          "scale_before": 1.0,
+          "scale_after": 0.96875,
+          "danger_set_changed": true,
+          "route_flipped": false,
+          "post_smoothing_correction_world": 51.8915367126465,
+          "trauma": 0.0
+        }
+      ]
+    },
+    {
+      "case": "E03_still",
+      "frames": 1200,
+      "trauma_max": 0.0,
+      "scale_min": 0.734375,
+      "scale_max": 1.0,
+      "screen_step_at_previous_player_max_px": 11.10501188934528,
+      "screen_step_at_previous_player_p95_px": 4.0,
+      "screen_step_300_world_right_max_px": 13.408617215246322,
+      "fixed_world_marker_screen_span_px": [
+        82.0,
+        129.8125
+      ],
+      "route_flips": 0,
+      "route_flips_without_focus_change": 0,
+      "route_flip_samples": [],
+      "largest": [
+        {
+          "frame": 59,
+          "time": 1.0,
+          "screen_step_at_previous_player_px": 11.10501188934528,
+          "screen_step_300_world_right_px": 13.408617215246322,
+          "scale_before": 1.0,
+          "scale_after": 0.9765625,
+          "danger_set_changed": true,
+          "route_flipped": false,
+          "post_smoothing_correction_world": 0.0,
+          "trauma": 0.0
+        },
+        {
+          "frame": 60,
+          "time": 1.01666666666667,
+          "screen_step_at_previous_player_px": 10.0625,
+          "screen_step_300_world_right_px": 11.10074603348802,
+          "scale_before": 0.9765625,
+          "scale_after": 0.9609375,
+          "danger_set_changed": false,
+          "route_flipped": false,
+          "post_smoothing_correction_world": 0.0,
+          "trauma": 0.0
+        },
+        {
+          "frame": 331,
+          "time": 5.53333333333333,
+          "screen_step_at_previous_player_px": 9.714729875940968,
+          "screen_step_300_world_right_px": 7.438944187517473,
+          "scale_before": 0.75,
+          "scale_after": 0.7578125,
+          "danger_set_changed": true,
+          "route_flipped": false,
+          "post_smoothing_correction_world": 0.0,
+          "trauma": 0.0
+        },
+        {
+          "frame": 61,
+          "time": 1.03333333333333,
+          "screen_step_at_previous_player_px": 9.0625,
+          "screen_step_300_world_right_px": 10.203017323321568,
+          "scale_before": 0.9609375,
+          "scale_after": 0.9453125,
+          "danger_set_changed": false,
+          "route_flipped": false,
+          "post_smoothing_correction_world": 0.0,
+          "trauma": 0.0
+        },
+        {
+          "frame": 149,
+          "time": 2.5,
+          "screen_step_at_previous_player_px": 9.045080240799415,
+          "screen_step_300_world_right_px": 9.217531699158945,
+          "scale_before": 0.84375,
+          "scale_after": 0.8515625,
+          "danger_set_changed": true,
+          "route_flipped": false,
+          "post_smoothing_correction_world": 0.0001220703125,
+          "trauma": 0.0
+        },
+        {
+          "frame": 298,
+          "time": 4.98333333333333,
+          "screen_step_at_previous_player_px": 9.0,
+          "screen_step_300_world_right_px": 9.0,
+          "scale_before": 0.75,
+          "scale_after": 0.75,
+          "danger_set_changed": true,
+          "route_flipped": false,
+          "post_smoothing_correction_world": 0.0001220703125,
+          "trauma": 0.0
+        },
+        {
+          "frame": 240,
+          "time": 4.01666666666667,
+          "screen_step_at_previous_player_px": 8.06225774829855,
+          "screen_step_300_world_right_px": 8.06225774829855,
+          "scale_before": 0.8671875,
+          "scale_after": 0.8671875,
+          "danger_set_changed": true,
+          "route_flipped": false,
+          "post_smoothing_correction_world": 6.103515625e-05,
+          "trauma": 0.0
+        },
+        {
+          "frame": 447,
+          "time": 7.46666666666667,
+          "screen_step_at_previous_player_px": 7.0710678118654755,
+          "screen_step_300_world_right_px": 7.0710678118654755,
+          "scale_before": 0.7734375,
+          "scale_after": 0.7734375,
+          "danger_set_changed": true,
+          "route_flipped": false,
+          "post_smoothing_correction_world": 0.0,
+          "trauma": 0.0
+        }
+      ]
+    },
+    {
+      "case": "E04_moving",
+      "frames": 1200,
+      "trauma_max": 0.0,
+      "scale_min": 1.0,
+      "scale_max": 1.0,
+      "screen_step_at_previous_player_max_px": 5.0990195135927845,
+      "screen_step_at_previous_player_p95_px": 2.23606797749979,
+      "screen_step_300_world_right_max_px": 5.0990195135927845,
+      "fixed_world_marker_screen_span_px": [
+        358.0,
+        15.0
+      ],
+      "route_flips": 3,
+      "route_flips_without_focus_change": 0,
+      "route_flip_samples": [
+        {
+          "frame": 180,
+          "danger_set_changed": false,
+          "focus_changed": true,
+          "screen_step_at_previous_player_px": 1.0
+        },
+        {
+          "frame": 187,
+          "danger_set_changed": false,
+          "focus_changed": true,
+          "screen_step_at_previous_player_px": 0.0
+        },
+        {
+          "frame": 220,
+          "danger_set_changed": false,
+          "focus_changed": true,
+          "screen_step_at_previous_player_px": 0.0
+        }
+      ],
+      "largest": [
+        {
+          "frame": 292,
+          "time": 4.88333333333333,
+          "screen_step_at_previous_player_px": 5.0990195135927845,
+          "screen_step_300_world_right_px": 5.0990195135927845,
+          "scale_before": 1.0,
+          "scale_after": 1.0,
+          "danger_set_changed": false,
+          "route_flipped": false,
+          "post_smoothing_correction_world": 0.0,
+          "trauma": 0.0
+        },
+        {
+          "frame": 291,
+          "time": 4.86666666666667,
+          "screen_step_at_previous_player_px": 4.47213595499958,
+          "screen_step_300_world_right_px": 4.47213595499958,
+          "scale_before": 1.0,
+          "scale_after": 1.0,
+          "danger_set_changed": true,
+          "route_flipped": false,
+          "post_smoothing_correction_world": 0.0,
+          "trauma": 0.0
+        },
+        {
+          "frame": 293,
+          "time": 4.9,
+          "screen_step_at_previous_player_px": 4.123105625617661,
+          "screen_step_300_world_right_px": 4.123105625617661,
+          "scale_before": 1.0,
+          "scale_after": 1.0,
+          "danger_set_changed": false,
+          "route_flipped": false,
+          "post_smoothing_correction_world": 0.0,
+          "trauma": 0.0
+        },
+        {
+          "frame": 295,
+          "time": 4.93333333333333,
+          "screen_step_at_previous_player_px": 4.123105625617661,
+          "screen_step_300_world_right_px": 4.123105625617661,
+          "scale_before": 1.0,
+          "scale_after": 1.0,
+          "danger_set_changed": false,
+          "route_flipped": false,
+          "post_smoothing_correction_world": 0.0,
+          "trauma": 0.0
+        },
+        {
+          "frame": 296,
+          "time": 4.95,
+          "screen_step_at_previous_player_px": 4.123105625617661,
+          "screen_step_300_world_right_px": 4.123105625617661,
+          "scale_before": 1.0,
+          "scale_after": 1.0,
+          "danger_set_changed": false,
+          "route_flipped": false,
+          "post_smoothing_correction_world": 0.0,
+          "trauma": 0.0
+        },
+        {
+          "frame": 848,
+          "time": 14.15,
+          "screen_step_at_previous_player_px": 4.123105625617661,
+          "screen_step_300_world_right_px": 4.123105625617661,
+          "scale_before": 1.0,
+          "scale_after": 1.0,
+          "danger_set_changed": false,
+          "route_flipped": false,
+          "post_smoothing_correction_world": 0.0,
+          "trauma": 0.0
+        },
+        {
+          "frame": 561,
+          "time": 9.36666666666667,
+          "screen_step_at_previous_player_px": 3.605551275463989,
+          "screen_step_300_world_right_px": 3.605551275463989,
+          "scale_before": 1.0,
+          "scale_after": 1.0,
+          "danger_set_changed": true,
+          "route_flipped": false,
+          "post_smoothing_correction_world": 0.0,
+          "trauma": 0.0
+        },
+        {
+          "frame": 92,
+          "time": 1.55,
+          "screen_step_at_previous_player_px": 3.1622776601683795,
+          "screen_step_300_world_right_px": 3.1622776601683795,
+          "scale_before": 1.0,
+          "scale_after": 1.0,
+          "danger_set_changed": true,
+          "route_flipped": false,
+          "post_smoothing_correction_world": 0.0,
+          "trauma": 0.0
+        }
+      ]
+    },
+    {
+      "case": "E04_still",
+      "frames": 1200,
+      "trauma_max": 0.0,
+      "scale_min": 1.0,
+      "scale_max": 1.0,
+      "screen_step_at_previous_player_max_px": 1.0,
+      "screen_step_at_previous_player_p95_px": 1.0,
+      "screen_step_300_world_right_max_px": 1.0,
+      "fixed_world_marker_screen_span_px": [
+        1.0,
+        2.0
+      ],
+      "route_flips": 0,
+      "route_flips_without_focus_change": 0,
+      "route_flip_samples": [],
+      "largest": []
+    },
+    {
+      "case": "E05_moving",
+      "frames": 1200,
+      "trauma_max": 0.0,
+      "scale_min": 1.0,
+      "scale_max": 1.0,
+      "screen_step_at_previous_player_max_px": 2.0,
+      "screen_step_at_previous_player_p95_px": 2.0,
+      "screen_step_300_world_right_max_px": 2.0,
+      "fixed_world_marker_screen_span_px": [
+        358.0,
+        0.0
+      ],
+      "route_flips": 0,
+      "route_flips_without_focus_change": 0,
+      "route_flip_samples": [],
+      "largest": []
+    },
+    {
+      "case": "E05_still",
+      "frames": 1200,
+      "trauma_max": 0.0,
+      "scale_min": 1.0,
+      "scale_max": 1.0,
+      "screen_step_at_previous_player_max_px": 0.0,
+      "screen_step_at_previous_player_p95_px": 0.0,
+      "screen_step_300_world_right_max_px": 0.0,
+      "fixed_world_marker_screen_span_px": [
+        0.0,
+        0.0
+      ],
+      "route_flips": 0,
+      "route_flips_without_focus_change": 0,
+      "route_flip_samples": [],
+      "largest": []
+    },
+    {
+      "case": "E06_moving",
+      "frames": 1200,
+      "trauma_max": 0.0,
+      "scale_min": 1.0,
+      "scale_max": 1.0,
+      "screen_step_at_previous_player_max_px": 9.0,
+      "screen_step_at_previous_player_p95_px": 4.0,
+      "screen_step_300_world_right_max_px": 9.0,
+      "fixed_world_marker_screen_span_px": [
+        318.0,
+        19.0
+      ],
+      "route_flips": 0,
+      "route_flips_without_focus_change": 0,
+      "route_flip_samples": [],
+      "largest": [
+        {
+          "frame": 1118,
+          "time": 18.65,
+          "screen_step_at_previous_player_px": 9.0,
+          "screen_step_300_world_right_px": 9.0,
+          "scale_before": 1.0,
+          "scale_after": 1.0,
+          "danger_set_changed": false,
+          "route_flipped": false,
+          "post_smoothing_correction_world": 0.0,
+          "trauma": 0.0
+        },
+        {
+          "frame": 119,
+          "time": 2.0,
+          "screen_step_at_previous_player_px": 8.0,
+          "screen_step_300_world_right_px": 8.0,
+          "scale_before": 1.0,
+          "scale_after": 1.0,
+          "danger_set_changed": true,
+          "route_flipped": false,
+          "post_smoothing_correction_world": 0.0,
+          "trauma": 0.0
+        },
+        {
+          "frame": 824,
+          "time": 13.75,
+          "screen_step_at_previous_player_px": 8.0,
+          "screen_step_300_world_right_px": 8.0,
+          "scale_before": 1.0,
+          "scale_after": 1.0,
+          "danger_set_changed": false,
+          "route_flipped": false,
+          "post_smoothing_correction_world": 0.0,
+          "trauma": 0.0
+        },
+        {
+          "frame": 825,
+          "time": 13.7666666666667,
+          "screen_step_at_previous_player_px": 7.0,
+          "screen_step_300_world_right_px": 7.0,
+          "scale_before": 1.0,
+          "scale_after": 1.0,
+          "danger_set_changed": false,
+          "route_flipped": false,
+          "post_smoothing_correction_world": 0.0,
+          "trauma": 0.0
+        },
+        {
+          "frame": 1119,
+          "time": 18.6666666666667,
+          "screen_step_at_previous_player_px": 7.0,
+          "screen_step_300_world_right_px": 7.0,
+          "scale_before": 1.0,
+          "scale_after": 1.0,
+          "danger_set_changed": false,
+          "route_flipped": false,
+          "post_smoothing_correction_world": 0.0,
+          "trauma": 0.0
+        },
+        {
+          "frame": 120,
+          "time": 2.01666666666667,
+          "screen_step_at_previous_player_px": 6.0,
+          "screen_step_300_world_right_px": 6.0,
+          "scale_before": 1.0,
+          "scale_after": 1.0,
+          "danger_set_changed": false,
+          "route_flipped": false,
+          "post_smoothing_correction_world": 0.0,
+          "trauma": 0.0
+        },
+        {
+          "frame": 121,
+          "time": 2.03333333333333,
+          "screen_step_at_previous_player_px": 6.0,
+          "screen_step_300_world_right_px": 6.0,
+          "scale_before": 1.0,
+          "scale_after": 1.0,
+          "danger_set_changed": false,
+          "route_flipped": false,
+          "post_smoothing_correction_world": 0.0,
+          "trauma": 0.0
+        },
+        {
+          "frame": 301,
+          "time": 5.03333333333333,
+          "screen_step_at_previous_player_px": 6.0,
+          "screen_step_300_world_right_px": 6.0,
+          "scale_before": 1.0,
+          "scale_after": 1.0,
+          "danger_set_changed": true,
+          "route_flipped": false,
+          "post_smoothing_correction_world": 0.0,
+          "trauma": 0.0
+        }
+      ]
+    },
+    {
+      "case": "E06_moving_edge",
+      "frames": 1200,
+      "trauma_max": 0.0,
+      "scale_min": 1.0,
+      "scale_max": 1.0,
+      "screen_step_at_previous_player_max_px": 0.0,
+      "screen_step_at_previous_player_p95_px": 0.0,
+      "screen_step_300_world_right_max_px": 0.0,
+      "fixed_world_marker_screen_span_px": [
+        0.0,
+        0.0
+      ],
+      "route_flips": 0,
+      "route_flips_without_focus_change": 0,
+      "route_flip_samples": [],
+      "largest": []
+    },
+    {
+      "case": "E06_still",
+      "frames": 1200,
+      "trauma_max": 0.0,
+      "scale_min": 1.0,
+      "scale_max": 1.0,
+      "screen_step_at_previous_player_max_px": 2.0,
+      "screen_step_at_previous_player_p95_px": 1.0,
+      "screen_step_300_world_right_max_px": 2.0,
+      "fixed_world_marker_screen_span_px": [
+        0.0,
+        22.0
+      ],
+      "route_flips": 0,
+      "route_flips_without_focus_change": 0,
+      "route_flip_samples": [],
+      "largest": []
+    },
+    {
+      "case": "E09_moving",
+      "frames": 1200,
+      "trauma_max": 0.0,
+      "scale_min": 1.0,
+      "scale_max": 1.0,
+      "screen_step_at_previous_player_max_px": 7.0710678118654755,
+      "screen_step_at_previous_player_p95_px": 4.0,
+      "screen_step_300_world_right_max_px": 7.0710678118654755,
+      "fixed_world_marker_screen_span_px": [
+        354.0,
+        40.0
+      ],
+      "route_flips": 6,
+      "route_flips_without_focus_change": 0,
+      "route_flip_samples": [
+        {
+          "frame": 62,
+          "danger_set_changed": false,
+          "focus_changed": true,
+          "screen_step_at_previous_player_px": 2.23606797749979
+        },
+        {
+          "frame": 225,
+          "danger_set_changed": true,
+          "focus_changed": true,
+          "screen_step_at_previous_player_px": 2.23606797749979
+        },
+        {
+          "frame": 822,
+          "danger_set_changed": false,
+          "focus_changed": true,
+          "screen_step_at_previous_player_px": 2.0
+        },
+        {
+          "frame": 824,
+          "danger_set_changed": false,
+          "focus_changed": true,
+          "screen_step_at_previous_player_px": 0.0
+        },
+        {
+          "frame": 1112,
+          "danger_set_changed": false,
+          "focus_changed": true,
+          "screen_step_at_previous_player_px": 2.0
+        },
+        {
+          "frame": 1113,
+          "danger_set_changed": false,
+          "focus_changed": true,
+          "screen_step_at_previous_player_px": 0.0
+        }
+      ],
+      "largest": [
+        {
+          "frame": 989,
+          "time": 16.5,
+          "screen_step_at_previous_player_px": 7.0710678118654755,
+          "screen_step_300_world_right_px": 7.0710678118654755,
+          "scale_before": 1.0,
+          "scale_after": 1.0,
+          "danger_set_changed": true,
+          "route_flipped": false,
+          "post_smoothing_correction_world": 0.0,
+          "trauma": 0.0
+        },
+        {
+          "frame": 131,
+          "time": 2.2,
+          "screen_step_at_previous_player_px": 6.324555320336759,
+          "screen_step_300_world_right_px": 6.324555320336759,
+          "scale_before": 1.0,
+          "scale_after": 1.0,
+          "danger_set_changed": true,
+          "route_flipped": false,
+          "post_smoothing_correction_world": 0.0,
+          "trauma": 0.0
+        },
+        {
+          "frame": 711,
+          "time": 11.8666666666667,
+          "screen_step_at_previous_player_px": 6.324555320336759,
+          "screen_step_300_world_right_px": 6.324555320336759,
+          "scale_before": 1.0,
+          "scale_after": 1.0,
+          "danger_set_changed": true,
+          "route_flipped": false,
+          "post_smoothing_correction_world": 0.0,
+          "trauma": 0.0
+        },
+        {
+          "frame": 132,
+          "time": 2.21666666666667,
+          "screen_step_at_previous_player_px": 6.082762530298219,
+          "screen_step_300_world_right_px": 6.082762530298219,
+          "scale_before": 1.0,
+          "scale_after": 1.0,
+          "danger_set_changed": false,
+          "route_flipped": false,
+          "post_smoothing_correction_world": 0.0,
+          "trauma": 0.0
+        },
+        {
+          "frame": 588,
+          "time": 9.81666666666667,
+          "screen_step_at_previous_player_px": 6.082762530298219,
+          "screen_step_300_world_right_px": 6.082762530298219,
+          "scale_before": 1.0,
+          "scale_after": 1.0,
+          "danger_set_changed": true,
+          "route_flipped": false,
+          "post_smoothing_correction_world": 0.0,
+          "trauma": 0.0
+        },
+        {
+          "frame": 991,
+          "time": 16.5333333333333,
+          "screen_step_at_previous_player_px": 6.082762530298219,
+          "screen_step_300_world_right_px": 6.082762530298219,
+          "scale_before": 1.0,
+          "scale_after": 1.0,
+          "danger_set_changed": false,
+          "route_flipped": false,
+          "post_smoothing_correction_world": 0.0,
+          "trauma": 0.0
+        },
+        {
+          "frame": 133,
+          "time": 2.23333333333333,
+          "screen_step_at_previous_player_px": 5.385164807134504,
+          "screen_step_300_world_right_px": 5.385164807134504,
+          "scale_before": 1.0,
+          "scale_after": 1.0,
+          "danger_set_changed": false,
+          "route_flipped": false,
+          "post_smoothing_correction_world": 0.0,
+          "trauma": 0.0
+        },
+        {
+          "frame": 420,
+          "time": 7.01666666666667,
+          "screen_step_at_previous_player_px": 5.385164807134504,
+          "screen_step_300_world_right_px": 5.385164807134504,
+          "scale_before": 1.0,
+          "scale_after": 1.0,
+          "danger_set_changed": true,
+          "route_flipped": false,
+          "post_smoothing_correction_world": 0.0,
+          "trauma": 0.0
+        }
+      ]
+    },
+    {
+      "case": "E09_still",
+      "frames": 1200,
+      "trauma_max": 0.0,
+      "scale_min": 1.0,
+      "scale_max": 1.0,
+      "screen_step_at_previous_player_max_px": 2.0,
+      "screen_step_at_previous_player_p95_px": 1.0,
+      "screen_step_300_world_right_max_px": 2.0,
+      "fixed_world_marker_screen_span_px": [
+        0.0,
+        16.0
+      ],
+      "route_flips": 0,
+      "route_flips_without_focus_change": 0,
+      "route_flip_samples": [],
+      "largest": []
+    },
+    {
+      "case": "E10_moving",
+      "frames": 1200,
+      "trauma_max": 0.0,
+      "scale_min": 0.5078125,
+      "scale_max": 1.0,
+      "screen_step_at_previous_player_max_px": 10.986224315854878,
+      "screen_step_at_previous_player_p95_px": 4.083610042417897,
+      "screen_step_300_world_right_max_px": 29.720058989931523,
+      "fixed_world_marker_screen_span_px": [
+        92.5,
+        121.28125
+      ],
+      "route_flips": 2,
+      "route_flips_without_focus_change": 2,
+      "route_flip_samples": [
+        {
+          "frame": 989,
+          "danger_set_changed": false,
+          "focus_changed": false,
+          "screen_step_at_previous_player_px": 0.0
+        },
+        {
+          "frame": 994,
+          "danger_set_changed": false,
+          "focus_changed": false,
+          "screen_step_at_previous_player_px": 0.0
+        }
+      ],
+      "largest": [
+        {
+          "frame": 704,
+          "time": 11.75,
+          "screen_step_at_previous_player_px": 10.986224315854878,
+          "screen_step_300_world_right_px": 29.720058989931523,
+          "scale_before": 0.9453125,
+          "scale_after": 0.8828125,
+          "danger_set_changed": true,
+          "route_flipped": false,
+          "post_smoothing_correction_world": 0.0,
+          "trauma": 0.0
+        },
+        {
+          "frame": 962,
+          "time": 16.05,
+          "screen_step_at_previous_player_px": 9.45090083070247,
+          "screen_step_300_world_right_px": 9.305765050525533,
+          "scale_before": 0.9609375,
+          "scale_after": 0.8984375,
+          "danger_set_changed": true,
+          "route_flipped": false,
+          "post_smoothing_correction_world": 0.0,
+          "trauma": 0.0
+        },
+        {
+          "frame": 963,
+          "time": 16.0666666666667,
+          "screen_step_at_previous_player_px": 8.826766682065518,
+          "screen_step_300_world_right_px": 7.585349193987325,
+          "scale_before": 0.8984375,
+          "scale_after": 0.84375,
+          "danger_set_changed": false,
+          "route_flipped": false,
+          "post_smoothing_correction_world": 0.0,
+          "trauma": 0.0
+        },
+        {
+          "frame": 706,
+          "time": 11.7833333333333,
+          "screen_step_at_previous_player_px": 8.261838214727772,
+          "screen_step_300_world_right_px": 22.322997770421033,
+          "scale_before": 0.8359375,
+          "scale_after": 0.7890625,
+          "danger_set_changed": false,
+          "route_flipped": false,
+          "post_smoothing_correction_world": 6.103515625e-05,
+          "trauma": 0.0
+        },
+        {
+          "frame": 705,
+          "time": 11.7666666666667,
+          "screen_step_at_previous_player_px": 8.242697191801758,
+          "screen_step_300_world_right_px": 22.303852480811685,
+          "scale_before": 0.8828125,
+          "scale_after": 0.8359375,
+          "danger_set_changed": false,
+          "route_flipped": false,
+          "post_smoothing_correction_world": 0.0,
+          "trauma": 0.0
+        },
+        {
+          "frame": 575,
+          "time": 9.6,
+          "screen_step_at_previous_player_px": 8.126404696349436,
+          "screen_step_300_world_right_px": 10.258777646022946,
+          "scale_before": 0.6796875,
+          "scale_after": 0.65625,
+          "danger_set_changed": true,
+          "route_flipped": false,
+          "post_smoothing_correction_world": 0.0,
+          "trauma": 0.0
+        },
+        {
+          "frame": 559,
+          "time": 9.33333333333333,
+          "screen_step_at_previous_player_px": 8.087383915270516,
+          "screen_step_300_world_right_px": 9.024151117758274,
+          "scale_before": 0.5078125,
+          "scale_after": 0.5234375,
+          "danger_set_changed": true,
+          "route_flipped": false,
+          "post_smoothing_correction_world": 0.0,
+          "trauma": 0.0
+        },
+        {
+          "frame": 560,
+          "time": 9.35,
+          "screen_step_at_previous_player_px": 8.08510841968254,
+          "screen_step_300_world_right_px": 9.037541076810859,
+          "scale_before": 0.5234375,
+          "scale_after": 0.5390625,
+          "danger_set_changed": false,
+          "route_flipped": false,
+          "post_smoothing_correction_world": 0.0,
+          "trauma": 0.0
+        }
+      ]
+    },
+    {
+      "case": "E10_moving_edge",
+      "frames": 1200,
+      "trauma_max": 0.0,
+      "scale_min": 0.71875,
+      "scale_max": 1.0,
+      "screen_step_at_previous_player_max_px": 20.39680649372014,
+      "screen_step_at_previous_player_p95_px": 4.403534232019225,
+      "screen_step_300_world_right_max_px": 30.734868595812426,
+      "fixed_world_marker_screen_span_px": [
+        90.0,
+        84.375
+      ],
+      "route_flips": 0,
+      "route_flips_without_focus_change": 0,
+      "route_flip_samples": [],
+      "largest": [
+        {
+          "frame": 59,
+          "time": 1.0,
+          "screen_step_at_previous_player_px": 20.39680649372014,
+          "screen_step_300_world_right_px": 30.734868595812426,
+          "scale_before": 1.0,
+          "scale_after": 0.9609375,
+          "danger_set_changed": true,
+          "route_flipped": false,
+          "post_smoothing_correction_world": 56.9559593200684,
+          "trauma": 0.0
+        },
+        {
+          "frame": 704,
+          "time": 11.75,
+          "screen_step_at_previous_player_px": 18.097796079966006,
+          "screen_step_300_world_right_px": 26.56457073554386,
+          "scale_before": 0.96875,
+          "scale_after": 0.9375,
+          "danger_set_changed": true,
+          "route_flipped": false,
+          "post_smoothing_correction_world": 53.2627105712891,
+          "trauma": 0.0
+        },
+        {
+          "frame": 60,
+          "time": 1.01666666666667,
+          "screen_step_at_previous_player_px": 16.35733785272486,
+          "screen_step_300_world_right_px": 24.632932962493175,
+          "scale_before": 0.9609375,
+          "scale_after": 0.9296875,
+          "danger_set_changed": false,
+          "route_flipped": false,
+          "post_smoothing_correction_world": 55.7214279174805,
+          "trauma": 0.0
+        },
+        {
+          "frame": 707,
+          "time": 11.8,
+          "screen_step_at_previous_player_px": 13.597924174869323,
+          "screen_step_300_world_right_px": 19.950305695543697,
+          "scale_before": 0.890625,
+          "scale_after": 0.8671875,
+          "danger_set_changed": false,
+          "route_flipped": false,
+          "post_smoothing_correction_world": 56.4041557312012,
+          "trauma": 0.0
+        },
+        {
+          "frame": 706,
+          "time": 11.7833333333333,
+          "screen_step_at_previous_player_px": 13.590144375517067,
+          "screen_step_300_world_right_px": 19.941799038668904,
+          "scale_before": 0.9140625,
+          "scale_after": 0.890625,
+          "danger_set_changed": false,
+          "route_flipped": false,
+          "post_smoothing_correction_world": 53.4406623840332,
+          "trauma": 0.0
+        },
+        {
+          "frame": 705,
+          "time": 11.7666666666667,
+          "screen_step_at_previous_player_px": 13.581951299441196,
+          "screen_step_300_world_right_px": 19.93283912558222,
+          "scale_before": 0.9375,
+          "scale_after": 0.9140625,
+          "danger_set_changed": false,
+          "route_flipped": false,
+          "post_smoothing_correction_world": 50.6604652404785,
+          "trauma": 0.0
+        },
+        {
+          "frame": 63,
+          "time": 1.06666666666667,
+          "screen_step_at_previous_player_px": 12.356481269537635,
+          "screen_step_300_world_right_px": 18.574416406897612,
+          "scale_before": 0.8828125,
+          "scale_after": 0.859375,
+          "danger_set_changed": false,
+          "route_flipped": false,
+          "post_smoothing_correction_world": 58.9290084838867,
+          "trauma": 0.0
+        },
+        {
+          "frame": 62,
+          "time": 1.05,
+          "screen_step_at_previous_player_px": 12.327206134828891,
+          "screen_step_300_world_right_px": 18.54145096622311,
+          "scale_before": 0.90625,
+          "scale_after": 0.8828125,
+          "danger_set_changed": false,
+          "route_flipped": false,
+          "post_smoothing_correction_world": 55.9207649230957,
+          "trauma": 0.0
+        }
+      ]
+    },
+    {
+      "case": "E10_still",
+      "frames": 1200,
+      "trauma_max": 0.0,
+      "scale_min": 0.5078125,
+      "scale_max": 1.0,
+      "screen_step_at_previous_player_max_px": 3.3191266264636545,
+      "screen_step_at_previous_player_p95_px": 0.0,
+      "screen_step_300_world_right_max_px": 20.85351626524889,
+      "fixed_world_marker_screen_span_px": [
+        0.5,
+        19.96875
+      ],
+      "route_flips": 0,
+      "route_flips_without_focus_change": 0,
+      "route_flip_samples": [],
+      "largest": [
+        {
+          "frame": 59,
+          "time": 1.0,
+          "screen_step_at_previous_player_px": 3.3191266264636545,
+          "screen_step_300_world_right_px": 20.85351626524889,
+          "scale_before": 1.0,
+          "scale_after": 0.9296875,
+          "danger_set_changed": true,
+          "route_flipped": false,
+          "post_smoothing_correction_world": 0.0,
+          "trauma": 0.0
+        },
+        {
+          "frame": 60,
+          "time": 1.01666666666667,
+          "screen_step_at_previous_player_px": 2.25,
+          "screen_step_300_world_right_px": 18.884517468021258,
+          "scale_before": 0.9296875,
+          "scale_after": 0.8671875,
+          "danger_set_changed": false,
+          "route_flipped": false,
+          "post_smoothing_correction_world": 0.0,
+          "trauma": 0.0
+        },
+        {
+          "frame": 61,
+          "time": 1.03333333333333,
+          "screen_step_at_previous_player_px": 2.1875,
+          "screen_step_300_world_right_px": 14.231621920919626,
+          "scale_before": 0.8671875,
+          "scale_after": 0.8203125,
+          "danger_set_changed": false,
+          "route_flipped": false,
+          "post_smoothing_correction_world": 0.0,
+          "trauma": 0.0
+        },
+        {
+          "frame": 62,
+          "time": 1.05,
+          "screen_step_at_previous_player_px": 2.1875,
+          "screen_step_300_world_right_px": 14.231621920919626,
+          "scale_before": 0.8203125,
+          "scale_after": 0.7734375,
+          "danger_set_changed": false,
+          "route_flipped": false,
+          "post_smoothing_correction_world": 0.0001220703125,
+          "trauma": 0.0
+        }
+      ]
+    },
+    {
+      "case": "E12_moving",
+      "frames": 1200,
+      "trauma_max": 0.0,
+      "scale_min": 0.625,
+      "scale_max": 1.0,
+      "screen_step_at_previous_player_max_px": 19.590728447334104,
+      "screen_step_at_previous_player_p95_px": 5.830951894845301,
+      "screen_step_300_world_right_max_px": 26.554589774169354,
+      "fixed_world_marker_screen_span_px": [
+        364.0,
+        125.6875
+      ],
+      "route_flips": 16,
+      "route_flips_without_focus_change": 7,
+      "route_flip_samples": [
+        {
+          "frame": 191,
+          "danger_set_changed": false,
+          "focus_changed": true,
+          "screen_step_at_previous_player_px": 1.4142135623730951
+        },
+        {
+          "frame": 197,
+          "danger_set_changed": false,
+          "focus_changed": true,
+          "screen_step_at_previous_player_px": 2.0
+        },
+        {
+          "frame": 204,
+          "danger_set_changed": false,
+          "focus_changed": true,
+          "screen_step_at_previous_player_px": 1.4142135623730951
+        },
+        {
+          "frame": 221,
+          "danger_set_changed": true,
+          "focus_changed": true,
+          "screen_step_at_previous_player_px": 3.605551275463989
+        },
+        {
+          "frame": 422,
+          "danger_set_changed": false,
+          "focus_changed": false,
+          "screen_step_at_previous_player_px": 5.0990195135927845
+        },
+        {
+          "frame": 428,
+          "danger_set_changed": false,
+          "focus_changed": false,
+          "screen_step_at_previous_player_px": 3.1622776601683795
+        },
+        {
+          "frame": 663,
+          "danger_set_changed": false,
+          "focus_changed": false,
+          "screen_step_at_previous_player_px": 1.4142135623730951
+        },
+        {
+          "frame": 665,
+          "danger_set_changed": false,
+          "focus_changed": false,
+          "screen_step_at_previous_player_px": 1.0
+        }
+      ],
+      "largest": [
+        {
+          "frame": 933,
+          "time": 15.5666666666667,
+          "screen_step_at_previous_player_px": 19.590728447334104,
+          "screen_step_300_world_right_px": 26.554589774169354,
+          "scale_before": 1.0,
+          "scale_after": 0.96875,
+          "danger_set_changed": true,
+          "route_flipped": false,
+          "post_smoothing_correction_world": 0.0,
+          "trauma": 0.0
+        },
+        {
+          "frame": 934,
+          "time": 15.5833333333333,
+          "screen_step_at_previous_player_px": 15.798274644807655,
+          "screen_step_300_world_right_px": 19.162521819518325,
+          "scale_before": 0.96875,
+          "scale_after": 0.953125,
+          "danger_set_changed": false,
+          "route_flipped": true,
+          "post_smoothing_correction_world": 0.0,
+          "trauma": 0.0
+        },
+        {
+          "frame": 985,
+          "time": 16.4333333333333,
+          "screen_step_at_previous_player_px": 15.002047947167858,
+          "screen_step_300_world_right_px": 16.67973589552863,
+          "scale_before": 0.828125,
+          "scale_after": 0.8359375,
+          "danger_set_changed": true,
+          "route_flipped": false,
+          "post_smoothing_correction_world": 0.0,
+          "trauma": 0.0
+        },
+        {
+          "frame": 1050,
+          "time": 17.5166666666667,
+          "screen_step_at_previous_player_px": 15.0,
+          "screen_step_300_world_right_px": 15.0,
+          "scale_before": 0.984375,
+          "scale_after": 0.984375,
+          "danger_set_changed": true,
+          "route_flipped": false,
+          "post_smoothing_correction_world": 0.0,
+          "trauma": 0.0
+        },
+        {
+          "frame": 935,
+          "time": 15.6,
+          "screen_step_at_previous_player_px": 14.374550801753902,
+          "screen_step_300_world_right_px": 17.738399527692827,
+          "scale_before": 0.953125,
+          "scale_after": 0.9375,
+          "danger_set_changed": false,
+          "route_flipped": false,
+          "post_smoothing_correction_world": 0.0,
+          "trauma": 0.0
+        },
+        {
+          "frame": 1051,
+          "time": 17.5333333333333,
+          "screen_step_at_previous_player_px": 14.0,
+          "screen_step_300_world_right_px": 14.0,
+          "scale_before": 0.984375,
+          "scale_after": 0.984375,
+          "danger_set_changed": false,
+          "route_flipped": false,
+          "post_smoothing_correction_world": 0.0,
+          "trauma": 0.0
+        },
+        {
+          "frame": 987,
+          "time": 16.4666666666667,
+          "screen_step_at_previous_player_px": 13.57162816089623,
+          "screen_step_300_world_right_px": 15.705799498482762,
+          "scale_before": 0.84375,
+          "scale_after": 0.8515625,
+          "danger_set_changed": true,
+          "route_flipped": false,
+          "post_smoothing_correction_world": 0.00013647876039613,
+          "trauma": 0.0
+        },
+        {
+          "frame": 986,
+          "time": 16.45,
+          "screen_step_at_previous_player_px": 12.932589056491771,
+          "screen_step_300_world_right_px": 14.526065961329168,
+          "scale_before": 0.8359375,
+          "scale_after": 0.84375,
+          "danger_set_changed": false,
+          "route_flipped": false,
+          "post_smoothing_correction_world": 0.0,
+          "trauma": 0.0
+        }
+      ]
+    },
+    {
+      "case": "E12_still",
+      "frames": 1200,
+      "trauma_max": 0.0,
+      "scale_min": 1.0,
+      "scale_max": 1.0,
+      "screen_step_at_previous_player_max_px": 15.297058540778355,
+      "screen_step_at_previous_player_p95_px": 3.1622776601683795,
+      "screen_step_300_world_right_max_px": 15.297058540778355,
+      "fixed_world_marker_screen_span_px": [
+        35.0,
+        176.0
+      ],
+      "route_flips": 0,
+      "route_flips_without_focus_change": 0,
+      "route_flip_samples": [],
+      "largest": [
+        {
+          "frame": 379,
+          "time": 6.33333333333333,
+          "screen_step_at_previous_player_px": 15.297058540778355,
+          "screen_step_300_world_right_px": 15.297058540778355,
+          "scale_before": 1.0,
+          "scale_after": 1.0,
+          "danger_set_changed": true,
+          "route_flipped": false,
+          "post_smoothing_correction_world": 0.0,
+          "trauma": 0.0
+        },
+        {
+          "frame": 463,
+          "time": 7.73333333333333,
+          "screen_step_at_previous_player_px": 15.297058540778355,
+          "screen_step_300_world_right_px": 15.297058540778355,
+          "scale_before": 1.0,
+          "scale_after": 1.0,
+          "danger_set_changed": true,
+          "route_flipped": false,
+          "post_smoothing_correction_world": 0.0,
+          "trauma": 0.0
+        },
+        {
+          "frame": 796,
+          "time": 13.2833333333333,
+          "screen_step_at_previous_player_px": 15.297058540778355,
+          "screen_step_300_world_right_px": 15.297058540778355,
+          "scale_before": 1.0,
+          "scale_after": 1.0,
+          "danger_set_changed": true,
+          "route_flipped": false,
+          "post_smoothing_correction_world": 0.0,
+          "trauma": 0.0
+        },
+        {
+          "frame": 880,
+          "time": 14.6833333333333,
+          "screen_step_at_previous_player_px": 15.297058540778355,
+          "screen_step_300_world_right_px": 15.297058540778355,
+          "scale_before": 1.0,
+          "scale_after": 1.0,
+          "danger_set_changed": true,
+          "route_flipped": false,
+          "post_smoothing_correction_world": 0.0,
+          "trauma": 0.0
+        },
+        {
+          "frame": 464,
+          "time": 7.75,
+          "screen_step_at_previous_player_px": 14.317821063276353,
+          "screen_step_300_world_right_px": 14.317821063276353,
+          "scale_before": 1.0,
+          "scale_after": 1.0,
+          "danger_set_changed": false,
+          "route_flipped": false,
+          "post_smoothing_correction_world": 0.0,
+          "trauma": 0.0
+        },
+        {
+          "frame": 881,
+          "time": 14.7,
+          "screen_step_at_previous_player_px": 14.317821063276353,
+          "screen_step_300_world_right_px": 14.317821063276353,
+          "scale_before": 1.0,
+          "scale_after": 1.0,
+          "danger_set_changed": false,
+          "route_flipped": false,
+          "post_smoothing_correction_world": 0.0,
+          "trauma": 0.0
+        },
+        {
+          "frame": 380,
+          "time": 6.35,
+          "screen_step_at_previous_player_px": 13.341664064126334,
+          "screen_step_300_world_right_px": 13.341664064126334,
+          "scale_before": 1.0,
+          "scale_after": 1.0,
+          "danger_set_changed": false,
+          "route_flipped": false,
+          "post_smoothing_correction_world": 0.0,
+          "trauma": 0.0
+        },
+        {
+          "frame": 797,
+          "time": 13.3,
+          "screen_step_at_previous_player_px": 13.341664064126334,
+          "screen_step_300_world_right_px": 13.341664064126334,
+          "scale_before": 1.0,
+          "scale_after": 1.0,
+          "danger_set_changed": false,
+          "route_flipped": false,
+          "post_smoothing_correction_world": 0.0,
+          "trauma": 0.0
+        }
+      ]
+    }
+  ]
+}

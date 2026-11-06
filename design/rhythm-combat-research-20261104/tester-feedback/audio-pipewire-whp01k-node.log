@@ -1,0 +1,42 @@
+	id: 82
+	permissions: rwxm-
+	type: PipeWire:Interface:Node/3
+*	input ports: 2/65
+*	output ports: 2/0
+*	state: "suspended"
+*	properties:
+*		api.bluez5.address = "C4:6E:7B:12:03:2E"
+*		api.bluez5.codec = "aptx"
+*		api.bluez5.profile = "a2dp-sink"
+*		api.bluez5.transport = ""
+*		card.profile.device = "1"
+*		device.id = "117"
+*		device.routes = "1"
+*		factory.name = "api.bluez5.a2dp.sink"
+*		node.description = "WHP01K"
+*		node.name = "bluez_output.C4_6E_7B_12_03_2E.1"
+*		node.pause-on-idle = "false"
+*		priority.driver = "1010"
+*		priority.session = "1010"
+*		factory.id = "8"
+*		clock.quantum-limit = "8192"
+*		device.api = "bluez5"
+*		media.class = "Audio/Sink"
+*		media.name = "WHP01K"
+*		node.driver = "true"
+*		factory.mode = "merge"
+*		audio.adapt.follower = ""
+*		library.name = "audioconvert/libspa-audioconvert"
+*		object.id = "82"
+*		object.serial = "60007"
+*		client.id = "35"
+*	params: (9)
+*	  3 (Spa:Enum:ParamId:EnumFormat) r-
+*	  1 (Spa:Enum:ParamId:PropInfo) r-
+*	  2 (Spa:Enum:ParamId:Props) rw
+*	  4 (Spa:Enum:ParamId:Format) -w
+*	  10 (Spa:Enum:ParamId:EnumPortConfig) r-
+*	  11 (Spa:Enum:ParamId:PortConfig) rw
+*	  15 (Spa:Enum:ParamId:Latency) rw
+*	  16 (Spa:Enum:ParamId:ProcessLatency) rw
+*	  17 (Spa:Enum:ParamId:Tag) rw

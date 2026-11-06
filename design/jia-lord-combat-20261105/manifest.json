@@ -1,0 +1,136 @@
+{
+  "date": "2026-11-05",
+  "status": "campaign_v2_combat_implemented_and_verified",
+  "identity_reference": "design/jia-weisuo-20261027/jia-lord-smirk-v1.png",
+  "runtime_changed": true,
+  "gameplay_changed": false,
+  "assets": [
+    {
+      "variant": "ready",
+      "path": "design/jia-lord-combat-20261105/jia-lord-ready-v1.png",
+      "generator": "built-in image_gen",
+      "generated_source": "/home/weathour/.codex/generated_images/01a1a493-d8f4-79f0-9d0a-71fa9533d063/exec-0bfb8c9f-5463-4ea6-bc21-b9eb9fb7774e.png",
+      "size": [
+        1024,
+        1536
+      ],
+      "mode": "RGBA",
+      "sha256": "1f472d041813af3d06e7dafe2744945a1000bca0b5a0981e54496716a31cf957",
+      "alpha_range": [
+        0,
+        254
+      ],
+      "alpha_zero_pixels": 982531,
+      "alpha_opaque_pixels": 0,
+      "opaque_bounds": [
+        17,
+        0,
+        1000,
+        1536
+      ],
+      "status": "costume_proposal_user_not_yet_evaluated_not_runtime",
+      "prompt": "design/jia-lord-combat-20261105/ready-v1-prompt.txt"
+    },
+    {
+      "variant": "campaign",
+      "path": "design/jia-lord-combat-20261105/jia-lord-campaign-v1.png",
+      "generator": "built-in image_gen",
+      "generated_source": "/home/weathour/.codex/generated_images/01a1a493-d8f4-79f0-9d0a-71fa9533d063/exec-d437b1af-a157-41e4-ae41-a193d90bf121.png",
+      "size": [
+        1024,
+        1536
+      ],
+      "mode": "RGBA",
+      "sha256": "25dc11598fce667c48db18bf6dbfca15cc1d28ddf9dbdf7959ac62082902f592",
+      "alpha_range": [
+        0,
+        254
+      ],
+      "alpha_zero_pixels": 934248,
+      "alpha_opaque_pixels": 0,
+      "opaque_bounds": [
+        0,
+        5,
+        1010,
+        1536
+      ],
+      "status": "rejected_by_user_retained_for_provenance",
+      "prompt": "design/jia-lord-combat-20261105/campaign-v1-prompt.txt",
+      "feedback": "亲征版档次不够高，像小兵；参考吕布或赵云形象重做。"
+    },
+    {
+      "variant": "campaign-v2",
+      "path": "design/jia-lord-combat-20261105/jia-lord-campaign-v2.png",
+      "generator": "built-in image_gen",
+      "generated_source": "/home/weathour/.codex/generated_images/01a1a493-d8f4-79f0-9d0a-71fa9533d063/exec-35854a8d-6e5b-486f-b6e8-a302bded386f.png",
+      "size": [
+        1024,
+        1536
+      ],
+      "mode": "RGBA",
+      "sha256": "d0b2f3950fa2287e085037d62764cc86c507128ddc68f651b786fbd7d39bd84d",
+      "alpha_range": [
+        0,
+        254
+      ],
+      "alpha_zero_pixels": 653059,
+      "alpha_opaque_pixels": 0,
+      "alpha_128_bounds": [
+        9,
+        4,
+        970,
+        1528
+      ],
+      "status": "user_approved_master_runtime_derivatives_complete",
+      "prompt": "design/jia-lord-combat-20261105/campaign-v2-prompt.txt",
+      "references": [
+        {
+          "path": "design/jia-lord-combat-20261105/jia-lord-campaign-v1.png",
+          "sha256": "25dc11598fce667c48db18bf6dbfca15cc1d28ddf9dbdf7959ac62082902f592"
+        },
+        {
+          "path": "design/jia-weisuo-20261027/jia-lord-smirk-v1.png",
+          "sha256": "7b7db70adc10121752b97127583acf60c5880afa63e99dd551c2b39f492cc2c1"
+        },
+        {
+          "path": "assets/enemies/baimen/B18_human/portrait.png",
+          "sha256": "69b379a6285e4feceadead35c8014e005e9847f116310f27075c4d764f12f4ce"
+        }
+      ]
+    }
+  ],
+  "current_candidates": {
+    "ready": "jia-lord-ready-v1.png",
+    "campaign": "jia-lord-campaign-v2.png"
+  },
+  "user_feedback_applied": "Raise campaign form to the rank and visual presence of an elite general or warlord; Lu Bu portrait used for armor rank only, Jia facial identity retained.",
+  "approval": {
+    "date": "2026-11-05",
+    "user_message": "可以，开始做",
+    "scope": "亲征v2母版、对应像素战斗模型与刀枪/技能动作、独立头像和剧情阶段接入；常备v1未评价。"
+  },
+  "appearance_unlock": {
+    "user_message": "按剧情解锁，开始打曹军了就开始变了",
+    "first_battle_nodes": [
+      "B13",
+      "B14"
+    ],
+    "not_before": [
+      "S10",
+      "S11"
+    ],
+    "derivation": "existing campaign current/completed and historical story context",
+    "new_save_schema": false,
+    "status": "implemented_and_verified"
+  },
+  "runtime_art": {
+    "manifest": "assets/players/jia-campaign/manifest.json",
+    "production_manifest": "design/jia-lord-combat-20261105/art-export-manifest.json",
+    "unique_actor_poses": 48,
+    "weapon_clips": 10,
+    "independent_hud_portrait": "assets/players/jia-campaign/campaign-head.png",
+    "standing_portrait": "assets/ui/chronicle/characters/JIA-campaign-standing.png",
+    "verification": "design/jia-lord-combat-20261105/verification/result.json",
+    "performance": "design/jia-lord-combat-20261105/performance/after/performance-comparison.json"
+  }
+}

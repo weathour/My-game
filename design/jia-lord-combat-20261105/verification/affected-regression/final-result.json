@@ -1,0 +1,40 @@
+{
+  "status": "passed",
+  "scope": "three root-requested affected regressions",
+  "repaired_scale": {
+    "script": "scripts/tests/chronicle_battle_scale_smoke.gd",
+    "script_sha256": "7790431b7b477ada425254b6331f10830f9470991e2e60f372cf301ffeb08061",
+    "log": "/home/weathour/programs/desktop-projects/My-game/design/jia-lord-combat-20261105/verification/affected-regression/chronicle_battle_scale_smoke-repaired.log",
+    "returncode": 0,
+    "validator_failures": [],
+    "elapsed_seconds": 3.9742379188537598
+  },
+  "unchanged_regressions": [
+    {
+      "script": "scripts/tests/chronicle_boss_camera_smoke.gd",
+      "log": "/home/weathour/programs/desktop-projects/My-game/design/jia-lord-combat-20261105/verification/affected-regression/chronicle_boss_camera_smoke.log",
+      "returncode": 0,
+      "validator_failures": [],
+      "elapsed_seconds": 2.2175538539886475
+    },
+    {
+      "script": "scripts/tests/chronicle_skill_presentation_smoke.gd",
+      "log": "/home/weathour/programs/desktop-projects/My-game/design/jia-lord-combat-20261105/verification/affected-regression/chronicle_skill_presentation_smoke.log",
+      "returncode": 0,
+      "validator_failures": [],
+      "elapsed_seconds": 1.5664613246917725
+    }
+  ],
+  "initial_scale_failure": {
+    "script": "scripts/tests/chronicle_battle_scale_smoke.gd",
+    "log": "/home/weathour/programs/desktop-projects/My-game/design/jia-lord-combat-20261105/verification/affected-regression/chronicle_battle_scale_smoke.log",
+    "returncode": 0,
+    "validator_failures": [
+      "SCRIPT ERROR: Trying to assign value of type 'Nil' to a variable of type 'Dictionary'.",
+      "SCRIPT ERROR: Trying to assign value of type 'Nil' to a variable of type 'Dictionary'.",
+      "SCRIPT ERROR: Trying to assign value of type 'Nil' to a variable of type 'Dictionary'.",
+      "SCRIPT ERROR: Trying to assign value of type 'Nil' to a variable of type 'Dictionary'."
+    ],
+    "elapsed_seconds": 3.872684955596924
+  }
+}

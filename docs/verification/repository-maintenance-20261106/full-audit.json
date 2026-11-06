@@ -1,0 +1,996 @@
+{
+  "status": "passed_staged_tree_archive_clean_directory_validation",
+  "at": 1793975361.7948558,
+  "candidate": "/tmp/my-game-repository-candidate-iew_fls6",
+  "tree": "a468d3066c7fd3116c556a43cd59b69f84105924",
+  "method": "git write-tree then git archive extracted into independent empty directory; NOT a git clone",
+  "coverage": {
+    "fresh_total": 66,
+    "fresh_source": 62,
+    "fresh_pack": 4,
+    "reuse": 0,
+    "extra_same_pack_camera_fresh_checks": 21725
+  },
+  "PROJECT_CHECK_OK": true,
+  "full_command": {
+    "name": "full-project-check",
+    "command": [
+      "bash",
+      "/tmp/my-game-repository-candidate-iew_fls6/scripts/check_project.sh"
+    ],
+    "cwd": "/tmp/my-game-repository-candidate-iew_fls6",
+    "started_at": 1793974504.0945702,
+    "log": "/tmp/my-game-repo-maintenance-20261106/candidate-validation/full-project-check.log",
+    "status": "passed",
+    "child_pid": 514757,
+    "returncode": 0,
+    "finished_at": 1793975142.4770405,
+    "elapsed_seconds": 638.3824710845947,
+    "diagnostic_faults": []
+  },
+  "preflight_steps": [
+    {
+      "name": "preflight-doclinks",
+      "command": [
+        "python3",
+        "scripts/tests/check_docs_links.py"
+      ],
+      "cwd": "/tmp/my-game-repository-candidate-iew_fls6",
+      "started_at": 1793974476.1047096,
+      "log": "/tmp/my-game-repo-maintenance-20261106/candidate-validation/preflight-doclinks.log",
+      "status": "passed",
+      "child_pid": 514411,
+      "returncode": 0,
+      "finished_at": 1793974476.1664398,
+      "elapsed_seconds": 0.06173062324523926,
+      "diagnostic_faults": []
+    },
+    {
+      "name": "preflight-cold-import",
+      "command": [
+        "/home/weathour/.local/bin/godot-4.6.2",
+        "--headless",
+        "--path",
+        "/tmp/my-game-repository-candidate-iew_fls6",
+        "--import"
+      ],
+      "cwd": "/tmp/my-game-repository-candidate-iew_fls6",
+      "started_at": 1793974476.6398816,
+      "log": "/tmp/my-game-repo-maintenance-20261106/candidate-validation/preflight-cold-import.log",
+      "status": "passed",
+      "child_pid": 514415,
+      "returncode": 0,
+      "finished_at": 1793974502.3225877,
+      "elapsed_seconds": 25.682706356048584,
+      "diagnostic_faults": []
+    },
+    {
+      "name": "preflight-parse-startup",
+      "command": [
+        "/home/weathour/.local/bin/godot-4.6.2",
+        "--headless",
+        "--path",
+        "/tmp/my-game-repository-candidate-iew_fls6",
+        "--quit",
+        "--verbose"
+      ],
+      "cwd": "/tmp/my-game-repository-candidate-iew_fls6",
+      "started_at": 1793974502.7814913,
+      "log": "/tmp/my-game-repo-maintenance-20261106/candidate-validation/preflight-parse-startup.log",
+      "status": "passed",
+      "child_pid": 514729,
+      "returncode": 0,
+      "finished_at": 1793974503.682456,
+      "elapsed_seconds": 0.9009649753570557,
+      "diagnostic_faults": []
+    }
+  ],
+  "durable_status": "status.json",
+  "end_guard": {
+    "retained_global_inputs": 1906,
+    "all_retained_global_hashes_match_previous1907_freeze": true,
+    "only_approved_removed_global": "addons/godot_mcp/tools/script_tools_native_backup.gd",
+    "all66_entry_hashes_match_previous_freeze": true,
+    "all_candidate_global_entry_binary_harness_hashes_unchanged_during_validation": true,
+    "binary": {
+      "path": "/home/weathour/.local/opt/godot-4.6.2/Godot_v4.6.2-stable_linux.x86_64",
+      "sha256": "5a806b2b385279d9607094d33e946ed828e9606df4cb46d258ca27468dc5c1c9"
+    },
+    "production_harness": {
+      "scripts/check_project.sh": "f45f877309bbc05f8b9cd5cc5b2c174383fbff86924c082f05cc298f3d204fd2",
+      "scripts/tests/check_smoke_log.py": "b85ee7b7dfa4f2d8a64dcf5b78ab29109b984f0205736166e30f51cc3bb2a683",
+      "scripts/tests/check_project_reuse.py": "a26f9f09408255ae3f7e70ca0266df3ec7bdf694d2d7399758c656df5bdce098"
+    },
+    "camera_sha256": "f61f7883f5e60699643411a869371e4e805bfa7db8ad36b6ead72de10f707b0b"
+  },
+  "archive_end_file_audit": "archive-end-file-audit.json",
+  "expected_test_output_change": {
+    "path": "design/skill-presentation-20261105/qa/skill-presentation-results.json",
+    "writer": "scripts/tests/chronicle_skill_presentation_smoke.gd:742-745 default report destination",
+    "top_level_keys_changed": [
+      "audio_teardown"
+    ],
+    "semantic_result": {
+      "actors": 38,
+      "abilities": 137,
+      "checks": 3934,
+      "failures": 0
+    },
+    "no_input_source_changed": true
+  },
+  "preflight_inventory": "preflight-inventory.json",
+  "credential_review": "own metadata/name scan has no flags; root same-index-tree content review reused; no settings/user records printed",
+  "pack": {
+    "path": "/tmp/my-game-check.AYKkJx/pack-smokes/game.pck",
+    "bytes": 239494336,
+    "sha256": "ebbb3c3fde43becf9cff22adac830cd4e26843484b5ccde44e0779ac2ad65538"
+  },
+  "extra_same_pack_camera": "extra-pack-camera.json",
+  "source_project_cache_fallback": false,
+  "original_project_editor203952_untouched": true,
+  "generated_candidate_cache_excluded_from_commit": {
+    "files": 4985,
+    "bytes": 910117189,
+    "excluded_from_index_archive": true
+  },
+  "all_logs_strict_revalidated": true,
+  "stdout_sha256": "997803cc541e2728423dab0ad052c9a9d0dbfe81106745820f611c3ad99f1973",
+  "entries": [
+    {
+      "entry": "scripts/tests/baimen_enemy_runtime_smoke.gd",
+      "entry_sha256": "3fa1415413a1f212da6256e56ac485b8c754c37a70e2a8ba5849ff667e7354f6",
+      "execution": "fresh_source",
+      "returncode": 0,
+      "returncode_evidence": "exact log body/next stdout heading plus normal set-e/pipefail command and strict validator completion",
+      "strict_failures": [],
+      "log": "/tmp/my-game-repo-maintenance-20261106/candidate-validation/full-logs/baimen_enemy_runtime_smoke.log",
+      "log_sha256": "6e2986cde6e1b2c022292ddef24fc576c8a19de572b65589fdd2415a3ba6a207",
+      "pass_lines": [
+        "BAIMEN_ENEMY_RUNTIME_SMOKE PASS checks=743 failures=0"
+      ]
+    },
+    {
+      "entry": "scripts/tests/baimen_women_combat_art_smoke.gd",
+      "entry_sha256": "eea6d59b814dd7a17fd5107fd3db6a5e846948dbf7ddb58cb922b2dd667039ea",
+      "execution": "fresh_source",
+      "returncode": 0,
+      "returncode_evidence": "exact log body/next stdout heading plus normal set-e/pipefail command and strict validator completion",
+      "strict_failures": [],
+      "log": "/tmp/my-game-repo-maintenance-20261106/candidate-validation/full-logs/baimen_women_combat_art_smoke.log",
+      "log_sha256": "646534b58adfc9313717be686e2d2e8dee305d9a09ec6657978a8085258df9a9",
+      "pass_lines": [
+        "BAIMEN_WOMEN_COMBAT_ART_SMOKE PASS checks=266 failures=0"
+      ]
+    },
+    {
+      "entry": "scripts/tests/baimen_women_portraits_smoke.gd",
+      "entry_sha256": "d6d73eef067cc7f5b2abcdeacdd86d0e049c1a0b023c897a940f001bf0d8d3e5",
+      "execution": "fresh_source",
+      "returncode": 0,
+      "returncode_evidence": "exact log body/next stdout heading plus normal set-e/pipefail command and strict validator completion",
+      "strict_failures": [],
+      "log": "/tmp/my-game-repo-maintenance-20261106/candidate-validation/full-logs/baimen_women_portraits_smoke.log",
+      "log_sha256": "6472c4e2426574abe0ef8061bb0884d5d96544d31c095f621f0b00f5f95eaed6",
+      "pass_lines": [
+        "BAIMEN_WOMEN_PORTRAITS_SMOKE PASS checks=525 failures=0"
+      ]
+    },
+    {
+      "entry": "scripts/tests/boss_combo_timing_smoke.gd",
+      "entry_sha256": "08c410f92fdb31c1f87475e7e352bec5432760f9d288a7eb652ea25ef8863844",
+      "execution": "fresh_source",
+      "returncode": 0,
+      "returncode_evidence": "exact log body/next stdout heading plus normal set-e/pipefail command and strict validator completion",
+      "strict_failures": [],
+      "log": "/tmp/my-game-repo-maintenance-20261106/candidate-validation/full-logs/boss_combo_timing_smoke.log",
+      "log_sha256": "bfea216ba0167181fc0932ac37ea3c3a2335a58f5271a249e496dafb47b8cdad",
+      "pass_lines": [
+        "BOSS_COMBO_TIMING_SMOKE PASS checks=41 failures=0"
+      ]
+    },
+    {
+      "entry": "scripts/tests/boss_forms_smoke.gd",
+      "entry_sha256": "4944f5bd41244fc81d821a43da5f0e2bd0d845886cb2de51db4923f9305c2dff",
+      "execution": "fresh_source",
+      "returncode": 0,
+      "returncode_evidence": "exact log body/next stdout heading plus normal set-e/pipefail command and strict validator completion",
+      "strict_failures": [],
+      "log": "/tmp/my-game-repo-maintenance-20261106/candidate-validation/full-logs/boss_forms_smoke.log",
+      "log_sha256": "51247d6284ec4fc4f7366e20931d34ca965366908d7ab729104cac73830b3b3e",
+      "pass_lines": [
+        "BOSS_FORMS_SMOKE PASS checks=672 failures=0 authored_moves=30"
+      ]
+    },
+    {
+      "entry": "scripts/tests/boss_friendly_art_smoke.gd",
+      "entry_sha256": "39aeb561620bbe1482404b1165909988f603af8b7d25c1402014ea056383604f",
+      "execution": "fresh_source",
+      "returncode": 0,
+      "returncode_evidence": "exact log body/next stdout heading plus normal set-e/pipefail command and strict validator completion",
+      "strict_failures": [],
+      "log": "/tmp/my-game-repo-maintenance-20261106/candidate-validation/full-logs/boss_friendly_art_smoke.log",
+      "log_sha256": "97c3180872ba707da4b4aa7f86aecf2499f0c0d44c4910de22bbabc15f2adabb",
+      "pass_lines": [
+        "BOSS_FRIENDLY_ART_SMOKE PASS checks=146 failures=0 portrait_capture=unavailable"
+      ]
+    },
+    {
+      "entry": "scripts/tests/chronicle_audio_settings_render_smoke.gd",
+      "entry_sha256": "b79efa82c78bfc7f7b4fbf9070488f2c0a2b2aecdc3ca9f7a0514809e73b2ef6",
+      "execution": "fresh_source",
+      "returncode": 0,
+      "returncode_evidence": "exact log body/next stdout heading plus normal set-e/pipefail command and strict validator completion",
+      "strict_failures": [],
+      "log": "/tmp/my-game-repo-maintenance-20261106/candidate-validation/full-logs/chronicle_audio_settings_render_smoke.log",
+      "log_sha256": "450544211f4efa034bec81931cccf97f548573d5fa7bad6813bf8dee44e31b83",
+      "pass_lines": [
+        "CHRONICLE_AUDIO_SETTINGS_RENDER_SMOKE PASS checks=300 failures=0"
+      ]
+    },
+    {
+      "entry": "scripts/tests/chronicle_authored_effects_smoke.gd",
+      "entry_sha256": "b55270456a11204bb0fb7e98673b4b3d1c142627a55f68f4253128705398b04e",
+      "execution": "fresh_source",
+      "returncode": 0,
+      "returncode_evidence": "exact log body/next stdout heading plus normal set-e/pipefail command and strict validator completion",
+      "strict_failures": [],
+      "log": "/tmp/my-game-repo-maintenance-20261106/candidate-validation/full-logs/chronicle_authored_effects_smoke.log",
+      "log_sha256": "53e196869708d490aabf3bac3edc36f98b9dd66590d261f4fbfb3e75ea9e9dd3",
+      "pass_lines": [
+        "CHRONICLE_AUTHORED_EFFECTS_SMOKE PASS checks=36 failures=0"
+      ]
+    },
+    {
+      "entry": "scripts/tests/chronicle_battle_ground_smoke.gd",
+      "entry_sha256": "31ed9fb32f33d9da34921b90e3cc785627b0f3867b49fa14e31171a0246e372c",
+      "execution": "fresh_source",
+      "returncode": 0,
+      "returncode_evidence": "exact log body/next stdout heading plus normal set-e/pipefail command and strict validator completion",
+      "strict_failures": [],
+      "log": "/tmp/my-game-repo-maintenance-20261106/candidate-validation/full-logs/chronicle_battle_ground_smoke.log",
+      "log_sha256": "6ad8d0616112a94d4e17ed06efcd552a0da41e7628af99633941ff6c6ed90239",
+      "pass_lines": [
+        "CHRONICLE_BATTLE_GROUND_SMOKE PASS checks=191 failures=0"
+      ]
+    },
+    {
+      "entry": "scripts/tests/chronicle_battle_scale_smoke.gd",
+      "entry_sha256": "7790431b7b477ada425254b6331f10830f9470991e2e60f372cf301ffeb08061",
+      "execution": "fresh_source",
+      "returncode": 0,
+      "returncode_evidence": "exact log body/next stdout heading plus normal set-e/pipefail command and strict validator completion",
+      "strict_failures": [],
+      "log": "/tmp/my-game-repo-maintenance-20261106/candidate-validation/full-logs/chronicle_battle_scale_smoke.log",
+      "log_sha256": "5a692dbde0d701cda1a5ea9699eb224027e18cfb0151a291df8722aad34107fc",
+      "pass_lines": [
+        "CHRONICLE_BATTLE_SCALE_SMOKE PASS checks=564 failures=0"
+      ]
+    },
+    {
+      "entry": "scripts/tests/chronicle_boss_camera_cache_smoke.gd",
+      "entry_sha256": "2c5ab8c824b12265ea56dfe7d6c8b9e5ced9e1981e69e1b7b9a4c99275dc63e6",
+      "execution": "fresh_source",
+      "returncode": 0,
+      "returncode_evidence": "exact log body/next stdout heading plus normal set-e/pipefail command and strict validator completion",
+      "strict_failures": [],
+      "log": "/tmp/my-game-repo-maintenance-20261106/candidate-validation/full-logs/chronicle_boss_camera_cache_smoke.log",
+      "log_sha256": "29909928a4740328f916367c01e9f3d6a2aae1d09afa2cdad1c5713ccd496296",
+      "pass_lines": [
+        "CHRONICLE_BOSS_CAMERA_CACHE_SMOKE PASS checks=57 failures=0"
+      ]
+    },
+    {
+      "entry": "scripts/tests/chronicle_boss_camera_smoke.gd",
+      "entry_sha256": "5e97be2b9905664da8744853cb26e738c396e5f45fa0bbf4807f94efcbba708e",
+      "execution": "fresh_source",
+      "returncode": 0,
+      "returncode_evidence": "exact log body/next stdout heading plus normal set-e/pipefail command and strict validator completion",
+      "strict_failures": [],
+      "log": "/tmp/my-game-repo-maintenance-20261106/candidate-validation/full-logs/chronicle_boss_camera_smoke.log",
+      "log_sha256": "f6d95e91a34d3cd1fb38a79eeefbf7a03ddd9f15b2293a2d6a0f57a5a8552eef",
+      "pass_lines": [
+        "CHRONICLE_BOSS_CAMERA_SMOKE PASS checks=165 failures=0"
+      ]
+    },
+    {
+      "entry": "scripts/tests/chronicle_boss_flow_smoke.gd",
+      "entry_sha256": "25d32eedf06cd0b84e92d023253fd9395be86661b381b57e9e90948ac1d5e4b5",
+      "execution": "fresh_source",
+      "returncode": 0,
+      "returncode_evidence": "exact log body/next stdout heading plus normal set-e/pipefail command and strict validator completion",
+      "strict_failures": [],
+      "log": "/tmp/my-game-repo-maintenance-20261106/candidate-validation/full-logs/chronicle_boss_flow_smoke.log",
+      "log_sha256": "1f3ac022a81b003abce8719c8a118fd60fda53572df43588b2136c959d1900c4",
+      "pass_lines": [
+        "CHRONICLE_BOSS_FLOW_SMOKE PASS checks=140 failures=0"
+      ]
+    },
+    {
+      "entry": "scripts/tests/chronicle_boss_sound_smoke.gd",
+      "entry_sha256": "0c694d5ffdfdfb6bfb66f3f7bdb4df2bb846a37f50e5a2c9026e19069e47aa31",
+      "execution": "fresh_source",
+      "returncode": 0,
+      "returncode_evidence": "exact log body/next stdout heading plus normal set-e/pipefail command and strict validator completion",
+      "strict_failures": [],
+      "log": "/tmp/my-game-repo-maintenance-20261106/candidate-validation/full-logs/chronicle_boss_sound_smoke.log",
+      "log_sha256": "c4ca2756c7c0f69173556c80b8c3848613edf9075503ae43e126189d6ba81990",
+      "pass_lines": [
+        "CHRONICLE_BOSS_SOUND_SMOKE PASS checks=23 failures=0"
+      ]
+    },
+    {
+      "entry": "scripts/tests/chronicle_camera_mob_framing_smoke.gd",
+      "entry_sha256": "55f808902cd84cca245b79a01db6717b06594f3abd067174ecebd96dd3a4d59e",
+      "execution": "fresh_source",
+      "returncode": 0,
+      "returncode_evidence": "exact log body/next stdout heading plus normal set-e/pipefail command and strict validator completion",
+      "strict_failures": [],
+      "log": "/tmp/my-game-repo-maintenance-20261106/candidate-validation/full-logs/chronicle_camera_mob_framing_smoke.log",
+      "log_sha256": "5e649dd0d81c8698c66bc8e64b31b27f2c27ce1da35f647755e9dc23dbe09fb8",
+      "pass_lines": [
+        "CHRONICLE_CAMERA_MOB_FRAMING_SMOKE PASS checks=21725 failures=0 cases=12 frames=7200"
+      ]
+    },
+    {
+      "entry": "scripts/tests/chronicle_chapter_two_smoke.gd",
+      "entry_sha256": "a374daac8fd5c79342aee1da766c0bfbd6f870b3e15cf95e22369dfc3a1a2e9d",
+      "execution": "fresh_source",
+      "returncode": 0,
+      "returncode_evidence": "exact log body/next stdout heading plus normal set-e/pipefail command and strict validator completion",
+      "strict_failures": [],
+      "log": "/tmp/my-game-repo-maintenance-20261106/candidate-validation/full-logs/chronicle_chapter_two_smoke.log",
+      "log_sha256": "ecad0b5331034dd3c641b8e77df65142124ede1b286b33ad3484bbf1612331e7",
+      "pass_lines": [
+        "CHRONICLE_CHAPTER_TWO_SMOKE PASS checks=189 failures=0"
+      ]
+    },
+    {
+      "entry": "scripts/tests/chronicle_character_campaign_smoke.gd",
+      "entry_sha256": "7bc9695683bad7ed847ae691167f73847542cdbb98dd76bd8253f4db42f28f07",
+      "execution": "fresh_source",
+      "returncode": 0,
+      "returncode_evidence": "exact log body/next stdout heading plus normal set-e/pipefail command and strict validator completion",
+      "strict_failures": [],
+      "log": "/tmp/my-game-repo-maintenance-20261106/candidate-validation/full-logs/chronicle_character_campaign_smoke.log",
+      "log_sha256": "20d3e782d39e8d7c63173bdce636a588661fa193768cd6d94f908d0fb21b6e1a",
+      "pass_lines": [
+        "CHRONICLE_CHARACTER_CAMPAIGN_SMOKE PASS checks=196 failures=0"
+      ]
+    },
+    {
+      "entry": "scripts/tests/chronicle_character_mechanics_smoke.gd",
+      "entry_sha256": "afb8aa395b79615e8c8f515490c963376c592a440ebe6a6631486c7d11d8f331",
+      "execution": "fresh_source",
+      "returncode": 0,
+      "returncode_evidence": "exact log body/next stdout heading plus normal set-e/pipefail command and strict validator completion",
+      "strict_failures": [],
+      "log": "/tmp/my-game-repo-maintenance-20261106/candidate-validation/full-logs/chronicle_character_mechanics_smoke.log",
+      "log_sha256": "1d6a2ba8cf44c282a15f7efb74bc0101e85e80a6c4c397850ff63e67d9ea55e7",
+      "pass_lines": [
+        "CHRONICLE_CHARACTER_MECHANICS_SMOKE PASS checks=126 failures=0"
+      ]
+    },
+    {
+      "entry": "scripts/tests/chronicle_character_panels_smoke.gd",
+      "entry_sha256": "7772dcac11fed3dafd81c54343a9c5ba05086a3d218cc70de1874a79676a3cb1",
+      "execution": "fresh_source",
+      "returncode": 0,
+      "returncode_evidence": "exact log body/next stdout heading plus normal set-e/pipefail command and strict validator completion",
+      "strict_failures": [],
+      "log": "/tmp/my-game-repo-maintenance-20261106/candidate-validation/full-logs/chronicle_character_panels_smoke.log",
+      "log_sha256": "88e17969dc10b04d23d0a1337bf2392f0faee9d786fc468700938ec64707704d",
+      "pass_lines": [
+        "CHRONICLE_CHARACTER_PANELS_SMOKE PASS checks=509 failures=0"
+      ]
+    },
+    {
+      "entry": "scripts/tests/chronicle_character_profiles_smoke.gd",
+      "entry_sha256": "3fd27773e4a1ad38022c76d3d7cbda6e7c2d55fcbe8aecc07df9760b4fe93c63",
+      "execution": "fresh_source",
+      "returncode": 0,
+      "returncode_evidence": "exact log body/next stdout heading plus normal set-e/pipefail command and strict validator completion",
+      "strict_failures": [],
+      "log": "/tmp/my-game-repo-maintenance-20261106/candidate-validation/full-logs/chronicle_character_profiles_smoke.log",
+      "log_sha256": "9a59b1881276b1daddcd848738e8687b2a715878e29b0d9ebbb0f54348073f89",
+      "pass_lines": [
+        "CHRONICLE_CHARACTER_PROFILES_SMOKE PASS checks=121 failures=0"
+      ]
+    },
+    {
+      "entry": "scripts/tests/chronicle_combat_feedback_events_smoke.gd",
+      "entry_sha256": "dd9d09da785467a3e9a6542cd33e401b86387dcb4e45023d3333906da767f375",
+      "execution": "fresh_source",
+      "returncode": 0,
+      "returncode_evidence": "exact log body/next stdout heading plus normal set-e/pipefail command and strict validator completion",
+      "strict_failures": [],
+      "log": "/tmp/my-game-repo-maintenance-20261106/candidate-validation/full-logs/chronicle_combat_feedback_events_smoke.log",
+      "log_sha256": "d66776256fc235108ae5b4912660e07980d4ed554b05a344de51aced3697768a",
+      "pass_lines": [
+        "CHRONICLE_COMBAT_FEEDBACK_EVENTS_SMOKE PASS checks=59 failures=0"
+      ]
+    },
+    {
+      "entry": "scripts/tests/chronicle_combat_feedback_pack_smoke.gd",
+      "entry_sha256": "1145db5f876b7e7975ac33a93abd225a0cd7de75f7aca0818edfe591b725ebe4",
+      "execution": "fresh_pack",
+      "returncode": 0,
+      "returncode_evidence": "exact log body/next stdout heading plus normal set-e/pipefail command and strict validator completion",
+      "strict_failures": [],
+      "log": "/tmp/my-game-repo-maintenance-20261106/candidate-validation/full-logs/chronicle_combat_feedback_pack_smoke.log",
+      "log_sha256": "8a5459eb738836969af4626cb7bb8309cdf67bd6e78e14925e247524e8d22352",
+      "pass_lines": [
+        "CHRONICLE_COMBAT_FEEDBACK_PACK_SMOKE PASS checks=1074 failures=0"
+      ]
+    },
+    {
+      "entry": "scripts/tests/chronicle_combat_feedback_smoke.gd",
+      "entry_sha256": "368d4d1891e397f6486233e82b25e1079c19301dcdcd71e774af4224ec7338d0",
+      "execution": "fresh_source",
+      "returncode": 0,
+      "returncode_evidence": "exact log body/next stdout heading plus normal set-e/pipefail command and strict validator completion",
+      "strict_failures": [],
+      "log": "/tmp/my-game-repo-maintenance-20261106/candidate-validation/full-logs/chronicle_combat_feedback_smoke.log",
+      "log_sha256": "dcb4020a553af89a5154cc7b9f27fb6f04dcc0b0d85de994ab9bd604905ee842",
+      "pass_lines": [
+        "CHRONICLE_COMBAT_FEEDBACK_SMOKE PASS checks=332 failures=0"
+      ]
+    },
+    {
+      "entry": "scripts/tests/chronicle_combat_smoke.gd",
+      "entry_sha256": "92ca00c9b5522604c67d74c877f927295647732f32ee281f64592beac6618a03",
+      "execution": "fresh_source",
+      "returncode": 0,
+      "returncode_evidence": "exact log body/next stdout heading plus normal set-e/pipefail command and strict validator completion",
+      "strict_failures": [],
+      "log": "/tmp/my-game-repo-maintenance-20261106/candidate-validation/full-logs/chronicle_combat_smoke.log",
+      "log_sha256": "6e130789ca312c034f5ad600c7e8504a18138050a5dc82477a15c6c06dc37231",
+      "pass_lines": [
+        "CHRONICLE_COMBAT_SMOKE PASS checks=77 failures=0"
+      ]
+    },
+    {
+      "entry": "scripts/tests/chronicle_context_navigation_smoke.gd",
+      "entry_sha256": "1529b24bb6eba8a0a08938b15a354403317484da9b25d534da7a506807efcfa9",
+      "execution": "fresh_source",
+      "returncode": 0,
+      "returncode_evidence": "exact log body/next stdout heading plus normal set-e/pipefail command and strict validator completion",
+      "strict_failures": [],
+      "log": "/tmp/my-game-repo-maintenance-20261106/candidate-validation/full-logs/chronicle_context_navigation_smoke.log",
+      "log_sha256": "55fa5ec68b43faf4415cbd03d760769c39d2fc3745b2f8935aba869ff41d3a17",
+      "pass_lines": [
+        "CHRONICLE_CONTEXT_NAVIGATION_SMOKE PASS checks=223 failures=0"
+      ]
+    },
+    {
+      "entry": "scripts/tests/chronicle_danmaku_smoke.gd",
+      "entry_sha256": "b61597cbf52859d06451c3314b0d5f216237c051083a5ebb8c92251a6741e02a",
+      "execution": "fresh_source",
+      "returncode": 0,
+      "returncode_evidence": "exact log body/next stdout heading plus normal set-e/pipefail command and strict validator completion",
+      "strict_failures": [],
+      "log": "/tmp/my-game-repo-maintenance-20261106/candidate-validation/full-logs/chronicle_danmaku_smoke.log",
+      "log_sha256": "845102c7254afa233a009c16b6d30ec5b45b7250d82e323102f63d90d0e94279",
+      "pass_lines": [
+        "CHRONICLE_DANMAKU_SMOKE PASS checks=288 failures=0"
+      ]
+    },
+    {
+      "entry": "scripts/tests/chronicle_enemy_campaign_smoke.gd",
+      "entry_sha256": "b0caa8a0a4c508ba092b5899d8469b15595c7e2fe1eeaceca6762fa4573166ee",
+      "execution": "fresh_source",
+      "returncode": 0,
+      "returncode_evidence": "exact log body/next stdout heading plus normal set-e/pipefail command and strict validator completion",
+      "strict_failures": [],
+      "log": "/tmp/my-game-repo-maintenance-20261106/candidate-validation/full-logs/chronicle_enemy_campaign_smoke.log",
+      "log_sha256": "b769a821f6989962529677c65baf969b275daa049e6c16a494ff34f7b6c0f0d5",
+      "pass_lines": [
+        "CHRONICLE_ENEMY_CAMPAIGN_SMOKE PASS checks=454 failures=0 routes=2"
+      ]
+    },
+    {
+      "entry": "scripts/tests/chronicle_enemy_codex_smoke.gd",
+      "entry_sha256": "28f554860c2088562969daed2938ecbc0b963f0af84b9792a30de08f6cb6afb1",
+      "execution": "fresh_source",
+      "returncode": 0,
+      "returncode_evidence": "exact log body/next stdout heading plus normal set-e/pipefail command and strict validator completion",
+      "strict_failures": [],
+      "log": "/tmp/my-game-repo-maintenance-20261106/candidate-validation/full-logs/chronicle_enemy_codex_smoke.log",
+      "log_sha256": "0f9439503aefe500f93e6a8b6d4c4447cbd56836600e080c25906c360e6521f9",
+      "pass_lines": [
+        "CHRONICLE_ENEMY_CODEX_SMOKE PASS checks=704 failures=0"
+      ]
+    },
+    {
+      "entry": "scripts/tests/chronicle_enemy_content_smoke.gd",
+      "entry_sha256": "800a9cc28dddda81e48d841810860d9b1352dbbc6b2cbe94723bd98a49392270",
+      "execution": "fresh_source",
+      "returncode": 0,
+      "returncode_evidence": "exact log body/next stdout heading plus normal set-e/pipefail command and strict validator completion",
+      "strict_failures": [],
+      "log": "/tmp/my-game-repo-maintenance-20261106/candidate-validation/full-logs/chronicle_enemy_content_smoke.log",
+      "log_sha256": "4f95a56d76c5473bf30dede7145033029f6ccfb21d7fba8777f45d839d4c8c57",
+      "pass_lines": [
+        "CHRONICLE_ENEMY_CONTENT_SMOKE PASS checks=2857 failures=0 paths=64 transaction_routes=4"
+      ]
+    },
+    {
+      "entry": "scripts/tests/chronicle_enemy_effects_smoke.gd",
+      "entry_sha256": "ac2f0263d54a94cddf561ade5d65f7b95e4dddf79d177f94c57dfaf821b88c71",
+      "execution": "fresh_source",
+      "returncode": 0,
+      "returncode_evidence": "exact log body/next stdout heading plus normal set-e/pipefail command and strict validator completion",
+      "strict_failures": [],
+      "log": "/tmp/my-game-repo-maintenance-20261106/candidate-validation/full-logs/chronicle_enemy_effects_smoke.log",
+      "log_sha256": "ac4fc3ab6186f232e44035505987fb1b34c0f99ae8fd5f6ecc94728e101787e2",
+      "pass_lines": [
+        "CHRONICLE_ENEMY_EFFECTS_SMOKE PASS checks=73 failures=0"
+      ]
+    },
+    {
+      "entry": "scripts/tests/chronicle_enemy_pack_smoke.gd",
+      "entry_sha256": "6155b26d4429c5086e99bc5f87f81d4bc2d53b138037fd8ee26690a23fe3850b",
+      "execution": "fresh_pack",
+      "returncode": 0,
+      "returncode_evidence": "exact log body/next stdout heading plus normal set-e/pipefail command and strict validator completion",
+      "strict_failures": [],
+      "log": "/tmp/my-game-repo-maintenance-20261106/candidate-validation/full-logs/chronicle_enemy_pack_smoke.log",
+      "log_sha256": "06ffb1ea8e46ab058aa395c4dc90c8c85df4a0b65d684b0900b45968bab8e556",
+      "pass_lines": [
+        "ENEMY_PACK_SMOKE PASS checks=742 failures=0"
+      ]
+    },
+    {
+      "entry": "scripts/tests/chronicle_enemy_presentation_smoke.gd",
+      "entry_sha256": "ede6f87637bb0081633f0a6c065b33fce40b3a672d3792cd1b47dc1ab5407b08",
+      "execution": "fresh_source",
+      "returncode": 0,
+      "returncode_evidence": "exact log body/next stdout heading plus normal set-e/pipefail command and strict validator completion",
+      "strict_failures": [],
+      "log": "/tmp/my-game-repo-maintenance-20261106/candidate-validation/full-logs/chronicle_enemy_presentation_smoke.log",
+      "log_sha256": "a06f4f665f2152af5e0412095922a2f8cc95ea1432ca2dba037ef0455f039c2c",
+      "pass_lines": [
+        "CHRONICLE_ENEMY_PRESENTATION_SMOKE PASS checks=509 failures=0"
+      ]
+    },
+    {
+      "entry": "scripts/tests/chronicle_enemy_sessions_smoke.gd",
+      "entry_sha256": "789ede1af5e195fd6445b95c265310691bd9cb5bbf9548d4b677f5d6e41db06c",
+      "execution": "fresh_source",
+      "returncode": 0,
+      "returncode_evidence": "exact log body/next stdout heading plus normal set-e/pipefail command and strict validator completion",
+      "strict_failures": [],
+      "log": "/tmp/my-game-repo-maintenance-20261106/candidate-validation/full-logs/chronicle_enemy_sessions_smoke.log",
+      "log_sha256": "9e2c0fc4f4e1817691004618e159dbe9d23a4c4d0b5a3040df3e0193fa0abd92",
+      "pass_lines": [
+        "CHRONICLE_ENEMY_SESSIONS_SMOKE PASS checks=89096 failures=0 sessions=18"
+      ]
+    },
+    {
+      "entry": "scripts/tests/chronicle_feedback_latency_smoke.gd",
+      "entry_sha256": "0412522e501eb83c523c5538b73575f331142554bef9e09b3984eeca35f029d7",
+      "execution": "fresh_source",
+      "returncode": 0,
+      "returncode_evidence": "exact log body/next stdout heading plus normal set-e/pipefail command and strict validator completion",
+      "strict_failures": [],
+      "log": "/tmp/my-game-repo-maintenance-20261106/candidate-validation/full-logs/chronicle_feedback_latency_smoke.log",
+      "log_sha256": "c7bd5d1835c72d3941409bbf8288500c2ba3c1e78cad151ca0b383126ea4eb16",
+      "pass_lines": [
+        "CHRONICLE_FEEDBACK_LATENCY_SMOKE PASS checks=20 failures=0"
+      ]
+    },
+    {
+      "entry": "scripts/tests/chronicle_home_menu_render_smoke.gd",
+      "entry_sha256": "3123321c0c86dfe315c0fd6de0facf341b6fe57a43cff6e936b543f796db7ca4",
+      "execution": "fresh_source",
+      "returncode": 0,
+      "returncode_evidence": "exact log body/next stdout heading plus normal set-e/pipefail command and strict validator completion",
+      "strict_failures": [],
+      "log": "/tmp/my-game-repo-maintenance-20261106/candidate-validation/full-logs/chronicle_home_menu_render_smoke.log",
+      "log_sha256": "805fce2d6a166a8308d961868866429ab3031e5cb2837a65dfb765c1e7d6bfed",
+      "pass_lines": [
+        "CHRONICLE_HOME_MENU_RENDER_SMOKE PASS checks=444 failures=0"
+      ]
+    },
+    {
+      "entry": "scripts/tests/chronicle_mechanic_hud_smoke.gd",
+      "entry_sha256": "f88b0d482f5c3f624c6ec7f7f6042d42d6be9cebce921a1c774dc82702c1d2c6",
+      "execution": "fresh_source",
+      "returncode": 0,
+      "returncode_evidence": "exact log body/next stdout heading plus normal set-e/pipefail command and strict validator completion",
+      "strict_failures": [],
+      "log": "/tmp/my-game-repo-maintenance-20261106/candidate-validation/full-logs/chronicle_mechanic_hud_smoke.log",
+      "log_sha256": "d81d85b36bf6cf128acf5d7ad8eb912146705bd5bc087da5a3d14ae7b3841e0f",
+      "pass_lines": [
+        "CHRONICLE_MECHANIC_HUD_SMOKE PASS checks=322 failures=0"
+      ]
+    },
+    {
+      "entry": "scripts/tests/chronicle_melee_reach_smoke.gd",
+      "entry_sha256": "a97c417126cd5e96284120538b5b2818bab20956810c58ef533ef584c0380714",
+      "execution": "fresh_source",
+      "returncode": 0,
+      "returncode_evidence": "exact log body/next stdout heading plus normal set-e/pipefail command and strict validator completion",
+      "strict_failures": [],
+      "log": "/tmp/my-game-repo-maintenance-20261106/candidate-validation/full-logs/chronicle_melee_reach_smoke.log",
+      "log_sha256": "898a1e40caf38e4953d15d072675a31a8aefa44f8cd2b69b8b9dbd1833afc759",
+      "pass_lines": [
+        "CHRONICLE_MELEE_REACH_SMOKE PASS checks=154 failures=0"
+      ]
+    },
+    {
+      "entry": "scripts/tests/chronicle_music_pack_smoke.gd",
+      "entry_sha256": "39f784bb86ada9a9ba4a22855b1664b388919b5ca9753254f347ed22b82393d2",
+      "execution": "fresh_pack",
+      "returncode": 0,
+      "returncode_evidence": "exact log body/next stdout heading plus normal set-e/pipefail command and strict validator completion",
+      "strict_failures": [],
+      "log": "/tmp/my-game-repo-maintenance-20261106/candidate-validation/full-logs/chronicle_music_pack_smoke.log",
+      "log_sha256": "e30e12496eadecdfde3f972d0f2138c4d8d493e6f91ed6e17c6c4def2aa9853f",
+      "pass_lines": [
+        "CHRONICLE_MUSIC_PACK_SMOKE PASS cues=16 checks=170 failures=0"
+      ]
+    },
+    {
+      "entry": "scripts/tests/chronicle_music_playback_smoke.gd",
+      "entry_sha256": "144bb659f43d3b3df9f3933030126c5135e32de1911c94390431d7051d303c66",
+      "execution": "fresh_source",
+      "returncode": 0,
+      "returncode_evidence": "exact log body/next stdout heading plus normal set-e/pipefail command and strict validator completion",
+      "strict_failures": [],
+      "log": "/tmp/my-game-repo-maintenance-20261106/candidate-validation/full-logs/chronicle_music_playback_smoke.log",
+      "log_sha256": "96769c78c5ca3afe23766f0b61c447b740f4790b167b37b238c5a3de169d06e4",
+      "pass_lines": [
+        "CHRONICLE_MUSIC_PLAYBACK_SMOKE PASS checks=65 failures=0 display=X11"
+      ]
+    },
+    {
+      "entry": "scripts/tests/chronicle_music_smoke.gd",
+      "entry_sha256": "a59607808b9e00208cf9a8cba204ca75f59c55becc457869151975253a959879",
+      "execution": "fresh_source",
+      "returncode": 0,
+      "returncode_evidence": "exact log body/next stdout heading plus normal set-e/pipefail command and strict validator completion",
+      "strict_failures": [],
+      "log": "/tmp/my-game-repo-maintenance-20261106/candidate-validation/full-logs/chronicle_music_smoke.log",
+      "log_sha256": "df0a09ea4efcd5efba8b00e8e5722da655d2ba1fdcf7c978ebfc00c19d6c0f04",
+      "pass_lines": [
+        "CHRONICLE_MUSIC_SMOKE PASS checks=2425 failures=0"
+      ]
+    },
+    {
+      "entry": "scripts/tests/chronicle_party_drag_smoke.gd",
+      "entry_sha256": "61c2e60f7e24e30a35cb06a05f06a63c0eeaa1780534619f9269ebc71b2e0899",
+      "execution": "fresh_source",
+      "returncode": 0,
+      "returncode_evidence": "exact log body/next stdout heading plus normal set-e/pipefail command and strict validator completion",
+      "strict_failures": [],
+      "log": "/tmp/my-game-repo-maintenance-20261106/candidate-validation/full-logs/chronicle_party_drag_smoke.log",
+      "log_sha256": "9bde423bbd0a5ab2a056e7f05e78457e062b6a90464448df98bcae1b07f2af72",
+      "pass_lines": [
+        "CHRONICLE_PARTY_DRAG_SMOKE PASS checks=143 failures=0"
+      ]
+    },
+    {
+      "entry": "scripts/tests/chronicle_party_summary_smoke.gd",
+      "entry_sha256": "5e366ab32a67e52af20e741a2bf5b1ffad5997c26b7af7733085e6c1d1d22fc7",
+      "execution": "fresh_source",
+      "returncode": 0,
+      "returncode_evidence": "exact log body/next stdout heading plus normal set-e/pipefail command and strict validator completion",
+      "strict_failures": [],
+      "log": "/tmp/my-game-repo-maintenance-20261106/candidate-validation/full-logs/chronicle_party_summary_smoke.log",
+      "log_sha256": "9dcaf6eddfad29e8032f83f48c82b0f42a63a3f1e63795237cb5dc1e55a666f1",
+      "pass_lines": [
+        "CHRONICLE_PARTY_SUMMARY_SMOKE PASS checks=155 failures=0"
+      ]
+    },
+    {
+      "entry": "scripts/tests/chronicle_playable_ui_smoke.gd",
+      "entry_sha256": "4272561d92c41876d4f5ad7eeb154ea68d7d0f8b9e311e0d9362aa771ed5c728",
+      "execution": "fresh_source",
+      "returncode": 0,
+      "returncode_evidence": "exact log body/next stdout heading plus normal set-e/pipefail command and strict validator completion",
+      "strict_failures": [],
+      "log": "/tmp/my-game-repo-maintenance-20261106/candidate-validation/full-logs/chronicle_playable_ui_smoke.log",
+      "log_sha256": "7ba64be39ac9efc9b52c01e03d506e5b77730fd5010bc2a3c781b2bb917b87ad",
+      "pass_lines": [
+        "CHRONICLE_PLAYABLE_UI_SMOKE PASS failures=0"
+      ]
+    },
+    {
+      "entry": "scripts/tests/chronicle_player_hurtbox_center_smoke.gd",
+      "entry_sha256": "aba43798cf37ec3c3290d9970cdb4de48d4571169c45ff6228db86cbd8bee2cc",
+      "execution": "fresh_source",
+      "returncode": 0,
+      "returncode_evidence": "exact log body/next stdout heading plus normal set-e/pipefail command and strict validator completion",
+      "strict_failures": [],
+      "log": "/tmp/my-game-repo-maintenance-20261106/candidate-validation/full-logs/chronicle_player_hurtbox_center_smoke.log",
+      "log_sha256": "145d495ef7023f4f09d0c0fa45a69ff5d2b60ce21eafadcdf1bd2dd33b1dc04d",
+      "pass_lines": [
+        "CHRONICLE_PLAYER_HURTBOX_CENTER_SMOKE PASS checks=51 failures=0 captures=0"
+      ]
+    },
+    {
+      "entry": "scripts/tests/chronicle_reflow_visual_smoke.gd",
+      "entry_sha256": "efb027c722982594fdb355316e693f3a485360863184624c345a02b7ea3107e4",
+      "execution": "fresh_source",
+      "returncode": 0,
+      "returncode_evidence": "exact log body/next stdout heading plus normal set-e/pipefail command and strict validator completion",
+      "strict_failures": [],
+      "log": "/tmp/my-game-repo-maintenance-20261106/candidate-validation/full-logs/chronicle_reflow_visual_smoke.log",
+      "log_sha256": "42a6d351ea1ff4939ab440f75ceae977601805721bf55bfec70c5e2d9aea1dd1",
+      "pass_lines": [
+        "CHRONICLE_REFLOW_VISUAL_SMOKE PASS"
+      ]
+    },
+    {
+      "entry": "scripts/tests/chronicle_roster_content_smoke.gd",
+      "entry_sha256": "0a3b8bc6713450d2bf7be83da2d1113c202c0c9ddde71a6cbc6a6ef2518fa7bc",
+      "execution": "fresh_source",
+      "returncode": 0,
+      "returncode_evidence": "exact log body/next stdout heading plus normal set-e/pipefail command and strict validator completion",
+      "strict_failures": [],
+      "log": "/tmp/my-game-repo-maintenance-20261106/candidate-validation/full-logs/chronicle_roster_content_smoke.log",
+      "log_sha256": "526478e66deb2e434c6f961488afa5431ff25ce730e43359a3e54e6c97bac70f",
+      "pass_lines": [
+        "CHRONICLE_ROSTER_CONTENT_SMOKE PASS checks=1164 failures=0"
+      ]
+    },
+    {
+      "entry": "scripts/tests/chronicle_route_map_smoke.gd",
+      "entry_sha256": "348fd0c51432934a866b5f885c257aa34d20c3e97c02a9a0cbf9e6e7a7c938af",
+      "execution": "fresh_source",
+      "returncode": 0,
+      "returncode_evidence": "exact log body/next stdout heading plus normal set-e/pipefail command and strict validator completion",
+      "strict_failures": [],
+      "log": "/tmp/my-game-repo-maintenance-20261106/candidate-validation/full-logs/chronicle_route_map_smoke.log",
+      "log_sha256": "44c497df7cd766f143ed055202c2a586b971f6f5d7a3fcfb77a24af273525d49",
+      "pass_lines": [
+        "CHRONICLE_ROUTE_MAP_SMOKE PASS checks=160 failures=0"
+      ]
+    },
+    {
+      "entry": "scripts/tests/chronicle_skill_audio_smoke.gd",
+      "entry_sha256": "261a01909a35b7d909ce901b61414d82f81a85c566ae50d223f4f5f340254dc4",
+      "execution": "fresh_source",
+      "returncode": 0,
+      "returncode_evidence": "exact log body/next stdout heading plus normal set-e/pipefail command and strict validator completion",
+      "strict_failures": [],
+      "log": "/tmp/my-game-repo-maintenance-20261106/candidate-validation/full-logs/chronicle_skill_audio_smoke.log",
+      "log_sha256": "2f3b6dce248aeeb410cd5b161b66dd875f5a35d5a14a88ded26e2a65d52458e2",
+      "pass_lines": [
+        "CHRONICLE_SKILL_AUDIO_SMOKE PASS checks=2249 failures=0"
+      ]
+    },
+    {
+      "entry": "scripts/tests/chronicle_skill_cache_smoke.gd",
+      "entry_sha256": "c9f02b0d451b7a6b1311a4d825b891ad807c909831ee179f641025a23d277c7b",
+      "execution": "fresh_source",
+      "returncode": 0,
+      "returncode_evidence": "exact log body/next stdout heading plus normal set-e/pipefail command and strict validator completion",
+      "strict_failures": [],
+      "log": "/tmp/my-game-repo-maintenance-20261106/candidate-validation/full-logs/chronicle_skill_cache_smoke.log",
+      "log_sha256": "a353aad9582c26c6dbf6489e8aae66944579bd87bc2dc136083b6b8bce9c306b",
+      "pass_lines": [
+        "CHRONICLE_SKILL_CACHE_SMOKE PASS checks=4572 failures=0"
+      ]
+    },
+    {
+      "entry": "scripts/tests/chronicle_skill_information_render_smoke.gd",
+      "entry_sha256": "4b3d2e589e05e4a23007f63226136585602d0ec0dbf24dea200b79d2997dcdd1",
+      "execution": "fresh_source",
+      "returncode": 0,
+      "returncode_evidence": "exact log body/next stdout heading plus normal set-e/pipefail command and strict validator completion",
+      "strict_failures": [],
+      "log": "/tmp/my-game-repo-maintenance-20261106/candidate-validation/full-logs/chronicle_skill_information_render_smoke.log",
+      "log_sha256": "fa977e3c979b35a957f2a0e70aa877fbe571f186b76f99c4e6e127cd17577d76",
+      "pass_lines": [
+        "CHRONICLE_SKILL_INFORMATION_RENDER_SMOKE PASS checks=566 failures=0"
+      ]
+    },
+    {
+      "entry": "scripts/tests/chronicle_skill_information_smoke.gd",
+      "entry_sha256": "ff8f40a0100ee58f84c0d621a54552f6682b9faba036742da83ab9993cb231f1",
+      "execution": "fresh_source",
+      "returncode": 0,
+      "returncode_evidence": "exact log body/next stdout heading plus normal set-e/pipefail command and strict validator completion",
+      "strict_failures": [],
+      "log": "/tmp/my-game-repo-maintenance-20261106/candidate-validation/full-logs/chronicle_skill_information_smoke.log",
+      "log_sha256": "da5dbc36ac65c5c9c6137c5f791b321856e4816e1204227c728194eef510497e",
+      "pass_lines": [
+        "CHRONICLE_SKILL_INFORMATION_SMOKE PASS checks=1575 failures=0"
+      ]
+    },
+    {
+      "entry": "scripts/tests/chronicle_skill_presentation_smoke.gd",
+      "entry_sha256": "b46ccfa67cdc362104a313ff2b8738f4a0b5e9c04a62963480cf91bf67ef10b3",
+      "execution": "fresh_source",
+      "returncode": 0,
+      "returncode_evidence": "exact log body/next stdout heading plus normal set-e/pipefail command and strict validator completion",
+      "strict_failures": [],
+      "log": "/tmp/my-game-repo-maintenance-20261106/candidate-validation/full-logs/chronicle_skill_presentation_smoke.log",
+      "log_sha256": "9a211aaa3b834791c70c9aa2dedf817c80f3c2926d805a1e8c5a320c8462189d",
+      "pass_lines": [
+        "CHRONICLE_SKILL_PRESENTATION_SMOKE PASS checks=3934 failures=0 abilities=137 actors=38 captures=0"
+      ]
+    },
+    {
+      "entry": "scripts/tests/chronicle_sprite_bounds_smoke.gd",
+      "entry_sha256": "94a53577ef611cda35c7bb4e9cf9ffddc01cec61d6c57c7e0ba6aadf77e54669",
+      "execution": "fresh_source",
+      "returncode": 0,
+      "returncode_evidence": "exact log body/next stdout heading plus normal set-e/pipefail command and strict validator completion",
+      "strict_failures": [],
+      "log": "/tmp/my-game-repo-maintenance-20261106/candidate-validation/full-logs/chronicle_sprite_bounds_smoke.log",
+      "log_sha256": "ea29f78b635b6d8bf7cbc3a2818f71a7581cbad9f7620ead5705f02cb48f871c",
+      "pass_lines": []
+    },
+    {
+      "entry": "scripts/tests/chronicle_story_content_smoke.gd",
+      "entry_sha256": "b880ae958c9508564228de461895b20cfff10597d4ad28f4a25c18b7783f3f8f",
+      "execution": "fresh_source",
+      "returncode": 0,
+      "returncode_evidence": "exact log body/next stdout heading plus normal set-e/pipefail command and strict validator completion",
+      "strict_failures": [],
+      "log": "/tmp/my-game-repo-maintenance-20261106/candidate-validation/full-logs/chronicle_story_content_smoke.log",
+      "log_sha256": "de1439fec2ac843d5058af349e9d006596f773fb927567e8884eec40b1d37b9b",
+      "pass_lines": [
+        "CHRONICLE_STORY_CONTENT_SMOKE PASS checks=321 failures=0"
+      ]
+    },
+    {
+      "entry": "scripts/tests/chronicle_story_history_smoke.gd",
+      "entry_sha256": "b47197103e717c382a51d9a93a322ab4cf070d443b52cf6d47e05192717ec448",
+      "execution": "fresh_source",
+      "returncode": 0,
+      "returncode_evidence": "exact log body/next stdout heading plus normal set-e/pipefail command and strict validator completion",
+      "strict_failures": [],
+      "log": "/tmp/my-game-repo-maintenance-20261106/candidate-validation/full-logs/chronicle_story_history_smoke.log",
+      "log_sha256": "31a66e450e4d8eb7a29f30bcb204d630c4e61ff3a7a73289dd1175c990fdc9ff",
+      "pass_lines": [
+        "CHRONICLE_STORY_HISTORY_SMOKE PASS checks=105 failures=0"
+      ]
+    },
+    {
+      "entry": "scripts/tests/chronicle_story_optional_render_smoke.gd",
+      "entry_sha256": "5e20e7dd88ffcc1e5783747b5665331ab2f730f356f977bcd32c24f180935886",
+      "execution": "fresh_source",
+      "returncode": 0,
+      "returncode_evidence": "exact log body/next stdout heading plus normal set-e/pipefail command and strict validator completion",
+      "strict_failures": [],
+      "log": "/tmp/my-game-repo-maintenance-20261106/candidate-validation/full-logs/chronicle_story_optional_render_smoke.log",
+      "log_sha256": "d23f9d04ff2c7bff7562e8e72af93dc6371fa44c65e4b703e89a128ce1605b09",
+      "pass_lines": [
+        "CHRONICLE_STORY_OPTIONAL_RENDER_SMOKE PASS checks=79 failures=0"
+      ]
+    },
+    {
+      "entry": "scripts/tests/chronicle_story_pack_smoke.gd",
+      "entry_sha256": "6446769664b75d4263dff84b071e3a823419546b8f8f79cb5f12f601c7fe2e10",
+      "execution": "fresh_pack",
+      "returncode": 0,
+      "returncode_evidence": "exact log body/next stdout heading plus normal set-e/pipefail command and strict validator completion",
+      "strict_failures": [],
+      "log": "/tmp/my-game-repo-maintenance-20261106/candidate-validation/full-logs/chronicle_story_pack_smoke.log",
+      "log_sha256": "8f0e7db9a231bf53be8fe01c06a2a02864deb7b31b43c434fdfd21823ba32696",
+      "pass_lines": [
+        "CHRONICLE_STORY_PACK_SMOKE PASS checks=99 failures=0"
+      ]
+    },
+    {
+      "entry": "scripts/tests/chronicle_story_progress_smoke.gd",
+      "entry_sha256": "ecb8c0ceb627522afd290c644ef4e645e832c234560b4487e0bac5340fbd7845",
+      "execution": "fresh_source",
+      "returncode": 0,
+      "returncode_evidence": "exact log body/next stdout heading plus normal set-e/pipefail command and strict validator completion",
+      "strict_failures": [],
+      "log": "/tmp/my-game-repo-maintenance-20261106/candidate-validation/full-logs/chronicle_story_progress_smoke.log",
+      "log_sha256": "b0a26d2d929e1dbc425e071237046cafd1199e1b8dd1b302c1168ef739781be7",
+      "pass_lines": [
+        "CHRONICLE_STORY_PROGRESS_SMOKE PASS checks=86 failures=0"
+      ]
+    },
+    {
+      "entry": "scripts/tests/chronicle_story_replay_smoke.gd",
+      "entry_sha256": "6d60d15249c212a8c8712232ac55db60e20c20988dd9e3f94059304dc81e7c90",
+      "execution": "fresh_source",
+      "returncode": 0,
+      "returncode_evidence": "exact log body/next stdout heading plus normal set-e/pipefail command and strict validator completion",
+      "strict_failures": [],
+      "log": "/tmp/my-game-repo-maintenance-20261106/candidate-validation/full-logs/chronicle_story_replay_smoke.log",
+      "log_sha256": "bc44636029b1161f9d48e9e2c8b8bb8e9123bbb04459d23a1ae25b55b352f4ea",
+      "pass_lines": [
+        "CHRONICLE_STORY_REPLAY_SMOKE PASS checks=162 failures=0"
+      ]
+    },
+    {
+      "entry": "scripts/tests/chronicle_story_ui_smoke.gd",
+      "entry_sha256": "5228440441e7797c82c33203b1957a073bae09cff6fd553980db3640f6b28153",
+      "execution": "fresh_source",
+      "returncode": 0,
+      "returncode_evidence": "exact log body/next stdout heading plus normal set-e/pipefail command and strict validator completion",
+      "strict_failures": [],
+      "log": "/tmp/my-game-repo-maintenance-20261106/candidate-validation/full-logs/chronicle_story_ui_smoke.log",
+      "log_sha256": "350fa8a2264a99979edcae9d850e0cff4bf133df85446ee0352b90070e5b7de2",
+      "pass_lines": [
+        "CHRONICLE_STORY_UI_SMOKE PASS checks=111 failures=0"
+      ]
+    },
+    {
+      "entry": "scripts/tests/jia_campaign_combat_smoke.gd",
+      "entry_sha256": "7f50d01984d9e988f3c8ec1ab5e637d2c02f41c9a9ba3bba721c1439255bbfc5",
+      "execution": "fresh_source",
+      "returncode": 0,
+      "returncode_evidence": "exact log body/next stdout heading plus normal set-e/pipefail command and strict validator completion",
+      "strict_failures": [],
+      "log": "/tmp/my-game-repo-maintenance-20261106/candidate-validation/full-logs/jia_campaign_combat_smoke.log",
+      "log_sha256": "50f75023897f7b91909092b030908005589f7fef86132573c20c2e663540e913",
+      "pass_lines": [
+        "JIA_CAMPAIGN_COMBAT_SMOKE PASS checks=172 failures=0"
+      ]
+    },
+    {
+      "entry": "scripts/tests/jia_campaign_progression_smoke.gd",
+      "entry_sha256": "b71092335b9dabc271639a3e02e1db781844af4422b6fd383664249f4e112f25",
+      "execution": "fresh_source",
+      "returncode": 0,
+      "returncode_evidence": "exact log body/next stdout heading plus normal set-e/pipefail command and strict validator completion",
+      "strict_failures": [],
+      "log": "/tmp/my-game-repo-maintenance-20261106/candidate-validation/full-logs/jia_campaign_progression_smoke.log",
+      "log_sha256": "a9228ffe42ac2e5e9c3e5cde3024b9cf6f9ba9042286874b30ccf5819ff5a8ea",
+      "pass_lines": [
+        "JIA_CAMPAIGN_PROGRESSION_SMOKE PASS checks=374 failures=0"
+      ]
+    },
+    {
+      "entry": "scripts/tests/jia_combat_art_smoke.gd",
+      "entry_sha256": "ba90c70ad0b32e2fde4c8501f2e8cf392a7cb91406f849c7e60c4da33d62974e",
+      "execution": "fresh_source",
+      "returncode": 0,
+      "returncode_evidence": "exact log body/next stdout heading plus normal set-e/pipefail command and strict validator completion",
+      "strict_failures": [],
+      "log": "/tmp/my-game-repo-maintenance-20261106/candidate-validation/full-logs/jia_combat_art_smoke.log",
+      "log_sha256": "5949001ea3083e14762e6822acf786bba3c861a3ab50ba8fd0048737db073e84",
+      "pass_lines": [
+        "JIA_COMBAT_ART_SMOKE PASS checks=27 failures=0"
+      ]
+    },
+    {
+      "entry": "scripts/tests/jia_lord_epilogue_smoke.gd",
+      "entry_sha256": "8f4689bb37efbc494ec7b1e8debb2f2e8ebd8943861b80ea6fc7984a97960581",
+      "execution": "fresh_source",
+      "returncode": 0,
+      "returncode_evidence": "exact log body/next stdout heading plus normal set-e/pipefail command and strict validator completion",
+      "strict_failures": [],
+      "log": "/tmp/my-game-repo-maintenance-20261106/candidate-validation/full-logs/jia_lord_epilogue_smoke.log",
+      "log_sha256": "b8b6674037f5b7132461e2ba516cbfb478d716530cd181e1e6fb0151dfeaf9d1",
+      "pass_lines": [
+        "JIA_LORD_EPILOGUE_SMOKE PASS checks=689 failures=0"
+      ]
+    },
+    {
+      "entry": "scripts/tests/zhang_liao_summon_render_smoke.gd",
+      "entry_sha256": "b9ce21bb60aaf9ac6c96f7cdb14f971b2ae8cf55ff59c36772bb578332c8531e",
+      "execution": "fresh_source",
+      "returncode": 0,
+      "returncode_evidence": "exact log body/next stdout heading plus normal set-e/pipefail command and strict validator completion",
+      "strict_failures": [],
+      "log": "/tmp/my-game-repo-maintenance-20261106/candidate-validation/full-logs/zhang_liao_summon_render_smoke.log",
+      "log_sha256": "e6809dd43d93fbd1baac8ceb0ebe4a047f52705b78804b0481fb50fe163bff6d",
+      "pass_lines": [
+        "ZHANG_LIAO_SUMMON_RENDER_SMOKE PASS checks=31078 failures=0 cases=17 frames=3230"
+      ]
+    },
+    {
+      "entry": "scripts/tests/zhang_liao_summon_smoke.gd",
+      "entry_sha256": "dce5dacabe9baf1e1016a617cfbab49180e01af863cfad985bcc7b0b6818b776",
+      "execution": "fresh_source",
+      "returncode": 0,
+      "returncode_evidence": "exact log body/next stdout heading plus normal set-e/pipefail command and strict validator completion",
+      "strict_failures": [],
+      "log": "/tmp/my-game-repo-maintenance-20261106/candidate-validation/full-logs/zhang_liao_summon_smoke.log",
+      "log_sha256": "c181b1b436ce5ab0772850d5fbec044ca54351347f233d400cfca21e71f89963",
+      "pass_lines": [
+        "ZHANG_LIAO_SUMMON_SMOKE PASS checks=4172 failures=0"
+      ]
+    }
+  ]
+}

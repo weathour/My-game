@@ -49,8 +49,10 @@ func encounter_contracts() -> void:
 		var stage := C.stage(id)
 		var director := DIRECTOR.new(stage, stage.seed)
 		director.kills = stage.boss_kills
-		var early := director.tick(.01,0,SPACE.CENTER)
-		expect(early.size() == 1 and early[0].kind == "boss", id + " kill threshold spawns boss immediately")
+		director.tick(.01,0,SPACE.CENTER)
+		expect(not director.boss_spawned, id + " kill threshold respects minimum ordinary encounter time")
+		var early := director.tick(float(stage.get("boss_min_time",0)),0,SPACE.CENTER)
+		expect(early.size() == 1 and early[0].kind == "boss", id + " kill threshold spawns boss once the minimum time is reached")
 		expect(director.tick(20,1,SPACE.CENTER).is_empty(), id + " boss stops ordinary waves")
 		director = DIRECTOR.new(stage, stage.seed)
 		var timed := director.tick(stage.boss_time,0,SPACE.CENTER)

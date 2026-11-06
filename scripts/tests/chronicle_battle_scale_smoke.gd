@@ -63,6 +63,26 @@ func body_bounds(visual: Node2D) -> Rect2:
 	return bounds
 
 func measure(visual: Node2D, expected: float, name: String) -> void:
+	# Per-character roster sheets may include weapons and cloth extending beyond
+	# the torso reference. Measure their manifested body, not the full alpha bbox;
+	# the sheet dimensions/anchor still independently verify the fixed foot.
+	if visual.has_method("body_profile") and visual.get("manifest") is Dictionary:
+		var profile: Vector2 = visual.body_profile()
+		var manifest: Dictionary = visual.get("manifest")
+		var reference_height := float(manifest.get("body_height_px", 0.0))
+		expect(reference_height > 0 and is_equal_approx(profile.x, reference_height), name + " body calibration agrees with its manifest")
+		var fitted_height := profile.x * visual.scale.y
+		metrics.append({"name":name,"height":fitted_height,"ground":visual.position.y + profile.y * visual.scale.y,"body_reference_px":reference_height,"scale":visual.scale.y})
+		expect(absf(fitted_height - expected) < .2, name + " manifested body height follows reference (expected %.2f, got %.2f)" % [expected, fitted_height])
+		var sprite: AnimatedSprite2D = visual.get("sprite")
+		if sprite != null:
+			var clip_name := str(sprite.animation)
+			var clip: Dictionary = manifest.get("clips", {}).get(clip_name, manifest.get("clips", {}).get("idle", {}))
+			var size: Array = clip.get("frame_size", [192,192])
+			var anchor: Array = manifest.get("anchor_px", [96,176])
+			var expected_sprite_position := Vector2(float(size[0]) * .5 - float(anchor[0]), float(size[1]) * .5 - float(anchor[1]))
+			expect(sprite.position.is_equal_approx(expected_sprite_position), name + " manifested frame anchor keeps feet at actor root")
+		return
 	var bounds := body_bounds(visual)
 	metrics.append({"name":name,"height":bounds.size.y,"ground":bounds.end.y})
 	expect(absf(bounds.size.y - expected) < .2, name + " height follows visible body, not frame (expected %.2f, got %.2f)" % [expected, bounds.size.y])

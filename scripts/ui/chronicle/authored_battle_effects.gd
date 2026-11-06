@@ -1,6 +1,10 @@
 extends RefCounted
 ## Pure presentation; combat simulation owns damage, targeting and collision.
 ## Transients survive the simulation's short effect descriptor; only battle time ages them.
+const SKILL := preload("res://scripts/ui/chronicle/skill_presentation.gd")
+const SETTINGS := preload("res://scripts/shared/settings.gd")
+const PROFILES := preload("res://scripts/ui/chronicle/skill_presentation_profiles.gd")
+var skill := SKILL.new()
 const SCENES := {
 	"boom":preload("res://effects/wizard/boom/boom.tscn"),
 	"field":preload("res://effects/wizard/field/field.tscn"),
@@ -8,13 +12,26 @@ const SCENES := {
 	"slash":preload("res://effects/sword/slash3/slasheffect3.tscn"),
 	"fan":preload("res://effects/sword/fan/fan.tscn"),
 }
+const MEDICINE_TRAIL := Color("82d8b0")
+const MEDICINE_CORE := Color("dfffe1")
+const MEDICINE_CROSS := Color("368e74")
+const STAR_COLOR := Color("ffd385")
+const SUPPORT_COLOR := Color("a4d8ff")
+const MAGIC_COLOR := Color("dfb7ff")
 const ICE := preload("res://assets/enemies/skullmage/ice_shard.png")
+# Exact unions of the current imported clip-frame alpha bounds. The dedicated
+# cache smoke compares these against every source frame, so art edits fail fast.
+const CLIP_BOUNDS := {"boom":Rect2i(101,33,57,92),"field":Rect2i(430,622,233,280),"gather":Rect2i(298,399,102,165),"slash":Rect2i(99,30,28,154),"fan":Rect2i(438,396,233,135),"wave":Rect2i(204,224,221,492)}
+static var _clips_cache: Dictionary = {}
 var clips: Dictionary = {}
 var transients: Array[Dictionary] = []
 var seen: Dictionary = {}
 var clock := 0.0
 
 func _init() -> void:
+	if not _clips_cache.is_empty():
+		clips=_clips_cache
+		return
 	for key in SCENES:
 		# Read the PackedScene data, not an instance: authored transforms and
 		# timers are deliberately not inherited by the current combat runtime.
@@ -37,14 +54,15 @@ func _init() -> void:
 		wave.append(load("res://effects/wizard/wave/%d.png" % i))
 		durations.append(1.0 / 14.0)
 	_store_clip("wave", wave, durations)
+	for clip: Dictionary in clips.values():
+		clip.textures.make_read_only();clip.durations.make_read_only();clip.make_read_only()
+	clips.make_read_only()
+	_clips_cache=clips
 
 func _store_clip(key: String, textures: Array[Texture2D], durations: Array[float]) -> void:
-	var bounds := Rect2i()
+	var bounds: Rect2i = CLIP_BOUNDS[key]
 	var total := 0.0
-	for i in textures.size():
-		var used := textures[i].get_image().get_used_rect()
-		bounds = used if i == 0 else bounds.merge(used)
-		total += durations[i]
+	for duration: float in durations: total+=duration
 	var cropped: Array[Texture2D] = []
 	for texture in textures:
 		var atlas := AtlasTexture.new()
@@ -54,43 +72,37 @@ func _store_clip(key: String, textures: Array[Texture2D], durations: Array[float
 	clips[key] = {"textures":cropped, "durations":durations, "duration":total, "bounds":bounds}
 
 static func style(effect: Dictionary) -> String:
-	var source: String = effect.get("source", "")
-	var ability: String = effect.get("ability", "")
-	if source == "F11":
-		if ability == "emma_frost": return "frost"
-		if ability == "emma_ice": return "ice"
-		if ability == "emma_star": return "star"
-		return "support_magic" if not effect.get("direct", true) else "magic"
-	if source == "F03":
-		if ability in ["physician_heal", "physician_support"]: return "heal"
-		if ability == "physician_ward": return "ward"
-		return "medicine"
-	if source == "F07":
-		if ability == "bandit_sweep": return "sweep"
-		if ability == "bandit_thrust": return "thrust"
-		return "sword"
-	return ""
+	var profile:=PROFILES.render_profile(str(effect.get("source","")),str(effect.get("ability","")),int(effect.get("ability_kind",-1)))
+	return str(profile._direct_style if bool(effect.get("direct",true)) else profile._support_style)
 
 func sync(battle: RefCounted) -> void:
+	skill.sync(battle)
 	clock = battle.director.elapsed
 	if not battle.outcome.is_empty():
 		transients.clear()
 		seen.clear()
 		return
-	for effect in battle.effects:
-		if style(effect).is_empty(): continue
-		var key := "%d:%s" % [int(effect.get("cast", 0)), effect.kind]
-		if seen.has(key): continue
-		seen[key] = float(effect.get("visual_time", clock))
-		var entry: Dictionary = effect.duplicate(true)
-		entry["started"] = float(effect.get("visual_time", clock))
-		entry["duration"] = .72 if style(effect) in ["heal", "ward", "frost", "sweep"] else .42
-		transients.append(entry)
+	for effect in battle.effects: _remember(effect)
 	for i in range(transients.size() - 1, -1, -1):
 		if clock - transients[i].started >= transients[i].duration: transients.remove_at(i)
 	# Bound deduplication memory independently of frame refresh frequency.
 	for key in seen.keys():
 		if clock - seen[key] > 3.0: seen.erase(key)
+
+func _remember(effect: Dictionary) -> void:
+	var resolved:=style(effect)
+	if resolved.is_empty(): return
+	var key := SKILL.effect_key(effect)
+	if seen.has(key): return
+	seen[key] = float(effect.get("visual_time",clock))
+	var entry := effect.duplicate(false)
+	if entry.has("effect_kind"): entry.kind=entry.effect_kind
+	if entry.has("beneficiaries"): entry.beneficiaries=entry.beneficiaries.duplicate()
+	entry._style=resolved
+	entry.started = float(effect.get("visual_time",clock))
+	entry.duration = .72 if resolved in ["heal","ward","frost","sweep"] else .42
+	transients.append(entry)
+	while transients.size()>64: transients.pop_front()
 
 func frame_index(key: String, age: float, loop: bool = false) -> int:
 	var clip: Dictionary = clips[key]
@@ -106,8 +118,10 @@ func _texture(painter: Node2D, key: String, age: float, point: Vector2, dimensio
 
 func draw_projectile(painter: Node2D, projectile: Dictionary, origin: Vector2, scale: float) -> bool:
 	if projectile.hostile: return false
-	var kind := style(projectile.context)
-	if kind.is_empty(): return false
+	var profile:=PROFILES.render_profile(str(projectile.context.source),str(projectile.context.ability),int(projectile.context.get("ability_kind",-1)))
+	var kind: String=profile._direct_style if bool(projectile.context.get("direct",true)) else profile._support_style
+	if kind.is_empty(): return skill.draw_projectile(painter,projectile,origin,scale,true,profile)
+	skill.draw_projectile(painter,projectile,origin,scale,false,profile)
 	var point: Vector2 = projectile.position + Vector2(0, -32)
 	var angle: float = projectile.velocity.angle()
 	if kind == "ice":
@@ -115,25 +129,38 @@ func draw_projectile(painter: Node2D, projectile: Dictionary, origin: Vector2, s
 		painter.draw_texture_rect(ICE, Rect2(-10, -19, 20, 38), false, Color.WHITE)
 	elif kind == "medicine":
 		painter.draw_set_transform(origin + point * scale, angle, Vector2.ONE * scale)
-		painter.draw_line(Vector2(-22,0), Vector2.ZERO, Color("82d8b0"), 3, true)
-		painter.draw_circle(Vector2.ZERO, 7, Color("dfffe1"))
-		painter.draw_line(Vector2(-4,0), Vector2(4,0), Color("368e74"), 2)
-		painter.draw_line(Vector2(0,-4), Vector2(0,4), Color("368e74"), 2)
+		painter.draw_line(Vector2(-22,0), Vector2.ZERO, MEDICINE_TRAIL, 3, true)
+		painter.draw_circle(Vector2.ZERO, 7, MEDICINE_CORE)
+		painter.draw_line(Vector2(-4,0), Vector2(4,0), MEDICINE_CROSS, 2)
+		painter.draw_line(Vector2(0,-4), Vector2(0,4), MEDICINE_CROSS, 2)
 	else:
 		var star := kind == "star"
-		var tint := Color("ffd385") if star else Color("a4d8ff") if kind == "support_magic" else Color("dfb7ff")
+		var tint := STAR_COLOR if star else SUPPORT_COLOR if kind == "support_magic" else MAGIC_COLOR
 		_texture(painter, "wave", fposmod(clock, clips.wave.duration), point, Vector2(14 if star else 9, 68 if star else 38), angle - PI * .5, tint, origin, scale)
 		painter.draw_set_transform(origin + point * scale, angle, Vector2.ONE * scale)
 		painter.draw_circle(Vector2.ZERO, 6 if star else 4, tint)
 	return true
 
-func draw(painter: Node2D, battle: RefCounted, origin: Vector2, scale: float) -> void:
+func consume(events: Array, battle: RefCounted) -> void:
+	skill.consume(events,battle)
+	clock=battle.director.elapsed
+	for fact: Dictionary in events:
+		if str(fact.get("kind","")) != "ability_release": continue
+		_remember(fact)
+
+func clear() -> void:
+	transients.clear();seen.clear();skill.clear()
+
+func draw(painter: Node2D, battle: RefCounted, origin: Vector2, scale: float, font: Font = null) -> void:
+	var visible:=SKILL.world_view(painter,origin,scale)
 	for effect in transients:
-		if style(effect) in ["heal", "ward"] and effect.get("beneficiary", "") != battle.current().id and battle.current().id not in effect.get("beneficiaries", []): continue
+		if not SKILL.effect_visible(effect,visible): continue
+		if str(effect._style) in ["heal", "ward"] and effect.get("beneficiary", "") != battle.current().id and battle.current().id not in effect.get("beneficiaries", []): continue
 		_draw_event(painter, effect, origin, scale)
 	# The ward remains on its actual beneficiary, including after switching back.
 	if battle.current().shield > 0 and battle.current().id == "F03":
 		_draw_shield(painter, battle.position, .65 + .1 * sin(clock * 3), origin, scale)
+	skill.draw(painter,battle,origin,scale,font,SETTINGS.comfort_enabled("reduced_motion"),SETTINGS.comfort_enabled("reduced_flash"),visible)
 
 func _draw_shield(painter: Node2D, point: Vector2, alpha: float, origin: Vector2, scale: float) -> void:
 	painter.draw_set_transform(origin + (point + Vector2(0,-35)) * scale, 0, Vector2.ONE * scale)
@@ -142,13 +169,14 @@ func _draw_shield(painter: Node2D, point: Vector2, alpha: float, origin: Vector2
 	painter.draw_polyline(shape, Color(.64,1,.84,alpha), 3, true)
 
 func _draw_event(painter: Node2D, effect: Dictionary, origin: Vector2, scale: float) -> void:
-	var kind := style(effect)
+	var kind: String=effect._style if effect.has("_style") else style(effect)
 	var age: float = maxf(0.0, clock - effect.started)
 	var progress: float = clampf(age / effect.duration, 0, 1)
 	var alpha := minf(1.0, (1.0 - progress) * 3)
 	var point: Vector2 = effect.origin
 	var tint := Color(1,1,1,alpha)
 	if effect.kind == "impact":
+		point += Vector2(0,32-clampf(float(effect.get("body_height",64))*.45,24,96))
 		if kind == "ice":
 			painter.draw_set_transform(origin + (point + Vector2(0,-32)) * scale, age * 2, Vector2.ONE * scale)
 			for i in 6:

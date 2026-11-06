@@ -23,7 +23,7 @@ def main() -> int:
     if len(route) != 36 or len(ids) != 36: failures.append("route must contain 36 unique Chronicle nodes")
     if len(events) != 22: failures.append("main story catalog must cover the 22 authored story nodes")
     if len(optional) != 32: failures.append("character-story catalog must contain 32 authored events")
-    if len(reactions) != 48: failures.append("conditional reaction catalog must contain 48 entries")
+    if len(reactions) != 49: failures.append("conditional reaction catalog must contain 49 entries")
     if not lore: failures.append("read-only lore catalog must not be empty")
     known = {str(person["id"]) for person in characters}
     for group_name, group in (("main", events), ("optional", optional)):

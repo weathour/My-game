@@ -1,0 +1,4228 @@
+{
+  "checks": 1667,
+  "definitions": 43,
+  "encounters": 18,
+  "authored_action_contexts": 87,
+  "move_identity_preserved": true,
+  "base_damage_preserved": true,
+  "duel_preserved": true,
+  "stage_metrics": {
+    "B01": {
+      "cap_before": 28,
+      "cap_after": 58,
+      "kill_gate_before": 28,
+      "kill_gate_after": 90,
+      "waves": [
+        {
+          "at": 0.0,
+          "attempted_bodies_per_second": 5.128,
+          "fodder_fraction": 1.0
+        },
+        {
+          "at": 28.0,
+          "attempted_bodies_per_second": 6.944,
+          "fodder_fraction": 1.0
+        },
+        {
+          "at": 58.0,
+          "attempted_bodies_per_second": 7.576,
+          "fodder_fraction": 1.0
+        }
+      ]
+    },
+    "B02": {
+      "cap_before": 29,
+      "cap_after": 60,
+      "kill_gate_before": 38,
+      "kill_gate_after": 122,
+      "waves": [
+        {
+          "at": 0.0,
+          "attempted_bodies_per_second": 5.208,
+          "fodder_fraction": 0.889
+        },
+        {
+          "at": 28.0,
+          "attempted_bodies_per_second": 7.062,
+          "fodder_fraction": 0.917
+        },
+        {
+          "at": 58.0,
+          "attempted_bodies_per_second": 7.716,
+          "fodder_fraction": 0.917
+        }
+      ]
+    },
+    "B04": {
+      "cap_before": 30,
+      "cap_after": 64,
+      "kill_gate_before": 44,
+      "kill_gate_after": 141,
+      "waves": [
+        {
+          "at": 0.0,
+          "attempted_bodies_per_second": 5.376,
+          "fodder_fraction": 0.889
+        },
+        {
+          "at": 28.0,
+          "attempted_bodies_per_second": 7.31,
+          "fodder_fraction": 0.75
+        },
+        {
+          "at": 58.0,
+          "attempted_bodies_per_second": 8.013,
+          "fodder_fraction": 0.75
+        }
+      ]
+    },
+    "B05": {
+      "cap_before": 31,
+      "cap_after": 66,
+      "kill_gate_before": 36,
+      "kill_gate_after": 115,
+      "waves": [
+        {
+          "at": 0.0,
+          "attempted_bodies_per_second": 5.464,
+          "fodder_fraction": 0.778
+        },
+        {
+          "at": 28.0,
+          "attempted_bodies_per_second": 7.44,
+          "fodder_fraction": 0.75
+        },
+        {
+          "at": 58.0,
+          "attempted_bodies_per_second": 8.17,
+          "fodder_fraction": 0.75
+        }
+      ]
+    },
+    "B03": {
+      "cap_before": 32,
+      "cap_after": 62,
+      "kill_gate_before": 54,
+      "kill_gate_after": 173,
+      "waves": [
+        {
+          "at": 0.0,
+          "attempted_bodies_per_second": 5.291,
+          "fodder_fraction": 0.75
+        },
+        {
+          "at": 28.0,
+          "attempted_bodies_per_second": 7.184,
+          "fodder_fraction": 0.75
+        },
+        {
+          "at": 58.0,
+          "attempted_bodies_per_second": 7.862,
+          "fodder_fraction": 0.75
+        }
+      ]
+    },
+    "B06": {
+      "cap_before": 33,
+      "cap_after": 68,
+      "kill_gate_before": 48,
+      "kill_gate_after": 154,
+      "waves": [
+        {
+          "at": 0.0,
+          "attempted_bodies_per_second": 5.556,
+          "fodder_fraction": 0.667
+        },
+        {
+          "at": 28.0,
+          "attempted_bodies_per_second": 7.576,
+          "fodder_fraction": 0.75
+        },
+        {
+          "at": 58.0,
+          "attempted_bodies_per_second": 8.333,
+          "fodder_fraction": 0.75
+        }
+      ]
+    },
+    "B07": {
+      "cap_before": 34,
+      "cap_after": 70,
+      "kill_gate_before": 45,
+      "kill_gate_after": 144,
+      "waves": [
+        {
+          "at": 0.0,
+          "attempted_bodies_per_second": 7.062,
+          "fodder_fraction": 0.75
+        },
+        {
+          "at": 34.0,
+          "attempted_bodies_per_second": 9.259,
+          "fodder_fraction": 0.75
+        },
+        {
+          "at": 58.0,
+          "attempted_bodies_per_second": 10.204,
+          "fodder_fraction": 0.75
+        }
+      ]
+    },
+    "B08": {
+      "cap_before": 35,
+      "cap_after": 72,
+      "kill_gate_before": 48,
+      "kill_gate_after": 154,
+      "waves": [
+        {
+          "at": 0.0,
+          "attempted_bodies_per_second": 7.184,
+          "fodder_fraction": 0.667
+        },
+        {
+          "at": 34.0,
+          "attempted_bodies_per_second": 9.434,
+          "fodder_fraction": 0.75
+        },
+        {
+          "at": 58.0,
+          "attempted_bodies_per_second": 10.417,
+          "fodder_fraction": 0.75
+        }
+      ]
+    },
+    "B09": {
+      "cap_before": 36,
+      "cap_after": 74,
+      "kill_gate_before": 48,
+      "kill_gate_after": 154,
+      "waves": [
+        {
+          "at": 0.0,
+          "attempted_bodies_per_second": 7.31,
+          "fodder_fraction": 0.778
+        },
+        {
+          "at": 34.0,
+          "attempted_bodies_per_second": 9.615,
+          "fodder_fraction": 0.75
+        },
+        {
+          "at": 58.0,
+          "attempted_bodies_per_second": 10.638,
+          "fodder_fraction": 0.75
+        }
+      ]
+    },
+    "B10": {
+      "cap_before": 37,
+      "cap_after": 76,
+      "kill_gate_before": 54,
+      "kill_gate_after": 173,
+      "waves": [
+        {
+          "at": 0.0,
+          "attempted_bodies_per_second": 7.44,
+          "fodder_fraction": 0.667
+        },
+        {
+          "at": 34.0,
+          "attempted_bodies_per_second": 9.804,
+          "fodder_fraction": 0.75
+        },
+        {
+          "at": 58.0,
+          "attempted_bodies_per_second": 10.87,
+          "fodder_fraction": 0.75
+        }
+      ]
+    },
+    "B11": {
+      "cap_before": 38,
+      "cap_after": 78,
+      "kill_gate_before": 48,
+      "kill_gate_after": 154,
+      "waves": [
+        {
+          "at": 0.0,
+          "attempted_bodies_per_second": 7.576,
+          "fodder_fraction": 0.75
+        },
+        {
+          "at": 34.0,
+          "attempted_bodies_per_second": 10.0,
+          "fodder_fraction": 0.75
+        },
+        {
+          "at": 58.0,
+          "attempted_bodies_per_second": 11.111,
+          "fodder_fraction": 0.75
+        }
+      ]
+    },
+    "B12": {
+      "cap_before": 39,
+      "cap_after": 80,
+      "kill_gate_before": 54,
+      "kill_gate_after": 173,
+      "waves": [
+        {
+          "at": 0.0,
+          "attempted_bodies_per_second": 7.716,
+          "fodder_fraction": 0.778
+        },
+        {
+          "at": 34.0,
+          "attempted_bodies_per_second": 10.204,
+          "fodder_fraction": 0.667
+        },
+        {
+          "at": 58.0,
+          "attempted_bodies_per_second": 11.364,
+          "fodder_fraction": 0.667
+        }
+      ]
+    },
+    "B13": {
+      "cap_before": 40,
+      "cap_after": 82,
+      "kill_gate_before": 52,
+      "kill_gate_after": 166,
+      "waves": [
+        {
+          "at": 0.0,
+          "attempted_bodies_per_second": 9.434,
+          "fodder_fraction": 0.667
+        },
+        {
+          "at": 34.0,
+          "attempted_bodies_per_second": 12.153,
+          "fodder_fraction": 0.75
+        },
+        {
+          "at": 58.0,
+          "attempted_bodies_per_second": 13.566,
+          "fodder_fraction": 0.75
+        }
+      ]
+    },
+    "B14": {
+      "cap_before": 41,
+      "cap_after": 84,
+      "kill_gate_before": 52,
+      "kill_gate_after": 166,
+      "waves": [
+        {
+          "at": 0.0,
+          "attempted_bodies_per_second": 9.615,
+          "fodder_fraction": 0.75
+        },
+        {
+          "at": 34.0,
+          "attempted_bodies_per_second": 12.411,
+          "fodder_fraction": 0.75
+        },
+        {
+          "at": 58.0,
+          "attempted_bodies_per_second": 13.889,
+          "fodder_fraction": 0.75
+        }
+      ]
+    },
+    "B15": {
+      "cap_before": 42,
+      "cap_after": 86,
+      "kill_gate_before": 56,
+      "kill_gate_after": 179,
+      "waves": [
+        {
+          "at": 0.0,
+          "attempted_bodies_per_second": 9.804,
+          "fodder_fraction": 0.75
+        },
+        {
+          "at": 34.0,
+          "attempted_bodies_per_second": 12.681,
+          "fodder_fraction": 0.667
+        },
+        {
+          "at": 58.0,
+          "attempted_bodies_per_second": 14.228,
+          "fodder_fraction": 0.667
+        }
+      ]
+    },
+    "B16": {
+      "cap_before": 42,
+      "cap_after": 88,
+      "kill_gate_before": 60,
+      "kill_gate_after": 192,
+      "waves": [
+        {
+          "at": 0.0,
+          "attempted_bodies_per_second": 10.0,
+          "fodder_fraction": 0.75
+        },
+        {
+          "at": 34.0,
+          "attempted_bodies_per_second": 12.963,
+          "fodder_fraction": 0.667
+        },
+        {
+          "at": 58.0,
+          "attempted_bodies_per_second": 14.583,
+          "fodder_fraction": 0.667
+        }
+      ]
+    },
+    "B17": {
+      "cap_before": 42,
+      "cap_after": 90,
+      "kill_gate_before": 60,
+      "kill_gate_after": 192,
+      "waves": [
+        {
+          "at": 0.0,
+          "attempted_bodies_per_second": 10.204,
+          "fodder_fraction": 0.667
+        },
+        {
+          "at": 34.0,
+          "attempted_bodies_per_second": 13.258,
+          "fodder_fraction": 0.75
+        },
+        {
+          "at": 58.0,
+          "attempted_bodies_per_second": 14.957,
+          "fodder_fraction": 0.75
+        }
+      ]
+    },
+    "B18": {
+      "cap_before": 0,
+      "cap_after": 0,
+      "kill_gate_before": 0,
+      "kill_gate_after": 0,
+      "waves": []
+    }
+  },
+  "action_changes": [
+    {
+      "context": [
+        "E01",
+        0,
+        0
+      ],
+      "before": {
+        "id": "swipe",
+        "action": "swipe",
+        "shape": "sector",
+        "range": 48,
+        "windup": 0.5,
+        "recovery": 1.0,
+        "damage_scale": 1.0,
+        "radius": 48,
+        "spread": 1.8
+      },
+      "after": {
+        "id": "swipe",
+        "action": "swipe",
+        "shape": "sector",
+        "range": 48,
+        "windup": 0.45,
+        "recovery": 0.7,
+        "damage_scale": 1.0,
+        "radius": 48,
+        "spread": 1.8,
+        "warning_policy": "area"
+      }
+    },
+    {
+      "context": [
+        "E02",
+        0,
+        0
+      ],
+      "before": {
+        "id": "shot",
+        "action": "shot",
+        "shape": "line",
+        "range": 430,
+        "windup": 0.9,
+        "recovery": 1.25,
+        "damage_scale": 1.0,
+        "length": 430,
+        "half_width": 7,
+        "speed": 250,
+        "life": 2.2,
+        "major": true
+      },
+      "after": {
+        "id": "shot",
+        "action": "shot",
+        "shape": "line",
+        "range": 850,
+        "windup": 0.7,
+        "recovery": 0.875,
+        "damage_scale": 1.0,
+        "length": 850,
+        "half_width": 7,
+        "speed": 245,
+        "life": 3.5,
+        "major": true,
+        "warning_policy": "none",
+        "bullet_style": "needle",
+        "hit_radius": 4.0,
+        "burst_count": 2,
+        "burst_interval": 0.4,
+        "angle_step": 0.1,
+        "aim_each_burst": false
+      }
+    },
+    {
+      "context": [
+        "E03",
+        0,
+        0
+      ],
+      "before": {
+        "id": "charge",
+        "action": "charge",
+        "shape": "line",
+        "range": 310,
+        "windup": 1.0,
+        "recovery": 1.4,
+        "damage_scale": 1.0,
+        "length": 270,
+        "half_width": 18,
+        "major": true
+      },
+      "after": {
+        "id": "charge",
+        "action": "charge",
+        "shape": "line",
+        "range": 540,
+        "windup": 0.85,
+        "recovery": 0.98,
+        "damage_scale": 1.0,
+        "length": 500,
+        "half_width": 25,
+        "major": true,
+        "warning_policy": "area"
+      }
+    },
+    {
+      "context": [
+        "E04",
+        0,
+        0
+      ],
+      "before": {
+        "id": "swipe",
+        "action": "swipe",
+        "shape": "sector",
+        "range": 65,
+        "windup": 0.6,
+        "recovery": 1.35,
+        "damage_scale": 1.0,
+        "radius": 65,
+        "spread": 1.8
+      },
+      "after": {
+        "id": "swipe",
+        "action": "swipe",
+        "shape": "sector",
+        "range": 65,
+        "windup": 0.54,
+        "recovery": 0.945,
+        "damage_scale": 1.0,
+        "radius": 65,
+        "spread": 1.8,
+        "warning_policy": "area"
+      }
+    },
+    {
+      "context": [
+        "E05",
+        0,
+        0
+      ],
+      "before": {
+        "id": "fan",
+        "action": "fan",
+        "shape": "fan",
+        "range": 390,
+        "windup": 1.1,
+        "recovery": 1.4,
+        "damage_scale": 1.0,
+        "count": 5,
+        "spread": 1.2,
+        "speed": 210,
+        "life": 2.2,
+        "major": true
+      },
+      "after": {
+        "id": "fan",
+        "action": "fan",
+        "shape": "fan",
+        "range": 820,
+        "windup": 0.85,
+        "recovery": 0.98,
+        "damage_scale": 1.0,
+        "count": 7,
+        "spread": 2.0,
+        "speed": 190,
+        "life": 4.4,
+        "major": true,
+        "warning_policy": "none",
+        "bullet_style": "orb",
+        "hit_radius": 4.0,
+        "burst_count": 2,
+        "burst_interval": 0.4,
+        "angle_step": 0.1,
+        "aim_each_burst": false
+      }
+    },
+    {
+      "context": [
+        "E06",
+        0,
+        0
+      ],
+      "before": {
+        "id": "pot",
+        "action": "pot",
+        "shape": "marker",
+        "range": 330,
+        "windup": 1.1,
+        "recovery": 1.5,
+        "damage_scale": 1.0,
+        "radius": 54,
+        "delay": 0.7,
+        "duration": 2.4,
+        "limit": 1,
+        "major": true
+      },
+      "after": {
+        "id": "pot",
+        "action": "pot",
+        "shape": "marker",
+        "range": 750,
+        "windup": 1.0,
+        "recovery": 1.05,
+        "damage_scale": 1.0,
+        "radius": 90,
+        "delay": 0.7,
+        "duration": 2.0,
+        "limit": 1,
+        "major": true,
+        "warning_policy": "area",
+        "marker_count": 1,
+        "marker_spacing": 175,
+        "marker_delay": 0.3
+      }
+    },
+    {
+      "context": [
+        "E07",
+        0,
+        0
+      ],
+      "before": {
+        "id": "command",
+        "action": "command",
+        "shape": "disc",
+        "range": 290,
+        "windup": 1.0,
+        "recovery": 1.5,
+        "damage_scale": 1.0,
+        "count": 3,
+        "duration": 3.0,
+        "major": true
+      },
+      "after": {
+        "id": "command",
+        "action": "command",
+        "shape": "disc",
+        "range": 290,
+        "windup": 0.85,
+        "recovery": 1.05,
+        "damage_scale": 1.0,
+        "count": 3,
+        "duration": 3.0,
+        "major": true,
+        "warning_policy": "area"
+      }
+    },
+    {
+      "context": [
+        "E07",
+        0,
+        1
+      ],
+      "before": {
+        "id": "swipe",
+        "action": "swipe",
+        "shape": "sector",
+        "range": 48,
+        "windup": 0.5,
+        "recovery": 1.0,
+        "damage_scale": 1.0,
+        "radius": 48,
+        "spread": 1.8
+      },
+      "after": {
+        "id": "swipe",
+        "action": "swipe",
+        "shape": "sector",
+        "range": 48,
+        "windup": 0.45,
+        "recovery": 0.7,
+        "damage_scale": 1.0,
+        "radius": 48,
+        "spread": 1.8,
+        "warning_policy": "area"
+      }
+    },
+    {
+      "context": [
+        "E08",
+        0,
+        0
+      ],
+      "before": {
+        "id": "heal",
+        "action": "heal",
+        "shape": "disc",
+        "range": 230,
+        "windup": 1.1,
+        "recovery": 1.6,
+        "damage_scale": 1.0,
+        "count": 2,
+        "major": true
+      },
+      "after": {
+        "id": "heal",
+        "action": "heal",
+        "shape": "disc",
+        "range": 230,
+        "windup": 0.935,
+        "recovery": 1.12,
+        "damage_scale": 1.0,
+        "count": 2,
+        "major": true,
+        "warning_policy": "area"
+      }
+    },
+    {
+      "context": [
+        "E08",
+        0,
+        1
+      ],
+      "before": {
+        "id": "swipe",
+        "action": "swipe",
+        "shape": "sector",
+        "range": 48,
+        "windup": 0.5,
+        "recovery": 1.0,
+        "damage_scale": 1.0,
+        "radius": 48,
+        "spread": 1.8
+      },
+      "after": {
+        "id": "swipe",
+        "action": "swipe",
+        "shape": "sector",
+        "range": 48,
+        "windup": 0.45,
+        "recovery": 0.7,
+        "damage_scale": 1.0,
+        "radius": 48,
+        "spread": 1.8,
+        "warning_policy": "area"
+      }
+    },
+    {
+      "context": [
+        "E09",
+        0,
+        0
+      ],
+      "before": {
+        "id": "slam",
+        "action": "slam",
+        "shape": "sector",
+        "range": 110,
+        "windup": 1.2,
+        "recovery": 1.4,
+        "damage_scale": 1.0,
+        "radius": 110,
+        "spread": 1.8,
+        "major": true
+      },
+      "after": {
+        "id": "slam",
+        "action": "slam",
+        "shape": "sector",
+        "range": 143.0,
+        "windup": 1.2,
+        "recovery": 1.05,
+        "damage_scale": 1.0,
+        "radius": 143.0,
+        "spread": 1.8,
+        "major": true,
+        "warning_policy": "area",
+        "secondary_pattern": {
+          "kind": "ring",
+          "count": 16,
+          "speed": 145,
+          "life": 5.0,
+          "hit_radius": 4.5,
+          "burst_count": 1,
+          "burst_interval": 0.34,
+          "angle_step": 0.1,
+          "angle_offset": 0.0,
+          "aim_each_burst": false,
+          "bullet_style": "orb",
+          "gap_width": 1.5,
+          "gap_angle_offset": 0.65
+        }
+      }
+    },
+    {
+      "context": [
+        "E09",
+        0,
+        1
+      ],
+      "before": {
+        "id": "slam",
+        "action": "slam",
+        "shape": "sector",
+        "range": 130,
+        "windup": 1.0,
+        "recovery": 1.6,
+        "damage_scale": 1.0,
+        "radius": 130,
+        "spread": 1.6,
+        "major": true
+      },
+      "after": {
+        "id": "slam",
+        "action": "slam",
+        "shape": "sector",
+        "range": 169.0,
+        "windup": 1.0,
+        "recovery": 1.2,
+        "damage_scale": 1.0,
+        "radius": 169.0,
+        "spread": 1.6,
+        "major": true,
+        "warning_policy": "area",
+        "secondary_pattern": {
+          "kind": "ring",
+          "count": 16,
+          "speed": 145,
+          "life": 5.0,
+          "hit_radius": 4.5,
+          "burst_count": 1,
+          "burst_interval": 0.34,
+          "angle_step": 0.1,
+          "angle_offset": 0.0,
+          "aim_each_burst": false,
+          "bullet_style": "orb",
+          "gap_width": 1.5,
+          "gap_angle_offset": 0.65
+        }
+      }
+    },
+    {
+      "context": [
+        "E10",
+        0,
+        0
+      ],
+      "before": {
+        "id": "hook",
+        "action": "hook",
+        "shape": "line",
+        "range": 300,
+        "windup": 1.2,
+        "recovery": 1.6,
+        "damage_scale": 1.0,
+        "length": 280,
+        "half_width": 24,
+        "slow": 0.25,
+        "duration": 2.0,
+        "major": true
+      },
+      "after": {
+        "id": "hook",
+        "action": "hook",
+        "shape": "line",
+        "range": 600,
+        "windup": 0.95,
+        "recovery": 1.2,
+        "damage_scale": 1.0,
+        "length": 560,
+        "half_width": 36,
+        "slow": 0.25,
+        "duration": 1.6,
+        "major": true,
+        "warning_policy": "area"
+      }
+    },
+    {
+      "context": [
+        "E11",
+        0,
+        0
+      ],
+      "before": {
+        "id": "summon",
+        "action": "summon",
+        "shape": "disc",
+        "range": 250,
+        "windup": 1.3,
+        "recovery": 1.6,
+        "damage_scale": 1.0,
+        "spawn_id": "D05",
+        "spawn_count": 2,
+        "limit": 4,
+        "major": true
+      },
+      "after": {
+        "id": "summon",
+        "action": "summon",
+        "shape": "disc",
+        "range": 250,
+        "windup": 1.105,
+        "recovery": 1.2,
+        "damage_scale": 1.0,
+        "spawn_id": "D05",
+        "spawn_count": 2,
+        "limit": 4,
+        "major": true,
+        "warning_policy": "area"
+      }
+    },
+    {
+      "context": [
+        "E11",
+        0,
+        1
+      ],
+      "before": {
+        "id": "swipe",
+        "action": "swipe",
+        "shape": "sector",
+        "range": 48,
+        "windup": 0.5,
+        "recovery": 1.0,
+        "damage_scale": 1.0,
+        "radius": 48,
+        "spread": 1.8
+      },
+      "after": {
+        "id": "swipe",
+        "action": "swipe",
+        "shape": "sector",
+        "range": 48,
+        "windup": 0.45,
+        "recovery": 0.75,
+        "damage_scale": 1.0,
+        "radius": 48,
+        "spread": 1.8,
+        "warning_policy": "area"
+      }
+    },
+    {
+      "context": [
+        "E12",
+        0,
+        0
+      ],
+      "before": {
+        "id": "stele_arc_1",
+        "action": "slam",
+        "shape": "sector",
+        "range": 130,
+        "radius": 130,
+        "windup": 1.2,
+        "recovery": 1.2,
+        "damage_scale": 1.0,
+        "spread": 1.7,
+        "major": true
+      },
+      "after": {
+        "id": "stele_arc_1",
+        "action": "slam",
+        "shape": "sector",
+        "range": 169.0,
+        "radius": 169.0,
+        "windup": 1.2,
+        "recovery": 0.9,
+        "damage_scale": 1.0,
+        "spread": 1.7,
+        "major": true,
+        "warning_policy": "area",
+        "secondary_pattern": {
+          "kind": "ring",
+          "count": 16,
+          "speed": 145,
+          "life": 5.0,
+          "hit_radius": 4.5,
+          "burst_count": 1,
+          "burst_interval": 0.34,
+          "angle_step": 0.1,
+          "angle_offset": 0.0,
+          "aim_each_burst": false,
+          "bullet_style": "orb",
+          "gap_width": 1.5,
+          "gap_angle_offset": 0.65
+        }
+      }
+    },
+    {
+      "context": [
+        "E12",
+        0,
+        1
+      ],
+      "before": {
+        "id": "stele_arc_2",
+        "action": "slam",
+        "shape": "sector",
+        "range": 150,
+        "radius": 150,
+        "windup": 1.2,
+        "recovery": 1.4,
+        "damage_scale": 1.0,
+        "spread": 1.5,
+        "major": true
+      },
+      "after": {
+        "id": "stele_arc_2",
+        "action": "slam",
+        "shape": "sector",
+        "range": 195.0,
+        "radius": 195.0,
+        "windup": 1.2,
+        "recovery": 1.05,
+        "damage_scale": 1.0,
+        "spread": 1.5,
+        "major": true,
+        "warning_policy": "area",
+        "secondary_pattern": {
+          "kind": "ring",
+          "count": 16,
+          "speed": 145,
+          "life": 5.0,
+          "hit_radius": 4.5,
+          "burst_count": 1,
+          "burst_interval": 0.34,
+          "angle_step": 0.1,
+          "angle_offset": 0.0,
+          "aim_each_burst": false,
+          "bullet_style": "orb",
+          "gap_width": 1.5,
+          "gap_angle_offset": 0.65
+        }
+      }
+    },
+    {
+      "context": [
+        "E12",
+        0,
+        2
+      ],
+      "before": {
+        "id": "pulse",
+        "action": "pulse",
+        "shape": "ring_gap",
+        "range": 180,
+        "windup": 1.4,
+        "recovery": 1.6,
+        "damage_scale": 1.0,
+        "radius": 180,
+        "gap_angle": 0.0,
+        "gap_width": 1.4,
+        "major": true
+      },
+      "after": {
+        "id": "pulse",
+        "action": "pulse",
+        "shape": "ring_gap",
+        "range": 234.0,
+        "windup": 1.4,
+        "recovery": 1.2,
+        "damage_scale": 1.0,
+        "radius": 234.0,
+        "gap_angle": 0.0,
+        "gap_width": 1.4,
+        "major": true,
+        "warning_policy": "area",
+        "secondary_pattern": {
+          "kind": "ring",
+          "count": 22,
+          "speed": 145,
+          "life": 5.0,
+          "hit_radius": 4.5,
+          "burst_count": 1,
+          "burst_interval": 0.34,
+          "angle_step": 0.1,
+          "angle_offset": 0.0,
+          "aim_each_burst": false,
+          "bullet_style": "orb",
+          "gap_width": 1.5,
+          "gap_angle_offset": 0.65
+        }
+      }
+    },
+    {
+      "context": [
+        "L00",
+        0,
+        0
+      ],
+      "before": {
+        "id": "swipe",
+        "action": "swipe",
+        "shape": "sector",
+        "range": 48,
+        "windup": 0.5,
+        "recovery": 1.0,
+        "damage_scale": 1.0,
+        "radius": 48,
+        "spread": 1.8
+      },
+      "after": {
+        "id": "swipe",
+        "action": "swipe",
+        "shape": "sector",
+        "range": 48,
+        "windup": 0.45,
+        "recovery": 0.75,
+        "damage_scale": 1.0,
+        "radius": 48,
+        "spread": 1.8,
+        "warning_policy": "area"
+      }
+    },
+    {
+      "context": [
+        "L01",
+        0,
+        0
+      ],
+      "before": {
+        "id": "command",
+        "action": "command",
+        "shape": "disc",
+        "range": 290,
+        "windup": 1.0,
+        "recovery": 1.5,
+        "damage_scale": 1.0,
+        "count": 3,
+        "duration": 3.0,
+        "major": true
+      },
+      "after": {
+        "id": "command",
+        "action": "command",
+        "shape": "disc",
+        "range": 290,
+        "windup": 0.85,
+        "recovery": 1.125,
+        "damage_scale": 1.0,
+        "count": 3,
+        "duration": 3.0,
+        "major": true,
+        "warning_policy": "area"
+      }
+    },
+    {
+      "context": [
+        "L01",
+        0,
+        1
+      ],
+      "before": {
+        "id": "swipe",
+        "action": "swipe",
+        "shape": "sector",
+        "range": 48,
+        "windup": 0.5,
+        "recovery": 1.0,
+        "damage_scale": 1.0,
+        "radius": 48,
+        "spread": 1.8
+      },
+      "after": {
+        "id": "swipe",
+        "action": "swipe",
+        "shape": "sector",
+        "range": 48,
+        "windup": 0.45,
+        "recovery": 0.75,
+        "damage_scale": 1.0,
+        "radius": 48,
+        "spread": 1.8,
+        "warning_policy": "area"
+      }
+    },
+    {
+      "context": [
+        "L02",
+        0,
+        0
+      ],
+      "before": {
+        "id": "fan",
+        "action": "fan",
+        "shape": "fan",
+        "range": 390,
+        "windup": 1.1,
+        "recovery": 1.4,
+        "damage_scale": 1.0,
+        "count": 5,
+        "spread": 1.2,
+        "speed": 210,
+        "life": 2.2,
+        "major": true
+      },
+      "after": {
+        "id": "fan",
+        "action": "fan",
+        "shape": "fan",
+        "range": 820,
+        "windup": 0.85,
+        "recovery": 1.05,
+        "damage_scale": 1.0,
+        "count": 9,
+        "spread": 2.0,
+        "speed": 190,
+        "life": 4.4,
+        "major": true,
+        "warning_policy": "none",
+        "bullet_style": "orb",
+        "hit_radius": 4.0,
+        "burst_count": 2,
+        "burst_interval": 0.4,
+        "angle_step": 0.1,
+        "aim_each_burst": false
+      }
+    },
+    {
+      "context": [
+        "L03",
+        0,
+        0
+      ],
+      "before": {
+        "id": "swipe",
+        "action": "swipe",
+        "shape": "sector",
+        "range": 65,
+        "windup": 0.6,
+        "recovery": 1.35,
+        "damage_scale": 1.0,
+        "radius": 65,
+        "spread": 1.8
+      },
+      "after": {
+        "id": "swipe",
+        "action": "swipe",
+        "shape": "sector",
+        "range": 65,
+        "windup": 0.54,
+        "recovery": 1.013,
+        "damage_scale": 1.0,
+        "radius": 65,
+        "spread": 1.8,
+        "warning_policy": "area"
+      }
+    },
+    {
+      "context": [
+        "L04",
+        0,
+        0
+      ],
+      "before": {
+        "id": "summon",
+        "action": "summon",
+        "shape": "disc",
+        "range": 250,
+        "windup": 1.3,
+        "recovery": 1.6,
+        "damage_scale": 1.0,
+        "spawn_id": "D05",
+        "spawn_count": 2,
+        "limit": 4,
+        "major": true
+      },
+      "after": {
+        "id": "summon",
+        "action": "summon",
+        "shape": "disc",
+        "range": 250,
+        "windup": 1.105,
+        "recovery": 1.2,
+        "damage_scale": 1.0,
+        "spawn_id": "D05",
+        "spawn_count": 2,
+        "limit": 4,
+        "major": true,
+        "warning_policy": "area"
+      }
+    },
+    {
+      "context": [
+        "L04",
+        0,
+        1
+      ],
+      "before": {
+        "id": "swipe",
+        "action": "swipe",
+        "shape": "sector",
+        "range": 48,
+        "windup": 0.5,
+        "recovery": 1.0,
+        "damage_scale": 1.0,
+        "radius": 48,
+        "spread": 1.8
+      },
+      "after": {
+        "id": "swipe",
+        "action": "swipe",
+        "shape": "sector",
+        "range": 48,
+        "windup": 0.45,
+        "recovery": 0.75,
+        "damage_scale": 1.0,
+        "radius": 48,
+        "spread": 1.8,
+        "warning_policy": "area"
+      }
+    },
+    {
+      "context": [
+        "L05",
+        0,
+        0
+      ],
+      "before": {
+        "id": "hook",
+        "action": "hook",
+        "shape": "line",
+        "range": 300,
+        "windup": 1.2,
+        "recovery": 1.6,
+        "damage_scale": 1.0,
+        "length": 280,
+        "half_width": 24,
+        "slow": 0.25,
+        "duration": 2.0,
+        "major": true
+      },
+      "after": {
+        "id": "hook",
+        "action": "hook",
+        "shape": "line",
+        "range": 600,
+        "windup": 0.95,
+        "recovery": 1.2,
+        "damage_scale": 1.0,
+        "length": 560,
+        "half_width": 36,
+        "slow": 0.25,
+        "duration": 1.6,
+        "major": true,
+        "warning_policy": "area",
+        "secondary_pattern": {
+          "kind": "fan",
+          "count": 9,
+          "speed": 180,
+          "life": 5.0,
+          "hit_radius": 4.5,
+          "burst_count": 2,
+          "burst_interval": 0.34,
+          "angle_step": 0.1,
+          "angle_offset": 0.0,
+          "aim_each_burst": false,
+          "bullet_style": "orb",
+          "spread": 2.4
+        }
+      }
+    },
+    {
+      "context": [
+        "L06",
+        0,
+        0
+      ],
+      "before": {
+        "id": "slam",
+        "action": "slam",
+        "shape": "sector",
+        "range": 110,
+        "windup": 1.2,
+        "recovery": 1.4,
+        "damage_scale": 1.0,
+        "radius": 110,
+        "spread": 1.8,
+        "major": true
+      },
+      "after": {
+        "id": "slam",
+        "action": "slam",
+        "shape": "sector",
+        "range": 143.0,
+        "windup": 1.2,
+        "recovery": 1.05,
+        "damage_scale": 1.0,
+        "radius": 143.0,
+        "spread": 1.8,
+        "major": true,
+        "warning_policy": "area",
+        "secondary_pattern": {
+          "kind": "ring",
+          "count": 16,
+          "speed": 145,
+          "life": 5.0,
+          "hit_radius": 4.5,
+          "burst_count": 1,
+          "burst_interval": 0.34,
+          "angle_step": 0.1,
+          "angle_offset": 0.0,
+          "aim_each_burst": false,
+          "bullet_style": "orb",
+          "gap_width": 1.5,
+          "gap_angle_offset": 0.65
+        }
+      }
+    },
+    {
+      "context": [
+        "L06",
+        0,
+        1
+      ],
+      "before": {
+        "id": "slam",
+        "action": "slam",
+        "shape": "sector",
+        "range": 130,
+        "windup": 1.0,
+        "recovery": 1.6,
+        "damage_scale": 1.0,
+        "radius": 130,
+        "spread": 1.6,
+        "major": true
+      },
+      "after": {
+        "id": "slam",
+        "action": "slam",
+        "shape": "sector",
+        "range": 169.0,
+        "windup": 1.0,
+        "recovery": 1.2,
+        "damage_scale": 1.0,
+        "radius": 169.0,
+        "spread": 1.6,
+        "major": true,
+        "warning_policy": "area",
+        "secondary_pattern": {
+          "kind": "ring",
+          "count": 16,
+          "speed": 145,
+          "life": 5.0,
+          "hit_radius": 4.5,
+          "burst_count": 1,
+          "burst_interval": 0.34,
+          "angle_step": 0.1,
+          "angle_offset": 0.0,
+          "aim_each_burst": false,
+          "bullet_style": "orb",
+          "gap_width": 1.5,
+          "gap_angle_offset": 0.65
+        }
+      }
+    },
+    {
+      "context": [
+        "B01",
+        0,
+        0
+      ],
+      "before": {
+        "id": "swipe",
+        "action": "swipe",
+        "shape": "sector",
+        "range": 120,
+        "windup": 1.15,
+        "recovery": 1.8,
+        "damage_scale": 1.0,
+        "radius": 120,
+        "spread": 2.0,
+        "major": true
+      },
+      "after": {
+        "id": "swipe",
+        "action": "swipe",
+        "shape": "sector",
+        "range": 270,
+        "windup": 1.35,
+        "recovery": 1.008,
+        "damage_scale": 1.0,
+        "radius": 270,
+        "spread": 2.35,
+        "major": true,
+        "warning_policy": "area",
+        "secondary_pattern": {
+          "kind": "ring",
+          "count": 18,
+          "speed": 155,
+          "life": 5.0,
+          "hit_radius": 4.5,
+          "burst_count": 1,
+          "burst_interval": 0.34,
+          "angle_step": 0.1,
+          "angle_offset": 0.0,
+          "aim_each_burst": false,
+          "bullet_style": "orb",
+          "gap_width": 1.2,
+          "gap_angle_offset": 0.65
+        }
+      }
+    },
+    {
+      "context": [
+        "B02",
+        0,
+        0
+      ],
+      "before": {
+        "id": "swipe",
+        "action": "swipe",
+        "shape": "sector",
+        "range": 120,
+        "windup": 1.15,
+        "recovery": 1.8,
+        "damage_scale": 1.0,
+        "radius": 120,
+        "spread": 2.0,
+        "major": true
+      },
+      "after": {
+        "id": "swipe",
+        "action": "swipe",
+        "shape": "sector",
+        "range": 270,
+        "windup": 1.35,
+        "recovery": 1.008,
+        "damage_scale": 1.0,
+        "radius": 270,
+        "spread": 2.35,
+        "major": true,
+        "warning_policy": "area",
+        "secondary_pattern": {
+          "kind": "ring",
+          "count": 18,
+          "speed": 155,
+          "life": 5.0,
+          "hit_radius": 4.5,
+          "burst_count": 1,
+          "burst_interval": 0.34,
+          "angle_step": 0.1,
+          "angle_offset": 0.0,
+          "aim_each_burst": false,
+          "bullet_style": "orb",
+          "gap_width": 1.2,
+          "gap_angle_offset": 0.65
+        }
+      }
+    },
+    {
+      "context": [
+        "B03",
+        0,
+        0
+      ],
+      "before": {
+        "id": "charge",
+        "action": "charge",
+        "shape": "line",
+        "range": 420,
+        "windup": 1.3,
+        "recovery": 2.1,
+        "damage_scale": 1.0,
+        "length": 340,
+        "half_width": 32,
+        "major": true
+      },
+      "after": {
+        "id": "charge",
+        "action": "charge",
+        "shape": "line",
+        "range": 780,
+        "windup": 1.2,
+        "recovery": 1.176,
+        "damage_scale": 1.0,
+        "length": 780,
+        "half_width": 58,
+        "major": true,
+        "warning_policy": "area",
+        "secondary_pattern": {
+          "kind": "fan",
+          "count": 17,
+          "speed": 200,
+          "life": 5.0,
+          "hit_radius": 4.5,
+          "burst_count": 2,
+          "burst_interval": 0.34,
+          "angle_step": 0.15,
+          "angle_offset": 0.0,
+          "aim_each_burst": false,
+          "bullet_style": "orb",
+          "spread": 3.6
+        }
+      }
+    },
+    {
+      "context": [
+        "B03",
+        0,
+        1
+      ],
+      "before": {
+        "id": "swipe",
+        "action": "swipe",
+        "shape": "sector",
+        "range": 140,
+        "windup": 1.1,
+        "recovery": 1.8,
+        "damage_scale": 1.0,
+        "radius": 140,
+        "spread": 2.0,
+        "major": true
+      },
+      "after": {
+        "id": "swipe",
+        "action": "swipe",
+        "shape": "sector",
+        "range": 365,
+        "windup": 1.392,
+        "recovery": 1.008,
+        "damage_scale": 1.0,
+        "radius": 365,
+        "spread": 2.5500000000000003,
+        "major": true,
+        "warning_policy": "area",
+        "secondary_pattern": {
+          "kind": "ring",
+          "count": 28,
+          "speed": 180,
+          "life": 5.0,
+          "hit_radius": 4.5,
+          "burst_count": 1,
+          "burst_interval": 0.34,
+          "angle_step": 0.1,
+          "angle_offset": 0.0,
+          "aim_each_burst": false,
+          "bullet_style": "orb",
+          "gap_width": 1.0,
+          "gap_angle_offset": 0.65
+        }
+      }
+    },
+    {
+      "context": [
+        "B04",
+        0,
+        0
+      ],
+      "before": {
+        "id": "charge",
+        "action": "charge",
+        "shape": "line",
+        "range": 420,
+        "windup": 1.3,
+        "recovery": 2.1,
+        "damage_scale": 1.0,
+        "length": 340,
+        "half_width": 32,
+        "major": true
+      },
+      "after": {
+        "id": "charge",
+        "action": "charge",
+        "shape": "line",
+        "range": 780,
+        "windup": 1.2,
+        "recovery": 1.176,
+        "damage_scale": 1.0,
+        "length": 780,
+        "half_width": 58,
+        "major": true,
+        "warning_policy": "area",
+        "secondary_pattern": {
+          "kind": "fan",
+          "count": 17,
+          "speed": 200,
+          "life": 5.0,
+          "hit_radius": 4.5,
+          "burst_count": 2,
+          "burst_interval": 0.34,
+          "angle_step": 0.15,
+          "angle_offset": 0.0,
+          "aim_each_burst": false,
+          "bullet_style": "orb",
+          "spread": 3.6
+        }
+      }
+    },
+    {
+      "context": [
+        "B04",
+        0,
+        1
+      ],
+      "before": {
+        "id": "swipe",
+        "action": "swipe",
+        "shape": "sector",
+        "range": 140,
+        "windup": 1.1,
+        "recovery": 1.8,
+        "damage_scale": 1.0,
+        "radius": 140,
+        "spread": 2.0,
+        "major": true
+      },
+      "after": {
+        "id": "swipe",
+        "action": "swipe",
+        "shape": "sector",
+        "range": 365,
+        "windup": 1.392,
+        "recovery": 1.008,
+        "damage_scale": 1.0,
+        "radius": 365,
+        "spread": 2.5500000000000003,
+        "major": true,
+        "warning_policy": "area",
+        "secondary_pattern": {
+          "kind": "ring",
+          "count": 28,
+          "speed": 180,
+          "life": 5.0,
+          "hit_radius": 4.5,
+          "burst_count": 1,
+          "burst_interval": 0.34,
+          "angle_step": 0.1,
+          "angle_offset": 0.0,
+          "aim_each_burst": false,
+          "bullet_style": "orb",
+          "gap_width": 1.0,
+          "gap_angle_offset": 0.65
+        }
+      }
+    },
+    {
+      "context": [
+        "B05",
+        0,
+        0
+      ],
+      "before": {
+        "id": "fan",
+        "action": "fan",
+        "shape": "fan",
+        "range": 520,
+        "windup": 1.3,
+        "recovery": 1.6,
+        "damage_scale": 1.0,
+        "count": 5,
+        "spread": 1.3,
+        "speed": 230,
+        "life": 2.4,
+        "major": true
+      },
+      "after": {
+        "id": "fan",
+        "action": "fan",
+        "shape": "fan",
+        "range": 1100,
+        "windup": 1.05,
+        "recovery": 0.896,
+        "damage_scale": 1.0,
+        "count": 15,
+        "spread": 2.6,
+        "speed": 240,
+        "life": 4.6,
+        "major": true,
+        "warning_policy": "none",
+        "bullet_style": "orb",
+        "radius": 1100,
+        "hit_radius": 4.0,
+        "burst_count": 3,
+        "burst_interval": 0.3,
+        "angle_step": 0.1,
+        "aim_each_burst": false
+      }
+    },
+    {
+      "context": [
+        "B05",
+        0,
+        1
+      ],
+      "before": {
+        "id": "pot",
+        "action": "pot",
+        "shape": "marker",
+        "range": 420,
+        "windup": 1.2,
+        "recovery": 2.2,
+        "damage_scale": 1.0,
+        "radius": 65,
+        "delay": 0.8,
+        "duration": 2.4,
+        "limit": 2,
+        "major": true
+      },
+      "after": {
+        "id": "pot",
+        "action": "pot",
+        "shape": "marker",
+        "range": 1100,
+        "windup": 1.25,
+        "recovery": 1.232,
+        "damage_scale": 1.0,
+        "radius": 135,
+        "delay": 0.8,
+        "duration": 2.0,
+        "limit": 2,
+        "major": true,
+        "warning_policy": "area",
+        "marker_count": 3,
+        "marker_spacing": 229.5,
+        "marker_delay": 0.23,
+        "secondary_pattern": {
+          "kind": "ring",
+          "count": 28,
+          "speed": 165,
+          "life": 5.0,
+          "hit_radius": 4.5,
+          "burst_count": 1,
+          "burst_interval": 0.34,
+          "angle_step": 0.1,
+          "angle_offset": 0.0,
+          "aim_each_burst": false,
+          "bullet_style": "orb",
+          "gap_width": 1.15,
+          "gap_angle_offset": 0.65
+        }
+      }
+    },
+    {
+      "context": [
+        "B06",
+        0,
+        0
+      ],
+      "before": {
+        "id": "slam",
+        "action": "slam",
+        "shape": "sector",
+        "range": 155,
+        "windup": 1.4,
+        "recovery": 1.6,
+        "damage_scale": 1.0,
+        "radius": 155,
+        "spread": 1.9,
+        "major": true
+      },
+      "after": {
+        "id": "slam",
+        "action": "slam",
+        "shape": "sector",
+        "range": 330,
+        "windup": 1.35,
+        "recovery": 0.896,
+        "damage_scale": 1.0,
+        "radius": 330,
+        "spread": 2.35,
+        "major": true,
+        "warning_policy": "area",
+        "secondary_pattern": {
+          "kind": "ring",
+          "count": 28,
+          "speed": 180,
+          "life": 5.0,
+          "hit_radius": 4.5,
+          "burst_count": 1,
+          "burst_interval": 0.34,
+          "angle_step": 0.1,
+          "angle_offset": 0.0,
+          "aim_each_burst": false,
+          "bullet_style": "orb",
+          "gap_width": 1.0,
+          "gap_angle_offset": 0.65
+        }
+      }
+    },
+    {
+      "context": [
+        "B06",
+        0,
+        1
+      ],
+      "before": {
+        "id": "slam",
+        "action": "slam",
+        "shape": "sector",
+        "range": 175,
+        "windup": 1.25,
+        "recovery": 2.4,
+        "damage_scale": 1.0,
+        "radius": 175,
+        "spread": 1.7,
+        "major": true
+      },
+      "after": {
+        "id": "slam",
+        "action": "slam",
+        "shape": "sector",
+        "range": 365,
+        "windup": 1.392,
+        "recovery": 1.344,
+        "damage_scale": 1.0,
+        "radius": 365,
+        "spread": 2.5500000000000003,
+        "major": true,
+        "warning_policy": "area",
+        "secondary_pattern": {
+          "kind": "ring",
+          "count": 28,
+          "speed": 180,
+          "life": 5.0,
+          "hit_radius": 4.5,
+          "burst_count": 1,
+          "burst_interval": 0.34,
+          "angle_step": 0.1,
+          "angle_offset": 0.0,
+          "aim_each_burst": false,
+          "bullet_style": "orb",
+          "gap_width": 1.0,
+          "gap_angle_offset": 0.65
+        }
+      }
+    },
+    {
+      "context": [
+        "B07",
+        0,
+        0
+      ],
+      "before": {
+        "id": "command",
+        "action": "command",
+        "shape": "disc",
+        "range": 390,
+        "windup": 1.25,
+        "recovery": 1.6,
+        "damage_scale": 1.0,
+        "count": 3,
+        "duration": 3.0,
+        "major": true
+      },
+      "after": {
+        "id": "command",
+        "action": "command",
+        "shape": "disc",
+        "range": 900,
+        "windup": 1.0,
+        "recovery": 0.896,
+        "damage_scale": 1.0,
+        "count": 3,
+        "duration": 3.0,
+        "major": true,
+        "warning_policy": "area",
+        "secondary_pattern": {
+          "kind": "fan",
+          "count": 25,
+          "speed": 190,
+          "life": 5.0,
+          "hit_radius": 4.5,
+          "burst_count": 3,
+          "burst_interval": 0.34,
+          "angle_step": 0.16,
+          "angle_offset": 0.0,
+          "aim_each_burst": false,
+          "bullet_style": "orb",
+          "spread": 4.6
+        }
+      }
+    },
+    {
+      "context": [
+        "B07",
+        0,
+        1
+      ],
+      "before": {
+        "id": "swipe",
+        "action": "swipe",
+        "shape": "sector",
+        "range": 165,
+        "windup": 1.2,
+        "recovery": 2.3,
+        "damage_scale": 1.0,
+        "radius": 165,
+        "spread": 2.0,
+        "major": true
+      },
+      "after": {
+        "id": "swipe",
+        "action": "swipe",
+        "shape": "sector",
+        "range": 425,
+        "windup": 1.621,
+        "recovery": 1.288,
+        "damage_scale": 1.0,
+        "radius": 425,
+        "spread": 2.5500000000000003,
+        "major": true,
+        "warning_policy": "area",
+        "secondary_pattern": {
+          "kind": "ring",
+          "count": 36,
+          "speed": 180,
+          "life": 5.0,
+          "hit_radius": 4.5,
+          "burst_count": 2,
+          "burst_interval": 0.34,
+          "angle_step": 0.1,
+          "angle_offset": 0.0,
+          "aim_each_burst": false,
+          "bullet_style": "orb",
+          "gap_width": 1.0,
+          "gap_angle_offset": 0.65
+        }
+      }
+    },
+    {
+      "context": [
+        "B08",
+        0,
+        0
+      ],
+      "before": {
+        "id": "charge",
+        "action": "charge",
+        "shape": "line",
+        "range": 420,
+        "windup": 1.3,
+        "recovery": 2.1,
+        "damage_scale": 1.0,
+        "length": 340,
+        "half_width": 32,
+        "major": true
+      },
+      "after": {
+        "id": "charge",
+        "action": "charge",
+        "shape": "line",
+        "range": 1060,
+        "windup": 1.2,
+        "recovery": 1.176,
+        "damage_scale": 1.0,
+        "length": 1060,
+        "half_width": 76,
+        "major": true,
+        "warning_policy": "area",
+        "secondary_pattern": {
+          "kind": "fan",
+          "count": 23,
+          "speed": 200,
+          "life": 5.0,
+          "hit_radius": 4.5,
+          "burst_count": 2,
+          "burst_interval": 0.34,
+          "angle_step": 0.15,
+          "angle_offset": 0.0,
+          "aim_each_burst": false,
+          "bullet_style": "orb",
+          "spread": 3.6
+        }
+      }
+    },
+    {
+      "context": [
+        "B08",
+        0,
+        1
+      ],
+      "before": {
+        "id": "swipe",
+        "action": "swipe",
+        "shape": "sector",
+        "range": 140,
+        "windup": 1.1,
+        "recovery": 1.8,
+        "damage_scale": 1.0,
+        "radius": 140,
+        "spread": 2.0,
+        "major": true
+      },
+      "after": {
+        "id": "swipe",
+        "action": "swipe",
+        "shape": "sector",
+        "range": 425,
+        "windup": 1.621,
+        "recovery": 1.008,
+        "damage_scale": 1.0,
+        "radius": 425,
+        "spread": 2.5500000000000003,
+        "major": true,
+        "warning_policy": "area",
+        "secondary_pattern": {
+          "kind": "ring",
+          "count": 36,
+          "speed": 180,
+          "life": 5.0,
+          "hit_radius": 4.5,
+          "burst_count": 2,
+          "burst_interval": 0.34,
+          "angle_step": 0.1,
+          "angle_offset": 0.0,
+          "aim_each_burst": false,
+          "bullet_style": "orb",
+          "gap_width": 1.0,
+          "gap_angle_offset": 0.65
+        }
+      }
+    },
+    {
+      "context": [
+        "B09",
+        0,
+        0
+      ],
+      "before": {
+        "id": "slam",
+        "action": "slam",
+        "shape": "sector",
+        "range": 155,
+        "windup": 1.4,
+        "recovery": 1.6,
+        "damage_scale": 1.0,
+        "radius": 155,
+        "spread": 1.9,
+        "major": true
+      },
+      "after": {
+        "id": "slam",
+        "action": "slam",
+        "shape": "sector",
+        "range": 390,
+        "windup": 1.487,
+        "recovery": 0.896,
+        "damage_scale": 1.0,
+        "radius": 390,
+        "spread": 2.35,
+        "major": true,
+        "warning_policy": "area",
+        "secondary_pattern": {
+          "kind": "ring",
+          "count": 36,
+          "speed": 180,
+          "life": 5.0,
+          "hit_radius": 4.5,
+          "burst_count": 2,
+          "burst_interval": 0.34,
+          "angle_step": 0.1,
+          "angle_offset": 0.0,
+          "aim_each_burst": false,
+          "bullet_style": "orb",
+          "gap_width": 1.0,
+          "gap_angle_offset": 0.65
+        }
+      }
+    },
+    {
+      "context": [
+        "B09",
+        0,
+        1
+      ],
+      "before": {
+        "id": "slam",
+        "action": "slam",
+        "shape": "sector",
+        "range": 175,
+        "windup": 1.25,
+        "recovery": 2.4,
+        "damage_scale": 1.0,
+        "radius": 175,
+        "spread": 1.7,
+        "major": true
+      },
+      "after": {
+        "id": "slam",
+        "action": "slam",
+        "shape": "sector",
+        "range": 425,
+        "windup": 1.621,
+        "recovery": 1.344,
+        "damage_scale": 1.0,
+        "radius": 425,
+        "spread": 2.5500000000000003,
+        "major": true,
+        "warning_policy": "area",
+        "secondary_pattern": {
+          "kind": "ring",
+          "count": 36,
+          "speed": 180,
+          "life": 5.0,
+          "hit_radius": 4.5,
+          "burst_count": 2,
+          "burst_interval": 0.34,
+          "angle_step": 0.1,
+          "angle_offset": 0.0,
+          "aim_each_burst": false,
+          "bullet_style": "orb",
+          "gap_width": 1.0,
+          "gap_angle_offset": 0.65
+        }
+      }
+    },
+    {
+      "context": [
+        "B10",
+        0,
+        0
+      ],
+      "before": {
+        "id": "slam",
+        "action": "slam",
+        "shape": "sector",
+        "range": 155,
+        "windup": 1.4,
+        "recovery": 1.6,
+        "damage_scale": 1.0,
+        "radius": 155,
+        "spread": 1.9,
+        "major": true
+      },
+      "after": {
+        "id": "slam",
+        "action": "slam",
+        "shape": "sector",
+        "range": 390,
+        "windup": 1.487,
+        "recovery": 0.896,
+        "damage_scale": 1.0,
+        "radius": 390,
+        "spread": 2.35,
+        "major": true,
+        "warning_policy": "area",
+        "secondary_pattern": {
+          "kind": "ring",
+          "count": 36,
+          "speed": 180,
+          "life": 5.0,
+          "hit_radius": 4.5,
+          "burst_count": 2,
+          "burst_interval": 0.34,
+          "angle_step": 0.1,
+          "angle_offset": 0.0,
+          "aim_each_burst": false,
+          "bullet_style": "orb",
+          "gap_width": 1.0,
+          "gap_angle_offset": 0.65
+        }
+      }
+    },
+    {
+      "context": [
+        "B10",
+        0,
+        1
+      ],
+      "before": {
+        "id": "slam",
+        "action": "slam",
+        "shape": "sector",
+        "range": 175,
+        "windup": 1.25,
+        "recovery": 2.4,
+        "damage_scale": 1.0,
+        "radius": 175,
+        "spread": 1.7,
+        "major": true
+      },
+      "after": {
+        "id": "slam",
+        "action": "slam",
+        "shape": "sector",
+        "range": 425,
+        "windup": 1.621,
+        "recovery": 1.344,
+        "damage_scale": 1.0,
+        "radius": 425,
+        "spread": 2.5500000000000003,
+        "major": true,
+        "warning_policy": "area",
+        "secondary_pattern": {
+          "kind": "ring",
+          "count": 36,
+          "speed": 180,
+          "life": 5.0,
+          "hit_radius": 4.5,
+          "burst_count": 2,
+          "burst_interval": 0.34,
+          "angle_step": 0.1,
+          "angle_offset": 0.0,
+          "aim_each_burst": false,
+          "bullet_style": "orb",
+          "gap_width": 1.0,
+          "gap_angle_offset": 0.65
+        }
+      }
+    },
+    {
+      "context": [
+        "B11",
+        0,
+        0
+      ],
+      "before": {
+        "id": "fan",
+        "action": "fan",
+        "shape": "fan",
+        "range": 520,
+        "windup": 1.3,
+        "recovery": 1.6,
+        "damage_scale": 1.0,
+        "count": 5,
+        "spread": 1.3,
+        "speed": 230,
+        "life": 2.4,
+        "major": true
+      },
+      "after": {
+        "id": "fan",
+        "action": "fan",
+        "shape": "fan",
+        "range": 1100,
+        "windup": 1.05,
+        "recovery": 0.896,
+        "damage_scale": 1.0,
+        "count": 21,
+        "spread": 3.4,
+        "speed": 240,
+        "life": 4.6,
+        "major": true,
+        "warning_policy": "none",
+        "bullet_style": "orb",
+        "radius": 1100,
+        "hit_radius": 4.0,
+        "burst_count": 4,
+        "burst_interval": 0.3,
+        "angle_step": 0.1,
+        "aim_each_burst": false
+      }
+    },
+    {
+      "context": [
+        "B11",
+        0,
+        1
+      ],
+      "before": {
+        "id": "pot",
+        "action": "pot",
+        "shape": "marker",
+        "range": 420,
+        "windup": 1.2,
+        "recovery": 2.2,
+        "damage_scale": 1.0,
+        "radius": 65,
+        "delay": 0.8,
+        "duration": 2.4,
+        "limit": 2,
+        "major": true
+      },
+      "after": {
+        "id": "pot",
+        "action": "pot",
+        "shape": "marker",
+        "range": 1100,
+        "windup": 1.25,
+        "recovery": 1.232,
+        "damage_scale": 1.0,
+        "radius": 175,
+        "delay": 0.8,
+        "duration": 2.0,
+        "limit": 2,
+        "major": true,
+        "warning_policy": "area",
+        "marker_count": 3,
+        "marker_spacing": 297.5,
+        "marker_delay": 0.23,
+        "secondary_pattern": {
+          "kind": "ring",
+          "count": 28,
+          "speed": 165,
+          "life": 5.0,
+          "hit_radius": 4.5,
+          "burst_count": 1,
+          "burst_interval": 0.34,
+          "angle_step": 0.1,
+          "angle_offset": 0.0,
+          "aim_each_burst": false,
+          "bullet_style": "orb",
+          "gap_width": 1.15,
+          "gap_angle_offset": 0.65
+        }
+      }
+    },
+    {
+      "context": [
+        "B12",
+        0,
+        0
+      ],
+      "before": {
+        "id": "anchor",
+        "action": "anchor",
+        "shape": "ring_gap",
+        "range": 230,
+        "windup": 1.4,
+        "recovery": 1.7,
+        "damage_scale": 1.0,
+        "radius": 230,
+        "gap_angle": 0.0,
+        "gap_width": 1.4,
+        "spawn_id": "D03",
+        "spawn_count": 2,
+        "limit": 2,
+        "major": true
+      },
+      "after": {
+        "id": "anchor",
+        "action": "anchor",
+        "shape": "ring_gap",
+        "range": 520,
+        "windup": 1.7,
+        "recovery": 0.952,
+        "damage_scale": 1.0,
+        "radius": 520,
+        "gap_angle": 0.0,
+        "gap_width": 1.65,
+        "spawn_id": "D03",
+        "spawn_count": 2,
+        "limit": 2,
+        "major": true,
+        "warning_policy": "area",
+        "inner_radius": 100,
+        "secondary_pattern": {
+          "kind": "ring",
+          "count": 40,
+          "speed": 175,
+          "life": 5.0,
+          "hit_radius": 4.5,
+          "burst_count": 3,
+          "burst_interval": 0.34,
+          "angle_step": 0.08,
+          "angle_offset": 0.0,
+          "aim_each_burst": false,
+          "bullet_style": "orb",
+          "gap_width": 1.1,
+          "gap_angle_offset": 0.65
+        }
+      }
+    },
+    {
+      "context": [
+        "B12",
+        0,
+        1
+      ],
+      "before": {
+        "id": "pulse",
+        "action": "pulse",
+        "shape": "ring_gap",
+        "range": 230,
+        "windup": 1.3,
+        "recovery": 2.4,
+        "damage_scale": 1.0,
+        "radius": 230,
+        "gap_angle": 0.0,
+        "gap_width": 1.4,
+        "major": true
+      },
+      "after": {
+        "id": "pulse",
+        "action": "pulse",
+        "shape": "ring_gap",
+        "range": 520,
+        "windup": 1.7,
+        "recovery": 1.344,
+        "damage_scale": 1.0,
+        "radius": 520,
+        "gap_angle": 0.0,
+        "gap_width": 1.65,
+        "major": true,
+        "warning_policy": "area",
+        "inner_radius": 100,
+        "secondary_pattern": {
+          "kind": "ring",
+          "count": 40,
+          "speed": 175,
+          "life": 5.0,
+          "hit_radius": 4.5,
+          "burst_count": 3,
+          "burst_interval": 0.34,
+          "angle_step": 0.08,
+          "angle_offset": 0.0,
+          "aim_each_burst": false,
+          "bullet_style": "orb",
+          "gap_width": 1.1,
+          "gap_angle_offset": 0.65
+        }
+      }
+    },
+    {
+      "context": [
+        "B13",
+        0,
+        0
+      ],
+      "before": {
+        "id": "charge",
+        "action": "charge",
+        "shape": "line",
+        "range": 420,
+        "windup": 1.3,
+        "recovery": 2.1,
+        "damage_scale": 1.0,
+        "length": 340,
+        "half_width": 32,
+        "major": true
+      },
+      "after": {
+        "id": "charge",
+        "action": "charge",
+        "shape": "line",
+        "range": 1060,
+        "windup": 1.2,
+        "recovery": 1.176,
+        "damage_scale": 1.0,
+        "length": 1060,
+        "half_width": 76,
+        "major": true,
+        "warning_policy": "area",
+        "secondary_pattern": {
+          "kind": "fan",
+          "count": 23,
+          "speed": 200,
+          "life": 5.0,
+          "hit_radius": 4.5,
+          "burst_count": 2,
+          "burst_interval": 0.34,
+          "angle_step": 0.15,
+          "angle_offset": 0.0,
+          "aim_each_burst": false,
+          "bullet_style": "orb",
+          "spread": 3.6
+        }
+      }
+    },
+    {
+      "context": [
+        "B13",
+        0,
+        1
+      ],
+      "before": {
+        "id": "swipe",
+        "action": "swipe",
+        "shape": "sector",
+        "range": 140,
+        "windup": 1.1,
+        "recovery": 1.8,
+        "damage_scale": 1.0,
+        "radius": 140,
+        "spread": 2.0,
+        "major": true
+      },
+      "after": {
+        "id": "swipe",
+        "action": "swipe",
+        "shape": "sector",
+        "range": 425,
+        "windup": 1.621,
+        "recovery": 1.008,
+        "damage_scale": 1.0,
+        "radius": 425,
+        "spread": 2.5500000000000003,
+        "major": true,
+        "warning_policy": "area",
+        "secondary_pattern": {
+          "kind": "ring",
+          "count": 36,
+          "speed": 180,
+          "life": 5.0,
+          "hit_radius": 4.5,
+          "burst_count": 2,
+          "burst_interval": 0.34,
+          "angle_step": 0.1,
+          "angle_offset": 0.0,
+          "aim_each_burst": false,
+          "bullet_style": "orb",
+          "gap_width": 1.0,
+          "gap_angle_offset": 0.65
+        }
+      }
+    },
+    {
+      "context": [
+        "B14",
+        0,
+        0
+      ],
+      "before": {
+        "id": "command",
+        "action": "command",
+        "shape": "disc",
+        "range": 390,
+        "windup": 1.25,
+        "recovery": 1.6,
+        "damage_scale": 1.0,
+        "count": 3,
+        "duration": 3.0,
+        "major": true
+      },
+      "after": {
+        "id": "command",
+        "action": "command",
+        "shape": "disc",
+        "range": 900,
+        "windup": 1.0,
+        "recovery": 0.896,
+        "damage_scale": 1.0,
+        "count": 3,
+        "duration": 3.0,
+        "major": true,
+        "warning_policy": "area",
+        "secondary_pattern": {
+          "kind": "fan",
+          "count": 31,
+          "speed": 190,
+          "life": 5.0,
+          "hit_radius": 4.5,
+          "burst_count": 3,
+          "burst_interval": 0.34,
+          "angle_step": 0.16,
+          "angle_offset": 0.0,
+          "aim_each_burst": false,
+          "bullet_style": "orb",
+          "spread": 4.6
+        }
+      }
+    },
+    {
+      "context": [
+        "B14",
+        0,
+        1
+      ],
+      "before": {
+        "id": "swipe",
+        "action": "swipe",
+        "shape": "sector",
+        "range": 165,
+        "windup": 1.2,
+        "recovery": 2.3,
+        "damage_scale": 1.0,
+        "radius": 165,
+        "spread": 2.0,
+        "major": true
+      },
+      "after": {
+        "id": "swipe",
+        "action": "swipe",
+        "shape": "sector",
+        "range": 425,
+        "windup": 1.621,
+        "recovery": 1.288,
+        "damage_scale": 1.0,
+        "radius": 425,
+        "spread": 2.5500000000000003,
+        "major": true,
+        "warning_policy": "area",
+        "secondary_pattern": {
+          "kind": "ring",
+          "count": 36,
+          "speed": 180,
+          "life": 5.0,
+          "hit_radius": 4.5,
+          "burst_count": 2,
+          "burst_interval": 0.34,
+          "angle_step": 0.1,
+          "angle_offset": 0.0,
+          "aim_each_burst": false,
+          "bullet_style": "orb",
+          "gap_width": 1.0,
+          "gap_angle_offset": 0.65
+        }
+      }
+    },
+    {
+      "context": [
+        "D01",
+        0,
+        0
+      ],
+      "before": {
+        "id": "swipe",
+        "action": "swipe",
+        "shape": "sector",
+        "range": 48,
+        "windup": 0.5,
+        "recovery": 1.0,
+        "damage_scale": 1.0,
+        "radius": 48,
+        "spread": 1.8
+      },
+      "after": {
+        "id": "swipe",
+        "action": "swipe",
+        "shape": "sector",
+        "range": 48,
+        "windup": 0.45,
+        "recovery": 0.7,
+        "damage_scale": 1.0,
+        "radius": 48,
+        "spread": 1.8,
+        "warning_policy": "area"
+      }
+    },
+    {
+      "context": [
+        "B10_R",
+        0,
+        0
+      ],
+      "before": {
+        "id": "slam",
+        "action": "slam",
+        "shape": "sector",
+        "range": 155,
+        "windup": 1.4,
+        "recovery": 1.6,
+        "damage_scale": 1.0,
+        "radius": 155,
+        "spread": 1.9,
+        "major": true
+      },
+      "after": {
+        "id": "slam",
+        "action": "slam",
+        "shape": "sector",
+        "range": 390,
+        "windup": 1.487,
+        "recovery": 0.896,
+        "damage_scale": 1.0,
+        "radius": 390,
+        "spread": 2.35,
+        "major": true,
+        "warning_policy": "area",
+        "secondary_pattern": {
+          "kind": "ring",
+          "count": 36,
+          "speed": 180,
+          "life": 5.0,
+          "hit_radius": 4.5,
+          "burst_count": 2,
+          "burst_interval": 0.34,
+          "angle_step": 0.1,
+          "angle_offset": 0.0,
+          "aim_each_burst": false,
+          "bullet_style": "orb",
+          "gap_width": 1.0,
+          "gap_angle_offset": 0.65
+        }
+      }
+    },
+    {
+      "context": [
+        "B10_R",
+        0,
+        1
+      ],
+      "before": {
+        "id": "slam",
+        "action": "slam",
+        "shape": "sector",
+        "range": 175,
+        "windup": 1.25,
+        "recovery": 2.4,
+        "damage_scale": 1.0,
+        "radius": 175,
+        "spread": 1.7,
+        "major": true
+      },
+      "after": {
+        "id": "slam",
+        "action": "slam",
+        "shape": "sector",
+        "range": 425,
+        "windup": 1.621,
+        "recovery": 1.344,
+        "damage_scale": 1.0,
+        "radius": 425,
+        "spread": 2.5500000000000003,
+        "major": true,
+        "warning_policy": "area",
+        "secondary_pattern": {
+          "kind": "ring",
+          "count": 36,
+          "speed": 180,
+          "life": 5.0,
+          "hit_radius": 4.5,
+          "burst_count": 2,
+          "burst_interval": 0.34,
+          "angle_step": 0.1,
+          "angle_offset": 0.0,
+          "aim_each_burst": false,
+          "bullet_style": "orb",
+          "gap_width": 1.0,
+          "gap_angle_offset": 0.65
+        }
+      }
+    },
+    {
+      "context": [
+        "B15",
+        0,
+        0
+      ],
+      "before": {
+        "id": "hunter_aim",
+        "action": "shot",
+        "shape": "line",
+        "range": 760,
+        "windup": 1.35,
+        "recovery": 1.9,
+        "damage_scale": 1.0,
+        "major": true,
+        "length": 760,
+        "half_width": 12,
+        "speed": 420,
+        "life": 2.2
+      },
+      "after": {
+        "id": "hunter_aim",
+        "action": "shot",
+        "shape": "line",
+        "range": 1300,
+        "windup": 0.9,
+        "recovery": 1.102,
+        "damage_scale": 1.0,
+        "major": true,
+        "length": 1300,
+        "half_width": 12,
+        "speed": 420,
+        "life": 3.2,
+        "warning_policy": "aim",
+        "bullet_style": "needle",
+        "hit_radius": 4.0,
+        "burst_count": 3,
+        "burst_interval": 0.24,
+        "angle_step": 0.08,
+        "aim_each_burst": true
+      }
+    },
+    {
+      "context": [
+        "B15",
+        0,
+        1
+      ],
+      "before": {
+        "id": "hunter_volley",
+        "action": "fan",
+        "shape": "fan",
+        "range": 640,
+        "windup": 1.55,
+        "recovery": 2.1,
+        "damage_scale": 0.8,
+        "major": true,
+        "radius": 640,
+        "count": 5,
+        "spread": 1.25,
+        "speed": 310,
+        "life": 3.0
+      },
+      "after": {
+        "id": "hunter_volley",
+        "action": "fan",
+        "shape": "fan",
+        "range": 1200,
+        "windup": 1.0,
+        "recovery": 1.218,
+        "damage_scale": 0.8,
+        "major": true,
+        "radius": 1200,
+        "count": 19,
+        "spread": 2.8,
+        "speed": 260,
+        "life": 5.0,
+        "warning_policy": "none",
+        "bullet_style": "orb",
+        "hit_radius": 4.0,
+        "burst_count": 3,
+        "burst_interval": 0.32,
+        "angle_step": 0.08,
+        "aim_each_burst": false
+      }
+    },
+    {
+      "context": [
+        "B15",
+        0,
+        2
+      ],
+      "before": {
+        "id": "hunter_reposition",
+        "action": "charge",
+        "shape": "line",
+        "range": 340,
+        "windup": 1.2,
+        "recovery": 2.6,
+        "damage_scale": 0.9,
+        "major": true,
+        "length": 340,
+        "half_width": 32
+      },
+      "after": {
+        "id": "hunter_reposition",
+        "action": "charge",
+        "shape": "line",
+        "range": 820,
+        "windup": 1.15,
+        "recovery": 1.508,
+        "damage_scale": 0.9,
+        "major": true,
+        "length": 820,
+        "half_width": 38.4,
+        "warning_policy": "area",
+        "secondary_pattern": {
+          "kind": "fan",
+          "count": 23,
+          "speed": 205,
+          "life": 5.0,
+          "hit_radius": 4.5,
+          "burst_count": 2,
+          "burst_interval": 0.34,
+          "angle_step": 0.14,
+          "angle_offset": 0.0,
+          "aim_each_burst": false,
+          "bullet_style": "orb",
+          "spread": 4.0
+        }
+      }
+    },
+    {
+      "context": [
+        "B15",
+        1,
+        0
+      ],
+      "before": {
+        "id": "beast_hunt",
+        "action": "fan",
+        "shape": "fan",
+        "range": 860,
+        "windup": 1.55,
+        "recovery": 2.0,
+        "damage_scale": 0.9,
+        "major": true,
+        "radius": 860,
+        "count": 7,
+        "spread": 1.55,
+        "speed": 310,
+        "life": 3.0
+      },
+      "after": {
+        "id": "beast_hunt",
+        "action": "fan",
+        "shape": "fan",
+        "range": 1200,
+        "windup": 1.0,
+        "recovery": 1.16,
+        "damage_scale": 0.9,
+        "major": true,
+        "radius": 1200,
+        "count": 27,
+        "spread": 3.8,
+        "speed": 240,
+        "life": 5.0,
+        "warning_policy": "none",
+        "bullet_style": "orb",
+        "hit_radius": 4.0,
+        "burst_count": 4,
+        "burst_interval": 0.32,
+        "angle_step": 0.08,
+        "aim_each_burst": false
+      }
+    },
+    {
+      "context": [
+        "B15",
+        1,
+        1
+      ],
+      "before": {
+        "id": "beast_leap",
+        "action": "charge",
+        "shape": "line",
+        "range": 510,
+        "windup": 1.4,
+        "recovery": 2.2,
+        "damage_scale": 1.15,
+        "major": true,
+        "length": 510,
+        "half_width": 50
+      },
+      "after": {
+        "id": "beast_leap",
+        "action": "charge",
+        "shape": "line",
+        "range": 820,
+        "windup": 1.25,
+        "recovery": 1.276,
+        "damage_scale": 1.15,
+        "major": true,
+        "length": 820,
+        "half_width": 60.0,
+        "warning_policy": "area",
+        "secondary_pattern": {
+          "kind": "fan",
+          "count": 31,
+          "speed": 205,
+          "life": 5.0,
+          "hit_radius": 4.5,
+          "burst_count": 3,
+          "burst_interval": 0.34,
+          "angle_step": 0.14,
+          "angle_offset": 0.0,
+          "aim_each_burst": false,
+          "bullet_style": "orb",
+          "spread": 4.0
+        }
+      }
+    },
+    {
+      "context": [
+        "B15",
+        1,
+        2
+      ],
+      "before": {
+        "id": "hunt_mark",
+        "action": "marker",
+        "shape": "marker",
+        "range": 1050,
+        "windup": 1.55,
+        "recovery": 2.2,
+        "damage_scale": 1.1,
+        "major": true,
+        "radius": 180
+      },
+      "after": {
+        "id": "hunt_mark",
+        "action": "marker",
+        "shape": "marker",
+        "range": 1050,
+        "windup": 1.227,
+        "recovery": 1.276,
+        "damage_scale": 1.1,
+        "major": true,
+        "radius": 208.79999999999998,
+        "warning_policy": "area",
+        "marker_count": 5,
+        "marker_spacing": 334.08,
+        "marker_delay": 0.18,
+        "secondary_pattern": {
+          "kind": "ring",
+          "count": 44,
+          "speed": 175,
+          "life": 5.0,
+          "hit_radius": 4.5,
+          "burst_count": 2,
+          "burst_interval": 0.34,
+          "angle_step": 0.1,
+          "angle_offset": 0.0,
+          "aim_each_burst": false,
+          "bullet_style": "orb",
+          "gap_width": 1.1,
+          "gap_angle_offset": 0.65
+        }
+      }
+    },
+    {
+      "context": [
+        "B15",
+        1,
+        3
+      ],
+      "before": {
+        "id": "beast_rend",
+        "action": "slam",
+        "shape": "sector",
+        "range": 280,
+        "windup": 1.5,
+        "recovery": 3.1,
+        "damage_scale": 1.2,
+        "major": true,
+        "radius": 280,
+        "spread": 2.6
+      },
+      "after": {
+        "id": "beast_rend",
+        "action": "slam",
+        "shape": "sector",
+        "range": 341.59999999999997,
+        "windup": 1.25,
+        "recovery": 1.798,
+        "damage_scale": 1.2,
+        "major": true,
+        "radius": 341.59999999999997,
+        "spread": 2.6,
+        "warning_policy": "area",
+        "secondary_pattern": {
+          "kind": "ring",
+          "count": 44,
+          "speed": 195,
+          "life": 5.0,
+          "hit_radius": 4.5,
+          "burst_count": 2,
+          "burst_interval": 0.34,
+          "angle_step": 0.12,
+          "angle_offset": 0.0,
+          "aim_each_burst": false,
+          "bullet_style": "orb",
+          "gap_width": 1.0,
+          "gap_angle_offset": 0.65
+        }
+      }
+    },
+    {
+      "context": [
+        "B16",
+        0,
+        0
+      ],
+      "before": {
+        "id": "rider_lance",
+        "action": "charge",
+        "shape": "line",
+        "range": 600,
+        "windup": 1.4,
+        "recovery": 2.2,
+        "damage_scale": 1.0,
+        "major": true,
+        "length": 600,
+        "half_width": 38
+      },
+      "after": {
+        "id": "rider_lance",
+        "action": "charge",
+        "shape": "line",
+        "range": 820,
+        "windup": 1.15,
+        "recovery": 1.276,
+        "damage_scale": 1.0,
+        "major": true,
+        "length": 820,
+        "half_width": 45.6,
+        "warning_policy": "area",
+        "secondary_pattern": {
+          "kind": "fan",
+          "count": 23,
+          "speed": 205,
+          "life": 5.0,
+          "hit_radius": 4.5,
+          "burst_count": 2,
+          "burst_interval": 0.34,
+          "angle_step": 0.14,
+          "angle_offset": 0.0,
+          "aim_each_burst": false,
+          "bullet_style": "orb",
+          "spread": 4.0
+        }
+      }
+    },
+    {
+      "context": [
+        "B16",
+        0,
+        1
+      ],
+      "before": {
+        "id": "rider_cleave",
+        "action": "slam",
+        "shape": "sector",
+        "range": 230,
+        "windup": 1.35,
+        "recovery": 2.1,
+        "damage_scale": 0.9,
+        "major": true,
+        "radius": 230,
+        "spread": 2.4
+      },
+      "after": {
+        "id": "rider_cleave",
+        "action": "slam",
+        "shape": "sector",
+        "range": 280.59999999999997,
+        "windup": 1.25,
+        "recovery": 1.218,
+        "damage_scale": 0.9,
+        "major": true,
+        "radius": 280.59999999999997,
+        "spread": 2.4,
+        "warning_policy": "area",
+        "secondary_pattern": {
+          "kind": "ring",
+          "count": 32,
+          "speed": 180,
+          "life": 5.0,
+          "hit_radius": 4.5,
+          "burst_count": 2,
+          "burst_interval": 0.34,
+          "angle_step": 0.12,
+          "angle_offset": 0.0,
+          "aim_each_burst": false,
+          "bullet_style": "orb",
+          "gap_width": 1.0,
+          "gap_angle_offset": 0.65
+        }
+      }
+    },
+    {
+      "context": [
+        "B16",
+        0,
+        2
+      ],
+      "before": {
+        "id": "rider_return",
+        "action": "charge",
+        "shape": "line",
+        "range": 440,
+        "windup": 1.3,
+        "recovery": 3.0,
+        "damage_scale": 1.1,
+        "major": true,
+        "length": 440,
+        "half_width": 42
+      },
+      "after": {
+        "id": "rider_return",
+        "action": "charge",
+        "shape": "line",
+        "range": 820,
+        "windup": 1.15,
+        "recovery": 1.74,
+        "damage_scale": 1.1,
+        "major": true,
+        "length": 820,
+        "half_width": 50.4,
+        "warning_policy": "area",
+        "secondary_pattern": {
+          "kind": "fan",
+          "count": 23,
+          "speed": 205,
+          "life": 5.0,
+          "hit_radius": 4.5,
+          "burst_count": 2,
+          "burst_interval": 0.34,
+          "angle_step": 0.14,
+          "angle_offset": 0.0,
+          "aim_each_burst": false,
+          "bullet_style": "orb",
+          "spread": 4.0
+        }
+      }
+    },
+    {
+      "context": [
+        "B16",
+        1,
+        0
+      ],
+      "before": {
+        "id": "tiger_long_charge",
+        "action": "charge",
+        "shape": "line",
+        "range": 900,
+        "windup": 1.65,
+        "recovery": 2.5,
+        "damage_scale": 1.2,
+        "major": true,
+        "length": 900,
+        "half_width": 62
+      },
+      "after": {
+        "id": "tiger_long_charge",
+        "action": "charge",
+        "shape": "line",
+        "range": 1125.0,
+        "windup": 1.25,
+        "recovery": 1.45,
+        "damage_scale": 1.2,
+        "major": true,
+        "length": 1125.0,
+        "half_width": 74.39999999999999,
+        "warning_policy": "area",
+        "secondary_pattern": {
+          "kind": "fan",
+          "count": 31,
+          "speed": 205,
+          "life": 5.0,
+          "hit_radius": 4.5,
+          "burst_count": 3,
+          "burst_interval": 0.34,
+          "angle_step": 0.14,
+          "angle_offset": 0.0,
+          "aim_each_burst": false,
+          "bullet_style": "orb",
+          "spread": 4.0
+        }
+      }
+    },
+    {
+      "context": [
+        "B16",
+        1,
+        1
+      ],
+      "before": {
+        "id": "tiger_trample",
+        "action": "slam",
+        "shape": "sector",
+        "range": 310,
+        "windup": 1.6,
+        "recovery": 2.2,
+        "damage_scale": 1.05,
+        "major": true,
+        "radius": 310,
+        "spread": 2.8
+      },
+      "after": {
+        "id": "tiger_trample",
+        "action": "slam",
+        "shape": "sector",
+        "range": 378.2,
+        "windup": 1.337,
+        "recovery": 1.276,
+        "damage_scale": 1.05,
+        "major": true,
+        "radius": 378.2,
+        "spread": 2.8,
+        "warning_policy": "area",
+        "secondary_pattern": {
+          "kind": "ring",
+          "count": 44,
+          "speed": 195,
+          "life": 5.0,
+          "hit_radius": 4.5,
+          "burst_count": 2,
+          "burst_interval": 0.34,
+          "angle_step": 0.12,
+          "angle_offset": 0.0,
+          "aim_each_burst": false,
+          "bullet_style": "orb",
+          "gap_width": 1.0,
+          "gap_angle_offset": 0.65
+        }
+      }
+    },
+    {
+      "context": [
+        "B16",
+        1,
+        2
+      ],
+      "before": {
+        "id": "leopard_return",
+        "action": "charge",
+        "shape": "line",
+        "range": 720,
+        "windup": 1.5,
+        "recovery": 2.4,
+        "damage_scale": 1.1,
+        "major": true,
+        "length": 720,
+        "half_width": 54
+      },
+      "after": {
+        "id": "leopard_return",
+        "action": "charge",
+        "shape": "line",
+        "range": 900.0,
+        "windup": 1.25,
+        "recovery": 1.392,
+        "damage_scale": 1.1,
+        "major": true,
+        "length": 900.0,
+        "half_width": 64.8,
+        "warning_policy": "area",
+        "secondary_pattern": {
+          "kind": "fan",
+          "count": 31,
+          "speed": 205,
+          "life": 5.0,
+          "hit_radius": 4.5,
+          "burst_count": 3,
+          "burst_interval": 0.34,
+          "angle_step": 0.14,
+          "angle_offset": 0.0,
+          "aim_each_burst": false,
+          "bullet_style": "orb",
+          "spread": 4.0
+        }
+      }
+    },
+    {
+      "context": [
+        "B16",
+        1,
+        3
+      ],
+      "before": {
+        "id": "cavalry_break",
+        "action": "pulse",
+        "shape": "ring_gap",
+        "range": 390,
+        "windup": 1.75,
+        "recovery": 3.4,
+        "damage_scale": 1.25,
+        "major": true,
+        "radius": 390,
+        "inner_radius": 85,
+        "gap_width": 1.6,
+        "gap_angle": 0.9
+      },
+      "after": {
+        "id": "cavalry_break",
+        "action": "pulse",
+        "shape": "ring_gap",
+        "range": 468.0,
+        "windup": 1.8,
+        "recovery": 1.972,
+        "damage_scale": 1.25,
+        "major": true,
+        "radius": 468.0,
+        "inner_radius": 85,
+        "gap_width": 1.75,
+        "gap_angle": 0.9,
+        "warning_policy": "area",
+        "secondary_pattern": {
+          "kind": "ring",
+          "count": 44,
+          "speed": 185,
+          "life": 5.0,
+          "hit_radius": 4.5,
+          "burst_count": 3,
+          "burst_interval": 0.34,
+          "angle_step": 0.1,
+          "angle_offset": 0.0,
+          "aim_each_burst": false,
+          "bullet_style": "orb",
+          "gap_width": 1.0,
+          "gap_angle_offset": 0.65
+        }
+      }
+    },
+    {
+      "context": [
+        "B17",
+        0,
+        0
+      ],
+      "before": {
+        "id": "general_lunge",
+        "action": "charge",
+        "shape": "line",
+        "range": 460,
+        "windup": 1.3,
+        "recovery": 1.8,
+        "damage_scale": 1.0,
+        "major": true,
+        "length": 460,
+        "half_width": 38
+      },
+      "after": {
+        "id": "general_lunge",
+        "action": "charge",
+        "shape": "line",
+        "range": 820,
+        "windup": 1.15,
+        "recovery": 1.044,
+        "damage_scale": 1.0,
+        "major": true,
+        "length": 820,
+        "half_width": 45.6,
+        "warning_policy": "area",
+        "secondary_pattern": {
+          "kind": "fan",
+          "count": 23,
+          "speed": 205,
+          "life": 5.0,
+          "hit_radius": 4.5,
+          "burst_count": 2,
+          "burst_interval": 0.34,
+          "angle_step": 0.14,
+          "angle_offset": 0.0,
+          "aim_each_burst": false,
+          "bullet_style": "orb",
+          "spread": 4.0
+        }
+      }
+    },
+    {
+      "context": [
+        "B17",
+        0,
+        1
+      ],
+      "before": {
+        "id": "general_cut",
+        "action": "slam",
+        "shape": "sector",
+        "range": 245,
+        "windup": 1.35,
+        "recovery": 1.7,
+        "damage_scale": 0.95,
+        "major": true,
+        "radius": 245,
+        "spread": 2.4
+      },
+      "after": {
+        "id": "general_cut",
+        "action": "slam",
+        "shape": "sector",
+        "range": 298.9,
+        "windup": 1.25,
+        "recovery": 0.986,
+        "damage_scale": 0.95,
+        "major": true,
+        "radius": 298.9,
+        "spread": 2.4,
+        "warning_policy": "area",
+        "secondary_pattern": {
+          "kind": "ring",
+          "count": 32,
+          "speed": 180,
+          "life": 5.0,
+          "hit_radius": 4.5,
+          "burst_count": 2,
+          "burst_interval": 0.34,
+          "angle_step": 0.12,
+          "angle_offset": 0.0,
+          "aim_each_burst": false,
+          "bullet_style": "orb",
+          "gap_width": 1.0,
+          "gap_angle_offset": 0.65
+        },
+        "approach_speed": 210
+      }
+    },
+    {
+      "context": [
+        "B17",
+        0,
+        2
+      ],
+      "before": {
+        "id": "human_formation",
+        "action": "collaboration",
+        "shape": "line",
+        "range": 820,
+        "windup": 1.45,
+        "recovery": 3.0,
+        "damage_scale": 1.0,
+        "major": true,
+        "length": 720,
+        "half_width": 55,
+        "radius": 185
+      },
+      "after": {
+        "id": "human_formation",
+        "action": "collaboration",
+        "shape": "line",
+        "range": 1200,
+        "windup": 1.4,
+        "recovery": 1.5,
+        "damage_scale": 1.0,
+        "major": true,
+        "length": 1100,
+        "half_width": 80,
+        "radius": 225,
+        "warning_policy": "area",
+        "marker_count": 3,
+        "marker_spacing": 320,
+        "marker_delay": 0.22,
+        "secondary_pattern": {
+          "kind": "fan",
+          "count": 27,
+          "speed": 200,
+          "life": 5.0,
+          "hit_radius": 4.5,
+          "burst_count": 3,
+          "burst_interval": 0.34,
+          "angle_step": 0.12,
+          "angle_offset": 0.0,
+          "aim_each_burst": false,
+          "bullet_style": "orb",
+          "spread": 4.6
+        }
+      }
+    },
+    {
+      "context": [
+        "B17",
+        1,
+        0
+      ],
+      "before": {
+        "id": "yaksha_break",
+        "action": "charge",
+        "shape": "line",
+        "range": 660,
+        "windup": 1.5,
+        "recovery": 1.9,
+        "damage_scale": 1.1,
+        "major": true,
+        "length": 660,
+        "half_width": 54
+      },
+      "after": {
+        "id": "yaksha_break",
+        "action": "charge",
+        "shape": "line",
+        "range": 825.0,
+        "windup": 1.25,
+        "recovery": 1.102,
+        "damage_scale": 1.1,
+        "major": true,
+        "length": 825.0,
+        "half_width": 64.8,
+        "warning_policy": "area",
+        "secondary_pattern": {
+          "kind": "fan",
+          "count": 31,
+          "speed": 205,
+          "life": 5.0,
+          "hit_radius": 4.5,
+          "burst_count": 3,
+          "burst_interval": 0.34,
+          "angle_step": 0.14,
+          "angle_offset": 0.0,
+          "aim_each_burst": false,
+          "bullet_style": "orb",
+          "spread": 4.0
+        }
+      }
+    },
+    {
+      "context": [
+        "B17",
+        1,
+        1
+      ],
+      "before": {
+        "id": "yaksha_cleave",
+        "action": "slam",
+        "shape": "sector",
+        "range": 340,
+        "windup": 1.65,
+        "recovery": 1.8,
+        "damage_scale": 1.05,
+        "major": true,
+        "radius": 340,
+        "spread": 2.65
+      },
+      "after": {
+        "id": "yaksha_cleave",
+        "action": "slam",
+        "shape": "sector",
+        "range": 414.8,
+        "windup": 1.466,
+        "recovery": 1.044,
+        "damage_scale": 1.05,
+        "major": true,
+        "radius": 414.8,
+        "spread": 2.65,
+        "warning_policy": "area",
+        "secondary_pattern": {
+          "kind": "ring",
+          "count": 44,
+          "speed": 195,
+          "life": 5.0,
+          "hit_radius": 4.5,
+          "burst_count": 2,
+          "burst_interval": 0.34,
+          "angle_step": 0.12,
+          "angle_offset": 0.0,
+          "aim_each_burst": false,
+          "bullet_style": "orb",
+          "gap_width": 1.0,
+          "gap_angle_offset": 0.65
+        }
+      }
+    },
+    {
+      "context": [
+        "B17",
+        1,
+        2
+      ],
+      "before": {
+        "id": "war_formation",
+        "action": "collaboration",
+        "shape": "line",
+        "range": 820,
+        "windup": 1.65,
+        "recovery": 3.3,
+        "damage_scale": 1.15,
+        "major": true,
+        "length": 720,
+        "half_width": 55,
+        "radius": 185
+      },
+      "after": {
+        "id": "war_formation",
+        "action": "collaboration",
+        "shape": "line",
+        "range": 1200,
+        "windup": 1.4,
+        "recovery": 1.5,
+        "damage_scale": 1.15,
+        "major": true,
+        "length": 1100,
+        "half_width": 80,
+        "radius": 225,
+        "warning_policy": "area",
+        "marker_count": 3,
+        "marker_spacing": 320,
+        "marker_delay": 0.22,
+        "secondary_pattern": {
+          "kind": "fan",
+          "count": 35,
+          "speed": 200,
+          "life": 5.0,
+          "hit_radius": 4.5,
+          "burst_count": 3,
+          "burst_interval": 0.34,
+          "angle_step": 0.12,
+          "angle_offset": 0.0,
+          "aim_each_burst": false,
+          "bullet_style": "orb",
+          "spread": 4.6
+        }
+      }
+    },
+    {
+      "context": [
+        "B17",
+        1,
+        3
+      ],
+      "before": {
+        "id": "yaksha_pulse",
+        "action": "pulse",
+        "shape": "ring_gap",
+        "range": 420,
+        "windup": 1.8,
+        "recovery": 3.4,
+        "damage_scale": 1.2,
+        "major": true,
+        "radius": 420,
+        "inner_radius": 90,
+        "gap_width": 1.65,
+        "gap_angle": 0.9
+      },
+      "after": {
+        "id": "yaksha_pulse",
+        "action": "pulse",
+        "shape": "ring_gap",
+        "range": 504.0,
+        "windup": 1.8,
+        "recovery": 1.972,
+        "damage_scale": 1.2,
+        "major": true,
+        "radius": 504.0,
+        "inner_radius": 90,
+        "gap_width": 1.75,
+        "gap_angle": 0.9,
+        "warning_policy": "area",
+        "secondary_pattern": {
+          "kind": "ring",
+          "count": 44,
+          "speed": 185,
+          "life": 5.0,
+          "hit_radius": 4.5,
+          "burst_count": 3,
+          "burst_interval": 0.34,
+          "angle_step": 0.1,
+          "angle_offset": 0.0,
+          "aim_each_burst": false,
+          "bullet_style": "orb",
+          "gap_width": 1.0,
+          "gap_angle_offset": 0.65
+        }
+      }
+    },
+    {
+      "context": [
+        "B18",
+        0,
+        0
+      ],
+      "before": {
+        "id": "halberd_sweep",
+        "action": "slam",
+        "shape": "sector",
+        "range": 300,
+        "windup": 1.5,
+        "recovery": 1.9,
+        "damage_scale": 1.0,
+        "major": true,
+        "radius": 300,
+        "spread": 2.5
+      },
+      "after": {
+        "id": "halberd_sweep",
+        "action": "slam",
+        "shape": "sector",
+        "range": 366.0,
+        "windup": 1.294,
+        "recovery": 1.102,
+        "damage_scale": 1.0,
+        "major": true,
+        "radius": 366.0,
+        "spread": 2.5,
+        "warning_policy": "area",
+        "secondary_pattern": {
+          "kind": "ring",
+          "count": 32,
+          "speed": 180,
+          "life": 5.0,
+          "hit_radius": 4.5,
+          "burst_count": 2,
+          "burst_interval": 0.34,
+          "angle_step": 0.12,
+          "angle_offset": 0.0,
+          "aim_each_burst": false,
+          "bullet_style": "orb",
+          "gap_width": 1.0,
+          "gap_angle_offset": 0.65
+        }
+      }
+    },
+    {
+      "context": [
+        "B18",
+        0,
+        1
+      ],
+      "before": {
+        "id": "halberd_charge",
+        "action": "charge",
+        "shape": "line",
+        "range": 650,
+        "windup": 1.5,
+        "recovery": 2.1,
+        "damage_scale": 1.15,
+        "major": true,
+        "length": 650,
+        "half_width": 48
+      },
+      "after": {
+        "id": "halberd_charge",
+        "action": "charge",
+        "shape": "line",
+        "range": 820,
+        "windup": 1.15,
+        "recovery": 1.218,
+        "damage_scale": 1.15,
+        "major": true,
+        "length": 820,
+        "half_width": 57.599999999999994,
+        "warning_policy": "area",
+        "secondary_pattern": {
+          "kind": "fan",
+          "count": 23,
+          "speed": 205,
+          "life": 5.0,
+          "hit_radius": 4.5,
+          "burst_count": 2,
+          "burst_interval": 0.34,
+          "angle_step": 0.14,
+          "angle_offset": 0.0,
+          "aim_each_burst": false,
+          "bullet_style": "orb",
+          "spread": 4.0
+        }
+      }
+    },
+    {
+      "context": [
+        "B18",
+        0,
+        2
+      ],
+      "before": {
+        "id": "halberd_fall",
+        "action": "marker",
+        "shape": "marker",
+        "range": 1050,
+        "windup": 1.55,
+        "recovery": 2.2,
+        "damage_scale": 1.1,
+        "major": true,
+        "radius": 175
+      },
+      "after": {
+        "id": "halberd_fall",
+        "action": "marker",
+        "shape": "marker",
+        "range": 1050,
+        "windup": 1.2,
+        "recovery": 1.276,
+        "damage_scale": 1.1,
+        "major": true,
+        "radius": 203.0,
+        "warning_policy": "area",
+        "marker_count": 3,
+        "marker_spacing": 324.8,
+        "marker_delay": 0.18,
+        "secondary_pattern": {
+          "kind": "ring",
+          "count": 34,
+          "speed": 175,
+          "life": 5.0,
+          "hit_radius": 4.5,
+          "burst_count": 2,
+          "burst_interval": 0.34,
+          "angle_step": 0.1,
+          "angle_offset": 0.0,
+          "aim_each_burst": false,
+          "bullet_style": "orb",
+          "gap_width": 1.1,
+          "gap_angle_offset": 0.65
+        }
+      }
+    },
+    {
+      "context": [
+        "B18",
+        0,
+        3
+      ],
+      "before": {
+        "id": "halberd_finish",
+        "action": "slam",
+        "shape": "sector",
+        "range": 350,
+        "windup": 1.7,
+        "recovery": 3.3,
+        "damage_scale": 1.2,
+        "major": true,
+        "radius": 350,
+        "spread": 2.8
+      },
+      "after": {
+        "id": "halberd_finish",
+        "action": "slam",
+        "shape": "sector",
+        "range": 427.0,
+        "windup": 1.509,
+        "recovery": 1.914,
+        "damage_scale": 1.2,
+        "major": true,
+        "radius": 427.0,
+        "spread": 2.8,
+        "warning_policy": "area",
+        "secondary_pattern": {
+          "kind": "ring",
+          "count": 32,
+          "speed": 180,
+          "life": 5.0,
+          "hit_radius": 4.5,
+          "burst_count": 2,
+          "burst_interval": 0.34,
+          "angle_step": 0.12,
+          "angle_offset": 0.0,
+          "aim_each_burst": false,
+          "bullet_style": "orb",
+          "gap_width": 1.0,
+          "gap_angle_offset": 0.65
+        }
+      }
+    },
+    {
+      "context": [
+        "B18",
+        1,
+        0
+      ],
+      "before": {
+        "id": "demon_fourfold",
+        "action": "slam",
+        "shape": "sector",
+        "range": 410,
+        "windup": 1.85,
+        "recovery": 0.65,
+        "damage_scale": 1.15,
+        "major": true,
+        "radius": 410,
+        "spread": 2.8
+      },
+      "after": {
+        "id": "demon_fourfold",
+        "action": "slam",
+        "shape": "sector",
+        "range": 500.2,
+        "windup": 1.768,
+        "recovery": 0.48,
+        "damage_scale": 1.15,
+        "major": true,
+        "radius": 500.2,
+        "spread": 2.8,
+        "warning_policy": "area",
+        "secondary_pattern": {
+          "kind": "ring",
+          "count": 44,
+          "speed": 195,
+          "life": 5.0,
+          "hit_radius": 4.5,
+          "burst_count": 2,
+          "burst_interval": 0.34,
+          "angle_step": 0.12,
+          "angle_offset": 0.0,
+          "aim_each_burst": false,
+          "bullet_style": "orb",
+          "gap_width": 1.0,
+          "gap_angle_offset": 0.65
+        }
+      }
+    },
+    {
+      "context": [
+        "B18",
+        1,
+        1
+      ],
+      "before": {
+        "id": "demon_skybreaker",
+        "action": "charge",
+        "shape": "line",
+        "range": 940,
+        "windup": 1.75,
+        "recovery": 0.8,
+        "damage_scale": 1.25,
+        "major": true,
+        "length": 940,
+        "half_width": 68
+      },
+      "after": {
+        "id": "demon_skybreaker",
+        "action": "charge",
+        "shape": "line",
+        "range": 1175.0,
+        "windup": 1.25,
+        "recovery": 0.48,
+        "damage_scale": 1.25,
+        "major": true,
+        "length": 1175.0,
+        "half_width": 81.6,
+        "warning_policy": "area",
+        "secondary_pattern": {
+          "kind": "fan",
+          "count": 31,
+          "speed": 205,
+          "life": 5.0,
+          "hit_radius": 4.5,
+          "burst_count": 3,
+          "burst_interval": 0.34,
+          "angle_step": 0.14,
+          "angle_offset": 0.0,
+          "aim_each_burst": false,
+          "bullet_style": "orb",
+          "spread": 4.0
+        }
+      }
+    },
+    {
+      "context": [
+        "B18",
+        1,
+        2
+      ],
+      "before": {
+        "id": "demon_quake",
+        "action": "pulse",
+        "shape": "ring_gap",
+        "range": 520,
+        "windup": 1.9,
+        "recovery": 1.0,
+        "damage_scale": 1.15,
+        "major": true,
+        "radius": 520,
+        "inner_radius": 105,
+        "gap_width": 1.75,
+        "gap_angle": 0.9
+      },
+      "after": {
+        "id": "demon_quake",
+        "action": "pulse",
+        "shape": "ring_gap",
+        "range": 624.0,
+        "windup": 1.8,
+        "recovery": 0.58,
+        "damage_scale": 1.15,
+        "major": true,
+        "radius": 624.0,
+        "inner_radius": 105,
+        "gap_width": 1.75,
+        "gap_angle": 0.9,
+        "warning_policy": "area",
+        "secondary_pattern": {
+          "kind": "ring",
+          "count": 44,
+          "speed": 185,
+          "life": 5.0,
+          "hit_radius": 4.5,
+          "burst_count": 3,
+          "burst_interval": 0.34,
+          "angle_step": 0.1,
+          "angle_offset": 0.0,
+          "aim_each_burst": false,
+          "bullet_style": "orb",
+          "gap_width": 1.0,
+          "gap_angle_offset": 0.65
+        }
+      }
+    },
+    {
+      "context": [
+        "B18",
+        1,
+        3
+      ],
+      "before": {
+        "id": "demon_heavenfall",
+        "action": "marker",
+        "shape": "marker",
+        "range": 1050,
+        "windup": 1.9,
+        "recovery": 0.9,
+        "damage_scale": 1.2,
+        "major": true,
+        "radius": 235
+      },
+      "after": {
+        "id": "demon_heavenfall",
+        "action": "marker",
+        "shape": "marker",
+        "range": 1050,
+        "windup": 1.524,
+        "recovery": 0.522,
+        "damage_scale": 1.2,
+        "major": true,
+        "radius": 272.59999999999997,
+        "warning_policy": "area",
+        "marker_count": 5,
+        "marker_spacing": 436.16,
+        "marker_delay": 0.18,
+        "secondary_pattern": {
+          "kind": "ring",
+          "count": 44,
+          "speed": 175,
+          "life": 5.0,
+          "hit_radius": 4.5,
+          "burst_count": 2,
+          "burst_interval": 0.34,
+          "angle_step": 0.1,
+          "angle_offset": 0.0,
+          "aim_each_burst": false,
+          "bullet_style": "orb",
+          "gap_width": 1.1,
+          "gap_angle_offset": 0.65
+        }
+      }
+    },
+    {
+      "context": [
+        "B18",
+        1,
+        4
+      ],
+      "before": {
+        "id": "demon_final_cleave",
+        "action": "slam",
+        "shape": "sector",
+        "range": 460,
+        "windup": 2.0,
+        "recovery": 3.7,
+        "damage_scale": 1.35,
+        "major": true,
+        "radius": 460,
+        "spread": 3.1
+      },
+      "after": {
+        "id": "demon_final_cleave",
+        "action": "slam",
+        "shape": "sector",
+        "range": 550,
+        "windup": 1.944,
+        "recovery": 2.146,
+        "damage_scale": 1.35,
+        "major": true,
+        "radius": 550,
+        "spread": 3.1,
+        "warning_policy": "area",
+        "secondary_pattern": {
+          "kind": "ring",
+          "count": 44,
+          "speed": 195,
+          "life": 5.0,
+          "hit_radius": 4.5,
+          "burst_count": 2,
+          "burst_interval": 0.34,
+          "angle_step": 0.12,
+          "angle_offset": 0.0,
+          "aim_each_burst": false,
+          "bullet_style": "orb",
+          "gap_width": 1.0,
+          "gap_angle_offset": 0.65
+        }
+      }
+    }
+  ]
+}

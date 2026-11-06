@@ -1,0 +1,8 @@
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+ERROR: actual field elite hook still changes framing
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://design/camera-mob-framing-20261106/runtime-owner/owner_contract.gd:13)
+       [1] run (res://design/camera-mob-framing-20261106/runtime-owner/owner_contract.gd:63)
+CAMERA_OWNER_CONTRACT checks=28 failures=1 elite_warning_frames=181 elite_route_frames=65 elite_min_scale=1.0

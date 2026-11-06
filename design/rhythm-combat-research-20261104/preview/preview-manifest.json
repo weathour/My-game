@@ -1,0 +1,374 @@
+{
+  "schema_version": 1,
+  "purpose": "Compare D2 audio with a candidate quarter-note timing cue by ear.",
+  "status": "candidate_only_not_manually_beat_calibrated",
+  "playlist": {
+    "path": "preview.m3u",
+    "sha256": "17c145603a3a86b846aa3414e4fe8a1fda05f2c68ecd0e26842852c056f6aae2"
+  },
+  "method": {
+    "source": "existing published D2 game OGGs, decoded without altering them",
+    "window": "median_density, fixed 8 quarter-note beats from the rhythm audit",
+    "nominal_mapping": "t_ogg = t_midi - declared_trim_seconds; this is the declared render transform, while residual renderer/device delay remains unmeasured",
+    "tempo": "Each quarter-note event uses integration of the complete per-song MIDI tempo map, including changes inside a window.",
+    "candidate_cue": "Eight identical quiet 880 Hz, 35 ms decaying sine ticks, one at each quarter-note boundary. No accent or downbeat strength is inferred.",
+    "mixing": "Original and candidate receive the same crop and same fixed gain. If needed, one shared constant gain keeps the pair below -1 dBFS. No compressor, limiter, fades, or time-moving processing.",
+    "drum_metadata": "Drum count/density and MIDI velocities are listed only as candidate comparison data; velocity is not treated as audible loudness or a true accent."
+  },
+  "songs": [
+    {
+      "cue_id": "midi_test_02",
+      "title": "mOBSCENE",
+      "window_selection": "median_density",
+      "window_start_tick": 15360,
+      "window_end_tick": 19200,
+      "ppq": 480,
+      "window_midi_start_seconds": 14.769312,
+      "window_midi_end_seconds": 18.46164,
+      "declared_trim_seconds": 1.6462,
+      "nominal_ogg_start_seconds": 13.123112,
+      "nominal_ogg_end_seconds": 16.81544,
+      "duration_seconds": 3.692333333,
+      "source_ogg_path": "assets/music/midi_test/midi_test_02.ogg",
+      "source_ogg_sha256_before": "e8f8c799962c1b94ed5140f1ebbf0269d9e59ad05045c6a11819ff9f62dcaad6",
+      "source_ogg_sha256_after": "e8f8c799962c1b94ed5140f1ebbf0269d9e59ad05045c6a11819ff9f62dcaad6",
+      "source_ogg_hash_unchanged": true,
+      "source_event_count_in_window": 21,
+      "source_event_density_per_quarter": 2.625,
+      "source_event_velocities_in_window": [
+        100
+      ],
+      "beat_cue_candidate": {
+        "events": [
+          {
+            "quarter_index": 0,
+            "midi_tick": 15360,
+            "midi_time_seconds": 14.769312,
+            "nominal_ogg_time_seconds": 13.123112,
+            "clip_time_seconds": 0.0,
+            "sample_index": 0
+          },
+          {
+            "quarter_index": 1,
+            "midi_tick": 15840,
+            "midi_time_seconds": 15.230853,
+            "nominal_ogg_time_seconds": 13.584653,
+            "clip_time_seconds": 0.461541,
+            "sample_index": 22154
+          },
+          {
+            "quarter_index": 2,
+            "midi_tick": 16320,
+            "midi_time_seconds": 15.692394,
+            "nominal_ogg_time_seconds": 14.046194,
+            "clip_time_seconds": 0.923082,
+            "sample_index": 44308
+          },
+          {
+            "quarter_index": 3,
+            "midi_tick": 16800,
+            "midi_time_seconds": 16.153935,
+            "nominal_ogg_time_seconds": 14.507735,
+            "clip_time_seconds": 1.384623,
+            "sample_index": 66462
+          },
+          {
+            "quarter_index": 4,
+            "midi_tick": 17280,
+            "midi_time_seconds": 16.615476,
+            "nominal_ogg_time_seconds": 14.969276,
+            "clip_time_seconds": 1.846164,
+            "sample_index": 88616
+          },
+          {
+            "quarter_index": 5,
+            "midi_tick": 17760,
+            "midi_time_seconds": 17.077017,
+            "nominal_ogg_time_seconds": 15.430817,
+            "clip_time_seconds": 2.307705,
+            "sample_index": 110770
+          },
+          {
+            "quarter_index": 6,
+            "midi_tick": 18240,
+            "midi_time_seconds": 17.538558,
+            "nominal_ogg_time_seconds": 15.892358,
+            "clip_time_seconds": 2.769246,
+            "sample_index": 132924
+          },
+          {
+            "quarter_index": 7,
+            "midi_tick": 18720,
+            "midi_time_seconds": 18.000099,
+            "nominal_ogg_time_seconds": 16.353899,
+            "clip_time_seconds": 3.230787,
+            "sample_index": 155078
+          }
+        ],
+        "tone_hz": 880.0,
+        "tone_duration_seconds": 0.035,
+        "tone_peak_dbfs_before_shared_gain": -24.0,
+        "same_tone_each_quarter": true,
+        "accent_or_downbeat_claimed": false,
+        "status": "candidate timing cue; not manually beat-calibrated"
+      },
+      "output": {
+        "sample_rate": 48000,
+        "channels": 2,
+        "pcm": "signed 16-bit little-endian",
+        "original_wav": {
+          "path": "midi_test_02-median-8beats-d2-original.wav",
+          "sha256": "7fe34b95af66aaed970dffa5221674d960c604f82e3bab47c149d8ba5177df3a",
+          "duration_seconds": 3.692333333,
+          "peak_dbfs": -6.282465
+        },
+        "candidate_wav": {
+          "path": "midi_test_02-median-8beats-d2-plus-candidate-quarter-clicks.wav",
+          "sha256": "b96d5e2dfd1fe6bc554046061b1742a2b04f5dce137cb0939cce7d1d2de92e1f",
+          "duration_seconds": 3.692333333,
+          "peak_dbfs": -6.283453
+        },
+        "shared_fixed_gain_linear": 1.0,
+        "common_peak_ceiling_dbfs": -1.0,
+        "dynamic_processing": false,
+        "same_crop_and_original_gain_for_pair": true
+      }
+    },
+    {
+      "cue_id": "midi_test_06",
+      "title": "Antichrist Superstar",
+      "window_selection": "median_density",
+      "window_start_tick": 26880,
+      "window_end_tick": 30720,
+      "ppq": 480,
+      "window_midi_start_seconds": 39.28692,
+      "window_midi_end_seconds": 44.870324,
+      "declared_trim_seconds": 0.1477,
+      "nominal_ogg_start_seconds": 39.13922,
+      "nominal_ogg_end_seconds": 44.722624,
+      "duration_seconds": 5.583395833,
+      "source_ogg_path": "assets/music/midi_test/midi_test_06.ogg",
+      "source_ogg_sha256_before": "8334c3f73c40aa2ce74317b66b4ede12c10a70b1e186ea1f762537426e1c6c2e",
+      "source_ogg_sha256_after": "8334c3f73c40aa2ce74317b66b4ede12c10a70b1e186ea1f762537426e1c6c2e",
+      "source_ogg_hash_unchanged": true,
+      "source_event_count_in_window": 29,
+      "source_event_density_per_quarter": 3.625,
+      "source_event_velocities_in_window": [
+        100
+      ],
+      "beat_cue_candidate": {
+        "events": [
+          {
+            "quarter_index": 0,
+            "midi_tick": 26880,
+            "midi_time_seconds": 39.28692,
+            "nominal_ogg_time_seconds": 39.13922,
+            "clip_time_seconds": 0.0,
+            "sample_index": 0
+          },
+          {
+            "quarter_index": 1,
+            "midi_tick": 27360,
+            "midi_time_seconds": 39.984965,
+            "nominal_ogg_time_seconds": 39.837265,
+            "clip_time_seconds": 0.698045,
+            "sample_index": 33506
+          },
+          {
+            "quarter_index": 2,
+            "midi_tick": 27840,
+            "midi_time_seconds": 40.68301,
+            "nominal_ogg_time_seconds": 40.53531,
+            "clip_time_seconds": 1.39609,
+            "sample_index": 67012
+          },
+          {
+            "quarter_index": 3,
+            "midi_tick": 28320,
+            "midi_time_seconds": 41.381055,
+            "nominal_ogg_time_seconds": 41.233355,
+            "clip_time_seconds": 2.094135,
+            "sample_index": 100518
+          },
+          {
+            "quarter_index": 4,
+            "midi_tick": 28800,
+            "midi_time_seconds": 42.0791,
+            "nominal_ogg_time_seconds": 41.9314,
+            "clip_time_seconds": 2.79218,
+            "sample_index": 134025
+          },
+          {
+            "quarter_index": 5,
+            "midi_tick": 29280,
+            "midi_time_seconds": 42.777145,
+            "nominal_ogg_time_seconds": 42.629445,
+            "clip_time_seconds": 3.490225,
+            "sample_index": 167531
+          },
+          {
+            "quarter_index": 6,
+            "midi_tick": 29760,
+            "midi_time_seconds": 43.47519,
+            "nominal_ogg_time_seconds": 43.32749,
+            "clip_time_seconds": 4.18827,
+            "sample_index": 201037
+          },
+          {
+            "quarter_index": 7,
+            "midi_tick": 30240,
+            "midi_time_seconds": 44.172757,
+            "nominal_ogg_time_seconds": 44.025057,
+            "clip_time_seconds": 4.885837,
+            "sample_index": 234520
+          }
+        ],
+        "tone_hz": 880.0,
+        "tone_duration_seconds": 0.035,
+        "tone_peak_dbfs_before_shared_gain": -24.0,
+        "same_tone_each_quarter": true,
+        "accent_or_downbeat_claimed": false,
+        "status": "candidate timing cue; not manually beat-calibrated"
+      },
+      "output": {
+        "sample_rate": 48000,
+        "channels": 2,
+        "pcm": "signed 16-bit little-endian",
+        "original_wav": {
+          "path": "midi_test_06-median-8beats-d2-original.wav",
+          "sha256": "01a5b942a680bf6a8a294d1b4d661e312c9f9bba3ba7e16eeab48a7e1525509f",
+          "duration_seconds": 5.583395833,
+          "peak_dbfs": -8.916586
+        },
+        "candidate_wav": {
+          "path": "midi_test_06-median-8beats-d2-plus-candidate-quarter-clicks.wav",
+          "sha256": "c2cccbd4ea1c9f02dd3b383e293aff55dd95657eceb263367478bbd1e9e5f894",
+          "duration_seconds": 5.583395833,
+          "peak_dbfs": -9.591314
+        },
+        "shared_fixed_gain_linear": 1.0,
+        "common_peak_ceiling_dbfs": -1.0,
+        "dynamic_processing": false,
+        "same_crop_and_original_gain_for_pair": true
+      }
+    },
+    {
+      "cue_id": "midi_test_08",
+      "title": "Man That You Fear",
+      "window_selection": "median_density",
+      "window_start_tick": 34560,
+      "window_end_tick": 38400,
+      "ppq": 480,
+      "window_midi_start_seconds": 66.459744,
+      "window_midi_end_seconds": 73.84416,
+      "declared_trim_seconds": 0.8388,
+      "nominal_ogg_start_seconds": 65.620944,
+      "nominal_ogg_end_seconds": 73.00536,
+      "duration_seconds": 7.384416667,
+      "source_ogg_path": "assets/music/midi_test/midi_test_08.ogg",
+      "source_ogg_sha256_before": "924cabe92795fcc3d435a652a4a50050e4f46036be50d509a6c7407bfe487e87",
+      "source_ogg_sha256_after": "924cabe92795fcc3d435a652a4a50050e4f46036be50d509a6c7407bfe487e87",
+      "source_ogg_hash_unchanged": true,
+      "source_event_count_in_window": 20,
+      "source_event_density_per_quarter": 2.5,
+      "source_event_velocities_in_window": [
+        100
+      ],
+      "beat_cue_candidate": {
+        "events": [
+          {
+            "quarter_index": 0,
+            "midi_tick": 34560,
+            "midi_time_seconds": 66.459744,
+            "nominal_ogg_time_seconds": 65.620944,
+            "clip_time_seconds": 0.0,
+            "sample_index": 0
+          },
+          {
+            "quarter_index": 1,
+            "midi_tick": 35040,
+            "midi_time_seconds": 67.382796,
+            "nominal_ogg_time_seconds": 66.543996,
+            "clip_time_seconds": 0.923052,
+            "sample_index": 44306
+          },
+          {
+            "quarter_index": 2,
+            "midi_tick": 35520,
+            "midi_time_seconds": 68.305848,
+            "nominal_ogg_time_seconds": 67.467048,
+            "clip_time_seconds": 1.846104,
+            "sample_index": 88613
+          },
+          {
+            "quarter_index": 3,
+            "midi_tick": 36000,
+            "midi_time_seconds": 69.2289,
+            "nominal_ogg_time_seconds": 68.3901,
+            "clip_time_seconds": 2.769156,
+            "sample_index": 132919
+          },
+          {
+            "quarter_index": 4,
+            "midi_tick": 36480,
+            "midi_time_seconds": 70.151952,
+            "nominal_ogg_time_seconds": 69.313152,
+            "clip_time_seconds": 3.692208,
+            "sample_index": 177226
+          },
+          {
+            "quarter_index": 5,
+            "midi_tick": 36960,
+            "midi_time_seconds": 71.075004,
+            "nominal_ogg_time_seconds": 70.236204,
+            "clip_time_seconds": 4.61526,
+            "sample_index": 221532
+          },
+          {
+            "quarter_index": 6,
+            "midi_tick": 37440,
+            "midi_time_seconds": 71.998056,
+            "nominal_ogg_time_seconds": 71.159256,
+            "clip_time_seconds": 5.538312,
+            "sample_index": 265839
+          },
+          {
+            "quarter_index": 7,
+            "midi_tick": 37920,
+            "midi_time_seconds": 72.921108,
+            "nominal_ogg_time_seconds": 72.082308,
+            "clip_time_seconds": 6.461364,
+            "sample_index": 310145
+          }
+        ],
+        "tone_hz": 880.0,
+        "tone_duration_seconds": 0.035,
+        "tone_peak_dbfs_before_shared_gain": -24.0,
+        "same_tone_each_quarter": true,
+        "accent_or_downbeat_claimed": false,
+        "status": "candidate timing cue; not manually beat-calibrated"
+      },
+      "output": {
+        "sample_rate": 48000,
+        "channels": 2,
+        "pcm": "signed 16-bit little-endian",
+        "original_wav": {
+          "path": "midi_test_08-median-8beats-d2-original.wav",
+          "sha256": "3f05cf21062b2b09b8715e2c680a9a450d7782f7d854358e551120e282cf54c8",
+          "duration_seconds": 7.384416667,
+          "peak_dbfs": -12.037298
+        },
+        "candidate_wav": {
+          "path": "midi_test_08-median-8beats-d2-plus-candidate-quarter-clicks.wav",
+          "sha256": "9b43105a36807cd10947999c212cfb45834ebe2ea66c15e3cb84925d3bd301eb",
+          "duration_seconds": 7.384416667,
+          "peak_dbfs": -11.720846
+        },
+        "shared_fixed_gain_linear": 1.0,
+        "common_peak_ceiling_dbfs": -1.0,
+        "dynamic_processing": false,
+        "same_crop_and_original_gain_for_pair": true
+      }
+    }
+  ]
+}

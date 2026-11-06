@@ -1,0 +1,112 @@
+{
+  "ui_checks": [
+    {
+      "check": "default catalog load completes asynchronously",
+      "pass": true
+    },
+    {
+      "check": "default is mOBSCENE",
+      "pass": true
+    },
+    {
+      "check": "initial audio does not autoplay",
+      "pass": true
+    },
+    {
+      "check": "pulse plan has inferred time grid",
+      "pass": true
+    },
+    {
+      "check": "visual and judge window boundaries agree",
+      "pass": true
+    },
+    {
+      "check": "fresh keys captured, shared reference duplicate classified",
+      "pass": true
+    },
+    {
+      "check": "keyboard auto-repeat does not record",
+      "pass": true
+    },
+    {
+      "check": "spin editor does not leak a tap",
+      "pass": true
+    },
+    {
+      "check": "another active window does not record a tap",
+      "pass": true
+    },
+    {
+      "check": "mouse key records separate input source",
+      "pass": true
+    },
+    {
+      "check": "keyboard End actually seeks and starts a new trial",
+      "pass": true
+    },
+    {
+      "check": "keyboard Home actually seeks and starts a new trial",
+      "pass": true
+    },
+    {
+      "check": "onset comparison disables layer and phase",
+      "pass": true
+    },
+    {
+      "check": "dense onset display uses judge windows",
+      "pass": true
+    },
+    {
+      "check": "blind mode hides pulse, scores, errors and analysis",
+      "pass": true
+    },
+    {
+      "check": "blind mode has no reference or click controls",
+      "pass": true
+    },
+    {
+      "check": "blind tap contains no target or score",
+      "pass": true
+    },
+    {
+      "check": "small window accepts intended minimum size",
+      "pass": true
+    },
+    {
+      "check": "positive compensation advances raw tap by100ms",
+      "pass": true
+    },
+    {
+      "check": "application focus loss automatically pauses",
+      "pass": true
+    },
+    {
+      "check": "all trials export to one session JSON",
+      "pass": true
+    },
+    {
+      "check": "trial changes retain prior taps",
+      "pass": true
+    },
+    {
+      "check": "trial provenance includes resource hashes and exact reference grid",
+      "pass": true
+    }
+  ],
+  "ui_count": 23,
+  "transport_probe": {
+    "check": "actual audio backend playback position advances",
+    "pass": true,
+    "state": "playing",
+    "position": 0.192,
+    "volume": 0,
+    "separate_from_clock_fixtures": true
+  },
+  "fixture_semantics": "UI routing checks use explicitly controlled AudioTransport sampled time/state; not an audio-clock accuracy or perceptual-beat evaluation",
+  "native_end_to_end": {
+    "artifact": "native-end-to-end.json",
+    "checks": 44,
+    "passed": true,
+    "clock_state_patched": false
+  }
+}

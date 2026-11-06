@@ -1,0 +1,721 @@
+{
+  "schema_version": 1,
+  "status": "FAILED",
+  "run": {
+    "runner_pid": 3895356,
+    "child_pid": 3895357,
+    "runner_status": "failed",
+    "returncode": 1,
+    "started_at_unix": 1793855861.9555714,
+    "finished_at_unix": 1793856734.0604272,
+    "elapsed_seconds": 872.1048562526703
+  },
+  "smoke_inventory": {
+    "expected_scripts": 55,
+    "expected_names": [
+      "baimen_enemy_runtime_smoke",
+      "baimen_women_combat_art_smoke",
+      "baimen_women_portraits_smoke",
+      "boss_combo_timing_smoke",
+      "boss_forms_smoke",
+      "boss_friendly_art_smoke",
+      "chronicle_audio_settings_render_smoke",
+      "chronicle_authored_effects_smoke",
+      "chronicle_battle_ground_smoke",
+      "chronicle_battle_scale_smoke",
+      "chronicle_boss_camera_smoke",
+      "chronicle_boss_flow_smoke",
+      "chronicle_boss_sound_smoke",
+      "chronicle_chapter_two_smoke",
+      "chronicle_character_campaign_smoke",
+      "chronicle_character_mechanics_smoke",
+      "chronicle_character_panels_smoke",
+      "chronicle_character_profiles_smoke",
+      "chronicle_combat_feedback_events_smoke",
+      "chronicle_combat_feedback_pack_smoke",
+      "chronicle_combat_feedback_smoke",
+      "chronicle_combat_smoke",
+      "chronicle_context_navigation_smoke",
+      "chronicle_danmaku_smoke",
+      "chronicle_enemy_campaign_smoke",
+      "chronicle_enemy_codex_smoke",
+      "chronicle_enemy_content_smoke",
+      "chronicle_enemy_effects_smoke",
+      "chronicle_enemy_pack_smoke",
+      "chronicle_enemy_presentation_smoke",
+      "chronicle_enemy_sessions_smoke",
+      "chronicle_feedback_latency_smoke",
+      "chronicle_home_menu_render_smoke",
+      "chronicle_mechanic_hud_smoke",
+      "chronicle_melee_reach_smoke",
+      "chronicle_music_pack_smoke",
+      "chronicle_music_playback_smoke",
+      "chronicle_music_smoke",
+      "chronicle_party_drag_smoke",
+      "chronicle_party_summary_smoke",
+      "chronicle_playable_ui_smoke",
+      "chronicle_player_hurtbox_center_smoke",
+      "chronicle_reflow_visual_smoke",
+      "chronicle_roster_content_smoke",
+      "chronicle_route_map_smoke",
+      "chronicle_skill_audio_smoke",
+      "chronicle_skill_presentation_smoke",
+      "chronicle_story_content_smoke",
+      "chronicle_story_history_smoke",
+      "chronicle_story_optional_render_smoke",
+      "chronicle_story_pack_smoke",
+      "chronicle_story_progress_smoke",
+      "chronicle_story_replay_smoke",
+      "chronicle_story_ui_smoke",
+      "jia_combat_art_smoke"
+    ],
+    "attempted_log_count": 42,
+    "validator_pass_count": 41,
+    "validator_fail_count": 1,
+    "not_run_count": 13,
+    "validated_check_total": 105273
+  },
+  "failure": {
+    "script": "scripts/tests/chronicle_playable_ui_smoke.gd",
+    "status": "failed",
+    "returncode": 1,
+    "log": "design/skill-presentation-20261105/verification/project-check/chronicle_playable_ui_smoke.log",
+    "checks": null,
+    "success_line": null,
+    "validator_errors": [
+      "ERROR: Emma reuses the existing mage scene",
+      "missing successful smoke result"
+    ],
+    "allowed_faults_expected": 0
+  },
+  "source_snapshot": {
+    "sha256": "bd7feb689afa0f3e21a96d6a6de5c6605c3cdf3303a9ea6e650ab8c578157897",
+    "file_count": 186,
+    "method": "SHA-256 over sorted path+bytes for source/config files under scripts, scenes, assets/data/chronicle, assets/data/audio, plus project.godot and export_presets.cfg; current working contents."
+  },
+  "scripts": [
+    {
+      "script": "scripts/tests/baimen_enemy_runtime_smoke.gd",
+      "status": "passed",
+      "returncode": 0,
+      "log": "design/skill-presentation-20261105/verification/project-check/baimen_enemy_runtime_smoke.log",
+      "checks": 743,
+      "success_line": "BAIMEN_ENEMY_RUNTIME_SMOKE PASS checks=743 failures=0",
+      "validator_errors": [],
+      "allowed_faults_expected": 0,
+      "authorized_fault_matches": []
+    },
+    {
+      "script": "scripts/tests/baimen_women_combat_art_smoke.gd",
+      "status": "passed",
+      "returncode": 0,
+      "log": "design/skill-presentation-20261105/verification/project-check/baimen_women_combat_art_smoke.log",
+      "checks": 266,
+      "success_line": "BAIMEN_WOMEN_COMBAT_ART_SMOKE PASS checks=266 failures=0",
+      "validator_errors": [],
+      "allowed_faults_expected": 0,
+      "authorized_fault_matches": []
+    },
+    {
+      "script": "scripts/tests/baimen_women_portraits_smoke.gd",
+      "status": "passed",
+      "returncode": 0,
+      "log": "design/skill-presentation-20261105/verification/project-check/baimen_women_portraits_smoke.log",
+      "checks": 525,
+      "success_line": "BAIMEN_WOMEN_PORTRAITS_SMOKE PASS checks=525 failures=0",
+      "validator_errors": [],
+      "allowed_faults_expected": 0,
+      "authorized_fault_matches": []
+    },
+    {
+      "script": "scripts/tests/boss_combo_timing_smoke.gd",
+      "status": "passed",
+      "returncode": 0,
+      "log": "design/skill-presentation-20261105/verification/project-check/boss_combo_timing_smoke.log",
+      "checks": 41,
+      "success_line": "BOSS_COMBO_TIMING_SMOKE PASS checks=41 failures=0",
+      "validator_errors": [],
+      "allowed_faults_expected": 0,
+      "authorized_fault_matches": []
+    },
+    {
+      "script": "scripts/tests/boss_forms_smoke.gd",
+      "status": "passed",
+      "returncode": 0,
+      "log": "design/skill-presentation-20261105/verification/project-check/boss_forms_smoke.log",
+      "checks": 672,
+      "success_line": "BOSS_FORMS_SMOKE PASS checks=672 failures=0 authored_moves=30",
+      "validator_errors": [],
+      "allowed_faults_expected": 0,
+      "authorized_fault_matches": []
+    },
+    {
+      "script": "scripts/tests/boss_friendly_art_smoke.gd",
+      "status": "passed",
+      "returncode": 0,
+      "log": "design/skill-presentation-20261105/verification/project-check/boss_friendly_art_smoke.log",
+      "checks": 146,
+      "success_line": "BOSS_FRIENDLY_ART_SMOKE PASS checks=146 failures=0 portrait_capture=unavailable",
+      "validator_errors": [],
+      "allowed_faults_expected": 0,
+      "authorized_fault_matches": []
+    },
+    {
+      "script": "scripts/tests/chronicle_audio_settings_render_smoke.gd",
+      "status": "passed",
+      "returncode": 0,
+      "log": "design/skill-presentation-20261105/verification/project-check/chronicle_audio_settings_render_smoke.log",
+      "checks": 300,
+      "success_line": "CHRONICLE_AUDIO_SETTINGS_RENDER_SMOKE PASS checks=300 failures=0",
+      "validator_errors": [],
+      "allowed_faults_expected": 0,
+      "authorized_fault_matches": []
+    },
+    {
+      "script": "scripts/tests/chronicle_authored_effects_smoke.gd",
+      "status": "passed",
+      "returncode": 0,
+      "log": "design/skill-presentation-20261105/verification/project-check/chronicle_authored_effects_smoke.log",
+      "checks": 36,
+      "success_line": "CHRONICLE_AUTHORED_EFFECTS_SMOKE PASS checks=36 failures=0",
+      "validator_errors": [],
+      "allowed_faults_expected": 0,
+      "authorized_fault_matches": []
+    },
+    {
+      "script": "scripts/tests/chronicle_battle_ground_smoke.gd",
+      "status": "passed",
+      "returncode": 0,
+      "log": "design/skill-presentation-20261105/verification/project-check/chronicle_battle_ground_smoke.log",
+      "checks": 191,
+      "success_line": "CHRONICLE_BATTLE_GROUND_SMOKE PASS checks=191 failures=0",
+      "validator_errors": [],
+      "allowed_faults_expected": 0,
+      "authorized_fault_matches": []
+    },
+    {
+      "script": "scripts/tests/chronicle_battle_scale_smoke.gd",
+      "status": "passed",
+      "returncode": 0,
+      "log": "design/skill-presentation-20261105/verification/project-check/chronicle_battle_scale_smoke.log",
+      "checks": 564,
+      "success_line": "CHRONICLE_BATTLE_SCALE_SMOKE PASS checks=564 failures=0",
+      "validator_errors": [],
+      "allowed_faults_expected": 0,
+      "authorized_fault_matches": []
+    },
+    {
+      "script": "scripts/tests/chronicle_boss_camera_smoke.gd",
+      "status": "passed",
+      "returncode": 0,
+      "log": "design/skill-presentation-20261105/verification/project-check/chronicle_boss_camera_smoke.log",
+      "checks": 165,
+      "success_line": "CHRONICLE_BOSS_CAMERA_SMOKE PASS checks=165 failures=0",
+      "validator_errors": [],
+      "allowed_faults_expected": 0,
+      "authorized_fault_matches": []
+    },
+    {
+      "script": "scripts/tests/chronicle_boss_flow_smoke.gd",
+      "status": "passed",
+      "returncode": 0,
+      "log": "design/skill-presentation-20261105/verification/project-check/chronicle_boss_flow_smoke.log",
+      "checks": 140,
+      "success_line": "CHRONICLE_BOSS_FLOW_SMOKE PASS checks=140 failures=0",
+      "validator_errors": [],
+      "allowed_faults_expected": 0,
+      "authorized_fault_matches": []
+    },
+    {
+      "script": "scripts/tests/chronicle_boss_sound_smoke.gd",
+      "status": "passed",
+      "returncode": 0,
+      "log": "design/skill-presentation-20261105/verification/project-check/chronicle_boss_sound_smoke.log",
+      "checks": 23,
+      "success_line": "CHRONICLE_BOSS_SOUND_SMOKE PASS checks=23 failures=0",
+      "validator_errors": [],
+      "allowed_faults_expected": 0,
+      "authorized_fault_matches": []
+    },
+    {
+      "script": "scripts/tests/chronicle_chapter_two_smoke.gd",
+      "status": "passed",
+      "returncode": 0,
+      "log": "design/skill-presentation-20261105/verification/project-check/chronicle_chapter_two_smoke.log",
+      "checks": 189,
+      "success_line": "CHRONICLE_CHAPTER_TWO_SMOKE PASS checks=189 failures=0",
+      "validator_errors": [],
+      "allowed_faults_expected": 0,
+      "authorized_fault_matches": []
+    },
+    {
+      "script": "scripts/tests/chronicle_character_campaign_smoke.gd",
+      "status": "passed",
+      "returncode": 0,
+      "log": "design/skill-presentation-20261105/verification/project-check/chronicle_character_campaign_smoke.log",
+      "checks": 196,
+      "success_line": "CHRONICLE_CHARACTER_CAMPAIGN_SMOKE PASS checks=196 failures=0",
+      "validator_errors": [],
+      "allowed_faults_expected": 1,
+      "authorized_fault_matches": [
+        {
+          "marker": "EXPECTED_FAULT_INJECTION: post-battle story save rejected",
+          "error": "ERROR: Could not create directory: '/proc/character-campaign-story-write-rejected'."
+        },
+        {
+          "marker": "EXPECTED_FAULT_INJECTION: post-battle story save rejected",
+          "error": "ERROR: Could not create directory: '/proc/character-campaign-story-write-rejected'."
+        }
+      ]
+    },
+    {
+      "script": "scripts/tests/chronicle_character_mechanics_smoke.gd",
+      "status": "passed",
+      "returncode": 0,
+      "log": "design/skill-presentation-20261105/verification/project-check/chronicle_character_mechanics_smoke.log",
+      "checks": 126,
+      "success_line": "CHRONICLE_CHARACTER_MECHANICS_SMOKE PASS checks=126 failures=0",
+      "validator_errors": [],
+      "allowed_faults_expected": 0,
+      "authorized_fault_matches": []
+    },
+    {
+      "script": "scripts/tests/chronicle_character_panels_smoke.gd",
+      "status": "passed",
+      "returncode": 0,
+      "log": "design/skill-presentation-20261105/verification/project-check/chronicle_character_panels_smoke.log",
+      "checks": 384,
+      "success_line": "CHRONICLE_CHARACTER_PANELS_SMOKE PASS checks=384 failures=0",
+      "validator_errors": [],
+      "allowed_faults_expected": 0,
+      "authorized_fault_matches": []
+    },
+    {
+      "script": "scripts/tests/chronicle_character_profiles_smoke.gd",
+      "status": "passed",
+      "returncode": 0,
+      "log": "design/skill-presentation-20261105/verification/project-check/chronicle_character_profiles_smoke.log",
+      "checks": 121,
+      "success_line": "CHRONICLE_CHARACTER_PROFILES_SMOKE PASS checks=121 failures=0",
+      "validator_errors": [],
+      "allowed_faults_expected": 0,
+      "authorized_fault_matches": []
+    },
+    {
+      "script": "scripts/tests/chronicle_combat_feedback_events_smoke.gd",
+      "status": "passed",
+      "returncode": 0,
+      "log": "design/skill-presentation-20261105/verification/project-check/chronicle_combat_feedback_events_smoke.log",
+      "checks": 59,
+      "success_line": "CHRONICLE_COMBAT_FEEDBACK_EVENTS_SMOKE PASS checks=59 failures=0",
+      "validator_errors": [],
+      "allowed_faults_expected": 0,
+      "authorized_fault_matches": []
+    },
+    {
+      "script": "scripts/tests/chronicle_combat_feedback_pack_smoke.gd",
+      "status": "passed",
+      "returncode": 0,
+      "log": "design/skill-presentation-20261105/verification/project-check/chronicle_combat_feedback_pack_smoke.log",
+      "checks": 1074,
+      "success_line": "CHRONICLE_COMBAT_FEEDBACK_PACK_SMOKE PASS checks=1074 failures=0",
+      "validator_errors": [],
+      "allowed_faults_expected": 0,
+      "authorized_fault_matches": []
+    },
+    {
+      "script": "scripts/tests/chronicle_combat_feedback_smoke.gd",
+      "status": "passed",
+      "returncode": 0,
+      "log": "design/skill-presentation-20261105/verification/project-check/chronicle_combat_feedback_smoke.log",
+      "checks": 332,
+      "success_line": "CHRONICLE_COMBAT_FEEDBACK_SMOKE PASS checks=332 failures=0",
+      "validator_errors": [],
+      "allowed_faults_expected": 0,
+      "authorized_fault_matches": []
+    },
+    {
+      "script": "scripts/tests/chronicle_combat_smoke.gd",
+      "status": "passed",
+      "returncode": 0,
+      "log": "design/skill-presentation-20261105/verification/project-check/chronicle_combat_smoke.log",
+      "checks": 77,
+      "success_line": "CHRONICLE_COMBAT_SMOKE PASS checks=77 failures=0",
+      "validator_errors": [],
+      "allowed_faults_expected": 2,
+      "authorized_fault_matches": [
+        {
+          "marker": "EXPECTED_FAULT_INJECTION: victory write rejected",
+          "error": "ERROR: Could not create directory: '/proc/chronicle-combat-result-read-only'."
+        },
+        {
+          "marker": "EXPECTED_FAULT_INJECTION: selection write rejected",
+          "error": "ERROR: Could not create directory: '/proc/chronicle-combat-test-read-only'."
+        }
+      ]
+    },
+    {
+      "script": "scripts/tests/chronicle_context_navigation_smoke.gd",
+      "status": "passed",
+      "returncode": 0,
+      "log": "design/skill-presentation-20261105/verification/project-check/chronicle_context_navigation_smoke.log",
+      "checks": 223,
+      "success_line": "CHRONICLE_CONTEXT_NAVIGATION_SMOKE PASS checks=223 failures=0",
+      "validator_errors": [],
+      "allowed_faults_expected": 0,
+      "authorized_fault_matches": []
+    },
+    {
+      "script": "scripts/tests/chronicle_danmaku_smoke.gd",
+      "status": "passed",
+      "returncode": 0,
+      "log": "design/skill-presentation-20261105/verification/project-check/chronicle_danmaku_smoke.log",
+      "checks": 288,
+      "success_line": "CHRONICLE_DANMAKU_SMOKE PASS checks=288 failures=0",
+      "validator_errors": [],
+      "allowed_faults_expected": 0,
+      "authorized_fault_matches": []
+    },
+    {
+      "script": "scripts/tests/chronicle_enemy_campaign_smoke.gd",
+      "status": "passed",
+      "returncode": 0,
+      "log": "design/skill-presentation-20261105/verification/project-check/chronicle_enemy_campaign_smoke.log",
+      "checks": 454,
+      "success_line": "CHRONICLE_ENEMY_CAMPAIGN_SMOKE PASS checks=454 failures=0 routes=2",
+      "validator_errors": [],
+      "allowed_faults_expected": 0,
+      "authorized_fault_matches": []
+    },
+    {
+      "script": "scripts/tests/chronicle_enemy_codex_smoke.gd",
+      "status": "passed",
+      "returncode": 0,
+      "log": "design/skill-presentation-20261105/verification/project-check/chronicle_enemy_codex_smoke.log",
+      "checks": 704,
+      "success_line": "CHRONICLE_ENEMY_CODEX_SMOKE PASS checks=704 failures=0",
+      "validator_errors": [],
+      "allowed_faults_expected": 0,
+      "authorized_fault_matches": []
+    },
+    {
+      "script": "scripts/tests/chronicle_enemy_content_smoke.gd",
+      "status": "passed",
+      "returncode": 0,
+      "log": "design/skill-presentation-20261105/verification/project-check/chronicle_enemy_content_smoke.log",
+      "checks": 2857,
+      "success_line": "CHRONICLE_ENEMY_CONTENT_SMOKE PASS checks=2857 failures=0 paths=64 transaction_routes=4",
+      "validator_errors": [],
+      "allowed_faults_expected": 0,
+      "authorized_fault_matches": []
+    },
+    {
+      "script": "scripts/tests/chronicle_enemy_effects_smoke.gd",
+      "status": "passed",
+      "returncode": 0,
+      "log": "design/skill-presentation-20261105/verification/project-check/chronicle_enemy_effects_smoke.log",
+      "checks": 73,
+      "success_line": "CHRONICLE_ENEMY_EFFECTS_SMOKE PASS checks=73 failures=0",
+      "validator_errors": [],
+      "allowed_faults_expected": 0,
+      "authorized_fault_matches": []
+    },
+    {
+      "script": "scripts/tests/chronicle_enemy_pack_smoke.gd",
+      "status": "passed",
+      "returncode": 0,
+      "log": "design/skill-presentation-20261105/verification/project-check/chronicle_enemy_pack_smoke.log",
+      "checks": 742,
+      "success_line": "ENEMY_PACK_SMOKE PASS checks=742 failures=0",
+      "validator_errors": [],
+      "allowed_faults_expected": 0,
+      "authorized_fault_matches": []
+    },
+    {
+      "script": "scripts/tests/chronicle_enemy_presentation_smoke.gd",
+      "status": "passed",
+      "returncode": 0,
+      "log": "design/skill-presentation-20261105/verification/project-check/chronicle_enemy_presentation_smoke.log",
+      "checks": 509,
+      "success_line": "CHRONICLE_ENEMY_PRESENTATION_SMOKE PASS checks=509 failures=0",
+      "validator_errors": [],
+      "allowed_faults_expected": 0,
+      "authorized_fault_matches": []
+    },
+    {
+      "script": "scripts/tests/chronicle_enemy_sessions_smoke.gd",
+      "status": "passed",
+      "returncode": 0,
+      "log": "design/skill-presentation-20261105/verification/project-check/chronicle_enemy_sessions_smoke.log",
+      "checks": 89096,
+      "success_line": "CHRONICLE_ENEMY_SESSIONS_SMOKE PASS checks=89096 failures=0 sessions=18",
+      "validator_errors": [],
+      "allowed_faults_expected": 0,
+      "authorized_fault_matches": []
+    },
+    {
+      "script": "scripts/tests/chronicle_feedback_latency_smoke.gd",
+      "status": "passed",
+      "returncode": 0,
+      "log": "design/skill-presentation-20261105/verification/project-check/chronicle_feedback_latency_smoke.log",
+      "checks": 20,
+      "success_line": "CHRONICLE_FEEDBACK_LATENCY_SMOKE PASS checks=20 failures=0",
+      "validator_errors": [],
+      "allowed_faults_expected": 0,
+      "authorized_fault_matches": []
+    },
+    {
+      "script": "scripts/tests/chronicle_home_menu_render_smoke.gd",
+      "status": "passed",
+      "returncode": 0,
+      "log": "design/skill-presentation-20261105/verification/project-check/chronicle_home_menu_render_smoke.log",
+      "checks": 444,
+      "success_line": "CHRONICLE_HOME_MENU_RENDER_SMOKE PASS checks=444 failures=0",
+      "validator_errors": [],
+      "allowed_faults_expected": 0,
+      "authorized_fault_matches": []
+    },
+    {
+      "script": "scripts/tests/chronicle_mechanic_hud_smoke.gd",
+      "status": "passed",
+      "returncode": 0,
+      "log": "design/skill-presentation-20261105/verification/project-check/chronicle_mechanic_hud_smoke.log",
+      "checks": 322,
+      "success_line": "CHRONICLE_MECHANIC_HUD_SMOKE PASS checks=322 failures=0",
+      "validator_errors": [],
+      "allowed_faults_expected": 0,
+      "authorized_fault_matches": []
+    },
+    {
+      "script": "scripts/tests/chronicle_melee_reach_smoke.gd",
+      "status": "passed",
+      "returncode": 0,
+      "log": "design/skill-presentation-20261105/verification/project-check/chronicle_melee_reach_smoke.log",
+      "checks": 154,
+      "success_line": "CHRONICLE_MELEE_REACH_SMOKE PASS checks=154 failures=0",
+      "validator_errors": [],
+      "allowed_faults_expected": 0,
+      "authorized_fault_matches": []
+    },
+    {
+      "script": "scripts/tests/chronicle_music_pack_smoke.gd",
+      "status": "passed",
+      "returncode": 0,
+      "log": "design/skill-presentation-20261105/verification/project-check/chronicle_music_pack_smoke.log",
+      "checks": 170,
+      "success_line": "CHRONICLE_MUSIC_PACK_SMOKE PASS cues=16 checks=170 failures=0",
+      "validator_errors": [],
+      "allowed_faults_expected": 0,
+      "authorized_fault_matches": []
+    },
+    {
+      "script": "scripts/tests/chronicle_music_playback_smoke.gd",
+      "status": "passed",
+      "returncode": 0,
+      "log": "design/skill-presentation-20261105/verification/project-check/chronicle_music_playback_smoke.log",
+      "checks": 65,
+      "success_line": "CHRONICLE_MUSIC_PLAYBACK_SMOKE PASS checks=65 failures=0 display=X11",
+      "validator_errors": [],
+      "allowed_faults_expected": 0,
+      "authorized_fault_matches": []
+    },
+    {
+      "script": "scripts/tests/chronicle_music_smoke.gd",
+      "status": "passed",
+      "returncode": 0,
+      "log": "design/skill-presentation-20261105/verification/project-check/chronicle_music_smoke.log",
+      "checks": 2387,
+      "success_line": "CHRONICLE_MUSIC_SMOKE PASS checks=2387 failures=0",
+      "validator_errors": [],
+      "allowed_faults_expected": 0,
+      "authorized_fault_matches": []
+    },
+    {
+      "script": "scripts/tests/chronicle_party_drag_smoke.gd",
+      "status": "passed",
+      "returncode": 0,
+      "log": "design/skill-presentation-20261105/verification/project-check/chronicle_party_drag_smoke.log",
+      "checks": 143,
+      "success_line": "CHRONICLE_PARTY_DRAG_SMOKE PASS checks=143 failures=0",
+      "validator_errors": [],
+      "allowed_faults_expected": 0,
+      "authorized_fault_matches": []
+    },
+    {
+      "script": "scripts/tests/chronicle_party_summary_smoke.gd",
+      "status": "passed",
+      "returncode": 0,
+      "log": "design/skill-presentation-20261105/verification/project-check/chronicle_party_summary_smoke.log",
+      "checks": 155,
+      "success_line": "CHRONICLE_PARTY_SUMMARY_SMOKE PASS checks=155 failures=0",
+      "validator_errors": [],
+      "allowed_faults_expected": 0,
+      "authorized_fault_matches": []
+    },
+    {
+      "script": "scripts/tests/chronicle_playable_ui_smoke.gd",
+      "status": "failed",
+      "returncode": 1,
+      "log": "design/skill-presentation-20261105/verification/project-check/chronicle_playable_ui_smoke.log",
+      "checks": null,
+      "success_line": null,
+      "validator_errors": [
+        "ERROR: Emma reuses the existing mage scene",
+        "missing successful smoke result"
+      ],
+      "allowed_faults_expected": 0,
+      "authorized_fault_matches": []
+    },
+    {
+      "script": "scripts/tests/chronicle_player_hurtbox_center_smoke.gd",
+      "status": "not_run",
+      "returncode": null,
+      "log": "design/skill-presentation-20261105/verification/project-check/chronicle_player_hurtbox_center_smoke.log",
+      "checks": null,
+      "validator_errors": [],
+      "allowed_faults_expected": 0,
+      "authorized_fault_matches": []
+    },
+    {
+      "script": "scripts/tests/chronicle_reflow_visual_smoke.gd",
+      "status": "not_run",
+      "returncode": null,
+      "log": "design/skill-presentation-20261105/verification/project-check/chronicle_reflow_visual_smoke.log",
+      "checks": null,
+      "validator_errors": [],
+      "allowed_faults_expected": 0,
+      "authorized_fault_matches": []
+    },
+    {
+      "script": "scripts/tests/chronicle_roster_content_smoke.gd",
+      "status": "not_run",
+      "returncode": null,
+      "log": "design/skill-presentation-20261105/verification/project-check/chronicle_roster_content_smoke.log",
+      "checks": null,
+      "validator_errors": [],
+      "allowed_faults_expected": 0,
+      "authorized_fault_matches": []
+    },
+    {
+      "script": "scripts/tests/chronicle_route_map_smoke.gd",
+      "status": "not_run",
+      "returncode": null,
+      "log": "design/skill-presentation-20261105/verification/project-check/chronicle_route_map_smoke.log",
+      "checks": null,
+      "validator_errors": [],
+      "allowed_faults_expected": 0,
+      "authorized_fault_matches": []
+    },
+    {
+      "script": "scripts/tests/chronicle_skill_audio_smoke.gd",
+      "status": "not_run",
+      "returncode": null,
+      "log": "design/skill-presentation-20261105/verification/project-check/chronicle_skill_audio_smoke.log",
+      "checks": null,
+      "validator_errors": [],
+      "allowed_faults_expected": 0,
+      "authorized_fault_matches": []
+    },
+    {
+      "script": "scripts/tests/chronicle_skill_presentation_smoke.gd",
+      "status": "not_run",
+      "returncode": null,
+      "log": "design/skill-presentation-20261105/verification/project-check/chronicle_skill_presentation_smoke.log",
+      "checks": null,
+      "validator_errors": [],
+      "allowed_faults_expected": 0,
+      "authorized_fault_matches": []
+    },
+    {
+      "script": "scripts/tests/chronicle_story_content_smoke.gd",
+      "status": "not_run",
+      "returncode": null,
+      "log": "design/skill-presentation-20261105/verification/project-check/chronicle_story_content_smoke.log",
+      "checks": null,
+      "validator_errors": [],
+      "allowed_faults_expected": 7,
+      "authorized_fault_matches": []
+    },
+    {
+      "script": "scripts/tests/chronicle_story_history_smoke.gd",
+      "status": "not_run",
+      "returncode": null,
+      "log": "design/skill-presentation-20261105/verification/project-check/chronicle_story_history_smoke.log",
+      "checks": null,
+      "validator_errors": [],
+      "allowed_faults_expected": 0,
+      "authorized_fault_matches": []
+    },
+    {
+      "script": "scripts/tests/chronicle_story_optional_render_smoke.gd",
+      "status": "not_run",
+      "returncode": null,
+      "log": "design/skill-presentation-20261105/verification/project-check/chronicle_story_optional_render_smoke.log",
+      "checks": null,
+      "validator_errors": [],
+      "allowed_faults_expected": 0,
+      "authorized_fault_matches": []
+    },
+    {
+      "script": "scripts/tests/chronicle_story_pack_smoke.gd",
+      "status": "passed",
+      "returncode": 0,
+      "log": "design/skill-presentation-20261105/verification/project-check/chronicle_story_pack_smoke.log",
+      "checks": 97,
+      "success_line": "CHRONICLE_STORY_PACK_SMOKE PASS checks=97 failures=0",
+      "validator_errors": [],
+      "allowed_faults_expected": 0,
+      "authorized_fault_matches": []
+    },
+    {
+      "script": "scripts/tests/chronicle_story_progress_smoke.gd",
+      "status": "not_run",
+      "returncode": null,
+      "log": "design/skill-presentation-20261105/verification/project-check/chronicle_story_progress_smoke.log",
+      "checks": null,
+      "validator_errors": [],
+      "allowed_faults_expected": 3,
+      "authorized_fault_matches": []
+    },
+    {
+      "script": "scripts/tests/chronicle_story_replay_smoke.gd",
+      "status": "not_run",
+      "returncode": null,
+      "log": "design/skill-presentation-20261105/verification/project-check/chronicle_story_replay_smoke.log",
+      "checks": null,
+      "validator_errors": [],
+      "allowed_faults_expected": 0,
+      "authorized_fault_matches": []
+    },
+    {
+      "script": "scripts/tests/chronicle_story_ui_smoke.gd",
+      "status": "not_run",
+      "returncode": null,
+      "log": "design/skill-presentation-20261105/verification/project-check/chronicle_story_ui_smoke.log",
+      "checks": null,
+      "validator_errors": [],
+      "allowed_faults_expected": 2,
+      "authorized_fault_matches": []
+    },
+    {
+      "script": "scripts/tests/jia_combat_art_smoke.gd",
+      "status": "not_run",
+      "returncode": null,
+      "log": "design/skill-presentation-20261105/verification/project-check/jia_combat_art_smoke.log",
+      "checks": null,
+      "validator_errors": [],
+      "allowed_faults_expected": 0,
+      "authorized_fault_matches": []
+    }
+  ],
+  "top_level_markers": {
+    "PROJECT_CHECK_OK": false,
+    "PROJECT_CHECK_FAILED": false,
+    "last_marker": "CHRONICLE_PLAYABLE_UI_SMOKE_FAILED"
+  },
+  "validator": {
+    "path": "scripts/tests/check_smoke_log.py",
+    "sha256": "b85ee7b7dfa4f2d8a64dcf5b78ab29109b984f0205736166e30f51cc3bb2a683",
+    "fault_policy": "exact preceding marker + exact ERROR line from FAULTS; all completed logs passed/failed through validate()"
+  }
+}

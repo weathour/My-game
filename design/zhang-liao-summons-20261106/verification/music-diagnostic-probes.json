@@ -1,0 +1,432 @@
+{
+  "purpose": "diagnostic print only; same .12s settle and original assertion unchanged",
+  "source_sha256": "fa3e5d47ac658ac4da67c0930ed08c208e702608eeb2505eb2918f1390e3d8dc",
+  "probe_sha256": "f12fe2d2970f18d7eed3609ce55541ff545f95fb6e425c7a76ac3ab6cc186e82",
+  "probe": "/tmp/liao-music-diagnostic-19mca1qz/diagnostic.gd",
+  "runs": [
+    {
+      "index": 1,
+      "started_at": 1793961758.4204922,
+      "command": [
+        "/home/weathour/.local/bin/godot-4.6.2",
+        "--rendering-method",
+        "gl_compatibility",
+        "--audio-driver",
+        "Dummy",
+        "--path",
+        "/home/weathour/programs/desktop-projects/My-game",
+        "--script",
+        "/tmp/liao-music-diagnostic-19mca1qz/diagnostic.gd"
+      ],
+      "returncode": 0,
+      "elapsed_seconds": 9.03971242904663,
+      "strict_failures": [],
+      "samples": [
+        {
+          "at": "immediate",
+          "cue": "midi_test_01",
+          "elapsed_ms": 0.0,
+          "playing": true,
+          "position": 0.0933333337306976,
+          "stream_type": "AudioStreamOggVorbis"
+        },
+        {
+          "at": "original_assert",
+          "cue": "midi_test_01",
+          "elapsed_ms": 15.174,
+          "playing": true,
+          "position": 0.0933333337306976,
+          "stream_type": "AudioStreamOggVorbis"
+        },
+        {
+          "at": "immediate",
+          "cue": "midi_test_02",
+          "elapsed_ms": 0.0,
+          "playing": true,
+          "position": 0.0933333337306976,
+          "stream_type": "AudioStreamOggVorbis"
+        },
+        {
+          "at": "original_assert",
+          "cue": "midi_test_02",
+          "elapsed_ms": 78.108,
+          "playing": true,
+          "position": 0.186666667461395,
+          "stream_type": "AudioStreamOggVorbis"
+        },
+        {
+          "at": "immediate",
+          "cue": "midi_test_03",
+          "elapsed_ms": 0.0,
+          "playing": true,
+          "position": 0.00266666663810611,
+          "stream_type": "AudioStreamOggVorbis"
+        },
+        {
+          "at": "original_assert",
+          "cue": "midi_test_03",
+          "elapsed_ms": 46.267,
+          "playing": true,
+          "position": 0.0933333337306976,
+          "stream_type": "AudioStreamOggVorbis"
+        },
+        {
+          "at": "immediate",
+          "cue": "midi_test_04",
+          "elapsed_ms": 0.0,
+          "playing": true,
+          "position": 0.0933333337306976,
+          "stream_type": "AudioStreamOggVorbis"
+        },
+        {
+          "at": "original_assert",
+          "cue": "midi_test_04",
+          "elapsed_ms": 30.881,
+          "playing": true,
+          "position": 0.0933333337306976,
+          "stream_type": "AudioStreamOggVorbis"
+        },
+        {
+          "at": "immediate",
+          "cue": "midi_test_05",
+          "elapsed_ms": 0.0,
+          "playing": true,
+          "position": 0.0933333337306976,
+          "stream_type": "AudioStreamOggVorbis"
+        },
+        {
+          "at": "original_assert",
+          "cue": "midi_test_05",
+          "elapsed_ms": 48.001,
+          "playing": true,
+          "position": 0.186666667461395,
+          "stream_type": "AudioStreamOggVorbis"
+        },
+        {
+          "at": "immediate",
+          "cue": "midi_test_06",
+          "elapsed_ms": 0.0,
+          "playing": true,
+          "position": 0.00266666663810611,
+          "stream_type": "AudioStreamOggVorbis"
+        },
+        {
+          "at": "original_assert",
+          "cue": "midi_test_06",
+          "elapsed_ms": 38.161,
+          "playing": true,
+          "position": 0.0933333337306976,
+          "stream_type": "AudioStreamOggVorbis"
+        },
+        {
+          "at": "immediate",
+          "cue": "midi_test_07",
+          "elapsed_ms": 0.0,
+          "playing": true,
+          "position": 0.0933333337306976,
+          "stream_type": "AudioStreamOggVorbis"
+        },
+        {
+          "at": "original_assert",
+          "cue": "midi_test_07",
+          "elapsed_ms": 48.76,
+          "playing": true,
+          "position": 0.0933333337306976,
+          "stream_type": "AudioStreamOggVorbis"
+        },
+        {
+          "at": "immediate",
+          "cue": "midi_test_08",
+          "elapsed_ms": 0.0,
+          "playing": true,
+          "position": 0.0933333337306976,
+          "stream_type": "AudioStreamOggVorbis"
+        },
+        {
+          "at": "original_assert",
+          "cue": "midi_test_08",
+          "elapsed_ms": 38.215,
+          "playing": true,
+          "position": 0.186666667461395,
+          "stream_type": "AudioStreamOggVorbis"
+        },
+        {
+          "at": "immediate",
+          "cue": "midi_test_09",
+          "elapsed_ms": 0.0,
+          "playing": true,
+          "position": 0.0933333337306976,
+          "stream_type": "AudioStreamOggVorbis"
+        },
+        {
+          "at": "original_assert",
+          "cue": "midi_test_09",
+          "elapsed_ms": 33.83,
+          "playing": true,
+          "position": 0.0933333337306976,
+          "stream_type": "AudioStreamOggVorbis"
+        },
+        {
+          "at": "immediate",
+          "cue": "midi_test_10",
+          "elapsed_ms": 0.0,
+          "playing": true,
+          "position": 0.0933333337306976,
+          "stream_type": "AudioStreamOggVorbis"
+        },
+        {
+          "at": "original_assert",
+          "cue": "midi_test_10",
+          "elapsed_ms": 30.769,
+          "playing": true,
+          "position": 0.0933333337306976,
+          "stream_type": "AudioStreamOggVorbis"
+        },
+        {
+          "at": "immediate",
+          "cue": "midi_test_11",
+          "elapsed_ms": 0.0,
+          "playing": true,
+          "position": 0.0933333337306976,
+          "stream_type": "AudioStreamOggVorbis"
+        },
+        {
+          "at": "original_assert",
+          "cue": "midi_test_11",
+          "elapsed_ms": 47.98,
+          "playing": true,
+          "position": 0.186666667461395,
+          "stream_type": "AudioStreamOggVorbis"
+        },
+        {
+          "at": "immediate",
+          "cue": "midi_test_12",
+          "elapsed_ms": 0.0,
+          "playing": true,
+          "position": 0.00266666663810611,
+          "stream_type": "AudioStreamOggVorbis"
+        },
+        {
+          "at": "original_assert",
+          "cue": "midi_test_12",
+          "elapsed_ms": 47.784,
+          "playing": true,
+          "position": 0.0933333337306976,
+          "stream_type": "AudioStreamOggVorbis"
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "started_at": 1793961767.4607306,
+      "command": [
+        "/home/weathour/.local/bin/godot-4.6.2",
+        "--rendering-method",
+        "gl_compatibility",
+        "--audio-driver",
+        "Dummy",
+        "--path",
+        "/home/weathour/programs/desktop-projects/My-game",
+        "--script",
+        "/tmp/liao-music-diagnostic-19mca1qz/diagnostic.gd"
+      ],
+      "returncode": 0,
+      "elapsed_seconds": 8.860937118530273,
+      "strict_failures": [],
+      "samples": [
+        {
+          "at": "immediate",
+          "cue": "midi_test_01",
+          "elapsed_ms": 0.0,
+          "playing": true,
+          "position": 0.0933333337306976,
+          "stream_type": "AudioStreamOggVorbis"
+        },
+        {
+          "at": "original_assert",
+          "cue": "midi_test_01",
+          "elapsed_ms": 17.599,
+          "playing": true,
+          "position": 0.0933333337306976,
+          "stream_type": "AudioStreamOggVorbis"
+        },
+        {
+          "at": "immediate",
+          "cue": "midi_test_02",
+          "elapsed_ms": 0.0,
+          "playing": true,
+          "position": 0.00266666663810611,
+          "stream_type": "AudioStreamOggVorbis"
+        },
+        {
+          "at": "original_assert",
+          "cue": "midi_test_02",
+          "elapsed_ms": 36.402,
+          "playing": true,
+          "position": 0.0933333337306976,
+          "stream_type": "AudioStreamOggVorbis"
+        },
+        {
+          "at": "immediate",
+          "cue": "midi_test_03",
+          "elapsed_ms": 0.0,
+          "playing": true,
+          "position": 0.0933333337306976,
+          "stream_type": "AudioStreamOggVorbis"
+        },
+        {
+          "at": "original_assert",
+          "cue": "midi_test_03",
+          "elapsed_ms": 38.831,
+          "playing": true,
+          "position": 0.0933333337306976,
+          "stream_type": "AudioStreamOggVorbis"
+        },
+        {
+          "at": "immediate",
+          "cue": "midi_test_04",
+          "elapsed_ms": 0.0,
+          "playing": true,
+          "position": 0.0933333337306976,
+          "stream_type": "AudioStreamOggVorbis"
+        },
+        {
+          "at": "original_assert",
+          "cue": "midi_test_04",
+          "elapsed_ms": 39.549,
+          "playing": true,
+          "position": 0.0933333337306976,
+          "stream_type": "AudioStreamOggVorbis"
+        },
+        {
+          "at": "immediate",
+          "cue": "midi_test_05",
+          "elapsed_ms": 0.0,
+          "playing": true,
+          "position": 0.00266666663810611,
+          "stream_type": "AudioStreamOggVorbis"
+        },
+        {
+          "at": "original_assert",
+          "cue": "midi_test_05",
+          "elapsed_ms": 30.384,
+          "playing": true,
+          "position": 0.0933333337306976,
+          "stream_type": "AudioStreamOggVorbis"
+        },
+        {
+          "at": "immediate",
+          "cue": "midi_test_06",
+          "elapsed_ms": 0.0,
+          "playing": true,
+          "position": 0.0933333337306976,
+          "stream_type": "AudioStreamOggVorbis"
+        },
+        {
+          "at": "original_assert",
+          "cue": "midi_test_06",
+          "elapsed_ms": 38.782,
+          "playing": true,
+          "position": 0.0933333337306976,
+          "stream_type": "AudioStreamOggVorbis"
+        },
+        {
+          "at": "immediate",
+          "cue": "midi_test_07",
+          "elapsed_ms": 0.0,
+          "playing": true,
+          "position": 0.0933333337306976,
+          "stream_type": "AudioStreamOggVorbis"
+        },
+        {
+          "at": "original_assert",
+          "cue": "midi_test_07",
+          "elapsed_ms": 47.238,
+          "playing": true,
+          "position": 0.186666667461395,
+          "stream_type": "AudioStreamOggVorbis"
+        },
+        {
+          "at": "immediate",
+          "cue": "midi_test_08",
+          "elapsed_ms": 0.0,
+          "playing": true,
+          "position": 0.0933333337306976,
+          "stream_type": "AudioStreamOggVorbis"
+        },
+        {
+          "at": "original_assert",
+          "cue": "midi_test_08",
+          "elapsed_ms": 38.196,
+          "playing": true,
+          "position": 0.0933333337306976,
+          "stream_type": "AudioStreamOggVorbis"
+        },
+        {
+          "at": "immediate",
+          "cue": "midi_test_09",
+          "elapsed_ms": 0.0,
+          "playing": true,
+          "position": 0.0933333337306976,
+          "stream_type": "AudioStreamOggVorbis"
+        },
+        {
+          "at": "original_assert",
+          "cue": "midi_test_09",
+          "elapsed_ms": 39.326,
+          "playing": true,
+          "position": 0.0933333337306976,
+          "stream_type": "AudioStreamOggVorbis"
+        },
+        {
+          "at": "immediate",
+          "cue": "midi_test_10",
+          "elapsed_ms": 0.0,
+          "playing": true,
+          "position": 0.00266666663810611,
+          "stream_type": "AudioStreamOggVorbis"
+        },
+        {
+          "at": "original_assert",
+          "cue": "midi_test_10",
+          "elapsed_ms": 30.836,
+          "playing": true,
+          "position": 0.0933333337306976,
+          "stream_type": "AudioStreamOggVorbis"
+        },
+        {
+          "at": "immediate",
+          "cue": "midi_test_11",
+          "elapsed_ms": 0.0,
+          "playing": true,
+          "position": 0.00266666663810611,
+          "stream_type": "AudioStreamOggVorbis"
+        },
+        {
+          "at": "original_assert",
+          "cue": "midi_test_11",
+          "elapsed_ms": 72.301,
+          "playing": true,
+          "position": 0.0933333337306976,
+          "stream_type": "AudioStreamOggVorbis"
+        },
+        {
+          "at": "immediate",
+          "cue": "midi_test_12",
+          "elapsed_ms": 0.0,
+          "playing": true,
+          "position": 0.0933333337306976,
+          "stream_type": "AudioStreamOggVorbis"
+        },
+        {
+          "at": "original_assert",
+          "cue": "midi_test_12",
+          "elapsed_ms": 30.335,
+          "playing": true,
+          "position": 0.0933333337306976,
+          "stream_type": "AudioStreamOggVorbis"
+        }
+      ]
+    }
+  ]
+}

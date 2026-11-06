@@ -1,0 +1,62 @@
+{
+  "utc": "2026-11-04T03:52:08.776298+00:00",
+  "baseline": "protected-inputs-before.json",
+  "nonplayer_protected": {
+    "checked": 818,
+    "changed": [],
+    "status": "PASS"
+  },
+  "authorized_catalog_update": {
+    "path": "/home/weathour/programs/desktop-projects/My-game/assets/data/audio/music_catalog.json",
+    "before": "6401b53db7cb2f1a5a61d1176ccf0aaeecef5949d1251185057707caffaf4450",
+    "after": "371f9cedfa93704f7de336b7fdbad4f99aee3b8af880dce9e8cd486ce9d45a76"
+  },
+  "player_data": {
+    "status": "CONCURRENT_CHANGES_OBSERVED",
+    "root": "/home/weathour/.local/share/godot/app_userdata/survivor_like",
+    "existing_checked": 118,
+    "unchanged": 115,
+    "changed": [
+      {
+        "path": "/home/weathour/.local/share/godot/app_userdata/survivor_like/chronicle_campaign_v1/auto.json",
+        "status": "changed",
+        "before": {
+          "sha256": "e8537961a938db316bc4d359b62bb40653e463ff542536f98dc2e322a0ddaf94",
+          "bytes": 3120
+        },
+        "after": {
+          "sha256": "cbb52193256407b7e0f5e771b8f4264c0e6a77a0130f131435e639c5f7086342",
+          "bytes": 3913,
+          "mtime_utc": "2026-11-04T03:52:08.418757+00:00"
+        }
+      },
+      {
+        "path": "/home/weathour/.local/share/godot/app_userdata/survivor_like/chronicle_campaign_v1/auto.json.bak",
+        "status": "changed",
+        "before": {
+          "sha256": "e8537961a938db316bc4d359b62bb40653e463ff542536f98dc2e322a0ddaf94",
+          "bytes": 3120
+        },
+        "after": {
+          "sha256": "a66c11019ce5846b9af5d5cdcfd0e2d9d358ce44f3cbac41f43bd52a3798d1d1",
+          "bytes": 3907,
+          "mtime_utc": "2026-11-04T03:52:08.421865+00:00"
+        }
+      },
+      {
+        "path": "/home/weathour/.local/share/godot/app_userdata/survivor_like/logs/godot2026-11-03T19.48.46.log",
+        "status": "missing"
+      }
+    ],
+    "new_files": [
+      "/home/weathour/.local/share/godot/app_userdata/survivor_like/logs/godot2026-11-04T11.48.12.log"
+    ],
+    "removed_files": [
+      "/home/weathour/.local/share/godot/app_userdata/survivor_like/logs/godot2026-11-03T19.48.46.log"
+    ],
+    "first_task_godot_run_utc": "2026-11-04T03:34:08.867Z",
+    "change_observation": "Two automatic-save files first changed at 03:30:15 UTC, before the first task Godot invocation at 03:34:08.867 UTC. They were subsequently updated again; their latest metadata is recorded above. One pre-existing Godot runtime log was also found absent in the final audit. The writer/cleanup source is not identified. This task did not restore, overwrite or remove these formal-directory files.",
+    "test_data_policy": "All task Godot checks explicitly isolate XDG_DATA_HOME and XDG_CONFIG_HOME; local package stores its own test-user-data.",
+    "first_observed_auto_save_mtime_utc": "2026-11-04T03:30:15Z"
+  }
+}

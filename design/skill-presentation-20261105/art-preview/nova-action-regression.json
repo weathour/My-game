@@ -1,0 +1,83 @@
+{
+  "status": "pass",
+  "source": "assets/players/baimen-women/women_visual.gd",
+  "source_sha256": "b781c8eff3a0ab2bb2c803421a2b6eaee783ea316a78399facc6bae9aea508c2",
+  "actual_ability_cases": [
+    {
+      "character": "F05",
+      "direction": "left",
+      "ability": "F05_spread",
+      "profile_motion": "burst",
+      "actual_clip": "attack",
+      "actual_contact_frame": 2,
+      "foot_root_stable": true,
+      "maximum_sprite_displacement_world": 0.0
+    },
+    {
+      "character": "F05",
+      "direction": "right",
+      "ability": "F05_spread",
+      "profile_motion": "burst",
+      "actual_clip": "attack",
+      "actual_contact_frame": 2,
+      "foot_root_stable": true,
+      "maximum_sprite_displacement_world": 0.0
+    },
+    {
+      "character": "F07",
+      "direction": "left",
+      "ability": "bandit_sweep",
+      "profile_motion": "burst",
+      "actual_clip": "attack",
+      "actual_contact_frame": 1,
+      "foot_root_stable": true,
+      "maximum_sprite_displacement_world": 0.0
+    },
+    {
+      "character": "F07",
+      "direction": "right",
+      "ability": "bandit_sweep",
+      "profile_motion": "burst",
+      "actual_clip": "attack",
+      "actual_contact_frame": 1,
+      "foot_root_stable": true,
+      "maximum_sprite_displacement_world": 0.0
+    },
+    {
+      "character": "F08",
+      "direction": "left",
+      "ability": "F08_break",
+      "profile_motion": "burst",
+      "actual_clip": "attack",
+      "actual_contact_frame": 2,
+      "foot_root_stable": true,
+      "maximum_sprite_displacement_world": 0.0
+    },
+    {
+      "character": "F08",
+      "direction": "right",
+      "ability": "F08_break",
+      "profile_motion": "burst",
+      "actual_clip": "attack",
+      "actual_contact_frame": 2,
+      "foot_root_stable": true,
+      "maximum_sprite_displacement_world": 0.0
+    }
+  ],
+  "resolutions": [
+    [
+      960,
+      540
+    ],
+    [
+      1280,
+      720
+    ],
+    [
+      1920,
+      1080
+    ]
+  ],
+  "visual_review": "Affected F05, F07 and F08 manual action poses inspected in actual 960 left, 1280 right and 1920 right pages 05 and 06. Attack poses retained, feet and core fixed, complete silhouettes and side mirroring preserved. Full 38 rerun retained 78 images and 912 correct core center samples.",
+  "scope": "Only NOVA burst animation selection regression; original art, anchors and VFX unchanged."
+}

@@ -1,0 +1,23 @@
+{
+  "status": "PASS",
+  "cases": [
+    {
+      "case": "real_manifest_digest_tamper",
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "PROJECT_CHECK_REUSE_GUARD_FAILED: manifest input digest is inconsistent\n"
+    },
+    {
+      "case": "original_failed_log_rejected",
+      "returncode": 1,
+      "stdout": "CHRONICLE_SKILL_PRESENTATION_SMOKE_LOG_FAILED\nERROR: 1 resources still in use at exit (run with --verbose for details).\n",
+      "stderr": ""
+    },
+    {
+      "case": "failed_test_cache_miss_reruns",
+      "returncode": 3,
+      "stdout": "PROJECT_CHECK_REUSE_MISS script=scripts/tests/chronicle_skill_presentation_smoke.gd reason=no validated cache entry\n",
+      "stderr": ""
+    }
+  ]
+}

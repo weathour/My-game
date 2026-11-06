@@ -63,7 +63,7 @@ func _get_drag_data(_position: Vector2) -> Variant:
 	holder.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	var preview := BASE_CARD.new()
 	preview.compact = true
-	preview.configure(character_id, character_name, subtitle, "拖入辅助位", false, rarity)
+	preview.configure(character_id, character_name, subtitle, "拖入辅助位", false, rarity, appearance)
 	preview.size = Vector2(136, 176)
 	preview.position = Vector2(-68, -42)
 	preview.mouse_filter = Control.MOUSE_FILTER_IGNORE

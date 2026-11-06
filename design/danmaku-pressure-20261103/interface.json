@@ -1,0 +1,128 @@
+{
+  "schema_version": 1,
+  "status": "implemented_and_automatically_validated",
+  "scope": "chapter_one_horde_pressure_and_boss_danmaku_upgrade",
+  "simulation_authorities": [
+    "scripts/battle/enemy_system.gd",
+    "scripts/battle/enemy_geometry.gd",
+    "scripts/battle/battle_session.gd",
+    "scripts/battle/stage_director.gd"
+  ],
+  "data_authorities": [
+    "scripts/content/enemy_catalog.gd",
+    "scripts/content/boss_forms.gd",
+    "scripts/content/stage_catalog.gd"
+  ],
+  "hurtbox": {
+    "authority": "scripts/battle/player_hurtbox.gd",
+    "radius_world_units": 4.0,
+    "center": "controlled_actor_battle_position",
+    "hostile_projectiles": "relative_motion_swept_circle",
+    "danger_geometry": "same_hurt_radius_for_collision_and_clearance",
+    "pickup_attack_push_and_boundary_radii_separate": true
+  },
+  "warnings": {
+    "policies": [
+      "area",
+      "aim",
+      "none"
+    ],
+    "bullet_styles": [
+      "orb",
+      "needle",
+      "bone"
+    ],
+    "ordinary_projectiles_do_not_require_full_trajectory_lines": true,
+    "high_speed_aim_charge_ground_delay_have_readable_cues": true,
+    "hit_core_and_red_dot_render_above_decorative_effects": true,
+    "comfort_settings_preserve_essential_danger_information": true
+  },
+  "patterns": {
+    "projectile_fields": [
+      "burst_count",
+      "burst_interval",
+      "angle_step",
+      "angle_offset",
+      "aim_each_burst"
+    ],
+    "optional_primary_descriptor": "projectile_pattern",
+    "optional_secondary_descriptor": "secondary_pattern",
+    "kinds": [
+      "fan",
+      "ring"
+    ],
+    "secondary_fields": [
+      "count",
+      "spread",
+      "gap_width",
+      "gap_angle_offset",
+      "speed",
+      "life",
+      "hit_radius",
+      "bullet_style",
+      "bullet_color"
+    ],
+    "locked_markers": [
+      "marker_count",
+      "marker_spacing",
+      "marker_delay"
+    ],
+    "wave_fields": [
+      "formation",
+      "spawn_radius",
+      "formation_spread",
+      "intercept_lead"
+    ],
+    "wave_formations": [
+      "surround",
+      "flank",
+      "intercept"
+    ],
+    "scheduled_waves_keep_source_move_form_serial": true,
+    "sfx_tell_and_release_once_per_action_not_per_bullet": true,
+    "pause_phase_death_and_terminal_cleanup_required": true
+  },
+  "preservation": {
+    "world_size": [
+      3200,
+      1800
+    ],
+    "B18_solo_no_mobs": true,
+    "campaign_save_schema_and_reward_transactions": true,
+    "player_kit_and_existing_music_and_sfx_waveforms": true
+  },
+  "acceptance": {
+    "static_configuration_checks_are_not_runtime_or_balance_acceptance": true,
+    "before_baseline": "encounters/before.json plus runtime/before-source",
+    "density_and_standing_vs_responsive_input_metrics": true,
+    "reachable_exits_and_bullet_gaps_with_actual_actor_speed": true,
+    "actual_emission_counts_must_confirm_authored_patterns": true,
+    "synthetic_render_stress_and_real_simulation_snapshots_reported_separately": true,
+    "visual_sizes": [
+      [
+        960,
+        600
+      ],
+      [
+        1280,
+        720
+      ],
+      [
+        1920,
+        1080
+      ]
+    ],
+    "protected_inputs": "runtime/protected-inputs-before.json",
+    "player_files": "runtime/player-data-before.json",
+    "full_project_check_required": true,
+    "human_playtest": "not_performed"
+  },
+  "completion_evidence": {
+    "runtime": "runtime/validation-report.json",
+    "root_integrity": "completion-verification.json",
+    "presentation": "runtime/presentation-review.json",
+    "package": "runtime/package-integrity-review.json",
+    "known_forced_exit_diagnostic": "runtime/package-function-review.json",
+    "human_playtest": "not_performed"
+  }
+}

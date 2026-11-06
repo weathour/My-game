@@ -2,11 +2,14 @@ extends SceneTree
 ## 18 isolated real sessions: production enemy stats/AI/damage and ordinary inputs.
 ## Character levels are explicit fixtures, not evidence of a reachable campaign build.
 ## Reports defeats and timeouts as playtest results; never synthesizes a victory.
+const LOCAL_DRIVER := preload("res://scripts/tests/reference_walk_driver.gd")
+const H := preload("res://scripts/battle/player_hurtbox.gd")
 const C := preload("res://scripts/content/combat_catalog.gd")
 const S := preload("res://scripts/content/stage_catalog.gd")
 const B := preload("res://scripts/battle/battle_session.gd")
 const TARGET := preload("res://scripts/battle/targeting.gd")
 const G := preload("res://scripts/battle/enemy_geometry.gd")
+const AUDIO_FEEDBACK := preload("res://scripts/ui/chronicle/combat_feedback.gd")
 const SPACE := preload("res://scripts/battle/battle_space.gd")
 var failures := 0
 var checks := 0
@@ -25,6 +28,7 @@ func expect(value: bool, message: String) -> void:
 	if not value: failures += 1; push_error(message)
 
 func run() -> void:
+	driver_contract()
 	for index in S.ROUTE_ORDER.size():
 		var id: String = S.ROUTE_ORDER[index]
 		if not only_stage.is_empty() and id not in only_stage.split(","): continue
@@ -33,6 +37,9 @@ func run() -> void:
 		var owned := {}
 		for member in members: owned[member] = C.record(member, level)
 		var battle := B.new({"attempt_id":"real-session-"+id,"members":members,"characters":owned,"equipment":{"weapon":"plain_blade","armor":"cloth_armor","accessory":"ember_seal"},"stage":S.stage(id),"seed":S.stage(id).seed})
+		var audio_feedback:=AUDIO_FEEDBACK.new()
+		root.add_child(audio_feedback)
+		audio_feedback.audio.enabled=false # Resolve real event bindings without scheduling native audio during accelerated simulation.
 		var seen := {}
 		var actions := {}
 		var warning_frames := 0
@@ -47,6 +54,8 @@ func run() -> void:
 					var candidate: RefCounted = battle.characters[members[slot]]
 					if not candidate.dead and candidate.hp > candidate.stats.hp * .55: battle.request_switch(slot - battle.active); break
 			battle.tick(1.0/60.0, movement)
+			audio_feedback.consume(battle.events,battle,Rect2())
+			audio_feedback.advance(1.0/60.0,battle.paused,battle.outcome)
 			elapsed += 1.0/60.0
 			for enemy in battle.enemies:
 				seen[enemy.definition_id] = true
@@ -55,6 +64,8 @@ func run() -> void:
 			if frame % 300 == 0:
 				expect(is_finite(battle.position.x) and is_finite(battle.current().hp), id + " finite runtime state")
 			expect(battle.enemies.size() <= S.stage(id).enemy_cap + 12, id + " bounded entity population")
+		expect(audio_feedback.audio.counters.missing_bindings==0,id+" actual session has zero unknown audio bindings: "+JSON.stringify(audio_feedback.audio.binding_diagnostics))
+		audio_feedback.free()
 		var remaining := {}
 		for enemy in battle.enemies:
 			if enemy.rank in ["boss","object"]: remaining[enemy.definition_id] = {"hp":snappedf(enemy.hp,.1),"distance":snappedf(enemy.position.distance_to(battle.position),.1)}
@@ -70,10 +81,34 @@ func run() -> void:
 	print("CHRONICLE_ENEMY_SESSIONS_SMOKE ","PASS" if failures == 0 else "FAIL"," checks=",checks," failures=",failures," sessions=",reports.size())
 	quit(0 if failures == 0 else 1)
 
+# The input fixture must approach visible bullets without inventing a damaging fan.
+func driver_contract() -> void:
+	var battle:=B.new({"attempt_id":"driver-danger-contract","members":["JIA"],"characters":{"JIA":C.record("JIA",1)},"equipment":{"weapon":"plain_blade","armor":"cloth_armor","accessory":""},"stage":S.stage("B01"),"seed":911})
+	var enemy: RefCounted=battle.director.spawn("E02",battle.position-Vector2(1300,0))
+	battle.enemies=[enemy]
+	var warning:={"shape":"fan","origin":enemy.position,"direction":Vector2.RIGHT,"radius":1200.0,"spread":2.8,"damage":10.0,"remaining":1.0,"phase":"tell","projectile_only":true,"owner_id":enemy.id,"action_serial":1}
+	battle.telegraphs=[warning]
+	expect(_drive_local_candidates(battle).dot(Vector2.LEFT)>.99,"local driver approaches through non-damaging firing envelope")
+	expect(_drive_visible_warnings(battle).dot(Vector2.LEFT)>.99,"persistent driver approaches through non-damaging firing envelope")
+	warning.projectile_only=false
+	var dodge:=_drive_local_candidates(battle)
+	expect(not G.contains_actor(warning,battle.position+dodge*100),"local driver still avoids a real area footprint")
+	dodge=_drive_visible_warnings(battle)
+	expect(not G.contains_actor(warning,battle.position+dodge*100),"persistent driver still avoids a real area footprint")
+	battle.telegraphs.clear()
+	battle.projectiles=[{"hostile":true,"position":H.center(battle.position)+Vector2(-100,0),"velocity":Vector2.ZERO}]
+	dodge=_drive_local_candidates(battle)
+	expect(H.center(battle.position+dodge*100).distance_to(battle.projectiles[0].position)>=30,"local driver retains actual projectile avoidance")
+	dodge=_drive_visible_warnings(battle)
+	expect(H.center(battle.position+dodge*100).distance_to(battle.projectiles[0].position)>=30,"persistent driver still avoids actual projectiles when no area warning is active")
+	var distant_area:={"shape":"disc","origin":battle.position+Vector2(800,0),"radius":20.0,"remaining":1.0,"phase":"tell"}
+	expect(_visible_path_risk(battle.position,battle.position+Vector2(-100,0),215,[distant_area],battle.projectiles)>0,"area-path planning also evaluates actual visible projectile crossings")
+	driver_plans.erase(battle.attempt_id)
+
 # Persistent plans use only warnings already visible this frame. The plan holds a
 # reachable safe point until that warning ends, then returns to attack range.
 var driver_plans: Dictionary = {}
-const DRIVER_REVISION := "visible_goal_v2"
+const DRIVER_REVISION := "visible_goal_v4_swept_core4"
 
 func drive(battle: RefCounted) -> Vector2:
 	if str(battle.director.config.get("encounter_mode","")) != "boss_duel": return _drive_local_candidates(battle)
@@ -92,7 +127,7 @@ func _drive_visible_warnings(battle: RefCounted) -> Vector2:
 	for enemy in battle.enemies:
 		if enemy.active_remaining > 0: active_owners[enemy.id] = true
 	for warning in battle.telegraphs:
-		if float(warning.get("damage",1)) <= 0: continue
+		if float(warning.get("damage",1)) <= 0 or bool(warning.get("projectile_only",false)): continue
 		var threat: Dictionary = warning.duplicate()
 		if active_owners.has(int(threat.get("owner_id",-1))): threat.phase = "active"
 		threats.append(threat)
@@ -103,7 +138,7 @@ func _drive_visible_warnings(battle: RefCounted) -> Vector2:
 	if threats.is_empty():
 		plan.signature = ""
 		driver_plans[battle.attempt_id] = plan
-		return (objective - battle.position).normalized() if objective.distance_to(battle.position) > 8 else Vector2.ZERO
+		return LOCAL_DRIVER.drive(battle)
 	var ids: Array[String] = []
 	var deadline := 2.0
 	for threat in threats:
@@ -111,7 +146,7 @@ func _drive_visible_warnings(battle: RefCounted) -> Vector2:
 		deadline = minf(deadline,maxf(0.1,float(threat.get("remaining",0.5))))
 	ids.sort()
 	var signature := ",".join(ids)
-	if plan.signature == signature and _visible_path_risk(battle.position,plan.goal,speed,threats) < 1:
+	if plan.signature == signature and _visible_path_risk(battle.position,plan.goal,speed,threats,battle.projectiles) < 1:
 		return (plan.goal - battle.position).normalized() if plan.goal.distance_to(battle.position) > 8 else Vector2.ZERO
 	var candidates: Array[Vector2] = [battle.position,SPACE.clamp_point(objective,SPACE.PLAYER_MARGIN)]
 	var travel := maxf(12,speed * maxf(0.05,deadline - 0.10))
@@ -122,7 +157,7 @@ func _drive_visible_warnings(battle: RefCounted) -> Vector2:
 	var best_risk := INF
 	var best_score := INF
 	for point in candidates:
-		var risk := _visible_path_risk(battle.position,point,speed,threats)
+		var risk := _visible_path_risk(battle.position,point,speed,threats,battle.projectiles)
 		var score: float = risk * 100000 + point.distance_to(battle.position) + point.distance_to(objective) * 0.15
 		if score < best_score: best = point; best_score = score; best_risk = risk
 	plan.signature = signature; plan.goal = best
@@ -130,7 +165,7 @@ func _drive_visible_warnings(battle: RefCounted) -> Vector2:
 	driver_plans[battle.attempt_id] = plan
 	return (best-battle.position).normalized() if best.distance_to(battle.position) > 8 else Vector2.ZERO
 
-func _visible_path_risk(start: Vector2, goal: Vector2, speed: float, threats: Array) -> float:
+func _visible_path_risk(start: Vector2, goal: Vector2, speed: float, threats: Array, projectiles: Array = []) -> float:
 	var distance := start.distance_to(goal)
 	var direction := (goal-start).normalized()
 	var risk := 0.0
@@ -138,40 +173,23 @@ func _visible_path_risk(start: Vector2, goal: Vector2, speed: float, threats: Ar
 		var remaining := maxf(0,float(threat.get("remaining",0)))
 		if str(threat.get("phase","tell")) == "tell":
 			var at_release := start + direction * minf(distance,speed * maxf(0,remaining - 1.0/60.0))
-			if G.contains(threat,at_release,28): risk += 1
+			if G.contains_actor(threat,at_release,H.RADIUS+2): risk += 1
 		else:
 			# Active hazards must be avoided along the route, not only at its end.
 			for sample in range(1,9):
 				var time: float = minf(distance / maxf(1,speed),remaining) * sample / 8.0
-				if G.contains(threat,start + direction * minf(distance,speed*time),24): risk += 0.125
+				if G.contains_actor(threat,start + direction * minf(distance,speed*time),H.RADIUS+2): risk += 0.125
+	# Compare simultaneous moving trajectories with the actual red core plus
+	# the same two-unit reaction margin used by the local input driver.
+	for bullet in projectiles:
+		if not bool(bullet.get("hostile",false)): continue
+		var horizon:=minf(maxf(.35,distance/maxf(1,speed)),minf(2,float(bullet.get("life",2))))
+		var endpoint: Vector2=start+direction*minf(distance,speed*horizon)
+		if H.contains_swept(bullet.position,Vector2(bullet.position)+Vector2(bullet.velocity)*horizon,float(bullet.get("hit_radius",5))+2,start,endpoint): risk+=1
 	return risk
 
 func _drive_local_candidates(battle: RefCounted) -> Vector2:
-	var target: RefCounted = TARGET.nearest(battle.enemies,battle.position,4000)
-	var objective: Vector2 = battle.position
-	if target != null:
-		var ranged: bool = C.definition(battle.current().id).basic.reach > 300
-		var wanted := 245.0 if ranged else 64.0
-		objective = target.position + (battle.position - target.position).normalized() * wanted
-	elif not battle.gems.is_empty(): objective = battle.gems[0].position
-	var desired: Vector2 = (objective - battle.position).normalized()
-	var best: Vector2 = desired
-	var best_score := -INF
-	for index in 17:
-		var direction := Vector2.ZERO if index == 16 else Vector2.RIGHT.rotated(index * TAU / 16)
-		var point: Vector2 = SPACE.clamp_point(battle.position + direction * 100.0, SPACE.PLAYER_MARGIN)
-		var score: float = -point.distance_to(objective) * .015
-		for warning in battle.telegraphs:
-			if G.contains(warning, point): score -= 30.0
-		for hazard in battle.hazards:
-			if G.contains(hazard, point): score -= 30.0
-		for projectile in battle.projectiles:
-			if not projectile.get("hostile",false): continue
-			var end: Vector2 = projectile.position + projectile.velocity * .45
-			if Geometry2D.get_closest_point_to_segment(point,projectile.position,end).distance_to(point) < 30: score -= 10.0
-		if point.distance_to(battle.position + direction * 100.0) > 5: score -= 10.0
-		if score > best_score: best_score = score; best = direction
-	return best
+	return LOCAL_DRIVER.drive(battle)
 
 # Read-only telemetry for reproducible simulated play. HP/MP snapshots are actual
 # runtime values; absent production attribution is reported rather than invented.

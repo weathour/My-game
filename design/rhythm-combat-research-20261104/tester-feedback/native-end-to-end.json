@@ -1,0 +1,331 @@
+{
+  "kind": "native real-audio end-to-end",
+  "platform": "xcb",
+  "checks": [
+    {
+      "check": "actual default02 OGG and D2 MIDI decoded",
+      "pass": true
+    },
+    {
+      "check": "initial state is ready without autoplay",
+      "pass": true
+    },
+    {
+      "check": "transport uses original class clock and playback methods",
+      "pass": true
+    },
+    {
+      "check": "native main window owns focus",
+      "pass": true
+    },
+    {
+      "check": "actual default audio backend starts at0.02 volume and advances",
+      "pass": true
+    },
+    {
+      "check": "real native J input recorded",
+      "pass": true
+    },
+    {
+      "check": "raw J is bracketed by actual transport samples",
+      "pass": true
+    },
+    {
+      "check": "native J keeps keyboard source",
+      "pass": true
+    },
+    {
+      "check": "real native K input recorded",
+      "pass": true
+    },
+    {
+      "check": "raw K is bracketed by actual transport samples",
+      "pass": true
+    },
+    {
+      "check": "native K keeps keyboard source",
+      "pass": true
+    },
+    {
+      "check": "real native SPACE input recorded",
+      "pass": true
+    },
+    {
+      "check": "raw SPACE is bracketed by actual transport samples",
+      "pass": true
+    },
+    {
+      "check": "native SPACE keeps keyboard source",
+      "pass": true
+    },
+    {
+      "check": "J K SPACE timestamps progress with real music",
+      "pass": true
+    },
+    {
+      "check": "native P pauses real playback",
+      "pass": true
+    },
+    {
+      "check": "paused real transport position freezes",
+      "pass": true
+    },
+    {
+      "check": "paused native key is not captured",
+      "pass": true
+    },
+    {
+      "check": "native Home seeks real transport and creates a new trial",
+      "pass": true
+    },
+    {
+      "check": "native main window owns focus",
+      "pass": true
+    },
+    {
+      "check": "real backend resumes after seek",
+      "pass": true
+    },
+    {
+      "check": "real native J-after-seek input recorded",
+      "pass": true
+    },
+    {
+      "check": "raw J-after-seek is bracketed by actual transport samples",
+      "pass": true
+    },
+    {
+      "check": "native J-after-seek keeps keyboard source",
+      "pass": true
+    },
+    {
+      "check": "blind change creates a reference-free trial",
+      "pass": true
+    },
+    {
+      "check": "native main window owns focus",
+      "pass": true
+    },
+    {
+      "check": "real native blind-J input recorded",
+      "pass": true
+    },
+    {
+      "check": "raw blind-J is bracketed by actual transport samples",
+      "pass": true
+    },
+    {
+      "check": "native blind-J keeps keyboard source",
+      "pass": true
+    },
+    {
+      "check": "real native blind-K input recorded",
+      "pass": true
+    },
+    {
+      "check": "raw blind-K is bracketed by actual transport samples",
+      "pass": true
+    },
+    {
+      "check": "native blind-K keeps keyboard source",
+      "pass": true
+    },
+    {
+      "check": "real native blind-SPACE input recorded",
+      "pass": true
+    },
+    {
+      "check": "raw blind-SPACE is bracketed by actual transport samples",
+      "pass": true
+    },
+    {
+      "check": "native blind-SPACE keeps keyboard source",
+      "pass": true
+    },
+    {
+      "check": "real blind taps have no target assignment or score",
+      "pass": true
+    },
+    {
+      "check": "blind raw timestamps progress naturally",
+      "pass": true
+    },
+    {
+      "check": "live blind interface hides timing and scoring",
+      "pass": true
+    },
+    {
+      "check": "all real keyboard events survive multi-trial export",
+      "pass": true
+    },
+    {
+      "check": "export preserves measured real transport timestamps exactly",
+      "pass": true
+    },
+    {
+      "check": "real trial exports retain exact MIDI and OGG resource hashes",
+      "pass": true
+    },
+    {
+      "check": "CSV preserves every measured raw audio timestamp",
+      "pass": true
+    },
+    {
+      "check": "real stop tears down playback and resets position",
+      "pass": true
+    },
+    {
+      "check": "real close releases transport audio",
+      "pass": true
+    }
+  ],
+  "count": 44,
+  "volume_linear": 0.02,
+  "clock_state_patched": false,
+  "sampling": "QAudioSink-backed AudioTransport.position_seconds before/inside/after native QTest input",
+  "readings": [
+    {
+      "mode": "pulse",
+      "trial_id": "20261104T104827_aeff5cbb45:1",
+      "before_audio_sec": 0.21333333333333335,
+      "after_audio_sec": 0.21333333333333335,
+      "event": {
+        "judgement": "hit",
+        "raw_audio_sec": 0.21333333333333335,
+        "presentation_audio_sec": 0.21333333333333335,
+        "corrected_audio_sec": 0.21333333333333335,
+        "compensation_ms": 0.0,
+        "presentation_offset_ms": 0.0,
+        "target_index": 0,
+        "target_sec": 0.1999639999999998,
+        "error_ms": 13.369333333333538,
+        "key": "J",
+        "source": "keyboard",
+        "blind": false
+      }
+    },
+    {
+      "mode": "pulse",
+      "trial_id": "20261104T104827_aeff5cbb45:1",
+      "before_audio_sec": 0.384,
+      "after_audio_sec": 0.384,
+      "event": {
+        "judgement": "late",
+        "raw_audio_sec": 0.384,
+        "presentation_audio_sec": 0.384,
+        "corrected_audio_sec": 0.384,
+        "compensation_ms": 0.0,
+        "presentation_offset_ms": 0.0,
+        "target_index": 0,
+        "target_sec": 0.1999639999999998,
+        "error_ms": 184.0360000000002,
+        "key": "K",
+        "source": "keyboard",
+        "blind": false
+      }
+    },
+    {
+      "mode": "pulse",
+      "trial_id": "20261104T104827_aeff5cbb45:1",
+      "before_audio_sec": 0.5973333333333334,
+      "after_audio_sec": 0.5973333333333334,
+      "event": {
+        "judgement": "hit",
+        "raw_audio_sec": 0.5973333333333334,
+        "presentation_audio_sec": 0.5973333333333334,
+        "corrected_audio_sec": 0.5973333333333334,
+        "compensation_ms": 0.0,
+        "presentation_offset_ms": 0.0,
+        "target_index": 1,
+        "target_sec": 0.6615049999999998,
+        "error_ms": -64.17166666666641,
+        "key": "SPACE",
+        "source": "keyboard",
+        "blind": false
+      }
+    },
+    {
+      "mode": "pulse",
+      "trial_id": "20261104T104827_aeff5cbb45:2",
+      "before_audio_sec": 0.17066666666666666,
+      "after_audio_sec": 0.17066666666666666,
+      "event": {
+        "judgement": "hit",
+        "raw_audio_sec": 0.17066666666666666,
+        "presentation_audio_sec": 0.17066666666666666,
+        "corrected_audio_sec": 0.17066666666666666,
+        "compensation_ms": 0.0,
+        "presentation_offset_ms": 0.0,
+        "target_index": 0,
+        "target_sec": 0.1999639999999998,
+        "error_ms": -29.297333333333146,
+        "key": "J",
+        "source": "keyboard",
+        "blind": false
+      }
+    },
+    {
+      "mode": "blind",
+      "trial_id": "20261104T104827_aeff5cbb45:3",
+      "before_audio_sec": 0.4266666666666667,
+      "after_audio_sec": 0.4266666666666667,
+      "event": {
+        "judgement": "recorded",
+        "raw_audio_sec": 0.4266666666666667,
+        "presentation_audio_sec": 0.4266666666666667,
+        "corrected_audio_sec": 0.4266666666666667,
+        "compensation_ms": 0.0,
+        "presentation_offset_ms": 0.0,
+        "target_index": null,
+        "target_sec": null,
+        "error_ms": null,
+        "key": "J",
+        "source": "keyboard",
+        "blind": true
+      }
+    },
+    {
+      "mode": "blind",
+      "trial_id": "20261104T104827_aeff5cbb45:3",
+      "before_audio_sec": 0.5973333333333334,
+      "after_audio_sec": 0.5973333333333334,
+      "event": {
+        "judgement": "recorded",
+        "raw_audio_sec": 0.5973333333333334,
+        "presentation_audio_sec": 0.5973333333333334,
+        "corrected_audio_sec": 0.5973333333333334,
+        "compensation_ms": 0.0,
+        "presentation_offset_ms": 0.0,
+        "target_index": null,
+        "target_sec": null,
+        "error_ms": null,
+        "key": "K",
+        "source": "keyboard",
+        "blind": true
+      }
+    },
+    {
+      "mode": "blind",
+      "trial_id": "20261104T104827_aeff5cbb45:3",
+      "before_audio_sec": 0.768,
+      "after_audio_sec": 0.768,
+      "event": {
+        "judgement": "recorded",
+        "raw_audio_sec": 0.768,
+        "presentation_audio_sec": 0.768,
+        "corrected_audio_sec": 0.768,
+        "compensation_ms": 0.0,
+        "presentation_offset_ms": 0.0,
+        "target_index": null,
+        "target_sec": null,
+        "error_ms": null,
+        "key": "SPACE",
+        "source": "keyboard",
+        "blind": true
+      }
+    }
+  ],
+  "trial_count": 3,
+  "total_taps": 7,
+  "subjective_listening_claim": false
+}

@@ -1,0 +1,77 @@
+{
+  "task": "current-version repository maintenance",
+  "started_at": 1793972684.5274081,
+  "deleted": [
+    {
+      "path": "addons/godot_mcp/tools/script_tools_native_backup.gd",
+      "bytes": 97,
+      "sha256": "047b767def29eda3106dee247d4f2b46316ca38d29e9975ab2c3a69217bbc49e",
+      "reason": "comment-only unused vendor backup; active plugin uses script_tools_native.gd"
+    },
+    {
+      "path": "addons/godot_mcp/tools/script_tools_native_backup.gd.uid",
+      "bytes": 20,
+      "sha256": "589c1bd80d8aa428e4c074421cb6c49e67a6a3fdc2f2465e7ebf301a0839669c",
+      "reason": "comment-only unused vendor backup; active plugin uses script_tools_native.gd"
+    },
+    {
+      "path": "design/zhang-liao-summons-20261106/art/partial-manifest.json",
+      "bytes": 457,
+      "sha256": "8a9d15fa96d3979d2b43b900ad3a10fd29975fe2368421d0c3e77a67206861ad",
+      "reason": "superseded one-clip temporary export manifest; final ten-clip manifest and complete QA retained; partial exporter regenerates it"
+    }
+  ],
+  "quarantined": [
+    {
+      "path": "home/weathour/programs/desktop-projects/My-game/design/skill-presentation-20261105/qa/headless-report.json",
+      "destination": "/home/weathour/.cache/my-game/repository-maintenance-20261106/misplaced-headless-report.json",
+      "bytes": 188,
+      "sha256": "aec740b233802dab6c0e95cf579ba4b8af9bfd8dd411c686584e4000644d8891",
+      "reason": "orphan diagnostic written into duplicated absolute-path tree; no user-save/settings structure"
+    }
+  ],
+  "git_exclusions": [
+    {
+      "path": "design/zhang-liao-summons-20261106/verification/native-approved/movie-frames",
+      "files": 1520,
+      "bytes": 414263315,
+      "disposition": "retained locally, excluded from version control; generated captures referenced by original audit metadata"
+    },
+    {
+      "path": "design/zhang-liao-summons-20261106/verification/native/movie-frames",
+      "files": 1520,
+      "bytes": 417039912,
+      "disposition": "retained locally, excluded from version control; generated captures referenced by original audit metadata"
+    },
+    {
+      "path": "design/zhang-liao-summons-20261106/verification/native-final/movie-frames",
+      "files": 1520,
+      "bytes": 417856259,
+      "disposition": "retained locally, excluded from version control; generated captures referenced by original audit metadata"
+    },
+    {
+      "path": "design/zhang-liao-summons-20261106/references",
+      "files": 18,
+      "bytes": 7213024,
+      "disposition": "external action-study downloads retained locally; source-index.json stays versioned"
+    },
+    {
+      "path": "selected superseded Zhang Liao native capture matrices",
+      "files": 532,
+      "bytes": 342803700,
+      "disposition": "retained locally; final native-approved images and two exact failure examples remain versioned"
+    }
+  ],
+  "retained_failure_images": [
+    {
+      "path": "design/zhang-liao-summons-20261106/verification/native/960-war-gaoshun-comfort-bounds-failure.png",
+      "bytes": 818485,
+      "sha256": "5dbf338523d1fcac4df1ae67a73c72c77d21e603a2e4731e130f5be85ca8c0c9"
+    },
+    {
+      "path": "design/zhang-liao-summons-20261106/verification/native-final/960-war-chengong-normal-edge-close-bounds-failure.png",
+      "bytes": 1125826,
+      "sha256": "0b08c3ed7848b315cdfb644cd8e68a4fe2a6fedc8c0e02efc10657c465cd4327"
+    }
+  ]
+}

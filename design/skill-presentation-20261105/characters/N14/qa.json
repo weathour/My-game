@@ -1,0 +1,23 @@
+{
+  "id": "N14",
+  "status": "passed",
+  "read_only_raster_checks": {
+    "binary_alpha": true,
+    "frame_sizes": true,
+    "distinct_frames_within_clips": true,
+    "canvas_no_clipping": true,
+    "editable_files": true,
+    "source_hash": true
+  },
+  "visual_review": "Elderly shrine curse adept uses hooked ritual staff, beaded accessories, patched charcoal/ochre robe and hanging paper charms. Staff and unfolding binding talismans retained; four special poses include planting, crouching, drawing and lifting charms. All 16 actual distinct source poses measured with alpha-connected component extraction. Source scaling is fixed from standing human body calibration; hunched/galloping frames are not stretched. Tiny disconnected alpha specks below 3 pixels omitted. User aesthetic acceptance remains pending.",
+  "actor_shared_opaque_colors": 58,
+  "export_visual_review": {
+    "source_sheet": true,
+    "idle": true,
+    "move": true,
+    "attack": true,
+    "special": true,
+    "head": true,
+    "hit": "reuse p04 and p01, reviewed idle"
+  }
+}

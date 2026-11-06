@@ -1,0 +1,71 @@
+{
+  "status": "passed",
+  "recorded_at": 1793961028.8261354,
+  "comparison": "last formal skill-information source freeze to current source freeze; no git HEAD assumption",
+  "before_freeze": "design/skill-information-20261106/verification/frozen-inputs.json",
+  "before_freeze_sha256": "ef92dada6a4932c05e3b2e73ead11d8bdbf29494ed5863972790baae67699563",
+  "after_freeze": "frozen-inputs.json",
+  "after_freeze_sha256": "e119dff784f22fe4f6eb6da3dff93bcd7eb465308500d96e3570f052547acaa7",
+  "unchanged_existing_global_count": 1874,
+  "changed_existing_global": {
+    "assets/data/chronicle/battle_sprite_bounds.json": {
+      "before": "0204d5da605e17807bc56064aea7ae5be402a42388c0f5c56d5cc2b8692edce4",
+      "after": "265b6c9bdebb079693134edeae744de2581df75d416a1c39c0be0bd1ac801e09"
+    },
+    "scripts/ui/chronicle/battle_canvas.gd": {
+      "before": "da52700e73f8cd790f61b683cbc2dfd7288ee0455c4c8fdf0e35b265a606d372",
+      "after": "10906c17b6248c8f8076f969b69bb977ee6220f6c91ac4b7b7364bab727eb6fd"
+    },
+    "scripts/ui/chronicle/enemy_actor.gd": {
+      "before": "999c3abeea3b090dadc113c7cca489978800a2b348e4051bbb33feded86f0f4f",
+      "after": "724eafa9653362b2c1b66cee1a6fdd2a5a0e5abd960ea87968428837c660616a"
+    },
+    "scripts/ui/chronicle/enemy_battle_effects.gd": {
+      "before": "18f2d9308a3e60c4fdbf4289d33ec77999ac45c05115b5f8353db6fa2312c31a",
+      "after": "1bfc036fb8bad96467c2e11e4df9fc2a43126422e8d7ad786784ba55b53ea72d"
+    }
+  },
+  "added_global": {
+    "assets/enemies/baimen/zhang_liao_summons/B17-actor.aseprite": "17c94c0daf3431c580d4615ef3ec111278e4f848d2e0cff5d460f732b9a7a8dc",
+    "assets/enemies/baimen/zhang_liao_summons/B17-order_chengong.aseprite": "24013e4f819a1a63d62b6bd45277fba31a6ccb899a627173de80178472b03d90",
+    "assets/enemies/baimen/zhang_liao_summons/B17-order_chengong.png": "6835f8a92b83c4bfdec5fd00c291e8303f86dc871bcda0179eac694976666214",
+    "assets/enemies/baimen/zhang_liao_summons/B17-order_gaoshun.aseprite": "59d7b42133ca8ebffacaced54d0e52fd2b1f4270c0dfee9b87d6ea91ab53256b",
+    "assets/enemies/baimen/zhang_liao_summons/B17-order_gaoshun.png": "c3a8e76a187ad9ac411ee5888d4db4eec24aef0eba55e6912006662c4fbf2b1f",
+    "assets/enemies/baimen/zhang_liao_summons/B17_human-actor.aseprite": "2ed10d6491388a8ceb5fdf8338d7fb9821677023e347a1a115c09e49695a9d31",
+    "assets/enemies/baimen/zhang_liao_summons/B17_human-order_chengong.aseprite": "1a5f893d0f118e64f434d79d4d70d76c5ad065248fdc88dd68e7e9b6b6337e98",
+    "assets/enemies/baimen/zhang_liao_summons/B17_human-order_chengong.png": "e505eb1ff98f06c37b72f1f946d8fcac7d8598e2de5d699b69adc843652fd7af",
+    "assets/enemies/baimen/zhang_liao_summons/B17_human-order_gaoshun.aseprite": "b3077948ee15fad9bd0f087d6cccfc3fea764882dafb8a488fca85b6dcd9f85c",
+    "assets/enemies/baimen/zhang_liao_summons/B17_human-order_gaoshun.png": "cc6519cf610ec1399d1aced69015418d0881c515ca7b792ec27630873c5aa4c1",
+    "assets/enemies/baimen/zhang_liao_summons/M03_WAR-actor.aseprite": "6ca9f0acf039de191e73fd27a59204c139b3563531a7cbcfe119a9b9abb6572c",
+    "assets/enemies/baimen/zhang_liao_summons/M03_WAR-gaoshun.aseprite": "0700fda367c32e7a71ce4a483fb4307809d5e917f9c2520f38fdd2e1a49871c5",
+    "assets/enemies/baimen/zhang_liao_summons/M03_WAR-gaoshun.png": "a56ef381cf63dbab4664d4986fef285db4d33fae7e7d25ad8653a830ec73224b",
+    "assets/enemies/baimen/zhang_liao_summons/M03_human-actor.aseprite": "b557d697c96dbab8cb3fc57bd9698f07d33f93de5e908c5caec7c02074800688",
+    "assets/enemies/baimen/zhang_liao_summons/M03_human-gaoshun.aseprite": "ad2a652e050fb464dbdbff6ed607a7704bb87a0f59ceacdff530f965f6b95dd7",
+    "assets/enemies/baimen/zhang_liao_summons/M03_human-gaoshun.png": "1eb9760b3226cf1890a84e741094dc66a2f977028f4d2268ec52f7c426a3be3e",
+    "assets/enemies/baimen/zhang_liao_summons/M04_WAR-actor.aseprite": "f7bfc817e2fde96428867a154c37b1c83bb5f0749b08c2821ab6771d7831e791",
+    "assets/enemies/baimen/zhang_liao_summons/M04_WAR-chengong.aseprite": "93e547a4c5a792acc98fc644a089f6e669f99a247fa821fc17d37cd27369850a",
+    "assets/enemies/baimen/zhang_liao_summons/M04_WAR-chengong.png": "d0aef3518e7a5e95540c32bc91592e82382a5565d792d6a7fdd50068dedeb1d1",
+    "assets/enemies/baimen/zhang_liao_summons/M04_human-actor.aseprite": "852503ef91996a6a7f3f938a510d10da4d5e88af98209e722b4b97bcd0b14088",
+    "assets/enemies/baimen/zhang_liao_summons/M04_human-chengong.aseprite": "25b5060ac8888e34b7165d2e9168e29443769698731a6c20b9563bf549eb963a",
+    "assets/enemies/baimen/zhang_liao_summons/M04_human-chengong.png": "6412ba9053381fc31446446687cf1f1861db51c43401822031b29ad0879dee57",
+    "assets/enemies/baimen/zhang_liao_summons/fx-chengong_seal.aseprite": "231cb3f6f52da2877321791980d9955a4090dd205796e8d9f815088a376935bf",
+    "assets/enemies/baimen/zhang_liao_summons/fx-chengong_seal.png": "b01fb59957edcce4e312a1040fe73ae313fe2ebd346a46d9f24f1d15145686a0",
+    "assets/enemies/baimen/zhang_liao_summons/fx-gaoshun_entry.aseprite": "7c09674e09dad9e39dcfb2cbe6c55c01847ee46f5a91d68d2b7316864dbb4392",
+    "assets/enemies/baimen/zhang_liao_summons/fx-gaoshun_entry.png": "422ba6819f321eb0befe6d0d7b347e3f8ff2b062cb09a454e7e16ebf051a94b3",
+    "assets/enemies/baimen/zhang_liao_summons/manifest.json": "8959c84773ae430ea0d63aa6c20a1fa47d9af52fb3e84090e68939512e59bb78",
+    "scripts/tests/check_zhang_liao_summon_art.py": "91ae84eb82ef8e1007c5a4c0171e48309d3ddf456171d2bbe037f9668b15779b",
+    "scripts/ui/chronicle/zhang_liao_summon_presentation.gd": "2bfa662cf8697e753604f77688fefe1c189901f1222f8d53dbd41149c1c93805"
+  },
+  "removed_global": [],
+  "numerical_and_simulation_source_hashes_unchanged": {
+    "scripts/battle/enemy_system.gd": true,
+    "scripts/battle/enemy_geometry.gd": true,
+    "scripts/battle/enemy_runtime.gd": true,
+    "scripts/battle/stage_director.gd": true,
+    "scripts/content/enemy_catalog.gd": true,
+    "scripts/content/boss_forms.gd": true,
+    "scripts/content/stage_catalog.gd": true,
+    "scripts/battle/player_hurtbox.gd": true
+  },
+  "data_scope": "All prior assets/data files unchanged except visual battle_sprite_bounds.json; route/story/characters/abilities/boss forms and simulation source hashes retain previous values."
+}

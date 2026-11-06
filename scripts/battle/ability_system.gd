@@ -19,6 +19,6 @@ static func activate(ability: Resource, source: RefCounted, origin: Vector2, tar
 	var context := {"source":source.id, "ability":str(ability.id), "cast":sequence, "damage":source.stats.attack * ability.damage_scale,
 		"attack":float(source.stats.attack), "enchant":equipment.get("accessory", "") if direct else "", "direct":direct,
 		"damage_type":ability.damage_type, "slow":ability.slow, "duration":ability.duration, "paid":cost if manual else 0.0,
-		"manual":manual, "basic":str(ability.id).ends_with("_basic"), "secondary":false, "mechanic":ability.mechanic, "params":parameters}
+		"ability_kind":int(ability.kind), "manual":manual, "basic":str(ability.id).ends_with("_basic"), "secondary":false, "mechanic":ability.mechanic, "params":parameters}
 	context.make_read_only()
 	return {"ability":ability, "context":context, "origin":origin, "direction":direction, "reach":ability.reach}

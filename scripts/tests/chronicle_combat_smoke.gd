@@ -1,5 +1,7 @@
 extends SceneTree
+const H := preload("res://scripts/battle/player_hurtbox.gd")
 ## Behaviour contracts and real two-stage simulation; no demo victory controls.
+const LOCAL_DRIVER := preload("res://scripts/tests/reference_walk_driver.gd")
 const CAMPAIGN := preload("res://scripts/campaign/campaign_service.gd")
 const BATTLE := preload("res://scripts/battle/battle_session.gd")
 const C := preload("res://scripts/content/combat_catalog.gd")
@@ -53,6 +55,7 @@ func run() -> void:
 	campaign_lifecycle()
 	var campaign := CAMPAIGN.new()
 	campaign.directory = "user://chronicle_combat_tests/" + str(Time.get_ticks_usec())
+	campaign.data.reward_seed = 781103
 	expect(campaign.begin_campaign() and campaign.resolve_event(), "new run starts alone at B01")
 	var entry := campaign.data.duplicate(true)
 	var request := campaign.start_battle()
@@ -98,6 +101,7 @@ func run() -> void:
 	var second := BATTLE.new(campaign.start_battle())
 	play(second)
 	expect(second.outcome == "victory", "B02 wins with independent companions")
+	if second.outcome != "victory": quit(1); return
 	expect(campaign.complete_battle(second.result), "second-stage result commits")
 	expect(campaign.data.owned[reserve_id] == reserve, "unassigned reserve HP/MP/XP/CD frozen")
 	expect(campaign.data.owned.F11.xp > 0 or campaign.data.owned.F11.level > 1, "configured Emma gains experience")
@@ -161,7 +165,7 @@ func resources_and_effects() -> void:
 	expect(projectile.context.source == "F11" and projectile.context.damage == attack and projectile.context.enchant == "ember_seal", "launched attacks retain owner and enchant")
 	# A living rear character cannot receive a direct enemy projectile.
 	var rear_hp: float = b.characters.F11.hp
-	b.projectiles.append({"position":b.position, "velocity":Vector2.ZERO, "life":1.0, "hostile":true, "damage":20.0, "source":1})
+	b.projectiles.append({"position":H.center(b.position), "velocity":Vector2.ZERO, "life":1.0, "hostile":true, "damage":20.0, "source":1})
 	b.tick(0.01, Vector2.ZERO)
 	expect(b.characters.F11.hp == rear_hp, "direct damage only hits foreground")
 	# Forced return bypasses shared switching cooldown; dead actors still receive XP.
@@ -169,7 +173,7 @@ func resources_and_effects() -> void:
 	b.switch_cooldown = 10
 	b.characters.F11.hurt_lock = 0
 	b.characters.F11.hp = 1
-	b.projectiles.append({"position":b.position, "velocity":Vector2.ZERO, "life":1.0, "hostile":true, "damage":999.0, "source":1})
+	b.projectiles.append({"position":H.center(b.position), "velocity":Vector2.ZERO, "life":1.0, "hostile":true, "damage":999.0, "source":1})
 	b.tick(0.01, Vector2.ZERO)
 	expect(b.active == 0 and b.characters.F11.dead and b.outcome == "", "auxiliary death returns to living protagonist")
 	var xp_before: float = b.characters.F11.xp
@@ -217,7 +221,7 @@ func stage_contracts() -> void:
 	other.hp = 0; other.dead = true
 	simultaneous.enemies.append(other)
 	simultaneous.current().hp = 1
-	simultaneous.projectiles.append({"position":simultaneous.position, "velocity":Vector2.ZERO, "life":1.0, "hostile":true, "damage":999.0, "source":1})
+	simultaneous.projectiles.append({"position":H.center(simultaneous.position), "velocity":Vector2.ZERO, "life":1.0, "hostile":true, "damage":999.0, "source":1})
 	simultaneous.tick(0.01, Vector2.ZERO)
 	expect(simultaneous.outcome == "failed", "same batch protagonist death takes priority")
 	var gate := fixture()
@@ -314,13 +318,7 @@ func play(b: RefCounted) -> void:
 	var started := Time.get_ticks_usec()
 	for frame in 18000:
 		if not b.outcome.is_empty(): break
-		var target := TARGET.nearest(b.enemies, b.position, 2000)
-		var movement := Vector2.ZERO
-		if target != null:
-			var distance: float = b.position.distance_to(target.position)
-			if distance > 75: movement = (target.position - b.position).normalized()
-			if target.kind == "boss" and target.windup > 0: movement = target.aim.orthogonal()
-		elif not b.gems.is_empty(): movement = (b.gems[0].position - b.position).normalized()
+		var movement: Vector2 = LOCAL_DRIVER.drive(b)
 		if frame % 15 == 0: b.request_skill(0); b.request_skill(1)
 		b.tick(1.0 / 60.0, movement)
 	print("REAL_BATTLE outcome=", b.outcome, " time=", snappedf(b.director.elapsed, 0.1), " kills=", b.director.kills, " level=", b.characters.JIA.level, " cpu_ms=", (Time.get_ticks_usec() - started) / 1000)

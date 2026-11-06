@@ -1,0 +1,72 @@
+PipeWire 'pipewire-0' [1.0.5, weathour@pc, cookie:2970436274]
+ └─ Clients:
+        32. pipewire                            [1.0.5, weathour@pc, pid:2376]
+        34. WirePlumber                         [1.0.5, weathour@pc, pid:2375]
+        35. WirePlumber [export]                [1.0.5, weathour@pc, pid:2375]
+        48. Chromium input                      [1.0.5, weathour@pc, pid:2864426]
+        66. Chromium input                      [1.0.5, weathour@pc, pid:1128766]
+        73. __main__.py                         [1.0.5, weathour@pc, pid:3515557]
+        75. clash-verge                         [1.0.5, weathour@pc, pid:3483129]
+        77. libcanberra                         [1.0.5, weathour@pc, pid:1492459]
+        85. 终端                              [1.0.5, weathour@pc, pid:1493915]
+        90. xdg-desktop-portal                  [1.0.5, weathour@pc, pid:1492919]
+        96. GNOME Shell Volume Control          [1.0.5, weathour@pc, pid:1492363]
+        98. gnome-shell                         [1.0.5, weathour@pc, pid:1492363]
+       100. Firefox                             [1.0.5, weathour@pc, pid:3482357]
+       101. GNOME Volume Control Media Keys     [1.0.5, weathour@pc, pid:1492459]
+       102. speech-dispatcher-dummy             [1.0.5, weathour@pc, pid:35087]
+       104. Chromium input                      [1.0.5, weathour@pc, pid:1512731]
+       105. python3.12                          [1.0.5, weathour@pc, pid:3515557]
+       107. Chromium input                      [1.0.5, weathour@pc, pid:1128682]
+       108. Mutter                              [1.0.5, weathour@pc, pid:1492363]
+       112. ToDesk                              [1.0.5, weathour@pc, pid:1492548]
+       122. gjs                                 [1.0.5, weathour@pc, pid:3343582]
+       131. wpctl                               [1.0.5, weathour@pc, pid:3576436]
+
+Audio
+ ├─ Devices:
+ │      41. HDA NVidia                          [alsa]
+ │      49. Built-in Audio                      [alsa]
+ │      62. USB Audio                           [alsa]
+ │     117. WHP01K                              [bluez5]
+ │  
+ ├─ Sinks:
+ │      39. USB Audio S/PDIF Output             [vol: 0.41]
+ │      52. USB Audio Speakers                  [vol: 1.00]
+ │      55. USB Audio Front Headphones          [vol: 1.00]
+ │      71. HDA NVidia 数字立体声(HDMI)    [vol: 0.53]
+ │  *   82. WHP01K                              [vol: 0.48]
+ │  
+ ├─ Sink endpoints:
+ │  
+ ├─ Sources:
+ │      50. USB Audio Line Input                [vol: 1.00]
+ │      54. USB Audio Microphone                [vol: 1.00]
+ │  
+ ├─ Source endpoints:
+ │  
+ └─ Streams:
+        64. __main__.py                                                 
+            123. output_AUX0     > WHP01K:playback_FL	[init]
+            127. output_AUX1     > WHP01K:playback_FR	[init]
+       103. speech-dispatcher-dummy                                     
+             93. output_FR       > WHP01K:playback_FR	[init]
+             97. output_FL       > WHP01K:playback_FL	[init]
+
+Video
+ ├─ Devices:
+ │  
+ ├─ Sinks:
+ │  
+ ├─ Sink endpoints:
+ │  
+ ├─ Sources:
+ │  
+ ├─ Source endpoints:
+ │  
+ └─ Streams:
+
+Settings
+ └─ Default Configured Node Names:
+         0. Audio/Sink    bluez_output.C4_6E_7B_12_03_2E.1
+         1. Audio/Source  alsa_input.usb-Generic_USB_Audio-00.HiFi__hw_Audio_2__source

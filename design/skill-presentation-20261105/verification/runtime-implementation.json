@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "status": "runtime implementation + direct self checks complete; independent full acceptance owned separately",
+  "ability_profiles": 137,
+  "character_profiles": 38,
+  "unchanged_gameplay": "No combat numbers/MP/CD/targets/movement/hit timing/RNG/time_scale edits. Existing delivery_context allocation sites retained; new presentation identity has its own counter. New window/exposure/refund metadata contains source/ability/cast only.",
+  "facts": {
+    "ability_release": "one per successful actual payload; original source/cast + actual delivery; distinct presentation_id shared with its effect descriptor",
+    "damage_dealt": "positive applied amount; existing target/delivery; enriched manual/ability_kind/slow metadata",
+    "ability_effect": "positive actual hp/mp/shield delta per recipient, including field pulses; individual presentation id; secondary field pulse audio remains suppressed",
+    "mechanic": "echo/refund retain semantic facts, now unique cosmetic ids; duplicate settlement amount not displayed twice",
+    "states": "detached current simulation state keys; start/pulse/end cosmetic diff, no runtime state changed by renderer"
+  },
+  "render_limits": {
+    "universal_transients": 112,
+    "legacy_specialized_transients": 64,
+    "persistent_state_draws": 64,
+    "contact_targets_per_delivery": 3,
+    "secondary_contacts_per_delivery": 1,
+    "benefit_text_rows": 6
+  },
+  "actor_api": "present_cast(effect) with profile/action=profile.motion/manual/direction/source/ability/cast/delivery/presentation_id. Manual priority; current direct body only.",
+  "checks": [
+    {
+      "name": "skill_presentation_unit",
+      "log": "runtime-unit.log",
+      "result": "SKILL_PRESENTATION_UNIT PASS checks=974 failures=0 abilities=137"
+    },
+    {
+      "name": "chronicle_combat_feedback_smoke",
+      "log": "chronicle_combat_feedback_smoke.log",
+      "result": "CHRONICLE_COMBAT_FEEDBACK_SMOKE PASS checks=332 failures=0"
+    },
+    {
+      "name": "chronicle_feedback_latency_smoke",
+      "log": "chronicle_feedback_latency_smoke.log",
+      "result": "CHRONICLE_FEEDBACK_LATENCY_SMOKE PASS checks=20 failures=0"
+    },
+    {
+      "name": "chronicle_authored_effects_smoke",
+      "log": "chronicle_authored_effects_smoke.log",
+      "result": "CHRONICLE_AUTHORED_EFFECTS_SMOKE PASS checks=36 failures=0"
+    },
+    {
+      "name": "chronicle_character_mechanics_smoke",
+      "log": "chronicle_character_mechanics_smoke.log",
+      "result": "CHRONICLE_CHARACTER_MECHANICS_SMOKE PASS checks=126 failures=0"
+    },
+    {
+      "name": "chronicle_combat_feedback_events_smoke",
+      "log": "chronicle_combat_feedback_events_smoke.log",
+      "result": "CHRONICLE_COMBAT_FEEDBACK_EVENTS_SMOKE PASS checks=59 failures=0"
+    }
+  ],
+  "pending_or_separate": [
+    "Independent comprehensive 38-person visual/behavior acceptance and dense/native performance run by Luna.",
+    "Root owns final full project check and release/docs/ledger.",
+    "Existing skill-audio smoke assertion sequence passed2236 but prior standalone process logged exit resource leak; verification owner investigating separately."
+  ],
+  "fingerprints": {
+    "scripts/battle/ability_system.gd": "e0f104bc1e163ab76e5be18db9d93e12bc0d8c824fd54b16fa0761ec8189ff3c",
+    "scripts/battle/battle_session.gd": "1c40ab2802ad115c8c52fce07709d60f8e411b3b233155c8d3341506353d2895",
+    "scripts/battle/combat_mechanics.gd": "5b7edf5e0a1f63e24b20c58f9f9dd82e02b1803e2546d097e5e761e625a8d716",
+    "scripts/ui/chronicle/battle_canvas.gd": "572616e734e3e776cdb82d7e61d49ed8fd891c5b7b706d3c99e769d0ea4fd61e",
+    "scripts/ui/chronicle/authored_battle_effects.gd": "c72dab1ab290353a440a45fe00b9281b549af95bb2a74a9a3eeb93a99a62ffc0",
+    "scripts/ui/chronicle/combat_feedback.gd": "2cf3c372ab2535547ff79afe94962242dd717c01a38fe4dbcccf524107d7bf5e",
+    "scripts/ui/chronicle/battle_mechanic_status.gd": "51e6925124e6a3cfa157ef2779009af91f7cd061c9509788820b6c8b8a90de35",
+    "scripts/ui/chronicle/skill_presentation.gd": "031506482f9fa951d041166367b7bf26eced30dd29438874328e6f1eece5da02",
+    "scripts/ui/chronicle/skill_presentation_profiles.gd": "2b391278d4bc4229c340655b7468ac6060562aaa5e5d5fc9926c916b1455603c",
+    "assets/data/chronicle/skill_presentation_profiles.json": "c5dfbf05b35d5440a333cce5709781afe11cec0a17de7c286db25c85358a8938",
+    "scripts/tests/skill_presentation_unit.gd": "93447b4d3d13c83213d1532ccc3c5b9e45533633ef9595914dad4aa5dabbf798"
+  },
+  "current_native_visual_index": "ability-visuals/index.json",
+  "current_native_visual_review": "ability-visuals/review.json"
+}

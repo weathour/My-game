@@ -5,11 +5,14 @@ const CONDITIONS := preload("res://scripts/content/story_conditions.gd")
 const OPTIONAL_PATH := "res://assets/data/chronicle/character_events.json"
 const REACTIONS_PATH := "res://assets/data/chronicle/story_reactions.json"
 const LORE_PATH := "res://assets/data/chronicle/story_lore.json"
+const JIA_APPEARANCE := preload("res://scripts/ui/chronicle/jia_appearance.gd")
 const MUSIC := preload("res://scripts/audio/music_catalog.gd")
 const BACKGROUNDS := {
 	"road": "res://assets/story/chronicle/road.png",
 	"market": "res://assets/story/chronicle/market.png",
-	"camp": "res://assets/story/chronicle/camp.png"
+	"camp": "res://assets/story/chronicle/camp.png",
+	"lord_hall": "res://assets/story/chronicle/lord-hall.png",
+	"lord_chamber": "res://assets/story/chronicle/lord-chamber.png"
 }
 # Explicit nearest-position migrations for retired, non-equivalent lines.
 # Narrative rationale: docs/story/baimen-20261030/前半剧情与资料来源.md.
@@ -34,7 +37,7 @@ static func for_node(node: Dictionary) -> Dictionary:
 	if not event.is_empty(): return event
 	# Unproduced route previews still have a safe, read-only presentation.
 	return {"id":id, "title":str(node.get("name", "")), "location":"白门楼", "background":BACKGROUNDS.camp,
-		"music":"camp_signal", "lines":[{"id":id + "_summary", "speaker":"", "text":str(node.get("summary", "")), "actors":[]}]}
+		"music":"midi_test_11", "lines":[{"id":id + "_summary", "speaker":"", "text":str(node.get("summary", "")), "actors":[]}]}
 
 static func has_event(id: String) -> bool:
 	return events().has(id)
@@ -116,6 +119,7 @@ static func validate() -> Array[String]:
 			if not catalog[id] is Dictionary: errors.append("Invalid story: " + str(id)); continue
 			var event: Dictionary = catalog[id]
 			if event.get("id") != id or not _nonempty(event.get("title")) or not _nonempty(event.get("location")): errors.append("Invalid story identity: " + str(id))
+			if event.has("jia_appearance") and (not event.jia_appearance is String or event.jia_appearance not in JIA_APPEARANCE.APPEARANCES): errors.append("Invalid story appearance: " + str(id))
 			if not MUSIC.has_cue(str(event.get("music", ""))): errors.append("Unknown story music: " + str(id))
 			if not ResourceLoader.exists(str(event.get("background", ""))): errors.append("Missing story background: " + str(id))
 			errors.append_array(_validate_lines(event.get("lines"), str(id), characters))
@@ -167,6 +171,7 @@ static func _validate_lines(value: Variant, id: String, characters: Dictionary) 
 		if not _nonempty(line.get("id")) or seen.has(key) or not _nonempty(line.get("text")): errors.append("Invalid story line: " + id + "/" + key)
 		seen[key] = true
 		if not line.get("speaker", "") is String or (line.get("speaker", "") != "" and not characters.has(line.speaker)): errors.append("Unknown story speaker: " + id + "/" + key)
+		if line.has("location") and not _nonempty(line.location): errors.append("Invalid line location: " + id + "/" + key)
 		if line.has("speaker_name") and not line.speaker_name is String: errors.append("Invalid speaker name: " + id + "/" + key)
 		for field in ["music", "stinger"]:
 			if line.has(field) and not MUSIC.has_cue(str(line[field])): errors.append("Unknown line music: " + id + "/" + key)
@@ -176,5 +181,7 @@ static func _validate_lines(value: Variant, id: String, characters: Dictionary) 
 		for actor in line.get("actors", []):
 			if not actor is Dictionary: errors.append("Invalid actor: " + id + "/" + key); continue
 			if not characters.has(actor.get("id")) or actor.get("slot") not in ["left", "center", "right"] or cast.has(actor.get("id")): errors.append("Invalid story actor: " + id + "/" + key)
+			if actor.has("appearance") and (not actor.appearance is String or actor.appearance not in JIA_APPEARANCE.APPEARANCES or actor.get("id") != "JIA"): errors.append("Invalid actor appearance: " + id + "/" + key)
+			if actor.has("expression") and (not actor.expression is String or actor.expression not in JIA_APPEARANCE.EXPRESSIONS): errors.append("Invalid actor expression: " + id + "/" + key)
 			cast[actor.get("id")] = true
 	return errors

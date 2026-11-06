@@ -1,0 +1,208 @@
+{
+  "schema_version": 1,
+  "renderer": "Godot 4.6.2 project-default mobile (Vulkan Forward Mobile)",
+  "adapter": "NVIDIA GeForce RTX 5080",
+  "status": "PASS",
+  "scope": "Standalone actual default renderer validation after optimized source freeze. Performance numbers are reported on their own and are not compared to GL.",
+  "scenarios": [
+    {
+      "facts": {
+        "stage": "B01",
+        "active_frames": 720,
+        "terminal_frames": 0,
+        "events_match_GL": true,
+        "wave_population_samples_match_GL": true,
+        "actor_switch_frames_match_GL": true,
+        "B12_ordinary_alive_p90_max": null,
+        "projectile_max": 2
+      },
+      "metrics": {
+        "frame_wall_ms": {
+          "p50_ms": 8.083,
+          "p95_ms": 14.629,
+          "p99_ms": 26.119,
+          "max_ms": 50.492,
+          "over_33_33ms": 4,
+          "over_50ms": 2
+        },
+        "battle_tick_ms": {
+          "p50_ms": 0.733,
+          "p95_ms": 1.475,
+          "p99_ms": 2.949,
+          "max_ms": 7.05,
+          "over_33_33ms": 0,
+          "over_50ms": 0
+        },
+        "canvas_refresh_ms": {
+          "p50_ms": 0.673,
+          "p95_ms": 1.684,
+          "p99_ms": 3.025,
+          "max_ms": 5.761,
+          "over_33_33ms": 0,
+          "over_50ms": 0
+        },
+        "hud_view_refresh_ms": {
+          "p50_ms": 0.274,
+          "p95_ms": 4.241,
+          "p99_ms": 8.156,
+          "max_ms": 15.711,
+          "over_33_33ms": 0,
+          "over_50ms": 0
+        },
+        "canvas_draw_ms": {
+          "p50_ms": 0.362,
+          "p95_ms": 0.675,
+          "p99_ms": 1.548,
+          "max_ms": 5.976
+        },
+        "canvas_foreground_ms": {
+          "p50_ms": 0.83,
+          "p95_ms": 2.367,
+          "p99_ms": 4.873,
+          "max_ms": 7.531
+        },
+        "canvas_bounds_readback_ms_delta": {
+          "p50_ms": 0.0,
+          "p95_ms": 0.0,
+          "p99_ms": 0.0,
+          "max_ms": 0.0
+        }
+      }
+    },
+    {
+      "facts": {
+        "stage": "B12",
+        "active_frames": 1500,
+        "terminal_frames": 0,
+        "events_match_GL": true,
+        "wave_population_samples_match_GL": true,
+        "actor_switch_frames_match_GL": true,
+        "B12_ordinary_alive_p90_max": {
+          "max": 80.0,
+          "p50": 74.0,
+          "p90": 80.0,
+          "p95": 80.0,
+          "samples": 25
+        },
+        "projectile_max": 245
+      },
+      "metrics": {
+        "frame_wall_ms": {
+          "p50_ms": 24.178,
+          "p95_ms": 37.749,
+          "p99_ms": 48.401,
+          "max_ms": 88.291,
+          "over_33_33ms": 133,
+          "over_50ms": 11
+        },
+        "battle_tick_ms": {
+          "p50_ms": 3.833,
+          "p95_ms": 6.506,
+          "p99_ms": 12.931,
+          "max_ms": 23.953,
+          "over_33_33ms": 0,
+          "over_50ms": 0
+        },
+        "canvas_refresh_ms": {
+          "p50_ms": 2.017,
+          "p95_ms": 3.261,
+          "p99_ms": 5.497,
+          "max_ms": 9.119,
+          "over_33_33ms": 0,
+          "over_50ms": 0
+        },
+        "hud_view_refresh_ms": {
+          "p50_ms": 0.303,
+          "p95_ms": 4.456,
+          "p99_ms": 6.732,
+          "max_ms": 14.315,
+          "over_33_33ms": 0,
+          "over_50ms": 0
+        },
+        "canvas_draw_ms": {
+          "p50_ms": 0.552,
+          "p95_ms": 0.968,
+          "p99_ms": 2.184,
+          "max_ms": 4.114
+        },
+        "canvas_foreground_ms": {
+          "p50_ms": 8.888,
+          "p95_ms": 14.709,
+          "p99_ms": 20.338,
+          "max_ms": 27.989
+        },
+        "canvas_bounds_readback_ms_delta": {
+          "p50_ms": 0.0,
+          "p95_ms": 0.0,
+          "p99_ms": 0.0,
+          "max_ms": 0.0
+        }
+      }
+    },
+    {
+      "facts": {
+        "stage": "B18",
+        "active_frames": 720,
+        "terminal_frames": 0,
+        "events_match_GL": true,
+        "wave_population_samples_match_GL": true,
+        "actor_switch_frames_match_GL": true,
+        "B12_ordinary_alive_p90_max": null,
+        "projectile_max": 100
+      },
+      "metrics": {
+        "frame_wall_ms": {
+          "p50_ms": 8.082,
+          "p95_ms": 14.943,
+          "p99_ms": 21.168,
+          "max_ms": 81.935,
+          "over_33_33ms": 3,
+          "over_50ms": 1
+        },
+        "battle_tick_ms": {
+          "p50_ms": 0.369,
+          "p95_ms": 0.6,
+          "p99_ms": 1.547,
+          "max_ms": 3.571,
+          "over_33_33ms": 0,
+          "over_50ms": 0
+        },
+        "canvas_refresh_ms": {
+          "p50_ms": 0.21,
+          "p95_ms": 0.369,
+          "p99_ms": 2.019,
+          "max_ms": 3.902,
+          "over_33_33ms": 0,
+          "over_50ms": 0
+        },
+        "hud_view_refresh_ms": {
+          "p50_ms": 0.271,
+          "p95_ms": 4.407,
+          "p99_ms": 7.53,
+          "max_ms": 8.431,
+          "over_33_33ms": 0,
+          "over_50ms": 0
+        },
+        "canvas_draw_ms": {
+          "p50_ms": 0.163,
+          "p95_ms": 0.259,
+          "p99_ms": 0.891,
+          "max_ms": 4.569
+        },
+        "canvas_foreground_ms": {
+          "p50_ms": 2.122,
+          "p95_ms": 4.063,
+          "p99_ms": 5.558,
+          "max_ms": 22.39
+        },
+        "canvas_bounds_readback_ms_delta": {
+          "p50_ms": 0.0,
+          "p95_ms": 0.0,
+          "p99_ms": 0.0,
+          "max_ms": 0.0
+        }
+      }
+    }
+  ],
+  "logic_facts_match_baseline": true
+}

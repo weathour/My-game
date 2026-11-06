@@ -28,6 +28,9 @@ REQUIRED_SUCCESS = {
     "chronicle_story_pack_smoke": "CHRONICLE_STORY_PACK_SMOKE PASS",
     "chronicle_combat_feedback_pack_smoke": "CHRONICLE_COMBAT_FEEDBACK_PACK_SMOKE PASS",
     "chronicle_music_playback_smoke": "CHRONICLE_MUSIC_PLAYBACK_SMOKE PASS",
+    "chronicle_audio_settings_render_smoke": "CHRONICLE_AUDIO_SETTINGS_RENDER_SMOKE PASS",
+    "chronicle_skill_audio_smoke": "CHRONICLE_SKILL_AUDIO_SMOKE PASS",
+    "chronicle_danmaku_smoke": "CHRONICLE_DANMAKU_SMOKE PASS",
 }
 # Match the test, exact preceding marker and exact error together. Never
 # blanket-ignore ERROR, /proc errors, or arbitrary lines after a fault marker.

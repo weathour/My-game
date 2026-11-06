@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "status": "PASS",
+  "runtime": {
+    "godot": "4.6.2.stable.official.71f334935",
+    "rendering_method": "gl_compatibility",
+    "audio_driver": "Dummy",
+    "isolated_xdg_data_home": "/tmp/audio-settings-smoke-data-5",
+    "isolated_xdg_config_home": "/tmp/audio-settings-smoke-config-5"
+  },
+  "checks": 314,
+  "failures": 0,
+  "coverage": [
+    "legacy and unknown settings compatibility; finite clamping; 11-channel persistence after disk reload",
+    "eight category cue routing, independent mute/gain, master and music mute coverage",
+    "live title preview and music-room gain/mute behavior",
+    "real paused B01 battle state/timers and audio gain freeze/live refresh",
+    "Esc subpage return then battle resume; keyboard slider navigation",
+    "11-slider reachability and fixed controls within viewport at 960x540, 1280x720, 1920x1080"
+  ],
+  "log": {
+    "path": "design/audio-settings-20261104/verification/logs/chronicle_audio_settings_render_smoke.log",
+    "sha256": "bc19dcee51b2bfbc7ea88d00dcee55d68a14e9602f9c51ad2de6249d4398a95f"
+  },
+  "test_script": {
+    "path": "scripts/tests/chronicle_audio_settings_render_smoke.gd",
+    "sha256": "b79efa82c78bfc7f7b4fbf9070488f2c0a2b2aecdc3ca9f7a0514809e73b2ef6"
+  },
+  "screenshots": {
+    "audio-settings-battle-1280.png": {
+      "path": "design/audio-settings-20261104/verification/screenshots/audio-settings-battle-1280.png",
+      "sha256": "63c2cc0a71e9979467f11462ebc8779b8df8339ed1490a48522eff75d517f5f6",
+      "bytes": 522859
+    },
+    "audio-settings-battle-1920.png": {
+      "path": "design/audio-settings-20261104/verification/screenshots/audio-settings-battle-1920.png",
+      "sha256": "05ad3dc880ffa57390af32588b2080f95beefa8c9bac9461d1ce2a849c851337",
+      "bytes": 712773
+    },
+    "audio-settings-battle-960.png": {
+      "path": "design/audio-settings-20261104/verification/screenshots/audio-settings-battle-960.png",
+      "sha256": "c71c0aa995d7c17c97d1510fdbc3843e5abdb00cfedae225feec7c039eeb406c",
+      "bytes": 361690
+    },
+    "audio-settings-title-1280.png": {
+      "path": "design/audio-settings-20261104/verification/screenshots/audio-settings-title-1280.png",
+      "sha256": "f8edc465d70b5a1c9a32adbdb7c182bae557a2aefcffef3e5604fdfeaf6fae4c",
+      "bytes": 622003
+    },
+    "audio-settings-title-1920.png": {
+      "path": "design/audio-settings-20261104/verification/screenshots/audio-settings-title-1920.png",
+      "sha256": "014a7f541c19039c52d92a2ff59dde318bef0c08cf8485cc4c3ae01e40629e38",
+      "bytes": 1045411
+    },
+    "audio-settings-title-960.png": {
+      "path": "design/audio-settings-20261104/verification/screenshots/audio-settings-title-960.png",
+      "sha256": "441fe57f9db8b5ce0e3d34858af1272c87503bff68e54eb9a50545178c7fbaab",
+      "bytes": 394023
+    }
+  }
+}

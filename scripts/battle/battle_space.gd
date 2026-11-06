@@ -1,5 +1,6 @@
 extends RefCounted
 ## Shared world geometry. Camera pixels and texture dimensions never define play bounds.
+const ACTOR_BODY_HEIGHT := 72.0
 const SIZE := Vector2(3200, 1800)
 const BOUNDS := Rect2(Vector2.ZERO, SIZE)
 const CENTER := SIZE * 0.5

@@ -1,4 +1,7 @@
 extends Control
+signal skill_hovered(anchor: Control)
+signal skill_unhovered(anchor: Control)
+const JIA_APPEARANCE := preload("res://scripts/ui/chronicle/jia_appearance.gd")
 ## Reuses the shipped HUD widgets; reads the new session without importing Player.
 const ROW := preload("res://scripts/ui/shared/team_role_status_row.gd")
 const PORTRAIT := preload("res://scripts/ui/shared/switch_portrait_display.gd")
@@ -7,6 +10,8 @@ const ART := preload("res://scripts/ui/chronicle/battle_art.gd")
 const C := preload("res://scripts/content/combat_catalog.gd")
 const T := preload("res://scripts/ui/chronicle/chronicle_theme.gd")
 const MECHANIC := preload("res://scripts/ui/chronicle/battle_mechanic_status.gd")
+const INFO := preload("res://scripts/content/skill_information.gd")
+var jia_appearance := JIA_APPEARANCE.COMMON
 var battle: RefCounted
 var definitions: Dictionary
 var band: Control
@@ -45,7 +50,16 @@ func _ready() -> void:
 			glyph.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 			var text := T.label("", 13, Color("e9dec3"))
 			row.add_child(text)
-			slots.append({"icon":icon, "glyph":glyph, "label":text})
+			var hit: Control
+			if j >= 2:
+				hit = Control.new()
+				hit.name = "manual_skill_hit_%d_%d" % [i, j - 2]
+				hit.mouse_filter = Control.MOUSE_FILTER_PASS
+				hit.set_meta("skill_slot", j - 2)
+				hit.mouse_entered.connect(func(): skill_hovered.emit(hit))
+				hit.mouse_exited.connect(func(): skill_unhovered.emit(hit))
+				row.add_child(hit)
+			slots.append({"icon":icon, "glyph":glyph, "label":text, "hit":hit})
 		rows.append({"row":row, "portrait":portrait, "slots":slots, "empty":empty, "mechanic":mechanic})
 	experience = T.bar(band, 0, 100, Color("b6a16a"))
 	experience.position = Vector2(0, 134)
@@ -87,11 +101,14 @@ func refresh() -> void:
 		row.size = Vector2(WIDTH - (8 if active else 0), base_height + (16 if has_status else 0))
 		entry.empty.position = Vector2(24, y + 8)
 		y += row.size.y + 4
-		entry.mechanic.name = "member_mechanic_" + id
+		var mechanic_name := "member_mechanic_" + id
+		if str(entry.mechanic.name) != mechanic_name: entry.mechanic.name = mechanic_name
 		entry.mechanic.text = model.text
 		entry.mechanic.visible = has_status
 		entry.mechanic.position = Vector2(365, base_height - 2)
-		entry.mechanic.add_theme_color_override("font_color", T.GOLD if model.active else T.MUTED)
+		var status_color: Color = T.GOLD if model.active else T.MUTED
+		if entry.mechanic.get_theme_color("font_color") != status_color:
+			entry.mechanic.add_theme_color_override("font_color", status_color)
 		if not present: continue
 		var actor: RefCounted = battle.characters[id]
 		var state := "阵亡 · 等待泉水" if actor.dead else "前台" if active else "后台支援"
@@ -102,7 +119,7 @@ func refresh() -> void:
 		var portrait: Control = entry.portrait
 		portrait.size = Vector2.ONE * (78 if active else 61)
 		portrait.position = Vector2(117 if active else 96.5, base_height * .5) - portrait.size * .5
-		portrait.set_role_scene(id, ART.portrait(id))
+		portrait.set_role_scene(id, ART.portrait(id, jia_appearance))
 		portrait.modulate = ART.tint(id)
 		portrait.set_state(battle.switch_cooldown / .5, active)
 		var definition := C.definition(id)
@@ -139,11 +156,24 @@ func _skill(slot: Dictionary, skill: Resource, actor: RefCounted, active: bool, 
 	icon.position = Vector2([530, 635, 746, 873][index], (height - side) * .5)
 	var label: Label = slot.label
 	label.position = icon.position + Vector2(side + 4, 0)
-	label.add_theme_font_size_override("font_size", 12 if active else 11)
-	label.add_theme_constant_override("line_spacing", -2)
+	if is_instance_valid(slot.hit):
+		slot.hit.position = icon.position - Vector2(2, 2)
+		slot.hit.size = Vector2(124, side + 4)
+		if slot.hit.get_meta("skill_character_id", "") != actor.id:
+			slot.hit.set_meta("skill_character_id", actor.id)
+	var font_size := 12 if active else 11
+	if label.get_theme_font_size("font_size") != font_size:
+		label.add_theme_font_size_override("font_size", font_size)
+	if label.get_theme_constant("line_spacing") != -2:
+		label.add_theme_constant_override("line_spacing", -2)
 	if skill == null:
-		icon.visible = false
-		label.text = ""
+		icon.visible = index >= 2
+		if index >= 2:
+			icon.set_auto_mode(false)
+			icon.set_state(false, Color("514938"), 0)
+			slot.glyph.text = "J" if index == 2 else "K"
+			label.text = INFO.ui("not_equipped")
+		else: label.text = ""
 		return
 	icon.visible = true
 	var unlocked: bool = actor.level >= skill.unlock_level and not actor.dead

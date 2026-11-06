@@ -1,0 +1,88 @@
+{
+  "checks": [
+    {
+      "check": "actual default D2 audio and MIDI load",
+      "pass": true
+    },
+    {
+      "check": "output presentation correction defaults to zero, no guessed acoustic latency",
+      "pass": true
+    },
+    {
+      "check": "real audio clock advances",
+      "pass": true
+    },
+    {
+      "check": "timing and window changes keep the exact audio stream",
+      "pass": true
+    },
+    {
+      "check": "timing change does not reset playback position",
+      "pass": true
+    },
+    {
+      "check": "visual timeline uses output correction once",
+      "pass": true
+    },
+    {
+      "check": "native tester owns focus",
+      "pass": true
+    },
+    {
+      "check": "real key is captured after compensation changes",
+      "pass": true
+    },
+    {
+      "check": "raw input remains unchanged and presentation subtracts150ms",
+      "pass": true
+    },
+    {
+      "check": "input correction subtracts30ms independently",
+      "pass": true
+    },
+    {
+      "check": "reference mode change without clicks does not rebuild music",
+      "pass": true
+    },
+    {
+      "check": "blind mode without clicks keeps playback continuous",
+      "pass": true
+    },
+    {
+      "check": "blind mode still hides reference and scores",
+      "pass": true
+    },
+    {
+      "check": "blind corrected input has no target or score",
+      "pass": true
+    },
+    {
+      "check": "blind capture retains presentation correction provenance",
+      "pass": true
+    },
+    {
+      "check": "new exports explicitly version changed timeline semantics",
+      "pass": true
+    },
+    {
+      "check": "all real taps survive multiple settings segments",
+      "pass": true
+    },
+    {
+      "check": "JSON retains both independent corrections",
+      "pass": true
+    },
+    {
+      "check": "CSV retains correction and exact raw timestamps",
+      "pass": true
+    },
+    {
+      "check": "close releases audio and saves user-style records",
+      "pass": true
+    }
+  ],
+  "count": 20,
+  "real_audio": true,
+  "patched_clock_or_state": false,
+  "subjective_accuracy_claim": false
+}

@@ -1,0 +1,1034 @@
+{
+  "status": "PASS",
+  "songs": 12,
+  "total_frozen_midi_note_events": 42063,
+  "missing_or_silent_stems": 0,
+  "source_event_fidelity": "Frozen source MIDI hashes and source note-on/off pairs were verified across all 12 inputs. For drum triggers, each source channel-9 trigger record includes source_channel and source_end_tick and is pair-matched against the source MIDI. This verifies source provenance, not event identity of the renderer-only FluidSynth derivative.",
+  "drum_adapter_policy": "The FluidSynth render-only derivative omits source drum note-offs so selected one-shot samples follow their natural sample decay; this does not assert source note-offs are artificial or invalid. Closed/pedal-hat events choke an active open-hat sample. Temporary channel, pitch, and control-flow adaptations are not original MIDI events. Frozen source MIDI is unchanged.",
+  "event_fidelity_check_scope": "42,063 note-on/off source pairs verified against frozen MIDI and mapped trigger provenance. Pitched stems retain source pitch/onset/offset/velocity events; drum trigger logs preserve source onsets and are paired to source off ticks, while the renderer-only drum derivative applies the documented one-shot/choke policy and is not byte-for-byte/event-for-event identical.",
+  "audio_outputs": {
+    "game_ogg_48k_stereo": 12,
+    "comparison_flac_24bit": 12,
+    "comparison_mp3_320k": 12
+  },
+  "loudness_policy": "A/B/C preview static gain; comparison target follows existing A/B target within ±0.3 LU; C game OGG uses separately reported fixed attenuation to approximately -21 LUFS and TP <= -3 dBTP",
+  "effects_policy": "Tone shaping is applied in source role stems. Gentle bus compression was used for The Nobodies, Man That You Fear, Deformography, Minute of Decay. No time, pitch, MIDI event, or CC edits were made.",
+  "bus_compressed_cues": [
+    {
+      "cue_id": "midi_test_05",
+      "title": "The Nobodies",
+      "filter": "acompressor=threshold=0.05:ratio=4:attack=20:release=120:detection=peak",
+      "reason": "required to preserve A/B/C loudness while keeping true peak below 0 dBTP"
+    },
+    {
+      "cue_id": "midi_test_08",
+      "title": "Man That You Fear",
+      "filter": "acompressor=threshold=0.05:ratio=4:attack=20:release=120:detection=peak",
+      "reason": "required to preserve A/B/C loudness while keeping true peak below 0 dBTP"
+    },
+    {
+      "cue_id": "midi_test_09",
+      "title": "Deformography",
+      "filter": "acompressor=threshold=0.05:ratio=4:attack=20:release=120:detection=peak",
+      "reason": "required to preserve A/B/C loudness while keeping true peak below 0 dBTP"
+    },
+    {
+      "cue_id": "midi_test_11",
+      "title": "Minute of Decay",
+      "filter": "acompressor=threshold=0.05:ratio=4:attack=20:release=120:detection=peak",
+      "reason": "required to preserve A/B/C loudness while keeping true peak below 0 dBTP"
+    }
+  ],
+  "source_and_license_lock": "sources/instrument-sources.json",
+  "SF2_keyzone_audit": "sources/muldjordkit/sf2-keyzone-audit.json",
+  "scripts": {
+    "audit_muldjord_sf2.py": "e1fd22094a23b4db330f8e94e8a7d35829eff4cd434a9034bdad5c0b540c7d29",
+    "build_playlists.py": "0b354566496f09ccb1aad9bd47701a67329cc0bad6821bbd663815b1c5df81ad",
+    "build_production_qa.py": "4bad291f198941eb63230c52fead905f35cfc9ea36031f3c7390a76a44193f1c",
+    "build_release_summary.py": "281e7f1cc63a6721f307bd9ae928b48d0711e8702b2fb52c3c1b1de2d4196117",
+    "mix_align_encode_c.py": "8b467ad34027c3603b38bbdac3ddfa6d2b4bd00a5ee36c9ad958f08fb48f58be",
+    "render_all_cues.py": "2823181ef3a17b6d7054698002475c405dce3108b8a6f10b77b95ed76db7ae24",
+    "render_gm_drum_oneshots.py": "ad04da0d09fa10f2dc962bbb2a0597de83cc60dfdf78c191483fd230bde21ed9",
+    "render_non_drum_stems.py": "c1d78a141eedb00df1a1ae98023356d6a5c1f903df69586d233bae2adf6f6d76",
+    "verify_event_fidelity.py": "eac96f8ad213524ba0f77bc1741ab79ed0a519f022e2b8cfd4d082a4016a8414"
+  },
+  "items": [
+    {
+      "index": 1,
+      "cue_id": "midi_test_01",
+      "title": "The Beautiful People",
+      "midi_sha256": "3bf77b5352dd8020628d9a7f2c5cb7a2ea53b015dc610b3ae14c9b18234e5cc8",
+      "note_count": 3564,
+      "source_event_fidelity": {
+        "status": "PASS",
+        "scope": "all source MIDI note-on/off pairs were matched by the non-drum event audit; drum trigger records were independently matched to source drum channel-9 note-on/off pairs including end tick",
+        "source_midi_sha256": "3bf77b5352dd8020628d9a7f2c5cb7a2ea53b015dc610b3ae14c9b18234e5cc8",
+        "source_note_pair_count": 3564,
+        "drum_source_pair_count": 1679,
+        "drum_trigger_pair_verification": {
+          "status": "PASS",
+          "matched_pairs": 1679,
+          "source_pairs": 1679,
+          "exact_pair_multisets_match": true
+        }
+      },
+      "event_fidelity_check_scope": "source MIDI note-on/off pairs; drums are independently pair-checked via source-trigger logs. Renderer-only FluidSynth derivative is adapted for one-shot sample release and is not claimed event-identical.",
+      "missing_sample_regions": 0,
+      "pitched_non_silent_stems": 3,
+      "drum_note_ons": 1679,
+      "drum_fallback": null,
+      "drum_adapter_policy": "The renderer-only FluidSynth derivative omits source drum note-offs so one-shot samples can follow their natural sample decay; this describes the adapter behavior and does not claim the source note-offs were artificial or invalid. Closed/pedal-hat triggers explicitly choke an active open-hat sample. Temporary channel, pitch, and control-flow adaptations are not the original MIDI. Source MIDI and source note events are unchanged.",
+      "comparison_target_lufs": -18.369999999999997,
+      "comparison_gain_db": 8.580000000000002,
+      "bus_compression": null,
+      "game_extra_attenuation_db": -2.6300000000000026,
+      "game_total_gain_db": 5.949999999999999,
+      "outputs": {
+        "flac": {
+          "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/扒谱试验/MuScriptor-large/全部完整伴奏_全曲对照/01 - The Beautiful People/C - 游戏音色.flac",
+          "sha256": "f9c9c1ee9d4e79187c02fc68baefa294acec2d6b26a33100ceb4583ebfbfcd31",
+          "duration_seconds": 221.764625,
+          "stream": {
+            "codec_name": "flac",
+            "sample_fmt": "s32",
+            "sample_rate": "48000",
+            "channels": 2,
+            "bits_per_sample": 0,
+            "bits_per_raw_sample": "24"
+          },
+          "integrated_lufs": -18.37,
+          "true_peak_dbtp": -1.06
+        },
+        "mp3": {
+          "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/扒谱试验/MuScriptor-large/全部完整伴奏_全曲对照/01 - The Beautiful People/C - 游戏音色.mp3",
+          "sha256": "f9e61eb2393d39a3195ce54c798f3fa08d35a5a36b51f86db696353b3adde694",
+          "duration_seconds": 221.808,
+          "stream": {
+            "codec_name": "mp3",
+            "sample_fmt": "fltp",
+            "sample_rate": "48000",
+            "channels": 2,
+            "bits_per_sample": 0,
+            "bit_rate": "320000"
+          },
+          "integrated_lufs": -18.37,
+          "true_peak_dbtp": -1.05
+        },
+        "ogg": {
+          "path": "/home/weathour/programs/desktop-projects/My-game/assets/music/midi_test/midi_test_01.ogg",
+          "sha256": "f6ea3b1476c8fd12c1afab00ab2c16c7b7da385cefdd904535033f6d20639e49",
+          "duration_seconds": 221.764625,
+          "stream": {
+            "codec_name": "vorbis",
+            "sample_fmt": "fltp",
+            "sample_rate": "48000",
+            "channels": 2,
+            "bits_per_sample": 0,
+            "bit_rate": "224000"
+          },
+          "integrated_lufs": -21.04,
+          "true_peak_dbtp": -3.74
+        }
+      },
+      "manual_listening_review": "not performed"
+    },
+    {
+      "index": 2,
+      "cue_id": "midi_test_02",
+      "title": "mOBSCENE",
+      "midi_sha256": "277b128bff29eba29fb325bd888fb1e4f49aa9b66f850f1f46b9005ab058c99c",
+      "note_count": 3104,
+      "source_event_fidelity": {
+        "status": "PASS",
+        "scope": "all source MIDI note-on/off pairs were matched by the non-drum event audit; drum trigger records were independently matched to source drum channel-9 note-on/off pairs including end tick",
+        "source_midi_sha256": "277b128bff29eba29fb325bd888fb1e4f49aa9b66f850f1f46b9005ab058c99c",
+        "source_note_pair_count": 3104,
+        "drum_source_pair_count": 1184,
+        "drum_trigger_pair_verification": {
+          "status": "PASS",
+          "matched_pairs": 1184,
+          "source_pairs": 1184,
+          "exact_pair_multisets_match": true
+        }
+      },
+      "event_fidelity_check_scope": "source MIDI note-on/off pairs; drums are independently pair-checked via source-trigger logs. Renderer-only FluidSynth derivative is adapted for one-shot sample release and is not claimed event-identical.",
+      "missing_sample_regions": 0,
+      "pitched_non_silent_stems": 2,
+      "drum_note_ons": 1184,
+      "drum_fallback": null,
+      "drum_adapter_policy": "The renderer-only FluidSynth derivative omits source drum note-offs so one-shot samples can follow their natural sample decay; this describes the adapter behavior and does not claim the source note-offs were artificial or invalid. Closed/pedal-hat triggers explicitly choke an active open-hat sample. Temporary channel, pitch, and control-flow adaptations are not the original MIDI. Source MIDI and source note events are unchanged.",
+      "comparison_target_lufs": -18.0,
+      "comparison_gain_db": 8.219999999999999,
+      "bus_compression": null,
+      "game_extra_attenuation_db": -2.8699999999999974,
+      "game_total_gain_db": 5.350000000000001,
+      "outputs": {
+        "flac": {
+          "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/扒谱试验/MuScriptor-large/全部完整伴奏_全曲对照/02 - mOBSCENE/C - 游戏音色.flac",
+          "sha256": "11e72d913be3d3cc0fb6c807dac0ff1d3b19384516fe599e01aad2418bbf0018",
+          "duration_seconds": 208.815917,
+          "stream": {
+            "codec_name": "flac",
+            "sample_fmt": "s32",
+            "sample_rate": "48000",
+            "channels": 2,
+            "bits_per_sample": 0,
+            "bits_per_raw_sample": "24"
+          },
+          "integrated_lufs": -18.13,
+          "true_peak_dbtp": -0.8
+        },
+        "mp3": {
+          "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/扒谱试验/MuScriptor-large/全部完整伴奏_全曲对照/02 - mOBSCENE/C - 游戏音色.mp3",
+          "sha256": "0d7580746a80c985aea8a4aaf2d63b5f9bb7a0a216afcf4a47fdd8ac89a38808",
+          "duration_seconds": 208.848,
+          "stream": {
+            "codec_name": "mp3",
+            "sample_fmt": "fltp",
+            "sample_rate": "48000",
+            "channels": 2,
+            "bits_per_sample": 0,
+            "bit_rate": "320000"
+          },
+          "integrated_lufs": -18.13,
+          "true_peak_dbtp": -0.81
+        },
+        "ogg": {
+          "path": "/home/weathour/programs/desktop-projects/My-game/assets/music/midi_test/midi_test_02.ogg",
+          "sha256": "f450db01f5297cde45aecf5ea4c8fc1c089baab5b0a719dd5f3f857f99b7d0d3",
+          "duration_seconds": 208.815917,
+          "stream": {
+            "codec_name": "vorbis",
+            "sample_fmt": "fltp",
+            "sample_rate": "48000",
+            "channels": 2,
+            "bits_per_sample": 0,
+            "bit_rate": "224000"
+          },
+          "integrated_lufs": -21.05,
+          "true_peak_dbtp": -3.57
+        }
+      },
+      "manual_listening_review": "not performed"
+    },
+    {
+      "index": 3,
+      "cue_id": "midi_test_03",
+      "title": "The Fight Song",
+      "midi_sha256": "058d6ee5c72221df2d05785ee3603f44557bbce19dfdb5afe7edd6f61d2a1d3a",
+      "note_count": 3890,
+      "source_event_fidelity": {
+        "status": "PASS",
+        "scope": "all source MIDI note-on/off pairs were matched by the non-drum event audit; drum trigger records were independently matched to source drum channel-9 note-on/off pairs including end tick",
+        "source_midi_sha256": "058d6ee5c72221df2d05785ee3603f44557bbce19dfdb5afe7edd6f61d2a1d3a",
+        "source_note_pair_count": 3890,
+        "drum_source_pair_count": 1562,
+        "drum_trigger_pair_verification": {
+          "status": "PASS",
+          "matched_pairs": 1562,
+          "source_pairs": 1562,
+          "exact_pair_multisets_match": true
+        }
+      },
+      "event_fidelity_check_scope": "source MIDI note-on/off pairs; drums are independently pair-checked via source-trigger logs. Renderer-only FluidSynth derivative is adapted for one-shot sample release and is not claimed event-identical.",
+      "missing_sample_regions": 0,
+      "pitched_non_silent_stems": 3,
+      "drum_note_ons": 1562,
+      "drum_fallback": null,
+      "drum_adapter_policy": "The renderer-only FluidSynth derivative omits source drum note-offs so one-shot samples can follow their natural sample decay; this describes the adapter behavior and does not claim the source note-offs were artificial or invalid. Closed/pedal-hat triggers explicitly choke an active open-hat sample. Temporary channel, pitch, and control-flow adaptations are not the original MIDI. Source MIDI and source note events are unchanged.",
+      "comparison_target_lufs": -18.0,
+      "comparison_gain_db": 6.890000000000001,
+      "bus_compression": null,
+      "game_extra_attenuation_db": -3.0,
+      "game_total_gain_db": 3.8900000000000006,
+      "outputs": {
+        "flac": {
+          "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/扒谱试验/MuScriptor-large/全部完整伴奏_全曲对照/03 - The Fight Song/C - 游戏音色.flac",
+          "sha256": "19f66cc89eb0a7e306147e8f52fe15f21858c5131b3ee56767b673fb211f3153",
+          "duration_seconds": 178.770438,
+          "stream": {
+            "codec_name": "flac",
+            "sample_fmt": "s32",
+            "sample_rate": "48000",
+            "channels": 2,
+            "bits_per_sample": 0,
+            "bits_per_raw_sample": "24"
+          },
+          "integrated_lufs": -18.0,
+          "true_peak_dbtp": -3.07
+        },
+        "mp3": {
+          "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/扒谱试验/MuScriptor-large/全部完整伴奏_全曲对照/03 - The Fight Song/C - 游戏音色.mp3",
+          "sha256": "2356b6834c64a82fa2fcf86e200aeabfb80f2ec23a4def6f926fa8a25f58c2b8",
+          "duration_seconds": 178.8,
+          "stream": {
+            "codec_name": "mp3",
+            "sample_fmt": "fltp",
+            "sample_rate": "48000",
+            "channels": 2,
+            "bits_per_sample": 0,
+            "bit_rate": "320000"
+          },
+          "integrated_lufs": -18.0,
+          "true_peak_dbtp": -3.11
+        },
+        "ogg": {
+          "path": "/home/weathour/programs/desktop-projects/My-game/assets/music/midi_test/midi_test_03.ogg",
+          "sha256": "2caeed865d0afe72865e60288664b4fe87f9e061e10d2954025e63e4db89f02c",
+          "duration_seconds": 178.770438,
+          "stream": {
+            "codec_name": "vorbis",
+            "sample_fmt": "fltp",
+            "sample_rate": "48000",
+            "channels": 2,
+            "bits_per_sample": 0,
+            "bit_rate": "224000"
+          },
+          "integrated_lufs": -21.07,
+          "true_peak_dbtp": -6.14
+        }
+      },
+      "manual_listening_review": "not performed"
+    },
+    {
+      "index": 4,
+      "cue_id": "midi_test_04",
+      "title": "Disposable Teens",
+      "midi_sha256": "6d36cfc0c0cd15d69a43ea892220c09e24966acf7e22952b6a275f5b725eb4fb",
+      "note_count": 4337,
+      "source_event_fidelity": {
+        "status": "PASS",
+        "scope": "all source MIDI note-on/off pairs were matched by the non-drum event audit; drum trigger records were independently matched to source drum channel-9 note-on/off pairs including end tick",
+        "source_midi_sha256": "6d36cfc0c0cd15d69a43ea892220c09e24966acf7e22952b6a275f5b725eb4fb",
+        "source_note_pair_count": 4337,
+        "drum_source_pair_count": 1491,
+        "drum_trigger_pair_verification": {
+          "status": "PASS",
+          "matched_pairs": 1491,
+          "source_pairs": 1491,
+          "exact_pair_multisets_match": true
+        }
+      },
+      "event_fidelity_check_scope": "source MIDI note-on/off pairs; drums are independently pair-checked via source-trigger logs. Renderer-only FluidSynth derivative is adapted for one-shot sample release and is not claimed event-identical.",
+      "missing_sample_regions": 0,
+      "pitched_non_silent_stems": 2,
+      "drum_note_ons": 1425,
+      "drum_fallback": {
+        "source_pitch": "54 GM tambourine",
+        "soundfont": "GeneralUser GS 2.0.3",
+        "note_on_count": 66,
+        "stem": "drum_fallback.wav",
+        "sha256": "f6632bbbd86fbcc2847098bc169323091d9b2ea7a5c75bed643dd11277535855",
+        "audio": {
+          "sample_rate": 48000,
+          "frames": 8889780,
+          "channels": 2,
+          "duration_seconds": 185.20375,
+          "rms": 0.0013964223706830643,
+          "peak_abs": 0.03973427414894104,
+          "silent": false
+        },
+        "only_unmapped_fallback": true
+      },
+      "drum_adapter_policy": "The renderer-only FluidSynth derivative omits source drum note-offs so one-shot samples can follow their natural sample decay; this describes the adapter behavior and does not claim the source note-offs were artificial or invalid. Closed/pedal-hat triggers explicitly choke an active open-hat sample. Temporary channel, pitch, and control-flow adaptations are not the original MIDI. Source MIDI and source note events are unchanged.",
+      "comparison_target_lufs": -18.0,
+      "comparison_gain_db": 6.960000000000001,
+      "bus_compression": null,
+      "game_extra_attenuation_db": -3.0,
+      "game_total_gain_db": 3.960000000000001,
+      "outputs": {
+        "flac": {
+          "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/扒谱试验/MuScriptor-large/全部完整伴奏_全曲对照/04 - Disposable Teens/C - 游戏音色.flac",
+          "sha256": "6d10900964a3aef0abce0d849351f00dd24b6fab60a1abdede146394cb00eb0b",
+          "duration_seconds": 189.823125,
+          "stream": {
+            "codec_name": "flac",
+            "sample_fmt": "s32",
+            "sample_rate": "48000",
+            "channels": 2,
+            "bits_per_sample": 0,
+            "bits_per_raw_sample": "24"
+          },
+          "integrated_lufs": -18.0,
+          "true_peak_dbtp": -2.22
+        },
+        "mp3": {
+          "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/扒谱试验/MuScriptor-large/全部完整伴奏_全曲对照/04 - Disposable Teens/C - 游戏音色.mp3",
+          "sha256": "64bd0d5dea53541f0a9b88f5ba5ac718792936be14843b131a1ef4f4fd582862",
+          "duration_seconds": 189.864,
+          "stream": {
+            "codec_name": "mp3",
+            "sample_fmt": "fltp",
+            "sample_rate": "48000",
+            "channels": 2,
+            "bits_per_sample": 0,
+            "bit_rate": "320000"
+          },
+          "integrated_lufs": -18.0,
+          "true_peak_dbtp": -2.22
+        },
+        "ogg": {
+          "path": "/home/weathour/programs/desktop-projects/My-game/assets/music/midi_test/midi_test_04.ogg",
+          "sha256": "fb51039ac1ebb2bdfe3fa51a17cfac9e111080d804f48f40a5158249ca645759",
+          "duration_seconds": 189.823125,
+          "stream": {
+            "codec_name": "vorbis",
+            "sample_fmt": "fltp",
+            "sample_rate": "48000",
+            "channels": 2,
+            "bits_per_sample": 0,
+            "bit_rate": "224000"
+          },
+          "integrated_lufs": -21.02,
+          "true_peak_dbtp": -5.26
+        }
+      },
+      "manual_listening_review": "not performed"
+    },
+    {
+      "index": 5,
+      "cue_id": "midi_test_05",
+      "title": "The Nobodies",
+      "midi_sha256": "50fa90065eab0d7ffbb8f65ac3fb78b1d9e8a2bb3c34b21bc09a7c36165121c0",
+      "note_count": 2501,
+      "source_event_fidelity": {
+        "status": "PASS",
+        "scope": "all source MIDI note-on/off pairs were matched by the non-drum event audit; drum trigger records were independently matched to source drum channel-9 note-on/off pairs including end tick",
+        "source_midi_sha256": "50fa90065eab0d7ffbb8f65ac3fb78b1d9e8a2bb3c34b21bc09a7c36165121c0",
+        "source_note_pair_count": 2501,
+        "drum_source_pair_count": 1009,
+        "drum_trigger_pair_verification": {
+          "status": "PASS",
+          "matched_pairs": 1009,
+          "source_pairs": 1009,
+          "exact_pair_multisets_match": true
+        }
+      },
+      "event_fidelity_check_scope": "source MIDI note-on/off pairs; drums are independently pair-checked via source-trigger logs. Renderer-only FluidSynth derivative is adapted for one-shot sample release and is not claimed event-identical.",
+      "missing_sample_regions": 0,
+      "pitched_non_silent_stems": 4,
+      "drum_note_ons": 1009,
+      "drum_fallback": null,
+      "drum_adapter_policy": "The renderer-only FluidSynth derivative omits source drum note-offs so one-shot samples can follow their natural sample decay; this describes the adapter behavior and does not claim the source note-offs were artificial or invalid. Closed/pedal-hat triggers explicitly choke an active open-hat sample. Temporary channel, pitch, and control-flow adaptations are not the original MIDI. Source MIDI and source note events are unchanged.",
+      "comparison_target_lufs": -18.0,
+      "comparison_gain_db": 10.39,
+      "bus_compression": {
+        "filter": "acompressor=threshold=0.05:ratio=4:attack=20:release=120:detection=peak",
+        "reason": "required to preserve A/B/C loudness while keeping true peak below 0 dBTP"
+      },
+      "game_extra_attenuation_db": -3.0,
+      "game_total_gain_db": 7.390000000000001,
+      "outputs": {
+        "flac": {
+          "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/扒谱试验/MuScriptor-large/全部完整伴奏_全曲对照/05 - The Nobodies/C - 游戏音色.flac",
+          "sha256": "953a56a9d09fbb48fa02c67b69a4b598cc116e8d265ee1fa4f64096db6b9cad8",
+          "duration_seconds": 220.310938,
+          "stream": {
+            "codec_name": "flac",
+            "sample_fmt": "s32",
+            "sample_rate": "48000",
+            "channels": 2,
+            "bits_per_sample": 0,
+            "bits_per_raw_sample": "24"
+          },
+          "integrated_lufs": -18.0,
+          "true_peak_dbtp": -0.82
+        },
+        "mp3": {
+          "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/扒谱试验/MuScriptor-large/全部完整伴奏_全曲对照/05 - The Nobodies/C - 游戏音色.mp3",
+          "sha256": "7ef6fbe49e11abee072640fee7f7a3aeb8fab2ea7ba2e2897ca425f76466c8b6",
+          "duration_seconds": 220.344,
+          "stream": {
+            "codec_name": "mp3",
+            "sample_fmt": "fltp",
+            "sample_rate": "48000",
+            "channels": 2,
+            "bits_per_sample": 0,
+            "bit_rate": "320000"
+          },
+          "integrated_lufs": -18.0,
+          "true_peak_dbtp": -0.81
+        },
+        "ogg": {
+          "path": "/home/weathour/programs/desktop-projects/My-game/assets/music/midi_test/midi_test_05.ogg",
+          "sha256": "b3160d493a5a3b2c1a0b21b05c64890e107fbec9ede215a3f9c6fba6787d5bac",
+          "duration_seconds": 220.310938,
+          "stream": {
+            "codec_name": "vorbis",
+            "sample_fmt": "fltp",
+            "sample_rate": "48000",
+            "channels": 2,
+            "bits_per_sample": 0,
+            "bit_rate": "224000"
+          },
+          "integrated_lufs": -21.03,
+          "true_peak_dbtp": -3.82
+        }
+      },
+      "manual_listening_review": "not performed"
+    },
+    {
+      "index": 6,
+      "cue_id": "midi_test_06",
+      "title": "Antichrist Superstar",
+      "midi_sha256": "b1e48dee25ba68a55d8ea9aa85bd691e15282674da85de0d19f2746d2117585e",
+      "note_count": 3240,
+      "source_event_fidelity": {
+        "status": "PASS",
+        "scope": "all source MIDI note-on/off pairs were matched by the non-drum event audit; drum trigger records were independently matched to source drum channel-9 note-on/off pairs including end tick",
+        "source_midi_sha256": "b1e48dee25ba68a55d8ea9aa85bd691e15282674da85de0d19f2746d2117585e",
+        "source_note_pair_count": 3240,
+        "drum_source_pair_count": 1284,
+        "drum_trigger_pair_verification": {
+          "status": "PASS",
+          "matched_pairs": 1284,
+          "source_pairs": 1284,
+          "exact_pair_multisets_match": true
+        }
+      },
+      "event_fidelity_check_scope": "source MIDI note-on/off pairs; drums are independently pair-checked via source-trigger logs. Renderer-only FluidSynth derivative is adapted for one-shot sample release and is not claimed event-identical.",
+      "missing_sample_regions": 0,
+      "pitched_non_silent_stems": 2,
+      "drum_note_ons": 1284,
+      "drum_fallback": null,
+      "drum_adapter_policy": "The renderer-only FluidSynth derivative omits source drum note-offs so one-shot samples can follow their natural sample decay; this describes the adapter behavior and does not claim the source note-offs were artificial or invalid. Closed/pedal-hat triggers explicitly choke an active open-hat sample. Temporary channel, pitch, and control-flow adaptations are not the original MIDI. Source MIDI and source note events are unchanged.",
+      "comparison_target_lufs": -18.45,
+      "comparison_gain_db": 8.45,
+      "bus_compression": null,
+      "game_extra_attenuation_db": -2.6999999999999993,
+      "game_total_gain_db": 5.75,
+      "outputs": {
+        "flac": {
+          "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/扒谱试验/MuScriptor-large/全部完整伴奏_全曲对照/06 - Antichrist Superstar/C - 游戏音色.flac",
+          "sha256": "7a59ddda9b7f982545c7d04c967195db35d03337dafdd10d8cd4b228360673ed",
+          "duration_seconds": 269.269313,
+          "stream": {
+            "codec_name": "flac",
+            "sample_fmt": "s32",
+            "sample_rate": "48000",
+            "channels": 2,
+            "bits_per_sample": 0,
+            "bits_per_raw_sample": "24"
+          },
+          "integrated_lufs": -18.71,
+          "true_peak_dbtp": -0.8
+        },
+        "mp3": {
+          "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/扒谱试验/MuScriptor-large/全部完整伴奏_全曲对照/06 - Antichrist Superstar/C - 游戏音色.mp3",
+          "sha256": "da25c86fcdf00628a0fd289cbfcec6e5b43d8b127ff6f779be15feecd191685b",
+          "duration_seconds": 269.304,
+          "stream": {
+            "codec_name": "mp3",
+            "sample_fmt": "fltp",
+            "sample_rate": "48000",
+            "channels": 2,
+            "bits_per_sample": 0,
+            "bit_rate": "320000"
+          },
+          "integrated_lufs": -18.71,
+          "true_peak_dbtp": -0.79
+        },
+        "ogg": {
+          "path": "/home/weathour/programs/desktop-projects/My-game/assets/music/midi_test/midi_test_06.ogg",
+          "sha256": "f85a8e4b0f34574734640912b5daaf602f1406753e119cd7400038419fc05432",
+          "duration_seconds": 269.269313,
+          "stream": {
+            "codec_name": "vorbis",
+            "sample_fmt": "fltp",
+            "sample_rate": "48000",
+            "channels": 2,
+            "bits_per_sample": 0,
+            "bit_rate": "224000"
+          },
+          "integrated_lufs": -21.45,
+          "true_peak_dbtp": -3.46
+        }
+      },
+      "manual_listening_review": "not performed"
+    },
+    {
+      "index": 7,
+      "cue_id": "midi_test_07",
+      "title": "Little Horn",
+      "midi_sha256": "37ecee25ebd64e725dea9917576a39d19308658724bb2d3c57c0f13ca5ff89f3",
+      "note_count": 3219,
+      "source_event_fidelity": {
+        "status": "PASS",
+        "scope": "all source MIDI note-on/off pairs were matched by the non-drum event audit; drum trigger records were independently matched to source drum channel-9 note-on/off pairs including end tick",
+        "source_midi_sha256": "37ecee25ebd64e725dea9917576a39d19308658724bb2d3c57c0f13ca5ff89f3",
+        "source_note_pair_count": 3219,
+        "drum_source_pair_count": 1135,
+        "drum_trigger_pair_verification": {
+          "status": "PASS",
+          "matched_pairs": 1135,
+          "source_pairs": 1135,
+          "exact_pair_multisets_match": true
+        }
+      },
+      "event_fidelity_check_scope": "source MIDI note-on/off pairs; drums are independently pair-checked via source-trigger logs. Renderer-only FluidSynth derivative is adapted for one-shot sample release and is not claimed event-identical.",
+      "missing_sample_regions": 0,
+      "pitched_non_silent_stems": 2,
+      "drum_note_ons": 1135,
+      "drum_fallback": null,
+      "drum_adapter_policy": "The renderer-only FluidSynth derivative omits source drum note-offs so one-shot samples can follow their natural sample decay; this describes the adapter behavior and does not claim the source note-offs were artificial or invalid. Closed/pedal-hat triggers explicitly choke an active open-hat sample. Temporary channel, pitch, and control-flow adaptations are not the original MIDI. Source MIDI and source note events are unchanged.",
+      "comparison_target_lufs": -18.0,
+      "comparison_gain_db": 7.149999999999999,
+      "bus_compression": null,
+      "game_extra_attenuation_db": -3.0,
+      "game_total_gain_db": 4.149999999999999,
+      "outputs": {
+        "flac": {
+          "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/扒谱试验/MuScriptor-large/全部完整伴奏_全曲对照/07 - Little Horn/C - 游戏音色.flac",
+          "sha256": "0094338372f82d9200281ea872b03181a83d012ebd0223f23a05d587d85fce8a",
+          "duration_seconds": 162.028854,
+          "stream": {
+            "codec_name": "flac",
+            "sample_fmt": "s32",
+            "sample_rate": "48000",
+            "channels": 2,
+            "bits_per_sample": 0,
+            "bits_per_raw_sample": "24"
+          },
+          "integrated_lufs": -18.0,
+          "true_peak_dbtp": -1.73
+        },
+        "mp3": {
+          "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/扒谱试验/MuScriptor-large/全部完整伴奏_全曲对照/07 - Little Horn/C - 游戏音色.mp3",
+          "sha256": "19766b9a88fb5c1646bb6df506cceb9faa7c3cf2cf4d180d13d18c647866a926",
+          "duration_seconds": 162.072,
+          "stream": {
+            "codec_name": "mp3",
+            "sample_fmt": "fltp",
+            "sample_rate": "48000",
+            "channels": 2,
+            "bits_per_sample": 0,
+            "bit_rate": "320000"
+          },
+          "integrated_lufs": -17.99,
+          "true_peak_dbtp": -1.69
+        },
+        "ogg": {
+          "path": "/home/weathour/programs/desktop-projects/My-game/assets/music/midi_test/midi_test_07.ogg",
+          "sha256": "5ce75b02de0cc804d173e69fd41b6ef123081ac9ba6dc955beb604b2e8505aab",
+          "duration_seconds": 162.028854,
+          "stream": {
+            "codec_name": "vorbis",
+            "sample_fmt": "fltp",
+            "sample_rate": "48000",
+            "channels": 2,
+            "bits_per_sample": 0,
+            "bit_rate": "224000"
+          },
+          "integrated_lufs": -21.07,
+          "true_peak_dbtp": -4.77
+        }
+      },
+      "manual_listening_review": "not performed"
+    },
+    {
+      "index": 8,
+      "cue_id": "midi_test_08",
+      "title": "Man That You Fear",
+      "midi_sha256": "419c590d01212e338488c8f6d34053bc4f4b5684ea293a642e918fe991cfa40b",
+      "note_count": 3569,
+      "source_event_fidelity": {
+        "status": "PASS",
+        "scope": "all source MIDI note-on/off pairs were matched by the non-drum event audit; drum trigger records were independently matched to source drum channel-9 note-on/off pairs including end tick",
+        "source_midi_sha256": "419c590d01212e338488c8f6d34053bc4f4b5684ea293a642e918fe991cfa40b",
+        "source_note_pair_count": 3569,
+        "drum_source_pair_count": 668,
+        "drum_trigger_pair_verification": {
+          "status": "PASS",
+          "matched_pairs": 668,
+          "source_pairs": 668,
+          "exact_pair_multisets_match": true
+        }
+      },
+      "event_fidelity_check_scope": "source MIDI note-on/off pairs; drums are independently pair-checked via source-trigger logs. Renderer-only FluidSynth derivative is adapted for one-shot sample release and is not claimed event-identical.",
+      "missing_sample_regions": 0,
+      "pitched_non_silent_stems": 6,
+      "drum_note_ons": 668,
+      "drum_fallback": null,
+      "drum_adapter_policy": "The renderer-only FluidSynth derivative omits source drum note-offs so one-shot samples can follow their natural sample decay; this describes the adapter behavior and does not claim the source note-offs were artificial or invalid. Closed/pedal-hat triggers explicitly choke an active open-hat sample. Temporary channel, pitch, and control-flow adaptations are not the original MIDI. Source MIDI and source note events are unchanged.",
+      "comparison_target_lufs": -18.5,
+      "comparison_gain_db": 9.77,
+      "bus_compression": {
+        "filter": "acompressor=threshold=0.05:ratio=4:attack=20:release=120:detection=peak",
+        "reason": "required to preserve A/B/C loudness while keeping true peak below 0 dBTP"
+      },
+      "game_extra_attenuation_db": -2.6999999999999993,
+      "game_total_gain_db": 7.07,
+      "outputs": {
+        "flac": {
+          "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/扒谱试验/MuScriptor-large/全部完整伴奏_全曲对照/08 - Man That You Fear/C - 游戏音色.flac",
+          "sha256": "041bbb59d90ad6b2cbd727839e633a116edaee9d72e401aa1e6bcd572fbcde22",
+          "duration_seconds": 291.959083,
+          "stream": {
+            "codec_name": "flac",
+            "sample_fmt": "s32",
+            "sample_rate": "48000",
+            "channels": 2,
+            "bits_per_sample": 0,
+            "bits_per_raw_sample": "24"
+          },
+          "integrated_lufs": -18.68,
+          "true_peak_dbtp": -0.8
+        },
+        "mp3": {
+          "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/扒谱试验/MuScriptor-large/全部完整伴奏_全曲对照/08 - Man That You Fear/C - 游戏音色.mp3",
+          "sha256": "0f8c9171bb932c1b1c50e2d5e713f719eb5707827524ae0ab9c278833313ec9f",
+          "duration_seconds": 291.984,
+          "stream": {
+            "codec_name": "mp3",
+            "sample_fmt": "fltp",
+            "sample_rate": "48000",
+            "channels": 2,
+            "bits_per_sample": 0,
+            "bit_rate": "320000"
+          },
+          "integrated_lufs": -18.68,
+          "true_peak_dbtp": -0.8
+        },
+        "ogg": {
+          "path": "/home/weathour/programs/desktop-projects/My-game/assets/music/midi_test/midi_test_08.ogg",
+          "sha256": "dae3bd96de35e646a194b2a46a7096a360faa35413c7289414ce78bb49438dd9",
+          "duration_seconds": 291.959083,
+          "stream": {
+            "codec_name": "vorbis",
+            "sample_fmt": "fltp",
+            "sample_rate": "48000",
+            "channels": 2,
+            "bits_per_sample": 0,
+            "bit_rate": "224000"
+          },
+          "integrated_lufs": -21.39,
+          "true_peak_dbtp": -3.55
+        }
+      },
+      "manual_listening_review": "not performed"
+    },
+    {
+      "index": 9,
+      "cue_id": "midi_test_09",
+      "title": "Deformography",
+      "midi_sha256": "442f966928a3be34f3eef5679c35d51f091452e7c4510fe2aabd3cd79c96f18b",
+      "note_count": 4484,
+      "source_event_fidelity": {
+        "status": "PASS",
+        "scope": "all source MIDI note-on/off pairs were matched by the non-drum event audit; drum trigger records were independently matched to source drum channel-9 note-on/off pairs including end tick",
+        "source_midi_sha256": "442f966928a3be34f3eef5679c35d51f091452e7c4510fe2aabd3cd79c96f18b",
+        "source_note_pair_count": 4484,
+        "drum_source_pair_count": 1592,
+        "drum_trigger_pair_verification": {
+          "status": "PASS",
+          "matched_pairs": 1592,
+          "source_pairs": 1592,
+          "exact_pair_multisets_match": true
+        }
+      },
+      "event_fidelity_check_scope": "source MIDI note-on/off pairs; drums are independently pair-checked via source-trigger logs. Renderer-only FluidSynth derivative is adapted for one-shot sample release and is not claimed event-identical.",
+      "missing_sample_regions": 0,
+      "pitched_non_silent_stems": 2,
+      "drum_note_ons": 1592,
+      "drum_fallback": null,
+      "drum_adapter_policy": "The renderer-only FluidSynth derivative omits source drum note-offs so one-shot samples can follow their natural sample decay; this describes the adapter behavior and does not claim the source note-offs were artificial or invalid. Closed/pedal-hat triggers explicitly choke an active open-hat sample. Temporary channel, pitch, and control-flow adaptations are not the original MIDI. Source MIDI and source note events are unchanged.",
+      "comparison_target_lufs": -18.0,
+      "comparison_gain_db": 9.719999999999999,
+      "bus_compression": {
+        "filter": "acompressor=threshold=0.05:ratio=4:attack=20:release=120:detection=peak",
+        "reason": "required to preserve A/B/C loudness while keeping true peak below 0 dBTP"
+      },
+      "game_extra_attenuation_db": -3.0,
+      "game_total_gain_db": 6.719999999999999,
+      "outputs": {
+        "flac": {
+          "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/扒谱试验/MuScriptor-large/全部完整伴奏_全曲对照/09 - Deformography/C - 游戏音色.flac",
+          "sha256": "3e8007abdefc64f77108e6d10abd297166f3bfeed9cb958ca1e0f743dbef4799",
+          "duration_seconds": 274.854604,
+          "stream": {
+            "codec_name": "flac",
+            "sample_fmt": "s32",
+            "sample_rate": "48000",
+            "channels": 2,
+            "bits_per_sample": 0,
+            "bits_per_raw_sample": "24"
+          },
+          "integrated_lufs": -18.0,
+          "true_peak_dbtp": -1.53
+        },
+        "mp3": {
+          "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/扒谱试验/MuScriptor-large/全部完整伴奏_全曲对照/09 - Deformography/C - 游戏音色.mp3",
+          "sha256": "005aa04a7ee97e90e995bb824fff23e9321b2796cd10b225de52f16a221b3e3b",
+          "duration_seconds": 274.896,
+          "stream": {
+            "codec_name": "mp3",
+            "sample_fmt": "fltp",
+            "sample_rate": "48000",
+            "channels": 2,
+            "bits_per_sample": 0,
+            "bit_rate": "320000"
+          },
+          "integrated_lufs": -18.0,
+          "true_peak_dbtp": -1.57
+        },
+        "ogg": {
+          "path": "/home/weathour/programs/desktop-projects/My-game/assets/music/midi_test/midi_test_09.ogg",
+          "sha256": "65a90044211859756c5c382bd3edd7507178a23ac91f7c97907cfaa72a8454c3",
+          "duration_seconds": 274.854604,
+          "stream": {
+            "codec_name": "vorbis",
+            "sample_fmt": "fltp",
+            "sample_rate": "48000",
+            "channels": 2,
+            "bits_per_sample": 0,
+            "bit_rate": "224000"
+          },
+          "integrated_lufs": -21.02,
+          "true_peak_dbtp": -4.56
+        }
+      },
+      "manual_listening_review": "not performed"
+    },
+    {
+      "index": 10,
+      "cue_id": "midi_test_10",
+      "title": "Kinderfeld",
+      "midi_sha256": "ce55a52e2f92c2b3a97e766c90704128c8378863fda1953d8eb3b992afad3eb7",
+      "note_count": 3288,
+      "source_event_fidelity": {
+        "status": "PASS",
+        "scope": "all source MIDI note-on/off pairs were matched by the non-drum event audit; drum trigger records were independently matched to source drum channel-9 note-on/off pairs including end tick",
+        "source_midi_sha256": "ce55a52e2f92c2b3a97e766c90704128c8378863fda1953d8eb3b992afad3eb7",
+        "source_note_pair_count": 3288,
+        "drum_source_pair_count": 1162,
+        "drum_trigger_pair_verification": {
+          "status": "PASS",
+          "matched_pairs": 1162,
+          "source_pairs": 1162,
+          "exact_pair_multisets_match": true
+        }
+      },
+      "event_fidelity_check_scope": "source MIDI note-on/off pairs; drums are independently pair-checked via source-trigger logs. Renderer-only FluidSynth derivative is adapted for one-shot sample release and is not claimed event-identical.",
+      "missing_sample_regions": 0,
+      "pitched_non_silent_stems": 3,
+      "drum_note_ons": 1162,
+      "drum_fallback": null,
+      "drum_adapter_policy": "The renderer-only FluidSynth derivative omits source drum note-offs so one-shot samples can follow their natural sample decay; this describes the adapter behavior and does not claim the source note-offs were artificial or invalid. Closed/pedal-hat triggers explicitly choke an active open-hat sample. Temporary channel, pitch, and control-flow adaptations are not the original MIDI. Source MIDI and source note events are unchanged.",
+      "comparison_target_lufs": -18.0,
+      "comparison_gain_db": 9.47,
+      "bus_compression": null,
+      "game_extra_attenuation_db": -3.3000000000000007,
+      "game_total_gain_db": 6.17,
+      "outputs": {
+        "flac": {
+          "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/扒谱试验/MuScriptor-large/全部完整伴奏_全曲对照/10 - Kinderfeld/C - 游戏音色.flac",
+          "sha256": "06ac43b565b62dcb9d22f38187e06f708582328c202fb0b6ecf6ef70551fd54e",
+          "duration_seconds": 288.953271,
+          "stream": {
+            "codec_name": "flac",
+            "sample_fmt": "s32",
+            "sample_rate": "48000",
+            "channels": 2,
+            "bits_per_sample": 0,
+            "bits_per_raw_sample": "24"
+          },
+          "integrated_lufs": -18.27,
+          "true_peak_dbtp": -0.2
+        },
+        "mp3": {
+          "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/扒谱试验/MuScriptor-large/全部完整伴奏_全曲对照/10 - Kinderfeld/C - 游戏音色.mp3",
+          "sha256": "c1e6e080cd99605a04ced60e9cdb95625485c6da8d0c58b48513b51d30f4c349",
+          "duration_seconds": 288.984,
+          "stream": {
+            "codec_name": "mp3",
+            "sample_fmt": "fltp",
+            "sample_rate": "48000",
+            "channels": 2,
+            "bits_per_sample": 0,
+            "bit_rate": "320000"
+          },
+          "integrated_lufs": -18.27,
+          "true_peak_dbtp": -0.14
+        },
+        "ogg": {
+          "path": "assets/music/midi_test/midi_test_10.ogg",
+          "sha256": "b658f0334c08d992457480a04b123b6ddd74fd60d8f9497de5ba3c3dca19c513",
+          "duration_seconds": 288.953271,
+          "stream": {
+            "codec_name": "vorbis",
+            "sample_fmt": "fltp",
+            "sample_rate": "48000",
+            "channels": 2,
+            "bits_per_sample": 0,
+            "bit_rate": "224000"
+          },
+          "integrated_lufs": -21.59,
+          "true_peak_dbtp": -3.54
+        }
+      },
+      "manual_listening_review": "not performed"
+    },
+    {
+      "index": 11,
+      "cue_id": "midi_test_11",
+      "title": "Minute of Decay",
+      "midi_sha256": "e32a9ed41b24f012eccb60ebb06504493244341f2b276be6723c7fc5da90e2c0",
+      "note_count": 3002,
+      "source_event_fidelity": {
+        "status": "PASS",
+        "scope": "all source MIDI note-on/off pairs were matched by the non-drum event audit; drum trigger records were independently matched to source drum channel-9 note-on/off pairs including end tick",
+        "source_midi_sha256": "e32a9ed41b24f012eccb60ebb06504493244341f2b276be6723c7fc5da90e2c0",
+        "source_note_pair_count": 3002,
+        "drum_source_pair_count": 1253,
+        "drum_trigger_pair_verification": {
+          "status": "PASS",
+          "matched_pairs": 1253,
+          "source_pairs": 1253,
+          "exact_pair_multisets_match": true
+        }
+      },
+      "event_fidelity_check_scope": "source MIDI note-on/off pairs; drums are independently pair-checked via source-trigger logs. Renderer-only FluidSynth derivative is adapted for one-shot sample release and is not claimed event-identical.",
+      "missing_sample_regions": 0,
+      "pitched_non_silent_stems": 2,
+      "drum_note_ons": 1253,
+      "drum_fallback": null,
+      "drum_adapter_policy": "The renderer-only FluidSynth derivative omits source drum note-offs so one-shot samples can follow their natural sample decay; this describes the adapter behavior and does not claim the source note-offs were artificial or invalid. Closed/pedal-hat triggers explicitly choke an active open-hat sample. Temporary channel, pitch, and control-flow adaptations are not the original MIDI. Source MIDI and source note events are unchanged.",
+      "comparison_target_lufs": -18.0,
+      "comparison_gain_db": 10.809999999999999,
+      "bus_compression": {
+        "filter": "acompressor=threshold=0.05:ratio=4:attack=20:release=120:detection=peak",
+        "reason": "required to preserve A/B/C loudness while keeping true peak below 0 dBTP"
+      },
+      "game_extra_attenuation_db": -3.0,
+      "game_total_gain_db": 7.809999999999999,
+      "outputs": {
+        "flac": {
+          "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/扒谱试验/MuScriptor-large/全部完整伴奏_全曲对照/11 - Minute of Decay/C - 游戏音色.flac",
+          "sha256": "0ba27e6f4c9c0d80464dcefa2a16d6d43041c6b46b0ecedd55ab88e4358576c4",
+          "duration_seconds": 280.609333,
+          "stream": {
+            "codec_name": "flac",
+            "sample_fmt": "s32",
+            "sample_rate": "48000",
+            "channels": 2,
+            "bits_per_sample": 0,
+            "bits_per_raw_sample": "24"
+          },
+          "integrated_lufs": -18.0,
+          "true_peak_dbtp": -0.98
+        },
+        "mp3": {
+          "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/扒谱试验/MuScriptor-large/全部完整伴奏_全曲对照/11 - Minute of Decay/C - 游戏音色.mp3",
+          "sha256": "b0a1a7ee3327397265f7618bf21dc3bba2871ac28f496505b64cfa91ed99638c",
+          "duration_seconds": 280.656,
+          "stream": {
+            "codec_name": "mp3",
+            "sample_fmt": "fltp",
+            "sample_rate": "48000",
+            "channels": 2,
+            "bits_per_sample": 0,
+            "bit_rate": "320000"
+          },
+          "integrated_lufs": -18.0,
+          "true_peak_dbtp": -1.0
+        },
+        "ogg": {
+          "path": "/home/weathour/programs/desktop-projects/My-game/assets/music/midi_test/midi_test_11.ogg",
+          "sha256": "2c673b8d02926ce1f9c1de12fb8f2c8fe652821f50d2b5a55987431ee669f6cb",
+          "duration_seconds": 280.609333,
+          "stream": {
+            "codec_name": "vorbis",
+            "sample_fmt": "fltp",
+            "sample_rate": "48000",
+            "channels": 2,
+            "bits_per_sample": 0,
+            "bit_rate": "224000"
+          },
+          "integrated_lufs": -21.03,
+          "true_peak_dbtp": -3.98
+        }
+      },
+      "manual_listening_review": "not performed"
+    },
+    {
+      "index": 12,
+      "cue_id": "midi_test_12",
+      "title": "President Dead",
+      "midi_sha256": "b6ef19ffa363a56b51d31cab55d4c723f3977afe46378f93ed2beebf4f67a61e",
+      "note_count": 3865,
+      "source_event_fidelity": {
+        "status": "PASS",
+        "scope": "all source MIDI note-on/off pairs were matched by the non-drum event audit; drum trigger records were independently matched to source drum channel-9 note-on/off pairs including end tick",
+        "source_midi_sha256": "b6ef19ffa363a56b51d31cab55d4c723f3977afe46378f93ed2beebf4f67a61e",
+        "source_note_pair_count": 3865,
+        "drum_source_pair_count": 1087,
+        "drum_trigger_pair_verification": {
+          "status": "PASS",
+          "matched_pairs": 1087,
+          "source_pairs": 1087,
+          "exact_pair_multisets_match": true
+        }
+      },
+      "event_fidelity_check_scope": "source MIDI note-on/off pairs; drums are independently pair-checked via source-trigger logs. Renderer-only FluidSynth derivative is adapted for one-shot sample release and is not claimed event-identical.",
+      "missing_sample_regions": 0,
+      "pitched_non_silent_stems": 2,
+      "drum_note_ons": 1087,
+      "drum_fallback": null,
+      "drum_adapter_policy": "The renderer-only FluidSynth derivative omits source drum note-offs so one-shot samples can follow their natural sample decay; this describes the adapter behavior and does not claim the source note-offs were artificial or invalid. Closed/pedal-hat triggers explicitly choke an active open-hat sample. Temporary channel, pitch, and control-flow adaptations are not the original MIDI. Source MIDI and source note events are unchanged.",
+      "comparison_target_lufs": -18.0,
+      "comparison_gain_db": 7.16,
+      "bus_compression": null,
+      "game_extra_attenuation_db": -3.0,
+      "game_total_gain_db": 4.16,
+      "outputs": {
+        "flac": {
+          "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/扒谱试验/MuScriptor-large/全部完整伴奏_全曲对照/12 - President Dead/C - 游戏音色.flac",
+          "sha256": "1944ffeeb4bda18e0dc051b90fe66e09c8a60d6f174c174b391e1eaebf8ef3f1",
+          "duration_seconds": 199.018229,
+          "stream": {
+            "codec_name": "flac",
+            "sample_fmt": "s32",
+            "sample_rate": "48000",
+            "channels": 2,
+            "bits_per_sample": 0,
+            "bits_per_raw_sample": "24"
+          },
+          "integrated_lufs": -18.0,
+          "true_peak_dbtp": -1.05
+        },
+        "mp3": {
+          "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/扒谱试验/MuScriptor-large/全部完整伴奏_全曲对照/12 - President Dead/C - 游戏音色.mp3",
+          "sha256": "387be0ee559b1e9f360b06bd2352fdf4b9df8aeef3fe0063fed6ea980c465ce0",
+          "duration_seconds": 199.056,
+          "stream": {
+            "codec_name": "mp3",
+            "sample_fmt": "fltp",
+            "sample_rate": "48000",
+            "channels": 2,
+            "bits_per_sample": 0,
+            "bit_rate": "320000"
+          },
+          "integrated_lufs": -18.0,
+          "true_peak_dbtp": -1.02
+        },
+        "ogg": {
+          "path": "/home/weathour/programs/desktop-projects/My-game/assets/music/midi_test/midi_test_12.ogg",
+          "sha256": "2e4b7e43f9cf2c19b7e06c7acae86d0a4ce79f646315c84570e3db606555042b",
+          "duration_seconds": 199.018229,
+          "stream": {
+            "codec_name": "vorbis",
+            "sample_fmt": "fltp",
+            "sample_rate": "48000",
+            "channels": 2,
+            "bits_per_sample": 0,
+            "bit_rate": "224000"
+          },
+          "integrated_lufs": -21.03,
+          "true_peak_dbtp": -4.07
+        }
+      },
+      "manual_listening_review": "not performed"
+    }
+  ],
+  "errors": []
+}

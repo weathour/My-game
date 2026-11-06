@@ -1,0 +1,3560 @@
+{
+  "schema_version": 1,
+  "status": "PASS_OFFLINE_ALGORITHM_EXPERIMENT_ONLY",
+  "purpose": "Demonstrate automatic candidate combat windows derivable from D2 MIDI without hand-authored per-song beat charts.",
+  "runtime_status": "No Godot runtime integration or gameplay balancing was implemented or claimed.",
+  "algorithm": {
+    "input": "12 derived D2 MIDI files; only MIDI notes and embedded muscriptor bar-offset metadata are read.",
+    "onset_rule": "Positive-velocity note_on on channel 10 or a drum/percussion-named track; if none exist, use positive-velocity note_on from any track; zero velocity is excluded.",
+    "simultaneous_rule": "Merge note-ons whose integrated MIDI onset times are within 0.020s into one candidate; retain pitch/count provenance.",
+    "minimum_spacing_rule": "Greedy chronological thinning with a 0.180s global minimum center gap.",
+    "long_gap_fallback_rule": "Between available events, insert quarter-note tempo-map candidates while a gap exceeds max(1.25s, 3.0 local quarter-note durations). If no note-ons exist, use a tempo quarter grid across the file.",
+    "window_rule": "Half-width=min(0.090s, 0.30*left interval, 0.30*right interval); clipped to nominal game-audio bounds.",
+    "time_rule": "Integrate the full effective MIDI tempo map in tick order; then subtract the embedded muscriptor:bar_offset seconds. Same-tick tempo uses last track/message order.",
+    "neutrality": "No manual time signatures, section labels, guessed accents, or forced J/K key sequence; drum pitches and MIDI velocity are provenance only.",
+    "confidence_meaning": "Labels identify the evidence type, not a calibrated probability or proof of audible alignment."
+  },
+  "parameters": {
+    "same_sound_merge_tolerance_seconds": 0.02,
+    "minimum_center_gap_seconds": 0.18,
+    "window_half_width_cap_seconds": 0.09,
+    "window_side_interval_fraction": 0.3,
+    "long_gap_min_seconds": 1.25,
+    "long_gap_quarter_beats": 3.0
+  },
+  "self_checks": {
+    "twelve_d2_files_found": true,
+    "source_hashes_unchanged": true,
+    "all_tempo_integrals_match_mido_length": true,
+    "all_representative_centers_ordered": true,
+    "all_representative_windows_nonoverlapping": true,
+    "all_candidate_centers_respect_minimum_gap": true,
+    "same_onset_merge_conserves_selected_positive_note_ons": true,
+    "zero_velocity_note_ons_excluded": true,
+    "full_tempo_map_integrated": true
+  },
+  "song_count": 12,
+  "global_counts": {
+    "candidate_windows": 7902,
+    "event_derived_windows": 7765,
+    "tempo_gap_fallbacks": 137,
+    "minimum_gap_thinned_groups": 1602
+  },
+  "midi_test_02_interval_example": {
+    "window": {
+      "start_tick": 3840,
+      "end_tick": 7680,
+      "start_sec": 2.046128,
+      "end_sec": 5.738456,
+      "candidate_count": 13
+    },
+    "event_centers_game_audio_seconds": [
+      2.049974,
+      2.279783,
+      2.510554,
+      2.740363,
+      2.970172,
+      3.429789,
+      3.890369,
+      4.120178,
+      4.349987,
+      4.579796,
+      4.820182,
+      5.270184,
+      5.729802
+    ],
+    "actual_selected_event_intervals_seconds": [
+      0.229809,
+      0.230771,
+      0.229809,
+      0.229809,
+      0.459617,
+      0.46058,
+      0.229809,
+      0.229809,
+      0.229809,
+      0.240386,
+      0.450002,
+      0.459618
+    ],
+    "selected_event_pitch_and_interval_rows": [
+      {
+        "event_id": "midi_test_02-auto-00006",
+        "center_sec": 2.049974,
+        "interval_from_previous_sec": null,
+        "candidate_pitches": [
+          35,
+          49
+        ],
+        "candidate_velocity_values": [
+          100
+        ],
+        "source": "midi_drum_note_on"
+      },
+      {
+        "event_id": "midi_test_02-auto-00007",
+        "center_sec": 2.279783,
+        "interval_from_previous_sec": 0.229809,
+        "candidate_pitches": [
+          35
+        ],
+        "candidate_velocity_values": [
+          100
+        ],
+        "source": "midi_drum_note_on"
+      },
+      {
+        "event_id": "midi_test_02-auto-00008",
+        "center_sec": 2.510554,
+        "interval_from_previous_sec": 0.230771,
+        "candidate_pitches": [
+          38,
+          46
+        ],
+        "candidate_velocity_values": [
+          100
+        ],
+        "source": "midi_drum_note_on"
+      },
+      {
+        "event_id": "midi_test_02-auto-00009",
+        "center_sec": 2.740363,
+        "interval_from_previous_sec": 0.229809,
+        "candidate_pitches": [
+          35
+        ],
+        "candidate_velocity_values": [
+          100
+        ],
+        "source": "midi_drum_note_on"
+      },
+      {
+        "event_id": "midi_test_02-auto-00010",
+        "center_sec": 2.970172,
+        "interval_from_previous_sec": 0.229809,
+        "candidate_pitches": [
+          46
+        ],
+        "candidate_velocity_values": [
+          100
+        ],
+        "source": "midi_drum_note_on"
+      },
+      {
+        "event_id": "midi_test_02-auto-00011",
+        "center_sec": 3.429789,
+        "interval_from_previous_sec": 0.459617,
+        "candidate_pitches": [
+          38,
+          57
+        ],
+        "candidate_velocity_values": [
+          100
+        ],
+        "source": "midi_drum_note_on"
+      },
+      {
+        "event_id": "midi_test_02-auto-00012",
+        "center_sec": 3.890369,
+        "interval_from_previous_sec": 0.46058,
+        "candidate_pitches": [
+          35,
+          46
+        ],
+        "candidate_velocity_values": [
+          100
+        ],
+        "source": "midi_drum_note_on"
+      },
+      {
+        "event_id": "midi_test_02-auto-00013",
+        "center_sec": 4.120178,
+        "interval_from_previous_sec": 0.229809,
+        "candidate_pitches": [
+          35
+        ],
+        "candidate_velocity_values": [
+          100
+        ],
+        "source": "midi_drum_note_on"
+      },
+      {
+        "event_id": "midi_test_02-auto-00014",
+        "center_sec": 4.349987,
+        "interval_from_previous_sec": 0.229809,
+        "candidate_pitches": [
+          38,
+          46
+        ],
+        "candidate_velocity_values": [
+          100
+        ],
+        "source": "midi_drum_note_on"
+      },
+      {
+        "event_id": "midi_test_02-auto-00015",
+        "center_sec": 4.579796,
+        "interval_from_previous_sec": 0.229809,
+        "candidate_pitches": [
+          35
+        ],
+        "candidate_velocity_values": [
+          100
+        ],
+        "source": "midi_drum_note_on"
+      },
+      {
+        "event_id": "midi_test_02-auto-00016",
+        "center_sec": 4.820182,
+        "interval_from_previous_sec": 0.240386,
+        "candidate_pitches": [
+          46
+        ],
+        "candidate_velocity_values": [
+          100
+        ],
+        "source": "midi_drum_note_on"
+      },
+      {
+        "event_id": "midi_test_02-auto-00017",
+        "center_sec": 5.270184,
+        "interval_from_previous_sec": 0.450002,
+        "candidate_pitches": [
+          38,
+          46
+        ],
+        "candidate_velocity_values": [
+          100
+        ],
+        "source": "midi_drum_note_on"
+      },
+      {
+        "event_id": "midi_test_02-auto-00018",
+        "center_sec": 5.729802,
+        "interval_from_previous_sec": 0.459618,
+        "candidate_pitches": [
+          35,
+          46
+        ],
+        "candidate_velocity_values": [
+          100
+        ],
+        "source": "midi_drum_note_on"
+      }
+    ],
+    "quarter_note_interval_at_fixed_130_bpm_seconds": 0.461538,
+    "interpretation": "Intervals follow selected MIDI drum-family onsets and are not a fixed 130 BPM quarter-note grid; event pitch families are retained for inspection, not labeled as true accents."
+  },
+  "songs": [
+    {
+      "cue_id": "midi_test_01",
+      "title": "midi_test_01",
+      "source_d2_path": "design/music-20261104-chinese-12/arrangements/midi_test_01/D2.mid",
+      "source_d2_sha256": "1700b898aad515812afaaf127e4676facc3e17147beb2b0c8884f045b4c400e4",
+      "ppq": 480,
+      "tempo_event_count": 65,
+      "effective_tempo_change_count": 12,
+      "tempo_integrated_end_seconds": 218.023054858,
+      "mido_length_seconds": 218.023054858,
+      "tempo_integral_matches_mido_length": true,
+      "effective_tempo_us_per_quarter": [
+        {
+          "tick": 0,
+          "tempo_us_per_quarter": 419040
+        },
+        {
+          "tick": 3360,
+          "tempo_us_per_quarter": 391134
+        },
+        {
+          "tick": 5760,
+          "tempo_us_per_quarter": 373074
+        },
+        {
+          "tick": 6720,
+          "tempo_us_per_quarter": 432554
+        },
+        {
+          "tick": 7680,
+          "tempo_us_per_quarter": 524502
+        },
+        {
+          "tick": 8640,
+          "tempo_us_per_quarter": 560065
+        },
+        {
+          "tick": 10560,
+          "tempo_us_per_quarter": 510866
+        },
+        {
+          "tick": 11520,
+          "tempo_us_per_quarter": 459004
+        },
+        {
+          "tick": 13440,
+          "tempo_us_per_quarter": 519942
+        },
+        {
+          "tick": 14880,
+          "tempo_us_per_quarter": 566263
+        },
+        {
+          "tick": 16320,
+          "tempo_us_per_quarter": 501082
+        },
+        {
+          "tick": 20160,
+          "tempo_us_per_quarter": 416260
+        },
+        {
+          "tick": 188160,
+          "tempo_us_per_quarter": 416212
+        }
+      ],
+      "declared_trim_seconds_from_muscriptor_marker": 0.3169,
+      "raw_positive_note_on_count": 3564,
+      "drum_positive_note_on_count": 1679,
+      "zero_velocity_note_on_count_excluded": 0,
+      "selected_source_positive_note_on_count": 1679,
+      "merged_note_on_count_conserved": 1679,
+      "selected_onset_source": "midi_drum_note_on",
+      "same_sound_merge_tolerance_seconds": 0.02,
+      "same_sound_merged_group_count": 1052,
+      "minimum_center_gap_seconds": 0.18,
+      "minimum_gap_thinned_count": 403,
+      "gap_tempo_fallback_insert_count": 0,
+      "candidate_window_count": 649,
+      "candidate_center_interval_seconds": {
+        "min": 0.18038,
+        "median": 0.280108,
+        "max": 0.560217
+      },
+      "event_derived_window_count": 649,
+      "tempo_fallback_window_count": 0,
+      "audio_end_nominal_seconds": 217.706155,
+      "representative_8_quarter_note_window": {
+        "start_tick": 84480,
+        "end_tick": 88320,
+        "start_sec": 75.376429,
+        "end_sec": 78.706509,
+        "candidate_count": 10,
+        "events": [
+          {
+            "event_id": "midi_test_01-auto-00251",
+            "center_sec": 75.635724,
+            "start_sec": 75.545724,
+            "end_sec": 75.725724,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 84779,
+            "candidate_pitches": [
+              36,
+              51
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 2
+          },
+          {
+            "event_id": "midi_test_01-auto-00252",
+            "center_sec": 76.05632,
+            "start_sec": 75.972548,
+            "end_sec": 76.140093,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 85264,
+            "candidate_pitches": [
+              36,
+              49
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 2
+          },
+          {
+            "event_id": "midi_test_01-auto-00253",
+            "center_sec": 76.335561,
+            "start_sec": 76.251789,
+            "end_sec": 76.419334,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 85586,
+            "candidate_pitches": [
+              51
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 1
+          },
+          {
+            "event_id": "midi_test_01-auto-00254",
+            "center_sec": 76.61567,
+            "start_sec": 76.531637,
+            "end_sec": 76.699702,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 85909,
+            "candidate_pitches": [
+              38,
+              51
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 2
+          },
+          {
+            "event_id": "midi_test_01-auto-00255",
+            "center_sec": 76.895778,
+            "start_sec": 76.811746,
+            "end_sec": 76.97981,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 86232,
+            "candidate_pitches": [
+              36,
+              51
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 2
+          },
+          {
+            "event_id": "midi_test_01-auto-00256",
+            "center_sec": 77.305968,
+            "start_sec": 77.215968,
+            "end_sec": 77.395968,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 86705,
+            "candidate_pitches": [
+              36,
+              51
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 2
+          },
+          {
+            "event_id": "midi_test_01-auto-00257",
+            "center_sec": 77.725696,
+            "start_sec": 77.641664,
+            "end_sec": 77.809729,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 87189,
+            "candidate_pitches": [
+              36,
+              49
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 2
+          },
+          {
+            "event_id": "midi_test_01-auto-00258",
+            "center_sec": 78.005805,
+            "start_sec": 77.921772,
+            "end_sec": 78.089837,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 87512,
+            "candidate_pitches": [
+              51
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 1
+          },
+          {
+            "event_id": "midi_test_01-auto-00259",
+            "center_sec": 78.285913,
+            "start_sec": 78.20188,
+            "end_sec": 78.369945,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 87835,
+            "candidate_pitches": [
+              38,
+              51
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 2
+          },
+          {
+            "event_id": "midi_test_01-auto-00260",
+            "center_sec": 78.566021,
+            "start_sec": 78.481989,
+            "end_sec": 78.650054,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 88158,
+            "candidate_pitches": [
+              36,
+              51
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 2
+          }
+        ]
+      }
+    },
+    {
+      "cue_id": "midi_test_02",
+      "title": "midi_test_02",
+      "source_d2_path": "design/music-20261104-chinese-12/arrangements/midi_test_02/D2.mid",
+      "source_d2_sha256": "4332c746d01a6260e9ecbbcb790ae78e3dd2b45b0930b40bf71281dade10fd2f",
+      "ppq": 480,
+      "tempo_event_count": 4,
+      "effective_tempo_change_count": 0,
+      "tempo_integrated_end_seconds": 206.566520725,
+      "mido_length_seconds": 206.566520725,
+      "tempo_integral_matches_mido_length": true,
+      "effective_tempo_us_per_quarter": [
+        {
+          "tick": 0,
+          "tempo_us_per_quarter": 461541
+        }
+      ],
+      "declared_trim_seconds_from_muscriptor_marker": 1.6462,
+      "raw_positive_note_on_count": 3104,
+      "drum_positive_note_on_count": 1184,
+      "zero_velocity_note_on_count_excluded": 0,
+      "selected_source_positive_note_on_count": 1184,
+      "merged_note_on_count_conserved": 1184,
+      "selected_onset_source": "midi_drum_note_on",
+      "same_sound_merge_tolerance_seconds": 0.02,
+      "same_sound_merged_group_count": 768,
+      "minimum_center_gap_seconds": 0.18,
+      "minimum_gap_thinned_count": 55,
+      "gap_tempo_fallback_insert_count": 2,
+      "candidate_window_count": 715,
+      "candidate_center_interval_seconds": {
+        "min": 0.209617,
+        "median": 0.229809,
+        "max": 1.150006
+      },
+      "event_derived_window_count": 713,
+      "tempo_fallback_window_count": 2,
+      "audio_end_nominal_seconds": 204.920321,
+      "representative_8_quarter_note_window": {
+        "start_tick": 3840,
+        "end_tick": 7680,
+        "start_sec": 2.046128,
+        "end_sec": 5.738456,
+        "candidate_count": 13,
+        "events": [
+          {
+            "event_id": "midi_test_02-auto-00006",
+            "center_sec": 2.049974,
+            "start_sec": 1.981031,
+            "end_sec": 2.118917,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 3844,
+            "candidate_pitches": [
+              35,
+              49
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 2
+          },
+          {
+            "event_id": "midi_test_02-auto-00007",
+            "center_sec": 2.279783,
+            "start_sec": 2.21084,
+            "end_sec": 2.348726,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 4083,
+            "candidate_pitches": [
+              35
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 1
+          },
+          {
+            "event_id": "midi_test_02-auto-00008",
+            "center_sec": 2.510554,
+            "start_sec": 2.441611,
+            "end_sec": 2.579496,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 4323,
+            "candidate_pitches": [
+              38,
+              46
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 2
+          },
+          {
+            "event_id": "midi_test_02-auto-00009",
+            "center_sec": 2.740363,
+            "start_sec": 2.67142,
+            "end_sec": 2.809305,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 4562,
+            "candidate_pitches": [
+              35
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 1
+          },
+          {
+            "event_id": "midi_test_02-auto-00010",
+            "center_sec": 2.970172,
+            "start_sec": 2.901229,
+            "end_sec": 3.039114,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 4801,
+            "candidate_pitches": [
+              46
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 1
+          },
+          {
+            "event_id": "midi_test_02-auto-00011",
+            "center_sec": 3.429789,
+            "start_sec": 3.339789,
+            "end_sec": 3.519789,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 5279,
+            "candidate_pitches": [
+              38,
+              57
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 2
+          },
+          {
+            "event_id": "midi_test_02-auto-00012",
+            "center_sec": 3.890369,
+            "start_sec": 3.821426,
+            "end_sec": 3.959312,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 5758,
+            "candidate_pitches": [
+              35,
+              46
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 2
+          },
+          {
+            "event_id": "midi_test_02-auto-00013",
+            "center_sec": 4.120178,
+            "start_sec": 4.051235,
+            "end_sec": 4.189121,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 5997,
+            "candidate_pitches": [
+              35
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 1
+          },
+          {
+            "event_id": "midi_test_02-auto-00014",
+            "center_sec": 4.349987,
+            "start_sec": 4.281044,
+            "end_sec": 4.41893,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 6236,
+            "candidate_pitches": [
+              38,
+              46
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 2
+          },
+          {
+            "event_id": "midi_test_02-auto-00015",
+            "center_sec": 4.579796,
+            "start_sec": 4.510853,
+            "end_sec": 4.648738,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 6475,
+            "candidate_pitches": [
+              35
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 1
+          },
+          {
+            "event_id": "midi_test_02-auto-00016",
+            "center_sec": 4.820182,
+            "start_sec": 4.748066,
+            "end_sec": 4.892297,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 6725,
+            "candidate_pitches": [
+              46
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 1
+          },
+          {
+            "event_id": "midi_test_02-auto-00017",
+            "center_sec": 5.270184,
+            "start_sec": 5.180184,
+            "end_sec": 5.360184,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 7193,
+            "candidate_pitches": [
+              38,
+              46
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 2
+          },
+          {
+            "event_id": "midi_test_02-auto-00018",
+            "center_sec": 5.729802,
+            "start_sec": 5.657686,
+            "end_sec": 5.801918,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 7671,
+            "candidate_pitches": [
+              35,
+              46
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 2
+          }
+        ]
+      }
+    },
+    {
+      "cue_id": "midi_test_03",
+      "title": "midi_test_03",
+      "source_d2_path": "design/music-20261104-chinese-12/arrangements/midi_test_03/D2.mid",
+      "source_d2_sha256": "fcdb5cfc3aff47ec61c8e37eb3575b89a78c64c8c9beb0bfbc03a9f96734b436",
+      "ppq": 480,
+      "tempo_event_count": 5,
+      "effective_tempo_change_count": 0,
+      "tempo_integrated_end_seconds": 175.942695037,
+      "mido_length_seconds": 175.942695037,
+      "tempo_integral_matches_mido_length": true,
+      "effective_tempo_us_per_quarter": [
+        {
+          "tick": 0,
+          "tempo_us_per_quarter": 461542
+        }
+      ],
+      "declared_trim_seconds_from_muscriptor_marker": 0.4615,
+      "raw_positive_note_on_count": 3890,
+      "drum_positive_note_on_count": 1562,
+      "zero_velocity_note_on_count_excluded": 0,
+      "selected_source_positive_note_on_count": 1562,
+      "merged_note_on_count_conserved": 1562,
+      "selected_onset_source": "midi_drum_note_on",
+      "same_sound_merge_tolerance_seconds": 0.02,
+      "same_sound_merged_group_count": 759,
+      "minimum_center_gap_seconds": 0.18,
+      "minimum_gap_thinned_count": 24,
+      "gap_tempo_fallback_insert_count": 0,
+      "candidate_window_count": 735,
+      "candidate_center_interval_seconds": {
+        "min": 0.209617,
+        "median": 0.22981,
+        "max": 0.440388
+      },
+      "event_derived_window_count": 735,
+      "tempo_fallback_window_count": 0,
+      "audio_end_nominal_seconds": 175.481195,
+      "representative_8_quarter_note_window": {
+        "start_tick": 11520,
+        "end_tick": 15360,
+        "start_sec": 10.615508,
+        "end_sec": 14.307844,
+        "candidate_count": 16,
+        "events": [
+          {
+            "event_id": "midi_test_03-auto-00022",
+            "center_sec": 10.697239,
+            "start_sec": 10.628297,
+            "end_sec": 10.766182,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 11605,
+            "candidate_pitches": [
+              36,
+              38,
+              51
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 3
+          },
+          {
+            "event_id": "midi_test_03-auto-00023",
+            "center_sec": 10.927049,
+            "start_sec": 10.858106,
+            "end_sec": 10.995992,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 11844,
+            "candidate_pitches": [
+              36,
+              51
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 2
+          },
+          {
+            "event_id": "midi_test_03-auto-00024",
+            "center_sec": 11.156858,
+            "start_sec": 11.087915,
+            "end_sec": 11.225801,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 12083,
+            "candidate_pitches": [
+              36,
+              51
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 2
+          },
+          {
+            "event_id": "midi_test_03-auto-00025",
+            "center_sec": 11.386668,
+            "start_sec": 11.317725,
+            "end_sec": 11.455611,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 12322,
+            "candidate_pitches": [
+              36,
+              51
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 2
+          },
+          {
+            "event_id": "midi_test_03-auto-00026",
+            "center_sec": 11.617439,
+            "start_sec": 11.548496,
+            "end_sec": 11.686382,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 12562,
+            "candidate_pitches": [
+              36,
+              38,
+              51
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 3
+          },
+          {
+            "event_id": "midi_test_03-auto-00027",
+            "center_sec": 11.847248,
+            "start_sec": 11.778305,
+            "end_sec": 11.916191,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 12801,
+            "candidate_pitches": [
+              36,
+              51
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 2
+          },
+          {
+            "event_id": "midi_test_03-auto-00028",
+            "center_sec": 12.077058,
+            "start_sec": 12.008115,
+            "end_sec": 12.146001,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 13040,
+            "candidate_pitches": [
+              36,
+              51
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 2
+          },
+          {
+            "event_id": "midi_test_03-auto-00029",
+            "center_sec": 12.317444,
+            "start_sec": 12.248501,
+            "end_sec": 12.386387,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 13290,
+            "candidate_pitches": [
+              36,
+              51
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 2
+          },
+          {
+            "event_id": "midi_test_03-auto-00030",
+            "center_sec": 12.547254,
+            "start_sec": 12.478311,
+            "end_sec": 12.616196,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 13529,
+            "candidate_pitches": [
+              36,
+              38,
+              51
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 3
+          },
+          {
+            "event_id": "midi_test_03-auto-00031",
+            "center_sec": 12.777063,
+            "start_sec": 12.70812,
+            "end_sec": 12.846006,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 13768,
+            "candidate_pitches": [
+              36,
+              51
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 2
+          },
+          {
+            "event_id": "midi_test_03-auto-00032",
+            "center_sec": 13.006872,
+            "start_sec": 12.93793,
+            "end_sec": 13.075815,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 14007,
+            "candidate_pitches": [
+              36,
+              49
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 2
+          },
+          {
+            "event_id": "midi_test_03-auto-00033",
+            "center_sec": 13.247259,
+            "start_sec": 13.178316,
+            "end_sec": 13.316202,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 14257,
+            "candidate_pitches": [
+              36,
+              51
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 2
+          },
+          {
+            "event_id": "midi_test_03-auto-00034",
+            "center_sec": 13.477068,
+            "start_sec": 13.408126,
+            "end_sec": 13.546011,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 14496,
+            "candidate_pitches": [
+              36,
+              38,
+              51
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 3
+          },
+          {
+            "event_id": "midi_test_03-auto-00035",
+            "center_sec": 13.706878,
+            "start_sec": 13.637935,
+            "end_sec": 13.775821,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 14735,
+            "candidate_pitches": [
+              36,
+              51
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 2
+          },
+          {
+            "event_id": "midi_test_03-auto-00036",
+            "center_sec": 13.936687,
+            "start_sec": 13.867744,
+            "end_sec": 14.00563,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 14974,
+            "candidate_pitches": [
+              36,
+              51
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 2
+          },
+          {
+            "event_id": "midi_test_03-auto-00037",
+            "center_sec": 14.167458,
+            "start_sec": 14.098227,
+            "end_sec": 14.23669,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 15214,
+            "candidate_pitches": [
+              36,
+              51
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 2
+          }
+        ]
+      }
+    },
+    {
+      "cue_id": "midi_test_04",
+      "title": "midi_test_04",
+      "source_d2_path": "design/music-20261104-chinese-12/arrangements/midi_test_04/D2.mid",
+      "source_d2_sha256": "848ee51d5e35e5718d678542a681d91e4dd1e12c51f06eac128c9a9cb4279420",
+      "ppq": 480,
+      "tempo_event_count": 4,
+      "effective_tempo_change_count": 0,
+      "tempo_integrated_end_seconds": 183.203753498,
+      "mido_length_seconds": 183.203753498,
+      "tempo_integral_matches_mido_length": true,
+      "effective_tempo_us_per_quarter": [
+        {
+          "tick": 0,
+          "tempo_us_per_quarter": 447769
+        }
+      ],
+      "declared_trim_seconds_from_muscriptor_marker": 0.4478,
+      "raw_positive_note_on_count": 4337,
+      "drum_positive_note_on_count": 1491,
+      "zero_velocity_note_on_count_excluded": 0,
+      "selected_source_positive_note_on_count": 1491,
+      "merged_note_on_count_conserved": 1491,
+      "selected_onset_source": "midi_drum_note_on",
+      "same_sound_merge_tolerance_seconds": 0.02,
+      "same_sound_merged_group_count": 936,
+      "minimum_center_gap_seconds": 0.18,
+      "minimum_gap_thinned_count": 404,
+      "gap_tempo_fallback_insert_count": 0,
+      "candidate_window_count": 532,
+      "candidate_center_interval_seconds": {
+        "min": 0.189369,
+        "median": 0.300378,
+        "max": 0.610085
+      },
+      "event_derived_window_count": 532,
+      "tempo_fallback_window_count": 0,
+      "audio_end_nominal_seconds": 182.755953,
+      "representative_8_quarter_note_window": {
+        "start_tick": 3840,
+        "end_tick": 7680,
+        "start_sec": 3.134352,
+        "end_sec": 6.716504,
+        "candidate_count": 10,
+        "events": [
+          {
+            "event_id": "midi_test_04-auto-00001",
+            "center_sec": 3.695929,
+            "start_sec": 3.611972,
+            "end_sec": 3.779886,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 4442,
+            "candidate_pitches": [
+              36,
+              49
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 2
+          },
+          {
+            "event_id": "midi_test_04-auto-00002",
+            "center_sec": 3.975785,
+            "start_sec": 3.891828,
+            "end_sec": 4.059741,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 4742,
+            "candidate_pitches": [
+              45
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 1
+          },
+          {
+            "event_id": "midi_test_04-auto-00003",
+            "center_sec": 4.395568,
+            "start_sec": 4.308533,
+            "end_sec": 4.482603,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 5192,
+            "candidate_pitches": [
+              45
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 1
+          },
+          {
+            "event_id": "midi_test_04-auto-00004",
+            "center_sec": 4.685685,
+            "start_sec": 4.601728,
+            "end_sec": 4.769642,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 5503,
+            "candidate_pitches": [
+              45
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 1
+          },
+          {
+            "event_id": "midi_test_04-auto-00005",
+            "center_sec": 4.965541,
+            "start_sec": 4.881584,
+            "end_sec": 5.049497,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 5803,
+            "candidate_pitches": [
+              45
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 1
+          },
+          {
+            "event_id": "midi_test_04-auto-00006",
+            "center_sec": 5.316293,
+            "start_sec": 5.226459,
+            "end_sec": 5.406127,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 6179,
+            "candidate_pitches": [
+              38
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 1
+          },
+          {
+            "event_id": "midi_test_04-auto-00007",
+            "center_sec": 5.615739,
+            "start_sec": 5.525905,
+            "end_sec": 5.705572,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 6500,
+            "candidate_pitches": [
+              43
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 1
+          },
+          {
+            "event_id": "midi_test_04-auto-00008",
+            "center_sec": 5.916117,
+            "start_sec": 5.826283,
+            "end_sec": 6.005951,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 6822,
+            "candidate_pitches": [
+              36,
+              38
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 2
+          },
+          {
+            "event_id": "midi_test_04-auto-00009",
+            "center_sec": 6.215562,
+            "start_sec": 6.125729,
+            "end_sec": 6.305396,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 7143,
+            "candidate_pitches": [
+              43
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 1
+          },
+          {
+            "event_id": "midi_test_04-auto-00010",
+            "center_sec": 6.515941,
+            "start_sec": 6.425941,
+            "end_sec": 6.605941,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 7465,
+            "candidate_pitches": [
+              43
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 1
+          }
+        ]
+      }
+    },
+    {
+      "cue_id": "midi_test_05",
+      "title": "midi_test_05",
+      "source_d2_path": "design/music-20261104-chinese-12/arrangements/midi_test_05/D2.mid",
+      "source_d2_sha256": "76fef7fe97d84ecfbd1d5ddaac86fc963eb0bae015c7574ed9eb5f1cff1a9312",
+      "ppq": 480,
+      "tempo_event_count": 6,
+      "effective_tempo_change_count": 0,
+      "tempo_integrated_end_seconds": 219.981008465,
+      "mido_length_seconds": 219.981008465,
+      "tempo_integral_matches_mido_length": true,
+      "effective_tempo_us_per_quarter": [
+        {
+          "tick": 0,
+          "tempo_us_per_quarter": 799937
+        }
+      ],
+      "declared_trim_seconds_from_muscriptor_marker": 3.0795,
+      "raw_positive_note_on_count": 2501,
+      "drum_positive_note_on_count": 1009,
+      "zero_velocity_note_on_count_excluded": 0,
+      "selected_source_positive_note_on_count": 1009,
+      "merged_note_on_count_conserved": 1009,
+      "selected_onset_source": "midi_drum_note_on",
+      "same_sound_merge_tolerance_seconds": 0.02,
+      "same_sound_merged_group_count": 562,
+      "minimum_center_gap_seconds": 0.18,
+      "minimum_gap_thinned_count": 0,
+      "gap_tempo_fallback_insert_count": 0,
+      "candidate_window_count": 562,
+      "candidate_center_interval_seconds": {
+        "min": 0.189985,
+        "median": 0.399968,
+        "max": 0.459964
+      },
+      "event_derived_window_count": 562,
+      "tempo_fallback_window_count": 0,
+      "audio_end_nominal_seconds": 216.901508,
+      "representative_8_quarter_note_window": {
+        "start_tick": 3840,
+        "end_tick": 7680,
+        "start_sec": 3.319996,
+        "end_sec": 9.719492,
+        "candidate_count": 16,
+        "events": [
+          {
+            "event_id": "midi_test_05-auto-00002",
+            "center_sec": 3.716631,
+            "start_sec": 3.626631,
+            "end_sec": 3.806631,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 4078,
+            "candidate_pitches": [
+              36,
+              42
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 2
+          },
+          {
+            "event_id": "midi_test_05-auto-00003",
+            "center_sec": 4.106601,
+            "start_sec": 4.016601,
+            "end_sec": 4.196601,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 4312,
+            "candidate_pitches": [
+              38,
+              42
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 2
+          },
+          {
+            "event_id": "midi_test_05-auto-00004",
+            "center_sec": 4.506569,
+            "start_sec": 4.416569,
+            "end_sec": 4.596569,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 4552,
+            "candidate_pitches": [
+              42
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 1
+          },
+          {
+            "event_id": "midi_test_05-auto-00005",
+            "center_sec": 4.906538,
+            "start_sec": 4.816538,
+            "end_sec": 4.996538,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 4792,
+            "candidate_pitches": [
+              36,
+              42
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 2
+          },
+          {
+            "event_id": "midi_test_05-auto-00006",
+            "center_sec": 5.296507,
+            "start_sec": 5.206507,
+            "end_sec": 5.386507,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 5026,
+            "candidate_pitches": [
+              36,
+              42
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 2
+          },
+          {
+            "event_id": "midi_test_05-auto-00007",
+            "center_sec": 5.696476,
+            "start_sec": 5.606476,
+            "end_sec": 5.786476,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 5266,
+            "candidate_pitches": [
+              38,
+              42
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 2
+          },
+          {
+            "event_id": "midi_test_05-auto-00008",
+            "center_sec": 6.096444,
+            "start_sec": 6.006444,
+            "end_sec": 6.186444,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 5506,
+            "candidate_pitches": [
+              42
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 1
+          },
+          {
+            "event_id": "midi_test_05-auto-00009",
+            "center_sec": 6.496413,
+            "start_sec": 6.406413,
+            "end_sec": 6.586413,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 5746,
+            "candidate_pitches": [
+              36,
+              42
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 2
+          },
+          {
+            "event_id": "midi_test_05-auto-00010",
+            "center_sec": 6.90638,
+            "start_sec": 6.81638,
+            "end_sec": 6.99638,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 5992,
+            "candidate_pitches": [
+              36,
+              42
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 2
+          },
+          {
+            "event_id": "midi_test_05-auto-00011",
+            "center_sec": 7.306349,
+            "start_sec": 7.216349,
+            "end_sec": 7.396349,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 6232,
+            "candidate_pitches": [
+              38,
+              42
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 2
+          },
+          {
+            "event_id": "midi_test_05-auto-00012",
+            "center_sec": 7.706317,
+            "start_sec": 7.616317,
+            "end_sec": 7.796317,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 6472,
+            "candidate_pitches": [
+              42
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 1
+          },
+          {
+            "event_id": "midi_test_05-auto-00013",
+            "center_sec": 8.106286,
+            "start_sec": 8.016286,
+            "end_sec": 8.196286,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 6712,
+            "candidate_pitches": [
+              36,
+              42
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 2
+          },
+          {
+            "event_id": "midi_test_05-auto-00014",
+            "center_sec": 8.506254,
+            "start_sec": 8.416254,
+            "end_sec": 8.596254,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 6952,
+            "candidate_pitches": [
+              36,
+              42
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 2
+          },
+          {
+            "event_id": "midi_test_05-auto-00015",
+            "center_sec": 8.906223,
+            "start_sec": 8.816223,
+            "end_sec": 8.996223,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 7192,
+            "candidate_pitches": [
+              38,
+              42
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 2
+          },
+          {
+            "event_id": "midi_test_05-auto-00016",
+            "center_sec": 9.306191,
+            "start_sec": 9.216191,
+            "end_sec": 9.396191,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 7432,
+            "candidate_pitches": [
+              42
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 1
+          },
+          {
+            "event_id": "midi_test_05-auto-00017",
+            "center_sec": 9.70616,
+            "start_sec": 9.61616,
+            "end_sec": 9.79616,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 7672,
+            "candidate_pitches": [
+              36,
+              42
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 2
+          }
+        ]
+      }
+    },
+    {
+      "cue_id": "midi_test_06",
+      "title": "midi_test_06",
+      "source_d2_path": "design/music-20261104-chinese-12/arrangements/midi_test_06/D2.mid",
+      "source_d2_sha256": "809db1731e88b042b8184f52ea2325bb2a182366b13a498622d106da479ac4dd",
+      "ppq": 480,
+      "tempo_event_count": 64,
+      "effective_tempo_change_count": 15,
+      "tempo_integrated_end_seconds": 267.41703005,
+      "mido_length_seconds": 267.41703005,
+      "tempo_integral_matches_mido_length": true,
+      "effective_tempo_us_per_quarter": [
+        {
+          "tick": 0,
+          "tempo_us_per_quarter": 737325
+        },
+        {
+          "tick": 2400,
+          "tempo_us_per_quarter": 698045
+        },
+        {
+          "tick": 29760,
+          "tempo_us_per_quarter": 697567
+        },
+        {
+          "tick": 61440,
+          "tempo_us_per_quarter": 697734
+        },
+        {
+          "tick": 93120,
+          "tempo_us_per_quarter": 694786
+        },
+        {
+          "tick": 97440,
+          "tempo_us_per_quarter": 705758
+        },
+        {
+          "tick": 100320,
+          "tempo_us_per_quarter": 696120
+        },
+        {
+          "tick": 108000,
+          "tempo_us_per_quarter": 698251
+        },
+        {
+          "tick": 120960,
+          "tempo_us_per_quarter": 734009
+        },
+        {
+          "tick": 122400,
+          "tempo_us_per_quarter": 744295
+        },
+        {
+          "tick": 124320,
+          "tempo_us_per_quarter": 699263
+        },
+        {
+          "tick": 140640,
+          "tempo_us_per_quarter": 692251
+        },
+        {
+          "tick": 141600,
+          "tempo_us_per_quarter": 768017
+        },
+        {
+          "tick": 144000,
+          "tempo_us_per_quarter": 697449
+        },
+        {
+          "tick": 167040,
+          "tempo_us_per_quarter": 697375
+        },
+        {
+          "tick": 180480,
+          "tempo_us_per_quarter": 696543
+        }
+      ],
+      "declared_trim_seconds_from_muscriptor_marker": 0.1477,
+      "raw_positive_note_on_count": 3240,
+      "drum_positive_note_on_count": 1284,
+      "zero_velocity_note_on_count_excluded": 0,
+      "selected_source_positive_note_on_count": 1284,
+      "merged_note_on_count_conserved": 1284,
+      "selected_onset_source": "midi_drum_note_on",
+      "same_sound_merge_tolerance_seconds": 0.02,
+      "same_sound_merged_group_count": 776,
+      "minimum_center_gap_seconds": 0.18,
+      "minimum_gap_thinned_count": 98,
+      "gap_tempo_fallback_insert_count": 6,
+      "candidate_window_count": 684,
+      "candidate_center_interval_seconds": {
+        "min": 0.180155,
+        "median": 0.350236,
+        "max": 1.89358
+      },
+      "event_derived_window_count": 678,
+      "tempo_fallback_window_count": 6,
+      "audio_end_nominal_seconds": 267.26933,
+      "representative_8_quarter_note_window": {
+        "start_tick": 11520,
+        "end_tick": 15360,
+        "start_sec": 16.80178,
+        "end_sec": 22.38614,
+        "candidate_count": 16,
+        "events": [
+          {
+            "event_id": "midi_test_06-auto-00027",
+            "center_sec": 16.819231,
+            "start_sec": 16.729231,
+            "end_sec": 16.909231,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 11532,
+            "candidate_pitches": [
+              36,
+              46
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 2
+          },
+          {
+            "event_id": "midi_test_06-auto-00028",
+            "center_sec": 17.169708,
+            "start_sec": 17.079708,
+            "end_sec": 17.259708,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 11773,
+            "candidate_pitches": [
+              36,
+              46
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 2
+          },
+          {
+            "event_id": "midi_test_06-auto-00029",
+            "center_sec": 17.520185,
+            "start_sec": 17.430185,
+            "end_sec": 17.610185,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 12014,
+            "candidate_pitches": [
+              38,
+              46
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 2
+          },
+          {
+            "event_id": "midi_test_06-auto-00030",
+            "center_sec": 17.869207,
+            "start_sec": 17.779207,
+            "end_sec": 17.959207,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 12254,
+            "candidate_pitches": [
+              46
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 1
+          },
+          {
+            "event_id": "midi_test_06-auto-00031",
+            "center_sec": 18.219684,
+            "start_sec": 18.129684,
+            "end_sec": 18.309684,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 12495,
+            "candidate_pitches": [
+              36,
+              46
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 2
+          },
+          {
+            "event_id": "midi_test_06-auto-00032",
+            "center_sec": 18.570161,
+            "start_sec": 18.480161,
+            "end_sec": 18.660161,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 12736,
+            "candidate_pitches": [
+              36,
+              46
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 2
+          },
+          {
+            "event_id": "midi_test_06-auto-00033",
+            "center_sec": 18.919183,
+            "start_sec": 18.829183,
+            "end_sec": 19.009183,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 12976,
+            "candidate_pitches": [
+              38,
+              46
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 2
+          },
+          {
+            "event_id": "midi_test_06-auto-00034",
+            "center_sec": 19.26966,
+            "start_sec": 19.17966,
+            "end_sec": 19.35966,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 13217,
+            "candidate_pitches": [
+              46
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 1
+          },
+          {
+            "event_id": "midi_test_06-auto-00035",
+            "center_sec": 19.620137,
+            "start_sec": 19.530137,
+            "end_sec": 19.710137,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 13458,
+            "candidate_pitches": [
+              36,
+              46
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 2
+          },
+          {
+            "event_id": "midi_test_06-auto-00036",
+            "center_sec": 19.960434,
+            "start_sec": 19.870434,
+            "end_sec": 20.050434,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 13692,
+            "candidate_pitches": [
+              36,
+              46
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 2
+          },
+          {
+            "event_id": "midi_test_06-auto-00037",
+            "center_sec": 20.309456,
+            "start_sec": 20.219456,
+            "end_sec": 20.399456,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 13932,
+            "candidate_pitches": [
+              38,
+              46
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 2
+          },
+          {
+            "event_id": "midi_test_06-auto-00038",
+            "center_sec": 20.659933,
+            "start_sec": 20.569933,
+            "end_sec": 20.749933,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 14173,
+            "candidate_pitches": [
+              46
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 1
+          },
+          {
+            "event_id": "midi_test_06-auto-00039",
+            "center_sec": 21.01041,
+            "start_sec": 20.92041,
+            "end_sec": 21.10041,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 14414,
+            "candidate_pitches": [
+              36,
+              46
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 2
+          },
+          {
+            "event_id": "midi_test_06-auto-00040",
+            "center_sec": 21.359432,
+            "start_sec": 21.269432,
+            "end_sec": 21.449432,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 14654,
+            "candidate_pitches": [
+              36,
+              46
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 2
+          },
+          {
+            "event_id": "midi_test_06-auto-00041",
+            "center_sec": 21.709909,
+            "start_sec": 21.619909,
+            "end_sec": 21.799909,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 14895,
+            "candidate_pitches": [
+              38,
+              46
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 2
+          },
+          {
+            "event_id": "midi_test_06-auto-00042",
+            "center_sec": 22.060386,
+            "start_sec": 21.970386,
+            "end_sec": 22.150386,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 15136,
+            "candidate_pitches": [
+              46
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 1
+          }
+        ]
+      }
+    },
+    {
+      "cue_id": "midi_test_07",
+      "title": "midi_test_07",
+      "source_d2_path": "design/music-20261104-chinese-12/arrangements/midi_test_07/D2.mid",
+      "source_d2_sha256": "471b9a119c5fb140de69628ea5626d5c9e890c2639cdf1014d42fbdd02142511",
+      "ppq": 480,
+      "tempo_event_count": 52,
+      "effective_tempo_change_count": 12,
+      "tempo_integrated_end_seconds": 159.404719433,
+      "mido_length_seconds": 159.404719433,
+      "tempo_integral_matches_mido_length": true,
+      "effective_tempo_us_per_quarter": [
+        {
+          "tick": 0,
+          "tempo_us_per_quarter": 375145
+        },
+        {
+          "tick": 60480,
+          "tempo_us_per_quarter": 374706
+        },
+        {
+          "tick": 89280,
+          "tempo_us_per_quarter": 338061
+        },
+        {
+          "tick": 91680,
+          "tempo_us_per_quarter": 375543
+        },
+        {
+          "tick": 102720,
+          "tempo_us_per_quarter": 409798
+        },
+        {
+          "tick": 105600,
+          "tempo_us_per_quarter": 374569
+        },
+        {
+          "tick": 132480,
+          "tempo_us_per_quarter": 374743
+        },
+        {
+          "tick": 152160,
+          "tempo_us_per_quarter": 378274
+        },
+        {
+          "tick": 155040,
+          "tempo_us_per_quarter": 374656
+        },
+        {
+          "tick": 172800,
+          "tempo_us_per_quarter": 338615
+        },
+        {
+          "tick": 175200,
+          "tempo_us_per_quarter": 376012
+        },
+        {
+          "tick": 190080,
+          "tempo_us_per_quarter": 337071
+        },
+        {
+          "tick": 192960,
+          "tempo_us_per_quarter": 375128
+        }
+      ],
+      "declared_trim_seconds_from_muscriptor_marker": 0.3021,
+      "raw_positive_note_on_count": 3219,
+      "drum_positive_note_on_count": 1135,
+      "zero_velocity_note_on_count_excluded": 0,
+      "selected_source_positive_note_on_count": 1135,
+      "merged_note_on_count_conserved": 1135,
+      "selected_onset_source": "midi_drum_note_on",
+      "same_sound_merge_tolerance_seconds": 0.02,
+      "same_sound_merged_group_count": 610,
+      "minimum_center_gap_seconds": 0.18,
+      "minimum_gap_thinned_count": 83,
+      "gap_tempo_fallback_insert_count": 37,
+      "candidate_window_count": 564,
+      "candidate_center_interval_seconds": {
+        "min": 0.18014,
+        "median": 0.189918,
+        "max": 1.121626
+      },
+      "event_derived_window_count": 527,
+      "tempo_fallback_window_count": 37,
+      "audio_end_nominal_seconds": 159.102619,
+      "representative_8_quarter_note_window": {
+        "start_tick": 34560,
+        "end_tick": 38400,
+        "start_sec": 26.70834,
+        "end_sec": 29.7095,
+        "candidate_count": 13,
+        "events": [
+          {
+            "event_id": "midi_test_07-auto-00003",
+            "center_sec": 27.072543,
+            "start_sec": 27.015568,
+            "end_sec": 27.129518,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 35026,
+            "candidate_pitches": [
+              38,
+              49
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 2
+          },
+          {
+            "event_id": "midi_test_07-auto-00004",
+            "center_sec": 27.26246,
+            "start_sec": 27.205485,
+            "end_sec": 27.319436,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 35269,
+            "candidate_pitches": [
+              35,
+              46
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 2
+          },
+          {
+            "event_id": "midi_test_07-auto-00005",
+            "center_sec": 27.452378,
+            "start_sec": 27.395402,
+            "end_sec": 27.509353,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 35512,
+            "candidate_pitches": [
+              35,
+              46
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 2
+          },
+          {
+            "event_id": "midi_test_07-auto-00006",
+            "center_sec": 27.642295,
+            "start_sec": 27.58532,
+            "end_sec": 27.69927,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 35755,
+            "candidate_pitches": [
+              38,
+              46
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 2
+          },
+          {
+            "event_id": "midi_test_07-auto-00007",
+            "center_sec": 27.832212,
+            "start_sec": 27.775237,
+            "end_sec": 27.889187,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 35998,
+            "candidate_pitches": [
+              35,
+              46
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 2
+          },
+          {
+            "event_id": "midi_test_07-auto-00008",
+            "center_sec": 28.022911,
+            "start_sec": 27.965935,
+            "end_sec": 28.079886,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 36242,
+            "candidate_pitches": [
+              35,
+              46
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 2
+          },
+          {
+            "event_id": "midi_test_07-auto-00009",
+            "center_sec": 28.212828,
+            "start_sec": 28.155853,
+            "end_sec": 28.269803,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 36485,
+            "candidate_pitches": [
+              38,
+              46
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 2
+          },
+          {
+            "event_id": "midi_test_07-auto-00010",
+            "center_sec": 28.582502,
+            "start_sec": 28.525527,
+            "end_sec": 28.639477,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 36958,
+            "candidate_pitches": [
+              35,
+              46
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 2
+          },
+          {
+            "event_id": "midi_test_07-auto-00011",
+            "center_sec": 28.772419,
+            "start_sec": 28.715444,
+            "end_sec": 28.829394,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 37201,
+            "candidate_pitches": [
+              38,
+              46
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 2
+          },
+          {
+            "event_id": "midi_test_07-auto-00012",
+            "center_sec": 28.962336,
+            "start_sec": 28.905361,
+            "end_sec": 29.019311,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 37444,
+            "candidate_pitches": [
+              35,
+              46
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 2
+          },
+          {
+            "event_id": "midi_test_07-auto-00013",
+            "center_sec": 29.152253,
+            "start_sec": 29.095278,
+            "end_sec": 29.209229,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 37687,
+            "candidate_pitches": [
+              35,
+              46
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 2
+          },
+          {
+            "event_id": "midi_test_07-auto-00014",
+            "center_sec": 29.342171,
+            "start_sec": 29.285195,
+            "end_sec": 29.399146,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 37930,
+            "candidate_pitches": [
+              41,
+              46
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 2
+          },
+          {
+            "event_id": "midi_test_07-auto-00015",
+            "center_sec": 29.532869,
+            "start_sec": 29.47566,
+            "end_sec": 29.590079,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 38174,
+            "candidate_pitches": [
+              35,
+              46
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 2
+          }
+        ]
+      }
+    },
+    {
+      "cue_id": "midi_test_08",
+      "title": "midi_test_08",
+      "source_d2_path": "design/music-20261104-chinese-12/arrangements/midi_test_08/D2.mid",
+      "source_d2_sha256": "18b84255653e18c65558c8c46cb361e1fb7d9caccc7c1ab473df413c3adc9bcc",
+      "ppq": 480,
+      "tempo_event_count": 72,
+      "effective_tempo_change_count": 8,
+      "tempo_integrated_end_seconds": 290.797869458,
+      "mido_length_seconds": 290.797869458,
+      "tempo_integral_matches_mido_length": true,
+      "effective_tempo_us_per_quarter": [
+        {
+          "tick": 0,
+          "tempo_us_per_quarter": 923052
+        },
+        {
+          "tick": 91680,
+          "tempo_us_per_quarter": 922860
+        },
+        {
+          "tick": 107520,
+          "tempo_us_per_quarter": 922834
+        },
+        {
+          "tick": 137760,
+          "tempo_us_per_quarter": 931804
+        },
+        {
+          "tick": 140640,
+          "tempo_us_per_quarter": 962569
+        },
+        {
+          "tick": 143520,
+          "tempo_us_per_quarter": 862381
+        },
+        {
+          "tick": 144480,
+          "tempo_us_per_quarter": 846537
+        },
+        {
+          "tick": 145440,
+          "tempo_us_per_quarter": 825643
+        },
+        {
+          "tick": 146400,
+          "tempo_us_per_quarter": 869165
+        }
+      ],
+      "declared_trim_seconds_from_muscriptor_marker": 0.8388,
+      "raw_positive_note_on_count": 3569,
+      "drum_positive_note_on_count": 668,
+      "zero_velocity_note_on_count_excluded": 0,
+      "selected_source_positive_note_on_count": 668,
+      "merged_note_on_count_conserved": 668,
+      "selected_onset_source": "midi_drum_note_on",
+      "same_sound_merge_tolerance_seconds": 0.02,
+      "same_sound_merged_group_count": 374,
+      "minimum_center_gap_seconds": 0.18,
+      "minimum_gap_thinned_count": 0,
+      "gap_tempo_fallback_insert_count": 70,
+      "candidate_window_count": 444,
+      "candidate_center_interval_seconds": {
+        "min": 0.249413,
+        "median": 0.469218,
+        "max": 2.007597
+      },
+      "event_derived_window_count": 374,
+      "tempo_fallback_window_count": 70,
+      "audio_end_nominal_seconds": 289.959069,
+      "representative_8_quarter_note_window": {
+        "start_tick": 46080,
+        "end_tick": 49920,
+        "start_sec": 87.774192,
+        "end_sec": 95.158608,
+        "candidate_count": 9,
+        "events": [
+          {
+            "event_id": "midi_test_08-auto-00159",
+            "center_sec": 88.231872,
+            "start_sec": 88.141872,
+            "end_sec": 88.321872,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 46318,
+            "candidate_pitches": [
+              42
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 1
+          },
+          {
+            "event_id": "midi_test_08-auto-00160",
+            "center_sec": 88.691475,
+            "start_sec": 88.601475,
+            "end_sec": 88.781475,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 46557,
+            "candidate_pitches": [
+              36,
+              42
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 2
+          },
+          {
+            "event_id": "midi_test_08-auto-00161",
+            "center_sec": 89.151078,
+            "start_sec": 89.061078,
+            "end_sec": 89.241078,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 46796,
+            "candidate_pitches": [
+              42
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 1
+          },
+          {
+            "event_id": "midi_test_08-auto-00162",
+            "center_sec": 89.622219,
+            "start_sec": 89.532219,
+            "end_sec": 89.712219,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 47041,
+            "candidate_pitches": [
+              38,
+              42
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 2
+          },
+          {
+            "event_id": "midi_test_08-auto-00163",
+            "center_sec": 90.543348,
+            "start_sec": 90.453348,
+            "end_sec": 90.633348,
+            "source": "tempo_quarter_fallback",
+            "confidence": "tempo-map fallback; no note-on claim",
+            "midi_tick": 47520,
+            "candidate_pitches": [],
+            "candidate_velocity_values": [],
+            "merged_note_on_count": 0
+          },
+          {
+            "event_id": "midi_test_08-auto-00164",
+            "center_sec": 91.4664,
+            "start_sec": 91.3764,
+            "end_sec": 91.5564,
+            "source": "tempo_quarter_fallback",
+            "confidence": "tempo-map fallback; no note-on claim",
+            "midi_tick": 48000,
+            "candidate_pitches": [],
+            "candidate_velocity_values": [],
+            "merged_note_on_count": 0
+          },
+          {
+            "event_id": "midi_test_08-auto-00165",
+            "center_sec": 92.389452,
+            "start_sec": 92.299452,
+            "end_sec": 92.479452,
+            "source": "tempo_quarter_fallback",
+            "confidence": "tempo-map fallback; no note-on claim",
+            "midi_tick": 48480,
+            "candidate_pitches": [],
+            "candidate_velocity_values": [],
+            "merged_note_on_count": 0
+          },
+          {
+            "event_id": "midi_test_08-auto-00166",
+            "center_sec": 93.312504,
+            "start_sec": 93.222504,
+            "end_sec": 93.402504,
+            "source": "tempo_quarter_fallback",
+            "confidence": "tempo-map fallback; no note-on claim",
+            "midi_tick": 48960,
+            "candidate_pitches": [],
+            "candidate_velocity_values": [],
+            "merged_note_on_count": 0
+          },
+          {
+            "event_id": "midi_test_08-auto-00167",
+            "center_sec": 94.235556,
+            "start_sec": 94.145556,
+            "end_sec": 94.325556,
+            "source": "tempo_quarter_fallback",
+            "confidence": "tempo-map fallback; no note-on claim",
+            "midi_tick": 49440,
+            "candidate_pitches": [],
+            "candidate_velocity_values": [],
+            "merged_note_on_count": 0
+          }
+        ]
+      }
+    },
+    {
+      "cue_id": "midi_test_09",
+      "title": "midi_test_09",
+      "source_d2_path": "design/music-20261104-chinese-12/arrangements/midi_test_09/D2.mid",
+      "source_d2_sha256": "9b70d3dda196c9a56bf4e2c7a41e1a474aac8537b7af25ed723f8c672129c034",
+      "ppq": 480,
+      "tempo_event_count": 48,
+      "effective_tempo_change_count": 11,
+      "tempo_integrated_end_seconds": 267.902503271,
+      "mido_length_seconds": 267.902503271,
+      "tempo_integral_matches_mido_length": true,
+      "effective_tempo_us_per_quarter": [
+        {
+          "tick": 0,
+          "tempo_us_per_quarter": 344639
+        },
+        {
+          "tick": 81120,
+          "tempo_us_per_quarter": 392468
+        },
+        {
+          "tick": 82080,
+          "tempo_us_per_quarter": 423088
+        },
+        {
+          "tick": 83520,
+          "tempo_us_per_quarter": 363636
+        },
+        {
+          "tick": 84480,
+          "tempo_us_per_quarter": 344683
+        },
+        {
+          "tick": 130080,
+          "tempo_us_per_quarter": 344757
+        },
+        {
+          "tick": 247200,
+          "tempo_us_per_quarter": 345036
+        },
+        {
+          "tick": 276000,
+          "tempo_us_per_quarter": 344324
+        },
+        {
+          "tick": 287520,
+          "tempo_us_per_quarter": 307818
+        },
+        {
+          "tick": 289920,
+          "tempo_us_per_quarter": 345606
+        },
+        {
+          "tick": 293760,
+          "tempo_us_per_quarter": 384485
+        },
+        {
+          "tick": 296160,
+          "tempo_us_per_quarter": 344770
+        }
+      ],
+      "declared_trim_seconds_from_muscriptor_marker": 0.2336,
+      "raw_positive_note_on_count": 4484,
+      "drum_positive_note_on_count": 1592,
+      "zero_velocity_note_on_count_excluded": 0,
+      "selected_source_positive_note_on_count": 1592,
+      "merged_note_on_count_conserved": 1592,
+      "selected_onset_source": "midi_drum_note_on",
+      "same_sound_merge_tolerance_seconds": 0.02,
+      "same_sound_merged_group_count": 1127,
+      "minimum_center_gap_seconds": 0.18,
+      "minimum_gap_thinned_count": 441,
+      "gap_tempo_fallback_insert_count": 0,
+      "candidate_window_count": 686,
+      "candidate_center_interval_seconds": {
+        "min": 0.180003,
+        "median": 0.340461,
+        "max": 0.71037
+      },
+      "event_derived_window_count": 686,
+      "tempo_fallback_window_count": 0,
+      "audio_end_nominal_seconds": 267.668903,
+      "representative_8_quarter_note_window": {
+        "start_tick": 34560,
+        "end_tick": 38400,
+        "start_sec": 24.580408,
+        "end_sec": 27.33752,
+        "candidate_count": 7,
+        "events": [
+          {
+            "event_id": "midi_test_09-auto-00068",
+            "center_sec": 24.738368,
+            "start_sec": 24.648368,
+            "end_sec": 24.828368,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 34780,
+            "candidate_pitches": [
+              44
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 1
+          },
+          {
+            "event_id": "midi_test_09-auto-00069",
+            "center_sec": 25.078699,
+            "start_sec": 24.988699,
+            "end_sec": 25.168699,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 35254,
+            "candidate_pitches": [
+              36
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 1
+          },
+          {
+            "event_id": "midi_test_09-auto-00070",
+            "center_sec": 25.598529,
+            "start_sec": 25.508529,
+            "end_sec": 25.688529,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 35978,
+            "candidate_pitches": [
+              38,
+              42
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 2
+          },
+          {
+            "event_id": "midi_test_09-auto-00071",
+            "center_sec": 25.948194,
+            "start_sec": 25.858194,
+            "end_sec": 26.038194,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 36465,
+            "candidate_pitches": [
+              42
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 1
+          },
+          {
+            "event_id": "midi_test_09-auto-00072",
+            "center_sec": 26.298577,
+            "start_sec": 26.208577,
+            "end_sec": 26.388577,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 36953,
+            "candidate_pitches": [
+              42
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 1
+          },
+          {
+            "event_id": "midi_test_09-auto-00073",
+            "center_sec": 26.63819,
+            "start_sec": 26.54819,
+            "end_sec": 26.72819,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 37426,
+            "candidate_pitches": [
+              36,
+              42
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 2
+          },
+          {
+            "event_id": "midi_test_09-auto-00074",
+            "center_sec": 26.988573,
+            "start_sec": 26.898573,
+            "end_sec": 27.078573,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 37914,
+            "candidate_pitches": [
+              38,
+              42
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 2
+          }
+        ]
+      }
+    },
+    {
+      "cue_id": "midi_test_10",
+      "title": "midi_test_10",
+      "source_d2_path": "design/music-20261104-chinese-12/arrangements/midi_test_10/D2.mid",
+      "source_d2_sha256": "65e1642d4a62a69d9fc900fd30add945de877dfc18b28bdc2a21e99e6d44cc74",
+      "ppq": 480,
+      "tempo_event_count": 5,
+      "effective_tempo_change_count": 0,
+      "tempo_integrated_end_seconds": 287.508764729,
+      "mido_length_seconds": 287.508764729,
+      "tempo_integral_matches_mido_length": true,
+      "effective_tempo_us_per_quarter": [
+        {
+          "tick": 0,
+          "tempo_us_per_quarter": 555530
+        }
+      ],
+      "declared_trim_seconds_from_muscriptor_marker": 0.5555,
+      "raw_positive_note_on_count": 3288,
+      "drum_positive_note_on_count": 1162,
+      "zero_velocity_note_on_count_excluded": 0,
+      "selected_source_positive_note_on_count": 1162,
+      "merged_note_on_count_conserved": 1162,
+      "selected_onset_source": "midi_drum_note_on",
+      "same_sound_merge_tolerance_seconds": 0.02,
+      "same_sound_merged_group_count": 826,
+      "minimum_center_gap_seconds": 0.18,
+      "minimum_gap_thinned_count": 3,
+      "gap_tempo_fallback_insert_count": 19,
+      "candidate_window_count": 842,
+      "candidate_center_interval_seconds": {
+        "min": 0.188649,
+        "median": 0.28008,
+        "max": 1.484885
+      },
+      "event_derived_window_count": 823,
+      "tempo_fallback_window_count": 19,
+      "audio_end_nominal_seconds": 286.953265,
+      "representative_8_quarter_note_window": {
+        "start_tick": 7680,
+        "end_tick": 11520,
+        "start_sec": 8.33298,
+        "end_sec": 12.77722,
+        "candidate_count": 13,
+        "events": [
+          {
+            "event_id": "midi_test_10-auto-00017",
+            "center_sec": 8.413995,
+            "start_sec": 8.323995,
+            "end_sec": 8.503995,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 7750,
+            "candidate_pitches": [
+              42
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 1
+          },
+          {
+            "event_id": "midi_test_10-auto-00018",
+            "center_sec": 8.963738,
+            "start_sec": 8.879714,
+            "end_sec": 9.047762,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 8225,
+            "candidate_pitches": [
+              36,
+              42
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 2
+          },
+          {
+            "event_id": "midi_test_10-auto-00019",
+            "center_sec": 9.243818,
+            "start_sec": 9.162919,
+            "end_sec": 9.324717,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 8467,
+            "candidate_pitches": [
+              36
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 1
+          },
+          {
+            "event_id": "midi_test_10-auto-00020",
+            "center_sec": 9.513481,
+            "start_sec": 9.432582,
+            "end_sec": 9.59438,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 8700,
+            "candidate_pitches": [
+              42
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 1
+          },
+          {
+            "event_id": "midi_test_10-auto-00021",
+            "center_sec": 9.793561,
+            "start_sec": 9.709537,
+            "end_sec": 9.877585,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 8942,
+            "candidate_pitches": [
+              36
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 1
+          },
+          {
+            "event_id": "midi_test_10-auto-00022",
+            "center_sec": 10.084057,
+            "start_sec": 9.996908,
+            "end_sec": 10.171206,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 9193,
+            "candidate_pitches": [
+              38,
+              42
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 2
+          },
+          {
+            "event_id": "midi_test_10-auto-00023",
+            "center_sec": 10.644216,
+            "start_sec": 10.560192,
+            "end_sec": 10.72824,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 9677,
+            "candidate_pitches": [
+              36,
+              42
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 2
+          },
+          {
+            "event_id": "midi_test_10-auto-00024",
+            "center_sec": 10.924296,
+            "start_sec": 10.843397,
+            "end_sec": 11.005195,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 9919,
+            "candidate_pitches": [
+              36
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 1
+          },
+          {
+            "event_id": "midi_test_10-auto-00025",
+            "center_sec": 11.19396,
+            "start_sec": 11.11306,
+            "end_sec": 11.274859,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 10152,
+            "candidate_pitches": [
+              42
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 1
+          },
+          {
+            "event_id": "midi_test_10-auto-00026",
+            "center_sec": 11.474039,
+            "start_sec": 11.390015,
+            "end_sec": 11.558063,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 10394,
+            "candidate_pitches": [
+              36
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 1
+          },
+          {
+            "event_id": "midi_test_10-auto-00027",
+            "center_sec": 11.754119,
+            "start_sec": 11.670095,
+            "end_sec": 11.838143,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 10636,
+            "candidate_pitches": [
+              42
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 1
+          },
+          {
+            "event_id": "midi_test_10-auto-00028",
+            "center_sec": 12.034199,
+            "start_sec": 11.9533,
+            "end_sec": 12.115098,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 10878,
+            "candidate_pitches": [
+              36
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 1
+          },
+          {
+            "event_id": "midi_test_10-auto-00029",
+            "center_sec": 12.303862,
+            "start_sec": 12.222963,
+            "end_sec": 12.384761,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 11111,
+            "candidate_pitches": [
+              38,
+              42
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 2
+          }
+        ]
+      }
+    },
+    {
+      "cue_id": "midi_test_11",
+      "title": "midi_test_11",
+      "source_d2_path": "design/music-20261104-chinese-12/arrangements/midi_test_11/D2.mid",
+      "source_d2_sha256": "d0a7cefa099c531567698287271d83c4c657656b93324e95767ce6e55b133119",
+      "ppq": 480,
+      "tempo_event_count": 4,
+      "effective_tempo_change_count": 0,
+      "tempo_integrated_end_seconds": 279.275932325,
+      "mido_length_seconds": 279.275932325,
+      "tempo_integral_matches_mido_length": true,
+      "effective_tempo_us_per_quarter": [
+        {
+          "tick": 0,
+          "tempo_us_per_quarter": 666649
+        }
+      ],
+      "declared_trim_seconds_from_muscriptor_marker": 0.6666,
+      "raw_positive_note_on_count": 3002,
+      "drum_positive_note_on_count": 1253,
+      "zero_velocity_note_on_count_excluded": 0,
+      "selected_source_positive_note_on_count": 1253,
+      "merged_note_on_count_conserved": 1253,
+      "selected_onset_source": "midi_drum_note_on",
+      "same_sound_merge_tolerance_seconds": 0.02,
+      "same_sound_merged_group_count": 828,
+      "minimum_center_gap_seconds": 0.18,
+      "minimum_gap_thinned_count": 86,
+      "gap_tempo_fallback_insert_count": 3,
+      "candidate_window_count": 745,
+      "candidate_center_interval_seconds": {
+        "min": 0.249993,
+        "median": 0.330547,
+        "max": 1.412463
+      },
+      "event_derived_window_count": 742,
+      "tempo_fallback_window_count": 3,
+      "audio_end_nominal_seconds": 278.609332,
+      "representative_8_quarter_note_window": {
+        "start_tick": 3840,
+        "end_tick": 7680,
+        "start_sec": 4.666592,
+        "end_sec": 9.999784,
+        "candidate_count": 16,
+        "events": [
+          {
+            "event_id": "midi_test_11-auto-00007",
+            "center_sec": 4.749923,
+            "start_sec": 4.659923,
+            "end_sec": 4.839923,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 3900,
+            "candidate_pitches": [
+              38,
+              42
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 2
+          },
+          {
+            "event_id": "midi_test_11-auto-00008",
+            "center_sec": 5.088803,
+            "start_sec": 4.998803,
+            "end_sec": 5.178803,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 4144,
+            "candidate_pitches": [
+              42
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 1
+          },
+          {
+            "event_id": "midi_test_11-auto-00009",
+            "center_sec": 5.41935,
+            "start_sec": 5.32935,
+            "end_sec": 5.50935,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 4382,
+            "candidate_pitches": [
+              36,
+              42
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 2
+          },
+          {
+            "event_id": "midi_test_11-auto-00010",
+            "center_sec": 5.749897,
+            "start_sec": 5.659897,
+            "end_sec": 5.839897,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 4620,
+            "candidate_pitches": [
+              42
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 1
+          },
+          {
+            "event_id": "midi_test_11-auto-00011",
+            "center_sec": 6.088777,
+            "start_sec": 5.998777,
+            "end_sec": 6.178777,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 4864,
+            "candidate_pitches": [
+              38,
+              42
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 2
+          },
+          {
+            "event_id": "midi_test_11-auto-00012",
+            "center_sec": 6.419323,
+            "start_sec": 6.329323,
+            "end_sec": 6.509323,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 5102,
+            "candidate_pitches": [
+              42
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 1
+          },
+          {
+            "event_id": "midi_test_11-auto-00013",
+            "center_sec": 6.759592,
+            "start_sec": 6.669592,
+            "end_sec": 6.849592,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 5347,
+            "candidate_pitches": [
+              36,
+              42
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 2
+          },
+          {
+            "event_id": "midi_test_11-auto-00014",
+            "center_sec": 7.08875,
+            "start_sec": 6.99875,
+            "end_sec": 7.17875,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 5584,
+            "candidate_pitches": [
+              36,
+              42
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 2
+          },
+          {
+            "event_id": "midi_test_11-auto-00015",
+            "center_sec": 7.419297,
+            "start_sec": 7.329297,
+            "end_sec": 7.509297,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 5822,
+            "candidate_pitches": [
+              38,
+              42
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 2
+          },
+          {
+            "event_id": "midi_test_11-auto-00016",
+            "center_sec": 7.759566,
+            "start_sec": 7.669566,
+            "end_sec": 7.849566,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 6067,
+            "candidate_pitches": [
+              42
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 1
+          },
+          {
+            "event_id": "midi_test_11-auto-00017",
+            "center_sec": 8.088724,
+            "start_sec": 7.998724,
+            "end_sec": 8.178724,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 6304,
+            "candidate_pitches": [
+              36,
+              42
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 2
+          },
+          {
+            "event_id": "midi_test_11-auto-00018",
+            "center_sec": 8.41927,
+            "start_sec": 8.32927,
+            "end_sec": 8.50927,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 6542,
+            "candidate_pitches": [
+              42
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 1
+          },
+          {
+            "event_id": "midi_test_11-auto-00019",
+            "center_sec": 8.749817,
+            "start_sec": 8.659817,
+            "end_sec": 8.839817,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 6780,
+            "candidate_pitches": [
+              38,
+              42
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 2
+          },
+          {
+            "event_id": "midi_test_11-auto-00020",
+            "center_sec": 9.078975,
+            "start_sec": 8.988975,
+            "end_sec": 9.168975,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 7017,
+            "candidate_pitches": [
+              42
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 1
+          },
+          {
+            "event_id": "midi_test_11-auto-00021",
+            "center_sec": 9.409522,
+            "start_sec": 9.319522,
+            "end_sec": 9.499522,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 7255,
+            "candidate_pitches": [
+              36,
+              42
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 2
+          },
+          {
+            "event_id": "midi_test_11-auto-00022",
+            "center_sec": 9.73868,
+            "start_sec": 9.64868,
+            "end_sec": 9.82868,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 7492,
+            "candidate_pitches": [
+              36,
+              42
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 2
+          }
+        ]
+      }
+    },
+    {
+      "cue_id": "midi_test_12",
+      "title": "midi_test_12",
+      "source_d2_path": "design/music-20261104-chinese-12/arrangements/midi_test_12/D2.mid",
+      "source_d2_sha256": "5ac731ade60d0753ec3a2aaba5eed7a392562b2d5bc98c829cf513870273746f",
+      "ppq": 480,
+      "tempo_event_count": 4,
+      "effective_tempo_change_count": 0,
+      "tempo_integrated_end_seconds": 195.049420125,
+      "mido_length_seconds": 195.049420125,
+      "tempo_integral_matches_mido_length": true,
+      "effective_tempo_us_per_quarter": [
+        {
+          "tick": 0,
+          "tempo_us_per_quarter": 394737
+        }
+      ],
+      "declared_trim_seconds_from_muscriptor_marker": 0.3947,
+      "raw_positive_note_on_count": 3865,
+      "drum_positive_note_on_count": 1087,
+      "zero_velocity_note_on_count_excluded": 0,
+      "selected_source_positive_note_on_count": 1087,
+      "merged_note_on_count_conserved": 1087,
+      "selected_onset_source": "midi_drum_note_on",
+      "same_sound_merge_tolerance_seconds": 0.02,
+      "same_sound_merged_group_count": 749,
+      "minimum_center_gap_seconds": 0.18,
+      "minimum_gap_thinned_count": 5,
+      "gap_tempo_fallback_insert_count": 0,
+      "candidate_window_count": 744,
+      "candidate_center_interval_seconds": {
+        "min": 0.180099,
+        "median": 0.199836,
+        "max": 0.569902
+      },
+      "event_derived_window_count": 744,
+      "tempo_fallback_window_count": 0,
+      "audio_end_nominal_seconds": 194.65472,
+      "representative_8_quarter_note_window": {
+        "start_tick": 7680,
+        "end_tick": 11520,
+        "start_sec": 5.921092,
+        "end_sec": 9.078988,
+        "candidate_count": 12,
+        "events": [
+          {
+            "event_id": "midi_test_12-auto-00016",
+            "center_sec": 6.004974,
+            "start_sec": 5.914974,
+            "end_sec": 6.094974,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 7782,
+            "candidate_pitches": [
+              46,
+              47
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 2
+          },
+          {
+            "event_id": "midi_test_12-auto-00017",
+            "center_sec": 6.404645,
+            "start_sec": 6.314645,
+            "end_sec": 6.494645,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 8268,
+            "candidate_pitches": [
+              36,
+              46
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 2
+          },
+          {
+            "event_id": "midi_test_12-auto-00018",
+            "center_sec": 6.794448,
+            "start_sec": 6.704448,
+            "end_sec": 6.884448,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 8742,
+            "candidate_pitches": [
+              36,
+              46
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 2
+          },
+          {
+            "event_id": "midi_test_12-auto-00019",
+            "center_sec": 7.185073,
+            "start_sec": 7.125122,
+            "end_sec": 7.245023,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 9217,
+            "candidate_pitches": [
+              38,
+              46
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 2
+          },
+          {
+            "event_id": "midi_test_12-auto-00020",
+            "center_sec": 7.384908,
+            "start_sec": 7.324958,
+            "end_sec": 7.444859,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 9460,
+            "candidate_pitches": [
+              38
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 1
+          },
+          {
+            "event_id": "midi_test_12-auto-00021",
+            "center_sec": 7.584744,
+            "start_sec": 7.527754,
+            "end_sec": 7.641734,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 9703,
+            "candidate_pitches": [
+              46
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 1
+          },
+          {
+            "event_id": "midi_test_12-auto-00022",
+            "center_sec": 7.774711,
+            "start_sec": 7.717721,
+            "end_sec": 7.831701,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 9934,
+            "candidate_pitches": [
+              36
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 1
+          },
+          {
+            "event_id": "midi_test_12-auto-00023",
+            "center_sec": 7.974547,
+            "start_sec": 7.914596,
+            "end_sec": 8.034497,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 10177,
+            "candidate_pitches": [
+              46
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 1
+          },
+          {
+            "event_id": "midi_test_12-auto-00024",
+            "center_sec": 8.174382,
+            "start_sec": 8.114432,
+            "end_sec": 8.234333,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 10420,
+            "candidate_pitches": [
+              38
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 1
+          },
+          {
+            "event_id": "midi_test_12-auto-00025",
+            "center_sec": 8.37504,
+            "start_sec": 8.31805,
+            "end_sec": 8.432031,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 10664,
+            "candidate_pitches": [
+              36,
+              46
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 2
+          },
+          {
+            "event_id": "midi_test_12-auto-00026",
+            "center_sec": 8.565008,
+            "start_sec": 8.508017,
+            "end_sec": 8.621998,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 10895,
+            "candidate_pitches": [
+              36
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 1
+          },
+          {
+            "event_id": "midi_test_12-auto-00027",
+            "center_sec": 8.764843,
+            "start_sec": 8.704892,
+            "end_sec": 8.824794,
+            "source": "midi_drum_note_on",
+            "confidence": "MIDI-event-derived; audio alignment unverified",
+            "midi_tick": 11138,
+            "candidate_pitches": [
+              38,
+              46
+            ],
+            "candidate_velocity_values": [
+              100
+            ],
+            "merged_note_on_count": 2
+          }
+        ]
+      }
+    }
+  ],
+  "limitations": [
+    "This is an offline algorithm demonstration, not Godot runtime code. It does not prove that player input, pause, latency compensation, or game-state transitions are implemented.",
+    "MIDI note-on metadata may not match audible attacks; the nominal trim transform does not measure remaining render, decoder, device, or human-perception delay.",
+    "180 ms spacing, 20 ms merging, fallback thresholds, and 90 ms maximum window half-width are experimental global parameters, not play-tested or balanced values.",
+    "Drum pitch and velocity have no asserted semantic role, loudness, or true accent meaning. The algorithm does not impose J/K alternation or any key assignment.",
+    "Tempo-quarter fallback creates candidate timing only; it does not claim a note-on or musical accent at that point."
+  ]
+}

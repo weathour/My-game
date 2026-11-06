@@ -1,0 +1,21 @@
+{
+  "kind": "preserved original failing native UI evidence",
+  "artifacts": [
+    {
+      "file": "before-false-eof-pulse.png",
+      "sha256": "c855337b4614f53d50070ca941d348d81a33ac76a8038847014bf9859565b50d",
+      "source_file": "feedback-live-pulse.png"
+    },
+    {
+      "file": "before-false-eof-small-window.png",
+      "sha256": "1f8ff75334263a5d3d62e35f6b2eb87af49af08f55633aca5a9c5f3cea2e4bab",
+      "source_file": "feedback-small-window.png"
+    },
+    {
+      "file": "before-false-eof.log",
+      "sha256": "cdf72dd13a0eb80c3ecda61f839f4ca670986fa17aca75b539141efdacaecaa3",
+      "source_file": "feedback-gui.log"
+    }
+  ],
+  "interpretation": "short playback followed by immediate full-duration UI is consistent with Idle treated as EOF; backend trace confirmation pending; screenshots alone do not prove callback cause"
+}

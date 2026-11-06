@@ -1,0 +1,63 @@
+{
+  "status": "PASS",
+  "method": "Independent old production parse_midi comparison; direct raw message difference audit; separate interval overlap semitone scan. No listening or rendering by MIDI owner.",
+  "results": [
+    {
+      "cue_id": "midi_test_01",
+      "checks": {
+        "source_hash_exact": true,
+        "independent_source_event_keys_match": true,
+        "independent_global_seconds_match_within_1ns": true,
+        "only_declared_paired_pitch_messages_changed": true,
+        "no_new_semitone_against_sustained_retained_accompaniment": true,
+        "erhu_single_keydown_line": true
+      },
+      "max_start_s_error_vs_old_parser": 5.684341886080802e-14,
+      "max_end_s_error_vs_old_parser": 5.684341886080802e-14,
+      "changed_note_count": 100,
+      "changed_message_count": 200,
+      "new_semitone_conflicts": [],
+      "source_sha256": "3bf77b5352dd8020628d9a7f2c5cb7a2ea53b015dc610b3ae14c9b18234e5cc8",
+      "D1_sha256": "3bf77b5352dd8020628d9a7f2c5cb7a2ea53b015dc610b3ae14c9b18234e5cc8",
+      "D2_sha256": "1700b898aad515812afaaf127e4676facc3e17147beb2b0c8884f045b4c400e4"
+    },
+    {
+      "cue_id": "midi_test_04",
+      "checks": {
+        "source_hash_exact": true,
+        "independent_source_event_keys_match": true,
+        "independent_global_seconds_match_within_1ns": true,
+        "only_declared_paired_pitch_messages_changed": true,
+        "no_new_semitone_against_sustained_retained_accompaniment": true,
+        "erhu_single_keydown_line": true
+      },
+      "max_start_s_error_vs_old_parser": 2.842170943040401e-14,
+      "max_end_s_error_vs_old_parser": 2.842170943040401e-14,
+      "changed_note_count": 19,
+      "changed_message_count": 38,
+      "new_semitone_conflicts": [],
+      "source_sha256": "6d36cfc0c0cd15d69a43ea892220c09e24966acf7e22952b6a275f5b725eb4fb",
+      "D1_sha256": "6d36cfc0c0cd15d69a43ea892220c09e24966acf7e22952b6a275f5b725eb4fb",
+      "D2_sha256": "848ee51d5e35e5718d678542a681d91e4dd1e12c51f06eac128c9a9cb4279420"
+    },
+    {
+      "cue_id": "midi_test_08",
+      "checks": {
+        "source_hash_exact": true,
+        "independent_source_event_keys_match": true,
+        "independent_global_seconds_match_within_1ns": true,
+        "only_declared_paired_pitch_messages_changed": true,
+        "no_new_semitone_against_sustained_retained_accompaniment": true,
+        "erhu_single_keydown_line": true
+      },
+      "max_start_s_error_vs_old_parser": 5.684341886080802e-14,
+      "max_end_s_error_vs_old_parser": 5.684341886080802e-14,
+      "changed_note_count": 83,
+      "changed_message_count": 166,
+      "new_semitone_conflicts": [],
+      "source_sha256": "419c590d01212e338488c8f6d34053bc4f4b5684ea293a642e918fe991cfa40b",
+      "D1_sha256": "419c590d01212e338488c8f6d34053bc4f4b5684ea293a642e918fe991cfa40b",
+      "D2_sha256": "18b84255653e18c65558c8c46cb361e1fb7d9caccc7c1ab473df413c3adc9bcc"
+    }
+  ]
+}

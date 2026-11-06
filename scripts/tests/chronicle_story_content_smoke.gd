@@ -30,7 +30,7 @@ func run() -> void:
 	for id in REQUIRED: expect(STORIES.has_event(id), "authored required node " + id)
 	expect(STORIES.events().size() == REQUIRED.size(), "only established route scenes")
 	expect(STORIES.optional_events().size() == 32, "32 complete independent character stories")
-	expect(STORIES.reactions().size() == 48, "48 conditional reactions")
+	expect(STORIES.reactions().size() == 49, "49 conditional reactions")
 	expect(not STORIES.lore().is_empty(), "read-only lore authored")
 	malformed_content()
 	reaction_validation_and_ordering()

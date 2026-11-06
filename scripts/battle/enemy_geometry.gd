@@ -1,6 +1,7 @@
 extends RefCounted
+const HURTBOX := preload("res://scripts/battle/player_hurtbox.gd")
 ## This descriptor is the single source for warning drawing and player collision.
-static func contains(g: Dictionary, point: Vector2, padding: float = 16.0) -> bool:
+static func contains(g: Dictionary, point: Vector2, padding: float = HURTBOX.RADIUS) -> bool:
 	var origin: Vector2 = g.get("origin", Vector2.ZERO)
 	var direction: Vector2 = g.get("direction", Vector2.RIGHT)
 	var offset := point - origin
@@ -20,11 +21,16 @@ static func contains(g: Dictionary, point: Vector2, padding: float = 16.0) -> bo
 			return absf(wrapf(offset.angle() - float(g.get("gap_angle", direction.angle())), -PI, PI)) >= maxf(0, half_gap - clearance)
 		_: return offset.length() <= radius + padding
 
+static func contains_actor(g: Dictionary, actor_position: Vector2, padding: float = HURTBOX.RADIUS) -> bool:
+	return contains(g, HURTBOX.center(actor_position), padding)
+
+# The actor argument is its ground anchor, while descriptors lock the danger core.
 static func descriptor(enemy: RefCounted, action: Dictionary, actor: Vector2) -> Dictionary:
-	var direction: Vector2 = (actor - enemy.position).normalized()
+	var target_point := HURTBOX.center(actor)
+	var direction: Vector2 = (target_point - enemy.position).normalized()
 	if direction == Vector2.ZERO: direction = Vector2.RIGHT
 	var shape := str(action.get("shape", "sector"))
-	var origin: Vector2 = actor if str(action.get("shape", "")) == "marker" or str(action.get("action", action.get("id", ""))) in ["pot", "marker"] else enemy.position
+	var origin: Vector2 = target_point if str(action.get("shape", "")) == "marker" or str(action.get("action", action.get("id", ""))) in ["pot", "marker"] else enemy.position
 	var length := float(action.get("length", 240))
 	# Clip along the locked ray. Clamping x/y independently changes its angle;
 	# reusing that endpoint's distance with the original direction can overshoot.
@@ -34,7 +40,7 @@ static func descriptor(enemy: RefCounted, action: Dictionary, actor: Vector2) ->
 		"half_width":float(action.get("half_width", enemy.radius)), "spread":float(action.get("spread", 1.7)),
 		"inner_radius":float(action.get("inner_radius", 0)), "gap_angle":direction.angle() + float(action.get("gap_angle", 0)),
 		"gap_width":float(action.get("gap_width", 1.2)), "remaining":float(action.get("windup", 0.9)), "total":float(action.get("windup", 0.9)),
-		"visual_id":enemy.visual_id, "damage":0.0 if str(action.get("action", "")) in ["heal", "command", "summon"] else enemy.damage * float(action.get("damage_scale", 1))}
+		"warning_policy":str(action.get("warning_policy","none" if str(action.get("action","")) in ["shot","fan"] else "area")), "projectile_only":str(action.get("action","")) in ["shot","fan"], "visual_id":enemy.visual_id, "damage":0.0 if str(action.get("action", "")) in ["heal", "command", "summon"] else enemy.damage * float(action.get("damage_scale", 1))}
 
 static func bounded_ray_length(origin: Vector2, direction: Vector2, requested: float, body_radius: float) -> float:
 	var space = preload("res://scripts/battle/battle_space.gd")

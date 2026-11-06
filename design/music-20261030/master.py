@@ -1,11 +1,10 @@
 #!/usr/bin/env python3
-"""Master verified dry renders, check actual Vorbis, then publish one complete roster."""
+"""Offline mastering for the legacy score package; game publication is retired."""
 import argparse
 import hashlib
 import json
 import math
 from pathlib import Path
-import shutil
 import subprocess
 import tempfile
 
@@ -135,13 +134,14 @@ def main():
     p.add_argument('--score',type=Path,default=HERE/'score.json')
     p.add_argument('--renders',type=Path,nargs='+',required=True)
     p.add_argument('--output',type=Path,required=True)
-    p.add_argument('--publish',action='store_true',help='Install only a complete 70-cue verified roster')
+    p.add_argument('--publish',action='store_true',help=argparse.SUPPRESS)
     p.add_argument('cues',nargs='*')
     a=p.parse_args()
+    if a.publish:
+        p.error('The legacy 70-cue publishing route is retired. Use design/music-20261103-midi-test for current game music; offline legacy reconstruction remains available without --publish.')
     all_cues=json.loads(a.score.read_text())
     if set(a.cues)-{c['id'] for c in all_cues}: p.error('Unknown cue')
     cues=[c for c in all_cues if not a.cues or c['id'] in a.cues]
-    if a.publish and len(cues)!=70: p.error('Partial roster cannot be published')
     output=a.output.resolve()
     output.mkdir(parents=True,exist_ok=True)
     config={'version':VERSION,'script_sha256':sha(__file__),'score_sha256':sha(a.score),
@@ -178,23 +178,4 @@ def main():
         qa[id]=encode(cue,pre[id],gains[id],output)
         dump(qapath,qa)
         print('VERIFIED',id,qa[id]['integrated_lufs'],qa[id]['true_peak_dbtp'],flush=True)
-    if a.publish:
-        catalog=json.loads((a.score.parent/'catalog.staged.json').read_text())
-        if {c['id'] for c in catalog['cues']}!=set(qa) or len(qa)!=70: raise ValueError('Incomplete catalog')
-        game=ROOT/'assets/music/chronicle'
-        game.mkdir(parents=True,exist_ok=True)
-        for id in qa:
-            final=game/f'{id}.ogg'
-            if final.exists() and sha(final)==qa[id]['ogg_sha256']: continue
-            staging=final.with_suffix('.ogg.tmp')
-            shutil.copy2(output/'music'/f'{id}.ogg',staging)
-            staging.replace(final)
-        path=ROOT/'assets/data/audio/music_catalog.json'
-        path.parent.mkdir(parents=True,exist_ok=True)
-        dump(path.with_suffix('.json.tmp'),catalog)
-        path.with_suffix('.json.tmp').replace(path)
-        dump(HERE/'audio-qa.json',qa)
-        dump(HERE/'production-lock.json',config|{'master_output':str(output),'catalog_sha256':sha(path),'listening_review':False})
-        print('PUBLISHED 70 VERIFIED CUES',flush=True)
-
 if __name__=='__main__': main()

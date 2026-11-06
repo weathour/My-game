@@ -1,4 +1,7 @@
 extends RefCounted
+const PATTERNS := preload("res://scripts/battle/projectile_patterns.gd")
+const SPATIAL := preload("res://scripts/battle/enemy_spatial_grid.gd")
+const HURTBOX := preload("res://scripts/battle/player_hurtbox.gd")
 const SPACE := preload("res://scripts/battle/battle_space.gd")
 const GEOMETRY := preload("res://scripts/battle/enemy_geometry.gd")
 
@@ -6,6 +9,13 @@ static func step(enemies: Array, actor: Vector2, delta: float, world: Dictionary
 	var result := {"hits":[], "projectiles":[], "effects":[], "spawns":[], "events":[], "hit_sources":[], "configuration_errors":[]}
 	var hazards: Array = world.get("hazards", [])
 	var config: Dictionary = world.get("config", {})
+	var pending: Array=world.get("patterns",[])
+	var grid: RefCounted=world.get("spatial")
+	if grid==null: grid=SPATIAL.new();grid.rebuild(enemies)
+	var hostile_count:=0
+	for projectile in world.get("projectiles",[]):
+		if bool(projectile.get("hostile",false)): hostile_count+=1
+	result.projectile_room=maxi(0,int(config.get("projectile_cap",1200))-hostile_count)
 	var used := {"major":0, "melee":0}
 	for enemy in enemies:
 		if enemy.phase_change_pending:
@@ -16,10 +26,15 @@ static func step(enemies: Array, actor: Vector2, delta: float, world: Dictionary
 			for child in enemies:
 				if child.parent_id == enemy.id and not child.targetable:
 					child.dead = true; child.death_reason = "source_cancel"
+	var major_groups: Dictionary={}
 	for hazard in hazards:
-		if hazard.phase == "tell": used.major += 1
+		if hazard.phase=="tell": major_groups[str(hazard.owner_id)+":"+str(hazard.get("action_serial",0))]=true
 	for enemy in enemies:
-		if not enemy.dead and (enemy.windup > 0 or enemy.active_remaining > 0): used[_budget(enemy.current_action)] += 1
+		if not enemy.dead and (enemy.windup>0 or enemy.active_remaining>0):
+			if _budget(enemy.current_action)=="major": major_groups[str(enemy.id)+":"+str(enemy.action_serial)]=true
+			else: used.melee+=1
+	used.major=major_groups.size()
+	PATTERNS.advance(pending,enemies,HURTBOX.center(actor),delta,result)
 	_update_hazards(hazards, enemies, actor, delta, result)
 	for enemy in enemies:
 		if enemy.dead: continue
@@ -55,13 +70,13 @@ static func step(enemies: Array, actor: Vector2, delta: float, world: Dictionary
 				if not escort.dead and escort.parent_id == enemy.id and escort.definition_id == "D01" and escort.position.distance_to(enemy.position) <= 220:
 					enemy.protection_remaining = 5; enemy.rule_cooldown = 8; break
 		if enemy.active_remaining > 0:
-			_advance_charge(enemy, actor, delta, enemies, result)
+			_advance_charge(enemy, actor, delta, enemies, result,world.get("actor_previous",actor))
 			continue
 		# A committed warning never follows the controlled actor.
 		if enemy.windup > 0:
 			enemy.windup = maxf(0, enemy.windup - delta)
 			if not enemy.telegraph.is_empty(): enemy.telegraph.remaining = enemy.windup
-			if enemy.windup <= 0: _release(enemy, actor, enemies, hazards, result, config)
+			if enemy.windup <= 0: _release(enemy, actor, enemies, hazards, result, config,pending)
 			continue
 		enemy.cooldown = maxf(0, enemy.cooldown - delta)
 		if enemy.cooldown > 0:
@@ -71,7 +86,7 @@ static func step(enemies: Array, actor: Vector2, delta: float, world: Dictionary
 		if enemy.definition_id in ["B10", "B10_R"]:
 			var owner: RefCounted = enemy.damage_owner()
 			if int(owner.params.get("turn_body", owner.id)) != enemy.id:
-				_move(enemy, actor, enemies, delta, 100)
+				_move(enemy, actor, enemies, delta, 100,grid)
 				continue
 		var action := _next_action(enemy)
 		if action.is_empty():
@@ -86,7 +101,7 @@ static func step(enemies: Array, actor: Vector2, delta: float, world: Dictionary
 			action = enemy.actions[0].duplicate(true)
 		var range_value := float(action.get("range", 70))
 		if str(action.get("action", "")) == "command" and _followers(enemy, enemies).is_empty():
-			action = {"action":"swipe", "id":"command_fallback_swipe", "shape":"sector", "range":enemy.radius + 38, "radius":enemy.radius + 38, "spread":1.8, "windup":0.6, "recovery":1.6, "damage_scale":1.0, "major":false}
+			action.merge({"action":"swipe", "id":"command_fallback_swipe", "shape":"sector", "range":enemy.radius + 38, "radius":enemy.radius + 38, "spread":1.8, "windup":0.6, "recovery":1.6, "damage_scale":1.0, "major":false},true)
 			range_value = float(action.range)
 		var category := _budget(action)
 		var budget: Dictionary = config.get("action_budget", {"major":1, "melee":2})
@@ -95,11 +110,19 @@ static func step(enemies: Array, actor: Vector2, delta: float, world: Dictionary
 				var anchors := 0
 				for child in enemies:
 					if child.parent_id == enemy.id and child.definition_id == "D03" and not child.dead: anchors += 1
-				action.gap_width = 1.4 + (2 - anchors) * 0.5
+				action.gap_width = float(action.get("gap_width",1.4)) + (2-anchors)*0.5
 			var geometry := GEOMETRY.descriptor(enemy, action, actor)
-			if category != "major" or str(action.get("action", "")) in ["command", "heal", "summon"] or _has_exit(geometry, enemies, hazards, actor, float(world.get("actor_speed", 215))):
+			geometry.sound_definition_id = enemy.definition_id
+			geometry.sound_form_index = enemy.form_index
+			geometry.sound_major = bool(action.get("major",false))
+			geometry=_marker_series(geometry,action)
+			if category != "major" or str(action.get("action", "")) in ["command", "heal", "summon"] or _has_exit(geometry, enemies, hazards, actor, float(world.get("actor_speed", 215)),world.get("projectiles",[])):
 				enemy.action_serial += 1
 				geometry.action_serial = enemy.action_serial
+				for extra: Dictionary in geometry.get("extra_markers",[]):
+					extra.action_serial=enemy.action_serial
+					extra.owner_id=enemy.id
+					hazards.append(extra)
 				if str(action.get("action", "")) in ["heal", "command"]:
 					geometry.beneficiaries = []
 					var recipients: Array = _heal_targets(enemy, enemies, float(enemy.params.get("heal_radius", 230))) if str(action.get("action", "")) == "heal" else _followers(enemy, enemies)
@@ -117,9 +140,9 @@ static func step(enemies: Array, actor: Vector2, delta: float, world: Dictionary
 				enemy.state = "tell"
 				enemy.attack_index += 1
 				used[category] += 1
-				result.events.append({"kind":"enemy_tell", "id":enemy.id, "action_serial":enemy.action_serial})
+				result.events.append(sound_event("enemy_tell",enemy,geometry))
 				continue
-		_move(enemy, actor, enemies, delta, range_value)
+		_move(enemy, actor, enemies, delta, range_value,grid,float(action.get("approach_speed",enemy.speed)))
 	return result
 
 static func _budget(action: Dictionary) -> String:
@@ -130,19 +153,22 @@ static func _next_action(enemy: RefCounted) -> Dictionary:
 		return enemy.actions[enemy.attack_index % enemy.actions.size()].duplicate(true)
 	return {}
 
-static func _move(enemy: RefCounted, actor: Vector2, enemies: Array, delta: float, reach: float) -> void:
+static func _move(enemy: RefCounted, actor: Vector2, enemies: Array, delta: float, reach: float, grid: RefCounted = null, approach_speed: float = -1.0) -> void:
 	if enemy.behavior_id == "E08": return # A shrine stays anchored; kiting breaks its coverage.
 	var gap: Vector2 = actor - enemy.position
 	if enemy.behavior_id in ["E02", "E05", "E06", "G"] and gap.length() < minf(220, reach * 0.75): return
 	var movement := gap.normalized()
-	for other in enemies:
+	var neighbors: Array=grid.nearby(enemy) if grid!=null else enemies
+	for other in neighbors:
 		if other == enemy or other.dead or not other.targetable: continue
 		var offset: Vector2 = enemy.position - other.position
 		if offset.length_squared() > 0.01 and offset.length_squared() < pow(enemy.radius + other.radius, 2): movement += offset.normalized() * 0.55
 	var boost := 1.15 if enemy.command_remaining > 0 else 1.0
-	enemy.position = SPACE.clamp_point(enemy.position + movement.limit_length(1) * enemy.speed * boost * (1 - enemy.slow) * delta, Vector2.ONE * enemy.radius)
+	var speed: float = enemy.speed if approach_speed < 0 else approach_speed
+	enemy.position = SPACE.clamp_point(enemy.position + movement.limit_length(1) * speed * boost * (1 - enemy.slow) * delta, Vector2.ONE * enemy.radius)
+	if grid!=null: grid.moved(enemy)
 
-static func _has_exit(proposed: Dictionary, enemies: Array, hazards: Array, actor: Vector2, actor_speed: float = 215.0) -> bool:
+static func _has_exit(proposed: Dictionary, enemies: Array, hazards: Array, actor: Vector2, actor_speed: float = 215.0, projectiles: Array = []) -> bool:
 	# Reachability is bounded by the actual tell duration and movement speed.
 	# A player may leave the proposed warning during its tell; active hazards
 	# must also be avoided along the route, rather than only at its endpoint.
@@ -151,17 +177,27 @@ static func _has_exit(proposed: Dictionary, enemies: Array, hazards: Array, acto
 		for i in 32:
 			var point: Vector2 = actor + Vector2.RIGHT.rotated(i * TAU / 32) * travel * float(ring)
 			if SPACE.clamp_point(point, SPACE.PLAYER_MARGIN).distance_to(point) > 1: continue
-			if GEOMETRY.contains(proposed, point): continue
+			if not bool(proposed.get("projectile_only",false)) and GEOMETRY.contains_actor(proposed,point): continue
+			var extra_blocked:=false
+			for extra: Dictionary in proposed.get("extra_markers",[]):
+				if GEOMETRY.contains_actor(extra,point): extra_blocked=true;break
+			if extra_blocked: continue
 			var safe := true
 			for other in enemies:
-				if other.dead or other.telegraph.is_empty() or other.state not in ["tell", "active"]: continue
-				if GEOMETRY.contains(other.telegraph, point): safe = false; break
+				if other.dead or other.telegraph.is_empty() or other.state not in ["tell", "active"] or bool(other.telegraph.get("projectile_only",false)): continue
+				if GEOMETRY.contains_actor(other.telegraph, point): safe = false; break
 			if safe:
 				for hazard in hazards:
 					if str(hazard.get("kind", "")) == "slow_strip": continue
 					for sample in range(1, 9):
-						if GEOMETRY.contains(hazard, actor.lerp(point, sample / 8.0)): safe = false; break
+						if GEOMETRY.contains_actor(hazard, actor.lerp(point, sample / 8.0)): safe = false; break
 					if not safe: break
+			if safe:
+				var duration:=maxf(.001,float(proposed.get("remaining",.9)))
+				for bullet: Dictionary in projectiles:
+					if not bool(bullet.get("hostile",false)): continue
+					var time:=minf(duration,float(bullet.get("life",0)))
+					if HURTBOX.contains_swept(bullet.position,Vector2(bullet.position)+Vector2(bullet.velocity)*time,float(bullet.get("hit_radius",5)),actor,actor.lerp(point,time/duration)): safe=false;break
 			if safe: return true
 	return false
 
@@ -173,7 +209,7 @@ static func _initialize(enemy: RefCounted, enemies: Array, result: Dictionary, c
 	if enemy.elite_rule_id == "L03" and _derivative_room(enemies, result, config) > 0: result.spawns.append({"definition_id":"D01", "position":enemy.position + Vector2(75, 0), "parent_id":enemy.id})
 	if enemy.definition_id == "B10": result.spawns.append({"definition_id":"B10_R", "position":enemy.position + Vector2(0, 150), "parent_id":enemy.id, "hp_owner_id":enemy.id})
 
-static func _release(enemy: RefCounted, actor: Vector2, enemies: Array, hazards: Array, result: Dictionary, config: Dictionary) -> void:
+static func _release(enemy: RefCounted, actor: Vector2, enemies: Array, hazards: Array, result: Dictionary, config: Dictionary, pending: Array = []) -> void:
 	var action: Dictionary = enemy.current_action
 	if action.is_empty() or enemy.telegraph.is_empty():
 		result.configuration_errors.append("Enemy %s released without an authored action and warning" % enemy.definition_id)
@@ -186,17 +222,13 @@ static func _release(enemy: RefCounted, actor: Vector2, enemies: Array, hazards:
 	var kind := str(action.get("action", action.get("id", "swipe")))
 	match kind:
 		"shot", "fan":
-			var count := int(action.get("count", 5 if kind == "fan" else 1))
-			var spread := float(action.get("spread", 1.15))
-			if enemy.elite_rule_id == "L02":
-				var anchors := 0
+			var pattern:=PATTERNS.primary(action)
+			if enemy.elite_rule_id=="L02":
+				var anchors:=0
 				for child in enemies:
-					if child.parent_id == enemy.id and child.definition_id == "D03" and not child.dead: anchors += 1
-				count = 1 + anchors * 2
-			for i in count:
-				var angle := (float(i) / maxf(1, count - 1) - 0.5) * spread if count > 1 else 0.0
-				var direction: Vector2 = enemy.aim.rotated(angle)
-				result.projectiles.append({"position":geometry.origin, "velocity":direction * float(action.get("speed", 225)), "life":minf(float(action.get("range", 400)) / float(action.get("speed", 225)), minf(3, float(action.get("life", 2.5)))), "hostile":true, "move_id":str(action.get("id", kind)), "damage":geometry.damage, "source":enemy.id, "source_id":enemy.id, "visual_id":enemy.visual_id, "hit_radius":5.0})
+					if child.parent_id==enemy.id and child.definition_id=="D03" and not child.dead: anchors+=1
+				pattern.count=maxi(1,roundi(float(pattern.get("count",5))*(1+anchors*2)/5.0))
+			PATTERNS.launch(pattern,_pattern_context(enemy,action,geometry,pattern),pending,HURTBOX.center(actor),result)
 		"heal": _heal(enemy, enemies, float(enemy.params.get("heal_radius", 230)), geometry.get("beneficiaries", []))
 		"command":
 			var count := 0
@@ -214,7 +246,7 @@ static func _release(enemy: RefCounted, actor: Vector2, enemies: Array, hazards:
 			for child in enemies:
 				if not child.dead and child.parent_id == enemy.id and child.definition_id == "D03": anchors += 1
 			geometry.shape = "ring_gap" # The opening was frozen at warning admission.
-			if GEOMETRY.contains(geometry, actor): _record_hit(result, geometry)
+			if GEOMETRY.contains_actor(geometry, actor): _record_hit(result, geometry)
 		"pot":
 			for i in range(hazards.size() - 1, -1, -1):
 				if hazards[i].owner_id == enemy.id and str(hazards[i].get("kind", "")) == "pot": hazards.remove_at(i)
@@ -225,10 +257,10 @@ static func _release(enemy: RefCounted, actor: Vector2, enemies: Array, hazards:
 			enemy.params.collaboration_index = int(enemy.params.get("collaboration_index", 0)) + 1
 			result.events.append({"kind":"collaboration", "id":enemy.id, "visual_id":visual, "origin":geometry.origin, "duration":1.6})
 			if visual == "M03_WAR":
-				if GEOMETRY.contains(geometry, actor): _record_hit(result, geometry)
+				if GEOMETRY.contains_actor(geometry, actor): _record_hit(result, geometry)
 			else:
 				var array_tell: Dictionary = geometry.duplicate(true)
-				array_tell.phase = "tell"; array_tell.kind = "collaboration_array"; array_tell.remaining = 0.9; array_tell.total = 0.9
+				array_tell.phase = "tell"; array_tell.warning_policy="area";array_tell.projectile_only=false;array_tell.kind = "collaboration_array"; array_tell.remaining = 0.9; array_tell.total = 0.9
 				hazards.append(array_tell)
 
 		_:
@@ -237,10 +269,12 @@ static func _release(enemy: RefCounted, actor: Vector2, enemies: Array, hazards:
 				enemy.active_remaining = enemy.active_total; enemy.active_hit = false
 				geometry.remaining = enemy.active_total; geometry.total = enemy.active_total
 				enemy.telegraph = geometry; enemy.state = "active"
-			elif GEOMETRY.contains(geometry, actor): _record_hit(result, geometry)
+			elif GEOMETRY.contains_actor(geometry, actor): _record_hit(result, geometry)
 			if kind == "hook":
 				geometry.kind = "slow_strip"; geometry.remaining = minf(2, float(action.get("duration", 1.5))); geometry.total = geometry.remaining; geometry.until = 0.0; geometry.interval = 0.3; geometry.slow = float(action.get("slow", 0.25)); geometry.phase = "active"
 				hazards.append(geometry)
+	var secondary:=PATTERNS.secondary(action)
+	if not secondary.is_empty(): PATTERNS.launch(secondary,_pattern_context(enemy,action,geometry,secondary),pending,HURTBOX.center(actor),result)
 	# Every delayed hit has a fresh warning; echo cannot recursively reproduce itself.
 	if enemy.elite_rule_id in ["L05", "L06"]:
 		var copies := 0
@@ -248,13 +282,13 @@ static func _release(enemy: RefCounted, actor: Vector2, enemies: Array, hazards:
 			if hazard.owner_id == enemy.id and hazard.phase == "tell": copies += 1
 		if copies < (2 if enemy.elite_rule_id == "L06" else 1):
 			var echo: Dictionary = geometry.duplicate(true)
-			if enemy.elite_rule_id == "L06": echo.shape = "marker"; echo.origin = actor; echo.radius = 55.0
-			echo.phase = "tell"; echo.kind = "echo"; echo.remaining = maxf(0.8, float(enemy.params.get("echo_delay", enemy.params.get("marker_delay", 0.9)))); echo.total = echo.remaining; echo.one_shot = true
+			if enemy.elite_rule_id == "L06": echo.shape = "marker"; echo.origin = HURTBOX.center(actor); echo.radius = 55.0
+			echo.phase = "tell";echo.warning_policy="area";echo.projectile_only=false;echo.kind = "echo"; echo.remaining = maxf(0.8, float(enemy.params.get("echo_delay", enemy.params.get("marker_delay", 0.9)))); echo.total = echo.remaining; echo.one_shot = true
 			hazards.append(echo)
 	if enemy.rank == "boss" and kind not in ["heal", "command", "summon"]:
 		result.events.append({"kind":"boss_impact", "id":enemy.id, "enemy_id":enemy.id, "position":geometry.origin, "phase":enemy.form_index, "form_index":enemy.form_index, "action_id":str(action.get("id", kind)), "action_serial":enemy.action_serial, "geometry":geometry.duplicate(true)})
 	if kind != "charge": _shared_recovery(enemy, enemies)
-	result.events.append({"kind":"enemy_release", "id":enemy.id, "action_serial":enemy.action_serial, "geometry":geometry.duplicate(true)})
+	result.events.append(sound_event("enemy_release",enemy,geometry))
 	result.effects.append({"kind":"enemy_buff" if kind in ["heal", "command", "summon"] else "line" if geometry.shape == "line" else "ring", "origin":geometry.origin, "end":geometry.origin + geometry.direction * float(geometry.length), "radius":geometry.radius, "life":0.3, "hostile":kind not in ["heal", "command", "summon"], "visual_id":enemy.visual_id})
 
 static func _heal_targets(enemy: RefCounted, enemies: Array, reach: float) -> Array:
@@ -285,24 +319,26 @@ static func _summon(enemy: RefCounted, action: Dictionary, enemies: Array, resul
 		enemy.spawned_total += 1
 
 static func _update_hazards(hazards: Array, enemies: Array, actor: Vector2, delta: float, result: Dictionary) -> void:
+	var active_owners: Dictionary={}
+	for source in enemies:
+		if not source.dead: active_owners[source.id]=true
 	for i in range(hazards.size() - 1, -1, -1):
 		var hazard: Dictionary = hazards[i]
-		var alive := false
-		for source in enemies:
-			if source.id == int(hazard.owner_id) and not source.dead: alive = true; break
-		if not alive: hazards.remove_at(i); continue
+		if not active_owners.has(int(hazard.owner_id)): hazards.remove_at(i);continue
 		hazard.remaining -= delta
 		if hazard.phase == "tell":
 			if hazard.remaining <= 0:
-				if GEOMETRY.contains(hazard, actor): _record_hit(result, hazard)
+				if str(hazard.get("kind",""))!="pot_marker" and GEOMETRY.contains_actor(hazard,actor): _record_hit(result,hazard)
 				var released_geometry: Dictionary = hazard.duplicate(true)
 				released_geometry.phase = "active"
-				result.events.append({"kind":"enemy_hazard_release", "id":int(hazard.owner_id), "action_serial":int(hazard.get("action_serial", 0)), "geometry":released_geometry})
-				hazards.remove_at(i)
+				result.events.append({"kind":"enemy_hazard_release", "id":int(hazard.owner_id), "enemy_id":int(hazard.owner_id), "definition_id":str(hazard.get("sound_definition_id","")), "form_index":int(hazard.get("sound_form_index",0)), "move_id":str(hazard.get("move_id","")), "position":hazard.origin, "major":bool(hazard.get("sound_major",false)), "action_serial":int(hazard.get("action_serial", 0)), "geometry":released_geometry})
+				if str(hazard.get("kind",""))=="pot_marker":
+					hazard.phase="active";hazard.kind="pot";hazard.remaining=float(hazard.get("pot_duration",3.0));hazard.total=hazard.remaining;hazard.until=.5;hazard.interval=.7
+				else: hazards.remove_at(i)
 		else:
 			hazard.until -= delta
 			if hazard.until <= 0 and hazard.remaining > 0:
-				if GEOMETRY.contains(hazard, actor):
+				if GEOMETRY.contains_actor(hazard, actor):
 					if str(hazard.get("kind", "")) == "slow_strip": result.events.append({"kind":"enemy_slow", "duration":0.4, "slow":float(hazard.get("slow", 0.25))})
 					else: _record_hit(result, hazard)
 				hazard.until += hazard.interval
@@ -336,7 +372,7 @@ static func _shared_recovery(enemy: RefCounted, enemies: Array) -> void:
 			body.cooldown = enemy.cooldown
 			body.state = "recovery"
 
-static func _advance_charge(enemy: RefCounted, actor: Vector2, delta: float, enemies: Array, result: Dictionary) -> void:
+static func _advance_charge(enemy: RefCounted, actor: Vector2, delta: float, enemies: Array, result: Dictionary, actor_previous: Vector2 = Vector2.INF) -> void:
 	var start: Vector2 = enemy.position
 	enemy.active_remaining = maxf(0, enemy.active_remaining - delta)
 	var progress: float = 1 - enemy.active_remaining / maxf(0.001, enemy.active_total)
@@ -344,7 +380,8 @@ static func _advance_charge(enemy: RefCounted, actor: Vector2, delta: float, ene
 	enemy.position = g.origin + g.direction * float(g.length) * progress
 	g.remaining = enemy.active_remaining
 	var swept := {"shape":"line", "origin":start, "direction":g.direction, "length":start.distance_to(enemy.position), "half_width":g.half_width}
-	if not enemy.active_hit and GEOMETRY.contains(swept, actor):
+	if actor_previous==Vector2.INF: actor_previous=actor
+	if not enemy.active_hit and HURTBOX.contains_swept(start,enemy.position,float(g.half_width),actor_previous,actor):
 		_record_hit(result, g); enemy.active_hit = true
 	if enemy.active_remaining <= 0:
 		enemy.telegraph = {}; enemy.state = "recovery"
@@ -352,8 +389,36 @@ static func _advance_charge(enemy: RefCounted, actor: Vector2, delta: float, ene
 
 static func phase_event(enemy: RefCounted) -> Dictionary:
 	return {"kind":"boss_phase", "id":enemy.id, "enemy_id":enemy.id, "position":enemy.position, "phase":enemy.form_index,
-		"form_index":enemy.form_index, "form_count":enemy.form_count, "form_name":enemy.form_name, "transition_remaining":enemy.transition_remaining}
+		"form_index":enemy.form_index, "definition_id":enemy.definition_id, "form_count":enemy.form_count, "form_name":enemy.form_name, "transition_remaining":enemy.transition_remaining}
 
 static func _record_hit(result: Dictionary, geometry: Dictionary) -> void:
 	result.hits.append(float(geometry.damage))
-	result.hit_sources.append({"enemy_id":int(geometry.get("owner_id", 0)), "attack":str(geometry.get("move_id", geometry.get("action_id", ""))), "position":geometry.get("origin", Vector2.ZERO)})
+	result.hit_sources.append({"enemy_id":int(geometry.get("owner_id", 0)), "attack":str(geometry.get("move_id", geometry.get("action_id", ""))), "move_id":str(geometry.get("move_id", "")), "definition_id":str(geometry.get("sound_definition_id","")), "form_index":int(geometry.get("sound_form_index",0)), "action_serial":int(geometry.get("action_serial",0)), "position":geometry.get("origin", Vector2.ZERO)})
+
+static func sound_event(kind: String, enemy: RefCounted, geometry: Dictionary) -> Dictionary:
+	return {"kind":kind,"id":enemy.id,"enemy_id":enemy.id,"definition_id":enemy.definition_id,"form_index":enemy.form_index,"rank":enemy.rank,"position":geometry.get("origin",enemy.position),"move_id":str(geometry.get("move_id",enemy.current_action.get("id",""))),"action_serial":enemy.action_serial,"major":bool(enemy.current_action.get("major",false)),"geometry":geometry.duplicate(true)}
+
+static func _pattern_context(enemy: RefCounted, action: Dictionary, geometry: Dictionary, pattern: Dictionary) -> Dictionary:
+	return {"origin":geometry.origin,"direction":geometry.direction,"source_id":enemy.id,"definition_id":enemy.definition_id,"form_index":enemy.form_index,
+		"move_id":str(action.get("id",action.get("action",""))),"action_serial":enemy.action_serial,"visual_id":enemy.visual_id,
+		"damage":enemy.damage*float(pattern.get("damage_scale",action.get("damage_scale",1.0)))}
+
+static func _marker_series(geometry: Dictionary, action: Dictionary) -> Dictionary:
+	var count:=clampi(int(action.get("marker_count",1)),1,5)
+	if count<=1 or str(geometry.get("shape",""))!="marker" and str(action.get("action",""))!="pot": return geometry
+	var source:=geometry.duplicate(true)
+	var points: Array=[]
+	for index in count:
+		var marker:=source.duplicate(true)
+		marker.origin=SPACE.clamp_point(Vector2(source.origin)+Vector2(source.direction).orthogonal()*(index-(count-1)*.5)*float(action.get("marker_spacing",180)),Vector2(35,35))
+		marker.marker_index=index;marker.warning_policy="area";marker.projectile_only=false
+		marker.remaining=float(source.remaining)+index*maxf(.12,float(action.get("marker_delay",.22)))
+		marker.total=marker.remaining
+		marker.one_shot=true;marker.kind="pot_marker" if str(action.get("action",""))=="pot" else "marker_series"
+		if marker.kind=="pot_marker": marker.pot_duration=float(action.get("duration",3))
+		if str(action.get("action",""))=="collaboration" and index>0: marker.remaining+=.9;marker.total=marker.remaining
+		points.append(marker)
+	var result: Dictionary=points[0]
+	result.extra_markers=[]
+	for index in range(1,points.size()): result.extra_markers.append(points[index])
+	return result

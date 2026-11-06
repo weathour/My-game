@@ -1,0 +1,37 @@
+{
+  "status": "passed_expected_cleanup_delta",
+  "candidate": "/tmp/my-game-repository-candidate-iew_fls6",
+  "archive_tree": "a468d3066c7fd3116c556a43cd59b69f84105924",
+  "at": 1793974381.5818918,
+  "candidate_file_count": 9428,
+  "bytes": 1878702245,
+  "retained_global_inputs": 1906,
+  "previous_global_inputs": 1907,
+  "only_approved_global_removal": [
+    "addons/godot_mcp/tools/script_tools_native_backup.gd"
+  ],
+  "entries": 66,
+  "all_retained_runtime_assets_and_test_bytes_match_previous_freeze": true,
+  "camera_sha256": "f61f7883f5e60699643411a869371e4e805bfa7db8ad36b6ead72de10f707b0b",
+  "absent_local_only_paths": {
+    ".git": true,
+    ".godot": true,
+    "builds": true,
+    "home": true,
+    "tools/rhythm_tester/.venv": true,
+    "tools/rhythm_tester/results": true
+  },
+  "files_over100MiB": [],
+  "credential_or_userdata_filename_flags": [],
+  "excluded_movie_frames_present": [],
+  "credential_scope": "metadata/name scan only; no session/settings contents printed; root prior same-index-tree review reused",
+  "harness": {
+    "scripts/check_project.sh": "f45f877309bbc05f8b9cd5cc5b2c174383fbff86924c082f05cc298f3d204fd2",
+    "scripts/tests/check_smoke_log.py": "b85ee7b7dfa4f2d8a64dcf5b78ab29109b984f0205736166e30f51cc3bb2a683",
+    "scripts/tests/check_project_reuse.py": "a26f9f09408255ae3f7e70ca0266df3ec7bdf694d2d7399758c656df5bdce098"
+  },
+  "inspection_generated_python_cache_removed": [
+    "scripts/tests/__pycache__/check_project_reuse.cpython-312.pyc",
+    "scripts/tests/__pycache__/check_smoke_log.cpython-312.pyc"
+  ]
+}

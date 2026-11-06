@@ -1,0 +1,268 @@
+{
+  "schema_version": 1,
+  "cue_id": "midi_test_04",
+  "title": "Disposable Teens",
+  "status": "PASS",
+  "source_midi": "/home/weathour/programs/desktop-projects/My-game/design/music-20261103-midi-test/inputs/midi_test_04.mid",
+  "source_sha256": "6d36cfc0c0cd15d69a43ea892220c09e24966acf7e22952b6a275f5b725eb4fb",
+  "D1_midi": "/home/weathour/programs/desktop-projects/My-game/design/music-20261104-chinese-12/arrangements/midi_test_04/D1.mid",
+  "D2_midi": "/home/weathour/programs/desktop-projects/My-game/design/music-20261104-chinese-12/arrangements/midi_test_04/D2.mid",
+  "checks": {
+    "frozen_source_sha_unchanged": true,
+    "source_sha_matches_existing_report": true,
+    "source_note_count_matches_existing_report": true,
+    "D1_byte_identical_to_source": true,
+    "D1_all_messages_exact": true,
+    "D1_note_pairs_exact": true,
+    "D2_all_nonpitch_message_fields_exact": true,
+    "D2_note_pairs_match_plan": true,
+    "all_note_counts_exact": true,
+    "tempo_and_meter_exact": true,
+    "duration_exact": true,
+    "drum_event_pairs_exact": true,
+    "D2_has_bounded_pitch_changes": true,
+    "D1_D2_same_timbre_assignments": true,
+    "erhu_has_no_overlapping_keydowns": true
+  },
+  "mapping_preventions": {
+    "new_semitone_against_retained_accompaniment_prevented": 8
+  },
+  "statistics": {
+    "event_count": 4337,
+    "changed_note_count": 19,
+    "changed_note_fraction_all_events": 0.004380908462070556,
+    "changed_note_fraction_pitched_events": 0.0066760365425158116,
+    "mapping_delta_counts": {
+      "0": 4318,
+      "1": 19
+    },
+    "mapping_reason_counts": {
+      "protected_original_riff_bass_harmony_or_drums": 3721,
+      "already_in_target_collection": 593,
+      "target_collision_register_contour_or_fifth_skeleton_exempt": 4,
+      "nearest_target_backbone_pitch": 19
+    },
+    "per_instrument_family": {
+      "bass": {
+        "note_count": 730,
+        "changed_note_count": 0,
+        "source_pitch_range": [
+          26,
+          41
+        ],
+        "output_pitch_range": [
+          26,
+          41
+        ],
+        "source_pitch_classes": [
+          0,
+          1,
+          2,
+          5,
+          7
+        ],
+        "output_pitch_classes": [
+          0,
+          1,
+          2,
+          5,
+          7
+        ],
+        "changed_duration_seconds": 0
+      },
+      "drums": {
+        "note_count": 1491,
+        "changed_note_count": 0,
+        "source_pitch_range": [
+          35,
+          57
+        ],
+        "output_pitch_range": [
+          35,
+          57
+        ],
+        "source_pitch_classes": [
+          0,
+          1,
+          2,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11
+        ],
+        "output_pitch_classes": [
+          0,
+          1,
+          2,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11
+        ],
+        "changed_duration_seconds": 0
+      },
+      "electric_guitar": {
+        "note_count": 1500,
+        "changed_note_count": 0,
+        "source_pitch_range": [
+          38,
+          80
+        ],
+        "output_pitch_range": [
+          38,
+          80
+        ],
+        "source_pitch_classes": [
+          0,
+          1,
+          2,
+          5,
+          7,
+          8,
+          9
+        ],
+        "output_pitch_classes": [
+          0,
+          1,
+          2,
+          5,
+          7,
+          8,
+          9
+        ],
+        "changed_duration_seconds": 0
+      },
+      "pipa": {
+        "note_count": 508,
+        "changed_note_count": 19,
+        "source_pitch_range": [
+          57,
+          80
+        ],
+        "output_pitch_range": [
+          57,
+          81
+        ],
+        "source_pitch_classes": [
+          0,
+          1,
+          2,
+          5,
+          8,
+          9
+        ],
+        "output_pitch_classes": [
+          0,
+          1,
+          2,
+          5,
+          9
+        ],
+        "changed_duration_seconds": 5.089640966666678
+      },
+      "ruan": {
+        "note_count": 108,
+        "changed_note_count": 0,
+        "source_pitch_range": [
+          48,
+          55
+        ],
+        "output_pitch_range": [
+          48,
+          55
+        ],
+        "source_pitch_classes": [
+          0,
+          2,
+          5,
+          7
+        ],
+        "output_pitch_classes": [
+          0,
+          2,
+          5,
+          7
+        ],
+        "changed_duration_seconds": 0
+      }
+    },
+    "erhu_note_count": 0,
+    "erhu_no_overlap": true,
+    "d1_d2_assignment_identical": true,
+    "drum_pitch_and_channel_unchanged": true,
+    "no_new_semitone_conflicts_against_retained_accompaniment": true,
+    "changed_notes_with_preexisting_semitone_conflicts": 3,
+    "changed_source_ids": [
+      "t01-c00-on003026-s151132-e151293-p68",
+      "t01-c00-on003034-s151293-e151775-p68",
+      "t01-c00-on003126-s154959-e155120-p68",
+      "t01-c00-on003134-s155120-e155602-p68",
+      "t01-c00-on003232-s158807-e158968-p80",
+      "t01-c00-on003240-s158968-e159450-p80",
+      "t01-c00-on003248-s159450-e159922-p80",
+      "t01-c00-on003614-s174147-e174308-p68",
+      "t01-c00-on003622-s174308-e174630-p68",
+      "t01-c00-on003630-s174630-e174790-p68",
+      "t01-c00-on003638-s174790-e175112-p68",
+      "t01-c00-on003646-s175112-e175273-p68",
+      "t01-c00-on003948-s185682-e185843-p68",
+      "t01-c00-on003956-s185843-e186164-p68",
+      "t01-c00-on003964-s186164-e186325-p68",
+      "t01-c00-on004068-s189530-e189691-p68",
+      "t01-c00-on004076-s189691-e190013-p68",
+      "t01-c00-on004084-s190013-e190173-p68",
+      "t01-c00-on004176-s193368-e194011-p68"
+    ],
+    "adjacent_stream_direction_reversals": [],
+    "adjacent_stream_collapsed_steps": [
+      [
+        "t01-c00-on003646-s175112-e175273-p68",
+        "t01-c00-on003654-s175273-e175434-p69",
+        1
+      ]
+    ],
+    "source_repeated_pitch_with_multiple_outputs": [],
+    "stream_warning": "Adjacency in a polyphonic plucked event stream is diagnostic, not verified melodic voice leading."
+  },
+  "sections": [
+    {
+      "section_id": "s00",
+      "start_s": 0.0,
+      "end_s": 183.20375349791962,
+      "pitch_class_numbers": [
+        0,
+        2,
+        5,
+        7,
+        9
+      ],
+      "pitch_classes": [
+        "C",
+        "D",
+        "F",
+        "G",
+        "A"
+      ],
+      "set_anchor_pc": 5,
+      "target_center": null,
+      "target_center_pc": null,
+      "target_mode": null,
+      "selection_rule": "fixed_low_change_collection_for_04",
+      "modal_claim": "arrangement_target_collection_only; original tonic/mode not inferred"
+    }
+  ],
+  "acceptance_limit": "Structural/event audit only. These candidates require audio rendering and listening; target collection scores are not music-quality scores.",
+  "reuse_provenance": {
+    "original_report": "/home/weathour/programs/desktop-projects/My-game/design/music-20261104-chinese-trial/reports/midi-midi_test_04.json",
+    "original_report_sha256": "688e456301925360aefa4dcaf249d3bfe8f9bcbb599abf01fb4f3be1e14d5cc7",
+    "source_epoch": "first_three_approved_trial",
+    "musical_and_audio_inputs_unchanged": true,
+    "full_outputs_copied_without_reencoding": false
+  }
+}

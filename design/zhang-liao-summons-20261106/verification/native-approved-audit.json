@@ -1,0 +1,56 @@
+{
+  "status": "passed",
+  "audited_at": 1793957533.8173926,
+  "run": {
+    "status": "passed",
+    "runner_pid": 295930,
+    "started_at": 1793957338.660384,
+    "command": [
+      "/home/weathour/.local/bin/godot-4.6.2",
+      "--path",
+      "/home/weathour/programs/desktop-projects/My-game",
+      "--rendering-method",
+      "gl_compatibility",
+      "--audio-driver",
+      "Dummy",
+      "--script",
+      "scripts/tests/zhang_liao_summon_render_smoke.gd",
+      "--",
+      "--capture=/home/weathour/programs/desktop-projects/My-game/design/zhang-liao-summons-20261106/verification/native-approved"
+    ],
+    "child_pid": 295932,
+    "returncode": 0,
+    "finished_at": 1793957412.7098405,
+    "elapsed_seconds": 74.04945659637451
+  },
+  "checks": 31078,
+  "cases": 17,
+  "actual_drawn_frames": 3230,
+  "dimensions": [
+    [
+      960,
+      540
+    ],
+    [
+      1280,
+      720
+    ],
+    [
+      1920,
+      1080
+    ]
+  ],
+  "comfort_cases_at_minimum": 4,
+  "extra_edge_close_case": true,
+  "runtime_inputs_and_entries_unchanged_during_capture": true,
+  "all_bodies_visible_outside_hud": true,
+  "runtime_alpha_readbacks": 0,
+  "actual_fx_texture_object_and_path_verified": true,
+  "actual_fx_contact_matches_damage_event_frame": true,
+  "actual_reduced_flash_alpha_ratio": 0.5,
+  "raw_report": "native-approved/render-report.json",
+  "raw_report_sha256": "26a6424bf77775fd96efc0a01141e2418fa4cf26781fb9d27cc207b67eccca24",
+  "native_log": "native-approved.log",
+  "native_log_sha256": "e6809dd43d93fbd1baac8ceb0ebe4a047f52705b78804b0481fb50fe163bff6d",
+  "source_freeze": "native-approved-inputs.json"
+}

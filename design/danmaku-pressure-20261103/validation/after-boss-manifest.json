@@ -1,0 +1,52 @@
+{
+  "version": "after",
+  "suite": "boss",
+  "seeds": "1701,2219,3191",
+  "machine": {
+    "system": "Linux",
+    "node": "pc",
+    "release": "7.0.0-28-generic",
+    "version": "#28~24.04.1-Ubuntu SMP PREEMPT_DYNAMIC Wed Jul  1 15:50:57 UTC 2",
+    "machine": "x86_64",
+    "processor": "x86_64"
+  },
+  "cpu": "Intel(R) Core(TM) i5-14600K",
+  "source_sha256": {
+    "scripts/content/stage_catalog.gd": "f37242fecea5cdaa0e23d038789ae2a0d7de04bdd44c9caae9a9e09f54eb4c40",
+    "scripts/content/enemy_catalog.gd": "b899d117783d949a0499d6848381b26a0b787ee1ad588869db1a21456e8da8b1",
+    "scripts/content/boss_forms.gd": "d16706a873e262887241dc72ed9821e26da3025c4d21a98bedb80bc56e04b2d7",
+    "scripts/battle/battle_session.gd": "6a776a857a5b0caeb402f90d28fd41f2fc5e917ec19e0b5824ff4d982297aa06",
+    "scripts/battle/combat_mechanics.gd": "00308ab31ce5707a7fee436cb0f005b34c53e7ca2a6bc1acdcad9b5494b04cad",
+    "scripts/battle/battle_space.gd": "8505ffe3b61661c3e6ae031b16e754d5728101e3b5e95be4859a5d1cbde40485",
+    "scripts/battle/combat_resolver.gd": "72c20ae204792a5515b662d814a718f1f8680273b57e0e2e69132801ae3e060c",
+    "scripts/battle/targeting.gd": "060455d6bf74a0180d4de29b795f498af33b929da07c9cb00567d6a3162cc344",
+    "scripts/battle/ability_definition.gd": "e633f09670a3d389028117ef3ed3b72b71aa198edb012cce4ff53cd1a33379bf",
+    "scripts/content/combat_catalog.gd": "a50549c0305cc2d21bc1b745905526080eb9442d63a0b941ba7f8d757e9606e9",
+    "scripts/content/roster_kit_data.gd": "bdb57613d8ae34f845c272869ef37bc590966fdccc9410d5518f27dd3790f737",
+    "scripts/battle/enemy_system.gd": "1960757b19f2afe510098218c6ff6aaa5f744cf6a41968d4046fbfb20d531d81",
+    "scripts/battle/enemy_geometry.gd": "046d03f340a98435f18cdcde29b346a7751d0ecc7f57d969727e1c5a04915473",
+    "scripts/battle/player_hurtbox.gd": "37b8b6f8024bb6409f1134c0923975aebed9a82dad9d7f7301dd19875b39bbf8",
+    "scripts/battle/enemy_spatial_grid.gd": "731d8970d6cd6c71b20671e0c0362e453e000d8a7fd60722b48222d9b387b9d9",
+    "scripts/battle/projectile_patterns.gd": "efa2645e704eb8383889fd9536142707dd7265c48c8fc0493274256d8c7075c8",
+    "scripts/battle/ability_system.gd": "80b75e8d4c363e49430951290dfd19af6d0b735a8717b4398216b714da3acc49",
+    "scripts/battle/stage_director.gd": "1de0a86031775da2a7f88df5d96fc72076846b4f5435fe3064957b33d1db082f",
+    "scripts/battle/enemy_runtime.gd": "4f32969329fc6216331710cf1487d57eec6c2184913617b5f66b80ff094a9db4",
+    "scripts/battle/character_runtime.gd": "7d7cf83ac6d611fc2410a518c78b50ab377ac0e9f49f7e5f9f5d8d3f6e674129"
+  },
+  "baseline_reconstruction": "consistent copied current workspace dependency closure; caller must arrange freeze",
+  "tmp_project": "/tmp/danmaku-after-_jxyh8cx",
+  "godot": "/home/weathour/.local/bin/godot",
+  "runner_sha256": "386454e115ba2aa024c6d9b371a2acc679232a754ce4f254ad725367cecb5465",
+  "command": [
+    "/home/weathour/.local/bin/godot",
+    "--headless",
+    "--path",
+    "/tmp/danmaku-after-_jxyh8cx",
+    "--script",
+    "/tmp/danmaku-after-_jxyh8cx/pressure_probe.gd",
+    "--",
+    "--suite=boss",
+    "--seeds=1701,2219,3191",
+    "--output=/home/weathour/programs/desktop-projects/My-game/design/danmaku-pressure-20261103/validation/after-boss.json"
+  ]
+}

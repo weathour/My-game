@@ -1,0 +1,14 @@
+PASS actual default D2 audio and MIDI load
+PASS output presentation correction defaults to zero, no guessed acoustic latency
+FAIL real audio clock advances
+Traceback (most recent call last):
+  File "<stdin>", line 9, in <module>
+  File "<frozen runpy>", line 286, in run_path
+  File "<frozen runpy>", line 98, in _run_module_code
+  File "<frozen runpy>", line 88, in _run_code
+  File "design/rhythm-combat-research-20261104/tester-feedback/check_gui_feedback.py", line 43, in <module>
+    check(w.transport.state=='playing' and w.transport.position_seconds()>.1,'real audio clock advances')
+  File "design/rhythm-combat-research-20261104/tester-feedback/check_gui_feedback.py", line 31, in check
+    if not ok:raise AssertionError(label)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: real audio clock advances

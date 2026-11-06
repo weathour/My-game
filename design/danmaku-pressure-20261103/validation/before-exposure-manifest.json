@@ -1,0 +1,49 @@
+{
+  "version": "before",
+  "suite": "exposure",
+  "seeds": "1701",
+  "machine": {
+    "system": "Linux",
+    "node": "pc",
+    "release": "7.0.0-28-generic",
+    "version": "#28~24.04.1-Ubuntu SMP PREEMPT_DYNAMIC Wed Jul  1 15:50:57 UTC 2",
+    "machine": "x86_64",
+    "processor": "x86_64"
+  },
+  "cpu": "Intel(R) Core(TM) i5-14600K",
+  "source_sha256": {
+    "scripts/content/stage_catalog.gd": "47af13337442fb60a12408a417b5fd87f8d560818d3756fc7c5e092b5656f847",
+    "scripts/content/enemy_catalog.gd": "30b518fee0d7c01bb03d3213c59392f85e240813324c4563e9e8c1d7d905f713",
+    "scripts/content/boss_forms.gd": "c9ffd295561bc2d536fcea55f1dc79ad9469559752244ccf4993b554d5be27c4",
+    "scripts/battle/battle_session.gd": "82343fa7afdc6ccca9163ec37477257abfd5b4b6e7f1a545e1ab21a6b9df4d30",
+    "scripts/battle/combat_mechanics.gd": "00308ab31ce5707a7fee436cb0f005b34c53e7ca2a6bc1acdcad9b5494b04cad",
+    "scripts/battle/battle_space.gd": "8505ffe3b61661c3e6ae031b16e754d5728101e3b5e95be4859a5d1cbde40485",
+    "scripts/battle/combat_resolver.gd": "72c20ae204792a5515b662d814a718f1f8680273b57e0e2e69132801ae3e060c",
+    "scripts/battle/targeting.gd": "060455d6bf74a0180d4de29b795f498af33b929da07c9cb00567d6a3162cc344",
+    "scripts/battle/ability_definition.gd": "e633f09670a3d389028117ef3ed3b72b71aa198edb012cce4ff53cd1a33379bf",
+    "scripts/content/combat_catalog.gd": "a50549c0305cc2d21bc1b745905526080eb9442d63a0b941ba7f8d757e9606e9",
+    "scripts/content/roster_kit_data.gd": "bdb57613d8ae34f845c272869ef37bc590966fdccc9410d5518f27dd3790f737",
+    "scripts/battle/enemy_system.gd": "e50a36dee03c8794405a0d00ab1ae161f0033cf37e40274f19cead5f245132e5",
+    "scripts/battle/enemy_geometry.gd": "b4c6ea92a0ea692526fd08074dfc989586ce95299bbf8078b012e7023b51a1a0",
+    "scripts/battle/ability_system.gd": "80b75e8d4c363e49430951290dfd19af6d0b735a8717b4398216b714da3acc49",
+    "scripts/battle/stage_director.gd": "fceb6f2247bad97d3034f690131423f2fd7a816bc660c58778720e357af3a260",
+    "scripts/battle/enemy_runtime.gd": "4f32969329fc6216331710cf1487d57eec6c2184913617b5f66b80ff094a9db4",
+    "scripts/battle/character_runtime.gd": "7d7cf83ac6d611fc2410a518c78b50ab377ac0e9f49f7e5f9f5d8d3f6e674129"
+  },
+  "baseline_reconstruction": "frozen seven core files + all frozen enemies/stages/forms; other reachable script dependencies unchanged from current workspace",
+  "tmp_project": "/tmp/danmaku-before-q1bcd9gn",
+  "godot": "/home/weathour/.local/bin/godot",
+  "runner_sha256": "386454e115ba2aa024c6d9b371a2acc679232a754ce4f254ad725367cecb5465",
+  "command": [
+    "/home/weathour/.local/bin/godot",
+    "--headless",
+    "--path",
+    "/tmp/danmaku-before-q1bcd9gn",
+    "--script",
+    "/tmp/danmaku-before-q1bcd9gn/pressure_probe.gd",
+    "--",
+    "--suite=exposure",
+    "--seeds=1701",
+    "--output=/home/weathour/programs/desktop-projects/My-game/design/danmaku-pressure-20261103/validation/before-exposure.json"
+  ]
+}

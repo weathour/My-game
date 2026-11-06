@@ -1,0 +1,182 @@
+{
+  "version": 1,
+  "character_id": "M08",
+  "producer": "Built-in image_gen; Aseprite extraction/nearest-neighbor resize/64-color quantization/binary alpha/export; Pillow read-only analysis",
+  "selected_source_version": "combat-bundle-v1",
+  "selection_record": "Only v1 generated; accepted after identity, complete weapon, two arms/two legs and direction review. No rejected versions.",
+  "reference_identity_authority": "scripts/ui/chronicle/chronicle_portraits.gd and assets/data/chronicle/character_profiles.json",
+  "standing_body_height_source": 239,
+  "independent_actor_drawings": 16,
+  "clip_frames": {
+    "idle": 4,
+    "move": 4,
+    "attack": 4,
+    "special": 4,
+    "hit": 2
+  },
+  "hit_frame_reuse": [
+    "p13",
+    "p01"
+  ],
+  "outputs": [
+    {
+      "path": "assets/players/chronicle-cast/M08/actor.aseprite",
+      "sha256": "96ea9d6991ac968d97eb0665d054e750526623b2d97790aa1f08087ceff7b1b8",
+      "bytes": 35518
+    },
+    {
+      "path": "assets/players/chronicle-cast/M08/attack.aseprite",
+      "sha256": "d71896614996c87a09556589e84a20a0a8bd6b8e54dc8aa21ee4c7dc9d7b2e75",
+      "bytes": 15035
+    },
+    {
+      "path": "assets/players/chronicle-cast/M08/attack.png",
+      "sha256": "02f943316cbb0c8ff81382f545ff3306b735e4126c93d8d8b8cc7b3b1bbf6ca0",
+      "bytes": 26357,
+      "size": [
+        768,
+        192
+      ]
+    },
+    {
+      "path": "assets/players/chronicle-cast/M08/head.aseprite",
+      "sha256": "7835fc1668a132c432a2b6db29bd55ec52cb98ac4f3c0cace8e2ecdd104b52cd",
+      "bytes": 2183
+    },
+    {
+      "path": "assets/players/chronicle-cast/M08/head.png",
+      "sha256": "3b6272abb793292cbac7497bbb034666cb96a8b3ff0f612a1d821ecb526a6558",
+      "bytes": 6342,
+      "size": [
+        128,
+        128
+      ]
+    },
+    {
+      "path": "assets/players/chronicle-cast/M08/hit.aseprite",
+      "sha256": "2137d7ad5f97ac9834d40b633774f9d30dc5e201fd02e370063b9b88ce73c099",
+      "bytes": 9082
+    },
+    {
+      "path": "assets/players/chronicle-cast/M08/hit.png",
+      "sha256": "e55ec8383eb207c9a655e42f98cbb6023b48fbe3b011d6f07386f4bab65ba3ca",
+      "bytes": 16365,
+      "size": [
+        384,
+        192
+      ]
+    },
+    {
+      "path": "assets/players/chronicle-cast/M08/idle.aseprite",
+      "sha256": "91d4300c6b1f6f72260e8828cd5748733a1c83fa2c4320ed94abccbb8f976179",
+      "bytes": 16692
+    },
+    {
+      "path": "assets/players/chronicle-cast/M08/idle.png",
+      "sha256": "df010a69e807875901ae3e796f60ba21614f4ab279b7497b090d136e59510bb1",
+      "bytes": 30915,
+      "size": [
+        768,
+        192
+      ]
+    },
+    {
+      "path": "assets/players/chronicle-cast/M08/manifest.json",
+      "sha256": "d12906a4968481682a9abf839ec63ddd3b5eee75ce2733e56e2d6e57b6f0ff0f",
+      "bytes": 1265
+    },
+    {
+      "path": "assets/players/chronicle-cast/M08/move.aseprite",
+      "sha256": "74d72c26c986a867ac34eeb05e1c4b56b636c55376d8c06a0deaebb9c720ace8",
+      "bytes": 15105
+    },
+    {
+      "path": "assets/players/chronicle-cast/M08/move.png",
+      "sha256": "4029edaf602479de714205b3c59b763beeac61963240f01ce109feff64466abd",
+      "bytes": 25731,
+      "size": [
+        768,
+        192
+      ]
+    },
+    {
+      "path": "assets/players/chronicle-cast/M08/special.aseprite",
+      "sha256": "b706d8e3fedc5daaad6ece1a0d94ea5e59b5a73d85d81027dc810d00cf08b5ef",
+      "bytes": 16753
+    },
+    {
+      "path": "assets/players/chronicle-cast/M08/special.png",
+      "sha256": "30f03817c4bdd9ce07a7ee7cb5b98043b014cfeeea28e59bad54cf0d3ee484c3",
+      "bytes": 29616,
+      "size": [
+        768,
+        192
+      ]
+    }
+  ],
+  "inputs": [
+    {
+      "path": "design/skill-presentation-20261105/characters/M08/analyze_source.py",
+      "sha256": "5fd3b00e96b3b86983dd2dec6704218878cb13b68416b3686a639626cd4a5370",
+      "bytes": 915
+    },
+    {
+      "path": "design/skill-presentation-20261105/characters/M08/audit_exports.py",
+      "sha256": "ef46656f34b3b92d5808e4d2cd968fa998ba69b66b8c6c5b839561433c011551",
+      "bytes": 5051
+    },
+    {
+      "path": "design/skill-presentation-20261105/characters/M08/export-contact-sheet.png",
+      "sha256": "dddc2c44add09efce0b8d6bf26dcacc3605a3d4bb1c87486ecb723102ad2d497",
+      "bytes": 129593
+    },
+    {
+      "path": "design/skill-presentation-20261105/characters/M08/export_contact.lua",
+      "sha256": "61a1618e18bc12a62636e9ace56df2dbfdc1090a5bdc96ccb25d05594eb30da4",
+      "bytes": 344
+    },
+    {
+      "path": "design/skill-presentation-20261105/characters/M08/measurements.json",
+      "sha256": "83c96fe46393e2d7f06610fc1aa223d6afbc9e826e35bbe2021da854883c7be1",
+      "bytes": 9004
+    },
+    {
+      "path": "design/skill-presentation-20261105/characters/M08/prompt-v1.txt",
+      "sha256": "69af3ba3c8bec543f1774d68bbf3254c117147e3eea9bb327081b25daf83fe52",
+      "bytes": 1900
+    },
+    {
+      "path": "design/skill-presentation-20261105/characters/M08/source/combat-bundle-v1.png",
+      "sha256": "7351ee0cf463079b073df7042ae3121a871f7ef4fc703d9e8ddd4f260354bcec",
+      "bytes": 1774340
+    },
+    {
+      "path": "design/skill-presentation-20261105/characters/M08/source/component-analysis.json",
+      "sha256": "df9a0c79503329098e2dc0c7078ed7ff2490c0bd6c3385e0a0a2df90307db318",
+      "bytes": 2056
+    },
+    {
+      "path": "design/skill-presentation-20261105/characters/M08/source/extract_identity.lua",
+      "sha256": "6480afea2514c58f5d3b1f988e41c08db4a3b3d6729c16200942b1b1f700533e",
+      "bytes": 227
+    },
+    {
+      "path": "design/skill-presentation-20261105/characters/M08/source/generation-record.json",
+      "sha256": "f570e63aee47ce2b5ed12769e80758f7579cc28a43492ab4601e581f7759f91a",
+      "bytes": 1988
+    },
+    {
+      "path": "design/skill-presentation-20261105/characters/M08/source/identity-reference.png",
+      "sha256": "9267799ea826c1633eac3235913a9e547837ecfee06d8b33c367933a24772e0b",
+      "bytes": 349608
+    },
+    {
+      "path": "design/skill-presentation-20261105/characters/M08/source/source-selection.json",
+      "sha256": "52b7159af9c9fdf826ef0c1ee73080360c18fcd7f17176f740678149fc1f8330",
+      "bytes": 1369
+    }
+  ],
+  "qa": "QA.json",
+  "aesthetic_status": "pending_user_review",
+  "runtime_status": "technical_exports_checked"
+}

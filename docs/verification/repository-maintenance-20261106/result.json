@@ -1,0 +1,36 @@
+{
+  "scope": "current-version repository cleanup and pre-commit candidate verification",
+  "status": "cleanup_and_empty_directory_validation_passed",
+  "candidate_tree": "a468d3066c7fd3116c556a43cd59b69f84105924",
+  "verification_method": "git archive of staged tree into a fresh empty directory, not an independent Git clone",
+  "candidate_files": 9428,
+  "candidate_original_bytes_match_index": true,
+  "fresh_full_checks": 66,
+  "reused_checks": 0,
+  "full_returncode": 0,
+  "PROJECT_CHECK_OK": true,
+  "extra_same_pack_camera_checks": 21725,
+  "player_data": {
+    "existing_player_files_before": 110,
+    "existing_player_files_after": 110,
+    "byte_hashes_unchanged": true,
+    "added": 0,
+    "removed": 0
+  },
+  "preserved_sources": "original character art, prompts, Aseprite projects, musical sources, licenses, exact input bytes and user rhythm records retained",
+  "newly_excluded_bytes": 1599176210,
+  "git_status": "local commit and read-only GitHub lookup are performed after this record is finalized; Git log and final user report own those results",
+  "limits": [
+    "Full check can regenerate one historical skill QA report audio_teardown field in the candidate; it was not copied back over the index.",
+    "Cold-import caches, generated raw captures, external action-study downloads and test builds remain local and outside Git.",
+    "Credential scanning covered common private-key/GitHub/OpenAI/AWS token patterns, not a proof against every possible secret.",
+    "Some immutable licenses, user CSVs, historical patches and raw logs have retained whitespace diagnostics; no global reformatting was performed."
+  ],
+  "local_full_logs": "/tmp/my-game-repo-maintenance-20261106/candidate-validation",
+  "records": {
+    "candidate-validation.json": "result.json",
+    "full-audit.json": "final-audit.json",
+    "candidate-preflight.json": "preflight-inventory.json",
+    "archive-end-file-audit.json": "archive-end-file-audit.json"
+  }
+}

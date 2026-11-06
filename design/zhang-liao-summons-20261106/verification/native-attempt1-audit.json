@@ -1,0 +1,23 @@
+{
+  "status": "failed",
+  "recorded_at": 1793954575.9531844,
+  "native_run": "native-run.json",
+  "render_report": "native/render-report.json",
+  "logical_readonly_failures": 0,
+  "expected_texture_test_fixture_error": "RefCounted Texture2D ObjectID is valid signed negative; assertion incorrectly required >0",
+  "native_real_failures": [
+    {
+      "case": "960-war-gaoshun-comfort",
+      "reason": "full proxy pose clipped beyond right viewport at960 reduced_motion",
+      "first_frame": 53
+    }
+  ],
+  "runtime_global_inputs_unchanged_during_capture": true,
+  "all_pose_indices_rendered": true,
+  "cases": 16,
+  "frames": 3040,
+  "root_visual_review_required_fixes": [
+    "Chen human/war main body and ten poses occluded by Zhang Liao; separate with visual-only offset and camera framing",
+    "FX base alpha0.28 insufficient contrast against floor; root requested approximately0.48 with reduced-flash half"
+  ]
+}

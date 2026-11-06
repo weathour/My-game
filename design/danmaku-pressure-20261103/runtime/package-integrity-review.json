@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "status": "PASS_WITH_KNOWN_FORCED_EXIT_DIAGNOSTIC",
+  "utc": "2026-11-03T16:14:58.259874+00:00",
+  "build_manifest": "builds/linux-danmaku-pressure-20261103/build-manifest.json",
+  "manifest_sha256": "99ca45b0679ffa8e4dd872b91c4b53055546593e35d38c6a92b88efaa72c542d",
+  "checks": 162,
+  "errors": [],
+  "pck_sha256": "551c4334bde630cdf7c27ce436649fb5ca46b2fb77a781a2233a3bccad69b42c",
+  "pck_bytes": 240345276,
+  "engine_sha256": "5a806b2b385279d9607094d33e946ed828e9606df4cb46d258ca27468dc5c1c9",
+  "notices_source_and_copy_count": 70,
+  "core_hashes_match_current_and_frozen": 13,
+  "feedback_hashes_match_current": 3,
+  "package_launcher_isolates_XDG_and_empty_cwd": true,
+  "launch_functional_check": {
+    "package_smoke_checks": 493,
+    "package_smoke_failures": 0,
+    "orderly_scene_unload_checks": 6,
+    "orderly_scene_unload_failures": 0,
+    "real_home_scene_and_bgm_verified": true,
+    "headless_startup_clean": true,
+    "direct_forced_frame_quit_graphical_exit_clean": false,
+    "existing_old_audio_pack_also_reproduces_same_vorbis_tail_reference": true,
+    "evidence": [
+      {
+        "path": "design/danmaku-pressure-20261103/runtime/final-logs/package-launch-headless.log",
+        "sha256": "cf54d599daaf44629860b15da1755d1d7c209ca05999e3bfc5bc8968a7619cfa",
+        "summaries": [],
+        "resource_exit_diagnostic_present": false,
+        "object_leak_exit_warning_present": false
+      },
+      {
+        "path": "design/danmaku-pressure-20261103/runtime/final-logs/package-danmaku.log",
+        "sha256": "6dc72846ae45a1e2310b426d1f106d00533611692e0b104df3a79814c0e5440f",
+        "summaries": [
+          "CHRONICLE_DANMAKU_SMOKE PASS checks=279 failures=0"
+        ],
+        "resource_exit_diagnostic_present": false,
+        "object_leak_exit_warning_present": false
+      },
+      {
+        "path": "design/danmaku-pressure-20261103/runtime/final-logs/package-skill-audio.log",
+        "sha256": "34cf3a291e6fa662c4f6754efe95eed0bb602884d3c9334bf86427815d9a3354",
+        "summaries": [
+          "CHRONICLE_SKILL_AUDIO_SMOKE PASS checks=201 failures=0"
+        ],
+        "resource_exit_diagnostic_present": false,
+        "object_leak_exit_warning_present": false
+      },
+      {
+        "path": "design/danmaku-pressure-20261103/runtime/final-logs/package-boss-impact.log",
+        "sha256": "90c32e149d8e12a4a31882e7b1b3e72ff1b4d762a859102171ab80a40662b949",
+        "summaries": [
+          "BOSS_PROJECTILE_IMPACT_REGRESSION PASS checks=13 failures=0"
+        ],
+        "resource_exit_diagnostic_present": false,
+        "object_leak_exit_warning_present": false
+      },
+      {
+        "path": "design/danmaku-pressure-20261103/runtime/final-logs/package-launch-graphical-graceful.log",
+        "sha256": "6de0abffa7b7f3b8058999844630298aa4283d50624d3218ffa184dc4b3a561f",
+        "summaries": [
+          "PACKAGE_STARTUP_RUNTIME_SMOKE PASS checks=6 failures=0"
+        ],
+        "resource_exit_diagnostic_present": false,
+        "object_leak_exit_warning_present": false
+      },
+      {
+        "path": "design/danmaku-pressure-20261103/runtime/final-logs/package-launch-graphical-initial-fast-exit.log",
+        "sha256": "5f937ed300bafe4c223462b7ed6b2992d22ab1fd854a1ebe9ae16ba1cd9f0609",
+        "summaries": [],
+        "resource_exit_diagnostic_present": true,
+        "object_leak_exit_warning_present": true
+      },
+      {
+        "path": "design/danmaku-pressure-20261103/runtime/final-logs/package-launch-graphical.log",
+        "sha256": "6e3097a0af38dc5720180b11c9071035df69c4f53da002a41f5b09f1388f64e3",
+        "summaries": [],
+        "resource_exit_diagnostic_present": true,
+        "object_leak_exit_warning_present": true
+      },
+      {
+        "path": "design/danmaku-pressure-20261103/runtime/final-logs/old-audio-package-forced-quit-control.log",
+        "sha256": "eb031e82b4c2ec85b3c2c80ddac5c944bc56b61aad673a98b235b0ec7c0e5fcf",
+        "summaries": [],
+        "resource_exit_diagnostic_present": false,
+        "object_leak_exit_warning_present": false
+      },
+      {
+        "path": "design/danmaku-pressure-20261103/runtime/final-logs/old-audio-package-forced-quit-control-2.log",
+        "sha256": "05996c6f5a6ac0879c8750c439c84ceb939168c3b50b0c760291cb1cd2fa4b9f",
+        "summaries": [],
+        "resource_exit_diagnostic_present": true,
+        "object_leak_exit_warning_present": true
+      }
+    ]
+  }
+}

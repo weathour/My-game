@@ -1,0 +1,50 @@
+{
+  "status": "FUNCTIONAL_PASS_WITH_KNOWN_FORCED_EXIT_DIAGNOSTIC",
+  "functional_checks": 493,
+  "ordered_graphical_startup_checks": 6,
+  "headless_launch_clean": true,
+  "graphical_home_and_actual_bgm_playback": true,
+  "ordered_scene_release_then_native_drain_seconds": 0.3,
+  "ordered_graphical_exit_clean": true,
+  "direct_quit_after_graphical_exit_clean": false,
+  "same_ogg_reference_diagnostic_reproduced_in_prior_audio_pack": true,
+  "prior_audio_control_log": "design/danmaku-pressure-20261103/runtime/final-logs/old-audio-package-forced-quit-control-2.log",
+  "direct_launcher_logs": [
+    "design/danmaku-pressure-20261103/runtime/final-logs/package-launch-graphical-initial-fast-exit.log",
+    "design/danmaku-pressure-20261103/runtime/final-logs/package-launch-graphical.log"
+  ],
+  "isolated_package_user_data": true,
+  "compiled_runtime_source_fallback": false,
+  "results": [
+    {
+      "name": "package-launch-headless",
+      "log": "design/danmaku-pressure-20261103/runtime/final-logs/package-launch-headless.log",
+      "sha256": "cf54d599daaf44629860b15da1755d1d7c209ca05999e3bfc5bc8968a7619cfa",
+      "unexpected_errors": []
+    },
+    {
+      "name": "package-launch-graphical-graceful",
+      "log": "design/danmaku-pressure-20261103/runtime/final-logs/package-launch-graphical-graceful.log",
+      "sha256": "6de0abffa7b7f3b8058999844630298aa4283d50624d3218ffa184dc4b3a561f",
+      "unexpected_errors": []
+    },
+    {
+      "name": "package-danmaku",
+      "log": "design/danmaku-pressure-20261103/runtime/final-logs/package-danmaku.log",
+      "sha256": "6dc72846ae45a1e2310b426d1f106d00533611692e0b104df3a79814c0e5440f",
+      "unexpected_errors": []
+    },
+    {
+      "name": "package-skill-audio",
+      "log": "design/danmaku-pressure-20261103/runtime/final-logs/package-skill-audio.log",
+      "sha256": "34cf3a291e6fa662c4f6754efe95eed0bb602884d3c9334bf86427815d9a3354",
+      "unexpected_errors": []
+    },
+    {
+      "name": "package-boss-impact",
+      "log": "design/danmaku-pressure-20261103/runtime/final-logs/package-boss-impact.log",
+      "sha256": "90c32e149d8e12a4a31882e7b1b3e72ff1b4d762a859102171ab80a40662b949",
+      "unexpected_errors": []
+    }
+  ]
+}

@@ -8,6 +8,7 @@ var campaign_routes: Array = ["short", "explore"]
 var campaign_output := "/tmp/baimen-enemy-continuous-campaigns.json"
 
 func run() -> void:
+	driver_contract()
 	expect(ProjectSettings.globalize_path("user://").begins_with("/tmp/"), "isolated real campaign storage")
 	if failures: quit(1); return
 	for arg in OS.get_cmdline_user_args():
@@ -119,7 +120,7 @@ func real_campaign(route_name: String) -> void:
 			if boss_entry.is_empty() and battle.director.boss_spawned: boss_entry = {"seconds":battle.director.elapsed,"members":capture_members(battle)}
 			for event in battle.events:
 				if event.kind == "level": level_events.append({"seconds":battle.director.elapsed,"id":event.id,"level":event.level})
-		var record := {"strategy":route_name,"driver_revision":DRIVER_REVISION if chosen == "B18" else "local_candidates_v1","request":request.duplicate(true) if chosen in ["B15","B16","B17","B18"] else {},"checkpoint":checkpoint if chosen in ["B15","B16","B17","B18"] else {},"metrics":end_metrics(battle, metrics),"result":battle.result.duplicate(true),"stage":chosen,"members":request.members,"equipment":request.equipment,"entry":entry,"boss_entry":boss_entry,"exit":capture_members(battle),"outcome":battle.outcome if not battle.outcome.is_empty() else "timeout","elapsed":snappedf(elapsed,.1),"kills":battle.director.kills,"field":battle.director.field,"card_elite":battle.director.card_elite,"equipment_elite":battle.director.equipment_elite,"level_events":level_events,"skill_requests":spell_requests,"switch_requests":switch_requests,"owned_count":state.data.owned.size(),"owned_bonus":C.owned_bonuses(state.data.owned)}
+		var record := {"strategy":route_name,"driver_revision":DRIVER_REVISION if chosen == "B18" else "local_candidates_v3_swept_core4","request":request.duplicate(true) if chosen in ["B15","B16","B17","B18"] else {},"checkpoint":checkpoint if chosen in ["B15","B16","B17","B18"] else {},"metrics":end_metrics(battle, metrics),"result":battle.result.duplicate(true),"stage":chosen,"members":request.members,"equipment":request.equipment,"entry":entry,"boss_entry":boss_entry,"exit":capture_members(battle),"outcome":battle.outcome if not battle.outcome.is_empty() else "timeout","elapsed":snappedf(elapsed,.1),"kills":battle.director.kills,"field":battle.director.field,"card_elite":battle.director.card_elite,"equipment_elite":battle.director.equipment_elite,"level_events":level_events,"skill_requests":spell_requests,"switch_requests":switch_requests,"owned_count":state.data.owned.size(),"owned_bonus":C.owned_bonuses(state.data.owned)}
 		battles.append(record)
 		print("CONTINUOUS_REAL_BATTLE ",JSON.stringify({"route":route_name,"record":record}))
 		if battle.outcome != "victory": stopped = record.outcome; state.abandon_battle(); break

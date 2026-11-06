@@ -6,7 +6,59 @@ const ENEMY_PLACEHOLDER := preload("res://scripts/ui/chronicle/enemy_placeholder
 const BATTLE_SPACE := preload("res://scripts/battle/battle_space.gd")
 const SWORD := preload("res://assets/players/sword/sword.tscn")
 const JIA := preload("res://assets/players/jia/jia.tscn")
+const JIA_APPEARANCE := preload("res://scripts/ui/chronicle/jia_appearance.gd")
+const JIA_CAMPAIGN := preload("res://assets/players/jia-campaign/jia-campaign.tscn")
+const JIA_CAMPAIGN_HEAD := preload("res://assets/players/jia-campaign/jia-campaign-head.tscn")
 const JIA_HEAD := preload("res://assets/players/jia/jia-head.tscn")
+const ROSTER := {
+	"M07": preload("res://assets/players/chronicle-cast/M07/M07.tscn"),
+	"M08": preload("res://assets/players/chronicle-cast/M08/M08.tscn"),
+	"F01": preload("res://assets/players/chronicle-cast/F01/F01.tscn"),
+	"F11": preload("res://assets/players/chronicle-cast/F11/F11.tscn"),
+	"N01": preload("res://assets/players/chronicle-cast/N01/N01.tscn"),
+	"N02": preload("res://assets/players/chronicle-cast/N02/N02.tscn"),
+	"N03": preload("res://assets/players/chronicle-cast/N03/N03.tscn"),
+	"N04": preload("res://assets/players/chronicle-cast/N04/N04.tscn"),
+	"N05": preload("res://assets/players/chronicle-cast/N05/N05.tscn"),
+	"N06": preload("res://assets/players/chronicle-cast/N06/N06.tscn"),
+	"N07": preload("res://assets/players/chronicle-cast/N07/N07.tscn"),
+	"N08": preload("res://assets/players/chronicle-cast/N08/N08.tscn"),
+	"N09": preload("res://assets/players/chronicle-cast/N09/N09.tscn"),
+	"N10": preload("res://assets/players/chronicle-cast/N10/N10.tscn"),
+	"N11": preload("res://assets/players/chronicle-cast/N11/N11.tscn"),
+	"N12": preload("res://assets/players/chronicle-cast/N12/N12.tscn"),
+	"N13": preload("res://assets/players/chronicle-cast/N13/N13.tscn"),
+	"N14": preload("res://assets/players/chronicle-cast/N14/N14.tscn"),
+	"N15": preload("res://assets/players/chronicle-cast/N15/N15.tscn"),
+	"N16": preload("res://assets/players/chronicle-cast/N16/N16.tscn"),
+	"N17": preload("res://assets/players/chronicle-cast/N17/N17.tscn"),
+	"N18": preload("res://assets/players/chronicle-cast/N18/N18.tscn"),
+}
+
+const ROSTER_HEADS := {
+	"M07": preload("res://assets/players/chronicle-cast/M07/M07-head.tscn"),
+	"M08": preload("res://assets/players/chronicle-cast/M08/M08-head.tscn"),
+	"F01": preload("res://assets/players/chronicle-cast/F01/F01-head.tscn"),
+	"F11": preload("res://assets/players/chronicle-cast/F11/F11-head.tscn"),
+	"N01": preload("res://assets/players/chronicle-cast/N01/N01-head.tscn"),
+	"N02": preload("res://assets/players/chronicle-cast/N02/N02-head.tscn"),
+	"N03": preload("res://assets/players/chronicle-cast/N03/N03-head.tscn"),
+	"N04": preload("res://assets/players/chronicle-cast/N04/N04-head.tscn"),
+	"N05": preload("res://assets/players/chronicle-cast/N05/N05-head.tscn"),
+	"N06": preload("res://assets/players/chronicle-cast/N06/N06-head.tscn"),
+	"N07": preload("res://assets/players/chronicle-cast/N07/N07-head.tscn"),
+	"N08": preload("res://assets/players/chronicle-cast/N08/N08-head.tscn"),
+	"N09": preload("res://assets/players/chronicle-cast/N09/N09-head.tscn"),
+	"N10": preload("res://assets/players/chronicle-cast/N10/N10-head.tscn"),
+	"N11": preload("res://assets/players/chronicle-cast/N11/N11-head.tscn"),
+	"N12": preload("res://assets/players/chronicle-cast/N12/N12-head.tscn"),
+	"N13": preload("res://assets/players/chronicle-cast/N13/N13-head.tscn"),
+	"N14": preload("res://assets/players/chronicle-cast/N14/N14-head.tscn"),
+	"N15": preload("res://assets/players/chronicle-cast/N15/N15-head.tscn"),
+	"N16": preload("res://assets/players/chronicle-cast/N16/N16-head.tscn"),
+	"N17": preload("res://assets/players/chronicle-cast/N17/N17-head.tscn"),
+	"N18": preload("res://assets/players/chronicle-cast/N18/N18-head.tscn"),
+}
 const WOMEN := {
 	"F02": preload("res://assets/players/baimen-women/F02/F02.tscn"),
 	"F03": preload("res://assets/players/baimen-women/F03/F03.tscn"),
@@ -72,15 +124,23 @@ const BODY_MAGE_IDLE := Vector2(50.05, 26.6)
 const BODY_MAGE_RUN := Vector2(52.65, 27.95)
 const BODY_GUN_IDLE := Vector2(81.84, 40.238)
 const BODY_GUN_RUN := Vector2(81.84, 41.602)
-const ACTOR_HEIGHT := 72.0
+const ACTOR_HEIGHT := BATTLE_SPACE.ACTOR_BODY_HEIGHT
 
 static func fit_actor(visual: Node2D, id: String, moving: bool) -> void:
+	if ROSTER.has(id):
+		_fit_body(visual, visual.body_profile(), ACTOR_HEIGHT)
+		return
 	if FRIENDLY.has(id):
-		var metadata := ENEMY_MANIFEST.read(FRIENDLY_HUMAN_IDS[id])
+		# The controller already loaded this exact manifest when mounting the actor.
+		# Fitting is called every frame, so it must not read/parse the file again.
+		var metadata: Dictionary = visual.manifest
 		var body_height := float(metadata.get("body_height_px", 224.0))
 		_fit_body(visual, Vector2(body_height, 0.0), ACTOR_HEIGHT)
 		return
-	if id == "JIA" or WOMEN.has(id):
+	if id == "JIA":
+		_fit_body(visual, visual.body_profile(), ACTOR_HEIGHT)
+		return
+	if WOMEN.has(id):
 		# Authored standing body is 80px, feet at the scene origin. Preserve
 		# the natural crouch/run height instead of stretching every pose.
 		_fit_body(visual, Vector2(80, 0), ACTOR_HEIGHT)
@@ -97,16 +157,18 @@ static func _fit_body(visual: Node2D, profile: Vector2, height: float) -> void:
 	var shadow := visual.get_node_or_null("Shadow") as Node2D
 	if shadow != null: shadow.position.y = profile.y
 
-static func actor(id: String) -> PackedScene:
-	if id == "JIA": return JIA
+static func actor(id: String, appearance: String = JIA_APPEARANCE.COMMON) -> PackedScene:
+	if ROSTER.has(id): return ROSTER[id]
+	if id == "JIA": return JIA_CAMPAIGN if appearance == JIA_APPEARANCE.CAMPAIGN else JIA
 	if FRIENDLY.has(id): return FRIENDLY[id]
 	if WOMEN.has(id): return WOMEN[id]
 	if id in ["F11", "N13", "N16", "N14", "N18"]: return MAGE
 	if id == "N07": return GUN
 	return SWORD
 
-static func portrait(id: String) -> PackedScene:
-	if id == "JIA": return JIA_HEAD
+static func portrait(id: String, appearance: String = JIA_APPEARANCE.COMMON) -> PackedScene:
+	if ROSTER_HEADS.has(id): return ROSTER_HEADS[id]
+	if id == "JIA": return JIA_CAMPAIGN_HEAD if appearance == JIA_APPEARANCE.CAMPAIGN else JIA_HEAD
 	if FRIENDLY_HEADS.has(id): return FRIENDLY_HEADS[id]
 	if WOMEN_HEADS.has(id): return WOMEN_HEADS[id]
 	if id in ["F11", "N13", "N16", "N14", "N18"]: return MAGE_HEAD
@@ -114,6 +176,7 @@ static func portrait(id: String) -> PackedScene:
 	return SWORD_HEAD
 
 static func tint(id: String) -> Color:
+	if ROSTER.has(id): return Color.WHITE
 	if id == "N14": return Color("b7b0dc")
 	if id == "N18": return Color("d6ca9f")
 	return COLORS.get(id, Color.WHITE)

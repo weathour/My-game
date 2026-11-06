@@ -7,6 +7,7 @@ const SETTINGS := preload("res://scripts/shared/settings.gd")
 const PARTY := preload("res://scripts/ui/chronicle/chronicle_party_pages.gd")
 const REWARD := preload("res://scripts/ui/chronicle/chronicle_reward_page.gd")
 const BGM := preload("res://scripts/audio/music_player.gd")
+const AUDIO_SETTINGS := preload("res://scripts/ui/chronicle/audio_settings_panel.gd")
 
 static func build(shell: Control, page: String) -> void:
 	match page:
@@ -213,30 +214,9 @@ static func settings(shell: Control) -> void:
 	var column := scaffold(shell, "设定", "")
 	var list := scroll_column(column, "settings_scroll")
 	list.add_child(T.label("声音", 24, T.INK, true))
-	for item in [["音乐音量", BGM.load_music_volume(), true], ["音效音量", SETTINGS.load_sfx_volume(), false]]:
-		var is_music: bool = item[2]
-		var row := T.row(list)
-		row.add_child(T.label(item[0], 17))
-		var slider := HSlider.new()
-		slider.name = "music_volume" if is_music else "sfx_volume"
-		slider.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		slider.min_value = 0
-		slider.max_value = 1
-		slider.step = .05
-		slider.value = item[1]
-		row.add_child(slider)
-		var amount := T.label("%d%%" % int(slider.value * 100), 16)
-		amount.custom_minimum_size.x = 65
-		row.add_child(amount)
-		slider.value_changed.connect(func(value: float):
-			if is_music: BGM.save_music_volume(value)
-			else: SETTINGS.save_sfx_volume(value)
-			amount.text = "%d%%" % int(value * 100))
-	var muted := CheckButton.new()
-	muted.text = "音乐静音"
-	muted.button_pressed = BGM.load_music_muted()
-	muted.toggled.connect(BGM.save_music_muted)
-	list.add_child(muted)
+	var audio_settings := AUDIO_SETTINGS.new()
+	audio_settings.compact = shell.size.y < 650
+	list.add_child(audio_settings)
 	list.add_child(T.label("显示", 24, T.INK, true))
 	var hud_row := T.row(list)
 	hud_row.add_child(T.label("战斗界面", 17))
@@ -298,8 +278,9 @@ static func music(shell: Control) -> void:
 	var controls := T.row(player)
 	shell.action(controls, "上一首", func(): shell.play_track(shell.music_index-1), "music_previous")
 	var pause: Button = shell.action(controls, "播放" if shell.music_preview.stream_paused or not shell.music_preview.playing else "暂停", func():
-		if not shell.music_preview.playing: shell.music_preview.play()
-		else: shell.music_preview.stream_paused = not shell.music_preview.stream_paused
+		if shell.music_preview.stream_paused: shell.music_preview.stream_paused = false
+		elif not shell.music_preview.playing: shell.music_preview.play()
+		else: shell.music_preview.stream_paused = true
 		shell.render(), "music_pause")
 	pause.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	shell.action(controls, "下一首", func(): shell.play_track(shell.music_index+1), "music_next")

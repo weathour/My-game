@@ -1,0 +1,7568 @@
+{
+	"attacks": [
+		{
+			"attack": {
+				"action": "swipe",
+				"damage_scale": 1.0,
+				"id": "swipe",
+				"radius": 48,
+				"range": 48,
+				"recovery": 1.0,
+				"shape": "sector",
+				"spread": 1.8,
+				"windup": 0.5
+			},
+			"enemy_id": "E01",
+			"enemy_name": "草甲鬼卒",
+			"form_index": 0,
+			"form_name": ""
+		},
+		{
+			"attack": {
+				"action": "shot",
+				"damage_scale": 1.0,
+				"half_width": 7,
+				"id": "shot",
+				"length": 430,
+				"life": 2.2,
+				"major": true,
+				"range": 430,
+				"recovery": 1.25,
+				"shape": "line",
+				"speed": 250,
+				"windup": 0.9
+			},
+			"enemy_id": "E02",
+			"enemy_name": "骨弓伥",
+			"form_index": 0,
+			"form_name": ""
+		},
+		{
+			"attack": {
+				"action": "charge",
+				"damage_scale": 1.0,
+				"half_width": 18,
+				"id": "charge",
+				"length": 270,
+				"major": true,
+				"range": 310,
+				"recovery": 1.4,
+				"shape": "line",
+				"windup": 1.0
+			},
+			"enemy_id": "E03",
+			"enemy_name": "轭骨奔兽",
+			"form_index": 0,
+			"form_name": ""
+		},
+		{
+			"attack": {
+				"action": "swipe",
+				"damage_scale": 1.0,
+				"id": "swipe",
+				"radius": 65,
+				"range": 65,
+				"recovery": 1.35,
+				"shape": "sector",
+				"spread": 1.8,
+				"windup": 0.6
+			},
+			"enemy_id": "E04",
+			"enemy_name": "扉甲卒",
+			"form_index": 0,
+			"form_name": ""
+		},
+		{
+			"attack": {
+				"action": "fan",
+				"count": 5,
+				"damage_scale": 1.0,
+				"id": "fan",
+				"life": 2.2,
+				"major": true,
+				"range": 390,
+				"recovery": 1.4,
+				"shape": "fan",
+				"speed": 210,
+				"spread": 1.2,
+				"windup": 1.1
+			},
+			"enemy_id": "E05",
+			"enemy_name": "纸灯蛛",
+			"form_index": 0,
+			"form_name": ""
+		},
+		{
+			"attack": {
+				"action": "pot",
+				"damage_scale": 1.0,
+				"delay": 0.7,
+				"duration": 2.4,
+				"id": "pot",
+				"limit": 1,
+				"major": true,
+				"radius": 54,
+				"range": 330,
+				"recovery": 1.5,
+				"shape": "marker",
+				"windup": 1.1
+			},
+			"enemy_id": "E06",
+			"enemy_name": "背瓮行脚",
+			"form_index": 0,
+			"form_name": ""
+		},
+		{
+			"attack": {
+				"action": "command",
+				"count": 3,
+				"damage_scale": 1.0,
+				"duration": 3.0,
+				"id": "command",
+				"major": true,
+				"range": 290,
+				"recovery": 1.5,
+				"shape": "disc",
+				"windup": 1.0
+			},
+			"enemy_id": "E07",
+			"enemy_name": "鸣幡吏",
+			"form_index": 0,
+			"form_name": ""
+		},
+		{
+			"attack": {
+				"action": "swipe",
+				"damage_scale": 1.0,
+				"id": "swipe",
+				"radius": 48,
+				"range": 48,
+				"recovery": 1.0,
+				"shape": "sector",
+				"spread": 1.8,
+				"windup": 0.5
+			},
+			"enemy_id": "E07",
+			"enemy_name": "鸣幡吏",
+			"form_index": 0,
+			"form_name": ""
+		},
+		{
+			"attack": {
+				"action": "heal",
+				"count": 2,
+				"damage_scale": 1.0,
+				"id": "heal",
+				"major": true,
+				"range": 230,
+				"recovery": 1.6,
+				"shape": "disc",
+				"windup": 1.1
+			},
+			"enemy_id": "E08",
+			"enemy_name": "供碗祠巫",
+			"form_index": 0,
+			"form_name": ""
+		},
+		{
+			"attack": {
+				"action": "swipe",
+				"damage_scale": 1.0,
+				"id": "swipe",
+				"radius": 48,
+				"range": 48,
+				"recovery": 1.0,
+				"shape": "sector",
+				"spread": 1.8,
+				"windup": 0.5
+			},
+			"enemy_id": "E08",
+			"enemy_name": "供碗祠巫",
+			"form_index": 0,
+			"form_name": ""
+		},
+		{
+			"attack": {
+				"action": "slam",
+				"damage_scale": 1.0,
+				"id": "slam",
+				"major": true,
+				"radius": 110,
+				"range": 110,
+				"recovery": 1.4,
+				"shape": "sector",
+				"spread": 1.8,
+				"windup": 1.2
+			},
+			"enemy_id": "E09",
+			"enemy_name": "撼钟尸卫",
+			"form_index": 0,
+			"form_name": ""
+		},
+		{
+			"attack": {
+				"action": "slam",
+				"damage_scale": 1.0,
+				"id": "slam",
+				"major": true,
+				"radius": 130,
+				"range": 130,
+				"recovery": 1.6,
+				"shape": "sector",
+				"spread": 1.6,
+				"windup": 1.0
+			},
+			"enemy_id": "E09",
+			"enemy_name": "撼钟尸卫",
+			"form_index": 0,
+			"form_name": ""
+		},
+		{
+			"attack": {
+				"action": "hook",
+				"damage_scale": 1.0,
+				"duration": 2.0,
+				"half_width": 24,
+				"id": "hook",
+				"length": 280,
+				"major": true,
+				"range": 300,
+				"recovery": 1.6,
+				"shape": "line",
+				"slow": 0.25,
+				"windup": 1.2
+			},
+			"enemy_id": "E10",
+			"enemy_name": "钩轮牵阵者",
+			"form_index": 0,
+			"form_name": ""
+		},
+		{
+			"attack": {
+				"action": "summon",
+				"damage_scale": 1.0,
+				"id": "summon",
+				"limit": 4,
+				"major": true,
+				"range": 250,
+				"recovery": 1.6,
+				"shape": "disc",
+				"spawn_count": 2,
+				"spawn_id": "D05",
+				"windup": 1.3
+			},
+			"enemy_id": "E11",
+			"enemy_name": "负棺驮役",
+			"form_index": 0,
+			"form_name": ""
+		},
+		{
+			"attack": {
+				"action": "swipe",
+				"damage_scale": 1.0,
+				"id": "swipe",
+				"radius": 48,
+				"range": 48,
+				"recovery": 1.0,
+				"shape": "sector",
+				"spread": 1.8,
+				"windup": 0.5
+			},
+			"enemy_id": "E11",
+			"enemy_name": "负棺驮役",
+			"form_index": 0,
+			"form_name": ""
+		},
+		{
+			"attack": {
+				"action": "slam",
+				"damage_scale": 1.0,
+				"id": "stele_arc_1",
+				"major": true,
+				"radius": 130,
+				"range": 130,
+				"recovery": 1.2,
+				"shape": "sector",
+				"spread": 1.7,
+				"windup": 1.2
+			},
+			"enemy_id": "E12",
+			"enemy_name": "碑背石龟",
+			"form_index": 0,
+			"form_name": ""
+		},
+		{
+			"attack": {
+				"action": "slam",
+				"damage_scale": 1.0,
+				"id": "stele_arc_2",
+				"major": true,
+				"radius": 150,
+				"range": 150,
+				"recovery": 1.4,
+				"shape": "sector",
+				"spread": 1.5,
+				"windup": 1.2
+			},
+			"enemy_id": "E12",
+			"enemy_name": "碑背石龟",
+			"form_index": 0,
+			"form_name": ""
+		},
+		{
+			"attack": {
+				"action": "pulse",
+				"damage_scale": 1.0,
+				"gap_angle": 0.0,
+				"gap_width": 1.4,
+				"id": "pulse",
+				"major": true,
+				"radius": 180,
+				"range": 180,
+				"recovery": 1.6,
+				"shape": "ring_gap",
+				"windup": 1.4
+			},
+			"enemy_id": "E12",
+			"enemy_name": "碑背石龟",
+			"form_index": 0,
+			"form_name": ""
+		},
+		{
+			"attack": {
+				"action": "swipe",
+				"damage_scale": 1.0,
+				"id": "swipe",
+				"radius": 48,
+				"range": 48,
+				"recovery": 1.0,
+				"shape": "sector",
+				"spread": 1.8,
+				"windup": 0.5
+			},
+			"enemy_id": "L00",
+			"enemy_name": "先遣重卒",
+			"form_index": 0,
+			"form_name": ""
+		},
+		{
+			"attack": {
+				"action": "command",
+				"count": 3,
+				"damage_scale": 1.0,
+				"duration": 3.0,
+				"id": "command",
+				"major": true,
+				"range": 290,
+				"recovery": 1.5,
+				"shape": "disc",
+				"windup": 1.0
+			},
+			"enemy_id": "L01",
+			"enemy_name": "旌威督军",
+			"form_index": 0,
+			"form_name": ""
+		},
+		{
+			"attack": {
+				"action": "swipe",
+				"damage_scale": 1.0,
+				"id": "swipe",
+				"radius": 48,
+				"range": 48,
+				"recovery": 1.0,
+				"shape": "sector",
+				"spread": 1.8,
+				"windup": 0.5
+			},
+			"enemy_id": "L01",
+			"enemy_name": "旌威督军",
+			"form_index": 0,
+			"form_name": ""
+		},
+		{
+			"attack": {
+				"action": "fan",
+				"count": 5,
+				"damage_scale": 1.0,
+				"id": "fan",
+				"life": 2.2,
+				"major": true,
+				"range": 390,
+				"recovery": 1.4,
+				"shape": "fan",
+				"speed": 210,
+				"spread": 1.2,
+				"windup": 1.1
+			},
+			"enemy_id": "L02",
+			"enemy_name": "织阵灯母",
+			"form_index": 0,
+			"form_name": ""
+		},
+		{
+			"attack": {
+				"action": "swipe",
+				"damage_scale": 1.0,
+				"id": "swipe",
+				"radius": 65,
+				"range": 65,
+				"recovery": 1.35,
+				"shape": "sector",
+				"spread": 1.8,
+				"windup": 0.6
+			},
+			"enemy_id": "L03",
+			"enemy_name": "缚契盾魁",
+			"form_index": 0,
+			"form_name": ""
+		},
+		{
+			"attack": {
+				"action": "summon",
+				"damage_scale": 1.0,
+				"id": "summon",
+				"limit": 4,
+				"major": true,
+				"range": 250,
+				"recovery": 1.6,
+				"shape": "disc",
+				"spawn_count": 2,
+				"spawn_id": "D05",
+				"windup": 1.3
+			},
+			"enemy_id": "L04",
+			"enemy_name": "孵棺驮役",
+			"form_index": 0,
+			"form_name": ""
+		},
+		{
+			"attack": {
+				"action": "swipe",
+				"damage_scale": 1.0,
+				"id": "swipe",
+				"radius": 48,
+				"range": 48,
+				"recovery": 1.0,
+				"shape": "sector",
+				"spread": 1.8,
+				"windup": 0.5
+			},
+			"enemy_id": "L04",
+			"enemy_name": "孵棺驮役",
+			"form_index": 0,
+			"form_name": ""
+		},
+		{
+			"attack": {
+				"action": "hook",
+				"damage_scale": 1.0,
+				"duration": 2.0,
+				"half_width": 24,
+				"id": "hook",
+				"length": 280,
+				"major": true,
+				"range": 300,
+				"recovery": 1.6,
+				"shape": "line",
+				"slow": 0.25,
+				"windup": 1.2
+			},
+			"enemy_id": "L05",
+			"enemy_name": "镜影复唱鬼",
+			"form_index": 0,
+			"form_name": ""
+		},
+		{
+			"attack": {
+				"action": "slam",
+				"damage_scale": 1.0,
+				"id": "slam",
+				"major": true,
+				"radius": 110,
+				"range": 110,
+				"recovery": 1.4,
+				"shape": "sector",
+				"spread": 1.8,
+				"windup": 1.2
+			},
+			"enemy_id": "L06",
+			"enemy_name": "鸣雷行刑鬼",
+			"form_index": 0,
+			"form_name": ""
+		},
+		{
+			"attack": {
+				"action": "slam",
+				"damage_scale": 1.0,
+				"id": "slam",
+				"major": true,
+				"radius": 130,
+				"range": 130,
+				"recovery": 1.6,
+				"shape": "sector",
+				"spread": 1.6,
+				"windup": 1.0
+			},
+			"enemy_id": "L06",
+			"enemy_name": "鸣雷行刑鬼",
+			"form_index": 0,
+			"form_name": ""
+		},
+		{
+			"attack": {
+				"action": "swipe",
+				"damage_scale": 1.0,
+				"id": "swipe",
+				"major": true,
+				"radius": 120,
+				"range": 120,
+				"recovery": 1.8,
+				"shape": "sector",
+				"spread": 2.0,
+				"windup": 1.15
+			},
+			"enemy_id": "B01",
+			"enemy_name": "荒道鬼校·空面碑甲",
+			"form_index": 0,
+			"form_name": ""
+		},
+		{
+			"attack": {
+				"action": "swipe",
+				"damage_scale": 1.0,
+				"id": "swipe",
+				"major": true,
+				"radius": 120,
+				"range": 120,
+				"recovery": 1.8,
+				"shape": "sector",
+				"spread": 2.0,
+				"windup": 1.15
+			},
+			"enemy_id": "B02",
+			"enemy_name": "守街尸将·檐面巡将",
+			"form_index": 0,
+			"form_name": ""
+		},
+		{
+			"attack": {
+				"action": "charge",
+				"damage_scale": 1.0,
+				"half_width": 32,
+				"id": "charge",
+				"length": 340,
+				"major": true,
+				"range": 420,
+				"recovery": 2.1,
+				"shape": "line",
+				"windup": 1.3
+			},
+			"enemy_id": "B03",
+			"enemy_name": "盘寨鬼魁·三面裂旗魁",
+			"form_index": 0,
+			"form_name": ""
+		},
+		{
+			"attack": {
+				"action": "swipe",
+				"damage_scale": 1.0,
+				"id": "swipe",
+				"major": true,
+				"radius": 140,
+				"range": 140,
+				"recovery": 1.8,
+				"shape": "sector",
+				"spread": 2.0,
+				"windup": 1.1
+			},
+			"enemy_id": "B03",
+			"enemy_name": "盘寨鬼魁·三面裂旗魁",
+			"form_index": 0,
+			"form_name": ""
+		},
+		{
+			"attack": {
+				"action": "charge",
+				"damage_scale": 1.0,
+				"half_width": 32,
+				"id": "charge",
+				"length": 340,
+				"major": true,
+				"range": 420,
+				"recovery": 2.1,
+				"shape": "line",
+				"windup": 1.3
+			},
+			"enemy_id": "B04",
+			"enemy_name": "押粮鬼尉·轭骨牛督",
+			"form_index": 0,
+			"form_name": ""
+		},
+		{
+			"attack": {
+				"action": "swipe",
+				"damage_scale": 1.0,
+				"id": "swipe",
+				"major": true,
+				"radius": 140,
+				"range": 140,
+				"recovery": 1.8,
+				"shape": "sector",
+				"spread": 2.0,
+				"windup": 1.1
+			},
+			"enemy_id": "B04",
+			"enemy_name": "押粮鬼尉·轭骨牛督",
+			"form_index": 0,
+			"form_name": ""
+		},
+		{
+			"attack": {
+				"action": "fan",
+				"count": 5,
+				"damage_scale": 1.0,
+				"id": "fan",
+				"life": 2.4,
+				"major": true,
+				"range": 520,
+				"recovery": 1.6,
+				"shape": "fan",
+				"speed": 230,
+				"spread": 1.3,
+				"windup": 1.3
+			},
+			"enemy_id": "B05",
+			"enemy_name": "冥灯术士·悬灯道人",
+			"form_index": 0,
+			"form_name": ""
+		},
+		{
+			"attack": {
+				"action": "pot",
+				"damage_scale": 1.0,
+				"delay": 0.8,
+				"duration": 2.4,
+				"id": "pot",
+				"limit": 2,
+				"major": true,
+				"radius": 65,
+				"range": 420,
+				"recovery": 2.2,
+				"shape": "marker",
+				"windup": 1.2
+			},
+			"enemy_id": "B05",
+			"enemy_name": "冥灯术士·悬灯道人",
+			"form_index": 0,
+			"form_name": ""
+		},
+		{
+			"attack": {
+				"action": "slam",
+				"damage_scale": 1.0,
+				"id": "slam",
+				"major": true,
+				"radius": 155,
+				"range": 155,
+				"recovery": 1.6,
+				"shape": "sector",
+				"spread": 1.9,
+				"windup": 1.4
+			},
+			"enemy_id": "B06",
+			"enemy_name": "荒祠镇将·祠脊石兽",
+			"form_index": 0,
+			"form_name": ""
+		},
+		{
+			"attack": {
+				"action": "slam",
+				"damage_scale": 1.0,
+				"id": "slam",
+				"major": true,
+				"radius": 175,
+				"range": 175,
+				"recovery": 2.4,
+				"shape": "sector",
+				"spread": 1.7,
+				"windup": 1.25
+			},
+			"enemy_id": "B06",
+			"enemy_name": "荒祠镇将·祠脊石兽",
+			"form_index": 0,
+			"form_name": ""
+		},
+		{
+			"attack": {
+				"action": "command",
+				"count": 3,
+				"damage_scale": 1.0,
+				"duration": 3.0,
+				"id": "command",
+				"major": true,
+				"range": 390,
+				"recovery": 1.6,
+				"shape": "disc",
+				"windup": 1.25
+			},
+			"enemy_id": "B07",
+			"enemy_name": "官署号令者·悬印司令",
+			"form_index": 0,
+			"form_name": ""
+		},
+		{
+			"attack": {
+				"action": "swipe",
+				"damage_scale": 1.0,
+				"id": "swipe",
+				"major": true,
+				"radius": 165,
+				"range": 165,
+				"recovery": 2.3,
+				"shape": "sector",
+				"spread": 2.0,
+				"windup": 1.2
+			},
+			"enemy_id": "B07",
+			"enemy_name": "官署号令者·悬印司令",
+			"form_index": 0,
+			"form_name": ""
+		},
+		{
+			"attack": {
+				"action": "charge",
+				"damage_scale": 1.0,
+				"half_width": 32,
+				"id": "charge",
+				"length": 340,
+				"major": true,
+				"range": 420,
+				"recovery": 2.1,
+				"shape": "line",
+				"windup": 1.3
+			},
+			"enemy_id": "B08",
+			"enemy_name": "水门冲将·闸齿鳄首",
+			"form_index": 0,
+			"form_name": ""
+		},
+		{
+			"attack": {
+				"action": "swipe",
+				"damage_scale": 1.0,
+				"id": "swipe",
+				"major": true,
+				"radius": 140,
+				"range": 140,
+				"recovery": 1.8,
+				"shape": "sector",
+				"spread": 2.0,
+				"windup": 1.1
+			},
+			"enemy_id": "B08",
+			"enemy_name": "水门冲将·闸齿鳄首",
+			"form_index": 0,
+			"form_name": ""
+		},
+		{
+			"attack": {
+				"action": "slam",
+				"damage_scale": 1.0,
+				"id": "slam",
+				"major": true,
+				"radius": 155,
+				"range": 155,
+				"recovery": 1.6,
+				"shape": "sector",
+				"spread": 1.9,
+				"windup": 1.4
+			},
+			"enemy_id": "B09",
+			"enemy_name": "军械库将·炉腹铁鬼",
+			"form_index": 0,
+			"form_name": ""
+		},
+		{
+			"attack": {
+				"action": "slam",
+				"damage_scale": 1.0,
+				"id": "slam",
+				"major": true,
+				"radius": 175,
+				"range": 175,
+				"recovery": 2.4,
+				"shape": "sector",
+				"spread": 1.7,
+				"windup": 1.25
+			},
+			"enemy_id": "B09",
+			"enemy_name": "军械库将·炉腹铁鬼",
+			"form_index": 0,
+			"form_name": ""
+		},
+		{
+			"attack": {
+				"action": "slam",
+				"damage_scale": 1.0,
+				"id": "slam",
+				"major": true,
+				"radius": 155,
+				"range": 155,
+				"recovery": 1.6,
+				"shape": "sector",
+				"spread": 1.9,
+				"windup": 1.4
+			},
+			"enemy_id": "B10",
+			"enemy_name": "封库双禁卫·左锁",
+			"form_index": 0,
+			"form_name": ""
+		},
+		{
+			"attack": {
+				"action": "slam",
+				"damage_scale": 1.0,
+				"id": "slam",
+				"major": true,
+				"radius": 175,
+				"range": 175,
+				"recovery": 2.4,
+				"shape": "sector",
+				"spread": 1.7,
+				"windup": 1.25
+			},
+			"enemy_id": "B10",
+			"enemy_name": "封库双禁卫·左锁",
+			"form_index": 0,
+			"form_name": ""
+		},
+		{
+			"attack": {
+				"action": "fan",
+				"count": 5,
+				"damage_scale": 1.0,
+				"id": "fan",
+				"life": 2.4,
+				"major": true,
+				"range": 520,
+				"recovery": 1.6,
+				"shape": "fan",
+				"speed": 230,
+				"spread": 1.3,
+				"windup": 1.3
+			},
+			"enemy_id": "B11",
+			"enemy_name": "巡城灯师·伞眼灯灵",
+			"form_index": 0,
+			"form_name": ""
+		},
+		{
+			"attack": {
+				"action": "pot",
+				"damage_scale": 1.0,
+				"delay": 0.8,
+				"duration": 2.4,
+				"id": "pot",
+				"limit": 2,
+				"major": true,
+				"radius": 65,
+				"range": 420,
+				"recovery": 2.2,
+				"shape": "marker",
+				"windup": 1.2
+			},
+			"enemy_id": "B11",
+			"enemy_name": "巡城灯师·伞眼灯灵",
+			"form_index": 0,
+			"form_name": ""
+		},
+		{
+			"attack": {
+				"action": "anchor",
+				"damage_scale": 1.0,
+				"gap_angle": 0.0,
+				"gap_width": 1.4,
+				"id": "anchor",
+				"limit": 2,
+				"major": true,
+				"radius": 230,
+				"range": 230,
+				"recovery": 1.7,
+				"shape": "ring_gap",
+				"spawn_count": 2,
+				"spawn_id": "D03",
+				"windup": 1.4
+			},
+			"enemy_id": "B12",
+			"enemy_name": "瘟灯阵主·多手幡灯大巫",
+			"form_index": 0,
+			"form_name": ""
+		},
+		{
+			"attack": {
+				"action": "pulse",
+				"damage_scale": 1.0,
+				"gap_angle": 0.0,
+				"gap_width": 1.4,
+				"id": "pulse",
+				"major": true,
+				"radius": 230,
+				"range": 230,
+				"recovery": 2.4,
+				"shape": "ring_gap",
+				"windup": 1.3
+			},
+			"enemy_id": "B12",
+			"enemy_name": "瘟灯阵主·多手幡灯大巫",
+			"form_index": 0,
+			"form_name": ""
+		},
+		{
+			"attack": {
+				"action": "charge",
+				"damage_scale": 1.0,
+				"half_width": 32,
+				"id": "charge",
+				"length": 340,
+				"major": true,
+				"range": 420,
+				"recovery": 2.1,
+				"shape": "line",
+				"windup": 1.3
+			},
+			"enemy_id": "B13",
+			"enemy_name": "城垣冲将·石鸱裂垛",
+			"form_index": 0,
+			"form_name": ""
+		},
+		{
+			"attack": {
+				"action": "swipe",
+				"damage_scale": 1.0,
+				"id": "swipe",
+				"major": true,
+				"radius": 140,
+				"range": 140,
+				"recovery": 1.8,
+				"shape": "sector",
+				"spread": 2.0,
+				"windup": 1.1
+			},
+			"enemy_id": "B13",
+			"enemy_name": "城垣冲将·石鸱裂垛",
+			"form_index": 0,
+			"form_name": ""
+		},
+		{
+			"attack": {
+				"action": "command",
+				"count": 3,
+				"damage_scale": 1.0,
+				"duration": 3.0,
+				"id": "command",
+				"major": true,
+				"range": 390,
+				"recovery": 1.6,
+				"shape": "disc",
+				"windup": 1.25
+			},
+			"enemy_id": "B14",
+			"enemy_name": "渡口号令者·引舟鬼帅",
+			"form_index": 0,
+			"form_name": ""
+		},
+		{
+			"attack": {
+				"action": "swipe",
+				"damage_scale": 1.0,
+				"id": "swipe",
+				"major": true,
+				"radius": 165,
+				"range": 165,
+				"recovery": 2.3,
+				"shape": "sector",
+				"spread": 2.0,
+				"windup": 1.2
+			},
+			"enemy_id": "B14",
+			"enemy_name": "渡口号令者·引舟鬼帅",
+			"form_index": 0,
+			"form_name": ""
+		},
+		{
+			"attack": {
+				"action": "shot",
+				"damage_scale": 1.0,
+				"half_width": 12.0,
+				"id": "hunter_aim",
+				"length": 760.0,
+				"life": 2.2,
+				"major": true,
+				"range": 760.0,
+				"recovery": 1.9,
+				"shape": "line",
+				"speed": 420,
+				"windup": 1.35
+			},
+			"enemy_id": "B15",
+			"enemy_name": "曹休·鬼猎兽相",
+			"form_index": 0,
+			"form_name": "曹休"
+		},
+		{
+			"attack": {
+				"action": "fan",
+				"count": 5,
+				"damage_scale": 0.8,
+				"id": "hunter_volley",
+				"life": 3.0,
+				"major": true,
+				"radius": 640.0,
+				"range": 640.0,
+				"recovery": 2.1,
+				"shape": "fan",
+				"speed": 310,
+				"spread": 1.25,
+				"windup": 1.55
+			},
+			"enemy_id": "B15",
+			"enemy_name": "曹休·鬼猎兽相",
+			"form_index": 0,
+			"form_name": "曹休"
+		},
+		{
+			"attack": {
+				"action": "charge",
+				"damage_scale": 0.9,
+				"half_width": 32.0,
+				"id": "hunter_reposition",
+				"length": 340.0,
+				"major": true,
+				"range": 340.0,
+				"recovery": 2.6,
+				"shape": "line",
+				"windup": 1.2
+			},
+			"enemy_id": "B15",
+			"enemy_name": "曹休·鬼猎兽相",
+			"form_index": 0,
+			"form_name": "曹休"
+		},
+		{
+			"attack": {
+				"action": "fan",
+				"count": 7,
+				"damage_scale": 0.9,
+				"id": "beast_hunt",
+				"life": 3.0,
+				"major": true,
+				"radius": 860.0,
+				"range": 860.0,
+				"recovery": 2.0,
+				"shape": "fan",
+				"speed": 310,
+				"spread": 1.55,
+				"windup": 1.55
+			},
+			"enemy_id": "B15",
+			"enemy_name": "曹休·鬼猎兽相",
+			"form_index": 1,
+			"form_name": "鬼猎兽相"
+		},
+		{
+			"attack": {
+				"action": "charge",
+				"damage_scale": 1.15,
+				"half_width": 50.0,
+				"id": "beast_leap",
+				"length": 510.0,
+				"major": true,
+				"range": 510.0,
+				"recovery": 2.2,
+				"shape": "line",
+				"windup": 1.4
+			},
+			"enemy_id": "B15",
+			"enemy_name": "曹休·鬼猎兽相",
+			"form_index": 1,
+			"form_name": "鬼猎兽相"
+		},
+		{
+			"attack": {
+				"action": "marker",
+				"damage_scale": 1.1,
+				"id": "hunt_mark",
+				"major": true,
+				"radius": 180.0,
+				"range": 1050.0,
+				"recovery": 2.2,
+				"shape": "marker",
+				"windup": 1.55
+			},
+			"enemy_id": "B15",
+			"enemy_name": "曹休·鬼猎兽相",
+			"form_index": 1,
+			"form_name": "鬼猎兽相"
+		},
+		{
+			"attack": {
+				"action": "slam",
+				"damage_scale": 1.2,
+				"id": "beast_rend",
+				"major": true,
+				"radius": 280.0,
+				"range": 280.0,
+				"recovery": 3.1,
+				"shape": "sector",
+				"spread": 2.6,
+				"windup": 1.5
+			},
+			"enemy_id": "B15",
+			"enemy_name": "曹休·鬼猎兽相",
+			"form_index": 1,
+			"form_name": "鬼猎兽相"
+		},
+		{
+			"attack": {
+				"action": "charge",
+				"damage_scale": 1.0,
+				"half_width": 38.0,
+				"id": "rider_lance",
+				"length": 600.0,
+				"major": true,
+				"range": 600.0,
+				"recovery": 2.2,
+				"shape": "line",
+				"windup": 1.4
+			},
+			"enemy_id": "B16",
+			"enemy_name": "曹纯·虎豹甲骑巨相",
+			"form_index": 0,
+			"form_name": "曹纯"
+		},
+		{
+			"attack": {
+				"action": "slam",
+				"damage_scale": 0.9,
+				"id": "rider_cleave",
+				"major": true,
+				"radius": 230.0,
+				"range": 230.0,
+				"recovery": 2.1,
+				"shape": "sector",
+				"spread": 2.4,
+				"windup": 1.35
+			},
+			"enemy_id": "B16",
+			"enemy_name": "曹纯·虎豹甲骑巨相",
+			"form_index": 0,
+			"form_name": "曹纯"
+		},
+		{
+			"attack": {
+				"action": "charge",
+				"damage_scale": 1.1,
+				"half_width": 42.0,
+				"id": "rider_return",
+				"length": 440.0,
+				"major": true,
+				"range": 440.0,
+				"recovery": 3.0,
+				"shape": "line",
+				"windup": 1.3
+			},
+			"enemy_id": "B16",
+			"enemy_name": "曹纯·虎豹甲骑巨相",
+			"form_index": 0,
+			"form_name": "曹纯"
+		},
+		{
+			"attack": {
+				"action": "charge",
+				"damage_scale": 1.2,
+				"half_width": 62.0,
+				"id": "tiger_long_charge",
+				"length": 900.0,
+				"major": true,
+				"range": 900.0,
+				"recovery": 2.5,
+				"shape": "line",
+				"windup": 1.65
+			},
+			"enemy_id": "B16",
+			"enemy_name": "曹纯·虎豹甲骑巨相",
+			"form_index": 1,
+			"form_name": "虎豹甲骑巨相"
+		},
+		{
+			"attack": {
+				"action": "slam",
+				"damage_scale": 1.05,
+				"id": "tiger_trample",
+				"major": true,
+				"radius": 310.0,
+				"range": 310.0,
+				"recovery": 2.2,
+				"shape": "sector",
+				"spread": 2.8,
+				"windup": 1.6
+			},
+			"enemy_id": "B16",
+			"enemy_name": "曹纯·虎豹甲骑巨相",
+			"form_index": 1,
+			"form_name": "虎豹甲骑巨相"
+		},
+		{
+			"attack": {
+				"action": "charge",
+				"damage_scale": 1.1,
+				"half_width": 54.0,
+				"id": "leopard_return",
+				"length": 720.0,
+				"major": true,
+				"range": 720.0,
+				"recovery": 2.4,
+				"shape": "line",
+				"windup": 1.5
+			},
+			"enemy_id": "B16",
+			"enemy_name": "曹纯·虎豹甲骑巨相",
+			"form_index": 1,
+			"form_name": "虎豹甲骑巨相"
+		},
+		{
+			"attack": {
+				"action": "pulse",
+				"damage_scale": 1.25,
+				"gap_angle": 0.9,
+				"gap_width": 1.6,
+				"id": "cavalry_break",
+				"inner_radius": 85.0,
+				"major": true,
+				"radius": 390.0,
+				"range": 390.0,
+				"recovery": 3.4,
+				"shape": "ring_gap",
+				"windup": 1.75
+			},
+			"enemy_id": "B16",
+			"enemy_name": "曹纯·虎豹甲骑巨相",
+			"form_index": 1,
+			"form_name": "虎豹甲骑巨相"
+		},
+		{
+			"attack": {
+				"action": "charge",
+				"damage_scale": 1.0,
+				"half_width": 38.0,
+				"id": "general_lunge",
+				"length": 460.0,
+				"major": true,
+				"range": 460.0,
+				"recovery": 1.8,
+				"shape": "line",
+				"windup": 1.3
+			},
+			"enemy_id": "B17",
+			"enemy_name": "张辽·夜叉裂阵将相",
+			"form_index": 0,
+			"form_name": "张辽"
+		},
+		{
+			"attack": {
+				"action": "slam",
+				"damage_scale": 0.95,
+				"id": "general_cut",
+				"major": true,
+				"radius": 245.0,
+				"range": 245.0,
+				"recovery": 1.7,
+				"shape": "sector",
+				"spread": 2.4,
+				"windup": 1.35
+			},
+			"enemy_id": "B17",
+			"enemy_name": "张辽·夜叉裂阵将相",
+			"form_index": 0,
+			"form_name": "张辽"
+		},
+		{
+			"attack": {
+				"action": "collaboration",
+				"damage_scale": 1.0,
+				"half_width": 55,
+				"id": "human_formation",
+				"length": 720,
+				"major": true,
+				"radius": 185,
+				"range": 820.0,
+				"recovery": 3.0,
+				"shape": "line",
+				"windup": 1.45
+			},
+			"enemy_id": "B17",
+			"enemy_name": "张辽·夜叉裂阵将相",
+			"form_index": 0,
+			"form_name": "张辽"
+		},
+		{
+			"attack": {
+				"action": "charge",
+				"damage_scale": 1.1,
+				"half_width": 54.0,
+				"id": "yaksha_break",
+				"length": 660.0,
+				"major": true,
+				"range": 660.0,
+				"recovery": 1.9,
+				"shape": "line",
+				"windup": 1.5
+			},
+			"enemy_id": "B17",
+			"enemy_name": "张辽·夜叉裂阵将相",
+			"form_index": 1,
+			"form_name": "夜叉裂阵将相"
+		},
+		{
+			"attack": {
+				"action": "slam",
+				"damage_scale": 1.05,
+				"id": "yaksha_cleave",
+				"major": true,
+				"radius": 340.0,
+				"range": 340.0,
+				"recovery": 1.8,
+				"shape": "sector",
+				"spread": 2.65,
+				"windup": 1.65
+			},
+			"enemy_id": "B17",
+			"enemy_name": "张辽·夜叉裂阵将相",
+			"form_index": 1,
+			"form_name": "夜叉裂阵将相"
+		},
+		{
+			"attack": {
+				"action": "collaboration",
+				"damage_scale": 1.15,
+				"half_width": 55,
+				"id": "war_formation",
+				"length": 720,
+				"major": true,
+				"radius": 185,
+				"range": 820.0,
+				"recovery": 3.3,
+				"shape": "line",
+				"windup": 1.65
+			},
+			"enemy_id": "B17",
+			"enemy_name": "张辽·夜叉裂阵将相",
+			"form_index": 1,
+			"form_name": "夜叉裂阵将相"
+		},
+		{
+			"attack": {
+				"action": "pulse",
+				"damage_scale": 1.2,
+				"gap_angle": 0.9,
+				"gap_width": 1.65,
+				"id": "yaksha_pulse",
+				"inner_radius": 90.0,
+				"major": true,
+				"radius": 420.0,
+				"range": 420.0,
+				"recovery": 3.4,
+				"shape": "ring_gap",
+				"windup": 1.8
+			},
+			"enemy_id": "B17",
+			"enemy_name": "张辽·夜叉裂阵将相",
+			"form_index": 1,
+			"form_name": "夜叉裂阵将相"
+		},
+		{
+			"attack": {
+				"action": "slam",
+				"damage_scale": 1.0,
+				"id": "halberd_sweep",
+				"major": true,
+				"radius": 300.0,
+				"range": 300.0,
+				"recovery": 1.9,
+				"shape": "sector",
+				"spread": 2.5,
+				"windup": 1.5
+			},
+			"enemy_id": "B18",
+			"enemy_name": "吕布·四臂鬼神相",
+			"form_index": 0,
+			"form_name": "吕布"
+		},
+		{
+			"attack": {
+				"action": "charge",
+				"damage_scale": 1.15,
+				"half_width": 48.0,
+				"id": "halberd_charge",
+				"length": 650.0,
+				"major": true,
+				"range": 650.0,
+				"recovery": 2.1,
+				"shape": "line",
+				"windup": 1.5
+			},
+			"enemy_id": "B18",
+			"enemy_name": "吕布·四臂鬼神相",
+			"form_index": 0,
+			"form_name": "吕布"
+		},
+		{
+			"attack": {
+				"action": "marker",
+				"damage_scale": 1.1,
+				"id": "halberd_fall",
+				"major": true,
+				"radius": 175.0,
+				"range": 1050.0,
+				"recovery": 2.2,
+				"shape": "marker",
+				"windup": 1.55
+			},
+			"enemy_id": "B18",
+			"enemy_name": "吕布·四臂鬼神相",
+			"form_index": 0,
+			"form_name": "吕布"
+		},
+		{
+			"attack": {
+				"action": "slam",
+				"damage_scale": 1.2,
+				"id": "halberd_finish",
+				"major": true,
+				"radius": 350.0,
+				"range": 350.0,
+				"recovery": 3.3,
+				"shape": "sector",
+				"spread": 2.8,
+				"windup": 1.7
+			},
+			"enemy_id": "B18",
+			"enemy_name": "吕布·四臂鬼神相",
+			"form_index": 0,
+			"form_name": "吕布"
+		},
+		{
+			"attack": {
+				"action": "slam",
+				"damage_scale": 1.15,
+				"id": "demon_fourfold",
+				"major": true,
+				"radius": 410.0,
+				"range": 410.0,
+				"recovery": 0.65,
+				"shape": "sector",
+				"spread": 2.8,
+				"windup": 1.85
+			},
+			"enemy_id": "B18",
+			"enemy_name": "吕布·四臂鬼神相",
+			"form_index": 1,
+			"form_name": "四臂鬼神相"
+		},
+		{
+			"attack": {
+				"action": "charge",
+				"damage_scale": 1.25,
+				"half_width": 68.0,
+				"id": "demon_skybreaker",
+				"length": 940.0,
+				"major": true,
+				"range": 940.0,
+				"recovery": 0.8,
+				"shape": "line",
+				"windup": 1.75
+			},
+			"enemy_id": "B18",
+			"enemy_name": "吕布·四臂鬼神相",
+			"form_index": 1,
+			"form_name": "四臂鬼神相"
+		},
+		{
+			"attack": {
+				"action": "pulse",
+				"damage_scale": 1.15,
+				"gap_angle": 0.9,
+				"gap_width": 1.75,
+				"id": "demon_quake",
+				"inner_radius": 105.0,
+				"major": true,
+				"radius": 520.0,
+				"range": 520.0,
+				"recovery": 1.0,
+				"shape": "ring_gap",
+				"windup": 1.9
+			},
+			"enemy_id": "B18",
+			"enemy_name": "吕布·四臂鬼神相",
+			"form_index": 1,
+			"form_name": "四臂鬼神相"
+		},
+		{
+			"attack": {
+				"action": "marker",
+				"damage_scale": 1.2,
+				"id": "demon_heavenfall",
+				"major": true,
+				"radius": 235.0,
+				"range": 1050.0,
+				"recovery": 0.9,
+				"shape": "marker",
+				"windup": 1.9
+			},
+			"enemy_id": "B18",
+			"enemy_name": "吕布·四臂鬼神相",
+			"form_index": 1,
+			"form_name": "四臂鬼神相"
+		},
+		{
+			"attack": {
+				"action": "slam",
+				"damage_scale": 1.35,
+				"id": "demon_final_cleave",
+				"major": true,
+				"radius": 460.0,
+				"range": 460.0,
+				"recovery": 3.7,
+				"shape": "sector",
+				"spread": 3.1,
+				"windup": 2.0
+			},
+			"enemy_id": "B18",
+			"enemy_name": "吕布·四臂鬼神相",
+			"form_index": 1,
+			"form_name": "四臂鬼神相"
+		},
+		{
+			"attack": {
+				"action": "swipe",
+				"damage_scale": 1.0,
+				"id": "swipe",
+				"radius": 48,
+				"range": 48,
+				"recovery": 1.0,
+				"shape": "sector",
+				"spread": 1.8,
+				"windup": 0.5
+			},
+			"enemy_id": "D01",
+			"enemy_name": "有限援军",
+			"form_index": 0,
+			"form_name": ""
+		},
+		{
+			"attack": {
+				"action": "slam",
+				"damage_scale": 1.0,
+				"id": "slam",
+				"major": true,
+				"radius": 155,
+				"range": 155,
+				"recovery": 1.6,
+				"shape": "sector",
+				"spread": 1.9,
+				"windup": 1.4
+			},
+			"enemy_id": "B10_R",
+			"enemy_name": "封库双禁卫·右锁",
+			"form_index": 0,
+			"form_name": ""
+		},
+		{
+			"attack": {
+				"action": "slam",
+				"damage_scale": 1.0,
+				"id": "slam",
+				"major": true,
+				"radius": 175,
+				"range": 175,
+				"recovery": 2.4,
+				"shape": "sector",
+				"spread": 1.7,
+				"windup": 1.25
+			},
+			"enemy_id": "B10_R",
+			"enemy_name": "封库双禁卫·右锁",
+			"form_index": 0,
+			"form_name": ""
+		}
+	],
+	"enemies": {
+		"B01": {
+			"attacks": [
+				{
+					"action": "swipe",
+					"damage_scale": 1.0,
+					"id": "swipe",
+					"major": true,
+					"radius": 120,
+					"range": 120,
+					"recovery": 1.8,
+					"shape": "sector",
+					"spread": 2.0,
+					"windup": 1.15
+				}
+			],
+			"behavior_id": "A",
+			"body_height": 128,
+			"counterplay": [
+				"诱使横扫落空，趁收势反击。",
+				"先清周围轻敌，再选择侧面接近。"
+			],
+			"damage": 22.65,
+			"description": "空面嵌入碑甲，以短追击和宽横扫阻路。",
+			"elite_rule_id": "",
+			"hp": 550,
+			"id": "B01",
+			"name": "荒道鬼校·空面碑甲",
+			"palette": [
+				"72694f",
+				"c5ad79",
+				"9a4838"
+			],
+			"params": {
+				"anchor_limit": 2,
+				"command_limit": 3,
+				"role": "boss",
+				"spawn_limit": 4
+			},
+			"radius": 29,
+			"rank": "boss",
+			"speed": 42,
+			"visual_id": "B01",
+			"xp": 30
+		},
+		"B02": {
+			"attacks": [
+				{
+					"action": "swipe",
+					"damage_scale": 1.0,
+					"id": "swipe",
+					"major": true,
+					"radius": 120,
+					"range": 120,
+					"recovery": 1.8,
+					"shape": "sector",
+					"spread": 2.0,
+					"windup": 1.15
+				}
+			],
+			"behavior_id": "A",
+			"body_height": 148,
+			"counterplay": [
+				"避开横扫后利用回气攻击。",
+				"先清理远射敌人，减少接近压力。"
+			],
+			"damage": 23.3,
+			"description": "巨大铜神面与屋檐化作躯体，追击并挥出横扫。",
+			"elite_rule_id": "",
+			"hp": 900,
+			"id": "B02",
+			"name": "守街尸将·檐面巡将",
+			"palette": [
+				"72694f",
+				"c5ad79",
+				"9a4838"
+			],
+			"params": {
+				"anchor_limit": 2,
+				"command_limit": 3,
+				"role": "boss",
+				"spawn_limit": 4
+			},
+			"radius": 30,
+			"rank": "boss",
+			"speed": 42,
+			"visual_id": "B02",
+			"xp": 30
+		},
+		"B03": {
+			"attacks": [
+				{
+					"action": "charge",
+					"damage_scale": 1.0,
+					"half_width": 32,
+					"id": "charge",
+					"length": 340,
+					"major": true,
+					"range": 420,
+					"recovery": 2.1,
+					"shape": "line",
+					"windup": 1.3
+				},
+				{
+					"action": "swipe",
+					"damage_scale": 1.0,
+					"id": "swipe",
+					"major": true,
+					"radius": 140,
+					"range": 140,
+					"recovery": 1.8,
+					"shape": "sector",
+					"spread": 2.0,
+					"windup": 1.1
+				}
+			],
+			"behavior_id": "B",
+			"body_height": 172,
+			"counterplay": [
+				"避开分别预告的横扫与冲刺。",
+				"清开一侧的来敌，再集中攻击鬼魁。"
+			],
+			"damage": 23.95,
+			"description": "三张裂面与残旗连成一个鬼躯，横扫后再作冲击。",
+			"elite_rule_id": "",
+			"hp": 1750,
+			"id": "B03",
+			"name": "盘寨鬼魁·三面裂旗魁",
+			"palette": [
+				"72694f",
+				"c5ad79",
+				"9a4838"
+			],
+			"params": {
+				"anchor_limit": 2,
+				"command_limit": 3,
+				"role": "boss",
+				"spawn_limit": 4
+			},
+			"radius": 31,
+			"rank": "boss",
+			"speed": 42,
+			"visual_id": "B03",
+			"xp": 30
+		},
+		"B04": {
+			"attacks": [
+				{
+					"action": "charge",
+					"damage_scale": 1.0,
+					"half_width": 32,
+					"id": "charge",
+					"length": 340,
+					"major": true,
+					"range": 420,
+					"recovery": 2.1,
+					"shape": "line",
+					"windup": 1.3
+				},
+				{
+					"action": "swipe",
+					"damage_scale": 1.0,
+					"id": "swipe",
+					"major": true,
+					"radius": 140,
+					"range": 140,
+					"recovery": 1.8,
+					"shape": "sector",
+					"spread": 2.0,
+					"windup": 1.1
+				}
+			],
+			"behavior_id": "B",
+			"body_height": 164,
+			"counterplay": [
+				"横向避开锁定的冲锋路线。",
+				"在冲锋终点附近等待回气再反击。"
+			],
+			"damage": 24.6,
+			"description": "粮车残轭、牛兽与鬼尉化为一体，低头后直线冲阵。",
+			"elite_rule_id": "",
+			"hp": 1250,
+			"id": "B04",
+			"name": "押粮鬼尉·轭骨牛督",
+			"palette": [
+				"72694f",
+				"c5ad79",
+				"9a4838"
+			],
+			"params": {
+				"anchor_limit": 2,
+				"command_limit": 3,
+				"role": "boss",
+				"spawn_limit": 4
+			},
+			"radius": 32,
+			"rank": "boss",
+			"speed": 42,
+			"visual_id": "B04",
+			"xp": 30
+		},
+		"B05": {
+			"attacks": [
+				{
+					"action": "fan",
+					"count": 5,
+					"damage_scale": 1.0,
+					"id": "fan",
+					"life": 2.4,
+					"major": true,
+					"range": 520,
+					"recovery": 1.6,
+					"shape": "fan",
+					"speed": 230,
+					"spread": 1.3,
+					"windup": 1.3
+				},
+				{
+					"action": "pot",
+					"damage_scale": 1.0,
+					"delay": 0.8,
+					"duration": 2.4,
+					"id": "pot",
+					"limit": 2,
+					"major": true,
+					"radius": 65,
+					"range": 420,
+					"recovery": 2.2,
+					"shape": "marker",
+					"windup": 1.2
+				}
+			],
+			"behavior_id": "C",
+			"body_height": 166,
+			"counterplay": [
+				"穿过扇弹的间隙。",
+				"避开灯位，趁术士停手接近。"
+			],
+			"damage": 25.25,
+			"description": "面具悬于旧灯，长节肢展开扇射并留下延迟灯位。",
+			"elite_rule_id": "",
+			"hp": 1150,
+			"id": "B05",
+			"name": "冥灯术士·悬灯道人",
+			"palette": [
+				"72694f",
+				"c5ad79",
+				"9a4838"
+			],
+			"params": {
+				"anchor_limit": 2,
+				"command_limit": 3,
+				"role": "boss",
+				"spawn_limit": 4
+			},
+			"radius": 33,
+			"rank": "boss",
+			"speed": 42,
+			"visual_id": "B05",
+			"xp": 30
+		},
+		"B06": {
+			"attacks": [
+				{
+					"action": "slam",
+					"damage_scale": 1.0,
+					"id": "slam",
+					"major": true,
+					"radius": 155,
+					"range": 155,
+					"recovery": 1.6,
+					"shape": "sector",
+					"spread": 1.9,
+					"windup": 1.4
+				},
+				{
+					"action": "slam",
+					"damage_scale": 1.0,
+					"id": "slam",
+					"major": true,
+					"radius": 175,
+					"range": 175,
+					"recovery": 2.4,
+					"shape": "sector",
+					"spread": 1.7,
+					"windup": 1.25
+				}
+			],
+			"behavior_id": "D",
+			"body_height": 184,
+			"counterplay": [
+				"避过连续重击，抓回气进攻。",
+				"先清附近敌人，再从侧面接近。"
+			],
+			"damage": 25.9,
+			"description": "祠脊与巨大石兽相连，以两拍重击守住荒祠。",
+			"elite_rule_id": "",
+			"hp": 2150,
+			"id": "B06",
+			"name": "荒祠镇将·祠脊石兽",
+			"palette": [
+				"72694f",
+				"c5ad79",
+				"9a4838"
+			],
+			"params": {
+				"anchor_limit": 2,
+				"command_limit": 3,
+				"role": "boss",
+				"spawn_limit": 4
+			},
+			"radius": 34,
+			"rank": "boss",
+			"speed": 42,
+			"visual_id": "B06",
+			"xp": 30
+		},
+		"B07": {
+			"attacks": [
+				{
+					"action": "command",
+					"count": 3,
+					"damage_scale": 1.0,
+					"duration": 3.0,
+					"id": "command",
+					"major": true,
+					"range": 390,
+					"recovery": 1.6,
+					"shape": "disc",
+					"windup": 1.25
+				},
+				{
+					"action": "swipe",
+					"damage_scale": 1.0,
+					"id": "swipe",
+					"major": true,
+					"radius": 165,
+					"range": 165,
+					"recovery": 2.3,
+					"shape": "sector",
+					"spread": 2.0,
+					"windup": 1.2
+				}
+			],
+			"behavior_id": "E",
+			"body_height": 184,
+			"counterplay": [
+				"先处理随从，减轻号令压力。",
+				"清开道路，优先攻击司令本体。"
+			],
+			"damage": 26.55,
+			"description": "巨印为躯，卷宗化臂，通过可见号令指挥有限部众。",
+			"elite_rule_id": "",
+			"hp": 2400,
+			"id": "B07",
+			"name": "官署号令者·悬印司令",
+			"palette": [
+				"72694f",
+				"c5ad79",
+				"9a4838"
+			],
+			"params": {
+				"anchor_limit": 2,
+				"command_limit": 3,
+				"role": "boss",
+				"spawn_limit": 4
+			},
+			"radius": 35,
+			"rank": "boss",
+			"speed": 42,
+			"visual_id": "B07",
+			"xp": 30
+		},
+		"B08": {
+			"attacks": [
+				{
+					"action": "charge",
+					"damage_scale": 1.0,
+					"half_width": 32,
+					"id": "charge",
+					"length": 340,
+					"major": true,
+					"range": 420,
+					"recovery": 2.1,
+					"shape": "line",
+					"windup": 1.3
+				},
+				{
+					"action": "swipe",
+					"damage_scale": 1.0,
+					"id": "swipe",
+					"major": true,
+					"radius": 140,
+					"range": 140,
+					"recovery": 1.8,
+					"shape": "sector",
+					"spread": 2.0,
+					"windup": 1.1
+				}
+			],
+			"behavior_id": "B",
+			"body_height": 176,
+			"counterplay": [
+				"横移离开预告路线。",
+				"清开侧路，在冲锋落点抓住回气。"
+			],
+			"damage": 27.2,
+			"description": "闸齿与鳄首组成狭长鬼躯，锁向后沿直线冲击。",
+			"elite_rule_id": "",
+			"hp": 2700,
+			"id": "B08",
+			"name": "水门冲将·闸齿鳄首",
+			"palette": [
+				"72694f",
+				"c5ad79",
+				"9a4838"
+			],
+			"params": {
+				"anchor_limit": 2,
+				"command_limit": 3,
+				"role": "boss",
+				"spawn_limit": 4
+			},
+			"radius": 36,
+			"rank": "boss",
+			"speed": 42,
+			"visual_id": "B08",
+			"xp": 30
+		},
+		"B09": {
+			"attacks": [
+				{
+					"action": "slam",
+					"damage_scale": 1.0,
+					"id": "slam",
+					"major": true,
+					"radius": 155,
+					"range": 155,
+					"recovery": 1.6,
+					"shape": "sector",
+					"spread": 1.9,
+					"windup": 1.4
+				},
+				{
+					"action": "slam",
+					"damage_scale": 1.0,
+					"id": "slam",
+					"major": true,
+					"radius": 175,
+					"range": 175,
+					"recovery": 2.4,
+					"shape": "sector",
+					"spread": 1.7,
+					"windup": 1.25
+				}
+			],
+			"behavior_id": "D",
+			"body_height": 184,
+			"counterplay": [
+				"避过两拍攻击后从侧面反击。",
+				"先清开附近轻敌，留出移动空间。"
+			],
+			"damage": 27.85,
+			"description": "旧炉为腹、铁桩为足，以两次重击守住库门。",
+			"elite_rule_id": "",
+			"hp": 2850,
+			"id": "B09",
+			"name": "军械库将·炉腹铁鬼",
+			"palette": [
+				"72694f",
+				"c5ad79",
+				"9a4838"
+			],
+			"params": {
+				"anchor_limit": 2,
+				"command_limit": 3,
+				"role": "boss",
+				"spawn_limit": 4
+			},
+			"radius": 37,
+			"rank": "boss",
+			"speed": 42,
+			"visual_id": "B09",
+			"xp": 30
+		},
+		"B10": {
+			"attacks": [
+				{
+					"action": "slam",
+					"damage_scale": 1.0,
+					"id": "slam",
+					"major": true,
+					"radius": 155,
+					"range": 155,
+					"recovery": 1.6,
+					"shape": "sector",
+					"spread": 1.9,
+					"windup": 1.4
+				},
+				{
+					"action": "slam",
+					"damage_scale": 1.0,
+					"id": "slam",
+					"major": true,
+					"radius": 175,
+					"range": 175,
+					"recovery": 2.4,
+					"shape": "sector",
+					"spread": 1.7,
+					"windup": 1.25
+				}
+			],
+			"behavior_id": "D",
+			"body_height": 170,
+			"counterplay": [
+				"留意两体分别预告的动作并逐次避开。",
+				"抓交替空档攻击任一锁卫；一次范围攻击不会双倍结算。"
+			],
+			"damage": 28.5,
+			"description": "左右锁卫交替攻击，两体共享同一条生命。",
+			"elite_rule_id": "",
+			"hp": 3200,
+			"id": "B10",
+			"name": "封库双禁卫·左锁",
+			"palette": [
+				"72694f",
+				"c5ad79",
+				"9a4838"
+			],
+			"params": {
+				"anchor_limit": 2,
+				"command_limit": 3,
+				"partner_id": "B10_R",
+				"role": "boss",
+				"spawn_limit": 4
+			},
+			"radius": 38,
+			"rank": "boss",
+			"speed": 42,
+			"visual_id": "B10",
+			"xp": 30
+		},
+		"B10_R": {
+			"attacks": [
+				{
+					"action": "slam",
+					"damage_scale": 1.0,
+					"id": "slam",
+					"major": true,
+					"radius": 155,
+					"range": 155,
+					"recovery": 1.6,
+					"shape": "sector",
+					"spread": 1.9,
+					"windup": 1.4
+				},
+				{
+					"action": "slam",
+					"damage_scale": 1.0,
+					"id": "slam",
+					"major": true,
+					"radius": 175,
+					"range": 175,
+					"recovery": 2.4,
+					"shape": "sector",
+					"spread": 1.7,
+					"windup": 1.25
+				}
+			],
+			"behavior_id": "D",
+			"body_height": 170,
+			"counterplay": [
+				"观察右锁的预告并避开。",
+				"抓两体交替空档，攻击任一锁卫。"
+			],
+			"damage": 0,
+			"description": "右锁与左锁交替出手，共享同一条生命。",
+			"elite_rule_id": "",
+			"hp": 3200,
+			"id": "B10_R",
+			"name": "封库双禁卫·右锁",
+			"palette": [
+				"72694f",
+				"c5ad79",
+				"9a4838"
+			],
+			"params": {
+				"counts_for_threshold": false,
+				"role": "derivative",
+				"targetable": true
+			},
+			"radius": 38,
+			"rank": "proxy",
+			"speed": 0,
+			"visual_id": "B10_R",
+			"xp": 0
+		},
+		"B11": {
+			"attacks": [
+				{
+					"action": "fan",
+					"count": 5,
+					"damage_scale": 1.0,
+					"id": "fan",
+					"life": 2.4,
+					"major": true,
+					"range": 520,
+					"recovery": 1.6,
+					"shape": "fan",
+					"speed": 230,
+					"spread": 1.3,
+					"windup": 1.3
+				},
+				{
+					"action": "pot",
+					"damage_scale": 1.0,
+					"delay": 0.8,
+					"duration": 2.4,
+					"id": "pot",
+					"limit": 2,
+					"major": true,
+					"radius": 65,
+					"range": 420,
+					"recovery": 2.2,
+					"shape": "marker",
+					"windup": 1.2
+				}
+			],
+			"behavior_id": "C",
+			"body_height": 178,
+			"counterplay": [
+				"穿过扇形弹幕的空隙。",
+				"绕开延迟灯位，趁灯灵回气接近。"
+			],
+			"damage": 29.15,
+			"description": "伞下多只灯眼聚为一体，展开扇射并留下有限灯位。",
+			"elite_rule_id": "",
+			"hp": 3150,
+			"id": "B11",
+			"name": "巡城灯师·伞眼灯灵",
+			"palette": [
+				"72694f",
+				"c5ad79",
+				"9a4838"
+			],
+			"params": {
+				"anchor_limit": 2,
+				"command_limit": 3,
+				"role": "boss",
+				"spawn_limit": 4
+			},
+			"radius": 39,
+			"rank": "boss",
+			"speed": 42,
+			"visual_id": "B11",
+			"xp": 30
+		},
+		"B12": {
+			"attacks": [
+				{
+					"action": "anchor",
+					"damage_scale": 1.0,
+					"gap_angle": 0.0,
+					"gap_width": 1.4,
+					"id": "anchor",
+					"limit": 2,
+					"major": true,
+					"radius": 230,
+					"range": 230,
+					"recovery": 1.7,
+					"shape": "ring_gap",
+					"spawn_count": 2,
+					"spawn_id": "D03",
+					"windup": 1.4
+				},
+				{
+					"action": "pulse",
+					"damage_scale": 1.0,
+					"gap_angle": 0.0,
+					"gap_width": 1.4,
+					"id": "pulse",
+					"major": true,
+					"radius": 230,
+					"range": 230,
+					"recovery": 2.4,
+					"shape": "ring_gap",
+					"windup": 1.3
+				}
+			],
+			"behavior_id": "F",
+			"body_height": 202,
+			"counterplay": [
+				"破坏灯锚，扩大可移动空间。",
+				"穿过已有缺口，直接攻击阵主。"
+			],
+			"damage": 29.8,
+			"description": "多手鬼巫布下可攻击灯锚，改变周围安全通路。",
+			"elite_rule_id": "",
+			"hp": 3600,
+			"id": "B12",
+			"name": "瘟灯阵主·多手幡灯大巫",
+			"palette": [
+				"72694f",
+				"c5ad79",
+				"9a4838"
+			],
+			"params": {
+				"anchor_limit": 2,
+				"command_limit": 3,
+				"role": "boss",
+				"spawn_limit": 4
+			},
+			"radius": 40,
+			"rank": "boss",
+			"speed": 42,
+			"visual_id": "B12",
+			"xp": 30
+		},
+		"B13": {
+			"attacks": [
+				{
+					"action": "charge",
+					"damage_scale": 1.0,
+					"half_width": 32,
+					"id": "charge",
+					"length": 340,
+					"major": true,
+					"range": 420,
+					"recovery": 2.1,
+					"shape": "line",
+					"windup": 1.3
+				},
+				{
+					"action": "swipe",
+					"damage_scale": 1.0,
+					"id": "swipe",
+					"major": true,
+					"radius": 140,
+					"range": 140,
+					"recovery": 1.8,
+					"shape": "sector",
+					"spread": 2.0,
+					"windup": 1.1
+				}
+			],
+			"behavior_id": "B",
+			"body_height": 188,
+			"counterplay": [
+				"避开预告冲线，待其停步反击。",
+				"先清轻敌，留出能横移的路线。"
+			],
+			"damage": 30.45,
+			"description": "石鸱与城垛巨兽融合，压低前身后冲出。",
+			"elite_rule_id": "",
+			"hp": 3650,
+			"id": "B13",
+			"name": "城垣冲将·石鸱裂垛",
+			"palette": [
+				"72694f",
+				"c5ad79",
+				"9a4838"
+			],
+			"params": {
+				"anchor_limit": 2,
+				"command_limit": 3,
+				"role": "boss",
+				"spawn_limit": 4
+			},
+			"radius": 41,
+			"rank": "boss",
+			"speed": 42,
+			"visual_id": "B13",
+			"xp": 30
+		},
+		"B14": {
+			"attacks": [
+				{
+					"action": "command",
+					"count": 3,
+					"damage_scale": 1.0,
+					"duration": 3.0,
+					"id": "command",
+					"major": true,
+					"range": 390,
+					"recovery": 1.6,
+					"shape": "disc",
+					"windup": 1.25
+				},
+				{
+					"action": "swipe",
+					"damage_scale": 1.0,
+					"id": "swipe",
+					"major": true,
+					"radius": 165,
+					"range": 165,
+					"recovery": 2.3,
+					"shape": "sector",
+					"spread": 2.0,
+					"windup": 1.2
+				}
+			],
+			"behavior_id": "E",
+			"body_height": 188,
+			"counterplay": [
+				"先清随从，减轻号令压力。",
+				"绕开前排，集中处理鬼帅。"
+			],
+			"damage": 31.1,
+			"description": "舟棺状长躯挥令杖，指挥有限部众协同进攻。",
+			"elite_rule_id": "",
+			"hp": 3650,
+			"id": "B14",
+			"name": "渡口号令者·引舟鬼帅",
+			"palette": [
+				"72694f",
+				"c5ad79",
+				"9a4838"
+			],
+			"params": {
+				"anchor_limit": 2,
+				"command_limit": 3,
+				"role": "boss",
+				"spawn_limit": 4
+			},
+			"radius": 42,
+			"rank": "boss",
+			"speed": 42,
+			"visual_id": "B14",
+			"xp": 30
+		},
+		"B15": {
+			"attacks": [],
+			"behavior_id": "G",
+			"body_height": 204,
+			"counterplay": [
+				"横移离开瞄准线，从扇箭间隙接近。",
+				"避开突进路线，趁曹休收势反击。"
+			],
+			"damage": 31.75,
+			"description": "曹休以瞄准射击和扇形箭矢压制远处，随后直线突进。",
+			"elite_rule_id": "",
+			"forms": [
+				{
+					"attacks": [
+						{
+							"action": "shot",
+							"damage_scale": 1.0,
+							"half_width": 12.0,
+							"id": "hunter_aim",
+							"length": 760.0,
+							"life": 2.2,
+							"major": true,
+							"range": 760.0,
+							"recovery": 1.9,
+							"shape": "line",
+							"speed": 420,
+							"windup": 1.35
+						},
+						{
+							"action": "fan",
+							"count": 5,
+							"damage_scale": 0.8,
+							"id": "hunter_volley",
+							"life": 3.0,
+							"major": true,
+							"radius": 640.0,
+							"range": 640.0,
+							"recovery": 2.1,
+							"shape": "fan",
+							"speed": 310,
+							"spread": 1.25,
+							"windup": 1.55
+						},
+						{
+							"action": "charge",
+							"damage_scale": 0.9,
+							"half_width": 32.0,
+							"id": "hunter_reposition",
+							"length": 340.0,
+							"major": true,
+							"range": 340.0,
+							"recovery": 2.6,
+							"shape": "line",
+							"windup": 1.2
+						}
+					],
+					"body_height": 120.0,
+					"counterplay": [
+						"横移离开瞄准线，从扇箭间隙接近。",
+						"避开突进路线，趁曹休收势反击。"
+					],
+					"description": "曹休以瞄准射击和扇形箭矢压制远处，随后直线突进。",
+					"name": "曹休",
+					"radius": 30.0,
+					"speed": 66.0
+				},
+				{
+					"attacks": [
+						{
+							"action": "fan",
+							"count": 7,
+							"damage_scale": 0.9,
+							"id": "beast_hunt",
+							"life": 3.0,
+							"major": true,
+							"radius": 860.0,
+							"range": 860.0,
+							"recovery": 2.0,
+							"shape": "fan",
+							"speed": 310,
+							"spread": 1.55,
+							"windup": 1.55
+						},
+						{
+							"action": "charge",
+							"damage_scale": 1.15,
+							"half_width": 50.0,
+							"id": "beast_leap",
+							"length": 510.0,
+							"major": true,
+							"range": 510.0,
+							"recovery": 2.2,
+							"shape": "line",
+							"windup": 1.4
+						},
+						{
+							"action": "marker",
+							"damage_scale": 1.1,
+							"id": "hunt_mark",
+							"major": true,
+							"radius": 180.0,
+							"range": 1050.0,
+							"recovery": 2.2,
+							"shape": "marker",
+							"windup": 1.55
+						},
+						{
+							"action": "slam",
+							"damage_scale": 1.2,
+							"id": "beast_rend",
+							"major": true,
+							"radius": 280.0,
+							"range": 280.0,
+							"recovery": 3.1,
+							"shape": "sector",
+							"spread": 2.6,
+							"windup": 1.5
+						}
+					],
+					"body_height": 204.0,
+					"counterplay": [
+						"从扇箭间隙穿过，横移避开扑击路线。",
+						"离开地面标记，等横扫结束再接近。"
+					],
+					"description": "鬼猎兽相以扇射、扑击和落点重击追猎，近处还有大范围横扫。",
+					"name": "鬼猎兽相",
+					"radius": 43.0,
+					"speed": 78.0
+				}
+			],
+			"hp": 4300,
+			"id": "B15",
+			"name": "曹休·鬼猎兽相",
+			"palette": [
+				"72694f",
+				"c5ad79",
+				"9a4838"
+			],
+			"params": {
+				"role": "boss"
+			},
+			"radius": 43,
+			"rank": "boss",
+			"speed": 42,
+			"visual_id": "B15",
+			"xp": 40
+		},
+		"B16": {
+			"attacks": [],
+			"behavior_id": "H",
+			"body_height": 218,
+			"counterplay": [
+				"看清冲锋方向，横移离开路线。",
+				"避开横斩后，趁收势接近攻击。"
+			],
+			"damage": 32.4,
+			"description": "曹纯持枪直冲，穿插近身横斩，再次发起冲击。",
+			"elite_rule_id": "",
+			"forms": [
+				{
+					"attacks": [
+						{
+							"action": "charge",
+							"damage_scale": 1.0,
+							"half_width": 38.0,
+							"id": "rider_lance",
+							"length": 600.0,
+							"major": true,
+							"range": 600.0,
+							"recovery": 2.2,
+							"shape": "line",
+							"windup": 1.4
+						},
+						{
+							"action": "slam",
+							"damage_scale": 0.9,
+							"id": "rider_cleave",
+							"major": true,
+							"radius": 230.0,
+							"range": 230.0,
+							"recovery": 2.1,
+							"shape": "sector",
+							"spread": 2.4,
+							"windup": 1.35
+						},
+						{
+							"action": "charge",
+							"damage_scale": 1.1,
+							"half_width": 42.0,
+							"id": "rider_return",
+							"length": 440.0,
+							"major": true,
+							"range": 440.0,
+							"recovery": 3.0,
+							"shape": "line",
+							"windup": 1.3
+						}
+					],
+					"body_height": 128.0,
+					"counterplay": [
+						"看清冲锋方向，横移离开路线。",
+						"避开横斩后，趁收势接近攻击。"
+					],
+					"description": "曹纯持枪直冲，穿插近身横斩，再次发起冲击。",
+					"name": "曹纯",
+					"radius": 31.0,
+					"speed": 62.0
+				},
+				{
+					"attacks": [
+						{
+							"action": "charge",
+							"damage_scale": 1.2,
+							"half_width": 62.0,
+							"id": "tiger_long_charge",
+							"length": 900.0,
+							"major": true,
+							"range": 900.0,
+							"recovery": 2.5,
+							"shape": "line",
+							"windup": 1.65
+						},
+						{
+							"action": "slam",
+							"damage_scale": 1.05,
+							"id": "tiger_trample",
+							"major": true,
+							"radius": 310.0,
+							"range": 310.0,
+							"recovery": 2.2,
+							"shape": "sector",
+							"spread": 2.8,
+							"windup": 1.6
+						},
+						{
+							"action": "charge",
+							"damage_scale": 1.1,
+							"half_width": 54.0,
+							"id": "leopard_return",
+							"length": 720.0,
+							"major": true,
+							"range": 720.0,
+							"recovery": 2.4,
+							"shape": "line",
+							"windup": 1.5
+						},
+						{
+							"action": "pulse",
+							"damage_scale": 1.25,
+							"gap_angle": 0.9,
+							"gap_width": 1.6,
+							"id": "cavalry_break",
+							"inner_radius": 85.0,
+							"major": true,
+							"radius": 390.0,
+							"range": 390.0,
+							"recovery": 3.4,
+							"shape": "ring_gap",
+							"windup": 1.75
+						}
+					],
+					"body_height": 218.0,
+					"counterplay": [
+						"横移离开冲锋路线，等他停步后反击。",
+						"朝震击缺口移动，或退出震击范围。"
+					],
+					"description": "虎豹甲骑巨相以长冲与踏击压制战场，还会引发带缺口的环形震击。",
+					"name": "虎豹甲骑巨相",
+					"radius": 44.0,
+					"speed": 70.0
+				}
+			],
+			"hp": 4800,
+			"id": "B16",
+			"name": "曹纯·虎豹甲骑巨相",
+			"palette": [
+				"72694f",
+				"c5ad79",
+				"9a4838"
+			],
+			"params": {
+				"role": "boss"
+			},
+			"radius": 44,
+			"rank": "boss",
+			"speed": 46,
+			"visual_id": "B16",
+			"xp": 40
+		},
+		"B17": {
+			"attacks": [],
+			"behavior_id": "I",
+			"body_height": 220,
+			"counterplay": [
+				"高顺列阵时离开路线；陈宫布阵时离开落点。",
+				"避过协同后，趁张辽回气反击。"
+			],
+			"damage": 33.05,
+			"description": "张辽以突进和横斩主攻，高顺与陈宫轮流协同。",
+			"elite_rule_id": "",
+			"forms": [
+				{
+					"attacks": [
+						{
+							"action": "charge",
+							"damage_scale": 1.0,
+							"half_width": 38.0,
+							"id": "general_lunge",
+							"length": 460.0,
+							"major": true,
+							"range": 460.0,
+							"recovery": 1.8,
+							"shape": "line",
+							"windup": 1.3
+						},
+						{
+							"action": "slam",
+							"damage_scale": 0.95,
+							"id": "general_cut",
+							"major": true,
+							"radius": 245.0,
+							"range": 245.0,
+							"recovery": 1.7,
+							"shape": "sector",
+							"spread": 2.4,
+							"windup": 1.35
+						},
+						{
+							"action": "collaboration",
+							"damage_scale": 1.0,
+							"half_width": 55,
+							"id": "human_formation",
+							"length": 720,
+							"major": true,
+							"radius": 185,
+							"range": 820.0,
+							"recovery": 3.0,
+							"shape": "line",
+							"windup": 1.45
+						}
+					],
+					"body_height": 130.0,
+					"counterplay": [
+						"高顺列阵时离开路线；陈宫布阵时离开落点。",
+						"避过协同后，趁张辽回气反击。"
+					],
+					"description": "张辽以突进和横斩主攻，高顺与陈宫轮流协同。",
+					"name": "张辽",
+					"radius": 32.0,
+					"speed": 64.0
+				},
+				{
+					"attacks": [
+						{
+							"action": "charge",
+							"damage_scale": 1.1,
+							"half_width": 54.0,
+							"id": "yaksha_break",
+							"length": 660.0,
+							"major": true,
+							"range": 660.0,
+							"recovery": 1.9,
+							"shape": "line",
+							"windup": 1.5
+						},
+						{
+							"action": "slam",
+							"damage_scale": 1.05,
+							"id": "yaksha_cleave",
+							"major": true,
+							"radius": 340.0,
+							"range": 340.0,
+							"recovery": 1.8,
+							"shape": "sector",
+							"spread": 2.65,
+							"windup": 1.65
+						},
+						{
+							"action": "collaboration",
+							"damage_scale": 1.15,
+							"half_width": 55,
+							"id": "war_formation",
+							"length": 720,
+							"major": true,
+							"radius": 185,
+							"range": 820.0,
+							"recovery": 3.3,
+							"shape": "line",
+							"windup": 1.65
+						},
+						{
+							"action": "pulse",
+							"damage_scale": 1.2,
+							"gap_angle": 0.9,
+							"gap_width": 1.65,
+							"id": "yaksha_pulse",
+							"inner_radius": 90.0,
+							"major": true,
+							"radius": 420.0,
+							"range": 420.0,
+							"recovery": 3.4,
+							"shape": "ring_gap",
+							"windup": 1.8
+						}
+					],
+					"body_height": 220.0,
+					"counterplay": [
+						"看清震击缺口，沿空处移动。",
+						"注意高顺的直线与陈宫的落点，避过后攻击张辽。"
+					],
+					"description": "夜叉将相以冲阵、横斩和环形震击施压，高顺与陈宫仍轮流协同。",
+					"name": "夜叉裂阵将相",
+					"radius": 45.0,
+					"speed": 72.0
+				}
+			],
+			"hp": 6200,
+			"id": "B17",
+			"name": "张辽·夜叉裂阵将相",
+			"palette": [
+				"72694f",
+				"c5ad79",
+				"9a4838"
+			],
+			"params": {
+				"collaborators": [
+					"M03_WAR",
+					"M04_WAR"
+				],
+				"role": "boss"
+			},
+			"radius": 45,
+			"rank": "boss",
+			"speed": 42,
+			"visual_id": "B17",
+			"xp": 40
+		},
+		"B18": {
+			"attacks": [],
+			"behavior_id": "J",
+			"body_height": 248,
+			"counterplay": [
+				"横移避开突进路线，离开落戟标记。",
+				"避过戟刃横扫，趁收势接近反击。"
+			],
+			"damage": 33.7,
+			"description": "吕布独自持戟迎战，以横扫、突进和落戟交替进攻。",
+			"elite_rule_id": "",
+			"forms": [
+				{
+					"attacks": [
+						{
+							"action": "slam",
+							"damage_scale": 1.0,
+							"id": "halberd_sweep",
+							"major": true,
+							"radius": 300.0,
+							"range": 300.0,
+							"recovery": 1.9,
+							"shape": "sector",
+							"spread": 2.5,
+							"windup": 1.5
+						},
+						{
+							"action": "charge",
+							"damage_scale": 1.15,
+							"half_width": 48.0,
+							"id": "halberd_charge",
+							"length": 650.0,
+							"major": true,
+							"range": 650.0,
+							"recovery": 2.1,
+							"shape": "line",
+							"windup": 1.5
+						},
+						{
+							"action": "marker",
+							"damage_scale": 1.1,
+							"id": "halberd_fall",
+							"major": true,
+							"radius": 175.0,
+							"range": 1050.0,
+							"recovery": 2.2,
+							"shape": "marker",
+							"windup": 1.55
+						},
+						{
+							"action": "slam",
+							"damage_scale": 1.2,
+							"id": "halberd_finish",
+							"major": true,
+							"radius": 350.0,
+							"range": 350.0,
+							"recovery": 3.3,
+							"shape": "sector",
+							"spread": 2.8,
+							"windup": 1.7
+						}
+					],
+					"body_height": 144.0,
+					"counterplay": [
+						"横移避开突进路线，离开落戟标记。",
+						"避过戟刃横扫，趁收势接近反击。"
+					],
+					"description": "吕布独自持戟迎战，以横扫、突进和落戟交替进攻。",
+					"name": "吕布",
+					"radius": 34.0,
+					"speed": 70.0
+				},
+				{
+					"attacks": [
+						{
+							"action": "slam",
+							"damage_scale": 1.15,
+							"id": "demon_fourfold",
+							"major": true,
+							"radius": 410.0,
+							"range": 410.0,
+							"recovery": 0.65,
+							"shape": "sector",
+							"spread": 2.8,
+							"windup": 1.85
+						},
+						{
+							"action": "charge",
+							"damage_scale": 1.25,
+							"half_width": 68.0,
+							"id": "demon_skybreaker",
+							"length": 940.0,
+							"major": true,
+							"range": 940.0,
+							"recovery": 0.8,
+							"shape": "line",
+							"windup": 1.75
+						},
+						{
+							"action": "pulse",
+							"damage_scale": 1.15,
+							"gap_angle": 0.9,
+							"gap_width": 1.75,
+							"id": "demon_quake",
+							"inner_radius": 105.0,
+							"major": true,
+							"radius": 520.0,
+							"range": 520.0,
+							"recovery": 1.0,
+							"shape": "ring_gap",
+							"windup": 1.9
+						},
+						{
+							"action": "marker",
+							"damage_scale": 1.2,
+							"id": "demon_heavenfall",
+							"major": true,
+							"radius": 235.0,
+							"range": 1050.0,
+							"recovery": 0.9,
+							"shape": "marker",
+							"windup": 1.9
+						},
+						{
+							"action": "slam",
+							"damage_scale": 1.35,
+							"id": "demon_final_cleave",
+							"major": true,
+							"radius": 460.0,
+							"range": 460.0,
+							"recovery": 3.7,
+							"shape": "sector",
+							"spread": 3.1,
+							"windup": 2.0
+						}
+					],
+					"body_height": 248.0,
+					"counterplay": [
+						"沿环形震击的缺口移动，或退出震击范围。",
+						"避开长冲路线与落戟标记，趁吕布收势反击。"
+					],
+					"description": "四臂鬼神相挥戟横扫、长冲，以环形震击与落戟覆盖大片战场。",
+					"name": "四臂鬼神相",
+					"radius": 46.0,
+					"speed": 80.0
+				}
+			],
+			"hp": 7600,
+			"id": "B18",
+			"name": "吕布·四臂鬼神相",
+			"palette": [
+				"72694f",
+				"c5ad79",
+				"9a4838"
+			],
+			"params": {
+				"role": "boss"
+			},
+			"radius": 46,
+			"rank": "boss",
+			"speed": 46,
+			"visual_id": "B18",
+			"xp": 60
+		},
+		"D01": {
+			"attacks": [
+				{
+					"action": "swipe",
+					"damage_scale": 1.0,
+					"id": "swipe",
+					"radius": 48,
+					"range": 48,
+					"recovery": 1.0,
+					"shape": "sector",
+					"spread": 1.8,
+					"windup": 0.5
+				}
+			],
+			"behavior_id": "E01",
+			"body_height": 40,
+			"counterplay": [
+				"先清援军，腾出行动空间。",
+				"先处理来源，阻止后续召唤。"
+			],
+			"damage": 8,
+			"description": "由敌人有限召出的活体，出生后可正常受击。",
+			"elite_rule_id": "",
+			"hp": 28,
+			"id": "D01",
+			"name": "有限援军",
+			"palette": [
+				"72694f",
+				"c5ad79",
+				"9a4838"
+			],
+			"params": {
+				"counts_for_threshold": false,
+				"role": "derivative",
+				"targetable": true
+			},
+			"radius": 11,
+			"rank": "ordinary",
+			"speed": 52,
+			"visual_id": "D01",
+			"xp": 0
+		},
+		"D03": {
+			"attacks": [],
+			"behavior_id": "E05",
+			"body_height": 46,
+			"counterplay": [
+				"破坏灯锚，扩大通路。",
+				"从缺口接近来源，不必先破锚。"
+			],
+			"damage": 0,
+			"description": "灯阵中可受击的固定锚点，破坏后缩小对应危险范围。",
+			"elite_rule_id": "",
+			"hp": 65,
+			"id": "D03",
+			"name": "灯锚",
+			"palette": [
+				"72694f",
+				"c5ad79",
+				"9a4838"
+			],
+			"params": {
+				"counts_for_threshold": false,
+				"role": "derivative",
+				"targetable": true
+			},
+			"radius": 16,
+			"rank": "object",
+			"speed": 0,
+			"visual_id": "D03",
+			"xp": 0
+		},
+		"D05": {
+			"attacks": [],
+			"behavior_id": "E11",
+			"body_height": 38,
+			"counterplay": [
+				"孵化前破坏待孵物。",
+				"处理来源，取消尚未孵出的援军。"
+			],
+			"damage": 0,
+			"description": "带有孵化预告的可攻击对象，孵化后产生援军。",
+			"elite_rule_id": "",
+			"hp": 45,
+			"id": "D05",
+			"name": "待孵棺卵",
+			"palette": [
+				"72694f",
+				"c5ad79",
+				"9a4838"
+			],
+			"params": {
+				"counts_for_threshold": false,
+				"role": "derivative",
+				"targetable": true
+			},
+			"radius": 17,
+			"rank": "object",
+			"speed": 0,
+			"visual_id": "D05",
+			"xp": 0
+		},
+		"E01": {
+			"attacks": [
+				{
+					"action": "swipe",
+					"damage_scale": 1.0,
+					"id": "swipe",
+					"radius": 48,
+					"range": 48,
+					"recovery": 1.0,
+					"shape": "sector",
+					"spread": 1.8,
+					"windup": 0.5
+				}
+			],
+			"behavior_id": "E01",
+			"body_height": 52,
+			"counterplay": [
+				"聚拢后用范围攻击清群。",
+				"从一侧开路，避开包围。"
+			],
+			"damage": 10,
+			"description": "草席与残甲裹住木骨，结群逼近后挥臂攻击。",
+			"elite_rule_id": "",
+			"hp": 38,
+			"id": "E01",
+			"name": "草甲鬼卒",
+			"palette": [
+				"72694f",
+				"c5ad79",
+				"9a4838"
+			],
+			"params": {
+				"role": "melee"
+			},
+			"radius": 13,
+			"rank": "ordinary",
+			"speed": 58,
+			"visual_id": "E01",
+			"xp": 3
+		},
+		"E02": {
+			"attacks": [
+				{
+					"action": "shot",
+					"damage_scale": 1.0,
+					"half_width": 7,
+					"id": "shot",
+					"length": 430,
+					"life": 2.2,
+					"major": true,
+					"range": 430,
+					"recovery": 1.25,
+					"shape": "line",
+					"speed": 250,
+					"windup": 0.9
+				}
+			],
+			"behavior_id": "E02",
+			"body_height": 64,
+			"counterplay": [
+				"看清瞄准方向后侧移避箭。",
+				"清开前排或绕侧接近弓手。"
+			],
+			"damage": 12,
+			"description": "持枯骨长弓，停步瞄准后向锁定位置射箭。",
+			"elite_rule_id": "",
+			"hp": 32,
+			"id": "E02",
+			"name": "骨弓伥",
+			"palette": [
+				"72694f",
+				"c5ad79",
+				"9a4838"
+			],
+			"params": {
+				"role": "ranged"
+			},
+			"radius": 13,
+			"rank": "ordinary",
+			"speed": 40,
+			"visual_id": "E02",
+			"xp": 4
+		},
+		"E03": {
+			"attacks": [
+				{
+					"action": "charge",
+					"damage_scale": 1.0,
+					"half_width": 18,
+					"id": "charge",
+					"length": 270,
+					"major": true,
+					"range": 310,
+					"recovery": 1.4,
+					"shape": "line",
+					"windup": 1.0
+				}
+			],
+			"behavior_id": "E03",
+			"body_height": 70,
+			"counterplay": [
+				"横向避开锁定路线。",
+				"等待冲锋停步后上前反击。"
+			],
+			"damage": 16,
+			"description": "兽首套着断轭，压低前身后沿直线冲锋。",
+			"elite_rule_id": "",
+			"hp": 58,
+			"id": "E03",
+			"name": "轭骨奔兽",
+			"palette": [
+				"72694f",
+				"c5ad79",
+				"9a4838"
+			],
+			"params": {
+				"role": "melee"
+			},
+			"radius": 16,
+			"rank": "ordinary",
+			"speed": 82,
+			"visual_id": "E03",
+			"xp": 5
+		},
+		"E04": {
+			"attacks": [
+				{
+					"action": "swipe",
+					"damage_scale": 1.0,
+					"id": "swipe",
+					"radius": 65,
+					"range": 65,
+					"recovery": 1.35,
+					"shape": "sector",
+					"spread": 1.8,
+					"windup": 0.6
+				}
+			],
+			"behavior_id": "E04",
+			"body_height": 74,
+			"counterplay": [
+				"从盾面侧后进攻。",
+				"等它放盾再集中攻击，或持续击打正面。"
+			],
+			"damage": 15,
+			"description": "残门板作盾，举盾期间正面直接伤害减少，出手时会放盾。",
+			"elite_rule_id": "",
+			"hp": 90,
+			"id": "E04",
+			"name": "扉甲卒",
+			"palette": [
+				"72694f",
+				"c5ad79",
+				"9a4838"
+			],
+			"params": {
+				"guard_duration": 2.6,
+				"role": "melee",
+				"shield_arc": 1.8,
+				"shield_reduction": 0.4
+			},
+			"radius": 18,
+			"rank": "ordinary",
+			"speed": 42,
+			"visual_id": "E04",
+			"xp": 6
+		},
+		"E05": {
+			"attacks": [
+				{
+					"action": "fan",
+					"count": 5,
+					"damage_scale": 1.0,
+					"id": "fan",
+					"life": 2.2,
+					"major": true,
+					"range": 390,
+					"recovery": 1.4,
+					"shape": "fan",
+					"speed": 210,
+					"spread": 1.2,
+					"windup": 1.1
+				}
+			],
+			"behavior_id": "E05",
+			"body_height": 62,
+			"counterplay": [
+				"沿弹幕间隙移动。",
+				"趁发射空档接近并处理来源。"
+			],
+			"damage": 12,
+			"description": "竹篾纸灯长出细腿，张开灯架后射出扇形灯弹。",
+			"elite_rule_id": "",
+			"hp": 48,
+			"id": "E05",
+			"name": "纸灯蛛",
+			"palette": [
+				"72694f",
+				"c5ad79",
+				"9a4838"
+			],
+			"params": {
+				"role": "ranged"
+			},
+			"radius": 16,
+			"rank": "ordinary",
+			"speed": 36,
+			"visual_id": "E05",
+			"xp": 5
+		},
+		"E06": {
+			"attacks": [
+				{
+					"action": "pot",
+					"damage_scale": 1.0,
+					"delay": 0.7,
+					"duration": 2.4,
+					"id": "pot",
+					"limit": 1,
+					"major": true,
+					"radius": 54,
+					"range": 330,
+					"recovery": 1.5,
+					"shape": "marker",
+					"windup": 1.1
+				}
+			],
+			"behavior_id": "E06",
+			"body_height": 68,
+			"counterplay": [
+				"在落罐前离开标记位置。",
+				"利用投罐后的空档接近来源。"
+			],
+			"damage": 14,
+			"description": "背负大瓮，抛出的陶罐在预告落点形成短时危险区。",
+			"elite_rule_id": "",
+			"hp": 56,
+			"id": "E06",
+			"name": "背瓮行脚",
+			"palette": [
+				"72694f",
+				"c5ad79",
+				"9a4838"
+			],
+			"params": {
+				"hazard_limit": 1,
+				"role": "ranged"
+			},
+			"radius": 17,
+			"rank": "ordinary",
+			"speed": 38,
+			"visual_id": "E06",
+			"xp": 5
+		},
+		"E07": {
+			"attacks": [
+				{
+					"action": "command",
+					"count": 3,
+					"damage_scale": 1.0,
+					"duration": 3.0,
+					"id": "command",
+					"major": true,
+					"range": 290,
+					"recovery": 1.5,
+					"shape": "disc",
+					"windup": 1.0
+				},
+				{
+					"action": "swipe",
+					"damage_scale": 1.0,
+					"id": "swipe",
+					"radius": 48,
+					"range": 48,
+					"recovery": 1.0,
+					"shape": "sector",
+					"spread": 1.8,
+					"windup": 0.5
+				}
+			],
+			"behavior_id": "E07",
+			"body_height": 82,
+			"counterplay": [
+				"先处理鸣幡吏，停止后续指挥。",
+				"先清除部众，减少号令收益。"
+			],
+			"damage": 10,
+			"description": "挥动长幡指挥附近已有部众，不额外召唤敌人。",
+			"elite_rule_id": "",
+			"hp": 72,
+			"id": "E07",
+			"name": "鸣幡吏",
+			"palette": [
+				"72694f",
+				"c5ad79",
+				"9a4838"
+			],
+			"params": {
+				"command_duration": 3.0,
+				"command_limit": 3,
+				"role": "support"
+			},
+			"radius": 17,
+			"rank": "ordinary",
+			"speed": 34,
+			"visual_id": "E07",
+			"xp": 6
+		},
+		"E08": {
+			"attacks": [
+				{
+					"action": "heal",
+					"count": 2,
+					"damage_scale": 1.0,
+					"id": "heal",
+					"major": true,
+					"range": 230,
+					"recovery": 1.6,
+					"shape": "disc",
+					"windup": 1.1
+				},
+				{
+					"action": "swipe",
+					"damage_scale": 1.0,
+					"id": "swipe",
+					"radius": 48,
+					"range": 48,
+					"recovery": 1.0,
+					"shape": "sector",
+					"spread": 1.8,
+					"windup": 0.5
+				}
+			],
+			"behavior_id": "E08",
+			"body_height": 74,
+			"counterplay": [
+				"击败祭巫，停止后续治疗。",
+				"把随从引出治疗范围再逐个处理。"
+			],
+			"damage": 8,
+			"description": "停在原地举碗，有限治疗附近随从，每名受益者的整场恢复总量有上限。",
+			"elite_rule_id": "",
+			"hp": 68,
+			"id": "E08",
+			"name": "供碗祠巫",
+			"palette": [
+				"72694f",
+				"c5ad79",
+				"9a4838"
+			],
+			"params": {
+				"anchored": true,
+				"heal_fraction": 0.15,
+				"heal_limit": 2,
+				"heal_radius": 230.0,
+				"heal_received_cap": 0.15,
+				"role": "support"
+			},
+			"radius": 18,
+			"rank": "ordinary",
+			"speed": 18,
+			"visual_id": "E08",
+			"xp": 6
+		},
+		"E09": {
+			"attacks": [
+				{
+					"action": "slam",
+					"damage_scale": 1.0,
+					"id": "slam",
+					"major": true,
+					"radius": 110,
+					"range": 110,
+					"recovery": 1.4,
+					"shape": "sector",
+					"spread": 1.8,
+					"windup": 1.2
+				},
+				{
+					"action": "slam",
+					"damage_scale": 1.0,
+					"id": "slam",
+					"major": true,
+					"radius": 130,
+					"range": 130,
+					"recovery": 1.6,
+					"shape": "sector",
+					"spread": 1.6,
+					"windup": 1.0
+				}
+			],
+			"behavior_id": "E09",
+			"body_height": 112,
+			"counterplay": [
+				"避过两次预告后抓回气进攻。",
+				"先清周围轻敌，腾出侧移空间。"
+			],
+			"damage": 22,
+			"description": "身披钟形铜甲，接连挥出两次重槌，随后回气。",
+			"elite_rule_id": "",
+			"hp": 160,
+			"id": "E09",
+			"name": "撼钟尸卫",
+			"palette": [
+				"72694f",
+				"c5ad79",
+				"9a4838"
+			],
+			"params": {
+				"role": "heavy"
+			},
+			"radius": 25,
+			"rank": "heavy",
+			"speed": 32,
+			"visual_id": "E09",
+			"xp": 10
+		},
+		"E10": {
+			"attacks": [
+				{
+					"action": "hook",
+					"damage_scale": 1.0,
+					"duration": 2.0,
+					"half_width": 24,
+					"id": "hook",
+					"length": 280,
+					"major": true,
+					"range": 300,
+					"recovery": 1.6,
+					"shape": "line",
+					"slow": 0.25,
+					"windup": 1.2
+				}
+			],
+			"behavior_id": "E10",
+			"body_height": 108,
+			"counterplay": [
+				"离开预告线路，等待钩镰扫过。",
+				"在锁向前穿过线路，从侧面接近。"
+			],
+			"damage": 18,
+			"description": "拖着斜轮挥动长钩，沿预告路线留下短暂减速带。",
+			"elite_rule_id": "",
+			"hp": 130,
+			"id": "E10",
+			"name": "钩轮牵阵者",
+			"palette": [
+				"72694f",
+				"c5ad79",
+				"9a4838"
+			],
+			"params": {
+				"role": "heavy"
+			},
+			"radius": 23,
+			"rank": "heavy",
+			"speed": 42,
+			"visual_id": "E10",
+			"xp": 9
+		},
+		"E11": {
+			"attacks": [
+				{
+					"action": "summon",
+					"damage_scale": 1.0,
+					"id": "summon",
+					"limit": 4,
+					"major": true,
+					"range": 250,
+					"recovery": 1.6,
+					"shape": "disc",
+					"spawn_count": 2,
+					"spawn_id": "D05",
+					"windup": 1.3
+				},
+				{
+					"action": "swipe",
+					"damage_scale": 1.0,
+					"id": "swipe",
+					"radius": 48,
+					"range": 48,
+					"recovery": 1.0,
+					"shape": "sector",
+					"spread": 1.8,
+					"windup": 0.5
+				}
+			],
+			"behavior_id": "E11",
+			"body_height": 104,
+			"counterplay": [
+				"在孵化前破坏待孵棺卵。",
+				"优先处理驮役，阻止后续出生。"
+			],
+			"damage": 14,
+			"description": "多足驮体背负木棺，停步后分批放出有限援军。",
+			"elite_rule_id": "",
+			"hp": 150,
+			"id": "E11",
+			"name": "负棺驮役",
+			"palette": [
+				"72694f",
+				"c5ad79",
+				"9a4838"
+			],
+			"params": {
+				"egg_delay": 1.5,
+				"role": "heavy",
+				"spawn_count": 2,
+				"spawn_limit": 4,
+				"spawn_waves": 2
+			},
+			"radius": 26,
+			"rank": "heavy",
+			"speed": 30,
+			"visual_id": "E11",
+			"xp": 10
+		},
+		"E12": {
+			"attacks": [
+				{
+					"action": "slam",
+					"damage_scale": 1.0,
+					"id": "stele_arc_1",
+					"major": true,
+					"radius": 130,
+					"range": 130,
+					"recovery": 1.2,
+					"shape": "sector",
+					"spread": 1.7,
+					"windup": 1.2
+				},
+				{
+					"action": "slam",
+					"damage_scale": 1.0,
+					"id": "stele_arc_2",
+					"major": true,
+					"radius": 150,
+					"range": 150,
+					"recovery": 1.4,
+					"shape": "sector",
+					"spread": 1.5,
+					"windup": 1.2
+				},
+				{
+					"action": "pulse",
+					"damage_scale": 1.0,
+					"gap_angle": 0.0,
+					"gap_width": 1.4,
+					"id": "pulse",
+					"major": true,
+					"radius": 180,
+					"range": 180,
+					"recovery": 1.6,
+					"shape": "ring_gap",
+					"windup": 1.4
+				}
+			],
+			"behavior_id": "E12",
+			"body_height": 116,
+			"counterplay": [
+				"沿预告缺口移动到安全处。",
+				"退出范围，等它回气后接近。"
+			],
+			"damage": 22,
+			"description": "四足石兽背负残碑，以缓慢的地面弧和缺口环压制周围。",
+			"elite_rule_id": "",
+			"hp": 185,
+			"id": "E12",
+			"name": "碑背石龟",
+			"palette": [
+				"72694f",
+				"c5ad79",
+				"9a4838"
+			],
+			"params": {
+				"gap_width": 1.4,
+				"role": "heavy"
+			},
+			"radius": 28,
+			"rank": "heavy",
+			"speed": 24,
+			"visual_id": "E12",
+			"xp": 12
+		},
+		"L00": {
+			"attacks": [
+				{
+					"action": "swipe",
+					"damage_scale": 1.0,
+					"id": "swipe",
+					"radius": 48,
+					"range": 48,
+					"recovery": 1.0,
+					"shape": "sector",
+					"spread": 1.8,
+					"windup": 0.5
+				}
+			],
+			"behavior_id": "E01",
+			"body_height": 116,
+			"counterplay": [
+				"先清附近轻敌，留下走位空间。",
+				"诱出挥击，趁收手时进攻。"
+			],
+			"damage": 20,
+			"description": "更强壮的草甲鬼卒，保留基础近身攻击。",
+			"elite_rule_id": "",
+			"hp": 280,
+			"id": "L00",
+			"name": "先遣重卒",
+			"palette": [
+				"72694f",
+				"c5ad79",
+				"9a4838"
+			],
+			"params": {
+				"role": "heavy"
+			},
+			"radius": 24,
+			"rank": "field_elite",
+			"speed": 44,
+			"visual_id": "E01",
+			"xp": 18
+		},
+		"L01": {
+			"attacks": [
+				{
+					"action": "command",
+					"count": 3,
+					"damage_scale": 1.0,
+					"duration": 3.0,
+					"id": "command",
+					"major": true,
+					"range": 290,
+					"recovery": 1.5,
+					"shape": "disc",
+					"windup": 1.0
+				},
+				{
+					"action": "swipe",
+					"damage_scale": 1.0,
+					"id": "swipe",
+					"radius": 48,
+					"range": 48,
+					"recovery": 1.0,
+					"shape": "sector",
+					"spread": 1.8,
+					"windup": 0.5
+				}
+			],
+			"behavior_id": "E07",
+			"body_height": 140,
+			"counterplay": [
+				"优先击败督军，停止后续指挥。",
+				"先清随从，使其无法继续受令。"
+			],
+			"damage": 22,
+			"description": "指挥最多三名已经在场的普通敌人；部众散尽后回到自身攻击。",
+			"elite_rule_id": "L01",
+			"hp": 340,
+			"id": "L01",
+			"name": "旌威督军",
+			"palette": [
+				"72694f",
+				"c5ad79",
+				"9a4838"
+			],
+			"params": {
+				"command_duration": 3.0,
+				"command_limit": 3,
+				"role": "heavy"
+			},
+			"radius": 26,
+			"rank": "field_elite",
+			"speed": 42,
+			"visual_id": "L01",
+			"xp": 18
+		},
+		"L02": {
+			"attacks": [
+				{
+					"action": "fan",
+					"count": 5,
+					"damage_scale": 1.0,
+					"id": "fan",
+					"life": 2.2,
+					"major": true,
+					"range": 390,
+					"recovery": 1.4,
+					"shape": "fan",
+					"speed": 210,
+					"spread": 1.2,
+					"windup": 1.1
+				}
+			],
+			"behavior_id": "E05",
+			"body_height": 138,
+			"counterplay": [
+				"破坏灯锚，扩大安全空间。",
+				"穿过灯阵缺口直接攻击灯母。"
+			],
+			"damage": 20,
+			"description": "展开可攻击的灯锚形成有限灯阵，灯母本体仍可受伤。",
+			"elite_rule_id": "L02",
+			"hp": 340,
+			"id": "L02",
+			"name": "织阵灯母",
+			"palette": [
+				"72694f",
+				"c5ad79",
+				"9a4838"
+			],
+			"params": {
+				"anchor_count": 2,
+				"anchor_limit": 2,
+				"role": "heavy"
+			},
+			"radius": 26,
+			"rank": "field_elite",
+			"speed": 36,
+			"visual_id": "L02",
+			"xp": 18
+		},
+		"L03": {
+			"attacks": [
+				{
+					"action": "swipe",
+					"damage_scale": 1.0,
+					"id": "swipe",
+					"radius": 65,
+					"range": 65,
+					"recovery": 1.35,
+					"shape": "sector",
+					"spread": 1.8,
+					"windup": 0.6
+				}
+			],
+			"behavior_id": "E04",
+			"body_height": 146,
+			"counterplay": [
+				"拉开精英与护卫的距离，断开连线。",
+				"先击败护卫，解除这次保护。"
+			],
+			"damage": 22,
+			"description": "与一名护卫形成可见连线，短时间减少所受伤害。",
+			"elite_rule_id": "L03",
+			"hp": 400,
+			"id": "L03",
+			"name": "缚契盾魁",
+			"palette": [
+				"72694f",
+				"c5ad79",
+				"9a4838"
+			],
+			"params": {
+				"escort_count": 1,
+				"escort_id": "D01",
+				"guard_duration": 2.6,
+				"link_cooldown": 8.0,
+				"link_duration": 5.0,
+				"link_reduction": 0.25,
+				"role": "heavy",
+				"shield_arc": 1.8,
+				"shield_reduction": 0.4,
+				"tether_distance": 220.0
+			},
+			"radius": 28,
+			"rank": "field_elite",
+			"speed": 40,
+			"visual_id": "L03",
+			"xp": 18
+		},
+		"L04": {
+			"attacks": [
+				{
+					"action": "summon",
+					"damage_scale": 1.0,
+					"id": "summon",
+					"limit": 4,
+					"major": true,
+					"range": 250,
+					"recovery": 1.6,
+					"shape": "disc",
+					"spawn_count": 2,
+					"spawn_id": "D05",
+					"windup": 1.3
+				},
+				{
+					"action": "swipe",
+					"damage_scale": 1.0,
+					"id": "swipe",
+					"radius": 48,
+					"range": 48,
+					"recovery": 1.0,
+					"shape": "sector",
+					"spread": 1.8,
+					"windup": 0.5
+				}
+			],
+			"behavior_id": "E11",
+			"body_height": 150,
+			"counterplay": [
+				"孵化前破坏待孵物。",
+				"优先处理驮役，取消后续孵化。"
+			],
+			"damage": 22,
+			"description": "背棺分批放出待孵物，出生数量有限。",
+			"elite_rule_id": "L04",
+			"hp": 420,
+			"id": "L04",
+			"name": "孵棺驮役",
+			"palette": [
+				"72694f",
+				"c5ad79",
+				"9a4838"
+			],
+			"params": {
+				"egg_delay": 1.5,
+				"role": "heavy",
+				"spawn_count": 2,
+				"spawn_limit": 4,
+				"spawn_waves": 2
+			},
+			"radius": 30,
+			"rank": "field_elite",
+			"speed": 30,
+			"visual_id": "L04",
+			"xp": 18
+		},
+		"L05": {
+			"attacks": [
+				{
+					"action": "hook",
+					"damage_scale": 1.0,
+					"duration": 2.0,
+					"half_width": 24,
+					"id": "hook",
+					"length": 280,
+					"major": true,
+					"range": 300,
+					"recovery": 1.6,
+					"shape": "line",
+					"slow": 0.25,
+					"windup": 1.2
+				}
+			],
+			"behavior_id": "E10",
+			"body_height": 144,
+			"counterplay": [
+				"避开两次独立预告的危险范围。",
+				"趁虚影出招，从侧面攻击本体。"
+			],
+			"damage": 22,
+			"description": "一次攻击后，虚影在旧位置另作预告并重复一次。",
+			"elite_rule_id": "L05",
+			"hp": 360,
+			"id": "L05",
+			"name": "镜影复唱鬼",
+			"palette": [
+				"72694f",
+				"c5ad79",
+				"9a4838"
+			],
+			"params": {
+				"echo_count": 1,
+				"echo_delay": 1.0,
+				"role": "heavy"
+			},
+			"radius": 26,
+			"rank": "field_elite",
+			"speed": 44,
+			"visual_id": "L05",
+			"xp": 18
+		},
+		"L06": {
+			"attacks": [
+				{
+					"action": "slam",
+					"damage_scale": 1.0,
+					"id": "slam",
+					"major": true,
+					"radius": 110,
+					"range": 110,
+					"recovery": 1.4,
+					"shape": "sector",
+					"spread": 1.8,
+					"windup": 1.2
+				},
+				{
+					"action": "slam",
+					"damage_scale": 1.0,
+					"id": "slam",
+					"major": true,
+					"radius": 130,
+					"range": 130,
+					"recovery": 1.6,
+					"shape": "sector",
+					"spread": 1.6,
+					"windup": 1.0
+				}
+			],
+			"behavior_id": "E09",
+			"body_height": 152,
+			"counterplay": [
+				"看清雷标并提前离开落点。",
+				"把雷标引向暂不经过的位置，再接近本体。"
+			],
+			"damage": 24,
+			"description": "指定攻击后，在锁定地点留下延迟雷标。",
+			"elite_rule_id": "L06",
+			"hp": 430,
+			"id": "L06",
+			"name": "鸣雷行刑鬼",
+			"palette": [
+				"72694f",
+				"c5ad79",
+				"9a4838"
+			],
+			"params": {
+				"marker_delay": 1.2,
+				"marker_limit": 2,
+				"role": "heavy"
+			},
+			"radius": 28,
+			"rank": "field_elite",
+			"speed": 42,
+			"visual_id": "L06",
+			"xp": 18
+		},
+		"M03_WAR": {
+			"attacks": [],
+			"behavior_id": "I",
+			"body_height": 200,
+			"counterplay": [
+				"离开列阵预告的路线。",
+				"趁协同结束后的共同回气攻击张辽。"
+			],
+			"damage": 0,
+			"description": "高顺的协同战相，以列阵配合张辽；自身不能被锁定。",
+			"elite_rule_id": "",
+			"hp": 1,
+			"id": "M03_WAR",
+			"name": "高顺·城壁铠魂",
+			"palette": [
+				"72694f",
+				"c5ad79",
+				"9a4838"
+			],
+			"params": {
+				"counts_for_threshold": false,
+				"role": "derivative",
+				"targetable": false
+			},
+			"radius": 0,
+			"rank": "proxy",
+			"speed": 0,
+			"visual_id": "M03_WAR",
+			"xp": 0
+		},
+		"M04_WAR": {
+			"attacks": [],
+			"behavior_id": "I",
+			"body_height": 190,
+			"counterplay": [
+				"离开阵区预告的落点。",
+				"趁协同结束后的共同回气攻击张辽。"
+			],
+			"damage": 0,
+			"description": "陈宫的协同战相，以延迟阵区配合张辽；自身不能被锁定。",
+			"elite_rule_id": "",
+			"hp": 1,
+			"id": "M04_WAR",
+			"name": "陈宫·卷轴冥相",
+			"palette": [
+				"72694f",
+				"c5ad79",
+				"9a4838"
+			],
+			"params": {
+				"counts_for_threshold": false,
+				"role": "derivative",
+				"targetable": false
+			},
+			"radius": 0,
+			"rank": "proxy",
+			"speed": 0,
+			"visual_id": "M04_WAR",
+			"xp": 0
+		}
+	},
+	"kits": {
+		"F01": {
+			"automatic": [],
+			"base": {
+				"armor": 5,
+				"attack": 34,
+				"hp": 190,
+				"move": 240,
+				"mp": 110,
+				"regen": 2.6,
+				"speed": 1.5
+			},
+			"basic": {
+				"cooldown": 0.666666666666667,
+				"duration": 0,
+				"id": "F01_basic",
+				"kind": "THRUST",
+				"magic": false,
+				"mana_cost": 0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"power": 1,
+				"reach": 145,
+				"slow": 0,
+				"target_scope": "active",
+				"title": "普攻",
+				"unlock_level": 1
+			},
+			"entry_level": 9,
+			"manual": [
+				{
+					"cooldown": 8,
+					"duration": 0,
+					"id": "F01_dash",
+					"kind": "THRUST",
+					"magic": false,
+					"mana_cost": 32,
+					"mechanic": "dash",
+					"params": {
+						"distance": 140
+					},
+					"power": 3.6,
+					"reach": 245,
+					"slow": 0,
+					"target_scope": "active",
+					"title": "绮锋突进",
+					"unlock_level": 1
+				},
+				{
+					"cooldown": 12,
+					"duration": 0,
+					"id": "F01_expose",
+					"kind": "NOVA",
+					"magic": false,
+					"mana_cost": 38,
+					"mechanic": "expose",
+					"params": {
+						"duration": 4,
+						"multiplier": 0.15
+					},
+					"power": 4.1,
+					"reach": 195,
+					"slow": 0,
+					"target_scope": "active",
+					"title": "裂阵",
+					"unlock_level": 9
+				}
+			],
+			"name": "吕玲绮",
+			"owned": {
+				"speed": 0.01
+			},
+			"support": {
+				"cooldown": 4.5,
+				"duration": 0,
+				"id": "F01_support",
+				"kind": "THRUST",
+				"magic": false,
+				"mana_cost": 0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"power": 1.4,
+				"reach": 225,
+				"slow": 0,
+				"target_scope": "active",
+				"title": "飞锋援击",
+				"unlock_level": 1
+			},
+			"trait": "",
+			"trait_params": {
+
+			}
+		},
+		"F02": {
+			"automatic": [],
+			"base": {
+				"armor": 10,
+				"attack": 26,
+				"hp": 200,
+				"move": 220,
+				"mp": 100,
+				"regen": 2.8,
+				"speed": 1.25
+			},
+			"basic": {
+				"cooldown": 0.8,
+				"duration": 0,
+				"id": "F02_basic",
+				"kind": "SWEEP",
+				"magic": false,
+				"mana_cost": 0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"power": 1,
+				"reach": 120,
+				"slow": 0,
+				"target_scope": "active",
+				"title": "普攻",
+				"unlock_level": 1
+			},
+			"entry_level": 5,
+			"manual": [
+				{
+					"cooldown": 9,
+					"duration": 0,
+					"id": "F02_guard",
+					"kind": "WARD",
+					"magic": false,
+					"mana_cost": 24,
+					"mechanic": "guard",
+					"params": {
+						"charges": 1,
+						"counter_scale": 2.2,
+						"duration": 2.5,
+						"radius": 185,
+						"reduction": 0.6
+					},
+					"power": 0,
+					"reach": 185,
+					"slow": 0,
+					"target_scope": "self",
+					"title": "守势反击",
+					"unlock_level": 1
+				},
+				{
+					"cooldown": 8,
+					"duration": 0,
+					"id": "F02_riposte",
+					"kind": "THRUST",
+					"magic": false,
+					"mana_cost": 30,
+					"mechanic": "expose",
+					"params": {
+						"duration": 3,
+						"multiplier": 0.1
+					},
+					"power": 3.1,
+					"reach": 210,
+					"slow": 0,
+					"target_scope": "active",
+					"title": "迎锋斩",
+					"unlock_level": 5
+				}
+			],
+			"name": "蕾娜",
+			"owned": {
+				"armor": 0.14
+			},
+			"support": {
+				"cooldown": 8,
+				"duration": 0,
+				"id": "F02_support",
+				"kind": "WARD",
+				"magic": false,
+				"mana_cost": 0,
+				"mechanic": "guard",
+				"params": {
+					"charges": 1,
+					"counter_scale": 0.8,
+					"duration": 1.2,
+					"radius": 155,
+					"reduction": 0.35
+				},
+				"power": 0,
+				"reach": 155,
+				"slow": 0,
+				"target_scope": "active",
+				"title": "护剑",
+				"unlock_level": 1
+			},
+			"trait": "",
+			"trait_params": {
+
+			}
+		},
+		"F03": {
+			"automatic": [],
+			"base": {
+				"armor": 3,
+				"attack": 11,
+				"hp": 145,
+				"move": 200,
+				"mp": 145,
+				"regen": 4,
+				"speed": 1
+			},
+			"basic": {
+				"cooldown": 1.0,
+				"duration": 0,
+				"id": "F03_basic",
+				"kind": "PROJECTILE",
+				"magic": true,
+				"mana_cost": 0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"power": 1,
+				"reach": 400,
+				"slow": 0,
+				"target_scope": "active",
+				"title": "普攻",
+				"unlock_level": 1
+			},
+			"entry_level": 3,
+			"manual": [
+				{
+					"cooldown": 10,
+					"duration": 0,
+					"id": "physician_heal",
+					"kind": "HEAL",
+					"magic": true,
+					"mana_cost": 34,
+					"mechanic": "party_heal",
+					"params": {
+						"shield_cap_ratio": 0.35
+					},
+					"power": 48,
+					"reach": 0,
+					"slow": 0,
+					"target_scope": "party",
+					"title": "回春",
+					"unlock_level": 1
+				},
+				{
+					"cooldown": 16,
+					"duration": 0,
+					"id": "physician_ward",
+					"kind": "WARD",
+					"magic": false,
+					"mana_cost": 42,
+					"mechanic": "",
+					"params": {
+
+					},
+					"power": 55,
+					"reach": 0,
+					"slow": 0,
+					"target_scope": "party",
+					"title": "护命",
+					"unlock_level": 5
+				}
+			],
+			"name": "田秀",
+			"owned": {
+				"armor": 0.12
+			},
+			"support": {
+				"cooldown": 6,
+				"duration": 0,
+				"id": "physician_support",
+				"kind": "HEAL",
+				"magic": true,
+				"mana_cost": 0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"power": 12,
+				"reach": 0,
+				"slow": 0,
+				"target_scope": "lowest_hp",
+				"title": "敷药",
+				"unlock_level": 1
+			},
+			"trait": "",
+			"trait_params": {
+
+			}
+		},
+		"F04": {
+			"automatic": [],
+			"base": {
+				"armor": 4,
+				"attack": 15,
+				"hp": 160,
+				"move": 210,
+				"mp": 135,
+				"regen": 3.4,
+				"speed": 1.05
+			},
+			"basic": {
+				"cooldown": 0.952380952380952,
+				"duration": 0,
+				"id": "F04_basic",
+				"kind": "PROJECTILE",
+				"magic": true,
+				"mana_cost": 0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"power": 1,
+				"reach": 390,
+				"slow": 0,
+				"target_scope": "active",
+				"title": "普攻",
+				"unlock_level": 1
+			},
+			"entry_level": 3,
+			"manual": [
+				{
+					"cooldown": 12,
+					"duration": 0,
+					"id": "F04_settle",
+					"kind": "MANA",
+					"magic": false,
+					"mana_cost": 18,
+					"mechanic": "refund_settle",
+					"params": {
+
+					},
+					"power": 0,
+					"reach": 0,
+					"slow": 0,
+					"target_scope": "party",
+					"title": "集中结账",
+					"unlock_level": 1
+				},
+				{
+					"cooldown": 15,
+					"duration": 0,
+					"id": "F04_supply",
+					"kind": "MANA",
+					"magic": false,
+					"mana_cost": 28,
+					"mechanic": "",
+					"params": {
+
+					},
+					"power": 22,
+					"reach": 0,
+					"slow": 0,
+					"target_scope": "lowest_mp",
+					"title": "应急补给",
+					"unlock_level": 5
+				}
+			],
+			"name": "钱绮罗",
+			"owned": {
+				"mp": 0.6
+			},
+			"support": {
+				"cooldown": 5,
+				"duration": 0,
+				"id": "F04_support",
+				"kind": "PROJECTILE",
+				"magic": true,
+				"mana_cost": 0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"power": 0.55,
+				"reach": 410,
+				"slow": 0,
+				"target_scope": "active",
+				"title": "护身碎银",
+				"unlock_level": 1
+			},
+			"trait": "refund",
+			"trait_params": {
+				"duration": 6,
+				"fraction": 0.2,
+				"ticks": 3
+			}
+		},
+		"F05": {
+			"automatic": [],
+			"base": {
+				"armor": 3,
+				"attack": 23,
+				"hp": 150,
+				"move": 205,
+				"mp": 135,
+				"regen": 3.6,
+				"speed": 1
+			},
+			"basic": {
+				"cooldown": 1.0,
+				"duration": 0,
+				"id": "F05_basic",
+				"kind": "PROJECTILE",
+				"magic": true,
+				"mana_cost": 0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"power": 1,
+				"reach": 460,
+				"slow": 0,
+				"target_scope": "active",
+				"title": "普攻",
+				"unlock_level": 1
+			},
+			"entry_level": 4,
+			"manual": [
+				{
+					"cooldown": 7,
+					"duration": 0,
+					"id": "F05_curse",
+					"kind": "PROJECTILE",
+					"magic": true,
+					"mana_cost": 26,
+					"mechanic": "curse",
+					"params": {
+						"dot_scale": 1.44,
+						"duration": 6,
+						"spread_fraction": 0.35,
+						"spread_radius": 180,
+						"spread_targets": 2
+					},
+					"power": 1.4,
+					"reach": 510,
+					"slow": 0,
+					"target_scope": "active",
+					"title": "青蘅符",
+					"unlock_level": 1
+				},
+				{
+					"cooldown": 11,
+					"duration": 0,
+					"id": "F05_spread",
+					"kind": "NOVA",
+					"magic": true,
+					"mana_cost": 34,
+					"mechanic": "curse",
+					"params": {
+						"dot_scale": 0.9,
+						"duration": 6,
+						"spread_fraction": 0.65,
+						"spread_radius": 230,
+						"spread_targets": 3
+					},
+					"power": 1.2,
+					"reach": 230,
+					"slow": 0,
+					"target_scope": "active",
+					"title": "散咒",
+					"unlock_level": 4
+				}
+			],
+			"name": "祝青蘅",
+			"owned": {
+				"regen": 0.12
+			},
+			"support": {
+				"cooldown": 5,
+				"duration": 0,
+				"id": "F05_support",
+				"kind": "PROJECTILE",
+				"magic": true,
+				"mana_cost": 0,
+				"mechanic": "curse",
+				"params": {
+					"dot_scale": 0.48,
+					"duration": 4
+				},
+				"power": 0.45,
+				"reach": 480,
+				"slow": 0,
+				"target_scope": "active",
+				"title": "缠咒",
+				"unlock_level": 1
+			},
+			"trait": "curse",
+			"trait_params": {
+				"dot_scale": 0.96,
+				"duration": 6,
+				"interval": 2
+			}
+		},
+		"F06": {
+			"automatic": [],
+			"base": {
+				"armor": 4,
+				"attack": 25,
+				"hp": 165,
+				"move": 210,
+				"mp": 110,
+				"regen": 3,
+				"speed": 1.2
+			},
+			"basic": {
+				"cooldown": 0.833333333333333,
+				"duration": 0,
+				"id": "F06_basic",
+				"kind": "PROJECTILE",
+				"magic": false,
+				"mana_cost": 0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"power": 1,
+				"reach": 510,
+				"slow": 0,
+				"target_scope": "active",
+				"title": "普攻",
+				"unlock_level": 1
+			},
+			"entry_level": 5,
+			"manual": [
+				{
+					"cooldown": 10,
+					"duration": 0,
+					"id": "F06_volley",
+					"kind": "THRUST",
+					"magic": false,
+					"mana_cost": 30,
+					"mechanic": "ammo_volley",
+					"params": {
+						"bonus_per_arrow": 0.35,
+						"max_spend": 4
+					},
+					"power": 1.8,
+					"reach": 560,
+					"slow": 0,
+					"target_scope": "active",
+					"title": "穿云齐射",
+					"unlock_level": 1
+				},
+				{
+					"cooldown": 12,
+					"duration": 2.5,
+					"id": "F06_pin",
+					"kind": "THRUST",
+					"magic": false,
+					"mana_cost": 34,
+					"mechanic": "",
+					"params": {
+
+					},
+					"power": 2.8,
+					"reach": 570,
+					"slow": 0.45,
+					"target_scope": "active",
+					"title": "钉阵矢",
+					"unlock_level": 6
+				}
+			],
+			"name": "秦雁",
+			"owned": {
+				"speed": 0.009
+			},
+			"support": {
+				"cooldown": 2,
+				"duration": 0,
+				"id": "F06_support",
+				"kind": "PROJECTILE",
+				"magic": false,
+				"mana_cost": 0,
+				"mechanic": "ammo_followup",
+				"params": {
+					"normal_multiplier": 0.4
+				},
+				"power": 1.15,
+				"reach": 560,
+				"slow": 0,
+				"target_scope": "active",
+				"title": "特制箭追射",
+				"unlock_level": 1
+			},
+			"trait": "ammo",
+			"trait_params": {
+				"capacity": 6,
+				"cast_refill": 1,
+				"followup_interval": 2,
+				"initial": 6,
+				"refill_amount": 2,
+				"refill_interval": 8
+			}
+		},
+		"F07": {
+			"automatic": [],
+			"base": {
+				"armor": 2,
+				"attack": 31,
+				"hp": 175,
+				"move": 225,
+				"mp": 95,
+				"regen": 2.2,
+				"speed": 1.6
+			},
+			"basic": {
+				"cooldown": 0.625,
+				"duration": 0,
+				"id": "F07_basic",
+				"kind": "SWEEP",
+				"magic": false,
+				"mana_cost": 0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"power": 1,
+				"reach": 120,
+				"slow": 0,
+				"target_scope": "active",
+				"title": "普攻",
+				"unlock_level": 1
+			},
+			"entry_level": 3,
+			"manual": [
+				{
+					"cooldown": 6,
+					"duration": 0,
+					"id": "bandit_sweep",
+					"kind": "NOVA",
+					"magic": false,
+					"mana_cost": 28,
+					"mechanic": "",
+					"params": {
+
+					},
+					"power": 3,
+					"reach": 165,
+					"slow": 0,
+					"target_scope": "active",
+					"title": "寨风斩",
+					"unlock_level": 1
+				},
+				{
+					"cooldown": 10,
+					"duration": 0,
+					"id": "bandit_thrust",
+					"kind": "THRUST",
+					"magic": false,
+					"mana_cost": 38,
+					"mechanic": "shield_strike",
+					"params": {
+						"reach_bonus": 100,
+						"shield_max": 30,
+						"shield_ratio": 0.025
+					},
+					"power": 3.2,
+					"reach": 230,
+					"slow": 0,
+					"target_scope": "active",
+					"title": "断阵刺",
+					"unlock_level": 1
+				}
+			],
+			"name": "马三娘",
+			"owned": {
+				"attack": 0.4
+			},
+			"support": {
+				"cooldown": 4,
+				"duration": 1.5,
+				"id": "bandit_support",
+				"kind": "SWEEP",
+				"magic": false,
+				"mana_cost": 0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"power": 1.1,
+				"reach": 150,
+				"slow": 0.45,
+				"target_scope": "active",
+				"title": "援斩",
+				"unlock_level": 1
+			},
+			"trait": "",
+			"trait_params": {
+
+			}
+		},
+		"F08": {
+			"automatic": [],
+			"base": {
+				"armor": 9,
+				"attack": 24,
+				"hp": 205,
+				"move": 195,
+				"mp": 100,
+				"regen": 2.8,
+				"speed": 1.05
+			},
+			"basic": {
+				"cooldown": 0.952380952380952,
+				"duration": 0,
+				"id": "F08_basic",
+				"kind": "SWEEP",
+				"magic": false,
+				"mana_cost": 0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"power": 1,
+				"reach": 125,
+				"slow": 0,
+				"target_scope": "active",
+				"title": "普攻",
+				"unlock_level": 1
+			},
+			"entry_level": 3,
+			"manual": [
+				{
+					"cooldown": 12,
+					"duration": 0,
+					"id": "F08_temper",
+					"kind": "WARD",
+					"magic": false,
+					"mana_cost": 30,
+					"mechanic": "temper",
+					"params": {
+						"duration": 6,
+						"reach_bonus": 50,
+						"spark_scale": 0.15,
+						"splash_radius": 45
+					},
+					"power": 0,
+					"reach": 155,
+					"slow": 0,
+					"target_scope": "active",
+					"title": "炉火淬刃",
+					"unlock_level": 1
+				},
+				{
+					"cooldown": 10,
+					"duration": 0,
+					"id": "F08_break",
+					"kind": "NOVA",
+					"magic": false,
+					"mana_cost": 32,
+					"mechanic": "expose",
+					"params": {
+						"duration": 4,
+						"multiplier": 0.12
+					},
+					"power": 3.4,
+					"reach": 180,
+					"slow": 0,
+					"target_scope": "active",
+					"title": "落锤",
+					"unlock_level": 5
+				}
+			],
+			"name": "陶小满",
+			"owned": {
+				"attack": 0.25
+			},
+			"support": {
+				"cooldown": 9,
+				"duration": 0,
+				"id": "F08_support",
+				"kind": "WARD",
+				"magic": false,
+				"mana_cost": 0,
+				"mechanic": "temper",
+				"params": {
+					"duration": 3,
+					"reach_bonus": 30,
+					"spark_scale": 0.1,
+					"splash_radius": 45
+				},
+				"power": 0,
+				"reach": 0,
+				"slow": 0,
+				"target_scope": "active",
+				"title": "余火淬刃",
+				"unlock_level": 1
+			},
+			"trait": "",
+			"trait_params": {
+
+			}
+		},
+		"F09": {
+			"automatic": [],
+			"base": {
+				"armor": 4,
+				"attack": 17,
+				"hp": 150,
+				"move": 210,
+				"mp": 135,
+				"regen": 3.8,
+				"speed": 1
+			},
+			"basic": {
+				"cooldown": 1.0,
+				"duration": 0,
+				"id": "F09_basic",
+				"kind": "PROJECTILE",
+				"magic": true,
+				"mana_cost": 0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"power": 1,
+				"reach": 420,
+				"slow": 0,
+				"target_scope": "active",
+				"title": "普攻",
+				"unlock_level": 1
+			},
+			"entry_level": 3,
+			"manual": [
+				{
+					"cooldown": 12,
+					"duration": 0,
+					"id": "F09_extend",
+					"kind": "WARD",
+					"magic": false,
+					"mana_cost": 26,
+					"mechanic": "extend",
+					"params": {
+						"allowed": [
+							"echo",
+							"temper"
+						],
+						"max_extension": 4,
+						"seconds": 3
+					},
+					"power": 0,
+					"reach": 0,
+					"slow": 0,
+					"target_scope": "party",
+					"title": "续一阕",
+					"unlock_level": 1
+				},
+				{
+					"cooldown": 14,
+					"duration": 0,
+					"id": "F09_rally",
+					"kind": "WARD",
+					"magic": false,
+					"mana_cost": 32,
+					"mechanic": "rally",
+					"params": {
+						"attack_multiplier": 0.16,
+						"duration": 5,
+						"speed_multiplier": 0.12
+					},
+					"power": 0,
+					"reach": 0,
+					"slow": 0,
+					"target_scope": "party",
+					"title": "高歌",
+					"unlock_level": 5
+				}
+			],
+			"name": "柳晚晴",
+			"owned": {
+				"mp": 0.5
+			},
+			"support": {
+				"cooldown": 8,
+				"duration": 0,
+				"id": "F09_support",
+				"kind": "WARD",
+				"magic": false,
+				"mana_cost": 0,
+				"mechanic": "extend",
+				"params": {
+					"allowed": [
+						"echo",
+						"temper"
+					],
+					"max_extension": 4,
+					"seconds": 1.5
+				},
+				"power": 0,
+				"reach": 0,
+				"slow": 0,
+				"target_scope": "party",
+				"title": "轻歌",
+				"unlock_level": 1
+			},
+			"trait": "",
+			"trait_params": {
+
+			}
+		},
+		"F10": {
+			"automatic": [],
+			"base": {
+				"armor": 5,
+				"attack": 16,
+				"hp": 165,
+				"move": 205,
+				"mp": 130,
+				"regen": 3.4,
+				"speed": 1.05
+			},
+			"basic": {
+				"cooldown": 0.952380952380952,
+				"duration": 0,
+				"id": "F10_basic",
+				"kind": "PROJECTILE",
+				"magic": true,
+				"mana_cost": 0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"power": 1,
+				"reach": 400,
+				"slow": 0,
+				"target_scope": "active",
+				"title": "普攻",
+				"unlock_level": 1
+			},
+			"entry_level": 5,
+			"manual": [
+				{
+					"cooldown": 12,
+					"duration": 0,
+					"id": "F10_ward",
+					"kind": "WARD",
+					"magic": false,
+					"mana_cost": 24,
+					"mechanic": "",
+					"params": {
+
+					},
+					"power": 38,
+					"reach": 0,
+					"slow": 0,
+					"target_scope": "active",
+					"title": "整册护身",
+					"unlock_level": 1
+				},
+				{
+					"cooldown": 10,
+					"duration": 0,
+					"id": "F10_expose",
+					"kind": "PROJECTILE",
+					"magic": true,
+					"mana_cost": 28,
+					"mechanic": "expose",
+					"params": {
+						"duration": 5,
+						"multiplier": 0.14
+					},
+					"power": 2.4,
+					"reach": 460,
+					"slow": 0,
+					"target_scope": "active",
+					"title": "点破",
+					"unlock_level": 6
+				}
+			],
+			"name": "陆知微",
+			"owned": {
+				"regen": 0.1
+			},
+			"support": {
+				"cooldown": 7,
+				"duration": 0,
+				"id": "F10_support",
+				"kind": "WARD",
+				"magic": false,
+				"mana_cost": 0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"power": 9,
+				"reach": 0,
+				"slow": 0,
+				"target_scope": "active",
+				"title": "护行符",
+				"unlock_level": 1
+			},
+			"trait": "relay",
+			"trait_params": {
+				"fraction": 0.2,
+				"min_cost": 1
+			}
+		},
+		"F11": {
+			"automatic": [
+				{
+					"cooldown": 8,
+					"duration": 1.8,
+					"id": "emma_ice",
+					"kind": "PROJECTILE",
+					"magic": true,
+					"mana_cost": 0,
+					"mechanic": "",
+					"params": {
+
+					},
+					"power": 1.8,
+					"reach": 480,
+					"slow": 0.3,
+					"target_scope": "active",
+					"title": "冰星",
+					"unlock_level": 2
+				}
+			],
+			"base": {
+				"armor": 3,
+				"attack": 25,
+				"hp": 155,
+				"move": 205,
+				"mp": 130,
+				"regen": 4.2,
+				"speed": 1.15
+			},
+			"basic": {
+				"cooldown": 0.869565217391304,
+				"duration": 0,
+				"id": "F11_basic",
+				"kind": "PROJECTILE",
+				"magic": true,
+				"mana_cost": 0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"power": 1,
+				"reach": 470,
+				"slow": 0,
+				"target_scope": "active",
+				"title": "普攻",
+				"unlock_level": 1
+			},
+			"entry_level": 1,
+			"manual": [
+				{
+					"cooldown": 7,
+					"duration": 3,
+					"id": "emma_frost",
+					"kind": "NOVA",
+					"magic": true,
+					"mana_cost": 28,
+					"mechanic": "echo_record",
+					"params": {
+						"charges": 2,
+						"damage_multiplier": 0.45,
+						"duration": 12,
+						"slow_multiplier": 0.5
+					},
+					"power": 1.8,
+					"reach": 190,
+					"slow": 0.6,
+					"target_scope": "active",
+					"title": "霜环",
+					"unlock_level": 1
+				},
+				{
+					"cooldown": 11,
+					"duration": 0,
+					"id": "emma_star",
+					"kind": "PROJECTILE",
+					"magic": true,
+					"mana_cost": 42,
+					"mechanic": "echo_record",
+					"params": {
+						"charges": 2,
+						"damage_multiplier": 0.45,
+						"duration": 12,
+						"slow_multiplier": 0.5
+					},
+					"power": 5,
+					"reach": 580,
+					"slow": 0,
+					"target_scope": "active",
+					"title": "星火",
+					"unlock_level": 3
+				}
+			],
+			"name": "艾玛",
+			"owned": {
+				"regen": 0.15
+			},
+			"support": {
+				"cooldown": 3.5,
+				"duration": 0,
+				"id": "emma_support",
+				"kind": "PROJECTILE",
+				"magic": true,
+				"mana_cost": 0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"power": 0.8,
+				"reach": 500,
+				"slow": 0,
+				"target_scope": "active",
+				"title": "术法支援",
+				"unlock_level": 1
+			},
+			"trait": "echo",
+			"trait_params": {
+				"charges": 2,
+				"damage_multiplier": 0.45,
+				"duration": 12,
+				"slow_multiplier": 0.5
+			}
+		},
+		"JIA": {
+			"automatic": [],
+			"base": {
+				"armor": 7,
+				"attack": 27,
+				"hp": 220,
+				"move": 215,
+				"mp": 90,
+				"regen": 2.8,
+				"speed": 1.45
+			},
+			"basic": {
+				"cooldown": 0.689655172413793,
+				"duration": 0,
+				"id": "JIA_basic",
+				"kind": "SWEEP",
+				"magic": false,
+				"mana_cost": 0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"power": 1,
+				"reach": 112,
+				"slow": 0,
+				"target_scope": "active",
+				"title": "普攻",
+				"unlock_level": 1
+			},
+			"entry_level": 1,
+			"manual": [
+				{
+					"cooldown": 5,
+					"duration": 0,
+					"id": "jia_sweep",
+					"kind": "NOVA",
+					"magic": false,
+					"mana_cost": 22,
+					"mechanic": "",
+					"params": {
+
+					},
+					"power": 2.5,
+					"reach": 150,
+					"slow": 0,
+					"target_scope": "active",
+					"title": "横扫",
+					"unlock_level": 1
+				},
+				{
+					"cooldown": 10,
+					"duration": 0,
+					"id": "jia_break",
+					"kind": "THRUST",
+					"magic": false,
+					"mana_cost": 36,
+					"mechanic": "expose",
+					"params": {
+						"duration": 4,
+						"multiplier": 0.12
+					},
+					"power": 4.5,
+					"reach": 245,
+					"slow": 0,
+					"target_scope": "active",
+					"title": "破阵",
+					"unlock_level": 3
+				}
+			],
+			"name": "贾苇索",
+			"owned": {
+
+			},
+			"support": {
+
+			},
+			"trait": "",
+			"trait_params": {
+
+			}
+		},
+		"M01": {
+			"automatic": [],
+			"base": {
+				"armor": 9,
+				"attack": 38,
+				"hp": 255,
+				"move": 210,
+				"mp": 95,
+				"regen": 2.1,
+				"speed": 1
+			},
+			"basic": {
+				"cooldown": 1.0,
+				"duration": 0,
+				"id": "M01_basic",
+				"kind": "SWEEP",
+				"magic": false,
+				"mana_cost": 0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"power": 1,
+				"reach": 155,
+				"slow": 0,
+				"target_scope": "active",
+				"title": "普攻",
+				"unlock_level": 1
+			},
+			"entry_level": 9,
+			"manual": [
+				{
+					"cooldown": 13,
+					"duration": 0,
+					"id": "M01_cleave",
+					"kind": "NOVA",
+					"magic": false,
+					"mana_cost": 46,
+					"mechanic": "expose",
+					"params": {
+						"duration": 4,
+						"multiplier": 0.16
+					},
+					"power": 5,
+					"reach": 240,
+					"slow": 0,
+					"target_scope": "active",
+					"title": "方天破军",
+					"unlock_level": 1
+				},
+				{
+					"cooldown": 20,
+					"duration": 0,
+					"id": "M01_rally",
+					"kind": "WARD",
+					"magic": false,
+					"mana_cost": 48,
+					"mechanic": "rally",
+					"params": {
+						"attack_multiplier": 0.3,
+						"duration": 6,
+						"speed_multiplier": 0.08
+					},
+					"power": 0,
+					"reach": 0,
+					"slow": 0,
+					"target_scope": "self",
+					"title": "鬼神降临",
+					"unlock_level": 9
+				}
+			],
+			"name": "吕布",
+			"owned": {
+				"attack": 0.3
+			},
+			"support": {
+				"cooldown": 8,
+				"duration": 0,
+				"id": "M01_support",
+				"kind": "SWEEP",
+				"magic": false,
+				"mana_cost": 0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"power": 2,
+				"reach": 225,
+				"slow": 0,
+				"target_scope": "active",
+				"title": "掠阵横戟",
+				"unlock_level": 1
+			},
+			"trait": "",
+			"trait_params": {
+
+			}
+		},
+		"M02": {
+			"automatic": [],
+			"base": {
+				"armor": 8,
+				"attack": 30,
+				"hp": 210,
+				"move": 230,
+				"mp": 105,
+				"regen": 2.7,
+				"speed": 1.35
+			},
+			"basic": {
+				"cooldown": 0.740740740740741,
+				"duration": 0,
+				"id": "M02_basic",
+				"kind": "THRUST",
+				"magic": false,
+				"mana_cost": 0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"power": 1,
+				"reach": 155,
+				"slow": 0,
+				"target_scope": "active",
+				"title": "普攻",
+				"unlock_level": 1
+			},
+			"entry_level": 8,
+			"manual": [
+				{
+					"cooldown": 8,
+					"duration": 1.2,
+					"id": "M02_dash",
+					"kind": "THRUST",
+					"magic": false,
+					"mana_cost": 30,
+					"mechanic": "dash",
+					"params": {
+						"distance": 150
+					},
+					"power": 3.2,
+					"reach": 230,
+					"slow": 0.6,
+					"target_scope": "active",
+					"title": "破阵突击",
+					"unlock_level": 1
+				},
+				{
+					"cooldown": 11,
+					"duration": 0,
+					"id": "M02_expose",
+					"kind": "THRUST",
+					"magic": false,
+					"mana_cost": 38,
+					"mechanic": "expose",
+					"params": {
+						"duration": 4,
+						"multiplier": 0.15
+					},
+					"power": 4,
+					"reach": 240,
+					"slow": 0,
+					"target_scope": "active",
+					"title": "斩将",
+					"unlock_level": 8
+				}
+			],
+			"name": "张辽",
+			"owned": {
+				"move": 0.3
+			},
+			"support": {
+				"cooldown": 5,
+				"duration": 1.2,
+				"id": "M02_support",
+				"kind": "THRUST",
+				"magic": false,
+				"mana_cost": 0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"power": 1.5,
+				"reach": 240,
+				"slow": 0.4,
+				"target_scope": "active",
+				"title": "追锋",
+				"unlock_level": 1
+			},
+			"trait": "",
+			"trait_params": {
+
+			}
+		},
+		"M03": {
+			"automatic": [],
+			"base": {
+				"armor": 17,
+				"attack": 22,
+				"hp": 275,
+				"move": 185,
+				"mp": 115,
+				"regen": 2.8,
+				"speed": 1
+			},
+			"basic": {
+				"cooldown": 1.0,
+				"duration": 0,
+				"id": "M03_basic",
+				"kind": "THRUST",
+				"magic": false,
+				"mana_cost": 0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"power": 1,
+				"reach": 145,
+				"slow": 0,
+				"target_scope": "active",
+				"title": "普攻",
+				"unlock_level": 1
+			},
+			"entry_level": 8,
+			"manual": [
+				{
+					"cooldown": 14,
+					"duration": 0,
+					"id": "M03_guard",
+					"kind": "WARD",
+					"magic": false,
+					"mana_cost": 36,
+					"mechanic": "",
+					"params": {
+
+					},
+					"power": 55,
+					"reach": 0,
+					"slow": 0,
+					"target_scope": "party",
+					"title": "陷阵守御",
+					"unlock_level": 1
+				},
+				{
+					"cooldown": 18,
+					"duration": 0,
+					"id": "M03_field",
+					"kind": "NOVA",
+					"magic": false,
+					"mana_cost": 42,
+					"mechanic": "field",
+					"params": {
+						"duration": 6,
+						"follow": false,
+						"heal": 5,
+						"interval": 1,
+						"mana": 0,
+						"radius": 195
+					},
+					"power": 0.22,
+					"reach": 195,
+					"slow": 0,
+					"target_scope": "party",
+					"title": "铁壁阵",
+					"unlock_level": 8
+				}
+			],
+			"name": "高顺",
+			"owned": {
+				"armor": 0.16
+			},
+			"support": {
+				"cooldown": 9,
+				"duration": 0,
+				"id": "M03_support",
+				"kind": "WARD",
+				"magic": false,
+				"mana_cost": 0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"power": 26,
+				"reach": 0,
+				"slow": 0,
+				"target_scope": "active",
+				"title": "陷阵护盾",
+				"unlock_level": 1
+			},
+			"trait": "",
+			"trait_params": {
+
+			}
+		},
+		"M04": {
+			"automatic": [],
+			"base": {
+				"armor": 5,
+				"attack": 21,
+				"hp": 155,
+				"move": 195,
+				"mp": 160,
+				"regen": 4.1,
+				"speed": 1
+			},
+			"basic": {
+				"cooldown": 1.0,
+				"duration": 0,
+				"id": "M04_basic",
+				"kind": "PROJECTILE",
+				"magic": true,
+				"mana_cost": 0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"power": 1,
+				"reach": 480,
+				"slow": 0,
+				"target_scope": "active",
+				"title": "普攻",
+				"unlock_level": 1
+			},
+			"entry_level": 8,
+			"manual": [
+				{
+					"cooldown": 13,
+					"duration": 0,
+					"id": "M04_field",
+					"kind": "NOVA",
+					"magic": true,
+					"mana_cost": 34,
+					"mechanic": "field",
+					"params": {
+						"duration": 7,
+						"follow": false,
+						"heal": 0,
+						"interval": 1,
+						"mana": 0,
+						"radius": 220
+					},
+					"power": 0.55,
+					"reach": 220,
+					"slow": 0,
+					"target_scope": "active",
+					"title": "阵前令",
+					"unlock_level": 1
+				},
+				{
+					"cooldown": 15,
+					"duration": 3,
+					"id": "M04_bind",
+					"kind": "NOVA",
+					"magic": true,
+					"mana_cost": 40,
+					"mechanic": "",
+					"params": {
+
+					},
+					"power": 2.7,
+					"reach": 245,
+					"slow": 0.65,
+					"target_scope": "active",
+					"title": "锁魂阵",
+					"unlock_level": 8
+				}
+			],
+			"name": "陈宫",
+			"owned": {
+				"regen": 0.12
+			},
+			"support": {
+				"cooldown": 6,
+				"duration": 0,
+				"id": "M04_support",
+				"kind": "PROJECTILE",
+				"magic": true,
+				"mana_cost": 0,
+				"mechanic": "expose",
+				"params": {
+					"duration": 3,
+					"multiplier": 0.1
+				},
+				"power": 0.8,
+				"reach": 520,
+				"slow": 0,
+				"target_scope": "active",
+				"title": "阵中令",
+				"unlock_level": 1
+			},
+			"trait": "",
+			"trait_params": {
+
+			}
+		},
+		"M05": {
+			"automatic": [],
+			"base": {
+				"armor": 10,
+				"attack": 29,
+				"hp": 225,
+				"move": 225,
+				"mp": 100,
+				"regen": 2.5,
+				"speed": 1.2
+			},
+			"basic": {
+				"cooldown": 0.833333333333333,
+				"duration": 0,
+				"id": "M05_basic",
+				"kind": "THRUST",
+				"magic": false,
+				"mana_cost": 0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"power": 1,
+				"reach": 175,
+				"slow": 0,
+				"target_scope": "active",
+				"title": "普攻",
+				"unlock_level": 1
+			},
+			"entry_level": 8,
+			"manual": [
+				{
+					"cooldown": 9,
+					"duration": 0,
+					"id": "M05_dash",
+					"kind": "THRUST",
+					"magic": false,
+					"mana_cost": 32,
+					"mechanic": "dash",
+					"params": {
+						"distance": 160
+					},
+					"power": 3.5,
+					"reach": 260,
+					"slow": 0,
+					"target_scope": "active",
+					"title": "虎豹突贯",
+					"unlock_level": 1
+				},
+				{
+					"cooldown": 16,
+					"duration": 0,
+					"id": "M05_rally",
+					"kind": "WARD",
+					"magic": false,
+					"mana_cost": 35,
+					"mechanic": "rally",
+					"params": {
+						"attack_multiplier": 0.15,
+						"duration": 5,
+						"speed_multiplier": 0.2
+					},
+					"power": 0,
+					"reach": 0,
+					"slow": 0,
+					"target_scope": "party",
+					"title": "催阵",
+					"unlock_level": 8
+				}
+			],
+			"name": "曹纯",
+			"owned": {
+				"hp": 0.8
+			},
+			"support": {
+				"cooldown": 6,
+				"duration": 0,
+				"id": "M05_support",
+				"kind": "THRUST",
+				"magic": false,
+				"mana_cost": 0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"power": 1.6,
+				"reach": 255,
+				"slow": 0,
+				"target_scope": "active",
+				"title": "骑军掠阵",
+				"unlock_level": 1
+			},
+			"trait": "",
+			"trait_params": {
+
+			}
+		},
+		"M06": {
+			"automatic": [],
+			"base": {
+				"armor": 5,
+				"attack": 32,
+				"hp": 175,
+				"move": 220,
+				"mp": 120,
+				"regen": 3,
+				"speed": 1
+			},
+			"basic": {
+				"cooldown": 1.0,
+				"duration": 0,
+				"id": "M06_basic",
+				"kind": "PROJECTILE",
+				"magic": false,
+				"mana_cost": 0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"power": 1,
+				"reach": 570,
+				"slow": 0,
+				"target_scope": "active",
+				"title": "普攻",
+				"unlock_level": 1
+			},
+			"entry_level": 7,
+			"manual": [
+				{
+					"cooldown": 11,
+					"duration": 0,
+					"id": "M06_expose",
+					"kind": "PROJECTILE",
+					"magic": false,
+					"mana_cost": 35,
+					"mechanic": "expose",
+					"params": {
+						"duration": 4,
+						"multiplier": 0.12
+					},
+					"power": 4.3,
+					"reach": 650,
+					"slow": 0,
+					"target_scope": "active",
+					"title": "定点狙击",
+					"unlock_level": 1
+				},
+				{
+					"cooldown": 12,
+					"duration": 0,
+					"id": "M06_dash",
+					"kind": "THRUST",
+					"magic": false,
+					"mana_cost": 30,
+					"mechanic": "dash",
+					"params": {
+						"distance": -120
+					},
+					"power": 2.5,
+					"reach": 480,
+					"slow": 0,
+					"target_scope": "active",
+					"title": "退阵射",
+					"unlock_level": 7
+				}
+			],
+			"name": "曹休",
+			"owned": {
+				"mp": 0.6
+			},
+			"support": {
+				"cooldown": 7,
+				"duration": 0,
+				"id": "M06_support",
+				"kind": "PROJECTILE",
+				"magic": false,
+				"mana_cost": 0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"power": 1.8,
+				"reach": 630,
+				"slow": 0,
+				"target_scope": "active",
+				"title": "定射",
+				"unlock_level": 1
+			},
+			"trait": "",
+			"trait_params": {
+
+			}
+		},
+		"M07": {
+			"automatic": [],
+			"base": {
+				"armor": 9,
+				"attack": 29,
+				"hp": 245,
+				"move": 205,
+				"mp": 90,
+				"regen": 2.6,
+				"speed": 1.1
+			},
+			"basic": {
+				"cooldown": 0.909090909090909,
+				"duration": 0,
+				"id": "M07_basic",
+				"kind": "SWEEP",
+				"magic": false,
+				"mana_cost": 0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"power": 1,
+				"reach": 145,
+				"slow": 0,
+				"target_scope": "active",
+				"title": "普攻",
+				"unlock_level": 1
+			},
+			"entry_level": 3,
+			"manual": [
+				{
+					"cooldown": 8,
+					"duration": 0,
+					"id": "M07_sweep",
+					"kind": "NOVA",
+					"magic": false,
+					"mana_cost": 30,
+					"mechanic": "",
+					"params": {
+
+					},
+					"power": 3.4,
+					"reach": 220,
+					"slow": 0,
+					"target_scope": "active",
+					"title": "扫寨",
+					"unlock_level": 1
+				},
+				{
+					"cooldown": 15,
+					"duration": 0,
+					"id": "M07_rally",
+					"kind": "WARD",
+					"magic": false,
+					"mana_cost": 34,
+					"mechanic": "rally",
+					"params": {
+						"attack_multiplier": 0.2,
+						"duration": 5,
+						"speed_multiplier": 0.08
+					},
+					"power": 0,
+					"reach": 0,
+					"slow": 0,
+					"target_scope": "self",
+					"title": "聚众",
+					"unlock_level": 5
+				}
+			],
+			"name": "臧霸",
+			"owned": {
+				"hp": 0.7
+			},
+			"support": {
+				"cooldown": 5.5,
+				"duration": 0,
+				"id": "M07_support",
+				"kind": "NOVA",
+				"magic": false,
+				"mana_cost": 0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"power": 1.25,
+				"reach": 190,
+				"slow": 0,
+				"target_scope": "active",
+				"title": "清围",
+				"unlock_level": 1
+			},
+			"trait": "",
+			"trait_params": {
+
+			}
+		},
+		"M08": {
+			"automatic": [],
+			"base": {
+				"armor": 14,
+				"attack": 25,
+				"hp": 230,
+				"move": 195,
+				"mp": 105,
+				"regen": 2.6,
+				"speed": 1
+			},
+			"basic": {
+				"cooldown": 1.0,
+				"duration": 0,
+				"id": "M08_basic",
+				"kind": "THRUST",
+				"magic": false,
+				"mana_cost": 0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"power": 1,
+				"reach": 150,
+				"slow": 0,
+				"target_scope": "active",
+				"title": "普攻",
+				"unlock_level": 1
+			},
+			"entry_level": 5,
+			"manual": [
+				{
+					"cooldown": 9,
+					"duration": 0,
+					"id": "M08_break",
+					"kind": "THRUST",
+					"magic": false,
+					"mana_cost": 28,
+					"mechanic": "expose",
+					"params": {
+						"duration": 5,
+						"multiplier": 0.18
+					},
+					"power": 3,
+					"reach": 240,
+					"slow": 0,
+					"target_scope": "active",
+					"title": "破坚",
+					"unlock_level": 1
+				},
+				{
+					"cooldown": 13,
+					"duration": 0,
+					"id": "M08_guard",
+					"kind": "WARD",
+					"magic": false,
+					"mana_cost": 30,
+					"mechanic": "",
+					"params": {
+
+					},
+					"power": 44,
+					"reach": 0,
+					"slow": 0,
+					"target_scope": "active",
+					"title": "固阵",
+					"unlock_level": 5
+				}
+			],
+			"name": "侯成",
+			"owned": {
+				"armor": 0.12
+			},
+			"support": {
+				"cooldown": 6,
+				"duration": 0,
+				"id": "M08_support",
+				"kind": "THRUST",
+				"magic": false,
+				"mana_cost": 0,
+				"mechanic": "expose",
+				"params": {
+					"duration": 3,
+					"multiplier": 0.1
+				},
+				"power": 1,
+				"reach": 205,
+				"slow": 0,
+				"target_scope": "active",
+				"title": "破甲援刺",
+				"unlock_level": 1
+			},
+			"trait": "",
+			"trait_params": {
+
+			}
+		},
+		"N01": {
+			"automatic": [],
+			"base": {
+				"armor": 12,
+				"attack": 21,
+				"hp": 240,
+				"move": 190,
+				"mp": 80,
+				"regen": 2,
+				"speed": 1.1
+			},
+			"basic": {
+				"cooldown": 0.909090909090909,
+				"duration": 0,
+				"id": "N01_basic",
+				"kind": "SWEEP",
+				"magic": false,
+				"mana_cost": 0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"power": 1,
+				"reach": 104,
+				"slow": 0,
+				"target_scope": "active",
+				"title": "普攻",
+				"unlock_level": 1
+			},
+			"entry_level": 1,
+			"manual": [
+				{
+					"cooldown": 7,
+					"duration": 0,
+					"id": "N01_strike",
+					"kind": "SWEEP",
+					"magic": false,
+					"mana_cost": 24,
+					"mechanic": "",
+					"params": {
+
+					},
+					"power": 3.2,
+					"reach": 129,
+					"slow": 0,
+					"target_scope": "active",
+					"title": "蓄势一击",
+					"unlock_level": 1
+				}
+			],
+			"name": "乡勇刀手",
+			"owned": {
+				"attack": 0.5
+			},
+			"support": {
+				"cooldown": 4,
+				"duration": 0,
+				"id": "militia_support",
+				"kind": "SWEEP",
+				"magic": false,
+				"mana_cost": 0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"power": 0.8,
+				"reach": 135,
+				"slow": 0,
+				"target_scope": "active",
+				"title": "援斩",
+				"unlock_level": 1
+			},
+			"trait": "mark",
+			"trait_params": {
+				"hits": 3,
+				"interval": 1
+			}
+		},
+		"N02": {
+			"automatic": [],
+			"base": {
+				"armor": 15,
+				"attack": 18,
+				"hp": 250,
+				"move": 180,
+				"mp": 90,
+				"regen": 2.3,
+				"speed": 1
+			},
+			"basic": {
+				"cooldown": 1.0,
+				"duration": 0,
+				"id": "N02_basic",
+				"kind": "SWEEP",
+				"magic": false,
+				"mana_cost": 0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"power": 1,
+				"reach": 100,
+				"slow": 0,
+				"target_scope": "active",
+				"title": "普攻",
+				"unlock_level": 1
+			},
+			"entry_level": 5,
+			"manual": [
+				{
+					"cooldown": 10,
+					"duration": 0,
+					"id": "N02_ward",
+					"kind": "WARD",
+					"magic": false,
+					"mana_cost": 24,
+					"mechanic": "",
+					"params": {
+
+					},
+					"power": 38,
+					"reach": 0,
+					"slow": 0,
+					"target_scope": "self",
+					"title": "举盾",
+					"unlock_level": 1
+				}
+			],
+			"name": "白门盾卒",
+			"owned": {
+				"armor": 0.12
+			},
+			"support": {
+				"cooldown": 4,
+				"duration": 0,
+				"id": "N02_support",
+				"kind": "WARD",
+				"magic": false,
+				"mana_cost": 0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"power": 12,
+				"reach": 0,
+				"slow": 0,
+				"target_scope": "active",
+				"title": "薄盾",
+				"unlock_level": 1
+			},
+			"trait": "",
+			"trait_params": {
+
+			}
+		},
+		"N03": {
+			"automatic": [],
+			"base": {
+				"armor": 19,
+				"attack": 17,
+				"hp": 290,
+				"move": 170,
+				"mp": 95,
+				"regen": 2.1,
+				"speed": 0.85
+			},
+			"basic": {
+				"cooldown": 1.17647058823529,
+				"duration": 0,
+				"id": "N03_basic",
+				"kind": "THRUST",
+				"magic": false,
+				"mana_cost": 0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"power": 1,
+				"reach": 120,
+				"slow": 0,
+				"target_scope": "active",
+				"title": "普攻",
+				"unlock_level": 1
+			},
+			"entry_level": 8,
+			"manual": [
+				{
+					"cooldown": 17,
+					"duration": 0,
+					"id": "N03_guard",
+					"kind": "WARD",
+					"magic": false,
+					"mana_cost": 34,
+					"mechanic": "",
+					"params": {
+
+					},
+					"power": 70,
+					"reach": 0,
+					"slow": 0,
+					"target_scope": "self",
+					"title": "陷阵重盾",
+					"unlock_level": 1
+				}
+			],
+			"name": "陷阵盾卫",
+			"owned": {
+				"hp": 1
+			},
+			"support": {
+				"cooldown": 11,
+				"duration": 0,
+				"id": "N03_support",
+				"kind": "WARD",
+				"magic": false,
+				"mana_cost": 0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"power": 32,
+				"reach": 0,
+				"slow": 0,
+				"target_scope": "active",
+				"title": "重盾援护",
+				"unlock_level": 1
+			},
+			"trait": "",
+			"trait_params": {
+
+			}
+		},
+		"N04": {
+			"automatic": [],
+			"base": {
+				"armor": 6,
+				"attack": 24,
+				"hp": 185,
+				"move": 205,
+				"mp": 85,
+				"regen": 2.1,
+				"speed": 1
+			},
+			"basic": {
+				"cooldown": 1.0,
+				"duration": 0,
+				"id": "N04_basic",
+				"kind": "THRUST",
+				"magic": false,
+				"mana_cost": 0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"power": 1,
+				"reach": 165,
+				"slow": 0,
+				"target_scope": "active",
+				"title": "普攻",
+				"unlock_level": 1
+			},
+			"entry_level": 1,
+			"manual": [
+				{
+					"cooldown": 7,
+					"duration": 0,
+					"id": "N04_strike",
+					"kind": "THRUST",
+					"magic": false,
+					"mana_cost": 24,
+					"mechanic": "",
+					"params": {
+
+					},
+					"power": 3.2,
+					"reach": 190,
+					"slow": 0,
+					"target_scope": "active",
+					"title": "蓄势一击",
+					"unlock_level": 1
+				}
+			],
+			"name": "乡勇枪手",
+			"owned": {
+				"attack": 0.35
+			},
+			"support": {
+				"cooldown": 4.5,
+				"duration": 0,
+				"id": "spear_support",
+				"kind": "THRUST",
+				"magic": false,
+				"mana_cost": 0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"power": 1.2,
+				"reach": 210,
+				"slow": 0,
+				"target_scope": "active",
+				"title": "援刺",
+				"unlock_level": 1
+			},
+			"trait": "",
+			"trait_params": {
+
+			}
+		},
+		"N05": {
+			"automatic": [],
+			"base": {
+				"armor": 10,
+				"attack": 22,
+				"hp": 220,
+				"move": 195,
+				"mp": 90,
+				"regen": 2.2,
+				"speed": 1
+			},
+			"basic": {
+				"cooldown": 1.0,
+				"duration": 0,
+				"id": "N05_basic",
+				"kind": "SWEEP",
+				"magic": false,
+				"mana_cost": 0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"power": 1,
+				"reach": 145,
+				"slow": 0,
+				"target_scope": "active",
+				"title": "普攻",
+				"unlock_level": 1
+			},
+			"entry_level": 5,
+			"manual": [
+				{
+					"cooldown": 9,
+					"duration": 2,
+					"id": "N05_sweep",
+					"kind": "NOVA",
+					"magic": false,
+					"mana_cost": 26,
+					"mechanic": "",
+					"params": {
+
+					},
+					"power": 2.2,
+					"reach": 200,
+					"slow": 0.65,
+					"target_scope": "active",
+					"title": "戟门拦截",
+					"unlock_level": 1
+				}
+			],
+			"name": "城门戟卒",
+			"owned": {
+				"armor": 0.1
+			},
+			"support": {
+				"cooldown": 5,
+				"duration": 1.5,
+				"id": "N05_support",
+				"kind": "SWEEP",
+				"magic": false,
+				"mana_cost": 0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"power": 1,
+				"reach": 190,
+				"slow": 0.5,
+				"target_scope": "active",
+				"title": "援戟",
+				"unlock_level": 1
+			},
+			"trait": "",
+			"trait_params": {
+
+			}
+		},
+		"N06": {
+			"automatic": [],
+			"base": {
+				"armor": 9,
+				"attack": 26,
+				"hp": 225,
+				"move": 190,
+				"mp": 90,
+				"regen": 2,
+				"speed": 0.95
+			},
+			"basic": {
+				"cooldown": 1.05263157894737,
+				"duration": 0,
+				"id": "N06_basic",
+				"kind": "THRUST",
+				"magic": false,
+				"mana_cost": 0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"power": 1,
+				"reach": 185,
+				"slow": 0,
+				"target_scope": "active",
+				"title": "普攻",
+				"unlock_level": 1
+			},
+			"entry_level": 8,
+			"manual": [
+				{
+					"cooldown": 9,
+					"duration": 0,
+					"id": "N06_break",
+					"kind": "THRUST",
+					"magic": false,
+					"mana_cost": 28,
+					"mechanic": "expose",
+					"params": {
+						"duration": 4,
+						"multiplier": 0.16
+					},
+					"power": 3,
+					"reach": 255,
+					"slow": 0,
+					"target_scope": "active",
+					"title": "锐卒攻坚",
+					"unlock_level": 1
+				}
+			],
+			"name": "陷阵锐卒",
+			"owned": {
+				"attack": 0.3
+			},
+			"support": {
+				"cooldown": 6,
+				"duration": 0,
+				"id": "N06_support",
+				"kind": "THRUST",
+				"magic": false,
+				"mana_cost": 0,
+				"mechanic": "expose",
+				"params": {
+					"duration": 3,
+					"multiplier": 0.1
+				},
+				"power": 0.9,
+				"reach": 235,
+				"slow": 0,
+				"target_scope": "active",
+				"title": "破坚援刺",
+				"unlock_level": 1
+			},
+			"trait": "",
+			"trait_params": {
+
+			}
+		},
+		"N07": {
+			"automatic": [],
+			"base": {
+				"armor": 3,
+				"attack": 19,
+				"hp": 150,
+				"move": 215,
+				"mp": 90,
+				"regen": 2.4,
+				"speed": 1.45
+			},
+			"basic": {
+				"cooldown": 0.689655172413793,
+				"duration": 0,
+				"id": "N07_basic",
+				"kind": "PROJECTILE",
+				"magic": false,
+				"mana_cost": 0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"power": 1,
+				"reach": 480,
+				"slow": 0,
+				"target_scope": "active",
+				"title": "普攻",
+				"unlock_level": 1
+			},
+			"entry_level": 1,
+			"manual": [
+				{
+					"cooldown": 7,
+					"duration": 0,
+					"id": "N07_strike",
+					"kind": "PROJECTILE",
+					"magic": false,
+					"mana_cost": 24,
+					"mechanic": "",
+					"params": {
+
+					},
+					"power": 3.2,
+					"reach": 505,
+					"slow": 0,
+					"target_scope": "active",
+					"title": "蓄势一击",
+					"unlock_level": 1
+				}
+			],
+			"name": "猎户弓手",
+			"owned": {
+				"speed": 0.012
+			},
+			"support": {
+				"cooldown": 3,
+				"duration": 0,
+				"id": "bow_support",
+				"kind": "PROJECTILE",
+				"magic": false,
+				"mana_cost": 0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"power": 1,
+				"reach": 520,
+				"slow": 0,
+				"target_scope": "active",
+				"title": "援射",
+				"unlock_level": 1
+			},
+			"trait": "mark",
+			"trait_params": {
+				"hits": 3,
+				"interval": 1
+			}
+		},
+		"N08": {
+			"automatic": [],
+			"base": {
+				"armor": 6,
+				"attack": 25,
+				"hp": 175,
+				"move": 195,
+				"mp": 95,
+				"regen": 2.3,
+				"speed": 0.9
+			},
+			"basic": {
+				"cooldown": 1.11111111111111,
+				"duration": 0,
+				"id": "N08_basic",
+				"kind": "THRUST",
+				"magic": false,
+				"mana_cost": 0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"power": 1,
+				"reach": 510,
+				"slow": 0,
+				"target_scope": "active",
+				"title": "普攻",
+				"unlock_level": 1
+			},
+			"entry_level": 5,
+			"manual": [
+				{
+					"cooldown": 10,
+					"duration": 0,
+					"id": "N08_bolt",
+					"kind": "THRUST",
+					"magic": false,
+					"mana_cost": 28,
+					"mechanic": "",
+					"params": {
+
+					},
+					"power": 3.4,
+					"reach": 580,
+					"slow": 0,
+					"target_scope": "active",
+					"title": "贯阵弩",
+					"unlock_level": 1
+				}
+			],
+			"name": "白门弩手",
+			"owned": {
+				"attack": 0.3
+			},
+			"support": {
+				"cooldown": 7,
+				"duration": 0,
+				"id": "N08_support",
+				"kind": "THRUST",
+				"magic": false,
+				"mana_cost": 0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"power": 1.5,
+				"reach": 570,
+				"slow": 0,
+				"target_scope": "active",
+				"title": "贯穿援射",
+				"unlock_level": 1
+			},
+			"trait": "",
+			"trait_params": {
+
+			}
+		},
+		"N09": {
+			"automatic": [],
+			"base": {
+				"armor": 5,
+				"attack": 26,
+				"hp": 170,
+				"move": 200,
+				"mp": 100,
+				"regen": 2.5,
+				"speed": 1.15
+			},
+			"basic": {
+				"cooldown": 0.869565217391304,
+				"duration": 0,
+				"id": "N09_basic",
+				"kind": "PROJECTILE",
+				"magic": false,
+				"mana_cost": 0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"power": 1,
+				"reach": 560,
+				"slow": 0,
+				"target_scope": "active",
+				"title": "普攻",
+				"unlock_level": 1
+			},
+			"entry_level": 7,
+			"manual": [
+				{
+					"cooldown": 11,
+					"duration": 0,
+					"id": "N09_aim",
+					"kind": "PROJECTILE",
+					"magic": false,
+					"mana_cost": 30,
+					"mechanic": "",
+					"params": {
+
+					},
+					"power": 4,
+					"reach": 630,
+					"slow": 0,
+					"target_scope": "active",
+					"title": "定敌弩",
+					"unlock_level": 1
+				}
+			],
+			"name": "曹军劲弩手",
+			"owned": {
+				"mp": 0.5
+			},
+			"support": {
+				"cooldown": 5,
+				"duration": 0,
+				"id": "N09_support",
+				"kind": "PROJECTILE",
+				"magic": false,
+				"mana_cost": 0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"power": 1.2,
+				"reach": 610,
+				"slow": 0,
+				"target_scope": "active",
+				"title": "连弩援射",
+				"unlock_level": 1
+			},
+			"trait": "mark",
+			"trait_params": {
+				"hits": 4,
+				"interval": 2
+			}
+		},
+		"N10": {
+			"automatic": [],
+			"base": {
+				"armor": 7,
+				"attack": 22,
+				"hp": 195,
+				"move": 240,
+				"mp": 90,
+				"regen": 2.1,
+				"speed": 1.2
+			},
+			"basic": {
+				"cooldown": 0.833333333333333,
+				"duration": 0,
+				"id": "N10_basic",
+				"kind": "THRUST",
+				"magic": false,
+				"mana_cost": 0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"power": 1,
+				"reach": 150,
+				"slow": 0,
+				"target_scope": "active",
+				"title": "普攻",
+				"unlock_level": 1
+			},
+			"entry_level": 8,
+			"manual": [
+				{
+					"cooldown": 9,
+					"duration": 0,
+					"id": "N10_dash",
+					"kind": "THRUST",
+					"magic": false,
+					"mana_cost": 25,
+					"mechanic": "dash",
+					"params": {
+						"distance": 150
+					},
+					"power": 2.7,
+					"reach": 215,
+					"slow": 0,
+					"target_scope": "active",
+					"title": "游骑突围",
+					"unlock_level": 1
+				}
+			],
+			"name": "并州游骑",
+			"owned": {
+				"move": 0.45
+			},
+			"support": {
+				"cooldown": 5.5,
+				"duration": 0,
+				"id": "N10_support",
+				"kind": "THRUST",
+				"magic": false,
+				"mana_cost": 0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"power": 1.2,
+				"reach": 225,
+				"slow": 0,
+				"target_scope": "active",
+				"title": "冲阵",
+				"unlock_level": 1
+			},
+			"trait": "",
+			"trait_params": {
+
+			}
+		},
+		"N11": {
+			"automatic": [],
+			"base": {
+				"armor": 6,
+				"attack": 24,
+				"hp": 190,
+				"move": 250,
+				"mp": 95,
+				"regen": 2.2,
+				"speed": 1.35
+			},
+			"basic": {
+				"cooldown": 0.740740740740741,
+				"duration": 0,
+				"id": "N11_basic",
+				"kind": "THRUST",
+				"magic": false,
+				"mana_cost": 0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"power": 1,
+				"reach": 155,
+				"slow": 0,
+				"target_scope": "active",
+				"title": "普攻",
+				"unlock_level": 1
+			},
+			"entry_level": 7,
+			"manual": [
+				{
+					"cooldown": 8,
+					"duration": 0,
+					"id": "N11_dash",
+					"kind": "THRUST",
+					"magic": false,
+					"mana_cost": 26,
+					"mechanic": "dash",
+					"params": {
+						"distance": 180
+					},
+					"power": 2.8,
+					"reach": 250,
+					"slow": 0,
+					"target_scope": "active",
+					"title": "轻骑逐敌",
+					"unlock_level": 1
+				}
+			],
+			"name": "虎豹轻骑",
+			"owned": {
+				"move": 0.35
+			},
+			"support": {
+				"cooldown": 4,
+				"duration": 1,
+				"id": "N11_support",
+				"kind": "THRUST",
+				"magic": false,
+				"mana_cost": 0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"power": 0.9,
+				"reach": 265,
+				"slow": 0.3,
+				"target_scope": "active",
+				"title": "掠锋",
+				"unlock_level": 1
+			},
+			"trait": "",
+			"trait_params": {
+
+			}
+		},
+		"N12": {
+			"automatic": [],
+			"base": {
+				"armor": 16,
+				"attack": 28,
+				"hp": 270,
+				"move": 185,
+				"mp": 90,
+				"regen": 2,
+				"speed": 0.8
+			},
+			"basic": {
+				"cooldown": 1.25,
+				"duration": 0,
+				"id": "N12_basic",
+				"kind": "THRUST",
+				"magic": false,
+				"mana_cost": 0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"power": 1,
+				"reach": 195,
+				"slow": 0,
+				"target_scope": "active",
+				"title": "普攻",
+				"unlock_level": 1
+			},
+			"entry_level": 8,
+			"manual": [
+				{
+					"cooldown": 14,
+					"duration": 2,
+					"id": "N12_charge",
+					"kind": "THRUST",
+					"magic": false,
+					"mana_cost": 32,
+					"mechanic": "dash",
+					"params": {
+						"distance": 110
+					},
+					"power": 3.8,
+					"reach": 285,
+					"slow": 0.65,
+					"target_scope": "active",
+					"title": "重骑压阵",
+					"unlock_level": 1
+				}
+			],
+			"name": "虎豹重骑",
+			"owned": {
+				"armor": 0.12
+			},
+			"support": {
+				"cooldown": 8,
+				"duration": 1.5,
+				"id": "N12_support",
+				"kind": "THRUST",
+				"magic": false,
+				"mana_cost": 0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"power": 1.8,
+				"reach": 275,
+				"slow": 0.55,
+				"target_scope": "active",
+				"title": "重冲",
+				"unlock_level": 1
+			},
+			"trait": "",
+			"trait_params": {
+
+			}
+		},
+		"N13": {
+			"automatic": [],
+			"base": {
+				"armor": 3,
+				"attack": 16,
+				"hp": 145,
+				"move": 200,
+				"mp": 140,
+				"regen": 5,
+				"speed": 1
+			},
+			"basic": {
+				"cooldown": 1.0,
+				"duration": 0,
+				"id": "N13_basic",
+				"kind": "PROJECTILE",
+				"magic": true,
+				"mana_cost": 0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"power": 1,
+				"reach": 400,
+				"slow": 0,
+				"target_scope": "active",
+				"title": "普攻",
+				"unlock_level": 1
+			},
+			"entry_level": 1,
+			"manual": [
+				{
+					"cooldown": 8,
+					"duration": 0,
+					"id": "N13_strike",
+					"kind": "PROJECTILE",
+					"magic": true,
+					"mana_cost": 24,
+					"mechanic": "",
+					"params": {
+
+					},
+					"power": 2.8,
+					"reach": 460,
+					"slow": 0,
+					"target_scope": "active",
+					"title": "蓄势一击",
+					"unlock_level": 1
+				},
+				{
+					"cooldown": 14,
+					"duration": 0,
+					"id": "N13_mana",
+					"kind": "MANA",
+					"magic": false,
+					"mana_cost": 34,
+					"mechanic": "",
+					"params": {
+
+					},
+					"power": 24,
+					"reach": 0,
+					"slow": 0,
+					"target_scope": "lowest_mp",
+					"title": "回元符",
+					"unlock_level": 4
+				}
+			],
+			"name": "游方符师",
+			"owned": {
+				"regen": 0.25
+			},
+			"support": {
+				"cooldown": 5,
+				"duration": 0,
+				"id": "talisman_support",
+				"kind": "MANA",
+				"magic": false,
+				"mana_cost": 0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"power": 6,
+				"reach": 0,
+				"slow": 0,
+				"target_scope": "lowest_mp",
+				"title": "回元",
+				"unlock_level": 1
+			},
+			"trait": "",
+			"trait_params": {
+
+			}
+		},
+		"N14": {
+			"automatic": [],
+			"base": {
+				"armor": 3,
+				"attack": 20,
+				"hp": 145,
+				"move": 200,
+				"mp": 125,
+				"regen": 3.5,
+				"speed": 1
+			},
+			"basic": {
+				"cooldown": 1.0,
+				"duration": 0,
+				"id": "N14_basic",
+				"kind": "PROJECTILE",
+				"magic": true,
+				"mana_cost": 0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"power": 1,
+				"reach": 460,
+				"slow": 0,
+				"target_scope": "active",
+				"title": "普攻",
+				"unlock_level": 1
+			},
+			"entry_level": 4,
+			"manual": [
+				{
+					"cooldown": 9,
+					"duration": 3.5,
+					"id": "curse_bind",
+					"kind": "NOVA",
+					"magic": true,
+					"mana_cost": 30,
+					"mechanic": "curse",
+					"params": {
+						"dot_scale": 1.08,
+						"duration": 6
+					},
+					"power": 2,
+					"reach": 210,
+					"slow": 0.65,
+					"target_scope": "active",
+					"title": "缚行咒",
+					"unlock_level": 1
+				}
+			],
+			"name": "荒祠咒师",
+			"owned": {
+				"regen": 0.12
+			},
+			"support": {
+				"cooldown": 4.5,
+				"duration": 2,
+				"id": "curse_support",
+				"kind": "PROJECTILE",
+				"magic": true,
+				"mana_cost": 0,
+				"mechanic": "curse",
+				"params": {
+					"dot_scale": 0.4,
+					"duration": 4
+				},
+				"power": 0.65,
+				"reach": 480,
+				"slow": 0.4,
+				"target_scope": "active",
+				"title": "缚行咒",
+				"unlock_level": 1
+			},
+			"trait": "curse",
+			"trait_params": {
+				"dot_scale": 0.5,
+				"duration": 5,
+				"interval": 2
+			}
+		},
+		"N15": {
+			"automatic": [],
+			"base": {
+				"armor": 4,
+				"attack": 19,
+				"hp": 155,
+				"move": 195,
+				"mp": 130,
+				"regen": 3.8,
+				"speed": 0.95
+			},
+			"basic": {
+				"cooldown": 1.05263157894737,
+				"duration": 0,
+				"id": "N15_basic",
+				"kind": "PROJECTILE",
+				"magic": true,
+				"mana_cost": 0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"power": 1,
+				"reach": 470,
+				"slow": 0,
+				"target_scope": "active",
+				"title": "普攻",
+				"unlock_level": 1
+			},
+			"entry_level": 7,
+			"manual": [
+				{
+					"cooldown": 8,
+					"duration": 0,
+					"id": "N15_curse",
+					"kind": "PROJECTILE",
+					"magic": true,
+					"mana_cost": 26,
+					"mechanic": "curse",
+					"params": {
+						"dot_scale": 1.0,
+						"duration": 5
+					},
+					"power": 1.8,
+					"reach": 510,
+					"slow": 0,
+					"target_scope": "active",
+					"title": "祭咒",
+					"unlock_level": 1
+				},
+				{
+					"cooldown": 12,
+					"duration": 0,
+					"id": "N15_cashout",
+					"kind": "PROJECTILE",
+					"magic": true,
+					"mana_cost": 34,
+					"mechanic": "curse_cashout",
+					"params": {
+						"fraction": 1
+					},
+					"power": 2,
+					"reach": 530,
+					"slow": 0,
+					"target_scope": "active",
+					"title": "催咒",
+					"unlock_level": 7
+				}
+			],
+			"name": "曹军祭师",
+			"owned": {
+				"mp": 0.6
+			},
+			"support": {
+				"cooldown": 6,
+				"duration": 0,
+				"id": "N15_support",
+				"kind": "PROJECTILE",
+				"magic": true,
+				"mana_cost": 0,
+				"mechanic": "expose",
+				"params": {
+					"duration": 3,
+					"multiplier": 0.1
+				},
+				"power": 0.65,
+				"reach": 520,
+				"slow": 0,
+				"target_scope": "active",
+				"title": "弱敌咒",
+				"unlock_level": 1
+			},
+			"trait": "",
+			"trait_params": {
+
+			}
+		},
+		"N16": {
+			"automatic": [],
+			"base": {
+				"armor": 4,
+				"attack": 14,
+				"hp": 170,
+				"move": 200,
+				"mp": 120,
+				"regen": 3.2,
+				"speed": 1
+			},
+			"basic": {
+				"cooldown": 1.0,
+				"duration": 0,
+				"id": "N16_basic",
+				"kind": "SWEEP",
+				"magic": false,
+				"mana_cost": 0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"power": 1,
+				"reach": 95,
+				"slow": 0,
+				"target_scope": "active",
+				"title": "普攻",
+				"unlock_level": 1
+			},
+			"entry_level": 1,
+			"manual": [
+				{
+					"cooldown": 12,
+					"duration": 0,
+					"id": "healer_aid",
+					"kind": "HEAL",
+					"magic": false,
+					"mana_cost": 32,
+					"mechanic": "",
+					"params": {
+
+					},
+					"power": 45,
+					"reach": 0,
+					"slow": 0,
+					"target_scope": "lowest_hp",
+					"title": "急救",
+					"unlock_level": 1
+				}
+			],
+			"name": "行脚郎中",
+			"owned": {
+				"supply_hp": 0.025
+			},
+			"support": {
+				"cooldown": 7,
+				"duration": 0,
+				"id": "healer_support",
+				"kind": "HEAL",
+				"magic": false,
+				"mana_cost": 0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"power": 7,
+				"reach": 0,
+				"slow": 0,
+				"target_scope": "lowest_hp",
+				"title": "敷药",
+				"unlock_level": 1
+			},
+			"trait": "",
+			"trait_params": {
+
+			}
+		},
+		"N17": {
+			"automatic": [],
+			"base": {
+				"armor": 6,
+				"attack": 17,
+				"hp": 205,
+				"move": 205,
+				"mp": 95,
+				"regen": 2.6,
+				"speed": 1.1
+			},
+			"basic": {
+				"cooldown": 0.909090909090909,
+				"duration": 0,
+				"id": "N17_basic",
+				"kind": "SWEEP",
+				"magic": false,
+				"mana_cost": 0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"power": 1,
+				"reach": 100,
+				"slow": 0,
+				"target_scope": "active",
+				"title": "普攻",
+				"unlock_level": 1
+			},
+			"entry_level": 1,
+			"manual": [
+				{
+					"cooldown": 12,
+					"duration": 0,
+					"id": "cook_guard",
+					"kind": "WARD",
+					"magic": false,
+					"mana_cost": 30,
+					"mechanic": "",
+					"params": {
+
+					},
+					"power": 45,
+					"reach": 0,
+					"slow": 0,
+					"target_scope": "self",
+					"title": "护身",
+					"unlock_level": 1
+				}
+			],
+			"name": "随军伙夫",
+			"owned": {
+				"supply_mp": 0.04
+			},
+			"support": {
+				"cooldown": 5,
+				"duration": 0,
+				"id": "cook_support",
+				"kind": "HEAL",
+				"magic": false,
+				"mana_cost": 0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"power": 4,
+				"reach": 0,
+				"slow": 0,
+				"target_scope": "lowest_hp",
+				"title": "热汤",
+				"unlock_level": 1
+			},
+			"trait": "",
+			"trait_params": {
+
+			}
+		},
+		"N18": {
+			"automatic": [],
+			"base": {
+				"armor": 5,
+				"attack": 12,
+				"hp": 170,
+				"move": 200,
+				"mp": 105,
+				"regen": 3.2,
+				"speed": 1
+			},
+			"basic": {
+				"cooldown": 1.0,
+				"duration": 0,
+				"id": "N18_basic",
+				"kind": "SWEEP",
+				"magic": false,
+				"mana_cost": 0,
+				"mechanic": "",
+				"params": {
+
+				},
+				"power": 1,
+				"reach": 100,
+				"slow": 0,
+				"target_scope": "active",
+				"title": "普攻",
+				"unlock_level": 1
+			},
+			"entry_level": 3,
+			"manual": [
+				{
+					"cooldown": 13,
+					"duration": 0,
+					"id": "clerk_guard",
+					"kind": "WARD",
+					"magic": false,
+					"mana_cost": 30,
+					"mechanic": "",
+					"params": {
+
+					},
+					"power": 45,
+					"reach": 0,
+					"slow": 0,
+					"target_scope": "active",
+					"title": "护身符",
+					"unlock_level": 1
+				},
+				{
+					"cooldown": 15,
+					"duration": 0,
+					"id": "N18_rally",
+					"kind": "WARD",
+					"magic": false,
+					"mana_cost": 28,
+					"mechanic": "rally",
+					"params": {
+						"attack_multiplier": 0.1,
+						"duration": 4,
+						"speed_multiplier": 0.1
+					},
+					"power": 0,
+					"reach": 0,
+					"slow": 0,
+					"target_scope": "party",
+					"title": "行军令",
+					"unlock_level": 5
+				}
+			],
+			"name": "军需小吏",
+			"owned": {
+				"supply_mp": 0.03
+			},
+			"support": {
+				"cooldown": 7,
+				"duration": 0,
+				"id": "clerk_support",
+				"kind": "WARD",
+				"magic": false,
+				"mana_cost": 0,
+				"mechanic": "rally",
+				"params": {
+					"attack_multiplier": 0.06,
+					"duration": 2,
+					"speed_multiplier": 0.04
+				},
+				"power": 0,
+				"reach": 0,
+				"slow": 0,
+				"target_scope": "active",
+				"title": "军需援护",
+				"unlock_level": 1
+			},
+			"trait": "",
+			"trait_params": {
+
+			}
+		}
+	}
+}

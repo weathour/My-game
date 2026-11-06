@@ -1,0 +1,897 @@
+{
+  "inputs": {
+    "encounters": "design/danmaku-pressure-20261103/encounters/after.json",
+    "profiles": "assets/data/audio/skill_sound_profiles.json",
+    "cue_catalog": "assets/sfx/skill-combat-20261103/catalog.json"
+  },
+  "freeze_sha": {
+    "checked": 13,
+    "mismatches": []
+  },
+  "counts": {
+    "definitions": 43,
+    "encounters": 18,
+    "bosses": 18,
+    "bosses_with_multiple_forms": 4,
+    "action_contexts": 87,
+    "unique_definition_form_move_bindings": 81,
+    "authored_pattern_actions": 69,
+    "boss_event_contexts": 22,
+    "profile_enemy_definition_entries": 39
+  },
+  "coverage": {
+    "missing_action_bindings": [],
+    "missing_or_invalid_action_stage_cues": [],
+    "command_fallback_swipe_alias_valid": true,
+    "missing_boss_event_bindings": [],
+    "profile_referenced_cues_present": [
+      "arcane.cast",
+      "arcane.impact",
+      "arcane.tell",
+      "armor.impact",
+      "beast.impact",
+      "blade.cast",
+      "blade.impact",
+      "blade.tell",
+      "blunt.cast",
+      "blunt.impact",
+      "blunt.tell",
+      "bone.cast",
+      "bone.impact",
+      "bone.tell",
+      "bow.cast",
+      "bow.impact",
+      "bow.tell",
+      "command.cast",
+      "command.impact",
+      "command.tell",
+      "dash.cast",
+      "dash.tell",
+      "earth.cast",
+      "earth.impact",
+      "earth.tell",
+      "flesh.cast",
+      "flesh.impact",
+      "flesh.tell",
+      "heavy_blade.cast",
+      "heavy_blade.impact",
+      "heavy_blade.tell",
+      "thrust.impact"
+    ]
+  },
+  "identity_compatibility": {
+    "action_identity_drift": [],
+    "baseline_action_contexts": 87,
+    "candidate_action_contexts": 87
+  },
+  "asset_files": {
+    "missing_variant_files": []
+  },
+  "pattern_summary": {
+    "warning_policies": [
+      "aim",
+      "area",
+      "none"
+    ],
+    "actions": [
+      {
+        "definition": "E02",
+        "form": 0,
+        "move_id": "shot",
+        "action": "shot",
+        "warning_policy": "none",
+        "hit_radius": 4.0,
+        "burst_count": 2,
+        "secondary_pattern": ""
+      },
+      {
+        "definition": "E05",
+        "form": 0,
+        "move_id": "fan",
+        "action": "fan",
+        "warning_policy": "none",
+        "hit_radius": 4.0,
+        "burst_count": 2,
+        "secondary_pattern": ""
+      },
+      {
+        "definition": "E09",
+        "form": 0,
+        "move_id": "slam",
+        "action": "slam",
+        "warning_policy": "area",
+        "hit_radius": 4.5,
+        "burst_count": 1,
+        "secondary_pattern": "ring"
+      },
+      {
+        "definition": "E09",
+        "form": 0,
+        "move_id": "slam",
+        "action": "slam",
+        "warning_policy": "area",
+        "hit_radius": 4.5,
+        "burst_count": 1,
+        "secondary_pattern": "ring"
+      },
+      {
+        "definition": "E12",
+        "form": 0,
+        "move_id": "stele_arc_1",
+        "action": "slam",
+        "warning_policy": "area",
+        "hit_radius": 4.5,
+        "burst_count": 1,
+        "secondary_pattern": "ring"
+      },
+      {
+        "definition": "E12",
+        "form": 0,
+        "move_id": "stele_arc_2",
+        "action": "slam",
+        "warning_policy": "area",
+        "hit_radius": 4.5,
+        "burst_count": 1,
+        "secondary_pattern": "ring"
+      },
+      {
+        "definition": "E12",
+        "form": 0,
+        "move_id": "pulse",
+        "action": "pulse",
+        "warning_policy": "area",
+        "hit_radius": 4.5,
+        "burst_count": 1,
+        "secondary_pattern": "ring"
+      },
+      {
+        "definition": "L02",
+        "form": 0,
+        "move_id": "fan",
+        "action": "fan",
+        "warning_policy": "none",
+        "hit_radius": 4.0,
+        "burst_count": 2,
+        "secondary_pattern": ""
+      },
+      {
+        "definition": "L05",
+        "form": 0,
+        "move_id": "hook",
+        "action": "hook",
+        "warning_policy": "area",
+        "hit_radius": 4.5,
+        "burst_count": 2,
+        "secondary_pattern": "fan"
+      },
+      {
+        "definition": "L06",
+        "form": 0,
+        "move_id": "slam",
+        "action": "slam",
+        "warning_policy": "area",
+        "hit_radius": 4.5,
+        "burst_count": 1,
+        "secondary_pattern": "ring"
+      },
+      {
+        "definition": "L06",
+        "form": 0,
+        "move_id": "slam",
+        "action": "slam",
+        "warning_policy": "area",
+        "hit_radius": 4.5,
+        "burst_count": 1,
+        "secondary_pattern": "ring"
+      },
+      {
+        "definition": "B01",
+        "form": 0,
+        "move_id": "swipe",
+        "action": "swipe",
+        "warning_policy": "area",
+        "hit_radius": 4.5,
+        "burst_count": 1,
+        "secondary_pattern": "ring"
+      },
+      {
+        "definition": "B02",
+        "form": 0,
+        "move_id": "swipe",
+        "action": "swipe",
+        "warning_policy": "area",
+        "hit_radius": 4.5,
+        "burst_count": 1,
+        "secondary_pattern": "ring"
+      },
+      {
+        "definition": "B03",
+        "form": 0,
+        "move_id": "charge",
+        "action": "charge",
+        "warning_policy": "area",
+        "hit_radius": 4.5,
+        "burst_count": 2,
+        "secondary_pattern": "fan"
+      },
+      {
+        "definition": "B03",
+        "form": 0,
+        "move_id": "swipe",
+        "action": "swipe",
+        "warning_policy": "area",
+        "hit_radius": 4.5,
+        "burst_count": 1,
+        "secondary_pattern": "ring"
+      },
+      {
+        "definition": "B04",
+        "form": 0,
+        "move_id": "charge",
+        "action": "charge",
+        "warning_policy": "area",
+        "hit_radius": 4.5,
+        "burst_count": 2,
+        "secondary_pattern": "fan"
+      },
+      {
+        "definition": "B04",
+        "form": 0,
+        "move_id": "swipe",
+        "action": "swipe",
+        "warning_policy": "area",
+        "hit_radius": 4.5,
+        "burst_count": 1,
+        "secondary_pattern": "ring"
+      },
+      {
+        "definition": "B05",
+        "form": 0,
+        "move_id": "fan",
+        "action": "fan",
+        "warning_policy": "none",
+        "hit_radius": 4.0,
+        "burst_count": 3,
+        "secondary_pattern": ""
+      },
+      {
+        "definition": "B05",
+        "form": 0,
+        "move_id": "pot",
+        "action": "pot",
+        "warning_policy": "area",
+        "hit_radius": 4.5,
+        "burst_count": 1,
+        "secondary_pattern": "ring"
+      },
+      {
+        "definition": "B06",
+        "form": 0,
+        "move_id": "slam",
+        "action": "slam",
+        "warning_policy": "area",
+        "hit_radius": 4.5,
+        "burst_count": 1,
+        "secondary_pattern": "ring"
+      },
+      {
+        "definition": "B06",
+        "form": 0,
+        "move_id": "slam",
+        "action": "slam",
+        "warning_policy": "area",
+        "hit_radius": 4.5,
+        "burst_count": 1,
+        "secondary_pattern": "ring"
+      },
+      {
+        "definition": "B07",
+        "form": 0,
+        "move_id": "command",
+        "action": "command",
+        "warning_policy": "area",
+        "hit_radius": 4.5,
+        "burst_count": 3,
+        "secondary_pattern": "fan"
+      },
+      {
+        "definition": "B07",
+        "form": 0,
+        "move_id": "swipe",
+        "action": "swipe",
+        "warning_policy": "area",
+        "hit_radius": 4.5,
+        "burst_count": 2,
+        "secondary_pattern": "ring"
+      },
+      {
+        "definition": "B08",
+        "form": 0,
+        "move_id": "charge",
+        "action": "charge",
+        "warning_policy": "area",
+        "hit_radius": 4.5,
+        "burst_count": 2,
+        "secondary_pattern": "fan"
+      },
+      {
+        "definition": "B08",
+        "form": 0,
+        "move_id": "swipe",
+        "action": "swipe",
+        "warning_policy": "area",
+        "hit_radius": 4.5,
+        "burst_count": 2,
+        "secondary_pattern": "ring"
+      },
+      {
+        "definition": "B09",
+        "form": 0,
+        "move_id": "slam",
+        "action": "slam",
+        "warning_policy": "area",
+        "hit_radius": 4.5,
+        "burst_count": 2,
+        "secondary_pattern": "ring"
+      },
+      {
+        "definition": "B09",
+        "form": 0,
+        "move_id": "slam",
+        "action": "slam",
+        "warning_policy": "area",
+        "hit_radius": 4.5,
+        "burst_count": 2,
+        "secondary_pattern": "ring"
+      },
+      {
+        "definition": "B10",
+        "form": 0,
+        "move_id": "slam",
+        "action": "slam",
+        "warning_policy": "area",
+        "hit_radius": 4.5,
+        "burst_count": 2,
+        "secondary_pattern": "ring"
+      },
+      {
+        "definition": "B10",
+        "form": 0,
+        "move_id": "slam",
+        "action": "slam",
+        "warning_policy": "area",
+        "hit_radius": 4.5,
+        "burst_count": 2,
+        "secondary_pattern": "ring"
+      },
+      {
+        "definition": "B11",
+        "form": 0,
+        "move_id": "fan",
+        "action": "fan",
+        "warning_policy": "none",
+        "hit_radius": 4.0,
+        "burst_count": 4,
+        "secondary_pattern": ""
+      },
+      {
+        "definition": "B11",
+        "form": 0,
+        "move_id": "pot",
+        "action": "pot",
+        "warning_policy": "area",
+        "hit_radius": 4.5,
+        "burst_count": 1,
+        "secondary_pattern": "ring"
+      },
+      {
+        "definition": "B12",
+        "form": 0,
+        "move_id": "anchor",
+        "action": "anchor",
+        "warning_policy": "area",
+        "hit_radius": 4.5,
+        "burst_count": 3,
+        "secondary_pattern": "ring"
+      },
+      {
+        "definition": "B12",
+        "form": 0,
+        "move_id": "pulse",
+        "action": "pulse",
+        "warning_policy": "area",
+        "hit_radius": 4.5,
+        "burst_count": 3,
+        "secondary_pattern": "ring"
+      },
+      {
+        "definition": "B13",
+        "form": 0,
+        "move_id": "charge",
+        "action": "charge",
+        "warning_policy": "area",
+        "hit_radius": 4.5,
+        "burst_count": 2,
+        "secondary_pattern": "fan"
+      },
+      {
+        "definition": "B13",
+        "form": 0,
+        "move_id": "swipe",
+        "action": "swipe",
+        "warning_policy": "area",
+        "hit_radius": 4.5,
+        "burst_count": 2,
+        "secondary_pattern": "ring"
+      },
+      {
+        "definition": "B14",
+        "form": 0,
+        "move_id": "command",
+        "action": "command",
+        "warning_policy": "area",
+        "hit_radius": 4.5,
+        "burst_count": 3,
+        "secondary_pattern": "fan"
+      },
+      {
+        "definition": "B14",
+        "form": 0,
+        "move_id": "swipe",
+        "action": "swipe",
+        "warning_policy": "area",
+        "hit_radius": 4.5,
+        "burst_count": 2,
+        "secondary_pattern": "ring"
+      },
+      {
+        "definition": "B10_R",
+        "form": 0,
+        "move_id": "slam",
+        "action": "slam",
+        "warning_policy": "area",
+        "hit_radius": 4.5,
+        "burst_count": 2,
+        "secondary_pattern": "ring"
+      },
+      {
+        "definition": "B10_R",
+        "form": 0,
+        "move_id": "slam",
+        "action": "slam",
+        "warning_policy": "area",
+        "hit_radius": 4.5,
+        "burst_count": 2,
+        "secondary_pattern": "ring"
+      },
+      {
+        "definition": "B15",
+        "form": 0,
+        "move_id": "hunter_aim",
+        "action": "shot",
+        "warning_policy": "aim",
+        "hit_radius": 4.0,
+        "burst_count": 3,
+        "secondary_pattern": ""
+      },
+      {
+        "definition": "B15",
+        "form": 0,
+        "move_id": "hunter_volley",
+        "action": "fan",
+        "warning_policy": "none",
+        "hit_radius": 4.0,
+        "burst_count": 3,
+        "secondary_pattern": ""
+      },
+      {
+        "definition": "B15",
+        "form": 0,
+        "move_id": "hunter_reposition",
+        "action": "charge",
+        "warning_policy": "area",
+        "hit_radius": 4.5,
+        "burst_count": 2,
+        "secondary_pattern": "fan"
+      },
+      {
+        "definition": "B15",
+        "form": 1,
+        "move_id": "beast_hunt",
+        "action": "fan",
+        "warning_policy": "none",
+        "hit_radius": 4.0,
+        "burst_count": 4,
+        "secondary_pattern": ""
+      },
+      {
+        "definition": "B15",
+        "form": 1,
+        "move_id": "beast_leap",
+        "action": "charge",
+        "warning_policy": "area",
+        "hit_radius": 4.5,
+        "burst_count": 3,
+        "secondary_pattern": "fan"
+      },
+      {
+        "definition": "B15",
+        "form": 1,
+        "move_id": "hunt_mark",
+        "action": "marker",
+        "warning_policy": "area",
+        "hit_radius": 4.5,
+        "burst_count": 2,
+        "secondary_pattern": "ring"
+      },
+      {
+        "definition": "B15",
+        "form": 1,
+        "move_id": "beast_rend",
+        "action": "slam",
+        "warning_policy": "area",
+        "hit_radius": 4.5,
+        "burst_count": 2,
+        "secondary_pattern": "ring"
+      },
+      {
+        "definition": "B16",
+        "form": 0,
+        "move_id": "rider_lance",
+        "action": "charge",
+        "warning_policy": "area",
+        "hit_radius": 4.5,
+        "burst_count": 2,
+        "secondary_pattern": "fan"
+      },
+      {
+        "definition": "B16",
+        "form": 0,
+        "move_id": "rider_cleave",
+        "action": "slam",
+        "warning_policy": "area",
+        "hit_radius": 4.5,
+        "burst_count": 2,
+        "secondary_pattern": "ring"
+      },
+      {
+        "definition": "B16",
+        "form": 0,
+        "move_id": "rider_return",
+        "action": "charge",
+        "warning_policy": "area",
+        "hit_radius": 4.5,
+        "burst_count": 2,
+        "secondary_pattern": "fan"
+      },
+      {
+        "definition": "B16",
+        "form": 1,
+        "move_id": "tiger_long_charge",
+        "action": "charge",
+        "warning_policy": "area",
+        "hit_radius": 4.5,
+        "burst_count": 3,
+        "secondary_pattern": "fan"
+      },
+      {
+        "definition": "B16",
+        "form": 1,
+        "move_id": "tiger_trample",
+        "action": "slam",
+        "warning_policy": "area",
+        "hit_radius": 4.5,
+        "burst_count": 2,
+        "secondary_pattern": "ring"
+      },
+      {
+        "definition": "B16",
+        "form": 1,
+        "move_id": "leopard_return",
+        "action": "charge",
+        "warning_policy": "area",
+        "hit_radius": 4.5,
+        "burst_count": 3,
+        "secondary_pattern": "fan"
+      },
+      {
+        "definition": "B16",
+        "form": 1,
+        "move_id": "cavalry_break",
+        "action": "pulse",
+        "warning_policy": "area",
+        "hit_radius": 4.5,
+        "burst_count": 3,
+        "secondary_pattern": "ring"
+      },
+      {
+        "definition": "B17",
+        "form": 0,
+        "move_id": "general_lunge",
+        "action": "charge",
+        "warning_policy": "area",
+        "hit_radius": 4.5,
+        "burst_count": 2,
+        "secondary_pattern": "fan"
+      },
+      {
+        "definition": "B17",
+        "form": 0,
+        "move_id": "general_cut",
+        "action": "slam",
+        "warning_policy": "area",
+        "hit_radius": 4.5,
+        "burst_count": 2,
+        "secondary_pattern": "ring"
+      },
+      {
+        "definition": "B17",
+        "form": 0,
+        "move_id": "human_formation",
+        "action": "collaboration",
+        "warning_policy": "area",
+        "hit_radius": 4.5,
+        "burst_count": 3,
+        "secondary_pattern": "fan"
+      },
+      {
+        "definition": "B17",
+        "form": 1,
+        "move_id": "yaksha_break",
+        "action": "charge",
+        "warning_policy": "area",
+        "hit_radius": 4.5,
+        "burst_count": 3,
+        "secondary_pattern": "fan"
+      },
+      {
+        "definition": "B17",
+        "form": 1,
+        "move_id": "yaksha_cleave",
+        "action": "slam",
+        "warning_policy": "area",
+        "hit_radius": 4.5,
+        "burst_count": 2,
+        "secondary_pattern": "ring"
+      },
+      {
+        "definition": "B17",
+        "form": 1,
+        "move_id": "war_formation",
+        "action": "collaboration",
+        "warning_policy": "area",
+        "hit_radius": 4.5,
+        "burst_count": 3,
+        "secondary_pattern": "fan"
+      },
+      {
+        "definition": "B17",
+        "form": 1,
+        "move_id": "yaksha_pulse",
+        "action": "pulse",
+        "warning_policy": "area",
+        "hit_radius": 4.5,
+        "burst_count": 3,
+        "secondary_pattern": "ring"
+      },
+      {
+        "definition": "B18",
+        "form": 0,
+        "move_id": "halberd_sweep",
+        "action": "slam",
+        "warning_policy": "area",
+        "hit_radius": 4.5,
+        "burst_count": 2,
+        "secondary_pattern": "ring"
+      },
+      {
+        "definition": "B18",
+        "form": 0,
+        "move_id": "halberd_charge",
+        "action": "charge",
+        "warning_policy": "area",
+        "hit_radius": 4.5,
+        "burst_count": 2,
+        "secondary_pattern": "fan"
+      },
+      {
+        "definition": "B18",
+        "form": 0,
+        "move_id": "halberd_fall",
+        "action": "marker",
+        "warning_policy": "area",
+        "hit_radius": 4.5,
+        "burst_count": 2,
+        "secondary_pattern": "ring"
+      },
+      {
+        "definition": "B18",
+        "form": 0,
+        "move_id": "halberd_finish",
+        "action": "slam",
+        "warning_policy": "area",
+        "hit_radius": 4.5,
+        "burst_count": 2,
+        "secondary_pattern": "ring"
+      },
+      {
+        "definition": "B18",
+        "form": 1,
+        "move_id": "demon_fourfold",
+        "action": "slam",
+        "warning_policy": "area",
+        "hit_radius": 4.5,
+        "burst_count": 2,
+        "secondary_pattern": "ring"
+      },
+      {
+        "definition": "B18",
+        "form": 1,
+        "move_id": "demon_skybreaker",
+        "action": "charge",
+        "warning_policy": "area",
+        "hit_radius": 4.5,
+        "burst_count": 3,
+        "secondary_pattern": "fan"
+      },
+      {
+        "definition": "B18",
+        "form": 1,
+        "move_id": "demon_quake",
+        "action": "pulse",
+        "warning_policy": "area",
+        "hit_radius": 4.5,
+        "burst_count": 3,
+        "secondary_pattern": "ring"
+      },
+      {
+        "definition": "B18",
+        "form": 1,
+        "move_id": "demon_heavenfall",
+        "action": "marker",
+        "warning_policy": "area",
+        "hit_radius": 4.5,
+        "burst_count": 2,
+        "secondary_pattern": "ring"
+      },
+      {
+        "definition": "B18",
+        "form": 1,
+        "move_id": "demon_final_cleave",
+        "action": "slam",
+        "warning_policy": "area",
+        "hit_radius": 4.5,
+        "burst_count": 2,
+        "secondary_pattern": "ring"
+      }
+    ]
+  },
+  "campaign_contract_review": {
+    "changed_enemy_xp": {
+      "E01": {
+        "before": 3,
+        "after": 1
+      }
+    },
+    "preserved_stage_fields": [
+      "boss_time",
+      "bonus_time",
+      "boss_hp",
+      "enemy_hp",
+      "enemy_damage",
+      "boss_definition",
+      "field_elites",
+      "derivative_cap",
+      "boss_derivative_cap"
+    ],
+    "stage_preserved_field_differences": {
+      "B01": [],
+      "B02": [],
+      "B04": [],
+      "B05": [],
+      "B03": [],
+      "B06": [],
+      "B07": [],
+      "B08": [],
+      "B09": [],
+      "B10": [],
+      "B11": [],
+      "B12": [],
+      "B13": [],
+      "B14": [],
+      "B15": [],
+      "B16": [],
+      "B17": [],
+      "B18": []
+    },
+    "b18_new_boss_min_time": 0.0,
+    "b18_legacy_stage_fields_unchanged": true,
+    "b18_solo_behavior_contract_ok": true,
+    "boss_min_time_by_stage": {
+      "B01": 28.0,
+      "B02": 29.0,
+      "B04": 31.0,
+      "B05": 32.0,
+      "B03": 30.0,
+      "B06": 33.0,
+      "B07": 34.0,
+      "B08": 35.0,
+      "B09": 36.0,
+      "B10": 37.0,
+      "B11": 38.0,
+      "B12": 39.0,
+      "B13": 40.0,
+      "B14": 40.0,
+      "B15": 40.0,
+      "B16": 40.0,
+      "B17": 40.0,
+      "B18": 0.0
+    },
+    "field_reward_and_pool_logic_source": "scripts/battle/stage_director.gd:57-78,108-114; stage_catalog field_elites are preserved by encounter validation",
+    "reward_observation": "Elite card/equipment reward tags and once-per-kind victory rewards are assigned in StageDirector/BattleSession, not by burst data; E01 XP is deliberately reduced 3->1 per kill in this candidate. Static checks do not establish net XP economy under increased population."
+  },
+  "runtime_pattern_observations_at_audit_time": {
+    "projectile_pattern_consumption": "enemy_system.gd:225-232 calls PATTERNS.primary/launch for shot/fan; :276 launches PATTERNS.secondary. projectile_patterns.gd:10-15 applies primary/secondary patterns and inherited action fields; :18-28 schedules bounded bursts; :32-55 emits burst projectiles.",
+    "authored_radius": "projectile_patterns.gd:47 clamps authored hit_radius (default 5 only if absent); _inherit at :58-62 carries hit_radius into nested patterns. battle_session.gd:350-352 passes projectile radius to HURTBOX.contains_swept.",
+    "unified_hurtbox": "player_hurtbox.gd:4 sets RADIUS=4; contains_swept at :8-12 sums actor and projectile radii. enemy_geometry.gd:4 uses the same HURTBOX.RADIUS for area checks; enemy_system.gd:383+ uses contains_swept for charge sweeps.",
+    "pending_lifecycle": "battle_session.gd:79 prevents all ticks while paused; :440-445 clears projectiles/pending patterns at terminal state; :470-500 removes dead-owner and transitioning-source hazards/projectiles/pending patterns. projectile_patterns.gd:22-29 drops dead/missing/wrong-form/transitioning owners.",
+    "action_event_count": "enemy_system.gd:143 emits one enemy_tell per admitted action; :290 emits one enemy_release; :333 emits enemy_hazard_release per delayed hazard. combat_feedback.gd:261 uses owner/action_serial/release as the mixer key, independent of event kind; :263-267 keeps an attempt-scoped last serial per owner to suppress later markers after the mixer's 3-second key cache expires, and clear(clear_audio=true) resets it at :383-385.",
+    "multi_marker_release_dedup": "Resolved. design/danmaku-pressure-20261103/runtime/final-logs/skill-audio.log reports CHRONICLE_SKILL_AUDIO_SMOKE PASS checks=2236 failures=0, including delayed same-serial suppression beyond 3.2s and next-serial playback.",
+    "multi_marker_actions": [
+      {
+        "definition": "B05",
+        "form": 0,
+        "move_id": "pot",
+        "action": "pot",
+        "marker_count": 3
+      },
+      {
+        "definition": "B11",
+        "form": 0,
+        "move_id": "pot",
+        "action": "pot",
+        "marker_count": 3
+      },
+      {
+        "definition": "B15",
+        "form": 1,
+        "move_id": "hunt_mark",
+        "action": "marker",
+        "marker_count": 5
+      },
+      {
+        "definition": "B17",
+        "form": 0,
+        "move_id": "human_formation",
+        "action": "collaboration",
+        "marker_count": 3
+      },
+      {
+        "definition": "B17",
+        "form": 1,
+        "move_id": "war_formation",
+        "action": "collaboration",
+        "marker_count": 3
+      },
+      {
+        "definition": "B18",
+        "form": 0,
+        "move_id": "halberd_fall",
+        "action": "marker",
+        "marker_count": 3
+      },
+      {
+        "definition": "B18",
+        "form": 1,
+        "move_id": "demon_heavenfall",
+        "action": "marker",
+        "marker_count": 5
+      }
+    ]
+  },
+  "interpretation": [
+    "Action SFX bindings are keyed by definition/form/move_id, so added projectile bursts do not create additional profile rows.",
+    "Burst and secondary projectiles do not emit a sound event per projectile; delayed marker hazards now share their original action release identity and are suppressed at attempt scope.",
+    "B18 accepts the new boss_min_time=0 field while retaining the existing solo duel behavior and all baseline B18 fields."
+  ]
+}

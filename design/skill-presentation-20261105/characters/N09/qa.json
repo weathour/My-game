@@ -1,0 +1,152 @@
+{
+  "id": "N09",
+  "status": "passed",
+  "actor_palette_colors": 57,
+  "binary_alpha": true,
+  "unique_source_body_poses": 16,
+  "clips": {
+    "idle": {
+      "frames": 4,
+      "distinct_frames": 4,
+      "bounds": [
+        [
+          69,
+          96,
+          132,
+          176
+        ],
+        [
+          69,
+          98,
+          129,
+          176
+        ],
+        [
+          68,
+          97,
+          131,
+          176
+        ],
+        [
+          68,
+          96,
+          130,
+          176
+        ]
+      ]
+    },
+    "move": {
+      "frames": 4,
+      "distinct_frames": 4,
+      "bounds": [
+        [
+          65,
+          101,
+          133,
+          176
+        ],
+        [
+          63,
+          100,
+          130,
+          176
+        ],
+        [
+          61,
+          101,
+          128,
+          176
+        ],
+        [
+          60,
+          100,
+          129,
+          176
+        ]
+      ]
+    },
+    "attack": {
+      "frames": 4,
+      "distinct_frames": 4,
+      "bounds": [
+        [
+          67,
+          105,
+          134,
+          176
+        ],
+        [
+          65,
+          105,
+          135,
+          176
+        ],
+        [
+          59,
+          104,
+          136,
+          176
+        ],
+        [
+          65,
+          104,
+          128,
+          176
+        ]
+      ]
+    },
+    "special": {
+      "frames": 4,
+      "distinct_frames": 4,
+      "bounds": [
+        [
+          65,
+          101,
+          135,
+          176
+        ],
+        [
+          61,
+          105,
+          134,
+          176
+        ],
+        [
+          59,
+          102,
+          134,
+          176
+        ],
+        [
+          63,
+          101,
+          131,
+          176
+        ]
+      ]
+    },
+    "hit": {
+      "frames": 2,
+      "distinct_frames": 2,
+      "bounds": [
+        [
+          69,
+          96,
+          132,
+          176
+        ],
+        [
+          69,
+          98,
+          129,
+          176
+        ]
+      ]
+    }
+  },
+  "portrait_native_px": 64,
+  "portrait_export_px": 128,
+  "source_hash_verified": true,
+  "visual_review": "Original full source and Aseprite exported QA contact sheet inspected: coherent role silhouette, intact weapons/feet, plausible limbs, no baked floor. Ground anchor and body scaling accepted for integration; user aesthetic acceptance pending.",
+  "scope": "Raster/export checks only; runtime rendering and action integration owned by main task."
+}

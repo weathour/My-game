@@ -1,0 +1,105 @@
+{
+  "captured_at": 1793948708.2145975,
+  "pack": {
+    "path": "/tmp/my-game-check.pM7fgF/pack-smokes/game.pck",
+    "bytes": 237767328,
+    "sha256": "8ff5f9dbdbca8e8ffd32a4a2648e5a0eed68aee782a2b04c14c9c0996c68b762"
+  },
+  "prior_source_freeze": "design/skill-information-20261106/verification/frozen-inputs.json",
+  "prior_source_freeze_sha256": "ef92dada6a4932c05e3b2e73ead11d8bdbf29494ed5863972790baae67699563",
+  "role": "old implementation inputs only; old full-suite results do not substitute for this round",
+  "numerical_and_simulation_sources": {
+    "scripts/battle/enemy_system.gd": {
+      "sha256": "78fb28a8d09aeefb1ff2cc603be6e28523bed0e77bd309df48192d4a0d0fef4a",
+      "equals_old_pack_source_freeze": true
+    },
+    "scripts/battle/enemy_geometry.gd": {
+      "sha256": "1f81cb206a5071547f2f831c9587ac9a30302c27203cd3373058750e88aeb503",
+      "equals_old_pack_source_freeze": true
+    },
+    "scripts/battle/enemy_runtime.gd": {
+      "sha256": "4f32969329fc6216331710cf1487d57eec6c2184913617b5f66b80ff094a9db4",
+      "equals_old_pack_source_freeze": true
+    },
+    "scripts/battle/stage_director.gd": {
+      "sha256": "1de0a86031775da2a7f88df5d96fc72076846b4f5435fe3064957b33d1db082f",
+      "equals_old_pack_source_freeze": true
+    },
+    "scripts/content/enemy_catalog.gd": {
+      "sha256": "b899d117783d949a0499d6848381b26a0b787ee1ad588869db1a21456e8da8b1",
+      "equals_old_pack_source_freeze": true
+    },
+    "scripts/content/boss_forms.gd": {
+      "sha256": "0993068afc9274b5b9096d5551affdb8e35f58a9372880a80150ea20bdb47f8c",
+      "equals_old_pack_source_freeze": true
+    },
+    "scripts/content/stage_catalog.gd": {
+      "sha256": "f37242fecea5cdaa0e23d038789ae2a0d7de04bdd44c9caae9a9e09f54eb4c40",
+      "equals_old_pack_source_freeze": true
+    },
+    "scripts/battle/player_hurtbox.gd": {
+      "sha256": "3ff2fae94debe76ad31a369b28e03def0bd806a81fb296d4dda2e8a0a00631fe",
+      "equals_old_pack_source_freeze": true
+    }
+  },
+  "before_manifests": {
+    "B17": {
+      "path": "before-manifests/B17.json",
+      "sha256": "875bf09d429bd61dff5af9c282381abf2f792f39f5df49fa164dd06f0175711a"
+    },
+    "B17_human": {
+      "path": "before-manifests/B17_human.json",
+      "sha256": "3e5c47f9eec34c2a0cc244cd6d5080d56e84f31ae112e3655b28c5b99bf14c05"
+    },
+    "M03_WAR": {
+      "path": "before-manifests/M03_WAR.json",
+      "sha256": "f8158ff6b68fa9aae3816f75a9262af0815784e1596bcad24b30ed50153f37bb"
+    },
+    "M03_human": {
+      "path": "before-manifests/M03_human.json",
+      "sha256": "c2fdf71819a9658c4f88c46ddfb4a9661f9f7d3ac8f561825505de0385e27555"
+    },
+    "M04_WAR": {
+      "path": "before-manifests/M04_WAR.json",
+      "sha256": "795b38aae993b8f15a81f109196c6244b672f7505bc51572e43a11be101ecf64"
+    },
+    "M04_human": {
+      "path": "before-manifests/M04_human.json",
+      "sha256": "76b1b8abaa10da696247f6ce39d75eabe11c563c9b1b42d43fade63f154568ea"
+    }
+  },
+  "known_contract": {
+    "variants": [
+      "B17_human/M03_human",
+      "B17_human/M04_human",
+      "B17/M03_WAR",
+      "B17/M04_WAR"
+    ],
+    "windup": 1.4,
+    "recovery": 1.5,
+    "M03_shape": "line",
+    "M03_requested_length": 1100,
+    "M03_half_width": 80,
+    "M04_shape": "marker",
+    "M04_radius": 225,
+    "M04_additional_array_tell_seconds": 0.9,
+    "marker_count": 3,
+    "marker_spacing": 320,
+    "marker_delay": 0.22,
+    "proxy_offset": [
+      80,
+      -50
+    ],
+    "proxy_lifetime": 2.9,
+    "human_body_heights": [
+      128,
+      120
+    ],
+    "war_body_heights": [
+      200,
+      190
+    ],
+    "no_targetable_proxy": true,
+    "additional_troops": 0
+  }
+}

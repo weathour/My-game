@@ -1,0 +1,61 @@
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+ERROR: B04 kill threshold spawns boss immediately
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://scripts/tests/chronicle_chapter_two_smoke.gd:25)
+       [1] encounter_contracts (res://scripts/tests/chronicle_chapter_two_smoke.gd:53)
+       [2] run (res://scripts/tests/chronicle_chapter_two_smoke.gd:34)
+ERROR: B04 boss stops ordinary waves
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://scripts/tests/chronicle_chapter_two_smoke.gd:25)
+       [1] encounter_contracts (res://scripts/tests/chronicle_chapter_two_smoke.gd:54)
+       [2] run (res://scripts/tests/chronicle_chapter_two_smoke.gd:34)
+ERROR: B05 kill threshold spawns boss immediately
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://scripts/tests/chronicle_chapter_two_smoke.gd:25)
+       [1] encounter_contracts (res://scripts/tests/chronicle_chapter_two_smoke.gd:53)
+       [2] run (res://scripts/tests/chronicle_chapter_two_smoke.gd:34)
+ERROR: B05 boss stops ordinary waves
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://scripts/tests/chronicle_chapter_two_smoke.gd:25)
+       [1] encounter_contracts (res://scripts/tests/chronicle_chapter_two_smoke.gd:54)
+       [2] run (res://scripts/tests/chronicle_chapter_two_smoke.gd:34)
+ERROR: B03 kill threshold spawns boss immediately
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://scripts/tests/chronicle_chapter_two_smoke.gd:25)
+       [1] encounter_contracts (res://scripts/tests/chronicle_chapter_two_smoke.gd:53)
+       [2] run (res://scripts/tests/chronicle_chapter_two_smoke.gd:34)
+ERROR: B03 boss stops ordinary waves
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://scripts/tests/chronicle_chapter_two_smoke.gd:25)
+       [1] encounter_contracts (res://scripts/tests/chronicle_chapter_two_smoke.gd:54)
+       [2] run (res://scripts/tests/chronicle_chapter_two_smoke.gd:34)
+ERROR: B06 kill threshold spawns boss immediately
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://scripts/tests/chronicle_chapter_two_smoke.gd:25)
+       [1] encounter_contracts (res://scripts/tests/chronicle_chapter_two_smoke.gd:53)
+       [2] run (res://scripts/tests/chronicle_chapter_two_smoke.gd:34)
+ERROR: B06 boss stops ordinary waves
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://scripts/tests/chronicle_chapter_two_smoke.gd:25)
+       [1] encounter_contracts (res://scripts/tests/chronicle_chapter_two_smoke.gd:54)
+       [2] run (res://scripts/tests/chronicle_chapter_two_smoke.gd:34)
+CAMPAIGN_RUN {"branch":"B04","card_elite":false,"enemy_kinds":["E01","equipment_elite","boss"],"jia_hp":284.0,"jia_level":5,"kills":144,"outcome":"victory","seconds":39.6,"stage":"B01"}
+CAMPAIGN_RUN {"branch":"B04","card_elite":true,"enemy_kinds":["E01","E02","card_elite","boss"],"jia_hp":300.0,"jia_level":6,"kills":159,"outcome":"victory","seconds":52.5,"stage":"B02"}
+CAMPAIGN_RUN {"branch":"B04","card_elite":false,"enemy_kinds":["E01","E03","equipment_elite","E02","E04","boss"],"jia_hp":77.2,"jia_level":7,"kills":183,"outcome":"victory","seconds":59.0,"stage":"B04"}
+CAMPAIGN_RUN {"branch":"B04","card_elite":true,"enemy_kinds":["E01","E03","E04","E02","card_elite","E06","boss"],"jia_hp":95.4,"jia_level":8,"kills":212,"outcome":"victory","seconds":58.8,"stage":"B03"}
+CAMPAIGN_RUN {"branch":"B04","card_elite":true,"enemy_kinds":["E01","E04","E02","E03","card_elite","boss"],"jia_hp":121.7,"jia_level":9,"kills":197,"outcome":"victory","seconds":62.8,"stage":"B06"}
+CAMPAIGN_RUN {"branch":"B05","card_elite":false,"enemy_kinds":["E01","equipment_elite","boss"],"jia_hp":284.0,"jia_level":5,"kills":144,"outcome":"victory","seconds":39.6,"stage":"B01"}
+CAMPAIGN_RUN {"branch":"B05","card_elite":true,"enemy_kinds":["E01","E02","card_elite","boss"],"jia_hp":300.0,"jia_level":6,"kills":159,"outcome":"victory","seconds":52.5,"stage":"B02"}
+CAMPAIGN_RUN {"branch":"B05","card_elite":false,"enemy_kinds":["E01","E04","E05","equipment_elite","boss"],"jia_hp":87.6,"jia_level":7,"kills":163,"outcome":"victory","seconds":44.6,"stage":"B05"}
+CAMPAIGN_RUN {"branch":"B05","card_elite":true,"enemy_kinds":["E01","E03","E04","E02","card_elite","E06","boss"],"jia_hp":96.9,"jia_level":8,"kills":225,"outcome":"victory","seconds":71.7,"stage":"B03"}
+CAMPAIGN_RUN {"branch":"B05","card_elite":true,"enemy_kinds":["E01","E04","E02","E03","card_elite","boss"],"jia_hp":121.7,"jia_level":9,"kills":197,"outcome":"victory","seconds":62.8,"stage":"B06"}
+CHRONICLE_CHAPTER_TWO_SMOKE FAIL checks=185 failures=8

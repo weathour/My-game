@@ -1,0 +1,655 @@
+{
+  "index": 7,
+  "title": "Little Horn",
+  "status": "PASS",
+  "source_sha256": "37ecee25ebd64e725dea9917576a39d19308658724bb2d3c57c0f13ca5ff89f3",
+  "offset_seconds": 0.3021,
+  "duration_seconds": 162.02885416666666,
+  "sample_rate": 48000,
+  "chinese_soundfont": "/home/weathour/.cache/my-game/chinese-instruments-20261104/DSK_Asian_DreamZ/DSK Asian DreamZ.SF2",
+  "soundfont_sha256": "e61d0f590db00434fa1a904ab210fdf4439fef13617d89d33eacc8edfc403e5e",
+  "chinese_source_claim": "Publisher-named sample-based patches; original recording chain not independently verified",
+  "variants": {
+    "D1": {
+      "plan_sha256": "b4dcc98941f64cc179caca35ceab1425756c2b1702dc622ac456b5619da1ff08",
+      "families": {
+        "bass": {
+          "event_count": 582,
+          "peak": 0.17871859669685364,
+          "rms": 0.024405760365807615,
+          "mapping_audit": []
+        },
+        "electric_guitar": {
+          "event_count": 1095,
+          "peak": 0.209347665309906,
+          "rms": 0.021371618279179272,
+          "mapping_audit": []
+        },
+        "erhu": {
+          "event_count": 7,
+          "peak": 0.21645250916481018,
+          "rms": 0.014732006822176362,
+          "mapping_audit": [],
+          "sf2_region_loop_modes": {
+            "1": 6
+          },
+          "nonloop_sample_duration_exceeded_count": 0,
+          "nonloop_sample_duration_exceeded_examples": [],
+          "natural_decay_policy": "SF2 native envelopes and loop flags unchanged; nonloop source may decay before noteoff",
+          "max_actual_sample_transposition_semitones": 3,
+          "actual_sample_transposition_range": [
+            -3,
+            1
+          ],
+          "bank": 0,
+          "program_zero_based": 4,
+          "recorded_root_span": [
+            65,
+            84
+          ],
+          "outside_recorded_root_span_count": 1,
+          "beyond_four_semitone_extension_count": 0,
+          "missing_sf2_zone_event_count": 0,
+          "pitch_range": [
+            62,
+            68
+          ],
+          "render_only_midi": "/home/weathour/.cache/my-game/chinese-12-render-20261104/midi_test_07/D1/erhu.mid",
+          "render_only_midi_sha256": "b4e86972713856ed1f4251828dd1febd7b264e847eecdf6c8d25a01710a469e8",
+          "derivative_note_on_count": 7,
+          "maximum_simultaneously_held_notes": 1,
+          "fluidsynth_log": "/home/weathour/.cache/my-game/chinese-12-render-20261104/midi_test_07/D1/erhu.log",
+          "fluidsynth_log_sha256": "e1a4b97181f5d784b542eb4645543d39ed57f64f162a38ddb54bdf54bebf2bef",
+          "fluidsynth_log_text": "fluidsynth: warning: No preset found on channel 9 [bank=128 prog=0]\n"
+        },
+        "pipa": {
+          "event_count": 2,
+          "peak": 0.2160435914993286,
+          "rms": 0.003238798929909785,
+          "mapping_audit": [],
+          "sf2_region_loop_modes": {
+            "0": 10
+          },
+          "nonloop_sample_duration_exceeded_count": 0,
+          "nonloop_sample_duration_exceeded_examples": [],
+          "natural_decay_policy": "SF2 native envelopes and loop flags unchanged; nonloop source may decay before noteoff",
+          "max_actual_sample_transposition_semitones": 0,
+          "actual_sample_transposition_range": [
+            0,
+            0
+          ],
+          "bank": 0,
+          "program_zero_based": 0,
+          "recorded_root_span": [
+            57,
+            91
+          ],
+          "outside_recorded_root_span_count": 0,
+          "beyond_four_semitone_extension_count": 0,
+          "missing_sf2_zone_event_count": 0,
+          "pitch_range": [
+            57,
+            57
+          ],
+          "render_only_midi": "/home/weathour/.cache/my-game/chinese-12-render-20261104/midi_test_07/D1/pipa.mid",
+          "render_only_midi_sha256": "8003a05307e95a47018f7daaa6641f336fc7a3079c2188827e64766095d0560a",
+          "derivative_note_on_count": 2,
+          "maximum_simultaneously_held_notes": 1,
+          "fluidsynth_log": "/home/weathour/.cache/my-game/chinese-12-render-20261104/midi_test_07/D1/pipa.log",
+          "fluidsynth_log_sha256": "e1a4b97181f5d784b542eb4645543d39ed57f64f162a38ddb54bdf54bebf2bef",
+          "fluidsynth_log_text": "fluidsynth: warning: No preset found on channel 9 [bank=128 prog=0]\n"
+        },
+        "ruan": {
+          "event_count": 398,
+          "peak": 0.28491199016571045,
+          "rms": 0.0605499356431386,
+          "mapping_audit": [],
+          "sf2_region_loop_modes": {
+            "0": 8
+          },
+          "nonloop_sample_duration_exceeded_count": 0,
+          "nonloop_sample_duration_exceeded_examples": [],
+          "natural_decay_policy": "SF2 native envelopes and loop flags unchanged; nonloop source may decay before noteoff",
+          "max_actual_sample_transposition_semitones": 4,
+          "actual_sample_transposition_range": [
+            -4,
+            1
+          ],
+          "bank": 0,
+          "program_zero_based": 2,
+          "recorded_root_span": [
+            50,
+            79
+          ],
+          "outside_recorded_root_span_count": 182,
+          "beyond_four_semitone_extension_count": 0,
+          "missing_sf2_zone_event_count": 0,
+          "pitch_range": [
+            46,
+            56
+          ],
+          "render_only_midi": "/home/weathour/.cache/my-game/chinese-12-render-20261104/midi_test_07/D1/ruan.mid",
+          "render_only_midi_sha256": "9322f8814ffd2c0a10634ec25a37f89bc5678a8cb1a6d37bd31cd8cb55d70ec0",
+          "derivative_note_on_count": 398,
+          "maximum_simultaneously_held_notes": 1,
+          "fluidsynth_log": "/home/weathour/.cache/my-game/chinese-12-render-20261104/midi_test_07/D1/ruan.log",
+          "fluidsynth_log_sha256": "e1a4b97181f5d784b542eb4645543d39ed57f64f162a38ddb54bdf54bebf2bef",
+          "fluidsynth_log_text": "fluidsynth: warning: No preset found on channel 9 [bank=128 prog=0]\n"
+        }
+      },
+      "stems": [
+        {
+          "path": "/home/weathour/programs/desktop-projects/My-game/design/music-20261103-midi-test/trials/07_non_drum/drums.wav",
+          "sha256": "e9ee8385984cc3a03555c77533e11a9099b6fde45f6403085b409b1ba635faf2",
+          "reuse": "unchanged original drums"
+        },
+        {
+          "path": "/home/weathour/.cache/my-game/chinese-12-render-20261104/midi_test_07/D1/bass.wav",
+          "sha256": "4736e32165b49f83e08b136e569a34a5aa4c62b0bf2cbdbe68f649c796c71a5d"
+        },
+        {
+          "path": "/home/weathour/.cache/my-game/chinese-12-render-20261104/midi_test_07/D1/electric_guitar.wav",
+          "sha256": "813ec5823b3fcc1ff5c463dd35be2bf5b74f66736c8a60ada39d3e76f7eaef69"
+        },
+        {
+          "path": "/home/weathour/.cache/my-game/chinese-12-render-20261104/midi_test_07/D1/erhu.wav",
+          "sha256": "653acb263d6410af2b4c2f4a00d8a76b9f93ef7198a0739d3b603e32855c0a3e"
+        },
+        {
+          "path": "/home/weathour/.cache/my-game/chinese-12-render-20261104/midi_test_07/D1/pipa.wav",
+          "sha256": "2f63dff131983d6f8f6bc361ea6add61b4c8e7c9011f3d54f511f6c84beaa490"
+        },
+        {
+          "path": "/home/weathour/.cache/my-game/chinese-12-render-20261104/midi_test_07/D1/ruan.wav",
+          "sha256": "2ec3ef78d0e14595d0ad40e835ce9485c91fc23fb2b831f78956ee98144159e9"
+        }
+      ],
+      "drum_reuse_verified_event_count": 1135,
+      "chinese_shared_gain": 0.20933494894949917,
+      "chinese_to_backbone_rms_db": -9.000000005717965,
+      "full_event_count": 3219,
+      "drum_event_count": 1135,
+      "event_coverage": "Every pitched plan event appears in exactly one family; drums reuse unchanged kit/fallback stems; no doubled old guitar track."
+    },
+    "D2": {
+      "plan_sha256": "f92b1bdc1de833bc9e0c01f090bc285d2e8f16d63e8c58bf00220b3803402705",
+      "families": {
+        "bass": {
+          "event_count": 582,
+          "peak": 0.17871859669685364,
+          "rms": 0.024405760365807615,
+          "mapping_audit": []
+        },
+        "electric_guitar": {
+          "event_count": 1095,
+          "peak": 0.209347665309906,
+          "rms": 0.021371618279179272,
+          "mapping_audit": []
+        },
+        "erhu": {
+          "event_count": 7,
+          "peak": 0.21651728451251984,
+          "rms": 0.014830965432446325,
+          "mapping_audit": [],
+          "sf2_region_loop_modes": {
+            "1": 6
+          },
+          "nonloop_sample_duration_exceeded_count": 0,
+          "nonloop_sample_duration_exceeded_examples": [],
+          "natural_decay_policy": "SF2 native envelopes and loop flags unchanged; nonloop source may decay before noteoff",
+          "max_actual_sample_transposition_semitones": 3,
+          "actual_sample_transposition_range": [
+            -3,
+            1
+          ],
+          "bank": 0,
+          "program_zero_based": 4,
+          "recorded_root_span": [
+            65,
+            84
+          ],
+          "outside_recorded_root_span_count": 1,
+          "beyond_four_semitone_extension_count": 0,
+          "missing_sf2_zone_event_count": 0,
+          "pitch_range": [
+            62,
+            68
+          ],
+          "render_only_midi": "/home/weathour/.cache/my-game/chinese-12-render-20261104/midi_test_07/D2/erhu.mid",
+          "render_only_midi_sha256": "b30ad936dd528094a97b229d1fe3f4c83bd4d9f428a54a2423cf0b59357242b8",
+          "derivative_note_on_count": 7,
+          "maximum_simultaneously_held_notes": 1,
+          "fluidsynth_log": "/home/weathour/.cache/my-game/chinese-12-render-20261104/midi_test_07/D2/erhu.log",
+          "fluidsynth_log_sha256": "e1a4b97181f5d784b542eb4645543d39ed57f64f162a38ddb54bdf54bebf2bef",
+          "fluidsynth_log_text": "fluidsynth: warning: No preset found on channel 9 [bank=128 prog=0]\n"
+        },
+        "pipa": {
+          "event_count": 2,
+          "peak": 0.2160435914993286,
+          "rms": 0.003238798929909785,
+          "mapping_audit": [],
+          "sf2_region_loop_modes": {
+            "0": 10
+          },
+          "nonloop_sample_duration_exceeded_count": 0,
+          "nonloop_sample_duration_exceeded_examples": [],
+          "natural_decay_policy": "SF2 native envelopes and loop flags unchanged; nonloop source may decay before noteoff",
+          "max_actual_sample_transposition_semitones": 0,
+          "actual_sample_transposition_range": [
+            0,
+            0
+          ],
+          "bank": 0,
+          "program_zero_based": 0,
+          "recorded_root_span": [
+            57,
+            91
+          ],
+          "outside_recorded_root_span_count": 0,
+          "beyond_four_semitone_extension_count": 0,
+          "missing_sf2_zone_event_count": 0,
+          "pitch_range": [
+            57,
+            57
+          ],
+          "render_only_midi": "/home/weathour/.cache/my-game/chinese-12-render-20261104/midi_test_07/D2/pipa.mid",
+          "render_only_midi_sha256": "8003a05307e95a47018f7daaa6641f336fc7a3079c2188827e64766095d0560a",
+          "derivative_note_on_count": 2,
+          "maximum_simultaneously_held_notes": 1,
+          "fluidsynth_log": "/home/weathour/.cache/my-game/chinese-12-render-20261104/midi_test_07/D2/pipa.log",
+          "fluidsynth_log_sha256": "e1a4b97181f5d784b542eb4645543d39ed57f64f162a38ddb54bdf54bebf2bef",
+          "fluidsynth_log_text": "fluidsynth: warning: No preset found on channel 9 [bank=128 prog=0]\n"
+        },
+        "ruan": {
+          "event_count": 398,
+          "peak": 0.28491199016571045,
+          "rms": 0.06096806737125941,
+          "mapping_audit": [],
+          "sf2_region_loop_modes": {
+            "0": 8
+          },
+          "nonloop_sample_duration_exceeded_count": 0,
+          "nonloop_sample_duration_exceeded_examples": [],
+          "natural_decay_policy": "SF2 native envelopes and loop flags unchanged; nonloop source may decay before noteoff",
+          "max_actual_sample_transposition_semitones": 4,
+          "actual_sample_transposition_range": [
+            -4,
+            1
+          ],
+          "bank": 0,
+          "program_zero_based": 2,
+          "recorded_root_span": [
+            50,
+            79
+          ],
+          "outside_recorded_root_span_count": 182,
+          "beyond_four_semitone_extension_count": 0,
+          "missing_sf2_zone_event_count": 0,
+          "pitch_range": [
+            46,
+            56
+          ],
+          "render_only_midi": "/home/weathour/.cache/my-game/chinese-12-render-20261104/midi_test_07/D2/ruan.mid",
+          "render_only_midi_sha256": "1a621a45c8c3a0c05118674cfcdaa6f85e7fdde7df41a0b542ec5bd6930377c9",
+          "derivative_note_on_count": 398,
+          "maximum_simultaneously_held_notes": 1,
+          "fluidsynth_log": "/home/weathour/.cache/my-game/chinese-12-render-20261104/midi_test_07/D2/ruan.log",
+          "fluidsynth_log_sha256": "e1a4b97181f5d784b542eb4645543d39ed57f64f162a38ddb54bdf54bebf2bef",
+          "fluidsynth_log_text": "fluidsynth: warning: No preset found on channel 9 [bank=128 prog=0]\n"
+        }
+      },
+      "stems": [
+        {
+          "path": "/home/weathour/programs/desktop-projects/My-game/design/music-20261103-midi-test/trials/07_non_drum/drums.wav",
+          "sha256": "e9ee8385984cc3a03555c77533e11a9099b6fde45f6403085b409b1ba635faf2",
+          "reuse": "unchanged original drums"
+        },
+        {
+          "path": "/home/weathour/.cache/my-game/chinese-12-render-20261104/midi_test_07/D2/bass.wav",
+          "sha256": "4736e32165b49f83e08b136e569a34a5aa4c62b0bf2cbdbe68f649c796c71a5d"
+        },
+        {
+          "path": "/home/weathour/.cache/my-game/chinese-12-render-20261104/midi_test_07/D2/electric_guitar.wav",
+          "sha256": "813ec5823b3fcc1ff5c463dd35be2bf5b74f66736c8a60ada39d3e76f7eaef69"
+        },
+        {
+          "path": "/home/weathour/.cache/my-game/chinese-12-render-20261104/midi_test_07/D2/erhu.wav",
+          "sha256": "482cd11ff49ae9562b398a4a13f6d8f1ac8edb2380b0be8ee72a1dbf828e5602"
+        },
+        {
+          "path": "/home/weathour/.cache/my-game/chinese-12-render-20261104/midi_test_07/D2/pipa.wav",
+          "sha256": "2f63dff131983d6f8f6bc361ea6add61b4c8e7c9011f3d54f511f6c84beaa490"
+        },
+        {
+          "path": "/home/weathour/.cache/my-game/chinese-12-render-20261104/midi_test_07/D2/ruan.wav",
+          "sha256": "5f6bee860405f722b139d1d93b2bf34317151c8b1505b99d20f71a4d00678944"
+        }
+      ],
+      "drum_reuse_verified_event_count": 1135,
+      "chinese_shared_gain": 0.20933494894949917,
+      "chinese_to_backbone_rms_db": -8.940817301539534,
+      "full_event_count": 3219,
+      "drum_event_count": 1135,
+      "event_coverage": "Every pitched plan event appears in exactly one family; drums reuse unchanged kit/fallback stems; no doubled old guitar track."
+    }
+  },
+  "processing": {
+    "fluidsynth_gain": 0.7,
+    "reverb": false,
+    "chorus": false,
+    "sample_rate": 48000,
+    "polyphony": 256,
+    "note_timing": "source ticks and tempo map unchanged; FluidSynth playback scheduling",
+    "backbone": "pinned existing sample renderer and amp processing",
+    "chinese_gain": "D1 aggregate RMS -9 dB relative to backbone, fixed and shared with D2",
+    "bus": "no compression or limiting; fixed gain only",
+    "backbone_amp_scope": "Each source track rendered and amp-processed independently before summing family; source track note ordering retained.",
+    "fluidsynth_unused_channel_warning": "SF2 has no GM drum preset for unused channel 9; render-only MIDI only uses non-drum channels. No voice-allocation or note-drop warnings.",
+    "native_sf2_decay": "Preserve SF2 native loop and envelope flags; PIPA/LUAN are nonlooping, ERHU/GUZHEN loop natively. No extra notes or synthetic tremolo."
+  },
+  "C_historical_processing": {
+    "report": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/扒谱试验/MuScriptor-large/全部完整伴奏_全曲对照/07 - Little Horn/C-render-report.json",
+    "report_sha256": "bf2c70a1ba60d81933765f5e571a1edab533df06385b787be31f080f3091fabe",
+    "compression": null,
+    "dynamics_processing": "none",
+    "pre_gain_loudness": {
+      "input_i": "-25.15",
+      "input_tp": "-8.88",
+      "input_lra": "5.80",
+      "input_thresh": "-35.41",
+      "output_i": "-17.22",
+      "output_tp": "-2.00",
+      "output_lra": "9.00",
+      "output_thresh": "-27.50",
+      "normalization_type": "dynamic",
+      "target_offset": "-0.78"
+    },
+    "note": "C retains the previously delivered rendering and its historical bus processing. This trial applies only fixed gain; C versus D1 includes any historical processing differences."
+  },
+  "common_target_lufs": -20.13,
+  "pre_gain_measurements": {
+    "D1": {
+      "input_i": "-25.40",
+      "input_tp": "-8.77",
+      "input_lra": "6.10",
+      "input_thresh": "-35.67",
+      "output_i": "-17.05",
+      "output_tp": "-2.00",
+      "output_lra": "9.90",
+      "output_thresh": "-27.38",
+      "normalization_type": "dynamic",
+      "target_offset": "-0.95"
+    },
+    "D2": {
+      "input_i": "-25.39",
+      "input_tp": "-9.26",
+      "input_lra": "6.10",
+      "input_thresh": "-35.65",
+      "output_i": "-17.04",
+      "output_tp": "-2.00",
+      "output_lra": "9.90",
+      "output_thresh": "-27.38",
+      "normalization_type": "dynamic",
+      "target_offset": "-0.96"
+    },
+    "C": {
+      "input_i": "-18.00",
+      "input_tp": "-1.73",
+      "input_lra": "5.70",
+      "input_thresh": "-28.27",
+      "output_i": "-17.06",
+      "output_tp": "-2.00",
+      "output_lra": "6.30",
+      "output_thresh": "-27.27",
+      "normalization_type": "dynamic",
+      "target_offset": "-0.94"
+    }
+  },
+  "outputs": {
+    "C": {
+      "fixed_gain_db": -2.129999999999999,
+      "encoded_from": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/扒谱试验/MuScriptor-large/全部完整伴奏_全曲对照/07 - Little Horn/C - 游戏音色.flac",
+      "encoded_from_sha256": "0094338372f82d9200281ea872b03181a83d012ebd0223f23a05d587d85fce8a",
+      "files": {
+        "flac": {
+          "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐全12曲_20261104/07 - Little Horn/C - 现游戏音色_响度匹配.flac",
+          "sha256": "5d99eed6c31679b7f390fe0174b8f97cf6449654c26eaee626cf6a5360f32e2d",
+          "probe": {
+            "programs": [],
+            "streams": [
+              {
+                "codec_name": "flac",
+                "sample_fmt": "s32",
+                "sample_rate": "48000",
+                "channels": 2,
+                "bits_per_sample": 0,
+                "bits_per_raw_sample": "24"
+              }
+            ],
+            "format": {
+              "duration": "162.028854",
+              "size": "28001765"
+            }
+          },
+          "loudness": {
+            "input_i": "-20.13",
+            "input_tp": "-3.86",
+            "input_lra": "5.70",
+            "input_thresh": "-30.40",
+            "output_i": "-17.13",
+            "output_tp": "-2.00",
+            "output_lra": "7.00",
+            "output_thresh": "-27.34",
+            "normalization_type": "dynamic",
+            "target_offset": "-0.87"
+          },
+          "decoded_finite": true,
+          "decoded_sample_count_per_channel": 7777385,
+          "decoded_peak": 0.6414027214050293,
+          "decoded_rms": 0.07179324121499385
+        },
+        "mp3": {
+          "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐全12曲_20261104/07 - Little Horn/C - 现游戏音色_响度匹配.mp3",
+          "sha256": "485da094d1b9d81c7812fa3f3fbdec123625f0f74cb40fd339fe81a796beae1b",
+          "probe": {
+            "programs": [],
+            "streams": [
+              {
+                "codec_name": "mp3",
+                "sample_fmt": "fltp",
+                "sample_rate": "48000",
+                "channels": 2,
+                "bits_per_sample": 0,
+                "bit_rate": "320000"
+              }
+            ],
+            "format": {
+              "duration": "162.072000",
+              "size": "6483885"
+            }
+          },
+          "loudness": {
+            "input_i": "-20.12",
+            "input_tp": "-3.84",
+            "input_lra": "5.70",
+            "input_thresh": "-30.39",
+            "output_i": "-17.13",
+            "output_tp": "-2.00",
+            "output_lra": "7.00",
+            "output_thresh": "-27.34",
+            "normalization_type": "dynamic",
+            "target_offset": "-0.87"
+          },
+          "decoded_finite": true,
+          "decoded_sample_count_per_channel": 7777385,
+          "decoded_peak": 0.6422805786132812,
+          "decoded_rms": 0.07179930352191762
+        }
+      }
+    },
+    "D1": {
+      "fixed_gain_db": 5.27,
+      "encoded_from": "/home/weathour/.cache/my-game/chinese-12-render-20261104/midi_test_07/D1/aligned.wav",
+      "encoded_from_sha256": "105faef683f44f434b0735fed9dc1146e2d282599e60fbdf27130a248ce16fc5",
+      "files": {
+        "flac": {
+          "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐全12曲_20261104/07 - Little Horn/D1 - 中国器乐_原音高.flac",
+          "sha256": "1d403ff400c1435db679c43957ee59063bd9ed3866c478f4fee94cc47d9b9321",
+          "probe": {
+            "programs": [],
+            "streams": [
+              {
+                "codec_name": "flac",
+                "sample_fmt": "s32",
+                "sample_rate": "48000",
+                "channels": 2,
+                "bits_per_sample": 0,
+                "bits_per_raw_sample": "24"
+              }
+            ],
+            "format": {
+              "duration": "162.028854",
+              "size": "28645962"
+            }
+          },
+          "loudness": {
+            "input_i": "-20.13",
+            "input_tp": "-3.50",
+            "input_lra": "6.20",
+            "input_thresh": "-30.40",
+            "output_i": "-16.98",
+            "output_tp": "-2.00",
+            "output_lra": "7.00",
+            "output_thresh": "-27.20",
+            "normalization_type": "dynamic",
+            "target_offset": "-1.02"
+          },
+          "decoded_finite": true,
+          "decoded_sample_count_per_channel": 7777385,
+          "decoded_peak": 0.662562370300293,
+          "decoded_rms": 0.07198073891895396
+        },
+        "mp3": {
+          "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐全12曲_20261104/07 - Little Horn/D1 - 中国器乐_原音高.mp3",
+          "sha256": "66d5178236871ac22537bc20eec6127b93d4a09fc18105b98d0bfb7245f24eca",
+          "probe": {
+            "programs": [],
+            "streams": [
+              {
+                "codec_name": "mp3",
+                "sample_fmt": "fltp",
+                "sample_rate": "48000",
+                "channels": 2,
+                "bits_per_sample": 0,
+                "bit_rate": "320000"
+              }
+            ],
+            "format": {
+              "duration": "162.072000",
+              "size": "6483885"
+            }
+          },
+          "loudness": {
+            "input_i": "-20.13",
+            "input_tp": "-3.52",
+            "input_lra": "6.20",
+            "input_thresh": "-30.40",
+            "output_i": "-16.98",
+            "output_tp": "-2.00",
+            "output_lra": "7.00",
+            "output_thresh": "-27.20",
+            "normalization_type": "dynamic",
+            "target_offset": "-1.02"
+          },
+          "decoded_finite": true,
+          "decoded_sample_count_per_channel": 7777385,
+          "decoded_peak": 0.6606027483940125,
+          "decoded_rms": 0.07198585008172274
+        }
+      }
+    },
+    "D2": {
+      "fixed_gain_db": 5.260000000000002,
+      "encoded_from": "/home/weathour/.cache/my-game/chinese-12-render-20261104/midi_test_07/D2/aligned.wav",
+      "encoded_from_sha256": "7e004979328f4d61b7852389bc3320a8fe394e7ae4a7b8a9bf5bf4c6d54d0ac7",
+      "files": {
+        "flac": {
+          "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐全12曲_20261104/07 - Little Horn/D2 - 中国器乐_有限调式.flac",
+          "sha256": "28cfc551f73080ab935b02fc1b50732ae46aef5ab5e4decbb1ea3974e44ccf89",
+          "probe": {
+            "programs": [],
+            "streams": [
+              {
+                "codec_name": "flac",
+                "sample_fmt": "s32",
+                "sample_rate": "48000",
+                "channels": 2,
+                "bits_per_sample": 0,
+                "bits_per_raw_sample": "24"
+              }
+            ],
+            "format": {
+              "duration": "162.028854",
+              "size": "28641694"
+            }
+          },
+          "loudness": {
+            "input_i": "-20.13",
+            "input_tp": "-4.00",
+            "input_lra": "6.20",
+            "input_thresh": "-30.40",
+            "output_i": "-16.98",
+            "output_tp": "-2.00",
+            "output_lra": "7.10",
+            "output_thresh": "-27.20",
+            "normalization_type": "dynamic",
+            "target_offset": "-1.02"
+          },
+          "decoded_finite": true,
+          "decoded_sample_count_per_channel": 7777385,
+          "decoded_peak": 0.6253832578659058,
+          "decoded_rms": 0.07202062942697533
+        },
+        "mp3": {
+          "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐全12曲_20261104/07 - Little Horn/D2 - 中国器乐_有限调式.mp3",
+          "sha256": "b59eab4e3a5237da8bee95760bea40120a9abf2c5c49c25aed6b0a8c0b7b7637",
+          "probe": {
+            "programs": [],
+            "streams": [
+              {
+                "codec_name": "mp3",
+                "sample_fmt": "fltp",
+                "sample_rate": "48000",
+                "channels": 2,
+                "bits_per_sample": 0,
+                "bit_rate": "320000"
+              }
+            ],
+            "format": {
+              "duration": "162.072000",
+              "size": "6483885"
+            }
+          },
+          "loudness": {
+            "input_i": "-20.12",
+            "input_tp": "-4.00",
+            "input_lra": "6.20",
+            "input_thresh": "-30.40",
+            "output_i": "-16.98",
+            "output_tp": "-2.00",
+            "output_lra": "7.10",
+            "output_thresh": "-27.20",
+            "normalization_type": "dynamic",
+            "target_offset": "-1.02"
+          },
+          "decoded_finite": true,
+          "decoded_sample_count_per_channel": 7777385,
+          "decoded_peak": 0.6267988681793213,
+          "decoded_rms": 0.07202492103141772
+        }
+      }
+    }
+  },
+  "render_script_sha256": "07fff350f5e917f5936630be2bb53bacfff023ed98e089bdab053d521611d1d5",
+  "manual_listening_review": "not performed"
+}

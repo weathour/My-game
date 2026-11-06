@@ -1,0 +1,505 @@
+{
+  "status": "PASS",
+  "clips": [
+    {
+      "index": 4,
+      "cue_id": "midi_test_04",
+      "title": "Disposable Teens",
+      "start_seconds_in_aligned_full_audio": 137,
+      "duration_per_variant_seconds": 45.0,
+      "selection": {
+        "changed_note_onsets": 19,
+        "chinese_note_onsets": 193,
+        "method": "max distinct changed onset half-second bins, then note count and Chinese-layer presence; no amplitude selection"
+      },
+      "common_excerpt_target_lufs": -19.52,
+      "individual_clips": {
+        "C": {
+          "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐首轮_20261104/04 - Disposable Teens/试听片段 - C.mp3",
+          "sha256": "ba47ae7556429a30053308c3af652287ba6abf5a707612a69ee4363e0415e234",
+          "probe": {
+            "programs": [],
+            "streams": [
+              {
+                "codec_name": "mp3",
+                "sample_fmt": "fltp",
+                "sample_rate": "48000",
+                "channels": 2,
+                "bits_per_sample": 0,
+                "bit_rate": "320000"
+              }
+            ],
+            "format": {
+              "duration": "45.024000",
+              "size": "1801965"
+            }
+          },
+          "loudness": {
+            "input_i": "-19.51",
+            "input_tp": "-3.99",
+            "input_lra": "1.60",
+            "input_thresh": "-29.51",
+            "output_i": "-17.66",
+            "output_tp": "-2.40",
+            "output_lra": "1.70",
+            "output_thresh": "-27.66",
+            "normalization_type": "dynamic",
+            "target_offset": "-0.34"
+          },
+          "finite": true,
+          "fixed_gain_db": -0.3200000000000003
+        },
+        "D1": {
+          "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐首轮_20261104/04 - Disposable Teens/试听片段 - D1.mp3",
+          "sha256": "7eeffc1652fe7a9e4ca8b1b7a7bc0d5d2bbc7213cd7e9e46eed8abebe4fe9765",
+          "probe": {
+            "programs": [],
+            "streams": [
+              {
+                "codec_name": "mp3",
+                "sample_fmt": "fltp",
+                "sample_rate": "48000",
+                "channels": 2,
+                "bits_per_sample": 0,
+                "bit_rate": "320000"
+              }
+            ],
+            "format": {
+              "duration": "45.024000",
+              "size": "1801965"
+            }
+          },
+          "loudness": {
+            "input_i": "-19.52",
+            "input_tp": "-4.58",
+            "input_lra": "1.60",
+            "input_thresh": "-29.52",
+            "output_i": "-17.66",
+            "output_tp": "-2.72",
+            "output_lra": "1.40",
+            "output_thresh": "-27.66",
+            "normalization_type": "dynamic",
+            "target_offset": "-0.34"
+          },
+          "finite": true,
+          "fixed_gain_db": -0.14000000000000057
+        },
+        "D2": {
+          "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐首轮_20261104/04 - Disposable Teens/试听片段 - D2.mp3",
+          "sha256": "00f81a6ade24b2dcc8c30f7ed44c9665c4554173f146b1c9254c1cf09968a7b6",
+          "probe": {
+            "programs": [],
+            "streams": [
+              {
+                "codec_name": "mp3",
+                "sample_fmt": "fltp",
+                "sample_rate": "48000",
+                "channels": 2,
+                "bits_per_sample": 0,
+                "bit_rate": "320000"
+              }
+            ],
+            "format": {
+              "duration": "45.024000",
+              "size": "1801965"
+            }
+          },
+          "loudness": {
+            "input_i": "-19.52",
+            "input_tp": "-4.28",
+            "input_lra": "1.50",
+            "input_thresh": "-29.52",
+            "output_i": "-17.66",
+            "output_tp": "-2.47",
+            "output_lra": "1.40",
+            "output_thresh": "-27.66",
+            "normalization_type": "dynamic",
+            "target_offset": "-0.34"
+          },
+          "finite": true,
+          "fixed_gain_db": -0.129999999999999
+        }
+      },
+      "joined_order": [
+        "C",
+        "D1",
+        "D2"
+      ],
+      "gap_seconds": 0.8,
+      "joined": {
+        "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐首轮_20261104/04 - Disposable Teens/快速对照 - C-D1-D2.mp3",
+        "sha256": "dc9fab148e38c611ea31aea290c2ad04a26f7cf6fae995b8b98b55d8bae996ea",
+        "probe": {
+          "programs": [],
+          "streams": [
+            {
+              "codec_name": "mp3",
+              "sample_fmt": "fltp",
+              "sample_rate": "48000",
+              "channels": 2,
+              "bits_per_sample": 0,
+              "bit_rate": "320000"
+            }
+          ],
+          "format": {
+            "duration": "136.632000",
+            "size": "5466285"
+          }
+        },
+        "loudness": {
+          "input_i": "-19.54",
+          "input_tp": "-3.99",
+          "input_lra": "1.80",
+          "input_thresh": "-29.55",
+          "output_i": "-17.86",
+          "output_tp": "-2.40",
+          "output_lra": "1.80",
+          "output_thresh": "-27.87",
+          "normalization_type": "dynamic",
+          "target_offset": "-0.14"
+        },
+        "finite": true
+      },
+      "source_audio_report_sha256": "22de3e50aebeb720a996606cbd2e619820ca21001b5bd0894fc0aaae681d44f2"
+    },
+    {
+      "index": 8,
+      "cue_id": "midi_test_08",
+      "title": "Man That You Fear",
+      "start_seconds_in_aligned_full_audio": 117,
+      "duration_per_variant_seconds": 45.0,
+      "selection": {
+        "changed_note_onsets": 35,
+        "chinese_note_onsets": 194,
+        "method": "max distinct changed onset half-second bins, then note count and Chinese-layer presence; no amplitude selection"
+      },
+      "common_excerpt_target_lufs": -19.24,
+      "individual_clips": {
+        "C": {
+          "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐首轮_20261104/08 - Man That You Fear/试听片段 - C.mp3",
+          "sha256": "018329029158a1b09f09746ed57116f2a64ba6878788205d6e77bf313a481390",
+          "probe": {
+            "programs": [],
+            "streams": [
+              {
+                "codec_name": "mp3",
+                "sample_fmt": "fltp",
+                "sample_rate": "48000",
+                "channels": 2,
+                "bits_per_sample": 0,
+                "bit_rate": "320000"
+              }
+            ],
+            "format": {
+              "duration": "45.024000",
+              "size": "1801965"
+            }
+          },
+          "loudness": {
+            "input_i": "-19.25",
+            "input_tp": "-4.30",
+            "input_lra": "1.50",
+            "input_thresh": "-29.25",
+            "output_i": "-17.91",
+            "output_tp": "-2.94",
+            "output_lra": "1.40",
+            "output_thresh": "-27.91",
+            "normalization_type": "dynamic",
+            "target_offset": "-0.09"
+          },
+          "finite": true,
+          "fixed_gain_db": 4.34
+        },
+        "D1": {
+          "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐首轮_20261104/08 - Man That You Fear/试听片段 - D1.mp3",
+          "sha256": "eeb81be11fd5d9b13df170d1c120095cc93c156d3921691dda2e668cc9d0e3ce",
+          "probe": {
+            "programs": [],
+            "streams": [
+              {
+                "codec_name": "mp3",
+                "sample_fmt": "fltp",
+                "sample_rate": "48000",
+                "channels": 2,
+                "bits_per_sample": 0,
+                "bit_rate": "320000"
+              }
+            ],
+            "format": {
+              "duration": "45.024000",
+              "size": "1801965"
+            }
+          },
+          "loudness": {
+            "input_i": "-19.24",
+            "input_tp": "-4.16",
+            "input_lra": "2.20",
+            "input_thresh": "-29.24",
+            "output_i": "-17.74",
+            "output_tp": "-2.72",
+            "output_lra": "2.10",
+            "output_thresh": "-27.74",
+            "normalization_type": "dynamic",
+            "target_offset": "-0.26"
+          },
+          "finite": true,
+          "fixed_gain_db": 4.580000000000002
+        },
+        "D2": {
+          "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐首轮_20261104/08 - Man That You Fear/试听片段 - D2.mp3",
+          "sha256": "2ef0cc1cbd382830550e27ba754e364f2bbe08228f89b9a74f001510501e4270",
+          "probe": {
+            "programs": [],
+            "streams": [
+              {
+                "codec_name": "mp3",
+                "sample_fmt": "fltp",
+                "sample_rate": "48000",
+                "channels": 2,
+                "bits_per_sample": 0,
+                "bit_rate": "320000"
+              }
+            ],
+            "format": {
+              "duration": "45.024000",
+              "size": "1801965"
+            }
+          },
+          "loudness": {
+            "input_i": "-19.24",
+            "input_tp": "-4.02",
+            "input_lra": "2.30",
+            "input_thresh": "-29.24",
+            "output_i": "-17.73",
+            "output_tp": "-2.62",
+            "output_lra": "2.20",
+            "output_thresh": "-27.73",
+            "normalization_type": "dynamic",
+            "target_offset": "-0.27"
+          },
+          "finite": true,
+          "fixed_gain_db": 4.59
+        }
+      },
+      "joined_order": [
+        "C",
+        "D1",
+        "D2"
+      ],
+      "gap_seconds": 0.8,
+      "joined": {
+        "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐首轮_20261104/08 - Man That You Fear/快速对照 - C-D1-D2.mp3",
+        "sha256": "37ec2efffb45fa0ec97cb28cef12e07a25732d125e29da5beac06f6920a42a57",
+        "probe": {
+          "programs": [],
+          "streams": [
+            {
+              "codec_name": "mp3",
+              "sample_fmt": "fltp",
+              "sample_rate": "48000",
+              "channels": 2,
+              "bits_per_sample": 0,
+              "bit_rate": "320000"
+            }
+          ],
+          "format": {
+            "duration": "136.632000",
+            "size": "5466285"
+          }
+        },
+        "loudness": {
+          "input_i": "-19.28",
+          "input_tp": "-4.01",
+          "input_lra": "2.20",
+          "input_thresh": "-29.28",
+          "output_i": "-17.95",
+          "output_tp": "-2.68",
+          "output_lra": "2.20",
+          "output_thresh": "-27.95",
+          "normalization_type": "dynamic",
+          "target_offset": "-0.05"
+        },
+        "finite": true
+      },
+      "source_audio_report_sha256": "b8a17a0cad6a1e47ceddd95f02ee57964977a37f67b52f66c25e7727c9ed2547"
+    },
+    {
+      "index": 1,
+      "cue_id": "midi_test_01",
+      "title": "The Beautiful People",
+      "start_seconds_in_aligned_full_audio": 173,
+      "duration_per_variant_seconds": 45.0,
+      "selection": {
+        "changed_note_onsets": 52,
+        "chinese_note_onsets": 69,
+        "method": "max distinct changed onset half-second bins, then note count and Chinese-layer presence; no amplitude selection"
+      },
+      "common_excerpt_target_lufs": -19.68,
+      "individual_clips": {
+        "C": {
+          "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐首轮_20261104/01 - The Beautiful People/试听片段 - C.mp3",
+          "sha256": "6cc5d57297d5b4b9c75568c3d94cef8c64bd2d20774302ab4df59be1322fca99",
+          "probe": {
+            "programs": [],
+            "streams": [
+              {
+                "codec_name": "mp3",
+                "sample_fmt": "fltp",
+                "sample_rate": "48000",
+                "channels": 2,
+                "bits_per_sample": 0,
+                "bit_rate": "320000"
+              }
+            ],
+            "format": {
+              "duration": "45.024000",
+              "size": "1801965"
+            }
+          },
+          "loudness": {
+            "input_i": "-19.69",
+            "input_tp": "-4.00",
+            "input_lra": "1.20",
+            "input_thresh": "-29.93",
+            "output_i": "-17.47",
+            "output_tp": "-2.00",
+            "output_lra": "0.90",
+            "output_thresh": "-27.63",
+            "normalization_type": "dynamic",
+            "target_offset": "-0.53"
+          },
+          "finite": true,
+          "fixed_gain_db": 0.1700000000000017
+        },
+        "D1": {
+          "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐首轮_20261104/01 - The Beautiful People/试听片段 - D1.mp3",
+          "sha256": "36604f30d88d495f3d3ce524e3dff6592291bf8e95e2f2be8b392ec5817dfd98",
+          "probe": {
+            "programs": [],
+            "streams": [
+              {
+                "codec_name": "mp3",
+                "sample_fmt": "fltp",
+                "sample_rate": "48000",
+                "channels": 2,
+                "bits_per_sample": 0,
+                "bit_rate": "320000"
+              }
+            ],
+            "format": {
+              "duration": "45.024000",
+              "size": "1801965"
+            }
+          },
+          "loudness": {
+            "input_i": "-19.68",
+            "input_tp": "-5.80",
+            "input_lra": "1.10",
+            "input_thresh": "-29.91",
+            "output_i": "-17.49",
+            "output_tp": "-2.00",
+            "output_lra": "1.20",
+            "output_thresh": "-27.64",
+            "normalization_type": "dynamic",
+            "target_offset": "-0.51"
+          },
+          "finite": true,
+          "fixed_gain_db": 0.03999999999999915
+        },
+        "D2": {
+          "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐首轮_20261104/01 - The Beautiful People/试听片段 - D2.mp3",
+          "sha256": "e1ebd54421085c6bba0ddcd7ffefbce552f395f297709d4b460fccff9e61569c",
+          "probe": {
+            "programs": [],
+            "streams": [
+              {
+                "codec_name": "mp3",
+                "sample_fmt": "fltp",
+                "sample_rate": "48000",
+                "channels": 2,
+                "bits_per_sample": 0,
+                "bit_rate": "320000"
+              }
+            ],
+            "format": {
+              "duration": "45.024000",
+              "size": "1801965"
+            }
+          },
+          "loudness": {
+            "input_i": "-19.68",
+            "input_tp": "-5.36",
+            "input_lra": "1.10",
+            "input_thresh": "-29.91",
+            "output_i": "-17.51",
+            "output_tp": "-2.00",
+            "output_lra": "1.20",
+            "output_thresh": "-27.65",
+            "normalization_type": "dynamic",
+            "target_offset": "-0.49"
+          },
+          "finite": true,
+          "fixed_gain_db": 0.10999999999999943
+        }
+      },
+      "joined_order": [
+        "C",
+        "D1",
+        "D2"
+      ],
+      "gap_seconds": 0.8,
+      "joined": {
+        "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐首轮_20261104/01 - The Beautiful People/快速对照 - C-D1-D2.mp3",
+        "sha256": "5fb3dbd3a97151a35673eeeee673da862996381974ef5e3b32a4660f7655b483",
+        "probe": {
+          "programs": [],
+          "streams": [
+            {
+              "codec_name": "mp3",
+              "sample_fmt": "fltp",
+              "sample_rate": "48000",
+              "channels": 2,
+              "bits_per_sample": 0,
+              "bit_rate": "320000"
+            }
+          ],
+          "format": {
+            "duration": "136.632000",
+            "size": "5466285"
+          }
+        },
+        "loudness": {
+          "input_i": "-19.70",
+          "input_tp": "-4.00",
+          "input_lra": "2.00",
+          "input_thresh": "-29.99",
+          "output_i": "-17.78",
+          "output_tp": "-2.00",
+          "output_lra": "1.90",
+          "output_thresh": "-28.02",
+          "normalization_type": "dynamic",
+          "target_offset": "-0.22"
+        },
+        "finite": true
+      },
+      "source_audio_report_sha256": "1b5b18746b342fb9e857a914e071714356371f08fbe86517237d3ff43987dbb9"
+    }
+  ],
+  "playlists": [
+    {
+      "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐首轮_20261104/先听短对照.m3u8",
+      "sha256": "5b33614b54ca57d1c1a60fbbce8279cebee3f0bf6e1ce24afb948e5914bb8f03"
+    },
+    {
+      "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐首轮_20261104/全部全曲_C-D1-D2.m3u8",
+      "sha256": "d1faeccc3db283d7d5b9ba7bf883821c5018125062d2229b17bd0a48a0c9aed6"
+    },
+    {
+      "path": "/home/weathour/音乐/Marilyn-Manson-伴奏学习/中国器乐首轮_20261104/中国器乐全曲_D1-D2.m3u8",
+      "sha256": "1ad38bc866503a535f042aa3256f47756a871bf789442e102fafd8459ee7431a"
+    }
+  ],
+  "musical_source_edits": false,
+  "clip_level_matching": "per-song common achievable target, fixed gain only; full songs remain unchanged",
+  "manual_listening_review": "not performed"
+}

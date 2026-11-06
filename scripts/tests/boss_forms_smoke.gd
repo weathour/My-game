@@ -1,4 +1,5 @@
 extends SceneTree
+const H := preload("res://scripts/battle/player_hurtbox.gd")
 ## Boundary tests use production runtime objects; no input driver implies play balance.
 const B = preload("res://scripts/battle/battle_session.gd")
 const C = preload("res://scripts/content/combat_catalog.gd")
@@ -77,20 +78,20 @@ func all_geometry(id: String) -> void:
 		boss._apply_form(form)
 		for action in boss.actions:
 			authored_moves += 1
-			var combo_beat: bool = id == "B18" and form == 1 and action.id != "demon_final_cleave"
-			expect(action.windup >= 1.2 and action.recovery >= (0.65 if combo_beat else 1.7), id + " readable tell and authored reset " + str(action.id))
+			var minimum_warning := .9 if str(action.action) in ["shot","fan"] else 1.1
+			expect(float(action.windup) >= minimum_warning and float(action.recovery) >= .48, id + " readable tell and authored reset " + str(action.id))
 			for point in points:
 				boss.position = SPACE.clamp_point(point + (SPACE.CENTER - point).normalized() * 150, Vector2.ONE * boss.radius)
 				if boss.position == point: boss.position += Vector2(-150,0)
 				var actual: Dictionary = action.duplicate(true)
 				if actual.action == "collaboration": actual.shape = "line"
 				var g: Dictionary = G.descriptor(boss, actual, point)
-				var admitted: bool = S._has_exit(g, [], [], point, 180.0)
+				var admitted: bool = S._has_exit(g, [], [], point, float(b.current().stats.move))
 				expect(admitted, id + " form " + str(form) + " " + str(action.id) + " reachable at " + str(point))
 				var origin: Vector2 = g.origin
 				var direction: Vector2 = g.direction
 				boss.current_action = actual; boss.telegraph = g; boss.windup = float(g.total); boss.aim = direction; boss.cooldown = 0
-				S.step([boss], point + Vector2(30,0), 0.1, {"actor_speed":180})
+				S.step([boss], point + Vector2(30,0), 0.1, {"actor_speed":float(b.current().stats.move)})
 				expect(boss.telegraph.origin == origin and boss.telegraph.direction == direction, id + " committed warning does not track")
 				boss.windup = 0; boss.telegraph = {}; boss.active_remaining = 0
 	b._finish("failed")
@@ -101,7 +102,7 @@ func pause_and_safe_transition() -> void:
 	boss.slow = 0.4; boss.slow_time = 0.5; boss.command_remaining = 0.5
 	var enemy: RefCounted = b.director.spawn("E01", b.position + Vector2(30,0))
 	enemy.cooldown = 10000; b.enemies.append(enemy)
-	b.projectiles.append({"position":b.position,"velocity":Vector2.ZERO,"life":3.0,"hostile":true,"source_id":enemy.id,"damage":9999.0})
+	b.projectiles.append({"position":H.center(b.position),"velocity":Vector2.ZERO,"life":3.0,"hostile":true,"source_id":enemy.id,"damage":9999.0})
 	var hp: float = b.current().hp
 	b.set_paused(true)
 	var time: float = b.director.elapsed

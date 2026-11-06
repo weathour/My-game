@@ -13,7 +13,6 @@ func run() -> void:
 	var boss := E.new(1,C.definition("B18"),Vector2(1600,900))
 	boss._apply_form(1); boss.cooldown = 0
 	var expected: Array = ["demon_fourfold","demon_skybreaker","demon_quake","demon_heavenfall","demon_final_cleave"]
-	var resets: Array = [0.65,0.8,1.0,0.9,3.7]
 	var tells: Array = []
 	var releases: Array = []
 	var elapsed := 0.0
@@ -23,7 +22,7 @@ func run() -> void:
 		for event in output.events:
 			if event.kind == "enemy_tell": tells.append({"move":boss.current_action.id,"time":elapsed})
 			if event.kind == "enemy_release":
-				releases.append({"move":event.geometry.move_id,"time":elapsed})
+				releases.append({"move":event.geometry.move_id,"time":elapsed,"recovery":float(boss.current_action.recovery),"active":boss.active_remaining if event.geometry.action_id=="charge" else 0.0})
 				expect(not boss.telegraph.is_empty() if event.geometry.action_id == "charge" else boss.telegraph.is_empty(), "only committed charge remains active after release")
 		if tells.size() >= 11: break
 	expect(tells.size() == 11 and releases.size() == 10,"two complete cycles reach next opening")
@@ -34,8 +33,9 @@ func run() -> void:
 		var authored: float = boss.actions[beat].windup
 		expect(warning >= authored - 0.001 and warning <= authored + 0.02,"every combo beat keeps its full locked warning")
 		var gap: float = float(tells[index+1].time) - float(releases[index].time)
-		var active := 0.65 if beat == 1 else 0.0
-		expect(gap >= float(resets[beat]) + active - 0.001 and gap <= float(resets[beat]) + active + 0.04,"actual reset matches authored recovery plus moving charge")
+		var active: float = releases[index].active
+		var reset: float = releases[index].recovery
+		expect(gap >= reset + active - 0.001 and gap <= reset + active + 0.04,"actual reset matches authored recovery plus moving charge")
 		print("BOSS_COMBO_BEAT ",JSON.stringify({"cycle":index/5,"move":expected[beat],"tell":snappedf(tells[index].time,.01),"release":snappedf(releases[index].time,.01),"next_tell":snappedf(tells[index+1].time,.01),"warning":snappedf(warning,.01),"release_to_next_tell":snappedf(gap,.01)}))
 	print("BOSS_COMBO_TIMING_SMOKE ","PASS" if failures == 0 else "FAIL"," checks=",checks," failures=",failures)
 	quit(0 if failures == 0 else 1)

@@ -1,0 +1,3065 @@
+{
+  "status": "PASS",
+  "cue_count": 101,
+  "variant_count": 303,
+  "asset_wav_count": 303,
+  "catalog_entry_count": 104,
+  "catalog_variant_reference_count": 309,
+  "new_variant_path_count": 303,
+  "retained_utility_variant_reference_count": 6,
+  "sample_rate_hz": 48000,
+  "channels": 1,
+  "encoding": "PCM16 WAV",
+  "peak_target_dbfs": -4.0,
+  "peak_ceiling_dbfs": -3.0,
+  "boss_defeat_max_seconds": 0.42822916666666666,
+  "feedback_death_max_seconds": 0.32275,
+  "source_layers_verified": "all source texture file hashes and non-silent post-envelope contributions checked per variant",
+  "variant_uniqueness": "all 303 file hashes unique; within-cue waveform correlation checked",
+  "manual_listening_review": "not performed; user/runtime team can use the five indexed offline previews",
+  "toolchain": {
+    "python": "3.12.3",
+    "numpy": "2.4.4",
+    "scipy": "1.17.1",
+    "ffmpeg": "ffmpeg version 6.1.1-3ubuntu5 Copyright (c) 2000-2023 the FFmpeg developers"
+  },
+  "tools_sha256": {
+    "build_skill_sfx.py": "d80727033c6b6143ac89c83bc0ca9d437c9f99e4633c362c2ace6cad91542130",
+    "verify_skill_sfx.py": "dec94ef06252e2e4beb7ff5850c094b57f9d779d6d411cc38b864b80b673735f",
+    "make_previews.py": "7f034936bea529c5ea971bd978c60163b30018e1303b9137283496f4f5eebfbe",
+    "sources/fetch-oga-samples.sh": "5505616b458aea1fc02496df83612383895461d6afd7664edc901cacaab54172"
+  },
+  "errors": [],
+  "files": [
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/blade_cast_01.wav",
+      "sha256": "b1aae2645f4952b36bad7ce8387a5d378f61cd787552d8fea320c3ee0d698854",
+      "duration_sec": 0.29,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -23.634025767046385,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.7234183584483939,
+      "pre_gain_mix_rms": 0.7723312126663635
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/blade_cast_02.wav",
+      "sha256": "5826257cf3f2d92e468f711c701dadd7290f1147dddaa1c7a5e679be41961ce9",
+      "duration_sec": 0.29,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -22.64001329058571,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.7281548474843269,
+      "pre_gain_mix_rms": 0.782393209434451
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/blade_cast_03.wav",
+      "sha256": "27404ccaf79004df92d50b80ced8de0f28303f4fe1091f7f07cb64d88056535b",
+      "duration_sec": 0.29,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -22.80250661420218,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.7270605429732625,
+      "pre_gain_mix_rms": 0.7872365111890917
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/blade_impact_01.wav",
+      "sha256": "ba7d449cabfe12be0d8efef5046e13762d7af99bd46ef742d392494482c3b87a",
+      "duration_sec": 0.25,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -22.235548803644946,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.7562163492287907,
+      "pre_gain_mix_rms": 0.8470487796778282
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/blade_impact_02.wav",
+      "sha256": "b0c8193e044117b77b407d172ec7ef51d64f138e9410c48b59842dbe8caaf5ff",
+      "duration_sec": 0.25,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -21.7190980279253,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.7562163492287907,
+      "pre_gain_mix_rms": 0.8048728573760501
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/blade_impact_03.wav",
+      "sha256": "200d680b7c3f8b76a30c2fe90ebf69766d4ced88de85e9f6c9d0537394765a79",
+      "duration_sec": 0.25,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -22.409469576218868,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.7562163492287907,
+      "pre_gain_mix_rms": 0.8088403064173657
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/blade_tell_01.wav",
+      "sha256": "4d6d30839376fe0bbe1dc59dc2e2671542b30f12f76c4831812e5f42a519ae88",
+      "duration_sec": 0.43,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -27.91849905770544,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.3879967282374347,
+      "pre_gain_mix_rms": 0.46421949278077274
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/blade_tell_02.wav",
+      "sha256": "164f2333a363200fdcd0355eb44ddd444507cb78ed967622ac5ad6b7c9038908",
+      "duration_sec": 0.43,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -27.956128989260254,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.3879967282374347,
+      "pre_gain_mix_rms": 0.45846232911939794
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/blade_tell_03.wav",
+      "sha256": "30d87cee90e03ba6e62e59cc2b33eb41066044f2c089620ef40efc92e4587b34",
+      "duration_sec": 0.43,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -27.683322773663647,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.3879967282374347,
+      "pre_gain_mix_rms": 0.45999080043327856
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/heavy_blade_cast_01.wav",
+      "sha256": "538406d9a08555aacf4279e1501fe3a8eacf5afbf6ece90cf2330f98c6052319",
+      "duration_sec": 0.29,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -20.077349991115234,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.74626624430913,
+      "pre_gain_mix_rms": 0.8033501818069698
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/heavy_blade_cast_02.wav",
+      "sha256": "aa9702b2d48fe98347fecc3f7d915b97fa3df0ad00d80d0d63aab55b859bd5c8",
+      "duration_sec": 0.29,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -19.805418887456284,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.7430204886322622,
+      "pre_gain_mix_rms": 0.7994218625731655
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/heavy_blade_cast_03.wav",
+      "sha256": "820d494d518545c3cd15dfa4ca7cd4052cc9e4cbf746f9127e2faa4a51dc833c",
+      "duration_sec": 0.29,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -20.283693940608035,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.7468633218164624,
+      "pre_gain_mix_rms": 0.79800189068433
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/heavy_blade_impact_01.wav",
+      "sha256": "64cfed708bff4f048f16e8f342005b27d4ecf80e5c5d1f591ba4a084cd804171",
+      "duration_sec": 0.25,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -18.85803594235591,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.7571655462110869,
+      "pre_gain_mix_rms": 0.8548347907065121
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/heavy_blade_impact_02.wav",
+      "sha256": "0a4d267efe0e9af398c85f0a67aeb31cd28b8a52e184fe975b9b9f43ed17acbd",
+      "duration_sec": 0.25,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -18.892997298961905,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.7571655462110869,
+      "pre_gain_mix_rms": 0.8302896666397991
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/heavy_blade_impact_03.wav",
+      "sha256": "d034fe79d9224fadf69c602a9c5d8e7b68c2711c7ef6be5c083fa73e4392173d",
+      "duration_sec": 0.25,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -19.611848569655887,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.7571655462110869,
+      "pre_gain_mix_rms": 0.8085282598919865
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/heavy_blade_tell_01.wav",
+      "sha256": "06097745c4554e27d77046a17083dc23caca2ceab558ecf638e790e64cdbf05a",
+      "duration_sec": 0.43,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -23.87094928080403,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.5863392718314666,
+      "pre_gain_mix_rms": 0.6432862898828227
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/heavy_blade_tell_02.wav",
+      "sha256": "4c63e470049a452c31c05fb3b0d32d94ecc534713fd4e265838f4f50886f143d",
+      "duration_sec": 0.43,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -24.19122200198391,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.5770541141603782,
+      "pre_gain_mix_rms": 0.6391603967004953
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/heavy_blade_tell_03.wav",
+      "sha256": "49d70ac0103ee8522d2ce7d8a2a78e9f45ac010ae74fce695ae89b58fb0d1858",
+      "duration_sec": 0.43,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -24.329448151050133,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.5840771656943072,
+      "pre_gain_mix_rms": 0.6437965594516603
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/thrust_cast_01.wav",
+      "sha256": "6229e72ef265a4f782962a57e609fa87bd6c9768b58b04a955dfc77eb5509a9a",
+      "duration_sec": 0.29,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -25.206582610765814,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.7067998051745472,
+      "pre_gain_mix_rms": 0.7483052358924009
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/thrust_cast_02.wav",
+      "sha256": "bf75797af807c5f49f01c0f5467baf4803c2b1fceb60887329742a543885a758",
+      "duration_sec": 0.29,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -22.503567817108223,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.7292644564128175,
+      "pre_gain_mix_rms": 0.7731234922470352
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/thrust_cast_03.wav",
+      "sha256": "4b6724f26b54e504cb6baed6fa0afe16bad308242af036037d8524285ef550ec",
+      "duration_sec": 0.29,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -22.157934931434617,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.7327391192570347,
+      "pre_gain_mix_rms": 0.7704191054002801
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/thrust_impact_01.wav",
+      "sha256": "dfc0504c092eb0a4e87a32e0de98a56ee9108c9eb084e92c4b1e3aa24a1f436c",
+      "duration_sec": 0.25,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -23.699320025547763,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.7573107296638713,
+      "pre_gain_mix_rms": 0.8072541151658092
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/thrust_impact_02.wav",
+      "sha256": "4fca6d1d6fa2f98c3d21289439f5f5f5684e458a5d758a3dd0131b041ebdd9cf",
+      "duration_sec": 0.25,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -24.517964197986263,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.7573107296638713,
+      "pre_gain_mix_rms": 0.8048405181103088
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/thrust_impact_03.wav",
+      "sha256": "5030a03a03409ec52f96616c47877351c9f16a9062b6039ec35f4a08883c925e",
+      "duration_sec": 0.25,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -24.192345608663615,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.7573107296638713,
+      "pre_gain_mix_rms": 0.7976427645134827
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/thrust_tell_01.wav",
+      "sha256": "793791fc81e9fdf8157070bcb959bac7424713f9bb5255d40499eb4e804747e0",
+      "duration_sec": 0.43,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -25.064344678635358,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.523255652774513,
+      "pre_gain_mix_rms": 0.5660018544609015
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/thrust_tell_02.wav",
+      "sha256": "5de3886184a257a3511f464c521ebab5fc5f8898b677156b452af12202055177",
+      "duration_sec": 0.43,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -24.555849534646796,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.523255652774513,
+      "pre_gain_mix_rms": 0.5725088608837418
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/thrust_tell_03.wav",
+      "sha256": "20eaa6c9a2396318c72268293d75fc5624fcbccc647e983f4b4c1dd395c0b380",
+      "duration_sec": 0.43,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -25.107472738745976,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.523255652774513,
+      "pre_gain_mix_rms": 0.5730123915152675
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/blunt_cast_01.wav",
+      "sha256": "fe43398499c18baf453be282a93c2b2bb770061251f778a19d9c12cd228c2849",
+      "duration_sec": 0.29,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -22.118917718898704,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.6227294430151991,
+      "pre_gain_mix_rms": 0.6871733322856097
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/blunt_cast_02.wav",
+      "sha256": "ae3c39e87ddb23cc599a9820a081a226e4cd3a3efce8f075acd9c13f5b66a537",
+      "duration_sec": 0.29,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -22.436747664188537,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.6271544989353974,
+      "pre_gain_mix_rms": 0.7029473197667951
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/blunt_cast_03.wav",
+      "sha256": "e6611eb7bf282fad97b722e492ef73b470e3b1d366ede0254d64f13bae64e3f8",
+      "duration_sec": 0.29,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -23.74483082429291,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.642440201213875,
+      "pre_gain_mix_rms": 0.7013964048735315
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/blunt_impact_01.wav",
+      "sha256": "7c21c402754a062ff4577a1c15279c42cf7f5c88c49c447002ccfe06e6549196",
+      "duration_sec": 0.25,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -23.93597555025464,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.7583705014361164,
+      "pre_gain_mix_rms": 0.8291633799474234
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/blunt_impact_02.wav",
+      "sha256": "cdb7d9694044e7417e6d6a98d2b9efd589d8ab8eb5f122bd7f4c97f94676be01",
+      "duration_sec": 0.25,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -24.38519345359697,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.7583705014361164,
+      "pre_gain_mix_rms": 0.8173397376752851
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/blunt_impact_03.wav",
+      "sha256": "de9fb0f01a10e529956ea2602026bad503e2972e3b4637455c2d480c5d104193",
+      "duration_sec": 0.25,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -23.466511598093305,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.7583705014361164,
+      "pre_gain_mix_rms": 0.8397217790533436
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/blunt_tell_01.wav",
+      "sha256": "4f7204d0438375d84e93375b901f587abfaedfe17a7ea8f99d588da191a3c1b2",
+      "duration_sec": 0.43,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -19.968902037219202,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.4048763474215095,
+      "pre_gain_mix_rms": 0.48562231362903646
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/blunt_tell_02.wav",
+      "sha256": "e1711a6bca8cb026abae2a06ac39ce9163f9fdb9454f71e0dfa3e640a204c46e",
+      "duration_sec": 0.43,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -19.358766673128343,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.4048763474215095,
+      "pre_gain_mix_rms": 0.4795680971709747
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/blunt_tell_03.wav",
+      "sha256": "4a17a20462984ac0fd53f4878f99013c157fe2aebad0e4e062c66b7caf88c754",
+      "duration_sec": 0.43,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -19.690380519232956,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.4048763474215095,
+      "pre_gain_mix_rms": 0.48785893720929036
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/bow_cast_01.wav",
+      "sha256": "379be434e67d4872e426f7a33a3b564bd4ab0cf8d2dcbf0ebeee66ef5659a125",
+      "duration_sec": 0.29,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -21.88431524349358,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.6355679525197877,
+      "pre_gain_mix_rms": 0.681567145540296
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/bow_cast_02.wav",
+      "sha256": "ed49f70137a7fbe86f2413f51a67722334d1642cf693db8a4ffe2f4954e16e00",
+      "duration_sec": 0.29,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -24.636060795566486,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.6238642003731747,
+      "pre_gain_mix_rms": 0.6731370015266739
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/bow_cast_03.wav",
+      "sha256": "b7dc3c8a27c7aea1f5e4a5ed9e685d5b2d131502431f5fa914eedfc67c91fb70",
+      "duration_sec": 0.29,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -20.319611184892,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.6329736140109661,
+      "pre_gain_mix_rms": 0.6832266238408621
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/bow_impact_01.wav",
+      "sha256": "bc1fe2f4ead2eb0921934ec5bb3a034a81a1453d55ce79cb0d5567ba0900f3be",
+      "duration_sec": 0.25,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -22.45994903284309,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.7473072386668793,
+      "pre_gain_mix_rms": 0.8035737769902657
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/bow_impact_02.wav",
+      "sha256": "65e80596ec99f9420f2b2ff8dc0481908875564f41945b195181ce796ec95e64",
+      "duration_sec": 0.25,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -23.19975095651468,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.7473072386668793,
+      "pre_gain_mix_rms": 0.7993073014606235
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/bow_impact_03.wav",
+      "sha256": "ba9224445633b3d4a5caa33fd6d29893c63397c837c80a708acaeaec1c334678",
+      "duration_sec": 0.25,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -23.308620162509328,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.7473072386668793,
+      "pre_gain_mix_rms": 0.8120502644068442
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/bow_tell_01.wav",
+      "sha256": "415618e4b826502abee79cb2bd74e973b6e93c78b462f8166dec7f2d8b6120ff",
+      "duration_sec": 0.43,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -24.466803630976706,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.38106826639489744,
+      "pre_gain_mix_rms": 0.4416216304984459
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/bow_tell_02.wav",
+      "sha256": "001aeec5baf59121ca3cc10c5bafc1995a093dbb2a7c21bac289fe013e0824a5",
+      "duration_sec": 0.43,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -23.781067122294925,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.41384353591512674,
+      "pre_gain_mix_rms": 0.4697060360754315
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/bow_tell_03.wav",
+      "sha256": "c323324d5a01fc90f66fd4a26a4dab9f12fe75e0f705b2aca0dbde510f8ab48a",
+      "duration_sec": 0.43,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -24.190793901846526,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.40771995575287806,
+      "pre_gain_mix_rms": 0.4632236699426217
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/dash_cast_01.wav",
+      "sha256": "ecf755f32e413b732d76d287b4e372ec5bb44cc68eb8159d43b8687b29517373",
+      "duration_sec": 0.29,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -18.762113814598408,
+      "source_layers": 1,
+      "source_layer_mix_rms": 0.4224596675218101,
+      "pre_gain_mix_rms": 0.5024856949408214
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/dash_cast_02.wav",
+      "sha256": "85e052ac3fa5b990dbbffd3b2834ca7b472cbe8ab7057fd0799c3939e550a4af",
+      "duration_sec": 0.29,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -19.09871572936761,
+      "source_layers": 1,
+      "source_layer_mix_rms": 0.43015250869723837,
+      "pre_gain_mix_rms": 0.4999697014220568
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/dash_cast_03.wav",
+      "sha256": "ce91bfcad395c0c7f69dcf0e04b2ba081ed3cc78fb9a73fb4f599ab6f170e671",
+      "duration_sec": 0.29,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -18.694508555331637,
+      "source_layers": 1,
+      "source_layer_mix_rms": 0.4315628482681922,
+      "pre_gain_mix_rms": 0.539914238598927
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/dash_impact_01.wav",
+      "sha256": "048f43876e99d97e4dd1ed9baf0cbdd0898ba5ef03f7a90ced07be0dd9023f8c",
+      "duration_sec": 0.25,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -17.728601620030517,
+      "source_layers": 1,
+      "source_layer_mix_rms": 0.4369029330378245,
+      "pre_gain_mix_rms": 0.5194036140866871
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/dash_impact_02.wav",
+      "sha256": "e1d0968721ca5db4820586691f4a1cfd89412e3e837578937978422b3df0edfc",
+      "duration_sec": 0.25,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -17.411902172900785,
+      "source_layers": 1,
+      "source_layer_mix_rms": 0.4369029330378245,
+      "pre_gain_mix_rms": 0.6032557145914624
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/dash_impact_03.wav",
+      "sha256": "9646a88112f8be54bccf6fe0956daf484af6a589cd8ec3007dd5c3a987f10745",
+      "duration_sec": 0.25,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -18.322402006155546,
+      "source_layers": 1,
+      "source_layer_mix_rms": 0.4369029330378245,
+      "pre_gain_mix_rms": 0.5751268432564578
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/dash_tell_01.wav",
+      "sha256": "06547141640275b832eba939107f9b63b58cedf18eaa6d944696773969180c14",
+      "duration_sec": 0.43,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -21.351162194974023,
+      "source_layers": 1,
+      "source_layer_mix_rms": 0.3077796120473069,
+      "pre_gain_mix_rms": 0.41555889904836224
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/dash_tell_02.wav",
+      "sha256": "bd586b8fc5d8bd4825a221d53b737bf5eec2b1969b7bab59f9c01cb35bd71b75",
+      "duration_sec": 0.43,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -18.171844863713336,
+      "source_layers": 1,
+      "source_layer_mix_rms": 0.3290804456687145,
+      "pre_gain_mix_rms": 0.43950022185530846
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/dash_tell_03.wav",
+      "sha256": "df16f9320988a9d7fb2f948be59025ffb2589bc519056851e3f0862c5cc784ad",
+      "duration_sec": 0.43,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -19.02297528664714,
+      "source_layers": 1,
+      "source_layer_mix_rms": 0.35666847775217886,
+      "pre_gain_mix_rms": 0.45566388775230066
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/earth_cast_01.wav",
+      "sha256": "ee5b9cb01152a8f5c0f1c97ae739b63bdfe36278c9edf0d4ab8ea5570927313d",
+      "duration_sec": 0.29,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -28.91991674189014,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.7476272095941461,
+      "pre_gain_mix_rms": 0.8058372163049325
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/earth_cast_02.wav",
+      "sha256": "d2767c15b34654594682cd2d772fbbf22f8d512b72c6903eda54aeb39385186d",
+      "duration_sec": 0.29,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -28.19530278188624,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.7115842286270746,
+      "pre_gain_mix_rms": 0.7731126703991245
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/earth_cast_03.wav",
+      "sha256": "fcdbfe6ac3db26eeb3832fbf4bafee362738a1e5f2a8b3db29427e8e0715a24f",
+      "duration_sec": 0.29,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -27.411875235783274,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.7371414246178443,
+      "pre_gain_mix_rms": 0.8078040758797593
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/earth_impact_01.wav",
+      "sha256": "4a1d245af751e8c9905fc200e59f889c8c267f90dd259152419d5f9f5b8f3a53",
+      "duration_sec": 0.25,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -28.397872510494672,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.7175234397912825,
+      "pre_gain_mix_rms": 0.8223042182926782
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/earth_impact_02.wav",
+      "sha256": "5644501e386a213556068517466b4f8d791ad60fd87945badc375668d4e25eb4",
+      "duration_sec": 0.25,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -29.11732769827563,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.7175234397912825,
+      "pre_gain_mix_rms": 0.7747660577973828
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/earth_impact_03.wav",
+      "sha256": "dc7288be31bc4fb78cc86a34e8f555a60c8e6fa010406a460e02fb0c64221ad7",
+      "duration_sec": 0.25,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -27.88088832964764,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.7175234397912825,
+      "pre_gain_mix_rms": 0.833402630539309
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/earth_tell_01.wav",
+      "sha256": "476e388bcdb5dbbf5cc6962e3037ee87f2bd7c3f30526e66e5819e9a1ee39f24",
+      "duration_sec": 0.43,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -29.03610257386098,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.5018780640081955,
+      "pre_gain_mix_rms": 0.5638741013285274
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/earth_tell_02.wav",
+      "sha256": "9b795bbb2fb4c75860e06dffc086d0a614f9870013c1cc0a9d54f9c341f63bb0",
+      "duration_sec": 0.43,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -29.560472650425005,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.51167359864954,
+      "pre_gain_mix_rms": 0.5851479203802151
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/earth_tell_03.wav",
+      "sha256": "63ae0f6e25c5681419c1efab52225fd95c9a0b1267d3152e032de67bfeb4ad3f",
+      "duration_sec": 0.43,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -28.192595645537168,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.4890332887184897,
+      "pre_gain_mix_rms": 0.5575852661196671
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/fire_cast_01.wav",
+      "sha256": "42a639f2b4cbff1f359cb506e83feeb0e19bf548bb85adf83e503b8d3ae60c25",
+      "duration_sec": 0.29,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -21.425242887766146,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.5312064181357774,
+      "pre_gain_mix_rms": 0.6232385253053013
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/fire_cast_02.wav",
+      "sha256": "ed792a2b053184e0d0e60bd76002657cbd10995b7ca0dbe5728070b7a132eb10",
+      "duration_sec": 0.29,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -20.70027772168134,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.5253261250742356,
+      "pre_gain_mix_rms": 0.5978275266384238
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/fire_cast_03.wav",
+      "sha256": "3ade1226e7d96ba58e49b10c115441ad40e9b8ec143599e5374efd5a6d983b61",
+      "duration_sec": 0.29,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -20.311134643710997,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.5261175097739031,
+      "pre_gain_mix_rms": 0.595160119808201
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/fire_impact_01.wav",
+      "sha256": "7c69bbc571abebb044afbab70fcb5861c2a429faffffdfeca38e1498e62cb5d2",
+      "duration_sec": 0.25,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -21.472775805229798,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.5272151981333435,
+      "pre_gain_mix_rms": 0.5678668655431234
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/fire_impact_02.wav",
+      "sha256": "e1f75d25c90e55ec893f4a4d8c73e15ea5a5a3a3964f8eddafb6e66a07282a48",
+      "duration_sec": 0.25,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -19.16684727801971,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.5272151981333435,
+      "pre_gain_mix_rms": 0.6168074361158917
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/fire_impact_03.wav",
+      "sha256": "801e154cc60969a73be33e02a8e50b04c6066bc90785f793c657e1a583b53b3b",
+      "duration_sec": 0.25,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -20.183063723673257,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.5272151981333435,
+      "pre_gain_mix_rms": 0.584430306950171
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/fire_tell_01.wav",
+      "sha256": "1134559e036ef4a0479118274151cb5019335f4f996e9e6cd34c3c3b47bfa3fb",
+      "duration_sec": 0.43,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -21.143792985778,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.40986567381564054,
+      "pre_gain_mix_rms": 0.5083753434743586
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/fire_tell_02.wav",
+      "sha256": "35d151693b1b775b3c75042cd506778b38a1ae52764766dfb315dd89ccf4a7f2",
+      "duration_sec": 0.43,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -21.767413367071377,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.41038991148453763,
+      "pre_gain_mix_rms": 0.5044009924545177
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/fire_tell_03.wav",
+      "sha256": "b2cdb96767548d1ff7bac1840f36112e8fe95f3422594b3bd382e933a9acf845",
+      "duration_sec": 0.43,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -21.563859006995667,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.3842134169929993,
+      "pre_gain_mix_rms": 0.4992931503981237
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/ice_cast_01.wav",
+      "sha256": "7979a484698758ec8a8a84e16b6fdc6d84444736d2976714b69c7b6017a4a52e",
+      "duration_sec": 0.29,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -23.871295515855664,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.5134095855862452,
+      "pre_gain_mix_rms": 0.5895725443960332
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/ice_cast_02.wav",
+      "sha256": "414390b4191f5f227ea302f2ff9f7842f3b59e15a46b8b0b2d88c91ba048352a",
+      "duration_sec": 0.29,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -22.01207957655225,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.4910469908897784,
+      "pre_gain_mix_rms": 0.5749131356346959
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/ice_cast_03.wav",
+      "sha256": "a62c7453b8e40fb03c6171e13969765a2fbccc0db34c268be01d60e115d35173",
+      "duration_sec": 0.29,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -20.985606449202304,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.49185372341163625,
+      "pre_gain_mix_rms": 0.5692936221096891
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/ice_impact_01.wav",
+      "sha256": "3423e1c8011fec0bf5317b3e930478c3eb78898e49cbad566e9843f2cfbd8107",
+      "duration_sec": 0.25,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -20.131786921928345,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.5368064824933882,
+      "pre_gain_mix_rms": 0.6252924754953303
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/ice_impact_02.wav",
+      "sha256": "62b29b0464dbd980e76043b1c46baa8deb27c02bb360b1116b0cc6b59c982a75",
+      "duration_sec": 0.25,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -18.66536900134167,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.5368064824933882,
+      "pre_gain_mix_rms": 0.6441353033825864
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/ice_impact_03.wav",
+      "sha256": "b219d0568b44cba6a4251ad2368f2ce66d1830d9ff47a334cae1685fac8e2387",
+      "duration_sec": 0.25,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -20.32727880511502,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.5368064824933882,
+      "pre_gain_mix_rms": 0.6205274696885144
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/ice_tell_01.wav",
+      "sha256": "8538ecef6afd52bb7f48167624b19726003744f6720b3434300c1b46d7cb603d",
+      "duration_sec": 0.43,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -29.41169283588906,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.32313628115925597,
+      "pre_gain_mix_rms": 0.43212161322340925
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/ice_tell_02.wav",
+      "sha256": "fa0f495b0b9a41eac8e6bbe8c886762edc6869f5544af8334cce7bd15d9d3d1b",
+      "duration_sec": 0.43,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -28.458286242020097,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.32354208174886867,
+      "pre_gain_mix_rms": 0.43592873715569735
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/ice_tell_03.wav",
+      "sha256": "65bfeceafde4240b113d6a875f1198009c09ff3659c82edc1220699228d7eeaf",
+      "duration_sec": 0.43,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -27.786714555693692,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.3052290909890125,
+      "pre_gain_mix_rms": 0.416792387058387
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/lightning_cast_01.wav",
+      "sha256": "8b9f241c677d2b1fff3767af814dd8b4643584e7ecb70cdd9efc090ef98add18",
+      "duration_sec": 0.29,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -19.499319173891173,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.505732975205744,
+      "pre_gain_mix_rms": 0.5804247129621618
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/lightning_cast_02.wav",
+      "sha256": "cc81e2c3571efb0282da5e20333d42fc275a9d5a0189356a617983e24816ff45",
+      "duration_sec": 0.29,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -19.57807701385762,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.5125716225245125,
+      "pre_gain_mix_rms": 0.5902093045403243
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/lightning_cast_03.wav",
+      "sha256": "1a3aabb1d64be5858c47d19f796b963cd07c650c1f656e63a7a23abc98fa55ce",
+      "duration_sec": 0.29,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -21.286221960602806,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.5084956713921842,
+      "pre_gain_mix_rms": 0.5881793852117174
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/lightning_impact_01.wav",
+      "sha256": "a73277078a49f868641640ae62ff8277d297842b3266afb05de23a76946fe55a",
+      "duration_sec": 0.25,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -20.336819973003372,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.5387536540528576,
+      "pre_gain_mix_rms": 0.6250179323535782
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/lightning_impact_02.wav",
+      "sha256": "664d727aa3d1afa851e15efe8fb8fa66cb21d5f19970faf758c431b409672245",
+      "duration_sec": 0.25,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -20.294235410323726,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.5387536540528576,
+      "pre_gain_mix_rms": 0.6223563282926806
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/lightning_impact_03.wav",
+      "sha256": "69a8e414a14e05d636d411bc888ae16f536c7b8f3b23181621e70be53df932b0",
+      "duration_sec": 0.25,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -21.079100441059538,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.5387536540528576,
+      "pre_gain_mix_rms": 0.6329668942194014
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/lightning_tell_01.wav",
+      "sha256": "d136537dc8397ef45c67f8e6925948349de3e1c70874ba9650151e5984a765ee",
+      "duration_sec": 0.43,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -18.85245194993169,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.34517114579558367,
+      "pre_gain_mix_rms": 0.4542984328466213
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/lightning_tell_02.wav",
+      "sha256": "f57e4dc0c5d2a477581fb2a2564a87dbbbdc6b9c41fb0f9f74e7b885493b66c8",
+      "duration_sec": 0.43,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -17.83554067207677,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.3509765663550124,
+      "pre_gain_mix_rms": 0.45644367496943133
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/lightning_tell_03.wav",
+      "sha256": "a73eafa47f50153ab1aa105b0b3ef9db9ea7cb15170c08ca60df3074a62b486b",
+      "duration_sec": 0.43,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -18.43786495749599,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.35614204071532635,
+      "pre_gain_mix_rms": 0.4523617231720172
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/wind_cast_01.wav",
+      "sha256": "983e81627d1e977182f19e3f42e22075668386e882bfdf199905c26cf38f0ec9",
+      "duration_sec": 0.29,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -18.40735364102972,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.5216172801263039,
+      "pre_gain_mix_rms": 0.5908532713663547
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/wind_cast_02.wav",
+      "sha256": "7cb0c590d36714a71953ffca31a530de82b2a41937c5f139457a03d9a428ef38",
+      "duration_sec": 0.29,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -23.085556416682866,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.5272590132393917,
+      "pre_gain_mix_rms": 0.6055451658759412
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/wind_cast_03.wav",
+      "sha256": "72a630d08d01a89191786366bc388cc29b53a3e401c02dc012d4e05298088e26",
+      "duration_sec": 0.29,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -21.72793701287306,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.5061267921083932,
+      "pre_gain_mix_rms": 0.5794277529066524
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/wind_impact_01.wav",
+      "sha256": "96af946654df7ac6ac8c5c3898703d4eec12cf5eb8a64988509e0f3f88f13f11",
+      "duration_sec": 0.25,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -21.688571266217927,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.5370822028007785,
+      "pre_gain_mix_rms": 0.6733032832333774
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/wind_impact_02.wav",
+      "sha256": "1f8ad7da9f7bfa183c1baa2c9e87e0e2a6ed65a383c17b5aee3e5107dd5c1c38",
+      "duration_sec": 0.25,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -21.53160298605455,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.5370822028007785,
+      "pre_gain_mix_rms": 0.6384324669286023
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/wind_impact_03.wav",
+      "sha256": "eae2d43f95c8bbcf36a9b4ca2f0b5354c10064126a10dbc6f79a729023865b83",
+      "duration_sec": 0.25,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -21.11444192451983,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.5370822028007785,
+      "pre_gain_mix_rms": 0.6632544399437309
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/wind_tell_01.wav",
+      "sha256": "826e7be96a9c878910f4aa1eac79a4c697c8ae0890db91acc8e07e561f3419b7",
+      "duration_sec": 0.43,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -21.681729459229928,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.4138739917707105,
+      "pre_gain_mix_rms": 0.5000032504656391
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/wind_tell_02.wav",
+      "sha256": "57b3cc2e7a1e070df601cbed64f31f41909fde6c7e2327396ab5c52d44314c5a",
+      "duration_sec": 0.43,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -21.34333868274482,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.40187814873005534,
+      "pre_gain_mix_rms": 0.489592081019906
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/wind_tell_03.wav",
+      "sha256": "0ca941bb5fb98553bd2d83d49271a09193e0c4c4192bae599c6d6cd395cbf6ba",
+      "duration_sec": 0.43,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -21.431584564302103,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.4102780785267497,
+      "pre_gain_mix_rms": 0.5021835696980681
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/water_cast_01.wav",
+      "sha256": "931ccafb59b4acc5d988e3c846432264d19439737867a5f91c77c6740ea56320",
+      "duration_sec": 0.29,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -23.685376775624594,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.49493047301726156,
+      "pre_gain_mix_rms": 0.5792857299136069
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/water_cast_02.wav",
+      "sha256": "678968e35cdb1098dc4052df74f5863a1d1b5f992ece4591943e76fa9fef95c0",
+      "duration_sec": 0.29,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -27.641694023484455,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.48810581658466734,
+      "pre_gain_mix_rms": 0.5633775636759799
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/water_cast_03.wav",
+      "sha256": "3ec93f0875364e7324c03c4df0780a33cab38296331f2c297f4eaf870316ebeb",
+      "duration_sec": 0.29,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -19.234525417084583,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.5065569669625312,
+      "pre_gain_mix_rms": 0.5995508660465053
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/water_impact_01.wav",
+      "sha256": "3d78907cfda35b4c7ce3ad483f560781d2c00bbb2da86b8c067674485861bd02",
+      "duration_sec": 0.25,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -24.193562600125166,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.5355295108401981,
+      "pre_gain_mix_rms": 0.6449995962826106
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/water_impact_02.wav",
+      "sha256": "9ce693edf8cddf4bfc0ab628d61aaa1cfaf43fa00464b145ed53cd65923e9607",
+      "duration_sec": 0.25,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -24.250032321803452,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.5355295108401981,
+      "pre_gain_mix_rms": 0.6153804534455346
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/water_impact_03.wav",
+      "sha256": "4cda1ddb110336cdb0f0bd194c936c1104ab15af43531b46ffa504a24064a1d7",
+      "duration_sec": 0.25,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -26.10436276038772,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.5355295108401981,
+      "pre_gain_mix_rms": 0.6083348739098928
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/water_tell_01.wav",
+      "sha256": "110dfdefc6ba0da7a4f35414faf0cfa256eba34341802adbce9a1eafa88e9f3d",
+      "duration_sec": 0.43,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -22.47793016046652,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.4375073624512972,
+      "pre_gain_mix_rms": 0.5262227824082117
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/water_tell_02.wav",
+      "sha256": "315efb821f52fb81232ed7d7271c2817b74038dc2e0b42588398a1c1c85cd3e7",
+      "duration_sec": 0.43,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -21.799463030371605,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.3947476563715768,
+      "pre_gain_mix_rms": 0.49478948116052557
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/water_tell_03.wav",
+      "sha256": "51291ff4d654c8c043c3861e6d8af11c07c97de34413aa4c83484803bfdb3acf",
+      "duration_sec": 0.43,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -22.830366400791355,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.43876222639915274,
+      "pre_gain_mix_rms": 0.5259148750295027
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/poison_cast_01.wav",
+      "sha256": "c5e9ee214470125475c923bf7e4b7e6531c2015729b0107d48a32f01a9c5d574",
+      "duration_sec": 0.29,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -31.5291363529293,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.5265477704175575,
+      "pre_gain_mix_rms": 0.5995834344144193
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/poison_cast_02.wav",
+      "sha256": "ffa30dea45e0fc41786621d47e1e295f091f746612d8fdfa5d3194becaf14541",
+      "duration_sec": 0.29,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -28.904920203227316,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.5109773266819889,
+      "pre_gain_mix_rms": 0.594688903935753
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/poison_cast_03.wav",
+      "sha256": "7a46bc5be648208288d77a987b6e40708202db7874ebcd321758cd33df5111df",
+      "duration_sec": 0.29,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -30.441521980043905,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.5310891359167951,
+      "pre_gain_mix_rms": 0.6138027824647063
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/poison_impact_01.wav",
+      "sha256": "8924b5e907d6cf20cd3a75aac0632961a72ca0da10ef8973e2938e7c9c7badfd",
+      "duration_sec": 0.25,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -29.432996356705246,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.5333899445051477,
+      "pre_gain_mix_rms": 0.6550030902079425
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/poison_impact_02.wav",
+      "sha256": "cc6bcf2442413f4ad85cdd97596f24dd81d5f0b009e68c94c39f216ccea318e8",
+      "duration_sec": 0.25,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -28.727986387062945,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.5333899445051477,
+      "pre_gain_mix_rms": 0.6984412828100042
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/poison_impact_03.wav",
+      "sha256": "16d86c127c78a8c49dd3d377b6db24ebabeca453aa23be47288e94b5db4145f4",
+      "duration_sec": 0.25,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -28.94817619481891,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.5333899445051477,
+      "pre_gain_mix_rms": 0.6534663006630419
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/poison_tell_01.wav",
+      "sha256": "bd716d67472681d69b773d69bc5b6d9733b40676fd4502cbf3887d402cb26328",
+      "duration_sec": 0.43,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -30.25030521855344,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.35519880416132665,
+      "pre_gain_mix_rms": 0.4695152934587212
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/poison_tell_02.wav",
+      "sha256": "e417ff2a8fbccf3e6d0f5b019d7cf132f2cec0142666d09bb592e593775a5d11",
+      "duration_sec": 0.43,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -30.930152404221296,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.35833067293601284,
+      "pre_gain_mix_rms": 0.4594664908194037
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/poison_tell_03.wav",
+      "sha256": "653169591d40d7dbcb83d7980ce4c9315c8063e6a3552c3728be98d29b2d183a",
+      "duration_sec": 0.43,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -31.721149291401858,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.3316054842181808,
+      "pre_gain_mix_rms": 0.4490404021023193
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/arcane_cast_01.wav",
+      "sha256": "16c69dfb52c3df76e039ab57e661488208f3e1c818cd1a784cc037927d7c8b52",
+      "duration_sec": 0.29,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -19.479826584219634,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.5106967626688833,
+      "pre_gain_mix_rms": 0.5816596430013814
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/arcane_cast_02.wav",
+      "sha256": "2ed07a7aeeb44ae8854b1e084683096800dc40490543545a815b474485d768c8",
+      "duration_sec": 0.29,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -19.02393435652746,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.5167917359360209,
+      "pre_gain_mix_rms": 0.5937975862334873
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/arcane_cast_03.wav",
+      "sha256": "48e404764493b1054555a6317ecba5a1eaf49b12e7c2717b825bf4791a733828",
+      "duration_sec": 0.29,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -17.574068339753545,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.5208572889817823,
+      "pre_gain_mix_rms": 0.6002457812073401
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/arcane_impact_01.wav",
+      "sha256": "947579a0e2e9eddb9d8efaf760ba81e5abcaed27acb034523c9e204a031403e4",
+      "duration_sec": 0.25,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -18.629284027582894,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.5339502608791791,
+      "pre_gain_mix_rms": 0.581661498081473
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/arcane_impact_02.wav",
+      "sha256": "03d4db4829bc78ffc9004bc88ef35826daa227cac7abccc69704fba987f339d1",
+      "duration_sec": 0.25,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -18.15281020657946,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.5339502608791791,
+      "pre_gain_mix_rms": 0.6276094531091924
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/arcane_impact_03.wav",
+      "sha256": "dfb2c6e955a0239935806d820182feb5ba1d885319eb589820ead096daccc799",
+      "duration_sec": 0.25,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -18.169626695194392,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.5339502608791791,
+      "pre_gain_mix_rms": 0.6601027155360164
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/arcane_tell_01.wav",
+      "sha256": "5af1306664e686432b6eb39bf279aec6d466f86de510e1dc40daaaf64edc0b7c",
+      "duration_sec": 0.43,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -18.588449689134737,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.3905889499470385,
+      "pre_gain_mix_rms": 0.48029943121579627
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/arcane_tell_02.wav",
+      "sha256": "90a3834c32d6ea5fd1f5783b0c14ec61fa001360fd76fa7fe7e89791b5040059",
+      "duration_sec": 0.43,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -18.534648225923593,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.404617705670859,
+      "pre_gain_mix_rms": 0.48955022131015813
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/arcane_tell_03.wav",
+      "sha256": "cc338c9b431f347e7ecea44eddb09d297158b955de577c95fcc56fae872dd4ab",
+      "duration_sec": 0.43,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -19.551885060970005,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.4003426356984802,
+      "pre_gain_mix_rms": 0.48922528917709773
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/curse_cast_01.wav",
+      "sha256": "b9f956aa8692f2efe0cde097a3095536d83089fc32118e41842ea1cda6a85642",
+      "duration_sec": 0.29,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -25.13308485403541,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.5298041509477969,
+      "pre_gain_mix_rms": 0.602303749529915
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/curse_cast_02.wav",
+      "sha256": "6fc40352c5510ea44e8053543ba76c52aa36a55808d15be2757186e44cc69b08",
+      "duration_sec": 0.29,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -25.72680127511688,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.5217368051771658,
+      "pre_gain_mix_rms": 0.5769209490537448
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/curse_cast_03.wav",
+      "sha256": "7a504d5dbb5bdf07bbc78271a467d61e6f9adc61609cc2866d6f144c4ca0bc75",
+      "duration_sec": 0.29,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -25.981443633534475,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.5360779579681308,
+      "pre_gain_mix_rms": 0.5898152493010006
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/curse_impact_01.wav",
+      "sha256": "ac5dd4d74a3de3c550281150362817510dc3e2c136690ec1b3ae90882ee672fd",
+      "duration_sec": 0.25,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -23.693299190237667,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.5363452599981369,
+      "pre_gain_mix_rms": 0.6434049736358053
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/curse_impact_02.wav",
+      "sha256": "f7482de4f4d27f21f57dc6accf8ab8b5ec10307c3df417c49189da351848123e",
+      "duration_sec": 0.25,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -24.38818241180247,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.5363452599981369,
+      "pre_gain_mix_rms": 0.6035601463173523
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/curse_impact_03.wav",
+      "sha256": "f500ef3683d0f7cb2efd000d21264d7bee541d5c735b845e13c0ee7418bd4e88",
+      "duration_sec": 0.25,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -23.67287676886866,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.5363452599981369,
+      "pre_gain_mix_rms": 0.6461711868914375
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/curse_tell_01.wav",
+      "sha256": "628f612edfbc0d85ae60eea1d5ed4fae13b95e1b91f43d6bd387290358b90df0",
+      "duration_sec": 0.43,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -23.819351060849463,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.27746220910776387,
+      "pre_gain_mix_rms": 0.3650565287191333
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/curse_tell_02.wav",
+      "sha256": "4ebec330fa05b09903b86b4437231672844bef5ea8e92c6bfdc71b6eda576fc3",
+      "duration_sec": 0.43,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -23.416084801686836,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.28428708085804033,
+      "pre_gain_mix_rms": 0.37477128807023447
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/curse_tell_03.wav",
+      "sha256": "dfca42e854593ba33826aed57aae87b551957952e341515fa0122c3a03c994f1",
+      "duration_sec": 0.43,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -22.562540492923876,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.29074557163659165,
+      "pre_gain_mix_rms": 0.4014755943511258
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/heal_cast_01.wav",
+      "sha256": "34be9ddbda915ea84aab1a76ed2ba328e589e6c3233a96596acc2eb4fd912db4",
+      "duration_sec": 0.29,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -22.461336902724014,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.5220659028479183,
+      "pre_gain_mix_rms": 0.5942039970348042
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/heal_cast_02.wav",
+      "sha256": "1b260f7a6deedd9e0428dc812a0f41aea39f6274923a2f3211e70ac71ad7f1e5",
+      "duration_sec": 0.29,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -22.60397253063897,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.5176674574471838,
+      "pre_gain_mix_rms": 0.5748008341727678
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/heal_cast_03.wav",
+      "sha256": "ec2b3b371c99ac3166a8ca49147b7cb7dd411b1da3aea332c9a4d0235eb7bb1e",
+      "duration_sec": 0.29,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -23.376100296733988,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.5223635194757489,
+      "pre_gain_mix_rms": 0.5797327247348352
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/heal_impact_01.wav",
+      "sha256": "00e0b73f0a1ed20f65c0ce272fb1e853e22d263252999203ac8cbeb79efb3f14",
+      "duration_sec": 0.25,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -20.705124676571927,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.5270740404965075,
+      "pre_gain_mix_rms": 0.6150159852137705
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/heal_impact_02.wav",
+      "sha256": "5c0ee471c18a9209a9084f0997d6fd77ed3851eb96d360210078237e962fe53d",
+      "duration_sec": 0.25,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -20.86924591345548,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.5270740404965075,
+      "pre_gain_mix_rms": 0.6175303671159145
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/heal_impact_03.wav",
+      "sha256": "e1456ced3e3178e31bf7c1eb0fc77423f98e1be95cf0c24f47f61beff166e947",
+      "duration_sec": 0.25,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -21.53373662633892,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.5270740404965075,
+      "pre_gain_mix_rms": 0.5860097214663885
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/heal_tell_01.wav",
+      "sha256": "feb5958c5f52eb28f251d8497732fed41b0cbdfd6e9dc72eea37a8fd1fed97b5",
+      "duration_sec": 0.43,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -18.063014296946427,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.3966601095932099,
+      "pre_gain_mix_rms": 0.4770652356548416
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/heal_tell_02.wav",
+      "sha256": "ebf3e9511b226300bfd3decf5aae22d8dcd1f85410ea07f59ac2ff7ae20d18e5",
+      "duration_sec": 0.43,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -21.634969426627574,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.3728317275175984,
+      "pre_gain_mix_rms": 0.4696166117003316
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/heal_tell_03.wav",
+      "sha256": "62defa9cbcf61efe5b44dbcaa79486c48a5f475db63ba2d4f8caa72014ca32e3",
+      "duration_sec": 0.43,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -22.422683784843844,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.37006214849969465,
+      "pre_gain_mix_rms": 0.465071598280167
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/shield_cast_01.wav",
+      "sha256": "1a7f59da8cb7b25b6ad527051e06cabb478bd01c7b4c537388026b0579fed2e1",
+      "duration_sec": 0.29,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -20.542206777439723,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.7232413862283064,
+      "pre_gain_mix_rms": 0.7800548901712622
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/shield_cast_02.wav",
+      "sha256": "9a4dd06d1f96045777d008658710d21f5c4e929d9f983bf1bcd97d6086c1b492",
+      "duration_sec": 0.29,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -21.06860834315734,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.7304494003907654,
+      "pre_gain_mix_rms": 0.7842708961235556
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/shield_cast_03.wav",
+      "sha256": "b92def9deee6efabdf37ae715c6c0400c383cf7e1b42f534ba808593e65fe2cb",
+      "duration_sec": 0.29,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -20.628666012347164,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.7236702124398783,
+      "pre_gain_mix_rms": 0.7783669629380207
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/shield_impact_01.wav",
+      "sha256": "bb3b7b353c7fb649ca68d580b5c9952d2692f7f25846f048d707520c76b5ea1b",
+      "duration_sec": 0.25,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -19.82139885775726,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.7591551701634248,
+      "pre_gain_mix_rms": 0.8294422666992349
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/shield_impact_02.wav",
+      "sha256": "34f667d5db29c1945bfc6680bcd9bcaea737a1665ba4ac8e421cfa9011da4e96",
+      "duration_sec": 0.25,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -19.001282546875164,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.7591551701634248,
+      "pre_gain_mix_rms": 0.8212891586289294
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/shield_impact_03.wav",
+      "sha256": "87ec7894ed0368553d78f5ba4dd7a6e4aa5e04d874e2b20e0178a110d6cd0179",
+      "duration_sec": 0.25,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -20.521922523891902,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.7591551701634248,
+      "pre_gain_mix_rms": 0.8192258860047027
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/shield_tell_01.wav",
+      "sha256": "e16b0ff0cd64879b6731cdcf5106dd14397a518802056afb9571f587ab923c57",
+      "duration_sec": 0.43,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -16.962693044949177,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.5472109969876615,
+      "pre_gain_mix_rms": 0.6061394839538301
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/shield_tell_02.wav",
+      "sha256": "c382765e588b358693bbdc5f6c2bf56c548d81b714d991d48419ff1547eb6dc2",
+      "duration_sec": 0.43,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -17.68655233412845,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.5475429747159143,
+      "pre_gain_mix_rms": 0.6103376225611667
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/shield_tell_03.wav",
+      "sha256": "53743b2509e0e2e420ceb71aa2f9fb81c4626345bcd1aff9f92eafc4f3383210",
+      "duration_sec": 0.43,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -16.78197662300406,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.5461692544736555,
+      "pre_gain_mix_rms": 0.6120038902600943
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/mana_cast_01.wav",
+      "sha256": "fd14fe3da41ab31d632da48717dd419debd86af8b6bf3be2de37fec18ca77e11",
+      "duration_sec": 0.29,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -29.488058640979006,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.49846493303549183,
+      "pre_gain_mix_rms": 0.5607760735484911
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/mana_cast_02.wav",
+      "sha256": "113fe3fbd965c8507e397f386f3660f05b59d0bdcf716eb77d29426426da0f59",
+      "duration_sec": 0.29,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -29.874478084181064,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.5065139081381332,
+      "pre_gain_mix_rms": 0.5786195786994648
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/mana_cast_03.wav",
+      "sha256": "46a41a2fd8c717fbea250525938e97e0f3476b008f5ef80670b37f5f10708801",
+      "duration_sec": 0.29,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -29.50040144874515,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.5061638327603782,
+      "pre_gain_mix_rms": 0.5686967240104228
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/mana_impact_01.wav",
+      "sha256": "7c3d3db2758bcabb4b427c0935bec9939fe2545dc9183b13368a9524e50b939b",
+      "duration_sec": 0.25,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -29.073853791886894,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.5359431391245761,
+      "pre_gain_mix_rms": 0.5853048343603044
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/mana_impact_02.wav",
+      "sha256": "f0c5655e09bdc9b61a04bb65ab9f5342a01a93f728ae86a1823a8b084f01c079",
+      "duration_sec": 0.25,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -29.003940824722175,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.5359431391245761,
+      "pre_gain_mix_rms": 0.6179662361552268
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/mana_impact_03.wav",
+      "sha256": "adb65691cb22a5560de9b984423835411d6870c67cb851cfa1ce88c239659629",
+      "duration_sec": 0.25,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -28.690279848737475,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.5359431391245761,
+      "pre_gain_mix_rms": 0.5993451332640928
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/mana_tell_01.wav",
+      "sha256": "fd9224a1c6ef226ca28d02606cf2eec995902f7babf394b24b7152cddb654ebf",
+      "duration_sec": 0.43,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -17.87400055626385,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.2507992058228401,
+      "pre_gain_mix_rms": 0.37912108137587125
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/mana_tell_02.wav",
+      "sha256": "e8fb29f35d98d4d395608e920fdf4726005fac2539b376bfcd4db29fdbcabf35",
+      "duration_sec": 0.43,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -18.79245698637343,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.26196432795358837,
+      "pre_gain_mix_rms": 0.38142584712411054
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/mana_tell_03.wav",
+      "sha256": "68389d0193575090a91d5b145745ab507a8fcb0900961f10b8c68a8d432ee06f",
+      "duration_sec": 0.43,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -18.413105065979632,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.27184076740266694,
+      "pre_gain_mix_rms": 0.3863999051020129
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/cleanse_cast_01.wav",
+      "sha256": "bd33338d46df3142bba60a7f80abb8d5661ef8c701cc30b7cd303aa220012ef1",
+      "duration_sec": 0.29,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -20.588777865598672,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.5076653141844796,
+      "pre_gain_mix_rms": 0.584478582361996
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/cleanse_cast_02.wav",
+      "sha256": "61934a3104dd0897b17ac1694ce87c88351d7505dcf15519aa4787dfb6514129",
+      "duration_sec": 0.29,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -22.81926960998003,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.5163909787768886,
+      "pre_gain_mix_rms": 0.5905146459665331
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/cleanse_cast_03.wav",
+      "sha256": "7b1aa78fd3b126e67adcdfbe0f43b66708795e970649beae24584be11d52d31b",
+      "duration_sec": 0.29,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -19.75869697161034,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.5035103722380857,
+      "pre_gain_mix_rms": 0.5813591485866397
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/cleanse_impact_01.wav",
+      "sha256": "c1cc9ed1e00315988a26deb11b2d868709c9ea159527456cc62e2f958c269f2a",
+      "duration_sec": 0.25,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -23.764424480311558,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.5176271850733627,
+      "pre_gain_mix_rms": 0.6094234414320643
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/cleanse_impact_02.wav",
+      "sha256": "d0ffb2d61bc89242752f945888996421a454dbdc942e6c9a1df43fa02657d7ee",
+      "duration_sec": 0.25,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -22.911299289946587,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.5176271850733627,
+      "pre_gain_mix_rms": 0.6141090803231553
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/cleanse_impact_03.wav",
+      "sha256": "92f4766196c1d1be74f3c5fda26cc9de396a3f3c8f619811a5628e3f357d71bb",
+      "duration_sec": 0.25,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -23.116996186001476,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.5176271850733627,
+      "pre_gain_mix_rms": 0.6103083552377798
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/cleanse_tell_01.wav",
+      "sha256": "b7a28741a33a17e0d0fa1e5dfd772ec5813e8fcba8a781659dfa809edeae3d66",
+      "duration_sec": 0.43,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -25.131395650741972,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.41963977013562687,
+      "pre_gain_mix_rms": 0.5045050113740495
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/cleanse_tell_02.wav",
+      "sha256": "c1a622c3506081e681de3c6066d9c16551a27a0008dcf8859ecc9183cdc0bf9e",
+      "duration_sec": 0.43,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -24.224232426684882,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.4298909852467568,
+      "pre_gain_mix_rms": 0.5132626268665432
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/cleanse_tell_03.wav",
+      "sha256": "9cf5e6bc1ebc9d6ac7c3447d2f883699bc485e1e6ce738571cc5c02a1a7ddbb3",
+      "duration_sec": 0.43,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -25.463736155991484,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.4281593607942951,
+      "pre_gain_mix_rms": 0.5094326923741708
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/summon_cast_01.wav",
+      "sha256": "62cda571625e280e5aa98c1973d8019c09c7b43193d88fbfd630df30eae58446",
+      "duration_sec": 0.29,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -24.732985682371293,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.5359849786397126,
+      "pre_gain_mix_rms": 0.6381822998723742
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/summon_cast_02.wav",
+      "sha256": "d05650a4f8453fc0f0e5de32a01c65299ca0c871d769eebcaea0c4bb77c7eada",
+      "duration_sec": 0.29,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -26.380496057406408,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.5216296646085813,
+      "pre_gain_mix_rms": 0.6056650766115461
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/summon_cast_03.wav",
+      "sha256": "cf97eb14815d4c1df6d66b89bccfe46a4e8cd63c2167fbcfbf56a9e6915eb1a6",
+      "duration_sec": 0.29,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -25.591109081188314,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.5413095035146398,
+      "pre_gain_mix_rms": 0.645035595522876
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/summon_impact_01.wav",
+      "sha256": "53c69871beaa83404f14c2e3999cbe7c4d3ed3d6507e02aef7aa41365cecf511",
+      "duration_sec": 0.25,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -24.011145180256023,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.5307960227944327,
+      "pre_gain_mix_rms": 0.6940354153523619
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/summon_impact_02.wav",
+      "sha256": "ff96f8de5f4f0585de05c0b99018a9416096ba8da7223d0c45dda056abedd11e",
+      "duration_sec": 0.25,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -24.427280070119384,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.5307960227944327,
+      "pre_gain_mix_rms": 0.7456779145072421
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/summon_impact_03.wav",
+      "sha256": "5a78deae2dfb59f73e56b87ad81ef9f15923e9ef498ae5498c86b5fc058266d0",
+      "duration_sec": 0.25,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -26.28528254310817,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.5307960227944327,
+      "pre_gain_mix_rms": 0.6069568516981069
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/summon_tell_01.wav",
+      "sha256": "2254d63c8292d69fc186b32faaa90340f040433818d0c9750df1a4ca38e602a0",
+      "duration_sec": 0.43,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -22.45186627069101,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.2893289755288723,
+      "pre_gain_mix_rms": 0.41877928154878774
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/summon_tell_02.wav",
+      "sha256": "8abafaadfd63a05c1a2c093783f1c80d9550463ebf227f6c454d8bedb3e4f411",
+      "duration_sec": 0.43,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -22.26433703054721,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.3110176886700414,
+      "pre_gain_mix_rms": 0.4241673513385532
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/summon_tell_03.wav",
+      "sha256": "1b74f109eb4b9da45a35e2a34abb84a4dd279eb55ef3c3dd83f8d0561846c7fe",
+      "duration_sec": 0.43,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -23.97612201238827,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.2453144210556727,
+      "pre_gain_mix_rms": 0.40810027303601126
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/buff_cast_01.wav",
+      "sha256": "c495280dc2aef7a48fa845fa017c6e9b8d518ea67775d33e37f805b611909db3",
+      "duration_sec": 0.29,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -29.28414251678653,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.5099407609519816,
+      "pre_gain_mix_rms": 0.5783644080611304
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/buff_cast_02.wav",
+      "sha256": "96f265110dc621d785c5ea47293aed4b9e118e7c1b5087a5c5703344ad3b9993",
+      "duration_sec": 0.29,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -28.96342937489151,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.521025619605831,
+      "pre_gain_mix_rms": 0.5836664954781673
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/buff_cast_03.wav",
+      "sha256": "041b8ed3a3c1679553980303ed2f885cc9a2dd55c9ff244f1cff074198741f18",
+      "duration_sec": 0.29,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -29.36894372177975,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.5169511605962576,
+      "pre_gain_mix_rms": 0.5824922629020202
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/buff_impact_01.wav",
+      "sha256": "ee13f37d667ef2fb2c0a39e8cb5862a618149bc1259eaa79f476a7e621bb0088",
+      "duration_sec": 0.25,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -27.940918734256215,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.5421371756060684,
+      "pre_gain_mix_rms": 0.6581663138721303
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/buff_impact_02.wav",
+      "sha256": "7108c94232b670f8d4e07fe20ccb10f347db321222fd872fed63b5c7d9a407b1",
+      "duration_sec": 0.25,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -28.438881707546866,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.5421371756060684,
+      "pre_gain_mix_rms": 0.6390028670406768
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/buff_impact_03.wav",
+      "sha256": "d2f3c589da7de628a7670be4ef5b59a29e5d208788185c595bd8876e6cc03cb8",
+      "duration_sec": 0.25,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -28.30773594092478,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.5421371756060684,
+      "pre_gain_mix_rms": 0.6534848292925797
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/buff_tell_01.wav",
+      "sha256": "d35618d774f9786fc908aeb2bda03ae3ef9bcb2712c5386cc06dc1caf0e3e6cd",
+      "duration_sec": 0.43,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -20.38733242354263,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.3069014292113096,
+      "pre_gain_mix_rms": 0.4224997018946126
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/buff_tell_02.wav",
+      "sha256": "90db8daac0546fc13d693277793d8a8a33497048d43fb1a0e49c61c685692c2d",
+      "duration_sec": 0.43,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -20.94656359830892,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.30313928600187845,
+      "pre_gain_mix_rms": 0.41156521942591745
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/buff_tell_03.wav",
+      "sha256": "a1eb0c49ed9da65e1e07c055d75d9b7f223e807bfa0b54d12ea65f5967e05aa2",
+      "duration_sec": 0.43,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -21.745994582343997,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.30543197311193226,
+      "pre_gain_mix_rms": 0.42048489090240404
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/beast_cast_01.wav",
+      "sha256": "e384ab30d5023b19b8412d74e40cd42a07574afc505267ac928caae4f0e3966f",
+      "duration_sec": 0.29,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -17.574466511719994,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.7315965225563245,
+      "pre_gain_mix_rms": 0.7505532102666889
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/beast_cast_02.wav",
+      "sha256": "03dbe836db5f1bb152a04dab2ad76afe94cdc2a8e880c91fa156f3c87808cc6f",
+      "duration_sec": 0.29,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -17.353901535651023,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.7503569746678073,
+      "pre_gain_mix_rms": 0.7694783196401204
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/beast_cast_03.wav",
+      "sha256": "71235e1ba4bb35e4a85aae0f2eb0954a911f9ba9f3facd96b7fa2d189dfdf77b",
+      "duration_sec": 0.29,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -18.386240191933123,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.7423923244535995,
+      "pre_gain_mix_rms": 0.7480433845266057
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/beast_impact_01.wav",
+      "sha256": "268a71f4f7665e4d66e04dfa092f00132f93fa7615b24fb4e103d2afeb0528bc",
+      "duration_sec": 0.25,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -14.013489023914145,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.7628753464207586,
+      "pre_gain_mix_rms": 0.8161450359057202
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/beast_impact_02.wav",
+      "sha256": "26fc1a898d4bdd7f6a01030bc309eb3be89dccc98232267b5694df7cacdf40ff",
+      "duration_sec": 0.25,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -14.650037050082329,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.7628753464207586,
+      "pre_gain_mix_rms": 0.863584884389112
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/beast_impact_03.wav",
+      "sha256": "4766056118258d3cd44cada8de97b4240d2c1ddcb79cdb38aa13a32cfc1de286",
+      "duration_sec": 0.25,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -14.377223647246124,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.7628753464207586,
+      "pre_gain_mix_rms": 0.8105348525539704
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/beast_tell_01.wav",
+      "sha256": "89eaa7a2d257bc100d93ce01ec10c0ce56a8420a76ee84e03a40c046fd0766a7",
+      "duration_sec": 0.43,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -16.308522979704044,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.5631633909135191,
+      "pre_gain_mix_rms": 0.5825262334715405
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/beast_tell_02.wav",
+      "sha256": "cad37ecf2d761e5ddf69a24c8b018df72876b61e51172160b15d510d78f5f024",
+      "duration_sec": 0.43,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -18.395750642502488,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.5191919187705563,
+      "pre_gain_mix_rms": 0.550617344851675
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/beast_tell_03.wav",
+      "sha256": "b271bf9e8b3b58ced4781367acbc8efd7f6d214d8b0fcb13d55064de020069dc",
+      "duration_sec": 0.43,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -18.593032443624594,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.47315301260585757,
+      "pre_gain_mix_rms": 0.5052101277098743
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/bone_cast_01.wav",
+      "sha256": "7445d0fcfe8c1f1d6686f96bbbe3be84ccab6c5b2f2fb607b43b553a260c096c",
+      "duration_sec": 0.29,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -27.993330958876257,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.717192279729613,
+      "pre_gain_mix_rms": 0.7680495153784078
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/bone_cast_02.wav",
+      "sha256": "82d6a19ddfb53556b950689aed97529418b350cc95123a5b3ffae22d563ed6d0",
+      "duration_sec": 0.29,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -27.316730156879796,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.7348089222216888,
+      "pre_gain_mix_rms": 0.7924436417586359
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/bone_cast_03.wav",
+      "sha256": "b671e658f3b441e705a74bee7dc494b055b001b35901213faf8d6e0bde6385e8",
+      "duration_sec": 0.29,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -23.540058911540285,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.6900387331966265,
+      "pre_gain_mix_rms": 0.7419093052927075
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/bone_impact_01.wav",
+      "sha256": "29a851761bf253509d210f7d311c1ca65ea2d98612f8c6af77da54234cfcbb87",
+      "duration_sec": 0.25,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -27.97794405987364,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.7479991231876078,
+      "pre_gain_mix_rms": 0.8148680654421446
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/bone_impact_02.wav",
+      "sha256": "10a0406f54ef172cd457bd7c958a0295e08e4c035b63a20191c067e90320ec45",
+      "duration_sec": 0.25,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -27.827799097756525,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.7479991231876078,
+      "pre_gain_mix_rms": 0.800841926271246
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/bone_impact_03.wav",
+      "sha256": "2dfb08389cfb08a8fea798cd7830e578328895868efa92d8f542c91ea222f835",
+      "duration_sec": 0.25,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -27.86854300640355,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.7479991231876078,
+      "pre_gain_mix_rms": 0.8100487220887242
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/bone_tell_01.wav",
+      "sha256": "6a1326d96d881a551f541a45972283fdbaee46735d5ea4ae0dc0ae481ba93f9f",
+      "duration_sec": 0.43,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -29.43913595508002,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.5921677192363762,
+      "pre_gain_mix_rms": 0.6410949823794295
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/bone_tell_02.wav",
+      "sha256": "715193faf6fdaa07a15db4142cecc9844a76ecf08855aff4d8c2e4e53f6117a8",
+      "duration_sec": 0.43,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -30.002983564575363,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.6139997225460574,
+      "pre_gain_mix_rms": 0.6629144009454583
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/bone_tell_03.wav",
+      "sha256": "5777946b41ea36e5288406d5e8e345f6ec9b71ed956075cd31f0fdd79f2648e5",
+      "duration_sec": 0.43,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -30.78715763654199,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.5910656476576086,
+      "pre_gain_mix_rms": 0.6407087956524551
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/armor_cast_01.wav",
+      "sha256": "98771d026e478223b249aa9053e18fdf5475427c386bdd952d75ed68e83625e7",
+      "duration_sec": 0.29,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -21.520695842957302,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.7376585885313096,
+      "pre_gain_mix_rms": 0.7943709979536372
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/armor_cast_02.wav",
+      "sha256": "e6782112899641f585aa03e3bbfc6a1164470322e90ac72a554400b83a00fd43",
+      "duration_sec": 0.29,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -22.227813883223856,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.7340141989033003,
+      "pre_gain_mix_rms": 0.79144486168269
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/armor_cast_03.wav",
+      "sha256": "076f961713ae020724ac12de24880b1268b8d4af23daa3a553d0bae02b7896b2",
+      "duration_sec": 0.29,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -21.773229410334295,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.7105893448690417,
+      "pre_gain_mix_rms": 0.7691494430461161
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/armor_impact_01.wav",
+      "sha256": "98a9e50bd8b6076498feef596bb67c92add52534953b16bee6a59c0cdd8bbed5",
+      "duration_sec": 0.25,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -27.134640330684675,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.6934057356908474,
+      "pre_gain_mix_rms": 0.7592935143462063
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/armor_impact_02.wav",
+      "sha256": "0c0f608ff352e3428e49de96e94f6d29ac220738bd3ebf79de6ee49473e7a462",
+      "duration_sec": 0.25,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -26.964938216669303,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.6934057356908474,
+      "pre_gain_mix_rms": 0.7530345014876926
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/armor_impact_03.wav",
+      "sha256": "347745bdfe90d5e795badeb7221fab9fb1d116db67562dc27b354e664a060430",
+      "duration_sec": 0.25,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -26.830275176121383,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.6934057356908474,
+      "pre_gain_mix_rms": 0.7754557339253234
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/armor_tell_01.wav",
+      "sha256": "284c5c4933b9955aea0b9fe7407e5985f728f7f4c4f0805eeffdded2d1fafadb",
+      "duration_sec": 0.43,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -27.187922920780817,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.6899103777073142,
+      "pre_gain_mix_rms": 0.7396511709649004
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/armor_tell_02.wav",
+      "sha256": "39c5c867d1aacc23c98af3bde1aa18b90bdc77af8c428d8c443df2cc65f1c406",
+      "duration_sec": 0.43,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -27.861153626368367,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.6696924669909958,
+      "pre_gain_mix_rms": 0.7163958507418373
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/armor_tell_03.wav",
+      "sha256": "f7e520094b3a1494e390862e2ec5c593ea90c7150b17639ff1f970518b4431cf",
+      "duration_sec": 0.43,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -28.459365620432845,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.715649278909583,
+      "pre_gain_mix_rms": 0.7562587045276853
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/command_cast_01.wav",
+      "sha256": "cefe4570800a0d912d85de5ac1b325cd4cf97cead982d4a10749d39b33b7a1dc",
+      "duration_sec": 0.29,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -17.001008738866478,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.5200649599199516,
+      "pre_gain_mix_rms": 0.5951745759429777
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/command_cast_02.wav",
+      "sha256": "3f00673fe9cb9e4950f0d8a2fbaaa27c689aa2f10544a73729aba805b9fc66f7",
+      "duration_sec": 0.29,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -18.888705936291153,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.5242934885033451,
+      "pre_gain_mix_rms": 0.6102500868812734
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/command_cast_03.wav",
+      "sha256": "87bff6deb44aa7c39284e95ee799ff05163998a764f089130acc5f76769f4591",
+      "duration_sec": 0.29,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -17.281693115889006,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.5376430340995598,
+      "pre_gain_mix_rms": 0.6164284888169578
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/command_impact_01.wav",
+      "sha256": "03732496768fd95e0098355977fcdfdd1ba4fd7975f56c283aa4e9803cfa94a9",
+      "duration_sec": 0.25,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -14.988652976852908,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.5134210689674041,
+      "pre_gain_mix_rms": 0.6607536726991364
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/command_impact_02.wav",
+      "sha256": "b978399d1e090ab722788b8c510be226717cf7ae8e97683f6aeb2bd973c0e8ee",
+      "duration_sec": 0.25,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -15.13781191981867,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.5134210689674041,
+      "pre_gain_mix_rms": 0.6438059634152342
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/command_impact_03.wav",
+      "sha256": "96c6bf3c6bbf977dfbea76bec7031fdcbfbc906cc9b3343b1587309ba6cb2e4f",
+      "duration_sec": 0.25,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -15.066400407414571,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.5134210689674041,
+      "pre_gain_mix_rms": 0.6625931354973299
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/command_tell_01.wav",
+      "sha256": "a34fdd7ce41ff86d354a1b7d38ec21cd761dbe72ba237f58267ad2f12a6687df",
+      "duration_sec": 0.43,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -17.74339915624847,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.4329697978772606,
+      "pre_gain_mix_rms": 0.5225218553122015
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/command_tell_02.wav",
+      "sha256": "fafee5b7456de5cfa2d8477d7af764dede9c199c531ac3a89d101d9e2419a4f4",
+      "duration_sec": 0.43,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -16.71947056182514,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.47045235516609124,
+      "pre_gain_mix_rms": 0.5509431248105369
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/command_tell_03.wav",
+      "sha256": "e1f5d16e00630195ba47bcf20a230687fa9b53790afd7c2e60c590e42f6dbb8c",
+      "duration_sec": 0.43,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -17.654665197517563,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.41679320278973786,
+      "pre_gain_mix_rms": 0.5237378263668396
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/flesh_cast_01.wav",
+      "sha256": "7b7209854688da031bff002dd2adfa42513ad46ebf54a77c54132ab1fd30869b",
+      "duration_sec": 0.29,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -23.814243446542985,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.738703548465366,
+      "pre_gain_mix_rms": 0.7754918455274099
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/flesh_cast_02.wav",
+      "sha256": "395c2bb67bed6c34fd5d70da960723237b22014957d0d6aed19a6fcd6e469b92",
+      "duration_sec": 0.29,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -23.616266567754195,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.7332396082001105,
+      "pre_gain_mix_rms": 0.7421419167031396
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/flesh_cast_03.wav",
+      "sha256": "2e93211e138587e3a3b73183cfc78c79706c0b9062c4383882507ce94a159818",
+      "duration_sec": 0.29,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -21.846573998316163,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.7239825672734925,
+      "pre_gain_mix_rms": 0.7558152323258172
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/flesh_impact_01.wav",
+      "sha256": "9fa0f9e19de4b1496c6a6d5c12ab4d730c268022ff77651f55bfad37de7d473f",
+      "duration_sec": 0.25,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -23.673857051967598,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.772372136980402,
+      "pre_gain_mix_rms": 0.7910524561579156
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/flesh_impact_02.wav",
+      "sha256": "eea1702349f277e9495c0eeec2ec35b5f4e5d8ff60a80e2af43623c95bc8ca48",
+      "duration_sec": 0.25,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -23.402481577694893,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.772372136980402,
+      "pre_gain_mix_rms": 0.7921524006617023
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/flesh_impact_03.wav",
+      "sha256": "7877d0e8f52bfbf1fc4905354c1291401a079093b0841358fa52173059dede13",
+      "duration_sec": 0.25,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -23.73721823667371,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.772372136980402,
+      "pre_gain_mix_rms": 0.8180404916240236
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/flesh_tell_01.wav",
+      "sha256": "8695313b2d62ddca3e4c5b741c50a04168d3d978f8092b475693dd494a9b47d9",
+      "duration_sec": 0.43,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -20.112691171002083,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.4173744107677083,
+      "pre_gain_mix_rms": 0.4542161390105842
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/flesh_tell_02.wav",
+      "sha256": "6e14dec277f0d9f55ef2361795dc4a4b738fcebaa0cebb345d7093aaf0d288a7",
+      "duration_sec": 0.43,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -17.412127493531102,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.4054362216199199,
+      "pre_gain_mix_rms": 0.44475336520163156
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/flesh_tell_03.wav",
+      "sha256": "deb569b84dd6117e10e460fe55415ba16e5d3e32df4912e0f1a4fdd93d0ed858",
+      "duration_sec": 0.43,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -20.592038285130684,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.393698116248925,
+      "pre_gain_mix_rms": 0.42720522281745305
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/boss_hunter_cast_01.wav",
+      "sha256": "2eaca6abebd9a274e29c760fb11b0a949fed46359af2f355b1ce7518d603cd7e",
+      "duration_sec": 0.35,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -26.887960973549806,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.7503301284762557,
+      "pre_gain_mix_rms": 0.7940883384528058
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/boss_hunter_cast_02.wav",
+      "sha256": "3172ac1b61062be9ba7c1788989f6eaf14f3312c80cd61a7becb6af1eab22be5",
+      "duration_sec": 0.35,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -27.005457711154,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.7068748424707373,
+      "pre_gain_mix_rms": 0.7595857758127785
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/boss_hunter_cast_03.wav",
+      "sha256": "f8a119c203c182aeb9ecef5d0d2c7a7cd3a8f8d0d0884365c43fa08bc6827d29",
+      "duration_sec": 0.35,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -27.66231541730955,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.6848411134388622,
+      "pre_gain_mix_rms": 0.7396021372060517
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/boss_hunter_impact_01.wav",
+      "sha256": "a5b840f85215d18e7f91ef7cc33eaba08cd5bfafb31ce1d2717ce46229aef196",
+      "duration_sec": 0.4,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -27.07651707826669,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.7565334915284592,
+      "pre_gain_mix_rms": 0.8146401532713663
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/boss_hunter_impact_02.wav",
+      "sha256": "fac319bb8fd3fc0082099ab84902173dfbccc3cc14783f8042a3b66c3813e68c",
+      "duration_sec": 0.4,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -27.161833569742583,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.7565334915284592,
+      "pre_gain_mix_rms": 0.8122190628816257
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/boss_hunter_impact_03.wav",
+      "sha256": "58d8c57a00d27f7348e0d7592816c5e0f6123c1fd715069160887bd849ca068d",
+      "duration_sec": 0.4,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -26.78847142312233,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.7565334915284592,
+      "pre_gain_mix_rms": 0.8032597399528267
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/boss_hunter_tell_01.wav",
+      "sha256": "6975816ce35f071ab19f92e1b556071b6360f2f51f272a0fb1b07d5dc6d19244",
+      "duration_sec": 0.49,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -28.91620093903868,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.49350762910790225,
+      "pre_gain_mix_rms": 0.5644623455494971
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/boss_hunter_tell_02.wav",
+      "sha256": "9965dd1ea52fb17ede3f35e6896f57fda5347bb4e470f47528221eb79645ef5f",
+      "duration_sec": 0.49,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -29.199562756550193,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.4980503927341488,
+      "pre_gain_mix_rms": 0.5651181067456791
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/boss_hunter_tell_03.wav",
+      "sha256": "e6a3a689c71cb871236706deed96f2147eb4557d47e7a4aee4004cd5496bab34",
+      "duration_sec": 0.49,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -29.274183358566322,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.49631830700461116,
+      "pre_gain_mix_rms": 0.55453541741892
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/boss_cavalry_cast_01.wav",
+      "sha256": "947a9317d4112655f379c31289fd4ea832a8a1f67bc39a045171538b78fa432e",
+      "duration_sec": 0.35,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -20.563877205788184,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.7216324709851321,
+      "pre_gain_mix_rms": 0.7832781502766041
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/boss_cavalry_cast_02.wav",
+      "sha256": "e44c84d05c7f8393cbe0dc5e7e7c6b411ef7a46a85f9d74abab886c536538075",
+      "duration_sec": 0.35,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -16.932413782405874,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.7406726365126906,
+      "pre_gain_mix_rms": 0.8088575417546666
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/boss_cavalry_cast_03.wav",
+      "sha256": "c446d09565d70c2618bab5e46d589b148862f757b6707246e0cdb9588221abd4",
+      "duration_sec": 0.35,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -18.818744579737583,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.7498113009745783,
+      "pre_gain_mix_rms": 0.8082805137421706
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/boss_cavalry_impact_01.wav",
+      "sha256": "35ef50614838972b02b4ffefd929fd81a7700e349936f25c445a7798b1bd5c34",
+      "duration_sec": 0.4,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -16.949760786549348,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.7586452157590088,
+      "pre_gain_mix_rms": 0.8266296101190557
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/boss_cavalry_impact_02.wav",
+      "sha256": "d6471bba13b16be6e5dd8567fd2296897213a2ca1853eaca1e322f8fce06d3a3",
+      "duration_sec": 0.4,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -17.600145453694747,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.7586452157590088,
+      "pre_gain_mix_rms": 0.8014349741159416
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/boss_cavalry_impact_03.wav",
+      "sha256": "6e0b93745956efce468c890b8b15f229c4481f3e2f596870314394d6bc617056",
+      "duration_sec": 0.4,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -18.19499947841998,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.7586452157590088,
+      "pre_gain_mix_rms": 0.8153741156090385
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/boss_cavalry_tell_01.wav",
+      "sha256": "943905e86b3c91874ae84199de661d6251e69b86eab596a7f29d22b415f70a8b",
+      "duration_sec": 0.49,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -17.45903813191815,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.5880851445105448,
+      "pre_gain_mix_rms": 0.650310265823205
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/boss_cavalry_tell_02.wav",
+      "sha256": "0efbb31a11748a24d68c1c8d41f7e5ca2d9b0cc1e3c534dcf3106f676ea9588d",
+      "duration_sec": 0.49,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -15.610434359245245,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.6473564435470796,
+      "pre_gain_mix_rms": 0.7012127108405027
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/boss_cavalry_tell_03.wav",
+      "sha256": "7d5c5eefb93190a05b6d449daeea425bafa7b12c05185050749af1d816cf8859",
+      "duration_sec": 0.49,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -16.347863008592864,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.6220700270161393,
+      "pre_gain_mix_rms": 0.6757685894383718
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/boss_general_cast_01.wav",
+      "sha256": "a12c3703e8fa91a25951d299273e4b351e679a38673ff7ed1a8df989715d1eb2",
+      "duration_sec": 0.35,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -16.705070760769573,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.7347224991288719,
+      "pre_gain_mix_rms": 0.7864464427115158
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/boss_general_cast_02.wav",
+      "sha256": "0bceb0e1f834121e296f2dbb26fdd078f32cf28dadbfc25da86f33021a90565d",
+      "duration_sec": 0.35,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -16.280313165261724,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.7458909241119402,
+      "pre_gain_mix_rms": 0.801679050807297
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/boss_general_cast_03.wav",
+      "sha256": "75ff462c1660c9b25dbd653120bc2427d73d177a7ff5d92a49dee5779e2bbb56",
+      "duration_sec": 0.35,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -16.47160625229827,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.7373127295786981,
+      "pre_gain_mix_rms": 0.7966790676583624
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/boss_general_impact_01.wav",
+      "sha256": "9f28366c0628d1e8b640c3c5e7a88916621f9a365d0034f2587481a8b0583216",
+      "duration_sec": 0.4,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -17.91759689082025,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.7499009797311854,
+      "pre_gain_mix_rms": 0.8134887003961456
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/boss_general_impact_02.wav",
+      "sha256": "8e321dbd1b3a59d5b17a41c5adeec011afbed016db3259c3fe90219fc19b58f8",
+      "duration_sec": 0.4,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -17.17555801147843,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.7499009797311854,
+      "pre_gain_mix_rms": 0.7756310589421975
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/boss_general_impact_03.wav",
+      "sha256": "e149f27485f65234b8e3ee4b51c44e22155fe2cd992ac05d4640316fdde707ec",
+      "duration_sec": 0.4,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -16.581040281376183,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.7499009797311854,
+      "pre_gain_mix_rms": 0.8482570581440556
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/boss_general_tell_01.wav",
+      "sha256": "823d62345948e1f2bc3e36a9bb0e95170c542ea3690255a3956d480d964db6b3",
+      "duration_sec": 0.49,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -17.97360993530627,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.6371832670267864,
+      "pre_gain_mix_rms": 0.6927099474092695
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/boss_general_tell_02.wav",
+      "sha256": "920ec71a22a9d1ca93f96fd584c0282960ec081f026ae9178d5113b7f034788d",
+      "duration_sec": 0.49,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -15.798903504078037,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.6105632039884975,
+      "pre_gain_mix_rms": 0.6694384372876083
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/boss_general_tell_03.wav",
+      "sha256": "a5d974f53ad149e4201df819ef5635b0ab4a3ef39024347450eecb50f631c845",
+      "duration_sec": 0.49,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -17.442427093934477,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.6301015679703589,
+      "pre_gain_mix_rms": 0.681978214318452
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/boss_demon_cast_01.wav",
+      "sha256": "4517a26e7cde4a2be8c9a57bee941274b1bd7b1023177089c29aeb2aa0e51090",
+      "duration_sec": 0.35,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -23.881480562794756,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.7481214500663547,
+      "pre_gain_mix_rms": 0.8210262400061897
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/boss_demon_cast_02.wav",
+      "sha256": "45dd96a4e2ed5d528e08349cca1ec730bc63683a91bf21d157f1e414b3367e04",
+      "duration_sec": 0.35,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -23.943552802247154,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.7526046288047885,
+      "pre_gain_mix_rms": 0.7781552820432633
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/boss_demon_cast_03.wav",
+      "sha256": "0bed9282a49b1f014c07a821abdfba222bf939166aed67b938ac6923d9bf16b5",
+      "duration_sec": 0.35,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -25.03488812142132,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.7532375414555919,
+      "pre_gain_mix_rms": 0.7960774666023891
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/boss_demon_impact_01.wav",
+      "sha256": "e917a0d1c9a1c833998a44e76b3c7aaab185e4eebf967b92c3c1c3c134685225",
+      "duration_sec": 0.4,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -23.836330954691633,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.7581453839577833,
+      "pre_gain_mix_rms": 0.8029358960287106
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/boss_demon_impact_02.wav",
+      "sha256": "2a8d5291e60452e335ac3d50e8f7913b6df5728c0f63ec94fa1714969f7d0485",
+      "duration_sec": 0.4,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -24.0481465606015,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.7581453839577833,
+      "pre_gain_mix_rms": 0.7716642352850825
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/boss_demon_impact_03.wav",
+      "sha256": "138b0330d816add6aed7aed2d62a763319227c09f639ce044777b64cd33d0b95",
+      "duration_sec": 0.4,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -24.07600454576894,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.7581453839577833,
+      "pre_gain_mix_rms": 0.785532418240627
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/boss_demon_tell_01.wav",
+      "sha256": "9792f5924cc1ad4d91e54cecc5310ddcc20d636c8366bde561f6b17d12bf2f41",
+      "duration_sec": 0.49,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -19.089761030862025,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.6200942460207459,
+      "pre_gain_mix_rms": 0.6185698202186503
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/boss_demon_tell_02.wav",
+      "sha256": "d5b3321fa590d9619fb3735abfd02a98df45f73ed60ea46e8e37326971cc906a",
+      "duration_sec": 0.49,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -18.47363467745727,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.5891503225684895,
+      "pre_gain_mix_rms": 0.6572788663757761
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/boss_demon_tell_03.wav",
+      "sha256": "4a665dac5f84473e8cb62bfca25d94e9d76d3e7e57457c64a11eafb14e724f29",
+      "duration_sec": 0.49,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -20.262570965203995,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.56025889045751,
+      "pre_gain_mix_rms": 0.5481648530867156
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/boss_hunter_phase_01.wav",
+      "sha256": "5df9b6a77479d813906b0b34cdbc07f78f0cb23e0dadd948b2cea0feea060b85",
+      "duration_sec": 1.0061041666666666,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -31.348309285731297,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.7597120176468896,
+      "pre_gain_mix_rms": 0.7893090565430686
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/boss_hunter_phase_02.wav",
+      "sha256": "abc961c89176829b12d45b65229503ba73d9335a1e1242c3e5b3ab0d47aa543b",
+      "duration_sec": 1.0107708333333334,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -30.993769744988246,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.7597120176468897,
+      "pre_gain_mix_rms": 0.7949611160495008
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/boss_hunter_phase_03.wav",
+      "sha256": "ddc2b54d7bc5d23842e6403b4edf78b63089832d1c8c26e6a727ada2746e606b",
+      "duration_sec": 1.1162708333333333,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -31.921970492686796,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.7597120176468897,
+      "pre_gain_mix_rms": 0.7893114159369088
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/boss_hunter_defeat_01.wav",
+      "sha256": "2b3b15cacecad4f8403f986bbb98dbd603f88a40c2f0bcf5db4c30c6df4b0312",
+      "duration_sec": 0.41079166666666667,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -26.902394659504804,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.756646250686343,
+      "pre_gain_mix_rms": 0.7938272712812863
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/boss_hunter_defeat_02.wav",
+      "sha256": "16ac399d9fd1b9bead25e74800b447e51dc198d5dbb06846f3849f7ffbc8622e",
+      "duration_sec": 0.4076458333333333,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -27.105416778419823,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.7567465819852733,
+      "pre_gain_mix_rms": 0.8120660806171753
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/boss_hunter_defeat_03.wav",
+      "sha256": "c4eed1f58d9f6384055dde6a3d4e29e4e6b40449de6bd34d0a6aa20072ef40cb",
+      "duration_sec": 0.4190833333333333,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -27.809211856160815,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.7567068135038855,
+      "pre_gain_mix_rms": 0.8204894095995454
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/boss_cavalry_phase_01.wav",
+      "sha256": "3fc334373f0625404f0705e012729f2d21587eda001e4527ed671223df456899",
+      "duration_sec": 1.0384166666666668,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -26.15840300363905,
+      "source_layers": 3,
+      "source_layer_mix_rms": 0.8171807084508688,
+      "pre_gain_mix_rms": 0.8595105095128658
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/boss_cavalry_phase_02.wav",
+      "sha256": "aff7849e674200478d14d90d46f49052a98a155b736412b1ff5e5629c6fc5b1b",
+      "duration_sec": 1.1791041666666666,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -27.032704287825965,
+      "source_layers": 3,
+      "source_layer_mix_rms": 0.8171807084508689,
+      "pre_gain_mix_rms": 0.8385758684911361
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/boss_cavalry_phase_03.wav",
+      "sha256": "246d3d0c30d6eca1335469cca1b46269ef3e7496f57a3a995c570e0ef6283c65",
+      "duration_sec": 1.070875,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -26.4492171877755,
+      "source_layers": 3,
+      "source_layer_mix_rms": 0.8171807084508688,
+      "pre_gain_mix_rms": 0.840325137192928
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/boss_cavalry_defeat_01.wav",
+      "sha256": "8d14f252eb1bf9c1214c1e5c920e1c41b572b5e85a506f87c31716d29a35a27d",
+      "duration_sec": 0.39670833333333333,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -20.367637782300115,
+      "source_layers": 3,
+      "source_layer_mix_rms": 0.8160521897576979,
+      "pre_gain_mix_rms": 0.885193022904451
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/boss_cavalry_defeat_02.wav",
+      "sha256": "1119ca115975cb232b436cdd63f7ea996065bfa1b01d8861a1b286b3362d7912",
+      "duration_sec": 0.3962291666666667,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -19.91128254717735,
+      "source_layers": 3,
+      "source_layer_mix_rms": 0.7973185765678724,
+      "pre_gain_mix_rms": 0.8538287319175291
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/boss_cavalry_defeat_03.wav",
+      "sha256": "ddf46ff086d423c5fc15ffe8a55081e31b4e957626f0d3bc532e2e663393011a",
+      "duration_sec": 0.4158125,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -18.835339376378872,
+      "source_layers": 3,
+      "source_layer_mix_rms": 0.8046178705928375,
+      "pre_gain_mix_rms": 0.850735330887579
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/boss_general_phase_01.wav",
+      "sha256": "87d0a30f1d91e3f751528e46f9491c99a5adcaaaf5ab6e72f1c79eaa2817c3ac",
+      "duration_sec": 1.0123333333333333,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -20.4056977649141,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.7589060467505909,
+      "pre_gain_mix_rms": 0.7995911770317248
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/boss_general_phase_02.wav",
+      "sha256": "2918c2e944374184676c9b9d3c79d8dd0553835a6833eebf79ce06b12ae2f90d",
+      "duration_sec": 1.1366875,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -20.14532452647329,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.7589060467507862,
+      "pre_gain_mix_rms": 0.7810925362145611
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/boss_general_phase_03.wav",
+      "sha256": "0b7aa5bdf962af61a2a28eb25bdf6d445931685034e65fd8381687cdb1308278",
+      "duration_sec": 1.1716666666666666,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -20.888087289984732,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.7589060467507862,
+      "pre_gain_mix_rms": 0.7934565434620933
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/boss_general_defeat_01.wav",
+      "sha256": "9d66c6aeca11a0b70d8ac1c3814fa9b27d5956f5a3d1630485cca911c94b7a8b",
+      "duration_sec": 0.42475,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -17.959960397593697,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.7328452349986383,
+      "pre_gain_mix_rms": 0.8069301849814594
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/boss_general_defeat_02.wav",
+      "sha256": "03f0fde77177b54eaee49fac131cf3037de31655b93e782dbe0fd22569e052b3",
+      "duration_sec": 0.39920833333333333,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -15.923820639905879,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.7380806269498419,
+      "pre_gain_mix_rms": 0.7981804635453759
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/boss_general_defeat_03.wav",
+      "sha256": "4717281d41af1409759b3ee0f83429bd57fd40ec19f2eb325ac1ce488bc3c8b2",
+      "duration_sec": 0.39477083333333335,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -18.176901154734896,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.7211892450684319,
+      "pre_gain_mix_rms": 0.7771421109179898
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/boss_demon_phase_01.wav",
+      "sha256": "0da458e1d5b46574acd336abf359f59ff29efdf59f853ca76cde1abcfc927aaf",
+      "duration_sec": 1.0088125,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -27.922312591035038,
+      "source_layers": 3,
+      "source_layer_mix_rms": 0.8424687009341175,
+      "pre_gain_mix_rms": 0.851325754452749
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/boss_demon_phase_02.wav",
+      "sha256": "34373257c8a3e53a18f7d721a0eb165ae1d89c7a63ec077a6f7a5f36b4a11bc4",
+      "duration_sec": 1.1211875,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -27.885874412032955,
+      "source_layers": 3,
+      "source_layer_mix_rms": 0.8304476091369887,
+      "pre_gain_mix_rms": 0.823765273571583
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/boss_demon_phase_03.wav",
+      "sha256": "566e87e050d3ef5ee4c65c633f13ad109b8bb1c20e0b25af0ef98d4cf6125aca",
+      "duration_sec": 1.0342708333333333,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -27.97046176593635,
+      "source_layers": 3,
+      "source_layer_mix_rms": 0.8449467775835121,
+      "pre_gain_mix_rms": 0.8288679063516384
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/boss_demon_defeat_01.wav",
+      "sha256": "0325f8202437a2b942cadf66a0c89af44dbc1f31451d16e8b0762960b5b12aa7",
+      "duration_sec": 0.4130625,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -24.105056981049813,
+      "source_layers": 3,
+      "source_layer_mix_rms": 0.80160134543145,
+      "pre_gain_mix_rms": 0.8220915549401566
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/boss_demon_defeat_02.wav",
+      "sha256": "359f3a1580d124031d15f7274abd0b5567f882c6aeb1458d15b107538c24de4b",
+      "duration_sec": 0.4024583333333333,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -23.87055451094877,
+      "source_layers": 3,
+      "source_layer_mix_rms": 0.8013953079667411,
+      "pre_gain_mix_rms": 0.8781291031094813
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/boss_demon_defeat_03.wav",
+      "sha256": "2fe5edcda7ecccef33d20ff3d13bd2ed4743f6697afa8e4f04c90324a9949354",
+      "duration_sec": 0.42822916666666666,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -23.365970586170633,
+      "source_layers": 3,
+      "source_layer_mix_rms": 0.8384526318898521,
+      "pre_gain_mix_rms": 0.9036252589502698
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/feedback_hurt_01.wav",
+      "sha256": "2be8f4b884c20158316adc6c52a8ba97cf6d14aa4c5a50b3639ecb52aa41ec7f",
+      "duration_sec": 0.25,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -24.21679552079258,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.772372136980402,
+      "pre_gain_mix_rms": 0.8095552481307917
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/feedback_hurt_02.wav",
+      "sha256": "fe4254c378c23afa4cc1dd1a49b8c69518d116cb817977d42c9aa263941f364a",
+      "duration_sec": 0.25,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -23.80144407909015,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.772372136980402,
+      "pre_gain_mix_rms": 0.7940873264604651
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/feedback_hurt_03.wav",
+      "sha256": "f74448b6ce370094435087231dd36646faeca4d41d6d2bff6968f985661cb364",
+      "duration_sec": 0.25,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -23.487740867239854,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.772372136980402,
+      "pre_gain_mix_rms": 0.7775617200731775
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/feedback_guard_01.wav",
+      "sha256": "2f6e038eb383383834fae4a3be020509ea90f4c3e99ceca4eb656e129f3dd846",
+      "duration_sec": 0.25,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -19.29173296550858,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.7591551701634248,
+      "pre_gain_mix_rms": 0.8315977993549659
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/feedback_guard_02.wav",
+      "sha256": "6b682459982e2764c476d5eb11909f8d85605d223b22c01c2723c64e7a7cb309",
+      "duration_sec": 0.25,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -20.107855342860983,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.7591551701634248,
+      "pre_gain_mix_rms": 0.8564516962119717
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/feedback_guard_03.wav",
+      "sha256": "eed6133d2891fd306487087a401b8b1aa9e05f76b9d7e5dbdc93dd571e6c8730",
+      "duration_sec": 0.25,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -21.29800035135713,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.7591551701634248,
+      "pre_gain_mix_rms": 0.8134748122893644
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/feedback_death_01.wav",
+      "sha256": "c63658be65d37c5c6b97e3a023ad0ddc9df52e59f0378198154f0724880a014d",
+      "duration_sec": 0.32275,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -20.522560809309482,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.6387557187339229,
+      "pre_gain_mix_rms": 0.6791537788908765
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/feedback_death_02.wav",
+      "sha256": "830fd11ec789d72c2e3c5088d2770b9834ba25014d5d410c5e12435ea427054d",
+      "duration_sec": 0.32047916666666665,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -17.223736753113474,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.6890325433058814,
+      "pre_gain_mix_rms": 0.6916545556654002
+    },
+    {
+      "path": "res://assets/sfx/skill-combat-20261103/feedback_death_03.wav",
+      "sha256": "4e61fe45ab60c7fc253d22d3d8322fecc2b2f50935444baca3ed33ad24db7291",
+      "duration_sec": 0.3082708333333333,
+      "sample_peak_dbfs": -4.0000883347026726,
+      "rms_dbfs": -19.708962105244066,
+      "source_layers": 2,
+      "source_layer_mix_rms": 0.6755221979287379,
+      "pre_gain_mix_rms": 0.7005338513253213
+    }
+  ]
+}
