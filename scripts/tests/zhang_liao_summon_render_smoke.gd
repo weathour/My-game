@@ -59,6 +59,7 @@ func render_case(form: int,collaborator: int,dimensions: Vector2i,comfort: bool,
 	# A manual targeted run remains explicit in its cases/frames report. The
 	# normal companion is retained for a selected comfort case's alpha oracle.
 	if not only_case.is_empty() and label!=only_case and not (only_case.ends_with("-comfort") and label==only_case.trim_suffix("comfort")+"normal"):return
+	var case_started := Time.get_ticks_usec()
 	view=VIEW.new();view.setup(request(),definitions);viewport.add_child(view);view.set_physics_process(false)
 	await process_frame;await process_frame
 	view.canvas.performance_trace_enabled=true
@@ -156,4 +157,5 @@ func render_case(form: int,collaborator: int,dimensions: Vector2i,comfort: bool,
 	expect(view.canvas.summon_camera_envelopes.is_empty(),"native sequence removes its extra framing envelope "+label)
 	expect(view.canvas.performance_counters.bounds_readbacks==0,"native source/proxy alpha bounds never read back at runtime "+label)
 	case_reports.append({"case":label,"dimensions":[dimensions.x,dimensions.y],"comfort":comfort,"edge_close":edge_close,"fixture_party_hp_multiplier":10 if edge_close else 1,"frames":drawn_frames,"phases":phases.keys(),"phase_images":captured_phases,"source_frames":source_frames.keys(),"proxy_frames":proxy_frames.keys(),"poses_fit":poses_fit,"trace":frame_trace,"effect_draw_count":effect_draw_count,"effect_contacts":effect_contacts,"effect_texture_ids":effect_textures,"runtime_alpha_readbacks":view.canvas.performance_counters.bounds_readbacks,"movie_frames":movie_dir})
+	print("ZHANG_LIAO_SUMMON_RENDER_CASE case=",label," completed=",case_reports.size()," frames=",drawn_frames," total_frames=",FRAME_COUNT*case_reports.size()," checks=",checks," failures=",failures," elapsed_ms=",(Time.get_ticks_usec()-case_started)/1000.0)
 	view.queue_free();await process_frame;await process_frame;view=null

@@ -86,6 +86,8 @@ if [[ -n "$GODOT_BIN" ]]; then
     if [[ "$script" == *chronicle_enemy_campaign_smoke.gd ]]; then limit=480; fi
     if [[ "$script" == *chronicle_enemy_sessions_smoke.gd ]]; then limit=300; fi
     name="$(basename "${script%.gd}")"
+    # This finite 17-case/3230-frame GL check exceeds 90s on two-CPU llvmpipe.
+    if [[ "$name" == "zhang_liao_summon_render_smoke" && "${LIBGL_ALWAYS_SOFTWARE:-}" == "1" ]]; then limit=300; fi
     log="$CHECK_LOG_DIR/${name}.log"
     if [[ -n "${PROJECT_CHECK_REUSE_MANIFEST:-}" ]]; then
       local reuse_status=0

@@ -2,9 +2,10 @@
 
 当前状态及迁移验收范围见[状态入口](docs/08_当前实现状态与后续重点.md)。
 
-## 自动检查依赖
+## 自动检查依赖与软件渲染
 
 - 公开提交 `9250cc3` 的 Actions 检查因缺少 Pillow 在进入 Godot 场景验证前停止；现补充检查依赖清单、工作流安装步骤和本地安装说明。隔离 Python 环境中的四项美术检查通过，云端结果见 [Actions](https://github.com/weathour/My-game/actions/workflows/check.yml)；范围见[维护记录](docs/implementation/2026-11-06_仓库整理与提交前校验.md#公开仓库自动检查)。
+- 后续 Actions 已通过依赖检查，但张辽画面专项在软件渲染下达到原有 90 秒上限；现仅对显式软件渲染的该专项延长至 300 秒并输出逐组进度，保留原有用例、帧数和断言。受限 CPU 的软件渲染实测 17 组通过，云端结果仍见 [Actions](https://github.com/weathour/My-game/actions/workflows/check.yml)。
 
 ## 仓库整理与提交前校验
 
