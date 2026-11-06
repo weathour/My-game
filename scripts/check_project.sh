@@ -30,6 +30,24 @@ echo "Check logs: $CHECK_LOG_DIR"
 
 GODOT_ERROR_PATTERN="SCRIPT ERROR|Parser Error|Parse Error|Invalid call|Failed to load script|Failed to instantiate|Compilation failed|^ERROR:"
 
+# Keep crash diagnostics visible even when pipefail stops a preflight command.
+run_godot_preflight() {
+  local failure_marker="$1"
+  local log="$2"
+  local code=0
+  shift 2
+  "$@" 2>&1 | tee "$log" >/dev/null || code=$?
+  if [[ "$code" != 0 ]]; then
+    echo "$failure_marker exit=$code log=$log"
+    tail -n 120 "$log"
+    return "$code"
+  fi
+  if grep -E "$GODOT_ERROR_PATTERN" "$log"; then
+    echo "$failure_marker"
+    return 1
+  fi
+}
+
 # Recovery is explicit and fails closed if any shared source/resource or the
 # original evidence changed. The default full check path remains unchanged.
 if [[ -n "${PROJECT_CHECK_REUSE_MANIFEST:-}" ]]; then
@@ -51,27 +69,18 @@ python3 scripts/tools/build_battle_sprite_bounds.py --check
 
 if [[ -n "$GODOT_BIN" ]]; then
   echo "== Godot asset import =="
-  "$GODOT_BIN" --headless --path . --import 2>&1 | tee "$CHECK_LOG_DIR/godot-import.log" >/dev/null
-  if grep -E "$GODOT_ERROR_PATTERN" "$CHECK_LOG_DIR/godot-import.log"; then
-    echo "GODOT_ASSET_IMPORT_FAILED"
-    exit 1
-  fi
+  run_godot_preflight GODOT_ASSET_IMPORT_FAILED "$CHECK_LOG_DIR/godot-import.log" \
+    "$GODOT_BIN" --headless --path . --import
   echo "GODOT_ASSET_IMPORT_OK"
 
   echo "== Godot headless parse =="
-  "$GODOT_BIN" --headless --path . --quit --verbose 2>&1 | tee "$CHECK_LOG_DIR/godot-check.log" >/dev/null
-  if grep -E "$GODOT_ERROR_PATTERN" "$CHECK_LOG_DIR/godot-check.log"; then
-    echo "GODOT_PARSE_CHECK_FAILED"
-    exit 1
-  fi
+  run_godot_preflight GODOT_PARSE_CHECK_FAILED "$CHECK_LOG_DIR/godot-check.log" \
+    "$GODOT_BIN" --headless --path . --quit --verbose
   echo "GODOT_PARSE_CHECK_OK"
 
   echo "== Godot Chronicle entry scene smoke =="
-  "$GODOT_BIN" --headless --path . res://scenes/chronicle/chronicle_shell.tscn --quit --verbose 2>&1 | tee "$CHECK_LOG_DIR/chronicle-entry-scene-smoke.log" >/dev/null
-  if grep -E "$GODOT_ERROR_PATTERN" "$CHECK_LOG_DIR/chronicle-entry-scene-smoke.log"; then
-    echo "CHRONICLE_ENTRY_SCENE_SMOKE_FAILED"
-    exit 1
-  fi
+  run_godot_preflight CHRONICLE_ENTRY_SCENE_SMOKE_FAILED "$CHECK_LOG_DIR/chronicle-entry-scene-smoke.log" \
+    "$GODOT_BIN" --headless --path . res://scenes/chronicle/chronicle_shell.tscn --quit --verbose
   echo "CHRONICLE_ENTRY_SCENE_SMOKE_OK"
 
   run_smoke() {
