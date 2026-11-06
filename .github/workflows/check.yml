@@ -21,6 +21,9 @@ jobs:
         with:
           python-version: '3.12'
 
+      - name: Install Python check dependencies
+        run: python3 -m pip install -r scripts/requirements-checks.txt
+
       - name: Install Godot
         run: |
           archive="$RUNNER_TEMP/godot.zip"
