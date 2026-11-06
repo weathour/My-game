@@ -8,6 +8,17 @@ Godot 4.6.2 实时肉鸽游戏：玩家操作固定主角贾苇索，携带最�
 
 玩家从单人开局，首关胜利后先完成选卡，再进入艾玛剧情；她在剧情结束后加入，其余人物通常须先达成剧情入池条件，再通过选卡获得。关间可从符合条件的已获存活人物中配置辅助。战斗只在当前小关失败时回到进关前，已取得的此前成果保留。
 
+## 获取项目
+
+项目位于 [GitHub 仓库](https://github.com/weathour/My-game)，也可[下载 main 分支 ZIP](https://github.com/weathour/My-game/archive/refs/heads/main.zip)。下载内容以 GitHub 当时的 `main` 提交为准。使用 Git 获取后进入项目目录：
+
+```bash
+git clone https://github.com/weathour/My-game.git
+cd My-game
+```
+
+历史本地测试包、Godot 导入缓存和本地虚拟环境不随仓库分发；首次在 Godot 中打开项目时需要导入资源。
+
 ## 运行
 
 在仓库根目录用 Godot 4.6.2 打开 `project.godot` 并运行，从标题选择“启程白门楼”。界面用 Tab／方向键、Enter、Esc 导航；战斗用 WASD／方向键移动，Q／E 切人，J／K 使用当前人物的关键技能，Esc 暂停。普攻、常规技能和攻击方向自动处理。
@@ -23,4 +34,4 @@ Godot 4.6.2 实时肉鸽游戏：玩家操作固定主角贾苇索，携带最�
 
 开发时运行 Godot 4.6.2 headless 启动以及 `./scripts/check_project.sh`；设置 `GODOT_BIN` 可指定 Godot 程序。自动化与渲染检查用于发现规则和技术问题，不能代替完整试玩、画面审美与主观听审。
 
-当前工程由原型仓库的 `f75dfc6` 基线收敛为独立本地 Git 仓库；2026-10-31 的迁移快照曾通过空目录与本地克隆检查，该历史结果不覆盖之后的修改。原型仓库的已提交历史可在[源仓库](https://github.com/weathour/My-game)按 `f75dfc6` 追溯；两份相邻本地归档已按用户要求删除。本工程保留本游戏需要的素材来源、许可和生产输入。许可见 [LICENSE.md](LICENSE.md) 和 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。
+当前工程于 2026-10-31 从原型仓库 `f75dfc6` 的内容快照建立独立 Git 历史。2026-11-06 核对时，本地历史与 GitHub 原型旧主线没有共同祖先；用户已授权通过保留当前文件内容的合并提交衔接两条历史，实际父链以 `git log --graph --all` 为准。2026-10-31 迁移快照曾通过空目录与本地克隆检查，该历史结果不覆盖之后的修改；近期整理后的暂存树通过空目录归档检查，但没有进行实际克隆验证。两份相邻本地归档已按用户要求删除。本工程保留游戏需要的素材来源、许可和生产输入。许可见 [LICENSE.md](LICENSE.md) 和 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。
